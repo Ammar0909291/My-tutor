@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { ArrowLeft, Loader2, Mic, Send } from 'lucide-react'
+import { ArrowLeft, Loader2, Mic, Send, Volume2, VolumeX } from 'lucide-react'
 
 // Monaco must be loaded client-side only
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
@@ -58,17 +58,25 @@ interface Props {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice }: Props) {
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [code, setCode] = useState(INITIAL_CODE[subjectSlug] ?? '// ...\n')
   const [input, setInput] = useState('')
   const [isStreaming, setIsStreaming] = useState(false)
   const [initError, setInitError] = useState('')
+  const [speakingId, setSpeakingId] = useState<string | null>(null)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
+
+  // ── TTS state ─────────────────────────────────────────────────────────────
+  const ttsQueueRef = useRef<Array<{ id: string; text: string }>>([])
+  const isPlayingRef = useRef(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const voiceChoiceRef = useRef(voiceChoice)
+  useEffect(() => { voiceChoiceRef.current = voiceChoice }, [voiceChoice])
 
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const langLabel = LANG_LABELS[subjectSlug] ?? subjectSlug.toUpperCase()
@@ -81,7 +89,65 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
     scrollToBottom()
   }, [messages, scrollToBottom])
 
-  // ── Stream a message from Claude ──────────────────────────────────────────
+  // ── TTS: stop current audio and clear queue ────────────────────────────────
+
+  const stopAudio = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.onended = null
+      audioRef.current.onerror = null
+      audioRef.current = null
+    }
+    ttsQueueRef.current = []
+    isPlayingRef.current = false
+    setSpeakingId(null)
+  }, [])
+
+  // ── TTS: play next item in queue ───────────────────────────────────────────
+
+  const processNextTTS = useCallback(() => {
+    if (isPlayingRef.current || ttsQueueRef.current.length === 0) return
+
+    const item = ttsQueueRef.current.shift()!
+    isPlayingRef.current = true
+    setSpeakingId(item.id)
+
+    fetch('/api/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: item.text, voiceId: voiceChoiceRef.current }),
+    })
+      .then((r) => (r.ok ? r.blob() : Promise.reject(new Error(`TTS ${r.status}`))))
+      .then((blob) => {
+        const url = URL.createObjectURL(blob)
+        const audio = new Audio(url)
+        audioRef.current = audio
+
+        const done = () => {
+          URL.revokeObjectURL(url)
+          audioRef.current = null
+          isPlayingRef.current = false
+          setSpeakingId(null)
+          processNextTTS()
+        }
+        audio.onended = done
+        audio.onerror = done
+        audio.play().catch(done)
+      })
+      .catch(() => {
+        isPlayingRef.current = false
+        setSpeakingId(null)
+      })
+  }, []) // stable — uses only refs and itself
+
+  // ── TTS: enqueue a message ─────────────────────────────────────────────────
+
+  const enqueueTTS = useCallback((id: string, text: string) => {
+    ttsQueueRef.current.push({ id, text })
+    processNextTTS()
+  }, [processNextTTS])
+
+  // ── Stream a message from the AI ──────────────────────────────────────────
 
   const streamMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
     setIsStreaming(true)
@@ -134,7 +200,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
                   m.id === assistantId ? { ...m, content: fullText } : m
                 )
               )
-              // Update Monaco when a complete code block arrives
               const extracted = extractLastCodeBlock(fullText)
               if (extracted) setCode(extracted)
             }
@@ -149,6 +214,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
           m.id === assistantId ? { ...m, streaming: false } : m
         )
       )
+
+      if (fullText) enqueueTTS(assistantId, fullText)
     } catch (err) {
       console.error('[streamMessage]', err)
       setMessages((prev) =>
@@ -162,7 +229,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
       setIsStreaming(false)
       inputRef.current?.focus()
     }
-  }, [])
+  }, [enqueueTTS])
 
   // ── Init: create session → send opening trigger ───────────────────────────
 
@@ -187,7 +254,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
         const sid = data.data.id
         setSessionId(sid)
 
-        // Kick off the first lesson — not shown as user bubble
         await streamMessage(
           sid,
           `Начни первый урок по предмету "${subjectName}". Уровень студента: "${levelDescription}". Представься, поприветствуй студента и дай первое объяснение с примером кода.`,
@@ -272,7 +338,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
         </Link>
         <div className="w-px h-4 bg-slate-700" />
         <span className="text-slate-200 text-sm font-medium">{subjectName}</span>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-3">
+          {speakingId && (
+            <button
+              onClick={stopAudio}
+              className="flex items-center gap-1.5 text-emerald-400 text-xs hover:text-emerald-300 transition-colors"
+            >
+              <Volume2 size={12} className="animate-pulse" />
+              говорит...
+            </button>
+          )}
           {isStreaming && (
             <div className="flex items-center gap-2 text-indigo-400 text-xs">
               <Loader2 size={12} className="animate-spin" />
@@ -287,7 +362,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
 
         {/* ── Monaco Editor (60%) ── */}
         <div className="relative border-r border-slate-700" style={{ width: '60%' }}>
-          {/* Language label */}
           <div className="absolute top-3 right-4 z-10 px-2.5 py-1 bg-slate-700 text-slate-300 text-xs font-mono rounded select-none">
             {langLabel}
           </div>
@@ -335,15 +409,34 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription }: Pro
                 key={msg.id}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div
-                  className={`max-w-[88%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
-                    msg.role === 'user'
-                      ? 'bg-indigo-600 text-white rounded-br-sm'
-                      : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'
-                  }`}
-                >
-                  {msg.content || (
-                    <TypingDots />
+                <div className="group relative max-w-[88%]">
+                  <div
+                    className={`px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                      msg.role === 'user'
+                        ? 'bg-indigo-600 text-white rounded-br-sm'
+                        : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'
+                    } ${speakingId === msg.id ? 'ring-1 ring-emerald-500/40' : ''}`}
+                  >
+                    {msg.content || <TypingDots />}
+                  </div>
+
+                  {/* Speaker button — visible on hover or while speaking */}
+                  {msg.role === 'assistant' && !msg.streaming && msg.content && (
+                    <button
+                      onClick={() =>
+                        speakingId === msg.id
+                          ? stopAudio()
+                          : enqueueTTS(msg.id, msg.content)
+                      }
+                      title={speakingId === msg.id ? 'Остановить' : 'Прослушать'}
+                      className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all border ${
+                        speakingId === msg.id
+                          ? 'bg-emerald-500 border-emerald-400 text-white opacity-100'
+                          : 'bg-slate-700 border-slate-600 text-slate-400 opacity-0 group-hover:opacity-100'
+                      }`}
+                    >
+                      {speakingId === msg.id ? <VolumeX size={10} /> : <Volume2 size={10} />}
+                    </button>
                   )}
                 </div>
               </div>

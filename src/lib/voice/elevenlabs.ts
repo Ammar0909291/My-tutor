@@ -1,33 +1,32 @@
-const ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1";
+import { ElevenLabsClient } from 'elevenlabs'
 
-// Default Russian voice — can be overridden per user preference
-const DEFAULT_VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? "pNInz6obpgDQGcFmaJgB";
+const DEFAULT_VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB'
 
-export async function synthesizeSpeech(
-  text: string,
-  voiceId = DEFAULT_VOICE_ID
-): Promise<ArrayBuffer> {
-  const response = await fetch(`${ELEVENLABS_API_URL}/text-to-speech/${voiceId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "xi-api-key": process.env.ELEVENLABS_API_KEY!,
+const globalForEL = globalThis as unknown as { el: ElevenLabsClient | undefined }
+
+const elevenlabs = globalForEL.el ?? new ElevenLabsClient({
+  apiKey: process.env.ELEVENLABS_API_KEY ?? '',
+})
+
+if (process.env.NODE_ENV !== 'production') globalForEL.el = elevenlabs
+
+export async function synthesizeSpeech(text: string, voiceId = DEFAULT_VOICE_ID): Promise<ArrayBuffer> {
+  const stream = await elevenlabs.textToSpeech.convert(voiceId, {
+    text,
+    model_id: 'eleven_multilingual_v2',
+    voice_settings: {
+      stability: 0.5,
+      similarity_boost: 0.75,
+      style: 0.3,
+      use_speaker_boost: true,
     },
-    body: JSON.stringify({
-      text,
-      model_id: "eleven_multilingual_v2",
-      voice_settings: {
-        stability: 0.5,
-        similarity_boost: 0.75,
-        style: 0.3,
-        use_speaker_boost: true,
-      },
-    }),
-  });
+  })
 
-  if (!response.ok) {
-    throw new Error(`ElevenLabs API error: ${response.status} ${response.statusText}`);
+  const chunks: Buffer[] = []
+  for await (const chunk of stream) {
+    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as ArrayBuffer))
   }
 
-  return response.arrayBuffer();
+  const buf = Buffer.concat(chunks)
+  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer
 }
