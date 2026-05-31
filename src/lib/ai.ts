@@ -1,6 +1,6 @@
-// Convenience re-export — Groq AI helpers at a flat path
+// Convenience re-export — OpenRouter AI helpers at a flat path
 export {
-  groq,
+  ai,
   TUTOR_MODEL,
   buildTutorSystemPrompt,
   buildCurriculumPrompt,

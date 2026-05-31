@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { groq, TUTOR_MODEL, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { ai, TUTOR_MODEL, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -61,24 +61,17 @@ export async function POST(req: Request) {
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          const stream = await groq.chat.completions.create({
+          const stream = await ai.chat.completions.create({
             model: TUTOR_MODEL,
             messages,
             stream: true,
           })
-
-          let promptTokens = 0
-          let completionTokens = 0
 
           for await (const chunk of stream) {
             const text = chunk.choices[0]?.delta?.content ?? ''
             if (text) {
               fullResponse += text
               controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
-            }
-            if (chunk.x_groq?.usage) {
-              promptTokens = chunk.x_groq.usage.prompt_tokens ?? 0
-              completionTokens = chunk.x_groq.usage.completion_tokens ?? 0
             }
           }
 
@@ -87,8 +80,8 @@ export async function POST(req: Request) {
               sessionId,
               role: MessageRole.ASSISTANT,
               content: fullResponse,
-              inputTokens: promptTokens || null,
-              outputTokens: completionTokens || null,
+              inputTokens: null,
+              outputTokens: null,
             },
           })
 

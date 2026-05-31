@@ -1,4 +1,4 @@
-import { groq, TUTOR_MODEL } from './client'
+import { ai, TUTOR_MODEL } from './client'
 
 export type MoodAnalysis = {
   engagement: 'high' | 'medium' | 'low'
@@ -24,7 +24,7 @@ ${recentMessages.map((m) => `[${m.role}]: ${m.content}`).join('\n')}
 }`
 
   try {
-    const completion = await groq.chat.completions.create({
+    const completion = await ai.chat.completions.create({
       model: TUTOR_MODEL,
       messages: [
         { role: 'system', content: 'Return only valid JSON, no markdown.' },

@@ -1,12 +1,19 @@
-import Groq from 'groq-sdk'
+import OpenAI from 'openai'
 
-export const TUTOR_MODEL = 'llama-3.1-8b-instant'
+export const TUTOR_MODEL = 'meta-llama/llama-3.1-8b-instruct:free'
 
-const globalForGroq = globalThis as unknown as { groq: Groq | undefined }
+const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
 
-export const groq = globalForGroq.groq ?? new Groq({ apiKey: process.env.GROQ_API_KEY! })
+export const ai = globalForAI.ai ?? new OpenAI({
+  baseURL: 'https://openrouter.ai/api/v1',
+  apiKey: process.env.OPENROUTER_API_KEY!,
+  defaultHeaders: {
+    'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
+    'X-Title': 'My Tutor',
+  },
+})
 
-if (process.env.NODE_ENV !== 'production') globalForGroq.groq = groq
+if (process.env.NODE_ENV !== 'production') globalForAI.ai = ai
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
 
