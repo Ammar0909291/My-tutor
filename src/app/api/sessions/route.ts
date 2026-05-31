@@ -60,7 +60,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // Warm up Redis state
+    // Warm up Redis state (best-effort — Redis may not be running)
     const state: RedisSessionState = {
       userId: session.user.id,
       subjectId: subject.id,
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
       messageCount: 0,
       lastActivity: new Date().toISOString(),
     };
-    await Promise.all([
+    await Promise.allSettled([
       setSessionState(learnSession.id, state),
       setUserActiveSession(session.user.id, learnSession.id),
     ]);

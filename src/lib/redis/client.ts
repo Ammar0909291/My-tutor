@@ -5,14 +5,18 @@ const globalForRedis = globalThis as unknown as {
 };
 
 function createRedisClient() {
-  const client = new Redis(process.env.REDIS_URL!, {
-    maxRetriesPerRequest: 3,
-    enableReadyCheck: true,
+  const url = process.env.REDIS_URL;
+  if (!url) return null;
+
+  const client = new Redis(url, {
+    maxRetriesPerRequest: 1,
+    enableReadyCheck: false,
     lazyConnect: true,
+    connectTimeout: 2000,
   });
 
-  client.on("error", (err) => {
-    console.error("[Redis] Connection error:", err);
+  client.on("error", () => {
+    // suppress — Redis is optional
   });
 
   return client;
@@ -20,29 +24,54 @@ function createRedisClient() {
 
 export const redis = globalForRedis.redis ?? createRedisClient();
 
-if (process.env.NODE_ENV !== "production") globalForRedis.redis = redis;
+if (process.env.NODE_ENV !== "production") globalForRedis.redis = redis ?? undefined;
 
 // ─── Session State Helpers ────────────────────────────────────────────────────
 
 const SESSION_TTL = 60 * 60 * 24; // 24 hours
 
 export async function getSessionState<T>(sessionId: string): Promise<T | null> {
-  const data = await redis.get(`session:${sessionId}`);
-  return data ? (JSON.parse(data) as T) : null;
+  try {
+    if (!redis) return null;
+    const data = await redis.get(`session:${sessionId}`);
+    return data ? (JSON.parse(data) as T) : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function setSessionState<T>(sessionId: string, state: T): Promise<void> {
-  await redis.setex(`session:${sessionId}`, SESSION_TTL, JSON.stringify(state));
+  try {
+    if (!redis) return;
+    await redis.setex(`session:${sessionId}`, SESSION_TTL, JSON.stringify(state));
+  } catch {
+    // Redis unavailable — skip
+  }
 }
 
 export async function deleteSessionState(sessionId: string): Promise<void> {
-  await redis.del(`session:${sessionId}`);
+  try {
+    if (!redis) return;
+    await redis.del(`session:${sessionId}`);
+  } catch {
+    // Redis unavailable — skip
+  }
 }
 
 export async function getUserActiveSession(userId: string): Promise<string | null> {
-  return redis.get(`user:${userId}:active_session`);
+  try {
+    if (!redis) return null;
+    return redis.get(`user:${userId}:active_session`);
+  } catch {
+    return null;
+  }
 }
 
 export async function setUserActiveSession(userId: string, sessionId: string): Promise<void> {
-  await redis.setex(`user:${userId}:active_session`, SESSION_TTL, sessionId);
+  try {
+    if (!redis) return;
+    await redis.setex(`user:${userId}:active_session`, SESSION_TTL, sessionId);
+  } catch {
+    // Redis unavailable — skip
+  }
 }
