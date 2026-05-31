@@ -30,6 +30,22 @@ const INITIAL_CODE: Record<string, string> = {
   english: '<!-- Заметки репетитора -->\n',
 }
 
+// ─── AudioWaveform ────────────────────────────────────────────────────────────
+
+function AudioWaveform({ className = '' }: { className?: string }) {
+  return (
+    <span className={`inline-flex items-center gap-[2px] ${className}`}>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <span
+          key={i}
+          className="inline-block w-[3px] h-3 bg-current rounded-full origin-bottom"
+          style={{ animation: `audioBar 0.8s ease-in-out ${i * 0.12}s infinite` }}
+        />
+      ))}
+    </span>
+  )
+}
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function stripTextForSpeech(text: string): string {
@@ -337,9 +353,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // ── Mic: record → Whisper → fill input ───────────────────────────────────
 
   async function startRecording() {
+    if (!navigator.mediaDevices?.getUserMedia) {
+      console.error('[mic] getUserMedia not supported')
+      return
+    }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const recorder = new MediaRecorder(stream)
+
+      // Prefer opus/webm; fall back to browser default
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+        ? 'audio/webm;codecs=opus'
+        : MediaRecorder.isTypeSupported('audio/webm')
+        ? 'audio/webm'
+        : ''
+
+      const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : {})
       mediaRecorderRef.current = recorder
       audioChunksRef.current = []
 
@@ -347,10 +375,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (e.data.size > 0) audioChunksRef.current.push(e.data)
       }
 
-      recorder.start()
+      recorder.start(100) // emit chunks every 100ms so data is never lost
       setMicState('recording')
     } catch (err) {
       console.error('[mic]', err)
+      setMicState('idle')
     }
   }
 
@@ -360,18 +389,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
     setMicState('transcribing')
 
+    // Stop tracks INSIDE onstop so the recorder can flush its last chunk first
     await new Promise<void>((resolve) => {
-      recorder.onstop = () => resolve()
+      recorder.onstop = () => {
+        recorder.stream.getTracks().forEach((t) => t.stop())
+        resolve()
+      }
       recorder.stop()
-      recorder.stream.getTracks().forEach((t) => t.stop())
     })
 
     try {
-      const blob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
-      if (blob.size < 100) { setMicState('idle'); return } // too short
+      if (audioChunksRef.current.length === 0) { setMicState('idle'); return }
 
+      const mimeType = audioChunksRef.current[0].type || 'audio/webm'
+      const blob = new Blob(audioChunksRef.current, { type: mimeType })
+      if (blob.size < 100) { setMicState('idle'); return }
+
+      const ext = mimeType.includes('mp4') ? 'mp4' : 'webm'
       const fd = new FormData()
-      fd.append('audio', blob, 'recording.webm')
+      fd.append('audio', blob, `recording.${ext}`)
 
       const res = await fetch('/api/whisper', { method: 'POST', body: fd })
       const data = await res.json()
@@ -383,6 +419,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     } catch (err) {
       console.error('[whisper]', err)
     } finally {
+      mediaRecorderRef.current = null
       setMicState('idle')
     }
   }
@@ -454,10 +491,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           {speakingId && (
             <button
               onClick={stopAudio}
-              className="flex items-center gap-1.5 text-emerald-400 text-xs hover:text-emerald-300 transition-colors"
+              title="Остановить"
+              className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
             >
-              <Volume2 size={12} className="animate-pulse" />
-              говорит...
+              <AudioWaveform />
+              <VolumeX size={12} />
             </button>
           )}
           {isStreaming && (
@@ -540,14 +578,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                           else enqueueTTS(msg.id, msg.content)
                         }}
                         title={speakingId === msg.id ? 'Остановить' : 'Прослушать'}
-                        className={`flex items-center gap-1 text-xs transition-all ${
+                        className={`flex items-center gap-1.5 transition-all ${
                           speakingId === msg.id
-                            ? 'text-emerald-400'
+                            ? 'text-emerald-400 opacity-100'
                             : 'text-slate-600 opacity-0 group-hover:opacity-100 hover:text-slate-400'
                         }`}
                       >
                         {speakingId === msg.id
-                          ? <><VolumeX size={11} /><span>стоп</span></>
+                          ? <><AudioWaveform /><VolumeX size={10} /></>
                           : <Volume2 size={11} />
                         }
                       </button>
