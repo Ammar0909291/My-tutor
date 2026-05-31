@@ -1,6 +1,6 @@
 import OpenAI from 'openai'
 
-export const TUTOR_MODEL = 'meta-llama/llama-3.2-3b-instruct:free'
+export const TUTOR_MODEL = 'google/gemma-4-31b-it:free'
 
 const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
 
