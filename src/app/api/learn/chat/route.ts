@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { buildTutorSystemPrompt, getGeminiModel } from '@/lib/ai/client'
+import { groq, TUTOR_MODEL, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -36,7 +36,6 @@ export async function POST(req: Request) {
       where: { userId: session.user.id },
     })
 
-    // Persist user message before streaming
     await prisma.message.create({
       data: { sessionId, role: MessageRole.USER, content: message },
     })
@@ -47,14 +46,14 @@ export async function POST(req: Request) {
       profile?.selfDescription ?? 'общее обучение'
     )
 
-    // Build Gemini history — all previous messages except the current one
-    const history = learnSession.messages.map((m) => ({
-      role: m.role === MessageRole.USER ? ('user' as const) : ('model' as const),
-      parts: [{ text: m.content }],
-    }))
-
-    const model = getGeminiModel(systemPrompt)
-    const chat = model.startChat({ history })
+    const messages = [
+      { role: 'system' as const, content: systemPrompt },
+      ...learnSession.messages.map((m) => ({
+        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+        content: m.content,
+      })),
+      { role: 'user' as const, content: message },
+    ]
 
     const encoder = new TextEncoder()
     let fullResponse = ''
@@ -62,29 +61,34 @@ export async function POST(req: Request) {
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          const streamResult = await chat.sendMessageStream(message)
+          const stream = await groq.chat.completions.create({
+            model: TUTOR_MODEL,
+            messages,
+            stream: true,
+          })
 
-          for await (const chunk of streamResult.stream) {
-            const text = chunk.text()
+          let promptTokens = 0
+          let completionTokens = 0
+
+          for await (const chunk of stream) {
+            const text = chunk.choices[0]?.delta?.content ?? ''
             if (text) {
               fullResponse += text
-              controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
-              )
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+            }
+            if (chunk.x_groq?.usage) {
+              promptTokens = chunk.x_groq.usage.prompt_tokens ?? 0
+              completionTokens = chunk.x_groq.usage.completion_tokens ?? 0
             }
           }
-
-          // Persist assistant message
-          const finalResponse = await streamResult.response
-          const usage = finalResponse.usageMetadata
 
           await prisma.message.create({
             data: {
               sessionId,
               role: MessageRole.ASSISTANT,
               content: fullResponse,
-              inputTokens: usage?.promptTokenCount ?? null,
-              outputTokens: usage?.candidatesTokenCount ?? null,
+              inputTokens: promptTokens || null,
+              outputTokens: completionTokens || null,
             },
           })
 
@@ -92,9 +96,7 @@ export async function POST(req: Request) {
           controller.close()
         } catch (err) {
           console.error('[learn/chat stream]', err)
-          controller.enqueue(
-            encoder.encode(`data: ${JSON.stringify({ error: 'Stream failed' })}\n\n`)
-          )
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: 'Stream failed' })}\n\n`))
           controller.close()
         }
       },

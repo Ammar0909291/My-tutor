@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { buildTutorSystemPrompt, getGeminiModel } from '@/lib/ai/client'
+import { groq, TUTOR_MODEL, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { analyzeStudentMood } from '@/lib/ai/mood'
 import { prisma } from '@/lib/db/prisma'
 import { getSessionState, setSessionState } from '@/lib/redis/client'
@@ -45,24 +45,30 @@ export async function POST(
       profile?.learningGoals ?? 'общее обучение'
     )
 
-    const history = learnSession.messages.map((m) => ({
-      role: m.role === MessageRole.USER ? ('user' as const) : ('model' as const),
-      parts: [{ text: m.content }],
-    }))
+    const messages = [
+      { role: 'system' as const, content: systemPrompt },
+      ...learnSession.messages.map((m) => ({
+        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+        content: m.content,
+      })),
+      { role: 'user' as const, content },
+    ]
 
-    const model = getGeminiModel(systemPrompt)
-    const chat = model.startChat({ history })
-    const result = await chat.sendMessage(content)
-    const assistantContent = result.response.text()
-    const usage = result.response.usageMetadata
+    const completion = await groq.chat.completions.create({
+      model: TUTOR_MODEL,
+      messages,
+    })
+
+    const assistantContent = completion.choices[0].message.content ?? ''
+    const usage = completion.usage
 
     const assistantMessage = await prisma.message.create({
       data: {
         sessionId,
         role: MessageRole.ASSISTANT,
         content: assistantContent,
-        inputTokens: usage?.promptTokenCount ?? null,
-        outputTokens: usage?.candidatesTokenCount ?? null,
+        inputTokens: usage?.prompt_tokens ?? null,
+        outputTokens: usage?.completion_tokens ?? null,
       },
     })
 

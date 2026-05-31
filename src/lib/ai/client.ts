@@ -1,15 +1,12 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import Groq from 'groq-sdk'
 
-export const TUTOR_MODEL = 'gemini-2.0-flash'
+export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+const globalForGroq = globalThis as unknown as { groq: Groq | undefined }
 
-export function getGeminiModel(systemInstruction?: string) {
-  return genAI.getGenerativeModel({
-    model: TUTOR_MODEL,
-    ...(systemInstruction ? { systemInstruction } : {}),
-  })
-}
+export const groq = globalForGroq.groq ?? new Groq({ apiKey: process.env.GROQ_API_KEY! })
+
+if (process.env.NODE_ENV !== 'production') globalForGroq.groq = groq
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
 

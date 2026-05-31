@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { buildCurriculumPrompt, getGeminiModel } from '@/lib/ai/client'
+import { groq, TUTOR_MODEL, buildCurriculumPrompt } from '@/lib/ai/client'
 import { prisma } from '@/lib/db/prisma'
 import type { Curriculum } from '@/types'
 
@@ -25,11 +25,15 @@ export async function POST(req: Request) {
 
     const prompt = buildCurriculumPrompt(subject.name, profile.selfDescription)
 
-    const model = getGeminiModel()
-    const result = await model.generateContent(prompt)
-    const text = result.response.text()
+    const completion = await groq.chat.completions.create({
+      model: TUTOR_MODEL,
+      messages: [
+        { role: 'system', content: 'Return only valid JSON with no markdown fences or extra text.' },
+        { role: 'user', content: prompt },
+      ],
+    })
 
-    // Strip markdown fences if Gemini wraps the JSON
+    const text = completion.choices[0].message.content ?? ''
     const cleaned = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
     const curriculum = JSON.parse(cleaned) as Curriculum
 

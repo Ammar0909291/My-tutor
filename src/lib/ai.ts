@@ -1,6 +1,6 @@
-// Convenience re-export — Gemini AI helpers at a flat path
+// Convenience re-export — Groq AI helpers at a flat path
 export {
-  getGeminiModel,
+  groq,
   TUTOR_MODEL,
   buildTutorSystemPrompt,
   buildCurriculumPrompt,

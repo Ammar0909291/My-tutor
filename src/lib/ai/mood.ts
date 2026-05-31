@@ -1,4 +1,4 @@
-import { getGeminiModel } from './client'
+import { groq, TUTOR_MODEL } from './client'
 
 export type MoodAnalysis = {
   engagement: 'high' | 'medium' | 'low'
@@ -24,9 +24,14 @@ ${recentMessages.map((m) => `[${m.role}]: ${m.content}`).join('\n')}
 }`
 
   try {
-    const model = getGeminiModel()
-    const result = await model.generateContent(prompt)
-    const text = result.response.text()
+    const completion = await groq.chat.completions.create({
+      model: TUTOR_MODEL,
+      messages: [
+        { role: 'system', content: 'Return only valid JSON, no markdown.' },
+        { role: 'user', content: prompt },
+      ],
+    })
+    const text = completion.choices[0].message.content ?? ''
     return JSON.parse(text) as MoodAnalysis
   } catch {
     return {
