@@ -7,6 +7,20 @@ import { ArrowLeft, Loader2, Mic, Send, Volume2, VolumeX } from 'lucide-react'
 // Monaco must be loaded client-side only
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
+// ─── Voice presets (ElevenLabs pre-made voices, free tier) ───────────────────
+
+const VOICE_PRESETS = [
+  { id: 'pNInz6obpgDQGcFmaJgB', label: 'Мужской',   hint: 'Adam'    },
+  { id: '21m00Tcm4TlvDq8ikWAM', label: 'Женский',   hint: 'Rachel'  },
+  { id: 'ErXwobaYiN019PkySvjV', label: 'Тёплый',    hint: 'Antoni'  },
+] as const
+
+const ONBOARDING_VOICE_MAP: Record<string, string> = {
+  alexei: 'pNInz6obpgDQGcFmaJgB',
+  maria:  '21m00Tcm4TlvDq8ikWAM',
+  dmitry: 'ErXwobaYiN019PkySvjV',
+}
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const LANG_MAP: Record<string, string> = {
@@ -97,6 +111,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [initError, setInitError] = useState('')
   const [speakingId, setSpeakingId] = useState<string | null>(null)
   const [micState, setMicState] = useState<MicState>('idle')
+  const [selectedVoiceId, setSelectedVoiceId] = useState(
+    () => ONBOARDING_VOICE_MAP[voiceChoice] ?? VOICE_PRESETS[0].id
+  )
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -107,8 +124,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const isPlayingRef = useRef(false)
   const audioCtxRef = useRef<AudioContext | null>(null)
   const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null)
-  const voiceChoiceRef = useRef(voiceChoice)
-  useEffect(() => { voiceChoiceRef.current = voiceChoice }, [voiceChoice])
+  const voiceChoiceRef = useRef(selectedVoiceId)
+  useEffect(() => { voiceChoiceRef.current = selectedVoiceId }, [selectedVoiceId])
 
   // ── Mic refs ──────────────────────────────────────────────────────────────
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
@@ -143,6 +160,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       sourceNodeRef.current.onended = null
       try { sourceNodeRef.current.stop() } catch { /* already stopped */ }
       sourceNodeRef.current = null
+    }
+    // Also cancel Web Speech API fallback utterances
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
     }
     ttsQueueRef.current = []
     isPlayingRef.current = false
@@ -487,7 +508,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         </Link>
         <div className="w-px h-4 bg-slate-700" />
         <span className="text-slate-200 text-sm font-medium">{subjectName}</span>
-        <div className="ml-auto flex items-center gap-3">
+
+        {/* Voice picker */}
+        <div className="ml-auto flex items-center gap-1 bg-slate-900/60 rounded-lg p-0.5 border border-slate-700/50">
+          {VOICE_PRESETS.map((v) => (
+            <button
+              key={v.id}
+              onClick={() => setSelectedVoiceId(v.id)}
+              title={v.hint}
+              className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+                selectedVoiceId === v.id
+                  ? 'bg-slate-700 text-white'
+                  : 'text-slate-500 hover:text-slate-300'
+              }`}
+            >
+              {v.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3">
           {speakingId && (
             <button
               onClick={stopAudio}

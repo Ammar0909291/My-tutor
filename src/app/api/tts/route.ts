@@ -3,19 +3,22 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { synthesizeSpeech } from '@/lib/voice/elevenlabs'
 
-// Map onboarding voice keys → ElevenLabs voice IDs.
-// Set ELEVENLABS_VOICE_MARIA_ID / ELEVENLABS_VOICE_DMITRY_ID in .env to use
-// distinct voices per character; falls back to the default voice otherwise.
-const VOICE_MAP: Record<string, string> = {
+// Legacy onboarding key → voice ID map (kept for back-compat).
+// New requests pass direct ElevenLabs voice IDs from the in-app picker.
+const VOICE_KEY_MAP: Record<string, string> = {
   alexei: process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB',
-  maria:
-    process.env.ELEVENLABS_VOICE_MARIA_ID ??
-    process.env.ELEVENLABS_VOICE_ID ??
-    'pNInz6obpgDQGcFmaJgB',
-  dmitry:
-    process.env.ELEVENLABS_VOICE_DMITRY_ID ??
-    process.env.ELEVENLABS_VOICE_ID ??
-    'pNInz6obpgDQGcFmaJgB',
+  maria: process.env.ELEVENLABS_VOICE_ID ?? '21m00Tcm4TlvDq8ikWAM',
+  dmitry: process.env.ELEVENLABS_VOICE_ID ?? 'ErXwobaYiN019PkySvjV',
+}
+
+const DEFAULT_VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB'
+
+function resolveVoice(voiceId: string | undefined): string {
+  if (!voiceId) return DEFAULT_VOICE
+  // Known onboarding key → mapped ID
+  if (VOICE_KEY_MAP[voiceId]) return VOICE_KEY_MAP[voiceId]
+  // Direct ElevenLabs voice ID (24-char alphanumeric)
+  return voiceId
 }
 
 function stripForTTS(text: string): string {
@@ -49,7 +52,7 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { text, voiceId } = schema.parse(body)
 
-    const resolvedVoice = (voiceId && VOICE_MAP[voiceId]) ?? VOICE_MAP.alexei
+    const resolvedVoice = resolveVoice(voiceId)
     const clean = stripForTTS(text)
 
     if (!clean) return NextResponse.json({ error: 'No speakable text' }, { status: 400 })
