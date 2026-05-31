@@ -1,6 +1,6 @@
 import Groq from 'groq-sdk'
 
-export const TUTOR_MODEL = 'llama3-8b-8192'
+export const TUTOR_MODEL = 'llama-3.1-8b-instant'
 
 const globalForGroq = globalThis as unknown as { groq: Groq | undefined }
 
