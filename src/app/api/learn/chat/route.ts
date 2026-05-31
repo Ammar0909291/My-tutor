@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { anthropic, buildTutorSystemPrompt, TUTOR_MODEL } from '@/lib/ai/client'
+import { buildTutorSystemPrompt, getGeminiModel } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       where: { userId: session.user.id },
     })
 
-    // Persist user message
+    // Persist user message before streaming
     await prisma.message.create({
       data: { sessionId, role: MessageRole.USER, content: message },
     })
@@ -47,12 +47,14 @@ export async function POST(req: Request) {
       profile?.selfDescription ?? 'общее обучение'
     )
 
+    // Build Gemini history — all previous messages except the current one
     const history = learnSession.messages.map((m) => ({
-      role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-      content: m.content,
+      role: m.role === MessageRole.USER ? ('user' as const) : ('model' as const),
+      parts: [{ text: m.content }],
     }))
 
-    const claudeMessages = [...history, { role: 'user' as const, content: message }]
+    const model = getGeminiModel(systemPrompt)
+    const chat = model.startChat({ history })
 
     const encoder = new TextEncoder()
     let fullResponse = ''
@@ -60,34 +62,29 @@ export async function POST(req: Request) {
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          const stream = anthropic.messages.stream({
-            model: TUTOR_MODEL,
-            max_tokens: 2048,
-            system: systemPrompt,
-            messages: claudeMessages,
-          })
+          const streamResult = await chat.sendMessageStream(message)
 
-          for await (const event of stream) {
-            if (
-              event.type === 'content_block_delta' &&
-              event.delta.type === 'text_delta'
-            ) {
-              fullResponse += event.delta.text
+          for await (const chunk of streamResult.stream) {
+            const text = chunk.text()
+            if (text) {
+              fullResponse += text
               controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+                encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
               )
             }
           }
 
-          const finalMsg = await stream.finalMessage()
+          // Persist assistant message
+          const finalResponse = await streamResult.response
+          const usage = finalResponse.usageMetadata
 
           await prisma.message.create({
             data: {
               sessionId,
               role: MessageRole.ASSISTANT,
               content: fullResponse,
-              inputTokens: finalMsg.usage.input_tokens,
-              outputTokens: finalMsg.usage.output_tokens,
+              inputTokens: usage?.promptTokenCount ?? null,
+              outputTokens: usage?.candidatesTokenCount ?? null,
             },
           })
 

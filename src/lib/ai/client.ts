@@ -1,10 +1,15 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
-export const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-});
+export const TUTOR_MODEL = 'gemini-1.5-flash'
 
-export const TUTOR_MODEL = "claude-sonnet-4-6";
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+
+export function getGeminiModel(systemInstruction?: string) {
+  return genAI.getGenerativeModel({
+    model: TUTOR_MODEL,
+    ...(systemInstruction ? { systemInstruction } : {}),
+  })
+}
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
 
@@ -27,7 +32,7 @@ export function buildTutorSystemPrompt(subject: string, studentLevel: string, go
 Формат ответа:
 - Говори как живой учитель, не как энциклопедия
 - Используй эмодзи умеренно для дружелюбной атмосферы
-- Блоки кода оформляй в markdown с указанием языка`;
+- Блоки кода оформляй в markdown с указанием языка`
 }
 
 // ─── Curriculum Generator ─────────────────────────────────────────────────────
@@ -53,5 +58,5 @@ export function buildCurriculumPrompt(subject: string, selfDescription: string) 
   ]
 }
 
-Адаптируй уровень сложности под описание студента. Создай от 8 до 15 шагов.`;
+Адаптируй уровень сложности под описание студента. Создай от 8 до 15 шагов.`
 }
