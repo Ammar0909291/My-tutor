@@ -80,6 +80,7 @@ model Profile {
   // Detected/confirmed level after first assessment
   currentLevel    String?
   learningGoals   String?  @db.Text
+  voiceId         String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

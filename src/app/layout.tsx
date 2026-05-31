@@ -1,15 +1,21 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Providers } from '@/components/Providers'
+
+const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 export const metadata: Metadata = {
-  title: "My Tutor — AI-репетитор для программистов",
-  description: "Персональный AI-репетитор по C, C++, Python и английскому языку на русском",
-};
+  title: 'My Tutor — AI-репетитор для программистов',
+  description: 'Персональный AI-репетитор по C, C++, Python и английскому языку на русском',
+}
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
-  );
+  )
 }
