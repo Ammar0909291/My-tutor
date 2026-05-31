@@ -16,6 +16,10 @@ const VOICE_LABELS: Record<string, string> = {
   alexei: 'Алексей (строгий)',
   maria:  'Мария (мягкий)',
   dmitry: 'Дмитрий (дружелюбный)',
+  // Legacy ElevenLabs IDs stored before voice rename
+  pNInz6obpgDQGcFmaJgB: 'Александр',
+  ErXwobaYiN019PkySvjV: 'Антон',
+  EXAVITQu4vr4xnSDxMaL: 'Наталья',
 }
 
 export default async function DashboardPage() {
