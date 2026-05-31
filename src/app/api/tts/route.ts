@@ -54,12 +54,12 @@ export async function POST(req: Request) {
 
     if (!clean) return NextResponse.json({ error: 'No speakable text' }, { status: 400 })
 
-    const audioBuffer = await synthesizeSpeech(clean, resolvedVoice)
+    const audio = await synthesizeSpeech(clean, resolvedVoice)
 
-    return new Response(audioBuffer, {
+    return new Response(audio, {
       headers: {
         'Content-Type': 'audio/mpeg',
-        'Content-Length': String(audioBuffer.byteLength),
+        'Content-Length': String(audio.byteLength),
         'Cache-Control': 'no-store',
       },
     })

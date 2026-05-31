@@ -24,9 +24,12 @@ export async function synthesizeSpeech(text: string, voiceId = DEFAULT_VOICE_ID)
 
   const chunks: Buffer[] = []
   for await (const chunk of stream) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as ArrayBuffer))
+    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array))
   }
 
   const buf = Buffer.concat(chunks)
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer
+  // Copy into a plain ArrayBuffer so BodyInit / decodeAudioData accept it
+  const out = new ArrayBuffer(buf.length)
+  new Uint8Array(out).set(buf)
+  return out
 }

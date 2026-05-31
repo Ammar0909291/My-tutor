@@ -49,6 +49,8 @@ type ChatMessage = {
   streaming?: boolean
 }
 
+type MicState = 'idle' | 'recording' | 'transcribing'
+
 interface Props {
   subjectSlug: string
   subjectName: string
@@ -66,17 +68,23 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [isStreaming, setIsStreaming] = useState(false)
   const [initError, setInitError] = useState('')
   const [speakingId, setSpeakingId] = useState<string | null>(null)
+  const [micState, setMicState] = useState<MicState>('idle')
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
 
-  // ── TTS state ─────────────────────────────────────────────────────────────
+  // ── TTS refs ──────────────────────────────────────────────────────────────
   const ttsQueueRef = useRef<Array<{ id: string; text: string }>>([])
   const isPlayingRef = useRef(false)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const audioCtxRef = useRef<AudioContext | null>(null)
+  const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null)
   const voiceChoiceRef = useRef(voiceChoice)
   useEffect(() => { voiceChoiceRef.current = voiceChoice }, [voiceChoice])
+
+  // ── Mic refs ──────────────────────────────────────────────────────────────
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const audioChunksRef = useRef<Blob[]>([])
 
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const langLabel = LANG_LABELS[subjectSlug] ?? subjectSlug.toUpperCase()
@@ -89,21 +97,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     scrollToBottom()
   }, [messages, scrollToBottom])
 
-  // ── TTS: stop current audio and clear queue ────────────────────────────────
+  // ── Audio: unlock / get AudioContext during user gesture ─────────────────
+  // Called synchronously inside click/keydown handlers before any await.
+  const ensureAudioContext = useCallback(() => {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext()
+    }
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume().catch(() => {})
+    }
+  }, [])
+
+  // ── TTS: stop current audio and clear queue ───────────────────────────────
 
   const stopAudio = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.onended = null
-      audioRef.current.onerror = null
-      audioRef.current = null
+    if (sourceNodeRef.current) {
+      sourceNodeRef.current.onended = null
+      try { sourceNodeRef.current.stop() } catch { /* already stopped */ }
+      sourceNodeRef.current = null
     }
     ttsQueueRef.current = []
     isPlayingRef.current = false
     setSpeakingId(null)
   }, [])
 
-  // ── TTS: play next item in queue ───────────────────────────────────────────
+  // ── TTS: play next item in queue via AudioContext ─────────────────────────
 
   const processNextTTS = useCallback(() => {
     if (isPlayingRef.current || ttsQueueRef.current.length === 0) return
@@ -112,35 +130,46 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     isPlayingRef.current = true
     setSpeakingId(item.id)
 
+    const ctx = audioCtxRef.current
+    if (!ctx) {
+      isPlayingRef.current = false
+      setSpeakingId(null)
+      return
+    }
+
     fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: item.text, voiceId: voiceChoiceRef.current }),
     })
-      .then((r) => (r.ok ? r.blob() : Promise.reject(new Error(`TTS ${r.status}`))))
-      .then((blob) => {
-        const url = URL.createObjectURL(blob)
-        const audio = new Audio(url)
-        audioRef.current = audio
+      .then((r) => {
+        if (!r.ok) throw new Error(`TTS HTTP ${r.status}`)
+        return r.arrayBuffer()
+      })
+      .then((buf) => ctx.decodeAudioData(buf))
+      .then((audioBuf) => {
+        const source = ctx.createBufferSource()
+        source.buffer = audioBuf
+        source.connect(ctx.destination)
+        sourceNodeRef.current = source
 
         const done = () => {
-          URL.revokeObjectURL(url)
-          audioRef.current = null
+          sourceNodeRef.current = null
           isPlayingRef.current = false
           setSpeakingId(null)
           processNextTTS()
         }
-        audio.onended = done
-        audio.onerror = done
-        audio.play().catch(done)
+        source.onended = done
+        source.start()
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('[TTS playback]', err)
         isPlayingRef.current = false
         setSpeakingId(null)
       })
-  }, []) // stable — uses only refs and itself
+  }, []) // stable — uses only refs
 
-  // ── TTS: enqueue a message ─────────────────────────────────────────────────
+  // ── TTS: enqueue a message ────────────────────────────────────────────────
 
   const enqueueTTS = useCallback((id: string, text: string) => {
     ttsQueueRef.current.push({ id, text })
@@ -269,17 +298,79 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // ── Send user message ─────────────────────────────────────────────────────
 
-  async function handleSend() {
+  function handleSend() {
     const text = input.trim()
     if (!text || isStreaming || !sessionId) return
+    ensureAudioContext() // unlock audio during user gesture
     setInput('')
-    await streamMessage(sessionId, text, true)
+    streamMessage(sessionId, text, true)
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
+    }
+  }
+
+  // ── Mic: record → Whisper → fill input ───────────────────────────────────
+
+  async function startRecording() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      const recorder = new MediaRecorder(stream)
+      mediaRecorderRef.current = recorder
+      audioChunksRef.current = []
+
+      recorder.ondataavailable = (e) => {
+        if (e.data.size > 0) audioChunksRef.current.push(e.data)
+      }
+
+      recorder.start()
+      setMicState('recording')
+    } catch (err) {
+      console.error('[mic]', err)
+    }
+  }
+
+  async function stopRecordingAndTranscribe() {
+    const recorder = mediaRecorderRef.current
+    if (!recorder) return
+
+    setMicState('transcribing')
+
+    await new Promise<void>((resolve) => {
+      recorder.onstop = () => resolve()
+      recorder.stop()
+      recorder.stream.getTracks().forEach((t) => t.stop())
+    })
+
+    try {
+      const blob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
+      if (blob.size < 100) { setMicState('idle'); return } // too short
+
+      const fd = new FormData()
+      fd.append('audio', blob, 'recording.webm')
+
+      const res = await fetch('/api/whisper', { method: 'POST', body: fd })
+      const data = await res.json()
+
+      if (data.text) {
+        setInput((prev) => (prev ? `${prev} ${data.text}` : data.text))
+        inputRef.current?.focus()
+      }
+    } catch (err) {
+      console.error('[whisper]', err)
+    } finally {
+      setMicState('idle')
+    }
+  }
+
+  function handleMicClick() {
+    if (micState === 'recording') {
+      stopRecordingAndTranscribe()
+    } else if (micState === 'idle') {
+      startRecording()
     }
   }
 
@@ -411,7 +502,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               >
                 <div className="group relative max-w-[88%]">
                   <div
-                    className={`px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                    className={`px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all ${
                       msg.role === 'user'
                         ? 'bg-indigo-600 text-white rounded-br-sm'
                         : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'
@@ -420,14 +511,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {msg.content || <TypingDots />}
                   </div>
 
-                  {/* Speaker button — visible on hover or while speaking */}
+                  {/* Replay button — appears on hover, green while speaking */}
                   {msg.role === 'assistant' && !msg.streaming && msg.content && (
                     <button
-                      onClick={() =>
-                        speakingId === msg.id
-                          ? stopAudio()
-                          : enqueueTTS(msg.id, msg.content)
-                      }
+                      onClick={() => {
+                        ensureAudioContext()
+                        if (speakingId === msg.id) stopAudio()
+                        else enqueueTTS(msg.id, msg.content)
+                      }}
                       title={speakingId === msg.id ? 'Остановить' : 'Прослушать'}
                       className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all border ${
                         speakingId === msg.id
@@ -458,11 +549,27 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 className="flex-1 bg-slate-800 text-slate-100 placeholder-slate-500 px-4 py-2.5 rounded-xl text-sm border border-slate-700 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all disabled:opacity-50"
               />
               <button
-                disabled
-                title="Голосовой ввод — скоро"
-                className="w-9 h-9 flex items-center justify-center bg-slate-800 text-slate-500 rounded-xl border border-slate-700 cursor-not-allowed opacity-50"
+                onClick={handleMicClick}
+                disabled={isStreaming || !sessionId || micState === 'transcribing'}
+                title={
+                  micState === 'recording'
+                    ? 'Остановить запись'
+                    : micState === 'transcribing'
+                    ? 'Распознаю...'
+                    : 'Голосовой ввод'
+                }
+                className={`w-9 h-9 flex items-center justify-center rounded-xl border transition-colors ${
+                  micState === 'recording'
+                    ? 'bg-red-600 border-red-500 text-white animate-pulse'
+                    : micState === 'transcribing'
+                    ? 'bg-slate-700 border-slate-600 text-slate-300'
+                    : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-slate-200 hover:border-slate-500'
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                <Mic size={15} />
+                {micState === 'transcribing'
+                  ? <Loader2 size={15} className="animate-spin" />
+                  : <Mic size={15} />
+                }
               </button>
               <button
                 onClick={handleSend}
