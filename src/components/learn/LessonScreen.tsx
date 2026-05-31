@@ -32,6 +32,18 @@ const INITIAL_CODE: Record<string, string> = {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+function stripTextForSpeech(text: string): string {
+  return text
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`\n]+`/g, '')
+    .replace(/\*{1,3}([^*\n]+)\*{1,3}/g, '$1')
+    .replace(/_{1,3}([^_\n]+)_{1,3}/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^[-*+]\s+/gm, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
 function extractLastCodeBlock(text: string): string | null {
   const regex = /```(?:\w*)\n([\s\S]*?)```/g
   let match: RegExpExecArray | null
@@ -121,7 +133,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setSpeakingId(null)
   }, [])
 
-  // ── TTS: play next item in queue via AudioContext ─────────────────────────
+  // ── TTS: play next item — ElevenLabs via AudioContext, Web Speech fallback ─
 
   const processNextTTS = useCallback(() => {
     if (isPlayingRef.current || ttsQueueRef.current.length === 0) return
@@ -130,12 +142,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     isPlayingRef.current = true
     setSpeakingId(item.id)
 
-    const ctx = audioCtxRef.current
-    if (!ctx) {
+    const finish = () => {
+      sourceNodeRef.current = null
       isPlayingRef.current = false
       setSpeakingId(null)
-      return
+      processNextTTS()
     }
+
+    const speakFallback = () => {
+      if (!('speechSynthesis' in window)) { finish(); return }
+      window.speechSynthesis.cancel()
+      const utt = new SpeechSynthesisUtterance(stripTextForSpeech(item.text).slice(0, 500))
+      utt.lang = 'ru-RU'
+      utt.rate = 0.9
+      utt.onend = finish
+      utt.onerror = finish
+      window.speechSynthesis.speak(utt)
+    }
+
+    const ctx = audioCtxRef.current
+    if (!ctx) { speakFallback(); return }
 
     fetch('/api/tts', {
       method: 'POST',
@@ -146,26 +172,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!r.ok) throw new Error(`TTS HTTP ${r.status}`)
         return r.arrayBuffer()
       })
-      .then((buf) => ctx.decodeAudioData(buf))
+      .then((buf) => {
+        if (buf.byteLength === 0) throw new Error('TTS returned empty audio')
+        return ctx.decodeAudioData(buf)
+      })
       .then((audioBuf) => {
         const source = ctx.createBufferSource()
         source.buffer = audioBuf
         source.connect(ctx.destination)
         sourceNodeRef.current = source
-
-        const done = () => {
-          sourceNodeRef.current = null
-          isPlayingRef.current = false
-          setSpeakingId(null)
-          processNextTTS()
-        }
-        source.onended = done
+        source.onended = finish
         source.start()
       })
       .catch((err) => {
-        console.error('[TTS playback]', err)
-        isPlayingRef.current = false
-        setSpeakingId(null)
+        console.error('[TTS ElevenLabs failed, falling back to browser speech]', err)
+        speakFallback()
       })
   }, []) // stable — uses only refs
 
@@ -500,34 +521,37 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 key={msg.id}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className="group relative max-w-[88%]">
-                  <div
-                    className={`px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all ${
-                      msg.role === 'user'
-                        ? 'bg-indigo-600 text-white rounded-br-sm'
-                        : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'
-                    } ${speakingId === msg.id ? 'ring-1 ring-emerald-500/40' : ''}`}
-                  >
-                    {msg.content || <TypingDots />}
-                  </div>
+                <div
+                  className={`group max-w-[88%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all ${
+                    msg.role === 'user'
+                      ? 'bg-indigo-600 text-white rounded-br-sm'
+                      : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'
+                  } ${speakingId === msg.id ? 'ring-1 ring-emerald-500/40' : ''}`}
+                >
+                  {msg.content || <TypingDots />}
 
-                  {/* Replay button — appears on hover, green while speaking */}
+                  {/* Speaker button — inline at bottom-right of assistant bubble */}
                   {msg.role === 'assistant' && !msg.streaming && msg.content && (
-                    <button
-                      onClick={() => {
-                        ensureAudioContext()
-                        if (speakingId === msg.id) stopAudio()
-                        else enqueueTTS(msg.id, msg.content)
-                      }}
-                      title={speakingId === msg.id ? 'Остановить' : 'Прослушать'}
-                      className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all border ${
-                        speakingId === msg.id
-                          ? 'bg-emerald-500 border-emerald-400 text-white opacity-100'
-                          : 'bg-slate-700 border-slate-600 text-slate-400 opacity-0 group-hover:opacity-100'
-                      }`}
-                    >
-                      {speakingId === msg.id ? <VolumeX size={10} /> : <Volume2 size={10} />}
-                    </button>
+                    <div className="flex justify-end mt-2 -mb-0.5">
+                      <button
+                        onClick={() => {
+                          ensureAudioContext()
+                          if (speakingId === msg.id) stopAudio()
+                          else enqueueTTS(msg.id, msg.content)
+                        }}
+                        title={speakingId === msg.id ? 'Остановить' : 'Прослушать'}
+                        className={`flex items-center gap-1 text-xs transition-all ${
+                          speakingId === msg.id
+                            ? 'text-emerald-400'
+                            : 'text-slate-600 opacity-0 group-hover:opacity-100 hover:text-slate-400'
+                        }`}
+                      >
+                        {speakingId === msg.id
+                          ? <><VolumeX size={11} /><span>стоп</span></>
+                          : <Volume2 size={11} />
+                        }
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
