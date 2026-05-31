@@ -28,7 +28,9 @@ export async function POST(req: Request) {
 
     const existingProfile = await prisma.profile.findUnique({ where: { userId } })
     if (existingProfile) {
-      return NextResponse.json({ success: false, error: 'Onboarding already completed' }, { status: 409 })
+      // Backfill the flag for users who completed onboarding before this column existed
+      await prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } })
+      return NextResponse.json({ success: true, data: existingProfile })
     }
 
     // Run all writes in a transaction
