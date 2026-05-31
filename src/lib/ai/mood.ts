@@ -1,4 +1,4 @@
-import { ai, TUTOR_MODEL } from './client'
+import { chatWithFallback } from './client'
 
 export type MoodAnalysis = {
   engagement: 'high' | 'medium' | 'low'
@@ -24,8 +24,7 @@ ${recentMessages.map((m) => `[${m.role}]: ${m.content}`).join('\n')}
 }`
 
   try {
-    const completion = await ai.chat.completions.create({
-      model: TUTOR_MODEL,
+    const completion = await chatWithFallback({
       messages: [
         { role: 'system', content: 'Return only valid JSON, no markdown.' },
         { role: 'user', content: prompt },

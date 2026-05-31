@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { ai, TUTOR_MODEL, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { chatStreamWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -61,11 +61,7 @@ export async function POST(req: Request) {
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          const stream = await ai.chat.completions.create({
-            model: TUTOR_MODEL,
-            messages,
-            stream: true,
-          })
+          const { stream } = await chatStreamWithFallback({ messages })
 
           for await (const chunk of stream) {
             const text = chunk.choices[0]?.delta?.content ?? ''

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { ai, TUTOR_MODEL, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { analyzeStudentMood } from '@/lib/ai/mood'
 import { prisma } from '@/lib/db/prisma'
 import { getSessionState, setSessionState } from '@/lib/redis/client'
@@ -54,10 +54,7 @@ export async function POST(
       { role: 'user' as const, content },
     ]
 
-    const completion = await ai.chat.completions.create({
-      model: TUTOR_MODEL,
-      messages,
-    })
+    const completion = await chatWithFallback({ messages })
 
     const assistantContent = completion.choices[0].message.content ?? ''
     const usage = completion.usage

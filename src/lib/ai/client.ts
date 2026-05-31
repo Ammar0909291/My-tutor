@@ -2,6 +2,15 @@ import OpenAI from 'openai'
 
 export const TUTOR_MODEL = 'google/gemma-4-31b-it:free'
 
+// Fallback chain — tried in order when a model returns 429 or 5xx
+export const FALLBACK_MODELS = [
+  'google/gemma-4-31b-it:free',
+  'openai/gpt-oss-20b:free',
+  'qwen/qwen3-next-80b-a3b-instruct:free',
+  'google/gemma-4-26b-a4b-it:free',
+  'openai/gpt-oss-120b:free',
+]
+
 const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
 
 export const ai = globalForAI.ai ?? new OpenAI({
@@ -14,6 +23,48 @@ export const ai = globalForAI.ai ?? new OpenAI({
 })
 
 if (process.env.NODE_ENV !== 'production') globalForAI.ai = ai
+
+function isRetryableError(err: unknown): boolean {
+  if (err instanceof OpenAI.APIError) {
+    return err.status === 429 || err.status >= 500
+  }
+  return false
+}
+
+type ChatParams = Parameters<typeof ai.chat.completions.create>[0]
+
+/** Non-streaming completion with automatic model fallback. */
+export async function chatWithFallback(
+  params: Omit<ChatParams, 'model' | 'stream'>
+): Promise<OpenAI.Chat.Completions.ChatCompletion> {
+  let lastErr: unknown
+  for (const model of FALLBACK_MODELS) {
+    try {
+      return await ai.chat.completions.create({ ...params, model, stream: false })
+    } catch (err) {
+      if (isRetryableError(err)) { lastErr = err; continue }
+      throw err
+    }
+  }
+  throw lastErr
+}
+
+/** Streaming completion with automatic model fallback. */
+export async function chatStreamWithFallback(
+  params: Omit<ChatParams, 'model' | 'stream'>
+): Promise<{ stream: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>; model: string }> {
+  let lastErr: unknown
+  for (const model of FALLBACK_MODELS) {
+    try {
+      const stream = await ai.chat.completions.create({ ...params, model, stream: true })
+      return { stream, model }
+    } catch (err) {
+      if (isRetryableError(err)) { lastErr = err; continue }
+      throw err
+    }
+  }
+  throw lastErr
+}
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
 
