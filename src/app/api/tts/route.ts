@@ -6,12 +6,12 @@ import { synthesizeSpeech } from '@/lib/voice/elevenlabs'
 // Legacy onboarding key → voice ID map (kept for back-compat).
 // New requests pass direct ElevenLabs voice IDs from the in-app picker.
 const VOICE_KEY_MAP: Record<string, string> = {
-  alexei: process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB',
-  maria: process.env.ELEVENLABS_VOICE_ID ?? '21m00Tcm4TlvDq8ikWAM',
-  dmitry: process.env.ELEVENLABS_VOICE_ID ?? 'ErXwobaYiN019PkySvjV',
+  alexei: 'nPczCjzI2devNBz1zQrb', // Brian — male, confident
+  maria:  'EXAVITQu4vr4xnSDxMaL', // Sarah — female, friendly
+  dmitry: 'IKne3meq5aSn9XLyUdCD', // Charlie — warm, conversational
 }
 
-const DEFAULT_VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB'
+const DEFAULT_VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'nPczCjzI2devNBz1zQrb'
 
 function resolveVoice(voiceId: string | undefined): string {
   if (!voiceId) return DEFAULT_VOICE
