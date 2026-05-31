@@ -4,53 +4,75 @@ import { useRouter } from 'next/navigation'
 import { CheckCircle } from 'lucide-react'
 
 const SUBJECTS = [
-  { slug: 'c', icon: '⚙️', name: 'C', desc: 'Системное программирование' },
-  { slug: 'cpp', icon: '🔷', name: 'C++', desc: 'ООП и современный C++' },
-  { slug: 'python', icon: '🐍', name: 'Python', desc: 'От основ до продвинутого' },
-  { slug: 'english', icon: '🇬🇧', name: 'English', desc: 'Технический английский' },
+  {
+    slug: 'c',
+    icon: '⚙️',
+    name: 'C язык',
+    desc: 'Указатели, память, системное программирование',
+  },
+  {
+    slug: 'cpp',
+    icon: '🔷',
+    name: 'C++',
+    desc: 'ООП, STL, современный C++',
+  },
+  {
+    slug: 'python',
+    icon: '🐍',
+    name: 'Python',
+    desc: 'От основ до продвинутых тем',
+  },
+  {
+    slug: 'english',
+    icon: '🇬🇧',
+    name: 'Английский язык',
+    desc: 'Технический английский для разработчиков',
+  },
 ]
 
 const VOICES = [
   {
-    id: 'pNInz6obpgDQGcFmaJgB',
-    name: 'Александр',
-    style: 'Строгий',
-    desc: 'Академический стиль, чёткие объяснения',
+    key: 'alexei',
+    name: 'Алексей',
+    gender: 'мужской',
+    style: 'строгий',
     emoji: '👨‍🏫',
+    desc: 'Академичный, чёткий, требовательный',
   },
   {
-    id: 'ErXwobaYiN019PkySvjV',
-    name: 'Антон',
-    style: 'Дружелюбный',
-    desc: 'Мягкий, поддерживающий, с юмором',
+    key: 'maria',
+    name: 'Мария',
+    gender: 'женский',
+    style: 'мягкий',
+    emoji: '👩‍🏫',
+    desc: 'Добрая, терпеливая, поддерживающая',
+  },
+  {
+    key: 'dmitry',
+    name: 'Дмитрий',
+    gender: 'мужской',
+    style: 'дружелюбный',
     emoji: '😊',
-  },
-  {
-    id: 'EXAVITQu4vr4xnSDxMaL',
-    name: 'Наталья',
-    style: 'Нейтральный',
-    desc: 'Профессиональная, нейтральный тон',
-    emoji: '👩‍💻',
+    desc: 'Неформальный, с юмором, мотивирующий',
   },
 ]
 
-type Props = {
-  userName: string | null | undefined
-}
+const STEP_LABELS = ['Предмет', 'Уровень', 'Голос']
 
-export function OnboardingWizard({ userName }: Props) {
+export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
   const router = useRouter()
+
   const [step, setStep] = useState(1)
   const [subjectSlug, setSubjectSlug] = useState('')
   const [description, setDescription] = useState('')
-  const [voiceId, setVoiceId] = useState(VOICES[0].id)
+  const [voiceKey, setVoiceKey] = useState(VOICES[0].key)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const canNext1 = subjectSlug !== ''
-  const canNext2 = description.trim().length >= 20
+  const canProceed1 = subjectSlug !== ''
+  const canProceed2 = description.trim().length >= 20
 
-  const handleFinish = async () => {
+  async function handleFinish() {
     setLoading(true)
     setError('')
 
@@ -58,17 +80,16 @@ export function OnboardingWizard({ userName }: Props) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        displayName: userName ?? 'Студент',
         subjectSlug,
         selfDescription: description.trim(),
-        voiceId,
+        voiceChoice: voiceKey,
       }),
     })
 
     const data = await res.json()
 
     if (!data.success) {
-      setError(data.error ?? 'Ошибка сохранения. Попробуй ещё раз.')
+      setError(data.error ?? 'Не удалось сохранить. Попробуй ещё раз.')
       setLoading(false)
       return
     }
@@ -79,56 +100,62 @@ export function OnboardingWizard({ userName }: Props) {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-lg animate-slide-up">
-        {/* Header */}
+      <div className="w-full max-w-lg">
+        {/* Logo + title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+          <div className="inline-flex items-center gap-2 mb-5">
+            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shadow-sm">
               <span className="text-white font-bold text-sm">MT</span>
             </div>
-            <span className="font-semibold text-slate-900">My Tutor</span>
+            <span className="font-bold text-lg text-slate-900">My Tutor</span>
           </div>
           <h1 className="text-2xl font-bold text-slate-900">
-            Настроим твоё обучение
+            {userName ? `Привет, ${userName}!` : 'Добро пожаловать!'} 👋
           </h1>
-          <p className="mt-2 text-slate-500 text-sm">Займёт меньше минуты</p>
+          <p className="mt-2 text-slate-500 text-sm">Настроим твоё обучение — займёт 1 минуту</p>
         </div>
 
         {/* Step indicator */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          {[1, 2, 3].map((s) => (
-            <div key={s} className="flex items-center gap-2">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                  s < step
-                    ? 'bg-indigo-600 text-white'
-                    : s === step
-                    ? 'bg-indigo-600 text-white ring-4 ring-indigo-100'
-                    : 'bg-slate-200 text-slate-500'
-                }`}
-              >
-                {s < step ? <CheckCircle size={16} /> : s}
+        <div className="flex items-center justify-center gap-1 mb-8">
+          {STEP_LABELS.map((label, i) => {
+            const s = i + 1
+            const done = s < step
+            const active = s === step
+            return (
+              <div key={s} className="flex items-center">
+                <div className="flex flex-col items-center gap-1">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                      done
+                        ? 'bg-indigo-600 text-white'
+                        : active
+                        ? 'bg-indigo-600 text-white ring-4 ring-indigo-100'
+                        : 'bg-slate-200 text-slate-400'
+                    }`}
+                  >
+                    {done ? <CheckCircle size={14} /> : s}
+                  </div>
+                  <span className={`text-xs font-medium ${active ? 'text-indigo-600' : 'text-slate-400'}`}>
+                    {label}
+                  </span>
+                </div>
+                {s < 3 && (
+                  <div className={`w-16 h-0.5 mx-1 mb-4 transition-all ${done ? 'bg-indigo-600' : 'bg-slate-200'}`} />
+                )}
               </div>
-              {s < 3 && (
-                <div
-                  className={`w-12 h-0.5 transition-all ${
-                    s < step ? 'bg-indigo-600' : 'bg-slate-200'
-                  }`}
-                />
-              )}
-            </div>
-          ))}
+            )
+          })}
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
-          {/* Step 1 — Subject */}
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 animate-fade-in">
+
+          {/* ── Step 1: Subject ── */}
           {step === 1 && (
             <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-1">
-                Что хочешь изучать?
-              </h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-1">Что хочешь изучать?</h2>
               <p className="text-sm text-slate-500 mb-6">
-                Выбери один предмет — потом можно добавить другие
+                Выбери один предмет — остальные можно добавить позже
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {SUBJECTS.map((s) => (
@@ -138,24 +165,20 @@ export function OnboardingWizard({ userName }: Props) {
                     className={`p-5 rounded-xl border-2 text-left transition-all hover:-translate-y-0.5 ${
                       subjectSlug === s.slug
                         ? 'border-indigo-500 bg-indigo-50 shadow-sm'
-                        : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                        : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
                     <div className="text-2xl mb-2">{s.icon}</div>
-                    <div
-                      className={`font-bold text-sm ${
-                        subjectSlug === s.slug ? 'text-indigo-700' : 'text-slate-900'
-                      }`}
-                    >
+                    <div className={`font-bold text-sm ${subjectSlug === s.slug ? 'text-indigo-700' : 'text-slate-900'}`}>
                       {s.name}
                     </div>
-                    <div className="text-xs text-slate-500 mt-0.5">{s.desc}</div>
+                    <div className="text-xs text-slate-500 mt-0.5 leading-tight">{s.desc}</div>
                   </button>
                 ))}
               </div>
               <button
                 onClick={() => setStep(2)}
-                disabled={!canNext1}
+                disabled={!canProceed1}
                 className="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Далее →
@@ -163,29 +186,23 @@ export function OnboardingWizard({ userName }: Props) {
             </div>
           )}
 
-          {/* Step 2 — Level description */}
+          {/* ── Step 2: Level description ── */}
           {step === 2 && (
             <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-1">
-                Опиши свой уровень
-              </h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-1">Опиши свой уровень</h2>
               <p className="text-sm text-slate-500 mb-6">
-                Напиши своими словами — Claude настроит программу именно для тебя
+                Напиши своими словами — Claude построит программу именно для тебя
               </p>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Например: я никогда не программировал, хочу начать с нуля и дойти до создания простых приложений..."
+                placeholder="Например: я никогда не программировал, хочу начать с нуля и научиться писать простые программы..."
                 rows={6}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-none leading-relaxed"
               />
               <div className="flex justify-between items-center mt-2 mb-6">
                 <p className="text-xs text-slate-400">Минимум 20 символов</p>
-                <p
-                  className={`text-xs font-medium ${
-                    description.length >= 20 ? 'text-green-500' : 'text-slate-400'
-                  }`}
-                >
+                <p className={`text-xs font-medium ${description.length >= 20 ? 'text-green-500' : 'text-slate-400'}`}>
                   {description.length} символов
                 </p>
               </div>
@@ -198,8 +215,8 @@ export function OnboardingWizard({ userName }: Props) {
                 </button>
                 <button
                   onClick={() => setStep(3)}
-                  disabled={!canNext2}
-                  className="flex-2 flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  disabled={!canProceed2}
+                  className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Далее →
                 </button>
@@ -207,45 +224,39 @@ export function OnboardingWizard({ userName }: Props) {
             </div>
           )}
 
-          {/* Step 3 — Voice */}
+          {/* ── Step 3: Voice ── */}
           {step === 3 && (
             <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-1">
-                Выбери голос репетитора
-              </h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-1">Выбери голос репетитора</h2>
               <p className="text-sm text-slate-500 mb-6">
-                Репетитор будет говорить с тобой по-русски
+                Репетитор будет объяснять по-русски выбранным голосом
               </p>
               <div className="space-y-3">
                 {VOICES.map((v) => (
                   <button
-                    key={v.id}
-                    onClick={() => setVoiceId(v.id)}
+                    key={v.key}
+                    onClick={() => setVoiceKey(v.key)}
                     className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all ${
-                      voiceId === v.id
+                      voiceKey === v.key
                         ? 'border-indigo-500 bg-indigo-50'
                         : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
-                    <div className="text-2xl w-10 text-center">{v.emoji}</div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className={`font-semibold text-sm ${voiceId === v.id ? 'text-indigo-700' : 'text-slate-900'}`}>
+                    <div className="text-2xl w-10 text-center shrink-0">{v.emoji}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`font-semibold text-sm ${voiceKey === v.key ? 'text-indigo-700' : 'text-slate-900'}`}>
                           {v.name}
                         </span>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                          voiceId === v.id
-                            ? 'bg-indigo-100 text-indigo-600'
-                            : 'bg-slate-100 text-slate-500'
+                          voiceKey === v.key ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-500'
                         }`}>
-                          {v.style}
+                          {v.gender}, {v.style}
                         </span>
                       </div>
                       <p className="text-xs text-slate-500 mt-0.5">{v.desc}</p>
                     </div>
-                    {voiceId === v.id && (
-                      <CheckCircle size={18} className="text-indigo-500 shrink-0" />
-                    )}
+                    {voiceKey === v.key && <CheckCircle size={18} className="text-indigo-500 shrink-0" />}
                   </button>
                 ))}
               </div>
