@@ -7,7 +7,7 @@ import { synthesizeSpeech } from '@/lib/voice/elevenlabs'
 // New requests pass direct ElevenLabs voice IDs from the in-app picker.
 const VOICE_KEY_MAP: Record<string, string> = {
   alexei: 'nPczCjzI2devNBz1zQrb', // Brian — male, confident
-  maria:  'EXAVITQu4vr4xnSDxMaL', // Sarah — female, friendly
+  maria:  '9BWtsMINqrJLrRacOk9x', // Aria — female, energetic
   dmitry: 'IKne3meq5aSn9XLyUdCD', // Charlie — warm, conversational
 }
 

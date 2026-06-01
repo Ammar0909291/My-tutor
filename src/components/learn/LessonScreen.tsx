@@ -10,14 +10,14 @@ const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false 
 // ─── Voice presets (current ElevenLabs premade voices) ───────────────────────
 
 const VOICE_PRESETS = [
-  { id: 'nPczCjzI2devNBz1zQrb', label: 'Мужской', hint: 'Brian — уверенный, глубокий'  },
-  { id: 'EXAVITQu4vr4xnSDxMaL', label: 'Женский', hint: 'Sarah — чёткий, дружелюбный' },
-  { id: 'IKne3meq5aSn9XLyUdCD', label: 'Тёплый',  hint: 'Charlie — живой, разговорный' },
+  { id: 'nPczCjzI2devNBz1zQrb', label: 'Мужской', hint: 'Brian — уверенный, глубокий'   },
+  { id: '9BWtsMINqrJLrRacOk9x', label: 'Женский', hint: 'Aria — энергичный, живой'      },
+  { id: 'IKne3meq5aSn9XLyUdCD', label: 'Тёплый',  hint: 'Charlie — живой, разговорный'  },
 ] as const
 
 const ONBOARDING_VOICE_MAP: Record<string, string> = {
   alexei: 'nPczCjzI2devNBz1zQrb',
-  maria:  'EXAVITQu4vr4xnSDxMaL',
+  maria:  '9BWtsMINqrJLrRacOk9x',
   dmitry: 'IKne3meq5aSn9XLyUdCD',
 }
 
@@ -551,58 +551,49 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
                   {msg.content || <TypingDots />}
 
-                  {/* ── Music player bar ── */}
+                  {/* ── Audio player bar ── */}
                   {msg.role === 'assistant' && !msg.streaming && msg.content && (() => {
-                    const isThis = speakingId === msg.id
-                    const pct    = isThis ? playbackProgress * 100 : 0
+                    const isThis  = speakingId === msg.id
+                    const pct     = isThis ? playbackProgress * 100 : 0
                     const elapsed = isThis ? playbackProgress * audioDuration : 0
                     return (
                       <div className={`mt-3 transition-opacity ${isThis ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                        <div className={`flex items-center gap-2 px-2.5 py-1.5 rounded-full border ${
-                          isThis
-                            ? 'bg-emerald-950/60 border-emerald-500/30'
-                            : 'bg-slate-700/40 border-slate-600/40'
+                        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg ${
+                          isThis ? 'bg-emerald-600/20 border border-emerald-500/30' : 'bg-slate-700/50 border border-slate-600/40'
                         }`}>
 
-                          {/* Play / Pause circle */}
+                          {/* Play / Pause */}
                           <button
                             onClick={() => { ensureAudioContext(); isThis ? stopAudio() : enqueueTTS(msg.id, msg.content) }}
-                            className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
-                              isThis
-                                ? 'bg-emerald-500 hover:bg-emerald-400 text-white'
-                                : 'bg-slate-600 hover:bg-slate-500 text-slate-200'
-                            }`}
+                            className={`flex-shrink-0 transition-colors ${isThis ? 'text-emerald-400 hover:text-emerald-300' : 'text-slate-400 hover:text-white'}`}
                           >
                             {isThis
-                              ? <Pause size={9} fill="currentColor" strokeWidth={0} />
-                              : <Play  size={9} fill="currentColor" strokeWidth={0} className="translate-x-[1px]" />
+                              ? <Pause size={13} fill="currentColor" strokeWidth={0} />
+                              : <Play  size={13} fill="currentColor" strokeWidth={0} className="translate-x-px" />
                             }
                           </button>
 
-                          {/* Waveform bars */}
-                          {isThis
-                            ? <AudioWaveform className="text-emerald-400 flex-shrink-0" />
-                            : <StaticWaveform className="text-slate-500 flex-shrink-0" />
-                          }
+                          {/* Elapsed time */}
+                          <span className={`text-[11px] tabular-nums flex-shrink-0 w-7 ${isThis ? 'text-emerald-400' : 'text-slate-500'}`}>
+                            {formatTime(elapsed)}
+                          </span>
 
                           {/* Progress track + thumb */}
-                          <div className="relative flex-1 h-[3px] bg-slate-600/60 rounded-full min-w-[50px]">
+                          <div className="relative flex-1 h-[3px] bg-slate-600/60 rounded-full cursor-pointer">
                             <div
-                              className={`absolute inset-y-0 left-0 rounded-full ${isThis ? 'bg-emerald-400' : 'bg-slate-500'}`}
+                              className={`absolute inset-y-0 left-0 rounded-full ${isThis ? 'bg-emerald-400' : 'bg-slate-600'}`}
                               style={{ width: `${pct}%`, transition: 'none' }}
                             />
                             {isThis && (
                               <div
-                                className="absolute top-1/2 w-2.5 h-2.5 bg-white rounded-full shadow-md border border-emerald-400/80"
+                                className="absolute top-1/2 w-2.5 h-2.5 bg-white rounded-full shadow"
                                 style={{ left: `${pct}%`, transform: 'translate(-50%,-50%)', transition: 'none' }}
                               />
                             )}
                           </div>
 
-                          {/* Elapsed time */}
-                          <span className={`text-[10px] tabular-nums flex-shrink-0 w-7 text-right ${isThis ? 'text-emerald-400' : 'text-slate-500'}`}>
-                            {isThis ? formatTime(elapsed) : <Volume2 size={11} />}
-                          </span>
+                          {/* Volume icon */}
+                          <Volume2 size={13} className={`flex-shrink-0 ${isThis ? 'text-emerald-400' : 'text-slate-500'}`} />
                         </div>
                       </div>
                     )

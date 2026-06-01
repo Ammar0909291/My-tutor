@@ -16,9 +16,9 @@ export async function synthesizeSpeech(text: string, voiceId = DEFAULT_VOICE_ID)
     model_id: 'eleven_multilingual_v2',
     output_format: 'mp3_44100_128',
     voice_settings: {
-      stability: 0.55,        // lower = more natural variation, less monotone
+      stability: 0.38,        // more dynamic = energetic, not flat
       similarity_boost: 0.80,
-      style: 0.20,            // slight style expression → confident, energetic
+      style: 0.45,            // strong style expression → lively, refreshing
       use_speaker_boost: true,
     },
   })
