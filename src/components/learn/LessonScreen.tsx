@@ -211,10 +211,16 @@ export function LessonScreen({
         }
         return r.arrayBuffer()
       })
-      .then((buf) => {
+      .then(async (buf) => {
         if (buf === null) return null
         if (buf.byteLength === 0) throw new Error('TTS returned empty audio')
-        return ctx.decodeAudioData(buf)
+        try {
+          return await ctx.decodeAudioData(buf.slice(0))
+        } catch {
+          // decodeAudioData failed — buffer is likely a JSON error from ElevenLabs
+          const text = new TextDecoder().decode(buf).slice(0, 300)
+          throw new Error(`Audio decode failed. ElevenLabs response: ${text}`)
+        }
       })
       .then((audioBuf) => {
         if (!audioBuf) return
