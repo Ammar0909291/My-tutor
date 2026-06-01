@@ -1,36 +1,52 @@
-import { ElevenLabsClient } from 'elevenlabs'
-
-const DEFAULT_VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB'
-
-const globalForEL = globalThis as unknown as { el: ElevenLabsClient | undefined }
-
-const elevenlabs = globalForEL.el ?? new ElevenLabsClient({
-  apiKey: process.env.ELEVENLABS_API_KEY ?? '',
-})
-
-if (process.env.NODE_ENV !== 'production') globalForEL.el = elevenlabs
+const ELEVENLABS_BASE = 'https://api.elevenlabs.io/v1'
+const DEFAULT_VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? 'nPczCjzI2devNBz1zQrb'
 
 export async function synthesizeSpeech(text: string, voiceId = DEFAULT_VOICE_ID): Promise<ArrayBuffer> {
-  const stream = await elevenlabs.textToSpeech.convert(voiceId, {
-    text,
-    model_id: 'eleven_multilingual_v2',
-    output_format: 'mp3_44100_128',
-    voice_settings: {
-      stability: 0.38,        // more dynamic = energetic, not flat
-      similarity_boost: 0.80,
-      style: 0.45,            // strong style expression → lively, refreshing
-      use_speaker_boost: true,
+  const apiKey = process.env.ELEVENLABS_API_KEY
+  if (!apiKey) throw new Error('ELEVENLABS_API_KEY not set')
+
+  // Truncate to avoid ElevenLabs 2500-char limit per request
+  const truncated = text.slice(0, 2400)
+
+  const res = await fetch(`${ELEVENLABS_BASE}/text-to-speech/${voiceId}`, {
+    method: 'POST',
+    headers: {
+      'xi-api-key': apiKey,
+      'Content-Type': 'application/json',
+      'Accept': 'audio/mpeg',
     },
+    body: JSON.stringify({
+      text: truncated,
+      model_id: 'eleven_multilingual_v2',
+      output_format: 'mp3_44100_128',
+      voice_settings: {
+        stability: 0.38,
+        similarity_boost: 0.80,
+        style: 0.45,
+        use_speaker_boost: true,
+      },
+    }),
   })
 
-  const chunks: Buffer[] = []
-  for await (const chunk of stream) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array))
+  if (!res.ok) {
+    // ElevenLabs returns JSON errors — surface the real message
+    let detail = `HTTP ${res.status}`
+    try {
+      const json = await res.json() as { detail?: { message?: string } | string }
+      if (typeof json.detail === 'string') detail = json.detail
+      else if (typeof json.detail?.message === 'string') detail = json.detail.message
+      else detail = JSON.stringify(json)
+    } catch {
+      detail = await res.text().catch(() => detail)
+    }
+    throw new Error(`ElevenLabs error: ${detail}`)
   }
 
-  const buf = Buffer.concat(chunks)
-  // Copy into a plain ArrayBuffer so BodyInit / decodeAudioData accept it
-  const out = new ArrayBuffer(buf.length)
-  new Uint8Array(out).set(buf)
-  return out
+  const contentType = res.headers.get('content-type') ?? ''
+  if (!contentType.includes('audio')) {
+    const body = await res.text().catch(() => '')
+    throw new Error(`ElevenLabs returned non-audio content: ${contentType} — ${body.slice(0, 200)}`)
+  }
+
+  return res.arrayBuffer()
 }
