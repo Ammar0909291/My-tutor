@@ -68,7 +68,8 @@ export async function POST(req: Request) {
     })
   } catch (err) {
     if (err instanceof z.ZodError) return NextResponse.json({ error: err.errors[0].message }, { status: 400 })
+    const msg = err instanceof Error ? err.message : String(err)
     console.error('[tts]', err)
-    return NextResponse.json({ error: 'Speech synthesis failed' }, { status: 500 })
+    return NextResponse.json({ error: msg }, { status: 500 })
   }
 }

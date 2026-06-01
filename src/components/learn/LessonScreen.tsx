@@ -126,6 +126,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [micState, setMicState]         = useState<MicState>('idle')
   const [micError, setMicError]         = useState<string>('')
   const [ttsEngine, setTtsEngine]       = useState<'elevenlabs' | 'browser' | ''>('')
+  const [ttsError, setTtsError]         = useState<string>('')
   const [selectedVoiceId, setSelectedVoiceId] = useState(
     () => ONBOARDING_VOICE_MAP[voiceChoice] ?? VOICE_PRESETS[0].id
   )
@@ -206,6 +207,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const speakFallback = (reason: string) => {
       console.warn('[TTS] ElevenLabs failed, using browser fallback. Reason:', reason)
       setTtsEngine('browser')
+      setTtsError(reason)
       if (!('speechSynthesis' in window)) { finish(); return }
       window.speechSynthesis.cancel()
       const utt = new SpeechSynthesisUtterance(stripTextForSpeech(item.text).slice(0, 500))
@@ -647,7 +649,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 )}
                 {ttsEngine === 'browser' && !micError && (
                   <span className="flex-1 text-xs text-amber-400 bg-amber-900/20 border border-amber-800/40 rounded-lg px-3 py-1.5">
-                    ⚠️ ElevenLabs недоступен — проверь API ключ и консоль браузера
+                    ⚠️ ElevenLabs: {ttsError || 'неизвестная ошибка'}
                   </span>
                 )}
               </div>
