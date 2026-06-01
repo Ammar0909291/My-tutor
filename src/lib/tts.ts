@@ -55,6 +55,12 @@ export function speakText(
     const russianVoice = pickRussianVoice()
     if (russianVoice) utterance.voice = russianVoice
 
+    console.log(
+      `[TTS] voice="${voice}" pitch=${settings.pitch} rate=${settings.rate}` +
+      ` | russianVoice=${russianVoice?.name ?? 'none (using default)'}` +
+      ` | text preview: "${text.slice(0, 60)}…"`,
+    )
+
     let timer: ReturnType<typeof setInterval> | null = null
     utterance.onstart = () => { timer = startResumeTimer(); onStart?.() }
     const cleanup = () => { if (timer !== null) clearInterval(timer); onEnd?.() }
