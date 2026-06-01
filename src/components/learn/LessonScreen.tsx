@@ -318,24 +318,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           if (!line.startsWith('data: ')) continue
           const payload = line.slice(6).trim()
           if (payload === '[DONE]') break
-          try {
-            const parsed = JSON.parse(payload)
-            if (parsed.text) {
-              fullText += parsed.text
-              setMessages((prev) =>
-                prev.map((m) => m.id === assistantId ? { ...m, content: fullText } : m)
-              )
-              const extracted = extractLastCodeBlock(fullText)
-              if (extracted) setCode(extracted)
-            }
-          } catch { /* incomplete chunk */ }
+          let parsed: Record<string, unknown> | null = null
+          try { parsed = JSON.parse(payload) } catch { /* incomplete chunk */ }
+          if (!parsed) continue
+          if (parsed.error) throw new Error(String(parsed.error))
+          if (parsed.text) {
+            fullText += parsed.text as string
+            setMessages((prev) =>
+              prev.map((m) => m.id === assistantId ? { ...m, content: fullText } : m)
+            )
+            const extracted = extractLastCodeBlock(fullText)
+            if (extracted) setCode(extracted)
+          }
         }
       }
 
+      if (!fullText) throw new Error('Репетитор не ответил. Попробуй ещё раз.')
       setMessages((prev) =>
         prev.map((m) => m.id === assistantId ? { ...m, streaming: false } : m)
       )
-      if (fullText) enqueueTTS(assistantId, fullText)
+      enqueueTTS(assistantId, fullText)
     } catch (err) {
       console.error('[streamMessage]', err)
       setMessages((prev) =>
