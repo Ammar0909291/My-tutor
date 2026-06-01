@@ -200,7 +200,7 @@ export default async function DashboardPage() {
                 <ul className="divide-y" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
                   {recentSessions.map((s) => {
                     const m = subjectMeta(s.subject.slug)
-                    const summary = (s as typeof s & { summary?: string | null }).summary
+                    const summary = s.summary
                     return (
                       <li key={s.id} className="px-5 py-4 hover:bg-white/[0.03] transition-colors">
                         <div className="flex items-start gap-4">

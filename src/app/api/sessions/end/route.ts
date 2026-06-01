@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { chatWithFallback } from '@/lib/ai/client'
-import { MessageRole } from '@prisma/client'
+import { MessageRole, SubscriptionStatus } from '@prisma/client'
 
 const schema = z.object({ sessionId: z.string() })
 
@@ -69,6 +69,12 @@ export async function POST(req: Request) {
         endedAt: new Date(),
         status: 'COMPLETED',
       },
+    })
+
+    // Mark free session as used so the user is prompted to subscribe next time
+    await prisma.subscription.updateMany({
+      where: { userId: session.user.id, status: SubscriptionStatus.FREE, freeSessionUsed: false },
+      data: { freeSessionUsed: true },
     })
 
     return NextResponse.json({ success: true })

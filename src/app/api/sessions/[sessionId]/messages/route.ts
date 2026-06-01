@@ -47,10 +47,12 @@ export async function POST(
 
     const messages = [
       { role: 'system' as const, content: systemPrompt },
-      ...learnSession.messages.map((m) => ({
-        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-        content: m.content,
-      })),
+      ...learnSession.messages
+        .filter((m) => m.role !== MessageRole.SYSTEM)
+        .map((m) => ({
+          role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+          content: m.content,
+        })),
       { role: 'user' as const, content },
     ]
 
