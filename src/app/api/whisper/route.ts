@@ -21,7 +21,8 @@ export async function POST(req: Request) {
     const text = await transcribeAudio(audio)
     return NextResponse.json({ text })
   } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
     console.error('[whisper]', err)
-    return NextResponse.json({ error: 'Transcription failed' }, { status: 500 })
+    return NextResponse.json({ error: msg }, { status: 500 })
   }
 }
