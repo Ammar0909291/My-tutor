@@ -79,7 +79,10 @@ async function* geminiStream(messages: ChatMessage[]): AsyncIterable<OpenAI.Chat
   }
 }
 
-async function geminiComplete(messages: ChatMessage[]): Promise<string> {
+async function geminiComplete(
+  messages: ChatMessage[],
+  generationConfig?: { temperature?: number; maxOutputTokens?: number },
+): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY
   if (!apiKey) throw new Error('GEMINI_API_KEY not set')
 
@@ -96,7 +99,7 @@ async function geminiComplete(messages: ChatMessage[]): Promise<string> {
     }))
   const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
 
-  const chat = model.startChat({ systemInstruction: system, history })
+  const chat = model.startChat({ systemInstruction: system, history, generationConfig })
   const result = await chat.sendMessage(lastMsg)
   return result.response.text()
 }
@@ -120,7 +123,10 @@ export async function chatWithFallback(
   // All OpenRouter models exhausted — try Gemini
   if (process.env.GEMINI_API_KEY) {
     const messages = (params.messages ?? []) as ChatMessage[]
-    const text = await geminiComplete(messages)
+    const text = await geminiComplete(messages, {
+      temperature: typeof params.temperature === 'number' ? params.temperature : undefined,
+      maxOutputTokens: typeof params.max_tokens === 'number' ? params.max_tokens : undefined,
+    })
     return {
       id: 'gemini-fallback',
       object: 'chat.completion',

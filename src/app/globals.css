@@ -346,6 +346,13 @@
 .scifi-send:active { transform: translateY(0); }
 .scifi-send:disabled { opacity: 0.3; box-shadow: none; cursor: not-allowed; }
 
+/* Message arrival fade-in — assistant response renders all at once */
+@keyframes messageArrive {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-message-arrive { animation: messageArrive 300ms ease-out both; }
+
 /* Recording mic — red pulse */
 .scifi-rec {
   background: rgba(255,51,85,0.18);

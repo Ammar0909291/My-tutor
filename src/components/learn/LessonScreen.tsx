@@ -304,7 +304,7 @@ export function LessonScreen({
     })
   }, [])
 
-  // ── Stream message ──────────────────────────────────────────────────────────
+  // ── Send message (single-response, no word-by-word) ─────────────────────────
   const streamMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
     setIsStreaming(true)
     if (showInUI) setMessages((prev) => [...prev, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
@@ -315,42 +315,20 @@ export function LessonScreen({
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text }),
       })
-      if (!res.ok) {
-        const errBody = await res.json().catch(() => ({})) as { error?: string }
-        throw new Error(errBody.error ?? `HTTP ${res.status}`)
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: string }
+      if (!res.ok || !data.success || !data.text) {
+        throw new Error(data.error ?? `HTTP ${res.status}`)
       }
-      if (!res.body) throw new Error('No response body')
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let fullText = ''; let buf = ''
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        buf += decoder.decode(value, { stream: true })
-        const lines = buf.split('\n'); buf = lines.pop() ?? ''
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue
-          const payload = line.slice(6).trim()
-          if (payload === '[DONE]') break
-          let parsed: Record<string, unknown> | null = null
-          try { parsed = JSON.parse(payload) } catch { /* incomplete chunk */ }
-          if (!parsed) continue
-          if (parsed.error) throw new Error(String(parsed.error))
-          if (parsed.text) {
-            fullText += parsed.text as string
-            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: fullText } : m))
-            const extracted = extractLastCodeBlock(fullText)
-            // Code persistence: only replace when a new block actually exists
-            if (extracted) setCode(extracted)
-          }
-        }
-      }
-      if (!fullText) throw new Error('Репетитор не ответил. Попробуй ещё раз.')
-      setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, streaming: false } : m))
+      const fullText = data.text
+      // Set the full message in a single state update — content appears all at once.
+      setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: fullText, streaming: false } : m))
+      // Code persistence: only replace when a new block actually exists
+      const extracted = extractLastCodeBlock(fullText)
+      if (extracted) setCode(extracted)
       handleSpeak(assistantId, fullText)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      console.error('[streamMessage]', err)
+      console.error('[sendMessage]', err)
       setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: `Ошибка: ${msg}`, streaming: false } : m))
     } finally {
       setIsStreaming(false)
@@ -674,7 +652,7 @@ export function LessonScreen({
                         boxShadow: isSpeaking ? '0 0 24px rgba(0,212,255,0.3), inset 0 0 12px rgba(0,212,255,0.04)' : undefined,
                       }}>
                       {msg.content
-                        ? <MessageContent text={displayText} isUser={false} />
+                        ? <div className="animate-message-arrive"><MessageContent text={displayText} isUser={false} /></div>
                         : <TypingEqualizer />
                       }
 
@@ -707,7 +685,7 @@ export function LessonScreen({
                   ) : (
                     /* STUDENT bubble */
                     <div className="flex items-center gap-2 max-w-[92%]">
-                      <div className="px-4 py-2.5 rounded-full text-[13px] leading-relaxed text-white font-medium shadow-lg"
+                      <div className="px-4 py-2.5 rounded-full text-[13px] leading-relaxed text-white font-medium shadow-lg animate-message-arrive"
                         style={{
                           background: 'linear-gradient(135deg, #7B2FFF, #00D4FF)',
                           boxShadow: '0 4px 16px rgba(123,47,255,0.35), 0 0 24px rgba(0,212,255,0.15)',
