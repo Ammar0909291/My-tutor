@@ -102,7 +102,7 @@ type ChatMessage = {
   content: string
   streaming?: boolean
 }
-type MicState = 'idle' | 'recording' | 'transcribing'
+type MicState = 'idle' | 'recording' | 'transcribing' | 'error'
 
 interface Props {
   subjectSlug: string
@@ -124,6 +124,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [playbackProgress, setPlaybackProgress] = useState(0)   // 0–1
   const [audioDuration, setAudioDuration]       = useState(0)   // seconds
   const [micState, setMicState]         = useState<MicState>('idle')
+  const [micError, setMicError]         = useState<string>('')
+  const [ttsEngine, setTtsEngine]       = useState<'elevenlabs' | 'browser' | ''>('')
   const [selectedVoiceId, setSelectedVoiceId] = useState(
     () => ONBOARDING_VOICE_MAP[voiceChoice] ?? VOICE_PRESETS[0].id
   )
@@ -201,7 +203,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       processNextTTS()
     }
 
-    const speakFallback = () => {
+    const speakFallback = (reason: string) => {
+      console.warn('[TTS] ElevenLabs failed, using browser fallback. Reason:', reason)
+      setTtsEngine('browser')
       if (!('speechSynthesis' in window)) { finish(); return }
       window.speechSynthesis.cancel()
       const utt = new SpeechSynthesisUtterance(stripTextForSpeech(item.text).slice(0, 500))
@@ -213,22 +217,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     }
 
     const ctx = audioCtxRef.current
-    if (!ctx) { speakFallback(); return }
+    if (!ctx) { speakFallback('no AudioContext'); return }
 
     fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: item.text, voiceId: voiceChoiceRef.current }),
     })
-      .then((r) => {
-        if (!r.ok) throw new Error(`TTS HTTP ${r.status}`)
+      .then(async (r) => {
+        if (!r.ok) {
+          const body = await r.text().catch(() => '')
+          throw new Error(`TTS HTTP ${r.status}: ${body}`)
+        }
         return r.arrayBuffer()
       })
       .then((buf) => {
-        if (buf.byteLength === 0) throw new Error('TTS empty audio')
+        if (buf.byteLength === 0) throw new Error('TTS returned empty audio')
         return ctx.decodeAudioData(buf)
       })
       .then((audioBuf) => {
+        setTtsEngine('elevenlabs')
         const source = ctx.createBufferSource()
         source.buffer = audioBuf
         source.connect(ctx.destination)
@@ -249,9 +257,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         source.onended = finish
         source.start()
       })
-      .catch((err) => {
-        console.error('[TTS failed, browser fallback]', err)
-        speakFallback()
+      .catch((err: unknown) => {
+        const msg = err instanceof Error ? err.message : String(err)
+        speakFallback(msg)
       })
   }, []) // stable — only refs
 
@@ -376,8 +384,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // ── Mic ───────────────────────────────────────────────────────────────────
   async function startRecording() {
+    setMicError('')
     if (!navigator.mediaDevices?.getUserMedia) {
-      console.error('[mic] getUserMedia not supported'); return
+      setMicError('Микрофон не поддерживается браузером')
+      return
     }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
@@ -391,7 +401,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       recorder.start(100)
       setMicState('recording')
     } catch (err) {
-      console.error('[mic]', err)
+      const msg = err instanceof Error ? err.message : 'Ошибка микрофона'
+      console.error('[mic start]', err)
+      setMicError(msg.includes('Permission') || msg.includes('NotAllowed') ? 'Нет разрешения на микрофон' : `Микрофон: ${msg}`)
       setMicState('idle')
     }
   }
@@ -400,23 +412,41 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const recorder = mediaRecorderRef.current
     if (!recorder) return
     setMicState('transcribing')
+    setMicError('')
     await new Promise<void>((resolve) => {
       recorder.onstop = () => { recorder.stream.getTracks().forEach((t) => t.stop()); resolve() }
       recorder.stop()
     })
     try {
-      if (!audioChunksRef.current.length) { setMicState('idle'); return }
+      if (!audioChunksRef.current.length) {
+        setMicError('Аудио не записано — попробуй ещё раз')
+        setMicState('idle'); return
+      }
       const mimeType = audioChunksRef.current[0].type || 'audio/webm'
       const blob = new Blob(audioChunksRef.current, { type: mimeType })
-      if (blob.size < 100) { setMicState('idle'); return }
+      if (blob.size < 100) {
+        setMicError('Слишком короткая запись')
+        setMicState('idle'); return
+      }
       const ext = mimeType.includes('mp4') ? 'mp4' : 'webm'
       const fd  = new FormData()
       fd.append('audio', blob, `recording.${ext}`)
       const res  = await fetch('/api/whisper', { method: 'POST', body: fd })
       const data = await res.json()
-      if (data.text) { setInput((p) => p ? `${p} ${data.text}` : data.text); inputRef.current?.focus() }
+      if (!res.ok) {
+        setMicError(`Whisper error ${res.status}: ${data.error ?? 'unknown'}`)
+        return
+      }
+      if (data.text) {
+        setInput((p) => p ? `${p} ${data.text}` : data.text)
+        inputRef.current?.focus()
+      } else {
+        setMicError('Речь не распознана — говори чётче')
+      }
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
       console.error('[whisper]', err)
+      setMicError(`Ошибка: ${msg}`)
     } finally {
       mediaRecorderRef.current = null
       setMicState('idle')
@@ -606,6 +636,23 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
           {/* Input bar */}
           <div className="px-4 py-3 border-t border-slate-800 shrink-0">
+
+            {/* Error / status row */}
+            {(micError || ttsEngine === 'browser') && (
+              <div className="mb-2 flex items-center gap-2">
+                {micError && (
+                  <span className="flex-1 text-xs text-red-400 bg-red-900/20 border border-red-800/40 rounded-lg px-3 py-1.5">
+                    🎤 {micError}
+                  </span>
+                )}
+                {ttsEngine === 'browser' && !micError && (
+                  <span className="flex-1 text-xs text-amber-400 bg-amber-900/20 border border-amber-800/40 rounded-lg px-3 py-1.5">
+                    ⚠️ ElevenLabs недоступен — проверь API ключ и консоль браузера
+                  </span>
+                )}
+              </div>
+            )}
+
             <div className="flex items-center gap-2">
               <input
                 ref={inputRef}
@@ -618,7 +665,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 className="flex-1 bg-slate-800 text-slate-100 placeholder-slate-500 px-4 py-2.5 rounded-xl text-sm border border-slate-700 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all disabled:opacity-50"
               />
               <button
-                onClick={handleMicClick}
+                onClick={() => { setMicError(''); handleMicClick() }}
                 disabled={isStreaming || !sessionId || micState === 'transcribing'}
                 title={micState === 'recording' ? 'Остановить запись' : micState === 'transcribing' ? 'Распознаю...' : 'Голосовой ввод'}
                 className={`w-9 h-9 flex items-center justify-center rounded-xl border transition-colors ${
@@ -626,6 +673,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     ? 'bg-red-600 border-red-500 text-white animate-pulse'
                     : micState === 'transcribing'
                     ? 'bg-slate-700 border-slate-600 text-slate-300'
+                    : micError
+                    ? 'bg-red-900/30 text-red-400 border-red-700'
                     : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-slate-200 hover:border-slate-500'
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
