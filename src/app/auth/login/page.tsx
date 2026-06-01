@@ -3,19 +3,23 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { Eye, EyeOff } from 'lucide-react'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import { LanguageToggle } from '@/components/ui/LanguageToggle'
 
 export default function LoginPage() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPwd, setShowPwd] = useState(false)
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setError('')
+    setLoading(true); setError('')
     const result = await signIn('credentials', { email, password, redirect: false })
     setLoading(false)
     if (result?.error) setError('Неверный email или пароль')
@@ -28,89 +32,97 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={{ background: '#0A0A0F' }}>
-      {/* Background orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full opacity-30"
-          style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.6) 0%, transparent 70%)', filter: 'blur(100px)' }} />
-      </div>
+    <div className="min-h-screen flex" style={{ background: 'var(--bg-base)' }}>
 
-      <div className="relative w-full max-w-sm animate-slide-up">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2.5 justify-center mb-6">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
-              <span className="text-white font-black">MT</span>
-            </div>
-            <span className="font-bold text-xl text-white tracking-tight">My Tutor</span>
-          </Link>
-          <h1 className="text-2xl font-black text-white tracking-tight">Добро пожаловать</h1>
-          <p className="mt-2 text-sm" style={{ color: '#71717A' }}>Войди в свой аккаунт</p>
-        </div>
-
-        {/* Card */}
-        <div className="gradient-border">
-          <div className="p-7 rounded-[1.25rem]" style={{ background: '#0F0F18' }}>
-
-            <button onClick={handleGoogle} disabled={googleLoading}
-              className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-white/10 text-sm font-medium text-zinc-200 hover:bg-white/[0.06] transition-colors duration-200 disabled:opacity-50">
-              <GoogleIcon />
-              {googleLoading ? 'Загрузка...' : 'Продолжить с Google'}
-            </button>
-
-            <Divider />
-
-            {error && (
-              <div className="mb-5 p-3.5 rounded-xl border border-red-500/20 text-red-400 text-sm animate-scale-in"
-                style={{ background: 'rgba(239,68,68,0.08)' }}>
-                {error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Field label="Email" type="email" value={email} onChange={setEmail} placeholder="your@email.com" />
-              <Field label="Пароль" type="password" value={password} onChange={setPassword} placeholder="••••••••" />
-              <button type="submit" disabled={loading}
-                className="btn-gradient w-full py-3.5 rounded-xl text-sm font-bold text-white mt-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
-                {loading ? 'Входим...' : 'Войти'}
-              </button>
-            </form>
+      {/* Left decorative panel (desktop) */}
+      <div className="hidden lg:flex flex-col justify-between w-[45%] p-12 relative overflow-hidden"
+        style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-default)' }}>
+        <div className="pointer-events-none absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(247,129,102,0.1) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(121,192,255,0.08) 0%, transparent 50%)' }} />
+        <div className="relative">
+          <div className="flex items-center gap-2 mb-16">
+            <span className="text-xl">🔥</span>
+            <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+          </div>
+          <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+            &ldquo;{t('login_quote')}&rdquo;
+          </blockquote>
+          <div className="flex flex-col gap-2">
+            {['🎓 Персональный план обучения', '💬 Объяснения на русском языке', '🧠 Запоминает твой прогресс'].map((f) => (
+              <span key={f} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
+                style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
+                {f}
+              </span>
+            ))}
           </div>
         </div>
-
-        <p className="text-center mt-6 text-sm" style={{ color: '#71717A' }}>
-          Нет аккаунта?{' '}
-          <Link href="/auth/signup" className="text-accent-400 font-semibold hover:text-accent-300 transition-colors">
-            Зарегистрироваться
-          </Link>
-        </p>
+        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 Уже занимаются 1 200+ студентов</p>
       </div>
-    </div>
-  )
-}
 
-function Field({ label, type, value, onChange, placeholder }: {
-  label: string; type: string; value: string; onChange: (v: string) => void; placeholder: string
-}) {
-  return (
-    <div className="space-y-1.5">
-      <label className="block text-xs font-semibold uppercase tracking-wider" style={{ color: '#52525B' }}>{label}</label>
-      <input
-        type={type} value={value} onChange={(e) => onChange(e.target.value)}
-        required placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl border border-white/[0.08] text-white placeholder-zinc-600 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:border-accent-500/50 transition-all duration-200"
-        style={{ background: 'rgba(255,255,255,0.04)' }}
-      />
-    </div>
-  )
-}
+      {/* Right form panel */}
+      <div className="flex-1 flex items-center justify-center p-6 relative">
+        <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
-function Divider() {
-  return (
-    <div className="relative my-6">
-      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/[0.07]" /></div>
-      <div className="relative flex justify-center text-xs">
-        <span className="px-3 text-zinc-600" style={{ background: '#0F0F18' }}>или</span>
+        <div className="w-full max-w-sm animate-slide-up">
+          {/* Logo (mobile) */}
+          <div className="lg:hidden flex items-center gap-2 justify-center mb-8">
+            <span className="text-2xl">🔥</span>
+            <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+          </div>
+
+          <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('login_title')}</h1>
+          <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('login_sub')}</p>
+
+          {/* Google */}
+          <button onClick={handleGoogle} disabled={googleLoading}
+            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+            style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+            <GoogleIcon />
+            {googleLoading ? 'Загрузка...' : t('login_google')}
+          </button>
+
+          {/* Divider */}
+          <div className="relative my-5">
+            <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
+            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div className="mb-5 p-3.5 rounded-xl text-sm animate-scale-in"
+              style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)', color: '#F85149' }}>
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_email')}</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
+                placeholder="your@email.com" className="input-field" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
+              <div className="relative">
+                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required
+                  placeholder="••••••••" className="input-field pr-10" />
+                <button type="button" onClick={() => setShowPwd(!showPwd)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                  style={{ color: 'var(--text-dim)' }}>
+                  {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
+                </button>
+              </div>
+            </div>
+            <button type="submit" disabled={loading} className="btn-primary w-full py-3 mt-1 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
+              {loading ? t('login_loading') : t('login_submit')}
+            </button>
+          </form>
+
+          <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
+            {t('login_no_account')}{' '}
+            <Link href="/auth/signup" className="font-semibold hover:underline" style={{ color: 'var(--accent-primary)' }}>{t('login_signup_link')}</Link>
+          </p>
+        </div>
       </div>
     </div>
   )

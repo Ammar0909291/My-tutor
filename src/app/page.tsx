@@ -1,234 +1,270 @@
+'use client'
 import Link from 'next/link'
-import { ArrowRight, Mic, Code2, Brain, Zap, Star } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import { LanguageToggle } from '@/components/ui/LanguageToggle'
 
-const FEATURES = [
-  {
-    icon: Mic,
-    title: 'Живой голос',
-    desc: 'Репетитор говорит, объясняет и отвечает голосом — как настоящий преподаватель рядом с тобой.',
-    gradient: 'from-violet-500/20 to-purple-500/10',
-    border: 'border-violet-500/20',
-    iconColor: 'text-violet-400',
-    iconBg: 'bg-violet-500/15',
-  },
-  {
-    icon: Code2,
-    title: 'Код на экране',
-    desc: 'Видишь как пишется код — строка за строкой, с объяснениями каждого шага в реальном времени.',
-    gradient: 'from-indigo-500/20 to-blue-500/10',
-    border: 'border-indigo-500/20',
-    iconColor: 'text-indigo-400',
-    iconBg: 'bg-indigo-500/15',
-  },
-  {
-    icon: Brain,
-    title: 'Помнит тебя',
-    desc: 'Знает где ты остановился, что уже понял, и продолжает обучение именно с этого места.',
-    gradient: 'from-blue-500/20 to-cyan-500/10',
-    border: 'border-blue-500/20',
-    iconColor: 'text-blue-400',
-    iconBg: 'bg-blue-500/15',
-  },
-]
+const STEPS = ['how1', 'how2', 'how3', 'how4'] as const
 
 const SUBJECTS = [
-  { icon: '⚙️', name: 'C',       desc: 'Системное программирование' },
-  { icon: '🔷', name: 'C++',     desc: 'Объектно-ориентированный подход' },
-  { icon: '🐍', name: 'Python',  desc: 'Быстрый старт в разработке' },
-  { icon: '🇬🇧', name: 'English', desc: 'Деловой и технический английский' },
+  { slug: 'c',       icon: 'C',   accent: '#F78166', desc_key: 'subj_c_desc'       as const },
+  { slug: 'cpp',     icon: 'C++', accent: '#79C0FF', desc_key: 'subj_cpp_desc'     as const },
+  { slug: 'python',  icon: '🐍',  accent: '#56D364', desc_key: 'subj_python_desc'  as const },
+  { slug: 'english', icon: '🇬🇧', accent: '#E3B341', desc_key: 'subj_english_desc' as const },
 ]
 
-const TICKER_ITEMS = [
-  '⚙️ C язык', '🔷 C++', '🐍 Python', '🇬🇧 Английский',
-  '⚙️ C язык', '🔷 C++', '🐍 Python', '🇬🇧 Английский',
-]
+const TESTIMONIALS = [
+  { text_key: 't1_text', name_key: 't1_name' },
+  { text_key: 't2_text', name_key: 't2_name' },
+  { text_key: 't3_text', name_key: 't3_name' },
+] as const
 
 export default function HomePage() {
+  const { t } = useLanguage()
+
   return (
-    <div className="min-h-screen text-white overflow-hidden" style={{ background: '#0A0A0F' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-base)' }}>
 
-      {/* ── Mesh gradient background ── */}
-      <div className="mesh-bg">
-        <div className="mesh-orb mesh-orb-1" />
-        <div className="mesh-orb mesh-orb-2" />
-        <div className="mesh-orb mesh-orb-3" />
-      </div>
-
-      {/* ── Nav ── */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/[0.06]" style={{ background: 'rgba(10,10,15,0.8)', backdropFilter: 'blur(20px)' }}>
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
-              <span className="text-white font-black text-sm">MT</span>
-            </div>
-            <span className="font-bold text-white text-sm tracking-tight">My Tutor</span>
+      {/* ── Navbar ───────────────────────────────────────────────────────── */}
+      <nav className="fixed top-0 inset-x-0 z-50"
+        style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
+        <div className="max-w-6xl mx-auto px-5 h-[60px] flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-xl">🔥</span>
+            <span className="font-bold text-base" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <Link href="/auth/login" className="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200">
-              Войти
-            </Link>
-            <Link href="/auth/signup" className="btn-gradient px-5 py-2 rounded-lg text-sm font-semibold text-white">
-              Начать бесплатно
-            </Link>
+
+          {/* Nav links (desktop) */}
+          <div className="hidden md:flex items-center gap-7 text-sm" style={{ color: 'var(--text-secondary)' }}>
+            <a href="#features" className="hover:text-white transition-colors">{t('nav_features')}</a>
+            <a href="#how"      className="hover:text-white transition-colors">{t('nav_how')}</a>
+            <a href="#pricing"  className="hover:text-white transition-colors">{t('nav_pricing')}</a>
+          </div>
+
+          {/* Right */}
+          <div className="flex items-center gap-2.5">
+            <LanguageToggle />
+            <Link href="/auth/login" className="btn-ghost text-xs px-3 py-1.5">{t('cta_login')}</Link>
+            <Link href="/auth/signup" className="btn-primary text-xs px-4 py-2">{t('cta_start')}</Link>
           </div>
         </div>
       </nav>
 
-      {/* ── Hero ── */}
-      <section className="relative pt-36 pb-28 px-6">
-        <div className="relative z-10 max-w-4xl mx-auto text-center animate-slide-up">
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="min-h-screen flex items-center justify-center px-5 pt-[60px]"
+        style={{
+          background: `radial-gradient(ellipse at 20% 50%, rgba(247,129,102,0.08) 0%, transparent 60%),
+                       radial-gradient(ellipse at 80% 20%, rgba(121,192,255,0.08) 0%, transparent 60%),
+                       var(--bg-base)`,
+        }}>
+        <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center py-20">
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 text-sm font-medium mb-10 text-zinc-300"
-            style={{ background: 'rgba(99,102,241,0.1)' }}>
-            <span className="text-accent-400">✦</span>
-            Первый урок бесплатно — без кредитной карты
+          {/* Left */}
+          <div className="animate-slide-up">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8"
+              style={{ background: 'rgba(247,129,102,0.1)', border: '1px solid rgba(247,129,102,0.3)', color: 'var(--accent-primary)' }}>
+              {t('hero_badge')}
+            </div>
+
+            {/* H1 */}
+            <h1 className="font-black leading-tight mb-6"
+              style={{ fontSize: 'clamp(40px, 6vw, 68px)', fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+              <span className="text-gradient-coral">{t('hero_title_accent')}</span>
+              <br />
+              <span>AI‑репетитор</span>
+            </h1>
+
+            <p className="text-lg mb-9 leading-relaxed max-w-lg" style={{ color: 'var(--text-secondary)' }}>
+              {t('hero_sub')}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              <Link href="/auth/signup" className="btn-primary gap-2 px-7 py-3.5 text-base font-bold">
+                {t('cta_start')} <ArrowRight size={18} />
+              </Link>
+              <Link href="/auth/login" className="btn-ghost px-7 py-3.5 text-base">
+                {t('cta_login')}
+              </Link>
+            </div>
+
+            {/* Social proof */}
+            <p className="text-sm" style={{ color: 'var(--text-dim)' }}>{t('hero_social_proof')}</p>
           </div>
 
-          {/* Headline */}
-          <h1 className="font-black leading-[1.02] mb-7 tracking-tighter"
-            style={{ fontSize: 'clamp(48px, 7vw, 80px)' }}>
-            Твой личный
-            <br />
-            <span className="text-transparent bg-clip-text"
-              style={{ backgroundImage: 'linear-gradient(135deg, #818CF8 0%, #A78BFA 40%, #60A5FA 100%)' }}>
-              AI‑репетитор
-            </span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto" style={{ color: '#71717A' }}>
-            Учи C, C++ и Python как с живым преподавателем.
-            <br className="hidden md:block" />
-            Голос. Код. Объяснения на русском — доступно 24/7.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/auth/signup"
-              className="btn-gradient group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-base font-bold text-white">
-              Начать бесплатно
-              <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-            </Link>
-            <Link href="/auth/login"
-              className="btn-ghost inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-zinc-200">
-              Войти в аккаунт
-            </Link>
-          </div>
-
-          {/* Trust badges */}
-          <div className="flex items-center justify-center gap-6 mt-12 text-xs text-zinc-600">
-            {['Без кредитной карты', 'Отмена в любое время', 'Поддержка 24/7'].map((t) => (
-              <span key={t} className="flex items-center gap-1.5">
-                <Star size={10} className="text-accent-500" fill="currentColor" />
-                {t}
-              </span>
-            ))}
+          {/* Right — Mockup window */}
+          <div className="hidden lg:flex justify-center">
+            <div className="animate-float w-full max-w-md">
+              <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+                {/* Titlebar */}
+                <div className="flex items-center gap-2 px-4 py-3" style={{ background: 'var(--bg-elevated)', borderBottom: '1px solid var(--border-default)' }}>
+                  <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                  <span className="ml-3 text-xs font-mono" style={{ color: 'var(--text-dim)' }}>урок.py</span>
+                </div>
+                {/* Code area */}
+                <div className="p-4 font-mono text-xs leading-relaxed" style={{ background: '#0D1117', borderBottom: '1px solid var(--border-default)' }}>
+                  <div><span style={{ color: '#79C0FF' }}>def </span><span style={{ color: '#56D364' }}>hello</span><span style={{ color: 'var(--text-secondary)' }}>():</span></div>
+                  <div className="pl-4"><span style={{ color: '#79C0FF' }}>print</span><span style={{ color: 'var(--text-secondary)' }}>(</span><span style={{ color: '#E3B341' }}>&quot;Привет, мир!&quot;</span><span style={{ color: 'var(--text-secondary)' }}>)</span></div>
+                  <div className="mt-1"><span style={{ color: '#56D364' }}>hello</span><span style={{ color: 'var(--text-secondary)' }}>()</span></div>
+                </div>
+                {/* Chat bubble */}
+                <div className="p-4">
+                  <div className="flex gap-3">
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
+                      style={{ background: 'var(--accent-primary)' }}>М</div>
+                    <div className="rounded-lg p-3 text-xs leading-relaxed flex-1"
+                      style={{ background: 'var(--bg-elevated)', borderLeft: '3px solid var(--accent-primary)', color: 'var(--text-primary)' }}>
+                      Отлично! Теперь попробуй изменить значение переменной — что думаешь произойдёт? 🤔
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Social proof ticker ── */}
-      <div className="relative z-10 border-y border-white/[0.06] py-4 overflow-hidden" style={{ background: 'rgba(99,102,241,0.04)' }}>
-        <div className="flex gap-0 whitespace-nowrap" style={{ animation: 'ticker 20s linear infinite' }}>
-          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-2 px-8 text-sm font-medium text-zinc-400">
-              {item}
-              <span className="text-accent-600 opacity-50">•</span>
-            </span>
-          ))}
-        </div>
-        <p className="absolute right-6 top-1/2 -translate-y-1/2 text-xs text-zinc-600 hidden sm:block">Учат прямо сейчас</p>
-      </div>
-
-      {/* ── Features ── */}
-      <section className="relative z-10 py-28 px-6">
+      {/* ── Features ─────────────────────────────────────────────────────── */}
+      <section id="features" className="py-24 px-5">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-accent-400 mb-4"
-              style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)' }}>
-              Возможности
-            </div>
-            <h2 className="text-4xl font-black text-white tracking-tight">Почему My Tutor?</h2>
-            <p className="mt-3 text-zinc-500 max-w-xl mx-auto">Не просто чат с AI — полноценный репетитор с голосом, кодом и памятью.</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+              {t('features_title')}
+            </h2>
           </div>
-
           <div className="grid md:grid-cols-3 gap-5">
-            {FEATURES.map((f) => (
-              <div key={f.title}
-                className={`group relative rounded-2xl p-7 border ${f.border} bg-gradient-to-br ${f.gradient} backdrop-blur-sm hover:-translate-y-1 transition-all duration-300`}
-                style={{ background: `linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))` }}>
-                <div className={`w-12 h-12 rounded-xl ${f.iconBg} flex items-center justify-center mb-5 border ${f.border}`}>
-                  <f.icon size={22} className={f.iconColor} />
-                </div>
-                <h3 className="font-bold text-white text-lg mb-2.5">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-zinc-500">{f.desc}</p>
+            {(['feat1','feat2','feat3'] as const).map((k, i) => (
+              <div key={k} className="p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                style={{ background: 'rgba(22,27,34,0.8)', border: '1px solid var(--border-default)' }}>
+                <div className="text-3xl mb-5">{['🎯','💬','🧠'][i]}</div>
+                <h3 className="font-bold text-base mb-2.5" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t(`${k}_title` as any)}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{t(`${k}_desc` as any)}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Subjects ── */}
-      <section className="relative z-10 py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-black text-white tracking-tight">Что можно изучать</h2>
-            <p className="mt-3 text-zinc-500">Репетитор подстроится под твой уровень с первого сообщения.</p>
+      {/* ── How it works ─────────────────────────────────────────────────── */}
+      <section id="how" className="py-24 px-5" style={{ background: 'var(--bg-surface)' }}>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-16" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+            {t('how_title')}
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {STEPS.map((key, i) => (
+              <div key={key} className="flex flex-col items-center text-center">
+                <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm mb-4 shrink-0"
+                  style={{ background: i === 0 ? 'var(--accent-primary)' : 'var(--bg-elevated)', color: i === 0 ? '#fff' : 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
+                  {i + 1}
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{t(key)}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Subjects ─────────────────────────────────────────────────────── */}
+      <section className="py-24 px-5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-14" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+            {t('subjects_title')}
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {SUBJECTS.map((s) => (
-              <div key={s.name}
-                className="group relative rounded-2xl p-6 border border-white/[0.07] hover:border-accent-500/30 transition-all duration-300 hover:-translate-y-1 cursor-default"
-                style={{ background: 'rgba(255,255,255,0.03)' }}>
-                <div className="text-4xl mb-4">{s.icon}</div>
-                <div className="font-bold text-white text-lg group-hover:text-accent-300 transition-colors">{s.name}</div>
-                <div className="text-xs text-zinc-600 mt-1.5 leading-tight">{s.desc}</div>
+              <div key={s.slug}
+                className="group relative p-6 rounded-2xl cursor-default transition-all duration-300 hover:-translate-y-1"
+                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = `${s.accent}55`; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 20px ${s.accent}14` }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border-default)'; (e.currentTarget as HTMLDivElement).style.boxShadow = 'none' }}>
+                <div className="text-3xl mb-4 font-black" style={{ color: s.slug === 'c' || s.slug === 'cpp' ? s.accent : undefined }}>{s.icon}</div>
+                <p className="font-bold text-sm mb-1.5" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                  {s.slug === 'c' ? 'C' : s.slug === 'cpp' ? 'C++' : s.slug === 'python' ? 'Python' : 'English'}
+                </p>
+                <p className="text-xs leading-snug mb-4" style={{ color: 'var(--text-secondary)' }}>{t(s.desc_key)}</p>
+                <Link href="/auth/signup" className="text-xs font-semibold" style={{ color: s.accent }}>{t('subj_start')}</Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA section ── */}
-      <section className="relative z-10 py-24 px-6">
+      {/* ── Pricing ──────────────────────────────────────────────────────── */}
+      <section id="pricing" className="py-24 px-5" style={{ background: 'var(--bg-surface)' }}>
         <div className="max-w-3xl mx-auto">
-          <div className="gradient-border p-[1px] rounded-3xl">
-            <div className="relative rounded-3xl p-14 text-center overflow-hidden" style={{ background: '#0F0F18' }}>
-              <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.12) 0%, transparent 70%)' }} />
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 mb-6">
-                  {[1,2,3,4,5].map((i) => <Star key={i} size={16} className="text-accent-400" fill="currentColor" />)}
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-14" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+            {t('pricing_title')}
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* Free */}
+            <div className="p-7 rounded-2xl" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
+              <p className="font-bold text-sm mb-1" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-heading)' }}>{t('plan_free_name')}</p>
+              <p className="text-3xl font-black mb-6" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t('plan_free_price')}</p>
+              {(['plan_free_f1','plan_free_f2','plan_free_f3'] as const).map((k) => (
+                <div key={k} className="flex gap-2.5 items-center mb-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <Check size={14} style={{ color: 'var(--accent-green)', flexShrink: 0 }} />
+                  {t(k)}
                 </div>
-                <h2 className="text-4xl font-black text-white tracking-tight mb-4">Начни учиться прямо сейчас</h2>
-                <p className="text-zinc-500 mb-10 text-lg">Первый урок бесплатно. Без кредитной карты. Без обязательств.</p>
-                <Link href="/auth/signup"
-                  className="btn-gradient inline-flex items-center gap-2.5 px-9 py-4 rounded-xl text-base font-bold text-white">
-                  Создать аккаунт бесплатно
-                  <ArrowRight size={18} />
-                </Link>
-              </div>
+              ))}
+              <Link href="/auth/signup" className="btn-ghost w-full mt-6 py-2.5 text-center block">{t('cta_start')}</Link>
+            </div>
+            {/* Pro */}
+            <div className="p-7 rounded-2xl relative" style={{ background: 'var(--bg-elevated)', border: `2px solid var(--accent-primary)`, boxShadow: '0 0 30px rgba(247,129,102,0.12)' }}>
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 badge badge-coral text-xs px-3 py-1">{t('plan_pro_badge')}</span>
+              <p className="font-bold text-sm mb-1" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>{t('plan_pro_name')}</p>
+              <p className="text-3xl font-black mb-6" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t('plan_pro_price')}</p>
+              {(['plan_pro_f1','plan_pro_f2','plan_pro_f3','plan_pro_f4'] as const).map((k) => (
+                <div key={k} className="flex gap-2.5 items-center mb-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  <Check size={14} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
+                  {t(k)}
+                </div>
+              ))}
+              <Link href="/auth/signup" className="btn-primary w-full mt-6 py-2.5 text-center block">{t('cta_start')}</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer className="relative z-10 border-t border-white/[0.06] py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
-              <span className="text-white font-black text-xs">MT</span>
-            </div>
-            <span className="text-sm font-semibold text-zinc-400">My Tutor</span>
+      {/* ── Testimonials ─────────────────────────────────────────────────── */}
+      <section className="py-24 px-5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-14" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+            {t('testimonials_title')}
+          </h2>
+          <div className="grid md:grid-cols-3 gap-5">
+            {TESTIMONIALS.map((item) => (
+              <div key={item.text_key} className="p-6 rounded-2xl"
+                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+                <p className="text-sm leading-relaxed mb-4 italic" style={{ color: 'var(--text-primary)' }}>&ldquo;{t(item.text_key)}&rdquo;</p>
+                <p className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>— {t(item.name_key)}</p>
+              </div>
+            ))}
           </div>
-          <p className="text-xs text-zinc-700">© 2026 My Tutor. Все права защищены.</p>
-          <div className="flex gap-5 text-xs text-zinc-600">
-            <Link href="/auth/login" className="hover:text-zinc-400 transition-colors">Войти</Link>
-            <Link href="/auth/signup" className="hover:text-zinc-400 transition-colors">Регистрация</Link>
+        </div>
+      </section>
+
+      {/* ── Footer ───────────────────────────────────────────────────────── */}
+      <footer className="py-10 px-5" style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border-default)' }}>
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span>🔥</span>
+            <span className="font-bold text-sm" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+          </div>
+          <p className="text-xs" style={{ color: 'var(--text-dim)' }}>{t('footer_rights')}</p>
+          <div className="flex gap-5 text-xs" style={{ color: 'var(--text-dim)' }}>
+            <a href="#features" className="hover:text-white transition-colors">{t('nav_features')}</a>
+            <a href="#pricing"  className="hover:text-white transition-colors">{t('nav_pricing')}</a>
+            <Link href="/auth/login" className="hover:text-white transition-colors">{t('cta_login')}</Link>
+            <LanguageToggle />
           </div>
         </div>
       </footer>
+
     </div>
   )
 }

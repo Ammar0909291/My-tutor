@@ -1,0 +1,40 @@
+:root {
+  /* Backgrounds */
+  --bg-base:     #0D1117;
+  --bg-surface:  #161B22;
+  --bg-elevated: #21262D;
+  --bg-hover:    #30363D;
+
+  /* Accents */
+  --accent-primary:   #F78166;
+  --accent-secondary: #79C0FF;
+  --accent-green:     #56D364;
+  --accent-yellow:    #E3B341;
+  --accent-primary-dim: rgba(247,129,102,0.12);
+  --accent-primary-glow: rgba(247,129,102,0.35);
+
+  /* Text */
+  --text-primary:   #F0F6FC;
+  --text-secondary: #8B949E;
+  --text-dim:       #484F58;
+
+  /* Borders */
+  --border-default: #30363D;
+  --border-accent:  rgba(247,129,102,0.4);
+  --border-muted:   rgba(48,54,61,0.6);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
+
+  /* Typography */
+  --font-heading: var(--font-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif);
+  --font-body:    var(--font-inter, 'Inter', system-ui, sans-serif);
+  --font-mono:    var(--font-jetbrains, 'JetBrains Mono', 'Fira Code', Consolas, monospace);
+}

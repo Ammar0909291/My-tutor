@@ -2,19 +2,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Check, ChevronDown, Copy, Hexagon, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
-import { cleanTextForTTS } from '@/lib/tts-cleaner'
-import { speakText, stopSpeaking, type VoiceType, VOICE_SETTINGS } from '@/lib/tts'
+import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
+import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { speakText, stopSpeaking, VOICE_SETTINGS, type VoiceType } from '@/lib/tts'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
-// ─── Web Speech API typings (mic input) ───────────────────────────────────────
+// ─── SpeechRecognition types ──────────────────────────────────────────────────
 interface SpeechRecognitionLike {
   lang: string; interimResults: boolean; continuous: boolean
-  start: () => void; stop: () => void; abort: () => void
-  onresult: ((event: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null
+  start(): void; stop(): void; abort(): void
+  onresult: ((e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null
   onend: (() => void) | null
-  onerror: ((event: { error: string }) => void) | null
+  onerror: ((e: { error: string }) => void) | null
 }
 type SpeechRecognitionCtor = new () => SpeechRecognitionLike
 function getSpeechRecognition(): SpeechRecognitionCtor | null {
@@ -23,220 +23,181 @@ function getSpeechRecognition(): SpeechRecognitionCtor | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null
 }
 
-// ─── Voice config ─────────────────────────────────────────────────────────────
-const VOICE_PRESETS: { type: VoiceType; code: string; label: string }[] = [
-  { type: 'male',   code: 'М-01', label: 'Мужской'  },
-  { type: 'female', code: 'Ж-01', label: 'Женский'  },
-  { type: 'warm',   code: 'Т-01', label: 'Тёплый'   },
-]
+// ─── Config ───────────────────────────────────────────────────────────────────
+const VOICE_CONFIG: Record<VoiceType, { pitch: number; rate: number; label: string }> = {
+  male:   { ...VOICE_SETTINGS.male,   label: 'М' },
+  female: { ...VOICE_SETTINGS.female, label: 'Ж' },
+  warm:   { ...VOICE_SETTINGS.warm,   label: 'Т' },
+}
 const VOICE_MAP: Record<string, VoiceType> = {
   male: 'male', female: 'female', warm: 'warm',
   alexei: 'male', maria: 'female', dmitry: 'warm',
 }
 function resolveVoice(choice: string): VoiceType { return VOICE_MAP[choice] ?? 'male' }
 
-// ─── Subject metadata ─────────────────────────────────────────────────────────
-const LANG_MAP: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'markdown' }
-const LANG_BADGE: Record<string, { label: string; color: string; bg: string }> = {
-  c:       { label: 'C',       color: '#FF6B35', bg: 'rgba(255,107,53,0.15)' },
-  cpp:     { label: 'C++',     color: '#7B2FFF', bg: 'rgba(123,47,255,0.18)' },
-  python:  { label: 'PYTHON',  color: '#00D4FF', bg: 'rgba(0,212,255,0.15)'  },
-  english: { label: 'ENGLISH', color: '#00FF88', bg: 'rgba(0,255,136,0.12)'  },
+const LANG_BADGE: Record<string, { label: string; accent: string }> = {
+  c:       { label: 'C',       accent: '#F78166' },
+  cpp:     { label: 'C++',     accent: '#79C0FF' },
+  python:  { label: 'Python',  accent: '#56D364' },
+  english: { label: 'English', accent: '#E3B341' },
 }
+const LANG_MAP: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'markdown' }
 const FILENAME: Record<string, string> = { c: 'урок.c', cpp: 'урок.cpp', python: 'урок.py', english: 'урок.md' }
 const INITIAL_CODE: Record<string, string> = {
-  c: '// > СИСТЕМА ГОТОВА. Ожидание инструкций от репетитора...\n',
-  cpp: '// > СИСТЕМА ГОТОВА. Ожидание инструкций от репетитора...\n',
-  python: '# > СИСТЕМА ГОТОВА. Ожидание инструкций от репетитора...\n',
-  english: '<!-- > СИСТЕМА ГОТОВА. Ожидание заметок от репетитора... -->\n',
+  c:       '// Ожидание первого урока...\n',
+  cpp:     '// Ожидание первого урока...\n',
+  python:  '# Ожидание первого урока...\n',
+  english: '<!-- Ожидание первого урока... -->\n',
 }
 const EXT_LANG: Record<string, string> = { py: 'python', c: 'c', cpp: 'cpp', txt: 'text' }
 
-// ─── Avatar helpers ───────────────────────────────────────────────────────────
-const TUTOR_AVATAR = 'https://ui-avatars.com/api/?name=Max+Tutor&background=7B2FFF&color=fff&bold=true&size=128'
-function studentAvatar(name?: string) {
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name ?? 'Студент')}&background=00D4FF&color=fff&bold=true&size=64`
-}
+const TUTOR_AVATAR_SRC = 'https://ui-avatars.com/api/?name=Max+Tutor&background=F78166&color=fff&bold=true&size=64'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-function formatTimer(secs: number): string {
-  const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60), s = secs % 60
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`
+function formatTimer(s: number) {
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60
+  const p = (n: number) => String(n).padStart(2, '0')
+  return h > 0 ? `${p(h)}:${p(m)}:${p(sec)}` : `${p(m)}:${p(sec)}`
 }
 function extractLastCodeBlock(text: string): string | null {
   let last: string | null = null
-  const tripleRe = /```(?:\w*)\n([\s\S]*?)```/g
-  let m: RegExpExecArray | null
-  while ((m = tripleRe.exec(text)) !== null) last = m[1].trim()
-  const tagRe = /\[CODE\]([\s\S]*?)\[\/CODE\]/gi
-  while ((m = tagRe.exec(text)) !== null) last = m[1].trim()
+  const re1 = /```(?:\w*)\n([\s\S]*?)```/g; let m: RegExpExecArray | null
+  while ((m = re1.exec(text)) !== null) last = m[1].trim()
+  const re2 = /\[CODE\]([\s\S]*?)\[\/CODE\]/gi
+  while ((m = re2.exec(text)) !== null) last = m[1].trim()
   return last
 }
-function stripCodeBlocks(text: string): string {
-  return text
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/\[CODE\][\s\S]*?\[\/CODE\]/gi, '')
-    .trim()
+function stripCode(text: string) {
+  return text.replace(/```[\s\S]*?```/g, '').replace(/\[CODE\][\s\S]*?\[\/CODE\]/gi, '').trim()
 }
-function truncateToSentences(text: string, n: number): { preview: string; hasMore: boolean } {
-  const matches: number[] = []
-  const re = /[.!?…]+[\s)]?/g
-  let m: RegExpExecArray | null
-  while ((m = re.exec(text)) !== null) matches.push(m.index + m[0].length)
-  if (matches.length <= n) return { preview: text, hasMore: false }
-  return { preview: text.slice(0, matches[n - 1]).trim(), hasMore: true }
+function truncate(text: string, n: number): { preview: string; hasMore: boolean } {
+  const idx: number[] = []
+  const re = /[.!?…]+[\s)]?/g; let m: RegExpExecArray | null
+  while ((m = re.exec(text)) !== null) idx.push(m.index + m[0].length)
+  if (idx.length <= n) return { preview: text, hasMore: false }
+  return { preview: text.slice(0, idx[n - 1]).trim(), hasMore: true }
 }
 
-// ─── Inline markdown → React ──────────────────────────────────────────────────
-function renderInline(text: string, prefix: string, codeClass: string): React.ReactNode {
-  const regex = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
-  const parts: React.ReactNode[] = []
-  let lastIndex = 0; let match: RegExpExecArray | null; let idx = 0
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index))
-    const raw = match[0]
-    if (raw.startsWith('**')) parts.push(<strong key={`${prefix}-b${idx}`} className="font-bold text-cyan-300">{raw.slice(2, -2)}</strong>)
-    else if (raw.startsWith('*')) parts.push(<em key={`${prefix}-i${idx}`} className="text-cyan-200">{raw.slice(1, -1)}</em>)
-    else parts.push(<code key={`${prefix}-c${idx}`} className={`px-1.5 py-0.5 rounded text-[0.85em] font-mono ${codeClass}`}>{raw.slice(1, -1)}</code>)
-    lastIndex = match.index + raw.length; idx++
+// ─── MessageContent ───────────────────────────────────────────────────────────
+function renderInline(text: string, key: string, codeStyle: string): React.ReactNode {
+  const re = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
+  const parts: React.ReactNode[] = []; let last = 0; let i = 0; let m: RegExpExecArray | null
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index))
+    const raw = m[0]
+    if (raw.startsWith('**')) parts.push(<strong key={`${key}-b${i}`} style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{raw.slice(2,-2)}</strong>)
+    else if (raw.startsWith('*')) parts.push(<em key={`${key}-i${i}`} style={{ color: 'var(--text-secondary)' }}>{raw.slice(1,-1)}</em>)
+    else parts.push(<code key={`${key}-c${i}`} className={codeStyle}>{raw.slice(1,-1)}</code>)
+    last = m.index + raw.length; i++
   }
-  if (lastIndex < text.length) parts.push(text.slice(lastIndex))
+  if (last < text.length) parts.push(text.slice(last))
   return parts.length === 0 ? text : parts
 }
+
 function MessageContent({ text, isUser }: { text: string; isUser: boolean }) {
-  const codeClass = isUser ? 'bg-black/30 text-white' : 'bg-black/50 text-emerald-300'
+  const codeStyle = `px-1.5 py-0.5 rounded text-[0.82em] font-mono ${isUser ? 'bg-white/20' : 'bg-black/30'}`
   return (
     <div className="space-y-1">
       {text.split('\n').map((line, i) => {
         if (!line.trim()) return <div key={i} className="h-1" />
-        if (line.match(/^[-_*]{3,}$/)) return <hr key={i} className="border-cyan-500/15 my-1.5" />
-        if (line.startsWith('### ')) return <p key={i} className="font-bold mt-1.5 text-cyan-200">{renderInline(line.slice(4), `${i}`, codeClass)}</p>
-        if (line.startsWith('## ')) return <p key={i} className="font-bold mt-1.5 text-cyan-200">{renderInline(line.slice(3), `${i}`, codeClass)}</p>
-        if (line.startsWith('# ')) return <p key={i} className="font-bold mt-1.5 text-cyan-200">{renderInline(line.slice(2), `${i}`, codeClass)}</p>
+        if (line.match(/^#+\s/)) return <p key={i} className="font-bold" style={{ color: 'var(--text-primary)' }}>{renderInline(line.replace(/^#+\s/, ''), `${i}`, codeStyle)}</p>
         const bullet = line.match(/^[-•*]\s+(.*)$/)
         if (bullet) return (
-          <div key={i} className="flex gap-2 items-start">
-            <span className="mt-0.5 shrink-0 text-xs text-cyan-400">▸</span>
-            <span>{renderInline(bullet[1], `${i}`, codeClass)}</span>
+          <div key={i} className="flex gap-2">
+            <span className="mt-0.5 shrink-0 text-xs" style={{ color: 'var(--accent-primary)' }}>▸</span>
+            <span>{renderInline(bullet[1], `${i}`, codeStyle)}</span>
           </div>
         )
         const num = line.match(/^(\d+)\.\s+(.*)$/)
         if (num) return (
-          <div key={i} className="flex gap-2 items-start">
-            <span className="tabular-nums text-xs mt-0.5 shrink-0 font-mono text-cyan-400">{num[1]}.</span>
-            <span>{renderInline(num[2], `${i}`, codeClass)}</span>
+          <div key={i} className="flex gap-2">
+            <span className="tabular-nums text-xs mt-0.5 shrink-0 font-mono" style={{ color: 'var(--accent-primary)' }}>{num[1]}.</span>
+            <span>{renderInline(num[2], `${i}`, codeStyle)}</span>
           </div>
         )
-        return <p key={i}>{renderInline(line, `${i}`, codeClass)}</p>
+        return <p key={i}>{renderInline(line, `${i}`, codeStyle)}</p>
       })}
     </div>
   )
 }
 
-// ─── Decorative pieces ────────────────────────────────────────────────────────
-function Starfield() {
-  const stars = useMemo(() => {
-    const n = 80
-    return Array.from({ length: n }, (_, i) => ({
-      key: i,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      delay: Math.random() * 4,
-      dur: 2 + Math.random() * 3,
-      size: Math.random() < 0.85 ? 1.5 : 2.5,
-    }))
-  }, [])
+// ─── Typing indicator ─────────────────────────────────────────────────────────
+function TypingDots() {
   return (
-    <div className="scifi-starfield">
-      {stars.map((s) => (
-        <span key={s.key} className="scifi-star"
-          style={{
-            top: `${s.top}%`,
-            left: `${s.left}%`,
-            width: `${s.size}px`,
-            height: `${s.size}px`,
-            '--dur': `${s.dur}s`,
-            '--delay': `${s.delay}s`,
-          } as React.CSSProperties}
-        />
-      ))}
+    <div className="flex items-center gap-3 px-4 py-3">
+      <div className="flex gap-1.5 items-center">
+        <span className="typing-dot" />
+        <span className="typing-dot" />
+        <span className="typing-dot" />
+      </div>
     </div>
-  )
-}
-function Waveform4() {
-  return (
-    <span className="inline-flex items-end gap-[2px] h-3.5">
-      {[0, 0.15, 0.3, 0.45].map((d, i) => (
-        <span key={i} className="scifi-wf-bar" style={{ animationDelay: `${d}s`, height: '12px' }} />
-      ))}
-    </span>
-  )
-}
-function TypingEqualizer() {
-  return (
-    <span className="inline-flex items-end gap-1 h-4">
-      {[0, 0.15, 0.3].map((d, i) => (
-        <span key={i} className="scifi-eq-bar" style={{ animationDelay: `${d}s` }} />
-      ))}
-    </span>
   )
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMessage = { id: string; role: 'user' | 'assistant'; content: string; ts: number; streaming?: boolean }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean }
 type MicState = 'idle' | 'recording'
 type AttachedFile = { name: string; content: string; language: string }
+type ActiveTab = 'code' | 'chat'
+
 interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
   memoryContext?: string | null; pastSessionsSummary?: string | null
-  subjects?: { slug: string; name: string }[]; displayName?: string
+  subjects?: {slug:string;name:string}[]; displayName?: string
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({
-  subjectSlug, subjectName, levelDescription, voiceChoice,
-  memoryContext, pastSessionsSummary, displayName,
-}: Props) {
-  const [sessionId, setSessionId] = useState<string | null>(null)
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, memoryContext, pastSessionsSummary, displayName }: Props) {
+  const { t } = useLanguage()
+
+  // Core state
+  const [sessionId, setSessionId] = useState<string|null>(null)
+  const [messages, setMessages] = useState<ChatMsg[]>([])
   const [code, setCode] = useState(INITIAL_CODE[subjectSlug] ?? '// ...\n')
   const [input, setInput] = useState('')
   const [isStreaming, setIsStreaming] = useState(false)
   const [initError, setInitError] = useState('')
-  const [speakingId, setSpeakingId] = useState<string | null>(null)
+  const [speakingId, setSpeakingId] = useState<string|null>(null)
   const [micState, setMicState] = useState<MicState>('idle')
-  const [speechInputSupported, setSpeechInputSupported] = useState(false)
-  const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
-  const [voiceSettings, setVoiceSettings] = useState(() => VOICE_SETTINGS[resolveVoice(voiceChoice)])
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({})
-  const [copied, setCopied] = useState(false)
+  const [micSupported, setMicSupported] = useState(false)
   const [elapsed, setElapsed] = useState(0)
-  // FIX 4 — file attachment
-  const [attachedFile, setAttachedFile] = useState<AttachedFile | null>(null)
-  // FIX 6 — terminal panel
+  const [copied, setCopied] = useState(false)
+  const [expanded, setExpanded] = useState<Record<string,boolean>>({})
+  const [activeTab, setActiveTab] = useState<ActiveTab>('chat')
+  const [atBottom, setAtBottom] = useState(true)
+
+  // Voice
+  const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
+  const [voiceConfig, setVoiceConfig] = useState(() => VOICE_SETTINGS[resolveVoice(voiceChoice)])
+  const voiceConfigRef = useRef(voiceConfig)
+  useEffect(() => { voiceConfigRef.current = voiceConfig }, [voiceConfig])
+
+  // File attachment
+  const [attachedFile, setAttachedFile] = useState<AttachedFile|null>(null)
+
+  // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [terminalOutput, setTerminalOutput] = useState('')
   const [isRunning, setIsRunning] = useState(false)
 
+  // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const messagesAreaRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const initializedRef = useRef(false)
-  const voiceSettingsRef = useRef(voiceSettings)
-  const speakingIdRef = useRef<string | null>(null)
-  const recognitionRef = useRef<SpeechRecognitionLike | null>(null)
+  const speakingIdRef = useRef<string|null>(null)
+  const recognitionRef = useRef<SpeechRecognitionLike|null>(null)
   const speechBaseRef = useRef('')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const sessionIdRef = useRef<string|null>(null)
 
-  // Keep voiceSettingsRef in sync with state
-  useEffect(() => { voiceSettingsRef.current = voiceSettings }, [voiceSettings])
-
+  // Derived
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
-  const langBadge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), color: '#00D4FF', bg: 'rgba(0,212,255,0.12)' }
+  const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
   const filename = FILENAME[subjectSlug] ?? 'урок.txt'
-  const lineCount = code.split('\n').length
+  const studentAvatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName ?? 'Студент')}&background=79C0FF&color=fff&bold=true&size=64`
 
-  // Session timer (starts when sessionId exists)
+  // Timer
   useEffect(() => {
     if (!sessionId) return
     const start = Date.now()
@@ -244,138 +205,117 @@ export function LessonScreen({
     return () => clearInterval(id)
   }, [sessionId])
 
-  // Smooth scroll on new message
+  // Scroll bottom detection
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-  }, [messages])
+    const el = messagesAreaRef.current; if (!el) return
+    const handler = () => setAtBottom(el.scrollHeight - el.scrollTop - el.clientHeight < 60)
+    el.addEventListener('scroll', handler, { passive: true })
+    return () => el.removeEventListener('scroll', handler)
+  }, [])
 
-  useEffect(() => { setSpeechInputSupported(getSpeechRecognition() !== null) }, [])
+  // Auto scroll
+  useEffect(() => {
+    if (atBottom) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+  }, [messages, atBottom])
 
-  // ── TTS (FIX 2: pass pitch/rate directly) ─────────────────────────────────
+  useEffect(() => { setMicSupported(getSpeechRecognition() !== null) }, [])
+
+  // TTS
   const handleStopSpeech = useCallback(() => {
     stopSpeaking(); speakingIdRef.current = null; setSpeakingId(null)
   }, [])
   const handleSpeak = useCallback((id: string, text: string) => {
-    const clean = cleanTextForTTS(text)
-    if (!clean) return
     speakingIdRef.current = id; setSpeakingId(id)
-    speakText(clean, voiceSettingsRef.current.pitch, voiceSettingsRef.current.rate, undefined, () => {
+    speakText(text, voiceConfigRef.current, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     })
   }, [])
-  const handleVoiceChange = useCallback((newVoice: VoiceType) => {
-    const settings = VOICE_SETTINGS[newVoice]
-    setVoiceType(newVoice)
-    setVoiceSettings(settings)
-    voiceSettingsRef.current = settings  // sync immediately so restart uses correct settings
+  const handleVoiceChange = useCallback((v: VoiceType) => {
+    const cfg = VOICE_SETTINGS[v]
+    setVoiceType(v); setVoiceConfig(cfg); voiceConfigRef.current = cfg
     if (speakingIdRef.current) {
       const id = speakingIdRef.current
       const msg = messages.find((m) => m.id === id)
       stopSpeaking()
-      if (msg) setTimeout(() => { handleSpeak(id, msg.content) }, 50)
+      if (msg) setTimeout(() => handleSpeak(id, msg.content), 50)
     }
   }, [messages, handleSpeak])
 
-  // ── Copy code ──────────────────────────────────────────────────────────────
+  // Copy
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(code).then(() => {
-      setCopied(true); setTimeout(() => setCopied(false), 1800)
-    }).catch(() => { /* ignore */ })
+    navigator.clipboard.writeText(code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800) }).catch(() => {})
   }, [code])
 
-  // ── Monaco custom theme (quantum) ──────────────────────────────────────────
-  const handleEditorWillMount = useCallback((monaco: typeof import('monaco-editor')) => {
-    monaco.editor.defineTheme('quantum', {
-      base: 'vs-dark',
-      inherit: true,
+  // Monaco theme
+  const handleEditorBeforeMount = useCallback((monaco: typeof import('monaco-editor')) => {
+    monaco.editor.defineTheme('mytutor', {
+      base: 'vs-dark', inherit: true,
       rules: [
-        { token: '',                 foreground: '00FF88' },
-        { token: 'comment',          foreground: '4A7FA5', fontStyle: 'italic' },
-        { token: 'keyword',          foreground: '00D4FF', fontStyle: 'bold' },
-        { token: 'keyword.flow',     foreground: '00D4FF' },
-        { token: 'string',           foreground: 'FFD789' },
-        { token: 'number',           foreground: 'FF6B35' },
-        { token: 'type',             foreground: '7B2FFF' },
-        { token: 'function',         foreground: '00FF88' },
-        { token: 'variable',         foreground: 'E8F4FD' },
-        { token: 'identifier',       foreground: 'E8F4FD' },
-        { token: 'delimiter',        foreground: '4A7FA5' },
-        { token: 'operator',         foreground: '00D4FF' },
-        { token: 'punctuation',      foreground: '4A7FA5' },
-        { token: 'tag',              foreground: '00D4FF' },
-        { token: 'attribute.name',   foreground: 'FF6B35' },
+        { token: 'comment',        foreground: '6E7681', fontStyle: 'italic' },
+        { token: 'keyword',        foreground: 'FF7B72', fontStyle: 'bold'   },
+        { token: 'string',         foreground: 'A5D6FF'                      },
+        { token: 'number',         foreground: 'F2CC60'                      },
+        { token: 'type',           foreground: '79C0FF'                      },
+        { token: 'function',       foreground: 'D2A8FF'                      },
+        { token: 'variable',       foreground: 'F0F6FC'                      },
+        { token: 'operator',       foreground: 'FF7B72'                      },
       ],
       colors: {
-        'editor.background':                    '#020408',
-        'editor.foreground':                    '#00FF88',
-        'editorCursor.foreground':              '#00D4FF',
-        'editorLineNumber.foreground':          '#1E4A6E',
-        'editorLineNumber.activeForeground':    '#00D4FF',
-        'editor.selectionBackground':           '#00D4FF33',
-        'editor.inactiveSelectionBackground':   '#00D4FF1A',
-        'editor.lineHighlightBackground':       '#0A162888',
-        'editorGutter.background':              '#020408',
-        'editorIndentGuide.background':         '#0A1628',
-        'editorIndentGuide.activeBackground':   '#1E4A6E',
-        'scrollbarSlider.background':           '#00D4FF22',
-        'scrollbarSlider.hoverBackground':      '#00D4FF44',
-        'scrollbarSlider.activeBackground':     '#00D4FF66',
+        'editor.background':                  '#0D1117',
+        'editor.foreground':                  '#F0F6FC',
+        'editorCursor.foreground':            '#F78166',
+        'editorLineNumber.foreground':        '#484F58',
+        'editorLineNumber.activeForeground':  '#8B949E',
+        'editor.selectionBackground':         '#264F78',
+        'editor.lineHighlightBackground':     '#161B22',
+        'editorGutter.background':            '#0D1117',
+        'scrollbarSlider.background':         '#21262D',
+        'scrollbarSlider.hoverBackground':    '#30363D',
       },
     })
   }, [])
 
-  // ── FIX 6: Simulate code run ───────────────────────────────────────────────
+  // Run code
   const handleRunCode = useCallback(async () => {
     if (isRunning) return
-    setIsRunning(true)
-    setTerminalOutput('> ВЫПОЛНЕНИЕ...')
+    setIsRunning(true); setTerminalOutput('> Выполнение...')
     try {
       const res = await fetch('/api/learn/run', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language }),
       })
       const data = await res.json() as { output?: string; error?: string }
       setTerminalOutput(data.output ?? data.error ?? '(нет вывода)')
     } catch (err) {
       setTerminalOutput(`Ошибка: ${err instanceof Error ? err.message : String(err)}`)
-    } finally {
-      setIsRunning(false)
-    }
+    } finally { setIsRunning(false) }
   }, [code, language, isRunning])
 
-  // ── Send message (single-response, no word-by-word) ─────────────────────────
-  const streamMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
+  // Send message
+  const sendMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
     setIsStreaming(true)
-    if (showInUI) setMessages((prev) => [...prev, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
-    const assistantId = `a-${Date.now()}`
-    setMessages((prev) => [...prev, { id: assistantId, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
+    if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
+    const aid = `a-${Date.now()}`
+    setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     try {
       const res = await fetch('/api/learn/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text }),
       })
       const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: string }
-      if (!res.ok || !data.success || !data.text) {
-        throw new Error(data.error ?? `HTTP ${res.status}`)
-      }
-      const fullText = data.text
-      setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: fullText, streaming: false } : m))
-      const extracted = extractLastCodeBlock(fullText)
-      if (extracted) setCode(extracted)
-      handleSpeak(assistantId, fullText)
+      if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
+      const full = data.text
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
+      const codeBlock = extractLastCodeBlock(full)
+      if (codeBlock) setCode(codeBlock)
+      handleSpeak(aid, full)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      console.error('[sendMessage]', err)
-      setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: `Ошибка: ${msg}`, streaming: false } : m))
-    } finally {
-      setIsStreaming(false)
-      inputRef.current?.focus()
-    }
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Ошибка: ${msg}`, streaming: false } : m))
+    } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak])
 
-  // ── Session lifecycle ──────────────────────────────────────────────────────
-  const sessionIdRef = useRef<string | null>(null)
+  // Session init + lifecycle
   useEffect(() => { sessionIdRef.current = sessionId }, [sessionId])
   useEffect(() => {
     function endSession() {
@@ -398,324 +338,290 @@ export function LessonScreen({
         if (!data.success) { setInitError(data.code === 'UPGRADE_REQUIRED' ? 'upgrade' : (data.error ?? 'Ошибка')); return }
         const sid = data.data.id; setSessionId(sid)
         const opening = pastSessionsSummary
-          ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень студента: "${levelDescription}". Кратко напомни что проходили и продолжи урок. Отвечай коротко — 3-4 предложения.`
-          : `Начни первый урок по предмету "${subjectName}". Уровень студента: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй студента и дай первое объяснение с примером кода. Отвечай коротко — 3-4 предложения.`
-        await streamMessage(sid, opening, false)
+          ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}". Кратко напомни и продолжи. 3-4 предложения.`
+          : `Начни первый урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и дай первое объяснение с кодом. 3-4 предложения.`
+        await sendMessage(sid, opening, false)
       } catch { setInitError('Не удалось подключиться. Обнови страницу.') }
     }
     init()
-  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, streamMessage])
+  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage])
 
-  // ── Send ────────────────────────────────────────────────────────────────────
+  // Send handler
   function handleSend() {
     const text = input.trim()
     if ((!text && !attachedFile) || isStreaming || !sessionId) return
     if (micState === 'recording') stopRecording()
-    let fullMessage = text
+    let msg = text
     if (attachedFile) {
-      fullMessage += (text ? '\n' : '') + `\`\`\`${attachedFile.language}\n${attachedFile.content}\n\`\`\``
+      msg += (text ? '\n' : '') + `\`\`\`${attachedFile.language}\n${attachedFile.content}\n\`\`\``
       setAttachedFile(null)
     }
     setInput('')
-    streamMessage(sessionId, fullMessage, true)
+    // Reset textarea height
+    if (textareaRef.current) textareaRef.current.style.height = 'auto'
+    sendMessage(sessionId, msg, true)
   }
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() }
   }
+  function handleTextareaChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setInput(e.target.value)
+    e.target.style.height = 'auto'
+    e.target.style.height = `${Math.min(e.target.scrollHeight, 96)}px`
+  }
 
-  // ── Mic ─────────────────────────────────────────────────────────────────────
+  // Mic
   function stopRecording() { recognitionRef.current?.stop() }
   function startRecording() {
-    const SR = getSpeechRecognition(); if (!SR) { setSpeechInputSupported(false); return }
-    const recognition = new SR()
-    recognition.lang = 'ru-RU'; recognition.interimResults = true; recognition.continuous = false
+    const SR = getSpeechRecognition(); if (!SR) { setMicSupported(false); return }
+    const r = new SR()
+    r.lang = 'ru-RU'; r.interimResults = true; r.continuous = false
     speechBaseRef.current = input ? input.trim() + ' ' : ''
-    recognition.onresult = (event) => {
-      let t = ''; for (let i = 0; i < event.results.length; i++) t += event.results[i][0].transcript
-      setInput(speechBaseRef.current + t)
+    r.onresult = (e) => {
+      let tx = ''; for (let i = 0; i < e.results.length; i++) tx += e.results[i][0].transcript
+      setInput(speechBaseRef.current + tx)
     }
-    recognition.onerror = () => setMicState('idle')
-    recognition.onend = () => { setMicState('idle'); recognitionRef.current = null; inputRef.current?.focus() }
-    recognitionRef.current = recognition
-    try { recognition.start(); setMicState('recording') } catch { setMicState('idle') }
+    r.onerror = () => setMicState('idle')
+    r.onend = () => { setMicState('idle'); recognitionRef.current = null; textareaRef.current?.focus() }
+    recognitionRef.current = r
+    try { r.start(); setMicState('recording') } catch { setMicState('idle') }
   }
   function handleMicClick() { if (micState === 'recording') stopRecording(); else startRecording() }
   useEffect(() => () => { recognitionRef.current?.abort() }, [])
 
-  // ── FIX 4: File attachment ─────────────────────────────────────────────────
+  // File attachment
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    if (file.size > 50 * 1024) {
-      alert('Файл слишком большой (макс. 50 КБ)')
-      e.target.value = ''
-      return
-    }
+    const file = e.target.files?.[0]; if (!file) return
+    if (file.size > 50 * 1024) { alert('Файл слишком большой (макс. 50 КБ)'); e.target.value = ''; return }
     const ext = file.name.split('.').pop()?.toLowerCase() ?? 'txt'
     const lang = EXT_LANG[ext] ?? 'text'
     const reader = new FileReader()
-    reader.onload = (ev) => {
-      setAttachedFile({ name: file.name, content: (ev.target?.result as string) ?? '', language: lang })
-    }
+    reader.onload = (ev) => setAttachedFile({ name: file.name, content: (ev.target?.result as string) ?? '', language: lang })
     reader.readAsText(file)
     e.target.value = ''
   }
 
-  // ── Long message preview ──────────────────────────────────────────────────
+  // Preview cache
   const previewCache = useMemo(() => {
-    const cache: Record<string, { preview: string; full: string; hasMore: boolean }> = {}
+    const c: Record<string, { preview: string; full: string; hasMore: boolean }> = {}
     for (const m of messages) {
       if (m.role !== 'assistant' || m.streaming) continue
-      const full = stripCodeBlocks(m.content)
-      if (full.length < 280) { cache[m.id] = { preview: full, full, hasMore: false }; continue }
-      const { preview, hasMore } = truncateToSentences(full, 3)
-      cache[m.id] = { preview, full, hasMore }
+      const full = stripCode(m.content)
+      if (full.length < 300) { c[m.id] = { preview: full, full, hasMore: false }; continue }
+      const { preview, hasMore } = truncate(full, 4)
+      c[m.id] = { preview, full, hasMore }
     }
-    return cache
+    return c
   }, [messages])
 
-  // ── Error states ────────────────────────────────────────────────────────────
+  // ── Error screens ────────────────────────────────────────────────────────────
   if (initError === 'upgrade') {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6 relative" style={{ background: '#020408' }}>
-        <Starfield />
-        <div className="relative z-10 p-8 max-w-md text-center rounded-2xl scifi-border" style={{ background: 'rgba(10,22,40,0.85)', backdropFilter: 'blur(20px)' }}>
-          <div className="text-5xl mb-4">⏻</div>
-          <h2 className="text-xl font-black scifi-text-glow mb-2 font-mono">ДОСТУП ОГРАНИЧЕН</h2>
-          <p className="text-sm mb-6 leading-relaxed text-cyan-200/70">Бесплатный сеанс использован. Активируй подписку.</p>
-          <Link href="/billing" className="inline-block px-6 py-3 rounded-lg text-white font-bold text-sm scifi-send">АКТИВИРОВАТЬ</Link>
-          <Link href="/dashboard" className="block mt-4 text-xs text-cyan-500/70 font-mono">← БАЗА</Link>
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--bg-base)' }}>
+        <div className="text-center max-w-sm">
+          <div className="text-5xl mb-5">⏻</div>
+          <h2 className="text-xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)' }}>{t('lesson_upgrade_title')}</h2>
+          <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('lesson_upgrade_sub')}</p>
+          <Link href="/billing" className="btn-primary px-6 py-3">{t('lesson_upgrade_btn')}</Link>
+          <Link href="/dashboard" className="block mt-4 text-sm" style={{ color: 'var(--text-dim)' }}>{t('lesson_back_base')}</Link>
         </div>
       </div>
     )
   }
   if (initError) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6 relative" style={{ background: '#020408' }}>
-        <Starfield />
-        <div className="relative z-10 p-8 max-w-sm text-center rounded-2xl scifi-border" style={{ background: 'rgba(10,22,40,0.85)' }}>
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--bg-base)' }}>
+        <div className="text-center">
           <div className="text-4xl mb-4 text-red-400">⚠</div>
-          <p className="text-red-300 text-sm mb-5 font-mono">{initError}</p>
-          <Link href="/dashboard" className="text-xs text-cyan-500/70 font-mono">← БАЗА</Link>
+          <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>{initError}</p>
+          <Link href="/dashboard" className="text-sm" style={{ color: 'var(--accent-primary)' }}>{t('lesson_back_base')}</Link>
         </div>
       </div>
     )
   }
 
-  const initializing = messages.length === 0
-
+  // ── Main layout ──────────────────────────────────────────────────────────────
   return (
-    <div className="h-screen flex flex-col overflow-hidden text-cyan-50 relative font-sans" style={{ background: '#020408' }}>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
 
-      {/* Decorative layers */}
-      <Starfield />
-      <div className="scifi-scanlines" />
+      {/* ── Top bar ────────────────────────────────────────────────────────── */}
+      <header className="flex items-center gap-4 px-4 shrink-0" style={{ height: 52, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}>
+        <Link href="/dashboard" className="text-sm font-medium transition-colors"
+          style={{ color: 'var(--text-secondary)' }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)' }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)' }}>
+          {t('lesson_back')}
+        </Link>
 
-      {/* ── MISSION CONTROL TOP BAR ───────────────────────────────────────── */}
-      <header className="relative z-10 h-[52px] flex items-center px-5 gap-4 shrink-0 border-b"
-        style={{ background: 'rgba(6,13,31,0.95)', backdropFilter: 'blur(20px)', borderColor: 'rgba(0,212,255,0.25)', boxShadow: '0 1px 0 rgba(0,212,255,0.15), 0 6px 24px rgba(0,212,255,0.08)' }}>
+        <div className="h-4 w-px" style={{ background: 'var(--border-default)' }} />
 
-        {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <Hexagon size={18} className="text-cyan-400" strokeWidth={2} style={{ filter: 'drop-shadow(0 0 8px rgba(0,212,255,0.7))' }} />
-          <span className="font-mono font-black text-sm tracking-[0.18em] scifi-text-glow">MY TUTOR</span>
-        </div>
-
-        <div className="h-6 w-px" style={{ background: 'rgba(0,212,255,0.2)' }} />
-
-        {/* Session status */}
-        <div className="flex items-center gap-2.5 text-xs font-mono">
-          <span className="w-2 h-2 rounded-full scifi-blink" style={{ background: '#00FF88', boxShadow: '0 0 10px rgba(0,255,136,0.8)' }} />
-          <span className="text-emerald-300 tracking-wider">СЕССИЯ АКТИВНА</span>
-          <span className="text-cyan-500/60">·</span>
-          <span className="tabular-nums text-cyan-300 tracking-wider">{formatTimer(elapsed)}</span>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ background: 'var(--bg-elevated)', color: badge.accent }}>{badge.label}</span>
+          <span style={{ color: 'var(--text-secondary)' }}>{t('lesson_with')}</span>
+          <span className="font-mono tabular-nums text-xs" style={{ color: 'var(--text-secondary)' }}>{formatTimer(elapsed)}</span>
         </div>
 
         <div className="flex-1" />
 
-        {/* Voice toggles */}
-        <div className="flex items-center gap-1.5">
-          {VOICE_PRESETS.map((v) => (
-            <button key={v.type} onClick={() => handleVoiceChange(v.type)} title={v.label}
-              className={`scifi-toggle font-mono text-[10px] font-bold tracking-wider px-3 py-1.5 rounded ${voiceType === v.type ? 'active' : ''}`}>
-              {v.code}
+        {/* Voice buttons */}
+        <div className="flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
+          {(Object.entries(VOICE_CONFIG) as [VoiceType, typeof VOICE_CONFIG[VoiceType]][]).map(([k, v]) => (
+            <button key={k} onClick={() => handleVoiceChange(k)}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-150"
+              style={{
+                background: voiceType === k ? 'var(--accent-primary)' : 'transparent',
+                color: voiceType === k ? '#fff' : 'var(--text-secondary)',
+              }}>
+              {v.label}
             </button>
           ))}
         </div>
 
-        <div className="h-6 w-px" style={{ background: 'rgba(0,212,255,0.2)' }} />
-
-        <Link href="/dashboard" className="font-mono text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors">
-          ← БАЗА
-        </Link>
+        <LanguageToggle />
       </header>
 
-      {/* ── Main split: editor 58% / chat 42% ─────────────────────────────── */}
-      <div className="relative z-10 flex flex-1 overflow-hidden">
+      {/* ── Mobile tabs ──────────────────────────────────────────────────────── */}
+      <div className="flex lg:hidden shrink-0" style={{ borderBottom: '1px solid var(--border-default)', background: 'var(--bg-surface)' }}>
+        {(['code','chat'] as ActiveTab[]).map((tab) => (
+          <button key={tab} onClick={() => setActiveTab(tab)}
+            className="flex-1 py-2.5 text-sm font-semibold transition-colors"
+            style={{
+              color: activeTab === tab ? 'var(--accent-primary)' : 'var(--text-secondary)',
+              borderBottom: activeTab === tab ? `2px solid var(--accent-primary)` : '2px solid transparent',
+            }}>
+            {tab === 'code' ? t('lesson_tab_code') : t('lesson_tab_chat')}
+          </button>
+        ))}
+      </div>
 
-        {/* ── LEFT: QUANTUM CODE TERMINAL ─────────────────────────────────── */}
-        <section className="hidden lg:flex flex-col border-r relative"
-          style={{ width: '58%', background: '#020408', borderColor: 'rgba(0,212,255,0.15)' }}>
+      {/* ── Split layout ───────────────────────────────────────────────────── */}
+      <div className="flex flex-1 overflow-hidden">
 
-          {/* Terminal header */}
-          <div className="h-12 flex items-center gap-3 px-4 shrink-0 border-b"
-            style={{ background: 'rgba(6,13,31,0.95)', borderColor: 'rgba(0,212,255,0.15)' }}>
-            <span className="font-mono text-[10px] font-black tracking-[0.18em] px-2.5 py-1 rounded border"
-              style={{ background: langBadge.bg, color: langBadge.color, borderColor: `${langBadge.color}55`, boxShadow: `0 0 12px ${langBadge.color}33` }}>
-              {langBadge.label}
-            </span>
-            <div className="flex items-center font-mono text-sm text-cyan-100">
-              <span>{filename}</span>
-              <span className="scifi-cursor ml-0.5 text-cyan-400" style={{ textShadow: '0 0 8px rgba(0,212,255,0.8)' }}>█</span>
-            </div>
-            <button onClick={handleCopy}
-              className={`ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded font-mono text-[10px] font-black tracking-wider transition-all border ${copied ? 'text-emerald-300' : 'text-cyan-300 hover:text-cyan-200'}`}
+        {/* ── LEFT: Code editor ─────────────────────────────────────────────── */}
+        <section className={`flex flex-col ${activeTab === 'code' ? 'flex' : 'hidden'} lg:flex`}
+          style={{ width: '55%', borderRight: '1px solid var(--border-default)' }}>
+
+          {/* Editor header */}
+          <div className="flex items-center gap-3 px-4 shrink-0"
+            style={{ height: 40, background: 'var(--bg-elevated)', borderBottom: '1px solid var(--border-default)' }}>
+            <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ background: 'var(--bg-hover)', color: badge.accent }}>{badge.label}</span>
+            <span className="text-sm font-mono" style={{ color: 'var(--text-secondary)' }}>{filename}</span>
+            <span className="animate-pulse" style={{ color: 'var(--accent-primary)' }}>_</span>
+            <button onClick={handleCopy} className="ml-auto flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition-all"
               style={{
-                background: copied ? 'rgba(0,255,136,0.12)' : 'rgba(0,212,255,0.06)',
-                borderColor: copied ? 'rgba(0,255,136,0.6)' : 'rgba(0,212,255,0.4)',
-                boxShadow: copied ? '0 0 16px rgba(0,255,136,0.45)' : '0 0 12px rgba(0,212,255,0.2)',
+                background: copied ? 'rgba(86,211,100,0.1)' : 'var(--bg-hover)',
+                color: copied ? 'var(--accent-green)' : 'var(--text-secondary)',
+                border: `1px solid ${copied ? 'rgba(86,211,100,0.3)' : 'var(--border-default)'}`,
               }}>
-              {copied ? <><Check size={12} strokeWidth={3} /> СКОПИРОВАНО ✓</> : <><Copy size={12} strokeWidth={2.5} /> КОПИРОВАТЬ КОД</>}
+              {copied ? <><Check size={11} strokeWidth={3} /> {t('lesson_copied')}</> : <><Copy size={11} /> {t('lesson_copy')}</>}
             </button>
           </div>
 
-          {/* Monaco + scanning line overlay */}
-          <div className="relative flex-1 min-h-0 overflow-hidden">
-            <div className="scifi-scan-line" />
+          {/* Monaco */}
+          <div className="flex-1 min-h-0 overflow-hidden">
             <MonacoEditor
-              height="100%" language={language} value={code} theme="quantum"
-              beforeMount={handleEditorWillMount}
+              height="100%" language={language} value={code} theme="mytutor"
+              beforeMount={handleEditorBeforeMount}
               options={{
-                readOnly: true, fontSize: 14, lineHeight: 1.7,
-                fontFamily: '"Fira Code", "JetBrains Mono", "Cascadia Code", Consolas, monospace',
+                readOnly: true, fontSize: 13, lineHeight: 1.75,
+                fontFamily: 'var(--font-mono), "JetBrains Mono", "Fira Code", monospace',
                 fontLigatures: true,
                 minimap: { enabled: false }, scrollBeyondLastLine: false, wordWrap: 'on',
-                padding: { top: 16, bottom: 16 }, renderLineHighlight: 'none',
-                hideCursorInOverviewRuler: true, overviewRulerBorder: false, overviewRulerLanes: 0,
-                folding: false, glyphMargin: false, contextmenu: false,
+                padding: { top: 16, bottom: 16 }, renderLineHighlight: 'all',
                 lineNumbers: 'on', automaticLayout: true,
-                cursorBlinking: 'phase', cursorStyle: 'line', cursorWidth: 2,
-                renderWhitespace: 'none',
+                folding: false, glyphMargin: false, contextmenu: false,
+                renderWhitespace: 'none', hideCursorInOverviewRuler: true,
+                overviewRulerBorder: false, overviewRulerLanes: 0,
               }}
             />
           </div>
 
           {/* Status bar */}
-          <div className="h-8 flex items-center px-4 shrink-0 border-t font-mono text-[10px] tracking-wider"
-            style={{ background: 'rgba(6,13,31,0.95)', borderColor: 'rgba(0,212,255,0.15)' }}>
-            {isStreaming ? (
-              <span className="flex items-center gap-2 text-cyan-300">
-                <Loader2 size={11} className="animate-spin" />
-                ⟳ РЕПЕТИТОР ПИШЕТ...
-              </span>
-            ) : (
-              <span className="flex items-center gap-2 text-emerald-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 scifi-blink" />
-                ● ГОТОВО
-              </span>
-            )}
-            <span className="ml-auto flex items-center gap-4 text-cyan-500/70">
-              <span>LN {lineCount}</span>
-              <span className="text-cyan-500/40">|</span>
-              <span>{langBadge.label}</span>
-              <span className="text-cyan-500/40">|</span>
+          <div className="editor-statusbar">
+            {isStreaming
+              ? <span style={{ color: 'var(--accent-primary)' }}>{t('lesson_thinking')}</span>
+              : <span style={{ color: 'var(--accent-green)' }}>{t('lesson_ready')}</span>
+            }
+            <span className="ml-auto flex gap-3">
+              <span>{badge.label}</span>
+              <span style={{ color: 'var(--text-dim)' }}>·</span>
               <span>UTF-8</span>
+              <span style={{ color: 'var(--text-dim)' }}>·</span>
+              <span>{filename}</span>
             </span>
           </div>
 
-          {/* FIX 6: Terminal toggle bar */}
-          <div
-            className="h-9 flex items-center px-4 shrink-0 border-t cursor-pointer select-none hover:bg-cyan-500/[0.04] transition-colors"
-            style={{ background: 'rgba(6,13,31,0.95)', borderColor: 'rgba(0,212,255,0.15)' }}
-            onClick={() => setTerminalOpen((o) => !o)}>
-            <span className="font-mono text-[10px] tracking-wider text-cyan-400/70 flex items-center gap-2">
-              <ChevronDown size={11} className={`transition-transform duration-200 ${terminalOpen ? 'rotate-180' : ''}`} />
-              ТЕРМИНАЛ
+          {/* Terminal toggle */}
+          <div className="flex items-center px-4 shrink-0 cursor-pointer select-none transition-colors"
+            style={{ height: 36, background: 'var(--bg-elevated)', borderTop: '1px solid var(--border-default)' }}
+            onClick={() => setTerminalOpen((o) => !o)}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-hover)' }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = 'var(--bg-elevated)' }}>
+            <span className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+              {terminalOpen ? <ChevronDown size={11} /> : <ChevronUp size={11} />}
+              {t('lesson_terminal')}
             </span>
             {terminalOpen && (
-              <button
-                onClick={(e) => { e.stopPropagation(); handleRunCode() }}
+              <button onClick={(e) => { e.stopPropagation(); handleRunCode() }}
                 disabled={isRunning}
-                className="ml-auto inline-flex items-center gap-1.5 px-3 py-1 rounded font-mono text-[10px] font-black tracking-wider border transition-all disabled:opacity-40"
-                style={{
-                  background: isRunning ? 'rgba(0,255,136,0.08)' : 'rgba(0,255,136,0.06)',
-                  borderColor: 'rgba(0,255,136,0.4)',
-                  color: '#00FF88',
-                  boxShadow: '0 0 10px rgba(0,255,136,0.2)',
-                }}>
-                {isRunning
-                  ? <><Loader2 size={9} className="animate-spin" /> ВЫПОЛНЕНИЕ...</>
-                  : <><Play size={9} fill="currentColor" strokeWidth={0} /> ЗАПУСК</>}
+                className="ml-auto flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all disabled:opacity-40"
+                style={{ background: 'rgba(86,211,100,0.08)', color: 'var(--accent-green)', border: '1px solid rgba(86,211,100,0.25)' }}>
+                {isRunning ? <><Loader2 size={10} className="animate-spin" />{t('lesson_running')}</> : <><Play size={10} fill="currentColor" strokeWidth={0} />{t('lesson_run')}</>}
               </button>
             )}
           </div>
-
-          {/* FIX 6: Terminal output panel */}
           {terminalOpen && (
-            <div
-              className="shrink-0 overflow-y-auto px-4 py-3 border-t font-mono text-[12px] leading-relaxed"
-              style={{ height: '200px', background: 'rgba(1,3,6,0.98)', borderColor: 'rgba(0,255,136,0.15)', color: '#00FF88' }}>
+            <div className="shrink-0 overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed"
+              style={{ height: 200, background: '#0D1117', borderTop: '1px solid var(--border-default)', color: 'var(--accent-green)' }}>
               {terminalOutput
                 ? <pre className="whitespace-pre-wrap break-words">{terminalOutput}</pre>
-                : <span className="text-cyan-700/60">{'// Нажми ЗАПУСК для симуляции выполнения кода'}</span>
+                : <span style={{ color: 'var(--text-dim)' }}>{'// Нажми ЗАПУСК для симуляции'}</span>
               }
             </div>
           )}
         </section>
 
-        {/* ── RIGHT: NEURAL COMMUNICATION INTERFACE ────────────────────────── */}
-        <section className="flex flex-col flex-1 min-w-0 relative" style={{ background: '#020408' }}>
+        {/* ── RIGHT: Chat ──────────────────────────────────────────────────── */}
+        <section className={`flex flex-col flex-1 min-w-0 ${activeTab === 'chat' ? 'flex' : 'hidden'} lg:flex`}>
 
           {/* Chat header */}
-          <div className="flex items-center gap-3 px-4 h-12 shrink-0 border-b"
-            style={{ background: 'rgba(6,13,31,0.95)', borderColor: 'rgba(0,212,255,0.15)' }}>
-
-            {/* FIX 5: ui-avatars tutor avatar (header) */}
+          <div className="flex items-center gap-3 px-4 shrink-0"
+            style={{ height: 56, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={TUTOR_AVATAR}
-              alt="Репетитор Макс"
-              className="w-9 h-9 rounded-full object-cover shrink-0"
-              style={{ boxShadow: '0 0 14px rgba(123,47,255,0.55)' }}
-            />
-
+            <img src={TUTOR_AVATAR_SRC} alt="Репетитор Макс" className="w-9 h-9 rounded-full object-cover shrink-0" style={{ boxShadow: '0 0 12px rgba(247,129,102,0.35)' }} />
             <div className="flex-1 min-w-0">
-              <div className="font-mono text-sm font-bold tracking-wider scifi-text-glow truncate">РЕПЕТИТОР МАКС</div>
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-wider mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full scifi-blink" style={{ background: '#00FF88', boxShadow: '0 0 6px #00FF88' }} />
-                <span className="text-emerald-400">● ОНЛАЙН</span>
-                <span className="text-cyan-700">·</span>
-                <span className="text-cyan-500/70 uppercase">{subjectName}</span>
+              <p className="font-bold text-sm" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t('lesson_tutor')}</p>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="online-dot" />
+                <span className="text-xs" style={{ color: 'var(--accent-green)' }}>● {t('lesson_online')}</span>
+                <span style={{ color: 'var(--text-dim)' }}>·</span>
+                <span className="text-xs uppercase" style={{ color: 'var(--text-dim)' }}>{subjectName}</span>
               </div>
             </div>
-
-            {/* Audio waveform — when TTS is speaking */}
             {speakingId && (
-              <div className="flex items-center gap-2 px-3 py-1 rounded border font-mono text-[10px] tracking-wider"
-                style={{ background: 'rgba(0,212,255,0.08)', borderColor: 'rgba(0,212,255,0.4)', color: '#7DF0FF' }}>
-                <Waveform4 />
-                <span>ГОВОРИТ</span>
+              <div className="flex items-end gap-0.5 h-5">
+                {[0,0.15,0.3,0.45].map((d,i) => (
+                  <span key={i} className="wave-bar" style={{ animationDelay: `${d}s`, height: '12px' }} />
+                ))}
+                <span className="text-xs ml-2" style={{ color: 'var(--accent-primary)' }}>{t('lesson_speaking')}</span>
               </div>
             )}
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-5 space-y-5 scifi-grid scroll-smooth">
+          <div ref={messagesAreaRef} className="flex-1 overflow-y-auto px-4 py-5 space-y-5 dot-grid scroll-smooth relative">
 
-            {initializing && (
-              <div className="animate-fade-in flex flex-col items-center justify-center py-12 gap-4">
-                {/* FIX 5: large tutor avatar on loading screen */}
+            {/* Loading state */}
+            {messages.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-16 gap-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={TUTOR_AVATAR}
-                  alt="Репетитор Макс"
-                  className="w-14 h-14 rounded-full object-cover"
-                  style={{ boxShadow: '0 0 28px rgba(123,47,255,0.65)' }}
-                />
-                <p className="font-mono text-xs tracking-wider text-cyan-400/80">
-                  ИНИЦИАЛИЗАЦИЯ НЕЙРОННОГО КАНАЛА...
-                </p>
-                <TypingEqualizer />
+                <img src={TUTOR_AVATAR_SRC} alt="Репетитор Макс" className="w-14 h-14 rounded-full object-cover" style={{ boxShadow: '0 0 24px rgba(247,129,102,0.4)' }} />
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
+                <div className="flex gap-1.5">
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                </div>
               </div>
             )}
 
@@ -724,198 +630,194 @@ export function LessonScreen({
               const isSpeaking = speakingId === msg.id
               const cached = previewCache[msg.id]
               const isExpanded = expanded[msg.id] ?? false
-              const displayText = cached
-                ? (cached.hasMore && !isExpanded ? cached.preview : cached.full)
-                : stripCodeBlocks(msg.content)
+              const displayText = cached ? (cached.hasMore && !isExpanded ? cached.preview : cached.full) : stripCode(msg.content)
 
               return (
-                <div key={msg.id} className={`group flex flex-col animate-slide-up ${isUser ? 'items-end' : 'items-start'}`}>
+                <div key={msg.id} className={`group flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
 
-                  {/* Assistant avatar/name */}
+                  {/* Tutor label */}
                   {!isUser && !msg.streaming && (
-                    <div className="flex items-center gap-2 mb-1.5 ml-0.5">
-                      {/* FIX 5: small tutor avatar per-message */}
+                    <div className="flex items-center gap-2 mb-1.5">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={TUTOR_AVATAR}
-                        alt="МТ"
-                        className="w-5 h-5 rounded-full object-cover shrink-0"
-                        style={{ boxShadow: '0 0 8px rgba(123,47,255,0.4)' }}
-                      />
-                      <span className="font-mono text-[10px] tracking-wider text-cyan-500/80">РЕПЕТИТОР МАКС</span>
+                      <img src={TUTOR_AVATAR_SRC} alt="МТ" className="w-5 h-5 rounded-full object-cover" />
+                      <span className="text-[10px] font-semibold" style={{ color: 'var(--text-secondary)' }}>{t('lesson_tutor')}</span>
                     </div>
                   )}
 
-                  {!isUser ? (
-                    /* TUTOR bubble */
-                    <div
-                      className={`max-w-[92%] px-4 py-3 rounded-r-lg text-[13px] leading-relaxed transition-all hover:bg-cyan-500/[0.07] ${
-                        isSpeaking ? 'shadow-[0_0_24px_rgba(0,212,255,0.25)]' : ''
-                      }`}
+                  {/* Tutor bubble */}
+                  {!isUser && (
+                    <div className="max-w-[88%] relative group/bubble"
                       style={{
-                        background: 'rgba(0,212,255,0.05)',
-                        borderLeft: '3px solid #00D4FF',
-                        color: '#E8F4FD',
-                        boxShadow: isSpeaking ? '0 0 24px rgba(0,212,255,0.3), inset 0 0 12px rgba(0,212,255,0.04)' : undefined,
+                        background: isSpeaking ? 'var(--bg-elevated)' : 'var(--bg-surface)',
+                        borderLeft: `3px solid var(--accent-primary)`,
+                        borderRadius: '0 12px 12px 12px',
+                        padding: '12px 16px',
+                        boxShadow: isSpeaking ? `0 0 20px rgba(247,129,102,0.15)` : 'none',
+                        transition: 'all 0.2s',
                       }}>
                       {msg.content
-                        ? <div className="animate-message-arrive"><MessageContent text={displayText} isUser={false} /></div>
-                        : <TypingEqualizer />
+                        ? <div className="animate-message text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+                            <MessageContent text={displayText} isUser={false} />
+                          </div>
+                        : <TypingDots />
                       }
 
                       {cached?.hasMore && (
-                        <button onClick={() => setExpanded((prev) => ({ ...prev, [msg.id]: !isExpanded }))}
-                          className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] tracking-wider text-cyan-400 hover:text-cyan-300 transition-colors">
-                          {isExpanded ? 'СВЕРНУТЬ' : 'РАЗВЕРНУТЬ'}
+                        <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
+                          className="mt-2 flex items-center gap-1 text-xs font-semibold transition-colors"
+                          style={{ color: 'var(--accent-primary)' }}>
+                          {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
                           <ChevronDown size={11} className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                         </button>
                       )}
 
                       {!msg.streaming && msg.content && (
-                        <div className={`mt-2.5 transition-opacity ${isSpeaking ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                          <button
-                            onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
-                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-mono text-[10px] font-bold tracking-wider border transition-all"
+                        <div className={`mt-3 transition-opacity ${isSpeaking ? 'opacity-100' : 'opacity-0 group-hover/bubble:opacity-100'}`}>
+                          <button onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all"
                             style={{
-                              background: isSpeaking ? 'rgba(0,212,255,0.15)' : 'rgba(0,212,255,0.04)',
-                              borderColor: isSpeaking ? 'rgba(0,212,255,0.55)' : 'rgba(0,212,255,0.25)',
-                              color: isSpeaking ? '#7DF0FF' : '#4A7FA5',
+                              background: isSpeaking ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                              color: isSpeaking ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                              border: `1px solid ${isSpeaking ? 'var(--border-accent)' : 'var(--border-default)'}`,
                             }}>
                             {isSpeaking
-                              ? <><Square size={9} fill="currentColor" strokeWidth={0} /> СТОП</>
-                              : <><Play size={10} fill="currentColor" strokeWidth={0} className="translate-x-px" /> ВОСПРОИЗВЕСТИ</>
+                              ? <><Square size={9} fill="currentColor" strokeWidth={0} />{t('lesson_stop')}</>
+                              : <><Play size={9} fill="currentColor" strokeWidth={0} />{t('lesson_play')}</>
                             }
                           </button>
                         </div>
                       )}
                     </div>
-                  ) : (
-                    /* STUDENT bubble */
-                    <div className="flex items-center gap-2 max-w-[92%]">
-                      <div className="px-4 py-2.5 rounded-full text-[13px] leading-relaxed text-white font-medium shadow-lg animate-message-arrive"
+                  )}
+
+                  {/* Student bubble */}
+                  {isUser && (
+                    <div className="flex items-end gap-2 max-w-[88%]">
+                      <div className="px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed animate-message"
                         style={{
-                          background: 'linear-gradient(135deg, #7B2FFF, #00D4FF)',
-                          boxShadow: '0 4px 16px rgba(123,47,255,0.35), 0 0 24px rgba(0,212,255,0.15)',
+                          background: 'var(--accent-primary)',
+                          color: '#fff',
+                          boxShadow: '0 2px 12px rgba(247,129,102,0.3)',
                         }}>
                         <MessageContent text={displayText} isUser={true} />
                       </div>
-                      {/* FIX 5: student avatar */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={studentAvatar(displayName)}
-                        alt={displayName ?? 'Студент'}
-                        className="w-6 h-6 rounded-full object-cover shrink-0"
-                        style={{ boxShadow: '0 0 10px rgba(0,212,255,0.45)' }}
-                      />
+                      <img src={studentAvatarSrc} alt={displayName ?? 'Студент'} className="w-6 h-6 rounded-full object-cover shrink-0" />
                     </div>
                   )}
 
-                  {/* Timestamp on hover */}
+                  {/* Timestamp */}
                   {msg.content && !msg.streaming && (
-                    <span className="font-mono text-[9px] mt-1 px-1 opacity-0 group-hover:opacity-100 transition-opacity text-cyan-700 tracking-wider">
-                      {new Date(msg.ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                    <span className="font-mono text-[9px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text-dim)' }}>
+                      {new Date(msg.ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   )}
                 </div>
               )
             })}
 
-            {/* Active typing indicator */}
-            {isStreaming && messages[messages.length - 1]?.streaming && !messages[messages.length - 1]?.content && (
-              <div className="flex items-center gap-2.5 font-mono text-[11px] tracking-wider text-cyan-400">
-                <TypingEqualizer />
-                <span>РЕПЕТИТОР ДУМАЕТ...</span>
+            {/* Thinking label */}
+            {isStreaming && messages.at(-1)?.streaming && !messages.at(-1)?.content && (
+              <div className="flex items-center gap-2.5 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                <TypingDots />
+                <span>{t('lesson_thinking_label')}</span>
               </div>
             )}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input bar */}
-          <div className="px-4 py-3.5 shrink-0 border-t"
-            style={{ background: 'rgba(6,13,31,0.98)', borderColor: 'rgba(0,212,255,0.2)' }}>
+          {/* Scroll-to-bottom button */}
+          {!atBottom && (
+            <button onClick={() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })}
+              className="absolute bottom-24 right-6 w-9 h-9 flex items-center justify-center rounded-full text-sm font-bold shadow-lg transition-all"
+              style={{ background: 'var(--accent-primary)', color: '#fff', zIndex: 10 }}>
+              {t('lesson_scroll_down')}
+            </button>
+          )}
 
-            {/* FIX 4: File attachment badge */}
+          {/* ── Input bar ──────────────────────────────────────────────────── */}
+          <div className="shrink-0 px-4 pt-3 pb-4" style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--border-default)' }}>
+
+            {/* File badge */}
             {attachedFile && (
-              <div className="mb-2 flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-mono text-[10px] tracking-wider border"
-                  style={{ background: 'rgba(0,212,255,0.08)', borderColor: 'rgba(0,212,255,0.35)', color: '#7DF0FF' }}>
-                  <Paperclip size={10} />
-                  <span>{attachedFile.name}</span>
-                </div>
-                <button onClick={() => setAttachedFile(null)}
-                  className="w-5 h-5 flex items-center justify-center rounded text-red-400/70 hover:text-red-300 transition-colors">
-                  <X size={11} />
-                </button>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium"
+                  style={{ background: 'rgba(121,192,255,0.1)', color: 'var(--accent-secondary)', border: '1px solid rgba(121,192,255,0.2)' }}>
+                  <Paperclip size={10} /> {attachedFile.name}
+                </span>
+                <button onClick={() => setAttachedFile(null)} style={{ color: 'var(--text-dim)' }}><X size={13} /></button>
               </div>
             )}
 
-            <div className="flex items-center gap-2">
-
-              {/* Input */}
-              <input
-                ref={inputRef} type="text" value={input}
-                onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown}
-                disabled={isStreaming || !sessionId}
-                placeholder={
-                  micState === 'recording' ? '● ЗАПИСЬ...' :
-                  isStreaming ? 'РЕПЕТИТОР ОТВЕЧАЕТ...' :
-                  'ВВЕДИ ВОПРОС ИЛИ ГОВОРИ...'
-                }
-                className="scifi-input flex-1 h-12 px-4 rounded-lg text-sm font-mono placeholder-cyan-700 tracking-wide disabled:opacity-40"
-              />
-
-              {/* FIX 4: Hidden file input + Attach button */}
-              <input
-                ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt"
-                className="hidden" onChange={handleFileSelect}
-              />
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={isStreaming || !sessionId}
-                title="Прикрепить файл (.py .c .cpp .txt, макс. 50 КБ)"
-                className="w-12 h-12 flex items-center justify-center rounded-lg border transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            <div className="flex items-end gap-2">
+              {/* Attach */}
+              <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
+              <button onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                title={t('lesson_attach_hint')}
+                className="flex items-center justify-center rounded-xl transition-all shrink-0 disabled:opacity-40"
                 style={{
-                  background: attachedFile ? 'rgba(0,212,255,0.12)' : 'rgba(0,212,255,0.04)',
-                  borderColor: attachedFile ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.25)',
-                  color: attachedFile ? '#00D4FF' : '#4A7FA5',
+                  width: 40, height: 40,
+                  background: attachedFile ? 'rgba(121,192,255,0.1)' : 'var(--bg-hover)',
+                  color: attachedFile ? 'var(--accent-secondary)' : 'var(--text-secondary)',
+                  border: `1px solid ${attachedFile ? 'rgba(121,192,255,0.3)' : 'var(--border-default)'}`,
                 }}>
-                <Paperclip size={16} />
+                <Paperclip size={15} />
               </button>
 
+              {/* Textarea */}
+              <textarea
+                ref={textareaRef}
+                value={input}
+                onChange={handleTextareaChange}
+                onKeyDown={handleKeyDown}
+                disabled={isStreaming || !sessionId}
+                placeholder={micState === 'recording' ? t('lesson_recording') : isStreaming ? t('lesson_responding') : t('lesson_placeholder')}
+                rows={1}
+                className="flex-1 px-4 py-2.5 rounded-xl resize-none outline-none text-sm leading-relaxed transition-all disabled:opacity-40"
+                style={{
+                  background: 'var(--bg-surface)',
+                  border: `1px solid ${micState === 'recording' ? '#EF4444' : 'var(--border-default)'}`,
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-mono)',
+                  minHeight: 40, maxHeight: 96,
+                  boxShadow: input ? '0 0 0 2px rgba(247,129,102,0.15)' : 'none',
+                  borderColor: input ? 'var(--accent-primary)' : micState === 'recording' ? '#EF4444' : 'var(--border-default)',
+                }}
+              />
+
               {/* Mic */}
-              {speechInputSupported && (
+              {micSupported && (
                 <button onClick={handleMicClick} disabled={isStreaming || !sessionId}
-                  title={micState === 'recording' ? 'Остановить' : 'Голосовой ввод'}
-                  className={`relative w-12 h-12 flex items-center justify-center rounded-lg border transition-all font-mono text-[9px] font-bold disabled:opacity-40 disabled:cursor-not-allowed
-                    ${micState === 'recording' ? 'scifi-rec' : ''}`}
-                  style={micState === 'recording' ? undefined : {
-                    background: 'rgba(0,212,255,0.04)',
-                    borderColor: 'rgba(0,212,255,0.25)',
-                    color: '#4A7FA5',
+                  className={`flex items-center justify-center rounded-xl shrink-0 transition-all disabled:opacity-40 ${micState === 'recording' ? 'mic-rec' : ''}`}
+                  style={micState === 'recording' ? { width: 40, height: 40 } : {
+                    width: 40, height: 40,
+                    background: 'var(--bg-hover)',
+                    color: 'var(--text-secondary)',
+                    border: '1px solid var(--border-default)',
                   }}>
                   {micState === 'recording'
-                    ? <span className="flex flex-col items-center gap-0.5"><Mic size={14} /><span className="tracking-wider">REC</span></span>
-                    : <Mic size={17} />
+                    ? <span className="flex flex-col items-center gap-0.5 text-[8px] font-bold"><Mic size={13} />REC</span>
+                    : <Mic size={16} />
                   }
                 </button>
               )}
 
               {/* Send */}
               <button onClick={handleSend} disabled={(!input.trim() && !attachedFile) || isStreaming || !sessionId}
-                className="scifi-send h-12 px-4 inline-flex items-center gap-2 rounded-lg font-mono text-xs font-black tracking-wider text-white">
-                <span className="hidden sm:inline">ОТПРАВИТЬ</span>
-                <Send size={15} className="translate-x-px" />
+                className="flex items-center justify-center rounded-xl shrink-0 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{ width: 40, height: 40, background: 'var(--accent-primary)', color: '#fff', boxShadow: '0 2px 8px rgba(247,129,102,0.35)' }}>
+                <Send size={16} className="translate-x-px" />
               </button>
             </div>
-            <p className="mt-2.5 font-mono text-[9px] text-center text-cyan-700 tracking-[0.2em]">
-              ENTER — ОТПРАВИТЬ{speechInputSupported ? ' · SHIFT+ENTER — НОВАЯ СТРОКА' : ''}
+
+            <p className="text-center mt-2.5 text-[10px]" style={{ color: 'var(--text-dim)' }}>
+              {t('lesson_hint')}{micSupported ? ' · 🎙 голосовой ввод' : ''}
             </p>
           </div>
         </section>
+
       </div>
     </div>
   )
 }
-
-// keep export shape stable; sidebar removed from this file
