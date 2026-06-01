@@ -42,7 +42,7 @@ export default async function DashboardPage() {
     prisma.learnSession.findMany({
       where: { userId: session.user.id },
       orderBy: { startedAt: 'desc' },
-      take: 10,
+      take: 3,
       include: {
         subject: { select: { name: true, slug: true } },
       },
@@ -137,25 +137,32 @@ export default async function DashboardPage() {
                 <ul className="divide-y divide-slate-50">
                   {recentSessions.map((s) => {
                     const m = SUBJECT_META[s.subject.slug] ?? SUBJECT_META['python']
+                    const summary = (s as typeof s & { summary?: string | null }).summary
                     return (
-                      <li key={s.id} className="flex items-center gap-4 px-5 py-4 hover:bg-slate-50 transition-colors group">
-                        <div className={`w-9 h-9 ${m.bg} rounded-xl flex items-center justify-center text-base shrink-0`}>
-                          {m.icon}
+                      <li key={s.id} className="px-5 py-4 hover:bg-slate-50 transition-colors">
+                        <div className="flex items-start gap-4">
+                          <div className={`w-9 h-9 ${m.bg} rounded-xl flex items-center justify-center text-base shrink-0 mt-0.5`}>
+                            {m.icon}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-slate-800 text-sm">
+                              {s.title ?? s.subject.name}
+                            </p>
+                            <p className="text-xs text-slate-400 mt-0.5">
+                              {new Date(s.startedAt).toLocaleDateString('ru-RU', {
+                                day: 'numeric',
+                                month: 'long',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })}
+                            </p>
+                            {summary && (
+                              <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                {summary}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-slate-800 text-sm truncate">
-                            {s.title ?? s.subject.name}
-                          </p>
-                          <p className="text-xs text-slate-400 mt-0.5">
-                            {new Date(s.startedAt).toLocaleDateString('ru-RU', {
-                              day: 'numeric',
-                              month: 'long',
-                              hour: '2-digit',
-                              minute: '2-digit',
-                            })}
-                          </p>
-                        </div>
-                        <ChevronRight size={15} className="text-slate-300 group-hover:text-slate-500 transition-colors shrink-0" />
                       </li>
                     )
                   })}

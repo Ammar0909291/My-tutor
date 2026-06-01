@@ -109,11 +109,13 @@ interface Props {
   subjectName: string
   levelDescription: string
   voiceChoice: string
+  memoryContext?: string | null
+  pastSessionsSummary?: string | null
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, memoryContext, pastSessionsSummary }: Props) {
   const [sessionId, setSessionId]       = useState<string | null>(null)
   const [messages, setMessages]         = useState<ChatMessage[]>([])
   const [code, setCode]                 = useState(INITIAL_CODE[subjectSlug] ?? '// ...\n')
@@ -348,6 +350,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     }
   }, [enqueueTTS])
 
+  // ── End session on leave ──────────────────────────────────────────────────
+  const sessionIdRef = useRef<string | null>(null)
+  useEffect(() => { sessionIdRef.current = sessionId }, [sessionId])
+
+  useEffect(() => {
+    function endSession() {
+      const sid = sessionIdRef.current
+      if (!sid) return
+      const blob = new Blob([JSON.stringify({ sessionId: sid })], { type: 'application/json' })
+      navigator.sendBeacon('/api/sessions/end', blob)
+    }
+    window.addEventListener('beforeunload', endSession)
+    return () => window.removeEventListener('beforeunload', endSession)
+  }, [])
+
   // ── Init ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     if (initializedRef.current) return
@@ -357,7 +374,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const res  = await fetch('/api/sessions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subjectSlug }),
+          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined }),
         })
         const data = await res.json()
         if (!data.success) {
@@ -366,17 +383,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
         const sid = data.data.id
         setSessionId(sid)
-        await streamMessage(
-          sid,
-          `Начни первый урок по предмету "${subjectName}". Уровень студента: "${levelDescription}". Представься, поприветствуй студента и дай первое объяснение с примером кода.`,
-          false
-        )
+
+        const openingMessage = pastSessionsSummary
+          ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим с того места? Уровень студента: "${levelDescription}". Кратко напомни что проходили и продолжи урок.`
+          : `Начни первый урок по предмету "${subjectName}". Уровень студента: "${levelDescription}". Представься, поприветствуй студента и дай первое объяснение с примером кода.`
+
+        await streamMessage(sid, openingMessage, false)
       } catch {
         setInitError('Не удалось подключиться. Обнови страницу.')
       }
     }
     init()
-  }, [subjectSlug, subjectName, levelDescription, streamMessage])
+  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, streamMessage])
 
   // ── Send ──────────────────────────────────────────────────────────────────
   function handleSend() {

@@ -156,6 +156,7 @@ model LearnSession {
   contextSnapshot Json?
   // Detected mood/engagement level from Claude's analysis
   moodAnalysis    Json?
+  summary     String?   @db.Text
   startedAt   DateTime  @default(now())
   endedAt     DateTime?
   updatedAt   DateTime  @updatedAt

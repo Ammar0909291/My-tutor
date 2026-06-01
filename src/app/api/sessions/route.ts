@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db/prisma";
 import { setSessionState, setUserActiveSession } from "@/lib/redis/client";
 import type { RedisSessionState } from "@/types";
 
-const createSchema = z.object({ subjectSlug: z.string() });
+const createSchema = z.object({ subjectSlug: z.string(), memoryContext: z.string().optional() });
 
 export async function GET() {
   const session = await auth();
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { subjectSlug } = createSchema.parse(body);
+    const { subjectSlug, memoryContext } = createSchema.parse(body);
 
     // Check free session eligibility
     const subscription = await prisma.subscription.findUnique({ where: { userId: session.user.id } });
@@ -56,6 +56,7 @@ export async function POST(req: Request) {
           profileLevel: profile?.currentLevel,
           learningPathId: activePath?.id,
           currentStep: activePath?.currentStep,
+          memoryContext: memoryContext ?? null,
         },
       },
     });

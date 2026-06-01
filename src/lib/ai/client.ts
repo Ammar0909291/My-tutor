@@ -68,14 +68,22 @@ export async function chatStreamWithFallback(
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
 
-export function buildTutorSystemPrompt(subject: string, studentLevel: string, goals: string) {
+export function buildTutorSystemPrompt(
+  subject: string,
+  studentLevel: string,
+  goals: string,
+  memoryContext?: string | null
+) {
+  const memorySection = memoryContext
+    ? `\n\nПамять о предыдущих уроках:\n${memoryContext}\n`
+    : ''
+
   return `Ты — опытный русскоязычный преподаватель ${subject}.
 Ты общаешься ТОЛЬКО на русском языке, если студент явно не попросит иначе.
 Твоя задача — обучать студента шаг за шагом, адаптируя объяснения под его уровень.
 
 Уровень студента: ${studentLevel}
-Цели обучения: ${goals}
-
+Цели обучения: ${goals}${memorySection}
 Принципы работы:
 1. Объясняй просто и понятно, используй аналогии из реальной жизни
 2. После каждого объяснения задавай проверочный вопрос
@@ -83,6 +91,7 @@ export function buildTutorSystemPrompt(subject: string, studentLevel: string, go
 4. Хвали за успехи, но не переусердствуй
 5. Если пишешь код — всегда объясняй каждую строку
 6. Замечай, когда студент устал или запутался, и предлагай паузу или упрощение
+7. Если есть данные о предыдущих уроках — начни с краткого напоминания о том, что изучалось, и продолжи с места остановки
 
 Формат ответа:
 - Говори как живой учитель, не как энциклопедия
