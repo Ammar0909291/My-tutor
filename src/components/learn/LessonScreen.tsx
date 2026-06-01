@@ -300,7 +300,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text }),
       })
-      if (!res.ok || !res.body) throw new Error('Bad response')
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({})) as { error?: string }
+        throw new Error(errBody.error ?? `HTTP ${res.status}`)
+      }
+      if (!res.body) throw new Error('No response body')
 
       const reader  = res.body.getReader()
       const decoder = new TextDecoder()
@@ -339,11 +343,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       )
       enqueueTTS(assistantId, fullText)
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
       console.error('[streamMessage]', err)
       setMessages((prev) =>
         prev.map((m) =>
           m.id === assistantId
-            ? { ...m, content: 'Ошибка соединения. Попробуй ещё раз.', streaming: false }
+            ? { ...m, content: `Ошибка: ${msg}`, streaming: false }
             : m
         )
       )
