@@ -219,7 +219,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     }
 
     const ctx = audioCtxRef.current
-    if (!ctx) { speakFallback('no AudioContext'); return }
+    if (!ctx) {
+      // Browser blocked autoplay — no user gesture yet. Skip silently.
+      isPlayingRef.current = false
+      setSpeakingId(null)
+      return
+    }
 
     fetch('/api/tts', {
       method: 'POST',
@@ -239,6 +244,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       })
       .then((audioBuf) => {
         setTtsEngine('elevenlabs')
+        setTtsError('')
         const source = ctx.createBufferSource()
         source.buffer = audioBuf
         source.connect(ctx.destination)
