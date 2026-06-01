@@ -1,8 +1,6 @@
 export type VoiceType = 'male' | 'female' | 'warm'
 
-interface VoiceSettings { pitch: number; rate: number }
-
-const VOICE_SETTINGS: Record<VoiceType, VoiceSettings> = {
+export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> = {
   male:   { pitch: 0.7, rate: 0.85 },
   female: { pitch: 1.4, rate: 0.9  },
   warm:   { pitch: 1.1, rate: 0.88 },
@@ -36,30 +34,28 @@ function startResumeTimer(): ReturnType<typeof setInterval> {
 
 export function speakText(
   text: string,
-  voice: VoiceType,
+  pitch: number,
+  rate: number,
   onStart?: () => void,
   onEnd?: () => void,
 ): void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
   window.speechSynthesis.cancel()
 
-  const settings = VOICE_SETTINGS[voice] ?? VOICE_SETTINGS.male
-
   const speak = () => {
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.lang = 'ru-RU'
-    utterance.pitch = settings.pitch
-    utterance.rate = settings.rate
+    utterance.pitch = pitch
+    utterance.rate = rate
     utterance.volume = 1.0
 
+    const voices = window.speechSynthesis.getVoices()
     const russianVoice = pickRussianVoice()
     if (russianVoice) utterance.voice = russianVoice
 
-    console.log(
-      `[TTS] voice="${voice}" pitch=${settings.pitch} rate=${settings.rate}` +
-      ` | russianVoice=${russianVoice?.name ?? 'none (using default)'}` +
-      ` | text preview: "${text.slice(0, 60)}…"`,
-    )
+    console.log('[TTS] All voices:', voices.map((v) => `${v.name} (${v.lang})`).join(', ') || 'none loaded')
+    console.log(`[TTS] Selected voice: "${russianVoice?.name ?? 'default'}" | pitch=${pitch} rate=${rate}`)
+    console.log(`[TTS] Text preview: "${text.slice(0, 80)}"`)
 
     let timer: ReturnType<typeof setInterval> | null = null
     utterance.onstart = () => { timer = startResumeTimer(); onStart?.() }

@@ -2,9 +2,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Check, ChevronDown, Copy, Hexagon, Loader2, Mic, Play, Send, Square, User } from 'lucide-react'
+import { Check, ChevronDown, Copy, Hexagon, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
-import { speakText, stopSpeaking, type VoiceType } from '@/lib/tts'
+import { speakText, stopSpeaking, type VoiceType, VOICE_SETTINGS } from '@/lib/tts'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -25,9 +25,9 @@ function getSpeechRecognition(): SpeechRecognitionCtor | null {
 
 // ─── Voice config ─────────────────────────────────────────────────────────────
 const VOICE_PRESETS: { type: VoiceType; code: string; label: string }[] = [
-  { type: 'male',   code: 'М-01', label: 'Мужской' },
-  { type: 'female', code: 'Ж-01', label: 'Женский' },
-  { type: 'warm',   code: 'Т-01', label: 'Тёплый' },
+  { type: 'male',   code: 'М-01', label: 'Мужской'  },
+  { type: 'female', code: 'Ж-01', label: 'Женский'  },
+  { type: 'warm',   code: 'Т-01', label: 'Тёплый'   },
 ]
 const VOICE_MAP: Record<string, VoiceType> = {
   male: 'male', female: 'female', warm: 'warm',
@@ -49,6 +49,13 @@ const INITIAL_CODE: Record<string, string> = {
   cpp: '// > СИСТЕМА ГОТОВА. Ожидание инструкций от репетитора...\n',
   python: '# > СИСТЕМА ГОТОВА. Ожидание инструкций от репетитора...\n',
   english: '<!-- > СИСТЕМА ГОТОВА. Ожидание заметок от репетитора... -->\n',
+}
+const EXT_LANG: Record<string, string> = { py: 'python', c: 'c', cpp: 'cpp', txt: 'text' }
+
+// ─── Avatar helpers ───────────────────────────────────────────────────────────
+const TUTOR_AVATAR = 'https://ui-avatars.com/api/?name=Max+Tutor&background=7B2FFF&color=fff&bold=true&size=128'
+function studentAvatar(name?: string) {
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name ?? 'Студент')}&background=00D4FF&color=fff&bold=true&size=64`
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -179,6 +186,7 @@ function TypingEqualizer() {
 // ─── Types ────────────────────────────────────────────────────────────────────
 type ChatMessage = { id: string; role: 'user' | 'assistant'; content: string; ts: number; streaming?: boolean }
 type MicState = 'idle' | 'recording'
+type AttachedFile = { name: string; content: string; language: string }
 interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
   memoryContext?: string | null; pastSessionsSummary?: string | null
@@ -200,19 +208,28 @@ export function LessonScreen({
   const [micState, setMicState] = useState<MicState>('idle')
   const [speechInputSupported, setSpeechInputSupported] = useState(false)
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
+  const [voiceSettings, setVoiceSettings] = useState(() => VOICE_SETTINGS[resolveVoice(voiceChoice)])
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
   const [copied, setCopied] = useState(false)
   const [elapsed, setElapsed] = useState(0)
+  // FIX 4 — file attachment
+  const [attachedFile, setAttachedFile] = useState<AttachedFile | null>(null)
+  // FIX 6 — terminal panel
+  const [terminalOpen, setTerminalOpen] = useState(false)
+  const [terminalOutput, setTerminalOutput] = useState('')
+  const [isRunning, setIsRunning] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
-  const voiceTypeRef = useRef<VoiceType>(voiceType)
+  const voiceSettingsRef = useRef(voiceSettings)
   const speakingIdRef = useRef<string | null>(null)
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null)
   const speechBaseRef = useRef('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  useEffect(() => { voiceTypeRef.current = voiceType }, [voiceType])
+  // Keep voiceSettingsRef in sync with state
+  useEffect(() => { voiceSettingsRef.current = voiceSettings }, [voiceSettings])
 
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const langBadge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), color: '#00D4FF', bg: 'rgba(0,212,255,0.12)' }
@@ -234,7 +251,7 @@ export function LessonScreen({
 
   useEffect(() => { setSpeechInputSupported(getSpeechRecognition() !== null) }, [])
 
-  // ── TTS ────────────────────────────────────────────────────────────────────
+  // ── TTS (FIX 2: pass pitch/rate directly) ─────────────────────────────────
   const handleStopSpeech = useCallback(() => {
     stopSpeaking(); speakingIdRef.current = null; setSpeakingId(null)
   }, [])
@@ -242,17 +259,20 @@ export function LessonScreen({
     const clean = cleanTextForTTS(text)
     if (!clean) return
     speakingIdRef.current = id; setSpeakingId(id)
-    speakText(clean, voiceTypeRef.current, undefined, () => {
+    speakText(clean, voiceSettingsRef.current.pitch, voiceSettingsRef.current.rate, undefined, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     })
   }, [])
   const handleVoiceChange = useCallback((newVoice: VoiceType) => {
+    const settings = VOICE_SETTINGS[newVoice]
     setVoiceType(newVoice)
+    setVoiceSettings(settings)
+    voiceSettingsRef.current = settings  // sync immediately so restart uses correct settings
     if (speakingIdRef.current) {
       const id = speakingIdRef.current
       const msg = messages.find((m) => m.id === id)
       stopSpeaking()
-      if (msg) setTimeout(() => { voiceTypeRef.current = newVoice; handleSpeak(id, msg.content) }, 50)
+      if (msg) setTimeout(() => { handleSpeak(id, msg.content) }, 50)
     }
   }, [messages, handleSpeak])
 
@@ -304,6 +324,26 @@ export function LessonScreen({
     })
   }, [])
 
+  // ── FIX 6: Simulate code run ───────────────────────────────────────────────
+  const handleRunCode = useCallback(async () => {
+    if (isRunning) return
+    setIsRunning(true)
+    setTerminalOutput('> ВЫПОЛНЕНИЕ...')
+    try {
+      const res = await fetch('/api/learn/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, language }),
+      })
+      const data = await res.json() as { output?: string; error?: string }
+      setTerminalOutput(data.output ?? data.error ?? '(нет вывода)')
+    } catch (err) {
+      setTerminalOutput(`Ошибка: ${err instanceof Error ? err.message : String(err)}`)
+    } finally {
+      setIsRunning(false)
+    }
+  }, [code, language, isRunning])
+
   // ── Send message (single-response, no word-by-word) ─────────────────────────
   const streamMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
     setIsStreaming(true)
@@ -320,9 +360,7 @@ export function LessonScreen({
         throw new Error(data.error ?? `HTTP ${res.status}`)
       }
       const fullText = data.text
-      // Set the full message in a single state update — content appears all at once.
       setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: fullText, streaming: false } : m))
-      // Code persistence: only replace when a new block actually exists
       const extracted = extractLastCodeBlock(fullText)
       if (extracted) setCode(extracted)
       handleSpeak(assistantId, fullText)
@@ -371,10 +409,15 @@ export function LessonScreen({
   // ── Send ────────────────────────────────────────────────────────────────────
   function handleSend() {
     const text = input.trim()
-    if (!text || isStreaming || !sessionId) return
+    if ((!text && !attachedFile) || isStreaming || !sessionId) return
     if (micState === 'recording') stopRecording()
+    let fullMessage = text
+    if (attachedFile) {
+      fullMessage += (text ? '\n' : '') + `\`\`\`${attachedFile.language}\n${attachedFile.content}\n\`\`\``
+      setAttachedFile(null)
+    }
     setInput('')
-    streamMessage(sessionId, text, true)
+    streamMessage(sessionId, fullMessage, true)
   }
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() }
@@ -398,6 +441,25 @@ export function LessonScreen({
   }
   function handleMicClick() { if (micState === 'recording') stopRecording(); else startRecording() }
   useEffect(() => () => { recognitionRef.current?.abort() }, [])
+
+  // ── FIX 4: File attachment ─────────────────────────────────────────────────
+  function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 50 * 1024) {
+      alert('Файл слишком большой (макс. 50 КБ)')
+      e.target.value = ''
+      return
+    }
+    const ext = file.name.split('.').pop()?.toLowerCase() ?? 'txt'
+    const lang = EXT_LANG[ext] ?? 'text'
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      setAttachedFile({ name: file.name, content: (ev.target?.result as string) ?? '', language: lang })
+    }
+    reader.readAsText(file)
+    e.target.value = ''
+  }
 
   // ── Long message preview ──────────────────────────────────────────────────
   const previewCache = useMemo(() => {
@@ -459,7 +521,6 @@ export function LessonScreen({
           <span className="font-mono font-black text-sm tracking-[0.18em] scifi-text-glow">MY TUTOR</span>
         </div>
 
-        {/* Vertical separator */}
         <div className="h-6 w-px" style={{ background: 'rgba(0,212,255,0.2)' }} />
 
         {/* Session status */}
@@ -484,7 +545,6 @@ export function LessonScreen({
 
         <div className="h-6 w-px" style={{ background: 'rgba(0,212,255,0.2)' }} />
 
-        {/* Back to base */}
         <Link href="/dashboard" className="font-mono text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors">
           ← БАЗА
         </Link>
@@ -562,6 +622,45 @@ export function LessonScreen({
               <span>UTF-8</span>
             </span>
           </div>
+
+          {/* FIX 6: Terminal toggle bar */}
+          <div
+            className="h-9 flex items-center px-4 shrink-0 border-t cursor-pointer select-none hover:bg-cyan-500/[0.04] transition-colors"
+            style={{ background: 'rgba(6,13,31,0.95)', borderColor: 'rgba(0,212,255,0.15)' }}
+            onClick={() => setTerminalOpen((o) => !o)}>
+            <span className="font-mono text-[10px] tracking-wider text-cyan-400/70 flex items-center gap-2">
+              <ChevronDown size={11} className={`transition-transform duration-200 ${terminalOpen ? 'rotate-180' : ''}`} />
+              ТЕРМИНАЛ
+            </span>
+            {terminalOpen && (
+              <button
+                onClick={(e) => { e.stopPropagation(); handleRunCode() }}
+                disabled={isRunning}
+                className="ml-auto inline-flex items-center gap-1.5 px-3 py-1 rounded font-mono text-[10px] font-black tracking-wider border transition-all disabled:opacity-40"
+                style={{
+                  background: isRunning ? 'rgba(0,255,136,0.08)' : 'rgba(0,255,136,0.06)',
+                  borderColor: 'rgba(0,255,136,0.4)',
+                  color: '#00FF88',
+                  boxShadow: '0 0 10px rgba(0,255,136,0.2)',
+                }}>
+                {isRunning
+                  ? <><Loader2 size={9} className="animate-spin" /> ВЫПОЛНЕНИЕ...</>
+                  : <><Play size={9} fill="currentColor" strokeWidth={0} /> ЗАПУСК</>}
+              </button>
+            )}
+          </div>
+
+          {/* FIX 6: Terminal output panel */}
+          {terminalOpen && (
+            <div
+              className="shrink-0 overflow-y-auto px-4 py-3 border-t font-mono text-[12px] leading-relaxed"
+              style={{ height: '200px', background: 'rgba(1,3,6,0.98)', borderColor: 'rgba(0,255,136,0.15)', color: '#00FF88' }}>
+              {terminalOutput
+                ? <pre className="whitespace-pre-wrap break-words">{terminalOutput}</pre>
+                : <span className="text-cyan-700/60">{'// Нажми ЗАПУСК для симуляции выполнения кода'}</span>
+              }
+            </div>
+          )}
         </section>
 
         {/* ── RIGHT: NEURAL COMMUNICATION INTERFACE ────────────────────────── */}
@@ -571,13 +670,14 @@ export function LessonScreen({
           <div className="flex items-center gap-3 px-4 h-12 shrink-0 border-b"
             style={{ background: 'rgba(6,13,31,0.95)', borderColor: 'rgba(0,212,255,0.15)' }}>
 
-            {/* Hexagon avatar */}
-            <div className="relative w-9 h-9 shrink-0">
-              <div className="absolute inset-0 scifi-hex"
-                style={{ background: 'linear-gradient(135deg, #00D4FF, #7B2FFF)', boxShadow: '0 0 18px rgba(0,212,255,0.5)' }} />
-              <div className="absolute inset-0 flex items-center justify-center font-mono font-black text-[11px] text-white"
-                style={{ textShadow: '0 0 6px rgba(255,255,255,0.6)' }}>МТ</div>
-            </div>
+            {/* FIX 5: ui-avatars tutor avatar (header) */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={TUTOR_AVATAR}
+              alt="Репетитор Макс"
+              className="w-9 h-9 rounded-full object-cover shrink-0"
+              style={{ boxShadow: '0 0 14px rgba(123,47,255,0.55)' }}
+            />
 
             <div className="flex-1 min-w-0">
               <div className="font-mono text-sm font-bold tracking-wider scifi-text-glow truncate">РЕПЕТИТОР МАКС</div>
@@ -604,11 +704,14 @@ export function LessonScreen({
 
             {initializing && (
               <div className="animate-fade-in flex flex-col items-center justify-center py-12 gap-4">
-                <div className="relative w-14 h-14">
-                  <div className="absolute inset-0 scifi-hex"
-                    style={{ background: 'linear-gradient(135deg, #00D4FF, #7B2FFF)', boxShadow: '0 0 24px rgba(0,212,255,0.6)' }} />
-                  <div className="absolute inset-0 flex items-center justify-center font-mono font-black text-sm text-white">МТ</div>
-                </div>
+                {/* FIX 5: large tutor avatar on loading screen */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={TUTOR_AVATAR}
+                  alt="Репетитор Макс"
+                  className="w-14 h-14 rounded-full object-cover"
+                  style={{ boxShadow: '0 0 28px rgba(123,47,255,0.65)' }}
+                />
                 <p className="font-mono text-xs tracking-wider text-cyan-400/80">
                   ИНИЦИАЛИЗАЦИЯ НЕЙРОННОГО КАНАЛА...
                 </p>
@@ -631,10 +734,14 @@ export function LessonScreen({
                   {/* Assistant avatar/name */}
                   {!isUser && !msg.streaming && (
                     <div className="flex items-center gap-2 mb-1.5 ml-0.5">
-                      <div className="relative w-5 h-5 shrink-0">
-                        <div className="absolute inset-0 scifi-hex" style={{ background: 'linear-gradient(135deg, #00D4FF, #7B2FFF)' }} />
-                        <div className="absolute inset-0 flex items-center justify-center font-mono font-black text-[8px] text-white">МТ</div>
-                      </div>
+                      {/* FIX 5: small tutor avatar per-message */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={TUTOR_AVATAR}
+                        alt="МТ"
+                        className="w-5 h-5 rounded-full object-cover shrink-0"
+                        style={{ boxShadow: '0 0 8px rgba(123,47,255,0.4)' }}
+                      />
                       <span className="font-mono text-[10px] tracking-wider text-cyan-500/80">РЕПЕТИТОР МАКС</span>
                     </div>
                   )}
@@ -692,13 +799,14 @@ export function LessonScreen({
                         }}>
                         <MessageContent text={displayText} isUser={true} />
                       </div>
-                      <div className="relative w-6 h-6 shrink-0">
-                        <div className="absolute inset-0 scifi-hex"
-                          style={{ background: 'linear-gradient(135deg, #7B2FFF, #00D4FF)', boxShadow: '0 0 10px rgba(123,47,255,0.5)' }} />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <User size={9} className="text-white" strokeWidth={2.5} />
-                        </div>
-                      </div>
+                      {/* FIX 5: student avatar */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={studentAvatar(displayName)}
+                        alt={displayName ?? 'Студент'}
+                        className="w-6 h-6 rounded-full object-cover shrink-0"
+                        style={{ boxShadow: '0 0 10px rgba(0,212,255,0.45)' }}
+                      />
                     </div>
                   )}
 
@@ -726,6 +834,22 @@ export function LessonScreen({
           {/* Input bar */}
           <div className="px-4 py-3.5 shrink-0 border-t"
             style={{ background: 'rgba(6,13,31,0.98)', borderColor: 'rgba(0,212,255,0.2)' }}>
+
+            {/* FIX 4: File attachment badge */}
+            {attachedFile && (
+              <div className="mb-2 flex items-center gap-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-mono text-[10px] tracking-wider border"
+                  style={{ background: 'rgba(0,212,255,0.08)', borderColor: 'rgba(0,212,255,0.35)', color: '#7DF0FF' }}>
+                  <Paperclip size={10} />
+                  <span>{attachedFile.name}</span>
+                </div>
+                <button onClick={() => setAttachedFile(null)}
+                  className="w-5 h-5 flex items-center justify-center rounded text-red-400/70 hover:text-red-300 transition-colors">
+                  <X size={11} />
+                </button>
+              </div>
+            )}
+
             <div className="flex items-center gap-2">
 
               {/* Input */}
@@ -740,6 +864,24 @@ export function LessonScreen({
                 }
                 className="scifi-input flex-1 h-12 px-4 rounded-lg text-sm font-mono placeholder-cyan-700 tracking-wide disabled:opacity-40"
               />
+
+              {/* FIX 4: Hidden file input + Attach button */}
+              <input
+                ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt"
+                className="hidden" onChange={handleFileSelect}
+              />
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isStreaming || !sessionId}
+                title="Прикрепить файл (.py .c .cpp .txt, макс. 50 КБ)"
+                className="w-12 h-12 flex items-center justify-center rounded-lg border transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{
+                  background: attachedFile ? 'rgba(0,212,255,0.12)' : 'rgba(0,212,255,0.04)',
+                  borderColor: attachedFile ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.25)',
+                  color: attachedFile ? '#00D4FF' : '#4A7FA5',
+                }}>
+                <Paperclip size={16} />
+              </button>
 
               {/* Mic */}
               {speechInputSupported && (
@@ -760,7 +902,7 @@ export function LessonScreen({
               )}
 
               {/* Send */}
-              <button onClick={handleSend} disabled={!input.trim() || isStreaming || !sessionId}
+              <button onClick={handleSend} disabled={(!input.trim() && !attachedFile) || isStreaming || !sessionId}
                 className="scifi-send h-12 px-4 inline-flex items-center gap-2 rounded-lg font-mono text-xs font-black tracking-wider text-white">
                 <span className="hidden sm:inline">ОТПРАВИТЬ</span>
                 <Send size={15} className="translate-x-px" />
