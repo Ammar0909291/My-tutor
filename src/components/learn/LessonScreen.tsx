@@ -207,10 +207,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       processNextTTS()
     }
 
-    const speakFallback = (reason: string) => {
-      console.warn('[TTS] ElevenLabs failed, using browser fallback. Reason:', reason)
-      setTtsEngine('browser')
-      setTtsError(reason)
+    const speakFallback = (reason: string, silent = false) => {
+      console.warn('[TTS] ElevenLabs failed, using browser fallback. Reason:', reason || '403 auth')
+      if (!silent && reason) {
+        setTtsEngine('browser')
+        setTtsError(reason)
+      }
       if (!('speechSynthesis' in window)) { finish(); return }
       window.speechSynthesis.cancel()
       const utt = new SpeechSynthesisUtterance(stripTextForSpeech(item.text).slice(0, 500))
@@ -236,16 +238,23 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     })
       .then(async (r) => {
         if (!r.ok) {
+          if (r.status === 403) {
+            // Invalid API key / plan — fall back to browser speech silently, no banner
+            speakFallback('', true)
+            return null
+          }
           const body = await r.text().catch(() => '')
           throw new Error(`TTS HTTP ${r.status}: ${body}`)
         }
         return r.arrayBuffer()
       })
       .then((buf) => {
+        if (buf === null) return null
         if (buf.byteLength === 0) throw new Error('TTS returned empty audio')
         return ctx.decodeAudioData(buf)
       })
       .then((audioBuf) => {
+        if (!audioBuf) return  // 403 branch already called speakFallback
         setTtsEngine('elevenlabs')
         setTtsError('')
         const source = ctx.createBufferSource()

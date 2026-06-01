@@ -70,6 +70,7 @@ export async function POST(req: Request) {
     if (err instanceof z.ZodError) return NextResponse.json({ error: err.errors[0].message }, { status: 400 })
     const msg = err instanceof Error ? err.message : String(err)
     console.error('[tts]', err)
-    return NextResponse.json({ error: msg }, { status: 500 })
+    const status = msg.includes('403') || msg.includes('401') ? 403 : 500
+    return NextResponse.json({ error: msg, code: status === 403 ? 'AUTH_FAILED' : undefined }, { status })
   }
 }
