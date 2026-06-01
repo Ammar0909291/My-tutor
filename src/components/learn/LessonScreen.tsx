@@ -127,6 +127,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [audioDuration, setAudioDuration]       = useState(0)   // seconds
   const [micState, setMicState]         = useState<MicState>('idle')
   const [micError, setMicError]         = useState<string>('')
+  const [micBlocked, setMicBlocked]     = useState(false)
   const [ttsEngine, setTtsEngine]       = useState<'elevenlabs' | 'browser' | ''>('')
   const [ttsError, setTtsError]         = useState<string>('')
   const [selectedVoiceId, setSelectedVoiceId] = useState(
@@ -460,7 +461,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const res  = await fetch('/api/whisper', { method: 'POST', body: fd })
       const data = await res.json()
       if (!res.ok) {
-        setMicError(`Whisper error ${res.status}: ${data.error ?? 'unknown'}`)
+        if (res.status === 451 || data.code === 'GEO_BLOCKED') {
+          setMicBlocked(true)
+          setMicError('')
+        } else {
+          setMicError(`Whisper error ${res.status}: ${data.error ?? 'unknown'}`)
+        }
         return
       }
       if (data.text) {
@@ -692,10 +698,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               />
               <button
                 onClick={() => { setMicError(''); handleMicClick() }}
-                disabled={isStreaming || !sessionId || micState === 'transcribing'}
-                title={micState === 'recording' ? 'Остановить запись' : micState === 'transcribing' ? 'Распознаю...' : 'Голосовой ввод'}
+                disabled={isStreaming || !sessionId || micState === 'transcribing' || micBlocked}
+                title={micBlocked ? 'Голосовой ввод недоступен в вашем регионе' : micState === 'recording' ? 'Остановить запись' : micState === 'transcribing' ? 'Распознаю...' : 'Голосовой ввод'}
                 className={`w-9 h-9 flex items-center justify-center rounded-xl border transition-colors ${
-                  micState === 'recording'
+                  micBlocked
+                    ? 'bg-slate-800 text-slate-600 border-slate-700 cursor-not-allowed'
+                    : micState === 'recording'
                     ? 'bg-red-600 border-red-500 text-white animate-pulse'
                     : micState === 'transcribing'
                     ? 'bg-slate-700 border-slate-600 text-slate-300'

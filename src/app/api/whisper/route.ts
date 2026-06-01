@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
-import { transcribeAudio } from '@/lib/voice/whisper'
+import { transcribeAudio, GEO_BLOCK_MSG } from '@/lib/voice/whisper'
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -23,6 +23,12 @@ export async function POST(req: Request) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err)
     console.error('[whisper]', err)
+    if (msg === GEO_BLOCK_MSG) {
+      return NextResponse.json(
+        { error: 'Голосовой ввод недоступен в вашем регионе. Пожалуйста, используйте текстовый ввод.', code: 'GEO_BLOCKED' },
+        { status: 451 }
+      )
+    }
     return NextResponse.json({ error: msg }, { status: 500 })
   }
 }
