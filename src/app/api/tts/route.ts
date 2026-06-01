@@ -2,37 +2,21 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { synthesizeSpeech } from '@/lib/voice/elevenlabs'
+import { cleanTextForTTS } from '@/lib/tts-cleaner'
 
-// Legacy onboarding key → voice ID map (kept for back-compat).
-// New requests pass direct ElevenLabs voice IDs from the in-app picker.
+// Onboarding key → ElevenLabs voice ID
 const VOICE_KEY_MAP: Record<string, string> = {
-  alexei: 'nPczCjzI2devNBz1zQrb', // Brian — male, confident
-  maria:  '9BWtsMINqrJLrRacOk9x', // Aria — female, energetic
-  dmitry: 'IKne3meq5aSn9XLyUdCD', // Charlie — warm, conversational
+  alexei: 'ErXwobaYiN019PkySvjV', // Antoni — male, confident
+  maria:  'EXAVITQu4vr4xnSDxMaL', // Bella — female, warm
+  dmitry: 'TxGEqnHWrfWFTfGW9XjX', // Josh — warm, conversational
 }
 
-const DEFAULT_VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'nPczCjzI2devNBz1zQrb'
+const DEFAULT_VOICE = 'ErXwobaYiN019PkySvjV' // Antoni
 
 function resolveVoice(voiceId: string | undefined): string {
   if (!voiceId) return DEFAULT_VOICE
-  // Known onboarding key → mapped ID
   if (VOICE_KEY_MAP[voiceId]) return VOICE_KEY_MAP[voiceId]
-  // Direct ElevenLabs voice ID (24-char alphanumeric)
   return voiceId
-}
-
-function stripForTTS(text: string): string {
-  return text
-    .replace(/```[\s\S]*?```/g, '')       // fenced code blocks
-    .replace(/`[^`\n]+`/g, '')            // inline code
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // markdown links
-    .replace(/^#{1,6}\s+/gm, '')          // headers
-    .replace(/\*{1,3}([^*\n]+)\*{1,3}/g, '$1') // bold / italic
-    .replace(/_{1,3}([^_\n]+)_{1,3}/g, '$1')
-    .replace(/^[-*+]\s+/gm, '')           // bullet points
-    .replace(/^\d+\.\s+/gm, '')           // numbered lists
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
 }
 
 const schema = z.object({
@@ -53,7 +37,7 @@ export async function POST(req: Request) {
     const { text, voiceId } = schema.parse(body)
 
     const resolvedVoice = resolveVoice(voiceId)
-    const clean = stripForTTS(text)
+    const clean = cleanTextForTTS(text)
 
     if (!clean) return NextResponse.json({ error: 'No speakable text' }, { status: 400 })
 

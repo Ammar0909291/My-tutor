@@ -3,11 +3,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { ArrowLeft, GraduationCap, Loader2, Mic, Pause, Play, Send, Volume2, VolumeX } from 'lucide-react'
+import { cleanTextForTTS } from '@/lib/tts-cleaner'
 
-// Monaco must be loaded client-side only
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
-// ─── Web Speech API typings (not in standard lib.dom) ────────────────────────
+// ─── Web Speech API typings ───────────────────────────────────────────────────
 interface SpeechRecognitionLike {
   lang: string
   interimResults: boolean
@@ -20,27 +20,23 @@ interface SpeechRecognitionLike {
   onerror: ((event: { error: string }) => void) | null
 }
 type SpeechRecognitionCtor = new () => SpeechRecognitionLike
-
 function getSpeechRecognition(): SpeechRecognitionCtor | null {
   if (typeof window === 'undefined') return null
-  const w = window as unknown as {
-    SpeechRecognition?: SpeechRecognitionCtor
-    webkitSpeechRecognition?: SpeechRecognitionCtor
-  }
+  const w = window as unknown as { SpeechRecognition?: SpeechRecognitionCtor; webkitSpeechRecognition?: SpeechRecognitionCtor }
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null
 }
 
-// ─── Voice presets (ElevenLabs premade voices) ──────────────────────────────
+// ─── Voice presets ────────────────────────────────────────────────────────────
 const VOICE_PRESETS = [
-  { id: 'nPczCjzI2devNBz1zQrb', label: 'Мужской', hint: 'Brian — уверенный, глубокий' },
-  { id: '9BWtsMINqrJLrRacOk9x', label: 'Женский', hint: 'Aria — энергичный, живой' },
-  { id: 'IKne3meq5aSn9XLyUdCD', label: 'Тёплый',  hint: 'Charlie — живой, разговорный' },
+  { id: 'ErXwobaYiN019PkySvjV', label: 'Мужской', hint: 'Antoni — уверенный, выразительный' },
+  { id: 'EXAVITQu4vr4xnSDxMaL', label: 'Женский', hint: 'Bella — мягкий, приятный' },
+  { id: 'TxGEqnHWrfWFTfGW9XjX', label: 'Тёплый',  hint: 'Josh — тёплый, разговорный' },
 ] as const
 
 const ONBOARDING_VOICE_MAP: Record<string, string> = {
-  alexei: 'nPczCjzI2devNBz1zQrb',
-  maria:  '9BWtsMINqrJLrRacOk9x',
-  dmitry: 'IKne3meq5aSn9XLyUdCD',
+  alexei: 'ErXwobaYiN019PkySvjV',
+  maria:  'EXAVITQu4vr4xnSDxMaL',
+  dmitry: 'TxGEqnHWrfWFTfGW9XjX',
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -54,7 +50,7 @@ const INITIAL_CODE: Record<string, string> = {
   english: '<!-- Заметки репетитора -->\n',
 }
 
-// ─── Small UI helpers ───────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function AudioWaveform({ className = '' }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-[2px] ${className}`}>
@@ -72,18 +68,73 @@ function formatTime(sec: number): string {
 function formatClock(ts: number): string {
   return new Date(ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
 }
-function stripTextForSpeech(text: string): string {
-  return text
-    .replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]+`/g, '')
-    .replace(/\*{1,3}([^*\n]+)\*{1,3}/g, '$1').replace(/_{1,3}([^_\n]+)_{1,3}/g, '$1')
-    .replace(/^#{1,6}\s+/gm, '').replace(/^[-*+]\s+/gm, '').replace(/\n{3,}/g, '\n\n').trim()
-}
 function extractLastCodeBlock(text: string): string | null {
   const regex = /```(?:\w*)\n([\s\S]*?)```/g
   let match: RegExpExecArray | null
   let last: string | null = null
   while ((match = regex.exec(text)) !== null) last = match[1].trim()
   return last
+}
+
+// ─── Inline markdown renderer ─────────────────────────────────────────────────
+function renderInline(text: string, prefix: string, codeClass: string): React.ReactNode {
+  const regex = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
+  const parts: React.ReactNode[] = []
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+  let idx = 0
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index))
+    const raw = match[0]
+    if (raw.startsWith('**')) {
+      parts.push(<strong key={`${prefix}-b${idx}`} className="font-bold">{raw.slice(2, -2)}</strong>)
+    } else if (raw.startsWith('*')) {
+      parts.push(<em key={`${prefix}-i${idx}`}>{raw.slice(1, -1)}</em>)
+    } else {
+      parts.push(<code key={`${prefix}-c${idx}`} className={`px-1.5 py-0.5 rounded text-xs font-mono ${codeClass}`}>{raw.slice(1, -1)}</code>)
+    }
+    lastIndex = match.index + raw.length
+    idx++
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex))
+  return parts.length === 0 ? text : parts
+}
+
+function MessageContent({ text, isUser }: { text: string; isUser: boolean }) {
+  // Code blocks go to Monaco — strip them from chat display
+  const display = text.replace(/```[\s\S]*?```/g, '').trim()
+  const codeClass = isUser ? 'bg-white/20 text-white' : 'bg-black/40 text-accent-300'
+  const lines = display.split('\n')
+  const accentDot = isUser ? 'text-white/60' : 'text-accent-400'
+
+  return (
+    <div className="space-y-0.5">
+      {lines.map((line, i) => {
+        if (!line.trim()) return <div key={i} className="h-1.5" />
+        if (line.match(/^-{3,}$/) || line.match(/^_{3,}$/) || line.match(/^\*{3,}$/)) {
+          return <hr key={i} className="border-white/10 my-2" />
+        }
+        if (line.startsWith('### ')) return <p key={i} className="font-bold mt-2 mb-0.5">{renderInline(line.slice(4), `${i}`, codeClass)}</p>
+        if (line.startsWith('## ')) return <p key={i} className="font-bold text-base mt-2 mb-0.5">{renderInline(line.slice(3), `${i}`, codeClass)}</p>
+        if (line.startsWith('# ')) return <p key={i} className="font-bold text-lg mt-2 mb-0.5">{renderInline(line.slice(2), `${i}`, codeClass)}</p>
+        const bulletMatch = line.match(/^[-•*]\s+(.*)$/)
+        if (bulletMatch) return (
+          <div key={i} className="flex gap-2 items-start">
+            <span className={`mt-0.5 shrink-0 text-xs ${accentDot}`}>•</span>
+            <span>{renderInline(bulletMatch[1], `${i}`, codeClass)}</span>
+          </div>
+        )
+        const numMatch = line.match(/^(\d+)\.\s+(.*)$/)
+        if (numMatch) return (
+          <div key={i} className="flex gap-2 items-start">
+            <span className={`tabular-nums text-xs mt-0.5 shrink-0 font-mono ${accentDot}`}>{numMatch[1]}.</span>
+            <span>{renderInline(numMatch[2], `${i}`, codeClass)}</span>
+          </div>
+        )
+        return <p key={i}>{renderInline(line, `${i}`, codeClass)}</p>
+      })}
+    </div>
+  )
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -127,7 +178,6 @@ export function LessonScreen({
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
 
-  // TTS refs
   const ttsQueueRef = useRef<Array<{ id: string; text: string }>>([])
   const isPlayingRef = useRef(false)
   const audioCtxRef = useRef<AudioContext | null>(null)
@@ -136,7 +186,6 @@ export function LessonScreen({
   const voiceChoiceRef = useRef(selectedVoiceId)
   useEffect(() => { voiceChoiceRef.current = selectedVoiceId }, [selectedVoiceId])
 
-  // Speech recognition refs
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null)
   const speechBaseRef = useRef('')
 
@@ -148,10 +197,8 @@ export function LessonScreen({
   }, [])
   useEffect(() => { scrollToBottom() }, [messages, scrollToBottom])
 
-  // Detect Web Speech API support once
   useEffect(() => { setSpeechSupported(getSpeechRecognition() !== null) }, [])
 
-  // ── Audio context unlock (during user gesture) ─────────────────────────────
   const ensureAudioContext = useCallback(() => {
     if (!audioCtxRef.current) audioCtxRef.current = new AudioContext()
     if (audioCtxRef.current.state === 'suspended') audioCtxRef.current.resume().catch(() => {})
@@ -171,7 +218,6 @@ export function LessonScreen({
     setSpeakingId(null)
   }, [])
 
-  // ── TTS: play next (ElevenLabs → browser fallback) ─────────────────────────
   const processNextTTS = useCallback(() => {
     if (isPlayingRef.current || ttsQueueRef.current.length === 0) return
     const item = ttsQueueRef.current.shift()!
@@ -191,7 +237,7 @@ export function LessonScreen({
       if (!silent && reason) { setTtsEngine('browser'); setTtsError(reason) }
       if (!('speechSynthesis' in window)) { finish(); return }
       window.speechSynthesis.cancel()
-      const utt = new SpeechSynthesisUtterance(stripTextForSpeech(item.text).slice(0, 500))
+      const utt = new SpeechSynthesisUtterance(cleanTextForTTS(item.text).slice(0, 500))
       utt.lang = 'ru-RU'; utt.rate = 0.9; utt.onend = finish; utt.onerror = finish
       window.speechSynthesis.speak(utt)
     }
@@ -217,7 +263,6 @@ export function LessonScreen({
         try {
           return await ctx.decodeAudioData(buf.slice(0))
         } catch {
-          // decodeAudioData failed — buffer is likely a JSON error from ElevenLabs
           const text = new TextDecoder().decode(buf).slice(0, 300)
           throw new Error(`Audio decode failed. ElevenLabs response: ${text}`)
         }
@@ -249,7 +294,6 @@ export function LessonScreen({
     ttsQueueRef.current.push({ id, text }); processNextTTS()
   }, [processNextTTS])
 
-  // ── Stream a message ────────────────────────────────────────────────────────
   const streamMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
     setIsStreaming(true)
     if (showInUI) {
@@ -309,21 +353,18 @@ export function LessonScreen({
     }
   }, [enqueueTTS])
 
-  // ── End session on leave ────────────────────────────────────────────────────
   const sessionIdRef = useRef<string | null>(null)
   useEffect(() => { sessionIdRef.current = sessionId }, [sessionId])
   useEffect(() => {
     function endSession() {
       const sid = sessionIdRef.current
       if (!sid) return
-      const blob = new Blob([JSON.stringify({ sessionId: sid })], { type: 'application/json' })
-      navigator.sendBeacon('/api/sessions/end', blob)
+      navigator.sendBeacon('/api/sessions/end', new Blob([JSON.stringify({ sessionId: sid })], { type: 'application/json' }))
     }
     window.addEventListener('beforeunload', endSession)
     return () => window.removeEventListener('beforeunload', endSession)
   }, [])
 
-  // ── Init session ──────────────────────────────────────────────────────────
   useEffect(() => {
     if (initializedRef.current) return
     initializedRef.current = true
@@ -351,7 +392,6 @@ export function LessonScreen({
     init()
   }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, streamMessage])
 
-  // ── Send ──────────────────────────────────────────────────────────────────
   function handleSend() {
     const text = input.trim()
     if (!text || isStreaming || !sessionId) return
@@ -364,10 +404,7 @@ export function LessonScreen({
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() }
   }
 
-  // ── Mic: Web Speech API (no server, region-free) ───────────────────────────
-  function stopRecording() {
-    recognitionRef.current?.stop()
-  }
+  function stopRecording() { recognitionRef.current?.stop() }
   function startRecording() {
     const SR = getSpeechRecognition()
     if (!SR) { setSpeechSupported(false); return }
@@ -394,27 +431,31 @@ export function LessonScreen({
   }
   useEffect(() => () => { recognitionRef.current?.abort() }, [])
 
-  // ── Error states ────────────────────────────────────────────────────────────
+  // ── Error states ──────────────────────────────────────────────────────────────
   if (initError === 'upgrade') {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6">
-        <div className="glass rounded-2xl p-8 max-w-md text-center animate-scale-in">
-          <div className="text-5xl mb-4">🔒</div>
-          <h2 className="text-xl font-bold text-white mb-2">Бесплатный урок использован</h2>
-          <p className="text-slate-400 text-sm mb-6 leading-relaxed">Ты уже прошёл бесплатный урок. Оформи подписку, чтобы продолжить обучение.</p>
-          <Link href="/billing" className="inline-block px-6 py-3 bg-accent-600 hover:bg-accent-500 text-white font-semibold rounded-xl transition-all hover:scale-[1.02]">Оформить подписку</Link>
-          <Link href="/dashboard" className="block mt-4 text-sm text-slate-500 hover:text-slate-300 transition-colors">← Вернуться на главную</Link>
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#0A0A0F' }}>
+        <div className="gradient-border">
+          <div className="p-8 max-w-md text-center rounded-[1.25rem]" style={{ background: '#0F0F18' }}>
+            <div className="text-5xl mb-4">🔒</div>
+            <h2 className="text-xl font-black text-white mb-2 tracking-tight">Бесплатный урок использован</h2>
+            <p className="text-sm mb-6 leading-relaxed" style={{ color: '#71717A' }}>Оформи подписку, чтобы продолжить обучение.</p>
+            <Link href="/billing" className="btn-gradient inline-block px-6 py-3 rounded-xl text-white font-bold text-sm">Оформить подписку</Link>
+            <Link href="/dashboard" className="block mt-4 text-sm transition-colors" style={{ color: '#3F3F46' }}>← Вернуться на главную</Link>
+          </div>
         </div>
       </div>
     )
   }
   if (initError) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6">
-        <div className="glass rounded-2xl p-8 max-w-sm text-center animate-scale-in">
-          <div className="text-4xl mb-4">⚠️</div>
-          <p className="text-red-300 text-sm mb-5">{initError}</p>
-          <Link href="/dashboard" className="text-sm text-slate-400 hover:text-slate-200 transition-colors">← Назад</Link>
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#0A0A0F' }}>
+        <div className="gradient-border">
+          <div className="p-8 max-w-sm text-center rounded-[1.25rem]" style={{ background: '#0F0F18' }}>
+            <div className="text-4xl mb-4">⚠️</div>
+            <p className="text-red-400 text-sm mb-5">{initError}</p>
+            <Link href="/dashboard" className="text-sm transition-colors" style={{ color: '#52525B' }}>← Назад</Link>
+          </div>
         </div>
       </div>
     )
@@ -422,35 +463,37 @@ export function LessonScreen({
 
   const initializing = messages.length === 0
 
-  // ── Main layout: subject sidebar · editor · chat ────────────────────────────
   return (
-    <div className="h-screen bg-slate-900 text-slate-100 flex overflow-hidden">
+    <div className="h-screen flex overflow-hidden text-white" style={{ background: '#0A0A0F' }}>
 
-      {/* ── Subject sidebar ── */}
-      <aside className="hidden md:flex flex-col w-60 shrink-0 border-r border-white/10 bg-slate-900/80">
-        <div className="h-14 flex items-center gap-2.5 px-4 border-b border-white/10">
-          <div className="w-7 h-7 bg-gradient-to-br from-accent-500 to-accent-700 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-xs">MT</span>
+      {/* ── Subject sidebar ─────────────────────────────────────────────────────── */}
+      <aside className="hidden md:flex flex-col w-60 shrink-0 border-r border-white/[0.06]" style={{ background: '#0A0A0F' }}>
+        <div className="h-14 flex items-center gap-2.5 px-4 border-b border-white/[0.06]">
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
+            <span className="text-white font-black text-xs">MT</span>
           </div>
-          <span className="font-semibold text-white text-sm">My Tutor</span>
+          <span className="font-bold text-white text-sm">My Tutor</span>
         </div>
 
         <div className="flex-1 overflow-y-auto p-3">
-          <p className="px-2 text-xs uppercase tracking-wide text-slate-500 mb-2">Мои программы</p>
+          <p className="px-2 text-xs uppercase tracking-wider mb-2 font-semibold" style={{ color: '#3F3F46' }}>Мои программы</p>
           {subjects.length === 0 ? (
-            <p className="px-2 text-xs text-slate-500">Нет предметов</p>
+            <p className="px-2 text-xs" style={{ color: '#3F3F46' }}>Нет предметов</p>
           ) : (
-            <ul className="space-y-1">
+            <ul className="space-y-0.5">
               {subjects.map((s) => {
                 const active = s.slug === subjectSlug
                 return (
                   <li key={s.slug}>
-                    <div className={`flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-colors ${
-                      active ? 'bg-accent-600/15 border border-accent-500/30 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
-                    }`}>
+                    <div className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-all duration-150"
+                      style={{
+                        background: active ? 'rgba(99,102,241,0.12)' : 'transparent',
+                        border: active ? '1px solid rgba(99,102,241,0.25)' : '1px solid transparent',
+                        color: active ? '#FAFAFA' : '#52525B',
+                      }}>
                       <span className="text-base">{SUBJECT_ICONS[s.slug] ?? '📘'}</span>
                       <span className="truncate">{s.name}</span>
-                      {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-accent-400" />}
+                      {active && <span className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: '#818CF8' }} />}
                     </div>
                   </li>
                 )
@@ -459,39 +502,45 @@ export function LessonScreen({
           )}
         </div>
 
-        <div className="p-3 border-t border-white/10">
-          <Link href="/dashboard" className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-sm text-slate-400 hover:bg-white/5 hover:text-white transition-colors">
-            <ArrowLeft size={15} /> На дашборд
+        <div className="p-3 border-t border-white/[0.06]">
+          <Link href="/dashboard" className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-sm transition-colors hover:bg-white/5"
+            style={{ color: '#52525B' }}>
+            <ArrowLeft size={14} /> На дашборд
           </Link>
           <div className="flex items-center gap-2.5 px-2.5 py-2 mt-1">
-            <div className="w-7 h-7 rounded-full bg-accent-600/20 border border-accent-500/30 flex items-center justify-center text-xs font-semibold text-accent-200">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
+              style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
               {(displayName ?? 'С').charAt(0).toUpperCase()}
             </div>
-            <span className="text-sm text-slate-300 truncate">{displayName ?? 'Студент'}</span>
+            <span className="text-sm truncate" style={{ color: '#71717A' }}>{displayName ?? 'Студент'}</span>
           </div>
         </div>
       </aside>
 
-      {/* ── Main area ── */}
+      {/* ── Main area ───────────────────────────────────────────────────────────── */}
       <div className="flex-1 flex flex-col overflow-hidden">
 
         {/* Top bar */}
-        <div className="h-14 glass border-b border-white/10 flex items-center px-4 gap-3 shrink-0">
-          <Link href="/dashboard" className="md:hidden flex items-center gap-1.5 text-slate-400 hover:text-white text-sm transition-colors">
+        <div className="h-14 flex items-center px-4 gap-3 shrink-0 border-b border-white/[0.06]"
+          style={{ background: 'rgba(10,10,15,0.9)', backdropFilter: 'blur(20px)' }}>
+          <Link href="/dashboard" className="md:hidden text-sm transition-colors" style={{ color: '#52525B' }}>
             <ArrowLeft size={14} />
           </Link>
           <div className="flex items-center gap-2">
-            <GraduationCap size={16} className="text-accent-400" />
+            <GraduationCap size={15} className="text-accent-400" />
             <span className="text-white text-sm font-medium">{subjectName}</span>
           </div>
 
           {/* Voice picker */}
-          <div className="ml-auto flex items-center gap-1 bg-slate-800/60 rounded-lg p-0.5 border border-white/10">
+          <div className="ml-auto flex items-center gap-0.5 rounded-lg p-0.5 border border-white/[0.07]"
+            style={{ background: 'rgba(255,255,255,0.04)' }}>
             {VOICE_PRESETS.map((v) => (
               <button key={v.id} onClick={() => setSelectedVoiceId(v.id)} title={v.hint}
-                className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-                  selectedVoiceId === v.id ? 'bg-accent-600 text-white' : 'text-slate-400 hover:text-slate-200'
-                }`}>
+                className="px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-150"
+                style={{
+                  background: selectedVoiceId === v.id ? 'linear-gradient(135deg, #6366F1, #8B5CF6)' : 'transparent',
+                  color: selectedVoiceId === v.id ? '#fff' : '#52525B',
+                }}>
                 {v.label}
               </button>
             ))}
@@ -499,12 +548,13 @@ export function LessonScreen({
 
           <div className="flex items-center gap-3">
             {speakingId && (
-              <button onClick={stopAudio} title="Остановить" className="flex items-center gap-2 text-accent-400 hover:text-accent-300 transition-colors">
+              <button onClick={stopAudio} title="Остановить"
+                className="flex items-center gap-1.5 text-xs transition-colors text-accent-400 hover:text-accent-300">
                 <AudioWaveform /><VolumeX size={12} />
               </button>
             )}
-            {isStreaming && (
-              <div className="flex items-center gap-2 text-accent-400 text-xs">
+            {isStreaming && !speakingId && (
+              <div className="flex items-center gap-1.5 text-xs text-accent-400">
                 <Loader2 size={12} className="animate-spin" /> Печатает...
               </div>
             )}
@@ -515,8 +565,9 @@ export function LessonScreen({
         <div className="flex flex-1 overflow-hidden">
 
           {/* Monaco editor */}
-          <div className="relative hidden lg:block border-r border-white/10" style={{ width: '52%' }}>
-            <div className="absolute top-3 right-4 z-10 px-2.5 py-1 bg-slate-800/80 border border-white/10 text-slate-300 text-xs font-mono rounded select-none">
+          <div className="relative hidden lg:block border-r border-white/[0.06]" style={{ width: '52%', background: '#0D0D14' }}>
+            <div className="absolute top-3 right-4 z-10 px-2.5 py-1 rounded-md border border-white/[0.07] text-xs font-mono select-none"
+              style={{ background: 'rgba(255,255,255,0.04)', color: '#52525B' }}>
               {langLabel}
             </div>
             <MonacoEditor
@@ -532,63 +583,90 @@ export function LessonScreen({
             />
           </div>
 
-          {/* Chat panel */}
-          <div className="flex flex-col bg-slate-900 flex-1 min-w-0">
-            <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
+          {/* ── Chat panel ──────────────────────────────────────────────────────── */}
+          <div className="flex flex-col flex-1 min-w-0" style={{ background: '#0A0A0F' }}>
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto px-4 py-5 space-y-3">
+
               {initializing && (
-                <div className="space-y-4 animate-fade-in">
+                <div className="animate-fade-in">
                   <div className="flex flex-col items-center justify-center py-10 gap-3">
                     <div className="relative">
-                      <div className="w-12 h-12 rounded-2xl bg-accent-600/15 border border-accent-500/30 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                        style={{ background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.25)' }}>
                         <GraduationCap size={22} className="text-accent-400" />
                       </div>
                       <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-accent-500 animate-pulse-ring" />
                     </div>
-                    <p className="text-slate-400 text-sm">Репетитор готовится к уроку...</p>
+                    <p className="text-sm" style={{ color: '#52525B' }}>Репетитор готовится к уроку...</p>
                   </div>
-                  {/* Skeleton bubbles */}
-                  <div className="flex justify-start"><div className="skeleton h-16 w-3/4 rounded-2xl" /></div>
+                  <div className="flex justify-start mb-3"><div className="skeleton h-16 w-3/4 rounded-2xl" /></div>
                   <div className="flex justify-start"><div className="skeleton h-10 w-1/2 rounded-2xl" /></div>
                 </div>
               )}
 
               {messages.map((msg) => (
-                <div key={msg.id} className={`flex flex-col animate-slide-up ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                  <div className={`group max-w-[88%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all ${
-                    msg.role === 'user'
-                      ? 'bg-accent-600 text-white rounded-br-md'
-                      : 'glass text-slate-100 rounded-bl-md'
-                  } ${speakingId === msg.id ? 'ring-1 ring-accent-400/50' : ''}`}>
-                    {msg.content || <TypingDots />}
+                <div key={msg.id} className={`group flex flex-col animate-slide-up ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                  <div
+                    className={`max-w-[88%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-all duration-200 ${
+                      msg.role === 'user' ? 'rounded-br-md text-white' : 'rounded-bl-md border-l-2'
+                    } ${speakingId === msg.id ? 'ring-1 ring-accent-400/40' : ''}`}
+                    style={msg.role === 'user'
+                      ? { background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }
+                      : { background: '#1A1A2E', borderLeftColor: 'rgba(99,102,241,0.4)', color: '#E4E4F0' }
+                    }>
 
-                    {/* Audio player bar */}
+                    {msg.content
+                      ? <MessageContent text={msg.content} isUser={msg.role === 'user'} />
+                      : <TypingDots />
+                    }
+
+                    {/* Audio player — assistant only, after streaming */}
                     {msg.role === 'assistant' && !msg.streaming && msg.content && (() => {
                       const isThis = speakingId === msg.id
                       const pct = isThis ? playbackProgress * 100 : 0
                       const elapsed = isThis ? playbackProgress * audioDuration : 0
                       return (
-                        <div className={`mt-3 transition-opacity ${isThis ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                          <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg ${
-                            isThis ? 'bg-accent-600/20 border border-accent-500/30' : 'bg-slate-800/60 border border-white/10'
-                          }`}>
+                        <div className={`mt-3 transition-opacity duration-200 ${isThis ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                          <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl"
+                            style={{
+                              background: isThis ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.04)',
+                              border: `1px solid ${isThis ? 'rgba(99,102,241,0.3)' : 'rgba(255,255,255,0.06)'}`,
+                            }}>
                             <button onClick={() => { ensureAudioContext(); isThis ? stopAudio() : enqueueTTS(msg.id, msg.content) }}
-                              className={`flex-shrink-0 transition-colors ${isThis ? 'text-accent-300 hover:text-accent-200' : 'text-slate-400 hover:text-white'}`}>
-                              {isThis ? <Pause size={13} fill="currentColor" strokeWidth={0} /> : <Play size={13} fill="currentColor" strokeWidth={0} className="translate-x-px" />}
+                              className="flex-shrink-0 transition-colors"
+                              style={{ color: isThis ? '#818CF8' : '#52525B' }}>
+                              {isThis
+                                ? <Pause size={13} fill="currentColor" strokeWidth={0} />
+                                : <Play size={13} fill="currentColor" strokeWidth={0} className="translate-x-px" />
+                              }
                             </button>
-                            <span className={`text-[11px] tabular-nums flex-shrink-0 w-7 ${isThis ? 'text-accent-300' : 'text-slate-500'}`}>{formatTime(elapsed)}</span>
-                            <div className="relative flex-1 h-[3px] bg-slate-600/60 rounded-full">
-                              <div className={`absolute inset-y-0 left-0 rounded-full ${isThis ? 'bg-accent-400' : 'bg-slate-600'}`} style={{ width: `${pct}%` }} />
-                              {isThis && <div className="absolute top-1/2 w-2.5 h-2.5 bg-white rounded-full shadow" style={{ left: `${pct}%`, transform: 'translate(-50%,-50%)' }} />}
+                            <span className="text-[11px] tabular-nums flex-shrink-0 w-7"
+                              style={{ color: isThis ? '#818CF8' : '#3F3F46' }}>
+                              {formatTime(elapsed)}
+                            </span>
+                            <div className="relative flex-1 h-[3px] rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                              <div className="absolute inset-y-0 left-0 rounded-full transition-all"
+                                style={{ width: `${pct}%`, background: isThis ? '#818CF8' : 'rgba(255,255,255,0.15)' }} />
+                              {isThis && (
+                                <div className="absolute top-1/2 w-2.5 h-2.5 bg-white rounded-full shadow-lg"
+                                  style={{ left: `${pct}%`, transform: 'translate(-50%,-50%)' }} />
+                              )}
                             </div>
-                            <Volume2 size={13} className={`flex-shrink-0 ${isThis ? 'text-accent-300' : 'text-slate-500'}`} />
+                            <Volume2 size={12} className="flex-shrink-0" style={{ color: isThis ? '#818CF8' : '#3F3F46' }} />
                           </div>
                         </div>
                       )
                     })()}
                   </div>
-                  {/* Timestamp */}
+
+                  {/* Timestamp on hover */}
                   {msg.content && !msg.streaming && (
-                    <span className="text-[10px] text-slate-600 mt-1 px-1">{formatClock(msg.ts)}</span>
+                    <span className="text-[10px] mt-1 px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      style={{ color: '#3F3F46' }}>
+                      {formatClock(msg.ts)}
+                    </span>
                   )}
                 </div>
               ))}
@@ -596,49 +674,64 @@ export function LessonScreen({
             </div>
 
             {/* Input bar */}
-            <div className="px-4 py-3 border-t border-white/10 shrink-0">
+            <div className="px-4 py-3 border-t border-white/[0.06] shrink-0" style={{ background: '#0A0A0F' }}>
               {ttsEngine === 'browser' && ttsError && (
-                <div className="mb-2">
-                  <span className="block text-xs text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-1.5">
-                    ⚠️ Озвучка через браузер (ElevenLabs недоступен)
-                  </span>
+                <div className="mb-2 px-3 py-1.5 rounded-xl border text-xs text-amber-300"
+                  style={{ background: 'rgba(245,158,11,0.06)', borderColor: 'rgba(245,158,11,0.15)' }}>
+                  Озвучка через браузер (ElevenLabs недоступен)
                 </div>
               )}
 
               <div className="flex items-center gap-2">
-                <input
-                  ref={inputRef} type="text" value={input}
-                  onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown}
-                  disabled={isStreaming || !sessionId}
-                  placeholder={micState === 'recording' ? '🎙️ Говори...' : isStreaming ? 'Репетитор печатает...' : 'Напиши свой вопрос...'}
-                  className="flex-1 bg-slate-800/60 text-white placeholder-slate-500 px-4 py-2.5 rounded-xl text-sm border border-white/10 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 transition-all disabled:opacity-50"
-                />
+                {/* Input wrapper — rounded pill */}
+                <div className="flex-1 flex items-center gap-2 px-4 rounded-full border transition-all duration-200 focus-within:border-accent-500/50"
+                  style={{ background: '#0F0F18', borderColor: 'rgba(255,255,255,0.07)', height: '48px' }}>
+                  <input
+                    ref={inputRef} type="text" value={input}
+                    onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown}
+                    disabled={isStreaming || !sessionId}
+                    placeholder={
+                      micState === 'recording' ? 'Говори...' :
+                      isStreaming ? 'Репетитор отвечает...' :
+                      'Напиши вопрос или нажми Enter...'
+                    }
+                    className="flex-1 bg-transparent text-white text-sm focus:outline-none disabled:opacity-40"
+                    style={{ color: '#FAFAFA' }}
+                  />
+                  <span className="text-xs" style={{ color: '#3F3F46', fontVariantNumeric: 'tabular-nums' }}>
+                    {input.length > 0 && `${input.length}`}
+                  </span>
+                </div>
 
+                {/* Mic button */}
                 {speechSupported && (
                   <button
                     onClick={handleMicClick}
                     disabled={isStreaming || !sessionId}
-                    title={micState === 'recording' ? 'Остановить запись' : 'Голосовой ввод'}
-                    className={`relative w-10 h-10 flex items-center justify-center rounded-xl border transition-all ${
-                      micState === 'recording'
-                        ? 'bg-accent-600 border-accent-500 text-white animate-pulse-ring'
-                        : 'bg-slate-800/60 text-slate-400 border-white/10 hover:text-white hover:border-accent-500/50'
-                    } disabled:opacity-50 disabled:cursor-not-allowed`}
-                  >
+                    title={micState === 'recording' ? 'Остановить' : 'Голосовой ввод'}
+                    className="w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{
+                      background: micState === 'recording' ? 'linear-gradient(135deg, #6366F1, #8B5CF6)' : '#0F0F18',
+                      borderColor: micState === 'recording' ? 'rgba(99,102,241,0.5)' : 'rgba(255,255,255,0.07)',
+                      color: micState === 'recording' ? '#fff' : '#52525B',
+                      boxShadow: micState === 'recording' ? '0 0 20px rgba(99,102,241,0.4)' : 'none',
+                    }}>
                     <Mic size={16} />
                   </button>
                 )}
 
+                {/* Send button */}
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isStreaming || !sessionId}
-                  className="w-10 h-10 flex items-center justify-center bg-accent-600 hover:bg-accent-500 text-white rounded-xl transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  <Send size={16} />
+                  className="w-12 h-12 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)', boxShadow: input.trim() ? '0 0 20px rgba(99,102,241,0.4)' : 'none' }}>
+                  <Send size={15} className="translate-x-px" />
                 </button>
               </div>
-              <p className="text-xs text-slate-600 mt-2 text-center">
-                Enter — отправить · Shift+Enter — новая строка{speechSupported ? ' · 🎙️ — голосовой ввод' : ''}
+
+              <p className="text-xs text-center mt-2" style={{ color: '#3F3F46' }}>
+                Enter — отправить{speechSupported ? ' · Микрофон — голосовой ввод' : ''}
               </p>
             </div>
           </div>
@@ -650,10 +743,16 @@ export function LessonScreen({
 
 function TypingDots() {
   return (
-    <span className="flex gap-1 items-center py-0.5">
-      {[0, 150, 300].map((delay) => (
-        <span key={delay} className="w-1.5 h-1.5 bg-accent-400 rounded-full animate-bounce" style={{ animationDelay: `${delay}ms` }} />
+    <div className="flex items-center gap-1.5 py-1 px-0.5">
+      {[0, 180, 360].map((delay) => (
+        <span key={delay}
+          className="w-2 h-2 rounded-full"
+          style={{
+            background: 'rgba(99,102,241,0.6)',
+            animation: `bounce 1.2s ease-in-out ${delay}ms infinite`,
+          }}
+        />
       ))}
-    </span>
+    </div>
   )
 }
