@@ -79,4 +79,6 @@ export async function POST(req: Request) {
   return NextResponse.json({ received: true });
 }
 
-export const config = { api: { bodyParser: false } };
+// App Router parses nothing by default; we read the raw body via req.text() above.
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";

@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+// Placeholder prevents the SDK from throwing at import time when the key is
+// absent (e.g. during build without secrets). Real calls require a valid key.
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_missing", {
   apiVersion: "2025-02-24.acacia",
   typescript: true,
 });

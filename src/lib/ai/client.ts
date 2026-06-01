@@ -16,7 +16,9 @@ const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
 
 export const ai = globalForAI.ai ?? new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
-  apiKey: process.env.OPENROUTER_API_KEY!,
+  // Placeholder prevents the SDK from throwing at import time when the key is
+  // absent (e.g. during build). Real requests fail gracefully via try/catch.
+  apiKey: process.env.OPENROUTER_API_KEY || 'missing-openrouter-key',
   defaultHeaders: {
     'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
     'X-Title': 'My Tutor',

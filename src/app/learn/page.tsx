@@ -13,7 +13,7 @@ export default async function LearnPage() {
     select: {
       onboardingCompleted: true,
       profile: {
-        include: { subjects: { include: { subject: true }, take: 1 } },
+        include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
       },
     },
   })
@@ -24,6 +24,12 @@ export default async function LearnPage() {
   const primarySubject = profile?.subjects[0]?.subject
 
   if (!profile || !primarySubject) redirect('/dashboard')
+
+  // All enrolled subjects for the lesson sidebar
+  const subjects = profile.subjects.map((ps) => ({
+    slug: ps.subject.slug,
+    name: ps.subject.name,
+  }))
 
   // Fetch last 3 completed sessions for memory context
   const pastSessions = await prisma.learnSession.findMany({
@@ -85,6 +91,8 @@ export default async function LearnPage() {
       voiceChoice={profile.voiceId ?? 'alexei'}
       memoryContext={memoryContext}
       pastSessionsSummary={pastSessionsSummary}
+      subjects={subjects}
+      displayName={profile.displayName}
     />
   )
 }

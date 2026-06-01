@@ -1,28 +1,40 @@
 import Link from 'next/link'
+import { ArrowRight, Brain, Code2, Mic, Sparkles } from 'lucide-react'
+
+const FEATURES = [
+  { icon: Brain,  title: 'Персональный подход', desc: 'AI анализирует твои ответы и адаптирует стиль объяснений именно под тебя.' },
+  { icon: Mic,    title: 'Голосовое общение',   desc: 'Говори с репетитором голосом прямо в браузере — он отвечает на русском.' },
+  { icon: Code2,  title: 'Редактор кода',        desc: 'Пиши и разбирай код прямо в уроке — встроенный редактор как в VS Code.' },
+]
+
+const SUBJECTS = [
+  { icon: '⚙️', name: 'C',       desc: 'Системное программирование' },
+  { icon: '🔷', name: 'C++',     desc: 'ООП и современный C++' },
+  { icon: '🐍', name: 'Python',  desc: 'От основ до продвинутого' },
+  { icon: '🇬🇧', name: 'English', desc: 'Технический английский' },
+]
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-900 text-slate-100 relative overflow-hidden">
+      {/* Ambient gradient glows */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent-600/20 rounded-full blur-[140px]" />
+      <div className="pointer-events-none absolute top-[60%] -right-40 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]" />
+
       {/* ── Nav ── */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-md">
+      <nav className="fixed top-0 inset-x-0 z-50 glass border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-700 rounded-lg flex items-center justify-center shadow-lg shadow-accent-600/30">
               <span className="text-white font-bold text-sm">MT</span>
             </div>
-            <span className="font-semibold text-slate-900">My Tutor</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/auth/login"
-              className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
-            >
+            <span className="font-semibold text-white">My Tutor</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/auth/login" className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
               Войти
             </Link>
-            <Link
-              href="/auth/signup"
-              className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-colors shadow-sm"
-            >
+            <Link href="/auth/signup" className="px-4 py-2 text-sm font-semibold text-white bg-accent-600 rounded-xl hover:bg-accent-500 transition-all shadow-lg shadow-accent-600/30 hover:scale-[1.02] active:scale-[0.98]">
               Начать бесплатно
             </Link>
           </div>
@@ -30,37 +42,32 @@ export default function HomePage() {
       </nav>
 
       {/* ── Hero ── */}
-      <section className="pt-36 pb-24 px-6">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 text-sm font-medium mb-8 border border-indigo-100">
-            <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-pulse" />
+      <section className="relative pt-40 pb-28 px-6">
+        <div className="max-w-4xl mx-auto text-center animate-slide-up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-accent-300 text-sm font-medium mb-8">
+            <Sparkles size={14} className="text-accent-400" />
             Первый урок — бесплатно
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight mb-6">
-            My Tutor — твой личный
+          <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-6 tracking-tight">
+            Твой личный
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 via-blue-400 to-accent-300 bg-[length:200%_auto] animate-gradient">
               AI-репетитор
             </span>
           </h1>
 
-          <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Учи C, C++, Python и английский язык с персональным AI-репетитором.
-            Доступно 24/7.
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+            Учи C, C++, Python и английский язык с персональным AI-репетитором,
+            который помнит твой прогресс. Доступно 24/7.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/auth/signup"
-              className="px-8 py-4 text-base font-semibold text-white bg-indigo-600 rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300 hover:-translate-y-0.5"
-            >
-              Начать бесплатно →
+            <Link href="/auth/signup" className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white bg-accent-600 rounded-2xl hover:bg-accent-500 transition-all shadow-xl shadow-accent-600/30 hover:scale-[1.02] active:scale-[0.98]">
+              Начать бесплатно
+              <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
-            <Link
-              href="/auth/login"
-              className="px-8 py-4 text-base font-semibold text-slate-700 bg-white border-2 border-slate-200 rounded-2xl hover:border-slate-300 hover:bg-slate-50 transition-all hover:-translate-y-0.5"
-            >
+            <Link href="/auth/login" className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-200 glass rounded-2xl hover:bg-white/5 transition-all hover:scale-[1.02] active:scale-[0.98]">
               Войти
             </Link>
           </div>
@@ -68,36 +75,17 @@ export default function HomePage() {
       </section>
 
       {/* ── Features ── */}
-      <section className="py-20 px-6 bg-slate-50">
+      <section className="relative py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-center text-slate-900 mb-12">
-            Почему My Tutor?
-          </h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-14">Почему My Tutor?</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: '🧠',
-                title: 'Персональный подход',
-                desc: 'Claude анализирует твои ответы и адаптирует стиль объяснений под тебя',
-              },
-              {
-                icon: '🎙️',
-                title: 'Голосовое общение',
-                desc: 'Говори с репетитором голосом, получай ответы на русском языке',
-              },
-              {
-                icon: '💻',
-                title: 'Редактор кода',
-                desc: 'Пиши код прямо в уроке — Monaco Editor как в VS Code',
-              },
-            ].map((f) => (
-              <div
-                key={f.title}
-                className="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="text-3xl mb-4">{f.icon}</div>
-                <h3 className="font-semibold text-slate-900 mb-2">{f.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+            {FEATURES.map((f) => (
+              <div key={f.title} className="group glass rounded-2xl p-7 hover:bg-white/5 transition-all hover:-translate-y-1">
+                <div className="w-12 h-12 rounded-xl bg-accent-600/15 border border-accent-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <f.icon size={22} className="text-accent-400" />
+                </div>
+                <h3 className="font-semibold text-white mb-2 text-lg">{f.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -105,30 +93,16 @@ export default function HomePage() {
       </section>
 
       {/* ── Subjects ── */}
-      <section className="py-20 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-3">
-            Что ты можешь изучать
-          </h2>
-          <p className="text-slate-500 mb-12">
-            Выбери предмет — репетитор подстроится под твой уровень с первого сообщения
-          </p>
+          <h2 className="text-3xl font-bold text-white mb-3">Что ты можешь изучать</h2>
+          <p className="text-slate-400 mb-14">Выбери предмет — репетитор подстроится под твой уровень с первого сообщения.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { icon: '⚙️', name: 'C', desc: 'Системное программирование' },
-              { icon: '🔷', name: 'C++', desc: 'ООП и современный C++' },
-              { icon: '🐍', name: 'Python', desc: 'От основ до продвинутого' },
-              { icon: '🇬🇧', name: 'English', desc: 'Технический английский' },
-            ].map((s) => (
-              <div
-                key={s.name}
-                className="p-6 border-2 border-slate-100 rounded-2xl hover:border-indigo-200 hover:bg-indigo-50/40 transition-all group"
-              >
-                <div className="text-3xl mb-3">{s.icon}</div>
-                <div className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                  {s.name}
-                </div>
-                <div className="text-xs text-slate-500 mt-1">{s.desc}</div>
+            {SUBJECTS.map((s) => (
+              <div key={s.name} className="group glass rounded-2xl p-7 hover:border-accent-500/40 hover:bg-accent-600/5 transition-all hover:-translate-y-1">
+                <div className="text-4xl mb-4">{s.icon}</div>
+                <div className="font-bold text-white text-lg group-hover:text-accent-300 transition-colors">{s.name}</div>
+                <div className="text-xs text-slate-400 mt-1.5">{s.desc}</div>
               </div>
             ))}
           </div>
@@ -136,33 +110,30 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 px-6 bg-indigo-600">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Начни учиться прямо сейчас
-          </h2>
-          <p className="text-indigo-200 mb-8">
-            Первый урок бесплатно. Без кредитной карты.
-          </p>
-          <Link
-            href="/auth/signup"
-            className="inline-block px-8 py-4 text-base font-semibold text-indigo-600 bg-white rounded-2xl hover:bg-indigo-50 transition-colors shadow-lg"
-          >
-            Создать аккаунт бесплатно →
-          </Link>
+      <section className="relative py-24 px-6">
+        <div className="max-w-3xl mx-auto text-center glass rounded-3xl p-12 overflow-hidden relative">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-600/20 to-transparent" />
+          <div className="relative">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Начни учиться прямо сейчас</h2>
+            <p className="text-slate-300 mb-8">Первый урок бесплатно. Без кредитной карты.</p>
+            <Link href="/auth/signup" className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white bg-accent-600 rounded-2xl hover:bg-accent-500 transition-all shadow-xl shadow-accent-600/30 hover:scale-[1.02] active:scale-[0.98]">
+              Создать аккаунт бесплатно
+              <ArrowRight size={18} />
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-slate-100 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+      <footer className="relative border-t border-white/10 py-8 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-indigo-600 rounded-md flex items-center justify-center">
+            <div className="w-6 h-6 bg-gradient-to-br from-accent-500 to-accent-700 rounded-md flex items-center justify-center">
               <span className="text-white font-bold text-xs">MT</span>
             </div>
-            <span className="text-sm font-medium text-slate-600">My Tutor</span>
+            <span className="text-sm font-medium text-slate-300">My Tutor</span>
           </div>
-          <p className="text-xs text-slate-400">© 2025 My Tutor. Все права защищены.</p>
+          <p className="text-xs text-slate-500">© 2026 My Tutor. Все права защищены.</p>
         </div>
       </footer>
     </div>

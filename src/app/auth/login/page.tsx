@@ -34,26 +34,27 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md animate-slide-up">
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-accent-600/15 rounded-full blur-[140px]" />
+
+      <div className="relative w-full max-w-md animate-slide-up">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-sm">
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <div className="w-10 h-10 bg-gradient-to-br from-accent-500 to-accent-700 rounded-xl flex items-center justify-center shadow-lg shadow-accent-600/30">
               <span className="text-white font-bold">MT</span>
             </div>
-            <span className="font-bold text-xl text-slate-900">My Tutor</span>
+            <span className="font-bold text-xl text-white">My Tutor</span>
           </Link>
-          <h1 className="mt-6 text-2xl font-bold text-slate-900">Добро пожаловать</h1>
-          <p className="mt-2 text-slate-500 text-sm">Войди в свой аккаунт</p>
+          <h1 className="mt-7 text-2xl font-bold text-white">Добро пожаловать</h1>
+          <p className="mt-2 text-slate-400 text-sm">Войди в свой аккаунт</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
-          {/* Google */}
+        <div className="glass rounded-2xl p-8">
           <button
             onClick={handleGoogle}
             disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-slate-200 rounded-xl text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-white/10 bg-white/5 rounded-xl text-slate-200 text-sm font-medium hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <GoogleIcon />
             {googleLoading ? 'Загрузка...' : 'Продолжить с Google'}
@@ -62,39 +63,27 @@ export default function LoginPage() {
           <Divider />
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm">
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-300 text-sm animate-scale-in">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Field
-              label="Email"
-              type="email"
-              value={email}
-              onChange={setEmail}
-              placeholder="your@email.com"
-            />
-            <Field
-              label="Пароль"
-              type="password"
-              value={password}
-              onChange={setPassword}
-              placeholder="••••••••"
-            />
+            <Field label="Email" type="email" value={email} onChange={setEmail} placeholder="your@email.com" />
+            <Field label="Пароль" type="password" value={password} onChange={setPassword} placeholder="••••••••" />
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-accent-600 hover:bg-accent-500 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-accent-600/30 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {loading ? 'Входим...' : 'Войти'}
             </button>
           </form>
         </div>
 
-        <p className="text-center mt-6 text-sm text-slate-500">
+        <p className="text-center mt-6 text-sm text-slate-400">
           Нет аккаунта?{' '}
-          <Link href="/auth/signup" className="text-indigo-600 font-medium hover:text-indigo-700">
+          <Link href="/auth/signup" className="text-accent-400 font-medium hover:text-accent-300 transition-colors">
             Зарегистрироваться
           </Link>
         </p>
@@ -103,29 +92,19 @@ export default function LoginPage() {
   )
 }
 
-function Field({
-  label,
-  type,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string
-  type: string
-  value: string
-  onChange: (v: string) => void
-  placeholder: string
+function Field({ label, type, value, onChange, placeholder }: {
+  label: string; type: string; value: string; onChange: (v: string) => void; placeholder: string
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1.5">{label}</label>
+      <label className="block text-sm font-medium text-slate-300 mb-1.5">{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required
         placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-slate-800/60 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
       />
     </div>
   )
@@ -134,12 +113,8 @@ function Field({
 function Divider() {
   return (
     <div className="relative my-6">
-      <div className="absolute inset-0 flex items-center">
-        <div className="w-full border-t border-slate-200" />
-      </div>
-      <div className="relative flex justify-center text-xs">
-        <span className="px-3 bg-white text-slate-400">или</span>
-      </div>
+      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10" /></div>
+      <div className="relative flex justify-center text-xs"><span className="px-3 bg-slate-800/80 text-slate-500 rounded">или</span></div>
     </div>
   )
 }
