@@ -4,8 +4,8 @@ interface VoiceSettings { pitch: number; rate: number }
 
 const VOICE_SETTINGS: Record<VoiceType, VoiceSettings> = {
   male:   { pitch: 0.7, rate: 0.85 },
-  female: { pitch: 1.3, rate: 0.9  },
-  warm:   { pitch: 1.0, rate: 0.88 },
+  female: { pitch: 1.4, rate: 0.9  },
+  warm:   { pitch: 1.1, rate: 0.88 },
 }
 
 // Prime the voice list. Browsers (Chrome especially) populate it async; calling
