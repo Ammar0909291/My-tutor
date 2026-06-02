@@ -6,12 +6,15 @@ import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 
-const NEXTAUTH_ERROR_MESSAGES: Record<string, string> = {
-  CredentialsSignin:     'Неверный email или пароль',
+const NEXTAUTH_ERROR_KEYS: Record<string, 'error_invalid' | 'error_required'> = {
+  CredentialsSignin: 'error_invalid',
+}
+
+const NEXTAUTH_ERROR_FALLBACK: Record<string, string> = {
   OAuthAccountNotLinked: 'Этот email уже используется другим способом входа',
-  OAuthSignin:           'Ошибка входа через Google. Попробуй ещё раз.',
-  Callback:              'Ошибка авторизации. Попробуй ещё раз.',
-  Default:               'Произошла ошибка. Попробуй ещё раз.',
+  OAuthSignin: 'Ошибка входа через Google. Попробуй ещё раз.',
+  Callback: 'Ошибка авторизации. Попробуй ещё раз.',
+  Default: 'Произошла ошибка. Попробуй ещё раз.',
 }
 
 export default function LoginPage() {
@@ -23,43 +26,40 @@ export default function LoginPage() {
 }
 
 function LoginForm() {
-  const router = useRouter()
   const params = useSearchParams()
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPwd, setShowPwd] = useState(false)
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
-  // Handle ?error= redirected from NextAuth (e.g. OAuthAccountNotLinked)
   useEffect(() => {
     const errorCode = params.get('error')
     if (errorCode) {
-      setError(NEXTAUTH_ERROR_MESSAGES[errorCode] ?? NEXTAUTH_ERROR_MESSAGES.Default)
+      const key = NEXTAUTH_ERROR_KEYS[errorCode]
+      setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[errorCode] ?? NEXTAUTH_ERROR_FALLBACK.Default))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true); setError('')
+    if (!email || !password) { setError(t('error_required')); return }
+    setLoading(true); setError(null)
 
     const result = await signIn('credentials', { email, password, redirect: false })
     setLoading(false)
 
-    if (!result) {
-      // signIn returned undefined — shouldn't happen with redirect:false, treat as error
-      setError(NEXTAUTH_ERROR_MESSAGES.Default)
-      return
-    }
+    if (!result) { setError(NEXTAUTH_ERROR_FALLBACK.Default); return }
     if (result.error) {
-      setError(NEXTAUTH_ERROR_MESSAGES[result.error] ?? NEXTAUTH_ERROR_MESSAGES.Default)
+      const key = NEXTAUTH_ERROR_KEYS[result.error]
+      setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[result.error] ?? NEXTAUTH_ERROR_FALLBACK.Default))
       return
     }
 
-    // Use full page navigation so the session cookie is picked up cleanly
     const callbackUrl = params.get('callbackUrl') ?? '/dashboard'
     window.location.href = callbackUrl
   }
@@ -69,8 +69,20 @@ function LoginForm() {
     await signIn('google', { callbackUrl: '/dashboard' })
   }
 
+  const features = [
+    { emoji: '🎓', text: t('left_feature_1') },
+    { emoji: '💬', text: t('left_feature_2') },
+    { emoji: '🧠', text: t('left_feature_3') },
+  ]
+
   return (
     <div className="min-h-screen flex" style={{ background: 'var(--bg-base)' }}>
+      <style>{`
+        @keyframes floatCard {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+        }
+      `}</style>
 
       {/* Left decorative panel (desktop) */}
       <div className="hidden lg:flex flex-col justify-between w-[45%] p-12 relative overflow-hidden"
@@ -83,18 +95,56 @@ function LoginForm() {
             <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
           </div>
           <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-            &ldquo;{t('login_quote')}&rdquo;
+            &ldquo;{t('left_quote')}&rdquo;
           </blockquote>
           <div className="flex flex-col gap-2">
-            {['🎓 Персональный план обучения', '💬 Объяснения на русском языке', '🧠 Запоминает твой прогресс'].map((f) => (
-              <span key={f} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
+            {features.map((f) => (
+              <span key={f.text} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
                 style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
-                {f}
+                {f.emoji} {f.text}
               </span>
             ))}
           </div>
+
+          {/* Floating product preview cards */}
+          <div className="relative mt-10" style={{ height: '180px' }}>
+            {/* Card 1 — subject pill */}
+            <div style={{
+              position: 'absolute', top: 0, left: 0,
+              animation: 'floatCard 4s ease-in-out infinite',
+              background: 'var(--bg-elevated)', border: '1px solid var(--border-default)',
+              borderRadius: 12, padding: '10px 16px', fontSize: 13,
+              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap',
+            }}>
+              🎯 {lang === 'ru' ? 'Язык C · Урок 3' : lang === 'hi' ? 'C भाषा · पाठ 3' : 'C Language · Lesson 3'}
+            </div>
+            {/* Card 2 — chat bubble */}
+            <div style={{
+              position: 'absolute', top: 44, left: 24,
+              animation: 'floatCard 4s ease-in-out infinite 1.3s',
+              background: 'rgba(247,129,102,0.12)', border: '1px solid rgba(247,129,102,0.3)',
+              borderRadius: 12, padding: '10px 16px', fontSize: 13,
+              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              maxWidth: 240,
+            }}>
+              💬 {lang === 'ru' ? 'Отлично! Ты понял указатели 🎉' : lang === 'hi' ? 'शाबाश! पॉइंटर्स समझ आए 🎉' : 'Great! You understood pointers 🎉'}
+            </div>
+            {/* Card 3 — code snippet */}
+            <div style={{
+              position: 'absolute', top: 96, left: 12,
+              animation: 'floatCard 4s ease-in-out infinite 2.6s',
+              background: 'var(--bg-base)', border: '1px solid var(--border-default)',
+              borderRadius: 12, padding: '10px 16px', fontSize: 12,
+              color: '#79C0FF', boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+              fontFamily: 'monospace',
+            }}>
+              <span style={{ color: '#FF7B72' }}>int</span>
+              <span style={{ color: 'var(--text-primary)' }}> *ptr = &amp;x;</span>
+            </div>
+          </div>
         </div>
-        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 Уже занимаются 1 200+ студентов</p>
+        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 {t('left_social')}</p>
       </div>
 
       {/* Right form panel */}
@@ -116,7 +166,7 @@ function LoginForm() {
             className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
             style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
             <GoogleIcon />
-            {googleLoading ? 'Загрузка...' : t('login_google')}
+            {googleLoading ? t('login_google_loading') : t('login_google')}
           </button>
 
           {/* Divider */}
@@ -136,18 +186,18 @@ function LoginForm() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_email')}</label>
-              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError('') }} required
+              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError(null) }} required
                 placeholder="your@email.com" className="input-field" />
             </div>
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
                 <Link href="/auth/forgot-password" className="text-xs hover:underline" style={{ color: 'var(--accent-primary)' }}>
-                  Забыл пароль?
+                  {t('login_forgot')}
                 </Link>
               </div>
               <div className="relative">
-                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); setError('') }} required
+                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); setError(null) }} required
                   placeholder="••••••••" className="input-field pr-10" />
                 <button type="button" onClick={() => setShowPwd(!showPwd)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"

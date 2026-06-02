@@ -1,25 +1,26 @@
 'use client'
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 
 export default function SignupPage() {
-  const router = useRouter()
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPwd, setShowPwd] = useState(false)
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string | null>(null)
+
+  const clearError = () => setError(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true); setError('')
+    if (!name || !email || !password) { setError(t('error_required')); return }
+    setLoading(true); setError(null)
     const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -27,13 +28,13 @@ export default function SignupPage() {
     })
     const data = await res.json()
     if (!data.success) {
-      setError(data.error === 'Email already registered' ? 'Этот email уже зарегистрирован' : (data.error ?? 'Ошибка'))
+      setError(data.error === 'Email already registered' ? t('error_email_taken') : (data.error ?? t('error_required')))
       setLoading(false); return
     }
     const result = await signIn('credentials', { email, password, redirect: false })
     setLoading(false)
     if (!result || result.error) {
-      setError('Аккаунт создан. Войди через форму входа.')
+      setError(t('error_account_created'))
       return
     }
     window.location.href = '/onboarding'
@@ -44,8 +45,20 @@ export default function SignupPage() {
     await signIn('google', { callbackUrl: '/onboarding' })
   }
 
+  const features = [
+    { emoji: '🎓', text: t('left_feature_1') },
+    { emoji: '💬', text: t('left_feature_2') },
+    { emoji: '🧠', text: t('left_feature_3') },
+  ]
+
   return (
     <div className="min-h-screen flex" style={{ background: 'var(--bg-base)' }}>
+      <style>{`
+        @keyframes floatCard {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+        }
+      `}</style>
 
       {/* Left decorative panel */}
       <div className="hidden lg:flex flex-col justify-between w-[45%] p-12 relative overflow-hidden"
@@ -58,18 +71,56 @@ export default function SignupPage() {
             <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
           </div>
           <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-            &ldquo;Лучший момент начать учиться — прямо сейчас&rdquo;
+            &ldquo;{t('left_quote')}&rdquo;
           </blockquote>
           <div className="flex flex-col gap-2">
-            {['✦ Первый урок бесплатно', '✦ Без кредитной карты', '✦ Отмена в любое время'].map((f) => (
-              <span key={f} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
+            {features.map((f) => (
+              <span key={f.text} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
                 style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
-                {f}
+                {f.emoji} {f.text}
               </span>
             ))}
           </div>
+
+          {/* Floating product preview cards */}
+          <div className="relative mt-10" style={{ height: '180px' }}>
+            {/* Card 1 — subject */}
+            <div style={{
+              position: 'absolute', top: 0, left: 0,
+              animation: 'floatCard 4s ease-in-out infinite',
+              background: 'var(--bg-elevated)', border: '1px solid var(--border-default)',
+              borderRadius: 12, padding: '10px 16px', fontSize: 13,
+              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap',
+            }}>
+              🎯 {lang === 'ru' ? 'Язык C · Урок 1' : lang === 'hi' ? 'C भाषा · पाठ 1' : 'C Language · Lesson 1'}
+            </div>
+            {/* Card 2 — chat bubble */}
+            <div style={{
+              position: 'absolute', top: 44, left: 24,
+              animation: 'floatCard 4s ease-in-out infinite 1.3s',
+              background: 'rgba(247,129,102,0.12)', border: '1px solid rgba(247,129,102,0.3)',
+              borderRadius: 12, padding: '10px 16px', fontSize: 13,
+              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              maxWidth: 240,
+            }}>
+              💬 {lang === 'ru' ? 'Привет! Начнём с основ C 🚀' : lang === 'hi' ? 'नमस्ते! C से शुरू करते हैं 🚀' : 'Hello! Lets start with C basics 🚀'}
+            </div>
+            {/* Card 3 — code snippet */}
+            <div style={{
+              position: 'absolute', top: 96, left: 12,
+              animation: 'floatCard 4s ease-in-out infinite 2.6s',
+              background: 'var(--bg-base)', border: '1px solid var(--border-default)',
+              borderRadius: 12, padding: '10px 16px', fontSize: 12,
+              color: '#79C0FF', boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+              fontFamily: 'monospace',
+            }}>
+              <span style={{ color: '#FF7B72' }}>printf</span>
+              <span style={{ color: 'var(--text-primary)' }}>(&quot;Hello, World!&quot;);</span>
+            </div>
+          </div>
         </div>
-        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 Уже занимаются 1 200+ студентов</p>
+        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 {t('left_social')}</p>
       </div>
 
       {/* Right form panel */}
@@ -89,12 +140,12 @@ export default function SignupPage() {
             className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
             style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
             <GoogleIcon />
-            {googleLoading ? 'Загрузка...' : t('signup_google')}
+            {googleLoading ? t('signup_google_loading') : t('signup_google')}
           </button>
 
           <div className="relative my-5">
             <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>или</span></div>
+            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
           </div>
 
           {error && (
@@ -105,20 +156,21 @@ export default function SignupPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {[
-              { key: 'signup_name', type: 'text',     value: name,     onChange: setName,     placeholder: 'Иван'              },
-              { key: 'signup_email', type: 'email',    value: email,    onChange: setEmail,    placeholder: 'your@email.com'    },
-            ].map((f) => (
-              <div key={f.key}>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t(f.key as any)}</label>
-                <input type={f.type} value={f.value} onChange={(e) => f.onChange(e.target.value)} required placeholder={f.placeholder} className="input-field" />
-              </div>
-            ))}
+            <div>
+              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('signup_name')}</label>
+              <input type="text" value={name} onChange={(e) => { setName(e.target.value); clearError() }} required
+                placeholder={lang === 'ru' ? 'Иван' : lang === 'hi' ? 'राहुल' : 'John'} className="input-field" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('signup_email')}</label>
+              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); clearError() }} required
+                placeholder="your@email.com" className="input-field" />
+            </div>
             <div>
               <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('signup_password')}</label>
               <div className="relative">
-                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required
-                  placeholder="Минимум 8 символов" className="input-field pr-10" />
+                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); clearError() }} required
+                  placeholder={t('signup_password_placeholder')} className="input-field pr-10" />
                 <button type="button" onClick={() => setShowPwd(!showPwd)}
                   className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-dim)' }}>
                   {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
