@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       data: {
         userId: session.user.id,
         subjectId: subject.id,
-        title: `${subject.name} — ${new Date().toLocaleDateString("ru-RU")}`,
+        title: `${subject.name} — ${new Date().toLocaleDateString("ru-RU", { day: '2-digit', month: '2-digit', year: 'numeric' })}`,
         contextSnapshot: {
           profileLevel: profile?.currentLevel,
           learningPathId: activePath?.id,

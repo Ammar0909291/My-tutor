@@ -61,7 +61,7 @@ export async function deleteSessionState(sessionId: string): Promise<void> {
 export async function getUserActiveSession(userId: string): Promise<string | null> {
   try {
     if (!redis) return null;
-    return redis.get(`user:${userId}:active_session`);
+    return await redis.get(`user:${userId}:active_session`);
   } catch {
     return null;
   }

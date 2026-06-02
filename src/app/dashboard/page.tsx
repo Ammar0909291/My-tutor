@@ -235,7 +235,7 @@ export default async function DashboardPage() {
                               {s.title ?? s.subject.name}
                             </p>
                             <p className="text-xs mt-0.5" style={{ color: 'var(--text-dim)' }}>
-                              {new Date(s.startedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
+                              {new Date(s.startedAt).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
                             </p>
                             {s.summary && (
                               <p className="text-xs mt-1.5 leading-relaxed line-clamp-2" style={{ color: 'var(--text-secondary)' }}>

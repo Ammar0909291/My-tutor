@@ -18,7 +18,7 @@ export default async function LearnPage() {
     },
   })
 
-  if (!user?.onboardingCompleted && !user?.profile) redirect('/onboarding')
+  if (!user?.onboardingCompleted) redirect('/onboarding')
 
   const profile = user?.profile
   const primarySubject = profile?.subjects[0]?.subject

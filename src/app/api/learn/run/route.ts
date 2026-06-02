@@ -11,7 +11,7 @@ const schema = z.object({
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
@@ -35,13 +35,13 @@ export async function POST(req: Request) {
     })
 
     const output = completion.choices[0]?.message?.content ?? '(нет вывода)'
-    return NextResponse.json({ output })
+    return NextResponse.json({ success: true, output })
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return NextResponse.json({ error: err.errors[0].message }, { status: 400 })
+      return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
     console.error('[learn/run]', err)
     const msg = err instanceof Error ? err.message : String(err)
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return NextResponse.json({ success: false, error: msg }, { status: 500 })
   }
 }
