@@ -32,9 +32,9 @@ const LANG_DESC_KEY = {
 } as const
 
 const VOICES = [
-  { key: 'male',   label: 'М‑голос',  icon: '👨‍🏫', desc: 'Строгий и чёткий',     pitch: 0.75, rate: 0.85 },
-  { key: 'female', label: 'Ж‑голос',  icon: '👩‍🏫', desc: 'Мягкий и спокойный',   pitch: 1.25, rate: 0.9  },
-  { key: 'warm',   label: 'Тёплый',   icon: '😊',   desc: 'Дружелюбный и живой',  pitch: 1.0,  rate: 0.87 },
+  { key: 'male',   labelKey: 'voice_male'   as const, icon: '👨‍🏫', pitch: 0.75, rate: 0.85 },
+  { key: 'female', labelKey: 'voice_female' as const, icon: '👩‍🏫', pitch: 1.25, rate: 0.9  },
+  { key: 'warm',   labelKey: 'voice_warm'   as const, icon: '😊',   pitch: 1.0,  rate: 0.87 },
 ]
 
 const PREVIEW_TEXT: Record<TeachingLang, string> = {
@@ -53,7 +53,7 @@ const STEPS_COUNT = 4
 
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
   const router = useRouter()
-  const { t } = useLanguage()
+  const { t, setLang } = useLanguage()
   const [step, setStep] = useState(1)
   const [subjectSlug, setSubjectSlug] = useState('')
   const [teachingLang, setTeachingLang] = useState<TeachingLang>('ru')
@@ -172,7 +172,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                 {TEACHING_LANGS.map((l) => {
                   const selected = teachingLang === l.key
                   return (
-                    <button key={l.key} onClick={() => setTeachingLang(l.key)}
+                    <button key={l.key} onClick={() => { setTeachingLang(l.key); setLang(l.key) }}
                       className="p-5 rounded-2xl text-center transition-all duration-200 hover:-translate-y-0.5 relative flex flex-col items-center gap-3"
                       style={{
                         background: selected ? l.subAccent : 'var(--bg-surface)',
@@ -259,8 +259,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                       }}>
                       <span className="text-2xl w-10 text-center shrink-0">{v.icon}</span>
                       <div className="flex-1 min-w-0">
-                        <div className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{v.label}</div>
-                        <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{v.desc}</div>
+                        <div className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t(v.labelKey)}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <button

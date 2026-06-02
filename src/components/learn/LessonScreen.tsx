@@ -24,11 +24,17 @@ function getSpeechRecognition(): SpeechRecognitionCtor | null {
 }
 
 // ─── Config ───────────────────────────────────────────────────────────────────
-const VOICE_CONFIG: Record<VoiceType, { pitch: number; rate: number; label: string }> = {
-  male:   { ...VOICE_SETTINGS.male,   label: 'М' },
-  female: { ...VOICE_SETTINGS.female, label: 'Ж' },
-  warm:   { ...VOICE_SETTINGS.warm,   label: 'Т' },
+const VOICE_CONFIG: Record<VoiceType, { pitch: number; rate: number }> = {
+  male:   { ...VOICE_SETTINGS.male   },
+  female: { ...VOICE_SETTINGS.female },
+  warm:   { ...VOICE_SETTINGS.warm   },
 }
+const VOICE_LABELS_BY_LANG: Record<TeachingLang, Record<VoiceType, string>> = {
+  ru: { male: 'Мужской', female: 'Женский', warm: 'Тёплый' },
+  en: { male: 'Male',    female: 'Female',  warm: 'Warm'    },
+  hi: { male: 'पुरुष',   female: 'महिला',   warm: 'मधुर'   },
+}
+const LANG_FLAG: Record<TeachingLang, string> = { ru: '🇷🇺', en: '🇬🇧', hi: '🇮🇳' }
 const VOICE_MAP: Record<string, VoiceType> = {
   male: 'male', female: 'female', warm: 'warm',
   alexei: 'male', maria: 'female', dmitry: 'warm',
@@ -459,6 +465,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
         <div className="flex items-center gap-2 text-sm">
           <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ background: 'var(--bg-elevated)', color: badge.accent }}>{badge.label}</span>
+          <span className="text-base leading-none" title={teachingLanguage}>{LANG_FLAG[teachingLanguage]}</span>
           <span style={{ color: 'var(--text-secondary)' }}>{t('lesson_with')}</span>
           <span className="font-mono tabular-nums text-xs" style={{ color: 'var(--text-secondary)' }}>{formatTimer(elapsed)}</span>
         </div>
@@ -467,14 +474,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
         {/* Voice buttons */}
         <div className="flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
-          {(Object.entries(VOICE_CONFIG) as [VoiceType, typeof VOICE_CONFIG[VoiceType]][]).map(([k, v]) => (
+          {(Object.keys(VOICE_CONFIG) as VoiceType[]).map((k) => (
             <button key={k} onClick={() => handleVoiceChange(k)}
               className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-150"
               style={{
                 background: voiceType === k ? 'var(--accent-primary)' : 'transparent',
                 color: voiceType === k ? '#fff' : 'var(--text-secondary)',
               }}>
-              {v.label}
+              {VOICE_LABELS_BY_LANG[teachingLanguage][k]}
             </button>
           ))}
         </div>

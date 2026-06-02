@@ -26,6 +26,12 @@ const VOICE_LABELS: Record<string, string> = {
   EXAVITQu4vr4xnSDxMaL: 'Наталья',
 }
 
+const TEACHING_LANG_DISPLAY: Record<string, string> = {
+  ru: '🇷🇺 Русский',
+  en: '🇬🇧 Английский',
+  hi: '🇮🇳 Хинди',
+}
+
 export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
@@ -37,7 +43,11 @@ export default async function DashboardPage() {
         onboardingCompleted: true,
         name: true,
         profile: {
-          include: {
+          select: {
+            displayName: true,
+            voiceId: true,
+            selfDescription: true,
+            teachingLanguage: true,
             subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } },
           },
         },
@@ -58,6 +68,7 @@ export default async function DashboardPage() {
   const enrolledSubjects = profile?.subjects ?? []
   const primarySubject = enrolledSubjects[0]?.subject
   const voiceLabel = profile?.voiceId ? (VOICE_LABELS[profile.voiceId] ?? profile.voiceId) : null
+  const langDisplay = profile?.teachingLanguage ? (TEACHING_LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Студент'
 
   return (
@@ -250,6 +261,11 @@ export default async function DashboardPage() {
                 <ProfileRow label="Голос репетитора">
                   <span className="text-sm text-zinc-300">{voiceLabel ?? '—'}</span>
                 </ProfileRow>
+                {langDisplay && (
+                  <ProfileRow label="Язык обучения">
+                    <span className="text-sm text-zinc-300">{langDisplay}</span>
+                  </ProfileRow>
+                )}
                 {profile?.selfDescription && (
                   <ProfileRow label="О себе">
                     <p className="text-xs leading-relaxed line-clamp-4" style={{ color: '#52525B' }}>{profile.selfDescription}</p>
