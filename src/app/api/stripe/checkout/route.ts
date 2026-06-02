@@ -16,8 +16,8 @@ export async function POST(req: Request) {
       customer: customerId,
       mode: "subscription",
       line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
-      success_url: `${origin}/billing?success=true`,
-      cancel_url: `${origin}/billing?canceled=true`,
+      success_url: `${origin}/dashboard?upgraded=true`,
+      cancel_url: `${origin}/dashboard`,
       metadata: { userId: session.user.id },
     });
 

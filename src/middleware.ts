@@ -2,7 +2,7 @@ import { auth } from '@/lib/auth'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-const PROTECTED = ['/dashboard', '/onboarding', '/learn', '/profile', '/billing']
+const PROTECTED = ['/dashboard', '/onboarding', '/learn', '/profile', '/billing', '/settings']
 const AUTH_ONLY = ['/auth/login', '/auth/signup', '/auth/forgot-password']
 
 export default auth(function middleware(req: NextRequest) {

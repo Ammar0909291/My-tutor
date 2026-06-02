@@ -422,19 +422,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     return c
   }, [messages])
 
-  // ── Error screens ────────────────────────────────────────────────────────────
-  if (initError === 'upgrade') {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--bg-base)' }}>
-        <div className="text-center max-w-sm">
-          <div className="text-5xl mb-5">⏻</div>
-          <h2 className="text-xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)' }}>{t('lesson_upgrade_title')}</h2>
-          <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('lesson_upgrade_sub')}</p>
-          <Link href="/billing" className="btn-primary px-6 py-3">{t('lesson_upgrade_btn')}</Link>
-          <Link href="/dashboard" className="block mt-4 text-sm" style={{ color: 'var(--text-dim)' }}>{t('lesson_back_base')}</Link>
-        </div>
-      </div>
-    )
+  // ── Paywall state ─────────────────────────────────────────────────────────────
+  const [paywallLoading, setPaywallLoading] = useState(false)
+  async function handlePaywallCheckout() {
+    setPaywallLoading(true)
+    try {
+      const res = await fetch('/api/stripe/checkout', { method: 'POST' })
+      const data = await res.json() as { success?: boolean; data?: { url?: string } }
+      if (data.success && data.data?.url) window.location.href = data.data.url
+    } catch { /* ignore */ } finally { setPaywallLoading(false) }
   }
   if (initError) {
     return (
@@ -451,6 +447,34 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // ── Main layout ──────────────────────────────────────────────────────────────
   return (
     <div className="h-screen flex flex-col overflow-hidden" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+
+      {/* ── Paywall overlay ───────────────────────────────────────────────── */}
+      {initError === 'upgrade' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }}>
+          <div className="w-full max-w-sm rounded-2xl p-7 text-center"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', boxShadow: '0 24px 80px rgba(0,0,0,0.6)' }}>
+            <div className="text-5xl mb-4" style={{ color: 'var(--accent-primary)' }}>🔒</div>
+            <h2 className="text-xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('paywall_title')}</h2>
+            <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{t('paywall_sub')}</p>
+            <p className="text-2xl font-black mb-5" style={{ color: 'var(--accent-primary)' }}>{t('paywall_price')}</p>
+            <ul className="space-y-2 mb-6 text-left">
+              {(['paywall_f1', 'paywall_f2', 'paywall_f3'] as const).map((k) => (
+                <li key={k} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-primary)' }}>
+                  <span style={{ color: '#56D364' }}>✓</span> {t(k)}
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={handlePaywallCheckout}
+              disabled={paywallLoading}
+              className="btn-primary w-full py-3.5 font-bold mb-3 disabled:opacity-60 disabled:cursor-not-allowed">
+              {paywallLoading ? '...' : t('paywall_cta')}
+            </button>
+            <p className="text-xs" style={{ color: 'var(--text-dim)' }}>{t('paywall_cancel')}</p>
+          </div>
+        </div>
+      )}
 
       {/* ── Top bar ────────────────────────────────────────────────────────── */}
       <header className="flex items-center gap-4 px-4 shrink-0" style={{ height: 52, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}>

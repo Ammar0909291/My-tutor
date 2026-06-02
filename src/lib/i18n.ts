@@ -155,6 +155,36 @@ export const translations = {
     lesson_upgrade_btn: 'Активировать',
     lesson_back_base: '← База',
     lesson_scroll_down: '↓',
+
+    /* ── Paywall overlay ── */
+    paywall_title: 'Бесплатный урок завершён',
+    paywall_sub: 'Оформи подписку чтобы продолжить обучение',
+    paywall_price: '990 ₽ / месяц',
+    paywall_f1: 'Безлимитные уроки',
+    paywall_f2: 'История сессий',
+    paywall_f3: 'Голосовой репетитор',
+    paywall_cta: 'Оформить подписку →',
+    paywall_cancel: 'Отменить можно в любое время',
+
+    /* ── Dashboard upgrade ── */
+    dash_upgrade_banner: 'Твой бесплатный урок использован · Оформи Pro чтобы продолжить',
+    dash_upgrade_cta: 'Оформить Pro →',
+
+    /* ── Settings ── */
+    settings_title: 'Настройки',
+    settings_plan: 'Тариф',
+    settings_plan_free: 'Бесплатный',
+    settings_plan_pro: 'Pro',
+    settings_manage: 'Управление подпиской',
+    settings_upgrade: 'Перейти на Pro',
+    settings_voice: 'Голос репетитора',
+    settings_lang: 'Язык обучения',
+    settings_account: 'Аккаунт',
+    settings_name: 'Имя',
+    settings_email: 'Email',
+    settings_save: 'Сохранить',
+    settings_saved: 'Сохранено ✓',
+    settings_back: '← Панель',
   },
   en: {
     /* ── Landing ── */
@@ -310,6 +340,36 @@ export const translations = {
     lesson_upgrade_btn: 'Activate',
     lesson_back_base: '← Dashboard',
     lesson_scroll_down: '↓',
+
+    /* ── Paywall overlay ── */
+    paywall_title: 'Free lesson completed',
+    paywall_sub: 'Subscribe to continue learning',
+    paywall_price: '990 ₽ / month',
+    paywall_f1: 'Unlimited lessons',
+    paywall_f2: 'Session history',
+    paywall_f3: 'Voice tutor',
+    paywall_cta: 'Subscribe →',
+    paywall_cancel: 'Cancel anytime',
+
+    /* ── Dashboard upgrade ── */
+    dash_upgrade_banner: 'Your free lesson has been used · Get Pro to continue',
+    dash_upgrade_cta: 'Get Pro →',
+
+    /* ── Settings ── */
+    settings_title: 'Settings',
+    settings_plan: 'Plan',
+    settings_plan_free: 'Free',
+    settings_plan_pro: 'Pro',
+    settings_manage: 'Manage subscription',
+    settings_upgrade: 'Upgrade to Pro',
+    settings_voice: 'Tutor voice',
+    settings_lang: 'Teaching language',
+    settings_account: 'Account',
+    settings_name: 'Name',
+    settings_email: 'Email',
+    settings_save: 'Save',
+    settings_saved: 'Saved ✓',
+    settings_back: '← Dashboard',
   },
   hi: {
     /* ── Landing ── */
@@ -465,6 +525,36 @@ export const translations = {
     lesson_upgrade_btn: 'सक्रिय करें',
     lesson_back_base: '← डैशबोर्ड',
     lesson_scroll_down: '↓',
+
+    /* ── Paywall overlay ── */
+    paywall_title: 'मुफ्त पाठ समाप्त',
+    paywall_sub: 'पढ़ाई जारी रखने के लिए सब्सक्राइब करें',
+    paywall_price: '₹790 / माह',
+    paywall_f1: 'असीमित पाठ',
+    paywall_f2: 'सत्र इतिहास',
+    paywall_f3: 'आवाज़ ट्यूटर',
+    paywall_cta: 'सब्सक्राइब करें →',
+    paywall_cancel: 'कभी भी रद्द करें',
+
+    /* ── Dashboard upgrade ── */
+    dash_upgrade_banner: 'आपका मुफ्त पाठ समाप्त हो गया · जारी रखने के लिए Pro लें',
+    dash_upgrade_cta: 'Pro लें →',
+
+    /* ── Settings ── */
+    settings_title: 'सेटिंग्स',
+    settings_plan: 'प्लान',
+    settings_plan_free: 'मुफ्त',
+    settings_plan_pro: 'Pro',
+    settings_manage: 'सब्सक्रिप्शन प्रबंधित करें',
+    settings_upgrade: 'Pro पर जाएं',
+    settings_voice: 'ट्यूटर की आवाज़',
+    settings_lang: 'पढ़ाई की भाषा',
+    settings_account: 'अकाउंट',
+    settings_name: 'नाम',
+    settings_email: 'ईमेल',
+    settings_save: 'सहेजें',
+    settings_saved: 'सहेजा गया ✓',
+    settings_back: '← डैशबोर्ड',
   },
 } as const
 

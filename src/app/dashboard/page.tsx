@@ -6,6 +6,7 @@ import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
+import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 
 const SUBJECT_META: Record<string, { icon: string; label: string; gradient: string; border: string; glow: string }> = {
   c:       { icon: '⚙️', label: 'C язык',          gradient: 'from-blue-600/20 to-cyan-600/10',     border: 'border-blue-500/30',    glow: 'shadow-blue-500/10'   },
@@ -36,7 +37,7 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const [user, recentSessions, totalLessons] = await Promise.all([
+  const [user, recentSessions, totalLessons, subscription] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },
       select: {
@@ -60,6 +61,7 @@ export default async function DashboardPage() {
       include: { subject: { select: { name: true, slug: true } } },
     }),
     prisma.learnSession.count({ where: { userId: session.user.id } }),
+    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
   ])
 
   if (!user?.onboardingCompleted) redirect('/onboarding')
@@ -70,6 +72,8 @@ export default async function DashboardPage() {
   const voiceLabel = profile?.voiceId ? (VOICE_LABELS[profile.voiceId] ?? profile.voiceId) : null
   const langDisplay = profile?.teachingLanguage ? (TEACHING_LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Студент'
+  const isPro = subscription?.status === 'ACTIVE'
+  const showUpgradeBanner = !isPro && (subscription?.freeSessionUsed ?? false)
 
   return (
     <div className="min-h-screen text-white" style={{ background: '#0A0A0F' }}>
@@ -102,9 +106,17 @@ export default async function DashboardPage() {
 
         {/* Greeting */}
         <div className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-            Привет, {displayName}! 👋
-          </h1>
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">
+              Привет, {displayName}! 👋
+            </h1>
+            {isPro && (
+              <span className="px-2.5 py-1 rounded-full text-xs font-black tracking-wider"
+                style={{ background: 'linear-gradient(135deg, #F6B444, #E8913A)', color: '#fff' }}>
+                PRO
+              </span>
+            )}
+          </div>
           <p className="mt-2 text-sm" style={{ color: '#52525B' }}>Твоя персональная доска обучения</p>
         </div>
 
@@ -125,6 +137,17 @@ export default async function DashboardPage() {
 
           {/* Main content */}
           <div className="lg:col-span-2 space-y-5">
+
+            {/* Upgrade banner */}
+            {showUpgradeBanner && (
+              <div className="flex items-center justify-between gap-4 px-5 py-4 rounded-2xl border"
+                style={{ background: 'rgba(247,129,102,0.07)', borderColor: 'rgba(247,129,102,0.25)' }}>
+                <p className="text-sm font-medium" style={{ color: '#F78166' }}>
+                  Твой бесплатный урок использован · Оформи Pro чтобы продолжить
+                </p>
+                <UpgradeButton />
+              </div>
+            )}
 
             {/* Start lesson hero */}
             <div className="relative rounded-2xl p-7 overflow-hidden border border-white/[0.07]"
@@ -283,6 +306,7 @@ export default async function DashboardPage() {
                 {[
                   { label: 'Начать урок', href: '/learn', icon: Sparkles },
                   { label: 'История сессий', href: '#history', icon: Clock },
+                  { label: 'Настройки', href: '/settings', icon: BookOpen },
                 ].map(({ label, href, icon: Icon }) => (
                   <Link key={label} href={href}
                     className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white/[0.05] transition-colors group">
