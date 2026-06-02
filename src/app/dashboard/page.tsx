@@ -1,21 +1,21 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { BookOpen, Clock, Flame, GraduationCap, Layers, Sparkles, ArrowRight } from 'lucide-react'
+import { BookOpen, Clock, Flame, GraduationCap, Layers, Sparkles, ArrowRight, Settings } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
 import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 
-const SUBJECT_META: Record<string, { icon: string; label: string; gradient: string; border: string; glow: string }> = {
-  c:       { icon: '⚙️', label: 'C язык',          gradient: 'from-blue-600/20 to-cyan-600/10',     border: 'border-blue-500/30',    glow: 'shadow-blue-500/10'   },
-  cpp:     { icon: '🔷', label: 'C++',              gradient: 'from-cyan-600/20 to-indigo-600/10',   border: 'border-cyan-500/30',    glow: 'shadow-cyan-500/10'   },
-  python:  { icon: '🐍', label: 'Python',           gradient: 'from-emerald-600/20 to-teal-600/10',  border: 'border-emerald-500/30', glow: 'shadow-emerald-500/10' },
-  english: { icon: '🇬🇧', label: 'Английский язык', gradient: 'from-violet-600/20 to-purple-600/10', border: 'border-violet-500/30',  glow: 'shadow-violet-500/10' },
+const SUBJECT_META: Record<string, { icon: string; label: string; color: string; bg: string; border: string }> = {
+  c:       { icon: 'C',   label: 'C язык',           color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
+  cpp:     { icon: 'C++', label: 'C++',               color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
+  python:  { icon: '🐍',  label: 'Python',            color: '#56D364', bg: 'rgba(86,211,100,0.08)',   border: 'rgba(86,211,100,0.2)'   },
+  english: { icon: '🇬🇧', label: 'Английский язык',  color: '#E3B341', bg: 'rgba(227,179,65,0.08)',   border: 'rgba(227,179,65,0.2)'   },
 }
-function subjectMeta(slug: string) {
-  return SUBJECT_META[slug] ?? { icon: '📘', label: slug, gradient: 'from-accent-600/20 to-accent-600/10', border: 'border-accent-500/30', glow: 'shadow-accent-500/10' }
+function sm(slug: string) {
+  return SUBJECT_META[slug] ?? { icon: '📘', label: slug, color: '#F78166', bg: 'rgba(247,129,102,0.08)', border: 'rgba(247,129,102,0.2)' }
 }
 
 const VOICE_LABELS: Record<string, string> = {
@@ -26,12 +26,7 @@ const VOICE_LABELS: Record<string, string> = {
   ErXwobaYiN019PkySvjV: 'Антон',
   EXAVITQu4vr4xnSDxMaL: 'Наталья',
 }
-
-const TEACHING_LANG_DISPLAY: Record<string, string> = {
-  ru: '🇷🇺 Русский',
-  en: '🇬🇧 Английский',
-  hi: '🇮🇳 Хинди',
-}
+const LANG_DISPLAY: Record<string, string> = { ru: '🇷🇺 Русский', en: '🇬🇧 English', hi: '🇮🇳 हिंदी' }
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -70,106 +65,112 @@ export default async function DashboardPage() {
   const enrolledSubjects = profile?.subjects ?? []
   const primarySubject = enrolledSubjects[0]?.subject
   const voiceLabel = profile?.voiceId ? (VOICE_LABELS[profile.voiceId] ?? profile.voiceId) : null
-  const langDisplay = profile?.teachingLanguage ? (TEACHING_LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
+  const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Студент'
   const isPro = subscription?.status === 'ACTIVE'
   const showUpgradeBanner = !isPro && (subscription?.freeSessionUsed ?? false)
 
   return (
-    <div className="min-h-screen text-white" style={{ background: '#0A0A0F' }}>
+    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
 
-      {/* Ambient background */}
+      {/* Ambient glow — matches landing page */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <div className="absolute top-[-200px] right-[-100px] w-[600px] h-[600px] rounded-full opacity-20"
-          style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.8) 0%, transparent 70%)', filter: 'blur(100px)' }} />
-        <div className="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] rounded-full opacity-15"
-          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.8) 0%, transparent 70%)', filter: 'blur(120px)' }} />
+        <div className="absolute top-[-150px] right-[-50px] w-[500px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(247,129,102,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(121,192,255,0.06) 0%, transparent 70%)', filter: 'blur(100px)' }} />
       </div>
 
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 border-b border-white/[0.06]" style={{ background: 'rgba(10,10,15,0.85)', backdropFilter: 'blur(20px)' }}>
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
-              <span className="text-white font-black text-sm">MT</span>
-            </div>
-            <span className="font-bold text-white text-sm tracking-tight">My Tutor</span>
+      {/* Navbar — same style as landing page */}
+      <nav className="sticky top-0 z-50"
+        style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
+        <div className="max-w-6xl mx-auto px-5 h-[60px] flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-xl">🔥</span>
+            <span className="font-bold text-base" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
           </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm hidden sm:block" style={{ color: '#52525B' }}>{session.user.email}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm hidden sm:block" style={{ color: 'var(--text-dim)' }}>{session.user.email}</span>
+            <Link href="/settings" className="btn-ghost text-xs px-3 py-1.5 flex items-center gap-1.5">
+              <Settings size={13} /> Настройки
+            </Link>
             <SignOutButton />
           </div>
         </div>
       </nav>
 
-      <main className="relative z-10 max-w-6xl mx-auto px-6 py-10 animate-fade-in">
+      <main className="relative z-10 max-w-6xl mx-auto px-5 py-10">
 
         {/* Greeting */}
         <div className="mb-10">
-          <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-              Привет, {displayName}! 👋
+          <div className="flex items-center gap-3 flex-wrap mb-2">
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+              Привет, <span className="text-gradient-coral">{displayName}</span>! 👋
             </h1>
             {isPro && (
-              <span className="px-2.5 py-1 rounded-full text-xs font-black tracking-wider"
-                style={{ background: 'linear-gradient(135deg, #F6B444, #E8913A)', color: '#fff' }}>
+              <span className="badge" style={{ background: 'linear-gradient(135deg,#F6B444,#E8913A)', color: '#fff', border: 'none', fontWeight: 800, letterSpacing: '0.08em' }}>
                 PRO
               </span>
             )}
           </div>
-          <p className="mt-2 text-sm" style={{ color: '#52525B' }}>Твоя персональная доска обучения</p>
+          <p className="text-sm" style={{ color: 'var(--text-dim)' }}>Твоя персональная доска обучения</p>
         </div>
 
-        {/* Stats */}
+        {/* Stats row */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <StatCard icon={GraduationCap} label="Всего уроков" value={String(totalLessons)} />
-          <StatCard icon={Layers} label="Предметов" value={String(enrolledSubjects.length)} />
+          <StatCard icon={GraduationCap} label="Уроков пройдено" value={String(totalLessons)} color="#F78166" />
+          <StatCard icon={Layers}        label="Предметов"        value={String(enrolledSubjects.length)} color="#79C0FF" />
           <StatCard
-            icon={Flame}
-            label="Последний урок"
+            icon={Flame} label="Последний урок" color="#56D364"
             value={recentSessions[0]
               ? new Date(recentSessions[0].startedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
               : '—'}
           />
         </div>
 
+        {/* Upgrade banner */}
+        {showUpgradeBanner && (
+          <div className="flex items-center justify-between gap-4 px-5 py-4 rounded-2xl mb-6"
+            style={{ background: 'rgba(247,129,102,0.07)', border: '1px solid rgba(247,129,102,0.25)' }}>
+            <p className="text-sm font-medium" style={{ color: '#F78166' }}>
+              ✦ Твой бесплатный урок использован · Оформи Pro чтобы продолжить
+            </p>
+            <UpgradeButton />
+          </div>
+        )}
+
         <div className="grid lg:grid-cols-3 gap-6">
 
-          {/* Main content */}
+          {/* ── Left column ── */}
           <div className="lg:col-span-2 space-y-5">
 
-            {/* Upgrade banner */}
-            {showUpgradeBanner && (
-              <div className="flex items-center justify-between gap-4 px-5 py-4 rounded-2xl border"
-                style={{ background: 'rgba(247,129,102,0.07)', borderColor: 'rgba(247,129,102,0.25)' }}>
-                <p className="text-sm font-medium" style={{ color: '#F78166' }}>
-                  Твой бесплатный урок использован · Оформи Pro чтобы продолжить
-                </p>
-                <UpgradeButton />
-              </div>
-            )}
-
-            {/* Start lesson hero */}
-            <div className="relative rounded-2xl p-7 overflow-hidden border border-white/[0.07]"
-              style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(15,15,24,0.95) 100%)' }}>
+            {/* Hero start lesson card */}
+            <div className="relative rounded-2xl p-7 overflow-hidden"
+              style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+              {/* Coral glow */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl"
-                style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(99,102,241,0.15) 0%, transparent 60%)' }} />
+                style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(247,129,102,0.1) 0%, transparent 60%)' }} />
+
               <div className="relative flex items-start gap-4">
                 {primarySubject && (
-                  <div className={`w-14 h-14 rounded-2xl border bg-gradient-to-br ${subjectMeta(primarySubject.slug).gradient} ${subjectMeta(primarySubject.slug).border} flex items-center justify-center text-2xl shrink-0`}>
-                    {subjectMeta(primarySubject.slug).icon}
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-xl font-black shrink-0"
+                    style={{ background: sm(primarySubject.slug).bg, border: `1px solid ${sm(primarySubject.slug).border}`, color: sm(primarySubject.slug).color }}>
+                    {sm(primarySubject.slug).icon}
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
                   {primarySubject && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold text-accent-300 mb-3"
-                      style={{ background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.2)' }}>
-                      <Sparkles size={11} />
-                      {subjectMeta(primarySubject.slug).label}
+                    <span className="badge badge-coral mb-3 inline-flex">
+                      <Sparkles size={10} className="mr-1" />
+                      {sm(primarySubject.slug).label}
                     </span>
                   )}
-                  <h2 className="text-xl font-black text-white tracking-tight mb-1">Готов к уроку?</h2>
-                  <p className="text-sm leading-relaxed line-clamp-2" style={{ color: '#71717A' }}>{profile?.selfDescription}</p>
+                  <h2 className="text-xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                    Готов к уроку?
+                  </h2>
+                  <p className="text-sm leading-relaxed line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+                    {profile?.selfDescription}
+                  </p>
                 </div>
               </div>
               <div className="relative mt-6">
@@ -178,32 +179,24 @@ export default async function DashboardPage() {
             </div>
 
             {/* Enrolled subjects */}
-            <div className="rounded-2xl border border-white/[0.07] overflow-hidden" style={{ background: '#0F0F18' }}>
-              <div className="px-5 py-4 border-b border-white/[0.06] flex items-center gap-2">
-                <Layers size={14} className="text-accent-400" />
-                <h3 className="font-bold text-white text-sm">Мои программы</h3>
-              </div>
+            <SectionCard title="Мои программы" icon={Layers}>
               {enrolledSubjects.length === 0 ? (
-                <div className="py-14 text-center px-6">
-                  <div className="text-4xl mb-3">🧭</div>
-                  <p className="font-bold text-white mb-1.5">Пока нет программ</p>
-                  <p className="text-sm" style={{ color: '#71717A' }}>Заверши онбординг, чтобы выбрать предмет.</p>
-                </div>
+                <EmptyState emoji="🧭" title="Пока нет программ" sub="Заверши онбординг, чтобы выбрать предмет." />
               ) : (
                 <div className="grid sm:grid-cols-2 gap-3 p-4">
                   {enrolledSubjects.map((ps) => {
-                    const m = subjectMeta(ps.subject.slug)
+                    const m = sm(ps.subject.slug)
                     return (
-                      <div key={ps.id}
-                        className={`group flex items-center gap-3 p-4 rounded-xl border bg-gradient-to-br ${m.gradient} ${m.border} hover:-translate-y-0.5 transition-all duration-200 cursor-default`}>
-                        <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
-                          style={{ background: 'rgba(255,255,255,0.05)' }}>
+                      <div key={ps.id} className="flex items-center gap-3 p-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
+                        style={{ background: m.bg, border: `1px solid ${m.border}` }}>
+                        <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl font-black shrink-0"
+                          style={{ background: 'var(--bg-elevated)', color: m.color }}>
                           {m.icon}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-bold text-white text-sm truncate">{ps.subject.name}</p>
-                          <p className="text-xs truncate mt-0.5" style={{ color: '#52525B' }}>
-                            {ps.level ? `Уровень: ${ps.level}` : m.label}
+                          <p className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{ps.subject.name}</p>
+                          <p className="text-xs truncate mt-0.5" style={{ color: 'var(--text-dim)' }}>
+                            {m.label}
                           </p>
                         </div>
                       </div>
@@ -211,43 +204,41 @@ export default async function DashboardPage() {
                   })}
                 </div>
               )}
-            </div>
+            </SectionCard>
 
             {/* Session history */}
-            <div className="rounded-2xl border border-white/[0.07] overflow-hidden" style={{ background: '#0F0F18' }}>
-              <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Clock size={14} className="text-accent-400" />
-                  <h3 className="font-bold text-white text-sm">История уроков</h3>
-                </div>
-                {recentSessions.length > 0 && (
-                  <span className="text-xs" style={{ color: '#3F3F46' }}>последние {recentSessions.length}</span>
-                )}
-              </div>
+            <SectionCard
+              title="История уроков"
+              icon={Clock}
+              right={recentSessions.length > 0
+                ? <span className="text-xs" style={{ color: 'var(--text-dim)' }}>последние {recentSessions.length}</span>
+                : undefined}
+            >
               {recentSessions.length === 0 ? (
-                <div className="py-16 text-center px-6">
-                  <div className="text-5xl mb-4">📚</div>
-                  <p className="font-bold text-white mb-1.5">Уроков пока нет</p>
-                  <p className="text-sm" style={{ color: '#71717A' }}>Начни свой первый урок — он появится здесь.</p>
-                </div>
+                <EmptyState emoji="📚" title="Уроков пока нет" sub="Начни свой первый урок — он появится здесь." />
               ) : (
-                <ul className="divide-y" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
+                <ul className="divide-y" style={{ borderColor: 'var(--border-default)' }}>
                   {recentSessions.map((s) => {
-                    const m = subjectMeta(s.subject.slug)
-                    const summary = s.summary
+                    const m = sm(s.subject.slug)
                     return (
-                      <li key={s.id} className="px-5 py-4 hover:bg-white/[0.03] transition-colors">
-                        <div className="flex items-start gap-4">
-                          <div className="w-9 h-9 rounded-xl flex items-center justify-center text-base shrink-0 mt-0.5"
-                            style={{ background: 'rgba(255,255,255,0.04)' }}>
+                      <li key={s.id} className="px-5 py-4 transition-colors hover:bg-white/[0.02]">
+                        <div className="flex items-start gap-3">
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center text-base font-black shrink-0 mt-0.5"
+                            style={{ background: m.bg, color: m.color, border: `1px solid ${m.border}` }}>
                             {m.icon}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-white text-sm">{s.title ?? s.subject.name}</p>
-                            <p className="text-xs mt-0.5" style={{ color: '#3F3F46' }}>
+                            <p className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
+                              {s.title ?? s.subject.name}
+                            </p>
+                            <p className="text-xs mt-0.5" style={{ color: 'var(--text-dim)' }}>
                               {new Date(s.startedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
                             </p>
-                            {summary && <p className="text-xs mt-1.5 leading-relaxed" style={{ color: '#52525B' }}>{summary}</p>}
+                            {s.summary && (
+                              <p className="text-xs mt-1.5 leading-relaxed line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+                                {s.summary}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </li>
@@ -255,70 +246,99 @@ export default async function DashboardPage() {
                   })}
                 </ul>
               )}
-            </div>
+            </SectionCard>
           </div>
 
-          {/* Sidebar */}
+          {/* ── Right sidebar ── */}
           <div className="space-y-5">
 
             {/* Profile card */}
-            <div className="rounded-2xl border border-white/[0.07] p-5" style={{ background: '#0F0F18' }}>
-              <div className="flex items-center gap-2 mb-5">
-                <BookOpen size={14} className="text-accent-400" />
-                <h3 className="font-bold text-white text-sm">Твой профиль</h3>
+            <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+              {/* Avatar */}
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black text-white shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #F78166, #FF9E88)' }}>
+                  {displayName.charAt(0).toUpperCase()}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{displayName}</p>
+                  <p className="text-xs truncate" style={{ color: 'var(--text-dim)' }}>{session.user.email}</p>
+                </div>
               </div>
-
-              <div className="w-12 h-12 rounded-xl mb-4 flex items-center justify-center text-lg font-black text-white"
-                style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
-                {displayName.charAt(0).toUpperCase()}
-              </div>
-              <p className="font-bold text-white text-base mb-0.5">{displayName}</p>
-              <p className="text-xs mb-5" style={{ color: '#3F3F46' }}>{session.user.email}</p>
 
               <div className="space-y-4">
-                <ProfileRow label="Основной предмет">
-                  {primarySubject ? (
-                    <span className="text-sm font-semibold text-white">{subjectMeta(primarySubject.slug).icon} {subjectMeta(primarySubject.slug).label}</span>
-                  ) : <span className="text-sm" style={{ color: '#3F3F46' }}>—</span>}
-                </ProfileRow>
-                <ProfileRow label="Голос репетитора">
-                  <span className="text-sm text-zinc-300">{voiceLabel ?? '—'}</span>
-                </ProfileRow>
+                {primarySubject && (
+                  <ProfileRow label="Основной предмет">
+                    <span className="badge" style={{ background: sm(primarySubject.slug).bg, color: sm(primarySubject.slug).color, border: `1px solid ${sm(primarySubject.slug).border}` }}>
+                      {sm(primarySubject.slug).icon} {sm(primarySubject.slug).label}
+                    </span>
+                  </ProfileRow>
+                )}
+                {voiceLabel && (
+                  <ProfileRow label="Голос репетитора">
+                    <span className="badge badge-blue">{voiceLabel}</span>
+                  </ProfileRow>
+                )}
                 {langDisplay && (
                   <ProfileRow label="Язык обучения">
-                    <span className="text-sm text-zinc-300">{langDisplay}</span>
+                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{langDisplay}</span>
                   </ProfileRow>
                 )}
                 {profile?.selfDescription && (
                   <ProfileRow label="О себе">
-                    <p className="text-xs leading-relaxed line-clamp-4" style={{ color: '#52525B' }}>{profile.selfDescription}</p>
+                    <p className="text-xs leading-relaxed line-clamp-4" style={{ color: 'var(--text-secondary)' }}>
+                      {profile.selfDescription}
+                    </p>
                   </ProfileRow>
                 )}
               </div>
             </div>
 
             {/* Quick actions */}
-            <div className="rounded-2xl border border-white/[0.07] overflow-hidden" style={{ background: '#0F0F18' }}>
-              <div className="px-5 py-4 border-b border-white/[0.06]">
-                <h3 className="font-bold text-white text-sm">Быстрые действия</h3>
+            <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+              <div className="px-5 py-4 flex items-center gap-2" style={{ borderBottom: '1px solid var(--border-default)' }}>
+                <Sparkles size={13} style={{ color: 'var(--accent-primary)' }} />
+                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>Быстрые действия</h3>
               </div>
               <div className="p-3 space-y-1">
-                {[
-                  { label: 'Начать урок', href: '/learn', icon: Sparkles },
-                  { label: 'История сессий', href: '#history', icon: Clock },
-                  { label: 'Настройки', href: '/settings', icon: BookOpen },
-                ].map(({ label, href, icon: Icon }) => (
+                {([
+                  { label: 'Начать урок',      href: '/learn',    icon: Sparkles, accent: '#F78166' },
+                  { label: 'История сессий',   href: '#history',  icon: Clock,    accent: '#79C0FF' },
+                  { label: 'Настройки',        href: '/settings', icon: Settings, accent: '#56D364' },
+                ] as const).map(({ label, href, icon: Icon, accent }) => (
                   <Link key={label} href={href}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white/[0.05] transition-colors group">
+                    className="flex items-center justify-between px-3 py-2.5 rounded-xl transition-colors group"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={undefined}>
                     <div className="flex items-center gap-2.5">
-                      <Icon size={14} className="text-accent-400" />
-                      <span className="text-sm text-zinc-300">{label}</span>
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+                        style={{ background: `${accent}15` }}>
+                        <Icon size={13} style={{ color: accent }} />
+                      </div>
+                      <span className="text-sm">{label}</span>
                     </div>
-                    <ArrowRight size={13} className="text-zinc-700 group-hover:text-zinc-500 transition-colors" />
+                    <ArrowRight size={13} style={{ color: 'var(--text-dim)' }} />
                   </Link>
                 ))}
               </div>
             </div>
+
+            {/* Streak / motivation card */}
+            <div className="rounded-2xl p-5 relative overflow-hidden"
+              style={{ background: 'var(--bg-surface)', border: '1px solid rgba(247,129,102,0.2)' }}>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl"
+                style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(247,129,102,0.08) 0%, transparent 60%)' }} />
+              <div className="relative">
+                <div className="text-3xl mb-2">🔥</div>
+                <p className="font-black text-sm mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                  Продолжай учиться!
+                </p>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  Регулярные уроки — ключ к прогрессу. Не останавливайся.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </main>
@@ -326,14 +346,46 @@ export default async function DashboardPage() {
   )
 }
 
-function StatCard({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
+/* ── Sub-components ─────────────────────────────────────────────────────── */
+
+function StatCard({ icon: Icon, label, value, color }: { icon: LucideIcon; label: string; value: string; color: string }) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] p-5" style={{ background: '#0F0F18' }}>
+    <div className="rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5"
+      style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
       <div className="flex items-center gap-2 mb-3">
-        <Icon size={14} className="text-accent-400" />
-        <span className="text-xs" style={{ color: '#52525B' }}>{label}</span>
+        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${color}15` }}>
+          <Icon size={14} style={{ color }} />
+        </div>
+        <span className="text-xs" style={{ color: 'var(--text-dim)' }}>{label}</span>
       </div>
-      <p className="text-2xl font-black text-white">{value}</p>
+      <p className="text-2xl font-black" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{value}</p>
+    </div>
+  )
+}
+
+function SectionCard({ title, icon: Icon, right, children }: {
+  title: string; icon: LucideIcon; right?: React.ReactNode; children: React.ReactNode
+}) {
+  return (
+    <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+      <div className="px-5 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid var(--border-default)' }}>
+        <div className="flex items-center gap-2">
+          <Icon size={13} style={{ color: 'var(--accent-primary)' }} />
+          <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{title}</h3>
+        </div>
+        {right}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function EmptyState({ emoji, title, sub }: { emoji: string; title: string; sub: string }) {
+  return (
+    <div className="py-14 text-center px-6">
+      <div className="text-4xl mb-3">{emoji}</div>
+      <p className="font-bold text-sm mb-1.5" style={{ color: 'var(--text-primary)' }}>{title}</p>
+      <p className="text-xs" style={{ color: 'var(--text-dim)' }}>{sub}</p>
     </div>
   )
 }
@@ -341,7 +393,7 @@ function StatCard({ icon: Icon, label, value }: { icon: LucideIcon; label: strin
 function ProfileRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#3F3F46' }}>{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>{label}</p>
       {children}
     </div>
   )
