@@ -1,15 +1,15 @@
 import OpenAI from 'openai'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
-export const TUTOR_MODEL = 'google/gemma-4-31b-it:free'
+export const TUTOR_MODEL = 'google/gemma-3-27b-it:free'
 
-// Fallback chain — tried in order when a model returns 429 or 5xx
+// Fallback chain — tried in order when a model returns 429, 404, or 5xx
 export const FALLBACK_MODELS = [
-  'google/gemma-4-31b-it:free',
-  'openai/gpt-oss-20b:free',
-  'qwen/qwen3-next-80b-a3b-instruct:free',
-  'google/gemma-4-26b-a4b-it:free',
-  'openai/gpt-oss-120b:free',
+  'google/gemma-3-27b-it:free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'mistralai/mistral-7b-instruct:free',
+  'deepseek/deepseek-chat:free',
+  'microsoft/phi-4:free',
 ]
 
 const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
@@ -29,11 +29,11 @@ if (process.env.NODE_ENV !== 'production') globalForAI.ai = ai
 
 function isRetryableError(err: unknown): boolean {
   if (err instanceof OpenAI.APIError) {
-    return err.status === 429 || err.status >= 500
+    // 404 = model not found on OpenRouter, also retry to try next model
+    return err.status === 404 || err.status === 429 || err.status >= 500
   }
-  // OpenRouter rate limit arrives as a plain Error with the message in some SDKs
   const msg = err instanceof Error ? err.message : String(err)
-  return msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit')
+  return msg.includes('404') || msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit')
 }
 
 type ChatParams = Parameters<typeof ai.chat.completions.create>[0]
