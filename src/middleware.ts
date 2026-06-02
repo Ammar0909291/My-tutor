@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 const PROTECTED = ['/dashboard', '/onboarding', '/learn', '/profile', '/billing']
-const AUTH_ONLY = ['/auth/login', '/auth/signup']
+const AUTH_ONLY = ['/auth/login', '/auth/signup', '/auth/forgot-password']
 
 export default auth(function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
