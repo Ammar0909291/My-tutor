@@ -21,23 +21,28 @@ export default function SignupPage() {
     e.preventDefault()
     if (!name || !email || !password) { setError(t('error_required')); return }
     setLoading(true); setError(null)
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
-    })
-    const data = await res.json()
-    if (!data.success) {
-      setError(data.error === 'Email already registered' ? t('error_email_taken') : (data.error ?? t('error_required')))
-      setLoading(false); return
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      })
+      const data = await res.json()
+      if (!data.success) {
+        setError(data.error === 'Email already registered' ? t('error_email_taken') : (data.error ?? t('error_required')))
+        setLoading(false); return
+      }
+      const result = await signIn('credentials', { email, password, redirect: false })
+      setLoading(false)
+      if (!result || result.error) {
+        setError(t('error_account_created'))
+        return
+      }
+      window.location.href = '/onboarding'
+    } catch {
+      setLoading(false)
+      setError(t('error_required'))
     }
-    const result = await signIn('credentials', { email, password, redirect: false })
-    setLoading(false)
-    if (!result || result.error) {
-      setError(t('error_account_created'))
-      return
-    }
-    window.location.href = '/onboarding'
   }
 
   const handleGoogle = async () => {

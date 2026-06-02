@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, Suspense } from 'react'
 import { signIn } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
@@ -50,18 +50,23 @@ function LoginForm() {
     if (!email || !password) { setError(t('error_required')); return }
     setLoading(true); setError(null)
 
-    const result = await signIn('credentials', { email, password, redirect: false })
-    setLoading(false)
+    try {
+      const result = await signIn('credentials', { email, password, redirect: false })
+      setLoading(false)
 
-    if (!result) { setError(NEXTAUTH_ERROR_FALLBACK.Default); return }
-    if (result.error) {
-      const key = NEXTAUTH_ERROR_KEYS[result.error]
-      setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[result.error] ?? NEXTAUTH_ERROR_FALLBACK.Default))
-      return
+      if (!result) { setError(NEXTAUTH_ERROR_FALLBACK.Default); return }
+      if (result.error) {
+        const key = NEXTAUTH_ERROR_KEYS[result.error]
+        setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[result.error] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+        return
+      }
+
+      const callbackUrl = params.get('callbackUrl') ?? '/dashboard'
+      window.location.href = callbackUrl
+    } catch {
+      setLoading(false)
+      setError(NEXTAUTH_ERROR_FALLBACK.Default)
     }
-
-    const callbackUrl = params.get('callbackUrl') ?? '/dashboard'
-    window.location.href = callbackUrl
   }
 
   const handleGoogle = async () => {
