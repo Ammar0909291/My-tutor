@@ -76,12 +76,11 @@ model Profile {
   id          String   @id @default(cuid())
   userId      String   @unique
   displayName String
-  // Free-text self-description that Claude uses to calibrate level
-  selfDescription String   @db.Text
-  // Detected/confirmed level after first assessment
-  currentLevel    String?
-  learningGoals   String?  @db.Text
-  voiceId         String?
+  selfDescription  String          @db.Text
+  currentLevel     String?
+  learningGoals    String?         @db.Text
+  voiceId          String?
+  teachingLanguage TeachingLanguage @default(ru)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -211,6 +210,12 @@ model Subscription {
 }
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum TeachingLanguage {
+  ru
+  en
+  hi
+}
 
 enum SubjectType {
   C

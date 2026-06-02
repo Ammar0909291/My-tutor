@@ -7,6 +7,7 @@ const schema = z.object({
   subjectSlug: z.string(),
   selfDescription: z.string().min(10).max(2000),
   voiceChoice: z.string(),
+  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('ru'),
 })
 
 export async function POST(req: Request) {
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectSlug, selfDescription, voiceChoice } = schema.parse(body)
+    const { subjectSlug, selfDescription, voiceChoice, teachingLanguage } = schema.parse(body)
 
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
     if (!subject) {
@@ -41,6 +42,7 @@ export async function POST(req: Request) {
           displayName: session.user.name ?? 'Студент',
           selfDescription,
           voiceId: voiceChoice,
+          teachingLanguage,
           subjects: { create: { subjectId: subject.id } },
         },
       })

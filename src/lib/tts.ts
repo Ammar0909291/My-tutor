@@ -1,11 +1,18 @@
 import { cleanTextForTTS } from './tts-cleaner'
 
 export type VoiceType = 'male' | 'female' | 'warm'
+export type TeachingLang = 'ru' | 'en' | 'hi'
 
 export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> = {
   male:   { pitch: 0.75, rate: 0.85 },
   female: { pitch: 1.25, rate: 0.9  },
   warm:   { pitch: 1.0,  rate: 0.87 },
+}
+
+const LANG_LOCALE: Record<TeachingLang, string> = {
+  ru: 'ru-RU',
+  en: 'en-US',
+  hi: 'hi-IN',
 }
 
 // Prime voices list on load
@@ -17,6 +24,7 @@ export function speakText(
   text: string,
   config: { pitch: number; rate: number },
   onEnd?: () => void,
+  lang: TeachingLang = 'ru',
 ): void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
   window.speechSynthesis.cancel()
@@ -24,8 +32,9 @@ export function speakText(
   const clean = cleanTextForTTS(text)
   if (!clean.trim()) { onEnd?.(); return }
 
+  const locale = LANG_LOCALE[lang]
   const utter = new SpeechSynthesisUtterance(clean)
-  utter.lang = 'ru-RU'
+  utter.lang = locale
   utter.pitch = config.pitch
   utter.rate = config.rate
   utter.volume = 1.0
@@ -37,10 +46,12 @@ export function speakText(
 
   const setVoice = () => {
     const voices = window.speechSynthesis.getVoices()
-    const ru = voices.find((v) => v.lang === 'ru-RU') ?? voices.find((v) => v.lang.startsWith('ru'))
-    if (ru) utter.voice = ru
+    const voice =
+      voices.find((v) => v.lang === locale) ??
+      voices.find((v) => v.lang.startsWith(lang))
+    if (voice) utter.voice = voice
 
-    console.log(`[TTS] pitch=${config.pitch} rate=${config.rate} | voice="${ru?.name ?? 'default'}" | "${clean.slice(0, 60)}"`)
+    console.log(`[TTS] lang=${lang} pitch=${config.pitch} rate=${config.rate} | voice="${voice?.name ?? 'default'}" | "${clean.slice(0, 60)}"`)
     window.speechSynthesis.speak(utter)
   }
 

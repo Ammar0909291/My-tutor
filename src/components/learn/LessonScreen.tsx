@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
-import { speakText, stopSpeaking, VOICE_SETTINGS, type VoiceType } from '@/lib/tts'
+import { speakText, stopSpeaking, VOICE_SETTINGS, type VoiceType, type TeachingLang } from '@/lib/tts'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -142,12 +142,13 @@ type ActiveTab = 'code' | 'chat'
 
 interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
+  teachingLanguage?: TeachingLang
   memoryContext?: string | null; pastSessionsSummary?: string | null
   subjects?: {slug:string;name:string}[]; displayName?: string
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, memoryContext, pastSessionsSummary, displayName }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName }: Props) {
   const { t } = useLanguage()
 
   // Core state
@@ -228,7 +229,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     speakingIdRef.current = id; setSpeakingId(id)
     speakText(text, voiceConfigRef.current, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    })
+    }, teachingLanguage)
   }, [])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     const cfg = VOICE_SETTINGS[v]
@@ -375,7 +376,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   function startRecording() {
     const SR = getSpeechRecognition(); if (!SR) { setMicSupported(false); return }
     const r = new SR()
-    r.lang = 'ru-RU'; r.interimResults = true; r.continuous = false
+    const micLocale = teachingLanguage === 'hi' ? 'hi-IN' : teachingLanguage === 'en' ? 'en-US' : 'ru-RU'
+    r.lang = micLocale; r.interimResults = true; r.continuous = false
     speechBaseRef.current = input ? input.trim() + ' ' : ''
     r.onresult = (e) => {
       let tx = ''; for (let i = 0; i < e.results.length; i++) tx += e.results[i][0].transcript

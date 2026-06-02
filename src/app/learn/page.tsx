@@ -89,6 +89,7 @@ export default async function LearnPage() {
       subjectName={primarySubject.name}
       levelDescription={profile.selfDescription}
       voiceChoice={profile.voiceId ?? 'alexei'}
+      teachingLanguage={(profile.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'}
       memoryContext={memoryContext}
       pastSessionsSummary={pastSessionsSummary}
       subjects={subjects}

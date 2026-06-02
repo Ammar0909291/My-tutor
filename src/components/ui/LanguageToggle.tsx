@@ -21,7 +21,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem('mt_lang') as Lang | null
-    if (stored === 'ru' || stored === 'en') setLangState(stored)
+    if (stored === 'ru' || stored === 'en' || stored === 'hi') setLangState(stored)
   }, [])
 
   function setLang(l: Lang) {
@@ -44,6 +44,7 @@ export function LanguageToggle({ className = '' }: { className?: string }) {
     <div className={`lang-toggle ${className}`}>
       <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => setLang('ru')}>RU</button>
       <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
+      <button className={`lang-btn ${lang === 'hi' ? 'active' : ''}`} onClick={() => setLang('hi')}>हि</button>
     </div>
   )
 }
