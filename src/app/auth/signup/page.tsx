@@ -32,8 +32,11 @@ export default function SignupPage() {
     }
     const result = await signIn('credentials', { email, password, redirect: false })
     setLoading(false)
-    if (result?.error) setError('Ошибка входа. Попробуй войти вручную.')
-    else { router.push('/onboarding'); router.refresh() }
+    if (!result || result.error) {
+      setError('Аккаунт создан. Войди через форму входа.')
+      return
+    }
+    window.location.href = '/onboarding'
   }
 
   const handleGoogle = async () => {

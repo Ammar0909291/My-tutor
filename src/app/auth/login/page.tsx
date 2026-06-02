@@ -1,15 +1,32 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
-import { useLanguage } from '@/components/ui/LanguageToggle'
-import { LanguageToggle } from '@/components/ui/LanguageToggle'
+import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+
+const NEXTAUTH_ERROR_MESSAGES: Record<string, string> = {
+  CredentialsSignin:     'Неверный email или пароль',
+  OAuthAccountNotLinked: 'Этот email уже используется другим способом входа',
+  OAuthSignin:           'Ошибка входа через Google. Попробуй ещё раз.',
+  Callback:              'Ошибка авторизации. Попробуй ещё раз.',
+  Default:               'Произошла ошибка. Попробуй ещё раз.',
+}
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" style={{ background: 'var(--bg-base)' }} />}>
+      <LoginForm />
+    </Suspense>
+  )
+}
+
+function LoginForm() {
   const router = useRouter()
+  const params = useSearchParams()
   const { t } = useLanguage()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPwd, setShowPwd] = useState(false)
@@ -17,13 +34,34 @@ export default function LoginPage() {
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState('')
 
+  // Handle ?error= redirected from NextAuth (e.g. OAuthAccountNotLinked)
+  useEffect(() => {
+    const errorCode = params.get('error')
+    if (errorCode) {
+      setError(NEXTAUTH_ERROR_MESSAGES[errorCode] ?? NEXTAUTH_ERROR_MESSAGES.Default)
+    }
+  }, [params])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true); setError('')
+
     const result = await signIn('credentials', { email, password, redirect: false })
     setLoading(false)
-    if (result?.error) setError('Неверный email или пароль')
-    else { router.push('/dashboard'); router.refresh() }
+
+    if (!result) {
+      // signIn returned undefined — shouldn't happen with redirect:false, treat as error
+      setError(NEXTAUTH_ERROR_MESSAGES.Default)
+      return
+    }
+    if (result.error) {
+      setError(NEXTAUTH_ERROR_MESSAGES[result.error] ?? NEXTAUTH_ERROR_MESSAGES.Default)
+      return
+    }
+
+    // Use full page navigation so the session cookie is picked up cleanly
+    const callbackUrl = params.get('callbackUrl') ?? '/dashboard'
+    window.location.href = callbackUrl
   }
 
   const handleGoogle = async () => {
@@ -98,18 +136,18 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_email')}</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
+              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError('') }} required
                 placeholder="your@email.com" className="input-field" />
             </div>
             <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
-              <Link href="/auth/forgot-password" className="text-xs hover:underline" style={{ color: 'var(--accent-primary)' }}>
-                Забыл пароль?
-              </Link>
-            </div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
+                <Link href="/auth/forgot-password" className="text-xs hover:underline" style={{ color: 'var(--accent-primary)' }}>
+                  Забыл пароль?
+                </Link>
+              </div>
               <div className="relative">
-                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required
+                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); setError('') }} required
                   placeholder="••••••••" className="input-field pr-10" />
                 <button type="button" onClick={() => setShowPwd(!showPwd)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
