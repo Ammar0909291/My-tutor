@@ -449,34 +449,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   return (
     <div className="h-screen flex flex-col overflow-hidden" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
 
-      {/* ── Paywall overlay ───────────────────────────────────────────────── */}
-      {initError === 'upgrade' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-6"
-          style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }}>
-          <div className="w-full max-w-sm rounded-2xl p-7 text-center"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', boxShadow: '0 24px 80px rgba(0,0,0,0.6)' }}>
-            <div className="text-5xl mb-4" style={{ color: 'var(--accent-primary)' }}>🔒</div>
-            <h2 className="text-xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('paywall_title')}</h2>
-            <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{t('paywall_sub')}</p>
-            <p className="text-2xl font-black mb-5" style={{ color: 'var(--accent-primary)' }}>{t('paywall_price')}</p>
-            <ul className="space-y-2 mb-6 text-left">
-              {(['paywall_f1', 'paywall_f2', 'paywall_f3'] as const).map((k) => (
-                <li key={k} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-primary)' }}>
-                  <span style={{ color: '#56D364' }}>✓</span> {t(k)}
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={handlePaywallCheckout}
-              disabled={paywallLoading}
-              className="btn-primary w-full py-3.5 font-bold mb-3 disabled:opacity-60 disabled:cursor-not-allowed">
-              {paywallLoading ? '...' : t('paywall_cta')}
-            </button>
-            <p className="text-xs" style={{ color: 'var(--text-dim)' }}>{t('paywall_cancel')}</p>
-          </div>
-        </div>
-      )}
-
       {/* ── Top bar ────────────────────────────────────────────────────────── */}
       <header className="flex items-center gap-4 px-4 shrink-0" style={{ height: 52, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}>
         <Link href="/dashboard" className="text-sm font-medium transition-colors"

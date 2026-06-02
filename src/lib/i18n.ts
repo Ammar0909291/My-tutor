@@ -607,3 +607,7 @@ export function t(lang: Lang, key: TranslationKey): string {
   if (lang === 'en') return en[key] ?? ru[key] ?? key
   return ru[key] ?? key
 }
+
+export function getTranslations(lang: Lang) {
+  return translations[lang] ?? translations.ru
+}
