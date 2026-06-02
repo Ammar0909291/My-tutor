@@ -9,8 +9,8 @@ import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
 import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 
 const SUBJECT_META: Record<string, { icon: string; label: string; color: string; bg: string; border: string }> = {
-  c:       { icon: 'C',   label: 'C язык',           color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
-  cpp:     { icon: 'C++', label: 'C++',               color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
+  c:       { icon: '⚙️',  label: 'C язык',           color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
+  cpp:     { icon: '🔷',  label: 'C++',               color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
   python:  { icon: '🐍',  label: 'Python',            color: '#56D364', bg: 'rgba(86,211,100,0.08)',   border: 'rgba(86,211,100,0.2)'   },
   english: { icon: '🇬🇧', label: 'Английский язык',  color: '#E3B341', bg: 'rgba(227,179,65,0.08)',   border: 'rgba(227,179,65,0.2)'   },
 }
@@ -19,9 +19,12 @@ function sm(slug: string) {
 }
 
 const VOICE_LABELS: Record<string, string> = {
-  alexei: 'Алексей (строгий)',
-  maria:  'Мария (мягкий)',
-  dmitry: 'Дмитрий (дружелюбный)',
+  male:   'Мужской',
+  female: 'Женский',
+  warm:   'Тёплый',
+  alexei: 'Алексей',
+  maria:  'Мария',
+  dmitry: 'Дмитрий',
   pNInz6obpgDQGcFmaJgB: 'Александр',
   ErXwobaYiN019PkySvjV: 'Антон',
   EXAVITQu4vr4xnSDxMaL: 'Наталья',
@@ -68,7 +71,7 @@ export default async function DashboardPage() {
   const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Студент'
   const isPro = subscription?.status === 'ACTIVE'
-  const showUpgradeBanner = !isPro && (subscription?.freeSessionUsed ?? false)
+  const showUpgradeBanner = false // Stripe disabled for now
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
