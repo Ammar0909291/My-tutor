@@ -59,7 +59,7 @@ async function* geminiStream(messages: ChatMessage[]): AsyncIterable<OpenAI.Chat
   const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
 
   const chat = model.startChat({
-    systemInstruction: system,
+    systemInstruction: { role: 'user', parts: [{ text: system }] },
     history,
   })
 
@@ -99,7 +99,7 @@ async function geminiComplete(
     }))
   const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
 
-  const chat = model.startChat({ systemInstruction: system, history, generationConfig })
+  const chat = model.startChat({ systemInstruction: { role: 'user', parts: [{ text: system }] }, history, generationConfig })
   const result = await chat.sendMessage(lastMsg)
   return result.response.text()
 }

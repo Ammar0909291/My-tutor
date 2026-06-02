@@ -155,7 +155,7 @@ interface Props {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName }: Props) {
-  const { t } = useLanguage()
+  const { t, lang: uiLang } = useLanguage()
 
   // Core state
   const [sessionId, setSessionId] = useState<string|null>(null)
@@ -506,7 +506,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 background: voiceType === k ? 'var(--accent-primary)' : 'transparent',
                 color: voiceType === k ? '#fff' : 'var(--text-secondary)',
               }}>
-              {VOICE_LABELS_BY_LANG[teachingLanguage][k]}
+              {VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
             </button>
           ))}
         </div>
