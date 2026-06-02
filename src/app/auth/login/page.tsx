@@ -102,7 +102,12 @@ export default function LoginPage() {
                 placeholder="your@email.com" className="input-field" />
             </div>
             <div>
-              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
+              <Link href="/auth/forgot-password" className="text-xs hover:underline" style={{ color: 'var(--accent-primary)' }}>
+                Забыл пароль?
+              </Link>
+            </div>
               <div className="relative">
                 <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required
                   placeholder="••••••••" className="input-field pr-10" />
