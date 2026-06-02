@@ -29,12 +29,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { subjectSlug, memoryContext } = createSchema.parse(body);
 
-    // Check free session eligibility
-    const subscription = await prisma.subscription.findUnique({ where: { userId: session.user.id } });
-    if (!subscription) return NextResponse.json({ success: false, error: "No subscription record" }, { status: 403 });
-    if (subscription.status === "FREE" && subscription.freeSessionUsed) {
-      return NextResponse.json({ success: false, error: "FREE_SESSION_USED", code: "UPGRADE_REQUIRED" }, { status: 402 });
-    }
+    // Paywall disabled — Stripe not configured yet
 
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } });
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
