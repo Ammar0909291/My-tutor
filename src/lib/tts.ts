@@ -44,14 +44,16 @@ export function speakText(
     utter.onerror = onEnd
   }
 
+  // Guard prevents double-speak when both voiceschanged and the fallback timeout fire
+  let spoken = false
   const setVoice = () => {
+    if (spoken) return
+    spoken = true
     const voices = window.speechSynthesis.getVoices()
     const voice =
       voices.find((v) => v.lang === locale) ??
       voices.find((v) => v.lang.startsWith(lang))
     if (voice) utter.voice = voice
-
-    console.log(`[TTS] lang=${lang} pitch=${config.pitch} rate=${config.rate} | voice="${voice?.name ?? 'default'}" | "${clean.slice(0, 60)}"`)
     window.speechSynthesis.speak(utter)
   }
 

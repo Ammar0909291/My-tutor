@@ -236,7 +236,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     speakText(text, voiceConfigRef.current, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     }, teachingLanguage)
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [teachingLanguage])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     const cfg = VOICE_SETTINGS[v]
     setVoiceType(v); setVoiceConfig(cfg); voiceConfigRef.current = cfg

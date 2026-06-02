@@ -39,10 +39,16 @@ export async function POST(
       data: { sessionId, role: MessageRole.USER, content },
     })
 
+    const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
+    const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
+    const teachingLang = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
+
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
-      profile?.currentLevel ?? profile?.selfDescription ?? 'неизвестный уровень',
-      profile?.learningGoals ?? 'общее обучение'
+      profile?.selfDescription ?? 'неизвестный уровень',
+      profile?.learningGoals ?? 'общее обучение',
+      memoryContext,
+      teachingLang,
     )
 
     const messages = [

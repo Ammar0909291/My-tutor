@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Moved out of experimental in Next.js 14.1 — old key is ignored on Vercel
-  serverExternalPackages: ["@prisma/client", "bcryptjs", "ioredis"],
+  experimental: {
+    // Next.js 14.2 still uses the experimental key; top-level serverExternalPackages is 15+
+    serverComponentsExternalPackages: ["@prisma/client", "bcryptjs", "ioredis"],
+  },
   images: {
     remotePatterns: [
       {
