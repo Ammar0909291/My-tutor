@@ -15,8 +15,8 @@ const LANG_LOCALE: Record<TeachingLang, string> = {
   hi: 'hi-IN',
 }
 
-// Prime voices list on load
-if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+// Prime voices list on load — only in browser, never during SSR
+if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefined') {
   window.speechSynthesis.getVoices()
 }
 
