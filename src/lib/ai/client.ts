@@ -1,5 +1,8 @@
 import Groq from 'groq-sdk'
 
+console.log('GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY)
+console.log('GROQ_API_KEY first 10:', process.env.GROQ_API_KEY?.substring(0, 10))
+
 export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
 
 const FALLBACK_MODELS = [
