@@ -95,6 +95,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
     console.error('[onboarding] ERROR:', err)
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+    const errMsg = err instanceof Error ? err.message : String(err)
+    console.error('[onboarding] FULL ERROR:', errMsg)
+    return NextResponse.json({ success: false, error: errMsg }, { status: 500 })
   }
 }
