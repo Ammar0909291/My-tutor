@@ -5,11 +5,12 @@ import { prisma } from "@/lib/db/prisma";
 import { setSessionState, setUserActiveSession } from "@/lib/redis/client";
 import type { RedisSessionState } from "@/types";
 
-const createSchema = z.object({ subjectSlug: z.string(), memoryContext: z.string().optional() });
+const createSchema = z.object({ subjectSlug: z.string(), memoryContext: z.string().optional(), userId: z.string().optional() });
 
 export async function GET() {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+
 
   const sessions = await prisma.learnSession.findMany({
     where: { userId: session.user.id },
@@ -22,12 +23,17 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const session = await auth();
-  if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-
   try {
     const body = await req.json();
-    const { subjectSlug, memoryContext } = createSchema.parse(body);
+    const { subjectSlug, memoryContext, userId: bodyUserId } = createSchema.parse(body);
+
+    // Prefer userId from body; fall back to server session
+    let userId = bodyUserId
+    if (!userId) {
+      const session = await auth()
+      userId = session?.user?.id
+    }
+    if (!userId) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     // Paywall disabled — Stripe not configured yet
 
@@ -35,16 +41,16 @@ export async function POST(req: Request) {
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
     const [profile, activePath] = await Promise.all([
-      prisma.profile.findUnique({ where: { userId: session.user.id } }),
+      prisma.profile.findUnique({ where: { userId } }),
       prisma.learningPath.findFirst({
-        where: { userId: session.user.id, subjectId: subject.id, isActive: true },
+        where: { userId, subjectId: subject.id, isActive: true },
         orderBy: { createdAt: "desc" },
       }),
     ]);
 
     const learnSession = await prisma.learnSession.create({
       data: {
-        userId: session.user.id,
+        userId,
         subjectId: subject.id,
         title: `${subject.name} — ${new Date().toLocaleDateString("ru-RU", { day: '2-digit', month: '2-digit', year: 'numeric' })}`,
         contextSnapshot: {
@@ -58,7 +64,7 @@ export async function POST(req: Request) {
 
     // Warm up Redis state (best-effort — Redis may not be running)
     const state: RedisSessionState = {
-      userId: session.user.id,
+      userId,
       subjectId: subject.id,
       subjectSlug: subject.slug,
       learningPathId: activePath?.id,
@@ -68,7 +74,7 @@ export async function POST(req: Request) {
     };
     await Promise.allSettled([
       setSessionState(learnSession.id, state),
-      setUserActiveSession(session.user.id, learnSession.id),
+      setUserActiveSession(userId, learnSession.id),
     ]);
 
     return NextResponse.json({ success: true, data: learnSession }, { status: 201 });

@@ -370,7 +370,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       try {
         const res = await fetch('/api/sessions', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined }),
+          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined }),
         })
         const data = await res.json()
         if (!data.success) { setInitError(data.code === 'UPGRADE_REQUIRED' ? 'upgrade' : (data.error ?? 'Error')); return }
