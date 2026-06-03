@@ -1,49 +1,44 @@
-import OpenAI from 'openai'
+import Groq from 'groq-sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
-export const TUTOR_MODEL = 'meta-llama/llama-3.3-70b-instruct:free'
+export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
 
-// Fallback chain — tried in order when a model returns 429, 404, or 5xx
+// Fallback chain — tried in order when primary returns 429 or 5xx
 export const FALLBACK_MODELS = [
-  'meta-llama/llama-3.3-70b-instruct:free',
-  'mistralai/mistral-7b-instruct:free',
-  'google/gemma-2-9b-it:free',
-  'microsoft/phi-4:free',
-  'qwen/qwen3-8b:free',
-  'google/gemma-3-27b-it:free',
-  'deepseek/deepseek-chat-v3-0324:free',
+  'llama-3.3-70b-versatile',
+  'llama3-70b-8192',
+  'llama-3.1-8b-instant',
+  'gemma2-9b-it',
 ]
 
-const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
+const globalForAI = globalThis as unknown as { groq: Groq | undefined }
 
-export const ai = globalForAI.ai ?? new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
+export const ai = globalForAI.groq ?? new Groq({
   // Placeholder prevents the SDK from throwing at import time when the key is
   // absent (e.g. during build). Real requests fail gracefully via try/catch.
-  apiKey: process.env.OPENROUTER_API_KEY || 'missing-openrouter-key',
-  defaultHeaders: {
-    'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
-    'X-Title': 'My Tutor',
-  },
+  apiKey: process.env.GROQ_API_KEY || 'missing-groq-key',
 })
 
-if (process.env.NODE_ENV !== 'production') globalForAI.ai = ai
+if (process.env.NODE_ENV !== 'production') globalForAI.groq = ai
 
 function isRetryableError(err: unknown): boolean {
-  if (err instanceof OpenAI.APIError) {
-    // 404 = model not found on OpenRouter, also retry to try next model
-    return err.status === 404 || err.status === 429 || err.status >= 500
+  if (err instanceof Groq.APIError) {
+    return err.status === 429 || err.status >= 500
   }
   const msg = err instanceof Error ? err.message : String(err)
-  return msg.includes('404') || msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit')
+  return msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit') || msg.includes('overloaded')
 }
 
-type ChatParams = Parameters<typeof ai.chat.completions.create>[0]
 type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
+type CreateParams = {
+  messages: ChatMessage[]
+  temperature?: number
+  max_tokens?: number
+}
 
-// ─── Gemini fallback (streaming) ──────────────────────────────────────────────
+// ─── Gemini fallback ──────────────────────────────────────────────────────────
 
-async function* geminiStream(messages: ChatMessage[]): AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk> {
+async function* geminiStream(messages: ChatMessage[]): AsyncIterable<Groq.Chat.Completions.ChatCompletionChunk> {
   const apiKey = process.env.GEMINI_API_KEY
   if (!apiKey) throw new Error('GEMINI_API_KEY not set')
 
@@ -75,8 +70,8 @@ async function* geminiStream(messages: ChatMessage[]): AsyncIterable<OpenAI.Chat
         object: 'chat.completion.chunk',
         created: Date.now(),
         model: 'gemini-2.0-flash',
-        choices: [{ index: 0, delta: { content: text }, finish_reason: null, logprobs: null }],
-      } as OpenAI.Chat.Completions.ChatCompletionChunk
+        choices: [{ index: 0, delta: { content: text, role: 'assistant' }, finish_reason: null, logprobs: null }],
+      } as Groq.Chat.Completions.ChatCompletionChunk
     }
   }
 }
@@ -101,45 +96,57 @@ async function geminiComplete(
     }))
   const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
 
-  const chat = model.startChat({ systemInstruction: { role: 'user', parts: [{ text: system }] }, history, generationConfig })
+  const chat = model.startChat({
+    systemInstruction: { role: 'user', parts: [{ text: system }] },
+    history,
+    generationConfig,
+  })
   const result = await chat.sendMessage(lastMsg)
   return result.response.text()
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
 
-/** Non-streaming completion with OpenRouter fallback chain, then Gemini. */
-export async function chatWithFallback(
-  params: Omit<ChatParams, 'model' | 'stream'>
-): Promise<OpenAI.Chat.Completions.ChatCompletion> {
+/** Non-streaming completion with Groq fallback chain, then Gemini. */
+export async function chatWithFallback(params: CreateParams): Promise<Groq.Chat.Completions.ChatCompletion> {
   let lastErr: unknown
+
   for (const model of FALLBACK_MODELS) {
     try {
-      return await ai.chat.completions.create({ ...params, model, stream: false })
+      return await ai.chat.completions.create({
+        model,
+        messages: params.messages,
+        temperature: params.temperature ?? 0.7,
+        max_tokens: params.max_tokens ?? 1024,
+        stream: false,
+      })
     } catch (err) {
       if (isRetryableError(err)) { lastErr = err; continue }
       throw err
     }
   }
 
-  // All OpenRouter models exhausted — try Gemini (skip if quota exhausted)
+  // All Groq models exhausted — try Gemini
   if (process.env.GEMINI_API_KEY) {
     try {
-      const messages = (params.messages ?? []) as ChatMessage[]
-      const text = await geminiComplete(messages, {
-        temperature: typeof params.temperature === 'number' ? params.temperature : undefined,
-        maxOutputTokens: typeof params.max_tokens === 'number' ? params.max_tokens : undefined,
+      const text = await geminiComplete(params.messages, {
+        temperature: params.temperature,
+        maxOutputTokens: params.max_tokens,
       })
       return {
         id: 'gemini-fallback',
         object: 'chat.completion',
         created: Date.now(),
         model: 'gemini-2.0-flash',
-        choices: [{ index: 0, message: { role: 'assistant', content: text }, finish_reason: 'stop', logprobs: null }],
-        usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
-      } as OpenAI.Chat.Completions.ChatCompletion
+        choices: [{
+          index: 0,
+          message: { role: 'assistant', content: text },
+          finish_reason: 'stop',
+          logprobs: null,
+        }],
+        usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0, queue_time: 0, prompt_time: 0, completion_time: 0, total_time: 0 },
+      } as Groq.Chat.Completions.ChatCompletion
     } catch (geminiErr) {
-      // 429 quota exceeded — surface original OpenRouter error instead
       const msg = geminiErr instanceof Error ? geminiErr.message : String(geminiErr)
       if (!msg.includes('429') && !msg.includes('quota')) throw geminiErr
     }
@@ -148,14 +155,21 @@ export async function chatWithFallback(
   throw lastErr
 }
 
-/** Streaming completion with OpenRouter fallback chain, then Gemini. */
+/** Streaming completion with Groq fallback chain, then Gemini. */
 export async function chatStreamWithFallback(
-  params: Omit<ChatParams, 'model' | 'stream'>
-): Promise<{ stream: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>; model: string }> {
+  params: CreateParams,
+): Promise<{ stream: AsyncIterable<Groq.Chat.Completions.ChatCompletionChunk>; model: string }> {
   let lastErr: unknown
+
   for (const model of FALLBACK_MODELS) {
     try {
-      const stream = await ai.chat.completions.create({ ...params, model, stream: true })
+      const stream = await ai.chat.completions.create({
+        model,
+        messages: params.messages,
+        temperature: params.temperature ?? 0.7,
+        max_tokens: params.max_tokens ?? 1024,
+        stream: true,
+      })
       return { stream, model }
     } catch (err) {
       if (isRetryableError(err)) { lastErr = err; continue }
@@ -163,11 +177,10 @@ export async function chatStreamWithFallback(
     }
   }
 
-  // All OpenRouter models exhausted — try Gemini (skip if quota exhausted)
+  // All Groq models exhausted — try Gemini
   if (process.env.GEMINI_API_KEY) {
     try {
-      const messages = (params.messages ?? []) as ChatMessage[]
-      return { stream: geminiStream(messages), model: 'gemini-2.0-flash' }
+      return { stream: geminiStream(params.messages), model: 'gemini-2.0-flash' }
     } catch (geminiErr) {
       const msg = geminiErr instanceof Error ? geminiErr.message : String(geminiErr)
       if (!msg.includes('429') && !msg.includes('quota')) throw geminiErr
@@ -184,7 +197,7 @@ export function buildTutorSystemPrompt(
   studentLevel: string,
   goals: string,
   memoryContext?: string | null,
-  teachingLanguage: 'ru' | 'en' | 'hi' = 'ru',
+  teachingLanguage: 'ru' | 'en' | 'hi' = 'en',
 ) {
   if (teachingLanguage === 'en') {
     const memory = memoryContext ? `\n\nMemory from previous lessons:\n${memoryContext}\n` : ''
@@ -225,39 +238,15 @@ LEARNING RULES:
 
 छात्र का स्तर: ${studentLevel}
 सीखने के लक्ष्य: ${goals}${memory}
-काम के सिद्धांत:
-1. ▶ सरल भाषा में समझाएं, असली जीवन के उदाहरण दें
-2. 📌 हर explanation के बाद पूछें: क्या आप समझे?
-3. 💡 अगर छात्र उलझा हो — अलग तरीके से समझाएं, नया उदाहरण दें
-4. ⚠️ प्रगति की तारीफ करें, लेकिन ज़्यादा नहीं
-5. ✅ जब कोड लिखें — हर line को हिंदी में समझाएं
-6. ❓ ध्यान दें जब छात्र थका हो या उलझा हो, और pause या सरलीकरण सुझाएं
-7. 🔧 पिछले पाठों का डेटा हो तो — शुरुआत में संक्षिप्त याद दिलाएं और वहीं से जारी रखें
-
-जवाब का तरीका:
-- एक जीवंत शिक्षक की तरह बात करें, encyclopaedia की तरह नहीं
-- दोस्ताना माहौल के लिए emojis का संयमित उपयोग करें
-- Code blocks को markdown में भाषा के साथ लिखें
-- Code के comments जहाँ संभव हो हिंदी में लिखें
-
-सीखने के नियम:
-1. हर explanation के बाद पूछें: "समझे? जवाब दें: हाँ / नहीं / थोड़ा"
-2. "नहीं" पर — अलग तरीका चुनें: उदाहरण, analogy, छोटे steps
-3. "थोड़ा" पर — पूछें "क्या नहीं समझे?"
-4. समझ की पुष्टि के बिना अगले topic पर न जाएं
-5. अधिकतम 3-4 वाक्य + code, फिर सवाल या काम
 
 HINGLISH SUPPORT:
 - छात्र Hinglish में लिख सकते हैं (Hindi + English mix) — यह बिल्कुल ठीक है
-- Valid examples: "yaar mujhe pointers samajh nahi aate", "bhai ye loop kyu nahi chal raha", "function ka matlab kya hota hai"
 - जब छात्र Hinglish में लिखे तो Hinglish में जवाब दें
-- Technical terms English में रखें: variable, function, loop, array, pointer, string, integer, boolean
-- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo
-- Example style: "Arre yaar, pointers thoda tricky lagte hain pehle, but ek baar samajh gaya toh bahut powerful hote hain!"
-- हमेशा सवाल के साथ खत्म करें: "Samjha? Ya ek aur example chahiye?"`
+- Technical terms English में रखें: variable, function, loop, array, pointer
+- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo`
   }
 
-  // Default: Russian
+  // Russian
   const memorySection = memoryContext ? `\n\nПамять о предыдущих уроках:\n${memoryContext}\n` : ''
   return `Ты — опытный русскоязычный преподаватель ${subject}.
 Ты общаешься ТОЛЬКО на русском языке, если студент явно не попросит иначе.
@@ -272,7 +261,7 @@ HINGLISH SUPPORT:
 4. ⚠️ Хвали за успехи, но не переусердствуй
 5. ✅ Если пишешь код — всегда объясняй каждую строку
 6. ❓ Замечай, когда студент устал или запутался, и предлагай паузу или упрощение
-7. 🔧 Если есть данные о предыдущих уроках — начни с краткого напоминания о том, что изучалось, и продолжи с места остановки
+7. 🔧 Если есть данные о предыдущих уроках — начни с краткого напоминания
 
 Формат ответа:
 - Говори как живой учитель, не как энциклопедия
@@ -284,32 +273,31 @@ HINGLISH SUPPORT:
 2. Если "нет" — выбери ДРУГОЙ подход: аналогия, реальный пример, мини-код, разбивка на шаги
 3. Если "частично" — спроси "Что именно непонятно?"
 4. НЕ переходи к новой теме пока не получишь подтверждение понимания
-5. Максимум 3-4 предложения + код, потом вопрос или задание
-6. Короткие ответы студента = усталость → сделай веселее`
+5. Максимум 3-4 предложения + код, потом вопрос или задание`
 }
 
 // ─── Curriculum Generator ─────────────────────────────────────────────────────
 
 export function buildCurriculumPrompt(subject: string, selfDescription: string) {
-  return `Составь персональный учебный план для студента по теме: ${subject}.
+  return `Create a personalized learning plan for a student on the topic: ${subject}.
 
-Самоописание студента: "${selfDescription}"
+Student self-description: "${selfDescription}"
 
-Верни ТОЛЬКО валидный JSON следующей структуры (без markdown, без пояснений):
+Return ONLY valid JSON in the following structure (no markdown, no explanations):
 {
-  "title": "Название курса",
-  "estimatedWeeks": число,
+  "title": "Course title",
+  "estimatedWeeks": number,
   "steps": [
     {
       "order": 1,
-      "title": "Название темы",
-      "description": "Краткое описание",
-      "topics": ["тема1", "тема2"],
-      "exercises": ["упражнение1"],
-      "estimatedHours": число
+      "title": "Topic title",
+      "description": "Brief description",
+      "topics": ["topic1", "topic2"],
+      "exercises": ["exercise1"],
+      "estimatedHours": number
     }
   ]
 }
 
-Адаптируй уровень сложности под описание студента. Создай от 8 до 15 шагов.`
+Adapt the difficulty level to the student's description. Create 8 to 15 steps.`
 }
