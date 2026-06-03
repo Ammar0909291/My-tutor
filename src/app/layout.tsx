@@ -22,8 +22,8 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'My Tutor — AI-репетитор для программистов',
-  description: 'Персональный AI-репетитор по C, C++, Python и английскому языку на русском',
+  title: 'My Tutor — AI Programming Tutor',
+  description: 'Learn C, C++ and Python with your personal AI tutor',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -42,7 +42,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${inter.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${body.variable} ${mono.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           __html: `if('serviceWorker'in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}`
         }} />
       </head>
-      <body className={body.className}>
+      <body suppressHydrationWarning className={body.className}>
         <Providers>{children}</Providers>
       </body>
     </html>

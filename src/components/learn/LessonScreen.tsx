@@ -48,12 +48,12 @@ const LANG_BADGE: Record<string, { label: string; accent: string }> = {
   english: { label: 'English', accent: '#E3B341' },
 }
 const LANG_MAP: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'markdown' }
-const FILENAME: Record<string, string> = { c: 'урок.c', cpp: 'урок.cpp', python: 'урок.py', english: 'урок.md' }
+const FILENAME: Record<string, string> = { c: 'lesson.c', cpp: 'lesson.cpp', python: 'lesson.py', english: 'lesson.md' }
 const INITIAL_CODE: Record<string, string> = {
-  c:       '// Ожидание первого урока...\n',
-  cpp:     '// Ожидание первого урока...\n',
-  python:  '# Ожидание первого урока...\n',
-  english: '<!-- Ожидание первого урока... -->\n',
+  c:       '// Waiting for first lesson...\n',
+  cpp:     '// Waiting for first lesson...\n',
+  python:  '# Waiting for first lesson...\n',
+  english: '<!-- Waiting for first lesson... -->\n',
 }
 const EXT_LANG: Record<string, string> = { py: 'python', c: 'c', cpp: 'cpp', txt: 'text' }
 
@@ -150,11 +150,11 @@ interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
   teachingLanguage?: TeachingLang
   memoryContext?: string | null; pastSessionsSummary?: string | null
-  subjects?: {slug:string;name:string}[]; displayName?: string
+  subjects?: {slug:string;name:string}[]; displayName?: string; userId?: string
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName, userId }: Props) {
   const { t, lang: uiLang } = useLanguage()
 
   // Core state
@@ -337,10 +337,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     try {
       const res = await fetch('/api/learn/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId: sid, message: text }),
+        body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: string }
-      if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: any }
+      const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
+      if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       const full = data.text
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
       const codeBlock = extractLastCodeBlock(full)
@@ -348,7 +349,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       handleSpeak(aid, full)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Ошибка: ${msg}`, streaming: false } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Error: ${msg}`, streaming: false } : m))
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak])
 
@@ -369,16 +370,24 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       try {
         const res = await fetch('/api/sessions', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined }),
+          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined }),
         })
         const data = await res.json()
-        if (!data.success) { setInitError(data.code === 'UPGRADE_REQUIRED' ? 'upgrade' : (data.error ?? 'Ошибка')); return }
+        if (!data.success) { setInitError(data.code === 'UPGRADE_REQUIRED' ? 'upgrade' : (data.error ?? 'Error')); return }
         const sid = data.data.id; setSessionId(sid)
-        const opening = pastSessionsSummary
-          ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}". Кратко напомни и продолжи. 3-4 предложения.`
-          : `Начни первый урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и дай первое объяснение с кодом. 3-4 предложения.`
+        const opening = teachingLanguage === 'ru'
+          ? (pastSessionsSummary
+            ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}". Кратко напомни и продолжи. 3-4 предложения.`
+            : `Начни первый урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и дай первое объяснение с кодом. 3-4 предложения.`)
+          : teachingLanguage === 'hi'
+          ? (pastSessionsSummary
+            ? `Namaste! Pichli baar humne "${pastSessionsSummary}" padha tha. Continue karein? Level: "${levelDescription}". Brief reminder do aur aage badho. 3-4 sentences.`
+            : `"${subjectName}" ka pehla lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation with code do. 3-4 sentences.`)
+          : (pastSessionsSummary
+            ? `Hi! Last time we studied: "${pastSessionsSummary}". Continue? Level: "${levelDescription}". Briefly remind and continue. 3-4 sentences.`
+            : `Start the first lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself and give the first explanation with code. 3-4 sentences.`)
         await sendMessage(sid, opening, false)
-      } catch { setInitError('Не удалось подключиться. Обнови страницу.') }
+      } catch { setInitError('Connection failed. Please refresh the page.') }
     }
     init()
   }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage])
@@ -406,8 +415,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageBase64: imgData.base64, mimeType: imgData.mimeType, question, subject: subjectSlug, lang: teachingLanguage }),
       })
-      const data = await res.json() as { success?: boolean; text?: string; error?: string }
-      if (!data.success || !data.text) throw new Error(data.error ?? 'Vision error')
+      const data = await res.json() as { success?: boolean; text?: string; error?: any }
+      const visionErr = typeof data.error === 'string' ? data.error : data.error?.message ?? 'Vision error'
+      if (!data.success || !data.text) throw new Error(visionErr)
       const full = data.text
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
       const codeBlock = extractLastCodeBlock(full)
@@ -415,7 +425,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       handleSpeak(aid, full)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Ошибка анализа: ${msg}`, streaming: false } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Analysis error: ${msg}`, streaming: false } : m))
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }
 

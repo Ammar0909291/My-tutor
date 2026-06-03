@@ -82,7 +82,7 @@ model Profile {
   currentLevel     String?
   learningGoals    String?         @db.Text
   voiceId          String?
-  teachingLanguage TeachingLanguage @default(ru)
+  teachingLanguage TeachingLanguage @default(en)
   confusedTopics    String[]  @default([])
   masteredTopics    String[]  @default([])
   totalSessions     Int       @default(0)

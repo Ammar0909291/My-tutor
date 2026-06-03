@@ -25,7 +25,7 @@ export default async function QuizPage() {
   const profile = user.profile
   const primarySubject = profile?.subjects[0]?.subject
   const subject = primarySubject?.name ?? 'программирование'
-  const lang = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
+  const lang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
 
   return <QuizClient subject={subject} lang={lang} />
 }

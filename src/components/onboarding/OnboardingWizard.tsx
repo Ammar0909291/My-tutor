@@ -56,7 +56,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const { t, setLang } = useLanguage()
   const [step, setStep] = useState(1)
   const [subjectSlug, setSubjectSlug] = useState('')
-  const [teachingLang, setTeachingLang] = useState<TeachingLang>('ru')
+  const [teachingLang, setTeachingLang] = useState<TeachingLang>('en')
   const [description, setDescription] = useState('')
   const [voiceKey, setVoiceKey] = useState('male')
   const [loading, setLoading] = useState(false)

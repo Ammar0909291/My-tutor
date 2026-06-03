@@ -11,27 +11,41 @@ interface LangContextValue {
 }
 
 const LangContext = createContext<LangContextValue>({
-  lang: 'ru',
+  lang: 'en',
   setLang: () => {},
-  t: (key) => translations.ru[key] ?? key,
+  t: (key) => translations.en[key] ?? key,
 })
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('ru')
+  const [lang, setLangState] = useState<Lang>('en')
 
   useEffect(() => {
-    const stored = localStorage.getItem('mt_lang') as Lang | null
-    if (stored === 'ru' || stored === 'en' || stored === 'hi') setLangState(stored)
+    const stored = localStorage.getItem('mytutor_lang') as Lang | null
+    if (stored && ['ru', 'en', 'hi'].includes(stored)) {
+      setLangState(stored)
+    }
   }, [])
 
-  function setLang(l: Lang) {
-    setLangState(l)
-    localStorage.setItem('mt_lang', l)
+  const setLang = (newLang: Lang) => {
+    setLangState(newLang)
+    localStorage.setItem('mytutor_lang', newLang)
+    fetch('/api/settings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ teachingLanguage: newLang }),
+    }).catch(() => {})
   }
 
-  const t = (key: TranslationKey) => tFn(lang, key)
+  const t = (key: TranslationKey): string => {
+    const uiLang = lang === 'ru' ? 'ru' : 'en'
+    return tFn(uiLang, key)
+  }
 
-  return <LangContext.Provider value={{ lang, setLang, t }}>{children}</LangContext.Provider>
+  return (
+    <LangContext.Provider value={{ lang, setLang, t }}>
+      {children}
+    </LangContext.Provider>
+  )
 }
 
 export function useLanguage() {

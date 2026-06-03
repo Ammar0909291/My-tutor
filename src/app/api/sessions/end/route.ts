@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { chatWithFallback } from '@/lib/ai/client'
+import { summarizeSession, generateJSON } from '@/lib/ai/client'
 import { MessageRole, SubscriptionStatus } from '@prisma/client'
 
 const schema = z.object({ sessionId: z.string() })
@@ -37,26 +37,13 @@ export async function POST(req: Request) {
     let summary: string | null = null
 
     if (learnSession.messages.length > 0) {
-      const transcript = learnSession.messages
-        .map((m) => `${m.role === MessageRole.USER ? 'Студент' : 'Репетитор'}: ${m.content}`)
-        .join('\n')
-        .slice(0, 6000)
-
       try {
-        const completion = await chatWithFallback({
-          messages: [
-            {
-              role: 'system',
-              content:
-                'Ты помощник, который кратко резюмирует учебные сессии. Отвечай только на русском языке.',
-            },
-            {
-              role: 'user',
-              content: `Напиши краткое резюме этого урока в 2-3 предложениях на русском языке. Укажи тему урока и что было изучено.\n\nТранскрипт урока:\n${transcript}`,
-            },
-          ],
-        })
-        summary = completion.choices[0]?.message?.content ?? null
+        const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+        const lang = profile?.teachingLanguage ?? 'en'
+        const msgs = learnSession.messages
+          .slice(0, 30)
+          .map((m) => ({ role: m.role === MessageRole.USER ? 'user' : 'assistant', content: m.content.slice(0, 300) }))
+        summary = await summarizeSession(msgs, lang) || null
       } catch (err) {
         console.error('[sessions/end] summary generation failed', err)
       }
@@ -110,27 +97,16 @@ export async function POST(req: Request) {
     if (learnSession.messages.length > 2) {
       try {
         const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
-        const lang = profile?.teachingLanguage ?? 'ru'
+        const lang = profile?.teachingLanguage ?? 'en'
         const lastMessages = learnSession.messages
           .slice(-20)
           .map((m) => `${m.role === MessageRole.USER ? 'Student' : 'Tutor'}: ${m.content.slice(0, 300)}`)
           .join('\n')
 
-        const flashcardCompletion = await chatWithFallback({
-          messages: [
-            { role: 'system', content: 'You are a flashcard generator. Return ONLY valid JSON array, no markdown.' },
-            {
-              role: 'user',
-              content: `Based on this tutoring session content, create 3 flashcard Q&A pairs about the key concepts. Return ONLY JSON array: [{"question":"...","answer":"...","topic":"..."}]. Keep answers under 2 sentences. Language: ${lang}\n\nSession:\n${lastMessages}`,
-            },
-          ],
-          temperature: 0.5,
-          max_tokens: 800,
-        })
-
-        const raw = flashcardCompletion.choices[0]?.message?.content ?? '[]'
-        const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
-        const flashcards = JSON.parse(cleaned)
+        const flashcards = await generateJSON(
+          `Based on this tutoring session content, create 3 flashcard Q&A pairs about the key concepts. Return ONLY JSON array: [{"question":"...","answer":"...","topic":"..."}]. Keep answers under 2 sentences. Language: ${lang}\n\nSession:\n${lastMessages}`,
+          800,
+        )
 
         if (Array.isArray(flashcards) && flashcards.length > 0) {
           const tomorrow = new Date()

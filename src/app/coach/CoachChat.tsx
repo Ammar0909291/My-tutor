@@ -53,10 +53,12 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
         }),
       })
       const data = await res.json()
-      const reply = data?.content ?? 'Ошибка ответа'
+      const errorMsg = teachingLanguage === 'ru' ? 'Ошибка ответа. Попробуй ещё раз.' : 'Error. Please try again.'
+      const reply = data?.content ?? errorMsg
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
     } catch {
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Произошла ошибка. Попробуй ещё раз.' }])
+      const errorMsg = teachingLanguage === 'ru' ? 'Произошла ошибка. Попробуй ещё раз.' : 'Something went wrong. Please try again.'
+      setMessages((prev) => [...prev, { role: 'assistant', content: errorMsg }])
     } finally {
       setLoading(false)
     }
@@ -67,10 +69,10 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
       {/* Header */}
       <div style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
         <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-          ← Назад
+          {teachingLanguage === 'ru' ? '← Назад' : '← Back'}
         </a>
         <span style={{ fontSize: 20 }}>🎯</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>Коуч</span>
+        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{teachingLanguage === 'ru' ? 'Коуч' : 'Coach'}</span>
         <span style={{ fontSize: 12, color: 'var(--text-secondary)', marginLeft: 4 }}>{subject}</span>
       </div>
 
@@ -96,7 +98,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 16 }}>
             <div style={{ padding: '12px 16px', borderRadius: '16px 16px 16px 4px', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)', fontSize: 14 }}>
-              Думаю...
+              {teachingLanguage === 'ru' ? 'Думаю...' : 'Thinking...'}
             </div>
           </div>
         )}
@@ -110,7 +112,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && send()}
-            placeholder="Напиши сообщение..."
+            placeholder={teachingLanguage === 'ru' ? 'Напиши сообщение...' : 'Type a message...'}
             style={{
               flex: 1,
               padding: '12px 16px',

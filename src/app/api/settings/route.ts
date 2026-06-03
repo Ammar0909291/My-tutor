@@ -21,7 +21,7 @@ export async function GET() {
     success: true,
     data: {
       voiceId: profile?.voiceId ?? 'male',
-      teachingLanguage: profile?.teachingLanguage ?? 'ru',
+      teachingLanguage: profile?.teachingLanguage ?? 'en',
       subscriptionStatus: subscription?.status ?? 'FREE',
       freeSessionUsed: subscription?.freeSessionUsed ?? false,
     },
@@ -44,7 +44,19 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ success: true })
     }
 
-    await prisma.profile.update({ where: { userId: session.user.id }, data })
+    const userId = session.user.id
+    // Use upsert: profile may not exist yet if user skipped onboarding or DB was reset
+    await prisma.profile.upsert({
+      where: { userId },
+      update: data,
+      create: {
+        userId,
+        displayName: session.user.name ?? 'Student',
+        selfDescription: 'Beginner',
+        voiceId: data.voiceId ?? 'male',
+        teachingLanguage: data.teachingLanguage ?? 'en',
+      },
+    })
     return NextResponse.json({ success: true })
   } catch (err) {
     if (err instanceof z.ZodError) {

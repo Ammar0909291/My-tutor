@@ -1,7 +1,8 @@
-// Convenience re-export — OpenRouter AI helpers at a flat path
+// Convenience re-export — AI helpers at a flat path
 export {
-  ai,
-  TUTOR_MODEL,
+  generateAIResponse,
+  generateJSON,
+  summarizeSession,
   buildTutorSystemPrompt,
   buildCurriculumPrompt,
 } from '@/lib/ai/client'

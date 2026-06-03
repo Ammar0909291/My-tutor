@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { chatWithFallback } from '@/lib/ai/client'
+import { generateAIResponse } from '@/lib/ai/client'
 
 const schema = z.object({
   code: z.string().max(10000),
@@ -18,23 +18,11 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { code, language } = schema.parse(body)
 
-    const completion = await chatWithFallback({
-      messages: [
-        {
-          role: 'system',
-          content:
-            'Ты — эмулятор компилятора и интерпретатора. Симулируй выполнение кода и верни ТОЛЬКО вывод программы (stdout/stderr). Без пояснений, без форматирования — только чистый текст вывода.',
-        },
-        {
-          role: 'user',
-          content: `Язык: ${language}\n\nКод:\n\`\`\`${language}\n${code}\n\`\`\``,
-        },
-      ],
-      temperature: 0.1,
-      max_tokens: 512,
-    })
-
-    const output = completion.choices[0]?.message?.content ?? '(нет вывода)'
+    const output = await generateAIResponse(
+      [{ role: 'user', content: `Язык: ${language}\n\nКод:\n\`\`\`${language}\n${code}\n\`\`\`` }],
+      'Ты — эмулятор компилятора и интерпретатора. Симулируй выполнение кода и верни ТОЛЬКО вывод программы (stdout/stderr). Без пояснений, без форматирования — только чистый текст вывода.',
+      512,
+    )
     return NextResponse.json({ success: true, output })
   } catch (err) {
     if (err instanceof z.ZodError) {

@@ -1,39 +1,78 @@
 :root {
-  /* Backgrounds */
+  /* ── Base backgrounds ── */
+  --bg-void:     #080B10;
   --bg-base:     #0D1117;
   --bg-surface:  #161B22;
   --bg-elevated: #21262D;
-  --bg-hover:    #30363D;
+  --bg-hover:    #2D333B;
+  --bg-overlay:  rgba(13,17,23,0.95);
 
-  /* Accents */
-  --accent-primary:   #F78166;
-  --accent-secondary: #79C0FF;
-  --accent-green:     #56D364;
-  --accent-yellow:    #E3B341;
-  --accent-primary-dim: rgba(247,129,102,0.12);
-  --accent-primary-glow: rgba(247,129,102,0.35);
+  /* ── Brand coral ── */
+  --coral:        #FF7B6B;
+  --coral-hover:  #FF6B58;
+  --coral-muted:  rgba(255,123,107,0.12);
+  --coral-border: rgba(255,123,107,0.25);
+  --coral-glow:   0 0 32px rgba(255,123,107,0.25);
 
-  /* Text */
-  --text-primary:   #F0F6FC;
-  --text-secondary: #8B949E;
+  /* ── Semantic colors ── */
+  --blue:          #79C0FF;
+  --blue-muted:    rgba(121,192,255,0.10);
+  --green:         #3FB950;
+  --green-muted:   rgba(63,185,80,0.10);
+  --yellow:        #D29922;
+  --yellow-muted:  rgba(210,153,34,0.10);
+  --purple:        #A371F7;
+  --purple-muted:  rgba(163,113,247,0.10);
+  --red:           #F85149;
+  --red-muted:     rgba(248,81,73,0.10);
+
+  /* ── Legacy accent aliases (keep for backward compat) ── */
+  --accent-primary:      var(--coral);
+  --accent-secondary:    var(--blue);
+  --accent-green:        var(--green);
+  --accent-yellow:       var(--yellow);
+  --accent-primary-dim:  var(--coral-muted);
+  --accent-primary-glow: rgba(255,123,107,0.35);
+
+  /* ── Text ── */
+  --text-primary:   #E6EDF3;
+  --text-secondary: #7D8590;
   --text-dim:       #484F58;
+  --text-inverse:   #0D1117;
 
-  /* Borders */
-  --border-default: #30363D;
-  --border-accent:  rgba(247,129,102,0.4);
-  --border-muted:   rgba(48,54,61,0.6);
+  /* ── Borders ── */
+  --border-subtle:   rgba(48,54,61,0.8);
+  --border-default:  #30363D;
+  --border-emphasis: #6E7681;
+  --border-accent:   rgba(255,123,107,0.4);
+  --border-muted:    rgba(48,54,61,0.6);
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  /* ── Radius ── */
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   16px;
+  --r-xl:   24px;
+  --r-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+  /* ── Legacy radius aliases ── */
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 0 rgba(27,31,36,0.04);
+  --shadow-md: 0 3px 12px rgba(0,0,0,0.4);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
+  --shadow-xl: 0 16px 64px rgba(0,0,0,0.8);
 
-  /* Typography */
+  /* ── Easing ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 250ms;
+  --duration-slow:   400ms;
+
+  /* ── Typography ── */
   --font-heading: var(--font-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif);
   --font-body:    var(--font-inter, 'Inter', system-ui, sans-serif);
   --font-mono:    var(--font-jetbrains, 'JetBrains Mono', 'Fira Code', Consolas, monospace);

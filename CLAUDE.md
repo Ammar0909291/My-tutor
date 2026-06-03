@@ -44,6 +44,13 @@ npm run lint             # ESLint
 npm run type-check       # TypeScript check (no emit)
 ```
 
+## Assistant Behavior
+
+- **Always include local dev run instructions at the end of every response:**
+  ```bash
+  npm run dev   # http://localhost:3000
+  ```
+
 ## Key Dependencies
 - **Framework**: Next.js 14 (App Router)
 - **Auth**: NextAuth v5 (`AUTH_SECRET` env var, not `NEXTAUTH_SECRET`)

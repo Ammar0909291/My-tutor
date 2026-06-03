@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { GoogleGenerativeAI } from '@google/generative-ai'
-import { chatWithFallback } from '@/lib/ai/client'
+
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
+const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
 
 const schema = z.object({
   imageBase64: z.string().min(1),
   mimeType: z.string().default('image/jpeg'),
   question: z.string().max(2000).default(''),
   subject: z.string().max(64).default('programming'),
-  lang: z.enum(['ru', 'en', 'hi']).default('ru'),
+  lang: z.enum(['ru', 'en', 'hi']).default('en'),
 })
 
 const PROMPTS: Record<string, string> = {
@@ -24,37 +25,42 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { imageBase64, mimeType, question, subject, lang } = schema.parse(body)
-
-    const apiKey = process.env.GEMINI_API_KEY
-    if (!apiKey) {
-      // Fallback: describe image via text-only model (limited, but works)
-      const completion = await chatWithFallback({
-        messages: [
-          { role: 'system', content: PROMPTS[lang] },
-          { role: 'user', content: question || 'Что изображено на картинке?' },
-        ],
-        temperature: 0.5,
-        max_tokens: 1024,
-      })
-      const text = completion.choices[0]?.message?.content ?? ''
-      return NextResponse.json({ success: true, text })
-    }
-
-    const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
+    const { imageBase64, mimeType, question, lang } = schema.parse(body)
 
     const basePrompt = PROMPTS[lang]
-    const fullPrompt = question
-      ? `${basePrompt}\n\nДополнительный вопрос студента: ${question}`
-      : basePrompt
+    const fullPrompt = question ? `${basePrompt}\n\nStudent question: ${question}` : basePrompt
 
-    const result = await model.generateContent([
-      { inlineData: { data: imageBase64, mimeType } },
-      fullPrompt,
-    ])
+    const res = await fetch(GROQ_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${GROQ_KEY}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        messages: [
+          { role: 'system', content: fullPrompt },
+          {
+            role: 'user',
+            content: [
+              { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageBase64}` } },
+              { type: 'text', text: question || 'Analyze this image.' },
+            ],
+          },
+        ],
+        max_tokens: 1024,
+      }),
+    })
 
-    const text = result.response.text()
+    if (!res.ok) {
+      const errBody = await res.text()
+      return NextResponse.json({ success: false, error: `Groq ${res.status}: ${errBody}` }, { status: 500 })
+    }
+
+    const result = (await res.json()) as { choices?: { message?: { content?: string } }[] }
+    const text = result.choices?.[0]?.message?.content ?? ''
     return NextResponse.json({ success: true, text })
   } catch (err) {
     console.error('[vision]', err)

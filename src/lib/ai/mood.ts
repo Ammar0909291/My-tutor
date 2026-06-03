@@ -1,4 +1,4 @@
-import { chatWithFallback } from './client'
+import { generateJSON } from './client'
 
 export type MoodAnalysis = {
   engagement: 'high' | 'medium' | 'low'
@@ -23,21 +23,16 @@ ${recentMessages.map((m) => `[${m.role}]: ${m.content}`).join('\n')}
   "notes": "краткое объяснение"
 }`
 
+  const fallback: MoodAnalysis = {
+    engagement: 'medium',
+    confusion: 'none',
+    suggestedAction: 'continue',
+    notes: 'Could not parse mood analysis',
+  }
   try {
-    const completion = await chatWithFallback({
-      messages: [
-        { role: 'system', content: 'Return only valid JSON, no markdown.' },
-        { role: 'user', content: prompt },
-      ],
-    })
-    const text = completion.choices[0].message.content ?? ''
-    return JSON.parse(text) as MoodAnalysis
+    const result = await generateJSON(prompt)
+    return (result as MoodAnalysis) ?? fallback
   } catch {
-    return {
-      engagement: 'medium',
-      confusion: 'none',
-      suggestedAction: 'continue',
-      notes: 'Could not parse mood analysis',
-    }
+    return fallback
   }
 }
