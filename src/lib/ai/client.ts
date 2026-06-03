@@ -27,9 +27,8 @@ if (process.env.NODE_ENV !== 'production') globalForAI.groq = ai
 
 function isRetryableError(err: unknown): boolean {
   if (err instanceof Groq.APIError) {
-    if (err.status === 401 || err.status === 403) {
-      throw new Error('GROQ_API_KEY is missing or invalid. Please set GROQ_API_KEY in your .env file.')
-    }
+    // Treat auth errors as retryable so we fall through to Gemini
+    if (err.status === 401 || err.status === 403) return true
     return err.status === 429 || err.status >= 500
   }
   const msg = err instanceof Error ? err.message : String(err)
@@ -122,8 +121,8 @@ export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
 ): Promise<string> {
-  if (!process.env.GROQ_API_KEY) {
-    throw new Error('GROQ_API_KEY is missing from .env.local')
+  if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY) {
+    throw new Error('No AI API key configured. Set GROQ_API_KEY or GEMINI_API_KEY in your .env file.')
   }
   const completion = await chatWithFallback({
     messages: [{ role: 'system', content: systemPrompt }, ...messages],
@@ -154,31 +153,26 @@ export async function chatWithFallback(params: CreateParams): Promise<Groq.Chat.
 
   // All Groq models exhausted — try Gemini
   if (process.env.GEMINI_API_KEY) {
-    try {
-      const text = await geminiComplete(params.messages, {
-        temperature: params.temperature,
-        maxOutputTokens: params.max_tokens,
-      })
-      return {
-        id: 'gemini-fallback',
-        object: 'chat.completion',
-        created: Date.now(),
-        model: 'gemini-2.0-flash',
-        choices: [{
-          index: 0,
-          message: { role: 'assistant', content: text },
-          finish_reason: 'stop',
-          logprobs: null,
-        }],
-        usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0, queue_time: 0, prompt_time: 0, completion_time: 0, total_time: 0 },
-      } as Groq.Chat.Completions.ChatCompletion
-    } catch (geminiErr) {
-      const msg = geminiErr instanceof Error ? geminiErr.message : String(geminiErr)
-      if (!msg.includes('429') && !msg.includes('quota')) throw geminiErr
-    }
+    const text = await geminiComplete(params.messages, {
+      temperature: params.temperature,
+      maxOutputTokens: params.max_tokens,
+    })
+    return {
+      id: 'gemini-fallback',
+      object: 'chat.completion',
+      created: Date.now(),
+      model: 'gemini-2.0-flash',
+      choices: [{
+        index: 0,
+        message: { role: 'assistant', content: text },
+        finish_reason: 'stop',
+        logprobs: null,
+      }],
+      usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0, queue_time: 0, prompt_time: 0, completion_time: 0, total_time: 0 },
+    } as Groq.Chat.Completions.ChatCompletion
   }
 
-  throw lastErr
+  throw new Error('No AI provider available. Set GROQ_API_KEY or GEMINI_API_KEY in your .env file.')
 }
 
 /** Streaming completion with Groq fallback chain, then Gemini. */
@@ -205,15 +199,10 @@ export async function chatStreamWithFallback(
 
   // All Groq models exhausted — try Gemini
   if (process.env.GEMINI_API_KEY) {
-    try {
-      return { stream: geminiStream(params.messages), model: 'gemini-2.0-flash' }
-    } catch (geminiErr) {
-      const msg = geminiErr instanceof Error ? geminiErr.message : String(geminiErr)
-      if (!msg.includes('429') && !msg.includes('quota')) throw geminiErr
-    }
+    return { stream: geminiStream(params.messages), model: 'gemini-2.0-flash' }
   }
 
-  throw lastErr
+  throw new Error('No AI provider available. Set GROQ_API_KEY or GEMINI_API_KEY in your .env file.')
 }
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
