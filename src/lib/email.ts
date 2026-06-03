@@ -12,16 +12,28 @@ function makeTransport() {
   })
 }
 
-export async function sendPasswordResetEmail(to: string, token: string) {
-  const base = process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
+export async function sendPasswordResetEmail(
+  to: string,
+  token: string,
+): Promise<{ success: boolean }> {
+  const base =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    process.env.NEXTAUTH_URL ??
+    'http://localhost:3000'
   const resetUrl = `${base}/auth/reset-password?token=${token}`
   const from = process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
 
-  await makeTransport().sendMail({
-    from,
-    to,
-    subject: 'Сброс пароля — My Tutor',
-    html: `
+  if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.log('[email] SMTP credentials missing — reset link (dev only):', resetUrl)
+    return { success: false }
+  }
+
+  try {
+    await makeTransport().sendMail({
+      from,
+      to,
+      subject: 'Password reset — My Tutor',
+      html: `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
@@ -31,20 +43,20 @@ export async function sendPasswordResetEmail(to: string, token: string) {
         <tr><td style="padding:32px 32px 24px;">
           <p style="margin:0 0 4px;font-size:22px;">🔥</p>
           <h1 style="margin:0 0 8px;font-size:22px;font-weight:800;color:#F78166;">My Tutor</h1>
-          <h2 style="margin:0 0 16px;font-size:18px;font-weight:700;color:#F0F6FC;">Сброс пароля</h2>
+          <h2 style="margin:0 0 16px;font-size:18px;font-weight:700;color:#F0F6FC;">Password Reset</h2>
           <p style="margin:0 0 24px;font-size:14px;color:#8B949E;line-height:1.6;">
-            Мы получили запрос на сброс пароля для вашего аккаунта.<br>
-            Нажмите кнопку ниже, чтобы установить новый пароль.
+            We received a request to reset the password for your account.<br>
+            Click the button below to set a new password.
           </p>
           <a href="${resetUrl}"
             style="display:inline-block;background:#F78166;color:#fff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:700;">
-            Сбросить пароль
+            Reset password
           </a>
         </td></tr>
         <tr><td style="padding:16px 32px 28px;border-top:1px solid #30363D;">
           <p style="margin:0;font-size:12px;color:#484F58;line-height:1.6;">
-            Ссылка действительна <strong style="color:#8B949E;">1 час</strong>.
-            Если вы не запрашивали сброс пароля — просто проигнорируйте это письмо.
+            Link valid for <strong style="color:#8B949E;">1 hour</strong>.
+            If you did not request a password reset — ignore this email.
           </p>
         </td></tr>
       </table>
@@ -52,6 +64,12 @@ export async function sendPasswordResetEmail(to: string, token: string) {
   </table>
 </body>
 </html>`,
-    text: `Сброс пароля — My Tutor\n\nПерейдите по ссылке для сброса пароля:\n${resetUrl}\n\nСсылка действительна 1 час.`,
-  })
+      text: `Password Reset — My Tutor\n\nClick the link to reset your password:\n${resetUrl}\n\nLink valid for 1 hour.`,
+    })
+    return { success: true }
+  } catch (err) {
+    console.error('[email] Failed to send reset email:', err)
+    console.log('[email] Reset link (dev fallback):', resetUrl)
+    return { success: false }
+  }
 }

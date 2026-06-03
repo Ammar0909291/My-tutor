@@ -198,6 +198,14 @@ export const translations = {
     dash_upgrade_banner: 'Твой бесплатный урок использован · Оформи Pro чтобы продолжить',
     dash_upgrade_cta: 'Оформить Pro →',
 
+    /* ── Forgot password ── */
+    forgot_title: 'Забыл пароль?',
+    forgot_sub: 'Введи свой email и мы пришлём ссылку для сброса пароля',
+    forgot_email: 'EMAIL',
+    forgot_btn: 'Отправить ссылку',
+    forgot_back: 'Вспомнил пароль? Войти',
+    forgot_success: 'Проверь email — ссылка отправлена',
+
     /* ── Settings ── */
     settings_title: 'Настройки',
     settings_plan: 'Тариф',
@@ -412,6 +420,14 @@ export const translations = {
     dash_upgrade_banner: 'Your free lesson has been used · Get Pro to continue',
     dash_upgrade_cta: 'Get Pro →',
 
+    /* ── Forgot password ── */
+    forgot_title: 'Forgot password?',
+    forgot_sub: "Enter your email and we'll send you a reset link",
+    forgot_email: 'Email',
+    forgot_btn: 'Send reset link',
+    forgot_back: 'Remembered? Sign in',
+    forgot_success: 'Check your email for the reset link',
+
     /* ── Settings ── */
     settings_title: 'Settings',
     settings_plan: 'Plan',
@@ -625,6 +641,14 @@ export const translations = {
     /* ── Dashboard upgrade ── */
     dash_upgrade_banner: 'आपका मुफ्त पाठ समाप्त हो गया · जारी रखने के लिए Pro लें',
     dash_upgrade_cta: 'Pro लें →',
+
+    /* ── Forgot password ── */
+    forgot_title: 'पासवर्ड भूल गए?',
+    forgot_sub: 'अपना email डालें और हम reset link भेजेंगे',
+    forgot_email: 'EMAIL',
+    forgot_btn: 'Reset link भेजें',
+    forgot_back: 'याद आया? लॉग इन करें',
+    forgot_success: 'Email चेक करें — link भेज दी गई है',
 
     /* ── Settings ── */
     settings_title: 'सेटिंग्स',
