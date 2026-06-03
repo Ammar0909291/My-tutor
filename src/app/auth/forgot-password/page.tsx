@@ -9,12 +9,12 @@ export default function ForgotPasswordPage() {
   const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [state, setState] = useState<State>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setState('loading')
-    setErrorMsg('')
+    setErrorMsg(null)
     try {
       const res = await fetch('/api/auth/forgot-password', {
         method: 'POST',
@@ -23,13 +23,13 @@ export default function ForgotPasswordPage() {
       })
       const data = await res.json()
       if (!res.ok || !data.success) {
-        setErrorMsg(data.error ?? data.message ?? t('forgot_btn'))
+        setErrorMsg(data.error ?? data.message ?? t('error_required'))
         setState('error')
       } else {
         setState('sent')
       }
     } catch {
-      setErrorMsg(t('forgot_sub'))
+      setErrorMsg(t('reset_error_network'))
       setState('error')
     }
   }
@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
               {t('forgot_sub')}
             </p>
 
-            {state === 'error' && (
+            {errorMsg !== null && (
               <div className="mb-5 p-3.5 rounded-xl text-sm"
                 style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)', color: '#F85149' }}>
                 {errorMsg}
@@ -81,7 +81,7 @@ export default function ForgotPasswordPage() {
                   {t('forgot_email')}
                 </label>
                 <input
-                  type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                  type="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrorMsg(null) }}
                   required placeholder="your@email.com" className="input-field"
                 />
               </div>

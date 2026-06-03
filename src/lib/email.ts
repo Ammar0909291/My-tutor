@@ -15,7 +15,7 @@ function makeTransport() {
 export async function sendPasswordResetEmail(
   to: string,
   token: string,
-): Promise<{ success: boolean }> {
+): Promise<{ success: boolean; error?: string }> {
   const base =
     process.env.NEXT_PUBLIC_APP_URL ??
     process.env.NEXTAUTH_URL ??
@@ -23,9 +23,9 @@ export async function sendPasswordResetEmail(
   const resetUrl = `${base}/auth/reset-password?token=${token}`
   const from = process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
 
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    console.log('[email] SMTP credentials missing — reset link (dev only):', resetUrl)
-    return { success: false }
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.log('[email] SMTP not configured — RESET LINK (dev mode):', resetUrl)
+    return { success: true }
   }
 
   try {
@@ -70,6 +70,6 @@ export async function sendPasswordResetEmail(
   } catch (err) {
     console.error('[email] Failed to send reset email:', err)
     console.log('[email] Reset link (dev fallback):', resetUrl)
-    return { success: false }
+    return { success: true, error: String(err) }
   }
 }
