@@ -8,24 +8,13 @@ const schema = z.object({
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
 })
 
-async function resolveDbUserId(sessionId: string, sessionEmail?: string | null): Promise<string | null> {
-  const byId = await prisma.user.findUnique({ where: { id: sessionId }, select: { id: true } })
-  if (byId) return byId.id
-  if (!sessionEmail) return null
-  const byEmail = await prisma.user.findUnique({ where: { email: sessionEmail }, select: { id: true } })
-  return byEmail?.id ?? null
-}
-
 export async function GET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 
-  const dbUserId = await resolveDbUserId(session.user.id, session.user.email)
-  if (!dbUserId) return NextResponse.json({ success: true, data: { voiceId: 'male', teachingLanguage: 'en', subscriptionStatus: 'FREE', freeSessionUsed: false } })
-
   const [profile, subscription] = await Promise.all([
-    prisma.profile.findUnique({ where: { userId: dbUserId } }),
-    prisma.subscription.findUnique({ where: { userId: dbUserId } }),
+    prisma.profile.findUnique({ where: { userId: session.user.id } }),
+    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
   ])
 
   return NextResponse.json({
@@ -53,14 +42,12 @@ export async function PATCH(req: Request) {
 
     if (Object.keys(data).length === 0) return NextResponse.json({ success: true })
 
-    const dbUserId = await resolveDbUserId(session.user.id, session.user.email)
-    if (!dbUserId) return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 })
-
+    const userId = session.user.id
     await prisma.profile.upsert({
-      where: { userId: dbUserId },
+      where: { userId },
       update: data,
       create: {
-        userId: dbUserId,
+        userId,
         displayName: session.user.name ?? 'Student',
         selfDescription: 'Beginner',
         voiceId: data.voiceId ?? 'male',

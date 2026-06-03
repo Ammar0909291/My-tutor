@@ -37,8 +37,20 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) token.sub = user.id
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id
+        return token
+      }
+      // Re-validate token.sub on every use: if the DB was reset or the user row
+      // was re-created under a new id, heal the token so all routes get the real id.
+      if (token.sub && token.email) {
+        const byId = await prisma.user.findUnique({ where: { id: token.sub }, select: { id: true } })
+        if (!byId) {
+          const byEmail = await prisma.user.findUnique({ where: { email: token.email as string }, select: { id: true } })
+          if (byEmail) token.sub = byEmail.id
+        }
+      }
       return token
     },
     session({ session, token }) {
