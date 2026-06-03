@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { auth } from '@/lib/auth'
 import { generateJSON } from '@/lib/ai/client'
 
-const schema = z.object({ subject: z.string(), topic: z.string().optional(), lang: z.enum(['ru', 'en', 'hi']) })
+const schema = z.object({ subject: z.string(), topic: z.string().optional(), lang: z.enum(['ru', 'en', 'hi']).default('en') })
 
 export async function POST(req: Request) {
-  const session = await auth()
-  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   try {
     const body = await req.json()

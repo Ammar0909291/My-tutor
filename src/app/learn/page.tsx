@@ -94,6 +94,7 @@ export default async function LearnPage() {
       pastSessionsSummary={pastSessionsSummary}
       subjects={subjects}
       displayName={profile.displayName}
+      userId={session.user.id}
     />
   )
 }

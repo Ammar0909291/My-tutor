@@ -150,11 +150,11 @@ interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
   teachingLanguage?: TeachingLang
   memoryContext?: string | null; pastSessionsSummary?: string | null
-  subjects?: {slug:string;name:string}[]; displayName?: string
+  subjects?: {slug:string;name:string}[]; displayName?: string; userId?: string
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName, userId }: Props) {
   const { t, lang: uiLang } = useLanguage()
 
   // Core state
@@ -337,7 +337,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     try {
       const res = await fetch('/api/learn/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId: sid, message: text }),
+        body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
       const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: any }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
