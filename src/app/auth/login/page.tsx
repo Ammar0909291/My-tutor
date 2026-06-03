@@ -10,11 +10,11 @@ const NEXTAUTH_ERROR_KEYS: Record<string, 'error_invalid' | 'error_required'> = 
   CredentialsSignin: 'error_invalid',
 }
 
-const NEXTAUTH_ERROR_FALLBACK: Record<string, string> = {
-  OAuthAccountNotLinked: 'Этот email уже используется другим способом входа',
-  OAuthSignin: 'Ошибка входа через Google. Попробуй ещё раз.',
-  Callback: 'Ошибка авторизации. Попробуй ещё раз.',
-  Default: 'Произошла ошибка. Попробуй ещё раз.',
+const NEXTAUTH_ERROR_I18N_KEYS: Record<string, 'error_oauth_linked' | 'error_oauth_signin' | 'error_oauth_callback' | 'error_generic'> = {
+  OAuthAccountNotLinked: 'error_oauth_linked',
+  OAuthSignin: 'error_oauth_signin',
+  Callback: 'error_oauth_callback',
+  Default: 'error_generic',
 }
 
 export default function LoginPage() {
@@ -39,8 +39,9 @@ function LoginForm() {
   useEffect(() => {
     const errorCode = params.get('error')
     if (errorCode) {
-      const key = NEXTAUTH_ERROR_KEYS[errorCode]
-      setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[errorCode] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+      const translationKey = NEXTAUTH_ERROR_KEYS[errorCode]
+      const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[errorCode] ?? 'error_generic'
+      setError(translationKey ? t(translationKey) : t(fallbackKey))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
@@ -54,10 +55,11 @@ function LoginForm() {
       const result = await signIn('credentials', { email, password, redirect: false })
       setLoading(false)
 
-      if (!result) { setError(NEXTAUTH_ERROR_FALLBACK.Default); return }
+      if (!result) { setError(t('error_generic')); return }
       if (result.error) {
-        const key = NEXTAUTH_ERROR_KEYS[result.error]
-        setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[result.error] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+        const translationKey = NEXTAUTH_ERROR_KEYS[result.error]
+        const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[result.error] ?? 'error_generic'
+        setError(translationKey ? t(translationKey) : t(fallbackKey))
         return
       }
 
@@ -65,7 +67,7 @@ function LoginForm() {
       window.location.href = callbackUrl
     } catch {
       setLoading(false)
-      setError(NEXTAUTH_ERROR_FALLBACK.Default)
+      setError(t('error_generic'))
     }
   }
 

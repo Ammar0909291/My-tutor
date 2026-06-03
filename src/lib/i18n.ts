@@ -245,6 +245,12 @@ export const translations = {
     settings_save: 'Сохранить',
     settings_saved: 'Сохранено ✓',
     settings_back: '← Панель',
+
+    /* ── Auth errors ── */
+    error_oauth_linked: 'Этот email уже используется другим способом входа',
+    error_oauth_signin: 'Ошибка входа через Google. Попробуй ещё раз.',
+    error_oauth_callback: 'Ошибка авторизации. Попробуй ещё раз.',
+    error_generic: 'Произошла ошибка. Попробуй ещё раз.',
   },
   en: {
     /* ── Landing ── */
@@ -490,6 +496,12 @@ export const translations = {
     settings_save: 'Save',
     settings_saved: 'Saved ✓',
     settings_back: '← Dashboard',
+
+    /* ── Auth errors ── */
+    error_oauth_linked: 'This email is already used with a different sign-in method',
+    error_oauth_signin: 'Google sign-in error. Please try again.',
+    error_oauth_callback: 'Authorization error. Please try again.',
+    error_generic: 'Something went wrong. Please try again.',
   },
   hi: {
     /* ── Landing ── */
@@ -735,6 +747,12 @@ export const translations = {
     settings_save: 'सहेजें',
     settings_saved: 'सहेजा गया ✓',
     settings_back: '← डैशबोर्ड',
+
+    /* ── Auth errors ── */
+    error_oauth_linked: 'यह email पहले से किसी अन्य sign-in method से जुड़ा है',
+    error_oauth_signin: 'Google sign-in में गड़बड़ी। फिर से कोशिश करें।',
+    error_oauth_callback: 'Authorization में गड़बड़ी। फिर से कोशिश करें।',
+    error_generic: 'कुछ गड़बड़ हो गई। फिर से कोशिश करें।',
   },
 } as const
 
