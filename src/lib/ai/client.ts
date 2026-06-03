@@ -14,9 +14,9 @@ const FALLBACK_MODELS = [
 
 const globalForAI = globalThis as unknown as { groq: Groq | undefined }
 
-export const ai = globalForAI.groq ?? new Groq({
-  apiKey: process.env.GROQ_API_KEY || 'missing-groq-key',
-})
+const GROQ_KEY = process.env.GROQ_API_KEY || ''
+
+export const ai = globalForAI.groq ?? new Groq({ apiKey: GROQ_KEY })
 
 if (process.env.NODE_ENV !== 'production') globalForAI.groq = ai
 
