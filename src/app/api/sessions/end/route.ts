@@ -77,6 +77,79 @@ export async function POST(req: Request) {
       data: { freeSessionUsed: true },
     })
 
+    // +10 XP for completing a session
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: { xpPoints: { increment: 10 } },
+    })
+
+    // Update streak logic
+    try {
+      const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      yesterday.setHours(0, 0, 0, 0)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      const lastStudy = profile?.lastStudyDate
+      const isConsecutive = lastStudy && lastStudy >= yesterday && lastStudy < today
+      const newStreak = isConsecutive ? (profile?.streakDays ?? 0) + 1 : 1
+      await prisma.profile.update({
+        where: { userId: session.user.id },
+        data: {
+          streakDays: newStreak,
+          lastStudyDate: new Date(),
+          totalSessions: { increment: 1 },
+        },
+      })
+    } catch (err) {
+      console.error('[sessions/end] streak update failed', err)
+    }
+
+    // Generate flashcards from session content
+    if (learnSession.messages.length > 2) {
+      try {
+        const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+        const lang = profile?.teachingLanguage ?? 'ru'
+        const lastMessages = learnSession.messages
+          .slice(-20)
+          .map((m) => `${m.role === MessageRole.USER ? 'Student' : 'Tutor'}: ${m.content.slice(0, 300)}`)
+          .join('\n')
+
+        const flashcardCompletion = await chatWithFallback({
+          messages: [
+            { role: 'system', content: 'You are a flashcard generator. Return ONLY valid JSON array, no markdown.' },
+            {
+              role: 'user',
+              content: `Based on this tutoring session content, create 3 flashcard Q&A pairs about the key concepts. Return ONLY JSON array: [{"question":"...","answer":"...","topic":"..."}]. Keep answers under 2 sentences. Language: ${lang}\n\nSession:\n${lastMessages}`,
+            },
+          ],
+          temperature: 0.5,
+          max_tokens: 800,
+        })
+
+        const raw = flashcardCompletion.choices[0]?.message?.content ?? '[]'
+        const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+        const flashcards = JSON.parse(cleaned)
+
+        if (Array.isArray(flashcards) && flashcards.length > 0) {
+          const tomorrow = new Date()
+          tomorrow.setDate(tomorrow.getDate() + 1)
+          await prisma.flashcard.createMany({
+            data: flashcards.map((f: { question: string; answer: string; topic: string }) => ({
+              userId: session.user.id,
+              topic: f.topic ?? learnSession.subject.name,
+              question: f.question,
+              answer: f.answer,
+              nextReview: tomorrow,
+            })),
+          })
+        }
+      } catch (err) {
+        console.error('[sessions/end] flashcard generation failed', err)
+      }
+    }
+
     return NextResponse.json({ success: true })
   } catch (err) {
     if (err instanceof z.ZodError) {

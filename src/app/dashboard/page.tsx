@@ -8,6 +8,14 @@ import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
 import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 
+function getLevel(xp: number) {
+  if (xp >= 1001) return { name: 'Мастер', color: '#F6B444', next: null }
+  if (xp >= 601) return { name: 'Знаток', color: '#79C0FF', next: 1001 }
+  if (xp >= 301) return { name: 'Практик', color: '#56D364', next: 601 }
+  if (xp >= 101) return { name: 'Ученик', color: '#A78BFA', next: 301 }
+  return { name: 'Новичок', color: '#71717A', next: 101 }
+}
+
 const SUBJECT_META: Record<string, { icon: string; label: string; color: string; bg: string; border: string }> = {
   c:       { icon: '⚙️',  label: 'C язык',           color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
   cpp:     { icon: '🔷',  label: 'C++',               color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
@@ -41,12 +49,14 @@ export default async function DashboardPage() {
       select: {
         onboardingCompleted: true,
         name: true,
+        xpPoints: true,
         profile: {
           select: {
             displayName: true,
             voiceId: true,
             selfDescription: true,
             teachingLanguage: true,
+            streakDays: true,
             subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } },
           },
         },
@@ -72,6 +82,9 @@ export default async function DashboardPage() {
   const displayName = profile?.displayName ?? user.name ?? 'Студент'
   const isPro = subscription?.status === 'ACTIVE'
   const showUpgradeBanner = false // Stripe disabled for now
+  const xpPoints = user?.xpPoints ?? 0
+  const streakDays = profile?.streakDays ?? 0
+  const level = getLevel(xpPoints)
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -120,15 +133,25 @@ export default async function DashboardPage() {
         </div>
 
         {/* Stats row */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-4 gap-4 mb-8">
           <StatCard icon={GraduationCap} label="Уроков пройдено" value={String(totalLessons)} color="#F78166" />
           <StatCard icon={Layers}        label="Предметов"        value={String(enrolledSubjects.length)} color="#79C0FF" />
-          <StatCard
-            icon={Flame} label="Последний урок" color="#56D364"
-            value={recentSessions[0]
-              ? new Date(recentSessions[0].startedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
-              : '—'}
-          />
+          <StatCard icon={Flame}         label="Серия дней"       value={`${streakDays} 🔥`} color="#F6B444" />
+          <StatCard icon={Sparkles}      label="XP очки"          value={String(xpPoints)} color="#A78BFA" />
+        </div>
+
+        {/* XP / level bar */}
+        <div className="mb-6 px-5 py-4 rounded-2xl flex items-center gap-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+          <div style={{ flexShrink: 0 }}>
+            <span className="text-sm font-black" style={{ color: level.color }}>{level.name}</span>
+            <span className="text-xs ml-2" style={{ color: 'var(--text-dim)' }}>{xpPoints} XP</span>
+          </div>
+          <div style={{ flex: 1, height: 6, borderRadius: 6, background: 'rgba(255,255,255,0.05)', overflow: 'hidden' }}>
+            <div style={{ height: '100%', width: `${level.next ? Math.min((xpPoints / level.next) * 100, 100) : 100}%`, background: level.color, borderRadius: 6, transition: 'width 0.5s' }} />
+          </div>
+          {level.next && (
+            <span className="text-xs shrink-0" style={{ color: 'var(--text-dim)' }}>до {level.next} XP</span>
+          )}
         </div>
 
         {/* Upgrade banner */}
@@ -178,6 +201,30 @@ export default async function DashboardPage() {
               </div>
               <div className="relative mt-6">
                 <StartLessonButton />
+              </div>
+            </div>
+
+            {/* Learning Modes */}
+            <div style={{ marginBottom: '0' }}>
+              <h2 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px', padding: '0 2px' }}>
+                Режим обучения
+              </h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+                <a href="/learn" style={{ display: 'block', padding: '16px', borderRadius: '16px', background: 'rgba(247,129,102,0.08)', border: '1px solid rgba(247,129,102,0.2)', textDecoration: 'none', cursor: 'pointer' }}>
+                  <div style={{ fontSize: '24px', marginBottom: '8px' }}>👨‍🏫</div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--accent-primary)', marginBottom: '4px' }}>Репетитор</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Живой урок с объяснениями</div>
+                </a>
+                <a href="/coach" style={{ display: 'block', padding: '16px', borderRadius: '16px', background: 'rgba(121,192,255,0.08)', border: '1px solid rgba(121,192,255,0.2)', textDecoration: 'none', cursor: 'pointer' }}>
+                  <div style={{ fontSize: '24px', marginBottom: '8px' }}>🎯</div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#79C0FF', marginBottom: '4px' }}>Коуч</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>План обучения и цели</div>
+                </a>
+                <a href="/quiz" style={{ display: 'block', padding: '16px', borderRadius: '16px', background: 'rgba(86,211,100,0.08)', border: '1px solid rgba(86,211,100,0.2)', textDecoration: 'none', cursor: 'pointer' }}>
+                  <div style={{ fontSize: '24px', marginBottom: '8px' }}>🎮</div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#56D364', marginBottom: '4px' }}>Квиз</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Проверь знания быстро</div>
+                </a>
               </div>
             </div>
 
@@ -305,9 +352,10 @@ export default async function DashboardPage() {
               </div>
               <div className="p-3 space-y-1">
                 {([
-                  { label: 'Начать урок',      href: '/learn',    icon: Sparkles, accent: '#F78166' },
-                  { label: 'История сессий',   href: '#history',  icon: Clock,    accent: '#79C0FF' },
-                  { label: 'Настройки',        href: '/settings', icon: Settings, accent: '#56D364' },
+                  { label: 'Начать урок',      href: '/learn',        icon: Sparkles,    accent: '#F78166' },
+                  { label: '🃏 Карточки',       href: '/flashcards',   icon: BookOpen,    accent: '#79C0FF' },
+                  { label: '📊 Прогресс',       href: '/progress',     icon: GraduationCap, accent: '#56D364' },
+                  { label: 'Настройки',        href: '/settings',     icon: Settings,    accent: '#71717A' },
                 ] as const).map(({ label, href, icon: Icon, accent }) => (
                   <Link key={label} href={href}
                     className="flex items-center justify-between px-3 py-2.5 rounded-xl transition-colors group"
