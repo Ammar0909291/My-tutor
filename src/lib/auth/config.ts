@@ -44,12 +44,18 @@ export const authConfig: NextAuthConfig = {
       }
       // Re-validate token.sub on every use: if the DB was reset or the user row
       // was re-created under a new id, heal the token so all routes get the real id.
-      if (token.sub && token.email) {
-        const byId = await prisma.user.findUnique({ where: { id: token.sub }, select: { id: true } })
-        if (!byId) {
-          const byEmail = await prisma.user.findUnique({ where: { email: token.email as string }, select: { id: true } })
-          if (byEmail) token.sub = byEmail.id
+      // Wrapped in try-catch: a DB error (cold-start, network blip) must never
+      // break auth — we fall back to returning the token unchanged.
+      try {
+        if (token.sub && token.email) {
+          const byId = await prisma.user.findUnique({ where: { id: token.sub }, select: { id: true } })
+          if (!byId) {
+            const byEmail = await prisma.user.findUnique({ where: { email: String(token.email) }, select: { id: true } })
+            if (byEmail) token.sub = byEmail.id
+          }
         }
+      } catch {
+        // DB unreachable — return token as-is; routes will handle any missing user
       }
       return token
     },
