@@ -32,8 +32,6 @@ export default function SettingsPage() {
   const [voiceId, setVoiceId] = useState('male')
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('ru')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
-  const [portalLoading, setPortalLoading] = useState(false)
-  const [upgradeLoading, setUpgradeLoading] = useState(false)
 
   useEffect(() => {
     fetch('/api/settings')
@@ -65,24 +63,6 @@ export default function SettingsPage() {
     } catch { setSaveState('idle') }
   }
 
-  async function handlePortal() {
-    setPortalLoading(true)
-    try {
-      const res = await fetch('/api/stripe/portal', { method: 'POST' })
-      const d = await res.json() as { success?: boolean; url?: string }
-      if (d.success && d.url) window.location.href = d.url
-    } catch { /* ignore */ } finally { setPortalLoading(false) }
-  }
-
-  async function handleUpgrade() {
-    setUpgradeLoading(true)
-    try {
-      const res = await fetch('/api/stripe/checkout', { method: 'POST' })
-      const d = await res.json() as { success?: boolean; data?: { url?: string } }
-      if (d.success && d.data?.url) window.location.href = d.data.url
-    } catch { /* ignore */ } finally { setUpgradeLoading(false) }
-  }
-
   const isPro = data?.subscriptionStatus === 'ACTIVE'
 
   return (
@@ -105,38 +85,19 @@ export default function SettingsPage() {
       <main className="max-w-2xl mx-auto px-6 py-10 space-y-6">
         <h1 className="text-2xl font-black tracking-tight">{t('settings_title')}</h1>
 
-        {/* Plan */}
+        {/* Plan — upgrade disabled until Stripe is configured */}
         <Section label={t('settings_plan')}>
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              {isPro ? (
-                <span className="px-3 py-1 rounded-full text-sm font-black"
-                  style={{ background: 'linear-gradient(135deg, #F6B444, #E8913A)', color: '#fff' }}>
-                  PRO
-                </span>
-              ) : (
-                <span className="px-3 py-1 rounded-full text-sm font-semibold"
-                  style={{ background: 'rgba(255,255,255,0.07)', color: '#71717A' }}>
-                  {t('settings_plan_free')}
-                </span>
-              )}
-            </div>
+          <div className="flex items-center gap-3">
             {isPro ? (
-              <button
-                onClick={handlePortal}
-                disabled={portalLoading}
-                className="px-4 py-2 rounded-xl text-sm font-semibold transition-all disabled:opacity-60"
-                style={{ background: 'rgba(255,255,255,0.07)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}>
-                {portalLoading ? '...' : t('settings_manage')}
-              </button>
+              <span className="px-3 py-1 rounded-full text-sm font-black"
+                style={{ background: 'linear-gradient(135deg, #F6B444, #E8913A)', color: '#fff' }}>
+                PRO
+              </span>
             ) : (
-              <button
-                onClick={handleUpgrade}
-                disabled={upgradeLoading}
-                className="px-4 py-2 rounded-xl text-sm font-bold transition-all disabled:opacity-60"
-                style={{ background: 'var(--accent-primary)', color: '#fff' }}>
-                {upgradeLoading ? '...' : t('settings_upgrade')}
-              </button>
+              <span className="px-3 py-1 rounded-full text-sm font-semibold"
+                style={{ background: 'rgba(255,255,255,0.07)', color: '#71717A' }}>
+                {t('settings_plan_free')}
+              </span>
             )}
           </div>
         </Section>
@@ -179,7 +140,7 @@ export default function SettingsPage() {
         {/* Account */}
         <Section label={t('settings_account')}>
           <p className="text-sm" style={{ color: '#52525B' }}>
-            {t('settings_name')} и {t('settings_email')} управляются через настройки аккаунта.
+            {t('settings_account_desc')}
           </p>
         </Section>
 
