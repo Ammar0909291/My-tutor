@@ -1,18 +1,17 @@
 import OpenAI from 'openai'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
-export const TUTOR_MODEL = 'google/gemma-3-27b-it:free'
+export const TUTOR_MODEL = 'meta-llama/llama-3.3-70b-instruct:free'
 
 // Fallback chain — tried in order when a model returns 429, 404, or 5xx
 export const FALLBACK_MODELS = [
-  'moonshotai/kimi-k2:free',
   'meta-llama/llama-3.3-70b-instruct:free',
-  'deepseek/deepseek-chat-v3-0324:free',
-  'google/gemma-3-27b-it:free',
   'mistralai/mistral-7b-instruct:free',
+  'google/gemma-2-9b-it:free',
   'microsoft/phi-4:free',
   'qwen/qwen3-8b:free',
-  'tngtech/deepseek-r1t-chimera:free',
+  'google/gemma-3-27b-it:free',
+  'deepseek/deepseek-chat-v3-0324:free',
 ]
 
 const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
