@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>
@@ -7,6 +8,7 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export function InstallBanner() {
+  const { t } = useLanguage()
   const [prompt, setPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [dismissed, setDismissed] = useState(false)
 
@@ -47,15 +49,15 @@ export function InstallBanner() {
       <span style={{ fontSize: 20 }}>📱</span>
       <div style={{ flex: 1 }}>
         <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
-          Установи My Tutor как приложение
+          {t('pwa_install')}
         </p>
         <p style={{ fontSize: 11, color: 'var(--text-secondary)', margin: 0 }}>
-          Открывай без браузера прямо с экрана
+          {t('pwa_install_sub')}
         </p>
       </div>
       <button onClick={handleInstall}
         style={{ padding: '6px 14px', borderRadius: 10, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 700, background: 'var(--accent-primary)', color: '#fff' }}>
-        Установить
+        {t('pwa_install_btn')}
       </button>
       <button onClick={handleDismiss}
         style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-dim)', fontSize: 16, padding: 4 }}>

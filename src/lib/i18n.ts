@@ -324,6 +324,9 @@ export const translations = {
     quiz_perfect: 'Отлично! Ты всё знаешь!',
     quiz_good: 'Хороший результат! Продолжай учиться.',
     quiz_retry_msg: 'Стоит повторить материал.',
+    pwa_install: 'Установи My Tutor как приложение',
+    pwa_install_sub: 'Открывай без браузера прямо с экрана',
+    pwa_install_btn: 'Установить',
   },
   en: {
     /* ── Landing ── */
@@ -648,6 +651,9 @@ export const translations = {
     quiz_perfect: 'Perfect! You know it all!',
     quiz_good: 'Good result! Keep learning.',
     quiz_retry_msg: 'You should review the material.',
+    pwa_install: 'Install My Tutor as an app',
+    pwa_install_sub: 'Open without browser, right from your screen',
+    pwa_install_btn: 'Install',
   },
   hi: {
     /* ── Landing ── */
@@ -960,6 +966,9 @@ export const translations = {
     quiz_perfect: 'Perfect! You know it all!',
     quiz_good: 'Good result! Keep learning.',
     quiz_retry_msg: 'You should review the material.',
+    pwa_install: 'My Tutor को ऐप की तरह इंस्टॉल करें',
+    pwa_install_sub: 'ब्राउज़र के बिना सीधे स्क्रीन से खोलें',
+    pwa_install_btn: 'इंस्टॉल करें',
   },
 } as const
 

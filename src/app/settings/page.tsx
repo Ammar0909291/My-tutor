@@ -95,7 +95,16 @@ export default function SettingsPage() {
       const d = await res.json() as { success?: boolean }
       if (d.success) {
         setSaveState('saved')
+        // Refetch to confirm saved values are reflected in UI
+        const fresh = await fetch('/api/settings').then((r) => r.json()) as { success?: boolean; data?: SettingsData }
+        if (fresh.success && fresh.data) {
+          setData(fresh.data)
+          setVoiceId(fresh.data.voiceId)
+          setTeachingLang(fresh.data.teachingLanguage)
+        }
         setTimeout(() => setSaveState('idle'), 2000)
+      } else {
+        setSaveState('idle')
       }
     } catch { setSaveState('idle') }
   }
@@ -111,6 +120,23 @@ export default function SettingsPage() {
       const d = await res.json() as { success?: boolean }
       if (d.success) {
         setProfileSave('saved')
+        // Refetch profile to confirm updated values
+        const fresh = await fetch('/api/user/profile').then((r) => r.json()) as { user?: { name?: string; email?: string; createdAt?: string; xpPoints?: number; _count?: { learnSessions?: number }; profile?: { selfDescription?: string; voiceId?: string } } }
+        if (fresh.user) {
+          const p: ProfileData = {
+            name: fresh.user.name ?? '',
+            email: fresh.user.email ?? '',
+            createdAt: fresh.user.createdAt ?? '',
+            xpPoints: fresh.user.xpPoints ?? 0,
+            lessonsCount: fresh.user._count?.learnSessions ?? 0,
+            selfDescription: fresh.user.profile?.selfDescription ?? '',
+            voiceId: fresh.user.profile?.voiceId ?? 'male',
+          }
+          setProfile(p)
+          setProfileName(p.name)
+          setProfileLevel(p.selfDescription)
+          setProfileVoice(p.voiceId)
+        }
         setTimeout(() => setProfileSave('idle'), 2000)
       } else {
         setProfileSave('idle')

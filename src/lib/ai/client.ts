@@ -9,18 +9,18 @@ const FALLBACK_MODELS = [
 
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 
-// Sanitize the key: strip whitespace/newlines and any surrounding quotes.
-const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
-
-// Node's default fetch (undici) sends a User-Agent that Cloudflare — which
-// fronts Groq's API — bot-blocks with "403 Forbidden" before the request is
-// ever metered. A browser/curl-like User-Agent makes the request pass, the
-// same way the working PowerShell/curl call does.
-const GROQ_HEADERS = {
-  Authorization: `Bearer ${GROQ_KEY}`,
-  'Content-Type': 'application/json',
-  Accept: 'application/json',
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+// Read and sanitize the key at call time (not module load time) so that
+// env vars set after import (e.g. via $env: in PowerShell) are always picked up.
+function getGroqHeaders() {
+  const key = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
+  return {
+    Authorization: `Bearer ${key}`,
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    // Node's undici User-Agent gets bot-blocked by Cloudflare (which fronts Groq).
+    // A browser-like UA passes the same way PowerShell/curl does.
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  }
 }
 
 type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
@@ -45,7 +45,7 @@ async function groqChat(
     try {
       const res = await fetch(GROQ_URL, {
         method: 'POST',
-        headers: GROQ_HEADERS,
+        headers: getGroqHeaders(),
         body: JSON.stringify({
           model,
           messages,
@@ -102,7 +102,7 @@ export async function summarizeSession(
   messages: { role: string; content: string }[],
   lang: string,
 ): Promise<string> {
-  if (!GROQ_KEY) return ''
+  if (!process.env.GROQ_API_KEY) return ''
   const prompt = lang === 'ru'
     ? 'Summarize this tutoring session in 2 sentences in Russian.'
     : lang === 'hi'
