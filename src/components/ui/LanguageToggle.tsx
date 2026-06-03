@@ -18,14 +18,12 @@ const LangContext = createContext<LangContextValue>({
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>('en')
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('mytutor_lang') as Lang | null
     if (stored && ['ru', 'en', 'hi'].includes(stored)) {
       setLangState(stored)
     }
-    setMounted(true)
   }, [])
 
   const setLang = (newLang: Lang) => {
@@ -34,21 +32,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     fetch('/api/settings', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ teachingLanguage: newLang })
+      body: JSON.stringify({ teachingLanguage: newLang }),
     }).catch(() => {})
   }
 
-  // During SSR and the hydration pass, always use 'en' so server and client HTML match.
-  // After mount, switch to the language stored in localStorage.
-  const effectiveLang = mounted ? lang : 'en'
-
   const t = (key: TranslationKey): string => {
-    const uiLang = effectiveLang === 'ru' ? 'ru' : 'en'
+    const uiLang = lang === 'ru' ? 'ru' : 'en'
     return tFn(uiLang, key)
   }
 
   return (
-    <LangContext.Provider value={{ lang: effectiveLang, setLang, t }}>
+    <LangContext.Provider value={{ lang, setLang, t }}>
       {children}
     </LangContext.Provider>
   )

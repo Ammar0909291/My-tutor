@@ -2,6 +2,7 @@
 export {
   generateAIResponse,
   generateJSON,
+  summarizeSession,
   buildTutorSystemPrompt,
   buildCurriculumPrompt,
 } from '@/lib/ai/client'

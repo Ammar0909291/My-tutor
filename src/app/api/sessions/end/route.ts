@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { generateAIResponse, generateJSON } from '@/lib/ai/client'
+import { summarizeSession, generateJSON } from '@/lib/ai/client'
 import { MessageRole, SubscriptionStatus } from '@prisma/client'
 
 const schema = z.object({ sessionId: z.string() })
@@ -37,16 +37,13 @@ export async function POST(req: Request) {
     let summary: string | null = null
 
     if (learnSession.messages.length > 0) {
-      const transcript = learnSession.messages
-        .map((m) => `${m.role === MessageRole.USER ? 'Студент' : 'Репетитор'}: ${m.content}`)
-        .join('\n')
-        .slice(0, 6000)
-
       try {
-        summary = await generateAIResponse(
-          [{ role: 'user', content: `Напиши краткое резюме этого урока в 2-3 предложениях на русском языке. Укажи тему урока и что было изучено.\n\nТранскрипт урока:\n${transcript}` }],
-          'Ты помощник, который кратко резюмирует учебные сессии. Отвечай только на русском языке.',
-        )
+        const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+        const lang = profile?.teachingLanguage ?? 'en'
+        const msgs = learnSession.messages
+          .slice(0, 30)
+          .map((m) => ({ role: m.role === MessageRole.USER ? 'user' : 'assistant', content: m.content.slice(0, 300) }))
+        summary = await summarizeSession(msgs, lang) || null
       } catch (err) {
         console.error('[sessions/end] summary generation failed', err)
       }

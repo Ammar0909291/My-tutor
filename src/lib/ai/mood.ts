@@ -23,15 +23,16 @@ ${recentMessages.map((m) => `[${m.role}]: ${m.content}`).join('\n')}
   "notes": "краткое объяснение"
 }`
 
+  const fallback: MoodAnalysis = {
+    engagement: 'medium',
+    confusion: 'none',
+    suggestedAction: 'continue',
+    notes: 'Could not parse mood analysis',
+  }
   try {
     const result = await generateJSON(prompt)
-    if (result) return result as MoodAnalysis
+    return (result as MoodAnalysis) ?? fallback
   } catch {
-    return {
-      engagement: 'medium',
-      confusion: 'none',
-      suggestedAction: 'continue',
-      notes: 'Could not parse mood analysis',
-    }
+    return fallback
   }
 }
