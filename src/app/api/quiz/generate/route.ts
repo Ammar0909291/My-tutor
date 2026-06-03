@@ -42,6 +42,9 @@ Make questions practical about code behavior. Difficulty: beginner level.`,
     return NextResponse.json({ success: true, questions })
   } catch (err) {
     console.error('[quiz/generate]', err)
+    if (err instanceof SyntaxError) {
+      return NextResponse.json({ success: true, questions: [] })
+    }
     return NextResponse.json({ success: false, error: 'Failed to generate quiz' }, { status: 500 })
   }
 }

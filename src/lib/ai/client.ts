@@ -1,6 +1,10 @@
 import Groq from 'groq-sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
+if (!process.env.GROQ_API_KEY) {
+  console.error('ERROR: GROQ_API_KEY missing — AI features will not work')
+}
+
 export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
 
 // Fallback chain — tried in order when primary returns 429 or 5xx
