@@ -38,7 +38,17 @@ export default function HomePage() {
 
   useEffect(() => { setMounted(true) }, [])
 
-  if (!mounted) return null
+  if (!mounted) return (
+    <div style={{
+      minHeight: '100vh',
+      background: '#0D1117',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <div style={{ color: '#FF7B6B', fontSize: 24, fontWeight: 700 }}>🔥 My Tutor</div>
+    </div>
+  )
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-base)' }}>

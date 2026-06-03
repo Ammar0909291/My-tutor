@@ -11,13 +11,23 @@ const schema = z.object({
 })
 
 export async function POST(req: Request) {
-  const session = await auth()
-  console.log('SESSION IN CHAT:', JSON.stringify(session))
+  console.log('=== CHAT API CALLED ===')
+  console.log('NEXTAUTH_SECRET exists:', !!process.env.NEXTAUTH_SECRET)
+  console.log('AUTH_SECRET exists:', !!process.env.AUTH_SECRET)
 
-  // Support id from token.sub (v5 standard) or fallback to email
-  const userId = session?.user?.id ?? (session?.user?.email ? session.user.email : null)
+  const session = await auth()
+  console.log('SESSION:', JSON.stringify(session))
+  console.log('Session user:', session?.user)
+
+  // Support id from token.sub (v5 standard) or fallback to sub or email
+  const userId = (session?.user as { id?: string; sub?: string } | undefined)?.id
+    ?? (session?.user as { sub?: string } | undefined)?.sub
+    ?? (session?.user?.email ?? null)
+
+  console.log('User ID found:', userId)
 
   if (!session?.user || !userId) {
+    console.log('NO USER ID - returning 403')
     return NextResponse.json({ error: { message: 'Forbidden' } }, { status: 403 })
   }
 

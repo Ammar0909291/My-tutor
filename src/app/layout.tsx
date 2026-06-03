@@ -22,8 +22,8 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'My Tutor — AI-репетитор для программистов',
-  description: 'Персональный AI-репетитор по C, C++, Python и английскому языку на русском',
+  title: 'My Tutor — AI Programming Tutor',
+  description: 'Learn C, C++ and Python with your personal AI tutor',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
