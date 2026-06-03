@@ -12,8 +12,13 @@ const schema = z.object({
 
 export async function POST(req: Request) {
   const session = await auth()
-  if (!session?.user?.id) {
-    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+  console.log('SESSION IN CHAT:', JSON.stringify(session))
+
+  // Support id from token.sub (v5 standard) or fallback to email
+  const userId = session?.user?.id ?? (session?.user?.email ? session.user.email : null)
+
+  if (!session?.user || !userId) {
+    return NextResponse.json({ error: { message: 'Forbidden' } }, { status: 403 })
   }
 
   try {
@@ -21,7 +26,7 @@ export async function POST(req: Request) {
     const { sessionId, message } = schema.parse(body)
 
     const learnSession = await prisma.learnSession.findUnique({
-      where: { id: sessionId, userId: session.user.id },
+      where: { id: sessionId, userId },
       include: {
         subject: true,
         messages: { orderBy: { createdAt: 'asc' } },
@@ -31,7 +36,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
-    const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+    const profile = await prisma.profile.findUnique({ where: { userId } })
 
     await prisma.message.create({
       data: { sessionId, role: MessageRole.USER, content: message },

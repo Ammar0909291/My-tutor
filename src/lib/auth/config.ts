@@ -15,7 +15,7 @@ export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   trustHost: true,
-  secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET ?? process.env.SECRET,
   pages: {
     signIn: '/auth/login',
     error: '/auth/login',
@@ -43,16 +43,13 @@ export const authConfig: NextAuthConfig = {
   ],
   callbacks: {
     jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id
-        token.id = user.id   // keep for backward compat
-      }
+      if (user) token.sub = user.id
       return token
     },
     session({ session, token }) {
       return {
         ...session,
-        user: { ...session.user, id: (token.sub ?? token.id) as string },
+        user: { ...session.user, id: token.sub as string },
       }
     },
   },
