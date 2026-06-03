@@ -182,6 +182,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // File attachment
   const [attachedFile, setAttachedFile] = useState<AttachedFile|null>(null)
 
+  // Image input
+  const [selectedImage, setSelectedImage] = useState<{ base64: string; mimeType: string; preview: string } | null>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
+  function handleImageSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]; if (!file) return
+    if (file.size > 5 * 1024 * 1024) { alert('Файл слишком большой. Максимум 5MB'); e.target.value = ''; return }
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result as string
+      setSelectedImage({ base64: result.split(',')[1], mimeType: file.type, preview: result })
+    }
+    reader.readAsDataURL(file)
+    e.target.value = ''
+  }
+
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [terminalOutput, setTerminalOutput] = useState('')
@@ -354,18 +369,56 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     init()
   }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage])
 
+  // Vision send
+  async function sendImageMessage(sid: string) {
+    if (!selectedImage) return
+    const question = input.trim()
+    const imgData = selectedImage
+    setSelectedImage(null)
+    setInput('')
+    if (textareaRef.current) textareaRef.current.style.height = 'auto'
+    setIsStreaming(true)
+    // Show student message with thumbnail
+    const uid = `u-${Date.now()}`
+    setMessages((p) => [...p, {
+      id: uid, role: 'user',
+      content: `📸 [Изображение]${question ? '\n' + question : ''}`,
+      ts: Date.now(),
+    }])
+    const aid = `a-${Date.now()}`
+    setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
+    try {
+      const res = await fetch('/api/vision', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageBase64: imgData.base64, mimeType: imgData.mimeType, question, subject: subjectSlug, lang: teachingLanguage }),
+      })
+      const data = await res.json() as { success?: boolean; text?: string; error?: string }
+      if (!data.success || !data.text) throw new Error(data.error ?? 'Vision error')
+      const full = data.text
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
+      const codeBlock = extractLastCodeBlock(full)
+      if (codeBlock) setCode(codeBlock)
+      handleSpeak(aid, full)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Ошибка анализа: ${msg}`, streaming: false } : m))
+    } finally { setIsStreaming(false); textareaRef.current?.focus() }
+  }
+
   // Send handler
   function handleSend() {
-    const text = input.trim()
-    if ((!text && !attachedFile) || isStreaming || !sessionId) return
+    if (isStreaming || !sessionId) return
     if (micState === 'recording') stopRecording()
+    // Image takes priority
+    if (selectedImage) { sendImageMessage(sessionId); return }
+    const text = input.trim()
+    if (!text && !attachedFile) return
     let msg = text
     if (attachedFile) {
       msg += (text ? '\n' : '') + `\`\`\`${attachedFile.language}\n${attachedFile.content}\n\`\`\``
       setAttachedFile(null)
     }
     setInput('')
-    // Reset textarea height
     if (textareaRef.current) textareaRef.current.style.height = 'auto'
     sendMessage(sessionId, msg, true)
   }
@@ -745,6 +798,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           {/* ── Input bar ──────────────────────────────────────────────────── */}
           <div className="shrink-0 px-4 pt-3 pb-4" style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--border-default)' }}>
 
+            {/* Image preview */}
+            {selectedImage && (
+              <div className="flex items-center gap-2 mb-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={selectedImage.preview} alt="preview" style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 8, border: '1px solid var(--border-default)' }} />
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium" style={{ color: 'var(--accent-primary)' }}>📸 Изображение выбрано</span>
+                  <span className="text-[10px]" style={{ color: 'var(--text-secondary)' }}>Нажми Отправить чтобы отправить репетитору</span>
+                </div>
+                <button onClick={() => setSelectedImage(null)} className="ml-auto" style={{ color: 'var(--text-dim)' }}><X size={13} /></button>
+              </div>
+            )}
+
             {/* File badge */}
             {attachedFile && (
               <div className="flex items-center gap-2 mb-2">
@@ -792,6 +858,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 }}
               />
 
+              {/* Camera / Image */}
+              <input ref={imageInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleImageSelect} />
+              <button onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                title="Сфотографировать код или ошибку"
+                className="flex items-center justify-center rounded-xl shrink-0 transition-all disabled:opacity-40"
+                style={{
+                  width: 40, height: 40,
+                  background: selectedImage ? 'rgba(247,129,102,0.12)' : 'var(--bg-hover)',
+                  color: selectedImage ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                  border: `1px solid ${selectedImage ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                  fontSize: 17,
+                }}>
+                📸
+              </button>
+
               {/* Mic */}
               {micSupported && (
                 <button onClick={handleMicClick} disabled={isStreaming || !sessionId}
@@ -810,7 +891,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               )}
 
               {/* Send */}
-              <button onClick={handleSend} disabled={(!input.trim() && !attachedFile) || isStreaming || !sessionId}
+              <button onClick={handleSend} disabled={(!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId}
                 className="flex items-center justify-center rounded-xl shrink-0 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{ width: 40, height: 40, background: 'var(--accent-primary)', color: '#fff', boxShadow: '0 2px 8px rgba(247,129,102,0.35)' }}>
                 <Send size={16} className="translate-x-px" />

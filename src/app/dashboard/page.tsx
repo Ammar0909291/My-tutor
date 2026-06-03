@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
 import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
+import { InstallBanner } from '@/components/dashboard/InstallBanner'
 
 function getLevel(xp: number) {
   if (xp >= 1001) return { name: 'Мастер', color: '#F6B444', next: null }
@@ -116,6 +117,8 @@ export default async function DashboardPage() {
       </nav>
 
       <main className="relative z-10 max-w-6xl mx-auto px-5 py-10">
+
+        <InstallBanner />
 
         {/* Greeting */}
         <div className="mb-10">
