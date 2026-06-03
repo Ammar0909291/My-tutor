@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Check, ChevronDown, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
@@ -34,24 +34,9 @@ export default function HomePage() {
   const { t } = useLanguage()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => { setMounted(true) }, [])
-
-  if (!mounted) return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#0D1117',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
-      <div style={{ color: '#FF7B6B', fontSize: 24, fontWeight: 700 }}>🔥 My Tutor</div>
-    </div>
-  )
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-base)' }}>
+    <div suppressHydrationWarning className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-base)' }}>
 
       {/* ── Animated orbs ─────────────────────────────────────────────────── */}
       <div aria-hidden style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
