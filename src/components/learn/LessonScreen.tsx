@@ -339,8 +339,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: string }
-      if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: any }
+      const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
+      if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       const full = data.text
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
       const codeBlock = extractLastCodeBlock(full)
@@ -414,8 +415,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageBase64: imgData.base64, mimeType: imgData.mimeType, question, subject: subjectSlug, lang: teachingLanguage }),
       })
-      const data = await res.json() as { success?: boolean; text?: string; error?: string }
-      if (!data.success || !data.text) throw new Error(data.error ?? 'Vision error')
+      const data = await res.json() as { success?: boolean; text?: string; error?: any }
+      const visionErr = typeof data.error === 'string' ? data.error : data.error?.message ?? 'Vision error'
+      if (!data.success || !data.text) throw new Error(visionErr)
       const full = data.text
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
       const codeBlock = extractLastCodeBlock(full)

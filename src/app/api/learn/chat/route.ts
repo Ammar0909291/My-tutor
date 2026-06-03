@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
   const session = await auth()
   if (!session?.user?.id) {
-    return NextResponse.json({ error: { message: 'Forbidden' } }, { status: 403 })
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
   }
 
   const userId = session.user.id
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     } catch (error: any) {
       console.error('[learn/chat] AI error:', error.message)
       return NextResponse.json(
-        { error: { message: error.message || 'AI failed' } },
+        { success: false, error: error.message || 'AI failed' },
         { status: 500 },
       )
     }
