@@ -189,20 +189,20 @@ export default function HomePage() {
                   <div className="w-3 h-3 rounded-full bg-red-500/70" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                   <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                  <span className="ml-3 text-xs font-mono" style={{ color: 'var(--text-dim)' }}>урок.py</span>
+                  <span className="ml-3 text-xs font-mono" style={{ color: 'var(--text-dim)' }}>lesson.py</span>
                 </div>
                 <div className="p-4 font-mono text-xs leading-relaxed" style={{ background: '#0D1117', borderBottom: '1px solid var(--border-default)' }}>
                   <div><span style={{ color: '#79C0FF' }}>def </span><span style={{ color: '#56D364' }}>hello</span><span style={{ color: 'var(--text-secondary)' }}>():</span></div>
-                  <div className="pl-4"><span style={{ color: '#79C0FF' }}>print</span><span style={{ color: 'var(--text-secondary)' }}>(</span><span style={{ color: '#E3B341' }}>&quot;Привет, мир!&quot;</span><span style={{ color: 'var(--text-secondary)' }}>)</span></div>
+                  <div className="pl-4"><span style={{ color: '#79C0FF' }}>print</span><span style={{ color: 'var(--text-secondary)' }}>(</span><span style={{ color: '#E3B341' }}>&quot;{t('hero_mock_string')}&quot;</span><span style={{ color: 'var(--text-secondary)' }}>)</span></div>
                   <div className="mt-1"><span style={{ color: '#56D364' }}>hello</span><span style={{ color: 'var(--text-secondary)' }}>()</span></div>
                 </div>
                 <div className="p-4">
                   <div className="flex gap-3">
                     <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-                      style={{ background: 'var(--accent-primary)' }}>М</div>
+                      style={{ background: 'var(--accent-primary)' }}>T</div>
                     <div className="rounded-lg p-3 text-xs leading-relaxed flex-1"
                       style={{ background: 'var(--bg-elevated)', borderLeft: '3px solid var(--accent-primary)', color: 'var(--text-primary)' }}>
-                      Отлично! Теперь попробуй изменить значение переменной — что думаешь произойдёт? 🤔
+                      {t('hero_mock_msg')}
                     </div>
                   </div>
                 </div>
