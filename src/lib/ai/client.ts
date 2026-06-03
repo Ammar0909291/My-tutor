@@ -1,208 +1,56 @@
 import Groq from 'groq-sdk'
-import { GoogleGenerativeAI } from '@google/generative-ai'
 
 if (!process.env.GROQ_API_KEY) {
-  console.error('ERROR: GROQ_API_KEY missing — AI features will not work')
+  console.error('GROQ_API_KEY missing from .env.local')
 }
 
-export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
-
-// Fallback chain — tried in order when primary returns 429 or 5xx
-export const FALLBACK_MODELS = [
-  'llama-3.3-70b-versatile',
-  'llama3-70b-8192',
-  'llama-3.1-8b-instant',
-  'gemma2-9b-it',
-]
-
-const globalForAI = globalThis as unknown as { groq: Groq | undefined }
-
-export const ai = globalForAI.groq ?? new Groq({
-  // Placeholder prevents the SDK from throwing at import time when the key is
-  // absent (e.g. during build). Real requests fail gracefully via try/catch.
-  apiKey: process.env.GROQ_API_KEY || 'missing-groq-key',
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || '',
 })
 
-if (process.env.NODE_ENV !== 'production') globalForAI.groq = ai
-
-function isRetryableError(err: unknown): boolean {
-  if (err instanceof Groq.APIError) {
-    // Treat auth errors as retryable so we fall through to Gemini
-    if (err.status === 401 || err.status === 403) return true
-    return err.status === 429 || err.status >= 500
-  }
-  const msg = err instanceof Error ? err.message : String(err)
-  return msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit') || msg.includes('overloaded')
-}
-
-type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
-type CreateParams = {
-  messages: ChatMessage[]
-  temperature?: number
-  max_tokens?: number
-}
-
-// ─── Gemini fallback ──────────────────────────────────────────────────────────
-
-async function* geminiStream(messages: ChatMessage[]): AsyncIterable<Groq.Chat.Completions.ChatCompletionChunk> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY not set')
-
-  const genAI = new GoogleGenerativeAI(apiKey)
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
-
-  const system = messages.find((m) => m.role === 'system')?.content ?? ''
-  const history = messages
-    .filter((m) => m.role !== 'system')
-    .slice(0, -1)
-    .map((m) => ({
-      role: m.role === 'user' ? 'user' as const : 'model' as const,
-      parts: [{ text: m.content }],
-    }))
-  const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
-
-  const chat = model.startChat({
-    systemInstruction: { role: 'user', parts: [{ text: system }] },
-    history,
-  })
-
-  const result = await chat.sendMessageStream(lastMsg)
-
-  for await (const chunk of result.stream) {
-    const text = chunk.text()
-    if (text) {
-      yield {
-        id: 'gemini',
-        object: 'chat.completion.chunk',
-        created: Date.now(),
-        model: 'gemini-2.0-flash',
-        choices: [{ index: 0, delta: { content: text, role: 'assistant' }, finish_reason: null, logprobs: null }],
-      } as Groq.Chat.Completions.ChatCompletionChunk
-    }
-  }
-}
-
-async function geminiComplete(
-  messages: ChatMessage[],
-  generationConfig?: { temperature?: number; maxOutputTokens?: number },
-): Promise<string> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY not set')
-
-  const genAI = new GoogleGenerativeAI(apiKey)
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
-
-  const system = messages.find((m) => m.role === 'system')?.content ?? ''
-  const history = messages
-    .filter((m) => m.role !== 'system')
-    .slice(0, -1)
-    .map((m) => ({
-      role: m.role === 'user' ? 'user' as const : 'model' as const,
-      parts: [{ text: m.content }],
-    }))
-  const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
-
-  const chat = model.startChat({
-    systemInstruction: { role: 'user', parts: [{ text: system }] },
-    history,
-    generationConfig,
-  })
-  const result = await chat.sendMessage(lastMsg)
-  return result.response.text()
-}
-
-// ─── Public API ───────────────────────────────────────────────────────────────
-
-/**
- * Simple one-shot AI call. Prepends systemPrompt as a system message.
- * Uses the same Groq fallback chain as chatWithFallback.
- */
 export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
+  maxTokens: number = 1024,
 ): Promise<string> {
-  if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY) {
-    throw new Error('No AI API key configured. Set GROQ_API_KEY or GEMINI_API_KEY in your .env file.')
-  }
-  const completion = await chatWithFallback({
-    messages: [{ role: 'system', content: systemPrompt }, ...messages],
-    temperature: 0.7,
-    max_tokens: 1024,
-  })
-  return completion.choices[0]?.message?.content ?? ''
-}
-
-/** Non-streaming completion with Groq fallback chain, then Gemini. */
-export async function chatWithFallback(params: CreateParams): Promise<Groq.Chat.Completions.ChatCompletion> {
-  let lastErr: unknown
-
-  for (const model of FALLBACK_MODELS) {
-    try {
-      return await ai.chat.completions.create({
-        model,
-        messages: params.messages,
-        temperature: params.temperature ?? 0.7,
-        max_tokens: params.max_tokens ?? 1024,
-        stream: false,
-      })
-    } catch (err) {
-      if (isRetryableError(err)) { lastErr = err; continue }
-      throw err
-    }
-  }
-
-  // All Groq models exhausted — try Gemini
-  if (process.env.GEMINI_API_KEY) {
-    const text = await geminiComplete(params.messages, {
-      temperature: params.temperature,
-      maxOutputTokens: params.max_tokens,
+  try {
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages,
+      ],
+      max_tokens: maxTokens,
+      temperature: 0.7,
     })
-    return {
-      id: 'gemini-fallback',
-      object: 'chat.completion',
-      created: Date.now(),
-      model: 'gemini-2.0-flash',
-      choices: [{
-        index: 0,
-        message: { role: 'assistant', content: text },
-        finish_reason: 'stop',
-        logprobs: null,
-      }],
-      usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0, queue_time: 0, prompt_time: 0, completion_time: 0, total_time: 0 },
-    } as Groq.Chat.Completions.ChatCompletion
+    return response.choices[0]?.message?.content ?? ''
+  } catch (error: any) {
+    console.error('Groq AI error:', error?.message || error)
+    throw new Error('AI response failed: ' + (error?.message || 'Unknown error'))
   }
-
-  throw new Error('No AI provider available. Set GROQ_API_KEY or GEMINI_API_KEY in your .env file.')
 }
 
-/** Streaming completion with Groq fallback chain, then Gemini. */
-export async function chatStreamWithFallback(
-  params: CreateParams,
-): Promise<{ stream: AsyncIterable<Groq.Chat.Completions.ChatCompletionChunk>; model: string }> {
-  let lastErr: unknown
-
-  for (const model of FALLBACK_MODELS) {
-    try {
-      const stream = await ai.chat.completions.create({
-        model,
-        messages: params.messages,
-        temperature: params.temperature ?? 0.7,
-        max_tokens: params.max_tokens ?? 1024,
-        stream: true,
-      })
-      return { stream, model }
-    } catch (err) {
-      if (isRetryableError(err)) { lastErr = err; continue }
-      throw err
-    }
+export async function generateJSON(
+  prompt: string,
+  maxTokens: number = 2048,
+): Promise<any> {
+  try {
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: maxTokens,
+      temperature: 0.3,
+    })
+    const text = response.choices[0]?.message?.content ?? '[]'
+    const clean = text
+      .replace(/```json\n?/g, '')
+      .replace(/```\n?/g, '')
+      .trim()
+    return JSON.parse(clean)
+  } catch (error: any) {
+    console.error('Groq JSON error:', error?.message || error)
+    return null
   }
-
-  // All Groq models exhausted — try Gemini
-  if (process.env.GEMINI_API_KEY) {
-    return { stream: geminiStream(params.messages), model: 'gemini-2.0-flash' }
-  }
-
-  throw new Error('No AI provider available. Set GROQ_API_KEY or GEMINI_API_KEY in your .env file.')
 }
 
 // ─── System Prompt ────────────────────────────────────────────────────────────

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { chatWithFallback } from '@/lib/ai/client'
+import { generateAIResponse } from '@/lib/ai/client'
 
 const schema = z.object({
   imageBase64: z.string().min(1),
@@ -29,15 +29,11 @@ export async function POST(req: Request) {
     const apiKey = process.env.GEMINI_API_KEY
     if (!apiKey) {
       // Fallback: describe image via text-only model (limited, but works)
-      const completion = await chatWithFallback({
-        messages: [
-          { role: 'system', content: PROMPTS[lang] },
-          { role: 'user', content: question || 'Что изображено на картинке?' },
-        ],
-        temperature: 0.5,
-        max_tokens: 1024,
-      })
-      const text = completion.choices[0]?.message?.content ?? ''
+      const text = await generateAIResponse(
+        [{ role: 'user', content: question || 'Что изображено на картинке?' }],
+        PROMPTS[lang],
+        1024,
+      )
       return NextResponse.json({ success: true, text })
     }
 

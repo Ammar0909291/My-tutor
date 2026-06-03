@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { generateAIResponse, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -11,11 +11,11 @@ const schema = z.object({
 })
 
 export async function POST(req: Request) {
-  const session = await auth()
-  console.log('CHAT SESSION:', JSON.stringify(session?.user))
+  console.log('GROQ KEY EXISTS:', !!process.env.GROQ_API_KEY)
+  console.log('GROQ KEY LENGTH:', process.env.GROQ_API_KEY?.length)
 
+  const session = await auth()
   if (!session?.user?.id) {
-    console.log('NO SESSION - returning 403')
     return NextResponse.json({ error: { message: 'Forbidden' } }, { status: 403 })
   }
 
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
 
-    const teachingLang = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
+    const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.selfDescription ?? 'level unknown',
@@ -54,39 +54,36 @@ export async function POST(req: Request) {
       teachingLang,
     )
 
-    const messages = [
-      { role: 'system' as const, content: systemPrompt },
-      ...learnSession.messages
-        .filter((m) => m.role !== MessageRole.SYSTEM)
-        .map((m) => ({
-          role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-          content: m.content,
-        })),
-      { role: 'user' as const, content: message },
-    ]
+    const historyMessages = learnSession.messages
+      .filter((m) => m.role !== MessageRole.SYSTEM)
+      .map((m) => ({
+        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+        content: m.content,
+      }))
 
-    // Single-response generation — return the full text at once, not word by word.
-    const completion = await chatWithFallback({
-      messages,
-      temperature: 0.7,
-      max_tokens: 1024,
-    })
-    const text = completion.choices[0]?.message?.content ?? ''
-    if (!text) {
-      return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+    try {
+      const text = await generateAIResponse(
+        [...historyMessages, { role: 'user', content: message }],
+        systemPrompt,
+        1024,
+      )
+
+      if (!text) {
+        return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+      }
+
+      await prisma.message.create({
+        data: { sessionId, role: MessageRole.ASSISTANT, content: text },
+      })
+
+      return NextResponse.json({ success: true, text })
+    } catch (error: any) {
+      console.error('[learn/chat] AI error:', error.message)
+      return NextResponse.json(
+        { error: { message: error.message || 'AI failed' } },
+        { status: 500 },
+      )
     }
-
-    await prisma.message.create({
-      data: {
-        sessionId,
-        role: MessageRole.ASSISTANT,
-        content: text,
-        inputTokens: completion.usage?.prompt_tokens ?? null,
-        outputTokens: completion.usage?.completion_tokens ?? null,
-      },
-    })
-
-    return NextResponse.json({ success: true, text })
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })

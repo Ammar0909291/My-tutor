@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { chatWithFallback, buildCurriculumPrompt } from '@/lib/ai/client'
+import { generateJSON, buildCurriculumPrompt } from '@/lib/ai/client'
 import { prisma } from '@/lib/db/prisma'
 import type { Curriculum } from '@/types'
 
@@ -25,16 +25,8 @@ export async function POST(req: Request) {
 
     const prompt = buildCurriculumPrompt(subject.name, profile.selfDescription)
 
-    const completion = await chatWithFallback({
-      messages: [
-        { role: 'system', content: 'Return only valid JSON with no markdown fences or extra text.' },
-        { role: 'user', content: prompt },
-      ],
-    })
-
-    const text = completion.choices[0].message.content ?? ''
-    const cleaned = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
-    const curriculum = JSON.parse(cleaned) as Curriculum
+    const curriculum = await generateJSON(prompt) as Curriculum
+    if (!curriculum) return NextResponse.json({ success: false, error: 'Failed to generate curriculum' }, { status: 502 })
 
     const learningPath = await prisma.learningPath.create({
       data: {

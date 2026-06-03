@@ -1,7 +1,7 @@
-// Convenience re-export — Groq AI helpers at a flat path
+// Convenience re-export — AI helpers at a flat path
 export {
-  ai,
-  TUTOR_MODEL,
+  generateAIResponse,
+  generateJSON,
   buildTutorSystemPrompt,
   buildCurriculumPrompt,
 } from '@/lib/ai/client'
