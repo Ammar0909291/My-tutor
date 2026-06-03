@@ -7,7 +7,7 @@ const schema = z.object({
   subjectSlug: z.string(),
   selfDescription: z.string().min(10).max(2000),
   voiceChoice: z.string(),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('ru'),
+  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
 })
 
 export async function POST(req: Request) {

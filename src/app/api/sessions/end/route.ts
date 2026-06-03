@@ -110,7 +110,7 @@ export async function POST(req: Request) {
     if (learnSession.messages.length > 2) {
       try {
         const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
-        const lang = profile?.teachingLanguage ?? 'ru'
+        const lang = profile?.teachingLanguage ?? 'en'
         const lastMessages = learnSession.messages
           .slice(-20)
           .map((m) => `${m.role === MessageRole.USER ? 'Student' : 'Tutor'}: ${m.content.slice(0, 300)}`)

@@ -8,15 +8,15 @@ type VoiceOption = { key: string; label: string }
 type LangOption = { key: TeachingLang; icon: string; label: string }
 
 const VOICE_OPTIONS: VoiceOption[] = [
-  { key: 'male',   label: 'Мужской (М)' },
-  { key: 'female', label: 'Женский (Ж)' },
-  { key: 'warm',   label: 'Тёплый (Т)' },
+  { key: 'male',   label: 'Male' },
+  { key: 'female', label: 'Female' },
+  { key: 'warm',   label: 'Warm' },
 ]
 
 const LANG_OPTIONS: LangOption[] = [
-  { key: 'ru', icon: '🇷🇺', label: 'Русский' },
+  { key: 'ru', icon: '🇷🇺', label: 'Russian' },
   { key: 'en', icon: '🇬🇧', label: 'English' },
-  { key: 'hi', icon: '🇮🇳', label: 'हिंदी' },
+  { key: 'hi', icon: '🇮🇳', label: 'Hinglish' },
 ]
 
 interface SettingsData {
@@ -26,12 +26,29 @@ interface SettingsData {
   freeSessionUsed: boolean
 }
 
+interface ProfileData {
+  name: string
+  email: string
+  createdAt: string
+  xpPoints: number
+  lessonsCount: number
+  selfDescription: string
+  voiceId: string
+}
+
 export default function SettingsPage() {
-  const { t, setLang } = useLanguage()
+  const { t, lang, setLang } = useLanguage()
   const [data, setData] = useState<SettingsData | null>(null)
   const [voiceId, setVoiceId] = useState('male')
-  const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('ru')
+  const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
+
+  // Profile state
+  const [profile, setProfile] = useState<ProfileData | null>(null)
+  const [profileName, setProfileName] = useState('')
+  const [profileLevel, setProfileLevel] = useState('')
+  const [profileVoice, setProfileVoice] = useState('male')
+  const [profileSave, setProfileSave] = useState<'idle' | 'saving' | 'saved'>('idle')
 
   useEffect(() => {
     fetch('/api/settings')
@@ -41,6 +58,27 @@ export default function SettingsPage() {
           setData(d.data)
           setVoiceId(d.data.voiceId)
           setTeachingLang(d.data.teachingLanguage)
+        }
+      })
+      .catch(() => {})
+
+    fetch('/api/user/profile')
+      .then((r) => r.json())
+      .then((d: { user?: { name?: string; email?: string; createdAt?: string; xpPoints?: number; _count?: { learnSessions?: number }; profile?: { selfDescription?: string; voiceId?: string } } }) => {
+        if (d.user) {
+          const p: ProfileData = {
+            name: d.user.name ?? '',
+            email: d.user.email ?? '',
+            createdAt: d.user.createdAt ?? '',
+            xpPoints: d.user.xpPoints ?? 0,
+            lessonsCount: d.user._count?.learnSessions ?? 0,
+            selfDescription: d.user.profile?.selfDescription ?? '',
+            voiceId: d.user.profile?.voiceId ?? 'male',
+          }
+          setProfile(p)
+          setProfileName(p.name)
+          setProfileLevel(p.selfDescription)
+          setProfileVoice(p.voiceId)
         }
       })
       .catch(() => {})
@@ -56,14 +94,38 @@ export default function SettingsPage() {
       })
       const d = await res.json() as { success?: boolean }
       if (d.success) {
-        setLang(teachingLanguage)
         setSaveState('saved')
         setTimeout(() => setSaveState('idle'), 2000)
       }
     } catch { setSaveState('idle') }
   }
 
+  async function handleProfileSave() {
+    setProfileSave('saving')
+    try {
+      const res = await fetch('/api/user/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: profileName, levelDescription: profileLevel, voicePreference: profileVoice }),
+      })
+      const d = await res.json() as { success?: boolean }
+      if (d.success) {
+        setProfileSave('saved')
+        setTimeout(() => setProfileSave('idle'), 2000)
+      } else {
+        setProfileSave('idle')
+      }
+    } catch { setProfileSave('idle') }
+  }
+
+  function handleLangClick(key: TeachingLang) {
+    setTeachingLang(key)
+    setLang(key)
+  }
+
   const isPro = data?.subscriptionStatus === 'ACTIVE'
+  const avatarName = profileName || profile?.name || 'U'
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarName)}&background=F78166&color=fff&size=128&bold=true&rounded=true`
 
   return (
     <div className="min-h-screen" style={{ background: '#0A0A0F', color: '#fff' }}>
@@ -85,7 +147,104 @@ export default function SettingsPage() {
       <main className="max-w-2xl mx-auto px-6 py-10 space-y-6">
         <h1 className="text-2xl font-black tracking-tight">{t('settings_title')}</h1>
 
-        {/* Plan — upgrade disabled until Stripe is configured */}
+        {/* Profile */}
+        <Section label={t('profile_title')}>
+          <div className="flex items-center gap-4 mb-5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} />
+            <div className="min-w-0">
+              <p className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{profile?.name || '—'}</p>
+              <p className="text-xs mt-0.5" style={{ color: '#52525B' }}>{profile?.email}</p>
+              {profile && (
+                <div className="flex gap-3 mt-1.5 text-xs" style={{ color: '#52525B' }}>
+                  <span>{t('profile_lessons')}: {profile.lessonsCount}</span>
+                  <span>{t('profile_xp')}: {profile.xpPoints}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {/* Name */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#3F3F46' }}>
+                {t('profile_name')}
+              </label>
+              <input
+                type="text"
+                value={profileName}
+                onChange={(e) => setProfileName(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl text-sm"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' }}
+              />
+            </div>
+
+            {/* Email (read-only) */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#3F3F46' }}>
+                {t('profile_email')} 🔒
+              </label>
+              <input
+                type="email"
+                value={profile?.email ?? ''}
+                readOnly
+                className="w-full px-4 py-2.5 rounded-xl text-sm"
+                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#52525B', cursor: 'not-allowed' }}
+              />
+            </div>
+
+            {/* Voice preference */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#3F3F46' }}>
+                {t('profile_voice')}
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {VOICE_OPTIONS.map((v) => (
+                  <button key={v.key} onClick={() => setProfileVoice(v.key)}
+                    className="py-2 rounded-xl text-xs font-semibold transition-all"
+                    style={{
+                      background: profileVoice === v.key ? 'rgba(247,129,102,0.12)' : 'rgba(255,255,255,0.04)',
+                      border: `1px solid ${profileVoice === v.key ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)'}`,
+                      color: profileVoice === v.key ? 'var(--accent-primary)' : '#71717A',
+                    }}>
+                    {v.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Level/About */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#3F3F46' }}>
+                {t('profile_level')}
+              </label>
+              <textarea
+                value={profileLevel}
+                onChange={(e) => setProfileLevel(e.target.value)}
+                rows={3}
+                className="w-full px-4 py-2.5 rounded-xl text-sm resize-none"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' }}
+              />
+            </div>
+
+            {/* Member since + stats */}
+            {profile && (
+              <div className="flex gap-4 text-xs" style={{ color: '#52525B' }}>
+                <span>{t('profile_member')}: {new Date(profile.createdAt).toLocaleDateString()}</span>
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={handleProfileSave}
+            disabled={profileSave === 'saving'}
+            className="mt-5 w-full py-3 rounded-xl text-sm font-bold transition-all disabled:opacity-60"
+            style={{ background: 'var(--accent-primary)', color: '#fff' }}>
+            {profileSave === 'saved' ? t('profile_saved') : profileSave === 'saving' ? '...' : t('profile_save')}
+          </button>
+        </Section>
+
+        {/* Plan */}
         <Section label={t('settings_plan')}>
           <div className="flex items-center gap-3">
             {isPro ? (
@@ -119,16 +278,16 @@ export default function SettingsPage() {
           </div>
         </Section>
 
-        {/* Teaching language */}
+        {/* Teaching language — changes immediately */}
         <Section label={t('settings_lang')}>
           <div className="grid grid-cols-3 gap-3">
             {LANG_OPTIONS.map((l) => (
-              <button key={l.key} onClick={() => setTeachingLang(l.key)}
+              <button key={l.key} onClick={() => handleLangClick(l.key)}
                 className="py-3 rounded-xl text-sm font-semibold transition-all flex flex-col items-center gap-1"
                 style={{
-                  background: teachingLanguage === l.key ? 'rgba(247,129,102,0.12)' : 'rgba(255,255,255,0.04)',
-                  border: `1px solid ${teachingLanguage === l.key ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)'}`,
-                  color: teachingLanguage === l.key ? 'var(--accent-primary)' : '#71717A',
+                  background: (teachingLanguage === l.key || lang === l.key) ? 'rgba(247,129,102,0.12)' : 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${(teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)'}`,
+                  color: (teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : '#71717A',
                 }}>
                 <span className="text-xl">{l.icon}</span>
                 <span>{l.label}</span>
@@ -144,7 +303,7 @@ export default function SettingsPage() {
           </p>
         </Section>
 
-        {/* Save */}
+        {/* Save (voice + language) */}
         <button
           onClick={handleSave}
           disabled={saveState === 'saving'}

@@ -9,7 +9,7 @@ const schema = z.object({
   mimeType: z.string().default('image/jpeg'),
   question: z.string().max(2000).default(''),
   subject: z.string().max(64).default('programming'),
-  lang: z.enum(['ru', 'en', 'hi']).default('ru'),
+  lang: z.enum(['ru', 'en', 'hi']).default('en'),
 })
 
 const PROMPTS: Record<string, string> = {

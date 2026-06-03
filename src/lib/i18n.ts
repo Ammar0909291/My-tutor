@@ -251,6 +251,18 @@ export const translations = {
     error_oauth_signin: 'Ошибка входа через Google. Попробуй ещё раз.',
     error_oauth_callback: 'Ошибка авторизации. Попробуй ещё раз.',
     error_generic: 'Произошла ошибка. Попробуй ещё раз.',
+
+    /* ── Profile ── */
+    profile_title: 'Профиль',
+    profile_save: 'Сохранить изменения',
+    profile_saved: 'Сохранено ✓',
+    profile_name: 'Имя',
+    profile_email: 'Email',
+    profile_voice: 'Голос репетитора',
+    profile_level: 'О себе',
+    profile_member: 'Участник с',
+    profile_lessons: 'Всего уроков',
+    profile_xp: 'Всего XP',
   },
   en: {
     /* ── Landing ── */
@@ -502,6 +514,18 @@ export const translations = {
     error_oauth_signin: 'Google sign-in error. Please try again.',
     error_oauth_callback: 'Authorization error. Please try again.',
     error_generic: 'Something went wrong. Please try again.',
+
+    /* ── Profile ── */
+    profile_title: 'Profile',
+    profile_save: 'Save changes',
+    profile_saved: 'Saved ✓',
+    profile_name: 'Full name',
+    profile_email: 'Email',
+    profile_voice: 'Tutor voice',
+    profile_level: 'About you',
+    profile_member: 'Member since',
+    profile_lessons: 'Total lessons',
+    profile_xp: 'Total XP',
   },
   hi: {
     /* ── Landing ── */

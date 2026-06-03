@@ -24,7 +24,7 @@ export function speakText(
   text: string,
   config: { pitch: number; rate: number },
   onEnd?: () => void,
-  lang: TeachingLang = 'ru',
+  lang: TeachingLang = 'en',
 ): void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
   window.speechSynthesis.cancel()
