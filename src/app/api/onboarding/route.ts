@@ -24,6 +24,18 @@ export async function POST(req: Request) {
     const { subjectSlug, selfDescription, voiceChoice, teachingLanguage } = schema.parse(body)
     console.log('[onboarding] parsed ok, userId:', userId, 'subject:', subjectSlug)
 
+    // JWT sessions outlive DB records (e.g. after a DB reset or env change).
+    // Upsert the user so the FK constraint on profiles never fails.
+    await prisma.user.upsert({
+      where: { id: userId },
+      update: { name: session.user.name ?? undefined },
+      create: {
+        id: userId,
+        email: session.user.email ?? `${userId}@mytutor.local`,
+        name: session.user.name ?? 'Student',
+      },
+    })
+
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
     if (!subject) {
       return NextResponse.json({ success: false, error: 'Subject not found. Run the seed first.' }, { status: 404 })
