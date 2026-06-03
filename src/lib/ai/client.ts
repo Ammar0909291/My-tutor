@@ -1,8 +1,5 @@
 import Groq from 'groq-sdk'
 
-console.log('GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY)
-console.log('GROQ_API_KEY first 10:', process.env.GROQ_API_KEY?.substring(0, 10))
-
 export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
 
 const FALLBACK_MODELS = [
@@ -12,13 +9,18 @@ const FALLBACK_MODELS = [
   'gemma2-9b-it',
 ]
 
-const globalForAI = globalThis as unknown as { groq: Groq | undefined }
+// Sanitize the key: strip whitespace/newlines and any surrounding quotes.
+// Windows .env files commonly leave trailing \r or wrapping quotes, which
+// makes Groq reject the request with "403 Forbidden" even though the key
+// itself is valid.
+const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
 
-const GROQ_KEY = process.env.GROQ_API_KEY || ''
+console.log('GROQ_API_KEY exists:', !!GROQ_KEY)
+console.log('GROQ_API_KEY length:', GROQ_KEY.length, 'last4:', GROQ_KEY.slice(-4))
 
-export const ai = globalForAI.groq ?? new Groq({ apiKey: GROQ_KEY })
-
-if (process.env.NODE_ENV !== 'production') globalForAI.groq = ai
+// No global caching — a stale client built with a missing key would otherwise
+// be reused across hot reloads even after the env var is fixed.
+export const ai = new Groq({ apiKey: GROQ_KEY })
 
 // Also expose a plain instance for simple one-off calls
 const groq = ai
