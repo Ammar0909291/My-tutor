@@ -8,13 +8,24 @@ const schema = z.object({
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
 })
 
+async function resolveDbUserId(sessionId: string, sessionEmail?: string | null): Promise<string | null> {
+  const byId = await prisma.user.findUnique({ where: { id: sessionId }, select: { id: true } })
+  if (byId) return byId.id
+  if (!sessionEmail) return null
+  const byEmail = await prisma.user.findUnique({ where: { email: sessionEmail }, select: { id: true } })
+  return byEmail?.id ?? null
+}
+
 export async function GET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 
+  const dbUserId = await resolveDbUserId(session.user.id, session.user.email)
+  if (!dbUserId) return NextResponse.json({ success: true, data: { voiceId: 'male', teachingLanguage: 'en', subscriptionStatus: 'FREE', freeSessionUsed: false } })
+
   const [profile, subscription] = await Promise.all([
-    prisma.profile.findUnique({ where: { userId: session.user.id } }),
-    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
+    prisma.profile.findUnique({ where: { userId: dbUserId } }),
+    prisma.subscription.findUnique({ where: { userId: dbUserId } }),
   ])
 
   return NextResponse.json({
@@ -40,17 +51,16 @@ export async function PATCH(req: Request) {
     if (voiceId !== undefined) data.voiceId = voiceId
     if (teachingLanguage !== undefined) data.teachingLanguage = teachingLanguage
 
-    if (Object.keys(data).length === 0) {
-      return NextResponse.json({ success: true })
-    }
+    if (Object.keys(data).length === 0) return NextResponse.json({ success: true })
 
-    const userId = session.user.id
-    // Use upsert: profile may not exist yet if user skipped onboarding or DB was reset
+    const dbUserId = await resolveDbUserId(session.user.id, session.user.email)
+    if (!dbUserId) return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 })
+
     await prisma.profile.upsert({
-      where: { userId },
+      where: { userId: dbUserId },
       update: data,
       create: {
-        userId,
+        userId: dbUserId,
         displayName: session.user.name ?? 'Student',
         selfDescription: 'Beginner',
         voiceId: data.voiceId ?? 'male',
