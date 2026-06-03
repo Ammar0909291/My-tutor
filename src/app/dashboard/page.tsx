@@ -171,7 +171,7 @@ export default async function DashboardPage() {
           <div className="flex items-center justify-between gap-4 px-5 py-4 rounded-2xl mb-6"
             style={{ background: 'rgba(247,129,102,0.07)', border: '1px solid rgba(247,129,102,0.25)' }}>
             <p className="text-sm font-medium" style={{ color: '#F78166' }}>
-              ✦ Твой бесплатный урок использован · Оформи Pro чтобы продолжить
+              ✦ {T('dash_upgrade_banner')}
             </p>
             <UpgradeButton />
           </div>

@@ -114,6 +114,25 @@ async function geminiComplete(
 
 // ─── Public API ───────────────────────────────────────────────────────────────
 
+/**
+ * Simple one-shot AI call. Prepends systemPrompt as a system message.
+ * Uses the same Groq fallback chain as chatWithFallback.
+ */
+export async function generateAIResponse(
+  messages: { role: 'user' | 'assistant'; content: string }[],
+  systemPrompt: string,
+): Promise<string> {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error('GROQ_API_KEY is missing from .env.local')
+  }
+  const completion = await chatWithFallback({
+    messages: [{ role: 'system', content: systemPrompt }, ...messages],
+    temperature: 0.7,
+    max_tokens: 1024,
+  })
+  return completion.choices[0]?.message?.content ?? ''
+}
+
 /** Non-streaming completion with Groq fallback chain, then Gemini. */
 export async function chatWithFallback(params: CreateParams): Promise<Groq.Chat.Completions.ChatCompletion> {
   let lastErr: unknown
