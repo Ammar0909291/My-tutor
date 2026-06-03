@@ -5,11 +5,13 @@ export const TUTOR_MODEL = 'google/gemma-3-27b-it:free'
 
 // Fallback chain — tried in order when a model returns 429, 404, or 5xx
 export const FALLBACK_MODELS = [
-  'google/gemma-3-27b-it:free',
   'meta-llama/llama-3.3-70b-instruct:free',
+  'deepseek/deepseek-chat-v3-0324:free',
+  'google/gemma-3-27b-it:free',
   'mistralai/mistral-7b-instruct:free',
-  'deepseek/deepseek-chat:free',
   'microsoft/phi-4:free',
+  'qwen/qwen3-8b:free',
+  'tngtech/deepseek-r1t-chimera:free',
 ]
 
 const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
@@ -120,21 +122,27 @@ export async function chatWithFallback(
     }
   }
 
-  // All OpenRouter models exhausted — try Gemini
+  // All OpenRouter models exhausted — try Gemini (skip if quota exhausted)
   if (process.env.GEMINI_API_KEY) {
-    const messages = (params.messages ?? []) as ChatMessage[]
-    const text = await geminiComplete(messages, {
-      temperature: typeof params.temperature === 'number' ? params.temperature : undefined,
-      maxOutputTokens: typeof params.max_tokens === 'number' ? params.max_tokens : undefined,
-    })
-    return {
-      id: 'gemini-fallback',
-      object: 'chat.completion',
-      created: Date.now(),
-      model: 'gemini-2.0-flash',
-      choices: [{ index: 0, message: { role: 'assistant', content: text }, finish_reason: 'stop', logprobs: null }],
-      usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
-    } as OpenAI.Chat.Completions.ChatCompletion
+    try {
+      const messages = (params.messages ?? []) as ChatMessage[]
+      const text = await geminiComplete(messages, {
+        temperature: typeof params.temperature === 'number' ? params.temperature : undefined,
+        maxOutputTokens: typeof params.max_tokens === 'number' ? params.max_tokens : undefined,
+      })
+      return {
+        id: 'gemini-fallback',
+        object: 'chat.completion',
+        created: Date.now(),
+        model: 'gemini-2.0-flash',
+        choices: [{ index: 0, message: { role: 'assistant', content: text }, finish_reason: 'stop', logprobs: null }],
+        usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+      } as OpenAI.Chat.Completions.ChatCompletion
+    } catch (geminiErr) {
+      // 429 quota exceeded — surface original OpenRouter error instead
+      const msg = geminiErr instanceof Error ? geminiErr.message : String(geminiErr)
+      if (!msg.includes('429') && !msg.includes('quota')) throw geminiErr
+    }
   }
 
   throw lastErr
@@ -155,10 +163,15 @@ export async function chatStreamWithFallback(
     }
   }
 
-  // All OpenRouter models exhausted — try Gemini
+  // All OpenRouter models exhausted — try Gemini (skip if quota exhausted)
   if (process.env.GEMINI_API_KEY) {
-    const messages = (params.messages ?? []) as ChatMessage[]
-    return { stream: geminiStream(messages), model: 'gemini-2.0-flash' }
+    try {
+      const messages = (params.messages ?? []) as ChatMessage[]
+      return { stream: geminiStream(messages), model: 'gemini-2.0-flash' }
+    } catch (geminiErr) {
+      const msg = geminiErr instanceof Error ? geminiErr.message : String(geminiErr)
+      if (!msg.includes('429') && !msg.includes('quota')) throw geminiErr
+    }
   }
 
   throw lastErr
