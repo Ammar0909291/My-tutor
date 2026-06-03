@@ -24,31 +24,45 @@ export async function POST(req: Request) {
     const { subjectSlug, selfDescription, voiceChoice, teachingLanguage } = schema.parse(body)
     console.log('[onboarding] parsed ok, userId:', userId, 'subject:', subjectSlug)
 
-    // JWT sessions outlive DB records (e.g. after a DB reset or env change).
-    // Upsert the user so the FK constraint on profiles never fails.
-    await prisma.user.upsert({
-      where: { id: userId },
-      update: { name: session.user.name ?? undefined },
-      create: {
-        id: userId,
-        email: session.user.email ?? `${userId}@mytutor.local`,
-        name: session.user.name ?? 'Student',
-      },
-    })
+    // JWT sessions outlive DB records. If the session userId doesn't exist in the DB
+    // but the email does (different row), resolve to the existing user's id.
+    let effectiveUserId = userId
+    try {
+      await prisma.user.upsert({
+        where: { id: userId },
+        update: { name: session.user.name ?? undefined },
+        create: {
+          id: userId,
+          email: session.user.email ?? `${userId}@mytutor.local`,
+          name: session.user.name ?? 'Student',
+        },
+      })
+    } catch (upsertErr: unknown) {
+      if (upsertErr instanceof Error && upsertErr.message.includes('Unique constraint')) {
+        // Email already belongs to a different DB row — find that user and use their id
+        const byEmail = session.user.email
+          ? await prisma.user.findUnique({ where: { email: session.user.email } })
+          : null
+        if (!byEmail) throw upsertErr
+        console.warn('[onboarding] session userId mismatch — resolved to existing user', byEmail.id)
+        effectiveUserId = byEmail.id
+      } else {
+        throw upsertErr
+      }
+    }
 
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
     if (!subject) {
       return NextResponse.json({ success: false, error: 'Subject not found. Run the seed first.' }, { status: 404 })
     }
 
-    const existingProfile = await prisma.profile.findUnique({ where: { userId } })
+    const existingProfile = await prisma.profile.findUnique({ where: { userId: effectiveUserId } })
     if (existingProfile) {
-      // Update existing profile with latest voice/language choice
       await prisma.profile.update({
-        where: { userId },
+        where: { userId: effectiveUserId },
         data: { voiceId: voiceChoice, teachingLanguage },
       })
-      await prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } })
+      await prisma.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
       return NextResponse.json({ success: true, data: existingProfile })
     }
 
@@ -56,7 +70,7 @@ export async function POST(req: Request) {
     const result = await prisma.$transaction(async (tx) => {
       const profile = await tx.profile.create({
         data: {
-          userId,
+          userId: effectiveUserId,
           displayName: session.user.name ?? 'Student',
           selfDescription,
           voiceId: voiceChoice,
@@ -67,7 +81,7 @@ export async function POST(req: Request) {
 
       const learningPath = await tx.learningPath.create({
         data: {
-          userId,
+          userId: effectiveUserId,
           subjectId: subject.id,
           title: `${subject.name} Course`,
           curriculum: { generated: false, steps: [], note: 'Curriculum will be generated at the start of first lesson' },
@@ -76,14 +90,14 @@ export async function POST(req: Request) {
         },
       })
 
-      await tx.user.update({ where: { id: userId }, data: { onboardingCompleted: true } })
+      await tx.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
 
       return { profile, learningPath }
     })
 
     // Subscription upsert outside transaction — not critical, don't block onboarding
     try {
-      await prisma.subscription.upsert({ where: { userId }, update: {}, create: { userId } })
+      await prisma.subscription.upsert({ where: { userId: effectiveUserId }, update: {}, create: { userId: effectiveUserId } })
     } catch (subErr) {
       console.warn('[onboarding] subscription upsert failed (non-fatal):', subErr)
     }
