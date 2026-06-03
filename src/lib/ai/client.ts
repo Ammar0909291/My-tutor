@@ -23,6 +23,9 @@ if (process.env.NODE_ENV !== 'production') globalForAI.groq = ai
 
 function isRetryableError(err: unknown): boolean {
   if (err instanceof Groq.APIError) {
+    if (err.status === 401 || err.status === 403) {
+      throw new Error('GROQ_API_KEY is missing or invalid. Please set GROQ_API_KEY in your .env file.')
+    }
     return err.status === 429 || err.status >= 500
   }
   const msg = err instanceof Error ? err.message : String(err)
