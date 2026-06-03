@@ -23,9 +23,15 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  console.log('=== SESSIONS POST CALLED ===')
+  const sessionCheck = await auth()
+  console.log('SESSION:', JSON.stringify(sessionCheck))
+  console.log('USER ID:', sessionCheck?.user?.id)
+
   try {
     const body = await req.json();
     const { subjectSlug, memoryContext, userId: bodyUserId } = createSchema.parse(body);
+    console.log('BODY userId:', bodyUserId, 'subjectSlug:', subjectSlug)
 
     // Prefer userId from body; fall back to server session
     let userId = bodyUserId
