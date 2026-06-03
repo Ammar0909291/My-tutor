@@ -5,6 +5,7 @@ export const TUTOR_MODEL = 'google/gemma-3-27b-it:free'
 
 // Fallback chain — tried in order when a model returns 429, 404, or 5xx
 export const FALLBACK_MODELS = [
+  'moonshotai/kimi-k2:free',
   'meta-llama/llama-3.3-70b-instruct:free',
   'deepseek/deepseek-chat-v3-0324:free',
   'google/gemma-3-27b-it:free',
