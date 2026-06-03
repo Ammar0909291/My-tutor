@@ -25,7 +25,7 @@ export default async function CoachPage() {
   const profile = user.profile
   const primarySubject = profile?.subjects[0]?.subject
   const subject = primarySubject?.name ?? 'программированию'
-  const teachingLanguage = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
+  const teachingLanguage = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
 
   return <CoachChat subject={subject} teachingLanguage={teachingLanguage} />
 }
