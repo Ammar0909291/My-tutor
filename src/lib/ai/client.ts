@@ -12,6 +12,17 @@ const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 // Sanitize the key: strip whitespace/newlines and any surrounding quotes.
 const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
 
+// Node's default fetch (undici) sends a User-Agent that Cloudflare — which
+// fronts Groq's API — bot-blocks with "403 Forbidden" before the request is
+// ever metered. A browser/curl-like User-Agent makes the request pass, the
+// same way the working PowerShell/curl call does.
+const GROQ_HEADERS = {
+  Authorization: `Bearer ${GROQ_KEY}`,
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+}
+
 type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
 
 type GroqCompletion = {
@@ -34,10 +45,7 @@ async function groqChat(
     try {
       const res = await fetch(GROQ_URL, {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${GROQ_KEY}`,
-          'Content-Type': 'application/json',
-        },
+        headers: GROQ_HEADERS,
         body: JSON.stringify({
           model,
           messages,
