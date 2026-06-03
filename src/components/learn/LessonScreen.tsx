@@ -200,6 +200,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [terminalOutput, setTerminalOutput] = useState('')
+  const [terminalIsError, setTerminalIsError] = useState(false)
+  const [terminalDone, setTerminalDone] = useState(false)
+  const [stdinInput, setStdinInput] = useState('')
   const [isRunning, setIsRunning] = useState(false)
 
   // Refs
@@ -217,6 +220,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
   const filename = FILENAME[subjectSlug] ?? 'урок.txt'
+  const terminalCmd = subjectSlug === 'python' ? `python ${filename}` :
+    subjectSlug === 'c' ? `gcc ${filename} -o урок && ./урок` :
+    subjectSlug === 'cpp' ? `g++ ${filename} -o урок && ./урок` :
+    filename
   const studentAvatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName ?? 'Студент')}&background=79C0FF&color=fff&bold=true&size=64`
 
   // Timer
@@ -301,18 +308,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Run code
   const handleRunCode = useCallback(async () => {
     if (isRunning) return
-    setIsRunning(true); setTerminalOutput('> Выполнение...')
+    setIsRunning(true); setTerminalOutput('> Выполнение...'); setTerminalIsError(false); setTerminalDone(false)
     try {
       const res = await fetch('/api/learn/run', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, language }),
+        body: JSON.stringify({ code, language, stdin: stdinInput }),
       })
-      const data = await res.json() as { output?: string; error?: string }
-      setTerminalOutput(data.output ?? data.error ?? '(нет вывода)')
+      const data = await res.json() as { success?: boolean; output?: string; error?: string }
+      if (!data.success) {
+        setTerminalOutput(data.error ?? '(ошибка)')
+        setTerminalIsError(true)
+      } else {
+        setTerminalOutput(data.output ?? '(нет вывода)')
+        setTerminalIsError(false)
+      }
     } catch (err) {
       setTerminalOutput(`Ошибка: ${err instanceof Error ? err.message : String(err)}`)
-    } finally { setIsRunning(false) }
-  }, [code, language, isRunning])
+      setTerminalIsError(true)
+    } finally { setIsRunning(false); setTerminalDone(true) }
+  }, [code, language, stdinInput, isRunning])
 
   // Send message
   const sendMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
@@ -619,6 +633,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             <span className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
               {terminalOpen ? <ChevronDown size={11} /> : <ChevronUp size={11} />}
               {t('lesson_terminal')}
+              {terminalOpen && <span style={{ color: 'var(--text-dim)', marginLeft: 4 }}>$ {terminalCmd}</span>}
             </span>
             {terminalOpen && (
               <button onClick={(e) => { e.stopPropagation(); handleRunCode() }}
@@ -630,12 +645,32 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             )}
           </div>
           {terminalOpen && (
-            <div className="shrink-0 overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed"
-              style={{ height: 200, background: '#0D1117', borderTop: '1px solid var(--border-default)', color: 'var(--accent-green)' }}>
-              {terminalOutput
-                ? <pre className="whitespace-pre-wrap break-words">{terminalOutput}</pre>
-                : <span style={{ color: 'var(--text-dim)' }}>{'// Нажми ЗАПУСК для симуляции'}</span>
-              }
+            <div className="shrink-0 flex flex-col" style={{ height: 220, background: '#0D1117', borderTop: '1px solid var(--border-default)' }}>
+              {/* Output area */}
+              <div className="flex-1 overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed">
+                {terminalOutput && terminalOutput !== '> Выполнение...'
+                  ? <>
+                      <pre className="whitespace-pre-wrap break-words" style={{ color: terminalIsError ? '#FF6B6B' : 'var(--accent-green)' }}>{terminalOutput}</pre>
+                      {terminalDone && <div className="mt-2 pt-2" style={{ color: 'var(--text-dim)', borderTop: '1px solid #21262D' }}>--- Выполнение завершено ---</div>}
+                    </>
+                  : terminalOutput === '> Выполнение...'
+                  ? <span style={{ color: '#E3B341' }}>{terminalOutput}</span>
+                  : <span style={{ color: 'var(--text-dim)' }}>$ {terminalCmd}</span>
+                }
+              </div>
+              {/* Stdin input */}
+              <div className="flex items-center gap-2 px-4 py-2 shrink-0" style={{ borderTop: '1px solid #21262D' }}>
+                <span className="font-mono text-xs" style={{ color: 'var(--text-dim)' }}>stdin:</span>
+                <input
+                  type="text"
+                  value={stdinInput}
+                  onChange={(e) => setStdinInput(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleRunCode() } }}
+                  placeholder="Ввод для программы..."
+                  className="flex-1 bg-transparent font-mono text-xs outline-none"
+                  style={{ color: 'var(--text-primary)', caretColor: 'var(--accent-green)' }}
+                />
+              </div>
             </div>
           )}
         </section>
