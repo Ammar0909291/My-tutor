@@ -51,36 +51,44 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const [user, recentSessions, totalLessons, subscription] = await Promise.all([
-    prisma.user.findUnique({
-      where: { id: session.user.id },
+  const userSelect = {
+    id: true,
+    onboardingCompleted: true,
+    name: true,
+    xpPoints: true,
+    profile: {
       select: {
-        onboardingCompleted: true,
-        name: true,
-        xpPoints: true,
-        profile: {
-          select: {
-            displayName: true,
-            voiceId: true,
-            selfDescription: true,
-            teachingLanguage: true,
-            streakDays: true,
-            subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } },
-          },
-        },
+        displayName: true,
+        voiceId: true,
+        selfDescription: true,
+        teachingLanguage: true,
+        streakDays: true,
+        subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } },
       },
-    }),
+    },
+  } as const
+
+  // Fall back to email lookup in case JWT userId differs from the DB row
+  // (stale session resolved to a different effectiveUserId during onboarding)
+  let user = await prisma.user.findUnique({ where: { id: session.user.id }, select: userSelect })
+  if (!user && session.user.email) {
+    user = await prisma.user.findUnique({ where: { email: session.user.email }, select: userSelect })
+  }
+
+  if (!user?.onboardingCompleted) redirect('/onboarding')
+
+  const dbUserId = user.id
+
+  const [recentSessions, totalLessons, subscription] = await Promise.all([
     prisma.learnSession.findMany({
-      where: { userId: session.user.id },
+      where: { userId: dbUserId },
       orderBy: { startedAt: 'desc' },
       take: 5,
       include: { subject: { select: { name: true, slug: true } } },
     }),
-    prisma.learnSession.count({ where: { userId: session.user.id } }),
-    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
+    prisma.learnSession.count({ where: { userId: dbUserId } }),
+    prisma.subscription.findUnique({ where: { userId: dbUserId } }),
   ])
-
-  if (!user?.onboardingCompleted) redirect('/onboarding')
 
   const profile = user.profile
   const lang = ((profile?.teachingLanguage ?? 'en') as Lang)
