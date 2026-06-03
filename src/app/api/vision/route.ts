@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import Groq from 'groq-sdk'
+
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
+const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
 
 const schema = z.object({
   imageBase64: z.string().min(1),
@@ -25,27 +27,38 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { imageBase64, mimeType, question, lang } = schema.parse(body)
 
-    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
-
     const basePrompt = PROMPTS[lang]
     const fullPrompt = question ? `${basePrompt}\n\nStudent question: ${question}` : basePrompt
 
-    const result = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
-      messages: [
-        { role: 'system', content: fullPrompt },
-        {
-          role: 'user',
-          content: [
-            { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageBase64}` } },
-            { type: 'text', text: question || 'Analyze this image.' },
-          ] as Groq.Chat.Completions.ChatCompletionContentPart[],
-        },
-      ],
-      max_tokens: 1024,
+    const res = await fetch(GROQ_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${GROQ_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        messages: [
+          { role: 'system', content: fullPrompt },
+          {
+            role: 'user',
+            content: [
+              { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageBase64}` } },
+              { type: 'text', text: question || 'Analyze this image.' },
+            ],
+          },
+        ],
+        max_tokens: 1024,
+      }),
     })
 
-    const text = result.choices[0]?.message?.content ?? ''
+    if (!res.ok) {
+      const errBody = await res.text()
+      return NextResponse.json({ success: false, error: `Groq ${res.status}: ${errBody}` }, { status: 500 })
+    }
+
+    const result = (await res.json()) as { choices?: { message?: { content?: string } }[] }
+    const text = result.choices?.[0]?.message?.content ?? ''
     return NextResponse.json({ success: true, text })
   } catch (err) {
     console.error('[vision]', err)

@@ -1,5 +1,3 @@
-import Groq from 'groq-sdk'
-
 export const TUTOR_MODEL = 'llama-3.3-70b-versatile'
 
 const FALLBACK_MODELS = [
@@ -9,38 +7,65 @@ const FALLBACK_MODELS = [
   'gemma2-9b-it',
 ]
 
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
+
 // Sanitize the key: strip whitespace/newlines and any surrounding quotes.
-// Windows .env files commonly leave trailing \r or wrapping quotes, which
-// makes Groq reject the request with "403 Forbidden" even though the key
-// itself is valid.
 const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
 
-console.log('GROQ_API_KEY exists:', !!GROQ_KEY)
-console.log('GROQ_API_KEY length:', GROQ_KEY.length, 'last4:', GROQ_KEY.slice(-4))
+type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
 
-// No global caching — a stale client built with a missing key would otherwise
-// be reused across hot reloads even after the env var is fixed.
-export const ai = new Groq({ apiKey: GROQ_KEY })
-
-// Also expose a plain instance for simple one-off calls
-const groq = ai
-
-function isRetryableError(err: unknown): boolean {
-  if (err instanceof Groq.APIError) {
-    if (err.status === 401 || err.status === 403) {
-      throw new Error('GROQ_API_KEY is missing or invalid. Please set GROQ_API_KEY in your .env file.')
-    }
-    return err.status === 429 || err.status >= 500
-  }
-  const msg = err instanceof Error ? err.message : String(err)
-  return msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit') || msg.includes('overloaded')
+type GroqCompletion = {
+  choices?: { message?: { content?: string } }[]
 }
 
-type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
-type CreateParams = {
-  messages: ChatMessage[]
-  temperature?: number
-  max_tokens?: number
+/**
+ * Call Groq's REST API directly with fetch — mirrors a plain curl/PowerShell
+ * request (only Authorization + Content-Type). The groq-sdk adds extra
+ * telemetry headers (x-stainless-*) that can trigger a "403 Forbidden" block
+ * on some networks/proxies even with a valid key, so we bypass it entirely.
+ * Tries each fallback model until one succeeds.
+ */
+async function groqChat(
+  messages: ChatMessage[],
+  opts: { temperature?: number; max_tokens?: number } = {},
+): Promise<string> {
+  let lastErr: unknown
+  for (const model of FALLBACK_MODELS) {
+    try {
+      const res = await fetch(GROQ_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${GROQ_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: opts.temperature ?? 0.7,
+          max_tokens: opts.max_tokens ?? 1024,
+        }),
+      })
+
+      if (!res.ok) {
+        const body = await res.text()
+        // 401/403 = key/account issue: don't bother trying other models
+        if (res.status === 401 || res.status === 403) {
+          throw new Error(`Groq auth failed (${res.status}): ${body}`)
+        }
+        // 429 / 5xx — try the next fallback model
+        lastErr = new Error(`Groq ${res.status}: ${body}`)
+        continue
+      }
+
+      const data = (await res.json()) as GroqCompletion
+      return data.choices?.[0]?.message?.content ?? ''
+    } catch (err) {
+      // Re-throw auth errors immediately
+      if (err instanceof Error && err.message.startsWith('Groq auth failed')) throw err
+      lastErr = err
+    }
+  }
+  throw lastErr ?? new Error('Groq: all models failed')
 }
 
 // ─── Simple helpers ───────────────────────────────────────────────────────────
@@ -50,24 +75,18 @@ export async function generateAIResponse(
   systemPrompt: string,
   maxTokens = 1024,
 ): Promise<string> {
-  const response = await groq.chat.completions.create({
-    model: TUTOR_MODEL,
-    messages: [{ role: 'system', content: systemPrompt }, ...messages],
-    max_tokens: maxTokens,
-    temperature: 0.7,
-  })
-  return response.choices[0]?.message?.content ?? ''
+  return groqChat(
+    [{ role: 'system', content: systemPrompt }, ...messages],
+    { max_tokens: maxTokens, temperature: 0.7 },
+  )
 }
 
 export async function generateJSON(prompt: string, maxTokens = 2048): Promise<unknown> {
-  const response = await groq.chat.completions.create({
-    model: TUTOR_MODEL,
-    messages: [{ role: 'user', content: prompt + '\n\nRespond with ONLY valid JSON. No markdown, no explanation, no backticks.' }],
-    max_tokens: maxTokens,
-    temperature: 0.3,
-  })
-  const text = response.choices[0]?.message?.content ?? '[]'
-  const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+  const text = await groqChat(
+    [{ role: 'user', content: prompt + '\n\nRespond with ONLY valid JSON. No markdown, no explanation, no backticks.' }],
+    { max_tokens: maxTokens, temperature: 0.3 },
+  )
+  const clean = (text || '[]').replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
   try { return JSON.parse(clean) } catch { return null }
 }
 
@@ -75,72 +94,21 @@ export async function summarizeSession(
   messages: { role: string; content: string }[],
   lang: string,
 ): Promise<string> {
-  if (!process.env.GROQ_API_KEY) return ''
+  if (!GROQ_KEY) return ''
   const prompt = lang === 'ru'
     ? 'Summarize this tutoring session in 2 sentences in Russian.'
     : lang === 'hi'
     ? 'इस session को 2 sentences में summarize करें।'
     : 'Summarize this tutoring session in 2 sentences in English.'
   try {
-    const response = await groq.chat.completions.create({
-      model: TUTOR_MODEL,
-      messages: [
+    return await groqChat(
+      [
         { role: 'system', content: prompt },
         ...messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
       ],
-      max_tokens: 200,
-    })
-    return response.choices[0]?.message?.content ?? ''
+      { max_tokens: 200 },
+    )
   } catch { return '' }
-}
-
-// ─── Fallback chain ───────────────────────────────────────────────────────────
-
-/** Non-streaming completion with Groq fallback chain. */
-export async function chatWithFallback(params: CreateParams): Promise<Groq.Chat.Completions.ChatCompletion> {
-  let lastErr: unknown
-
-  for (const model of FALLBACK_MODELS) {
-    try {
-      return await ai.chat.completions.create({
-        model,
-        messages: params.messages,
-        temperature: params.temperature ?? 0.7,
-        max_tokens: params.max_tokens ?? 1024,
-        stream: false,
-      })
-    } catch (err) {
-      if (isRetryableError(err)) { lastErr = err; continue }
-      throw err
-    }
-  }
-
-  throw lastErr
-}
-
-/** Streaming completion with Groq fallback chain. */
-export async function chatStreamWithFallback(
-  params: CreateParams,
-): Promise<{ stream: AsyncIterable<Groq.Chat.Completions.ChatCompletionChunk>; model: string }> {
-  let lastErr: unknown
-
-  for (const model of FALLBACK_MODELS) {
-    try {
-      const stream = await ai.chat.completions.create({
-        model,
-        messages: params.messages,
-        temperature: params.temperature ?? 0.7,
-        max_tokens: params.max_tokens ?? 1024,
-        stream: true,
-      })
-      return { stream, model }
-    } catch (err) {
-      if (isRetryableError(err)) { lastErr = err; continue }
-      throw err
-    }
-  }
-
-  throw lastErr
 }
 
 // ─── System Prompts ───────────────────────────────────────────────────────────
