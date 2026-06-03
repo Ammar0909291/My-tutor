@@ -1,4 +1,3 @@
-import { PrismaAdapter } from '@auth/prisma-adapter'
 import bcrypt from 'bcryptjs'
 import type { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
@@ -12,7 +11,6 @@ const credentialsSchema = z.object({
 })
 
 export const authConfig: NextAuthConfig = {
-  adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   trustHost: true,
   secret: process.env.AUTH_SECRET,
@@ -29,14 +27,11 @@ export const authConfig: NextAuthConfig = {
       async authorize(credentials) {
         const parsed = credentialsSchema.safeParse(credentials)
         if (!parsed.success) return null
-
         const { email, password } = parsed.data
         const user = await prisma.user.findUnique({ where: { email } })
         if (!user?.passwordHash) return null
-
         const valid = await bcrypt.compare(password, user.passwordHash)
         if (!valid) return null
-
         return { id: user.id, email: user.email, name: user.name, image: user.image }
       },
     }),
