@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 
-const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
-const GROQ_KEY = (process.env.GROQ_API_KEY || '').trim().replace(/^["']|["']$/g, '')
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
 
 const schema = z.object({
   imageBase64: z.string().min(1),
@@ -23,6 +22,9 @@ export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+  const apiKey = process.env.GEMINI_API_KEY
+  if (!apiKey) return NextResponse.json({ success: false, error: 'GEMINI_API_KEY not configured' }, { status: 500 })
+
   try {
     const body = await req.json()
     const { imageBase64, mimeType, question, lang } = schema.parse(body)
@@ -30,37 +32,29 @@ export async function POST(req: Request) {
     const basePrompt = PROMPTS[lang]
     const fullPrompt = question ? `${basePrompt}\n\nStudent question: ${question}` : basePrompt
 
-    const res = await fetch(GROQ_URL, {
+    const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${GROQ_KEY}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-        messages: [
-          { role: 'system', content: fullPrompt },
-          {
-            role: 'user',
-            content: [
-              { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageBase64}` } },
-              { type: 'text', text: question || 'Analyze this image.' },
-            ],
-          },
-        ],
-        max_tokens: 1024,
+        systemInstruction: { parts: [{ text: fullPrompt }] },
+        contents: [{
+          role: 'user',
+          parts: [
+            { inlineData: { mimeType, data: imageBase64 } },
+            { text: question || 'Analyze this image.' },
+          ],
+        }],
+        generationConfig: { maxOutputTokens: 1024, temperature: 0.7 },
       }),
     })
 
     if (!res.ok) {
       const errBody = await res.text()
-      return NextResponse.json({ success: false, error: `Groq ${res.status}: ${errBody}` }, { status: 500 })
+      return NextResponse.json({ success: false, error: `Gemini ${res.status}: ${errBody}` }, { status: 500 })
     }
 
-    const result = (await res.json()) as { choices?: { message?: { content?: string } }[] }
-    const text = result.choices?.[0]?.message?.content ?? ''
+    const result = await res.json()
+    const text = result.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
     return NextResponse.json({ success: true, text })
   } catch (err) {
     console.error('[vision]', err)
