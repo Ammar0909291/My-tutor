@@ -68,13 +68,31 @@ export async function summarizeSession(
 
 // ─── System Prompts ───────────────────────────────────────────────────────────
 
+export interface LessonContext {
+  currentLesson: number
+  totalLessons: number
+  lessonTitle: string
+  lessonGoal: string
+  unitTitle: string
+  completedLessons: number[]
+}
+
 export function buildTutorSystemPrompt(
   subject: string,
   studentLevel: string,
   goals: string,
   memoryContext?: string | null,
   teachingLanguage: 'ru' | 'en' | 'hi' = 'en',
+  lessonCtx?: LessonContext | null,
 ) {
+  const lessonBlock = lessonCtx
+    ? teachingLanguage === 'ru'
+      ? `\n\nТЕКУЩИЙ УРОК:\nУрок ${lessonCtx.currentLesson} из ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nРаздел: ${lessonCtx.unitTitle}\nЦель урока: ${lessonCtx.lessonGoal}\nПройдено уроков: ${lessonCtx.completedLessons.length} из ${lessonCtx.totalLessons}\n\nКогда студент явно говорит "понял", "готов к следующему" или "закончили урок" И ты уверен что цель урока достигнута — ответь СТРОГО в конце сообщения: [LESSON_COMPLETE]`
+      : teachingLanguage === 'hi'
+      ? `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nJab student clearly kahe "samajh gaya", "next lesson" ya "done" AND lesson goal achieve ho jaye — reply ke BILKUL END mein likhein: [LESSON_COMPLETE]`
+      : `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nWhen the student clearly says "understood", "ready for next", or "done" AND you are confident the lesson goal is achieved — append EXACTLY at the very end: [LESSON_COMPLETE]`
+    : ''
+
   if (teachingLanguage === 'en') {
     const memory = memoryContext ? `\n\nMemory from previous lessons:\n${memoryContext}\n` : ''
     return `You are an experienced ${subject} tutor who teaches in English.
@@ -82,7 +100,7 @@ Communicate ONLY in English unless the student explicitly asks otherwise.
 Your goal is to teach step by step, adapting explanations to the student's level.
 
 Student level: ${studentLevel}
-Learning goals: ${goals}${memory}
+Learning goals: ${goals}${memory}${lessonBlock}
 Principles:
 1. ▶ Explain simply using real-life analogies
 2. 📌 After each explanation, ask a comprehension question
@@ -112,7 +130,7 @@ LEARNING RULES:
 केवल हिंदी में बात करें, जब तक छात्र स्पष्ट रूप से कुछ और न माँगे।
 
 छात्र का स्तर: ${studentLevel}
-सीखने के लक्ष्य: ${goals}${memory}
+सीखने के लक्ष्य: ${goals}${memory}${lessonBlock}
 
 HINGLISH SUPPORT:
 - छात्र Hinglish में लिख सकते हैं — यह बिल्कुल ठीक है
@@ -127,7 +145,7 @@ HINGLISH SUPPORT:
 Твоя задача — обучать студента шаг за шагом.
 
 Уровень студента: ${studentLevel}
-Цели обучения: ${goals}${memorySection}
+Цели обучения: ${goals}${memorySection}${lessonBlock}
 
 ПРАВИЛА ОБУЧЕНИЯ:
 1. После каждого объяснения спроси: "Понял? Отвечай: да / нет / частично"

@@ -28,6 +28,7 @@ model User {
   subscription  Subscription?
   learningPaths LearningPath[]
   flashcards    Flashcard[]
+  studentProgress StudentProgress[]
 
   @@map("users")
 }
@@ -233,6 +234,39 @@ model Flashcard {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("flashcards")
+}
+
+// ─── Structured Curriculum ───────────────────────────────────────────────────
+
+model Curriculum {
+  id          String   @id @default(cuid())
+  subjectCode String   // 'c' | 'cpp' | 'python' | 'english'
+  unit        Int
+  unitTitle   String
+  lesson      Int      // lesson number within unit
+  lessonTitle String
+  lessonGoal  String   @db.Text
+  order       Int      // global order across all lessons in subject
+  createdAt   DateTime @default(now())
+
+  @@unique([subjectCode, order])
+  @@index([subjectCode])
+  @@map("curriculum")
+}
+
+model StudentProgress {
+  id               String   @id @default(cuid())
+  userId           String
+  subjectCode      String
+  currentLesson    Int      @default(1)
+  completedLessons Int[]    @default([])
+  lastStudiedAt    DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectCode])
+  @@map("student_progress")
 }
 
 // ─── Enums ────────────────────────────────────────────────────────────────────

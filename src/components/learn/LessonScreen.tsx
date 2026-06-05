@@ -132,6 +132,8 @@ type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: numb
 type MicState = 'idle' | 'recording'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'code' | 'chat'
+type CurriculumLesson = { id: string; subjectCode: string; unit: number; unitTitle: string; lesson: number; lessonTitle: string; lessonGoal: string; order: number }
+type CurriculumProgress = { currentLesson: number; completedLessons: number[] }
 
 interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
@@ -184,6 +186,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     e.target.value = ''
   }
 
+  // Curriculum
+  const [curriculumLessons, setCurriculumLessons] = useState<CurriculumLesson[]>([])
+  const [curriculumProgress, setCurriculumProgress] = useState<CurriculumProgress>({ currentLesson: 1, completedLessons: [] })
+  const [xpCelebration, setXpCelebration] = useState(false)
+
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [terminalOutput, setTerminalOutput] = useState('')
@@ -235,6 +242,42 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [messages, atBottom])
 
   useEffect(() => { setMicSupported(typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getUserMedia) }, [])
+
+  // Fetch curriculum
+  useEffect(() => {
+    const subjectMap: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'english' }
+    const code = subjectMap[subjectSlug]
+    if (!code) return
+    fetch(`/api/curriculum?subject=${code}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.success) {
+          setCurriculumLessons(data.lessons ?? [])
+          setCurriculumProgress(data.progress ?? { currentLesson: 1, completedLessons: [] })
+        }
+      })
+      .catch(() => {})
+  }, [subjectSlug])
+
+  // Detect lesson completion
+  const handleLessonComplete = useCallback(async (lessonOrder: number) => {
+    const subjectMap: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'english' }
+    const code = subjectMap[subjectSlug]
+    if (!code) return
+    try {
+      const res = await fetch('/api/curriculum/progress', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectCode: code, completedLesson: lessonOrder }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setCurriculumProgress(data.progress)
+        setXpCelebration(true)
+        setTimeout(() => setXpCelebration(false), 3000)
+      }
+    } catch { /* ignore */ }
+  }, [subjectSlug])
 
   // TTS
   const handleStopSpeech = useCallback(() => {
@@ -329,7 +372,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; error?: any }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
-      const full = data.text
+      let full = data.text
+      // Detect lesson completion signal
+      if (full.includes('[LESSON_COMPLETE]')) {
+        full = full.replace('[LESSON_COMPLETE]', '').trim()
+        const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
+        if (currentLessonData) handleLessonComplete(currentLessonData.order)
+      }
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) setCode(codeBlock)
@@ -338,7 +387,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const msg = err instanceof Error ? err.message : String(err)
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Error: ${msg}`, streaming: false } : m))
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
-  }, [handleSpeak])
+  }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete])
 
   // Session init + lifecycle
   useEffect(() => { sessionIdRef.current = sessionId }, [sessionId])
@@ -362,17 +411,40 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const data = await res.json()
         if (!data.success) { setInitError(data.code === 'UPGRADE_REQUIRED' ? 'upgrade' : (data.error ?? 'Error')); return }
         const sid = data.data.id; setSessionId(sid)
+
+        // Fetch curriculum for opening message context
+        const subjectMap: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'english' }
+        const subCode = subjectMap[subjectSlug]
+        let lessonHint = ''
+        if (subCode) {
+          try {
+            const cr = await fetch(`/api/curriculum?subject=${subCode}`)
+            const cd = await cr.json()
+            if (cd.success && cd.lessons?.length > 0) {
+              setCurriculumLessons(cd.lessons)
+              setCurriculumProgress(cd.progress ?? { currentLesson: 1, completedLessons: [] })
+              const curOrder = cd.progress?.currentLesson ?? 1
+              const cur = cd.lessons.find((l: CurriculumLesson) => l.order === curOrder) ?? cd.lessons[0]
+              lessonHint = teachingLanguage === 'ru'
+                ? ` Текущая тема урока: "${cur.lessonTitle}". Цель: ${cur.lessonGoal}.`
+                : teachingLanguage === 'hi'
+                ? ` Current lesson topic: "${cur.lessonTitle}". Goal: ${cur.lessonGoal}.`
+                : ` Current lesson topic: "${cur.lessonTitle}". Goal: ${cur.lessonGoal}.`
+            }
+          } catch { /* ignore */ }
+        }
+
         const opening = teachingLanguage === 'ru'
           ? (pastSessionsSummary
-            ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}". Кратко напомни и продолжи. 3-4 предложения.`
-            : `Начни первый урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и дай первое объяснение с кодом. 3-4 предложения.`)
+            ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}".${lessonHint} Кратко напомни и продолжи. 3-4 предложения.`
+            : `Начни урок по "${subjectName}". Уровень: "${levelDescription}".${lessonHint} Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
           : teachingLanguage === 'hi'
           ? (pastSessionsSummary
-            ? `Namaste! Pichli baar humne "${pastSessionsSummary}" padha tha. Continue karein? Level: "${levelDescription}". Brief reminder do aur aage badho. 3-4 sentences.`
-            : `"${subjectName}" ka pehla lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation with code do. 3-4 sentences.`)
+            ? `Namaste! Pichli baar humne "${pastSessionsSummary}" padha tha. Continue karein? Level: "${levelDescription}".${lessonHint} Brief reminder do aur aage badho. 3-4 sentences.`
+            : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}".${lessonHint} Apna parichay do aur pehla explanation with code do. 3-4 sentences.`)
           : (pastSessionsSummary
-            ? `Hi! Last time we studied: "${pastSessionsSummary}". Continue? Level: "${levelDescription}". Briefly remind and continue. 3-4 sentences.`
-            : `Start the first lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself and give the first explanation with code. 3-4 sentences.`)
+            ? `Hi! Last time we studied: "${pastSessionsSummary}". Continue? Level: "${levelDescription}".${lessonHint} Briefly remind and continue. 3-4 sentences.`
+            : `Start the lesson on "${subjectName}". Level: "${levelDescription}".${lessonHint} Introduce yourself and begin teaching. 3-4 sentences.`)
         await sendMessage(sid, opening, false)
       } catch { setInitError('Connection failed. Please refresh the page.') }
     }
@@ -535,6 +607,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   return (
     <div className="h-screen flex flex-col overflow-hidden" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
 
+      {/* XP Celebration */}
+      {xpCelebration && (
+        <div className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center">
+          <div className="text-center animate-bounce">
+            <div className="text-5xl mb-2">🎉</div>
+            <div className="text-2xl font-bold" style={{ color: 'var(--accent-primary)' }}>+10 XP</div>
+            <div className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+              {teachingLanguage === 'ru' ? 'Урок завершён!' : teachingLanguage === 'hi' ? 'Lesson complete!' : 'Lesson complete!'}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Top bar ────────────────────────────────────────────────────────── */}
       <header className="flex items-center gap-4 px-4 shrink-0" style={{ height: 52, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}>
         <Link href="/dashboard" className="text-sm font-medium transition-colors"
@@ -549,6 +634,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         <div className="flex items-center gap-2 text-sm">
           <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ background: 'var(--bg-elevated)', color: badge.accent }}>{badge.label}</span>
           <span className="text-base leading-none" title={teachingLanguage}>{LANG_FLAG[teachingLanguage]}</span>
+          {curriculumLessons.length > 0 && (() => {
+            const cur = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0]
+            return (
+              <span className="hidden sm:inline text-xs px-2 py-0.5 rounded" style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)' }}>
+                {teachingLanguage === 'ru' ? `Урок ${cur.order}/${curriculumLessons.length}: ${cur.lessonTitle}` :
+                 teachingLanguage === 'hi' ? `Lesson ${cur.order}/${curriculumLessons.length}: ${cur.lessonTitle}` :
+                 `Lesson ${cur.order}/${curriculumLessons.length}: ${cur.lessonTitle}`}
+              </span>
+            )
+          })()}
           <span style={{ color: 'var(--text-secondary)' }}>{t('lesson_with')}</span>
           <span className="font-mono tabular-nums text-xs" style={{ color: 'var(--text-secondary)' }}>{formatTimer(elapsed)}</span>
         </div>

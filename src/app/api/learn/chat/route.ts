@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { generateAIResponse, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { generateAIResponse, buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -44,6 +44,26 @@ export async function POST(req: Request) {
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
 
+    const subjectCode = learnSession.subject.slug
+    const [curriculumLessons, studentProgress] = await Promise.all([
+      prisma.curriculum.findMany({ where: { subjectCode }, orderBy: { order: 'asc' } }),
+      prisma.studentProgress.findUnique({ where: { userId_subjectCode: { userId, subjectCode } } }),
+    ])
+
+    let lessonCtx: LessonContext | null = null
+    if (curriculumLessons.length > 0) {
+      const currentOrder = studentProgress?.currentLesson ?? 1
+      const currentLesson = curriculumLessons.find((l) => l.order === currentOrder) ?? curriculumLessons[0]
+      lessonCtx = {
+        currentLesson: currentLesson.order,
+        totalLessons: curriculumLessons.length,
+        lessonTitle: currentLesson.lessonTitle,
+        lessonGoal: currentLesson.lessonGoal,
+        unitTitle: currentLesson.unitTitle,
+        completedLessons: studentProgress?.completedLessons ?? [],
+      }
+    }
+
     const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
@@ -51,6 +71,7 @@ export async function POST(req: Request) {
       profile?.learningGoals ?? profile?.selfDescription ?? 'general learning',
       memoryContext,
       teachingLang,
+      lessonCtx,
     )
 
     const historyMessages = learnSession.messages

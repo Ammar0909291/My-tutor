@@ -6,5 +6,6 @@ export {
   buildTutorSystemPrompt,
   buildCurriculumPrompt,
 } from '@/lib/ai/client'
+export type { LessonContext } from '@/lib/ai/client'
 export { analyzeStudentMood } from '@/lib/ai/mood'
 export type { MoodAnalysis } from '@/lib/ai/mood'
