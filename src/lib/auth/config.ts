@@ -13,7 +13,7 @@ const credentialsSchema = z.object({
 export const authConfig: NextAuthConfig = {
   session: { strategy: 'jwt' },
   trustHost: true,
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
   pages: {
     signIn: '/auth/login',
     error: '/auth/login',

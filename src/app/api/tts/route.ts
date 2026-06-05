@@ -30,10 +30,19 @@ export async function POST(req: Request) {
     const clean = cleanTextForTTS(text)
     if (!clean.trim()) return NextResponse.json({ error: 'Empty' }, { status: 400 })
 
+    console.log('TTS request:', { lang, voice, textLength: clean.length })
+    console.log('GROQ KEY EXISTS:', !!process.env.GROQ_API_KEY)
+
     const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
     const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
-    const response = await groq.audio.speech.create({ model: 'playai-tts', voice: selectedVoice, input: clean, response_format: 'mp3' })
-    const buffer = Buffer.from(await response.arrayBuffer())
+    let response: Awaited<ReturnType<typeof groq.audio.speech.create>>
+    try {
+      response = await groq.audio.speech.create({ model: 'playai-tts', voice: selectedVoice, input: clean, response_format: 'mp3' })
+    } catch (ttsErr: any) {
+      console.error('playai-tts failed:', ttsErr.message)
+      return NextResponse.json({ error: 'TTS unavailable' }, { status: 503 })
+    }
+    const buffer = Buffer.from(await (response as any).arrayBuffer())
 
     return new NextResponse(buffer.buffer as ArrayBuffer, {
       headers: {
