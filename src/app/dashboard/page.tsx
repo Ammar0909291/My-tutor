@@ -6,7 +6,6 @@ import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
-import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
@@ -51,7 +50,7 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const [user, recentSessions, totalLessons, subscription, referralData] = await Promise.all([
+  const [user, recentSessions, totalLessons, referralData] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },
       select: {
@@ -59,7 +58,6 @@ export default async function DashboardPage() {
         name: true,
         xpPoints: true,
         referralCode: true,
-        freeSessionsExtra: true,
         profile: {
           select: {
             displayName: true,
@@ -79,7 +77,6 @@ export default async function DashboardPage() {
       include: { subject: { select: { name: true, slug: true } } },
     }),
     prisma.learnSession.count({ where: { userId: session.user.id } }),
-    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
     prisma.referral.count({ where: { referrerId: session.user.id, used: true } }),
   ])
 
@@ -93,12 +90,9 @@ export default async function DashboardPage() {
   const voiceLbl = profile?.voiceId ? voiceLabel(profile.voiceId, lang) : null
   const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Student'
-  const plan = subscription?.plan ?? 'free'
-  const isPro = plan === 'pro' || plan === 'annual'
   const referralCode = user?.referralCode
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
   const referralLink = referralCode ? `${appUrl}/join?ref=${referralCode}` : null
-  const showUpgradeBanner = !isPro && plan === 'free'
   const xpPoints = user?.xpPoints ?? 0
   const streakDays = profile?.streakDays ?? 0
   const level = getLevel(xpPoints, lang)
@@ -142,11 +136,6 @@ export default async function DashboardPage() {
             <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
               {T('dash_greeting')}, <span className="text-gradient-coral">{displayName}</span>! 👋
             </h1>
-            {isPro && (
-              <span className="badge" style={{ background: 'linear-gradient(135deg,#F6B444,#E8913A)', color: '#fff', border: 'none', fontWeight: 800, letterSpacing: '0.08em' }}>
-                PRO
-              </span>
-            )}
           </div>
           <p className="text-sm" style={{ color: 'var(--text-dim)' }}>{T('dash_personal_board')}</p>
         </div>
@@ -174,16 +163,6 @@ export default async function DashboardPage() {
         </div>
 
         {/* Upgrade banner */}
-        {showUpgradeBanner && (
-          <div className="flex items-center justify-between gap-4 px-5 py-4 rounded-2xl mb-6"
-            style={{ background: 'rgba(247,129,102,0.07)', border: '1px solid rgba(247,129,102,0.25)' }}>
-            <p className="text-sm font-medium" style={{ color: '#F78166' }}>
-              ✦ {T('dash_upgrade_banner')}
-            </p>
-            <UpgradeButton />
-          </div>
-        )}
-
         <div className="grid lg:grid-cols-3 gap-6">
 
           {/* ── Left column ── */}

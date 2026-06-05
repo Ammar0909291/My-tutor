@@ -180,25 +180,8 @@ export const translations = {
     lesson_tab_chat: 'Чат',
     lesson_attach_hint: 'Прикрепить файл (.py .c .cpp .txt, макс. 50 КБ)',
     lesson_init: 'Подключаемся к репетитору...',
-    lesson_upgrade_title: 'Доступ ограничен',
-    lesson_upgrade_sub: 'Бесплатный сеанс использован. Активируй подписку.',
-    lesson_upgrade_btn: 'Активировать',
     lesson_back_base: '← База',
     lesson_scroll_down: '↓',
-
-    /* ── Paywall overlay ── */
-    paywall_title: 'Бесплатный урок завершён',
-    paywall_sub: 'Оформи подписку чтобы продолжить обучение',
-    paywall_price: '990 ₽ / месяц',
-    paywall_f1: 'Безлимитные уроки',
-    paywall_f2: 'История сессий',
-    paywall_f3: 'Голосовой репетитор',
-    paywall_cta: 'Оформить подписку →',
-    paywall_cancel: 'Отменить можно в любое время',
-
-    /* ── Dashboard upgrade ── */
-    dash_upgrade_banner: 'Твой бесплатный урок использован · Оформи Pro чтобы продолжить',
-    dash_upgrade_cta: 'Оформить Pro →',
 
     /* ── Forgot password ── */
     forgot_title: 'Забыл пароль?',
@@ -233,11 +216,7 @@ export const translations = {
 
     /* ── Settings ── */
     settings_title: 'Настройки',
-    settings_plan: 'Тариф',
-    settings_plan_free: 'Бесплатный',
-    settings_plan_pro: 'Pro',
     settings_manage: 'Управление подпиской',
-    settings_upgrade: 'Перейти на Pro',
     settings_voice: 'Голос репетитора',
     settings_lang: 'Язык обучения',
     settings_account: 'Аккаунт',
@@ -507,25 +486,8 @@ export const translations = {
     lesson_tab_chat: 'Chat',
     lesson_attach_hint: 'Attach file (.py .c .cpp .txt, max 50 KB)',
     lesson_init: 'Connecting to tutor...',
-    lesson_upgrade_title: 'Access restricted',
-    lesson_upgrade_sub: 'Free session used. Activate subscription.',
-    lesson_upgrade_btn: 'Activate',
     lesson_back_base: '← Dashboard',
     lesson_scroll_down: '↓',
-
-    /* ── Paywall overlay ── */
-    paywall_title: 'Free lesson completed',
-    paywall_sub: 'Subscribe to continue learning',
-    paywall_price: '990 ₽ / month',
-    paywall_f1: 'Unlimited lessons',
-    paywall_f2: 'Session history',
-    paywall_f3: 'Voice tutor',
-    paywall_cta: 'Subscribe →',
-    paywall_cancel: 'Cancel anytime',
-
-    /* ── Dashboard upgrade ── */
-    dash_upgrade_banner: 'Your free lesson has been used · Get Pro to continue',
-    dash_upgrade_cta: 'Get Pro →',
 
     /* ── Forgot password ── */
     forgot_title: 'Forgot password?',
@@ -560,11 +522,7 @@ export const translations = {
 
     /* ── Settings ── */
     settings_title: 'Settings',
-    settings_plan: 'Plan',
-    settings_plan_free: 'Free',
-    settings_plan_pro: 'Pro',
     settings_manage: 'Manage subscription',
-    settings_upgrade: 'Upgrade to Pro',
     settings_voice: 'Tutor voice',
     settings_lang: 'Teaching language',
     settings_account: 'Account',
@@ -834,25 +792,8 @@ export const translations = {
     lesson_tab_chat: 'चैट',
     lesson_attach_hint: 'फाइल संलग्न करें (.py .c .cpp .txt, अधिकतम 50 KB)',
     lesson_init: 'ट्यूटर से जुड़ रहे हैं...',
-    lesson_upgrade_title: 'पहुंच सीमित है',
-    lesson_upgrade_sub: 'मुफ्त सत्र समाप्त हो गया। सब्सक्रिप्शन सक्रिय करें।',
-    lesson_upgrade_btn: 'सक्रिय करें',
     lesson_back_base: '← डैशबोर्ड',
     lesson_scroll_down: '↓',
-
-    /* ── Paywall overlay ── */
-    paywall_title: 'मुफ्त पाठ समाप्त',
-    paywall_sub: 'पढ़ाई जारी रखने के लिए सब्सक्राइब करें',
-    paywall_price: '₹790 / माह',
-    paywall_f1: 'असीमित पाठ',
-    paywall_f2: 'सत्र इतिहास',
-    paywall_f3: 'आवाज़ ट्यूटर',
-    paywall_cta: 'सब्सक्राइब करें →',
-    paywall_cancel: 'कभी भी रद्द करें',
-
-    /* ── Dashboard upgrade ── */
-    dash_upgrade_banner: 'आपका मुफ्त पाठ समाप्त हो गया · जारी रखने के लिए Pro लें',
-    dash_upgrade_cta: 'Pro लें →',
 
     /* ── Forgot password ── */
     forgot_title: 'पासवर्ड भूल गए?',
@@ -887,11 +828,7 @@ export const translations = {
 
     /* ── Settings ── */
     settings_title: 'सेटिंग्स',
-    settings_plan: 'प्लान',
-    settings_plan_free: 'मुफ्त',
-    settings_plan_pro: 'Pro',
     settings_manage: 'सब्सक्रिप्शन प्रबंधित करें',
-    settings_upgrade: 'Pro पर जाएं',
     settings_voice: 'ट्यूटर की आवाज़',
     settings_lang: 'पढ़ाई की भाषा',
     settings_account: 'अकाउंट',

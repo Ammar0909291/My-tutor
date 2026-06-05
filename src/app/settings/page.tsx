@@ -22,8 +22,8 @@ const LANG_OPTIONS: LangOption[] = [
 interface SettingsData {
   voiceId: string
   teachingLanguage: TeachingLang
-  subscriptionStatus: string
-  freeSessionUsed: boolean
+  plan: string
+  planExpiresAt: string | null
 }
 
 interface ProfileData {
@@ -149,7 +149,6 @@ export default function SettingsPage() {
     setLang(key)
   }
 
-  const isPro = data?.subscriptionStatus === 'ACTIVE'
   const avatarName = profileName || profile?.name || 'U'
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarName)}&background=F78166&color=fff&size=128&bold=true&rounded=true`
 
@@ -268,23 +267,6 @@ export default function SettingsPage() {
             style={{ background: 'var(--accent-primary)', color: '#fff' }}>
             {profileSave === 'saved' ? t('profile_saved') : profileSave === 'saving' ? '...' : t('profile_save')}
           </button>
-        </Section>
-
-        {/* Plan */}
-        <Section label={t('settings_plan')}>
-          <div className="flex items-center gap-3">
-            {isPro ? (
-              <span className="px-3 py-1 rounded-full text-sm font-black"
-                style={{ background: 'linear-gradient(135deg, #F6B444, #E8913A)', color: '#fff' }}>
-                PRO
-              </span>
-            ) : (
-              <span className="px-3 py-1 rounded-full text-sm font-semibold"
-                style={{ background: 'rgba(255,255,255,0.07)', color: '#71717A' }}>
-                {t('settings_plan_free')}
-              </span>
-            )}
-          </div>
         </Section>
 
         {/* Voice */}

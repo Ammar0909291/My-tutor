@@ -405,14 +405,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined }),
         })
         const data = await res.json()
-        if (!data.success) {
-          if (data.error === 'free_limit_reached' || data.error === 'monthly_limit_reached') {
-            setShowPaywall(true)
-            return
-          }
-          setInitError(data.error ?? 'Error')
-          return
-        }
+        if (!data.success) { setInitError(data.error ?? 'Error'); return }
         const sid = data.data.id; setSessionId(sid)
 
         const opening = teachingLanguage === 'ru'
@@ -561,55 +554,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     }
     return c
   }, [messages])
-
-  // ── Paywall state ─────────────────────────────────────────────────────────────
-  const [paywallLoading, setPaywallLoading] = useState(false)
-  const [showPaywall, setShowPaywall] = useState(false)
-  async function handlePaywallCheckout(plan: 'basic' | 'pro') {
-    setPaywallLoading(true)
-    try {
-      const res = await fetch('/api/payments/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan }),
-      })
-      const data = await res.json() as { success?: boolean; confirmationUrl?: string }
-      if (data.success && data.confirmationUrl) window.location.href = data.confirmationUrl
-    } catch { /* ignore */ } finally { setPaywallLoading(false) }
-  }
-  if (showPaywall) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--bg-base)' }}>
-        <div className="max-w-sm w-full text-center rounded-2xl p-8" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-          <div className="text-5xl mb-4">🔒</div>
-          <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-            Бесплатный период завершён
-          </h2>
-          <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-            Вы использовали все 3 бесплатных урока. Выберите план, чтобы продолжить обучение.
-          </p>
-          <div className="space-y-3">
-            <button
-              onClick={() => handlePaywallCheckout('basic')}
-              disabled={paywallLoading}
-              className="w-full py-3 rounded-xl font-bold text-sm text-white transition-all disabled:opacity-60"
-              style={{ background: 'var(--accent-primary)' }}>
-              {paywallLoading ? '...' : 'Продолжить за 490 ₽/мес'}
-            </button>
-            <Link
-              href="/pricing"
-              className="block w-full py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
-              Выбрать план →
-            </Link>
-            <Link href="/dashboard" className="block text-sm mt-2" style={{ color: 'var(--text-dim)' }}>
-              ← Вернуться
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   if (initError) {
     return (
