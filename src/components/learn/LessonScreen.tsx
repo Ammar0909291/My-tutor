@@ -8,20 +8,7 @@ import { speakText, stopSpeaking, VOICE_SETTINGS, type VoiceType, type TeachingL
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
-// ─── SpeechRecognition types ──────────────────────────────────────────────────
-interface SpeechRecognitionLike {
-  lang: string; interimResults: boolean; continuous: boolean
-  start(): void; stop(): void; abort(): void
-  onresult: ((e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null
-  onend: (() => void) | null
-  onerror: ((e: { error: string }) => void) | null
-}
-type SpeechRecognitionCtor = new () => SpeechRecognitionLike
-function getSpeechRecognition(): SpeechRecognitionCtor | null {
-  if (typeof window === 'undefined') return null
-  const w = window as unknown as { SpeechRecognition?: SpeechRecognitionCtor; webkitSpeechRecognition?: SpeechRecognitionCtor }
-  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null
-}
+// ─── MediaRecorder STT via Groq Whisper ──────────────────────────────────────
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const VOICE_CONFIG: Record<VoiceType, { pitch: number; rate: number }> = {
@@ -211,8 +198,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const initializedRef = useRef(false)
   const speakingIdRef = useRef<string|null>(null)
-  const recognitionRef = useRef<SpeechRecognitionLike|null>(null)
-  const speechBaseRef = useRef('')
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const audioChunksRef = useRef<Blob[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const sessionIdRef = useRef<string|null>(null)
 
@@ -247,7 +234,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (atBottom) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [messages, atBottom])
 
-  useEffect(() => { setMicSupported(getSpeechRecognition() !== null) }, [])
+  useEffect(() => { setMicSupported(typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getUserMedia) }, [])
 
   // TTS
   const handleStopSpeech = useCallback(() => {
@@ -257,9 +244,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     speakingIdRef.current = id; setSpeakingId(id)
     speakText(text, voiceConfigRef.current, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    }, teachingLanguage)
+    }, teachingLanguage, voiceType)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teachingLanguage])
+  }, [teachingLanguage, voiceType])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     const cfg = VOICE_SETTINGS[v]
     setVoiceType(v); setVoiceConfig(cfg); voiceConfigRef.current = cfg
@@ -455,25 +442,47 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     e.target.style.height = `${Math.min(e.target.scrollHeight, 96)}px`
   }
 
-  // Mic
-  function stopRecording() { recognitionRef.current?.stop() }
-  function startRecording() {
-    const SR = getSpeechRecognition(); if (!SR) { setMicSupported(false); return }
-    const r = new SR()
-    const micLocale = teachingLanguage === 'hi' ? 'hi-IN' : teachingLanguage === 'en' ? 'en-US' : 'ru-RU'
-    r.lang = micLocale; r.interimResults = true; r.continuous = false
-    speechBaseRef.current = input ? input.trim() + ' ' : ''
-    r.onresult = (e) => {
-      let tx = ''; for (let i = 0; i < e.results.length; i++) tx += e.results[i][0].transcript
-      setInput(speechBaseRef.current + tx)
+  // Mic — MediaRecorder + Groq Whisper STT
+  function stopRecording() {
+    if (mediaRecorderRef.current && micState === 'recording') {
+      mediaRecorderRef.current.stop()
     }
-    r.onerror = () => setMicState('idle')
-    r.onend = () => { setMicState('idle'); recognitionRef.current = null; textareaRef.current?.focus() }
-    recognitionRef.current = r
-    try { r.start(); setMicState('recording') } catch { setMicState('idle') }
+  }
+  async function startRecording() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, sampleRate: 16000 } })
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/webm'
+      const recorder = new MediaRecorder(stream, { mimeType })
+      mediaRecorderRef.current = recorder
+      audioChunksRef.current = []
+
+      recorder.ondataavailable = (e) => { if (e.data.size > 0) audioChunksRef.current.push(e.data) }
+      recorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
+        const formData = new FormData()
+        formData.append('audio', audioBlob, 'recording.webm')
+        formData.append('lang', teachingLanguage || 'en')
+        try {
+          const res = await fetch('/api/stt', { method: 'POST', body: formData })
+          if (res.ok) {
+            const data = await res.json()
+            if (data.text?.trim()) setInput((prev) => prev ? prev + ' ' + data.text : data.text)
+          }
+        } catch (err) { console.error('STT request error:', err) }
+        stream.getTracks().forEach((t) => t.stop())
+        setMicState('idle')
+        textareaRef.current?.focus()
+      }
+
+      recorder.start(250)
+      setMicState('recording')
+    } catch (err: any) {
+      console.error('Microphone access error:', err.message)
+      setMicState('idle')
+    }
   }
   function handleMicClick() { if (micState === 'recording') stopRecording(); else startRecording() }
-  useEffect(() => () => { recognitionRef.current?.abort() }, [])
+  useEffect(() => () => { mediaRecorderRef.current?.stop() }, [])
 
   // File attachment
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {

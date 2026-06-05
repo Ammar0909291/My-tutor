@@ -1,72 +1,69 @@
-import { cleanTextForTTS } from './tts-cleaner'
-
 export type VoiceType = 'male' | 'female' | 'warm'
 export type TeachingLang = 'ru' | 'en' | 'hi'
 
+// Keep for backward compat with LessonScreen voice config
 export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> = {
   male:   { pitch: 0.75, rate: 0.85 },
   female: { pitch: 1.25, rate: 0.9  },
   warm:   { pitch: 1.0,  rate: 0.87 },
 }
 
-const LANG_LOCALE: Record<TeachingLang, string> = {
-  ru: 'ru-RU',
-  en: 'en-US',
-  hi: 'hi-IN',
-}
+let currentAudio: HTMLAudioElement | null = null
 
-// Prime voices list on load — only in browser, never during SSR
-if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefined') {
-  window.speechSynthesis.getVoices()
-}
-
-export function speakText(
+export async function speakText(
   text: string,
-  config: { pitch: number; rate: number },
+  _config: { pitch: number; rate: number },
   onEnd?: () => void,
   lang: TeachingLang = 'en',
-): void {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
-  window.speechSynthesis.cancel()
+  voice: VoiceType = 'female',
+): Promise<void> {
+  if (typeof window === 'undefined') return
+  stopSpeaking()
 
-  const clean = cleanTextForTTS(text)
-  if (!clean.trim()) { onEnd?.(); return }
+  try {
+    const response = await fetch('/api/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, lang, voice }),
+    })
 
-  const locale = LANG_LOCALE[lang]
-  const utter = new SpeechSynthesisUtterance(clean)
-  utter.lang = locale
-  utter.pitch = config.pitch
-  utter.rate = config.rate
-  utter.volume = 1.0
+    if (!response.ok) {
+      console.error('TTS request failed:', response.status)
+      onEnd?.()
+      return
+    }
 
-  if (onEnd) {
-    utter.onend = onEnd
-    utter.onerror = onEnd
-  }
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+    const audio = new Audio(url)
+    currentAudio = audio
 
-  // Guard prevents double-speak when both voiceschanged and the fallback timeout fire
-  let spoken = false
-  const setVoice = () => {
-    if (spoken) return
-    spoken = true
-    const voices = window.speechSynthesis.getVoices()
-    const voice =
-      voices.find((v) => v.lang === locale) ??
-      voices.find((v) => v.lang.startsWith(lang))
-    if (voice) utter.voice = voice
-    window.speechSynthesis.speak(utter)
-  }
+    audio.onended = () => {
+      URL.revokeObjectURL(url)
+      currentAudio = null
+      onEnd?.()
+    }
+    audio.onerror = () => {
+      URL.revokeObjectURL(url)
+      currentAudio = null
+      onEnd?.()
+    }
 
-  if (window.speechSynthesis.getVoices().length === 0) {
-    window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true })
-    setTimeout(setVoice, 500)
-  } else {
-    setVoice()
+    await audio.play()
+  } catch (error: any) {
+    console.error('TTS playback error:', error.message)
+    onEnd?.()
   }
 }
 
 export function stopSpeaking(): void {
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    window.speechSynthesis.cancel()
+  if (currentAudio) {
+    currentAudio.pause()
+    try { URL.revokeObjectURL(currentAudio.src) } catch {}
+    currentAudio = null
   }
+}
+
+export function isSpeaking(): boolean {
+  return currentAudio !== null && !currentAudio.paused
 }
