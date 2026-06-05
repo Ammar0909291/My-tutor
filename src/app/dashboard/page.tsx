@@ -57,7 +57,6 @@ export default async function DashboardPage() {
         onboardingCompleted: true,
         name: true,
         xpPoints: true,
-        referralCode: true,
         profile: {
           select: {
             displayName: true,
@@ -91,7 +90,7 @@ export default async function DashboardPage() {
   const voiceLbl = profile?.voiceId ? voiceLabel(profile.voiceId, lang) : null
   const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Student'
-  const referralCode = user?.referralCode
+  const referralCode = (user as any)?.referralCode as string | undefined
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
   const referralLink = referralCode ? `${appUrl}/join?ref=${referralCode}` : null
   const xpPoints = user?.xpPoints ?? 0
