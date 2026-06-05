@@ -4,8 +4,6 @@ import { auth } from '@/lib/auth'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
 
-const LANGUAGE_MAP: Record<string, string> = { ru: 'ru', en: 'en', hi: 'hi' }
-
 export async function POST(req: Request) {
   try {
     const session = await auth()
@@ -18,19 +16,19 @@ export async function POST(req: Request) {
     const lang = (formData.get('lang') as string) || 'en'
 
     if (!audioFile) {
-      return NextResponse.json({ error: 'No audio file' }, { status: 400 })
+      return NextResponse.json({ error: 'No audio' }, { status: 400 })
     }
 
     const transcription = await groq.audio.transcriptions.create({
       file: audioFile,
       model: 'whisper-large-v3',
-      language: LANGUAGE_MAP[lang] || 'en',
+      language: lang,
       response_format: 'json',
     })
 
     return NextResponse.json({ text: transcription.text })
   } catch (error: any) {
     console.error('STT error:', error.message)
-    return NextResponse.json({ error: 'Transcription failed: ' + error.message }, { status: 500 })
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }

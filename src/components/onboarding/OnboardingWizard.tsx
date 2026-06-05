@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Check, Play } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
-import { VOICE_SETTINGS, speakText } from '@/lib/tts'
-import type { TeachingLang } from '@/lib/tts'
+import { speakText } from '@/lib/tts'
+import type { TeachingLang, VoiceType } from '@/lib/tts'
 
 const SUBJECTS = [
   { slug: 'c',       icon: 'C',   accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)',  desc: 'Системное программирование · Память · Скорость' },
@@ -93,7 +93,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   }
 
   function handleVoicePreview(v: typeof VOICES[0]) {
-    speakText(PREVIEW_TEXT[teachingLang], { pitch: v.pitch, rate: v.rate }, undefined, teachingLang)
+    speakText(PREVIEW_TEXT[teachingLang], teachingLang, v.key as VoiceType)
   }
 
   const progressPct = ((step - 1) / (STEPS_COUNT - 1)) * 100

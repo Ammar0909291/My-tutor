@@ -4,18 +4,11 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
-import { speakText, stopSpeaking, VOICE_SETTINGS, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { speakText, stopSpeaking, type VoiceType, type TeachingLang } from '@/lib/tts'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
-// ─── MediaRecorder STT via Groq Whisper ──────────────────────────────────────
-
 // ─── Config ───────────────────────────────────────────────────────────────────
-const VOICE_CONFIG: Record<VoiceType, { pitch: number; rate: number }> = {
-  male:   { ...VOICE_SETTINGS.male   },
-  female: { ...VOICE_SETTINGS.female },
-  warm:   { ...VOICE_SETTINGS.warm   },
-}
 const VOICE_LABELS_BY_LANG: Record<TeachingLang, Record<VoiceType, string>> = {
   ru: { male: 'Мужской', female: 'Женский', warm: 'Тёплый' },
   en: { male: 'Male',    female: 'Female',  warm: 'Warm'    },
@@ -164,9 +157,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Voice
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
-  const [voiceConfig, setVoiceConfig] = useState(() => VOICE_SETTINGS[resolveVoice(voiceChoice)])
-  const voiceConfigRef = useRef(voiceConfig)
-  useEffect(() => { voiceConfigRef.current = voiceConfig }, [voiceConfig])
 
   // File attachment
   const [attachedFile, setAttachedFile] = useState<AttachedFile|null>(null)
@@ -285,14 +275,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [])
   const handleSpeak = useCallback((id: string, text: string) => {
     speakingIdRef.current = id; setSpeakingId(id)
-    speakText(text, voiceConfigRef.current, () => {
+    speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    }, teachingLanguage, voiceType)
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teachingLanguage, voiceType])
   const handleVoiceChange = useCallback((v: VoiceType) => {
-    const cfg = VOICE_SETTINGS[v]
-    setVoiceType(v); setVoiceConfig(cfg); voiceConfigRef.current = cfg
+    setVoiceType(v)
     if (speakingIdRef.current) {
       const id = speakingIdRef.current
       const msg = messages.find((m) => m.id === id)
@@ -373,8 +362,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
-      // Detect lesson completion signal
-      if (full.includes('[LESSON_COMPLETE]')) {
+      // Detect lesson completion — explicit marker or keyword fallback
+      const COMPLETION_KEYWORDS = [
+        '[LESSON_COMPLETE]',
+        'следующий урок', 'урок завершён', 'урок завершен',
+        'next lesson', 'lesson complete', 'lesson completed',
+        'अगला पाठ', 'पाठ पूरा',
+      ]
+      const hasCompletion = COMPLETION_KEYWORDS.some((kw) => full.toLowerCase().includes(kw.toLowerCase()))
+      if (hasCompletion) {
         full = full.replace('[LESSON_COMPLETE]', '').trim()
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
         if (currentLessonData) handleLessonComplete(currentLessonData.order)
@@ -630,7 +626,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
         {/* Voice buttons */}
         <div className="flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
-          {(Object.keys(VOICE_CONFIG) as VoiceType[]).map((k) => (
+          {(['male', 'female', 'warm'] as VoiceType[]).map((k) => (
             <button key={k} onClick={() => handleVoiceChange(k)}
               className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-150"
               style={{

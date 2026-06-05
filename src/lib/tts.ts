@@ -1,21 +1,13 @@
 export type VoiceType = 'male' | 'female' | 'warm'
 export type TeachingLang = 'ru' | 'en' | 'hi'
 
-// Keep for backward compat with LessonScreen voice config
-export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> = {
-  male:   { pitch: 0.75, rate: 0.85 },
-  female: { pitch: 1.25, rate: 0.9  },
-  warm:   { pitch: 1.0,  rate: 0.87 },
-}
-
 let currentAudio: HTMLAudioElement | null = null
 
 export async function speakText(
   text: string,
-  _config: { pitch: number; rate: number },
-  onEnd?: () => void,
   lang: TeachingLang = 'en',
   voice: VoiceType = 'female',
+  onEnd?: () => void,
 ): Promise<void> {
   if (typeof window === 'undefined') return
   stopSpeaking()
