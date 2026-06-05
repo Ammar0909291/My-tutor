@@ -7,12 +7,13 @@ const registerSchema = z.object({
   name: z.string().min(2).max(80),
   email: z.string().email(),
   password: z.string().min(8).max(100),
+  referralCode: z.string().optional(),
 });
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, password } = registerSchema.parse(body);
+    const { name, email, password, referralCode } = registerSchema.parse(body);
 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
@@ -21,13 +22,38 @@ export async function POST(req: Request) {
 
     const passwordHash = await bcrypt.hash(password, 12);
 
+    // Generate unique referral code for new user
+    const newCode = Math.random().toString(36).substring(2, 8).toUpperCase()
+
+    // Resolve referrer if a code was passed
+    let referrerId: string | null = null
+    if (referralCode) {
+      const referrer = await prisma.user.findUnique({ where: { referralCode } })
+      if (referrer) referrerId = referrer.id
+    }
+
     const user = await prisma.user.create({
-      data: { name, email, passwordHash },
+      data: {
+        name, email, passwordHash,
+        referralCode: newCode,
+        referredBy: referrerId ?? undefined,
+        freeSessionsExtra: referrerId ? 1 : 0,
+      },
       select: { id: true, email: true, name: true },
     });
 
     // Create a free subscription record for the new user
     await prisma.subscription.create({ data: { userId: user.id } });
+
+    // Credit referrer +1 free session and create referral record
+    if (referrerId) {
+      await Promise.all([
+        prisma.user.update({ where: { id: referrerId }, data: { freeSessionsExtra: { increment: 1 } } }),
+        prisma.referral.create({
+          data: { referrerId, referredId: user.id, code: referralCode!, used: true, usedAt: new Date() },
+        }),
+      ])
+    }
 
     return NextResponse.json({ success: true, data: user }, { status: 201 });
   } catch (err) {

@@ -18,6 +18,10 @@ model User {
   passwordHash        String?
   onboardingCompleted Boolean   @default(false)
   xpPoints            Int       @default(0)
+  referralCode        String?   @unique
+  referredBy          String?
+  freeSessionsExtra   Int       @default(0)
+  telegramChatId      String?
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
@@ -29,6 +33,8 @@ model User {
   learningPaths LearningPath[]
   flashcards    Flashcard[]
   studentProgress StudentProgress[]
+  referralsGiven  Referral[] @relation("referrer")
+  weeklyXP        WeeklyXP[]
 
   @@map("users")
 }
@@ -267,6 +273,36 @@ model StudentProgress {
 
   @@unique([userId, subjectCode])
   @@map("student_progress")
+}
+
+// ─── Referrals ────────────────────────────────────────────────────────────────
+
+model Referral {
+  id         String    @id @default(cuid())
+  referrerId String
+  referredId String?
+  code       String    @unique
+  used       Boolean   @default(false)
+  usedAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  referrer User @relation("referrer", fields: [referrerId], references: [id])
+
+  @@map("referrals")
+}
+
+// ─── Weekly XP (leaderboard) ──────────────────────────────────────────────────
+
+model WeeklyXP {
+  id     String @id @default(cuid())
+  userId String
+  week   String // "2026-W23"
+  xp     Int    @default(0)
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, week])
+  @@map("weekly_xp")
 }
 
 // ─── Enums ────────────────────────────────────────────────────────────────────

@@ -51,13 +51,15 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const [user, recentSessions, totalLessons, subscription] = await Promise.all([
+  const [user, recentSessions, totalLessons, subscription, referralData] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },
       select: {
         onboardingCompleted: true,
         name: true,
         xpPoints: true,
+        referralCode: true,
+        freeSessionsExtra: true,
         profile: {
           select: {
             displayName: true,
@@ -78,6 +80,7 @@ export default async function DashboardPage() {
     }),
     prisma.learnSession.count({ where: { userId: session.user.id } }),
     prisma.subscription.findUnique({ where: { userId: session.user.id } }),
+    prisma.referral.count({ where: { referrerId: session.user.id, used: true } }),
   ])
 
   if (!user?.onboardingCompleted) redirect('/onboarding')
@@ -91,6 +94,9 @@ export default async function DashboardPage() {
   const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Student'
   const isPro = subscription?.status === 'ACTIVE'
+  const referralCode = user?.referralCode
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+  const referralLink = referralCode ? `${appUrl}/join?ref=${referralCode}` : null
   const showUpgradeBanner = false // Stripe disabled for now
   const xpPoints = user?.xpPoints ?? 0
   const streakDays = profile?.streakDays ?? 0
@@ -403,6 +409,46 @@ export default async function DashboardPage() {
             </div>
 
           </div>
+
+          {/* Referral card */}
+          {referralLink && (
+            <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-lg">🎁</span>
+                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
+                  {lang === 'ru' ? 'Пригласи друга — получи бесплатный урок' : 'Invite a friend — get a free lesson'}
+                </h3>
+              </div>
+              <p className="text-xs mb-3" style={{ color: 'var(--text-dim)' }}>
+                {lang === 'ru'
+                  ? `Уже пришли: ${referralData} друг(а)`
+                  : `Friends joined: ${referralData}`}
+              </p>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-mono break-all select-all"
+                style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
+                {referralLink}
+              </div>
+            </div>
+          )}
+
+          {/* Leaderboard link */}
+          <Link href="/leaderboard"
+            className="flex items-center justify-between px-5 py-4 rounded-2xl transition-all hover:-translate-y-0.5"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <div className="flex items-center gap-3">
+              <span className="text-lg">🏆</span>
+              <div>
+                <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+                  {lang === 'ru' ? 'Таблица лидеров' : 'Leaderboard'}
+                </p>
+                <p className="text-xs" style={{ color: 'var(--text-dim)' }}>
+                  {lang === 'ru' ? 'Кто учится лучше всех на этой неделе' : 'Who\'s learning the most this week'}
+                </p>
+              </div>
+            </div>
+            <ArrowRight size={16} style={{ color: 'var(--text-dim)' }} />
+          </Link>
+
         </div>
       </main>
     </div>

@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { sendStudyReminder } from '@/lib/notifications/email'
+import { sendTelegramMessage } from '@/lib/notifications/telegram'
 
-// Vercel cron calls this with the CRON_SECRET header for auth
 function isAuthorized(req: Request): boolean {
   const secret = process.env.CRON_SECRET
-  if (!secret) return true // dev: allow without secret
-  const auth = req.headers.get('authorization')
-  return auth === `Bearer ${secret}`
+  if (!secret) return true
+  return req.headers.get('authorization') === `Bearer ${secret}`
 }
 
 export async function GET(req: Request) {
@@ -18,29 +17,33 @@ export async function GET(req: Request) {
   try {
     const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
 
-    // Find users who haven't studied in 2+ days and have email
     const staleProfiles = await prisma.profile.findMany({
-      where: {
-        lastStudyDate: { lt: twoDaysAgo },
-        user: { email: { not: undefined } },
-      },
-      include: {
-        user: { select: { email: true, name: true } },
-      },
+      where: { lastStudyDate: { lt: twoDaysAgo } },
+      include: { user: { select: { id: true, email: true, name: true, telegramChatId: true } } },
       take: 200,
     })
 
     let sent = 0
     await Promise.allSettled(
       staleProfiles.map(async (profile) => {
-        const email = profile.user.email
-        if (!email) return
-        const name = profile.user.name ?? profile.displayName ?? 'Student'
+        const { email, name, telegramChatId } = profile.user
+        const displayName = name ?? profile.displayName ?? 'Student'
         const lang = profile.teachingLanguage ?? 'en'
         const daysSince = profile.lastStudyDate
           ? Math.floor((Date.now() - new Date(profile.lastStudyDate).getTime()) / (24 * 60 * 60 * 1000))
           : 3
-        await sendStudyReminder(email, name, lang, daysSince)
+
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+        const reminderText: Record<string, string> = {
+          ru: `🔥 Привет, ${displayName}! Ты не занимался ${daysSince} дня. Репетитор ждёт: ${appUrl}/learn`,
+          en: `🔥 Hi ${displayName}! You haven't studied for ${daysSince} days. Your tutor is waiting: ${appUrl}/learn`,
+          hi: `🔥 Namaste ${displayName}! ${daysSince} din se padhai nahi ki. Tutor wait kar raha hai: ${appUrl}/learn`,
+        }
+
+        await Promise.allSettled([
+          email ? sendStudyReminder(email, displayName, lang, daysSince) : Promise.resolve(),
+          telegramChatId ? sendTelegramMessage(telegramChatId, reminderText[lang] ?? reminderText.en) : Promise.resolve(),
+        ])
         sent++
       }),
     )

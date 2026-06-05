@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { awardXP } from '@/lib/xp'
 
 const schema = z.object({
   subjectCode: z.string(),
@@ -60,11 +61,8 @@ export async function PATCH(req: Request) {
       },
     })
 
-    // Award XP
-    await prisma.user.update({
-      where: { id: session.user.id },
-      data: { xpPoints: { increment: 10 } },
-    })
+    // Award XP (updates both all-time and weekly leaderboard)
+    await awardXP(session.user.id, 10)
 
     return NextResponse.json({ success: true, progress })
   } catch (err) {
