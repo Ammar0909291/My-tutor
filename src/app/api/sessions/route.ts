@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
+import { withRetry } from "@/lib/db/withRetry";
 import { setSessionState, setUserActiveSession } from "@/lib/redis/client";
 import type { RedisSessionState } from "@/types";
 
@@ -12,12 +13,12 @@ export async function GET() {
   if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
 
-  const sessions = await prisma.learnSession.findMany({
+  const sessions = await withRetry(() => prisma.learnSession.findMany({
     where: { userId: session.user.id },
     orderBy: { startedAt: "desc" },
     take: 20,
     include: { subject: { select: { name: true, slug: true } }, messages: { orderBy: { createdAt: "desc" }, take: 1 } },
-  });
+  }));
 
   return NextResponse.json({ success: true, data: sessions });
 }
@@ -42,20 +43,20 @@ export async function POST(req: Request) {
     if (!userId) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     // No lesson limits — all users have full access
-    const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } });
+    const subject = await withRetry(() => prisma.subject.findUnique({ where: { slug: subjectSlug } }));
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
     const [profile, activePath] = await Promise.all([
-      prisma.profile.findUnique({ where: { userId } }),
-      prisma.learningPath.findFirst({
-        where: { userId, subjectId: subject.id, isActive: true },
+      withRetry(() => prisma.profile.findUnique({ where: { userId: userId! } })),
+      withRetry(() => prisma.learningPath.findFirst({
+        where: { userId: userId!, subjectId: subject.id, isActive: true },
         orderBy: { createdAt: "desc" },
-      }),
+      })),
     ]);
 
-    const learnSession = await prisma.learnSession.create({
+    const learnSession = await withRetry(() => prisma.learnSession.create({
       data: {
-        userId,
+        userId: userId!,
         subjectId: subject.id,
         title: `${subject.name} — ${new Date().toLocaleDateString("ru-RU", { day: '2-digit', month: '2-digit', year: 'numeric' })}`,
         contextSnapshot: {
@@ -65,7 +66,7 @@ export async function POST(req: Request) {
           memoryContext: memoryContext ?? null,
         },
       },
-    });
+    }));
 
     // Warm up Redis state (best-effort — Redis may not be running)
     const state: RedisSessionState = {

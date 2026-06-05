@@ -1,46 +1,57 @@
 import Groq from 'groq-sdk'
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || '',
+  timeout: 20000,
+  maxRetries: 2,
+})
 
 export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
-  maxTokens = 1024,
+  maxTokens = 800,
 ): Promise<string> {
-  if (!process.env.GROQ_API_KEY) {
-    throw new Error('GROQ_API_KEY missing from .env.local')
+  try {
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.1-8b-instant',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages.slice(-6),
+      ],
+      max_tokens: maxTokens,
+      temperature: 0.7,
+    })
+    return response.choices[0]?.message?.content ?? ''
+  } catch (error: any) {
+    console.error('Groq error:', error.message)
+    if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
+      return 'Извини, я думаю немного дольше обычного. Попробуй ещё раз.'
+    }
+    throw error
   }
-  const response = await groq.chat.completions.create({
-    model: 'llama-3.3-70b-versatile',
-    messages: [
-      { role: 'system', content: systemPrompt },
-      ...messages,
-    ],
-    max_tokens: maxTokens,
-    temperature: 0.7,
-  })
-  return response.choices[0]?.message?.content ?? ''
 }
 
 export async function generateJSON(
   prompt: string,
-  maxTokens = 2048,
+  maxTokens = 1500,
 ): Promise<any> {
-  if (!process.env.GROQ_API_KEY) {
-    throw new Error('GROQ_API_KEY missing from .env.local')
+  try {
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.1-8b-instant',
+      messages: [{
+        role: 'user',
+        content: prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.',
+      }],
+      max_tokens: maxTokens,
+      temperature: 0.3,
+    })
+    const text = response.choices[0]?.message?.content ?? '[]'
+    const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    try { return JSON.parse(clean) } catch { return null }
+  } catch (error: any) {
+    console.error('Groq JSON error:', error.message)
+    return null
   }
-  const response = await groq.chat.completions.create({
-    model: 'llama-3.3-70b-versatile',
-    messages: [{
-      role: 'user',
-      content: prompt + '\n\nRespond with ONLY valid JSON. No markdown, no explanation, no backticks.',
-    }],
-    max_tokens: maxTokens,
-    temperature: 0.3,
-  })
-  const text = response.choices[0]?.message?.content ?? '[]'
-  const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
-  try { return JSON.parse(clean) } catch { return null }
 }
 
 export async function summarizeSession(
@@ -55,7 +66,7 @@ export async function summarizeSession(
     : 'Summarize this tutoring session in 2 sentences in English.'
   try {
     const response = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'llama-3.1-8b-instant',
       messages: [
         { role: 'system', content: prompt },
         ...messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),

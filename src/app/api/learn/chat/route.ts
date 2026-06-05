@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
 import { generateAIResponse, buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
@@ -24,22 +25,22 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { sessionId, message } = schema.parse(body)
 
-    const learnSession = await prisma.learnSession.findUnique({
+    const learnSession = await withRetry(() => prisma.learnSession.findUnique({
       where: { id: sessionId, userId },
       include: {
         subject: true,
         messages: { orderBy: { createdAt: 'asc' } },
       },
-    })
+    }))
     if (!learnSession) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
-    const profile = await prisma.profile.findUnique({ where: { userId } })
+    const profile = await withRetry(() => prisma.profile.findUnique({ where: { userId } }))
 
-    await prisma.message.create({
+    await withRetry(() => prisma.message.create({
       data: { sessionId, role: MessageRole.USER, content: message },
-    })
+    }))
 
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
@@ -92,9 +93,9 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
       }
 
-      await prisma.message.create({
+      await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: text },
-      })
+      }))
 
       return NextResponse.json({ success: true, text })
     } catch (error: any) {
