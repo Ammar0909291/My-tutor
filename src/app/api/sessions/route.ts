@@ -41,7 +41,41 @@ export async function POST(req: Request) {
     }
     if (!userId) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
-    // Paywall disabled — Stripe not configured yet
+    // ── Plan enforcement ──────────────────────────────────────────────────────
+    const subscription = await prisma.subscription.findUnique({ where: { userId } })
+    const plan = subscription?.plan ?? 'free'
+    const planExpiresAt = subscription?.planExpiresAt
+
+    // Paid plan expiry check
+    const isPaidPlanActive = planExpiresAt && new Date(planExpiresAt) > new Date()
+    const effectivePlan = (plan !== 'free' && isPaidPlanActive) ? plan : 'free'
+
+    if (effectivePlan === 'free') {
+      const sessionCount = await prisma.learnSession.count({ where: { userId } })
+      if (sessionCount >= 3) {
+        return NextResponse.json(
+          { success: false, error: 'free_limit_reached', message: 'Бесплатный период завершён' },
+          { status: 403 },
+        )
+      }
+    }
+
+    if (effectivePlan === 'basic') {
+      // Reset monthly counter if month has passed
+      const monthStart = subscription!.monthResetAt
+      const now = new Date()
+      if (now.getMonth() !== new Date(monthStart).getMonth() || now.getFullYear() !== new Date(monthStart).getFullYear()) {
+        await prisma.subscription.update({
+          where: { userId },
+          data: { lessonsThisMonth: 0, monthResetAt: now },
+        })
+      } else if ((subscription!.lessonsThisMonth ?? 0) >= 30) {
+        return NextResponse.json(
+          { success: false, error: 'monthly_limit_reached', message: 'Лимит 30 уроков в месяц исчерпан' },
+          { status: 403 },
+        )
+      }
+    }
 
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } });
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
@@ -67,6 +101,14 @@ export async function POST(req: Request) {
         },
       },
     });
+
+    // Track monthly lesson count for basic plan
+    if (effectivePlan === 'basic') {
+      await prisma.subscription.update({
+        where: { userId },
+        data: { lessonsThisMonth: { increment: 1 } },
+      }).catch(() => {})
+    }
 
     // Warm up Redis state (best-effort — Redis may not be running)
     const state: RedisSessionState = {

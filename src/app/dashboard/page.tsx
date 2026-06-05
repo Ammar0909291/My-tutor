@@ -93,11 +93,12 @@ export default async function DashboardPage() {
   const voiceLbl = profile?.voiceId ? voiceLabel(profile.voiceId, lang) : null
   const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
   const displayName = profile?.displayName ?? user.name ?? 'Student'
-  const isPro = subscription?.status === 'ACTIVE'
+  const plan = subscription?.plan ?? 'free'
+  const isPro = plan === 'pro' || plan === 'annual'
   const referralCode = user?.referralCode
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
   const referralLink = referralCode ? `${appUrl}/join?ref=${referralCode}` : null
-  const showUpgradeBanner = false // Stripe disabled for now
+  const showUpgradeBanner = !isPro && plan === 'free'
   const xpPoints = user?.xpPoints ?? 0
   const streakDays = profile?.streakDays ?? 0
   const level = getLevel(xpPoints, lang)

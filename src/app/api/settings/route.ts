@@ -22,8 +22,8 @@ export async function GET() {
     data: {
       voiceId: profile?.voiceId ?? 'male',
       teachingLanguage: profile?.teachingLanguage ?? 'en',
-      subscriptionStatus: subscription?.status ?? 'FREE',
-      freeSessionUsed: subscription?.freeSessionUsed ?? false,
+      plan: subscription?.plan ?? 'free',
+      planExpiresAt: subscription?.planExpiresAt ?? null,
     },
   })
 }

@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { summarizeSession, generateJSON } from '@/lib/ai/client'
-import { MessageRole, SubscriptionStatus } from '@prisma/client'
+import { MessageRole } from '@prisma/client'
 
 const schema = z.object({ sessionId: z.string() })
 
@@ -58,11 +58,7 @@ export async function POST(req: Request) {
       },
     })
 
-    // Mark free session as used so the user is prompted to subscribe next time
-    await prisma.subscription.updateMany({
-      where: { userId: session.user.id, status: SubscriptionStatus.FREE, freeSessionUsed: false },
-      data: { freeSessionUsed: true },
-    })
+    // Session count is tracked via learnSession.count; no extra action needed here
 
     // +10 XP for completing a session
     await prisma.user.update({

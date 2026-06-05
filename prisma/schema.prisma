@@ -30,6 +30,7 @@ model User {
   profile       Profile?
   learnSessions LearnSession[]
   subscription  Subscription?
+  payments      Payment[]
   learningPaths LearningPath[]
   flashcards    Flashcard[]
   studentProgress StudentProgress[]
@@ -209,20 +210,38 @@ model Message {
 // ─── Subscription ─────────────────────────────────────────────────────────────
 
 model Subscription {
-  id                   String             @id @default(cuid())
-  userId               String             @unique
-  stripeCustomerId     String?            @unique
-  stripeSubscriptionId String?            @unique
-  stripePriceId        String?
-  stripeCurrentPeriodEnd DateTime?
-  status               SubscriptionStatus @default(FREE)
-  freeSessionUsed      Boolean            @default(false)
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  plan            String   @default("free")  // free | basic | pro | annual
+  planExpiresAt   DateTime?
+  lessonsThisMonth Int     @default(0)
+  monthResetAt    DateTime @default(now())
+  // YooKassa payment tracking
+  yookassaPaymentId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("subscriptions")
+}
+
+// ─── Payment Records ──────────────────────────────────────────────────────────
+
+model Payment {
+  id          String   @id @default(cuid())
+  userId      String
+  yookassaId  String   @unique
+  plan        String   // basic | pro | annual
+  amount      Int      // in kopecks
+  currency    String   @default("RUB")
+  status      String   @default("pending") // pending | succeeded | canceled
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
 }
 
 // ─── Flashcards ───────────────────────────────────────────────────────────────
@@ -332,10 +351,3 @@ enum MessageRole {
   SYSTEM
 }
 
-enum SubscriptionStatus {
-  FREE
-  ACTIVE
-  CANCELED
-  PAST_DUE
-  TRIALING
-}

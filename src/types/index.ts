@@ -1,7 +1,10 @@
-import type { SubjectType, SessionStatus, MessageRole, SubscriptionStatus } from "@prisma/client";
+import type { SubjectType, SessionStatus, MessageRole } from "@prisma/client";
 
 // Re-export Prisma enums for convenience
-export { SubjectType, SessionStatus, MessageRole, SubscriptionStatus };
+export { SubjectType, SessionStatus, MessageRole };
+
+// Plan type (replaces removed SubscriptionStatus enum)
+export type SubscriptionStatus = 'free' | 'basic' | 'pro' | 'annual';
 
 // ─── Session State (Redis) ────────────────────────────────────────────────────
 
