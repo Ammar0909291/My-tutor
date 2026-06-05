@@ -50,7 +50,7 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const [user, recentSessions, totalLessons, referralData] = await Promise.all([
+  const [user, recentSessions, totalLessons] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },
       select: {
@@ -77,8 +77,9 @@ export default async function DashboardPage() {
       include: { subject: { select: { name: true, slug: true } } },
     }),
     prisma.learnSession.count({ where: { userId: session.user.id } }),
-    prisma.referral.count({ where: { referrerId: session.user.id, used: true } }),
   ])
+
+  const referralData = await (prisma as any).referral?.count({ where: { referrerId: session.user.id, used: true } }).catch(() => 0) ?? 0
 
   if (!user?.onboardingCompleted) redirect('/onboarding')
 
