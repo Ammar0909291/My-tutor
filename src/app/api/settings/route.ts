@@ -12,18 +12,13 @@ export async function GET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 
-  const [profile, subscription] = await Promise.all([
-    prisma.profile.findUnique({ where: { userId: session.user.id } }),
-    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
-  ])
+  const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
 
   return NextResponse.json({
     success: true,
     data: {
       voiceId: profile?.voiceId ?? 'male',
       teachingLanguage: profile?.teachingLanguage ?? 'en',
-      plan: subscription?.plan ?? 'free',
-      planExpiresAt: subscription?.planExpiresAt ?? null,
     },
   })
 }

@@ -31,7 +31,7 @@ const FAQ_KEYS = [
 const AVATAR_COLORS = ['#F78166', '#79C0FF', '#56D364', '#E3B341', '#D2A8FF']
 
 export default function HomePage() {
-  const { t } = useLanguage()
+  const { t, lang: _lang } = useLanguage() // _lang subscription forces re-render on language change
   const [mobileOpen, setMobileOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
 

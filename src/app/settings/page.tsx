@@ -22,8 +22,6 @@ const LANG_OPTIONS: LangOption[] = [
 interface SettingsData {
   voiceId: string
   teachingLanguage: TeachingLang
-  plan: string
-  planExpiresAt: string | null
 }
 
 interface ProfileData {

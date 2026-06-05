@@ -10,7 +10,6 @@ export async function GET() {
       where: { id: session.user.id },
       include: {
         profile: true,
-        subscription: true,
         _count: { select: { learnSessions: true } }
       }
     })
