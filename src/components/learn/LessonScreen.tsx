@@ -136,8 +136,10 @@ interface Props {
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'ru', memoryContext, pastSessionsSummary, displayName, userId }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', memoryContext, pastSessionsSummary, displayName, userId }: Props) {
   const { t, lang: uiLang } = useLanguage()
+
+  console.log('Teaching language:', teachingLanguage, '| UI language:', uiLang)
 
   // Core state
   const [sessionId, setSessionId] = useState<string|null>(null)
@@ -207,10 +209,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Derived
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
-  const filename = FILENAME[subjectSlug] ?? 'урок.txt'
+  const filename = FILENAME[subjectSlug] ?? 'lesson.txt'
   const terminalCmd = subjectSlug === 'python' ? `python ${filename}` :
-    subjectSlug === 'c' ? `gcc ${filename} -o урок && ./урок` :
-    subjectSlug === 'cpp' ? `g++ ${filename} -o урок && ./урок` :
+    subjectSlug === 'c' ? `gcc ${filename} -o lesson && ./lesson` :
+    subjectSlug === 'cpp' ? `g++ ${filename} -o lesson && ./lesson` :
     filename
   const studentAvatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName ?? 'Student')}&background=79C0FF&color=fff&bold=true&size=64`
 
@@ -279,10 +281,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [])
   const handleSpeak = useCallback((id: string, text: string) => {
     speakingIdRef.current = id; setSpeakingId(id)
-    console.log('Calling TTS with:', { textLength: text.length, lang: teachingLanguage, voice: voiceType })
+    console.log('Tutor responded, calling TTS...', { textLength: text.length, lang: teachingLanguage, voice: voiceType })
     speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     })
+    console.log('TTS called')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teachingLanguage, voiceType])
   const handleVoiceChange = useCallback((v: VoiceType) => {
@@ -332,7 +335,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Run code
   const handleRunCode = useCallback(async () => {
     if (isRunning) return
-    setIsRunning(true); setTerminalOutput('> Выполнение...'); setTerminalIsError(false); setTerminalDone(false)
+    setIsRunning(true); setTerminalOutput(''); setTerminalIsError(false); setTerminalDone(false)
     try {
       const res = await fetch('/api/learn/run', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -340,14 +343,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       })
       const data = await res.json() as { success?: boolean; output?: string; error?: string }
       if (!data.success) {
-        setTerminalOutput(data.error ?? '(ошибка)')
+        setTerminalOutput(data.error ?? '(error)')
         setTerminalIsError(true)
       } else {
-        setTerminalOutput(data.output ?? '(нет вывода)')
+        setTerminalOutput(data.output ?? '(no output)')
         setTerminalIsError(false)
       }
     } catch (err) {
-      setTerminalOutput(`Ошибка: ${err instanceof Error ? err.message : String(err)}`)
+      setTerminalOutput(`Error: ${err instanceof Error ? err.message : String(err)}`)
       setTerminalIsError(true)
     } finally { setIsRunning(false); setTerminalDone(true) }
   }, [code, language, stdinInput, isRunning])
@@ -621,16 +624,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
         {/* Voice buttons */}
         <div className="flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
-          {(['male', 'female', 'warm'] as VoiceType[]).map((k) => (
-            <button key={k} onClick={() => handleVoiceChange(k)}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-150"
-              style={{
-                background: voiceType === k ? 'var(--accent-primary)' : 'transparent',
-                color: voiceType === k ? '#fff' : 'var(--text-secondary)',
-              }}>
-              {mounted ? (VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]) : VOICE_LABELS_BY_LANG.en[k]}
-            </button>
-          ))}
+          {(['male', 'female', 'warm'] as VoiceType[]).map((k) => {
+            const fallback = { male: 'M', female: 'F', warm: 'W' }[k]
+            const voiceKey = { male: 'lesson_voice_male', female: 'lesson_voice_female', warm: 'lesson_voice_warm' }[k] as 'lesson_voice_male' | 'lesson_voice_female' | 'lesson_voice_warm'
+            return (
+              <button key={k} onClick={() => handleVoiceChange(k)}
+                title={VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
+                className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-150"
+                style={{
+                  background: voiceType === k ? 'var(--accent-primary)' : 'transparent',
+                  color: voiceType === k ? '#fff' : 'var(--text-secondary)',
+                }}>
+                {mounted ? t(voiceKey) : fallback}
+              </button>
+            )
+          })}
         </div>
 
         <LanguageToggle />
@@ -731,13 +739,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             <div className="shrink-0 flex flex-col" style={{ height: 220, background: '#0D1117', borderTop: '1px solid var(--border-default)' }}>
               {/* Output area */}
               <div className="flex-1 overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed">
-                {terminalOutput && terminalOutput !== '> Выполнение...'
+                {isRunning
+                  ? <span style={{ color: '#E3B341' }}>{`> ${t('lesson_running')}`}</span>
+                  : terminalOutput
                   ? <>
                       <pre className="whitespace-pre-wrap break-words" style={{ color: terminalIsError ? '#FF6B6B' : 'var(--accent-green)' }}>{terminalOutput}</pre>
-                      {terminalDone && <div className="mt-2 pt-2" style={{ color: 'var(--text-dim)', borderTop: '1px solid #21262D' }}>--- Выполнение завершено ---</div>}
+                      {terminalDone && <div className="mt-2 pt-2" style={{ color: 'var(--text-dim)', borderTop: '1px solid #21262D' }}>{t('lesson_terminal_done')}</div>}
                     </>
-                  : terminalOutput === '> Выполнение...'
-                  ? <span style={{ color: '#E3B341' }}>{terminalOutput}</span>
                   : <span style={{ color: 'var(--text-dim)' }}>$ {terminalCmd}</span>
                 }
               </div>
@@ -749,7 +757,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   value={stdinInput}
                   onChange={(e) => setStdinInput(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleRunCode() } }}
-                  placeholder="Ввод для программы..."
+                  placeholder={t('lesson_terminal_stdin')}
                   className="flex-1 bg-transparent font-mono text-xs outline-none"
                   style={{ color: 'var(--text-primary)', caretColor: 'var(--accent-green)' }}
                 />

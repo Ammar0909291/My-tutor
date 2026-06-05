@@ -32,14 +32,23 @@ export async function POST(req: Request) {
 
     const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
     const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
-    let response: Awaited<ReturnType<typeof groq.audio.speech.create>>
-    try {
-      response = await groq.audio.speech.create({ model: 'playai-tts', voice: selectedVoice, input: clean, response_format: 'mp3' })
-    } catch (ttsErr: any) {
-      console.error('playai-tts failed:', ttsErr.message)
+
+    const models = ['playai-tts', 'tts-1']
+    let buffer: Buffer | null = null
+    for (const model of models) {
+      try {
+        const response = await groq.audio.speech.create({ model, voice: selectedVoice, input: clean, response_format: 'mp3' })
+        buffer = Buffer.from(await response.arrayBuffer())
+        console.log('TTS success with model:', model)
+        break
+      } catch (e: any) {
+        console.error('TTS failed with model:', model, e.message)
+      }
+    }
+
+    if (!buffer) {
       return NextResponse.json({ error: 'TTS unavailable' }, { status: 503 })
     }
-    const buffer = Buffer.from(await (response as any).arrayBuffer())
 
     return new NextResponse(buffer.buffer as ArrayBuffer, {
       headers: {

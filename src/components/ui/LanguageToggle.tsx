@@ -52,11 +52,16 @@ export function useLanguage() {
 
 export function LanguageToggle({ className = '' }: { className?: string }) {
   const { lang, setLang } = useLanguage()
+  // Mounted guard: server always renders lang='en'; the active highlight is only
+  // applied after hydration so SSR and client markup match (no hydration error).
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+  const active = mounted ? lang : 'en'
   return (
     <div className={`lang-toggle ${className}`}>
-      <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => setLang('ru')}>RU</button>
-      <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
-      <button className={`lang-btn ${lang === 'hi' ? 'active' : ''}`} onClick={() => setLang('hi')}>HI</button>
+      <button className={`lang-btn ${active === 'ru' ? 'active' : ''}`} onClick={() => setLang('ru')}>RU</button>
+      <button className={`lang-btn ${active === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
+      <button className={`lang-btn ${active === 'hi' ? 'active' : ''}`} onClick={() => setLang('hi')}>HI</button>
     </div>
   )
 }
