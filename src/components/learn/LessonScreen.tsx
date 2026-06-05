@@ -218,7 +218,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     subjectSlug === 'c' ? `gcc ${filename} -o урок && ./урок` :
     subjectSlug === 'cpp' ? `g++ ${filename} -o урок && ./урок` :
     filename
-  const studentAvatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName ?? 'Студент')}&background=79C0FF&color=fff&bold=true&size=64`
+  const studentAvatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName ?? 'Student')}&background=79C0FF&color=fff&bold=true&size=64`
 
   // Timer
   useEffect(() => {
@@ -412,39 +412,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!data.success) { setInitError(data.code === 'UPGRADE_REQUIRED' ? 'upgrade' : (data.error ?? 'Error')); return }
         const sid = data.data.id; setSessionId(sid)
 
-        // Fetch curriculum for opening message context
-        const subjectMap: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'english' }
-        const subCode = subjectMap[subjectSlug]
-        let lessonHint = ''
-        if (subCode) {
-          try {
-            const cr = await fetch(`/api/curriculum?subject=${subCode}`)
-            const cd = await cr.json()
-            if (cd.success && cd.lessons?.length > 0) {
-              setCurriculumLessons(cd.lessons)
-              setCurriculumProgress(cd.progress ?? { currentLesson: 1, completedLessons: [] })
-              const curOrder = cd.progress?.currentLesson ?? 1
-              const cur = cd.lessons.find((l: CurriculumLesson) => l.order === curOrder) ?? cd.lessons[0]
-              lessonHint = teachingLanguage === 'ru'
-                ? ` Текущая тема урока: "${cur.lessonTitle}". Цель: ${cur.lessonGoal}.`
-                : teachingLanguage === 'hi'
-                ? ` Current lesson topic: "${cur.lessonTitle}". Goal: ${cur.lessonGoal}.`
-                : ` Current lesson topic: "${cur.lessonTitle}". Goal: ${cur.lessonGoal}.`
-            }
-          } catch { /* ignore */ }
-        }
-
         const opening = teachingLanguage === 'ru'
           ? (pastSessionsSummary
-            ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}".${lessonHint} Кратко напомни и продолжи. 3-4 предложения.`
-            : `Начни урок по "${subjectName}". Уровень: "${levelDescription}".${lessonHint} Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
+            ? `Привет! В прошлый раз мы изучали: "${pastSessionsSummary}". Продолжим? Уровень: "${levelDescription}".Кратко напомни и продолжи. 3-4 предложения.`
+            : `Начни урок по "${subjectName}". Уровень: "${levelDescription}".Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
           : teachingLanguage === 'hi'
           ? (pastSessionsSummary
-            ? `Namaste! Pichli baar humne "${pastSessionsSummary}" padha tha. Continue karein? Level: "${levelDescription}".${lessonHint} Brief reminder do aur aage badho. 3-4 sentences.`
-            : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}".${lessonHint} Apna parichay do aur pehla explanation with code do. 3-4 sentences.`)
+            ? `Namaste! Pichli baar humne "${pastSessionsSummary}" padha tha. Continue karein? Level: "${levelDescription}".Brief reminder do aur aage badho. 3-4 sentences.`
+            : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}".Apna parichay do aur pehla explanation with code do. 3-4 sentences.`)
           : (pastSessionsSummary
-            ? `Hi! Last time we studied: "${pastSessionsSummary}". Continue? Level: "${levelDescription}".${lessonHint} Briefly remind and continue. 3-4 sentences.`
-            : `Start the lesson on "${subjectName}". Level: "${levelDescription}".${lessonHint} Introduce yourself and begin teaching. 3-4 sentences.`)
+            ? `Hi! Last time we studied: "${pastSessionsSummary}". Continue? Level: "${levelDescription}".Briefly remind and continue. 3-4 sentences.`
+            : `Start the lesson on "${subjectName}". Level: "${levelDescription}".Introduce yourself and begin teaching. 3-4 sentences.`)
         await sendMessage(sid, opening, false)
       } catch { setInitError('Connection failed. Please refresh the page.') }
     }
@@ -910,7 +888,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                         <MessageContent text={displayText} isUser={true} />
                       </div>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={studentAvatarSrc} alt={displayName ?? 'Студент'} className="w-6 h-6 rounded-full object-cover shrink-0" />
+                      <img src={studentAvatarSrc} alt={displayName ?? 'Student'} className="w-6 h-6 rounded-full object-cover shrink-0" />
                     </div>
                   )}
 

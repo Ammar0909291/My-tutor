@@ -50,15 +50,21 @@ export default async function LearnPage() {
   let memoryContext: string | null = null
   let pastSessionsSummary: string | null = null
 
+  const teachingLang = (profile.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
+
   if (pastSessions.length > 0) {
+    const studentLabel = teachingLang === 'ru' ? 'Студент' : teachingLang === 'hi' ? 'Student' : 'Student'
+    const tutorLabel   = teachingLang === 'ru' ? 'Репетитор' : teachingLang === 'hi' ? 'Tutor' : 'Tutor'
+    const lessonLabel  = teachingLang === 'ru' ? 'Урок' : teachingLang === 'hi' ? 'Lesson' : 'Lesson'
+    const prevLabel    = teachingLang === 'ru' ? 'Предыдущие уроки студента' : teachingLang === 'hi' ? 'Previous lessons' : 'Previous lessons'
+    const recentLabel  = teachingLang === 'ru' ? 'Последние сообщения' : teachingLang === 'hi' ? 'Recent messages' : 'Recent messages'
+    const locale       = teachingLang === 'ru' ? 'ru-RU' : teachingLang === 'hi' ? 'hi-IN' : 'en-US'
+
     const summaryLines = pastSessions
       .filter((s) => s.summary)
       .map((s, i) => {
-        const date = new Date(s.startedAt).toLocaleDateString('ru-RU', {
-          day: 'numeric',
-          month: 'long',
-        })
-        return `Урок ${i + 1} (${date}): ${s.summary}`
+        const date = new Date(s.startedAt).toLocaleDateString(locale, { day: 'numeric', month: 'long' })
+        return `${lessonLabel} ${i + 1} (${date}): ${s.summary}`
       })
 
     // Collect last 10 messages across past sessions
@@ -66,14 +72,14 @@ export default async function LearnPage() {
       .flatMap((s) => s.messages)
       .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
       .slice(-10)
-      .map((m) => `${m.role === MessageRole.USER ? 'Студент' : 'Репетитор'}: ${m.content.slice(0, 200)}`)
+      .map((m) => `${m.role === MessageRole.USER ? studentLabel : tutorLabel}: ${m.content.slice(0, 200)}`)
 
     const parts: string[] = []
     if (summaryLines.length > 0) {
-      parts.push(`Предыдущие уроки студента:\n${summaryLines.join('\n')}`)
+      parts.push(`${prevLabel}:\n${summaryLines.join('\n')}`)
     }
     if (allMessages.length > 0) {
-      parts.push(`Последние сообщения:\n${allMessages.join('\n')}`)
+      parts.push(`${recentLabel}:\n${allMessages.join('\n')}`)
     }
     if (parts.length > 0) {
       memoryContext = parts.join('\n\n')
@@ -89,7 +95,7 @@ export default async function LearnPage() {
       subjectName={primarySubject.name}
       levelDescription={profile.selfDescription}
       voiceChoice={profile.voiceId ?? 'alexei'}
-      teachingLanguage={(profile.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'}
+      teachingLanguage={teachingLang}
       memoryContext={memoryContext}
       pastSessionsSummary={pastSessionsSummary}
       subjects={subjects}
