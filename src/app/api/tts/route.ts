@@ -17,18 +17,23 @@ const VOICE_MAP: Record<string, string> = {
   ru_warm:   'Arista-PlayAI',
 }
 
-async function tryYandexTTS(text: string, voice: string): Promise<Buffer | null> {
+async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
   if (!process.env.YANDEX_API_KEY || !process.env.YANDEX_FOLDER_ID) return null
-  const YANDEX_VOICES: Record<string, string> = { male: 'ermil', female: 'alena', warm: 'jane' }
+  const voiceMap: Record<string, string> = { male: 'ermil', female: 'alena', warm: 'jane' }
   try {
     const params = new URLSearchParams({
-      text, lang: 'ru-RU', voice: YANDEX_VOICES[voice] || 'alena',
-      format: 'mp3', sampleRateHertz: '48000',
+      text,
+      lang: 'ru-RU',
+      voice: voiceMap[voice] || 'alena',
+      format: 'mp3',
       folderId: process.env.YANDEX_FOLDER_ID,
     })
     const res = await fetch('https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize', {
       method: 'POST',
-      headers: { Authorization: `Api-Key ${process.env.YANDEX_API_KEY}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: {
+        Authorization: `Api-Key ${process.env.YANDEX_API_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       body: params.toString(),
     })
     if (!res.ok) return null
@@ -52,21 +57,19 @@ export async function POST(req: Request) {
     let buffer: Buffer
 
     if (lang === 'ru') {
-      const yandex = await tryYandexTTS(clean, voice)
+      const yandex = await yandexTTS(clean, voice)
       if (yandex) {
-        buffer = yandex
-      } else {
-        const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
-        const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
-        const response = await groq.audio.speech.create({ model: 'playai-tts', voice: selectedVoice, input: clean, response_format: 'mp3' })
-        buffer = Buffer.from(await response.arrayBuffer())
+        return new NextResponse(yandex.buffer as ArrayBuffer, {
+          headers: { 'Content-Type': 'audio/mpeg', 'Content-Length': yandex.length.toString(), 'Cache-Control': 'no-cache' },
+        })
       }
-    } else {
-      const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
-      const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
-      const response = await groq.audio.speech.create({ model: 'playai-tts', voice: selectedVoice, input: clean, response_format: 'mp3' })
-      buffer = Buffer.from(await response.arrayBuffer())
+      // fallback to Groq
     }
+
+    const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
+    const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
+    const response = await groq.audio.speech.create({ model: 'playai-tts', voice: selectedVoice, input: clean, response_format: 'mp3' })
+    buffer = Buffer.from(await response.arrayBuffer())
 
     return new NextResponse(buffer.buffer as ArrayBuffer, {
       headers: {

@@ -8,6 +8,25 @@ const schema = z.object({
   completedLesson: z.number().int().positive(),
 })
 
+export async function GET(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+
+  const { searchParams } = new URL(req.url)
+  const subjectCode = searchParams.get('subject')
+  if (!subjectCode) return NextResponse.json({ success: false, error: 'subject param required' }, { status: 400 })
+
+  try {
+    const progress = await prisma.studentProgress.findUnique({
+      where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
+    })
+    return NextResponse.json({ success: true, progress: progress ?? { currentLesson: 1, completedLessons: [] } })
+  } catch (err) {
+    console.error('[GET /api/curriculum/progress]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
+}
+
 export async function PATCH(req: Request) {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
