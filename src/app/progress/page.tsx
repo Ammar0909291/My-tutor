@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
 import Link from 'next/link'
 
 function getLevel(xp: number) {
@@ -17,7 +18,7 @@ export default async function ProgressPage() {
 
   const userId = session.user.id
 
-  const [user, profile, recentSessions, flashcardsDue] = await Promise.all([
+  const [user, profile, recentSessions, flashcardsDue] = await withRetry(() => Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: { xpPoints: true, name: true },
@@ -43,7 +44,7 @@ export default async function ProgressPage() {
       },
     }),
     prisma.flashcard.count({ where: { userId, nextReview: { lte: new Date() } } }),
-  ])
+  ]))
 
   const xp = user?.xpPoints ?? 0
   const level = getLevel(xp)

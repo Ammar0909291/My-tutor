@@ -10,6 +10,7 @@ export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
   maxTokens = 800,
+  lang: 'ru' | 'en' | 'hi' = 'en',
 ): Promise<string> {
   try {
     const response = await groq.chat.completions.create({
@@ -25,7 +26,12 @@ export async function generateAIResponse(
   } catch (error: any) {
     console.error('Groq error:', error.message)
     if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
-      return 'Извини, я думаю немного дольше обычного. Попробуй ещё раз.'
+      const timeoutMsg: Record<string, string> = {
+        en: 'Taking longer than usual. Please try again.',
+        ru: 'Думаю дольше обычного. Попробуй ещё раз.',
+        hi: 'Thoda time lag raha hai. Please try again.',
+      }
+      return timeoutMsg[lang] || timeoutMsg.en
     }
     throw error
   }

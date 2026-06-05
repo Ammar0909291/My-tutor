@@ -87,6 +87,7 @@ export async function POST(req: Request) {
         [...historyMessages, { role: 'user', content: message }],
         systemPrompt,
         1024,
+        teachingLang,
       )
 
       if (!text) {

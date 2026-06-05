@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
 import { BookOpen, Clock, Flame, GraduationCap, Layers, Sparkles, ArrowRight, Settings } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -50,7 +51,7 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const [user, recentSessions, totalLessons] = await Promise.all([
+  const [user, recentSessions, totalLessons] = await withRetry(() => Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },
       select: {
@@ -76,7 +77,7 @@ export default async function DashboardPage() {
       include: { subject: { select: { name: true, slug: true } } },
     }),
     prisma.learnSession.count({ where: { userId: session.user.id } }),
-  ])
+  ]))
 
   const referralData = await (prisma as any).referral?.count({ where: { referrerId: session.user.id, used: true } }).catch(() => 0) ?? 0
 

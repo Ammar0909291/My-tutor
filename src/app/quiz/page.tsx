@@ -1,13 +1,14 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
 import QuizClient from './QuizClient'
 
 export default async function QuizPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const user = await prisma.user.findUnique({
+  const user = await withRetry(() => prisma.user.findUnique({
     where: { id: session.user.id },
     select: {
       onboardingCompleted: true,
@@ -18,7 +19,7 @@ export default async function QuizPage() {
         },
       },
     },
-  })
+  }))
 
   if (!user?.onboardingCompleted) redirect('/onboarding')
 

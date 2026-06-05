@@ -25,7 +25,12 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
       ? `नमस्ते! मैं आपका study coach हूँ। ${subject} के लिए एक learning plan बनाते हैं। बताइए: आपका लक्ष्य क्या है? (job / university / hobby), हफ्ते में कितने घंटे पढ़ सकते हैं, और कोई deadline है?`
       : `Привет! Я твой учебный коуч. Давай составим план обучения по ${subject}. Расскажи: какая у тебя цель? (работа / университет / хобби), сколько часов в неделю можешь учиться, и есть ли дедлайн?`
 
-  const systemPrompt = `You are a study coach helping a student create a structured learning plan for ${subject}. Teach in ${teachingLanguage === 'en' ? 'English' : teachingLanguage === 'hi' ? 'Hindi' : 'Russian'}. Ask about their goal (job/university/hobby), weekly hours available, and deadline. Then create a detailed week-by-week roadmap. Be specific about topics per week. After presenting the plan, ask if they want adjustments.`
+  const langPrompts: Record<string, string> = {
+    en: `You are a helpful study coach for ${subject}. Respond ONLY in English. Create clear, structured study plans. Ask about their goal (job/university/hobby), weekly hours available, and deadline. Then create a detailed week-by-week roadmap, specific about topics per week. After presenting the plan, ask if they want adjustments. Be encouraging and practical.`,
+    ru: `Ты помощник по учёбе для ${subject}. Отвечай ТОЛЬКО на русском языке. Создавай понятные планы обучения. Спроси про цель (работа/университет/хобби), сколько часов в неделю и дедлайн. Затем составь подробную дорожную карту по неделям с конкретными темами. После плана спроси, нужны ли изменения. Будь поддерживающим и практичным.`,
+    hi: `Aap ${subject} ke liye ek helpful study coach hain. Sirf Hinglish mein respond karein. Clear study plans banao. Goal pucho (job/university/hobby), weekly hours aur deadline. Phir week-by-week roadmap banao with specific topics. Plan ke baad pucho ki koi changes chahiye. Encouraging aur practical raho.`,
+  }
+  const systemPrompt = langPrompts[teachingLanguage] || langPrompts.en
 
   useEffect(() => {
     setMessages([{ role: 'assistant', content: openingMessage }])

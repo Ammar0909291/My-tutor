@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 
@@ -8,7 +9,7 @@ export default async function LearnPage() {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const user = await prisma.user.findUnique({
+  const user = await withRetry(() => prisma.user.findUnique({
     where: { id: session.user.id },
     select: {
       onboardingCompleted: true,
@@ -16,7 +17,7 @@ export default async function LearnPage() {
         include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
       },
     },
-  })
+  }))
 
   if (!user?.onboardingCompleted) redirect('/onboarding')
 
@@ -32,7 +33,7 @@ export default async function LearnPage() {
   }))
 
   // Fetch last 3 completed sessions for memory context
-  const pastSessions = await prisma.learnSession.findMany({
+  const pastSessions = await withRetry(() => prisma.learnSession.findMany({
     where: {
       userId: session.user.id,
       subjectId: primarySubject.id,
@@ -45,7 +46,7 @@ export default async function LearnPage() {
         orderBy: { createdAt: 'asc' },
       },
     },
-  })
+  }))
 
   let memoryContext: string | null = null
   let pastSessionsSummary: string | null = null
