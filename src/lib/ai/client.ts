@@ -1,87 +1,45 @@
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
+import Groq from 'groq-sdk'
 
-async function geminiChat(
-  messages: { role: 'user' | 'assistant'; content: string }[],
-  systemPrompt: string,
-  opts: { temperature?: number; maxOutputTokens?: number } = {},
-): Promise<string> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY is missing from .env')
-
-  const contents = messages.map(m => ({
-    role: m.role === 'user' ? 'user' : 'model',
-    parts: [{ text: m.content }],
-  }))
-
-  const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      systemInstruction: { parts: [{ text: systemPrompt }] },
-      contents,
-      generationConfig: {
-        maxOutputTokens: opts.maxOutputTokens ?? 1024,
-        temperature: opts.temperature ?? 0.7,
-      },
-    }),
-  })
-
-  if (!res.ok) {
-    const err = await res.text()
-    throw new Error(`Gemini error (${res.status}): ${err}`)
-  }
-
-  const data = await res.json()
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
-}
-
-// ─── Public helpers ───────────────────────────────────────────────────────────
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
 
 export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
   maxTokens = 1024,
 ): Promise<string> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY is missing from .env')
-
-  const contents = messages.map(m => ({
-    role: m.role === 'user' ? 'user' : 'model',
-    parts: [{ text: m.content }]
-  }))
-
-  const response = await fetch(
-    `${GEMINI_URL}?key=${apiKey}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-        contents,
-        generationConfig: {
-          maxOutputTokens: maxTokens,
-          temperature: 0.7,
-        },
-      }),
-    }
-  )
-
-  if (!response.ok) {
-    const err = await response.text()
-    throw new Error(`Gemini error (${response.status}): ${err}`)
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error('GROQ_API_KEY missing from .env.local')
   }
-
-  const data = await response.json()
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
+  const response = await groq.chat.completions.create({
+    model: 'llama-3.3-70b-versatile',
+    messages: [
+      { role: 'system', content: systemPrompt },
+      ...messages,
+    ],
+    max_tokens: maxTokens,
+    temperature: 0.7,
+  })
+  return response.choices[0]?.message?.content ?? ''
 }
 
-export async function generateJSON(prompt: string, maxTokens = 2048): Promise<unknown> {
-  const text = await geminiChat(
-    [{ role: 'user', content: prompt + '\n\nRespond with ONLY valid JSON. No markdown, no explanation, no backticks.' }],
-    'You are a JSON generator. Output only valid JSON with no extra text.',
-    { maxOutputTokens: maxTokens, temperature: 0.3 },
-  )
-  const clean = (text || '[]').replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+export async function generateJSON(
+  prompt: string,
+  maxTokens = 2048,
+): Promise<any> {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error('GROQ_API_KEY missing from .env.local')
+  }
+  const response = await groq.chat.completions.create({
+    model: 'llama-3.3-70b-versatile',
+    messages: [{
+      role: 'user',
+      content: prompt + '\n\nRespond with ONLY valid JSON. No markdown, no explanation, no backticks.',
+    }],
+    max_tokens: maxTokens,
+    temperature: 0.3,
+  })
+  const text = response.choices[0]?.message?.content ?? '[]'
+  const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
   try { return JSON.parse(clean) } catch { return null }
 }
 
@@ -89,18 +47,22 @@ export async function summarizeSession(
   messages: { role: string; content: string }[],
   lang: string,
 ): Promise<string> {
-  if (!process.env.GEMINI_API_KEY) return ''
+  if (!process.env.GROQ_API_KEY) return ''
   const prompt = lang === 'ru'
     ? 'Summarize this tutoring session in 2 sentences in Russian.'
     : lang === 'hi'
     ? 'इस session को 2 sentences में summarize करें।'
     : 'Summarize this tutoring session in 2 sentences in English.'
   try {
-    return await geminiChat(
-      messages.map(m => ({ role: m.role as 'user' | 'assistant', content: m.content })),
-      prompt,
-      { maxOutputTokens: 200 },
-    )
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: prompt },
+        ...messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
+      ],
+      max_tokens: 200,
+    })
+    return response.choices[0]?.message?.content ?? ''
   } catch { return '' }
 }
 
@@ -148,14 +110,12 @@ LEARNING RULES:
     const memory = memoryContext ? `\n\nपिछले पाठों की याददाश्त:\n${memoryContext}\n` : ''
     return `आप एक अनुभवी ${subject} ट्यूटर हैं जो हिंदी में पढ़ाते हैं।
 केवल हिंदी में बात करें, जब तक छात्र स्पष्ट रूप से कुछ और न माँगे।
-आपका लक्ष्य छात्र को कदम-दर-कदम सिखाना है, उनके स्तर के अनुसार समझाना है।
 
 छात्र का स्तर: ${studentLevel}
 सीखने के लक्ष्य: ${goals}${memory}
 
 HINGLISH SUPPORT:
-- छात्र Hinglish में लिख सकते हैं (Hindi + English mix) — यह बिल्कुल ठीक है
-- जब छात्र Hinglish में लिखे तो Hinglish में जवाब दें
+- छात्र Hinglish में लिख सकते हैं — यह बिल्कुल ठीक है
 - Technical terms English में रखें: variable, function, loop, array, pointer
 - Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo`
   }
@@ -164,30 +124,15 @@ HINGLISH SUPPORT:
   const memorySection = memoryContext ? `\n\nПамять о предыдущих уроках:\n${memoryContext}\n` : ''
   return `Ты — опытный русскоязычный преподаватель ${subject}.
 Ты общаешься ТОЛЬКО на русском языке, если студент явно не попросит иначе.
-Твоя задача — обучать студента шаг за шагом, адаптируя объяснения под его уровень.
+Твоя задача — обучать студента шаг за шагом.
 
 Уровень студента: ${studentLevel}
 Цели обучения: ${goals}${memorySection}
-Принципы работы:
-1. ▶ Объясняй просто и понятно, используй аналогии из реальной жизни
-2. 📌 После каждого объяснения задавай проверочный вопрос
-3. 💡 Если студент путается — измени подход, используй другой пример
-4. ⚠️ Хвали за успехи, но не переусердствуй
-5. ✅ Если пишешь код — всегда объясняй каждую строку
-6. ❓ Замечай, когда студент устал или запутался, и предлагай паузу или упрощение
-7. 🔧 Если есть данные о предыдущих уроках — начни с краткого напоминания
-
-Формат ответа:
-- Говори как живой учитель, не как энциклопедия
-- Используй эмодзи умеренно для дружелюбной атмосферы
-- Блоки кода оформляй в markdown с указанием языка
 
 ПРАВИЛА ОБУЧЕНИЯ:
 1. После каждого объяснения спроси: "Понял? Отвечай: да / нет / частично"
-2. Если "нет" — выбери ДРУГОЙ подход: аналогия, реальный пример, мини-код, разбивка на шаги
-3. Если "частично" — спроси "Что именно непонятно?"
-4. НЕ переходи к новой теме пока не получишь подтверждение понимания
-5. Максимум 3-4 предложения + код, потом вопрос или задание`
+2. Если "нет" — выбери ДРУГОЙ подход
+3. Максимум 3-4 предложения + код, потом вопрос или задание`
 }
 
 export function buildCurriculumPrompt(subject: string, selfDescription: string) {

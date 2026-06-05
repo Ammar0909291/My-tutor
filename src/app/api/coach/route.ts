@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { auth } from '@/lib/auth'
 import { generateAIResponse } from '@/lib/ai/client'
 
 const schema = z.object({
   messages: z.array(z.object({ role: z.enum(['system', 'user', 'assistant']), content: z.string() })),
-  userId: z.string().optional(),
 })
 
 export async function POST(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   try {
     const body = await req.json()
@@ -23,10 +25,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ content })
     } catch (error: any) {
       console.error('[coach] AI error:', error.message)
-      return NextResponse.json(
-        { error: { message: error.message || 'AI failed' } },
-        { status: 500 },
-      )
+      return NextResponse.json({ error: { message: error.message || 'AI failed' } }, { status: 500 })
     }
   } catch (err) {
     console.error('[coach]', err)

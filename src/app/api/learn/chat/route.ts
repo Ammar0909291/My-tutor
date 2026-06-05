@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { generateAIResponse, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
@@ -7,17 +8,24 @@ import { MessageRole } from '@prisma/client'
 const schema = z.object({
   sessionId: z.string(),
   message: z.string().min(1).max(8000),
-  userId: z.string().optional(),
 })
 
 export async function POST(req: Request) {
+  console.log('GROQ KEY EXISTS:', !!process.env.GROQ_API_KEY)
+
+  const session = await auth()
+  if (!session?.user?.id) {
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
+  }
+
+  const userId = session.user.id
+
   try {
     const body = await req.json()
-    const { sessionId, message, userId: bodyUserId } = schema.parse(body)
-    const userId = bodyUserId ?? 'anonymous'
+    const { sessionId, message } = schema.parse(body)
 
     const learnSession = await prisma.learnSession.findUnique({
-      where: { id: sessionId },
+      where: { id: sessionId, userId },
       include: {
         subject: true,
         messages: { orderBy: { createdAt: 'asc' } },
@@ -70,10 +78,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, text })
     } catch (error: any) {
       console.error('[learn/chat] AI error:', error.message)
-      return NextResponse.json(
-        { success: false, error: error.message || 'AI failed' },
-        { status: 500 },
-      )
+      return NextResponse.json({ success: false, error: error.message || 'AI failed' }, { status: 500 })
     }
   } catch (err) {
     if (err instanceof z.ZodError) {
