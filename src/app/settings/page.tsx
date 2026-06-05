@@ -110,12 +110,15 @@ export default function SettingsPage() {
   async function handleProfileSave() {
     setProfileSave('saving')
     try {
+      console.log('Save clicked with:', { name: profileName, levelDescription: profileLevel, voicePreference: profileVoice })
       const res = await fetch('/api/user/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: profileName, levelDescription: profileLevel, voicePreference: profileVoice }),
       })
+      console.log('Save response status:', res.status)
       const d = await res.json() as { success?: boolean }
+      console.log('Save response data:', d)
       if (d.success) {
         setProfileSave('saved')
         // Refetch profile to confirm updated values

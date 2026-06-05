@@ -158,6 +158,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Voice
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
 
+  // Mounted guard — avoid hydration mismatch on language-dependent labels
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
   // File attachment
   const [attachedFile, setAttachedFile] = useState<AttachedFile|null>(null)
 
@@ -275,6 +279,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [])
   const handleSpeak = useCallback((id: string, text: string) => {
     speakingIdRef.current = id; setSpeakingId(id)
+    console.log('Calling TTS with:', { textLength: text.length, lang: teachingLanguage, voice: voiceType })
     speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     })
@@ -623,7 +628,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 background: voiceType === k ? 'var(--accent-primary)' : 'transparent',
                 color: voiceType === k ? '#fff' : 'var(--text-secondary)',
               }}>
-              {VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
+              {mounted ? (VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]) : VOICE_LABELS_BY_LANG.en[k]}
             </button>
           ))}
         </div>

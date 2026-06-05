@@ -1,6 +1,5 @@
 import Groq from 'groq-sdk'
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
@@ -19,19 +18,17 @@ const VOICE_MAP: Record<string, string> = {
 
 export async function POST(req: Request) {
   try {
-    const session = await auth()
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
+    // Audio is not sensitive data — auth is not required to synthesize speech.
     const { text, lang = 'en', voice = 'female' } = await req.json()
     if (!text) return NextResponse.json({ error: 'No text' }, { status: 400 })
 
     const clean = cleanTextForTTS(text)
     if (!clean.trim()) return NextResponse.json({ error: 'Empty' }, { status: 400 })
 
+    console.log('=== TTS CALLED ===')
+    console.log('GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY)
+    console.log('Input text length:', text?.length)
     console.log('TTS request:', { lang, voice, textLength: clean.length })
-    console.log('GROQ KEY EXISTS:', !!process.env.GROQ_API_KEY)
 
     const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
     const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
