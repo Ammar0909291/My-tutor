@@ -33,42 +33,53 @@ export default async function LearnPage() {
   let profile = user.profile
   let primarySubject = profile?.subjects[0]?.subject
 
-  // Auto-heal: profile has no subject linked — find any subject and link it
+  // Auto-heal: profile has no subject linked — ensure subject exists then link it
   if (profile && !primarySubject) {
-    const anySubject = await prisma.subject.findFirst()
-    if (anySubject) {
-      await prisma.profileSubject.upsert({
-        where: { profileId_subjectId: { profileId: profile.id, subjectId: anySubject.id } },
+    // Guarantee at least one subject exists (upsert python as safe default)
+    const SLUG_TO_TYPE: Record<string, 'C' | 'CPP' | 'PYTHON' | 'ENGLISH'> = {
+      c: 'C', cpp: 'CPP', python: 'PYTHON', english: 'ENGLISH',
+    }
+    let anySubject = await prisma.subject.findFirst()
+    if (!anySubject) {
+      anySubject = await prisma.subject.upsert({
+        where: { slug: 'python' },
         update: {},
-        create: { profileId: profile.id, subjectId: anySubject.id },
+        create: { slug: 'python', name: 'Python', type: SLUG_TO_TYPE['python'] },
       })
-      // Ensure learning path exists
-      const existingPath = await prisma.learningPath.findFirst({ where: { userId: session.user.id, subjectId: anySubject.id } })
-      if (!existingPath) {
-        await prisma.learningPath.create({
-          data: {
-            userId: session.user.id,
-            subjectId: anySubject.id,
-            title: `${anySubject.name} Course`,
-            curriculum: { generated: false, steps: [] },
-            totalSteps: 0,
-            isActive: true,
-          },
-        }).catch(() => null)
-      }
-      // Re-fetch profile with subjects
-      const refreshed = await prisma.profile.findUnique({
-        where: { userId: session.user.id },
-        include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
-      })
-      if (refreshed) {
-        profile = refreshed
-        primarySubject = refreshed.subjects[0]?.subject
-      }
+    }
+
+    await prisma.profileSubject.upsert({
+      where: { profileId_subjectId: { profileId: profile.id, subjectId: anySubject.id } },
+      update: {},
+      create: { profileId: profile.id, subjectId: anySubject.id },
+    })
+
+    const existingPath = await prisma.learningPath.findFirst({ where: { userId: session.user.id, subjectId: anySubject.id } })
+    if (!existingPath) {
+      await prisma.learningPath.create({
+        data: {
+          userId: session.user.id, subjectId: anySubject.id,
+          title: `${anySubject.name} Course`,
+          curriculum: { generated: false, steps: [] },
+          totalSteps: 0, isActive: true,
+        },
+      }).catch(() => null)
+    }
+
+    // Re-fetch profile with subjects
+    const refreshed = await prisma.profile.findUnique({
+      where: { userId: session.user.id },
+      include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
+    })
+    if (refreshed) {
+      profile = refreshed
+      primarySubject = refreshed.subjects[0]?.subject ?? anySubject
     }
   }
 
-  if (!profile || !primarySubject) redirect('/onboarding')
+  // Last resort: if still no subject, use a stub so the lesson renders
+  if (!profile) redirect('/onboarding')
+  const resolvedSubject = primarySubject ?? { id: '', slug: 'python', name: 'Python' }
 
   // All enrolled subjects for the lesson sidebar
   const subjects = profile.subjects.map((ps) => ({
@@ -77,10 +88,10 @@ export default async function LearnPage() {
   }))
 
   // Fetch last 3 completed sessions for memory context
-  const pastSessions = await withRetry(() => prisma.learnSession.findMany({
+  const pastSessions = resolvedSubject.id ? await withRetry(() => prisma.learnSession.findMany({
     where: {
       userId: session.user.id,
-      subjectId: primarySubject.id,
+      subjectId: resolvedSubject.id,
       endedAt: { not: null },
     },
     orderBy: { startedAt: 'desc' },
@@ -90,7 +101,7 @@ export default async function LearnPage() {
         orderBy: { createdAt: 'asc' },
       },
     },
-  }))
+  })) : []
 
   let memoryContext: string | null = null
   let pastSessionsSummary: string | null = null
@@ -136,8 +147,8 @@ export default async function LearnPage() {
 
   return (
     <LessonScreen
-      subjectSlug={primarySubject.slug}
-      subjectName={primarySubject.name}
+      subjectSlug={resolvedSubject.slug}
+      subjectName={resolvedSubject.name}
       levelDescription={profile.selfDescription}
       voiceChoice={profile.voiceId ?? 'alexei'}
       teachingLanguage={teachingLang}
