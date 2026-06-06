@@ -8,14 +8,23 @@ export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
   })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+// Auto-migrate missing columns on startup (idempotent — safe to run every boot)
+async function ensureColumns() {
+  try {
+    await prisma.$executeRaw`
+      ALTER TABLE profiles ADD COLUMN IF NOT EXISTS country VARCHAR(10) DEFAULT 'global'
+    `
+    console.log('✅ DB columns verified')
+  } catch (e: any) {
+    console.log('DB column check:', e.message)
+  }
+}
+
+ensureColumns()
 
 /**
  * Retry wrapper for Prisma queries against Neon serverless.
