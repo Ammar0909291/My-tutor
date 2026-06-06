@@ -19,12 +19,56 @@ export default async function LearnPage() {
     },
   }))
 
-  if (!user?.onboardingCompleted) redirect('/onboarding')
+  // Auto-heal: if profile exists but flag not set, fix it
+  if (!user?.onboardingCompleted) {
+    if (user?.profile) {
+      await prisma.user.update({ where: { id: session.user.id }, data: { onboardingCompleted: true } })
+    } else {
+      redirect('/onboarding')
+    }
+  }
 
-  const profile = user?.profile
-  const primarySubject = profile?.subjects[0]?.subject
+  if (!user?.profile) redirect('/onboarding')
 
-  if (!profile || !primarySubject) redirect('/dashboard')
+  let profile = user.profile
+  let primarySubject = profile?.subjects[0]?.subject
+
+  // Auto-heal: profile has no subject linked — find any subject and link it
+  if (profile && !primarySubject) {
+    const anySubject = await prisma.subject.findFirst()
+    if (anySubject) {
+      await prisma.profileSubject.upsert({
+        where: { profileId_subjectId: { profileId: profile.id, subjectId: anySubject.id } },
+        update: {},
+        create: { profileId: profile.id, subjectId: anySubject.id },
+      })
+      // Ensure learning path exists
+      const existingPath = await prisma.learningPath.findFirst({ where: { userId: session.user.id, subjectId: anySubject.id } })
+      if (!existingPath) {
+        await prisma.learningPath.create({
+          data: {
+            userId: session.user.id,
+            subjectId: anySubject.id,
+            title: `${anySubject.name} Course`,
+            curriculum: { generated: false, steps: [] },
+            totalSteps: 0,
+            isActive: true,
+          },
+        }).catch(() => null)
+      }
+      // Re-fetch profile with subjects
+      const refreshed = await prisma.profile.findUnique({
+        where: { userId: session.user.id },
+        include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
+      })
+      if (refreshed) {
+        profile = refreshed
+        primarySubject = refreshed.subjects[0]?.subject
+      }
+    }
+  }
+
+  if (!profile || !primarySubject) redirect('/onboarding')
 
   // All enrolled subjects for the lesson sidebar
   const subjects = profile.subjects.map((ps) => ({
