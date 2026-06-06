@@ -134,7 +134,7 @@ interface Props {
 }
 
 // ─── Panel wrapper ────────────────────────────────────────────────────────────
-function Panel({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
+function Panel({ children, style, accentColor = '#F78166' }: { children: React.ReactNode; style?: React.CSSProperties; accentColor?: string }) {
   const [hovered, setHovered] = useState(false)
   return (
     <div
@@ -142,13 +142,13 @@ function Panel({ children, style }: { children: React.ReactNode; style?: React.C
       onMouseLeave={() => setHovered(false)}
       style={{
         background: '#0D1117',
-        border: `1px solid ${hovered ? 'rgba(247,129,102,0.3)' : '#21262D'}`,
+        border: `2px solid ${hovered ? accentColor + 'B3' : accentColor + '66'}`,
         borderRadius: 16,
-        boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+        boxShadow: `0 4px 24px rgba(0,0,0,0.4)${hovered ? `, 0 0 16px ${accentColor}18` : ''}`,
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        transition: 'border-color 200ms ease',
+        transition: 'border-color 200ms ease, box-shadow 200ms ease',
         ...style,
       }}
     >
@@ -253,6 +253,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     subjectSlug === 'c' ? `gcc ${filename} -o lesson && ./lesson` :
     subjectSlug === 'cpp' ? `g++ ${filename} -o lesson && ./lesson` :
     filename
+  const showTerminal = subjectSlug !== 'english'
   const studentAvatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName ?? 'Student')}&background=79C0FF&color=fff&bold=true&size=64`
 
   // Timer
@@ -715,7 +716,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       }}>
 
         {/* ══ PANEL 1 — CURRICULUM (25%) ════════════════════════════════ */}
-        <Panel style={{ overflow: 'hidden' }}>
+        <Panel style={{ overflow: 'hidden' }} accentColor="#F78166">
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             className={activeTab !== 'curriculum' ? 'hidden md:flex' : 'flex'}>
             {/* Header */}
@@ -794,7 +795,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         </Panel>
 
         {/* ══ PANEL 2 — CODE EDITOR (45%) ═══════════════════════════════ */}
-        <Panel>
+        <Panel accentColor="#79C0FF">
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             className={activeTab !== 'code' ? 'hidden md:flex' : 'flex'}>
             {/* Header */}
@@ -860,7 +861,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             </div>
 
             {/* Terminal toggle */}
-            <div
+            {showTerminal && <div
               onClick={() => setTerminalOpen((o) => !o)}
               style={{
                 height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -887,10 +888,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     : <><Play size={10} fill="currentColor" strokeWidth={0} />{teachingLanguage === 'ru' ? 'Запустить' : 'Run'}</>}
                 </button>
               )}
-            </div>
+            </div>}
 
             {/* Terminal panel */}
-            {terminalOpen && (
+            {showTerminal && terminalOpen && (
               <div style={{
                 height: 180, background: '#000', borderTop: '1px solid #21262D',
                 borderRadius: '0 0 16px 16px', display: 'flex', flexDirection: 'column', flexShrink: 0,
@@ -925,7 +926,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         </Panel>
 
         {/* ══ PANEL 3 — TUTOR CHAT (30%) ════════════════════════════════ */}
-        <Panel>
+        <Panel accentColor="#3FB950">
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             className={activeTab !== 'chat' ? 'hidden md:flex' : 'flex'}>
 

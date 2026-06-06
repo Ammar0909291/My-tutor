@@ -51,19 +51,31 @@ export async function POST(req: Request) {
       }
     }
 
-    const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
+    // Find subject — fall back to upsert with slug so onboarding works without seed
+    let subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
     if (!subject) {
-      return NextResponse.json({ success: false, error: 'Subject not found. Run the seed first.' }, { status: 404 })
+      const SLUG_TO_TYPE: Record<string, 'C'|'CPP'|'PYTHON'|'ENGLISH'> = {
+        c: 'C', cpp: 'CPP', python: 'PYTHON', english: 'ENGLISH',
+      }
+      const type = SLUG_TO_TYPE[subjectSlug]
+      if (!type) {
+        return NextResponse.json({ success: false, error: 'Invalid subject slug' }, { status: 400 })
+      }
+      subject = await prisma.subject.upsert({
+        where: { slug: subjectSlug },
+        update: {},
+        create: { slug: subjectSlug, name: subjectSlug.charAt(0).toUpperCase() + subjectSlug.slice(1), type },
+      })
     }
 
     const existingProfile = await prisma.profile.findUnique({ where: { userId: effectiveUserId } })
     if (existingProfile) {
       await prisma.profile.update({
         where: { userId: effectiveUserId },
-        data: { voiceId: voiceChoice, teachingLanguage },
+        data: { selfDescription, voiceId: voiceChoice, teachingLanguage },
       })
       await prisma.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
-      return NextResponse.json({ success: true, data: existingProfile })
+      return NextResponse.json({ success: true })
     }
 
     // Run profile + learning path in a transaction; subscription separately (best-effort)
@@ -75,16 +87,16 @@ export async function POST(req: Request) {
           selfDescription,
           voiceId: voiceChoice,
           teachingLanguage,
-          subjects: { create: { subjectId: subject.id } },
+          subjects: { create: { subjectId: subject!.id } },
         },
       })
 
       const learningPath = await tx.learningPath.create({
         data: {
           userId: effectiveUserId,
-          subjectId: subject.id,
-          title: `${subject.name} Course`,
-          curriculum: { generated: false, steps: [], note: 'Curriculum will be generated at the start of first lesson' },
+          subjectId: subject!.id,
+          title: `${subject!.name} Course`,
+          curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
           totalSteps: 0,
           isActive: true,
         },

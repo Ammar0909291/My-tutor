@@ -133,6 +133,8 @@ export const translations = {
     ob_s3_preview: '▶ Нажми чтобы услышать',
     ob_finish: 'Начать обучение →',
     ob_saving: 'Сохраняем...',
+    ob_error_generic: 'Не удалось сохранить. Попробуй ещё раз.',
+    ob_error_network: 'Ошибка сети. Проверь интернет и попробуй снова.',
 
     /* ── Dashboard ── */
     dash_greeting: 'Привет',
@@ -444,6 +446,8 @@ export const translations = {
     ob_s3_preview: '▶ Click to hear a sample',
     ob_finish: 'Start learning →',
     ob_saving: 'Saving...',
+    ob_error_generic: 'Could not save. Please try again.',
+    ob_error_network: 'Network error. Check your connection and try again.',
 
     /* ── Dashboard ── */
     dash_greeting: 'Hey',
@@ -755,6 +759,8 @@ export const translations = {
     ob_s3_preview: '▶ सुनने के लिए दबाएं',
     ob_finish: 'पढ़ाई शुरू करें →',
     ob_saving: 'सहेज रहे हैं...',
+    ob_error_generic: 'सहेजा नहीं जा सका। कृपया पुनः प्रयास करें।',
+    ob_error_network: 'नेटवर्क त्रुटि। कनेक्शन जांचें और पुनः प्रयास करें।',
 
     /* ── Dashboard ── */
     dash_greeting: 'नमस्ते',
