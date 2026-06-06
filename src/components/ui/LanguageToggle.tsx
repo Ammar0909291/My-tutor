@@ -17,11 +17,16 @@ const LangContext = createContext<LangContextValue>({
 })
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => {
-    if (typeof window === 'undefined') return 'en'
+  const [mounted, setMounted] = useState(false)
+  const [lang, setLangState] = useState<Lang>('en')
+
+  useEffect(() => {
     const stored = localStorage.getItem('mytutor_lang') as Lang | null
-    return stored && ['ru', 'en', 'hi'].includes(stored) ? stored : 'en'
-  })
+    if (stored && ['ru', 'en', 'hi'].includes(stored)) setLangState(stored)
+    setMounted(true)
+  }, [])
+
+  const effectiveLang = mounted ? lang : 'en'
 
   const setLang = (newLang: Lang) => {
     setLangState(newLang)
@@ -34,13 +39,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }
 
   const t = (key: TranslationKey): string => {
-    // UI is Russian for ru, English for en/hi (hi teaches in Hinglish but UI stays English)
-    const uiLang: 'ru' | 'en' = lang === 'ru' ? 'ru' : 'en'
+    const uiLang: 'ru' | 'en' = effectiveLang === 'ru' ? 'ru' : 'en'
     return tFn(uiLang, key)
   }
 
   return (
-    <LangContext.Provider value={{ lang, setLang, t }}>
+    <LangContext.Provider value={{ lang: effectiveLang, setLang, t }}>
       {children}
     </LangContext.Provider>
   )
