@@ -13,6 +13,19 @@ export async function speakText(
   if (typeof window === 'undefined') return
   stopSpeaking()
 
+  const browserFallback = () => {
+    try {
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = lang === 'ru' ? 'ru-RU' : lang === 'hi' ? 'hi-IN' : 'en-US'
+      utterance.rate = 0.9
+      utterance.onend = () => onEnd?.()
+      window.speechSynthesis.cancel()
+      window.speechSynthesis.speak(utterance)
+    } catch {
+      onEnd?.()
+    }
+  }
+
   try {
     const response = await fetch('/api/tts', {
       method: 'POST',
@@ -21,8 +34,8 @@ export async function speakText(
     })
 
     if (!response.ok) {
-      console.error('TTS request failed:', response.status)
-      onEnd?.()
+      console.warn('TTS request failed:', response.status, '— falling back to browser TTS')
+      browserFallback()
       return
     }
 
@@ -39,13 +52,14 @@ export async function speakText(
     audio.onerror = () => {
       URL.revokeObjectURL(url)
       currentAudio = null
-      onEnd?.()
+      console.warn('Audio playback error — falling back to browser TTS')
+      browserFallback()
     }
 
     await audio.play()
   } catch (error: any) {
-    console.error('TTS playback error:', error.message)
-    onEnd?.()
+    console.warn('TTS error:', error.message, '— falling back to browser TTS')
+    browserFallback()
   }
 }
 
@@ -54,6 +68,9 @@ export function stopSpeaking(): void {
     currentAudio.pause()
     try { URL.revokeObjectURL(currentAudio.src) } catch {}
     currentAudio = null
+  }
+  if (typeof window !== 'undefined') {
+    window.speechSynthesis.cancel()
   }
 }
 

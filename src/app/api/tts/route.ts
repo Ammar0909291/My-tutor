@@ -5,15 +5,15 @@ import { cleanTextForTTS } from '@/lib/tts-cleaner'
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
 
 const VOICE_MAP: Record<string, string> = {
-  ru_male:   'Fritz-PlayAI',
-  ru_female: 'Celeste-PlayAI',
-  ru_warm:   'Arista-PlayAI',
-  en_male:   'Fritz-PlayAI',
-  en_female: 'Celeste-PlayAI',
-  en_warm:   'Arista-PlayAI',
-  hi_male:   'Fritz-PlayAI',
-  hi_female: 'Celeste-PlayAI',
-  hi_warm:   'Arista-PlayAI',
+  ru_male:   'aoede',
+  ru_female: 'aoede',
+  ru_warm:   'aoede',
+  en_male:   'aoede',
+  en_female: 'aoede',
+  en_warm:   'aoede',
+  hi_male:   'aoede',
+  hi_female: 'aoede',
+  hi_warm:   'aoede',
 }
 
 // ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
@@ -51,7 +51,7 @@ async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
 
 // ─── Groq TTS ─────────────────────────────────────────────────────────────────
 async function groqTTS(text: string, selectedVoice: string): Promise<Buffer | null> {
-  const models = ['playai-tts', 'tts-1']
+  const models = ['canopylabs/orpheus-v1-english', 'playai-tts', 'tts-1']
   for (const model of models) {
     try {
       const response = await groq.audio.speech.create({ model, voice: selectedVoice, input: text, response_format: 'mp3' })
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
     console.log('TTS request:', { lang, voice, country, textLength: clean.length })
 
     const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
-    const selectedGroqVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
+    const selectedGroqVoice = VOICE_MAP[voiceKey] || 'aoede'
 
     let buffer: Buffer | null = null
 
