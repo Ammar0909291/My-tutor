@@ -8,6 +8,7 @@ export async function speakText(
   lang: TeachingLang = 'en',
   voice: VoiceType = 'female',
   onEnd?: () => void,
+  country = 'global',
 ): Promise<void> {
   if (typeof window === 'undefined') return
   stopSpeaking()
@@ -16,7 +17,7 @@ export async function speakText(
     const response = await fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, lang, voice }),
+      body: JSON.stringify({ text, lang, voice, country }),
     })
 
     if (!response.ok) {

@@ -3,7 +3,8 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { generateAIResponse, buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
+import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
+import { routeAI } from '@/lib/ai/router'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -66,6 +67,7 @@ export async function POST(req: Request) {
     }
 
     const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
+    const country = (profile as any)?.country ?? 'global'
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.selfDescription ?? 'level unknown',
@@ -83,9 +85,10 @@ export async function POST(req: Request) {
       }))
 
     try {
-      const text = await generateAIResponse(
+      const text = await routeAI(
         [...historyMessages, { role: 'user', content: message }],
         systemPrompt,
+        country,
         1024,
         teachingLang,
       )

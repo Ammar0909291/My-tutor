@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, Check, ChevronDown, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
+import { useCountry, type Country } from '@/components/Providers'
 
 const STEPS = ['how1', 'how2', 'how3', 'how4'] as const
 
@@ -30,10 +31,24 @@ const FAQ_KEYS = [
 
 const AVATAR_COLORS = ['#F78166', '#79C0FF', '#56D364', '#E3B341', '#D2A8FF']
 
+const COUNTRY_OPTIONS: { key: Country; flag: string; name: string; desc: string; color: string }[] = [
+  { key: 'ru',     flag: '🇷🇺', name: 'Россия',  desc: 'Полностью на русском', color: '#F78166' },
+  { key: 'in',     flag: '🇮🇳', name: 'India',   desc: 'Hinglish teaching',    color: '#3FB950' },
+  { key: 'global', flag: '🌍', name: 'Global',  desc: 'English teaching',     color: '#79C0FF' },
+]
+
 export default function HomePage() {
-  const { t, lang: _lang } = useLanguage() // _lang subscription forces re-render on language change
+  const { t, lang: _lang, setLang } = useLanguage()
+  const { country, setCountry } = useCountry()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
+
+  function handleCountrySelect(c: Country) {
+    setCountry(c)
+    if (c === 'ru') setLang('ru')
+    else if (c === 'in') setLang('hi')
+    else setLang('en')
+  }
 
   return (
     <div suppressHydrationWarning className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-base)' }}>
@@ -121,6 +136,59 @@ export default function HomePage() {
           </div>
         )}
       </nav>
+
+      {/* ── Country selector ─────────────────────────────────────────────── */}
+      <section className="relative z-10" style={{ paddingTop: 72, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center' }}>
+        <p style={{ fontSize: 13, color: '#484F58', marginBottom: 20 }}>
+          Select your country · Выберите страну · अपना देश चुनें
+        </p>
+        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+          {COUNTRY_OPTIONS.map((opt) => {
+            const isSelected = country === opt.key
+            return (
+              <button
+                key={opt.key}
+                onClick={() => handleCountrySelect(opt.key)}
+                style={{
+                  width: 180, cursor: 'pointer', position: 'relative',
+                  background: isSelected ? `${opt.color}0F` : '#0D1117',
+                  border: `2px solid ${isSelected ? opt.color : '#21262D'}`,
+                  borderRadius: 16, padding: '20px 16px', textAlign: 'center',
+                  transition: 'all 200ms', outline: 'none',
+                  transform: isSelected ? 'scale(1.02)' : 'scale(1)',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isSelected) {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = `${opt.color}88`
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isSelected) {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = '#21262D'
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'
+                  }
+                }}
+              >
+                {isSelected && (
+                  <div style={{
+                    position: 'absolute', top: 10, right: 10,
+                    width: 20, height: 20, borderRadius: '50%',
+                    background: opt.color, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 11, color: '#fff', fontWeight: 700,
+                  }}>✓</div>
+                )}
+                <div style={{ fontSize: 48, lineHeight: 1 }}>{opt.flag}</div>
+                <p style={{ fontSize: 18, fontWeight: 700, color: '#E6EDF3', marginTop: 8 }}>{opt.name}</p>
+                <p style={{ fontSize: 13, color: '#7D8590', marginTop: 4 }}>{opt.desc}</p>
+              </button>
+            )
+          })}
+        </div>
+        <p style={{ fontSize: 12, color: '#484F58', marginTop: 12 }}>
+          You can change this anytime in settings
+        </p>
+      </section>
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center px-5 pt-[60px] z-10">

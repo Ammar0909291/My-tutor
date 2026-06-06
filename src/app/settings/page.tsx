@@ -2,10 +2,18 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { useCountry, type Country } from '@/components/Providers'
 import type { TeachingLang } from '@/lib/tts'
 
 type VoiceOption = { key: string; label: string }
 type LangOption = { key: TeachingLang; icon: string; label: string }
+type CountryOption = { key: Country; flag: string; name: string; desc: string; color: string }
+
+const COUNTRY_OPTIONS: CountryOption[] = [
+  { key: 'ru',     flag: '🇷🇺', name: 'Россия', desc: 'YandexGPT · SpeechKit', color: '#F78166' },
+  { key: 'in',     flag: '🇮🇳', name: 'India',  desc: 'Groq · Hinglish',      color: '#3FB950' },
+  { key: 'global', flag: '🌍', name: 'Global', desc: 'Groq · English',        color: '#79C0FF' },
+]
 
 const VOICE_OPTIONS: VoiceOption[] = [
   { key: 'male',   label: 'Male' },
@@ -36,6 +44,7 @@ interface ProfileData {
 
 export default function SettingsPage() {
   const { t, lang, setLang } = useLanguage()
+  const { country, setCountry } = useCountry()
   const [data, setData] = useState<SettingsData | null>(null)
   const [voiceId, setVoiceId] = useState('male')
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
@@ -303,6 +312,42 @@ export default function SettingsPage() {
               </button>
             ))}
           </div>
+        </Section>
+
+        {/* Region */}
+        <Section label={lang === 'ru' ? 'Ваш регион' : 'Your Region'}>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            {COUNTRY_OPTIONS.map((opt) => {
+              const isSelected = country === opt.key
+              return (
+                <button
+                  key={opt.key}
+                  onClick={() => {
+                    setCountry(opt.key)
+                    if (opt.key === 'ru') setLang('ru')
+                    else if (opt.key === 'in') setLang('hi')
+                    else setLang('en')
+                  }}
+                  style={{
+                    flex: 1, minWidth: 100, cursor: 'pointer', position: 'relative',
+                    background: isSelected ? `${opt.color}15` : 'rgba(255,255,255,0.04)',
+                    border: `2px solid ${isSelected ? opt.color : 'rgba(255,255,255,0.08)'}`,
+                    borderRadius: 14, padding: '14px 12px', textAlign: 'center',
+                    transition: 'all 200ms', outline: 'none',
+                  }}>
+                  {isSelected && (
+                    <div style={{ position: 'absolute', top: 8, right: 8, width: 16, height: 16, borderRadius: '50%', background: opt.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 700 }}>✓</div>
+                  )}
+                  <div style={{ fontSize: 28 }}>{opt.flag}</div>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#E6EDF3', marginTop: 6 }}>{opt.name}</p>
+                  <p style={{ fontSize: 11, color: '#7D8590', marginTop: 3 }}>{opt.desc}</p>
+                </button>
+              )
+            })}
+          </div>
+          <p style={{ fontSize: 11, color: '#484F58', marginTop: 10 }}>
+            {lang === 'ru' ? 'Регион определяет AI-репетитора и голос' : 'Changing region affects AI tutor and voice'}
+          </p>
         </Section>
 
         {/* Account */}

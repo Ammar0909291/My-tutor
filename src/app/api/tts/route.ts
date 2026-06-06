@@ -16,10 +16,58 @@ const VOICE_MAP: Record<string, string> = {
   hi_warm:   'Arista-PlayAI',
 }
 
+// ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
+async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
+  if (!process.env.YANDEX_API_KEY || !process.env.YANDEX_FOLDER_ID) return null
+
+  const yandexVoice = voice === 'female' ? 'alena' : voice === 'warm' ? 'jane' : 'filipp'
+
+  try {
+    const params = new URLSearchParams({
+      text,
+      lang: 'ru-RU',
+      voice: yandexVoice,
+      format: 'mp3',
+      folderId: process.env.YANDEX_FOLDER_ID,
+    })
+    const response = await fetch(
+      `https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize?${params}`,
+      {
+        method: 'POST',
+        headers: { Authorization: `Api-Key ${process.env.YANDEX_API_KEY}` },
+        signal: AbortSignal.timeout(15000),
+      },
+    )
+    if (!response.ok) {
+      console.error('Yandex TTS error:', response.status)
+      return null
+    }
+    return Buffer.from(await response.arrayBuffer())
+  } catch (e: any) {
+    console.error('Yandex TTS exception:', e.message)
+    return null
+  }
+}
+
+// ─── Groq TTS ─────────────────────────────────────────────────────────────────
+async function groqTTS(text: string, selectedVoice: string): Promise<Buffer | null> {
+  const models = ['playai-tts', 'tts-1']
+  for (const model of models) {
+    try {
+      const response = await groq.audio.speech.create({ model, voice: selectedVoice, input: text, response_format: 'mp3' })
+      const buf = Buffer.from(await response.arrayBuffer())
+      console.log('TTS success with model:', model)
+      return buf
+    } catch (e: any) {
+      console.error('TTS failed with model:', model, e.message)
+    }
+  }
+  return null
+}
+
 export async function POST(req: Request) {
   try {
-    // Audio is not sensitive data — auth is not required to synthesize speech.
-    const { text, lang = 'en', voice = 'female' } = await req.json()
+    const { text, lang = 'en', voice = 'female', country = 'global' } = await req.json()
     if (!text) return NextResponse.json({ error: 'No text' }, { status: 400 })
 
     const clean = cleanTextForTTS(text)
@@ -28,22 +76,23 @@ export async function POST(req: Request) {
     console.log('=== TTS CALLED ===')
     console.log('GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY)
     console.log('Input text length:', text?.length)
-    console.log('TTS request:', { lang, voice, textLength: clean.length })
+    console.log('TTS request:', { lang, voice, country, textLength: clean.length })
 
     const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
-    const selectedVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
+    const selectedGroqVoice = VOICE_MAP[voiceKey] || 'Celeste-PlayAI'
 
-    const models = ['playai-tts', 'tts-1']
     let buffer: Buffer | null = null
-    for (const model of models) {
-      try {
-        const response = await groq.audio.speech.create({ model, voice: selectedVoice, input: clean, response_format: 'mp3' })
-        buffer = Buffer.from(await response.arrayBuffer())
-        console.log('TTS success with model:', model)
-        break
-      } catch (e: any) {
-        console.error('TTS failed with model:', model, e.message)
+
+    if (country === 'ru' && process.env.YANDEX_API_KEY) {
+      console.log('→ TTS: Yandex SpeechKit')
+      buffer = await yandexTTS(clean, voice)
+      if (!buffer) {
+        console.log('Yandex TTS failed, falling back to Groq')
+        buffer = await groqTTS(clean, selectedGroqVoice)
       }
+    } else {
+      console.log('→ TTS: Groq')
+      buffer = await groqTTS(clean, selectedGroqVoice)
     }
 
     if (!buffer) {

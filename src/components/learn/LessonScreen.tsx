@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
+import { useCountry } from '@/components/Providers'
 import { speakText, stopSpeaking, type VoiceType, type TeachingLang } from '@/lib/tts'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
@@ -177,6 +178,7 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
 // ─── Component ────────────────────────────────────────────────────────────────
 export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', memoryContext, pastSessionsSummary, displayName, userId }: Props) {
   const { t, lang: uiLang } = useLanguage()
+  const { country } = useCountry()
 
   console.log('Teaching language:', teachingLanguage, '| UI language:', uiLang)
 
@@ -321,7 +323,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     console.log('Tutor responded, calling TTS...', { textLength: text.length, lang: teachingLanguage, voice: voiceType })
     speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    })
+    }, country)
     console.log('TTS called')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teachingLanguage, voiceType])

@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db/prisma'
 const schema = z.object({
   voiceId: z.string().optional(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
+  country: z.enum(['ru', 'in', 'global']).optional(),
 })
 
 export async function GET() {
@@ -19,6 +20,7 @@ export async function GET() {
     data: {
       voiceId: profile?.voiceId ?? 'male',
       teachingLanguage: profile?.teachingLanguage ?? 'en',
+      country: (profile as any)?.country ?? 'global',
     },
   })
 }
@@ -29,11 +31,12 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { voiceId, teachingLanguage } = schema.parse(body)
+    const { voiceId, teachingLanguage, country } = schema.parse(body)
 
-    const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi' } = {}
+    const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi'; country?: string } = {}
     if (voiceId !== undefined) data.voiceId = voiceId
     if (teachingLanguage !== undefined) data.teachingLanguage = teachingLanguage
+    if (country !== undefined) data.country = country
 
     if (Object.keys(data).length === 0) return NextResponse.json({ success: true })
 
@@ -47,6 +50,7 @@ export async function PATCH(req: Request) {
         selfDescription: 'Beginner',
         voiceId: data.voiceId ?? 'male',
         teachingLanguage: data.teachingLanguage ?? 'en',
+        country: data.country ?? 'global',
       },
     })
     return NextResponse.json({ success: true })
