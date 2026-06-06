@@ -68,12 +68,34 @@ export async function POST(req: Request) {
       })
     }
 
-    const existingProfile = await prisma.profile.findUnique({ where: { userId: effectiveUserId } })
+    const existingProfile = await prisma.profile.findUnique({
+      where: { userId: effectiveUserId },
+      include: { subjects: true },
+    })
     if (existingProfile) {
       await prisma.profile.update({
         where: { userId: effectiveUserId },
         data: { selfDescription, voiceId: voiceChoice, teachingLanguage },
       })
+      // Ensure subject is linked (may be missing if onboarding was interrupted)
+      const alreadyLinked = existingProfile.subjects.some((s) => s.subjectId === subject!.id)
+      if (!alreadyLinked) {
+        await prisma.profileSubject.create({ data: { profileId: existingProfile.id, subjectId: subject!.id } })
+      }
+      // Ensure learning path exists for this subject
+      const existingPath = await prisma.learningPath.findFirst({ where: { userId: effectiveUserId, subjectId: subject!.id } })
+      if (!existingPath) {
+        await prisma.learningPath.create({
+          data: {
+            userId: effectiveUserId,
+            subjectId: subject!.id,
+            title: `${subject!.name} Course`,
+            curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
+            totalSteps: 0,
+            isActive: true,
+          },
+        })
+      }
       await prisma.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
       return NextResponse.json({ success: true })
     }
