@@ -81,7 +81,14 @@ export default async function DashboardPage() {
 
   const referralData = await (prisma as any).referral?.count({ where: { referrerId: session.user.id, used: true } }).catch(() => 0) ?? 0
 
-  if (!user?.onboardingCompleted) redirect('/onboarding')
+  // If profile exists but flag not set, fix the flag and continue rather than looping
+  if (!user?.onboardingCompleted) {
+    if (user?.profile) {
+      await prisma.user.update({ where: { id: session.user.id }, data: { onboardingCompleted: true } })
+    } else {
+      redirect('/onboarding')
+    }
+  }
 
   const profile = user.profile
   const lang = ((profile?.teachingLanguage ?? 'en') as Lang)

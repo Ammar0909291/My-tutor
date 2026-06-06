@@ -12,7 +12,7 @@ export default async function OnboardingPage() {
     select: { onboardingCompleted: true, name: true, profile: { select: { id: true } } },
   })
 
-  if (user?.onboardingCompleted || user?.profile) redirect('/dashboard')
+  if (user?.onboardingCompleted) redirect('/dashboard')
 
   return <OnboardingWizard userName={user?.name ?? session.user.name} />
 }
