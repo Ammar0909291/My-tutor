@@ -6,10 +6,13 @@ import { sendPasswordResetEmail } from '@/lib/email'
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 const EXPIRY_MS = 60 * 60 * 1000 // 1 hour
 
-const SAFE_RESPONSE = NextResponse.json({
-  success: true,
-  message: "If that email exists, a link was sent",
-})
+// Must be a function — NextResponse bodies are single-use streams and cannot be shared across requests
+function safeResponse() {
+  return NextResponse.json({
+    success: true,
+    message: 'If that email exists, a link was sent',
+  })
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,8 +27,7 @@ export async function POST(req: NextRequest) {
 
     const user = await prisma.user.findUnique({ where: { email: normalized } })
     if (!user || !user.passwordHash) {
-      // Don't reveal whether the email exists
-      return SAFE_RESPONSE
+      return safeResponse()
     }
 
     const token = randomBytes(32).toString('hex')
@@ -39,14 +41,12 @@ export async function POST(req: NextRequest) {
 
     const result = await sendPasswordResetEmail(normalized, token)
     if (!result.success) {
-      // SMTP not configured — still return success so the page shows the confirmation state.
-      // The reset link is logged to console for local dev.
-      return SAFE_RESPONSE
+      console.error('[forgot-password] Email send failed:', result.error)
     }
 
-    return SAFE_RESPONSE
+    return safeResponse()
   } catch (err) {
     console.error('[forgot-password]', err)
-    return SAFE_RESPONSE
+    return safeResponse()
   }
 }
