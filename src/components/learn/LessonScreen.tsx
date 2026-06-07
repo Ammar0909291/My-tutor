@@ -223,6 +223,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [curriculumLessons, setCurriculumLessons] = useState<CurriculumLesson[]>([])
   const [curriculumProgress, setCurriculumProgress] = useState<CurriculumProgress>({ currentLesson: 1, completedLessons: [] })
   const [xpCelebration, setXpCelebration] = useState(false)
+  const [expandedUnits, setExpandedUnits] = useState<number[]>([1])
 
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
@@ -286,8 +287,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       .then((r) => r.json())
       .then((data) => {
         if (data.success) {
-          setCurriculumLessons(data.lessons ?? [])
-          setCurriculumProgress(data.progress ?? { currentLesson: 1, completedLessons: [] })
+          const lessons: CurriculumLesson[] = data.lessons ?? []
+          const progress: CurriculumProgress = data.progress ?? { currentLesson: 1, completedLessons: [] }
+          setCurriculumLessons(lessons)
+          setCurriculumProgress(progress)
+          // Auto-expand the unit containing the current lesson
+          const currentLes = lessons.find((l) => l.order === progress.currentLesson)
+          if (currentLes) setExpandedUnits([currentLes.unit])
         }
       })
       .catch(() => {})
@@ -426,6 +432,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Error: ${msg}`, streaming: false } : m))
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId])
+
+  // Navigate to a previous lesson for review
+  const navigateToLesson = useCallback(async (lessonOrder: number) => {
+    if (lessonOrder >= curriculumProgress.currentLesson) return
+    const lesson = curriculumLessons.find((l) => l.order === lessonOrder)
+    if (!lesson || !sessionId) return
+    const reviewMsg = teachingLanguage === 'ru'
+      ? `Давай повторим урок ${lessonOrder}: ${lesson.lessonTitle}`
+      : teachingLanguage === 'hi'
+      ? `Lesson ${lessonOrder} repeat karte hain: ${lesson.lessonTitle}`
+      : `Let's review lesson ${lessonOrder}: ${lesson.lessonTitle}`
+    await sendMessage(sessionId, reviewMsg, true)
+  }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, teachingLanguage, sendMessage])
 
   // Session init + lifecycle
   useEffect(() => { sessionIdRef.current = sessionId }, [sessionId])
@@ -603,7 +622,22 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
   const nextLessonData = curriculumLessons.find((l) => l.order === (curriculumProgress.currentLesson + 1)) ?? null
   const totalLessons = curriculumLessons.length
-  const xpProgress = totalLessons > 0 ? Math.round((curriculumProgress.currentLesson / totalLessons) * 100) : 0
+  const xpProgress = totalLessons > 0 ? Math.round((curriculumProgress.completedLessons.length / totalLessons) * 100) : 0
+
+  // Group lessons into units for the roadmap tree
+  const curriculumUnits = (() => {
+    const unitMap = new Map<number, { number: number; title: string; lessons: CurriculumLesson[]; completedCount: number; totalLessons: number }>()
+    for (const lesson of curriculumLessons) {
+      if (!unitMap.has(lesson.unit)) {
+        unitMap.set(lesson.unit, { number: lesson.unit, title: lesson.unitTitle, lessons: [], completedCount: 0, totalLessons: 0 })
+      }
+      const unit = unitMap.get(lesson.unit)!
+      unit.lessons.push(lesson)
+      unit.totalLessons++
+      if (curriculumProgress.completedLessons.includes(lesson.order)) unit.completedCount++
+    }
+    return Array.from(unitMap.values()).sort((a, b) => a.number - b.number)
+  })()
 
   const backLabel = teachingLanguage === 'ru' ? '← Главная' : '← Home'
 
@@ -723,7 +757,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         padding: 12,
       }}>
 
-        {/* ══ PANEL 1 — CURRICULUM (25%) ════════════════════════════════ */}
+        {/* ══ PANEL 1 — CURRICULUM ROADMAP (25%) ══════════════════════════ */}
         <Panel style={{ overflow: 'hidden' }} accentColor="#F78166">
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             className={activeTab !== 'curriculum' ? 'hidden md:flex' : 'flex'}>
@@ -731,74 +765,136 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             <PanelHeader>
               <span style={{ fontSize: 14 }}>📚</span>
               <span style={{ fontSize: 12, fontWeight: 600, color: '#E6EDF3', flex: 1 }}>
-                {teachingLanguage === 'ru' ? 'Программа урока' : 'Lesson Plan'}
+                {teachingLanguage === 'ru' ? 'Программа' : 'Roadmap'}
               </span>
               <span style={{ padding: '2px 8px', borderRadius: 12, fontSize: 10, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>
                 {badge.label}
               </span>
             </PanelHeader>
 
-            {/* Content scrollable */}
-            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-
-              {/* Current lesson */}
-              <div style={{ padding: 16 }}>
-                <span style={{ display: 'inline-block', padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700, background: 'rgba(247,129,102,0.15)', color: '#F78166', border: '1px solid rgba(247,129,102,0.3)' }}>
-                  {teachingLanguage === 'ru' ? `Урок ${curriculumProgress.currentLesson}` : `Lesson ${curriculumProgress.currentLesson}`}
-                </span>
-                <p style={{ fontSize: 15, fontWeight: 600, color: '#E6EDF3', marginTop: 8, lineHeight: 1.4 }}>
-                  {currentLessonData?.lessonTitle ?? subjectName}
+            {/* Goal card for current lesson */}
+            {currentLessonData?.lessonGoal && (
+              <div style={{ padding: '10px 12px', borderBottom: '1px solid #21262D', background: 'rgba(247,129,102,0.05)' }}>
+                <p style={{ fontSize: 10, color: '#F78166', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+                  🎯 {teachingLanguage === 'ru' ? 'Цель' : 'Goal'}
                 </p>
-                {currentLessonData?.unitTitle && (
-                  <p style={{ fontSize: 12, color: '#8B949E', marginTop: 4 }}>{currentLessonData.unitTitle}</p>
-                )}
-
-                {/* Goal card */}
-                {currentLessonData?.lessonGoal && (
-                  <div style={{ marginTop: 12, background: 'rgba(247,129,102,0.08)', border: '1px solid rgba(247,129,102,0.2)', borderRadius: 10, padding: '10px 12px' }}>
-                    <p style={{ fontSize: 10, color: '#F78166', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
-                      🎯 {teachingLanguage === 'ru' ? 'Цель урока' : 'Lesson Goal'}
-                    </p>
-                    <p style={{ fontSize: 12, color: '#E6EDF3', marginTop: 4, lineHeight: 1.5 }}>{currentLessonData.lessonGoal}</p>
-                  </div>
-                )}
+                <p style={{ fontSize: 11, color: '#E6EDF3', marginTop: 3, lineHeight: 1.4 }}>{currentLessonData.lessonGoal}</p>
               </div>
+            )}
 
-              {/* Progress */}
-              {totalLessons > 0 && (
-                <div style={{ padding: '12px 16px', borderTop: '1px solid #21262D' }}>
-                  <p style={{ fontSize: 10, color: '#6E7681', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                    {teachingLanguage === 'ru' ? 'Прогресс' : 'Progress'}
-                  </p>
-                  <div style={{ marginTop: 8, height: 6, borderRadius: 3, background: '#21262D', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', width: `${xpProgress}%`, background: 'linear-gradient(90deg, #F78166, #FF9E88)', borderRadius: 3, transition: 'width 600ms ease' }} />
-                  </div>
-                  <p style={{ fontSize: 11, color: '#8B949E', marginTop: 6, textAlign: 'right' }}>
-                    {teachingLanguage === 'ru' ? `Урок ${curriculumProgress.currentLesson} из ${totalLessons}` : `Lesson ${curriculumProgress.currentLesson} of ${totalLessons}`}
-                  </p>
+            {/* Curriculum tree */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '8px 0' }}>
+              {curriculumUnits.length === 0 ? (
+                <div style={{ padding: 16, fontSize: 12, color: '#484F58', textAlign: 'center' }}>
+                  {teachingLanguage === 'ru' ? 'Загрузка программы...' : 'Loading curriculum...'}
                 </div>
-              )}
-
-              {/* XP row */}
-              <div style={{ padding: '12px 16px', borderTop: '1px solid #21262D', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 12, color: '#8B949E' }}>⚡ {teachingLanguage === 'ru' ? 'XP за урок' : 'Session XP'}</span>
-                <span style={{ padding: '2px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700, background: 'rgba(247,129,102,0.12)', color: '#F78166', border: '1px solid rgba(247,129,102,0.25)' }}>+10 XP</span>
-              </div>
-
-              {/* Next lesson */}
-              {nextLessonData && (
-                <div style={{ padding: '0 16px 16px', borderTop: '1px solid #21262D', paddingTop: 12 }}>
-                  <p style={{ fontSize: 10, color: '#6E7681', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                    {teachingLanguage === 'ru' ? 'Следующий урок' : 'Next lesson'}
-                  </p>
-                  <div style={{ marginTop: 8, background: '#161B22', border: '1px solid #21262D', borderRadius: 10, padding: '10px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 12, color: '#E6EDF3' }}>{nextLessonData.lessonTitle}</span>
-                    <span style={{ color: '#484F58', fontSize: 14 }}>→</span>
+              ) : curriculumUnits.map((unit) => (
+                <div key={unit.number}>
+                  {/* Unit header */}
+                  <div
+                    onClick={() => setExpandedUnits((prev) =>
+                      prev.includes(unit.number) ? prev.filter((n) => n !== unit.number) : [...prev, unit.number]
+                    )}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 6,
+                      padding: '7px 12px', cursor: 'pointer',
+                      borderBottom: '1px solid #21262D',
+                      background: 'rgba(22,27,34,0.5)',
+                    }}
+                  >
+                    <span style={{
+                      fontSize: 9, color: '#484F58', flexShrink: 0,
+                      transform: expandedUnits.includes(unit.number) ? 'rotate(90deg)' : 'none',
+                      transition: 'transform 200ms', display: 'inline-block',
+                    }}>▶</span>
+                    <span style={{
+                      background: 'rgba(247,129,102,0.15)', color: '#F78166',
+                      borderRadius: 4, padding: '1px 5px', fontSize: 9, fontWeight: 700, flexShrink: 0,
+                    }}>U{unit.number}</span>
+                    <span style={{
+                      fontSize: 10, fontWeight: 600, color: '#8B949E',
+                      textTransform: 'uppercase', letterSpacing: '0.04em', flex: 1,
+                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    }}>{unit.title}</span>
+                    <span style={{ fontSize: 10, color: '#484F58', flexShrink: 0 }}>
+                      {unit.completedCount}/{unit.totalLessons}
+                    </span>
                   </div>
-                </div>
-              )}
 
+                  {/* Lessons list */}
+                  {expandedUnits.includes(unit.number) && (
+                    <div style={{ paddingLeft: 8, paddingBottom: 4 }}>
+                      {unit.lessons.map((lesson) => {
+                        const isCompleted = curriculumProgress.completedLessons.includes(lesson.order)
+                        const isCurrent = lesson.order === curriculumProgress.currentLesson
+                        const isPrevious = lesson.order < curriculumProgress.currentLesson
+                        const canNavigate = (isCompleted || isPrevious) && !isCurrent
+                        return (
+                          <div
+                            key={lesson.order}
+                            onClick={() => canNavigate && navigateToLesson(lesson.order)}
+                            style={{
+                              display: 'flex', alignItems: 'flex-start', gap: 6,
+                              padding: '5px 8px', borderRadius: 6,
+                              cursor: canNavigate ? 'pointer' : 'default',
+                              background: isCurrent ? 'rgba(247,129,102,0.1)' : 'transparent',
+                              border: isCurrent ? '1px solid rgba(247,129,102,0.3)' : '1px solid transparent',
+                              marginBottom: 2, transition: 'all 150ms',
+                            }}
+                          >
+                            <span style={{
+                              fontSize: 11, marginTop: 1, flexShrink: 0,
+                              color: isCompleted ? '#3FB950' : isCurrent ? '#F78166' : '#484F58',
+                            }}>
+                              {isCompleted ? '✅' : isCurrent ? '→' : '○'}
+                            </span>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{
+                                fontSize: 11, lineHeight: 1.3,
+                                fontWeight: isCurrent ? 600 : 400,
+                                color: isCompleted ? '#6E7681'
+                                  : isCurrent ? '#F78166'
+                                  : isPrevious ? '#8B949E'
+                                  : '#484F58',
+                                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                              }}>
+                                {lesson.order}. {lesson.lessonTitle}
+                              </div>
+                              {isCurrent && (
+                                <div style={{ fontSize: 9, color: '#484F58', marginTop: 1 }}>
+                                  {teachingLanguage === 'ru' ? 'Текущий' : 'Current'}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
+
+            {/* Overall progress bar */}
+            {totalLessons > 0 && (
+              <div style={{ padding: '10px 12px', borderTop: '1px solid #21262D', flexShrink: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
+                  <span style={{ fontSize: 10, color: '#6E7681' }}>
+                    {teachingLanguage === 'ru' ? 'Завершено' : 'Complete'}
+                  </span>
+                  <span style={{ fontSize: 10, color: '#8B949E' }}>
+                    {curriculumProgress.completedLessons.length} / {totalLessons}
+                  </span>
+                </div>
+                <div style={{ height: 5, borderRadius: 3, background: '#21262D', overflow: 'hidden' }}>
+                  <div style={{
+                    height: '100%', width: `${xpProgress}%`,
+                    background: 'linear-gradient(90deg, #F78166, #FF9E88)',
+                    borderRadius: 3, transition: 'width 600ms ease',
+                  }} />
+                </div>
+              </div>
+            )}
           </div>
         </Panel>
 
