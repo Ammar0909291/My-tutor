@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useCountry, type Country } from '@/components/Providers'
@@ -49,6 +50,29 @@ export default function SettingsPage() {
   const [voiceId, setVoiceId] = useState('male')
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
+
+  // Danger zone
+  const [deleteStep, setDeleteStep] = useState<'hidden' | 'confirm' | 'deleting'>('hidden')
+  const [deleteInput, setDeleteInput] = useState('')
+  const deleteReady = deleteInput === 'DELETE'
+
+  async function handleDeleteAccount() {
+    if (!deleteReady) return
+    setDeleteStep('deleting')
+    try {
+      const res = await fetch('/api/user/delete-account', { method: 'DELETE' })
+      const d = await res.json() as { success?: boolean; error?: string }
+      if (d.success) {
+        await signOut({ callbackUrl: '/' })
+      } else {
+        alert(d.error ?? 'Failed to delete account')
+        setDeleteStep('confirm')
+      }
+    } catch {
+      alert('Network error. Please try again.')
+      setDeleteStep('confirm')
+    }
+  }
 
   // Profile state
   const [profile, setProfile] = useState<ProfileData | null>(null)
@@ -347,12 +371,80 @@ export default function SettingsPage() {
           </p>
         </Section>
 
-        {/* Account */}
-        <Section label={t('settings_account')}>
-          <p className="text-sm" style={{ color: '#52525B' }}>
-            {t('settings_account_desc')}
+        {/* Danger Zone */}
+        <div className="rounded-2xl p-5" style={{ background: '#0F0F18', border: '1px solid rgba(248,81,73,0.25)' }}>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#F85149' }}>
+            {lang === 'ru' ? '⚠ Опасная зона' : '⚠ Danger Zone'}
           </p>
-        </Section>
+
+          {deleteStep === 'hidden' && (
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <p className="text-sm font-semibold" style={{ color: '#E6EDF3' }}>
+                  {lang === 'ru' ? 'Удалить аккаунт' : 'Delete Account'}
+                </p>
+                <p className="text-xs mt-1" style={{ color: '#52525B' }}>
+                  {lang === 'ru'
+                    ? 'Доступ будет закрыт. История обучения сохранится. Email можно использовать снова.'
+                    : 'Access removed. Learning history archived. Email becomes available again.'}
+                </p>
+              </div>
+              <button
+                onClick={() => setDeleteStep('confirm')}
+                className="text-sm font-semibold px-4 py-2 rounded-xl transition-all flex-shrink-0"
+                style={{ background: 'rgba(248,81,73,0.1)', color: '#F85149', border: '1px solid rgba(248,81,73,0.3)' }}>
+                {lang === 'ru' ? 'Удалить аккаунт' : 'Delete Account'}
+              </button>
+            </div>
+          )}
+
+          {(deleteStep === 'confirm' || deleteStep === 'deleting') && (
+            <div className="space-y-4">
+              <div className="p-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)' }}>
+                <p className="text-sm font-bold mb-2" style={{ color: '#F85149' }}>
+                  {lang === 'ru' ? 'Это действие необратимо.' : 'This action cannot be undone.'}
+                </p>
+                <ul className="text-xs space-y-1" style={{ color: '#8B949E' }}>
+                  <li>• {lang === 'ru' ? 'Доступ к аккаунту будет закрыт навсегда' : 'Account access will be permanently removed'}</li>
+                  <li>• {lang === 'ru' ? 'История уроков сохранится в базе данных' : 'Learning progress is archived in the database'}</li>
+                  <li>• {lang === 'ru' ? 'Email станет доступен для новой регистрации' : 'Your email can be used to register a new account'}</li>
+                </ul>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wider" style={{ color: '#3F3F46' }}>
+                  {lang === 'ru' ? 'Введите DELETE для подтверждения' : 'Type DELETE to confirm'}
+                </label>
+                <input
+                  type="text"
+                  value={deleteInput}
+                  onChange={(e) => setDeleteInput(e.target.value)}
+                  placeholder="DELETE"
+                  disabled={deleteStep === 'deleting'}
+                  className="w-full px-4 py-2.5 rounded-xl text-sm font-mono"
+                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(248,81,73,0.3)', color: '#fff', outline: 'none' }}
+                />
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setDeleteStep('hidden'); setDeleteInput('') }}
+                  disabled={deleteStep === 'deleting'}
+                  className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                  style={{ background: 'rgba(255,255,255,0.05)', color: '#71717A', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  {lang === 'ru' ? 'Отмена' : 'Cancel'}
+                </button>
+                <button
+                  onClick={handleDeleteAccount}
+                  disabled={!deleteReady || deleteStep === 'deleting'}
+                  className="flex-1 py-2.5 rounded-xl text-sm font-bold transition-all disabled:opacity-40"
+                  style={{ background: deleteReady ? '#F85149' : 'rgba(248,81,73,0.2)', color: '#fff', border: 'none', cursor: deleteReady ? 'pointer' : 'not-allowed' }}>
+                  {deleteStep === 'deleting'
+                    ? (lang === 'ru' ? 'Удаление...' : 'Deleting...')
+                    : (lang === 'ru' ? 'Удалить навсегда' : 'Delete permanently')}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Save (voice + language) */}
         <button

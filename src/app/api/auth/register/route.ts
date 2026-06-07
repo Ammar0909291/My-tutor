@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
+import { sendWelcomeEmail } from "@/lib/email";
 
 const registerSchema = z.object({
   name: z.string().min(2).max(80),
@@ -44,6 +45,9 @@ export async function POST(req: Request) {
 
     // Create a free subscription record for the new user
     await prisma.subscription.create({ data: { userId: user.id } });
+
+    // Send welcome email — non-blocking, never fails signup
+    sendWelcomeEmail(user.email, user.name ?? 'there').catch(() => {})
 
     // Credit referrer +1 free session and create referral record
     if (referrerId) {

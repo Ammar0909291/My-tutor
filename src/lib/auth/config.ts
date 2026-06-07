@@ -29,6 +29,7 @@ export const authConfig: NextAuthConfig = {
         const { email, password } = parsed.data
         const user = await prisma.user.findUnique({ where: { email } })
         if (!user?.passwordHash) return null
+        if (user.isDeleted) return null  // soft-deleted accounts cannot log in
         const valid = await bcrypt.compare(password, user.passwordHash)
         if (!valid) return null
         return { id: user.id, email: user.email, name: user.name, image: user.image }
