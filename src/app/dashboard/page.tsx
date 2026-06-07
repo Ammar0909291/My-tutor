@@ -10,6 +10,7 @@ import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
+import { findLibrarySubject, levelLabel } from '@/lib/curriculum/library'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: '#F6B444', next: null }
@@ -32,8 +33,10 @@ function subjectMeta(slug: string, lang: Lang): { icon: string; label: string; c
     python:  { icon: '🐍',  color: '#56D364', bg: 'rgba(86,211,100,0.08)',  border: 'rgba(86,211,100,0.2)'  },
     english: { icon: '🇬🇧', color: '#E3B341', bg: 'rgba(227,179,65,0.08)',  border: 'rgba(227,179,65,0.2)'  },
   }
-  const m = meta[slug] ?? { icon: '📘', color: '#F78166', bg: 'rgba(247,129,102,0.08)', border: 'rgba(247,129,102,0.2)' }
-  return { ...m, label: labels[slug] ?? slug }
+  const libraryIcon = findLibrarySubject(slug)?.icon
+  const fallback = { icon: libraryIcon ?? '📘', color: '#F78166', bg: 'rgba(247,129,102,0.08)', border: 'rgba(247,129,102,0.2)' }
+  const m = meta[slug] ?? fallback
+  return { ...m, label: labels[slug] ?? findLibrarySubject(slug)?.name ?? slug }
 }
 
 function voiceLabel(voiceId: string, lang: Lang): string {
@@ -221,7 +224,7 @@ export default async function DashboardPage() {
               <h2 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px', padding: '0 2px' }}>
                 {T('dash_mode_title')}
               </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
                 <a href="/learn" style={{ display: 'block', padding: '16px', borderRadius: '16px', background: 'rgba(247,129,102,0.08)', border: '1px solid rgba(247,129,102,0.2)', textDecoration: 'none', cursor: 'pointer' }}>
                   <div style={{ fontSize: '24px', marginBottom: '8px' }}>👨‍🏫</div>
                   <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--accent-primary)', marginBottom: '4px' }}>{T('dash_mode_tutor')}</div>
@@ -237,31 +240,50 @@ export default async function DashboardPage() {
                   <div style={{ fontSize: '13px', fontWeight: 700, color: '#56D364', marginBottom: '4px' }}>{T('dash_mode_quiz')}</div>
                   <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{T('dash_mode_quiz_sub')}</div>
                 </a>
+                <a href="/library" style={{ display: 'block', padding: '16px', borderRadius: '16px', background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)', textDecoration: 'none', cursor: 'pointer' }}>
+                  <div style={{ fontSize: '24px', marginBottom: '8px' }}>📚</div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#A78BFA', marginBottom: '4px' }}>{T('library_title')}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{T('library_add_subject')}</div>
+                </a>
               </div>
             </div>
 
-            {/* Enrolled subjects */}
-            <SectionCard title={T('dash_my_programs')} icon={Layers}>
+            {/* Enrolled subjects — each tracked independently: level, target, progress */}
+            <SectionCard
+              title={T('dash_my_programs')}
+              icon={Layers}
+              right={<Link href="/library" className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--accent-primary)' }}>+ {T('library_add_subject')}</Link>}
+            >
               {enrolledSubjects.length === 0 ? (
                 <EmptyState emoji="🧭" title={T('dash_no_programs')} sub={T('dash_no_programs_sub')} />
               ) : (
                 <div className="grid sm:grid-cols-2 gap-3 p-4">
                   {enrolledSubjects.map((ps) => {
                     const m = subjectMeta(ps.subject.slug, lang)
+                    const current = ps.currentLevelIndex ?? 0
+                    const target = ps.targetLevelIndex
+                    const progress = ps.progressPercent ?? 0
                     return (
-                      <div key={ps.id} className="flex items-center gap-3 p-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
-                        style={{ background: m.bg, border: `1px solid ${m.border}` }}>
-                        <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl font-black shrink-0"
-                          style={{ background: 'var(--bg-elevated)', color: m.color }}>
-                          {m.icon}
+                      <Link key={ps.id} href={`/library/${ps.subject.slug}`}
+                        className="flex flex-col gap-2.5 p-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
+                        style={{ background: m.bg, border: `1px solid ${m.border}`, textDecoration: 'none' }}>
+                        <div className="flex items-center gap-3">
+                          <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl font-black shrink-0"
+                            style={{ background: 'var(--bg-elevated)', color: m.color }}>
+                            {m.icon}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{ps.subject.name}</p>
+                            <p className="text-xs truncate mt-0.5" style={{ color: 'var(--text-dim)' }}>
+                              {levelLabel(current)}{target != null ? ` → ${levelLabel(target)}` : ''}
+                            </p>
+                          </div>
+                          <span className="ml-auto text-xs font-mono shrink-0" style={{ color: m.color }}>{progress}%</span>
                         </div>
-                        <div className="min-w-0">
-                          <p className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{ps.subject.name}</p>
-                          <p className="text-xs truncate mt-0.5" style={{ color: 'var(--text-dim)' }}>
-                            {m.label}
-                          </p>
+                        <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
+                          <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, progress))}%`, background: m.color }} />
                         </div>
-                      </div>
+                      </Link>
                     )
                   })}
                 </div>

@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth'
 import { generateJSON, buildCurriculumPrompt } from '@/lib/ai/client'
 import { prisma } from '@/lib/db/prisma'
 import type { Curriculum } from '@/types'
+import { findLibrarySubject, renderCurriculumTree } from '@/lib/curriculum/library'
 
 const schema = z.object({ subjectSlug: z.string() })
 
@@ -23,7 +24,11 @@ export async function POST(req: Request) {
     if (!profile) return NextResponse.json({ success: false, error: 'Profile not found' }, { status: 404 })
     if (!subject) return NextResponse.json({ success: false, error: 'Subject not found' }, { status: 404 })
 
-    const prompt = buildCurriculumPrompt(subject.name, profile.selfDescription)
+    // If this subject has a known curriculum tree (Subject Library), point the
+    // generator at it so it follows prerequisites instead of inventing structure.
+    const librarySubject = findLibrarySubject(subjectSlug)
+    const treeBlock = librarySubject ? renderCurriculumTree(librarySubject) : null
+    const prompt = buildCurriculumPrompt(subject.name, profile.selfDescription, treeBlock)
 
     const curriculum = await generateJSON(prompt) as Curriculum
     if (!curriculum) return NextResponse.json({ success: false, error: 'Failed to generate curriculum' }, { status: 502 })

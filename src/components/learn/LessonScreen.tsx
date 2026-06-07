@@ -42,18 +42,48 @@ const VOICE_MAP: Record<string, VoiceType> = {
 function resolveVoice(choice: string): VoiceType { return VOICE_MAP[choice] ?? 'male' }
 
 const LANG_BADGE: Record<string, { label: string; accent: string }> = {
-  c:       { label: 'C',       accent: '#F78166' },
-  cpp:     { label: 'C++',     accent: '#79C0FF' },
-  python:  { label: 'Python',  accent: '#56D364' },
-  english: { label: 'English', accent: '#E3B341' },
+  c:          { label: 'C',          accent: '#F78166' },
+  cpp:        { label: 'C++',        accent: '#79C0FF' },
+  python:     { label: 'Python',     accent: '#56D364' },
+  english:    { label: 'English',    accent: '#E3B341' },
+  javascript: { label: 'JavaScript', accent: '#F0DB4F' },
+  typescript: { label: 'TypeScript', accent: '#3178C6' },
+  java:       { label: 'Java',       accent: '#E76F00' },
+  csharp:     { label: 'C#',         accent: '#A179DC' },
+  go:         { label: 'Go',         accent: '#00ADD8' },
+  rust:       { label: 'Rust',       accent: '#DEA584' },
+  russian:    { label: 'Russian',    accent: '#F78166' },
+  hindi:      { label: 'Hindi',      accent: '#FF9933' },
+  german:     { label: 'German',     accent: '#FFCE00' },
+  arabic:     { label: 'Arabic',     accent: '#2EA043' },
+  mathematics:{ label: 'Math',       accent: '#A78BFA' },
+  physics:    { label: 'Physics',    accent: '#79C0FF' },
+  chemistry:  { label: 'Chemistry',  accent: '#F78166' },
+  biology:    { label: 'Biology',    accent: '#2EA043' },
 }
-const LANG_MAP: Record<string, string> = { c: 'c', cpp: 'cpp', python: 'python', english: 'markdown' }
-const FILENAME: Record<string, string> = { c: 'lesson.c', cpp: 'lesson.cpp', python: 'lesson.py', english: 'lesson.md' }
+// Subjects that aren't programming languages render their lesson canvas as markdown/plaintext.
+const NON_CODE_SUBJECTS = ['english', 'russian', 'hindi', 'german', 'arabic', 'mathematics', 'physics', 'chemistry', 'biology']
+const LANG_MAP: Record<string, string> = {
+  c: 'c', cpp: 'cpp', python: 'python', javascript: 'javascript', typescript: 'typescript',
+  java: 'java', csharp: 'csharp', go: 'go', rust: 'rust',
+  ...Object.fromEntries(NON_CODE_SUBJECTS.map((s) => [s, 'markdown'])),
+}
+const FILENAME: Record<string, string> = {
+  c: 'lesson.c', cpp: 'lesson.cpp', python: 'lesson.py', javascript: 'lesson.js', typescript: 'lesson.ts',
+  java: 'Lesson.java', csharp: 'Lesson.cs', go: 'lesson.go', rust: 'lesson.rs',
+  ...Object.fromEntries(NON_CODE_SUBJECTS.map((s) => [s, 'lesson.md'])),
+}
 const INITIAL_CODE: Record<string, string> = {
-  c:       '// Waiting for first lesson...\n',
-  cpp:     '// Waiting for first lesson...\n',
-  python:  '# Waiting for first lesson...\n',
-  english: '<!-- Waiting for first lesson... -->\n',
+  c: '// Waiting for first lesson...\n',
+  cpp: '// Waiting for first lesson...\n',
+  python: '# Waiting for first lesson...\n',
+  javascript: '// Waiting for first lesson...\n',
+  typescript: '// Waiting for first lesson...\n',
+  java: '// Waiting for first lesson...\n',
+  csharp: '// Waiting for first lesson...\n',
+  go: '// Waiting for first lesson...\n',
+  rust: '// Waiting for first lesson...\n',
+  ...Object.fromEntries(NON_CODE_SUBJECTS.map((s) => [s, '<!-- Waiting for first lesson... -->\n'])),
 }
 const EXT_LANG: Record<string, string> = { py: 'python', c: 'c', cpp: 'cpp', txt: 'text' }
 

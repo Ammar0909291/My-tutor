@@ -273,10 +273,13 @@ HINGLISH SUPPORT:
 4. Максимум 3-4 предложения + код, потом вопрос или задание`
 }
 
-export function buildCurriculumPrompt(subject: string, selfDescription: string) {
+export function buildCurriculumPrompt(subject: string, selfDescription: string, curriculumTree?: string | null) {
+  const treeBlock = curriculumTree
+    ? `\n\nThis subject has an established curriculum tree — follow its order and DO NOT skip prerequisite modules or invent a different structure. Use it as the backbone for your steps:\n${curriculumTree}\n`
+    : ''
   return `Create a personalized learning plan for a student on the topic: ${subject}.
 
-Student self-description: "${selfDescription}"
+Student self-description: "${selfDescription}"${treeBlock}
 
 Return ONLY valid JSON in the following structure (no markdown, no explanations):
 {
