@@ -13,8 +13,6 @@ const schema = z.object({
 })
 
 export async function POST(req: Request) {
-  console.log('GROQ KEY EXISTS:', !!process.env.GROQ_API_KEY)
-
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
@@ -104,7 +102,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, text })
     } catch (error: any) {
       console.error('[learn/chat] AI error:', error.message)
-      return NextResponse.json({ success: false, error: error.message || 'AI failed' }, { status: 500 })
+      const isAuthError = error.status === 401 || error.message?.includes('401') || error.message?.toLowerCase().includes('invalid api key')
+      const userMessage = isAuthError
+        ? 'AI service not configured. Add a valid GROQ_API_KEY to .env.local'
+        : error.message || 'AI failed'
+      return NextResponse.json({ success: false, error: userMessage }, { status: 500 })
     }
   } catch (err) {
     if (err instanceof z.ZodError) {

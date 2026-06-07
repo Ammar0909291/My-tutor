@@ -48,6 +48,13 @@ export async function POST(req: Request) {
       })),
     ]);
 
+    // Ensure user row exists — handles stale JWT after DB reset
+    await withRetry(() => prisma.user.upsert({
+      where: { id: userId! },
+      update: {},
+      create: { id: userId!, email: `${userId}@mytutor.local`, name: 'Student' },
+    }))
+
     const learnSession = await withRetry(() => prisma.learnSession.create({
       data: {
         userId: userId!,
