@@ -12,6 +12,52 @@ function makeTransport() {
   })
 }
 
+export async function sendWelcomeEmail(
+  to: string,
+  name: string,
+): Promise<{ success: boolean; error?: string }> {
+  const from = process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
+
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.log('[email] SMTP not configured — skipping welcome email for', to)
+    return { success: true }
+  }
+
+  try {
+    await makeTransport().sendMail({
+      from,
+      to,
+      subject: 'Welcome to My Tutor',
+      html: `
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr><td align="center" style="padding:40px 16px;">
+      <table width="480" cellpadding="0" cellspacing="0" style="background:#161B22;border:1px solid #30363D;border-radius:12px;overflow:hidden;">
+        <tr><td style="padding:32px 32px 24px;">
+          <p style="margin:0 0 4px;font-size:22px;">🔥</p>
+          <h1 style="margin:0 0 8px;font-size:22px;font-weight:800;color:#F78166;">My Tutor</h1>
+          <h2 style="margin:0 0 16px;font-size:18px;font-weight:700;color:#F0F6FC;">Welcome${name ? `, ${name}` : ''}!</h2>
+          <p style="margin:0;font-size:14px;color:#8B949E;line-height:1.6;">
+            Your account has been created successfully.<br>
+            Start learning with your personal AI tutor.
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`,
+      text: `Welcome to My Tutor!\n\nYour account has been created successfully.\n\nStart learning with your personal AI tutor.`,
+    })
+    return { success: true }
+  } catch (err) {
+    console.error('[email] Failed to send welcome email:', err)
+    return { success: false, error: String(err) }
+  }
+}
+
 export async function sendPasswordResetEmail(
   to: string,
   token: string,

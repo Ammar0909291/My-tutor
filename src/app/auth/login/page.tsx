@@ -17,6 +17,10 @@ const NEXTAUTH_ERROR_I18N_KEYS: Record<string, 'error_oauth_linked' | 'error_oau
   Default: 'error_generic',
 }
 
+const CUSTOM_ERROR_MESSAGES: Record<string, string> = {
+  account_deleted: 'This account has been deleted.',
+}
+
 export default function LoginPage() {
   return (
     <Suspense fallback={<div className="min-h-screen" style={{ background: 'var(--bg-base)' }} />}>
@@ -39,6 +43,7 @@ function LoginForm() {
   useEffect(() => {
     const errorCode = params.get('error')
     if (errorCode) {
+      if (CUSTOM_ERROR_MESSAGES[errorCode]) { setError(CUSTOM_ERROR_MESSAGES[errorCode]); return }
       const translationKey = NEXTAUTH_ERROR_KEYS[errorCode]
       const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[errorCode] ?? 'error_generic'
       setError(translationKey ? t(translationKey) : t(fallbackKey))
@@ -57,6 +62,7 @@ function LoginForm() {
 
       if (!result) { setError(t('error_generic')); return }
       if (result.error) {
+        if (CUSTOM_ERROR_MESSAGES[result.error]) { setError(CUSTOM_ERROR_MESSAGES[result.error]); return }
         const translationKey = NEXTAUTH_ERROR_KEYS[result.error]
         const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[result.error] ?? 'error_generic'
         setError(translationKey ? t(translationKey) : t(fallbackKey))

@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
+import { sendWelcomeEmail } from "@/lib/email";
 
 const registerSchema = z.object({
   name: z.string().min(2).max(80),
@@ -28,6 +29,11 @@ export async function POST(req: Request) {
 
     // Create a free subscription record for the new user
     await prisma.subscription.create({ data: { userId: user.id } });
+
+    // Best-effort welcome email — never block or fail signup on email errors
+    sendWelcomeEmail(user.email, user.name ?? "").catch((err) => {
+      console.error("[register] Failed to send welcome email:", err);
+    });
 
     return NextResponse.json({ success: true, data: user }, { status: 201 });
   } catch (err) {

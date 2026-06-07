@@ -1,7 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { useToast } from '@/components/ui/Toast'
 import type { TeachingLang } from '@/lib/tts'
 
 type VoiceOption = { key: string; label: string }
@@ -38,6 +41,8 @@ interface ProfileData {
 
 export default function SettingsPage() {
   const { t, lang, setLang } = useLanguage()
+  const router = useRouter()
+  const { show } = useToast()
   const [data, setData] = useState<SettingsData | null>(null)
   const [voiceId, setVoiceId] = useState('male')
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
@@ -49,6 +54,30 @@ export default function SettingsPage() {
   const [profileLevel, setProfileLevel] = useState('')
   const [profileVoice, setProfileVoice] = useState('male')
   const [profileSave, setProfileSave] = useState<'idle' | 'saving' | 'saved'>('idle')
+
+  // Account deletion
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+  const [deleteConfirmText, setDeleteConfirmText] = useState('')
+  const [deleting, setDeleting] = useState(false)
+
+  async function handleDeleteAccount() {
+    if (deleteConfirmText !== 'DELETE') return
+    setDeleting(true)
+    try {
+      const res = await fetch('/api/user/delete-account', { method: 'POST' })
+      const d = await res.json() as { success?: boolean; error?: string }
+      if (d.success) {
+        await signOut({ redirect: false })
+        router.push('/')
+      } else {
+        show(d.error ?? 'Failed to delete account', 'error')
+        setDeleting(false)
+      }
+    } catch {
+      show('Failed to delete account', 'error')
+      setDeleting(false)
+    }
+  }
 
   useEffect(() => {
     fetch('/api/settings')
@@ -336,7 +365,61 @@ export default function SettingsPage() {
           className="btn-primary w-full py-3.5 font-bold disabled:opacity-60">
           {saveState === 'saved' ? t('settings_saved') : saveState === 'saving' ? '...' : t('settings_save')}
         </button>
+
+        {/* Danger Zone */}
+        <div className="rounded-2xl p-5 border" style={{ background: 'rgba(248,81,73,0.04)', borderColor: 'rgba(248,81,73,0.25)' }}>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#F85149' }}>Danger Zone</p>
+          <p className="text-sm mb-4" style={{ color: '#8B949E' }}>
+            Permanently lose access to your account. Your learning history is archived, not erased — and you can register again with the same email later.
+          </p>
+          <button
+            onClick={() => setShowDeleteDialog(true)}
+            className="px-4 py-2.5 rounded-xl text-sm font-bold transition-all"
+            style={{ background: 'rgba(248,81,73,0.12)', border: '1px solid rgba(248,81,73,0.4)', color: '#F85149' }}>
+            Delete Account
+          </button>
+        </div>
       </main>
+
+      {/* Delete account confirmation dialog */}
+      {showDeleteDialog && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.6)' }}>
+          <div className="w-full max-w-md rounded-2xl p-6" style={{ background: '#0F0F18', border: '1px solid rgba(248,81,73,0.3)' }}>
+            <h3 className="text-lg font-bold mb-3" style={{ color: '#F85149' }}>Delete your account?</h3>
+            <ul className="text-sm space-y-1.5 mb-4" style={{ color: '#8B949E' }}>
+              <li>• Account access will be removed immediately</li>
+              <li>• Your learning progress will be archived, not deleted</li>
+              <li>• Your email can be reused to register a new account later</li>
+            </ul>
+            <p className="text-sm mb-2" style={{ color: '#E6EDF3' }}>
+              Type <strong style={{ color: '#F85149' }}>DELETE</strong> to confirm.
+            </p>
+            <input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl text-sm mb-5"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' }}
+              placeholder="DELETE"
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => { setShowDeleteDialog(false); setDeleteConfirmText('') }}
+                className="flex-1 py-2.5 rounded-xl text-sm font-semibold"
+                style={{ background: 'rgba(255,255,255,0.05)', color: '#8B949E', border: '1px solid rgba(255,255,255,0.1)' }}>
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteAccount}
+                disabled={deleteConfirmText !== 'DELETE' || deleting}
+                className="flex-1 py-2.5 rounded-xl text-sm font-bold disabled:opacity-50"
+                style={{ background: '#F85149', color: '#fff' }}>
+                {deleting ? '...' : 'Delete Account'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

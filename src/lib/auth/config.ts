@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import type { NextAuthConfig } from 'next-auth'
+import { CredentialsSignin, type NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import Google from 'next-auth/providers/google'
 import { z } from 'zod'
@@ -9,6 +9,10 @@ const credentialsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 })
+
+class AccountDeletedError extends CredentialsSignin {
+  code = 'account_deleted'
+}
 
 export const authConfig: NextAuthConfig = {
   session: { strategy: 'jwt' },
@@ -32,6 +36,7 @@ export const authConfig: NextAuthConfig = {
         if (!user?.passwordHash) return null
         const valid = await bcrypt.compare(password, user.passwordHash)
         if (!valid) return null
+        if (user.isDeleted) throw new AccountDeletedError()
         return { id: user.id, email: user.email, name: user.name, image: user.image }
       },
     }),
