@@ -23,11 +23,16 @@ export async function sendPasswordResetEmail(
   const resetUrl = `${base}/auth/reset-password?token=${token}`
   const from = process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
 
+  console.log('[email] SMTP_HOST present:', !!process.env.SMTP_HOST)
+  console.log('[email] SMTP_USER present:', !!process.env.SMTP_USER)
+  console.log('[email] SMTP_PASS present:', !!process.env.SMTP_PASS)
+
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
     console.log('[email] SMTP not configured — RESET LINK (dev mode):', resetUrl)
     return { success: true }
   }
 
+  console.log('[email] Sending via SMTP to:', to)
   try {
     await makeTransport().sendMail({
       from,
