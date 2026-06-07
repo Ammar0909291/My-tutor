@@ -141,17 +141,21 @@ export default function SignupPage() {
           <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('signup_title')}</h1>
           <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('signup_sub')}</p>
 
-          <button onClick={handleGoogle} disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
-            style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
-            <GoogleIcon />
-            {googleLoading ? t('signup_google_loading') : t('signup_google')}
-          </button>
+          {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+            <>
+              <button onClick={handleGoogle} disabled={googleLoading}
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+                style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+                <GoogleIcon />
+                {googleLoading ? t('signup_google_loading') : t('signup_google')}
+              </button>
 
-          <div className="relative my-5">
-            <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
-          </div>
+              <div className="relative my-5">
+                <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
+                <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
+              </div>
+            </>
+          )}
 
           {error && (
             <div className="mb-5 p-3.5 rounded-xl text-sm animate-scale-in"

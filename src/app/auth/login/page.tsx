@@ -168,19 +168,23 @@ function LoginForm() {
           <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('login_title')}</h1>
           <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('login_sub')}</p>
 
-          {/* Google */}
-          <button onClick={handleGoogle} disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
-            style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
-            <GoogleIcon />
-            {googleLoading ? t('login_google_loading') : t('login_google')}
-          </button>
+          {/* Google — only shown when GOOGLE_CLIENT_ID/SECRET are configured */}
+          {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+            <>
+              <button onClick={handleGoogle} disabled={googleLoading}
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+                style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+                <GoogleIcon />
+                {googleLoading ? t('login_google_loading') : t('login_google')}
+              </button>
 
-          {/* Divider */}
-          <div className="relative my-5">
-            <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
-          </div>
+              {/* Divider */}
+              <div className="relative my-5">
+                <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
+                <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
+              </div>
+            </>
+          )}
 
           {/* Error */}
           {error && (
