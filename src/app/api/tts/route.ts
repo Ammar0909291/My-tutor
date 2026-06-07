@@ -4,16 +4,17 @@ import { cleanTextForTTS } from '@/lib/tts-cleaner'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
 
+// playai-tts valid voices — male/female/warm distinction
 const VOICE_MAP: Record<string, string> = {
-  ru_male:   'aoede',
+  ru_male:   'charon',
   ru_female: 'aoede',
   ru_warm:   'aoede',
-  en_male:   'aoede',
+  en_male:   'charon',
   en_female: 'aoede',
-  en_warm:   'aoede',
-  hi_male:   'aoede',
+  en_warm:   'kore',
+  hi_male:   'charon',
   hi_female: 'aoede',
-  hi_warm:   'aoede',
+  hi_warm:   'kore',
 }
 
 // ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
@@ -51,13 +52,11 @@ async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
 
 // ─── Groq TTS ─────────────────────────────────────────────────────────────────
 async function groqTTS(text: string, selectedVoice: string): Promise<Buffer | null> {
-  const models = ['canopylabs/orpheus-v1-english', 'playai-tts', 'tts-1']
-  for (const model of models) {
+  // playai-tts is primary; tts-1 is legacy fallback
+  for (const model of ['playai-tts', 'tts-1']) {
     try {
       const response = await groq.audio.speech.create({ model, voice: selectedVoice, input: text, response_format: 'mp3' })
-      const buf = Buffer.from(await response.arrayBuffer())
-      console.log('TTS success with model:', model)
-      return buf
+      return Buffer.from(await response.arrayBuffer())
     } catch (e: any) {
       console.error('TTS failed with model:', model, e.message)
     }
@@ -72,11 +71,6 @@ export async function POST(req: Request) {
 
     const clean = cleanTextForTTS(text)
     if (!clean.trim()) return NextResponse.json({ error: 'Empty' }, { status: 400 })
-
-    console.log('=== TTS CALLED ===')
-    console.log('GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY)
-    console.log('Input text length:', text?.length)
-    console.log('TTS request:', { lang, voice, country, textLength: clean.length })
 
     const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
     const selectedGroqVoice = VOICE_MAP[voiceKey] || 'aoede'

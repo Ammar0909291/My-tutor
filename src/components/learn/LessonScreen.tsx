@@ -529,14 +529,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }
   async function startRecording() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, sampleRate: 16000 } })
-      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/webm'
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1, sampleRate: 16000 },
+      })
+      const mimeType = ['audio/webm;codecs=opus', 'audio/webm', 'audio/ogg', 'audio/mp4']
+        .find((t) => MediaRecorder.isTypeSupported(t)) ?? 'audio/webm'
       const recorder = new MediaRecorder(stream, { mimeType })
       mediaRecorderRef.current = recorder
       audioChunksRef.current = []
       recorder.ondataavailable = (e) => { if (e.data.size > 0) audioChunksRef.current.push(e.data) }
       recorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
+        const audioBlob = new Blob(audioChunksRef.current, { type: mimeType })
+        stream.getTracks().forEach((t) => t.stop())
+        if (audioBlob.size < 500) { setMicState('idle'); textareaRef.current?.focus(); return }
         const formData = new FormData()
         formData.append('audio', audioBlob, 'recording.webm')
         formData.append('lang', teachingLanguage || 'en')
@@ -545,17 +550,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           if (res.ok) {
             const data = await res.json()
             if (data.text?.trim()) setInput((prev) => prev ? prev + ' ' + data.text : data.text)
+          } else {
+            const err = await res.json().catch(() => ({})) as { error?: string }
+            console.error('STT error:', err.error)
           }
         } catch (err) { console.error('STT request error:', err) }
-        stream.getTracks().forEach((t) => t.stop())
         setMicState('idle')
         textareaRef.current?.focus()
       }
+      recorder.onerror = () => { stream.getTracks().forEach((t) => t.stop()); setMicState('idle') }
       recorder.start(250)
       setMicState('recording')
     } catch (err: any) {
       console.error('Microphone access error:', err.message)
       setMicState('idle')
+      if (err.name === 'NotAllowedError') {
+        alert(teachingLanguage === 'ru'
+          ? 'Доступ к микрофону запрещён. Разрешите доступ в настройках браузера.'
+          : 'Microphone permission denied. Please allow microphone access in browser settings.')
+      }
     }
   }
   function handleMicClick() { if (micState === 'recording') stopRecording(); else startRecording() }
