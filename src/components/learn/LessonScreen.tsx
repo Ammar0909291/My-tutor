@@ -180,8 +180,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const { t, lang: uiLang } = useLanguage()
   const { country } = useCountry()
 
-  console.log('Teaching language:', teachingLanguage, '| UI language:', uiLang)
-
   // Core state
   const [sessionId, setSessionId] = useState<string|null>(null)
   const [messages, setMessages] = useState<ChatMsg[]>([])
@@ -321,13 +319,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [])
   const handleSpeak = useCallback((id: string, text: string) => {
     speakingIdRef.current = id; setSpeakingId(id)
-    console.log('Tutor responded, calling TTS...', { textLength: text.length, lang: teachingLanguage, voice: voiceType })
     speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     }, country)
-    console.log('TTS called')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teachingLanguage, voiceType])
+  }, [teachingLanguage, voiceType, country])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     setVoiceType(v)
     if (speakingIdRef.current) {

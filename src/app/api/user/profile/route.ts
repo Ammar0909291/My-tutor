@@ -5,7 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 export async function GET() {
   try {
     const session = await auth()
-    console.log('Session check [profile GET]:', session?.user?.id)
+
     if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
@@ -24,7 +24,7 @@ export async function GET() {
 export async function PATCH(req: NextRequest) {
   try {
     const session = await auth()
-    console.log('Session check [profile PATCH]:', session?.user?.id)
+
     if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const { name, levelDescription, voicePreference } = await req.json()
 

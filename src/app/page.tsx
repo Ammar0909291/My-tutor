@@ -158,17 +158,18 @@ export default function HomePage() {
                   transform: isSelected ? 'scale(1.02)' : 'scale(1)',
                 }}
                 onMouseEnter={(e) => {
-                  if (!isSelected) {
+                  if (e.currentTarget.getAttribute('data-selected') !== 'true') {
                     (e.currentTarget as HTMLButtonElement).style.borderColor = `${opt.color}88`
                     ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'
                   }
                 }}
                 onMouseLeave={(e) => {
-                  if (!isSelected) {
+                  if (e.currentTarget.getAttribute('data-selected') !== 'true') {
                     (e.currentTarget as HTMLButtonElement).style.borderColor = '#21262D'
                     ;(e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'
                   }
                 }}
+                data-selected={isSelected ? 'true' : 'false'}
               >
                 {isSelected && (
                   <div style={{
