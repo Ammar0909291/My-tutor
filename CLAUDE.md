@@ -46,6 +46,25 @@ npm run type-check       # TypeScript check (no emit)
 
 ## Assistant Behavior
 
+- **After completing EVERY prompt, output a single copyable report block** in this exact format:
+
+  ```
+  ✅ What was done:
+  - <bullet 1>
+  - <bullet 2>
+  ...
+
+  🚀 To run locally:
+  # Prerequisites (first time only)
+  npm install
+  cp .env.example .env        # fill in DATABASE_URL, AUTH_SECRET, OPENROUTER_API_KEY
+  npx prisma db push
+  npx prisma db seed
+
+  # Start dev server
+  npm run dev                 # http://localhost:3000
+  ```
+
 - **Always include local dev run instructions at the end of every response:**
   ```bash
   npm run dev   # http://localhost:3000
