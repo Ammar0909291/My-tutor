@@ -2089,17 +2089,23 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   <button
                     onClick={async () => {
                       setInsightsOpen(false)
-                      // Sprint P (Task 6): personalize practice defaults from the
-                      // learner's mistake/mastery history before opening, unless
-                      // Insights already set targeted defaults.
+                      // Sprint R: merge learner intelligence profile with practice analysis
+                      // to auto-set difficulty and focus categories before opening.
                       if (!practiceOpen) {
                         try {
-                          const res = await fetch(`/api/practice/analysis?subject=${subjectSlug}`)
-                          const data = await res.json()
-                          if (data?.success) {
-                            setPracticeDifficulty(data.recommendedDifficulty ?? 2)
-                            setPracticeFocusCategories(data.recommendedFocusCategories ?? [])
-                          }
+                          const [analysisRes, profileRes] = await Promise.all([
+                            fetch(`/api/practice/analysis?subject=${subjectSlug}`).then((r) => r.json()).catch(() => null),
+                            fetch(`/api/learner/profile-insights?subject=${subjectSlug}`).then((r) => r.json()).catch(() => null),
+                          ])
+                          // Learner profile takes precedence over raw analysis for difficulty
+                          const difficulty = profileRes?.meta?.recommendedDifficulty
+                            ?? analysisRes?.recommendedDifficulty
+                            ?? 2
+                          const focusFromProfile = (profileRes?.meta?.weakConcepts ?? []).slice(0, 3)
+                          const focusFromAnalysis = analysisRes?.recommendedFocusCategories ?? []
+                          const focus = focusFromProfile.length > 0 ? focusFromProfile : focusFromAnalysis
+                          setPracticeDifficulty(difficulty)
+                          setPracticeFocusCategories(focus)
                         } catch {}
                       }
                       setPracticeOpen((v) => !v)
