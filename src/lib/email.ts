@@ -19,81 +19,21 @@ function smtpReady() {
 const FROM = () => process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
 const APP_URL = () => process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
 
-// ─── Welcome email ────────────────────────────────────────────────────────────
-
-export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
-  if (!smtpReady()) {
-    console.log('[email] Welcome email skipped (SMTP not configured) for:', to)
-    return
-  }
-  try {
-    await makeTransport().sendMail({
-      from: FROM(),
-      to,
-      subject: 'Welcome to My Tutor! 🔥',
-      html: `
-<!DOCTYPE html>
-<html>
-<body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr><td align="center" style="padding:40px 16px;">
-      <table width="480" cellpadding="0" cellspacing="0" style="background:#161B22;border:1px solid #30363D;border-radius:12px;overflow:hidden;">
-        <tr><td style="padding:32px 32px 24px;">
-          <p style="margin:0 0 4px;font-size:28px;">🔥</p>
-          <h1 style="margin:0 0 8px;font-size:22px;font-weight:800;color:#F78166;">Welcome to My Tutor!</h1>
-          <p style="margin:0 0 16px;font-size:16px;font-weight:600;color:#F0F6FC;">Hi ${name},</p>
-          <p style="margin:0 0 24px;font-size:14px;color:#8B949E;line-height:1.6;">
-            Your account has been created successfully.<br>
-            Start learning C, C++, Python or English with your personal AI tutor — available 24/7,
-            explains until you truly understand.
-          </p>
-          <a href="${APP_URL()}/onboarding"
-            style="display:inline-block;background:#F78166;color:#fff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:700;">
-            Start learning →
-          </a>
-        </td></tr>
-        <tr><td style="padding:16px 32px 28px;border-top:1px solid #30363D;">
-          <p style="margin:0;font-size:12px;color:#484F58;line-height:1.6;">
-            You're receiving this because you signed up at My Tutor.
-          </p>
-        </td></tr>
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`,
-      text: `Welcome to My Tutor!\n\nHi ${name},\n\nYour account has been created.\nStart learning: ${APP_URL()}/onboarding\n`,
-    })
-    console.log('[email] Welcome email sent to:', to)
-  } catch (err) {
-    console.error('[email] Failed to send welcome email:', err)
-    // Non-fatal — signup already succeeded
-  }
-}
-
-// ─── Password reset email ─────────────────────────────────────────────────────
-
-export async function sendPasswordResetEmail(
-  to: string,
-  token: string,
-): Promise<{ success: boolean; error?: string }> {
+export async function sendPasswordResetEmail(to: string, token: string): Promise<{ success: boolean; error?: string }> {
   const resetUrl = `${APP_URL()}/auth/reset-password?token=${token}`
 
-  console.log('[email] SMTP_HOST present:', !!process.env.SMTP_HOST)
-  console.log('[email] SMTP_USER present:', !!process.env.SMTP_USER)
-  console.log('[email] SMTP_PASS present:', !!process.env.SMTP_PASS)
-
   if (!smtpReady()) {
-    console.log('[email] SMTP not configured — RESET LINK (dev mode):', resetUrl)
-    return { success: true }
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[email] SMTP not configured — RESET LINK (dev only):', resetUrl)
+    }
+    return { success: false, error: 'SMTP not configured' }
   }
 
-  console.log('[email] Sending password reset via SMTP to:', to)
   try {
     await makeTransport().sendMail({
       from: FROM(),
       to,
-      subject: 'Password reset — My Tutor',
+      subject: 'Сброс пароля — My Tutor',
       html: `
 <!DOCTYPE html>
 <html>
@@ -104,20 +44,20 @@ export async function sendPasswordResetEmail(
         <tr><td style="padding:32px 32px 24px;">
           <p style="margin:0 0 4px;font-size:22px;">🔥</p>
           <h1 style="margin:0 0 8px;font-size:22px;font-weight:800;color:#F78166;">My Tutor</h1>
-          <h2 style="margin:0 0 16px;font-size:18px;font-weight:700;color:#F0F6FC;">Password Reset</h2>
+          <h2 style="margin:0 0 16px;font-size:18px;font-weight:700;color:#F0F6FC;">Сброс пароля</h2>
           <p style="margin:0 0 24px;font-size:14px;color:#8B949E;line-height:1.6;">
-            We received a request to reset the password for your account.<br>
-            Click the button below to set a new password.
+            Мы получили запрос на сброс пароля для вашего аккаунта.<br>
+            Нажмите кнопку ниже, чтобы установить новый пароль.
           </p>
           <a href="${resetUrl}"
             style="display:inline-block;background:#F78166;color:#fff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:700;">
-            Reset password
+            Сбросить пароль
           </a>
         </td></tr>
         <tr><td style="padding:16px 32px 28px;border-top:1px solid #30363D;">
           <p style="margin:0;font-size:12px;color:#484F58;line-height:1.6;">
-            Link valid for <strong style="color:#8B949E;">1 hour</strong>.
-            If you did not request a password reset — ignore this email.
+            Ссылка действительна <strong style="color:#8B949E;">1 час</strong>.
+            Если вы не запрашивали сброс пароля — просто проигнорируйте это письмо.
           </p>
         </td></tr>
       </table>
@@ -125,12 +65,11 @@ export async function sendPasswordResetEmail(
   </table>
 </body>
 </html>`,
-      text: `Password Reset — My Tutor\n\nClick the link to reset your password:\n${resetUrl}\n\nLink valid for 1 hour.`,
+      text: `Сброс пароля — My Tutor\n\nПерейдите по ссылке для сброса пароля:\n${resetUrl}\n\nСсылка действительна 1 час.`,
     })
     return { success: true }
-  } catch (err) {
-    console.error('[email] Failed to send reset email:', err)
-    console.log('[email] Reset link (dev fallback):', resetUrl)
-    return { success: true, error: String(err) }
+  } catch (err: any) {
+    console.error('[email] Failed to send password reset:', err.message)
+    return { success: false, error: err.message }
   }
 }

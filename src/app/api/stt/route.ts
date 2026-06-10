@@ -1,6 +1,7 @@
 import Groq from 'groq-sdk'
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
 
@@ -10,6 +11,9 @@ export async function POST(req: Request) {
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
+
+    const { allowed } = await checkRateLimit(`rl:stt:${session.user.id}`, 30, 60)
+    if (!allowed) return rateLimitResponse()
 
     const formData = await req.formData()
     const audioFile = formData.get('audio') as File

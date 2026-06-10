@@ -1,79 +1,72 @@
+import { cleanTextForTTS } from './tts-cleaner'
+
 export type VoiceType = 'male' | 'female' | 'warm'
 export type TeachingLang = 'ru' | 'en' | 'hi'
 
-let currentAudio: HTMLAudioElement | null = null
+export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> = {
+  male:   { pitch: 0.75, rate: 0.85 },
+  female: { pitch: 1.25, rate: 0.9  },
+  warm:   { pitch: 1.0,  rate: 0.87 },
+}
 
-export async function speakText(
+const LANG_LOCALE: Record<TeachingLang, string> = {
+  ru: 'ru-RU',
+  en: 'en-US',
+  hi: 'hi-IN',
+}
+
+// Prime voices list on load — only in browser, never during SSR
+if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefined') {
+  window.speechSynthesis.getVoices()
+}
+
+export function speakText(
   text: string,
-  lang: TeachingLang = 'en',
-  voice: VoiceType = 'female',
+  config: { pitch: number; rate: number },
   onEnd?: () => void,
-  country = 'global',
-): Promise<void> {
-  if (typeof window === 'undefined') return
-  stopSpeaking()
+  lang: TeachingLang = 'ru',
+): void {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
+  window.speechSynthesis.cancel()
 
-  const browserFallback = () => {
-    try {
-      const utterance = new SpeechSynthesisUtterance(text)
-      utterance.lang = lang === 'ru' ? 'ru-RU' : lang === 'hi' ? 'hi-IN' : 'en-US'
-      utterance.rate = 0.9
-      utterance.onend = () => onEnd?.()
-      window.speechSynthesis.cancel()
-      window.speechSynthesis.speak(utterance)
-    } catch {
-      onEnd?.()
-    }
+  const clean = cleanTextForTTS(text)
+  if (!clean.trim()) { onEnd?.(); return }
+
+  const locale = LANG_LOCALE[lang]
+  const utter = new SpeechSynthesisUtterance(clean)
+  utter.lang = locale
+  utter.pitch = config.pitch
+  utter.rate = config.rate
+  utter.volume = 1.0
+
+  if (onEnd) {
+    utter.onend = onEnd
+    utter.onerror = onEnd
   }
 
-  try {
-    const response = await fetch('/api/tts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, lang, voice, country }),
-    })
+  // Guard prevents double-speak when both voiceschanged and the fallback timeout fire
+  let spoken = false
+  const setVoice = () => {
+    if (spoken) return
+    spoken = true
+    const voices = window.speechSynthesis.getVoices()
+    const voice =
+      voices.find((v) => v.lang === locale) ??
+      voices.find((v) => v.lang.startsWith(lang))
+    if (voice) utter.voice = voice
+    window.speechSynthesis.speak(utter)
+  }
 
-    if (!response.ok) {
-      console.warn('TTS request failed:', response.status, '— falling back to browser TTS')
-      browserFallback()
-      return
-    }
-
-    const blob = await response.blob()
-    const url = URL.createObjectURL(blob)
-    const audio = new Audio(url)
-    currentAudio = audio
-
-    audio.onended = () => {
-      URL.revokeObjectURL(url)
-      currentAudio = null
-      onEnd?.()
-    }
-    audio.onerror = () => {
-      URL.revokeObjectURL(url)
-      currentAudio = null
-      console.warn('Audio playback error — falling back to browser TTS')
-      browserFallback()
-    }
-
-    await audio.play()
-  } catch (error: any) {
-    console.warn('TTS error:', error.message, '— falling back to browser TTS')
-    browserFallback()
+  if (window.speechSynthesis.getVoices().length === 0) {
+    window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true })
+    setTimeout(setVoice, 500)
+  } else {
+    setVoice()
   }
 }
 
 export function stopSpeaking(): void {
-  if (currentAudio) {
-    currentAudio.pause()
-    try { URL.revokeObjectURL(currentAudio.src) } catch {}
-    currentAudio = null
-  }
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
     window.speechSynthesis.cancel()
   }
-}
-
-export function isSpeaking(): boolean {
-  return currentAudio !== null && !currentAudio.paused
 }

@@ -2,10 +2,9 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { withRetry } from '@/lib/db/withRetry'
-import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
-import { routeAI } from '@/lib/ai/router'
+import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -15,99 +14,80 @@ const schema = z.object({
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) {
-    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
+    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
   }
 
   const userId = session.user.id
+
+  const { allowed } = await checkRateLimit(`rl:chat:${userId}`, 60, 60)
+  if (!allowed) return rateLimitResponse()
 
   try {
     const body = await req.json()
     const { sessionId, message } = schema.parse(body)
 
-    const learnSession = await withRetry(() => prisma.learnSession.findUnique({
-      where: { id: sessionId, userId },
+    const learnSession = await prisma.learnSession.findUnique({
+      where: { id: sessionId, userId: session.user.id },
       include: {
         subject: true,
         messages: { orderBy: { createdAt: 'asc' } },
       },
-    }))
+    })
     if (!learnSession) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
-    const profile = await withRetry(() => prisma.profile.findUnique({ where: { userId } }))
+    const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
 
-    await withRetry(() => prisma.message.create({
+    await prisma.message.create({
       data: { sessionId, role: MessageRole.USER, content: message },
-    }))
+    })
 
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
 
-    const subjectCode = learnSession.subject.slug
-    const [curriculumLessons, studentProgress] = await Promise.all([
-      (prisma as any).curriculum?.findMany({ where: { subjectCode }, orderBy: { order: 'asc' } }).catch(() => []) ?? Promise.resolve([]),
-      (prisma as any).studentProgress?.findUnique({ where: { userId_subjectCode: { userId, subjectCode } } }).catch(() => null) ?? Promise.resolve(null),
-    ])
-
-    let lessonCtx: LessonContext | null = null
-    if (curriculumLessons.length > 0) {
-      const currentOrder = studentProgress?.currentLesson ?? 1
-      const currentLesson = (curriculumLessons as any[]).find((l) => l.order === currentOrder) ?? curriculumLessons[0]
-      lessonCtx = {
-        currentLesson: currentLesson.order,
-        totalLessons: curriculumLessons.length,
-        lessonTitle: currentLesson.lessonTitle,
-        lessonGoal: currentLesson.lessonGoal,
-        unitTitle: currentLesson.unitTitle,
-        completedLessons: studentProgress?.completedLessons ?? [],
-      }
-    }
-
-    const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
-    const country = (profile as any)?.country ?? 'global'
+    const teachingLang = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.selfDescription ?? 'level unknown',
       profile?.learningGoals ?? profile?.selfDescription ?? 'general learning',
       memoryContext,
       teachingLang,
-      lessonCtx,
     )
 
-    const historyMessages = learnSession.messages
-      .filter((m) => m.role !== MessageRole.SYSTEM)
-      .map((m) => ({
-        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-        content: m.content,
-      }))
+    const messages = [
+      { role: 'system' as const, content: systemPrompt },
+      ...learnSession.messages
+        .filter((m) => m.role !== MessageRole.SYSTEM)
+        .map((m) => ({
+          role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+          content: m.content,
+        })),
+      { role: 'user' as const, content: message },
+    ]
 
-    try {
-      const text = await routeAI(
-        [...historyMessages, { role: 'user', content: message }],
-        systemPrompt,
-        country,
-        1024,
-        teachingLang,
-      )
-
-      if (!text) {
-        return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
-      }
-
-      await withRetry(() => prisma.message.create({
-        data: { sessionId, role: MessageRole.ASSISTANT, content: text },
-      }))
-
-      return NextResponse.json({ success: true, text })
-    } catch (error: any) {
-      console.error('[learn/chat] AI error:', error.message)
-      const isAuthError = error.status === 401 || error.message?.includes('401') || error.message?.toLowerCase().includes('invalid api key')
-      const userMessage = isAuthError
-        ? 'AI service not configured. Add a valid GROQ_API_KEY to .env.local'
-        : error.message || 'AI failed'
-      return NextResponse.json({ success: false, error: userMessage }, { status: 500 })
+    // Single-response generation — return the full text at once, not word by word.
+    const completion = await chatWithFallback({
+      messages,
+      temperature: 0.7,
+      max_tokens: 1024,
+    })
+    const text = completion.choices[0]?.message?.content ?? ''
+    if (!text) {
+      return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
     }
+
+    await prisma.message.create({
+      data: {
+        sessionId,
+        role: MessageRole.ASSISTANT,
+        content: text,
+        inputTokens: completion.usage?.prompt_tokens ?? null,
+        outputTokens: completion.usage?.completion_tokens ?? null,
+      },
+    })
+
+    return NextResponse.json({ success: true, text })
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })

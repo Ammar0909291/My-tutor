@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { generateJSON } from '@/lib/ai/client'
+import { chatWithFallback } from '@/lib/ai/client'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const schema = z.object({ subject: z.string(), topic: z.string().optional(), lang: z.enum(['ru', 'en', 'hi']).default('en') })
 
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const { allowed } = await checkRateLimit(`rl:quiz:${session.user.id}`, 20, 60)
+  if (!allowed) return rateLimitResponse()
 
   try {
     const body = await req.json()
@@ -21,9 +25,15 @@ Return ONLY a JSON array:
 [{"question":"...","options":["a","b","c","d"],"correctIndex":0,"explanation":"..."}]`
 
     try {
-      const result = await generateJSON(prompt, 1500)
-      const questions = Array.isArray(result) ? result : []
-      return NextResponse.json({ success: true, questions })
+      const completion = await chatWithFallback({
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 1500,
+        temperature: 0.4,
+      })
+      const raw = completion.choices[0]?.message?.content ?? '[]'
+      const jsonMatch = raw.match(/\[[\s\S]*\]/)
+      const questions = jsonMatch ? JSON.parse(jsonMatch[0]) : []
+      return NextResponse.json({ success: true, questions: Array.isArray(questions) ? questions : [] })
     } catch (error: any) {
       console.error('[quiz/generate] AI error:', error.message)
       return NextResponse.json({ success: true, questions: [] })
