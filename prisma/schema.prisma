@@ -417,6 +417,7 @@ model LearningPath {
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   subject Subject @relation(fields: [subjectId], references: [id])
 
+  @@index([userId, subjectId])
   @@map("learning_paths")
 }
 
@@ -441,6 +442,8 @@ model LearnSession {
   subject  Subject   @relation(fields: [subjectId], references: [id])
   messages Message[]
 
+  @@index([userId, subjectId])
+  @@index([userId, status])
   @@map("learn_sessions")
 }
 
@@ -918,6 +921,7 @@ model RetentionMetric {
   subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@unique([userId, subjectId, topic])
+  @@index([userId, subjectId, masteryScore])
   @@map("retention_metrics")
 }
 

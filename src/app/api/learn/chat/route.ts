@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { withRetry } from '@/lib/db/withRetry'
+import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
+import { routeAI } from '@/lib/ai/router'
 import { MessageRole } from '@prisma/client'
-import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -14,80 +15,480 @@ const schema = z.object({
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) {
-    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
   }
 
   const userId = session.user.id
-
-  const { allowed } = await checkRateLimit(`rl:chat:${userId}`, 60, 60)
-  if (!allowed) return rateLimitResponse()
 
   try {
     const body = await req.json()
     const { sessionId, message } = schema.parse(body)
 
-    const learnSession = await prisma.learnSession.findUnique({
-      where: { id: sessionId, userId: session.user.id },
+    const learnSession = await withRetry(() => prisma.learnSession.findUnique({
+      where: { id: sessionId, userId },
       include: {
         subject: true,
         messages: { orderBy: { createdAt: 'asc' } },
       },
-    })
+    }))
     if (!learnSession) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
-    const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+    const profile = await withRetry(() => prisma.profile.findUnique({ where: { userId } }))
 
-    await prisma.message.create({
+    await withRetry(() => prisma.message.create({
       data: { sessionId, role: MessageRole.USER, content: message },
-    })
+    }))
 
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
 
-    const teachingLang = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
-    const systemPrompt = buildTutorSystemPrompt(
+    const subjectCode = learnSession.subject.slug
+
+    // Batch all per-request reads that are needed by multiple context blocks.
+    // Sprint U: topicProgress was fetched 3× (KG synthesis, Library synthesis,
+    // KG context builder) — now fetched once and shared. learningProfile +
+    // subjectAnalytics fetched once instead of twice (adaptive context +
+    // buildLearnerIntelligenceProfile reuses Prisma's connection pool but still
+    // issues separate SQL calls without batching).
+    const [curriculumLessons, studentProgress, topicProgressRowsShared, learningProfileShared, subjectAnalyticsShared] = await Promise.all([
+      (prisma as any).curriculum?.findMany({ where: { subjectCode }, orderBy: { order: 'asc' } }).catch(() => []) ?? Promise.resolve([]),
+      (prisma as any).studentProgress?.findUnique({ where: { userId_subjectCode: { userId, subjectCode } } }).catch(() => null) ?? Promise.resolve(null),
+      prisma.topicProgress.findMany({ where: { userId, subjectSlug: subjectCode } }),
+      prisma.learningProfile.findUnique({ where: { userId } }).catch(() => null),
+      prisma.subjectAnalytics.findUnique({ where: { userId_subjectId: { userId, subjectId: learnSession.subjectId } } }).catch(() => null),
+    ])
+
+    let lessonCtx: LessonContext | null = null
+    if (curriculumLessons.length > 0) {
+      const currentOrder = studentProgress?.currentLesson ?? 1
+      const currentLesson = (curriculumLessons as any[]).find((l) => l.order === currentOrder) ?? curriculumLessons[0]
+      lessonCtx = {
+        currentLesson: currentLesson.order,
+        totalLessons: curriculumLessons.length,
+        lessonTitle: currentLesson.lessonTitle,
+        lessonGoal: currentLesson.lessonGoal,
+        unitTitle: currentLesson.unitTitle,
+        completedLessons: studentProgress?.completedLessons ?? [],
+      }
+    }
+
+    // For KG-backed subjects (math/physics/chemistry/biology) there are no DB
+    // curriculum rows, so synthesise lessonCtx from the knowledge graph instead.
+    if (lessonCtx === null) {
+      try {
+        const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+        const graph = getKnowledgeGraph(subjectCode)
+        if (graph) {
+          let order = 1
+          const syntheticLessons = graph.modules.flatMap((module, modIdx) =>
+            module.nodes.map((node, nodeIdx) => ({
+              subjectCode,
+              unit: modIdx + 1,
+              unitTitle: module.title,
+              lesson: nodeIdx + 1,
+              lessonTitle: node.title,
+              lessonGoal: (node as any).description ?? node.title,
+              order: order++,
+              topicSlug: node.slug,
+            }))
+          )
+          if (syntheticLessons.length > 0) {
+            const topicProgressRows = topicProgressRowsShared
+            const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+            const currentLesson = (inProgressSlug
+              ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
+              : null)
+              ?? (studentProgress?.currentLesson != null
+                ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
+                : null)
+              ?? syntheticLessons[0]
+            const completedSlugs = new Set(
+              topicProgressRows
+                .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED')
+                .map((r) => r.topicSlug)
+            )
+            lessonCtx = {
+              currentLesson: currentLesson.order,
+              totalLessons: syntheticLessons.length,
+              lessonTitle: currentLesson.lessonTitle,
+              lessonGoal: currentLesson.lessonGoal,
+              unitTitle: currentLesson.unitTitle,
+              completedLessons: syntheticLessons
+                .filter((l) => completedSlugs.has(l.topicSlug))
+                .map((l) => l.order),
+            }
+          }
+        }
+      } catch {
+        // KG synthesis is optional — never blocks the lesson
+      }
+    }
+
+    // For Subject Library subjects without a knowledge graph (Spanish, JavaScript, etc.)
+    // synthesise lessonCtx from the subject catalog.
+    if (lessonCtx === null) {
+      try {
+        const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
+        const libSubject = findLibrarySubject(subjectCode)
+        if (libSubject) {
+          let order = 1
+          const syntheticLessons = libSubject.modules.flatMap((module, modIdx) =>
+            module.nodes.map((_node, _nodeIdx) => ({
+              subjectCode,
+              unit: modIdx + 1,
+              unitTitle: module.title,
+              lessonTitle: _node.title,
+              lessonGoal: _node.title,
+              order: order++,
+              topicSlug: _node.slug,
+            }))
+          )
+          if (syntheticLessons.length > 0) {
+            const topicProgressRows = topicProgressRowsShared
+            const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+            const currentLesson = (inProgressSlug
+              ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
+              : null)
+              ?? (studentProgress?.currentLesson != null
+                ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
+                : null)
+              ?? syntheticLessons[0]
+            const completedSlugs = new Set(
+              topicProgressRows
+                .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED')
+                .map((r) => r.topicSlug)
+            )
+            lessonCtx = {
+              currentLesson: currentLesson.order,
+              totalLessons: syntheticLessons.length,
+              lessonTitle: currentLesson.lessonTitle,
+              lessonGoal: currentLesson.lessonGoal,
+              unitTitle: currentLesson.unitTitle,
+              completedLessons: syntheticLessons
+                .filter((l) => completedSlugs.has(l.topicSlug))
+                .map((l) => l.order),
+            }
+          }
+        }
+      } catch {
+        // Subject Library synthesis is optional — never blocks the lesson
+      }
+    }
+
+    const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
+    const country = (profile as any)?.country ?? 'global'
+    let systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.selfDescription ?? 'level unknown',
       profile?.learningGoals ?? profile?.selfDescription ?? 'general learning',
       memoryContext,
       teachingLang,
+      lessonCtx,
+      learnSession.subject.type,
     )
 
-    const messages = [
-      { role: 'system' as const, content: systemPrompt },
-      ...learnSession.messages
-        .filter((m) => m.role !== MessageRole.SYSTEM)
-        .map((m) => ({
-          role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-          content: m.content,
-        })),
-      { role: 'user' as const, content: message },
-    ]
-
-    // Single-response generation — return the full text at once, not word by word.
-    const completion = await chatWithFallback({
-      messages,
-      temperature: 0.7,
-      max_tokens: 1024,
-    })
-    const text = completion.choices[0]?.message?.content ?? ''
-    if (!text) {
-      return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+    // Append the personalized roadmap context (if one exists) so the tutor
+    // never skips ahead of the learner's current level/module.
+    if (profile?.currentLevel) {
+      try {
+        const { generateRoadmap } = await import('@/lib/curriculum/engine')
+        const roadmap = generateRoadmap(subjectCode, profile.currentLevel as any, (profile as any).targetLevel ?? null)
+        if (roadmap) {
+          const { buildTutorRoadmapContext } = await import('@/lib/curriculum/engine')
+          systemPrompt += `\n\n${buildTutorRoadmapContext(roadmap)}`
+        }
+      } catch (err) {
+        console.warn('[learn/chat] roadmap context skipped:', err)
+      }
     }
 
-    await prisma.message.create({
-      data: {
-        sessionId,
-        role: MessageRole.ASSISTANT,
-        content: text,
-        inputTokens: completion.usage?.prompt_tokens ?? null,
-        outputTokens: completion.usage?.completion_tokens ?? null,
-      },
-    })
+    // Append Coach placement context (recommended level + strengths/weaknesses)
+    // when available, so the Tutor adapts explanations without re-deriving level.
+    try {
+      const goal = await prisma.learningGoal.findFirst({
+        where: { coachProfile: { userId: session.user.id }, subjectId: learnSession.subjectId },
+        include: { assessment: { include: { attempts: { orderBy: { createdAt: 'desc' }, take: 1 } } } },
+      })
+      const attempt = goal?.assessment?.attempts?.[0]
+      if (goal?.recommendedLevel || attempt) {
+        const lines = [`\n\nCOACH CONTEXT — use this to calibrate your explanations:`]
+        if (goal?.recommendedLevel) lines.push(`- Coach-recommended starting level: ${goal.recommendedLevel.replace('_', ' ')}`)
+        if (goal?.targetLevel) lines.push(`- Target level: ${goal.targetLevel.replace('_', ' ')}`)
+        if (attempt?.strengths?.length) lines.push(`- Strengths from placement assessment: ${attempt.strengths.join(', ')}`)
+        if (attempt?.weaknesses?.length) lines.push(`- Weak areas to reinforce gently: ${attempt.weaknesses.join(', ')}`)
+        lines.push(`Adapt pacing and depth accordingly — spend more time on weak areas, move faster through strengths, and never assume knowledge beyond the recommended starting level.`)
+        systemPrompt += lines.join('\n')
+      }
+    } catch (err) {
+      console.warn('[learn/chat] coach context skipped:', err)
+    }
 
-    return NextResponse.json({ success: true, text })
+    // Append curriculum-tree progression context (current/completed modules,
+    // weak areas from module checks) for SUBJECT_LIBRARY subjects, so the
+    // Tutor never teaches ahead of what's unlocked. Additive — independent
+    // of the legacy lesson-based roadmap context above.
+    try {
+      const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
+      const librarySubject = findLibrarySubject(learnSession.subject.slug)
+      if (librarySubject) {
+        const progressRows = await prisma.moduleProgress.findMany({
+          where: { userId: session.user.id, subjectId: learnSession.subjectId },
+        })
+        if (progressRows.length > 0) {
+          const bySlug = new Map(progressRows.map((p) => [p.moduleSlug, p]))
+          const completed = librarySubject.modules.filter((m) => bySlug.get(m.slug)?.status === 'COMPLETED').map((m) => m.title)
+          const current = librarySubject.modules.find((m) => {
+            const st = bySlug.get(m.slug)?.status
+            return st === 'AVAILABLE' || st === 'IN_PROGRESS'
+          })
+          const locked = librarySubject.modules.filter((m) => (bySlug.get(m.slug)?.status ?? 'LOCKED') === 'LOCKED').map((m) => m.title)
+          const weakModules = progressRows.filter((p) => p.status === 'IN_PROGRESS' && p.bestScore != null && p.bestScore < 70)
+            .map((p) => librarySubject.modules.find((m) => m.slug === p.moduleSlug)?.title)
+            .filter(Boolean)
+
+          const lines = [`\n\nCURRICULUM PROGRESSION — strict teaching boundary:`]
+          if (current) lines.push(`- Current module (teach this now): "${current.title}" — topics: ${current.nodes.map((n) => n.title).join(', ')}`)
+          if (completed.length) lines.push(`- Already completed (can reference, don't re-teach from scratch): ${completed.join(', ')}`)
+          if (weakModules.length) lines.push(`- Struggled with on module checks (revisit gently, give extra examples): ${weakModules.join(', ')}`)
+          if (locked.length) lines.push(`- NOT YET UNLOCKED (do not teach these topics yet, even if asked — gently redirect to the current module): ${locked.join(', ')}`)
+          lines.push(`Stay strictly within the current module's scope unless the student is reviewing a completed module.`)
+          systemPrompt += lines.join('\n')
+        }
+      }
+    } catch (err) {
+      console.warn('[learn/chat] curriculum progression context skipped:', err)
+    }
+
+    // Append Adaptive Tutor context — preferences + recent performance trend,
+    // so the Tutor adjusts pacing/depth/examples per learner instead of
+    // teaching everyone the same way. Additive — independent of other context blocks.
+    try {
+      const learningProfile = learningProfileShared
+      const subjectAnalytics = subjectAnalyticsShared
+      if (learningProfile || subjectAnalytics) {
+        const lines = [`\n\nADAPTIVE TUTOR CONTEXT — calibrate your teaching style:`]
+        if (learningProfile) {
+          lines.push(`- Preferred learning style: ${learningProfile.preferredLearningStyle.toLowerCase()} (lean into ${learningProfile.preferredLearningStyle === 'VISUAL' ? 'diagrams/visual analogies' : learningProfile.preferredLearningStyle === 'PRACTICAL' ? 'hands-on examples and exercises' : learningProfile.preferredLearningStyle === 'THEORETICAL' ? 'concepts and underlying principles' : 'a mix of theory and practice'})`)
+          lines.push(`- Preferred lesson length: ${learningProfile.preferredLessonLength.toLowerCase()}; pace: ${learningProfile.learningPace.toLowerCase()}; difficulty preference: ${learningProfile.preferredDifficulty.toLowerCase()}`)
+          lines.push(`- Self-reported confidence: ${learningProfile.confidenceLevel}/100`)
+        }
+        if (subjectAnalytics) {
+          if (subjectAnalytics.trend === 'DECLINING') lines.push(`- Recent trend: struggling lately — slow down, simplify, add more worked examples and check understanding often.`)
+          else if (subjectAnalytics.trend === 'IMPROVING') lines.push(`- Recent trend: excelling lately — move faster, increase depth/challenge, introduce more advanced angles.`)
+          if (subjectAnalytics.weakTopics.length) lines.push(`- Give extra reinforcement on: ${subjectAnalytics.weakTopics.join(', ')}`)
+          if (subjectAnalytics.strongTopics.length) lines.push(`- Can move quickly through (already solid): ${subjectAnalytics.strongTopics.join(', ')}`)
+        }
+        lines.push(`Adapt explanations, pacing, and example density to this learner — never use a one-size-fits-all approach.`)
+        systemPrompt += lines.join('\n')
+      }
+    } catch (err) {
+      console.warn('[learn/chat] adaptive tutor context skipped:', err)
+    }
+
+    // Mastery + Spaced Repetition context (Sprint C, Part 8): the Tutor should
+    // know weak concepts, upcoming reviews, project history, and mastery
+    // scores, and adjust explanations accordingly. Additive, own try/catch —
+    // never blocks the lesson if any of this is unavailable.
+    try {
+      const sevenDaysOut = new Date()
+      sevenDaysOut.setDate(sevenDaysOut.getDate() + 7)
+
+      const [weakMetrics, dueReviews, recentSubmissions] = await Promise.all([
+        prisma.retentionMetric.findMany({
+          where: { userId, subjectId: learnSession.subjectId, masteryScore: { lt: 70 } },
+          orderBy: { masteryScore: 'asc' },
+          take: 5,
+        }),
+        prisma.reviewSchedule.findMany({
+          where: { userId, subjectId: learnSession.subjectId, nextReviewAt: { lte: sevenDaysOut } },
+          orderBy: { nextReviewAt: 'asc' },
+          take: 5,
+        }),
+        prisma.projectSubmission.findMany({
+          where: { userId, project: { subjectId: learnSession.subjectId } },
+          include: { project: true },
+          orderBy: { updatedAt: 'desc' },
+          take: 3,
+        }),
+      ])
+
+      if (weakMetrics.length || dueReviews.length || recentSubmissions.length) {
+        const lines = [`\n\nMASTERY & SPACED REPETITION CONTEXT — use this to target your teaching:`]
+        if (weakMetrics.length) {
+          lines.push(`- Weak concepts (mastery score in parentheses, out of 100): ${weakMetrics.map((m) => `${m.topic} (${m.masteryScore})`).join(', ')}. Weave in extra reinforcement and check understanding before moving on.`)
+        }
+        if (dueReviews.length) {
+          const now = new Date()
+          const overdueTopics = dueReviews.filter((r) => r.nextReviewAt < now).map((r) => r.topic)
+          const upcomingTopics = dueReviews.filter((r) => r.nextReviewAt >= now).map((r) => r.topic)
+          if (overdueTopics.length) lines.push(`- OVERDUE for review: ${overdueTopics.join(', ')}. If a natural opening arises, briefly revisit one of these before introducing new material.`)
+          if (upcomingTopics.length) lines.push(`- Coming up for review soon: ${upcomingTopics.join(', ')}.`)
+        }
+        if (recentSubmissions.length) {
+          lines.push(`- Recent project history: ${recentSubmissions.map((s) => `"${s.project.title}" — ${s.status.toLowerCase()}${s.score != null ? ` (score ${s.score}/100)` : ''}`).join('; ')}. Reference these when relevant to ground new concepts in work the student has already done.`)
+        }
+        lines.push(`Adjust explanation depth and examples toward the learner's weak spots and overdue reviews — don't just repeat what they already know well.`)
+        systemPrompt += lines.join('\n')
+      }
+    } catch (err) {
+      console.warn('[learn/chat] mastery/spaced-repetition context skipped:', err)
+    }
+
+    // Knowledge Graph context — prerequisites, available topics, mastery gaps,
+    // and WHY the tutor is recommending the current topic (Part 7 of Sprint K.5).
+    // Additive — independent try/catch, never blocks the lesson.
+    try {
+      const { getKnowledgeGraph, buildKnowledgeGraphContext, getAvailableNodes, getDirectUnlocks, getAllNodes } = await import('@/lib/curriculum/knowledgeGraph')
+      const graph = getKnowledgeGraph(subjectCode)
+      if (graph) {
+        const topicProgressRows = topicProgressRowsShared
+        const completedSlugs = topicProgressRows
+          .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION')
+          .map((r) => r.topicSlug)
+        const completedSet = new Set(completedSlugs)
+
+        const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+        const kgContext = buildKnowledgeGraphContext(subjectCode, completedSlugs, inProgressSlug)
+        if (kgContext) systemPrompt += `\n\n${kgContext}`
+
+        // WHY THIS TOPIC: tell the tutor what the current/next topic unlocks so it
+        // can explain to the learner why mastering this topic matters.
+        const allNodes = getAllNodes(graph)
+        const currentTopicNode = inProgressSlug ? allNodes.find((n) => n.slug === inProgressSlug) : null
+        if (currentTopicNode) {
+          const unlocks = getDirectUnlocks(graph, currentTopicNode.slug)
+          if (unlocks.length > 0) {
+            systemPrompt += `\n\nWHY THIS TOPIC MATTERS: Mastering "${currentTopicNode.title}" unlocks: ${unlocks.map((n) => n.title).join(', ')}. When it's natural, briefly explain to the learner why this topic is a prerequisite for their next goals — make the learning journey feel purposeful, not arbitrary.`
+          }
+        } else {
+          // No in-progress: recommend next available
+          const available = getAvailableNodes(graph, completedSet)
+          const nextNode = available[0]
+          if (nextNode) {
+            const unlocks = getDirectUnlocks(graph, nextNode.slug)
+            if (unlocks.length > 0) {
+              systemPrompt += `\n\nNEXT RECOMMENDED TOPIC: "${nextNode.title}" (${nextNode.estimatedHours}h). Mastering it unlocks: ${unlocks.map((n) => n.title).join(', ')}. Guide the learner toward this topic once the current discussion concludes.`
+            }
+          }
+        }
+
+        // Knowledge gaps: completed but mastery below 70%
+        const weakTopics = topicProgressRows.filter(
+          (r) => (r.status === 'COMPLETED' || r.status === 'MASTERED') && r.masteryPct > 0 && r.masteryPct < 70
+        )
+        if (weakTopics.length > 0) {
+          systemPrompt += `\n\nKNOWLEDGE GAPS — completed with mastery < 70%: ${weakTopics.map((r) => `${r.topicSlug} (${r.masteryPct}%)`).join(', ')}. Weave in targeted reinforcement for these topics where natural.`
+        }
+
+        // Assessment protocol — subject-aware, with deterministic validation instructions
+        // for STEM and programming subjects.
+        try {
+          const { getAssessmentRequirement } = await import('@/lib/assessment/subjectValidator')
+          const req = getAssessmentRequirement(subjectCode)
+          const deterministicExtra = [
+            req.mathAnswerInstruction,
+            req.codeOutputInstruction,
+          ].filter(Boolean).join('\n')
+
+          systemPrompt += `\n\nASSESSMENT PROTOCOL — follow this EXACTLY when the learner asks to be assessed (phrases like "assess me", "test me", "оцени моё понимание", "परीक्षण करो"):
+Question focus for this subject: ${req.questionFocus.join('; ')}.
+Validation approach: ${req.deterministicNote}
+${deterministicExtra ? deterministicExtra + '\n' : ''}Steps:
+1. Acknowledge, then ask ONE question at a time.
+2. Wait for the learner's answer before the next question.
+3. Ask exactly 3 questions: (1) factual/numeric recall, (2) application/reasoning, (3) explanation in own words.
+4. After question 3 is answered, give brief feedback per answer, then END your response (last line) with:
+[ASSESSMENT_RESULT correctness=XX reasoning=XX confidence=XX]
+Where: correctness (0-100) = factual/numeric accuracy; reasoning (0-100) = quality of explanation; confidence (0-100) = clarity and certainty (inferred, not self-reported).
+CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never mid-conversation.`
+        } catch {
+          // fallback to generic protocol
+          systemPrompt += `\n\nASSESSMENT PROTOCOL: When asked to assess, ask 3 questions one at a time, then end with [ASSESSMENT_RESULT correctness=XX reasoning=XX confidence=XX].`
+        }
+      }
+    } catch (err) {
+      console.warn('[learn/chat] knowledge graph context skipped:', err)
+    }
+
+    // Learner Intelligence Profile (Sprint P) — aggregates TopicProgress,
+    // MistakeRecord, EvidenceRecord, LearningProfile, and SubjectAnalytics
+    // into estimated level, confidence, pace, weak/strong concepts, mistake
+    // trends, learner mode (slow/advanced), and explanation style. Subject-
+    // agnostic — works for every subject. Additive, own try/catch.
+    try {
+      const { buildLearnerIntelligenceProfile, formatLearnerIntelligenceContext } = await import('@/lib/ai/learnerProfile')
+      const learnerProfile = await buildLearnerIntelligenceProfile(
+        userId,
+        subjectCode,
+        learnSession.subjectId,
+        profile?.selfDescription ?? null,
+        profile?.learningGoals ?? null,
+      )
+      if (learnerProfile.hasSignal) {
+        systemPrompt += formatLearnerIntelligenceContext(learnerProfile)
+      }
+    } catch (err) {
+      console.warn('[learn/chat] learner intelligence profile skipped:', err)
+    }
+
+    const historyMessages = learnSession.messages
+      .filter((m) => m.role !== MessageRole.SYSTEM)
+      .map((m) => ({
+        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+        content: m.content,
+      }))
+
+    try {
+      const { text, provider } = await routeAI(
+        [...historyMessages, { role: 'user', content: message }],
+        systemPrompt,
+        country,
+        1024,
+        teachingLang,
+        { userId, subject: learnSession.subject.slug },
+      )
+
+      if (!text) {
+        return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+      }
+
+      await withRetry(() => prisma.message.create({
+        data: { sessionId, role: MessageRole.ASSISTANT, content: text },
+      }))
+
+      // Auto-save lesson position on every interaction so Dashboard/Library
+      // can show exactly where the learner is without them completing a lesson.
+      prisma.studentProgress.upsert({
+        where: { userId_subjectCode: { userId, subjectCode } },
+        update: {
+          lastStudiedAt: new Date(),
+          ...(lessonCtx ? {
+            lastLessonTitle: lessonCtx.lessonTitle,
+            lastUnitTitle: lessonCtx.unitTitle,
+          } : {}),
+        },
+        create: {
+          userId,
+          subjectCode,
+          currentLesson: lessonCtx?.currentLesson ?? 1,
+          completedLessons: lessonCtx?.completedLessons ?? [],
+          lastStudiedAt: new Date(),
+          lastLessonTitle: lessonCtx?.lessonTitle ?? null,
+          lastUnitTitle: lessonCtx?.unitTitle ?? null,
+        },
+      }).catch(() => {})
+
+      return NextResponse.json({ success: true, text, provider })
+    } catch (error: any) {
+      console.error('[learn/chat] AI error:', error.message)
+      const isAuthError = error.status === 401 || error.message?.includes('401') || error.message?.toLowerCase().includes('invalid api key')
+      const userMessage = isAuthError
+        ? 'AI service not configured. Add a valid GROQ_API_KEY to .env.local'
+        : error.message || 'AI failed'
+      return NextResponse.json({ success: false, error: userMessage }, { status: 500 })
+    }
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
