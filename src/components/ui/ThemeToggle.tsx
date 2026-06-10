@@ -1,29 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useTheme } from '@/components/Providers'
 
 export function ThemeToggle() {
-  const [dark, setDark] = useState(false)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isDark = stored ? stored === 'dark' : prefersDark
-    setDark(isDark)
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
-  }, [])
-
-  function toggle() {
-    const next = !dark
-    setDark(next)
-    const theme = next ? 'dark' : 'light'
-    localStorage.setItem('theme', theme)
-    document.documentElement.setAttribute('data-theme', theme)
-  }
+  const { theme, toggleTheme } = useTheme()
+  const dark = theme === 'dark'
 
   return (
     <button
-      onClick={toggle}
+      onClick={toggleTheme}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
       className="rounded-lg p-2 transition-colors"
       style={{ color: 'var(--text-secondary)', background: 'transparent' }}

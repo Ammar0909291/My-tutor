@@ -184,16 +184,16 @@ export default function SettingsPage() {
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarName)}&background=F78166&color=fff&size=128&bold=true&rounded=true`
 
   return (
-    <div className="min-h-screen" style={{ background: '#0A0A0F', color: '#fff' }}>
+    <div className="min-h-screen" style={{ background: 'var(--bg-void)', color: 'var(--text-primary)' }}>
 
       {/* Nav */}
-      <nav className="sticky top-0 z-50 border-b border-white/[0.06]"
-        style={{ background: 'rgba(10,10,15,0.85)', backdropFilter: 'blur(20px)' }}>
+      <nav className="sticky top-0 z-50"
+        style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/dashboard" className="text-sm font-medium transition-colors"
-            style={{ color: '#52525B' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#fff' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#52525B' }}>
+            style={{ color: 'var(--text-secondary)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)' }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)' }}>
             {t('settings_back')}
           </Link>
           <LanguageToggle />
@@ -210,9 +210,9 @@ export default function SettingsPage() {
             <img src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} />
             <div className="min-w-0">
               <p className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{profile?.name || '—'}</p>
-              <p className="text-xs mt-0.5" style={{ color: '#52525B' }}>{profile?.email}</p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{profile?.email}</p>
               {profile && (
-                <div className="flex gap-3 mt-1.5 text-xs" style={{ color: '#52525B' }}>
+                <div className="flex gap-3 mt-1.5 text-xs" style={{ color: 'var(--text-secondary)' }}>
                   <span>{t('profile_lessons')}: {profile.lessonsCount}</span>
                   <span>{t('profile_xp')}: {profile.xpPoints}</span>
                 </div>
@@ -223,7 +223,7 @@ export default function SettingsPage() {
           <div className="space-y-4">
             {/* Name */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#3F3F46' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>
                 {t('profile_name')}
               </label>
               <input
@@ -231,13 +231,13 @@ export default function SettingsPage() {
                 value={profileName}
                 onChange={(e) => setProfileName(e.target.value)}
                 className="w-full px-4 py-2.5 rounded-xl text-sm"
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' }}
+                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', outline: 'none' }}
               />
             </div>
 
             {/* Email (read-only) */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#3F3F46' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>
                 {t('profile_email')} 🔒
               </label>
               <input
@@ -245,13 +245,13 @@ export default function SettingsPage() {
                 value={profile?.email ?? ''}
                 readOnly
                 className="w-full px-4 py-2.5 rounded-xl text-sm"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#52525B', cursor: 'not-allowed' }}
+                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', color: 'var(--text-secondary)', cursor: 'not-allowed' }}
               />
             </div>
 
             {/* Voice preference */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#3F3F46' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>
                 {t('profile_voice')}
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -259,9 +259,9 @@ export default function SettingsPage() {
                   <button key={v.key} onClick={() => setProfileVoice(v.key)}
                     className="py-2 rounded-xl text-xs font-semibold transition-all"
                     style={{
-                      background: profileVoice === v.key ? 'rgba(247,129,102,0.12)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${profileVoice === v.key ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)'}`,
-                      color: profileVoice === v.key ? 'var(--accent-primary)' : '#71717A',
+                      background: profileVoice === v.key ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                      border: `1px solid ${profileVoice === v.key ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                      color: profileVoice === v.key ? 'var(--accent-primary)' : 'var(--text-secondary)',
                     }}>
                     {v.label}
                   </button>
@@ -271,7 +271,7 @@ export default function SettingsPage() {
 
             {/* Level/About */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#3F3F46' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>
                 {t('profile_level')}
               </label>
               <textarea
@@ -279,13 +279,13 @@ export default function SettingsPage() {
                 onChange={(e) => setProfileLevel(e.target.value)}
                 rows={3}
                 className="w-full px-4 py-2.5 rounded-xl text-sm resize-none"
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' }}
+                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', outline: 'none' }}
               />
             </div>
 
             {/* Member since + stats */}
             {profile && (
-              <div className="flex gap-4 text-xs" style={{ color: '#52525B' }}>
+              <div className="flex gap-4 text-xs" style={{ color: 'var(--text-secondary)' }}>
                 <span>{t('profile_member')}: {new Date(profile.createdAt).toLocaleDateString()}</span>
               </div>
             )}
@@ -307,9 +307,9 @@ export default function SettingsPage() {
               <button key={v.key} onClick={() => setVoiceId(v.key)}
                 className="py-3 rounded-xl text-sm font-semibold transition-all"
                 style={{
-                  background: voiceId === v.key ? 'rgba(247,129,102,0.12)' : 'rgba(255,255,255,0.04)',
-                  border: `1px solid ${voiceId === v.key ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)'}`,
-                  color: voiceId === v.key ? 'var(--accent-primary)' : '#71717A',
+                  background: voiceId === v.key ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                  border: `1px solid ${voiceId === v.key ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                  color: voiceId === v.key ? 'var(--accent-primary)' : 'var(--text-secondary)',
                 }}>
                 {v.label}
               </button>
@@ -324,9 +324,9 @@ export default function SettingsPage() {
               <button key={l.key} onClick={() => handleLangClick(l.key)}
                 className="py-3 rounded-xl text-sm font-semibold transition-all flex flex-col items-center gap-1"
                 style={{
-                  background: (teachingLanguage === l.key || lang === l.key) ? 'rgba(247,129,102,0.12)' : 'rgba(255,255,255,0.04)',
-                  border: `1px solid ${(teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)'}`,
-                  color: (teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : '#71717A',
+                  background: (teachingLanguage === l.key || lang === l.key) ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                  border: `1px solid ${(teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                  color: (teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : 'var(--text-secondary)',
                 }}>
                 <span className="text-xl">{l.icon}</span>
                 <span>{l.label}</span>
@@ -351,8 +351,8 @@ export default function SettingsPage() {
                   }}
                   style={{
                     flex: 1, minWidth: 100, cursor: 'pointer', position: 'relative',
-                    background: isSelected ? `${opt.color}15` : 'rgba(255,255,255,0.04)',
-                    border: `2px solid ${isSelected ? opt.color : 'rgba(255,255,255,0.08)'}`,
+                    background: isSelected ? `${opt.color}15` : 'var(--bg-elevated)',
+                    border: `2px solid ${isSelected ? opt.color : 'var(--border-default)'}`,
                     borderRadius: 14, padding: '14px 12px', textAlign: 'center',
                     transition: 'all 200ms', outline: 'none',
                   }}>
@@ -360,19 +360,19 @@ export default function SettingsPage() {
                     <div style={{ position: 'absolute', top: 8, right: 8, width: 16, height: 16, borderRadius: '50%', background: opt.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 700 }}>✓</div>
                   )}
                   <div style={{ fontSize: 28 }}>{opt.flag}</div>
-                  <p style={{ fontSize: 13, fontWeight: 700, color: '#E6EDF3', marginTop: 6 }}>{opt.name}</p>
-                  <p style={{ fontSize: 11, color: '#7D8590', marginTop: 3 }}>{opt.desc}</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', marginTop: 6 }}>{opt.name}</p>
+                  <p style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 3 }}>{opt.desc}</p>
                 </button>
               )
             })}
           </div>
-          <p style={{ fontSize: 11, color: '#484F58', marginTop: 10 }}>
+          <p style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 10 }}>
             {lang === 'ru' ? 'Регион определяет AI-репетитора и голос' : 'Changing region affects AI tutor and voice'}
           </p>
         </Section>
 
         {/* Danger Zone */}
-        <div className="rounded-2xl p-5" style={{ background: '#0F0F18', border: '1px solid rgba(248,81,73,0.25)' }}>
+        <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid rgba(248,81,73,0.25)' }}>
           <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#F85149' }}>
             {lang === 'ru' ? '⚠ Опасная зона' : '⚠ Danger Zone'}
           </p>
@@ -380,10 +380,10 @@ export default function SettingsPage() {
           {deleteStep === 'hidden' && (
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <p className="text-sm font-semibold" style={{ color: '#E6EDF3' }}>
+                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
                   {lang === 'ru' ? 'Удалить аккаунт' : 'Delete Account'}
                 </p>
-                <p className="text-xs mt-1" style={{ color: '#52525B' }}>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
                   {lang === 'ru'
                     ? 'Доступ будет закрыт. История обучения сохранится. Email можно использовать снова.'
                     : 'Access removed. Learning history archived. Email becomes available again.'}
@@ -404,14 +404,14 @@ export default function SettingsPage() {
                 <p className="text-sm font-bold mb-2" style={{ color: '#F85149' }}>
                   {lang === 'ru' ? 'Это действие необратимо.' : 'This action cannot be undone.'}
                 </p>
-                <ul className="text-xs space-y-1" style={{ color: '#8B949E' }}>
+                <ul className="text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
                   <li>• {lang === 'ru' ? 'Доступ к аккаунту будет закрыт навсегда' : 'Account access will be permanently removed'}</li>
                   <li>• {lang === 'ru' ? 'История уроков сохранится в базе данных' : 'Learning progress is archived in the database'}</li>
                   <li>• {lang === 'ru' ? 'Email станет доступен для новой регистрации' : 'Your email can be used to register a new account'}</li>
                 </ul>
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wider" style={{ color: '#3F3F46' }}>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wider" style={{ color: 'var(--text-dim)' }}>
                   {lang === 'ru' ? 'Введите DELETE для подтверждения' : 'Type DELETE to confirm'}
                 </label>
                 <input
@@ -421,7 +421,7 @@ export default function SettingsPage() {
                   placeholder="DELETE"
                   disabled={deleteStep === 'deleting'}
                   className="w-full px-4 py-2.5 rounded-xl text-sm font-mono"
-                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(248,81,73,0.3)', color: '#fff', outline: 'none' }}
+                  style={{ background: 'var(--bg-elevated)', border: '1px solid rgba(248,81,73,0.3)', color: 'var(--text-primary)', outline: 'none' }}
                 />
               </div>
               <div className="flex gap-3">
@@ -429,7 +429,7 @@ export default function SettingsPage() {
                   onClick={() => { setDeleteStep('hidden'); setDeleteInput('') }}
                   disabled={deleteStep === 'deleting'}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all"
-                  style={{ background: 'rgba(255,255,255,0.05)', color: '#71717A', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
                   {lang === 'ru' ? 'Отмена' : 'Cancel'}
                 </button>
                 <button
@@ -460,8 +460,8 @@ export default function SettingsPage() {
 
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl p-5 border border-white/[0.07]" style={{ background: '#0F0F18' }}>
-      <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#3F3F46' }}>{label}</p>
+    <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}>
+      <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--text-dim)' }}>{label}</p>
       {children}
     </div>
   )

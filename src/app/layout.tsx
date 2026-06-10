@@ -69,6 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{
           __html: `if('serviceWorker'in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}`
         }} />
+        <script dangerouslySetInnerHTML={{
+          __html: `try{var t=localStorage.getItem('mytutor_theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}`
+        }} />
       </head>
       <body suppressHydrationWarning className={body.className}>
         <Providers>{children}</Providers>

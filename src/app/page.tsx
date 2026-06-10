@@ -81,7 +81,7 @@ export default function HomePage() {
 
       {/* ── Navbar ───────────────────────────────────────────────────────── */}
       <nav className="fixed top-0 inset-x-0 z-50"
-        style={{ background: 'rgba(13,17,23,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
+        style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
         <div className="max-w-6xl mx-auto px-5 h-[60px] flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-xl">🔥</span>
@@ -89,10 +89,10 @@ export default function HomePage() {
           </Link>
 
           <div className="hidden md:flex items-center gap-7 text-sm" style={{ color: 'var(--text-secondary)' }}>
-            <a href="#features" className="hover:text-white transition-colors">{t('nav_features')}</a>
-            <a href="#how"      className="hover:text-white transition-colors">{t('nav_how')}</a>
-            <a href="#pricing"  className="hover:text-white transition-colors">{t('nav_pricing')}</a>
-            <a href="#faq"      className="hover:text-white transition-colors">FAQ</a>
+            <a href="#features" className="hover:text-[var(--text-primary)] transition-colors">{t('nav_features')}</a>
+            <a href="#how"      className="hover:text-[var(--text-primary)] transition-colors">{t('nav_how')}</a>
+            <a href="#pricing"  className="hover:text-[var(--text-primary)] transition-colors">{t('nav_pricing')}</a>
+            <a href="#faq"      className="hover:text-[var(--text-primary)] transition-colors">FAQ</a>
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -105,9 +105,9 @@ export default function HomePage() {
               ]).map(({ key, flag, label, color }) => (
                 <button key={key} onClick={() => handleCountrySelect(key)} style={{
                   padding: '4px 10px', borderRadius: 20, fontSize: 12, cursor: 'pointer',
-                  border: `1px solid ${country === key ? color : '#30363D'}`,
+                  border: `1px solid ${country === key ? color : 'var(--border-default)'}`,
                   background: country === key ? `${color}26` : 'transparent',
-                  color: country === key ? color : '#7D8590',
+                  color: country === key ? color : 'var(--text-secondary)',
                   display: 'flex', alignItems: 'center', gap: 4, transition: 'all 150ms',
                 }}>
                   {flag} {label}
@@ -137,15 +137,15 @@ export default function HomePage() {
         {/* Mobile menu */}
         {mobileOpen && (
           <div className="md:hidden px-5 pb-4 flex flex-col gap-3"
-            style={{ background: 'rgba(13,17,23,0.97)', borderTop: '1px solid var(--border-default)' }}>
+            style={{ background: 'var(--bg-overlay)', borderTop: '1px solid var(--border-default)' }}>
             {(['nav_features','nav_how','nav_pricing'] as const).map((k, i) => (
               <a key={k} href={['#features','#how','#pricing'][i]}
                 onClick={() => setMobileOpen(false)}
-                className="py-2 text-sm transition-colors hover:text-white"
+                className="py-2 text-sm transition-colors hover:text-[var(--text-primary)]"
                 style={{ color: 'var(--text-secondary)' }}>{t(k)}</a>
             ))}
             <a href="#faq" onClick={() => setMobileOpen(false)}
-              className="py-2 text-sm transition-colors hover:text-white" style={{ color: 'var(--text-secondary)' }}>FAQ</a>
+              className="py-2 text-sm transition-colors hover:text-[var(--text-primary)]" style={{ color: 'var(--text-secondary)' }}>FAQ</a>
             <div className="flex gap-2 pt-2">
               <Link href="/auth/login"  className="btn-ghost text-sm flex-1 text-center py-2">{t('cta_login')}</Link>
               <Link href="/auth/signup" className="btn-primary text-sm flex-1 text-center py-2">{t('cta_start')}</Link>

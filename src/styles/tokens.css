@@ -4,10 +4,15 @@
   --bg-base:     #0D1117;
   --bg-surface:  #161B22;
   --bg-elevated: #21262D;
+  --bg-hover:    #2D333B;
+  --bg-overlay:  rgba(13,17,23,0.95);
   --text-primary:   #E6EDF3;
   --text-secondary: #7D8590;
   --text-dim:       #484F58;
+  --border-subtle:   rgba(48,54,61,0.8);
   --border-default: #30363D;
+  --border-emphasis: #6E7681;
+  --border-muted:    rgba(48,54,61,0.6);
 }
 
 /* ── Light theme ──────────────────────────────────────────────────── */
@@ -28,14 +33,6 @@
 }
 
 :root {
-  /* ── Base backgrounds ── */
-  --bg-void:     #080B10;
-  --bg-base:     #0D1117;
-  --bg-surface:  #161B22;
-  --bg-elevated: #21262D;
-  --bg-hover:    #2D333B;
-  --bg-overlay:  rgba(13,17,23,0.95);
-
   /* ── Brand coral ── */
   --coral:        #FF7B6B;
   --coral-hover:  #FF6B58;
@@ -63,18 +60,11 @@
   --accent-primary-dim:  var(--coral-muted);
   --accent-primary-glow: rgba(255,123,107,0.35);
 
-  /* ── Text ── */
-  --text-primary:   #E6EDF3;
-  --text-secondary: #7D8590;
-  --text-dim:       #484F58;
+  /* ── Text (theme-independent) ── */
   --text-inverse:   #0D1117;
 
-  /* ── Borders ── */
-  --border-subtle:   rgba(48,54,61,0.8);
-  --border-default:  #30363D;
-  --border-emphasis: #6E7681;
+  /* ── Borders (theme-independent) ── */
   --border-accent:   rgba(255,123,107,0.4);
-  --border-muted:    rgba(48,54,61,0.6);
 
   /* ── Radius ── */
   --r-sm:   6px;
