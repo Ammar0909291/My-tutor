@@ -12,16 +12,29 @@ function makeTransport() {
   })
 }
 
-export async function sendPasswordResetEmail(to: string, token: string) {
-  const base = process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
-  const resetUrl = `${base}/auth/reset-password?token=${token}`
-  const from = process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
+function smtpReady() {
+  return !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)
+}
 
-  await makeTransport().sendMail({
-    from,
-    to,
-    subject: 'Сброс пароля — My Tutor',
-    html: `
+const FROM = () => process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
+const APP_URL = () => process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
+
+export async function sendPasswordResetEmail(to: string, token: string): Promise<{ success: boolean; error?: string }> {
+  const resetUrl = `${APP_URL()}/auth/reset-password?token=${token}`
+
+  if (!smtpReady()) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[email] SMTP not configured — RESET LINK (dev only):', resetUrl)
+    }
+    return { success: false, error: 'SMTP not configured' }
+  }
+
+  try {
+    await makeTransport().sendMail({
+      from: FROM(),
+      to,
+      subject: 'Сброс пароля — My Tutor',
+      html: `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
@@ -52,6 +65,11 @@ export async function sendPasswordResetEmail(to: string, token: string) {
   </table>
 </body>
 </html>`,
-    text: `Сброс пароля — My Tutor\n\nПерейдите по ссылке для сброса пароля:\n${resetUrl}\n\nСсылка действительна 1 час.`,
-  })
+      text: `Сброс пароля — My Tutor\n\nПерейдите по ссылке для сброса пароля:\n${resetUrl}\n\nСсылка действительна 1 час.`,
+    })
+    return { success: true }
+  } catch (err: any) {
+    console.error('[email] Failed to send password reset:', err.message)
+    return { success: false, error: err.message }
+  }
 }

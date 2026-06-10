@@ -29,7 +29,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { subjectSlug, memoryContext } = createSchema.parse(body);
 
-    // Paywall disabled — Stripe not configured yet
 
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } });
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });

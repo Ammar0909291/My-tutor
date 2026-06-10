@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -15,6 +16,11 @@ export async function POST(req: Request) {
   if (!session?.user?.id) {
     return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
   }
+
+  const userId = session.user.id
+
+  const { allowed } = await checkRateLimit(`rl:chat:${userId}`, 60, 60)
+  if (!allowed) return rateLimitResponse()
 
   try {
     const body = await req.json()
