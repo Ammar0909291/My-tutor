@@ -1,15 +1,16 @@
 // India Education Knowledge Graph — Public API
-// Import from here, not from individual files.
+// SCHOOL_MODE_ENABLED = false: all school UI is hidden; data layer is ready
 
-// ─── Feature Flag ─────────────────────────────────────────────────────────────
-// School mode is NOT publicly available yet.
-// Set to true once UI is built and tested.
 export const SCHOOL_MODE_ENABLED = false
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// Types
 export type {
   Difficulty,
   MathDomain,
+  ScienceDomain,
+  EnglishDomain,
+  SocialScienceDomain,
+  AnyDomain,
   KnowledgeNode,
   Chapter,
   GradeSubjectCatalog,
@@ -22,32 +23,26 @@ export type {
   GeneralContext,
 } from './educationTypes'
 
-// ─── Master Knowledge Graph ───────────────────────────────────────────────────
-export {
-  MATH_KNOWLEDGE_GRAPH,
-  getKGNode,
-  getNodesByDomain,
-  getAllPrerequisites,
-} from './mathKnowledgeGraph'
+// Knowledge Graphs
+export { MATH_KNOWLEDGE_GRAPH, getKGNode, getNodesByDomain, getAllPrerequisites } from './mathKnowledgeGraph'
+export { SCIENCE_KNOWLEDGE_GRAPH, getScienceNode } from './scienceKnowledgeGraph'
+export { ENGLISH_KNOWLEDGE_GRAPH, getEnglishNode } from './englishKnowledgeGraph'
+export { SOCIAL_SCIENCE_KNOWLEDGE_GRAPH, getSocialScienceNode } from './socialScienceKnowledgeGraph'
 
-// ─── UP Board Catalog ─────────────────────────────────────────────────────────
+// UP Board Catalogs
+export { UP_MATH_CATALOG, getUPMathChapters, getUPMathChapter } from './upMathCatalog'
+export { UP_SCIENCE_CATALOG, getUPScienceChapters } from './upScienceCatalog'
+export { UP_ENGLISH_CATALOG, getUPEnglishChapters } from './upEnglishCatalog'
+export { UP_SOCIAL_SCIENCE_CATALOG, getUPSocialScienceChapters } from './upSocialScienceCatalog'
+
+// Board Registry
 export { UP_BOARD } from './upBoardCatalog'
-export {
-  UP_MATH_CATALOG,
-  getUPMathChapters,
-  getUPMathChapter,
-} from './upMathCatalog'
+export { INDIA, EDUCATION_COUNTRIES, getBoard, getAllBoards } from './educationCatalog'
 
-// ─── Country & Board Registry ─────────────────────────────────────────────────
+// Cross-cutting Graph Queries
 export {
-  INDIA,
-  EDUCATION_COUNTRIES,
-  getBoard,
-  getAllBoards,
-} from './educationCatalog'
-
-// ─── Cross-cutting Graph Queries ──────────────────────────────────────────────
-export {
+  ALL_KG_NODES,
+  BOARD_CATALOGS,
   getNodesForChapter,
   getNewNodesAtGrade,
   getCumulativeNodes,
@@ -56,3 +51,13 @@ export {
   getUncoveredNodes,
   buildSchoolTutorContext,
 } from './educationGraph'
+
+// Coverage Audit Engine
+export {
+  auditSubjectCoverage,
+  auditGradeCoverage,
+  auditBoardCoverage,
+  findUnmappedChapters,
+  findUnusedKnowledgeNodes,
+} from './coverageAudit'
+export type { CoverageAuditResult, BoardCoverageReport, UnusedNodesReport } from './coverageAudit'

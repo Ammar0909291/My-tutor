@@ -1,12 +1,7 @@
 // India Education Knowledge Graph — Core Type System
-// Designed to support any country → board → class → subject → chapter → KG node
-// Future boards (CBSE, ICSE, Maharashtra, Karnataka, ...) require only data additions.
-
-// ─── Shared Primitives ────────────────────────────────────────────────────────
 
 export type Difficulty = 'foundational' | 'developing' | 'proficient' | 'advanced'
 
-/** All mathematics knowledge domains tracked in the master KG */
 export type MathDomain =
   | 'arithmetic'
   | 'number_systems'
@@ -29,44 +24,132 @@ export type MathDomain =
   | 'matrices'
   | 'combinatorics'
 
-// ─── Master Knowledge Graph ───────────────────────────────────────────────────
+export type ScienceDomain =
+  | 'physics.measurement'
+  | 'physics.kinematics'
+  | 'physics.forces'
+  | 'physics.work_energy'
+  | 'physics.rotational_motion'
+  | 'physics.gravitation'
+  | 'physics.mechanical_properties'
+  | 'physics.thermodynamics'
+  | 'physics.waves_oscillations'
+  | 'physics.optics'
+  | 'physics.electricity'
+  | 'physics.magnetism'
+  | 'physics.modern_physics'
+  | 'physics.semiconductors'
+  | 'chemistry.matter_mixtures'
+  | 'chemistry.atomic_structure'
+  | 'chemistry.periodic_table'
+  | 'chemistry.chemical_bonding'
+  | 'chemistry.chemical_reactions'
+  | 'chemistry.acids_bases_salts'
+  | 'chemistry.metals_nonmetals'
+  | 'chemistry.thermochemistry'
+  | 'chemistry.electrochemistry'
+  | 'chemistry.organic_chemistry'
+  | 'chemistry.biochemistry'
+  | 'chemistry.environmental_chemistry'
+  | 'biology.cell'
+  | 'biology.plant_physiology'
+  | 'biology.animal_physiology'
+  | 'biology.reproduction'
+  | 'biology.genetics'
+  | 'biology.evolution'
+  | 'biology.ecology'
+  | 'biology.taxonomy'
+  | 'biology.biotechnology'
+  | 'earth_science.solar_system'
+  | 'earth_science.earth_structure'
+  | 'earth_science.climate_weather'
+  | 'environmental_science.natural_resources'
+  | 'environmental_science.pollution'
+  | 'environmental_science.conservation'
 
-/**
- * A KnowledgeNode is a single reusable mathematical concept.
- * Multiple boards and classes can reference the same node.
- * This is the heart of the IEKG — one concept, many curriculum contexts.
- */
+export type EnglishDomain =
+  | 'grammar.alphabet_phonics'
+  | 'grammar.parts_of_speech'
+  | 'grammar.sentences'
+  | 'grammar.tenses'
+  | 'grammar.punctuation'
+  | 'grammar.clauses_phrases'
+  | 'grammar.voice'
+  | 'grammar.narration'
+  | 'grammar.conditionals'
+  | 'grammar.modals'
+  | 'vocabulary.basic_words'
+  | 'vocabulary.word_formation'
+  | 'vocabulary.synonyms_antonyms'
+  | 'vocabulary.idioms_phrases'
+  | 'vocabulary.academic'
+  | 'reading.comprehension_basic'
+  | 'reading.comprehension_advanced'
+  | 'reading.strategies'
+  | 'reading.literary_analysis'
+  | 'writing.sentences_paragraphs'
+  | 'writing.essay_types'
+  | 'writing.formal_informal'
+  | 'writing.creative'
+  | 'communication.speaking'
+  | 'communication.listening'
+  | 'communication.debate'
+  | 'literature.prose'
+  | 'literature.poetry'
+  | 'literature.drama'
+
+export type SocialScienceDomain =
+  | 'history.ancient_india'
+  | 'history.medieval_india'
+  | 'history.modern_india'
+  | 'history.world_history'
+  | 'history.ancient_world'
+  | 'history.post_independence'
+  | 'geography.earth_globe'
+  | 'geography.india_physical'
+  | 'geography.india_resources'
+  | 'geography.world_physical'
+  | 'geography.human_geography'
+  | 'geography.maps'
+  | 'civics.government_systems'
+  | 'civics.constitution'
+  | 'civics.local_government'
+  | 'civics.national_government'
+  | 'civics.international_relations'
+  | 'economics.basic_economics'
+  | 'economics.markets'
+  | 'economics.indian_economy'
+  | 'economics.development'
+  | 'economics.money_banking'
+  | 'economics.globalisation'
+  | 'economics.statistics'
+  | 'society.social_institutions'
+  | 'society.social_inequality'
+  | 'society.social_change'
+
+export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain
+
 export interface KnowledgeNode {
-  /** Namespaced ID: "domain.concept", e.g. "algebra.linear_equations_1var" */
   id: string
-  domain: MathDomain
+  domain: string
   title: string
   description: string
   difficulty: Difficulty
-  /** IDs of KnowledgeNodes that must be understood before this one */
   prerequisites: string[]
 }
 
-// ─── Curriculum Structure ─────────────────────────────────────────────────────
-
-/** A single chapter in a class's syllabus */
 export interface Chapter {
-  /** Scoped ID: "board.subject.grade.ch{n}", e.g. "up.math.6.ch3" */
   id: string
-  /** Display order in the syllabus (1-based) */
   order: number
   title: string
-  /** Which KnowledgeNode ids this chapter covers */
   kgNodeIds: string[]
 }
 
-/** Chapters for one grade level within a board's subject */
 export interface GradeSubjectCatalog {
   grade: number
   chapters: Chapter[]
 }
 
-/** Complete subject catalog for a board (all grades) */
 export interface BoardSubjectCatalog {
   boardId: string
   subjectSlug: string
@@ -74,38 +157,24 @@ export interface BoardSubjectCatalog {
   grades: GradeSubjectCatalog[]
 }
 
-// ─── Board & Country Registry ─────────────────────────────────────────────────
-
-/** An education board (e.g. UP Board, CBSE, ICSE) */
 export interface EducationBoard {
-  /** Unique stable ID, e.g. "up_board", "cbse", "icse" */
   id: string
-  /** Full display name */
   name: string
-  /** Short name for URLs/display */
   shortName: string
   country: string
-  /** State/region (if state board) */
   state?: string
-  /** Subject slugs the board offers */
   subjects: string[]
-  /** Grade levels supported */
   grades: number[]
 }
 
-/** Top-level country registry */
 export interface EducationCountry {
   id: string
   name: string
   boards: EducationBoard[]
 }
 
-// ─── School Learning Mode ─────────────────────────────────────────────────────
-
-/** Learning mode — determines which content layer is active */
 export type LearningMode = 'general' | 'school'
 
-/** School context selected by a student */
 export interface SchoolContext {
   mode: 'school'
   countryId: string
@@ -114,7 +183,6 @@ export interface SchoolContext {
   subjectSlug: string
 }
 
-/** General learning context (existing behavior) */
 export interface GeneralContext {
   mode: 'general'
 }

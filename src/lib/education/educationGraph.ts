@@ -1,178 +1,124 @@
-// Education Graph — Chapter-to-KG Mapping Queries
-//
-// This file answers questions that cross the boundary between
-// board curriculum (chapters) and the master KG (knowledge nodes).
-// Future boards plug in here without touching the KG itself.
-
-import { MATH_KNOWLEDGE_GRAPH, getKGNode, getAllPrerequisites } from './mathKnowledgeGraph'
-import { UP_MATH_CATALOG } from './upMathCatalog'
 import type { BoardSubjectCatalog, KnowledgeNode, Chapter } from './educationTypes'
+import { MATH_KNOWLEDGE_GRAPH } from './mathKnowledgeGraph'
+import { SCIENCE_KNOWLEDGE_GRAPH } from './scienceKnowledgeGraph'
+import { ENGLISH_KNOWLEDGE_GRAPH } from './englishKnowledgeGraph'
+import { SOCIAL_SCIENCE_KNOWLEDGE_GRAPH } from './socialScienceKnowledgeGraph'
+import { UP_MATH_CATALOG } from './upMathCatalog'
+import { UP_SCIENCE_CATALOG } from './upScienceCatalog'
+import { UP_ENGLISH_CATALOG } from './upEnglishCatalog'
+import { UP_SOCIAL_SCIENCE_CATALOG } from './upSocialScienceCatalog'
 
-/** All board catalogs registered in the system */
-const BOARD_CATALOGS: BoardSubjectCatalog[] = [
-  UP_MATH_CATALOG,
-  // Future: CBSE_MATH_CATALOG, ICSE_MATH_CATALOG, ...
+export const ALL_KG_NODES: KnowledgeNode[] = [
+  ...MATH_KNOWLEDGE_GRAPH,
+  ...SCIENCE_KNOWLEDGE_GRAPH,
+  ...ENGLISH_KNOWLEDGE_GRAPH,
+  ...SOCIAL_SCIENCE_KNOWLEDGE_GRAPH,
 ]
 
-// ─── Chapter → KG Queries ────────────────────────────────────────────────────
+export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
+  UP_MATH_CATALOG,
+  UP_SCIENCE_CATALOG,
+  UP_ENGLISH_CATALOG,
+  UP_SOCIAL_SCIENCE_CATALOG,
+]
 
-/** Get all KG nodes covered by a chapter */
+/** All KG nodes introduced in a specific chapter */
 export function getNodesForChapter(chapter: Chapter): KnowledgeNode[] {
-  return chapter.kgNodeIds.flatMap((id) => {
-    const node = getKGNode(id)
-    return node ? [node] : []
-  })
+  return chapter.kgNodeIds
+    .map((id) => ALL_KG_NODES.find((n) => n.id === id))
+    .filter(Boolean) as KnowledgeNode[]
 }
 
-/** Get all KG node ids introduced for the first time at a given grade
- *  (i.e. not present in any earlier grade of the same board+subject) */
-export function getNewNodesAtGrade(
-  boardId: string,
-  subjectSlug: string,
-  grade: number,
-): KnowledgeNode[] {
-  const catalog = BOARD_CATALOGS.find(
-    (c) => c.boardId === boardId && c.subjectSlug === subjectSlug,
+/** KG nodes that first appear at this grade (not in any lower grade of the same catalog) */
+export function getNewNodesAtGrade(catalog: BoardSubjectCatalog, grade: number): KnowledgeNode[] {
+  const lowerGradeIds = new Set<string>()
+  for (const g of catalog.grades) {
+    if (g.grade < grade) {
+      g.chapters.forEach((ch) => ch.kgNodeIds.forEach((id) => lowerGradeIds.add(id)))
+    }
+  }
+  const gradeEntry = catalog.grades.find((g) => g.grade === grade)
+  if (!gradeEntry) return []
+  const newIds = new Set<string>()
+  gradeEntry.chapters.forEach((ch) =>
+    ch.kgNodeIds.forEach((id) => { if (!lowerGradeIds.has(id)) newIds.add(id) })
   )
-  if (!catalog) return []
-
-  const priorGrades = catalog.grades.filter((g) => g.grade < grade)
-  const priorNodeIds = new Set(
-    priorGrades.flatMap((g) => g.chapters.flatMap((ch) => ch.kgNodeIds)),
-  )
-
-  const thisGrade = catalog.grades.find((g) => g.grade === grade)
-  if (!thisGrade) return []
-
-  const thisNodeIds = new Set(thisGrade.chapters.flatMap((ch) => ch.kgNodeIds))
-  const newIds = [...thisNodeIds].filter((id) => !priorNodeIds.has(id))
-
-  return newIds.flatMap((id) => {
-    const node = getKGNode(id)
-    return node ? [node] : []
-  })
+  return [...newIds]
+    .map((id) => ALL_KG_NODES.find((n) => n.id === id))
+    .filter(Boolean) as KnowledgeNode[]
 }
 
-/** Get the cumulative KG coverage up to and including a grade */
-export function getCumulativeNodes(
-  boardId: string,
-  subjectSlug: string,
-  upToGrade: number,
-): KnowledgeNode[] {
-  const catalog = BOARD_CATALOGS.find(
-    (c) => c.boardId === boardId && c.subjectSlug === subjectSlug,
-  )
-  if (!catalog) return []
-
-  const coveredGrades = catalog.grades.filter((g) => g.grade <= upToGrade)
-  const coveredIds = new Set(
-    coveredGrades.flatMap((g) => g.chapters.flatMap((ch) => ch.kgNodeIds)),
-  )
-
-  return [...coveredIds].flatMap((id) => {
-    const node = getKGNode(id)
-    return node ? [node] : []
-  })
+/** All unique KG nodes covered from grade 1 up to and including the given grade */
+export function getCumulativeNodes(catalog: BoardSubjectCatalog, upToGrade: number): KnowledgeNode[] {
+  const ids = new Set<string>()
+  for (const g of catalog.grades) {
+    if (g.grade <= upToGrade) {
+      g.chapters.forEach((ch) => ch.kgNodeIds.forEach((id) => ids.add(id)))
+    }
+  }
+  return [...ids]
+    .map((id) => ALL_KG_NODES.find((n) => n.id === id))
+    .filter(Boolean) as KnowledgeNode[]
 }
 
-/** For a given chapter, return prerequisite KG nodes not yet covered
- *  by the curriculum up to the previous grade (gap analysis) */
-export function getPrerequisiteGaps(
-  boardId: string,
-  subjectSlug: string,
-  grade: number,
-  chapterId: string,
-): KnowledgeNode[] {
-  const catalog = BOARD_CATALOGS.find(
-    (c) => c.boardId === boardId && c.subjectSlug === subjectSlug,
-  )
-  if (!catalog) return []
+/** Prerequisites the student hasn't covered yet, given a target node and their current cumulative nodes */
+export function getPrerequisiteGaps(targetNodeId: string, coveredNodeIds: Set<string>): KnowledgeNode[] {
+  const target = ALL_KG_NODES.find((n) => n.id === targetNodeId)
+  if (!target) return []
+  return target.prerequisites
+    .filter((pid) => !coveredNodeIds.has(pid))
+    .map((pid) => ALL_KG_NODES.find((n) => n.id === pid))
+    .filter(Boolean) as KnowledgeNode[]
+}
 
-  const chapter = catalog.grades
-    .find((g) => g.grade === grade)
-    ?.chapters.find((c) => c.id === chapterId)
-  if (!chapter) return []
+/** Which board catalogs cover a given KG node */
+export function getBoardsCoveringNode(nodeId: string): string[] {
+  return BOARD_CATALOGS
+    .filter((cat) => cat.grades.some((g) => g.chapters.some((ch) => ch.kgNodeIds.includes(nodeId))))
+    .map((cat) => `${cat.boardId}/${cat.subjectSlug}`)
+}
 
-  const coveredBefore = new Set(
-    catalog.grades
-      .filter((g) => g.grade < grade)
-      .flatMap((g) => g.chapters.flatMap((ch) => ch.kgNodeIds)),
-  )
-
-  const gaps = new Set<string>()
-  for (const nodeId of chapter.kgNodeIds) {
-    for (const prereq of getAllPrerequisites(nodeId)) {
-      if (!coveredBefore.has(prereq.id)) {
-        gaps.add(prereq.id)
+/** KG nodes not covered by any chapter in any of the provided catalogs */
+export function getUncoveredNodes(catalogs: BoardSubjectCatalog[] = BOARD_CATALOGS): KnowledgeNode[] {
+  const coveredIds = new Set<string>()
+  for (const cat of catalogs) {
+    for (const g of cat.grades) {
+      for (const ch of g.chapters) {
+        ch.kgNodeIds.forEach((id) => coveredIds.add(id))
       }
     }
   }
-
-  return [...gaps].flatMap((id) => {
-    const node = getKGNode(id)
-    return node ? [node] : []
-  })
+  return ALL_KG_NODES.filter((n) => !coveredIds.has(n.id))
 }
 
-// ─── Cross-Board Reuse ────────────────────────────────────────────────────────
-
-/**
- * Which boards cover a given KG node?
- * Used to verify that node reuse is working across future boards.
- */
-export function getBoardsCoveringNode(nodeId: string): string[] {
-  return BOARD_CATALOGS.filter((catalog) =>
-    catalog.grades.some((g) =>
-      g.chapters.some((ch) => ch.kgNodeIds.includes(nodeId)),
-    ),
-  ).map((c) => c.boardId)
-}
-
-/** KG nodes that are NOT covered by any board yet (useful for coverage audits) */
-export function getUncoveredNodes(): KnowledgeNode[] {
-  const allCoveredIds = new Set(
-    BOARD_CATALOGS.flatMap((catalog) =>
-      catalog.grades.flatMap((g) => g.chapters.flatMap((ch) => ch.kgNodeIds)),
-    ),
-  )
-  return MATH_KNOWLEDGE_GRAPH.filter((n) => !allCoveredIds.has(n.id))
-}
-
-// ─── AI Tutor Context Builder ─────────────────────────────────────────────────
-
-/**
- * Build an AI tutor context string for a school-mode session.
- * Tells the AI exactly which chapter and KG nodes are being studied.
- */
+/** Build a tutor context string for a specific school chapter */
 export function buildSchoolTutorContext(
   boardId: string,
   subjectSlug: string,
   grade: number,
-  chapterId: string,
+  chapterId: string
 ): string {
   const catalog = BOARD_CATALOGS.find(
-    (c) => c.boardId === boardId && c.subjectSlug === subjectSlug,
+    (c) => c.boardId === boardId && c.subjectSlug === subjectSlug
   )
   if (!catalog) return ''
-
-  const chapter = catalog.grades
-    .find((g) => g.grade === grade)
-    ?.chapters.find((c) => c.id === chapterId)
+  const gradeEntry = catalog.grades.find((g) => g.grade === grade)
+  if (!gradeEntry) return ''
+  const chapter = gradeEntry.chapters.find((ch) => ch.id === chapterId)
   if (!chapter) return ''
-
   const nodes = getNodesForChapter(chapter)
-  const prereqs = nodes.flatMap((n) => getAllPrerequisites(n.id))
-  const uniquePrereqs = [...new Map(prereqs.map((p) => [p.id, p])).values()].slice(0, 8)
-
-  return [
-    `Board: ${boardId.replace('_', ' ').toUpperCase()} | Class: ${grade} | Subject: ${catalog.subjectName}`,
+  const cumulative = getCumulativeNodes(catalog, grade)
+  const cumulativeIds = new Set(cumulative.map((n) => n.id))
+  const lines = [
+    `Board: ${boardId} | Subject: ${subjectSlug} | Grade: ${grade}`,
     `Chapter: ${chapter.title}`,
-    `Concepts covered in this chapter:`,
-    nodes.map((n) => `  • ${n.title}: ${n.description}`).join('\n'),
-    uniquePrereqs.length > 0
-      ? `Prior knowledge the student should have:\n${uniquePrereqs.map((p) => `  • ${p.title}`).join('\n')}`
-      : '',
+    `Topics covered in this chapter:`,
+    ...nodes.map((n) => `  - ${n.title}: ${n.description}`),
+    `Student has previously covered ${cumulative.length} knowledge nodes up to this grade.`,
   ]
-    .filter(Boolean)
-    .join('\n')
+  const gaps = nodes.flatMap((n) => getPrerequisiteGaps(n.id, cumulativeIds))
+  if (gaps.length > 0) {
+    lines.push(`Prerequisite gaps to watch for: ${gaps.map((g) => g.title).join(', ')}`)
+  }
+  return lines.join('\n')
 }
