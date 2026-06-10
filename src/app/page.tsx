@@ -15,12 +15,6 @@ const SUBJECTS = [
   { slug: 'english', icon: '🇬🇧', accent: '#E3B341', desc_key: 'subj_english_desc' as const },
 ]
 
-const TESTIMONIALS = [
-  { text_key: 't1_text', name_key: 't1_name' },
-  { text_key: 't2_text', name_key: 't2_name' },
-  { text_key: 't3_text', name_key: 't3_name' },
-] as const
-
 const FAQ_KEYS = [
   { q: 'faq_q1', a: 'faq_a1' },
   { q: 'faq_q2', a: 'faq_a2' },
@@ -30,8 +24,6 @@ const FAQ_KEYS = [
 ] as const
 
 const AVATAR_COLORS = ['#F78166', '#79C0FF', '#56D364', '#E3B341', '#D2A8FF']
-
-
 
 export default function HomePage() {
   const { t, lang: _lang, setLang } = useLanguage()
@@ -345,24 +337,6 @@ export default function HomePage() {
               ))}
               <Link href="/auth/signup" className="btn-primary w-full mt-6 py-2.5 text-center block">{t('cta_start')}</Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Testimonials ─────────────────────────────────────────────────── */}
-      <section className="relative z-10 py-24 px-5">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-14" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-            {t('testimonials_title')}
-          </h2>
-          <div className="grid md:grid-cols-3 gap-5">
-            {TESTIMONIALS.map((item) => (
-              <div key={item.text_key} className="p-6 rounded-2xl"
-                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-                <p className="text-sm leading-relaxed mb-4 italic" style={{ color: 'var(--text-primary)' }}>&ldquo;{t(item.text_key)}&rdquo;</p>
-                <p className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>— {t(item.name_key)}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
