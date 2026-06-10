@@ -43,7 +43,7 @@ export async function DELETE() {
       prisma.authSession.deleteMany({ where: { userId } }),
     ])
 
-    console.log(`[delete-account] Soft-deleted user ${userId}, email renamed to ${tombstone}`)
+    console.log('[delete-account] account soft-deleted')
     return NextResponse.json({ success: true })
   } catch (err) {
     console.error('[delete-account]', err)

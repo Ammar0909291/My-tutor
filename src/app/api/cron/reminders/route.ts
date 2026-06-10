@@ -5,7 +5,8 @@ import { sendTelegramMessage } from '@/lib/notifications/telegram'
 
 function isAuthorized(req: Request): boolean {
   const secret = process.env.CRON_SECRET
-  if (!secret) return true
+  // Deny if CRON_SECRET is not configured — never allow unauthenticated access in production
+  if (!secret) return false
   return req.headers.get('authorization') === `Bearer ${secret}`
 }
 

@@ -15,7 +15,6 @@ function safeResponse() {
 }
 
 export async function POST(req: NextRequest) {
-  console.log('[forgot-password] Route called')
   try {
     const body = await req.json().catch(() => ({}))
     const { email } = body
@@ -24,11 +23,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Email required' }, { status: 400 })
     }
 
-    console.log('[forgot-password] Email received:', email)
     const normalized = email.toLowerCase().trim()
-
     const user = await prisma.user.findUnique({ where: { email: normalized } })
-    console.log('[forgot-password] User found:', !!user, '| Has password:', !!user?.passwordHash)
     if (!user || !user.passwordHash) {
       return safeResponse()
     }
@@ -36,23 +32,20 @@ export async function POST(req: NextRequest) {
     const token = randomBytes(32).toString('hex')
     const identifier = `${TOKEN_IDENTIFIER_PREFIX}${normalized}`
     const expires = new Date(Date.now() + EXPIRY_MS)
-    console.log('[forgot-password] Token generated, storing in DB...')
 
     await prisma.verificationToken.deleteMany({ where: { identifier } })
     await prisma.verificationToken.create({
       data: { identifier, token, expires },
     })
-    console.log('[forgot-password] Token stored. Calling email service...')
 
     const result = await sendPasswordResetEmail(normalized, token)
-    console.log('[forgot-password] Email service returned:', result)
     if (!result.success) {
-      console.error('[forgot-password] Email send failed:', result.error)
+      console.error('[forgot-password] email send failed')
     }
 
     return safeResponse()
   } catch (err) {
-    console.error('[forgot-password] EXCEPTION:', err)
+    console.error('[forgot-password] exception:', err instanceof Error ? err.message : 'unknown')
     return safeResponse()
   }
 }

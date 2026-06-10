@@ -36,7 +36,6 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    console.log('[onboarding] body:', JSON.stringify(body))
     const parsed = schema.parse(body)
     const { currentLevel, selfDescription, voiceChoice, teachingLanguage } = parsed
     // Accept either the legacy single `subjectSlug` or the new multi-select `subjectSlugs` — dedupe and keep order.
@@ -44,7 +43,6 @@ export async function POST(req: Request) {
       ...(parsed.subjectSlugs ?? []),
       ...(parsed.subjectSlug ? [parsed.subjectSlug] : []),
     ]))
-    console.log('[onboarding] parsed ok, userId:', userId, 'subjects:', subjectSlugs)
 
     // JWT sessions outlive DB records. If the session userId doesn't exist in the DB
     // but the email does (different row), resolve to the existing user's id.
@@ -66,7 +64,7 @@ export async function POST(req: Request) {
           ? await prisma.user.findUnique({ where: { email: session.user.email } })
           : null
         if (!byEmail) throw upsertErr
-        console.warn('[onboarding] session userId mismatch — resolved to existing user', byEmail.id)
+        console.warn('[onboarding] session userId mismatch — resolved to existing user')
         effectiveUserId = byEmail.id
       } else {
         throw upsertErr
@@ -171,7 +169,7 @@ export async function POST(req: Request) {
       console.warn('[onboarding] subscription upsert failed (non-fatal):', subErr)
     }
 
-    console.log('[onboarding] success, profileId:', result.profile.id)
+    console.log('[onboarding] success')
     return NextResponse.json({ success: true, data: result })
   } catch (err) {
     if (err instanceof z.ZodError) {

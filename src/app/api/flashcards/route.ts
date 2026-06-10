@@ -7,14 +7,18 @@ export async function GET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const userId = session.user.id
-  const cards = await prisma.flashcard.findMany({
-    where: { userId, nextReview: { lte: new Date() } },
-    orderBy: { nextReview: 'asc' },
-    take: 20,
-  })
-
-  return NextResponse.json({ success: true, cards })
+  try {
+    const userId = session.user.id
+    const cards = await prisma.flashcard.findMany({
+      where: { userId, nextReview: { lte: new Date() } },
+      orderBy: { nextReview: 'asc' },
+      take: 20,
+    })
+    return NextResponse.json({ success: true, cards })
+  } catch (err) {
+    console.error('[flashcards GET]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
 }
 
 const patchSchema = z.object({ id: z.string(), remembered: z.boolean() })
