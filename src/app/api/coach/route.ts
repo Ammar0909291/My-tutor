@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { generateAIResponse } from '@/lib/ai/client'
+import { chatWithFallback } from '@/lib/ai/client'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const schema = z.object({
@@ -25,7 +25,11 @@ export async function POST(req: Request) {
       .map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
 
     try {
-      const content = await generateAIResponse(chatMessages, systemMsg, 1500)
+      const completion = await chatWithFallback({
+        messages: [{ role: 'system', content: systemMsg }, ...chatMessages],
+        max_tokens: 1500,
+      })
+      const content = completion.choices[0]?.message?.content ?? ''
       return NextResponse.json({ content })
     } catch (error: any) {
       console.error('[coach] AI error:', error.message)
