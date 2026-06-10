@@ -209,6 +209,10 @@ export interface LibrarySubject {
   icon: string
   description: string
   modules: CurriculumModule[]
+  // Visibility flag — false hides the subject from discovery UIs (library,
+  // onboarding, enroll APIs) without deleting any data or curriculum.
+  // Flip to true to restore. Enrolled users are never affected regardless.
+  visible?: boolean
 }
 
 function node(slug: string, title: string): CurriculumNode {
@@ -402,9 +406,9 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
   // Languages
   { slug: 'english', name: 'English', category: 'languages', icon: '🇬🇧', description: 'Speak, read and write English with confidence.', modules: languageTree('English') },
   { slug: 'russian', name: 'Russian', category: 'languages', icon: '🇷🇺', description: 'Learn Russian from the alphabet to fluent conversation.', modules: languageTree('Russian') },
-  { slug: 'hindi', name: 'Hindi', category: 'languages', icon: '🇮🇳', description: 'Learn Hindi step by step, from basics to fluency.', modules: languageTree('Hindi') },
-  { slug: 'german', name: 'German', category: 'languages', icon: '🇩🇪', description: 'Build German skills from scratch to confident conversation.', modules: languageTree('German') },
-  { slug: 'arabic', name: 'Arabic', category: 'languages', icon: '🇸🇦', description: 'Learn to read, write and speak Arabic.', modules: languageTree('Arabic') },
+  { slug: 'hindi',  name: 'Hindi',  category: 'languages', icon: '🇮🇳', description: 'Learn Hindi step by step, from basics to fluency.',           modules: languageTree('Hindi'),  visible: false },
+  { slug: 'german', name: 'German', category: 'languages', icon: '🇩🇪', description: 'Build German skills from scratch to confident conversation.', modules: languageTree('German'), visible: false },
+  { slug: 'arabic', name: 'Arabic', category: 'languages', icon: '🇸🇦', description: 'Learn to read, write and speak Arabic.',                     modules: languageTree('Arabic'), visible: false },
 
   // Programming
   { slug: 'c', name: 'C', category: 'programming', icon: '🔩', description: 'C — the foundation of systems programming, from pointers to the kernel.', modules: programmingTree('C') },
@@ -439,12 +443,21 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
   { slug: 'data-visualization', name: 'Data Visualization', category: 'programming', icon: '📊', description: 'Turn raw data into clear charts, dashboards, and stories.', modules: DATA_VISUALIZATION_TREE },
 ]
 
+/** All subjects visible to new users in discovery UIs (library, onboarding, enroll).
+ *  Subjects with visible: false are hidden from browsing but remain fully functional
+ *  for already-enrolled users. Restore any subject by setting visible: true. */
+export const VISIBLE_SUBJECT_LIBRARY: LibrarySubject[] = SUBJECT_LIBRARY.filter(
+  (s) => s.visible !== false,
+)
+
 export function findLibrarySubject(slug: string): LibrarySubject | undefined {
+  // findLibrarySubject intentionally searches ALL subjects (including hidden ones)
+  // so that enrolled users on hidden subjects continue to work normally.
   return SUBJECT_LIBRARY.find((s) => s.slug === slug)
 }
 
 export function librarySubjectsByCategory(category: SubjectCategory): LibrarySubject[] {
-  return SUBJECT_LIBRARY.filter((s) => s.category === category)
+  return VISIBLE_SUBJECT_LIBRARY.filter((s) => s.category === category)
 }
 
 /**

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
+import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 
 const FALLBACK_SUBJECTS = [
   { id: 'c',          name: 'C',          slug: 'c',          description: 'System programming · Memory · Speed',       type: 'C' },
@@ -20,7 +21,14 @@ export async function GET() {
   try {
     const subjects = await prisma.subject.findMany({ orderBy: { name: 'asc' } })
     if (subjects.length > 0) {
-      return NextResponse.json(subjects)
+      // Filter out hidden subjects so the onboarding subject picker never
+      // shows them to new users. Enrolled users are served via profile APIs,
+      // not this discovery endpoint.
+      const visible = subjects.filter((s) => {
+        const lib = findLibrarySubject(s.slug)
+        return lib === undefined || lib.visible !== false
+      })
+      return NextResponse.json(visible)
     }
     return NextResponse.json(FALLBACK_SUBJECTS)
   } catch {

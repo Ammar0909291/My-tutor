@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
-import { CATEGORY_LABELS, SUBJECT_LIBRARY, levelLabel, categoryLabel, localizedSubjectName, localizedSubjectDescription, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
+import { CATEGORY_LABELS, VISIBLE_SUBJECT_LIBRARY, levelLabel, categoryLabel, localizedSubjectName, localizedSubjectDescription, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { EnrollButton } from '@/components/library/EnrollButton'
 
 const CATEGORY_ACCENT: Record<SubjectCategory, string> = {
@@ -71,7 +71,7 @@ export default async function LibraryPage() {
 
         <div className="space-y-8">
           {(Object.keys(CATEGORY_LABELS) as SubjectCategory[]).map((category) => {
-            const subjects = SUBJECT_LIBRARY.filter((s) => s.category === category)
+            const subjects = VISIBLE_SUBJECT_LIBRARY.filter((s) => s.category === category)
             const accent = CATEGORY_ACCENT[category]
             return (
               <section key={category}>

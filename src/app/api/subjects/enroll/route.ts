@@ -39,6 +39,11 @@ export async function POST(req: Request) {
     if (!librarySubject) {
       return NextResponse.json({ success: false, error: 'Unknown subject' }, { status: 404 })
     }
+    // Block new enrollments into hidden subjects — existing enrolled users are
+    // handled by the profile endpoint and remain unaffected.
+    if (librarySubject.visible === false) {
+      return NextResponse.json({ success: false, error: 'Subject not available' }, { status: 403 })
+    }
 
     const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
     if (!profile) return NextResponse.json({ success: false, error: 'Complete onboarding first' }, { status: 404 })
