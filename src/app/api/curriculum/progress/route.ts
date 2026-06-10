@@ -7,6 +7,7 @@ import { awardXP } from '@/lib/xp'
 const schema = z.object({
   subjectCode: z.string(),
   completedLesson: z.number().int().positive(),
+  totalLessons: z.number().int().positive().optional(),
 })
 
 export async function GET(req: Request) {
@@ -34,7 +35,7 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectCode, completedLesson } = schema.parse(body)
+    const { subjectCode, completedLesson, totalLessons } = schema.parse(body)
 
     const existing = await prisma.studentProgress.findUnique({
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
@@ -44,6 +45,14 @@ export async function PATCH(req: Request) {
       ? Array.from(new Set([...existing.completedLessons, completedLesson]))
       : [completedLesson]
 
+    // Sprint N — derive subject completion fields when the client tells us
+    // how many lessons the subject has in total.
+    const completionPercent = totalLessons
+      ? Math.min(100, Math.round((completedLessons.length / totalLessons) * 100))
+      : (existing?.completionPercent ?? 0)
+    const isCompleted = totalLessons ? completedLessons.length >= totalLessons : (existing?.isCompleted ?? false)
+    const completedAt = isCompleted ? (existing?.completedAt ?? new Date()) : null
+
     const progress = await prisma.studentProgress.upsert({
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
       create: {
@@ -52,12 +61,18 @@ export async function PATCH(req: Request) {
         currentLesson: completedLesson + 1,
         completedLessons,
         lastStudiedAt: new Date(),
+        completionPercent,
+        isCompleted,
+        completedAt,
       },
       update: {
         currentLesson: Math.max((existing?.currentLesson ?? 1), completedLesson + 1),
         completedLessons,
         lastStudiedAt: new Date(),
         updatedAt: new Date(),
+        completionPercent,
+        isCompleted,
+        completedAt,
       },
     })
 
