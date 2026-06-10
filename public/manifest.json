@@ -1,12 +1,13 @@
 {
-  "name": "My Tutor — AI репетитор",
+  "name": "My Tutor",
   "short_name": "My Tutor",
-  "description": "Твой личный AI-репетитор по программированию",
+  "description": "Learn programming, mathematics, physics, chemistry, biology, languages and AI with a personalized AI tutor.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0D1117",
   "theme_color": "#F78166",
   "orientation": "portrait",
+  "lang": "en",
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -22,6 +23,5 @@
     }
   ],
   "screenshots": [],
-  "categories": ["education"],
-  "lang": "ru"
+  "categories": ["education"]
 }

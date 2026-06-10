@@ -22,13 +22,30 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'My Tutor — AI Programming Tutor',
-  description: 'Learn C, C++ and Python with your personal AI tutor',
+  title: {
+    default: 'My Tutor — Personal AI Tutor',
+    template: '%s | My Tutor',
+  },
+  description:
+    'Learn programming, mathematics, physics, chemistry, biology, languages and AI with a personalized AI tutor.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'My Tutor',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'My Tutor',
+    title: 'My Tutor — Personal AI Tutor',
+    description:
+      'Learn programming, mathematics, physics, chemistry, biology, languages and AI with a personalized AI tutor.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'My Tutor — Personal AI Tutor',
+    description:
+      'Learn programming, mathematics, physics, chemistry, biology, languages and AI with a personalized AI tutor.',
   },
 }
 
