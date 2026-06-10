@@ -28,11 +28,16 @@ export async function PATCH(req: NextRequest) {
     if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const { name, levelDescription, voicePreference } = await req.json()
 
-    if (name && name.length >= 2 && name.length <= 50) {
+    const nameValid = typeof name === 'string' && name.length >= 2 && name.length <= 50
+    if (nameValid) {
       await prisma.user.update({ where: { id: session.user.id }, data: { name } })
     }
 
     const profileData: Record<string, unknown> = {}
+    // The dashboard greeting, avatar, and lesson screen all render
+    // profile.displayName — so a name change must update displayName too,
+    // otherwise the new name persists to user.name but never reaches the header.
+    if (nameValid) profileData.displayName = name
     if (levelDescription !== undefined) profileData.selfDescription = levelDescription
     if (voicePreference !== undefined) profileData.voiceId = voicePreference
 
