@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "src/app/api/learn/chat/route.ts":          { "maxDuration": 60 },
+    "src/app/api/learn/run/route.ts":           { "maxDuration": 30 },
+    "src/app/api/curriculum/route.ts":          { "maxDuration": 60 },
+    "src/app/api/sessions/end/route.ts":        { "maxDuration": 30 },
+    "src/app/api/sessions/[sessionId]/messages/route.ts": { "maxDuration": 60 }
+  }
+}
