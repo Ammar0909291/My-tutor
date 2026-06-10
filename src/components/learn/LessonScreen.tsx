@@ -752,7 +752,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       navigator.sendBeacon('/api/sessions/end', new Blob([JSON.stringify({ sessionId: sid })], { type: 'application/json' }))
     }
     window.addEventListener('beforeunload', endSession)
-    return () => window.removeEventListener('beforeunload', endSession)
+    // Also end the session on unmount (e.g. switching subjects remounts this
+    // component via its `key` prop) so the previous subject's session gets
+    // its summary/flashcards instead of being left open indefinitely.
+    return () => {
+      window.removeEventListener('beforeunload', endSession)
+      endSession()
+    }
   }, [])
   useEffect(() => {
     if (initializedRef.current) return

@@ -5,7 +5,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 
-export default async function LearnPage() {
+export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string } }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
@@ -31,7 +31,15 @@ export default async function LearnPage() {
   if (!user?.profile) redirect('/onboarding')
 
   let profile = user.profile
-  let primarySubject = profile?.subjects[0]?.subject
+
+  // Allow picking a specific enrolled subject for this session via /learn?subject=<slug>
+  // (e.g. the "Continue learning" link from /library/[slug]) — falls back to the
+  // learner's primary (first-enrolled) subject when absent or not enrolled in.
+  const requestedSlug = searchParams?.subject
+  const requestedSubject = requestedSlug
+    ? profile?.subjects.find((ps) => ps.subject.slug === requestedSlug)?.subject
+    : undefined
+  let primarySubject = requestedSubject ?? profile?.subjects[0]?.subject
 
   // Auto-heal: profile has no subject linked — ensure subject exists then link it
   if (profile && !primarySubject) {
@@ -86,6 +94,14 @@ export default async function LearnPage() {
     slug: ps.subject.slug,
     name: ps.subject.name,
   }))
+
+  // Server-side lesson position for resume — used in the opening message
+  const studentProgress = resolvedSubject.id
+    ? await prisma.studentProgress.findUnique({
+        where: { userId_subjectCode: { userId: session.user.id, subjectCode: resolvedSubject.slug } },
+        select: { lastLessonTitle: true, lastUnitTitle: true, currentLesson: true },
+      })
+    : null
 
   // Fetch last 3 completed sessions for memory context
   const pastSessions = resolvedSubject.id ? await withRetry(() => prisma.learnSession.findMany({
@@ -147,6 +163,7 @@ export default async function LearnPage() {
 
   return (
     <LessonScreen
+      key={resolvedSubject.slug}
       subjectSlug={resolvedSubject.slug}
       subjectName={resolvedSubject.name}
       levelDescription={profile.selfDescription}
@@ -157,6 +174,8 @@ export default async function LearnPage() {
       subjects={subjects}
       displayName={profile.displayName}
       userId={session.user.id}
+      resumeLessonTitle={studentProgress?.lastLessonTitle ?? undefined}
+      resumeUnitTitle={studentProgress?.lastUnitTitle ?? undefined}
     />
   )
 }
