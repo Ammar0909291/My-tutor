@@ -57,7 +57,7 @@ npm run type-check       # TypeScript check (no emit)
   🚀 To run locally:
   # Prerequisites (first time only)
   npm install
-  cp .env.example .env        # fill in DATABASE_URL, AUTH_SECRET, OPENROUTER_API_KEY
+  cp .env.example .env        # fill in DATABASE_URL, AUTH_SECRET, GROQ_API_KEY
   npx prisma db push
   npx prisma db seed
 
