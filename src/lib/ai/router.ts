@@ -76,22 +76,30 @@ async function callYandexGPT(
 }
 
 // ─── Main router ──────────────────────────────────────────────────────────────
+export interface RouteAIResult {
+  text: string
+  provider: string
+}
+
 export async function routeAI(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
   country: string,
   maxTokens = 800,
   lang: 'ru' | 'en' | 'hi' = 'en',
-): Promise<string> {
+  _meta?: Record<string, unknown>,
+): Promise<RouteAIResult> {
   console.log('AI Router: country =', country)
 
   try {
     if (country === 'ru') {
       console.log('→ Routing to YandexGPT')
-      return await callYandexGPT(messages, systemPrompt, maxTokens)
+      const text = await callYandexGPT(messages, systemPrompt, maxTokens)
+      return { text, provider: 'yandex' }
     }
     console.log('→ Routing to Groq')
-    return await callGroq(messages, systemPrompt, maxTokens)
+    const text = await callGroq(messages, systemPrompt, maxTokens)
+    return { text, provider: 'groq' }
   } catch (error: any) {
     console.error('routeAI error:', error.message)
     if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
@@ -100,7 +108,7 @@ export async function routeAI(
         ru: 'Думаю дольше обычного. Попробуй ещё раз.',
         hi: 'Thoda time lag raha hai. Please try again.',
       }
-      return timeoutMsg[lang] || timeoutMsg.en
+      return { text: timeoutMsg[lang] || timeoutMsg.en, provider: 'fallback' }
     }
     throw error
   }

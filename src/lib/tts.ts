@@ -22,6 +22,23 @@ if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefine
 
 export function speakText(
   text: string,
+  configOrLang: { pitch: number; rate: number } | string,
+  onEndOrVoiceType?: (() => void) | string,
+  langOrCallback?: TeachingLang | (() => void),
+  country?: string,
+): void {
+  const config = typeof configOrLang === 'object' ? configOrLang : { pitch: 1, rate: 1 }
+  const onEnd = typeof onEndOrVoiceType === 'function' ? onEndOrVoiceType
+    : typeof langOrCallback === 'function' ? langOrCallback : undefined
+  const lang: TeachingLang = typeof configOrLang === 'string'
+    ? (configOrLang as TeachingLang)
+    : typeof langOrCallback === 'string' ? langOrCallback : 'en'
+  void country
+  return _speakTextImpl(text, config, onEnd, lang)
+}
+
+function _speakTextImpl(
+  text: string,
   config: { pitch: number; rate: number },
   onEnd?: () => void,
   lang: TeachingLang = 'ru',

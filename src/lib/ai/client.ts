@@ -101,6 +101,7 @@ export function buildTutorSystemPrompt(
   memoryContext?: string | null,
   teachingLanguage: 'ru' | 'en' | 'hi' = 'en',
   lessonCtx?: LessonContext | null,
+  _subjectType?: string,
 ) {
   const lessonBlock = lessonCtx
     ? teachingLanguage === 'ru'
@@ -170,7 +171,7 @@ HINGLISH SUPPORT:
 3. Максимум 3-4 предложения + код, потом вопрос или задание`
 }
 
-export function buildCurriculumPrompt(subject: string, selfDescription: string) {
+export function buildCurriculumPrompt(subject: string, selfDescription: string, treeBlock?: string | null) {
   return `Create a personalized learning plan for a student on the topic: ${subject}.
 
 Student self-description: "${selfDescription}"
@@ -192,4 +193,29 @@ Return ONLY valid JSON in the following structure (no markdown, no explanations)
 }
 
 Adapt the difficulty level to the student's description. Create 8 to 15 steps.`
+}
+
+export interface ChatWithFallbackParams {
+  messages: Array<{ role: string; content: string }>
+  max_tokens?: number
+  systemPrompt?: string
+  temperature?: number
+  response_format?: { type: string }
+}
+
+export interface ChatWithFallbackResult {
+  choices: Array<{ message: { content: string } }>
+}
+
+export async function chatWithFallback(
+  params: ChatWithFallbackParams
+): Promise<ChatWithFallbackResult> {
+  const systemMsg = params.messages.find((m) => m.role === 'system')?.content ?? params.systemPrompt ?? ''
+  const userMsgs = params.messages.filter((m) => m.role !== 'system')
+  const content = await generateAIResponse(
+    userMsgs.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
+    systemMsg,
+    params.max_tokens ?? 800
+  )
+  return { choices: [{ message: { content } }] }
 }
