@@ -2,12 +2,28 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { SubjectType, type Subject } from '@prisma/client'
+import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
+
+const CATEGORY_TO_TYPE: Record<SubjectCategory, SubjectType> = {
+  languages: SubjectType.LANGUAGE,
+  programming: SubjectType.PROGRAMMING,
+  mathematics: SubjectType.MATHEMATICS,
+  physics: SubjectType.PHYSICS,
+  chemistry: SubjectType.CHEMISTRY,
+  biology: SubjectType.BIOLOGY,
+  ai: SubjectType.AI,
+}
 
 const schema = z.object({
-  subjectSlug: z.string(),
+  subjectSlug: z.string().optional(),
+  subjectSlugs: z.array(z.string()).optional(),
+  currentLevel: z.enum(['complete_beginner', 'beginner', 'intermediate', 'advanced', 'professional']).default('beginner'),
   selfDescription: z.string().min(10).max(2000),
   voiceChoice: z.string(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
+}).refine((b) => (b.subjectSlugs && b.subjectSlugs.length > 0) || !!b.subjectSlug, {
+  message: 'At least one subject is required', path: ['subjectSlugs'],
 })
 
 export async function POST(req: Request) {
@@ -21,8 +37,14 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     console.log('[onboarding] body:', JSON.stringify(body))
-    const { subjectSlug, selfDescription, voiceChoice, teachingLanguage } = schema.parse(body)
-    console.log('[onboarding] parsed ok, userId:', userId, 'subject:', subjectSlug)
+    const parsed = schema.parse(body)
+    const { currentLevel, selfDescription, voiceChoice, teachingLanguage } = parsed
+    // Accept either the legacy single `subjectSlug` or the new multi-select `subjectSlugs` — dedupe and keep order.
+    const subjectSlugs = Array.from(new Set([
+      ...(parsed.subjectSlugs ?? []),
+      ...(parsed.subjectSlug ? [parsed.subjectSlug] : []),
+    ]))
+    console.log('[onboarding] parsed ok, userId:', userId, 'subjects:', subjectSlugs)
 
     // JWT sessions outlive DB records. If the session userId doesn't exist in the DB
     // but the email does (different row), resolve to the existing user's id.
@@ -51,22 +73,33 @@ export async function POST(req: Request) {
       }
     }
 
-    // Find subject — fall back to upsert with slug so onboarding works without seed
-    let subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
-    if (!subject) {
-      const SLUG_TO_TYPE: Record<string, 'C'|'CPP'|'PYTHON'|'ENGLISH'> = {
-        c: 'C', cpp: 'CPP', python: 'PYTHON', english: 'ENGLISH',
+    // Find/create each selected subject — same resolution as /api/subjects/enroll so the
+    // full Subject Library (not just the original 4 seeded subjects) works at onboarding.
+    const subjects: Subject[] = []
+    for (const slug of subjectSlugs) {
+      let subj = await prisma.subject.findUnique({ where: { slug } })
+      if (!subj) {
+        const librarySubject = findLibrarySubject(slug)
+        if (!librarySubject) {
+          return NextResponse.json({ success: false, error: `Invalid subject slug: ${slug}` }, { status: 400 })
+        }
+        subj = await prisma.subject.upsert({
+          where: { slug: librarySubject.slug },
+          update: {},
+          create: {
+            slug: librarySubject.slug,
+            name: librarySubject.name,
+            type: CATEGORY_TO_TYPE[librarySubject.category],
+            description: librarySubject.description,
+          },
+        })
       }
-      const type = SLUG_TO_TYPE[subjectSlug]
-      if (!type) {
-        return NextResponse.json({ success: false, error: 'Invalid subject slug' }, { status: 400 })
-      }
-      subject = await prisma.subject.upsert({
-        where: { slug: subjectSlug },
-        update: {},
-        create: { slug: subjectSlug, name: subjectSlug.charAt(0).toUpperCase() + subjectSlug.slice(1), type },
-      })
+      subjects.push(subj)
     }
+    if (subjects.length === 0) {
+      return NextResponse.json({ success: false, error: 'At least one subject is required' }, { status: 400 })
+    }
+    const subject = subjects[0]
 
     const existingProfile = await prisma.profile.findUnique({
       where: { userId: effectiveUserId },
@@ -75,58 +108,60 @@ export async function POST(req: Request) {
     if (existingProfile) {
       await prisma.profile.update({
         where: { userId: effectiveUserId },
-        data: { selfDescription, voiceId: voiceChoice, teachingLanguage },
+        data: { selfDescription, voiceId: voiceChoice, teachingLanguage, currentLevel },
       })
-      // Ensure subject is linked (may be missing if onboarding was interrupted)
-      const alreadyLinked = existingProfile.subjects.some((s) => s.subjectId === subject!.id)
-      if (!alreadyLinked) {
-        await prisma.profileSubject.create({ data: { profileId: existingProfile.id, subjectId: subject!.id } })
-      }
-      // Ensure learning path exists for this subject
-      const existingPath = await prisma.learningPath.findFirst({ where: { userId: effectiveUserId, subjectId: subject!.id } })
-      if (!existingPath) {
-        await prisma.learningPath.create({
-          data: {
-            userId: effectiveUserId,
-            subjectId: subject!.id,
-            title: `${subject!.name} Course`,
-            curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
-            totalSteps: 0,
-            isActive: true,
-          },
-        })
+      // Ensure every selected subject is linked + has a learning path (may be missing if onboarding was interrupted)
+      const linkedIds = new Set(existingProfile.subjects.map((s) => s.subjectId))
+      for (const subj of subjects) {
+        if (!linkedIds.has(subj.id)) {
+          await prisma.profileSubject.create({ data: { profileId: existingProfile.id, subjectId: subj.id } })
+        }
+        const existingPath = await prisma.learningPath.findFirst({ where: { userId: effectiveUserId, subjectId: subj.id } })
+        if (!existingPath) {
+          await prisma.learningPath.create({
+            data: {
+              userId: effectiveUserId,
+              subjectId: subj.id,
+              title: `${subj.name} Course`,
+              curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
+              totalSteps: 0,
+              isActive: true,
+            },
+          })
+        }
       }
       await prisma.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
       return NextResponse.json({ success: true })
     }
 
-    // Run profile + learning path in a transaction; subscription separately (best-effort)
+    // Run profile + learning paths in a transaction; subscription separately (best-effort)
     const result = await prisma.$transaction(async (tx) => {
       const profile = await tx.profile.create({
         data: {
           userId: effectiveUserId,
           displayName: session.user.name ?? 'Student',
           selfDescription,
+          currentLevel,
           voiceId: voiceChoice,
           teachingLanguage,
-          subjects: { create: { subjectId: subject!.id } },
+          subjects: { create: subjects.map((s) => ({ subjectId: s.id })) },
         },
       })
 
-      const learningPath = await tx.learningPath.create({
+      const learningPaths = await Promise.all(subjects.map((s) => tx.learningPath.create({
         data: {
           userId: effectiveUserId,
-          subjectId: subject!.id,
-          title: `${subject!.name} Course`,
+          subjectId: s.id,
+          title: `${s.name} Course`,
           curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
           totalSteps: 0,
           isActive: true,
         },
-      })
+      })))
 
       await tx.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
 
-      return { profile, learningPath }
+      return { profile, learningPaths }
     })
 
     // Subscription upsert outside transaction — not critical, don't block onboarding

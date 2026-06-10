@@ -5,12 +5,22 @@ import { useLanguage } from '@/components/ui/LanguageToggle'
 import { speakText } from '@/lib/tts'
 import type { TeachingLang, VoiceType } from '@/lib/tts'
 import { useCountry } from '@/components/Providers'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
 
 const FALLBACK_SUBJECTS = [
-  { id: 'c',       slug: 'c',       name: 'C',       icon: 'C',   accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)' },
-  { id: 'cpp',     slug: 'cpp',     name: 'C++',     icon: 'C++', accent: '#79C0FF', subAccent: 'rgba(121,192,255,0.08)' },
-  { id: 'python',  slug: 'python',  name: 'Python',  icon: '🐍',  accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
-  { id: 'english', slug: 'english', name: 'English', icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
+  { id: 'c',          slug: 'c',          name: 'C',          icon: 'C',   accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)' },
+  { id: 'cpp',        slug: 'cpp',        name: 'C++',        icon: 'C++', accent: '#79C0FF', subAccent: 'rgba(121,192,255,0.08)' },
+  { id: 'python',     slug: 'python',     name: 'Python',     icon: '🐍',  accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
+  { id: 'english',    slug: 'english',    name: 'English',    icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
+  { id: 'javascript', slug: 'javascript', name: 'JavaScript', icon: 'JS',  accent: '#F7DF1E', subAccent: 'rgba(247,223,30,0.08)' },
+  { id: 'typescript', slug: 'typescript', name: 'TypeScript', icon: 'TS',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
+  { id: 'russian',    slug: 'russian',    name: 'Russian',    icon: 'Рус', accent: '#A371F7', subAccent: 'rgba(163,113,247,0.08)' },
+  { id: 'java',   slug: 'java',   name: 'Java',   icon: '☕',  accent: '#E76F00', subAccent: 'rgba(231,111,0,0.08)' },
+  { id: 'csharp', slug: 'csharp', name: 'C#',     icon: 'C#',  accent: '#9B4993', subAccent: 'rgba(155,73,147,0.08)' },
+  { id: 'go',     slug: 'go',     name: 'Go',     icon: 'Go',  accent: '#00ACD7', subAccent: 'rgba(0,172,215,0.08)' },
+  { id: 'rust',   slug: 'rust',   name: 'Rust',   icon: '⚙',  accent: '#CE422B', subAccent: 'rgba(206,66,43,0.08)' },
+  { id: 'ai',     slug: 'ai',     name: 'AI',     icon: '🤖', accent: '#7C3AED', subAccent: 'rgba(124,58,237,0.08)' },
 ]
 
 const VOICES = [
@@ -31,14 +41,15 @@ const PLACEHOLDER_CYCLE = [
   'Studied C at university but forgot a lot...',
 ]
 
-const STEPS_COUNT = 3
+const STEPS_COUNT = 4
 
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
   const { t } = useLanguage()
   const { country } = useCountry()
   const [step, setStep] = useState(1)
-  const [subjects, setSubjects] = useState(FALLBACK_SUBJECTS)
-  const [subjectSlug, setSubjectSlug] = useState('')
+  const [subjects, setSubjects] = useState<{ id: string; slug: string; name: string; icon?: string }[]>(FALLBACK_SUBJECTS)
+  const [subjectSlugs, setSubjectSlugs] = useState<string[]>([])
+  const [skillLevel, setSkillLevel] = useState<SkillLevel | ''>('')
   const [description, setDescription] = useState('')
   const [voiceKey, setVoiceKey] = useState('female')
   const [loading, setLoading] = useState(false)
@@ -50,8 +61,14 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const teachingLang: TeachingLang = country === 'ru' ? 'ru' : country === 'in' ? 'hi' : 'en'
 
   useEffect(() => {
-    fetch('/api/subjects').then(r => r.json()).then(data => {
-      if (Array.isArray(data) && data.length > 0) setSubjects(data)
+    // Fetch the full Subject Library (not just the legacy 4-subject /api/subjects)
+    // so every catalog entry — languages, programming, mathematics, sciences — is
+    // selectable at onboarding and resolves correctly against /api/onboarding.
+    fetch('/api/subjects/library').then(r => r.json()).then((data: { success?: boolean; categories?: { subjects: { slug: string; name: string; icon?: string }[] }[] }) => {
+      if (data?.success && Array.isArray(data.categories)) {
+        const flat = data.categories.flatMap((c) => c.subjects.map((s) => ({ id: s.slug, slug: s.slug, name: s.name, icon: s.icon })))
+        if (flat.length > 0) setSubjects(flat)
+      }
     }).catch(() => {})
   }, [])
 
@@ -60,8 +77,13 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
     return () => clearInterval(id)
   }, [])
 
-  const canProceed1 = subjectSlug !== ''
-  const canProceed2 = description.trim().length >= 20
+  const canProceed1 = subjectSlugs.length > 0
+
+  function toggleSubject(slug: string) {
+    setSubjectSlugs((prev) => prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug])
+  }
+  const canProceed2 = skillLevel !== ''
+  const canProceed3 = description.trim().length >= 20
 
   async function handleFinish() {
     setLoading(true); setError('')
@@ -70,7 +92,8 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          subjectSlug,
+          subjectSlugs,
+          currentLevel: skillLevel || 'beginner',
           selfDescription: description.trim(),
           voiceChoice: voiceKey,
           teachingLanguage: teachingLang,
@@ -110,9 +133,12 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           <span>🔥</span>
           <span className="font-bold text-sm" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
         </div>
-        <span className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
-          {t('ob_step')} {step} {t('ob_of')} {STEPS_COUNT}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
+            {t('ob_step')} {step} {t('ob_of')} {STEPS_COUNT}
+          </span>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* Progress bar */}
@@ -129,15 +155,24 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           {step === 1 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s1_title')}</h1>
-              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
+              <p className={subjectSlugs.length > 0 ? 'text-sm mb-2' : 'text-sm mb-8'} style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
+              {subjectSlugs.length > 0 && (
+                <p className="text-xs mb-6 font-semibold" style={{ color: 'var(--accent-primary)' }}>
+                  {teachingLang === 'ru'
+                    ? `Выбрано: ${subjectSlugs.length}`
+                    : teachingLang === 'hi'
+                    ? `${subjectSlugs.length} चुने गए`
+                    : `${subjectSlugs.length} selected`}
+                </p>
+              )}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {subjects.map((s) => {
-                  const selected = subjectSlug === s.slug
+                  const selected = subjectSlugs.includes(s.slug)
                   const accent = SUBJ_ACCENT[s.slug] ?? '#F78166'
                   const subAccent = SUBJ_SUB[s.slug] ?? 'rgba(247,129,102,0.1)'
-                  const icon = SUBJ_ICON[s.slug] ?? s.name
+                  const icon = s.icon ?? SUBJ_ICON[s.slug] ?? s.name
                   return (
-                    <button key={s.slug} onClick={() => setSubjectSlug(s.slug)}
+                    <button key={s.slug} onClick={() => toggleSubject(s.slug)}
                       className="p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5 relative"
                       style={{
                         background: selected ? subAccent : 'var(--bg-surface)',
@@ -165,8 +200,45 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
             </div>
           )}
 
-          {/* Step 2 — Level description */}
+          {/* Step 2 — Current skill level (drives curriculum generation) */}
           {step === 2 && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {teachingLang === 'ru' ? 'Какой у вас текущий уровень?' : 'What is your current level?'}
+              </h1>
+              <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+                {teachingLang === 'ru' ? 'Это поможет построить персональную программу обучения.' : 'This helps us build your personalized learning roadmap.'}
+              </p>
+              <div className="space-y-2.5 mb-6">
+                {SKILL_LEVELS.map((lvl) => {
+                  const selected = skillLevel === lvl.key
+                  return (
+                    <button key={lvl.key} onClick={() => setSkillLevel(lvl.key)}
+                      className="w-full flex flex-col items-start gap-0.5 p-4 rounded-xl text-left transition-all duration-200"
+                      style={{
+                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
+                        border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                        boxShadow: selected ? 'var(--coral-glow)' : 'none',
+                      }}>
+                      <span className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                        {lvl.label}
+                      </span>
+                      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{lvl.description}</span>
+                    </button>
+                  )
+                })}
+              </div>
+              <div className="flex gap-3">
+                <button onClick={() => setStep(1)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStep(3)} disabled={!canProceed2} className="btn-primary flex-1 py-3 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                  {t('ob_next')}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3 — Self description */}
+          {step === 3 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s2_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s2_sub')}</p>
@@ -192,16 +264,16 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                 </p>
               </div>
               <div className="flex gap-3">
-                <button onClick={() => setStep(1)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
-                <button onClick={() => setStep(3)} disabled={!canProceed2} className="btn-primary flex-1 py-3 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                <button onClick={() => setStep(2)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStep(4)} disabled={!canProceed3} className="btn-primary flex-1 py-3 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
                   {t('ob_next')}
                 </button>
               </div>
             </div>
           )}
 
-          {/* Step 3 — Voice */}
-          {step === 3 && (
+          {/* Step 4 — Voice */}
+          {step === 4 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s3_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s3_sub')}</p>
@@ -212,9 +284,9 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                     <button key={v.key} onClick={() => setVoiceKey(v.key)}
                       className="w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-200"
                       style={{
-                        background: selected ? 'rgba(247,129,102,0.08)' : 'var(--bg-surface)',
+                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
                         border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                        boxShadow: selected ? '0 0 16px rgba(247,129,102,0.1)' : 'none',
+                        boxShadow: selected ? 'var(--coral-glow)' : 'none',
                       }}>
                       <span className="text-2xl w-10 text-center shrink-0">{v.icon}</span>
                       <div className="flex-1 min-w-0">
@@ -240,13 +312,13 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
 
               {error && (
                 <div className="mb-4 p-3.5 rounded-xl text-sm"
-                  style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)', color: '#F85149' }}>
+                  style={{ background: 'var(--red-muted)', border: '1px solid var(--coral-border)', color: 'var(--red)' }}>
                   {error}
                 </div>
               )}
 
               <div className="flex gap-3">
-                <button onClick={() => setStep(2)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStep(3)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
                 <button onClick={handleFinish} disabled={loading} className="btn-primary flex-1 py-3.5 font-bold disabled:opacity-50 disabled:cursor-not-allowed">
                   {loading ? t('ob_saving') : t('ob_finish')}
                 </button>

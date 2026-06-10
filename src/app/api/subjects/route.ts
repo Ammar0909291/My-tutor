@@ -2,10 +2,18 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 
 const FALLBACK_SUBJECTS = [
-  { id: 'c',       name: 'C',       slug: 'c',       description: 'System programming · Memory · Speed', type: 'C' },
-  { id: 'cpp',     name: 'C++',     slug: 'cpp',     description: 'OOP · STL · High performance',        type: 'CPP' },
-  { id: 'python',  name: 'Python',  slug: 'python',  description: 'Fast start · Readability · Versatile', type: 'PYTHON' },
-  { id: 'english', name: 'English', slug: 'english', description: 'IT English · Docs · Communication',    type: 'ENGLISH' },
+  { id: 'c',          name: 'C',          slug: 'c',          description: 'System programming · Memory · Speed',       type: 'C' },
+  { id: 'cpp',        name: 'C++',        slug: 'cpp',        description: 'OOP · STL · High performance',              type: 'CPP' },
+  { id: 'python',     name: 'Python',     slug: 'python',     description: 'Fast start · Readability · Versatile',      type: 'PYTHON' },
+  { id: 'english',    name: 'English',    slug: 'english',    description: 'IT English · Docs · Communication',         type: 'ENGLISH' },
+  { id: 'javascript', name: 'JavaScript', slug: 'javascript', description: 'Web · Browser · Full-stack',               type: 'PROGRAMMING' },
+  { id: 'typescript', name: 'TypeScript', slug: 'typescript', description: 'Types · Safety · Enterprise JS',           type: 'PROGRAMMING' },
+  { id: 'russian',    name: 'Russian',    slug: 'russian',    description: 'Alphabet · Grammar · Conversation',        type: 'LANGUAGE' },
+  { id: 'java',       name: 'Java',       slug: 'java',       description: 'Enterprise · Spring Boot · JVM',            type: 'PROGRAMMING' },
+  { id: 'csharp',     name: 'C#',         slug: 'csharp',     description: '.NET · ASP.NET Core · Modern C#',           type: 'PROGRAMMING' },
+  { id: 'go',         name: 'Go',         slug: 'go',         description: 'Simplicity · Concurrency · Cloud',          type: 'PROGRAMMING' },
+  { id: 'rust',       name: 'Rust',       slug: 'rust',       description: 'Safety · Speed · Systems programming',      type: 'PROGRAMMING' },
+  { id: 'ai',         name: 'Artificial Intelligence', slug: 'ai', description: 'ML · Deep Learning · Generative AI · MLOps', type: 'AI' },
 ]
 
 export async function GET() {

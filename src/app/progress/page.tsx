@@ -56,7 +56,7 @@ export default async function ProgressPage() {
   const masteredTopics = profile?.masteredTopics ?? []
   const confusedTopics = profile?.confusedTopics ?? []
 
-  const SLUG_ICON: Record<string, string> = { c: '⚙️', cpp: '🔷', python: '🐍', english: '🇬🇧' }
+  const SLUG_ICON: Record<string, string> = { c: '⚙️', cpp: '🔷', python: '🐍', english: '🇬🇧', javascript: '🟨', typescript: '🔵', russian: '🇷🇺', java: '☕', csharp: 'C#', go: 'Go', rust: '⚙', ai: '🤖' }
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-base)' }}>

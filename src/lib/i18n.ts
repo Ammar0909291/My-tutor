@@ -765,6 +765,16 @@ export const translations = {
     dash_milestone_continue: 'Продолжить',
     dash_milestone_start: 'Начать изучение',
     dash_no_milestone: 'Вы всё наверстали! 🎉',
+
+    /* ── Learn workspace subject selector ── */
+    learn_select_subject: 'Выбрать предмет',
+    learn_current_subject: 'Текущий предмет',
+    learn_enrolled_count_one: 'предмет',
+    learn_enrolled_count_few: 'предмета',
+    learn_enrolled_count_many: 'предметов',
+    learn_switch_subject: 'Переключиться',
+    learn_maximize: 'Развернуть',
+    learn_restore: 'Свернуть',
   },
   en: {
     /* ── Landing ── */
@@ -1530,6 +1540,16 @@ export const translations = {
     dash_milestone_continue: 'Continue',
     dash_milestone_start: 'Start learning',
     dash_no_milestone: "You're all caught up! 🎉",
+
+    /* ── Learn workspace subject selector ── */
+    learn_select_subject: 'Select Subject',
+    learn_current_subject: 'Current subject',
+    learn_enrolled_count_one: 'subject',
+    learn_enrolled_count_few: 'subjects',
+    learn_enrolled_count_many: 'subjects',
+    learn_switch_subject: 'Switch',
+    learn_maximize: 'Maximize',
+    learn_restore: 'Restore',
   },
   hi: {
     /* ── Landing ── */
@@ -2284,6 +2304,16 @@ export const translations = {
     dash_milestone_continue: 'जारी रखें',
     dash_milestone_start: 'सीखना शुरू करें',
     dash_no_milestone: 'आप पूरी तरह तैयार हैं! 🎉',
+
+    /* ── Learn workspace subject selector ── */
+    learn_select_subject: 'विषय चुनें',
+    learn_current_subject: 'वर्तमान विषय',
+    learn_enrolled_count_one: 'विषय',
+    learn_enrolled_count_few: 'विषय',
+    learn_enrolled_count_many: 'विषय',
+    learn_switch_subject: 'बदलें',
+    learn_maximize: 'बड़ा करें',
+    learn_restore: 'छोटा करें',
   },
 } as const
 
