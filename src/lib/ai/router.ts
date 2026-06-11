@@ -1,4 +1,6 @@
 import Groq from 'groq-sdk'
+import { consumeAIBudget } from '@/lib/ai/budget'
+import { captureError } from '@/lib/monitoring'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '', timeout: 20000, maxRetries: 2 })
 
@@ -8,6 +10,7 @@ async function callGroq(
   systemPrompt: string,
   maxTokens = 800,
 ): Promise<string> {
+  await consumeAIBudget()
   const response = await groq.chat.completions.create({
     model: 'llama-3.1-8b-instant',
     messages: [
@@ -119,6 +122,9 @@ export async function routeJSON(
   prompt: string,
   maxTokens = 1500,
 ): Promise<any> {
+  // routeJSON never throws (callers expect null on failure) — a spent budget
+  // degrades to null the same way a provider error does.
+  try { await consumeAIBudget() } catch { return null }
   try {
     const response = await groq.chat.completions.create({
       model: 'llama-3.1-8b-instant',
@@ -133,7 +139,9 @@ export async function routeJSON(
     const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
     try { return JSON.parse(clean) } catch { return null }
   } catch (error: any) {
+    // Swallowed failure — without reporting it would be invisible in production.
     console.error('routeJSON error:', error.message)
+    captureError(error, { route: 'lib/ai/routeJSON', tags: { provider: 'groq' } })
     return null
   }
 }

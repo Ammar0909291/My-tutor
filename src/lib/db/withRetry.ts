@@ -1,3 +1,5 @@
+import { captureError } from '@/lib/monitoring'
+
 export async function withRetry<T>(
   operation: () => Promise<T>,
   retries = 3,
@@ -22,6 +24,11 @@ export async function withRetry<T>(
         console.log(`DB connection failed, retry ${i + 1}/${retries}...`)
         await new Promise((resolve) => setTimeout(resolve, delay * (i + 1)))
         continue
+      }
+      // Connection errors that survive all retries are the signal that the
+      // database itself is in trouble — report before propagating.
+      if (isConnectionError) {
+        captureError(error, { route: 'db/withRetry', tags: { kind: 'db-connection' }, extra: { retries } })
       }
       throw error
     }

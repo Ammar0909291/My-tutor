@@ -1,4 +1,6 @@
 import Groq from 'groq-sdk'
+import { consumeAIBudget } from '@/lib/ai/budget'
+import { captureError } from '@/lib/monitoring'
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY || '',
@@ -12,6 +14,7 @@ export async function generateAIResponse(
   maxTokens = 800,
   lang: 'ru' | 'en' | 'hi' = 'en',
 ): Promise<string> {
+  await consumeAIBudget() // propagates AIBudgetExceededError — callers already handle thrown provider errors
   try {
     const response = await groq.chat.completions.create({
       model: 'llama-3.1-8b-instant',
@@ -41,6 +44,9 @@ export async function generateJSON(
   prompt: string,
   maxTokens = 1500,
 ): Promise<any> {
+  // generateJSON never throws (callers expect null on failure) — a spent
+  // budget degrades to null the same way a provider error does.
+  try { await consumeAIBudget() } catch { return null }
   try {
     const response = await groq.chat.completions.create({
       model: 'llama-3.1-8b-instant',
@@ -55,7 +61,9 @@ export async function generateJSON(
     const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
     try { return JSON.parse(clean) } catch { return null }
   } catch (error: any) {
+    // Swallowed failure — without reporting it would be invisible in production.
     console.error('Groq JSON error:', error.message)
+    captureError(error, { route: 'lib/ai/generateJSON', tags: { provider: 'groq' } })
     return null
   }
 }
@@ -65,6 +73,7 @@ export async function summarizeSession(
   lang: string,
 ): Promise<string> {
   if (!process.env.GROQ_API_KEY) return ''
+  try { await consumeAIBudget() } catch { return '' }
   const prompt = lang === 'ru'
     ? 'Summarize this tutoring session in 2 sentences in Russian.'
     : lang === 'hi'

@@ -5,7 +5,9 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { routeAI } from '@/lib/ai/router'
+import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
+import { captureError } from '@/lib/monitoring'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -502,9 +504,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       return NextResponse.json({ success: true, text, provider })
     } catch (error: any) {
+      // Global AI budget spent — expected under load, not an error to report.
+      if (error instanceof AIBudgetExceededError) {
+        return NextResponse.json({ success: false, error: 'High demand right now — please try again in a minute.' }, { status: 429 })
+      }
       // Log the real provider error server-side only — raw messages can leak
       // API key names and provider configuration to the client.
       console.error('[learn/chat] AI error:', error.message)
+      captureError(error, { route: 'api/learn/chat', tags: { stage: 'ai' } })
       return NextResponse.json({ success: false, error: 'AI service temporarily unavailable. Please try again.' }, { status: 500 })
     }
   } catch (err) {
@@ -512,6 +519,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
     console.error('[learn/chat]', err)
+    captureError(err, { route: 'api/learn/chat' })
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
   }
 }
