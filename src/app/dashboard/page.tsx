@@ -225,7 +225,8 @@ export default async function DashboardPage() {
           <SectionHeading icon={Layers} title={T('dashx_my_subjects')}
             right={<Link href="/library" className="text-xs font-bold" style={{ color: 'var(--coral)' }}>+ {T('library_add_subject')}</Link>} />
           {enrolledSubjects.length === 0 ? (
-            <EmptyState emoji="🧭" title={T('dash_no_programs')} sub={T('dash_no_programs_sub')} />
+            <EmptyState emoji="🧭" title={T('dash_no_programs')} sub={T('dash_no_programs_sub')}
+              cta={{ href: '/library', label: `+ ${T('library_add_subject')}` }} />
           ) : (
             <>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -423,7 +424,7 @@ function HeroChip({ icon, label }: { icon: string; label: string }) {
 
 function StatCard({ icon: Icon, label, value, color }: { icon: LucideIcon; label: string; value: string; color: string }) {
   return (
-    <div className="rounded-2xl p-4 flex flex-col justify-between min-h-[96px] transition-all duration-200 hover:-translate-y-0.5"
+    <div className="rounded-2xl p-4 flex flex-col justify-between min-h-[108px] transition-all duration-200 hover:-translate-y-0.5"
       style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
       <div className="flex items-center gap-2">
         <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--bg-elevated)' }}>
@@ -470,12 +471,18 @@ function AchievementChip({ icon, value, label }: { icon: string; value: string; 
   )
 }
 
-function EmptyState({ emoji, title, sub }: { emoji: string; title: string; sub: string }) {
+function EmptyState({ emoji, title, sub, cta }: { emoji: string; title: string; sub: string; cta?: { href: string; label: string } }) {
   return (
     <div className="py-12 text-center px-6 rounded-2xl" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
       <div className="text-4xl mb-3">{emoji}</div>
       <p className="font-bold text-sm mb-1.5" style={{ color: 'var(--text-primary)' }}>{title}</p>
       <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{sub}</p>
+      {cta && (
+        <Link href={cta.href} className="inline-block mt-4 px-5 py-2.5 rounded-xl text-xs font-bold text-white"
+          style={{ background: 'var(--coral)', textDecoration: 'none' }}>
+          {cta.label}
+        </Link>
+      )}
     </div>
   )
 }
