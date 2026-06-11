@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { randomBytes } from 'crypto'
 import { prisma } from '@/lib/db/prisma'
 import { sendPasswordResetEmail } from '@/lib/email'
+import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
 
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 const EXPIRY_MS = 60 * 60 * 1000 // 1 hour
@@ -15,6 +16,11 @@ function safeResponse() {
 }
 
 export async function POST(req: NextRequest) {
+  // Pre-auth endpoint — limit per IP to stop email-bombing via reset requests
+  // (Sprint AQ).
+  const { allowed } = await checkRateLimit(`rl:forgot-password:${getClientIp(req)}`, 5, 900)
+  if (!allowed) return rateLimitResponse()
+
   try {
     const body = await req.json().catch(() => ({}))
     const { email } = body

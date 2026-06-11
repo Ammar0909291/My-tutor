@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/db/prisma'
+import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
 
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 
 export async function POST(req: NextRequest) {
+  // Pre-auth endpoint — limit per IP to slow token brute-forcing (Sprint AQ).
+  const { allowed } = await checkRateLimit(`rl:reset-password:${getClientIp(req)}`, 10, 900)
+  if (!allowed) return rateLimitResponse()
+
   try {
     const { token, password } = await req.json()
 

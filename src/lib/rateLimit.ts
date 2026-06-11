@@ -42,3 +42,14 @@ export function rateLimitResponse() {
     { status: 429 },
   )
 }
+
+/**
+ * Client IP for rate-limiting unauthenticated endpoints (register,
+ * forgot-password, reset-password). On Vercel the left-most entry of
+ * x-forwarded-for is the real client address.
+ */
+export function getClientIp(req: Request): string {
+  const fwd = req.headers.get('x-forwarded-for')
+  if (fwd) return fwd.split(',')[0].trim()
+  return req.headers.get('x-real-ip') ?? 'unknown'
+}

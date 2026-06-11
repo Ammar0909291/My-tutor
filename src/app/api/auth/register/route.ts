@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { sendWelcomeEmail } from "@/lib/email";
+import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rateLimit";
 
 const registerSchema = z.object({
   name: z.string().min(2).max(80),
@@ -12,6 +13,10 @@ const registerSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  // Pre-auth endpoint — limit per IP to stop registration spam (Sprint AQ).
+  const { allowed } = await checkRateLimit(`rl:register:${getClientIp(req)}`, 5, 900);
+  if (!allowed) return rateLimitResponse();
+
   try {
     const body = await req.json();
     const { name, email, password, referralCode } = registerSchema.parse(body);
