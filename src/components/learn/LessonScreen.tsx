@@ -1859,10 +1859,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   setPracticeFocusCategories([])
                 }}
                 onComplete={(score, evidenceWritten) => {
+                  // Record the score but keep the panel open so the user sees
+                  // the result screen; it closes via its Done/✕ buttons.
                   setPracticeScore(score)
-                  setPracticeOpen(false)
-                  setPracticeDifficulty(2)
-                  setPracticeFocusCategories([])
                   if (evidenceWritten && currentLessonData.topicSlug) {
                     fetch(`/api/topic-progress?subject=${subjectSlug}`)
                       .then((r) => r.json())

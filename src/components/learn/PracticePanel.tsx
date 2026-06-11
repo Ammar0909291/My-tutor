@@ -99,134 +99,244 @@ export function PracticePanel({
     ? Math.round((answers.filter(Boolean).length / answers.length) * 100)
     : 0
 
+  const statusLabel =
+    state === 'loading' ? 'Generating questions…'
+    : state === 'quiz' ? `Question ${currentIdx + 1} of ${questions.length}`
+    : state === 'result' ? `Completed · ${questions.length} questions`
+    : 'Unavailable'
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.6)' }}
+      style={{ background: 'rgba(2,4,8,0.78)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose?.() }}
     >
       <div
-        className="w-full max-w-lg rounded-2xl p-6 space-y-4"
-        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
+        className="w-full max-w-lg overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Knowledge Check"
+        style={{
+          background: 'var(--bg-base)',
+          border: '1px solid var(--border-default)',
+          borderRadius: 'var(--r-xl)',
+          boxShadow: 'var(--shadow-xl), 0 0 0 1px rgba(0,0,0,0.04)',
+        }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-            {topicTitle ?? topicSlug ?? 'Practice'}
-          </h3>
+        {/* ── Header ── */}
+        <div
+          className="flex items-start gap-3 px-6 py-4"
+          style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}
+        >
+          <div
+            className="flex items-center justify-center shrink-0"
+            style={{
+              width: 40, height: 40, fontSize: 20,
+              background: 'var(--coral-muted)',
+              border: '1px solid var(--coral-border)',
+              borderRadius: 'var(--r-md)',
+            }}
+          >
+            🎯
+          </div>
+          <div className="min-w-0 flex-1">
+            <div
+              className="text-[11px] font-bold uppercase"
+              style={{ color: 'var(--coral)', letterSpacing: '0.08em' }}
+            >
+              Knowledge Check
+            </div>
+            <h3
+              className="font-bold text-base leading-snug truncate"
+              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
+              title={topicTitle ?? topicSlug ?? 'Practice'}
+            >
+              {topicTitle ?? topicSlug ?? 'Practice'}
+            </h3>
+            <div className="text-xs mt-0.5 font-medium" style={{ color: 'var(--text-secondary)' }}>
+              {statusLabel}
+            </div>
+          </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-sm transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
+            aria-label="Close"
+            className="shrink-0 flex items-center justify-center transition-colors"
+            style={{
+              width: 32, height: 32, fontSize: 14,
+              color: 'var(--text-primary)',
+              background: 'var(--bg-elevated)',
+              border: '1px solid var(--border-default)',
+              borderRadius: 'var(--r-md)',
+              cursor: 'pointer',
+            }}
           >
             ✕
           </button>
         </div>
 
-        {/* Loading */}
-        {state === 'loading' && (
-          <div className="flex items-center justify-center py-12">
-            <div className="w-8 h-8 border-2 rounded-full animate-spin" style={{ borderColor: 'var(--accent-primary)', borderTopColor: 'transparent' }} />
+        {/* ── Quiz progress bar ── */}
+        {state === 'quiz' && questions.length > 0 && (
+          <div style={{ height: 4, background: 'var(--bg-elevated)' }}>
+            <div
+              style={{
+                height: '100%',
+                width: `${(currentIdx / questions.length) * 100}%`,
+                background: 'var(--coral)',
+                transition: 'width 0.3s var(--ease-out)',
+              }}
+            />
           </div>
         )}
 
-        {/* Error */}
-        {state === 'error' && (
-          <div className="space-y-4">
-            <p className="text-sm text-center py-4" style={{ color: 'var(--text-secondary)' }}>
-              {errorMsg}
-            </p>
-            <div className="flex gap-2 justify-center">
-              <button
-                onClick={load}
-                className="rounded-lg px-4 py-2 text-sm font-medium"
-                style={{ background: 'var(--accent-primary)', color: '#fff' }}
-              >
-                Retry
-              </button>
-              <button
-                onClick={onClose}
-                className="rounded-lg px-4 py-2 text-sm font-medium"
-                style={{ background: 'var(--bg-base)', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Quiz */}
-        {state === 'quiz' && q && (
-          <div className="space-y-4">
-            <div className="flex justify-between text-xs" style={{ color: 'var(--text-secondary)' }}>
-              <span>Question {currentIdx + 1} of {questions.length}</span>
-            </div>
-            <p className="font-medium" style={{ color: 'var(--text-primary)' }}>{q.question}</p>
-            <div className="space-y-2">
-              {q.options.map((opt, i) => {
-                let bg = 'var(--bg-base)'
-                let border = 'var(--border-subtle)'
-                let color = 'var(--text-primary)'
-                if (selected !== null) {
-                  if (i === q.correctIndex) { bg = '#16a34a22'; border = '#16a34a'; color = '#16a34a' }
-                  else if (i === selected) { bg = '#dc262622'; border = '#dc2626'; color = '#dc2626' }
-                } else if (selected === i) {
-                  bg = 'var(--accent-primary)22'; border = 'var(--accent-primary)'
-                }
-                return (
-                  <button
-                    key={i}
-                    onClick={() => handleSelect(i)}
-                    className="w-full text-left rounded-xl px-4 py-3 text-sm transition-colors"
-                    style={{ background: bg, border: `1px solid ${border}`, color }}
-                  >
-                    {opt}
-                  </button>
-                )
-              })}
-            </div>
-            {selected !== null && (
-              <p className="text-xs italic" style={{ color: 'var(--text-secondary)' }}>
-                {q.explanation}
+        <div className="p-6">
+          {/* ── Loading ── */}
+          {state === 'loading' && (
+            <div className="flex flex-col items-center justify-center gap-4 py-14">
+              <div
+                className="w-10 h-10 border-[3px] rounded-full animate-spin"
+                style={{ borderColor: 'var(--coral)', borderTopColor: 'transparent' }}
+              />
+              <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                Preparing your practice questions…
               </p>
-            )}
-            <button
-              onClick={handleNext}
-              disabled={selected === null}
-              className="w-full rounded-xl py-2.5 text-sm font-medium disabled:opacity-40 transition-opacity"
-              style={{ background: 'var(--accent-primary)', color: '#fff' }}
-            >
-              {currentIdx + 1 < questions.length ? 'Next' : 'Finish'}
-            </button>
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* Result */}
-        {state === 'result' && (
-          <div className="space-y-4 text-center">
-            <div className="text-4xl font-bold" style={{ color: 'var(--accent-primary)' }}>
-              {score}%
-            </div>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              {answers.filter(Boolean).length} / {questions.length} correct
-            </p>
-            <div className="flex gap-2 justify-center">
-              <button
-                onClick={load}
-                className="rounded-lg px-4 py-2 text-sm font-medium"
-                style={{ background: 'var(--accent-primary)', color: '#fff' }}
+          {/* ── Error / AI unavailable ── */}
+          {state === 'error' && (
+            <div className="flex flex-col items-center text-center gap-3 py-8 px-4">
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: 64, height: 64, fontSize: 30,
+                  background: 'var(--yellow-muted)',
+                  border: '1px solid var(--border-default)',
+                  borderRadius: 'var(--r-full)',
+                }}
               >
-                Try Again
-              </button>
+                ⚠️
+              </div>
+              <h4 className="text-lg font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                Practice Unavailable
+              </h4>
+              <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                Unable to generate questions right now.
+              </p>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {errorMsg || 'Please try again later.'}
+              </p>
+              <div className="flex gap-3 justify-center mt-3">
+                <button
+                  onClick={load}
+                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
+                >
+                  ↻ Retry
+                </button>
+                <button
+                  onClick={onClose}
+                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  style={{
+                    background: 'var(--bg-elevated)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-default)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── Quiz ── */}
+          {state === 'quiz' && q && (
+            <div className="space-y-4">
+              <p className="font-semibold text-[15px] leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+                {q.question}
+              </p>
+              <div className="space-y-2">
+                {q.options.map((opt, i) => {
+                  let bg = 'var(--bg-surface)'
+                  let border = 'var(--border-default)'
+                  let color = 'var(--text-primary)'
+                  let fontWeight = 500
+                  if (selected !== null) {
+                    if (i === q.correctIndex) { bg = 'var(--green-muted)'; border = 'var(--green)'; color = 'var(--green)'; fontWeight = 700 }
+                    else if (i === selected) { bg = 'var(--red-muted)'; border = 'var(--red)'; color = 'var(--red)'; fontWeight = 700 }
+                  }
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => handleSelect(i)}
+                      className="w-full text-left rounded-xl px-4 py-3 text-sm transition-colors"
+                      style={{ background: bg, border: `1.5px solid ${border}`, color, fontWeight, cursor: selected === null ? 'pointer' : 'default' }}
+                    >
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {selected !== null && (
+                <div
+                  className="rounded-lg px-4 py-3 text-sm"
+                  style={{
+                    background: 'var(--blue-muted)',
+                    border: '1px solid var(--border-default)',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  💡 {q.explanation}
+                </div>
+              )}
               <button
-                onClick={onClose}
-                className="rounded-lg px-4 py-2 text-sm font-medium"
-                style={{ background: 'var(--bg-base)', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}
+                onClick={handleNext}
+                disabled={selected === null}
+                className="w-full rounded-xl py-3 text-sm font-bold disabled:opacity-40 transition-opacity"
+                style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: selected === null ? 'default' : 'pointer' }}
               >
-                Done
+                {currentIdx + 1 < questions.length ? 'Next Question →' : 'Finish'}
               </button>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* ── Result ── */}
+          {state === 'result' && (
+            <div className="space-y-4 text-center py-4">
+              <div style={{ fontSize: 44 }}>{score >= 80 ? '🏆' : score >= 50 ? '👏' : '💪'}</div>
+              <div
+                className="text-5xl font-extrabold"
+                style={{ color: score >= 50 ? 'var(--green)' : 'var(--coral)', fontFamily: 'var(--font-heading)' }}
+              >
+                {score}%
+              </div>
+              <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                {answers.filter(Boolean).length} / {questions.length} correct
+              </p>
+              <div className="flex gap-3 justify-center pt-2">
+                <button
+                  onClick={load}
+                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
+                >
+                  Try Again
+                </button>
+                <button
+                  onClick={onClose}
+                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  style={{
+                    background: 'var(--bg-elevated)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-default)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
