@@ -7,12 +7,6 @@ import type { TeachingLang } from '@/lib/tts'
 type VoiceOption = { key: string; label: string }
 type LangOption = { key: TeachingLang; icon: string; label: string }
 
-const VOICE_OPTIONS: VoiceOption[] = [
-  { key: 'male',   label: 'Мужской (М)' },
-  { key: 'female', label: 'Женский (Ж)' },
-  { key: 'warm',   label: 'Тёплый (Т)' },
-]
-
 const LANG_OPTIONS: LangOption[] = [
   { key: 'ru', icon: '🇷🇺', label: 'Русский' },
   { key: 'en', icon: '🇬🇧', label: 'English' },
@@ -28,6 +22,12 @@ interface SettingsData {
 
 export default function SettingsPage() {
   const { t, setLang } = useLanguage()
+
+  const VOICE_OPTIONS: VoiceOption[] = [
+    { key: 'male',   label: t('voice_male') },
+    { key: 'female', label: t('voice_female') },
+    { key: 'warm',   label: t('voice_warm') },
+  ]
   const [data, setData] = useState<SettingsData | null>(null)
   const [voiceId, setVoiceId] = useState('male')
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('ru')
@@ -179,7 +179,7 @@ export default function SettingsPage() {
         {/* Account */}
         <Section label={t('settings_account')}>
           <p className="text-sm" style={{ color: '#52525B' }}>
-            {t('settings_name')} и {t('settings_email')} управляются через настройки аккаунта.
+            {t('settings_account_desc')}
           </p>
         </Section>
 

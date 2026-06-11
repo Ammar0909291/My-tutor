@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { t } from '@/lib/i18n'
+import type { Lang } from '@/lib/i18n'
 import { BookOpen, Clock, Flame, GraduationCap, Layers, Sparkles, ArrowRight, Settings } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -8,27 +10,16 @@ import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
 import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
 
-const SUBJECT_META: Record<string, { icon: string; label: string; color: string; bg: string; border: string }> = {
-  c:       { icon: '⚙️',  label: 'C язык',           color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
-  cpp:     { icon: '🔷',  label: 'C++',               color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
-  python:  { icon: '🐍',  label: 'Python',            color: '#56D364', bg: 'rgba(86,211,100,0.08)',   border: 'rgba(86,211,100,0.2)'   },
-  english: { icon: '🇬🇧', label: 'Английский язык',  color: '#E3B341', bg: 'rgba(227,179,65,0.08)',   border: 'rgba(227,179,65,0.2)'   },
+const SUBJECT_META: Record<string, { icon: string; color: string; bg: string; border: string }> = {
+  c:       { icon: '⚙️',  color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
+  cpp:     { icon: '🔷',  color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
+  python:  { icon: '🐍',  color: '#56D364', bg: 'rgba(86,211,100,0.08)',   border: 'rgba(86,211,100,0.2)'   },
+  english: { icon: '🇬🇧', color: '#E3B341', bg: 'rgba(227,179,65,0.08)',   border: 'rgba(227,179,65,0.2)'   },
 }
 function sm(slug: string) {
-  return SUBJECT_META[slug] ?? { icon: '📘', label: slug, color: '#F78166', bg: 'rgba(247,129,102,0.08)', border: 'rgba(247,129,102,0.2)' }
+  return SUBJECT_META[slug] ?? { icon: '📘', color: '#F78166', bg: 'rgba(247,129,102,0.08)', border: 'rgba(247,129,102,0.2)' }
 }
 
-const VOICE_LABELS: Record<string, string> = {
-  male:   'Мужской',
-  female: 'Женский',
-  warm:   'Тёплый',
-  alexei: 'Алексей',
-  maria:  'Мария',
-  dmitry: 'Дмитрий',
-  pNInz6obpgDQGcFmaJgB: 'Александр',
-  ErXwobaYiN019PkySvjV: 'Антон',
-  EXAVITQu4vr4xnSDxMaL: 'Наталья',
-}
 const LANG_DISPLAY: Record<string, string> = { ru: '🇷🇺 Русский', en: '🇬🇧 English', hi: '🇮🇳 हिंदी' }
 
 export default async function DashboardPage() {
@@ -65,11 +56,13 @@ export default async function DashboardPage() {
   if (!user?.onboardingCompleted) redirect('/onboarding')
 
   const profile = user.profile
+  const lang = (profile?.teachingLanguage ?? 'ru') as Lang
   const enrolledSubjects = profile?.subjects ?? []
   const primarySubject = enrolledSubjects[0]?.subject
-  const voiceLabel = profile?.voiceId ? (VOICE_LABELS[profile.voiceId] ?? profile.voiceId) : null
+  const voiceLabel = profile?.voiceId ? (t(lang, `voice_${profile.voiceId}` as Parameters<typeof t>[1]) || profile.voiceId) : null
   const langDisplay = profile?.teachingLanguage ? (LANG_DISPLAY[profile.teachingLanguage] ?? profile.teachingLanguage) : null
-  const displayName = profile?.displayName ?? user.name ?? 'Студент'
+  const displayName = profile?.displayName ?? user.name ?? t(lang, 'dash_student_default')
+  const locale = lang === 'ru' ? 'ru-RU' : lang === 'hi' ? 'hi-IN' : 'en-US'
   const isPro = subscription?.status === 'ACTIVE'
   const showUpgradeBanner = false // Stripe disabled for now
 
@@ -95,7 +88,7 @@ export default async function DashboardPage() {
           <div className="flex items-center gap-3">
             <span className="text-sm hidden sm:block" style={{ color: 'var(--text-dim)' }}>{session.user.email}</span>
             <Link href="/settings" className="btn-ghost text-xs px-3 py-1.5 flex items-center gap-1.5">
-              <Settings size={13} /> Настройки
+              <Settings size={13} /> {t(lang, 'dash_nav_settings')}
             </Link>
             <SignOutButton />
           </div>
@@ -108,7 +101,7 @@ export default async function DashboardPage() {
         <div className="mb-10">
           <div className="flex items-center gap-3 flex-wrap mb-2">
             <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              Привет, <span className="text-gradient-coral">{displayName}</span>! 👋
+              {t(lang, 'dash_greeting')}, <span className="text-gradient-coral">{displayName}</span>! 👋
             </h1>
             {isPro && (
               <span className="badge" style={{ background: 'linear-gradient(135deg,#F6B444,#E8913A)', color: '#fff', border: 'none', fontWeight: 800, letterSpacing: '0.08em' }}>
@@ -116,17 +109,17 @@ export default async function DashboardPage() {
               </span>
             )}
           </div>
-          <p className="text-sm" style={{ color: 'var(--text-dim)' }}>Твоя персональная доска обучения</p>
+          <p className="text-sm" style={{ color: 'var(--text-dim)' }}>{t(lang, 'dash_personal_board')}</p>
         </div>
 
         {/* Stats row */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <StatCard icon={GraduationCap} label="Уроков пройдено" value={String(totalLessons)} color="#F78166" />
-          <StatCard icon={Layers}        label="Предметов"        value={String(enrolledSubjects.length)} color="#79C0FF" />
+          <StatCard icon={GraduationCap} label={t(lang, 'dash_stat_lessons')} value={String(totalLessons)} color="#F78166" />
+          <StatCard icon={Layers}        label={t(lang, 'dash_stat_subjects')} value={String(enrolledSubjects.length)} color="#79C0FF" />
           <StatCard
-            icon={Flame} label="Последний урок" color="#56D364"
+            icon={Flame} label={t(lang, 'dash_stat_last_lesson')} color="#56D364"
             value={recentSessions[0]
-              ? new Date(recentSessions[0].startedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
+              ? new Date(recentSessions[0].startedAt).toLocaleDateString(locale, { day: 'numeric', month: 'short' })
               : '—'}
           />
         </div>
@@ -136,7 +129,7 @@ export default async function DashboardPage() {
           <div className="flex items-center justify-between gap-4 px-5 py-4 rounded-2xl mb-6"
             style={{ background: 'rgba(247,129,102,0.07)', border: '1px solid rgba(247,129,102,0.25)' }}>
             <p className="text-sm font-medium" style={{ color: '#F78166' }}>
-              ✦ Твой бесплатный урок использован · Оформи Pro чтобы продолжить
+              ✦ {t(lang, 'dash_upgrade_banner')}
             </p>
             <UpgradeButton />
           </div>
@@ -165,11 +158,11 @@ export default async function DashboardPage() {
                   {primarySubject && (
                     <span className="badge badge-coral mb-3 inline-flex">
                       <Sparkles size={10} className="mr-1" />
-                      {sm(primarySubject.slug).label}
+                      {primarySubject.name}
                     </span>
                   )}
                   <h2 className="text-xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                    Готов к уроку?
+                    {t(lang, 'dash_ready_lesson')}
                   </h2>
                   <p className="text-sm leading-relaxed line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
                     {profile?.selfDescription}
@@ -182,9 +175,9 @@ export default async function DashboardPage() {
             </div>
 
             {/* Enrolled subjects */}
-            <SectionCard title="Мои программы" icon={Layers}>
+            <SectionCard title={t(lang, 'dash_my_programs')} icon={Layers}>
               {enrolledSubjects.length === 0 ? (
-                <EmptyState emoji="🧭" title="Пока нет программ" sub="Заверши онбординг, чтобы выбрать предмет." />
+                <EmptyState emoji="🧭" title={t(lang, 'dash_no_programs_title')} sub={t(lang, 'dash_no_programs_sub')} />
               ) : (
                 <div className="grid sm:grid-cols-2 gap-3 p-4">
                   {enrolledSubjects.map((ps) => {
@@ -199,7 +192,7 @@ export default async function DashboardPage() {
                         <div className="min-w-0">
                           <p className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{ps.subject.name}</p>
                           <p className="text-xs truncate mt-0.5" style={{ color: 'var(--text-dim)' }}>
-                            {m.label}
+                            {ps.subject.slug}
                           </p>
                         </div>
                       </div>
@@ -211,14 +204,14 @@ export default async function DashboardPage() {
 
             {/* Session history */}
             <SectionCard
-              title="История уроков"
+              title={t(lang, 'dash_history_title')}
               icon={Clock}
               right={recentSessions.length > 0
-                ? <span className="text-xs" style={{ color: 'var(--text-dim)' }}>последние {recentSessions.length}</span>
+                ? <span className="text-xs" style={{ color: 'var(--text-dim)' }}>{t(lang, 'dash_history_recent').replace('{n}', String(recentSessions.length))}</span>
                 : undefined}
             >
               {recentSessions.length === 0 ? (
-                <EmptyState emoji="📚" title="Уроков пока нет" sub="Начни свой первый урок — он появится здесь." />
+                <EmptyState emoji="📚" title={t(lang, 'dash_no_lessons_title')} sub={t(lang, 'dash_no_lessons_sub')} />
               ) : (
                 <ul className="divide-y" style={{ borderColor: 'var(--border-default)' }}>
                   {recentSessions.map((s) => {
@@ -235,7 +228,7 @@ export default async function DashboardPage() {
                               {s.title ?? s.subject.name}
                             </p>
                             <p className="text-xs mt-0.5" style={{ color: 'var(--text-dim)' }}>
-                              {new Date(s.startedAt).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
+                              {new Date(s.startedAt).toLocaleString(locale, { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
                             </p>
                             {s.summary && (
                               <p className="text-xs mt-1.5 leading-relaxed line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
@@ -271,24 +264,24 @@ export default async function DashboardPage() {
 
               <div className="space-y-4">
                 {primarySubject && (
-                  <ProfileRow label="Основной предмет">
+                  <ProfileRow label={t(lang, 'dash_primary_subject')}>
                     <span className="badge" style={{ background: sm(primarySubject.slug).bg, color: sm(primarySubject.slug).color, border: `1px solid ${sm(primarySubject.slug).border}` }}>
-                      {sm(primarySubject.slug).icon} {sm(primarySubject.slug).label}
+                      {sm(primarySubject.slug).icon} {primarySubject.name}
                     </span>
                   </ProfileRow>
                 )}
                 {voiceLabel && (
-                  <ProfileRow label="Голос репетитора">
+                  <ProfileRow label={t(lang, 'dash_tutor_voice')}>
                     <span className="badge badge-blue">{voiceLabel}</span>
                   </ProfileRow>
                 )}
                 {langDisplay && (
-                  <ProfileRow label="Язык обучения">
+                  <ProfileRow label={t(lang, 'dash_teach_lang')}>
                     <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{langDisplay}</span>
                   </ProfileRow>
                 )}
                 {profile?.selfDescription && (
-                  <ProfileRow label="О себе">
+                  <ProfileRow label={t(lang, 'dash_about')}>
                     <p className="text-xs leading-relaxed line-clamp-4" style={{ color: 'var(--text-secondary)' }}>
                       {profile.selfDescription}
                     </p>
@@ -301,14 +294,14 @@ export default async function DashboardPage() {
             <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
               <div className="px-5 py-4 flex items-center gap-2" style={{ borderBottom: '1px solid var(--border-default)' }}>
                 <Sparkles size={13} style={{ color: 'var(--accent-primary)' }} />
-                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>Быстрые действия</h3>
+                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{t(lang, 'dash_quick_actions')}</h3>
               </div>
               <div className="p-3 space-y-1">
                 {([
-                  { label: 'Начать урок',      href: '/learn',    icon: Sparkles, accent: '#F78166' },
-                  { label: 'История сессий',   href: '#history',  icon: Clock,    accent: '#79C0FF' },
-                  { label: 'Настройки',        href: '/settings', icon: Settings, accent: '#56D364' },
-                ] as const).map(({ label, href, icon: Icon, accent }) => (
+                  { label: t(lang, 'dash_action_start'),   href: '/learn',    icon: Sparkles, accent: '#F78166' },
+                  { label: t(lang, 'dash_action_history'), href: '#history',  icon: Clock,    accent: '#79C0FF' },
+                  { label: t(lang, 'dash_action_settings'),href: '/settings', icon: Settings, accent: '#56D364' },
+                ] as { label: string; href: string; icon: LucideIcon; accent: string }[]).map(({ label, href, icon: Icon, accent }) => (
                   <Link key={label} href={href}
                     className="flex items-center justify-between px-3 py-2.5 rounded-xl transition-colors group"
                     style={{ color: 'var(--text-secondary)' }}
@@ -334,10 +327,10 @@ export default async function DashboardPage() {
               <div className="relative">
                 <div className="text-3xl mb-2">🔥</div>
                 <p className="font-black text-sm mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                  Продолжай учиться!
+                  {t(lang, 'dash_motivation_title')}
                 </p>
                 <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  Регулярные уроки — ключ к прогрессу. Не останавливайся.
+                  {t(lang, 'dash_motivation_sub')}
                 </p>
               </div>
             </div>
