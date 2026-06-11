@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
+import { generateCoachInsights } from '@/lib/analytics/coachInsights'
 
 const schema = z.object({
   subjectSlug: z.string().min(1),
@@ -80,6 +81,11 @@ export async function POST(req: Request) {
       create: { userId, subjectSlug, topicSlug, status, masteryPct, attempts: 1, lastScore: score },
       update: { status, masteryPct, attempts: { increment: 1 }, lastScore: score },
     }))
+
+    // Refresh Smart Coach insights from the freshly-written TopicProgress/
+    // MistakeRecord/PracticeSession data. Best-effort — never fails the
+    // practice submission.
+    await generateCoachInsights(userId).catch((err) => console.error('[practice/submit] coach insights', err))
 
     return NextResponse.json({
       success: true,
