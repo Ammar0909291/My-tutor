@@ -66,6 +66,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="My Tutor" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        {/* Blocking script: apply saved theme before first paint to prevent flash */}
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(){try{var t=localStorage.getItem('mytutor_theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){}})();`
+        }} />
         <script dangerouslySetInnerHTML={{
           __html: `if('serviceWorker'in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}`
         }} />

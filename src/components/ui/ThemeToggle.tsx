@@ -1,11 +1,9 @@
 'use client'
-
 import { useTheme } from '@/components/Providers'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
   const dark = theme === 'dark'
-
   return (
     <button
       onClick={toggleTheme}

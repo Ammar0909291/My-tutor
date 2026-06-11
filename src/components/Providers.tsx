@@ -64,18 +64,23 @@ const ThemeContext = createContext<ThemeContextValue>({
 })
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  // Read from DOM — the inline script in layout.tsx already set data-theme
+  // before hydration, so we can trust the attribute as the initial value.
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof document === 'undefined') return 'dark'
+    const attr = document.documentElement.getAttribute('data-theme')
+    return attr === 'light' ? 'light' : 'dark'
+  })
 
   useEffect(() => {
     const stored = localStorage.getItem('mytutor_theme') as Theme | null
-    if (stored === 'light' || stored === 'dark') {
-      setTheme(stored)
-      document.documentElement.setAttribute('data-theme', stored)
-    }
+    const resolved: Theme = stored === 'light' || stored === 'dark' ? stored : 'dark'
+    setTheme(resolved)
+    document.documentElement.setAttribute('data-theme', resolved)
   }, [])
 
   const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
+    const next: Theme = theme === 'dark' ? 'light' : 'dark'
     setTheme(next)
     localStorage.setItem('mytutor_theme', next)
     document.documentElement.setAttribute('data-theme', next)
