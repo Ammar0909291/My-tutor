@@ -52,6 +52,12 @@ export default async function LibraryPage() {
       if (hrs < 24) return `${hrs} ч. назад`
       return `${days} дн. назад`
     }
+    if (lang === 'hi') {
+      if (mins < 2) return 'अभी'
+      if (mins < 60) return `${mins} मिनट पहले`
+      if (hrs < 24) return `${hrs} घंटे पहले`
+      return `${days} दिन पहले`
+    }
     if (mins < 2) return 'just now'
     if (mins < 60) return `${mins}m ago`
     if (hrs < 24) return `${hrs}h ago`

@@ -336,7 +336,7 @@ export default function SettingsPage() {
         </Section>
 
         {/* Region */}
-        <Section label={lang === 'ru' ? 'Ваш регион' : 'Your Region'}>
+        <Section label={t('settings_region')}>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             {COUNTRY_OPTIONS.map((opt) => {
               const isSelected = country === opt.key
@@ -367,33 +367,31 @@ export default function SettingsPage() {
             })}
           </div>
           <p style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 10 }}>
-            {lang === 'ru' ? 'Регион определяет AI-репетитора и голос' : 'Changing region affects AI tutor and voice'}
+            {t('settings_region_hint')}
           </p>
         </Section>
 
         {/* Danger Zone */}
         <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid rgba(248,81,73,0.25)' }}>
           <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#F85149' }}>
-            {lang === 'ru' ? '⚠ Опасная зона' : '⚠ Danger Zone'}
+            {t('settings_danger_zone')}
           </p>
 
           {deleteStep === 'hidden' && (
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  {lang === 'ru' ? 'Удалить аккаунт' : 'Delete Account'}
+                  {t('settings_delete_title')}
                 </p>
                 <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
-                  {lang === 'ru'
-                    ? 'Доступ будет закрыт. История обучения сохранится. Email можно использовать снова.'
-                    : 'Access removed. Learning history archived. Email becomes available again.'}
+                  {t('settings_delete_desc')}
                 </p>
               </div>
               <button
                 onClick={() => setDeleteStep('confirm')}
                 className="text-sm font-semibold px-4 py-2 rounded-xl transition-all flex-shrink-0"
                 style={{ background: 'rgba(248,81,73,0.1)', color: '#F85149', border: '1px solid rgba(248,81,73,0.3)' }}>
-                {lang === 'ru' ? 'Удалить аккаунт' : 'Delete Account'}
+                {t('settings_delete_title')}
               </button>
             </div>
           )}
@@ -402,17 +400,17 @@ export default function SettingsPage() {
             <div className="space-y-4">
               <div className="p-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)' }}>
                 <p className="text-sm font-bold mb-2" style={{ color: '#F85149' }}>
-                  {lang === 'ru' ? 'Это действие необратимо.' : 'This action cannot be undone.'}
+                  {t('settings_delete_irreversible')}
                 </p>
                 <ul className="text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
-                  <li>• {lang === 'ru' ? 'Доступ к аккаунту будет закрыт навсегда' : 'Account access will be permanently removed'}</li>
-                  <li>• {lang === 'ru' ? 'История уроков сохранится в базе данных' : 'Learning progress is archived in the database'}</li>
-                  <li>• {lang === 'ru' ? 'Email станет доступен для новой регистрации' : 'Your email can be used to register a new account'}</li>
+                  <li>• {t('settings_delete_bullet1')}</li>
+                  <li>• {t('settings_delete_bullet2')}</li>
+                  <li>• {t('settings_delete_bullet3')}</li>
                 </ul>
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wider" style={{ color: 'var(--text-dim)' }}>
-                  {lang === 'ru' ? 'Введите DELETE для подтверждения' : 'Type DELETE to confirm'}
+                  {t('settings_delete_confirm_label')}
                 </label>
                 <input
                   type="text"
@@ -430,16 +428,14 @@ export default function SettingsPage() {
                   disabled={deleteStep === 'deleting'}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all"
                   style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
-                  {lang === 'ru' ? 'Отмена' : 'Cancel'}
+                  {t('settings_cancel')}
                 </button>
                 <button
                   onClick={handleDeleteAccount}
                   disabled={!deleteReady || deleteStep === 'deleting'}
                   className="flex-1 py-2.5 rounded-xl text-sm font-bold transition-all disabled:opacity-40"
                   style={{ background: deleteReady ? '#F85149' : 'rgba(248,81,73,0.2)', color: '#fff', border: 'none', cursor: deleteReady ? 'pointer' : 'not-allowed' }}>
-                  {deleteStep === 'deleting'
-                    ? (lang === 'ru' ? 'Удаление...' : 'Deleting...')
-                    : (lang === 'ru' ? 'Удалить навсегда' : 'Delete permanently')}
+                  {deleteStep === 'deleting' ? t('settings_deleting') : t('settings_delete_permanent')}
                 </button>
               </div>
             </div>

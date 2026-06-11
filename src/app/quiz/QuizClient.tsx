@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { t as i18n } from '@/lib/i18n'
 
 interface Question {
   question: string
@@ -44,10 +45,10 @@ export default function QuizClient({ subject, lang }: Props) {
         setQuestions(data.questions)
         startTimer()
       } else {
-        setError(lang === 'ru' ? 'Не удалось загрузить вопросы. Попробуй ещё раз.' : 'Failed to load questions. Please try again.')
+        setError(i18n(lang, 'quiz_error_load'))
       }
     } catch {
-      setError(lang === 'ru' ? 'Ошибка сети. Попробуй ещё раз.' : 'Network error. Please try again.')
+      setError(i18n(lang, 'quiz_error_network'))
     } finally {
       setLoading(false)
     }
@@ -101,7 +102,7 @@ export default function QuizClient({ subject, lang }: Props) {
     return (
       <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
         <div style={{ fontSize: 40 }}>🎮</div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>{lang === 'ru' ? 'Генерирую вопросы...' : 'Generating questions...'}</p>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>{i18n(lang, 'quiz_loading')}</p>
       </div>
     )
   }
@@ -111,9 +112,9 @@ export default function QuizClient({ subject, lang }: Props) {
       <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
         <p style={{ color: '#F78166', fontSize: 16 }}>{error}</p>
         <button onClick={restart} style={{ padding: '10px 20px', borderRadius: 12, background: '#F78166', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700 }}>
-          {lang === 'ru' ? 'Попробовать снова' : 'Try again'}
+          {i18n(lang, 'quiz_retry')}
         </button>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{lang === 'ru' ? 'На главную' : 'Dashboard'}</a>
+        <a href="/dashboard" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{i18n(lang, 'quiz_back')}</a>
       </div>
     )
   }
@@ -125,21 +126,21 @@ export default function QuizClient({ subject, lang }: Props) {
         <div style={{ textAlign: 'center', padding: 40, maxWidth: 400 }}>
           <div style={{ fontSize: 60, marginBottom: 16 }}>{emoji}</div>
           <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--text-primary)', marginBottom: 8 }}>
-            {score} {lang === 'ru' ? `из ${questions.length} правильно!` : `/ ${questions.length} correct!`}
+            {score} / {questions.length} {i18n(lang, 'quiz_finish')}
           </h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 32, fontSize: 15 }}>
             {score === 5
-              ? (lang === 'ru' ? 'Отлично! Ты всё знаешь!' : 'Perfect! You know it all!')
+              ? i18n(lang, 'quiz_perfect')
               : score >= 3
-              ? (lang === 'ru' ? 'Хороший результат! Продолжай учиться.' : 'Good result! Keep learning.')
-              : (lang === 'ru' ? 'Стоит повторить материал.' : 'You should review the material.')}
+              ? i18n(lang, 'quiz_good')
+              : i18n(lang, 'quiz_retry_msg')}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button onClick={restart} style={{ padding: '12px 24px', borderRadius: 12, background: '#F78166', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
-              {lang === 'ru' ? 'Попробовать снова' : 'Try again'}
+              {i18n(lang, 'quiz_retry')}
             </button>
             <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 12, background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-default)', textDecoration: 'none', fontWeight: 700, fontSize: 14, display: 'inline-block' }}>
-              {lang === 'ru' ? 'На главную' : 'Dashboard'}
+              {i18n(lang, 'quiz_back')}
             </a>
           </div>
         </div>
@@ -154,9 +155,9 @@ export default function QuizClient({ subject, lang }: Props) {
     <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14 }}>{lang === 'ru' ? '← Назад' : '← Back'}</a>
+        <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14 }}>{i18n(lang, 'quiz_back')}</a>
         <span style={{ fontSize: 20 }}>🎮</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{lang === 'ru' ? 'Квиз' : 'Quiz'}</span>
+        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{i18n(lang, 'quiz_title')}</span>
         <span style={{ marginLeft: 'auto', color: 'var(--text-secondary)', fontSize: 13 }}>
           {current + 1} / {questions.length}
         </span>
@@ -173,7 +174,7 @@ export default function QuizClient({ subject, lang }: Props) {
             borderRadius: 4,
           }} />
         </div>
-        <div style={{ marginBottom: 8, color: 'var(--text-dim)', fontSize: 12 }}>⏱ {timeLeft}{lang === 'ru' ? 'с' : 's'}</div>
+        <div style={{ marginBottom: 8, color: 'var(--text-dim)', fontSize: 12 }}>⏱ {timeLeft}{i18n(lang, 'quiz_seconds_suffix')}</div>
 
         {/* Question */}
         <div style={{ padding: '24px', borderRadius: 20, background: 'var(--bg-surface)', border: '1px solid var(--border-default)', marginBottom: 20 }}>
@@ -221,9 +222,7 @@ export default function QuizClient({ subject, lang }: Props) {
               <p style={{ fontSize: 13, color: '#79C0FF', lineHeight: 1.6 }}>💡 {q.explanation}</p>
             </div>
             <button onClick={nextQuestion} style={{ width: '100%', padding: '14px', borderRadius: 14, background: '#F78166', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 15 }}>
-              {current + 1 < questions.length
-                ? (lang === 'ru' ? 'Следующий вопрос →' : 'Next question →')
-                : (lang === 'ru' ? 'Завершить квиз' : 'Finish quiz')}
+              {current + 1 < questions.length ? i18n(lang, 'quiz_next') : i18n(lang, 'quiz_finish')}
             </button>
           </div>
         )}

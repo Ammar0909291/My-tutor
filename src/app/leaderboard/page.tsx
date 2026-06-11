@@ -27,8 +27,8 @@ export default function LeaderboardPage() {
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <Link href="/dashboard" className="text-sm" style={{ color: 'var(--text-secondary)' }}>← Back</Link>
-          <h1 className="text-xl font-bold flex-1 text-center">🏆 Leaderboard</h1>
+          <Link href="/dashboard" className="text-sm" style={{ color: 'var(--text-secondary)' }}>{t('lb_back')}</Link>
+          <h1 className="text-xl font-bold flex-1 text-center">{t('lb_title')}</h1>
         </div>
 
         {/* Tabs */}
@@ -40,14 +40,14 @@ export default function LeaderboardPage() {
                 background: mode === m ? 'var(--accent-primary)' : 'transparent',
                 color: mode === m ? '#fff' : 'var(--text-secondary)',
               }}>
-              {m === 'week' ? 'This Week' : 'All Time'}
+              {m === 'week' ? t('lb_this_week') : t('lb_all_time')}
             </button>
           ))}
         </div>
 
         {mode === 'week' && (
           <p className="text-xs text-center mb-4" style={{ color: 'var(--text-dim)' }}>
-            🔄 Resets every Monday
+            🔄 {t('lb_resets_monday')}
             {data?.week ? ` · ${data.week}` : ''}
           </p>
         )}
@@ -56,7 +56,7 @@ export default function LeaderboardPage() {
         {data?.myRank && (
           <div className="flex items-center justify-between px-4 py-3 rounded-xl mb-4"
             style={{ background: 'rgba(247,129,102,0.12)', border: '1px solid rgba(247,129,102,0.3)' }}>
-            <span className="text-sm font-semibold" style={{ color: 'var(--accent-primary)' }}>Your rank</span>
+            <span className="text-sm font-semibold" style={{ color: 'var(--accent-primary)' }}>{t('lb_your_rank')}</span>
             <span className="text-sm font-bold">#{data.myRank} · {data.myXP} XP</span>
           </div>
         )}
@@ -89,7 +89,7 @@ export default function LeaderboardPage() {
             ))}
             {(data?.entries ?? []).length === 0 && (
               <p className="text-center py-8 text-sm" style={{ color: 'var(--text-dim)' }}>
-                No entries yet — complete a lesson to appear here!
+                {t('lb_no_entries')}
               </p>
             )}
           </div>

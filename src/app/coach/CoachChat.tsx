@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { t as i18n } from '@/lib/i18n'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -58,11 +59,11 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
         }),
       })
       const data = await res.json()
-      const errorMsg = teachingLanguage === 'ru' ? 'Ошибка ответа. Попробуй ещё раз.' : 'Error. Please try again.'
+      const errorMsg = i18n(teachingLanguage, 'coach_error')
       const reply = data?.content ?? errorMsg
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
     } catch {
-      const errorMsg = teachingLanguage === 'ru' ? 'Произошла ошибка. Попробуй ещё раз.' : 'Something went wrong. Please try again.'
+      const errorMsg = i18n(teachingLanguage, 'coach_error')
       setMessages((prev) => [...prev, { role: 'assistant', content: errorMsg }])
     } finally {
       setLoading(false)
@@ -74,10 +75,10 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
       {/* Header */}
       <div style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
         <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-          {teachingLanguage === 'ru' ? '← Назад' : '← Back'}
+          {i18n(teachingLanguage, 'coach_back')}
         </a>
         <span style={{ fontSize: 20 }}>🎯</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{teachingLanguage === 'ru' ? 'Коуч' : 'Coach'}</span>
+        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{i18n(teachingLanguage, 'coach_title')}</span>
         <span style={{ fontSize: 12, color: 'var(--text-secondary)', marginLeft: 4 }}>{subject}</span>
       </div>
 
@@ -103,7 +104,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 16 }}>
             <div style={{ padding: '12px 16px', borderRadius: '16px 16px 16px 4px', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)', fontSize: 14 }}>
-              {teachingLanguage === 'ru' ? 'Думаю...' : 'Thinking...'}
+              {i18n(teachingLanguage, 'coach_thinking')}
             </div>
           </div>
         )}
@@ -117,7 +118,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && send()}
-            placeholder={teachingLanguage === 'ru' ? 'Напиши сообщение...' : 'Type a message...'}
+            placeholder={i18n(teachingLanguage, 'coach_placeholder')}
             style={{
               flex: 1,
               padding: '12px 16px',

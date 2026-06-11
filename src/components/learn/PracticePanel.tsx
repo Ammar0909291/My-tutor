@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { t as i18n, type Lang } from '@/lib/i18n'
 
 interface Question {
   question: string
@@ -39,7 +40,7 @@ export function PracticePanel({
   const [answers, setAnswers] = useState<boolean[]>([])
   const [errorMsg, setErrorMsg] = useState('')
 
-  const lang = teachingLanguage === 'ru' ? 'ru' : teachingLanguage === 'hi' ? 'hi' : 'en'
+  const lang: Lang = teachingLanguage === 'ru' ? 'ru' : teachingLanguage === 'hi' ? 'hi' : 'en'
 
   const load = useCallback(async () => {
     setState('loading')
@@ -100,10 +101,10 @@ export function PracticePanel({
     : 0
 
   const statusLabel =
-    state === 'loading' ? 'Generating questions…'
-    : state === 'quiz' ? `Question ${currentIdx + 1} of ${questions.length}`
-    : state === 'result' ? `Completed · ${questions.length} questions`
-    : 'Unavailable'
+    state === 'loading' ? i18n(lang, 'practice_loading')
+    : state === 'quiz' ? `${currentIdx + 1} ${i18n(lang, 'practice_q_of')} ${questions.length}`
+    : state === 'result' ? i18n(lang, 'practice_completed_n').replace('{n}', String(questions.length))
+    : i18n(lang, 'practice_unavailable')
 
   return (
     <div
@@ -115,7 +116,7 @@ export function PracticePanel({
         className="w-full max-w-lg overflow-hidden"
         role="dialog"
         aria-modal="true"
-        aria-label="Knowledge Check"
+        aria-label={i18n(lang, 'practice_knowledge_check')}
         style={{
           background: 'var(--bg-base)',
           border: '1px solid var(--border-default)',
@@ -144,7 +145,7 @@ export function PracticePanel({
               className="text-[11px] font-bold uppercase"
               style={{ color: 'var(--coral)', letterSpacing: '0.08em' }}
             >
-              Knowledge Check
+              {i18n(lang, 'practice_knowledge_check')}
             </div>
             <h3
               className="font-bold text-base leading-snug truncate"
@@ -197,7 +198,7 @@ export function PracticePanel({
                 style={{ borderColor: 'var(--coral)', borderTopColor: 'transparent' }}
               />
               <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-                Preparing your practice questions…
+                {i18n(lang, 'practice_loading')}
               </p>
             </div>
           )}
@@ -217,10 +218,10 @@ export function PracticePanel({
                 ⚠️
               </div>
               <h4 className="text-lg font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                Practice Unavailable
+                {i18n(lang, 'practice_unavailable')}
               </h4>
               <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-                Unable to generate questions right now.
+                {i18n(lang, 'practice_error_generic')}
               </p>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                 {errorMsg || 'Please try again later.'}
@@ -231,7 +232,7 @@ export function PracticePanel({
                   className="rounded-lg px-5 py-2.5 text-sm font-bold"
                   style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
                 >
-                  ↻ Retry
+                  ↻ {i18n(lang, 'quiz_retry')}
                 </button>
                 <button
                   onClick={onClose}
@@ -243,7 +244,7 @@ export function PracticePanel({
                     cursor: 'pointer',
                   }}
                 >
-                  Close
+                  {i18n(lang, 'practice_close')}
                 </button>
               </div>
             </div>
@@ -295,7 +296,7 @@ export function PracticePanel({
                 className="w-full rounded-xl py-3 text-sm font-bold disabled:opacity-40 transition-opacity"
                 style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: selected === null ? 'default' : 'pointer' }}
               >
-                {currentIdx + 1 < questions.length ? 'Next Question →' : 'Finish'}
+                {currentIdx + 1 < questions.length ? i18n(lang, 'quiz_next') : i18n(lang, 'quiz_finish')}
               </button>
             </div>
           )}
@@ -311,7 +312,7 @@ export function PracticePanel({
                 {score}%
               </div>
               <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                {answers.filter(Boolean).length} / {questions.length} correct
+                {i18n(lang, 'practice_correct_count').replace('{x}', String(answers.filter(Boolean).length)).replace('{y}', String(questions.length))}
               </p>
               <div className="flex gap-3 justify-center pt-2">
                 <button
@@ -319,7 +320,7 @@ export function PracticePanel({
                   className="rounded-lg px-5 py-2.5 text-sm font-bold"
                   style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
                 >
-                  Try Again
+                  {i18n(lang, 'quiz_retry')}
                 </button>
                 <button
                   onClick={onClose}
@@ -331,7 +332,7 @@ export function PracticePanel({
                     cursor: 'pointer',
                   }}
                 >
-                  Done
+                  {i18n(lang, 'practice_done')}
                 </button>
               </div>
             </div>

@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
+import { t } from '@/lib/i18n'
 
 export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string } }) {
   const session = await auth()
@@ -125,11 +126,11 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
   const teachingLang = (profile.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
 
   if (pastSessions.length > 0) {
-    const studentLabel = teachingLang === 'ru' ? 'Студент' : teachingLang === 'hi' ? 'Student' : 'Student'
-    const tutorLabel   = teachingLang === 'ru' ? 'Репетитор' : teachingLang === 'hi' ? 'Tutor' : 'Tutor'
-    const lessonLabel  = teachingLang === 'ru' ? 'Урок' : teachingLang === 'hi' ? 'Lesson' : 'Lesson'
-    const prevLabel    = teachingLang === 'ru' ? 'Предыдущие уроки студента' : teachingLang === 'hi' ? 'Previous lessons' : 'Previous lessons'
-    const recentLabel  = teachingLang === 'ru' ? 'Последние сообщения' : teachingLang === 'hi' ? 'Recent messages' : 'Recent messages'
+    const studentLabel = t(teachingLang, 'learn_label_student')
+    const tutorLabel   = t(teachingLang, 'learn_label_tutor')
+    const lessonLabel  = t(teachingLang, 'learn_label_lesson')
+    const prevLabel    = t(teachingLang, 'learn_label_prev')
+    const recentLabel  = t(teachingLang, 'learn_label_recent')
     const locale       = teachingLang === 'ru' ? 'ru-RU' : teachingLang === 'hi' ? 'hi-IN' : 'en-US'
 
     const summaryLines = pastSessions

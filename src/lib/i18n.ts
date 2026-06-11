@@ -826,6 +826,36 @@ export const translations = {
     learn_switch_subject: 'Переключиться',
     learn_maximize: 'Развернуть',
     learn_restore: 'Свернуть',
+
+    /* ── Leaderboard ── */
+    lb_back: '← Назад',
+    lb_title: '🏆 Таблица лидеров',
+    lb_this_week: 'Эта неделя',
+    lb_all_time: 'Всё время',
+    lb_resets_monday: 'Сбрасывается каждый понедельник',
+    lb_your_rank: 'Ваш ранг',
+    lb_no_entries: 'Пока нет участников...',
+
+    /* ── Practice Panel ── */
+    practice_knowledge_check: 'Проверка знаний',
+    practice_q_of: 'из',
+    practice_completed_n: 'Верно: {n}',
+    practice_unavailable: 'Практика недоступна',
+    practice_loading: 'Генерируем вопросы…',
+    practice_error_generic: 'Не удалось сгенерировать вопросы.',
+    practice_close: 'Закрыть',
+    practice_done: 'Готово',
+    practice_correct_count: '{x} / {y} правильно',
+
+    /* ── Quiz ── */
+    quiz_seconds_suffix: 'с',
+
+    /* ── Learn memory labels ── */
+    learn_label_student: 'Студент',
+    learn_label_tutor: 'Репетитор',
+    learn_label_lesson: 'Урок',
+    learn_label_prev: 'Предыдущие уроки студента',
+    learn_label_recent: 'Последние сообщения',
   },
   en: {
     /* ── Landing ── */
@@ -1652,6 +1682,36 @@ export const translations = {
     learn_switch_subject: 'Switch',
     learn_maximize: 'Maximize',
     learn_restore: 'Restore',
+
+    /* ── Leaderboard ── */
+    lb_back: '← Back',
+    lb_title: '🏆 Leaderboard',
+    lb_this_week: 'This Week',
+    lb_all_time: 'All Time',
+    lb_resets_monday: 'Resets every Monday',
+    lb_your_rank: 'Your rank',
+    lb_no_entries: 'No entries yet...',
+
+    /* ── Practice Panel ── */
+    practice_knowledge_check: 'Knowledge Check',
+    practice_q_of: 'of',
+    practice_completed_n: 'Correct: {n}',
+    practice_unavailable: 'Practice Unavailable',
+    practice_loading: 'Generating questions…',
+    practice_error_generic: 'Unable to generate questions right now.',
+    practice_close: 'Close',
+    practice_done: 'Done',
+    practice_correct_count: '{x} / {y} correct',
+
+    /* ── Quiz ── */
+    quiz_seconds_suffix: 's',
+
+    /* ── Learn memory labels ── */
+    learn_label_student: 'Student',
+    learn_label_tutor: 'Tutor',
+    learn_label_lesson: 'Lesson',
+    learn_label_prev: 'Previous lessons',
+    learn_label_recent: 'Recent messages',
   },
   hi: {
     /* ── Landing ── */
@@ -2467,6 +2527,48 @@ export const translations = {
     learn_switch_subject: 'बदलें',
     learn_maximize: 'बड़ा करें',
     learn_restore: 'छोटा करें',
+
+    /* ── Profile ── */
+    profile_title: 'प्रोफ़ाइल',
+    profile_save: 'बदलाव सहेजें',
+    profile_saved: 'सहेजा गया ✓',
+    profile_name: 'नाम',
+    profile_email: 'ईमेल',
+    profile_voice: 'ट्यूटर की आवाज़',
+    profile_level: 'अपने बारे में',
+    profile_member: 'सदस्य',
+    profile_lessons: 'कुल पाठ',
+    profile_xp: 'कुल XP',
+
+    /* ── Leaderboard ── */
+    lb_back: '← वापस',
+    lb_title: '🏆 लीडरबोर्ड',
+    lb_this_week: 'इस हफ़्ते',
+    lb_all_time: 'सभी समय',
+    lb_resets_monday: 'हर सोमवार रीसेट होता है',
+    lb_your_rank: 'आपकी रैंक',
+    lb_no_entries: 'अभी कोई प्रविष्टि नहीं...',
+
+    /* ── Practice Panel ── */
+    practice_knowledge_check: 'ज्ञान जाँच',
+    practice_q_of: 'में से',
+    practice_completed_n: 'सही: {n}',
+    practice_unavailable: 'अभ्यास उपलब्ध नहीं',
+    practice_loading: 'प्रश्न बना रहे हैं…',
+    practice_error_generic: 'अभी प्रश्न नहीं बना सके।',
+    practice_close: 'बंद करें',
+    practice_done: 'हो गया',
+    practice_correct_count: '{x} / {y} सही',
+
+    /* ── Quiz ── */
+    quiz_seconds_suffix: 'से',
+
+    /* ── Learn memory labels ── */
+    learn_label_student: 'छात्र',
+    learn_label_tutor: 'ट्यूटर',
+    learn_label_lesson: 'पाठ',
+    learn_label_prev: 'पिछले पाठ',
+    learn_label_recent: 'हाल के संदेश',
   },
 } as const
 
