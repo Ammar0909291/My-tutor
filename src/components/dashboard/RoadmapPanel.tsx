@@ -24,7 +24,7 @@ export function RoadmapPanel({ subjectSlug, primarySubjectSlug }: Props) {
   return (
     <div
       className="rounded-2xl p-5 space-y-4"
-      style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
+      style={{ background: 'var(--bg-base)', border: '1px solid var(--border-default)' }}
     >
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
