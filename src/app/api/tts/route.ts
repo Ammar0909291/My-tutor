@@ -1,5 +1,7 @@
 import Groq from 'groq-sdk'
 import { NextResponse } from 'next/server'
+import { auth } from '@/lib/auth'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
@@ -65,6 +67,12 @@ async function groqTTS(text: string, selectedVoice: string): Promise<Buffer | nu
 }
 
 export async function POST(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const { allowed } = await checkRateLimit(`rl:tts:${session.user.id}`, 30, 60)
+  if (!allowed) return rateLimitResponse()
+
   try {
     const { text, lang = 'en', voice = 'female', country = 'global' } = await req.json()
     if (!text) return NextResponse.json({ error: 'No text' }, { status: 400 })
@@ -101,8 +109,7 @@ export async function POST(req: Request) {
       },
     })
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'TTS error'
-    console.error('TTS error:', msg)
-    return NextResponse.json({ error: msg }, { status: 500 })
+    console.error('TTS error:', error instanceof Error ? error.message : error)
+    return NextResponse.json({ error: 'TTS unavailable' }, { status: 500 })
   }
 }

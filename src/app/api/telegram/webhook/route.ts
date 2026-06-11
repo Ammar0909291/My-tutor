@@ -10,6 +10,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false }, { status: 503 })
   }
 
+  // Telegram sends the secret_token registered via setWebhook in this header.
+  // Deny if TELEGRAM_WEBHOOK_SECRET is not configured — never accept
+  // unauthenticated webhook payloads in production.
+  const secret = process.env.TELEGRAM_WEBHOOK_SECRET
+  if (!secret || req.headers.get('x-telegram-bot-api-secret-token') !== secret) {
+    return NextResponse.json({ ok: false }, { status: 401 })
+  }
+
   try {
     const body = await req.json()
     const msg = body?.message

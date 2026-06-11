@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { generateJSON } from '@/lib/ai/client'
 import { prisma } from '@/lib/db/prisma'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 
 const schema = z.object({
   subjectCode: z.string(),
@@ -19,6 +20,9 @@ const schema = z.object({
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+
+  const { allowed } = await checkRateLimit(`rl:final-assessment:${session.user.id}`, 5, 300)
+  if (!allowed) return rateLimitResponse()
 
   try {
     const body = await req.json()

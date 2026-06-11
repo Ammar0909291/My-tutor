@@ -58,7 +58,7 @@ export default async function CertificatesPage() {
             </div>
             <h2 className="text-base font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{T('certificates_empty_title')}</h2>
             <p className="text-sm mt-2 max-w-sm mx-auto" style={{ color: 'var(--text-dim)' }}>{T('certificates_empty_body')}</p>
-            <Link href="/roadmaps" className="btn-primary inline-block mt-5 px-5 py-2.5 text-sm font-bold" style={{ textDecoration: 'none' }}>
+            <Link href="/library" className="btn-primary inline-block mt-5 px-5 py-2.5 text-sm font-bold" style={{ textDecoration: 'none' }}>
               {T('certificates_browse_roadmaps')}
             </Link>
           </div>

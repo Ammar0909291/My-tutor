@@ -43,6 +43,8 @@ export async function GET(req: Request) {
       withRetry(() => prisma.mistakeRecord.findMany({
         where: { userId, subjectSlug },
         select: { category: true, topicSlug: true },
+        orderBy: { createdAt: 'desc' },
+        take: 500,
       })),
     ])
 

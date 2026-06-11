@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { routeAI } from '@/lib/ai/router'
+import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -19,6 +20,9 @@ export async function POST(req: Request) {
   }
 
   const userId = session.user.id
+
+  const { allowed } = await checkRateLimit(`rl:learn-chat:${userId}`, 30, 60)
+  if (!allowed) return rateLimitResponse()
 
   try {
     const body = await req.json()
@@ -489,19 +493,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       return NextResponse.json({ success: true, text, provider })
     } catch (error: any) {
+      // Log the real provider error server-side only — raw messages can leak
+      // API key names and provider configuration to the client.
       console.error('[learn/chat] AI error:', error.message)
-      const isAuthError = error.status === 401 || error.message?.includes('401') || error.message?.toLowerCase().includes('invalid api key')
-      const userMessage = isAuthError
-        ? 'AI service not configured. Add a valid GROQ_API_KEY to .env.local'
-        : error.message || 'AI failed'
-      return NextResponse.json({ success: false, error: userMessage }, { status: 500 })
+      return NextResponse.json({ success: false, error: 'AI service temporarily unavailable. Please try again.' }, { status: 500 })
     }
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
     console.error('[learn/chat]', err)
-    const msg = err instanceof Error ? err.message : String(err)
-    return NextResponse.json({ success: false, error: msg }, { status: 500 })
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
   }
 }

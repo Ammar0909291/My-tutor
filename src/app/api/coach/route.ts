@@ -32,8 +32,10 @@ export async function POST(req: Request) {
       const content = completion.choices[0]?.message?.content ?? ''
       return NextResponse.json({ content })
     } catch (error: any) {
+      // Log the real provider error server-side only — raw messages can leak
+      // provider configuration to the client.
       console.error('[coach] AI error:', error.message)
-      return NextResponse.json({ error: { message: error.message || 'AI failed' } }, { status: 500 })
+      return NextResponse.json({ error: { message: 'AI service temporarily unavailable. Please try again.' } }, { status: 500 })
     }
   } catch (err) {
     console.error('[coach]', err)

@@ -395,7 +395,6 @@ export default async function DashboardPage() {
               { label: `📚 ${T('library_title')}`,        href: '/library' },
               { label: `🏆 ${T('dash_leaderboard')}`,     href: '/leaderboard' },
               { label: `📊 ${T('dash_progress_link')}`,   href: '/progress' },
-              { label: `📄 ${T('dash_reports_link')}`,    href: '/reports' },
             ] as { label: string; href: string }[]).map(({ label, href }) => (
               <Link key={href} href={href}
                 className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5"
