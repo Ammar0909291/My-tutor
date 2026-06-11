@@ -7,6 +7,7 @@ import { UP_MATH_CATALOG } from './upMathCatalog'
 import { UP_SCIENCE_CATALOG } from './upScienceCatalog'
 import { UP_ENGLISH_CATALOG } from './upEnglishCatalog'
 import { UP_SOCIAL_SCIENCE_CATALOG } from './upSocialScienceCatalog'
+import { CBSE_MATH_CATALOG } from './cbseMathCatalog'
 
 export const ALL_KG_NODES: KnowledgeNode[] = [
   ...MATH_KNOWLEDGE_GRAPH,
@@ -20,6 +21,7 @@ export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_SCIENCE_CATALOG,
   UP_ENGLISH_CATALOG,
   UP_SOCIAL_SCIENCE_CATALOG,
+  CBSE_MATH_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */

@@ -35,8 +35,12 @@ export { UP_SCIENCE_CATALOG, getUPScienceChapters } from './upScienceCatalog'
 export { UP_ENGLISH_CATALOG, getUPEnglishChapters } from './upEnglishCatalog'
 export { UP_SOCIAL_SCIENCE_CATALOG, getUPSocialScienceChapters } from './upSocialScienceCatalog'
 
+// CBSE Catalogs
+export { CBSE_MATH_CATALOG, getCBSEMathChapters, getCBSEMathChapter } from './cbseMathCatalog'
+
 // Board Registry
 export { UP_BOARD } from './upBoardCatalog'
+export { CBSE_BOARD } from './cbseBoardCatalog'
 export { INDIA, EDUCATION_COUNTRIES, getBoard, getAllBoards } from './educationCatalog'
 
 // Cross-cutting Graph Queries
