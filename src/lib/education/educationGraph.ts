@@ -10,6 +10,7 @@ import { UP_SOCIAL_SCIENCE_CATALOG } from './upSocialScienceCatalog'
 import { CBSE_MATH_CATALOG } from './cbseMathCatalog'
 import { CBSE_SCIENCE_CATALOG } from './cbseScienceCatalog'
 import { CBSE_SOCIAL_SCIENCE_CATALOG } from './cbseSocialScienceCatalog'
+import { CBSE_ENGLISH_CATALOG } from './cbseEnglishCatalog'
 
 export const ALL_KG_NODES: KnowledgeNode[] = [
   ...MATH_KNOWLEDGE_GRAPH,
@@ -26,6 +27,7 @@ export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   CBSE_MATH_CATALOG,
   CBSE_SCIENCE_CATALOG,
   CBSE_SOCIAL_SCIENCE_CATALOG,
+  CBSE_ENGLISH_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */

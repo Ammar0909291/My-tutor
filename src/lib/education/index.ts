@@ -39,6 +39,7 @@ export { UP_SOCIAL_SCIENCE_CATALOG, getUPSocialScienceChapters } from './upSocia
 export { CBSE_MATH_CATALOG, getCBSEMathChapters, getCBSEMathChapter } from './cbseMathCatalog'
 export { CBSE_SCIENCE_CATALOG, getCBSEScienceChapters, getCBSEScienceChapter } from './cbseScienceCatalog'
 export { CBSE_SOCIAL_SCIENCE_CATALOG, getCBSESocialScienceChapters, getCBSESocialScienceChapter } from './cbseSocialScienceCatalog'
+export { CBSE_ENGLISH_CATALOG, getCBSEEnglishChapters, getCBSEEnglishChapter } from './cbseEnglishCatalog'
 
 // Board Registry
 export { UP_BOARD } from './upBoardCatalog'
