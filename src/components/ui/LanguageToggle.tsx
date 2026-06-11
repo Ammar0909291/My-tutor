@@ -39,8 +39,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }
 
   const t = (key: TranslationKey): string => {
-    const uiLang: 'ru' | 'en' = effectiveLang === 'ru' ? 'ru' : 'en'
-    return tFn(uiLang, key)
+    return tFn(effectiveLang, key)
   }
 
   return (
