@@ -1,9 +1,19 @@
 'use client'
+import { useEffect, useState } from 'react'
 import { useTheme } from '@/components/Providers'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
-  const dark = theme === 'dark'
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
+  // SSR and the first client render must produce identical HTML.
+  // We render the dark-mode icon (moon) as the neutral default; the blocking
+  // script in layout.tsx has already applied the correct data-theme to <html>
+  // so the *visual* theme is correct even before React paints.  After mount
+  // the correct icon appears synchronously in the same paint cycle.
+  const dark = mounted ? theme === 'dark' : true
+
   return (
     <button
       onClick={toggleTheme}

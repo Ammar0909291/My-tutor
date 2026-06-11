@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import { ArrowRight, Check, ChevronDown, LogOut, Menu, X } from 'lucide-react'
@@ -30,6 +30,8 @@ export default function HomePage() {
   const { t, lang: _lang, setLang } = useLanguage()
   const { country, setCountry } = useCountry()
   const { theme, toggleTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
   const [mobileOpen, setMobileOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
 
@@ -128,14 +130,14 @@ export default function HomePage() {
             </div>
             <LanguageToggle />
             {/* Theme toggle */}
-            <button onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
+            <button onClick={toggleTheme} title={(mounted ? theme : 'dark') === 'dark' ? 'Switch to light' : 'Switch to dark'}
               style={{
                 width: 32, height: 32, borderRadius: '50%', cursor: 'pointer',
                 background: 'transparent', border: '1px solid var(--border-default)',
                 color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 15, transition: 'all 150ms',
               }}>
-              {theme === 'dark' ? '☀️' : '🌙'}
+              {(mounted ? theme : 'dark') === 'dark' ? '☀️' : '🌙'}
             </button>
             {isGuest && (
               <>
