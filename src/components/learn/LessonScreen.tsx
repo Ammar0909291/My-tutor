@@ -1867,6 +1867,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                       ...prev,
                       [currentLessonData.topicSlug!]: { status: topicProgress.status, masteryPct: topicProgress.masteryPct },
                     }))
+                    fetch(`/api/topic-progress?subject=${subjectSlug}`)
+                      .then((r) => r.json())
+                      .then((d) => { if (d.availableNodes) setAvailableTopicSlugs(d.availableNodes) })
+                      .catch(() => {})
                   }
                 }}
                 onViewInsights={() => {
