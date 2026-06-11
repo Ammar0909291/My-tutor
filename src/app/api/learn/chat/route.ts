@@ -358,6 +358,13 @@ export async function POST(req: Request) {
         const allNodes = getAllNodes(graph)
         const currentTopicNode = inProgressSlug ? allNodes.find((n) => n.slug === inProgressSlug) : null
         if (currentTopicNode) {
+          // Explicit warning when the learner is on a topic whose prerequisites
+          // they haven't completed — the tutor must backfill, not assume.
+          const unmetPrereqs = currentTopicNode.prerequisites.filter((p) => !completedSet.has(p))
+          if (unmetPrereqs.length > 0) {
+            const unmetTitles = unmetPrereqs.map((p) => allNodes.find((n) => n.slug === p)?.title ?? p)
+            systemPrompt += `\n\nPREREQUISITES NOT MET: The learner has NOT completed the prerequisites for "${currentTopicNode.title}": ${unmetTitles.join(', ')}. Do NOT assume this knowledge. Briefly probe what they already know, fill the most critical gaps inline as you teach, and keep explanations self-contained.`
+          }
           const unlocks = getDirectUnlocks(graph, currentTopicNode.slug)
           if (unlocks.length > 0) {
             systemPrompt += `\n\nWHY THIS TOPIC MATTERS: Mastering "${currentTopicNode.title}" unlocks: ${unlocks.map((n) => n.title).join(', ')}. When it's natural, briefly explain to the learner why this topic is a prerequisite for their next goals — make the learning journey feel purposeful, not arbitrary.`

@@ -1,0 +1,135 @@
+import { NextResponse } from 'next/server'
+import { z } from 'zod'
+import { auth } from '@/lib/auth'
+import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
+import { getKnowledgeGraph, getAvailableNodes } from '@/lib/curriculum/knowledgeGraph'
+import { TopicStatus } from '@prisma/client'
+
+/**
+ * Knowledge-graph topic progress.
+ *
+ * GET  ?subject=<slug>  → all TopicProgress rows for the subject plus the
+ *                         list of node slugs whose prerequisites are met.
+ * PATCH { subjectSlug, topicSlug, action } → upsert a row through the topic
+ *                         lifecycle. Actions: start | complete | start_revision
+ *                         | skip | resume.
+ *
+ * This is the WRITE side of the KG loop — learn/chat, learnerProfile and the
+ * curriculum route all read TopicProgress to build tutor context.
+ */
+
+export async function GET(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  try {
+    const { searchParams } = new URL(req.url)
+    const subjectSlug = searchParams.get('subject')
+    if (!subjectSlug) {
+      return NextResponse.json({ success: false, error: 'subject query param required' }, { status: 400 })
+    }
+
+    const rows = await withRetry(() => prisma.topicProgress.findMany({
+      where: { userId: session.user.id, subjectSlug },
+    }))
+
+    // Available = prerequisites satisfied by completed/mastered/revision topics
+    let availableNodes: string[] | undefined
+    const graph = getKnowledgeGraph(subjectSlug)
+    if (graph) {
+      const completed = new Set(
+        rows
+          .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION')
+          .map((r) => r.topicSlug),
+      )
+      availableNodes = getAvailableNodes(graph, completed).map((n) => n.slug)
+    }
+
+    return NextResponse.json({ success: true, topicProgress: rows, availableNodes })
+  } catch (err) {
+    console.error('[topic-progress GET]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+const patchSchema = z.object({
+  subjectSlug: z.string().min(1),
+  topicSlug: z.string().min(1),
+  action: z.enum(['start', 'complete', 'start_revision', 'skip', 'resume']),
+})
+
+export async function PATCH(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  try {
+    const body = await req.json()
+    const { subjectSlug, topicSlug, action } = patchSchema.parse(body)
+    const userId = session.user.id
+    const now = new Date()
+
+    const key = { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } }
+    const existing = await withRetry(() => prisma.topicProgress.findUnique({ where: key }))
+
+    let data: {
+      status: TopicStatus
+      completedAt?: Date | null
+      revisionCount?: number
+      lastRevisionAt?: Date
+    }
+    switch (action) {
+      case 'start':
+        // Never demote a finished topic back to IN_PROGRESS
+        if (existing && (existing.status === 'COMPLETED' || existing.status === 'MASTERED')) {
+          data = { status: existing.status }
+        } else {
+          data = { status: 'IN_PROGRESS' }
+        }
+        break
+      case 'complete':
+        // Preserve MASTERED if an assessment already promoted the topic
+        data = {
+          status: existing?.status === 'MASTERED' ? 'MASTERED' : 'COMPLETED',
+          completedAt: existing?.completedAt ?? now,
+        }
+        break
+      case 'start_revision':
+        data = {
+          status: 'REVISION',
+          revisionCount: (existing?.revisionCount ?? 0) + 1,
+          lastRevisionAt: now,
+        }
+        break
+      case 'skip':
+        data = { status: 'SKIPPED' }
+        break
+      case 'resume':
+        // Back from SKIPPED / REVISION to the learner's working state
+        data = {
+          status:
+            existing?.status === 'REVISION' && existing.completedAt
+              ? (existing.masteryPct >= 80 ? 'MASTERED' : 'COMPLETED')
+              : 'IN_PROGRESS',
+        }
+        break
+    }
+
+    const row = await withRetry(() => prisma.topicProgress.upsert({
+      where: key,
+      update: data,
+      create: { userId, subjectSlug, topicSlug, ...data },
+    }))
+
+    return NextResponse.json({
+      success: true,
+      topicProgress: { status: row.status, masteryPct: row.masteryPct, revisionCount: row.revisionCount },
+    })
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
+    }
+    console.error('[topic-progress PATCH]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
+}
