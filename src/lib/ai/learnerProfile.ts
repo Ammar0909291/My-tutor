@@ -152,10 +152,10 @@ export async function buildLearnerIntelligenceProfile(
     .map(([category, { count, recent }]) => ({ concept: category, category, count, recent }))
 
   // ── Recommended focus ─────────────────────────────────────────────────────────
-  const recommendedFocusAreas = [
+  const recommendedFocusAreas = [...new Set([
     ...weakConcepts.slice(0, 2),
     ...mistakeTrend.slice(0, 1).map((m) => m.category),
-  ].filter(Boolean).slice(0, 3)
+  ])].filter(Boolean).slice(0, 3)
 
   // ── Mode ──────────────────────────────────────────────────────────────────────
   let mode: string | undefined
