@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, ChevronDown, Menu, X } from 'lucide-react'
+import { useSession, signOut } from 'next-auth/react'
+import { ArrowRight, Check, ChevronDown, LogOut, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme, type Country } from '@/components/Providers'
@@ -31,6 +32,17 @@ export default function HomePage() {
   const { theme, toggleTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
+
+  // Auth state — the homepage must always reflect the real session.
+  // status: 'loading' renders neither guest nor user UI (prevents a stale
+  // guest flash); 'authenticated' shows the user menu; 'unauthenticated'
+  // shows Sign In / Start for Free.
+  const { data: session, status } = useSession()
+  const isAuthed = status === 'authenticated' && !!session?.user
+  const isGuest = status === 'unauthenticated'
+  const userName = session?.user?.name ?? session?.user?.email ?? 'Student'
+  // Where content CTAs (pricing, subject cards) should send the user
+  const ctaHref = isAuthed ? '/dashboard' : '/auth/signup'
 
   function handleCountrySelect(c: Country) {
     setCountry(c)
@@ -125,8 +137,30 @@ export default function HomePage() {
               }}>
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
-            <Link href="/auth/login"  className="btn-ghost text-xs px-3 py-1.5 hidden md:inline-flex">{t('cta_login')}</Link>
-            <Link href="/auth/signup" className="btn-primary text-xs px-4 py-2 hidden md:inline-flex">{t('cta_start')}</Link>
+            {isGuest && (
+              <>
+                <Link href="/auth/login"  className="btn-ghost text-xs px-3 py-1.5 hidden md:inline-flex">{t('cta_login')}</Link>
+                <Link href="/auth/signup" className="btn-primary text-xs px-4 py-2 hidden md:inline-flex">{t('cta_start')}</Link>
+              </>
+            )}
+            {isAuthed && (
+              <div className="hidden md:flex items-center gap-2.5">
+                <Link href="/dashboard" className="flex items-center gap-2" style={{ textDecoration: 'none' }} title={userName}>
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0"
+                    style={{ background: 'linear-gradient(135deg, var(--coral), #FF9E88)' }}>
+                    {userName.charAt(0).toUpperCase()}
+                  </span>
+                  <span className="text-sm font-semibold max-w-[120px] truncate hidden lg:block" style={{ color: 'var(--text-primary)' }}>
+                    {userName}
+                  </span>
+                </Link>
+                <Link href="/dashboard" className="btn-primary text-xs px-4 py-2">{t('nav_dashboard')}</Link>
+                <button onClick={() => signOut({ callbackUrl: '/' })} title={t('dash_signout')}
+                  className="btn-ghost text-xs px-2.5 py-1.5 inline-flex items-center gap-1.5" style={{ cursor: 'pointer' }}>
+                  <LogOut size={13} /> {t('dash_signout')}
+                </button>
+              </div>
+            )}
             <button onClick={() => setMobileOpen((o) => !o)} className="md:hidden p-2 rounded-lg"
               style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)' }}>
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -146,10 +180,28 @@ export default function HomePage() {
             ))}
             <a href="#faq" onClick={() => setMobileOpen(false)}
               className="py-2 text-sm transition-colors hover:text-[var(--text-primary)]" style={{ color: 'var(--text-secondary)' }}>FAQ</a>
-            <div className="flex gap-2 pt-2">
-              <Link href="/auth/login"  className="btn-ghost text-sm flex-1 text-center py-2">{t('cta_login')}</Link>
-              <Link href="/auth/signup" className="btn-primary text-sm flex-1 text-center py-2">{t('cta_start')}</Link>
-            </div>
+            {isGuest && (
+              <div className="flex gap-2 pt-2">
+                <Link href="/auth/login"  className="btn-ghost text-sm flex-1 text-center py-2">{t('cta_login')}</Link>
+                <Link href="/auth/signup" className="btn-primary text-sm flex-1 text-center py-2">{t('cta_start')}</Link>
+              </div>
+            )}
+            {isAuthed && (
+              <div className="flex flex-col gap-2 pt-2">
+                <div className="flex items-center gap-2.5 py-1">
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0"
+                    style={{ background: 'linear-gradient(135deg, var(--coral), #FF9E88)' }}>
+                    {userName.charAt(0).toUpperCase()}
+                  </span>
+                  <span className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>{userName}</span>
+                </div>
+                <Link href="/dashboard" className="btn-primary text-sm text-center py-2" onClick={() => setMobileOpen(false)}>{t('nav_dashboard')}</Link>
+                <button onClick={() => signOut({ callbackUrl: '/' })}
+                  className="btn-ghost text-sm text-center py-2 inline-flex items-center justify-center gap-1.5" style={{ cursor: 'pointer' }}>
+                  <LogOut size={13} /> {t('dash_signout')}
+                </button>
+              </div>
+            )}
           </div>
         )}
       </nav>
@@ -176,12 +228,20 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-wrap gap-3 mb-8">
-              <Link href="/auth/signup" className="btn-primary gap-2 px-7 py-3.5 text-base font-bold">
-                {t('cta_start')} <ArrowRight size={18} />
-              </Link>
-              <Link href="/auth/login" className="btn-ghost px-7 py-3.5 text-base">
-                {t('cta_login')}
-              </Link>
+              {isAuthed ? (
+                <Link href="/dashboard" className="btn-primary gap-2 px-7 py-3.5 text-base font-bold">
+                  {t('nav_dashboard')} <ArrowRight size={18} />
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth/signup" className="btn-primary gap-2 px-7 py-3.5 text-base font-bold">
+                    {t('cta_start')} <ArrowRight size={18} />
+                  </Link>
+                  <Link href="/auth/login" className="btn-ghost px-7 py-3.5 text-base">
+                    {t('cta_login')}
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Avatar row */}
@@ -302,7 +362,7 @@ export default function HomePage() {
                   {s.slug === 'c' ? 'C' : s.slug === 'cpp' ? 'C++' : s.slug === 'python' ? 'Python' : 'English'}
                 </p>
                 <p className="text-xs leading-snug mb-4" style={{ color: 'var(--text-secondary)' }}>{t(s.desc_key)}</p>
-                <Link href="/auth/signup" className="text-xs font-semibold" style={{ color: s.accent }}>{t('subj_start')}</Link>
+                <Link href={ctaHref} className="text-xs font-semibold" style={{ color: s.accent }}>{t('subj_start')}</Link>
               </div>
             ))}
           </div>
@@ -324,7 +384,7 @@ export default function HomePage() {
                   <Check size={14} style={{ color: 'var(--accent-green)', flexShrink: 0 }} />{t(k)}
                 </div>
               ))}
-              <Link href="/auth/signup" className="btn-ghost w-full mt-6 py-2.5 text-center block">{t('cta_start')}</Link>
+              <Link href={ctaHref} className="btn-ghost w-full mt-6 py-2.5 text-center block">{isAuthed ? t('nav_dashboard') : t('cta_start')}</Link>
             </div>
             <div className="p-7 rounded-2xl relative" style={{ background: 'var(--bg-elevated)', border: '2px solid var(--accent-primary)', boxShadow: '0 0 30px rgba(247,129,102,0.12)' }}>
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 badge badge-coral text-xs px-3 py-1">{t('plan_pro_badge')}</span>
@@ -335,7 +395,7 @@ export default function HomePage() {
                   <Check size={14} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />{t(k)}
                 </div>
               ))}
-              <Link href="/auth/signup" className="btn-primary w-full mt-6 py-2.5 text-center block">{t('cta_start')}</Link>
+              <Link href={ctaHref} className="btn-primary w-full mt-6 py-2.5 text-center block">{isAuthed ? t('nav_dashboard') : t('cta_start')}</Link>
             </div>
           </div>
         </div>
@@ -385,7 +445,9 @@ export default function HomePage() {
             <a href="#features" className="hover:text-white transition-colors">{t('nav_features')}</a>
             <a href="#pricing"  className="hover:text-white transition-colors">{t('nav_pricing')}</a>
             <a href="#faq"      className="hover:text-white transition-colors">FAQ</a>
-            <Link href="/auth/login" className="hover:text-white transition-colors">{t('cta_login')}</Link>
+            {isAuthed
+              ? <Link href="/dashboard" className="hover:text-white transition-colors">{t('nav_dashboard')}</Link>
+              : <Link href="/auth/login" className="hover:text-white transition-colors">{t('cta_login')}</Link>}
             <LanguageToggle />
           </div>
         </div>
