@@ -1858,15 +1858,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   setPracticeDifficulty(2)
                   setPracticeFocusCategories([])
                 }}
-                onComplete={(score, evidenceWritten) => {
+                onComplete={(score, evidenceWritten, topicProgress) => {
                   // Record the score but keep the panel open so the user sees
                   // the result screen; it closes via its Done/✕ buttons.
                   setPracticeScore(score)
-                  if (evidenceWritten && currentLessonData.topicSlug) {
-                    fetch(`/api/topic-progress?subject=${subjectSlug}`)
-                      .then((r) => r.json())
-                      .then((d) => { if (d.availableNodes) setAvailableTopicSlugs(d.availableNodes) })
-                      .catch(() => {})
+                  if (evidenceWritten && currentLessonData.topicSlug && topicProgress) {
+                    setTopicProgressMap((prev) => ({
+                      ...prev,
+                      [currentLessonData.topicSlug!]: { status: topicProgress.status, masteryPct: topicProgress.masteryPct },
+                    }))
                   }
                 }}
                 onViewInsights={() => {

@@ -19,7 +19,7 @@ interface Props {
   difficulty?: number
   focusCategories?: string[]
   onClose?: () => void
-  onComplete?: (score: number | null, evidenceWritten: boolean) => void
+  onComplete?: (score: number | null, evidenceWritten: boolean, topicProgress?: { status: string; masteryPct: number }) => void
   onViewInsights?: () => void
 }
 
@@ -89,8 +89,30 @@ export function PracticePanel({
       setCurrentIdx(currentIdx + 1)
     } else {
       const score = Math.round((newAnswers.filter(Boolean).length / questions.length) * 100)
-      setAnswers(newAnswers)
       setState('result')
+      submitResults(newAnswers, score)
+    }
+  }
+
+  async function submitResults(correctFlags: boolean[], score: number) {
+    if (!subjectSlug || !topicSlug) {
+      onComplete?.(score, false)
+      return
+    }
+    try {
+      const res = await fetch('/api/practice/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subjectSlug,
+          topicSlug,
+          questions: questions.map((q) => ({ question: q.question, correctIndex: q.correctIndex })),
+          correct: correctFlags,
+        }),
+      })
+      const data = await res.json()
+      onComplete?.(score, !!(res.ok && data.success), data.topicProgress)
+    } catch {
       onComplete?.(score, false)
     }
   }
