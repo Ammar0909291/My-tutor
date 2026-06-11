@@ -28,11 +28,17 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { sessionId, message } = schema.parse(body)
 
+    // Sprint AP: cap history at the most recent messages instead of loading the
+    // whole session. 30 messages ≈ 15 exchanges is more context than the model
+    // meaningfully uses, and long-running sessions (100+ messages) were paying
+    // for the full table scan + a ~200KB AI payload on every send. Fetched
+    // newest-first so `take` keeps the RECENT end, then reversed to chronological.
+    const HISTORY_LIMIT = 30
     const learnSession = await withRetry(() => prisma.learnSession.findUnique({
       where: { id: sessionId, userId },
       include: {
         subject: true,
-        messages: { orderBy: { createdAt: 'asc' } },
+        messages: { orderBy: { createdAt: 'desc' }, take: HISTORY_LIMIT },
       },
     }))
     if (!learnSession) {
@@ -444,7 +450,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       console.warn('[learn/chat] learner intelligence profile skipped:', err)
     }
 
-    const historyMessages = learnSession.messages
+    // Messages arrive newest-first (capped query above) — restore chronological
+    // order for the AI payload.
+    const historyMessages = [...learnSession.messages]
+      .reverse()
       .filter((m) => m.role !== MessageRole.SYSTEM)
       .map((m) => ({
         role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),

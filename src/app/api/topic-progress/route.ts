@@ -121,6 +121,13 @@ export async function PATCH(req: Request) {
       create: { userId, subjectSlug, topicSlug, ...data },
     }))
 
+    // Drop the cached learner-intelligence profile so the tutor's next chat
+    // turn reflects this progress change immediately (Sprint AP cache).
+    try {
+      const { invalidateLearnerProfileCache } = await import('@/lib/ai/learnerProfile')
+      invalidateLearnerProfileCache(userId)
+    } catch { /* cache invalidation is best-effort */ }
+
     return NextResponse.json({
       success: true,
       topicProgress: { status: row.status, masteryPct: row.masteryPct, revisionCount: row.revisionCount },

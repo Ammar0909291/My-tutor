@@ -102,6 +102,13 @@ export async function POST(req: Request) {
       },
     }))
 
+    // Drop the cached learner-intelligence profile so the tutor's next chat
+    // turn reflects this assessment immediately (Sprint AP cache).
+    try {
+      const { invalidateLearnerProfileCache } = await import('@/lib/ai/learnerProfile')
+      invalidateLearnerProfileCache(userId)
+    } catch { /* cache invalidation is best-effort */ }
+
     return NextResponse.json({
       success: true,
       evaluation: {

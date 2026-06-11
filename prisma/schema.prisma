@@ -522,6 +522,10 @@ model Flashcard {
   createdAt     DateTime  @default(now())
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  // Sprint AP: /api/flashcards filters by (userId, nextReview) for due cards
+  // and (userId, lastReviewedAt) for the studied-today count on every load.
+  @@index([userId, nextReview])
+  @@index([userId, lastReviewedAt])
   @@map("flashcards")
 }
 

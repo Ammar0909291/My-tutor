@@ -111,6 +111,12 @@ export function PracticePanel({
         }),
       })
       const data = await res.json()
+      if (res.ok && data.success) {
+        // Practice results change the insights — drop the panel's client cache
+        // so the next open shows fresh data (Sprint AP).
+        const { invalidateInsightsCache } = await import('@/components/learn/InsightsPanel')
+        invalidateInsightsCache()
+      }
       onComplete?.(score, !!(res.ok && data.success), data.topicProgress)
     } catch {
       onComplete?.(score, false)

@@ -87,6 +87,13 @@ export async function POST(req: Request) {
     // practice submission.
     await generateCoachInsights(userId).catch((err) => console.error('[practice/submit] coach insights', err))
 
+    // Drop the cached learner-intelligence profile so the tutor's next chat
+    // turn reflects this practice session immediately (Sprint AP cache).
+    try {
+      const { invalidateLearnerProfileCache } = await import('@/lib/ai/learnerProfile')
+      invalidateLearnerProfileCache(userId)
+    } catch { /* cache invalidation is best-effort */ }
+
     return NextResponse.json({
       success: true,
       score,

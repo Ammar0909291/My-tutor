@@ -47,6 +47,18 @@ interface Props {
   onStartTargetedPractice: (difficulty: number, focusCategories: string[]) => void
 }
 
+// Sprint AP: the panel is conditionally rendered in LessonScreen, so every
+// open/close toggle remounts it and refired both fetches even when nothing
+// changed. Cache responses per subject+topic for a short window — insights
+// only move after a practice session, not between panel toggles.
+const INSIGHTS_CACHE_TTL_MS = 60_000
+const insightsCache = new Map<string, { data: AnalysisData | null; profileData: LearnerProfileData | null; expires: number }>()
+
+// Called after a practice submission so the next panel open refetches fresh data.
+export function invalidateInsightsCache() {
+  insightsCache.clear()
+}
+
 const T = {
   ru: {
     learnerIntel: 'Профиль обучения',
@@ -142,15 +154,31 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
   const [profileData, setProfileData] = useState<LearnerProfileData | null>(null)
 
   const load = useCallback(() => {
+    const cacheKey = `${subjectSlug}:${topicSlug ?? ''}`
+    const cached = insightsCache.get(cacheKey)
+    if (cached && cached.expires > Date.now()) {
+      setData(cached.data)
+      setProfileData(cached.profileData)
+      setLoading(false)
+      return
+    }
     setLoading(true)
     const url = `/api/practice/analysis?subject=${subjectSlug}${topicSlug ? `&topic=${topicSlug}` : ''}`
+    let nextData: AnalysisData | null = null
+    let nextProfile: LearnerProfileData | null = null
     Promise.all([
-      fetch(url).then((r) => r.json()).then((d) => { if (d.success) setData(d) }).catch(() => {}),
+      fetch(url).then((r) => r.json()).then((d) => { if (d.success) { nextData = d; setData(d) } }).catch(() => {}),
       fetch(`/api/learner/profile-insights?subject=${subjectSlug}`)
         .then((r) => r.json())
-        .then((d) => { if (!d.error) setProfileData(d) })
+        .then((d) => { if (!d.error) { nextProfile = d; setProfileData(d) } })
         .catch(() => {}),
-    ]).finally(() => setLoading(false))
+    ]).finally(() => {
+      setLoading(false)
+      // Only cache when at least one fetch succeeded — never cache a dead state.
+      if (nextData || nextProfile) {
+        insightsCache.set(cacheKey, { data: nextData, profileData: nextProfile, expires: Date.now() + INSIGHTS_CACHE_TTL_MS })
+      }
+    })
   }, [subjectSlug, topicSlug])
 
   useEffect(() => { load() }, [load])

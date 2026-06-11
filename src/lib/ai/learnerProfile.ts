@@ -27,17 +27,57 @@ export interface LearnerProfile {
   lastActive?: string
 }
 
+// ── Sprint AP: short-TTL in-memory cache ──────────────────────────────────────
+// The profile is rebuilt on EVERY /api/learn/chat message (6 queries each), yet
+// its inputs only change when the learner completes practice/assessments — not
+// between consecutive chat turns. A 60s TTL keeps the tutor context fresh-enough
+// while collapsing the per-message cost to one build per minute per subject.
+// Writes that feed the profile call invalidateLearnerProfileCache() so a learner
+// returning from a practice session sees updated context immediately.
+// Note: selfDescription/learningGoals params don't affect the computed output,
+// so they're excluded from the cache key.
+const PROFILE_CACHE_TTL_MS = 60_000
+const profileCache = new Map<string, { value: LearnerProfile & { hasSignal: boolean }; expires: number }>()
+
+export function invalidateLearnerProfileCache(userId: string) {
+  for (const key of profileCache.keys()) {
+    if (key.startsWith(`${userId}:`)) profileCache.delete(key)
+  }
+}
+
 /**
  * Build a Learner Intelligence Profile from real DB data.
  * Aggregates: SubjectAnalytics, TopicProgress, MistakeRecord,
  * LearningProfile, LearningAnalytics, PracticeSession.
+ * Cached in-memory for 60s per (userId, subjectSlug, subjectId).
  */
 export async function buildLearnerIntelligenceProfile(
   userId: string,
   subjectSlug?: string,
   subjectId?: string | null,
-  selfDescription?: string | null,
-  learningGoals?: string | null,
+  _selfDescription?: string | null,
+  _learningGoals?: string | null,
+): Promise<LearnerProfile & { hasSignal: boolean }> {
+  const cacheKey = `${userId}:${subjectSlug ?? ''}:${subjectId ?? ''}`
+  const cached = profileCache.get(cacheKey)
+  if (cached && cached.expires > Date.now()) return cached.value
+
+  const value = await buildLearnerIntelligenceProfileUncached(userId, subjectSlug, subjectId)
+  profileCache.set(cacheKey, { value, expires: Date.now() + PROFILE_CACHE_TTL_MS })
+  // Bound memory: drop expired entries opportunistically once the map grows.
+  if (profileCache.size > 500) {
+    const now = Date.now()
+    for (const [k, v] of profileCache) {
+      if (v.expires <= now) profileCache.delete(k)
+    }
+  }
+  return value
+}
+
+async function buildLearnerIntelligenceProfileUncached(
+  userId: string,
+  subjectSlug?: string,
+  subjectId?: string | null,
 ): Promise<LearnerProfile & { hasSignal: boolean }> {
   const [
     subjectAnalytics,
