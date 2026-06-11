@@ -392,12 +392,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [subjectSlug])
 
   // Detect lesson completion
-  const handleLessonComplete = useCallback(async (lessonOrder: number) => {
+  const handleLessonComplete = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string }) => {
     try {
       const res = await fetch('/api/curriculum/progress', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subjectCode: subjectSlug, completedLesson: lessonOrder, totalLessons: curriculumLessons.length || undefined }),
+        body: JSON.stringify({
+          subjectCode: subjectSlug, completedLesson: lessonOrder, totalLessons: curriculumLessons.length || undefined,
+          lessonTitle: lesson?.lessonTitle, lessonGoal: lesson?.lessonGoal,
+        }),
       })
       const data = await res.json()
       if (data.success) {
@@ -539,7 +542,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         full = full.replace('[LESSON_COMPLETE]', '').trim()
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
         if (currentLessonData) {
-          handleLessonComplete(currentLessonData.order)
+          handleLessonComplete(currentLessonData.order, currentLessonData)
           // Update knowledge-graph TopicProgress and recompute unlocked nodes
           if (currentLessonData.topicSlug) {
             const topicSlug = currentLessonData.topicSlug
@@ -1308,7 +1311,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   </div>
                 ) : (
                   <button
-                    onClick={() => handleLessonComplete(currentLessonData.order)}
+                    onClick={() => handleLessonComplete(currentLessonData.order, currentLessonData)}
                     style={{
                       width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                       background: 'var(--coral)', color: '#fff', border: 'none',
