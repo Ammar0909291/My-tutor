@@ -70,6 +70,7 @@ export type ScienceDomain =
 export type EnglishDomain =
   | 'grammar.alphabet_phonics'
   | 'grammar.parts_of_speech'
+  | 'grammar.articles'
   | 'grammar.sentences'
   | 'grammar.tenses'
   | 'grammar.punctuation'
