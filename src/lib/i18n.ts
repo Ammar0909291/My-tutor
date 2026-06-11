@@ -195,6 +195,10 @@ export const translations = {
     lesson_back_base: '← База',
     lesson_scroll_down: '↓',
 
+    /* ── Auth navigation ── */
+    nav_back_home: 'На главную',
+    nav_back_login: 'Ко входу',
+
     /* ── Forgot password ── */
     forgot_title: 'Забыл пароль?',
     forgot_sub: 'Введи свой email и мы пришлём ссылку для сброса пароля',
@@ -963,6 +967,10 @@ export const translations = {
     lesson_back_base: '← Dashboard',
     lesson_scroll_down: '↓',
 
+    /* ── Auth navigation ── */
+    nav_back_home: 'Back to Home',
+    nav_back_login: 'Back to Login',
+
     /* ── Forgot password ── */
     forgot_title: 'Forgot password?',
     forgot_sub: "Enter your email and we'll send you a reset link",
@@ -1730,6 +1738,10 @@ export const translations = {
     lesson_init: 'ट्यूटर से जुड़ रहे हैं...',
     lesson_back_base: '← डैशबोर्ड',
     lesson_scroll_down: '↓',
+
+    /* ── Auth navigation ── */
+    nav_back_home: 'होम पर जाएं',
+    nav_back_login: 'लॉग इन पर जाएं',
 
     /* ── Forgot password ── */
     forgot_title: 'पासवर्ड भूल गए?',

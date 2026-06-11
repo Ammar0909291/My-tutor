@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { LanguageToggle, useLanguage } from '@/components/ui/LanguageToggle'
+import { AuthBackLink } from '@/components/auth/AuthBackLink'
 
 type State = 'idle' | 'loading' | 'sent' | 'error'
 
@@ -45,6 +46,10 @@ export default function ForgotPasswordPage() {
       </div>
 
       <div className="w-full max-w-sm animate-fade-in">
+        <div className="flex items-center gap-2 mb-6">
+          <AuthBackLink href="/" label={t('nav_back_home')} icon="home" />
+          <AuthBackLink href="/auth/login" label={t('nav_back_login')} />
+        </div>
 
         {state === 'sent' ? (
           <div className="text-center">

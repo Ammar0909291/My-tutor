@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { LanguageToggle, useLanguage } from '@/components/ui/LanguageToggle'
+import { AuthBackLink } from '@/components/auth/AuthBackLink'
 
 type State = 'idle' | 'loading' | 'success' | 'error'
 
@@ -84,6 +85,10 @@ function ResetPasswordForm() {
       </div>
 
       <div className="w-full max-w-sm animate-fade-in">
+        <div className="flex items-center gap-2 mb-6">
+          <AuthBackLink href="/" label={t('nav_back_home')} icon="home" />
+          <AuthBackLink href="/auth/login" label={t('nav_back_login')} />
+        </div>
 
         {state === 'success' ? (
           <div className="text-center">

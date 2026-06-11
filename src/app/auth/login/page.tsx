@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { AuthBackLink } from '@/components/auth/AuthBackLink'
 
 const NEXTAUTH_ERROR_KEYS: Record<string, 'error_invalid' | 'error_required'> = {
   CredentialsSignin: 'error_invalid',
@@ -156,6 +157,7 @@ function LoginForm() {
 
       {/* Right form panel */}
       <div className="flex-1 flex items-center justify-center p-6 relative">
+        <div className="absolute top-5 left-5"><AuthBackLink href="/" label={t('nav_back_home')} icon="home" /></div>
         <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
         <div className="w-full max-w-sm animate-slide-up">
