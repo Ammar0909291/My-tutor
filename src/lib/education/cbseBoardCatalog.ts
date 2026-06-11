@@ -9,6 +9,6 @@ export const CBSE_BOARD: EducationBoard = {
   name: 'Central Board of Secondary Education',
   shortName: 'CBSE',
   country: 'India',
-  subjects: ['mathematics'],
+  subjects: ['mathematics', 'science'],
   grades: [5, 6, 7, 8, 9, 10, 11, 12],
 }

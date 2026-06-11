@@ -37,6 +37,7 @@ export { UP_SOCIAL_SCIENCE_CATALOG, getUPSocialScienceChapters } from './upSocia
 
 // CBSE Catalogs
 export { CBSE_MATH_CATALOG, getCBSEMathChapters, getCBSEMathChapter } from './cbseMathCatalog'
+export { CBSE_SCIENCE_CATALOG, getCBSEScienceChapters, getCBSEScienceChapter } from './cbseScienceCatalog'
 
 // Board Registry
 export { UP_BOARD } from './upBoardCatalog'
