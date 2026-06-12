@@ -58,6 +58,37 @@ export async function POST(req: Request) {
 
     const subjectCode = learnSession.subject.slug
 
+    // ─── School Mode (Sprint BI) ───
+    // When the session carries a school chapter id and the learner is a school
+    // student, resolve the chapter from the board catalog. School progress uses
+    // the namespaced subjectCode so it never collides with global-mode rows.
+    let schoolCtx: {
+      board: string; grade: number; code: string
+      chapter: { id: string; order: number; title: string }
+      totalChapters: number; displayTitle: string
+    } | null = null
+    const snapshotChapterId = typeof snapshot?.schoolChapterId === 'string' ? snapshot.schoolChapterId : null
+    if (snapshotChapterId && profile?.userType === 'SCHOOL_STUDENT' && profile.educationBoard && profile.grade) {
+      try {
+        const { getSchoolChapters, schoolSubjectCode, chapterDisplayTitle } = await import('@/lib/school/schoolRouting')
+        const chapters = getSchoolChapters(profile.educationBoard, subjectCode, profile.grade)
+        const chapter = chapters.find((c) => c.id === snapshotChapterId)
+        if (chapter) {
+          schoolCtx = {
+            board: profile.educationBoard,
+            grade: profile.grade,
+            code: schoolSubjectCode(profile.educationBoard, subjectCode, profile.grade),
+            chapter,
+            totalChapters: chapters.length,
+            displayTitle: chapterDisplayTitle(chapter.title),
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] school context resolution skipped:', err)
+      }
+    }
+    const progressCode = schoolCtx?.code ?? subjectCode
+
     // Batch all per-request reads that are needed by multiple context blocks.
     // Sprint U: topicProgress was fetched 3× (KG synthesis, Library synthesis,
     // KG context builder) — now fetched once and shared. learningProfile +
@@ -66,7 +97,7 @@ export async function POST(req: Request) {
     // issues separate SQL calls without batching).
     const [curriculumLessons, studentProgress, topicProgressRowsShared, learningProfileShared, subjectAnalyticsShared] = await Promise.all([
       (prisma as any).curriculum?.findMany({ where: { subjectCode }, orderBy: { order: 'asc' } }).catch(() => []) ?? Promise.resolve([]),
-      (prisma as any).studentProgress?.findUnique({ where: { userId_subjectCode: { userId, subjectCode } } }).catch(() => null) ?? Promise.resolve(null),
+      (prisma as any).studentProgress?.findUnique({ where: { userId_subjectCode: { userId, subjectCode: progressCode } } }).catch(() => null) ?? Promise.resolve(null),
       prisma.topicProgress.findMany({ where: { userId, subjectSlug: subjectCode } }),
       prisma.learningProfile.findUnique({ where: { userId } }).catch(() => null),
       prisma.subjectAnalytics.findUnique({ where: { userId_subjectId: { userId, subjectId: learnSession.subjectId } } }).catch(() => null),
@@ -189,6 +220,18 @@ export async function POST(req: Request) {
       }
     }
 
+    // School sessions: the chapter IS the lesson — override any synthesized ctx.
+    if (schoolCtx) {
+      lessonCtx = {
+        currentLesson: schoolCtx.chapter.order,
+        totalLessons: schoolCtx.totalChapters,
+        lessonTitle: schoolCtx.displayTitle,
+        lessonGoal: `Master "${schoolCtx.displayTitle}" as prescribed by the ${schoolCtx.board === 'cbse' ? 'CBSE' : 'UP Board'} Class ${schoolCtx.grade} syllabus`,
+        unitTitle: learnSession.subject.name,
+        completedLessons: studentProgress?.completedLessons ?? [],
+      }
+    }
+
     const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
     const country = (profile as any)?.country ?? 'global'
     let systemPrompt = buildTutorSystemPrompt(
@@ -200,6 +243,21 @@ export async function POST(req: Request) {
       lessonCtx,
       learnSession.subject.type,
     )
+
+    // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
+    // chapter KG topics and previously-covered node count, straight from the
+    // education graph. Additive and school-only; general learners never get it.
+    if (schoolCtx) {
+      try {
+        const { buildSchoolTutorContext } = await import('@/lib/education')
+        const ctx = buildSchoolTutorContext(schoolCtx.board, subjectCode, schoolCtx.grade, schoolCtx.chapter.id)
+        if (ctx) {
+          systemPrompt += `\n\nSCHOOL MODE — AUTHORITATIVE CURRICULUM CONTEXT:\n${ctx}\nThe student is a ${schoolCtx.board === 'cbse' ? 'CBSE' : 'UP Board'} Class ${schoolCtx.grade} student working on chapter ${schoolCtx.chapter.order} of ${schoolCtx.totalChapters}, "${schoolCtx.displayTitle}". Teach strictly at this grade level and within this chapter's scope (referencing previously covered chapters is fine). NEVER ask the student for their board, class, or chapter — you already know. Use NCERT/board-aligned terminology, methods, and examples appropriate for this class.`
+        }
+      } catch (err) {
+        console.warn('[learn/chat] school curriculum context skipped:', err)
+      }
+    }
 
     // Append the personalized roadmap context (if one exists) so the tutor
     // never skips ahead of the learner's current level/module.
@@ -483,17 +541,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Auto-save lesson position on every interaction so Dashboard/Library
       // can show exactly where the learner is without them completing a lesson.
       prisma.studentProgress.upsert({
-        where: { userId_subjectCode: { userId, subjectCode } },
+        where: { userId_subjectCode: { userId, subjectCode: progressCode } },
         update: {
           lastStudiedAt: new Date(),
           ...(lessonCtx ? {
             lastLessonTitle: lessonCtx.lessonTitle,
             lastUnitTitle: lessonCtx.unitTitle,
           } : {}),
+          ...(schoolCtx ? { currentLesson: schoolCtx.chapter.order } : {}),
         },
         create: {
           userId,
-          subjectCode,
+          subjectCode: progressCode,
           currentLesson: lessonCtx?.currentLesson ?? 1,
           completedLessons: lessonCtx?.completedLessons ?? [],
           lastStudiedAt: new Date(),

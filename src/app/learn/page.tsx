@@ -5,8 +5,10 @@ import { withRetry } from '@/lib/db/withRetry'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 import { t } from '@/lib/i18n'
+import { SubjectType } from '@prisma/client'
+import { getSchoolChapters, getChapterPosition, isSchoolSubject, schoolSubjectCode, chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 
-export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string } }) {
+export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string; chapter?: string } }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
@@ -41,6 +43,45 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
     ? profile?.subjects.find((ps) => ps.subject.slug === requestedSlug)?.subject
     : undefined
   let primarySubject = requestedSubject ?? profile?.subjects[0]?.subject
+
+  // ─── School Mode (Sprint BI) ───
+  // School students arrive from /school/<subject> with an explicit chapter id.
+  // Resolve the chapter against the board catalog (falling back to the current
+  // chapter from namespaced progress), and ensure a Subject row exists so the
+  // session pipeline works without ProfileSubject enrollment.
+  let schoolChapterId: string | undefined
+  let schoolChapterTitle: string | undefined
+  if (
+    profile.userType === 'SCHOOL_STUDENT' && profile.educationBoard && profile.grade &&
+    requestedSlug && isSchoolSubject(profile.educationBoard, requestedSlug)
+  ) {
+    const chapters = getSchoolChapters(profile.educationBoard, requestedSlug, profile.grade)
+    if (chapters.length > 0) {
+      const sp = await prisma.studentProgress.findUnique({
+        where: { userId_subjectCode: { userId: session.user.id, subjectCode: schoolSubjectCode(profile.educationBoard, requestedSlug, profile.grade) } },
+        select: { completedLessons: true },
+      }).catch(() => null)
+      const pos = getChapterPosition(chapters, sp?.completedLessons ?? [])
+      const chapter = chapters.find((c) => c.id === searchParams?.chapter) ?? pos?.current
+      if (chapter) {
+        schoolChapterId = chapter.id
+        schoolChapterTitle = chapterDisplayTitle(chapter.title)
+        // SubjectType is cosmetic for non-code subjects — closest buckets used.
+        const SCHOOL_TYPE: Record<string, SubjectType> = {
+          mathematics: SubjectType.MATHEMATICS,
+          science: SubjectType.PHYSICS,
+          english: SubjectType.ENGLISH,
+          social_science: SubjectType.LANGUAGE,
+        }
+        const meta = SCHOOL_SUBJECT_META[requestedSlug]
+        primarySubject = await prisma.subject.upsert({
+          where: { slug: requestedSlug },
+          update: {},
+          create: { slug: requestedSlug, name: meta?.label ?? requestedSlug, type: SCHOOL_TYPE[requestedSlug] ?? SubjectType.LANGUAGE },
+        })
+      }
+    }
+  }
 
   // Auto-heal: profile has no subject linked — ensure subject exists then link it
   if (profile && !primarySubject) {
@@ -175,8 +216,9 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       subjects={subjects}
       displayName={profile.displayName}
       userId={session.user.id}
-      resumeLessonTitle={studentProgress?.lastLessonTitle ?? undefined}
-      resumeUnitTitle={studentProgress?.lastUnitTitle ?? undefined}
+      resumeLessonTitle={schoolChapterTitle ?? studentProgress?.lastLessonTitle ?? undefined}
+      resumeUnitTitle={schoolChapterId ? undefined : studentProgress?.lastUnitTitle ?? undefined}
+      schoolChapterId={schoolChapterId}
     />
   )
 }

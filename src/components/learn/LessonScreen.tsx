@@ -185,6 +185,7 @@ interface Props {
   memoryContext?: string | null; pastSessionsSummary?: string | null
   subjects?: {slug:string;name:string}[]; displayName?: string; userId?: string
   resumeLessonTitle?: string; resumeUnitTitle?: string
+  schoolChapterId?: string
 }
 
 // ─── Panel wrapper ────────────────────────────────────────────────────────────
@@ -230,7 +231,7 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId }: Props) {
   const { t, lang: uiLang } = useLanguage()
   const { country } = useCountry()
   const { theme } = useTheme()
@@ -770,7 +771,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       try {
         const res = await fetch('/api/sessions', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined }),
+          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
         })
         const data = await res.json()
         if (!data.success) { setInitError(data.error ?? 'Error'); return }
