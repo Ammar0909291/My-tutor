@@ -117,13 +117,19 @@ export default async function DashboardPage() {
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-    const [progressMap, recentMistakeRows] = await withRetry(() => Promise.all([
+    const [progressMap, recentMistakeRows, pendingAssessmentRow] = await withRetry(() => Promise.all([
       getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs),
       prisma.mistakeRecord.findMany({
         where: { userId: session.user.id, subjectSlug: { in: schoolSlugs }, createdAt: { gte: sevenDaysAgo } },
         select: { subjectSlug: true },
         distinct: ['subjectSlug'],
       }).catch(() => [] as { subjectSlug: string }[]),
+      // Sprint BN: find the most recent incomplete assessment session to resume
+      prisma.practiceSession.findFirst({
+        where: { userId: session.user.id, subjectSlug: { in: schoolSlugs }, kind: 'assessment', completedAt: null },
+        orderBy: { createdAt: 'desc' },
+        select: { subjectSlug: true, chapterId: true },
+      }).catch(() => null),
     ]))
     const subjects: SchoolSubjectProgress[] = schoolSlugs.map((slug) => {
       const row = progressMap.get(slug)
@@ -139,6 +145,10 @@ export default async function DashboardPage() {
     const weakSubjectSlugs = [...new Set(recentMistakeRows.map((r) => r.subjectSlug))]
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0)
     const studiedToday = recentSessions.some((s) => s.startedAt >= startOfToday)
+    // Pending assessment: resume link overrides current-chapter CTA
+    const pendingAssessment = pendingAssessmentRow?.chapterId
+      ? { subjectSlug: pendingAssessmentRow.subjectSlug, chapterId: pendingAssessmentRow.chapterId }
+      : null
     return (
       <SchoolDashboard
         displayName={sp0.displayName ?? user.name ?? 'Student'}
@@ -149,6 +159,7 @@ export default async function DashboardPage() {
         studiedToday={studiedToday}
         subjects={subjects}
         weakSubjectSlugs={weakSubjectSlugs}
+        pendingAssessment={pendingAssessment}
       />
     )
   }

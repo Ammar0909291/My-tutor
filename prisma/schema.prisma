@@ -388,6 +388,8 @@ model PracticeSession {
   topicSlug   String
   // Sprint BM: school chapter practice; null for legacy topic-level sessions
   chapterId   String?
+  // Sprint BN: "practice" (default) | "assessment"
+  kind        String    @default("practice")
   questions   Json      // StoredPracticeQuestion[] — includes correct answers (never sent to client)
   completedAt DateTime?
   score       Int?      // 0-100

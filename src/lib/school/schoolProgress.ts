@@ -103,11 +103,15 @@ export interface ChapterProgressDetails {
   accuracyPercent: number | null
   practiceStatus: 'not_started' | 'in_progress' | 'mastered'
   lastPracticeScore: number | null
+  // Sprint BN: assessment fields
+  assessmentPassed: boolean
+  assessmentScore: number | null
+  assessmentAttempts: number
 }
 
 /**
- * Per-chapter progress for the chapter workspace (Sprint BL/BM):
- * KG node mastery, chapter-level practice accuracy, and last score — derived
+ * Per-chapter progress for the chapter workspace (Sprint BL/BM/BN):
+ * KG node mastery, practice accuracy, assessment pass/fail — all derived
  * from TopicProgress and PracticeSession rows; no new tables.
  */
 export async function getChapterProgressDetails(
@@ -121,44 +125,57 @@ export async function getChapterProgressDetails(
     completed, practiceMasteredCount: 0, practiceTotalCount: 0,
     questionsAttempted: 0, accuracyPercent: null,
     practiceStatus: 'not_started', lastPracticeScore: null,
+    assessmentPassed: false, assessmentScore: null, assessmentAttempts: 0,
   }
   if (nodeIds.length === 0) return empty
 
-  const [topicRows, nodeSessions, chapterSessions] = await Promise.all([
+  const [topicRows, nodeSessions, practiceSessions, assessmentSessions] = await Promise.all([
     prisma.topicProgress.findMany({
       where: { userId, subjectSlug, topicSlug: { in: nodeIds } },
       select: { status: true },
     }),
+    // Legacy topic-level practice
     prisma.practiceSession.findMany({
-      where: { userId, subjectSlug, topicSlug: { in: nodeIds }, completedAt: { not: null } },
+      where: { userId, subjectSlug, topicSlug: { in: nodeIds }, kind: 'practice', completedAt: { not: null } },
       select: { questions: true, score: true },
     }),
-    // Sprint BM: chapter-level sessions keyed by chapterId
+    // Sprint BM: chapter-level practice sessions
     prisma.practiceSession.findMany({
-      where: { userId, subjectSlug, chapterId: chapter.id, completedAt: { not: null } },
+      where: { userId, subjectSlug, chapterId: chapter.id, kind: 'practice', completedAt: { not: null } },
       orderBy: { completedAt: 'desc' },
       take: 5,
       select: { questions: true, score: true },
     }),
+    // Sprint BN: chapter assessment sessions
+    prisma.practiceSession.findMany({
+      where: { userId, subjectSlug, chapterId: chapter.id, kind: 'assessment', completedAt: { not: null } },
+      orderBy: { completedAt: 'desc' },
+      take: 10,
+      select: { score: true },
+    }),
   ])
 
   const practiceMasteredCount = topicRows.filter((r) => DONE_STATUSES.has(r.status)).length
-  const allSessions = [...nodeSessions, ...chapterSessions]
-  const questionsAttempted = allSessions.reduce(
+  const allPracticeSessions = [...nodeSessions, ...practiceSessions]
+  const questionsAttempted = allPracticeSessions.reduce(
     (sum, s) => sum + (Array.isArray(s.questions) ? s.questions.length : 0), 0,
   )
-  const scored = allSessions.filter((s): s is typeof s & { score: number } => typeof s.score === 'number')
-  const accuracyPercent = scored.length > 0
-    ? Math.round(scored.reduce((sum, s) => sum + s.score, 0) / scored.length)
+  const scoredPractice = allPracticeSessions.filter((s): s is typeof s & { score: number } => typeof s.score === 'number')
+  const accuracyPercent = scoredPractice.length > 0
+    ? Math.round(scoredPractice.reduce((sum, s) => sum + s.score, 0) / scoredPractice.length)
     : null
-  const lastPracticeScore = chapterSessions.find((s) => typeof s.score === 'number')?.score ?? null
+  const lastPracticeScore = practiceSessions.find((s) => typeof s.score === 'number')?.score ?? null
 
   let practiceStatus: 'not_started' | 'in_progress' | 'mastered' = 'not_started'
   if (topicRows.some((r) => DONE_STATUSES.has(r.status))) {
     practiceStatus = topicRows.every((r) => r.status === 'MASTERED') ? 'mastered' : 'in_progress'
-  } else if (allSessions.length > 0) {
+  } else if (allPracticeSessions.length > 0) {
     practiceStatus = 'in_progress'
   }
+
+  const assessmentAttempts = assessmentSessions.length
+  const assessmentScore = assessmentSessions.find((s) => typeof s.score === 'number')?.score ?? null
+  const assessmentPassed = assessmentSessions.some((s) => typeof s.score === 'number' && s.score >= 70)
 
   return {
     completed,
@@ -168,5 +185,8 @@ export async function getChapterProgressDetails(
     accuracyPercent,
     practiceStatus,
     lastPracticeScore,
+    assessmentPassed,
+    assessmentScore,
+    assessmentAttempts,
   }
 }

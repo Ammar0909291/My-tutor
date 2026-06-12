@@ -45,9 +45,10 @@ export interface SchoolDashboardProps {
   studiedToday: boolean
   subjects: SchoolSubjectProgress[]
   weakSubjectSlugs?: string[]
+  pendingAssessment?: { subjectSlug: string; chapterId: string } | null
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, weakSubjectSlugs }: SchoolDashboardProps) {
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, weakSubjectSlugs, pendingAssessment }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -55,6 +56,12 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
   const active = sorted.find((s) => s.lastStudiedAt) ?? subjects[0]
   const activeMeta = active ? SUBJECT_META[active.slug] : undefined
   const hasHistory = !!active?.lastStudiedAt
+
+  // Sprint BN: pending assessment takes priority in Continue Learning CTA
+  const continueHref = pendingAssessment
+    ? `/school/${pendingAssessment.subjectSlug}/chapter/${encodeURIComponent(pendingAssessment.chapterId)}/assessment`
+    : active ? `/school/${active.slug}` : '/dashboard'
+  const continueLabel = pendingAssessment ? 'Resume Assessment' : hasHistory ? 'Continue' : 'Start now'
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -104,10 +111,15 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
                 {active.lastChapterTitle ? ` — ${active.lastChapterTitle}` : hasHistory ? '' : ' — your first lesson awaits'}
               </p>
             )}
-            <Link href={active ? `/school/${active.slug}` : '/dashboard'}
+            {pendingAssessment && (
+              <p className="text-xs mb-3 font-medium" style={{ color: 'var(--coral)' }}>
+                📝 You have an assessment in progress
+              </p>
+            )}
+            <Link href={continueHref}
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
               style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
-              {hasHistory ? 'Continue' : 'Start now'}
+              {continueLabel}
               <ArrowRight size={16} />
             </Link>
           </div>

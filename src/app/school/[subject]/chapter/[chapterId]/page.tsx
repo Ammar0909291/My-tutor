@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Target, MessageCircle, Check } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Target, MessageCircle, Check, ClipboardCheck } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
@@ -69,7 +69,14 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   ])
 
   const learnHref = `/learn?subject=${subjectSlug}&chapter=${encodeURIComponent(chapter.id)}`
+  const practiceHref = `/school/${subjectSlug}/chapter/${encodeURIComponent(chapter.id)}/practice`
+  const assessmentHref = `/school/${subjectSlug}/chapter/${encodeURIComponent(chapter.id)}/assessment`
   const summaryParagraphs = content.summary.split(/\n+/).filter((p) => p.trim().length > 0)
+
+  // Next chapter for recommendation when assessment is passed
+  const chapterIdx = progress.chapters.findIndex((c) => c.id === chapter.id)
+  const nextChapter = chapterIdx >= 0 && chapterIdx < progress.chapters.length - 1
+    ? progress.chapters[chapterIdx + 1] : null
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -132,17 +139,30 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
         </section>
 
         {/* Phase 3: Primary actions */}
-        <section className="flex flex-col sm:flex-row gap-3">
+        <section className="flex flex-col gap-3">
           <Link href={learnHref}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
+            className="inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
             style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
             Continue learning <ArrowRight size={16} />
           </Link>
-          <Link href={`/school/${subjectSlug}/chapter/${encodeURIComponent(chapter.id)}/practice`}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold rounded-xl transition-transform hover:scale-[1.02]"
-            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', textDecoration: 'none' }}>
-            <Target size={16} /> Practice chapter
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href={practiceHref}
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-bold rounded-xl transition-transform hover:scale-[1.02]"
+              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', textDecoration: 'none' }}>
+              <Target size={15} /> Practice
+            </Link>
+            <Link href={assessmentHref}
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-bold rounded-xl transition-transform hover:scale-[1.02]"
+              style={{
+                background: details.assessmentPassed ? 'var(--green-muted)' : 'var(--bg-elevated)',
+                border: `1px solid ${details.assessmentPassed ? 'var(--green)' : 'var(--border-default)'}`,
+                color: details.assessmentPassed ? 'var(--green)' : 'var(--text-primary)',
+                textDecoration: 'none',
+              }}>
+              <ClipboardCheck size={15} />
+              {details.assessmentPassed ? 'Retake Assessment' : details.assessmentAttempts > 0 ? 'Retake Assessment' : 'Take Assessment'}
+            </Link>
+          </div>
         </section>
 
         {/* Phase 4: Ask Tutor */}
@@ -165,13 +185,30 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
         <section className="grid grid-cols-2 gap-3">
           <StatCard label="Chapter" value={completed ? 'Completed' : 'Not yet'} accent={completed ? 'var(--green)' : undefined} />
           <StatCard
+            label="Assessment"
+            value={details.assessmentPassed ? 'Passed' : details.assessmentAttempts > 0 ? 'Not passed yet' : 'Not taken'}
+            accent={details.assessmentPassed ? 'var(--green)' : details.assessmentAttempts > 0 ? 'var(--coral)' : undefined}
+          />
+          <StatCard
             label="Practice"
             value={details.practiceStatus === 'mastered' ? 'Mastered' : details.practiceStatus === 'in_progress' ? 'In Progress' : 'Not Started'}
             accent={details.practiceStatus === 'mastered' ? 'var(--green)' : details.practiceStatus === 'in_progress' ? 'var(--coral)' : undefined}
           />
-          <StatCard label="Questions done" value={String(details.questionsAttempted)} />
-          <StatCard label="Accuracy" value={details.accuracyPercent !== null ? `${details.accuracyPercent}%` : '—'} />
+          <StatCard label="Practice accuracy" value={details.accuracyPercent !== null ? `${details.accuracyPercent}%` : '—'} />
         </section>
+
+        {/* Phase 6: Next chapter recommendation (when assessment passed) */}
+        {details.assessmentPassed && nextChapter && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--green)' }}>
+            <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--green)' }}>Recommended Next</p>
+            <p className="font-bold text-sm mb-3" style={{ color: 'var(--text-primary)' }}>{chapterDisplayTitle(nextChapter.title)}</p>
+            <Link href={`/school/${subjectSlug}/chapter/${encodeURIComponent(nextChapter.id)}`}
+              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white"
+              style={{ background: 'var(--green)', textDecoration: 'none' }}>
+              Go to next chapter <ArrowRight size={13} />
+            </Link>
+          </section>
+        )}
       </main>
     </div>
   )
