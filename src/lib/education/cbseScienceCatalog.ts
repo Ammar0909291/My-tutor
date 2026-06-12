@@ -16,93 +16,98 @@ import type { BoardSubjectCatalog } from './educationTypes'
  * Every kgNodeId references an EXISTING node in scienceKnowledgeGraph.ts —
  * verified by coverageAudit.findUnmappedChapters (Sprint AU audit).
  *
- * Maintenance note: rationalization lists shift between NCERT print runs and
- * the NCF-2023 textbook rollout is replacing books from lower grades upward.
- * Re-verify against the official CBSE syllabus PDF each academic year.
+ * Sprint BA (June 2026): Grades 5–8 updated to NCF-2023 textbooks:
+ *   Grade 5 — Our Wondrous World (EVS, 10 chapters)
+ *   Grades 6–8 — Curiosity (12/12/13 chapters)
+ * Sources: ncert.nic.in eeev1ps.pdf, fecu1ps.pdf, gecu1ps.pdf, hecu1ps.pdf (2026-27)
+ * Cross-ref: tiwariacademy.com, learncbse.in (2026-27 editions)
  */
 export const CBSE_SCIENCE_CATALOG: BoardSubjectCatalog = {
   boardId: 'cbse',
   subjectSlug: 'science',
   subjectName: 'Science',
   grades: [
+    // ─── Grade 5 — Our Wondrous World (NCF-2023 EVS, 2024 edition, 10 chapters) ─
+    // Source: ncert.nic.in/textbook/pdf/eeev1ps.pdf (eeev = EVS Grade 5)
+    // Cross-ref: tiwariacademy.com/ncert-solutions/class-5/evs/ (verified June 2026)
+    // Replaces: old generic EVS stubs (Super Senses, Plants Growth, etc.)
     {
       grade: 5,
-      // Class 5 is EVS ("Looking Around") under CBSE — modeled here as the
-      // science strand, mirroring UP's grade-5 science framing.
       chapters: [
-        { id: 'cbse.sci.5.ch1', order: 1, title: 'Super Senses (Animals)', kgNodeIds: ['biology.ecology.ecosystems'] },
-        { id: 'cbse.sci.5.ch2', order: 2, title: 'Plants — Growth and Food', kgNodeIds: ['biology.plant_physiology.nutrition'] },
-        { id: 'cbse.sci.5.ch3', order: 3, title: 'The Human Body and Health', kgNodeIds: ['biology.animal_physiology.digestion'] },
-        { id: 'cbse.sci.5.ch4', order: 4, title: 'Food and Digestion', kgNodeIds: ['biology.animal_physiology.digestion'] },
-        { id: 'cbse.sci.5.ch5', order: 5, title: 'Water — Sources and Conservation', kgNodeIds: ['environmental_science.natural_resources.management'] },
-        { id: 'cbse.sci.5.ch6', order: 6, title: 'Air, Weather and Sky', kgNodeIds: ['earth_science.climate_weather.atmosphere'] },
-        { id: 'cbse.sci.5.ch7', order: 7, title: 'Our Earth and the Solar System', kgNodeIds: ['earth_science.solar_system.planets'] },
-        { id: 'cbse.sci.5.ch8', order: 8, title: 'Light, Shadows and Reflection', kgNodeIds: ['physics.optics.reflection_refraction'] },
-        { id: 'cbse.sci.5.ch9', order: 9, title: 'Forces and Simple Machines', kgNodeIds: ['physics.forces.laws_of_motion'] },
-        { id: 'cbse.sci.5.ch10', order: 10, title: 'Environment and Pollution', kgNodeIds: ['environmental_science.pollution.types'] },
+        { id: 'cbse.sci.5.ch1', order: 1, title: 'Water — The Essence of Life', kgNodeIds: ['environmental_science.natural_resources.management'] },
+        { id: 'cbse.sci.5.ch2', order: 2, title: 'Journey of a River', kgNodeIds: ['earth_science.climate_weather.atmosphere'] },
+        { id: 'cbse.sci.5.ch3', order: 3, title: 'The Mystery of Food', kgNodeIds: ['biology.animal_physiology.digestion'] },
+        { id: 'cbse.sci.5.ch4', order: 4, title: 'Our School — A Happy Place', kgNodeIds: ['biology.reproduction.human_health'] },
+        { id: 'cbse.sci.5.ch5', order: 5, title: 'Our Vibrant Country', kgNodeIds: ['biology.ecology.ecosystems'] },
+        { id: 'cbse.sci.5.ch6', order: 6, title: 'Some Unique Places', kgNodeIds: ['biology.ecology.ecosystems'] },
+        { id: 'cbse.sci.5.ch7', order: 7, title: 'Energy — How Things Work', kgNodeIds: ['physics.work_energy.basics'] },
+        { id: 'cbse.sci.5.ch8', order: 8, title: 'Clothes — How Things are Made', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
+        { id: 'cbse.sci.5.ch9', order: 9, title: 'Rhythms of Nature', kgNodeIds: ['biology.ecology.ecosystems'] },
+        { id: 'cbse.sci.5.ch10', order: 10, title: 'Earth — Our Shared Home', kgNodeIds: ['environmental_science.conservation.biodiversity'] },
       ],
     },
+    // ─── Grade 6 — Curiosity (NCF-2023, 2024 edition, 12 chapters) ──────────
+    // Source: ncert.nic.in/textbook/pdf/fecu1ps.pdf (Reprint 2026-27)
+    // Cross-ref: learncbse.in, tiwariacademy.com (verified June 2026)
+    // Replaces: 16 old rationalized NCERT chapters
     {
       grade: 6,
       chapters: [
-        { id: 'cbse.sci.6.ch1', order: 1, title: 'Food — Where Does It Come From?', kgNodeIds: ['biology.plant_physiology.nutrition'] },
-        { id: 'cbse.sci.6.ch2', order: 2, title: 'Components of Food', kgNodeIds: ['biology.animal_physiology.digestion'] },
-        { id: 'cbse.sci.6.ch3', order: 3, title: 'Fibre to Fabric', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
-        { id: 'cbse.sci.6.ch4', order: 4, title: 'Sorting Materials into Groups', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
-        { id: 'cbse.sci.6.ch5', order: 5, title: 'Separation of Substances', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
-        { id: 'cbse.sci.6.ch6', order: 6, title: 'Changes Around Us', kgNodeIds: ['chemistry.chemical_reactions.equations'] },
-        { id: 'cbse.sci.6.ch7', order: 7, title: 'Getting to Know Plants', kgNodeIds: ['biology.plant_physiology.nutrition'] },
-        { id: 'cbse.sci.6.ch8', order: 8, title: 'Body Movements', kgNodeIds: ['biology.animal_physiology.locomotion'] },
-        { id: 'cbse.sci.6.ch9', order: 9, title: 'The Living Organisms and Their Surroundings', kgNodeIds: ['biology.cell.structure'] },
-        { id: 'cbse.sci.6.ch10', order: 10, title: 'Motion and Measurement of Distances', kgNodeIds: ['physics.kinematics.motion_1d'] },
-        { id: 'cbse.sci.6.ch11', order: 11, title: 'Light, Shadows and Reflections', kgNodeIds: ['physics.optics.reflection_refraction'] },
-        { id: 'cbse.sci.6.ch12', order: 12, title: 'Electricity and Circuits', kgNodeIds: ['physics.electricity.current_circuits'] },
-        { id: 'cbse.sci.6.ch13', order: 13, title: 'Fun with Magnets', kgNodeIds: ['physics.magnetism.permanent'] },
-        { id: 'cbse.sci.6.ch14', order: 14, title: 'Water', kgNodeIds: ['environmental_science.natural_resources.management'] },
-        { id: 'cbse.sci.6.ch15', order: 15, title: 'Air Around Us', kgNodeIds: ['earth_science.climate_weather.atmosphere'] },
-        { id: 'cbse.sci.6.ch16', order: 16, title: 'Garbage In, Garbage Out', kgNodeIds: ['environmental_science.pollution.types'] },
+        { id: 'cbse.sci.6.ch1', order: 1, title: 'The Wonderful World of Science', kgNodeIds: ['physics.measurement.units'] },
+        { id: 'cbse.sci.6.ch2', order: 2, title: 'Diversity in the Living World', kgNodeIds: ['biology.taxonomy.classification'] },
+        { id: 'cbse.sci.6.ch3', order: 3, title: 'Mindful Eating: A Path to a Healthy Body', kgNodeIds: ['biology.animal_physiology.digestion'] },
+        { id: 'cbse.sci.6.ch4', order: 4, title: 'Exploring Magnets', kgNodeIds: ['physics.magnetism.permanent'] },
+        { id: 'cbse.sci.6.ch5', order: 5, title: 'Measurement of Length and Motion', kgNodeIds: ['physics.kinematics.motion_1d'] },
+        { id: 'cbse.sci.6.ch6', order: 6, title: 'Materials Around Us', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
+        { id: 'cbse.sci.6.ch7', order: 7, title: 'Temperature and its Measurement', kgNodeIds: ['physics.thermodynamics.heat_temperature'] },
+        { id: 'cbse.sci.6.ch8', order: 8, title: 'A Journey through States of Water', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
+        { id: 'cbse.sci.6.ch9', order: 9, title: 'Methods of Separation in Everyday Life', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
+        { id: 'cbse.sci.6.ch10', order: 10, title: 'Living Creatures: Exploring their Characteristics', kgNodeIds: ['biology.cell.structure'] },
+        { id: 'cbse.sci.6.ch11', order: 11, title: "Nature's Treasures", kgNodeIds: ['environmental_science.natural_resources.management'] },
+        { id: 'cbse.sci.6.ch12', order: 12, title: 'Beyond Earth', kgNodeIds: ['earth_science.solar_system.planets'] },
       ],
     },
+    // ─── Grade 7 — Curiosity (NCF-2023, 2025 edition, 12 chapters) ──────────
+    // Source: ncert.nic.in/textbook/pdf/gecu1ps.pdf (Reprint 2026-27)
+    // Cross-ref: tiwariacademy.com chapter pages (verified June 2026)
+    // Replaces: 13 old rationalized NCERT chapters
     {
       grade: 7,
       chapters: [
-        { id: 'cbse.sci.7.ch1', order: 1, title: 'Nutrition in Plants', kgNodeIds: ['biology.plant_physiology.nutrition'] },
-        { id: 'cbse.sci.7.ch2', order: 2, title: 'Nutrition in Animals', kgNodeIds: ['biology.animal_physiology.digestion'] },
-        { id: 'cbse.sci.7.ch3', order: 3, title: 'Heat', kgNodeIds: ['physics.thermodynamics.heat_temperature'] },
-        { id: 'cbse.sci.7.ch4', order: 4, title: 'Acids, Bases and Salts', kgNodeIds: ['chemistry.acids_bases_salts.basics'] },
-        { id: 'cbse.sci.7.ch5', order: 5, title: 'Physical and Chemical Changes', kgNodeIds: ['chemistry.chemical_reactions.equations'] },
-        { id: 'cbse.sci.7.ch6', order: 6, title: 'Respiration in Organisms', kgNodeIds: ['biology.animal_physiology.respiration'] },
-        { id: 'cbse.sci.7.ch7', order: 7, title: 'Transportation in Animals and Plants', kgNodeIds: ['biology.plant_physiology.transport', 'biology.animal_physiology.circulation'] },
-        { id: 'cbse.sci.7.ch8', order: 8, title: 'Reproduction in Plants', kgNodeIds: ['biology.reproduction.plants_animals'] },
-        { id: 'cbse.sci.7.ch9', order: 9, title: 'Motion and Time', kgNodeIds: ['physics.kinematics.motion_1d'] },
-        { id: 'cbse.sci.7.ch10', order: 10, title: 'Electric Current and Its Effects', kgNodeIds: ['physics.electricity.current_circuits'] },
-        { id: 'cbse.sci.7.ch11', order: 11, title: 'Light', kgNodeIds: ['physics.optics.reflection_refraction'] },
-        { id: 'cbse.sci.7.ch12', order: 12, title: 'Forests — Our Lifeline', kgNodeIds: ['biology.ecology.ecosystems'] },
-        { id: 'cbse.sci.7.ch13', order: 13, title: 'Wastewater Story', kgNodeIds: ['environmental_science.pollution.types'] },
-        // Rationalization (Class 7): Fibre to Fabric, Weather/Climate and
-        // Adaptations, Winds Storms and Cyclones, Soil, and Water — A
-        // Precious Resource removed/merged by CBSE.
+        { id: 'cbse.sci.7.ch1', order: 1, title: 'The Ever-Evolving World of Science', kgNodeIds: ['physics.measurement.units'] },
+        { id: 'cbse.sci.7.ch2', order: 2, title: 'Exploring Substances: Acidic, Basic and Neutral', kgNodeIds: ['chemistry.acids_bases_salts.basics'] },
+        { id: 'cbse.sci.7.ch3', order: 3, title: 'Electricity: Circuits and their Components', kgNodeIds: ['physics.electricity.current_circuits'] },
+        { id: 'cbse.sci.7.ch4', order: 4, title: 'The World of Metals and Non-metals', kgNodeIds: ['chemistry.metals_nonmetals.reactivity'] },
+        { id: 'cbse.sci.7.ch5', order: 5, title: 'Changes Around Us: Physical and Chemical', kgNodeIds: ['chemistry.chemical_reactions.equations'] },
+        { id: 'cbse.sci.7.ch6', order: 6, title: 'Adolescence: A Stage of Growth and Change', kgNodeIds: ['biology.animal_physiology.nervous_endocrine'] },
+        { id: 'cbse.sci.7.ch7', order: 7, title: 'Heat Transfer in Nature', kgNodeIds: ['physics.thermodynamics.heat_temperature'] },
+        { id: 'cbse.sci.7.ch8', order: 8, title: 'Measurement of Time and Motion', kgNodeIds: ['physics.kinematics.motion_1d'] },
+        { id: 'cbse.sci.7.ch9', order: 9, title: 'Life Processes in Animals', kgNodeIds: ['biology.animal_physiology.digestion'] },
+        { id: 'cbse.sci.7.ch10', order: 10, title: 'Life Processes in Plants', kgNodeIds: ['biology.plant_physiology.nutrition'] },
+        { id: 'cbse.sci.7.ch11', order: 11, title: 'Light: Shadows and Reflections', kgNodeIds: ['physics.optics.reflection_refraction'] },
+        { id: 'cbse.sci.7.ch12', order: 12, title: 'Earth, Moon, and the Sun', kgNodeIds: ['earth_science.solar_system.planets'] },
       ],
     },
+    // ─── Grade 8 — Curiosity (NCF-2023, 2026 edition, 13 chapters) ──────────
+    // Source: ncert.nic.in/textbook/pdf/hecu1ps.pdf (Reprint 2026-27)
+    // Cross-ref: tiwariacademy.com curiosity-chapter-* pages (verified June 2026)
+    // Replaces: 13 old rationalized NCERT chapters (entirely different content)
     {
       grade: 8,
       chapters: [
-        { id: 'cbse.sci.8.ch1', order: 1, title: 'Crop Production and Management', kgNodeIds: ['biology.plant_physiology.nutrition'] },
-        { id: 'cbse.sci.8.ch2', order: 2, title: 'Microorganisms — Friends and Foe', kgNodeIds: ['biology.taxonomy.classification'] },
-        { id: 'cbse.sci.8.ch3', order: 3, title: 'Coal and Petroleum', kgNodeIds: ['chemistry.organic_chemistry.basics'] },
-        { id: 'cbse.sci.8.ch4', order: 4, title: 'Combustion and Flame', kgNodeIds: ['chemistry.chemical_reactions.equations'] },
-        { id: 'cbse.sci.8.ch5', order: 5, title: 'Conservation of Plants and Animals', kgNodeIds: ['environmental_science.conservation.biodiversity'] },
-        { id: 'cbse.sci.8.ch6', order: 6, title: 'Reproduction in Animals', kgNodeIds: ['biology.reproduction.plants_animals'] },
-        { id: 'cbse.sci.8.ch7', order: 7, title: 'Reaching the Age of Adolescence', kgNodeIds: ['biology.animal_physiology.nervous_endocrine'] },
-        { id: 'cbse.sci.8.ch8', order: 8, title: 'Force and Pressure', kgNodeIds: ['physics.forces.laws_of_motion'] },
-        { id: 'cbse.sci.8.ch9', order: 9, title: 'Friction', kgNodeIds: ['physics.forces.friction_circular'] },
-        { id: 'cbse.sci.8.ch10', order: 10, title: 'Sound', kgNodeIds: ['physics.waves_oscillations.waves'] },
-        { id: 'cbse.sci.8.ch11', order: 11, title: 'Chemical Effects of Electric Current', kgNodeIds: ['chemistry.electrochemistry.basics'] },
-        { id: 'cbse.sci.8.ch12', order: 12, title: 'Some Natural Phenomena', kgNodeIds: ['earth_science.earth_structure.layers'] },
-        { id: 'cbse.sci.8.ch13', order: 13, title: 'Light', kgNodeIds: ['physics.optics.reflection_refraction'] },
-        // Rationalization (Class 8): Synthetic Fibres and Plastics, Materials
-        // — Metals and Non-metals, Cell — Structure and Functions, Stars and
-        // the Solar System, and Pollution of Air and Water removed/merged by CBSE.
+        { id: 'cbse.sci.8.ch1', order: 1, title: 'Exploring the Investigative World of Science', kgNodeIds: ['physics.measurement.units'] },
+        { id: 'cbse.sci.8.ch2', order: 2, title: 'The Invisible Living World: Beyond Our Naked Eye', kgNodeIds: ['biology.taxonomy.classification'] },
+        { id: 'cbse.sci.8.ch3', order: 3, title: 'Health: The Ultimate Treasure', kgNodeIds: ['biology.reproduction.human_health'] },
+        { id: 'cbse.sci.8.ch4', order: 4, title: 'Electricity: Magnetic and Heating Effects', kgNodeIds: ['physics.electricity.current_circuits', 'physics.magnetism.permanent'] },
+        { id: 'cbse.sci.8.ch5', order: 5, title: 'Exploring Forces', kgNodeIds: ['physics.forces.laws_of_motion'] },
+        { id: 'cbse.sci.8.ch6', order: 6, title: 'Pressure, Winds, Storms and Cyclones', kgNodeIds: ['physics.mechanical_properties.solids_fluids', 'earth_science.climate_weather.atmosphere'] },
+        { id: 'cbse.sci.8.ch7', order: 7, title: 'Particulate Nature of Matter', kgNodeIds: ['chemistry.atomic_structure.basics'] },
+        { id: 'cbse.sci.8.ch8', order: 8, title: 'Nature of Matter: Elements, Compounds and Mixtures', kgNodeIds: ['chemistry.matter_mixtures.matter'] },
+        { id: 'cbse.sci.8.ch9', order: 9, title: 'The Amazing World of Solutes, Solvents and Solutions', kgNodeIds: ['chemistry.matter_mixtures.solutions'] },
+        { id: 'cbse.sci.8.ch10', order: 10, title: 'Light: Mirrors and Lenses', kgNodeIds: ['physics.optics.reflection_refraction'] },
+        { id: 'cbse.sci.8.ch11', order: 11, title: 'Keeping Time with the Skies', kgNodeIds: ['earth_science.solar_system.planets'] },
+        { id: 'cbse.sci.8.ch12', order: 12, title: 'How Nature Works in Harmony', kgNodeIds: ['biology.ecology.ecosystems'] },
+        { id: 'cbse.sci.8.ch13', order: 13, title: 'Our Home: Earth, a Unique Life Sustaining Planet', kgNodeIds: ['environmental_science.conservation.biodiversity'] },
       ],
     },
     {
