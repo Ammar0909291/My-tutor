@@ -7,6 +7,9 @@ const schema = z.object({
   voiceId: z.string().optional(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
   country: z.enum(['ru', 'in', 'global']).optional(),
+  voiceSpeed: z.union([
+    z.literal(0.75), z.literal(0.9), z.literal(1.0), z.literal(1.1), z.literal(1.25), z.literal(1.5),
+  ]).optional(),
 })
 
 export async function GET() {
@@ -21,6 +24,7 @@ export async function GET() {
       voiceId: profile?.voiceId ?? 'male',
       teachingLanguage: profile?.teachingLanguage ?? 'en',
       country: (profile as any)?.country ?? 'global',
+      voiceSpeed: profile?.voiceSpeed ?? 1.0,
     },
   })
 }
@@ -31,12 +35,13 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { voiceId, teachingLanguage, country } = schema.parse(body)
+    const { voiceId, teachingLanguage, country, voiceSpeed } = schema.parse(body)
 
-    const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi'; country?: string } = {}
+    const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi'; country?: string; voiceSpeed?: number } = {}
     if (voiceId !== undefined) data.voiceId = voiceId
     if (teachingLanguage !== undefined) data.teachingLanguage = teachingLanguage
     if (country !== undefined) data.country = country
+    if (voiceSpeed !== undefined) data.voiceSpeed = voiceSpeed
 
     if (Object.keys(data).length === 0) return NextResponse.json({ success: true })
 
@@ -51,6 +56,7 @@ export async function PATCH(req: Request) {
         voiceId: data.voiceId ?? 'male',
         teachingLanguage: data.teachingLanguage ?? 'en',
         country: data.country ?? 'global',
+        voiceSpeed: data.voiceSpeed ?? 1.0,
       },
     })
     return NextResponse.json({ success: true })

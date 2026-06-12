@@ -182,6 +182,7 @@ type PromotionResult = {
 interface Props {
   subjectSlug: string; subjectName: string; levelDescription: string; voiceChoice: string
   teachingLanguage?: TeachingLang
+  voiceSpeed?: number
   memoryContext?: string | null; pastSessionsSummary?: string | null
   subjects?: {slug:string;name:string}[]; displayName?: string; userId?: string
   resumeLessonTitle?: string; resumeUnitTitle?: string
@@ -231,7 +232,7 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId }: Props) {
   const { t, lang: uiLang } = useLanguage()
   const { country } = useCountry()
   const { theme } = useTheme()
@@ -420,8 +421,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     speakingIdRef.current = id; setSpeakingId(id)
     speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    }, country)
-  }, [teachingLanguage, voiceType, country])
+    }, country, voiceSpeed)
+  }, [teachingLanguage, voiceType, country, voiceSpeed])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     setVoiceType(v)
     if (speakingIdRef.current) {

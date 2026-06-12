@@ -211,6 +211,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       levelDescription={profile.selfDescription}
       voiceChoice={profile.voiceId ?? 'alexei'}
       teachingLanguage={teachingLang}
+      voiceSpeed={profile.voiceSpeed ?? 1.0}
       memoryContext={memoryContext}
       pastSessionsSummary={pastSessionsSummary}
       subjects={subjects}

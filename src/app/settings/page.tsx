@@ -22,6 +22,8 @@ const VOICE_OPTIONS: VoiceOption[] = [
   { key: 'warm',   label: 'Warm' },
 ]
 
+const VOICE_SPEED_OPTIONS = [0.75, 0.9, 1.0, 1.1, 1.25, 1.5]
+
 const LANG_OPTIONS: LangOption[] = [
   { key: 'ru', icon: '🇷🇺', label: 'Russian' },
   { key: 'en', icon: '🇬🇧', label: 'English' },
@@ -31,6 +33,7 @@ const LANG_OPTIONS: LangOption[] = [
 interface SettingsData {
   voiceId: string
   teachingLanguage: TeachingLang
+  voiceSpeed: number
 }
 
 interface ProfileData {
@@ -58,6 +61,7 @@ export default function SettingsPage() {
   const { country, setCountry } = useCountry()
   const [data, setData] = useState<SettingsData | null>(null)
   const [voiceId, setVoiceId] = useState('male')
+  const [voiceSpeed, setVoiceSpeed] = useState(1.0)
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
 
@@ -103,6 +107,7 @@ export default function SettingsPage() {
           setData(d.data)
           setVoiceId(d.data.voiceId)
           setTeachingLang(d.data.teachingLanguage)
+          setVoiceSpeed(d.data.voiceSpeed)
         }
       })
       .catch(() => {})
@@ -140,7 +145,7 @@ export default function SettingsPage() {
       const res = await fetch('/api/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ voiceId, teachingLanguage }),
+        body: JSON.stringify({ voiceId, teachingLanguage, voiceSpeed }),
       })
       const d = await res.json() as { success?: boolean }
       if (d.success) {
@@ -151,6 +156,7 @@ export default function SettingsPage() {
           setData(fresh.data)
           setVoiceId(fresh.data.voiceId)
           setTeachingLang(fresh.data.teachingLanguage)
+          setVoiceSpeed(fresh.data.voiceSpeed)
         }
         setTimeout(() => setSaveState('idle'), 2000)
       } else {
@@ -406,6 +412,23 @@ export default function SettingsPage() {
                   color: voiceId === v.key ? 'var(--accent-primary)' : 'var(--text-secondary)',
                 }}>
                 {v.label}
+              </button>
+            ))}
+          </div>
+        </Section>
+
+        {/* Voice speed */}
+        <Section label={t('settings_voice_speed')}>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+            {VOICE_SPEED_OPTIONS.map((s) => (
+              <button key={s} onClick={() => setVoiceSpeed(s)}
+                className="py-3 rounded-xl text-sm font-semibold transition-all"
+                style={{
+                  background: voiceSpeed === s ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                  border: `1px solid ${voiceSpeed === s ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                  color: voiceSpeed === s ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                }}>
+                {s}x
               </button>
             ))}
           </div>
