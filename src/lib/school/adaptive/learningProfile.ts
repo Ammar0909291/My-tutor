@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/db/prisma'
+import { getCheckpointPassRate } from '@/lib/school/checkpoints/checkpointStats'
 
 /**
  * Student Learning Profile (Sprint BR) — deterministic, no AI, no new tables.
@@ -7,6 +8,9 @@ import { prisma } from '@/lib/db/prisma'
  *   guided   — frequent mistakes or failed assessments
  *   standard — average
  *   advanced — high mastery rate + strong assessment performance
+ *
+ * Sprint BS: also folds in the in-session understanding-checkpoint pass rate
+ * (>80% = strong signal, <50% = struggling signal).
  */
 
 export type DifficultyMode = 'guided' | 'standard' | 'advanced'
@@ -28,7 +32,7 @@ export async function buildLearningProfile(
 ): Promise<StudentLearningProfile> {
   const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000)
 
-  const [topicProgressRows, assessmentRows, mistakeRows] = await Promise.all([
+  const [topicProgressRows, assessmentRows, mistakeRows, checkpointStats] = await Promise.all([
     prisma.topicProgress.findMany({
       where: { userId },
       select: { topicSlug: true, status: true, masteryPct: true },
@@ -41,6 +45,7 @@ export async function buildLearningProfile(
       where: { userId, createdAt: { gte: since } },
       select: { topicSlug: true },
     }).catch(() => [] as { topicSlug: string }[]),
+    getCheckpointPassRate(userId),
   ])
 
   const masteredTopics = topicProgressRows
@@ -81,12 +86,17 @@ export async function buildLearningProfile(
   const highMistakeRate = mistakeRows.length > 10
   const frequentFailures = passRate !== null && passRate < 0.5
 
+  // Sprint BS: in-session checkpoint pass rate — >80% strong, <50% struggling.
+  const checkpointStruggling = checkpointStats.passRate !== null && checkpointStats.passRate < 50
+  const checkpointStrong = checkpointStats.passRate !== null && checkpointStats.passRate >= 80
+
   let preferredDifficulty: DifficultyMode = 'standard'
-  if (highMistakeRate || frequentFailures) {
+  if (highMistakeRate || frequentFailures || checkpointStruggling) {
     preferredDifficulty = 'guided'
   } else if (
     (passRate !== null && passRate >= 0.8) ||
-    (masteryRate !== null && masteryRate >= 0.6)
+    (masteryRate !== null && masteryRate >= 0.6) ||
+    checkpointStrong
   ) {
     preferredDifficulty = 'advanced'
   }
@@ -147,4 +157,15 @@ export function chapterDifficultyBadge(
   if (score <= 2) return { label: 'Easy', color: 'var(--green)', bg: 'var(--green-muted)' }
   if (score <= 5) return { label: 'Moderate', color: 'var(--yellow)', bg: 'var(--yellow-muted)' }
   return { label: 'Advanced', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+}
+
+/**
+ * Sprint BS: how often the tutor should weave in understanding checkpoints,
+ * based on the student's coaching mode — guided students get more frequent
+ * checks, advanced students get fewer.
+ */
+export function checkpointFrequencyForMode(mode: DifficultyMode): 'frequent' | 'normal' | 'reduced' {
+  if (mode === 'guided') return 'frequent'
+  if (mode === 'advanced') return 'reduced'
+  return 'normal'
 }

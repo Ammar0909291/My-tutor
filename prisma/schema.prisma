@@ -92,6 +92,7 @@ model User {
   evidenceRecords         EvidenceRecord[]
   practiceSessions        PracticeSession[]
   mistakeRecords          MistakeRecord[]
+  learningCheckpoints     LearningCheckpoint[]
 
   @@map("users")
 }
@@ -418,6 +419,31 @@ model MistakeRecord {
   @@index([userId, subjectSlug, topicSlug])
   @@index([userId, subjectSlug, category])
   @@map("mistake_records")
+}
+
+// Sprint BS: lightweight in-session understanding checks — micro-checkpoints
+// the tutor asks while teaching, evaluated by a lightweight AI classifier.
+// Not part of the Practice/Assessment systems.
+model LearningCheckpoint {
+  id          String   @id @default(cuid())
+  userId      String
+  board       String
+  grade       Int
+  subjectSlug String
+  chapterId   String
+  kgNodeId    String?
+  question    String
+  answer      String
+  userResponse String
+  passed      Boolean
+  hintUsed    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, subjectSlug, chapterId])
+  @@index([userId, subjectSlug, createdAt])
+  @@map("learning_checkpoints")
 }
 
 // ─── Learning Path (Claude-generated curriculum) ─────────────────────────────

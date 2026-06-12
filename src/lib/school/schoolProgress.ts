@@ -107,6 +107,8 @@ export interface ChapterProgressDetails {
   assessmentPassed: boolean
   assessmentScore: number | null
   assessmentAttempts: number
+  // Sprint BS: blended in-session understanding signal (checkpoints + practice + assessment)
+  understandingPercent: number | null
 }
 
 /**
@@ -126,6 +128,7 @@ export async function getChapterProgressDetails(
     questionsAttempted: 0, accuracyPercent: null,
     practiceStatus: 'not_started', lastPracticeScore: null,
     assessmentPassed: false, assessmentScore: null, assessmentAttempts: 0,
+    understandingPercent: null,
   }
   if (nodeIds.length === 0) return empty
 
@@ -177,6 +180,12 @@ export async function getChapterProgressDetails(
   const assessmentScore = assessmentSessions.find((s) => typeof s.score === 'number')?.score ?? null
   const assessmentPassed = assessmentSessions.some((s) => typeof s.score === 'number' && s.score >= 70)
 
+  // Sprint BS: blend checkpoint pass rate with practice + assessment signals
+  const { getUnderstandingLevel } = await import('@/lib/school/checkpoints/checkpointStats')
+  const understandingPercent = await getUnderstandingLevel(
+    userId, subjectSlug, chapter.id, practiceStatus, assessmentScore, assessmentAttempts,
+  ).catch(() => null)
+
   return {
     completed,
     practiceMasteredCount,
@@ -188,5 +197,6 @@ export async function getChapterProgressDetails(
     assessmentPassed,
     assessmentScore,
     assessmentAttempts,
+    understandingPercent,
   }
 }

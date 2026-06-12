@@ -93,6 +93,12 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   // Sprint BR: difficulty badge derived from KG node count + grade
   const diffBadge = chapterDifficultyBadge(chapter.kgNodeIds.length, grade)
 
+  // Sprint BS: understanding level color by band
+  const understandingColor = details.understandingPercent === null ? 'var(--text-dim)'
+    : details.understandingPercent >= 80 ? 'var(--green)'
+    : details.understandingPercent >= 50 ? 'var(--yellow)'
+    : 'var(--coral)'
+
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
       <nav className="sticky top-0 z-50"
@@ -248,6 +254,20 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
           />
           <StatCard label="Practice accuracy" value={details.accuracyPercent !== null ? `${details.accuracyPercent}%` : '—'} />
         </section>
+
+        {/* Sprint BS: Understanding Level — blended in-session signal */}
+        {details.understandingPercent !== null && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <div className="flex items-baseline justify-between mb-2">
+              <h2 className="font-bold text-xs uppercase tracking-wide" style={{ color: 'var(--text-secondary)' }}>Understanding Level</h2>
+              <span className="text-sm font-black font-mono" style={{ color: understandingColor }}>{details.understandingPercent}%</span>
+            </div>
+            <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
+              <div className="h-full rounded-full" style={{ width: `${details.understandingPercent}%`, background: understandingColor, transition: 'width .5s' }} />
+            </div>
+            <p className="text-xs mt-2" style={{ color: 'var(--text-secondary)' }}>Based on understanding checks, practice, and assessments.</p>
+          </section>
+        )}
 
         {/* Phase 6: Next chapter recommendation (when assessment passed) */}
         {details.assessmentPassed && nextChapter && (

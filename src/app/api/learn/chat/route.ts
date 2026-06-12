@@ -252,6 +252,14 @@ export async function POST(req: Request) {
       // can be passed to buildGuidedTeachingPrompt below.
       let guidedWeakTopicTitles: string[] = []
       let guidedChapterObjectives: string[] = []
+      // Sprint BS: chapter KG nodes (for checkpoint node matching), checkpoint
+      // frequency for this learner's coaching mode, and retry/recovery flags
+      // derived from evaluating the previous turn's understanding check.
+      let chapterKgNodes: { id: string; title: string }[] = []
+      let checkpointFrequency: 'frequent' | 'normal' | 'reduced' = 'normal'
+      let pendingCheckpointRetry = false
+      let checkpointFailedAgain = false
+      let learnerProf: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
 
       try {
         const { buildSchoolTutorContext, getNodesForChapter } = await import('@/lib/education')
@@ -264,10 +272,48 @@ export async function POST(req: Request) {
         const fullChapterForObj = _getChapters(schoolCtx.board, subjectCode, schoolCtx.grade)
           .find((c) => c.id === schoolCtx!.chapter.id)
         if (fullChapterForObj) {
-          guidedChapterObjectives = getNodesForChapter(fullChapterForObj).map((n) => n.title)
+          const nodes = getNodesForChapter(fullChapterForObj)
+          guidedChapterObjectives = nodes.map((n) => n.title)
+          chapterKgNodes = nodes.map((n) => ({ id: n.id, title: n.title }))
         }
       } catch (err) {
         console.warn('[learn/chat] school curriculum context skipped:', err)
+      }
+
+      // Sprint BS: in-session understanding-check evaluation. A lightweight AI
+      // classifier looks at the previous tutor turn + this student reply to
+      // detect a conversational checkpoint question and evaluate the answer,
+      // records the result, and derives this turn's checkpoint frequency
+      // (from the learner's coaching mode) and retry/recovery flags for the
+      // guided teaching prompt below. Writes only to LearningCheckpoint —
+      // never touches Practice/Assessment/TopicProgress/MistakeRecord.
+      try {
+        const { buildLearningProfile, checkpointFrequencyForMode } = await import('@/lib/school/adaptive/learningProfile')
+        learnerProf = await buildLearningProfile(userId, schoolCtx.grade)
+        checkpointFrequency = checkpointFrequencyForMode(learnerProf.preferredDifficulty)
+
+        const prevMsg = learnSession.messages[0]
+        if (prevMsg?.role === MessageRole.ASSISTANT) {
+          const { evaluateCheckpointTurn } = await import('@/lib/school/checkpoints/evaluateCheckpoint')
+          const { recordCheckpoint, getPendingRetry } = await import('@/lib/school/checkpoints/checkpointStats')
+          const checkpointEval = await evaluateCheckpointTurn(prevMsg.content, message, chapterKgNodes)
+          if (checkpointEval?.checkpointAsked && checkpointEval.question && checkpointEval.expectedAnswer) {
+            const pending = await getPendingRetry(userId, subjectCode, schoolCtx.chapter.id)
+            const hintUsed = pending !== null
+            await recordCheckpoint({
+              userId, board: schoolCtx.board, grade: schoolCtx.grade, subjectSlug: subjectCode,
+              chapterId: schoolCtx.chapter.id, kgNodeId: checkpointEval.nodeId,
+              question: checkpointEval.question, answer: checkpointEval.expectedAnswer,
+              userResponse: message, passed: checkpointEval.passed, hintUsed,
+            })
+            if (!checkpointEval.passed) {
+              if (hintUsed) checkpointFailedAgain = true
+              else pendingCheckpointRetry = true
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] checkpoint evaluation skipped:', err)
       }
 
       // Sprint BO/BP: compact student status — weak topics + recommended next
@@ -324,6 +370,9 @@ export async function POST(req: Request) {
           subjectSlug: subjectCode,
           weakTopicTitles: guidedWeakTopicTitles,
           chapterObjectives: guidedChapterObjectives,
+          checkpointFrequency,
+          pendingCheckpointRetry,
+          checkpointFailedAgain,
         })
       } catch (err) {
         console.warn('[learn/chat] guided teaching prompt skipped:', err)
@@ -333,7 +382,7 @@ export async function POST(req: Request) {
       // smart questioning, phase 4 weak-node recovery, phase 3 explanation depth.
       try {
         const { buildLearningProfile, formatLearningProfileContext } = await import('@/lib/school/adaptive/learningProfile')
-        const learnerProf = await buildLearningProfile(userId, schoolCtx.grade)
+        learnerProf = learnerProf ?? await buildLearningProfile(userId, schoolCtx.grade)
         systemPrompt += formatLearningProfileContext(learnerProf)
 
         // Phase 4: if this chapter has weak nodes, add recovery instruction

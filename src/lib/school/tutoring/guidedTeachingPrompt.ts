@@ -22,6 +22,12 @@ export interface GuidedTeachingOptions {
   weakTopicTitles: string[]
   /** Chapter objective bullet points from the curriculum context, if available */
   chapterObjectives?: string[]
+  /** Sprint BS: how often to weave in understanding checkpoints, by coaching mode */
+  checkpointFrequency?: 'frequent' | 'normal' | 'reduced'
+  /** Sprint BS: the student's last checkpoint answer was incorrect — give a hint and retry once */
+  pendingCheckpointRetry?: boolean
+  /** Sprint BS: the student failed the checkpoint again after a hint — note as weak, continue */
+  checkpointFailedAgain?: boolean
 }
 
 const EXAMPLE_FIRST_SUBJECTS = new Set(['mathematics', 'science', 'economics'])
@@ -56,9 +62,24 @@ function gradeDepthBlock(grade: number): string {
 - Challenge the student to reason independently; don't just provide answers.`
 }
 
-function understandingCheckBlock(): string {
-  return `UNDERSTANDING CHECKS — MANDATORY RULE:
-After any response that contains a substantial explanation (roughly 120+ words, or introduces a new concept), end with ONE short, conversational question that checks whether the student understood the key idea.
+/**
+ * Sprint BS — in-session understanding checks. `frequency` adapts how often
+ * checks are asked based on the student's coaching mode; `pendingRetry` and
+ * `failedAgain` drive the retry/recovery flow after a checkpoint evaluation.
+ */
+function understandingCheckBlock(
+  frequency: 'frequent' | 'normal' | 'reduced',
+  pendingRetry: boolean,
+  failedAgain: boolean,
+): string {
+  const freqInstruction = frequency === 'frequent'
+    ? 'After EVERY explanation of a new idea (even a short one, ~80+ words), end with ONE short understanding-check question. This student benefits from frequent, gentle checks.'
+    : frequency === 'reduced'
+    ? "After a substantial explanation (roughly 150+ words, or a meaningfully new concept), end with ONE short understanding-check question. Don't check after every small step — this student usually grasps things quickly."
+    : 'After any response that contains a substantial explanation (roughly 120+ words, or introduces a new concept), end with ONE short, conversational question that checks whether the student understood the key idea.'
+
+  const lines = [`UNDERSTANDING CHECKS — MANDATORY RULE:
+${freqInstruction}
 - Never ask more than one check question per response.
 - Never create a quiz or a numbered list of questions.
 - Never ask a check question if your response is already a question.
@@ -68,7 +89,24 @@ After any response that contains a substantial explanation (roughly 120+ words, 
   Math: "So why do you think multiplying both sides by the same number keeps the equation balanced?"
   Science: "What do you think would happen to the current if we doubled the resistance?"
   Social Science: "Why do you think people's participation in elections matters for democracy?"
-  English: "What emotion do you think the poet is trying to create with those words?"`
+  English: "What emotion do you think the poet is trying to create with those words?"`]
+
+  if (failedAgain) {
+    lines.push(`UNDERSTANDING CHECK — STILL NOT QUITE THERE:
+The student's last two attempts at your understanding-check question (including after a hint) weren't quite right.
+- Do NOT ask that same check again right now.
+- Warmly and briefly acknowledge it needs a bit more practice (e.g. "No worries, this one takes a little more practice — let's keep going and we'll circle back to it.").
+- Continue the lesson at a slightly gentler pace. If a natural opportunity comes up later, weave in one small extra example for this concept.`)
+  } else if (pendingRetry) {
+    lines.push(`UNDERSTANDING CHECK — RETRY AFTER A MISSED ANSWER:
+The student's answer to your last understanding-check question wasn't quite right.
+- Do NOT say "that's wrong" bluntly, and do NOT just repeat the exact same question.
+- Briefly re-explain the key idea from a slightly different angle, or give a small hint pointing toward the answer.
+- Then ask essentially the same question again, rephrased, in a warm and encouraging tone — this is the one retry.
+- Keep it short and natural, like a continuation of the conversation, not a do-over.`)
+  }
+
+  return lines.join('\n\n')
 }
 
 function recoveryBlock(): string {
@@ -136,7 +174,11 @@ export function buildGuidedTeachingPrompt(opts: GuidedTeachingOptions): string {
   const blocks: string[] = []
 
   blocks.push(gradeDepthBlock(opts.grade))
-  blocks.push(understandingCheckBlock())
+  blocks.push(understandingCheckBlock(
+    opts.checkpointFrequency ?? 'normal',
+    opts.pendingCheckpointRetry ?? false,
+    opts.checkpointFailedAgain ?? false,
+  ))
   blocks.push(recoveryBlock())
 
   const weakBlock = weakTopicReinforcementBlock(opts.weakTopicTitles)
