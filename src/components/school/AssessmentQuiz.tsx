@@ -17,11 +17,13 @@ interface AssessmentQuizProps {
   subjectSlug: string
   chapterId: string
   chapterTitle: string
+  // Sprint BO: non-blocking guidance when the chapter has weak topics
+  recommendPractice?: boolean
 }
 
 type Phase = 'loading' | 'quiz' | 'submitting' | 'results'
 
-export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle }: AssessmentQuizProps) {
+export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommendPractice }: AssessmentQuizProps) {
   const [phase, setPhase] = useState<Phase>('loading')
   const [error, setError] = useState<string | null>(null)
   const [sessionId, setSessionId] = useState('')
@@ -158,6 +160,14 @@ export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle }: Assessm
             <p className="text-xs mb-6 px-4" style={{ color: 'var(--text-secondary)' }}>
               Passing this assessment completes the chapter and unlocks the next one.
             </p>
+            {recommendPractice && (
+              <div className="rounded-xl p-3 mb-6 text-left" style={{ background: 'var(--coral-muted)', border: '1px solid var(--coral)' }}>
+                <p className="text-xs font-bold mb-0.5" style={{ color: 'var(--coral)' }}>Recommended</p>
+                <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
+                  Practice this chapter before taking the assessment — you recently struggled with some of its topics.
+                </p>
+              </div>
+            )}
             <button onClick={() => setStarted(true)}
               className="w-full py-4 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-transform hover:scale-[1.02]"
               style={{ background: 'var(--coral)', boxShadow: 'var(--coral-glow)' }}>

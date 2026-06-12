@@ -257,6 +257,17 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[learn/chat] school curriculum context skipped:', err)
       }
+
+      // Sprint BO: weak-topic recovery context — additive only, max 5 nodes.
+      try {
+        const { getWeakTopicsForSubject } = await import('@/lib/school/adaptive/weakTopics')
+        const weak = (await getWeakTopicsForSubject(userId, subjectCode)).slice(0, 5)
+        if (weak.length > 0) {
+          systemPrompt += `\n\nSTUDENT WEAK AREAS (from recent practice/assessment mistakes):\nStudent recently struggled with:\n${weak.map((t) => `- ${t.title}`).join('\n')}\nWhen these topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this list explicitly.`
+        }
+      } catch (err) {
+        console.warn('[learn/chat] weak-topic context skipped:', err)
+      }
     }
 
     // Append the personalized roadmap context (if one exists) so the tutor

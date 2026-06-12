@@ -7,6 +7,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress, getChapterProgressDetails } from '@/lib/school/schoolProgress'
 import { getChapterContent } from '@/lib/school/chapterContent'
+import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -63,10 +64,15 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusLabel = completed ? 'Completed' : isCurrent ? 'In progress' : 'Not started'
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
-  const [content, details] = await Promise.all([
+  const [content, details, subjectWeakTopics] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
+    getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
   ])
+  // Sprint BO: weak KG nodes belonging to THIS chapter (max 3 shown)
+  const chapterWeakTopics = subjectWeakTopics
+    .filter((t) => chapter.kgNodeIds.includes(t.nodeId))
+    .slice(0, 3)
 
   const learnHref = `/learn?subject=${subjectSlug}&chapter=${encodeURIComponent(chapter.id)}`
   const practiceHref = `/school/${subjectSlug}/chapter/${encodeURIComponent(chapter.id)}/practice`
@@ -112,6 +118,23 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </span>
           </div>
         </header>
+
+        {/* Sprint BO: Needs Revision alert — only when this chapter has weak nodes */}
+        {chapterWeakTopics.length > 0 && (
+          <section className="rounded-2xl p-4" style={{ background: 'var(--coral-muted)', border: '1px solid var(--coral)' }}>
+            <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: 'var(--coral)' }}>Needs Revision</p>
+            <p className="text-xs mb-2" style={{ color: 'var(--text-primary)' }}>You recently struggled with:</p>
+            <ul className="space-y-1 mb-2">
+              {chapterWeakTopics.map((t) => (
+                <li key={t.nodeId} className="flex items-center gap-2 text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  <span className="w-1 h-1 rounded-full shrink-0" style={{ background: 'var(--coral)' }} />
+                  {t.title}
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Review this chapter before the assessment.</p>
+          </section>
+        )}
 
         {/* Phase 5: Chapter summary */}
         <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>

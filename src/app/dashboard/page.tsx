@@ -17,6 +17,7 @@ import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 import { SchoolDashboard, type SchoolSubjectProgress } from '@/components/dashboard/SchoolDashboard'
 import { getBoard } from '@/lib/education'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
+import { getRecommendedRevisionChapter } from '@/lib/school/adaptive/weakTopics'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -116,14 +117,10 @@ export default async function DashboardPage() {
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
-    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-    const [progressMap, recentMistakeRows, pendingAssessmentRow] = await withRetry(() => Promise.all([
+    const [progressMap, revision, pendingAssessmentRow] = await withRetry(() => Promise.all([
       getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs),
-      prisma.mistakeRecord.findMany({
-        where: { userId: session.user.id, subjectSlug: { in: schoolSlugs }, createdAt: { gte: sevenDaysAgo } },
-        select: { subjectSlug: true },
-        distinct: ['subjectSlug'],
-      }).catch(() => [] as { subjectSlug: string }[]),
+      // Sprint BO: single top revision recommendation from the weak-topic engine
+      getRecommendedRevisionChapter(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
       // Sprint BN: find the most recent incomplete assessment session to resume
       prisma.practiceSession.findFirst({
         where: { userId: session.user.id, subjectSlug: { in: schoolSlugs }, kind: 'assessment', completedAt: null },
@@ -142,7 +139,6 @@ export default async function DashboardPage() {
         lastStudiedAt: row?.lastStudiedAt ?? null,
       }
     })
-    const weakSubjectSlugs = [...new Set(recentMistakeRows.map((r) => r.subjectSlug))]
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0)
     const studiedToday = recentSessions.some((s) => s.startedAt >= startOfToday)
     // Pending assessment: resume link overrides current-chapter CTA
@@ -158,7 +154,7 @@ export default async function DashboardPage() {
         xpPoints={user.xpPoints ?? 0}
         studiedToday={studiedToday}
         subjects={subjects}
-        weakSubjectSlugs={weakSubjectSlugs}
+        revision={revision}
         pendingAssessment={pendingAssessment}
       />
     )

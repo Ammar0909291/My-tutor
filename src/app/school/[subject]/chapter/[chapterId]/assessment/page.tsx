@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle } from '@/lib/school/schoolRouting'
 import { AssessmentQuiz } from '@/components/school/AssessmentQuiz'
+import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 
 export default async function ChapterAssessmentPage({ params }: { params: { subject: string; chapterId: string } }) {
   const session = await auth()
@@ -25,11 +26,16 @@ export default async function ChapterAssessmentPage({ params }: { params: { subj
   const chapter = chapters.find((c) => c.id === params.chapterId)
   if (!chapter) redirect(`/school/${subjectSlug}`)
 
+  // Sprint BO: non-blocking guidance when this chapter has weak topics
+  const weakTopics = await getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => [])
+  const hasWeakTopics = weakTopics.some((t) => chapter.kgNodeIds.includes(t.nodeId))
+
   return (
     <AssessmentQuiz
       subjectSlug={subjectSlug}
       chapterId={chapter.id}
       chapterTitle={chapterDisplayTitle(chapter.title)}
+      recommendPractice={hasWeakTopics}
     />
   )
 }
