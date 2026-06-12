@@ -46,10 +46,26 @@ export interface SchoolDashboardProps {
   subjects: SchoolSubjectProgress[]
   // Sprint BO: single top revision recommendation; null hides the card
   revision?: { subjectSlug: string; subjectLabel: string; chapterId: string; chapterTitle: string } | null
+  // Sprint BP: next best action; null hides the card
+  nextAction?: {
+    type: 'retake_assessment' | 'practice_weak' | 'continue_chapter' | 'start_next_chapter'
+    subjectSlug: string
+    subjectLabel: string
+    chapterId: string
+    title: string
+    reason: string | null
+  } | null
   pendingAssessment?: { subjectSlug: string; chapterId: string } | null
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, pendingAssessment }: SchoolDashboardProps) {
+const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
+  retake_assessment:  { heading: 'Retake', cta: 'Retake Assessment' },
+  practice_weak:      { heading: 'Review', cta: 'Review Weak Areas' },
+  continue_chapter:   { heading: 'Continue', cta: 'Continue' },
+  start_next_chapter: { heading: 'Start', cta: 'Start Chapter' },
+}
+
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -92,6 +108,27 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
       <main className="relative z-10 max-w-3xl mx-auto px-5 py-8 space-y-6">
 
         <InstallBanner />
+
+        {/* ═══ YOUR NEXT STEP (Sprint BP) — one small card above Continue Learning ═══ */}
+        {nextAction && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <h2 className="font-bold text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--coral)' }}>⭐ Your Next Step</h2>
+            <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-dim)' }}>
+              {NEXT_ACTION_LABELS[nextAction.type]?.heading ?? 'Next'}:
+            </p>
+            <p className="font-bold text-sm mt-0.5" style={{ color: 'var(--text-primary)' }}>{nextAction.title}</p>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{nextAction.subjectLabel} · Class {grade}</p>
+            {nextAction.reason && (
+              <p className="text-xs mt-2" style={{ color: 'var(--text-secondary)' }}>{nextAction.reason}</p>
+            )}
+            <Link
+              href={`/school/${nextAction.subjectSlug}/chapter/${encodeURIComponent(nextAction.chapterId)}${nextAction.type === 'retake_assessment' ? '/assessment' : ''}`}
+              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white mt-3"
+              style={{ background: 'var(--coral)', textDecoration: 'none' }}>
+              {NEXT_ACTION_LABELS[nextAction.type]?.cta ?? 'Continue'} <ArrowRight size={13} />
+            </Link>
+          </section>
+        )}
 
         {/* ═══ SECTION 1 — CONTINUE LEARNING ═══ */}
         <section className="relative rounded-2xl overflow-hidden"

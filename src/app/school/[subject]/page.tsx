@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
+import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
 
 /**
@@ -37,6 +38,9 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
     }),
   ]))
   if (!progress) redirect('/dashboard')
+
+  // Sprint BP: compact 4-step study plan for the current chapter
+  const studyPlan = await getStudyPlan(session.user.id, board, grade, subjectSlug).catch(() => [])
 
   const pos = progress.position
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
@@ -71,6 +75,10 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
             <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
               {pos.completedCount} completed · {pos.totalCount - pos.completedCount} remaining
             </p>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+              Chapter {pos.current.order} of {pos.totalCount}
+              {pos.next ? ` · Next recommended: Chapter ${pos.next.order}` : ''}
+            </p>
           </div>
           <span className="text-lg font-black font-mono shrink-0" style={{ color: m.color }}>{pos.percent}%</span>
         </header>
@@ -102,6 +110,27 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
             </div>
           </div>
         </section>
+
+        {/* Sprint BP: study plan — max 4 simple steps, no roadmap UI */}
+        {studyPlan.length > 0 && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <h2 className="font-bold text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--text-secondary)' }}>Study plan</h2>
+            <ul className="space-y-2">
+              {studyPlan.map((step) => (
+                <li key={step.slot} className="flex items-center gap-3 text-sm">
+                  <span className="text-[10px] font-bold uppercase tracking-wider w-12 shrink-0" style={{ color: 'var(--text-dim)' }}>
+                    {step.slot}
+                  </span>
+                  <Link href={step.href} className="font-semibold flex-1 truncate"
+                    style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
+                    {step.label}
+                  </Link>
+                  <ArrowRight size={13} className="shrink-0" style={{ color: 'var(--text-dim)' }} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Previous / Next — quiet secondary cards */}
         <section className="grid sm:grid-cols-2 gap-3">

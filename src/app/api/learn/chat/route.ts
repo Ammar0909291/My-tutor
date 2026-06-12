@@ -258,15 +258,33 @@ export async function POST(req: Request) {
         console.warn('[learn/chat] school curriculum context skipped:', err)
       }
 
-      // Sprint BO: weak-topic recovery context — additive only, max 5 nodes.
+      // Sprint BO/BP: compact student status — weak topics + recommended next
+      // action, max 5 lines. Additive only.
       try {
         const { getWeakTopicsForSubject } = await import('@/lib/school/adaptive/weakTopics')
-        const weak = (await getWeakTopicsForSubject(userId, subjectCode)).slice(0, 5)
-        if (weak.length > 0) {
-          systemPrompt += `\n\nSTUDENT WEAK AREAS (from recent practice/assessment mistakes):\nStudent recently struggled with:\n${weak.map((t) => `- ${t.title}`).join('\n')}\nWhen these topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this list explicitly.`
-        }
+        const { getChapterNextStep } = await import('@/lib/school/adaptive/nextBestAction')
+        const { getChapterProgressDetails } = await import('@/lib/school/schoolProgress')
+        const { getSchoolChapters } = await import('@/lib/school/schoolRouting')
+        const fullChapter = getSchoolChapters(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c) => c.id === schoolCtx!.chapter.id)
+        if (!fullChapter) throw new Error('chapter not found for status context')
+        const [weak, details] = await Promise.all([
+          getWeakTopicsForSubject(userId, subjectCode),
+          getChapterProgressDetails(userId, subjectCode, fullChapter, false),
+        ])
+        const weakTop = weak.slice(0, 5)
+        const nextStep = getChapterNextStep(details, schoolCtx.chapter.order < schoolCtx.totalChapters)
+        const actionLabel = nextStep === 'practice' ? 'Practice this chapter'
+          : nextStep === 'assessment' ? 'Take the chapter assessment'
+          : nextStep === 'next_chapter' ? 'Move to the next chapter' : 'Continue learning'
+        const lines = [
+          `- Current chapter: ${schoolCtx.displayTitle} (mastery: ${details.practiceStatus.replace('_', ' ')})`,
+          `- Recommended action: ${actionLabel}`,
+        ]
+        if (weakTop.length > 0) lines.push(`- Weak topics: ${weakTop.map((t) => t.title).join(', ')}`)
+        systemPrompt += `\n\nSTUDENT STATUS:\n${lines.join('\n')}\nWhen weak topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this status block explicitly.`
       } catch (err) {
-        console.warn('[learn/chat] weak-topic context skipped:', err)
+        console.warn('[learn/chat] student status context skipped:', err)
       }
     }
 

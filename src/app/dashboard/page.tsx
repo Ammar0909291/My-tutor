@@ -18,6 +18,7 @@ import { SchoolDashboard, type SchoolSubjectProgress } from '@/components/dashbo
 import { getBoard } from '@/lib/education'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from '@/lib/school/adaptive/weakTopics'
+import { getNextBestAction } from '@/lib/school/adaptive/nextBestAction'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -117,7 +118,7 @@ export default async function DashboardPage() {
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
-    const [progressMap, revision, pendingAssessmentRow] = await withRetry(() => Promise.all([
+    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction] = await withRetry(() => Promise.all([
       getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs),
       // Sprint BO: single top revision recommendation from the weak-topic engine
       getRecommendedRevisionChapter(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
@@ -127,7 +128,12 @@ export default async function DashboardPage() {
         orderBy: { createdAt: 'desc' },
         select: { subjectSlug: true, chapterId: true },
       }).catch(() => null),
+      // Sprint BP: next best action for the "Your Next Step" card
+      getNextBestAction(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
     ]))
+    // Suppress the BO revision card when the Next Step card already points at
+    // the same chapter — one recommendation, no duplicates.
+    const revision = revisionRaw && nextAction?.chapterId === revisionRaw.chapterId ? null : revisionRaw
     const subjects: SchoolSubjectProgress[] = schoolSlugs.map((slug) => {
       const row = progressMap.get(slug)
       return {
@@ -155,6 +161,7 @@ export default async function DashboardPage() {
         studiedToday={studiedToday}
         subjects={subjects}
         revision={revision}
+        nextAction={nextAction}
         pendingAssessment={pendingAssessment}
       />
     )

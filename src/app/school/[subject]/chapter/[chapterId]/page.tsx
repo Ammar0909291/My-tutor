@@ -8,6 +8,7 @@ import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib
 import { getSchoolSubjectProgress, getChapterProgressDetails } from '@/lib/school/schoolProgress'
 import { getChapterContent } from '@/lib/school/chapterContent'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
+import { getChapterNextStep } from '@/lib/school/adaptive/nextBestAction'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -83,6 +84,10 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const chapterIdx = progress.chapters.findIndex((c) => c.id === chapter.id)
   const nextChapter = chapterIdx >= 0 && chapterIdx < progress.chapters.length - 1
     ? progress.chapters[chapterIdx + 1] : null
+
+  // Sprint BP: compact next-step recommendation. The 'next_chapter' case is
+  // already covered by the green Recommended Next card below.
+  const chapterNextStep = getChapterNextStep(details, !!nextChapter)
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -187,6 +192,22 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </Link>
           </div>
         </section>
+
+        {/* Sprint BP: compact next-step guidance */}
+        {(chapterNextStep === 'practice' || chapterNextStep === 'assessment') && (
+          <section className="rounded-2xl px-5 py-4 flex items-center gap-3"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <span className="text-base shrink-0">💡</span>
+            <p className="text-xs flex-1" style={{ color: 'var(--text-secondary)' }}>
+              <span className="font-bold" style={{ color: 'var(--text-primary)' }}>Recommended Next: </span>
+              {chapterNextStep === 'practice' ? 'Take Practice' : 'Take Assessment'}
+            </p>
+            <Link href={chapterNextStep === 'practice' ? practiceHref : assessmentHref}
+              className="text-xs font-bold shrink-0" style={{ color: 'var(--coral)', textDecoration: 'none' }}>
+              Go →
+            </Link>
+          </section>
+        )}
 
         {/* Phase 4: Ask Tutor */}
         <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
