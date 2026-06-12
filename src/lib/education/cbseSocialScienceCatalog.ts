@@ -2,26 +2,22 @@ import type { BoardSubjectCatalog } from './educationTypes'
 
 /**
  * CBSE Social Science — grades 5-10 integrated Social Science; grades 11-12
- * split into History / Geography / Political Science / Economics streams
- * (Sprint AV).
+ * split into History / Geography / Political Science / Economics streams.
  *
- * Authored against the CURRENT rationalized CBSE/NCERT syllabus (2023-24),
- * NOT copied verbatim from UP Board. Chapters CBSE deleted in
- * rationalization are intentionally absent — every removal is commented at
- * the grade where it applies. Grades 11-12 keep UP's single-catalog
- * convention: each chapter id carries a histN/geoN/polN/ecoN segment and the
- * title is prefixed with [History]/[Geography]/[Political Science]/
- * [Economics], so the four senior-secondary subjects coexist in one
- * 'social_science' catalog (matches the validated UP structure and keeps the
- * coverage comparison apples-to-apples).
+ * Sprint BB (June 2026): Grades 5–8 updated to NCF-2023 textbooks:
+ *   Grade 5  — Our Wondrous World (EVS, 10 chapters, ncert.nic.in/eeev1ps.pdf)
+ *   Grade 6  — Exploring Society: India and Beyond (14 chapters, fees1ps.pdf)
+ *   Grade 7  — Exploring Society: India and Beyond Parts 1+2 (20 chapters)
+ *   Grade 8  — Exploring Society: India and Beyond Part 1 only (8 chapters)
+ *              Part 2 recalled by Supreme Court order 2026-02-26; rewrite pending.
+ * Sources: ncert.nic.in PDFs (403 blocked); chapters cross-verified via
+ * LearnCBSE, TiwariAcademy, Vedantu, EduRev search snippets (June 2026).
  *
- * Every kgNodeId references an EXISTING node in socialScienceKnowledgeGraph.ts
- * — verified by coverageAudit.findUnmappedChapters (Sprint AV audit).
+ * Grades 11-12 keep UP's single-catalog convention: each chapter id carries a
+ * histN/geoN/polN/ecoN segment and the title is prefixed with [History]/
+ * [Geography]/[Political Science]/[Economics].
  *
- * Maintenance note: SST rationalization lists shift between NCERT print runs,
- * and the NCF-2023 textbooks (e.g. Class 6 "Exploring Society: India and
- * Beyond") are replacing the old three-book structure from the lower grades
- * upward. Re-verify against the official CBSE syllabus PDF each academic year.
+ * Every kgNodeId references an EXISTING node in socialScienceKnowledgeGraph.ts.
  */
 export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
   boardId: 'cbse',
@@ -30,63 +26,86 @@ export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
   grades: [
     {
       grade: 5,
-      // Class 5 is EVS under CBSE — modeled here as the social-studies strand,
-      // mirroring UP's grade-5 framing.
+      // NCF-2023: "Our Wondrous World" (EVS) — integrated Science + Social Science.
+      // Chapters mapped to social-studies KG nodes; same titles as Science Grade 5.
       chapters: [
-        { id: 'cbse.sst.5.ch1', order: 1, title: 'Our Earth — Shape and Movements', kgNodeIds: ['geography.earth_globe.basics'] },
-        { id: 'cbse.sst.5.ch2', order: 2, title: 'Maps and Directions', kgNodeIds: ['geography.maps.reading'] },
-        { id: 'cbse.sst.5.ch3', order: 3, title: 'Our Country India', kgNodeIds: ['geography.india_physical.relief_drainage'] },
-        { id: 'cbse.sst.5.ch4', order: 4, title: 'Our Family and Community', kgNodeIds: ['society.social_institutions.family'] },
-        { id: 'cbse.sst.5.ch5', order: 5, title: 'Our Government — Gram Panchayat', kgNodeIds: ['civics.local_government.panchayati_raj'] },
-        { id: 'cbse.sst.5.ch6', order: 6, title: 'Ancient Civilisations', kgNodeIds: ['history.ancient_india.harappan'] },
-        { id: 'cbse.sst.5.ch7', order: 7, title: 'Our Needs and Resources', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
-        { id: 'cbse.sst.5.ch8', order: 8, title: 'Festivals and Traditions', kgNodeIds: ['society.social_institutions.family'] },
+        { id: 'cbse.sst.5.ch1', order: 1, title: 'Water — The Essence of Life', kgNodeIds: ['geography.india_physical.relief_drainage'] },
+        { id: 'cbse.sst.5.ch2', order: 2, title: 'Journey of a River', kgNodeIds: ['geography.india_physical.relief_drainage'] },
+        { id: 'cbse.sst.5.ch3', order: 3, title: 'The Mystery of Food', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
+        { id: 'cbse.sst.5.ch4', order: 4, title: 'Our School — A Happy Place', kgNodeIds: ['society.social_institutions.family'] },
+        { id: 'cbse.sst.5.ch5', order: 5, title: 'Our Vibrant Country', kgNodeIds: ['geography.india_physical.relief_drainage'] },
+        { id: 'cbse.sst.5.ch6', order: 6, title: 'Some Unique Places', kgNodeIds: ['geography.earth_globe.basics'] },
+        { id: 'cbse.sst.5.ch7', order: 7, title: 'Energy — How Things Work', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
+        { id: 'cbse.sst.5.ch8', order: 8, title: 'Clothes — How Things are Made', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
+        { id: 'cbse.sst.5.ch9', order: 9, title: 'Rhythms of Nature', kgNodeIds: ['geography.earth_globe.basics'] },
+        { id: 'cbse.sst.5.ch10', order: 10, title: 'Earth — Our Shared Home', kgNodeIds: ['geography.earth_globe.basics'] },
       ],
     },
     {
       grade: 6,
+      // NCF-2023: "Exploring Society: India and Beyond" (single volume, 14 chapters).
+      // Source: fees1ps.pdf; verified via LearnCBSE, TiwariAcademy, Vedantu (June 2026).
       chapters: [
-        { id: 'cbse.sst.6.ch1', order: 1, title: 'The Earth and Its Movements', kgNodeIds: ['geography.earth_globe.basics'] },
-        { id: 'cbse.sst.6.ch2', order: 2, title: 'Globe and Maps', kgNodeIds: ['geography.maps.reading'] },
-        { id: 'cbse.sst.6.ch3', order: 3, title: 'Major Landforms', kgNodeIds: ['geography.earth_globe.landforms'] },
-        { id: 'cbse.sst.6.ch4', order: 4, title: 'The Harappan Civilisation', kgNodeIds: ['history.ancient_india.harappan'] },
-        { id: 'cbse.sst.6.ch5', order: 5, title: 'The Vedic Period', kgNodeIds: ['history.ancient_india.vedic_period'] },
-        { id: 'cbse.sst.6.ch6', order: 6, title: 'Kingdoms, Kings and an Early Republic', kgNodeIds: ['history.ancient_india.vedic_period'] },
-        { id: 'cbse.sst.6.ch7', order: 7, title: 'Diversity and Local Government', kgNodeIds: ['civics.local_government.panchayati_raj'] },
-        { id: 'cbse.sst.6.ch8', order: 8, title: 'Government — Rural and Urban', kgNodeIds: ['civics.government_systems.democracy'] },
-        { id: 'cbse.sst.6.ch9', order: 9, title: 'Wants, Needs and Economic Activities', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
-        { id: 'cbse.sst.6.ch10', order: 10, title: 'Family and Social Life', kgNodeIds: ['society.social_institutions.family'] },
+        { id: 'cbse.sst.6.ch1', order: 1, title: 'Locating Places on the Earth', kgNodeIds: ['geography.maps.reading'] },
+        { id: 'cbse.sst.6.ch2', order: 2, title: 'Oceans and Continents', kgNodeIds: ['geography.earth_globe.landforms'] },
+        { id: 'cbse.sst.6.ch3', order: 3, title: 'Landforms and Life', kgNodeIds: ['geography.earth_globe.landforms'] },
+        { id: 'cbse.sst.6.ch4', order: 4, title: 'Timeline and Sources of History', kgNodeIds: ['history.ancient_india.harappan'] },
+        { id: 'cbse.sst.6.ch5', order: 5, title: 'India, That Is Bharat', kgNodeIds: ['geography.india_physical.relief_drainage'] },
+        { id: 'cbse.sst.6.ch6', order: 6, title: 'The Beginnings of Indian Civilisation', kgNodeIds: ['history.ancient_india.harappan'] },
+        { id: 'cbse.sst.6.ch7', order: 7, title: "India's Cultural Roots", kgNodeIds: ['history.ancient_india.vedic_period'] },
+        { id: 'cbse.sst.6.ch8', order: 8, title: "Unity in Diversity, or 'Many in the One'", kgNodeIds: ['society.social_institutions.family'] },
+        { id: 'cbse.sst.6.ch9', order: 9, title: 'Family and Community', kgNodeIds: ['society.social_institutions.family'] },
+        { id: 'cbse.sst.6.ch10', order: 10, title: 'Grassroots Democracy — Part 1: Governance', kgNodeIds: ['civics.government_systems.democracy'] },
+        { id: 'cbse.sst.6.ch11', order: 11, title: 'Grassroots Democracy — Part 2: Local Government in Rural Areas', kgNodeIds: ['civics.local_government.panchayati_raj'] },
+        { id: 'cbse.sst.6.ch12', order: 12, title: 'Grassroots Democracy — Part 3: Local Government in Urban Areas', kgNodeIds: ['civics.local_government.panchayati_raj'] },
+        { id: 'cbse.sst.6.ch13', order: 13, title: 'The Value of Work', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
+        { id: 'cbse.sst.6.ch14', order: 14, title: 'Economic Activities Around Us', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
       ],
     },
     {
       grade: 7,
+      // NCF-2023: "Exploring Society: India and Beyond" Parts 1+2 (20 chapters).
+      // Part 1 (gees1ps.pdf) Ch 1-12; Part 2 (gees2ps.pdf) Ch 13-20.
+      // Source: LearnCBSE, Vedantu, EduRev, Allen (June 2026). Part 1: very high
+      // confidence. Part 2 Ch 15-20: medium-high (single synthesized source).
       chapters: [
-        { id: 'cbse.sst.7.ch1', order: 1, title: 'Inside the Earth — Structure', kgNodeIds: ['geography.earth_globe.landforms'] },
-        { id: 'cbse.sst.7.ch2', order: 2, title: 'Our Changing Earth and Climate', kgNodeIds: ['geography.world_physical.climate_biomes'] },
-        { id: 'cbse.sst.7.ch3', order: 3, title: 'Natural Vegetation and Wildlife', kgNodeIds: ['geography.world_physical.climate_biomes'] },
-        { id: 'cbse.sst.7.ch4', order: 4, title: 'The Delhi Sultanate', kgNodeIds: ['history.medieval_india.delhi_sultanate'] },
-        { id: 'cbse.sst.7.ch5', order: 5, title: 'The Mughal Empire', kgNodeIds: ['history.medieval_india.mughal_empire'] },
-        { id: 'cbse.sst.7.ch6', order: 6, title: 'Devotional Paths — Bhakti and Sufi', kgNodeIds: ['history.medieval_india.bhakti_sufi'] },
-        { id: 'cbse.sst.7.ch7', order: 7, title: 'The Indian Constitution — Rights', kgNodeIds: ['civics.constitution.rights_duties'] },
-        { id: 'cbse.sst.7.ch8', order: 8, title: 'Role of the Government in Health', kgNodeIds: ['civics.government_systems.democracy'] },
-        { id: 'cbse.sst.7.ch9', order: 9, title: 'Markets Around Us', kgNodeIds: ['economics.markets.supply_demand'] },
-        { id: 'cbse.sst.7.ch10', order: 10, title: 'Social Inequality and Marginalisation', kgNodeIds: ['society.social_inequality.gender_caste'] },
-        { id: 'cbse.sst.7.ch11', order: 11, title: 'Human Environment and Settlement', kgNodeIds: ['geography.human_geography.population'] },
+        { id: 'cbse.sst.7.ch1', order: 1, title: 'Geographical Diversity of India', kgNodeIds: ['geography.india_physical.relief_drainage'] },
+        { id: 'cbse.sst.7.ch2', order: 2, title: 'Understanding the Weather', kgNodeIds: ['geography.world_physical.climate_biomes'] },
+        { id: 'cbse.sst.7.ch3', order: 3, title: 'Climates of India', kgNodeIds: ['geography.india_physical.climate_vegetation'] },
+        { id: 'cbse.sst.7.ch4', order: 4, title: 'New Beginnings: Cities and States', kgNodeIds: ['history.ancient_india.vedic_period'] },
+        { id: 'cbse.sst.7.ch5', order: 5, title: 'The Rise of Empires', kgNodeIds: ['history.ancient_india.maurya_gupta'] },
+        { id: 'cbse.sst.7.ch6', order: 6, title: 'The Age of Reorganisation', kgNodeIds: ['history.ancient_india.maurya_gupta'] },
+        { id: 'cbse.sst.7.ch7', order: 7, title: 'The Gupta Era: An Age of Tireless Creativity', kgNodeIds: ['history.ancient_india.maurya_gupta'] },
+        { id: 'cbse.sst.7.ch8', order: 8, title: 'How the Land Becomes Sacred', kgNodeIds: ['history.ancient_india.buddhism_jainism'] },
+        { id: 'cbse.sst.7.ch9', order: 9, title: 'From the Rulers to the Ruled: Types of Governments', kgNodeIds: ['civics.government_systems.democracy'] },
+        { id: 'cbse.sst.7.ch10', order: 10, title: 'The Constitution of India — An Introduction', kgNodeIds: ['civics.constitution.rights_duties'] },
+        { id: 'cbse.sst.7.ch11', order: 11, title: 'From Barter to Money', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
+        { id: 'cbse.sst.7.ch12', order: 12, title: 'Understanding Markets', kgNodeIds: ['economics.markets.supply_demand'] },
+        { id: 'cbse.sst.7.ch13', order: 13, title: 'The Story of Indian Farming', kgNodeIds: ['geography.india_resources.agriculture'] },
+        { id: 'cbse.sst.7.ch14', order: 14, title: 'India and Her Neighbours', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.7.ch15', order: 15, title: 'Empires and Kingdoms: 6th to 10th Centuries', kgNodeIds: ['history.medieval_india.regional_kingdoms'] },
+        { id: 'cbse.sst.7.ch16', order: 16, title: 'Turning Tides: 11th and 12th Centuries', kgNodeIds: ['history.medieval_india.delhi_sultanate'] },
+        { id: 'cbse.sst.7.ch17', order: 17, title: 'India, a Home to Many', kgNodeIds: ['society.social_institutions.family'] },
+        { id: 'cbse.sst.7.ch18', order: 18, title: 'The State, the Government, and You', kgNodeIds: ['civics.local_government.panchayati_raj'] },
+        { id: 'cbse.sst.7.ch19', order: 19, title: "Infrastructure: Engine of India's Development", kgNodeIds: ['geography.human_geography.development'] },
+        { id: 'cbse.sst.7.ch20', order: 20, title: 'Banks and the Magic of Finance', kgNodeIds: ['economics.money_banking.currency'] },
       ],
     },
     {
       grade: 8,
+      // NCF-2023: "Exploring Society: India and Beyond" Part 1 only (8 chapters).
+      // Part 2 (hees2ps.pdf) recalled by Supreme Court blanket order 2026-02-26
+      // over Ch 4 "The Role of Judiciary in our Society"; rewrite not yet reissued.
+      // Source: hees1ps.pdf; verified via LearnCBSE, TiwariAcademy, Careers360 (June 2026).
       chapters: [
-        { id: 'cbse.sst.8.ch1', order: 1, title: 'Resources — Types and Conservation', kgNodeIds: ['geography.india_resources.minerals_energy'] },
-        { id: 'cbse.sst.8.ch2', order: 2, title: 'Agriculture and Land Use', kgNodeIds: ['geography.india_resources.agriculture'] },
-        { id: 'cbse.sst.8.ch3', order: 3, title: 'How, When and Where — The Colonial Period', kgNodeIds: ['history.modern_india.colonial_period'] },
-        { id: 'cbse.sst.8.ch4', order: 4, title: 'Ruling the Countryside and Tribal Society', kgNodeIds: ['history.modern_india.colonial_period'] },
-        { id: 'cbse.sst.8.ch5', order: 5, title: 'The Making of the National Movement', kgNodeIds: ['history.modern_india.independence_movement'] },
-        { id: 'cbse.sst.8.ch6', order: 6, title: 'The Indian Constitution and the Parliament', kgNodeIds: ['civics.national_government.parliament'] },
-        { id: 'cbse.sst.8.ch7', order: 7, title: 'Understanding Laws and the Judiciary', kgNodeIds: ['civics.national_government.executive_judiciary'] },
-        { id: 'cbse.sst.8.ch8', order: 8, title: 'Poverty and Public Facilities', kgNodeIds: ['economics.development.poverty'] },
-        { id: 'cbse.sst.8.ch9', order: 9, title: 'Social Justice and Marginalised Groups', kgNodeIds: ['society.social_change.reform'] },
-        { id: 'cbse.sst.8.ch10', order: 10, title: 'Industries and Transport in India', kgNodeIds: ['geography.india_resources.industries_transport'] },
+        { id: 'cbse.sst.8.ch1', order: 1, title: 'Natural Resources and Their Use', kgNodeIds: ['geography.india_resources.minerals_energy'] },
+        { id: 'cbse.sst.8.ch2', order: 2, title: 'Reshaping India\'s Political Map', kgNodeIds: ['history.post_independence.constitution'] },
+        { id: 'cbse.sst.8.ch3', order: 3, title: 'The Rise of the Marathas', kgNodeIds: ['history.medieval_india.regional_kingdoms'] },
+        { id: 'cbse.sst.8.ch4', order: 4, title: 'The Colonial Era in India', kgNodeIds: ['history.modern_india.colonial_period'] },
+        { id: 'cbse.sst.8.ch5', order: 5, title: 'Universal Franchise and India\'s Electoral System', kgNodeIds: ['civics.national_government.parliament'] },
+        { id: 'cbse.sst.8.ch6', order: 6, title: 'The Parliamentary System: Legislature and Executive', kgNodeIds: ['civics.national_government.parliament'] },
+        { id: 'cbse.sst.8.ch7', order: 7, title: 'Factors of Production', kgNodeIds: ['economics.basic_economics.wants_scarcity'] },
+        { id: 'cbse.sst.8.ch8', order: 8, title: 'The Making of the National Movement: 1870s–1947', kgNodeIds: ['history.modern_india.independence_movement'] },
       ],
     },
     {
