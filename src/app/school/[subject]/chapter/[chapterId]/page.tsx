@@ -9,6 +9,7 @@ import { getSchoolSubjectProgress, getChapterProgressDetails } from '@/lib/schoo
 import { getChapterContent } from '@/lib/school/chapterContent'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getChapterNextStep } from '@/lib/school/adaptive/nextBestAction'
+import { chapterDifficultyBadge } from '@/lib/school/adaptive/learningProfile'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -89,6 +90,9 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   // already covered by the green Recommended Next card below.
   const chapterNextStep = getChapterNextStep(details, !!nextChapter)
 
+  // Sprint BR: difficulty badge derived from KG node count + grade
+  const diffBadge = chapterDifficultyBadge(chapter.kgNodeIds.length, grade)
+
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
       <nav className="sticky top-0 z-50"
@@ -120,6 +124,10 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             <span className="inline-block mt-2 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
               style={{ color: statusColor, background: 'var(--bg-elevated)', border: `1px solid ${statusColor}` }}>
               {statusLabel}
+            </span>
+            <span className="inline-block mt-2 ml-2 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+              style={{ color: diffBadge.color, background: diffBadge.bg, border: `1px solid ${diffBadge.color}` }}>
+              {diffBadge.label}
             </span>
           </div>
         </header>

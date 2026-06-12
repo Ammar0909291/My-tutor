@@ -328,6 +328,21 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[learn/chat] guided teaching prompt skipped:', err)
       }
+
+      // Sprint BR: student learning profile — coaching mode, strengths/weaknesses,
+      // smart questioning, phase 4 weak-node recovery, phase 3 explanation depth.
+      try {
+        const { buildLearningProfile, formatLearningProfileContext } = await import('@/lib/school/adaptive/learningProfile')
+        const learnerProf = await buildLearningProfile(userId, schoolCtx.grade)
+        systemPrompt += formatLearningProfileContext(learnerProf)
+
+        // Phase 4: if this chapter has weak nodes, add recovery instruction
+        if (guidedWeakTopicTitles.length > 0) {
+          systemPrompt += `\n\nWEAK TOPIC RECOVERY (this chapter): When introducing a concept related to ${guidedWeakTopicTitles[0]}, briefly revisit the underlying prerequisite idea first, mention one common mistake students make, then provide one extra worked example. Limit this recovery to a single example — do not pad the response.`
+        }
+      } catch (err) {
+        console.warn('[learn/chat] learning profile context skipped:', err)
+      }
     }
 
     // Append the personalized roadmap context (if one exists) so the tutor
