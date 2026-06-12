@@ -16,9 +16,9 @@ import type { BoardSubjectCatalog } from './educationTypes'
  * Class 5 follows NCERT Math-Magic chapter naming (thematic, unlike UP's
  * generic primary list).
  *
- * Maintenance note: NCERT is rolling out new NCF-2023 textbooks
- * ("Ganita Prakash") from the lower grades upward. When CBSE's secondary
- * syllabus documents switch to them, grades 6-8 here need re-verification.
+ * Sprint AZ (June 2026): Grades 6–8 updated to Ganita Prakash (NCF-2023).
+ * Sources: ncert.nic.in fegp1ps.pdf, gegp1ps/2ps.pdf, hegp1ps/2ps.pdf (2026-27)
+ * Cross-ref: learncbse.in, teachoo.com, tiwariacademy.com, odinnclasses.com
  *
  * Every kgNodeId below references an EXISTING node in mathKnowledgeGraph.ts —
  * verified by coverageAudit.findUnmappedChapters (Sprint AT audit).
@@ -47,61 +47,71 @@ export const CBSE_MATH_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.math.5.ch14', order: 14, title: 'How Big? How Heavy? (Volume and Weight)', kgNodeIds: ['mensuration.surface_area_volume'] },
       ],
     },
+    // ─── Grade 6 — Ganita Prakash (NCF-2023, 2024 edition, 10 chapters) ─────
+    // Source: ncert.nic.in/textbook/pdf/fegp1ps.pdf (Reprint 2026-27)
+    // Replaces: Knowing Our Numbers / Whole Numbers / Playing with Numbers etc.
     {
       grade: 6,
       chapters: [
-        { id: 'cbse.math.6.ch1', order: 1, title: 'Knowing Our Numbers', kgNodeIds: ['number_systems.whole_natural'] },
-        { id: 'cbse.math.6.ch2', order: 2, title: 'Whole Numbers', kgNodeIds: ['number_systems.whole_natural'] },
-        { id: 'cbse.math.6.ch3', order: 3, title: 'Playing with Numbers', kgNodeIds: ['arithmetic.lcm_hcf'] },
-        { id: 'cbse.math.6.ch4', order: 4, title: 'Basic Geometrical Ideas', kgNodeIds: ['geometry.basic_shapes'] },
-        { id: 'cbse.math.6.ch5', order: 5, title: 'Understanding Elementary Shapes', kgNodeIds: ['geometry.basic_shapes'] },
-        { id: 'cbse.math.6.ch6', order: 6, title: 'Integers', kgNodeIds: ['number_systems.integers'] },
+        { id: 'cbse.math.6.ch1', order: 1, title: 'Patterns in Mathematics', kgNodeIds: ['arithmetic.counting_numbers'] },
+        { id: 'cbse.math.6.ch2', order: 2, title: 'Lines and Angles', kgNodeIds: ['geometry.basic_shapes'] },
+        { id: 'cbse.math.6.ch3', order: 3, title: 'Number Play', kgNodeIds: ['arithmetic.lcm_hcf'] },
+        { id: 'cbse.math.6.ch4', order: 4, title: 'Data Handling and Presentation', kgNodeIds: ['statistics.data_collection'] },
+        { id: 'cbse.math.6.ch5', order: 5, title: 'Prime Time', kgNodeIds: ['arithmetic.lcm_hcf'] },
+        { id: 'cbse.math.6.ch6', order: 6, title: 'Perimeter and Area', kgNodeIds: ['mensuration.perimeter_area_2d'] },
         { id: 'cbse.math.6.ch7', order: 7, title: 'Fractions', kgNodeIds: ['fractions.introduction'] },
-        { id: 'cbse.math.6.ch8', order: 8, title: 'Decimals', kgNodeIds: ['decimals.introduction'] },
-        { id: 'cbse.math.6.ch9', order: 9, title: 'Data Handling', kgNodeIds: ['statistics.data_collection'] },
-        { id: 'cbse.math.6.ch10', order: 10, title: 'Mensuration', kgNodeIds: ['mensuration.perimeter_area_2d'] },
-        { id: 'cbse.math.6.ch11', order: 11, title: 'Algebra', kgNodeIds: ['algebra.introduction'] },
-        { id: 'cbse.math.6.ch12', order: 12, title: 'Ratio and Proportion', kgNodeIds: ['ratios_proportions.ratio_basics'] },
-        // Rationalization: Symmetry and Practical Geometry deleted by CBSE.
+        { id: 'cbse.math.6.ch8', order: 8, title: 'Playing with Constructions', kgNodeIds: ['geometry.constructions'] },
+        { id: 'cbse.math.6.ch9', order: 9, title: 'Symmetry', kgNodeIds: ['geometry.symmetry'] },
+        { id: 'cbse.math.6.ch10', order: 10, title: 'The Other Side of Zero', kgNodeIds: ['number_systems.integers'] },
       ],
     },
+    // ─── Grade 7 — Ganita Prakash Part 1 & 2 (NCF-2023, 2025 edition, 15 chapters) ─
+    // Source: ncert.nic.in gegp1ps.pdf (Ch 1–8) + gegp2ps.pdf (Ch 9–15)
+    // Replaces: Integers / Fractions and Decimals / Data Handling etc.
     {
       grade: 7,
       chapters: [
-        { id: 'cbse.math.7.ch1', order: 1, title: 'Integers', kgNodeIds: ['number_systems.integers'] },
-        { id: 'cbse.math.7.ch2', order: 2, title: 'Fractions and Decimals', kgNodeIds: ['fractions.operations', 'decimals.operations'] },
-        { id: 'cbse.math.7.ch3', order: 3, title: 'Data Handling', kgNodeIds: ['statistics.data_collection'] },
-        { id: 'cbse.math.7.ch4', order: 4, title: 'Simple Equations', kgNodeIds: ['algebra.linear_equations_1var'] },
-        { id: 'cbse.math.7.ch5', order: 5, title: 'Lines and Angles', kgNodeIds: ['geometry.basic_shapes'] },
-        { id: 'cbse.math.7.ch6', order: 6, title: 'The Triangle and its Properties', kgNodeIds: ['geometry.triangles'] },
-        { id: 'cbse.math.7.ch7', order: 7, title: 'Comparing Quantities', kgNodeIds: ['ratios_proportions.ratio_basics', 'percentages.basics'] },
-        { id: 'cbse.math.7.ch8', order: 8, title: 'Rational Numbers', kgNodeIds: ['number_systems.rational'] },
-        { id: 'cbse.math.7.ch9', order: 9, title: 'Perimeter and Area', kgNodeIds: ['mensuration.perimeter_area_2d'] },
-        { id: 'cbse.math.7.ch10', order: 10, title: 'Algebraic Expressions', kgNodeIds: ['algebra.introduction'] },
-        { id: 'cbse.math.7.ch11', order: 11, title: 'Exponents and Powers', kgNodeIds: ['exponents_powers.basics'] },
-        { id: 'cbse.math.7.ch12', order: 12, title: 'Symmetry', kgNodeIds: ['geometry.symmetry'] },
-        { id: 'cbse.math.7.ch13', order: 13, title: 'Visualising Solid Shapes', kgNodeIds: ['mensuration.surface_area_volume'] },
-        // Rationalization: Congruence of Triangles and Practical Geometry deleted by CBSE.
+        // Part 1 (Chapters 1–8)
+        { id: 'cbse.math.7.ch1', order: 1, title: 'Large Numbers Around Us', kgNodeIds: ['arithmetic.counting_numbers'] },
+        { id: 'cbse.math.7.ch2', order: 2, title: 'Arithmetic Expressions', kgNodeIds: ['algebra.introduction'] },
+        { id: 'cbse.math.7.ch3', order: 3, title: 'A Peek Beyond the Point', kgNodeIds: ['decimals.introduction'] },
+        { id: 'cbse.math.7.ch4', order: 4, title: 'Expressions using Letter-Numbers', kgNodeIds: ['algebra.introduction'] },
+        { id: 'cbse.math.7.ch5', order: 5, title: 'Parallel and Intersecting Lines', kgNodeIds: ['geometry.basic_shapes'] },
+        { id: 'cbse.math.7.ch6', order: 6, title: 'Number Play', kgNodeIds: ['arithmetic.lcm_hcf'] },
+        { id: 'cbse.math.7.ch7', order: 7, title: 'A Tale of Three Intersecting Lines', kgNodeIds: ['geometry.triangles'] },
+        { id: 'cbse.math.7.ch8', order: 8, title: 'Working with Fractions', kgNodeIds: ['fractions.operations'] },
+        // Part 2 (Chapters 9–15)
+        { id: 'cbse.math.7.ch9', order: 9, title: 'Geometric Twins', kgNodeIds: ['geometry.triangles'] },
+        { id: 'cbse.math.7.ch10', order: 10, title: 'Operations with Integers', kgNodeIds: ['number_systems.integers'] },
+        { id: 'cbse.math.7.ch11', order: 11, title: 'Finding Common Ground', kgNodeIds: ['arithmetic.lcm_hcf'] },
+        { id: 'cbse.math.7.ch12', order: 12, title: 'Another Peek Beyond the Point', kgNodeIds: ['decimals.operations'] },
+        { id: 'cbse.math.7.ch13', order: 13, title: 'Connecting the Dots', kgNodeIds: ['coordinate_geometry.cartesian_plane'] },
+        { id: 'cbse.math.7.ch14', order: 14, title: 'Constructions and Tilings', kgNodeIds: ['geometry.constructions'] },
+        { id: 'cbse.math.7.ch15', order: 15, title: 'Finding the Unknown', kgNodeIds: ['algebra.linear_equations_1var'] },
       ],
     },
+    // ─── Grade 8 — Ganita Prakash Part 1 & 2 (NCF-2023, 2026 edition, 14 chapters) ─
+    // Source: ncert.nic.in hegp1ps.pdf (Ch 1–7) + hegp2ps.pdf (Ch 8–14)
+    // Replaces: Rational Numbers / Linear Equations / Understanding Quadrilaterals etc.
     {
       grade: 8,
       chapters: [
-        { id: 'cbse.math.8.ch1', order: 1, title: 'Rational Numbers', kgNodeIds: ['number_systems.rational'] },
-        { id: 'cbse.math.8.ch2', order: 2, title: 'Linear Equations in One Variable', kgNodeIds: ['algebra.linear_equations_1var'] },
-        { id: 'cbse.math.8.ch3', order: 3, title: 'Understanding Quadrilaterals', kgNodeIds: ['geometry.quadrilaterals'] },
-        { id: 'cbse.math.8.ch4', order: 4, title: 'Data Handling', kgNodeIds: ['statistics.data_collection', 'statistics.central_tendency'] },
-        { id: 'cbse.math.8.ch5', order: 5, title: 'Squares and Square Roots', kgNodeIds: ['exponents_powers.basics'] },
-        { id: 'cbse.math.8.ch6', order: 6, title: 'Cubes and Cube Roots', kgNodeIds: ['exponents_powers.basics'] },
-        { id: 'cbse.math.8.ch7', order: 7, title: 'Comparing Quantities', kgNodeIds: ['percentages.applications', 'percentages.interest'] },
-        { id: 'cbse.math.8.ch8', order: 8, title: 'Algebraic Expressions and Identities', kgNodeIds: ['algebra.polynomials'] },
-        { id: 'cbse.math.8.ch9', order: 9, title: 'Mensuration', kgNodeIds: ['mensuration.surface_area_volume'] },
-        { id: 'cbse.math.8.ch10', order: 10, title: 'Exponents and Powers', kgNodeIds: ['exponents_powers.basics'] },
-        { id: 'cbse.math.8.ch11', order: 11, title: 'Direct and Inverse Proportions', kgNodeIds: ['ratios_proportions.ratio_basics'] },
-        { id: 'cbse.math.8.ch12', order: 12, title: 'Factorisation', kgNodeIds: ['algebra.polynomials'] },
-        { id: 'cbse.math.8.ch13', order: 13, title: 'Introduction to Graphs', kgNodeIds: ['coordinate_geometry.cartesian_plane'] },
-        // Rationalization: Practical Geometry, Visualising Solid Shapes and
-        // Playing with Numbers deleted by CBSE.
+        // Part 1 (Chapters 1–7)
+        { id: 'cbse.math.8.ch1', order: 1, title: 'A Square and A Cube', kgNodeIds: ['exponents_powers.basics'] },
+        { id: 'cbse.math.8.ch2', order: 2, title: 'Power Play', kgNodeIds: ['exponents_powers.basics'] },
+        { id: 'cbse.math.8.ch3', order: 3, title: 'A Story of Numbers', kgNodeIds: ['number_systems.rational'] },
+        { id: 'cbse.math.8.ch4', order: 4, title: 'Quadrilaterals', kgNodeIds: ['geometry.quadrilaterals'] },
+        { id: 'cbse.math.8.ch5', order: 5, title: 'Number Play', kgNodeIds: ['arithmetic.lcm_hcf'] },
+        { id: 'cbse.math.8.ch6', order: 6, title: 'We Distribute, Yet Things Multiply', kgNodeIds: ['algebra.polynomials'] },
+        { id: 'cbse.math.8.ch7', order: 7, title: 'Proportional Reasoning-1', kgNodeIds: ['ratios_proportions.ratio_basics'] },
+        // Part 2 (Chapters 8–14)
+        { id: 'cbse.math.8.ch8', order: 8, title: 'Fractions in Disguise', kgNodeIds: ['fractions.operations'] },
+        { id: 'cbse.math.8.ch9', order: 9, title: 'The Baudhayana-Pythagoras Theorem', kgNodeIds: ['geometry.similarity'] },
+        { id: 'cbse.math.8.ch10', order: 10, title: 'Proportional Reasoning-2', kgNodeIds: ['ratios_proportions.ratio_basics'] },
+        { id: 'cbse.math.8.ch11', order: 11, title: 'Exploring Some Geometric Themes', kgNodeIds: ['geometry.constructions'] },
+        { id: 'cbse.math.8.ch12', order: 12, title: 'Tales by Dots and Lines', kgNodeIds: ['statistics.data_collection'] },
+        { id: 'cbse.math.8.ch13', order: 13, title: 'Algebra Play', kgNodeIds: ['algebra.introduction'] },
+        { id: 'cbse.math.8.ch14', order: 14, title: 'Area', kgNodeIds: ['mensuration.perimeter_area_2d'] },
       ],
     },
     {
