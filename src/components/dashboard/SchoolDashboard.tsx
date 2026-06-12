@@ -44,9 +44,10 @@ export interface SchoolDashboardProps {
   xpPoints: number
   studiedToday: boolean
   subjects: SchoolSubjectProgress[]
+  weakSubjectSlugs?: string[]
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects }: SchoolDashboardProps) {
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, weakSubjectSlugs }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -124,6 +125,30 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
             <GoalItem done={false} label="Review yesterday&apos;s mistakes" />
           </ul>
         </section>
+
+        {/* ═══ RECOMMENDED PRACTICE — only when weak topics exist ═══ */}
+        {weakSubjectSlugs && weakSubjectSlugs.length > 0 && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <h2 className="font-bold text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--text-primary)' }}>🎯 Recommended Practice</h2>
+            <p className="text-xs mb-3" style={{ color: 'var(--text-secondary)' }}>
+              You have weak areas to review. Practice helps you master the material.
+            </p>
+            <div className="flex flex-col gap-2">
+              {weakSubjectSlugs.map((slug) => {
+                const m = SUBJECT_META[slug] ?? { label: slug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+                return (
+                  <Link key={slug} href={`/school/${slug}`}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 transition-colors"
+                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', textDecoration: 'none' }}>
+                    <span className="text-base">{m.icon}</span>
+                    <span className="text-sm font-semibold flex-1" style={{ color: 'var(--text-primary)' }}>Practice {m.label}</span>
+                    <span className="text-xs font-bold" style={{ color: m.color }}>Review →</span>
+                  </Link>
+                )
+              })}
+            </div>
+          </section>
+        )}
 
         {/* ═══ SECTION 3 — MY SUBJECTS ═══ */}
         <section>

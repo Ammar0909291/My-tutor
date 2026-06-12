@@ -101,13 +101,14 @@ export interface ChapterProgressDetails {
   practiceTotalCount: number
   questionsAttempted: number
   accuracyPercent: number | null
+  practiceStatus: 'not_started' | 'in_progress' | 'mastered'
+  lastPracticeScore: number | null
 }
 
 /**
- * Per-chapter progress for the chapter workspace (Sprint BL, Phase 6):
- * mastery of the chapter's KG nodes, practice questions attempted, and
- * average accuracy — all derived from existing TopicProgress/PracticeSession
- * rows, keyed by the chapter's kgNodeIds.
+ * Per-chapter progress for the chapter workspace (Sprint BL/BM):
+ * KG node mastery, chapter-level practice accuracy, and last score — derived
+ * from TopicProgress and PracticeSession rows; no new tables.
  */
 export async function getChapterProgressDetails(
   userId: string,
@@ -116,11 +117,14 @@ export async function getChapterProgressDetails(
   completed: boolean,
 ): Promise<ChapterProgressDetails> {
   const nodeIds = chapter.kgNodeIds
-  if (nodeIds.length === 0) {
-    return { completed, practiceMasteredCount: 0, practiceTotalCount: 0, questionsAttempted: 0, accuracyPercent: null }
+  const empty: ChapterProgressDetails = {
+    completed, practiceMasteredCount: 0, practiceTotalCount: 0,
+    questionsAttempted: 0, accuracyPercent: null,
+    practiceStatus: 'not_started', lastPracticeScore: null,
   }
+  if (nodeIds.length === 0) return empty
 
-  const [topicRows, sessions] = await Promise.all([
+  const [topicRows, nodeSessions, chapterSessions] = await Promise.all([
     prisma.topicProgress.findMany({
       where: { userId, subjectSlug, topicSlug: { in: nodeIds } },
       select: { status: true },
@@ -129,15 +133,32 @@ export async function getChapterProgressDetails(
       where: { userId, subjectSlug, topicSlug: { in: nodeIds }, completedAt: { not: null } },
       select: { questions: true, score: true },
     }),
+    // Sprint BM: chapter-level sessions keyed by chapterId
+    prisma.practiceSession.findMany({
+      where: { userId, subjectSlug, chapterId: chapter.id, completedAt: { not: null } },
+      orderBy: { completedAt: 'desc' },
+      take: 5,
+      select: { questions: true, score: true },
+    }),
   ])
 
   const practiceMasteredCount = topicRows.filter((r) => DONE_STATUSES.has(r.status)).length
-  const questionsAttempted = sessions.reduce((sum, s) => sum + (Array.isArray(s.questions) ? s.questions.length : 0), 0)
-
-  const scored = sessions.filter((s): s is typeof s & { score: number } => typeof s.score === 'number')
+  const allSessions = [...nodeSessions, ...chapterSessions]
+  const questionsAttempted = allSessions.reduce(
+    (sum, s) => sum + (Array.isArray(s.questions) ? s.questions.length : 0), 0,
+  )
+  const scored = allSessions.filter((s): s is typeof s & { score: number } => typeof s.score === 'number')
   const accuracyPercent = scored.length > 0
     ? Math.round(scored.reduce((sum, s) => sum + s.score, 0) / scored.length)
     : null
+  const lastPracticeScore = chapterSessions.find((s) => typeof s.score === 'number')?.score ?? null
+
+  let practiceStatus: 'not_started' | 'in_progress' | 'mastered' = 'not_started'
+  if (topicRows.some((r) => DONE_STATUSES.has(r.status))) {
+    practiceStatus = topicRows.every((r) => r.status === 'MASTERED') ? 'mastered' : 'in_progress'
+  } else if (allSessions.length > 0) {
+    practiceStatus = 'in_progress'
+  }
 
   return {
     completed,
@@ -145,5 +166,7 @@ export async function getChapterProgressDetails(
     practiceTotalCount: nodeIds.length,
     questionsAttempted,
     accuracyPercent,
+    practiceStatus,
+    lastPracticeScore,
   }
 }

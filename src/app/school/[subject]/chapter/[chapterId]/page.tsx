@@ -138,7 +138,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
             Continue learning <ArrowRight size={16} />
           </Link>
-          <Link href={`${learnHref}&practice=1`}
+          <Link href={`/school/${subjectSlug}/chapter/${encodeURIComponent(chapter.id)}/practice`}
             className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold rounded-xl transition-transform hover:scale-[1.02]"
             style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', textDecoration: 'none' }}>
             <Target size={16} /> Practice chapter
@@ -164,8 +164,12 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
         {/* Phase 6: Progress block */}
         <section className="grid grid-cols-2 gap-3">
           <StatCard label="Chapter" value={completed ? 'Completed' : 'Not yet'} accent={completed ? 'var(--green)' : undefined} />
-          <StatCard label="Practice mastered" value={`${details.practiceMasteredCount}/${details.practiceTotalCount}`} />
-          <StatCard label="Questions attempted" value={String(details.questionsAttempted)} />
+          <StatCard
+            label="Practice"
+            value={details.practiceStatus === 'mastered' ? 'Mastered' : details.practiceStatus === 'in_progress' ? 'In Progress' : 'Not Started'}
+            accent={details.practiceStatus === 'mastered' ? 'var(--green)' : details.practiceStatus === 'in_progress' ? 'var(--coral)' : undefined}
+          />
+          <StatCard label="Questions done" value={String(details.questionsAttempted)} />
           <StatCard label="Accuracy" value={details.accuracyPercent !== null ? `${details.accuracyPercent}%` : '—'} />
         </section>
       </main>

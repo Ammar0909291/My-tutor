@@ -386,6 +386,8 @@ model PracticeSession {
   userId      String
   subjectSlug String
   topicSlug   String
+  // Sprint BM: school chapter practice; null for legacy topic-level sessions
+  chapterId   String?
   questions   Json      // StoredPracticeQuestion[] — includes correct answers (never sent to client)
   completedAt DateTime?
   score       Int?      // 0-100
@@ -394,6 +396,7 @@ model PracticeSession {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, subjectSlug, topicSlug])
+  @@index([userId, chapterId])
   @@map("practice_sessions")
 }
 

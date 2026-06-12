@@ -116,8 +116,15 @@ export default async function DashboardPage() {
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
-    const progressMap = await withRetry(() =>
-      getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs))
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+    const [progressMap, recentMistakeRows] = await withRetry(() => Promise.all([
+      getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs),
+      prisma.mistakeRecord.findMany({
+        where: { userId: session.user.id, subjectSlug: { in: schoolSlugs }, createdAt: { gte: sevenDaysAgo } },
+        select: { subjectSlug: true },
+        distinct: ['subjectSlug'],
+      }).catch(() => [] as { subjectSlug: string }[]),
+    ]))
     const subjects: SchoolSubjectProgress[] = schoolSlugs.map((slug) => {
       const row = progressMap.get(slug)
       return {
@@ -129,6 +136,7 @@ export default async function DashboardPage() {
         lastStudiedAt: row?.lastStudiedAt ?? null,
       }
     })
+    const weakSubjectSlugs = [...new Set(recentMistakeRows.map((r) => r.subjectSlug))]
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0)
     const studiedToday = recentSessions.some((s) => s.startedAt >= startOfToday)
     return (
@@ -140,6 +148,7 @@ export default async function DashboardPage() {
         xpPoints={user.xpPoints ?? 0}
         studiedToday={studiedToday}
         subjects={subjects}
+        weakSubjectSlugs={weakSubjectSlugs}
       />
     )
   }
