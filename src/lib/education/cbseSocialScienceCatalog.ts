@@ -1,10 +1,19 @@
 import type { BoardSubjectCatalog } from './educationTypes'
 
 /**
- * CBSE Social Science — grades 5-10 integrated Social Science; grades 11-12
- * split into History / Geography / Political Science / Economics streams.
- *
- * Sprint BB (June 2026): Grades 5–8 updated to NCF-2023 textbooks:
+ * Sprint BD (June 2026): Class 11-12 Social Science verification and corrections.
+ *   • Class 11 Political Science: added 10 missing "Indian Constitution at Work"
+ *     chapters (pol9-pol18); eco orders shifted to 37-46.
+ *   • Class 11 History: rationalization comment updated to note conflicting evidence
+ *     on Nomadic Empires / Three Orders / Confrontation / Displacing; no chapter
+ *     changes applied pending conclusive source confirmation.
+ *   • Class 12 History: removed hist8 "Kings and Chronicles — The Mughal Court"
+ *     (confirmed deleted by CBSE per multiple 2025-26 sources).
+ *   • Class 12 Political Science: added pol10b "Challenges to and Restoration of
+ *     the Congress System" (confirmed present in 2025-26 syllabus); pol11-pol13
+ *     orders shifted by +1; eco orders shifted by +1.
+ *   • Class 12 Political Science rationalization comment updated.
+ *   • Economics Class 11 and 12: verified correct (Stats + IED; Macro). No changes.
  *   Grade 5  — Our Wondrous World (EVS, 10 chapters, ncert.nic.in/eeev1ps.pdf)
  *   Grade 6  — Exploring Society: India and Beyond (14 chapters, fees1ps.pdf)
  *   Grade 7  — Exploring Society: India and Beyond Parts 1+2 (20 chapters)
@@ -198,17 +207,28 @@ export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.sst.11.pol6', order: 24, title: '[Political Science] Citizenship', kgNodeIds: ['civics.constitution.rights_duties'] },
         { id: 'cbse.sst.11.pol7', order: 25, title: '[Political Science] Nationalism', kgNodeIds: ['history.post_independence.constitution'] },
         { id: 'cbse.sst.11.pol8', order: 26, title: '[Political Science] Secularism', kgNodeIds: ['civics.constitution.rights_duties'] },
+        // ── Political Science (Indian Constitution at Work) ──
+        { id: 'cbse.sst.11.pol9',  order: 27, title: '[Political Science] Constitution: Why and How?', kgNodeIds: ['civics.constitution.rights_duties'] },
+        { id: 'cbse.sst.11.pol10', order: 28, title: '[Political Science] Rights in the Indian Constitution', kgNodeIds: ['civics.constitution.rights_duties'] },
+        { id: 'cbse.sst.11.pol11', order: 29, title: '[Political Science] Election and Representation', kgNodeIds: ['civics.national_government.parliament'] },
+        { id: 'cbse.sst.11.pol12', order: 30, title: '[Political Science] Executive', kgNodeIds: ['civics.national_government.executive_judiciary'] },
+        { id: 'cbse.sst.11.pol13', order: 31, title: '[Political Science] Legislature', kgNodeIds: ['civics.national_government.parliament'] },
+        { id: 'cbse.sst.11.pol14', order: 32, title: '[Political Science] Judiciary', kgNodeIds: ['civics.national_government.executive_judiciary'] },
+        { id: 'cbse.sst.11.pol15', order: 33, title: '[Political Science] Federalism', kgNodeIds: ['civics.constitution.federalism'] },
+        { id: 'cbse.sst.11.pol16', order: 34, title: '[Political Science] Local Governments', kgNodeIds: ['civics.local_government.panchayati_raj'] },
+        { id: 'cbse.sst.11.pol17', order: 35, title: '[Political Science] Constitution as a Living Document', kgNodeIds: ['civics.constitution.rights_duties'] },
+        { id: 'cbse.sst.11.pol18', order: 36, title: '[Political Science] The Philosophy of the Constitution', kgNodeIds: ['civics.constitution.rights_duties'] },
         // ── Economics (Statistics for Economics + Indian Economic Development) ──
-        { id: 'cbse.sst.11.eco1', order: 27, title: '[Economics] Introduction and Collection of Data', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco2', order: 28, title: '[Economics] Organisation and Presentation of Data', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco3', order: 29, title: '[Economics] Measures of Central Tendency', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco4', order: 30, title: '[Economics] Correlation and Index Numbers', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco5', order: 31, title: '[Economics] Indian Economy on the Eve of Independence', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.11.eco6', order: 32, title: '[Economics] Indian Economy 1950–1990', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.11.eco7', order: 33, title: '[Economics] Liberalisation, Privatisation and Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
-        { id: 'cbse.sst.11.eco8', order: 34, title: '[Economics] Poverty and Human Capital Formation', kgNodeIds: ['economics.development.poverty'] },
-        { id: 'cbse.sst.11.eco9', order: 35, title: '[Economics] Rural Development and Employment', kgNodeIds: ['economics.indian_economy.sectors'] },
-        { id: 'cbse.sst.11.eco10', order: 36, title: '[Economics] Infrastructure and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
+        { id: 'cbse.sst.11.eco1', order: 37, title: '[Economics] Introduction and Collection of Data', kgNodeIds: ['economics.statistics.data'] },
+        { id: 'cbse.sst.11.eco2', order: 38, title: '[Economics] Organisation and Presentation of Data', kgNodeIds: ['economics.statistics.data'] },
+        { id: 'cbse.sst.11.eco3', order: 39, title: '[Economics] Measures of Central Tendency', kgNodeIds: ['economics.statistics.data'] },
+        { id: 'cbse.sst.11.eco4', order: 40, title: '[Economics] Correlation and Index Numbers', kgNodeIds: ['economics.statistics.data'] },
+        { id: 'cbse.sst.11.eco5', order: 41, title: '[Economics] Indian Economy on the Eve of Independence', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.11.eco6', order: 42, title: '[Economics] Indian Economy 1950–1990', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.11.eco7', order: 43, title: '[Economics] Liberalisation, Privatisation and Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
+        { id: 'cbse.sst.11.eco8', order: 44, title: '[Economics] Poverty and Human Capital Formation', kgNodeIds: ['economics.development.poverty'] },
+        { id: 'cbse.sst.11.eco9', order: 45, title: '[Economics] Rural Development and Employment', kgNodeIds: ['economics.indian_economy.sectors'] },
+        { id: 'cbse.sst.11.eco10', order: 46, title: '[Economics] Infrastructure and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
       ],
     },
     {
@@ -222,43 +242,46 @@ export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.sst.12.hist5', order: 5, title: '[History] Through the Eyes of Travellers', kgNodeIds: ['history.medieval_india.mughal_empire'] },
         { id: 'cbse.sst.12.hist6', order: 6, title: '[History] Bhakti-Sufi Traditions', kgNodeIds: ['history.medieval_india.bhakti_sufi'] },
         { id: 'cbse.sst.12.hist7', order: 7, title: '[History] An Imperial Capital — Vijayanagara', kgNodeIds: ['history.medieval_india.regional_kingdoms'] },
-        { id: 'cbse.sst.12.hist8', order: 8, title: '[History] Kings and Chronicles — The Mughal Court', kgNodeIds: ['history.medieval_india.mughal_empire'] },
-        { id: 'cbse.sst.12.hist9', order: 9, title: '[History] Colonialism and the Countryside', kgNodeIds: ['history.modern_india.colonial_period'] },
-        { id: 'cbse.sst.12.hist10', order: 10, title: '[History] Rebels and the Raj — 1857 Revolt', kgNodeIds: ['history.modern_india.colonial_period'] },
-        { id: 'cbse.sst.12.hist11', order: 11, title: '[History] Mahatma Gandhi and the Nationalist Movement', kgNodeIds: ['history.modern_india.independence_movement'] },
-        { id: 'cbse.sst.12.hist12', order: 12, title: '[History] Framing the Constitution', kgNodeIds: ['history.post_independence.constitution'] },
-        // Rationalization (Class 12 History): "Colonial Cities" and
-        // "Understanding Partition" themes deleted/merged by CBSE.
+        // hist8 "Kings and Chronicles — The Mughal Court" deleted by CBSE (confirmed 2025-26).
+        { id: 'cbse.sst.12.hist9', order: 8,  title: '[History] Colonialism and the Countryside', kgNodeIds: ['history.modern_india.colonial_period'] },
+        { id: 'cbse.sst.12.hist10', order: 9,  title: '[History] Rebels and the Raj — 1857 Revolt', kgNodeIds: ['history.modern_india.colonial_period'] },
+        { id: 'cbse.sst.12.hist11', order: 10, title: '[History] Mahatma Gandhi and the Nationalist Movement', kgNodeIds: ['history.modern_india.independence_movement'] },
+        { id: 'cbse.sst.12.hist12', order: 11, title: '[History] Framing the Constitution', kgNodeIds: ['history.post_independence.constitution'] },
+        // Rationalization (Class 12 History): "Kings and Chronicles — The Mughal Court"
+        // deleted (confirmed 2025-26); "Colonial Cities" and "Understanding Partition"
+        // themes also deleted/merged by CBSE.
         // ── Geography (Fundamentals of Human Geography + India: People and Economy) ──
-        { id: 'cbse.sst.12.geo1', order: 13, title: '[Geography] Human Geography — Nature and Scope', kgNodeIds: ['geography.human_geography.population'] },
-        { id: 'cbse.sst.12.geo2', order: 14, title: '[Geography] The World Population — Distribution and Growth', kgNodeIds: ['geography.human_geography.population'] },
-        { id: 'cbse.sst.12.geo3', order: 15, title: '[Geography] Human Development', kgNodeIds: ['geography.human_geography.development'] },
-        { id: 'cbse.sst.12.geo4', order: 16, title: '[Geography] Primary Activities', kgNodeIds: ['geography.india_resources.agriculture'] },
-        { id: 'cbse.sst.12.geo5', order: 17, title: '[Geography] Secondary Activities — Manufacturing', kgNodeIds: ['geography.india_resources.industries_transport'] },
-        { id: 'cbse.sst.12.geo6', order: 18, title: '[Geography] Tertiary and Quaternary Activities', kgNodeIds: ['geography.india_resources.industries_transport'] },
-        { id: 'cbse.sst.12.geo7', order: 19, title: '[Geography] Transport, Communication and International Trade', kgNodeIds: ['economics.globalisation.trade'] },
-        { id: 'cbse.sst.12.geo8', order: 20, title: '[Geography] Human Settlements', kgNodeIds: ['geography.human_geography.population'] },
-        { id: 'cbse.sst.12.geo9', order: 21, title: '[Geography] Land Resources and Agriculture in India', kgNodeIds: ['geography.india_resources.agriculture'] },
-        { id: 'cbse.sst.12.geo10', order: 22, title: '[Geography] Mineral and Energy Resources', kgNodeIds: ['geography.india_resources.minerals_energy'] },
-        { id: 'cbse.sst.12.geo11', order: 23, title: '[Geography] Planning and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
+        { id: 'cbse.sst.12.geo1', order: 12, title: '[Geography] Human Geography — Nature and Scope', kgNodeIds: ['geography.human_geography.population'] },
+        { id: 'cbse.sst.12.geo2', order: 13, title: '[Geography] The World Population — Distribution and Growth', kgNodeIds: ['geography.human_geography.population'] },
+        { id: 'cbse.sst.12.geo3', order: 14, title: '[Geography] Human Development', kgNodeIds: ['geography.human_geography.development'] },
+        { id: 'cbse.sst.12.geo4', order: 15, title: '[Geography] Primary Activities', kgNodeIds: ['geography.india_resources.agriculture'] },
+        { id: 'cbse.sst.12.geo5', order: 16, title: '[Geography] Secondary Activities — Manufacturing', kgNodeIds: ['geography.india_resources.industries_transport'] },
+        { id: 'cbse.sst.12.geo6', order: 17, title: '[Geography] Tertiary and Quaternary Activities', kgNodeIds: ['geography.india_resources.industries_transport'] },
+        { id: 'cbse.sst.12.geo7', order: 18, title: '[Geography] Transport, Communication and International Trade', kgNodeIds: ['economics.globalisation.trade'] },
+        { id: 'cbse.sst.12.geo8', order: 19, title: '[Geography] Human Settlements', kgNodeIds: ['geography.human_geography.population'] },
+        { id: 'cbse.sst.12.geo9', order: 20, title: '[Geography] Land Resources and Agriculture in India', kgNodeIds: ['geography.india_resources.agriculture'] },
+        { id: 'cbse.sst.12.geo10', order: 21, title: '[Geography] Mineral and Energy Resources', kgNodeIds: ['geography.india_resources.minerals_energy'] },
+        { id: 'cbse.sst.12.geo11', order: 22, title: '[Geography] Planning and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
         // ── Political Science (Contemporary World Politics + Politics in India Since Independence) ──
-        { id: 'cbse.sst.12.pol1', order: 24, title: '[Political Science] The Cold War Era', kgNodeIds: ['civics.international_relations.cold_war'] },
-        { id: 'cbse.sst.12.pol2', order: 25, title: '[Political Science] The End of Bipolarity', kgNodeIds: ['history.post_independence.contemporary'] },
-        { id: 'cbse.sst.12.pol3', order: 26, title: '[Political Science] US Hegemony in World Politics', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol4', order: 27, title: '[Political Science] Alternative Centres of Power', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol5', order: 28, title: '[Political Science] Contemporary South Asia', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol6', order: 29, title: '[Political Science] International Organisations', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol7', order: 30, title: '[Political Science] Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
-        { id: 'cbse.sst.12.pol8', order: 31, title: '[Political Science] Challenges of Nation Building', kgNodeIds: ['history.post_independence.constitution'] },
-        { id: 'cbse.sst.12.pol9', order: 32, title: '[Political Science] Era of One-Party Dominance', kgNodeIds: ['history.post_independence.contemporary'] },
-        { id: 'cbse.sst.12.pol10', order: 33, title: '[Political Science] Politics of Planned Development', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.12.pol11', order: 34, title: "[Political Science] India's External Relations", kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol12', order: 35, title: '[Political Science] Regional Aspirations', kgNodeIds: ['civics.constitution.federalism'] },
-        { id: 'cbse.sst.12.pol13', order: 36, title: '[Political Science] Recent Developments in Indian Politics', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol1', order: 23, title: '[Political Science] The Cold War Era', kgNodeIds: ['civics.international_relations.cold_war'] },
+        { id: 'cbse.sst.12.pol2', order: 24, title: '[Political Science] The End of Bipolarity', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol3', order: 25, title: '[Political Science] US Hegemony in World Politics', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol4', order: 26, title: '[Political Science] Alternative Centres of Power', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol5', order: 27, title: '[Political Science] Contemporary South Asia', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol6', order: 28, title: '[Political Science] International Organisations', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol7', order: 29, title: '[Political Science] Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
+        { id: 'cbse.sst.12.pol8', order: 30, title: '[Political Science] Challenges of Nation Building', kgNodeIds: ['history.post_independence.constitution'] },
+        { id: 'cbse.sst.12.pol9', order: 31, title: '[Political Science] Era of One-Party Dominance', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol10',  order: 32, title: '[Political Science] Politics of Planned Development', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.12.pol10b', order: 33, title: '[Political Science] Challenges to and Restoration of the Congress System', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol11',  order: 34, title: "[Political Science] India's External Relations", kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol12',  order: 35, title: '[Political Science] Regional Aspirations', kgNodeIds: ['civics.constitution.federalism'] },
+        { id: 'cbse.sst.12.pol13',  order: 36, title: '[Political Science] Recent Developments in Indian Politics', kgNodeIds: ['history.post_independence.contemporary'] },
         // Rationalization (Class 12 Political Science): "Security in the
         // Contemporary World", "Environment and Natural Resources", "Crisis
         // of the Democratic Order", and "Rise of Popular Movements" deleted
-        // by CBSE.
+        // by CBSE. "Challenges to and Restoration of the Congress System"
+        // (pol10b) confirmed present in 2025-26 syllabus.
         // ── Economics (Introductory Macroeconomics + Indian Economic Development) ──
         { id: 'cbse.sst.12.eco1', order: 37, title: '[Economics] National Income Accounting', kgNodeIds: ['economics.indian_economy.sectors'] },
         { id: 'cbse.sst.12.eco2', order: 38, title: '[Economics] Money and Banking', kgNodeIds: ['economics.money_banking.currency'] },
