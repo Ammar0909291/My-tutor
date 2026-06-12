@@ -16,6 +16,7 @@ import type { Lang } from '@/lib/i18n'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 import { SchoolDashboard, type SchoolSubjectProgress } from '@/components/dashboard/SchoolDashboard'
 import { getBoard } from '@/lib/education'
+import { schoolSubjectCode } from '@/lib/school/schoolRouting'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -113,17 +114,24 @@ export default async function DashboardPage() {
   if (sp0?.userType === 'SCHOOL_STUDENT' && sp0.educationBoard && sp0.grade) {
     const boardDef = getBoard(sp0.educationBoard)
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
+    // School progress rows use namespaced codes "<board>:<slug>:<grade>"
+    // (see src/lib/school/schoolRouting.ts) so they never collide with
+    // global-mode StudentProgress for the same subject.
+    const codes = schoolSlugs.map((slug) => schoolSubjectCode(sp0.educationBoard!, slug, sp0.grade!))
     const schoolProgress = await withRetry(() => prisma.studentProgress.findMany({
-      where: { userId: session.user.id, subjectCode: { in: schoolSlugs } },
+      where: { userId: session.user.id, subjectCode: { in: codes } },
       select: { subjectCode: true, completionPercent: true, lastLessonTitle: true, lastStudiedAt: true },
     }))
     const progressMap = new Map(schoolProgress.map((p) => [p.subjectCode, p]))
-    const subjects: SchoolSubjectProgress[] = schoolSlugs.map((slug) => ({
-      slug,
-      completionPercent: progressMap.get(slug)?.completionPercent ?? 0,
-      lastChapterTitle: progressMap.get(slug)?.lastLessonTitle ?? null,
-      lastStudiedAt: progressMap.get(slug)?.lastStudiedAt ?? null,
-    }))
+    const subjects: SchoolSubjectProgress[] = schoolSlugs.map((slug) => {
+      const row = progressMap.get(schoolSubjectCode(sp0.educationBoard!, slug, sp0.grade!))
+      return {
+        slug,
+        completionPercent: row?.completionPercent ?? 0,
+        lastChapterTitle: row?.lastLessonTitle ?? null,
+        lastStudiedAt: row?.lastStudiedAt ?? null,
+      }
+    })
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0)
     const studiedToday = recentSessions.some((s) => s.startedAt >= startOfToday)
     return (

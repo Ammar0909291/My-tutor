@@ -10,7 +10,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle'
  * Four sections, in priority order: Continue Learning, Today's Goal,
  * My Subjects, Progress Snapshot. Subjects come from board + grade — the
  * student is never asked again. Chapter routing attaches in Sprint BH; until
- * then every CTA lands on /learn?subject=<slug>.
+ * subject cards route to /school/<slug> (Sprint BH).
  */
 
 // Display metadata for school subject slugs (slugs match BoardSubjectCatalog
@@ -101,7 +101,7 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
                 {active.lastChapterTitle ? ` — ${active.lastChapterTitle}` : hasHistory ? '' : ' — your first lesson awaits'}
               </p>
             )}
-            <Link href={active ? `/learn?subject=${active.slug}` : '/learn'}
+            <Link href={active ? `/school/${active.slug}` : '/dashboard'}
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
               style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
               {hasHistory ? 'Continue' : 'Start now'}
@@ -130,7 +130,7 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
             {subjects.map((s) => {
               const m = SUBJECT_META[s.slug] ?? { label: s.slug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
               return (
-                <Link key={s.slug} href={`/learn?subject=${s.slug}`}
+                <Link key={s.slug} href={`/school/${s.slug}`}
                   className="rounded-2xl p-4 flex flex-col gap-2 transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', textDecoration: 'none', minHeight: 110 }}>
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
