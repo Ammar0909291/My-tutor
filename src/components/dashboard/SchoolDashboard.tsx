@@ -56,6 +56,17 @@ export interface SchoolDashboardProps {
     reason: string | null
   } | null
   pendingAssessment?: { subjectSlug: string; chapterId: string } | null
+  // Sprint BQ: daily study plan tasks; empty array hides the card
+  dailyPlan?: {
+    subjectSlug: string
+    subjectLabel: string
+    chapterId: string
+    title: string
+    estimatedMinutes: number
+    reason: string
+    priority: string
+    href: string
+  }[]
 }
 
 const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
@@ -65,7 +76,7 @@ const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
   start_next_chapter: { heading: 'Start', cta: 'Start Chapter' },
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment }: SchoolDashboardProps) {
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -126,6 +137,37 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
               className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white mt-3"
               style={{ background: 'var(--coral)', textDecoration: 'none' }}>
               {NEXT_ACTION_LABELS[nextAction.type]?.cta ?? 'Continue'} <ArrowRight size={13} />
+            </Link>
+          </section>
+        )}
+
+        {/* ═══ TODAY'S PLAN (Sprint BQ) ═══ */}
+        {dailyPlan && dailyPlan.length > 0 && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-bold text-xs uppercase tracking-wide" style={{ color: 'var(--coral)' }}>📅 Today&apos;s Plan</h2>
+              <span className="text-xs" style={{ color: 'var(--text-dim)' }}>
+                ~{dailyPlan.reduce((s, t) => s + t.estimatedMinutes, 0)} min
+              </span>
+            </div>
+            <ul className="space-y-2.5 mb-3">
+              {dailyPlan.map((task, i) => (
+                <li key={i} className="flex items-center gap-3 text-sm">
+                  <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0"
+                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-dim)' }}>
+                    {i + 1}
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span className="font-semibold truncate block" style={{ color: 'var(--text-primary)' }}>{task.title}</span>
+                    <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{task.subjectLabel} · ~{task.estimatedMinutes} min</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/school/focus"
+              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white"
+              style={{ background: 'var(--coral)', textDecoration: 'none' }}>
+              Start Today&apos;s Plan <ArrowRight size={13} />
             </Link>
           </section>
         )}

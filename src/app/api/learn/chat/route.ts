@@ -286,6 +286,19 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[learn/chat] student status context skipped:', err)
       }
+
+      // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
+      // this lesson sits in today's schedule. Additive only, max 1 line.
+      try {
+        const { getDailyStudyPlan } = await import('@/lib/school/adaptive/dailyPlan')
+        const dailyTasks = await getDailyStudyPlan(userId, schoolCtx.board, schoolCtx.grade)
+        const taskIdx = dailyTasks.findIndex((t) => t.chapterId === schoolCtx!.chapter.id)
+        if (taskIdx !== -1) {
+          systemPrompt += `\n\nDAILY STUDY PLAN: Task ${taskIdx + 1} of ${dailyTasks.length} for today. Keep the session focused and within the chapter scope.`
+        }
+      } catch {
+        // non-fatal — plan context is purely additive
+      }
     }
 
     // Append the personalized roadmap context (if one exists) so the tutor

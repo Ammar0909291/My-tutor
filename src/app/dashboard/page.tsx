@@ -19,6 +19,7 @@ import { getBoard } from '@/lib/education'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from '@/lib/school/adaptive/weakTopics'
 import { getNextBestAction } from '@/lib/school/adaptive/nextBestAction'
+import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -118,7 +119,7 @@ export default async function DashboardPage() {
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
-    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction] = await withRetry(() => Promise.all([
+    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction, dailyPlan] = await withRetry(() => Promise.all([
       getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs),
       // Sprint BO: single top revision recommendation from the weak-topic engine
       getRecommendedRevisionChapter(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
@@ -130,6 +131,8 @@ export default async function DashboardPage() {
       }).catch(() => null),
       // Sprint BP: next best action for the "Your Next Step" card
       getNextBestAction(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
+      // Sprint BQ: daily study plan tasks
+      getDailyStudyPlan(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => [] as Awaited<ReturnType<typeof getDailyStudyPlan>>),
     ]))
     // Suppress the BO revision card when the Next Step card already points at
     // the same chapter — one recommendation, no duplicates.
@@ -163,6 +166,7 @@ export default async function DashboardPage() {
         revision={revision}
         nextAction={nextAction}
         pendingAssessment={pendingAssessment}
+        dailyPlan={dailyPlan}
       />
     )
   }
