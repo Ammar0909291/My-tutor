@@ -1,53 +1,38 @@
 import type { BoardSubjectCatalog } from './educationTypes'
 
 /**
- * CBSE English — grades 5-12 (Sprint AW).
+ * CBSE English — grades 5-12.
  *
- * UNLIKE UP_ENGLISH_CATALOG (which is organised around skills — grammar,
- * vocabulary, comprehension, writing — as discrete chapters), CBSE English
- * is organised around the NCERT-prescribed reader textbooks. Each grade has
- * a Main Reader and a Supplementary Reader, and the literature chapters below
- * follow those readers:
+ * Sprint BC (June 2026): Grades 6-7 updated to NCF-2023 Poorvi textbook;
+ * Grades 8-10 and 12 corrected for CBSE rationalization deletions.
  *
- *   Grade 5  — Marigold (primary-stage NCERT reader)
- *   Grade 6  — Honeysuckle (Main) + A Pact with the Sun (Supplementary)
- *   Grade 7  — Honeycomb (Main) + An Alien Hand (Supplementary)
- *   Grade 8  — Honeydew (Main) + It So Happened (Supplementary)
- *   Grade 9  — Beehive (Main) + Moments (Supplementary)
- *   Grade 10 — First Flight (Main) + Footprints Without Feet (Supplementary)
- *   Grade 11 — Hornbill (Main) + Snapshots (Supplementary)
- *   Grade 12 — Flamingo (Main) + Vistas (Supplementary)
+ * Textbooks by grade:
+ *   Grade 5  — Marigold (NCERT primary reader; Santoor also piloted under
+ *              NCF-2023 at some schools — left as Marigold pending confirmed
+ *              nationwide switchover)
+ *   Grade 6  — Poorvi (NCF-2023, 5 units / 16 pieces; replaces Honeysuckle
+ *              + A Pact with the Sun). Source: TiwariAcademy (June 2026)
+ *   Grade 7  — Poorvi (NCF-2023, 4 units / 15 pieces; replaces Honeycomb
+ *              + An Alien Hand). Source: web snippets (June 2026)
+ *   Grade 8  — Honeydew + It So Happened (8 chs each).
+ *              Rationalization: Ancient Education System of India added as
+ *              It So Happened Ch 8.
+ *   Grade 9  — Beehive + Moments.
+ *              Rationalization: Packing, The Bond of Love deleted from Beehive;
+ *              Weathering the Storm in Ersama deleted from Moments.
+ *   Grade 10 — First Flight + Footprints Without Feet.
+ *              Rationalization: The Hundred Dresses — I & II deleted.
+ *   Grade 11 — Hornbill + Snapshots. VERIFIED ONLY — no changes made.
+ *              Catalog matches post-rationalization structure.
+ *   Grade 12 — Flamingo + Vistas.
+ *              Rationalization (confirmed): An Elementary School Classroom in
+ *              a Slum (poem) deleted; Should Wizard Hit Mommy, Evans Tries an
+ *              O-Level deleted from Vistas. Poets and Pancakes, The Interview,
+ *              Going Places confirmed retained per 2024-25 official syllabus.
  *
- * Because the KG models GENRES/SKILLS (literature.prose.stories,
- * literature.poetry.basic, etc.) rather than individual stories or poems,
- * multiple short reader pieces that map to the same KG node are grouped into
- * a single catalog chapter (e.g. "Honeysuckle — 'X' and 'Y' (poem)"). This
- * keeps chapter density comparable to cbseMathCatalog / cbseScienceCatalog /
- * cbseSocialScienceCatalog while still surfacing the real reader content.
- *
- * literature.prose.stories vs literature.prose.advanced and
- * literature.poetry.basic vs literature.poetry.advanced follow the same
- * grade-11-vs-12 boundary used by UP_ENGLISH_CATALOG (Hornbill/Snapshots are
- * "stories"/"basic"; Flamingo/Vistas are "advanced"). literature.drama.plays
- * is mapped to the two CBSE-prescribed dramatic texts: "The Proposal"
- * (Class 10, First Flight) and "The Tale of Melon City" (Class 11,
- * Snapshots).
- *
- * Alongside the reader-based chapters, each grade also has the
- * grammar / vocabulary / reading / writing / speaking-listening "skill"
- * chapters that make up the rest of the CBSE English syllabus and exam
- * paper (Section A/B "Writing and Grammar" + "Literature" sections). These
- * mirror UP_ENGLISH_CATALOG's skill progression so the same KG nodes are
- * exercised at comparable grades.
- *
- * Every kgNodeId references an EXISTING node in englishKnowledgeGraph.ts —
- * verified by coverageAudit.findUnmappedChapters (Sprint AW audit).
- *
- * Maintenance note: NCERT periodically rationalises reader contents (chapters
- * are added/removed between print runs), and the NCF-2023 rollout is expected
- * to eventually replace the "Honeysuckle/Honeycomb/..." reader series at the
- * lower grades. Re-verify the chapter list against the official CBSE
- * curriculum/syllabus document each academic year.
+ * KG models GENRES/SKILLS; multiple reader pieces mapping to the same node
+ * are grouped into one catalog chapter.
+ * Every kgNodeId references an EXISTING node in englishKnowledgeGraph.ts.
  */
 export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
   boardId: 'cbse',
@@ -75,43 +60,38 @@ export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
     },
     {
       grade: 6,
+      // NCF-2023: Poorvi (5 units, 16 pieces). Replaces Honeysuckle + A Pact with the Sun.
+      // Source: TiwariAcademy search snippet (June 2026). Confidence: HIGH.
       chapters: [
-        { id: 'cbse.eng.6.ch1', order: 1, title: 'Honeysuckle — "Who Did Patrick\'s Homework?" and "A House, A Home"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.6.ch2', order: 2, title: 'Honeysuckle — "How the Dog Found Himself a New Master!" and "The Kite"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.6.ch3', order: 3, title: 'Honeysuckle — "Taro\'s Reward" and "The Quarrel"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.6.ch4', order: 4, title: 'Honeysuckle — "Kalpana Chawla: An Indian-American Woman in Space" and "Beauty"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.6.ch5', order: 5, title: 'Honeysuckle — "A Different Kind of School" and "Where Do All the Teachers Go?"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.6.ch6', order: 6, title: 'Honeysuckle — "Who I Am", "Fair Play" and "A Game of Chance"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.6.ch7', order: 7, title: 'A Pact with the Sun — Folk Tales (A Tale of Two Birds, The Friendly Mongoose, The Shepherd\'s Treasure)', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.6.ch8', order: 8, title: 'A Pact with the Sun — Tales of Wonder (Tansen, The Wonder Called Sleep, A Pact with the Sun)', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.6.ch9', order: 9, title: 'Grammar — Nouns, Pronouns and Determiners', kgNodeIds: ['grammar.parts_of_speech.nouns_pronouns'] },
-        { id: 'cbse.eng.6.ch10', order: 10, title: 'Grammar — Verbs and the Present Tense', kgNodeIds: ['grammar.parts_of_speech.verbs', 'grammar.tenses.present_past'] },
-        { id: 'cbse.eng.6.ch11', order: 11, title: 'Grammar — Adjectives, Adverbs and Degrees of Comparison', kgNodeIds: ['grammar.parts_of_speech.adjectives_adverbs'] },
-        { id: 'cbse.eng.6.ch12', order: 12, title: 'Grammar — Punctuation and Articles', kgNodeIds: ['grammar.punctuation.basics', 'grammar.articles.usage'] },
-        { id: 'cbse.eng.6.ch13', order: 13, title: 'Vocabulary — Synonyms, Antonyms and Word Formation', kgNodeIds: ['vocabulary.synonyms_antonyms.relationships', 'vocabulary.word_formation.affixes'] },
-        { id: 'cbse.eng.6.ch14', order: 14, title: 'Writing — Paragraph and Picture Composition', kgNodeIds: ['writing.sentences_paragraphs.basics'] },
-        { id: 'cbse.eng.6.ch15', order: 15, title: 'Speaking and Listening Skills', kgNodeIds: ['communication.speaking.pronunciation', 'communication.listening.comprehension'] },
+        { id: 'cbse.eng.6.ch1', order: 1, title: 'Poorvi — Unit 1 Fables and Folk Tales ("A Bottle of Dew", "The Raven and the Fox", "Rama to the Rescue")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.6.ch2', order: 2, title: 'Poorvi — Unit 2 Friendship ("The Unlikely Best Friends", "A Friend\'s Prayer", "The Chair")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.6.ch3', order: 3, title: 'Poorvi — Unit 3 Nurturing Nature ("Neem Baba", "What a Bird Thought", "Spices that Heal Us")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.6.ch4', order: 4, title: 'Poorvi — Unit 4 Sports and Wellness ("Change of Heart", "The Winner", "Yoga—A Way of Life")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.6.ch5', order: 5, title: 'Poorvi — Unit 5 Culture and Tradition ("Hamara Bharat—Incredible India!", "The Kites", "Ila Sachani: Embroidering Dreams with her Feet", "National War Memorial")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.6.ch6', order: 6, title: 'Grammar — Nouns, Pronouns and Determiners', kgNodeIds: ['grammar.parts_of_speech.nouns_pronouns'] },
+        { id: 'cbse.eng.6.ch7', order: 7, title: 'Grammar — Verbs and the Present Tense', kgNodeIds: ['grammar.parts_of_speech.verbs', 'grammar.tenses.present_past'] },
+        { id: 'cbse.eng.6.ch8', order: 8, title: 'Grammar — Adjectives, Adverbs and Degrees of Comparison', kgNodeIds: ['grammar.parts_of_speech.adjectives_adverbs'] },
+        { id: 'cbse.eng.6.ch9', order: 9, title: 'Grammar — Punctuation and Articles', kgNodeIds: ['grammar.punctuation.basics', 'grammar.articles.usage'] },
+        { id: 'cbse.eng.6.ch10', order: 10, title: 'Vocabulary — Synonyms, Antonyms and Word Formation', kgNodeIds: ['vocabulary.synonyms_antonyms.relationships', 'vocabulary.word_formation.affixes'] },
+        { id: 'cbse.eng.6.ch11', order: 11, title: 'Writing — Paragraph and Picture Composition', kgNodeIds: ['writing.sentences_paragraphs.basics'] },
+        { id: 'cbse.eng.6.ch12', order: 12, title: 'Speaking and Listening Skills', kgNodeIds: ['communication.speaking.pronunciation', 'communication.listening.comprehension'] },
       ],
     },
     {
       grade: 7,
+      // NCF-2023: Poorvi (4 units, 15 pieces). Replaces Honeycomb + An Alien Hand.
+      // Source: web search snippets (June 2026). Confidence: MEDIUM-HIGH.
       chapters: [
-        { id: 'cbse.eng.7.ch1', order: 1, title: 'Honeycomb — "Three Questions" and "The Squirrel"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch2', order: 2, title: 'Honeycomb — "A Gift of Chappals" and "The Rebel"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch3', order: 3, title: 'Honeycomb — "Gopal and the Hilsa Fish" and "The Shed"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch4', order: 4, title: 'Honeycomb — "The Ashes That Made Trees Bloom" and "Chivvy"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch5', order: 5, title: 'Honeycomb — "Quality" and "Trees"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch6', order: 6, title: 'Honeycomb — "Expert Detectives" and "Mystery of the Talking Fan"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch7', order: 7, title: 'Honeycomb — "The Invention of Vita-Wonk" and "Dad and the Cat and the Tree"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.7.ch8', order: 8, title: 'Honeycomb — "Fire: Friend and Foe", "A Bicycle in Good Repair" and "The Story of Cricket"', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.7.ch9', order: 9, title: 'An Alien Hand — Animal Stories (The Tiny Teacher, Bringing Up Kari, The Desert, A Tiger in the House)', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.7.ch10', order: 10, title: 'An Alien Hand — Tales of Imagination (The Cop and the Anthem, Golu Grows a Nose, I Want Something in a Cage, Chandni, The Bear Story, An Alien Hand)', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.7.ch11', order: 11, title: 'Grammar — Past and Future Tenses', kgNodeIds: ['grammar.tenses.present_past', 'grammar.tenses.future_advanced'] },
-        { id: 'cbse.eng.7.ch12', order: 12, title: 'Grammar — Modals, Prepositions and Conjunctions', kgNodeIds: ['grammar.modals.usage', 'grammar.parts_of_speech.prepositions_conjunctions'] },
-        { id: 'cbse.eng.7.ch13', order: 13, title: 'Grammar — Clauses and Sentence Transformation', kgNodeIds: ['grammar.clauses_phrases.clause_types', 'grammar.sentences.types_structure'] },
-        { id: 'cbse.eng.7.ch14', order: 14, title: 'Vocabulary — Idioms and Phrases', kgNodeIds: ['vocabulary.idioms_phrases.fixed_expressions'] },
-        { id: 'cbse.eng.7.ch15', order: 15, title: 'Writing — Descriptive Paragraphs and Informal Letters', kgNodeIds: ['writing.essay_types.descriptive_narrative', 'writing.formal_informal.letters'] },
-        { id: 'cbse.eng.7.ch16', order: 16, title: 'Reading — Comprehension and Reading Strategies', kgNodeIds: ['reading.comprehension_basic.main_idea', 'reading.strategies.skim_scan'] },
+        { id: 'cbse.eng.7.ch1', order: 1, title: 'Poorvi — Unit 1 Learning Together ("The Day the River Spoke", "Try Again")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.7.ch2', order: 2, title: 'Poorvi — Unit 2 Wit and Humour ("Animals, Birds, and Dr. Dolittle", "A Funny Man", "Say the Right Thing")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.7.ch3', order: 3, title: 'Poorvi — Unit 3 Dreams and Discoveries ("My Brother\'s Great Invention", "Paper Boats", "North South East West")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.7.ch4', order: 4, title: 'Poorvi — Unit 4 Travel and Adventure ("The Tunnel", "Travel", "Conquering the Summit", "A Homage to Our Brave Soldiers", "My Dear Soldiers", "Rani Abbakka")', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        { id: 'cbse.eng.7.ch5', order: 5, title: 'Grammar — Past and Future Tenses', kgNodeIds: ['grammar.tenses.present_past', 'grammar.tenses.future_advanced'] },
+        { id: 'cbse.eng.7.ch6', order: 6, title: 'Grammar — Modals, Prepositions and Conjunctions', kgNodeIds: ['grammar.modals.usage', 'grammar.parts_of_speech.prepositions_conjunctions'] },
+        { id: 'cbse.eng.7.ch7', order: 7, title: 'Grammar — Clauses and Sentence Transformation', kgNodeIds: ['grammar.clauses_phrases.clause_types', 'grammar.sentences.types_structure'] },
+        { id: 'cbse.eng.7.ch8', order: 8, title: 'Vocabulary — Idioms and Phrases', kgNodeIds: ['vocabulary.idioms_phrases.fixed_expressions'] },
+        { id: 'cbse.eng.7.ch9', order: 9, title: 'Writing — Descriptive Paragraphs and Informal Letters', kgNodeIds: ['writing.essay_types.descriptive_narrative', 'writing.formal_informal.letters'] },
+        { id: 'cbse.eng.7.ch10', order: 10, title: 'Reading — Comprehension and Reading Strategies', kgNodeIds: ['reading.comprehension_basic.main_idea', 'reading.strategies.skim_scan'] },
       ],
     },
     {
@@ -126,7 +106,8 @@ export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.eng.8.ch7', order: 7, title: 'Honeydew — "A Visit to Cambridge" and "When I Set Out for Lyonnesse"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.8.ch8', order: 8, title: 'Honeydew — "A Short Monsoon Diary", "The Great Stone Face — I & II" and "On the Grasshopper and Cricket"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.8.ch9', order: 9, title: 'It So Happened — Folk Tales (How the Camel Got His Hump, The Selfish Giant, The Open Window)', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.8.ch10', order: 10, title: 'It So Happened — Stories of Courage (Children at Work, The Treasure Within, Princess September, The Fight, Jalebis, The Comet — I & II)', kgNodeIds: ['literature.prose.stories'] },
+        // Rationalization: Ancient Education System of India added as Ch 8 of It So Happened.
+        { id: 'cbse.eng.8.ch10', order: 10, title: 'It So Happened — Ancient Education System of India; Stories of Courage (Children at Work, The Treasure Within, Princess September, The Fight, Jalebis, The Comet — I & II)', kgNodeIds: ['literature.prose.stories'] },
         { id: 'cbse.eng.8.ch11', order: 11, title: 'Grammar — Perfect Tenses', kgNodeIds: ['grammar.tenses.present_past'] },
         { id: 'cbse.eng.8.ch12', order: 12, title: 'Grammar — Active and Passive Voice', kgNodeIds: ['grammar.voice.active_passive'] },
         { id: 'cbse.eng.8.ch13', order: 13, title: 'Grammar — Direct and Indirect Speech', kgNodeIds: ['grammar.narration.direct_indirect'] },
@@ -148,9 +129,11 @@ export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.eng.9.ch4', order: 4, title: 'Beehive — "A Truly Beautiful Mind" and "The Lake Isle of Innisfree"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.9.ch5', order: 5, title: 'Beehive — "The Snake and the Mirror" and "A Legend of the Northland"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.9.ch6', order: 6, title: 'Beehive — "My Childhood" and "No Men Are Foreign"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.9.ch7', order: 7, title: 'Beehive — "Packing", "Reach for the Top", "The Bond of Love", "Kathmandu" and "If I Were You"', kgNodeIds: ['literature.prose.stories'] },
+        // Rationalization: "Packing" and "The Bond of Love" deleted from Beehive.
+        { id: 'cbse.eng.9.ch7', order: 7, title: 'Beehive — "Reach for the Top", "Kathmandu" and "If I Were You"', kgNodeIds: ['literature.prose.stories'] },
         { id: 'cbse.eng.9.ch8', order: 8, title: 'Moments — Tales of Childhood and Friendship (The Lost Child, The Adventures of Toto, Iswaran the Storyteller, A House Is Not a Home)', kgNodeIds: ['literature.prose.stories'] },
-        { id: 'cbse.eng.9.ch9', order: 9, title: 'Moments — Tales of Wisdom and Resilience (In the Kingdom of Fools, The Happy Prince, Weathering the Storm in Ersama, The Last Leaf, The Beggar)', kgNodeIds: ['literature.prose.stories'] },
+        // Rationalization: "Weathering the Storm in Ersama" deleted from Moments.
+        { id: 'cbse.eng.9.ch9', order: 9, title: 'Moments — Tales of Wisdom and Resilience (In the Kingdom of Fools, The Happy Prince, The Last Leaf, The Beggar)', kgNodeIds: ['literature.prose.stories'] },
         { id: 'cbse.eng.9.ch10', order: 10, title: 'Grammar — Tense Revision and Modals', kgNodeIds: ['grammar.tenses.future_advanced', 'grammar.modals.usage'] },
         { id: 'cbse.eng.9.ch11', order: 11, title: 'Grammar — Active/Passive Voice and Reported Speech', kgNodeIds: ['grammar.voice.active_passive', 'grammar.narration.direct_indirect'] },
         { id: 'cbse.eng.9.ch12', order: 12, title: 'Grammar — Conditional Sentences', kgNodeIds: ['grammar.conditionals.types'] },
@@ -170,7 +153,8 @@ export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.eng.10.ch2', order: 2, title: 'First Flight — "Nelson Mandela: Long Walk to Freedom" and "Fire and Ice"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.10.ch3', order: 3, title: 'First Flight — "Two Stories About Flying" and "A Tiger in the Zoo"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.10.ch4', order: 4, title: 'First Flight — "From the Diary of Anne Frank" and "How to Tell Wild Animals"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
-        { id: 'cbse.eng.10.ch5', order: 5, title: 'First Flight — "The Hundred Dresses — I & II" and "The Ball Poem"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
+        // Rationalization: "The Hundred Dresses — I & II" deleted from First Flight.
+        { id: 'cbse.eng.10.ch5', order: 5, title: 'First Flight — "The Ball Poem"', kgNodeIds: ['literature.poetry.basic'] },
         { id: 'cbse.eng.10.ch6', order: 6, title: 'First Flight — "Glimpses of India" and "Amanda!"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.10.ch7', order: 7, title: 'First Flight — "Mijbil the Otter" and "The Trees"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'cbse.eng.10.ch8', order: 8, title: 'First Flight — "Madam Rides the Bus" and "Fog"', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
@@ -216,7 +200,8 @@ export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
       grade: 12,
       chapters: [
         { id: 'cbse.eng.12.ch1', order: 1, title: 'Flamingo — "The Last Lesson" and "My Mother at Sixty-six"', kgNodeIds: ['literature.prose.advanced', 'literature.poetry.advanced'] },
-        { id: 'cbse.eng.12.ch2', order: 2, title: 'Flamingo — "Lost Spring" and "An Elementary School Classroom in a Slum"', kgNodeIds: ['literature.prose.advanced', 'literature.poetry.advanced'] },
+        // Rationalization: "An Elementary School Classroom in a Slum" (poem) deleted from Flamingo Ch 2.
+        { id: 'cbse.eng.12.ch2', order: 2, title: 'Flamingo — "Lost Spring"', kgNodeIds: ['literature.prose.advanced'] },
         { id: 'cbse.eng.12.ch3', order: 3, title: 'Flamingo — "Deep Water" and "Keeping Quiet"', kgNodeIds: ['literature.prose.advanced', 'literature.poetry.advanced'] },
         { id: 'cbse.eng.12.ch4', order: 4, title: 'Flamingo — "The Rattrap" and "A Thing of Beauty"', kgNodeIds: ['literature.prose.advanced', 'literature.poetry.advanced'] },
         { id: 'cbse.eng.12.ch5', order: 5, title: 'Flamingo — "Indigo" and "A Roadside Stand"', kgNodeIds: ['literature.prose.advanced', 'literature.poetry.advanced'] },
@@ -224,8 +209,10 @@ export const CBSE_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.eng.12.ch7', order: 7, title: 'Flamingo — "The Interview"', kgNodeIds: ['literature.prose.advanced'] },
         { id: 'cbse.eng.12.ch8', order: 8, title: 'Flamingo — "Going Places"', kgNodeIds: ['literature.prose.advanced'] },
         { id: 'cbse.eng.12.ch9', order: 9, title: 'Vistas — Adventure and Journey Stories (The Third Level, The Tiger King, Journey to the End of the Earth)', kgNodeIds: ['literature.prose.advanced'] },
-        { id: 'cbse.eng.12.ch10', order: 10, title: 'Vistas — Moral Dilemmas and Human Nature (The Enemy, Should Wizard Hit Mommy, On the Face of It)', kgNodeIds: ['literature.prose.advanced'] },
-        { id: 'cbse.eng.12.ch11', order: 11, title: 'Vistas — Memoir and Satire (Evans Tries an O-Level, Memories of Childhood)', kgNodeIds: ['literature.prose.advanced'] },
+        // Rationalization: "Should Wizard Hit Mommy" deleted from Vistas.
+        { id: 'cbse.eng.12.ch10', order: 10, title: 'Vistas — Moral Dilemmas and Human Nature (The Enemy, On the Face of It)', kgNodeIds: ['literature.prose.advanced'] },
+        // Rationalization: "Evans Tries an O-Level" deleted from Vistas.
+        { id: 'cbse.eng.12.ch11', order: 11, title: 'Vistas — "Memories of Childhood"', kgNodeIds: ['literature.prose.advanced'] },
         { id: 'cbse.eng.12.ch12', order: 12, title: 'Grammar — Editing and Omission (Comprehensive Revision)', kgNodeIds: ['grammar.voice.active_passive', 'grammar.narration.direct_indirect', 'grammar.conditionals.types'] },
         { id: 'cbse.eng.12.ch13', order: 13, title: 'Reading — Unseen Prose Passages', kgNodeIds: ['reading.comprehension_advanced.inference'] },
         { id: 'cbse.eng.12.ch14', order: 14, title: 'Reading — Unseen Poetry and Appreciation', kgNodeIds: ['literature.poetry.advanced', 'reading.literary_analysis.elements'] },
