@@ -3,6 +3,11 @@
 
 export const SCHOOL_MODE_ENABLED = false
 
+// Sprint BF: school onboarding (who-are-you → board → grade) is live so new
+// users can identify as school students; content activation (chapter routing,
+// tutor integration) remains gated behind SCHOOL_MODE_ENABLED above.
+export const SCHOOL_ONBOARDING_ENABLED = true
+
 // Types
 export type {
   Difficulty,

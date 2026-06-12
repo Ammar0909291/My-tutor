@@ -43,9 +43,23 @@ const PLACEHOLDER_CYCLE = [
 
 const STEPS_COUNT = 4
 
+// Mirrors the education board registry (src/lib/education) — kept as a small
+// static list so the full catalog module stays out of the client bundle.
+const SCHOOL_BOARDS = [
+  { id: 'cbse', shortName: 'CBSE', name: 'Central Board of Secondary Education', icon: '🏛️' },
+  { id: 'up_board', shortName: 'UP Board', name: 'Uttar Pradesh Board (UPMSP)', icon: '📚' },
+]
+const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
+
+type LearnerMode = 'school' | 'general' | null
+
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
   const { t } = useLanguage()
   const { country } = useCountry()
+  const [mode, setMode] = useState<LearnerMode>(null)
+  const [boardId, setBoardId] = useState('')
+  const [grade, setGrade] = useState<number | null>(null)
+  const [schoolStep, setSchoolStep] = useState(1) // 1 = board, 2 = grade
   const [step, setStep] = useState(1)
   const [subjects, setSubjects] = useState<{ id: string; slug: string; name: string; icon?: string }[]>(FALLBACK_SUBJECTS)
   const [subjectSlugs, setSubjectSlugs] = useState<string[]>([])
@@ -85,6 +99,35 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const canProceed2 = skillLevel !== ''
   const canProceed3 = description.trim().length >= 20
 
+  // Tri-lingual inline label helper (same pattern as the level step below)
+  const L = (en: string, hi: string, ru: string) => (teachingLang === 'hi' ? hi : teachingLang === 'ru' ? ru : en)
+
+  async function handleSchoolFinish(selectedGrade: number) {
+    setGrade(selectedGrade)
+    setLoading(true); setError('')
+    try {
+      const res = await fetch('/api/onboarding', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userType: 'SCHOOL_STUDENT',
+          board: boardId,
+          grade: selectedGrade,
+          teachingLanguage: teachingLang,
+        }),
+      })
+      const data = await res.json()
+      if (!data.success) {
+        setError(data.error ?? t('ob_error_generic'))
+        setLoading(false); return
+      }
+      window.location.href = '/dashboard'
+    } catch {
+      setError(t('ob_error_network'))
+      setLoading(false)
+    }
+  }
+
   async function handleFinish() {
     setLoading(true); setError('')
     try {
@@ -115,7 +158,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
     speakText(PREVIEW_TEXT[teachingLang], teachingLang, v.key as VoiceType, undefined, country)
   }
 
-  const progressPct = ((step - 1) / (STEPS_COUNT - 1)) * 100
+  // Path-aware progress: school = type + board + grade (3); general = type + 4 legacy steps (5)
+  const totalSteps = mode === 'school' ? 3 : mode === 'general' ? STEPS_COUNT + 1 : 3
+  const currentStep = mode === null ? 1 : mode === 'school' ? 1 + schoolStep : 1 + step
+  const progressPct = ((currentStep - 1) / (totalSteps - 1)) * 100
 
   const SUBJ_ICON: Record<string, string> = { c: 'C', cpp: 'C++', python: '🐍', english: '🇬🇧' }
   const SUBJ_ACCENT: Record<string, string> = { c: '#F78166', cpp: '#79C0FF', python: '#56D364', english: '#E3B341' }
@@ -135,7 +181,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
         </div>
         <div className="flex items-center gap-3">
           <span className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
-            {t('ob_step')} {step} {t('ob_of')} {STEPS_COUNT}
+            {t('ob_step')} {currentStep} {t('ob_of')} {totalSteps}
           </span>
           <ThemeToggle />
         </div>
@@ -144,15 +190,124 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
       {/* Progress bar */}
       <div className="h-[3px]" style={{ background: 'var(--bg-elevated)' }}>
         <div className="h-full transition-all duration-500 ease-out"
-          style={{ width: `${progressPct + 100 / STEPS_COUNT}%`, background: 'var(--accent-primary)' }} />
+          style={{ width: `${progressPct + 100 / totalSteps}%`, background: 'var(--accent-primary)' }} />
       </div>
 
       {/* Content */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-lg">
 
+          {/* Step 0 — Who are you? */}
+          {mode === null && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {L(userName ? `Hi ${userName}! Who are you?` : 'Who are you?', userName ? `नमस्ते ${userName}! आप कौन हैं?` : 'आप कौन हैं?', userName ? `Привет, ${userName}! Кто вы?` : 'Кто вы?')}
+              </h1>
+              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
+                {L('We’ll personalize everything around your answer.', 'हम आपके उत्तर के अनुसार सब कुछ व्यक्तिगत बनाएंगे।', 'Мы персонализируем всё под ваш ответ.')}
+              </p>
+              <div className="space-y-4 mb-2">
+                <button onClick={() => setMode('school')}
+                  className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', minHeight: 88 }}>
+                  <span className="text-3xl shrink-0">🎒</span>
+                  <div>
+                    <div className="font-bold text-base" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                      {L('School Student', 'स्कूल विद्यार्थी', 'Школьник')}
+                    </div>
+                    <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                      {L('I study in Class 5–12 (CBSE / UP Board)', 'मैं कक्षा 5–12 में पढ़ता/पढ़ती हूँ (CBSE / UP बोर्ड)', 'Я учусь в 5–12 классе (CBSE / UP Board)')}
+                    </div>
+                  </div>
+                </button>
+                <button onClick={() => setMode('general')}
+                  className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', minHeight: 88 }}>
+                  <span className="text-3xl shrink-0">🚀</span>
+                  <div>
+                    <div className="font-bold text-base" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                      {L('General Learner', 'सामान्य शिक्षार्थी', 'Самообучение')}
+                    </div>
+                    <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                      {L('I want to learn programming, languages and more', 'मैं प्रोग्रामिंग, भाषाएँ और बहुत कुछ सीखना चाहता/चाहती हूँ', 'Хочу изучать программирование, языки и многое другое')}
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* School Step 1 — Board */}
+          {mode === 'school' && schoolStep === 1 && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {L('Choose your curriculum', 'अपना बोर्ड चुनें', 'Выберите программу')}
+              </h1>
+              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
+                {L('Which board does your school follow?', 'आपका स्कूल किस बोर्ड का पालन करता है?', 'Какой программе следует ваша школа?')}
+              </p>
+              <div className="space-y-4 mb-8">
+                {SCHOOL_BOARDS.map((b) => {
+                  const selected = boardId === b.id
+                  return (
+                    <button key={b.id} onClick={() => { setBoardId(b.id); setSchoolStep(2) }}
+                      className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
+                      style={{
+                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
+                        border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                        minHeight: 88,
+                      }}>
+                      <span className="text-3xl shrink-0">{b.icon}</span>
+                      <div>
+                        <div className="font-bold text-base" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{b.shortName}</div>
+                        <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{b.name}</div>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+              <button onClick={() => setMode(null)} className="btn-ghost w-full py-3">{t('ob_back')}</button>
+            </div>
+          )}
+
+          {/* School Step 2 — Grade */}
+          {mode === 'school' && schoolStep === 2 && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {L('Which class are you in?', 'आप किस कक्षा में हैं?', 'В каком вы классе?')}
+              </h1>
+              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
+                {L('Tap your class — that’s the last step!', 'अपनी कक्षा चुनें — यह आखिरी कदम है!', 'Выберите класс — это последний шаг!')}
+              </p>
+              <div className="grid grid-cols-4 gap-3 mb-8">
+                {SCHOOL_GRADES.map((g) => (
+                  <button key={g} onClick={() => handleSchoolFinish(g)} disabled={loading}
+                    className="rounded-2xl font-black text-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
+                    style={{
+                      background: grade === g ? 'var(--coral-muted)' : 'var(--bg-surface)',
+                      border: `1px solid ${grade === g ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                      color: grade === g ? 'var(--accent-primary)' : 'var(--text-primary)',
+                      fontFamily: 'var(--font-heading)',
+                      minHeight: 64,
+                    }}>
+                    {g}
+                  </button>
+                ))}
+              </div>
+              {error && (
+                <div className="mb-4 p-3.5 rounded-xl text-sm"
+                  style={{ background: 'var(--red-muted)', border: '1px solid var(--coral-border)', color: 'var(--red)' }}>
+                  {error}
+                </div>
+              )}
+              <button onClick={() => setSchoolStep(1)} disabled={loading} className="btn-ghost w-full py-3 disabled:opacity-50">
+                {loading ? t('ob_saving') : t('ob_back')}
+              </button>
+            </div>
+          )}
+
           {/* Step 1 — Subject */}
-          {step === 1 && (
+          {mode === 'general' && step === 1 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s1_title')}</h1>
               <p className={subjectSlugs.length > 0 ? 'text-sm mb-2' : 'text-sm mb-8'} style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
@@ -194,14 +349,17 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                   )
                 })}
               </div>
-              <button onClick={() => setStep(2)} disabled={!canProceed1} className="btn-primary w-full py-3.5 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
-                {t('ob_next')}
-              </button>
+              <div className="flex gap-3">
+                <button onClick={() => setMode(null)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStep(2)} disabled={!canProceed1} className="btn-primary flex-1 py-3.5 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                  {t('ob_next')}
+                </button>
+              </div>
             </div>
           )}
 
           {/* Step 2 — Current skill level (drives curriculum generation) */}
-          {step === 2 && (
+          {mode === 'general' && step === 2 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
                 {teachingLang === 'ru' ? 'Какой у вас текущий уровень?' : 'What is your current level?'}
@@ -238,7 +396,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
 
           {/* Step 3 — Self description */}
-          {step === 3 && (
+          {mode === 'general' && step === 3 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s2_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s2_sub')}</p>
@@ -273,7 +431,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
 
           {/* Step 4 — Voice */}
-          {step === 4 && (
+          {mode === 'general' && step === 4 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s3_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s3_sub')}</p>

@@ -152,11 +152,22 @@ model EmailVerificationToken {
 
 // ─── Student Profile ──────────────────────────────────────────────────────────
 
+enum UserType {
+  GENERAL_LEARNER
+  SCHOOL_STUDENT
+}
+
 model Profile {
   id               String           @id @default(cuid())
   userId           String           @unique
   displayName      String
   selfDescription  String           @db.Text
+  // School Mode (Sprint BF): set once at onboarding; board/grade stay null for
+  // general learners. educationBoard holds a board id from the education
+  // registry ('cbse', 'up_board', ...) — validated in the API layer.
+  userType         UserType         @default(GENERAL_LEARNER)
+  educationBoard   String?
+  grade            Int?
   currentLevel     String?
   targetLevel      String?
   learningGoals    String?          @db.Text

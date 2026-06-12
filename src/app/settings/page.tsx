@@ -41,7 +41,17 @@ interface ProfileData {
   lessonsCount: number
   selfDescription: string
   voiceId: string
+  userType: string
+  educationBoard: string | null
+  grade: number | null
 }
+
+// Mirrors the education board registry (kept static — see OnboardingWizard)
+const SCHOOL_BOARDS = [
+  { id: 'cbse', shortName: 'CBSE' },
+  { id: 'up_board', shortName: 'UP Board' },
+]
+const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
 
 export default function SettingsPage() {
   const { t, lang, setLang } = useLanguage()
@@ -76,6 +86,10 @@ export default function SettingsPage() {
 
   // Profile state
   const [profile, setProfile] = useState<ProfileData | null>(null)
+  // School section state (Sprint BF)
+  const [schoolBoard, setSchoolBoard] = useState('')
+  const [schoolGrade, setSchoolGrade] = useState<number | null>(null)
+  const [schoolSave, setSchoolSave] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [profileName, setProfileName] = useState('')
   const [profileLevel, setProfileLevel] = useState('')
   const [profileVoice, setProfileVoice] = useState('male')
@@ -95,7 +109,7 @@ export default function SettingsPage() {
 
     fetch('/api/user/profile')
       .then((r) => r.json())
-      .then((d: { user?: { name?: string; email?: string; createdAt?: string; xpPoints?: number; _count?: { learnSessions?: number }; profile?: { selfDescription?: string; voiceId?: string } } }) => {
+      .then((d: { user?: { name?: string; email?: string; createdAt?: string; xpPoints?: number; _count?: { learnSessions?: number }; profile?: { selfDescription?: string; voiceId?: string; userType?: string; educationBoard?: string | null; grade?: number | null } } }) => {
         if (d.user) {
           const p: ProfileData = {
             name: d.user.name ?? '',
@@ -105,11 +119,16 @@ export default function SettingsPage() {
             lessonsCount: d.user._count?.learnSessions ?? 0,
             selfDescription: d.user.profile?.selfDescription ?? '',
             voiceId: d.user.profile?.voiceId ?? 'male',
+            userType: d.user.profile?.userType ?? 'GENERAL_LEARNER',
+            educationBoard: d.user.profile?.educationBoard ?? null,
+            grade: d.user.profile?.grade ?? null,
           }
           setProfile(p)
           setProfileName(p.name)
           setProfileLevel(p.selfDescription)
           setProfileVoice(p.voiceId)
+          setSchoolBoard(p.educationBoard ?? '')
+          setSchoolGrade(p.grade)
         }
       })
       .catch(() => {})
@@ -152,7 +171,7 @@ export default function SettingsPage() {
       if (d.success) {
         setProfileSave('saved')
         // Refetch profile to confirm updated values
-        const fresh = await fetch('/api/user/profile').then((r) => r.json()) as { user?: { name?: string; email?: string; createdAt?: string; xpPoints?: number; _count?: { learnSessions?: number }; profile?: { selfDescription?: string; voiceId?: string } } }
+        const fresh = await fetch('/api/user/profile').then((r) => r.json()) as { user?: { name?: string; email?: string; createdAt?: string; xpPoints?: number; _count?: { learnSessions?: number }; profile?: { selfDescription?: string; voiceId?: string; userType?: string; educationBoard?: string | null; grade?: number | null } } }
         if (fresh.user) {
           const p: ProfileData = {
             name: fresh.user.name ?? '',
@@ -162,6 +181,9 @@ export default function SettingsPage() {
             lessonsCount: fresh.user._count?.learnSessions ?? 0,
             selfDescription: fresh.user.profile?.selfDescription ?? '',
             voiceId: fresh.user.profile?.voiceId ?? 'male',
+            userType: fresh.user.profile?.userType ?? 'GENERAL_LEARNER',
+            educationBoard: fresh.user.profile?.educationBoard ?? null,
+            grade: fresh.user.profile?.grade ?? null,
           }
           setProfile(p)
           setProfileName(p.name)
@@ -173,6 +195,26 @@ export default function SettingsPage() {
         setProfileSave('idle')
       }
     } catch { setProfileSave('idle') }
+  }
+
+
+  async function handleSchoolSave() {
+    if (!schoolBoard || schoolGrade === null) return
+    setSchoolSave('saving')
+    try {
+      const res = await fetch('/api/user/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ educationBoard: schoolBoard, grade: schoolGrade }),
+      })
+      const d = await res.json() as { success?: boolean }
+      if (d.success) {
+        setSchoolSave('saved')
+        setTimeout(() => setSchoolSave('idle'), 2000)
+      } else {
+        setSchoolSave('error')
+      }
+    } catch { setSchoolSave('error') }
   }
 
   function handleLangClick(key: TeachingLang) {
@@ -299,6 +341,58 @@ export default function SettingsPage() {
             {profileSave === 'saved' ? t('profile_saved') : profileSave === 'saving' ? '...' : t('profile_save')}
           </button>
         </Section>
+
+
+        {/* My School (school students only) */}
+        {profile?.userType === 'SCHOOL_STUDENT' && (
+          <Section label="My School 🎒">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>
+                  Board
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {SCHOOL_BOARDS.map((b) => (
+                    <button key={b.id} onClick={() => setSchoolBoard(b.id)}
+                      className="py-2.5 rounded-xl text-xs font-semibold transition-all"
+                      style={{
+                        background: schoolBoard === b.id ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                        border: `1px solid ${schoolBoard === b.id ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                        color: schoolBoard === b.id ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                      }}>
+                      {b.shortName}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>
+                  Class
+                </label>
+                <div className="grid grid-cols-4 gap-2">
+                  {SCHOOL_GRADES.map((g) => (
+                    <button key={g} onClick={() => setSchoolGrade(g)}
+                      className="py-2.5 rounded-xl text-xs font-bold transition-all"
+                      style={{
+                        background: schoolGrade === g ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
+                        border: `1px solid ${schoolGrade === g ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                        color: schoolGrade === g ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                      }}>
+                      {g}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <button
+                onClick={handleSchoolSave}
+                disabled={schoolSave === 'saving' || !schoolBoard || schoolGrade === null}
+                className="w-full py-3 rounded-xl text-sm font-bold transition-all disabled:opacity-60"
+                style={{ background: 'var(--accent-primary)', color: '#fff' }}>
+                {schoolSave === 'saved' ? '✓ Saved' : schoolSave === 'saving' ? '...' : schoolSave === 'error' ? 'Failed — try again' : 'Save school info'}
+              </button>
+            </div>
+          </Section>
+        )}
 
         {/* Voice */}
         <Section label={t('settings_voice')}>
