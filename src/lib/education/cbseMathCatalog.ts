@@ -55,7 +55,7 @@ export const CBSE_MATH_CATALOG: BoardSubjectCatalog = {
       chapters: [
         { id: 'cbse.math.6.ch1', order: 1, title: 'Patterns in Mathematics', kgNodeIds: ['arithmetic.counting_numbers'] },
         { id: 'cbse.math.6.ch2', order: 2, title: 'Lines and Angles', kgNodeIds: ['geometry.basic_shapes'] },
-        { id: 'cbse.math.6.ch3', order: 3, title: 'Number Play', kgNodeIds: ['arithmetic.lcm_hcf'] },
+        { id: 'cbse.math.6.ch3', order: 3, title: 'Number Play', kgNodeIds: ['arithmetic.lcm_hcf', 'number_systems.whole_natural'] },
         { id: 'cbse.math.6.ch4', order: 4, title: 'Data Handling and Presentation', kgNodeIds: ['statistics.data_collection'] },
         { id: 'cbse.math.6.ch5', order: 5, title: 'Prime Time', kgNodeIds: ['arithmetic.lcm_hcf'] },
         { id: 'cbse.math.6.ch6', order: 6, title: 'Perimeter and Area', kgNodeIds: ['mensuration.perimeter_area_2d'] },
@@ -105,7 +105,7 @@ export const CBSE_MATH_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.math.8.ch6', order: 6, title: 'We Distribute, Yet Things Multiply', kgNodeIds: ['algebra.polynomials'] },
         { id: 'cbse.math.8.ch7', order: 7, title: 'Proportional Reasoning-1', kgNodeIds: ['ratios_proportions.ratio_basics'] },
         // Part 2 (Chapters 8–14)
-        { id: 'cbse.math.8.ch8', order: 8, title: 'Fractions in Disguise', kgNodeIds: ['fractions.operations'] },
+        { id: 'cbse.math.8.ch8', order: 8, title: 'Fractions in Disguise', kgNodeIds: ['fractions.operations', 'percentages.basics', 'percentages.applications', 'percentages.interest'] },
         { id: 'cbse.math.8.ch9', order: 9, title: 'The Baudhayana-Pythagoras Theorem', kgNodeIds: ['geometry.similarity'] },
         { id: 'cbse.math.8.ch10', order: 10, title: 'Proportional Reasoning-2', kgNodeIds: ['ratios_proportions.ratio_basics'] },
         { id: 'cbse.math.8.ch11', order: 11, title: 'Exploring Some Geometric Themes', kgNodeIds: ['geometry.constructions'] },
