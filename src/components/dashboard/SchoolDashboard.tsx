@@ -30,6 +30,8 @@ const BOARD_LABELS: Record<string, string> = {
 export interface SchoolSubjectProgress {
   slug: string
   completionPercent: number
+  completedCount: number
+  totalCount: number
   lastChapterTitle: string | null
   lastStudiedAt: Date | null
 }
@@ -166,7 +168,9 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
                   <div className="h-2 flex-1 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
                     <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, s.completionPercent))}%`, background: m.color, transition: 'width .5s' }} />
                   </div>
-                  <span className="text-[11px] font-mono font-bold w-9 text-right shrink-0" style={{ color: m.color }}>{s.completionPercent}%</span>
+                  <span className="text-[11px] font-mono font-bold w-20 text-right shrink-0" style={{ color: m.color }}>
+                    {s.completedCount}/{s.totalCount} · {s.completionPercent}%
+                  </span>
                 </div>
               )
             })}

@@ -4,10 +4,9 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import {
-  getSchoolChapters, getChapterPosition, chapterDisplayTitle,
-  isSchoolSubject, schoolSubjectCode, SCHOOL_SUBJECT_META,
-} from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
+import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
 
 /**
  * School subject home (Sprint BH): board-aware landing for one subject.
@@ -28,15 +27,8 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
   const subjectSlug = params.subject
   if (!isSchoolSubject(board, subjectSlug)) redirect('/dashboard')
 
-  const chapters = getSchoolChapters(board, subjectSlug, grade)
-  if (chapters.length === 0) redirect('/dashboard')
-
-  const code = schoolSubjectCode(board, subjectSlug, grade)
-  const [sp, recentSessions] = await withRetry(() => Promise.all([
-    prisma.studentProgress.findUnique({
-      where: { userId_subjectCode: { userId: session.user.id, subjectCode: code } },
-      select: { completedLessons: true, lastStudiedAt: true },
-    }),
+  const [progress, recentSessions] = await withRetry(() => Promise.all([
+    getSchoolSubjectProgress(session.user.id, board, grade, subjectSlug).catch(() => null),
     prisma.learnSession.findMany({
       where: { userId: session.user.id },
       orderBy: { startedAt: 'desc' },
@@ -44,8 +36,9 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
       select: { id: true, title: true, startedAt: true },
     }),
   ]))
+  if (!progress) redirect('/dashboard')
 
-  const pos = getChapterPosition(chapters, sp?.completedLessons ?? [])!
+  const pos = progress.position
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
   const boardLabel = board === 'cbse' ? 'CBSE' : board === 'up_board' ? 'UP Board' : board
 
@@ -76,7 +69,7 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
               {m.label}
             </h1>
             <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-              {pos.completedCount} of {pos.totalCount} chapters done
+              {pos.completedCount} completed · {pos.totalCount - pos.completedCount} remaining
             </p>
           </div>
           <span className="text-lg font-black font-mono shrink-0" style={{ color: m.color }}>{pos.percent}%</span>
@@ -99,11 +92,14 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
             <h2 className="text-lg font-black leading-snug mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
               {chapterDisplayTitle(pos.current.title)}
             </h2>
-            <Link href={`/learn?subject=${subjectSlug}&chapter=${encodeURIComponent(pos.current.id)}`}
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
-              style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
-              Continue learning <ArrowRight size={16} />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href={`/learn?subject=${subjectSlug}&chapter=${encodeURIComponent(pos.current.id)}`}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
+                style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
+                Continue learning <ArrowRight size={16} />
+              </Link>
+              <MarkChapterCompleteButton subject={subjectSlug} chapterId={pos.current.id} />
+            </div>
           </div>
         </section>
 

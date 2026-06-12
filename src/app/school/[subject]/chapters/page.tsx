@@ -4,10 +4,8 @@ import { ArrowLeft } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import {
-  getSchoolChapters, getChapterPosition, groupChaptersByUnit, chapterDisplayTitle,
-  isSchoolSubject, schoolSubjectCode, SCHOOL_SUBJECT_META,
-} from '@/lib/school/schoolRouting'
+import { groupChaptersByUnit, chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 
 /**
  * Full chapter list (Sprint BH) — secondary view behind "View all chapters".
@@ -28,16 +26,12 @@ export default async function SchoolChapterListPage({ params }: { params: { subj
   const subjectSlug = params.subject
   if (!isSchoolSubject(board, subjectSlug)) redirect('/dashboard')
 
-  const chapters = getSchoolChapters(board, subjectSlug, grade)
-  if (chapters.length === 0) redirect('/dashboard')
+  const progress = await withRetry(() => getSchoolSubjectProgress(session.user.id, board, grade, subjectSlug).catch(() => null))
+  if (!progress) redirect('/dashboard')
 
-  const sp = await withRetry(() => prisma.studentProgress.findUnique({
-    where: { userId_subjectCode: { userId: session.user.id, subjectCode: schoolSubjectCode(board, subjectSlug, grade) } },
-    select: { completedLessons: true },
-  }))
-  const completed = new Set(sp?.completedLessons ?? [])
-  const pos = getChapterPosition(chapters, sp?.completedLessons ?? [])!
-  const groups = groupChaptersByUnit(chapters)
+  const completed = progress.completedOrders
+  const pos = progress.position
+  const groups = groupChaptersByUnit(progress.chapters)
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
 
   return (
@@ -90,11 +84,10 @@ export default async function SchoolChapterListPage({ params }: { params: { subj
                       style={{ color: isCurrent ? 'var(--accent-primary)' : 'var(--text-primary)' }}>
                       {chapterDisplayTitle(ch.title)}
                     </span>
-                    {isCurrent && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider shrink-0" style={{ color: 'var(--accent-primary)' }}>
-                        Current
-                      </span>
-                    )}
+                    <span className="text-[10px] font-bold uppercase tracking-wider shrink-0"
+                      style={{ color: isCurrent ? 'var(--accent-primary)' : isDone ? 'var(--green)' : 'var(--text-dim)' }}>
+                      {isCurrent ? 'In progress' : isDone ? 'Completed' : ''}
+                    </span>
                   </div>
                 )
                 return isCurrent ? (
