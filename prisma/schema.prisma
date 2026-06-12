@@ -172,6 +172,7 @@ model Profile {
   targetLevel      String?
   learningGoals    String?          @db.Text
   voiceId          String?
+  speechRate       Float            @default(1.0)
   teachingLanguage TeachingLanguage @default(en)
   country          String           @default("global")
   voiceSpeed       Float            @default(1.0)
