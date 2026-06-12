@@ -14,6 +14,8 @@ import CareerSummaryPanel from '@/components/career/CareerSummaryPanel'
 import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
+import { SchoolDashboard, type SchoolSubjectProgress } from '@/components/dashboard/SchoolDashboard'
+import { getBoard } from '@/lib/education'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -68,6 +70,9 @@ export default async function DashboardPage() {
             displayName: true,
             teachingLanguage: true,
             streakDays: true,
+            userType: true,
+            educationBoard: true,
+            grade: true,
             subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } },
           },
         },
@@ -99,6 +104,39 @@ export default async function DashboardPage() {
     } else {
       redirect('/onboarding')
     }
+  }
+
+  // ─── School Student home (Sprint BG) ───
+  // Subjects derive from board + grade — never asked again. Chapter routing
+  // attaches in Sprint BH; CTAs land on /learn?subject=<slug> until then.
+  const sp0 = user.profile
+  if (sp0?.userType === 'SCHOOL_STUDENT' && sp0.educationBoard && sp0.grade) {
+    const boardDef = getBoard(sp0.educationBoard)
+    const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
+    const schoolProgress = await withRetry(() => prisma.studentProgress.findMany({
+      where: { userId: session.user.id, subjectCode: { in: schoolSlugs } },
+      select: { subjectCode: true, completionPercent: true, lastLessonTitle: true, lastStudiedAt: true },
+    }))
+    const progressMap = new Map(schoolProgress.map((p) => [p.subjectCode, p]))
+    const subjects: SchoolSubjectProgress[] = schoolSlugs.map((slug) => ({
+      slug,
+      completionPercent: progressMap.get(slug)?.completionPercent ?? 0,
+      lastChapterTitle: progressMap.get(slug)?.lastLessonTitle ?? null,
+      lastStudiedAt: progressMap.get(slug)?.lastStudiedAt ?? null,
+    }))
+    const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0)
+    const studiedToday = recentSessions.some((s) => s.startedAt >= startOfToday)
+    return (
+      <SchoolDashboard
+        displayName={sp0.displayName ?? user.name ?? 'Student'}
+        board={sp0.educationBoard}
+        grade={sp0.grade}
+        streakDays={sp0.streakDays ?? 0}
+        xpPoints={user.xpPoints ?? 0}
+        studiedToday={studiedToday}
+        subjects={subjects}
+      />
+    )
   }
 
   const profile = user.profile
