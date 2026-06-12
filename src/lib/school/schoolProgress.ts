@@ -94,3 +94,56 @@ export async function getSchoolProgressForSubjects(
   results.forEach((r, i) => { if (r) map.set(slugs[i], r) })
   return map
 }
+
+export interface ChapterProgressDetails {
+  completed: boolean
+  practiceMasteredCount: number
+  practiceTotalCount: number
+  questionsAttempted: number
+  accuracyPercent: number | null
+}
+
+/**
+ * Per-chapter progress for the chapter workspace (Sprint BL, Phase 6):
+ * mastery of the chapter's KG nodes, practice questions attempted, and
+ * average accuracy — all derived from existing TopicProgress/PracticeSession
+ * rows, keyed by the chapter's kgNodeIds.
+ */
+export async function getChapterProgressDetails(
+  userId: string,
+  subjectSlug: string,
+  chapter: Chapter,
+  completed: boolean,
+): Promise<ChapterProgressDetails> {
+  const nodeIds = chapter.kgNodeIds
+  if (nodeIds.length === 0) {
+    return { completed, practiceMasteredCount: 0, practiceTotalCount: 0, questionsAttempted: 0, accuracyPercent: null }
+  }
+
+  const [topicRows, sessions] = await Promise.all([
+    prisma.topicProgress.findMany({
+      where: { userId, subjectSlug, topicSlug: { in: nodeIds } },
+      select: { status: true },
+    }),
+    prisma.practiceSession.findMany({
+      where: { userId, subjectSlug, topicSlug: { in: nodeIds }, completedAt: { not: null } },
+      select: { questions: true, score: true },
+    }),
+  ])
+
+  const practiceMasteredCount = topicRows.filter((r) => DONE_STATUSES.has(r.status)).length
+  const questionsAttempted = sessions.reduce((sum, s) => sum + (Array.isArray(s.questions) ? s.questions.length : 0), 0)
+
+  const scored = sessions.filter((s): s is typeof s & { score: number } => typeof s.score === 'number')
+  const accuracyPercent = scored.length > 0
+    ? Math.round(scored.reduce((sum, s) => sum + s.score, 0) / scored.length)
+    : null
+
+  return {
+    completed,
+    practiceMasteredCount,
+    practiceTotalCount: nodeIds.length,
+    questionsAttempted,
+    accuracyPercent,
+  }
+}

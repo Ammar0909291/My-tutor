@@ -4,11 +4,20 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
-import { t } from '@/lib/i18n'
+import { t, type TranslationKey } from '@/lib/i18n'
 import { SubjectType } from '@prisma/client'
 import { getSchoolChapters, getChapterPosition, isSchoolSubject, schoolSubjectCode, chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 
-export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string; chapter?: string } }) {
+// Sprint BL — "Ask Tutor" quick-question chips on the chapter workspace deep
+// link in via ?ask=<key>, mapped to a localized prompt sent on session start.
+const ASK_PROMPT_KEYS: Record<string, TranslationKey> = {
+  explain: 'chapter_ask_explain',
+  examples: 'chapter_ask_examples',
+  summary: 'chapter_ask_summary',
+  basics: 'chapter_ask_basics',
+}
+
+export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string; chapter?: string; practice?: string; ask?: string } }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
@@ -203,6 +212,12 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
     pastSessionsSummary = pastSessions[0]?.summary ?? null
   }
 
+  // Sprint BL — deep links from the chapter workspace ("Practice Chapter" /
+  // "Ask Tutor" chips)
+  const autoOpenPractice = searchParams?.practice === '1'
+  const askKey = searchParams?.ask ? ASK_PROMPT_KEYS[searchParams.ask] : undefined
+  const initialPrompt = askKey ? t(teachingLang, askKey) : undefined
+
   return (
     <LessonScreen
       key={resolvedSubject.slug}
@@ -220,6 +235,8 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       resumeLessonTitle={schoolChapterTitle ?? studentProgress?.lastLessonTitle ?? undefined}
       resumeUnitTitle={schoolChapterId ? undefined : studentProgress?.lastUnitTitle ?? undefined}
       schoolChapterId={schoolChapterId}
+      autoOpenPractice={autoOpenPractice}
+      initialPrompt={initialPrompt}
     />
   )
 }

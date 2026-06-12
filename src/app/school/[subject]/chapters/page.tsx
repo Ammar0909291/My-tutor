@@ -91,7 +91,7 @@ export default async function SchoolChapterListPage({ params }: { params: { subj
                   </div>
                 )
                 return isCurrent ? (
-                  <Link key={ch.id} href={`/learn?subject=${subjectSlug}&chapter=${encodeURIComponent(ch.id)}`} style={{ textDecoration: 'none', display: 'block' }}>
+                  <Link key={ch.id} href={`/school/${subjectSlug}/chapter/${encodeURIComponent(ch.id)}`} style={{ textDecoration: 'none', display: 'block' }}>
                     {card}
                   </Link>
                 ) : (

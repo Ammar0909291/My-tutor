@@ -1728,3 +1728,23 @@ model OrganizationMember {
   @@index([userId])
   @@map("organization_members")
 }
+
+// ─── Chapter content cache (Sprint BL — chapter learning workspace) ─────────
+// Global cache (not per-user) for AI-generated chapter summaries/objectives,
+// keyed by board+subject+grade+chapter+language so all students share results.
+
+model ChapterContentCache {
+  id          String   @id @default(cuid())
+  board       String
+  subjectSlug String
+  grade       Int
+  chapterId   String
+  language    String   @default("en")
+  summary     String
+  objectives  Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([board, subjectSlug, grade, chapterId, language])
+  @@map("chapter_content_cache")
+}

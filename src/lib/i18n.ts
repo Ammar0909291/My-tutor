@@ -857,6 +857,10 @@ export const translations = {
     learn_label_lesson: 'Урок',
     learn_label_prev: 'Предыдущие уроки студента',
     learn_label_recent: 'Последние сообщения',
+    chapter_ask_explain: 'Объясни эту главу',
+    chapter_ask_examples: 'Приведи примеры',
+    chapter_ask_summary: 'Кратко перескажи главу',
+    chapter_ask_basics: 'Помоги разобраться с основами',
   },
   en: {
     /* ── Landing ── */
@@ -1714,6 +1718,10 @@ export const translations = {
     learn_label_lesson: 'Lesson',
     learn_label_prev: 'Previous lessons',
     learn_label_recent: 'Recent messages',
+    chapter_ask_explain: 'Explain this chapter',
+    chapter_ask_examples: 'Give examples',
+    chapter_ask_summary: 'Summarize chapter',
+    chapter_ask_basics: 'Help me understand basics',
   },
   hi: {
     /* ── Landing ── */
@@ -2572,6 +2580,10 @@ export const translations = {
     learn_label_lesson: 'पाठ',
     learn_label_prev: 'पिछले पाठ',
     learn_label_recent: 'हाल के संदेश',
+    chapter_ask_explain: 'यह चैप्टर समझाओ',
+    chapter_ask_examples: 'उदाहरण दो',
+    chapter_ask_summary: 'चैप्टर का सार बताओ',
+    chapter_ask_basics: 'बेसिक्स समझने में मदद करो',
   },
 } as const
 

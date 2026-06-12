@@ -93,7 +93,7 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
               {chapterDisplayTitle(pos.current.title)}
             </h2>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href={`/learn?subject=${subjectSlug}&chapter=${encodeURIComponent(pos.current.id)}`}
+              <Link href={`/school/${subjectSlug}/chapter/${encodeURIComponent(pos.current.id)}`}
                 className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
                 style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
                 Continue learning <ArrowRight size={16} />

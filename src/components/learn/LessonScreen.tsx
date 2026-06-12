@@ -187,6 +187,8 @@ interface Props {
   subjects?: {slug:string;name:string}[]; displayName?: string; userId?: string
   resumeLessonTitle?: string; resumeUnitTitle?: string
   schoolChapterId?: string
+  autoOpenPractice?: boolean
+  initialPrompt?: string
 }
 
 // ─── Panel wrapper ────────────────────────────────────────────────────────────
@@ -232,7 +234,7 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId, autoOpenPractice, initialPrompt }: Props) {
   const { t, lang: uiLang } = useLanguage()
   const { country } = useCountry()
   const { theme } = useTheme()
@@ -318,6 +320,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const messagesAreaRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const initializedRef = useRef(false)
+  const autoOpenedPracticeRef = useRef(false)
   const speakingIdRef = useRef<string|null>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
@@ -792,10 +795,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             ? `Hi! ${lessonRef ? `You were working on ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue from there. Level: "${levelDescription}". 3-4 sentences.`
             : `Start the lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself as "Tutor Max" and begin teaching. 3-4 sentences.`)
         await sendMessage(sid, opening, false)
+        if (initialPrompt) await sendMessage(sid, initialPrompt, true)
       } catch { setInitError('Connection failed. Please refresh the page.') }
     }
     init()
-  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId])
+  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId, initialPrompt])
 
   // Vision send
   async function sendImageMessage(sid: string) {
@@ -974,6 +978,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const nextLessonData = curriculumLessons.find((l) => l.order === (curriculumProgress.currentLesson + 1)) ?? null
   const totalLessons = curriculumLessons.length
   const xpProgress = totalLessons > 0 ? Math.round((curriculumProgress.completedLessons.length / totalLessons) * 100) : 0
+
+  // Sprint BL — "Practice Chapter" deep link from the chapter workspace opens
+  // straight into the practice panel once the lesson/topic data is ready.
+  useEffect(() => {
+    if (!autoOpenPractice || autoOpenedPracticeRef.current) return
+    if (!currentLessonData?.topicSlug) return
+    autoOpenedPracticeRef.current = true
+    setPracticeOpen(true)
+  }, [autoOpenPractice, currentLessonData])
 
   // Sprint F, Part 4 — session recovery: remember the learner's last position
   // so the dashboard can offer "continue where you left off" (read-only —
