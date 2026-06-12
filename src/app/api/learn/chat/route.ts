@@ -248,11 +248,23 @@ export async function POST(req: Request) {
     // chapter KG topics and previously-covered node count, straight from the
     // education graph. Additive and school-only; general learners never get it.
     if (schoolCtx) {
+      // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
+      // can be passed to buildGuidedTeachingPrompt below.
+      let guidedWeakTopicTitles: string[] = []
+      let guidedChapterObjectives: string[] = []
+
       try {
-        const { buildSchoolTutorContext } = await import('@/lib/education')
+        const { buildSchoolTutorContext, getNodesForChapter } = await import('@/lib/education')
+        const { getSchoolChapters: _getChapters } = await import('@/lib/school/schoolRouting')
         const ctx = buildSchoolTutorContext(schoolCtx.board, subjectCode, schoolCtx.grade, schoolCtx.chapter.id)
         if (ctx) {
           systemPrompt += `\n\nSCHOOL MODE — AUTHORITATIVE CURRICULUM CONTEXT:\n${ctx}\nThe student is a ${schoolCtx.board === 'cbse' ? 'CBSE' : 'UP Board'} Class ${schoolCtx.grade} student working on chapter ${schoolCtx.chapter.order} of ${schoolCtx.totalChapters}, "${schoolCtx.displayTitle}". Teach strictly at this grade level and within this chapter's scope (referencing previously covered chapters is fine). NEVER ask the student for their board, class, or chapter — you already know. Use NCERT/board-aligned terminology, methods, and examples appropriate for this class.`
+        }
+        // Phase 6: extract chapter node titles as objectives for guided teaching
+        const fullChapterForObj = _getChapters(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c) => c.id === schoolCtx!.chapter.id)
+        if (fullChapterForObj) {
+          guidedChapterObjectives = getNodesForChapter(fullChapterForObj).map((n) => n.title)
         }
       } catch (err) {
         console.warn('[learn/chat] school curriculum context skipped:', err)
@@ -273,6 +285,7 @@ export async function POST(req: Request) {
           getChapterProgressDetails(userId, subjectCode, fullChapter, false),
         ])
         const weakTop = weak.slice(0, 5)
+        guidedWeakTopicTitles = weak.slice(0, 2).map((t) => t.title)
         const nextStep = getChapterNextStep(details, schoolCtx.chapter.order < schoolCtx.totalChapters)
         const actionLabel = nextStep === 'practice' ? 'Practice this chapter'
           : nextStep === 'assessment' ? 'Take the chapter assessment'
@@ -298,6 +311,22 @@ export async function POST(req: Request) {
         }
       } catch {
         // non-fatal — plan context is purely additive
+      }
+
+      // Sprint BP (Tutoring Quality): guided teaching strategy — understanding
+      // checks, grade-aware depth, confusion recovery, weak-topic reinforcement,
+      // example-first teaching, objective awareness, session completion signal.
+      try {
+        const { buildGuidedTeachingPrompt } = await import('@/lib/school/tutoring/guidedTeachingPrompt')
+        systemPrompt += buildGuidedTeachingPrompt({
+          board: schoolCtx.board,
+          grade: schoolCtx.grade,
+          subjectSlug: subjectCode,
+          weakTopicTitles: guidedWeakTopicTitles,
+          chapterObjectives: guidedChapterObjectives,
+        })
+      } catch (err) {
+        console.warn('[learn/chat] guided teaching prompt skipped:', err)
       }
     }
 
