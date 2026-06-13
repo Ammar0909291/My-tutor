@@ -26,6 +26,8 @@ export interface StudentLearningProfile {
   preferredTeachingStyle: TeachingStyleResult
   /** Sprint CB: number of detected prerequisite gaps across all struggling topics */
   prerequisiteGapCount: number
+  /** Sprint CE: lightweight exam readiness summary string (e.g. "Mathematics: 78% (Exam Ready), ...") */
+  examReadinessSummary: string | null
 }
 
 const LOOKBACK_DAYS = 60
@@ -35,6 +37,7 @@ export async function buildLearningProfile(
   grade: number,
   subjectSlug?: string,
   lastSuccessfulStyle?: string | null,
+  board?: string,
 ): Promise<StudentLearningProfile> {
   const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000)
 
@@ -139,6 +142,16 @@ export async function buildLearningProfile(
     } catch { /* non-fatal */ }
   }
 
+  // Sprint CE: lightweight exam readiness summary (only when board is provided)
+  let examReadinessSummary: string | null = null
+  if (board) {
+    try {
+      const { getExamReadinessForAllSubjects, buildExamReadinessSummaryText } = await import('./examReadiness')
+      const summary = await getExamReadinessForAllSubjects(userId, board, grade)
+      examReadinessSummary = buildExamReadinessSummaryText(summary)
+    } catch { /* non-fatal */ }
+  }
+
   return {
     grade,
     strengths,
@@ -148,6 +161,7 @@ export async function buildLearningProfile(
     preferredDifficulty,
     preferredTeachingStyle,
     prerequisiteGapCount,
+    examReadinessSummary,
   }
 }
 

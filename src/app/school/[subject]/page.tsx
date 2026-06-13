@@ -8,6 +8,7 @@ import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
+import { getExamReadinessForSubject } from '@/lib/school/adaptive/examReadiness'
 
 /**
  * School subject home (Sprint BH): board-aware landing for one subject.
@@ -39,8 +40,11 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
   ]))
   if (!progress) redirect('/dashboard')
 
-  // Sprint BP: compact 4-step study plan for the current chapter
-  const studyPlan = await getStudyPlan(session.user.id, board, grade, subjectSlug).catch(() => [])
+  // Sprint BP: compact 4-step study plan + Sprint CE: exam readiness
+  const [studyPlan, examReadiness] = await Promise.all([
+    getStudyPlan(session.user.id, board, grade, subjectSlug).catch(() => []),
+    getExamReadinessForSubject(session.user.id, board, grade, subjectSlug).catch(() => null),
+  ])
 
   const pos = progress.position
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
@@ -80,7 +84,24 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
               {pos.next ? ` · Next recommended: Chapter ${pos.next.order}` : ''}
             </p>
           </div>
-          <span className="text-lg font-black font-mono shrink-0" style={{ color: m.color }}>{pos.percent}%</span>
+          <div className="flex flex-col items-end gap-1.5 shrink-0">
+            <span className="text-lg font-black font-mono" style={{ color: m.color }}>{pos.percent}%</span>
+            {examReadiness && examReadiness.confidence !== 'low' && (
+              <span
+                className="text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
+                style={{
+                  background: examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready'
+                    ? 'var(--green-muted)' : 'var(--yellow-muted)',
+                  color: examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready'
+                    ? 'var(--green)' : 'var(--yellow)',
+                  border: `1px solid ${examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready' ? 'var(--green)' : 'var(--yellow)'}`,
+                }}
+              >
+                {examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready'
+                  ? '✓ Exam Ready' : 'Needs Revision'}
+              </span>
+            )}
+          </div>
         </header>
 
         {/* Progress bar */}

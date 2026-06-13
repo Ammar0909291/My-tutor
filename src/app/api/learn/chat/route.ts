@@ -297,7 +297,7 @@ export async function POST(req: Request) {
       // never touches Practice/Assessment/TopicProgress/MistakeRecord.
       try {
         const { buildLearningProfile, checkpointFrequencyForMode } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle)
+        learnerProf = await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle, schoolCtx.board)
         learnerProfHoisted = learnerProf
         checkpointFrequency = checkpointFrequencyForMode(learnerProf.preferredDifficulty)
 
@@ -398,7 +398,7 @@ export async function POST(req: Request) {
       // smart questioning, phase 4 weak-node recovery, phase 3 explanation depth.
       try {
         const { buildLearningProfile, formatLearningProfileContext } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = learnerProf ?? await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle)
+        learnerProf = learnerProf ?? await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle, schoolCtx.board)
         learnerProfHoisted = learnerProf
         systemPrompt += formatLearningProfileContext(learnerProf)
 
@@ -470,6 +470,20 @@ export async function POST(req: Request) {
         }
       } catch (err) {
         console.warn('[learn/chat] prerequisite recovery context skipped:', err)
+      }
+
+      // Sprint CE: exam readiness block — inject when profile has readiness data
+      try {
+        if (learnerProfHoisted?.examReadinessSummary) {
+          const { getExamReadinessForSubject, buildExamReadinessBlock } = await import('@/lib/school/adaptive/examReadiness')
+          const { ALL_KG_NODES } = await import('@/lib/education')
+          const nodeMap = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n.title]))
+          const readiness = await getExamReadinessForSubject(userId, schoolCtx.board, schoolCtx.grade, subjectCode)
+          const block = buildExamReadinessBlock(readiness, (id) => nodeMap.get(id) ?? id)
+          if (block) systemPrompt += block
+        }
+      } catch (err) {
+        console.warn('[learn/chat] exam readiness context skipped:', err)
       }
 
       // Sprint BW: visual learning aids — detect the best visual for this chapter

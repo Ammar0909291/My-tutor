@@ -191,11 +191,30 @@ export async function getDailyStudyPlan(
     })
   }
 
-  // Priority 3 & 4: continue/start chapters for each subject in board order
-  for (const slug of slugs) {
+  // Priority 3 & 4: continue/start chapters sorted by exam readiness ascending
+  // (lower readiness subjects get scheduled first — Sprint CE influence)
+  let candidateSlugs = slugs.filter((slug) => {
+    const p = progressMap.get(slug)
+    return p && p.completedCount < p.totalCount
+  })
+  if (candidateSlugs.length > 1) {
+    try {
+      const { getExamReadinessForSubject } = await import('./examReadiness')
+      const readinessScores = await Promise.all(
+        candidateSlugs.map((slug) =>
+          getExamReadinessForSubject(userId, board, grade, slug)
+            .then((r) => ({ slug, score: r.readinessPercent }))
+            .catch(() => ({ slug, score: 50 }))
+        )
+      )
+      const scoreMap = new Map(readinessScores.map((r) => [r.slug, r.score]))
+      candidateSlugs = candidateSlugs.sort((a, b) => (scoreMap.get(a) ?? 50) - (scoreMap.get(b) ?? 50))
+    } catch { /* non-fatal — fall back to board order */ }
+  }
+  for (const slug of candidateSlugs) {
     if (tasks.length >= MAX_TASKS) break
     const p = progressMap.get(slug)
-    if (!p || p.completedCount >= p.totalCount) continue
+    if (!p) continue
     const chapter = p.position.current
     const priority = p.lastStudiedAt ? 'continue_chapter' : 'start_next_chapter'
     addTask({
