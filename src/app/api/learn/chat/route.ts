@@ -414,6 +414,23 @@ export async function POST(req: Request) {
         // non-fatal — transfer context is purely additive
       }
 
+      // Sprint CU: confidence calibration — detect overconfident/underconfident learners.
+      try {
+        const { getConfidenceProfile, buildConfidenceCalibrationBlock } = await import('@/lib/school/adaptive/confidenceCalibration')
+        // Include recent student messages from this session as live language signals
+        const recentStudentMessages = learnSession.messages
+          .filter((m) => m.role === MessageRole.USER)
+          .slice(0, 10)
+          .map((m) => m.content)
+        const confidenceProfile = await getConfidenceProfile(
+          userId, subjectCode, schoolCtx.chapter.id, recentStudentMessages
+        )
+        const block = buildConfidenceCalibrationBlock(confidenceProfile)
+        if (block) systemPrompt += block
+      } catch {
+        // non-fatal — confidence context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {

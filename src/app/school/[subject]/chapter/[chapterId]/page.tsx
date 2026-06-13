@@ -21,6 +21,7 @@ import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 import { getMasteryProfile, buildStudentFacingEvidence } from '@/lib/school/adaptive/masteryIntelligence'
 import { getChapterMisconceptions } from '@/lib/school/adaptive/misconceptionEngine'
 import { getTransferProfile } from '@/lib/school/adaptive/conceptTransfer'
+import { getConfidenceProfile } from '@/lib/school/adaptive/confidenceCalibration'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -78,7 +79,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -94,6 +95,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     getChapterMisconceptions(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => []),
     // Sprint CT: concept transfer profile
     getTransferProfile(session.user.id, board, grade, subjectSlug, chapter.id).catch(() => null),
+    // Sprint CU: confidence calibration
+    getConfidenceProfile(session.user.id, subjectSlug, chapter.id).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -160,6 +163,16 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     TRANSFER_DEVELOPING:'You understand the basics but need more application practice.',
     TRANSFER_WEAK:      'Try more real-world applications of this concept.',
   }
+
+  // Sprint CU: confidence calibration card styling (hide UNCERTAIN/null)
+  const CONFIDENCE_STYLE: Record<string, { color: string; bg: string; border: string }> = {
+    WELL_CALIBRATED: { color: 'var(--green)',   bg: 'var(--green-muted)',   border: 'var(--green)' },
+    OVERCONFIDENT:   { color: 'var(--coral)',   bg: 'var(--coral-muted)',   border: 'var(--coral)' },
+    UNDERCONFIDENT:  { color: 'var(--purple)',  bg: 'var(--coral-muted)',   border: 'var(--purple)' },
+  }
+  const confidenceStyle = confidenceProfile && confidenceProfile.calibration !== 'UNCERTAIN'
+    ? (CONFIDENCE_STYLE[confidenceProfile.calibration] ?? null)
+    : null
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -272,6 +285,19 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </p>
             <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
               {TRANSFER_DESCRIPTIONS[transferProfile.level]}
+            </p>
+          </div>
+        )}
+
+        {/* Sprint CU: Confidence calibration card — hidden when null or UNCERTAIN */}
+        {confidenceProfile && confidenceStyle && (
+          <div className="rounded-2xl px-4 py-3"
+            style={{ background: confidenceStyle.bg, border: `1px solid ${confidenceStyle.border}` }}>
+            <p className="text-xs font-bold mb-0.5" style={{ color: confidenceStyle.color }}>
+              {confidenceProfile.insight}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              {confidenceProfile.insightDetail}
             </p>
           </div>
         )}

@@ -211,36 +211,44 @@ export async function getDailyStudyPlan(
       candidateSlugs = candidateSlugs.sort((a, b) => (scoreMap.get(a) ?? 50) - (scoreMap.get(b) ?? 50))
     } catch { /* non-fatal — fall back to board order */ }
 
-    // Sprint CR+CS+CT: secondary sort by mastery weight with misconception and transfer adjustments
+    // Sprint CR+CS+CT+CU: secondary sort by mastery weight with intelligence adjustments
     try {
       const { getMasteryProfile, masteryPriorityWeight } = await import('./masteryIntelligence')
       const { getChapterMisconceptions } = await import('./misconceptionEngine')
       const { evaluateConceptTransfer } = await import('./conceptTransfer')
+      const { getConfidenceProfile } = await import('./confidenceCalibration')
       const masteryScores = await Promise.all(
         candidateSlugs.map(async (slug) => {
           const p = progressMap.get(slug)
           const chapter = p?.position.current
           if (!chapter) return { slug, weight: 2 }
-          const [profile, misconceptions, transferProfile] = await Promise.all([
+          const [profile, misconceptions, transferProfile, confidenceProfile] = await Promise.all([
             getMasteryProfile(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => null),
             getChapterMisconceptions(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => []),
             evaluateConceptTransfer(userId, slug, chapter.id).catch(() => null),
+            getConfidenceProfile(userId, slug, chapter.id).catch(() => null),
           ])
           let weight = profile ? masteryPriorityWeight(profile.masteryLevel) : 2
-          // FALSE_MASTERY + HIGH confidence misconception → escalate to AT_RISK priority (0)
+          // FALSE_MASTERY + HIGH misconception → AT_RISK priority (0)
           if (profile?.masteryLevel === 'FALSE_MASTERY' && misconceptions.some((m) => m.confidence === 'HIGH')) {
             weight = 0
           }
-          // TRUE_MASTERY + TRANSFER_WEAK → don't advance aggressively; treat as DEVELOPING (2)
+          // FALSE_MASTERY + OVERCONFIDENT → AT_RISK priority (0) — student thinks they know but doesn't
+          if (profile?.masteryLevel === 'FALSE_MASTERY' && confidenceProfile?.calibration === 'OVERCONFIDENT') {
+            weight = 0
+          }
+          // TRUE_MASTERY + TRANSFER_WEAK → DEVELOPING priority (2) — needs application practice
           if (profile?.masteryLevel === 'TRUE_MASTERY' && transferProfile?.level === 'TRANSFER_WEAK') {
             weight = Math.min(weight, 2)
           }
+          // TRUE_MASTERY + UNDERCONFIDENT → keep at 3 (don't hold back well-performing student)
+          // (no change needed — already weight 3)
           return { slug, weight }
         })
       )
       const weightMap = new Map(masteryScores.map((r) => [r.slug, r.weight]))
       candidateSlugs = candidateSlugs.sort((a, b) => (weightMap.get(a) ?? 2) - (weightMap.get(b) ?? 2))
-    } catch { /* non-fatal — mastery/misconception/transfer sort is additive */ }
+    } catch { /* non-fatal — intelligence sort is additive */ }
   }
   for (const slug of candidateSlugs) {
     if (tasks.length >= MAX_TASKS) break
