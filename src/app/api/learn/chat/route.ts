@@ -392,6 +392,22 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[learn/chat] learning profile context skipped:', err)
       }
+
+      // Sprint BW: visual learning aids — detect the best visual for this chapter
+      // and instruct the tutor to emit a VISUAL:<type> tag when helpful.
+      // Additive only — never blocks, never modifies existing context.
+      try {
+        const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
+        const availableVisual = detectVisual({
+          subjectSlug: subjectCode,
+          chapterTitle: schoolCtx.chapter.title,
+          lessonTitle: lessonCtx?.lessonTitle,
+        })
+        const visualBlock = buildVisualsSystemBlock(availableVisual)
+        if (visualBlock) systemPrompt += visualBlock
+      } catch (err) {
+        console.warn('[learn/chat] visual aids context skipped:', err)
+      }
     }
 
     // Append the personalized roadmap context (if one exists) so the tutor
@@ -669,8 +685,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
       }
 
+      // Sprint BW: extract and strip VISUAL:<type> tag before persisting/returning.
+      // The tag is additive — stripping it keeps stored messages clean.
+      let responseVisual: string | null = null
+      let cleanText = text
+      if (schoolCtx) {
+        try {
+          const { parseVisualTag } = await import('@/lib/school/visuals/detectVisual')
+          const parsed = parseVisualTag(text)
+          responseVisual = parsed.visual
+          cleanText = parsed.cleanText
+        } catch { /* non-fatal */ }
+      }
+
       await withRetry(() => prisma.message.create({
-        data: { sessionId, role: MessageRole.ASSISTANT, content: text },
+        data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
 
       // Auto-save lesson position on every interaction so Dashboard/Library
@@ -696,7 +725,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         },
       }).catch(() => {})
 
-      return NextResponse.json({ success: true, text, provider })
+      return NextResponse.json({ success: true, text: cleanText, provider, visual: responseVisual ?? undefined })
     } catch (error: any) {
       // Global AI budget spent — expected under load, not an error to report.
       if (error instanceof AIBudgetExceededError) {

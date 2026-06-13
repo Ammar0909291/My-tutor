@@ -13,6 +13,8 @@ import { recordLastLesson } from '@/lib/hooks/useLastLesson'
 import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
+import { VisualCard } from '@/components/school/visuals/VisualCard'
+import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -156,7 +158,7 @@ function TypingDots() {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'YANDEX'|'GROQ'|'FALLBACK' }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -531,11 +533,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; error?: any }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; error?: any }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
       const provider = data.provider
+      const responseVisual = data.visual
       const COMPLETION_KEYWORDS = [
         '[LESSON_COMPLETE]',
         'следующий урок', 'урок завершён', 'урок завершен',
@@ -635,7 +638,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2017,6 +2020,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                             </button>
                           </div>
                         )}
+                      </div>
+                    )}
+
+                    {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
+                    {!isUser && !msg.streaming && msg.visual && (
+                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                        <VisualCard type={msg.visual as VisualType} />
                       </div>
                     )}
 
