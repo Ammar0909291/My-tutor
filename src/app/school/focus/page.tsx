@@ -98,6 +98,7 @@ export default async function FocusPage({
 
   const ACTION_LABELS: Record<string, string> = {
     retake_assessment: 'Retake Assessment',
+    review_spaced: 'Quick Review',
     practice_weak: 'Review Weak Areas',
     continue_chapter: 'Continue',
     start_next_chapter: 'Start Chapter',

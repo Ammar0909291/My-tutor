@@ -2,17 +2,19 @@ import { getBoard } from '@/lib/education'
 import { chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from './weakTopics'
+import { getDueRevisionsBySubjects } from './spacedRevision'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
 import { prisma } from '@/lib/db/prisma'
 
 /**
- * Daily Study Plan (Sprint BQ) — deterministic, no AI, no new tables.
+ * Daily Study Plan (Sprint BQ/CA) — deterministic, no AI, no new tables.
  *
  * Priority:
- *   1. failed assessment  → retake_assessment
- *   2. weak topic revision → practice_weak
- *   3. current chapter     → continue_chapter
- *   4. next chapter        → start_next_chapter
+ *   1. failed assessment   → retake_assessment
+ *   2. spaced revision due → review_spaced      (Sprint CA)
+ *   3. weak topic revision → practice_weak
+ *   4. current chapter     → continue_chapter
+ *   5. next chapter        → start_next_chapter
  *
  * Max 3 tasks. Target total: 30 min (grade 5–6), 45 min (7–8), 60 min (9–12).
  */
@@ -24,7 +26,7 @@ export interface DailyTask {
   title: string
   estimatedMinutes: number
   reason: string
-  priority: 'retake_assessment' | 'practice_weak' | 'continue_chapter' | 'start_next_chapter'
+  priority: 'retake_assessment' | 'review_spaced' | 'practice_weak' | 'continue_chapter' | 'start_next_chapter'
   href: string
 }
 
@@ -38,6 +40,7 @@ function targetMinutes(grade: number): number {
 
 function taskMinutes(priority: DailyTask['priority']): number {
   if (priority === 'retake_assessment') return 20
+  if (priority === 'review_spaced') return 10
   if (priority === 'practice_weak') return 15
   return 15
 }
@@ -55,7 +58,7 @@ export async function getDailyStudyPlan(
   const slugs = getBoard(board)?.subjects ?? []
   if (slugs.length === 0) return []
 
-  const [progressMap, assessmentRows, revision] = await Promise.all([
+  const [progressMap, assessmentRows, revision, dueRevisions] = await Promise.all([
     getSchoolProgressForSubjects(userId, board, grade, slugs),
     prisma.practiceSession.findMany({
       where: { userId, subjectSlug: { in: slugs }, kind: 'assessment', completedAt: { not: null } },
@@ -64,6 +67,7 @@ export async function getDailyStudyPlan(
       select: { subjectSlug: true, chapterId: true, score: true },
     }).catch(() => [] as { subjectSlug: string; chapterId: string | null; score: number | null }[]),
     getRecommendedRevisionChapter(userId, board, grade).catch(() => null),
+    getDueRevisionsBySubjects(userId, slugs).catch(() => [] as Awaited<ReturnType<typeof getDueRevisionsBySubjects>>),
   ])
 
   const label = (slug: string) => SCHOOL_SUBJECT_META[slug]?.label ?? slug
@@ -107,7 +111,32 @@ export async function getDailyStudyPlan(
     })
   }
 
-  // Priority 2: weak topic revision
+  // Priority 2: spaced revision due (Sprint CA) — map overdue nodes → chapters
+  if (dueRevisions.length > 0 && tasks.length < MAX_TASKS) {
+    const { getSchoolChapters } = await import('@/lib/school/schoolRouting')
+    // Group by subject, find the chapter containing the most overdue node
+    const addedRevisionChapterIds = new Set<string>()
+    for (const due of dueRevisions) {
+      if (tasks.length >= MAX_TASKS) break
+      const chapters = getSchoolChapters(board, due.subjectSlug, grade)
+      const chapter = chapters.find((c) => c.kgNodeIds.includes(due.nodeId))
+      if (!chapter) continue
+      if (addedRevisionChapterIds.has(chapter.id)) continue
+      addedRevisionChapterIds.add(chapter.id)
+      addTask({
+        subjectSlug: due.subjectSlug,
+        subjectLabel: label(due.subjectSlug),
+        chapterId: chapter.id,
+        title: chapterDisplayTitle(chapter.title),
+        estimatedMinutes: taskMinutes('review_spaced'),
+        reason: `Review: ${due.title} — due for memory refresh`,
+        priority: 'review_spaced',
+        href: taskHref(due.subjectSlug, chapter.id, 'review_spaced'),
+      })
+    }
+  }
+
+  // Priority 3: weak topic revision
   if (revision && tasks.length < MAX_TASKS) {
     addTask({
       subjectSlug: revision.subjectSlug,

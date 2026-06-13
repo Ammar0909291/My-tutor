@@ -11,6 +11,7 @@ import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getChapterNextStep } from '@/lib/school/adaptive/nextBestAction'
 import { chapterDifficultyBadge, buildLearningProfile } from '@/lib/school/adaptive/learningProfile'
 import { buildLessonPlan, getLessonPlanCardItems } from '@/lib/school/adaptive/lessonPlanner'
+import { getRevisionStates, getRevisionBadge } from '@/lib/school/adaptive/spacedRevision'
 import { getNodesForChapter } from '@/lib/education'
 
 /**
@@ -69,13 +70,15 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
     buildLearningProfile(session.user.id, grade, subjectSlug).catch(() => null),
     buildLessonPlan(session.user.id, subjectSlug, chapter.id, chapterDisplayTitle(chapter.title), chapterKgNodesForPlan).catch(() => null),
+    getRevisionStates(session.user.id, subjectSlug, chapter.kgNodeIds).catch(() => []),
   ])
+  const revisionBadge = getRevisionBadge(revisionStates)
   // Sprint BO: weak KG nodes belonging to THIS chapter (max 3 shown)
   const chapterWeakTopics = subjectWeakTopics
     .filter((t) => chapter.kgNodeIds.includes(t.nodeId))
@@ -144,6 +147,18 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
               <span className="inline-block mt-2 ml-2 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
                 style={{ color: 'var(--coral)', background: 'var(--coral-muted)', border: '1px solid var(--coral)' }}>
                 {learnerProfile.preferredTeachingStyle.label}
+              </span>
+            )}
+            {revisionBadge === 'review_due' && (
+              <span className="inline-block mt-2 ml-2 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                style={{ color: 'var(--yellow)', background: 'var(--yellow-muted)', border: '1px solid var(--yellow)' }}>
+                Review Due
+              </span>
+            )}
+            {revisionBadge === 'recently_mastered' && (
+              <span className="inline-block mt-2 ml-2 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                style={{ color: 'var(--green)', background: 'var(--green-muted)', border: '1px solid var(--green)' }}>
+                Recently Mastered
               </span>
             )}
           </div>

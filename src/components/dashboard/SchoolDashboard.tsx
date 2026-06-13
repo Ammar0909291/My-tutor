@@ -71,6 +71,7 @@ export interface SchoolDashboardProps {
 
 const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
   retake_assessment:  { heading: 'Retake', cta: 'Retake Assessment' },
+  review_spaced:      { heading: 'Review', cta: 'Quick Review' },
   practice_weak:      { heading: 'Review', cta: 'Review Weak Areas' },
   continue_chapter:   { heading: 'Continue', cta: 'Continue' },
   start_next_chapter: { heading: 'Start', cta: 'Start Chapter' },

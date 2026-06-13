@@ -317,6 +317,13 @@ export async function POST(req: Request) {
               if (hintUsed) checkpointFailedAgain = true
               else pendingCheckpointRetry = true
             }
+            // Sprint CA: advance spaced revision stage when checkpoint is on a
+            // previously-mastered node (tracks whether memory is being retained)
+            if (checkpointEval.nodeId) {
+              import('@/lib/school/adaptive/spacedRevision').then(({ advanceRevision }) =>
+                advanceRevision(userId, subjectCode, checkpointEval.nodeId!, checkpointEval.passed)
+              ).catch(() => {})
+            }
           }
         }
       } catch (err) {
@@ -430,6 +437,17 @@ export async function POST(req: Request) {
         }
       } catch (err) {
         console.warn('[learn/chat] lesson plan context skipped:', err)
+      }
+
+      // Sprint CA: spaced revision — inject DUE FOR REVIEW block when mastered
+      // concepts in this chapter are due for a memory refresh.
+      try {
+        const { getDueRevisions, buildRevisionBlock } = await import('@/lib/school/adaptive/spacedRevision')
+        const dueRevisions = await getDueRevisions(userId, subjectCode, chapterKgNodes.map((n) => n.id))
+        const revBlock = buildRevisionBlock(dueRevisions)
+        if (revBlock) systemPrompt += revBlock
+      } catch (err) {
+        console.warn('[learn/chat] spaced revision context skipped:', err)
       }
 
       // Sprint BW: visual learning aids — detect the best visual for this chapter
