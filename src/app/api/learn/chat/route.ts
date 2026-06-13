@@ -368,6 +368,21 @@ export async function POST(req: Request) {
         console.warn('[learn/chat] student status context skipped:', err)
       }
 
+      // Sprint CR: mastery intelligence — detect false mastery and guide tutor tone.
+      try {
+        const { getMasteryProfile, buildMasteryIntelligenceBlock } = await import('@/lib/school/adaptive/masteryIntelligence')
+        const { getSchoolChapters: _getChaptersForMastery } = await import('@/lib/school/schoolRouting')
+        const fullChapterForMastery = _getChaptersForMastery(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+        const kgNodeIds = fullChapterForMastery?.kgNodeIds ?? []
+        const masteryProfile = await getMasteryProfile(
+          userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, kgNodeIds
+        )
+        systemPrompt += buildMasteryIntelligenceBlock(masteryProfile)
+      } catch {
+        // non-fatal — mastery context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {
