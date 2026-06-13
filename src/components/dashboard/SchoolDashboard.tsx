@@ -4,7 +4,7 @@ import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
-import type { LearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorTypes'
 import { ProgressReportButton } from '@/components/dashboard/ProgressReportButton'
 
 /**

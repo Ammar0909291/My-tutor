@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, CheckCircle, XCircle, RotateCcw, ArrowLeft } from 'lucide-react'
 import type { PracticeResult, QuestionReview } from '@/lib/school/practice/practiceTypes'
+import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorTypes'
+import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 interface ClientQuestion {
   id: string
@@ -17,6 +19,8 @@ interface PracticeQuizProps {
   subjectSlug: string
   chapterId: string
   chapterTitle: string
+  /** Sprint CQ: pre-fetched Navigator action for post-completion next step. */
+  navigatorAction?: LearningNavigatorAction | null
 }
 
 type Phase = 'loading' | 'quiz' | 'submitting' | 'results'
@@ -27,7 +31,7 @@ const MASTERY_LABELS: Record<string, { label: string; color: string; bg: string 
   needs_practice: { label: 'Needs Practice', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
 }
 
-export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle }: PracticeQuizProps) {
+export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle, navigatorAction }: PracticeQuizProps) {
   const router = useRouter()
   const [phase, setPhase] = useState<Phase>('loading')
   const [error, setError] = useState<string | null>(null)
@@ -343,6 +347,11 @@ export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle }: PracticeQ
                 ))}
               </ul>
             </div>
+          )}
+
+          {/* Sprint CQ: Navigator next step — replaces the dead-end after practice */}
+          {navigatorAction && (
+            <NavigatorActionCard action={navigatorAction} heading="🎯 What to do next" compact />
           )}
 
           {/* Review */}

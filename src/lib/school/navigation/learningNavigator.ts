@@ -33,43 +33,21 @@ import {
 } from '@/lib/school/adaptive/learningOrchestrator'
 import { getDailyStudyPlan, type DailyTask } from '@/lib/school/adaptive/dailyPlan'
 
-export type NavigatorUrgency = 'high' | 'medium' | 'low'
+// Re-export client-safe types from the types file so existing server-side
+// callers (`import { LearningNavigatorAction } from './learningNavigator'`)
+// keep working without modification.
+export type {
+  NavigatorUrgency,
+  NavigatorSource,
+  LearningNavigatorAction,
+} from './navigatorTypes'
+export { NAVIGATOR_URGENCY_COLORS } from './navigatorTypes'
 
-export type NavigatorSource =
-  | 'assessment'
-  | 'prerequisite'
-  | 'revision'
-  | 'weak_topic'
-  | 'exam_readiness'
-  | 'mock_test'
-  | 'chapter'
-  | 'daily_plan'
-
-export interface LearningNavigatorAction {
-  type: string
-  title: string
-  description: string
-  reason: string
-  urgency: NavigatorUrgency
-  estimatedMinutes: number
-  expectedOutcome: string
-  href: string
-  source: NavigatorSource
-  // Sprint CO.1: target identity, used by callers to detect when the
-  // navigator's recommendation IS the page currently being viewed
-  // (consolidation — avoids duplicate/competing recommendation cards).
-  subjectSlug: string
-  chapterId: string
-}
-
-/** Urgency → color for compact "🎯 Recommended Next Action" cards. Low urgency is
- * intentionally neutral/muted (not green) — it should not compete visually with
- * HIGH/MEDIUM items elsewhere on the page. */
-export const NAVIGATOR_URGENCY_COLORS: Record<NavigatorUrgency, string> = {
-  high: 'var(--coral)',
-  medium: 'var(--yellow)',
-  low: 'var(--text-dim)',
-}
+import type {
+  NavigatorUrgency,
+  NavigatorSource,
+  LearningNavigatorAction,
+} from './navigatorTypes'
 
 // ── Orchestrator recommendation enrichment ──────────────────────────────────
 
@@ -135,7 +113,7 @@ const RECOMMENDATION_ENRICHMENT: Record<RecommendationType, ActionEnrichment> = 
     source: 'mock_test',
   },
   continue_chapter: {
-    title: 'Continue Learning',
+    title: 'Continue',
     description: 'Pick up where you left off in this chapter.',
     estimatedMinutes: 12,
     expectedOutcome: 'Unlock next chapter',

@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Clock } from 'lucide-react'
 import type { QuestionReview } from '@/lib/school/practice/practiceTypes'
 import { MOCK_TEST_CONFIG, type MockTestResult, type MockTestType } from '@/lib/school/exams/mockTestTypes'
+import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorTypes'
+import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 interface ClientQuestion {
   id: string
@@ -17,6 +19,8 @@ interface MockTestQuizProps {
   subjectSlug: string
   subjectLabel: string
   backHref: string
+  /** Sprint CQ: pre-fetched Navigator action for post-completion next step. */
+  navigatorAction?: LearningNavigatorAction | null
 }
 
 type Phase = 'select' | 'loading' | 'quiz' | 'submitting' | 'results'
@@ -27,7 +31,7 @@ function formatTime(sec: number) {
   return `${m}:${String(s).padStart(2, '0')}`
 }
 
-export function MockTestQuiz({ subjectSlug, subjectLabel, backHref }: MockTestQuizProps) {
+export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAction }: MockTestQuizProps) {
   const [phase, setPhase] = useState<Phase>('select')
   const [error, setError] = useState<string | null>(null)
   const [testType, setTestType] = useState<MockTestType>('standard')
@@ -360,6 +364,11 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref }: MockTestQu
             </div>
           )}
 
+          {/* Sprint CQ: Navigator next step */}
+          {navigatorAction && (
+            <NavigatorActionCard action={navigatorAction} heading="🎯 What to do next" compact />
+          )}
+
           {/* Review toggle */}
           <button
             onClick={() => setShowReview((v) => !v)}
@@ -388,7 +397,7 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref }: MockTestQu
               className="flex-1 py-3 rounded-xl text-sm font-bold"
               style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
             >
-              Try Again
+              Retake Mock Test
             </button>
             <a
               href={backHref}

@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { MockTestQuiz } from '@/components/school/MockTestQuiz'
+import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 
 export default async function MockTestPage({ params }: { params: { subject: string } }) {
   const session = await auth()
@@ -19,17 +20,21 @@ export default async function MockTestPage({ params }: { params: { subject: stri
     redirect('/dashboard')
   }
 
-  const { educationBoard: board } = profile
+  const { educationBoard: board, grade } = profile
   const subjectSlug = params.subject
   if (!isSchoolSubject(board, subjectSlug)) redirect('/dashboard')
 
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug }
+
+  // Sprint CQ: fetch Navigator for post-completion next step
+  const navigatorAction = await getLearningNavigatorAction(session.user.id, board, grade).catch(() => null)
 
   return (
     <MockTestQuiz
       subjectSlug={subjectSlug}
       subjectLabel={m.label}
       backHref={`/school/${subjectSlug}`}
+      navigatorAction={navigatorAction}
     />
   )
 }

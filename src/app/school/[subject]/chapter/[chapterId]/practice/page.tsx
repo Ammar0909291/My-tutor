@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle } from '@/lib/school/schoolRouting'
 import { PracticeQuiz } from '@/components/school/PracticeQuiz'
+import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 
 export default async function ChapterPracticePage({ params }: { params: { subject: string; chapterId: string } }) {
   const session = await auth()
@@ -25,11 +26,15 @@ export default async function ChapterPracticePage({ params }: { params: { subjec
   const chapter = chapters.find((c) => c.id === params.chapterId)
   if (!chapter) redirect(`/school/${subjectSlug}`)
 
+  // Sprint CQ: fetch Navigator for post-completion next step
+  const navigatorAction = await getLearningNavigatorAction(session.user.id, board, grade).catch(() => null)
+
   return (
     <PracticeQuiz
       subjectSlug={subjectSlug}
       chapterId={chapter.id}
       chapterTitle={chapterDisplayTitle(chapter.title)}
+      navigatorAction={navigatorAction}
     />
   )
 }

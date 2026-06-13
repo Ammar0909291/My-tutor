@@ -1,6 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight, AlertTriangle } from 'lucide-react'
-import { NAVIGATOR_URGENCY_COLORS, type LearningNavigatorAction, type NavigatorUrgency } from '@/lib/school/navigation/learningNavigator'
+import { NAVIGATOR_URGENCY_COLORS, type LearningNavigatorAction, type NavigatorUrgency } from '@/lib/school/navigation/navigatorTypes'
 
 // Sprint CO.1: per-urgency card framing. HIGH gets the strongest visual
 // weight (accent border + tinted background + warning icon); MEDIUM is

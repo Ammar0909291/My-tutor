@@ -5,6 +5,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle } from '@/lib/school/schoolRouting'
 import { AssessmentQuiz } from '@/components/school/AssessmentQuiz'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
+import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 
 export default async function ChapterAssessmentPage({ params }: { params: { subject: string; chapterId: string } }) {
   const session = await auth()
@@ -27,7 +28,11 @@ export default async function ChapterAssessmentPage({ params }: { params: { subj
   if (!chapter) redirect(`/school/${subjectSlug}`)
 
   // Sprint BO: non-blocking guidance when this chapter has weak topics
-  const weakTopics = await getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => [])
+  // Sprint CQ: fetch Navigator for post-completion next step (parallel)
+  const [weakTopics, navigatorAction] = await Promise.all([
+    getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
+    getLearningNavigatorAction(session.user.id, board, grade).catch(() => null),
+  ])
   const hasWeakTopics = weakTopics.some((t) => chapter.kgNodeIds.includes(t.nodeId))
 
   return (
@@ -36,6 +41,7 @@ export default async function ChapterAssessmentPage({ params }: { params: { subj
       chapterId={chapter.id}
       chapterTitle={chapterDisplayTitle(chapter.title)}
       recommendPractice={hasWeakTopics}
+      navigatorAction={navigatorAction}
     />
   )
 }

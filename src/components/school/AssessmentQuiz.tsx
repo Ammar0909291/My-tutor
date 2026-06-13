@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { ArrowRight, CheckCircle, XCircle, RotateCcw, ArrowLeft } from 'lucide-react'
 import type { QuestionReview } from '@/lib/school/practice/practiceTypes'
 import type { AssessmentResult } from '@/lib/school/assessment/assessmentTypes'
+import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorTypes'
+import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 interface ClientQuestion {
   id: string
@@ -19,11 +21,13 @@ interface AssessmentQuizProps {
   chapterTitle: string
   // Sprint BO: non-blocking guidance when the chapter has weak topics
   recommendPractice?: boolean
+  /** Sprint CQ: pre-fetched Navigator action for post-completion next step. */
+  navigatorAction?: LearningNavigatorAction | null
 }
 
 type Phase = 'loading' | 'quiz' | 'submitting' | 'results'
 
-export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommendPractice }: AssessmentQuizProps) {
+export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommendPractice, navigatorAction }: AssessmentQuizProps) {
   const [phase, setPhase] = useState<Phase>('loading')
   const [error, setError] = useState<string | null>(null)
   const [sessionId, setSessionId] = useState('')
@@ -338,18 +342,22 @@ export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommend
             </div>
           )}
 
-          {/* Next chapter recommendation */}
-          {passed && result.nextChapter && (
+          {/* Sprint CQ: Navigator next step — covers both pass (start next chapter) and
+              fail (retake / practice weak) scenarios, eliminating the dead-end on failure.
+              Falls back to the legacy next-chapter card only when navigator is unavailable. */}
+          {navigatorAction ? (
+            <NavigatorActionCard action={navigatorAction} heading="🎯 What to do next" compact />
+          ) : passed && result.nextChapter ? (
             <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--green)' }}>
               <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--green)' }}>Recommended Next</p>
               <p className="font-bold text-sm mb-3" style={{ color: 'var(--text-primary)' }}>{result.nextChapter.title}</p>
               <a href={`/school/${subjectSlug}/chapter/${encodeURIComponent(result.nextChapter.id)}`}
                 className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white"
                 style={{ background: 'var(--green)', textDecoration: 'none' }}>
-                Go to next chapter <ArrowRight size={13} />
+                Start Next Chapter <ArrowRight size={13} />
               </a>
             </div>
-          )}
+          ) : null}
 
           {/* Review */}
           <button onClick={() => setShowReview((v) => !v)}
