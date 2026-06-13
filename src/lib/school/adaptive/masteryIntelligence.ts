@@ -384,9 +384,32 @@ function buildExplanation(level: MasteryLevel, assessment: AssessmentSignal, mis
 
 const INSIGHT_STRINGS: Record<MasteryLevel, string> = {
   TRUE_MASTERY:  '✓ Strong Mastery',
-  DEVELOPING:    '⟳ Understanding Developing',
-  FALSE_MASTERY: '⚠ Appears Memorized — Review Recommended',
-  AT_RISK:       '⚠ Needs Active Support',
+  DEVELOPING:    '📘 Understanding Developing',
+  FALSE_MASTERY: '⚠ Appears Memorized',
+  AT_RISK:       '⚠ Knowledge Fading',
+}
+
+const INSIGHT_DESCRIPTIONS: Record<MasteryLevel, string> = {
+  TRUE_MASTERY:  'You consistently perform well and retain this topic.',
+  DEVELOPING:    'Your understanding is improving. Continue practicing.',
+  FALSE_MASTERY: 'You passed assessments, but recent performance suggests review is needed.',
+  AT_RISK:       'Recent activity suggests this topic needs reinforcement.',
+}
+
+// Student-facing evidence — at most 2 concise items, no technical language.
+const STUDENT_EVIDENCE: Record<MasteryLevel, [string, string]> = {
+  TRUE_MASTERY:  ['Assessment passed', 'Retention remains strong'],
+  DEVELOPING:    ['Building understanding', 'Continue practicing to strengthen recall'],
+  FALSE_MASTERY: ['Repeated mistakes detected', 'Checkpoint performance inconsistent'],
+  AT_RISK:       ['Recent revision missed', 'Assessment performance declining'],
+}
+
+/**
+ * Returns at most 2 student-facing evidence items for the chapter insight card.
+ * No percentages, no technical language.
+ */
+export function buildStudentFacingEvidence(profile: MasteryProfile): string[] {
+  return STUDENT_EVIDENCE[profile.masteryLevel].slice(0, 2)
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────────
@@ -436,6 +459,10 @@ export function buildMasteryIntelligenceBlock(profile: MasteryProfile): string {
   const lines: string[] = ['\n\nMASTERY INTELLIGENCE']
   lines.push(`Classification: ${profile.masteryLevel} (confidence: ${profile.confidence}, retention score: ${profile.retentionScore}/100)`)
   lines.push(`Summary: ${profile.explanation}`)
+  const topEvidence = profile.evidence.slice(0, 2)
+  if (topEvidence.length > 0) {
+    lines.push(`MASTERY EVIDENCE:\n${topEvidence.map((e) => `- ${e}`).join('\n')}`)
+  }
 
   switch (profile.masteryLevel) {
     case 'TRUE_MASTERY':

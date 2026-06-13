@@ -303,7 +303,7 @@ export async function POST(req: Request) {
       // never touches Practice/Assessment/TopicProgress/MistakeRecord.
       try {
         const { buildLearningProfile, checkpointFrequencyForMode } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle, schoolCtx.board)
+        learnerProf = await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle, schoolCtx.board, schoolCtx.chapter.id, chapterKgNodes.map((n) => n.id))
         learnerProfHoisted = learnerProf
         checkpointFrequency = checkpointFrequencyForMode(learnerProf.preferredDifficulty)
 

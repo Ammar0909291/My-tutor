@@ -28,6 +28,8 @@ export interface StudentLearningProfile {
   prerequisiteGapCount: number
   /** Sprint CE: lightweight exam readiness summary string (e.g. "Mathematics: 78% (Exam Ready), ...") */
   examReadinessSummary: string | null
+  /** Sprint CR.1: compact mastery classification for the current chapter (if chapterId provided). */
+  masterySummary: string | null
 }
 
 const LOOKBACK_DAYS = 60
@@ -38,6 +40,8 @@ export async function buildLearningProfile(
   subjectSlug?: string,
   lastSuccessfulStyle?: string | null,
   board?: string,
+  chapterId?: string,
+  kgNodeIds?: string[],
 ): Promise<StudentLearningProfile> {
   const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000)
 
@@ -152,6 +156,16 @@ export async function buildLearningProfile(
     } catch { /* non-fatal */ }
   }
 
+  // Sprint CR.1: mastery summary for the current chapter (only when chapterId provided)
+  let masterySummary: string | null = null
+  if (board && chapterId && subjectSlug) {
+    try {
+      const { getMasteryProfile } = await import('./masteryIntelligence')
+      const mp = await getMasteryProfile(userId, board, grade, subjectSlug, chapterId, kgNodeIds ?? [])
+      masterySummary = mp.insight
+    } catch { /* non-fatal */ }
+  }
+
   return {
     grade,
     strengths,
@@ -162,6 +176,7 @@ export async function buildLearningProfile(
     preferredTeachingStyle,
     prerequisiteGapCount,
     examReadinessSummary,
+    masterySummary,
   }
 }
 
@@ -187,6 +202,9 @@ export function formatLearningProfileContext(profile: StudentLearningProfile): s
   }
   if (profile.strugglingTopics.length > 0) {
     lines.push(`- Currently struggling with: ${profile.strugglingTopics.slice(0, 3).join(', ')}`)
+  }
+  if (profile.masterySummary) {
+    lines.push(`- Chapter mastery: ${profile.masterySummary}`)
   }
   lines.push(`Coaching instruction: ${difficultyInstructions[profile.preferredDifficulty]}`)
 

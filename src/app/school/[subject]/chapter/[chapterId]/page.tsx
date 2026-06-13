@@ -18,6 +18,7 @@ import { RevisionNotesButton } from '@/components/school/RevisionNotesButton'
 import { isFormulaSheetAvailable } from '@/lib/school/revision/revisionNotesTypes'
 import { getLearningNavigatorAction, navigatorTitleForCurrentChapter } from '@/lib/school/navigation/learningNavigator'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
+import { getMasteryProfile, buildStudentFacingEvidence } from '@/lib/school/adaptive/masteryIntelligence'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -75,7 +76,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -85,6 +86,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     detectPrerequisiteGap(session.user.id, subjectSlug, chapter.id, chapterKgNodesForPlan).catch(() => null),
     // Sprint CO: unified Learning Navigator action
     getLearningNavigatorAction(session.user.id, board, grade).catch(() => null),
+    // Sprint CR.1: mastery insight card
+    getMasteryProfile(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -125,6 +128,16 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     : details.understandingPercent >= 80 ? 'var(--green)'
     : details.understandingPercent >= 50 ? 'var(--yellow)'
     : 'var(--coral)'
+
+  // Sprint CR.1: mastery insight card styling
+  const MASTERY_STYLE: Record<string, { color: string; bg: string; border: string }> = {
+    TRUE_MASTERY:  { color: 'var(--green)',  bg: 'var(--green-muted)',  border: 'var(--green)' },
+    DEVELOPING:    { color: 'var(--text-secondary)', bg: 'var(--bg-surface)', border: 'var(--border-default)' },
+    FALSE_MASTERY: { color: 'var(--yellow)', bg: 'var(--yellow-muted)', border: 'var(--yellow)' },
+    AT_RISK:       { color: 'var(--coral)',  bg: 'var(--coral-muted)',  border: 'var(--coral)' },
+  }
+  const masteryStyle = masteryProfile ? (MASTERY_STYLE[masteryProfile.masteryLevel] ?? MASTERY_STYLE.DEVELOPING) : null
+  const masteryEvidence = masteryProfile ? buildStudentFacingEvidence(masteryProfile) : []
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -188,6 +201,32 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             )}
           </div>
         </header>
+
+        {/* Sprint CR.1: Mastery Insight Card — compact, near chapter status */}
+        {masteryProfile && masteryStyle && (
+          <div className="rounded-2xl px-4 py-3 flex items-start gap-3"
+            style={{ background: masteryStyle.bg, border: `1px solid ${masteryStyle.border}` }}>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold mb-0.5" style={{ color: masteryStyle.color }}>
+                {masteryProfile.insight}
+              </p>
+              <p className="text-xs mb-1.5" style={{ color: 'var(--text-secondary)' }}>
+                {masteryProfile.masteryLevel === 'TRUE_MASTERY' && 'You consistently perform well and retain this topic.'}
+                {masteryProfile.masteryLevel === 'DEVELOPING' && 'Your understanding is improving. Continue practicing.'}
+                {masteryProfile.masteryLevel === 'FALSE_MASTERY' && 'You passed assessments, but recent performance suggests review is needed.'}
+                {masteryProfile.masteryLevel === 'AT_RISK' && 'Recent activity suggests this topic needs reinforcement.'}
+              </p>
+              <ul className="space-y-0.5">
+                {masteryEvidence.map((item, i) => (
+                  <li key={i} className="flex items-center gap-1.5 text-[11px]" style={{ color: 'var(--text-secondary)' }}>
+                    <span className="w-1 h-1 rounded-full shrink-0" style={{ background: masteryStyle.color }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
 
         {/* Sprint BO: Needs Revision alert — only when this chapter has weak nodes */}
         {chapterWeakTopics.length > 0 && (
