@@ -24,6 +24,7 @@ import { getTransferProfile } from '@/lib/school/adaptive/conceptTransfer'
 import { getConfidenceProfile } from '@/lib/school/adaptive/confidenceCalibration'
 import { getLearningMomentum } from '@/lib/school/adaptive/learningMomentum'
 import { getTeachingStrategy } from '@/lib/school/adaptive/teachingStrategy'
+import { getLearningNarrative } from '@/lib/school/adaptive/learningNarrative'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -81,7 +82,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile, momentumProfile, teachingStrategy] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile, momentumProfile, teachingStrategy, learningNarrative] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -103,6 +104,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     getLearningMomentum(session.user.id).catch(() => null),
     // Sprint CW: unified teaching strategy
     getTeachingStrategy(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => null),
+    // Sprint CX: longitudinal learning narrative
+    getLearningNarrative(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -200,6 +203,16 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     7: { color: 'var(--green)',         bg: 'var(--green-muted)',   border: 'var(--green)' },
   }
   const strategyStyle = teachingStrategy ? (STRATEGY_STYLE[teachingStrategy.priority] ?? STRATEGY_STYLE[5]) : null
+
+  // Sprint CX: learning narrative card styling — positive trends green, regression coral, plateau neutral
+  const NARRATIVE_STYLE: Record<string, { color: string; bg: string; border: string }> = {
+    RAPID_IMPROVEMENT: { color: 'var(--green)',         bg: 'var(--green-muted)',   border: 'var(--green)' },
+    STEADY_PROGRESS:   { color: 'var(--green)',         bg: 'var(--green-muted)',   border: 'var(--green)' },
+    RECOVERY_PHASE:    { color: 'var(--green)',         bg: 'var(--green-muted)',   border: 'var(--green)' },
+    PLATEAU:           { color: 'var(--text-secondary)',bg: 'var(--bg-surface)',    border: 'var(--border-default)' },
+    REGRESSION_RISK:   { color: 'var(--coral)',         bg: 'var(--coral-muted)',   border: 'var(--coral)' },
+  }
+  const narrativeStyle = learningNarrative ? (NARRATIVE_STYLE[learningNarrative.trend] ?? NARRATIVE_STYLE.PLATEAU) : null
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -354,6 +367,22 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </p>
             <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
               {teachingStrategy.insightDetail}
+            </p>
+          </div>
+        )}
+
+        {/* Sprint CX: Learning Progress Story — longitudinal narrative, hidden when insufficient evidence */}
+        {learningNarrative && narrativeStyle && (
+          <div className="rounded-2xl px-4 py-3"
+            style={{ background: narrativeStyle.bg, border: `1px solid ${narrativeStyle.border}` }}>
+            <p className="text-[10px] font-bold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-dim)' }}>
+              Learning Progress Story
+            </p>
+            <p className="text-xs font-bold mb-0.5" style={{ color: narrativeStyle.color }}>
+              {learningNarrative.insight}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              {learningNarrative.story}
             </p>
           </div>
         )}

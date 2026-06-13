@@ -219,6 +219,7 @@ export async function getDailyStudyPlan(
       const { getConfidenceProfile } = await import('./confidenceCalibration')
       const { getLearningMomentum, getMomentumPriorityWeight } = await import('./learningMomentum')
       const { determineStrategy } = await import('./teachingStrategy')
+      const { getLearningNarrative } = await import('./learningNarrative')
 
       // Fetch momentum once for the user (it's global, not per chapter)
       const momentumProfile = await getLearningMomentum(userId).catch(() => null)
@@ -228,11 +229,12 @@ export async function getDailyStudyPlan(
           const p = progressMap.get(slug)
           const chapter = p?.position.current
           if (!chapter) return { slug, weight: 2 }
-          const [profile, misconceptions, transferProfile, confidenceProfile] = await Promise.all([
+          const [profile, misconceptions, transferProfile, confidenceProfile, narrative] = await Promise.all([
             getMasteryProfile(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => null),
             getChapterMisconceptions(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => []),
             evaluateConceptTransfer(userId, slug, chapter.id).catch(() => null),
             getConfidenceProfile(userId, slug, chapter.id).catch(() => null),
+            getLearningNarrative(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => null),
           ])
           let weight = profile ? masteryPriorityWeight(profile.masteryLevel) : 2
           // FALSE_MASTERY + HIGH misconception → AT_RISK priority (0)
@@ -269,6 +271,10 @@ export async function getDailyStudyPlan(
           // FOUNDATION_REBUILD chapters not already at 0 → cap at 1 (urgent)
           if (strategyType === 'FOUNDATION_REBUILD' && weight > 1) weight = 1
           // ACCELERATED_GROWTH → stay at natural weight (don't force to 3, let other signals decide)
+          // Sprint CX: minimal narrative influence — slightly favour reinforcement when
+          // performance is slipping; never slow a student who is improving rapidly.
+          if (narrative?.trend === 'REGRESSION_RISK' && weight > 0) weight -= 1
+          else if (narrative?.trend === 'RAPID_IMPROVEMENT' && weight < 3) weight += 1
           return { slug, weight }
         })
       )

@@ -455,6 +455,21 @@ export async function POST(req: Request) {
         // non-fatal — strategy context is purely additive
       }
 
+      // Sprint CX: longitudinal learning narrative — let the tutor acknowledge growth over time.
+      try {
+        const { getLearningNarrative, buildLearningNarrativeBlock } = await import('@/lib/school/adaptive/learningNarrative')
+        const { getSchoolChapters: _getChaptersForNarrative } = await import('@/lib/school/schoolRouting')
+        const fullChapterForNarrative = _getChaptersForNarrative(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+        const narrativeKgNodeIds = fullChapterForNarrative?.kgNodeIds ?? []
+        const narrative = await getLearningNarrative(
+          userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, narrativeKgNodeIds
+        )
+        systemPrompt += buildLearningNarrativeBlock(narrative)
+      } catch {
+        // non-fatal — narrative context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {
