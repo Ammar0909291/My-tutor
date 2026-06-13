@@ -56,6 +56,7 @@ export async function POST(req: Request) {
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
     const lastSuccessfulTeachingStyle = typeof snapshot?.lastSuccessfulTeachingStyle === 'string' ? snapshot.lastSuccessfulTeachingStyle : null
+    const snapshotCurrentConceptId = typeof snapshot?.currentConceptNodeId === 'string' ? snapshot.currentConceptNodeId : null
 
     const subjectCode = learnSession.subject.slug
 
@@ -248,8 +249,9 @@ export async function POST(req: Request) {
     // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
     // chapter KG topics and previously-covered node count, straight from the
     // education graph. Additive and school-only; general learners never get it.
-    // Hoisted outside schoolCtx block so Sprint BX snapshot update can reference it
+    // Hoisted outside schoolCtx block so Sprint BX/BY snapshot updates can reference them
     let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
+    let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
 
     if (schoolCtx) {
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
@@ -403,6 +405,31 @@ export async function POST(req: Request) {
         }
       } catch (err) {
         console.warn('[learn/chat] learning profile context skipped:', err)
+      }
+
+      // Sprint BY: lesson plan — derive chapter roadmap from existing progress data
+      // and inject as CURRENT LESSON PLAN block. Additive, try/catch, never blocks.
+      try {
+        const { buildLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonPlanner')
+        const { getNodesForChapter: _getNodes } = await import('@/lib/education')
+        const { getSchoolChapters: _getChapsByForPlan } = await import('@/lib/school/schoolRouting')
+        const fullChapterForPlan = _getChapsByForPlan(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c) => c.id === schoolCtx!.chapter.id)
+        if (fullChapterForPlan) {
+          const planNodes = _getNodes(fullChapterForPlan)
+          const plan = await buildLessonPlan(
+            userId,
+            subjectCode,
+            schoolCtx.chapter.id,
+            schoolCtx.displayTitle,
+            planNodes,
+          )
+          lessonPlanHoisted = plan
+          const planBlock = buildLessonPlanBlock(plan)
+          if (planBlock) systemPrompt += planBlock
+        }
+      } catch (err) {
+        console.warn('[learn/chat] lesson plan context skipped:', err)
       }
 
       // Sprint BW: visual learning aids — detect the best visual for this chapter
@@ -714,16 +741,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
 
-      // Sprint BX: persist successful teaching style to snapshot when confidence is high/medium
-      if (schoolCtx && learnerProfHoisted && learnerProfHoisted.preferredTeachingStyle.confidence !== 'low') {
-        const styleToStore = learnerProfHoisted.preferredTeachingStyle.style
-        if (styleToStore !== lastSuccessfulTeachingStyle) {
+      // Sprint BY: persist current/next concept + teaching style to snapshot
+      // (BX style update consolidated here so we write the snapshot once)
+      if (schoolCtx && lessonPlanHoisted?.currentConcept) {
+        const newCurrentId = lessonPlanHoisted.currentConcept.nodeId
+        const newNextId = lessonPlanHoisted.nextConcept?.nodeId ?? null
+        if (newCurrentId !== snapshotCurrentConceptId) {
           prisma.learnSession.update({
             where: { id: sessionId },
             data: {
               contextSnapshot: {
                 ...(snapshot ?? {}),
-                lastSuccessfulTeachingStyle: styleToStore,
+                ...(learnerProfHoisted?.preferredTeachingStyle.confidence !== 'low'
+                  ? { lastSuccessfulTeachingStyle: learnerProfHoisted!.preferredTeachingStyle.style }
+                  : {}),
+                currentConceptNodeId: newCurrentId,
+                nextConceptNodeId: newNextId,
               },
             },
           }).catch(() => {})

@@ -10,6 +10,8 @@ import { getChapterContent } from '@/lib/school/chapterContent'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getChapterNextStep } from '@/lib/school/adaptive/nextBestAction'
 import { chapterDifficultyBadge, buildLearningProfile } from '@/lib/school/adaptive/learningProfile'
+import { buildLessonPlan, getLessonPlanCardItems } from '@/lib/school/adaptive/lessonPlanner'
+import { getNodesForChapter } from '@/lib/education'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -66,11 +68,13 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusLabel = completed ? 'Completed' : isCurrent ? 'In progress' : 'Not started'
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
-  const [content, details, subjectWeakTopics, learnerProfile] = await Promise.all([
+  const chapterKgNodesForPlan = getNodesForChapter(chapter)
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
     buildLearningProfile(session.user.id, grade, subjectSlug).catch(() => null),
+    buildLessonPlan(session.user.id, subjectSlug, chapter.id, chapterDisplayTitle(chapter.title), chapterKgNodesForPlan).catch(() => null),
   ])
   // Sprint BO: weak KG nodes belonging to THIS chapter (max 3 shown)
   const chapterWeakTopics = subjectWeakTopics
@@ -275,6 +279,50 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             <p className="text-xs mt-2" style={{ color: 'var(--text-secondary)' }}>Based on understanding checks, practice, and assessments.</p>
           </section>
         )}
+
+        {/* Sprint BY: Learning Journey card — compact concept roadmap */}
+        {(() => {
+          if (!lessonPlan) return null
+          const items = getLessonPlanCardItems(lessonPlan)
+          if (items.length === 0) return null
+          return (
+            <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+              <h2 className="font-bold text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--text-secondary)' }}>Learning Journey</h2>
+              <ul className="space-y-2.5">
+                {items.map((item) => (
+                  <li key={item.title} className="flex items-center gap-2.5 text-sm">
+                    {item.status === 'mastered' && (
+                      <span className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-[10px] font-black"
+                        style={{ background: 'var(--green-muted)', color: 'var(--green)' }}>✓</span>
+                    )}
+                    {item.status === 'current' && (
+                      <span className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-[9px] font-black"
+                        style={{ background: 'var(--coral-muted)', color: 'var(--coral)', border: '1.5px solid var(--coral)' }}>→</span>
+                    )}
+                    {item.status === 'remaining' && (
+                      <span className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
+                        style={{ background: 'var(--bg-elevated)', border: '1.5px solid var(--border-default)' }} />
+                    )}
+                    <span className="leading-snug"
+                      style={{
+                        color: item.status === 'mastered' ? 'var(--text-secondary)'
+                          : item.status === 'current' ? 'var(--text-primary)'
+                          : 'var(--text-dim)',
+                        fontWeight: item.status === 'current' ? 700 : 400,
+                      }}>
+                      {item.title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {lessonPlan.estimatedCompletion > 0 && (
+                <p className="text-[10px] mt-3" style={{ color: 'var(--text-dim)' }}>
+                  {lessonPlan.estimatedCompletion}% of chapter concepts covered
+                </p>
+              )}
+            </section>
+          )
+        })()}
 
         {/* Phase 6: Next chapter recommendation (when assessment passed) */}
         {details.assessmentPassed && nextChapter && (
