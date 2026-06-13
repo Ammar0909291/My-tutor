@@ -7,6 +7,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
+import { getLearningNavigatorAction, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
 
 /**
  * Focus Mode (Sprint BQ) — walks through today's study plan one task at a time.
@@ -35,9 +36,11 @@ export default async function FocusPage({
   }
 
   const { educationBoard: board, grade } = profile
-  const [tasks, streak] = await Promise.all([
+  const [tasks, streak, navigatorAction] = await Promise.all([
     getDailyStudyPlan(session.user.id, board, grade),
     getStudyStreak(session.user.id).catch(() => null),
+    // Sprint CO: unified Learning Navigator action — "Current Priority" line
+    getLearningNavigatorAction(session.user.id, board, grade).catch(() => null),
   ])
 
   if (tasks.length === 0) {
@@ -142,6 +145,16 @@ export default async function FocusPage({
       </nav>
 
       <main className="max-w-xl mx-auto px-5 py-10 space-y-6">
+        {/* Sprint CO: Current Priority — derived from the Learning Navigator */}
+        {navigatorAction && (
+          <p className="text-xs font-semibold flex items-center gap-1.5 flex-wrap"
+            style={{ color: NAVIGATOR_URGENCY_COLORS[navigatorAction.urgency] }}>
+            <span>🎯 Current Priority:</span>
+            <span style={{ color: 'var(--text-primary)' }}>{navigatorAction.title}</span>
+            <span style={{ color: 'var(--text-dim)', fontWeight: 400 }}>— {navigatorAction.reason}</span>
+          </p>
+        )}
+
         {/* Step indicator */}
         <div className="flex items-center gap-2">
           {tasks.map((_, i) => (

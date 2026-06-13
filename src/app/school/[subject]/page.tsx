@@ -10,6 +10,8 @@ import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
 import { getExamReadinessForSubject } from '@/lib/school/adaptive/examReadiness'
 import { getSubjectRoadmap } from '@/lib/school/roadmap/learningRoadmap'
+import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 /**
  * School subject home (Sprint BH): board-aware landing for one subject.
@@ -42,10 +44,12 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
   if (!progress) redirect('/dashboard')
 
   // Sprint BP: compact 4-step study plan + Sprint CE: exam readiness + Sprint CK: roadmap
-  const [studyPlan, examReadiness, roadmap] = await Promise.all([
+  // + Sprint CO: unified Learning Navigator action
+  const [studyPlan, examReadiness, roadmap, navigatorAction] = await Promise.all([
     getStudyPlan(session.user.id, board, grade, subjectSlug).catch(() => []),
     getExamReadinessForSubject(session.user.id, board, grade, subjectSlug).catch(() => null),
     getSubjectRoadmap(session.user.id, board, grade, subjectSlug).catch(() => null),
+    getLearningNavigatorAction(session.user.id, board, grade).catch(() => null),
   ])
 
   const pos = progress.position
@@ -110,6 +114,9 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
         <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
           <div className="h-full rounded-full" style={{ width: `${pos.percent}%`, background: m.color, transition: 'width .5s' }} />
         </div>
+
+        {/* Sprint CO: Recommended Next Action — placed above roadmap/progress */}
+        {navigatorAction && <NavigatorActionCard action={navigatorAction} compact />}
 
         {/* Current chapter — primary card */}
         <section className="relative rounded-2xl overflow-hidden"

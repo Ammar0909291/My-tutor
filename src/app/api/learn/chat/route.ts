@@ -449,12 +449,12 @@ export async function POST(req: Request) {
         console.warn('[learn/chat] worked example context skipped:', err)
       }
 
-      // Sprint CG: primary learning objective from orchestrator
+      // Sprint CO: primary student goal from the unified Learning Navigator
       // Sprint CK: enrich with roadmap progress for the current subject
       try {
-        const { getTopRecommendation, buildPrimaryObjectiveBlock } = await import('@/lib/school/adaptive/learningOrchestrator')
-        const rec = await getTopRecommendation(userId, schoolCtx.board, schoolCtx.grade)
-        if (rec) systemPrompt += buildPrimaryObjectiveBlock(rec)
+        const { getLearningNavigatorAction, buildNavigatorSystemPromptBlock } = await import('@/lib/school/navigation/learningNavigator')
+        const action = await getLearningNavigatorAction(userId, schoolCtx.board, schoolCtx.grade)
+        if (action) systemPrompt += buildNavigatorSystemPromptBlock(action)
 
         const { getSubjectRoadmap, roadmapProgressPhrase } = await import('@/lib/school/roadmap/learningRoadmap')
         const roadmap = await getSubjectRoadmap(userId, schoolCtx.board, schoolCtx.grade, subjectCode).catch(() => null)
@@ -462,7 +462,7 @@ export async function POST(req: Request) {
           systemPrompt += `\n\nROADMAP PROGRESS: The student is ${roadmapProgressPhrase(roadmap)}. You may occasionally acknowledge this long-term progress to motivate them (e.g. "You're ${roadmap.completionPercent}% through ${roadmap.subjectLabel}!"). Do not over-use it — keep the focus on the current concept.`
         }
       } catch (err) {
-        console.warn('[learn/chat] orchestrator context skipped:', err)
+        console.warn('[learn/chat] navigator context skipped:', err)
       }
 
       // Sprint BY: lesson plan — derive chapter roadmap from existing progress data

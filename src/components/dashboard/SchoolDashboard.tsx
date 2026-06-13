@@ -3,7 +3,8 @@ import { ArrowRight, Settings } from 'lucide-react'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { RECOMMENDATION_LABELS } from '@/lib/school/adaptive/learningOrchestrator'
+import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
+import type { LearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { ProgressReportButton } from '@/components/dashboard/ProgressReportButton'
 
 /**
@@ -82,17 +83,8 @@ export interface SchoolDashboardProps {
     readinessPercent: number
     level: string
   }[] | null
-  // Sprint CG: single unified recommendation from the orchestrator
-  recommendation?: {
-    type: string
-    title: string
-    reason: string
-    sourceSystem: string
-    subjectSlug: string
-    subjectLabel: string
-    chapterId: string
-    href: string
-  } | null
+  // Sprint CO: single unified action from the Learning Navigator
+  navigatorAction?: LearningNavigatorAction | null
   // Sprint CK: academic journey (roadmap completion per subject)
   academicJourney?: {
     subjectSlug: string
@@ -112,7 +104,7 @@ const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
   start_next_chapter:  { heading: 'Start', cta: 'Start Chapter' },
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan, momentum, examReadiness, recommendation, academicJourney }: SchoolDashboardProps) {
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan, momentum, examReadiness, navigatorAction, academicJourney }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -156,35 +148,9 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
 
         <InstallBanner />
 
-        {/* ═══ RECOMMENDED NEXT ACTION (Sprint CG) — single unified orchestrator card ═══ */}
-        {recommendation ? (
-          (() => {
-            const rl = RECOMMENDATION_LABELS[recommendation.type as keyof typeof RECOMMENDATION_LABELS]
-              ?? { heading: 'Recommended', cta: 'Start', color: 'var(--coral)' }
-            return (
-              <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: `1px solid ${rl.color}22` }}>
-                <div className="flex items-center gap-2 mb-2">
-                  <h2 className="font-bold text-xs uppercase tracking-wide" style={{ color: rl.color }}>⭐ Recommended Next Action</h2>
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded opacity-60"
-                    style={{ background: rl.color + '22', color: rl.color }}>
-                    {recommendation.sourceSystem}
-                  </span>
-                </div>
-                <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-dim)' }}>
-                  {rl.heading}
-                </p>
-                <p className="font-bold text-sm mt-0.5" style={{ color: 'var(--text-primary)' }}>{recommendation.title}</p>
-                <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{recommendation.subjectLabel} · Class {grade}</p>
-                <p className="text-xs mt-1.5" style={{ color: 'var(--text-secondary)' }}>{recommendation.reason}</p>
-                <Link
-                  href={recommendation.href}
-                  className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white mt-3"
-                  style={{ background: rl.color, textDecoration: 'none' }}>
-                  {rl.cta} <ArrowRight size={13} />
-                </Link>
-              </section>
-            )
-          })()
+        {/* ═══ RECOMMENDED NEXT ACTION (Sprint CO Learning Navigator) ═══ */}
+        {navigatorAction ? (
+          <NavigatorActionCard action={navigatorAction} />
         ) : nextAction ? (
           /* Fallback: legacy nextAction card when orchestrator returned null */
           <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
@@ -271,7 +237,7 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
         </section>
 
         {/* ═══ RECOMMENDED REVISION (Sprint BO) — suppressed when orchestrator card is shown ═══ */}
-        {revision && !recommendation && (
+        {revision && !navigatorAction && (
           <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
             <h2 className="font-bold text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--coral)' }}>📌 Recommended Revision</h2>
             <p className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{revision.chapterTitle}</p>

@@ -16,6 +16,8 @@ import { detectPrerequisiteGap } from '@/lib/school/adaptive/prerequisiteRecover
 import { getNodesForChapter } from '@/lib/education'
 import { RevisionNotesButton } from '@/components/school/RevisionNotesButton'
 import { isFormulaSheetAvailable } from '@/lib/school/revision/revisionNotesTypes'
+import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -73,7 +75,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -81,6 +83,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     buildLessonPlan(session.user.id, subjectSlug, chapter.id, chapterDisplayTitle(chapter.title), chapterKgNodesForPlan).catch(() => null),
     getRevisionStates(session.user.id, subjectSlug, chapter.kgNodeIds).catch(() => []),
     detectPrerequisiteGap(session.user.id, subjectSlug, chapter.id, chapterKgNodesForPlan).catch(() => null),
+    // Sprint CO: unified Learning Navigator action
+    getLearningNavigatorAction(session.user.id, board, grade).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -191,6 +195,9 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Review this chapter before the assessment.</p>
           </section>
         )}
+
+        {/* Sprint CO: Next Recommended Step — unified Learning Navigator banner */}
+        {navigatorAction && <NavigatorActionCard action={navigatorAction} heading="🎯 Next Recommended Step" compact />}
 
         {/* Phase 5: Chapter summary */}
         <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
