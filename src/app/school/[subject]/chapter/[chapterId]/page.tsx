@@ -19,6 +19,7 @@ import { isFormulaSheetAvailable } from '@/lib/school/revision/revisionNotesType
 import { getLearningNavigatorAction, navigatorTitleForCurrentChapter } from '@/lib/school/navigation/learningNavigator'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 import { getMasteryProfile, buildStudentFacingEvidence } from '@/lib/school/adaptive/masteryIntelligence'
+import { getChapterMisconceptions } from '@/lib/school/adaptive/misconceptionEngine'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -76,7 +77,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -88,6 +89,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     getLearningNavigatorAction(session.user.id, board, grade).catch(() => null),
     // Sprint CR.1: mastery insight card
     getMasteryProfile(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => null),
+    // Sprint CS: misconception detection
+    getChapterMisconceptions(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => []),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -138,6 +141,9 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   }
   const masteryStyle = masteryProfile ? (MASTERY_STYLE[masteryProfile.masteryLevel] ?? MASTERY_STYLE.DEVELOPING) : null
   const masteryEvidence = masteryProfile ? buildStudentFacingEvidence(masteryProfile) : []
+
+  // Sprint CS: show the highest-confidence misconception, hidden when LOW
+  const topMisconception = allMisconceptions.find((m) => m.confidence !== 'LOW') ?? null
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -225,6 +231,19 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
                 ))}
               </ul>
             </div>
+          </div>
+        )}
+
+        {/* Sprint CS: Misconception insight — only MEDIUM or HIGH confidence */}
+        {topMisconception && (
+          <div className="rounded-2xl px-4 py-3"
+            style={{ background: 'var(--yellow-muted)', border: '1px solid var(--yellow)' }}>
+            <p className="text-xs font-bold mb-0.5" style={{ color: 'var(--yellow)' }}>
+              {topMisconception.confidence === 'HIGH' ? '⚠ Common Misunderstanding Detected' : '⚠ Possible Confusion'}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
+              {topMisconception.label}
+            </p>
           </div>
         )}
 

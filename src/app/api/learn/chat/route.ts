@@ -383,6 +383,22 @@ export async function POST(req: Request) {
         // non-fatal — mastery context is purely additive
       }
 
+      // Sprint CS: misconception alert — detect specific misunderstanding patterns.
+      try {
+        const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy } = await import('@/lib/school/adaptive/misconceptionEngine')
+        const misconceptions = await detectMisconceptions(
+          userId, subjectCode, chapterKgNodes.map((n) => n.id), schoolCtx.chapter.id
+        )
+        const block = buildMisconceptionBlock(misconceptions)
+        if (block) {
+          systemPrompt += block
+          const topHighConfidence = misconceptions.find((m) => m.confidence === 'HIGH')
+          if (topHighConfidence) systemPrompt += buildRemediationStrategy(topHighConfidence)
+        }
+      } catch {
+        // non-fatal — misconception context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {
