@@ -67,6 +67,12 @@ export interface SchoolDashboardProps {
     priority: string
     href: string
   }[]
+  // Sprint CD: learning momentum (streak + recent achievement)
+  momentum?: {
+    currentStreak: number
+    longestStreak: number
+    recentAchievement: { slug: string; title: string; icon: string } | null
+  } | null
 }
 
 const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
@@ -78,7 +84,7 @@ const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
   start_next_chapter:  { heading: 'Start', cta: 'Start Chapter' },
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan }: SchoolDashboardProps) {
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan, momentum }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -235,6 +241,39 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
             <GoalItem done={false} label="Review yesterday&apos;s mistakes" />
           </ul>
         </section>
+
+        {/* ═══ SECTION 2b — LEARNING MOMENTUM (Sprint CD) ═══ */}
+        {momentum && (
+          <section
+            className="rounded-2xl p-4 flex items-center gap-4"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}
+          >
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <span className="text-2xl">🔥</span>
+              <div className="min-w-0">
+                <p className="text-sm font-black" style={{ color: 'var(--text-primary)' }}>
+                  {momentum.currentStreak}-day streak
+                </p>
+                {momentum.longestStreak > momentum.currentStreak && (
+                  <p className="text-[11px]" style={{ color: 'var(--text-dim)' }}>
+                    Best: {momentum.longestStreak} days
+                  </p>
+                )}
+              </div>
+            </div>
+            {momentum.recentAchievement && (
+              <div className="flex items-center gap-2 shrink-0 max-w-[55%]">
+                <span className="text-xl">{momentum.recentAchievement.icon}</span>
+                <div className="min-w-0">
+                  <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>Latest</p>
+                  <p className="text-xs font-semibold truncate" style={{ color: 'var(--text-secondary)' }}>
+                    {momentum.recentAchievement.title}
+                  </p>
+                </div>
+              </div>
+            )}
+          </section>
+        )}
 
         {/* ═══ SECTION 3 — MY SUBJECTS ═══ */}
         <section>

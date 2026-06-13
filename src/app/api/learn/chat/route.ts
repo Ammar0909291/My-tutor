@@ -828,6 +828,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         },
       }).catch(() => {})
 
+      // Sprint CD: fire-and-forget streak update + achievement check (school students only)
+      if (schoolCtx) {
+        Promise.all([
+          import('@/lib/school/achievements/streakEngine').then(({ updateStudyStreak }) =>
+            updateStudyStreak(userId)
+          ),
+        ]).then(async ([streakResult]) => {
+          if (streakResult.isNewDay) {
+            const { checkAndUnlockAchievements } = await import('@/lib/school/achievements/achievementEngine')
+            await checkAndUnlockAchievements(userId, schoolCtx!.board, schoolCtx!.grade)
+          }
+        }).catch(() => {})
+      }
+
       return NextResponse.json({ success: true, text: cleanText, provider, visual: responseVisual ?? undefined })
     } catch (error: any) {
       // Global AI budget spent — expected under load, not an error to report.

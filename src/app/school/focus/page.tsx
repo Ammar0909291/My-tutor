@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 
 /**
  * Focus Mode (Sprint BQ) — walks through today's study plan one task at a time.
@@ -34,7 +35,10 @@ export default async function FocusPage({
   }
 
   const { educationBoard: board, grade } = profile
-  const tasks = await getDailyStudyPlan(session.user.id, board, grade)
+  const [tasks, streak] = await Promise.all([
+    getDailyStudyPlan(session.user.id, board, grade),
+    getStudyStreak(session.user.id).catch(() => null),
+  ])
 
   if (tasks.length === 0) {
     return (
@@ -290,10 +294,10 @@ export default async function FocusPage({
           {isLast ? (
             <Link
               href="/dashboard"
-              className="text-xs font-bold"
-              style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
+              className="text-xs font-bold flex items-center gap-1.5"
+              style={{ color: 'var(--coral)', textDecoration: 'none' }}
             >
-              Done for today ✓
+              🔥 {streak?.currentStreak ?? 0}-day streak · Done ✓
             </Link>
           ) : (
             <Link

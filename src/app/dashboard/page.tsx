@@ -20,6 +20,8 @@ import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from '@/lib/school/adaptive/weakTopics'
 import { getNextBestAction } from '@/lib/school/adaptive/nextBestAction'
 import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
+import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
+import { getRecentAchievement } from '@/lib/school/achievements/achievementEngine'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -119,21 +121,25 @@ export default async function DashboardPage() {
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
-    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction, dailyPlan] = await withRetry(() => Promise.all([
-      getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs),
+    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction, dailyPlan, streakData, recentAchievement] = await Promise.all([
+      withRetry(() => getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs)),
       // Sprint BO: single top revision recommendation from the weak-topic engine
       getRecommendedRevisionChapter(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
       // Sprint BN: find the most recent incomplete assessment session to resume
-      prisma.practiceSession.findFirst({
+      withRetry(() => prisma.practiceSession.findFirst({
         where: { userId: session.user.id, subjectSlug: { in: schoolSlugs }, kind: 'assessment', completedAt: null },
         orderBy: { createdAt: 'desc' },
         select: { subjectSlug: true, chapterId: true },
-      }).catch(() => null),
+      })).catch(() => null),
       // Sprint BP: next best action for the "Your Next Step" card
       getNextBestAction(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
       // Sprint BQ: daily study plan tasks
       getDailyStudyPlan(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => [] as Awaited<ReturnType<typeof getDailyStudyPlan>>),
-    ]))
+      // Sprint CD: streak data
+      getStudyStreak(session.user.id).catch(() => null),
+      // Sprint CD: most recent achievement
+      getRecentAchievement(session.user.id).catch(() => null),
+    ])
     // Suppress the BO revision card when the Next Step card already points at
     // the same chapter — one recommendation, no duplicates.
     const revision = revisionRaw && nextAction?.chapterId === revisionRaw.chapterId ? null : revisionRaw
@@ -167,6 +173,7 @@ export default async function DashboardPage() {
         nextAction={nextAction}
         pendingAssessment={pendingAssessment}
         dailyPlan={dailyPlan}
+        momentum={streakData ? { currentStreak: streakData.currentStreak, longestStreak: streakData.longestStreak, recentAchievement } : null}
       />
     )
   }

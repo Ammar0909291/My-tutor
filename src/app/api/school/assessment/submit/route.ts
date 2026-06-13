@@ -129,5 +129,13 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  // Sprint CD: fire-and-forget achievement check after assessment
+  Promise.resolve().then(async () => {
+    const { updateStudyStreak } = await import('@/lib/school/achievements/streakEngine')
+    const { checkAndUnlockAchievements } = await import('@/lib/school/achievements/achievementEngine')
+    await updateStudyStreak(session.user.id)
+    await checkAndUnlockAchievements(session.user.id, profile.educationBoard!, profile.grade!)
+  }).catch(() => {})
+
   return NextResponse.json(result)
 }
