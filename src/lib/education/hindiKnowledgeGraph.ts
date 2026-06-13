@@ -1,6 +1,4 @@
-// Master Hindi Knowledge Graph — Grammar, Writing, Vocabulary, Reading
-// Literature nodes (sahitya) are intentionally excluded; those belong to
-// a future sprint once board-specific prose/poetry catalogs are authored.
+// Master Hindi Knowledge Graph — Grammar, Writing, Vocabulary, Reading, Literature
 
 import type { KnowledgeNode } from './educationTypes'
 
@@ -344,6 +342,175 @@ export const HINDI_KNOWLEDGE_GRAPH: KnowledgeNode[] = [
     description: 'समाचार-पत्र के संपादक को पत्र का प्रारूप; सामाजिक समस्याओं पर मत व्यक्त करना; औपचारिक किंतु प्रभावशाली भाषा; 150–200 शब्द',
     difficulty: 'advanced',
     prerequisites: ['hindi.lekhan.patra_oupcharik', 'hindi.lekhan.nibandh'],
+  },
+
+  // ─── साहित्य — गद्य (PROSE LITERATURE) ───────────────────────────────────
+
+  {
+    id: 'hindi.gadya.kahani',
+    domain: 'hindi.gadya',
+    title: 'कहानी — पठन और विश्लेषण',
+    description: 'कहानी के तत्व: पात्र, कथानक, संवाद, देशकाल, भाषाशैली, उद्देश्य; पाठ्यपुस्तक की कहानियों का सारांश, पात्र-चित्रण और विषयवस्तु; कहानी पढ़कर प्रश्नोत्तर',
+    difficulty: 'developing',
+    prerequisites: ['hindi.padhna.apathit_gadyansh'],
+  },
+  {
+    id: 'hindi.gadya.nibandh_prabandh',
+    domain: 'hindi.gadya',
+    title: 'निबंध और प्रबंधात्मक गद्य',
+    description: 'विचारात्मक और भावात्मक निबंध; पाठ्यपुस्तक के विचारपरक निबंधों का सारांश और विश्लेषण; निबंध में तर्क, उदाहरण और भाषाशैली; लेखक का दृष्टिकोण',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.padhna.apathit_gadyansh'],
+  },
+  {
+    id: 'hindi.gadya.yatra_sansmaran',
+    domain: 'hindi.gadya',
+    title: 'यात्रा-वृत्तांत और संस्मरण',
+    description: 'यात्रा-वृत्तांत की विशेषताएँ; पाठ्यपुस्तक के यात्रा और संस्मरण पाठों का सारांश; लेखक के अनुभव और भावों की समझ; देश-विदेश के संदर्भ',
+    difficulty: 'developing',
+    prerequisites: ['hindi.gadya.kahani'],
+  },
+  {
+    id: 'hindi.gadya.jeevani_aatmkatha',
+    domain: 'hindi.gadya',
+    title: 'जीवनी और आत्मकथा',
+    description: 'जीवनी और आत्मकथा में अंतर; पाठ्यपुस्तक की जीवनी रचनाओं का पठन; व्यक्तित्व और योगदान की समझ; जीवनीपरक लेखन की भाषाशैली',
+    difficulty: 'developing',
+    prerequisites: ['hindi.gadya.kahani'],
+  },
+  {
+    id: 'hindi.gadya.natak_ekaanki',
+    domain: 'hindi.gadya',
+    title: 'नाटक और एकांकी',
+    description: 'नाटक के तत्व: अंक, दृश्य, संवाद, मंच-निर्देश; पाठ्यपुस्तक के नाटकों/एकांकियों का सारांश; पात्रों के संवाद और उनके उद्देश्य; नाट्यशैली की विशेषताएँ',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.gadya.kahani'],
+  },
+  {
+    id: 'hindi.gadya.reportaj_patra',
+    domain: 'hindi.gadya',
+    title: 'रिपोर्ताज और पत्र-साहित्य',
+    description: 'रिपोर्ताज की विशेषताएँ और उद्देश्य; पत्र-साहित्य की साहित्यिक महत्ता; पाठ्यपुस्तक के पत्र और रिपोर्ताज पाठों का विश्लेषण; तथ्यात्मक और साहित्यिक भाषा में अंतर',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.gadya.nibandh_prabandh'],
+  },
+
+  // ─── साहित्य — पद्य (POETRY) ──────────────────────────────────────────────
+
+  {
+    id: 'hindi.padya.bhaktikaal',
+    domain: 'hindi.padya',
+    title: 'भक्तिकाल की कविता — कबीर, मीरा, सूर, तुलसी',
+    description: 'भक्तिकाल का परिचय; कबीर की साखियाँ और सबद; मीराबाई के पद; सूरदास के पद (भ्रमरगीत, बाल-लीला); तुलसीदास की काव्यकृतियाँ; भक्तिकाव्य का भाव, अलंकार और सामाजिक संदेश',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.vyakaran.ras', 'hindi.vyakaran.alankar', 'hindi.padhna.apathit_padyansh'],
+  },
+  {
+    id: 'hindi.padya.ritikaal',
+    domain: 'hindi.padya',
+    title: 'रीतिकाल की कविता — देव, बिहारी, रसखान',
+    description: 'रीतिकाल का परिचय; देव के सवैये; बिहारी की बरवै रामायण/सतसई; रसखान के सवैये; श्रृंगार-रस की अभिव्यक्ति; रीतिकाव्य में अलंकार और छंद',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.padya.bhaktikaal'],
+  },
+  {
+    id: 'hindi.padya.chhayavad',
+    domain: 'hindi.padya',
+    title: 'छायावाद की कविता — पंत, निराला, प्रसाद, महादेवी',
+    description: 'छायावाद का परिचय; जयशंकर प्रसाद, सुमित्रानंदन पंत, सूर्यकांत त्रिपाठी निराला और महादेवी वर्मा की प्रमुख कविताएँ; प्रकृति-चित्रण, रहस्यवाद और राष्ट्रीयता; छायावादी काव्य-भाषा की विशेषताएँ',
+    difficulty: 'advanced',
+    prerequisites: ['hindi.padya.ritikaal', 'hindi.vyakaran.chhand'],
+  },
+  {
+    id: 'hindi.padya.pragativad_prayogvad',
+    domain: 'hindi.padya',
+    title: 'प्रगतिवाद और प्रयोगवाद की कविता',
+    description: 'प्रगतिवादी कविता: दिनकर, नागार्जुन, केदारनाथ अग्रवाल; प्रयोगवादी कविता: अज्ञेय; सामाजिक यथार्थ और नई भाषाशैली; कविता में प्रतीक और बिंब',
+    difficulty: 'advanced',
+    prerequisites: ['hindi.padya.chhayavad'],
+  },
+  {
+    id: 'hindi.padya.samakaleen',
+    domain: 'hindi.padya',
+    title: 'समकालीन हिंदी कविता',
+    description: 'समकालीन कविता की विशेषताएँ; पाश, राजेश जोशी, मंगलेश डबराल, दुष्यंत कुमार जैसे कवियों की कविताएँ; गजल, गीत और छंदमुक्त कविता; कविता में सामाजिक आलोचना और मानवीय संवेदना',
+    difficulty: 'advanced',
+    prerequisites: ['hindi.padya.pragativad_prayogvad'],
+  },
+  {
+    id: 'hindi.padya.bal_kavita',
+    domain: 'hindi.padya',
+    title: 'बाल-कविता और प्राथमिक पद्य',
+    description: 'कक्षा 5–8 की पाठ्यपुस्तकों की कविताएँ; सरल भाषा में प्रकृति, देशभक्ति और नैतिक मूल्यों की अभिव्यक्ति; तुकबंदी और लय; कविता का भावार्थ और सौंदर्य-बोध',
+    difficulty: 'foundational',
+    prerequisites: ['hindi.padhna.apathit_padyansh'],
+  },
+
+  // ─── साहित्य-विश्लेषण (LITERARY ANALYSIS) ────────────────────────────────
+
+  {
+    id: 'hindi.sahitya_vishleshan.vishay_vastu',
+    domain: 'hindi.sahitya_vishleshan',
+    title: 'विषय-वस्तु और केंद्रीय भाव',
+    description: 'पाठ का केंद्रीय भाव; उपविषय और अंतर्निहित संदेश; सामाजिक, नैतिक और दार्शनिक आयाम; विषय-वस्तु का प्रासंगिक महत्व; उत्तर में विषय-वस्तु का विश्लेषण कैसे करें',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.gadya.kahani', 'hindi.padhna.bodh_prashna'],
+  },
+  {
+    id: 'hindi.sahitya_vishleshan.patra_chitran',
+    domain: 'hindi.sahitya_vishleshan',
+    title: 'पात्र-चित्रण और चरित्र-विश्लेषण',
+    description: 'मुख्य और गौण पात्र; पात्र की विशेषताएँ — शारीरिक, मानसिक, नैतिक; पात्र का विकास और परिवर्तन; पात्रों के संवाद और व्यवहार से चरित्र की पहचान; चरित्र-चित्रण प्रश्नों के उत्तर लिखना',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.sahitya_vishleshan.vishay_vastu'],
+  },
+  {
+    id: 'hindi.sahitya_vishleshan.bhasha_shaili',
+    domain: 'hindi.sahitya_vishleshan',
+    title: 'भाषाशैली और अभिव्यक्ति-कौशल',
+    description: 'लेखक की भाषाशैली — सरल, व्यंग्यात्मक, काव्यात्मक, यथार्थवादी; वाक्य-संरचना की विशेषताएँ; बोलियों और उर्दू-शब्दों का प्रभाव; मुहावरों और प्रतीकों का साहित्यिक प्रयोग',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.sahitya_vishleshan.vishay_vastu'],
+  },
+  {
+    id: 'hindi.sahitya_vishleshan.samaj_darshan',
+    domain: 'hindi.sahitya_vishleshan',
+    title: 'सामाजिक संदर्भ और लेखक-दृष्टि',
+    description: 'रचना का सामाजिक-ऐतिहासिक परिप्रेक्ष्य; लेखक का जीवन-परिचय और रचना पर प्रभाव; सामाजिक समस्याओं की साहित्यिक अभिव्यक्ति; लेखक का मानवीय दृष्टिकोण और उद्देश्य',
+    difficulty: 'advanced',
+    prerequisites: ['hindi.sahitya_vishleshan.patra_chitran'],
+  },
+  {
+    id: 'hindi.kavya_bodh.bhav_saundarya',
+    domain: 'hindi.kavya_bodh',
+    title: 'काव्य का भाव-सौंदर्य',
+    description: 'कविता में भाव की पहचान; स्थायी और संचारी भाव; कवि की भावना और उसकी अभिव्यक्ति; पंक्तियों का भावार्थ; परीक्षा में "भाव स्पष्ट करें" और "कविता का केंद्रीय भाव" प्रश्नों के उत्तर',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.vyakaran.ras', 'hindi.padhna.apathit_padyansh'],
+  },
+  {
+    id: 'hindi.kavya_bodh.shilpa_saundarya',
+    domain: 'hindi.kavya_bodh',
+    title: 'काव्य का शिल्प-सौंदर्य',
+    description: 'शिल्प-सौंदर्य: भाषा, अलंकार, छंद, बिंब और प्रतीक का समन्वय; काव्य-पंक्तियों में शिल्प की पहचान; "कलात्मक विशेषताएँ" प्रश्नों के उत्तर; उद्धरण-आधारित प्रश्न',
+    difficulty: 'advanced',
+    prerequisites: ['hindi.kavya_bodh.bhav_saundarya', 'hindi.vyakaran.alankar', 'hindi.vyakaran.chhand'],
+  },
+  {
+    id: 'hindi.kavya_bodh.lekhak_kavi_parichay',
+    domain: 'hindi.kavya_bodh',
+    title: 'लेखक और कवि परिचय',
+    description: 'पाठ्यपुस्तक के प्रमुख लेखकों और कवियों का संक्षिप्त जीवन-परिचय; प्रमुख रचनाएँ; साहित्यिक विधा और योगदान; परीक्षा में "लेखक-परिचय" प्रश्नों की तैयारी',
+    difficulty: 'developing',
+    prerequisites: ['hindi.sahitya_vishleshan.samaj_darshan'],
+  },
+  {
+    id: 'hindi.gadya.purak_path',
+    domain: 'hindi.gadya',
+    title: 'पूरक पाठ्यपुस्तकें — गद्य अंश',
+    description: 'पूरक पाठ्यपुस्तकों (कृतिका, वितान, बाल रामकथा, भारत की खोज) के गद्य अंशों का पठन और विश्लेषण; पूरक पाठों की विशेषता; परीक्षा में पूरक पाठ से पूछे जाने वाले प्रश्न',
+    difficulty: 'proficient',
+    prerequisites: ['hindi.gadya.kahani', 'hindi.sahitya_vishleshan.vishay_vastu'],
   },
 ]
 

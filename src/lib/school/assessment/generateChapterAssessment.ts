@@ -99,6 +99,25 @@ function languageNote(subjectName: string): string {
     : ''
 }
 
+function hindiLiteratureGuidance(chapterTitle: string): string {
+  const t = chapterTitle.toLowerCase()
+  const isLit = t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
+    t.includes('वितान') || t.includes('वसंत') || t.includes('रिमझिम') ||
+    t.includes('कहानी') || t.includes('कविता') || t.includes('पद्य') ||
+    t.includes('गद्य') || t.includes('निबंध') || t.includes('रामकथा') ||
+    t.includes('महाभारत') || t.includes('भारत की खोज') || t.includes('परिचय')
+  if (!isLit) return ''
+  return `This is a Hindi LITERATURE chapter. Include questions on:
+- विषय-वस्तु (central theme/idea of the text)
+- पात्र-चित्रण (character description/analysis) if the text has characters
+- भाव-सौंदर्य (emotional/poetic meaning) for poetry passages
+- शिल्प-सौंदर्य / भाषाशैली (language style, literary devices used)
+- गद्यांश/पद्यांश पर आधारित प्रश्न (passage-based comprehension questions)
+- लेखक/कवि की मंशा (author's/poet's intent or message)
+Short-answer questions should ask students to explain in 2–3 sentences using the text.
+`
+}
+
 function buildPrompt(board: string, subjectName: string, grade: number, chapter: Chapter, topics: string[], nodeIds: string[]): string {
   const title = chapterDisplayTitle(chapter.title)
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
@@ -110,7 +129,7 @@ Topics (use these node IDs):
 ${topicLines}
 
 ${gradeGuidance(grade)}
-
+${hindiLiteratureGuidance(title)}
 This is a formal assessment. Questions must be comprehensive and cover the chapter thoroughly.
 
 Create EXACTLY ${ASSESSMENT_TOTAL} questions as a JSON array:

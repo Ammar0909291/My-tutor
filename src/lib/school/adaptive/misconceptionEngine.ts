@@ -240,6 +240,67 @@ const RULES: MisconceptionRule[] = [
       'Compare two similar regions and ask student to identify what makes them different.',
     ],
   },
+  // ── Hindi ──────────────────────────────────────────────────────────────
+  {
+    type: 'hindi_ling_vachan',
+    label: 'लिंग-वचन की त्रुटि',
+    description: 'Student applies incorrect gender (लिंग) or number (वचन) agreement — e.g. using पुल्लिंग forms for स्त्रीलिंग nouns, or singular verb with plural subject.',
+    primaryPatterns: ['hindi.vyakaran.ling_vachan', 'hindi.vyakaran.sangya', 'hindi.vyakaran.vakya_shuddhi'],
+    remediationSteps: [
+      'List the noun and ask: does this refer to a male/female person, or have a conventional gender? Check using "वह" substitution.',
+      'Verb-agreement drill: give 5 nouns (mixed gender/number), student writes the correct verb form for each.',
+      'Point to lिंग-वचन rules for common problem words: पानी (पुल्लिंग), हवा (स्त्रीलिंग), दूध (पुल्लिंग).',
+      'Have student re-read a paragraph they wrote and underline every verb, checking agreement each time.',
+    ],
+  },
+  {
+    type: 'hindi_sandhi_samaas',
+    label: 'संधि-समास की पहचान में भ्रम',
+    description: 'Student confuses sandhi (phonological joining) with samaas (compound word formation), or misidentifies the type of compound word.',
+    primaryPatterns: ['hindi.vyakaran.sandhi', 'hindi.vyakaran.samaas', 'hindi.shabdavali.shabd_nirman'],
+    remediationSteps: [
+      'Explain the key distinction: संधि = joining sounds of two words; समास = joining meanings of two words.',
+      'Give 5 examples of each and ask student to categorise before analysing further.',
+      'For समास: use the विग्रह method — write the expanded form, then identify which relation connects the parts.',
+      'Practise sandhi-vicchhhed with the most common स्वर-संधि patterns (दीर्घ, गुण) using colour-coding.',
+    ],
+  },
+  {
+    type: 'hindi_ras_alankar',
+    label: 'रस और अलंकार की पहचान में त्रुटि',
+    description: 'Student misidentifies the rasa (emotional sentiment) or alankar (figure of speech) in a passage — e.g. confusing shringar with karuna, or upma with rupak.',
+    primaryPatterns: ['hindi.vyakaran.ras', 'hindi.vyakaran.alankar', 'hindi.kavya_bodh.bhav_saundarya', 'hindi.kavya_bodh.shilpa_saundarya'],
+    remediationSteps: [
+      'Rasa identification: ask what emotion the lines make the reader feel — सुख? दुख? वीरता? Then match to the corresponding रस.',
+      'Alankar shortcut: Upma always uses "जैसे/सा/सी/से"; Rupak drops the comparison word completely ("वह शेर है"); Utpreksha uses "मानो/जनु".',
+      'Give 10 poetic lines and have student label रस + अलंकार, then check against answer key.',
+      'Focus revision on the three most confused pairs: उपमा-रूपक, श्रृंगार-करुण, अनुप्रास-यमक.',
+    ],
+  },
+  {
+    type: 'hindi_vishay_patra',
+    label: 'विषय-वस्तु और पात्र-चित्रण में भ्रम',
+    description: 'Student confuses the theme (विषय-वस्तु) of a text with a character\'s action, or gives character-level answers to theme questions and vice versa.',
+    primaryPatterns: ['hindi.sahitya_vishleshan.vishay_vastu', 'hindi.sahitya_vishleshan.patra_chitran', 'hindi.gadya.kahani'],
+    remediationSteps: [
+      'Distinguish: "विषय-वस्तु" = the big idea the whole story is about; "पात्र" = a person in the story.',
+      'Theme question tip: answer with an abstract noun (ईमानदारी, त्याग, सामाजिक न्याय) not a character name.',
+      'Character question tip: describe specific traits seen in the character\'s words and actions, not the story\'s moral.',
+      'Practice: give the same story extract and ask two different questions — one about theme, one about character — and compare the expected answers.',
+    ],
+  },
+  {
+    type: 'hindi_kavya_bodh',
+    label: 'काव्यांश के भाव-सौंदर्य की व्याख्या में त्रुटि',
+    description: 'Student gives a literal word-for-word translation instead of explaining the deeper emotional meaning (भाव) or poetic beauty (सौंदर्य) of a verse.',
+    primaryPatterns: ['hindi.kavya_bodh.bhav_saundarya', 'hindi.padhna.apathit_padyansh', 'hindi.padya.bhaktikaal', 'hindi.padya.chhayavad'],
+    remediationSteps: [
+      'Teach the 3-step formula: (1) literal meaning in simple Hindi, (2) deeper emotion/idea the poet is expressing, (3) connection to the broader theme of the poem.',
+      'Model the difference: "पानी गया" literally = water left; poetically = loss of opportunity / wasted time.',
+      'Ask student to identify the emotion in the poem first (खुशी? दर्द? विरह?) before writing the explanation.',
+      'Give two sample answers — one literal, one interpretive — and ask student to identify which is the better "भाव-सौंदर्य" answer.',
+    ],
+  },
 ]
 
 // ── Signal lookback ───────────────────────────────────────────────────────────

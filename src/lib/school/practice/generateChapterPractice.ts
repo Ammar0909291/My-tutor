@@ -58,6 +58,17 @@ function languageNote(subjectName: string): string {
     : ''
 }
 
+function hindiLiteratureGuidance(chapterTitle: string): string {
+  const t = chapterTitle.toLowerCase()
+  const isLit = t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
+    t.includes('वितान') || t.includes('वसंत') || t.includes('रिमझिम') ||
+    t.includes('कहानी') || t.includes('कविता') || t.includes('पद्य') ||
+    t.includes('गद्य') || t.includes('निबंध') || t.includes('रामकथा') ||
+    t.includes('महाभारत') || t.includes('भारत की खोज') || t.includes('परिचय')
+  if (!isLit) return ''
+  return `This is a Hindi LITERATURE chapter. Mix question types: comprehension (बोध-प्रश्न), character-based (पात्र-चित्रण), theme-based (विषय-वस्तु), and vocabulary (शब्दार्थ) questions drawn from the text.\n`
+}
+
 function buildPrompt(
   board: string,
   subjectName: string,
@@ -76,6 +87,7 @@ Topics covered (use these node IDs when assigning nodeId):
 ${topicLines}
 
 ${gradeGuidance(grade)}
+${hindiLiteratureGuidance(title)}
 
 Create EXACTLY 5 questions as a JSON array:
 - Questions q1, q2, q3: type "mcq" (4 options, one correct)

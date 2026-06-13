@@ -81,6 +81,23 @@ function languageNote(subjectName: string): string {
     : ''
 }
 
+function hindiLiteratureRevisionNote(chapterTitle: string, type: RevisionNoteType): string {
+  const t = chapterTitle.toLowerCase()
+  const isLit = t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
+    t.includes('वितान') || t.includes('वसंत') || t.includes('रिमझिम') ||
+    t.includes('कहानी') || t.includes('कविता') || t.includes('पद्य') ||
+    t.includes('गद्य') || t.includes('रामकथा') || t.includes('महाभारत') ||
+    t.includes('भारत की खोज') || t.includes('परिचय')
+  if (!isLit) return ''
+  if (type === 'quick') {
+    return 'For this literature chapter, "keyConcepts" should list key themes/characters/ideas from the text. "importantTerms" should include key literary terms or difficult words with meanings. "recallQuestions" should test comprehension and theme understanding.\n'
+  }
+  if (type === 'exam') {
+    return 'For this literature chapter, "highWeightTopics" should list: पात्र-चित्रण, विषय-वस्तु, भाव/शिल्प-सौंदर्य, गद्यांश/पद्यांश से प्रश्न, लेखक/कवि परिचय. "definitions" should include key literary terms. "fastRevisionPoints" should be crucial exam-ready points about themes, characters and style.\n'
+  }
+  return ''
+}
+
 function buildPrompt(type: RevisionNoteType, board: string, subjectName: string, grade: number, chapter: Chapter): string {
   const title = chapterDisplayTitle(chapter.title)
   const topics = getNodesForChapter(chapter).map((n) => n.title)
@@ -90,6 +107,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
   if (type === 'quick') {
     return [
       languageNote(subjectName),
+      hindiLiteratureRevisionNote(title, 'quick'),
       `Create a CONCISE Quick Revision sheet for a ${ctx}`,
       'Keep it tight — equivalent to 1-2 pages. No essays.',
       'Return ONLY this JSON:',
@@ -105,6 +123,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
   if (type === 'exam') {
     return [
       languageNote(subjectName),
+      hindiLiteratureRevisionNote(title, 'exam'),
       `Create a CONCISE Exam Revision sheet for a ${ctx}`,
       'Focus on high-yield, exam-relevant material only. Be brief.',
       'Return ONLY this JSON:',

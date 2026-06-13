@@ -133,7 +133,10 @@ export type HindiDomain =
   | 'hindi.shabdavali'
   | 'hindi.padhna'
   | 'hindi.lekhan'
-  | 'hindi.sahitya'
+  | 'hindi.gadya'
+  | 'hindi.padya'
+  | 'hindi.sahitya_vishleshan'
+  | 'hindi.kavya_bodh'
 
 export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain | HindiDomain
 
