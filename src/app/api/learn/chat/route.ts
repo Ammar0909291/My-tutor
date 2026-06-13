@@ -486,6 +486,32 @@ export async function POST(req: Request) {
         console.warn('[learn/chat] exam readiness context skipped:', err)
       }
 
+      // Sprint CF: mock test insights block — inject most recent mock result for this subject
+      try {
+        const recentMock = await prisma.practiceSession.findFirst({
+          where: { userId, subjectSlug: subjectCode, kind: 'mock', completedAt: { not: null } },
+          orderBy: { completedAt: 'desc' },
+          select: { score: true, questions: true, completedAt: true },
+        }).catch(() => null)
+        if (recentMock && typeof recentMock.score === 'number') {
+          const { ALL_KG_NODES } = await import('@/lib/education')
+          const nodeMap = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n.title]))
+          const { buildMockTestInsightsBlock } = await import('@/lib/school/exams/mockTestEngine')
+          // Derive strong/weak from question-level scores stored in review (not persisted here — use mistake records as proxy)
+          const since7 = new Date(Date.now() - 7 * 86400000)
+          const recentMistakeNodes = await prisma.mistakeRecord.findMany({
+            where: { userId, subjectSlug: subjectCode, category: 'mock_test', createdAt: { gte: since7 } },
+            select: { topicSlug: true },
+          }).catch(() => [] as { topicSlug: string }[])
+          const weakTitles = [...new Set(recentMistakeNodes.map((r) => nodeMap.get(r.topicSlug) ?? r.topicSlug))].filter(Boolean).slice(0, 4)
+          const subjectMeta = (await import('@/lib/school/schoolRouting')).SCHOOL_SUBJECT_META
+          const block = buildMockTestInsightsBlock(subjectMeta[subjectCode]?.label ?? subjectCode, recentMock.score, [], weakTitles)
+          if (block) systemPrompt += block
+        }
+      } catch (err) {
+        console.warn('[learn/chat] mock test insights skipped:', err)
+      }
+
       // Sprint BW: visual learning aids — detect the best visual for this chapter
       // and instruct the tutor to emit a VISUAL:<type> tag when helpful.
       // Additive only — never blocks, never modifies existing context.

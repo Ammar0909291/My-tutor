@@ -80,10 +80,11 @@ export async function getExamReadinessForSubject(
       where: { userId, subjectSlug, topicSlug: { in: allNodeIds } },
       select: { topicSlug: true, status: true, masteryPct: true, completedAt: true, revisionCount: true, lastRevisionAt: true },
     }).catch(() => [] as { topicSlug: string; status: string; masteryPct: number; completedAt: Date | null; revisionCount: number; lastRevisionAt: Date | null }[]),
+    // Include both chapter assessments and subject-level mocks (Sprint CF)
     prisma.practiceSession.findMany({
-      where: { userId, subjectSlug, kind: 'assessment', completedAt: { not: null }, createdAt: { gte: since60 } },
-      select: { score: true, createdAt: true },
-    }).catch(() => [] as { score: number | null; createdAt: Date }[]),
+      where: { userId, subjectSlug, kind: { in: ['assessment', 'mock'] }, completedAt: { not: null }, createdAt: { gte: since60 } },
+      select: { score: true, createdAt: true, kind: true },
+    }).catch(() => [] as { score: number | null; createdAt: Date; kind: string }[]),
     prisma.mistakeRecord.findMany({
       where: { userId, subjectSlug, topicSlug: { in: allNodeIds }, createdAt: { gte: since60 } },
       select: { topicSlug: true, createdAt: true },
@@ -109,7 +110,9 @@ export async function getExamReadinessForSubject(
     let totalWeight = 0
     for (const row of assessmentRows) {
       const ageDays = (now - row.createdAt.getTime()) / 86400000
-      const w = ageDays <= 7 ? 2 : ageDays <= 30 ? 1.5 : 1
+      // Mock tests count 1.5× (multi-chapter, more exam-representative — Sprint CF)
+      const kindMultiplier = (row as { kind?: string }).kind === 'mock' ? 1.5 : 1
+      const w = (ageDays <= 7 ? 2 : ageDays <= 30 ? 1.5 : 1) * kindMultiplier
       totalWeight += w
       if (typeof row.score === 'number' && row.score >= ASSESSMENT_PASS_THRESHOLD) weightedPass += w
     }

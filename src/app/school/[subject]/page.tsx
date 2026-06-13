@@ -173,12 +173,19 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
           )}
         </section>
 
-        {/* View all chapters — secondary action */}
-        <Link href={`/school/${subjectSlug}/chapters`}
-          className="block text-center text-sm font-bold py-3 rounded-xl"
-          style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', textDecoration: 'none' }}>
-          View all chapters ({pos.totalCount})
-        </Link>
+        {/* View all chapters + Take Mock Test — secondary actions */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link href={`/school/${subjectSlug}/chapters`}
+            className="block text-center text-sm font-bold py-3 rounded-xl"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', textDecoration: 'none' }}>
+            All chapters ({pos.totalCount})
+          </Link>
+          <Link href={`/school/${subjectSlug}/mock`}
+            className="block text-center text-sm font-bold py-3 rounded-xl text-white"
+            style={{ background: 'var(--blue)', textDecoration: 'none' }}>
+            🎓 Take Mock Test
+          </Link>
+        </div>
 
         {/* Recent activity — compact */}
         {recentSessions.length > 0 && (
