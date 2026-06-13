@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, AlertTriangle } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
@@ -10,7 +10,7 @@ import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
 import { getExamReadinessForSubject } from '@/lib/school/adaptive/examReadiness'
 import { getSubjectRoadmap } from '@/lib/school/roadmap/learningRoadmap'
-import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { getLearningNavigatorAction, navigatorTitleForCurrentChapter, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 /**
@@ -55,6 +55,20 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
   const pos = progress.position
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
   const boardLabel = board === 'cbse' ? 'CBSE' : board === 'up_board' ? 'UP Board' : board
+
+  // Sprint CO.1: when the Navigator's recommendation IS this subject's current
+  // chapter, fold it into the Current Chapter card instead of showing a
+  // separate (duplicate) Navigator card above it.
+  const samePriorityTarget = !!navigatorAction
+    && navigatorAction.subjectSlug === subjectSlug
+    && navigatorAction.chapterId === pos.current.id
+  const priorityColor = navigatorAction ? NAVIGATOR_URGENCY_COLORS[navigatorAction.urgency] : undefined
+  const continueLabel = samePriorityTarget && navigatorAction
+    ? navigatorTitleForCurrentChapter(navigatorAction) ?? navigatorAction.title
+    : 'Continue learning'
+  const continueHref = samePriorityTarget && navigatorAction
+    ? navigatorAction.href
+    : `/school/${subjectSlug}/chapter/${encodeURIComponent(pos.current.id)}`
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -115,8 +129,11 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
           <div className="h-full rounded-full" style={{ width: `${pos.percent}%`, background: m.color, transition: 'width .5s' }} />
         </div>
 
-        {/* Sprint CO: Recommended Next Action — placed above roadmap/progress */}
-        {navigatorAction && <NavigatorActionCard action={navigatorAction} compact />}
+        {/* Sprint CO: Recommended Next Action — placed above roadmap/progress.
+            Sprint CO.1: hidden when it targets THIS subject's current chapter
+            (folded into the Current Chapter card below instead, to avoid a
+            duplicate card). */}
+        {navigatorAction && !samePriorityTarget && <NavigatorActionCard action={navigatorAction} compact />}
 
         {/* Current chapter — primary card */}
         <section className="relative rounded-2xl overflow-hidden"
@@ -130,11 +147,31 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
             <h2 className="text-lg font-black leading-snug mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
               {chapterDisplayTitle(pos.current.title)}
             </h2>
+
+            {/* Sprint CO.1: Navigator priority folded into this card when its
+                target is this chapter — avoids a duplicate recommendation card. */}
+            {samePriorityTarget && navigatorAction && (
+              <div className="rounded-xl p-3 mb-4" style={{ background: 'var(--bg-elevated)', border: `1px solid ${priorityColor}33` }}>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wide flex items-center gap-1.5" style={{ color: priorityColor }}>
+                    {navigatorAction.urgency === 'high' && <AlertTriangle size={11} />}
+                    🎯 Priority
+                  </span>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide"
+                    style={{ background: `${priorityColor}22`, color: priorityColor }}>
+                    {navigatorAction.urgency}
+                  </span>
+                </div>
+                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{navigatorAction.reason}</p>
+                <p className="text-[11px] mt-1" style={{ color: 'var(--text-dim)' }}>🎯 {navigatorAction.expectedOutcome}</p>
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href={`/school/${subjectSlug}/chapter/${encodeURIComponent(pos.current.id)}`}
+              <Link href={continueHref}
                 className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
                 style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
-                Continue learning <ArrowRight size={16} />
+                {continueLabel} <ArrowRight size={16} />
               </Link>
               <MarkChapterCompleteButton subject={subjectSlug} chapterId={pos.current.id} />
             </div>

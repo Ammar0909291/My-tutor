@@ -182,18 +182,31 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
               </span>
             </div>
             <ul className="space-y-2.5 mb-3">
-              {dailyPlan.map((task, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm">
-                  <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0"
-                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-dim)' }}>
-                    {i + 1}
-                  </span>
-                  <span className="flex-1 min-w-0">
-                    <span className="font-semibold truncate block" style={{ color: 'var(--text-primary)' }}>{task.title}</span>
-                    <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{task.subjectLabel} · ~{task.estimatedMinutes} min</span>
-                  </span>
-                </li>
-              ))}
+              {dailyPlan.map((task, i) => {
+                // Sprint CO.1: when the Navigator's recommendation IS this task,
+                // note it instead of repeating the full recommendation card —
+                // keeps the Daily Plan intact while avoiding duplication.
+                const isNavigatorTarget = !!navigatorAction
+                  && navigatorAction.subjectSlug === task.subjectSlug
+                  && navigatorAction.chapterId === task.chapterId
+                return (
+                  <li key={i} className="flex items-center gap-3 text-sm">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0"
+                      style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-dim)' }}>
+                      {i + 1}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="font-semibold truncate block" style={{ color: 'var(--text-primary)' }}>{task.title}</span>
+                      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{task.subjectLabel} · ~{task.estimatedMinutes} min</span>
+                      {isNavigatorTarget && (
+                        <span className="text-[10px] block mt-0.5" style={{ color: 'var(--text-dim)' }}>
+                          ✓ Included in your recommended action above
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                )
+              })}
             </ul>
             <Link href="/school/focus"
               className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white"

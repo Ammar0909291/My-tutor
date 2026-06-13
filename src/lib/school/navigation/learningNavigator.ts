@@ -55,13 +55,20 @@ export interface LearningNavigatorAction {
   expectedOutcome: string
   href: string
   source: NavigatorSource
+  // Sprint CO.1: target identity, used by callers to detect when the
+  // navigator's recommendation IS the page currently being viewed
+  // (consolidation — avoids duplicate/competing recommendation cards).
+  subjectSlug: string
+  chapterId: string
 }
 
-/** Urgency → color for compact "🎯 Recommended Next Action" cards (red/yellow/green). */
+/** Urgency → color for compact "🎯 Recommended Next Action" cards. Low urgency is
+ * intentionally neutral/muted (not green) — it should not compete visually with
+ * HIGH/MEDIUM items elsewhere on the page. */
 export const NAVIGATOR_URGENCY_COLORS: Record<NavigatorUrgency, string> = {
   high: 'var(--coral)',
   medium: 'var(--yellow)',
-  low: 'var(--green)',
+  low: 'var(--text-dim)',
 }
 
 // ── Orchestrator recommendation enrichment ──────────────────────────────────
@@ -157,6 +164,8 @@ function enrichRecommendation(rec: LearningRecommendation): LearningNavigatorAct
     expectedOutcome: e.expectedOutcome,
     href: rec.href,
     source: e.source,
+    subjectSlug: rec.subjectSlug,
+    chapterId: rec.chapterId,
   }
 }
 
@@ -185,6 +194,8 @@ function enrichDailyTask(task: DailyTask): LearningNavigatorAction {
     expectedOutcome: e.expectedOutcome,
     href: task.href,
     source: 'daily_plan',
+    subjectSlug: task.subjectSlug,
+    chapterId: task.chapterId,
   }
 }
 
@@ -207,6 +218,20 @@ export async function getLearningNavigatorAction(
   const tasks = await getDailyStudyPlan(userId, board, grade).catch(() => [] as DailyTask[])
   if (tasks.length > 0) return enrichDailyTask(tasks[0])
 
+  return null
+}
+
+// ── Copy helpers (Sprint CO.1) ────────────────────────────────────────────────
+
+/**
+ * "Continue Learning" / "Start Next Chapter" read as if they point somewhere
+ * else when the navigator's target IS the page the student is already on.
+ * Returns a context-aware label for that case, or null if the action's own
+ * title is unambiguous regardless of where it's shown.
+ */
+export function navigatorTitleForCurrentChapter(action: LearningNavigatorAction): string | null {
+  if (action.type === 'continue_chapter') return 'Continue This Chapter'
+  if (action.type === 'start_next_chapter') return 'Start This Chapter'
   return null
 }
 

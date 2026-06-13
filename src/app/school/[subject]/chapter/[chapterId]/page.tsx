@@ -16,7 +16,7 @@ import { detectPrerequisiteGap } from '@/lib/school/adaptive/prerequisiteRecover
 import { getNodesForChapter } from '@/lib/education'
 import { RevisionNotesButton } from '@/components/school/RevisionNotesButton'
 import { isFormulaSheetAvailable } from '@/lib/school/revision/revisionNotesTypes'
-import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { getLearningNavigatorAction, navigatorTitleForCurrentChapter } from '@/lib/school/navigation/learningNavigator'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 /**
@@ -106,6 +106,16 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   // Sprint BP: compact next-step recommendation. The 'next_chapter' case is
   // already covered by the green Recommended Next card below.
   const chapterNextStep = getChapterNextStep(details, !!nextChapter)
+
+  // Sprint CO.1: when the Navigator already has a recommendation, it is the
+  // single source of truth for "what's next" on this page — suppress the
+  // older Recommended Next widgets below to avoid conflicting guidance.
+  const navigatorTargetsThisChapter = !!navigatorAction
+    && navigatorAction.subjectSlug === subjectSlug
+    && navigatorAction.chapterId === chapter.id
+  const navigatorTitle = navigatorTargetsThisChapter && navigatorAction
+    ? navigatorTitleForCurrentChapter(navigatorAction) ?? undefined
+    : undefined
 
   // Sprint BR: difficulty badge derived from KG node count + grade
   const diffBadge = chapterDifficultyBadge(chapter.kgNodeIds.length, grade)
@@ -197,7 +207,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
         )}
 
         {/* Sprint CO: Next Recommended Step — unified Learning Navigator banner */}
-        {navigatorAction && <NavigatorActionCard action={navigatorAction} heading="🎯 Next Recommended Step" compact />}
+        {navigatorAction && <NavigatorActionCard action={navigatorAction} heading="🎯 Next Recommended Step" title={navigatorTitle} compact />}
 
         {/* Phase 5: Chapter summary */}
         <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
@@ -257,8 +267,10 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
           />
         </section>
 
-        {/* Sprint BP: compact next-step guidance */}
-        {(chapterNextStep === 'practice' || chapterNextStep === 'assessment') && (
+        {/* Sprint BP: compact next-step guidance — suppressed when the Navigator
+            banner above already covers "what's next" (Sprint CO.1: avoid
+            conflicting recommendations). */}
+        {!navigatorAction && (chapterNextStep === 'practice' || chapterNextStep === 'assessment') && (
           <section className="rounded-2xl px-5 py-4 flex items-center gap-3"
             style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
             <span className="text-base shrink-0">💡</span>
@@ -363,8 +375,10 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
           )
         })()}
 
-        {/* Phase 6: Next chapter recommendation (when assessment passed) */}
-        {details.assessmentPassed && nextChapter && (
+        {/* Phase 6: Next chapter recommendation (when assessment passed) —
+            suppressed when the Navigator banner above already covers "what's
+            next" (Sprint CO.1: avoid conflicting recommendations). */}
+        {!navigatorAction && details.assessmentPassed && nextChapter && (
           <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--green)' }}>
             <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--green)' }}>Recommended Next</p>
             <p className="font-bold text-sm mb-3" style={{ color: 'var(--text-primary)' }}>{chapterDisplayTitle(nextChapter.title)}</p>
