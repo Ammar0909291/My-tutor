@@ -211,30 +211,36 @@ export async function getDailyStudyPlan(
       candidateSlugs = candidateSlugs.sort((a, b) => (scoreMap.get(a) ?? 50) - (scoreMap.get(b) ?? 50))
     } catch { /* non-fatal — fall back to board order */ }
 
-    // Sprint CR+CS: secondary sort by mastery weight; FALSE_MASTERY + HIGH misconception = AT_RISK priority
+    // Sprint CR+CS+CT: secondary sort by mastery weight with misconception and transfer adjustments
     try {
       const { getMasteryProfile, masteryPriorityWeight } = await import('./masteryIntelligence')
       const { getChapterMisconceptions } = await import('./misconceptionEngine')
+      const { evaluateConceptTransfer } = await import('./conceptTransfer')
       const masteryScores = await Promise.all(
         candidateSlugs.map(async (slug) => {
           const p = progressMap.get(slug)
           const chapter = p?.position.current
           if (!chapter) return { slug, weight: 2 }
-          const [profile, misconceptions] = await Promise.all([
+          const [profile, misconceptions, transferProfile] = await Promise.all([
             getMasteryProfile(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => null),
             getChapterMisconceptions(userId, board, grade, slug, chapter.id, chapter.kgNodeIds ?? []).catch(() => []),
+            evaluateConceptTransfer(userId, slug, chapter.id).catch(() => null),
           ])
           let weight = profile ? masteryPriorityWeight(profile.masteryLevel) : 2
           // FALSE_MASTERY + HIGH confidence misconception → escalate to AT_RISK priority (0)
           if (profile?.masteryLevel === 'FALSE_MASTERY' && misconceptions.some((m) => m.confidence === 'HIGH')) {
             weight = 0
           }
+          // TRUE_MASTERY + TRANSFER_WEAK → don't advance aggressively; treat as DEVELOPING (2)
+          if (profile?.masteryLevel === 'TRUE_MASTERY' && transferProfile?.level === 'TRANSFER_WEAK') {
+            weight = Math.min(weight, 2)
+          }
           return { slug, weight }
         })
       )
       const weightMap = new Map(masteryScores.map((r) => [r.slug, r.weight]))
       candidateSlugs = candidateSlugs.sort((a, b) => (weightMap.get(a) ?? 2) - (weightMap.get(b) ?? 2))
-    } catch { /* non-fatal — mastery/misconception sort is additive */ }
+    } catch { /* non-fatal — mastery/misconception/transfer sort is additive */ }
   }
   for (const slug of candidateSlugs) {
     if (tasks.length >= MAX_TASKS) break

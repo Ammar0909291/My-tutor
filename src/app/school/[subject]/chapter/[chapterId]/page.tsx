@@ -20,6 +20,7 @@ import { getLearningNavigatorAction, navigatorTitleForCurrentChapter } from '@/l
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 import { getMasteryProfile, buildStudentFacingEvidence } from '@/lib/school/adaptive/masteryIntelligence'
 import { getChapterMisconceptions } from '@/lib/school/adaptive/misconceptionEngine'
+import { getTransferProfile } from '@/lib/school/adaptive/conceptTransfer'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -77,7 +78,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -91,6 +92,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     getMasteryProfile(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => null),
     // Sprint CS: misconception detection
     getChapterMisconceptions(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => []),
+    // Sprint CT: concept transfer profile
+    getTransferProfile(session.user.id, board, grade, subjectSlug, chapter.id).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -144,6 +147,19 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
 
   // Sprint CS: show the highest-confidence misconception, hidden when LOW
   const topMisconception = allMisconceptions.find((m) => m.confidence !== 'LOW') ?? null
+
+  // Sprint CT: transfer card styling
+  const TRANSFER_STYLE: Record<string, { color: string; bg: string; border: string }> = {
+    TRANSFER_STRONG:    { color: 'var(--green)',        bg: 'var(--green-muted)',   border: 'var(--green)' },
+    TRANSFER_DEVELOPING:{ color: 'var(--text-secondary)',bg: 'var(--bg-surface)',   border: 'var(--border-default)' },
+    TRANSFER_WEAK:      { color: 'var(--yellow)',       bg: 'var(--yellow-muted)',  border: 'var(--yellow)' },
+  }
+  const transferStyle = transferProfile ? (TRANSFER_STYLE[transferProfile.level] ?? TRANSFER_STYLE.TRANSFER_DEVELOPING) : null
+  const TRANSFER_DESCRIPTIONS: Record<string, string> = {
+    TRANSFER_STRONG:    'You successfully apply this topic in new situations.',
+    TRANSFER_DEVELOPING:'You understand the basics but need more application practice.',
+    TRANSFER_WEAK:      'Try more real-world applications of this concept.',
+  }
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -243,6 +259,19 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </p>
             <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
               {topMisconception.label}
+            </p>
+          </div>
+        )}
+
+        {/* Sprint CT: Concept Transfer card — hidden when null (insufficient evidence) */}
+        {transferProfile && transferStyle && (
+          <div className="rounded-2xl px-4 py-3"
+            style={{ background: transferStyle.bg, border: `1px solid ${transferStyle.border}` }}>
+            <p className="text-xs font-bold mb-0.5" style={{ color: transferStyle.color }}>
+              {transferProfile.insight}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              {TRANSFER_DESCRIPTIONS[transferProfile.level]}
             </p>
           </div>
         )}

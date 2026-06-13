@@ -399,6 +399,21 @@ export async function POST(req: Request) {
         // non-fatal — misconception context is purely additive
       }
 
+      // Sprint CT: concept transfer status — distinguish memorized procedure from real understanding.
+      try {
+        const { evaluateConceptTransfer, buildTransferReasoningBlock, generateTransferPrompt } = await import('@/lib/school/adaptive/conceptTransfer')
+        const transferProfile = await evaluateConceptTransfer(userId, subjectCode, schoolCtx.chapter.id)
+        const block = buildTransferReasoningBlock(transferProfile)
+        if (block) {
+          systemPrompt += block
+          if (transferProfile?.level === 'TRANSFER_WEAK') {
+            systemPrompt += generateTransferPrompt(subjectCode, chapterKgNodes.map((n) => n.id))
+          }
+        }
+      } catch {
+        // non-fatal — transfer context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {
