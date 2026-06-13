@@ -221,14 +221,19 @@ export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
         // ── Economics (Statistics for Economics + Indian Economic Development) ──
         { id: 'cbse.sst.11.eco1', order: 37, title: '[Economics] Introduction and Collection of Data', kgNodeIds: ['economics.statistics.data'] },
         { id: 'cbse.sst.11.eco2', order: 38, title: '[Economics] Organisation and Presentation of Data', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco3', order: 39, title: '[Economics] Measures of Central Tendency', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco4', order: 40, title: '[Economics] Correlation and Index Numbers', kgNodeIds: ['economics.statistics.data'] },
-        { id: 'cbse.sst.11.eco5', order: 41, title: '[Economics] Indian Economy on the Eve of Independence', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.11.eco6', order: 42, title: '[Economics] Indian Economy 1950–1990', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.11.eco7', order: 43, title: '[Economics] Liberalisation, Privatisation and Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
-        { id: 'cbse.sst.11.eco8', order: 44, title: '[Economics] Poverty and Human Capital Formation', kgNodeIds: ['economics.development.poverty'] },
-        { id: 'cbse.sst.11.eco9', order: 45, title: '[Economics] Rural Development and Employment', kgNodeIds: ['economics.indian_economy.sectors'] },
-        { id: 'cbse.sst.11.eco10', order: 46, title: '[Economics] Infrastructure and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
+        { id: 'cbse.sst.11.eco3',  order: 39, title: '[Economics] Measures of Central Tendency', kgNodeIds: ['economics.statistics.data'] },
+        // Sprint BV: added eco3b "Measures of Dispersion" — confirmed absent in Sprint BU
+        // forensic audit. Covers range, quartile deviation, mean deviation, standard deviation,
+        // coefficient of variation. KG: economics.statistics.data already explicitly lists
+        // "measures of central tendency and dispersion" in its description.
+        { id: 'cbse.sst.11.eco3b', order: 40, title: '[Economics] Measures of Dispersion', kgNodeIds: ['economics.statistics.data'] },
+        { id: 'cbse.sst.11.eco4',  order: 41, title: '[Economics] Correlation and Index Numbers', kgNodeIds: ['economics.statistics.data'] },
+        { id: 'cbse.sst.11.eco5',  order: 42, title: '[Economics] Indian Economy on the Eve of Independence', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.11.eco6',  order: 43, title: '[Economics] Indian Economy 1950–1990', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.11.eco7',  order: 44, title: '[Economics] Liberalisation, Privatisation and Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
+        { id: 'cbse.sst.11.eco8',  order: 45, title: '[Economics] Poverty and Human Capital Formation', kgNodeIds: ['economics.development.poverty'] },
+        { id: 'cbse.sst.11.eco9',  order: 46, title: '[Economics] Rural Development and Employment', kgNodeIds: ['economics.indian_economy.sectors'] },
+        { id: 'cbse.sst.11.eco10', order: 47, title: '[Economics] Infrastructure and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
       ],
     },
     {
@@ -251,6 +256,7 @@ export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
         // deleted (confirmed 2025-26); "Colonial Cities" and "Understanding Partition"
         // themes also deleted/merged by CBSE.
         // ── Geography (Fundamentals of Human Geography + India: People and Economy) ──
+        // Book 1: Fundamentals of Human Geography (geo1–geo8)
         { id: 'cbse.sst.12.geo1', order: 12, title: '[Geography] Human Geography — Nature and Scope', kgNodeIds: ['geography.human_geography.population'] },
         { id: 'cbse.sst.12.geo2', order: 13, title: '[Geography] The World Population — Distribution and Growth', kgNodeIds: ['geography.human_geography.population'] },
         { id: 'cbse.sst.12.geo3', order: 14, title: '[Geography] Human Development', kgNodeIds: ['geography.human_geography.development'] },
@@ -259,35 +265,47 @@ export const CBSE_SOCIAL_SCIENCE_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.sst.12.geo6', order: 17, title: '[Geography] Tertiary and Quaternary Activities', kgNodeIds: ['geography.india_resources.industries_transport'] },
         { id: 'cbse.sst.12.geo7', order: 18, title: '[Geography] Transport, Communication and International Trade', kgNodeIds: ['economics.globalisation.trade'] },
         { id: 'cbse.sst.12.geo8', order: 19, title: '[Geography] Human Settlements', kgNodeIds: ['geography.human_geography.population'] },
-        { id: 'cbse.sst.12.geo9', order: 20, title: '[Geography] Land Resources and Agriculture in India', kgNodeIds: ['geography.india_resources.agriculture'] },
-        { id: 'cbse.sst.12.geo10', order: 21, title: '[Geography] Mineral and Energy Resources', kgNodeIds: ['geography.india_resources.minerals_energy'] },
-        { id: 'cbse.sst.12.geo11', order: 22, title: '[Geography] Planning and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
+        // Book 2: India — People and Economy (geo9–geo15)
+        // Sprint BV: added geo9b (Population), geo9c (Migration), geo10b (Water Resources),
+        // geo10c (Manufacturing Industries) — confirmed absent in Sprint BU forensic audit.
+        // KG mapping: geo9b+geo9c → geography.human_geography.population (already covers
+        //   India population density/growth/migration per node description).
+        //   geo10b → geography.india_resources.agriculture (irrigation/water conservation
+        //   are core content; no standalone water node exists).
+        //   geo10c → geography.india_resources.industries_transport (covers India industries).
+        { id: 'cbse.sst.12.geo9',  order: 20, title: '[Geography] Land Resources and Agriculture in India', kgNodeIds: ['geography.india_resources.agriculture'] },
+        { id: 'cbse.sst.12.geo9b', order: 21, title: '[Geography] Population: Distribution, Density, Growth and Composition', kgNodeIds: ['geography.human_geography.population'] },
+        { id: 'cbse.sst.12.geo9c', order: 22, title: '[Geography] Migration: Types, Causes and Consequences', kgNodeIds: ['geography.human_geography.population'] },
+        { id: 'cbse.sst.12.geo10', order: 23, title: '[Geography] Mineral and Energy Resources', kgNodeIds: ['geography.india_resources.minerals_energy'] },
+        { id: 'cbse.sst.12.geo10b', order: 24, title: '[Geography] Water Resources', kgNodeIds: ['geography.india_resources.agriculture'] },
+        { id: 'cbse.sst.12.geo10c', order: 25, title: '[Geography] Manufacturing Industries', kgNodeIds: ['geography.india_resources.industries_transport'] },
+        { id: 'cbse.sst.12.geo11', order: 26, title: '[Geography] Planning and Sustainable Development', kgNodeIds: ['geography.human_geography.development'] },
         // ── Political Science (Contemporary World Politics + Politics in India Since Independence) ──
-        { id: 'cbse.sst.12.pol1', order: 23, title: '[Political Science] The Cold War Era', kgNodeIds: ['civics.international_relations.cold_war'] },
-        { id: 'cbse.sst.12.pol2', order: 24, title: '[Political Science] The End of Bipolarity', kgNodeIds: ['history.post_independence.contemporary'] },
-        { id: 'cbse.sst.12.pol3', order: 25, title: '[Political Science] US Hegemony in World Politics', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol4', order: 26, title: '[Political Science] Alternative Centres of Power', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol5', order: 27, title: '[Political Science] Contemporary South Asia', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol6', order: 28, title: '[Political Science] International Organisations', kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol7', order: 29, title: '[Political Science] Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
-        { id: 'cbse.sst.12.pol8', order: 30, title: '[Political Science] Challenges of Nation Building', kgNodeIds: ['history.post_independence.constitution'] },
-        { id: 'cbse.sst.12.pol9', order: 31, title: '[Political Science] Era of One-Party Dominance', kgNodeIds: ['history.post_independence.contemporary'] },
-        { id: 'cbse.sst.12.pol10',  order: 32, title: '[Political Science] Politics of Planned Development', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.12.pol10b', order: 33, title: '[Political Science] Challenges to and Restoration of the Congress System', kgNodeIds: ['history.post_independence.contemporary'] },
-        { id: 'cbse.sst.12.pol11',  order: 34, title: "[Political Science] India's External Relations", kgNodeIds: ['civics.international_relations.un'] },
-        { id: 'cbse.sst.12.pol12',  order: 35, title: '[Political Science] Regional Aspirations', kgNodeIds: ['civics.constitution.federalism'] },
-        { id: 'cbse.sst.12.pol13',  order: 36, title: '[Political Science] Recent Developments in Indian Politics', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol1', order: 27, title: '[Political Science] The Cold War Era', kgNodeIds: ['civics.international_relations.cold_war'] },
+        { id: 'cbse.sst.12.pol2', order: 28, title: '[Political Science] The End of Bipolarity', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol3', order: 29, title: '[Political Science] US Hegemony in World Politics', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol4', order: 30, title: '[Political Science] Alternative Centres of Power', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol5', order: 31, title: '[Political Science] Contemporary South Asia', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol6', order: 32, title: '[Political Science] International Organisations', kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol7', order: 33, title: '[Political Science] Globalisation', kgNodeIds: ['economics.globalisation.trade'] },
+        { id: 'cbse.sst.12.pol8', order: 34, title: '[Political Science] Challenges of Nation Building', kgNodeIds: ['history.post_independence.constitution'] },
+        { id: 'cbse.sst.12.pol9', order: 35, title: '[Political Science] Era of One-Party Dominance', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol10',  order: 36, title: '[Political Science] Politics of Planned Development', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.12.pol10b', order: 37, title: '[Political Science] Challenges to and Restoration of the Congress System', kgNodeIds: ['history.post_independence.contemporary'] },
+        { id: 'cbse.sst.12.pol11',  order: 38, title: "[Political Science] India's External Relations", kgNodeIds: ['civics.international_relations.un'] },
+        { id: 'cbse.sst.12.pol12',  order: 39, title: '[Political Science] Regional Aspirations', kgNodeIds: ['civics.constitution.federalism'] },
+        { id: 'cbse.sst.12.pol13',  order: 40, title: '[Political Science] Recent Developments in Indian Politics', kgNodeIds: ['history.post_independence.contemporary'] },
         // Rationalization (Class 12 Political Science): "Security in the
         // Contemporary World", "Environment and Natural Resources", "Crisis
         // of the Democratic Order", and "Rise of Popular Movements" deleted
         // by CBSE. "Challenges to and Restoration of the Congress System"
         // (pol10b) confirmed present in 2025-26 syllabus.
         // ── Economics (Introductory Macroeconomics + Indian Economic Development) ──
-        { id: 'cbse.sst.12.eco1', order: 37, title: '[Economics] National Income Accounting', kgNodeIds: ['economics.indian_economy.sectors'] },
-        { id: 'cbse.sst.12.eco2', order: 38, title: '[Economics] Money and Banking', kgNodeIds: ['economics.money_banking.currency'] },
-        { id: 'cbse.sst.12.eco3', order: 39, title: '[Economics] Determination of Income and Employment', kgNodeIds: ['economics.markets.supply_demand'] },
-        { id: 'cbse.sst.12.eco4', order: 40, title: '[Economics] Government Budget and the Economy', kgNodeIds: ['economics.indian_economy.planning'] },
-        { id: 'cbse.sst.12.eco5', order: 41, title: '[Economics] Balance of Payments and Foreign Exchange', kgNodeIds: ['economics.globalisation.trade'] },
+        { id: 'cbse.sst.12.eco1', order: 41, title: '[Economics] National Income Accounting', kgNodeIds: ['economics.indian_economy.sectors'] },
+        { id: 'cbse.sst.12.eco2', order: 42, title: '[Economics] Money and Banking', kgNodeIds: ['economics.money_banking.currency'] },
+        { id: 'cbse.sst.12.eco3', order: 43, title: '[Economics] Determination of Income and Employment', kgNodeIds: ['economics.markets.supply_demand'] },
+        { id: 'cbse.sst.12.eco4', order: 44, title: '[Economics] Government Budget and the Economy', kgNodeIds: ['economics.indian_economy.planning'] },
+        { id: 'cbse.sst.12.eco5', order: 45, title: '[Economics] Balance of Payments and Foreign Exchange', kgNodeIds: ['economics.globalisation.trade'] },
       ],
     },
   ],
