@@ -416,6 +416,15 @@ export async function POST(req: Request) {
         console.warn('[learn/chat] learning profile context skipped:', err)
       }
 
+      // Sprint CG: primary learning objective from orchestrator
+      try {
+        const { getTopRecommendation, buildPrimaryObjectiveBlock } = await import('@/lib/school/adaptive/learningOrchestrator')
+        const rec = await getTopRecommendation(userId, schoolCtx.board, schoolCtx.grade)
+        if (rec) systemPrompt += buildPrimaryObjectiveBlock(rec)
+      } catch (err) {
+        console.warn('[learn/chat] orchestrator context skipped:', err)
+      }
+
       // Sprint BY: lesson plan — derive chapter roadmap from existing progress data
       // and inject as CURRENT LESSON PLAN block. Additive, try/catch, never blocks.
       try {

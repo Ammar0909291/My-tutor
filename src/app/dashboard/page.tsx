@@ -23,6 +23,7 @@ import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 import { getRecentAchievement } from '@/lib/school/achievements/achievementEngine'
 import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadiness'
+import { getTopRecommendation } from '@/lib/school/adaptive/learningOrchestrator'
 
 function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
@@ -122,7 +123,7 @@ export default async function DashboardPage() {
     const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
-    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction, dailyPlan, streakData, recentAchievement, examReadinessSummary] = await Promise.all([
+    const [progressMap, revisionRaw, pendingAssessmentRow, nextAction, dailyPlan, streakData, recentAchievement, examReadinessSummary, topRecommendation] = await Promise.all([
       withRetry(() => getSchoolProgressForSubjects(session.user.id, sp0.educationBoard!, sp0.grade!, schoolSlugs)),
       // Sprint BO: single top revision recommendation from the weak-topic engine
       getRecommendedRevisionChapter(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
@@ -142,6 +143,8 @@ export default async function DashboardPage() {
       getRecentAchievement(session.user.id).catch(() => null),
       // Sprint CE: exam readiness
       getExamReadinessForAllSubjects(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
+      // Sprint CG: single unified recommendation from the orchestrator
+      getTopRecommendation(session.user.id, sp0.educationBoard!, sp0.grade!).catch(() => null),
     ])
     // Suppress the BO revision card when the Next Step card already points at
     // the same chapter — one recommendation, no duplicates.
@@ -183,6 +186,7 @@ export default async function DashboardPage() {
           readinessPercent: s.readinessPercent,
           level: s.level,
         })) ?? null}
+        recommendation={topRecommendation}
       />
     )
   }
