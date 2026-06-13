@@ -554,6 +554,19 @@ export async function POST(req: Request) {
         console.warn('[learn/chat] mock test insights skipped:', err)
       }
 
+      // Sprint CI: note when revision notes have been generated for this chapter,
+      // so the tutor can point the student to them when relevant.
+      try {
+        const notesCount = await prisma.revisionNotesCache.count({
+          where: { board: schoolCtx.board, subjectSlug: subjectCode, grade: schoolCtx.grade, chapterId: schoolCtx.chapter.id },
+        }).catch(() => 0)
+        if (notesCount > 0) {
+          systemPrompt += `\n\nREVISION NOTES AVAILABLE: Concise revision notes (Quick Revision, Exam Revision${schoolCtx && (subjectCode === 'mathematics' || subjectCode === 'science') ? ', Formula Sheet' : ''}) have been generated for this chapter and can be opened from the chapter page via "Generate Revision Notes". If the student asks for a summary, key points, or quick revision, you may mention these are available — but still answer their question directly.`
+        }
+      } catch (err) {
+        console.warn('[learn/chat] revision notes hint skipped:', err)
+      }
+
       // Sprint BW: visual learning aids — detect the best visual for this chapter
       // and instruct the tutor to emit a VISUAL:<type> tag when helpful.
       // Additive only — never blocks, never modifies existing context.

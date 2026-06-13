@@ -1780,3 +1780,21 @@ model ChapterContentCache {
   @@unique([board, subjectSlug, grade, chapterId, language])
   @@map("chapter_content_cache")
 }
+
+// Sprint CI: AI-generated revision notes / sheets, cached globally per
+// board/subject/grade/chapter/noteType (same pattern as ChapterContentCache).
+model RevisionNotesCache {
+  id          String   @id @default(cuid())
+  board       String
+  subjectSlug String
+  grade       Int
+  chapterId   String
+  noteType    String   // "quick" | "exam" | "formula"
+  language    String   @default("en")
+  content     Json     // structured RevisionNotes payload
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([board, subjectSlug, grade, chapterId, noteType, language])
+  @@map("revision_notes_cache")
+}

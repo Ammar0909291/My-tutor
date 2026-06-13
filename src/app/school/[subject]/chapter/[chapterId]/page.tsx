@@ -14,6 +14,8 @@ import { buildLessonPlan, getLessonPlanCardItems } from '@/lib/school/adaptive/l
 import { getRevisionStates, getRevisionBadge } from '@/lib/school/adaptive/spacedRevision'
 import { detectPrerequisiteGap } from '@/lib/school/adaptive/prerequisiteRecovery'
 import { getNodesForChapter } from '@/lib/education'
+import { RevisionNotesButton } from '@/components/school/RevisionNotesButton'
+import { isFormulaSheetAvailable } from '@/lib/school/revision/revisionNotesTypes'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -240,6 +242,12 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
               {details.assessmentPassed ? 'Retake Assessment' : details.assessmentAttempts > 0 ? 'Retake Assessment' : 'Take Assessment'}
             </Link>
           </div>
+          {/* Sprint CI: on-demand revision notes */}
+          <RevisionNotesButton
+            subjectSlug={subjectSlug}
+            chapterId={chapter.id}
+            formulaAvailable={isFormulaSheetAvailable(subjectSlug)}
+          />
         </section>
 
         {/* Sprint BP: compact next-step guidance */}
