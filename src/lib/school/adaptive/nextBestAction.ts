@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/db/prisma'
-import { getBoard } from '@/lib/education'
-import { chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getGradeSubjects } from '@/lib/school/schoolRouting'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from './weakTopics'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
@@ -38,7 +37,7 @@ export async function getNextBestAction(
   board: string,
   grade: number,
 ): Promise<NextBestAction | null> {
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
   if (slugs.length === 0) return null
 
   const [progressMap, assessmentRows, revision] = await Promise.all([

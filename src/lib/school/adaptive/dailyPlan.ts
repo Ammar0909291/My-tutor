@@ -1,5 +1,4 @@
-import { getBoard } from '@/lib/education'
-import { chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getGradeSubjects } from '@/lib/school/schoolRouting'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from './weakTopics'
 import { getDueRevisionsBySubjects } from './spacedRevision'
@@ -59,7 +58,7 @@ export async function getDailyStudyPlan(
   board: string,
   grade: number,
 ): Promise<DailyTask[]> {
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
   if (slugs.length === 0) return []
 
   const [progressMap, assessmentRows, revision, dueRevisions] = await Promise.all([

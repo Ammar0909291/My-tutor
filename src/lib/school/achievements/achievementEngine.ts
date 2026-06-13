@@ -3,7 +3,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { SCHOOL_ACHIEVEMENTS } from './achievementTypes'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
-import { getBoard } from '@/lib/education'
+import { getGradeSubjects } from '@/lib/school/schoolRouting'
 
 export interface UnlockedAchievement {
   slug: string
@@ -34,7 +34,7 @@ export async function checkAndUnlockAchievements(
   board: string,
   grade: number,
 ): Promise<UnlockedAchievement[]> {
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
 
   const [
     achievements,

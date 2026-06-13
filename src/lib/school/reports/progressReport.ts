@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/db/prisma'
 import { generateAIResponse } from '@/lib/ai/client'
-import { ALL_KG_NODES, getBoard } from '@/lib/education'
-import { SCHOOL_SUBJECT_META, getSchoolChapters, chapterDisplayTitle } from '@/lib/school/schoolRouting'
+import { ALL_KG_NODES } from '@/lib/education'
+import { SCHOOL_SUBJECT_META, getSchoolChapters, chapterDisplayTitle, getGradeSubjects } from '@/lib/school/schoolRouting'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
 import { type ProgressReport, type ReportWindow, REPORT_WINDOW_META } from './progressReportTypes'
 
@@ -32,7 +32,7 @@ export async function generateProgressReport(
 ): Promise<ProgressReport> {
   const meta = REPORT_WINDOW_META[window]
   const since = new Date(Date.now() - meta.days * 86400000)
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
 
   // ── Gather all data in parallel (all non-fatal) ──────────────────────────
   const [

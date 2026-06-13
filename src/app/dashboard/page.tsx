@@ -15,7 +15,7 @@ import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 import { SchoolDashboard, type SchoolSubjectProgress } from '@/components/dashboard/SchoolDashboard'
-import { getBoard } from '@/lib/education'
+import { getGradeSubjects } from '@/lib/school/schoolRouting'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from '@/lib/school/adaptive/weakTopics'
 import { getNextBestAction } from '@/lib/school/adaptive/nextBestAction'
@@ -120,8 +120,9 @@ export default async function DashboardPage() {
   // attaches in Sprint BH; CTAs land on /learn?subject=<slug> until then.
   const sp0 = user.profile
   if (sp0?.userType === 'SCHOOL_STUDENT' && sp0.educationBoard && sp0.grade) {
-    const boardDef = getBoard(sp0.educationBoard)
-    const schoolSlugs = boardDef?.subjects ?? ['mathematics', 'science', 'english', 'social_science']
+    // Sprint DC: grade-aware — Grade 11–12 students see stream subjects
+    // (Physics/Chemistry/…); lower grades see Science/Social Science.
+    const schoolSlugs = getGradeSubjects(sp0.educationBoard, sp0.grade)
     // Live progress derived from namespaced StudentProgress + TopicProgress
     // mastery (Sprint BJ) — see src/lib/school/schoolProgress.ts.
     const [progressMap, revisionRaw, pendingAssessmentRow, nextAction, dailyPlan, streakData, recentAchievement, examReadinessSummary, navigatorAction, overallRoadmap] = await Promise.all([

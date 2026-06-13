@@ -15,9 +15,8 @@
  */
 
 import { prisma } from '@/lib/db/prisma'
-import { getBoard } from '@/lib/education'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
-import { getSchoolChapters, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getSchoolChapters, SCHOOL_SUBJECT_META, getGradeSubjects } from '@/lib/school/schoolRouting'
 import { REVIEW_INTERVALS_DAYS } from './spacedRevision'
 
 export interface ExamReadiness {
@@ -198,7 +197,7 @@ export async function getExamReadinessForAllSubjects(
   board: string,
   grade: number,
 ): Promise<ExamReadinessSummary> {
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
   if (slugs.length === 0) {
     return { subjects: [], overallReadiness: 0, readiestSubject: null, weakestSubject: null }
   }

@@ -46,6 +46,16 @@ export { CBSE_SCIENCE_CATALOG, getCBSEScienceChapters, getCBSEScienceChapter } f
 export { CBSE_SOCIAL_SCIENCE_CATALOG, getCBSESocialScienceChapters, getCBSESocialScienceChapter } from './cbseSocialScienceCatalog'
 export { CBSE_ENGLISH_CATALOG, getCBSEEnglishChapters, getCBSEEnglishChapter } from './cbseEnglishCatalog'
 
+// Grade 11–12 Stream Subjects (Sprint DC — derived from Science/SST, no new content)
+export {
+  STREAM_SUBJECT_SLUGS,
+  CBSE_STREAM_CATALOGS, UP_STREAM_CATALOGS,
+  CBSE_PHYSICS_CATALOG, CBSE_CHEMISTRY_CATALOG, CBSE_BIOLOGY_CATALOG,
+  CBSE_HISTORY_CATALOG, CBSE_GEOGRAPHY_CATALOG, CBSE_POLITICAL_SCIENCE_CATALOG, CBSE_ECONOMICS_CATALOG,
+  UP_PHYSICS_CATALOG, UP_CHEMISTRY_CATALOG, UP_BIOLOGY_CATALOG,
+  UP_HISTORY_CATALOG, UP_GEOGRAPHY_CATALOG, UP_POLITICAL_SCIENCE_CATALOG, UP_ECONOMICS_CATALOG,
+} from './streamCatalogs'
+
 // Board Registry
 export { UP_BOARD } from './upBoardCatalog'
 export { CBSE_BOARD } from './cbseBoardCatalog'

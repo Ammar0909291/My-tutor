@@ -1,6 +1,5 @@
-import { getBoard } from '@/lib/education'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
-import { chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getGradeSubjects } from '@/lib/school/schoolRouting'
 
 /**
  * Long-Term Learning Roadmaps (Sprint CK) — conceptual chapter progression
@@ -97,7 +96,7 @@ export async function getOverallRoadmap(
   board: string,
   grade: number,
 ): Promise<OverallRoadmap> {
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
   if (slugs.length === 0) return { subjects: [], overallCompletionPercent: 0 }
 
   const map = await getSchoolProgressForSubjects(userId, board, grade, slugs).catch(() => new Map())

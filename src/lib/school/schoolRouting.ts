@@ -94,4 +94,24 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   science:        { label: 'Science',        icon: '🔬', color: 'var(--green)',  bg: 'var(--green-muted)' },
   english:        { label: 'English',        icon: '📖', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
   social_science: { label: 'Social Science', icon: '🌍', color: 'var(--purple)', bg: 'var(--coral-muted)' },
+  // Sprint DC: senior-secondary (Grade 11–12) standalone stream subjects.
+  physics:           { label: 'Physics',           icon: '⚛️', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
+  chemistry:         { label: 'Chemistry',         icon: '🧪', color: 'var(--green)',  bg: 'var(--green-muted)' },
+  biology:           { label: 'Biology',           icon: '🧬', color: 'var(--green)',  bg: 'var(--green-muted)' },
+  history:           { label: 'History',           icon: '📜', color: 'var(--purple)', bg: 'var(--coral-muted)' },
+  geography:         { label: 'Geography',         icon: '🗺️', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
+  political_science: { label: 'Political Science', icon: '⚖️', color: 'var(--purple)', bg: 'var(--coral-muted)' },
+  economics:         { label: 'Economics',         icon: '📈', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
+}
+
+/**
+ * Subjects a student at a given grade should actually see — i.e. those with at
+ * least one chapter at that grade. This keeps the grade-agnostic `board.subjects`
+ * list (which includes both the 5–10 bundled subjects and the 11–12 streams)
+ * from surfacing empty subjects: a Grade 7 student sees Science (not Physics);
+ * a Grade 11 student sees Physics/Chemistry/Biology (not the now 5–10 Science).
+ */
+export function getGradeSubjects(boardId: string, grade: number): string[] {
+  const all = getBoard(boardId)?.subjects ?? []
+  return all.filter((slug) => getSchoolChapters(boardId, slug, grade).length > 0)
 }

@@ -8,6 +8,14 @@ export const CBSE_BOARD: EducationBoard = {
   name: 'Central Board of Secondary Education',
   shortName: 'CBSE',
   country: 'India',
-  subjects: ['mathematics', 'science', 'social_science', 'english'],
+  // Sprint DC: senior-secondary (11–12) streams are first-class subjects.
+  // Science/Social Science cover grades 5–10; the streams below cover 11–12.
+  // Grade-aware listing (getGradeSubjects) ensures each student only sees the
+  // subjects that have chapters at their grade.
+  subjects: [
+    'mathematics', 'science', 'social_science', 'english',
+    'physics', 'chemistry', 'biology',
+    'history', 'geography', 'political_science', 'economics',
+  ],
   grades: [5, 6, 7, 8, 9, 10, 11, 12],
 }

@@ -17,9 +17,8 @@
  */
 
 import { prisma } from '@/lib/db/prisma'
-import { getBoard } from '@/lib/education'
 import { ALL_KG_NODES } from '@/lib/education'
-import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getSchoolChapters } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getSchoolChapters, getGradeSubjects } from '@/lib/school/schoolRouting'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
 
@@ -60,7 +59,7 @@ export async function getTopRecommendation(
   board: string,
   grade: number,
 ): Promise<LearningRecommendation | null> {
-  const slugs = getBoard(board)?.subjects ?? []
+  const slugs = getGradeSubjects(board, grade)
   if (slugs.length === 0) return null
 
   // Fetch shared data once for efficiency
