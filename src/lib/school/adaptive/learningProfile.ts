@@ -24,6 +24,8 @@ export interface StudentLearningProfile {
   strugglingTopics: string[]
   preferredDifficulty: DifficultyMode
   preferredTeachingStyle: TeachingStyleResult
+  /** Sprint CB: number of detected prerequisite gaps across all struggling topics */
+  prerequisiteGapCount: number
 }
 
 const LOOKBACK_DAYS = 60
@@ -116,6 +118,27 @@ export async function buildLearningProfile(
     label: 'Step-by-Step',
   }))
 
+  // Sprint CB: count detected prerequisite gaps across struggling topics
+  let prerequisiteGapCount = 0
+  if (strugglingTopics.length > 0 || weaknesses.length > 0) {
+    try {
+      const { ALL_KG_NODES } = await import('@/lib/education')
+      const KG_BY_ID = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n]))
+      const recentMistakeSlugs = new Set([...weaknesses, ...strugglingTopics])
+      const masteredSet = new Set(masteredTopics)
+      for (const slug of recentMistakeSlugs) {
+        const node = KG_BY_ID.get(slug)
+        if (!node) continue
+        for (const prereqId of node.prerequisites) {
+          if (!masteredSet.has(prereqId)) {
+            prerequisiteGapCount++
+            break // count one gap per struggling topic
+          }
+        }
+      }
+    } catch { /* non-fatal */ }
+  }
+
   return {
     grade,
     strengths,
@@ -124,6 +147,7 @@ export async function buildLearningProfile(
     strugglingTopics,
     preferredDifficulty,
     preferredTeachingStyle,
+    prerequisiteGapCount,
   }
 }
 

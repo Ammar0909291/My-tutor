@@ -57,6 +57,7 @@ export async function POST(req: Request) {
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
     const lastSuccessfulTeachingStyle = typeof snapshot?.lastSuccessfulTeachingStyle === 'string' ? snapshot.lastSuccessfulTeachingStyle : null
     const snapshotCurrentConceptId = typeof snapshot?.currentConceptNodeId === 'string' ? snapshot.currentConceptNodeId : null
+    const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
 
     const subjectCode = learnSession.subject.slug
 
@@ -249,9 +250,10 @@ export async function POST(req: Request) {
     // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
     // chapter KG topics and previously-covered node count, straight from the
     // education graph. Additive and school-only; general learners never get it.
-    // Hoisted outside schoolCtx block so Sprint BX/BY snapshot updates can reference them
+    // Hoisted outside schoolCtx block so Sprint BX/BY/CB snapshot updates can reference them
     let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
     let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
+    let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
 
     if (schoolCtx) {
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
@@ -448,6 +450,26 @@ export async function POST(req: Request) {
         if (revBlock) systemPrompt += revBlock
       } catch (err) {
         console.warn('[learn/chat] spaced revision context skipped:', err)
+      }
+
+      // Sprint CB: prerequisite gap detection — only inject when confidence is high.
+      // Avoids overwhelming the student with recovery prompts on low-signal turns.
+      try {
+        const { detectPrerequisiteGap, buildPrerequisiteAlertBlock } = await import('@/lib/school/adaptive/prerequisiteRecovery')
+        const { getNodesForChapter: _getNodesForPrereq } = await import('@/lib/education')
+        const { getSchoolChapters: _getChapsForPrereq } = await import('@/lib/school/schoolRouting')
+        const fullChapterForPrereq = _getChapsForPrereq(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c) => c.id === schoolCtx!.chapter.id)
+        if (fullChapterForPrereq) {
+          const prereqNodes = _getNodesForPrereq(fullChapterForPrereq)
+          const gap = await detectPrerequisiteGap(userId, subjectCode, schoolCtx.chapter.id, prereqNodes)
+          if (gap && gap.confidence === 'high') {
+            prereqGapHoisted = gap
+            systemPrompt += buildPrerequisiteAlertBlock(gap)
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] prerequisite recovery context skipped:', err)
       }
 
       // Sprint BW: visual learning aids — detect the best visual for this chapter
@@ -775,6 +797,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   : {}),
                 currentConceptNodeId: newCurrentId,
                 nextConceptNodeId: newNextId,
+                // Sprint CB: persist prereq gap only when high-confidence (avoid noisy writes)
+                ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
               },
             },
           }).catch(() => {})

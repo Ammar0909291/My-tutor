@@ -6,6 +6,9 @@ import { getDueRevisionsBySubjects } from './spacedRevision'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
 import { prisma } from '@/lib/db/prisma'
 
+// Sprint CB: imported lazily to avoid circular dependencies
+type PrerequisiteChapterTarget = import('./prerequisiteRecovery').PrerequisiteChapterTarget
+
 /**
  * Daily Study Plan (Sprint BQ/CA) — deterministic, no AI, no new tables.
  *
@@ -26,7 +29,7 @@ export interface DailyTask {
   title: string
   estimatedMinutes: number
   reason: string
-  priority: 'retake_assessment' | 'review_spaced' | 'practice_weak' | 'continue_chapter' | 'start_next_chapter'
+  priority: 'retake_assessment' | 'bridge_prerequisite' | 'review_spaced' | 'practice_weak' | 'continue_chapter' | 'start_next_chapter'
   href: string
 }
 
@@ -40,6 +43,7 @@ function targetMinutes(grade: number): number {
 
 function taskMinutes(priority: DailyTask['priority']): number {
   if (priority === 'retake_assessment') return 20
+  if (priority === 'bridge_prerequisite') return 10
   if (priority === 'review_spaced') return 10
   if (priority === 'practice_weak') return 15
   return 15
@@ -109,6 +113,41 @@ export async function getDailyStudyPlan(
       priority: 'retake_assessment',
       href: taskHref(attempt.subjectSlug, chapter.id, 'retake_assessment'),
     })
+  }
+
+  // Priority 1b: bridge prerequisite (Sprint CB) — high-confidence gap only, max 1/day
+  if (tasks.length < MAX_TASKS) {
+    try {
+      const { detectPrerequisiteGap, findPrerequisiteChapter } = await import('./prerequisiteRecovery')
+      const { getNodesForChapter } = await import('@/lib/education')
+      const { getSchoolChapters } = await import('@/lib/school/schoolRouting')
+      // Check each subject's current chapter for a high-confidence gap
+      const addedPrereqChapterIds = new Set<string>()
+      for (const slug of slugs) {
+        if (tasks.length >= MAX_TASKS) break
+        const p = progressMap.get(slug)
+        if (!p) continue
+        const currentChapter = p.position.current
+        const fullChapter = getSchoolChapters(board, slug, grade).find((c: { id: string }) => c.id === currentChapter.id)
+        if (!fullChapter) continue
+        const kgNodes = getNodesForChapter(fullChapter)
+        const gap = await detectPrerequisiteGap(userId, slug, currentChapter.id, kgNodes)
+        if (!gap || gap.confidence !== 'high') continue
+        const prereqChapter = findPrerequisiteChapter(board, slug, grade, gap.missingPrereqId)
+        if (!prereqChapter || addedPrereqChapterIds.has(prereqChapter.chapterId)) continue
+        addedPrereqChapterIds.add(prereqChapter.chapterId)
+        addTask({
+          subjectSlug: slug,
+          subjectLabel: label(slug),
+          chapterId: prereqChapter.chapterId,
+          title: prereqChapter.chapterTitle,
+          estimatedMinutes: taskMinutes('bridge_prerequisite'),
+          reason: `Foundation review: "${prereqChapter.missingPrereqTitle}" needed for current chapter`,
+          priority: 'bridge_prerequisite',
+          href: taskHref(slug, prereqChapter.chapterId, 'bridge_prerequisite'),
+        })
+      }
+    } catch { /* non-fatal */ }
   }
 
   // Priority 2: spaced revision due (Sprint CA) — map overdue nodes → chapters
