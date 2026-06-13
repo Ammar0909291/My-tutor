@@ -4,6 +4,7 @@ import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { RECOMMENDATION_LABELS } from '@/lib/school/adaptive/learningOrchestrator'
+import { ProgressReportButton } from '@/components/dashboard/ProgressReportButton'
 
 /**
  * School Student home (Sprint BG).
@@ -401,6 +402,9 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
             </div>
           </section>
         )}
+
+        {/* ═══ SECTION 6 — PROGRESS REPORT (Sprint CJ) ═══ */}
+        <ProgressReportButton />
 
       </main>
     </div>
