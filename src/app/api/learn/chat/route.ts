@@ -58,6 +58,10 @@ export async function POST(req: Request) {
     const lastSuccessfulTeachingStyle = typeof snapshot?.lastSuccessfulTeachingStyle === 'string' ? snapshot.lastSuccessfulTeachingStyle : null
     const snapshotCurrentConceptId = typeof snapshot?.currentConceptNodeId === 'string' ? snapshot.currentConceptNodeId : null
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
+    // Sprint CH: active worked example carried across turns
+    const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
+      ? snapshot.currentWorkedExample as { concept: string; currentStep: number; stepCount: number }
+      : null
 
     const subjectCode = learnSession.subject.slug
 
@@ -254,6 +258,8 @@ export async function POST(req: Request) {
     let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
     let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
+    // Sprint CH: did THIS turn activate/continue a worked example?
+    let workedExampleActive = false
 
     if (schoolCtx) {
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
@@ -414,6 +420,33 @@ export async function POST(req: Request) {
         }
       } catch (err) {
         console.warn('[learn/chat] learning profile context skipped:', err)
+      }
+
+      // Sprint CH: interactive worked examples — solve WITH the student step by step.
+      // Activates when the student asks to be walked through a problem, or when a
+      // worked example is already in progress from a previous turn.
+      try {
+        const { detectWorkedExampleIntent, buildWorkedExampleBlock } = await import('@/lib/school/tutoring/workedExamples')
+        const difficultyMode = learnerProfHoisted?.preferredDifficulty ?? 'standard'
+        if (snapshotWorkedExample) {
+          // Resume an in-progress example
+          workedExampleActive = true
+          systemPrompt += buildWorkedExampleBlock({
+            concept: snapshotWorkedExample.concept,
+            difficultyMode,
+            resuming: true,
+            currentStep: snapshotWorkedExample.currentStep,
+            totalSteps: snapshotWorkedExample.stepCount,
+          })
+        } else {
+          const concept = detectWorkedExampleIntent(message, subjectCode)
+          if (concept) {
+            workedExampleActive = true
+            systemPrompt += buildWorkedExampleBlock({ concept, difficultyMode })
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] worked example context skipped:', err)
       }
 
       // Sprint CG: primary learning objective from orchestrator
@@ -817,6 +850,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // The tag is additive — stripping it keeps stored messages clean.
       let responseVisual: string | null = null
       let cleanText = text
+      // Sprint CH: worked-example progress — null = no change, 'clear' = done, object = update
+      let workedExampleUpdate: 'clear' | { concept: string; currentStep: number; stepCount: number } | null = null
       if (schoolCtx) {
         try {
           const { parseVisualTag } = await import('@/lib/school/visuals/detectVisual')
@@ -824,18 +859,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           responseVisual = parsed.visual
           cleanText = parsed.cleanText
         } catch { /* non-fatal */ }
+
+        // Sprint CH: extract and strip the [WE:...] worked-example progress tag
+        if (workedExampleActive || snapshotWorkedExample) {
+          try {
+            const { parseWorkedExampleTag } = await import('@/lib/school/tutoring/workedExamples')
+            const we = parseWorkedExampleTag(cleanText)
+            cleanText = we.cleanText
+            if (we.done) workedExampleUpdate = 'clear'
+            else if (we.state) workedExampleUpdate = { concept: we.state.concept, currentStep: we.state.currentStep, stepCount: we.state.stepCount }
+          } catch { /* non-fatal */ }
+        }
       }
 
       await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
 
-      // Sprint BY: persist current/next concept + teaching style to snapshot
-      // (BX style update consolidated here so we write the snapshot once)
-      if (schoolCtx && lessonPlanHoisted?.currentConcept) {
-        const newCurrentId = lessonPlanHoisted.currentConcept.nodeId
-        const newNextId = lessonPlanHoisted.nextConcept?.nodeId ?? null
-        if (newCurrentId !== snapshotCurrentConceptId) {
+      // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
+      // snapshot. Write once when either the lesson concept changed (BY) or the
+      // worked-example state changed (CH).
+      if (schoolCtx) {
+        const newCurrentId = lessonPlanHoisted?.currentConcept?.nodeId ?? null
+        const newNextId = lessonPlanHoisted?.nextConcept?.nodeId ?? null
+        const conceptChanged = !!newCurrentId && newCurrentId !== snapshotCurrentConceptId
+        const workedExampleChanged = workedExampleUpdate !== null
+
+        if (conceptChanged || workedExampleChanged) {
+          // Sprint CH: compute the next worked-example memory value
+          let workedExampleField: Record<string, unknown> = {}
+          if (workedExampleUpdate === 'clear') {
+            workedExampleField = { currentWorkedExample: null }
+          } else if (workedExampleUpdate) {
+            workedExampleField = { currentWorkedExample: workedExampleUpdate }
+          }
+
           prisma.learnSession.update({
             where: { id: sessionId },
             data: {
@@ -844,10 +902,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...(learnerProfHoisted?.preferredTeachingStyle.confidence !== 'low'
                   ? { lastSuccessfulTeachingStyle: learnerProfHoisted!.preferredTeachingStyle.style }
                   : {}),
-                currentConceptNodeId: newCurrentId,
-                nextConceptNodeId: newNextId,
+                ...(conceptChanged ? { currentConceptNodeId: newCurrentId, nextConceptNodeId: newNextId } : {}),
                 // Sprint CB: persist prereq gap only when high-confidence (avoid noisy writes)
                 ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
+                ...workedExampleField,
               },
             },
           }).catch(() => {})
