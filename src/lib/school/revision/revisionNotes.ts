@@ -75,6 +75,12 @@ function fallbackFor(type: RevisionNoteType, chapter: Chapter): RevisionNotes {
 
 // ── Prompts ──────────────────────────────────────────────────────────────────
 
+function languageNote(subjectName: string): string {
+  return subjectName === 'Hindi'
+    ? 'Write ALL content (summary, concepts, terms, questions, answers) in Hindi (Devanagari script). Do not use Roman transliteration.\n'
+    : ''
+}
+
 function buildPrompt(type: RevisionNoteType, board: string, subjectName: string, grade: number, chapter: Chapter): string {
   const title = chapterDisplayTitle(chapter.title)
   const topics = getNodesForChapter(chapter).map((n) => n.title)
@@ -83,6 +89,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
 
   if (type === 'quick') {
     return [
+      languageNote(subjectName),
       `Create a CONCISE Quick Revision sheet for a ${ctx}`,
       'Keep it tight — equivalent to 1-2 pages. No essays.',
       'Return ONLY this JSON:',
@@ -97,6 +104,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
   }
   if (type === 'exam') {
     return [
+      languageNote(subjectName),
       `Create a CONCISE Exam Revision sheet for a ${ctx}`,
       'Focus on high-yield, exam-relevant material only. Be brief.',
       'Return ONLY this JSON:',
@@ -110,6 +118,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
   }
   // formula
   return [
+    languageNote(subjectName),
     `Create a CONCISE Formula Sheet for a ${ctx}`,
     'List only the formulas that genuinely appear in this chapter. If the chapter has no formulas, return an empty array.',
     'Return ONLY this JSON:',

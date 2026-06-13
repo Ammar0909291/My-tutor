@@ -128,7 +128,14 @@ export type SocialScienceDomain =
   | 'society.social_inequality'
   | 'society.social_change'
 
-export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain
+export type HindiDomain =
+  | 'hindi.vyakaran'
+  | 'hindi.shabdavali'
+  | 'hindi.padhna'
+  | 'hindi.lekhan'
+  | 'hindi.sahitya'
+
+export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain | HindiDomain
 
 export interface KnowledgeNode {
   id: string

@@ -93,12 +93,18 @@ function validateAndFixQuestion(q: unknown, nodeIds: string[], index: number): P
   return null
 }
 
+function languageNote(subjectName: string): string {
+  return subjectName === 'Hindi'
+    ? 'Write ALL questions, options, explanations and sample answers in Hindi (Devanagari script). Do not use Roman transliteration.\n'
+    : ''
+}
+
 function buildPrompt(board: string, subjectName: string, grade: number, chapter: Chapter, topics: string[], nodeIds: string[]): string {
   const title = chapterDisplayTitle(chapter.title)
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
   const topicLines = topics.slice(0, 8).map((t, i) => `  - "${nodeIds[i] ?? nodeIds[0]}": ${t}`).join('\n')
 
-  return `You are creating a chapter ASSESSMENT (not just practice) for a ${boardLabel} Class ${grade} ${subjectName} student.
+  return `${languageNote(subjectName)}You are creating a chapter ASSESSMENT (not just practice) for a ${boardLabel} Class ${grade} ${subjectName} student.
 Chapter: "${title}"
 Topics (use these node IDs):
 ${topicLines}

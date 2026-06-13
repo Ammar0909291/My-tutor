@@ -41,12 +41,19 @@ function fallbackContent(chapter: Chapter): ChapterContent {
   return { summary, objectives }
 }
 
+function languageNote(subjectName: string): string {
+  return subjectName === 'Hindi'
+    ? 'Write ALL content (summary, objectives) in Hindi (Devanagari script). Do not use Roman transliteration.'
+    : ''
+}
+
 function buildPrompt(board: string, subjectName: string, grade: number, chapter: Chapter): string {
   const title = chapterDisplayTitle(chapter.title)
   const topics = getNodesForChapter(chapter).map((n) => n.title)
   const boardLabel = BOARD_LABELS[board] ?? board
 
   return [
+    languageNote(subjectName),
     `You are writing for a ${boardLabel} Grade ${grade} ${subjectName} student opening the chapter "${title}".`,
     `Topics in this chapter: ${topics.length > 0 ? topics.join(', ') : title}.`,
     '',

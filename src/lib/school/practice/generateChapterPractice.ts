@@ -52,6 +52,12 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string): Pra
   ]
 }
 
+function languageNote(subjectName: string): string {
+  return subjectName === 'Hindi'
+    ? 'Write ALL questions, options, explanations and sample answers in Hindi (Devanagari script). Do not use Roman transliteration.\n'
+    : ''
+}
+
 function buildPrompt(
   board: string,
   subjectName: string,
@@ -64,7 +70,7 @@ function buildPrompt(
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
   const topicLines = topics.slice(0, 6).map((t, i) => `  - "${nodeIds[i] ?? nodeIds[0]}": ${t}`).join('\n')
 
-  return `You are creating practice questions for a ${boardLabel} Class ${grade} ${subjectName} student.
+  return `${languageNote(subjectName)}You are creating practice questions for a ${boardLabel} Class ${grade} ${subjectName} student.
 Chapter: "${title}"
 Topics covered (use these node IDs when assigning nodeId):
 ${topicLines}

@@ -3,10 +3,13 @@ import { MATH_KNOWLEDGE_GRAPH } from './mathKnowledgeGraph'
 import { SCIENCE_KNOWLEDGE_GRAPH } from './scienceKnowledgeGraph'
 import { ENGLISH_KNOWLEDGE_GRAPH } from './englishKnowledgeGraph'
 import { SOCIAL_SCIENCE_KNOWLEDGE_GRAPH } from './socialScienceKnowledgeGraph'
+import { HINDI_KNOWLEDGE_GRAPH } from './hindiKnowledgeGraph'
 import { UP_MATH_CATALOG } from './upMathCatalog'
 import { UP_ENGLISH_CATALOG } from './upEnglishCatalog'
+import { UP_HINDI_CATALOG } from './upHindiCatalog'
 import { CBSE_MATH_CATALOG } from './cbseMathCatalog'
 import { CBSE_ENGLISH_CATALOG } from './cbseEnglishCatalog'
+import { CBSE_HINDI_CATALOG } from './cbseHindiCatalog'
 // Sprint DC: senior-secondary streams are owned by standalone subjects; the
 // bundled Science/SST catalogs are trimmed to grades 5–10 in BOARD_CATALOGS.
 import {
@@ -23,12 +26,14 @@ export const ALL_KG_NODES: KnowledgeNode[] = [
   ...SCIENCE_KNOWLEDGE_GRAPH,
   ...ENGLISH_KNOWLEDGE_GRAPH,
   ...SOCIAL_SCIENCE_KNOWLEDGE_GRAPH,
+  ...HINDI_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_MATH_CATALOG,
   UP_SCIENCE_CATALOG_5_10,
   UP_ENGLISH_CATALOG,
+  UP_HINDI_CATALOG,
   UP_SOCIAL_SCIENCE_CATALOG_5_10,
   ...UP_STREAM_CATALOGS,
   CBSE_MATH_CATALOG,
@@ -36,6 +41,7 @@ export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   CBSE_SOCIAL_SCIENCE_CATALOG_5_10,
   ...CBSE_STREAM_CATALOGS,
   CBSE_ENGLISH_CATALOG,
+  CBSE_HINDI_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */

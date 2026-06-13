@@ -11,7 +11,7 @@ export const UP_BOARD: EducationBoard = {
   // NOTE: UP Grade 12 Economics has no chapters yet (catalog gap, Sprint DB) —
   // the Economics subject exposes only Grade 11 until backfilled.
   subjects: [
-    'mathematics', 'science', 'english', 'social_science',
+    'mathematics', 'science', 'english', 'hindi', 'social_science',
     'physics', 'chemistry', 'biology',
     'history', 'geography', 'political_science', 'economics',
   ],
