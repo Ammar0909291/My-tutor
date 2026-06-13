@@ -9,6 +9,7 @@ import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
 import { getExamReadinessForSubject } from '@/lib/school/adaptive/examReadiness'
+import { getSubjectRoadmap } from '@/lib/school/roadmap/learningRoadmap'
 
 /**
  * School subject home (Sprint BH): board-aware landing for one subject.
@@ -40,10 +41,11 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
   ]))
   if (!progress) redirect('/dashboard')
 
-  // Sprint BP: compact 4-step study plan + Sprint CE: exam readiness
-  const [studyPlan, examReadiness] = await Promise.all([
+  // Sprint BP: compact 4-step study plan + Sprint CE: exam readiness + Sprint CK: roadmap
+  const [studyPlan, examReadiness, roadmap] = await Promise.all([
     getStudyPlan(session.user.id, board, grade, subjectSlug).catch(() => []),
     getExamReadinessForSubject(session.user.id, board, grade, subjectSlug).catch(() => null),
+    getSubjectRoadmap(session.user.id, board, grade, subjectSlug).catch(() => null),
   ])
 
   const pos = progress.position
@@ -186,6 +188,37 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
             🎓 Take Mock Test
           </Link>
         </div>
+
+        {/* Sprint CK: Learning Roadmap — compact chapter progression */}
+        {roadmap && roadmap.allChapters.length > 0 && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-bold text-xs uppercase tracking-wide" style={{ color: 'var(--text-secondary)' }}>🗺️ Learning Roadmap</h2>
+              <span className="text-xs font-bold" style={{ color: m.color }}>
+                {roadmap.completedCount}/{roadmap.totalCount} · {roadmap.completionPercent}%
+              </span>
+            </div>
+            <ul className="space-y-1.5">
+              {roadmap.allChapters.map((ch) => {
+                const icon = ch.status === 'completed' ? '✓' : ch.status === 'current' ? '→' : '○'
+                const iconColor = ch.status === 'completed' ? 'var(--green)' : ch.status === 'current' ? 'var(--coral)' : 'var(--text-dim)'
+                const textColor = ch.status === 'upcoming' ? 'var(--text-dim)' : 'var(--text-primary)'
+                const weight = ch.status === 'current' ? 700 : 500
+                return (
+                  <li key={ch.id} className="flex items-center gap-2.5 text-sm">
+                    <span className="w-4 text-center shrink-0 font-bold" style={{ color: iconColor }}>{icon}</span>
+                    <span className="truncate" style={{ color: textColor, fontWeight: weight }}>{ch.title}</span>
+                  </li>
+                )
+              })}
+            </ul>
+            <p className="text-[11px] mt-3" style={{ color: 'var(--text-dim)' }}>
+              {roadmap.estimatedRemainingSteps === 0
+                ? 'All chapters complete — great work!'
+                : `${roadmap.estimatedRemainingSteps} chapter${roadmap.estimatedRemainingSteps === 1 ? '' : 's'} remaining to finish this subject`}
+            </p>
+          </section>
+        )}
 
         {/* Recent activity — compact */}
         {recentSessions.length > 0 && (

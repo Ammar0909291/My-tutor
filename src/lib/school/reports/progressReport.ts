@@ -44,6 +44,7 @@ export async function generateProgressReport(
     recentAchievement,
     examReadiness,
     recommendation,
+    overallRoadmap,
   ] = await Promise.all([
     prisma.topicProgress.findMany({
       where: {
@@ -71,6 +72,7 @@ export async function generateProgressReport(
     import('@/lib/school/achievements/achievementEngine').then((m) => m.getRecentAchievement(userId)).catch(() => null),
     import('@/lib/school/adaptive/examReadiness').then((m) => m.getExamReadinessForAllSubjects(userId, board, grade)).catch(() => null),
     import('@/lib/school/adaptive/learningOrchestrator').then((m) => m.getTopRecommendation(userId, board, grade)).catch(() => null),
+    import('@/lib/school/roadmap/learningRoadmap').then((m) => m.getOverallRoadmap(userId, board, grade)).catch(() => null),
   ])
 
   // ── Section 1: Learning Summary — chapters completed in window ────────────
@@ -178,6 +180,9 @@ Keep it under 60 words, second person ("you"), no headings, no bullet points, no
     areasToImprove,
     studyHabits,
     recommendation: reportRecommendation,
+    roadmapStatus: overallRoadmap
+      ? overallRoadmap.subjects.map((r) => ({ subjectLabel: r.subjectLabel, completedCount: r.completedCount, totalCount: r.totalCount }))
+      : [],
   }
 }
 

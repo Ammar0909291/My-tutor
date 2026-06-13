@@ -170,6 +170,22 @@ export function ProgressReportButton() {
                     </div>
                   </ReportSection>
 
+                  {/* Roadmap status (Sprint CK) */}
+                  {report.roadmapStatus.length > 0 && (
+                    <ReportSection title="🗺️ Roadmap status">
+                      <ul className="space-y-1.5">
+                        {report.roadmapStatus.map((r, i) => (
+                          <li key={i} className="text-sm flex items-center justify-between" style={{ color: 'var(--text-primary)' }}>
+                            <span>{r.subjectLabel}</span>
+                            <span className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+                              {r.completedCount} of {r.totalCount} chapters
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </ReportSection>
+                  )}
+
                   {/* Recommendation */}
                   {report.recommendation && (
                     <ReportSection title="⭐ Recommended next step">

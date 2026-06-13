@@ -33,6 +33,8 @@ export interface ProgressReport {
   }
   /** Section 5: single orchestrator recommendation. */
   recommendation: ReportRecommendation | null
+  /** Sprint CK: roadmap status — chapters completed per subject. */
+  roadmapStatus: { subjectLabel: string; completedCount: number; totalCount: number }[]
 }
 
 export const REPORT_WINDOW_META: Record<ReportWindow, { label: string; days: number }> = {

@@ -93,6 +93,14 @@ export interface SchoolDashboardProps {
     chapterId: string
     href: string
   } | null
+  // Sprint CK: academic journey (roadmap completion per subject)
+  academicJourney?: {
+    subjectSlug: string
+    subjectLabel: string
+    completedCount: number
+    totalCount: number
+    completionPercent: number
+  }[] | null
 }
 
 const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
@@ -104,7 +112,7 @@ const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
   start_next_chapter:  { heading: 'Start', cta: 'Start Chapter' },
 }
 
-export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan, momentum, examReadiness, recommendation }: SchoolDashboardProps) {
+export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan, momentum, examReadiness, recommendation, academicJourney }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
 
   // Continue target = most recently studied subject, else Mathematics first
@@ -375,6 +383,30 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
             })}
           </div>
         </section>
+
+        {/* ═══ SECTION 4b — ACADEMIC JOURNEY (Sprint CK) — chapter completion, NOT readiness ═══ */}
+        {academicJourney && academicJourney.length > 0 && (
+          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+            <h2 className="font-bold text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--text-primary)' }}>🗺️ Academic Journey</h2>
+            <div className="space-y-2.5">
+              {academicJourney.map((r) => {
+                const m = SUBJECT_META[r.subjectSlug] ?? { label: r.subjectLabel, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+                return (
+                  <div key={r.subjectSlug} className="flex items-center gap-3">
+                    <span className="text-sm w-6 text-center shrink-0">{m.icon}</span>
+                    <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--text-primary)' }}>{m.label}</span>
+                    <div className="h-2 flex-1 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
+                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, r.completionPercent))}%`, background: m.color, transition: 'width .5s' }} />
+                    </div>
+                    <span className="text-[11px] font-mono font-bold w-20 text-right shrink-0" style={{ color: m.color }}>
+                      {r.completedCount}/{r.totalCount} · {r.completionPercent}%
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+        )}
 
         {/* ═══ SECTION 5 — EXAM READINESS (Sprint CE) ═══ */}
         {examReadiness && examReadiness.length > 0 && (
