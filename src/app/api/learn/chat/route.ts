@@ -55,6 +55,7 @@ export async function POST(req: Request) {
 
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
+    const lastSuccessfulTeachingStyle = typeof snapshot?.lastSuccessfulTeachingStyle === 'string' ? snapshot.lastSuccessfulTeachingStyle : null
 
     const subjectCode = learnSession.subject.slug
 
@@ -247,6 +248,9 @@ export async function POST(req: Request) {
     // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
     // chapter KG topics and previously-covered node count, straight from the
     // education graph. Additive and school-only; general learners never get it.
+    // Hoisted outside schoolCtx block so Sprint BX snapshot update can reference it
+    let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
+
     if (schoolCtx) {
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
       // can be passed to buildGuidedTeachingPrompt below.
@@ -289,7 +293,8 @@ export async function POST(req: Request) {
       // never touches Practice/Assessment/TopicProgress/MistakeRecord.
       try {
         const { buildLearningProfile, checkpointFrequencyForMode } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = await buildLearningProfile(userId, schoolCtx.grade)
+        learnerProf = await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle)
+        learnerProfHoisted = learnerProf
         checkpointFrequency = checkpointFrequencyForMode(learnerProf.preferredDifficulty)
 
         const prevMsg = learnSession.messages[0]
@@ -382,8 +387,15 @@ export async function POST(req: Request) {
       // smart questioning, phase 4 weak-node recovery, phase 3 explanation depth.
       try {
         const { buildLearningProfile, formatLearningProfileContext } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = learnerProf ?? await buildLearningProfile(userId, schoolCtx.grade)
+        learnerProf = learnerProf ?? await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle)
+        learnerProfHoisted = learnerProf
         systemPrompt += formatLearningProfileContext(learnerProf)
+
+        // Sprint BX: inject teaching style instructions into system prompt
+        if (learnerProf.preferredTeachingStyle.confidence !== 'low') {
+          const { buildTeachingStyleBlock } = await import('@/lib/school/adaptive/teachingStyle')
+          systemPrompt += buildTeachingStyleBlock(learnerProf.preferredTeachingStyle)
+        }
 
         // Phase 4: if this chapter has weak nodes, add recovery instruction
         if (guidedWeakTopicTitles.length > 0) {
@@ -701,6 +713,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
+
+      // Sprint BX: persist successful teaching style to snapshot when confidence is high/medium
+      if (schoolCtx && learnerProfHoisted && learnerProfHoisted.preferredTeachingStyle.confidence !== 'low') {
+        const styleToStore = learnerProfHoisted.preferredTeachingStyle.style
+        if (styleToStore !== lastSuccessfulTeachingStyle) {
+          prisma.learnSession.update({
+            where: { id: sessionId },
+            data: {
+              contextSnapshot: {
+                ...(snapshot ?? {}),
+                lastSuccessfulTeachingStyle: styleToStore,
+              },
+            },
+          }).catch(() => {})
+        }
+      }
 
       // Auto-save lesson position on every interaction so Dashboard/Library
       // can show exactly where the learner is without them completing a lesson.

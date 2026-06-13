@@ -9,7 +9,7 @@ import { getSchoolSubjectProgress, getChapterProgressDetails } from '@/lib/schoo
 import { getChapterContent } from '@/lib/school/chapterContent'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getChapterNextStep } from '@/lib/school/adaptive/nextBestAction'
-import { chapterDifficultyBadge } from '@/lib/school/adaptive/learningProfile'
+import { chapterDifficultyBadge, buildLearningProfile } from '@/lib/school/adaptive/learningProfile'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -66,10 +66,11 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusLabel = completed ? 'Completed' : isCurrent ? 'In progress' : 'Not started'
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
-  const [content, details, subjectWeakTopics] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
+    buildLearningProfile(session.user.id, grade, subjectSlug).catch(() => null),
   ])
   // Sprint BO: weak KG nodes belonging to THIS chapter (max 3 shown)
   const chapterWeakTopics = subjectWeakTopics
@@ -135,6 +136,12 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
               style={{ color: diffBadge.color, background: diffBadge.bg, border: `1px solid ${diffBadge.color}` }}>
               {diffBadge.label}
             </span>
+            {learnerProfile && learnerProfile.preferredTeachingStyle.confidence !== 'low' && (
+              <span className="inline-block mt-2 ml-2 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                style={{ color: 'var(--coral)', background: 'var(--coral-muted)', border: '1px solid var(--coral)' }}>
+                {learnerProfile.preferredTeachingStyle.label}
+              </span>
+            )}
           </div>
         </header>
 

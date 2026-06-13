@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db/prisma'
 import { getCheckpointPassRate } from '@/lib/school/checkpoints/checkpointStats'
+import { detectTeachingStyle, type TeachingStyleResult } from './teachingStyle'
 
 /**
  * Student Learning Profile (Sprint BR) — deterministic, no AI, no new tables.
@@ -22,6 +23,7 @@ export interface StudentLearningProfile {
   masteredTopics: string[]
   strugglingTopics: string[]
   preferredDifficulty: DifficultyMode
+  preferredTeachingStyle: TeachingStyleResult
 }
 
 const LOOKBACK_DAYS = 60
@@ -29,6 +31,8 @@ const LOOKBACK_DAYS = 60
 export async function buildLearningProfile(
   userId: string,
   grade: number,
+  subjectSlug?: string,
+  lastSuccessfulStyle?: string | null,
 ): Promise<StudentLearningProfile> {
   const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000)
 
@@ -101,6 +105,17 @@ export async function buildLearningProfile(
     preferredDifficulty = 'advanced'
   }
 
+  const preferredTeachingStyle = await detectTeachingStyle(
+    userId,
+    subjectSlug ?? '',
+    preferredDifficulty,
+    lastSuccessfulStyle,
+  ).catch(() => ({
+    style: 'STEP_BY_STEP' as const,
+    confidence: 'low' as const,
+    label: 'Step-by-Step',
+  }))
+
   return {
     grade,
     strengths,
@@ -108,6 +123,7 @@ export async function buildLearningProfile(
     masteredTopics,
     strugglingTopics,
     preferredDifficulty,
+    preferredTeachingStyle,
   }
 }
 
@@ -123,6 +139,7 @@ export function formatLearningProfileContext(profile: StudentLearningProfile): s
     `STUDENT LEARNING PROFILE:`,
     `- Grade: ${profile.grade}`,
     `- Coaching mode: ${profile.preferredDifficulty.toUpperCase()}`,
+    `- Teaching style: ${profile.preferredTeachingStyle.label} (${profile.preferredTeachingStyle.confidence} confidence)`,
   ]
   if (profile.strengths.length > 0) {
     lines.push(`- Strong topics (can move quickly): ${profile.strengths.slice(0, 3).join(', ')}`)
