@@ -431,6 +431,15 @@ export async function POST(req: Request) {
         // non-fatal — confidence context is purely additive
       }
 
+      // Sprint CV: learning momentum — detect engagement risk before drop-off.
+      try {
+        const { getLearningMomentum, buildMomentumBlock } = await import('@/lib/school/adaptive/learningMomentum')
+        const momentumProfile = await getLearningMomentum(userId)
+        systemPrompt += buildMomentumBlock(momentumProfile)
+      } catch {
+        // non-fatal — momentum context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {

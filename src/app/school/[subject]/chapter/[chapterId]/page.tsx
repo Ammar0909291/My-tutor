@@ -22,6 +22,7 @@ import { getMasteryProfile, buildStudentFacingEvidence } from '@/lib/school/adap
 import { getChapterMisconceptions } from '@/lib/school/adaptive/misconceptionEngine'
 import { getTransferProfile } from '@/lib/school/adaptive/conceptTransfer'
 import { getConfidenceProfile } from '@/lib/school/adaptive/confidenceCalibration'
+import { getLearningMomentum } from '@/lib/school/adaptive/learningMomentum'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -79,7 +80,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile, momentumProfile] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -97,6 +98,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     getTransferProfile(session.user.id, board, grade, subjectSlug, chapter.id).catch(() => null),
     // Sprint CU: confidence calibration
     getConfidenceProfile(session.user.id, subjectSlug, chapter.id).catch(() => null),
+    // Sprint CV: learning momentum
+    getLearningMomentum(session.user.id).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -173,6 +176,15 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const confidenceStyle = confidenceProfile && confidenceProfile.calibration !== 'UNCERTAIN'
     ? (CONFIDENCE_STYLE[confidenceProfile.calibration] ?? null)
     : null
+
+  // Sprint CV: momentum card styling
+  const MOMENTUM_STYLE: Record<string, { color: string; bg: string; border: string }> = {
+    STRONG_MOMENTUM:    { color: 'var(--green)',        bg: 'var(--green-muted)',   border: 'var(--green)' },
+    STABLE_MOMENTUM:    { color: 'var(--text-secondary)',bg: 'var(--bg-surface)',   border: 'var(--border-default)' },
+    DECLINING_MOMENTUM: { color: 'var(--yellow)',       bg: 'var(--yellow-muted)',  border: 'var(--yellow)' },
+    DISENGAGEMENT_RISK: { color: 'var(--coral)',        bg: 'var(--coral-muted)',   border: 'var(--coral)' },
+  }
+  const momentumStyle = momentumProfile ? (MOMENTUM_STYLE[momentumProfile.level] ?? MOMENTUM_STYLE.STABLE_MOMENTUM) : null
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -298,6 +310,19 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </p>
             <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
               {confidenceProfile.insightDetail}
+            </p>
+          </div>
+        )}
+
+        {/* Sprint CV: Learning Momentum card */}
+        {momentumProfile && momentumStyle && (
+          <div className="rounded-2xl px-4 py-3"
+            style={{ background: momentumStyle.bg, border: `1px solid ${momentumStyle.border}` }}>
+            <p className="text-xs font-bold mb-0.5" style={{ color: momentumStyle.color }}>
+              {momentumProfile.insight}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              {momentumProfile.insightDetail}
             </p>
           </div>
         )}

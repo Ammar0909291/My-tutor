@@ -211,12 +211,17 @@ export async function getDailyStudyPlan(
       candidateSlugs = candidateSlugs.sort((a, b) => (scoreMap.get(a) ?? 50) - (scoreMap.get(b) ?? 50))
     } catch { /* non-fatal — fall back to board order */ }
 
-    // Sprint CR+CS+CT+CU: secondary sort by mastery weight with intelligence adjustments
+    // Sprint CR+CS+CT+CU+CV: secondary sort by mastery/intelligence/momentum weight
     try {
       const { getMasteryProfile, masteryPriorityWeight } = await import('./masteryIntelligence')
       const { getChapterMisconceptions } = await import('./misconceptionEngine')
       const { evaluateConceptTransfer } = await import('./conceptTransfer')
       const { getConfidenceProfile } = await import('./confidenceCalibration')
+      const { getLearningMomentum, getMomentumPriorityWeight } = await import('./learningMomentum')
+
+      // Fetch momentum once for the user (it's global, not per chapter)
+      const momentumProfile = await getLearningMomentum(userId).catch(() => null)
+
       const masteryScores = await Promise.all(
         candidateSlugs.map(async (slug) => {
           const p = progressMap.get(slug)
@@ -242,7 +247,11 @@ export async function getDailyStudyPlan(
             weight = Math.min(weight, 2)
           }
           // TRUE_MASTERY + UNDERCONFIDENT → keep at 3 (don't hold back well-performing student)
-          // (no change needed — already weight 3)
+          // Sprint CV: momentum adjustment — deprioritize new chapter starts when engagement is at risk
+          if (momentumProfile) {
+            const hasStudiedBefore = !!p?.lastStudiedAt
+            weight += getMomentumPriorityWeight(momentumProfile.level, hasStudiedBefore)
+          }
           return { slug, weight }
         })
       )
