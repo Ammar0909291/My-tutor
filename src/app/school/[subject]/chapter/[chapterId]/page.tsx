@@ -23,6 +23,7 @@ import { getChapterMisconceptions } from '@/lib/school/adaptive/misconceptionEng
 import { getTransferProfile } from '@/lib/school/adaptive/conceptTransfer'
 import { getConfidenceProfile } from '@/lib/school/adaptive/confidenceCalibration'
 import { getLearningMomentum } from '@/lib/school/adaptive/learningMomentum'
+import { getTeachingStrategy } from '@/lib/school/adaptive/teachingStrategy'
 
 /**
  * Chapter learning workspace (Sprint BL) — the student's home base for one
@@ -80,7 +81,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const statusColor = completed ? 'var(--green)' : isCurrent ? 'var(--coral)' : 'var(--text-dim)'
 
   const chapterKgNodesForPlan = getNodesForChapter(chapter)
-  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile, momentumProfile] = await Promise.all([
+  const [content, details, subjectWeakTopics, learnerProfile, lessonPlan, revisionStates, prereqGap, navigatorAction, masteryProfile, allMisconceptions, transferProfile, confidenceProfile, momentumProfile, teachingStrategy] = await Promise.all([
     getChapterContent(board, subjectSlug, m.label, grade, chapter),
     getChapterProgressDetails(session.user.id, subjectSlug, chapter, completed),
     getWeakTopicsForSubject(session.user.id, subjectSlug).catch(() => []),
@@ -100,6 +101,8 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     getConfidenceProfile(session.user.id, subjectSlug, chapter.id).catch(() => null),
     // Sprint CV: learning momentum
     getLearningMomentum(session.user.id).catch(() => null),
+    // Sprint CW: unified teaching strategy
+    getTeachingStrategy(session.user.id, board, grade, subjectSlug, chapter.id, chapter.kgNodeIds).catch(() => null),
   ])
   const revisionBadge = getRevisionBadge(revisionStates)
   const showFoundationBadge = prereqGap?.confidence === 'high'
@@ -185,6 +188,18 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
     DISENGAGEMENT_RISK: { color: 'var(--coral)',        bg: 'var(--coral-muted)',   border: 'var(--coral)' },
   }
   const momentumStyle = momentumProfile ? (MOMENTUM_STYLE[momentumProfile.level] ?? MOMENTUM_STYLE.STABLE_MOMENTUM) : null
+
+  // Sprint CW: teaching strategy card styling — priority 1-3 are action-oriented (coral/yellow), 4-5 neutral, 6-7 positive
+  const STRATEGY_STYLE: Record<number, { color: string; bg: string; border: string }> = {
+    1: { color: 'var(--coral)',         bg: 'var(--coral-muted)',   border: 'var(--coral)' },
+    2: { color: 'var(--yellow)',        bg: 'var(--yellow-muted)',  border: 'var(--yellow)' },
+    3: { color: 'var(--coral)',         bg: 'var(--coral-muted)',   border: 'var(--coral)' },
+    4: { color: 'var(--yellow)',        bg: 'var(--yellow-muted)',  border: 'var(--yellow)' },
+    5: { color: 'var(--text-secondary)',bg: 'var(--bg-surface)',    border: 'var(--border-default)' },
+    6: { color: 'var(--purple)',        bg: 'var(--coral-muted)',   border: 'var(--purple)' },
+    7: { color: 'var(--green)',         bg: 'var(--green-muted)',   border: 'var(--green)' },
+  }
+  const strategyStyle = teachingStrategy ? (STRATEGY_STYLE[teachingStrategy.priority] ?? STRATEGY_STYLE[5]) : null
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
@@ -323,6 +338,22 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
             </p>
             <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
               {momentumProfile.insightDetail}
+            </p>
+          </div>
+        )}
+
+        {/* Sprint CW: Adaptive Teaching Strategy card */}
+        {teachingStrategy && strategyStyle && (
+          <div className="rounded-2xl px-4 py-3"
+            style={{ background: strategyStyle.bg, border: `1px solid ${strategyStyle.border}` }}>
+            <p className="text-[10px] font-bold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-dim)' }}>
+              Current Learning Strategy
+            </p>
+            <p className="text-xs font-bold mb-0.5" style={{ color: strategyStyle.color }}>
+              {teachingStrategy.insight}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              {teachingStrategy.insightDetail}
             </p>
           </div>
         )}

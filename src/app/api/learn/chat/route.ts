@@ -440,6 +440,21 @@ export async function POST(req: Request) {
         // non-fatal — momentum context is purely additive
       }
 
+      // Sprint CW: unified teaching strategy — single orchestrated directive from all signals.
+      try {
+        const { getTeachingStrategy, buildTeachingStrategyBlock } = await import('@/lib/school/adaptive/teachingStrategy')
+        const { getSchoolChapters: _getChaptersForStrategy } = await import('@/lib/school/schoolRouting')
+        const fullChapterForStrategy = _getChaptersForStrategy(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+        const strategyKgNodeIds = fullChapterForStrategy?.kgNodeIds ?? []
+        const teachingStrategy = await getTeachingStrategy(
+          userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, strategyKgNodeIds
+        )
+        systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
+      } catch {
+        // non-fatal — strategy context is purely additive
+      }
+
       // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
       // this lesson sits in today's schedule. Additive only, max 1 line.
       try {
