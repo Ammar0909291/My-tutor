@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 const PROTECTED = ['/dashboard', '/onboarding', '/learn', '/profile', '/billing', '/settings', '/coach', '/quiz', '/flashcards', '/progress']
+const ADMIN_PATHS = ['/admin']
 const AUTH_ONLY = ['/auth/login', '/auth/signup', '/auth/forgot-password']
 
 // Static / public paths that must never be intercepted
@@ -18,9 +19,10 @@ export default auth(function middleware(req: NextRequest) {
   }
 
   const isProtected = PROTECTED.some((p) => pathname === p || pathname.startsWith(p + '/'))
+  const isAdminPath = ADMIN_PATHS.some((p) => pathname === p || pathname.startsWith(p + '/'))
   const isAuthOnly = AUTH_ONLY.some((p) => pathname === p || pathname.startsWith(p + '/'))
 
-  if (isProtected && !session) {
+  if ((isProtected || isAdminPath) && !session) {
     const url = new URL('/auth/login', req.url)
     url.searchParams.set('callbackUrl', pathname)
     return NextResponse.redirect(url)

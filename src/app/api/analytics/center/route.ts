@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { isAdminEmail } from '@/lib/auth/admin'
+import { isAdmin } from '@/lib/auth/admin'
 
 /**
  * Sprint G, Part 8 — Analytics Center (executive dashboard).
@@ -16,7 +16,7 @@ const DAY_MS = 86_400_000
 
 export async function GET() {
   const session = await auth()
-  if (!session?.user?.email || !isAdminEmail(session.user.email)) {
+  if (!session?.user?.id || !(await isAdmin(session.user.id))) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 

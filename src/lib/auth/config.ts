@@ -4,6 +4,7 @@ import Credentials from 'next-auth/providers/credentials'
 import Google from 'next-auth/providers/google'
 import { z } from 'zod'
 import { prisma } from '@/lib/db/prisma'
+import { maybeBootstrapAdmin } from '@/lib/auth/admin'
 
 const credentialsSchema = z.object({
   email: z.string().email(),
@@ -40,6 +41,10 @@ export const authConfig: NextAuthConfig = {
     async jwt({ token, user }) {
       if (user) {
         token.sub = user.id
+        // Auto-promote ADMIN_EMAILS users to ADMIN role on their first sign-in
+        if (user.id && user.email) {
+          await maybeBootstrapAdmin(user.id, user.email).catch(() => {})
+        }
         return token
       }
       // Re-validate token.sub on every use: if the DB was reset or the user row

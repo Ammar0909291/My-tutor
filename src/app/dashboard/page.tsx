@@ -74,6 +74,7 @@ export default async function DashboardPage() {
         onboardingCompleted: true,
         name: true,
         xpPoints: true,
+        role: true,
         profile: {
           select: {
             displayName: true,
@@ -244,6 +245,12 @@ export default async function DashboardPage() {
           </Link>
           <div className="flex items-center gap-3">
             <ThemeToggle />
+            {user?.role === 'ADMIN' && (
+              <Link href="/admin" className="btn-ghost text-xs px-3 py-1.5 flex items-center gap-1.5"
+                style={{ color: 'var(--coral)' }}>
+                ⚙ Admin
+              </Link>
+            )}
             <Link href="/settings" className="btn-ghost text-xs px-3 py-1.5 flex items-center gap-1.5">
               <Settings size={13} /> {T('dash_settings')}
             </Link>

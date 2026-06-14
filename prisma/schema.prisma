@@ -10,25 +10,33 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// ─── Platform roles ───────────────────────────────────────────────────────────
+
+enum PlatformRole {
+  STUDENT
+  ADMIN
+}
+
 // ─── Auth (NextAuth v5 required tables) ───────────────────────────────────────
 
 model User {
-  id                  String    @id @default(cuid())
+  id                  String       @id @default(cuid())
   name                String?
-  email               String    @unique
+  email               String       @unique
   emailVerified       DateTime?
   image               String?
   passwordHash        String?
-  onboardingCompleted Boolean   @default(false)
-  xpPoints            Int       @default(0)
-  referralCode        String?   @unique
+  role                PlatformRole @default(STUDENT)
+  onboardingCompleted Boolean      @default(false)
+  xpPoints            Int          @default(0)
+  referralCode        String?      @unique
   referredBy          String?
-  freeSessionsExtra   Int       @default(0)
+  freeSessionsExtra   Int          @default(0)
   telegramChatId      String?
-  isDeleted           Boolean   @default(false)
+  isDeleted           Boolean      @default(false)
   deletedAt           DateTime?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
 
   accounts                 Account[]
   sessions                 AuthSession[]
