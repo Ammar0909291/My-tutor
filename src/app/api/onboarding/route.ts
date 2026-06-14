@@ -2,12 +2,38 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { SubjectType, type Subject } from '@prisma/client'
+import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
+import { getBoard } from '@/lib/education'
 
-const schema = z.object({
-  subjectSlug: z.string(),
+const CATEGORY_TO_TYPE: Record<SubjectCategory, SubjectType> = {
+  languages: SubjectType.LANGUAGE,
+  programming: SubjectType.PROGRAMMING,
+  mathematics: SubjectType.MATHEMATICS,
+  physics: SubjectType.PHYSICS,
+  chemistry: SubjectType.CHEMISTRY,
+  biology: SubjectType.BIOLOGY,
+  ai: SubjectType.AI,
+}
+
+const generalSchema = z.object({
+  userType: z.literal('GENERAL_LEARNER').optional(),
+  subjectSlug: z.string().optional(),
+  subjectSlugs: z.array(z.string()).optional(),
+  currentLevel: z.enum(['complete_beginner', 'beginner', 'intermediate', 'advanced', 'professional']).default('beginner'),
   selfDescription: z.string().min(10).max(2000),
   voiceChoice: z.string(),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('ru'),
+  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
+}).refine((b) => (b.subjectSlugs && b.subjectSlugs.length > 0) || !!b.subjectSlug, {
+  message: 'At least one subject is required', path: ['subjectSlugs'],
+})
+
+// School students make exactly 3 onboarding decisions: user type, board, grade.
+const schoolSchema = z.object({
+  userType: z.literal('SCHOOL_STUDENT'),
+  board: z.string(),
+  grade: z.number().int().min(5).max(12),
+  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
 })
 
 export async function POST(req: Request) {
@@ -20,71 +46,228 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectSlug, selfDescription, voiceChoice, teachingLanguage } = schema.parse(body)
 
-    const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } })
-    if (!subject) {
-      return NextResponse.json({ success: false, error: 'Subject not found. Run the seed first.' }, { status: 404 })
+    if (body?.userType === 'SCHOOL_STUDENT') {
+      return handleSchoolStudent(session.user, userId, schoolSchema.parse(body))
     }
 
-    const existingProfile = await prisma.profile.findUnique({ where: { userId } })
+    const parsed = generalSchema.parse(body)
+    const { currentLevel, selfDescription, voiceChoice, teachingLanguage } = parsed
+    // Accept either the legacy single `subjectSlug` or the new multi-select `subjectSlugs` — dedupe and keep order.
+    const subjectSlugs = Array.from(new Set([
+      ...(parsed.subjectSlugs ?? []),
+      ...(parsed.subjectSlug ? [parsed.subjectSlug] : []),
+    ]))
+
+    // JWT sessions outlive DB records. If the session userId doesn't exist in the DB
+    // but the email does (different row), resolve to the existing user's id.
+    let effectiveUserId = userId
+    try {
+      await prisma.user.upsert({
+        where: { id: userId },
+        update: { name: session.user.name ?? undefined },
+        create: {
+          id: userId,
+          email: session.user.email ?? `${userId}@mytutor.local`,
+          name: session.user.name ?? 'Student',
+        },
+      })
+    } catch (upsertErr: unknown) {
+      if (upsertErr instanceof Error && upsertErr.message.includes('Unique constraint')) {
+        // Email already belongs to a different DB row — find that user and use their id
+        const byEmail = session.user.email
+          ? await prisma.user.findUnique({ where: { email: session.user.email } })
+          : null
+        if (!byEmail) throw upsertErr
+        console.warn('[onboarding] session userId mismatch — resolved to existing user')
+        effectiveUserId = byEmail.id
+      } else {
+        throw upsertErr
+      }
+    }
+
+    // Find/create each selected subject — same resolution as /api/subjects/enroll so the
+    // full Subject Library (not just the original 4 seeded subjects) works at onboarding.
+    const subjects: Subject[] = []
+    for (const slug of subjectSlugs) {
+      let subj = await prisma.subject.findUnique({ where: { slug } })
+      if (!subj) {
+        const librarySubject = findLibrarySubject(slug)
+        if (!librarySubject) {
+          return NextResponse.json({ success: false, error: `Invalid subject slug: ${slug}` }, { status: 400 })
+        }
+        subj = await prisma.subject.upsert({
+          where: { slug: librarySubject.slug },
+          update: {},
+          create: {
+            slug: librarySubject.slug,
+            name: librarySubject.name,
+            type: CATEGORY_TO_TYPE[librarySubject.category],
+            description: librarySubject.description,
+          },
+        })
+      }
+      subjects.push(subj)
+    }
+    if (subjects.length === 0) {
+      return NextResponse.json({ success: false, error: 'At least one subject is required' }, { status: 400 })
+    }
+    const subject = subjects[0]
+
+    const existingProfile = await prisma.profile.findUnique({
+      where: { userId: effectiveUserId },
+      include: { subjects: true },
+    })
     if (existingProfile) {
-      // Backfill the flag for users who completed onboarding before this column existed
-      await prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } })
-      return NextResponse.json({ success: true, data: existingProfile })
+      await prisma.profile.update({
+        where: { userId: effectiveUserId },
+        data: { selfDescription, voiceId: voiceChoice, teachingLanguage, currentLevel },
+      })
+      // Ensure every selected subject is linked + has a learning path (may be missing if onboarding was interrupted)
+      const linkedIds = new Set(existingProfile.subjects.map((s) => s.subjectId))
+      for (const subj of subjects) {
+        if (!linkedIds.has(subj.id)) {
+          await prisma.profileSubject.create({ data: { profileId: existingProfile.id, subjectId: subj.id } })
+        }
+        const existingPath = await prisma.learningPath.findFirst({ where: { userId: effectiveUserId, subjectId: subj.id } })
+        if (!existingPath) {
+          await prisma.learningPath.create({
+            data: {
+              userId: effectiveUserId,
+              subjectId: subj.id,
+              title: `${subj.name} Course`,
+              curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
+              totalSteps: 0,
+              isActive: true,
+            },
+          })
+        }
+      }
+      await prisma.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
+      return NextResponse.json({ success: true })
     }
 
-    // Run all writes in a transaction
+    // Run profile + learning paths in a transaction; subscription separately (best-effort)
     const result = await prisma.$transaction(async (tx) => {
       const profile = await tx.profile.create({
         data: {
-          userId,
-          displayName: session.user.name ?? 'Студент',
+          userId: effectiveUserId,
+          displayName: session.user.name ?? 'Student',
           selfDescription,
+          currentLevel,
           voiceId: voiceChoice,
           teachingLanguage,
-          subjects: { create: { subjectId: subject.id } },
+          subjects: { create: subjects.map((s) => ({ subjectId: s.id })) },
         },
       })
 
-      // Placeholder learning path — curriculum generated on first lesson
-      const learningPath = await tx.learningPath.create({
+      const learningPaths = await Promise.all(subjects.map((s) => tx.learningPath.create({
         data: {
-          userId,
-          subjectId: subject.id,
-          title: `Курс по ${subject.name}`,
-          curriculum: {
-            generated: false,
-            steps: [],
-            note: 'Curriculum will be generated at the start of first lesson',
-          },
+          userId: effectiveUserId,
+          subjectId: s.id,
+          title: `${s.name} Course`,
+          curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
           totalSteps: 0,
           isActive: true,
         },
-      })
+      })))
 
-      // Mark onboarding done + ensure subscription record
-      await Promise.all([
-        tx.user.update({
-          where: { id: userId },
-          data: { onboardingCompleted: true },
-        }),
-        tx.subscription.upsert({
-          where: { userId },
-          update: {},
-          create: { userId },
-        }),
-      ])
+      await tx.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
 
-      return { profile, learningPath }
+      return { profile, learningPaths }
     })
 
+    // Subscription upsert outside transaction — not critical, don't block onboarding
+    try {
+      await prisma.subscription.upsert({ where: { userId: effectiveUserId }, update: {}, create: { userId: effectiveUserId } })
+    } catch (subErr) {
+      console.warn('[onboarding] subscription upsert failed (non-fatal):', subErr)
+    }
+
+    console.log('[onboarding] success')
     return NextResponse.json({ success: true, data: result })
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
-    console.error('[onboarding]', err)
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+    console.error('[onboarding] ERROR:', err)
+    const errMsg = err instanceof Error ? err.message : String(err)
+    console.error('[onboarding] FULL ERROR:', errMsg)
+    return NextResponse.json({ success: false, error: errMsg }, { status: 500 })
   }
+}
+
+async function handleSchoolStudent(
+  sessionUser: { name?: string | null; email?: string | null },
+  userId: string,
+  parsed: z.infer<typeof schoolSchema>,
+) {
+  const { board, grade, teachingLanguage } = parsed
+
+  const boardDef = getBoard(board)
+  if (!boardDef) {
+    return NextResponse.json({ success: false, error: `Unknown board: ${board}` }, { status: 400 })
+  }
+  if (!boardDef.grades.includes(grade)) {
+    return NextResponse.json({ success: false, error: `Grade ${grade} is not offered by ${boardDef.shortName}` }, { status: 400 })
+  }
+
+  // Same JWT-session/DB-row resolution as the general path.
+  let effectiveUserId = userId
+  try {
+    await prisma.user.upsert({
+      where: { id: userId },
+      update: { name: sessionUser.name ?? undefined },
+      create: {
+        id: userId,
+        email: sessionUser.email ?? `${userId}@mytutor.local`,
+        name: sessionUser.name ?? 'Student',
+      },
+    })
+  } catch (upsertErr: unknown) {
+    if (upsertErr instanceof Error && upsertErr.message.includes('Unique constraint')) {
+      const byEmail = sessionUser.email
+        ? await prisma.user.findUnique({ where: { email: sessionUser.email } })
+        : null
+      if (!byEmail) throw upsertErr
+      console.warn('[onboarding] session userId mismatch — resolved to existing user')
+      effectiveUserId = byEmail.id
+    } else {
+      throw upsertErr
+    }
+  }
+
+  const schoolFields = {
+    userType: 'SCHOOL_STUDENT' as const,
+    educationBoard: boardDef.id,
+    grade,
+    teachingLanguage,
+    country: 'in',
+  }
+
+  await prisma.$transaction(async (tx) => {
+    const existing = await tx.profile.findUnique({ where: { userId: effectiveUserId } })
+    if (existing) {
+      await tx.profile.update({ where: { userId: effectiveUserId }, data: schoolFields })
+    } else {
+      await tx.profile.create({
+        data: {
+          userId: effectiveUserId,
+          displayName: sessionUser.name ?? 'Student',
+          selfDescription: `Class ${grade} student (${boardDef.shortName})`,
+          ...schoolFields,
+        },
+      })
+    }
+    await tx.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
+  })
+
+  try {
+    await prisma.subscription.upsert({ where: { userId: effectiveUserId }, update: {}, create: { userId: effectiveUserId } })
+  } catch (subErr) {
+    console.warn('[onboarding] subscription upsert failed (non-fatal):', subErr)
+  }
+
+  console.log('[onboarding] success')
+  return NextResponse.json({ success: true })
 }

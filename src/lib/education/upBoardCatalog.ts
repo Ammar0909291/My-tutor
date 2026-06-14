@@ -6,6 +6,15 @@ export const UP_BOARD: EducationBoard = {
   shortName: 'UP Board',
   country: 'India',
   state: 'Uttar Pradesh',
-  subjects: ['mathematics', 'science', 'english', 'social_science'],
+  // Sprint DC: senior-secondary (11–12) streams are first-class subjects.
+  // Science/Social Science cover grades 5–10; the streams below cover 11–12.
+  // NOTE: UP Grade 12 Economics has no chapters yet (catalog gap, Sprint DB) —
+  // the Economics subject exposes only Grade 11 until backfilled.
+  subjects: [
+    'mathematics', 'science', 'english', 'hindi', 'sanskrit', 'social_science',
+    'physics', 'chemistry', 'biology',
+    'history', 'geography', 'political_science', 'economics',
+    'accountancy', 'business_studies', 'computer_science',
+  ],
   grades: [5, 6, 7, 8, 9, 10, 11, 12],
 }

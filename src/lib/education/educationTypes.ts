@@ -70,6 +70,7 @@ export type ScienceDomain =
 export type EnglishDomain =
   | 'grammar.alphabet_phonics'
   | 'grammar.parts_of_speech'
+  | 'grammar.articles'
   | 'grammar.sentences'
   | 'grammar.tenses'
   | 'grammar.punctuation'
@@ -127,7 +128,28 @@ export type SocialScienceDomain =
   | 'society.social_inequality'
   | 'society.social_change'
 
-export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain
+export type HindiDomain =
+  | 'hindi.vyakaran'
+  | 'hindi.shabdavali'
+  | 'hindi.padhna'
+  | 'hindi.lekhan'
+  | 'hindi.gadya'
+  | 'hindi.padya'
+  | 'hindi.sahitya_vishleshan'
+  | 'hindi.kavya_bodh'
+
+export type SanskritDomain =
+  | 'sanskrit.vyakarana'
+  | 'sanskrit.sandhi'
+  | 'sanskrit.samasa'
+  | 'sanskrit.shabda_roopa'
+  | 'sanskrit.dhaatu_roopa'
+  | 'sanskrit.gadya'
+  | 'sanskrit.padya'
+  | 'sanskrit.sahitya_vishleshan'
+  | 'sanskrit.kavya_bodh'
+
+export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain | HindiDomain | SanskritDomain
 
 export interface KnowledgeNode {
   id: string

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   experimental: {
     // Next.js 14.2 still uses the experimental key; top-level serverExternalPackages is 15+
     serverComponentsExternalPackages: ["@prisma/client", "bcryptjs", "ioredis"],

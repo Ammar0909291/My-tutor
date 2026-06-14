@@ -6,24 +6,25 @@ import { prisma } from '@/lib/db/prisma'
 const schema = z.object({
   voiceId: z.string().optional(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
+  country: z.enum(['ru', 'in', 'global']).optional(),
+  voiceSpeed: z.union([
+    z.literal(0.75), z.literal(0.9), z.literal(1.0), z.literal(1.1), z.literal(1.25), z.literal(1.5),
+  ]).optional(),
 })
 
 export async function GET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 
-  const [profile, subscription] = await Promise.all([
-    prisma.profile.findUnique({ where: { userId: session.user.id } }),
-    prisma.subscription.findUnique({ where: { userId: session.user.id } }),
-  ])
+  const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
 
   return NextResponse.json({
     success: true,
     data: {
       voiceId: profile?.voiceId ?? 'male',
-      teachingLanguage: profile?.teachingLanguage ?? 'ru',
-      subscriptionStatus: subscription?.status ?? 'FREE',
-      freeSessionUsed: subscription?.freeSessionUsed ?? false,
+      teachingLanguage: profile?.teachingLanguage ?? 'en',
+      country: (profile as any)?.country ?? 'global',
+      voiceSpeed: profile?.voiceSpeed ?? 1.0,
     },
   })
 }
@@ -34,17 +35,30 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { voiceId, teachingLanguage } = schema.parse(body)
+    const { voiceId, teachingLanguage, country, voiceSpeed } = schema.parse(body)
 
-    const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi' } = {}
+    const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi'; country?: string; voiceSpeed?: number } = {}
     if (voiceId !== undefined) data.voiceId = voiceId
     if (teachingLanguage !== undefined) data.teachingLanguage = teachingLanguage
+    if (country !== undefined) data.country = country
+    if (voiceSpeed !== undefined) data.voiceSpeed = voiceSpeed
 
-    if (Object.keys(data).length === 0) {
-      return NextResponse.json({ success: true })
-    }
+    if (Object.keys(data).length === 0) return NextResponse.json({ success: true })
 
-    await prisma.profile.update({ where: { userId: session.user.id }, data })
+    const userId = session.user.id
+    await prisma.profile.upsert({
+      where: { userId },
+      update: data,
+      create: {
+        userId,
+        displayName: session.user.name ?? 'Student',
+        selfDescription: 'Beginner',
+        voiceId: data.voiceId ?? 'male',
+        teachingLanguage: data.teachingLanguage ?? 'en',
+        country: data.country ?? 'global',
+        voiceSpeed: data.voiceSpeed ?? 1.0,
+      },
+    })
     return NextResponse.json({ success: true })
   } catch (err) {
     if (err instanceof z.ZodError) {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-// Voice synthesis is now handled client-side via the Web Speech API.
+// TTS is handled server-side via /api/tts (Groq PlayAI + optional Yandex)
 export async function POST() {
-  return NextResponse.json({ success: false, error: 'Voice synthesis is handled client-side' }, { status: 410 })
+  return NextResponse.json({ success: false, error: 'Use /api/tts instead' }, { status: 410 })
 }

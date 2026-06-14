@@ -1,0 +1,100 @@
+'use client'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+
+type Entry = { rank: number; userId: string; name: string; image: string | null; xp: number }
+
+const RANK_ICON = ['🥇', '🥈', '🥉']
+
+export default function LeaderboardPage() {
+  const { t } = useLanguage()
+  const [mode, setMode] = useState<'week' | 'alltime'>('week')
+  const [data, setData] = useState<{ entries: Entry[]; myRank: number | null; myXP: number; week?: string } | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    fetch(`/api/leaderboard?mode=${mode}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.success) setData(d) })
+      .finally(() => setLoading(false))
+  }, [mode])
+
+  return (
+    <div className="min-h-screen p-6" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+      <div className="max-w-lg mx-auto">
+
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-6">
+          <Link href="/dashboard" className="text-sm" style={{ color: 'var(--text-secondary)' }}>{t('lb_back')}</Link>
+          <h1 className="text-xl font-bold flex-1 text-center">{t('lb_title')}</h1>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex rounded-xl mb-6 p-1" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
+          {(['week', 'alltime'] as const).map((m) => (
+            <button key={m} onClick={() => setMode(m)}
+              className="flex-1 py-2 text-sm font-semibold rounded-lg transition-all"
+              style={{
+                background: mode === m ? 'var(--accent-primary)' : 'transparent',
+                color: mode === m ? '#fff' : 'var(--text-secondary)',
+              }}>
+              {m === 'week' ? t('lb_this_week') : t('lb_all_time')}
+            </button>
+          ))}
+        </div>
+
+        {mode === 'week' && (
+          <p className="text-xs text-center mb-4" style={{ color: 'var(--text-dim)' }}>
+            🔄 {t('lb_resets_monday')}
+            {data?.week ? ` · ${data.week}` : ''}
+          </p>
+        )}
+
+        {/* My rank */}
+        {data?.myRank && (
+          <div className="flex items-center justify-between px-4 py-3 rounded-xl mb-4"
+            style={{ background: 'rgba(247,129,102,0.12)', border: '1px solid rgba(247,129,102,0.3)' }}>
+            <span className="text-sm font-semibold" style={{ color: 'var(--accent-primary)' }}>{t('lb_your_rank')}</span>
+            <span className="text-sm font-bold">#{data.myRank} · {data.myXP} XP</span>
+          </div>
+        )}
+
+        {/* List */}
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <div className="w-6 h-6 border-2 rounded-full animate-spin" style={{ borderColor: 'var(--accent-primary)', borderTopColor: 'transparent' }} />
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {(data?.entries ?? []).map((entry) => (
+              <div key={entry.userId}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl"
+                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+                <span className="w-8 text-center text-lg font-bold">
+                  {entry.rank <= 3 ? RANK_ICON[entry.rank - 1] : `#${entry.rank}`}
+                </span>
+                {entry.image ? (
+                  <img src={entry.image} alt={entry.name} className="w-8 h-8 rounded-full object-cover" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
+                    style={{ background: 'var(--accent-primary)', color: '#fff' }}>
+                    {entry.name[0]?.toUpperCase()}
+                  </div>
+                )}
+                <span className="flex-1 font-medium text-sm">{entry.name}</span>
+                <span className="text-sm font-bold tabular-nums" style={{ color: 'var(--accent-primary)' }}>{entry.xp} XP</span>
+              </div>
+            ))}
+            {(data?.entries ?? []).length === 0 && (
+              <p className="text-center py-8 text-sm" style={{ color: 'var(--text-dim)' }}>
+                {t('lb_no_entries')}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

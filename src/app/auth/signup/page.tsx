@@ -4,6 +4,7 @@ import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { AuthBackLink } from '@/components/auth/AuthBackLink'
 
 export default function SignupPage() {
   const { t, lang } = useLanguage()
@@ -130,6 +131,7 @@ export default function SignupPage() {
 
       {/* Right form panel */}
       <div className="flex-1 flex items-center justify-center p-6 relative">
+        <div className="absolute top-5 left-5"><AuthBackLink href="/" label={t('nav_back_home')} icon="home" /></div>
         <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
         <div className="w-full max-w-sm animate-slide-up">
@@ -141,17 +143,21 @@ export default function SignupPage() {
           <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('signup_title')}</h1>
           <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('signup_sub')}</p>
 
-          <button onClick={handleGoogle} disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
-            style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
-            <GoogleIcon />
-            {googleLoading ? t('signup_google_loading') : t('signup_google')}
-          </button>
+          {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+            <>
+              <button onClick={handleGoogle} disabled={googleLoading}
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+                style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+                <GoogleIcon />
+                {googleLoading ? t('signup_google_loading') : t('signup_google')}
+              </button>
 
-          <div className="relative my-5">
-            <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
-          </div>
+              <div className="relative my-5">
+                <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
+                <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
+              </div>
+            </>
+          )}
 
           {error && (
             <div className="mb-5 p-3.5 rounded-xl text-sm animate-scale-in"

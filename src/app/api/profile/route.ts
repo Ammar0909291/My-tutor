@@ -14,12 +14,16 @@ export async function GET() {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
-  const profile = await prisma.profile.findUnique({
-    where: { userId: session.user.id },
-    include: { subjects: { include: { subject: true } } },
-  });
-
-  return NextResponse.json({ success: true, data: profile });
+  try {
+    const profile = await prisma.profile.findUnique({
+      where: { userId: session.user.id },
+      include: { subjects: { include: { subject: true } } },
+    });
+    return NextResponse.json({ success: true, data: profile });
+  } catch (err) {
+    console.error('[profile GET]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
 }
 
 export async function POST(req: Request) {

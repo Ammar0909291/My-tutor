@@ -22,9 +22,28 @@ if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefine
 
 export function speakText(
   text: string,
+  configOrLang: { pitch: number; rate: number } | string,
+  onEndOrVoiceType?: (() => void) | string,
+  langOrCallback?: TeachingLang | (() => void),
+  country?: string,
+  speed?: number,
+): void {
+  const config = typeof configOrLang === 'object' ? configOrLang : { pitch: 1, rate: 1 }
+  const onEnd = typeof onEndOrVoiceType === 'function' ? onEndOrVoiceType
+    : typeof langOrCallback === 'function' ? langOrCallback : undefined
+  const lang: TeachingLang = typeof configOrLang === 'string'
+    ? (configOrLang as TeachingLang)
+    : typeof langOrCallback === 'string' ? langOrCallback : 'en'
+  void country
+  return _speakTextImpl(text, config, onEnd, lang, speed)
+}
+
+function _speakTextImpl(
+  text: string,
   config: { pitch: number; rate: number },
   onEnd?: () => void,
   lang: TeachingLang = 'ru',
+  speed = 1,
 ): void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
   window.speechSynthesis.cancel()
@@ -32,11 +51,12 @@ export function speakText(
   const clean = cleanTextForTTS(text)
   if (!clean.trim()) { onEnd?.(); return }
 
+  const safeSpeed = Math.min(Math.max(speed || 1, 0.5), 2)
   const locale = LANG_LOCALE[lang]
   const utter = new SpeechSynthesisUtterance(clean)
   utter.lang = locale
   utter.pitch = config.pitch
-  utter.rate = config.rate
+  utter.rate = config.rate * safeSpeed
   utter.volume = 1.0
 
   if (onEnd) {

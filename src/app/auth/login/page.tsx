@@ -5,16 +5,17 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { AuthBackLink } from '@/components/auth/AuthBackLink'
 
 const NEXTAUTH_ERROR_KEYS: Record<string, 'error_invalid' | 'error_required'> = {
   CredentialsSignin: 'error_invalid',
 }
 
-const NEXTAUTH_ERROR_FALLBACK: Record<string, string> = {
-  OAuthAccountNotLinked: 'Этот email уже используется другим способом входа',
-  OAuthSignin: 'Ошибка входа через Google. Попробуй ещё раз.',
-  Callback: 'Ошибка авторизации. Попробуй ещё раз.',
-  Default: 'Произошла ошибка. Попробуй ещё раз.',
+const NEXTAUTH_ERROR_I18N_KEYS: Record<string, 'error_oauth_linked' | 'error_oauth_signin' | 'error_oauth_callback' | 'error_generic'> = {
+  OAuthAccountNotLinked: 'error_oauth_linked',
+  OAuthSignin: 'error_oauth_signin',
+  Callback: 'error_oauth_callback',
+  Default: 'error_generic',
 }
 
 export default function LoginPage() {
@@ -39,8 +40,9 @@ function LoginForm() {
   useEffect(() => {
     const errorCode = params.get('error')
     if (errorCode) {
-      const key = NEXTAUTH_ERROR_KEYS[errorCode]
-      setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[errorCode] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+      const translationKey = NEXTAUTH_ERROR_KEYS[errorCode]
+      const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[errorCode] ?? 'error_generic'
+      setError(translationKey ? t(translationKey) : t(fallbackKey))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
@@ -54,10 +56,11 @@ function LoginForm() {
       const result = await signIn('credentials', { email, password, redirect: false })
       setLoading(false)
 
-      if (!result) { setError(NEXTAUTH_ERROR_FALLBACK.Default); return }
+      if (!result) { setError(t('error_generic')); return }
       if (result.error) {
-        const key = NEXTAUTH_ERROR_KEYS[result.error]
-        setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[result.error] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+        const translationKey = NEXTAUTH_ERROR_KEYS[result.error]
+        const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[result.error] ?? 'error_generic'
+        setError(translationKey ? t(translationKey) : t(fallbackKey))
         return
       }
 
@@ -65,7 +68,7 @@ function LoginForm() {
       window.location.href = callbackUrl
     } catch {
       setLoading(false)
-      setError(NEXTAUTH_ERROR_FALLBACK.Default)
+      setError(t('error_generic'))
     }
   }
 
@@ -154,6 +157,7 @@ function LoginForm() {
 
       {/* Right form panel */}
       <div className="flex-1 flex items-center justify-center p-6 relative">
+        <div className="absolute top-5 left-5"><AuthBackLink href="/" label={t('nav_back_home')} icon="home" /></div>
         <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
         <div className="w-full max-w-sm animate-slide-up">
@@ -166,19 +170,23 @@ function LoginForm() {
           <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('login_title')}</h1>
           <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('login_sub')}</p>
 
-          {/* Google */}
-          <button onClick={handleGoogle} disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
-            style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
-            <GoogleIcon />
-            {googleLoading ? t('login_google_loading') : t('login_google')}
-          </button>
+          {/* Google — only shown when GOOGLE_CLIENT_ID/SECRET are configured */}
+          {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+            <>
+              <button onClick={handleGoogle} disabled={googleLoading}
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+                style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+                <GoogleIcon />
+                {googleLoading ? t('login_google_loading') : t('login_google')}
+              </button>
 
-          {/* Divider */}
-          <div className="relative my-5">
-            <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
-          </div>
+              {/* Divider */}
+              <div className="relative my-5">
+                <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
+                <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
+              </div>
+            </>
+          )}
 
           {/* Error */}
           {error && (

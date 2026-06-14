@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "profiles" ADD COLUMN     "speechRate" DOUBLE PRECISION NOT NULL DEFAULT 1.0;

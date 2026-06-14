@@ -3,23 +3,69 @@ import { MATH_KNOWLEDGE_GRAPH } from './mathKnowledgeGraph'
 import { SCIENCE_KNOWLEDGE_GRAPH } from './scienceKnowledgeGraph'
 import { ENGLISH_KNOWLEDGE_GRAPH } from './englishKnowledgeGraph'
 import { SOCIAL_SCIENCE_KNOWLEDGE_GRAPH } from './socialScienceKnowledgeGraph'
+import { HINDI_KNOWLEDGE_GRAPH } from './hindiKnowledgeGraph'
+import { SANSKRIT_KNOWLEDGE_GRAPH } from './sanskritKnowledgeGraph'
+import { ACCOUNTANCY_KNOWLEDGE_GRAPH } from './accountancyKnowledgeGraph'
+import { BUSINESS_STUDIES_KNOWLEDGE_GRAPH } from './businessStudiesKnowledgeGraph'
+import { COMPUTER_SCIENCE_KNOWLEDGE_GRAPH } from './computerScienceKnowledgeGraph'
+import { CBSE_ACCOUNTANCY_CATALOG } from './cbseAccountancyCatalog'
+import { UP_ACCOUNTANCY_CATALOG } from './upAccountancyCatalog'
+import { CBSE_BUSINESS_STUDIES_CATALOG } from './cbseBusinessStudiesCatalog'
+import { UP_BUSINESS_STUDIES_CATALOG } from './upBusinessStudiesCatalog'
+import { CBSE_COMPUTER_SCIENCE_CATALOG } from './cbseComputerScienceCatalog'
+import { UP_COMPUTER_SCIENCE_CATALOG } from './upComputerScienceCatalog'
 import { UP_MATH_CATALOG } from './upMathCatalog'
-import { UP_SCIENCE_CATALOG } from './upScienceCatalog'
 import { UP_ENGLISH_CATALOG } from './upEnglishCatalog'
-import { UP_SOCIAL_SCIENCE_CATALOG } from './upSocialScienceCatalog'
+import { UP_HINDI_CATALOG } from './upHindiCatalog'
+import { UP_SANSKRIT_CATALOG } from './upSanskritCatalog'
+import { CBSE_MATH_CATALOG } from './cbseMathCatalog'
+import { CBSE_ENGLISH_CATALOG } from './cbseEnglishCatalog'
+import { CBSE_HINDI_CATALOG } from './cbseHindiCatalog'
+import { CBSE_SANSKRIT_CATALOG } from './cbseSanskritCatalog'
+// Sprint DC: senior-secondary streams are owned by standalone subjects; the
+// bundled Science/SST catalogs are trimmed to grades 5–10 in BOARD_CATALOGS.
+import {
+  CBSE_SCIENCE_CATALOG_5_10,
+  CBSE_SOCIAL_SCIENCE_CATALOG_5_10,
+  UP_SCIENCE_CATALOG_5_10,
+  UP_SOCIAL_SCIENCE_CATALOG_5_10,
+  CBSE_STREAM_CATALOGS,
+  UP_STREAM_CATALOGS,
+} from './streamCatalogs'
 
 export const ALL_KG_NODES: KnowledgeNode[] = [
   ...MATH_KNOWLEDGE_GRAPH,
   ...SCIENCE_KNOWLEDGE_GRAPH,
   ...ENGLISH_KNOWLEDGE_GRAPH,
   ...SOCIAL_SCIENCE_KNOWLEDGE_GRAPH,
+  ...HINDI_KNOWLEDGE_GRAPH,
+  ...SANSKRIT_KNOWLEDGE_GRAPH,
+  ...ACCOUNTANCY_KNOWLEDGE_GRAPH,
+  ...BUSINESS_STUDIES_KNOWLEDGE_GRAPH,
+  ...COMPUTER_SCIENCE_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_MATH_CATALOG,
-  UP_SCIENCE_CATALOG,
+  UP_SCIENCE_CATALOG_5_10,
   UP_ENGLISH_CATALOG,
-  UP_SOCIAL_SCIENCE_CATALOG,
+  UP_HINDI_CATALOG,
+  UP_SANSKRIT_CATALOG,
+  UP_SOCIAL_SCIENCE_CATALOG_5_10,
+  ...UP_STREAM_CATALOGS,
+  CBSE_MATH_CATALOG,
+  CBSE_SCIENCE_CATALOG_5_10,
+  CBSE_SOCIAL_SCIENCE_CATALOG_5_10,
+  ...CBSE_STREAM_CATALOGS,
+  CBSE_ENGLISH_CATALOG,
+  CBSE_HINDI_CATALOG,
+  CBSE_SANSKRIT_CATALOG,
+  CBSE_ACCOUNTANCY_CATALOG,
+  UP_ACCOUNTANCY_CATALOG,
+  CBSE_BUSINESS_STUDIES_CATALOG,
+  UP_BUSINESS_STUDIES_CATALOG,
+  CBSE_COMPUTER_SCIENCE_CATALOG,
+  UP_COMPUTER_SCIENCE_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */

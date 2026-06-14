@@ -5,7 +5,13 @@ import { prisma } from "@/lib/db/prisma";
 import { setSessionState, setUserActiveSession } from "@/lib/redis/client";
 import type { RedisSessionState } from "@/types";
 
-const createSchema = z.object({ subjectSlug: z.string(), memoryContext: z.string().optional() });
+const createSchema = z.object({
+  subjectSlug: z.string(),
+  memoryContext: z.string().optional(),
+  // School Mode (Sprint BI): catalog chapter id (e.g. "cbse.math.8.ch1") —
+  // persisted in contextSnapshot so the chat route can build board-aware context.
+  schoolChapterId: z.string().max(64).optional(),
+});
 
 export async function GET() {
   const session = await auth();
@@ -27,7 +33,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { subjectSlug, memoryContext } = createSchema.parse(body);
+    const { subjectSlug, memoryContext, schoolChapterId } = createSchema.parse(body);
 
 
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } });
@@ -51,6 +57,7 @@ export async function POST(req: Request) {
           learningPathId: activePath?.id,
           currentStep: activePath?.currentStep,
           memoryContext: memoryContext ?? null,
+          schoolChapterId: schoolChapterId ?? null,
         },
       },
     });
