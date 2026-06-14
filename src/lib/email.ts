@@ -10,6 +10,12 @@ function makeTransport() {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    // Bound every phase of the SMTP conversation. Without these a blocked or
+    // unreachable mail host hangs the request indefinitely (and our send-failure
+    // logging never runs). 10s is generous for a healthy SMTP server.
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 10_000,
   })
 }
 
