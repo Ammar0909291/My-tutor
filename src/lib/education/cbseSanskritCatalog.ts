@@ -5,12 +5,15 @@ import type { BoardSubjectCatalog } from './educationTypes'
  *
  * Sprint DL: Architecture + Core — Grammar (व्याकरण), Sandhi (संधि),
  *   Samasa (समास), Shabda-roopa (शब्द-रूप), Dhaatu-roopa (धातु-रूप) and
- *   comprehension/translation (गद्य/पद्य). No literature/prose readers yet —
- *   board-specific textbook chapters are deferred to a future sprint.
+ *   comprehension/translation (गद्य/पद्य).
  *
- * Shared core: chapter titles and kgNodeIds are identical to
- * upSanskritCatalog.ts by design — only the `id` prefix differs
- * (cbse.san.X.chN vs up.san.X.chN).
+ * Sprint DM: CBSE-specific literature readers — Ruchira (Grades 6–8),
+ *   Shemushi (Grades 9–10) and Bhaswati (Grades 11–12). These chapters
+ *   are CBSE-only and are NOT mirrored to upSanskritCatalog.ts.
+ *
+ * Shared core (grammar chapters only): chapter titles and kgNodeIds are
+ * identical to upSanskritCatalog.ts by design — only the `id` prefix
+ * differs (cbse.san.X.chN vs up.san.X.chN).
  *
  * Chapter "[Section]" prefixes enable groupChaptersByUnit() grouping.
  * All kgNodeIds reference nodes in sanskritKnowledgeGraph.ts.
@@ -33,6 +36,19 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.6.ch6', order: 6, title: '[धातु-रूप] परिचय एवं लट् लकार (वर्तमान काल)',                   kgNodeIds: ['sanskrit.dhaatu_roopa.parichay', 'sanskrit.dhaatu_roopa.lat_lakar'] },
         { id: 'cbse.san.6.ch7', order: 7, title: '[पठन] सूक्तियाँ एवं सुभाषितानि',                                kgNodeIds: ['sanskrit.padya.subhashitani'] },
         { id: 'cbse.san.6.ch8', order: 8, title: '[पठन] गद्यांश-आधारित शब्दार्थ एवं प्रश्नोत्तर',                 kgNodeIds: ['sanskrit.gadya.shabda_arth_prashna'] },
+        // ── [रुचिरा] गद्य-पद्य-सुभाषित अंश (Sprint DM) ──
+        { id: 'cbse.san.6.ch9',  order: 9,  title: '[रुचिरा] विद्यालयः (गद्य)',          kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch10', order: 10, title: '[रुचिरा] वृक्षाः (गद्य)',            kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch11', order: 11, title: '[रुचिरा] समुद्रतटः (गद्य)',          kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch12', order: 12, title: '[रुचिरा] बकस्य प्रतीकारः (गद्य-कथा)', kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch13', order: 13, title: '[रुचिरा] सूक्तिस्तबकः (सुभाषित)',    kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.6.ch14', order: 14, title: '[रुचिरा] क्रीडास्पर्धा (गद्य)',       kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch15', order: 15, title: '[रुचिरा] कृषिकाः कर्मवीराः (गद्य)',  kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch16', order: 16, title: '[रुचिरा] पुष्पोत्सवः (गद्य)',        kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch17', order: 17, title: '[रुचिरा] दशमः त्वम् असि (पद्य)',     kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.6.ch18', order: 18, title: '[रुचिरा] विमानयानं रचयाम (गद्य)',    kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.6.ch19', order: 19, title: '[रुचिरा] अहह आः च (पद्य)',           kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.6.ch20', order: 20, title: '[रुचिरा] मातुलचन्द्र (गद्य)',        kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran'] },
       ],
     },
 
@@ -48,6 +64,22 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.7.ch6', order: 6, title: '[धातु-रूप] लोट् लकार (आज्ञार्थ)',                       kgNodeIds: ['sanskrit.dhaatu_roopa.lot_lakar'] },
         { id: 'cbse.san.7.ch7', order: 7, title: '[धातु-रूप] प्रमुख धातुएँ: भू और अस् (होना)',            kgNodeIds: ['sanskrit.dhaatu_roopa.bhu_as'] },
         { id: 'cbse.san.7.ch8', order: 8, title: '[लेखन] अनुवाद: हिन्दी से संस्कृत — परिचय',              kgNodeIds: ['sanskrit.gadya.hindi_se_sanskrit'] },
+        // ── [रुचिरा] गद्य-पद्य-सुभाषित अंश (Sprint DM) ──
+        { id: 'cbse.san.7.ch9',  order: 9,  title: '[रुचिरा] सुभाषितानि (सुभाषित)',                kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.7.ch10', order: 10, title: '[रुचिरा] दुर्बुद्धिः विनश्यति (गद्य-नीतिकथा)', kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch11', order: 11, title: '[रुचिरा] स्वावलम्बनम् (गद्य-निबन्ध)',          kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch12', order: 12, title: '[रुचिरा] हास्यबालकविसम्मेलनम् (पद्य)',         kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.7.ch13', order: 13, title: '[रुचिरा] पण्डिता रमाबाई (गद्य-जीवनी)',         kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
+        { id: 'cbse.san.7.ch14', order: 14, title: '[रुचिरा] सदाचारः (गद्य-नीति)',                 kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch15', order: 15, title: '[रुचिरा] संकल्पः सिद्धिदायकः (गद्य)',          kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch16', order: 16, title: '[रुचिरा] त्रिवर्णः ध्वजः (गद्य)',               kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch17', order: 17, title: '[रुचिरा] अहमपि विद्यालयं गमिष्यामि (पद्य)',     kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.7.ch18', order: 18, title: '[रुचिरा] विश्वबन्धुत्वम् (गद्य)',               kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch19', order: 19, title: '[रुचिरा] समवायो हि दुर्जयः (गद्य-नीति)',        kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch20', order: 20, title: '[रुचिरा] विद्याधनम् (सुभाषित)',                 kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.7.ch21', order: 21, title: '[रुचिरा] अमृतं संस्कृतम् (गद्य)',               kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch22', order: 22, title: '[रुचिरा] अनारिकायाः जिज्ञासा (गद्य-कथा)',       kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.7.ch23', order: 23, title: '[रुचिरा] लालनगीतम् (पद्य)',                     kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
       ],
     },
 
@@ -64,6 +96,21 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.8.ch7', order: 7, title: '[धातु-रूप] लङ् लकार (भूत काल)',                         kgNodeIds: ['sanskrit.dhaatu_roopa.lang_lakar'] },
         { id: 'cbse.san.8.ch8', order: 8, title: '[धातु-रूप] प्रमुख धातुएँ: गम् और पठ्',                  kgNodeIds: ['sanskrit.dhaatu_roopa.gam_path'] },
         { id: 'cbse.san.8.ch9', order: 9, title: '[लेखन] अनुवाद: संस्कृत से हिन्दी',                       kgNodeIds: ['sanskrit.gadya.sanskrit_se_hindi'] },
+        // ── [रुचिरा] गद्य-पद्य-सुभाषित अंश (Sprint DM) ──
+        { id: 'cbse.san.8.ch10', order: 10, title: '[रुचिरा] सुभाषितानि (सुभाषित)',                          kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.8.ch11', order: 11, title: '[रुचिरा] बिलस्य वाणी न कदापि मे श्रुता (गद्य-नीतिकथा)',  kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.8.ch12', order: 12, title: '[रुचिरा] डिजीभारतम् (गद्य)',                              kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.8.ch13', order: 13, title: '[रुचिरा] सदैव पुरतो निधेहि चरणम् (पद्य)',                kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.8.ch14', order: 14, title: '[रुचिरा] कण्टकेनैव कण्टकम् (गद्य-नीति)',                 kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.8.ch15', order: 15, title: '[रुचिरा] गृहं शून्यं सुतां विना (गद्य-कथा)',             kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.8.ch16', order: 16, title: '[रुचिरा] भारतजनताऽहम् (पद्य)',                           kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.8.ch17', order: 17, title: '[रुचिरा] संसारसागरस्य नायकाः (गद्य)',                    kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
+        { id: 'cbse.san.8.ch18', order: 18, title: '[रुचिरा] सप्तभगिन्यः (गद्य)',                            kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.8.ch19', order: 19, title: '[रुचिरा] नीतिनवनीतम् (सुभाषित)',                         kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.8.ch20', order: 20, title: '[रुचिरा] सावित्रीबाई फुले (गद्य-जीवनी)',                 kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
+        { id: 'cbse.san.8.ch21', order: 21, title: '[रुचिरा] कः रक्षति कः रक्षितः (गद्य-कथा)',               kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.8.ch22', order: 22, title: '[रुचिरा] क्षितौ राजते भारतस्वर्णभूमिः (पद्य)',           kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.8.ch23', order: 23, title: '[रुचिरा] आर्यभटः (गद्य-जीवनी)',                          kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
       ],
     },
 
@@ -79,6 +126,17 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.9.ch6', order: 6, title: '[पठन] अपठित गद्यांश अवबोधन',                            kgNodeIds: ['sanskrit.gadya.apathit_avbodh'] },
         { id: 'cbse.san.9.ch7', order: 7, title: '[पठन] अपठित पद्यांश अवबोधन',                            kgNodeIds: ['sanskrit.padya.apathit_padyansh'] },
         { id: 'cbse.san.9.ch8', order: 8, title: '[संधि-समास] संधि और समास — पुनरावृत्ति',                kgNodeIds: ['sanskrit.sandhi.parichay', 'sanskrit.samasa.parichay'] },
+        // ── [शेमुषी] गद्य-पद्य-सूक्ति अंश (Sprint DM) ──
+        { id: 'cbse.san.9.ch9',  order: 9,  title: '[शेमुषी] भारतीवसन्तगीतिः (गद्य)',                kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.9.ch10', order: 10, title: '[शेमुषी] स्वर्णकाकः (गद्य-कथा)',                  kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.9.ch11', order: 11, title: '[शेमुषी] गोदोहनम् (नाट्यांश)',                    kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.bhasha_shaili'] },
+        { id: 'cbse.san.9.ch12', order: 12, title: '[शेमुषी] सूक्तिमौक्तिकम् (सूक्ति)',               kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.9.ch13', order: 13, title: '[शेमुषी] भ्रान्तो बालः (गद्य-कथा)',               kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.9.ch14', order: 14, title: '[शेमुषी] लौहतुला (गद्य-कथा)',                     kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.9.ch15', order: 15, title: '[शेमुषी] सिकतासेतुः (गद्य-कथा)',                  kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.9.ch16', order: 16, title: '[शेमुषी] जटायोः शौर्यम् — वाल्मीकि रामायण (पद्य)', kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.shlok_vyakhya', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
+        { id: 'cbse.san.9.ch17', order: 17, title: '[शेमुषी] पर्यावरणम् (पद्य)',                      kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.9.ch18', order: 18, title: '[शेमुषी] वाङ्मनःप्राणस्वरूपम् — उपनिषद् (गद्य)',  kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
       ],
     },
 
@@ -94,6 +152,17 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.10.ch6', order: 6, title: '[पठन] श्लोक अर्थ-बोध एवं कण्ठस्थीकरण',                  kgNodeIds: ['sanskrit.padya.shlok_arth_bodh'] },
         { id: 'cbse.san.10.ch7', order: 7, title: '[संधि] संधि — सम्पूर्ण पुनरावृत्ति',                    kgNodeIds: ['sanskrit.sandhi.deergha', 'sanskrit.sandhi.guna', 'sanskrit.sandhi.yan', 'sanskrit.sandhi.ayadi', 'sanskrit.sandhi.vyanjan', 'sanskrit.sandhi.visarga'] },
         { id: 'cbse.san.10.ch8', order: 8, title: '[समास] समास — सम्पूर्ण पुनरावृत्ति',                    kgNodeIds: ['sanskrit.samasa.avyayibhava', 'sanskrit.samasa.tatpurusha', 'sanskrit.samasa.karmadharaya', 'sanskrit.samasa.dvigu', 'sanskrit.samasa.dvandva', 'sanskrit.samasa.bahuvrihi'] },
+        // ── [शेमुषी] गद्य-पद्य-सूक्ति अंश (Sprint DM) ──
+        { id: 'cbse.san.10.ch9',  order: 9,  title: '[शेमुषी] शुचिपर्यावरणम् (गद्य-निबन्ध)',                   kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.10.ch10', order: 10, title: '[शेमुषी] बुद्धिर्बलवती सदा (गद्य-कथा)',                   kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.10.ch11', order: 11, title: '[शेमुषी] शिशुलालनम् — भवभूति, उत्तररामचरितम् (नाट्यांश)', kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
+        { id: 'cbse.san.10.ch12', order: 12, title: '[शेमुषी] जननी तुल्यवत्सला (गद्य-कथा)',                    kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.10.ch13', order: 13, title: '[शेमुषी] सुभाषितानि (सूक्ति)',                            kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.10.ch14', order: 14, title: '[शेमुषी] सौहार्दं प्रकृतेः शोभा (पद्य)',                  kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.10.ch15', order: 15, title: '[शेमुषी] विचित्रः साक्षी (गद्य-कथा)',                     kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.10.ch16', order: 16, title: '[शेमुषी] सूक्तयः (सूक्ति)',                               kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.10.ch17', order: 17, title: '[शेमुषी] भूकम्पविभीषिका (गद्य-निबन्ध)',                   kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.10.ch18', order: 18, title: '[शेमुषी] अन्योक्तयः (पद्य)',                              kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
       ],
     },
 
@@ -108,6 +177,19 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.11.ch5', order: 5, title: '[संधि-समास] व्यंजन-विसर्ग संधि और बहुव्रीहि — उन्नत',   kgNodeIds: ['sanskrit.sandhi.vyanjan', 'sanskrit.sandhi.visarga', 'sanskrit.samasa.bahuvrihi'] },
         { id: 'cbse.san.11.ch6', order: 6, title: '[लेखन] अनुवाद अभ्यास — हिन्दी-संस्कृत (उन्नत)',          kgNodeIds: ['sanskrit.gadya.hindi_se_sanskrit', 'sanskrit.gadya.sanskrit_se_hindi'] },
         { id: 'cbse.san.11.ch7', order: 7, title: '[पठन] अपठित गद्यांश एवं पद्यांश — वरिष्ठ स्तर',         kgNodeIds: ['sanskrit.gadya.apathit_avbodh', 'sanskrit.padya.apathit_padyansh'] },
+        // ── [भास्वती] गद्य-पद्य-सूक्ति अंश (Sprint DM) ──
+        { id: 'cbse.san.11.ch8',  order: 8,  title: '[भास्वती] कुशलप्रशासनम् (गद्य-कथा)',           kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.11.ch9',  order: 9,  title: '[भास्वती] सौवर्णो नकुलः (गद्य-कथा)',            kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.11.ch10', order: 10, title: '[भास्वती] सूक्तिसुधा (सूक्ति)',                  kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.11.ch11', order: 11, title: '[भास्वती] ऋतुचर्या (पद्य)',                     kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.11.ch12', order: 12, title: '[भास्वती] वीरः सर्वदमनः (गद्य-कथा)',             kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.11.ch13', order: 13, title: '[भास्वती] शुकशावकोदन्तः (गद्य-कथा)',             kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.11.ch14', order: 14, title: '[भास्वती] भव्यः सत्याग्रहाश्रमः (गद्य-निबन्ध)',  kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.11.ch15', order: 15, title: '[भास्वती] सङ्गीतानुरागी सुब्बण्णः (गद्य-जीवनी)', kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.kavya_bodh.lekhak_kavi_parichay'] },
+        { id: 'cbse.san.11.ch16', order: 16, title: '[भास्वती] वस्त्रविक्रयः (नाट्यांश)',             kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.bhasha_shaili'] },
+        { id: 'cbse.san.11.ch17', order: 17, title: '[भास्वती] यद्भूतहितं तत्सत्यम् (सूक्ति)',        kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.11.ch18', order: 18, title: '[भास्वती] स मे प्रियः (पद्य)',                   kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.11.ch19', order: 19, title: '[भास्वती] अथ शिक्षां प्रवक्ष्यामि (पद्य)',       kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
       ],
     },
 
@@ -122,6 +204,19 @@ export const CBSE_SANSKRIT_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.san.12.ch5', order: 5, title: '[व्याकरण] प्रत्यय, उपसर्ग एवं शब्द-निर्माण — पुनरावृत्ति', kgNodeIds: ['sanskrit.vyakarana.upasarga', 'sanskrit.vyakarana.pratyaya'] },
         { id: 'cbse.san.12.ch6', order: 6, title: '[लेखन] अनुवाद एवं संवाद लेखन — बोर्ड-परीक्षा स्तर',     kgNodeIds: ['sanskrit.gadya.hindi_se_sanskrit', 'sanskrit.gadya.sanskrit_se_hindi', 'sanskrit.gadya.samvad_lekhan'] },
         { id: 'cbse.san.12.ch7', order: 7, title: '[पठन] अपठित गद्यांश-पद्यांश एवं श्लोक — बोर्ड-परीक्षा स्तर', kgNodeIds: ['sanskrit.gadya.apathit_avbodh', 'sanskrit.gadya.shabda_arth_prashna', 'sanskrit.padya.apathit_padyansh', 'sanskrit.padya.shlok_arth_bodh'] },
+        // ── [भास्वती] गद्य-पद्य-सूक्ति अंश (Sprint DM) ──
+        { id: 'cbse.san.12.ch8',  order: 8,  title: '[भास्वती] अनुशासनम् (गद्य-निबन्ध)',                  kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.12.ch9',  order: 9,  title: '[भास्वती] न त्वं शोचितुमर्हसि — श्रीमद्भगवद्गीता (पद्य)', kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.12.ch10', order: 10, title: '[भास्वती] राष्ट्रचिन्ता गरीयसी (गद्य-निबन्ध)',       kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.12.ch11', order: 11, title: '[भास्वती] प्रजानुरञ्जको नृपः (गद्य-कथा)',             kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.12.ch12', order: 12, title: '[भास्वती] दौवारिकस्य निष्ठा (गद्य-कथा)',              kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.12.ch13', order: 13, title: '[भास्वती] सूक्तिसौरभम् (सूक्ति)',                     kgNodeIds: ['sanskrit.padya.subhashitani', 'sanskrit.kavya_bodh.shlok_vyakhya'] },
+        { id: 'cbse.san.12.ch14', order: 14, title: '[भास्वती] नैकेनापि समं गता वसुमती (पद्य)',           kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.12.ch15', order: 15, title: '[भास्वती] हल्दीघाटी (पद्य)',                          kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.12.ch16', order: 16, title: '[भास्वती] मदालसा (गद्य-कथा)',                         kgNodeIds: ['sanskrit.gadya.varnan_katha', 'sanskrit.sahitya_vishleshan.patra_chitran', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.12.ch17', order: 17, title: '[भास्वती] प्रतीक्षा (पद्य)',                          kgNodeIds: ['sanskrit.padya.kavya_path', 'sanskrit.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.san.12.ch18', order: 18, title: '[भास्वती] कार्याकार्यव्यवस्थितिः (गद्य-निबन्ध)',     kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.san.12.ch19', order: 19, title: '[भास्वती] विद्यास्थानानि (गद्य-निबन्ध)',              kgNodeIds: ['sanskrit.gadya.nibandh_jeevani', 'sanskrit.sahitya_vishleshan.vishay_vastu'] },
       ],
     },
 

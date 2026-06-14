@@ -159,6 +159,38 @@ Short-answer questions should ask students to explain in 2–3 sentences using t
 `
 }
 
+// Sanskrit literature chapters are identified purely via KG node IDs (no title
+// keyword matching) — every literature chapter carries at least one of these
+// node IDs (see sanskritKnowledgeGraph.ts and cbseSanskritCatalog.ts, Sprint DM).
+const SANSKRIT_LIT_KG_PREFIXES = [
+  'sanskrit.sahitya_vishleshan.',
+  'sanskrit.kavya_bodh.',
+  'sanskrit.gadya.varnan_katha',
+  'sanskrit.gadya.nibandh_jeevani',
+  'sanskrit.padya.kavya_path',
+  'sanskrit.padya.subhashitani',
+]
+
+function isSanskritLiteratureChapter(nodeIds: string[]): boolean {
+  return nodeIds.some((id) => SANSKRIT_LIT_KG_PREFIXES.some((p) => id.startsWith(p)))
+}
+
+function sanskritLiteratureGuidance(nodeIds: string[]): string {
+  if (!isSanskritLiteratureChapter(nodeIds)) return ''
+  const isPoetry = nodeIds.some((id) => id.startsWith('sanskrit.padya.') || id.startsWith('sanskrit.kavya_bodh.'))
+  const poetryExtra = isPoetry ? '\n- श्लोक/सूक्ति का भावार्थ एवं सप्रसंग व्याख्या (verse/subhashita meaning and contextual explanation — highest-weight question type)' : ''
+  return `This is a Sanskrit LITERATURE chapter. Include questions on:${poetryExtra}
+- विषय-वस्तु (central theme/summary of the text)
+- पात्र-चित्रण (character description/analysis) if the text has characters
+- भाव-सौन्दर्य (emotional/poetic meaning) for पद्य/सुभाषित passages
+- भाषा-शैली (language style, notable word usage) where relevant
+- गद्यांश/पद्यांश पर आधारित प्रश्न (passage-based comprehension questions)
+- लेखक/कवि परिचय (author's/poet's introduction) where relevant
+Short-answer questions should ask students to explain in 2-3 sentences using the text.
+IMPORTANT: Never fabricate or misquote Sanskrit shloka/subhashita text — describe themes, characters and meaning in your own words instead of inventing verses.
+`
+}
+
 function buildPrompt(board: string, subjectName: string, grade: number, chapter: Chapter, topics: string[], nodeIds: string[]): string {
   const title = chapterDisplayTitle(chapter.title)
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
@@ -171,6 +203,7 @@ ${topicLines}
 
 ${gradeGuidance(grade)}
 ${hindiLiteratureGuidance(title, nodeIds)}
+${sanskritLiteratureGuidance(nodeIds)}
 This is a formal assessment. Questions must be comprehensive and cover the chapter thoroughly.
 
 Create EXACTLY ${ASSESSMENT_TOTAL} questions as a JSON array:

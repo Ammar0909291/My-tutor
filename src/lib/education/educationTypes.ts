@@ -146,6 +146,8 @@ export type SanskritDomain =
   | 'sanskrit.dhaatu_roopa'
   | 'sanskrit.gadya'
   | 'sanskrit.padya'
+  | 'sanskrit.sahitya_vishleshan'
+  | 'sanskrit.kavya_bodh'
 
 export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain | HindiDomain | SanskritDomain
 

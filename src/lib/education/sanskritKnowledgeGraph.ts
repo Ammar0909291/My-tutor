@@ -1,4 +1,4 @@
-// Master Sanskrit Knowledge Graph — Grammar, Sandhi, Samasa, Shabda-roopa, Dhaatu-roopa, Comprehension
+// Master Sanskrit Knowledge Graph — Grammar, Sandhi, Samasa, Shabda-roopa, Dhaatu-roopa, Comprehension, Literature
 
 import type { KnowledgeNode } from './educationTypes'
 
@@ -423,6 +423,84 @@ export const SANSKRIT_KNOWLEDGE_GRAPH: KnowledgeNode[] = [
     description: 'पाठ्यपुस्तक में निर्धारित श्लोकों का शब्दशः एवं भावार्थ-बोध; शुद्ध उच्चारण के साथ कण्ठस्थीकरण (याद करना) का अभ्यास',
     difficulty: 'developing',
     prerequisites: ['sanskrit.padya.subhashitani'],
+  },
+
+  // ─── साहित्य — गद्य/पद्य पाठ (LITERATURE READERS — Ruchira/Deepakam, Shemushi, Bhaswati) ──
+
+  {
+    id: 'sanskrit.gadya.varnan_katha',
+    domain: 'sanskrit.gadya',
+    title: 'वर्णनात्मक एवं कथात्मक गद्य-पाठ',
+    description: 'पाठ्यपुस्तक के वर्णनात्मक (विद्यालय, प्रकृति, पर्व) एवं कथात्मक (नीतिकथा, लोककथा, नाट्यांश) गद्य पाठों का पठन; पाठ का सार, घटनाक्रम एवं मुख्य बिंदुओं की पहचान; पाठ पर आधारित प्रश्नोत्तर',
+    difficulty: 'developing',
+    prerequisites: ['sanskrit.gadya.shabda_arth_prashna'],
+  },
+  {
+    id: 'sanskrit.gadya.nibandh_jeevani',
+    domain: 'sanskrit.gadya',
+    title: 'निबन्ध एवं जीवनी पाठ',
+    description: 'पाठ्यपुस्तक के निबन्धात्मक एवं जीवनीपरक गद्य पाठों का पठन; विषय-वस्तु, तर्क एवं उदाहरणों की पहचान; महापुरुषों के जीवन-प्रसंगों से प्रेरणा एवं मूल्य-शिक्षा',
+    difficulty: 'proficient',
+    prerequisites: ['sanskrit.gadya.varnan_katha'],
+  },
+  {
+    id: 'sanskrit.padya.kavya_path',
+    domain: 'sanskrit.padya',
+    title: 'काव्य-पाठ — पद्य/श्लोक का अवबोधन',
+    description: 'पाठ्यपुस्तक के पद्य पाठों (श्लोक, गीत) का पठन; अन्वय एवं शब्दार्थ के आधार पर भावार्थ-बोध; पद्य पाठों पर आधारित प्रश्नोत्तर',
+    difficulty: 'developing',
+    prerequisites: ['sanskrit.padya.shlok_arth_bodh'],
+  },
+
+  // ─── साहित्य-विश्लेषण (LITERARY ANALYSIS) ────────────────────────────────
+
+  {
+    id: 'sanskrit.sahitya_vishleshan.vishay_vastu',
+    domain: 'sanskrit.sahitya_vishleshan',
+    title: 'विषय-वस्तु एवं सार-संक्षेप',
+    description: 'पाठ का केंद्रीय भाव एवं सार; घटनाक्रम का क्रमबद्ध विवरण; पाठ में निहित नैतिक/सामाजिक संदेश; विषय-वस्तु आधारित प्रश्नों के उत्तर लिखना',
+    difficulty: 'proficient',
+    prerequisites: ['sanskrit.gadya.varnan_katha'],
+  },
+  {
+    id: 'sanskrit.sahitya_vishleshan.patra_chitran',
+    domain: 'sanskrit.sahitya_vishleshan',
+    title: 'पात्र-चित्रण',
+    description: 'पाठ के प्रमुख एवं गौण पात्रों की पहचान; पात्रों के गुण, स्वभाव एवं व्यवहार का विश्लेषण; संवादों के आधार पर चरित्र-चित्रण प्रश्नों के उत्तर',
+    difficulty: 'proficient',
+    prerequisites: ['sanskrit.sahitya_vishleshan.vishay_vastu'],
+  },
+  {
+    id: 'sanskrit.sahitya_vishleshan.bhasha_shaili',
+    domain: 'sanskrit.sahitya_vishleshan',
+    title: 'भाषा-शैली एवं अलंकार',
+    description: 'पाठ की भाषा-शैली — सरल, सूक्तिपूर्ण, वर्णनात्मक; प्रयुक्त अलंकार एवं विशेष शब्द-प्रयोग की पहचान; शैली-संबंधी प्रश्नों के उत्तर',
+    difficulty: 'advanced',
+    prerequisites: ['sanskrit.sahitya_vishleshan.vishay_vastu'],
+  },
+  {
+    id: 'sanskrit.kavya_bodh.bhav_saundarya',
+    domain: 'sanskrit.kavya_bodh',
+    title: 'काव्य का भाव-सौन्दर्य',
+    description: 'पद्य/श्लोक में निहित भाव की पहचान; पंक्तियों का भावार्थ; कवि की भावना एवं उद्देश्य; "भावार्थ स्पष्ट करें" प्रकार के प्रश्नों के उत्तर',
+    difficulty: 'proficient',
+    prerequisites: ['sanskrit.padya.kavya_path'],
+  },
+  {
+    id: 'sanskrit.kavya_bodh.shlok_vyakhya',
+    domain: 'sanskrit.kavya_bodh',
+    title: 'श्लोक/सूक्ति की सप्रसंग व्याख्या',
+    description: 'श्लोक या सूक्ति को प्रसंग सहित स्पष्ट करना; शब्दशः अर्थ एवं भावार्थ का सम्यक् विवेचन; परीक्षा में सप्रसंग व्याख्या प्रश्नों की तैयारी',
+    difficulty: 'advanced',
+    prerequisites: ['sanskrit.kavya_bodh.bhav_saundarya', 'sanskrit.padya.subhashitani'],
+  },
+  {
+    id: 'sanskrit.kavya_bodh.lekhak_kavi_parichay',
+    domain: 'sanskrit.kavya_bodh',
+    title: 'लेखक/कवि परिचय',
+    description: 'पाठ्यपुस्तक के प्रमुख लेखकों, कवियों एवं ग्रंथों (वाल्मीकि, कालिदास, भवभूति, पञ्चतन्त्र आदि) का संक्षिप्त परिचय; उनकी रचनाओं का साहित्यिक महत्व',
+    difficulty: 'developing',
+    prerequisites: ['sanskrit.sahitya_vishleshan.bhasha_shaili'],
   },
 ]
 

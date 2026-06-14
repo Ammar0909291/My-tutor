@@ -116,6 +116,29 @@ function hindiLiteratureGuidance(chapterTitle: string, nodeIds: string[]): strin
   return `This is a Hindi LITERATURE chapter. Mix question types: comprehension (बोध-प्रश्न), character-based (पात्र-चित्रण), theme-based (विषय-वस्तु), vocabulary (शब्दार्थ), and passage-based questions drawn from the text.${poetryExtra}\n`
 }
 
+// Sanskrit literature chapters are identified purely via KG node IDs (no title
+// keyword matching) — every literature chapter carries at least one of these
+// node IDs (see sanskritKnowledgeGraph.ts and cbseSanskritCatalog.ts, Sprint DM).
+const SANSKRIT_LIT_KG_PREFIXES = [
+  'sanskrit.sahitya_vishleshan.',
+  'sanskrit.kavya_bodh.',
+  'sanskrit.gadya.varnan_katha',
+  'sanskrit.gadya.nibandh_jeevani',
+  'sanskrit.padya.kavya_path',
+  'sanskrit.padya.subhashitani',
+]
+
+function isSanskritLiteratureChapter(nodeIds: string[]): boolean {
+  return nodeIds.some((id) => SANSKRIT_LIT_KG_PREFIXES.some((p) => id.startsWith(p)))
+}
+
+function sanskritLiteratureGuidance(nodeIds: string[]): string {
+  if (!isSanskritLiteratureChapter(nodeIds)) return ''
+  const isPoetry = nodeIds.some((id) => id.startsWith('sanskrit.padya.') || id.startsWith('sanskrit.kavya_bodh.'))
+  const poetryExtra = isPoetry ? ' For पद्य/सुभाषित passages: include a भावार्थ (verse-meaning) question.' : ''
+  return `This is a Sanskrit LITERATURE chapter. Mix question types: comprehension (अवबोधन), character-based (पात्र-चित्रण), theme-based (विषय-वस्तु), word-meaning (शब्दार्थ), and passage-based questions drawn from the text.${poetryExtra} Never fabricate or misquote Sanskrit shloka/subhashita text — describe themes and meaning in your own words instead of inventing verses.\n`
+}
+
 function buildPrompt(
   board: string,
   subjectName: string,
@@ -135,6 +158,7 @@ ${topicLines}
 
 ${gradeGuidance(grade)}
 ${hindiLiteratureGuidance(title, nodeIds)}
+${sanskritLiteratureGuidance(nodeIds)}
 
 Create EXACTLY 5 questions as a JSON array:
 - Questions q1, q2, q3: type "mcq" (4 options, one correct)

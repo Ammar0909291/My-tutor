@@ -128,6 +128,37 @@ function hindiLiteratureRevisionNote(chapterTitle: string, type: RevisionNoteTyp
   return ''
 }
 
+// Sanskrit literature chapters are identified purely via KG node IDs (no title
+// keyword matching) — every literature chapter carries at least one of these
+// node IDs (see sanskritKnowledgeGraph.ts and cbseSanskritCatalog.ts, Sprint DM).
+const SANSKRIT_LIT_KG_PREFIXES = [
+  'sanskrit.sahitya_vishleshan.',
+  'sanskrit.kavya_bodh.',
+  'sanskrit.gadya.varnan_katha',
+  'sanskrit.gadya.nibandh_jeevani',
+  'sanskrit.padya.kavya_path',
+  'sanskrit.padya.subhashitani',
+]
+
+function isSanskritLiteratureChapter(kgNodeIds: string[]): boolean {
+  return kgNodeIds.some((id) => SANSKRIT_LIT_KG_PREFIXES.some((p) => id.startsWith(p)))
+}
+
+function sanskritLiteratureRevisionNote(type: RevisionNoteType, kgNodeIds: string[]): string {
+  if (!isSanskritLiteratureChapter(kgNodeIds)) return ''
+  const isPoetry = kgNodeIds.some((id) => id.startsWith('sanskrit.padya.') || id.startsWith('sanskrit.kavya_bodh.'))
+  const noFabricate = 'Never fabricate or misquote Sanskrit shloka/subhashita text — describe themes and meaning in your own words instead of inventing verses.'
+  if (type === 'quick') {
+    const poetryExtra = isPoetry ? ' For पद्य/सुभाषित chapters, "recallQuestions" should include one भावार्थ (verse-meaning) question.' : ''
+    return `For this Sanskrit literature chapter, "keyConcepts" should list key themes/characters (पात्र) and ideas (विषय-वस्तु) from the text. "importantTerms" should give meanings of difficult Sanskrit words used in the chapter. "recallQuestions" should test विषय-वस्तु and भाव-बोध (comprehension).${poetryExtra} ${noFabricate}\n`
+  }
+  if (type === 'exam') {
+    const poetryExtra = isPoetry ? ', श्लोक/सूक्ति का भावार्थ एवं सप्रसंग व्याख्या (highest-weight question type)' : ''
+    return `For this Sanskrit literature chapter, "highWeightTopics" should list: पात्र-चित्रण, विषय-वस्तु, भाव-सौन्दर्य/भाषा-शैली${poetryExtra}, लेखक/कवि-परिचय. "definitions" should give meanings of key Sanskrit words from the chapter. ${noFabricate}\n`
+  }
+  return ''
+}
+
 function buildPrompt(type: RevisionNoteType, board: string, subjectName: string, grade: number, chapter: Chapter): string {
   const title = chapterDisplayTitle(chapter.title)
   const topics = getNodesForChapter(chapter).map((n) => n.title)
@@ -138,6 +169,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
     return [
       languageNote(subjectName),
       hindiLiteratureRevisionNote(title, 'quick', chapter.kgNodeIds),
+      sanskritLiteratureRevisionNote('quick', chapter.kgNodeIds),
       `Create a CONCISE Quick Revision sheet for a ${ctx}`,
       'Keep it tight — equivalent to 1-2 pages. No essays.',
       'Return ONLY this JSON:',
@@ -154,6 +186,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
     return [
       languageNote(subjectName),
       hindiLiteratureRevisionNote(title, 'exam', chapter.kgNodeIds),
+      sanskritLiteratureRevisionNote('exam', chapter.kgNodeIds),
       `Create a CONCISE Exam Revision sheet for a ${ctx}`,
       'Focus on high-yield, exam-relevant material only. Be brief.',
       'Return ONLY this JSON:',
