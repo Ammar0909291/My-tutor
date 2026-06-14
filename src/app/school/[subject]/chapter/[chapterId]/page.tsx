@@ -137,6 +137,12 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const navigatorTitle = navigatorTargetsThisChapter && navigatorAction
     ? navigatorTitleForCurrentChapter(navigatorAction) ?? undefined
     : undefined
+  // Sprint DM.1: a continue_chapter / start_next_chapter action targeting THIS
+  // chapter resolves its href back to this very overview page — a dead
+  // self-link. navigatorTitle is non-null only for exactly those two action
+  // types, so reuse it as the guard and send the student into the actual
+  // learning interface (same target as the page's "Continue learning" CTA).
+  const navigatorHref = navigatorTitle ? learnHref : undefined
 
   // Sprint BR: difficulty badge derived from KG node count + grade
   const diffBadge = chapterDifficultyBadge(chapter.kgNodeIds.length, grade)
@@ -405,7 +411,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
         )}
 
         {/* Sprint CO: Next Recommended Step — unified Learning Navigator banner */}
-        {navigatorAction && <NavigatorActionCard action={navigatorAction} heading="🎯 Next Recommended Step" title={navigatorTitle} compact />}
+        {navigatorAction && <NavigatorActionCard action={navigatorAction} heading="🎯 Next Recommended Step" title={navigatorTitle} href={navigatorHref} compact />}
 
         {/* Phase 5: Chapter summary */}
         <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
