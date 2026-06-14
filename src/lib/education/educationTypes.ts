@@ -138,7 +138,16 @@ export type HindiDomain =
   | 'hindi.sahitya_vishleshan'
   | 'hindi.kavya_bodh'
 
-export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain | HindiDomain
+export type SanskritDomain =
+  | 'sanskrit.vyakarana'
+  | 'sanskrit.sandhi'
+  | 'sanskrit.samasa'
+  | 'sanskrit.shabda_roopa'
+  | 'sanskrit.dhaatu_roopa'
+  | 'sanskrit.gadya'
+  | 'sanskrit.padya'
+
+export type AnyDomain = MathDomain | ScienceDomain | EnglishDomain | SocialScienceDomain | HindiDomain | SanskritDomain
 
 export interface KnowledgeNode {
   id: string

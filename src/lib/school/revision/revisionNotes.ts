@@ -97,8 +97,8 @@ function fallbackFor(type: RevisionNoteType, chapter: Chapter, subjectName?: str
 // ── Prompts ──────────────────────────────────────────────────────────────────
 
 function languageNote(subjectName: string): string {
-  return subjectName === 'Hindi'
-    ? 'Write ALL content (summary, concepts, terms, questions, answers) in Hindi (Devanagari script). Do not use Roman transliteration.\n'
+  return subjectName === 'Hindi' || subjectName === 'Sanskrit'
+    ? `Write ALL content (summary, concepts, terms, questions, answers) in ${subjectName} (Devanagari script). Do not use Roman transliteration.\n`
     : ''
 }
 

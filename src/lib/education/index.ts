@@ -15,6 +15,7 @@ export type {
   ScienceDomain,
   EnglishDomain,
   HindiDomain,
+  SanskritDomain,
   SocialScienceDomain,
   AnyDomain,
   KnowledgeNode,
@@ -34,6 +35,7 @@ export { MATH_KNOWLEDGE_GRAPH, getKGNode, getNodesByDomain, getAllPrerequisites 
 export { SCIENCE_KNOWLEDGE_GRAPH, getScienceNode } from './scienceKnowledgeGraph'
 export { ENGLISH_KNOWLEDGE_GRAPH, getEnglishNode } from './englishKnowledgeGraph'
 export { HINDI_KNOWLEDGE_GRAPH, getHindiNode } from './hindiKnowledgeGraph'
+export { SANSKRIT_KNOWLEDGE_GRAPH, getSanskritNode } from './sanskritKnowledgeGraph'
 export { SOCIAL_SCIENCE_KNOWLEDGE_GRAPH, getSocialScienceNode } from './socialScienceKnowledgeGraph'
 
 // UP Board Catalogs
@@ -41,6 +43,7 @@ export { UP_MATH_CATALOG, getUPMathChapters, getUPMathChapter } from './upMathCa
 export { UP_SCIENCE_CATALOG, getUPScienceChapters } from './upScienceCatalog'
 export { UP_ENGLISH_CATALOG, getUPEnglishChapters } from './upEnglishCatalog'
 export { UP_HINDI_CATALOG, getUPHindiChapters, getUPHindiChapter } from './upHindiCatalog'
+export { UP_SANSKRIT_CATALOG, getUPSanskritChapters, getUPSanskritChapter } from './upSanskritCatalog'
 export { UP_SOCIAL_SCIENCE_CATALOG, getUPSocialScienceChapters } from './upSocialScienceCatalog'
 
 // CBSE Catalogs
@@ -49,6 +52,7 @@ export { CBSE_SCIENCE_CATALOG, getCBSEScienceChapters, getCBSEScienceChapter } f
 export { CBSE_SOCIAL_SCIENCE_CATALOG, getCBSESocialScienceChapters, getCBSESocialScienceChapter } from './cbseSocialScienceCatalog'
 export { CBSE_ENGLISH_CATALOG, getCBSEEnglishChapters, getCBSEEnglishChapter } from './cbseEnglishCatalog'
 export { CBSE_HINDI_CATALOG, getCBSEHindiChapters, getCBSEHindiChapter } from './cbseHindiCatalog'
+export { CBSE_SANSKRIT_CATALOG, getCBSESanskritChapters, getCBSESanskritChapter } from './cbseSanskritCatalog'
 
 // Grade 11–12 Stream Subjects (Sprint DC — derived from Science/SST, no new content)
 export {

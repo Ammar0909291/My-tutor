@@ -13,7 +13,7 @@ export const CBSE_BOARD: EducationBoard = {
   // Grade-aware listing (getGradeSubjects) ensures each student only sees the
   // subjects that have chapters at their grade.
   subjects: [
-    'mathematics', 'science', 'social_science', 'english', 'hindi',
+    'mathematics', 'science', 'social_science', 'english', 'hindi', 'sanskrit',
     'physics', 'chemistry', 'biology',
     'history', 'geography', 'political_science', 'economics',
   ],

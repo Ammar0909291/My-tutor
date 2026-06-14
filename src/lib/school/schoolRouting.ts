@@ -94,6 +94,7 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   science:        { label: 'Science',        icon: '🔬', color: 'var(--green)',  bg: 'var(--green-muted)' },
   english:        { label: 'English',        icon: '📖', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
   hindi:          { label: 'Hindi',          icon: '📝', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
+  sanskrit:       { label: 'Sanskrit',       icon: '🕉️', color: 'var(--purple)', bg: 'var(--purple-muted)' },
   social_science: { label: 'Social Science', icon: '🌍', color: 'var(--purple)', bg: 'var(--coral-muted)' },
   // Sprint DC: senior-secondary (Grade 11–12) standalone stream subjects.
   physics:           { label: 'Physics',           icon: '⚛️', color: 'var(--blue)',   bg: 'var(--blue-muted)' },

@@ -90,8 +90,8 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subj
 }
 
 function languageNote(subjectName: string): string {
-  return subjectName === 'Hindi'
-    ? 'Write ALL questions, options, explanations and sample answers in Hindi (Devanagari script). Do not use Roman transliteration.\n'
+  return subjectName === 'Hindi' || subjectName === 'Sanskrit'
+    ? `Write ALL questions, options, explanations and sample answers in ${subjectName} (Devanagari script). Do not use Roman transliteration.\n`
     : ''
 }
 

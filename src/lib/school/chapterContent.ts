@@ -42,8 +42,8 @@ function fallbackContent(chapter: Chapter): ChapterContent {
 }
 
 function languageNote(subjectName: string): string {
-  return subjectName === 'Hindi'
-    ? 'Write ALL content (summary, objectives) in Hindi (Devanagari script). Do not use Roman transliteration.'
+  return subjectName === 'Hindi' || subjectName === 'Sanskrit'
+    ? `Write ALL content (summary, objectives) in ${subjectName} (Devanagari script). Do not use Roman transliteration.`
     : ''
 }
 
