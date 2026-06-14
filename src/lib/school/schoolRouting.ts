@@ -108,7 +108,9 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   accountancy:       { label: 'Accountancy',       icon: '🧾', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
   business_studies:  { label: 'Business Studies',  icon: '💼', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
   // Sprint DY: Computer Science (Grades 9–12).
-  computer_science:  { label: 'Computer Science',  icon: '💻', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
+  computer_science:      { label: 'Computer Science',      icon: '💻', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
+  // Sprint EA: Information Technology (Grades 9–12).
+  information_technology: { label: 'Information Technology', icon: '🖥️', color: 'var(--green)',  bg: 'var(--green-muted)' },
 }
 
 /**

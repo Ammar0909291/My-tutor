@@ -15,6 +15,9 @@ import { ECONOMICS_KNOWLEDGE_GRAPH } from './economicsKnowledgeGraph'
 import { HISTORY_KNOWLEDGE_GRAPH } from './historyKnowledgeGraph'
 import { GEOGRAPHY_KNOWLEDGE_GRAPH } from './geographyKnowledgeGraph'
 import { POLITICAL_SCIENCE_KNOWLEDGE_GRAPH } from './politicalScienceKnowledgeGraph'
+import { INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH } from './informationTechnologyKnowledgeGraph'
+import { CBSE_INFORMATION_TECHNOLOGY_CATALOG } from './cbseInformationTechnologyCatalog'
+import { UP_INFORMATION_TECHNOLOGY_CATALOG } from './upInformationTechnologyCatalog'
 import { CBSE_ACCOUNTANCY_CATALOG } from './cbseAccountancyCatalog'
 import { UP_ACCOUNTANCY_CATALOG } from './upAccountancyCatalog'
 import { CBSE_BUSINESS_STUDIES_CATALOG } from './cbseBusinessStudiesCatalog'
@@ -57,6 +60,7 @@ export const ALL_KG_NODES: KnowledgeNode[] = [
   ...HISTORY_KNOWLEDGE_GRAPH,
   ...GEOGRAPHY_KNOWLEDGE_GRAPH,
   ...POLITICAL_SCIENCE_KNOWLEDGE_GRAPH,
+  ...INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
@@ -80,6 +84,8 @@ export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_BUSINESS_STUDIES_CATALOG,
   CBSE_COMPUTER_SCIENCE_CATALOG,
   UP_COMPUTER_SCIENCE_CATALOG,
+  CBSE_INFORMATION_TECHNOLOGY_CATALOG,
+  UP_INFORMATION_TECHNOLOGY_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */
