@@ -18,12 +18,15 @@ import { POLITICAL_SCIENCE_KNOWLEDGE_GRAPH } from './politicalScienceKnowledgeGr
 import { INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH } from './informationTechnologyKnowledgeGraph'
 import { SOCIOLOGY_KNOWLEDGE_GRAPH } from './sociologyKnowledgeGraph'
 import { PSYCHOLOGY_KNOWLEDGE_GRAPH } from './psychologyKnowledgeGraph'
+import { URDU_KNOWLEDGE_GRAPH } from './urduKnowledgeGraph'
 import { CBSE_INFORMATION_TECHNOLOGY_CATALOG } from './cbseInformationTechnologyCatalog'
 import { UP_INFORMATION_TECHNOLOGY_CATALOG } from './upInformationTechnologyCatalog'
 import { CBSE_SOCIOLOGY_CATALOG } from './cbseSociologyCatalog'
 import { UP_SOCIOLOGY_CATALOG } from './upSociologyCatalog'
 import { CBSE_PSYCHOLOGY_CATALOG } from './cbsePsychologyCatalog'
 import { UP_PSYCHOLOGY_CATALOG } from './upPsychologyCatalog'
+import { CBSE_URDU_CATALOG } from './cbseUrduCatalog'
+import { UP_URDU_CATALOG } from './upUrduCatalog'
 import { CBSE_ACCOUNTANCY_CATALOG } from './cbseAccountancyCatalog'
 import { UP_ACCOUNTANCY_CATALOG } from './upAccountancyCatalog'
 import { CBSE_BUSINESS_STUDIES_CATALOG } from './cbseBusinessStudiesCatalog'
@@ -69,6 +72,7 @@ export const ALL_KG_NODES: KnowledgeNode[] = [
   ...INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH,
   ...SOCIOLOGY_KNOWLEDGE_GRAPH,
   ...PSYCHOLOGY_KNOWLEDGE_GRAPH,
+  ...URDU_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
@@ -98,6 +102,8 @@ export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_SOCIOLOGY_CATALOG,
   CBSE_PSYCHOLOGY_CATALOG,
   UP_PSYCHOLOGY_CATALOG,
+  CBSE_URDU_CATALOG,
+  UP_URDU_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */

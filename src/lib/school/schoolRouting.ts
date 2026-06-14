@@ -115,6 +115,8 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   sociology:             { label: 'Sociology',             icon: '🏛️', color: 'var(--purple)', bg: 'var(--coral-muted)' },
   // Sprint EC: Psychology (Grades 11–12).
   psychology:            { label: 'Psychology',            icon: '🧠', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
+  // Sprint ED: Urdu (Grades 6–12, CBSE + UP Board).
+  urdu:                  { label: 'Urdu',                  icon: '📜', color: 'var(--green)',  bg: 'var(--green-muted)' },
 }
 
 /**

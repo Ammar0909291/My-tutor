@@ -45,6 +45,7 @@ export { POLITICAL_SCIENCE_KNOWLEDGE_GRAPH, getPoliticalScienceNode, getPolitica
 export { INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH, getITNode, getITNodesByDomain } from './informationTechnologyKnowledgeGraph'
 export { SOCIOLOGY_KNOWLEDGE_GRAPH, getSociologyNode, getSociologyNodesByDomain } from './sociologyKnowledgeGraph'
 export { PSYCHOLOGY_KNOWLEDGE_GRAPH, getPsychologyNode, getPsychologyNodesByDomain } from './psychologyKnowledgeGraph'
+export { URDU_KNOWLEDGE_GRAPH, getUrduNode, getUrduNodesByDomain } from './urduKnowledgeGraph'
 export { MATH_KNOWLEDGE_GRAPH, getKGNode, getNodesByDomain, getAllPrerequisites } from './mathKnowledgeGraph'
 export { SCIENCE_KNOWLEDGE_GRAPH, getScienceNode } from './scienceKnowledgeGraph'
 export { ENGLISH_KNOWLEDGE_GRAPH, getEnglishNode } from './englishKnowledgeGraph'
@@ -85,6 +86,9 @@ export { UP_SOCIOLOGY_CATALOG, getUPSociologyChapters, getUPSociologyChapter } f
 // Sprint EC: Psychology (Grades 11–12)
 export { CBSE_PSYCHOLOGY_CATALOG, getCBSEPsychologyChapters, getCBSEPsychologyChapter } from './cbsePsychologyCatalog'
 export { UP_PSYCHOLOGY_CATALOG, getUPPsychologyChapters, getUPPsychologyChapter } from './upPsychologyCatalog'
+// Sprint ED: Urdu (Grades 6–12)
+export { CBSE_URDU_CATALOG, getCBSEUrduChapters, getCBSEUrduChapter } from './cbseUrduCatalog'
+export { UP_URDU_CATALOG, getUPUrduChapters, getUPUrduChapter } from './upUrduCatalog'
 
 // Grade 11–12 Stream Subjects (Sprint DC — derived from Science/SST, no new content)
 export {
