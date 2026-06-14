@@ -113,6 +113,8 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   information_technology: { label: 'Information Technology', icon: '🖥️', color: 'var(--green)',  bg: 'var(--green-muted)' },
   // Sprint EB: Sociology (Grades 11–12).
   sociology:             { label: 'Sociology',             icon: '🏛️', color: 'var(--purple)', bg: 'var(--coral-muted)' },
+  // Sprint EC: Psychology (Grades 11–12).
+  psychology:            { label: 'Psychology',            icon: '🧠', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
 }
 
 /**
