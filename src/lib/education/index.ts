@@ -43,6 +43,7 @@ export { HISTORY_KNOWLEDGE_GRAPH, getHistoryNode, getHistoryNodesByDomain } from
 export { GEOGRAPHY_KNOWLEDGE_GRAPH, getGeographyNode, getGeographyNodesByDomain } from './geographyKnowledgeGraph'
 export { POLITICAL_SCIENCE_KNOWLEDGE_GRAPH, getPoliticalScienceNode, getPoliticalScienceNodesByDomain } from './politicalScienceKnowledgeGraph'
 export { INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH, getITNode, getITNodesByDomain } from './informationTechnologyKnowledgeGraph'
+export { SOCIOLOGY_KNOWLEDGE_GRAPH, getSociologyNode, getSociologyNodesByDomain } from './sociologyKnowledgeGraph'
 export { MATH_KNOWLEDGE_GRAPH, getKGNode, getNodesByDomain, getAllPrerequisites } from './mathKnowledgeGraph'
 export { SCIENCE_KNOWLEDGE_GRAPH, getScienceNode } from './scienceKnowledgeGraph'
 export { ENGLISH_KNOWLEDGE_GRAPH, getEnglishNode } from './englishKnowledgeGraph'
@@ -77,6 +78,9 @@ export { UP_COMPUTER_SCIENCE_CATALOG, getUPCSChapters, getUPCSChapter } from './
 // Sprint EA: Information Technology (Grades 9–12)
 export { CBSE_INFORMATION_TECHNOLOGY_CATALOG, getCBSEITChapters, getCBSEITChapter } from './cbseInformationTechnologyCatalog'
 export { UP_INFORMATION_TECHNOLOGY_CATALOG, getUPITChapters, getUPITChapter } from './upInformationTechnologyCatalog'
+// Sprint EB: Sociology (Grades 11–12)
+export { CBSE_SOCIOLOGY_CATALOG, getCBSESociologyChapters, getCBSESociologyChapter } from './cbseSociologyCatalog'
+export { UP_SOCIOLOGY_CATALOG, getUPSociologyChapters, getUPSociologyChapter } from './upSociologyCatalog'
 
 // Grade 11–12 Stream Subjects (Sprint DC — derived from Science/SST, no new content)
 export {
