@@ -8,6 +8,13 @@ import { SANSKRIT_KNOWLEDGE_GRAPH } from './sanskritKnowledgeGraph'
 import { ACCOUNTANCY_KNOWLEDGE_GRAPH } from './accountancyKnowledgeGraph'
 import { BUSINESS_STUDIES_KNOWLEDGE_GRAPH } from './businessStudiesKnowledgeGraph'
 import { COMPUTER_SCIENCE_KNOWLEDGE_GRAPH } from './computerScienceKnowledgeGraph'
+import { PHYSICS_KNOWLEDGE_GRAPH } from './physicsKnowledgeGraph'
+import { CHEMISTRY_KNOWLEDGE_GRAPH } from './chemistryKnowledgeGraph'
+import { BIOLOGY_KNOWLEDGE_GRAPH } from './biologyKnowledgeGraph'
+import { ECONOMICS_KNOWLEDGE_GRAPH } from './economicsKnowledgeGraph'
+import { HISTORY_KNOWLEDGE_GRAPH } from './historyKnowledgeGraph'
+import { GEOGRAPHY_KNOWLEDGE_GRAPH } from './geographyKnowledgeGraph'
+import { POLITICAL_SCIENCE_KNOWLEDGE_GRAPH } from './politicalScienceKnowledgeGraph'
 import { CBSE_ACCOUNTANCY_CATALOG } from './cbseAccountancyCatalog'
 import { UP_ACCOUNTANCY_CATALOG } from './upAccountancyCatalog'
 import { CBSE_BUSINESS_STUDIES_CATALOG } from './cbseBusinessStudiesCatalog'
@@ -43,6 +50,13 @@ export const ALL_KG_NODES: KnowledgeNode[] = [
   ...ACCOUNTANCY_KNOWLEDGE_GRAPH,
   ...BUSINESS_STUDIES_KNOWLEDGE_GRAPH,
   ...COMPUTER_SCIENCE_KNOWLEDGE_GRAPH,
+  ...PHYSICS_KNOWLEDGE_GRAPH,
+  ...CHEMISTRY_KNOWLEDGE_GRAPH,
+  ...BIOLOGY_KNOWLEDGE_GRAPH,
+  ...ECONOMICS_KNOWLEDGE_GRAPH,
+  ...HISTORY_KNOWLEDGE_GRAPH,
+  ...GEOGRAPHY_KNOWLEDGE_GRAPH,
+  ...POLITICAL_SCIENCE_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
