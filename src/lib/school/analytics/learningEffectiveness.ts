@@ -98,6 +98,10 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
   const since30d = new Date(now.getTime() - 30 * DAY_MS)
   const since60d = new Date(now.getTime() - 60 * DAY_MS)
 
+  // Four tables fetched in parallel. Cross-table consistency is best-effort
+  // (not wrapped in a transaction) — the window between fetches is negligible
+  // in practice. take: 2000 caps memory per request; power users see a sampled
+  // view, which is statistically representative for effectiveness scoring.
   const [topicRows, practiceRows, mistakeRows, checkpointRows] = await Promise.all([
     prisma.topicProgress.findMany({
       where: { userId },
@@ -113,11 +117,13 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
       where: { userId },
       select: { category: true, subjectSlug: true },
       take: 2000,
+      orderBy: { createdAt: 'desc' },
     }),
     prisma.learningCheckpoint.findMany({
       where: { userId },
       select: { passed: true, subjectSlug: true, createdAt: true },
       take: 2000,
+      orderBy: { createdAt: 'desc' },
     }),
   ])
 
@@ -126,7 +132,9 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
   const mastered = touched.filter((t) => t.masteryPct >= 80)
   const avgMastery = touched.length ? Math.round(touched.reduce((s, t) => s + t.masteryPct, 0) / touched.length) : 0
 
-  const totalVelocityPoints = touched.reduce((s, t) => s + (t.attempts > 0 ? t.masteryPct / t.attempts : 0), 0)
+  // Velocity = avg mastery earned per attempt across all touched topics.
+  // `touched` is already filtered to attempts > 0, so division is safe.
+  const totalVelocityPoints = touched.reduce((s, t) => s + t.masteryPct / t.attempts, 0)
   const learningVelocity = touched.length ? Math.round(totalVelocityPoints / touched.length) : 0
 
   const recent = touched.filter((t) => t.updatedAt >= since30d)
@@ -151,7 +159,7 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
     : 0
   const revisionSuccess = revised.filter((t) => t.masteryPct >= 80).length
   const revisionSuccessRate = revised.length ? Math.round((revisionSuccess / revised.length) * 100) : 0
-  const retentionScore = Math.round(revisionSuccessRate * 0.6 + avgMasteryAfterRevision * 0.4)
+  const retentionScore = Math.min(100, Math.round(revisionSuccessRate * 0.6 + avgMasteryAfterRevision * 0.4))
 
   const revisionEffectiveness: RevisionEffectiveness = {
     revisedTopics: revised.length,
@@ -169,7 +177,7 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
   const avgPracticeScore = scores.length ? Math.round(scores.reduce((s: number, v: number) => s + v, 0) / scores.length) : 0
   const passingPractice = scores.filter((s: number) => s >= 70).length
   const practicePassRate = scores.length ? Math.round((passingPractice / scores.length) * 100) : 0
-  const recScore = Math.round(checkpointPassRate * 0.5 + practicePassRate * 0.5)
+  const recScore = Math.min(100, Math.round(checkpointPassRate * 0.5 + practicePassRate * 0.5))
 
   const recommendationEffectiveness: RecommendationEffectiveness = {
     totalCheckpoints,
@@ -187,16 +195,26 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
     e.subjects.add(m.subjectSlug)
     catMap.set(m.category, e)
   }
-  const total = mistakeRows.length || 1
-  const topMisconceptions: MisconceptionReport[] = [...catMap.entries()]
-    .sort((a, b) => b[1].count - a[1].count)
-    .slice(0, 5)
-    .map(([category, { count, subjects }]) => ({
-      category,
-      count,
-      topSubjects: [...subjects].slice(0, 3),
-      share: Math.round((count / total) * 100),
-    }))
+  const topMisconceptions: MisconceptionReport[] = mistakeRows.length === 0
+    ? []
+    : (() => {
+        const totalMistakes = mistakeRows.length
+        const raw = [...catMap.entries()]
+          .sort((a, b) => b[1].count - a[1].count)
+          .slice(0, 5)
+          .map(([category, { count, subjects }]) => ({
+            category,
+            count,
+            topSubjects: [...subjects].slice(0, 3),
+            share: Math.round((count / totalMistakes) * 100),
+          }))
+        // Normalize so rounding errors don't push total share past 100
+        if (raw.length > 1) {
+          const sumHead = raw.slice(0, -1).reduce((s, m) => s + m.share, 0)
+          raw[raw.length - 1].share = Math.max(0, Math.min(raw[raw.length - 1].share, 100 - sumHead))
+        }
+        return raw
+      })()
 
   // ── Subject-level effectiveness ───────────────────────────────────────────
   type SubjBucket = { topics: LearningOutcome[]; scores: number[]; checkpoints: { passed: boolean }[] }
@@ -227,9 +245,9 @@ export async function computeLearningEffectiveness(userId: string): Promise<Lear
       : 0,
   }))
 
-  const sorted = [...subjectList].sort((a, b) => b.avgMastery - a.avgMastery)
-  const strongestSubjects = sorted.slice(0, 3)
-  const weakestSubjects = [...sorted].reverse().slice(0, 3)
+  // DEF-EH-01: sort independently so weakest/strongest never duplicate when ≤3 subjects exist
+  const strongestSubjects = [...subjectList].sort((a, b) => b.avgMastery - a.avgMastery).slice(0, 3)
+  const weakestSubjects = [...subjectList].sort((a, b) => a.avgMastery - b.avgMastery).slice(0, 3)
 
   const learningEffectivenessScore = Math.min(
     100,
@@ -299,16 +317,25 @@ export async function computePlatformEffectiveness(): Promise<PlatformEffectiven
     e.subjects.add(m.subjectSlug)
     catMap.set(m.category, e)
   }
-  const totalMistakes = mistakeRows.length || 1
-  const topMisconceptions: MisconceptionReport[] = [...catMap.entries()]
-    .sort((a, b) => b[1].count - a[1].count)
-    .slice(0, 5)
-    .map(([category, { count, subjects }]) => ({
-      category,
-      count,
-      topSubjects: [...subjects].slice(0, 3),
-      share: Math.round((count / totalMistakes) * 100),
-    }))
+  const topMisconceptions: MisconceptionReport[] = mistakeRows.length === 0
+    ? []
+    : (() => {
+        const totalMistakes = mistakeRows.length
+        const raw = [...catMap.entries()]
+          .sort((a, b) => b[1].count - a[1].count)
+          .slice(0, 5)
+          .map(([category, { count, subjects }]) => ({
+            category,
+            count,
+            topSubjects: [...subjects].slice(0, 3),
+            share: Math.round((count / totalMistakes) * 100),
+          }))
+        if (raw.length > 1) {
+          const sumHead = raw.slice(0, -1).reduce((s, m) => s + m.share, 0)
+          raw[raw.length - 1].share = Math.max(0, Math.min(raw[raw.length - 1].share, 100 - sumHead))
+        }
+        return raw
+      })()
 
   // Subject effectiveness
   type PlatSubjBucket = { mastery: number[]; scores: number[]; cp: boolean[] }
@@ -347,11 +374,12 @@ export async function computePlatformEffectiveness(): Promise<PlatformEffectiven
   const revisedAndMastered = topicRows.filter((t) => t.revisionCount > 0 && t.masteryPct >= 80).length
   const revised = topicRows.filter((t) => t.revisionCount > 0).length
 
-  const avgRetentionEffectivenessScore = revised > 0 ? Math.round((revisedAndMastered / revised) * 100) : 0
-  const avgRecommendationEffectivenessScore = Math.round(checkpointPassRate * 0.5 + practicePassRate * 0.5)
+  const avgRetentionEffectivenessScore = revised > 0 ? Math.min(100, Math.round((revisedAndMastered / revised) * 100)) : 0
+  // DEF-EH-06: clamp; DEF-EH-03: removed erroneous * 2 on trend bonus
+  const avgRecommendationEffectivenessScore = Math.min(100, Math.round(checkpointPassRate * 0.5 + practicePassRate * 0.5))
   const avgLearningEffectivenessScore = Math.min(
     100,
-    Math.round(platformAvgMastery * 0.6 + (platformMasteryTrend === 'IMPROVING' ? 20 : 10) * 2)
+    Math.round(platformAvgMastery * 0.6 + (platformMasteryTrend === 'IMPROVING' ? 20 : 10))
   )
 
   return {

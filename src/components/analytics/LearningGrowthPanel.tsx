@@ -78,15 +78,20 @@ function SubjectRow({ s, rank }: { s: SubjectEff; rank: 'best' | 'weak' }) {
 export function LearningGrowthPanel() {
   const [data, setData] = useState<Report | null>(null)
   const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState(false)
 
   useEffect(() => {
     fetch('/api/analytics/learning-effectiveness')
-      .then((r) => r.ok ? r.json() : null)
-      .then((d) => { setData(d); setLoading(false) })
-      .catch(() => setLoading(false))
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
+      .then((d: Report) => { setData(d); setLoading(false) })
+      .catch(() => { setFetchError(true); setLoading(false) })
   }, [])
 
   if (loading) return <div className="text-xs py-2" style={{ color: 'var(--text-dim)' }}>Loading growth data…</div>
+  if (fetchError) return <div className="text-xs py-2" style={{ color: 'var(--coral)' }}>Could not load growth data — try refreshing.</div>
   if (!data || data.masteryGrowth.totalTopics === 0) {
     return <div className="text-xs py-2" style={{ color: 'var(--text-dim)' }}>No learning data yet. Start practising to see your growth!</div>
   }

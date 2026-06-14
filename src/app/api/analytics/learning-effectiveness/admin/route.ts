@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth'
 import { computePlatformEffectiveness } from '@/lib/school/analytics/learningEffectiveness'
 
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim()).filter(Boolean)
+if (process.env.NODE_ENV === 'production' && ADMIN_EMAILS.length === 0) {
+  console.warn('[analytics/learning-effectiveness/admin] ADMIN_EMAILS env var is empty — endpoint will deny all requests.')
+}
 
 /**
  * Sprint EG — Learning Effectiveness Intelligence (admin aggregate).
