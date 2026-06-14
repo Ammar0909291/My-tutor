@@ -14,11 +14,44 @@ function gradeGuidance(grade: number): string {
   return 'Higher difficulty. Include analysis, application, and multi-step reasoning.'
 }
 
-function fallbackAssessment(chapter: Chapter, nodeIds: string[], topics: string[]): PracticeQuestion[] {
+function fallbackAssessment(chapter: Chapter, nodeIds: string[], topics: string[], subjectName?: string): PracticeQuestion[] {
   const title = chapterDisplayTitle(chapter.title)
-  const nodeId = nodeIds[0]
-  const topic = topics[0] ?? title
   const qs: PracticeQuestion[] = []
+
+  if (subjectName === 'Hindi') {
+    for (let i = 0; i < ASSESSMENT_MCQ_COUNT; i++) {
+      const nId = nodeIds[i % nodeIds.length]
+      const t = topics[i % topics.length] ?? title
+      qs.push({
+        id: `q${i + 1}`, type: 'mcq', nodeId: nId,
+        question: `"${t}" के बारे में कौन-सा कथन सही है?`,
+        options: [`${t} इस पाठ की प्रमुख अवधारणा है`, 'यह इस पाठ में नहीं पढ़ाया जाता', 'यह किसी अन्य विषय से संबंधित है', 'इनमें से कोई नहीं'],
+        correctIndex: 0,
+        explanation: `"${t}" इस पाठ में पढ़ाई जाने वाली प्रमुख अवधारणा है।`,
+      })
+    }
+    for (let i = 0; i < ASSESSMENT_TF_COUNT; i++) {
+      const nId = nodeIds[i % nodeIds.length]
+      const t = topics[i % topics.length] ?? title
+      qs.push({
+        id: `q${ASSESSMENT_MCQ_COUNT + i + 1}`, type: 'true_false', nodeId: nId,
+        question: `सत्य या असत्य: "${t}" इस पाठ की विषय-वस्तु का हिस्सा है।`,
+        correct: true,
+        explanation: `हाँ, "${t}" इस पाठ में पढ़ाया जाता है।`,
+      })
+    }
+    for (let i = 0; i < ASSESSMENT_SA_COUNT; i++) {
+      const nId = nodeIds[i % nodeIds.length]
+      const t = topics[i % topics.length] ?? title
+      qs.push({
+        id: `q${ASSESSMENT_MCQ_COUNT + ASSESSMENT_TF_COUNT + i + 1}`, type: 'short_answer', nodeId: nId,
+        question: `"${t}" को अपने शब्दों में समझाइए।`,
+        sampleAnswer: `"${t}" इस पाठ की एक महत्त्वपूर्ण अवधारणा है। इसे समझने से पाठ के मुख्य विचारों को सही ढंग से जानने और लागू करने में सहायता मिलती है।`,
+        keywords: t.split(/\s+/).filter((w) => w.length > 2).slice(0, 4),
+      })
+    }
+    return qs
+  }
 
   for (let i = 0; i < ASSESSMENT_MCQ_COUNT; i++) {
     const nId = nodeIds[i % nodeIds.length]
@@ -99,15 +132,23 @@ function languageNote(subjectName: string): string {
     : ''
 }
 
-function hindiLiteratureGuidance(chapterTitle: string): string {
+const LIT_KG_PREFIXES = ['hindi.gadya.', 'hindi.padya.', 'hindi.sahitya_vishleshan.', 'hindi.kavya_bodh.']
+
+function isHindiLiteratureChapter(chapterTitle: string, nodeIds: string[]): boolean {
+  if (nodeIds.some((id) => LIT_KG_PREFIXES.some((p) => id.startsWith(p)))) return true
   const t = chapterTitle.toLowerCase()
-  const isLit = t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
+  return t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
     t.includes('वितान') || t.includes('वसंत') || t.includes('रिमझिम') ||
     t.includes('कहानी') || t.includes('कविता') || t.includes('पद्य') ||
     t.includes('गद्य') || t.includes('निबंध') || t.includes('रामकथा') ||
     t.includes('महाभारत') || t.includes('भारत की खोज') || t.includes('परिचय')
-  if (!isLit) return ''
-  return `This is a Hindi LITERATURE chapter. Include questions on:
+}
+
+function hindiLiteratureGuidance(chapterTitle: string, nodeIds: string[]): string {
+  if (!isHindiLiteratureChapter(chapterTitle, nodeIds)) return ''
+  const isPoetry = nodeIds.some((id) => id.startsWith('hindi.padya.') || id.startsWith('hindi.kavya_bodh.'))
+  const poetryExtra = isPoetry ? '\n- सप्रसंग व्याख्या (contextual explanation of a quoted verse — highest-weight question type)' : ''
+  return `This is a Hindi LITERATURE chapter. Include questions on:${poetryExtra}
 - विषय-वस्तु (central theme/idea of the text)
 - पात्र-चित्रण (character description/analysis) if the text has characters
 - भाव-सौंदर्य (emotional/poetic meaning) for poetry passages
@@ -129,7 +170,7 @@ Topics (use these node IDs):
 ${topicLines}
 
 ${gradeGuidance(grade)}
-${hindiLiteratureGuidance(title)}
+${hindiLiteratureGuidance(title, nodeIds)}
 This is a formal assessment. Questions must be comprehensive and cover the chapter thoroughly.
 
 Create EXACTLY ${ASSESSMENT_TOTAL} questions as a JSON array:
@@ -171,5 +212,5 @@ export async function generateChapterAssessment(
     if (valid.length >= Math.floor(ASSESSMENT_TOTAL * 0.7)) return valid
   }
 
-  return fallbackAssessment(chapter, nodeIds, topics)
+  return fallbackAssessment(chapter, nodeIds, topics, subjectName)
 }

@@ -32,9 +32,21 @@ const LANGUAGE = 'en'
 
 // ── Fallbacks (instant, KG-derived) ──────────────────────────────────────────
 
-function fallbackQuick(chapter: Chapter): QuickRevisionNotes {
+function fallbackQuick(chapter: Chapter, subjectName?: string): QuickRevisionNotes {
   const title = chapterDisplayTitle(chapter.title)
   const topics = getNodesForChapter(chapter).map((n) => n.title)
+  if (subjectName === 'Hindi') {
+    return {
+      type: 'quick',
+      summary: topics.length > 0
+        ? `"${title}" पाठ में ${topics.join(', ')} का अध्ययन किया जाता है। प्रत्येक विषय को ध्यान से पढ़ें और स्मरण प्रश्नों का अभ्यास करें।`
+        : `"${title}" पाठ के मुख्य विचारों को पुनः पढ़ें और अभ्यास प्रश्न हल करें।`,
+      keyConcepts: topics.slice(0, 6),
+      importantTerms: topics.slice(0, 4).map((t) => ({ term: t, definition: `"${title}" पाठ की प्रमुख अवधारणा।` })),
+      commonMistakes: ['बिना सोचे-समझे उत्तर लिखना', 'पिछले पाठों को दोबारा न पढ़ना'],
+      recallQuestions: topics.slice(0, 3).map((t) => ({ question: `"${t}" से आप क्या समझते हैं?`, answer: `${t} से संबंधित पाठ को दोबारा पढ़ें।` })),
+    }
+  }
   return {
     type: 'quick',
     summary: topics.length > 0
@@ -47,9 +59,18 @@ function fallbackQuick(chapter: Chapter): QuickRevisionNotes {
   }
 }
 
-function fallbackExam(chapter: Chapter): ExamRevisionNotes {
+function fallbackExam(chapter: Chapter, subjectName?: string): ExamRevisionNotes {
   const title = chapterDisplayTitle(chapter.title)
   const topics = getNodesForChapter(chapter).map((n) => n.title)
+  if (subjectName === 'Hindi') {
+    return {
+      type: 'exam',
+      highWeightTopics: topics.slice(0, 5),
+      likelyMistakes: ['प्रश्न को ध्यान से न पढ़ना', 'उत्तर में उदाहरण न देना'],
+      definitions: topics.slice(0, 4).map((t) => ({ term: t, definition: `"${title}" की प्रमुख अवधारणा।` })),
+      fastRevisionPoints: topics.slice(0, 6).map((t) => `पुनरावृत्ति: ${t}`),
+    }
+  }
   return {
     type: 'exam',
     highWeightTopics: topics.slice(0, 5),
@@ -67,10 +88,10 @@ function fallbackFormula(chapter: Chapter): FormulaSheetNotes {
   }
 }
 
-function fallbackFor(type: RevisionNoteType, chapter: Chapter): RevisionNotes {
-  if (type === 'exam') return fallbackExam(chapter)
+function fallbackFor(type: RevisionNoteType, chapter: Chapter, subjectName?: string): RevisionNotes {
+  if (type === 'exam') return fallbackExam(chapter, subjectName)
   if (type === 'formula') return fallbackFormula(chapter)
-  return fallbackQuick(chapter)
+  return fallbackQuick(chapter, subjectName)
 }
 
 // ── Prompts ──────────────────────────────────────────────────────────────────
@@ -81,19 +102,28 @@ function languageNote(subjectName: string): string {
     : ''
 }
 
-function hindiLiteratureRevisionNote(chapterTitle: string, type: RevisionNoteType): string {
+const LIT_KG_PREFIXES = ['hindi.gadya.', 'hindi.padya.', 'hindi.sahitya_vishleshan.', 'hindi.kavya_bodh.']
+
+function isHindiLiteratureChapter(chapterTitle: string, kgNodeIds: string[]): boolean {
+  if (kgNodeIds.some((id) => LIT_KG_PREFIXES.some((p) => id.startsWith(p)))) return true
   const t = chapterTitle.toLowerCase()
-  const isLit = t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
+  return t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
     t.includes('वितान') || t.includes('वसंत') || t.includes('रिमझिम') ||
     t.includes('कहानी') || t.includes('कविता') || t.includes('पद्य') ||
     t.includes('गद्य') || t.includes('रामकथा') || t.includes('महाभारत') ||
     t.includes('भारत की खोज') || t.includes('परिचय')
-  if (!isLit) return ''
+}
+
+function hindiLiteratureRevisionNote(chapterTitle: string, type: RevisionNoteType, kgNodeIds: string[]): string {
+  if (!isHindiLiteratureChapter(chapterTitle, kgNodeIds)) return ''
+  const isPoetry = kgNodeIds.some((id) => id.startsWith('hindi.padya.') || id.startsWith('hindi.kavya_bodh.'))
   if (type === 'quick') {
-    return 'For this literature chapter, "keyConcepts" should list key themes/characters/ideas from the text. "importantTerms" should include key literary terms or difficult words with meanings. "recallQuestions" should test comprehension and theme understanding.\n'
+    const poetryExtra = isPoetry ? ' For poetry chapters, "recallQuestions" should include one सप्रसंग व्याख्या question asking to explain a quoted verse in context.' : ''
+    return `For this literature chapter, "keyConcepts" should list key themes/characters/ideas from the text. "importantTerms" should include key literary terms or difficult words with meanings. "recallQuestions" should test comprehension and theme understanding.${poetryExtra}\n`
   }
   if (type === 'exam') {
-    return 'For this literature chapter, "highWeightTopics" should list: पात्र-चित्रण, विषय-वस्तु, भाव/शिल्प-सौंदर्य, गद्यांश/पद्यांश से प्रश्न, लेखक/कवि परिचय. "definitions" should include key literary terms. "fastRevisionPoints" should be crucial exam-ready points about themes, characters and style.\n'
+    const poetryExtra = isPoetry ? ', सप्रसंग व्याख्या (contextual explanation of quoted verse — highest-weight question type)' : ''
+    return `For this literature chapter, "highWeightTopics" should list: पात्र-चित्रण, विषय-वस्तु, भाव/शिल्प-सौंदर्य, गद्यांश/पद्यांश से प्रश्न${poetryExtra}, लेखक/कवि परिचय. "definitions" should include key literary terms. "fastRevisionPoints" should be crucial exam-ready points about themes, characters and style.\n`
   }
   return ''
 }
@@ -107,7 +137,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
   if (type === 'quick') {
     return [
       languageNote(subjectName),
-      hindiLiteratureRevisionNote(title, 'quick'),
+      hindiLiteratureRevisionNote(title, 'quick', chapter.kgNodeIds),
       `Create a CONCISE Quick Revision sheet for a ${ctx}`,
       'Keep it tight — equivalent to 1-2 pages. No essays.',
       'Return ONLY this JSON:',
@@ -123,7 +153,7 @@ function buildPrompt(type: RevisionNoteType, board: string, subjectName: string,
   if (type === 'exam') {
     return [
       languageNote(subjectName),
-      hindiLiteratureRevisionNote(title, 'exam'),
+      hindiLiteratureRevisionNote(title, 'exam', chapter.kgNodeIds),
       `Create a CONCISE Exam Revision sheet for a ${ctx}`,
       'Focus on high-yield, exam-relevant material only. Be brief.',
       'Return ONLY this JSON:',
@@ -163,14 +193,14 @@ function termArr(v: unknown, max: number): TermDefinition[] {
     .slice(0, max)
 }
 
-function normalize(type: RevisionNoteType, data: unknown, chapter: Chapter): RevisionNotes {
-  if (!data || typeof data !== 'object') return fallbackFor(type, chapter)
+function normalize(type: RevisionNoteType, data: unknown, chapter: Chapter, subjectName?: string): RevisionNotes {
+  if (!data || typeof data !== 'object') return fallbackFor(type, chapter, subjectName)
   const d = data as Record<string, unknown>
 
   if (type === 'quick') {
     const summary = String(d.summary ?? '').trim()
     const keyConcepts = strArr(d.keyConcepts, 6)
-    if (!summary || keyConcepts.length === 0) return fallbackQuick(chapter)
+    if (!summary || keyConcepts.length === 0) return fallbackQuick(chapter, subjectName)
     return {
       type: 'quick',
       summary,
@@ -187,7 +217,7 @@ function normalize(type: RevisionNoteType, data: unknown, chapter: Chapter): Rev
 
   if (type === 'exam') {
     const highWeightTopics = strArr(d.highWeightTopics, 5)
-    if (highWeightTopics.length === 0) return fallbackExam(chapter)
+    if (highWeightTopics.length === 0) return fallbackExam(chapter, subjectName)
     return {
       type: 'exam',
       highWeightTopics,
@@ -235,7 +265,7 @@ export async function getRevisionNotes(
   }
 
   const generated = await generateJSON(buildPrompt(type, board, subjectName, grade, chapter), 1200).catch(() => null)
-  const notes = normalize(type, generated, chapter)
+  const notes = normalize(type, generated, chapter, subjectName)
 
   await prisma.revisionNotesCache.create({
     data: {

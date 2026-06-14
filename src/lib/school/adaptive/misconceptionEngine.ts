@@ -301,6 +301,42 @@ const RULES: MisconceptionRule[] = [
       'Give two sample answers — one literal, one interpretive — and ask student to identify which is the better "भाव-सौंदर्य" answer.',
     ],
   },
+  {
+    type: 'hindi_kaarak',
+    label: 'कारक-विभक्ति की त्रुटि',
+    description: 'Student uses the wrong case marker (विभक्ति/परसर्ग) — e.g. writing "राम को जाता है" instead of "राम जाता है", or confusing ने, को, से, के लिए in different contexts.',
+    primaryPatterns: ['hindi.vyakaran.kaarak', 'hindi.vyakaran.vakya_shuddhi', 'hindi.vyakaran.vakya_bhed'],
+    remediationSteps: [
+      'Learn the 8 कारक with their परसर्ग: कर्ता (ने), कर्म (को), करण (से/द्वारा), संप्रदान (के लिए), अपादान (से), संबंध (का/के/की), अधिकरण (में/पर), संबोधन (हे/अरे).',
+      'Key rule: कर्ता "ने" is only used with सकर्मक verbs in past tense — "राम ने रोटी खाई" (correct), "राम ने सोया" (incorrect — अकर्मक verb).',
+      'Practise by rewriting 5 sentences replacing each विभक्ति one at a time and checking if meaning changes correctly.',
+      'For संबंध कारक, use the gender/number of the noun that follows: उसका भाई, उसकी बहन, उसके बच्चे.',
+    ],
+  },
+  {
+    type: 'hindi_lekhan_praaroop',
+    label: 'पत्र/लेखन-प्रारूप की त्रुटि',
+    description: 'Student omits or incorrectly places required format elements in formal/informal letter writing — e.g. missing प्रेषक का पता, दिनांक, विषय, संबोधन, or the closing (भवदीय/आपका).',
+    primaryPatterns: ['hindi.lekhan.patra_oupcharik', 'hindi.lekhan.patra_anoupcharik', 'hindi.lekhan.sampadak_patra'],
+    remediationSteps: [
+      'Memorise the 7-part formal letter format: (1) प्रेषक का पता (2) दिनांक (3) प्राप्तकर्ता का पद/पता (4) विषय (5) संबोधन — महोदय/महोदया (6) मुख्य भाग (7) समाप्ति — भवदीय + हस्ताक्षर.',
+      'For informal letters: (1) स्थान + दिनांक (2) संबोधन — प्रिय/आदरणीय (3) मुख्य भाग (4) समाप्ति — आपका/तुम्हारा + नाम.',
+      'Common error: writing "सेवा में" for informal letters — this is only for formal/official letters.',
+      'Always write "विषय:" on a separate line in formal letters; it is optional and not standard format for informal letters.',
+    ],
+  },
+  {
+    type: 'hindi_tatsam_tadbhav',
+    label: 'तत्सम–तद्भव और देशज–विदेशी शब्दों में भ्रम',
+    description: 'Student misclassifies word origins — confusing तत्सम (Sanskrit-origin, unchanged) with तद्भव (Sanskrit-derived but changed), or fails to identify देशज/विदेशी शब्द.',
+    primaryPatterns: ['hindi.shabdavali.tatsam_tadbhav', 'hindi.shabdavali.deshaj_videshi', 'hindi.shabdavali.shabd_nirman'],
+    remediationSteps: [
+      'तत्सम rule: same spelling as Sanskrit original — कर्म, धर्म, अग्नि, कार्य. तद्भव rule: changed form — काम (< कर्म), धरम (< धर्म), आग (< अग्नि), काज (< कार्य).',
+      'Test: if the word looks "classical" and can appear in Sanskrit directly, it is तत्सम. If it sounds colloquial/changed, it is तद्भव.',
+      'देशज शब्द are native words with no Sanskrit root — e.g. लोटा, थैला, पगड़ी. विदेशी शब्द are borrowed — Arabic (किताब, औरत), Persian (बाजार, दुकान), English (स्कूल, बस).',
+      'Make four-column flashcards: तत्सम | तद्भव | देशज | विदेशी — and practise sorting 10 new words each day.',
+    ],
+  },
 ]
 
 // ── Signal lookback ───────────────────────────────────────────────────────────

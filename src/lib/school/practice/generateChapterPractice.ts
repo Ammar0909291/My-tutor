@@ -13,8 +13,45 @@ function gradeGuidance(grade: number): string {
   return 'Higher difficulty. Include analysis and multi-step reasoning appropriate for Class 11-12.'
 }
 
-function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string): PracticeQuestion[] {
+function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subjectName?: string): PracticeQuestion[] {
   const title = chapterDisplayTitle(chapter.title)
+  if (subjectName === 'Hindi') {
+    return [
+      {
+        id: 'q1', type: 'mcq', nodeId,
+        question: `"${title}" पाठ का मुख्य विषय क्या है?`,
+        options: [topic, 'असंबंधित विषय', 'किसी अन्य विषय की बात', 'इनमें से कोई नहीं'],
+        correctIndex: 0,
+        explanation: `इस पाठ का मुख्य विषय ${topic} है।`,
+      },
+      {
+        id: 'q2', type: 'mcq', nodeId,
+        question: `"${title}" पाठ से क्या सीखने को मिलता है?`,
+        options: [topic, 'गणित के सूत्र', 'विज्ञान के नियम', 'इतिहास की घटनाएँ'],
+        correctIndex: 0,
+        explanation: `इस पाठ में ${topic} का अध्ययन किया जाता है।`,
+      },
+      {
+        id: 'q3', type: 'mcq', nodeId,
+        question: `"${title}" पाठ से संबंधित कौन-सा विकल्प सही है?`,
+        options: [`यह ${topic} से संबंधित है`, 'यह पाठ्यक्रम का हिस्सा नहीं है', 'यह केवल उच्च कक्षाओं के लिए है', 'इनमें से कोई नहीं'],
+        correctIndex: 0,
+        explanation: `"${title}" पाठ ${topic} की समझ विकसित करता है।`,
+      },
+      {
+        id: 'q4', type: 'true_false', nodeId,
+        question: `सत्य या असत्य: "${title}" इस पाठ्यक्रम का एक महत्त्वपूर्ण पाठ है।`,
+        correct: true,
+        explanation: 'हाँ, यह पाठ पाठ्यक्रम का अभिन्न अंग है।',
+      },
+      {
+        id: 'q5', type: 'short_answer', nodeId,
+        question: `"${title}" पाठ के बारे में 2-3 वाक्यों में अपने शब्दों में लिखिए।`,
+        sampleAnswer: `"${title}" पाठ में ${topic} का अध्ययन किया जाता है। इस पाठ से संबंधित मुख्य विचारों और अवधारणाओं को समझना आगे की पढ़ाई के लिए आवश्यक है।`,
+        keywords: topic.split(/\s+/).filter((w) => w.length > 2).slice(0, 4),
+      },
+    ]
+  }
   return [
     {
       id: 'q1', type: 'mcq', nodeId,
@@ -58,15 +95,25 @@ function languageNote(subjectName: string): string {
     : ''
 }
 
-function hindiLiteratureGuidance(chapterTitle: string): string {
+const LIT_KG_PREFIXES = ['hindi.gadya.', 'hindi.padya.', 'hindi.sahitya_vishleshan.', 'hindi.kavya_bodh.']
+
+function isHindiLiteratureChapter(chapterTitle: string, nodeIds: string[]): boolean {
+  // Primary: check KG node IDs — reliable and covers all chapter types
+  if (nodeIds.some((id) => LIT_KG_PREFIXES.some((p) => id.startsWith(p)))) return true
+  // Fallback: title keyword check for edge cases
   const t = chapterTitle.toLowerCase()
-  const isLit = t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
+  return t.includes('क्षितिज') || t.includes('आरोह') || t.includes('कृतिका') ||
     t.includes('वितान') || t.includes('वसंत') || t.includes('रिमझिम') ||
     t.includes('कहानी') || t.includes('कविता') || t.includes('पद्य') ||
     t.includes('गद्य') || t.includes('निबंध') || t.includes('रामकथा') ||
     t.includes('महाभारत') || t.includes('भारत की खोज') || t.includes('परिचय')
-  if (!isLit) return ''
-  return `This is a Hindi LITERATURE chapter. Mix question types: comprehension (बोध-प्रश्न), character-based (पात्र-चित्रण), theme-based (विषय-वस्तु), and vocabulary (शब्दार्थ) questions drawn from the text.\n`
+}
+
+function hindiLiteratureGuidance(chapterTitle: string, nodeIds: string[]): string {
+  if (!isHindiLiteratureChapter(chapterTitle, nodeIds)) return ''
+  const isPoetry = nodeIds.some((id) => id.startsWith('hindi.padya.') || id.startsWith('hindi.kavya_bodh.'))
+  const poetryExtra = isPoetry ? ' For poetry: include सप्रसंग व्याख्या (contextual explanation of a quoted verse).' : ''
+  return `This is a Hindi LITERATURE chapter. Mix question types: comprehension (बोध-प्रश्न), character-based (पात्र-चित्रण), theme-based (विषय-वस्तु), vocabulary (शब्दार्थ), and passage-based questions drawn from the text.${poetryExtra}\n`
 }
 
 function buildPrompt(
@@ -87,7 +134,7 @@ Topics covered (use these node IDs when assigning nodeId):
 ${topicLines}
 
 ${gradeGuidance(grade)}
-${hindiLiteratureGuidance(title)}
+${hindiLiteratureGuidance(title, nodeIds)}
 
 Create EXACTLY 5 questions as a JSON array:
 - Questions q1, q2, q3: type "mcq" (4 options, one correct)
@@ -167,5 +214,5 @@ export async function generateChapterPractice(
     if (valid.length >= 3) return valid
   }
 
-  return fallbackQuestions(chapter, nodeIds[0], topics[0])
+  return fallbackQuestions(chapter, nodeIds[0], topics[0], subjectName)
 }
