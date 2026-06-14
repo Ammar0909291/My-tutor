@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { randomBytes } from 'crypto'
 import { prisma } from '@/lib/db/prisma'
 import { sendPasswordResetEmail } from '@/lib/email'
+import { checkRateLimit, rateLimitResponse, requestIp } from '@/lib/rateLimit'
 
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 const EXPIRY_MS = 60 * 60 * 1000 // 1 hour
@@ -14,6 +15,15 @@ export async function POST(req: NextRequest) {
     }
 
     const normalized = email.toLowerCase().trim()
+
+    // DEF-EJ-12: throttle by IP and by target email to block enumeration and
+    // inbox-flooding. 5/hour per IP, 3/hour per email address.
+    const ip = requestIp(req)
+    const [byIp, byEmail] = await Promise.all([
+      checkRateLimit(`rl:forgot:ip:${ip}`, 5, 3600),
+      checkRateLimit(`rl:forgot:email:${normalized}`, 3, 3600),
+    ])
+    if (!byIp.allowed || !byEmail.allowed) return rateLimitResponse()
 
     // Always return success to avoid leaking whether email exists
     const user = await prisma.user.findUnique({ where: { email: normalized } })

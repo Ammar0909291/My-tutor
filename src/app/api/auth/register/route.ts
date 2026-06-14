@@ -2,15 +2,22 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
+import { checkRateLimit, rateLimitResponse, requestIp } from "@/lib/rateLimit";
 
 const registerSchema = z.object({
   name: z.string().min(2).max(80),
   email: z.string().email(),
-  password: z.string().min(8).max(100),
+  // DEF-EJ-01: cap at 72 — bcrypt silently truncates beyond 72 bytes.
+  password: z.string().min(8).max(72),
 });
 
 export async function POST(req: Request) {
   try {
+    // DEF-EJ-10: throttle signups per IP (10/hour) to curb automated abuse.
+    const ip = requestIp(req);
+    const { allowed } = await checkRateLimit(`rl:register:ip:${ip}`, 10, 3600);
+    if (!allowed) return rateLimitResponse();
+
     const body = await req.json();
     const { name, email, password } = registerSchema.parse(body);
 

@@ -251,7 +251,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Copy
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800) }).catch(() => {})
+    navigator.clipboard.writeText(code)
+      .then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800) })
+      .catch((err) => { console.warn('[LessonScreen] clipboard copy failed', err) })
   }, [code])
 
   // Monaco theme

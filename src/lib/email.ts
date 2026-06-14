@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { reportError, recordFailure, maskEmail } from '@/lib/monitoring'
 
 function makeTransport() {
   return nodemailer.createTransport({
@@ -25,6 +26,10 @@ export async function sendPasswordResetEmail(to: string, token: string): Promise
   if (!smtpReady()) {
     if (process.env.NODE_ENV !== 'production') {
       console.log('[email] SMTP not configured — RESET LINK (dev only):', resetUrl)
+    } else {
+      // DEF-EJ-11: in production this is an operational failure — surface it.
+      recordFailure('smtp.not_configured')
+      reportError('smtp.password_reset', new Error('SMTP not configured'), { to: maskEmail(to) })
     }
     return { success: false, error: 'SMTP not configured' }
   }
@@ -69,7 +74,9 @@ export async function sendPasswordResetEmail(to: string, token: string): Promise
     })
     return { success: true }
   } catch (err: any) {
-    console.error('[email] Failed to send password reset:', err.message)
-    return { success: false, error: err.message }
+    // DEF-EJ-11: route SMTP send failures to the monitoring hook (with a
+    // masked recipient — never the SMTP credentials) so ops can alert.
+    reportError('smtp.password_reset', err, { to: maskEmail(to) })
+    return { success: false, error: err?.message ?? 'send failed' }
   }
 }

@@ -227,6 +227,9 @@ export const translations = {
     learn_label_recent: 'Последние сообщения',
     settings_save: 'Сохранить',
     settings_saved: 'Сохранено ✓',
+    settings_save_retry: 'Повторить',
+    settings_save_error: 'Не удалось сохранить настройки. Попробуйте ещё раз.',
+    settings_load_error: 'Не удалось загрузить настройки. Обновите страницу.',
     settings_back: '← Панель',
   },
   en: {
@@ -455,6 +458,9 @@ export const translations = {
     learn_label_recent: 'Recent messages',
     settings_save: 'Save',
     settings_saved: 'Saved ✓',
+    settings_save_retry: 'Retry',
+    settings_save_error: 'Could not save settings. Please try again.',
+    settings_load_error: 'Could not load settings. Please refresh the page.',
     settings_back: '← Dashboard',
   },
   hi: {
@@ -683,6 +689,9 @@ export const translations = {
     learn_label_recent: 'Recent messages',
     settings_save: 'सहेजें',
     settings_saved: 'सहेजा गया ✓',
+    settings_save_retry: 'पुनः प्रयास करें',
+    settings_save_error: 'सेटिंग्स सहेजी नहीं जा सकीं। कृपया पुनः प्रयास करें।',
+    settings_load_error: 'सेटिंग्स लोड नहीं हो सकीं। कृपया पेज रिफ्रेश करें।',
     settings_back: '← डैशबोर्ड',
   },
 } as const

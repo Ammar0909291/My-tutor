@@ -71,7 +71,10 @@ export async function POST(req: Request) {
       },
     })
 
-    // Mark free session as used so the user is prompted to subscribe next time
+    // Mark free session as used so the user is prompted to subscribe next time.
+    // DEF-EJ-03: the where clause MUST be scoped to the authenticated user's id
+    // so a request can never flip another account's subscription flag. Covered
+    // by scripts/security-guards.mjs.
     await prisma.subscription.updateMany({
       where: { userId: session.user.id, status: SubscriptionStatus.FREE, freeSessionUsed: false },
       data: { freeSessionUsed: true },

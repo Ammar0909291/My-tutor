@@ -31,21 +31,32 @@ export default function SettingsPage() {
   const [data, setData] = useState<SettingsData | null>(null)
   const [voiceId, setVoiceId] = useState('male')
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('ru')
-  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [loadError, setLoadError] = useState(false)
   const [portalLoading, setPortalLoading] = useState(false)
   const [upgradeLoading, setUpgradeLoading] = useState(false)
 
   useEffect(() => {
     fetch('/api/settings')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
       .then((d: { success?: boolean; data?: SettingsData }) => {
         if (d.success && d.data) {
           setData(d.data)
           setVoiceId(d.data.voiceId)
           setTeachingLang(d.data.teachingLanguage)
+          setLoadError(false)
+        } else {
+          setLoadError(true)
         }
       })
-      .catch(() => {})
+      .catch((err) => {
+        // DEF-EJ-06: no longer swallowed — log + show a visible error.
+        console.error('[settings] failed to load settings', err)
+        setLoadError(true)
+      })
   }, [])
 
   async function handleSave() {
@@ -57,12 +68,18 @@ export default function SettingsPage() {
         body: JSON.stringify({ voiceId, teachingLanguage }),
       })
       const d = await res.json() as { success?: boolean }
-      if (d.success) {
+      if (res.ok && d.success) {
         setLang(teachingLanguage)
         setSaveState('saved')
         setTimeout(() => setSaveState('idle'), 2000)
+      } else {
+        throw new Error(`save failed (HTTP ${res.status})`)
       }
-    } catch { setSaveState('idle') }
+    } catch (err) {
+      // DEF-EJ-06: surface the failure instead of silently resetting.
+      console.error('[settings] failed to save settings', err)
+      setSaveState('error')
+    }
   }
 
   async function handlePortal() {
@@ -183,12 +200,29 @@ export default function SettingsPage() {
           </p>
         </Section>
 
+        {/* DEF-EJ-06: visible load/save error feedback */}
+        {loadError && (
+          <p className="text-sm rounded-xl px-4 py-3" role="alert"
+            style={{ background: 'rgba(248,81,73,0.1)', color: '#F85149', border: '1px solid rgba(248,81,73,0.3)' }}>
+            {t('settings_load_error')}
+          </p>
+        )}
+        {saveState === 'error' && (
+          <p className="text-sm rounded-xl px-4 py-3" role="alert"
+            style={{ background: 'rgba(248,81,73,0.1)', color: '#F85149', border: '1px solid rgba(248,81,73,0.3)' }}>
+            {t('settings_save_error')}
+          </p>
+        )}
+
         {/* Save */}
         <button
           onClick={handleSave}
           disabled={saveState === 'saving'}
           className="btn-primary w-full py-3.5 font-bold disabled:opacity-60">
-          {saveState === 'saved' ? t('settings_saved') : saveState === 'saving' ? '...' : t('settings_save')}
+          {saveState === 'saved' ? t('settings_saved')
+            : saveState === 'saving' ? '...'
+            : saveState === 'error' ? t('settings_save_retry')
+            : t('settings_save')}
         </button>
       </main>
     </div>
