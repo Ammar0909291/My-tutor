@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { StartLessonButton } from '@/components/dashboard/StartLessonButton'
 import { UpgradeButton } from '@/components/dashboard/UpgradeButton'
+import { LearningGrowthPanel } from '@/components/analytics/LearningGrowthPanel'
 
 const SUBJECT_META: Record<string, { icon: string; color: string; bg: string; border: string }> = {
   c:       { icon: '⚙️',  color: '#79C0FF', bg: 'rgba(121,192,255,0.08)',  border: 'rgba(121,192,255,0.2)'  },
@@ -333,6 +334,15 @@ export default async function DashboardPage() {
                   {t(lang, 'dash_motivation_sub')}
                 </p>
               </div>
+            </div>
+
+            {/* Learning Growth — Sprint EG */}
+            <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-base">📊</span>
+                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>Learning Growth</h3>
+              </div>
+              <LearningGrowthPanel />
             </div>
 
           </div>
