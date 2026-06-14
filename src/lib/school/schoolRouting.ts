@@ -104,6 +104,9 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   geography:         { label: 'Geography',         icon: '🗺️', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
   political_science: { label: 'Political Science', icon: '⚖️', color: 'var(--purple)', bg: 'var(--coral-muted)' },
   economics:         { label: 'Economics',         icon: '📈', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
+  // Sprint DX: Commerce stream subjects (Grade 11–12).
+  accountancy:       { label: 'Accountancy',       icon: '🧾', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
+  business_studies:  { label: 'Business Studies',  icon: '💼', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
 }
 
 /**

@@ -16,6 +16,7 @@ export const CBSE_BOARD: EducationBoard = {
     'mathematics', 'science', 'social_science', 'english', 'hindi', 'sanskrit',
     'physics', 'chemistry', 'biology',
     'history', 'geography', 'political_science', 'economics',
+    'accountancy', 'business_studies',
   ],
   grades: [5, 6, 7, 8, 9, 10, 11, 12],
 }

@@ -31,6 +31,8 @@ export type {
 } from './educationTypes'
 
 // Knowledge Graphs
+export { ACCOUNTANCY_KNOWLEDGE_GRAPH, getAccountancyNode, getAccountancyNodesByDomain } from './accountancyKnowledgeGraph'
+export { BUSINESS_STUDIES_KNOWLEDGE_GRAPH, getBusinessStudiesNode, getBusinessStudiesNodesByDomain } from './businessStudiesKnowledgeGraph'
 export { MATH_KNOWLEDGE_GRAPH, getKGNode, getNodesByDomain, getAllPrerequisites } from './mathKnowledgeGraph'
 export { SCIENCE_KNOWLEDGE_GRAPH, getScienceNode } from './scienceKnowledgeGraph'
 export { ENGLISH_KNOWLEDGE_GRAPH, getEnglishNode } from './englishKnowledgeGraph'
@@ -53,6 +55,12 @@ export { CBSE_SOCIAL_SCIENCE_CATALOG, getCBSESocialScienceChapters, getCBSESocia
 export { CBSE_ENGLISH_CATALOG, getCBSEEnglishChapters, getCBSEEnglishChapter } from './cbseEnglishCatalog'
 export { CBSE_HINDI_CATALOG, getCBSEHindiChapters, getCBSEHindiChapter } from './cbseHindiCatalog'
 export { CBSE_SANSKRIT_CATALOG, getCBSESanskritChapters, getCBSESanskritChapter } from './cbseSanskritCatalog'
+
+// Commerce Stream Catalogs (Sprint DX — Grade 11–12)
+export { CBSE_ACCOUNTANCY_CATALOG, getCBSEAccountancyChapters, getCBSEAccountancyChapter } from './cbseAccountancyCatalog'
+export { UP_ACCOUNTANCY_CATALOG, getUPAccountancyChapters, getUPAccountancyChapter } from './upAccountancyCatalog'
+export { CBSE_BUSINESS_STUDIES_CATALOG, getCBSEBusinessStudiesChapters, getCBSEBusinessStudiesChapter } from './cbseBusinessStudiesCatalog'
+export { UP_BUSINESS_STUDIES_CATALOG, getUPBusinessStudiesChapters, getUPBusinessStudiesChapter } from './upBusinessStudiesCatalog'
 
 // Grade 11–12 Stream Subjects (Sprint DC — derived from Science/SST, no new content)
 export {
