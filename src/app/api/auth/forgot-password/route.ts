@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     const result = await sendPasswordResetEmail(normalized, token)
     if (!result.success) {
-      console.error('[forgot-password] email send failed')
+      console.error('[forgot-password] email send failed:', result.error ?? 'unknown')
     }
 
     return safeResponse()

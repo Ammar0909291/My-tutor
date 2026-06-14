@@ -83,8 +83,10 @@ export async function sendPasswordResetEmail(
   if (!smtpReady()) {
     if (process.env.NODE_ENV !== 'production') {
       console.log('[email] SMTP not configured — RESET LINK (dev mode):', resetUrl)
+      return { success: true }
     }
-    return { success: true }
+    console.error('[email] sendPasswordResetEmail: SMTP_HOST / SMTP_USER / SMTP_PASS are not set — email NOT sent')
+    return { success: false, error: 'SMTP not configured' }
   }
 
   try {
@@ -127,11 +129,12 @@ export async function sendPasswordResetEmail(
     })
     return { success: true }
   } catch (err) {
-    console.error('[email] Failed to send reset email:', err instanceof Error ? err.message : 'unknown')
+    const msg = err instanceof Error ? err.message : String(err)
+    console.error('[email] Failed to send reset email:', msg)
     if (process.env.NODE_ENV !== 'production') {
       console.log('[email] Reset link (dev fallback):', resetUrl)
     }
-    return { success: true, error: String(err) }
+    return { success: false, error: msg }
   }
 }
 
