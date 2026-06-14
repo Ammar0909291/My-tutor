@@ -33,6 +33,7 @@ export type {
 // Knowledge Graphs
 export { ACCOUNTANCY_KNOWLEDGE_GRAPH, getAccountancyNode, getAccountancyNodesByDomain } from './accountancyKnowledgeGraph'
 export { BUSINESS_STUDIES_KNOWLEDGE_GRAPH, getBusinessStudiesNode, getBusinessStudiesNodesByDomain } from './businessStudiesKnowledgeGraph'
+export { COMPUTER_SCIENCE_KNOWLEDGE_GRAPH, getCSNode, getCSNodesByDomain } from './computerScienceKnowledgeGraph'
 export { MATH_KNOWLEDGE_GRAPH, getKGNode, getNodesByDomain, getAllPrerequisites } from './mathKnowledgeGraph'
 export { SCIENCE_KNOWLEDGE_GRAPH, getScienceNode } from './scienceKnowledgeGraph'
 export { ENGLISH_KNOWLEDGE_GRAPH, getEnglishNode } from './englishKnowledgeGraph'
@@ -61,6 +62,9 @@ export { CBSE_ACCOUNTANCY_CATALOG, getCBSEAccountancyChapters, getCBSEAccountanc
 export { UP_ACCOUNTANCY_CATALOG, getUPAccountancyChapters, getUPAccountancyChapter } from './upAccountancyCatalog'
 export { CBSE_BUSINESS_STUDIES_CATALOG, getCBSEBusinessStudiesChapters, getCBSEBusinessStudiesChapter } from './cbseBusinessStudiesCatalog'
 export { UP_BUSINESS_STUDIES_CATALOG, getUPBusinessStudiesChapters, getUPBusinessStudiesChapter } from './upBusinessStudiesCatalog'
+// Sprint DY: Computer Science (Grades 9–12)
+export { CBSE_COMPUTER_SCIENCE_CATALOG, getCBSECSChapters, getCBSECSChapter } from './cbseComputerScienceCatalog'
+export { UP_COMPUTER_SCIENCE_CATALOG, getUPCSChapters, getUPCSChapter } from './upComputerScienceCatalog'
 
 // Grade 11–12 Stream Subjects (Sprint DC — derived from Science/SST, no new content)
 export {

@@ -107,6 +107,8 @@ export const SCHOOL_SUBJECT_META: Record<string, { label: string; icon: string; 
   // Sprint DX: Commerce stream subjects (Grade 11–12).
   accountancy:       { label: 'Accountancy',       icon: '🧾', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
   business_studies:  { label: 'Business Studies',  icon: '💼', color: 'var(--coral)',  bg: 'var(--coral-muted)' },
+  // Sprint DY: Computer Science (Grades 9–12).
+  computer_science:  { label: 'Computer Science',  icon: '💻', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
 }
 
 /**

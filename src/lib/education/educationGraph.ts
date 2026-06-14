@@ -7,10 +7,13 @@ import { HINDI_KNOWLEDGE_GRAPH } from './hindiKnowledgeGraph'
 import { SANSKRIT_KNOWLEDGE_GRAPH } from './sanskritKnowledgeGraph'
 import { ACCOUNTANCY_KNOWLEDGE_GRAPH } from './accountancyKnowledgeGraph'
 import { BUSINESS_STUDIES_KNOWLEDGE_GRAPH } from './businessStudiesKnowledgeGraph'
+import { COMPUTER_SCIENCE_KNOWLEDGE_GRAPH } from './computerScienceKnowledgeGraph'
 import { CBSE_ACCOUNTANCY_CATALOG } from './cbseAccountancyCatalog'
 import { UP_ACCOUNTANCY_CATALOG } from './upAccountancyCatalog'
 import { CBSE_BUSINESS_STUDIES_CATALOG } from './cbseBusinessStudiesCatalog'
 import { UP_BUSINESS_STUDIES_CATALOG } from './upBusinessStudiesCatalog'
+import { CBSE_COMPUTER_SCIENCE_CATALOG } from './cbseComputerScienceCatalog'
+import { UP_COMPUTER_SCIENCE_CATALOG } from './upComputerScienceCatalog'
 import { UP_MATH_CATALOG } from './upMathCatalog'
 import { UP_ENGLISH_CATALOG } from './upEnglishCatalog'
 import { UP_HINDI_CATALOG } from './upHindiCatalog'
@@ -39,6 +42,7 @@ export const ALL_KG_NODES: KnowledgeNode[] = [
   ...SANSKRIT_KNOWLEDGE_GRAPH,
   ...ACCOUNTANCY_KNOWLEDGE_GRAPH,
   ...BUSINESS_STUDIES_KNOWLEDGE_GRAPH,
+  ...COMPUTER_SCIENCE_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
@@ -60,6 +64,8 @@ export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_ACCOUNTANCY_CATALOG,
   CBSE_BUSINESS_STUDIES_CATALOG,
   UP_BUSINESS_STUDIES_CATALOG,
+  CBSE_COMPUTER_SCIENCE_CATALOG,
+  UP_COMPUTER_SCIENCE_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */
