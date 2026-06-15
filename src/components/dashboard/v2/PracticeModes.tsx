@@ -1,4 +1,5 @@
 import styles from './dashboard.module.css'
+import { CandyButton, Pill } from '@/components/ui/candy'
 import type { PracticeModeData } from './types'
 
 interface PracticeModesProps {
@@ -15,12 +16,20 @@ export function PracticeModes({ modes }: PracticeModesProps) {
   return (
     <div className={styles.modes}>
       {modes.map((mode) => (
-        <button key={mode.id} type="button" className={`${styles.mode} ${MODE_CLASS[mode.id]}`}>
-          {mode.badge && <div className={styles['mode-badge']}>{mode.badge}</div>}
+        <CandyButton
+          key={mode.id}
+          type="button"
+          className={`${styles.mode} ${MODE_CLASS[mode.id]}`}
+          depth={5}
+          hoverLift={4}
+          activePush={2}
+          activeDepth={3}
+        >
+          {mode.badge && <Pill className={styles['mode-badge']}>{mode.badge}</Pill>}
           <div className={styles['mode-emoji']}>{mode.emoji}</div>
           <div className={styles['mode-name']}>{mode.name}</div>
           <div className={styles['mode-desc']}>{mode.description}</div>
-        </button>
+        </CandyButton>
       ))}
     </div>
   )

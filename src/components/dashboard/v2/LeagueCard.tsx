@@ -1,4 +1,5 @@
 import styles from './dashboard.module.css'
+import { Card } from '@/components/ui/candy'
 import type { LeagueData } from './types'
 
 interface LeagueCardProps {
@@ -7,7 +8,7 @@ interface LeagueCardProps {
 
 export function LeagueCard({ league }: LeagueCardProps) {
   return (
-    <div className={styles['side-card']}>
+    <Card className={styles['side-card']}>
       <div className={styles['league-banner']}>
         <div className={styles['league-icon']}>{league.emoji}</div>
         <div className={styles['league-name']}>{league.name}</div>
@@ -23,6 +24,6 @@ export function LeagueCard({ league }: LeagueCardProps) {
           <div className={styles['rank-xp']}>{entry.xp}</div>
         </div>
       ))}
-    </div>
+    </Card>
   )
 }

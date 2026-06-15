@@ -1,4 +1,5 @@
 import styles from './dashboard.module.css'
+import { Card, ProgressBar } from '@/components/ui/candy'
 import type { DailyQuestData } from './types'
 
 interface DailyQuestsProps {
@@ -7,7 +8,7 @@ interface DailyQuestsProps {
 
 export function DailyQuests({ quests }: DailyQuestsProps) {
   return (
-    <div className={styles['side-card']}>
+    <Card className={styles['side-card']}>
       <div className={styles['side-title']}>
         Daily Quests <a href="#">View all</a>
       </div>
@@ -18,12 +19,13 @@ export function DailyQuests({ quests }: DailyQuestsProps) {
             <div className={`${styles['quest-icon']} ${styles[quest.iconBg]}`}>{quest.icon}</div>
             <div className={styles['quest-body']}>
               <div className={styles['quest-name']}>{quest.name}</div>
-              <div className={styles['quest-bar']}>
-                <div
-                  className={styles['quest-fill']}
-                  style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${quest.gradientFrom}, ${quest.gradientTo})` }}
-                />
-              </div>
+              <ProgressBar
+                percent={pct}
+                height={10}
+                borderRadius={6}
+                fillColor={`linear-gradient(90deg, ${quest.gradientFrom}, ${quest.gradientTo})`}
+                animated={false}
+              />
               <span className={styles['quest-pct']}>
                 {quest.progress} / {quest.target} {quest.unitLabel}
               </span>
@@ -31,6 +33,6 @@ export function DailyQuests({ quests }: DailyQuestsProps) {
           </div>
         )
       })}
-    </div>
+    </Card>
   )
 }

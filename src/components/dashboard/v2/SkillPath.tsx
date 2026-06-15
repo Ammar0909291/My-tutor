@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import styles from './dashboard.module.css'
+import { Card } from '@/components/ui/candy'
 import type { SkillNodeData } from './types'
 
 interface SkillPathProps {
@@ -14,7 +15,7 @@ const STATUS_CLASS: Record<SkillNodeData['status'], string> = {
 
 export function SkillPath({ nodes }: SkillPathProps) {
   return (
-    <div className={styles['path-card']}>
+    <Card className={styles['path-card']}>
       <div className={styles.path}>
         {nodes.map((node, i) => (
           <Fragment key={node.id}>
@@ -27,6 +28,6 @@ export function SkillPath({ nodes }: SkillPathProps) {
           </Fragment>
         ))}
       </div>
-    </div>
+    </Card>
   )
 }

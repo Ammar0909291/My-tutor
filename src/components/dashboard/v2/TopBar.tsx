@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import styles from './dashboard.module.css'
-import { LogoMascotSVG } from './mascots'
-import { useConfetti } from './useConfetti'
+import { EagleMascot, useConfetti } from '@/components/ui/candy'
 import type { TopBarData } from './types'
 
 interface TopBarProps {
@@ -12,7 +11,7 @@ interface TopBarProps {
 
 export function TopBar({ data }: TopBarProps) {
   const [waving, setWaving] = useState(false)
-  const fireConfetti = useConfetti(styles.confetti)
+  const fireConfetti = useConfetti()
 
   function handleMascotClick() {
     setWaving(true)
@@ -27,7 +26,7 @@ export function TopBar({ data }: TopBarProps) {
           onClick={handleMascotClick}
           onAnimationEnd={() => setWaving(false)}
         >
-          <LogoMascotSVG />
+          <EagleMascot variant="logo" />
         </div>
         <div className={styles['logo-text']}>
           My<span>Tutor</span>

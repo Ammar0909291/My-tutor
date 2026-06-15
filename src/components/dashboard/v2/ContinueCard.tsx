@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './dashboard.module.css'
-import { useConfetti } from './useConfetti'
+import { CandyButton, useConfetti } from '@/components/ui/candy'
 import type { ContinueLessonData } from './types'
 
 interface ContinueCardProps {
@@ -9,10 +9,20 @@ interface ContinueCardProps {
 }
 
 export function ContinueCard({ data }: ContinueCardProps) {
-  const fireConfetti = useConfetti(styles.confetti)
+  const fireConfetti = useConfetti()
 
   return (
-    <button type="button" className={styles['continue-card']} onClick={() => fireConfetti()}>
+    <CandyButton
+      type="button"
+      className={styles['continue-card']}
+      depth={6}
+      hoverLift={3}
+      hoverDepth={9}
+      activePush={3}
+      activeDepth={3}
+      shadowColor="var(--candy-green-d)"
+      onClick={() => fireConfetti()}
+    >
       <div className={styles['cc-left']}>
         <div className={styles['cc-icon']}>{data.emoji}</div>
         <div className={styles['cc-text']}>
@@ -24,6 +34,6 @@ export function ContinueCard({ data }: ContinueCardProps) {
         </div>
       </div>
       <div className={styles['cc-play']}>▶</div>
-    </button>
+    </CandyButton>
   )
 }

@@ -1,35 +1,53 @@
 /**
- * Mascot SVGs ported verbatim from design/dashboard-approved.html — do not
- * redesign or simplify these paths.
+ * Eagle mascot SVGs ported verbatim from design/dashboard-approved.html — do
+ * not redesign or simplify these paths. Two distinct illustrations are
+ * available via the `variant` prop:
+ *  - 'logo' — the small 38x38 (viewBox 0 0 100 100) mark used in the top bar.
+ *  - 'hero' — the larger 110x110 (viewBox 0 0 200 200) mark used in banners.
  */
 
-export function LogoMascotSVG() {
-  return (
-    <svg viewBox="0 0 100 100" width="38" height="38">
-      <g transform="translate(50,52)">
-        <path d="M -38 -4 Q -46 8 -38 20 Q -30 18 -26 8 Q -30 -1 -38 -4 Z" fill="#6B4A2B" />
-        <path d="M 38 -4 Q 46 8 38 20 Q 30 18 26 8 Q 30 -1 38 -4 Z" fill="#6B4A2B" />
-        <path d="M 0 6 Q -22 5 -21 26 Q -20 40 0 40 Q 20 40 21 26 Q 22 5 0 6 Z" fill="#7A5230" />
-        <circle cx="0" cy="-12" r="22" fill="#FFFFFF" />
-        <path d="M -22 -12 Q -22 -32 0 -33 Q 22 -32 22 -12 Q 17 -22 0 -22 Q -17 -22 -22 -12 Z" fill="#F0F0F0" />
-        <ellipse cx="-9" cy="-15" rx="7.5" ry="8" fill="#FFFFFF" stroke="#E0E0E0" strokeWidth="0.8" />
-        <ellipse cx="9" cy="-15" rx="7.5" ry="8" fill="#FFFFFF" stroke="#E0E0E0" strokeWidth="0.8" />
-        <circle cx="-8" cy="-14" r="4.3" fill="#3C2A1A" />
-        <circle cx="10" cy="-14" r="4.3" fill="#3C2A1A" />
-        <circle cx="-6.5" cy="-15.5" r="1.5" fill="#FFFFFF" />
-        <circle cx="11.5" cy="-15.5" r="1.5" fill="#FFFFFF" />
-        <path d="M -15 -20 Q -9 -24 -2 -21" stroke="#D4A017" strokeWidth="2" fill="none" strokeLinecap="round" />
-        <path d="M 2 -21 Q 9 -24 15 -20" stroke="#D4A017" strokeWidth="2" fill="none" strokeLinecap="round" />
-        <path d="M -5 -9 Q 0 -10 5 -9 L 3 0 Q 0 4 -3 0 Z" fill="#F5A623" />
-        <path d="M -3 0 Q 0 4 3 0 Q 0 2 -3 0 Z" fill="#D4881A" />
-      </g>
-    </svg>
-  )
+export interface EagleMascotProps {
+  /** Which illustration to render. */
+  variant: 'logo' | 'hero'
+  /**
+   * Rendered width/height in px (the SVG scales uniformly via its
+   * viewBox). Defaults to each variant's natural size: 38 for 'logo',
+   * 110 for 'hero'.
+   */
+  size?: number
+  className?: string
 }
 
-export function HeroMascotSVG() {
+/** Reusable eagle mascot, sized via the `size` prop. */
+export function EagleMascot({ variant, size, className }: EagleMascotProps) {
+  if (variant === 'logo') {
+    const s = size ?? 38
+    return (
+      <svg viewBox="0 0 100 100" width={s} height={s} className={className}>
+        <g transform="translate(50,52)">
+          <path d="M -38 -4 Q -46 8 -38 20 Q -30 18 -26 8 Q -30 -1 -38 -4 Z" fill="#6B4A2B" />
+          <path d="M 38 -4 Q 46 8 38 20 Q 30 18 26 8 Q 30 -1 38 -4 Z" fill="#6B4A2B" />
+          <path d="M 0 6 Q -22 5 -21 26 Q -20 40 0 40 Q 20 40 21 26 Q 22 5 0 6 Z" fill="#7A5230" />
+          <circle cx="0" cy="-12" r="22" fill="#FFFFFF" />
+          <path d="M -22 -12 Q -22 -32 0 -33 Q 22 -32 22 -12 Q 17 -22 0 -22 Q -17 -22 -22 -12 Z" fill="#F0F0F0" />
+          <ellipse cx="-9" cy="-15" rx="7.5" ry="8" fill="#FFFFFF" stroke="#E0E0E0" strokeWidth="0.8" />
+          <ellipse cx="9" cy="-15" rx="7.5" ry="8" fill="#FFFFFF" stroke="#E0E0E0" strokeWidth="0.8" />
+          <circle cx="-8" cy="-14" r="4.3" fill="#3C2A1A" />
+          <circle cx="10" cy="-14" r="4.3" fill="#3C2A1A" />
+          <circle cx="-6.5" cy="-15.5" r="1.5" fill="#FFFFFF" />
+          <circle cx="11.5" cy="-15.5" r="1.5" fill="#FFFFFF" />
+          <path d="M -15 -20 Q -9 -24 -2 -21" stroke="#D4A017" strokeWidth="2" fill="none" strokeLinecap="round" />
+          <path d="M 2 -21 Q 9 -24 15 -20" stroke="#D4A017" strokeWidth="2" fill="none" strokeLinecap="round" />
+          <path d="M -5 -9 Q 0 -10 5 -9 L 3 0 Q 0 4 -3 0 Z" fill="#F5A623" />
+          <path d="M -3 0 Q 0 4 3 0 Q 0 2 -3 0 Z" fill="#D4881A" />
+        </g>
+      </svg>
+    )
+  }
+
+  const s = size ?? 110
   return (
-    <svg viewBox="0 0 200 200" width="110" height="110">
+    <svg viewBox="0 0 200 200" width={s} height={s} className={className}>
       <g transform="translate(100,98)">
         <ellipse cx="0" cy="72" rx="46" ry="8" fill="#000000" opacity="0.12" />
         <path d="M -72 -6 Q -88 14 -72 36 Q -58 33 -48 16 Q -56 1 -72 -6 Z" fill="#6B4A2B" />

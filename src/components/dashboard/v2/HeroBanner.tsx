@@ -1,5 +1,5 @@
 import styles from './dashboard.module.css'
-import { HeroMascotSVG } from './mascots'
+import { EagleMascot } from '@/components/ui/candy'
 import type { HeroBannerData } from './types'
 
 interface HeroBannerProps {
@@ -15,7 +15,7 @@ export function HeroBanner({ data }: HeroBannerProps) {
           <div className={styles['hb-sub']}>{data.subtitle}</div>
         </div>
         <div className={styles['hb-mascot']}>
-          <HeroMascotSVG />
+          <EagleMascot variant="hero" />
         </div>
       </div>
     </div>

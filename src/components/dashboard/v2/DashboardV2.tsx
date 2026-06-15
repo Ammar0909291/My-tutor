@@ -10,7 +10,7 @@ import { PracticeModes } from './PracticeModes'
 import { SkillPath } from './SkillPath'
 import { LeagueCard } from './LeagueCard'
 import { DailyQuests } from './DailyQuests'
-import { useConfetti } from './useConfetti'
+import { SectionTitle, useConfetti } from '@/components/ui/candy'
 import type { DashboardV2Data } from './types'
 
 interface DashboardV2Props {
@@ -18,7 +18,7 @@ interface DashboardV2Props {
 }
 
 export function DashboardV2({ data }: DashboardV2Props) {
-  const fireConfetti = useConfetti(styles.confetti)
+  const fireConfetti = useConfetti()
 
   useEffect(() => {
     const timer = setTimeout(fireConfetti, 300)
@@ -34,13 +34,13 @@ export function DashboardV2({ data }: DashboardV2Props) {
           <HeroBanner data={data.hero} />
           <DailyGoalCard data={data.dailyGoal} />
 
-          <div className={styles['sec-title']}>⚡ Jump back in</div>
+          <SectionTitle>⚡ Jump back in</SectionTitle>
           <ContinueCard data={data.continueLesson} />
 
-          <div className={styles['sec-title']}>🎮 Practice modes</div>
+          <SectionTitle>🎮 Practice modes</SectionTitle>
           <PracticeModes modes={data.practiceModes} />
 
-          <div className={styles['sec-title']}>🗺️ Your path</div>
+          <SectionTitle>🗺️ Your path</SectionTitle>
           <SkillPath nodes={data.skillPath} />
         </div>
 
