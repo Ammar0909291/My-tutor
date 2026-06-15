@@ -1,3 +1,5 @@
+import { Card, EagleMascot } from '@/components/ui/candy'
+
 interface Props {
   certificate: {
     code: string
@@ -13,18 +15,19 @@ interface Props {
 export default function CertificateView({ certificate }: Props) {
   if (!certificate) {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-2xl border p-8 text-center">
-        <p className="text-muted-foreground">Certificate not found.</p>
-      </div>
+      <Card className="flex flex-col items-center gap-4 text-center" style={{ padding: 32 }}>
+        <p style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>Certificate not found.</p>
+      </Card>
     )
   }
   return (
-    <div className="flex flex-col items-center gap-4 rounded-2xl border p-8 text-center">
-      <h1 className="text-2xl font-bold">Certificate of Completion</h1>
-      <p className="text-lg">{certificate.roadmapTitle ?? certificate.subjectName}</p>
-      <p className="text-muted-foreground">Awarded to {certificate.recipientName ?? certificate.profileName}</p>
-      {certificate.outcome && <p className="text-sm">{certificate.outcome}</p>}
-      <p className="font-mono text-sm text-muted-foreground">{certificate.code}</p>
-    </div>
+    <Card className="flex flex-col items-center gap-4 text-center" style={{ padding: 40 }}>
+      <EagleMascot variant="hero" />
+      <h1 style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, fontSize: 28, color: 'var(--candy-ink)' }}>Certificate of Completion</h1>
+      <p style={{ fontSize: 18, fontWeight: 800, color: 'var(--candy-purple)' }}>{certificate.roadmapTitle ?? certificate.subjectName}</p>
+      <p style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>Awarded to {certificate.recipientName ?? certificate.profileName}</p>
+      {certificate.outcome && <p style={{ fontSize: 14, color: 'var(--candy-ink)', fontWeight: 600 }}>{certificate.outcome}</p>}
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--candy-ink-soft)' }}>{certificate.code}</p>
+    </Card>
   )
 }

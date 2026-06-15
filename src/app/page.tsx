@@ -6,6 +6,7 @@ import { ArrowRight, Check, ChevronDown, LogOut, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme, type Country } from '@/components/Providers'
+import { CandyPage } from '@/components/ui/candy'
 
 const STEPS = ['how1', 'how2', 'how3', 'how4'] as const
 
@@ -54,7 +55,7 @@ export default function HomePage() {
   }
 
   return (
-    <div suppressHydrationWarning className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy suppressHydrationWarning className="overflow-x-hidden">
 
       {/* ── Animated orbs ─────────────────────────────────────────────────── */}
       <div aria-hidden style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
@@ -455,6 +456,6 @@ export default function HomePage() {
         </div>
       </footer>
 
-    </div>
+    </CandyPage>
   )
 }

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
+import { CandyPage } from '@/components/ui/candy'
 import CertificateView from './CertificateView'
 
 /**
@@ -39,10 +40,10 @@ export default async function CertificatePage({ params }: { params: { code: stri
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-base)', padding: '40px 20px' }}>
+    <CandyPage style={{ padding: '40px 20px' }}>
       <div style={{ maxWidth: 720, margin: '0 auto' }}>
         <CertificateView certificate={certificateData} />
       </div>
-    </div>
+    </CandyPage>
   )
 }
