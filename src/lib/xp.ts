@@ -7,6 +7,32 @@ export function currentWeekString(): string {
   return `${now.getFullYear()}-W${String(week).padStart(2, '0')}`
 }
 
+export interface LeagueTier {
+  name: string
+  emoji: string
+  minXP: number
+}
+
+/**
+ * League tiers derived purely from weekly XP thresholds — no new table.
+ * Used by the dashboard "League" widget alongside /api/leaderboard.
+ */
+export const LEAGUE_TIERS: LeagueTier[] = [
+  { name: 'Bronze League', emoji: '🥉', minXP: 0 },
+  { name: 'Silver League', emoji: '🥈', minXP: 100 },
+  { name: 'Gold League', emoji: '🏆', minXP: 300 },
+  { name: 'Sapphire League', emoji: '💎', minXP: 700 },
+  { name: 'Diamond League', emoji: '👑', minXP: 1500 },
+]
+
+export function getLeagueForXP(weeklyXP: number): LeagueTier {
+  let tier = LEAGUE_TIERS[0]
+  for (const t of LEAGUE_TIERS) {
+    if (weeklyXP >= t.minXP) tier = t
+  }
+  return tier
+}
+
 export async function awardXP(userId: string, amount: number): Promise<void> {
   const week = currentWeekString()
   await Promise.all([
