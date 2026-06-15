@@ -15,6 +15,7 @@ import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
+import styles from './LessonScreen.module.css'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -1060,7 +1061,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   if (initError) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--bg-void)' }}>
+      <div className={`${styles.learnCandy} min-h-screen flex items-center justify-center p-6`} style={{ background: 'var(--bg-void)' }}>
         <div className="text-center">
           <div className="text-4xl mb-4 text-red-400">⚠</div>
           <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>{initError}</p>
@@ -1078,7 +1079,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // ── Layout ────────────────────────────────────────────────────────────────
   return (
-    <div className="pb-mobile-nav" style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-void)', color: 'var(--text-primary)', overflow: 'hidden' }}>
+    <div className={`${styles.learnCandy} pb-mobile-nav`} style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-void)', color: 'var(--text-primary)', overflow: 'hidden' }}>
 
       {/* XP Celebration */}
       {xpCelebration && (

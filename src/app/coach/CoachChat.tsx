@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { t as i18n } from '@/lib/i18n'
+import { CandyPage, Card, CandyButton } from '@/components/ui/candy'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -71,15 +72,15 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', flexDirection: 'column' }}>
+    <CandyPage style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+      <div style={{ background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
+        <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', textDecoration: 'none', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
           {i18n(teachingLanguage, 'coach_back')}
         </a>
         <span style={{ fontSize: 20 }}>🎯</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{i18n(teachingLanguage, 'coach_title')}</span>
-        <span style={{ fontSize: 12, color: 'var(--text-secondary)', marginLeft: 4 }}>{subject}</span>
+        <span style={{ fontWeight: 800, color: 'var(--candy-ink)', fontSize: 16, fontFamily: 'var(--font-baloo2)' }}>{i18n(teachingLanguage, 'coach_title')}</span>
+        <span style={{ fontSize: 12, color: 'var(--candy-ink-soft)', marginLeft: 4, fontWeight: 600 }}>{subject}</span>
       </div>
 
       {/* Messages */}
@@ -89,12 +90,13 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
             <div style={{
               maxWidth: '75%',
               padding: '12px 16px',
-              borderRadius: msg.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-              background: msg.role === 'user' ? 'rgba(247,129,102,0.15)' : 'var(--bg-surface)',
-              border: `1px solid ${msg.role === 'user' ? 'rgba(247,129,102,0.3)' : 'var(--border-default)'}`,
-              color: 'var(--text-primary)',
+              borderRadius: msg.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+              background: msg.role === 'user' ? 'var(--candy-purple)' : 'var(--candy-card)',
+              color: msg.role === 'user' ? '#fff' : 'var(--candy-ink)',
+              boxShadow: '0 3px 0 var(--candy-shadow)',
               fontSize: 14,
               lineHeight: 1.6,
+              fontWeight: 600,
               whiteSpace: 'pre-wrap',
             }}>
               {msg.content}
@@ -103,7 +105,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
         ))}
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 16 }}>
-            <div style={{ padding: '12px 16px', borderRadius: '16px 16px 16px 4px', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)', fontSize: 14 }}>
+            <div style={{ padding: '12px 16px', borderRadius: '18px 18px 18px 4px', background: 'var(--candy-card)', boxShadow: '0 3px 0 var(--candy-shadow)', color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>
               {i18n(teachingLanguage, 'coach_thinking')}
             </div>
           </div>
@@ -112,7 +114,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
       </div>
 
       {/* Input */}
-      <div style={{ padding: '16px 20px', borderTop: '1px solid var(--border-default)', background: 'var(--bg-base)', position: 'sticky', bottom: 0 }}>
+      <div style={{ padding: '16px 20px', borderTop: '1px solid var(--candy-shadow)', background: 'var(--candy-bg)', position: 'sticky', bottom: 0 }}>
         <div style={{ maxWidth: 800, margin: '0 auto', display: 'flex', gap: 10 }}>
           <input
             value={input}
@@ -122,32 +124,33 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
             style={{
               flex: 1,
               padding: '12px 16px',
-              borderRadius: 12,
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-default)',
-              color: 'var(--text-primary)',
+              borderRadius: 14,
+              background: 'var(--candy-card)',
+              border: '2px solid var(--candy-shadow)',
+              color: 'var(--candy-ink)',
               fontSize: 14,
+              fontWeight: 600,
               outline: 'none',
             }}
           />
-          <button
+          <CandyButton
             onClick={send}
             disabled={loading || !input.trim()}
+            shadowColor="var(--candy-purple-d)"
             style={{
-              padding: '12px 20px',
-              borderRadius: 12,
-              background: loading ? 'rgba(247,129,102,0.3)' : '#F78166',
+              padding: '12px 22px',
+              borderRadius: 14,
+              background: 'var(--candy-purple)',
               color: '#fff',
-              fontWeight: 700,
-              fontSize: 14,
-              border: 'none',
-              cursor: loading ? 'not-allowed' : 'pointer',
+              fontWeight: 800,
+              fontSize: 16,
+              opacity: loading || !input.trim() ? 0.5 : 1,
             }}
           >
             →
-          </button>
+          </CandyButton>
         </div>
       </div>
-    </div>
+    </CandyPage>
   )
 }
