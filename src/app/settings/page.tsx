@@ -159,7 +159,7 @@ export default function SettingsPage() {
         body: JSON.stringify({ voiceId, teachingLanguage, voiceSpeed }),
       })
       const d = await res.json() as { success?: boolean }
-      if (d.success) {
+      if (res.ok && d.success) {
         setSaveState('saved')
         // Refetch to confirm saved values are reflected in UI
         const fresh = await fetch('/api/settings').then((r) => r.json()) as { success?: boolean; data?: SettingsData }
@@ -171,9 +171,13 @@ export default function SettingsPage() {
         }
         setTimeout(() => setSaveState('idle'), 2000)
       } else {
-        setSaveState('idle')
+        throw new Error(`save failed (HTTP ${res.status})`)
       }
-    } catch { setSaveState('idle') }
+    } catch (err) {
+      // DEF-EJ-06: surface the failure instead of silently resetting.
+      console.error('[settings] failed to save settings', err)
+      setSaveState('error')
+    }
   }
 
   async function handleProfileSave() {
@@ -570,12 +574,27 @@ export default function SettingsPage() {
           )}
         </div>
 
+        {/* DEF-EJ-06: visible load/save error feedback */}
+        {loadError && (
+          <p className="text-sm text-center py-2 px-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.15)', color: '#F85149' }}>
+            {t('settings_load_error')}
+          </p>
+        )}
+        {saveState === 'error' && (
+          <p className="text-sm text-center py-2 px-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.15)', color: '#F85149' }}>
+            {t('settings_save_error')}
+          </p>
+        )}
+
         {/* Save (voice + language) */}
         <button
           onClick={handleSave}
           disabled={saveState === 'saving'}
           className="btn-primary w-full py-3.5 font-bold disabled:opacity-60">
-          {saveState === 'saved' ? t('settings_saved') : saveState === 'saving' ? '...' : t('settings_save')}
+          {saveState === 'saved' ? t('settings_saved')
+            : saveState === 'saving' ? '...'
+            : saveState === 'error' ? t('settings_save_retry')
+            : t('settings_save')}
         </button>
       </main>
     </div>
