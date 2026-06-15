@@ -1,10 +1,12 @@
+import { redirect } from 'next/navigation'
+import { auth } from '@/lib/auth'
 import { DashboardV2 } from '@/components/dashboard/v2/DashboardV2'
-import { MOCK_DASHBOARD_DATA } from '@/components/dashboard/v2/mockData'
+import { getDashboardV2Data } from '@/lib/dashboard/getDashboardV2Data'
 
-/**
- * Phase 1 preview route — presentational only, mock data.
- * Phase 2 will wire this to GET /api/dashboard.
- */
-export default function DashboardV2Page() {
-  return <DashboardV2 data={MOCK_DASHBOARD_DATA} />
+export default async function DashboardV2Page() {
+  const session = await auth()
+  if (!session?.user?.id) redirect('/auth/login')
+
+  const data = await getDashboardV2Data(session.user.id)
+  return <DashboardV2 data={data} />
 }
