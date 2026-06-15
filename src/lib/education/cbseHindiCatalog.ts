@@ -223,9 +223,9 @@ export const CBSE_HINDI_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.hin.10.ch19', order: 19, title: '[क्षितिज] अब कहाँ दूसरे के दुख से दुखी होने वाले — निदा फ़ाज़ली (निबंध)', kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.samaj_darshan'] },
         { id: 'cbse.hin.10.ch20', order: 20, title: '[क्षितिज] कारतूस — हबीब तनवीर (एकांकी)',              kgNodeIds: ['hindi.gadya.natak_ekaanki', 'hindi.sahitya_vishleshan.patra_chitran'] },
         // ── क्षितिज भाग–2 — पद्य (Sprint DG) ──
-        { id: 'cbse.hin.10.ch21', order: 21, title: '[क्षितिज] सूरदास के पद / राम-लक्ष्मण-परशुराम संवाद — तुलसीदास (पद्य)', kgNodeIds: ['hindi.padya.bhaktikaal', 'hindi.kavya_bodh.bhav_saundarya', 'hindi.kavya_bodh.shilpa_saundarya'] },
-        { id: 'cbse.hin.10.ch22', order: 22, title: '[क्षितिज] देव के सवैये / आत्मकथ्य — जयशंकर प्रसाद (पद्य)', kgNodeIds: ['hindi.padya.ritikaal', 'hindi.padya.chhayavad', 'hindi.kavya_bodh.bhav_saundarya'] },
-        { id: 'cbse.hin.10.ch23', order: 23, title: '[क्षितिज] उत्साह और अट नहीं रही — सूर्यकांत त्रिपाठी निराला (पद्य)', kgNodeIds: ['hindi.padya.chhayavad', 'hindi.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.hin.10.ch21', order: 21, title: '[क्षितिज] सूरदास के पद — सूरदास / राम-लक्ष्मण-परशुराम संवाद — तुलसीदास (पद्य)', kgNodeIds: ['hindi.padya.bhaktikaal', 'hindi.kavya_bodh.bhav_saundarya', 'hindi.kavya_bodh.shilpa_saundarya'] },
+        { id: 'cbse.hin.10.ch22', order: 22, title: '[क्षितिज] देव के सवैये — देव / आत्मकथ्य — जयशंकर प्रसाद (पद्य)', kgNodeIds: ['hindi.padya.ritikaal', 'hindi.padya.chhayavad', 'hindi.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.hin.10.ch23', order: 23, title: '[क्षितिज] उत्साह और अट नहीं रही है — सूर्यकांत त्रिपाठी निराला (पद्य)', kgNodeIds: ['hindi.padya.chhayavad', 'hindi.kavya_bodh.bhav_saundarya'] },
         { id: 'cbse.hin.10.ch24', order: 24, title: '[क्षितिज] यह दंतुरित मुसकान / फसल — नागार्जुन / छाया मत छूना — गिरिजाकुमार माथुर (पद्य)', kgNodeIds: ['hindi.padya.pragativad_prayogvad', 'hindi.kavya_bodh.bhav_saundarya'] },
         { id: 'cbse.hin.10.ch25', order: 25, title: '[क्षितिज] कन्यादान — ऋतुराज / संगतकार — मंगलेश डबराल (पद्य)',      kgNodeIds: ['hindi.padya.samakaleen', 'hindi.kavya_bodh.bhav_saundarya'] },
         // ── कृतिका भाग–2 — पूरक पाठ (Sprint DG) ──
