@@ -124,11 +124,12 @@ export const CBSE_HINDI_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.hin.7.ch21', order: 21, title: '[बाल महाभारत] पांडु, कुंती और कौरवों का जन्म (पाठ 1–4)', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.patra_chitran'] },
         { id: 'cbse.hin.7.ch22', order: 22, title: '[बाल महाभारत] लाक्षागृह और पांडवों का वनवास (पाठ 5–8)', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.vishay_vastu'] },
         { id: 'cbse.hin.7.ch23', order: 23, title: '[बाल महाभारत] द्रौपदी-स्वयंवर से कुरुक्षेत्र-युद्ध तक (पाठ 9–15)', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.vishay_vastu'] },
-        // ── वसंत भाग–2 — अतिरिक्त (Sprint EU.1B) ──
-        { id: 'cbse.hin.7.ch24', order: 24, title: '[वसंत] रक्त और हमारा शरीर — यतींद्र मिश्र (निबंध)',      kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.vishay_vastu'] },
+        // ── वसंत भाग–2 — अतिरिक्त (Sprint EU.1B; corrected EU.1D) ──
+        { id: 'cbse.hin.7.ch24', order: 24, title: '[वसंत] रक्त और हमारा शरीर (निबंध)',                        kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.vishay_vastu'] },
         { id: 'cbse.hin.7.ch25', order: 25, title: '[वसंत] कंचा (कहानी)',                                      kgNodeIds: ['hindi.gadya.kahani', 'hindi.sahitya_vishleshan.vishay_vastu'] },
         { id: 'cbse.hin.7.ch26', order: 26, title: '[वसंत] संघर्ष के कारण मैं तुनुकमिज़ाज हो गया: धनराज पिल्लै — नीलम महता (साक्षात्कार)', kgNodeIds: ['hindi.gadya.jeevani_aatmkatha', 'hindi.sahitya_vishleshan.patra_chitran'] },
         { id: 'cbse.hin.7.ch27', order: 27, title: '[वसंत] आश्रम का अनुमानित व्यय — महात्मा गांधी (लेखा-जोखा)', kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.samaj_darshan'] },
+        { id: 'cbse.hin.7.ch28', order: 28, title: '[वसंत] अपूर्व अनुभव (कहानी)',                               kgNodeIds: ['hindi.gadya.kahani', 'hindi.sahitya_vishleshan.vishay_vastu'] },
       ],
     },
 
@@ -165,8 +166,8 @@ export const CBSE_HINDI_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.hin.8.ch23', order: 23, title: '[भारत की खोज] मध्यकाल और आधुनिक भारत (पाठ 6–8)', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.samaj_darshan'] },
         // ── वसंत भाग–3 — अतिरिक्त (Sprint EU.1B) ──
         { id: 'cbse.hin.8.ch24', order: 24, title: '[वसंत] जब सिनेमा ने बोलना सीखा (निबंध)',                kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.vishay_vastu'] },
-        { id: 'cbse.hin.8.ch25', order: 25, title: '[वसंत] पानी की कहानी — रामचंद्र तिवारी (निबंध)',         kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.vishay_vastu'] },
-        { id: 'cbse.hin.8.ch26', order: 26, title: '[वसंत] टोपी — हिमांशु जोशी (कहानी)',                    kgNodeIds: ['hindi.gadya.kahani', 'hindi.sahitya_vishleshan.patra_chitran'] },
+        { id: 'cbse.hin.8.ch25', order: 25, title: '[वसंत] पानी की कहानी (निबंध)',                             kgNodeIds: ['hindi.gadya.nibandh_prabandh', 'hindi.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.hin.8.ch26', order: 26, title: '[वसंत] टोपी (कहानी)',                                    kgNodeIds: ['hindi.gadya.kahani', 'hindi.sahitya_vishleshan.patra_chitran'] },
       ],
     },
 
