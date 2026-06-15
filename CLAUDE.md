@@ -24,6 +24,6 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 ```
 
 ## Constraints
-- Branch for current work: `claude/my-tutor-foundation-KDSUO`.
+- Branch for current work (canonical): `claude/my-tutor-foundation-KDSUO`.
 - Do NOT create PRs unless explicitly asked. Do NOT push to other branches.
 - Do NOT redesign UI, navigation, or touch Hindi/Sanskrit subject architecture.
