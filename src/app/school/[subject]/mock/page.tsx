@@ -5,6 +5,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { MockTestQuiz } from '@/components/school/MockTestQuiz'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function MockTestPage({ params }: { params: { subject: string } }) {
   const session = await auth()
@@ -30,11 +31,13 @@ export default async function MockTestPage({ params }: { params: { subject: stri
   const navigatorAction = await getLearningNavigatorAction(session.user.id, board, grade).catch(() => null)
 
   return (
-    <MockTestQuiz
-      subjectSlug={subjectSlug}
-      subjectLabel={m.label}
-      backHref={`/school/${subjectSlug}`}
-      navigatorAction={navigatorAction}
-    />
+    <CandyPage legacy>
+      <MockTestQuiz
+        subjectSlug={subjectSlug}
+        subjectLabel={m.label}
+        backHref={`/school/${subjectSlug}`}
+        navigatorAction={navigatorAction}
+      />
+    </CandyPage>
   )
 }

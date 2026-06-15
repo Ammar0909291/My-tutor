@@ -7,6 +7,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress, getChapterProgressDetails } from '@/lib/school/schoolProgress'
 import { getChapterContent } from '@/lib/school/chapterContent'
+import { CandyPage } from '@/components/ui/candy'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getChapterNextStep } from '@/lib/school/adaptive/nextBestAction'
 import { chapterDifficultyBadge, buildLearningProfile } from '@/lib/school/adaptive/learningProfile'
@@ -221,7 +222,7 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
   const narrativeStyle = learningNarrative ? (NARRATIVE_STYLE[learningNarrative.trend] ?? NARRATIVE_STYLE.PLATEAU) : null
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="min-h-screen">
       <nav className="sticky top-0 z-50"
         style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
         <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
@@ -594,6 +595,6 @@ export default async function ChapterWorkspacePage({ params }: { params: { subje
           </section>
         )}
       </main>
-    </div>
+    </CandyPage>
   )
 }

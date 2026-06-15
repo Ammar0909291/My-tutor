@@ -8,6 +8,7 @@ import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 import { getLearningNavigatorAction, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
+import { CandyPage } from '@/components/ui/candy'
 
 /**
  * Focus Mode (Sprint BQ) — walks through today's study plan one task at a time.
@@ -45,7 +46,7 @@ export default async function FocusPage({
 
   if (tasks.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-base)' }}>
+      <CandyPage legacy className="flex flex-col">
         <nav
           className="sticky top-0 z-50"
           style={{
@@ -85,7 +86,7 @@ export default async function FocusPage({
             </Link>
           </div>
         </main>
-      </div>
+      </CandyPage>
     )
   }
 
@@ -113,7 +114,7 @@ export default async function FocusPage({
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="min-h-screen">
       <nav
         className="sticky top-0 z-50"
         style={{
@@ -323,6 +324,6 @@ export default async function FocusPage({
           )}
         </div>
       </main>
-    </div>
+    </CandyPage>
   )
 }

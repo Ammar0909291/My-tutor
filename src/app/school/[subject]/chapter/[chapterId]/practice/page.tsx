@@ -5,6 +5,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle } from '@/lib/school/schoolRouting'
 import { PracticeQuiz } from '@/components/school/PracticeQuiz'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function ChapterPracticePage({ params }: { params: { subject: string; chapterId: string } }) {
   const session = await auth()
@@ -30,11 +31,13 @@ export default async function ChapterPracticePage({ params }: { params: { subjec
   const navigatorAction = await getLearningNavigatorAction(session.user.id, board, grade).catch(() => null)
 
   return (
-    <PracticeQuiz
-      subjectSlug={subjectSlug}
-      chapterId={chapter.id}
-      chapterTitle={chapterDisplayTitle(chapter.title)}
-      navigatorAction={navigatorAction}
-    />
+    <CandyPage legacy>
+      <PracticeQuiz
+        subjectSlug={subjectSlug}
+        chapterId={chapter.id}
+        chapterTitle={chapterDisplayTitle(chapter.title)}
+        navigatorAction={navigatorAction}
+      />
+    </CandyPage>
   )
 }

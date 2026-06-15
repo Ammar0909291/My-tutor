@@ -6,6 +6,7 @@ import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle } from '@/lib/s
 import { AssessmentQuiz } from '@/components/school/AssessmentQuiz'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function ChapterAssessmentPage({ params }: { params: { subject: string; chapterId: string } }) {
   const session = await auth()
@@ -36,12 +37,14 @@ export default async function ChapterAssessmentPage({ params }: { params: { subj
   const hasWeakTopics = weakTopics.some((t) => chapter.kgNodeIds.includes(t.nodeId))
 
   return (
-    <AssessmentQuiz
-      subjectSlug={subjectSlug}
-      chapterId={chapter.id}
-      chapterTitle={chapterDisplayTitle(chapter.title)}
-      recommendPractice={hasWeakTopics}
-      navigatorAction={navigatorAction}
-    />
+    <CandyPage legacy>
+      <AssessmentQuiz
+        subjectSlug={subjectSlug}
+        chapterId={chapter.id}
+        chapterTitle={chapterDisplayTitle(chapter.title)}
+        recommendPractice={hasWeakTopics}
+        navigatorAction={navigatorAction}
+      />
+    </CandyPage>
   )
 }

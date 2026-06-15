@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { groupChaptersByUnit, chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
+import { CandyPage } from '@/components/ui/candy'
 
 /**
  * Full chapter list (Sprint BH) — secondary view behind "View all chapters".
@@ -35,7 +36,7 @@ export default async function SchoolChapterListPage({ params }: { params: { subj
   const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="min-h-screen">
       <nav className="sticky top-0 z-50"
         style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
         <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
@@ -102,6 +103,6 @@ export default async function SchoolChapterListPage({ params }: { params: { subj
           </section>
         ))}
       </main>
-    </div>
+    </CandyPage>
   )
 }

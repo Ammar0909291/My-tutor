@@ -8,6 +8,7 @@ import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
+import { CandyPage } from '@/components/ui/candy'
 import { getExamReadinessForSubject } from '@/lib/school/adaptive/examReadiness'
 import { getSubjectRoadmap } from '@/lib/school/roadmap/learningRoadmap'
 import { getLearningNavigatorAction, navigatorTitleForCurrentChapter, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
@@ -71,7 +72,7 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
     : `/school/${subjectSlug}/chapter/${encodeURIComponent(pos.current.id)}`
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="min-h-screen">
       <nav className="sticky top-0 z-50"
         style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
         <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
@@ -282,6 +283,6 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
           </section>
         )}
       </main>
-    </div>
+    </CandyPage>
   )
 }
