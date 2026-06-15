@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { t as i18n } from '@/lib/i18n'
+import { CandyPage, Card, CandyButton, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
 
 interface Question {
   question: string
@@ -25,11 +26,19 @@ export default function QuizClient({ subject, lang }: Props) {
   const [finished, setFinished] = useState(false)
   const [timeLeft, setTimeLeft] = useState(30)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const fireConfetti = useConfetti()
 
   useEffect(() => {
     fetchQuestions()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (finished && questions.length > 0 && score >= Math.ceil(questions.length * 0.6)) {
+      fireConfetti()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finished])
 
   async function fetchQuestions() {
     setLoading(true)
@@ -100,35 +109,35 @@ export default function QuizClient({ subject, lang }: Props) {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
         <div style={{ fontSize: 40 }}>🎮</div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>{i18n(lang, 'quiz_loading')}</p>
-      </div>
+        <p style={{ color: 'var(--candy-ink-soft)', fontSize: 16, fontWeight: 600 }}>{i18n(lang, 'quiz_loading')}</p>
+      </CandyPage>
     )
   }
 
   if (error) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
-        <p style={{ color: '#F78166', fontSize: 16 }}>{error}</p>
-        <button onClick={restart} style={{ padding: '10px 20px', borderRadius: 12, background: '#F78166', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700 }}>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <p style={{ color: 'var(--candy-red)', fontSize: 16, fontWeight: 700 }}>{error}</p>
+        <CandyButton onClick={restart} style={{ padding: '10px 20px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800 }}>
           {i18n(lang, 'quiz_retry')}
-        </button>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{i18n(lang, 'quiz_back')}</a>
-      </div>
+        </CandyButton>
+        <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>{i18n(lang, 'quiz_back')}</a>
+      </CandyPage>
     )
   }
 
   if (finished) {
     const emoji = score === 5 ? '🏆' : score >= 3 ? '💪' : '📚'
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', padding: 40, maxWidth: 400 }}>
           <div style={{ fontSize: 60, marginBottom: 16 }}>{emoji}</div>
-          <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--text-primary)', marginBottom: 8 }}>
+          <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--candy-ink)', marginBottom: 8, fontFamily: 'var(--font-baloo2)' }}>
             {score} / {questions.length} {i18n(lang, 'quiz_finish')}
           </h2>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, fontSize: 15 }}>
+          <p style={{ color: 'var(--candy-ink-soft)', marginBottom: 32, fontSize: 15, fontWeight: 600 }}>
             {score === 5
               ? i18n(lang, 'quiz_perfect')
               : score >= 3
@@ -136,15 +145,15 @@ export default function QuizClient({ subject, lang }: Props) {
               : i18n(lang, 'quiz_retry_msg')}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={restart} style={{ padding: '12px 24px', borderRadius: 12, background: '#F78166', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
+            <CandyButton onClick={restart} style={{ padding: '12px 24px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14 }}>
               {i18n(lang, 'quiz_retry')}
-            </button>
-            <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 12, background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-default)', textDecoration: 'none', fontWeight: 700, fontSize: 14, display: 'inline-block' }}>
+            </CandyButton>
+            <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 14, background: 'var(--candy-card)', color: 'var(--candy-ink)', textDecoration: 'none', fontWeight: 800, fontSize: 14, display: 'inline-block', boxShadow: '0 4px 0 var(--candy-shadow)' }}>
               {i18n(lang, 'quiz_back')}
             </a>
           </div>
         </div>
-      </div>
+      </CandyPage>
     )
   }
 
@@ -152,65 +161,62 @@ export default function QuizClient({ subject, lang }: Props) {
   const timerPct = (timeLeft / 30) * 100
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', flexDirection: 'column' }}>
+    <CandyPage style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14 }}>{i18n(lang, 'quiz_back')}</a>
+      <div style={{ background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
+        <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', textDecoration: 'none', fontSize: 14, fontWeight: 700 }}>{i18n(lang, 'quiz_back')}</a>
         <span style={{ fontSize: 20 }}>🎮</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{i18n(lang, 'quiz_title')}</span>
-        <span style={{ marginLeft: 'auto', color: 'var(--text-secondary)', fontSize: 13 }}>
+        <span style={{ fontWeight: 800, color: 'var(--candy-ink)', fontSize: 16, fontFamily: 'var(--font-baloo2)' }}>{i18n(lang, 'quiz_title')}</span>
+        <span style={{ marginLeft: 'auto', color: 'var(--candy-ink-soft)', fontSize: 13, fontWeight: 600 }}>
           {current + 1} / {questions.length}
         </span>
       </div>
 
       <div style={{ flex: 1, maxWidth: 700, margin: '40px auto', padding: '0 20px', width: '100%' }}>
         {/* Timer bar */}
-        <div style={{ height: 4, borderRadius: 4, background: 'var(--bg-surface)', marginBottom: 32, overflow: 'hidden' }}>
-          <div style={{
-            height: '100%',
-            width: `${timerPct}%`,
-            background: timeLeft <= 10 ? '#F78166' : '#56D364',
-            transition: 'width 1s linear, background 0.3s',
-            borderRadius: 4,
-          }} />
+        <div style={{ marginBottom: 8 }}>
+          <ProgressBar
+            percent={timerPct}
+            height={8}
+            fillColor={timeLeft <= 10 ? 'var(--candy-red)' : 'var(--candy-green)'}
+            animated={false}
+          />
         </div>
-        <div style={{ marginBottom: 8, color: 'var(--text-dim)', fontSize: 12 }}>⏱ {timeLeft}{i18n(lang, 'quiz_seconds_suffix')}</div>
+        <div style={{ marginBottom: 24, color: 'var(--candy-ink-soft)', fontSize: 12, fontWeight: 600 }}>⏱ {timeLeft}{i18n(lang, 'quiz_seconds_suffix')}</div>
 
         {/* Question */}
-        <div style={{ padding: '24px', borderRadius: 20, background: 'var(--bg-surface)', border: '1px solid var(--border-default)', marginBottom: 20 }}>
-          <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.5 }}>{q.question}</p>
-        </div>
+        <Card style={{ padding: '24px', marginBottom: 20 }}>
+          <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--candy-ink)', lineHeight: 1.5 }}>{q.question}</p>
+        </Card>
 
         {/* Options */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {q.options.map((opt, idx) => {
-            let bg = 'var(--bg-surface)'
-            let border = 'var(--border-default)'
-            let color = 'var(--text-primary)'
+            let bg = 'var(--candy-card)'
+            let color = 'var(--candy-ink)'
+            let shadowColor = 'var(--candy-shadow)'
             if (selected !== null) {
-              if (idx === q.correctIndex) { bg = 'rgba(86,211,100,0.15)'; border = '#56D364'; color = '#56D364' }
-              else if (idx === selected) { bg = 'rgba(247,129,102,0.15)'; border = '#F78166'; color = '#F78166' }
+              if (idx === q.correctIndex) { bg = 'rgba(88,204,2,0.16)'; color = '#46A302'; shadowColor = 'rgba(88,204,2,0.3)' }
+              else if (idx === selected) { bg = 'rgba(255,75,75,0.16)'; color = '#FF4B4B'; shadowColor = 'rgba(255,75,75,0.3)' }
             }
             return (
-              <button
+              <CandyButton
                 key={idx}
                 onClick={() => handleSelect(idx)}
                 disabled={selected !== null}
+                shadowColor={shadowColor}
                 style={{
                   padding: '14px 20px',
-                  borderRadius: 14,
+                  borderRadius: 16,
                   background: bg,
-                  border: `1px solid ${border}`,
                   color,
                   textAlign: 'left',
                   fontSize: 14,
-                  cursor: selected !== null ? 'default' : 'pointer',
-                  fontWeight: 500,
-                  transition: 'all 0.2s',
+                  fontWeight: 700,
                 }}
               >
                 {String.fromCharCode(65 + idx)}. {opt}
-              </button>
+              </CandyButton>
             )
           })}
         </div>
@@ -218,15 +224,15 @@ export default function QuizClient({ subject, lang }: Props) {
         {/* Explanation + Next */}
         {selected !== null && (
           <div style={{ marginTop: 20 }}>
-            <div style={{ padding: '16px', borderRadius: 14, background: 'rgba(121,192,255,0.08)', border: '1px solid rgba(121,192,255,0.2)', marginBottom: 16 }}>
-              <p style={{ fontSize: 13, color: '#79C0FF', lineHeight: 1.6 }}>💡 {q.explanation}</p>
-            </div>
-            <button onClick={nextQuestion} style={{ width: '100%', padding: '14px', borderRadius: 14, background: '#F78166', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 15 }}>
+            <Card style={{ padding: '16px', background: 'rgba(59,158,255,0.08)', marginBottom: 16 }}>
+              <p style={{ fontSize: 13, color: 'var(--candy-blue)', lineHeight: 1.6, fontWeight: 600 }}>💡 {q.explanation}</p>
+            </Card>
+            <CandyButton onClick={nextQuestion} style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 15 }}>
               {current + 1 < questions.length ? i18n(lang, 'quiz_next') : i18n(lang, 'quiz_finish')}
-            </button>
+            </CandyButton>
           </div>
         )}
       </div>
-    </div>
+    </CandyPage>
   )
 }

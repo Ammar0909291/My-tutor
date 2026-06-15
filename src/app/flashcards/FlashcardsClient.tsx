@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { getTranslations } from '@/lib/i18n'
+import { CandyPage, Card, CandyButton, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
 
 interface Flashcard {
   id: string
@@ -26,11 +27,11 @@ function StatsBar({ stats, tr }: { stats: Stats; tr: ReturnType<typeof getTransl
   return (
     <div style={{ display: 'flex', gap: 12, width: '100%', maxWidth: 420 }}>
       {items.map((item) => (
-        <div key={item.label} style={{ flex: 1, background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 14, padding: '14px 10px', textAlign: 'center' }}>
+        <Card key={item.label} style={{ flex: 1, padding: '14px 10px', textAlign: 'center' }}>
           <div style={{ fontSize: 20, marginBottom: 4 }}>{item.icon}</div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)' }}>{item.value}</div>
-          <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 2 }}>{item.label}</div>
-        </div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{item.value}</div>
+          <div style={{ fontSize: 11, color: 'var(--candy-ink-soft)', marginTop: 2, fontWeight: 600 }}>{item.label}</div>
+        </Card>
       ))}
     </div>
   )
@@ -39,6 +40,7 @@ function StatsBar({ stats, tr }: { stats: Stats; tr: ReturnType<typeof getTransl
 export default function FlashcardsClient() {
   const { lang } = useLanguage()
   const tr = getTranslations(lang)
+  const fireConfetti = useConfetti()
 
   const [cards, setCards] = useState<Flashcard[]>([])
   const [stats, setStats] = useState<Stats>({ total: 0, due: 0, studiedToday: 0 })
@@ -75,6 +77,7 @@ export default function FlashcardsClient() {
 
     if (current + 1 >= cards.length) {
       setAllDone(true)
+      fireConfetti()
     } else {
       setCurrent((c) => c + 1)
     }
@@ -82,88 +85,83 @@ export default function FlashcardsClient() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: 'var(--text-secondary)' }}>{tr.flashcards_loading}</p>
-      </div>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{tr.flashcards_loading}</p>
+      </CandyPage>
     )
   }
 
   if (stats.total === 0) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, textAlign: 'center', padding: 40 }}>
-        <div style={{ fontSize: 50 }}>🃏</div>
-        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', maxWidth: 420 }}>{tr.flashcards_zero_title}</h2>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, textAlign: 'center', padding: 40 }}>
+        <EagleMascot variant="hero" />
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', maxWidth: 420, fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_zero_title}</h2>
         <StatsBar stats={stats} tr={tr} />
-        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 12, background: '#F78166', color: '#fff', textDecoration: 'none', fontWeight: 700 }}>
+        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
           {tr.flashcards_empty_cta}
         </a>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{tr.flashcards_back_home}</a>
-      </div>
+        <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', fontSize: 13, fontWeight: 600 }}>{tr.flashcards_back_home}</a>
+      </CandyPage>
     )
   }
 
   if (allDone) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, textAlign: 'center', padding: 40 }}>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, textAlign: 'center', padding: 40 }}>
         <div style={{ fontSize: 50 }}>🏆</div>
-        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)' }}>{tr.flashcards_alldone_title}</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>+{done.length * 2} {tr.flashcards_xp_earned}</p>
-        <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 12, background: '#F78166', color: '#fff', textDecoration: 'none', fontWeight: 700 }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_alldone_title}</h2>
+        <p style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>+{done.length * 2} {tr.flashcards_xp_earned}</p>
+        <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-green)', color: '#fff', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-green-d)' }}>
           {tr.flashcards_back_home}
         </a>
-      </div>
+      </CandyPage>
     )
   }
 
   if (cards.length === 0) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, textAlign: 'center', padding: 40 }}>
-        <div style={{ fontSize: 50 }}>🃏</div>
-        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)' }}>{tr.flashcards_empty_title}</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{tr.flashcards_empty_sub}</p>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, textAlign: 'center', padding: 40 }}>
+        <EagleMascot variant="hero" />
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_empty_title}</h2>
+        <p style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>{tr.flashcards_empty_sub}</p>
         <StatsBar stats={stats} tr={tr} />
-        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 12, background: '#F78166', color: '#fff', textDecoration: 'none', fontWeight: 700 }}>
+        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
           {tr.flashcards_empty_cta}
         </a>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{tr.flashcards_back_home}</a>
-      </div>
+        <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', fontSize: 13, fontWeight: 600 }}>{tr.flashcards_back_home}</a>
+      </CandyPage>
     )
   }
 
   const card = cards[current]
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', flexDirection: 'column' }}>
+    <CandyPage style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: 'rgba(13,17,23,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
-        <a href="/dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 14 }}>← {tr.flashcards_back}</a>
+      <div style={{ background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12, position: 'sticky', top: 0, zIndex: 50 }}>
+        <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', textDecoration: 'none', fontSize: 14, fontWeight: 700 }}>← {tr.flashcards_back}</a>
         <span style={{ fontSize: 20 }}>🃏</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 16 }}>{tr.flashcards_title}</span>
-        <span style={{ marginLeft: 'auto', color: 'var(--text-secondary)', fontSize: 13 }}>
+        <span style={{ fontWeight: 800, color: 'var(--candy-ink)', fontSize: 16, fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_title}</span>
+        <span style={{ marginLeft: 'auto', color: 'var(--candy-ink-soft)', fontSize: 13, fontWeight: 600 }}>
           {done.length} / {cards.length} {tr.flashcards_progress_label}
         </span>
       </div>
 
       {/* Progress bar */}
-      <div style={{ height: 3, background: 'var(--bg-surface)' }}>
-        <div style={{ height: '100%', width: `${(done.length / cards.length) * 100}%`, background: '#56D364', transition: 'width 0.3s' }} />
-      </div>
+      <ProgressBar percent={(done.length / cards.length) * 100} height={6} borderRadius={0} fillColor="var(--candy-green)" animated={false} />
 
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
         <div style={{ maxWidth: 560, width: '100%' }}>
           {/* Topic */}
           <div style={{ textAlign: 'center', marginBottom: 12 }}>
-            <span style={{ fontSize: 11, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{card.topic}</span>
+            <span style={{ fontSize: 11, color: 'var(--candy-ink-soft)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>{card.topic}</span>
           </div>
 
           {/* Card */}
-          <div
+          <Card
             onClick={() => !flipped && setFlipped(true)}
             style={{
               padding: 32,
-              borderRadius: 24,
-              background: 'var(--bg-surface)',
-              border: `1px solid ${flipped ? 'rgba(121,192,255,0.3)' : 'var(--border-default)'}`,
               cursor: flipped ? 'default' : 'pointer',
               minHeight: 200,
               display: 'flex',
@@ -171,54 +169,57 @@ export default function FlashcardsClient() {
               alignItems: 'center',
               justifyContent: 'center',
               textAlign: 'center',
-              transition: 'border-color 0.3s',
               marginBottom: 24,
             }}
           >
             {!flipped ? (
               <>
-                <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.5, marginBottom: 20 }}>
+                <p style={{ fontSize: 18, fontWeight: 800, color: 'var(--candy-ink)', lineHeight: 1.5, marginBottom: 20 }}>
                   {card.question}
                 </p>
-                <button
+                <CandyButton
                   onClick={() => setFlipped(true)}
-                  style={{ padding: '10px 24px', borderRadius: 10, background: 'rgba(121,192,255,0.1)', border: '1px solid rgba(121,192,255,0.3)', color: '#79C0FF', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
+                  style={{ padding: '10px 24px', borderRadius: 12, background: 'rgba(59,158,255,0.12)', color: 'var(--candy-blue)', fontSize: 13, fontWeight: 800 }}
+                  depth={3}
                 >
                   {tr.flashcards_show_answer}
-                </button>
+                </CandyButton>
               </>
             ) : (
-              <p style={{ fontSize: 16, color: 'var(--text-primary)', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>
+              <p style={{ fontSize: 16, color: 'var(--candy-ink)', lineHeight: 1.7, whiteSpace: 'pre-wrap', fontWeight: 600 }}>
                 {card.answer}
               </p>
             )}
-          </div>
+          </Card>
 
           {/* Rating buttons */}
           {flipped && (
             <div style={{ display: 'flex', gap: 12 }}>
-              <button
+              <CandyButton
                 onClick={() => handleRate('hard')}
-                style={{ flex: 1, padding: '14px', borderRadius: 14, background: 'rgba(247,129,102,0.1)', border: '1px solid rgba(247,129,102,0.3)', color: '#F78166', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-red)', color: '#fff', fontWeight: 800, fontSize: 15 }}
+                shadowColor="#D43B3B"
               >
                 {tr.flashcards_hard}
-              </button>
-              <button
+              </CandyButton>
+              <CandyButton
                 onClick={() => handleRate('medium')}
-                style={{ flex: 1, padding: '14px', borderRadius: 14, background: 'rgba(227,179,65,0.1)', border: '1px solid rgba(227,179,65,0.3)', color: '#E3B341', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-yellow)', color: '#3C3B54', fontWeight: 800, fontSize: 15 }}
+                shadowColor="var(--candy-yellow-d)"
               >
                 {tr.flashcards_medium}
-              </button>
-              <button
+              </CandyButton>
+              <CandyButton
                 onClick={() => handleRate('easy')}
-                style={{ flex: 1, padding: '14px', borderRadius: 14, background: 'rgba(86,211,100,0.1)', border: '1px solid rgba(86,211,100,0.3)', color: '#56D364', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-green)', color: '#fff', fontWeight: 800, fontSize: 15 }}
+                shadowColor="var(--candy-green-d)"
               >
                 {tr.flashcards_easy}
-              </button>
+              </CandyButton>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </CandyPage>
   )
 }

@@ -1,0 +1,16 @@
+/*
+ * Candy page shell — the screen-level equivalent of dashboard v2's
+ * `.dashboardV2` root. Composes the canonical `.candyTheme` token set so every
+ * candy primitive used inside resolves its `--candy-*` variables, and applies
+ * the candy background, ink color and Nunito body font. Light/dark flip is
+ * inherited from the app-wide `data-theme` attribute via tokens.module.css.
+ */
+.candyPage {
+  composes: candyTheme from './tokens.module.css';
+
+  min-height: 100vh;
+  background: var(--candy-bg);
+  color: var(--candy-ink);
+  font-family: var(--font-nunito), 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

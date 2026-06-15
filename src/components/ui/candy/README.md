@@ -40,6 +40,21 @@ Dashboard v2 consumes this token set via
 aliases its own local var names (`--bg`, `--card`, `--purple`, ...) to the
 `--candy-*` equivalents — so the rest of `dashboard.module.css` is unchanged.
 
+## `<CandyPage />`
+
+Page-level shell — wrap a screen's root in this to opt the whole page into
+the candy visual language. Composes `.candyTheme` (so `var(--candy-*)`
+resolves for every candy primitive used inside), and applies the candy
+background, ink color, Nunito body font and `min-height: 100vh` — matching how
+/dashboard's `.dashboardV2` root is configured. Renders a `<div>`; pass page
+layout (container width, padding, flex centering) via `className`/`style` or a
+child wrapper. Light/dark flips automatically via the app-wide `data-theme`.
+
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `className` | `string` | — | page layout / container utilities |
+| ...rest | `HTMLAttributes<HTMLDivElement>` | — | forwarded to the `<div>` |
+
 ## `<Card />`
 
 Rounded (24px) surface with the flat candy drop-shadow

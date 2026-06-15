@@ -6,14 +6,16 @@ import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
 import { CATEGORY_LABELS, VISIBLE_SUBJECT_LIBRARY, levelLabel, categoryLabel, localizedSubjectName, localizedSubjectDescription, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { EnrollButton } from '@/components/library/EnrollButton'
+import { CandyPage, Card, SectionTitle, ProgressBar } from '@/components/ui/candy'
 
+// Candy-palette accents per category (hex so the `${accent}xx` alpha trick keeps working).
 const CATEGORY_ACCENT: Record<SubjectCategory, string> = {
-  languages: '#E3B341',
-  programming: '#56D364',
-  mathematics: '#A78BFA',
-  physics: '#79C0FF',
-  chemistry: '#F78166',
-  biology: '#2EA043',
+  languages: '#FFC800',
+  programming: '#58CC02',
+  mathematics: '#8B5CF6',
+  physics: '#3B9EFF',
+  chemistry: '#FF9600',
+  biology: '#FF5FA2',
   ai: '#7C3AED',
 }
 
@@ -65,15 +67,15 @@ export default async function LibraryPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage>
       <div className="max-w-5xl mx-auto px-5 py-8">
         <div className="flex items-center justify-between mb-2">
-          <Link href="/dashboard" className="text-xs font-semibold" style={{ color: 'var(--text-dim)' }}>← {T('coach_back')}</Link>
+          <Link href="/dashboard" className="text-xs font-extrabold" style={{ color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>← {T('coach_back')}</Link>
         </div>
-        <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+        <h1 className="text-2xl mb-1" style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, color: 'var(--candy-ink)' }}>
           {T('library_title')}
         </h1>
-        <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{T('library_subtitle')}</p>
+        <p className="text-sm mb-8" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{T('library_subtitle')}</p>
 
         <div className="space-y-8">
           {(Object.keys(CATEGORY_LABELS) as SubjectCategory[]).map((category) => {
@@ -81,71 +83,74 @@ export default async function LibraryPage() {
             const accent = CATEGORY_ACCENT[category]
             return (
               <section key={category}>
-                <h2 className="text-sm font-black uppercase tracking-wide mb-3" style={{ color: accent, fontFamily: 'var(--font-heading)' }}>
+                <SectionTitle style={{ color: accent, textTransform: 'uppercase', fontSize: 15, marginBottom: 12 }}>
                   {categoryLabel(category, lang)}
-                </h2>
+                </SectionTitle>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {subjects.map((s) => {
                     const ps = enrolled.get(s.slug)
                     return (
-                      <div key={s.slug} className="rounded-2xl p-4 flex flex-col gap-3"
-                        style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+                      <Card key={s.slug} className="p-4 flex flex-col gap-3">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
-                            style={{ background: `${accent}15`, color: accent }}>
+                            style={{ background: `${accent}1f`, color: accent }}>
                             {s.icon}
                           </div>
                           <div className="min-w-0">
-                            <p className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{localizedSubjectName(s, lang)}</p>
-                            <p className="text-[11px] truncate" style={{ color: 'var(--text-dim)' }}>{s.modules.length} modules · L0–L5</p>
+                            <p className="text-sm truncate" style={{ color: 'var(--candy-ink)', fontWeight: 800 }}>{localizedSubjectName(s, lang)}</p>
+                            <p className="text-[11px] truncate" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{s.modules.length} modules · L0–L5</p>
                           </div>
                         </div>
-                        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{localizedSubjectDescription(s, lang)}</p>
+                        <p className="text-xs leading-relaxed" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{localizedSubjectDescription(s, lang)}</p>
                         <div className="mt-auto flex flex-col gap-2">
                           {ps ? (
                             <>
                               {/* Progress row */}
                               <div className="flex items-center gap-2">
-                                <span className="text-[11px] font-mono" style={{ color: accent }}>
+                                <span className="text-[11px]" style={{ color: accent, fontWeight: 800 }}>
                                   {levelLabel(ps.currentLevelIndex, lang)} · {ps.progressPercent}%
                                 </span>
                                 {spMap.get(s.slug)?.lastStudiedAt && (
-                                  <span className="text-[10px]" style={{ color: 'var(--text-dim)' }}>
+                                  <span className="text-[10px]" style={{ color: 'var(--candy-ink-soft)' }}>
                                     · {timeAgo(spMap.get(s.slug)!.lastStudiedAt!)}
                                   </span>
                                 )}
                               </div>
                               {/* Current lesson info */}
                               {(spMap.get(s.slug)?.lastUnitTitle || spMap.get(s.slug)?.lastLessonTitle) && (
-                                <p className="text-[11px] truncate" style={{ color: 'var(--text-dim)' }}>
+                                <p className="text-[11px] truncate" style={{ color: 'var(--candy-ink-soft)' }}>
                                   {spMap.get(s.slug)?.lastUnitTitle && <span>{spMap.get(s.slug)!.lastUnitTitle} · </span>}
                                   {spMap.get(s.slug)?.lastLessonTitle}
                                 </p>
                               )}
                               {/* Progress bar */}
-                              <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                                <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, ps.progressPercent ?? 0))}%`, background: accent }} />
-                              </div>
+                              <ProgressBar
+                                percent={Math.min(100, Math.max(0, ps.progressPercent ?? 0))}
+                                height={8}
+                                borderRadius={6}
+                                fillColor={accent}
+                                animated={false}
+                              />
                               {/* Actions */}
                               <div className="flex items-center gap-2">
-                                <Link href={`/learn?subject=${s.slug}`} className="flex-1 text-center text-xs font-bold px-3 py-1.5 rounded-lg"
-                                  style={{ background: `${accent}1a`, color: accent, border: `1px solid ${accent}33`, textDecoration: 'none' }}>
+                                <Link href={`/learn?subject=${s.slug}`} className="flex-1 text-center text-xs px-3 py-2 rounded-xl"
+                                  style={{ background: accent, color: '#fff', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
                                   {T('library_continue_learning')}
                                 </Link>
-                                <Link href={`/library/${s.slug}`} className="text-xs px-3 py-1.5 rounded-lg"
-                                  style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)', textDecoration: 'none' }}>
+                                <Link href={`/library/${s.slug}`} className="text-xs px-3 py-2 rounded-xl"
+                                  style={{ background: 'var(--candy-bg)', color: 'var(--candy-ink-soft)', fontWeight: 700, textDecoration: 'none' }}>
                                   Details
                                 </Link>
                               </div>
                             </>
                           ) : (
                             <div className="flex items-center justify-between">
-                              <span className="text-[11px]" style={{ color: 'var(--text-dim)' }}>{T('library_not_enrolled')}</span>
+                              <span className="text-[11px]" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{T('library_not_enrolled')}</span>
                               <EnrollButton subjectSlug={s.slug} label={`+ ${T('library_add_subject')}`} accent={accent} />
                             </div>
                           )}
                         </div>
-                      </div>
+                      </Card>
                     )
                   })}
                 </div>
@@ -154,6 +159,6 @@ export default async function LibraryPage() {
           })}
         </div>
       </div>
-    </div>
+    </CandyPage>
   )
 }

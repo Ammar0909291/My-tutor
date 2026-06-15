@@ -1,6 +1,9 @@
 export { Card } from './Card'
 export type { CardProps } from './Card'
 
+export { CandyPage } from './CandyPage'
+export type { CandyPageProps } from './CandyPage'
+
 export { CandyButton } from './Button'
 export type { CandyButtonProps } from './Button'
 
