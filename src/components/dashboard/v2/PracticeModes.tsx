@@ -1,3 +1,6 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
 import styles from './dashboard.module.css'
 import { CandyButton, Pill } from '@/components/ui/candy'
 import type { PracticeModeData } from './types'
@@ -13,6 +16,8 @@ const MODE_CLASS: Record<PracticeModeData['id'], string> = {
 }
 
 export function PracticeModes({ modes }: PracticeModesProps) {
+  const router = useRouter()
+
   return (
     <div className={styles.modes}>
       {modes.map((mode) => (
@@ -24,6 +29,7 @@ export function PracticeModes({ modes }: PracticeModesProps) {
           hoverLift={4}
           activePush={2}
           activeDepth={3}
+          onClick={() => router.push(mode.href)}
         >
           {mode.badge && <Pill className={styles['mode-badge']}>{mode.badge}</Pill>}
           <div className={styles['mode-emoji']}>{mode.emoji}</div>

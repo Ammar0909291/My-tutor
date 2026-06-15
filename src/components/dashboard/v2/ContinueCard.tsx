@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import styles from './dashboard.module.css'
 import { CandyButton, useConfetti } from '@/components/ui/candy'
 import type { ContinueLessonData } from './types'
@@ -10,6 +11,7 @@ interface ContinueCardProps {
 
 export function ContinueCard({ data }: ContinueCardProps) {
   const fireConfetti = useConfetti()
+  const router = useRouter()
 
   return (
     <CandyButton
@@ -21,7 +23,10 @@ export function ContinueCard({ data }: ContinueCardProps) {
       activePush={3}
       activeDepth={3}
       shadowColor="var(--candy-green-d)"
-      onClick={() => fireConfetti()}
+      onClick={() => {
+        fireConfetti()
+        router.push(data.href)
+      }}
     >
       <div className={styles['cc-left']}>
         <div className={styles['cc-icon']}>{data.emoji}</div>

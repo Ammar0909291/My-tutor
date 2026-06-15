@@ -41,7 +41,7 @@ export function DashboardV2({ data }: DashboardV2Props) {
           <PracticeModes modes={data.practiceModes} />
 
           <SectionTitle>🗺️ Your path</SectionTitle>
-          <SkillPath nodes={data.skillPath} />
+          <SkillPath nodes={data.skillPath} currentHref={data.continueLesson.href} />
         </div>
 
         <div className={styles.side}>
