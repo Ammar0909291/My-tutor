@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { isAdmin } from '@/lib/auth/admin'
 import Link from 'next/link'
-import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight } from 'lucide-react'
+import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight, Activity } from 'lucide-react'
 
 const NAV = [
   { href: '/admin',                  label: 'Overview',        icon: LayoutDashboard },
@@ -12,6 +12,7 @@ const NAV = [
   { href: '/admin/knowledge-graphs', label: 'Knowledge Graphs',icon: GitBranch },
   { href: '/admin/analytics',        label: 'Analytics',       icon: BarChart2 },
   { href: '/admin/ai-ops',           label: 'AI Operations',   icon: Bot },
+  { href: '/admin/ops',              label: 'Ops Center',      icon: Activity },
   { href: '/admin/settings',         label: 'System Settings', icon: Settings },
 ]
 
