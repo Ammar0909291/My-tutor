@@ -63,7 +63,8 @@ export default function SettingsPage() {
   const [voiceId, setVoiceId] = useState('male')
   const [voiceSpeed, setVoiceSpeed] = useState(1.0)
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
-  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [loadError, setLoadError] = useState(false)
 
   // Danger zone
   const [deleteStep, setDeleteStep] = useState<'hidden' | 'confirm' | 'deleting'>('hidden')
@@ -101,16 +102,26 @@ export default function SettingsPage() {
 
   useEffect(() => {
     fetch('/api/settings')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
       .then((d: { success?: boolean; data?: SettingsData }) => {
         if (d.success && d.data) {
           setData(d.data)
           setVoiceId(d.data.voiceId)
           setTeachingLang(d.data.teachingLanguage)
           setVoiceSpeed(d.data.voiceSpeed)
+          setLoadError(false)
+        } else {
+          setLoadError(true)
         }
       })
-      .catch(() => {})
+      .catch((err) => {
+        // DEF-EJ-06: no longer swallowed — log + show a visible error.
+        console.error('[settings] failed to load settings', err)
+        setLoadError(true)
+      })
 
     fetch('/api/user/profile')
       .then((r) => r.json())

@@ -1,11 +1,17 @@
 import { redis } from '@/lib/redis/client'
 import { NextResponse } from 'next/server'
+import { slidingWindow, clientIp } from '@/lib/rateLimitEdge'
+
+export { clientIp } from '@/lib/rateLimitEdge'
 
 /**
- * Sliding-window rate limiter backed by Redis.
- * Falls back silently (allows the request) when Redis is unavailable.
+ * Sliding-window rate limiter backed by Redis (Node runtime).
  *
- * @param key    Unique key, e.g. `rl:chat:${userId}`
+ * When Redis is unavailable it falls back to an in-memory per-instance limiter
+ * (Sprint EK — DEF-EJ-10) rather than silently allowing every request, so
+ * protection still holds in single-instance / Redis-less deployments.
+ *
+ * @param key    Unique key, e.g. `rl:chat:${userId}` or `rl:forgot:${ip}`
  * @param limit  Max requests per window
  * @param windowSec  Window size in seconds
  */
@@ -14,7 +20,10 @@ export async function checkRateLimit(
   limit: number,
   windowSec: number,
 ): Promise<{ allowed: boolean; remaining: number }> {
-  if (!redis) return { allowed: true, remaining: limit }
+  if (!redis) {
+    const r = slidingWindow(key, limit, windowSec * 1000)
+    return { allowed: r.success, remaining: r.remaining }
+  }
 
   try {
     const now = Date.now()
@@ -32,7 +41,9 @@ export async function checkRateLimit(
     const remaining = Math.max(0, limit - count)
     return { allowed: count <= limit, remaining }
   } catch {
-    return { allowed: true, remaining: limit }
+    // Redis errored mid-request — degrade to in-memory limiting, not open.
+    const r = slidingWindow(key, limit, windowSec * 1000)
+    return { allowed: r.success, remaining: r.remaining }
   }
 }
 
@@ -43,13 +54,12 @@ export function rateLimitResponse() {
   )
 }
 
-/**
- * Client IP for rate-limiting unauthenticated endpoints (register,
- * forgot-password, reset-password). On Vercel the left-most entry of
- * x-forwarded-for is the real client address.
- */
+/** Convenience: derive the client IP from a Request's headers. */
+export function requestIp(req: Request): string {
+  return clientIp(req.headers)
+}
+
+/** @deprecated Use requestIp instead. Kept for backward compatibility. */
 export function getClientIp(req: Request): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') ?? 'unknown'
+  return clientIp(req.headers)
 }

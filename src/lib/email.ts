@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import type { Lang } from '@/lib/i18n'
+import { reportError, recordFailure, maskEmail } from '@/lib/monitoring'
 
 function makeTransport() {
   return nodemailer.createTransport({

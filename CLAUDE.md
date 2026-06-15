@@ -1,80 +1,29 @@
-# My Tutor — Project Notes
+# My Tutor — Project Memory
 
-## Run Instructions
+## Reporting preference (ALWAYS follow)
+- At the end of EVERY sprint/task, ALWAYS produce a **detailed report**.
+- ALWAYS include **running instructions for the local computer** (install, env setup,
+  `npx prisma db push`, `npm run dev`, `npm run build`, type-check) in that report.
+- When asked, deliver the report as a **single copy-able code block**.
 
-### Prerequisites
-- Node.js 18+
-- PostgreSQL database running
-- Copy `.env.example` to `.env` and fill in required values (at minimum: `DATABASE_URL`, `AUTH_SECRET`, `OPENROUTER_API_KEY` or `GEMINI_API_KEY`)
+## Architecture facts
+- Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
+- AI: OpenRouter primary, Gemini fallback. Redis optional (app runs without it).
+- KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
+  Misconception data is runtime (`MistakeRecord`), NOT in the static KG type.
+- Admin gated by `ADMIN_EMAILS` env var (not a DB flag).
 
-### Setup (first time)
-```bash
+## Run locally
+```
+cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), OPENROUTER_API_KEY
 npm install
-npx prisma db push       # push schema to DB
-npx prisma db seed       # optional: seed data
+npx prisma db push
+npm run dev            # http://localhost:3000
+npm run build          # prisma generate && next build
+npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on feature branches
 ```
 
-### Development
-```bash
-npm run dev              # starts Next.js dev server on http://localhost:3000
-```
-
-### Build
-```bash
-npm run build            # prisma generate + next build
-```
-
-### Production
-```bash
-npm run start            # starts production server
-```
-
-### Database helpers
-```bash
-npm run db:generate      # regenerate Prisma client
-npm run db:push          # push schema changes to DB (no migration file)
-npm run db:migrate       # create & apply a migration
-npm run db:studio        # open Prisma Studio GUI
-npm run db:seed          # seed the database
-```
-
-### Other
-```bash
-npm run lint             # ESLint
-npm run type-check       # TypeScript check (no emit)
-```
-
-## Assistant Behavior
-
-- **After completing EVERY prompt, output a single copyable report block** in this exact format:
-
-  ```
-  ✅ What was done:
-  - <bullet 1>
-  - <bullet 2>
-  ...
-
-  🚀 To run locally:
-  # Prerequisites (first time only)
-  npm install
-  cp .env.example .env        # fill in DATABASE_URL, AUTH_SECRET, GROQ_API_KEY
-  npx prisma db push
-  npx prisma db seed
-
-  # Start dev server
-  npm run dev                 # http://localhost:3000
-  ```
-
-- **Always include local dev run instructions at the end of every response:**
-  ```bash
-  npm run dev   # http://localhost:3000
-  ```
-
-## Key Dependencies
-- **Framework**: Next.js 14 (App Router)
-- **Auth**: NextAuth v5 (`AUTH_SECRET` env var, not `NEXTAUTH_SECRET`)
-- **DB ORM**: Prisma + PostgreSQL
-- **AI**: OpenRouter (primary), Gemini (fallback)
-- **Email**: Nodemailer (SMTP — see `.env.example` for Gmail config)
-- **Payments**: Stripe
-- **Cache**: Redis (optional — app works without it)
+## Constraints
+- Branch for current work: `claude/my-tutor-foundation-KDSUO`.
+- Do NOT create PRs unless explicitly asked. Do NOT push to other branches.
+- Do NOT redesign UI, navigation, or touch Hindi/Sanskrit subject architecture.

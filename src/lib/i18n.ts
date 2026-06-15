@@ -266,6 +266,9 @@ export const translations = {
     settings_account_desc: 'Имя и Email управляются через настройки аккаунта.',
     settings_save: 'Сохранить',
     settings_saved: 'Сохранено ✓',
+    settings_save_error: 'Не удалось сохранить настройки. Попробуйте ещё раз.',
+    settings_save_retry: 'Повторить',
+    settings_load_error: 'Не удалось загрузить настройки. Обновите страницу.',
     settings_back: '← Панель',
 
     /* ── Sprint F: Mobile & Offline settings ── */
@@ -1127,6 +1130,9 @@ export const translations = {
     settings_account_desc: 'Name and Email are managed through account settings.',
     settings_save: 'Save',
     settings_saved: 'Saved ✓',
+    settings_save_error: 'Could not save settings. Please try again.',
+    settings_save_retry: 'Retry',
+    settings_load_error: 'Could not load settings. Please refresh the page.',
     settings_back: '← Dashboard',
 
     /* ── Sprint F: Mobile & Offline settings ── */
@@ -1989,6 +1995,9 @@ export const translations = {
     settings_account_desc: 'नाम और Email अकाउंट सेटिंग्स में प्रबंधित किए जाते हैं।',
     settings_save: 'सहेजें',
     settings_saved: 'सहेजा गया ✓',
+    settings_save_error: 'सेटिंग्स सहेजी नहीं जा सकीं। कृपया पुनः प्रयास करें।',
+    settings_save_retry: 'पुनः प्रयास करें',
+    settings_load_error: 'सेटिंग्स लोड नहीं हो सकीं। कृपया पेज रिफ्रेश करें।',
     settings_back: '← डैशबोर्ड',
 
     /* ── Sprint F: Mobile & Offline settings ── */
