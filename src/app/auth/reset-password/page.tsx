@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { LanguageToggle, useLanguage } from '@/components/ui/LanguageToggle'
 import { AuthBackLink } from '@/components/auth/AuthBackLink'
+import { CandyPage, CandyButton } from '@/components/ui/candy'
 
 type State = 'idle' | 'loading' | 'success' | 'error'
 
@@ -76,7 +77,7 @@ function ResetPasswordForm() {
   const strengthLabels = ['', t('reset_strength_weak'), t('reset_strength_medium'), t('reset_strength_strong')]
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 relative" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="flex items-center justify-center p-6 relative">
       <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
       <div className="absolute top-5 left-5 flex items-center gap-2">
@@ -99,7 +100,8 @@ function ResetPasswordForm() {
             <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
               {t('reset_success_sub')}
             </p>
-            <Link href="/auth/login" className="btn-primary block w-full py-3 text-center text-sm font-bold">
+            <Link href="/auth/login" className="block w-full"
+              style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, textAlign: 'center', textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
               {t('reset_success_login')}
             </Link>
           </div>
@@ -168,11 +170,12 @@ function ResetPasswordForm() {
                 )}
               </div>
 
-              <button type="submit"
+              <CandyButton type="submit"
                 disabled={state === 'loading' || !token || password !== confirm || password.length < 8}
-                className="btn-primary w-full py-3 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
+                className="w-full" shadowColor="var(--candy-purple-d)"
+                style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (state === 'loading' || !token || password !== confirm || password.length < 8) ? 0.5 : 1 }}>
                 {state === 'loading' ? t('reset_saving') : t('reset_btn')}
-              </button>
+              </CandyButton>
             </form>
 
             <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
@@ -183,6 +186,6 @@ function ResetPasswordForm() {
           </>
         )}
       </div>
-    </div>
+    </CandyPage>
   )
 }

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { AuthBackLink } from '@/components/auth/AuthBackLink'
+import { CandyPage, CandyButton } from '@/components/ui/candy'
 
 export default function SignupPage() {
   const { t, lang } = useLanguage()
@@ -58,7 +59,7 @@ export default function SignupPage() {
   ]
 
   return (
-    <div className="min-h-screen flex" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="flex">
       <style>{`
         @keyframes floatCard {
           0%, 100% { transform: translateY(0px); }
@@ -188,9 +189,10 @@ export default function SignupPage() {
                 </button>
               </div>
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full py-3 mt-1 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
+            <CandyButton type="submit" disabled={loading} className="w-full" shadowColor="var(--candy-purple-d)"
+              style={{ padding: '12px', marginTop: 4, borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: loading ? 0.5 : 1 }}>
               {loading ? t('signup_loading') : t('signup_submit')}
-            </button>
+            </CandyButton>
           </form>
 
           <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
@@ -199,7 +201,7 @@ export default function SignupPage() {
           </p>
         </div>
       </div>
-    </div>
+    </CandyPage>
   )
 }
 

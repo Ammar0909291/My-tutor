@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useCountry, type Country } from '@/components/Providers'
 import type { TeachingLang } from '@/lib/tts'
+import { CandyPage } from '@/components/ui/candy'
 
 type VoiceOption = { key: string; label: string }
 type LangOption = { key: TeachingLang; icon: string; label: string }
@@ -247,7 +248,7 @@ export default function SettingsPage() {
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarName)}&background=F78166&color=fff&size=128&bold=true&rounded=true`
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-void)', color: 'var(--text-primary)' }}>
+    <CandyPage legacy className="min-h-screen">
 
       {/* Nav */}
       <nav className="sticky top-0 z-50"
@@ -597,7 +598,7 @@ export default function SettingsPage() {
             : t('settings_save')}
         </button>
       </main>
-    </div>
+    </CandyPage>
   )
 }
 

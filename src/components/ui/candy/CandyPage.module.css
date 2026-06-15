@@ -14,3 +14,56 @@
   font-family: var(--font-nunito), 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/*
+ * Legacy-token bridge (opt-in via the CandyPage `legacy` prop). Re-points the
+ * app-wide semantic tokens + display fonts at the canonical candy tokens so
+ * screens still using them — or the global `.btn-primary`/`.input-field`/`.card`
+ * classes from globals.css — re-skin to the candy palette via the CSS-variable
+ * cascade, with no per-element edits. Same approach as learn/LessonScreen.module.css.
+ */
+.legacyBridge {
+  /* Surfaces */
+  --bg-void: var(--candy-bg);
+  --bg-base: var(--candy-bg);
+  --bg-surface: var(--candy-card);
+  --bg-card: var(--candy-card);
+  --bg-elevated: var(--candy-card);
+  --bg-hover: rgba(139, 92, 246, 0.08);
+  --bg-overlay: var(--candy-card);
+
+  /* Text */
+  --text-primary: var(--candy-ink);
+  --text-secondary: var(--candy-ink-soft);
+  --text-dim: var(--candy-ink-soft);
+
+  /* Borders */
+  --border-subtle: var(--candy-shadow);
+  --border-default: var(--candy-shadow);
+  --border-muted: var(--candy-shadow);
+  --border-emphasis: var(--candy-ink-soft);
+
+  /* Brand accent — coral → candy purple (matches the dashboard accent) */
+  --coral: var(--candy-purple);
+  --coral-hover: var(--candy-purple-d);
+  --coral-muted: rgba(139, 92, 246, 0.12);
+  --coral-border: rgba(139, 92, 246, 0.25);
+  --coral-glow: 0 0 24px rgba(139, 92, 246, 0.25);
+  --accent-primary: var(--candy-purple);
+
+  /* Semantic hues → candy equivalents */
+  --blue: var(--candy-blue);
+  --blue-muted: rgba(59, 158, 255, 0.10);
+  --green: var(--candy-green);
+  --green-muted: rgba(88, 204, 2, 0.10);
+  --yellow: var(--candy-yellow);
+  --yellow-muted: rgba(255, 200, 0, 0.10);
+  --purple: var(--candy-purple);
+  --purple-muted: rgba(139, 92, 246, 0.10);
+  --red: var(--candy-red);
+  --red-muted: rgba(255, 75, 75, 0.10);
+
+  /* Display fonts → candy (Baloo 2 headings, Nunito body) */
+  --font-heading: var(--font-baloo2), 'Baloo 2', cursive;
+  --font-body: var(--font-nunito), 'Nunito', sans-serif;
+}

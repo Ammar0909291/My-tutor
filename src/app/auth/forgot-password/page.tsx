@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { LanguageToggle, useLanguage } from '@/components/ui/LanguageToggle'
 import { AuthBackLink } from '@/components/auth/AuthBackLink'
+import { CandyPage, CandyButton } from '@/components/ui/candy'
 
 type State = 'idle' | 'loading' | 'sent' | 'error'
 
@@ -36,7 +37,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 relative" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="flex items-center justify-center p-6 relative">
       <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
       {/* Logo */}
@@ -60,7 +61,8 @@ export default function ForgotPasswordPage() {
             <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{email}</span>
             </p>
-            <Link href="/auth/login" className="btn-primary block w-full py-3 text-center text-sm font-bold">
+            <Link href="/auth/login" className="block w-full"
+              style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, textAlign: 'center', textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
               {t('forgot_back')}
             </Link>
           </div>
@@ -90,11 +92,12 @@ export default function ForgotPasswordPage() {
                   required placeholder="your@email.com" className="input-field"
                 />
               </div>
-              <button
+              <CandyButton
                 type="submit" disabled={state === 'loading'}
-                className="btn-primary w-full py-3 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
+                className="w-full" shadowColor="var(--candy-purple-d)"
+                style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: state === 'loading' ? 0.5 : 1 }}>
                 {state === 'loading' ? '...' : t('forgot_btn')}
-              </button>
+              </CandyButton>
             </form>
 
             <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
@@ -105,6 +108,6 @@ export default function ForgotPasswordPage() {
           </>
         )}
       </div>
-    </div>
+    </CandyPage>
   )
 }

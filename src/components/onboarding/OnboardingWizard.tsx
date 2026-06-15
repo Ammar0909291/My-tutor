@@ -7,6 +7,7 @@ import type { TeachingLang, VoiceType } from '@/lib/tts'
 import { useCountry } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
+import { CandyPage } from '@/components/ui/candy'
 
 const FALLBACK_SUBJECTS = [
   { id: 'c',          slug: 'c',          name: 'C',          icon: 'C',   accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)' },
@@ -171,7 +172,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="flex flex-col">
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--border-default)' }}>
@@ -485,6 +486,6 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
         </div>
       </div>
-    </div>
+    </CandyPage>
   )
 }

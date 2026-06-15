@@ -52,6 +52,7 @@ child wrapper. Light/dark flips automatically via the app-wide `data-theme`.
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
+| `legacy` | `boolean` | `false` | Bridge the app-wide semantic tokens (`--bg-*`, `--text-*`, `--border-*`, `--coral`/`--accent-*`, `--font-heading/body`) + global `.btn-primary`/`.input-field`/`.card` classes to candy values, so screens still using them re-skin via the CSS-variable cascade without a rewrite. Off by default (screens built on candy tokens directly are unaffected). |
 | `className` | `string` | — | page layout / container utilities |
 | ...rest | `HTMLAttributes<HTMLDivElement>` | — | forwarded to the `<div>` |
 
