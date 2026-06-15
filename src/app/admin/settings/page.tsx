@@ -11,7 +11,6 @@ export default function AdminSettingsPage() {
     { key: 'ADMIN_EMAILS', desc: 'Admin bootstrap allowlist (CSV)', secret: false },
     { key: 'AI_GLOBAL_RPM', desc: 'Global AI rate limit (req/min)', secret: false },
     { key: 'GOOGLE_CLIENT_ID', desc: 'Google OAuth client', secret: false },
-    { key: 'STRIPE_SECRET_KEY', desc: 'Stripe payments', secret: true },
   ]
 
   const flags = [

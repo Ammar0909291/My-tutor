@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { slidingWindow, classifyApiPath, clientIp, RL_TIERS } from '@/lib/rateLimitEdge'
 
-const PROTECTED = ['/dashboard', '/onboarding', '/learn', '/profile', '/billing', '/settings', '/coach', '/quiz', '/flashcards', '/progress']
+const PROTECTED = ['/dashboard', '/onboarding', '/learn', '/profile', '/settings', '/coach', '/quiz', '/flashcards', '/progress']
 const ADMIN_PATHS = ['/admin']
 const AUTH_ONLY = ['/auth/login', '/auth/signup', '/auth/forgot-password']
 
