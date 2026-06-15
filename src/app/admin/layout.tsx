@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth'
 import { isAdmin } from '@/lib/auth/admin'
 import Link from 'next/link'
 import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight, Activity } from 'lucide-react'
+import { CandyPage } from '@/components/ui/candy'
 
 const NAV = [
   { href: '/admin',                  label: 'Overview',        icon: LayoutDashboard },
@@ -23,7 +24,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!ok) redirect('/dashboard')
 
   return (
-    <div className="min-h-screen flex" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+    <CandyPage legacy className="flex">
       {/* Sidebar */}
       <aside className="w-56 shrink-0 border-r flex flex-col"
         style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
@@ -55,6 +56,6 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
       {/* Main */}
       <main className="flex-1 overflow-auto p-8">{children}</main>
-    </div>
+    </CandyPage>
   )
 }
