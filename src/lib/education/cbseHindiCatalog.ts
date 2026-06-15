@@ -199,6 +199,7 @@ export const CBSE_HINDI_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.hin.9.ch19', order: 19, title: '[क्षितिज] साखियाँ एवं सबद — कबीर / वाखें — ललद्यद / सवैये — रसखान (पद्य)', kgNodeIds: ['hindi.padya.bhaktikaal', 'hindi.kavya_bodh.bhav_saundarya', 'hindi.kavya_bodh.shilpa_saundarya'] },
         { id: 'cbse.hin.9.ch20', order: 20, title: '[क्षितिज] कैदी और कोकिला — माखनलाल चतुर्वेदी / ग्राम श्री — सुमित्रानंदन पंत (कविताएँ)', kgNodeIds: ['hindi.padya.chhayavad', 'hindi.kavya_bodh.bhav_saundarya'] },
         { id: 'cbse.hin.9.ch21', order: 21, title: '[क्षितिज] चाँद से थोड़ी सी गप्पें — शमशेर / मेघ आए — सर्वेश्वरदयाल / बच्चे काम पर जा रहे हैं — राजेश जोशी (कविताएँ)', kgNodeIds: ['hindi.padya.samakaleen', 'hindi.kavya_bodh.bhav_saundarya'] },
+        { id: 'cbse.hin.9.ch26', order: 26, title: '[क्षितिज] यमराज की दिशा — चंद्रकांत देवताले (कविता)', kgNodeIds: ['hindi.padya.samakaleen', 'hindi.kavya_bodh.bhav_saundarya'] },
         // ── कृतिका भाग–1 — पूरक पाठ (Sprint DG) ──
         { id: 'cbse.hin.9.ch22', order: 22, title: '[कृतिका] इस जल प्रलय में — फणीश्वरनाथ रेणु / माटी वाली — विद्यासागर नौटियाल', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.vishay_vastu'] },
         { id: 'cbse.hin.9.ch23', order: 23, title: '[कृतिका] मेरे संग की औरतें — मृदुला गर्ग / रीढ़ की हड्डी — जगदीश चंद्र माथुर (एकांकी)', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.gadya.natak_ekaanki', 'hindi.sahitya_vishleshan.patra_chitran'] },
@@ -246,6 +247,9 @@ export const CBSE_HINDI_CATALOG: BoardSubjectCatalog = {
         { id: 'cbse.hin.10.ch28', order: 28, title: '[कृतिका] मैं क्यों लिखता हूँ — अज्ञेय',                            kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.vishay_vastu'] },
         // ── लेखक परिचय ──
         { id: 'cbse.hin.10.ch29', order: 29, title: '[लेखक परिचय] क्षितिज-2 के लेखकों और कवियों का परिचय', kgNodeIds: ['hindi.kavya_bodh.lekhak_kavi_parichay'] },
+        // ── Sprint EU.2 additions ──
+        { id: 'cbse.hin.10.ch30', order: 30, title: '[क्षितिज] एक कहानी यह भी — मन्नू भंडारी (संस्मरण)', kgNodeIds: ['hindi.gadya.jeevani_aatmkatha', 'hindi.sahitya_vishleshan.vishay_vastu'] },
+        { id: 'cbse.hin.10.ch31', order: 31, title: '[कृतिका] एहि ठैयाँ झुलनी हेरानी हो रामा! — शिवप्रसाद मिश्र रुद्र (कहानी)', kgNodeIds: ['hindi.gadya.purak_path', 'hindi.sahitya_vishleshan.vishay_vastu'] },
       ],
     },
 
