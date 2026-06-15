@@ -53,6 +53,12 @@ export default auth(function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
 
+  // /dashboard/v2 was the staging route for the redesigned dashboard, now
+  // promoted to /dashboard — redirect old links/bookmarks.
+  if (pathname === '/dashboard/v2' || pathname.startsWith('/dashboard/v2/')) {
+    return NextResponse.redirect(new URL('/dashboard', req.url))
+  }
+
   return NextResponse.next()
 })
 
