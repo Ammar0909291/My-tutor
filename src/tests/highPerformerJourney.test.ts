@@ -46,7 +46,7 @@ describe('High-performing student journey', () => {
   })
 
   it('MASTERED status is not demoted by single low score', () => {
-    const existingStatus = 'MASTERED'
+    const existingStatus: string = 'MASTERED'
     const masteryPct = Math.round((85 + 20) / 2) // score drops to 20
     const newStatus = (existingStatus === 'NOT_STARTED' || existingStatus === 'IN_PROGRESS')
       ? (masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS')
@@ -55,7 +55,7 @@ describe('High-performing student journey', () => {
   })
 
   it('COMPLETED status is also not demoted', () => {
-    const existingStatus = 'COMPLETED'
+    const existingStatus: string = 'COMPLETED'
     const masteryPct = 30
     const newStatus = (existingStatus === 'NOT_STARTED' || existingStatus === 'IN_PROGRESS')
       ? (masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS')
