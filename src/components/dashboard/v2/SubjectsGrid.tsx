@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Card, SectionTitle, ProgressBar } from '@/components/ui/candy'
+import { SectionTitle, ProgressBar } from '@/components/ui/candy'
 import styles from './dashboard.module.css'
 import type { SubjectCardData } from './types'
 
@@ -13,37 +13,44 @@ export function SubjectsGrid({ subjects }: SubjectsGridProps) {
   return (
     <div className={styles['subjects-section']}>
       <SectionTitle>📚 My Subjects</SectionTitle>
-      <div className={styles['subjects-grid']}>
+      <div className={styles['subjects-grid-new']}>
         {subjects.map((s) => (
-          <Link key={s.slug} href={s.href} className={styles['subject-card']} style={{ textDecoration: 'none' }}>
-            <Card className={styles['subject-card-inner']}>
-              <div className={styles['subject-icon']} style={{ background: s.bgColor }}>
-                {s.icon}
-              </div>
-              <div className={styles['subject-info']}>
-                <div className={styles['subject-name']}>{s.name}</div>
-                <div className={styles['subject-lesson']}>
-                  {s.lastLessonTitle ?? `Lesson ${s.currentLesson}`}
+          <Link key={s.slug} href={s.href} className={styles['subject-card-new']}>
+            <span className={styles['subject-card-strip']} style={{ background: s.color }} />
+            <div className={styles['subject-card-body']}>
+              <div className={styles['subject-card-top']}>
+                <div className={styles['subject-icon-lg']} style={{ background: s.bgColor }}>
+                  {s.icon}
+                </div>
+                <div className={styles['subject-card-info']}>
+                  <div className={styles['subject-card-name']}>{s.name}</div>
+                  <div className={styles['subject-card-lesson']}>
+                    {s.lastLessonTitle ?? `Lesson ${s.currentLesson}`}
+                  </div>
                 </div>
               </div>
-              <div className={styles['subject-pct']} style={{ color: s.color }}>
-                {s.completionPercent}%
+              <div className={styles['subject-card-bottom']}>
+                <div className={styles['subject-pct-row']}>
+                  <span className={styles['subject-pct-label']}>Progress</span>
+                  <span className={styles['subject-pct-val']} style={{ color: s.color }}>
+                    {s.completionPercent}%
+                  </span>
+                </div>
+                <ProgressBar
+                  percent={s.completionPercent}
+                  height={12}
+                  borderRadius={6}
+                  fillColor={s.color}
+                  animated={true}
+                />
               </div>
-              <ProgressBar
-                percent={s.completionPercent}
-                height={8}
-                borderRadius={4}
-                fillColor={s.color}
-                animated={false}
-                className={styles['subject-bar']}
-              />
-            </Card>
+            </div>
           </Link>
         ))}
+        <Link href="/library" className={styles['subjects-add-new']}>
+          ＋ Add a subject
+        </Link>
       </div>
-      <Link href="/library" className={styles['subjects-add']}>
-        + Add subject
-      </Link>
     </div>
   )
 }

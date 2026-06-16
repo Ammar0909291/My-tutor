@@ -15,10 +15,9 @@ import { SubjectsGrid } from './SubjectsGrid'
 import { AchievementCenter } from './AchievementCenter'
 import { ActivityTimeline } from './ActivityTimeline'
 import { ExploreLinks } from './ExploreLinks'
+import { LearningCoachCard } from './LearningCoachCard'
 import { SectionTitle, useConfetti } from '@/components/ui/candy'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
-import MasterySummaryPanel from '@/components/mastery/MasterySummaryPanel'
-import CareerSummaryPanel from '@/components/career/CareerSummaryPanel'
 import type { DashboardV2Data } from './types'
 
 interface DashboardV2Props {
@@ -62,12 +61,8 @@ export function DashboardV2({ data }: DashboardV2Props) {
           <AchievementCenter data={data.achievement} />
           <ActivityTimeline items={data.recentActivity} />
 
-          {/* AI-powered intelligence panels (client — fetch own data) */}
-          <div className={styles['intelligence-section']}>
-            <SectionTitle>🧠 Learning Intelligence</SectionTitle>
-            <MasterySummaryPanel variant="dashboard" />
-            <CareerSummaryPanel variant="dashboard" />
-          </div>
+          {/* AI-powered learning coach (client — fetches own data) */}
+          <LearningCoachCard />
 
           <ExploreLinks />
         </div>
