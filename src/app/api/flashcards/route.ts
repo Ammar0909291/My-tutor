@@ -54,6 +54,19 @@ export async function PATCH(req: Request) {
     const nextReview = new Date(now)
     nextReview.setDate(nextReview.getDate() + RATING_INTERVAL_DAYS[rating])
 
+    // MED-5: read current card to detect whether it's been reviewed today before
+    // awarding XP. XP is only granted once per card per calendar day (UTC) to
+    // prevent infinite farming by replaying the same card.
+    const card = await prisma.flashcard.findUnique({
+      where: { id, userId: session.user.id },
+      select: { lastReviewedAt: true },
+    })
+    if (!card) return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 })
+
+    const startOfTodayUtc = new Date(now)
+    startOfTodayUtc.setUTCHours(0, 0, 0, 0)
+    const alreadyReviewedToday = card.lastReviewedAt !== null && card.lastReviewedAt >= startOfTodayUtc
+
     await prisma.flashcard.update({
       where: { id, userId: session.user.id },
       data: {
@@ -64,11 +77,13 @@ export async function PATCH(req: Request) {
       },
     })
 
-    // +2 XP per card reviewed
-    await prisma.user.update({
-      where: { id: session.user.id },
-      data: { xpPoints: { increment: 2 } },
-    })
+    // +2 XP only on the first review of this card today (MED-5 farm guard).
+    if (!alreadyReviewedToday) {
+      await prisma.user.update({
+        where: { id: session.user.id },
+        data: { xpPoints: { increment: 2 } },
+      })
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {

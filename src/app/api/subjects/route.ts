@@ -1,3 +1,9 @@
+// MED-4 review: /api/subjects is intentionally unauthenticated.
+// It powers the subject picker on the landing/onboarding page where the user
+// has not yet signed in. The payload is a non-sensitive product catalogue
+// (subject names, slugs, descriptions) — no PII, no pricing, no internal ids
+// beyond what a visitor would see on the marketing site. Keeping it public
+// avoids a chicken-and-egg auth requirement during sign-up. No change needed.
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'

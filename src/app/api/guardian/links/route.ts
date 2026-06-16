@@ -34,12 +34,14 @@ export async function GET() {
       withRetry(() => prisma.guardianLink.findMany({
         where: { studentId: userId },
         orderBy: { createdAt: 'desc' },
-        include: { guardian: { select: { name: true, email: true } } },
+        // MED-2: name only — email is not needed for display and would expose PII.
+        include: { guardian: { select: { name: true } } },
       })),
       withRetry(() => prisma.guardianLink.findMany({
         where: { guardianId: userId, status: 'ACTIVE' },
         orderBy: { createdAt: 'desc' },
-        include: { student: { select: { id: true, name: true, email: true } } },
+        // MED-2: name + id only; email omitted (least-privilege).
+        include: { student: { select: { id: true, name: true } } },
       })),
     ])
 
@@ -49,13 +51,13 @@ export async function GET() {
         relationship: l.relationship,
         status: l.status,
         inviteCode: l.status === 'PENDING' ? l.inviteCode : null,
-        guardian: l.guardian ? { name: l.guardian.name, email: l.guardian.email } : null,
+        guardian: l.guardian ? { name: l.guardian.name } : null,
         createdAt: l.createdAt,
       })),
       asGuardian: asGuardian.map((l) => ({
         id: l.id,
         relationship: l.relationship,
-        student: { id: l.student.id, name: l.student.name, email: l.student.email },
+        student: { id: l.student.id, name: l.student.name },
         since: l.updatedAt,
       })),
     })

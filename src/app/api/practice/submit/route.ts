@@ -78,21 +78,22 @@ export async function POST(req: Request) {
       }))
     }
 
-    const existing = await withRetry(() => prisma.topicProgress.findUnique({
-      where: { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } },
-    }))
-
-    const masteryPct = existing ? Math.round((existing.masteryPct + score) / 2) : score
-
-    let status = existing?.status ?? 'IN_PROGRESS'
-    if (status === 'NOT_STARTED' || status === 'IN_PROGRESS') {
-      status = masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS'
-    }
-
-    const topicProgress = await withRetry(() => prisma.topicProgress.upsert({
-      where: { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } },
-      create: { userId, subjectSlug, topicSlug, status, masteryPct, attempts: 1, lastScore: score },
-      update: { status, masteryPct, attempts: { increment: 1 }, lastScore: score },
+    // MED-10: wrap mastery read-compute-write in a transaction to prevent two
+    // concurrent submissions from both reading the old masteryPct and both
+    // writing a stale (lower) value.
+    const topicProgress = await withRetry(() => prisma.$transaction(async (tx) => {
+      const key = { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } }
+      const existing = await tx.topicProgress.findUnique({ where: key })
+      const masteryPct = existing ? Math.round((existing.masteryPct + score) / 2) : score
+      let status = existing?.status ?? 'IN_PROGRESS'
+      if (status === 'NOT_STARTED' || status === 'IN_PROGRESS') {
+        status = masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS'
+      }
+      return tx.topicProgress.upsert({
+        where: key,
+        create: { userId, subjectSlug, topicSlug, status, masteryPct, attempts: 1, lastScore: score },
+        update: { status, masteryPct, attempts: { increment: 1 }, lastScore: score },
+      })
     }))
 
     // Refresh Smart Coach insights from the freshly-written TopicProgress/

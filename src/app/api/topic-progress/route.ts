@@ -75,7 +75,7 @@ export async function PATCH(req: Request) {
     let data: {
       status: TopicStatus
       completedAt?: Date | null
-      revisionCount?: number
+      revisionCount?: number | { increment: number }
       lastRevisionAt?: Date
     }
     switch (action) {
@@ -95,9 +95,11 @@ export async function PATCH(req: Request) {
         }
         break
       case 'start_revision':
+        // MED-6: use atomic increment so concurrent start_revision calls cannot
+        // both read the same revisionCount and overwrite each other.
         data = {
           status: 'REVISION',
-          revisionCount: (existing?.revisionCount ?? 0) + 1,
+          revisionCount: { increment: 1 },
           lastRevisionAt: now,
         }
         break
@@ -115,10 +117,15 @@ export async function PATCH(req: Request) {
         break
     }
 
+    // For the create branch we resolve the atomic increment to its initial value (1).
+    const createData = {
+      ...data,
+      revisionCount: action === 'start_revision' ? 1 : (data.revisionCount as number | undefined),
+    }
     const row = await withRetry(() => prisma.topicProgress.upsert({
       where: key,
       update: data,
-      create: { userId, subjectSlug, topicSlug, ...data },
+      create: { userId, subjectSlug, topicSlug, ...createData },
     }))
 
     // Drop the cached learner-intelligence profile so the tutor's next chat

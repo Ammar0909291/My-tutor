@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { randomBytes } from 'crypto'
+import { randomBytes, createHash } from 'crypto'
 import { prisma } from '@/lib/db/prisma'
 import { sendPasswordResetEmail } from '@/lib/email'
 import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
@@ -35,16 +35,20 @@ export async function POST(req: NextRequest) {
       return safeResponse()
     }
 
-    const token = randomBytes(32).toString('hex')
+    // MED-11: generate raw token (sent to user via email), store only its
+    // SHA-256 hash. A DB read gives the attacker the hash, not the raw token,
+    // so active reset links cannot be used from a stolen DB snapshot.
+    const rawToken = randomBytes(32).toString('hex')
+    const tokenHash = createHash('sha256').update(rawToken).digest('hex')
     const identifier = `${TOKEN_IDENTIFIER_PREFIX}${normalized}`
     const expires = new Date(Date.now() + EXPIRY_MS)
 
     await prisma.verificationToken.deleteMany({ where: { identifier } })
     await prisma.verificationToken.create({
-      data: { identifier, token, expires },
+      data: { identifier, token: tokenHash, expires },
     })
 
-    const result = await sendPasswordResetEmail(normalized, token)
+    const result = await sendPasswordResetEmail(normalized, rawToken)
     if (!result.success) {
       console.error('[forgot-password] email send failed:', result.error ?? 'unknown')
     }

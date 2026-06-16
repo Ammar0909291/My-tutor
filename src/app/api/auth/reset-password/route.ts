@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
+import { createHash } from 'crypto'
 import { prisma } from '@/lib/db/prisma'
 import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
 
@@ -16,17 +17,21 @@ export async function POST(req: NextRequest) {
     if (!token || typeof token !== 'string') {
       return NextResponse.json({ error: 'Token required' }, { status: 400 })
     }
-    if (!password || typeof password !== 'string' || password.length < 8) {
-      return NextResponse.json({ error: 'Password must be at least 8 characters' }, { status: 400 })
+    // MED-12: bcrypt silently truncates at 72 bytes; cap at 72 to make this explicit.
+    if (!password || typeof password !== 'string' || password.length < 8 || password.length > 72) {
+      return NextResponse.json({ error: 'Password must be between 8 and 72 characters' }, { status: 400 })
     }
 
-    const record = await prisma.verificationToken.findUnique({ where: { token } })
+    // MED-11: the DB stores the SHA-256 hash of the token; hash the incoming
+    // raw token before lookup so a stolen DB snapshot cannot be used directly.
+    const tokenHash = createHash('sha256').update(token).digest('hex')
+    const record = await prisma.verificationToken.findUnique({ where: { token: tokenHash } })
 
     if (!record || !record.identifier.startsWith(TOKEN_IDENTIFIER_PREFIX)) {
       return NextResponse.json({ error: 'Invalid or expired reset link' }, { status: 400 })
     }
     if (record.expires < new Date()) {
-      await prisma.verificationToken.delete({ where: { token } })
+      await prisma.verificationToken.delete({ where: { token: tokenHash } })
       return NextResponse.json({ error: 'Reset link has expired. Please request a new one.' }, { status: 400 })
     }
 
@@ -35,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     await prisma.$transaction([
       prisma.user.update({ where: { email }, data: { passwordHash } }),
-      prisma.verificationToken.delete({ where: { token } }),
+      prisma.verificationToken.delete({ where: { token: tokenHash } }),
     ])
 
     return NextResponse.json({ success: true })

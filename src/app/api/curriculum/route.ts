@@ -136,7 +136,12 @@ export async function POST(req: Request) {
     const prompt = buildCurriculumPrompt(subject.name, profile.selfDescription, treeBlock)
 
     const curriculum = await generateJSON(prompt) as Curriculum
-    if (!curriculum) return NextResponse.json({ success: false, error: 'Failed to generate curriculum' }, { status: 502 })
+    // MED-9: validate shape before accessing .steps — an empty array [], a plain
+    // object, or any other truthy non-Curriculum value would pass the null check
+    // but throw TypeError on .steps.length.
+    if (!curriculum || typeof curriculum !== 'object' || !Array.isArray((curriculum as Curriculum).steps) || (curriculum as Curriculum).steps.length === 0) {
+      return NextResponse.json({ success: false, error: 'Failed to generate curriculum' }, { status: 502 })
+    }
 
     const learningPath = await prisma.learningPath.create({
       data: {

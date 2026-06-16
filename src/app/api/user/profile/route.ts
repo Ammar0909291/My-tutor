@@ -8,13 +8,16 @@ export async function GET() {
     const session = await auth()
 
     if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // MED-1: explicit select allowlist so no future column leaks automatically.
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      omit: { passwordHash: true },
-      include: {
+      select: {
+        id: true, name: true, email: true, image: true,
+        onboardingCompleted: true, xpPoints: true, referralCode: true,
+        createdAt: true, updatedAt: true,
         profile: true,
-        _count: { select: { learnSessions: true } }
-      }
+        _count: { select: { learnSessions: true } },
+      },
     })
     return NextResponse.json({ user })
   } catch (err) {
@@ -73,8 +76,13 @@ export async function PATCH(req: NextRequest) {
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      omit: { passwordHash: true },
-      include: { profile: true, _count: { select: { learnSessions: true } } },
+      select: {
+        id: true, name: true, email: true, image: true,
+        onboardingCompleted: true, xpPoints: true, referralCode: true,
+        createdAt: true, updatedAt: true,
+        profile: true,
+        _count: { select: { learnSessions: true } },
+      },
     })
     return NextResponse.json({ success: true, user })
   } catch (err) {
