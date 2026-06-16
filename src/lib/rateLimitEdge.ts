@@ -80,9 +80,34 @@ export function classifyApiPath(pathname: string): RateLimitTier | null {
   return 'general'
 }
 
-/** Extract the best-effort client IP from forwarding headers. */
+/**
+ * HIGH-3: Extract a rate-limit key that cannot be trivially spoofed.
+ *
+ * Attack: a client sets X-Forwarded-For: <rotating IPs> to appear as different
+ * callers. The first entry in XFF is always client-supplied and untrustworthy.
+ *
+ * Defence:
+ * 1. x-real-ip — set by a trusted reverse proxy (nginx, Vercel edge); a
+ *    single authoritative value the client cannot override.
+ * 2. Last value in x-forwarded-for — appended by the outermost trusted proxy,
+ *    not the client (who can only inject values at the front).
+ * 3. First XFF value — only as last resort in single-hop setups where there
+ *    is no proxy wrapping; still better than 'unknown'.
+ *
+ * This does not defend against a compromised proxy layer, but it closes the
+ * trivial client-side spoofing attack described in HIGH-3.
+ */
 export function clientIp(headers: Headers): string {
+  // Prefer the single-value header set by the trusted proxy layer.
+  const realIp = headers.get('x-real-ip')?.trim()
+  if (realIp) return realIp
+
   const xff = headers.get('x-forwarded-for')
-  if (xff) return xff.split(',')[0].trim()
-  return headers.get('x-real-ip') ?? 'unknown'
+  if (xff) {
+    const parts = xff.split(',').map((s) => s.trim()).filter(Boolean)
+    // Last entry is set by the outermost trusted proxy, not the client.
+    if (parts.length > 0) return parts[parts.length - 1]
+  }
+
+  return 'unknown'
 }

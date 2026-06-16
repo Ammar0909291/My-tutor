@@ -27,7 +27,9 @@ export const authConfig: NextAuthConfig = {
       async authorize(credentials) {
         const parsed = credentialsSchema.safeParse(credentials)
         if (!parsed.success) return null
-        const { email, password } = parsed.data
+        // HIGH-2: normalize email before lookup so casing differences don't create duplicate identities.
+        const email = parsed.data.email.trim().toLowerCase()
+        const { password } = parsed.data
         const user = await prisma.user.findUnique({ where: { email } })
         if (!user?.passwordHash) return null
         if (user.isDeleted) return null  // soft-deleted accounts cannot log in
@@ -38,6 +40,25 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   callbacks: {
+    // HIGH-1: deny authentication for soft-deleted users across ALL providers
+    // (Credentials already returns null above; this covers Google OAuth and any
+    //  future providers before NextAuth issues a session token).
+    async signIn({ user }) {
+      if (!user?.email) return false
+      try {
+        const canonicalEmail = user.email.trim().toLowerCase()
+        const dbUser = await prisma.user.findUnique({
+          where: { email: canonicalEmail },
+          select: { isDeleted: true },
+        })
+        // If the user row doesn't exist yet (first OAuth sign-in), allow through —
+        // NextAuth will create it. If it exists and is deleted, block.
+        if (dbUser?.isDeleted) return false
+      } catch {
+        // DB unreachable — fail open so auth isn't broken by transient DB errors.
+      }
+      return true
+    },
     async jwt({ token, user }) {
       if (user) {
         token.sub = user.id
@@ -47,16 +68,33 @@ export const authConfig: NextAuthConfig = {
         }
         return token
       }
-      // Re-validate token.sub on every use: if the DB was reset or the user row
-      // was re-created under a new id, heal the token so all routes get the real id.
-      // Wrapped in try-catch: a DB error (cold-start, network blip) must never
-      // break auth — we fall back to returning the token unchanged.
+      // Re-validate token on every subsequent use.
+      // Wrapped in try-catch: DB errors must never break auth — fall back to
+      // returning the token unchanged so a Redis/Neon cold-start doesn't log
+      // everyone out.
       try {
         if (token.sub && token.email) {
-          const byId = await prisma.user.findUnique({ where: { id: token.sub }, select: { id: true } })
+          const byId = await prisma.user.findUnique({
+            where: { id: token.sub },
+            select: { id: true, isDeleted: true },
+          })
           if (!byId) {
-            const byEmail = await prisma.user.findUnique({ where: { email: String(token.email) }, select: { id: true } })
-            if (byEmail) token.sub = byEmail.id
+            // User row gone — try to heal by email (DB reset scenario)
+            const canonicalEmail = String(token.email).trim().toLowerCase()
+            const byEmail = await prisma.user.findUnique({
+              where: { email: canonicalEmail },
+              select: { id: true, isDeleted: true },
+            })
+            if (byEmail && !byEmail.isDeleted) {
+              token.sub = byEmail.id
+            } else {
+              // User deleted or not found — invalidate token immediately (MED-8)
+              token.sub = undefined
+            }
+          } else if (byId.isDeleted) {
+            // MED-8: admin banned this user — nullify sub so all route auth checks
+            // see no user id and return 401 without waiting for JWT expiry.
+            token.sub = undefined
           }
         }
       } catch {

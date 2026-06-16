@@ -19,7 +19,11 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { name, email, password, referralCode } = registerSchema.parse(body);
+    const parsed = registerSchema.parse(body);
+    const name = parsed.name
+    // HIGH-2: canonical email — single identity per mailbox regardless of case.
+    const email = parsed.email.trim().toLowerCase()
+    const { password, referralCode } = parsed
 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
