@@ -6,7 +6,8 @@ import { sendWelcomeEmail } from "@/lib/email";
 import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rateLimit";
 
 const registerSchema = z.object({
-  name: z.string().min(2).max(80),
+  // LOW-1: trim before length check so "  A " (3 chars, 1 non-space) is rejected.
+  name: z.string().trim().min(2, 'Name must be at least 2 characters').max(80),
   email: z.string().email(),
   password: z.string().min(8).max(100),
   referralCode: z.string().optional(),
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
       if (referrer) referrerId = referrer.id
     }
 
-    const user = await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         name, email, passwordHash,
         referralCode: newCode,
@@ -53,22 +54,23 @@ export async function POST(req: Request) {
     });
 
     // Create a free subscription record for the new user
-    await prisma.subscription.create({ data: { userId: user.id } });
+    await prisma.subscription.create({ data: { userId: newUser.id } });
 
     // Send welcome email — non-blocking, never fails signup
-    sendWelcomeEmail(user.email, user.name ?? 'there').catch(() => {})
+    sendWelcomeEmail(newUser.email, newUser.name ?? 'there').catch(() => {})
 
     // Credit referrer +1 free session and create referral record
     if (referrerId) {
       await Promise.all([
         prisma.user.update({ where: { id: referrerId }, data: { freeSessionsExtra: { increment: 1 } } }),
         prisma.referral.create({
-          data: { referrerId, referredId: user.id, code: referralCode!, used: true, usedAt: new Date() },
+          data: { referrerId, referredId: newUser.id, code: referralCode!, used: true, usedAt: new Date() },
         }),
       ])
     }
 
-    return NextResponse.json({ success: true, data: user }, { status: 201 });
+    // LOW-2: return only email + name; internal id is not needed by the client.
+    return NextResponse.json({ success: true, data: { email: newUser.email, name: newUser.name } }, { status: 201 });
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 });

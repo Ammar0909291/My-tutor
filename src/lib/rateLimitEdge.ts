@@ -4,6 +4,32 @@
  * Pure in-memory, NO ioredis/Node imports, so it is importable from
  * `middleware.ts` (Edge runtime) and reused as the fallback in the Node-side
  * `rateLimit.ts` when Redis is unavailable. State is per-instance.
+ *
+ * ── LOW-3: Known limitations ─────────────────────────────────────────────────
+ *
+ * 1. Per-process state (not shared).
+ *    Each Node.js worker or Edge runtime instance holds its own `store` Map.
+ *    In a horizontally-scaled deployment (multiple pods / serverless replicas)
+ *    each instance tracks only the requests it personally handled. A client
+ *    distributing requests across N replicas can make N×limit calls before any
+ *    single instance blocks them.
+ *
+ * 2. Cold-start reset.
+ *    Serverless / Edge deployments spin up new instances on demand. A cold start
+ *    clears all in-memory counters, resetting the window for every key. This
+ *    means burst limits are ineffective immediately after a cold start.
+ *
+ * 3. No persistence.
+ *    Restarting the process (deploy, crash, scale-down) erases all state.
+ *
+ * Mitigation in production:
+ *    The Node-side `rateLimit.ts` uses Redis (via `checkRateLimit`) for all
+ *    sensitive routes (/api/auth/register, /api/auth/forgot-password, etc.)
+ *    when REDIS_URL is configured. This limiter is the fallback for those routes
+ *    when Redis is unavailable, and the primary limiter for the Edge middleware.
+ *    For strict single-instance or dev environments it provides adequate protection.
+ *    For multi-replica production, provision Redis and set REDIS_URL.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 
 export interface RateLimitResult {

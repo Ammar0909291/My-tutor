@@ -21,7 +21,8 @@ const generalSchema = z.object({
   subjectSlug: z.string().optional(),
   subjectSlugs: z.array(z.string()).optional(),
   currentLevel: z.enum(['complete_beginner', 'beginner', 'intermediate', 'advanced', 'professional']).default('beginner'),
-  selfDescription: z.string().min(10).max(2000),
+  // LOW-1: trim so 10 spaces doesn't pass as a valid description.
+  selfDescription: z.string().trim().min(10, 'Please describe your learning goals (min 10 characters)').max(2000),
   voiceChoice: z.string(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
 }).refine((b) => (b.subjectSlugs && b.subjectSlugs.length > 0) || !!b.subjectSlug, {
@@ -247,6 +248,15 @@ async function handleSchoolStudent(
 
   await prisma.$transaction(async (tx) => {
     const existing = await tx.profile.findUnique({ where: { userId: effectiveUserId } })
+    const user = await tx.user.findUnique({ where: { id: effectiveUserId }, select: { onboardingCompleted: true } })
+
+    if (existing && user?.onboardingCompleted && existing.educationBoard) {
+      // LOW-4: guard against silent data loss — do not overwrite board/grade for a
+      // fully-completed school onboarding. Return without error so the client can
+      // redirect to the dashboard as if onboarding had just completed.
+      return
+    }
+
     if (existing) {
       await tx.profile.update({ where: { userId: effectiveUserId }, data: schoolFields })
     } else {

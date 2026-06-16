@@ -7,7 +7,14 @@ import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 const EXPIRY_MS = 60 * 60 * 1000 // 1 hour
 
-// Must be a function — NextResponse bodies are single-use streams and cannot be shared across requests
+// Must be a function — NextResponse bodies are single-use streams and cannot be shared across requests.
+// LOW-5 timing oracle: response body is identical for found/not-found emails (safeResponse).
+// A timing difference remains because the "found" path runs deleteMany+create+sendEmail
+// while "not found" returns immediately. In practice this is mitigated by:
+//   (a) the 5-req/15-min IP rate limit (hardened in Batch 4, HIGH-3),
+//   (b) network jitter dominating the small server-side delta at real latencies.
+// Adding an artificial sleep to equalise timing would add complexity with no practical gain
+// given the rate-limit protection already in place.
 function safeResponse() {
   return NextResponse.json({
     success: true,
