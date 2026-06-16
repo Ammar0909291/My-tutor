@@ -20,9 +20,17 @@ export function ActivityTimeline({ items }: ActivityTimelineProps) {
         <SectionTitle>📖 Learning Journey</SectionTitle>
         <Card className={styles['journey-card']}>
           <div className={styles['journey-empty']}>
-            <div className={styles['journey-empty-dot']} />
-            <span className={styles['journey-empty-text']}>Your learning story starts here — complete your first lesson to see progress</span>
-            <Link href="/learn" className={styles['journey-empty-link']}>Start →</Link>
+            <div className={styles['journey-empty-timeline']}>
+              <div className={styles['journey-empty-dot-ring']}>
+                <div className={styles['journey-empty-dot']} />
+              </div>
+              <div className={styles['journey-empty-fade-line']} />
+            </div>
+            <div className={styles['journey-empty-body']}>
+              <div className={styles['journey-empty-title']}>Your first lesson is waiting</div>
+              <div className={styles['journey-empty-sub']}>Complete a lesson and watch your learning story unfold here — one achievement at a time.</div>
+              <Link href="/learn" className={styles['journey-empty-btn']}>Start learning →</Link>
+            </div>
           </div>
         </Card>
       </div>

@@ -45,7 +45,7 @@ function getLevel(xp: number): { name: string; color: string; next: number | nul
   if (xp >= 601)  return { name: 'Expert',       color: 'var(--blue)',   next: 1001 }
   if (xp >= 301)  return { name: 'Practitioner', color: 'var(--green)',  next: 601 }
   if (xp >= 101)  return { name: 'Student',      color: 'var(--purple)', next: 301 }
-  return           { name: 'Novice',              color: 'var(--ink-soft)', next: 101 }
+  return           { name: 'Novice',              color: 'var(--purple)',   next: 101 }
 }
 
 function dayBucket(date: Date): 'today' | 'yesterday' | 'earlier' {
@@ -113,11 +113,16 @@ function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string
   if (idx === -1) idx = allChapters.length - 1
   const start = Math.max(0, idx - 2)
   const end = Math.min(allChapters.length, start + 5)
-  return allChapters.slice(start, end).map((c) => ({
-    id: c.id,
-    status: c.status === 'completed' ? 'done' : c.status === 'current' ? 'current' : 'locked',
-    emoji: c.status === 'current' ? activeEmoji : c.status === 'upcoming' ? '🔒' : undefined,
-  }))
+  return allChapters.slice(start, end).map((c) => {
+    const raw = c.title ?? ''
+    const label = raw.length > 16 ? raw.slice(0, 15) + '…' : raw || `Ch. ${c.order}`
+    return {
+      id: c.id,
+      status: c.status === 'completed' ? 'done' : c.status === 'current' ? 'current' : 'locked',
+      emoji: c.status === 'current' ? activeEmoji : c.status === 'upcoming' ? '🔒' : undefined,
+      label,
+    }
+  })
 }
 
 function buildLibrarySkillPath(
@@ -133,7 +138,7 @@ function buildLibrarySkillPath(
     if (n === current) status = 'current'
     else if (n < current || completed.has(n)) status = 'done'
     else status = 'locked'
-    nodes.push({ id: `lesson-${n}`, status, emoji: status === 'current' ? activeEmoji : status === 'locked' ? '🔒' : undefined })
+    nodes.push({ id: `lesson-${n}`, status, emoji: status === 'current' ? activeEmoji : status === 'locked' ? '🔒' : undefined, label: `Lesson ${n}` })
   }
   return nodes
 }

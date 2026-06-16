@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { SectionTitle } from '@/components/ui/candy'
+import { Card, SectionTitle } from '@/components/ui/candy'
 import styles from './dashboard.module.css'
 
 const GROUPS = [
@@ -30,21 +30,23 @@ export function ExploreLinks() {
   return (
     <div className={styles['explore-section']}>
       <SectionTitle>🧭 Explore</SectionTitle>
-      <div className={styles['explore-groups']}>
-        {GROUPS.map((group) => (
-          <div key={group.label} className={styles['explore-group']}>
-            <div className={styles['explore-group-label']}>{group.label}</div>
-            <div className={styles['explore-group-row']}>
-              {group.links.map((link) => (
-                <Link key={link.href} href={link.href} className={styles['explore-nav-item']}>
-                  <span className={styles['explore-nav-item-icon']}>{link.icon}</span>
-                  {link.label}
-                </Link>
-              ))}
+      <Card className={styles['explore-card']}>
+        <div className={styles['explore-groups']}>
+          {GROUPS.map((group) => (
+            <div key={group.label} className={styles['explore-group']}>
+              <div className={styles['explore-group-label']}>{group.label}</div>
+              <div className={styles['explore-group-row']}>
+                {group.links.map((link) => (
+                  <Link key={link.href} href={link.href} className={styles['explore-nav-item']}>
+                    <span className={styles['explore-nav-item-icon']}>{link.icon}</span>
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Card>
     </div>
   )
 }

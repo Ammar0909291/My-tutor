@@ -115,11 +115,9 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
             <span className={styles['level-stat-icon']}>🎓</span>
             <div className={styles['level-stat-info']}>
               <div className={styles['level-stat-val']}>
-                {data.certCount === 0 ? '—' : data.certCount}
+                {data.certCount === 0 ? '0' : data.certCount}
               </div>
-              <div className={styles['level-stat-label']}>
-                {data.certCount === 0 ? 'First cert coming soon' : 'Certificates'}
-              </div>
+              <div className={styles['level-stat-label']}>Certificates</div>
               <div className={styles['level-stat-msg']}>{certMsg}</div>
             </div>
           </Link>
@@ -128,7 +126,7 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
             <span className={styles['level-stat-icon']}>🔥</span>
             <div className={styles['level-stat-info']}>
               <div className={styles['level-stat-val']}>
-                {data.streakDays === 0 ? '—' : data.streakDays}
+                {data.streakDays === 0 ? '0' : data.streakDays}
               </div>
               <div className={styles['level-stat-label']}>Day streak</div>
               <div className={styles['level-stat-msg']}>{streakMsg}</div>

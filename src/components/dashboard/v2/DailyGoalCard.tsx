@@ -1,5 +1,5 @@
 import styles from './dashboard.module.css'
-import { Card, ProgressBar, ProgressRing } from '@/components/ui/candy'
+import { Card, ProgressRing } from '@/components/ui/candy'
 import type { DailyGoalData } from './types'
 
 interface DailyGoalCardProps {
@@ -13,7 +13,6 @@ export function DailyGoalCard({ data }: DailyGoalCardProps) {
       <div className={styles['goal-info']}>
         <div className={styles['goal-title']}>{data.title}</div>
         <div className={styles['goal-desc']}>{data.description}</div>
-        <ProgressBar percent={data.percent} />
       </div>
     </Card>
   )

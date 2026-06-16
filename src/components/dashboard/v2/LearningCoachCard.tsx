@@ -40,9 +40,9 @@ const PACE_TEXT: Record<string, string> = {
 }
 
 const LEVEL_BADGE: Record<string, { label: string; color: string; bg: string }> = {
-  beginner:     { label: 'Getting Started', color: '#58CC02', bg: 'rgba(88,204,2,0.15)' },
-  intermediate: { label: 'Intermediate',    color: '#E6AC00', bg: 'rgba(255,200,0,0.15)' },
-  advanced:     { label: 'Advanced',        color: '#8B5CF6', bg: 'rgba(139,92,246,0.18)' },
+  beginner:     { label: 'Getting Started', color: '#fff', bg: 'rgba(255,255,255,0.20)' },
+  intermediate: { label: 'Intermediate',    color: '#fff', bg: 'rgba(255,255,255,0.22)' },
+  advanced:     { label: 'Advanced',        color: '#fff', bg: 'rgba(255,255,255,0.22)' },
 }
 
 function humanize(s: string) {
@@ -155,7 +155,7 @@ export function LearningCoachCard() {
             <span className={styles['coach-tile-label']}>Strongest</span>
             <span className={styles['coach-tile-name']}>{strongest.name}</span>
             <span className={styles['coach-tile-pct']} style={{ color: 'var(--green)' }}>
-              {strongest.completionPercent > 0 ? `${strongest.completionPercent}%` : 'Just started'}
+              {strongest.completionPercent > 0 ? `${strongest.completionPercent}%` : 'Build it up!'}
             </span>
           </div>
 
@@ -186,7 +186,7 @@ export function LearningCoachCard() {
             <span className={styles['coach-tile-label']}>Focus Here</span>
             <span className={styles['coach-tile-name']}>{focusTile.name}</span>
             <span className={styles['coach-tile-pct']} style={{ color: 'var(--yellow-d)' }}>
-              {focusTile.completionPercent > 0 ? `${focusTile.completionPercent}%` : 'Just started'}
+              {focusTile.completionPercent > 0 ? `${focusTile.completionPercent}%` : 'Start here!'}
             </span>
           </div>
         </div>

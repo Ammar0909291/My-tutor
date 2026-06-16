@@ -41,6 +41,7 @@ export interface SkillNodeData {
   id: string
   status: SkillNodeStatus
   emoji?: string
+  label?: string
 }
 
 export interface LeagueEntry {
