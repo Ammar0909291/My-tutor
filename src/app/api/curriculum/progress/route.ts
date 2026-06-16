@@ -4,10 +4,12 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { awardXP } from '@/lib/xp'
 import { generateJSON } from '@/lib/ai/client'
+import { getSchoolChapters } from '@/lib/school/schoolRouting'
 
 const schema = z.object({
   subjectCode: z.string(),
   completedLesson: z.number().int().positive(),
+  // MED-7: totalLessons still accepted but ignored — computed server-side from catalog.
   totalLessons: z.number().int().positive().optional(),
   lessonTitle: z.string().optional(),
   lessonGoal: z.string().optional(),
@@ -38,7 +40,16 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectCode, completedLesson, totalLessons, lessonTitle, lessonGoal } = schema.parse(body)
+    const { subjectCode, completedLesson, lessonTitle, lessonGoal } = schema.parse(body)
+
+    // MED-7: derive totalLessons from the server-authoritative catalog.
+    // subjectCode format: "boardId:subjectSlug:grade"
+    const [boardId, subjectSlug, gradeStr] = subjectCode.split(':')
+    const grade = parseInt(gradeStr ?? '', 10)
+    const catalogChapters = (boardId && subjectSlug && !isNaN(grade))
+      ? getSchoolChapters(boardId, subjectSlug, grade)
+      : []
+    const totalLessons = catalogChapters.length > 0 ? catalogChapters.length : undefined
 
     const existing = await prisma.studentProgress.findUnique({
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },

@@ -14,7 +14,7 @@ const schema = z.object({
     .array(z.object({ questionId: z.string(), value: z.union([z.number(), z.boolean(), z.string()]) }))
     .min(1)
     .max(60),
-  startedAt: z.string().datetime().optional(),
+  // HIGH-9: startedAt removed — server derives it from createdAt (see below).
 })
 
 const nodeMap = new Map(ALL_KG_NODES.map((n) => [n.id, n.title]))
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   const parsed = schema.safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
 
-  const { sessionId, answers, startedAt: startedAtStr } = parsed.data
+  const { sessionId, answers } = parsed.data
 
   const ps = await withRetry(() => prisma.practiceSession.findUnique({
     where: { id: sessionId },
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
   }))
   if (!ps || ps.userId !== session.user.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   if (ps.kind !== 'mock') return NextResponse.json({ error: 'Not a mock session' }, { status: 400 })
+  // HIGH-8: early exit for sequential-replay case (optimisation; real guard is the atomic UPDATE below).
   if (ps.completedAt) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
   const profile = await withRetry(() => prisma.profile.findUnique({
@@ -49,7 +50,8 @@ export async function POST(req: NextRequest) {
   const questions = ps.questions as unknown as PracticeQuestion[]
   const typedAnswers: PracticeAnswer[] = answers.map((a) => ({ questionId: a.questionId, value: a.value }))
   const chapters = getSchoolChapters(board, ps.subjectSlug, grade)
-  const startedAt = startedAtStr ? new Date(startedAtStr) : ps.createdAt
+  // HIGH-9: always use server-stored createdAt — never the client-supplied value.
+  const startedAt = ps.createdAt
 
   const result = evaluateMockTest(sessionId, questions, typedAnswers, chapters, startedAt)
 
@@ -57,11 +59,13 @@ export async function POST(req: NextRequest) {
   result.strongTopicTitles = result.strongTopicIds.map((id: string) => nodeMap.get(id) ?? id).filter(Boolean)
   result.weakTopicTitles = result.weakTopicIds.map((id: string) => nodeMap.get(id) ?? id).filter(Boolean)
 
-  // Persist score + completion
-  await withRetry(() => prisma.practiceSession.update({
-    where: { id: sessionId },
+  // HIGH-8: atomic claim — only ONE concurrent request can win this UPDATE.
+  // If 0 rows affected the session was already claimed; return 409, no side-effects.
+  const claimed = await withRetry(() => prisma.practiceSession.updateMany({
+    where: { id: sessionId, completedAt: null },
     data: { completedAt: new Date(), score: result.score },
   }))
+  if (claimed.count === 0) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
   // Record weak topics as mistake records for exam readiness + future planning
   if (result.weakTopicIds.length > 0) {

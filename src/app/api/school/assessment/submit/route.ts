@@ -32,6 +32,8 @@ export async function POST(req: NextRequest) {
   })
   if (!ps || ps.userId !== session.user.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   if (ps.kind !== 'assessment') return NextResponse.json({ error: 'Not an assessment session' }, { status: 400 })
+  // HIGH-8: early exit for the sequential-replay case (optimisation only;
+  // the real atomic guard is the conditional UPDATE below).
   if (ps.completedAt) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
   const profile = await prisma.profile.findUnique({
@@ -54,11 +56,13 @@ export async function POST(req: NextRequest) {
   const questions = ps.questions as unknown as PracticeQuestion[]
   const result = evaluateChapterAssessment(sessionId, questions, answers as PracticeAnswer[], nextChapter)
 
-  // Persist score + completion
-  await prisma.practiceSession.update({
-    where: { id: sessionId },
+  // HIGH-8: atomic claim — only ONE concurrent request can win this UPDATE.
+  // If 0 rows affected the session was already claimed; return 409, no side-effects.
+  const claimed = await prisma.practiceSession.updateMany({
+    where: { id: sessionId, completedAt: null },
     data: { completedAt: new Date(), score: result.accuracyPercent },
   })
+  if (claimed.count === 0) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
   // If passed: mark chapter complete in StudentProgress
   if (result.passed && ps.chapterId) {

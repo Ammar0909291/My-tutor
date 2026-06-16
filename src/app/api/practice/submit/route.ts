@@ -14,6 +14,7 @@ const schema = z.object({
     correctIndex: z.number().optional(),
   })).max(100).default([]),
   correct: z.array(z.boolean()).min(1).max(100),
+  idempotencyKey: z.string().max(128).optional(),
 })
 
 export async function POST(req: Request) {
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectSlug, topicSlug, questions, correct } = schema.parse(body)
+    const { subjectSlug, topicSlug, questions, correct, idempotencyKey } = schema.parse(body)
 
     const total = correct.length
     const correctCount = correct.filter(Boolean).length
@@ -37,16 +38,28 @@ export async function POST(req: Request) {
       correct: isCorrect,
     }))
 
-    const practiceSession = await withRetry(() => prisma.practiceSession.create({
-      data: {
-        userId,
-        subjectSlug,
-        topicSlug,
-        questions: storedQuestions,
-        completedAt: new Date(),
-        score,
-      },
-    }))
+    // HIGH-6: if idempotencyKey is supplied the DB unique constraint is the
+    // atomic guard — two concurrent requests with the same key cannot both
+    // succeed; the second one hits P2002 and we return 409, no side-effects.
+    let practiceSession
+    try {
+      practiceSession = await withRetry(() => prisma.practiceSession.create({
+        data: {
+          userId,
+          subjectSlug,
+          topicSlug,
+          questions: storedQuestions,
+          completedAt: new Date(),
+          score,
+          ...(idempotencyKey ? { idempotencyKey } : {}),
+        },
+      }))
+    } catch (e: unknown) {
+      if ((e as { code?: string })?.code === 'P2002') {
+        return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
+      }
+      throw e
+    }
 
     const mistakeIndexes = correct
       .map((isCorrect, i) => (isCorrect ? -1 : i))

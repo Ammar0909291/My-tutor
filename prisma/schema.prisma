@@ -399,10 +399,11 @@ model PracticeSession {
   chapterId   String?
   // Sprint BN: "practice" (default) | "assessment"
   kind        String    @default("practice")
-  questions   Json      // StoredPracticeQuestion[] — includes correct answers (never sent to client)
-  completedAt DateTime?
-  score       Int?      // 0-100
-  createdAt   DateTime  @default(now())
+  questions       Json      // StoredPracticeQuestion[] — includes correct answers (never sent to client)
+  completedAt     DateTime?
+  score           Int?      // 0-100
+  idempotencyKey  String?   @unique  // HIGH-6: client-supplied key; DB unique constraint is the atomic dedup guard
+  createdAt       DateTime  @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
