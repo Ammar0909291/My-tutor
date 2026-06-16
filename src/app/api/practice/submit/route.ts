@@ -12,8 +12,8 @@ const schema = z.object({
   questions: z.array(z.object({
     question: z.string(),
     correctIndex: z.number().optional(),
-  })).default([]),
-  correct: z.array(z.boolean()).min(1),
+  })).max(100).default([]),
+  correct: z.array(z.boolean()).min(1).max(100),
 })
 
 export async function POST(req: Request) {
@@ -102,6 +102,9 @@ export async function POST(req: Request) {
       topicProgress: { status: topicProgress.status, masteryPct: topicProgress.masteryPct },
     })
   } catch (err) {
+    if (err instanceof z.ZodError) {
+      return NextResponse.json({ error: err.errors[0].message }, { status: 400 })
+    }
     console.error('[practice/submit]', err)
     return NextResponse.json({ error: 'Failed to submit practice results' }, { status: 500 })
   }

@@ -7,7 +7,12 @@ import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
 
 const schema = z.object({
-  messages: z.array(z.object({ role: z.enum(['system', 'user', 'assistant']), content: z.string() })),
+  messages: z.array(
+    z.object({
+      role: z.enum(['system', 'user', 'assistant']),
+      content: z.string().max(8000),
+    })
+  ).max(50),
 })
 
 export async function POST(req: Request) {

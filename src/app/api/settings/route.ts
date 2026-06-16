@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 
 const schema = z.object({
-  voiceId: z.string().optional(),
+  voiceId: z.string().max(100).optional(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
   country: z.enum(['ru', 'in', 'global']).optional(),
   voiceSpeed: z.union([
