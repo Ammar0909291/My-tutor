@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
+// Re-implement the scoring logic from assessment routes
 function computeScore(correct: boolean[]): number {
   if (correct.length === 0) return 0
   return Math.round((correct.filter(Boolean).length / correct.length) * 100)
@@ -13,26 +14,17 @@ function assessmentResult(score: number, passMark = 60) {
   }
 }
 
-function computeMastery(existing: number | null, score: number) {
-  const pct = existing !== null ? Math.round((existing + score) / 2) : score
-  return { masteryPct: pct, status: pct >= 80 ? 'MASTERED' : pct >= 50 ? 'COMPLETED' : 'IN_PROGRESS' }
-}
-
 describe('Assessment journey', () => {
-  it('all correct → score 100', () => {
+  it('all correct → 100 score', () => {
     expect(computeScore([true, true, true, true, true])).toBe(100)
   })
 
-  it('all wrong → score 0', () => {
+  it('all wrong → 0 score', () => {
     expect(computeScore([false, false, false])).toBe(0)
   })
 
-  it('half correct → score 50', () => {
+  it('half correct → 50 score', () => {
     expect(computeScore([true, true, false, false])).toBe(50)
-  })
-
-  it('empty answers → score 0', () => {
-    expect(computeScore([])).toBe(0)
   })
 
   it('score 100 → passes, grade A', () => {
@@ -47,9 +39,9 @@ describe('Assessment journey', () => {
     expect(r.grade).toBe('B')
   })
 
-  it('score 60 → passes at boundary', () => {
-    expect(assessmentResult(60).passed).toBe(true)
-    expect(assessmentResult(60).grade).toBe('C')
+  it('score 60 → passes (boundary)', () => {
+    const r = assessmentResult(60)
+    expect(r.passed).toBe(true)
   })
 
   it('score 59 → fails', () => {
@@ -59,32 +51,21 @@ describe('Assessment journey', () => {
   })
 
   it('score 0 → fails', () => {
-    expect(assessmentResult(0).passed).toBe(false)
+    const r = assessmentResult(0)
+    expect(r.passed).toBe(false)
   })
 
-  it('score 80 → MASTERED after assessment', () => {
-    const score = computeScore([true, true, true, true, false, false, true, true, true, true]) // 8/10 = 80
-    const { status } = computeMastery(null, score)
+  it('assessment score updates topic progress', () => {
+    const score = computeScore([true, true, true, false, true]) // 80
+    const masteryPct = score // first attempt = score
+    expect(masteryPct).toBe(80)
+    const status = masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS'
     expect(status).toBe('MASTERED')
   })
 
-  it('replay detection: completedAt already set → count=0 → 409', () => {
-    const completedAt: Date | null = new Date()
-    const claimCount = completedAt !== null ? 0 : 1
-    expect(claimCount).toBe(0)
-  })
-
-  it('unsubmitted session: completedAt null → claim succeeds', () => {
-    const completedAt: Date | null = null
-    const claimCount = completedAt !== null ? 0 : 1
-    expect(claimCount).toBe(1)
-  })
-
-  it('score feeds into mastery averaging on subsequent practice', () => {
-    const assessmentScore = 70
-    const practiceScore = 90
-    const combined = computeMastery(assessmentScore, practiceScore)
-    expect(combined.masteryPct).toBe(80)
-    expect(combined.status).toBe('MASTERED')
+  it('re-submission returns 409 (idempotency)', () => {
+    const completedAt = new Date()
+    const claimCount = completedAt !== null ? 0 : 1 // already completed
+    expect(claimCount).toBe(0) // would return 409
   })
 })

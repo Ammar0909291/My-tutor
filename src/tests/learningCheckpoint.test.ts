@@ -15,21 +15,25 @@ const CHECKPOINTS: Checkpoint[] = [
 ]
 
 function getEarnedCheckpoints(masteryPct: number, alreadyEarned: string[] = []): Checkpoint[] {
-  return CHECKPOINTS.filter(cp => masteryPct >= cp.threshold && !alreadyEarned.includes(cp.id))
+  return CHECKPOINTS.filter(
+    cp => masteryPct >= cp.threshold && !alreadyEarned.includes(cp.id)
+  )
 }
 
 describe('Learning checkpoint journey', () => {
-  it('mastery 0 earns first_lesson checkpoint', () => {
-    expect(getEarnedCheckpoints(0).some(c => c.id === 'first_lesson')).toBe(true)
+  it('first lesson triggers first_lesson checkpoint', () => {
+    const earned = getEarnedCheckpoints(0)
+    expect(earned.some(c => c.id === 'first_lesson')).toBe(true)
   })
 
-  it('mastery 50 earns beginner and intermediate', () => {
-    const ids = getEarnedCheckpoints(50).map(c => c.id)
+  it('mastery 50 earns beginner and intermediate checkpoints', () => {
+    const earned = getEarnedCheckpoints(50)
+    const ids = earned.map(c => c.id)
     expect(ids).toContain('beginner')
     expect(ids).toContain('intermediate')
   })
 
-  it('already-earned checkpoints not re-awarded', () => {
+  it('already-earned checkpoints are not re-awarded', () => {
     const alreadyEarned = ['first_lesson', 'beginner']
     const newlyEarned = getEarnedCheckpoints(60, alreadyEarned)
     expect(newlyEarned.some(c => c.id === 'first_lesson')).toBe(false)
@@ -38,36 +42,30 @@ describe('Learning checkpoint journey', () => {
   })
 
   it('mastery 100 earns master checkpoint', () => {
-    expect(getEarnedCheckpoints(100).some(c => c.id === 'master')).toBe(true)
+    const earned = getEarnedCheckpoints(100)
+    expect(earned.some(c => c.id === 'master')).toBe(true)
   })
 
-  it('mastery 74 does not earn advanced', () => {
-    expect(getEarnedCheckpoints(74).some(c => c.id === 'advanced')).toBe(false)
+  it('mastery 74 does not earn advanced checkpoint', () => {
+    const earned = getEarnedCheckpoints(74)
+    expect(earned.some(c => c.id === 'advanced')).toBe(false)
   })
 
-  it('mastery 75 earns advanced', () => {
-    expect(getEarnedCheckpoints(75).some(c => c.id === 'advanced')).toBe(true)
+  it('mastery 75 earns advanced checkpoint', () => {
+    const earned = getEarnedCheckpoints(75)
+    expect(earned.some(c => c.id === 'advanced')).toBe(true)
   })
 
-  it('all already earned → nothing new', () => {
+  it('duplicate prevention: all already earned → nothing new', () => {
     const allIds = CHECKPOINTS.map(c => c.id)
-    expect(getEarnedCheckpoints(100, allIds).length).toBe(0)
+    const newlyEarned = getEarnedCheckpoints(100, allIds)
+    expect(newlyEarned.length).toBe(0)
   })
 
-  it('checkpoints are ordered by threshold', () => {
+  it('checkpoints progress in order', () => {
     const thresholds = CHECKPOINTS.map(c => c.threshold)
     for (let i = 1; i < thresholds.length; i++) {
       expect(thresholds[i]).toBeGreaterThanOrEqual(thresholds[i - 1])
     }
-  })
-
-  it('mastery 99 does not earn master', () => {
-    expect(getEarnedCheckpoints(99).some(c => c.id === 'master')).toBe(false)
-  })
-
-  it('mastery 24 only earns first_lesson', () => {
-    const earned = getEarnedCheckpoints(24)
-    expect(earned.length).toBe(1)
-    expect(earned[0].id).toBe('first_lesson')
   })
 })

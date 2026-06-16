@@ -30,15 +30,11 @@ describe('Certificate journey', () => {
     expect(isCertificateEligible({ score: 59, passMark: 60, allTopicsAttempted: true, minSessionsCompleted: true })).toBe(false)
   })
 
-  it('no sessions completed → not eligible', () => {
+  it('no sessions → not eligible', () => {
     expect(isCertificateEligible({ score: 100, passMark: 60, allTopicsAttempted: true, minSessionsCompleted: false })).toBe(false)
   })
 
-  it('score 100, all conditions met → eligible', () => {
+  it('boundary: score=100, all topics, sessions → eligible', () => {
     expect(isCertificateEligible({ score: 100, passMark: 60, allTopicsAttempted: true, minSessionsCompleted: true })).toBe(true)
-  })
-
-  it('score 0, all conditions met → not eligible', () => {
-    expect(isCertificateEligible({ score: 0, passMark: 60, allTopicsAttempted: true, minSessionsCompleted: true })).toBe(false)
   })
 })

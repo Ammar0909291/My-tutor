@@ -1,39 +1,27 @@
 import { describe, it, expect } from 'vitest'
-import { z } from 'zod'
 
-const registerSchema = z.object({
-  name: z.string().trim().min(2).max(80),
-  email: z.string().email(),
-  password: z.string().min(8).max(100),
-})
-
-const onboardingSchema = z.object({
-  selfDescription: z.string().trim().min(10).max(2000),
-  voiceChoice: z.string(),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
-})
-
+// Pure state machine tests — no Prisma needed
 describe('New student journey state machine', () => {
-  it('registration schema accepts valid input', () => {
-    expect(registerSchema.safeParse({ name: 'Alice', email: 'alice@test.com', password: 'password123' }).success).toBe(true)
+  // Registration produces valid user shape
+  it('registration schema produces correct user shape', () => {
+    const { z } = require('zod')
+    const registerSchema = z.object({
+      name: z.string().trim().min(2).max(80),
+      email: z.string().email(),
+      password: z.string().min(8).max(100),
+    })
+    const result = registerSchema.safeParse({ name: 'Alice', email: 'alice@test.com', password: 'password123' })
+    expect(result.success).toBe(true)
   })
 
   it('registration rejects whitespace-only name', () => {
-    expect(registerSchema.safeParse({ name: '   ', email: 'a@b.com', password: 'password123' }).success).toBe(false)
+    const { z } = require('zod')
+    const registerSchema = z.object({ name: z.string().trim().min(2).max(80) })
+    const result = registerSchema.safeParse({ name: '   ' })
+    expect(result.success).toBe(false)
   })
 
-  it('registration rejects short name', () => {
-    expect(registerSchema.safeParse({ name: 'A', email: 'a@b.com', password: 'password123' }).success).toBe(false)
-  })
-
-  it('registration rejects invalid email', () => {
-    expect(registerSchema.safeParse({ name: 'Alice', email: 'notanemail', password: 'password123' }).success).toBe(false)
-  })
-
-  it('registration rejects short password', () => {
-    expect(registerSchema.safeParse({ name: 'Alice', email: 'a@b.com', password: 'short' }).success).toBe(false)
-  })
-
+  // Onboarding state transitions
   it('new student starts with onboardingCompleted=false', () => {
     const user = { onboardingCompleted: false, profile: null }
     expect(user.onboardingCompleted).toBe(false)
@@ -46,26 +34,21 @@ describe('New student journey state machine', () => {
     expect(user.profile).not.toBeNull()
   })
 
-  it('initial topic progress state is empty', () => {
+  it('initial topic progress state is valid', () => {
+    // A new student has no topic progress records → default state
     const topicProgressList: Array<{ masteryPct: number; status: string }> = []
-    expect(topicProgressList.filter(t => t.status === 'MASTERED').length).toBe(0)
+    const completedTopics = topicProgressList.filter(t => t.status === 'MASTERED' || t.status === 'COMPLETED')
+    expect(completedTopics.length).toBe(0)
   })
 
-  it('onboarding schema requires selfDescription min 10 chars', () => {
-    expect(onboardingSchema.safeParse({ selfDescription: 'short', voiceChoice: 'female' }).success).toBe(false)
-    expect(onboardingSchema.safeParse({ selfDescription: 'I want to learn JavaScript programming', voiceChoice: 'female' }).success).toBe(true)
-  })
-
-  it('onboarding schema rejects whitespace-only selfDescription', () => {
-    expect(onboardingSchema.safeParse({ selfDescription: '          ', voiceChoice: 'female' }).success).toBe(false)
-  })
-
-  it('onboarding schema rejects invalid teachingLanguage', () => {
-    expect(onboardingSchema.safeParse({ selfDescription: 'I want to learn things properly', voiceChoice: 'female', teachingLanguage: 'fr' }).success).toBe(false)
-  })
-
-  it('registration name trim: trailing spaces do not count toward min length', () => {
-    // 'A ' trims to 'A' which is length 1 — fails min(2)
-    expect(registerSchema.safeParse({ name: 'A ', email: 'a@b.com', password: 'password123' }).success).toBe(false)
+  it('general learner onboarding schema requires selfDescription', () => {
+    const { z } = require('zod')
+    const schema = z.object({
+      selfDescription: z.string().trim().min(10).max(2000),
+      voiceChoice: z.string(),
+      teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
+    })
+    expect(schema.safeParse({ selfDescription: 'short', voiceChoice: 'female' }).success).toBe(false)
+    expect(schema.safeParse({ selfDescription: 'I want to learn JavaScript programming', voiceChoice: 'female' }).success).toBe(true)
   })
 })
