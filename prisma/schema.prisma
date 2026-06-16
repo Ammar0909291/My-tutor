@@ -630,10 +630,11 @@ model FinalAssessmentResult {
   id             String   @id @default(cuid())
   userId         String
   subjectCode    String
-  score          Int
-  totalQuestions Int
-  passed         Boolean
+  score          Int      @default(0)
+  totalQuestions Int      @default(0)
+  passed         Boolean  @default(false)
   takenAt        DateTime @default(now())
+  questions      Json?    // stored server-side at generate time; used for server-side grading
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

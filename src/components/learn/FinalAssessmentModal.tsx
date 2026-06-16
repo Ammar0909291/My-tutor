@@ -6,8 +6,8 @@ import { useLanguage } from '@/components/ui/LanguageToggle'
 interface Question {
   question: string
   options: string[]
-  correctIndex: number
-  explanation?: string
+  // correctIndex is intentionally absent: the server never sends it.
+  // Grading is done server-side; the client only submits selected indices.
 }
 
 interface Props {
@@ -79,18 +79,20 @@ export function FinalAssessmentModal({ subjectSlug, subjectName, lessonTitles, o
   }, [])
 
   function handleSubmit() {
-    const computedScore = questions.reduce((acc, q, i) => acc + (answers[i] === q.correctIndex ? 1 : 0), 0)
+    // Send only the selected option indices — the server computes the score
+    // against its stored questions. Never send pre-computed score/total.
+    const answersArray = Array.from({ length: questions.length }, (_, i) => answers[i] ?? 0)
     setPhase('submitting')
     fetch('/api/final-assessment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subjectCode: subjectSlug, score: computedScore, total: questions.length }),
+      body: JSON.stringify({ subjectCode: subjectSlug, answers: answersArray }),
     })
       .then((r) => r.json())
       .then((d) => {
         if (d.success) {
-          setScore(computedScore)
-          setTotal(questions.length)
+          setScore(d.result.score)
+          setTotal(d.result.totalQuestions)
           setPassed(d.passed)
           setCertificateCode(d.certificate?.certificateCode ?? null)
           setPhase('results')

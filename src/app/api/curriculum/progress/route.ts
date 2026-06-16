@@ -44,14 +44,36 @@ export async function PATCH(req: Request) {
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
     })
 
-    const isNewCompletion = !existing?.completedLessons.includes(completedLesson)
+    // Determine first-completion atomically to prevent XP farming.
+    //
+    // For existing rows: issue a raw UPDATE that appends the lesson to the
+    // completedLessons array ONLY IF it is not already present. PostgreSQL
+    // executes this as a single atomic operation, so two concurrent requests
+    // for the same lesson will produce exactly one row affected = exactly one
+    // isNewCompletion=true, preventing double XP award.
+    //
+    // For new rows (existing=null): isNewCompletion is always true; the upsert
+    // create branch handles the row insertion.
+    let isNewCompletion: boolean
+    if (!existing) {
+      isNewCompletion = true
+    } else {
+      const changed = await prisma.$executeRaw`
+        UPDATE student_progress
+        SET "completedLessons" = array_append("completedLessons", ${completedLesson}::int4)
+        WHERE "userId" = ${session.user.id}
+          AND "subjectCode" = ${subjectCode}
+          AND NOT (${completedLesson}::int4 = ANY("completedLessons"))
+      `
+      isNewCompletion = changed > 0
+    }
 
+    // Build the completed-lessons set for computing derived fields.
+    // When isNewCompletion=false the lesson is already in existing.completedLessons.
     const completedLessons = existing
-      ? Array.from(new Set([...existing.completedLessons, completedLesson]))
+      ? (isNewCompletion ? [...new Set([...existing.completedLessons, completedLesson])] : existing.completedLessons)
       : [completedLesson]
 
-    // Sprint N — derive subject completion fields when the client tells us
-    // how many lessons the subject has in total.
     const completionPercent = totalLessons
       ? Math.min(100, Math.round((completedLessons.length / totalLessons) * 100))
       : (existing?.completionPercent ?? 0)
@@ -72,7 +94,7 @@ export async function PATCH(req: Request) {
       },
       update: {
         currentLesson: Math.max((existing?.currentLesson ?? 1), completedLesson + 1),
-        completedLessons,
+        // completedLessons for existing rows is managed by the atomic raw UPDATE above
         lastStudiedAt: new Date(),
         updatedAt: new Date(),
         completionPercent,
@@ -81,36 +103,38 @@ export async function PATCH(req: Request) {
       },
     })
 
-    // Award XP (updates both all-time and weekly leaderboard)
-    await awardXP(session.user.id, 10)
-
-    // Generate spaced-repetition flashcards from the completed lesson — only
-    // on first completion, so re-completing a lesson doesn't spam duplicates.
+    // XP and flashcards are awarded only on genuine first completion.
+    // The atomic raw UPDATE above ensures concurrent calls cannot both
+    // receive isNewCompletion=true for the same lesson.
     let flashcardsCreated = 0
-    if (isNewCompletion && lessonTitle) {
-      try {
-        const cards = await generateJSON(
-          `Create 2 flashcard Q&A pairs to help a student remember the key concepts from this lesson.\n` +
-          `Subject: ${subjectCode}\nLesson: ${lessonTitle}\n${lessonGoal ? `Goal: ${lessonGoal}\n` : ''}` +
-          `Return ONLY a JSON array: [{"question":"...","answer":"..."}]. Keep answers under 2 sentences.`,
-          500,
-        )
-        if (Array.isArray(cards) && cards.length > 0) {
-          const result = await prisma.flashcard.createMany({
-            data: cards
-              .filter((c: { question?: string; answer?: string }) => c.question && c.answer)
-              .map((c: { question: string; answer: string }) => ({
-                userId: session.user.id,
-                topic: lessonTitle,
-                question: c.question,
-                answer: c.answer,
-                nextReview: new Date(),
-              })),
-          })
-          flashcardsCreated = result.count
+    if (isNewCompletion) {
+      await awardXP(session.user.id, 10)
+
+      if (lessonTitle) {
+        try {
+          const cards = await generateJSON(
+            `Create 2 flashcard Q&A pairs to help a student remember the key concepts from this lesson.\n` +
+            `Subject: ${subjectCode}\nLesson: ${lessonTitle}\n${lessonGoal ? `Goal: ${lessonGoal}\n` : ''}` +
+            `Return ONLY a JSON array: [{"question":"...","answer":"..."}]. Keep answers under 2 sentences.`,
+            500,
+          )
+          if (Array.isArray(cards) && cards.length > 0) {
+            const result = await prisma.flashcard.createMany({
+              data: cards
+                .filter((c: { question?: string; answer?: string }) => c.question && c.answer)
+                .map((c: { question: string; answer: string }) => ({
+                  userId: session.user.id,
+                  topic: lessonTitle,
+                  question: c.question,
+                  answer: c.answer,
+                  nextReview: new Date(),
+                })),
+            })
+            flashcardsCreated = result.count
+          }
+        } catch (err) {
+          console.error('[curriculum/progress] flashcard generation failed', err)
         }
-      } catch (err) {
-        console.error('[curriculum/progress] flashcard generation failed', err)
       }
     }
 
