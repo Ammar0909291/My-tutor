@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './dashboard.module.css'
 import { Card } from '@/components/ui/candy'
 import type { LeagueData } from './types'
@@ -9,6 +10,9 @@ interface LeagueCardProps {
 export function LeagueCard({ league }: LeagueCardProps) {
   return (
     <Card className={styles['side-card']}>
+      <div className={styles['side-title']}>
+        League <Link href="/leaderboard">View all</Link>
+      </div>
       <div className={styles['league-banner']}>
         <div className={styles['league-icon']}>{league.emoji}</div>
         <div className={styles['league-name']}>{league.name}</div>

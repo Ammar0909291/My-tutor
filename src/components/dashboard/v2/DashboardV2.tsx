@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import styles from './dashboard.module.css'
 import { TopBar } from './TopBar'
+import { NavHeader } from './NavHeader'
 import { HeroBanner } from './HeroBanner'
 import { DailyGoalCard } from './DailyGoalCard'
 import { ContinueCard } from './ContinueCard'
@@ -10,7 +11,14 @@ import { PracticeModes } from './PracticeModes'
 import { SkillPath } from './SkillPath'
 import { LeagueCard } from './LeagueCard'
 import { DailyQuests } from './DailyQuests'
+import { SubjectsGrid } from './SubjectsGrid'
+import { AchievementCenter } from './AchievementCenter'
+import { ActivityTimeline } from './ActivityTimeline'
+import { ExploreLinks } from './ExploreLinks'
 import { SectionTitle, useConfetti } from '@/components/ui/candy'
+import { InstallBanner } from '@/components/dashboard/InstallBanner'
+import MasterySummaryPanel from '@/components/mastery/MasterySummaryPanel'
+import CareerSummaryPanel from '@/components/career/CareerSummaryPanel'
 import type { DashboardV2Data } from './types'
 
 interface DashboardV2Props {
@@ -27,7 +35,13 @@ export function DashboardV2({ data }: DashboardV2Props) {
 
   return (
     <div className={styles.dashboardV2}>
+      <NavHeader userRole={data.topBar.userRole} />
+
       <div className={styles.wrap}>
+        <div className={styles['full-width']}>
+          <InstallBanner />
+        </div>
+
         <TopBar data={data.topBar} />
 
         <div className={styles.main}>
@@ -42,6 +56,20 @@ export function DashboardV2({ data }: DashboardV2Props) {
 
           <SectionTitle>🗺️ Your path</SectionTitle>
           <SkillPath nodes={data.skillPath} currentHref={data.continueLesson.href} />
+
+          {/* ── RESTORED EDUCATIONAL CAPABILITIES ── */}
+          <SubjectsGrid subjects={data.subjects} />
+          <AchievementCenter data={data.achievement} />
+          <ActivityTimeline items={data.recentActivity} />
+
+          {/* AI-powered intelligence panels (client — fetch own data) */}
+          <div className={styles['intelligence-section']}>
+            <SectionTitle>🧠 Learning Intelligence</SectionTitle>
+            <MasterySummaryPanel variant="dashboard" />
+            <CareerSummaryPanel variant="dashboard" />
+          </div>
+
+          <ExploreLinks />
         </div>
 
         <div className={styles.side}>

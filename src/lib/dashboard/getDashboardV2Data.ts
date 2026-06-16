@@ -8,7 +8,6 @@ import { getSubjectRoadmap, type RoadmapChapter } from '@/lib/school/roadmap/lea
 import { getGradeSubjects, chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 import { getLeagueForXP, currentWeekString } from '@/lib/xp'
-import { MOCK_DASHBOARD_DATA } from '@/components/dashboard/v2/mockData'
 import type {
   DashboardV2Data,
   ContinueLessonData,
@@ -16,16 +15,49 @@ import type {
   SkillNodeData,
   SkillNodeStatus,
   LeagueEntry,
+  SubjectCardData,
+  AchievementData,
+  ActivityItem,
+  DailyQuestData,
 } from '@/components/dashboard/v2/types'
 
-// No daily-plan equivalent exists for library subjects, and a school day's
-// plan can occasionally be empty (everything complete) — fall back to the
-// "3 lessons" goal shown in the approved mockup.
 const DEFAULT_DAILY_GOAL_LESSONS = 3
 const AVATAR_PALETTE = ['#FF5FA2', '#3B9EFF', '#8B5CF6', '#58CC02', '#FFC800', '#FF9600']
 const LEADERBOARD_SIZE = 5
 
-/** IST (Asia/Kolkata) calendar-day boundaries, expressed as UTC Date objects for Prisma filters. */
+const SUBJECT_COLOR_MAP: Record<string, { color: string; bgColor: string }> = {
+  c:           { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
+  cpp:         { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
+  python:      { color: 'var(--green)',  bgColor: 'rgba(88,204,2,0.12)' },
+  english:     { color: 'var(--yellow)', bgColor: 'rgba(255,200,0,0.12)' },
+  javascript:  { color: 'var(--yellow)', bgColor: 'rgba(255,200,0,0.12)' },
+  typescript:  { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
+  java:        { color: 'var(--orange)', bgColor: 'rgba(255,150,0,0.12)' },
+  russian:     { color: 'var(--purple)', bgColor: 'rgba(139,92,246,0.12)' },
+  mathematics: { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
+  physics:     { color: 'var(--purple)', bgColor: 'rgba(139,92,246,0.12)' },
+  chemistry:   { color: 'var(--green)',  bgColor: 'rgba(88,204,2,0.12)' },
+}
+const DEFAULT_SUBJECT_COLORS = { color: 'var(--pink)', bgColor: 'rgba(255,95,162,0.12)' }
+
+function getLevel(xp: number): { name: string; color: string; next: number | null } {
+  if (xp >= 1001) return { name: 'Master',       color: 'var(--yellow)', next: null }
+  if (xp >= 601)  return { name: 'Expert',       color: 'var(--blue)',   next: 1001 }
+  if (xp >= 301)  return { name: 'Practitioner', color: 'var(--green)',  next: 601 }
+  if (xp >= 101)  return { name: 'Student',      color: 'var(--purple)', next: 301 }
+  return           { name: 'Novice',              color: 'var(--ink-soft)', next: 101 }
+}
+
+function dayBucket(date: Date): 'today' | 'yesterday' | 'earlier' {
+  const now = new Date()
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const startOfYesterday = new Date(startOfToday.getTime() - 86400000)
+  if (date >= startOfToday) return 'today'
+  if (date >= startOfYesterday) return 'yesterday'
+  return 'earlier'
+}
+
+/** IST calendar-day boundaries as UTC Date objects for Prisma filters. */
 function getISTDayBoundsUTC(): { gte: Date; lt: Date } {
   const now = new Date()
   const istDate = new Intl.DateTimeFormat('en-CA', {
@@ -67,15 +99,14 @@ function emptyContinueLesson(): ContinueLessonData {
   }
 }
 
-function buildPracticeModes(tutorHref: string, quizHref: string): PracticeModeData[] {
+function buildPracticeModes(tutorHref: string): PracticeModeData[] {
   return [
     { id: 'tutor', emoji: '👨‍🏫', name: 'Tutor', description: 'Live lesson with code', href: tutorHref },
-    { id: 'quiz', emoji: '🎯', name: 'Quiz', description: 'Test your skills', badge: 'NEW', href: quizHref },
-    { id: 'coach', emoji: '🧭', name: 'Coach', description: 'Your study plan', href: '/coach' },
+    { id: 'quiz',  emoji: '🎯',   name: 'Quiz',  description: 'Test your skills', badge: 'NEW', href: '/quiz' },
+    { id: 'coach', emoji: '🧭',   name: 'Coach', description: 'Your study plan', href: '/coach' },
   ]
 }
 
-/** Window the roadmap's chapter list to (up to) 5 nodes centered on the current chapter. */
 function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string): SkillNodeData[] {
   if (allChapters.length === 0) return []
   let idx = allChapters.findIndex((c) => c.status === 'current')
@@ -89,7 +120,6 @@ function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string
   }))
 }
 
-/** 5-node window of lesson numbers centered on the learner's current lesson. */
 function buildLibrarySkillPath(
   sp: { currentLesson: number; completedLessons: number[] } | undefined,
   activeEmoji: string,
@@ -112,12 +142,24 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 
-  const [user, sessionsTodayCount, streak, myWeeklyXP, weeklyTop] = await withRetry(() => Promise.all([
+  const [
+    user,
+    sessionsTodayCount,
+    streak,
+    myWeeklyXP,
+    weeklyTop,
+    recentSessions,
+    subjectCertCount,
+    roadmapCertCount,
+    practiceCountToday,
+    topicsMastered,
+  ] = await withRetry(() => Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: {
         name: true,
         xpPoints: true,
+        role: true,
         profile: {
           select: {
             displayName: true,
@@ -138,6 +180,16 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
       take: LEADERBOARD_SIZE,
       include: { user: { select: { id: true, name: true } } },
     }),
+    prisma.learnSession.findMany({
+      where: { userId },
+      orderBy: { startedAt: 'desc' },
+      take: 10,
+      include: { subject: { select: { name: true, slug: true } } },
+    }),
+    prisma.subjectCertificate.count({ where: { userId } }).catch(() => 0),
+    prisma.certificate.count({ where: { userId } }).catch(() => 0),
+    prisma.practiceSession.count({ where: { userId, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }).catch(() => 0),
+    prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } }).catch(() => 0),
   ]))
 
   if (!user) redirect('/auth/login')
@@ -145,12 +197,15 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
 
   const profile = user.profile
   const displayName = profile.displayName ?? user.name ?? 'Student'
+  const xp = user.xpPoints ?? 0
   const isSchool = profile.userType === 'SCHOOL_STUDENT' && !!profile.educationBoard && !!profile.grade
+  const userRole = (user.role as 'ADMIN' | 'USER') ?? 'USER'
 
   let continueLesson: ContinueLessonData
   let practiceModes: PracticeModeData[]
   let skillPath: SkillNodeData[]
   let dailyGoalTarget: number
+  let subjectCards: SubjectCardData[] = []
 
   if (isSchool) {
     const board = profile.educationBoard!
@@ -159,7 +214,7 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
 
     if (schoolSlugs.length === 0) {
       continueLesson = emptyContinueLesson()
-      practiceModes = buildPracticeModes('/learn', '/learn')
+      practiceModes = buildPracticeModes('/learn')
       skillPath = []
       dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
     } else {
@@ -169,7 +224,6 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
       ])
       dailyGoalTarget = dailyPlan.length > 0 ? dailyPlan.length : DEFAULT_DAILY_GOAL_LESSONS
 
-      // Active subject = most recently studied, falling back to the first grade subject.
       let activeSlug = schoolSlugs[0]
       let bestTime = -Infinity
       for (const slug of schoolSlugs) {
@@ -191,10 +245,10 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
           estimatedMinutes: 15,
           href,
         }
-        practiceModes = buildPracticeModes(href, `${href}&practice=1`)
+        practiceModes = buildPracticeModes(href)
       } else {
         continueLesson = emptyContinueLesson()
-        practiceModes = buildPracticeModes('/learn', '/learn')
+        practiceModes = buildPracticeModes('/learn')
       }
 
       const roadmap = await getSubjectRoadmap(userId, board, grade, activeSlug).catch(() => null)
@@ -207,11 +261,17 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
 
     const studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
       where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
-      select: { subjectCode: true, currentLesson: true, completedLessons: true, lastStudiedAt: true, lastLessonTitle: true },
+      select: {
+        subjectCode: true,
+        currentLesson: true,
+        completedLessons: true,
+        lastStudiedAt: true,
+        lastLessonTitle: true,
+        completionPercent: true,
+      },
     }))
     const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
 
-    // Active subject = most recently studied, falling back to the first enrolled subject.
     const activePs = [...enrolledSubjects].sort((a, b) => {
       const ta = spMap.get(a.subject.slug)?.lastStudiedAt?.getTime() ?? 0
       const tb = spMap.get(b.subject.slug)?.lastStudiedAt?.getTime() ?? 0
@@ -232,13 +292,31 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
         estimatedMinutes: 5,
         href,
       }
-      practiceModes = buildPracticeModes(href, `${href}&practice=1`)
+      practiceModes = buildPracticeModes(href)
       skillPath = buildLibrarySkillPath(sp, lib?.icon ?? '📘')
     } else {
       continueLesson = emptyContinueLesson()
-      practiceModes = buildPracticeModes('/learn', '/learn')
+      practiceModes = buildPracticeModes('/learn')
       skillPath = []
     }
+
+    subjectCards = enrolledSubjects.map((ps) => {
+      const slug = ps.subject.slug
+      const sp = spMap.get(slug)
+      const lib = findLibrarySubject(slug)
+      const colors = SUBJECT_COLOR_MAP[slug] ?? DEFAULT_SUBJECT_COLORS
+      return {
+        slug,
+        name: lib?.name ?? ps.subject.name,
+        icon: lib?.icon ?? '📘',
+        color: colors.color,
+        bgColor: colors.bgColor,
+        currentLesson: sp?.currentLesson ?? 1,
+        lastLessonTitle: sp?.lastLessonTitle ?? null,
+        completionPercent: sp?.completionPercent ?? 0,
+        href: `/learn?subject=${slug}`,
+      }
+    })
   }
 
   // Daily Goal ring
@@ -249,7 +327,7 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     ? 'Goal complete! Amazing work today! 🎉'
     : `${sessionsToday} of ${dailyGoalTarget} ${dailyGoalTarget === 1 ? 'lesson' : 'lessons'} done — ${remaining} more to hit your goal!`
 
-  // League — replicates /api/leaderboard's week-mode query, fed into getLeagueForXP for the tier label.
+  // League
   const myXP = myWeeklyXP?.xp ?? 0
   const tier = getLeagueForXP(myXP)
   const myRank = myWeeklyXP
@@ -270,12 +348,72 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     }
   })
 
+  // Achievement Center
+  const level = getLevel(xp)
+  const totalCerts = (subjectCertCount ?? 0) + (roadmapCertCount ?? 0)
+  const achievement: AchievementData = {
+    levelName: level.name,
+    levelColor: level.color,
+    xp,
+    xpToNext: level.next,
+    certCount: totalCerts,
+    streakDays: streak.currentStreak,
+  }
+
+  // Recent Activity timeline
+  const recentActivity: ActivityItem[] = recentSessions.map((s) => ({
+    id: s.id,
+    subjectIcon: findLibrarySubject(s.subject.slug)?.icon ?? '📘',
+    subjectName: s.subject.name,
+    title: (s as any).title ?? null,
+    timeStr: s.startedAt.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    bucket: dayBucket(s.startedAt),
+  }))
+
+  // Real Daily Quests from live data
+  const dailyQuests: DailyQuestData[] = [
+    {
+      id: 'q-lessons',
+      icon: '📚',
+      iconBg: 'q1',
+      name: 'Daily Lessons',
+      progress: sessionsToday,
+      target: dailyGoalTarget,
+      unitLabel: 'lessons',
+      gradientFrom: '#FFC800',
+      gradientTo: '#FF9600',
+    },
+    {
+      id: 'q-practice',
+      icon: '🎯',
+      iconBg: 'q2',
+      name: 'Practice Sessions',
+      progress: practiceCountToday,
+      target: 3,
+      unitLabel: 'sessions',
+      gradientFrom: '#3B9EFF',
+      gradientTo: '#1B7EEF',
+    },
+    {
+      id: 'q-mastery',
+      icon: '⭐',
+      iconBg: 'q3',
+      name: 'Topics Mastered',
+      progress: Math.min(topicsMastered, 5),
+      target: 5,
+      unitLabel: 'topics',
+      gradientFrom: '#FF5FA2',
+      gradientTo: '#FF3F82',
+    },
+  ]
+
   return {
     topBar: {
       streak: streak.currentStreak,
-      gems: user.xpPoints ?? 0,
+      gems: xp,
       hearts: 5,
       maxHearts: 5,
+      userRole,
     },
     hero: {
       greeting: timeOfDayGreeting(displayName),
@@ -295,6 +433,9 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
       subtitle: myRank ? `You're #${myRank} this week!` : 'Earn XP this week to join the leaderboard!',
       entries,
     },
-    dailyQuests: MOCK_DASHBOARD_DATA.dailyQuests,
+    dailyQuests,
+    subjects: subjectCards,
+    achievement,
+    recentActivity,
   }
 }

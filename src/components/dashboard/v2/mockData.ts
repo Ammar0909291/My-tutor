@@ -11,6 +11,7 @@ export const MOCK_DASHBOARD_DATA: DashboardV2Data = {
     gems: 350,
     hearts: 5,
     maxHearts: 5,
+    userRole: 'USER' as const,
   },
   hero: {
     greeting: 'Good evening, Alex! 🌙',
@@ -59,4 +60,14 @@ export const MOCK_DASHBOARD_DATA: DashboardV2Data = {
     { id: 'q2', icon: '💬', iconBg: 'q2', name: 'Ask 5 questions', progress: 2, target: 5, unitLabel: 'questions', gradientFrom: '#3B9EFF', gradientTo: '#2B7FD9' },
     { id: 'q3', icon: '🎯', iconBg: 'q3', name: 'Complete a quiz', progress: 0, target: 1, unitLabel: 'quiz', gradientFrom: '#FF5FA2', gradientTo: '#FF4B4B' },
   ],
+  subjects: [],
+  achievement: {
+    levelName: 'Student',
+    levelColor: 'var(--purple)',
+    xp: 350,
+    xpToNext: 601,
+    certCount: 0,
+    streakDays: 7,
+  },
+  recentActivity: [],
 }

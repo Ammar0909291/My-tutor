@@ -1,14 +1,9 @@
-/**
- * Phase 1 (presentational) prop shapes for the gamified dashboard, shaped to
- * match what the Phase 2 `/api/dashboard` aggregator will return — see
- * design/dashboard-approved.html for the visual source of truth.
- */
-
 export interface TopBarData {
   streak: number
   gems: number
   hearts: number
   maxHearts: number
+  userRole: 'ADMIN' | 'USER'
 }
 
 export interface HeroBannerData {
@@ -77,6 +72,36 @@ export interface DailyQuestData {
   gradientTo: string
 }
 
+export interface SubjectCardData {
+  slug: string
+  name: string
+  icon: string
+  color: string
+  bgColor: string
+  currentLesson: number
+  lastLessonTitle: string | null
+  completionPercent: number
+  href: string
+}
+
+export interface AchievementData {
+  levelName: string
+  levelColor: string
+  xp: number
+  xpToNext: number | null
+  certCount: number
+  streakDays: number
+}
+
+export interface ActivityItem {
+  id: string
+  subjectIcon: string
+  subjectName: string
+  title: string | null
+  timeStr: string
+  bucket: 'today' | 'yesterday' | 'earlier'
+}
+
 export interface DashboardV2Data {
   topBar: TopBarData
   hero: HeroBannerData
@@ -86,4 +111,7 @@ export interface DashboardV2Data {
   skillPath: SkillNodeData[]
   league: LeagueData
   dailyQuests: DailyQuestData[]
+  subjects: SubjectCardData[]
+  achievement: AchievementData
+  recentActivity: ActivityItem[]
 }
