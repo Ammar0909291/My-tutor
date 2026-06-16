@@ -10,6 +10,7 @@ export async function GET() {
     if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
+      omit: { passwordHash: true },
       include: {
         profile: true,
         _count: { select: { learnSessions: true } }
@@ -72,6 +73,7 @@ export async function PATCH(req: NextRequest) {
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
+      omit: { passwordHash: true },
       include: { profile: true, _count: { select: { learnSessions: true } } },
     })
     return NextResponse.json({ success: true, user })

@@ -1,14 +1,10 @@
+import { prisma } from '@/lib/db/prisma'
+import { redis } from '@/lib/redis/client'
+import { getFailureCounters } from '@/lib/monitoring'
+
 interface OpsData {
   health: { db: boolean; redis: string; uptime: number }
   failureCounters: Record<string, number>
-  env: {
-    smtp: boolean
-    monitoring: boolean
-    groq: boolean
-    yandex: boolean
-    openrouter: boolean
-    adminEmails: boolean
-  }
   timestamp: string
 }
 
@@ -42,21 +38,35 @@ function EnvRow({ name, set }: { name: string; set: boolean }) {
 
 export default async function AdminOpsPage() {
   let data: OpsData | null = null
-  let fetchError = false
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/api/admin/ops`,
-      { cache: 'no-store' }
-    )
-    if (res.ok) {
-      data = (await res.json()) as OpsData
-    } else {
-      fetchError = true
+    let dbHealthy = false
+    try {
+      await Promise.race([
+        prisma.$queryRaw`SELECT 1`,
+        new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+      ])
+      dbHealthy = true
+    } catch { /* db unreachable */ }
+
+    const redisUrl = process.env.REDIS_URL
+    let redisStatus: string = redisUrl ? 'configured' : 'not-configured'
+    if (redis) {
+      try {
+        await Promise.race([
+          redis.ping(),
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 2000)),
+        ])
+        redisStatus = 'configured'
+      } catch { redisStatus = 'error' }
     }
-  } catch {
-    fetchError = true
-  }
+
+    data = {
+      health: { db: dbHealthy, redis: redisStatus, uptime: process.uptime() },
+      failureCounters: getFailureCounters(),
+      timestamp: new Date().toISOString(),
+    }
+  } catch { /* data remains null */ }
 
   // Env checks direct in server component
   const requiredEnv: { name: string; set: boolean }[] = [
@@ -99,17 +109,17 @@ export default async function AdminOpsPage() {
         )}
       </div>
 
-      {fetchError && (
+      {!data && (
         <div
           className="rounded-xl border p-5 mb-5"
           style={{ background: 'rgba(248,81,73,0.07)', borderColor: 'rgba(248,81,73,0.25)' }}
         >
           <p className="text-sm font-bold" style={{ color: '#F85149' }}>
-            Failed to load health data from /api/admin/ops
+            Failed to load health data
           </p>
           <p className="text-xs mt-1" style={{ color: 'var(--text-dim)' }}>
-            The API route may be unavailable. Environment checks below still use server-side
-            process.env.
+            Could not reach the database or monitoring layer. Environment checks below still use
+            server-side process.env.
           </p>
         </div>
       )}
