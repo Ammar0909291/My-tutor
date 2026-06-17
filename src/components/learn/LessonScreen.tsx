@@ -15,6 +15,7 @@ import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
+import { Card } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
@@ -195,40 +196,36 @@ interface Props {
 }
 
 // ─── Panel wrapper ────────────────────────────────────────────────────────────
+// Sprint 1 (lesson-experience modernization): chrome only — built on the
+// candy <Card> primitive (same flat 0 4px 0 shadow + 24px radius used by
+// Dashboard/Coach/Quiz/Flashcards) instead of the old dark glow-border box.
 function Panel({ children, style, accentColor = 'var(--coral)' }: { children: React.ReactNode; style?: React.CSSProperties; accentColor?: string }) {
-  const [hovered, setHovered] = useState(false)
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <Card
       style={{
-        background: 'var(--bg-base)',
-        border: `2px solid ${hovered ? accentColor + 'B3' : accentColor + '66'}`,
-        borderRadius: 16,
-        boxShadow: `0 4px 24px rgba(0,0,0,0.4)${hovered ? `, 0 0 16px ${accentColor}18` : ''}`,
+        boxShadow: `0 4px 0 ${accentColor}`,
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        transition: 'border-color 200ms ease, box-shadow 200ms ease',
         ...style,
       }}
     >
       {children}
-    </div>
+    </Card>
   )
 }
 
 function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boolean }) {
   return (
     <div style={{
-      height: tall ? 56 : 40,
+      height: tall ? 60 : 44,
       background: 'var(--bg-surface)',
-      borderBottom: '1px solid var(--border-subtle)',
-      borderRadius: '16px 16px 0 0',
+      borderBottom: '2px solid var(--border-subtle)',
+      borderRadius: '24px 24px 0 0',
       display: 'flex',
       alignItems: 'center',
-      padding: '0 14px',
-      gap: 8,
+      padding: '0 16px',
+      gap: 10,
       flexShrink: 0,
     }}>
       {children}
@@ -1104,13 +1101,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         />
       )}
 
-      {/* ══ TOP BAR (52px) ══════════════════════════════════════════════════ */}
+      {/* ══ TOP BAR (56px) — candy chrome, same family as Dashboard V2's TopBar ══ */}
       <header style={{
-        height: 52, flexShrink: 0,
-        background: 'var(--bg-base)',
-        borderBottom: '1px solid var(--border-subtle)',
-        padding: '0 16px',
+        height: 56, flexShrink: 0,
+        background: 'var(--bg-surface)',
+        boxShadow: '0 4px 0 var(--border-subtle)',
+        padding: '0 18px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+        position: 'relative', zIndex: 5,
       }}>
         {/* Left */}
         <Link href="/dashboard"
@@ -1202,10 +1200,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               <button key={k} onClick={() => handleVoiceChange(k)}
                 title={VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
                 style={{
-                  width: 28, height: 28, borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer',
-                  background: isActive ? 'rgba(247,129,102,0.15)' : 'transparent',
-                  color: isActive ? 'var(--coral)' : 'var(--text-dim)',
-                  border: `1px solid ${isActive ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
+                  width: 30, height: 30, borderRadius: 10, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                  background: isActive ? 'var(--coral)' : 'var(--bg-elevated)',
+                  color: isActive ? '#fff' : 'var(--text-dim)',
+                  border: 'none',
+                  boxShadow: isActive ? '0 2px 0 var(--coral-hover)' : '0 2px 0 var(--border-subtle)',
                   transition: 'all 150ms',
                 }}>
                 {mounted ? voiceShortLabel[k] : { male: 'M', female: 'F', warm: 'W' }[k]}
@@ -1216,18 +1215,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         </div>
       </header>
 
-      {/* ══ MOBILE TABS ════════════════════════════════════════════════════ */}
-      <div className="flex md:hidden shrink-0" style={{ background: 'var(--bg-base)', borderBottom: '1px solid var(--border-subtle)' }}>
+      {/* ══ MOBILE TABS — candy segmented control ═════════════════════════ */}
+      <div className="flex md:hidden shrink-0" style={{ background: 'var(--bg-surface)', padding: 8, gap: 6, boxShadow: '0 4px 0 var(--border-subtle)' }}>
         {(['curriculum', 'code', 'chat'] as ActiveTab[]).map((tab, i) => {
           const icons = ['📚', '💻', '💬']
           const labels = teachingLanguage === 'ru' ? ['Урок', 'Код', 'Чат'] : ['Lesson', 'Code', 'Chat']
+          const isActive = activeTab === tab
           return (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{
-              flex: 1, height: 44, fontSize: 12, fontWeight: 600, cursor: 'pointer', background: 'transparent',
-              color: activeTab === tab ? 'var(--coral)' : 'var(--text-secondary)',
-              borderTop: `2px solid ${activeTab === tab ? 'var(--coral)' : 'transparent'}`,
-              borderBottom: 'none', borderLeft: 'none', borderRight: 'none',
+              flex: 1, height: 40, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+              borderRadius: 14, border: 'none',
+              background: isActive ? 'var(--coral)' : 'var(--bg-elevated)',
+              color: isActive ? '#fff' : 'var(--text-secondary)',
+              boxShadow: isActive ? '0 3px 0 var(--coral-hover)' : '0 3px 0 var(--border-subtle)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+              transition: 'all 150ms',
             }}>
               <span>{icons[i]}</span> {labels[i]}
             </button>
