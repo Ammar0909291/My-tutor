@@ -109,20 +109,26 @@ export default function ModesPicker({ hasSchoolAccess, currentBoard, currentGrad
               <select
                 value={boardId}
                 onChange={(e) => { setBoardId(e.target.value); setGrade('') }}
-                style={{ padding: '10px 12px', borderRadius: 10, border: '2px solid var(--candy-shadow)', fontWeight: 700 }}
+                style={{
+                  padding: '10px 12px', borderRadius: 10, border: '2px solid var(--candy-shadow)', fontWeight: 700,
+                  background: '#fff', color: 'var(--candy-ink)', colorScheme: 'light',
+                }}
               >
                 {boards.map((b) => (
-                  <option key={b.id} value={b.id}>{b.shortName}</option>
+                  <option key={b.id} value={b.id} style={{ color: 'var(--candy-ink)', background: '#fff' }}>{b.shortName}</option>
                 ))}
               </select>
               <select
                 value={grade}
                 onChange={(e) => setGrade(e.target.value ? Number(e.target.value) : '')}
-                style={{ padding: '10px 12px', borderRadius: 10, border: '2px solid var(--candy-shadow)', fontWeight: 700 }}
+                style={{
+                  padding: '10px 12px', borderRadius: 10, border: '2px solid var(--candy-shadow)', fontWeight: 700,
+                  background: '#fff', color: 'var(--candy-ink)', colorScheme: 'light',
+                }}
               >
-                <option value="">Select grade</option>
+                <option value="" style={{ color: 'var(--candy-ink-soft)', background: '#fff' }}>Select grade</option>
                 {selectedBoard?.grades.map((g) => (
-                  <option key={g} value={g}>Class {g}</option>
+                  <option key={g} value={g} style={{ color: 'var(--candy-ink)', background: '#fff' }}>Class {g}</option>
                 ))}
               </select>
               {error && <div style={{ color: 'var(--candy-red, #FF4B4B)', fontSize: 12, fontWeight: 700 }}>{error}</div>}
