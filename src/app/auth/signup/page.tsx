@@ -5,7 +5,18 @@ import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { AuthBackLink } from '@/components/auth/AuthBackLink'
-import { CandyPage, CandyButton } from '@/components/ui/candy'
+import { Card, CandyButton, EagleMascot } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
+
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '12px 14px',
+  borderRadius: 14,
+  border: '1px solid var(--candy-shadow)',
+  background: 'var(--candy-card)',
+  color: 'var(--candy-ink)',
+  fontSize: 14,
+}
 
 export default function SignupPage() {
   const { t, lang } = useLanguage()
@@ -59,75 +70,30 @@ export default function SignupPage() {
   ]
 
   return (
-    <CandyPage legacy className="flex">
-      <style>{`
-        @keyframes floatCard {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
-      `}</style>
-
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)', display: 'flex' }}>
       {/* Left decorative panel */}
       <div className="hidden lg:flex flex-col justify-between w-[45%] p-12 relative overflow-hidden"
-        style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-default)' }}>
+        style={{ background: 'var(--candy-card)', borderRight: '1px solid var(--candy-shadow)' }}>
         <div className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(247,129,102,0.1) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(121,192,255,0.08) 0%, transparent 50%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59,158,255,0.08) 0%, transparent 50%)' }} />
         <div className="relative">
-          <div className="flex items-center gap-2 mb-16">
-            <span className="text-xl">🔥</span>
-            <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+          <div className="flex items-center gap-2 mb-12">
+            <EagleMascot variant="logo" size={36} />
+            <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--candy-red)' }}>My Tutor</span>
           </div>
-          <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+          <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--candy-ink)' }}>
             &ldquo;{t('left_quote')}&rdquo;
           </blockquote>
           <div className="flex flex-col gap-2">
             {features.map((f) => (
               <span key={f.text} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
-                style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
+                style={{ background: 'var(--candy-bg)', color: 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)' }}>
                 {f.emoji} {f.text}
               </span>
             ))}
           </div>
-
-          {/* Floating product preview cards */}
-          <div className="relative mt-10" style={{ height: '180px' }}>
-            {/* Card 1 — subject */}
-            <div style={{
-              position: 'absolute', top: 0, left: 0,
-              animation: 'floatCard 4s ease-in-out infinite',
-              background: 'var(--bg-elevated)', border: '1px solid var(--border-default)',
-              borderRadius: 12, padding: '10px 16px', fontSize: 13,
-              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-              display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap',
-            }}>
-              🎯 {lang === 'ru' ? 'Язык C · Урок 1' : lang === 'hi' ? 'C भाषा · पाठ 1' : 'C Language · Lesson 1'}
-            </div>
-            {/* Card 2 — chat bubble */}
-            <div style={{
-              position: 'absolute', top: 44, left: 24,
-              animation: 'floatCard 4s ease-in-out infinite 1.3s',
-              background: 'rgba(247,129,102,0.12)', border: '1px solid rgba(247,129,102,0.3)',
-              borderRadius: 12, padding: '10px 16px', fontSize: 13,
-              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-              maxWidth: 240,
-            }}>
-              💬 {lang === 'ru' ? 'Привет! Начнём с основ C 🚀' : lang === 'hi' ? 'नमस्ते! C से शुरू करते हैं 🚀' : 'Hello! Lets start with C basics 🚀'}
-            </div>
-            {/* Card 3 — code snippet */}
-            <div style={{
-              position: 'absolute', top: 96, left: 12,
-              animation: 'floatCard 4s ease-in-out infinite 2.6s',
-              background: 'var(--bg-base)', border: '1px solid var(--border-default)',
-              borderRadius: 12, padding: '10px 16px', fontSize: 12,
-              color: '#79C0FF', boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-              fontFamily: 'monospace',
-            }}>
-              <span style={{ color: '#FF7B72' }}>printf</span>
-              <span style={{ color: 'var(--text-primary)' }}>(&quot;Hello, World!&quot;);</span>
-            </div>
-          </div>
         </div>
-        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 {t('left_social')}</p>
+        <p className="relative text-xs" style={{ color: 'var(--candy-ink-soft)' }}>🎓 {t('left_social')}</p>
       </div>
 
       {/* Right form panel */}
@@ -135,73 +101,75 @@ export default function SignupPage() {
         <div className="absolute top-5 left-5"><AuthBackLink href="/" label={t('nav_back_home')} icon="home" /></div>
         <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
-        <div className="w-full max-w-sm animate-slide-up">
-          <div className="lg:hidden flex items-center gap-2 justify-center mb-8">
-            <span className="text-2xl">🔥</span>
-            <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+        <div className="w-full max-w-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <EagleMascot variant="hero" size={56} />
+            <div>
+              <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>Let&rsquo;s start your learning journey</h1>
+              <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', margin: 0 }}>{t('signup_sub')}</p>
+            </div>
           </div>
 
-          <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('signup_title')}</h1>
-          <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('signup_sub')}</p>
-
-          {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
-            <>
-              <button onClick={handleGoogle} disabled={googleLoading}
-                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
-                style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
-                <GoogleIcon />
-                {googleLoading ? t('signup_google_loading') : t('signup_google')}
-              </button>
-
-              <div className="relative my-5">
-                <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-                <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
-              </div>
-            </>
-          )}
-
-          {error && (
-            <div className="mb-5 p-3.5 rounded-xl text-sm animate-scale-in"
-              style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)', color: '#F85149' }}>
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('signup_name')}</label>
-              <input type="text" value={name} onChange={(e) => { setName(e.target.value); clearError() }} required
-                placeholder={lang === 'ru' ? 'Иван' : lang === 'hi' ? 'राहुल' : 'John'} className="input-field" />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('signup_email')}</label>
-              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); clearError() }} required
-                placeholder="your@email.com" className="input-field" />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('signup_password')}</label>
-              <div className="relative">
-                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); clearError() }} required
-                  placeholder={t('signup_password_placeholder')} className="input-field pr-10" />
-                <button type="button" onClick={() => setShowPwd(!showPwd)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-dim)' }}>
-                  {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
+          <Card style={{ padding: 24 }}>
+            {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+              <>
+                <button onClick={handleGoogle} disabled={googleLoading}
+                  className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+                  style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+                  <GoogleIcon />
+                  {googleLoading ? t('signup_google_loading') : t('signup_google')}
                 </button>
-              </div>
-            </div>
-            <CandyButton type="submit" disabled={loading} className="w-full" shadowColor="var(--candy-purple-d)"
-              style={{ padding: '12px', marginTop: 4, borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: loading ? 0.5 : 1 }}>
-              {loading ? t('signup_loading') : t('signup_submit')}
-            </CandyButton>
-          </form>
 
-          <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <div className="relative my-5">
+                  <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--candy-shadow)' }} /></div>
+                  <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--candy-card)', color: 'var(--candy-ink-soft)' }}>{t('login_or')}</span></div>
+                </div>
+              </>
+            )}
+
+            {error && (
+              <div className="mb-5 p-3.5 rounded-xl text-sm"
+                style={{ background: 'rgba(255, 75, 75, 0.08)', border: '1px solid rgba(255, 75, 75, 0.2)', color: 'var(--candy-red)' }}>
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--candy-ink-soft)' }}>{t('signup_name')}</label>
+                <input type="text" value={name} onChange={(e) => { setName(e.target.value); clearError() }} required
+                  placeholder={lang === 'ru' ? 'Иван' : lang === 'hi' ? 'राहुल' : 'John'} style={inputStyle} />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--candy-ink-soft)' }}>{t('signup_email')}</label>
+                <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); clearError() }} required
+                  placeholder="your@email.com" style={inputStyle} />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--candy-ink-soft)' }}>{t('signup_password')}</label>
+                <div className="relative">
+                  <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); clearError() }} required
+                    placeholder={t('signup_password_placeholder')} style={{ ...inputStyle, paddingRight: 40 }} />
+                  <button type="button" onClick={() => setShowPwd(!showPwd)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--candy-ink-soft)' }}>
+                    {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
+                  </button>
+                </div>
+              </div>
+              <CandyButton type="submit" disabled={loading} className="w-full" shadowColor="var(--candy-purple-d)"
+                style={{ padding: '12px', marginTop: 4, borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: loading ? 0.5 : 1 }}>
+                {loading ? t('signup_loading') : t('signup_submit')}
+              </CandyButton>
+            </form>
+          </Card>
+
+          <p className="text-center mt-6 text-sm" style={{ color: 'var(--candy-ink-soft)' }}>
             {t('signup_has_account')}{' '}
-            <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: 'var(--accent-primary)' }}>{t('signup_login_link')}</Link>
+            <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: 'var(--candy-red)' }}>{t('signup_login_link')}</Link>
           </p>
         </div>
       </div>
-    </CandyPage>
+    </div>
   )
 }
 

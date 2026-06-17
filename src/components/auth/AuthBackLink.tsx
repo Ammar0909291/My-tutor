@@ -13,7 +13,7 @@ export function AuthBackLink({ href, label, icon = 'arrow' }: AuthBackLinkProps)
     <Link
       href={href}
       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors hover:brightness-110"
-      style={{ color: 'var(--text-secondary)', background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+      style={{ color: 'var(--candy-ink-soft)', background: 'var(--candy-card)', border: '1px solid var(--candy-shadow)' }}
     >
       <ArrowLeft size={14} />
       {icon === 'home' && <Home size={14} />}
