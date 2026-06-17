@@ -366,9 +366,14 @@ export default function SettingsPage() {
         </Section>
 
 
-        {/* My School (school students only) */}
-        {profile?.userType === 'SCHOOL_STUDENT' && (
+        {/* My School — board/grade context switcher. Shown for any learner who
+            has ever used School Mode (SCHOOL_STUDENT, or a GENERAL_LEARNER who
+            opted in via /modes), so it's always reachable, not a one-time choice. */}
+        {(profile?.userType === 'SCHOOL_STUDENT' || !!profile?.educationBoard) && (
           <Section label="My School 🎒">
+            <p className="text-xs mb-4" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>
+              Switch board or class anytime — each combination keeps its own separate progress.
+            </p>
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
@@ -398,7 +403,7 @@ export default function SettingsPage() {
                 onClick={handleSchoolSave}
                 disabled={schoolSave === 'saving' || !schoolBoard || schoolGrade === null}
                 style={{ width: '100%', padding: '12px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (schoolSave === 'saving' || !schoolBoard || schoolGrade === null) ? 0.6 : 1 }}>
-                {schoolSave === 'saved' ? '✓ Saved' : schoolSave === 'saving' ? '...' : schoolSave === 'error' ? 'Failed — try again' : 'Save school info'}
+                {schoolSave === 'saved' ? '✓ Switched' : schoolSave === 'saving' ? '...' : schoolSave === 'error' ? 'Failed — try again' : 'Switch board / class'}
               </CandyButton>
             </div>
           </Section>

@@ -20,6 +20,8 @@ export default async function ModesPage() {
   return (
     <ModesPicker
       hasSchoolAccess={hasSchoolAccess}
+      currentBoard={profile.educationBoard}
+      currentGrade={profile.grade}
       boards={boards}
     />
   )

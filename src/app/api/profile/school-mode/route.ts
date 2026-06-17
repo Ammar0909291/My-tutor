@@ -39,11 +39,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: 'Profile not found' }, { status: 404 })
   }
 
-  // Already a SCHOOL_STUDENT — board/grade already drive their primary experience.
-  if (profile.userType === 'SCHOOL_STUDENT') {
-    return NextResponse.json({ success: true })
-  }
-
+  // Multi-grade/multi-board access: always set the requested board/grade,
+  // even if one was already set (SCHOOL_STUDENT or otherwise). Progress is
+  // namespaced by "<board>:<subjectSlug>:<grade>" (see StudentProgress /
+  // schoolRouting.ts), so switching here never merges or overwrites another
+  // combination's data.
   await prisma.profile.update({
     where: { userId },
     data: { educationBoard: boardDef.id, grade },

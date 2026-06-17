@@ -12,21 +12,24 @@ interface BoardOption {
 
 interface Props {
   hasSchoolAccess: boolean
+  currentBoard: string | null
+  currentGrade: number | null
   boards: BoardOption[]
 }
 
-export default function ModesPicker({ hasSchoolAccess, boards }: Props) {
+export default function ModesPicker({ hasSchoolAccess, currentBoard, currentGrade, boards }: Props) {
   const router = useRouter()
   const [showPicker, setShowPicker] = useState(false)
-  const [boardId, setBoardId] = useState(boards[0]?.id ?? '')
-  const [grade, setGrade] = useState<number | ''>('')
+  const [boardId, setBoardId] = useState(currentBoard ?? boards[0]?.id ?? '')
+  const [grade, setGrade] = useState<number | ''>(currentGrade ?? '')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const selectedBoard = boards.find((b) => b.id === boardId)
+  const currentBoardName = boards.find((b) => b.id === currentBoard)?.shortName
 
   async function enterSchoolMode() {
-    if (hasSchoolAccess) {
+    if (hasSchoolAccess && !showPicker) {
       router.push('/dashboard?mode=school')
       return
     }
@@ -62,7 +65,7 @@ export default function ModesPicker({ hasSchoolAccess, boards }: Props) {
         Choose Your Learning Mode
       </h1>
       <p style={{ color: 'var(--candy-ink-soft)', fontSize: 14, marginBottom: 28, textAlign: 'center', maxWidth: 420 }}>
-        Switch freely between modes anytime. Each keeps its own progress and recommendations.
+        Switch freely between modes, boards, and grades anytime. Each combination keeps its own progress.
       </p>
 
       <div style={{ display: 'grid', gap: 16, width: '100%', maxWidth: 420 }}>
@@ -88,7 +91,20 @@ export default function ModesPicker({ hasSchoolAccess, boards }: Props) {
             Board-aligned chapters, exams, mock tests, and exam readiness for your grade.
           </p>
 
-          {!hasSchoolAccess && showPicker && (
+          {hasSchoolAccess && !showPicker && currentBoardName && currentGrade && (
+            <div style={{ marginBottom: 14, fontSize: 13, color: 'var(--candy-ink-soft)', fontWeight: 700 }}>
+              Current: {currentBoardName} · Class {currentGrade}{' '}
+              <button
+                type="button"
+                onClick={() => setShowPicker(true)}
+                style={{ color: 'var(--candy-green, #58CC02)', fontWeight: 800, background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                Change
+              </button>
+            </div>
+          )}
+
+          {showPicker && (
             <div style={{ marginBottom: 14, display: 'grid', gap: 10 }}>
               <select
                 value={boardId}
@@ -114,12 +130,12 @@ export default function ModesPicker({ hasSchoolAccess, boards }: Props) {
           )}
 
           <CandyButton
-            onClick={() => (hasSchoolAccess || showPicker ? enterSchoolMode() : setShowPicker(true))}
+            onClick={() => (hasSchoolAccess && !showPicker ? enterSchoolMode() : showPicker ? enterSchoolMode() : setShowPicker(true))}
             disabled={loading}
             shadowColor="var(--candy-green-d, #2E9B00)"
             style={{ width: '100%', background: 'var(--candy-green, #58CC02)', color: '#fff', fontWeight: 800, padding: '12px 0', borderRadius: 14, opacity: loading ? 0.6 : 1 }}
           >
-            {loading ? 'Setting up…' : hasSchoolAccess ? 'Enter School Mode' : showPicker ? 'Confirm & Enter' : 'Enter School Mode'}
+            {loading ? 'Setting up…' : hasSchoolAccess && !showPicker ? 'Enter School Mode' : showPicker ? 'Confirm & Enter' : 'Enter School Mode'}
           </CandyButton>
         </Card>
       </div>
