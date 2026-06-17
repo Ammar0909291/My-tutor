@@ -20,6 +20,14 @@ if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefine
   window.speechSynthesis.getVoices()
 }
 
+// Bumped on every speak() call and every stopSpeaking() call. The deferred
+// voice-resolution callbacks below (voiceschanged listener / fallback
+// timeout) capture the generation at creation time and check it before
+// calling speechSynthesis.speak() — this prevents a delayed callback from
+// starting speech after the caller has already navigated away / cancelled,
+// which is what let utterances survive component unmount.
+let ttsGeneration = 0
+
 export function speakText(
   text: string,
   configOrLang: { pitch: number; rate: number } | string,
@@ -47,6 +55,7 @@ function _speakTextImpl(
 ): void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
   window.speechSynthesis.cancel()
+  const myGeneration = ++ttsGeneration
 
   const clean = cleanTextForTTS(text)
   if (!clean.trim()) { onEnd?.(); return }
@@ -64,10 +73,13 @@ function _speakTextImpl(
     utter.onerror = onEnd
   }
 
-  // Guard prevents double-speak when both voiceschanged and the fallback timeout fire
+  // Guard prevents double-speak when both voiceschanged and the fallback timeout fire,
+  // and prevents speak() firing after a newer speakText()/stopSpeaking() call has
+  // already superseded this one (e.g. the caller navigated away while voices were
+  // still loading).
   let spoken = false
   const setVoice = () => {
-    if (spoken) return
+    if (spoken || myGeneration !== ttsGeneration) return
     spoken = true
     const voices = window.speechSynthesis.getVoices()
     const voice =
@@ -86,6 +98,10 @@ function _speakTextImpl(
 }
 
 export function stopSpeaking(): void {
+  // Invalidate any in-flight setVoice() callback (voiceschanged listener or
+  // fallback timeout) from a previous speakText() call so it can't call
+  // speak() after this point, then cancel anything already queued/speaking.
+  ttsGeneration++
   if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
     window.speechSynthesis.cancel()
   }

@@ -5,7 +5,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
-import { SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { SCHOOL_SUBJECT_META, isLibraryModeRequest } from '@/lib/school/schoolRouting'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 import { getLearningNavigatorAction, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
 import { Card, CandyButton, Pill, EagleMascot } from '@/components/ui/candy'
@@ -18,10 +18,11 @@ import tokenStyles from '@/components/ui/candy/tokens.module.css'
 export default async function FocusPage({
   searchParams,
 }: {
-  searchParams: { task?: string }
+  searchParams: { task?: string; mode?: string | string[] }
 }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
+  if (isLibraryModeRequest(searchParams)) redirect('/dashboard?mode=library')
 
   const profile = await withRetry(() =>
     prisma.profile.findUnique({

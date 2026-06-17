@@ -130,3 +130,17 @@ export function getGradeSubjects(boardId: string, grade: number): string[] {
   const all = getBoard(boardId)?.subjects ?? []
   return all.filter((slug) => getSchoolChapters(boardId, slug, grade).length > 0)
 }
+
+/**
+ * Centralized mode guard for every /school/* route. The dashboard already
+ * hides School subjects when `?mode=library` is active, but the /school/*
+ * routes themselves had no equivalent check — a learner could navigate
+ * straight to a school URL while "in" Library Mode. Each /school/* page
+ * calls this once, passing its own `searchParams` prop (Next.js layouts
+ * don't receive searchParams, so this can't live in a shared layout —
+ * a shared helper keeps the actual check in one place instead).
+ */
+export function isLibraryModeRequest(searchParams?: Record<string, string | string[] | undefined>): boolean {
+  const mode = searchParams?.mode
+  return (Array.isArray(mode) ? mode[0] : mode) === 'library'
+}

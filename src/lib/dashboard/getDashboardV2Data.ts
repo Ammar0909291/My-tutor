@@ -171,7 +171,7 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
             userType: true,
             educationBoard: true,
             grade: true,
-            subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } },
+            subjects: { where: { isActive: true }, include: { subject: true }, orderBy: { createdAt: 'asc' } },
           },
         },
       },
@@ -182,7 +182,7 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     getStudyStreak(userId),
     prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }),
     prisma.weeklyXP.findMany({
-      where: { week },
+      where: { week, user: { isDeleted: false } },
       orderBy: { xp: 'desc' },
       take: LEADERBOARD_SIZE,
       include: { user: { select: { id: true, name: true } } },
@@ -338,14 +338,18 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   const myXP = myWeeklyXP?.xp ?? 0
   const tier = getLeagueForXP(myXP)
   const myRank = myWeeklyXP
-    ? (await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp } } })) + 1
+    ? (await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } })) + 1
     : null
 
   const entries: LeagueEntry[] = weeklyTop.map((e, i) => {
     const isMe = e.userId === userId
     const name = isMe ? 'You' : (e.user.name ?? 'Student').split(' ')[0]
+    // Standard competition ranking: ties share a rank, the next distinct
+    // value's rank is its 1-based position in this descending-sorted list.
+    let firstOccurrence = i
+    while (firstOccurrence > 0 && weeklyTop[firstOccurrence - 1].xp === e.xp) firstOccurrence--
     return {
-      rank: i + 1,
+      rank: firstOccurrence + 1,
       name,
       xp: e.xp,
       avatarLetter: name.charAt(0).toUpperCase(),

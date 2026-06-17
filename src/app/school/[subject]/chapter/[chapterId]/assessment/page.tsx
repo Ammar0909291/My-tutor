@@ -2,15 +2,16 @@ import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle } from '@/lib/school/schoolRouting'
+import { getSchoolChapters, isSchoolSubject, chapterDisplayTitle, isLibraryModeRequest } from '@/lib/school/schoolRouting'
 import { AssessmentQuiz } from '@/components/school/AssessmentQuiz'
 import { getWeakTopicsForSubject } from '@/lib/school/adaptive/weakTopics'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { CandyPage } from '@/components/ui/candy'
 
-export default async function ChapterAssessmentPage({ params }: { params: { subject: string; chapterId: string } }) {
+export default async function ChapterAssessmentPage({ params, searchParams }: { params: { subject: string; chapterId: string }, searchParams?: Record<string, string | string[] | undefined> }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
+  if (isLibraryModeRequest(searchParams)) redirect('/dashboard?mode=library')
 
   const profile = await withRetry(() =>
     prisma.profile.findUnique({

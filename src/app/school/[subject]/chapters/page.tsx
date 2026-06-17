@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { groupChaptersByUnit, chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { groupChaptersByUnit, chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META, isLibraryModeRequest } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 import { Card, Pill, SectionTitle } from '@/components/ui/candy'
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
@@ -15,9 +15,10 @@ import tokenStyles from '@/components/ui/candy/tokens.module.css'
  * completion status; the current chapter is highlighted and remains the
  * only tappable CTA.
  */
-export default async function SchoolChapterListPage({ params }: { params: { subject: string } }) {
+export default async function SchoolChapterListPage({ params, searchParams }: { params: { subject: string }, searchParams?: Record<string, string | string[] | undefined> }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
+  if (isLibraryModeRequest(searchParams)) redirect('/dashboard?mode=library')
 
   const profile = await withRetry(() => prisma.profile.findUnique({
     where: { userId: session.user.id },

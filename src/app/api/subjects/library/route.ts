@@ -20,8 +20,10 @@ export async function GET() {
     include: { subjects: { include: { subject: true } } },
   })
 
+  // Only active enrollments count as "enrolled" — a removed (isActive: false)
+  // subject should show as available to add again, not stuck as enrolled.
   const enrolled = new Map(
-    (profile?.subjects ?? []).map((ps) => [ps.subject.slug, ps]),
+    (profile?.subjects ?? []).filter((ps) => ps.isActive).map((ps) => [ps.subject.slug, ps]),
   )
 
   const lang = (profile?.teachingLanguage ?? 'en') as Lang

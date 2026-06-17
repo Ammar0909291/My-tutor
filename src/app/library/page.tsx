@@ -6,6 +6,7 @@ import { t as i18nT } from '@/lib/i18n'
 import type { Lang } from '@/lib/i18n'
 import { CATEGORY_LABELS, VISIBLE_SUBJECT_LIBRARY, levelLabel, categoryLabel, localizedSubjectName, localizedSubjectDescription, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { EnrollButton } from '@/components/library/EnrollButton'
+import { RemoveSubjectButton } from '@/components/library/RemoveSubjectButton'
 import { CandyPage, Card, SectionTitle, ProgressBar } from '@/components/ui/candy'
 
 // Candy-palette accents per category (hex so the `${accent}xx` alpha trick keeps working).
@@ -32,9 +33,12 @@ export default async function LibraryPage() {
   const lang = (profile.teachingLanguage ?? 'en') as Lang
   const T = (key: Parameters<typeof i18nT>[1]) => i18nT(lang, key)
 
-  const enrolled = new Map(profile.subjects.map((ps) => [ps.subject.slug, ps]))
+  // Only active enrollments count as "enrolled" — a removed subject should
+  // show as available to add again, not stuck as enrolled.
+  const activeSubjects = profile.subjects.filter((ps) => ps.isActive)
+  const enrolled = new Map(activeSubjects.map((ps) => [ps.subject.slug, ps]))
 
-  const enrolledSlugs = profile.subjects.map((ps) => ps.subject.slug)
+  const enrolledSlugs = activeSubjects.map((ps) => ps.subject.slug)
   const studentProgressList = enrolledSlugs.length > 0
     ? await prisma.studentProgress.findMany({
         where: { userId: session.user.id, subjectCode: { in: enrolledSlugs } },
@@ -141,6 +145,7 @@ export default async function LibraryPage() {
                                   style={{ background: 'var(--candy-bg)', color: 'var(--candy-ink-soft)', fontWeight: 700, textDecoration: 'none' }}>
                                   Details
                                 </Link>
+                                <RemoveSubjectButton subjectSlug={s.slug} subjectName={localizedSubjectName(s, lang)} />
                               </div>
                             </>
                           ) : (

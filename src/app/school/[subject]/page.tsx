@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, AlertTriangle } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, isLibraryModeRequest, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
@@ -20,9 +20,10 @@ import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
  * for one subject. Progressive disclosure — current/next/previous chapter
  * only; the full chapter list lives behind "View all chapters".
  */
-export default async function SchoolSubjectPage({ params }: { params: { subject: string } }) {
+export default async function SchoolSubjectPage({ params, searchParams }: { params: { subject: string }, searchParams?: Record<string, string | string[] | undefined> }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
+  if (isLibraryModeRequest(searchParams)) redirect('/dashboard?mode=library')
 
   const profile = await withRetry(() => prisma.profile.findUnique({
     where: { userId: session.user.id },

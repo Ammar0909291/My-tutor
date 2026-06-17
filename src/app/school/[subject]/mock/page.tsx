@@ -2,14 +2,15 @@ import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { isSchoolSubject, SCHOOL_SUBJECT_META, isLibraryModeRequest } from '@/lib/school/schoolRouting'
 import { MockTestQuiz } from '@/components/school/MockTestQuiz'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { CandyPage } from '@/components/ui/candy'
 
-export default async function MockTestPage({ params }: { params: { subject: string } }) {
+export default async function MockTestPage({ params, searchParams }: { params: { subject: string }, searchParams?: Record<string, string | string[] | undefined> }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
+  if (isLibraryModeRequest(searchParams)) redirect('/dashboard?mode=library')
 
   const profile = await withRetry(() =>
     prisma.profile.findUnique({

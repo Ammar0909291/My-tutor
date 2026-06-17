@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, Target, MessageCircle, Check, ClipboardCheck } f
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META, isLibraryModeRequest } from '@/lib/school/schoolRouting'
 import { getSchoolSubjectProgress, getChapterProgressDetails } from '@/lib/school/schoolProgress'
 import { getChapterContent } from '@/lib/school/chapterContent'
 import { Card, CandyButton, Pill, ProgressBar, SectionTitle } from '@/components/ui/candy'
@@ -69,9 +69,10 @@ function InsightCard({ eyebrow, title, color, bg, border, children }: { eyebrow?
   )
 }
 
-export default async function ChapterWorkspacePage({ params }: { params: { subject: string; chapterId: string } }) {
+export default async function ChapterWorkspacePage({ params, searchParams }: { params: { subject: string; chapterId: string }, searchParams?: Record<string, string | string[] | undefined> }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
+  if (isLibraryModeRequest(searchParams)) redirect('/dashboard?mode=library')
 
   const profile = await withRetry(() => prisma.profile.findUnique({
     where: { userId: session.user.id },
