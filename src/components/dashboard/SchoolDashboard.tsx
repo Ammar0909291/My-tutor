@@ -1,11 +1,15 @@
+'use client'
+
 import Link from 'next/link'
-import { ArrowRight, Settings } from 'lucide-react'
+import { ArrowRight, Settings, Flame, Zap } from 'lucide-react'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorTypes'
 import { ProgressReportButton } from '@/components/dashboard/ProgressReportButton'
+import { Card, CandyButton, Pill, ProgressBar, SectionTitle, EagleMascot, useConfetti } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 /**
  * School Student home (Sprint BG).
@@ -14,15 +18,19 @@ import { ProgressReportButton } from '@/components/dashboard/ProgressReportButto
  * My Subjects, Progress Snapshot. Subjects come from board + grade — the
  * student is never asked again. Chapter routing attaches in Sprint BH; until
  * subject cards route to /school/<slug> (Sprint BH).
+ *
+ * School Sprint B: restyled onto the candy primitives (Card/CandyButton/
+ * Pill/ProgressBar/SectionTitle) to match Dashboard V2 / Lesson Experience.
+ * No data shape, computation, or routing changes.
  */
 
 // Display metadata for school subject slugs (slugs match BoardSubjectCatalog
 // subjectSlug values so Sprint BH can attach catalogs without remapping).
 const SUBJECT_META: Record<string, { label: string; icon: string; color: string; bg: string }> = {
-  mathematics:    { label: 'Mathematics',    icon: '🔢', color: 'var(--blue)',   bg: 'var(--blue-muted)' },
-  science:        { label: 'Science',        icon: '🔬', color: 'var(--green)',  bg: 'var(--green-muted)' },
-  english:        { label: 'English',        icon: '📖', color: 'var(--yellow)', bg: 'var(--yellow-muted)' },
-  social_science: { label: 'Social Science', icon: '🌍', color: 'var(--purple)', bg: 'var(--coral-muted)' },
+  mathematics:    { label: 'Mathematics',    icon: '🔢', color: 'var(--candy-blue)',   bg: 'var(--candy-blue)22' },
+  science:        { label: 'Science',        icon: '🔬', color: 'var(--candy-green)',  bg: 'var(--candy-green)22' },
+  english:        { label: 'English',        icon: '📖', color: 'var(--candy-yellow)', bg: 'var(--candy-yellow)22' },
+  social_science: { label: 'Social Science', icon: '🌍', color: 'var(--candy-purple)', bg: 'var(--candy-purple)22' },
 }
 
 const BOARD_LABELS: Record<string, string> = {
@@ -106,6 +114,7 @@ const NEXT_ACTION_LABELS: Record<string, { heading: string; cta: string }> = {
 
 export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoints, studiedToday, subjects, revision, nextAction, pendingAssessment, dailyPlan, momentum, examReadiness, navigatorAction, academicJourney }: SchoolDashboardProps) {
   const boardLabel = BOARD_LABELS[board] ?? board.toUpperCase()
+  const fireConfetti = useConfetti()
 
   // Continue target = most recently studied subject, else Mathematics first
   const sorted = [...subjects].sort((a, b) => (b.lastStudiedAt?.getTime() ?? 0) - (a.lastStudiedAt?.getTime() ?? 0))
@@ -120,23 +129,22 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
   const continueLabel = pendingAssessment ? 'Resume Assessment' : hasHistory ? 'Continue' : 'Start now'
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
 
       {/* Navbar */}
       <nav className="sticky top-0 z-50"
-        style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
+        style={{ background: 'var(--candy-card)', backdropFilter: 'blur(12px)', boxShadow: '0 2px 0 var(--candy-shadow)' }}>
         <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl">🔥</span>
-            <span className="font-bold text-base" style={{ color: 'var(--coral)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+          <Link href="/" className="flex items-center gap-2" style={{ textDecoration: 'none' }}>
+            <EagleMascot variant="logo" size={26} />
+            <span style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, fontSize: 16, color: 'var(--candy-ink)' }}>My Tutor</span>
           </Link>
           <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-bold"
-              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}>
+            <Pill color="var(--candy-shadow)" className="hidden sm:inline-flex" style={{ color: 'var(--candy-ink-soft)' }}>
               🎒 {boardLabel} · Class {grade}
-            </span>
+            </Pill>
             <ThemeToggle />
-            <Link href="/settings" className="btn-ghost text-xs px-3 py-1.5 flex items-center gap-1.5">
+            <Link href="/settings" className="text-xs px-3 py-1.5 flex items-center gap-1.5" style={{ color: 'var(--candy-ink-soft)' }}>
               <Settings size={13} />
             </Link>
             <SignOutButton />
@@ -144,7 +152,7 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
         </div>
       </nav>
 
-      <main className="relative z-10 max-w-3xl mx-auto px-5 py-8 space-y-6">
+      <main className="relative z-10 max-w-3xl mx-auto px-5 py-8 space-y-5">
 
         <InstallBanner />
 
@@ -153,31 +161,33 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
           <NavigatorActionCard action={navigatorAction} />
         ) : nextAction ? (
           /* Fallback: legacy nextAction card when orchestrator returned null */
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <h2 className="font-bold text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--coral)' }}>⭐ Your Next Step</h2>
-            <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-dim)' }}>
+          <Card style={{ padding: 18 }}>
+            <SectionTitle style={{ fontSize: 13, marginBottom: 8 }}>⭐ Your Next Step</SectionTitle>
+            <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--candy-ink-soft)' }}>
               {NEXT_ACTION_LABELS[nextAction.type]?.heading ?? 'Next'}:
             </p>
-            <p className="font-bold text-sm mt-0.5" style={{ color: 'var(--text-primary)' }}>{nextAction.title}</p>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{nextAction.subjectLabel} · Class {grade}</p>
+            <p className="font-bold text-sm mt-0.5" style={{ color: 'var(--candy-ink)' }}>{nextAction.title}</p>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--candy-ink-soft)' }}>{nextAction.subjectLabel} · Class {grade}</p>
             {nextAction.reason && (
-              <p className="text-xs mt-2" style={{ color: 'var(--text-secondary)' }}>{nextAction.reason}</p>
+              <p className="text-xs mt-2" style={{ color: 'var(--candy-ink-soft)' }}>{nextAction.reason}</p>
             )}
             <Link
               href={`/school/${nextAction.subjectSlug}/chapter/${encodeURIComponent(nextAction.chapterId)}${nextAction.type === 'retake_assessment' ? '/assessment' : ''}`}
-              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white mt-3"
-              style={{ background: 'var(--coral)', textDecoration: 'none' }}>
-              {NEXT_ACTION_LABELS[nextAction.type]?.cta ?? 'Continue'} <ArrowRight size={13} />
+              style={{ textDecoration: 'none', display: 'inline-block', marginTop: 12 }}>
+              <CandyButton depth={3} shadowColor="var(--candy-red)" activeDepth={1}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 800, padding: '10px 18px', borderRadius: 12, background: 'var(--candy-red)', color: '#fff' }}>
+                {NEXT_ACTION_LABELS[nextAction.type]?.cta ?? 'Continue'} <ArrowRight size={13} />
+              </CandyButton>
             </Link>
-          </section>
+          </Card>
         ) : null}
 
         {/* ═══ TODAY'S PLAN (Sprint BQ) ═══ */}
         {dailyPlan && dailyPlan.length > 0 && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+          <Card style={{ padding: 18 }}>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="font-bold text-xs uppercase tracking-wide" style={{ color: 'var(--coral)' }}>📅 Today&apos;s Plan</h2>
-              <span className="text-xs" style={{ color: 'var(--text-dim)' }}>
+              <SectionTitle style={{ fontSize: 13, margin: 0 }}>📅 Today&apos;s Plan</SectionTitle>
+              <span className="text-xs font-semibold" style={{ color: 'var(--candy-ink-soft)' }}>
                 ~{dailyPlan.reduce((s, t) => s + t.estimatedMinutes, 0)} min
               </span>
             </div>
@@ -191,15 +201,15 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
                   && navigatorAction.chapterId === task.chapterId
                 return (
                   <li key={i} className="flex items-center gap-3 text-sm">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0"
-                      style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-dim)' }}>
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0 font-bold"
+                      style={{ background: 'var(--candy-bg)', color: 'var(--candy-ink-soft)' }}>
                       {i + 1}
                     </span>
                     <span className="flex-1 min-w-0">
-                      <span className="font-semibold truncate block" style={{ color: 'var(--text-primary)' }}>{task.title}</span>
-                      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{task.subjectLabel} · ~{task.estimatedMinutes} min</span>
+                      <span className="font-semibold truncate block" style={{ color: 'var(--candy-ink)' }}>{task.title}</span>
+                      <span className="text-xs" style={{ color: 'var(--candy-ink-soft)' }}>{task.subjectLabel} · ~{task.estimatedMinutes} min</span>
                       {isNavigatorTarget && (
-                        <span className="text-[10px] block mt-0.5" style={{ color: 'var(--text-dim)' }}>
+                        <span className="text-[10px] block mt-0.5" style={{ color: 'var(--candy-ink-soft)' }}>
                           ✓ Included in your recommended action above
                         </span>
                       )}
@@ -208,90 +218,94 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
                 )
               })}
             </ul>
-            <Link href="/school/focus"
-              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl text-white"
-              style={{ background: 'var(--coral)', textDecoration: 'none' }}>
-              Start Today&apos;s Plan <ArrowRight size={13} />
+            <Link href="/school/focus" style={{ textDecoration: 'none', display: 'inline-block' }}>
+              <CandyButton depth={3} shadowColor="var(--candy-red)" activeDepth={1}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 800, padding: '10px 18px', borderRadius: 12, background: 'var(--candy-red)', color: '#fff' }}>
+                Start Today&apos;s Plan <ArrowRight size={13} />
+              </CandyButton>
             </Link>
-          </section>
+          </Card>
         )}
 
         {/* ═══ SECTION 1 — CONTINUE LEARNING ═══ */}
-        <section className="relative rounded-2xl overflow-hidden"
-          style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', boxShadow: 'var(--shadow-md)' }}>
-          <div className="pointer-events-none absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse at 0% 0%, var(--coral-muted) 0%, transparent 55%)' }} />
-          <div className="relative p-6">
-            <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--text-secondary)' }}>
-              {hasHistory ? 'Continue learning' : 'Start learning'}
-            </p>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight leading-tight mb-1"
-              style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              Hi {displayName}! 👋
-            </h1>
-            {active && activeMeta && (
-              <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
-                {activeMeta.icon} <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{activeMeta.label}</span>
-                {active.lastChapterTitle ? ` — ${active.lastChapterTitle}` : hasHistory ? '' : ' — your first lesson awaits'}
+        <Card style={{
+          position: 'relative', overflow: 'hidden', padding: 22,
+          background: 'linear-gradient(135deg, var(--candy-purple) 0%, var(--candy-blue) 100%)',
+          boxShadow: '0 4px 0 var(--candy-purple-d)',
+        }}>
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+            <EagleMascot variant="hero" size={48} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                {hasHistory ? 'Continue learning' : 'Start learning'}
               </p>
-            )}
-            {pendingAssessment && (
-              <p className="text-xs mb-3 font-medium" style={{ color: 'var(--coral)' }}>
-                📝 You have an assessment in progress
-              </p>
-            )}
-            <Link href={continueHref}
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
-              style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
-              {continueLabel}
-              <ArrowRight size={16} />
-            </Link>
+              <h1 style={{ fontFamily: 'var(--font-baloo2)', fontSize: 22, fontWeight: 800, color: '#fff', margin: 0, marginBottom: 4 }}>
+                Hi {displayName}! 👋
+              </h1>
+              {active && activeMeta && (
+                <p className="text-sm mb-3" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  {activeMeta.icon} <span className="font-semibold">{activeMeta.label}</span>
+                  {active.lastChapterTitle ? ` — ${active.lastChapterTitle}` : hasHistory ? '' : ' — your first lesson awaits'}
+                </p>
+              )}
+              {pendingAssessment && (
+                <p className="text-xs mb-3 font-bold" style={{ color: '#fff' }}>
+                  📝 You have an assessment in progress
+                </p>
+              )}
+              <Link href={continueHref} className="w-full sm:w-auto" style={{ textDecoration: 'none', display: 'inline-block' }}>
+                <CandyButton onClick={fireConfetti} depth={3} activeDepth={1} shadowColor="rgba(0,0,0,0.2)" className="w-full sm:w-auto"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px 26px', borderRadius: 14, fontSize: 14, fontWeight: 800, background: '#fff', color: 'var(--candy-purple-d)' }}>
+                  {continueLabel} <ArrowRight size={16} />
+                </CandyButton>
+              </Link>
+            </div>
           </div>
-        </section>
+        </Card>
 
         {/* ═══ RECOMMENDED REVISION (Sprint BO) — suppressed when orchestrator card is shown ═══ */}
         {revision && !navigatorAction && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <h2 className="font-bold text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--coral)' }}>📌 Recommended Revision</h2>
-            <p className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{revision.chapterTitle}</p>
-            <p className="text-xs mt-0.5 mb-3" style={{ color: 'var(--text-secondary)' }}>
+          <Card style={{ padding: 18 }}>
+            <SectionTitle style={{ fontSize: 13, marginBottom: 8 }}>📌 Recommended Revision</SectionTitle>
+            <p className="font-bold text-sm" style={{ color: 'var(--candy-ink)' }}>{revision.chapterTitle}</p>
+            <p className="text-xs mt-0.5 mb-3" style={{ color: 'var(--candy-ink-soft)' }}>
               {revision.subjectLabel} · Class {grade}
             </p>
-            <Link href={`/school/${revision.subjectSlug}/chapter/${encodeURIComponent(revision.chapterId)}`}
-              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl"
-              style={{ background: 'var(--coral-muted)', border: '1px solid var(--coral)', color: 'var(--coral)', textDecoration: 'none' }}>
-              Review Weak Areas <ArrowRight size={13} />
+            <Link href={`/school/${revision.subjectSlug}/chapter/${encodeURIComponent(revision.chapterId)}`} style={{ textDecoration: 'none', display: 'inline-block' }}>
+              <CandyButton depth={2} activeDepth={1} shadowColor="var(--candy-shadow)"
+                style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 800, padding: '10px 18px', borderRadius: 12, background: 'var(--candy-card)', color: 'var(--candy-red)', border: '1px solid var(--candy-red)' }}>
+                Review Weak Areas <ArrowRight size={13} />
+              </CandyButton>
             </Link>
-          </section>
+          </Card>
         )}
 
         {/* ═══ SECTION 2 — TODAY'S GOAL ═══ */}
-        <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+        <Card style={{ padding: 18 }}>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-bold text-sm uppercase tracking-wide" style={{ color: 'var(--text-primary)' }}>🎯 Today&apos;s Goal</h2>
-            <span className="text-xs font-bold" style={{ color: 'var(--coral)' }}>🔥 {streakDays}-day streak</span>
+            <SectionTitle style={{ fontSize: 13, margin: 0 }}>🎯 Today&apos;s Goal</SectionTitle>
+            <Pill color="var(--candy-red)" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <Flame size={11} /> {streakDays}-day streak
+            </Pill>
           </div>
           <ul className="space-y-2">
             <GoalItem done={studiedToday} label="Study one chapter" />
             <GoalItem done={false} label="Solve 5 practice questions" />
             <GoalItem done={false} label="Review yesterday&apos;s mistakes" />
           </ul>
-        </section>
+        </Card>
 
         {/* ═══ SECTION 2b — LEARNING MOMENTUM (Sprint CD) ═══ */}
         {momentum && (
-          <section
-            className="rounded-2xl p-4 flex items-center gap-4"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}
-          >
+          <Card style={{ padding: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
             <div className="flex items-center gap-2 flex-1 min-w-0">
               <span className="text-2xl">🔥</span>
               <div className="min-w-0">
-                <p className="text-sm font-black" style={{ color: 'var(--text-primary)' }}>
+                <p className="text-sm font-black" style={{ color: 'var(--candy-ink)' }}>
                   {momentum.currentStreak}-day streak
                 </p>
                 {momentum.longestStreak > momentum.currentStreak && (
-                  <p className="text-[11px]" style={{ color: 'var(--text-dim)' }}>
+                  <p className="text-[11px]" style={{ color: 'var(--candy-ink-soft)' }}>
                     Best: {momentum.longestStreak} days
                   </p>
                 )}
@@ -301,37 +315,35 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
               <div className="flex items-center gap-2 shrink-0 max-w-[55%]">
                 <span className="text-xl">{momentum.recentAchievement.icon}</span>
                 <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>Latest</p>
-                  <p className="text-xs font-semibold truncate" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: 'var(--candy-ink-soft)' }}>Latest</p>
+                  <p className="text-xs font-semibold truncate" style={{ color: 'var(--candy-ink)' }}>
                     {momentum.recentAchievement.title}
                   </p>
                 </div>
               </div>
             )}
-          </section>
+          </Card>
         )}
 
         {/* ═══ SECTION 3 — MY SUBJECTS ═══ */}
         <section>
-          <h2 className="font-bold text-sm uppercase tracking-wide mb-3 px-0.5" style={{ color: 'var(--text-primary)' }}>📚 My Subjects</h2>
+          <SectionTitle style={{ marginBottom: 12, paddingLeft: 2 }}>📚 My Subjects</SectionTitle>
           <div className="grid grid-cols-2 gap-3">
             {subjects.map((s) => {
-              const m = SUBJECT_META[s.slug] ?? { label: s.slug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+              const m = SUBJECT_META[s.slug] ?? { label: s.slug, icon: '📘', color: 'var(--candy-red)', bg: 'var(--candy-red)22' }
               return (
-                <Link key={s.slug} href={`/school/${s.slug}`}
-                  className="rounded-2xl p-4 flex flex-col gap-2 transition-all duration-200 hover:-translate-y-0.5"
-                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', textDecoration: 'none', minHeight: 110 }}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-                    style={{ background: m.bg }}>
-                    {m.icon}
-                  </div>
-                  <p className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{m.label}</p>
-                  <div className="flex items-center gap-2 mt-auto">
-                    <div className="h-1.5 flex-1 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, s.completionPercent))}%`, background: m.color }} />
+                <Link key={s.slug} href={`/school/${s.slug}`} style={{ textDecoration: 'none' }}>
+                  <Card style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 8, minHeight: 110 }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+                      style={{ background: m.bg }}>
+                      {m.icon}
                     </div>
-                    <span className="text-[11px] font-mono font-bold" style={{ color: m.color }}>{s.completionPercent}%</span>
-                  </div>
+                    <p className="font-bold text-sm" style={{ color: 'var(--candy-ink)' }}>{m.label}</p>
+                    <div className="flex items-center gap-2 mt-auto">
+                      <ProgressBar percent={Math.min(100, Math.max(0, s.completionPercent))} height={8} borderRadius={4} fillColor={m.color} className="flex-1" animated={false} />
+                      <span className="text-[11px] font-mono font-bold" style={{ color: m.color }}>{s.completionPercent}%</span>
+                    </div>
+                  </Card>
                 </Link>
               )
             })}
@@ -339,21 +351,21 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
         </section>
 
         {/* ═══ SECTION 4 — PROGRESS SNAPSHOT ═══ */}
-        <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
+        <Card style={{ padding: 18 }}>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-bold text-sm uppercase tracking-wide" style={{ color: 'var(--text-primary)' }}>📈 Progress</h2>
-            <span className="text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>⚡ {xpPoints} XP</span>
+            <SectionTitle style={{ fontSize: 13, margin: 0 }}>📈 Progress</SectionTitle>
+            <Pill color="var(--candy-yellow)" style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--candy-ink)' }}>
+              <Zap size={11} /> {xpPoints} XP
+            </Pill>
           </div>
           <div className="space-y-2.5">
             {subjects.map((s) => {
-              const m = SUBJECT_META[s.slug] ?? { label: s.slug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+              const m = SUBJECT_META[s.slug] ?? { label: s.slug, icon: '📘', color: 'var(--candy-red)', bg: 'var(--candy-red)22' }
               return (
                 <div key={s.slug} className="flex items-center gap-3">
                   <span className="text-sm w-6 text-center shrink-0">{m.icon}</span>
-                  <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--text-primary)' }}>{m.label}</span>
-                  <div className="h-2 flex-1 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                    <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, s.completionPercent))}%`, background: m.color, transition: 'width .5s' }} />
-                  </div>
+                  <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--candy-ink)' }}>{m.label}</span>
+                  <ProgressBar percent={Math.min(100, Math.max(0, s.completionPercent))} height={8} borderRadius={4} fillColor={m.color} className="flex-1" animated={false} />
                   <span className="text-[11px] font-mono font-bold w-20 text-right shrink-0" style={{ color: m.color }}>
                     {s.completedCount}/{s.totalCount} · {s.completionPercent}%
                   </span>
@@ -361,22 +373,20 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
               )
             })}
           </div>
-        </section>
+        </Card>
 
         {/* ═══ SECTION 4b — ACADEMIC JOURNEY (Sprint CK) — chapter completion, NOT readiness ═══ */}
         {academicJourney && academicJourney.length > 0 && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <h2 className="font-bold text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--text-primary)' }}>🗺️ Academic Journey</h2>
+          <Card style={{ padding: 18 }}>
+            <SectionTitle style={{ fontSize: 13, marginBottom: 12 }}>🗺️ Academic Journey</SectionTitle>
             <div className="space-y-2.5">
               {academicJourney.map((r) => {
-                const m = SUBJECT_META[r.subjectSlug] ?? { label: r.subjectLabel, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+                const m = SUBJECT_META[r.subjectSlug] ?? { label: r.subjectLabel, icon: '📘', color: 'var(--candy-red)', bg: 'var(--candy-red)22' }
                 return (
                   <div key={r.subjectSlug} className="flex items-center gap-3">
                     <span className="text-sm w-6 text-center shrink-0">{m.icon}</span>
-                    <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--text-primary)' }}>{m.label}</span>
-                    <div className="h-2 flex-1 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, r.completionPercent))}%`, background: m.color, transition: 'width .5s' }} />
-                    </div>
+                    <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--candy-ink)' }}>{m.label}</span>
+                    <ProgressBar percent={Math.min(100, Math.max(0, r.completionPercent))} height={8} borderRadius={4} fillColor={m.color} className="flex-1" animated={false} />
                     <span className="text-[11px] font-mono font-bold w-20 text-right shrink-0" style={{ color: m.color }}>
                       {r.completedCount}/{r.totalCount} · {r.completionPercent}%
                     </span>
@@ -384,34 +394,32 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
                 )
               })}
             </div>
-          </section>
+          </Card>
         )}
 
         {/* ═══ SECTION 5 — EXAM READINESS (Sprint CE) ═══ */}
         {examReadiness && examReadiness.length > 0 && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <h2 className="font-bold text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--text-primary)' }}>🎓 Exam Readiness</h2>
+          <Card style={{ padding: 18 }}>
+            <SectionTitle style={{ fontSize: 13, marginBottom: 12 }}>🎓 Exam Readiness</SectionTitle>
             <div className="space-y-2.5">
               {examReadiness.map((r) => {
-                const m = SUBJECT_META[r.subjectSlug] ?? { label: r.subjectLabel, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+                const m = SUBJECT_META[r.subjectSlug] ?? { label: r.subjectLabel, icon: '📘', color: 'var(--candy-red)', bg: 'var(--candy-red)22' }
                 const levelColor =
-                  r.level === 'strongly_prepared' ? 'var(--green)' :
-                  r.level === 'exam_ready' ? 'var(--blue)' :
-                  r.level === 'developing' ? 'var(--yellow)' :
-                  'var(--coral)'
+                  r.level === 'strongly_prepared' ? 'var(--candy-green)' :
+                  r.level === 'exam_ready' ? 'var(--candy-blue)' :
+                  r.level === 'developing' ? 'var(--candy-yellow)' :
+                  'var(--candy-red)'
                 return (
                   <div key={r.subjectSlug} className="flex items-center gap-3">
                     <span className="text-sm w-6 text-center shrink-0">{m.icon}</span>
-                    <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--text-primary)' }}>{m.label}</span>
-                    <div className="h-2 flex-1 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, r.readinessPercent))}%`, background: levelColor, transition: 'width .5s' }} />
-                    </div>
+                    <span className="text-xs font-semibold w-28 shrink-0 truncate" style={{ color: 'var(--candy-ink)' }}>{m.label}</span>
+                    <ProgressBar percent={Math.min(100, Math.max(0, r.readinessPercent))} height={8} borderRadius={4} fillColor={levelColor} className="flex-1" animated={false} />
                     <span className="text-[11px] font-mono font-bold w-9 text-right shrink-0" style={{ color: levelColor }}>{r.readinessPercent}%</span>
                   </div>
                 )
               })}
             </div>
-          </section>
+          </Card>
         )}
 
         {/* ═══ SECTION 6 — PROGRESS REPORT (Sprint CJ) ═══ */}
@@ -424,12 +432,11 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
 
 function GoalItem({ done, label }: { done: boolean; label: string }) {
   return (
-    <li className="flex items-center gap-2.5 text-sm" style={{ color: done ? 'var(--text-secondary)' : 'var(--text-primary)' }}>
-      <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0"
+    <li className="flex items-center gap-2.5 text-sm" style={{ color: done ? 'var(--candy-ink-soft)' : 'var(--candy-ink)' }}>
+      <span className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] shrink-0 font-bold"
         style={{
-          background: done ? 'var(--green-muted)' : 'var(--bg-elevated)',
-          border: `1px solid ${done ? 'var(--green)' : 'var(--border-default)'}`,
-          color: done ? 'var(--green)' : 'var(--text-dim)',
+          background: done ? 'var(--candy-green)' : 'var(--candy-bg)',
+          color: done ? '#fff' : 'var(--candy-ink-soft)',
         }}>
         {done ? '✓' : ''}
       </span>
