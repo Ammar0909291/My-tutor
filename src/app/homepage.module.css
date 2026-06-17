@@ -70,8 +70,13 @@
 .navLogo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
 .navLogoMark {
   width: 34px; height: 34px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
-  font-size: 17px; background: linear-gradient(135deg, var(--purple), var(--blue)); box-shadow: 0 3px 0 var(--purple-d);
+  background: linear-gradient(135deg, var(--purple), var(--blue)); box-shadow: 0 3px 0 var(--purple-d);
+  animation: bob 3s ease-in-out infinite; cursor: pointer;
 }
+.navLogoMark.waving { animation: mascotWave 0.6s ease-in-out; }
+.navLogoMark svg { display: block; }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-3px) rotate(2deg); } }
+@keyframes mascotWave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
 .navLogoText { font-family: var(--font-baloo2), 'Baloo 2', cursive; font-weight: 800; font-size: 17px; color: var(--ink); }
 .navLinks { display: none; align-items: center; gap: 28px; font-size: 14px; font-weight: 700; color: var(--ink-soft); }
 .navLink { color: inherit; text-decoration: none; transition: color 140ms; }
@@ -150,7 +155,7 @@
 .mockChat { padding: 16px; display: flex; gap: 12px; }
 .mockChatAvatar {
   width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--purple), var(--blue));
+  background: linear-gradient(135deg, var(--purple), var(--blue));
 }
 .mockChatBubble { flex: 1; border-radius: 12px; padding: 10px 14px; font-size: 13px; line-height: 1.5; font-weight: 600; background: color-mix(in srgb, var(--purple) 8%, var(--card)); border-left: 3px solid var(--purple); color: var(--ink); }
 
@@ -251,3 +256,56 @@
 .footerLinks a:hover { color: var(--purple); }
 
 @media (min-width: 640px) { .footerInner { flex-direction: row; text-align: left; } }
+
+/* ===== Hero mascot greeting bubble — same eagle character as the dashboard topbar ===== */
+.heroMascotRow { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.heroMascotMark {
+  width: 52px; height: 52px; border-radius: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--purple), var(--blue)); box-shadow: 0 4px 0 var(--purple-d);
+  animation: bob 3s ease-in-out infinite;
+}
+.heroMascotBubble {
+  background: var(--card); border-radius: 16px 16px 16px 4px; padding: 10px 16px; font-size: 13px; font-weight: 700;
+  color: var(--ink); box-shadow: 0 3px 0 var(--shadow);
+}
+
+/* ===== Learning Journey timeline — reuses the dashboard journey-node/dot/line motif ===== */
+.journeyRow { display: flex; flex-direction: column; gap: 0; }
+.journeyNode { display: flex; gap: 18px; }
+.journeyTrack { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
+.journeyDot {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #fff; box-shadow: 0 3px 0 var(--shadow); z-index: 1;
+}
+.journeyLine { width: 3px; flex: 1; min-height: 28px; background: var(--shadow); margin: 2px 0; }
+.journeyContent { padding-bottom: 28px; flex: 1; }
+.journeyStepTitle { font-weight: 800; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+.journeyStepDesc { font-size: 13px; font-weight: 600; color: var(--ink-soft); line-height: 1.5; }
+
+/* ===== AI Learning Coach preview — mirrors LearningCoachCard's gradient header + tile row ===== */
+.coachCard { padding: 0; overflow: hidden; }
+.coachHeader {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%); color: #fff;
+  padding: 22px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.coachBadge { background: rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
+.coachHeaderTitle { font-family: var(--font-baloo2), 'Baloo 2', cursive; font-weight: 800; font-size: 18px; }
+.coachHeaderSub { font-size: 13px; font-weight: 600; opacity: 0.92; }
+.coachTiles { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 26px; }
+.coachTile { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 16px; border-radius: 16px; background: color-mix(in srgb, var(--purple) 6%, var(--card)); }
+.coachTileIcon { font-size: 22px; }
+.coachTileLabel { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-soft); }
+.coachTileName { font-size: 13px; font-weight: 700; color: var(--ink); }
+
+@media (min-width: 768px) { .coachTiles { grid-template-columns: repeat(3, 1fr); } }
+
+/* ===== Progression strip — real level ladder + streak/XP/certificate concepts ===== */
+.progChips { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 36px; }
+.progChip { display: flex; align-items: center; gap: 10px; padding: 12px 20px; }
+.progChipIcon { font-size: 22px; }
+.progChipLabel { font-size: 13px; font-weight: 800; color: var(--ink); }
+.ladderRow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; max-width: 640px; margin: 0 auto; }
+.ladderStep { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ladderDot { width: 14px; height: 14px; border-radius: 50%; background: var(--shadow); }
+.ladderStepName { font-size: 11px; font-weight: 800; color: var(--ink-soft); white-space: nowrap; }
+.ladderConnector { width: 28px; height: 2px; background: var(--shadow); margin: 0 2px; }

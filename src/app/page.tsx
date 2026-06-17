@@ -6,8 +6,28 @@ import { ArrowRight, Check, ChevronDown, LogOut, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme, type Country } from '@/components/Providers'
-import { CandyPage, Card, CandyButton, Pill } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, Pill, EagleMascot, ProgressRing, useConfetti } from '@/components/ui/candy'
 import styles from './homepage.module.css'
+
+const JOURNEY_STEPS = [
+  { icon: '🔍', title: 'journey_step1', desc: 'journey_step1_desc' },
+  { icon: '📖', title: 'journey_step2', desc: 'journey_step2_desc' },
+  { icon: '✏️', title: 'journey_step3', desc: 'journey_step3_desc' },
+  { icon: '🧠', title: 'journey_step4', desc: 'journey_step4_desc' },
+  { icon: '🎯', title: 'journey_step5', desc: 'journey_step5_desc' },
+  { icon: '🏆', title: 'journey_step6', desc: 'journey_step6_desc' },
+  { icon: '🎓', title: 'journey_step7', desc: 'journey_step7_desc' },
+] as const
+
+const JOURNEY_COLORS = ['var(--purple)', 'var(--blue)', 'var(--green)', 'var(--orange)', 'var(--pink)', 'var(--yellow-d)', 'var(--purple-d)']
+
+const LEVEL_LADDER = [
+  { name: 'Novice', icon: '🌱' },
+  { name: 'Student', icon: '📖' },
+  { name: 'Practitioner', icon: '⚡' },
+  { name: 'Expert', icon: '🚀' },
+  { name: 'Master', icon: '🏆' },
+]
 
 const STEPS = ['how1', 'how2', 'how3', 'how4'] as const
 
@@ -38,6 +58,13 @@ export default function HomePage() {
   useEffect(() => { setMounted(true) }, [])
   const [mobileOpen, setMobileOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
+  const [mascotWaving, setMascotWaving] = useState(false)
+  const fireConfetti = useConfetti()
+
+  function handleMascotClick() {
+    setMascotWaving(true)
+    fireConfetti()
+  }
 
   // Auth state — the homepage must always reflect the real session.
   // status: 'loading' renders neither guest nor user UI (prevents a stale
@@ -71,7 +98,13 @@ export default function HomePage() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <Link href="/" className={styles.navLogo}>
-            <span className={styles.navLogoMark}>🔥</span>
+            <span
+              className={`${styles.navLogoMark} ${mascotWaving ? styles.waving : ''}`}
+              onClick={(e) => { e.preventDefault(); handleMascotClick() }}
+              onAnimationEnd={() => setMascotWaving(false)}
+            >
+              <EagleMascot variant="logo" size={24} />
+            </span>
             <span className={styles.navLogoText}>My Tutor</span>
           </Link>
 
@@ -160,6 +193,11 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div>
+            <div className={styles.heroMascotRow}>
+              <span className={styles.heroMascotMark}><EagleMascot variant="logo" size={30} /></span>
+              <span className={styles.heroMascotBubble}>{t('mascot_greet')}</span>
+            </div>
+
             <Pill className={styles.heroBadge} color="transparent">{t('hero_badge')}</Pill>
 
             <h1 className={`${styles.heading} ${styles.heroTitle}`}>
@@ -216,7 +254,7 @@ export default function HomePage() {
                   <div style={{ marginTop: 4 }}><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: '#C9D1D9' }}>()</span></div>
                 </div>
                 <div className={styles.mockChat}>
-                  <div className={styles.mockChatAvatar}>T</div>
+                  <div className={styles.mockChatAvatar}><EagleMascot variant="logo" size={18} /></div>
                   <div className={styles.mockChatBubble}>{t('hero_mock_msg')}</div>
                 </div>
               </div>
@@ -236,6 +274,103 @@ export default function HomePage() {
               <span className={styles.statLabel}>{t(k)}</span>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* ── Learning Journey — the same Discover→Learn→Practice→Master→Coach→Achieve→Certify flow that powers the dashboard ── */}
+      <section className={styles.section}>
+        <div className={styles.sectionInner} style={{ maxWidth: 640 }}>
+          <div className={styles.sectionHead}>
+            <h2 className={`${styles.heading} ${styles.sectionTitleBig}`}>{t('journey_title')}</h2>
+            <p className={styles.sectionSub}>{t('journey_sub')}</p>
+          </div>
+          <div className={styles.journeyRow}>
+            {JOURNEY_STEPS.map((step, i) => (
+              <div key={step.title} className={styles.journeyNode}>
+                <div className={styles.journeyTrack}>
+                  <div className={styles.journeyDot} style={{ background: JOURNEY_COLORS[i % JOURNEY_COLORS.length] }}>{step.icon}</div>
+                  {i < JOURNEY_STEPS.length - 1 && <div className={styles.journeyLine} />}
+                </div>
+                <div className={styles.journeyContent}>
+                  <div className={styles.journeyStepTitle}>{t(step.title as any)}</div>
+                  <div className={styles.journeyStepDesc}>{t(step.desc as any)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── AI Learning Coach preview — same gradient header + tile layout as the dashboard's LearningCoachCard ── */}
+      <section className={styles.section}>
+        <div className={styles.sectionInner} style={{ maxWidth: 760 }}>
+          <Card className={styles.coachCard}>
+            <div className={styles.coachHeader}>
+              <div>
+                <span className={styles.coachBadge}>{t('coach_preview_badge')}</span>
+                <div className={`${styles.heading} ${styles.coachHeaderTitle}`} style={{ marginTop: 10 }}>{t('coach_preview_title')}</div>
+                <div className={styles.coachHeaderSub}>{t('coach_preview_sub')}</div>
+              </div>
+            </div>
+            <div className={styles.coachTiles}>
+              <div className={styles.coachTile}>
+                <span className={styles.coachTileIcon}>💪</span>
+                <span className={styles.coachTileLabel}>{t('coach_preview_tile1')}</span>
+              </div>
+              <div className={styles.coachTile}>
+                <ProgressRing
+                  percent={65}
+                  size={72}
+                  radius={30}
+                  strokeWidth={8}
+                  gradientFrom="var(--purple)"
+                  gradientTo="var(--blue)"
+                  trackColor="var(--shadow)"
+                  label={<span style={{ fontSize: 11, fontWeight: 800, color: 'var(--ink-soft)' }}>{t('coach_preview_ring_word')}</span>}
+                />
+                <span className={styles.coachTileLabel} style={{ marginTop: 4 }}>{t('coach_preview_tile2')}</span>
+              </div>
+              <div className={styles.coachTile}>
+                <span className={styles.coachTileIcon}>🎯</span>
+                <span className={styles.coachTileLabel}>{t('coach_preview_tile3')}</span>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* ── Progression preview — the same level ladder + streak/XP/certificate systems shown on the dashboard ── */}
+      <section className={styles.section} style={{ paddingTop: 0 }}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHead}>
+            <h2 className={`${styles.heading} ${styles.sectionTitleBig}`}>{t('progression_title')}</h2>
+            <p className={styles.sectionSub}>{t('progression_sub')}</p>
+          </div>
+          <div className={styles.progChips}>
+            <Card className={styles.progChip}>
+              <span className={styles.progChipIcon}>🔥</span>
+              <span className={styles.progChipLabel}>{t('progression_streak_label')}</span>
+            </Card>
+            <Card className={styles.progChip}>
+              <span className={styles.progChipIcon}>⭐</span>
+              <span className={styles.progChipLabel}>{t('progression_xp_label')}</span>
+            </Card>
+            <Card className={styles.progChip}>
+              <span className={styles.progChipIcon}>🎓</span>
+              <span className={styles.progChipLabel}>{t('progression_cert_label')}</span>
+            </Card>
+          </div>
+          <div className={styles.ladderRow}>
+            {LEVEL_LADDER.map((lvl, i) => (
+              <div key={lvl.name} style={{ display: 'flex', alignItems: 'center' }}>
+                {i > 0 && <div className={styles.ladderConnector} />}
+                <div className={styles.ladderStep}>
+                  <div className={styles.ladderDot} style={{ background: i === 0 ? 'var(--purple)' : undefined }} />
+                  <span className={styles.ladderStepName}>{lvl.icon} {lvl.name}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -360,7 +495,7 @@ export default function HomePage() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerLogo}>
-            <span>🔥</span>
+            <EagleMascot variant="logo" size={20} />
             <span>My Tutor</span>
           </div>
           <p className={styles.footerRights}>{t('footer_rights')}</p>
