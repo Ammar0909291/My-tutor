@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { t as i18n } from '@/lib/i18n'
-import { CandyPage, Card, CandyButton, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, Pill, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
 
 interface Question {
   question: string
@@ -110,7 +110,7 @@ export default function QuizClient({ subject, lang }: Props) {
   if (loading) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
-        <div style={{ fontSize: 40 }}>🎮</div>
+        <EagleMascot variant="hero" size={72} />
         <p style={{ color: 'var(--candy-ink-soft)', fontSize: 16, fontWeight: 600 }}>{i18n(lang, 'quiz_loading')}</p>
       </CandyPage>
     )
@@ -119,6 +119,7 @@ export default function QuizClient({ subject, lang }: Props) {
   if (error) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <EagleMascot variant="hero" size={72} />
         <p style={{ color: 'var(--candy-red)', fontSize: 16, fontWeight: 700 }}>{error}</p>
         <CandyButton onClick={restart} style={{ padding: '10px 20px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800 }}>
           {i18n(lang, 'quiz_retry')}
@@ -133,7 +134,10 @@ export default function QuizClient({ subject, lang }: Props) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', padding: 40, maxWidth: 400 }}>
-          <div style={{ fontSize: 60, marginBottom: 16 }}>{emoji}</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
+            <EagleMascot variant="hero" size={80} />
+          </div>
+          <div style={{ fontSize: 40, marginBottom: 8 }}>{emoji}</div>
           <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--candy-ink)', marginBottom: 8, fontFamily: 'var(--font-baloo2)' }}>
             {score} / {questions.length} {i18n(lang, 'quiz_finish')}
           </h2>
@@ -182,7 +186,11 @@ export default function QuizClient({ subject, lang }: Props) {
             animated={false}
           />
         </div>
-        <div style={{ marginBottom: 24, color: 'var(--candy-ink-soft)', fontSize: 12, fontWeight: 600 }}>⏱ {timeLeft}{i18n(lang, 'quiz_seconds_suffix')}</div>
+        <div style={{ marginBottom: 24 }}>
+          <Pill color="var(--candy-bg)" style={{ color: timeLeft <= 10 ? 'var(--candy-red)' : 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)' }}>
+            ⏱ {timeLeft}{i18n(lang, 'quiz_seconds_suffix')}
+          </Pill>
+        </div>
 
         {/* Question */}
         <Card style={{ padding: '24px', marginBottom: 20 }}>

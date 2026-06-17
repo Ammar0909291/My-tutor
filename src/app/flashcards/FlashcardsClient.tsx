@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { getTranslations } from '@/lib/i18n'
-import { CandyPage, Card, CandyButton, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, Pill, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
 
 interface Flashcard {
   id: string
@@ -85,7 +85,8 @@ export default function FlashcardsClient() {
 
   if (loading) {
     return (
-      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <EagleMascot variant="hero" size={72} />
         <p style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{tr.flashcards_loading}</p>
       </CandyPage>
     )
@@ -154,7 +155,7 @@ export default function FlashcardsClient() {
         <div style={{ maxWidth: 560, width: '100%' }}>
           {/* Topic */}
           <div style={{ textAlign: 'center', marginBottom: 12 }}>
-            <span style={{ fontSize: 11, color: 'var(--candy-ink-soft)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>{card.topic}</span>
+            <Pill color="var(--candy-bg)" style={{ color: 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)' }}>{card.topic}</Pill>
           </div>
 
           {/* Card */}
