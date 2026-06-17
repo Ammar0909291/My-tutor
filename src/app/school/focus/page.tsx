@@ -8,11 +8,12 @@ import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 import { getLearningNavigatorAction, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
-import { CandyPage } from '@/components/ui/candy'
+import { Card, CandyButton, Pill, EagleMascot } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 /**
- * Focus Mode (Sprint BQ) — walks through today's study plan one task at a time.
- * URL: /school/focus?task=0 (default task=0)
+ * Focus Mode (Sprint BQ, restyled Sprint G) — walks through today's study
+ * plan one task at a time. URL: /school/focus?task=0 (default task=0)
  */
 export default async function FocusPage({
   searchParams,
@@ -45,47 +46,29 @@ export default async function FocusPage({
 
   if (tasks.length === 0) {
     return (
-      <CandyPage legacy className="flex flex-col">
-        <nav
-          className="sticky top-0 z-50"
-          style={{
-            background: 'var(--bg-overlay)',
-            backdropFilter: 'blur(12px)',
-            borderBottom: '1px solid var(--border-default)',
-          }}
-        >
-          <div className="max-w-xl mx-auto px-5 h-[60px] flex items-center gap-3">
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-2 text-sm font-medium"
-              style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
-            >
+      <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)', display: 'flex', flexDirection: 'column' }}>
+        <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)' }}>
+          <div style={{ maxWidth: 576, margin: '0 auto', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12 }}>
+            <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
               <ArrowLeft size={15} /> Back
             </Link>
           </div>
         </nav>
-        <main className="flex-1 flex items-center justify-center px-5">
-          <div className="text-center max-w-sm">
-            <div className="text-5xl mb-4">🎉</div>
-            <h1
-              className="text-xl font-black mb-2"
-              style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}
-            >
-              All caught up!
-            </h1>
-            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-              No tasks for today. Keep up the great work.
-            </p>
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-xl text-white"
-              style={{ background: 'var(--coral)', textDecoration: 'none' }}
-            >
-              Back to Dashboard <ArrowRight size={14} />
+        <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: 360 }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
+              <EagleMascot variant="hero" size={88} />
+            </div>
+            <h1 style={{ fontSize: 20, fontWeight: 800, marginBottom: 8, color: 'var(--candy-ink)' }}>All caught up!</h1>
+            <p style={{ fontSize: 14, marginBottom: 24, color: 'var(--candy-ink-soft)' }}>No tasks for today. Keep up the great work.</p>
+            <Link href="/dashboard" style={{ textDecoration: 'none' }}>
+              <CandyButton style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', fontSize: 14, fontWeight: 800, borderRadius: 14, background: 'var(--candy-red)', color: '#fff' }} shadowColor="#C73A3A">
+                Back to Dashboard <ArrowRight size={14} />
+              </CandyButton>
             </Link>
           </div>
         </main>
-      </CandyPage>
+      </div>
     )
   }
 
@@ -99,8 +82,8 @@ export default async function FocusPage({
   const m = SCHOOL_SUBJECT_META[task.subjectSlug] ?? {
     label: task.subjectLabel,
     icon: '📘',
-    color: 'var(--coral)',
-    bg: 'var(--coral-muted)',
+    color: 'var(--candy-red)',
+    bg: 'rgba(255, 75, 75, 0.12)',
   }
 
   const ACTION_LABELS: Record<string, string> = {
@@ -113,216 +96,109 @@ export default async function FocusPage({
   }
 
   return (
-    <CandyPage legacy className="min-h-screen">
-      <nav
-        className="sticky top-0 z-50"
-        style={{
-          background: 'var(--bg-overlay)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid var(--border-default)',
-        }}
-      >
-        <div className="max-w-xl mx-auto px-5 h-[60px] flex items-center justify-between">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2 text-sm font-medium"
-            style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
-          >
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)' }}>
+        <div style={{ maxWidth: 576, margin: '0 auto', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
             <ArrowLeft size={15} /> Back
           </Link>
-          <span
-            className="text-xs font-bold px-3 py-1 rounded-full"
-            style={{
-              background: 'var(--bg-elevated)',
-              border: '1px solid var(--border-default)',
-              color: 'var(--text-secondary)',
-            }}
-          >
-            <Clock size={11} className="inline mr-1" />
+          <Pill color="var(--candy-bg)" style={{ color: 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)' }}>
+            <Clock size={11} style={{ display: 'inline', marginRight: 4, verticalAlign: -1 }} />
             ~{totalMinutes} min today
-          </span>
+          </Pill>
         </div>
       </nav>
 
-      <main className="max-w-xl mx-auto px-5 py-10 space-y-6">
+      <main style={{ maxWidth: 576, margin: '0 auto', padding: '40px 20px', display: 'flex', flexDirection: 'column', gap: 24 }}>
         {/* Sprint CO: Current Priority — derived from the Learning Navigator */}
         {navigatorAction && (
-          <p className="text-xs font-semibold flex items-center gap-1.5 flex-wrap"
-            style={{ color: NAVIGATOR_URGENCY_COLORS[navigatorAction.urgency] }}>
+          <p style={{ fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: NAVIGATOR_URGENCY_COLORS[navigatorAction.urgency] }}>
             <span>🎯 Current Priority:</span>
-            <span style={{ color: 'var(--text-primary)' }}>{navigatorAction.title}</span>
-            <span style={{ color: 'var(--text-dim)', fontWeight: 400 }}>— {navigatorAction.reason}</span>
+            <span style={{ color: 'var(--candy-ink)' }}>{navigatorAction.title}</span>
+            <span style={{ color: 'var(--candy-ink-soft)', fontWeight: 400 }}>— {navigatorAction.reason}</span>
           </p>
         )}
 
         {/* Step indicator */}
-        <div className="flex items-center gap-2">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {tasks.map((_, i) => (
             <div
               key={i}
-              className="h-1.5 flex-1 rounded-full"
-              style={{
-                background: i <= taskIndex ? 'var(--coral)' : 'var(--bg-elevated)',
-                transition: 'background .3s',
-              }}
+              style={{ height: 6, flex: 1, borderRadius: 8, background: i <= taskIndex ? 'var(--candy-red)' : 'var(--candy-shadow)', transition: 'background .3s' }}
             />
           ))}
         </div>
 
-        <p
-          className="text-[11px] font-bold uppercase tracking-wider"
-          style={{ color: 'var(--text-dim)' }}
-        >
+        <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--candy-ink-soft)' }}>
           Task {taskIndex + 1} of {tasks.length}
         </p>
 
         {/* Current task card */}
-        <section
-          className="relative rounded-2xl overflow-hidden"
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-default)',
-            boxShadow: 'var(--shadow-md)',
-          }}
-        >
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: `radial-gradient(ellipse at 0% 0%, ${m.bg} 0%, transparent 55%)`,
-            }}
-          />
-          <div className="relative p-6 space-y-4">
-            <div className="flex items-center gap-3">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
-                style={{ background: m.bg }}
-              >
-                {m.icon}
-              </div>
-              <div>
-                <p
-                  className="text-xs font-bold uppercase tracking-wider"
-                  style={{ color: m.color }}
-                >
-                  {task.subjectLabel}
-                </p>
-                <p
-                  className="text-xs mt-0.5"
-                  style={{ color: 'var(--text-dim)' }}
-                >
-                  ~{task.estimatedMinutes} min
-                </p>
-              </div>
+        <Card style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ width: 48, height: 48, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, flexShrink: 0, background: m.bg }}>
+              {m.icon}
             </div>
-
             <div>
-              <h1
-                className="text-xl font-black leading-snug"
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                {task.title}
-              </h1>
-              <p
-                className="text-sm mt-1"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                {task.reason}
-              </p>
+              <p style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: m.color }}>{task.subjectLabel}</p>
+              <p style={{ fontSize: 12, marginTop: 2, color: 'var(--candy-ink-soft)' }}>~{task.estimatedMinutes} min</p>
             </div>
-
-            <Link
-              href={task.href}
-              className="inline-flex items-center justify-center gap-2 w-full py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
-              style={{
-                background: 'var(--coral)',
-                textDecoration: 'none',
-                boxShadow: 'var(--coral-glow)',
-              }}
-            >
-              {ACTION_LABELS[task.priority] ?? 'Start Learning'}{' '}
-              <ArrowRight size={16} />
-            </Link>
           </div>
-        </section>
+
+          <div>
+            <h1 style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.3, color: 'var(--candy-ink)', margin: 0 }}>{task.title}</h1>
+            <p style={{ fontSize: 14, marginTop: 4, color: 'var(--candy-ink-soft)' }}>{task.reason}</p>
+          </div>
+
+          <Link href={task.href} style={{ textDecoration: 'none' }}>
+            <CandyButton
+              style={{ width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px 0', fontSize: 14, fontWeight: 800, borderRadius: 14, background: 'var(--candy-red)', color: '#fff' }}
+              shadowColor="#C73A3A"
+            >
+              {ACTION_LABELS[task.priority] ?? 'Start Learning'} <ArrowRight size={16} />
+            </CandyButton>
+          </Link>
+        </Card>
 
         {/* Upcoming tasks */}
         {tasks.slice(taskIndex + 1).length > 0 && (
-          <section
-            className="rounded-2xl p-4 space-y-2"
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-default)',
-            }}
-          >
-            <p
-              className="text-[10px] font-bold uppercase tracking-wider mb-1"
-              style={{ color: 'var(--text-dim)' }}
-            >
-              Up next
-            </p>
+          <Card style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <p style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4, color: 'var(--candy-ink-soft)' }}>Up next</p>
             {tasks.slice(taskIndex + 1).map((t, i) => {
               const tm =
                 SCHOOL_SUBJECT_META[t.subjectSlug] ??
-                { icon: '📘', color: 'var(--coral)' }
+                { icon: '📘', color: 'var(--candy-red)' }
               return (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 text-sm py-1"
-                >
-                  <span className="text-base shrink-0">{tm.icon}</span>
-                  <span
-                    className="flex-1 truncate font-semibold"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {t.title}
-                  </span>
-                  <span
-                    className="text-xs shrink-0"
-                    style={{ color: 'var(--text-dim)' }}
-                  >
-                    ~{t.estimatedMinutes} min
-                  </span>
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 14, padding: '4px 0' }}>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}>{tm.icon}</span>
+                  <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 700, color: 'var(--candy-ink-soft)' }}>{t.title}</span>
+                  <span style={{ fontSize: 12, flexShrink: 0, color: 'var(--candy-ink-soft)' }}>~{t.estimatedMinutes} min</span>
                 </div>
               )
             })}
-          </section>
+          </Card>
         )}
 
         {/* Skip / done */}
-        <div className="flex items-center justify-between pt-2">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 8 }}>
           {taskIndex > 0 ? (
-            <Link
-              href={`/school/focus?task=${taskIndex - 1}`}
-              className="text-xs font-bold"
-              style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
-            >
+            <Link href={`/school/focus?task=${taskIndex - 1}`} style={{ fontSize: 12, fontWeight: 800, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
               ← Previous
             </Link>
           ) : (
             <span />
           )}
           {isLast ? (
-            <Link
-              href="/dashboard"
-              className="text-xs font-bold flex items-center gap-1.5"
-              style={{ color: 'var(--coral)', textDecoration: 'none' }}
-            >
+            <Link href="/dashboard" style={{ fontSize: 12, fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6, color: 'var(--candy-red)', textDecoration: 'none' }}>
               🔥 {streak?.currentStreak ?? 0}-day streak · Done ✓
             </Link>
           ) : (
-            <Link
-              href={`/school/focus?task=${taskIndex + 1}`}
-              className="text-xs font-bold"
-              style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
-            >
+            <Link href={`/school/focus?task=${taskIndex + 1}`} style={{ fontSize: 12, fontWeight: 800, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
               Skip →
             </Link>
           )}
         </div>
       </main>
-    </CandyPage>
+    </div>
   )
 }

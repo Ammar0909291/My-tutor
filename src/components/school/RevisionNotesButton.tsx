@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { BookOpen, X } from 'lucide-react'
 import { REVISION_NOTE_META, type RevisionNoteType, type RevisionNotes } from '@/lib/school/revision/revisionNotesTypes'
+import { Card, CandyButton } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 interface RevisionNotesButtonProps {
   subjectSlug: string
@@ -48,56 +50,51 @@ export function RevisionNotesButton({ subjectSlug, chapterId, formulaAvailable }
   }
 
   return (
-    <>
-      <button
+    <div className={tokenStyles.candyTheme}>
+      <CandyButton
         onClick={() => setOpen(true)}
-        className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-bold rounded-xl transition-transform hover:scale-[1.02]"
-        style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)' }}
+        style={{ width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px 20px', fontSize: 14, fontWeight: 800, borderRadius: 14, background: 'var(--candy-card)', border: '1px solid var(--candy-shadow)', color: 'var(--candy-ink)' }}
       >
         <BookOpen size={15} /> Generate Revision Notes
-      </button>
+      </CandyButton>
 
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-5"
-          style={{ background: 'rgba(0,0,0,0.55)' }}
+          style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, background: 'rgba(0,0,0,0.55)' }}
           onClick={close}
         >
-          <div
-            className="w-full sm:max-w-lg max-h-[88vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}
+          <Card
+            style={{ width: '100%', maxWidth: 512, maxHeight: '88vh', overflowY: 'auto', borderRadius: 20, padding: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 flex items-center justify-between px-5 py-4 z-10"
-              style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}>
-              <h2 className="font-black text-base" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+            <div style={{ position: 'sticky', top: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', zIndex: 10, background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)', borderRadius: '20px 20px 0 0' }}>
+              <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>
                 {activeType ? REVISION_NOTE_META[activeType].label : 'Revision Notes'}
               </h2>
-              <button onClick={close} className="p-1 rounded-lg" style={{ color: 'var(--text-secondary)' }}>
+              <button onClick={close} style={{ padding: 4, borderRadius: 8, color: 'var(--candy-ink-soft)', background: 'transparent', border: 'none', cursor: 'pointer' }}>
                 <X size={18} />
               </button>
             </div>
 
-            <div className="p-5">
+            <div style={{ padding: 20 }}>
               {/* Type chooser */}
               {!activeType && (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {types.map((type) => {
                     const meta = REVISION_NOTE_META[type]
                     return (
-                      <button
+                      <CandyButton
                         key={type}
                         onClick={() => loadNotes(type)}
-                        className="w-full rounded-xl p-4 text-left flex items-start gap-3 transition-all hover:scale-[1.01]"
-                        style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+                        style={{ width: '100%', borderRadius: 14, padding: 16, textAlign: 'left', display: 'flex', alignItems: 'flex-start', gap: 12, background: 'var(--candy-bg)', border: '1px solid var(--candy-shadow)' }}
                       >
-                        <span className="text-2xl shrink-0">{meta.icon}</span>
-                        <div>
-                          <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{meta.label}</p>
-                          <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{meta.description}</p>
-                        </div>
-                      </button>
+                        <span style={{ fontSize: 24, flexShrink: 0 }}>{meta.icon}</span>
+                        <span>
+                          <span style={{ display: 'block', fontSize: 14, fontWeight: 800, color: 'var(--candy-ink)' }}>{meta.label}</span>
+                          <span style={{ display: 'block', fontSize: 12, marginTop: 2, color: 'var(--candy-ink-soft)' }}>{meta.description}</span>
+                        </span>
+                      </CandyButton>
                     )
                   })}
                 </div>
@@ -105,48 +102,46 @@ export function RevisionNotesButton({ subjectSlug, chapterId, formulaAvailable }
 
               {/* Loading */}
               {activeType && loading && (
-                <div className="py-12 text-center">
-                  <div className="w-9 h-9 rounded-full border-2 animate-spin mx-auto mb-3"
-                    style={{ borderColor: 'var(--coral)', borderTopColor: 'transparent' }} />
-                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Generating your revision sheet…</p>
+                <div style={{ padding: '48px 0', textAlign: 'center' }}>
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid var(--candy-red)', borderTopColor: 'transparent', margin: '0 auto 12px', animation: 'spin 0.8s linear infinite' }} />
+                  <p style={{ fontSize: 14, color: 'var(--candy-ink-soft)' }}>Generating your revision sheet…</p>
                 </div>
               )}
 
               {/* Error */}
               {activeType && error && !loading && (
-                <div className="py-8 text-center">
-                  <p className="text-sm mb-4" style={{ color: 'var(--coral)' }}>{error}</p>
-                  <button onClick={() => loadNotes(activeType)} className="text-sm font-bold px-4 py-2 rounded-xl text-white" style={{ background: 'var(--coral)' }}>
+                <div style={{ padding: '32px 0', textAlign: 'center' }}>
+                  <p style={{ fontSize: 14, marginBottom: 16, color: 'var(--candy-red)' }}>{error}</p>
+                  <CandyButton onClick={() => loadNotes(activeType)} style={{ fontSize: 14, fontWeight: 800, padding: '8px 16px', borderRadius: 14, background: 'var(--candy-red)', color: '#fff' }} shadowColor="#C73A3A">
                     Try again
-                  </button>
+                  </CandyButton>
                 </div>
               )}
 
               {/* Notes content */}
               {activeType && notes && !loading && (
-                <div className="space-y-5">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                   <NotesBody notes={notes} />
-                  <button
+                  <CandyButton
                     onClick={() => { setActiveType(null); setNotes(null) }}
-                    className="w-full text-xs font-bold py-2.5 rounded-xl"
-                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
+                    style={{ width: '100%', fontSize: 12, fontWeight: 800, padding: '10px 0', borderRadius: 14, background: 'var(--candy-bg)', border: '1px solid var(--candy-shadow)', color: 'var(--candy-ink-soft)' }}
                   >
                     ← Choose another type
-                  </button>
+                  </CandyButton>
                 </div>
               )}
             </div>
-          </div>
+          </Card>
         </div>
       )}
-    </>
+    </div>
   )
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--coral)' }}>{title}</h3>
+      <h3 style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8, color: 'var(--candy-red)' }}>{title}</h3>
       {children}
     </div>
   )
@@ -157,14 +152,14 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
     return (
       <>
         <Section title="Chapter Summary">
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{notes.summary}</p>
+          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--candy-ink-soft)' }}>{notes.summary}</p>
         </Section>
         {notes.keyConcepts.length > 0 && (
           <Section title="Key Concepts">
-            <ul className="space-y-1.5">
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {notes.keyConcepts.map((c, i) => (
-                <li key={i} className="text-sm flex gap-2" style={{ color: 'var(--text-primary)' }}>
-                  <span style={{ color: 'var(--coral)' }}>•</span> {c}
+                <li key={i} style={{ fontSize: 14, display: 'flex', gap: 8, color: 'var(--candy-ink)' }}>
+                  <span style={{ color: 'var(--candy-red)' }}>•</span> {c}
                 </li>
               ))}
             </ul>
@@ -172,11 +167,11 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
         )}
         {notes.importantTerms.length > 0 && (
           <Section title="Important Terms">
-            <dl className="space-y-2">
+            <dl style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: 0 }}>
               {notes.importantTerms.map((t, i) => (
                 <div key={i}>
-                  <dt className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{t.term}</dt>
-                  <dd className="text-xs" style={{ color: 'var(--text-secondary)' }}>{t.definition}</dd>
+                  <dt style={{ fontSize: 14, fontWeight: 800, color: 'var(--candy-ink)' }}>{t.term}</dt>
+                  <dd style={{ fontSize: 12, margin: 0, color: 'var(--candy-ink-soft)' }}>{t.definition}</dd>
                 </div>
               ))}
             </dl>
@@ -184,10 +179,10 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
         )}
         {notes.commonMistakes.length > 0 && (
           <Section title="Common Mistakes">
-            <ul className="space-y-1.5">
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {notes.commonMistakes.map((m, i) => (
-                <li key={i} className="text-sm flex gap-2" style={{ color: 'var(--text-secondary)' }}>
-                  <span style={{ color: 'var(--yellow)' }}>⚠</span> {m}
+                <li key={i} style={{ fontSize: 14, display: 'flex', gap: 8, color: 'var(--candy-ink-soft)' }}>
+                  <span style={{ color: 'var(--candy-yellow-d)' }}>⚠</span> {m}
                 </li>
               ))}
             </ul>
@@ -195,11 +190,11 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
         )}
         {notes.recallQuestions.length > 0 && (
           <Section title="Quick Recall Questions">
-            <ol className="space-y-2.5">
+            <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
               {notes.recallQuestions.map((q, i) => (
                 <li key={i}>
-                  <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{i + 1}. {q.question}</p>
-                  <p className="text-xs mt-0.5 pl-4" style={{ color: 'var(--text-dim)' }}>{q.answer}</p>
+                  <p style={{ fontSize: 14, fontWeight: 700, margin: 0, color: 'var(--candy-ink)' }}>{i + 1}. {q.question}</p>
+                  <p style={{ fontSize: 12, marginTop: 2, paddingLeft: 16, color: 'var(--candy-ink-soft)' }}>{q.answer}</p>
                 </li>
               ))}
             </ol>
@@ -214,10 +209,10 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
       <>
         {notes.highWeightTopics.length > 0 && (
           <Section title="High-Weight Topics">
-            <ul className="space-y-1.5">
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {notes.highWeightTopics.map((t, i) => (
-                <li key={i} className="text-sm flex gap-2" style={{ color: 'var(--text-primary)' }}>
-                  <span style={{ color: 'var(--coral)' }}>★</span> {t}
+                <li key={i} style={{ fontSize: 14, display: 'flex', gap: 8, color: 'var(--candy-ink)' }}>
+                  <span style={{ color: 'var(--candy-red)' }}>★</span> {t}
                 </li>
               ))}
             </ul>
@@ -225,11 +220,11 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
         )}
         {notes.definitions.length > 0 && (
           <Section title="Important Definitions">
-            <dl className="space-y-2">
+            <dl style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: 0 }}>
               {notes.definitions.map((t, i) => (
                 <div key={i}>
-                  <dt className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{t.term}</dt>
-                  <dd className="text-xs" style={{ color: 'var(--text-secondary)' }}>{t.definition}</dd>
+                  <dt style={{ fontSize: 14, fontWeight: 800, color: 'var(--candy-ink)' }}>{t.term}</dt>
+                  <dd style={{ fontSize: 12, margin: 0, color: 'var(--candy-ink-soft)' }}>{t.definition}</dd>
                 </div>
               ))}
             </dl>
@@ -237,10 +232,10 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
         )}
         {notes.likelyMistakes.length > 0 && (
           <Section title="Likely Mistakes">
-            <ul className="space-y-1.5">
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {notes.likelyMistakes.map((m, i) => (
-                <li key={i} className="text-sm flex gap-2" style={{ color: 'var(--text-secondary)' }}>
-                  <span style={{ color: 'var(--yellow)' }}>⚠</span> {m}
+                <li key={i} style={{ fontSize: 14, display: 'flex', gap: 8, color: 'var(--candy-ink-soft)' }}>
+                  <span style={{ color: 'var(--candy-yellow-d)' }}>⚠</span> {m}
                 </li>
               ))}
             </ul>
@@ -248,10 +243,10 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
         )}
         {notes.fastRevisionPoints.length > 0 && (
           <Section title="Fast Revision Points">
-            <ul className="space-y-1.5">
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {notes.fastRevisionPoints.map((p, i) => (
-                <li key={i} className="text-sm flex gap-2" style={{ color: 'var(--text-primary)' }}>
-                  <span style={{ color: 'var(--green)' }}>✓</span> {p}
+                <li key={i} style={{ fontSize: 14, display: 'flex', gap: 8, color: 'var(--candy-ink)' }}>
+                  <span style={{ color: 'var(--candy-green-d)' }}>✓</span> {p}
                 </li>
               ))}
             </ul>
@@ -263,16 +258,16 @@ function NotesBody({ notes }: { notes: RevisionNotes }) {
 
   // formula
   if (notes.formulas.length === 0) {
-    return <p className="text-sm py-6 text-center" style={{ color: 'var(--text-secondary)' }}>This chapter has no formulas to list.</p>
+    return <p style={{ fontSize: 14, padding: '24px 0', textAlign: 'center', color: 'var(--candy-ink-soft)' }}>This chapter has no formulas to list.</p>
   }
   return (
     <Section title="Formula Sheet">
-      <div className="space-y-3">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {notes.formulas.map((f, i) => (
-          <div key={i} className="rounded-xl p-3" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
-            <p className="text-sm font-bold font-mono mb-1" style={{ color: 'var(--coral)' }}>{f.formula}</p>
-            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{f.meaning}</p>
-            {f.example && <p className="text-xs mt-1 italic" style={{ color: 'var(--text-dim)' }}>e.g. {f.example}</p>}
+          <div key={i} style={{ borderRadius: 14, padding: 12, background: 'var(--candy-bg)', border: '1px solid var(--candy-shadow)' }}>
+            <p style={{ fontSize: 14, fontWeight: 800, fontFamily: 'monospace', marginBottom: 4, color: 'var(--candy-red)' }}>{f.formula}</p>
+            <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)' }}>{f.meaning}</p>
+            {f.example && <p style={{ fontSize: 12, marginTop: 4, fontStyle: 'italic', color: 'var(--candy-ink-soft)' }}>e.g. {f.example}</p>}
           </div>
         ))}
       </div>
