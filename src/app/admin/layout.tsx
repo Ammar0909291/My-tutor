@@ -3,7 +3,8 @@ import { auth } from '@/lib/auth'
 import { isAdmin } from '@/lib/auth/admin'
 import Link from 'next/link'
 import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight, Activity } from 'lucide-react'
-import { CandyPage } from '@/components/ui/candy'
+import { EagleMascot } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 const NAV = [
   { href: '/admin',                  label: 'Overview',        icon: LayoutDashboard },
@@ -24,38 +25,60 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!ok) redirect('/dashboard')
 
   return (
-    <CandyPage legacy className="flex">
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)', display: 'flex' }}>
       {/* Sidebar */}
-      <aside className="w-56 shrink-0 border-r flex flex-col"
-        style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
-        <div className="px-4 py-5 border-b flex items-center gap-2" style={{ borderColor: 'var(--border-default)' }}>
-          <span className="text-lg">🔥</span>
+      <aside
+        style={{
+          width: 224,
+          flexShrink: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          background: 'var(--candy-card)',
+          borderRight: '1px solid var(--candy-shadow)',
+        }}
+      >
+        <div style={{ padding: '20px 16px', borderBottom: '1px solid var(--candy-shadow)', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <EagleMascot variant="logo" size={32} />
           <div>
-            <p className="text-xs font-black uppercase tracking-wider" style={{ color: 'var(--accent-primary)' }}>My Tutor</p>
-            <p className="text-[10px]" style={{ color: 'var(--text-dim)' }}>Admin Console</p>
+            <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--candy-red)', margin: 0 }}>My Tutor</p>
+            <p style={{ fontSize: 10, color: 'var(--candy-ink-soft)', margin: 0 }}>Mission Control</p>
           </div>
         </div>
-        <nav className="flex-1 py-3 space-y-0.5 px-2">
+        <nav style={{ flex: 1, padding: '12px 8px', display: 'flex', flexDirection: 'column', gap: 2 }}>
           {NAV.map(({ href, label, icon: Icon }) => (
-            <Link key={href} href={href}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-white/5 group"
-              style={{ color: 'var(--text-secondary)' }}>
-              <Icon size={15} className="shrink-0" />
-              <span className="flex-1">{label}</span>
+            <Link
+              key={href}
+              href={href}
+              className="group"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '9px 12px',
+                borderRadius: 10,
+                fontSize: 13,
+                fontWeight: 700,
+                color: 'var(--candy-ink-soft)',
+                textDecoration: 'none',
+                transition: 'background .15s, color .15s',
+              }}
+            >
+              <Icon size={15} style={{ flexShrink: 0 }} />
+              <span style={{ flex: 1 }}>{label}</span>
               <ChevronRight size={11} className="opacity-0 group-hover:opacity-40 transition-opacity" />
             </Link>
           ))}
         </nav>
-        <div className="px-4 py-3 border-t text-[10px]" style={{ borderColor: 'var(--border-default)', color: 'var(--text-dim)' }}>
-          <p>{session.user.email}</p>
-          <Link href="/dashboard" className="hover:underline mt-0.5 block" style={{ color: 'var(--accent-primary)' }}>
+        <div style={{ padding: '12px 16px', borderTop: '1px solid var(--candy-shadow)', fontSize: 10, color: 'var(--candy-ink-soft)' }}>
+          <p style={{ margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{session.user.email}</p>
+          <Link href="/dashboard" style={{ color: 'var(--candy-red)', textDecoration: 'none', display: 'block', marginTop: 4 }}>
             ← Back to app
           </Link>
         </div>
       </aside>
 
       {/* Main */}
-      <main className="flex-1 overflow-auto p-8">{children}</main>
-    </CandyPage>
+      <main style={{ flex: 1, overflow: 'auto', padding: 32 }}>{children}</main>
+    </div>
   )
 }
