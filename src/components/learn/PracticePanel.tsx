@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { t as i18n, type Lang } from '@/lib/i18n'
+import { Card, CandyButton, Pill, ProgressRing, EagleMascot, useConfetti } from '@/components/ui/candy'
 
 interface Question {
   question: string
@@ -39,6 +40,7 @@ export function PracticePanel({
   const [selected, setSelected] = useState<number | null>(null)
   const [answers, setAnswers] = useState<boolean[]>([])
   const [errorMsg, setErrorMsg] = useState('')
+  const fireConfetti = useConfetti()
 
   const lang: Lang = teachingLanguage === 'ru' ? 'ru' : teachingLanguage === 'hi' ? 'hi' : 'en'
 
@@ -90,6 +92,7 @@ export function PracticePanel({
     } else {
       const score = Math.round((newAnswers.filter(Boolean).length / questions.length) * 100)
       setState('result')
+      if (score >= 50) fireConfetti()
       submitResults(newAnswers, score)
     }
   }
@@ -140,44 +143,26 @@ export function PracticePanel({
       style={{ background: 'rgba(2,4,8,0.78)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose?.() }}
     >
-      <div
+      <Card
         className="w-full max-w-lg overflow-hidden"
         role="dialog"
         aria-modal="true"
         aria-label={i18n(lang, 'practice_knowledge_check')}
-        style={{
-          background: 'var(--bg-base)',
-          border: '1px solid var(--border-default)',
-          borderRadius: 'var(--r-xl)',
-          boxShadow: 'var(--shadow-xl), 0 0 0 1px rgba(0,0,0,0.04)',
-        }}
+        style={{ padding: 0, boxShadow: '0 4px 0 var(--coral)' }}
       >
         {/* ── Header ── */}
         <div
           className="flex items-start gap-3 px-6 py-4"
-          style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-default)' }}
+          style={{ background: 'var(--bg-surface)', boxShadow: '0 2px 0 var(--border-subtle)' }}
         >
-          <div
-            className="flex items-center justify-center shrink-0"
-            style={{
-              width: 40, height: 40, fontSize: 20,
-              background: 'var(--coral-muted)',
-              border: '1px solid var(--coral-border)',
-              borderRadius: 'var(--r-md)',
-            }}
-          >
-            🎯
-          </div>
+          <EagleMascot variant="logo" size={40} className="shrink-0" />
           <div className="min-w-0 flex-1">
-            <div
-              className="text-[11px] font-bold uppercase"
-              style={{ color: 'var(--coral)', letterSpacing: '0.08em' }}
-            >
+            <Pill color="var(--coral)" style={{ fontSize: 10, letterSpacing: '0.08em' }}>
               {i18n(lang, 'practice_knowledge_check')}
-            </div>
+            </Pill>
             <h3
-              className="font-bold text-base leading-snug truncate"
-              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
+              className="font-bold text-base leading-snug truncate mt-1"
+              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-baloo2)' }}
               title={topicTitle ?? topicSlug ?? 'Practice'}
             >
               {topicTitle ?? topicSlug ?? 'Practice'}
@@ -186,34 +171,43 @@ export function PracticePanel({
               {statusLabel}
             </div>
           </div>
-          <button
+          <CandyButton
             onClick={onClose}
             aria-label="Close"
-            className="shrink-0 flex items-center justify-center transition-colors"
+            depth={2} activeDepth={0} shadowColor="var(--border-subtle)"
+            className="shrink-0 flex items-center justify-center"
             style={{
-              width: 32, height: 32, fontSize: 14,
+              width: 32, height: 32, fontSize: 14, border: 'none',
               color: 'var(--text-primary)',
               background: 'var(--bg-elevated)',
-              border: '1px solid var(--border-default)',
-              borderRadius: 'var(--r-md)',
+              borderRadius: 10,
               cursor: 'pointer',
             }}
           >
             ✕
-          </button>
+          </CandyButton>
         </div>
 
-        {/* ── Quiz progress bar ── */}
+        {/* ── Quiz progress ring + bar ── */}
         {state === 'quiz' && questions.length > 0 && (
-          <div style={{ height: 4, background: 'var(--bg-elevated)' }}>
-            <div
-              style={{
-                height: '100%',
-                width: `${(currentIdx / questions.length) * 100}%`,
-                background: 'var(--coral)',
-                transition: 'width 0.3s var(--ease-out)',
-              }}
+          <div className="flex items-center gap-3 px-6 pt-4">
+            <ProgressRing
+              percent={(currentIdx / questions.length) * 100}
+              size={36} radius={15} strokeWidth={4}
+              gradientFrom="var(--coral)" gradientTo="var(--coral-hover)"
+              trackColor="var(--bg-elevated)"
             />
+            <div style={{ flex: 1, height: 8, borderRadius: 8, background: 'var(--bg-elevated)', overflow: 'hidden' }}>
+              <div
+                style={{
+                  height: '100%',
+                  width: `${(currentIdx / questions.length) * 100}%`,
+                  background: 'var(--coral)',
+                  borderRadius: 8,
+                  transition: 'width 0.3s ease-out',
+                }}
+              />
+            </div>
           </div>
         )}
 
@@ -221,10 +215,7 @@ export function PracticePanel({
           {/* ── Loading ── */}
           {state === 'loading' && (
             <div className="flex flex-col items-center justify-center gap-4 py-14">
-              <div
-                className="w-10 h-10 border-[3px] rounded-full animate-spin"
-                style={{ borderColor: 'var(--coral)', borderTopColor: 'transparent' }}
-              />
+              <EagleMascot variant="hero" size={56} className="animate-pulse" />
               <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                 {i18n(lang, 'practice_loading')}
               </p>
@@ -234,18 +225,8 @@ export function PracticePanel({
           {/* ── Error / AI unavailable ── */}
           {state === 'error' && (
             <div className="flex flex-col items-center text-center gap-3 py-8 px-4">
-              <div
-                className="flex items-center justify-center"
-                style={{
-                  width: 64, height: 64, fontSize: 30,
-                  background: 'var(--yellow-muted)',
-                  border: '1px solid var(--border-default)',
-                  borderRadius: 'var(--r-full)',
-                }}
-              >
-                ⚠️
-              </div>
-              <h4 className="text-lg font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+              <EagleMascot variant="logo" size={56} />
+              <h4 className="text-lg font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-baloo2)' }}>
                 {i18n(lang, 'practice_unavailable')}
               </h4>
               <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
@@ -255,25 +236,27 @@ export function PracticePanel({
                 {errorMsg || 'Please try again later.'}
               </p>
               <div className="flex gap-3 justify-center mt-3">
-                <button
+                <CandyButton
                   onClick={load}
-                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  depth={3} shadowColor="var(--coral-hover)"
+                  className="rounded-xl px-5 py-2.5 text-sm font-bold"
                   style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
                 >
                   ↻ {i18n(lang, 'quiz_retry')}
-                </button>
-                <button
+                </CandyButton>
+                <CandyButton
                   onClick={onClose}
-                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  depth={3} shadowColor="var(--border-subtle)"
+                  className="rounded-xl px-5 py-2.5 text-sm font-bold"
                   style={{
                     background: 'var(--bg-elevated)',
                     color: 'var(--text-primary)',
-                    border: '1px solid var(--border-default)',
+                    border: 'none',
                     cursor: 'pointer',
                   }}
                 >
                   {i18n(lang, 'practice_close')}
-                </button>
+                </CandyButton>
               </div>
             </div>
           )}
@@ -287,86 +270,93 @@ export function PracticePanel({
               <div className="space-y-2">
                 {q.options.map((opt, i) => {
                   let bg = 'var(--bg-surface)'
-                  let border = 'var(--border-default)'
+                  let shadowColor = 'var(--border-subtle)'
                   let color = 'var(--text-primary)'
                   let fontWeight = 500
                   if (selected !== null) {
-                    if (i === q.correctIndex) { bg = 'var(--green-muted)'; border = 'var(--green)'; color = 'var(--green)'; fontWeight = 700 }
-                    else if (i === selected) { bg = 'var(--red-muted)'; border = 'var(--red)'; color = 'var(--red)'; fontWeight = 700 }
+                    if (i === q.correctIndex) { bg = 'var(--green)'; shadowColor = 'var(--green)'; color = '#fff'; fontWeight = 700 }
+                    else if (i === selected) { bg = 'var(--red)'; shadowColor = 'var(--red)'; color = '#fff'; fontWeight = 700 }
                   }
                   return (
-                    <button
+                    <CandyButton
                       key={i}
                       onClick={() => handleSelect(i)}
-                      className="w-full text-left rounded-xl px-4 py-3 text-sm transition-colors"
-                      style={{ background: bg, border: `1.5px solid ${border}`, color, fontWeight, cursor: selected === null ? 'pointer' : 'default' }}
+                      depth={3} activeDepth={1} shadowColor={shadowColor}
+                      className="w-full text-left rounded-xl px-4 py-3 text-sm"
+                      style={{ background: bg, border: 'none', color, fontWeight, cursor: selected === null ? 'pointer' : 'default' }}
                     >
                       {opt}
-                    </button>
+                    </CandyButton>
                   )
                 })}
               </div>
               {selected !== null && (
-                <div
-                  className="rounded-lg px-4 py-3 text-sm"
-                  style={{
-                    background: 'var(--blue-muted)',
-                    border: '1px solid var(--border-default)',
-                    color: 'var(--text-primary)',
-                  }}
+                <Card
+                  className="px-4 py-3 text-sm"
+                  style={{ background: 'var(--bg-elevated)', boxShadow: '0 3px 0 var(--blue)', color: 'var(--text-primary)' }}
                 >
                   💡 {q.explanation}
-                </div>
+                </Card>
               )}
-              <button
+              <CandyButton
                 onClick={handleNext}
                 disabled={selected === null}
-                className="w-full rounded-xl py-3 text-sm font-bold disabled:opacity-40 transition-opacity"
+                depth={3} shadowColor="var(--coral-hover)"
+                className="w-full rounded-xl py-3 text-sm font-bold disabled:opacity-40"
                 style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: selected === null ? 'default' : 'pointer' }}
               >
                 {currentIdx + 1 < questions.length ? i18n(lang, 'quiz_next') : i18n(lang, 'quiz_finish')}
-              </button>
+              </CandyButton>
             </div>
           )}
 
-          {/* ── Result ── */}
+          {/* ── Result — connected to lesson completion's mascot + ProgressRing language ── */}
           {state === 'result' && (
             <div className="space-y-4 text-center py-4">
-              <div style={{ fontSize: 44 }}>{score >= 80 ? '🏆' : score >= 50 ? '👏' : '💪'}</div>
-              <div
-                className="text-5xl font-extrabold"
-                style={{ color: score >= 50 ? 'var(--green)' : 'var(--coral)', fontFamily: 'var(--font-heading)' }}
-              >
-                {score}%
-              </div>
+              <EagleMascot variant="hero" size={64} className="mx-auto" />
+              <ProgressRing
+                percent={score}
+                size={96} radius={40} strokeWidth={9}
+                gradientFrom={score >= 50 ? 'var(--green)' : 'var(--coral)'}
+                gradientTo={score >= 50 ? 'var(--candy-green-d)' : 'var(--coral-hover)'}
+                trackColor="var(--bg-elevated)"
+                label={
+                  <span className="text-2xl font-extrabold" style={{ color: score >= 50 ? 'var(--green)' : 'var(--coral)', fontFamily: 'var(--font-baloo2)' }}>
+                    {score}%
+                  </span>
+                }
+                className="mx-auto"
+              />
               <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
                 {i18n(lang, 'practice_correct_count').replace('{x}', String(answers.filter(Boolean).length)).replace('{y}', String(questions.length))}
               </p>
               <div className="flex gap-3 justify-center pt-2">
-                <button
+                <CandyButton
                   onClick={load}
-                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  depth={3} shadowColor="var(--coral-hover)"
+                  className="rounded-xl px-5 py-2.5 text-sm font-bold"
                   style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
                 >
                   {i18n(lang, 'quiz_retry')}
-                </button>
-                <button
+                </CandyButton>
+                <CandyButton
                   onClick={onClose}
-                  className="rounded-lg px-5 py-2.5 text-sm font-bold"
+                  depth={3} shadowColor="var(--border-subtle)"
+                  className="rounded-xl px-5 py-2.5 text-sm font-bold"
                   style={{
                     background: 'var(--bg-elevated)',
                     color: 'var(--text-primary)',
-                    border: '1px solid var(--border-default)',
+                    border: 'none',
                     cursor: 'pointer',
                   }}
                 >
                   {i18n(lang, 'practice_done')}
-                </button>
+                </CandyButton>
               </div>
             </div>
           )}
         </div>
-      </div>
+      </Card>
     </div>
   )
 }
