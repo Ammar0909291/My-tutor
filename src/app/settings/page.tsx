@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useCountry, type Country } from '@/components/Providers'
 import type { TeachingLang } from '@/lib/tts'
-import { CandyPage } from '@/components/ui/candy'
+import { Card, CandyButton, SectionTitle, EagleMascot } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 type VoiceOption = { key: string; label: string }
 type LangOption = { key: TeachingLang; icon: string; label: string }
@@ -56,6 +57,17 @@ const SCHOOL_BOARDS = [
   { id: 'up_board', shortName: 'UP Board' },
 ]
 const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
+
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '10px 14px',
+  borderRadius: 14,
+  border: '1px solid var(--candy-shadow)',
+  background: 'var(--candy-bg)',
+  color: 'var(--candy-ink)',
+  fontSize: 14,
+  outline: 'none',
+}
 
 export default function SettingsPage() {
   const { t, lang, setLang } = useLanguage()
@@ -248,16 +260,12 @@ export default function SettingsPage() {
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarName)}&background=F78166&color=fff&size=128&bold=true&rounded=true`
 
   return (
-    <CandyPage legacy className="min-h-screen">
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
 
       {/* Nav */}
-      <nav className="sticky top-0 z-50"
-        style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border-subtle)' }}>
+      <nav className="sticky top-0 z-50" style={{ background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)' }}>
         <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/dashboard" className="text-sm font-medium transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)' }}>
+          <Link href="/dashboard" className="text-sm font-semibold transition-colors" style={{ color: 'var(--candy-ink-soft)' }}>
             {t('settings_back')}
           </Link>
           <LanguageToggle />
@@ -265,7 +273,10 @@ export default function SettingsPage() {
       </nav>
 
       <main className="max-w-2xl mx-auto px-6 py-10 space-y-6">
-        <h1 className="text-2xl font-black tracking-tight">{t('settings_title')}</h1>
+        <div className="flex items-center gap-3">
+          <EagleMascot variant="hero" size={48} />
+          <h1 style={{ fontSize: 24, fontWeight: 900, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{t('settings_title')}</h1>
+        </div>
 
         {/* Profile */}
         <Section label={t('profile_title')}>
@@ -273,10 +284,10 @@ export default function SettingsPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} />
             <div className="min-w-0">
-              <p className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{profile?.name || '—'}</p>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{profile?.email}</p>
+              <p className="font-bold text-sm" style={{ color: 'var(--candy-ink)' }}>{profile?.name || '—'}</p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--candy-ink-soft)' }}>{profile?.email}</p>
               {profile && (
-                <div className="flex gap-3 mt-1.5 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                <div className="flex gap-3 mt-1.5 text-xs" style={{ color: 'var(--candy-ink-soft)' }}>
                   <span>{t('profile_lessons')}: {profile.lessonsCount}</span>
                   <span>{t('profile_xp')}: {profile.xpPoints}</span>
                 </div>
@@ -287,81 +298,71 @@ export default function SettingsPage() {
           <div className="space-y-4">
             {/* Name */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--candy-ink-soft)' }}>
                 {t('profile_name')}
               </label>
               <input
                 type="text"
                 value={profileName}
                 onChange={(e) => setProfileName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl text-sm"
-                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', outline: 'none' }}
+                style={inputStyle}
               />
             </div>
 
             {/* Email (read-only) */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--candy-ink-soft)' }}>
                 {t('profile_email')} 🔒
               </label>
               <input
                 type="email"
                 value={profile?.email ?? ''}
                 readOnly
-                className="w-full px-4 py-2.5 rounded-xl text-sm"
-                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', color: 'var(--text-secondary)', cursor: 'not-allowed' }}
+                style={{ ...inputStyle, background: 'var(--candy-card)', color: 'var(--candy-ink-soft)', cursor: 'not-allowed' }}
               />
             </div>
 
             {/* Voice preference */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
                 {t('profile_voice')}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {VOICE_OPTIONS.map((v) => (
-                  <button key={v.key} onClick={() => setProfileVoice(v.key)}
-                    className="py-2 rounded-xl text-xs font-semibold transition-all"
-                    style={{
-                      background: profileVoice === v.key ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
-                      border: `1px solid ${profileVoice === v.key ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                      color: profileVoice === v.key ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                    }}>
+                  <ChoiceButton key={v.key} active={profileVoice === v.key} onClick={() => setProfileVoice(v.key)}>
                     {v.label}
-                  </button>
+                  </ChoiceButton>
                 ))}
               </div>
             </div>
 
             {/* Level/About */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-dim)' }}>
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--candy-ink-soft)' }}>
                 {t('profile_level')}
               </label>
               <textarea
                 value={profileLevel}
                 onChange={(e) => setProfileLevel(e.target.value)}
                 rows={3}
-                className="w-full px-4 py-2.5 rounded-xl text-sm resize-none"
-                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', outline: 'none' }}
+                style={{ ...inputStyle, resize: 'none' }}
               />
             </div>
 
             {/* Member since + stats */}
             {profile && (
-              <div className="flex gap-4 text-xs" style={{ color: 'var(--text-secondary)' }}>
+              <div className="flex gap-4 text-xs" style={{ color: 'var(--candy-ink-soft)' }}>
                 <span>{t('profile_member')}: {new Date(profile.createdAt).toLocaleDateString()}</span>
               </div>
             )}
           </div>
 
-          <button
+          <CandyButton
             onClick={handleProfileSave}
             disabled={profileSave === 'saving'}
-            className="mt-5 w-full py-3 rounded-xl text-sm font-bold transition-all disabled:opacity-60"
-            style={{ background: 'var(--accent-primary)', color: '#fff' }}>
+            style={{ marginTop: 20, width: '100%', padding: '12px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: profileSave === 'saving' ? 0.6 : 1 }}>
             {profileSave === 'saved' ? t('profile_saved') : profileSave === 'saving' ? '...' : t('profile_save')}
-          </button>
+          </CandyButton>
         </Section>
 
 
@@ -370,48 +371,35 @@ export default function SettingsPage() {
           <Section label="My School 🎒">
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>
+                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
                   Board
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   {SCHOOL_BOARDS.map((b) => (
-                    <button key={b.id} onClick={() => setSchoolBoard(b.id)}
-                      className="py-2.5 rounded-xl text-xs font-semibold transition-all"
-                      style={{
-                        background: schoolBoard === b.id ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
-                        border: `1px solid ${schoolBoard === b.id ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                        color: schoolBoard === b.id ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                      }}>
+                    <ChoiceButton key={b.id} active={schoolBoard === b.id} onClick={() => setSchoolBoard(b.id)}>
                       {b.shortName}
-                    </button>
+                    </ChoiceButton>
                   ))}
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>
+                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
                   Class
                 </label>
                 <div className="grid grid-cols-4 gap-2">
                   {SCHOOL_GRADES.map((g) => (
-                    <button key={g} onClick={() => setSchoolGrade(g)}
-                      className="py-2.5 rounded-xl text-xs font-bold transition-all"
-                      style={{
-                        background: schoolGrade === g ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
-                        border: `1px solid ${schoolGrade === g ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                        color: schoolGrade === g ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                      }}>
+                    <ChoiceButton key={g} active={schoolGrade === g} onClick={() => setSchoolGrade(g)}>
                       {g}
-                    </button>
+                    </ChoiceButton>
                   ))}
                 </div>
               </div>
-              <button
+              <CandyButton
                 onClick={handleSchoolSave}
                 disabled={schoolSave === 'saving' || !schoolBoard || schoolGrade === null}
-                className="w-full py-3 rounded-xl text-sm font-bold transition-all disabled:opacity-60"
-                style={{ background: 'var(--accent-primary)', color: '#fff' }}>
+                style={{ width: '100%', padding: '12px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (schoolSave === 'saving' || !schoolBoard || schoolGrade === null) ? 0.6 : 1 }}>
                 {schoolSave === 'saved' ? '✓ Saved' : schoolSave === 'saving' ? '...' : schoolSave === 'error' ? 'Failed — try again' : 'Save school info'}
-              </button>
+              </CandyButton>
             </div>
           </Section>
         )}
@@ -420,15 +408,9 @@ export default function SettingsPage() {
         <Section label={t('settings_voice')}>
           <div className="grid grid-cols-3 gap-3">
             {VOICE_OPTIONS.map((v) => (
-              <button key={v.key} onClick={() => setVoiceId(v.key)}
-                className="py-3 rounded-xl text-sm font-semibold transition-all"
-                style={{
-                  background: voiceId === v.key ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
-                  border: `1px solid ${voiceId === v.key ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                  color: voiceId === v.key ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                }}>
+              <ChoiceButton key={v.key} active={voiceId === v.key} onClick={() => setVoiceId(v.key)}>
                 {v.label}
-              </button>
+              </ChoiceButton>
             ))}
           </div>
         </Section>
@@ -437,15 +419,9 @@ export default function SettingsPage() {
         <Section label={t('settings_voice_speed')}>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
             {VOICE_SPEED_OPTIONS.map((s) => (
-              <button key={s} onClick={() => setVoiceSpeed(s)}
-                className="py-3 rounded-xl text-sm font-semibold transition-all"
-                style={{
-                  background: voiceSpeed === s ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
-                  border: `1px solid ${voiceSpeed === s ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                  color: voiceSpeed === s ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                }}>
+              <ChoiceButton key={s} active={voiceSpeed === s} onClick={() => setVoiceSpeed(s)}>
                 {s}x
-              </button>
+              </ChoiceButton>
             ))}
           </div>
         </Section>
@@ -454,16 +430,10 @@ export default function SettingsPage() {
         <Section label={t('settings_lang')}>
           <div className="grid grid-cols-3 gap-3">
             {LANG_OPTIONS.map((l) => (
-              <button key={l.key} onClick={() => handleLangClick(l.key)}
-                className="py-3 rounded-xl text-sm font-semibold transition-all flex flex-col items-center gap-1"
-                style={{
-                  background: (teachingLanguage === l.key || lang === l.key) ? 'rgba(247,129,102,0.12)' : 'var(--bg-elevated)',
-                  border: `1px solid ${(teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                  color: (teachingLanguage === l.key || lang === l.key) ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                }}>
+              <ChoiceButton key={l.key} active={teachingLanguage === l.key || lang === l.key} onClick={() => handleLangClick(l.key)} column>
                 <span className="text-xl">{l.icon}</span>
                 <span>{l.label}</span>
-              </button>
+              </ChoiceButton>
             ))}
           </div>
         </Section>
@@ -484,8 +454,8 @@ export default function SettingsPage() {
                   }}
                   style={{
                     flex: 1, minWidth: 100, cursor: 'pointer', position: 'relative',
-                    background: isSelected ? `${opt.color}15` : 'var(--bg-elevated)',
-                    border: `2px solid ${isSelected ? opt.color : 'var(--border-default)'}`,
+                    background: isSelected ? `${opt.color}15` : 'var(--candy-bg)',
+                    border: `2px solid ${isSelected ? opt.color : 'var(--candy-shadow)'}`,
                     borderRadius: 14, padding: '14px 12px', textAlign: 'center',
                     transition: 'all 200ms', outline: 'none',
                   }}>
@@ -493,56 +463,56 @@ export default function SettingsPage() {
                     <div style={{ position: 'absolute', top: 8, right: 8, width: 16, height: 16, borderRadius: '50%', background: opt.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 700 }}>✓</div>
                   )}
                   <div style={{ fontSize: 28 }}>{opt.flag}</div>
-                  <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', marginTop: 6 }}>{opt.name}</p>
-                  <p style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 3 }}>{opt.desc}</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--candy-ink)', marginTop: 6 }}>{opt.name}</p>
+                  <p style={{ fontSize: 11, color: 'var(--candy-ink-soft)', marginTop: 3 }}>{opt.desc}</p>
                 </button>
               )
             })}
           </div>
-          <p style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 10 }}>
+          <p style={{ fontSize: 11, color: 'var(--candy-ink-soft)', marginTop: 10 }}>
             {t('settings_region_hint')}
           </p>
         </Section>
 
         {/* Danger Zone */}
-        <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid rgba(248,81,73,0.25)' }}>
-          <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#F85149' }}>
+        <Card style={{ padding: 20, border: '1px solid rgba(255,75,75,0.25)' }}>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--candy-red)' }}>
             {t('settings_danger_zone')}
           </p>
 
           {deleteStep === 'hidden' && (
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                <p className="text-sm font-semibold" style={{ color: 'var(--candy-ink)' }}>
                   {t('settings_delete_title')}
                 </p>
-                <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
+                <p className="text-xs mt-1" style={{ color: 'var(--candy-ink-soft)' }}>
                   {t('settings_delete_desc')}
                 </p>
               </div>
-              <button
+              <CandyButton
                 onClick={() => setDeleteStep('confirm')}
-                className="text-sm font-semibold px-4 py-2 rounded-xl transition-all flex-shrink-0"
-                style={{ background: 'rgba(248,81,73,0.1)', color: '#F85149', border: '1px solid rgba(248,81,73,0.3)' }}>
+                style={{ padding: '10px 16px', borderRadius: 14, background: 'rgba(255,75,75,0.1)', color: 'var(--candy-red)', border: '1px solid rgba(255,75,75,0.3)', fontWeight: 700, fontSize: 14, flexShrink: 0 }}
+                shadowColor="rgba(255,75,75,0.2)">
                 {t('settings_delete_title')}
-              </button>
+              </CandyButton>
             </div>
           )}
 
           {(deleteStep === 'confirm' || deleteStep === 'deleting') && (
             <div className="space-y-4">
-              <div className="p-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)' }}>
-                <p className="text-sm font-bold mb-2" style={{ color: '#F85149' }}>
+              <div className="p-4 rounded-xl" style={{ background: 'rgba(255,75,75,0.08)', border: '1px solid rgba(255,75,75,0.2)' }}>
+                <p className="text-sm font-bold mb-2" style={{ color: 'var(--candy-red)' }}>
                   {t('settings_delete_irreversible')}
                 </p>
-                <ul className="text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
+                <ul className="text-xs space-y-1" style={{ color: 'var(--candy-ink-soft)' }}>
                   <li>• {t('settings_delete_bullet1')}</li>
                   <li>• {t('settings_delete_bullet2')}</li>
                   <li>• {t('settings_delete_bullet3')}</li>
                 </ul>
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wider" style={{ color: 'var(--text-dim)' }}>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wider" style={{ color: 'var(--candy-ink-soft)' }}>
                   {t('settings_delete_confirm_label')}
                 </label>
                 <input
@@ -551,62 +521,77 @@ export default function SettingsPage() {
                   onChange={(e) => setDeleteInput(e.target.value)}
                   placeholder="DELETE"
                   disabled={deleteStep === 'deleting'}
-                  className="w-full px-4 py-2.5 rounded-xl text-sm font-mono"
-                  style={{ background: 'var(--bg-elevated)', border: '1px solid rgba(248,81,73,0.3)', color: 'var(--text-primary)', outline: 'none' }}
+                  className="font-mono"
+                  style={{ ...inputStyle, border: '1px solid rgba(255,75,75,0.3)' }}
                 />
               </div>
               <div className="flex gap-3">
-                <button
+                <CandyButton
                   onClick={() => { setDeleteStep('hidden'); setDeleteInput('') }}
                   disabled={deleteStep === 'deleting'}
-                  className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all"
-                  style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
+                  style={{ flex: 1, padding: '10px', borderRadius: 14, background: 'var(--candy-bg)', color: 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)', fontWeight: 700, fontSize: 14 }}>
                   {t('settings_cancel')}
-                </button>
-                <button
+                </CandyButton>
+                <CandyButton
                   onClick={handleDeleteAccount}
                   disabled={!deleteReady || deleteStep === 'deleting'}
-                  className="flex-1 py-2.5 rounded-xl text-sm font-bold transition-all disabled:opacity-40"
-                  style={{ background: deleteReady ? '#F85149' : 'rgba(248,81,73,0.2)', color: '#fff', border: 'none', cursor: deleteReady ? 'pointer' : 'not-allowed' }}>
+                  style={{ flex: 1, padding: '10px', borderRadius: 14, background: deleteReady ? 'var(--candy-red)' : 'rgba(255,75,75,0.2)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (!deleteReady || deleteStep === 'deleting') ? 0.5 : 1 }}
+                  shadowColor="#D43B3B">
                   {deleteStep === 'deleting' ? t('settings_deleting') : t('settings_delete_permanent')}
-                </button>
+                </CandyButton>
               </div>
             </div>
           )}
-        </div>
+        </Card>
 
         {/* DEF-EJ-06: visible load/save error feedback */}
         {loadError && (
-          <p className="text-sm text-center py-2 px-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.15)', color: '#F85149' }}>
+          <p className="text-sm text-center py-2 px-4 rounded-xl" style={{ background: 'rgba(255,75,75,0.15)', color: 'var(--candy-red)' }}>
             {t('settings_load_error')}
           </p>
         )}
         {saveState === 'error' && (
-          <p className="text-sm text-center py-2 px-4 rounded-xl" style={{ background: 'rgba(248,81,73,0.15)', color: '#F85149' }}>
+          <p className="text-sm text-center py-2 px-4 rounded-xl" style={{ background: 'rgba(255,75,75,0.15)', color: 'var(--candy-red)' }}>
             {t('settings_save_error')}
           </p>
         )}
 
         {/* Save (voice + language) */}
-        <button
+        <CandyButton
           onClick={handleSave}
           disabled={saveState === 'saving'}
-          className="btn-primary w-full py-3.5 font-bold disabled:opacity-60">
+          style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 15, opacity: saveState === 'saving' ? 0.6 : 1 }}>
           {saveState === 'saved' ? t('settings_saved')
             : saveState === 'saving' ? '...'
             : saveState === 'error' ? t('settings_save_retry')
             : t('settings_save')}
-        </button>
+        </CandyButton>
       </main>
-    </CandyPage>
+    </div>
   )
 }
 
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}>
-      <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--text-dim)' }}>{label}</p>
+    <Card style={{ padding: 20 }}>
+      <SectionTitle style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--candy-ink-soft)', marginBottom: 16, fontWeight: 700 }}>{label}</SectionTitle>
       {children}
-    </div>
+    </Card>
+  )
+}
+
+function ChoiceButton({ active, onClick, children, column, disabled }: { active: boolean; onClick: () => void; children: React.ReactNode; column?: boolean; disabled?: boolean }) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`py-2.5 rounded-xl text-xs font-bold transition-all ${column ? 'flex flex-col items-center gap-1' : ''}`}
+      style={{
+        background: active ? 'rgba(255,148,53,0.12)' : 'var(--candy-bg)',
+        border: `1px solid ${active ? 'var(--candy-orange)' : 'var(--candy-shadow)'}`,
+        color: active ? 'var(--candy-orange)' : 'var(--candy-ink-soft)',
+      }}>
+      {children}
+    </button>
   )
 }

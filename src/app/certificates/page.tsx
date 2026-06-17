@@ -5,7 +5,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { t as i18nT, type Lang } from '@/lib/i18n'
-import { CandyPage, Card } from '@/components/ui/candy'
+import { CandyPage, Card, EagleMascot } from '@/components/ui/candy'
 
 /**
  * /certificates — the learner's own certificate list (linked from MobileNav).
@@ -54,8 +54,8 @@ export default async function CertificatesPage() {
 
         {!hasAnyCertificates ? (
           <Card className="text-center" style={{ padding: '56px 24px' }}>
-            <div className="flex items-center justify-center mx-auto mb-4 rounded-full" style={{ width: 56, height: 56, background: 'rgba(139,92,246,0.14)' }}>
-              <Award size={26} color="var(--candy-purple)" />
+            <div className="flex justify-center mb-4">
+              <EagleMascot variant="hero" size={64} />
             </div>
             <h2 className="text-base" style={{ color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)', fontWeight: 800 }}>{T('certificates_empty_title')}</h2>
             <p className="text-sm mt-2 max-w-sm mx-auto" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{T('certificates_empty_body')}</p>
