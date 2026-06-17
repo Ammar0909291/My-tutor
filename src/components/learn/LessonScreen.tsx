@@ -15,7 +15,7 @@ import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
-import { Card } from '@/components/ui/candy'
+import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
@@ -285,6 +285,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [curriculumLoaded, setCurriculumLoaded] = useState(false)
   const [curriculumProgress, setCurriculumProgress] = useState<CurriculumProgress>({ currentLesson: 1, completedLessons: [] })
   const [xpCelebration, setXpCelebration] = useState(false)
+  const fireConfetti = useConfetti()
   const [expandedUnits, setExpandedUnits] = useState<number[]>([1])
   const [topicProgressMap, setTopicProgressMap] = useState<Record<string, TopicProgressEntry>>({})
   const [availableTopicSlugs, setAvailableTopicSlugs] = useState<string[]>([])
@@ -411,6 +412,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       if (data.success) {
         setCurriculumProgress(data.progress)
         setXpCelebration(true)
+        fireConfetti()
         setTimeout(() => setXpCelebration(false), 3000)
       }
     } catch { /* ignore */ }
@@ -1078,16 +1080,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   return (
     <div className={`${styles.learnCandy} pb-mobile-nav`} style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-void)', color: 'var(--text-primary)', overflow: 'hidden' }}>
 
-      {/* XP Celebration */}
+      {/* XP Celebration — candy Card + EagleMascot + confetti (useConfetti fired alongside setXpCelebration above) */}
       {xpCelebration && (
         <div className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center">
-          <div className="text-center animate-bounce">
-            <div className="text-5xl mb-2">🎉</div>
-            <div className="text-2xl font-bold" style={{ color: 'var(--coral)' }}>+10 XP</div>
-            <div className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+          <Card className="animate-bounce" style={{ padding: '20px 28px', textAlign: 'center', boxShadow: '0 4px 0 var(--coral)' }}>
+            <EagleMascot variant="hero" size={72} className="mx-auto mb-2" />
+            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--coral)', fontFamily: 'var(--font-baloo2)' }}>+10 XP</div>
+            <div style={{ fontSize: 13, marginTop: 4, color: 'var(--text-secondary)' }}>
               {teachingLanguage === 'ru' ? 'Урок завершён!' : 'Lesson complete!'}
             </div>
-          </div>
+          </Card>
         </div>
       )}
 
@@ -1911,10 +1913,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               className="dot-grid"
               style={{ flex: 1, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 14, background: 'var(--bg-void)', position: 'relative' }}>
 
-              {/* Loading state */}
+              {/* Welcome / empty state — EagleMascot replaces the generic initials avatar */}
               {messages.length === 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
-                  <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'linear-gradient(135deg, var(--coral), var(--coral-hover))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: 'var(--text-inverse)', boxShadow: '0 0 24px rgba(247,129,102,0.4)' }}>МТ</div>
+                  <EagleMascot variant="hero" size={56} />
                   <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
                   <div style={{ display: 'flex', gap: 6 }}>
                     <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
@@ -1932,25 +1934,23 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 return (
                   <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', animation: 'fadeUp 200ms ease-out both' }}>
 
-                    {/* Tutor avatar row */}
+                    {/* Tutor avatar row — EagleMascot replaces the generic initials avatar */}
                     {!isUser && !msg.streaming && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                        <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(135deg, var(--coral), var(--coral-hover))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 700, color: 'var(--text-inverse)', flexShrink: 0 }}>МТ</div>
+                        <EagleMascot variant="logo" size={20} />
                         <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{teachingLanguage === 'ru' ? 'Репетитор Макс' : 'Tutor Max'}</span>
                       </div>
                     )}
 
-                    {/* Tutor bubble */}
+                    {/* Tutor bubble — candy Card surface (flat shadow, no glow) */}
                     {!isUser && (
-                      <div className="group/bubble" style={{
+                      <Card className="group/bubble" style={{
                         maxWidth: '90%',
-                        background: isSpeaking ? 'var(--bg-elevated)' : 'var(--bg-base)',
-                        border: '1px solid var(--border-subtle)',
-                        borderLeft: '2px solid var(--coral)',
-                        borderRadius: '0 12px 12px 12px',
-                        padding: '10px 12px',
-                        boxShadow: isSpeaking ? '0 0 20px rgba(247,129,102,0.15)' : 'none',
-                        transition: 'all 200ms',
+                        background: isSpeaking ? 'var(--bg-elevated)' : 'var(--candy-card, var(--bg-base))',
+                        borderRadius: '4px 18px 18px 18px',
+                        padding: '12px 14px',
+                        boxShadow: isSpeaking ? '0 4px 0 var(--coral)' : '0 4px 0 var(--border-subtle)',
+                        transition: 'box-shadow 200ms',
                       }}>
                         {msg.content
                           ? <div className="animate-message" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--text-primary)' }}>
@@ -1983,47 +1983,47 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                                 {msg.provider === 'YANDEX' ? 'YandexGPT' : msg.provider === 'FALLBACK' ? 'Fallback' : 'Groq'}
                               </span>
                             )}
-                            <button onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
+                            <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
+                              depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
                               style={{
-                                display: 'flex', alignItems: 'center', gap: 4, padding: '2px 8px', borderRadius: 8,
-                                fontSize: 11, fontWeight: 600, cursor: 'pointer', transition: 'all 150ms',
-                                background: isSpeaking ? 'rgba(247,129,102,0.12)' : 'transparent',
-                                color: isSpeaking ? 'var(--coral)' : 'var(--text-dim)',
-                                border: `1px solid ${isSpeaking ? 'rgba(247,129,102,0.4)' : 'transparent'}`,
+                                display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 10, border: 'none',
+                                fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                                background: isSpeaking ? 'var(--coral)' : 'var(--bg-elevated)',
+                                color: isSpeaking ? '#fff' : 'var(--text-dim)',
                               }}>
                               {isSpeaking
                                 ? <><Square size={8} fill="currentColor" strokeWidth={0} />{t('lesson_stop')}</>
                                 : <><Play size={8} fill="currentColor" strokeWidth={0} />{t('lesson_play')}</>}
-                            </button>
+                            </CandyButton>
                           </div>
                         )}
 
-                        {/* Comprehension buttons after tutor message */}
+                        {/* Comprehension buttons after tutor message — candy pill buttons */}
                         {!msg.streaming && msg.content && (
                           <div style={{ display: 'flex', gap: 6, marginTop: 8 }}>
-                            <button
+                            <CandyButton
                               onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
                               disabled={isStreaming || !sessionId}
+                              depth={2} activeDepth={0} shadowColor="var(--green)"
                               style={{
-                                padding: '3px 10px', borderRadius: 20, fontSize: 11, cursor: 'pointer',
-                                background: 'rgba(63,185,80,0.1)', color: 'var(--green)',
-                                border: '1px solid rgba(63,185,80,0.3)', transition: 'background 150ms',
+                                padding: '3px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer', border: 'none',
+                                background: 'var(--green)', color: '#fff',
                               }}>
                               ✓ {teachingLanguage === 'ru' ? 'Понял' : 'Got it'}
-                            </button>
-                            <button
+                            </CandyButton>
+                            <CandyButton
                               onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
                               disabled={isStreaming || !sessionId}
+                              depth={2} activeDepth={0} shadowColor="var(--red)"
                               style={{
-                                padding: '3px 10px', borderRadius: 20, fontSize: 11, cursor: 'pointer',
-                                background: 'rgba(248,81,73,0.1)', color: 'var(--red)',
-                                border: '1px solid rgba(248,81,73,0.3)', transition: 'background 150ms',
+                                padding: '3px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer', border: 'none',
+                                background: 'var(--red)', color: '#fff',
                               }}>
                               ✗ {teachingLanguage === 'ru' ? 'Не понял' : 'Not clear'}
-                            </button>
+                            </CandyButton>
                           </div>
                         )}
-                      </div>
+                      </Card>
                     )}
 
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
@@ -2037,8 +2037,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {isUser && (
                       <div style={{ animation: 'slideInRight 200ms ease-out both', maxWidth: '75%' }}>
                         <div style={{
-                          padding: '10px 12px', borderRadius: '12px 12px 0 12px', fontSize: 13, lineHeight: 1.5,
+                          padding: '12px 14px', borderRadius: '18px 18px 4px 18px', fontSize: 13, lineHeight: 1.5,
                           background: 'linear-gradient(135deg, var(--coral), var(--coral-hover))', color: 'var(--text-inverse)',
+                          boxShadow: '0 4px 0 var(--coral-hover)',
                         }}>
                           <MessageContent text={displayText} isUser={true} />
                         </div>
@@ -2051,12 +2052,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 )
               })}
 
-              {/* Thinking */}
+              {/* Thinking — candy Pill */}
               {isStreaming && messages.at(-1)?.streaming && !messages.at(-1)?.content && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--text-secondary)' }}>
+                <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '6px 12px' }}>
                   <TypingDots />
                   <span>{teachingLanguage === 'ru' ? 'Думает...' : 'Thinking...'}</span>
-                </div>
+                </Pill>
               )}
 
               <div ref={messagesEndRef} />
@@ -2100,29 +2101,29 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6 }}>
                 {/* Attach */}
                 <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
-                <button onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                <CandyButton onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                  depth={2} activeDepth={0} shadowColor={attachedFile ? 'var(--blue)' : 'var(--border-subtle)'}
                   style={{
-                    width: 28, height: 28, borderRadius: 8, flexShrink: 0, cursor: 'pointer',
-                    background: attachedFile ? 'rgba(121,192,255,0.1)' : 'transparent',
-                    color: attachedFile ? 'var(--blue)' : 'var(--border-emphasis)',
-                    border: `1px solid ${attachedFile ? 'rgba(121,192,255,0.3)' : 'var(--border-default)'}`,
+                    width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', border: 'none',
+                    background: attachedFile ? 'var(--blue)' : 'var(--bg-elevated)',
+                    color: attachedFile ? '#fff' : 'var(--border-emphasis)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                   <Paperclip size={13} />
-                </button>
+                </CandyButton>
 
                 {/* Camera */}
                 <input ref={imageInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleImageSelect} />
-                <button onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                <CandyButton onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                  depth={2} activeDepth={0} shadowColor={selectedImage ? 'var(--coral-hover)' : 'var(--border-subtle)'}
                   style={{
-                    width: 28, height: 28, borderRadius: 8, flexShrink: 0, cursor: 'pointer', fontSize: 14,
-                    background: selectedImage ? 'rgba(247,129,102,0.12)' : 'transparent',
-                    color: selectedImage ? 'var(--coral)' : 'var(--border-emphasis)',
-                    border: `1px solid ${selectedImage ? 'rgba(247,129,102,0.3)' : 'var(--border-default)'}`,
+                    width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', fontSize: 14, border: 'none',
+                    background: selectedImage ? 'var(--coral)' : 'var(--bg-elevated)',
+                    color: selectedImage ? '#fff' : 'var(--border-emphasis)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                   📸
-                </button>
+                </CandyButton>
 
                 {/* Practice button */}
                 {currentLessonData?.topicSlug && (
@@ -2152,10 +2153,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     }}
                     title={practiceScore !== null ? `Practice: ${practiceScore}%` : (teachingLanguage === 'ru' ? 'Практика' : teachingLanguage === 'hi' ? 'अभ्यास' : 'Practice')}
                     style={{
-                      width: 28, height: 28, borderRadius: 8, flexShrink: 0, cursor: 'pointer', fontSize: 13,
-                      background: practiceOpen ? 'rgba(167,139,250,0.15)' : practiceScore !== null ? 'rgba(63,185,80,0.08)' : 'transparent',
-                      color: practiceOpen ? '#A78BFA' : practiceScore !== null ? 'var(--green)' : 'var(--border-emphasis)',
-                      border: `1px solid ${practiceOpen ? 'rgba(167,139,250,0.3)' : practiceScore !== null ? 'rgba(63,185,80,0.3)' : 'var(--border-default)'}`,
+                      width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', fontSize: 13, border: 'none',
+                      background: practiceOpen ? 'var(--candy-purple)' : practiceScore !== null ? 'var(--green)' : 'var(--bg-elevated)',
+                      color: practiceOpen || practiceScore !== null ? '#fff' : 'var(--border-emphasis)',
+                      boxShadow: practiceOpen ? '0 2px 0 var(--candy-purple-d)' : practiceScore !== null ? '0 2px 0 var(--green)' : '0 2px 0 var(--border-subtle)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                     {practiceScore !== null ? '✓' : '✏️'}
@@ -2168,10 +2169,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v) }}
                     title={teachingLanguage === 'ru' ? 'Аналитика практики' : teachingLanguage === 'hi' ? 'अभ्यास विश्लेषण' : 'Practice insights'}
                     style={{
-                      width: 28, height: 28, borderRadius: 8, flexShrink: 0, cursor: 'pointer', fontSize: 13,
-                      background: insightsOpen ? 'rgba(245,158,11,0.15)' : 'transparent',
-                      color: insightsOpen ? '#F59E0B' : 'var(--border-emphasis)',
-                      border: `1px solid ${insightsOpen ? 'rgba(245,158,11,0.4)' : 'var(--border-default)'}`,
+                      width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', fontSize: 13, border: 'none',
+                      background: insightsOpen ? 'var(--yellow)' : 'var(--bg-elevated)',
+                      color: insightsOpen ? '#fff' : 'var(--border-emphasis)',
+                      boxShadow: insightsOpen ? '0 2px 0 var(--yellow)' : '0 2px 0 var(--border-subtle)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                     📊
@@ -2201,31 +2202,33 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
                 {/* Mic */}
                 {micSupported && (
-                  <button onClick={handleMicClick} disabled={isStreaming || !sessionId || micState === 'processing'}
+                  <CandyButton onClick={handleMicClick} disabled={isStreaming || !sessionId || micState === 'processing'}
                     className={micState === 'recording' ? 'mic-rec' : ''}
-                    style={micState === 'recording' ? { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }
-                      : micState === 'processing' ? { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-elevated)', color: 'var(--text-dim)', border: '1px solid var(--border-default)', opacity: 0.7 }
-                      : { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-surface)', color: 'var(--border-emphasis)', border: '1px solid var(--border-default)' }}>
+                    depth={2} activeDepth={0}
+                    shadowColor={micState === 'recording' ? 'var(--red)' : micState === 'processing' ? 'var(--border-subtle)' : 'var(--border-subtle)'}
+                    style={micState === 'recording' ? { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'var(--red)', color: '#fff' }
+                      : micState === 'processing' ? { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-elevated)', color: 'var(--text-dim)', border: 'none', opacity: 0.7 }
+                      : { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-elevated)', color: 'var(--border-emphasis)', border: 'none' }}>
                     {micState === 'recording'
                       ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 7, fontWeight: 700, gap: 1 }}><Mic size={11} />REC</span>
                       : micState === 'processing'
                       ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 7, fontWeight: 700, gap: 1 }}><Mic size={11} />...</span>
                       : <Mic size={14} />}
-                  </button>
+                  </CandyButton>
                 )}
 
                 {/* Send */}
-                <button onClick={handleSend}
+                <CandyButton onClick={handleSend}
                   disabled={(!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId}
+                  depth={2} activeDepth={0} shadowColor="var(--coral-hover)"
                   style={{
                     width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none',
-                    background: 'var(--coral)', color: 'var(--text-inverse)',
-                    boxShadow: '0 2px 8px rgba(247,129,102,0.35)',
+                    background: 'var(--coral)', color: '#fff',
                     opacity: (!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId ? 0.4 : 1,
                     transition: 'opacity 150ms',
                   }}>
                   <Send size={14} style={{ transform: 'translateX(1px)' }} />
-                </button>
+                </CandyButton>
               </div>
 
               <p style={{ fontSize: 10, color: 'var(--text-dim)', textAlign: 'center', marginTop: 6 }}>
