@@ -1817,13 +1817,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
             {/* Header (taller) */}
             <PanelHeader tall>
-              {/* Avatar */}
+              {/* Avatar — EagleMascot replaces the generic initials avatar */}
               <div style={{
                 width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
-                background: 'linear-gradient(135deg, var(--coral), var(--coral-hover))',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 12, fontWeight: 700, color: 'var(--text-inverse)',
-              }}>МТ</div>
+              }}>
+                <EagleMascot variant="logo" size={36} />
+              </div>
 
               {/* Info */}
               <div style={{ flex: 1 }}>
