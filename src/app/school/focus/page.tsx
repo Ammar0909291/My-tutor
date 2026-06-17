@@ -29,8 +29,7 @@ export default async function FocusPage({
     })
   )
   if (
-    profile?.userType !== 'SCHOOL_STUDENT' ||
-    !profile.educationBoard ||
+    !profile?.educationBoard ||
     !profile.grade
   ) {
     redirect('/dashboard')

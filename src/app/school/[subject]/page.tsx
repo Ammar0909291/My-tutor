@@ -27,7 +27,7 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
     where: { userId: session.user.id },
     select: { userType: true, educationBoard: true, grade: true },
   }))
-  if (profile?.userType !== 'SCHOOL_STUDENT' || !profile.educationBoard || !profile.grade) redirect('/dashboard')
+  if (!profile?.educationBoard || !profile.grade) redirect('/dashboard')
 
   const { educationBoard: board, grade } = profile
   const subjectSlug = params.subject

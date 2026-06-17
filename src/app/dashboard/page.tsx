@@ -34,8 +34,16 @@ export default async function DashboardPage({ searchParams }: { searchParams?: {
   // changing their stored profile, curriculum, or progress data. Default
   // landing behavior (no query param) is unchanged.
   const wantsLibrary = searchParams?.mode === 'library'
+  // Dual Learning Modes: a GENERAL_LEARNER who has opted into School Mode
+  // (via /modes, board/grade set without changing userType) keeps Library as
+  // their default landing experience and enters School Mode explicitly with
+  // ?mode=school. A SCHOOL_STUDENT keeps the existing reverse default.
+  const wantsSchool = searchParams?.mode === 'school'
+  const hasSchoolAccess = !!profileCheck.educationBoard && !!profileCheck.grade
+  const isSchoolStudent = profileCheck.userType === 'SCHOOL_STUDENT'
+  const showSchoolDashboard = hasSchoolAccess && (isSchoolStudent ? !wantsLibrary : wantsSchool)
 
-  if (profileCheck.userType === 'SCHOOL_STUDENT' && profileCheck.educationBoard && profileCheck.grade && !wantsLibrary) {
+  if (showSchoolDashboard && profileCheck.educationBoard && profileCheck.grade) {
     const board = profileCheck.educationBoard
     const grade = profileCheck.grade
     const schoolSlugs = getGradeSubjects(board, grade)
@@ -136,14 +144,21 @@ export default async function DashboardPage({ searchParams }: { searchParams?: {
 
   // Library student — candy v2 dashboard with all educational intelligence restored
   const data = await getDashboardV2Data(userId)
-  const isSchoolAccountInLibraryMode = wantsLibrary
-    && profileCheck.userType === 'SCHOOL_STUDENT' && profileCheck.educationBoard && profileCheck.grade
+  const isSchoolAccountInLibraryMode = wantsLibrary && isSchoolStudent && hasSchoolAccess
+  const isGeneralLearnerWithSchoolAccess = !isSchoolStudent && hasSchoolAccess
   return (
     <>
       {isSchoolAccountInLibraryMode && (
         <div style={{ textAlign: 'center', padding: '8px 0', fontSize: 12 }}>
           <a href="/dashboard" style={{ color: 'var(--candy-purple, #8B5CF6)', fontWeight: 700, textDecoration: 'none' }}>
             ← Back to School Mode
+          </a>
+        </div>
+      )}
+      {isGeneralLearnerWithSchoolAccess && (
+        <div style={{ textAlign: 'center', padding: '8px 0', fontSize: 12 }}>
+          <a href="/dashboard?mode=school" style={{ color: 'var(--candy-purple, #8B5CF6)', fontWeight: 700, textDecoration: 'none' }}>
+            🎒 Switch to School Mode
           </a>
         </div>
       )}

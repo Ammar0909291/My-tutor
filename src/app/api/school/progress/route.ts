@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       where: { userId },
       select: { userType: true, educationBoard: true, grade: true },
     }))
-    if (profile?.userType !== 'SCHOOL_STUDENT' || !profile.educationBoard || !profile.grade) {
+    if (!profile?.educationBoard || !profile.grade) {
       return NextResponse.json({ success: false, error: 'Not a school student' }, { status: 403 })
     }
     if (!isSchoolSubject(profile.educationBoard, subject)) {

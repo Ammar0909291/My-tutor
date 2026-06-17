@@ -17,7 +17,7 @@ export default async function MockTestPage({ params }: { params: { subject: stri
       select: { userType: true, educationBoard: true, grade: true },
     })
   )
-  if (profile?.userType !== 'SCHOOL_STUDENT' || !profile.educationBoard || !profile.grade) {
+  if (!profile?.educationBoard || !profile.grade) {
     redirect('/dashboard')
   }
 

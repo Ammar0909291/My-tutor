@@ -18,7 +18,7 @@ export default async function ChapterAssessmentPage({ params }: { params: { subj
       select: { userType: true, educationBoard: true, grade: true },
     }),
   )
-  if (profile?.userType !== 'SCHOOL_STUDENT' || !profile.educationBoard || !profile.grade) redirect('/dashboard')
+  if (!profile?.educationBoard || !profile.grade) redirect('/dashboard')
 
   const { educationBoard: board, grade } = profile
   const subjectSlug = params.subject

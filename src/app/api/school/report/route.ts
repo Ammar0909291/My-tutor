@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     where: { userId: session.user.id },
     select: { userType: true, educationBoard: true, grade: true },
   })
-  if (profile?.userType !== 'SCHOOL_STUDENT' || !profile.educationBoard || !profile.grade) {
+  if (!profile?.educationBoard || !profile.grade) {
     return NextResponse.json({ error: 'Not a school student' }, { status: 403 })
   }
 
