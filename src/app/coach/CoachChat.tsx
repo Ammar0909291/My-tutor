@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { t as i18n } from '@/lib/i18n'
-import { CandyPage, Card, CandyButton } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -86,7 +86,8 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
       {/* Messages */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '20px', maxWidth: 800, margin: '0 auto', width: '100%' }}>
         {messages.map((msg, i) => (
-          <div key={i} style={{ marginBottom: 16, display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
+          <div key={i} style={{ marginBottom: 16, display: 'flex', alignItems: 'flex-end', gap: 8, justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
+            {msg.role === 'assistant' && <EagleMascot variant="logo" size={24} />}
             <div style={{
               maxWidth: '75%',
               padding: '12px 16px',

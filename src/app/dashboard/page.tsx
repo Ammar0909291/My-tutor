@@ -16,7 +16,7 @@ import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadin
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { getOverallRoadmap } from '@/lib/school/roadmap/learningRoadmap'
 
-export default async function DashboardPage() {
+export default async function DashboardPage({ searchParams }: { searchParams?: { mode?: string } }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
   const userId = session.user.id
@@ -29,7 +29,13 @@ export default async function DashboardPage() {
 
   if (!profileCheck) redirect('/onboarding')
 
-  if (profileCheck.userType === 'SCHOOL_STUDENT' && profileCheck.educationBoard && profileCheck.grade) {
+  // Cross-system navigation (Stabilization Sprint): a SCHOOL_STUDENT can opt
+  // into viewing the Library/General experience via ?mode=library without
+  // changing their stored profile, curriculum, or progress data. Default
+  // landing behavior (no query param) is unchanged.
+  const wantsLibrary = searchParams?.mode === 'library'
+
+  if (profileCheck.userType === 'SCHOOL_STUDENT' && profileCheck.educationBoard && profileCheck.grade && !wantsLibrary) {
     const board = profileCheck.educationBoard
     const grade = profileCheck.grade
     const schoolSlugs = getGradeSubjects(board, grade)
@@ -87,7 +93,9 @@ export default async function DashboardPage() {
     })
 
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0)
-    const studiedToday = recentSessions.some((s) => s.startedAt >= startOfToday)
+    // Sprint Stabilization: count only genuinely COMPLETED sessions toward
+    // today's goal — opening and immediately closing a lesson must not count.
+    const studiedToday = recentSessions.some((s) => s.status === 'COMPLETED' && !!s.endedAt && s.endedAt >= startOfToday)
     const pendingAssessment = pendingAssessmentRow?.chapterId
       ? { subjectSlug: pendingAssessmentRow.subjectSlug, chapterId: pendingAssessmentRow.chapterId }
       : null
@@ -128,5 +136,18 @@ export default async function DashboardPage() {
 
   // Library student — candy v2 dashboard with all educational intelligence restored
   const data = await getDashboardV2Data(userId)
-  return <DashboardV2 data={data} />
+  const isSchoolAccountInLibraryMode = wantsLibrary
+    && profileCheck.userType === 'SCHOOL_STUDENT' && profileCheck.educationBoard && profileCheck.grade
+  return (
+    <>
+      {isSchoolAccountInLibraryMode && (
+        <div style={{ textAlign: 'center', padding: '8px 0', fontSize: 12 }}>
+          <a href="/dashboard" style={{ color: 'var(--candy-purple, #8B5CF6)', fontWeight: 700, textDecoration: 'none' }}>
+            ← Back to School Mode
+          </a>
+        </div>
+      )}
+      <DashboardV2 data={data} />
+    </>
+  )
 }

@@ -176,7 +176,9 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
         },
       },
     }),
-    prisma.learnSession.count({ where: { userId, startedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
+    // Sprint Stabilization: only genuinely completed sessions count toward
+    // today's lesson goal/quest — opening and closing a lesson must not count.
+    prisma.learnSession.count({ where: { userId, status: 'COMPLETED', endedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
     getStudyStreak(userId),
     prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }),
     prisma.weeklyXP.findMany({

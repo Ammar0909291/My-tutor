@@ -144,6 +144,9 @@ export function SchoolDashboard({ displayName, board, grade, streakDays, xpPoint
               🎒 {boardLabel} · Class {grade}
             </Pill>
             <ThemeToggle />
+            <Link href="/dashboard?mode=library" className="hidden sm:inline-flex text-xs px-3 py-1.5 font-bold" style={{ color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
+              Library Mode
+            </Link>
             <Link href="/settings" className="text-xs px-3 py-1.5 flex items-center gap-1.5" style={{ color: 'var(--candy-ink-soft)' }}>
               <Settings size={13} />
             </Link>

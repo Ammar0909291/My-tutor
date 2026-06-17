@@ -951,6 +951,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }
   useEffect(() => () => { mediaRecorderRef.current?.stop() }, [])
 
+  // Stop any in-flight TTS playback on unmount/route change so voice never
+  // keeps speaking after the learner leaves the lesson.
+  useEffect(() => () => { stopSpeaking() }, [])
+
   // File attachment
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]; if (!file) return
