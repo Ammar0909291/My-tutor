@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/db/prisma'
 import { redis } from '@/lib/redis/client'
 import { getFailureCounters } from '@/lib/monitoring'
+import { Card, Pill, SectionTitle } from '@/components/ui/candy'
 
 interface OpsData {
   health: { db: boolean; redis: string; uptime: number }
@@ -8,30 +9,28 @@ interface OpsData {
   timestamp: string
 }
 
-function Badge({ ok, label }: { ok: boolean; label: string }) {
+function StatusPill({ ok, label }: { ok: boolean; label: string }) {
   return (
-    <span
-      className="inline-block rounded px-2 py-0.5 text-xs font-bold"
-      style={{
-        background: ok ? 'rgba(63,185,80,0.15)' : 'rgba(248,81,73,0.15)',
-        color: ok ? '#3FB950' : '#F85149',
-      }}
-    >
+    <Pill color={ok ? 'var(--candy-green)' : 'var(--candy-red)'} style={{ color: '#fff' }}>
       {label}
-    </span>
+    </Pill>
   )
 }
 
 function EnvRow({ name, set }: { name: string; set: boolean }) {
   return (
     <div
-      className="flex items-center justify-between py-2 border-b last:border-0 text-sm"
-      style={{ borderColor: 'var(--border-default)' }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '8px 0',
+        borderBottom: '1px solid var(--candy-shadow)',
+        fontSize: 13,
+      }}
     >
-      <span className="font-mono text-xs" style={{ color: 'var(--text-secondary)' }}>
-        {name}
-      </span>
-      <Badge ok={set} label={set ? 'SET ✓' : 'MISSING ✗'} />
+      <span style={{ fontFamily: 'monospace', fontSize: 12, color: 'var(--candy-ink-soft)' }}>{name}</span>
+      <StatusPill ok={set} label={set ? 'SET ✓' : 'MISSING ✗'} />
     </div>
   )
 }
@@ -91,117 +90,80 @@ export default async function AdminOpsPage() {
     { name: 'GEMINI_API_KEY', set: !!process.env.GEMINI_API_KEY },
   ]
 
-  const card = { background: '#0F0F18', borderColor: '#1A1A2E' }
-
   return (
-    <div className="max-w-3xl">
-      <div className="mb-6">
-        <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>
-          Operations Center
-        </h1>
-        <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>
+    <div style={{ maxWidth: 720 }}>
+      <div style={{ marginBottom: 24 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>Operations Center</h1>
+        <p style={{ fontSize: 14, color: 'var(--candy-ink-soft)', marginTop: 2 }}>
           Live system health and environment diagnostics
         </p>
         {data?.timestamp && (
-          <p className="text-xs mt-1" style={{ color: 'var(--text-dim)' }}>
+          <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)', marginTop: 4 }}>
             Last checked: {new Date(data.timestamp).toLocaleString()}
           </p>
         )}
       </div>
 
       {!data && (
-        <div
-          className="rounded-xl border p-5 mb-5"
-          style={{ background: 'rgba(248,81,73,0.07)', borderColor: 'rgba(248,81,73,0.25)' }}
-        >
-          <p className="text-sm font-bold" style={{ color: '#F85149' }}>
+        <Card style={{ padding: 20, marginBottom: 20, background: 'rgba(255, 75, 75, 0.08)' }}>
+          <p style={{ fontSize: 14, fontWeight: 800, color: 'var(--candy-red)', margin: 0 }}>
             Failed to load health data
           </p>
-          <p className="text-xs mt-1" style={{ color: 'var(--text-dim)' }}>
+          <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)', marginTop: 4 }}>
             Could not reach the database or monitoring layer. Environment checks below still use
             server-side process.env.
           </p>
-        </div>
+        </Card>
       )}
 
       {/* Panel 1: Platform Health */}
-      <div className="rounded-xl border p-5 mb-5" style={card}>
-        <h2
-          className="text-xs font-bold uppercase tracking-wide mb-4"
-          style={{ color: 'var(--text-dim)' }}
-        >
-          Platform Health
-        </h2>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between text-sm">
-            <span style={{ color: 'var(--text-secondary)' }}>Database</span>
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <SectionTitle style={{ fontSize: 13, marginBottom: 16 }}>Platform Health</SectionTitle>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13 }}>
+            <span style={{ color: 'var(--candy-ink-soft)' }}>Database</span>
             {data ? (
-              <Badge ok={data.health.db} label={data.health.db ? 'Connected' : 'Disconnected'} />
+              <StatusPill ok={data.health.db} label={data.health.db ? 'Connected' : 'Disconnected'} />
             ) : (
-              <span className="text-xs" style={{ color: 'var(--text-dim)' }}>
-                —
-              </span>
+              <span style={{ fontSize: 12, color: 'var(--candy-ink-soft)' }}>—</span>
             )}
           </div>
-          <div
-            className="flex items-center justify-between text-sm border-t pt-3"
-            style={{ borderColor: '#1A1A2E' }}
-          >
-            <span style={{ color: 'var(--text-secondary)' }}>Redis</span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13, borderTop: '1px solid var(--candy-shadow)', paddingTop: 12 }}>
+            <span style={{ color: 'var(--candy-ink-soft)' }}>Redis</span>
             {data ? (
-              <span
-                className="inline-block rounded px-2 py-0.5 text-xs font-bold"
-                style={{
-                  background:
-                    data.health.redis === 'configured'
-                      ? 'rgba(56,139,253,0.15)'
-                      : 'rgba(110,118,129,0.15)',
-                  color: data.health.redis === 'configured' ? '#388BFD' : '#8B949E',
-                }}
+              <Pill
+                color={data.health.redis === 'configured' ? 'var(--candy-blue)' : 'var(--candy-ink-soft)'}
+                style={{ color: '#fff' }}
               >
                 {data.health.redis === 'configured' ? 'Configured' : data.health.redis === 'error' ? 'Error' : 'Not Configured'}
-              </span>
+              </Pill>
             ) : (
-              <span className="text-xs" style={{ color: 'var(--text-dim)' }}>
-                —
-              </span>
+              <span style={{ fontSize: 12, color: 'var(--candy-ink-soft)' }}>—</span>
             )}
           </div>
-          <div
-            className="flex items-center justify-between text-sm border-t pt-3"
-            style={{ borderColor: '#1A1A2E' }}
-          >
-            <span style={{ color: 'var(--text-secondary)' }}>Node Uptime</span>
-            <span className="text-xs font-bold" style={{ color: 'var(--text-primary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13, borderTop: '1px solid var(--candy-shadow)', paddingTop: 12 }}>
+            <span style={{ color: 'var(--candy-ink-soft)' }}>Node Uptime</span>
+            <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--candy-ink)' }}>
               {data ? `${Math.floor(data.health.uptime / 3600)}h` : '—'}
             </span>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Panel 2: Failure Counters */}
-      <div className="rounded-xl border p-5 mb-5" style={card}>
-        <h2
-          className="text-xs font-bold uppercase tracking-wide mb-4"
-          style={{ color: 'var(--text-dim)' }}
-        >
-          Failure Counters
-        </h2>
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <SectionTitle style={{ fontSize: 13, marginBottom: 16 }}>Failure Counters</SectionTitle>
         {!data ? (
-          <p className="text-sm" style={{ color: 'var(--text-dim)' }}>
-            Unavailable
-          </p>
+          <p style={{ fontSize: 14, color: 'var(--candy-ink-soft)' }}>Unavailable</p>
         ) : Object.keys(data.failureCounters).length === 0 ? (
-          <p className="text-sm" style={{ color: 'var(--text-dim)' }}>
-            No failures recorded since last restart
-          </p>
+          <p style={{ fontSize: 14, color: 'var(--candy-ink-soft)' }}>No failures recorded since last restart</p>
         ) : (
-          <table className="w-full text-sm">
+          <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ color: 'var(--text-dim)' }}>
-                <th className="text-left text-xs uppercase pb-2 font-semibold">Context</th>
-                <th className="text-right text-xs uppercase pb-2 font-semibold">Count</th>
-                <th className="text-right text-xs uppercase pb-2 font-semibold">Status</th>
+              <tr style={{ color: 'var(--candy-ink-soft)' }}>
+                <th style={{ textAlign: 'left', fontSize: 11, textTransform: 'uppercase', paddingBottom: 8, fontWeight: 700 }}>Context</th>
+                <th style={{ textAlign: 'right', fontSize: 11, textTransform: 'uppercase', paddingBottom: 8, fontWeight: 700 }}>Count</th>
+                <th style={{ textAlign: 'right', fontSize: 11, textTransform: 'uppercase', paddingBottom: 8, fontWeight: 700 }}>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -209,29 +171,20 @@ export default async function AdminOpsPage() {
                 const isCritical = count > 10
                 const isWarning = count > 0 && !isCritical
                 return (
-                  <tr
-                    key={ctx}
-                    className="border-t"
-                    style={{ borderColor: '#1A1A2E' }}
-                  >
-                    <td className="py-2 font-mono text-xs" style={{ color: 'var(--text-secondary)' }}>
+                  <tr key={ctx} style={{ borderTop: '1px solid var(--candy-shadow)' }}>
+                    <td style={{ padding: '8px 0', fontFamily: 'monospace', fontSize: 12, color: 'var(--candy-ink-soft)' }}>
                       {ctx}
                     </td>
-                    <td className="py-2 text-right font-bold" style={{ color: 'var(--text-primary)' }}>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800, color: 'var(--candy-ink)' }}>
                       {count}
                     </td>
-                    <td className="py-2 text-right">
+                    <td style={{ padding: '8px 0', textAlign: 'right' }}>
                       {isCritical ? (
-                        <Badge ok={false} label="Critical" />
+                        <StatusPill ok={false} label="Critical" />
                       ) : isWarning ? (
-                        <span
-                          className="inline-block rounded px-2 py-0.5 text-xs font-bold"
-                          style={{ background: 'rgba(210,153,34,0.15)', color: '#D2993C' }}
-                        >
-                          Warning
-                        </span>
+                        <Pill color="var(--candy-yellow)" style={{ color: 'var(--candy-ink)' }}>Warning</Pill>
                       ) : (
-                        <Badge ok={true} label="OK" />
+                        <StatusPill ok={true} label="OK" />
                       )}
                     </td>
                   </tr>
@@ -240,25 +193,20 @@ export default async function AdminOpsPage() {
             </tbody>
           </table>
         )}
-      </div>
+      </Card>
 
       {/* Panel 3: Environment Validation */}
-      <div className="rounded-xl border p-5 mb-5" style={card}>
-        <h2
-          className="text-xs font-bold uppercase tracking-wide mb-4"
-          style={{ color: 'var(--text-dim)' }}
-        >
-          Environment Validation
-        </h2>
-        <p className="text-xs font-semibold uppercase mb-2" style={{ color: 'var(--text-dim)' }}>
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <SectionTitle style={{ fontSize: 13, marginBottom: 16 }}>Environment Validation</SectionTitle>
+        <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: 'var(--candy-ink-soft)', marginBottom: 8 }}>
           Required
         </p>
-        <div className="mb-4">
+        <div style={{ marginBottom: 16 }}>
           {requiredEnv.map((e) => (
             <EnvRow key={e.name} name={e.name} set={e.set} />
           ))}
         </div>
-        <p className="text-xs font-semibold uppercase mb-2" style={{ color: 'var(--text-dim)' }}>
+        <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: 'var(--candy-ink-soft)', marginBottom: 8 }}>
           Recommended
         </p>
         <div>
@@ -266,22 +214,17 @@ export default async function AdminOpsPage() {
             <EnvRow key={e.name} name={e.name} set={e.set} />
           ))}
         </div>
-      </div>
+      </Card>
 
       {/* Panel 4: AI Provider Configuration */}
-      <div className="rounded-xl border p-5 mb-5" style={card}>
-        <h2
-          className="text-xs font-bold uppercase tracking-wide mb-4"
-          style={{ color: 'var(--text-dim)' }}
-        >
-          AI Provider Configuration
-        </h2>
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <SectionTitle style={{ fontSize: 13, marginBottom: 16 }}>AI Provider Configuration</SectionTitle>
         <div>
           {aiProviders.map((p) => (
             <EnvRow key={p.name} name={p.name} set={p.set} />
           ))}
         </div>
-      </div>
+      </Card>
     </div>
   )
 }
