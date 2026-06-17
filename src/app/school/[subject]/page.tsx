@@ -8,16 +8,17 @@ import { chapterDisplayTitle, isSchoolSubject, SCHOOL_SUBJECT_META } from '@/lib
 import { getSchoolSubjectProgress } from '@/lib/school/schoolProgress'
 import { getStudyPlan } from '@/lib/school/adaptive/studyPlan'
 import { MarkChapterCompleteButton } from '@/components/school/MarkChapterCompleteButton'
-import { CandyPage } from '@/components/ui/candy'
+import { Card, CandyButton, Pill, ProgressBar, SectionTitle } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 import { getExamReadinessForSubject } from '@/lib/school/adaptive/examReadiness'
 import { getSubjectRoadmap } from '@/lib/school/roadmap/learningRoadmap'
 import { getLearningNavigatorAction, navigatorTitleForCurrentChapter, NAVIGATOR_URGENCY_COLORS } from '@/lib/school/navigation/learningNavigator'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 
 /**
- * School subject home (Sprint BH): board-aware landing for one subject.
- * Progressive disclosure — current/next/previous chapter only; the full
- * chapter list lives behind "View all chapters".
+ * School subject home (Sprint BH, restyled Sprint F): board-aware landing
+ * for one subject. Progressive disclosure — current/next/previous chapter
+ * only; the full chapter list lives behind "View all chapters".
  */
 export default async function SchoolSubjectPage({ params }: { params: { subject: string } }) {
   const session = await auth()
@@ -54,7 +55,7 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
   ])
 
   const pos = progress.position
-  const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--coral)', bg: 'var(--coral-muted)' }
+  const m = SCHOOL_SUBJECT_META[subjectSlug] ?? { label: subjectSlug, icon: '📘', color: 'var(--candy-red)', bg: 'rgba(255, 75, 75, 0.12)' }
   const boardLabel = board === 'cbse' ? 'CBSE' : board === 'up_board' ? 'UP Board' : board
 
   // Sprint CO.1: when the Navigator's recommendation IS this subject's current
@@ -71,64 +72,50 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
     ? navigatorAction.href
     : `/school/${subjectSlug}/chapter/${encodeURIComponent(pos.current.id)}`
 
+  const readinessGood = examReadiness && (examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready')
+
   return (
-    <CandyPage legacy className="min-h-screen">
-      <nav className="sticky top-0 z-50"
-        style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
-        <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)' }}>
+        <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
             <ArrowLeft size={15} /> Home
           </Link>
-          <span className="text-xs font-bold px-3 py-1 rounded-full"
-            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}>
+          <Pill color="var(--candy-card)" style={{ color: 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)' }}>
             🎒 {boardLabel} · Class {grade}
-          </span>
+          </Pill>
         </div>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-5 py-8 space-y-6">
+      <main style={{ maxWidth: 768, margin: '0 auto', padding: '32px 20px', display: 'flex', flexDirection: 'column', gap: 24 }}>
 
         {/* Subject header */}
-        <header className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0" style={{ background: m.bg }}>
+        <header style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ width: 56, height: 56, borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30, flexShrink: 0, background: m.bg }}>
             {m.icon}
           </div>
-          <div className="flex-1 min-w-0">
-            <h1 className="text-2xl font-black tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              {m.label}
-            </h1>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.01em', color: 'var(--candy-ink)', margin: 0 }}>{m.label}</h1>
+            <p style={{ fontSize: 12, marginTop: 2, color: 'var(--candy-ink-soft)' }}>
               {pos.completedCount} completed · {pos.totalCount - pos.completedCount} remaining
             </p>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+            <p style={{ fontSize: 12, marginTop: 2, color: 'var(--candy-ink-soft)' }}>
               Chapter {pos.current.order} of {pos.totalCount}
               {pos.next ? ` · Next recommended: Chapter ${pos.next.order}` : ''}
             </p>
           </div>
-          <div className="flex flex-col items-end gap-1.5 shrink-0">
-            <span className="text-lg font-black font-mono" style={{ color: m.color }}>{pos.percent}%</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
+            <span style={{ fontSize: 18, fontWeight: 800, fontFamily: 'monospace', color: m.color }}>{pos.percent}%</span>
             {examReadiness && examReadiness.confidence !== 'low' && (
-              <span
-                className="text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
-                style={{
-                  background: examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready'
-                    ? 'var(--green-muted)' : 'var(--yellow-muted)',
-                  color: examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready'
-                    ? 'var(--green)' : 'var(--yellow)',
-                  border: `1px solid ${examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready' ? 'var(--green)' : 'var(--yellow)'}`,
-                }}
-              >
-                {examReadiness.level === 'strongly_prepared' || examReadiness.level === 'exam_ready'
-                  ? '✓ Exam Ready' : 'Needs Revision'}
-              </span>
+              <Pill color={readinessGood ? 'var(--candy-green)' : 'var(--candy-yellow)'} style={{ color: '#fff', whiteSpace: 'nowrap' }}>
+                {readinessGood ? '✓ Exam Ready' : 'Needs Revision'}
+              </Pill>
             )}
           </div>
         </header>
 
         {/* Progress bar */}
-        <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-          <div className="h-full rounded-full" style={{ width: `${pos.percent}%`, background: m.color, transition: 'width .5s' }} />
-        </div>
+        <ProgressBar percent={pos.percent} fillColor={m.color} />
 
         {/* Sprint CO: Recommended Next Action — placed above roadmap/progress.
             Sprint CO.1: hidden when it targets THIS subject's current chapter
@@ -137,152 +124,144 @@ export default async function SchoolSubjectPage({ params }: { params: { subject:
         {navigatorAction && !samePriorityTarget && <NavigatorActionCard action={navigatorAction} compact />}
 
         {/* Current chapter — primary card */}
-        <section className="relative rounded-2xl overflow-hidden"
-          style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', boxShadow: 'var(--shadow-md)' }}>
-          <div className="pointer-events-none absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse at 0% 0%, var(--coral-muted) 0%, transparent 55%)' }} />
-          <div className="relative p-6">
-            <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--coral)' }}>
-              Current chapter · {pos.current.order} of {pos.totalCount}
-            </p>
-            <h2 className="text-lg font-black leading-snug mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              {chapterDisplayTitle(pos.current.title)}
-            </h2>
+        <Card style={{ padding: 24, position: 'relative', overflow: 'hidden' }}>
+          <p style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8, color: 'var(--candy-red)' }}>
+            Current chapter · {pos.current.order} of {pos.totalCount}
+          </p>
+          <h2 style={{ fontSize: 18, fontWeight: 800, lineHeight: 1.3, marginBottom: 16, color: 'var(--candy-ink)' }}>
+            {chapterDisplayTitle(pos.current.title)}
+          </h2>
 
-            {/* Sprint CO.1: Navigator priority folded into this card when its
-                target is this chapter — avoids a duplicate recommendation card. */}
-            {samePriorityTarget && navigatorAction && (
-              <div className="rounded-xl p-3 mb-4" style={{ background: 'var(--bg-elevated)', border: `1px solid ${priorityColor}33` }}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wide flex items-center gap-1.5" style={{ color: priorityColor }}>
-                    {navigatorAction.urgency === 'high' && <AlertTriangle size={11} />}
-                    🎯 Priority
-                  </span>
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide"
-                    style={{ background: `${priorityColor}22`, color: priorityColor }}>
-                    {navigatorAction.urgency}
-                  </span>
-                </div>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{navigatorAction.reason}</p>
-                <p className="text-[11px] mt-1" style={{ color: 'var(--text-dim)' }}>🎯 {navigatorAction.expectedOutcome}</p>
+          {/* Sprint CO.1: Navigator priority folded into this card when its
+              target is this chapter — avoids a duplicate recommendation card. */}
+          {samePriorityTarget && navigatorAction && (
+            <div style={{ borderRadius: 14, padding: 12, marginBottom: 16, background: 'var(--candy-bg)', border: `1px solid ${priorityColor}` }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 6, color: priorityColor }}>
+                  {navigatorAction.urgency === 'high' && <AlertTriangle size={11} />}
+                  🎯 Priority
+                </span>
+                <Pill color={priorityColor} style={{ color: '#fff', fontSize: 9, textTransform: 'uppercase' }}>
+                  {navigatorAction.urgency}
+                </Pill>
               </div>
-            )}
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href={continueHref}
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-sm font-bold rounded-xl text-white transition-transform hover:scale-[1.02]"
-                style={{ background: 'var(--coral)', textDecoration: 'none', boxShadow: 'var(--coral-glow)' }}>
-                {continueLabel} <ArrowRight size={16} />
-              </Link>
-              <MarkChapterCompleteButton subject={subjectSlug} chapterId={pos.current.id} />
+              <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)' }}>{navigatorAction.reason}</p>
+              <p style={{ fontSize: 11, marginTop: 4, color: 'var(--candy-ink-soft)' }}>🎯 {navigatorAction.expectedOutcome}</p>
             </div>
+          )}
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <Link href={continueHref} style={{ textDecoration: 'none' }}>
+              <CandyButton
+                style={{ width: '100%', background: 'var(--candy-red)', color: '#fff', borderRadius: 14, padding: '14px 28px', fontSize: 14, fontWeight: 800, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+                shadowColor="#C73A3A"
+              >
+                {continueLabel} <ArrowRight size={16} />
+              </CandyButton>
+            </Link>
+            <MarkChapterCompleteButton subject={subjectSlug} chapterId={pos.current.id} />
           </div>
-        </section>
+        </Card>
 
         {/* Sprint BP: study plan — max 4 simple steps, no roadmap UI */}
         {studyPlan.length > 0 && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <h2 className="font-bold text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--text-secondary)' }}>Study plan</h2>
-            <ul className="space-y-2">
+          <Card style={{ padding: 20 }}>
+            <SectionTitle style={{ fontSize: 13, marginBottom: 12 }}>Study plan</SectionTitle>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
               {studyPlan.map((step) => (
-                <li key={step.slot} className="flex items-center gap-3 text-sm">
-                  <span className="text-[10px] font-bold uppercase tracking-wider w-12 shrink-0" style={{ color: 'var(--text-dim)' }}>
+                <li key={step.slot} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 14 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', width: 48, flexShrink: 0, color: 'var(--candy-ink-soft)' }}>
                     {step.slot}
                   </span>
-                  <Link href={step.href} className="font-semibold flex-1 truncate"
-                    style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
+                  <Link href={step.href} style={{ fontWeight: 700, flex: 1, color: 'var(--candy-ink)', textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {step.label}
                   </Link>
-                  <ArrowRight size={13} className="shrink-0" style={{ color: 'var(--text-dim)' }} />
+                  <ArrowRight size={13} style={{ flexShrink: 0, color: 'var(--candy-ink-soft)' }} />
                 </li>
               ))}
             </ul>
-          </section>
+          </Card>
         )}
 
         {/* Previous / Next — quiet secondary cards */}
-        <section className="grid sm:grid-cols-2 gap-3">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           {pos.previous && (
-            <div className="rounded-2xl p-4" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-              <p className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--text-dim)' }}>← Previous</p>
-              <p className="text-sm font-semibold leading-snug" style={{ color: 'var(--text-secondary)' }}>
-                {chapterDisplayTitle(pos.previous.title)}
-              </p>
-            </div>
+            <Card style={{ padding: 16 }}>
+              <p style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4, color: 'var(--candy-ink-soft)' }}>← Previous</p>
+              <p style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.3, color: 'var(--candy-ink-soft)' }}>{chapterDisplayTitle(pos.previous.title)}</p>
+            </Card>
           )}
           {pos.next && (
-            <div className="rounded-2xl p-4" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-              <p className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--text-dim)' }}>Up next →</p>
-              <p className="text-sm font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>
-                {chapterDisplayTitle(pos.next.title)}
-              </p>
-            </div>
+            <Card style={{ padding: 16 }}>
+              <p style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4, color: 'var(--candy-ink-soft)' }}>Up next →</p>
+              <p style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.3, color: 'var(--candy-ink)' }}>{chapterDisplayTitle(pos.next.title)}</p>
+            </Card>
           )}
-        </section>
+        </div>
 
         {/* View all chapters + Take Mock Test — secondary actions */}
-        <div className="grid grid-cols-2 gap-3">
-          <Link href={`/school/${subjectSlug}/chapters`}
-            className="block text-center text-sm font-bold py-3 rounded-xl"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-primary)', textDecoration: 'none' }}>
-            All chapters ({pos.totalCount})
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <Link href={`/school/${subjectSlug}/chapters`} style={{ textDecoration: 'none' }}>
+            <CandyButton style={{ width: '100%', textAlign: 'center', fontSize: 14, fontWeight: 800, padding: '12px 0', borderRadius: 14, background: 'var(--candy-card)', border: '1px solid var(--candy-shadow)', color: 'var(--candy-ink)' }}>
+              All chapters ({pos.totalCount})
+            </CandyButton>
           </Link>
-          <Link href={`/school/${subjectSlug}/mock`}
-            className="block text-center text-sm font-bold py-3 rounded-xl text-white"
-            style={{ background: 'var(--blue)', textDecoration: 'none' }}>
-            🎓 Take Mock Test
+          <Link href={`/school/${subjectSlug}/mock`} style={{ textDecoration: 'none' }}>
+            <CandyButton style={{ width: '100%', textAlign: 'center', fontSize: 14, fontWeight: 800, padding: '12px 0', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff' }} shadowColor="var(--candy-purple-d)">
+              🎓 Take Mock Test
+            </CandyButton>
           </Link>
         </div>
 
         {/* Sprint CK: Learning Roadmap — compact chapter progression */}
         {roadmap && roadmap.allChapters.length > 0 && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="font-bold text-xs uppercase tracking-wide" style={{ color: 'var(--text-secondary)' }}>🗺️ Learning Roadmap</h2>
-              <span className="text-xs font-bold" style={{ color: m.color }}>
+          <Card style={{ padding: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <SectionTitle style={{ fontSize: 13 }}>🗺️ Learning Roadmap</SectionTitle>
+              <span style={{ fontSize: 12, fontWeight: 800, color: m.color }}>
                 {roadmap.completedCount}/{roadmap.totalCount} · {roadmap.completionPercent}%
               </span>
             </div>
-            <ul className="space-y-1.5">
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {roadmap.allChapters.map((ch) => {
                 const icon = ch.status === 'completed' ? '✓' : ch.status === 'current' ? '→' : '○'
-                const iconColor = ch.status === 'completed' ? 'var(--green)' : ch.status === 'current' ? 'var(--coral)' : 'var(--text-dim)'
-                const textColor = ch.status === 'upcoming' ? 'var(--text-dim)' : 'var(--text-primary)'
-                const weight = ch.status === 'current' ? 700 : 500
+                const iconColor = ch.status === 'completed' ? 'var(--candy-green)' : ch.status === 'current' ? 'var(--candy-red)' : 'var(--candy-ink-soft)'
+                const textColor = ch.status === 'upcoming' ? 'var(--candy-ink-soft)' : 'var(--candy-ink)'
+                const weight = ch.status === 'current' ? 800 : 500
                 return (
-                  <li key={ch.id} className="flex items-center gap-2.5 text-sm">
-                    <span className="w-4 text-center shrink-0 font-bold" style={{ color: iconColor }}>{icon}</span>
-                    <span className="truncate" style={{ color: textColor, fontWeight: weight }}>{ch.title}</span>
+                  <li key={ch.id} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14 }}>
+                    <span style={{ width: 16, textAlign: 'center', flexShrink: 0, fontWeight: 800, color: iconColor }}>{icon}</span>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: textColor, fontWeight: weight }}>{ch.title}</span>
                   </li>
                 )
               })}
             </ul>
-            <p className="text-[11px] mt-3" style={{ color: 'var(--text-dim)' }}>
+            <p style={{ fontSize: 11, marginTop: 12, color: 'var(--candy-ink-soft)' }}>
               {roadmap.estimatedRemainingSteps === 0
                 ? 'All chapters complete — great work!'
                 : `${roadmap.estimatedRemainingSteps} chapter${roadmap.estimatedRemainingSteps === 1 ? '' : 's'} remaining to finish this subject`}
             </p>
-          </section>
+          </Card>
         )}
 
         {/* Recent activity — compact */}
         {recentSessions.length > 0 && (
-          <section className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <h2 className="font-bold text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--text-secondary)' }}>Recent activity</h2>
-            <ul className="space-y-2">
+          <Card style={{ padding: 20 }}>
+            <SectionTitle style={{ fontSize: 13, marginBottom: 12 }}>Recent activity</SectionTitle>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
               {recentSessions.map((s) => (
-                <li key={s.id} className="flex items-center gap-3 text-sm">
-                  <span className="shrink-0">📚</span>
-                  <span className="truncate flex-1" style={{ color: 'var(--text-primary)' }}>{s.title ?? 'Study session'}</span>
-                  <span className="text-xs font-mono shrink-0" style={{ color: 'var(--text-secondary)' }}>
+                <li key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 14 }}>
+                  <span style={{ flexShrink: 0 }}>📚</span>
+                  <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--candy-ink)' }}>{s.title ?? 'Study session'}</span>
+                  <span style={{ fontSize: 12, fontFamily: 'monospace', flexShrink: 0, color: 'var(--candy-ink-soft)' }}>
                     {new Date(s.startedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
                   </span>
                 </li>
               ))}
             </ul>
-          </section>
+          </Card>
         )}
       </main>
-    </CandyPage>
+    </div>
   )
 }
