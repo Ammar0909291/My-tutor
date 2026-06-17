@@ -6,6 +6,8 @@ import type { QuestionReview } from '@/lib/school/practice/practiceTypes'
 import { MOCK_TEST_CONFIG, type MockTestResult, type MockTestType } from '@/lib/school/exams/mockTestTypes'
 import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorTypes'
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
+import { Card, CandyButton, Pill, ProgressBar, ProgressRing, EagleMascot, useConfetti } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 interface ClientQuestion {
   id: string
@@ -46,6 +48,7 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
   const [elapsed, setElapsed] = useState(0)
   const startedAtRef = useRef<Date | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const fireConfetti = useConfetti()
 
   useEffect(() => {
     if (phase === 'quiz') {
@@ -98,6 +101,7 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
       if (data.error) { setError(data.error); setPhase('quiz'); return }
       setResult(data)
       setPhase('results')
+      if (data.score >= 70) fireConfetti()
     } catch {
       setError('Submission failed. Please try again.')
       setPhase('quiz')
@@ -113,76 +117,85 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
     else submitAnswers()
   }
 
-  // ── Type selector ──────────────────────────────────────────────────────────
-  if (phase === 'select') {
+  function Shell({ children, navLabel }: { children: React.ReactNode; navLabel?: React.ReactNode }) {
     return (
-      <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
-        <nav className="sticky top-0 z-50" style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
-          <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center">
-            <a href={backHref} className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+      <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
+        <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)' }}>
+          <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <a href={backHref} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
               <ArrowLeft size={15} /> Back
             </a>
+            {navLabel}
           </div>
         </nav>
-        <main className="max-w-3xl mx-auto px-5 py-12">
-          <div className="rounded-2xl p-8" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style={{ background: 'var(--blue-muted)' }}>🎓</div>
-              <h1 className="text-xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>Mock Test</h1>
-              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{subjectLabel} — questions drawn from across all chapters</p>
-            </div>
-
-            {error && (
-              <div className="rounded-xl p-3 mb-6 text-sm" style={{ background: 'var(--coral-muted)', color: 'var(--coral)', border: '1px solid var(--coral)' }}>
-                {error}
-              </div>
-            )}
-
-            <div className="space-y-3 mb-8">
-              {(Object.entries(MOCK_TEST_CONFIG) as [MockTestType, typeof MOCK_TEST_CONFIG[MockTestType]][]).map(([type, cfg]) => (
-                <button
-                  key={type}
-                  onClick={() => setTestType(type)}
-                  className="w-full rounded-xl p-4 text-left transition-all"
-                  style={{
-                    background: testType === type ? 'var(--blue-muted)' : 'var(--bg-elevated)',
-                    border: `2px solid ${testType === type ? 'var(--blue)' : 'var(--border-default)'}`,
-                  }}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{cfg.label}</p>
-                      <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>~{cfg.estimatedMinutes} minutes</p>
-                    </div>
-                    {testType === type && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: 'var(--blue)', color: 'white' }}>Selected</span>
-                    )}
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={startMock}
-              className="w-full py-4 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-transform hover:scale-[1.02]"
-              style={{ background: 'var(--coral)', boxShadow: 'var(--coral-glow)' }}
-            >
-              Start Mock Test <ArrowRight size={16} />
-            </button>
-          </div>
+        <main style={{ maxWidth: 768, margin: '0 auto', padding: '32px 20px' }}>
+          {children}
         </main>
       </div>
     )
   }
 
-  // ── Loading / Submitting ───────────────────────────────────────────────────
+  // ── Type selector (exam instructions) ───────────────────────────────────
+  if (phase === 'select') {
+    return (
+      <Shell>
+        <Card style={{ padding: 32 }}>
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
+            <div style={{ width: 64, height: 64, borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30, margin: '0 auto 16px', background: 'rgba(139,92,246,0.12)' }}>🎓</div>
+            <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)', margin: '0 0 6px' }}>Mock Test</h1>
+            <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', fontWeight: 600, margin: 0 }}>{subjectLabel} — questions drawn from across all chapters</p>
+          </div>
+
+          {error && (
+            <Card style={{ padding: 12, marginBottom: 20, border: '1.5px solid var(--candy-red)', background: 'rgba(255,75,75,0.06)' }}>
+              <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--candy-red)', margin: 0 }}>{error}</p>
+            </Card>
+          )}
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
+            {(Object.entries(MOCK_TEST_CONFIG) as [MockTestType, typeof MOCK_TEST_CONFIG[MockTestType]][]).map(([type, cfg]) => {
+              const selected = testType === type
+              return (
+                <CandyButton
+                  key={type}
+                  onClick={() => setTestType(type)}
+                  shadowColor={selected ? 'var(--candy-purple)' : 'var(--candy-shadow)'}
+                  style={{
+                    width: '100%', textAlign: 'left', padding: '16px 18px', borderRadius: 16,
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    background: selected ? 'rgba(139,92,246,0.10)' : 'var(--candy-card)',
+                    border: `2px solid ${selected ? 'var(--candy-purple)' : 'var(--candy-shadow)'}`,
+                  }}
+                >
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>{cfg.label}</p>
+                    <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)', fontWeight: 600, margin: '2px 0 0' }}>~{cfg.estimatedMinutes} minutes</p>
+                  </div>
+                  {selected && <Pill color="var(--candy-purple)" style={{ color: '#fff' }}>Selected</Pill>}
+                </CandyButton>
+              )
+            })}
+          </div>
+
+          <CandyButton
+            onClick={startMock}
+            shadowColor="var(--candy-purple-d, #7C3AED)"
+            style={{ width: '100%', padding: '14px 0', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+          >
+            Start Mock Test <ArrowRight size={16} />
+          </CandyButton>
+        </Card>
+      </Shell>
+    )
+  }
+
+  // ── Loading / Submitting ─────────────────────────────────────────────────
   if (phase === 'loading' || phase === 'submitting') {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-base)' }}>
-        <div className="text-center">
-          <div className="w-10 h-10 rounded-full border-2 animate-spin mx-auto mb-4"
-            style={{ borderColor: 'var(--coral)', borderTopColor: 'transparent' }} />
-          <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+      <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--candy-bg)' }}>
+        <div style={{ textAlign: 'center' }}>
+          <EagleMascot variant="hero" size={56} className="animate-pulse" />
+          <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--candy-ink-soft)', marginTop: 14 }}>
             {phase === 'loading' ? 'Preparing your mock test…' : 'Scoring your test…'}
           </p>
         </div>
@@ -190,98 +203,113 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
     )
   }
 
-  // ── Quiz ──────────────────────────────────────────────────────────────────
+  // ── Quiz (exam-focused: prominent timer + strong structure) ─────────────
   if (phase === 'quiz') {
     const q = questions[currentIdx]
     const answered = q.id in answers
     const isLast = currentIdx === questions.length - 1
+    const progressPercent = ((currentIdx + 1) / questions.length) * 100
 
     return (
-      <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
-        <nav className="sticky top-0 z-50" style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
-          <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
-            <a href={backHref} className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+      <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
+        <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--candy-card)', borderBottom: '1px solid var(--candy-shadow)' }}>
+          <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <a href={backHref} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700, color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>
               <ArrowLeft size={15} /> Exit
             </a>
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1 text-xs font-mono" style={{ color: 'var(--text-dim)' }}>
-                <Clock size={11} /> {formatTime(elapsed)}
-              </span>
-              <span className="text-xs font-bold font-mono" style={{ color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Pill color="var(--candy-purple)" style={{ color: '#fff', display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'monospace' }}>
+                <Clock size={12} /> {formatTime(elapsed)}
+              </Pill>
+              <Pill color="var(--candy-shadow)" style={{ color: 'var(--candy-ink-soft)', fontFamily: 'monospace' }}>
                 {currentIdx + 1} / {questions.length}
-              </span>
+              </Pill>
             </div>
           </div>
-          <div className="h-1" style={{ background: 'var(--bg-elevated)' }}>
-            <div className="h-full" style={{ width: `${((currentIdx + 1) / questions.length) * 100}%`, background: 'var(--blue)', transition: 'width .3s' }} />
+          <div style={{ padding: '0 20px 10px', maxWidth: 768, margin: '0 auto' }}>
+            <ProgressBar percent={progressPercent} height={8} fillColor="var(--candy-purple)" animated={false} />
           </div>
         </nav>
-        <main className="max-w-3xl mx-auto px-5 py-8">
-          <div className="rounded-2xl p-6 space-y-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
-              style={{ background: 'var(--blue-muted)', color: 'var(--blue)' }}>
+
+        <main style={{ maxWidth: 768, margin: '0 auto', padding: '28px 20px' }}>
+          <Card style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <Pill color="var(--candy-purple)" style={{ color: '#fff', alignSelf: 'flex-start' }}>
               {q.type === 'mcq' ? 'Multiple Choice' : q.type === 'true_false' ? 'True / False' : 'Short Answer'}
-            </span>
-            <p className="text-base font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>{q.question}</p>
+            </Pill>
+            <p style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.5, color: 'var(--candy-ink)', margin: 0 }}>{q.question}</p>
 
             {q.type === 'mcq' && q.options && (
-              <div className="space-y-2">
-                {q.options.map((opt, i) => (
-                  <button key={i} onClick={() => handleAnswer(q.id, i)}
-                    className="w-full text-left px-4 py-3 rounded-xl text-sm transition-all"
-                    style={{
-                      background: answers[q.id] === i ? 'var(--blue-muted)' : 'var(--bg-elevated)',
-                      border: `2px solid ${answers[q.id] === i ? 'var(--blue)' : 'var(--border-default)'}`,
-                      color: 'var(--text-primary)',
-                    }}>
-                    <span className="font-bold mr-2" style={{ color: 'var(--text-dim)' }}>{String.fromCharCode(65 + i)}.</span>
-                    {opt}
-                  </button>
-                ))}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {q.options.map((opt, i) => {
+                  const selected = answers[q.id] === i
+                  return (
+                    <CandyButton
+                      key={i}
+                      onClick={() => handleAnswer(q.id, i)}
+                      shadowColor={selected ? 'var(--candy-purple)' : 'var(--candy-shadow)'}
+                      style={{
+                        width: '100%', textAlign: 'left', padding: '14px 16px', borderRadius: 16, fontSize: 14,
+                        background: selected ? 'rgba(139,92,246,0.10)' : 'var(--candy-card)',
+                        border: `2px solid ${selected ? 'var(--candy-purple)' : 'var(--candy-shadow)'}`,
+                        color: 'var(--candy-ink)',
+                      }}
+                    >
+                      <span style={{ fontWeight: 800, marginRight: 8, color: 'var(--candy-ink-soft)' }}>{String.fromCharCode(65 + i)}.</span>
+                      {opt}
+                    </CandyButton>
+                  )
+                })}
               </div>
             )}
 
             {q.type === 'true_false' && (
-              <div className="flex gap-3">
-                {([true, false] as const).map((val) => (
-                  <button key={String(val)} onClick={() => handleAnswer(q.id, val)}
-                    className="flex-1 py-3 rounded-xl text-sm font-bold transition-all"
-                    style={{
-                      background: answers[q.id] === val ? 'var(--blue-muted)' : 'var(--bg-elevated)',
-                      border: `2px solid ${answers[q.id] === val ? 'var(--blue)' : 'var(--border-default)'}`,
-                      color: 'var(--text-primary)',
-                    }}>
-                    {val ? 'True' : 'False'}
-                  </button>
-                ))}
+              <div style={{ display: 'flex', gap: 10 }}>
+                {([true, false] as const).map((val) => {
+                  const selected = answers[q.id] === val
+                  return (
+                    <CandyButton
+                      key={String(val)}
+                      onClick={() => handleAnswer(q.id, val)}
+                      shadowColor={selected ? 'var(--candy-purple)' : 'var(--candy-shadow)'}
+                      style={{
+                        flex: 1, padding: '14px 0', borderRadius: 16, fontSize: 14, fontWeight: 800,
+                        background: selected ? 'rgba(139,92,246,0.10)' : 'var(--candy-card)',
+                        border: `2px solid ${selected ? 'var(--candy-purple)' : 'var(--candy-shadow)'}`,
+                        color: 'var(--candy-ink)',
+                      }}
+                    >
+                      {val ? 'True' : 'False'}
+                    </CandyButton>
+                  )
+                })}
               </div>
             )}
 
             {q.type === 'short_answer' && (
-              <textarea
-                rows={3}
-                value={String(answers[q.id] ?? '')}
-                onChange={(e) => handleAnswer(q.id, e.target.value)}
-                placeholder="Type your answer here…"
-                className="w-full rounded-xl px-4 py-3 text-sm resize-none"
-                style={{
-                  background: 'var(--bg-elevated)',
-                  border: '2px solid var(--border-default)',
-                  color: 'var(--text-primary)',
-                  outline: 'none',
-                }}
-              />
+              <Card style={{ padding: 0 }}>
+                <textarea
+                  rows={3}
+                  value={String(answers[q.id] ?? '')}
+                  onChange={(e) => handleAnswer(q.id, e.target.value)}
+                  placeholder="Type your answer here…"
+                  style={{ width: '100%', padding: 14, fontSize: 14, borderRadius: 16, resize: 'none', outline: 'none', background: 'transparent', color: 'var(--candy-ink)', border: 'none', fontFamily: 'inherit' }}
+                />
+              </Card>
             )}
 
-            <button
+            <CandyButton
               onClick={handleNext}
               disabled={!answered}
-              className="w-full py-3.5 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 disabled:opacity-40 transition-all"
-              style={{ background: 'var(--coral)' }}
+              shadowColor="var(--candy-purple-d, #7C3AED)"
+              style={{
+                width: '100%', padding: '14px 0', borderRadius: 14, fontSize: 15, fontWeight: 800,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                background: 'var(--candy-purple)', color: '#fff', opacity: answered ? 1 : 0.4,
+              }}
             >
               {isLast ? 'Submit Test' : 'Next'} <ArrowRight size={16} />
-            </button>
-          </div>
+            </CandyButton>
+          </Card>
         </main>
       </div>
     )
@@ -289,79 +317,82 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
 
   // ── Results ───────────────────────────────────────────────────────────────
   if (phase === 'results' && result) {
-    const scoreColor = result.score >= 85 ? 'var(--green)' : result.score >= 70 ? 'var(--blue)' : result.score >= 40 ? 'var(--yellow)' : 'var(--coral)'
+    const scoreColor = result.score >= 85 ? 'var(--candy-green)' : result.score >= 70 ? 'var(--candy-blue)' : result.score >= 40 ? 'var(--candy-yellow)' : 'var(--candy-red)'
     const reviewToShow: QuestionReview[] = result.review ?? []
 
     return (
-      <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
-        <nav className="sticky top-0 z-50" style={{ background: 'var(--bg-overlay)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-default)' }}>
-          <div className="max-w-3xl mx-auto px-5 h-[60px] flex items-center justify-between">
-            <a href={backHref} className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
-              <ArrowLeft size={15} /> Back
-            </a>
-            <span className="text-xs font-bold" style={{ color: 'var(--text-dim)' }}>Mock Results</span>
-          </div>
-        </nav>
-        <main className="max-w-3xl mx-auto px-5 py-8 space-y-5">
+      <Shell navLabel={<Pill color="var(--candy-shadow)" style={{ color: 'var(--candy-ink-soft)' }}>Mock Results</Pill>}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {/* Score card */}
-          <div className="rounded-2xl p-7 text-center" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-            <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-dim)' }}>{label}</p>
-            <div className="text-6xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: scoreColor }}>{result.score}%</div>
-            <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+          <Card style={{ padding: 28, textAlign: 'center' }}>
+            <Pill color="var(--candy-shadow)" style={{ color: 'var(--candy-ink-soft)', marginBottom: 12 }}>{label}</Pill>
+            <ProgressRing
+              percent={result.score}
+              size={104} radius={44} strokeWidth={9}
+              gradientFrom={scoreColor}
+              gradientTo={scoreColor}
+              trackColor="var(--candy-shadow)"
+              className="mx-auto"
+              label={
+                <span style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-baloo2)', color: scoreColor }}>
+                  {result.score}%
+                </span>
+              }
+            />
+            <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--candy-ink-soft)', margin: '14px 0 12px' }}>
               {result.correctCount} / {result.totalQuestions} correct · {formatTime(result.timeTakenSeconds)}
             </p>
             {result.updatedReadinessPercent !== undefined && (
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold"
-                style={{ background: 'var(--blue-muted)', color: 'var(--blue)', border: '1px solid var(--blue)' }}>
+              <Pill color="var(--candy-blue)" style={{ color: '#fff' }}>
                 Exam Readiness updated: {result.updatedReadinessPercent}%
-              </div>
+              </Pill>
             )}
-          </div>
+          </Card>
 
           {/* Strong / Weak */}
-          <div className="grid grid-cols-2 gap-3">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {result.strongTopicTitles.length > 0 && (
-              <div className="rounded-2xl p-4" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--green)' }}>✓ Strong</p>
-                <ul className="space-y-1">
+              <Card style={{ padding: 16 }}>
+                <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.4, color: 'var(--candy-green)', margin: '0 0 8px' }}>✓ Strong</p>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: 4, margin: 0, padding: 0, listStyle: 'none' }}>
                   {result.strongTopicTitles.slice(0, 4).map((t) => (
-                    <li key={t} className="text-xs" style={{ color: 'var(--text-secondary)' }}>{t}</li>
+                    <li key={t} style={{ fontSize: 12, color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{t}</li>
                   ))}
                 </ul>
-              </div>
+              </Card>
             )}
             {result.weakTopicTitles.length > 0 && (
-              <div className="rounded-2xl p-4" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--coral)' }}>⚠ Needs Work</p>
-                <ul className="space-y-1">
+              <Card style={{ padding: 16 }}>
+                <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.4, color: 'var(--candy-red)', margin: '0 0 8px' }}>⚠ Needs Work</p>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: 4, margin: 0, padding: 0, listStyle: 'none' }}>
                   {result.weakTopicTitles.slice(0, 4).map((t) => (
-                    <li key={t} className="text-xs" style={{ color: 'var(--text-secondary)' }}>{t}</li>
+                    <li key={t} style={{ fontSize: 12, color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{t}</li>
                   ))}
                 </ul>
-              </div>
+              </Card>
             )}
           </div>
 
           {/* Chapter breakdown */}
           {result.chapterBreakdown.length > 1 && (
-            <div className="rounded-2xl p-5" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)' }}>
-              <p className="text-[10px] font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-dim)' }}>Chapter Breakdown</p>
-              <div className="space-y-2">
+            <Card style={{ padding: 20 }}>
+              <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.4, color: 'var(--candy-ink-soft)', margin: '0 0 12px' }}>Chapter Breakdown</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {result.chapterBreakdown.map((b) => {
                   const pct = b.total > 0 ? Math.round((b.correct / b.total) * 100) : 0
-                  const c = pct >= 70 ? 'var(--green)' : pct >= 40 ? 'var(--yellow)' : 'var(--coral)'
+                  const c = pct >= 70 ? 'var(--candy-green)' : pct >= 40 ? 'var(--candy-yellow)' : 'var(--candy-red)'
                   return (
-                    <div key={b.chapterId} className="flex items-center gap-3">
-                      <span className="text-xs flex-1 truncate" style={{ color: 'var(--text-secondary)' }}>{b.chapterTitle}</span>
-                      <div className="w-20 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: c }} />
+                    <div key={b.chapterId} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <span style={{ fontSize: 12, color: 'var(--candy-ink-soft)', fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{b.chapterTitle}</span>
+                      <div style={{ width: 80, flexShrink: 0 }}>
+                        <ProgressBar percent={pct} height={6} fillColor={c} animated={false} />
                       </div>
-                      <span className="text-[11px] font-mono font-bold w-8 text-right shrink-0" style={{ color: c }}>{pct}%</span>
+                      <span style={{ fontSize: 11, fontFamily: 'monospace', fontWeight: 800, width: 32, textAlign: 'right', flexShrink: 0, color: c }}>{pct}%</span>
                     </div>
                   )
                 })}
               </div>
-            </div>
+            </Card>
           )}
 
           {/* Sprint CQ: Navigator next step */}
@@ -370,45 +401,49 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
           )}
 
           {/* Review toggle */}
-          <button
+          <CandyButton
             onClick={() => setShowReview((v) => !v)}
-            className="w-full py-3 rounded-xl text-sm font-bold"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
+            shadowColor="var(--candy-shadow)"
+            style={{ width: '100%', padding: '14px 0', borderRadius: 14, fontSize: 14, fontWeight: 800, background: 'var(--candy-card)', border: '1px solid var(--candy-shadow)', color: 'var(--candy-ink)' }}
           >
             {showReview ? 'Hide Review' : 'Review Answers'}
-          </button>
+          </CandyButton>
 
-          {showReview && reviewToShow.map((r, i) => (
-            <div key={r.questionId} className="rounded-2xl p-5 space-y-2"
-              style={{ background: 'var(--bg-surface)', border: `1px solid ${r.isCorrect ? 'var(--green)' : 'var(--coral)'}` }}>
-              <div className="flex items-start gap-2">
-                {r.isCorrect ? <CheckCircle size={16} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} /> : <XCircle size={16} style={{ color: 'var(--coral)', flexShrink: 0, marginTop: 2 }} />}
-                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Q{i + 1}. {r.question}</p>
-              </div>
-              {r.explanation && <p className="text-xs pl-6" style={{ color: 'var(--text-secondary)' }}>{r.explanation}</p>}
-              {r.sampleAnswer && <p className="text-xs pl-6 italic" style={{ color: 'var(--text-dim)' }}>Sample: {r.sampleAnswer}</p>}
+          {showReview && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {reviewToShow.map((r, i) => (
+                <Card key={r.questionId} style={{ padding: 16, border: `1.5px solid ${r.isCorrect ? 'var(--candy-green)' : 'var(--candy-red)'}` }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 8 }}>
+                    {r.isCorrect ? <CheckCircle size={16} style={{ flexShrink: 0, color: 'var(--candy-green)' }} /> : <XCircle size={16} style={{ flexShrink: 0, color: 'var(--candy-red)' }} />}
+                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--candy-ink)', margin: 0 }}>Q{i + 1}. {r.question}</p>
+                  </div>
+                  {r.explanation && <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)', margin: '0 0 0 24px' }}>{r.explanation}</p>}
+                  {r.sampleAnswer && <p style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--candy-ink-soft)', margin: '4px 0 0 24px' }}>Sample: {r.sampleAnswer}</p>}
+                </Card>
+              ))}
             </div>
-          ))}
+          )}
 
           {/* CTAs */}
-          <div className="flex gap-3">
-            <button
+          <div style={{ display: 'flex', gap: 12 }}>
+            <CandyButton
               onClick={() => { setPhase('select'); setResult(null); setShowReview(false) }}
-              className="flex-1 py-3 rounded-xl text-sm font-bold"
-              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
+              shadowColor="var(--candy-shadow)"
+              style={{ flex: 1, padding: '14px 0', borderRadius: 14, fontSize: 14, fontWeight: 800, background: 'var(--candy-card)', border: '1px solid var(--candy-shadow)', color: 'var(--candy-ink)' }}
             >
               Retake Mock Test
-            </button>
-            <a
-              href={backHref}
-              className="flex-1 py-3 rounded-xl text-sm font-bold text-center text-white"
-              style={{ background: 'var(--coral)', textDecoration: 'none' }}
-            >
-              Back to Subject
+            </CandyButton>
+            <a href={backHref} style={{ flex: 1, textDecoration: 'none' }}>
+              <CandyButton
+                shadowColor="var(--candy-purple-d, #7C3AED)"
+                style={{ width: '100%', padding: '14px 0', borderRadius: 14, fontSize: 14, fontWeight: 800, background: 'var(--candy-purple)', color: '#fff' }}
+              >
+                Back to Subject
+              </CandyButton>
             </a>
           </div>
-        </main>
-      </div>
+        </div>
+      </Shell>
     )
   }
 
