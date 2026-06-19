@@ -4,8 +4,10 @@ import { withRetry } from '@/lib/db/withRetry'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
-import { getSubjectRoadmap, type RoadmapChapter } from '@/lib/school/roadmap/learningRoadmap'
+import { getSubjectRoadmap, getOverallRoadmap, type RoadmapChapter } from '@/lib/school/roadmap/learningRoadmap'
 import { getGradeSubjects, chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadiness'
+import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 import { getLeagueForXP, currentWeekString } from '@/lib/xp'
 import type {
@@ -19,6 +21,7 @@ import type {
   AchievementData,
   ActivityItem,
   DailyQuestData,
+  SchoolExtrasData,
 } from '@/components/dashboard/v2/types'
 
 const DEFAULT_DAILY_GOAL_LESSONS = 3
@@ -143,7 +146,7 @@ function buildLibrarySkillPath(
   return nodes
 }
 
-export async function getDashboardV2Data(userId: string): Promise<DashboardV2Data> {
+export async function getDashboardV2Data(userId: string, modeOverride?: 'library' | 'school'): Promise<DashboardV2Data> {
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 
@@ -205,7 +208,13 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   const profile = user.profile
   const displayName = profile.displayName ?? user.name ?? 'Student'
   const xp = user.xpPoints ?? 0
-  const isSchool = profile.userType === 'SCHOOL_STUDENT' && !!profile.educationBoard && !!profile.grade
+  // Cross-system navigation: a learner with board/grade set can view either
+  // experience without changing their stored profile or progress data —
+  // modeOverride lets the caller (the ?mode= query param on /dashboard)
+  // request the non-default view while keeping the same DashboardV2 shell.
+  const hasSchoolAccess = !!profile.educationBoard && !!profile.grade
+  const defaultIsSchool = profile.userType === 'SCHOOL_STUDENT' && hasSchoolAccess
+  const isSchool = modeOverride === 'library' ? false : modeOverride === 'school' ? hasSchoolAccess : defaultIsSchool
   const userRole = (user.role as 'ADMIN' | 'USER') ?? 'USER'
 
   let continueLesson: ContinueLessonData
@@ -213,6 +222,7 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   let skillPath: SkillNodeData[]
   let dailyGoalTarget: number
   let subjectCards: SubjectCardData[] = []
+  let school: SchoolExtrasData | null = null
 
   if (isSchool) {
     const board = profile.educationBoard!
@@ -225,9 +235,12 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
       skillPath = []
       dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
     } else {
-      const [progressMap, dailyPlan] = await Promise.all([
+      const [progressMap, dailyPlan, navigatorAction, examReadinessSummary, overallRoadmap] = await Promise.all([
         withRetry(() => getSchoolProgressForSubjects(userId, board, grade, schoolSlugs)),
         getDailyStudyPlan(userId, board, grade).catch(() => []),
+        getLearningNavigatorAction(userId, board, grade).catch(() => null),
+        getExamReadinessForAllSubjects(userId, board, grade).catch(() => null),
+        getOverallRoadmap(userId, board, grade).catch(() => null),
       ])
       dailyGoalTarget = dailyPlan.length > 0 ? dailyPlan.length : DEFAULT_DAILY_GOAL_LESSONS
 
@@ -260,6 +273,43 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
 
       const roadmap = await getSubjectRoadmap(userId, board, grade, activeSlug).catch(() => null)
       skillPath = roadmap ? buildSchoolSkillPath(roadmap.allChapters, meta?.icon ?? '📘') : []
+
+      // School subjects as dashboard content cards — same SubjectsGrid V2 component
+      // the Library Mode shell already uses; only the data source differs.
+      subjectCards = schoolSlugs.map((slug) => {
+        const subjMeta = SCHOOL_SUBJECT_META[slug]
+        const row = progressMap.get(slug)
+        const colors = SUBJECT_COLOR_MAP[slug] ?? DEFAULT_SUBJECT_COLORS
+        return {
+          slug,
+          name: subjMeta?.label ?? slug,
+          icon: subjMeta?.icon ?? '📘',
+          color: colors.color,
+          bgColor: colors.bgColor,
+          currentLesson: row?.position.current?.order ?? row?.totalCount ?? 1,
+          lastLessonTitle: row?.lastChapterTitle ?? null,
+          completionPercent: row?.percent ?? 0,
+          href: `/school/${slug}`,
+        }
+      })
+
+      school = {
+        navigatorAction,
+        dailyPlan,
+        academicJourney: overallRoadmap?.subjects.map((r) => ({
+          subjectSlug: r.subjectSlug,
+          subjectLabel: r.subjectLabel,
+          completedCount: r.completedCount,
+          totalCount: r.totalCount,
+          completionPercent: r.completionPercent,
+        })) ?? null,
+        examReadiness: examReadinessSummary?.subjects.map((s) => ({
+          subjectSlug: s.subjectSlug,
+          subjectLabel: s.subjectLabel,
+          readinessPercent: s.readinessPercent,
+          level: s.level,
+        })) ?? null,
+      }
     }
   } else {
     const enrolledSubjects = profile.subjects ?? []
@@ -448,5 +498,6 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     subjects: subjectCards,
     achievement,
     recentActivity,
+    school,
   }
 }

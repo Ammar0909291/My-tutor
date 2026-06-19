@@ -6,7 +6,7 @@ import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Sen
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { speakText, stopSpeaking, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, type VoiceType, type TeachingLang } from '@/lib/tts'
 import { useDraftMessage, clearDraft } from '@/lib/hooks/useDraftMessage'
 import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
@@ -259,6 +259,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Voice
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
+  const [speed, setSpeed] = useState(voiceSpeed)
+  const [speedMenuOpen, setSpeedMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
 
@@ -426,10 +428,22 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     speakingIdRef.current = id; setSpeakingId(id)
     speakText(text, teachingLanguage, voiceType, () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    }, country, voiceSpeed)
-  }, [teachingLanguage, voiceType, country, voiceSpeed])
+    }, country, speed)
+  }, [teachingLanguage, voiceType, country, speed])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     setVoiceType(v)
+    fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ voiceId: v }) }).catch(() => {})
+    if (speakingIdRef.current) {
+      const id = speakingIdRef.current
+      const msg = messages.find((m) => m.id === id)
+      stopSpeaking()
+      if (msg) setTimeout(() => handleSpeak(id, msg.content), 50)
+    }
+  }, [messages, handleSpeak])
+  const handleSpeedChange = useCallback((s: number) => {
+    setSpeed(s)
+    setSpeedMenuOpen(false)
+    fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ voiceSpeed: s }) }).catch(() => {})
     if (speakingIdRef.current) {
       const id = speakingIdRef.current
       const msg = messages.find((m) => m.id === id)
@@ -1217,6 +1231,42 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               </button>
             )
           })}
+          <div style={{ position: 'relative' }}>
+            <button onClick={() => setSpeedMenuOpen((o) => !o)}
+              title={t('settings_voice_speed')}
+              style={{
+                height: 28, padding: '0 8px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                background: speedMenuOpen ? 'rgba(247,129,102,0.15)' : 'transparent',
+                color: speedMenuOpen ? 'var(--coral)' : 'var(--text-dim)',
+                border: `1px solid ${speedMenuOpen ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
+                transition: 'all 150ms',
+              }}>
+              {speed}x
+            </button>
+            {speedMenuOpen && (
+              <>
+                <div onClick={() => setSpeedMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
+                <div style={{
+                  position: 'absolute', top: 'calc(100% + 6px)', right: 0, width: 'max-content', zIndex: 50,
+                  background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
+                }}>
+                  {VOICE_SPEED_OPTIONS.map((s) => (
+                    <button key={s} onClick={() => handleSpeedChange(s)}
+                      style={{
+                        padding: '8px 16px', fontSize: 12.5, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
+                        background: speed === s ? 'rgba(247,129,102,0.12)' : 'transparent',
+                        color: speed === s ? 'var(--coral)' : 'var(--text-primary)',
+                      }}
+                      onMouseEnter={(e) => { if (speed !== s) (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-hover)' }}
+                      onMouseLeave={(e) => { if (speed !== s) (e.currentTarget as HTMLButtonElement).style.background = 'transparent' }}>
+                      {s}x
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
           <ThemeToggle />
         </div>
       </header>

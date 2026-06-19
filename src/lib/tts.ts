@@ -9,6 +9,9 @@ export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> 
   warm:   { pitch: 1.0,  rate: 0.87 },
 }
 
+// Shared by the settings API and the Tutor Max voice-speed picker — single source of truth.
+export const VOICE_SPEED_OPTIONS = [0.6, 0.75, 0.9, 1.0, 1.1, 1.25, 1.5] as const
+
 const LANG_LOCALE: Record<TeachingLang, string> = {
   ru: 'ru-RU',
   en: 'en-US',

@@ -8,7 +8,6 @@ import type { TeachingLang } from '@/lib/tts'
 import { Card, CandyButton, SectionTitle, EagleMascot } from '@/components/ui/candy'
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
-type VoiceOption = { key: string; label: string }
 type LangOption = { key: TeachingLang; icon: string; label: string }
 type CountryOption = { key: Country; flag: string; name: string; desc: string; color: string }
 
@@ -17,14 +16,6 @@ const COUNTRY_OPTIONS: CountryOption[] = [
   { key: 'in',     flag: '🇮🇳', name: 'India',  desc: 'Groq · Hinglish',      color: '#3FB950' },
   { key: 'global', flag: '🌍', name: 'Global', desc: 'Groq · English',        color: '#79C0FF' },
 ]
-
-const VOICE_OPTIONS: VoiceOption[] = [
-  { key: 'male',   label: 'Male' },
-  { key: 'female', label: 'Female' },
-  { key: 'warm',   label: 'Warm' },
-]
-
-const VOICE_SPEED_OPTIONS = [0.75, 0.9, 1.0, 1.1, 1.25, 1.5]
 
 const LANG_OPTIONS: LangOption[] = [
   { key: 'ru', icon: '🇷🇺', label: 'Russian' },
@@ -73,8 +64,6 @@ export default function SettingsPage() {
   const { t, lang, setLang } = useLanguage()
   const { country, setCountry } = useCountry()
   const [data, setData] = useState<SettingsData | null>(null)
-  const [voiceId, setVoiceId] = useState('male')
-  const [voiceSpeed, setVoiceSpeed] = useState(1.0)
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [loadError, setLoadError] = useState(false)
@@ -110,7 +99,6 @@ export default function SettingsPage() {
   const [schoolSave, setSchoolSave] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [profileName, setProfileName] = useState('')
   const [profileLevel, setProfileLevel] = useState('')
-  const [profileVoice, setProfileVoice] = useState('male')
   const [profileSave, setProfileSave] = useState<'idle' | 'saving' | 'saved'>('idle')
 
   useEffect(() => {
@@ -122,9 +110,7 @@ export default function SettingsPage() {
       .then((d: { success?: boolean; data?: SettingsData }) => {
         if (d.success && d.data) {
           setData(d.data)
-          setVoiceId(d.data.voiceId)
           setTeachingLang(d.data.teachingLanguage)
-          setVoiceSpeed(d.data.voiceSpeed)
           setLoadError(false)
         } else {
           setLoadError(true)
@@ -155,7 +141,6 @@ export default function SettingsPage() {
           setProfile(p)
           setProfileName(p.name)
           setProfileLevel(p.selfDescription)
-          setProfileVoice(p.voiceId)
           setSchoolBoard(p.educationBoard ?? '')
           setSchoolGrade(p.grade)
         }
@@ -169,7 +154,7 @@ export default function SettingsPage() {
       const res = await fetch('/api/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ voiceId, teachingLanguage, voiceSpeed }),
+        body: JSON.stringify({ teachingLanguage }),
       })
       const d = await res.json() as { success?: boolean }
       if (res.ok && d.success) {
@@ -178,9 +163,7 @@ export default function SettingsPage() {
         const fresh = await fetch('/api/settings').then((r) => r.json()) as { success?: boolean; data?: SettingsData }
         if (fresh.success && fresh.data) {
           setData(fresh.data)
-          setVoiceId(fresh.data.voiceId)
           setTeachingLang(fresh.data.teachingLanguage)
-          setVoiceSpeed(fresh.data.voiceSpeed)
         }
         setTimeout(() => setSaveState('idle'), 2000)
       } else {
@@ -199,7 +182,7 @@ export default function SettingsPage() {
       const res = await fetch('/api/user/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: profileName, levelDescription: profileLevel, voicePreference: profileVoice }),
+        body: JSON.stringify({ name: profileName, levelDescription: profileLevel }),
       })
       const d = await res.json() as { success?: boolean }
       if (d.success) {
@@ -222,7 +205,6 @@ export default function SettingsPage() {
           setProfile(p)
           setProfileName(p.name)
           setProfileLevel(p.selfDescription)
-          setProfileVoice(p.voiceId)
         }
         setTimeout(() => setProfileSave('idle'), 2000)
       } else {
@@ -322,20 +304,6 @@ export default function SettingsPage() {
               />
             </div>
 
-            {/* Voice preference */}
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
-                {t('profile_voice')}
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {VOICE_OPTIONS.map((v) => (
-                  <ChoiceButton key={v.key} active={profileVoice === v.key} onClick={() => setProfileVoice(v.key)}>
-                    {v.label}
-                  </ChoiceButton>
-                ))}
-              </div>
-            </div>
-
             {/* Level/About */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--candy-ink-soft)' }}>
@@ -408,28 +376,6 @@ export default function SettingsPage() {
             </div>
           </Section>
         )}
-
-        {/* Voice */}
-        <Section label={t('settings_voice')}>
-          <div className="grid grid-cols-3 gap-3">
-            {VOICE_OPTIONS.map((v) => (
-              <ChoiceButton key={v.key} active={voiceId === v.key} onClick={() => setVoiceId(v.key)}>
-                {v.label}
-              </ChoiceButton>
-            ))}
-          </div>
-        </Section>
-
-        {/* Voice speed */}
-        <Section label={t('settings_voice_speed')}>
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
-            {VOICE_SPEED_OPTIONS.map((s) => (
-              <ChoiceButton key={s} active={voiceSpeed === s} onClick={() => setVoiceSpeed(s)}>
-                {s}x
-              </ChoiceButton>
-            ))}
-          </div>
-        </Section>
 
         {/* Teaching language — changes immediately */}
         <Section label={t('settings_lang')}>
@@ -561,8 +507,8 @@ export default function SettingsPage() {
           </p>
         )}
 
-        {/* Save (voice + language) */}
-        <CandyButton
+        {/* Save (language) */}
+        <button
           onClick={handleSave}
           disabled={saveState === 'saving'}
           style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 15, opacity: saveState === 'saving' ? 0.6 : 1 }}>
@@ -570,7 +516,7 @@ export default function SettingsPage() {
             : saveState === 'saving' ? '...'
             : saveState === 'error' ? t('settings_save_retry')
             : t('settings_save')}
-        </CandyButton>
+        </button>
       </main>
     </div>
   )

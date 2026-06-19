@@ -16,6 +16,7 @@ import { AchievementCenter } from './AchievementCenter'
 import { ActivityTimeline } from './ActivityTimeline'
 import { ExploreLinks } from './ExploreLinks'
 import { LearningCoachCard } from './LearningCoachCard'
+import { SchoolExtras } from './SchoolExtras'
 import { SectionTitle, useConfetti } from '@/components/ui/candy'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import type { DashboardV2Data } from './types'
@@ -58,6 +59,10 @@ export function DashboardV2({ data }: DashboardV2Props) {
 
           {/* ── RESTORED EDUCATIONAL CAPABILITIES ── */}
           <SubjectsGrid subjects={data.subjects} />
+
+          {/* School Mode content cards — same V2 shell, school-specific data only */}
+          {data.school && <SchoolExtras data={data.school} />}
+
           <AchievementCenter data={data.achievement} />
           <ActivityTimeline items={data.recentActivity} />
 
