@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
-import { getKnowledgeGraph, getAvailableNodes } from '@/lib/curriculum/knowledgeGraph'
+import { getKnowledgeGraph, getAvailableNodes, getAllNodes } from '@/lib/curriculum/knowledgeGraph'
 import { TopicStatus } from '@prisma/client'
 
 /**
@@ -36,6 +36,9 @@ export async function GET(req: Request) {
 
     // Available = prerequisites satisfied by completed/mastered/revision topics
     let availableNodes: string[] | undefined
+    // lockReasons: for each still-locked node, the prerequisite nodes it's missing
+    // (consumed by the curriculum tree UI to explain why a topic is locked).
+    let lockReasons: Record<string, { missingPrereqs: { slug: string; title: string }[] }> | undefined
     const graph = getKnowledgeGraph(subjectSlug)
     if (graph) {
       const completed = new Set(
@@ -43,10 +46,23 @@ export async function GET(req: Request) {
           .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION')
           .map((r) => r.topicSlug),
       )
-      availableNodes = getAvailableNodes(graph, completed).map((n) => n.slug)
+      const available = getAvailableNodes(graph, completed)
+      availableNodes = available.map((n) => n.slug)
+
+      const availableSlugs = new Set(availableNodes)
+      const allNodes = getAllNodes(graph)
+      const bySlug = new Map(allNodes.map((n) => [n.slug, n]))
+      lockReasons = {}
+      for (const node of allNodes) {
+        if (completed.has(node.slug) || availableSlugs.has(node.slug)) continue
+        const missingPrereqs = node.prerequisites
+          .filter((p) => !completed.has(p))
+          .map((p) => ({ slug: p, title: bySlug.get(p)?.title ?? p }))
+        if (missingPrereqs.length > 0) lockReasons[node.slug] = { missingPrereqs }
+      }
     }
 
-    return NextResponse.json({ success: true, topicProgress: rows, availableNodes })
+    return NextResponse.json({ success: true, topicProgress: rows, availableNodes, lockReasons })
   } catch (err) {
     console.error('[topic-progress GET]', err)
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })

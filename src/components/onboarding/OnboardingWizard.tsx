@@ -452,13 +452,16 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                         <div className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t(v.labelKey)}</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button
+                        <span
+                          role="button"
+                          tabIndex={0}
                           onClick={(e) => { e.stopPropagation(); handleVoicePreview(v) }}
-                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors"
+                          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); handleVoicePreview(v) } }}
+                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer"
                           style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}
                           title={t('ob_s3_preview')}>
                           <Play size={10} fill="currentColor" strokeWidth={0} /> ▶
-                        </button>
+                        </span>
                         <div className="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all"
                           style={{ borderColor: selected ? 'var(--accent-primary)' : 'var(--text-dim)', background: selected ? 'var(--accent-primary)' : 'transparent' }}>
                           {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}

@@ -1021,10 +1021,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     })
   }, [subjectSlug, subjectName, currentLessonData])
 
-  // Fetch lock reasons from the summary API so the curriculum tree can show WHY
-  // each topic is locked (its unmet prerequisites). Loads once per subject.
+  // Fetch lock reasons so the curriculum tree can show WHY each topic is
+  // locked (its unmet prerequisites). Loads once per subject.
   useEffect(() => {
-    fetch(`/api/topic-progress/summary?subject=${subjectSlug}`)
+    fetch(`/api/topic-progress?subject=${subjectSlug}`)
       .then((r) => r.json())
       .then((d) => { if (d.lockReasons) setLockReasons(d.lockReasons) })
       .catch(() => {})

@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { isSchoolSubject } from '@/lib/school/schoolRouting'
 import { generateMockTest, MOCK_TEST_CONFIG, type MockTestType } from '@/lib/school/exams/mockTestEngine'
+import { captureError } from '@/lib/monitoring'
 
 const schema = z.object({
   subjectSlug: z.string().max(64),
@@ -39,38 +40,44 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid subject' }, { status: 400 })
   }
 
-  const { questions, chapterIds } = await generateMockTest(
-    session.user.id,
-    board,
-    subjectSlug,
-    grade,
-    testType as MockTestType,
-  )
-
-  if (questions.length === 0) {
-    return NextResponse.json({ error: 'Could not generate questions for this subject' }, { status: 422 })
-  }
-
-  const config = MOCK_TEST_CONFIG[testType as MockTestType]
-
-  const ps = await prisma.practiceSession.create({
-    data: {
-      userId: session.user.id,
+  try {
+    const { questions, chapterIds } = await generateMockTest(
+      session.user.id,
+      board,
       subjectSlug,
-      topicSlug: subjectSlug,   // subject-level mock — no single chapter
-      chapterId: null,
-      kind: 'mock',
-      questions: questions as unknown as import('@prisma/client').Prisma.JsonArray,
-    },
-  })
+      grade,
+      testType as MockTestType,
+    )
 
-  return NextResponse.json({
-    sessionId: ps.id,
-    testType,
-    label: config.label,
-    estimatedMinutes: config.estimatedMinutes,
-    totalQuestions: questions.length,
-    chapterIds,
-    questions: questions.map(toClientQuestion),
-  })
+    if (questions.length === 0) {
+      return NextResponse.json({ error: 'Could not generate questions for this subject' }, { status: 422 })
+    }
+
+    const config = MOCK_TEST_CONFIG[testType as MockTestType]
+
+    const ps = await prisma.practiceSession.create({
+      data: {
+        userId: session.user.id,
+        subjectSlug,
+        topicSlug: subjectSlug,   // subject-level mock — no single chapter
+        chapterId: null,
+        kind: 'mock',
+        questions: questions as unknown as import('@prisma/client').Prisma.JsonArray,
+      },
+    })
+
+    return NextResponse.json({
+      sessionId: ps.id,
+      testType,
+      label: config.label,
+      estimatedMinutes: config.estimatedMinutes,
+      totalQuestions: questions.length,
+      chapterIds,
+      questions: questions.map(toClientQuestion),
+    })
+  } catch (error: any) {
+    console.error('[mock/generate]', error)
+    captureError(error, { route: 'api/school/mock/generate', tags: { subjectSlug } })
+    return NextResponse.json({ error: 'Could not generate the mock test. Please try again.' }, { status: 500 })
+  }
 }
