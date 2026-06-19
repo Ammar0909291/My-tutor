@@ -15,6 +15,10 @@ import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
+// Visual Learning Sprint B: data-driven visuals (graph / number_line). Additive
+// to the existing Sprint BW static VisualCard path — see render block below.
+import { VisualRenderer } from '@/components/visuals/VisualRenderer'
+import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
@@ -160,7 +164,7 @@ function TypingDots() {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; visualSpec?: VisualSpec }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -2084,6 +2088,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {!isUser && !msg.streaming && msg.visual && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
                         <VisualCard type={msg.visual as VisualType} />
+                      </div>
+                    )}
+
+                    {/* Sprint B: data-driven visual (graph / number_line). Only renders
+                        when a tutor message carries a VisualSpec; absent on every
+                        existing lesson, so those render exactly as before (zero regression). */}
+                    {!isUser && !msg.streaming && msg.visualSpec && (
+                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                        <VisualRenderer spec={msg.visualSpec} />
                       </div>
                     )}
 

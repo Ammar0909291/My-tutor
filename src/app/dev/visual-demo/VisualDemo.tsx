@@ -1,0 +1,81 @@
+'use client'
+/**
+ * VisualDemo — internal showcase for Visual Learning Sprint B (dev only).
+ * Renders the supported VisualSpecs through the real VisualRenderer, plus a
+ * theme toggle and a fail-safe (invalid spec) check. Not user-facing.
+ */
+import { useState } from 'react'
+import { VisualRenderer } from '@/components/visuals/VisualRenderer'
+import type { VisualSpec } from '@/lib/visuals/visualSpec'
+
+const SPECS: { label: string; spec: VisualSpec }[] = [
+  { label: 'Linear — y = x + 2',          spec: { type: 'graph', equation: 'y = x + 2', title: 'Linear' } },
+  { label: 'Linear — y = -2x + 1',        spec: { type: 'graph', equation: 'y = -2x + 1', title: 'Linear (negative slope)' } },
+  { label: 'Quadratic — y = x²',          spec: { type: 'graph', equation: 'y = x^2', title: 'Quadratic' } },
+  { label: 'Quadratic — y = x² - 2x - 3', spec: { type: 'graph', equation: 'y = x^2 - 2x - 3', title: 'Quadratic (roots at -1, 3)' } },
+  { label: 'Number line — -5 → 5',        spec: { type: 'number_line', start: -5, end: 5, highlight: [3], title: 'Highlight 3' } },
+  { label: 'Number line — fractions',     spec: { type: 'number_line', start: -2, end: 2, step: 0.5, highlight: [-1.5, 0.5], title: 'Basic fractions' } },
+  { label: 'Number line — large range',   spec: { type: 'number_line', start: -100, end: 100, highlight: [-50, 75], title: 'Auto-stepped' } },
+]
+
+export function VisualDemo() {
+  // Initial theme can be set via ?theme=dark (dev convenience for screenshots);
+  // the in-page toggle still works for manual checking.
+  const [dark, setDark] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('theme') === 'dark'
+  })
+  // local CSS-variable shim so the renderers (which read these vars) look
+  // correct on this standalone page regardless of global theme.
+  const pageStyle = {
+    minHeight: '100vh',
+    background: dark ? '#0d1117' : '#f6f8fa',
+    color: dark ? '#e6edf3' : '#1f2328',
+    '--bg-surface': dark ? '#161b22' : '#ffffff',
+    '--border-subtle': dark ? '#30363d' : '#e5e7eb',
+    '--text-secondary': dark ? '#9da7b3' : '#4b5563',
+    '--text-dim': dark ? '#6e7681' : '#9ca3af',
+    '--coral': '#F78166',
+    '--coral-muted': 'rgba(247,129,102,0.16)',
+    '--font-mono': 'ui-monospace, monospace',
+    padding: 24,
+  } as React.CSSProperties
+  return (
+    <div data-theme={dark ? 'dark' : 'light'} style={pageStyle}>
+      <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+          <h1 style={{ fontSize: 22, fontWeight: 800, margin: 0 }}>Visual Learning — Sprint B Showcase</h1>
+          <button
+            type="button"
+            onClick={() => setDark((d) => !d)}
+            style={{ padding: '6px 12px', borderRadius: 8, border: '1px solid var(--border-subtle)', background: 'var(--bg-surface)', color: 'inherit', cursor: 'pointer', fontSize: 13 }}
+          >
+            {dark ? '☀ Light' : '🌙 Dark'} mode
+          </button>
+        </div>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Dev-only. GraphRenderer (zoom/pan) + NumberLineRenderer via the real VisualRenderer.
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16 }}>
+          {SPECS.map(({ label, spec }) => (
+            <section key={label}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualRenderer spec={spec} />
+            </section>
+          ))}
+
+          {/* Fail-safe check: an invalid spec must render nothing, not crash. */}
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Fail-safe — invalid spec renders nothing</h2>
+            <div style={{ border: '1px dashed var(--border-subtle)', borderRadius: 12, padding: 12, fontSize: 12, opacity: 0.6 }}>
+              <VisualRenderer raw={{ type: 'graph', equation: 'y = sin(@@@)' }} />
+              <VisualRenderer raw={{ type: 'unknown_type', foo: 1 }} />
+              (nothing rendered above ✓)
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  )
+}
