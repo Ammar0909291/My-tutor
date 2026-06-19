@@ -41,3 +41,8 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 .claude/
+
+# Throwaway test/scratch scripts (beta QA sprints) — never committed
+*.tmp.js
+*.tmp.mjs
+beta_results_*.json
