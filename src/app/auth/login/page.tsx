@@ -30,6 +30,22 @@ const NEXTAUTH_ERROR_I18N_KEYS: Record<string, 'error_oauth_linked' | 'error_oau
   Default: 'error_generic',
 }
 
+// CRITICAL-1 (Sprint D): callbackUrl comes from the query string, so it must
+// be a same-origin relative path — never a full URL or protocol-relative
+// (//evil.example) string an attacker could plant in a phishing link.
+function safeCallbackUrl(raw: string | null): string {
+  if (!raw) return '/dashboard'
+  if (!raw.startsWith('/') || raw.startsWith('//')) return '/dashboard'
+  try {
+    // New URL() with a base resolves relative paths and rejects anything
+    // that isn't actually same-origin once resolved (e.g. "/\evil.com").
+    const resolved = new URL(raw, window.location.origin)
+    return resolved.origin === window.location.origin ? `${resolved.pathname}${resolved.search}${resolved.hash}` : '/dashboard'
+  } catch {
+    return '/dashboard'
+  }
+}
+
 export default function LoginPage() {
   return (
     <Suspense fallback={<div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }} />}>
@@ -76,8 +92,7 @@ function LoginForm() {
         return
       }
 
-      const callbackUrl = params.get('callbackUrl') ?? '/dashboard'
-      window.location.href = callbackUrl
+      window.location.href = safeCallbackUrl(params.get('callbackUrl'))
     } catch {
       setLoading(false)
       setError(t('error_generic'))

@@ -22,7 +22,17 @@ export default async function CoachPage() {
     },
   }))
 
-  if (!user?.onboardingCompleted) redirect('/onboarding')
+  // Auto-heal: a Profile can exist while the onboardingCompleted flag is
+  // stale (e.g. an interrupted resubmission) — match /learn's behavior so
+  // pages don't disagree on what "onboarding complete" means and bounce a
+  // fully-onboarded user back into the wizard.
+  if (!user?.onboardingCompleted) {
+    if (user?.profile) {
+      await withRetry(() => prisma.user.update({ where: { id: session.user.id }, data: { onboardingCompleted: true } }))
+    } else {
+      redirect('/onboarding')
+    }
+  }
 
   const profile = user.profile
   const teachingLanguage = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'

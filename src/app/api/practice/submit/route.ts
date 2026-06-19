@@ -38,44 +38,51 @@ export async function POST(req: Request) {
       correct: isCorrect,
     }))
 
-    // HIGH-6: if idempotencyKey is supplied the DB unique constraint is the
-    // atomic guard — two concurrent requests with the same key cannot both
-    // succeed; the second one hits P2002 and we return 409, no side-effects.
+    const mistakeIndexes = correct
+      .map((isCorrect, i) => (isCorrect ? -1 : i))
+      .filter((i) => i >= 0)
+
+    // HIGH-6 / CRITICAL-5 (Sprint D): if idempotencyKey is supplied the DB
+    // unique constraint is the atomic dedup guard — two concurrent requests
+    // with the same key cannot both succeed; the second hits P2002 and we
+    // return 409, no side-effects. The session create and its MistakeRecord
+    // batch now run in one transaction so an interruption between them can't
+    // leave a "submitted" session with no recorded mistakes — and, since the
+    // create rolls back too, a retry with the same idempotencyKey can still
+    // succeed instead of permanently hitting "Already submitted".
     let practiceSession
     try {
-      practiceSession = await withRetry(() => prisma.practiceSession.create({
-        data: {
-          userId,
-          subjectSlug,
-          topicSlug,
-          questions: storedQuestions,
-          completedAt: new Date(),
-          score,
-          ...(idempotencyKey ? { idempotencyKey } : {}),
-        },
+      practiceSession = await withRetry(() => prisma.$transaction(async (tx) => {
+        const ps = await tx.practiceSession.create({
+          data: {
+            userId,
+            subjectSlug,
+            topicSlug,
+            questions: storedQuestions,
+            completedAt: new Date(),
+            score,
+            ...(idempotencyKey ? { idempotencyKey } : {}),
+          },
+        })
+        if (mistakeIndexes.length > 0) {
+          await tx.mistakeRecord.createMany({
+            data: mistakeIndexes.map((i) => ({
+              userId,
+              subjectSlug,
+              topicSlug,
+              sessionId: ps.id,
+              category: topicSlug,
+              questionId: `${ps.id}-${i}`,
+            })),
+          })
+        }
+        return ps
       }))
     } catch (e: unknown) {
       if ((e as { code?: string })?.code === 'P2002') {
         return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
       }
       throw e
-    }
-
-    const mistakeIndexes = correct
-      .map((isCorrect, i) => (isCorrect ? -1 : i))
-      .filter((i) => i >= 0)
-
-    if (mistakeIndexes.length > 0) {
-      await withRetry(() => prisma.mistakeRecord.createMany({
-        data: mistakeIndexes.map((i) => ({
-          userId,
-          subjectSlug,
-          topicSlug,
-          sessionId: practiceSession.id,
-          category: topicSlug,
-          questionId: `${practiceSession.id}-${i}`,
-        })),
-      }))
     }
 
     // MED-10: wrap mastery read-compute-write in a transaction to prevent two

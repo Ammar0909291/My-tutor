@@ -5,6 +5,20 @@ import { prisma } from '@/lib/db/prisma'
 import { SubjectType, type Subject } from '@prisma/client'
 import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { getBoard } from '@/lib/education'
+import { captureError } from '@/lib/monitoring'
+
+// CRITICAL-3 (Sprint D): the old check matched any error whose message
+// contained "Unique constraint", which could mask an unrelated write
+// conflict (e.g. referralCode) as an "email already belongs to another
+// row" case and silently resolve onboarding writes to the wrong user.
+// Require the specific Prisma P2002-on-email signature before falling
+// back to the existing-account-by-email resolution.
+function isEmailUniqueConflict(err: unknown): boolean {
+  const e = err as { code?: string; meta?: { target?: string[] | string } } | null
+  if (!e || e.code !== 'P2002') return false
+  const target = e.meta?.target
+  return Array.isArray(target) ? target.includes('email') : target === 'email'
+}
 
 const CATEGORY_TO_TYPE: Record<SubjectCategory, SubjectType> = {
   languages: SubjectType.LANGUAGE,
@@ -74,7 +88,7 @@ export async function POST(req: Request) {
         },
       })
     } catch (upsertErr: unknown) {
-      if (upsertErr instanceof Error && upsertErr.message.includes('Unique constraint')) {
+      if (isEmailUniqueConflict(upsertErr)) {
         // Email already belongs to a different DB row — find that user and use their id
         const byEmail = session.user.email
           ? await prisma.user.findUnique({ where: { email: session.user.email } })
@@ -120,31 +134,40 @@ export async function POST(req: Request) {
       include: { subjects: true },
     })
     if (existingProfile) {
-      await prisma.profile.update({
-        where: { userId: effectiveUserId },
-        data: { selfDescription, voiceId: voiceChoice, teachingLanguage, currentLevel },
+      // CRITICAL-2 (Sprint D): these writes used to run as separate, non-
+      // transactional statements. An interrupted request between any two of
+      // them (timeout, transient DB error) could leave a fully-valid Profile
+      // committed while onboardingCompleted never flips to true — pages that
+      // strictly gate on that flag (coach, quiz) would then bounce an
+      // already-onboarded user back into the wizard. Wrapping in a single
+      // transaction makes the resubmission all-or-nothing.
+      await prisma.$transaction(async (tx) => {
+        await tx.profile.update({
+          where: { userId: effectiveUserId },
+          data: { selfDescription, voiceId: voiceChoice, teachingLanguage, currentLevel },
+        })
+        // Ensure every selected subject is linked + has a learning path (may be missing if onboarding was interrupted)
+        const linkedIds = new Set(existingProfile.subjects.map((s) => s.subjectId))
+        for (const subj of subjects) {
+          if (!linkedIds.has(subj.id)) {
+            await tx.profileSubject.create({ data: { profileId: existingProfile.id, subjectId: subj.id } })
+          }
+          const existingPath = await tx.learningPath.findFirst({ where: { userId: effectiveUserId, subjectId: subj.id } })
+          if (!existingPath) {
+            await tx.learningPath.create({
+              data: {
+                userId: effectiveUserId,
+                subjectId: subj.id,
+                title: `${subj.name} Course`,
+                curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
+                totalSteps: 0,
+                isActive: true,
+              },
+            })
+          }
+        }
+        await tx.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
       })
-      // Ensure every selected subject is linked + has a learning path (may be missing if onboarding was interrupted)
-      const linkedIds = new Set(existingProfile.subjects.map((s) => s.subjectId))
-      for (const subj of subjects) {
-        if (!linkedIds.has(subj.id)) {
-          await prisma.profileSubject.create({ data: { profileId: existingProfile.id, subjectId: subj.id } })
-        }
-        const existingPath = await prisma.learningPath.findFirst({ where: { userId: effectiveUserId, subjectId: subj.id } })
-        if (!existingPath) {
-          await prisma.learningPath.create({
-            data: {
-              userId: effectiveUserId,
-              subjectId: subj.id,
-              title: `${subj.name} Course`,
-              curriculum: { generated: false, steps: [], note: 'Will be generated at first lesson' },
-              totalSteps: 0,
-              isActive: true,
-            },
-          })
-        }
-      }
-      await prisma.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
       return NextResponse.json({ success: true })
     }
 
@@ -191,10 +214,12 @@ export async function POST(req: Request) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
+    // CRITICAL-9 (Sprint D): never echo raw error text (Prisma constraint
+    // names, field names, internal messages) back to the client — log full
+    // detail server-side only, return a generic message.
     console.error('[onboarding] ERROR:', err)
-    const errMsg = err instanceof Error ? err.message : String(err)
-    console.error('[onboarding] FULL ERROR:', errMsg)
-    return NextResponse.json({ success: false, error: errMsg }, { status: 500 })
+    captureError(err, { route: 'api/onboarding' })
+    return NextResponse.json({ success: false, error: 'Could not complete onboarding. Please try again.' }, { status: 500 })
   }
 }
 
@@ -226,7 +251,7 @@ async function handleSchoolStudent(
       },
     })
   } catch (upsertErr: unknown) {
-    if (upsertErr instanceof Error && upsertErr.message.includes('Unique constraint')) {
+    if (isEmailUniqueConflict(upsertErr)) {
       const byEmail = sessionUser.email
         ? await prisma.user.findUnique({ where: { email: sessionUser.email } })
         : null

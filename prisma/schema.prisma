@@ -843,7 +843,7 @@ model Referral {
   usedAt     DateTime?
   createdAt  DateTime  @default(now())
 
-  referrer User @relation("referrer", fields: [referrerId], references: [id])
+  referrer User @relation("referrer", fields: [referrerId], references: [id], onDelete: Cascade)
 
   @@map("referrals")
 }
@@ -856,7 +856,7 @@ model WeeklyXP {
   week   String // "2026-W23"
   xp     Int    @default(0)
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, week])
   @@map("weekly_xp")
