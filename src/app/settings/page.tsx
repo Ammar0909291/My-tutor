@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { useCountry, type Country } from '@/components/Providers'
 import type { TeachingLang } from '@/lib/tts'
 import { Card, CandyButton, SectionTitle, EagleMascot } from '@/components/ui/candy'
@@ -250,7 +251,12 @@ export default function SettingsPage() {
           <Link href="/dashboard" className="text-sm font-semibold transition-colors" style={{ color: 'var(--candy-ink-soft)' }}>
             {t('settings_back')}
           </Link>
-          <LanguageToggle />
+          {/* LOW-1: appearance/theme control belongs on Settings too — users
+              reasonably look here for it, not only in the dashboard nav. */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <LanguageToggle />
+          </div>
         </div>
       </nav>
 

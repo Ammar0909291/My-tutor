@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { withRetry } from '@/lib/db/withRetry'
 import { DashboardV2 } from '@/components/dashboard/v2/DashboardV2'
 import { getDashboardV2Data } from '@/lib/dashboard/getDashboardV2Data'
 
@@ -9,11 +10,25 @@ export default async function DashboardPage({ searchParams }: { searchParams?: {
   if (!session?.user?.id) redirect('/auth/login')
   const userId = session.user.id
 
-  const profile = await prisma.profile.findUnique({
-    where: { userId },
-    select: { userType: true, educationBoard: true, grade: true },
-  })
-  if (!profile) redirect('/onboarding')
+  // MED-1 (onboarding-redirect flakiness on refresh): treat the existence of a
+  // Profile as the single source of truth for "is onboarded", and read it with
+  // withRetry so a transient DB hiccup right after onboarding doesn't redirect a
+  // freshly-onboarded user back into the wizard. If a Profile exists but the
+  // onboardingCompleted flag is stale, self-heal it — this is the same auto-heal
+  // pattern /coach and /learn use, so no two pages disagree on what "onboarded"
+  // means and bounce the user between /dashboard and /onboarding on a hard refresh.
+  const user = await withRetry(() => prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      onboardingCompleted: true,
+      profile: { select: { userType: true, educationBoard: true, grade: true } },
+    },
+  }))
+  if (!user?.profile) redirect('/onboarding')
+  if (!user.onboardingCompleted) {
+    await withRetry(() => prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } }))
+  }
+  const profile = user.profile
 
   // Cross-system navigation (Stabilization Sprint): a SCHOOL_STUDENT can opt
   // into viewing the Library/General experience via ?mode=library without

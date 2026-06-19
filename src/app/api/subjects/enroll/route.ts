@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
@@ -84,6 +85,11 @@ export async function POST(req: Request) {
         },
       })
     }
+
+    // MED-2 (symmetry with unenroll): refresh the server-rendered dashboard and
+    // library so a newly-added subject appears immediately on both.
+    revalidatePath('/dashboard')
+    revalidatePath('/library')
 
     return NextResponse.json({ success: true, data: { subject, profileSubject } })
   } catch (err) {

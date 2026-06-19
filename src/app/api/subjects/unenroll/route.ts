@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
@@ -39,6 +40,13 @@ export async function POST(req: Request) {
       where: { profileId_subjectId: { profileId: profile.id, subjectId: subject.id } },
       data: { isActive: false },
     })
+
+    // MED-2: the dashboard renders the active-subject list from the server, so
+    // invalidate its cached render (and the library's) here — without this, the
+    // dashboard visited right after a removal still shows the removed subject
+    // until the next hard reload.
+    revalidatePath('/dashboard')
+    revalidatePath('/library')
 
     return NextResponse.json({ success: true })
   } catch (err) {
