@@ -1,4 +1,7 @@
-import { auth } from '@/lib/auth'
+// CRIT-1 FIX: use the Edge-safe auth instance here, not '@/lib/auth' (which
+// pulls in Prisma-backed callbacks that hang when executed in the Edge
+// runtime middleware always runs in). See src/lib/auth/edge-config.ts.
+import { auth } from '@/lib/auth/edge'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { slidingWindow, classifyApiPath, clientIp, RL_TIERS } from '@/lib/rateLimitEdge'

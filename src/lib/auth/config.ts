@@ -6,6 +6,11 @@ import { z } from 'zod'
 import { prisma } from '@/lib/db/prisma'
 import { maybeBootstrapAdmin } from '@/lib/auth/admin'
 
+// Node.js-runtime-only config (Prisma + bcrypt). Used by the NextAuth route
+// handler and every page/Server Component/API route's auth() call — never
+// import this in middleware.ts or any other Edge-runtime context. See
+// src/lib/auth/edge-config.ts for the Edge-safe config used by middleware.
+
 const credentialsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
