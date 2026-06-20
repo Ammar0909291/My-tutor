@@ -12,6 +12,7 @@ import { useVisualMastery } from '@/hooks/useVisualMastery'
 import type { VisualMasterySignal } from '@/lib/visuals/visualMastery'
 import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
 import { VisualMasteryViewer } from '@/components/visuals/VisualMasteryViewer'
+import { RevisionIntelligenceViewer } from '@/components/intelligence/RevisionIntelligenceViewer'
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -529,6 +530,14 @@ export function VisualDemo() {
         {persistStatus === 'saved' && <span style={{ marginLeft: 10, fontSize: 12, color: '#16a34a' }}>Saved ✓</span>}
         {persistStatus === 'failed' && <span style={{ marginLeft: 10, fontSize: 12, color: '#dc2626' }}>Save failed (are you signed in?)</span>}
         <VisualMasteryViewer key={viewerRefreshKey} />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 1 — Weakness-Based Revision</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Read-only revision profile and recommendations, built from already-persisted
+          <code> TopicProgress</code> mastery data and the existing Visual Learning Profile above.
+          No new writes, no scoring/grading changes.
+        </p>
+        <RevisionIntelligenceViewer />
       </div>
     </div>
   )
