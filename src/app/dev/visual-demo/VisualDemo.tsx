@@ -17,6 +17,7 @@ import { PracticeTargetsViewer } from '@/components/intelligence/PracticeTargets
 import { RetestIntelligenceViewer } from '@/components/intelligence/RetestIntelligenceViewer'
 import { ImprovementTrackingViewer } from '@/components/intelligence/ImprovementTrackingViewer'
 import { LearningDifficultyViewer } from '@/components/intelligence/LearningDifficultyViewer'
+import { TeachingPlanViewer } from '@/components/intelligence/TeachingPlanViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -615,6 +616,15 @@ export function VisualDemo() {
           this sprint does not act on the difficulty.
         </p>
         <LearningDifficultyViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 5 — Adaptive Teaching Plan Engine</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Decides HOW each struggling topic should be taught by synthesizing Sprints 1–4 into a
+          per-topic <code>TeachingPlan</code> (recommended methods, practice intensity, revision
+          &amp; retest priority). Pure synthesis of existing outputs — no new analysis, no writes,
+          no Tutor Max / curriculum / grading / XP changes. The plan is consumed nowhere yet.
+        </p>
+        <TeachingPlanViewer />
       </div>
     </div>
   )
