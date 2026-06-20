@@ -16,6 +16,25 @@ import { RevisionIntelligenceViewer } from '@/components/intelligence/RevisionIn
 import { PracticeTargetsViewer } from '@/components/intelligence/PracticeTargetsViewer'
 import { RetestIntelligenceViewer } from '@/components/intelligence/RetestIntelligenceViewer'
 import { ImprovementTrackingViewer } from '@/components/intelligence/ImprovementTrackingViewer'
+import { VisualCard } from '@/components/school/visuals/VisualCard'
+import type { VisualType } from '@/lib/school/visuals/visualTypes'
+
+// Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
+// up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
+// of rendering the finished diagram instantly. These are the real production
+// VisualCard components (the path /api/learn/chat → LessonScreen uses).
+const ANIMATED_TEACHING_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Coordinate plane (graph)', type: 'coordinate_plane' },
+  { label: 'Geometry — triangle / rectangle / circle', type: 'geometry_shape' },
+  { label: 'Number line', type: 'number_line' },
+  { label: 'Fraction bars', type: 'fraction_bar' },
+  { label: 'Percentage grid', type: 'percentage_grid' },
+  { label: 'Food chain (photosynthesis / energy flow)', type: 'food_chain' },
+  { label: 'Water cycle', type: 'water_cycle' },
+  { label: 'Solar system', type: 'solar_system' },
+  { label: 'Force diagram', type: 'force_diagram' },
+  { label: 'Circuit diagram', type: 'circuit_diagram' },
+]
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -312,6 +331,21 @@ export function VisualDemo() {
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
           Dev-only. GraphRenderer (zoom/pan) + NumberLineRenderer via the real VisualRenderer.
         </p>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '24px 0 4px' }}>Sprint R.1 — Animated Teaching Engine</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The production <code>VisualCard</code> components, now drawing themselves step-by-step
+          (autoplay) like a teacher at a whiteboard, with Play / Pause / Replay and a 0.5×–1.5×
+          speed selector. Final state matches the previous static diagram exactly.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {ANIMATED_TEACHING_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16 }}>
           {SPECS.map(({ label, spec }) => (

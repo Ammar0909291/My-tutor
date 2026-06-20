@@ -2304,7 +2304,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
-                        <VisualCard type={msg.visual as VisualType} />
+                        <VisualCard type={msg.visual as VisualType} autoPlay speed={speed} />
                       </div>
                     )}
 
