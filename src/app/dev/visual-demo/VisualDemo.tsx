@@ -23,6 +23,7 @@ import { MethodEffectivenessViewer } from '@/components/intelligence/MethodEffec
 import { WeightedTeachingPlanViewer } from '@/components/intelligence/WeightedTeachingPlanViewer'
 import { TeachingStyleViewer } from '@/components/intelligence/TeachingStyleViewer'
 import { TutorVisualSyncViewer } from '@/components/school/visuals/TutorVisualSyncViewer'
+import { NarrationDrivenPlaybackViewer } from '@/components/school/visuals/NarrationDrivenPlaybackViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -676,6 +677,15 @@ export function VisualDemo() {
           No live tutor behavior change — Sprint R/R.1 animation is unchanged.
         </p>
         <TutorVisualSyncViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Visual Learning Sprint T — Narration-Driven Playback</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The visual advances when narration advances, not by a timer. Use Next / Previous / Reset to
+          step the narration; the animation follows via <code>useTeachingPlayback</code> in
+          &ldquo;narration&rdquo; mode. Timer mode elsewhere is unchanged. No live tutor / AI / curriculum
+          changes — playback control infrastructure only.
+        </p>
+        <NarrationDrivenPlaybackViewer />
       </div>
     </div>
   )

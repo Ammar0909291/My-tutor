@@ -24,6 +24,14 @@ export interface UseTeachingPlaybackOptions {
    * animation progress without touching the renderer or animation logic.
    */
   onStepChange?: (step: number) => void
+  /**
+   * Sprint T — playback driver. 'timer' (default) advances by requestAnimationFrame
+   * as before; 'narration' advances `revealStep` from the externally-supplied
+   * `narrationStep` instead of time. Backward compatible — omitting it keeps timer mode.
+   */
+  mode?: 'timer' | 'narration'
+  /** Sprint T — in 'narration' mode, the current 1-based step to reveal (e.g. the active narration segment). */
+  narrationStep?: number
 }
 
 export interface TeachingPlayback {
@@ -42,7 +50,7 @@ export function useTeachingPlayback(
   stepCount: number,
   options: UseTeachingPlaybackOptions = {}
 ): TeachingPlayback {
-  const { autoPlay = true, speed: initialSpeed = 1, stepDurationMs = 700, onStepChange } = options
+  const { autoPlay = true, speed: initialSpeed = 1, stepDurationMs = 700, onStepChange, mode = 'timer', narrationStep } = options
 
   const timeline: Timeline = useMemo(
     () =>
@@ -102,12 +110,24 @@ export function useTeachingPlayback(
     [stepCount, stepDurationMs, total, stop]
   )
 
-  // Drive the rAF loop whenever we're playing.
+  // Drive the rAF loop whenever we're playing (timer mode only).
   useEffect(() => {
-    if (!isPlaying || stepCount <= 0) return
+    if (mode !== 'timer' || !isPlaying || stepCount <= 0) return
     rafRef.current = requestAnimationFrame(frame)
     return stop
-  }, [isPlaying, stepCount, frame, stop])
+  }, [mode, isPlaying, stepCount, frame, stop])
+
+  // Sprint T — narration mode: drive revealStep from the external narrationStep
+  // instead of the timer. The rAF loop is never started in this mode (guarded
+  // above), so time is irrelevant — the visual advances exactly when narration does.
+  useEffect(() => {
+    if (mode !== 'narration') return
+    stop()
+    const next = Math.max(0, Math.min(stepCount, narrationStep ?? 0))
+    setRevealStep(next)
+    setIsComplete(next >= stepCount && stepCount > 0)
+    setIsPlaying(false)
+  }, [mode, narrationStep, stepCount, stop])
 
   // Cleanup on unmount.
   useEffect(() => stop, [stop])
