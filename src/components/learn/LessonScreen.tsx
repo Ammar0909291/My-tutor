@@ -18,7 +18,7 @@ import type { VisualType } from '@/lib/school/visuals/visualTypes'
 // Visual Learning Sprint B: data-driven visuals (graph / number_line). Additive
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
-import type { VisualSpec } from '@/lib/visuals/visualSpec'
+import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
@@ -551,12 +551,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; error?: any }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; visualSpec?: unknown; error?: any }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
       const provider = data.provider
       const responseVisual = data.visual
+      // Sprint C: server already validated this with zod; re-validate
+      // client-side too (defense in depth — never trust a network payload).
+      const responseVisualSpec = parseVisualSpec(data.visualSpec) ?? undefined
       const COMPLETION_KEYWORDS = [
         '[LESSON_COMPLETE]',
         'следующий урок', 'урок завершён', 'урок завершен',
@@ -656,7 +659,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)

@@ -9,6 +9,7 @@ import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
 import { MessageRole } from '@prisma/client'
+import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -994,6 +995,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // Sprint C: deterministic, rule-based visual detection on the final
+      // tutor text (no AI reasoning, no LLM parsing). Non-fatal — falls
+      // back to undefined on any error so a lesson never breaks because of
+      // this. Never persisted; attached to the JSON response only.
+      let detectedVisualSpec: ReturnType<typeof buildVisualSpec> = null
+      try {
+        detectedVisualSpec = buildVisualSpec(cleanText)
+      } catch { /* non-fatal */ }
+
       await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
@@ -1071,7 +1081,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => {})
       }
 
-      return NextResponse.json({ success: true, text: cleanText, provider, visual: responseVisual ?? undefined })
+      return NextResponse.json({ success: true, text: cleanText, provider, visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined })
     } catch (error: any) {
       // Global AI budget spent — expected under load, not an error to report.
       if (error instanceof AIBudgetExceededError) {

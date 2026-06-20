@@ -7,6 +7,33 @@
 import { useState } from 'react'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
+import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
+
+// Sprint C: tutor-style explanations grounded in real curriculum topics from
+// src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
+// Quadratic Equations, Cartesian Plane and Plotting, Integers — Introduction).
+// These are NOT VisualSpecs — they are plain lesson text. The VisualSpec
+// below each one is produced live by the real buildVisualSpec() detector,
+// exactly as route.ts does for actual Tutor Max responses. No spec here is
+// authored by hand.
+const DETECTOR_FIXTURES: { topic: string; tutorText: string }[] = [
+  {
+    topic: 'Linear Equations in Two Variables (algebra.linear_equations_2var)',
+    tutorText: "Let's graph this on the Cartesian plane. The linear equation y = x + 2 is a straight line — start at (0, 2) and use the slope to find more points.",
+  },
+  {
+    topic: 'Quadratic Equations (algebra.quadratic_equations)',
+    tutorText: 'A quadratic equation like y = x^2 - 2x - 3 graphs as a parabola. Notice the discriminant tells us it crosses the x-axis at two points.',
+  },
+  {
+    topic: 'Cartesian Plane and Plotting (coordinate_geometry.cartesian_plane)',
+    tutorText: 'Every point on the coordinate plane has an x and y value. For example the line y = -2x + 1 passes through the y-axis at (0, 1).',
+  },
+  {
+    topic: 'Integers — Introduction (number_systems.integers)',
+    tutorText: 'On the number line, negative numbers sit to the left of zero. Compare -5 and 3 as integers: which is greater?',
+  },
+]
 
 const SPECS: { label: string; spec: VisualSpec }[] = [
   { label: 'Linear — y = x + 2',          spec: { type: 'graph', equation: 'y = x + 2', title: 'Linear' } },
@@ -74,6 +101,29 @@ export function VisualDemo() {
               (nothing rendered above ✓)
             </div>
           </section>
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint C — Automatic detection from real lesson text</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Each card below runs the real <code>buildVisualSpec()</code> detector (same function
+          <code> /api/learn/chat</code> calls) against tutor-style text grounded in the actual
+          curriculum (src/lib/education/mathKnowledgeGraph.ts). No VisualSpec is hand-written here.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {DETECTOR_FIXTURES.map(({ topic, tutorText }) => {
+            const detected = buildVisualSpec(tutorText)
+            return (
+              <section key={topic}>
+                <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{topic}</h2>
+                <div style={{ border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, marginBottom: 8, fontSize: 12, fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                  &ldquo;{tutorText}&rdquo;
+                </div>
+                {detected ? <VisualRenderer spec={detected} /> : (
+                  <p style={{ fontSize: 12, opacity: 0.6 }}>No visual detected (renders lesson text only — zero regression).</p>
+                )}
+              </section>
+            )
+          })}
         </div>
       </div>
     </div>
