@@ -21,6 +21,7 @@ import { TeachingPlanViewer } from '@/components/intelligence/TeachingPlanViewer
 import { AdaptationEffectivenessViewer } from '@/components/intelligence/AdaptationEffectivenessViewer'
 import { MethodEffectivenessViewer } from '@/components/intelligence/MethodEffectivenessViewer'
 import { WeightedTeachingPlanViewer } from '@/components/intelligence/WeightedTeachingPlanViewer'
+import { TeachingStyleViewer } from '@/components/intelligence/TeachingStyleViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -656,6 +657,15 @@ export function VisualDemo() {
           curriculum, XP, grading, or Sprints 1–8.
         </p>
         <WeightedTeachingPlanViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 11 — Teaching Style Transparency</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Exposes and explains the teaching style Tutor Max is already using — the active
+          (weighted-ordered) methods for the learner&apos;s most relevant struggling topic, plus a
+          plain-English &ldquo;why&rdquo;. Visibility only — read-only, no new intelligence, no
+          adaptation, no Tutor Max / curriculum / grading / XP changes.
+        </p>
+        <TeachingStyleViewer />
       </div>
     </div>
   )
