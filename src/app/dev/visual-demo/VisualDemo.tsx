@@ -15,6 +15,7 @@ import { VisualMasteryViewer } from '@/components/visuals/VisualMasteryViewer'
 import { RevisionIntelligenceViewer } from '@/components/intelligence/RevisionIntelligenceViewer'
 import { PracticeTargetsViewer } from '@/components/intelligence/PracticeTargetsViewer'
 import { RetestIntelligenceViewer } from '@/components/intelligence/RetestIntelligenceViewer'
+import { ImprovementTrackingViewer } from '@/components/intelligence/ImprovementTrackingViewer'
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -558,6 +559,16 @@ export function VisualDemo() {
           new writes, no grading or assessment-generation changes.
         </p>
         <RetestIntelligenceViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 4 — Improvement Tracking</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Compares the earliest and latest persisted score per topic
+          (<code>PracticeSession</code>) and visual area
+          (<code>EvidenceRecord</code>) to classify improving / stable /
+          declining trends. No new mastery system, no writes, no
+          grading changes.
+        </p>
+        <ImprovementTrackingViewer />
       </div>
     </div>
   )
