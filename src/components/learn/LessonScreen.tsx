@@ -1241,14 +1241,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           <div style={{ position: 'relative' }}>
             <button onClick={() => setSpeedMenuOpen((o) => !o)}
               title={t('settings_voice_speed')}
+              aria-label={`${t('settings_voice_speed')}: ${speed}x`}
               style={{
-                height: 28, padding: '0 8px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                height: 28, padding: '0 10px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                whiteSpace: 'nowrap', flexShrink: 0,
                 background: speedMenuOpen ? 'rgba(247,129,102,0.15)' : 'transparent',
                 color: speedMenuOpen ? 'var(--coral)' : 'var(--text-dim)',
                 border: `1px solid ${speedMenuOpen ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
-              {speed}x
+              Speed: {speed}x
             </button>
             {speedMenuOpen && (
               <>
@@ -1258,6 +1260,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
                   boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
                 }}>
+                  <div style={{ padding: '8px 16px 6px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', borderBottom: '1px solid var(--border-subtle)' }}>
+                    {t('settings_voice_speed')}
+                  </div>
                   {VOICE_SPEED_OPTIONS.map((s) => (
                     <button key={s} onClick={() => handleSpeedChange(s)}
                       style={{

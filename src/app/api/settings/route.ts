@@ -8,7 +8,7 @@ const schema = z.object({
   teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
   country: z.enum(['ru', 'in', 'global']).optional(),
   voiceSpeed: z.union([
-    z.literal(0.6), z.literal(0.75), z.literal(0.9), z.literal(1.0), z.literal(1.1), z.literal(1.25), z.literal(1.5),
+    z.literal(0.5), z.literal(0.75), z.literal(1.0), z.literal(1.25), z.literal(1.5),
   ]).optional(),
 })
 
