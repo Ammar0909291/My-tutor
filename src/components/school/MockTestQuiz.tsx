@@ -12,6 +12,7 @@ import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import { useVisualMastery } from '@/hooks/useVisualMastery'
 import { VisualMasteryDevSummary } from '@/components/visuals/VisualMasteryDevSummary'
+import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
 
 interface ClientQuestion {
   id: string
@@ -108,6 +109,9 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
       setResult(data)
       setPhase('results')
       if (data.score >= 70) fireConfetti()
+      // Sprint M: persist the session's summarized visual mastery — fire-and-forget,
+      // never blocks results/grading and never throws.
+      void persistVisualMasterySummary({ subjectSlug, topicSlug: `mock-${testType}`, source: 'mock', sessionId, summary })
     } catch {
       setError('Submission failed. Please try again.')
       setPhase('quiz')

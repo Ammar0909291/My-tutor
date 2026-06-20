@@ -11,6 +11,7 @@ import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import { useVisualMastery } from '@/hooks/useVisualMastery'
 import { VisualMasteryDevSummary } from '@/components/visuals/VisualMasteryDevSummary'
+import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
 
 interface ClientQuestion {
   id: string
@@ -82,6 +83,9 @@ export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle, navigatorAc
       setResult(data)
       setPhase('results')
       if (data.accuracyPercent >= 50) fireConfetti()
+      // Sprint M: persist the session's summarized visual mastery — fire-and-forget,
+      // never blocks results/grading and never throws.
+      void persistVisualMasterySummary({ subjectSlug, topicSlug: chapterId, source: 'practice', sessionId, summary })
     } catch {
       setError('Failed to submit. Please try again.')
       setPhase('quiz')

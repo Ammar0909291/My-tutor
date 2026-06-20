@@ -10,6 +10,8 @@ import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { useVisualMastery } from '@/hooks/useVisualMastery'
 import type { VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
+import { VisualMasteryViewer } from '@/components/visuals/VisualMasteryViewer'
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -259,6 +261,22 @@ export function VisualDemo() {
     recordMasteryEvent(signal)
     setSignalLog((prev) => [signal, ...prev].slice(0, 8))
   }
+  // Sprint M: manual "persist now" control for the demo — real quiz integrations
+  // (Practice/Assessment/MockTestQuiz) call this automatically on completion;
+  // this page has no completion event, so it's an explicit button instead.
+  const [persistStatus, setPersistStatus] = useState<'idle' | 'saving' | 'saved' | 'failed'>('idle')
+  const [viewerRefreshKey, setViewerRefreshKey] = useState(0)
+  const handlePersistDemoSummary = async () => {
+    setPersistStatus('saving')
+    const ok = await persistVisualMasterySummary({
+      subjectSlug: 'visual-demo',
+      topicSlug: 'sprint-m-demo',
+      source: 'learn',
+      summary,
+    })
+    setPersistStatus(ok ? 'saved' : 'failed')
+    if (ok) setViewerRefreshKey((k) => k + 1)
+  }
   // local CSS-variable shim so the renderers (which read these vars) look
   // correct on this standalone page regardless of global theme.
   const pageStyle = {
@@ -490,6 +508,27 @@ export function VisualDemo() {
             </pre>
           </section>
         </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint M — Visual Mastery Persistence</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Real quiz integrations (Practice/Assessment/MockTestQuiz) call
+          <code> persistVisualMasterySummary()</code> automatically once, on quiz completion — summarized
+          outcomes only, never per click. This page has no completion event of its own, so the button below
+          calls the same function manually with the session summary above. Requires being signed in (the
+          persist API is authenticated, same as every other save in this app); sign in first if the viewer
+          below shows &ldquo;Unauthorized&rdquo;.
+        </p>
+        <button
+          type="button"
+          onClick={handlePersistDemoSummary}
+          disabled={persistStatus === 'saving' || Object.keys(summary).length === 0}
+          style={{ padding: '8px 14px', borderRadius: 8, border: '1px solid var(--border-subtle)', background: 'var(--bg-surface)', color: 'inherit', cursor: 'pointer', fontSize: 13, marginBottom: 16 }}
+        >
+          {persistStatus === 'saving' ? 'Saving…' : 'Persist current session summary'}
+        </button>
+        {persistStatus === 'saved' && <span style={{ marginLeft: 10, fontSize: 12, color: '#16a34a' }}>Saved ✓</span>}
+        {persistStatus === 'failed' && <span style={{ marginLeft: 10, fontSize: 12, color: '#dc2626' }}>Save failed (are you signed in?)</span>}
+        <VisualMasteryViewer key={viewerRefreshKey} />
       </div>
     </div>
   )

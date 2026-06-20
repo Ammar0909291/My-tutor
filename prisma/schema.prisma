@@ -370,6 +370,11 @@ enum EvidenceType {
   PROJECT
   REVIEW
   ASSESSMENT
+  // Visual Learning Sprint M — visual mastery signals (graph/number_line/
+  // geometry/process_flow shown/interacted/completed summaries). Always
+  // written with weight 0 (see EvidenceRecord.weight) so existing/future
+  // weighted-average mastery computations never blend these in implicitly.
+  VISUAL
 }
 
 model EvidenceRecord {
