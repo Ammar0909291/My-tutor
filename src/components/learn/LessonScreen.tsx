@@ -151,6 +151,179 @@ function MessageContent({ text, isUser }: { text: string; isUser: boolean }) {
   )
 }
 
+// ─── LessonDocument ─────────────────────────────────────────────────────────
+// Eagle UI alignment sprint: renders the lesson canvas for non-programming
+// subjects (NON_CODE_SUBJECTS) as a formatted learning document — headings,
+// callout blocks (Concept/Example/Important/Remember/Definition/Formula),
+// lists and fenced blocks — instead of raw markdown text inside Monaco.
+// Programming subjects keep the unmodified Monaco code editor.
+type CalloutKind = 'concept' | 'example' | 'important' | 'remember' | 'definition' | 'formula' | 'visual' | 'note'
+type LessonBlock =
+  | { type: 'heading'; level: 1 | 2 | 3; text: string }
+  | { type: 'callout'; kind: CalloutKind; lines: string[] }
+  | { type: 'fence'; lang: string; text: string }
+  | { type: 'list'; ordered: boolean; items: string[] }
+  | { type: 'paragraph'; lines: string[] }
+
+const CALLOUT_STYLE: Record<CalloutKind, { icon: string; label: string; color: string; bg: string }> = {
+  concept:    { icon: '💡', label: 'Concept',    color: 'var(--blue)',           bg: 'var(--blue-muted)' },
+  example:    { icon: '✏️', label: 'Example',    color: 'var(--green)',          bg: 'var(--green-muted)' },
+  important:  { icon: '⚠️', label: 'Important',  color: 'var(--coral)',          bg: 'var(--coral-muted)' },
+  remember:   { icon: '🔑', label: 'Remember',   color: 'var(--purple)',         bg: 'var(--purple-muted)' },
+  definition: { icon: '📖', label: 'Definition', color: 'var(--yellow)',         bg: 'var(--yellow-muted)' },
+  formula:    { icon: '🧮', label: 'Formula',    color: 'var(--coral)',          bg: 'var(--coral-muted)' },
+  visual:     { icon: '📊', label: 'Visual',     color: 'var(--blue)',           bg: 'var(--blue-muted)' },
+  note:       { icon: '📝', label: 'Note',       color: 'var(--border-emphasis)', bg: 'var(--bg-elevated)' },
+}
+const CALLOUT_RE = /^\*{0,2}(concept|example|important|remember|definition|formula)\*{0,2}:?\*{0,2}\s*(.*)$/i
+const CODE_LANGS = new Set(['py', 'python', 'js', 'javascript', 'ts', 'typescript', 'c', 'cpp', 'c++', 'java', 'csharp', 'cs', 'go', 'rust'])
+
+function parseLessonBlocks(text: string): LessonBlock[] {
+  const lines = text.replace(/\r\n/g, '\n').split('\n')
+  const blocks: LessonBlock[] = []
+  let i = 0
+  while (i < lines.length) {
+    const line = lines[i]
+    if (!line.trim()) { i++; continue }
+
+    const heading = line.match(/^(#{1,3})\s+(.*)$/)
+    if (heading) {
+      blocks.push({ type: 'heading', level: heading[1].length as 1 | 2 | 3, text: heading[2].trim() })
+      i++; continue
+    }
+
+    const fence = line.match(/^```\s*(\w*)/)
+    if (fence) {
+      const lang = fence[1] ?? ''
+      const body: string[] = []
+      i++
+      while (i < lines.length && !lines[i].trim().startsWith('```')) { body.push(lines[i]); i++ }
+      i++ // skip closing fence
+      blocks.push({ type: 'fence', lang, text: body.join('\n') })
+      continue
+    }
+
+    if (line.trim().startsWith('>')) {
+      const quoteLines: string[] = []
+      while (i < lines.length && lines[i].trim().startsWith('>')) { quoteLines.push(lines[i].replace(/^\s*>\s?/, '')); i++ }
+      const match = quoteLines[0]?.match(CALLOUT_RE)
+      const kind = (match ? match[1].toLowerCase() : 'note') as CalloutKind
+      if (match && match[2]) quoteLines[0] = match[2]
+      else if (match) quoteLines.shift()
+      blocks.push({ type: 'callout', kind, lines: quoteLines.length ? quoteLines : [''] })
+      continue
+    }
+
+    const bulletMatch = line.match(/^[-•*]\s+(.*)$/)
+    const numMatch = line.match(/^\d+\.\s+(.*)$/)
+    if (bulletMatch || numMatch) {
+      const ordered = !!numMatch
+      const items: string[] = [(bulletMatch ?? numMatch)![1]]
+      i++
+      while (i < lines.length) {
+        const m = ordered ? lines[i].match(/^\d+\.\s+(.*)$/) : lines[i].match(/^[-•*]\s+(.*)$/)
+        if (!m) break
+        items.push(m[1]); i++
+      }
+      blocks.push({ type: 'list', ordered, items })
+      continue
+    }
+
+    const paraLines: string[] = [line]
+    i++
+    while (i < lines.length && lines[i].trim() && !lines[i].match(/^(#{1,3})\s/) && !lines[i].trim().startsWith('>') && !lines[i].trim().startsWith('```') && !lines[i].match(/^[-•*]\s+/) && !lines[i].match(/^\d+\.\s+/)) {
+      paraLines.push(lines[i]); i++
+    }
+    blocks.push({ type: 'paragraph', lines: paraLines })
+  }
+  return blocks
+}
+
+function LessonDocument({ text }: { text: string }) {
+  const blocks = parseLessonBlocks(text)
+  const codeInline = 'px-1.5 py-0.5 rounded text-[0.85em] font-mono bg-black/20 text-[var(--coral)]'
+  return (
+    <div style={{ maxWidth: 760, margin: '0 auto', padding: '32px 36px 56px', color: 'var(--text-primary)' }}>
+      {blocks.map((b, idx) => {
+        if (b.type === 'heading') {
+          const styles = b.level === 1
+            ? { fontSize: 27, fontWeight: 800, marginTop: idx === 0 ? 0 : 28, marginBottom: 10, letterSpacing: '-0.01em' }
+            : b.level === 2
+            ? { fontSize: 20, fontWeight: 750, marginTop: 26, marginBottom: 10 }
+            : { fontSize: 16.5, fontWeight: 700, marginTop: 18, marginBottom: 6 }
+          return (
+            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 10, ...styles }}>
+              {b.level === 2 && <span style={{ width: 4, height: 18, borderRadius: 2, background: 'var(--coral)', flexShrink: 0 }} />}
+              <span>{renderInline(b.text, `h${idx}`, codeInline)}</span>
+            </div>
+          )
+        }
+        if (b.type === 'callout') {
+          const cs = CALLOUT_STYLE[b.kind]
+          return (
+            <div key={idx} style={{
+              margin: '16px 0', padding: '14px 16px', borderRadius: 12,
+              background: cs.bg, borderLeft: `3px solid ${cs.color}`,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, fontSize: 12, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: 14 }}>{cs.icon}</span>{cs.label}
+              </div>
+              <div style={{ fontSize: 15, lineHeight: 1.7 }}>
+                {b.lines.map((l, j) => l.trim()
+                  ? <p key={j} style={{ margin: j === 0 ? 0 : '4px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline)}</p>
+                  : <div key={j} style={{ height: 6 }} />)}
+              </div>
+            </div>
+          )
+        }
+        if (b.type === 'fence') {
+          const isCode = CODE_LANGS.has(b.lang.toLowerCase())
+          if (isCode) {
+            return (
+              <pre key={idx} style={{
+                margin: '16px 0', padding: '14px 16px', borderRadius: 12,
+                background: 'var(--bg-void)', border: '1px solid var(--panel-border)',
+                fontFamily: 'var(--font-mono)', fontSize: 13.5, lineHeight: 1.6, overflowX: 'auto',
+              }}>{b.text}</pre>
+            )
+          }
+          const cs = CALLOUT_STYLE.visual
+          return (
+            <div key={idx} style={{
+              margin: '16px 0', padding: '14px 16px', borderRadius: 12,
+              background: cs.bg, border: `1px solid ${cs.color}33`,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, fontSize: 12, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: 14 }}>{cs.icon}</span>{b.lang ? b.lang : cs.label}
+              </div>
+              <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: 13.5, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: 'var(--text-secondary)' }}>{b.text}</pre>
+            </div>
+          )
+        }
+        if (b.type === 'list') {
+          return (
+            <div key={idx} style={{ margin: '10px 0', display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {b.items.map((item, j) => (
+                <div key={j} style={{ display: 'flex', gap: 10, fontSize: 15, lineHeight: 1.65 }}>
+                  <span style={{ flexShrink: 0, color: 'var(--coral)', fontWeight: 700, fontFamily: b.ordered ? 'var(--font-mono)' : undefined }}>
+                    {b.ordered ? `${j + 1}.` : '▸'}
+                  </span>
+                  <span>{renderInline(item, `${idx}-${j}`, codeInline)}</span>
+                </div>
+              ))}
+            </div>
+          )
+        }
+        return (
+          <div key={idx} style={{ margin: '12px 0', fontSize: 15.5, lineHeight: 1.75 }}>
+            {b.lines.map((l, j) => <p key={j} style={{ margin: j === 0 ? 0 : '6px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline)}</p>)}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 function TypingDots() {
   return (
     <div className="flex items-center gap-3 py-1">
@@ -340,6 +513,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
   const filename = FILENAME[subjectSlug] ?? 'lesson.txt'
+  // Eagle UI alignment sprint: non-programming subjects render the lesson
+  // canvas as a formatted learning document instead of a raw-markdown code
+  // editor view. Programming subjects are unaffected (still real code).
+  const isNotebook = NON_CODE_SUBJECTS.includes(subjectSlug)
   const terminalCmd = subjectSlug === 'python' ? `python ${filename}` :
     subjectSlug === 'c' ? `gcc ${filename} -o lesson && ./lesson` :
     subjectSlug === 'cpp' ? `g++ ${filename} -o lesson && ./lesson` :
@@ -1739,8 +1916,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             {/* Header */}
             <PanelHeader>
               <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 10, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>{badge.label}</span>
-              <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
-              <span style={{ color: 'var(--coral)', fontSize: 12, animation: 'blink 1s infinite' }}>_</span>
+              {isNotebook ? (
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  📖 {currentLessonData ? currentLessonData.lessonTitle : (teachingLanguage === 'ru' ? 'Учебный материал' : 'Lesson Notes')}
+                </span>
+              ) : (
+                <>
+                  <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
+                  <span style={{ color: 'var(--coral)', fontSize: 12, animation: 'blink 1s infinite' }}>_</span>
+                </>
+              )}
               <div style={{ flex: 1 }} />
               <button onClick={handleCopy}
                 style={{
@@ -1764,30 +1949,34 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               </button>
             </PanelHeader>
 
-            {/* Monaco */}
-            <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-              <MonacoEditor
-                height="100%" language={language} value={code} theme={monacoTheme}
-                beforeMount={handleEditorBeforeMount}
-                options={{
-                  readOnly: true, fontSize: 14, lineHeight: 1.7,
-                  fontFamily: 'var(--font-mono), "JetBrains Mono", "Fira Code", monospace',
-                  fontLigatures: true,
-                  minimap: { enabled: false }, scrollBeyondLastLine: false, wordWrap: 'on',
-                  padding: { top: 12, bottom: 12 }, renderLineHighlight: 'all',
-                  lineNumbers: 'on', automaticLayout: true,
-                  folding: false, glyphMargin: false, contextmenu: false,
-                  renderWhitespace: 'none', hideCursorInOverviewRuler: true,
-                  overviewRulerBorder: false, overviewRulerLanes: 0,
-                }}
-              />
+            {/* Lesson canvas — formatted learning document for non-programming subjects, Monaco code editor otherwise */}
+            <div style={{ flex: 1, minHeight: 0, overflow: isNotebook ? 'auto' : 'hidden', background: isNotebook ? 'var(--bg-card)' : undefined }}>
+              {isNotebook ? (
+                <LessonDocument text={code} />
+              ) : (
+                <MonacoEditor
+                  height="100%" language={language} value={code} theme={monacoTheme}
+                  beforeMount={handleEditorBeforeMount}
+                  options={{
+                    readOnly: true, fontSize: 14, lineHeight: 1.7,
+                    fontFamily: 'var(--font-mono), "JetBrains Mono", "Fira Code", monospace',
+                    fontLigatures: true,
+                    minimap: { enabled: false }, scrollBeyondLastLine: false, wordWrap: 'on',
+                    padding: { top: 12, bottom: 12 }, renderLineHighlight: 'all',
+                    lineNumbers: 'on', automaticLayout: true,
+                    folding: false, glyphMargin: false, contextmenu: false,
+                    renderWhitespace: 'none', hideCursorInOverviewRuler: true,
+                    overviewRulerBorder: false, overviewRulerLanes: 0,
+                  }}
+                />
+              )}
             </div>
 
             {/* Status bar */}
             <div style={{
               height: 28, display: 'flex', alignItems: 'center', padding: '0 12px',
               background: 'var(--bg-surface)', borderTop: '1px solid var(--border-subtle)',
-              fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--border-emphasis)',
+              fontSize: 11, fontFamily: isNotebook ? undefined : 'var(--font-mono)', color: 'var(--border-emphasis)',
               justifyContent: 'space-between', flexShrink: 0,
             }}>
               <span>
@@ -1799,11 +1988,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   : <span style={{ color: 'var(--green)' }}>● {teachingLanguage === 'ru' ? 'Готово' : 'Ready'}</span>
                 }
               </span>
-              <span style={{ display: 'flex', gap: 8, color: 'var(--text-dim)' }}>
-                <span>{badge.label}</span>
-                <span>·</span>
-                <span>UTF-8</span>
-              </span>
+              {isNotebook ? (
+                <span style={{ color: 'var(--text-dim)' }}>{currentLessonData ? currentLessonData.unitTitle : subjectName}</span>
+              ) : (
+                <span style={{ display: 'flex', gap: 8, color: 'var(--text-dim)' }}>
+                  <span>{badge.label}</span>
+                  <span>·</span>
+                  <span>UTF-8</span>
+                </span>
+              )}
             </div>
 
             {/* Terminal toggle */}
