@@ -19,6 +19,7 @@ import { ImprovementTrackingViewer } from '@/components/intelligence/Improvement
 import { LearningDifficultyViewer } from '@/components/intelligence/LearningDifficultyViewer'
 import { TeachingPlanViewer } from '@/components/intelligence/TeachingPlanViewer'
 import { AdaptationEffectivenessViewer } from '@/components/intelligence/AdaptationEffectivenessViewer'
+import { MethodEffectivenessViewer } from '@/components/intelligence/MethodEffectivenessViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -636,6 +637,15 @@ export function VisualDemo() {
           / grading / XP changes.
         </p>
         <AdaptationEffectivenessViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 8 — Teaching Method Effectiveness Intelligence</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Ranks teaching methods by observed learner improvement, by re-aggregating the Sprint 7
+          per-topic effectiveness BY METHOD. Surfaces strongest/weakest methods and per-method
+          insights. Intelligence only — read-only, no new measurement, no teaching-plan / Tutor Max /
+          curriculum / grading / XP changes.
+        </p>
+        <MethodEffectivenessViewer />
       </div>
     </div>
   )
