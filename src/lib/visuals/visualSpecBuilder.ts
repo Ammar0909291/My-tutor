@@ -5,7 +5,7 @@
  * VisualSpec, ready for VisualRenderer. Fails safe: any unexpected shape or
  * exception yields null, never a thrown error.
  */
-import { detectVisualConcept, type DetectedConcept } from './visualConceptDetector'
+import { detectVisualConcept, type DetectedConcept, type NumberLineConcept } from './visualConceptDetector'
 import { parseVisualSpec, type VisualSpec } from './visualSpec'
 
 /** Round to a "nice" bound so number-line ranges look intentional, not jagged. */
@@ -17,14 +17,28 @@ function niceBound(n: number): number {
   return 100
 }
 
-function buildGraphSpec(equation: string): unknown {
-  return { type: 'graph', equation }
+function buildGraphSpec(equation: string, title?: string): unknown {
+  return { type: 'graph', equation, ...(title ? { title } : {}) }
 }
 
-function buildNumberLineSpec(highlight: number[]): unknown {
-  const maxAbs = Math.max(...highlight.map(Math.abs), 5)
-  const bound = niceBound(maxAbs)
-  return { type: 'number_line', start: -bound, end: bound, highlight }
+// Sprint J: now takes the full NumberLineConcept (not just `highlight`) so
+// fraction/percentage/ratio/probability concepts can carry an explicit
+// `bound` (e.g. [0,1], [0,100]) instead of always falling back to
+// niceBound(maxAbs); `title` (e.g. a statistics summary) passes through to
+// the spec's existing optional title field. No schema change either way.
+function buildNumberLineSpec(concept: NumberLineConcept): unknown {
+  const { highlight, bound, title } = concept
+  let start: number
+  let end: number
+  if (bound) {
+    ;[start, end] = bound
+  } else {
+    const maxAbs = Math.max(...highlight.map(Math.abs), 5)
+    const b = niceBound(maxAbs)
+    start = -b
+    end = b
+  }
+  return { type: 'number_line', start, end, highlight, ...(title ? { title } : {}) }
 }
 
 // Sprint D: geometry concepts map directly onto a geometry VisualSpec —
@@ -61,10 +75,10 @@ export function buildVisualSpec(content: string): VisualSpec | null {
     let raw: unknown
     switch (concept.kind) {
       case 'graph':
-        raw = buildGraphSpec(concept.equation)
+        raw = buildGraphSpec(concept.equation, concept.title)
         break
       case 'number_line':
-        raw = buildNumberLineSpec(concept.highlight)
+        raw = buildNumberLineSpec(concept)
         break
       case 'process_flow':
         raw = buildProcessFlowSpec(concept.title, concept.steps)

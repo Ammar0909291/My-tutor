@@ -15,11 +15,23 @@ import { compileExpression } from './mathParser'
 export interface GraphConcept {
   kind: 'graph'
   equation: string
+  // Sprint J: optional descriptive title (e.g. coordinate-geometry's
+  // "line through (x1,y1) and (x2,y2) — distance ≈ d"). Maps directly onto
+  // graphSpecSchema's existing optional `title` field — no schema change.
+  title?: string
 }
 
 export interface NumberLineConcept {
   kind: 'number_line'
   highlight: number[]
+  // Sprint J: optional explicit [start, end] override for concepts with a
+  // natural fixed domain (fractions, percentages, ratios, probability),
+  // instead of the generic niceBound(maxAbs) default. Maps onto
+  // numberLineSpecSchema's existing start/end fields — no schema change.
+  bound?: [number, number]
+  // Sprint J: optional descriptive title (e.g. a statistics summary).
+  // Maps onto numberLineSpecSchema's existing optional `title` field.
+  title?: string
 }
 
 // Sprint D: geometry concepts. Numeric props come from the text when
@@ -84,6 +96,13 @@ const RECTANGLE_KEYWORDS = ['rectangle', 'square']
 const CIRCLE_KEYWORDS = ['circle', 'circular']
 const ANGLE_KEYWORDS = ['angle', 'degrees', 'degree']
 const GEOMETRY_TASK_KEYWORDS = ['area', 'perimeter', 'circumference', 'measure']
+
+// Sprint J: keywords/patterns for the six new curriculum-coverage concepts,
+// all reusing the existing 'graph'/'number_line' DetectedConcept kinds.
+const FRACTION_KEYWORDS = ['fraction', 'numerator', 'denominator']
+const PROBABILITY_KEYWORDS = ['probability', 'likelihood', 'chance of', 'chance that', 'odds of']
+const STATISTICS_KEYWORDS = ['mean of', 'median of', 'range of', 'average of', 'find the mean', 'find the median', 'find the range']
+const COORDINATE_KEYWORDS = ['coordinate', 'coordinates', 'point', 'points', 'plot', 'distance', 'quadrant']
 
 // Illustrative defaults — directly matching the worked examples a tutor
 // would use when no specific numbers are given in the text.
@@ -194,6 +213,188 @@ function containsAny(lower: string, keywords: string[]): boolean {
   return keywords.some((kw) => lower.includes(kw))
 }
 
+// ── Sprint J: Fractions / Ratios / Percentages / Probability / Statistics /
+// Coordinate Geometry — all reuse the existing 'graph'/'number_line' kinds
+// and the existing engines unchanged. No new DetectedConcept variants, no
+// renderer changes, no schema changes (only the two new optional
+// GraphConcept/NumberLineConcept fields added above).
+
+/** "1/2", "3/4", "5/8" → [0.5, 0.75, 0.625]. Capped, deduped. */
+function extractFractions(text: string): number[] {
+  const out: number[] = []
+  const re = /(-?\d+)\s*\/\s*(\d+)/g
+  let m: RegExpExecArray | null
+  while ((m = re.exec(text))) {
+    const num = Number(m[1])
+    const den = Number(m[2])
+    if (Number.isFinite(num) && Number.isFinite(den) && den !== 0) out.push(num / den)
+  }
+  return Array.from(new Set(out)).slice(0, 6)
+}
+
+/** "75%", "12.5%" → [75, 12.5] (kept on a 0-100 scale, not converted to decimal). */
+function extractPercentages(text: string): number[] {
+  const out: number[] = []
+  const re = /(-?\d+(?:\.\d+)?)\s*%/g
+  let m: RegExpExecArray | null
+  while ((m = re.exec(text))) {
+    const n = Number(m[1])
+    if (Number.isFinite(n)) out.push(n)
+  }
+  return Array.from(new Set(out)).slice(0, 6)
+}
+
+/** First "a:b" ratio pattern in the text, e.g. "2:3" → [2, 3]. */
+function extractRatio(text: string): [number, number] | null {
+  const m = text.match(/(\d+)\s*:\s*(\d+)/)
+  if (!m) return null
+  const a = Number(m[1])
+  const b = Number(m[2])
+  if (!Number.isFinite(a) || !Number.isFinite(b) || a + b === 0) return null
+  return [a, b]
+}
+
+/** All "(x, y)" coordinate pairs in the text, in order of appearance. */
+function extractCoordinatePoints(text: string): [number, number][] {
+  const out: [number, number][] = []
+  const re = /\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)/g
+  let m: RegExpExecArray | null
+  while ((m = re.exec(text))) {
+    const x = Number(m[1])
+    const y = Number(m[2])
+    if (Number.isFinite(x) && Number.isFinite(y)) out.push([x, y])
+  }
+  return out
+}
+
+/** All raw numbers in the text (not deduped — duplicates matter for mean/median). */
+function extractDataset(text: string): number[] {
+  const found = text.match(NUMBER_RE) ?? []
+  return found.map(Number).filter((n) => Number.isFinite(n) && Math.abs(n) <= 1000).slice(0, 15)
+}
+
+function computeStats(data: number[]): { mean: number; median: number; range: number } {
+  const sorted = [...data].sort((a, b) => a - b)
+  const round = (n: number) => Math.round(n * 100) / 100
+  const mean = round(data.reduce((s, n) => s + n, 0) / data.length)
+  const mid = Math.floor(sorted.length / 2)
+  const median = round(sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid])
+  const range = round(sorted[sorted.length - 1] - sorted[0])
+  return { mean, median, range }
+}
+
+/** A tight, visually sensible [start, end] bound around a set of fraction-like values. */
+function fractionBound(values: number[]): [number, number] {
+  const upper = Math.ceil(Math.max(...values, 1))
+  const lower = Math.floor(Math.min(...values, 0))
+  return [lower, upper]
+}
+
+/** Connecting line between two points as a "y = mx + b" string, or null for a vertical line (unsupported by the y=f(x) Graph Engine). */
+function formatEquationFromPoints(p1: [number, number], p2: [number, number]): string | null {
+  const [x1, y1] = p1
+  const [x2, y2] = p2
+  if (x1 === x2) return null
+  const round = (n: number) => Math.round(n * 1000) / 1000
+  const slope = round((y2 - y1) / (x2 - x1))
+  const intercept = round(y1 - slope * x1)
+  const sign = intercept < 0 ? '-' : '+'
+  return `y = ${slope}x ${sign} ${Math.abs(intercept)}`
+}
+
+function distanceBetween(p1: [number, number], p2: [number, number]): number {
+  return Math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+}
+
+/** Sprint J Task 4: two coordinate points + a coordinate-context keyword → the connecting line, rendered via the existing, unmodified Graph Engine. A single point or a vertical line cannot be represented (no point-marker / no y=f(x) form) — documented as a known gap, not implemented. */
+function detectCoordinateLine(content: string, lower: string): GraphConcept | null {
+  if (!containsAny(lower, COORDINATE_KEYWORDS)) return null
+  const points = extractCoordinatePoints(content)
+  if (points.length < 2) return null
+  const [p1, p2] = points
+  const equation = formatEquationFromPoints(p1, p2)
+  if (!equation || !compileExpression(equation)) return null
+  const dist = Math.round(distanceBetween(p1, p2) * 100) / 100
+  const base = `Line through (${p1[0]}, ${p1[1]}) and (${p2[0]}, ${p2[1]})`
+  const withDistance = `${base} — distance ≈ ${dist}`
+  const title = withDistance.length <= 80 ? withDistance : base.slice(0, 80)
+  return { kind: 'graph', equation, title }
+}
+
+/** Sprint J Task 2: fraction placement/comparison on the existing Number Line Engine. Two-or-more fraction matches are a strong enough signal on their own (mirrors equation-alone detection); a single match still needs a corroborating keyword to avoid misfiring on date-like "3/4" text. */
+function detectFractionConcept(content: string, lower: string): NumberLineConcept | null {
+  const values = extractFractions(content)
+  if (values.length === 0) return null
+  const strongSignal = values.length >= 2 || containsAny(lower, FRACTION_KEYWORDS) || containsAny(lower, NUMBER_LINE_KEYWORDS)
+  if (!strongSignal) return null
+  return {
+    kind: 'number_line',
+    highlight: values,
+    bound: fractionBound(values),
+    title: values.length > 1 ? 'Comparing Fractions' : 'Fraction on a Number Line',
+  }
+}
+
+/** Sprint J Task 3: percentage placement/comparison on a fixed 0-100 scale. The literal "%" sign is an unambiguous signal on its own. */
+function detectPercentageConcept(content: string): NumberLineConcept | null {
+  const values = extractPercentages(content)
+  if (values.length === 0) return null
+  return {
+    kind: 'number_line',
+    highlight: values,
+    bound: [0, 100],
+    title: values.length > 1 ? 'Comparing Percentages' : 'Percentage on a Scale of 100',
+  }
+}
+
+/** Sprint J Task 3: a ratio "a:b" shown as its two parts-of-a-whole on a 0-1 Number Line. Requires the explicit word "ratio" — a bare "a:b" pattern alone is too ambiguous (time, reference, etc.) to fire on. */
+function detectRatioConcept(content: string, lower: string): NumberLineConcept | null {
+  if (!lower.includes('ratio')) return null
+  const ratio = extractRatio(content)
+  if (!ratio) return null
+  const [a, b] = ratio
+  const total = a + b
+  const round = (n: number) => Math.round(n * 1000) / 1000
+  return {
+    kind: 'number_line',
+    highlight: [round(a / total), round(b / total)],
+    bound: [0, 1],
+    title: `Ratio ${a}:${b} as Parts of a Whole`,
+  }
+}
+
+/** Sprint J Task 6: a probability value (fraction, percentage, or bare 0-1 decimal) placed on a fixed 0-1 probability scale. Requires an explicit probability/likelihood/chance keyword. */
+function detectProbabilityConcept(content: string, lower: string): NumberLineConcept | null {
+  if (!containsAny(lower, PROBABILITY_KEYWORDS)) return null
+  const fractions = extractFractions(content)
+  const percents = extractPercentages(content).map((p) => p / 100)
+  // True decimals only (requires a "."), not extractHighlightNumbers() —
+  // that would also match the bare integer components of an already-handled
+  // "1/6" fraction pattern (e.g. the standalone "1") and double-count them.
+  const decimals = (content.match(/-?\d+\.\d+/g) ?? []).map(Number).filter((n) => n >= 0 && n <= 1)
+  const values = Array.from(new Set([...fractions, ...percents, ...decimals])).slice(0, 4)
+  if (values.length === 0) return null
+  return {
+    kind: 'number_line',
+    highlight: values,
+    bound: [0, 1],
+    title: values.length > 1 ? 'Comparing Probabilities' : 'Probability Scale',
+  }
+}
+
+/** Sprint J Task 5: mean/median/range of a dataset, shown as the data points plus the mean highlighted on the existing Number Line Engine — the only one of the four existing engines that can plot a literal set of numeric data points (the Graph Engine only plots y=f(x); building a dedicated chart engine is explicitly out of scope). Requires an explicit "mean of"/"median of"/"range of"/"average of" phrase, since bare "mean"/"range" are too common in non-statistical text (e.g. "mountain range"). */
+function detectStatisticsConcept(content: string, lower: string): NumberLineConcept | null {
+  if (!containsAny(lower, STATISTICS_KEYWORDS)) return null
+  const data = extractDataset(content)
+  if (data.length < 2) return null
+  const { mean, median, range } = computeStats(data)
+  return {
+    kind: 'number_line',
+    highlight: Array.from(new Set([...data, mean])),
+    title: `Mean = ${mean}, Median = ${median}, Range = ${range}`,
+  }
+}
+
 /**
  * Detect a visualizable concept in lesson content. Pure, synchronous,
  * deterministic. Returns null when no rule matches — callers must treat
@@ -214,6 +415,34 @@ export function detectVisualConcept(content: string): DetectedConcept | null {
   if (equation) {
     return { kind: 'graph', equation }
   }
+
+  // Sprint J: coordinate geometry — two points reused as a line through the
+  // existing Graph Engine. Comes before the fraction/number-line branches
+  // since it's still 'graph'-kind, mirroring the equation checks above.
+  const coordLine = detectCoordinateLine(content, lower)
+  if (coordLine) return coordLine
+
+  // Sprint J: fractions/percentages/ratios/probability/statistics all run
+  // before the generic NUMBER_LINE_KEYWORDS branch below, so their more
+  // specific number parsing (fraction strings, "%", "a:b") wins instead of
+  // being swallowed by extractHighlightNumbers()'s plain-integer extraction.
+  const fraction = detectFractionConcept(content, lower)
+  if (fraction) return fraction
+
+  // Probability checked before plain percentage so "the probability of rain
+  // is 30%" is tagged as a probability scale, not a generic percentage scale
+  // — probability's own extraction already understands percent values too.
+  const probability = detectProbabilityConcept(content, lower)
+  if (probability) return probability
+
+  const percentage = detectPercentageConcept(content)
+  if (percentage) return percentage
+
+  const ratio = detectRatioConcept(content, lower)
+  if (ratio) return ratio
+
+  const statistics = detectStatisticsConcept(content, lower)
+  if (statistics) return statistics
 
   if (containsAny(lower, NUMBER_LINE_KEYWORDS)) {
     const highlight = extractHighlightNumbers(content)

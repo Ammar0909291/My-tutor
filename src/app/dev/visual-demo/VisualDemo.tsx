@@ -190,6 +190,45 @@ const CHALLENGE_SPECS: { label: string; spec: VisualSpec }[] = [
   },
 ]
 
+// Sprint J: tutor-style explanations for the six newly-covered concepts
+// (fractions, percentages, ratios, coordinate geometry, statistics,
+// probability). Run through the real detector below — no VisualSpec is
+// hand-written here, same convention as every detector-fixture list above.
+const SPRINT_J_DETECTOR_FIXTURES: { topic: string; tutorText: string }[] = [
+  {
+    topic: 'Fractions — placement (number_systems.fractions)',
+    tutorText: 'Place the fraction 3/4 on a number line to see where it sits between 0 and 1.',
+  },
+  {
+    topic: 'Fractions — comparison (number_systems.fractions)',
+    tutorText: 'Which is bigger: 1/2 or 5/8? Compare them on a number line.',
+  },
+  {
+    topic: 'Percentages (number_systems.percentages)',
+    tutorText: 'A student scored 75% on a test. Show 75% on a percentage scale.',
+  },
+  {
+    topic: 'Ratios (number_systems.ratio_proportion)',
+    tutorText: 'A recipe mixes flour and sugar in a ratio of 2:3 — what fraction of the mixture is each ingredient?',
+  },
+  {
+    topic: 'Coordinate Geometry — distance between two points (coordinate_geometry.distance)',
+    tutorText: 'Plot the points (2, 3) and (5, 9), then find the distance between them.',
+  },
+  {
+    topic: 'Statistics — mean, median, range (statistics.central_tendency)',
+    tutorText: 'Find the mean of these test scores: 4, 8, 6, 5, 3, 8. Also find the median and the range.',
+  },
+  {
+    topic: 'Probability — single event (probability.basic_probability)',
+    tutorText: 'A fair die has six faces. What is the probability of rolling a 4? The probability is 1/6.',
+  },
+  {
+    topic: 'Probability — everyday percentage framing (probability.basic_probability)',
+    tutorText: 'The weather forecast says the probability of rain tomorrow is 30%.',
+  },
+]
+
 export function VisualDemo() {
   // Initial theme can be set via ?theme=dark (dev convenience for screenshots);
   // the in-page toggle still works for manual checking.
@@ -369,6 +408,29 @@ export function VisualDemo() {
               <VisualRenderer spec={spec} />
             </section>
           ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint J — Fractions, Percentages, Ratios, Coordinate Geometry, Statistics, Probability</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Each card runs the real <code>buildVisualSpec()</code> detector against tutor-style text for
+          six newly-covered concept areas. Every visual below is rendered by the same, unmodified
+          Graph/Number Line Engine used everywhere else on this page — no new renderer types.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {SPRINT_J_DETECTOR_FIXTURES.map(({ topic, tutorText }) => {
+            const detected = buildVisualSpec(tutorText)
+            return (
+              <section key={topic}>
+                <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{topic}</h2>
+                <div style={{ border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, marginBottom: 8, fontSize: 12, fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                  &ldquo;{tutorText}&rdquo;
+                </div>
+                {detected ? <VisualRenderer spec={detected} /> : (
+                  <p style={{ fontSize: 12, opacity: 0.6 }}>No visual detected (renders lesson text only — zero regression).</p>
+                )}
+              </section>
+            )
+          })}
         </div>
       </div>
     </div>
