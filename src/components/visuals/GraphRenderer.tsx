@@ -223,6 +223,18 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
 
   const liveEquation = model ? formatLinearEquation(model.m, model.b) : `y = ${spec.equation.replace(/^\s*y\s*=\s*/i, '')}`
 
+  // Sprint G: challenge validation. Purely a read of already-live `model`
+  // state vs. spec.challenge's targets — no new parsing, no new state.
+  const challenge = spec.challenge
+  const challengeTolerance = challenge?.tolerance ?? 0.5
+  const slopeOk = challenge?.targetSlope === undefined || (model !== null && Math.abs(model.m - challenge.targetSlope) <= challengeTolerance)
+  const interceptOk = challenge?.targetIntercept === undefined || (model !== null && Math.abs(model.b - challenge.targetIntercept) <= challengeTolerance)
+  const challengeMet = !!challenge && (challenge.targetSlope !== undefined || challenge.targetIntercept !== undefined) && slopeOk && interceptOk
+  const challengeGoalText = challenge && [
+    challenge.targetSlope !== undefined ? `slope = ${challenge.targetSlope}` : null,
+    challenge.targetIntercept !== undefined ? `intercept = ${challenge.targetIntercept}` : null,
+  ].filter(Boolean).join(', ')
+
   return (
     <div style={cardStyle}>
       <Header title={spec.title ?? 'Graph'} subtitle={liveEquation} />
@@ -281,6 +293,11 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
       <p style={{ margin: '6px 4px 0', fontSize: 10, color: 'var(--text-dim, #888)' }}>
         {model ? 'Drag the points to change slope/intercept · ' : ''}Drag to pan · scroll or use +/− to zoom
       </p>
+      {challenge && challengeGoalText && (
+        <p style={{ margin: '4px 4px 0', fontSize: 11, fontWeight: 600, color: challengeMet ? 'var(--coral, #F78166)' : 'var(--text-dim, #888)' }}>
+          {challengeMet ? `✓ Target met: ${challengeGoalText}` : `Target: ${challengeGoalText}`}
+        </p>
+      )}
     </div>
   )
 }

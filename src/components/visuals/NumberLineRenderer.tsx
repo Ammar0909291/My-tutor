@@ -91,6 +91,29 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
     ? `${fractionLabel(highlights[0])} ${highlights[0] === highlights[1] ? '=' : highlights[0] < highlights[1] ? '<' : '>'} ${fractionLabel(highlights[1])}`
     : null
 
+  // Sprint G: challenge validation. Reads the same `highlights` array Sprint
+  // F's drag interaction already maintains — no new state.
+  const challenge = spec.challenge
+  const tolerance = challenge?.tolerance ?? 0.5
+  const placeOk = challenge?.targetValue === undefined
+    || highlights.some((p) => Math.abs(p - challenge.targetValue!) <= tolerance)
+  const relationOk = challenge?.targetRelation === undefined
+    || (highlights.length === 2 && (
+      challenge.targetRelation === '=' ? highlights[0] === highlights[1]
+      : challenge.targetRelation === '<' ? highlights[0] < highlights[1]
+      : highlights[0] > highlights[1]
+    ))
+  const orderOk = challenge?.order === undefined
+    || (highlights.length >= 2 && highlights.every((v, i) => i === 0
+      || (challenge.order === 'asc' ? v >= highlights[i - 1] : v <= highlights[i - 1])))
+  const hasChallenge = !!challenge && (challenge.targetValue !== undefined || challenge.targetRelation !== undefined || challenge.order !== undefined)
+  const challengeMet = hasChallenge && placeOk && relationOk && orderOk
+  const challengeGoalText = challenge && [
+    challenge.targetValue !== undefined ? `place a point near ${fractionLabel(challenge.targetValue)}` : null,
+    challenge.targetRelation !== undefined ? `make a ${challenge.targetRelation} b` : null,
+    challenge.order !== undefined ? `arrange points in ${challenge.order === 'asc' ? 'ascending' : 'descending'} order` : null,
+  ].filter(Boolean).join(', ')
+
   return (
     <div style={cardStyle}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
@@ -134,6 +157,11 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
       )}
       {spec.interactive && (
         <p style={{ margin: '4px 4px 0', fontSize: 10, color: 'var(--text-dim, #888)' }}>Drag a point to move it</p>
+      )}
+      {hasChallenge && challengeGoalText && (
+        <p style={{ margin: '4px 4px 0', fontSize: 11, fontWeight: 600, color: challengeMet ? 'var(--coral, #F78166)' : 'var(--text-dim, #888)' }}>
+          {challengeMet ? `✓ Target met: ${challengeGoalText}` : `Target: ${challengeGoalText}`}
+        </p>
       )}
     </div>
   )

@@ -55,6 +55,18 @@ function fmt(n: number): string {
   return String(r)
 }
 
+/** Sprint G: shared challenge feedback line — reads a shape's already-live derived value(s) vs. spec.challenge targets. No new state. */
+function ChallengeFeedback({ challenge, checks }: { challenge: { tolerance?: number } | undefined; checks: { label: string; ok: boolean }[] }) {
+  if (!challenge || checks.length === 0) return null
+  const met = checks.every((c) => c.ok)
+  const goalText = checks.map((c) => c.label).join(', ')
+  return (
+    <p style={{ margin: '4px 4px 0', fontSize: 11, fontWeight: 600, color: met ? 'var(--coral, #F78166)' : 'var(--text-dim, #888)' }}>
+      {met ? `✓ Target met: ${goalText}` : `Target: ${goalText}`}
+    </p>
+  )
+}
+
 /** Fit a shape's intrinsic width/height (math units) into the available pixel box. */
 function useFitScale(w: number, h: number, unitW: number, unitH: number) {
   const availW = Math.max(1, w - PAD * 2)
@@ -136,6 +148,13 @@ function TriangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'triangl
         )}
       </Canvas>
       <Formula>Area = ½ × base × height = {fmt(area)} · Perimeter ≈ {fmt(perimeter)}</Formula>
+      <ChallengeFeedback
+        challenge={spec.challenge}
+        checks={[
+          ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
+          ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `perimeter = ${spec.challenge.targetPerimeter}`, ok: Math.abs(perimeter - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
+        ]}
+      />
     </Card>
   )
 }
@@ -175,6 +194,13 @@ function RectangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'rectan
         )}
       </Canvas>
       <Formula>Area = width × height = {fmt(area)}</Formula>
+      <ChallengeFeedback
+        challenge={spec.challenge}
+        checks={[
+          ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
+          ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `perimeter = ${spec.challenge.targetPerimeter}`, ok: Math.abs(2 * (width + height) - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
+        ]}
+      />
     </Card>
   )
 }
@@ -207,6 +233,14 @@ function CircleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'circle' }
         )}
       </Canvas>
       <Formula>Circumference = 2πr = {fmt(circumference)} · Area = πr² = {fmt(area)}</Formula>
+      <ChallengeFeedback
+        challenge={spec.challenge}
+        checks={[
+          ...(spec.challenge?.targetRadius !== undefined ? [{ label: `radius = ${spec.challenge.targetRadius}`, ok: Math.abs(radius - spec.challenge.targetRadius) <= (spec.challenge.tolerance ?? 1) }] : []),
+          ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
+          ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `circumference = ${spec.challenge.targetPerimeter}`, ok: Math.abs(circumference - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
+        ]}
+      />
     </Card>
   )
 }
@@ -278,6 +312,12 @@ function AngleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'angle' }> 
         )}
       </Canvas>
       <Formula>Angle measurement = {fmt(angle)}°</Formula>
+      <ChallengeFeedback
+        challenge={spec.challenge}
+        checks={[
+          ...(spec.challenge?.targetAngle !== undefined ? [{ label: `angle = ${spec.challenge.targetAngle}°`, ok: Math.abs(angle - spec.challenge.targetAngle) <= (spec.challenge.tolerance ?? 3) }] : []),
+        ]}
+      />
     </Card>
   )
 }

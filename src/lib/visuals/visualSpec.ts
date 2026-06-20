@@ -12,6 +12,41 @@
 
 import { z } from 'zod'
 
+// ── challenge (Sprint G: Assessment-Integrated Visual Learning) ─────────────
+// Each spec type gets its own challenge shape because each renderer's "live
+// value" is differently typed. All fields are optional — a challenge can
+// target any subset of them — and `tolerance` lets callers loosen/tighten the
+// default tolerance used by the renderer's live validation.
+const graphChallengeSchema = z.object({
+  targetSlope: z.number().min(-20).max(20).optional(),
+  targetIntercept: z.number().min(-50).max(50).optional(),
+  tolerance: z.number().positive().max(10).optional(),
+}).optional()
+
+const numberLineChallengeSchema = z.object({
+  // "Place number": drag a point until it lands near targetValue.
+  targetValue: z.number().optional(),
+  // "Compare numbers": arrange exactly 2 highlighted points so their relation
+  // (first vs. second) matches targetRelation.
+  targetRelation: z.enum(['<', '>', '=']).optional(),
+  // "Ordering exercise": arrange 2+ highlighted points into ascending/descending order.
+  order: z.enum(['asc', 'desc']).optional(),
+  tolerance: z.number().positive().max(50).optional(),
+}).optional()
+
+const geometryChallengeSchema = z.object({
+  targetArea: z.number().positive().max(100000).optional(),
+  targetPerimeter: z.number().positive().max(100000).optional(),
+  targetAngle: z.number().min(0).max(360).optional(),
+  targetRadius: z.number().positive().max(1000).optional(),
+  tolerance: z.number().positive().max(50).optional(),
+}).optional()
+
+// "Reorder process steps": success when the current order matches the
+// spec's own (assumed-correct) order. No extra target fields are needed —
+// presence of `challenge` simply turns on the success/feedback display.
+const processFlowChallengeSchema = z.object({}).optional()
+
 // ── graph ──────────────────────────────────────────────────────────────────
 // equation is a single-variable (x) expression; Sprint B targets linear
 // (y = mx + b) and quadratic (y = ax^2 + bx + c). It is evaluated by the safe
@@ -25,6 +60,9 @@ export const graphSpecSchema = z.object({
   // Sprint F: opt-in drag interaction (draggable slope/intercept for linear
   // equations). Omitted/false renders exactly as Sprint B — purely additive.
   interactive: z.boolean().optional(),
+  // Sprint G: opt-in slope/intercept challenge, validated against the live
+  // interactive model. Purely additive.
+  challenge: graphChallengeSchema,
 })
 
 // ── number_line ─────────────────────────────────────────────────────────────
@@ -40,6 +78,8 @@ export const numberLineSpecSchema = z.object({
   title: z.string().max(80).optional(),
   // Sprint F: opt-in drag interaction (draggable highlighted points).
   interactive: z.boolean().optional(),
+  // Sprint G: opt-in place/compare/order challenge.
+  challenge: numberLineChallengeSchema,
 })
 
 // ── process_flow ─────────────────────────────────────────────────────────────
@@ -66,6 +106,8 @@ export const processFlowSpecSchema = z.object({
   orientation: z.enum(['vertical', 'horizontal', 'auto']).optional(),
   // Sprint F: opt-in reorder mode (drag/Up-Down to fix a shuffled sequence).
   interactive: z.boolean().optional(),
+  // Sprint G: opt-in reorder challenge — success when order matches the spec's own order.
+  challenge: processFlowChallengeSchema,
 })
 
 // ── geometry ─────────────────────────────────────────────────────────────────
@@ -86,6 +128,7 @@ const pointSpecSchema = z.object({
   shape: z.literal('point'),
   title: z.string().max(80).optional(),
   interactive: z.boolean().optional(),
+  challenge: geometryChallengeSchema,
 })
 
 const lineSpecSchema = z.object({
@@ -94,6 +137,7 @@ const lineSpecSchema = z.object({
   length: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
   interactive: z.boolean().optional(),
+  challenge: geometryChallengeSchema,
 })
 
 const angleSpecSchema = z.object({
@@ -102,6 +146,7 @@ const angleSpecSchema = z.object({
   angle: z.number().min(0).max(360),
   title: z.string().max(80).optional(),
   interactive: z.boolean().optional(),
+  challenge: geometryChallengeSchema,
 })
 
 const trianglePropsSchema = z.object({
@@ -111,6 +156,7 @@ const trianglePropsSchema = z.object({
   height: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
   interactive: z.boolean().optional(),
+  challenge: geometryChallengeSchema,
 })
 
 const rectanglePropsSchema = z.object({
@@ -120,6 +166,7 @@ const rectanglePropsSchema = z.object({
   height: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
   interactive: z.boolean().optional(),
+  challenge: geometryChallengeSchema,
 })
 
 const circlePropsSchema = z.object({
@@ -128,6 +175,7 @@ const circlePropsSchema = z.object({
   radius: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
   interactive: z.boolean().optional(),
+  challenge: geometryChallengeSchema,
 })
 
 export const geometrySpecSchema = z.discriminatedUnion('shape', [

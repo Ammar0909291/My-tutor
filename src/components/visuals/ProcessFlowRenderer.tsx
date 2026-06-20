@@ -69,9 +69,11 @@ export function ProcessFlowRenderer({ spec }: { spec: ProcessFlowSpec }) {
   const { order, swap, isCorrect } = useReorder(spec.steps.length, !!spec.interactive)
   const orderedSteps = spec.interactive ? order.map((i) => spec.steps[i]) : spec.steps
 
+  const hasChallenge = !!spec.challenge
+
   return orientation === 'horizontal'
-    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} />
-    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} />
+    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
+    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
 }
 
 interface FlowProps {
@@ -83,18 +85,21 @@ interface FlowProps {
   order: number[]
   swap: (i: number, j: number) => void
   isCorrect: boolean
+  hasChallenge: boolean
 }
 
-function ReorderFeedback({ interactive, isCorrect }: { interactive: boolean; isCorrect: boolean }) {
+function ReorderFeedback({ interactive, isCorrect, hasChallenge }: { interactive: boolean; isCorrect: boolean; hasChallenge: boolean }) {
   if (!interactive) return null
   return (
     <p style={{ margin: '6px 4px 0', fontSize: 11, fontWeight: 600, color: isCorrect ? 'var(--coral, #F78166)' : 'var(--text-dim, #888)' }}>
-      {isCorrect ? '✓ Correct order!' : 'Use ▲▼ to put the steps in the right order'}
+      {isCorrect
+        ? (hasChallenge ? '✓ Target met: steps in the correct order' : '✓ Correct order!')
+        : (hasChallenge ? 'Target: arrange steps in the correct order' : 'Use ▲▼ to put the steps in the right order')}
     </p>
   )
 }
 
-function VerticalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect }: FlowProps) {
+function VerticalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
   const boxW = Math.min(STEP_W + 60, width - 16)
   const cx = width / 2
   const h = steps.length * STEP_H + (steps.length - 1) * GAP + 16
@@ -123,12 +128,12 @@ function VerticalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrec
           })}
         </svg>
       </div>
-      <ReorderFeedback interactive={interactive} isCorrect={isCorrect} />
+      <ReorderFeedback interactive={interactive} isCorrect={isCorrect} hasChallenge={hasChallenge} />
     </Card>
   )
 }
 
-function HorizontalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect }: FlowProps) {
+function HorizontalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
   const n = steps.length
   const totalW = n * STEP_W + (n - 1) * GAP
   const startX = Math.max(8, (width - totalW) / 2)
@@ -160,7 +165,7 @@ function HorizontalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorr
           })}
         </svg>
       </div>
-      <ReorderFeedback interactive={interactive} isCorrect={isCorrect} />
+      <ReorderFeedback interactive={interactive} isCorrect={isCorrect} hasChallenge={hasChallenge} />
     </Card>
   )
 }

@@ -169,6 +169,27 @@ const INTERACTIVE_SPECS: { label: string; spec: VisualSpec }[] = [
   },
 ]
 
+// Sprint G: assessment specs — same renderers, opt-in `challenge` alongside
+// `interactive`. Each card states a target; the live drag value is graded
+// against it with a tolerance, purely client-side.
+const CHALLENGE_SPECS: { label: string; spec: VisualSpec }[] = [
+  { label: 'Graph challenge — hit slope 3, intercept 2', spec: { type: 'graph', equation: 'y = x + 1', title: 'Drag to slope=3, intercept=2', interactive: true, challenge: { targetSlope: 3, targetIntercept: 2 } } },
+  { label: 'Number line — place a point near 7', spec: { type: 'number_line', start: -10, end: 10, highlight: [2], title: 'Place a point near 7', interactive: true, challenge: { targetValue: 7 } } },
+  { label: 'Number line — make a < b', spec: { type: 'number_line', start: -10, end: 10, highlight: [5, 3], title: 'Arrange so the first point is less than the second', interactive: true, challenge: { targetRelation: '<' } } },
+  { label: 'Number line — ascending order', spec: { type: 'number_line', start: -10, end: 10, highlight: [8, 1, 5], title: 'Arrange the three points in ascending order', interactive: true, challenge: { order: 'asc' } } },
+  { label: 'Triangle challenge — area = 20', spec: { type: 'geometry', shape: 'triangle', base: 6, height: 4, interactive: true, challenge: { targetArea: 20 } } },
+  { label: 'Rectangle challenge — perimeter = 24', spec: { type: 'geometry', shape: 'rectangle', width: 8, height: 3, interactive: true, challenge: { targetPerimeter: 24 } } },
+  { label: 'Circle challenge — radius = 8', spec: { type: 'geometry', shape: 'circle', radius: 5, interactive: true, challenge: { targetRadius: 8 } } },
+  { label: 'Angle challenge — set angle to 120°', spec: { type: 'geometry', shape: 'angle', angle: 45, interactive: true, challenge: { targetAngle: 120 } } },
+  {
+    label: 'Photosynthesis — reorder challenge',
+    spec: {
+      type: 'process_flow', title: 'Photosynthesis', interactive: true, orientation: 'auto', challenge: {},
+      steps: ['Sunlight', 'Water', 'Carbon Dioxide', 'Glucose', 'Oxygen'].map((title) => ({ title })),
+    },
+  },
+]
+
 export function VisualDemo() {
   // Initial theme can be set via ?theme=dark (dev convenience for screenshots);
   // the in-page toggle still works for manual checking.
@@ -328,6 +349,21 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
           {INTERACTIVE_SPECS.map(({ label, spec }) => (
+            <section key={label}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualRenderer spec={spec} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint G — Visual Assessment</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Same renderers, opt-in <code>challenge</code> alongside <code>interactive</code>. Each card states a
+          target; dragging toward it flips the feedback line from &ldquo;Target: …&rdquo; to &ldquo;✓ Target
+          met: …&rdquo;. All grading is live and client-side — no score is saved anywhere.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {CHALLENGE_SPECS.map(({ label, spec }) => (
             <section key={label}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualRenderer spec={spec} />
