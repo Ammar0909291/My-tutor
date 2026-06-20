@@ -8,7 +8,7 @@
  * only: it does not touch curriculum, progression, grading, XP, or
  * assessment scoring (see docs/EDUCATIONAL_INTELLIGENCE_TUTOR_INTEGRATION_AUDIT.md).
  */
-import { getTeachingPlans } from './teachingPlan'
+import { getWeightedTeachingPlanProfile } from './methodWeighting'
 import type { TeachingPlan, TeachingMethod } from './teachingPlan'
 
 /** The compact view of a topic's teaching plan that Tutor Max consumes. */
@@ -77,9 +77,14 @@ CRITICAL: This changes only your teaching STYLE (pacing, examples, analogies, ch
 }
 
 /**
- * Task 2 — loads the Sprint 5 teaching plans for the user and returns the
- * tutor context for the current topic. Thin wrapper; read-only. Returns null
- * if there is no plan for the topic (or no current topic).
+ * Task 2 (Sprint 10) — loads the Sprint 9 WEIGHTED teaching plans for the user
+ * and returns the tutor context for the current topic. The weighted plan
+ * reorders `recommendedMethods` to lead with the learner's proven-effective
+ * methods; `buildTutorTeachingContext` + `buildTutorTeachingContextBlock`
+ * preserve that order verbatim (no re-sort). Thin wrapper; read-only. Returns
+ * null if there is no plan for the topic (or no current topic). For learners
+ * with no effectiveness evidence the weighted order equals the original order,
+ * so this is a safe no-op-ordering change.
  */
 export async function getTutorTeachingContext(
   userId: string,
@@ -87,6 +92,6 @@ export async function getTutorTeachingContext(
   topicSlug: string | null
 ): Promise<TutorTeachingContext | null> {
   if (!topicSlug) return null
-  const { teachingPlan } = await getTeachingPlans(userId)
-  return buildTutorTeachingContext(teachingPlan, subjectSlug, topicSlug)
+  const { weightedPlan } = await getWeightedTeachingPlanProfile(userId)
+  return buildTutorTeachingContext(weightedPlan, subjectSlug, topicSlug)
 }
