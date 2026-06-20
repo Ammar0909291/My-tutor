@@ -5,7 +5,7 @@
  * VisualSpec, ready for VisualRenderer. Fails safe: any unexpected shape or
  * exception yields null, never a thrown error.
  */
-import { detectVisualConcept } from './visualConceptDetector'
+import { detectVisualConcept, type DetectedConcept } from './visualConceptDetector'
 import { parseVisualSpec, type VisualSpec } from './visualSpec'
 
 /** Round to a "nice" bound so number-line ranges look intentional, not jagged. */
@@ -27,6 +27,21 @@ function buildNumberLineSpec(highlight: number[]): unknown {
   return { type: 'number_line', start: -bound, end: bound, highlight }
 }
 
+// Sprint D: geometry concepts map directly onto a geometry VisualSpec —
+// no derived ranges/bounds needed, every prop is already a validated number.
+function buildGeometrySpec(concept: Exclude<DetectedConcept, { kind: 'graph' } | { kind: 'number_line' }>): unknown {
+  switch (concept.kind) {
+    case 'triangle':
+      return { type: 'geometry', shape: 'triangle', base: concept.base, height: concept.height }
+    case 'rectangle':
+      return { type: 'geometry', shape: 'rectangle', width: concept.width, height: concept.height }
+    case 'circle':
+      return { type: 'geometry', shape: 'circle', radius: concept.radius }
+    case 'angle':
+      return { type: 'geometry', shape: 'angle', angle: concept.angle }
+  }
+}
+
 /**
  * Detect + build + validate in one call. Input: raw lesson/tutor text.
  * Output: a validated VisualSpec, or null when nothing qualifies or the
@@ -37,9 +52,17 @@ export function buildVisualSpec(content: string): VisualSpec | null {
     const concept = detectVisualConcept(content)
     if (!concept) return null
 
-    const raw = concept.kind === 'graph'
-      ? buildGraphSpec(concept.equation)
-      : buildNumberLineSpec(concept.highlight)
+    let raw: unknown
+    switch (concept.kind) {
+      case 'graph':
+        raw = buildGraphSpec(concept.equation)
+        break
+      case 'number_line':
+        raw = buildNumberLineSpec(concept.highlight)
+        break
+      default:
+        raw = buildGeometrySpec(concept)
+    }
 
     return parseVisualSpec(raw)
   } catch {

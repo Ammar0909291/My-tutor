@@ -35,6 +35,47 @@ const DETECTOR_FIXTURES: { topic: string; tutorText: string }[] = [
   },
 ]
 
+// Sprint D: tutor-style explanations grounded in real curriculum geometry
+// topics (src/lib/education/mathKnowledgeGraph.ts: geometry.triangles,
+// geometry.quadrilaterals, geometry.circles, geometry.basic_shapes,
+// mensuration.perimeter_area_2d). Run through the real detector below —
+// no VisualSpec is hand-written here.
+const GEOMETRY_DETECTOR_FIXTURES: { topic: string; tutorText: string }[] = [
+  {
+    topic: 'Triangles — Properties and Congruence (geometry.triangles)',
+    tutorText: 'Find the area of a triangle with base 6 cm and height 4 cm. Remember, the angle sum of any triangle is always 180°.',
+  },
+  {
+    topic: 'Quadrilaterals and Polygons (geometry.quadrilaterals)',
+    tutorText: 'A rectangle with width 8 cm and height 3 cm — calculate its area and perimeter using the standard rectangle formulas.',
+  },
+  {
+    topic: 'Circles (geometry.circles)',
+    tutorText: 'For a circle of radius 5 cm, calculate the circumference and area using the centre and radius.',
+  },
+  {
+    topic: 'Basic Geometry — Points, Lines and Angles (geometry.basic_shapes)',
+    tutorText: 'Measure the angle: this is an angle of 45 degrees, which makes it an acute angle.',
+  },
+  {
+    topic: 'Perimeter and Area of 2D Figures (mensuration.perimeter_area_2d)',
+    tutorText: 'To find the perimeter and area of a triangle, we first need its base and height.',
+  },
+]
+
+// Sprint D: the six supported geometry shapes, rendered through the real
+// GeometryRenderer (via VisualRenderer) to verify rendering/theming/responsiveness
+// independent of detection (which is exercised separately below).
+const GEOMETRY_SPECS: { label: string; spec: VisualSpec }[] = [
+  { label: 'Triangle — base 6, height 4',  spec: { type: 'geometry', shape: 'triangle', base: 6, height: 4 } },
+  { label: 'Rectangle — 8 × 3',            spec: { type: 'geometry', shape: 'rectangle', width: 8, height: 3 } },
+  { label: 'Circle — radius 5',            spec: { type: 'geometry', shape: 'circle', radius: 5 } },
+  { label: 'Angle — 45°',                  spec: { type: 'geometry', shape: 'angle', angle: 45 } },
+  { label: 'Angle — 120°',                 spec: { type: 'geometry', shape: 'angle', angle: 120 } },
+  { label: 'Line segment — length 10',     spec: { type: 'geometry', shape: 'line', length: 10 } },
+  { label: 'Point',                        spec: { type: 'geometry', shape: 'point' } },
+]
+
 const SPECS: { label: string; spec: VisualSpec }[] = [
   { label: 'Linear — y = x + 2',          spec: { type: 'graph', equation: 'y = x + 2', title: 'Linear' } },
   { label: 'Linear — y = -2x + 1',        spec: { type: 'graph', equation: 'y = -2x + 1', title: 'Linear (negative slope)' } },
@@ -111,6 +152,41 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
           {DETECTOR_FIXTURES.map(({ topic, tutorText }) => {
+            const detected = buildVisualSpec(tutorText)
+            return (
+              <section key={topic}>
+                <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{topic}</h2>
+                <div style={{ border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, marginBottom: 8, fontSize: 12, fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                  &ldquo;{tutorText}&rdquo;
+                </div>
+                {detected ? <VisualRenderer spec={detected} /> : (
+                  <p style={{ fontSize: 12, opacity: 0.6 }}>No visual detected (renders lesson text only — zero regression).</p>
+                )}
+              </section>
+            )
+          })}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint D — Geometry Engine (manual specs, rendering proof)</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The six supported shapes via the real GeometryRenderer (through VisualRenderer). Automatic detection from real lesson text is demonstrated separately below.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16 }}>
+          {GEOMETRY_SPECS.map(({ label, spec }) => (
+            <section key={label}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualRenderer spec={spec} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint D — Automatic geometry detection from real lesson text</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Each card runs the real <code>buildVisualSpec()</code> detector against tutor-style text grounded
+          in real curriculum geometry topics (src/lib/education/mathKnowledgeGraph.ts). No VisualSpec is hand-written here.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {GEOMETRY_DETECTOR_FIXTURES.map(({ topic, tutorText }) => {
             const detected = buildVisualSpec(tutorText)
             return (
               <section key={topic}>

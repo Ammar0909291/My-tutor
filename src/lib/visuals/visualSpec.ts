@@ -37,13 +37,81 @@ export const numberLineSpecSchema = z.object({
   title: z.string().max(80).optional(),
 })
 
+// ── geometry ─────────────────────────────────────────────────────────────────
+// Sprint D: closed-form coordinate-geometry shapes only — no equation
+// strings, no parser, no external geometry engine. Every numeric prop is
+// validated directly by zod, so there is no expression-evaluation attack
+// surface the way graph's `equation` string requires one (see mathParser.ts).
+// Each shape is its own ZodObject sharing the literal `type: 'geometry'` plus
+// a `shape` discriminant; geometrySpecSchema is a nested discriminatedUnion
+// on `shape` (kept separate from the outer union below because
+// discriminatedUnion requires unique discriminant *values* per member, and
+// every geometry shape shares `type: 'geometry'`).
+const pointSpecSchema = z.object({
+  type: z.literal('geometry'),
+  shape: z.literal('point'),
+  title: z.string().max(80).optional(),
+})
+
+const lineSpecSchema = z.object({
+  type: z.literal('geometry'),
+  shape: z.literal('line'),
+  length: z.number().positive().max(1000),
+  title: z.string().max(80).optional(),
+})
+
+const angleSpecSchema = z.object({
+  type: z.literal('geometry'),
+  shape: z.literal('angle'),
+  angle: z.number().min(0).max(360),
+  title: z.string().max(80).optional(),
+})
+
+const trianglePropsSchema = z.object({
+  type: z.literal('geometry'),
+  shape: z.literal('triangle'),
+  base: z.number().positive().max(1000),
+  height: z.number().positive().max(1000),
+  title: z.string().max(80).optional(),
+})
+
+const rectanglePropsSchema = z.object({
+  type: z.literal('geometry'),
+  shape: z.literal('rectangle'),
+  width: z.number().positive().max(1000),
+  height: z.number().positive().max(1000),
+  title: z.string().max(80).optional(),
+})
+
+const circlePropsSchema = z.object({
+  type: z.literal('geometry'),
+  shape: z.literal('circle'),
+  radius: z.number().positive().max(1000),
+  title: z.string().max(80).optional(),
+})
+
+export const geometrySpecSchema = z.discriminatedUnion('shape', [
+  pointSpecSchema,
+  lineSpecSchema,
+  angleSpecSchema,
+  trianglePropsSchema,
+  rectanglePropsSchema,
+  circlePropsSchema,
+])
+
 // ── union ────────────────────────────────────────────────────────────────────
 // Members must be plain ZodObjects for discriminatedUnion; cross-field checks
 // (e.g. number_line end > start) go on a union-level superRefine below.
-const visualSpecUnion = z.discriminatedUnion('type', [
+// geometrySpecSchema is itself a (nested) discriminated union, not a plain
+// ZodObject, so the outer union is a plain z.union rather than a
+// discriminatedUnion — `type` still narrows correctly at the TypeScript
+// level for switch/case dispatch, zod just validates each branch in order.
+const mathSpecUnion = z.discriminatedUnion('type', [
   graphSpecSchema,
   numberLineSpecSchema,
 ])
+
+const visualSpecUnion = z.union([mathSpecUnion, geometrySpecSchema])
 
 export const visualSpecSchema = visualSpecUnion.superRefine((s, ctx) => {
   if (s.type === 'number_line' && s.end <= s.start) {
@@ -53,10 +121,17 @@ export const visualSpecSchema = visualSpecUnion.superRefine((s, ctx) => {
 
 export type GraphSpec = z.infer<typeof graphSpecSchema>
 export type NumberLineSpec = z.infer<typeof numberLineSpecSchema>
+export type PointSpec = z.infer<typeof pointSpecSchema>
+export type LineSpec = z.infer<typeof lineSpecSchema>
+export type AngleSpec = z.infer<typeof angleSpecSchema>
+export type TriangleSpec = z.infer<typeof trianglePropsSchema>
+export type RectangleSpec = z.infer<typeof rectanglePropsSchema>
+export type CircleSpec = z.infer<typeof circlePropsSchema>
+export type GeometrySpec = z.infer<typeof geometrySpecSchema>
 export type VisualSpec = z.infer<typeof visualSpecUnion>
 
 /** All visual `type` values implemented this sprint (for docs/tests). */
-export const SUPPORTED_VISUAL_TYPES = ['graph', 'number_line'] as const
+export const SUPPORTED_VISUAL_TYPES = ['graph', 'number_line', 'geometry'] as const
 
 /**
  * Validate unknown input into a VisualSpec. Fail-safe: returns null on any

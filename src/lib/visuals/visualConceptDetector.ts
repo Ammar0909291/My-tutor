@@ -22,7 +22,23 @@ export interface NumberLineConcept {
   highlight: number[]
 }
 
-export type DetectedConcept = GraphConcept | NumberLineConcept
+// Sprint D: geometry concepts. Numeric props come from the text when
+// explicitly labelled (e.g. "base 6", "radius 5cm", "45 degrees"); otherwise
+// a sensible illustrative default is used so the concept (e.g. "find the
+// area of a triangle") still gets a representative, correctly-labelled
+// diagram even without specific numbers in the prompt.
+export interface TriangleConcept { kind: 'triangle'; base: number; height: number }
+export interface RectangleConcept { kind: 'rectangle'; width: number; height: number }
+export interface CircleConcept { kind: 'circle'; radius: number }
+export interface AngleConcept { kind: 'angle'; angle: number }
+
+export type DetectedConcept =
+  | GraphConcept
+  | NumberLineConcept
+  | TriangleConcept
+  | RectangleConcept
+  | CircleConcept
+  | AngleConcept
 
 // Keywords that confirm a graph-worthy concept is being discussed (linear
 // equations, quadratic equations, coordinate systems). Matched only to
@@ -51,6 +67,43 @@ function extractEquation(text: string): string | null {
     if (compileExpression(candidate)) return candidate
   }
   return null
+}
+
+// Sprint D: geometry keywords. Shape keywords identify *which* shape is being
+// discussed; task keywords ("area", "perimeter", ...) confirm the discussion
+// is asking for a visualizable computation, not just a passing mention.
+const TRIANGLE_KEYWORDS = ['triangle']
+const RECTANGLE_KEYWORDS = ['rectangle', 'square']
+const CIRCLE_KEYWORDS = ['circle', 'circular']
+const ANGLE_KEYWORDS = ['angle', 'degrees', 'degree']
+const GEOMETRY_TASK_KEYWORDS = ['area', 'perimeter', 'circumference', 'measure']
+
+// Illustrative defaults — directly matching the worked examples a tutor
+// would use when no specific numbers are given in the text.
+const DEFAULT_TRIANGLE = { base: 6, height: 4 }
+const DEFAULT_RECTANGLE = { width: 8, height: 3 }
+const DEFAULT_CIRCLE_RADIUS = 5
+const DEFAULT_ANGLE = 45
+
+/** Pull a number explicitly labelled with one of the given words, e.g. "base 6", "radius: 5cm", "height = 4". */
+function extractLabeled(text: string, labels: string[]): number | null {
+  for (const label of labels) {
+    const re = new RegExp(`${label}\\s*(?:of|is|=|:)?\\s*(-?\\d+(?:\\.\\d+)?)`, 'i')
+    const m = text.match(re)
+    if (m) {
+      const n = Number(m[1])
+      if (Number.isFinite(n)) return n
+    }
+  }
+  return null
+}
+
+/** Pull a number followed by "degree(s)" or a bare "°", e.g. "45 degrees", "120°". */
+function extractAngleDegrees(text: string): number | null {
+  const m = text.match(/(-?\d+(?:\.\d+)?)\s*(?:°|degrees?)/i)
+  if (!m) return null
+  const n = Number(m[1])
+  return Number.isFinite(n) ? n : null
 }
 
 // Standalone signed integers/decimals, e.g. "-5", "3", "0.5" — used to find
@@ -93,6 +146,44 @@ export function detectVisualConcept(content: string): DetectedConcept | null {
     const highlight = extractHighlightNumbers(content)
     if (highlight.length > 0) {
       return { kind: 'number_line', highlight }
+    }
+  }
+
+  // Geometry: a shape keyword alone is too ambiguous (a shape can be
+  // mentioned in passing); require it alongside a task keyword (area,
+  // perimeter, ...) or an explicit labelled dimension before firing.
+  const hasTaskSignal = containsAny(lower, GEOMETRY_TASK_KEYWORDS)
+
+  if (containsAny(lower, TRIANGLE_KEYWORDS)) {
+    const base = extractLabeled(content, ['base'])
+    const height = extractLabeled(content, ['height'])
+    if (hasTaskSignal || base !== null || height !== null) {
+      return { kind: 'triangle', base: base ?? DEFAULT_TRIANGLE.base, height: height ?? DEFAULT_TRIANGLE.height }
+    }
+  }
+
+  if (containsAny(lower, CIRCLE_KEYWORDS)) {
+    const radius = extractLabeled(content, ['radius']) ?? (() => {
+      const d = extractLabeled(content, ['diameter'])
+      return d !== null ? d / 2 : null
+    })()
+    if (hasTaskSignal || radius !== null) {
+      return { kind: 'circle', radius: radius ?? DEFAULT_CIRCLE_RADIUS }
+    }
+  }
+
+  if (containsAny(lower, RECTANGLE_KEYWORDS)) {
+    const width = extractLabeled(content, ['width', 'length'])
+    const height = extractLabeled(content, ['height'])
+    if (hasTaskSignal || width !== null || height !== null) {
+      return { kind: 'rectangle', width: width ?? DEFAULT_RECTANGLE.width, height: height ?? DEFAULT_RECTANGLE.height }
+    }
+  }
+
+  if (containsAny(lower, ANGLE_KEYWORDS)) {
+    const angle = extractAngleDegrees(content) ?? extractLabeled(content, ['angle'])
+    if (angle !== null || hasTaskSignal) {
+      return { kind: 'angle', angle: angle ?? DEFAULT_ANGLE }
     }
   }
 
