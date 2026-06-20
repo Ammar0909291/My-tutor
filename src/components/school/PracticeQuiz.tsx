@@ -7,6 +7,8 @@ import type { LearningNavigatorAction } from '@/lib/school/navigation/navigatorT
 import { NavigatorActionCard } from '@/components/school/NavigatorActionCard'
 import { Card, CandyButton, Pill, ProgressBar, ProgressRing, EagleMascot, useConfetti } from '@/components/ui/candy'
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
+import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
+import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 
 interface ClientQuestion {
   id: string
@@ -211,6 +213,10 @@ export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle, navigatorAc
     const answered = q.id in answers
     const isLast = currentIdx === questions.length - 1
     const progressPercent = ((currentIdx + 1) / questions.length) * 100
+    // Sprint I: same deterministic Teaching Strategy pipeline as Learn — additive,
+    // read-only, never affects grading. Absent on every question with nothing
+    // detected, so existing practice sessions render exactly as before.
+    const visualSpec = planVisualTeaching(q.question).spec
 
     return (
       <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
@@ -235,6 +241,11 @@ export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle, navigatorAc
               Question {currentIdx + 1} · {q.type === 'mcq' ? 'Multiple Choice' : q.type === 'true_false' ? 'True / False' : 'Short Answer'}
             </Pill>
             <p style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.5, color: 'var(--candy-ink)', margin: 0 }}>{q.question}</p>
+            {visualSpec && (
+              <div style={{ marginTop: 14 }}>
+                <VisualRenderer spec={visualSpec} />
+              </div>
+            )}
           </Card>
 
           {/* Answer area */}
