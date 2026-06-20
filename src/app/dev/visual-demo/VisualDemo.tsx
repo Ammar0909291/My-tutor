@@ -13,6 +13,7 @@ import type { VisualMasterySignal } from '@/lib/visuals/visualMastery'
 import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
 import { VisualMasteryViewer } from '@/components/visuals/VisualMasteryViewer'
 import { RevisionIntelligenceViewer } from '@/components/intelligence/RevisionIntelligenceViewer'
+import { PracticeTargetsViewer } from '@/components/intelligence/PracticeTargetsViewer'
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -538,6 +539,15 @@ export function VisualDemo() {
           No new writes, no scoring/grading changes.
         </p>
         <RevisionIntelligenceViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 2 — Targeted Practice Intelligence</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Priority-banded practice targets (high/medium/low), built from the
+          <code> RevisionProfile</code> above plus <code>TopicProgress.attempts</code>
+          as a read-only escalation signal. No new writes, no curriculum or
+          practice-generation changes.
+        </p>
+        <PracticeTargetsViewer />
       </div>
     </div>
   )
