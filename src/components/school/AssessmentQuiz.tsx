@@ -13,6 +13,7 @@ import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import { useVisualMastery } from '@/hooks/useVisualMastery'
 import { VisualMasteryDevSummary } from '@/components/visuals/VisualMasteryDevSummary'
 import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
+import { VisualLearningInsights } from '@/components/visuals/VisualLearningInsights'
 
 interface ClientQuestion {
   id: string
@@ -402,6 +403,10 @@ export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommend
               </ul>
             </Card>
           )}
+
+          {/* Sprint Q: read-only visual learning insight — built entirely from
+              already-persisted visual mastery evidence, never affects score/grading/pass-fail. */}
+          <VisualLearningInsights />
 
           {/* Sprint CQ: Navigator next step — covers both pass (start next chapter) and
               fail (retake / practice weak) scenarios, eliminating the dead-end on failure.
