@@ -1,7 +1,7 @@
 'use client'
 /**
  * VisualMasteryViewer — Visual Learning Sprint M Task 5, extended Sprint N
- * Task 6 and Sprint O Task 4.
+ * Task 6, Sprint O Task 4, and Sprint P Task 4.
  *
  * Development-only viewer for persisted Visual Mastery evidence. Fetches the
  * authenticated user's EvidenceRecord(type: VISUAL) rows from
@@ -10,6 +10,7 @@
  *   - a persisted summary aggregated across all saved rows (client-side, Sprint M)
  *   - the server-computed VisualLearningProfile and weak visual areas (Sprint N)
  *   - the server-computed VisualLearningRecommendation list (Sprint O)
+ *   - the server-computed learner-facing VisualGuidance list (Sprint P)
  *
  * Renders nothing outside NODE_ENV === 'development', matching the same
  * dev-only gate as VisualMasteryDevSummary (Sprint L) — there is no
@@ -59,11 +60,18 @@ interface VisualLearningRecommendation {
   recommendation: string
 }
 
+interface VisualGuidance {
+  visualType: string
+  status: 'needs_improvement' | 'strong'
+  message: string
+}
+
 export function VisualMasteryViewer() {
   const [rows, setRows] = useState<VisualMasteryEvidenceRow[] | null>(null)
   const [profile, setProfile] = useState<Record<string, VisualLearningProfileEntry> | null>(null)
   const [weaknesses, setWeaknesses] = useState<VisualWeaknessEntry[] | null>(null)
   const [recommendations, setRecommendations] = useState<VisualLearningRecommendation[] | null>(null)
+  const [guidance, setGuidance] = useState<VisualGuidance[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -76,6 +84,7 @@ export function VisualMasteryViewer() {
         setProfile(data.profile ?? {})
         setWeaknesses(data.weaknesses ?? [])
         setRecommendations(data.recommendations ?? [])
+        setGuidance(data.guidance ?? [])
       })
       .catch(() => setError('Failed to load persisted visual mastery data.'))
   }, [])
@@ -116,6 +125,14 @@ export function VisualMasteryViewer() {
         </h2>
         <pre style={{ fontSize: 12, fontFamily: 'var(--font-mono)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, margin: 0, background: 'var(--bg-surface)', overflowX: 'auto' }}>
           {error ?? (recommendations === null ? 'Loading…' : recommendations.length === 0 ? '(no recommendations — no weak visual areas detected)' : JSON.stringify(recommendations, null, 2))}
+        </pre>
+      </section>
+      <section>
+        <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>
+          Learner Guidance (Sprint P — strengths + weaknesses, plain-language messages)
+        </h2>
+        <pre style={{ fontSize: 12, fontFamily: 'var(--font-mono)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, margin: 0, background: 'var(--bg-surface)', overflowX: 'auto' }}>
+          {error ?? (guidance === null ? 'Loading…' : guidance.length === 0 ? '(no guidance yet — not enough visual data)' : JSON.stringify(guidance, null, 2))}
         </pre>
       </section>
       <section>
