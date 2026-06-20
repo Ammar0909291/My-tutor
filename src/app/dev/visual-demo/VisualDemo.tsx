@@ -14,6 +14,7 @@ import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersiste
 import { VisualMasteryViewer } from '@/components/visuals/VisualMasteryViewer'
 import { RevisionIntelligenceViewer } from '@/components/intelligence/RevisionIntelligenceViewer'
 import { PracticeTargetsViewer } from '@/components/intelligence/PracticeTargetsViewer'
+import { RetestIntelligenceViewer } from '@/components/intelligence/RetestIntelligenceViewer'
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -548,6 +549,15 @@ export function VisualDemo() {
           practice-generation changes.
         </p>
         <PracticeTargetsViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 3 — Retest Intelligence</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Priority-banded retest candidates, built directly from the
+          <code> PracticeTargetPlan</code> above — each target&apos;s existing
+          priority becomes its retest priority. No new mastery system, no
+          new writes, no grading or assessment-generation changes.
+        </p>
+        <RetestIntelligenceViewer />
       </div>
     </div>
   )
