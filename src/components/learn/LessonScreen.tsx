@@ -207,7 +207,9 @@ function Panel({ children, style, accentColor = 'var(--coral)' }: { children: Re
   return (
     <Card
       style={{
-        boxShadow: `0 4px 0 ${accentColor}`,
+        boxShadow: `0 4px 0 ${accentColor}, 0 4px 16px rgba(0,0,0,0.25)`,
+        border: '1px solid var(--border-subtle)',
+        borderRadius: 16,
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
@@ -225,7 +227,7 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
       height: tall ? 60 : 44,
       background: 'var(--bg-surface)',
       borderBottom: '2px solid var(--border-subtle)',
-      borderRadius: '24px 24px 0 0',
+      borderRadius: '16px 16px 0 0',
       display: 'flex',
       alignItems: 'center',
       padding: '0 16px',
@@ -1309,7 +1311,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       {/* Mobile: single column, one panel visible per activeTab. Desktop (md+): all three side by side. */}
       <div
         className={maximizedPanel ? 'grid grid-cols-1' : 'grid grid-cols-1 md:grid-cols-[25%_45%_30%]'}
-        style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: 12, padding: 12 }}
+        style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: 16, padding: 16 }}
       >
 
         {/* ══ PANEL 1 — CURRICULUM ROADMAP (25%) ══════════════════════════ */}
@@ -1809,7 +1811,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               onClick={() => setTerminalOpen((o) => !o)}
               style={{
                 height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '0 12px', background: 'var(--bg-void)', borderTop: '1px solid var(--border-subtle)',
+                padding: '0 12px', background: 'var(--bg-void)', borderTop: '2px solid var(--border-subtle)',
+                boxShadow: 'inset 0 1px 4px rgba(0,0,0,0.2)',
                 cursor: 'pointer', fontSize: 12, color: 'var(--border-emphasis)', flexShrink: 0,
                 transition: 'color 150ms',
               }}
@@ -1837,7 +1840,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             {/* Terminal panel */}
             {showTerminal && terminalOpen && (
               <div style={{
-                height: 180, background: 'var(--bg-void)', borderTop: '1px solid var(--border-subtle)',
+                height: 180, background: 'var(--bg-void)', borderTop: '2px solid var(--border-subtle)',
                 borderRadius: '0 0 16px 16px', display: 'flex', flexDirection: 'column', flexShrink: 0,
               }}>
                 <div style={{ flex: 1, overflowY: 'auto', padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, lineHeight: 1.6 }}>
