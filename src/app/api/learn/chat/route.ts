@@ -793,6 +793,21 @@ export async function POST(req: Request) {
       console.warn('[learn/chat] adaptive tutor context skipped:', err)
     }
 
+    // Sprint EI-6: Adaptive Teaching Plan — let Tutor Max SEE the Sprint 5
+    // TeachingPlan for the current topic and adapt its teaching STYLE only.
+    // Additive, own try/catch, never blocks. Teaching style only — content
+    // stays curriculum-controlled (the block carries an explicit guard line).
+    try {
+      const currentTopicSlug = topicProgressRowsShared.find((r) => r.status === 'IN_PROGRESS')?.topicSlug ?? null
+      if (currentTopicSlug) {
+        const { getTutorTeachingContext, buildTutorTeachingContextBlock } = await import('@/lib/intelligence/tutorTeachingContext')
+        const teachingContext = await getTutorTeachingContext(userId, subjectCode, currentTopicSlug)
+        systemPrompt += buildTutorTeachingContextBlock(teachingContext)
+      }
+    } catch (err) {
+      console.warn('[learn/chat] adaptive teaching plan context skipped:', err)
+    }
+
     // Mastery + Spaced Repetition context (Sprint C, Part 8): the Tutor should
     // know weak concepts, upcoming reviews, project history, and mastery
     // scores, and adjust explanations accordingly. Additive, own try/catch —
