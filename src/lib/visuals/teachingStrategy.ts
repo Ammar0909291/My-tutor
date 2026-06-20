@@ -66,7 +66,7 @@ function hasTaskSignal(content: string): boolean {
 }
 
 /**
- * Deterministic strategy selection. See docs/TEACHING_STRATEGY_ENGINE_AUDIT.md
+ * Deterministic strategy selection. See docs/TEACHING_STRATEGY_AUDIT.md
  * (Task 1) and the Sprint H report's "Selection Rules" section for the
  * rationale behind each rule. No AI reasoning — pure function of the already
  * -detected concept plus a couple of keyword checks on the original text.
@@ -82,8 +82,14 @@ export function selectTeachingStrategy(content: string, concept: DetectedConcept
         // Pan/zoom is always safe regardless of equation shape (GraphRenderer's
         // existing fail-safe: non-linear equations simply get no drag handles).
         interaction: true,
-        // Only gradable when GraphRenderer can derive a live slope/intercept model.
-        assessment: isLinearEquation(concept.equation),
+        // Assessment intent is on for every graph (linear or not) — exploring
+        // any equation is worth a "did you find something" check. Whether a
+        // *live, numeric* target exists depends on isLinearEquation() (see
+        // deriveChallenge() below): non-linear equations get assessment:true
+        // at the strategy level but an empty challenge object (no targets),
+        // since GraphRenderer's own model extraction is linear-only and is
+        // explicitly out of scope to rebuild this sprint.
+        assessment: true,
       }
 
     case 'number_line':
@@ -136,7 +142,11 @@ function deriveChallenge(spec: VisualSpec): Record<string, unknown> | null {
   switch (spec.type) {
     case 'graph': {
       const m = isLinearEquation(spec.equation) ? parseLinearCoeffs(spec.equation) : null
-      return m ? { targetSlope: m.slope, targetIntercept: m.intercept } : null
+      // Non-linear equations: assessment is "on" at the strategy level but
+      // there is no live numeric model to grade, so the challenge carries no
+      // targets — GraphRenderer renders nothing extra for an empty/targetless
+      // challenge (challengeGoalText is falsy), so no renderer change needed.
+      return m ? { targetSlope: m.slope, targetIntercept: m.intercept } : {}
     }
     case 'process_flow':
       return {}
