@@ -22,6 +22,9 @@ export const graphSpecSchema = z.object({
   title: z.string().max(80).optional(),
   // Optional initial visible x-range; the renderer is pan/zoomable regardless.
   domain: z.tuple([z.number(), z.number()]).optional(),
+  // Sprint F: opt-in drag interaction (draggable slope/intercept for linear
+  // equations). Omitted/false renders exactly as Sprint B — purely additive.
+  interactive: z.boolean().optional(),
 })
 
 // ── number_line ─────────────────────────────────────────────────────────────
@@ -35,6 +38,8 @@ export const numberLineSpecSchema = z.object({
   // Optional tick spacing; defaults to a sensible value derived from range.
   step: z.number().positive().max(1000).optional(),
   title: z.string().max(80).optional(),
+  // Sprint F: opt-in drag interaction (draggable highlighted points).
+  interactive: z.boolean().optional(),
 })
 
 // ── process_flow ─────────────────────────────────────────────────────────────
@@ -59,6 +64,8 @@ export const processFlowSpecSchema = z.object({
   // 'auto' (default) picks vertical/horizontal based on the rendered
   // container width; callers may force a layout explicitly.
   orientation: z.enum(['vertical', 'horizontal', 'auto']).optional(),
+  // Sprint F: opt-in reorder mode (drag/Up-Down to fix a shuffled sequence).
+  interactive: z.boolean().optional(),
 })
 
 // ── geometry ─────────────────────────────────────────────────────────────────
@@ -71,10 +78,14 @@ export const processFlowSpecSchema = z.object({
 // on `shape` (kept separate from the outer union below because
 // discriminatedUnion requires unique discriminant *values* per member, and
 // every geometry shape shares `type: 'geometry'`).
+// Sprint F: opt-in drag interaction (vertex/handle dragging with live
+// area/perimeter/circumference/angle updates). Omitted/false renders
+// exactly as Sprint D — purely additive on every shape below.
 const pointSpecSchema = z.object({
   type: z.literal('geometry'),
   shape: z.literal('point'),
   title: z.string().max(80).optional(),
+  interactive: z.boolean().optional(),
 })
 
 const lineSpecSchema = z.object({
@@ -82,6 +93,7 @@ const lineSpecSchema = z.object({
   shape: z.literal('line'),
   length: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
+  interactive: z.boolean().optional(),
 })
 
 const angleSpecSchema = z.object({
@@ -89,6 +101,7 @@ const angleSpecSchema = z.object({
   shape: z.literal('angle'),
   angle: z.number().min(0).max(360),
   title: z.string().max(80).optional(),
+  interactive: z.boolean().optional(),
 })
 
 const trianglePropsSchema = z.object({
@@ -97,6 +110,7 @@ const trianglePropsSchema = z.object({
   base: z.number().positive().max(1000),
   height: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
+  interactive: z.boolean().optional(),
 })
 
 const rectanglePropsSchema = z.object({
@@ -105,6 +119,7 @@ const rectanglePropsSchema = z.object({
   width: z.number().positive().max(1000),
   height: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
+  interactive: z.boolean().optional(),
 })
 
 const circlePropsSchema = z.object({
@@ -112,6 +127,7 @@ const circlePropsSchema = z.object({
   shape: z.literal('circle'),
   radius: z.number().positive().max(1000),
   title: z.string().max(80).optional(),
+  interactive: z.boolean().optional(),
 })
 
 export const geometrySpecSchema = z.discriminatedUnion('shape', [

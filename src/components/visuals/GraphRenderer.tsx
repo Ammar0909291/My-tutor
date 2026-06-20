@@ -17,6 +17,37 @@ interface View { cx: number; cy: number; ppu: number } // center (math units) + 
 const MIN_PPU = 4
 const MAX_PPU = 400
 
+// ── Sprint F: interactive linear model (draggable slope/intercept) ─────────
+// Only a plain `y = mx + b` form is recognized — quadratics and other forms
+// simply yield null and the graph renders exactly as before (fail-safe, no
+// half-feature). This is a regex match, never a second expression parse.
+const LINEAR_RE = /^y=([+-]?\d*\.?\d*)x([+-]\d+\.?\d*)?$/i
+
+function extractLinearModel(equation: string): { m: number; b: number } | null {
+  const compact = equation.replace(/\s+/g, '')
+  const match = compact.match(LINEAR_RE)
+  if (!match) return null
+  const [, mStr, bStr] = match
+  let m: number
+  if (mStr === '' || mStr === '+') m = 1
+  else if (mStr === '-') m = -1
+  else m = Number(mStr)
+  const b = bStr ? Number(bStr) : 0
+  if (!Number.isFinite(m) || !Number.isFinite(b)) return null
+  return { m, b }
+}
+
+const M_BOUND = 20
+const B_BOUND = 50
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
+const round1 = (v: number) => Math.round(v * 10) / 10
+
+function formatLinearEquation(m: number, b: number): string {
+  const mPart = m === 1 ? 'x' : m === -1 ? '-x' : `${round1(m)}x`
+  const bPart = b === 0 ? '' : b > 0 ? ` + ${round1(b)}` : ` - ${Math.abs(round1(b))}`
+  return `y = ${mPart}${bPart}`
+}
+
 /** Pick a "nice" grid step (1,2,5 × 10^n) so ~targetPx pixels separate lines. */
 function niceStep(ppu: number, targetPx = 64): number {
   const raw = targetPx / ppu
@@ -36,6 +67,15 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
   const wrapRef = useRef<HTMLDivElement | null>(null)
   const [size, setSize] = useState({ w: 360, h: 280 })
   const compiled = useMemo(() => compileExpression(spec.equation), [spec.equation])
+
+  // Sprint F: linear interactive model. Re-derived (and local state reset)
+  // whenever the spec's own equation/flag changes — never mutates `spec`.
+  const linearModel = useMemo(
+    () => (spec.interactive ? extractLinearModel(spec.equation) : null),
+    [spec.interactive, spec.equation]
+  )
+  const [model, setModel] = useState(linearModel)
+  useEffect(() => { setModel(linearModel) }, [linearModel])
 
   // Initial view: center on origin, scale so the optional domain (or [-10,10]) fits.
   const [view, setView] = useState<View>(() => {
@@ -69,18 +109,41 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
 
   // ── interaction: pan ──
   const drag = useRef<{ x: number; y: number } | null>(null)
+  // Sprint F: which (if any) model handle is currently being dragged. Set by
+  // the handle's own onPointerDown (which stops propagation), so background
+  // pan and handle-drag never both fire for the same gesture.
+  const handleDrag = useRef<'slope' | 'intercept' | null>(null)
+  const slopeHandleX = useMemo(() => clamp(round1((xMax - xMin) * 0.3) || 2, 1, M_BOUND), [xMax, xMin])
+
   const onPointerDown = (e: React.PointerEvent) => {
     ;(e.target as Element).setPointerCapture?.(e.pointerId)
     drag.current = { x: e.clientX, y: e.clientY }
   }
   const onPointerMove = (e: React.PointerEvent) => {
+    const rect = wrapRef.current?.getBoundingClientRect()
+    if (handleDrag.current === 'intercept' && model && rect) {
+      const newB = clamp(round1(fromSy(e.clientY - rect.top)), -B_BOUND, B_BOUND)
+      setModel({ ...model, b: newB })
+      return
+    }
+    if (handleDrag.current === 'slope' && model && rect) {
+      const my = fromSy(e.clientY - rect.top)
+      const newM = clamp(round1((my - model.b) / slopeHandleX), -M_BOUND, M_BOUND)
+      setModel({ ...model, m: newM })
+      return
+    }
     if (!drag.current) return
     const dx = e.clientX - drag.current.x
     const dy = e.clientY - drag.current.y
     drag.current = { x: e.clientX, y: e.clientY }
     setView((v) => ({ ...v, cx: v.cx - dx / v.ppu, cy: v.cy + dy / v.ppu }))
   }
-  const onPointerUp = () => { drag.current = null }
+  const onPointerUp = () => { drag.current = null; handleDrag.current = null }
+  const startHandleDrag = (which: 'slope' | 'intercept') => (e: React.PointerEvent) => {
+    e.stopPropagation()
+    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    handleDrag.current = which
+  }
 
   // ── interaction: zoom (wheel, anchored at cursor) ──
   const onWheel = (e: React.WheelEvent) => {
@@ -118,14 +181,17 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
     return { xs, ys }
   }, [xMin, xMax, yMin, yMax, step])
 
+  // When a linear model is active, plot from the live m/b state (plain
+  // arithmetic) rather than re-parsing text on every drag frame.
+  const evalFn = model ? (x: number) => model.m * x + model.b : compiled?.eval
   const pathD = useMemo(() => {
-    if (!compiled) return ''
+    if (!evalFn) return ''
     let d = ''
     let penDown = false
     const prevYRef = { v: NaN }
     for (let px = 0; px <= w; px += 2) {
       const x = fromSx(px)
-      const y = compiled.eval(x)
+      const y = evalFn(x)
       if (!Number.isFinite(y)) { penDown = false; prevYRef.v = NaN; continue }
       const sy = toSy(y)
       // break the line across large vertical jumps (asymptotes)
@@ -139,7 +205,7 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
     }
     return d
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [compiled, w, h, view])
+  }, [compiled, model, w, h, view])
 
   const axisX = toSy(0) // screen y of the x-axis (y=0)
   const axisY = toSx(0) // screen x of the y-axis (x=0)
@@ -155,9 +221,11 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
     )
   }
 
+  const liveEquation = model ? formatLinearEquation(model.m, model.b) : `y = ${spec.equation.replace(/^\s*y\s*=\s*/i, '')}`
+
   return (
     <div style={cardStyle}>
-      <Header title={spec.title ?? 'Graph'} subtitle={`y = ${spec.equation.replace(/^\s*y\s*=\s*/i, '')}`} />
+      <Header title={spec.title ?? 'Graph'} subtitle={liveEquation} />
       <div
         ref={wrapRef}
         onPointerDown={onPointerDown}
@@ -187,6 +255,21 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
           ))}
           {/* curve */}
           <path d={pathD} fill="none" stroke="var(--coral, #F78166)" strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+          {/* Sprint F: drag handles for the linear model (interactive only) */}
+          {model && (
+            <>
+              <DragHandle
+                x={toSx(0)} y={toSy(model.b)}
+                label="Drag to change the y-intercept"
+                onPointerDown={startHandleDrag('intercept')}
+              />
+              <DragHandle
+                x={toSx(slopeHandleX)} y={toSy(model.m * slopeHandleX + model.b)}
+                label="Drag to change the slope"
+                onPointerDown={startHandleDrag('slope')}
+              />
+            </>
+          )}
         </svg>
         {/* zoom controls */}
         <div style={{ position: 'absolute', right: 8, bottom: 8, display: 'flex', gap: 4 }}>
@@ -196,7 +279,7 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
         </div>
       </div>
       <p style={{ margin: '6px 4px 0', fontSize: 10, color: 'var(--text-dim, #888)' }}>
-        Drag to pan · scroll or use +/− to zoom
+        {model ? 'Drag the points to change slope/intercept · ' : ''}Drag to pan · scroll or use +/− to zoom
       </p>
     </div>
   )
@@ -209,6 +292,16 @@ function Header({ title, subtitle }: { title: string; subtitle?: string }) {
       <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-secondary, #6b7280)' }}>{title}</span>
       {subtitle && <span style={{ fontSize: 11, color: 'var(--text-dim, #888)', fontFamily: 'var(--font-mono, monospace)' }}>{subtitle}</span>}
     </div>
+  )
+}
+
+/** Sprint F: a draggable model handle — generous invisible hit-area for touch, visible coral dot on top. */
+function DragHandle({ x, y, label, onPointerDown }: { x: number; y: number; label: string; onPointerDown: (e: React.PointerEvent) => void }) {
+  return (
+    <g style={{ cursor: 'grab', touchAction: 'none' }} onPointerDown={onPointerDown}>
+      <circle cx={x} cy={y} r={16} fill="transparent" aria-label={label} role="img" />
+      <circle cx={x} cy={y} r={6} fill="var(--coral, #F78166)" stroke="var(--bg-surface, #fff)" strokeWidth={2} />
+    </g>
   )
 }
 

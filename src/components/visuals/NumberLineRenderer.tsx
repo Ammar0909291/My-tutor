@@ -5,8 +5,10 @@
  * fractions (non-integer highlights labelled as simple fractions where
  * possible), and highlighted points. Theme-aware via CSS variables.
  */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { NumberLineSpec } from '@/lib/visuals/visualSpec'
+
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 
 /** Format a number as a simple fraction when it is a clean half/third/quarter, else decimal. */
 function fractionLabel(n: number): string {
@@ -61,7 +63,33 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
   const first = Math.ceil(start / step) * step
   for (let v = first; v <= end + 1e-9; v += step) ticks.push(Math.round(v * 1e6) / 1e6)
 
-  const highlights = (spec.highlight ?? []).filter((p) => p >= start && p <= end)
+  const initialHighlights = useMemo(() => (spec.highlight ?? []).filter((p) => p >= start && p <= end), [spec.highlight, start, end])
+
+  // Sprint F: opt-in draggable points. Local state only — never written back
+  // to `spec`. Resyncs if the spec's own highlight set changes.
+  const [points, setPoints] = useState(initialHighlights)
+  useEffect(() => { setPoints(initialHighlights) }, [initialHighlights])
+  const highlights = spec.interactive ? points : initialHighlights
+
+  const dragIndex = useRef<number | null>(null)
+  const toValue = (sx: number) => clamp(start + ((sx - padX) / usableW) * (end - start), start, end)
+  const onPointPointerDown = (i: number) => (e: React.PointerEvent) => {
+    e.stopPropagation()
+    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    dragIndex.current = i
+  }
+  const onLinePointerMove = (e: React.PointerEvent) => {
+    if (dragIndex.current === null) return
+    const rect = wrapRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const value = Math.round(toValue(e.clientX - rect.left) * 10) / 10
+    setPoints((prev) => prev.map((p, i) => (i === dragIndex.current ? value : p)))
+  }
+  const onLinePointerUp = () => { dragIndex.current = null }
+
+  const comparison = spec.interactive && highlights.length === 2
+    ? `${fractionLabel(highlights[0])} ${highlights[0] === highlights[1] ? '=' : highlights[0] < highlights[1] ? '<' : '>'} ${fractionLabel(highlights[1])}`
+    : null
 
   return (
     <div style={cardStyle}>
@@ -69,7 +97,13 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
         <span style={badgeStyle}>Number Line</span>
         {spec.title && <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-secondary, #6b7280)' }}>{spec.title}</span>}
       </div>
-      <div ref={wrapRef} style={{ width: '100%' }}>
+      <div
+        ref={wrapRef}
+        style={{ width: '100%', touchAction: spec.interactive ? 'none' : undefined }}
+        onPointerMove={spec.interactive ? onLinePointerMove : undefined}
+        onPointerUp={spec.interactive ? onLinePointerUp : undefined}
+        onPointerLeave={spec.interactive ? onLinePointerUp : undefined}
+      >
         <svg width={w} height={h} role="img" aria-label={`Number line from ${start} to ${end}${highlights.length ? `, highlighting ${highlights.join(', ')}` : ''}`} style={{ display: 'block' }}>
           {/* main line with arrowheads */}
           <defs>
@@ -87,13 +121,20 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
           ))}
           {/* highlighted points */}
           {highlights.map((p, i) => (
-            <g key={`h${p}-${i}`}>
+            <g key={`h${i}`} style={spec.interactive ? { cursor: 'grab', touchAction: 'none' } : undefined} onPointerDown={spec.interactive ? onPointPointerDown(i) : undefined}>
+              {spec.interactive && <circle cx={toX(p)} cy={lineY} r={16} fill="transparent" aria-label={`Drag point ${fractionLabel(p)}`} role="img" />}
               <circle cx={toX(p)} cy={lineY} r={6} fill="var(--coral, #F78166)" stroke="var(--bg-surface, #fff)" strokeWidth={2} />
               <text x={toX(p)} y={lineY - 12} fontSize={11} fontWeight={700} textAnchor="middle" fill="var(--coral, #F78166)">{fractionLabel(p)}</text>
             </g>
           ))}
         </svg>
       </div>
+      {comparison && (
+        <p style={{ margin: '4px 4px 0', fontSize: 12, fontWeight: 600, color: 'var(--text-secondary, #6b7280)' }}>{comparison}</p>
+      )}
+      {spec.interactive && (
+        <p style={{ margin: '4px 4px 0', fontSize: 10, color: 'var(--text-dim, #888)' }}>Drag a point to move it</p>
+      )}
     </div>
   )
 }

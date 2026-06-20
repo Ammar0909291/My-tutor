@@ -38,30 +38,84 @@ function resolveOrientation(spec: ProcessFlowSpec, containerWidth: number): 'ver
   return neededWidth <= containerWidth ? 'horizontal' : 'vertical'
 }
 
+// Sprint F: reorder mode. `order` is a permutation of step indices, held in
+// local component state only (never written back to `spec`) — dragging or
+// tapping Up/Down swaps adjacent entries. Correctness is checked against the
+// identity permutation, i.e. the spec's own step order is assumed correct
+// (visual feedback only, no grading/scoring is persisted anywhere).
+function useReorder(stepCount: number, enabled: boolean) {
+  const identity = Array.from({ length: stepCount }, (_, i) => i)
+  // Start reversed when interactive, so there is actually something to fix
+  // (matching the brief's "steps shuffled, student reorders" example) — a
+  // fixed, deterministic permutation, never random, so it's reproducible.
+  const initial = enabled ? [...identity].reverse() : identity
+  const [order, setOrder] = useState<number[]>(initial)
+  useEffect(() => { setOrder(enabled ? [...identity].reverse() : identity) }, [stepCount, enabled]) // eslint-disable-line react-hooks/exhaustive-deps
+  const swap = (i: number, j: number) => {
+    if (j < 0 || j >= order.length) return
+    setOrder((prev) => {
+      const next = [...prev]
+      ;[next[i], next[j]] = [next[j], next[i]]
+      return next
+    })
+  }
+  const isCorrect = enabled && order.every((v, i) => v === i)
+  return { order, swap, isCorrect }
+}
+
 export function ProcessFlowRenderer({ spec }: { spec: ProcessFlowSpec }) {
   const { ref, width } = useResponsiveWidth()
   const orientation = resolveOrientation(spec, width)
+  const { order, swap, isCorrect } = useReorder(spec.steps.length, !!spec.interactive)
+  const orderedSteps = spec.interactive ? order.map((i) => spec.steps[i]) : spec.steps
 
   return orientation === 'horizontal'
-    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} />
-    : <VerticalFlow spec={spec} wrapRef={ref} width={width} />
+    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} />
+    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} />
 }
 
-function VerticalFlow({ spec, wrapRef, width }: { spec: ProcessFlowSpec; wrapRef: React.MutableRefObject<HTMLDivElement | null>; width: number }) {
+interface FlowProps {
+  spec: ProcessFlowSpec
+  wrapRef: React.MutableRefObject<HTMLDivElement | null>
+  width: number
+  steps: ProcessFlowSpec['steps']
+  interactive: boolean
+  order: number[]
+  swap: (i: number, j: number) => void
+  isCorrect: boolean
+}
+
+function ReorderFeedback({ interactive, isCorrect }: { interactive: boolean; isCorrect: boolean }) {
+  if (!interactive) return null
+  return (
+    <p style={{ margin: '6px 4px 0', fontSize: 11, fontWeight: 600, color: isCorrect ? 'var(--coral, #F78166)' : 'var(--text-dim, #888)' }}>
+      {isCorrect ? '✓ Correct order!' : 'Use ▲▼ to put the steps in the right order'}
+    </p>
+  )
+}
+
+function VerticalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect }: FlowProps) {
   const boxW = Math.min(STEP_W + 60, width - 16)
   const cx = width / 2
-  const h = spec.steps.length * STEP_H + (spec.steps.length - 1) * GAP + 16
+  const h = steps.length * STEP_H + (steps.length - 1) * GAP + 16
 
   return (
     <Card title={spec.title} badge="PROCESS">
       <div ref={wrapRef} style={{ width: '100%' }}>
         <svg width={width} height={h} role="img" aria-label={`${spec.title} process flow`} style={{ display: 'block' }}>
-          {spec.steps.map((step, i) => {
+          {steps.map((step, i) => {
             const y = i * (STEP_H + GAP) + 8
             return (
               <g key={i}>
                 <StepBox x={cx - boxW / 2} y={y} w={boxW} h={STEP_H} index={i} step={step} />
-                {i < spec.steps.length - 1 && (
+                {interactive && (
+                  <ReorderButtons
+                    x={cx + boxW / 2 + 4} y={y + STEP_H / 2}
+                    onUp={() => swap(i, i - 1)} onDown={() => swap(i, i + 1)}
+                    upDisabled={i === 0} downDisabled={i === steps.length - 1}
+                  />
+                )}
+                {i < steps.length - 1 && (
                   <Arrow x1={cx} y1={y + STEP_H} x2={cx} y2={y + STEP_H + GAP} vertical />
                 )}
               </g>
@@ -69,26 +123,35 @@ function VerticalFlow({ spec, wrapRef, width }: { spec: ProcessFlowSpec; wrapRef
           })}
         </svg>
       </div>
+      <ReorderFeedback interactive={interactive} isCorrect={isCorrect} />
     </Card>
   )
 }
 
-function HorizontalFlow({ spec, wrapRef, width }: { spec: ProcessFlowSpec; wrapRef: React.MutableRefObject<HTMLDivElement | null>; width: number }) {
-  const n = spec.steps.length
+function HorizontalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect }: FlowProps) {
+  const n = steps.length
   const totalW = n * STEP_W + (n - 1) * GAP
   const startX = Math.max(8, (width - totalW) / 2)
-  const h = STEP_H + 16
+  const h = STEP_H + 16 + (interactive ? 20 : 0)
 
   return (
     <Card title={spec.title} badge="PROCESS">
       <div ref={wrapRef} style={{ width: '100%', overflowX: 'auto' }}>
         <svg width={Math.max(width, totalW + 16)} height={h} role="img" aria-label={`${spec.title} process flow`} style={{ display: 'block' }}>
-          {spec.steps.map((step, i) => {
+          {steps.map((step, i) => {
             const x = startX + i * (STEP_W + GAP)
             const y = 8
             return (
               <g key={i}>
                 <StepBox x={x} y={y} w={STEP_W} h={STEP_H} index={i} step={step} />
+                {interactive && (
+                  <ReorderButtons
+                    x={x + STEP_W / 2} y={y + STEP_H + 14}
+                    onUp={() => swap(i, i - 1)} onDown={() => swap(i, i + 1)}
+                    upDisabled={i === 0} downDisabled={i === n - 1}
+                    horizontal
+                  />
+                )}
                 {i < n - 1 && (
                   <Arrow x1={x + STEP_W} y1={y + STEP_H / 2} x2={x + STEP_W + GAP} y2={y + STEP_H / 2} vertical={false} />
                 )}
@@ -97,8 +160,46 @@ function HorizontalFlow({ spec, wrapRef, width }: { spec: ProcessFlowSpec; wrapR
           })}
         </svg>
       </div>
+      <ReorderFeedback interactive={interactive} isCorrect={isCorrect} />
     </Card>
   )
+}
+
+/** Up/Down (or Left/Right) buttons swapping a step with its neighbor — the reliable, touch- and keyboard-friendly reorder affordance. */
+function ReorderButtons({ x, y, onUp, onDown, upDisabled, downDisabled, horizontal }: { x: number; y: number; onUp: () => void; onDown: () => void; upDisabled: boolean; downDisabled: boolean; horizontal?: boolean }) {
+  return (
+    <foreignObject x={x - 12} y={y - 12} width={24} height={24}>
+      <div style={{ display: 'flex', flexDirection: horizontal ? 'row' : 'column', gap: 2 }}>
+        <button
+          type="button"
+          aria-label={horizontal ? 'Move step left' : 'Move step up'}
+          disabled={upDisabled}
+          onClick={onUp}
+          style={reorderBtnStyle(upDisabled)}
+        >
+          {horizontal ? '◀' : '▲'}
+        </button>
+        <button
+          type="button"
+          aria-label={horizontal ? 'Move step right' : 'Move step down'}
+          disabled={downDisabled}
+          onClick={onDown}
+          style={reorderBtnStyle(downDisabled)}
+        >
+          {horizontal ? '▶' : '▼'}
+        </button>
+      </div>
+    </foreignObject>
+  )
+}
+
+function reorderBtnStyle(disabled: boolean): React.CSSProperties {
+  return {
+    width: 22, height: 11, fontSize: 8, lineHeight: 1, padding: 0, borderRadius: 3,
+    border: '1px solid var(--border-subtle, #e5e7eb)', background: 'var(--bg-surface, #fff)',
+    color: disabled ? 'var(--text-dim, #888)' : 'var(--text-secondary, #374151)',
+    cursor: disabled ? 'default' : 'pointer', opacity: disabled ? 0.4 : 1,
+  }
 }
 
 // ── shared pieces ────────────────────────────────────────────────────────────

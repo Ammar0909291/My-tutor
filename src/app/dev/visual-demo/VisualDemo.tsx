@@ -150,6 +150,25 @@ const PROCESS_FLOW_SPECS: { label: string; spec: VisualSpec }[] = [
   },
 ]
 
+// Sprint F: interactive specs — same renderers, `interactive: true` opt-in.
+// Manual specs only (Task 7's real-curriculum demo is Sprint E's, unchanged
+// here); this section exercises the new drag/reorder behavior in isolation.
+const INTERACTIVE_SPECS: { label: string; spec: VisualSpec }[] = [
+  { label: 'Graph — drag slope & intercept (y = x + 1)', spec: { type: 'graph', equation: 'y = x + 1', title: 'Interactive linear graph', interactive: true } },
+  { label: 'Number line — drag points, compare', spec: { type: 'number_line', start: -10, end: 10, highlight: [2, 5], title: 'Move a point from 2 to 5', interactive: true } },
+  { label: 'Triangle — drag vertices', spec: { type: 'geometry', shape: 'triangle', base: 6, height: 4, interactive: true } },
+  { label: 'Rectangle — drag corner', spec: { type: 'geometry', shape: 'rectangle', width: 8, height: 3, interactive: true } },
+  { label: 'Circle — drag radius', spec: { type: 'geometry', shape: 'circle', radius: 5, interactive: true } },
+  { label: 'Angle — drag ray', spec: { type: 'geometry', shape: 'angle', angle: 45, interactive: true } },
+  {
+    label: 'Photosynthesis — reorder (shuffled)',
+    spec: {
+      type: 'process_flow', title: 'Photosynthesis', interactive: true, orientation: 'auto',
+      steps: ['Sunlight', 'Water', 'Carbon Dioxide', 'Glucose', 'Oxygen'].map((title) => ({ title })),
+    },
+  },
+]
+
 export function VisualDemo() {
   // Initial theme can be set via ?theme=dark (dev convenience for screenshots);
   // the in-page toggle still works for manual checking.
@@ -299,6 +318,21 @@ export function VisualDemo() {
               </section>
             )
           })}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint F — Interactive Learning Layer</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Same renderers, <code>interactive: true</code> opt-in. Drag the graph&apos;s slope/intercept points,
+          drag a number-line point, drag a shape&apos;s handles, or reorder the shuffled photosynthesis
+          steps with the ▲▼ buttons. All state is local to the component — nothing is saved.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {INTERACTIVE_SPECS.map(({ label, spec }) => (
+            <section key={label}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualRenderer spec={spec} />
+            </section>
+          ))}
         </div>
       </div>
     </div>
