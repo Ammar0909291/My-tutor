@@ -17,6 +17,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { buildVisualMasteryEvidence, type VisualMasteryPersistRequest } from '@/lib/visuals/visualMasteryPersistence'
 import { buildVisualLearningProfile, detectVisualWeaknesses, type VisualEvidenceRow } from '@/lib/visuals/visualMasteryProfile'
+import { buildVisualLearningRecommendations } from '@/lib/visuals/visualMasteryRecommendations'
 
 const summaryEntrySchema = z.object({
   shown: z.number().int().min(0),
@@ -67,5 +68,9 @@ export async function GET() {
   const profile = buildVisualLearningProfile(records as unknown as VisualEvidenceRow[])
   const weaknesses = detectVisualWeaknesses(profile)
 
-  return NextResponse.json({ records, profile, weaknesses })
+  // Sprint O, Task 2/3/4 — recommendations derived from the same profile,
+  // purely additive to the Sprint N response shape; existing fields unchanged.
+  const recommendations = buildVisualLearningRecommendations(profile)
+
+  return NextResponse.json({ records, profile, weaknesses, recommendations })
 }
