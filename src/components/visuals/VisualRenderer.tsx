@@ -13,6 +13,7 @@ import { VisualErrorBoundary } from './VisualErrorBoundary'
 import { GraphRenderer } from './GraphRenderer'
 import { NumberLineRenderer } from './NumberLineRenderer'
 import { GeometryRenderer } from './GeometryRenderer'
+import { ProcessFlowRenderer } from './ProcessFlowRenderer'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 
 interface VisualRendererProps {
@@ -30,6 +31,8 @@ function dispatch(spec: VisualSpec) {
       return <NumberLineRenderer spec={spec} />
     case 'geometry':
       return <GeometryRenderer spec={spec} />
+    case 'process_flow':
+      return <ProcessFlowRenderer spec={spec} />
     default: {
       // Exhaustiveness guard: a new union member without a case is a type error.
       const _never: never = spec

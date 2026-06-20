@@ -76,6 +76,45 @@ const GEOMETRY_SPECS: { label: string; spec: VisualSpec }[] = [
   { label: 'Point',                        spec: { type: 'geometry', shape: 'point' } },
 ]
 
+// Sprint E: tutor-style explanations grounded in real curriculum science
+// topics (src/lib/education/biologyKnowledgeGraph.ts, scienceKnowledgeGraph.ts,
+// chemistryKnowledgeGraph.ts, geographyKnowledgeGraph.ts). Run through the
+// real detector below — no VisualSpec is hand-written here.
+const SCIENCE_DETECTOR_FIXTURES: { topic: string; tutorText: string }[] = [
+  {
+    topic: 'Photosynthesis (biology.photosynthesis)',
+    tutorText: 'Photosynthesis is how plants convert sunlight, water, and carbon dioxide into glucose and oxygen inside the chloroplast.',
+  },
+  {
+    topic: 'Digestion and Absorption (biology.digestion)',
+    tutorText: 'Explain the human digestive system: digestion begins in the mouth, continues through the stomach and intestines, and ends with absorption.',
+  },
+  {
+    topic: 'Ecosystem (biology.ecosystem)',
+    tutorText: 'A food chain shows how energy flows from producers to consumers and finally to decomposers in an ecosystem.',
+  },
+  {
+    topic: 'Respiration in Plants (biology.respiration_plants)',
+    tutorText: 'Cellular respiration breaks down glucose using oxygen to release energy, producing carbon dioxide and water as byproducts.',
+  },
+  {
+    topic: 'Chemical Reactions and Equations (chemistry.chemical_reactions.equations)',
+    tutorText: 'In a chemical reaction, reactants are transformed into products by breaking and forming chemical bonds.',
+  },
+  {
+    topic: 'States of Matter (chemistry.states_of_matter)',
+    tutorText: 'Water can exist as a solid, liquid, or gas — these are called states of matter, and the changes between them follow a predictable pattern.',
+  },
+  {
+    topic: 'Moisture, Clouds and Precipitation (geography.moisture_precipitation)',
+    tutorText: 'The water cycle describes how water evaporates, condenses into clouds, falls as precipitation, and is collected in rivers and oceans.',
+  },
+  {
+    topic: 'Structure of the Earth (earth_science.earth_structure.layers)',
+    tutorText: 'The rock cycle explains how igneous, sedimentary, and metamorphic rocks continuously transform into one another over geological time.',
+  },
+]
+
 const SPECS: { label: string; spec: VisualSpec }[] = [
   { label: 'Linear — y = x + 2',          spec: { type: 'graph', equation: 'y = x + 2', title: 'Linear' } },
   { label: 'Linear — y = -2x + 1',        spec: { type: 'graph', equation: 'y = -2x + 1', title: 'Linear (negative slope)' } },
@@ -84,6 +123,31 @@ const SPECS: { label: string; spec: VisualSpec }[] = [
   { label: 'Number line — -5 → 5',        spec: { type: 'number_line', start: -5, end: 5, highlight: [3], title: 'Highlight 3' } },
   { label: 'Number line — fractions',     spec: { type: 'number_line', start: -2, end: 2, step: 0.5, highlight: [-1.5, 0.5], title: 'Basic fractions' } },
   { label: 'Number line — large range',   spec: { type: 'number_line', start: -100, end: 100, highlight: [-50, 75], title: 'Auto-stepped' } },
+]
+
+// Sprint E: manual process_flow specs, rendered through the real
+// ProcessFlowRenderer (via VisualRenderer) to verify rendering/theming/
+// responsiveness/orientation independent of detection (exercised below).
+const PROCESS_FLOW_SPECS: { label: string; spec: VisualSpec }[] = [
+  { label: 'Photosynthesis (horizontal, fits desktop)', spec: { type: 'process_flow', title: 'Photosynthesis', steps: ['Sunlight', 'Water', 'Carbon Dioxide', 'Glucose', 'Oxygen'].map((title) => ({ title })), orientation: 'horizontal' } },
+  { label: 'Water Cycle (auto)', spec: { type: 'process_flow', title: 'Water Cycle', steps: ['Evaporation', 'Condensation', 'Precipitation', 'Collection'].map((title) => ({ title })), orientation: 'auto' } },
+  { label: 'Digestion (vertical, forced)', spec: { type: 'process_flow', title: 'Digestion', steps: ['Mouth', 'Stomach', 'Small Intestine', 'Large Intestine', 'Absorption'].map((title) => ({ title })), orientation: 'vertical' } },
+  {
+    label: 'Rock Cycle (8 steps, with notes)',
+    spec: {
+      type: 'process_flow', title: 'Rock Cycle', orientation: 'auto',
+      steps: [
+        { title: 'Magma', note: 'Molten rock beneath the surface' },
+        { title: 'Igneous Rock', note: 'Magma cools and solidifies' },
+        { title: 'Weathering and Erosion', note: 'Rock is broken down' },
+        { title: 'Sediment', note: 'Particles are transported and deposited' },
+        { title: 'Sedimentary Rock', note: 'Sediment compacts and cements' },
+        { title: 'Heat and Pressure', note: 'Burial deep underground' },
+        { title: 'Metamorphic Rock', note: 'Rock recrystallizes' },
+        { title: 'Melting', note: 'Returns to magma' },
+      ],
+    },
+  },
 ]
 
 export function VisualDemo() {
@@ -187,6 +251,41 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
           {GEOMETRY_DETECTOR_FIXTURES.map(({ topic, tutorText }) => {
+            const detected = buildVisualSpec(tutorText)
+            return (
+              <section key={topic}>
+                <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{topic}</h2>
+                <div style={{ border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, marginBottom: 8, fontSize: 12, fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                  &ldquo;{tutorText}&rdquo;
+                </div>
+                {detected ? <VisualRenderer spec={detected} /> : (
+                  <p style={{ fontSize: 12, opacity: 0.6 }}>No visual detected (renders lesson text only — zero regression).</p>
+                )}
+              </section>
+            )
+          })}
+        </div>
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint E — Science Flow Engine (manual specs, rendering proof)</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          process_flow via the real ProcessFlowRenderer (through VisualRenderer) — vertical, horizontal, and auto orientation, with and without per-step notes. Automatic detection from real lesson text is demonstrated separately below.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {PROCESS_FLOW_SPECS.map(({ label, spec }) => (
+            <section key={label}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualRenderer spec={spec} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint E — Automatic science process detection from real lesson text</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Each card runs the real <code>buildVisualSpec()</code> detector against tutor-style text grounded
+          in real curriculum science topics (biologyKnowledgeGraph.ts, scienceKnowledgeGraph.ts,
+          chemistryKnowledgeGraph.ts, geographyKnowledgeGraph.ts). No VisualSpec is hand-written here.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {SCIENCE_DETECTOR_FIXTURES.map(({ topic, tutorText }) => {
             const detected = buildVisualSpec(tutorText)
             return (
               <section key={topic}>

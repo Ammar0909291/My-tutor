@@ -29,7 +29,7 @@ function buildNumberLineSpec(highlight: number[]): unknown {
 
 // Sprint D: geometry concepts map directly onto a geometry VisualSpec —
 // no derived ranges/bounds needed, every prop is already a validated number.
-function buildGeometrySpec(concept: Exclude<DetectedConcept, { kind: 'graph' } | { kind: 'number_line' }>): unknown {
+function buildGeometrySpec(concept: Exclude<DetectedConcept, { kind: 'graph' } | { kind: 'number_line' } | { kind: 'process_flow' }>): unknown {
   switch (concept.kind) {
     case 'triangle':
       return { type: 'geometry', shape: 'triangle', base: concept.base, height: concept.height }
@@ -40,6 +40,12 @@ function buildGeometrySpec(concept: Exclude<DetectedConcept, { kind: 'graph' } |
     case 'angle':
       return { type: 'geometry', shape: 'angle', angle: concept.angle }
   }
+}
+
+// Sprint E: science process concepts map directly onto a process_flow
+// VisualSpec — steps are already a fixed, curriculum-accurate list.
+function buildProcessFlowSpec(title: string, steps: string[]): unknown {
+  return { type: 'process_flow', title, steps }
 }
 
 /**
@@ -59,6 +65,9 @@ export function buildVisualSpec(content: string): VisualSpec | null {
         break
       case 'number_line':
         raw = buildNumberLineSpec(concept.highlight)
+        break
+      case 'process_flow':
+        raw = buildProcessFlowSpec(concept.title, concept.steps)
         break
       default:
         raw = buildGeometrySpec(concept)

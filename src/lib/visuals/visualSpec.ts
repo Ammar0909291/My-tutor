@@ -37,6 +37,30 @@ export const numberLineSpecSchema = z.object({
   title: z.string().max(80).optional(),
 })
 
+// ── process_flow ─────────────────────────────────────────────────────────────
+// Sprint E: a reusable diagram for sequential scientific processes
+// (photosynthesis, water cycle, digestion, food chain, ...). Every step is
+// plain text — no expression evaluation, no external diagram library.
+// Accepts either a bare string per step (the sprint brief's own example
+// shape) or a richer { title, note? } object; preprocess normalizes both to
+// the object form so the renderer always has a stable shape to annotate.
+const processFlowStepSchema = z.preprocess(
+  (v) => (typeof v === 'string' ? { title: v } : v),
+  z.object({
+    title: z.string().min(1).max(60),
+    note: z.string().max(140).optional(),
+  })
+)
+
+export const processFlowSpecSchema = z.object({
+  type: z.literal('process_flow'),
+  title: z.string().min(1).max(80),
+  steps: z.array(processFlowStepSchema).min(2).max(12),
+  // 'auto' (default) picks vertical/horizontal based on the rendered
+  // container width; callers may force a layout explicitly.
+  orientation: z.enum(['vertical', 'horizontal', 'auto']).optional(),
+})
+
 // ── geometry ─────────────────────────────────────────────────────────────────
 // Sprint D: closed-form coordinate-geometry shapes only — no equation
 // strings, no parser, no external geometry engine. Every numeric prop is
@@ -109,6 +133,7 @@ export const geometrySpecSchema = z.discriminatedUnion('shape', [
 const mathSpecUnion = z.discriminatedUnion('type', [
   graphSpecSchema,
   numberLineSpecSchema,
+  processFlowSpecSchema,
 ])
 
 const visualSpecUnion = z.union([mathSpecUnion, geometrySpecSchema])
@@ -121,6 +146,7 @@ export const visualSpecSchema = visualSpecUnion.superRefine((s, ctx) => {
 
 export type GraphSpec = z.infer<typeof graphSpecSchema>
 export type NumberLineSpec = z.infer<typeof numberLineSpecSchema>
+export type ProcessFlowSpec = z.infer<typeof processFlowSpecSchema>
 export type PointSpec = z.infer<typeof pointSpecSchema>
 export type LineSpec = z.infer<typeof lineSpecSchema>
 export type AngleSpec = z.infer<typeof angleSpecSchema>
@@ -131,7 +157,7 @@ export type GeometrySpec = z.infer<typeof geometrySpecSchema>
 export type VisualSpec = z.infer<typeof visualSpecUnion>
 
 /** All visual `type` values implemented this sprint (for docs/tests). */
-export const SUPPORTED_VISUAL_TYPES = ['graph', 'number_line', 'geometry'] as const
+export const SUPPORTED_VISUAL_TYPES = ['graph', 'number_line', 'geometry', 'process_flow'] as const
 
 /**
  * Validate unknown input into a VisualSpec. Fail-safe: returns null on any
