@@ -16,6 +16,7 @@ import { RevisionIntelligenceViewer } from '@/components/intelligence/RevisionIn
 import { PracticeTargetsViewer } from '@/components/intelligence/PracticeTargetsViewer'
 import { RetestIntelligenceViewer } from '@/components/intelligence/RetestIntelligenceViewer'
 import { ImprovementTrackingViewer } from '@/components/intelligence/ImprovementTrackingViewer'
+import { LearningDifficultyViewer } from '@/components/intelligence/LearningDifficultyViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -603,6 +604,17 @@ export function VisualDemo() {
           grading changes.
         </p>
         <ImprovementTrackingViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 4 — Learning Difficulty Intelligence</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Read-only detection of WHEN a learner is struggling, built from already-persisted
+          <code> TopicProgress</code> (mastery / attempts / revisions) plus the Sprint 1
+          <code> RevisionProfile</code> and Sprint 3 retest flags. Classifies each topic
+          LOW / MEDIUM / HIGH and lists advisory teaching adaptations. No mastery system,
+          no writes, no grading / XP / curriculum / Tutor Max changes. Detection only —
+          this sprint does not act on the difficulty.
+        </p>
+        <LearningDifficultyViewer />
       </div>
     </div>
   )
