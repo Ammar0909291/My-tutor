@@ -20,6 +20,7 @@ import { LearningDifficultyViewer } from '@/components/intelligence/LearningDiff
 import { TeachingPlanViewer } from '@/components/intelligence/TeachingPlanViewer'
 import { AdaptationEffectivenessViewer } from '@/components/intelligence/AdaptationEffectivenessViewer'
 import { MethodEffectivenessViewer } from '@/components/intelligence/MethodEffectivenessViewer'
+import { WeightedTeachingPlanViewer } from '@/components/intelligence/WeightedTeachingPlanViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -646,6 +647,15 @@ export function VisualDemo() {
           curriculum / grading / XP changes.
         </p>
         <MethodEffectivenessViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 9 — Personalized Teaching Plan Weighting</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Reorders each Teaching Plan&apos;s methods to prefer those proven effective for this learner
+          (Sprint 8) and de-emphasize weak ones — ordering only, no methods added or removed, difficulty
+          logic intact. Read-only: shows original vs weighted order; does not modify Tutor Max,
+          curriculum, XP, grading, or Sprints 1–8.
+        </p>
+        <WeightedTeachingPlanViewer />
       </div>
     </div>
   )
