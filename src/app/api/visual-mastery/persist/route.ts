@@ -16,6 +16,7 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { buildVisualMasteryEvidence, type VisualMasteryPersistRequest } from '@/lib/visuals/visualMasteryPersistence'
+import { buildVisualLearningProfile, detectVisualWeaknesses, type VisualEvidenceRow } from '@/lib/visuals/visualMasteryProfile'
 
 const summaryEntrySchema = z.object({
   shown: z.number().int().min(0),
@@ -60,5 +61,11 @@ export async function GET() {
     take: 50,
   })
 
-  return NextResponse.json({ records })
+  // Sprint N, Task 2/3/4 — profile/weakness analysis built from the same rows
+  // already fetched above (not a second query), purely additive to the
+  // Sprint M response shape; existing callers reading `records` are unaffected.
+  const profile = buildVisualLearningProfile(records as unknown as VisualEvidenceRow[])
+  const weaknesses = detectVisualWeaknesses(profile)
+
+  return NextResponse.json({ records, profile, weaknesses })
 }
