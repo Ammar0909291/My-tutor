@@ -730,24 +730,37 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; visualSpec?: unknown; error?: any }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; visualSpec?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
       const provider = data.provider
       const responseVisual = data.visual
+      // Lesson-sync bug fix: reconcile the Roadmap/Learn Panel to the exact
+      // lesson Tutor Max just generated content for. The server recomputes
+      // this fresh from studentProgress.currentLesson on every single chat
+      // turn, so treating it as authoritative here keeps Roadmap from ever
+      // silently lagging behind what Tutor Max is actually teaching.
+      if (typeof data.lessonOrder === 'number') {
+        setCurriculumProgress((prev) =>
+          prev.currentLesson === data.lessonOrder && (!data.completedLessons || prev.completedLessons.length === data.completedLessons.length)
+            ? prev
+            : { ...prev, currentLesson: data.lessonOrder!, completedLessons: data.completedLessons ?? prev.completedLessons })
+      }
       // Sprint C: server already validated this with zod; re-validate
       // client-side too (defense in depth — never trust a network payload).
       const responseVisualSpec = parseVisualSpec(data.visualSpec) ?? undefined
-      const COMPLETION_KEYWORDS = [
-        '[LESSON_COMPLETE]',
-        'следующий урок', 'урок завершён', 'урок завершен',
-        'next lesson', 'lesson complete', 'lesson completed',
-        'अगला पाठ', 'पाठ पूरा',
-      ]
-      const hasCompletion = COMPLETION_KEYWORDS.some((kw) => full.toLowerCase().includes(kw.toLowerCase()))
+      // Lesson-sync bug fix: completion must be detected ONLY from the exact
+      // [LESSON_COMPLETE] control tag the system prompt instructs the AI to
+      // emit. The previous keyword list also matched ordinary teaching prose
+      // ("next lesson", "lesson complete", etc.), which Tutor Max says
+      // constantly as normal conversational filler — every such false
+      // positive silently advanced curriculumProgress.currentLesson, which is
+      // exactly what caused Tutor Max's lesson context to drift ahead of the
+      // Roadmap's displayed lesson.
+      const hasCompletion = full.toUpperCase().includes('[LESSON_COMPLETE]')
       if (hasCompletion) {
-        full = full.replace('[LESSON_COMPLETE]', '').trim()
+        full = full.replace(/\[LESSON_COMPLETE\]/i, '').trim()
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
         if (currentLessonData) {
           handleLessonComplete(currentLessonData.order, currentLessonData)

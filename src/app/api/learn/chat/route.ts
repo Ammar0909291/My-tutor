@@ -1085,7 +1085,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => {})
       }
 
-      return NextResponse.json({ success: true, text: cleanText, provider, visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined })
+      // Lesson-sync bug fix: surface the exact lesson context this response
+      // was generated from, so the client can reconcile Roadmap/Learn Panel
+      // state to it on every turn. studentProgress.currentLesson (read above
+      // into lessonCtx) is the single source of truth for "active lesson" —
+      // previously only the client's own completion-triggered PATCH updated
+      // curriculumProgress, so any failed/dropped PATCH left the Roadmap
+      // showing a stale lesson while Tutor Max (which always re-reads this
+      // DB value fresh, every turn) had already moved on.
+      return NextResponse.json({
+        success: true, text: cleanText, provider,
+        visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
+        lessonOrder: lessonCtx?.currentLesson ?? undefined,
+        completedLessons: lessonCtx?.completedLessons ?? undefined,
+      })
     } catch (error: any) {
       // Global AI budget spent — expected under load, not an error to report.
       if (error instanceof AIBudgetExceededError) {
