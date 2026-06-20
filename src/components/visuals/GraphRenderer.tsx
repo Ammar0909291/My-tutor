@@ -11,6 +11,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { compileExpression } from '@/lib/visuals/mathParser'
 import type { GraphSpec } from '@/lib/visuals/visualSpec'
+import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 interface View { cx: number; cy: number; ppu: number } // center (math units) + pixels-per-unit
 
@@ -63,7 +64,16 @@ function formatTick(n: number): string {
   return String(r)
 }
 
-export function GraphRenderer({ spec }: { spec: GraphSpec }) {
+export function GraphRenderer({
+  spec,
+  onMasteryEvent,
+  masteryContext,
+}: {
+  spec: GraphSpec
+  /** Sprint L (Visual Mastery activation) — fully optional; omitting it leaves this renderer byte-identical to before. */
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+  masteryContext?: VisualMasteryContext
+}) {
   const wrapRef = useRef<HTMLDivElement | null>(null)
   const [size, setSize] = useState({ w: 360, h: 280 })
   const compiled = useMemo(() => compileExpression(spec.equation), [spec.equation])
@@ -76,6 +86,31 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
   )
   const [model, setModel] = useState(linearModel)
   useEffect(() => { setModel(linearModel) }, [linearModel])
+
+  // Sprint G: challenge validation, moved up unchanged (was computed just
+  // before the JSX return) so the mastery emitters below can reference it
+  // without a forward reference. Same expressions, same result every render.
+  const challenge = spec.challenge
+  const challengeTolerance = challenge?.tolerance ?? 0.5
+  const slopeOk = challenge?.targetSlope === undefined || (model !== null && Math.abs(model.m - challenge.targetSlope) <= challengeTolerance)
+  const interceptOk = challenge?.targetIntercept === undefined || (model !== null && Math.abs(model.b - challenge.targetIntercept) <= challengeTolerance)
+  const challengeMet = !!challenge && (challenge.targetSlope !== undefined || challenge.targetIntercept !== undefined) && slopeOk && interceptOk
+
+  // Sprint L: mastery emission. `emitMastery` is a no-op whenever
+  // onMasteryEvent is absent. Each milestone (shown/interacted/attempted/
+  // completed) fires at most once per mounted instance — see
+  // docs/VISUAL_MASTERY_INTEGRATION_AUDIT.md for the duplicate-event analysis.
+  const emitMastery = useMemo(
+    () => createMasteryEmitter({ visualType: 'graph', defaultConcept: spec.title ?? 'graph', context: masteryContext, onMasteryEvent }),
+    [spec.title, masteryContext, onMasteryEvent]
+  )
+  const fired = useRef({ shown: false, interacted: false, attempted: false, completed: false })
+  useEffect(() => {
+    if (fired.current.shown) return
+    fired.current.shown = true
+    emitMastery({ challengeCompleted: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Initial view: center on origin, scale so the optional domain (or [-10,10]) fits.
   const [view, setView] = useState<View>(() => {
@@ -138,11 +173,29 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
     drag.current = { x: e.clientX, y: e.clientY }
     setView((v) => ({ ...v, cx: v.cx - dx / v.ppu, cy: v.cy + dy / v.ppu }))
   }
-  const onPointerUp = () => { drag.current = null; handleDrag.current = null }
+  const onPointerUp = () => {
+    const wasHandleDrag = handleDrag.current
+    drag.current = null
+    handleDrag.current = null
+    if (wasHandleDrag && challenge) {
+      if (!fired.current.attempted) {
+        fired.current.attempted = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: challengeMet })
+      }
+      if (challengeMet && !fired.current.completed) {
+        fired.current.completed = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+      }
+    }
+  }
   const startHandleDrag = (which: 'slope' | 'intercept') => (e: React.PointerEvent) => {
     e.stopPropagation()
     ;(e.target as Element).setPointerCapture?.(e.pointerId)
     handleDrag.current = which
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
   }
 
   // ── interaction: zoom (wheel, anchored at cursor) ──
@@ -223,13 +276,6 @@ export function GraphRenderer({ spec }: { spec: GraphSpec }) {
 
   const liveEquation = model ? formatLinearEquation(model.m, model.b) : `y = ${spec.equation.replace(/^\s*y\s*=\s*/i, '')}`
 
-  // Sprint G: challenge validation. Purely a read of already-live `model`
-  // state vs. spec.challenge's targets — no new parsing, no new state.
-  const challenge = spec.challenge
-  const challengeTolerance = challenge?.tolerance ?? 0.5
-  const slopeOk = challenge?.targetSlope === undefined || (model !== null && Math.abs(model.m - challenge.targetSlope) <= challengeTolerance)
-  const interceptOk = challenge?.targetIntercept === undefined || (model !== null && Math.abs(model.b - challenge.targetIntercept) <= challengeTolerance)
-  const challengeMet = !!challenge && (challenge.targetSlope !== undefined || challenge.targetIntercept !== undefined) && slopeOk && interceptOk
   const challengeGoalText = challenge && [
     challenge.targetSlope !== undefined ? `slope = ${challenge.targetSlope}` : null,
     challenge.targetIntercept !== undefined ? `intercept = ${challenge.targetIntercept}` : null,

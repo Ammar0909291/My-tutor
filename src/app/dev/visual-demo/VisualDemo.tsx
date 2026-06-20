@@ -8,6 +8,8 @@ import { useState } from 'react'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
+import { useVisualMastery } from '@/hooks/useVisualMastery'
+import type { VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
@@ -229,6 +231,19 @@ const SPRINT_J_DETECTOR_FIXTURES: { topic: string; tutorText: string }[] = [
   },
 ]
 
+// Sprint L: Visual Mastery Tracking — same renderers, same challenge specs
+// as Sprint G above, just with onMasteryEvent/masteryContext wired to a real
+// useVisualMastery() collector so the activation can be observed live.
+const MASTERY_DEMO_SPECS: { label: string; concept: string; spec: VisualSpec }[] = [
+  { label: 'Graph — hit slope 3, intercept 2', concept: 'linear_equation', spec: { type: 'graph', equation: 'y = x + 1', title: 'Drag to slope=3, intercept=2', interactive: true, challenge: { targetSlope: 3, targetIntercept: 2 } } },
+  { label: 'Number line — place a point near 7', concept: 'integer_comparison', spec: { type: 'number_line', start: -10, end: 10, highlight: [2], title: 'Place a point near 7', interactive: true, challenge: { targetValue: 7 } } },
+  { label: 'Triangle — area = 20', concept: 'triangle_area', spec: { type: 'geometry', shape: 'triangle', base: 6, height: 4, interactive: true, challenge: { targetArea: 20 } } },
+  {
+    label: 'Photosynthesis — reorder challenge', concept: 'photosynthesis_sequence',
+    spec: { type: 'process_flow', title: 'Photosynthesis', interactive: true, orientation: 'auto', challenge: {}, steps: ['Sunlight', 'Water', 'Carbon Dioxide', 'Glucose', 'Oxygen'].map((title) => ({ title })) },
+  },
+]
+
 export function VisualDemo() {
   // Initial theme can be set via ?theme=dark (dev convenience for screenshots);
   // the in-page toggle still works for manual checking.
@@ -236,6 +251,14 @@ export function VisualDemo() {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('theme') === 'dark'
   })
+  // Sprint L: Visual Mastery Tracking demo state — collector + a rolling log
+  // of the raw signals it received, so the activation can be inspected live.
+  const { recordMasteryEvent, summary } = useVisualMastery()
+  const [signalLog, setSignalLog] = useState<VisualMasterySignal[]>([])
+  const handleMasteryEvent = (signal: VisualMasterySignal) => {
+    recordMasteryEvent(signal)
+    setSignalLog((prev) => [signal, ...prev].slice(0, 8))
+  }
   // local CSS-variable shim so the renderers (which read these vars) look
   // correct on this standalone page regardless of global theme.
   const pageStyle = {
@@ -431,6 +454,41 @@ export function VisualDemo() {
               </section>
             )
           })}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Sprint L — Visual Mastery Tracking</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Same renderers and challenge specs as Sprint G, now wired to a real <code>useVisualMastery()</code> collector
+          via the optional <code>onMasteryEvent</code>/<code>masteryContext</code> props. Reach each target below to see
+          the emitted signal, the collector&apos;s per-instance state, and the running summary update live. Nothing here
+          is persisted or sent to any API — it&apos;s purely in-memory for this page.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16 }}>
+          {MASTERY_DEMO_SPECS.map(({ label, concept, spec }) => (
+            <section key={label}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualRenderer
+                spec={spec}
+                onMasteryEvent={handleMasteryEvent}
+                masteryContext={{ concept, source: 'learn' }}
+              />
+            </section>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16, marginTop: 20 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Collector summary (useVisualMastery)</h2>
+            <pre style={{ fontSize: 12, fontFamily: 'var(--font-mono)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, margin: 0, background: 'var(--bg-surface)', overflowX: 'auto' }}>
+              {JSON.stringify(summary, null, 2)}
+            </pre>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Last emitted signals (most recent first)</h2>
+            <pre style={{ fontSize: 11, fontFamily: 'var(--font-mono)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: 12, margin: 0, background: 'var(--bg-surface)', maxHeight: 220, overflow: 'auto' }}>
+              {signalLog.length === 0 ? '(no signals yet — interact with a visual above)' : JSON.stringify(signalLog, null, 2)}
+            </pre>
+          </section>
         </div>
       </div>
     </div>

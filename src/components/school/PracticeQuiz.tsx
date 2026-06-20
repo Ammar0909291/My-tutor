@@ -9,6 +9,8 @@ import { Card, CandyButton, Pill, ProgressBar, ProgressRing, EagleMascot, useCon
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
+import { useVisualMastery } from '@/hooks/useVisualMastery'
+import { VisualMasteryDevSummary } from '@/components/visuals/VisualMasteryDevSummary'
 
 interface ClientQuestion {
   id: string
@@ -46,6 +48,8 @@ export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle, navigatorAc
   const [result, setResult] = useState<PracticeResult | null>(null)
   const [showReview, setShowReview] = useState(false)
   const fireConfetti = useConfetti()
+  // Sprint L: visual mastery collection only — never read by submitAnswers/scoring.
+  const { recordMasteryEvent, summary } = useVisualMastery()
 
   useEffect(() => {
     fetch('/api/school/practice/generate', {
@@ -243,10 +247,15 @@ export function PracticeQuiz({ subjectSlug, chapterId, chapterTitle, navigatorAc
             <p style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.5, color: 'var(--candy-ink)', margin: 0 }}>{q.question}</p>
             {visualSpec && (
               <div style={{ marginTop: 14 }}>
-                <VisualRenderer spec={visualSpec} />
+                <VisualRenderer
+                  spec={visualSpec}
+                  onMasteryEvent={recordMasteryEvent}
+                  masteryContext={{ source: 'practice', subjectSlug, sessionId }}
+                />
               </div>
             )}
           </Card>
+          <VisualMasteryDevSummary summary={summary} />
 
           {/* Answer area */}
           {q.type === 'mcq' && q.options && (

@@ -10,6 +10,8 @@ import { Card, CandyButton, Pill, ProgressBar, ProgressRing, EagleMascot, useCon
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
+import { useVisualMastery } from '@/hooks/useVisualMastery'
+import { VisualMasteryDevSummary } from '@/components/visuals/VisualMasteryDevSummary'
 
 interface ClientQuestion {
   id: string
@@ -43,6 +45,8 @@ export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommend
   const [result, setResult] = useState<AssessmentResult | null>(null)
   const [showReview, setShowReview] = useState(false)
   const fireConfetti = useConfetti()
+  // Sprint L: visual mastery collection only — never read by scoring/grading.
+  const { recordMasteryEvent, summary } = useVisualMastery()
 
   const backHref = `/school/${subjectSlug}/chapter/${encodeURIComponent(chapterId)}`
 
@@ -237,10 +241,15 @@ export function AssessmentQuiz({ subjectSlug, chapterId, chapterTitle, recommend
             <p style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.5, color: 'var(--candy-ink)', margin: 0 }}>{q.question}</p>
             {visualSpec && (
               <div style={{ marginTop: 14 }}>
-                <VisualRenderer spec={visualSpec} />
+                <VisualRenderer
+                  spec={visualSpec}
+                  onMasteryEvent={recordMasteryEvent}
+                  masteryContext={{ source: 'assessment', subjectSlug, sessionId }}
+                />
               </div>
             )}
           </Card>
+          <VisualMasteryDevSummary summary={summary} />
 
           {q.type === 'mcq' && q.options && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

@@ -9,8 +9,9 @@
  * variables with literal fallbacks), matching GraphRenderer/NumberLineRenderer/
  * GeometryRenderer.
  */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ProcessFlowSpec } from '@/lib/visuals/visualSpec'
+import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 const STEP_W = 150
 const STEP_H = 56
@@ -63,7 +64,16 @@ function useReorder(stepCount: number, enabled: boolean) {
   return { order, swap, isCorrect }
 }
 
-export function ProcessFlowRenderer({ spec }: { spec: ProcessFlowSpec }) {
+export function ProcessFlowRenderer({
+  spec,
+  onMasteryEvent,
+  masteryContext,
+}: {
+  spec: ProcessFlowSpec
+  /** Sprint L (Visual Mastery activation) — fully optional; omitting it leaves this renderer byte-identical to before. */
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+  masteryContext?: VisualMasteryContext
+}) {
   const { ref, width } = useResponsiveWidth()
   const orientation = resolveOrientation(spec, width)
   const { order, swap, isCorrect } = useReorder(spec.steps.length, !!spec.interactive)
@@ -71,9 +81,50 @@ export function ProcessFlowRenderer({ spec }: { spec: ProcessFlowSpec }) {
 
   const hasChallenge = !!spec.challenge
 
+  // Sprint L: mastery emission — see GraphRenderer for the shared pattern.
+  // `swap` is a discrete button click (no pointer-up "interaction end"), so
+  // the natural emission point is the resulting `order`/`isCorrect` change
+  // rather than a pointer event. `userSwappedRef` distinguishes a real user
+  // click from useReorder's own mount/reset effect (see useReorder above),
+  // which also changes `order` but isn't a mastery event.
+  const emitMastery = useMemo(
+    () => createMasteryEmitter({ visualType: 'process_flow', defaultConcept: spec.title, context: masteryContext, onMasteryEvent }),
+    [spec.title, masteryContext, onMasteryEvent]
+  )
+  const fired = useRef({ shown: false, interacted: false, attempted: false, completed: false })
+  const userSwappedRef = useRef(false)
+  useEffect(() => {
+    if (fired.current.shown) return
+    fired.current.shown = true
+    emitMastery({ challengeCompleted: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  useEffect(() => {
+    if (!userSwappedRef.current) return
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
+    if (spec.interactive) {
+      if (!fired.current.attempted) {
+        fired.current.attempted = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: isCorrect })
+      }
+      if (isCorrect && !fired.current.completed) {
+        fired.current.completed = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order])
+  const wrappedSwap = (i: number, j: number) => {
+    userSwappedRef.current = true
+    swap(i, j)
+  }
+
   return orientation === 'horizontal'
-    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
-    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={swap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
+    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={wrappedSwap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
+    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={wrappedSwap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
 }
 
 interface FlowProps {

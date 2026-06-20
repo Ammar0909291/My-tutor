@@ -10,6 +10,8 @@ import { Card, CandyButton, Pill, ProgressBar, ProgressRing, EagleMascot, useCon
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
+import { useVisualMastery } from '@/hooks/useVisualMastery'
+import { VisualMasteryDevSummary } from '@/components/visuals/VisualMasteryDevSummary'
 
 interface ClientQuestion {
   id: string
@@ -51,6 +53,8 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
   const startedAtRef = useRef<Date | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const fireConfetti = useConfetti()
+  // Sprint L: visual mastery collection only — never read by the timer/scoring.
+  const { recordMasteryEvent, summary } = useVisualMastery()
 
   useEffect(() => {
     if (phase === 'quiz') {
@@ -242,7 +246,13 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
               {q.type === 'mcq' ? 'Multiple Choice' : q.type === 'true_false' ? 'True / False' : 'Short Answer'}
             </Pill>
             <p style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.5, color: 'var(--candy-ink)', margin: 0 }}>{q.question}</p>
-            {visualSpec && <VisualRenderer spec={visualSpec} />}
+            {visualSpec && (
+              <VisualRenderer
+                spec={visualSpec}
+                onMasteryEvent={recordMasteryEvent}
+                masteryContext={{ source: 'mock', subjectSlug, sessionId }}
+              />
+            )}
 
             {q.type === 'mcq' && q.options && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -316,6 +326,7 @@ export function MockTestQuiz({ subjectSlug, subjectLabel, backHref, navigatorAct
               {isLast ? 'Submit Test' : 'Next'} <ArrowRight size={16} />
             </CandyButton>
           </Card>
+          <VisualMasteryDevSummary summary={summary} />
         </main>
       </div>
     )

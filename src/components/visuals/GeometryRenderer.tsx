@@ -9,8 +9,9 @@
  * geometry engine. Responsive (ResizeObserver) and theme-aware (CSS
  * variables with literal fallbacks), matching GraphRenderer/NumberLineRenderer.
  */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { GeometrySpec } from '@/lib/visuals/visualSpec'
+import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 const PAD = 32 // px padding around the drawn shape, inside the SVG canvas
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
@@ -21,12 +22,28 @@ const round1 = (v: number) => Math.round(v * 10) / 10
  * visible coral dot on top. Purely a pointer-event wrapper — never mutates
  * the spec, only the caller's local state via onDrag.
  */
-function Handle({ x, y, label, onDrag }: { x: number; y: number; label: string; onDrag: (dx: number, dy: number) => void }) {
+function Handle({
+  x,
+  y,
+  label,
+  onDrag,
+  onDragStart,
+  onDragEnd,
+}: {
+  x: number
+  y: number
+  label: string
+  onDrag: (dx: number, dy: number) => void
+  /** Sprint L (Visual Mastery activation) — fully optional; omitting these leaves Handle's drag behavior unchanged. */
+  onDragStart?: () => void
+  onDragEnd?: () => void
+}) {
   const last = useRef<{ x: number; y: number } | null>(null)
   const onPointerDown = (e: React.PointerEvent) => {
     e.stopPropagation()
     ;(e.target as Element).setPointerCapture?.(e.pointerId)
     last.current = { x: e.clientX, y: e.clientY }
+    onDragStart?.()
   }
   const onPointerMove = (e: React.PointerEvent) => {
     if (!last.current) return
@@ -35,7 +52,11 @@ function Handle({ x, y, label, onDrag }: { x: number; y: number; label: string; 
     last.current = { x: e.clientX, y: e.clientY }
     onDrag(dx, dy)
   }
-  const onPointerUp = () => { last.current = null }
+  const onPointerUp = () => {
+    const wasDragging = last.current !== null
+    last.current = null
+    if (wasDragging) onDragEnd?.()
+  }
   return (
     <g
       style={{ cursor: 'grab', touchAction: 'none' }}
@@ -91,14 +112,20 @@ function useResponsiveSize(defaultH = 260) {
   return { ref, size }
 }
 
-export function GeometryRenderer({ spec }: { spec: GeometrySpec }) {
+interface MasteryProps {
+  /** Sprint L (Visual Mastery activation) — fully optional; omitting it leaves this renderer byte-identical to before. */
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+  masteryContext?: VisualMasteryContext
+}
+
+export function GeometryRenderer({ spec, onMasteryEvent, masteryContext }: { spec: GeometrySpec } & MasteryProps) {
   switch (spec.shape) {
-    case 'triangle': return <TriangleShape spec={spec} />
-    case 'rectangle': return <RectangleShape spec={spec} />
-    case 'circle': return <CircleShape spec={spec} />
-    case 'angle': return <AngleShape spec={spec} />
-    case 'line': return <LineShape spec={spec} />
-    case 'point': return <PointShape spec={spec} />
+    case 'triangle': return <TriangleShape spec={spec} onMasteryEvent={onMasteryEvent} masteryContext={masteryContext} />
+    case 'rectangle': return <RectangleShape spec={spec} onMasteryEvent={onMasteryEvent} masteryContext={masteryContext} />
+    case 'circle': return <CircleShape spec={spec} onMasteryEvent={onMasteryEvent} masteryContext={masteryContext} />
+    case 'angle': return <AngleShape spec={spec} onMasteryEvent={onMasteryEvent} masteryContext={masteryContext} />
+    case 'line': return <LineShape spec={spec} onMasteryEvent={onMasteryEvent} masteryContext={masteryContext} />
+    case 'point': return <PointShape spec={spec} onMasteryEvent={onMasteryEvent} masteryContext={masteryContext} />
     default: {
       const _never: never = spec
       return _never
@@ -106,10 +133,27 @@ export function GeometryRenderer({ spec }: { spec: GeometrySpec }) {
   }
 }
 
+/** Sprint L: shared per-shape mastery wiring — mount-fires `shown`, and returns the once-only fired-state ref plus the emitter, identical pattern to GraphRenderer/NumberLineRenderer. */
+function useShapeMastery(visualType: 'geometry', defaultConcept: string, props: MasteryProps) {
+  const emitMastery = useMemo(
+    () => createMasteryEmitter({ visualType, defaultConcept, context: props.masteryContext, onMasteryEvent: props.onMasteryEvent }),
+    [visualType, defaultConcept, props.masteryContext, props.onMasteryEvent]
+  )
+  const fired = useRef({ shown: false, interacted: false, attempted: false, completed: false })
+  useEffect(() => {
+    if (fired.current.shown) return
+    fired.current.shown = true
+    emitMastery({ challengeCompleted: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  return { emitMastery, fired }
+}
+
 // ── triangle (axis-aligned base/height) ─────────────────────────────────────
-function TriangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'triangle' }> }) {
+function TriangleShape({ spec, onMasteryEvent, masteryContext }: { spec: Extract<GeometrySpec, { shape: 'triangle' }> } & MasteryProps) {
   const { ref, size } = useResponsiveSize()
   const { w, h } = size
+  const { emitMastery, fired } = useShapeMastery('geometry', spec.title ?? 'triangle', { onMasteryEvent, masteryContext })
 
   // Sprint F: live base/height, draggable when spec.interactive. Local
   // state only — resyncs if the spec's own values change.
@@ -131,6 +175,32 @@ function TriangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'triangl
   const x1 = ox + bx, y1 = oy + by // bottom-right
   const x2 = ox + bx / 2, y2 = oy // apex (isosceles, centered over base)
 
+  // Same checks ChallengeFeedback already rendered below — extracted to a
+  // const purely so Sprint L's mastery emission can read the same `met`
+  // boolean it always displayed. No new computation.
+  const checks = [
+    ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
+    ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `perimeter = ${spec.challenge.targetPerimeter}`, ok: Math.abs(perimeter - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
+  ]
+  const challengeMet = !!spec.challenge && checks.length > 0 && checks.every((c) => c.ok)
+  const onShapeDragEnd = () => {
+    if (!spec.challenge || checks.length === 0) return
+    if (!fired.current.attempted) {
+      fired.current.attempted = true
+      emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: challengeMet })
+    }
+    if (challengeMet && !fired.current.completed) {
+      fired.current.completed = true
+      emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+    }
+  }
+  const onShapeDragStart = () => {
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
+  }
+
   return (
     <Card title={spec.title ?? 'Triangle'} badge="GEOMETRY">
       <Canvas wrapRef={ref} w={w} h={h}>
@@ -142,27 +212,22 @@ function TriangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'triangl
         <Label x={x2 + 8} y={(y0 + y2) / 2} text={`height = ${fmt(height)}`} anchor="start" />
         {spec.interactive && (
           <>
-            <Handle x={x2} y={y2} label="Drag to change height" onDrag={(_dx, dy) => setHeight((v) => clamp(round1(v - dy / scale), 1, 50))} />
-            <Handle x={x1} y={y1} label="Drag to change base" onDrag={(dx) => setBase((v) => clamp(round1(v + (2 * dx) / scale), 1, 50))} />
+            <Handle x={x2} y={y2} label="Drag to change height" onDrag={(_dx, dy) => setHeight((v) => clamp(round1(v - dy / scale), 1, 50))} onDragStart={onShapeDragStart} onDragEnd={onShapeDragEnd} />
+            <Handle x={x1} y={y1} label="Drag to change base" onDrag={(dx) => setBase((v) => clamp(round1(v + (2 * dx) / scale), 1, 50))} onDragStart={onShapeDragStart} onDragEnd={onShapeDragEnd} />
           </>
         )}
       </Canvas>
       <Formula>Area = ½ × base × height = {fmt(area)} · Perimeter ≈ {fmt(perimeter)}</Formula>
-      <ChallengeFeedback
-        challenge={spec.challenge}
-        checks={[
-          ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
-          ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `perimeter = ${spec.challenge.targetPerimeter}`, ok: Math.abs(perimeter - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
-        ]}
-      />
+      <ChallengeFeedback challenge={spec.challenge} checks={checks} />
     </Card>
   )
 }
 
 // ── rectangle ────────────────────────────────────────────────────────────────
-function RectangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'rectangle' }> }) {
+function RectangleShape({ spec, onMasteryEvent, masteryContext }: { spec: Extract<GeometrySpec, { shape: 'rectangle' }> } & MasteryProps) {
   const { ref, size } = useResponsiveSize()
   const { w, h } = size
+  const { emitMastery, fired } = useShapeMastery('geometry', spec.title ?? 'rectangle', { onMasteryEvent, masteryContext })
 
   const [width, setWidth] = useState(spec.width)
   const [height, setHeight] = useState(spec.height)
@@ -175,6 +240,29 @@ function RectangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'rectan
   const x0 = (w - rw) / 2
   const y0 = (h - rh) / 2
   const area = width * height
+
+  const checks = [
+    ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
+    ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `perimeter = ${spec.challenge.targetPerimeter}`, ok: Math.abs(2 * (width + height) - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
+  ]
+  const challengeMet = !!spec.challenge && checks.length > 0 && checks.every((c) => c.ok)
+  const onShapeDragEnd = () => {
+    if (!spec.challenge || checks.length === 0) return
+    if (!fired.current.attempted) {
+      fired.current.attempted = true
+      emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: challengeMet })
+    }
+    if (challengeMet && !fired.current.completed) {
+      fired.current.completed = true
+      emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+    }
+  }
+  const onShapeDragStart = () => {
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
+  }
 
   return (
     <Card title={spec.title ?? 'Rectangle'} badge="GEOMETRY">
@@ -190,25 +278,22 @@ function RectangleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'rectan
               setWidth((v) => clamp(round1(v + dx / scale), 1, 50))
               setHeight((v) => clamp(round1(v + dy / scale), 1, 50))
             }}
+            onDragStart={onShapeDragStart}
+            onDragEnd={onShapeDragEnd}
           />
         )}
       </Canvas>
       <Formula>Area = width × height = {fmt(area)}</Formula>
-      <ChallengeFeedback
-        challenge={spec.challenge}
-        checks={[
-          ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
-          ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `perimeter = ${spec.challenge.targetPerimeter}`, ok: Math.abs(2 * (width + height) - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
-        ]}
-      />
+      <ChallengeFeedback challenge={spec.challenge} checks={checks} />
     </Card>
   )
 }
 
 // ── circle ───────────────────────────────────────────────────────────────────
-function CircleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'circle' }> }) {
+function CircleShape({ spec, onMasteryEvent, masteryContext }: { spec: Extract<GeometrySpec, { shape: 'circle' }> } & MasteryProps) {
   const { ref, size } = useResponsiveSize()
   const { w, h } = size
+  const { emitMastery, fired } = useShapeMastery('geometry', spec.title ?? 'circle', { onMasteryEvent, masteryContext })
 
   const [radius, setRadius] = useState(spec.radius)
   useEffect(() => { setRadius(spec.radius) }, [spec.radius])
@@ -220,6 +305,30 @@ function CircleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'circle' }
   const area = Math.PI * radius * radius
   const circumference = 2 * Math.PI * radius
 
+  const checks = [
+    ...(spec.challenge?.targetRadius !== undefined ? [{ label: `radius = ${spec.challenge.targetRadius}`, ok: Math.abs(radius - spec.challenge.targetRadius) <= (spec.challenge.tolerance ?? 1) }] : []),
+    ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
+    ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `circumference = ${spec.challenge.targetPerimeter}`, ok: Math.abs(circumference - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
+  ]
+  const challengeMet = !!spec.challenge && checks.length > 0 && checks.every((c) => c.ok)
+  const onShapeDragEnd = () => {
+    if (!spec.challenge || checks.length === 0) return
+    if (!fired.current.attempted) {
+      fired.current.attempted = true
+      emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: challengeMet })
+    }
+    if (challengeMet && !fired.current.completed) {
+      fired.current.completed = true
+      emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+    }
+  }
+  const onShapeDragStart = () => {
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
+  }
+
   return (
     <Card title={spec.title ?? 'Circle'} badge="GEOMETRY">
       <Canvas wrapRef={ref} w={w} h={h}>
@@ -229,26 +338,20 @@ function CircleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'circle' }
         <line x1={cx - r} y1={cy + r + 14} x2={cx + r} y2={cy + r + 14} stroke="var(--text-dim, #888)" strokeWidth={1} />
         <Label x={cx} y={cy + r + 28} text={`diameter = ${fmt(radius * 2)}`} />
         {spec.interactive && (
-          <Handle x={cx + r} y={cy} label="Drag to change radius" onDrag={(dx) => setRadius((v) => clamp(round1(v + dx / scale), 1, 50))} />
+          <Handle x={cx + r} y={cy} label="Drag to change radius" onDrag={(dx) => setRadius((v) => clamp(round1(v + dx / scale), 1, 50))} onDragStart={onShapeDragStart} onDragEnd={onShapeDragEnd} />
         )}
       </Canvas>
       <Formula>Circumference = 2πr = {fmt(circumference)} · Area = πr² = {fmt(area)}</Formula>
-      <ChallengeFeedback
-        challenge={spec.challenge}
-        checks={[
-          ...(spec.challenge?.targetRadius !== undefined ? [{ label: `radius = ${spec.challenge.targetRadius}`, ok: Math.abs(radius - spec.challenge.targetRadius) <= (spec.challenge.tolerance ?? 1) }] : []),
-          ...(spec.challenge?.targetArea !== undefined ? [{ label: `area = ${spec.challenge.targetArea}`, ok: Math.abs(area - spec.challenge.targetArea) <= (spec.challenge.tolerance ?? 1) }] : []),
-          ...(spec.challenge?.targetPerimeter !== undefined ? [{ label: `circumference = ${spec.challenge.targetPerimeter}`, ok: Math.abs(circumference - spec.challenge.targetPerimeter) <= (spec.challenge.tolerance ?? 1) }] : []),
-        ]}
-      />
+      <ChallengeFeedback challenge={spec.challenge} checks={checks} />
     </Card>
   )
 }
 
 // ── angle ────────────────────────────────────────────────────────────────────
-function AngleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'angle' }> }) {
+function AngleShape({ spec, onMasteryEvent, masteryContext }: { spec: Extract<GeometrySpec, { shape: 'angle' }> } & MasteryProps) {
   const { ref, size } = useResponsiveSize()
   const { w, h } = size
+  const { emitMastery, fired } = useShapeMastery('geometry', spec.title ?? 'angle', { onMasteryEvent, masteryContext })
 
   const [angle, setAngle] = useState(spec.angle)
   useEffect(() => { setAngle(spec.angle) }, [spec.angle])
@@ -274,6 +377,10 @@ function AngleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'angle' }> 
     e.stopPropagation()
     ;(e.target as Element).setPointerCapture?.(e.pointerId)
     lastPos.current = { x: e.clientX, y: e.clientY }
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
   }
   const onRayPointerMove = (e: React.PointerEvent) => {
     if (!lastPos.current) return
@@ -288,7 +395,22 @@ function AngleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'angle' }> 
     setAngle(clamp(Math.round(deg), 0, 360))
     lastPos.current = { x: e.clientX, y: e.clientY }
   }
-  const onRayPointerUp = () => { lastPos.current = null }
+  const onRayPointerUp = () => {
+    const wasDragging = lastPos.current !== null
+    lastPos.current = null
+    if (wasDragging && spec.challenge?.targetAngle !== undefined) {
+      const tolerance = spec.challenge.tolerance ?? 3
+      const challengeMet = Math.abs(angle - spec.challenge.targetAngle) <= tolerance
+      if (!fired.current.attempted) {
+        fired.current.attempted = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: challengeMet })
+      }
+      if (challengeMet && !fired.current.completed) {
+        fired.current.completed = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+      }
+    }
+  }
 
   return (
     <Card title={spec.title ?? 'Angle'} badge="GEOMETRY">
@@ -323,9 +445,14 @@ function AngleShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'angle' }> 
 }
 
 // ── line ─────────────────────────────────────────────────────────────────────
-function LineShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'line' }> }) {
+// No interaction/challenge capability exists for this shape (no Handle, no
+// ChallengeFeedback) — Sprint L's mastery emission can therefore only ever
+// fire `shown` here, never interacted/attempted/completed. See
+// docs/VISUAL_MASTERY_INTEGRATION_AUDIT.md.
+function LineShape({ spec, onMasteryEvent, masteryContext }: { spec: Extract<GeometrySpec, { shape: 'line' }> } & MasteryProps) {
   const { ref, size } = useResponsiveSize(160)
   const { w, h } = size
+  useShapeMastery('geometry', spec.title ?? 'line', { onMasteryEvent, masteryContext })
   const scale = useFitScale(w, h, spec.length, 1)
   const len = spec.length * scale
   const x0 = (w - len) / 2
@@ -345,9 +472,11 @@ function LineShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'line' }> })
 }
 
 // ── point ────────────────────────────────────────────────────────────────────
-function PointShape({ spec }: { spec: Extract<GeometrySpec, { shape: 'point' }> }) {
+// Same as LineShape: shown-only, no interaction/challenge capability.
+function PointShape({ spec, onMasteryEvent, masteryContext }: { spec: Extract<GeometrySpec, { shape: 'point' }> } & MasteryProps) {
   const { ref, size } = useResponsiveSize(120)
   const { w, h } = size
+  useShapeMastery('geometry', spec.title ?? 'point', { onMasteryEvent, masteryContext })
   const cx = w / 2
   const cy = h / 2
 

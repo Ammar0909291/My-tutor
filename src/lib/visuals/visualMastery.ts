@@ -112,3 +112,61 @@ export function summarizeVisualMastery(signals: VisualMasterySignal[]): VisualMa
     }
   })
 }
+
+/**
+ * VisualMasterySignal — Visual Learning Sprint L (Activation, Task 2).
+ *
+ * A renderer only ever knows its own `spec` (so its own `visualType`, and the
+ * already-computed `challengeMet`/`isCorrect` boolean) — it never knows the
+ * detector-derived `concept` string, or which Learn/Practice/Assessment/Mock
+ * surface it's being shown on. `VisualMasteryContext` is the small, fully
+ * optional bundle of that *caller-known* information; a renderer's caller
+ * (e.g. the PracticeQuiz/AssessmentQuiz/MockTestQuiz integrations below)
+ * passes it down alongside `onMasteryEvent` so each renderer can still emit
+ * a complete `VisualMasterySignal` without ever needing to know these fields
+ * itself.
+ */
+export interface VisualMasteryContext {
+  /** Falls back to each renderer's own internal default (e.g. spec.title) when omitted. */
+  concept?: string
+  source?: VisualMasterySource
+  subjectSlug?: string
+  topicSlug?: string
+  sessionId?: string
+}
+
+/**
+ * Builds a single renderer's mastery-emission function. Pure factory, no
+ * React/DOM dependency — every renderer calls this once per render and then
+ * invokes the returned `emit()` at its own existing interaction-start/
+ * interaction-end points (see docs/VISUAL_MASTERY_INTEGRATION_AUDIT.md).
+ * `emit()` itself is a no-op whenever `onMasteryEvent` is absent, so adding
+ * this to a renderer is zero-cost for every existing caller that doesn't
+ * pass it.
+ */
+export function createMasteryEmitter(params: {
+  visualType: VisualMasteryEngine
+  /** Used only when `context.concept` is not supplied. */
+  defaultConcept: string
+  context?: VisualMasteryContext
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+}) {
+  const { visualType, defaultConcept, context, onMasteryEvent } = params
+  return function emit(partial: { interacted?: boolean; challengeAttempted?: boolean; challengeCompleted: boolean }) {
+    if (!onMasteryEvent) return
+    onMasteryEvent(
+      buildVisualMasterySignal({
+        concept: context?.concept ?? defaultConcept,
+        visualType,
+        shown: true,
+        interacted: partial.interacted ?? false,
+        challengeAttempted: partial.challengeAttempted ?? false,
+        challengeCompleted: partial.challengeCompleted,
+        source: context?.source,
+        subjectSlug: context?.subjectSlug,
+        topicSlug: context?.topicSlug,
+        sessionId: context?.sessionId,
+      })
+    )
+  }
+}

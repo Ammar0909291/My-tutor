@@ -7,6 +7,7 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { NumberLineSpec } from '@/lib/visuals/visualSpec'
+import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 
@@ -39,7 +40,16 @@ function autoStep(start: number, end: number): number {
   return Math.max(step * mag, span / 50)
 }
 
-export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
+export function NumberLineRenderer({
+  spec,
+  onMasteryEvent,
+  masteryContext,
+}: {
+  spec: NumberLineSpec
+  /** Sprint L (Visual Mastery activation) — fully optional; omitting it leaves this renderer byte-identical to before. */
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+  masteryContext?: VisualMasteryContext
+}) {
   const wrapRef = useRef<HTMLDivElement | null>(null)
   const [w, setW] = useState(360)
   const h = 90
@@ -71,28 +81,9 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
   useEffect(() => { setPoints(initialHighlights) }, [initialHighlights])
   const highlights = spec.interactive ? points : initialHighlights
 
-  const dragIndex = useRef<number | null>(null)
-  const toValue = (sx: number) => clamp(start + ((sx - padX) / usableW) * (end - start), start, end)
-  const onPointPointerDown = (i: number) => (e: React.PointerEvent) => {
-    e.stopPropagation()
-    ;(e.target as Element).setPointerCapture?.(e.pointerId)
-    dragIndex.current = i
-  }
-  const onLinePointerMove = (e: React.PointerEvent) => {
-    if (dragIndex.current === null) return
-    const rect = wrapRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const value = Math.round(toValue(e.clientX - rect.left) * 10) / 10
-    setPoints((prev) => prev.map((p, i) => (i === dragIndex.current ? value : p)))
-  }
-  const onLinePointerUp = () => { dragIndex.current = null }
-
-  const comparison = spec.interactive && highlights.length === 2
-    ? `${fractionLabel(highlights[0])} ${highlights[0] === highlights[1] ? '=' : highlights[0] < highlights[1] ? '<' : '>'} ${fractionLabel(highlights[1])}`
-    : null
-
-  // Sprint G: challenge validation. Reads the same `highlights` array Sprint
-  // F's drag interaction already maintains — no new state.
+  // Sprint G: challenge validation, moved up unchanged (was computed just
+  // before the JSX return) so the Sprint L mastery emitters below can
+  // reference it without a forward reference. Same expressions, same result.
   const challenge = spec.challenge
   const tolerance = challenge?.tolerance ?? 0.5
   const placeOk = challenge?.targetValue === undefined
@@ -108,6 +99,57 @@ export function NumberLineRenderer({ spec }: { spec: NumberLineSpec }) {
       || (challenge.order === 'asc' ? v >= highlights[i - 1] : v <= highlights[i - 1])))
   const hasChallenge = !!challenge && (challenge.targetValue !== undefined || challenge.targetRelation !== undefined || challenge.order !== undefined)
   const challengeMet = hasChallenge && placeOk && relationOk && orderOk
+
+  // Sprint L: mastery emission — see GraphRenderer for the shared pattern.
+  const emitMastery = useMemo(
+    () => createMasteryEmitter({ visualType: 'number_line', defaultConcept: spec.title ?? 'number_line', context: masteryContext, onMasteryEvent }),
+    [spec.title, masteryContext, onMasteryEvent]
+  )
+  const fired = useRef({ shown: false, interacted: false, attempted: false, completed: false })
+  useEffect(() => {
+    if (fired.current.shown) return
+    fired.current.shown = true
+    emitMastery({ challengeCompleted: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const dragIndex = useRef<number | null>(null)
+  const toValue = (sx: number) => clamp(start + ((sx - padX) / usableW) * (end - start), start, end)
+  const onPointPointerDown = (i: number) => (e: React.PointerEvent) => {
+    e.stopPropagation()
+    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    dragIndex.current = i
+    if (!fired.current.interacted) {
+      fired.current.interacted = true
+      emitMastery({ interacted: true, challengeCompleted: false })
+    }
+  }
+  const onLinePointerMove = (e: React.PointerEvent) => {
+    if (dragIndex.current === null) return
+    const rect = wrapRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const value = Math.round(toValue(e.clientX - rect.left) * 10) / 10
+    setPoints((prev) => prev.map((p, i) => (i === dragIndex.current ? value : p)))
+  }
+  const onLinePointerUp = () => {
+    const wasDragging = dragIndex.current !== null
+    dragIndex.current = null
+    if (wasDragging && hasChallenge) {
+      if (!fired.current.attempted) {
+        fired.current.attempted = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: challengeMet })
+      }
+      if (challengeMet && !fired.current.completed) {
+        fired.current.completed = true
+        emitMastery({ interacted: true, challengeAttempted: true, challengeCompleted: true })
+      }
+    }
+  }
+
+  const comparison = spec.interactive && highlights.length === 2
+    ? `${fractionLabel(highlights[0])} ${highlights[0] === highlights[1] ? '=' : highlights[0] < highlights[1] ? '<' : '>'} ${fractionLabel(highlights[1])}`
+    : null
+
   const challengeGoalText = challenge && [
     challenge.targetValue !== undefined ? `place a point near ${fractionLabel(challenge.targetValue)}` : null,
     challenge.targetRelation !== undefined ? `make a ${challenge.targetRelation} b` : null,
