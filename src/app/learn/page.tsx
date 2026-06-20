@@ -6,7 +6,8 @@ import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 import { t, type TranslationKey } from '@/lib/i18n'
 import { SubjectType } from '@prisma/client'
-import { getSchoolChapters, getChapterPosition, isSchoolSubject, schoolSubjectCode, chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getSchoolChapters, getChapterPosition, isSchoolSubject, schoolSubjectCode, chapterDisplayTitle, getGradeSubjects, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 
 // Sprint BL — "Ask Tutor" quick-question chips on the chapter workspace deep
 // link in via ?ask=<key>, mapped to a localized prompt sent on session start.
@@ -44,10 +45,18 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
 
   let profile = user.profile
 
-  // Allow picking a specific enrolled subject for this session via /learn?subject=<slug>
+  // School students have no ProfileSubject enrollment rows at all — their
+  // subject set is the board/grade catalog (same source the dashboard uses,
+  // via getUserNavSubjects). Resolved once here so both the default subject
+  // and the dropdown below stay in sync.
+  const isSchoolMode = profile.userType === 'SCHOOL_STUDENT' && !!profile.educationBoard && !!profile.grade
+
+  // Allow picking a specific subject for this session via /learn?subject=<slug>
   // (e.g. the "Continue learning" link from /library/[slug]) — falls back to the
-  // learner's primary (first-enrolled) subject when absent or not enrolled in.
+  // learner's primary (first-enrolled, or first grade-catalog subject for school
+  // students) subject when absent.
   const requestedSlug = searchParams?.subject
+    ?? (isSchoolMode ? getGradeSubjects(profile.educationBoard!, profile.grade!)[0] : undefined)
   const requestedSubject = requestedSlug
     ? profile?.subjects.find((ps) => ps.subject.slug === requestedSlug)?.subject
     : undefined
@@ -140,11 +149,9 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
   if (!profile) redirect('/onboarding')
   const resolvedSubject = primarySubject ?? { id: '', slug: 'python', name: 'Python' }
 
-  // All enrolled subjects for the lesson sidebar
-  const subjects = profile.subjects.map((ps) => ({
-    slug: ps.subject.slug,
-    name: ps.subject.name,
-  }))
+  // All subjects for the lesson sidebar/dropdown — same source the dashboard
+  // uses, so the two views can never show different subject sets again.
+  const subjects = getUserNavSubjects(profile, isSchoolMode)
 
   // Server-side lesson position for resume — used in the opening message
   const studentProgress = resolvedSubject.id

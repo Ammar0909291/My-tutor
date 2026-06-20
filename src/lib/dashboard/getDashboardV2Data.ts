@@ -5,7 +5,8 @@ import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
 import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getSubjectRoadmap, getOverallRoadmap, type RoadmapChapter } from '@/lib/school/roadmap/learningRoadmap'
-import { getGradeSubjects, chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadiness'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
@@ -227,7 +228,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   if (isSchool) {
     const board = profile.educationBoard!
     const grade = profile.grade!
-    const schoolSlugs = getGradeSubjects(board, grade)
+    const schoolSlugs = getUserNavSubjects(profile, true).map((s) => s.slug)
 
     if (schoolSlugs.length === 0) {
       continueLesson = emptyContinueLesson()
@@ -313,7 +314,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     }
   } else {
     const enrolledSubjects = profile.subjects ?? []
-    const slugs = enrolledSubjects.map((ps) => ps.subject.slug)
+    const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
     dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
 
     const studentProgressList = await withRetry(() => prisma.studentProgress.findMany({

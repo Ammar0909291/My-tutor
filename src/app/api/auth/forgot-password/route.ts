@@ -6,6 +6,11 @@ import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
 
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 const EXPIRY_MS = 60 * 60 * 1000 // 1 hour
+// Loose RFC-5322-ish check — just enough to reject obviously malformed input
+// before it reaches the DB lookup / SMTP send (mirrors the validation gap
+// flagged in the password-reset bugfix audit: previously any non-empty
+// string was accepted).
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // Must be a function — NextResponse bodies are single-use streams and cannot be shared across requests.
 // LOW-5 timing oracle: response body is identical for found/not-found emails (safeResponse).
@@ -37,6 +42,9 @@ export async function POST(req: NextRequest) {
     }
 
     const normalized = email.toLowerCase().trim()
+    if (!EMAIL_RE.test(normalized)) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+    }
     const user = await prisma.user.findUnique({ where: { email: normalized } })
     if (!user || !user.passwordHash) {
       return safeResponse()

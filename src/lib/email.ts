@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import type { Lang } from '@/lib/i18n'
-import { reportError, recordFailure, maskEmail } from '@/lib/monitoring'
+import { reportError, maskEmail } from '@/lib/monitoring'
 
 function makeTransport() {
   return nodemailer.createTransport({
@@ -86,36 +86,19 @@ export async function sendPasswordResetEmail(
   token: string,
 ): Promise<{ success: boolean; error?: string }> {
   const resetUrl = `${APP_URL()}/auth/reset-password?token=${token}`
-
-  // ─── DR.4 DIAGNOSTIC (temporary — remove after confirming email works) ──────
-  const _maskEmail = (s?: string) => (s ?? '').replace(/^(.{2})(.*)(@.{2})(.*)$/, '$1***$3***')
-  console.log('[email:diag] smtpReady =', smtpReady())
-  console.log('[email:diag] SMTP_HOST =', process.env.SMTP_HOST ?? '(unset)')
-  console.log('[email:diag] SMTP_PORT =', process.env.SMTP_PORT ?? '(unset)')
-  console.log('[email:diag] SMTP_SECURE =', process.env.SMTP_SECURE ?? '(unset)')
-  console.log('[email:diag] SMTP_USER =', _maskEmail(process.env.SMTP_USER))
-  console.log('[email:diag] SMTP_FROM =', _maskEmail(process.env.SMTP_FROM))
-  console.log('[email:diag] SMTP_PASS len =', process.env.SMTP_PASS?.length ?? 0)
-  const _diagT = makeTransport()
-  console.log('[email:diag] running transporter.verify() ...')
-  await _diagT.verify().then(
-    () => console.log('[email:diag] verify() OK — credentials + connection valid'),
-    (e: Error & { code?: string; command?: string; response?: string }) =>
-      console.error('[email:diag] verify() FAILED', { code: e.code, command: e.command, response: e.response, message: e.message }),
-  )
-  // ─────────────────────────────────────────────────────────────────────────────
+  const masked = maskEmail(to)
 
   if (!smtpReady()) {
     if (process.env.NODE_ENV !== 'production') {
       console.log('[email] SMTP not configured — RESET LINK (dev mode):', resetUrl)
       return { success: true }
     }
-    console.error('[email] sendPasswordResetEmail: SMTP_HOST / SMTP_USER / SMTP_PASS are not set — email NOT sent')
+    const count = reportError('email.password-reset.smtp-not-configured', new Error('SMTP_HOST / SMTP_USER / SMTP_PASS not set'), { to: masked })
+    console.error(`[email] sendPasswordResetEmail: SMTP not configured — email NOT sent to ${masked} (failure #${count})`)
     return { success: false, error: 'SMTP not configured' }
   }
 
   try {
-    console.log('[email:diag] calling sendMail() to:', to)
     await makeTransport().sendMail({
       from: FROM(),
       to,
@@ -153,19 +136,19 @@ export async function sendPasswordResetEmail(
 </html>`,
       text: `Password Reset — My Tutor\n\nClick the link to reset your password:\n${resetUrl}\n\nLink valid for 1 hour.`,
     })
-    console.log('[email:diag] sendMail() succeeded')
+    console.log('[email] Password reset email sent to:', masked)
     return { success: true }
   } catch (err) {
     const errObj = err as Error & { code?: string; command?: string; response?: string; responseCode?: number }
-    console.error('[email:diag] sendMail() FAILED', {
-      code: errObj.code,
-      command: errObj.command,
-      responseCode: errObj.responseCode,
-      response: errObj.response,
-      message: errObj.message,
-    })
     const msg = errObj.message ?? String(err)
-    console.error('[email] Failed to send reset email:', msg)
+    const count = reportError('email.password-reset.send-failed', err, {
+      to: masked,
+      code: errObj.code ?? null,
+      command: errObj.command ?? null,
+      responseCode: errObj.responseCode ?? null,
+      response: errObj.response ?? null,
+    })
+    console.error(`[email] Failed to send reset email to ${masked} (failure #${count}):`, msg)
     if (process.env.NODE_ENV !== 'production') {
       console.log('[email] Reset link (dev fallback):', resetUrl)
     }
