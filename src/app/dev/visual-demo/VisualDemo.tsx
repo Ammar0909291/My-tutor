@@ -18,6 +18,7 @@ import { RetestIntelligenceViewer } from '@/components/intelligence/RetestIntell
 import { ImprovementTrackingViewer } from '@/components/intelligence/ImprovementTrackingViewer'
 import { LearningDifficultyViewer } from '@/components/intelligence/LearningDifficultyViewer'
 import { TeachingPlanViewer } from '@/components/intelligence/TeachingPlanViewer'
+import { AdaptationEffectivenessViewer } from '@/components/intelligence/AdaptationEffectivenessViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -625,6 +626,16 @@ export function VisualDemo() {
           no Tutor Max / curriculum / grading / XP changes. The plan is consumed nowhere yet.
         </p>
         <TeachingPlanViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Educational Intelligence Sprint 7 — Adaptation Effectiveness Engine</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Measures whether the adaptive teaching system (Sprints 5/6) is actually helping, by joining
+          the before→after mastery signal (Sprint 4-Improvement) with the teaching methods each topic
+          received (Sprint 5). Classifies HIGH / MEDIUM / LOW / REGRESSION and surfaces per-method
+          insights. Measurement only — read-only, no writes, no teaching-plan / Tutor Max / curriculum
+          / grading / XP changes.
+        </p>
+        <AdaptationEffectivenessViewer />
       </div>
     </div>
   )
