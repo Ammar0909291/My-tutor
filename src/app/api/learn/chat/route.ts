@@ -10,6 +10,7 @@ import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
 import { MessageRole } from '@prisma/client'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
+import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -995,13 +996,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      // Sprint C: deterministic, rule-based visual detection on the final
-      // tutor text (no AI reasoning, no LLM parsing). Non-fatal — falls
-      // back to undefined on any error so a lesson never breaks because of
-      // this. Never persisted; attached to the JSON response only.
+      // Sprint C/H: deterministic, rule-based visual detection on the final
+      // tutor text, now routed through the Teaching Strategy Engine (Sprint H)
+      // so a visual only appears when the strategy actually requests one, and
+      // carries `interactive`/`challenge` only when the strategy calls for
+      // them — no AI reasoning, no LLM parsing, no prompt changes. Non-fatal —
+      // falls back to undefined on any error so a lesson never breaks because
+      // of this. Never persisted; attached to the JSON response only.
       let detectedVisualSpec: ReturnType<typeof buildVisualSpec> = null
       try {
-        detectedVisualSpec = buildVisualSpec(cleanText)
+        detectedVisualSpec = planVisualTeaching(cleanText).spec
       } catch { /* non-fatal */ }
 
       await withRetry(() => prisma.message.create({
