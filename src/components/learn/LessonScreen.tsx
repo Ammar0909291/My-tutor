@@ -208,7 +208,7 @@ function Panel({ children, style, accentColor = 'var(--coral)' }: { children: Re
     <Card
       style={{
         boxShadow: `0 4px 0 ${accentColor}, 0 4px 16px rgba(0,0,0,0.25)`,
-        border: '1px solid var(--border-subtle)',
+        border: '1px solid var(--panel-border)',
         borderRadius: 16,
         display: 'flex',
         flexDirection: 'column',
@@ -1811,7 +1811,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               onClick={() => setTerminalOpen((o) => !o)}
               style={{
                 height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '0 12px', background: 'var(--bg-void)', borderTop: '2px solid var(--border-subtle)',
+                padding: '0 12px', background: 'var(--bg-void)', borderTop: '2px solid var(--panel-border)',
                 boxShadow: 'inset 0 1px 4px rgba(0,0,0,0.2)',
                 cursor: 'pointer', fontSize: 12, color: 'var(--border-emphasis)', flexShrink: 0,
                 transition: 'color 150ms',
@@ -1840,7 +1840,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             {/* Terminal panel */}
             {showTerminal && terminalOpen && (
               <div style={{
-                height: 180, background: 'var(--bg-void)', borderTop: '2px solid var(--border-subtle)',
+                height: 180, background: 'var(--bg-void)', borderTop: '2px solid var(--panel-border)',
                 borderRadius: '0 0 16px 16px', display: 'flex', flexDirection: 'column', flexShrink: 0,
               }}>
                 <div style={{ flex: 1, overflowY: 'auto', padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, lineHeight: 1.6 }}>
