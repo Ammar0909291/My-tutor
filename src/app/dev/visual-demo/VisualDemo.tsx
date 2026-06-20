@@ -22,6 +22,7 @@ import { AdaptationEffectivenessViewer } from '@/components/intelligence/Adaptat
 import { MethodEffectivenessViewer } from '@/components/intelligence/MethodEffectivenessViewer'
 import { WeightedTeachingPlanViewer } from '@/components/intelligence/WeightedTeachingPlanViewer'
 import { TeachingStyleViewer } from '@/components/intelligence/TeachingStyleViewer'
+import { TutorVisualSyncViewer } from '@/components/school/visuals/TutorVisualSyncViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -666,6 +667,15 @@ export function VisualDemo() {
           adaptation, no Tutor Max / curriculum / grading / XP changes.
         </p>
         <TeachingStyleViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Visual Learning Sprint S — Tutor ↔ Visual Synchronization</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Synchronization infrastructure (dev-only). Each visual drives the real playback engine with
+          the new optional <code>onStepChange</code>; the active narration segment is highlighted live
+          as the animation reaches each step. Sample narration is developer-authored, not AI-generated.
+          No live tutor behavior change — Sprint R/R.1 animation is unchanged.
+        </p>
+        <TutorVisualSyncViewer />
       </div>
     </div>
   )

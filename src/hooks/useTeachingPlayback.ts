@@ -18,6 +18,12 @@ export interface UseTeachingPlaybackOptions {
   speed?: number
   /** Per-step duration in ms before speed scaling. */
   stepDurationMs?: number
+  /**
+   * Sprint S — optional, additive: fired whenever the revealed step changes
+   * (including 0 → 1 and the final step). Lets a synchronization layer react to
+   * animation progress without touching the renderer or animation logic.
+   */
+  onStepChange?: (step: number) => void
 }
 
 export interface TeachingPlayback {
@@ -36,7 +42,7 @@ export function useTeachingPlayback(
   stepCount: number,
   options: UseTeachingPlaybackOptions = {}
 ): TeachingPlayback {
-  const { autoPlay = true, speed: initialSpeed = 1, stepDurationMs = 700 } = options
+  const { autoPlay = true, speed: initialSpeed = 1, stepDurationMs = 700, onStepChange } = options
 
   const timeline: Timeline = useMemo(
     () =>
@@ -105,6 +111,11 @@ export function useTeachingPlayback(
 
   // Cleanup on unmount.
   useEffect(() => stop, [stop])
+
+  // Sprint S — additive: notify an optional listener when the revealed step changes.
+  useEffect(() => {
+    onStepChange?.(revealStep)
+  }, [revealStep, onStepChange])
 
   const play = useCallback(() => {
     if (isComplete) {
