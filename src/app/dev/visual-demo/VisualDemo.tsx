@@ -39,6 +39,11 @@ import { NewtonForcesInteractive3D } from '@/components/school/visuals/NewtonFor
 import { MomentumCollisionInteractive3D } from '@/components/school/visuals/MomentumCollisionInteractive3D'
 import { CircularMotionInteractive3D } from '@/components/school/visuals/CircularMotionInteractive3D'
 import { PendulumInteractive3D } from '@/components/school/visuals/PendulumInteractive3D'
+import { AtomicStructureInteractive3D } from '@/components/school/visuals/AtomicStructureInteractive3D'
+import { ElectronShellsInteractive3D } from '@/components/school/visuals/ElectronShellsInteractive3D'
+import { MolecularShapesInteractive3D } from '@/components/school/visuals/MolecularShapesInteractive3D'
+import { BondFormationInteractive3D } from '@/components/school/visuals/BondFormationInteractive3D'
+import { CrystalLatticeInteractive3D } from '@/components/school/visuals/CrystalLatticeInteractive3D'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -622,6 +627,109 @@ export function VisualDemo() {
                   highlightedControlId={highlightedControlId}
                   onMasteryEvent={handleMasteryEvent}
                   masteryContext={{ concept: 'pendulum_period', source: 'learn', subjectSlug: 'classical_mechanics', topicSlug: 'pendulum_motion' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Chemistry Interactive Simulations</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Chemistry 3D Interactive Layer Sprint: live, student-controlled versions built additively
+          on the same <code>ThreeDVisual</code> host plus the shared, generic{' '}
+          <code>SimulationControlPanel</code> and <code>GuidedSimulationMode</code> — identical
+          infrastructure to the Quantum and Classical Mechanics Interactive layers, just new subject
+          content. Each is wrapped in a guided step-through script and wired to the same mastery
+          collector via <code>onMasteryEvent</code>/<code>masteryContext</code>. The original
+          revealStep-gated Chemistry 3D Foundation components above are unmodified.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Atomic structure — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the proton count and notice this changes which element the atom is.', highlightedControlId: 'protons' },
+                { instruction: 'Now change the neutron count and watch the mass number change while the element stays the same.', highlightedControlId: 'neutrons' },
+                { instruction: 'Change the electron count away from the proton count and observe the atom becomes a charged ion.', highlightedControlId: 'electrons' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <AtomicStructureInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'atomic_identity', source: 'learn', subjectSlug: 'chemistry', topicSlug: 'atomic_structure' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Electron shells — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the atomic number from 1 and watch the K shell fill first (max 2).', highlightedControlId: 'atomicNumber' },
+                { instruction: 'Keep increasing past 2 and observe the L shell start filling (max 8).', highlightedControlId: 'atomicNumber' },
+                { instruction: 'Switch the shell display mode to compare animated and static views.', highlightedControlId: 'displayMode' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <ElectronShellsInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'electron_shell_filling', source: 'learn', subjectSlug: 'chemistry', topicSlug: 'electron_shells' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Molecular shapes — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Start with linear geometry and note the 180° bond angle.', highlightedControlId: 'moleculeType' },
+                { instruction: 'Switch to trigonal planar and observe the 120° bond angle.', highlightedControlId: 'moleculeType' },
+                { instruction: 'Switch to tetrahedral and observe the 109.5° bond angle.', highlightedControlId: 'moleculeType' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <MolecularShapesInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'molecular_geometry', source: 'learn', subjectSlug: 'chemistry', topicSlug: 'molecular_shapes' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Bond formation — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Start with ionic bonding and observe the electron transfer between atoms.', highlightedControlId: 'bondType' },
+                { instruction: 'Switch to covalent bonding and observe the shared electron pair instead.', highlightedControlId: 'bondType' },
+                { instruction: 'Switch to metallic bonding and observe the delocalized electron sea across the lattice.', highlightedControlId: 'bondType' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <BondFormationInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'bond_type', source: 'learn', subjectSlug: 'chemistry', topicSlug: 'bond_formation' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Crystal lattice — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Start at lattice size 1 to see a single unit cell.', highlightedControlId: 'latticeSize' },
+                { instruction: 'Increase the lattice size and watch the crystal grow by repeating the unit cell.', highlightedControlId: 'latticeSize' },
+                { instruction: 'Switch lattice type to body-centered and notice the extra atom at the center of each cell.', highlightedControlId: 'latticeType' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <CrystalLatticeInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'crystal_lattice_growth', source: 'learn', subjectSlug: 'chemistry', topicSlug: 'crystal_lattice' }}
                 />
               )}
             </GuidedSimulationMode>
