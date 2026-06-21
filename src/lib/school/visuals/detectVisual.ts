@@ -37,7 +37,11 @@ const SCIENCE_RULES: MatchRule[] = [
 // Quantum Physics rules (Visual Expansion Sprint) — ordered most-specific first.
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
-  { keywords: ['bloch sphere', 'qubit', 'single-qubit', 'superposition state', 'quantum gate', 'quantum computing', 'quantum computer'], visual: 'bloch_sphere' },
+  { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
+  { keywords: ['entangle', 'entanglement', 'entangled', 'bell pair', 'bell state', 'bell inequality', 'epr', 'correlated measurement', 'no-signaling', 'spooky action'], visual: 'entanglement_pair' },
+  { keywords: ['quantum circuit', 'cnot', 'hadamard', 'logic gate', 'qubit gate', 'quantum gate', 'quantum algorithm', 'circuit diagram'], visual: 'quantum_circuit' },
+  { keywords: ['energy level', 'energy levels', 'spectral line', 'spectral lines', 'line spectrum', 'emission spectrum', 'absorption spectrum', 'atomic transition', 'photon emission', 'bohr model', 'electron transition'], visual: 'energy_level_diagram' },
+  { keywords: ['bloch sphere', 'qubit', 'single-qubit', 'superposition state', 'quantum computer'], visual: 'bloch_sphere' },
   { keywords: ['tunnel', 'tunneling', 'tunnelling', 'barrier penetration', 'potential barrier', 'transmission probability'], visual: 'quantum_tunneling' },
   { keywords: ['square well', 'potential well', 'infinite well', 'energy level', 'energy levels', 'quantized energy', 'stationary state', 'bound state'], visual: 'potential_well' },
   { keywords: ['wavefunction', 'wave function', 'born rule', 'probability density', 'probability amplitude', 'psi', '|ψ|', 'schrödinger', 'schrodinger'], visual: 'wave_function' },
@@ -91,6 +95,7 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     'geometry_shape', 'food_chain', 'water_cycle', 'solar_system',
     'force_diagram', 'circuit_diagram',
     'double_slit', 'wave_function', 'potential_well', 'quantum_tunneling', 'bloch_sphere',
+    'energy_level_diagram', 'quantum_circuit', 'stern_gerlach', 'entanglement_pair',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -105,6 +110,7 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'geometry_shape', 'food_chain', 'water_cycle', 'solar_system',
     'force_diagram', 'circuit_diagram',
     'double_slit', 'wave_function', 'potential_well', 'quantum_tunneling', 'bloch_sphere',
+    'energy_level_diagram', 'quantum_circuit', 'stern_gerlach', 'entanglement_pair',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}

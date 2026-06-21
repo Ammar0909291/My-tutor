@@ -33,6 +33,10 @@ import { WaveFunctionPlot } from './WaveFunctionPlot'
 import { PotentialWell } from './PotentialWell'
 import { QuantumTunneling } from './QuantumTunneling'
 import { BlochSphere } from './BlochSphere'
+import { EnergyLevelDiagram } from './EnergyLevelDiagram'
+import { QuantumCircuit } from './QuantumCircuit'
+import { SternGerlach } from './SternGerlach'
+import { EntanglementPair } from './EntanglementPair'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -75,6 +79,10 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   potential_well: 5,
   quantum_tunneling: 5,
   bloch_sphere: 5,
+  energy_level_diagram: 5,
+  quantum_circuit: 5,
+  stern_gerlach: 5,
+  entanglement_pair: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -94,6 +102,10 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'potential_well':    return <PotentialWell revealStep={revealStep} />
     case 'quantum_tunneling': return <QuantumTunneling revealStep={revealStep} />
     case 'bloch_sphere':      return <BlochSphere revealStep={revealStep} />
+    case 'energy_level_diagram': return <EnergyLevelDiagram revealStep={revealStep} />
+    case 'quantum_circuit':   return <QuantumCircuit revealStep={revealStep} />
+    case 'stern_gerlach':     return <SternGerlach revealStep={revealStep} />
+    case 'entanglement_pair': return <EntanglementPair revealStep={revealStep} />
   }
 }
 

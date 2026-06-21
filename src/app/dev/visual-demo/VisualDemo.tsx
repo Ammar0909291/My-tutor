@@ -54,6 +54,11 @@ const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Quantum potential well', type: 'potential_well' },
   { label: 'Quantum tunneling', type: 'quantum_tunneling' },
   { label: 'Bloch sphere (qubit)', type: 'bloch_sphere' },
+  // Phase 2
+  { label: 'Energy level diagram', type: 'energy_level_diagram' },
+  { label: 'Quantum circuit', type: 'quantum_circuit' },
+  { label: 'Stern–Gerlach experiment', type: 'stern_gerlach' },
+  { label: 'Entangled pair', type: 'entanglement_pair' },
 ]
 
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
@@ -367,9 +372,9 @@ export function VisualDemo() {
           ))}
         </div>
 
-        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics — Visual Expansion (Phase 1)</h1>
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics — Visual Expansion (Phase 1 & 2)</h1>
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
-          The five Phase-1 quantum visuals, rendered by the same production <code>VisualCard</code>
+          The nine quantum visuals, rendered by the same production <code>VisualCard</code>
           (step-by-step autoplay, Play / Pause / Replay, 0.5×–1.5× speed). They reuse the Sprint R.1
           animation engine and the Sprint S/T/U narration-sync infrastructure unchanged — no new
           renderer base, no new playback engine.

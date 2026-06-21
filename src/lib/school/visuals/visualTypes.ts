@@ -21,6 +21,11 @@ export type VisualType =
   | 'potential_well'
   | 'quantum_tunneling'
   | 'bloch_sphere'
+  // Quantum Physics (Visual Expansion Phase 2)
+  | 'energy_level_diagram'
+  | 'quantum_circuit'
+  | 'stern_gerlach'
+  | 'entanglement_pair'
 
 export interface VisualAid {
   type: VisualType
@@ -44,6 +49,10 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   potential_well:   { title: 'Quantum Potential Well', description: 'An infinite square well with quantized energy levels and stationary-state wavefunctions' },
   quantum_tunneling:{ title: 'Quantum Tunneling',  description: 'A wave packet decaying exponentially through a barrier and emerging with reduced amplitude' },
   bloch_sphere:     { title: 'Bloch Sphere',       description: 'A qubit state as a vector on the Bloch sphere, with |0⟩/|1⟩ poles and a phase angle' },
+  energy_level_diagram: { title: 'Energy Level Diagram', description: 'Atomic energy levels with absorption and emission transitions producing a spectral line' },
+  quantum_circuit:  { title: 'Quantum Circuit',    description: 'A two-qubit circuit with a Hadamard gate, CNOT entangling gate, and measurement' },
+  stern_gerlach:    { title: 'Stern–Gerlach Experiment', description: 'An atom beam split by an inhomogeneous magnet into two discrete spin-up/spin-down spots' },
+  entanglement_pair:{ title: 'Entangled Pair',     description: 'A Bell pair separating to two labs, where measuring one instantly correlates the other' },
 }
 
 /** Subjects where visual aids are applicable */
