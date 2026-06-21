@@ -27,6 +27,14 @@ interface VisualCardProps {
   autoPlay?: boolean
   /** Initial animation speed multiplier (e.g. the Learn panel's voice speed). */
   speed?: number
+  /**
+   * Sprint U — optional live narration step (1-based). When provided alongside a
+   * narration source, the visual advances in narration mode (driven by this step)
+   * instead of by the timer. Omit (the default) to keep Sprint R.1 timer playback.
+   */
+  narrationStep?: number
+  /** Sprint U — whether a narration source exists for this visual (enables narration mode when narrationStep is also set). */
+  hasNarration?: boolean
 }
 
 /** Number of teaching steps each visual reveals — drives the timeline length. */
@@ -58,10 +66,16 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
   }
 }
 
-export function VisualCard({ type, autoPlay = true, speed = 1 }: VisualCardProps) {
+export function VisualCard({ type, autoPlay = true, speed = 1, narrationStep, hasNarration = false }: VisualCardProps) {
   const meta = VISUAL_META[type]
   const stepCount = VISUAL_STEP_COUNTS[type]
-  const playback = useTeachingPlayback(stepCount, { autoPlay, speed })
+  // Sprint U: narration mode is active only when a narration source AND a live
+  // narration step are both supplied; otherwise fall back to Sprint R.1 timer mode.
+  const narrationActive = hasNarration && typeof narrationStep === 'number'
+  const playback = useTeachingPlayback(
+    stepCount,
+    narrationActive ? { mode: 'narration', narrationStep } : { autoPlay, speed }
+  )
 
   return (
     <div
@@ -96,16 +110,18 @@ export function VisualCard({ type, autoPlay = true, speed = 1 }: VisualCardProps
         <VisualComponent type={type} revealStep={playback.revealStep} />
       </div>
 
-      {/* playback controls */}
-      <VisualPlaybackControls
-        isPlaying={playback.isPlaying}
-        isComplete={playback.isComplete}
-        speed={playback.speed}
-        onPlay={playback.play}
-        onPause={playback.pause}
-        onReplay={playback.replay}
-        onSpeedChange={playback.setSpeed}
-      />
+      {/* playback controls — timer mode only (narration mode is driven externally) */}
+      {!narrationActive && (
+        <VisualPlaybackControls
+          isPlaying={playback.isPlaying}
+          isComplete={playback.isComplete}
+          speed={playback.speed}
+          onPlay={playback.play}
+          onPause={playback.pause}
+          onReplay={playback.replay}
+          onSpeedChange={playback.setSpeed}
+        />
+      )}
 
       {/* screen-reader / fallback description */}
       <p style={{ margin: '6px 0 0', fontSize: 10, color: 'var(--text-dim)', lineHeight: 1.4 }}>
