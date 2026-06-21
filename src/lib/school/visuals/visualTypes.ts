@@ -87,4 +87,4 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
 }
 
 /** Subjects where visual aids are applicable */
-export const VISUAL_SUBJECTS = new Set(['mathematics', 'science', 'math', 'quantum_physics'])
+export const VISUAL_SUBJECTS = new Set(['mathematics', 'science', 'math', 'quantum_physics', 'physics'])

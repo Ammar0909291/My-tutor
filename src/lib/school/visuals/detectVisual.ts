@@ -48,6 +48,20 @@ const QUANTUM_3D_RULES: MatchRule[] = [
   { keywords: ['3d orbital', '3d hydrogen orbital', 'orbital in 3d', 'rotate the orbital', 'three-dimensional electron cloud', 'orbital shapes in 3d'], visual: 'three_hydrogen_orbital' },
 ]
 
+// Classical Mechanics 3D rules (Production Learning Integration Sprint) —
+// same architecture as QUANTUM_3D_RULES: checked first under the 'physics'
+// subject slug so mechanics-topic lesson text matches a 3D simulation;
+// SCIENCE_RULES (force_diagram etc.) remains the 2D fallback for physics
+// topics this table doesn't cover, exactly mirroring how QUANTUM_RULES is
+// the 2D fallback for quantum_physics.
+const MECHANICS_3D_RULES: MatchRule[] = [
+  { keywords: ['projectile motion', 'launch angle', 'trajectory', 'ballistic motion'], visual: 'three_projectile_motion' },
+  { keywords: ['centripetal force', 'circular motion', 'angular velocity'], visual: 'three_circular_motion' },
+  { keywords: ['pendulum', 'oscillation', 'simple harmonic motion'], visual: 'three_pendulum_motion' },
+  { keywords: ['collision', 'conservation of momentum', 'elastic collision', 'inelastic collision'], visual: 'three_momentum_collision' },
+  { keywords: ['force diagram', 'net force', 'friction', 'newton laws', "newton's laws"], visual: 'three_newton_forces' },
+]
+
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
   { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
@@ -95,6 +109,15 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, QUANTUM_3D_RULES) ?? matchRules(combined, QUANTUM_RULES)
   }
 
+  // Physics (Subject Library, 'physics' slug — Classical Mechanics lessons
+  // live here, distinct from the dedicated 'quantum_physics' slug). Classical
+  // Mechanics Production Learning Integration Sprint: mechanics 3D rules
+  // checked first, then SCIENCE_RULES (force_diagram etc.) as the existing
+  // 2D fallback — same two-tier pattern as quantum_physics above.
+  if (opts.subjectSlug === 'physics') {
+    return matchRules(combined, MECHANICS_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
+  }
+
   return null
 }
 
@@ -115,6 +138,8 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     // 3D Production Integration Sprint — explicit 3D requests via the VISUAL: tag.
     'three_double_slit', 'three_quantum_tunneling', 'three_bloch_sphere',
     'three_stern_gerlach', 'three_hydrogen_orbital',
+    'three_projectile_motion', 'three_newton_forces', 'three_momentum_collision',
+    'three_circular_motion', 'three_pendulum_motion',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -132,6 +157,8 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'energy_level_diagram', 'quantum_circuit', 'stern_gerlach', 'entanglement_pair',
     'three_double_slit', 'three_quantum_tunneling', 'three_bloch_sphere',
     'three_stern_gerlach', 'three_hydrogen_orbital',
+    'three_projectile_motion', 'three_newton_forces', 'three_momentum_collision',
+    'three_circular_motion', 'three_pendulum_motion',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
