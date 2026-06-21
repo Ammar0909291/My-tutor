@@ -24,6 +24,7 @@ import { WeightedTeachingPlanViewer } from '@/components/intelligence/WeightedTe
 import { TeachingStyleViewer } from '@/components/intelligence/TeachingStyleViewer'
 import { TutorVisualSyncViewer } from '@/components/school/visuals/TutorVisualSyncViewer'
 import { NarrationDrivenPlaybackViewer } from '@/components/school/visuals/NarrationDrivenPlaybackViewer'
+import { LiveNarrationPlaybackViewer } from '@/components/school/visuals/LiveNarrationPlaybackViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 
@@ -686,6 +687,15 @@ export function VisualDemo() {
           changes — playback control infrastructure only.
         </p>
         <NarrationDrivenPlaybackViewer />
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Visual Learning Sprint U — Live Narration → Visual Playback</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The real production <code>VisualCard</code> driven by real lesson narration via narration
+          mode (Next / Previous / Reset). Visual progression follows the narration segment, not a timer.
+          In production, when no live narration step is supplied, VisualCard falls back to timer mode
+          (identical to Sprint R.1) — zero regression. No Tutor Max / AI / curriculum changes.
+        </p>
+        <LiveNarrationPlaybackViewer />
       </div>
     </div>
   )
