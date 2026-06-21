@@ -1,10 +1,13 @@
 # My Tutor — Project Memory
 
 ## Reporting preference (ALWAYS follow)
-- After EVERY prompt/task, ALWAYS produce a **detailed report**.
+- After EVERY prompt/task — including non-coding tasks (audits, Q&A, memory updates) — ALWAYS
+  produce a **detailed report** at the end of the turn.
 - ALWAYS include **running instructions for the local computer** (install, env setup,
-  `npx prisma db push`, `npm run dev`, `npm run build`, type-check) in that report.
-- ALWAYS deliver the report as a **single copy-able code block** (no exceptions).
+  `npx prisma db push`, `npm run dev`, `npm run build`, type-check) in that report when the task
+  touched code; otherwise still close with a report summarizing what was done.
+- ALWAYS deliver the report as a **single copy-able block of plain text** (a fenced code block),
+  so it can be copied in one action. No exceptions.
 
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
