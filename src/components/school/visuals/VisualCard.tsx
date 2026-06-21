@@ -49,6 +49,11 @@ import { NewtonForces3D } from './NewtonForces3D'
 import { MomentumCollision3D } from './MomentumCollision3D'
 import { CircularMotion3D } from './CircularMotion3D'
 import { PendulumMotion3D } from './PendulumMotion3D'
+import { AtomicStructure3D } from './AtomicStructure3D'
+import { ElectronShells3D } from './ElectronShells3D'
+import { MolecularShapes3D } from './MolecularShapes3D'
+import { BondFormation3D } from './BondFormation3D'
+import { CrystalLattice3D } from './CrystalLattice3D'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -109,6 +114,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   three_momentum_collision: 5,
   three_circular_motion: 5,
   three_pendulum_motion: 5,
+  three_atomic_structure: 5,
+  three_electron_shells: 5,
+  three_molecular_shapes: 5,
+  three_bond_formation: 5,
+  three_crystal_lattice: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -146,6 +156,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'three_momentum_collision':  return <MomentumCollision3D revealStep={revealStep} />
     case 'three_circular_motion':     return <CircularMotion3D revealStep={revealStep} />
     case 'three_pendulum_motion':     return <PendulumMotion3D revealStep={revealStep} />
+    case 'three_atomic_structure':    return <AtomicStructure3D revealStep={revealStep} />
+    case 'three_electron_shells':     return <ElectronShells3D revealStep={revealStep} />
+    case 'three_molecular_shapes':    return <MolecularShapes3D revealStep={revealStep} />
+    case 'three_bond_formation':      return <BondFormation3D revealStep={revealStep} />
+    case 'three_crystal_lattice':     return <CrystalLattice3D revealStep={revealStep} />
   }
 }
 

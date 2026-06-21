@@ -43,6 +43,12 @@ export type VisualType =
   | 'three_momentum_collision'
   | 'three_circular_motion'
   | 'three_pendulum_motion'
+  // Chemistry 3D Foundation Sprint
+  | 'three_atomic_structure'
+  | 'three_electron_shells'
+  | 'three_molecular_shapes'
+  | 'three_bond_formation'
+  | 'three_crystal_lattice'
 
 export interface VisualAid {
   type: VisualType
@@ -84,6 +90,11 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   three_momentum_collision: { title: '3D Momentum Collision', description: 'A 3D momentum-collision simulation: two objects with motion vectors, the collision, the momentum transfer, and the final post-collision velocities' },
   three_circular_motion: { title: '3D Circular Motion', description: 'A 3D circular-motion simulation: the orbit path, a moving body, its velocity vector, the centripetal force vector, and the full motion animating' },
   three_pendulum_motion: { title: '3D Pendulum Motion', description: 'A 3D pendulum simulation: pivot, string, bob, the swing motion, and an energy indicator tracking kinetic vs potential energy' },
+  three_atomic_structure: { title: '3D Atomic Structure', description: 'A 3D atom model: nucleus, protons and neutrons, an electron shell, multiple shells, and the completed orbiting atom' },
+  three_electron_shells: { title: '3D Electron Shells', description: 'A 3D electron-shell model: nucleus, K shell, L shell, M shell, and each shell populated with its electrons' },
+  three_molecular_shapes: { title: '3D Molecular Shapes', description: 'A 3D tetrahedral molecule built up from its atoms, bonds, overall geometry, labeled bond angles, and the final molecule' },
+  three_bond_formation: { title: '3D Bond Formation', description: 'A 3D chemical-bonding simulation: separate atoms, their valence electrons, the approach, bond formation, and the stable molecule' },
+  three_crystal_lattice: { title: '3D Crystal Lattice', description: 'A 3D crystal-lattice model: a single unit cell, the repeated structure, lattice growth, a symmetry plane, and the completed crystal' },
 }
 
 /** Subjects where visual aids are applicable */

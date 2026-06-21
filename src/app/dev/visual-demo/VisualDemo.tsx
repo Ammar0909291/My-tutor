@@ -97,6 +97,20 @@ const MECHANICS_3D_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Pendulum motion', type: 'three_pendulum_motion' },
 ]
 
+// Chemistry 3D Foundation Sprint. Five production chemistry simulations
+// built on the Universal 3D Engine (ThreeDVisual wrapper) plus the new
+// generic MolecularNode3D/Bond3D primitives, each revealStep-gated and
+// rendered through the same production VisualCard / playback / narration
+// stack as every quantum and mechanics 3D visual above — no new engine,
+// no new narration code.
+const CHEMISTRY_3D_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Atomic structure', type: 'three_atomic_structure' },
+  { label: 'Electron shells', type: 'three_electron_shells' },
+  { label: 'Molecular shapes', type: 'three_molecular_shapes' },
+  { label: 'Bond formation', type: 'three_bond_formation' },
+  { label: 'Crystal lattice', type: 'three_crystal_lattice' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -484,6 +498,24 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {MECHANICS_3D_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Chemistry 3D Foundation</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The first production 3D package for Chemistry: five revealStep-gated simulations
+          (Atomic Structure, Electron Shells, Molecular Shapes, Bond Formation, Crystal Lattice)
+          built on the unmodified <code>ThreeDVisual</code> host, using the new generic{' '}
+          <code>MolecularNode3D</code>/<code>Bond3D</code> primitives. Rendered by the same
+          production <code>VisualCard</code> — Play / Pause / Replay, 0.5×–1.5× speed, and narration
+          mode all work unchanged.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {CHEMISTRY_3D_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />
