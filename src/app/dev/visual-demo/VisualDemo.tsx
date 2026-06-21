@@ -44,6 +44,11 @@ import { ElectronShellsInteractive3D } from '@/components/school/visuals/Electro
 import { MolecularShapesInteractive3D } from '@/components/school/visuals/MolecularShapesInteractive3D'
 import { BondFormationInteractive3D } from '@/components/school/visuals/BondFormationInteractive3D'
 import { CrystalLatticeInteractive3D } from '@/components/school/visuals/CrystalLatticeInteractive3D'
+import { CoordinateSystemInteractive3D } from '@/components/school/visuals/CoordinateSystemInteractive3D'
+import { VectorVisualizationInteractive3D } from '@/components/school/visuals/VectorVisualizationInteractive3D'
+import { SurfaceVisualizationInteractive3D } from '@/components/school/visuals/SurfaceVisualizationInteractive3D'
+import { GeometricSolidsInteractive3D } from '@/components/school/visuals/GeometricSolidsInteractive3D'
+import { TransformationsInteractive3D } from '@/components/school/visuals/TransformationsInteractive3D'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -756,6 +761,109 @@ export function VisualDemo() {
                   highlightedControlId={highlightedControlId}
                   onMasteryEvent={handleMasteryEvent}
                   masteryContext={{ concept: 'crystal_lattice_growth', source: 'learn', subjectSlug: 'chemistry', topicSlug: 'crystal_lattice' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Mathematics Interactive Simulations</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Mathematics Interactive Layer Sprint: live, student-controlled versions built additively
+          on the same <code>ThreeDVisual</code> host plus the shared, generic{' '}
+          <code>SimulationControlPanel</code> and <code>GuidedSimulationMode</code> — identical
+          infrastructure to the Quantum, Classical Mechanics, and Chemistry Interactive layers, just
+          new subject content. Each is wrapped in a guided step-through script and wired to the same
+          mastery collector via <code>onMasteryEvent</code>/<code>masteryContext</code>. The original
+          revealStep-gated Mathematics 3D Foundation components above are unmodified.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Coordinate system — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Move the X slider and watch the point and its X projection line move together.', highlightedControlId: 'x' },
+                { instruction: 'Now move the Y slider — notice only the Y projection line responds.', highlightedControlId: 'y' },
+                { instruction: 'Finally move the Z slider to see the point lift in the third dimension.', highlightedControlId: 'z' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <CoordinateSystemInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'coordinate_point_position', source: 'learn', subjectSlug: 'mathematics', topicSlug: 'coordinate_system' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Vector visualization — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase vector X and watch the magnitude readout grow.', highlightedControlId: 'vx' },
+                { instruction: 'Now change vector Y and Z together and see all three components contribute to magnitude.', highlightedControlId: 'vy' },
+                { instruction: 'Set one component to zero and observe the vector flattens into a plane.', highlightedControlId: 'vz' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <VectorVisualizationInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'vector_magnitude_direction', source: 'learn', subjectSlug: 'mathematics', topicSlug: 'vector_visualization' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Surface visualization — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Start with the paraboloid and notice it curves upward in every direction.', highlightedControlId: 'surfaceType' },
+                { instruction: 'Switch to the saddle and notice it curves up along one axis and down along the other.', highlightedControlId: 'surfaceType' },
+                { instruction: 'Switch to the plane and notice there is no curvature at all.', highlightedControlId: 'surfaceType' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <SurfaceVisualizationInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'surface_shape_from_function', source: 'learn', subjectSlug: 'mathematics', topicSlug: 'surface_visualization' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Geometric solids — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Start with the cube and note its volume and surface area.', highlightedControlId: 'shape' },
+                { instruction: 'Switch shapes and compare how volume and surface area formulas differ.', highlightedControlId: 'shape' },
+                { instruction: 'Increase the scale and watch volume grow much faster than surface area.', highlightedControlId: 'scale' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <GeometricSolidsInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'solid_volume_surface_area', source: 'learn', subjectSlug: 'mathematics', topicSlug: 'geometric_solids' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Transformations — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase translation and watch the cube move away from the original.', highlightedControlId: 'translation' },
+                { instruction: 'Now add rotation and observe the cube spin while staying the same size.', highlightedControlId: 'rotation' },
+                { instruction: 'Finally adjust scaling and see the cube grow or shrink independently of position and orientation.', highlightedControlId: 'scaling' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <TransformationsInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'transformation_independence', source: 'learn', subjectSlug: 'mathematics', topicSlug: 'transformations' }}
                 />
               )}
             </GuidedSimulationMode>
