@@ -695,6 +695,25 @@ export async function POST(req: Request) {
       }
     }
 
+    // Visual learning aids for SUBJECT_LIBRARY subjects — same Sprint BW
+    // detectVisual()/buildVisualsSystemBlock() the school flow uses above,
+    // here scoped to the Library lesson's own unit/lesson titles instead of
+    // schoolCtx.chapter.title. Purely additive; never blocks a lesson.
+    if (!schoolCtx) {
+      try {
+        const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
+        const availableVisual = detectVisual({
+          subjectSlug: subjectCode,
+          chapterTitle: lessonCtx?.unitTitle ?? '',
+          lessonTitle: lessonCtx?.lessonTitle,
+        })
+        const visualBlock = buildVisualsSystemBlock(availableVisual)
+        if (visualBlock) systemPrompt += visualBlock
+      } catch (err) {
+        console.warn('[learn/chat] library visual aids context skipped:', err)
+      }
+    }
+
     // Append the personalized roadmap context (if one exists) so the tutor
     // never skips ahead of the learner's current level/module.
     if (profile?.currentLevel) {
@@ -1034,6 +1053,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             else if (we.state) workedExampleUpdate = { concept: we.state.concept, currentStep: we.state.currentStep, stepCount: we.state.stepCount }
           } catch { /* non-fatal */ }
         }
+      } else {
+        // VISUAL:<type> extraction for SUBJECT_LIBRARY subjects — same
+        // Sprint BW parseVisualTag() the school flow uses above. Additive;
+        // strips the tag from the persisted/returned text either way.
+        try {
+          const { parseVisualTag } = await import('@/lib/school/visuals/detectVisual')
+          const parsed = parseVisualTag(text)
+          responseVisual = parsed.visual
+          cleanText = parsed.cleanText
+        } catch { /* non-fatal */ }
       }
 
       // Sprint C/H: deterministic, rule-based visual detection on the final

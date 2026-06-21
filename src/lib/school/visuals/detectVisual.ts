@@ -90,6 +90,7 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     'number_line', 'fraction_bar', 'percentage_grid', 'coordinate_plane',
     'geometry_shape', 'food_chain', 'water_cycle', 'solar_system',
     'force_diagram', 'circuit_diagram',
+    'double_slit', 'wave_function', 'potential_well', 'quantum_tunneling', 'bloch_sphere',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -103,6 +104,7 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'number_line', 'fraction_bar', 'percentage_grid', 'coordinate_plane',
     'geometry_shape', 'food_chain', 'water_cycle', 'solar_system',
     'force_diagram', 'circuit_diagram',
+    'double_slit', 'wave_function', 'potential_well', 'quantum_tunneling', 'bloch_sphere',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
