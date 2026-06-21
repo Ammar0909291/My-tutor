@@ -333,6 +333,36 @@ export async function POST(req: Request) {
               import('@/lib/school/adaptive/spacedRevision').then(({ advanceRevision }) =>
                 advanceRevision(userId, subjectCode, checkpointEval.nodeId!, checkpointEval.passed)
               ).catch(() => {})
+
+              // Bridge: a conversational checkpoint is a single AI-judged, lenient
+              // signal — not a deterministic multi-question score like
+              // practice/submit. So it contributes a soft TopicProgress nudge
+              // (never MASTERED, never downgrades an already-mastered node) and,
+              // on failure, a MistakeRecord so misconception/weak-topic engines
+              // see it. Mirrors the never-downgrade pattern in
+              // school/practice/submit/route.ts but at lower confidence weight.
+              const nodeId = checkpointEval.nodeId
+              ;(async () => {
+                const existing = await prisma.topicProgress.findUnique({
+                  where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
+                  select: { status: true },
+                }).catch(() => null)
+                if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
+                const score = checkpointEval.passed ? 65 : 25
+                await prisma.topicProgress.upsert({
+                  where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
+                  create: { userId, subjectSlug: subjectCode, topicSlug: nodeId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
+                  update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
+                }).catch(() => {})
+                if (!checkpointEval.passed) {
+                  await prisma.mistakeRecord.create({
+                    data: {
+                      userId, subjectSlug: subjectCode, topicSlug: nodeId,
+                      sessionId: learnSession.id, category: 'conversational_checkpoint', questionId: nodeId,
+                    },
+                  }).catch(() => {})
+                }
+              })().catch(() => {})
             }
           }
         }
