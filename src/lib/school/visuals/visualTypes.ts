@@ -37,6 +37,12 @@ export type VisualType =
   | 'three_bloch_sphere'
   | 'three_stern_gerlach'
   | 'three_hydrogen_orbital'
+  // Classical Mechanics 3D Foundation Sprint
+  | 'three_projectile_motion'
+  | 'three_newton_forces'
+  | 'three_momentum_collision'
+  | 'three_circular_motion'
+  | 'three_pendulum_motion'
 
 export interface VisualAid {
   type: VisualType
@@ -73,6 +79,11 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   three_bloch_sphere: { title: '3D Bloch Sphere', description: 'A 3D Bloch sphere: poles, equator, a superposition state vector, and phase precession' },
   three_stern_gerlach: { title: '3D Stern–Gerlach Experiment', description: 'A 3D Stern–Gerlach simulation: a beam, an inhomogeneous magnet, beam splitting, and two discrete spin detectors' },
   three_hydrogen_orbital: { title: '3D Hydrogen Orbital Explorer', description: 'A 3D hydrogen orbital explorer: nucleus, 1s/2s/2p probability clouds, and a comparison view' },
+  three_projectile_motion: { title: '3D Projectile Motion', description: 'A 3D projectile motion simulation: ground plane, launch point, traced parabolic path, decomposed velocity vector, and the completed trajectory' },
+  three_newton_forces: { title: "3D Newton's Forces", description: "A 3D Newton's-laws simulation: an object, the gravity and normal force vectors, the net-force explanation, and the final balanced-force state" },
+  three_momentum_collision: { title: '3D Momentum Collision', description: 'A 3D momentum-collision simulation: two objects with motion vectors, the collision, the momentum transfer, and the final post-collision velocities' },
+  three_circular_motion: { title: '3D Circular Motion', description: 'A 3D circular-motion simulation: the orbit path, a moving body, its velocity vector, the centripetal force vector, and the full motion animating' },
+  three_pendulum_motion: { title: '3D Pendulum Motion', description: 'A 3D pendulum simulation: pivot, string, bob, the swing motion, and an energy indicator tracking kinetic vs potential energy' },
 }
 
 /** Subjects where visual aids are applicable */

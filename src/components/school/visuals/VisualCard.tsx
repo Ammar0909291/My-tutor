@@ -44,6 +44,11 @@ import { QuantumTunneling3D } from './QuantumTunneling3D'
 import { BlochSphere3D } from './BlochSphere3D'
 import { SternGerlach3D } from './SternGerlach3D'
 import { HydrogenOrbital3D } from './HydrogenOrbital3D'
+import { ProjectileMotion3D } from './ProjectileMotion3D'
+import { NewtonForces3D } from './NewtonForces3D'
+import { MomentumCollision3D } from './MomentumCollision3D'
+import { CircularMotion3D } from './CircularMotion3D'
+import { PendulumMotion3D } from './PendulumMotion3D'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -99,6 +104,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   three_bloch_sphere: 5,
   three_stern_gerlach: 5,
   three_hydrogen_orbital: 5,
+  three_projectile_motion: 5,
+  three_newton_forces: 5,
+  three_momentum_collision: 5,
+  three_circular_motion: 5,
+  three_pendulum_motion: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -131,6 +141,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'three_bloch_sphere':        return <BlochSphere3D revealStep={revealStep} />
     case 'three_stern_gerlach':       return <SternGerlach3D revealStep={revealStep} />
     case 'three_hydrogen_orbital':    return <HydrogenOrbital3D revealStep={revealStep} />
+    case 'three_projectile_motion':   return <ProjectileMotion3D revealStep={revealStep} />
+    case 'three_newton_forces':       return <NewtonForces3D revealStep={revealStep} />
+    case 'three_momentum_collision':  return <MomentumCollision3D revealStep={revealStep} />
+    case 'three_circular_motion':     return <CircularMotion3D revealStep={revealStep} />
+    case 'three_pendulum_motion':     return <PendulumMotion3D revealStep={revealStep} />
   }
 }
 

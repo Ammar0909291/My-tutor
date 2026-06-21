@@ -79,6 +79,19 @@ const QUANTUM_3D_DEMOS: { label: string; type: VisualType }[] = [
   { label: '3D Hydrogen orbital explorer', type: 'three_hydrogen_orbital' },
 ]
 
+// Classical Mechanics 3D Foundation Sprint. Five production mechanics
+// simulations built on the Universal 3D Engine (ThreeDVisual wrapper) plus the
+// new generic Vector3D/ForceArrow3D primitives, each revealStep-gated and
+// rendered through the same production VisualCard / playback / narration
+// stack as every quantum 3D visual above — no new engine, no new narration code.
+const MECHANICS_3D_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Projectile motion', type: 'three_projectile_motion' },
+  { label: "Newton's forces", type: 'three_newton_forces' },
+  { label: 'Momentum collision', type: 'three_momentum_collision' },
+  { label: 'Circular motion', type: 'three_circular_motion' },
+  { label: 'Pendulum motion', type: 'three_pendulum_motion' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -448,6 +461,24 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {QUANTUM_3D_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Classical Mechanics 3D Foundation</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The first production 3D package for Classical Mechanics: five revealStep-gated
+          simulations (Projectile Motion, Newton&apos;s Forces, Momentum Collision, Circular Motion,
+          Pendulum Motion) built on the unmodified <code>ThreeDVisual</code> host, using the new
+          generic <code>Vector3D</code>/<code>ForceArrow3D</code> primitives. Rendered by the same
+          production <code>VisualCard</code> — Play / Pause / Replay, 0.5×–1.5× speed, and narration
+          mode all work unchanged.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {MECHANICS_3D_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />
