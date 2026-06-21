@@ -29,6 +29,7 @@ const RECOMMENDATION_TEXT: Record<VisualMasteryEngine, string> = {
   number_line: 'Practice more number-line activities',
   geometry: 'Practice more geometry activities',
   process_flow: 'Practice more process-flow activities',
+  quantum_interactive: 'Practice more quantum physics visual challenges',
 }
 
 /**

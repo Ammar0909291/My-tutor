@@ -9,6 +9,8 @@ import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { useVisualMastery } from '@/hooks/useVisualMastery'
+import { QuantumVisualChallenge } from '@/components/visuals/QuantumVisualChallenge'
+import { QUANTUM_MASTERY_CHALLENGES } from '@/lib/visuals/quantumMasteryChallenges'
 import type { VisualMasterySignal } from '@/lib/visuals/visualMastery'
 import { persistVisualMasterySummary } from '@/lib/visuals/visualMasteryPersistence'
 import { VisualMasteryViewer } from '@/components/visuals/VisualMasteryViewer'
@@ -384,6 +386,25 @@ export function VisualDemo() {
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics — Visual Mastery Challenges</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The 5 highest-value quantum visuals paired with multiple-choice mastery challenges. Reuses
+          the existing <code>VisualCard</code> renderers unchanged plus the existing
+          <code> createMasteryEmitter</code>/<code>useVisualMastery</code> pipeline
+          (<code>visualType: &apos;quantum_interactive&apos;</code>) — same collector as below.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {QUANTUM_MASTERY_CHALLENGES.map((c) => (
+            <section key={c.id}>
+              <QuantumVisualChallenge
+                challenge={c}
+                onMasteryEvent={recordMasteryEvent}
+                masteryContext={{ source: 'learn', subjectSlug: 'quantum_physics', topicSlug: c.concept }}
+              />
             </section>
           ))}
         </div>
