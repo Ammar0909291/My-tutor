@@ -58,6 +58,12 @@ export type VisualType =
   | 'three_network_packet_flow'
   | 'three_data_structure'
   | 'three_algorithm_visualization'
+  // Data Science 3D Foundation Sprint
+  | 'three_statistical_distribution'
+  | 'three_data_visualization'
+  | 'three_correlation'
+  | 'three_clustering'
+  | 'three_ml_pipeline'
 
 export interface VisualAid {
   type: VisualType
@@ -111,6 +117,11 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   three_network_packet_flow: { title: '3D Network Packet Flow', description: 'A 3D packet-networking model: a sender, a created packet, a multi-hop router path, the destination, and the completed transmission' },
   three_data_structure: { title: '3D Data Structures', description: 'A 3D data-structures comparison: an array, a linked list, a stack, a queue, and how each stores and accesses data' },
   three_algorithm_visualization: { title: '3D Algorithm Visualization', description: 'A 3D sorting-algorithm flow: unsorted bars, a comparison, a swap, partial progress, and the final sorted result' },
+  three_statistical_distribution: { title: '3D Statistical Distribution', description: 'A 3D statistical distribution: axes, data points, a histogram, the distribution curve, and summary statistics showing the mean and spread' },
+  three_data_visualization: { title: '3D Data Visualization', description: 'A 3D data-visualization sequence: a dataset, a bar chart, a scatter plot, a trend line, and a comparison view of relationships and trends' },
+  three_correlation: { title: '3D Correlation', description: 'A 3D correlation model: axes, random points, positive correlation, negative correlation, and a side-by-side comparison of correlation strength and direction' },
+  three_clustering: { title: '3D Clustering', description: 'A 3D clustering model: a dataset of unclassified points, cluster centers, point assignment to the nearest center, and the final grouped clusters' },
+  three_ml_pipeline: { title: '3D Machine Learning Pipeline', description: 'A 3D machine-learning pipeline: raw data, cleaning, feature preparation, the model, and the prediction output as a training and prediction workflow' },
 }
 
 /** Subjects where visual aids are applicable */

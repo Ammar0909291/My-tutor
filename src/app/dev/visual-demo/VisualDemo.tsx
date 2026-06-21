@@ -139,6 +139,14 @@ const COMPUTER_SCIENCE_3D_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Algorithm visualization', type: 'three_algorithm_visualization' },
 ]
 
+const DATA_SCIENCE_3D_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Statistical distribution', type: 'three_statistical_distribution' },
+  { label: 'Data visualization', type: 'three_data_visualization' },
+  { label: 'Correlation', type: 'three_correlation' },
+  { label: 'Clustering', type: 'three_clustering' },
+  { label: 'Machine learning pipeline', type: 'three_ml_pipeline' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -581,6 +589,25 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {COMPUTER_SCIENCE_3D_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Data Science 3D Foundation</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The first production 3D package for Data Science: five revealStep-gated visualizations
+          (Statistical Distribution, Data Visualization, Correlation, Clustering, Machine Learning
+          Pipeline) built on the unmodified <code>ThreeDVisual</code> host, reusing the existing
+          generic <code>MolecularNode3D</code> (data points / clusters), <code>Vector3D</code> (axes /
+          trend lines), and <code>Bond3D</code> (pipeline connectors) primitives — no new primitives.
+          Rendered by the same production <code>VisualCard</code> — Play / Pause / Replay, 0.5×–1.5×
+          speed, and narration mode all work unchanged.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {DATA_SCIENCE_3D_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />

@@ -63,6 +63,11 @@ import { MemoryStorage3D } from './MemoryStorage3D'
 import { NetworkPacketFlow3D } from './NetworkPacketFlow3D'
 import { DataStructureVisualization3D } from './DataStructureVisualization3D'
 import { AlgorithmVisualization3D } from './AlgorithmVisualization3D'
+import { StatisticalDistribution3D } from './StatisticalDistribution3D'
+import { DataVisualization3D } from './DataVisualization3D'
+import { Correlation3D } from './Correlation3D'
+import { Clustering3D } from './Clustering3D'
+import { MachineLearningPipeline3D } from './MachineLearningPipeline3D'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -135,6 +140,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   three_network_packet_flow: 5,
   three_data_structure: 5,
   three_algorithm_visualization: 5,
+  three_statistical_distribution: 5,
+  three_data_visualization: 5,
+  three_correlation: 5,
+  three_clustering: 5,
+  three_ml_pipeline: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -184,6 +194,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'three_network_packet_flow':    return <NetworkPacketFlow3D revealStep={revealStep} />
     case 'three_data_structure':         return <DataStructureVisualization3D revealStep={revealStep} />
     case 'three_algorithm_visualization': return <AlgorithmVisualization3D revealStep={revealStep} />
+    case 'three_statistical_distribution': return <StatisticalDistribution3D revealStep={revealStep} />
+    case 'three_data_visualization':     return <DataVisualization3D revealStep={revealStep} />
+    case 'three_correlation':            return <Correlation3D revealStep={revealStep} />
+    case 'three_clustering':             return <Clustering3D revealStep={revealStep} />
+    case 'three_ml_pipeline':            return <MachineLearningPipeline3D revealStep={revealStep} />
   }
 }
 
