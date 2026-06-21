@@ -54,6 +54,8 @@ import { MemoryStorageInteractive3D } from '@/components/school/visuals/MemorySt
 import { NetworkPacketFlowInteractive3D } from '@/components/school/visuals/NetworkPacketFlowInteractive3D'
 import { DataStructureInteractive3D } from '@/components/school/visuals/DataStructureInteractive3D'
 import { AlgorithmInteractive3D } from '@/components/school/visuals/AlgorithmInteractive3D'
+import { SceneSpecRenderer } from '@/components/school/visuals/SceneSpecRenderer'
+import { vectorVisualizationSpec } from '@/lib/teaching/sceneSpecExamples'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -455,6 +457,26 @@ export function VisualDemo() {
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
           Dev-only. GraphRenderer (zoom/pan) + NumberLineRenderer via the real VisualRenderer.
         </p>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '24px 0 4px' }}>Scene Specification Prototype</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Universal Teaching Animation Engine spike: the existing <code>VectorVisualization3D</code>{' '}
+          (left, rendered through the production <code>VisualCard</code>) vs the same teaching
+          animation re-expressed as a declarative <code>SceneSpec</code> and drawn by the generic{' '}
+          <code>SceneSpecRenderer</code> (right). The SceneSpec version is data only — no dedicated
+          <code> VisualType</code>, no <code>VisualCard</code> case, no <code>detectVisual</code> rule.
+          The original visual is unchanged.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Existing visual (VisualCard → VisualType)</h2>
+            <VisualCard type="three_vector_visualization" autoPlay speed={1} />
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>SceneSpec version (SceneSpecRenderer ← data)</h2>
+            <SceneSpecRenderer spec={vectorVisualizationSpec} />
+          </section>
+        </div>
 
         <h1 style={{ fontSize: 20, fontWeight: 800, margin: '24px 0 4px' }}>Sprint R.1 — Animated Teaching Engine</h1>
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
