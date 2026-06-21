@@ -35,6 +35,19 @@ const SCIENCE_RULES: MatchRule[] = [
 ]
 
 // Quantum Physics rules (Visual Expansion Sprint) — ordered most-specific first.
+// 3D Production Integration Sprint — explicit "3D" / "rotate" phrasing is checked
+// FIRST (most specific), so a lesson that asks for the rotatable 3D model gets the
+// three_* VisualType; everything else falls through to the existing 2D rules below.
+// This is the safe-selection strategy (Task 3): 2D stays the default for a plain/
+// beginner explanation, 3D only surfaces when the text itself asks for it.
+const QUANTUM_3D_RULES: MatchRule[] = [
+  { keywords: ['3d double slit', '3d double-slit', 'double slit in 3d', 'three-dimensional double slit', 'rotate the double-slit', 'rotate the double slit'], visual: 'three_double_slit' },
+  { keywords: ['3d tunneling', '3d tunnelling', 'tunneling in 3d', 'tunnelling in 3d', 'three-dimensional barrier', 'rotate the barrier'], visual: 'three_quantum_tunneling' },
+  { keywords: ['3d bloch sphere', 'bloch sphere in 3d', 'rotate the bloch sphere', 'three-dimensional qubit state'], visual: 'three_bloch_sphere' },
+  { keywords: ['3d stern-gerlach', '3d stern gerlach', 'stern-gerlach in 3d', 'rotate the stern-gerlach', 'rotate the magnet'], visual: 'three_stern_gerlach' },
+  { keywords: ['3d orbital', '3d hydrogen orbital', 'orbital in 3d', 'rotate the orbital', 'three-dimensional electron cloud', 'orbital shapes in 3d'], visual: 'three_hydrogen_orbital' },
+]
+
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
   { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
@@ -74,9 +87,12 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, SCIENCE_RULES)
   }
 
-  // Quantum Physics (Subject Library) — Phase 1 quantum visual set
+  // Quantum Physics (Subject Library) — Phase 1 quantum visual set, plus the
+  // 3D production visuals (3D Production Integration Sprint, Task 2): 3D rules
+  // are checked first so explicit "3D"/"rotate" phrasing wins, otherwise the
+  // existing 2D rules apply unchanged (zero behavior change for all existing text).
   if (opts.subjectSlug === 'quantum_physics') {
-    return matchRules(combined, QUANTUM_RULES)
+    return matchRules(combined, QUANTUM_3D_RULES) ?? matchRules(combined, QUANTUM_RULES)
   }
 
   return null
@@ -96,6 +112,9 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     'force_diagram', 'circuit_diagram',
     'double_slit', 'wave_function', 'potential_well', 'quantum_tunneling', 'bloch_sphere',
     'energy_level_diagram', 'quantum_circuit', 'stern_gerlach', 'entanglement_pair',
+    // 3D Production Integration Sprint — explicit 3D requests via the VISUAL: tag.
+    'three_double_slit', 'three_quantum_tunneling', 'three_bloch_sphere',
+    'three_stern_gerlach', 'three_hydrogen_orbital',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -111,6 +130,8 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'force_diagram', 'circuit_diagram',
     'double_slit', 'wave_function', 'potential_well', 'quantum_tunneling', 'bloch_sphere',
     'energy_level_diagram', 'quantum_circuit', 'stern_gerlach', 'entanglement_pair',
+    'three_double_slit', 'three_quantum_tunneling', 'three_bloch_sphere',
+    'three_stern_gerlach', 'three_hydrogen_orbital',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
