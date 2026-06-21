@@ -62,6 +62,18 @@ const THREE_D_ENGINE_DEMOS: { label: string; type: VisualType }[] = [
   { label: '3D Structure Visualization (foundation placeholder)', type: 'three_structure_visualization' },
 ]
 
+// 3D Quantum Simulations Phase 1. Five production quantum simulations built on
+// the Universal 3D Engine (ThreeDVisual wrapper), each revealStep-gated and
+// rendered through the same production VisualCard / playback / narration stack
+// as every 2D and 3D visual above — no new engine, no new narration code.
+const QUANTUM_3D_DEMOS: { label: string; type: VisualType }[] = [
+  { label: '3D Double-slit experiment', type: 'three_double_slit' },
+  { label: '3D Quantum tunneling', type: 'three_quantum_tunneling' },
+  { label: '3D Bloch sphere', type: 'three_bloch_sphere' },
+  { label: '3D Stern–Gerlach experiment', type: 'three_stern_gerlach' },
+  { label: '3D Hydrogen orbital explorer', type: 'three_hydrogen_orbital' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -413,6 +425,24 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {THREE_D_ENGINE_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics 3D Simulations</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Phase 1: five production quantum simulations built on the Universal 3D Engine
+          (<code>ThreeDVisual</code> wrapper, React Three Fiber). Each is revealStep-gated and rendered
+          by the same production <code>VisualCard</code> — Play / Pause / Replay, 0.5×–1.5× speed, and
+          narration mode all work unchanged. Double-slit, quantum tunneling (counters the
+          “borrowed energy” misconception), Bloch sphere (superposition + phase), Stern–Gerlach (spin
+          quantization), and the hydrogen orbital explorer (counters the “planetary orbit” misconception).
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {QUANTUM_3D_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />

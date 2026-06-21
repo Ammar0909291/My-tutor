@@ -31,6 +31,12 @@ export type VisualType =
   | 'three_wave_simulation'
   | 'three_field_visualization'
   | 'three_structure_visualization'
+  // 3D Quantum Simulations Phase 1
+  | 'three_double_slit'
+  | 'three_quantum_tunneling'
+  | 'three_bloch_sphere'
+  | 'three_stern_gerlach'
+  | 'three_hydrogen_orbital'
 
 export interface VisualAid {
   type: VisualType
@@ -62,6 +68,11 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   three_wave_simulation: { title: '3D Wave Simulation', description: 'A reusable 3D wave-simulation engine surface (foundation placeholder)' },
   three_field_visualization: { title: '3D Field Visualization', description: 'A reusable 3D field-visualization engine surface (foundation placeholder)' },
   three_structure_visualization: { title: '3D Structure Visualization', description: 'A reusable 3D structure-visualization engine surface (foundation placeholder)' },
+  three_double_slit: { title: '3D Double-Slit Experiment', description: 'A 3D double-slit simulation: source, two-slit barrier, propagating wavefronts, and a building interference pattern' },
+  three_quantum_tunneling: { title: '3D Quantum Tunneling', description: 'A 3D tunneling simulation: a fixed-height barrier, an incoming wave packet, exponential penetration, and a reduced-amplitude transmitted packet' },
+  three_bloch_sphere: { title: '3D Bloch Sphere', description: 'A 3D Bloch sphere: poles, equator, a superposition state vector, and phase precession' },
+  three_stern_gerlach: { title: '3D Stern–Gerlach Experiment', description: 'A 3D Stern–Gerlach simulation: a beam, an inhomogeneous magnet, beam splitting, and two discrete spin detectors' },
+  three_hydrogen_orbital: { title: '3D Hydrogen Orbital Explorer', description: 'A 3D hydrogen orbital explorer: nucleus, 1s/2s/2p probability clouds, and a comparison view' },
 }
 
 /** Subjects where visual aids are applicable */

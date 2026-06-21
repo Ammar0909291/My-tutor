@@ -39,6 +39,11 @@ import { SternGerlach } from './SternGerlach'
 import { EntanglementPair } from './EntanglementPair'
 import { ParticleSystem3D } from './ParticleSystem3D'
 import { WaveSimulation3D, FieldVisualization3D, StructureVisualization3D } from './ThreeDEngineStub'
+import { DoubleSlit3D } from './DoubleSlit3D'
+import { QuantumTunneling3D } from './QuantumTunneling3D'
+import { BlochSphere3D } from './BlochSphere3D'
+import { SternGerlach3D } from './SternGerlach3D'
+import { HydrogenOrbital3D } from './HydrogenOrbital3D'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -89,6 +94,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   three_wave_simulation: 5,
   three_field_visualization: 5,
   three_structure_visualization: 5,
+  three_double_slit: 5,
+  three_quantum_tunneling: 5,
+  three_bloch_sphere: 5,
+  three_stern_gerlach: 5,
+  three_hydrogen_orbital: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -116,6 +126,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'three_wave_simulation':         return <WaveSimulation3D revealStep={revealStep} />
     case 'three_field_visualization':     return <FieldVisualization3D revealStep={revealStep} />
     case 'three_structure_visualization': return <StructureVisualization3D revealStep={revealStep} />
+    case 'three_double_slit':         return <DoubleSlit3D revealStep={revealStep} />
+    case 'three_quantum_tunneling':   return <QuantumTunneling3D revealStep={revealStep} />
+    case 'three_bloch_sphere':        return <BlochSphere3D revealStep={revealStep} />
+    case 'three_stern_gerlach':       return <SternGerlach3D revealStep={revealStep} />
+    case 'three_hydrogen_orbital':    return <HydrogenOrbital3D revealStep={revealStep} />
   }
 }
 
