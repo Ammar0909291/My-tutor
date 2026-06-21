@@ -116,6 +116,14 @@ const CHEMISTRY_3D_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Crystal lattice', type: 'three_crystal_lattice' },
 ]
 
+const MATHEMATICS_3D_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Coordinate system', type: 'three_coordinate_system' },
+  { label: 'Vector visualization', type: 'three_vector_visualization' },
+  { label: 'Surface visualization', type: 'three_surface_visualization' },
+  { label: 'Geometric solids', type: 'three_geometric_solids' },
+  { label: 'Transformations', type: 'three_transformations' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -521,6 +529,24 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {CHEMISTRY_3D_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Mathematics 3D Foundation</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The first production 3D package for Mathematics: five revealStep-gated visualizations
+          (Coordinate System, Vector Visualization, Surface Visualization, Geometric Solids,
+          Transformations) built on the unmodified <code>ThreeDVisual</code> host, reusing the
+          existing generic <code>Vector3D</code> primitive for axes and vector arrows. Rendered by
+          the same production <code>VisualCard</code> — Play / Pause / Replay, 0.5×–1.5× speed, and
+          narration mode all work unchanged.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {MATHEMATICS_3D_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />

@@ -49,6 +49,12 @@ export type VisualType =
   | 'three_molecular_shapes'
   | 'three_bond_formation'
   | 'three_crystal_lattice'
+  // Mathematics 3D Foundation Sprint
+  | 'three_coordinate_system'
+  | 'three_vector_visualization'
+  | 'three_surface_visualization'
+  | 'three_geometric_solids'
+  | 'three_transformations'
 
 export interface VisualAid {
   type: VisualType
@@ -95,7 +101,13 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   three_molecular_shapes: { title: '3D Molecular Shapes', description: 'A 3D tetrahedral molecule built up from its atoms, bonds, overall geometry, labeled bond angles, and the final molecule' },
   three_bond_formation: { title: '3D Bond Formation', description: 'A 3D chemical-bonding simulation: separate atoms, their valence electrons, the approach, bond formation, and the stable molecule' },
   three_crystal_lattice: { title: '3D Crystal Lattice', description: 'A 3D crystal-lattice model: a single unit cell, the repeated structure, lattice growth, a symmetry plane, and the completed crystal' },
+  three_coordinate_system: { title: '3D Coordinate System', description: 'A 3D coordinate system: X, Y, and Z axes built up in order, a labeled coordinate point, and the completed system with projection lines' },
+  three_vector_visualization: { title: '3D Vector Visualization', description: 'A 3D vector visualization: the origin, the vector arrow, its magnitude, its directional components, and the completed visualization' },
+  three_surface_visualization: { title: '3D Surface Visualization', description: 'A 3D surface visualization of z = x squared plus y squared: axes, a flat grid, the generated curved surface, contour rings, and the completed shaded surface' },
+  three_geometric_solids: { title: '3D Geometric Solids', description: 'A set of 3D geometric solids: a cube, a sphere, a cylinder, a cone, each introduced in turn, then a side-by-side comparison view' },
+  three_transformations: { title: '3D Transformations', description: 'A 3D geometric transformations sequence: an original cube, then its translation, rotation, and scaling, each introduced in turn, then a side-by-side comparison view' },
 }
 
 /** Subjects where visual aids are applicable */
 export const VISUAL_SUBJECTS = new Set(['mathematics', 'science', 'math', 'quantum_physics', 'physics', 'chemistry'])
+

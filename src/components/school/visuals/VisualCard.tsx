@@ -54,6 +54,11 @@ import { ElectronShells3D } from './ElectronShells3D'
 import { MolecularShapes3D } from './MolecularShapes3D'
 import { BondFormation3D } from './BondFormation3D'
 import { CrystalLattice3D } from './CrystalLattice3D'
+import { CoordinateSystem3D } from './CoordinateSystem3D'
+import { VectorVisualization3D } from './VectorVisualization3D'
+import { SurfaceVisualization3D } from './SurfaceVisualization3D'
+import { GeometricSolids3D } from './GeometricSolids3D'
+import { Transformations3D } from './Transformations3D'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -119,6 +124,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   three_molecular_shapes: 5,
   three_bond_formation: 5,
   three_crystal_lattice: 5,
+  three_coordinate_system: 5,
+  three_vector_visualization: 5,
+  three_surface_visualization: 5,
+  three_geometric_solids: 5,
+  three_transformations: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -161,6 +171,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'three_molecular_shapes':    return <MolecularShapes3D revealStep={revealStep} />
     case 'three_bond_formation':      return <BondFormation3D revealStep={revealStep} />
     case 'three_crystal_lattice':     return <CrystalLattice3D revealStep={revealStep} />
+    case 'three_coordinate_system':      return <CoordinateSystem3D revealStep={revealStep} />
+    case 'three_vector_visualization':   return <VectorVisualization3D revealStep={revealStep} />
+    case 'three_surface_visualization':  return <SurfaceVisualization3D revealStep={revealStep} />
+    case 'three_geometric_solids':       return <GeometricSolids3D revealStep={revealStep} />
+    case 'three_transformations':        return <Transformations3D revealStep={revealStep} />
   }
 }
 
