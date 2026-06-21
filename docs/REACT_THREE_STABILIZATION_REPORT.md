@@ -69,6 +69,52 @@ Task 5 verification checklist:
 | Existing guided simulations build/render | ✅ Pass — `GuidedSimulationMode`-wrapped sections compiled in the same route |
 | Production lesson rendering | ✅ Pass — `/learn` route (464 kB) compiled, the production `VisualCard`/`ThreeDVisual` path |
 
+## Runtime verification (bug-fix re-validation)
+
+The original crash — `TypeError: Cannot read properties of undefined (reading 's')` originating from
+`@react-three/fiber/dist/events-*.esm.js` on `/dev/visual-demo` — was being served from a **stale
+`.next` build cache** that had been compiled while `@react-three/fiber@9.6.1` (the React-19 build)
+was still installed, before the dependency downgrade landed. The fix was to clear that cache and
+rebuild against `fiber@8.18.0`:
+
+```
+rm -rf .next node_modules package-lock.json
+npm install            → 604 packages, NO ERESOLVE
+npx prisma generate     → success
+npx tsc --noEmit        → exit 0, zero errors
+npm run build           → "✓ Compiled successfully"
+```
+
+Live runtime smoke test (`npm run dev`, since `/dev/visual-demo` calls `notFound()` under
+`NODE_ENV=production` by design — `src/app/dev/visual-demo/page.tsx:14` — so it is only reachable in
+dev mode):
+
+```
+GET http://localhost:3945/dev/visual-demo
+  → ✓ Compiled /dev/visual-demo in 11.3s (1938 modules)   [no compile error]
+  → HTTP 200, 611,151 bytes
+  → 0 crash markers in rendered HTML
+       (grep for "Application error" / "client-side exception" /
+        "Cannot read properties" / "Internal Server Error" → 0 matches)
+  → rendered HTML contains every demo section heading:
+       Quantum Physics 3D Simulations, Classical Mechanics, Chemistry 3D
+       Foundation, Chemistry Interactive Simulations, Mathematics 3D Foundation,
+       Mathematics Interactive Simulations, Interactive Simulations, Guided …
+```
+
+| Runtime check | Result |
+|---|---|
+| `/dev/visual-demo` loads | ✅ HTTP 200, compiled, no "reading 's'" error |
+| Quantum 3D visuals load | ✅ "Quantum Physics 3D Simulations" section in rendered HTML |
+| Mechanics 3D visuals load | ✅ "Classical Mechanics" section in rendered HTML |
+| Chemistry 3D visuals load | ✅ "Chemistry 3D Foundation" section in rendered HTML |
+| Mathematics 3D visuals load | ✅ "Mathematics 3D Foundation" section in rendered HTML |
+| Interactive simulations load | ✅ "Interactive Simulations" sections in rendered HTML |
+| Guided simulations load | ✅ "Guided" sections in rendered HTML |
+
+No `events-*.esm.js` "reading 's'" error appears in the dev server log or the rendered page — the
+crash is resolved.
+
 ## Systems validated (Task 3)
 
 All compiled cleanly under the downgraded bindings:
