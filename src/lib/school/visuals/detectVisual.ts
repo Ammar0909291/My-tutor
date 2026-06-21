@@ -92,6 +92,22 @@ const MATHEMATICS_3D_RULES: MatchRule[] = [
   { keywords: ['transformations', 'translation rotation scaling', 'geometric transformation'], visual: 'three_transformations' },
 ]
 
+// Computer Science 3D rules (Computer Science Production Learning Integration
+// Sprint) — same architecture as MECHANICS_3D_RULES/CHEMISTRY_3D_RULES/
+// MATHEMATICS_3D_RULES: checked under the 'computer_science' subject slug so
+// CS-topic lesson text matches a 3D simulation. Computer Science has no
+// pre-existing 2D rule set, so this branch returns the 3D match directly (no
+// 2D fallback table to consult), exactly mirroring the two-tier shape minus the
+// fallback. Ordered most-specific first; intra-table first-match behaviour is
+// reviewed in docs/COMPUTER_SCIENCE_PRODUCTION_INTEGRATION_REPORT.md (Task 4).
+const COMPUTER_SCIENCE_3D_RULES: MatchRule[] = [
+  { keywords: ['computer architecture', 'cpu', 'processor', 'central processing unit', 'input devices'], visual: 'three_computer_architecture' },
+  { keywords: ['memory hierarchy', 'ram', 'cache', 'storage', 'memory and storage'], visual: 'three_memory_storage' },
+  { keywords: ['network packet', 'packet routing', 'router', 'packet-based networking', 'packet flow'], visual: 'three_network_packet_flow' },
+  { keywords: ['data structure', 'array', 'linked list', 'stack', 'queue'], visual: 'three_data_structure' },
+  { keywords: ['algorithm', 'sorting', 'searching', 'sort algorithm'], visual: 'three_algorithm_visualization' },
+]
+
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
   { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
@@ -158,6 +174,15 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, CHEMISTRY_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
   }
 
+  // Computer Science (Subject Library, dedicated 'computer_science' slug).
+  // Computer Science Production Learning Integration Sprint: CS 3D rules are the
+  // only rule set for this subject (no pre-existing 2D CS visuals), so the
+  // branch returns the 3D match or null — same branch shape as the subjects
+  // above, just without a 2D fallback table.
+  if (opts.subjectSlug === 'computer_science') {
+    return matchRules(combined, COMPUTER_SCIENCE_3D_RULES)
+  }
+
   return null
 }
 
@@ -186,6 +211,9 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     // Mathematics Production Learning Integration Sprint.
     'three_coordinate_system', 'three_vector_visualization', 'three_surface_visualization',
     'three_geometric_solids', 'three_transformations',
+    // Computer Science Production Learning Integration Sprint.
+    'three_computer_architecture', 'three_memory_storage', 'three_network_packet_flow',
+    'three_data_structure', 'three_algorithm_visualization',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -209,6 +237,8 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'three_bond_formation', 'three_crystal_lattice',
     'three_coordinate_system', 'three_vector_visualization', 'three_surface_visualization',
     'three_geometric_solids', 'three_transformations',
+    'three_computer_architecture', 'three_memory_storage', 'three_network_packet_flow',
+    'three_data_structure', 'three_algorithm_visualization',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
