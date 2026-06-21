@@ -167,6 +167,8 @@ const SUBJECT_I18N: Record<string, Record<Exclude<Lang3, 'en'>, { name: string; 
                 hi: { name: 'गणित',         description: 'बुनियादी अंकगणित से लेकर उन्नत गणित तक की संपूर्ण यात्रा।' } },
   physics:    { ru: { name: 'Физика',      description: 'Поймите, как устроен физический мир — от движения до квантовой физики.' },
                 hi: { name: 'भौतिकी',       description: 'जानें भौतिक संसार कैसे काम करता है — गति से क्वांटम भौतिकी तक।' } },
+  quantum_physics: { ru: { name: 'Квантовая физика', description: 'Полный путь от школьной алгебры до основ квантовых исследований.' },
+                hi: { name: 'क्वांटम भौतिकी', description: 'स्कूली बीजगणित से क्वांटम अनुसंधान की नींव तक की संपूर्ण यात्रा।' } },
   chemistry:  { ru: { name: 'Химия',       description: 'От атомов до органической химии — простыми словами.' },
                 hi: { name: 'रसायन विज्ञान', description: 'परमाणुओं से कार्बनिक रसायन विज्ञान तक — सरल शब्दों में।' } },
   biology:    { ru: { name: 'Биология',    description: 'Исследуйте жизнь — от клеток до экосистем.' },
@@ -188,9 +190,19 @@ export function localizedSubjectDescription(subject: LibrarySubject, lang: Lang3
 // list of topic nodes. This mirrors the bullet trees in the spec, e.g.
 //   Algebra ├── Variables ├── Equations ├── Functions
 
+/** Pedagogical difficulty tag (matches the platform's Beginner→Expert spirit).
+ *  Optional metadata carried by richer trees (e.g. Quantum Physics); existing
+ *  trees omit it and behave exactly as before. */
+export type Difficulty = 'foundational' | 'developing' | 'proficient' | 'advanced'
+
 export interface CurriculumNode {
   slug: string
   title: string
+  /** Optional lesson-level prerequisites, referenced by node slug. Authored in
+   *  strict topological order, so every entry points to an earlier node. */
+  prerequisites?: string[]
+  /** Optional per-lesson difficulty tag. */
+  difficulty?: Difficulty
 }
 
 export interface CurriculumModule {
@@ -200,6 +212,10 @@ export interface CurriculumModule {
   /** Roughly which levels this module belongs to (inclusive range). */
   levelRange: [LevelIndex, LevelIndex]
   estimatedHours: number
+  /** Optional unit-level difficulty tag. */
+  difficulty?: Difficulty
+  /** Optional unit-level prerequisites, referenced by module slug. */
+  prerequisites?: string[]
 }
 
 export interface LibrarySubject {
@@ -400,6 +416,272 @@ const AI_TREE: CurriculumModule[] = [
   ], [5, 5], 16),
 ]
 
+// ─── Quantum Physics (full reconstructed curriculum) ─────────────────────────
+// Faithful encoding of docs/QUANTUM_PHYSICS_MASTER_CURRICULUM.md (Revision 2):
+// 7 levels → 33 units → 144 lessons, with per-unit difficulty and lesson-level
+// prerequisite metadata. Units map to CurriculumModule, lessons to CurriculumNode.
+// 7 pedagogical levels → 0–5 LevelIndex (L1→0, L2→1, L3→2, L4→3, L5→4, L6→5, L7→5).
+// Lessons are authored in strict topological order; every prereq points to an
+// earlier-numbered lesson, so the dependency graph is a DAG by construction.
+
+type QLesson = { id: string; title: string; prereqs: string[] }
+
+function qL(id: string, title: string, prereqs: string[] = []): QLesson {
+  return { id, title, prereqs }
+}
+
+function qUnit(
+  num: number,
+  title: string,
+  level: LevelIndex,
+  estimatedHours: number,
+  difficulty: Difficulty,
+  prereqUnits: number[],
+  lessons: QLesson[],
+): CurriculumModule {
+  const lessonSlug = (id: string) => `l${id.replace(/\./g, '-')}`
+  return {
+    slug: `u${num}`,
+    title,
+    levelRange: [level, level],
+    estimatedHours,
+    difficulty,
+    prerequisites: prereqUnits.map((u) => `u${u}`),
+    nodes: lessons.map((l) => ({
+      slug: lessonSlug(l.id),
+      title: l.title,
+      difficulty,
+      prerequisites: l.prereqs.map(lessonSlug),
+    })),
+  }
+}
+
+const QUANTUM_PHYSICS_TREE: CurriculumModule[] = [
+  // ── Level 1 — Foundations (LevelIndex 0) ──
+  qUnit(1, 'Mathematical Toolkit I', 0, 18, 'foundational', [], [
+    qL('1.1', 'Functions, graphs & units review'),
+    qL('1.2', 'Derivatives & rates of change', ['1.1']),
+    qL('1.3', 'Derivative applications & practice', ['1.2']),
+    qL('1.4', 'Integrals & areas', ['1.3']),
+    qL('1.5', 'Intro to differential equations — first-order, separable', ['1.4']),
+    qL('1.6', 'Second-order ODEs & the oscillator equation', ['1.5']),
+    qL('1.7', "Complex numbers & Euler's formula", ['1.1']),
+  ]),
+  qUnit(2, 'Classical Physics Essentials', 0, 10, 'foundational', [1], [
+    qL('2.1', 'Position, velocity, acceleration', ['1.2']),
+    qL('2.2', "Forces, momentum & Newton's laws", ['2.1']),
+    qL('2.3', 'Work, energy & potentials', ['2.2']),
+    qL('2.4', 'Probability & expectation values', ['1.4']),
+  ]),
+  qUnit(3, 'Waves & Oscillations', 0, 10, 'foundational', [2], [
+    qL('3.1', 'Simple harmonic motion', ['2.3', '1.6']),
+    qL('3.2', 'Wave properties: wavelength, frequency, phase', ['3.1']),
+    qL('3.3', 'Superposition & interference', ['3.2']),
+    qL('3.4', 'Standing waves & normal modes', ['3.3']),
+  ]),
+  qUnit(4, 'The Failure of Classical Physics', 0, 12, 'developing', [3], [
+    qL('4.1', 'Blackbody radiation & the ultraviolet catastrophe', ['3.4']),
+    qL('4.2', 'The photoelectric effect', ['4.1']),
+    qL('4.3', 'Atomic line spectra & the Bohr model', ['4.2']),
+    qL('4.4', 'The Compton effect & photon momentum', ['4.2']),
+  ]),
+
+  // ── Level 2 — Wave Mechanics (LevelIndex 1) ──
+  qUnit(5, 'Mathematical Toolkit II', 1, 16, 'developing', [1], [
+    qL('5.1', 'Vectors & vector spaces', ['1.7']),
+    qL('5.2', 'Matrices & linear transformations', ['5.1']),
+    qL('5.3', 'Eigenvalues & eigenvectors', ['5.2']),
+    qL('5.4', 'Inner products & orthogonality', ['5.1']),
+    qL('5.5', 'Fourier series & transforms', ['5.4']),
+  ]),
+  qUnit(6, 'Wave–Particle Duality', 1, 10, 'developing', [4, 5], [
+    qL('6.1', 'de Broglie matter waves', ['4.4', '5.5']),
+    qL('6.2', 'The double-slit experiment with particles', ['6.1']),
+    qL('6.3', 'Wave packets & group velocity', ['6.1']),
+    qL('6.4', 'Heisenberg uncertainty (qualitative)', ['6.3']),
+  ]),
+  qUnit(7, 'The Schrödinger Equation', 1, 20, 'proficient', [6], [
+    qL('7.1', "The wavefunction & Born's rule", ['6.4']),
+    qL('7.2', 'Time-dependent Schrödinger equation', ['7.1']),
+    qL('7.3', 'Time-independent Schrödinger equation & stationary states', ['7.2']),
+    qL('7.4', 'Probability current & normalization', ['7.1']),
+    qL('7.5', 'Free particle, plane waves & momentum eigenstates', ['7.3']),
+    qL('7.6', 'Wave-packet normalization — intuition and pitfalls', ['7.5', '6.3']),
+  ]),
+  qUnit(8, 'Particle in 1D Potentials', 1, 14, 'proficient', [7], [
+    qL('8.1', 'Infinite square well', ['7.3', '7.6']),
+    qL('8.2', 'Finite square well & bound states', ['8.1']),
+    qL('8.3', 'Potential barriers & quantum tunneling', ['8.2']),
+    qL('8.4', 'The step potential & reflection', ['8.2']),
+  ]),
+
+  // ── Level 3 — Formal Quantum Mechanics (LevelIndex 2) ──
+  qUnit(9, 'Hilbert Spaces & Dirac Notation', 2, 16, 'proficient', [5, 8], [
+    qL('9.1', 'Bridge: from wavefunctions to state vectors', ['8.1', '5.4']),
+    qL('9.2', 'State vectors & bra–ket notation', ['9.1']),
+    qL('9.3', 'Hilbert space & completeness', ['9.2']),
+    qL('9.4', 'Basis states & superposition', ['9.3']),
+    qL('9.5', 'Position & momentum representations', ['9.4', '7.5']),
+  ]),
+  qUnit(10, 'Postulates of Quantum Mechanics', 2, 16, 'proficient', [9], [
+    qL('10.1', 'The state postulate', ['9.5']),
+    qL('10.2', 'Observables as Hermitian operators', ['10.1']),
+    qL('10.3', 'The measurement postulate & collapse', ['10.2']),
+    qL('10.4', 'Time evolution & the Hamiltonian', ['10.2']),
+    qL('10.5', 'Pictures of quantum mechanics: Schrödinger, Heisenberg, interaction', ['10.4']),
+  ]),
+  qUnit(11, 'Operators, Observables & Measurement', 2, 18, 'advanced', [10], [
+    qL('11.1', 'Expectation values & variance', ['10.3']),
+    qL('11.2', 'Commutators & compatibility', ['11.1']),
+    qL('11.3', 'The generalized uncertainty principle', ['11.2']),
+    qL('11.4', 'Eigenstates, spectra & degeneracy', ['11.1']),
+    qL('11.5', 'Symmetries & conservation laws (intro)', ['11.2', '11.4']),
+    qL('11.6', "Ehrenfest's theorem & the classical limit", ['11.2']),
+  ]),
+  qUnit(12, 'The Quantum Harmonic Oscillator', 2, 12, 'advanced', [11], [
+    qL('12.1', 'The QHO Hamiltonian & energy ladder', ['11.4']),
+    qL('12.2', 'Ladder (creation/annihilation) operators', ['12.1']),
+    qL('12.3', 'Wavefunctions & Hermite polynomials', ['12.1']),
+    qL('12.4', 'Coherent states & applications', ['12.2']),
+  ]),
+  qUnit(13, 'Angular Momentum & Spin', 2, 16, 'advanced', [11], [
+    qL('13.1', 'Orbital angular momentum operators', ['11.2']),
+    qL('13.2', 'Eigenvalues & spherical harmonics', ['13.1']),
+    qL('13.3', 'Spin-½ & the Stern–Gerlach experiment', ['13.1']),
+    qL('13.4', 'Pauli matrices & spinors', ['13.3']),
+    qL('13.5', 'Addition of angular momenta', ['13.2', '13.4']),
+  ]),
+  qUnit(14, 'The Hydrogen Atom', 2, 14, 'advanced', [12, 13], [
+    qL('14.1', 'The Coulomb potential & separation in 3D', ['13.2']),
+    qL('14.2', 'Radial solutions & energy levels', ['14.1']),
+    qL('14.3', 'Orbitals & probability densities', ['14.2']),
+    qL('14.4', 'Fine structure & spin–orbit coupling', ['14.2', '13.5']),
+  ]),
+  qUnit(15, 'Composite Quantum Systems & Tensor Products', 2, 10, 'advanced', [13], [
+    qL('15.1', 'Tensor products & composite-system state spaces', ['13.4', '9.5']),
+    qL('15.2', 'Multi-particle Hilbert spaces & distinguishable vs. identical setups', ['15.1']),
+  ]),
+
+  // ── Level 4 — Advanced Quantum Systems (LevelIndex 3) ──
+  qUnit(16, 'Identical Particles & Many-Body Basics', 3, 12, 'advanced', [14, 15], [
+    qL('16.1', 'Indistinguishability & exchange symmetry', ['14.3', '15.2']),
+    qL('16.2', 'Bosons, fermions & the Pauli exclusion principle', ['16.1']),
+    qL('16.3', 'Slater determinants & the periodic table', ['16.2', '15.1']),
+    qL('16.4', 'Exchange interaction & basic many-body effects', ['16.2']),
+  ]),
+  qUnit(17, 'Approximation Methods', 3, 14, 'advanced', [14], [
+    qL('17.1', 'Time-independent perturbation theory (non-degenerate)', ['14.2']),
+    qL('17.2', 'Degenerate perturbation theory', ['17.1']),
+    qL('17.3', 'The variational method', ['14.2']),
+    qL('17.4', 'The WKB approximation', ['8.3', '14.2']),
+  ]),
+  qUnit(18, 'Time-Dependent Quantum Mechanics', 3, 12, 'advanced', [17], [
+    qL('18.1', 'Time-dependent perturbation theory', ['17.1', '10.5']),
+    qL('18.2', "Fermi's golden rule", ['18.1']),
+    qL('18.3', 'Interaction with radiation: absorption & emission', ['18.2']),
+    qL('18.4', 'Rabi oscillations in two-level systems', ['13.4', '18.1']),
+  ]),
+  qUnit(19, 'Scattering Theory', 3, 10, 'advanced', [17], [
+    qL('19.1', 'Cross sections & scattering amplitude', ['8.4']),
+    qL('19.2', 'Partial wave analysis', ['13.2', '19.1']),
+    qL('19.3', 'The Born approximation', ['17.1', '19.1']),
+  ]),
+  qUnit(20, 'Quantum Entanglement & Nonlocality', 3, 10, 'advanced', [13, 15, 16], [
+    qL('20.1', 'Entangled states & the EPR paradox', ['15.1', '16.2']),
+    qL('20.2', "Bell's theorem & inequalities", ['20.1']),
+    qL('20.3', 'Density matrices & mixed states', ['15.1']),
+  ]),
+
+  // ── Level 5 — Quantum Information & Computing (LevelIndex 4) ──
+  qUnit(21, 'Qubits & Quantum Gates', 4, 12, 'proficient', [20], [
+    qL('21.1', 'The qubit & the Bloch sphere', ['20.3', '13.4']),
+    qL('21.2', 'Single-qubit gates (X, Y, Z, H, phase)', ['21.1']),
+    qL('21.3', 'Multi-qubit gates (CNOT, controlled-U)', ['21.1', '20.1']),
+    qL('21.4', 'Universal gate sets & no-cloning', ['21.2', '21.3']),
+  ]),
+  qUnit(22, 'Quantum Circuits & Algorithms', 4, 24, 'advanced', [21], [
+    qL('22.1', 'The circuit model & measurement', ['21.4']),
+    qL('22.2', 'Superdense coding & quantum teleportation', ['21.3', '20.1']),
+    qL('22.3', 'Deutsch–Jozsa & Bernstein–Vazirani', ['22.1']),
+    qL('22.4', "Grover's search algorithm", ['22.1']),
+    qL('22.5', "The quantum Fourier transform & Shor's algorithm", ['22.1', '5.5']),
+    qL('22.6', 'The variational quantum eigensolver (VQE)', ['22.1', '17.1']),
+    qL('22.7', 'QAOA & combinatorial optimization', ['22.6']),
+  ]),
+  qUnit(23, 'Quantum Error Correction', 4, 12, 'advanced', [22], [
+    qL('23.1', 'Decoherence & quantum noise channels', ['20.3']),
+    qL('23.2', 'The 3-qubit bit-flip & phase-flip codes', ['23.1', '22.1']),
+    qL('23.3', 'The 9-qubit Shor code & stabilizers', ['23.2']),
+    qL('23.4', 'Fault tolerance & the threshold theorem', ['23.3']),
+  ]),
+  qUnit(24, 'Quantum Cryptography & Communication', 4, 10, 'proficient', [22], [
+    qL('24.1', 'BB84 quantum key distribution', ['21.2']),
+    qL('24.2', 'E91 & entanglement-based QKD', ['20.2']),
+    qL('24.3', 'Quantum repeaters & networks', ['22.2']),
+  ]),
+  qUnit(25, 'Quantum Hardware Platforms', 4, 18, 'proficient', [23], [
+    qL('25.1', 'Superconducting qubits', ['23.1']),
+    qL('25.2', 'Trapped ions & neutral atoms', ['13.3']),
+    qL('25.3', 'Photonic & spin qubits', ['21.1']),
+    qL('25.4', 'Benchmarking & the NISQ era', ['23.4']),
+    qL('25.5', 'Error mitigation techniques', ['25.4', '23.1']),
+    qL('25.6', 'Quantum advantage: claims, skepticism & benchmarks', ['25.4', '22.5']),
+  ]),
+
+  // ── Level 6 — Modern Quantum Physics (LevelIndex 5) ──
+  qUnit(26, 'Quantum Statistical Mechanics', 5, 12, 'advanced', [16], [
+    qL('26.1', 'Density operators & thermal states', ['20.3']),
+    qL('26.2', 'Bose–Einstein & Fermi–Dirac statistics', ['16.2']),
+    qL('26.3', 'Bose–Einstein condensation', ['26.2']),
+    qL('26.4', 'Quantum entropy & information', ['26.1', '20.3']),
+  ]),
+  qUnit(27, 'Open Quantum Systems & Decoherence', 5, 12, 'advanced', [20, 26], [
+    qL('27.1', 'System–environment coupling', ['26.1']),
+    qL('27.2', 'The Lindblad master equation', ['27.1']),
+    qL('27.3', 'Decoherence & the quantum-to-classical transition', ['27.1']),
+    qL('27.4', 'Quantum measurement theory revisited', ['27.3', '10.3']),
+  ]),
+  qUnit(28, 'Relativistic Quantum Mechanics', 5, 12, 'advanced', [14], [
+    qL('28.1', 'Special relativity refresher for QM', ['14.2']),
+    qL('28.2', 'The Klein–Gordon equation', ['28.1', '7.2']),
+    qL('28.3', 'The Dirac equation & spin', ['28.2', '13.4']),
+    qL('28.4', 'Antimatter & the Dirac sea', ['28.3']),
+  ]),
+  qUnit(29, 'Introduction to Quantum Field Theory', 5, 14, 'advanced', [28], [
+    qL('29.1', 'Why fields? Second quantization', ['12.2', '28.3']),
+    qL('29.2', 'Canonical quantization of the scalar field', ['29.1']),
+    qL('29.3', 'Propagators & Feynman diagrams (intro)', ['29.2']),
+    qL('29.4', 'Quantum electrodynamics overview', ['29.3']),
+  ]),
+  qUnit(30, 'Particle Physics Foundations', 5, 12, 'advanced', [29], [
+    qL('30.1', 'The Standard Model particle zoo', ['29.4']),
+    qL('30.2', 'Symmetries & conservation laws', ['29.2', '11.5']),
+    qL('30.3', 'The Higgs mechanism (conceptual)', ['30.2']),
+    qL('30.4', 'Open questions: neutrinos, dark matter, beyond-SM', ['30.1']),
+  ]),
+
+  // ── Level 7 — Research Foundations — Orientation & Literacy (LevelIndex 5) ──
+  qUnit(31, 'Advanced QFT & Gauge Theory', 5, 14, 'advanced', [29], [
+    qL('31.1', 'Gauge invariance & U(1)', ['30.2']),
+    qL('31.2', 'Non-abelian gauge theories (Yang–Mills)', ['31.1']),
+    qL('31.3', 'Renormalization & running couplings', ['29.3']),
+    qL('31.4', 'Path integrals', ['29.2']),
+  ]),
+  qUnit(32, 'Quantum Many-Body & Condensed Matter', 5, 16, 'advanced', [26], [
+    qL('32.1', 'Second quantization for many-body systems', ['29.1']),
+    qL('32.2', 'Band theory & semiconductors', ['16.3']),
+    qL('32.3', 'Superconductivity & BCS theory', ['26.3']),
+    qL('32.4', 'Berry/geometric phase', ['13.2', '17.1']),
+    qL('32.5', 'Topological phases & quantum Hall effect', ['32.2', '32.4']),
+  ]),
+  qUnit(33, 'Frontiers & Research Methods', 5, 10, 'advanced', [31, 32], [
+    qL('33.1', 'Reading & evaluating physics papers', ['31.3']),
+    qL('33.2', 'Computational quantum methods', ['32.1']),
+    qL('33.3', 'Current frontiers: quantum gravity, quantum simulation, fault-tolerant QC', ['32.5', '23.4']),
+    qL('33.4', 'Designing a research question', ['33.1']),
+  ]),
+]
+
 // ─── Subject library (the full, browsable catalogue) ─────────────────────────
 
 export const SUBJECT_LIBRARY: LibrarySubject[] = [
@@ -426,6 +708,7 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
 
   // Physics
   { slug: 'physics', name: 'Physics', category: 'physics', icon: '⚛️', description: 'Understand how the physical world works, from motion to quantum physics.', modules: PHYSICS_TREE },
+  { slug: 'quantum_physics', name: 'Quantum Physics', category: 'physics', icon: '🌀', description: 'A complete journey from high-school algebra to quantum research foundations — wave mechanics, formal QM, quantum information, and modern quantum physics.', modules: QUANTUM_PHYSICS_TREE },
 
   // Chemistry
   { slug: 'chemistry', name: 'Chemistry', category: 'chemistry', icon: '🧪', description: 'From atoms to organic chemistry — explained simply.', modules: CHEMISTRY_TREE },
