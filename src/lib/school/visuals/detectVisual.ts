@@ -34,6 +34,15 @@ const SCIENCE_RULES: MatchRule[] = [
   { keywords: ['electric circuit', 'circuit', 'current electricity', 'resistance', 'ohm', 'voltage', 'battery', 'bulb', 'conductor', 'series', 'parallel'], visual: 'circuit_diagram' },
 ]
 
+// Quantum Physics rules (Visual Expansion Sprint) — ordered most-specific first.
+const QUANTUM_RULES: MatchRule[] = [
+  { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
+  { keywords: ['bloch sphere', 'qubit', 'single-qubit', 'superposition state', 'quantum gate', 'quantum computing', 'quantum computer'], visual: 'bloch_sphere' },
+  { keywords: ['tunnel', 'tunneling', 'tunnelling', 'barrier penetration', 'potential barrier', 'transmission probability'], visual: 'quantum_tunneling' },
+  { keywords: ['square well', 'potential well', 'infinite well', 'energy level', 'energy levels', 'quantized energy', 'stationary state', 'bound state'], visual: 'potential_well' },
+  { keywords: ['wavefunction', 'wave function', 'born rule', 'probability density', 'probability amplitude', 'psi', '|ψ|', 'schrödinger', 'schrodinger'], visual: 'wave_function' },
+]
+
 function matchRules(text: string, rules: MatchRule[]): VisualType | null {
   const lower = text.toLowerCase()
   for (const rule of rules) {
@@ -59,6 +68,11 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
   // Science (physics, chemistry, biology — all under 'science' slug)
   if (opts.subjectSlug === 'science') {
     return matchRules(combined, SCIENCE_RULES)
+  }
+
+  // Quantum Physics (Subject Library) — Phase 1 quantum visual set
+  if (opts.subjectSlug === 'quantum_physics') {
+    return matchRules(combined, QUANTUM_RULES)
   }
 
   return null

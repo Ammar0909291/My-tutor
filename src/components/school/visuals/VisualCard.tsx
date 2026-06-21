@@ -28,6 +28,11 @@ import { WaterCycle } from './WaterCycle'
 import { SolarSystem } from './SolarSystem'
 import { ForceDiagram } from './ForceDiagram'
 import { CircuitDiagram } from './CircuitDiagram'
+import { DoubleSlit } from './DoubleSlit'
+import { WaveFunctionPlot } from './WaveFunctionPlot'
+import { PotentialWell } from './PotentialWell'
+import { QuantumTunneling } from './QuantumTunneling'
+import { BlochSphere } from './BlochSphere'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -65,6 +70,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   solar_system: 3,
   force_diagram: 5,
   circuit_diagram: 5,
+  double_slit: 5,
+  wave_function: 4,
+  potential_well: 5,
+  quantum_tunneling: 5,
+  bloch_sphere: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -79,6 +89,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'solar_system':     return <SolarSystem revealStep={revealStep} />
     case 'force_diagram':    return <ForceDiagram revealStep={revealStep} />
     case 'circuit_diagram':  return <CircuitDiagram revealStep={revealStep} />
+    case 'double_slit':       return <DoubleSlit revealStep={revealStep} />
+    case 'wave_function':     return <WaveFunctionPlot revealStep={revealStep} />
+    case 'potential_well':    return <PotentialWell revealStep={revealStep} />
+    case 'quantum_tunneling': return <QuantumTunneling revealStep={revealStep} />
+    case 'bloch_sphere':      return <BlochSphere revealStep={revealStep} />
   }
 }
 

@@ -15,6 +15,12 @@ export type VisualType =
   | 'solar_system'
   | 'force_diagram'
   | 'circuit_diagram'
+  // Quantum Physics (Visual Expansion Sprint) — Phase 1 set
+  | 'double_slit'
+  | 'wave_function'
+  | 'potential_well'
+  | 'quantum_tunneling'
+  | 'bloch_sphere'
 
 export interface VisualAid {
   type: VisualType
@@ -33,7 +39,12 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   solar_system:     { title: 'Solar System',       description: 'The Sun and the eight planets in their orbital paths' },
   force_diagram:    { title: 'Force Diagram',      description: 'An object showing the direction and nature of forces acting on it' },
   circuit_diagram:  { title: 'Electric Circuit',   description: 'A simple electric circuit showing battery, wires, switch, and bulb' },
+  double_slit:      { title: 'Double-Slit Experiment', description: 'Particles passing through two slits build up a wave-like interference pattern on a screen' },
+  wave_function:    { title: 'Wave Function ψ(x)',  description: 'The wavefunction ψ(x) and its probability density |ψ(x)|² (Born rule) on the same axes' },
+  potential_well:   { title: 'Quantum Potential Well', description: 'An infinite square well with quantized energy levels and stationary-state wavefunctions' },
+  quantum_tunneling:{ title: 'Quantum Tunneling',  description: 'A wave packet decaying exponentially through a barrier and emerging with reduced amplitude' },
+  bloch_sphere:     { title: 'Bloch Sphere',       description: 'A qubit state as a vector on the Bloch sphere, with |0⟩/|1⟩ poles and a phase angle' },
 }
 
 /** Subjects where visual aids are applicable */
-export const VISUAL_SUBJECTS = new Set(['mathematics', 'science', 'math'])
+export const VISUAL_SUBJECTS = new Set(['mathematics', 'science', 'math', 'quantum_physics'])

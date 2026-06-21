@@ -45,6 +45,17 @@ const ANIMATED_TEACHING_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Circuit diagram', type: 'circuit_diagram' },
 ]
 
+// Quantum Physics — Visual Expansion Sprint Phase 1. The five production
+// VisualCard quantum visuals, each animating step-by-step via the same Sprint
+// R.1 engine + Sprint S/T/U narration infrastructure (unchanged).
+const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Double-slit experiment', type: 'double_slit' },
+  { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
+  { label: 'Quantum potential well', type: 'potential_well' },
+  { label: 'Quantum tunneling', type: 'quantum_tunneling' },
+  { label: 'Bloch sphere (qubit)', type: 'bloch_sphere' },
+]
+
 // Sprint C: tutor-style explanations grounded in real curriculum topics from
 // src/lib/education/mathKnowledgeGraph.ts (Linear Equations in Two Variables,
 // Quadratic Equations, Cartesian Plane and Plotting, Integers — Introduction).
@@ -349,6 +360,22 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {ANIMATED_TEACHING_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics — Visual Expansion (Phase 1)</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The five Phase-1 quantum visuals, rendered by the same production <code>VisualCard</code>
+          (step-by-step autoplay, Play / Pause / Replay, 0.5×–1.5× speed). They reuse the Sprint R.1
+          animation engine and the Sprint S/T/U narration-sync infrastructure unchanged — no new
+          renderer base, no new playback engine.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {QUANTUM_VISUAL_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />
