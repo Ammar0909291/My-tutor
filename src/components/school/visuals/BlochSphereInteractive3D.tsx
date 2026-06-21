@@ -9,6 +9,7 @@ import { useMemo, useState } from 'react'
 import { Line } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
+import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 function blochVector(thetaDeg: number, phiDeg: number) {
   const theta = (thetaDeg * Math.PI) / 180
@@ -64,13 +65,32 @@ const GATE_PRESETS: Record<string, { theta: number; phi: number }> = {
   H: { theta: 90, phi: 0 },
 }
 
-export function BlochSphereInteractive3D() {
+interface BlochSphereInteractive3DProps {
+  highlightedControlId?: string | null
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+  masteryContext?: VisualMasteryContext
+}
+
+export function BlochSphereInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: BlochSphereInteractive3DProps = {}) {
   const [theta, setTheta] = useState(60)
   const [phi, setPhi] = useState(0)
+  const touched = useMemo(() => new Set<string>(), [])
+
+  const emit = createMasteryEmitter({
+    visualType: 'quantum_interactive',
+    defaultConcept: 'bloch_sphere_superposition',
+    context: masteryContext,
+    onMasteryEvent,
+  })
+
+  const markTouched = (id: string) => {
+    touched.add(id)
+    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 })
+  }
 
   const controls: SimulationControl[] = [
-    { kind: 'slider', id: 'theta', label: 'Theta (polar angle)', min: 0, max: 180, step: 1, value: theta, onChange: setTheta, format: (v) => `${v.toFixed(0)}°` },
-    { kind: 'slider', id: 'phi', label: 'Phi (phase angle)', min: 0, max: 360, step: 1, value: phi, onChange: setPhi, format: (v) => `${v.toFixed(0)}°` },
+    { kind: 'slider', id: 'theta', label: 'Theta (polar angle)', min: 0, max: 180, step: 1, value: theta, onChange: (v) => { setTheta(v); markTouched('theta') }, format: (v) => `${v.toFixed(0)}°` },
+    { kind: 'slider', id: 'phi', label: 'Phi (phase angle)', min: 0, max: 360, step: 1, value: phi, onChange: (v) => { setPhi(v); markTouched('phi') }, format: (v) => `${v.toFixed(0)}°` },
     {
       kind: 'dropdown',
       id: 'gate',
@@ -85,7 +105,7 @@ export function BlochSphereInteractive3D() {
       ],
       onChange: (v) => {
         const preset = GATE_PRESETS[v]
-        if (preset) { setTheta(preset.theta); setPhi(preset.phi) }
+        if (preset) { setTheta(preset.theta); setPhi(preset.phi); markTouched('gate') }
       },
     },
   ]
@@ -104,6 +124,7 @@ export function BlochSphereInteractive3D() {
       </p>
       <SimulationControlPanel
         controls={controls}
+        highlightedControlId={highlightedControlId}
         onReset={() => { setTheta(60); setPhi(0) }}
       />
     </div>

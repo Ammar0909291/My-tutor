@@ -31,6 +31,9 @@ import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { QuantumTunnelingInteractive3D } from '@/components/school/visuals/QuantumTunnelingInteractive3D'
 import { BlochSphereInteractive3D } from '@/components/school/visuals/BlochSphereInteractive3D'
+import { DoubleSlitInteractive3D } from '@/components/school/visuals/DoubleSlitInteractive3D'
+import { HydrogenOrbitalInteractive3D } from '@/components/school/visuals/HydrogenOrbitalInteractive3D'
+import { GuidedSimulationMode } from '@/components/school/visuals/GuidedSimulationMode'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -454,13 +457,13 @@ export function VisualDemo() {
 
         <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Interactive Quantum Simulations</h1>
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
-          3D Interactive Simulation Layer Phase 1: live, student-controlled versions of two of the
-          quantum simulations above, built additively on the same <code>ThreeDVisual</code> host plus
-          a new generic <code>SimulationControlPanel</code> (sliders/dropdowns/reset). These are
-          student-driven (local state), not <code>revealStep</code>/narration-driven, so they are
+          3D Interactive Simulation Layer Phase 1 &amp; 2: live, student-controlled versions of four of
+          the quantum simulations above, built additively on the same <code>ThreeDVisual</code> host
+          plus a shared, generic <code>SimulationControlPanel</code> (sliders/dropdowns/reset). These
+          are student-driven (local state), not <code>revealStep</code>/narration-driven, so they are
           rendered as standalone components here rather than through <code>VisualCard</code>. The
-          original revealStep-gated <code>QuantumTunneling3D</code>/<code>BlochSphere3D</code> above
-          are unmodified.
+          original revealStep-gated <code>QuantumTunneling3D</code>/<code>BlochSphere3D</code>/
+          <code>DoubleSlit3D</code>/<code>HydrogenOrbital3D</code> above are unmodified.
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           <section>
@@ -471,6 +474,34 @@ export function VisualDemo() {
             <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Bloch sphere — interactive</h2>
             <BlochSphereInteractive3D />
           </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Double slit — interactive</h2>
+            <DoubleSlitInteractive3D />
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Hydrogen orbitals — interactive</h2>
+            <HydrogenOrbitalInteractive3D />
+          </section>
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Guided Simulation Mode</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Phase 2, Task 3: a generic step-through wrapper (<code>GuidedSimulationMode</code>) around
+          an interactive simulation — instruction banner, Next / Previous / Reset, and a highlighted
+          control per step (reusing <code>SimulationControlPanel</code>&apos;s existing
+          <code> highlightedControlId</code> prop). Local step-index state, same paradigm as
+          <code> revealStep</code> — no new narration architecture.
+        </p>
+        <div style={{ maxWidth: 360, marginTop: 16, marginBottom: 24 }}>
+          <GuidedSimulationMode
+            steps={[
+              { instruction: 'First, raise the barrier height and watch the transmission probability drop.', highlightedControlId: 'height' },
+              { instruction: 'Now widen the barrier — a thicker barrier is even harder to tunnel through.', highlightedControlId: 'width' },
+              { instruction: 'Finally, raise the particle energy — probability rises, but the barrier height never changes.', highlightedControlId: 'energy' },
+            ]}
+          >
+            {({ highlightedControlId }) => <QuantumTunnelingInteractive3D highlightedControlId={highlightedControlId} />}
+          </GuidedSimulationMode>
         </div>
 
         <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics — Visual Mastery Challenges</h1>

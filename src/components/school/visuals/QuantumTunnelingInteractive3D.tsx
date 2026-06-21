@@ -11,6 +11,7 @@
 import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
+import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 function transmissionProbability(barrierHeight: number, barrierWidth: number, energy: number) {
   if (energy >= barrierHeight) return 0.97 // classical-like pass-through (clamped, illustrative)
@@ -58,17 +59,37 @@ function Scene({ height, width, energy }: { height: number; width: number; energ
   )
 }
 
-export function QuantumTunnelingInteractive3D() {
+interface QuantumTunnelingInteractive3DProps {
+  highlightedControlId?: string | null
+  onMasteryEvent?: (signal: VisualMasterySignal) => void
+  masteryContext?: VisualMasteryContext
+}
+
+export function QuantumTunnelingInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: QuantumTunnelingInteractive3DProps = {}) {
   const [height, setHeight] = useState(3)
   const [width, setWidth] = useState(1)
   const [energy, setEnergy] = useState(1.5)
+  const touched = useMemo(() => new Set<string>(), [])
 
   const T = useMemo(() => transmissionProbability(height, width, energy), [height, width, energy])
 
+  const emit = createMasteryEmitter({
+    visualType: 'quantum_interactive',
+    defaultConcept: 'quantum_tunneling_probability',
+    context: masteryContext,
+    onMasteryEvent,
+  })
+
+  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
+    setter(v)
+    touched.add(id)
+    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
+  }
+
   const controls: SimulationControl[] = [
-    { kind: 'slider', id: 'height', label: 'Barrier height', min: 1, max: 6, step: 0.1, value: height, onChange: setHeight, format: (v) => v.toFixed(1) },
-    { kind: 'slider', id: 'width', label: 'Barrier width', min: 0.3, max: 3, step: 0.1, value: width, onChange: setWidth, format: (v) => v.toFixed(1) },
-    { kind: 'slider', id: 'energy', label: 'Particle energy', min: 0.1, max: 5.9, step: 0.1, value: energy, onChange: setEnergy, format: (v) => v.toFixed(1) },
+    { kind: 'slider', id: 'height', label: 'Barrier height', min: 1, max: 6, step: 0.1, value: height, onChange: handleChange('height', setHeight), format: (v) => v.toFixed(1) },
+    { kind: 'slider', id: 'width', label: 'Barrier width', min: 0.3, max: 3, step: 0.1, value: width, onChange: handleChange('width', setWidth), format: (v) => v.toFixed(1) },
+    { kind: 'slider', id: 'energy', label: 'Particle energy', min: 0.1, max: 5.9, step: 0.1, value: energy, onChange: handleChange('energy', setEnergy), format: (v) => v.toFixed(1) },
   ]
 
   return (
@@ -85,6 +106,7 @@ export function QuantumTunnelingInteractive3D() {
       </p>
       <SimulationControlPanel
         controls={controls}
+        highlightedControlId={highlightedControlId}
         onReset={() => { setHeight(3); setWidth(1); setEnergy(1.5) }}
       />
     </div>
