@@ -15,6 +15,7 @@ import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
+import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // Visual Learning Sprint B: data-driven visuals (graph / number_line). Additive
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
@@ -2304,7 +2305,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
-                        <VisualCard type={msg.visual as VisualType} autoPlay speed={speed} />
+                        <VisualCard
+                          type={msg.visual as VisualType}
+                          autoPlay
+                          speed={speed}
+                          hasNarration
+                          narrationTimeline={extractNarrationSegments(msg.content, msg.visual)}
+                        />
                       </div>
                     )}
 
