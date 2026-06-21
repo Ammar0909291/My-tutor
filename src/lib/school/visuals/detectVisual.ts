@@ -75,6 +75,23 @@ const CHEMISTRY_3D_RULES: MatchRule[] = [
   { keywords: ['crystal lattice', 'unit cell', 'lattice structure', 'crystalline solid', 'crystal structure'], visual: 'three_crystal_lattice' },
 ]
 
+// Mathematics 3D rules (Mathematics Production Learning Integration Sprint) —
+// same architecture as MECHANICS_3D_RULES/CHEMISTRY_3D_RULES: checked first
+// under the 'mathematics' subject slug so 3D-coordinate/vector/surface/solid/
+// transformation lesson text matches a 3D simulation; MATH_RULES remains the
+// 2D fallback for mathematics topics this table doesn't cover, exactly
+// mirroring the chemistry/physics branches.
+const MATHEMATICS_3D_RULES: MatchRule[] = [
+  { keywords: ['coordinate system', 'cartesian coordinates', '3d coordinates', 'xyz axes'], visual: 'three_coordinate_system' },
+  { keywords: ['vector', 'vector components', 'vector magnitude', 'direction vector'], visual: 'three_vector_visualization' },
+  // 'geometric solids'/'volume and surface area' checked before the generic
+  // 'surface' keyword below, so a solids lesson mentioning "surface area"
+  // isn't hijacked by the surface-visualization rule (Task 4 finding).
+  { keywords: ['geometric solids', 'cube sphere cone cylinder', 'solid geometry', 'volume and surface area'], visual: 'three_geometric_solids' },
+  { keywords: ['surface', '3d graph', 'paraboloid', 'saddle surface', 'multivariable function'], visual: 'three_surface_visualization' },
+  { keywords: ['transformations', 'translation rotation scaling', 'geometric transformation'], visual: 'three_transformations' },
+]
+
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
   { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
@@ -104,9 +121,11 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
 
   const combined = [opts.chapterTitle, opts.lessonTitle ?? ''].join(' ')
 
-  // Mathematics
+  // Mathematics — 3D rules checked first (Mathematics Production Learning
+  // Integration Sprint), then MATH_RULES as the existing 2D fallback — same
+  // two-tier pattern as quantum_physics/physics/chemistry above.
   if (opts.subjectSlug === 'mathematics') {
-    return matchRules(combined, MATH_RULES)
+    return matchRules(combined, MATHEMATICS_3D_RULES) ?? matchRules(combined, MATH_RULES)
   }
 
   // Science (physics, chemistry, biology — all under 'science' slug)
@@ -164,6 +183,9 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     // Chemistry Production Learning Integration Sprint.
     'three_atomic_structure', 'three_electron_shells', 'three_molecular_shapes',
     'three_bond_formation', 'three_crystal_lattice',
+    // Mathematics Production Learning Integration Sprint.
+    'three_coordinate_system', 'three_vector_visualization', 'three_surface_visualization',
+    'three_geometric_solids', 'three_transformations',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -185,6 +207,8 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'three_circular_motion', 'three_pendulum_motion',
     'three_atomic_structure', 'three_electron_shells', 'three_molecular_shapes',
     'three_bond_formation', 'three_crystal_lattice',
+    'three_coordinate_system', 'three_vector_visualization', 'three_surface_visualization',
+    'three_geometric_solids', 'three_transformations',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
