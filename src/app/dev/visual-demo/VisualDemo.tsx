@@ -49,6 +49,11 @@ import { VectorVisualizationInteractive3D } from '@/components/school/visuals/Ve
 import { SurfaceVisualizationInteractive3D } from '@/components/school/visuals/SurfaceVisualizationInteractive3D'
 import { GeometricSolidsInteractive3D } from '@/components/school/visuals/GeometricSolidsInteractive3D'
 import { TransformationsInteractive3D } from '@/components/school/visuals/TransformationsInteractive3D'
+import { ComputerArchitectureInteractive3D } from '@/components/school/visuals/ComputerArchitectureInteractive3D'
+import { MemoryStorageInteractive3D } from '@/components/school/visuals/MemoryStorageInteractive3D'
+import { NetworkPacketFlowInteractive3D } from '@/components/school/visuals/NetworkPacketFlowInteractive3D'
+import { DataStructureInteractive3D } from '@/components/school/visuals/DataStructureInteractive3D'
+import { AlgorithmInteractive3D } from '@/components/school/visuals/AlgorithmInteractive3D'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -888,6 +893,110 @@ export function VisualDemo() {
                   highlightedControlId={highlightedControlId}
                   onMasteryEvent={handleMasteryEvent}
                   masteryContext={{ concept: 'transformation_independence', source: 'learn', subjectSlug: 'mathematics', topicSlug: 'transformations' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Computer Science Interactive Simulations</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Computer Science Interactive Layer Sprint: live, student-controlled versions of all five
+          Computer Science 3D Foundation simulations, built additively on the same{' '}
+          <code>ThreeDVisual</code> host plus the shared, generic <code>SimulationControlPanel</code>,
+          <code> GuidedSimulationMode</code>, and <code>useControlMastery</code> hook — identical
+          infrastructure to the Quantum, Classical Mechanics, Chemistry, and Mathematics Interactive
+          layers, just new subject content. Each is wrapped in a guided step-through script and wired
+          to the same mastery collector via <code>onMasteryEvent</code>/<code>masteryContext</code>.
+          The original revealStep-gated Computer Science 3D Foundation components above are unmodified.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Computer architecture — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the CPU speed and notice it alone does not raise throughput once another part is slower.', highlightedControlId: 'cpuSpeed' },
+                { instruction: 'Now increase memory size and watch the bottleneck shift between components.', highlightedControlId: 'memorySize' },
+                { instruction: 'Change the storage type from HDD to NVMe and see the slowest link change.', highlightedControlId: 'storageType' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <ComputerArchitectureInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'computer_architecture_bottleneck', source: 'learn', subjectSlug: 'computer_science', topicSlug: 'computer_architecture' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Memory hierarchy — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Grow the cache and notice it stays the smallest, fastest tier at the top.', highlightedControlId: 'cacheSize' },
+                { instruction: 'Now grow RAM and see how the middle tier widens relative to cache.', highlightedControlId: 'ramSize' },
+                { instruction: 'Change storage type and compare the cache-miss latency cost.', highlightedControlId: 'storageType' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <MemoryStorageInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'memory_hierarchy_latency', source: 'learn', subjectSlug: 'computer_science', topicSlug: 'memory_storage' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Network packet flow — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the packet count and watch multiple packets travel the link.', highlightedControlId: 'packetCount' },
+                { instruction: 'Add more routers and notice the path gains extra hops.', highlightedControlId: 'routerCount' },
+                { instruction: 'Raise the transmission speed to clear the congestion you created.', highlightedControlId: 'speed' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <NetworkPacketFlowInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'packet_routing_congestion', source: 'learn', subjectSlug: 'computer_science', topicSlug: 'network_packet_flow' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Data structures — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Start with the array and note random access by index.', highlightedControlId: 'structure' },
+                { instruction: 'Switch to the linked list and see traversal follow pointers from the head.', highlightedControlId: 'structure' },
+                { instruction: 'Compare stack (LIFO) and queue (FIFO) and notice their opposite access rules.', highlightedControlId: 'structure' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <DataStructureInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'data_structure_access_rules', source: 'learn', subjectSlug: 'computer_science', topicSlug: 'data_structure' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Algorithm visualization — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Change the dataset size and watch the number of bars to sort change.', highlightedControlId: 'size' },
+                { instruction: 'Switch the algorithm type and compare how each one orders the data.', highlightedControlId: 'algo' },
+                { instruction: 'Adjust the speed to watch the compare-and-swap steps unfold.', highlightedControlId: 'speed' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <AlgorithmInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'algorithm_compare_swap_flow', source: 'learn', subjectSlug: 'computer_science', topicSlug: 'algorithm_visualization' }}
                 />
               )}
             </GuidedSimulationMode>
