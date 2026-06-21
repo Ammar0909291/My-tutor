@@ -58,6 +58,11 @@ import { VectorVisualization3D } from './VectorVisualization3D'
 import { SurfaceVisualization3D } from './SurfaceVisualization3D'
 import { GeometricSolids3D } from './GeometricSolids3D'
 import { Transformations3D } from './Transformations3D'
+import { ComputerArchitecture3D } from './ComputerArchitecture3D'
+import { MemoryStorage3D } from './MemoryStorage3D'
+import { NetworkPacketFlow3D } from './NetworkPacketFlow3D'
+import { DataStructureVisualization3D } from './DataStructureVisualization3D'
+import { AlgorithmVisualization3D } from './AlgorithmVisualization3D'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -125,6 +130,11 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   three_surface_visualization: 5,
   three_geometric_solids: 5,
   three_transformations: 5,
+  three_computer_architecture: 5,
+  three_memory_storage: 5,
+  three_network_packet_flow: 5,
+  three_data_structure: 5,
+  three_algorithm_visualization: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -169,6 +179,11 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'three_surface_visualization':  return <SurfaceVisualization3D revealStep={revealStep} />
     case 'three_geometric_solids':       return <GeometricSolids3D revealStep={revealStep} />
     case 'three_transformations':        return <Transformations3D revealStep={revealStep} />
+    case 'three_computer_architecture':  return <ComputerArchitecture3D revealStep={revealStep} />
+    case 'three_memory_storage':         return <MemoryStorage3D revealStep={revealStep} />
+    case 'three_network_packet_flow':    return <NetworkPacketFlow3D revealStep={revealStep} />
+    case 'three_data_structure':         return <DataStructureVisualization3D revealStep={revealStep} />
+    case 'three_algorithm_visualization': return <AlgorithmVisualization3D revealStep={revealStep} />
   }
 }
 

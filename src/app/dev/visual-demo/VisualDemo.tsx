@@ -126,6 +126,14 @@ const MATHEMATICS_3D_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Transformations', type: 'three_transformations' },
 ]
 
+const COMPUTER_SCIENCE_3D_DEMOS: { label: string; type: VisualType }[] = [
+  { label: 'Computer architecture', type: 'three_computer_architecture' },
+  { label: 'Memory & storage hierarchy', type: 'three_memory_storage' },
+  { label: 'Network packet flow', type: 'three_network_packet_flow' },
+  { label: 'Data structures', type: 'three_data_structure' },
+  { label: 'Algorithm visualization', type: 'three_algorithm_visualization' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -549,6 +557,25 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {MATHEMATICS_3D_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Computer Science 3D Foundation</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          The first production 3D package for Computer Science: five revealStep-gated visualizations
+          (Computer Architecture, Memory &amp; Storage hierarchy, Network Packet Flow, Data Structures,
+          Algorithm Visualization) built on the unmodified <code>ThreeDVisual</code> host, reusing the
+          existing generic <code>MolecularNode3D</code> (nodes), <code>Bond3D</code> (links), and
+          <code> Vector3D</code> (data flow) primitives — no new primitives. Rendered by the same
+          production <code>VisualCard</code> — Play / Pause / Replay, 0.5×–1.5× speed, and narration
+          mode all work unchanged.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {COMPUTER_SCIENCE_3D_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />

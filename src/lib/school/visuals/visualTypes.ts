@@ -52,6 +52,12 @@ export type VisualType =
   | 'three_surface_visualization'
   | 'three_geometric_solids'
   | 'three_transformations'
+  // Computer Science 3D Foundation Sprint
+  | 'three_computer_architecture'
+  | 'three_memory_storage'
+  | 'three_network_packet_flow'
+  | 'three_data_structure'
+  | 'three_algorithm_visualization'
 
 export interface VisualAid {
   type: VisualType
@@ -100,6 +106,11 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   three_surface_visualization: { title: '3D Surface Visualization', description: 'A 3D surface visualization of z = x squared plus y squared: axes, a flat grid, the generated curved surface, contour rings, and the completed shaded surface' },
   three_geometric_solids: { title: '3D Geometric Solids', description: 'A set of 3D geometric solids: a cube, a sphere, a cylinder, a cone, each introduced in turn, then a side-by-side comparison view' },
   three_transformations: { title: '3D Transformations', description: 'A 3D geometric transformations sequence: an original cube, then its translation, rotation, and scaling, each introduced in turn, then a side-by-side comparison view' },
+  three_computer_architecture: { title: '3D Computer Architecture', description: 'A 3D computer-architecture model: input devices, the CPU, memory, storage, and the data flow connecting them' },
+  three_memory_storage: { title: '3D Memory Hierarchy', description: 'A 3D memory hierarchy: the CPU, RAM, cache, and storage as a speed-versus-size pyramid, and the path data takes moving up toward the CPU' },
+  three_network_packet_flow: { title: '3D Network Packet Flow', description: 'A 3D packet-networking model: a sender, a created packet, a multi-hop router path, the destination, and the completed transmission' },
+  three_data_structure: { title: '3D Data Structures', description: 'A 3D data-structures comparison: an array, a linked list, a stack, a queue, and how each stores and accesses data' },
+  three_algorithm_visualization: { title: '3D Algorithm Visualization', description: 'A 3D sorting-algorithm flow: unsorted bars, a comparison, a swap, partial progress, and the final sorted result' },
 }
 
 /** Subjects where visual aids are applicable */
