@@ -11,14 +11,16 @@
 
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
-- AI: OpenRouter primary, Gemini fallback. Redis optional (app runs without it).
+- AI: Groq primary (`llama-3.1-8b-instant`), YandexGPT fallback (Russia only, `country === 'ru'`;
+  itself falls back to Groq on missing credentials or any error). Redis optional (app runs without it).
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
   Misconception data is runtime (`MistakeRecord`), NOT in the static KG type.
 - Admin gated by `ADMIN_EMAILS` env var (not a DB flag).
 
 ## Run locally
 ```
-cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), OPENROUTER_API_KEY
+cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
+                        # optional: YANDEX_API_KEY, YANDEX_FOLDER_ID (Russia-only fallback)
 npm install
 npx prisma db push
 npm run dev            # http://localhost:3000
