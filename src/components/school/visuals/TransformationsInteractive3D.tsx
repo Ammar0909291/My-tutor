@@ -5,10 +5,11 @@
  * cube shown alongside the unmoved original, plus a values readout. Does not
  * modify Transformations3D.tsx.
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const ORIGINAL_POS: [number, number, number] = [-1.5, 0, 0]
 
@@ -38,20 +39,8 @@ export function TransformationsInteractive3D({ highlightedControlId, onMasteryEv
   const [translation, setTranslation] = useState(2.5)
   const [rotation, setRotation] = useState(0)
   const [scale, setScale] = useState(1)
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'transformation_independence',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'transformation_independence', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'translation', label: 'Translation', min: 0, max: 4, step: 0.1, value: translation, onChange: handleChange('translation', setTranslation), format: (v) => v.toFixed(1) },

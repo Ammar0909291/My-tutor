@@ -10,7 +10,8 @@ import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { MolecularNode3D } from './MolecularNode3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const SHELL_CAPACITY = [2, 8, 8, 18]
 
@@ -87,24 +88,12 @@ export function AtomicStructureInteractive3D({ highlightedControlId, onMasteryEv
   const [protons, setProtons] = useState(6)
   const [neutrons, setNeutrons] = useState(6)
   const [electrons, setElectrons] = useState(6)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const atomicNumber = protons
   const massNumber = protons + neutrons
   const charge = protons - electrons
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'atomic_identity',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'atomic_identity', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'protons', label: 'Proton count', min: 1, max: 20, step: 1, value: protons, onChange: handleChange('protons', setProtons), format: (v) => `${v}` },

@@ -5,11 +5,12 @@
  * coefficient) drive the gravity/normal/friction force vectors and a net
  * force readout. Does not modify NewtonForces3D.tsx (untouched).
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { ForceArrow3D } from './ForceArrow3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 function Scene({ mass, g, friction }: { mass: number; g: number; friction: number }) {
   const weight = mass * g
@@ -48,23 +49,11 @@ export function NewtonForcesInteractive3D({ highlightedControlId, onMasteryEvent
   const [mass, setMass] = useState(2)
   const [gravity, setGravity] = useState(9.8)
   const [friction, setFriction] = useState(0.3)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const weight = mass * gravity
   const frictionForce = friction * weight
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'newton_forces_balance',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'newton_forces_balance', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'mass', label: 'Object mass', min: 0.5, max: 10, step: 0.5, value: mass, onChange: handleChange('mass', setMass), format: (v) => `${v.toFixed(1)} kg` },

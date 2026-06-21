@@ -10,7 +10,8 @@ import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const LAUNCH: [number, number, number] = [-4, 0, 0]
 const GRAVITY_PRESETS: Record<string, number> = { earth: 9.8, moon: 1.6, jupiter: 24.8 }
@@ -67,23 +68,11 @@ export function ProjectileMotionInteractive3D({ highlightedControlId, onMasteryE
   const [angle, setAngle] = useState(45)
   const [v0, setV0] = useState(10)
   const [gravityPreset, setGravityPreset] = useState<'earth' | 'moon' | 'jupiter'>('earth')
-  const touched = useMemo(() => new Set<string>(), [])
 
   const g = GRAVITY_PRESETS[gravityPreset]
   const { range, maxHeight } = useMemo(() => arcPoints(angle, v0, g), [angle, v0, g])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'projectile_motion_range',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleNumberChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange: handleNumberChange, mark } = useControlMastery({ defaultConcept: 'projectile_motion_range', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'angle', label: 'Launch angle', min: 5, max: 85, step: 1, value: angle, onChange: handleNumberChange('angle', setAngle), format: (v) => `${v.toFixed(0)}°` },
@@ -91,7 +80,7 @@ export function ProjectileMotionInteractive3D({ highlightedControlId, onMasteryE
     {
       kind: 'dropdown', id: 'gravity', label: 'Gravity preset', value: gravityPreset,
       options: [{ value: 'earth', label: 'Earth (9.8)' }, { value: 'moon', label: 'Moon (1.6)' }, { value: 'jupiter', label: 'Jupiter (24.8)' }],
-      onChange: (v) => { setGravityPreset(v as 'earth' | 'moon' | 'jupiter'); touched.add('gravity'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 }) },
+      onChange: (v) => { setGravityPreset(v as 'earth' | 'moon' | 'jupiter'); mark('gravity') },
     },
   ]
 

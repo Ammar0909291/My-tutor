@@ -11,7 +11,8 @@ import { ThreeDVisual } from './ThreeDVisual'
 import { MolecularNode3D } from './MolecularNode3D'
 import { Bond3D } from './Bond3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const SPACING = 1.1
 type LatticeType = 'simple_cubic' | 'body_centered'
@@ -70,25 +71,19 @@ interface CrystalLatticeInteractive3DProps {
 export function CrystalLatticeInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: CrystalLatticeInteractive3DProps = {}) {
   const [size, setSize] = useState(2)
   const [latticeType, setLatticeType] = useState<LatticeType>('simple_cubic')
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'crystal_lattice_growth',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'crystal_lattice_growth', threshold: 2, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     {
       kind: 'slider', id: 'latticeSize', label: 'Lattice size', min: 1, max: 4, step: 1, value: size,
-      onChange: (v) => { setSize(v); touched.add('latticeSize'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 }) },
+      onChange: (v) => { setSize(v); mark('latticeSize') },
       format: (v) => `${v}×${v}×${v} cells`,
     },
     {
       kind: 'dropdown', id: 'latticeType', label: 'Lattice type', value: latticeType,
       options: [{ value: 'simple_cubic', label: 'Simple cubic' }, { value: 'body_centered', label: 'Body-centered' }],
-      onChange: (v) => { setLatticeType(v as LatticeType); touched.add('latticeType'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 }) },
+      onChange: (v) => { setLatticeType(v as LatticeType); mark('latticeType') },
     },
   ]
 

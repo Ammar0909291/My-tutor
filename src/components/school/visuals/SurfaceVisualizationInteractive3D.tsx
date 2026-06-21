@@ -9,7 +9,8 @@ import { PlaneGeometry } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const SIZE = 3
 const SEGMENTS = 24
@@ -76,19 +77,12 @@ const SURFACE_LABEL: Record<SurfaceType, string> = {
 
 export function SurfaceVisualizationInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: SurfaceVisualizationInteractive3DProps = {}) {
   const [surfaceType, setSurfaceType] = useState<SurfaceType>('paraboloid')
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'surface_shape_from_function',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'surface_shape_from_function', threshold: 2, context: masteryContext, onMasteryEvent })
 
   const handleChange = (v: string) => {
     setSurfaceType(v as SurfaceType)
-    touched.add(v)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 })
+    mark(v)
   }
 
   const controls: SimulationControl[] = [

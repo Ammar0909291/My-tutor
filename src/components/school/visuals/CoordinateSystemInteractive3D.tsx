@@ -4,12 +4,13 @@
  * Additive: live controls (X, Y, Z) drive a moving point, its coordinate
  * readout, and projection lines. Does not modify CoordinateSystem3D.tsx.
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const ORIGIN: [number, number, number] = [0, 0, 0]
 
@@ -38,20 +39,8 @@ export function CoordinateSystemInteractive3D({ highlightedControlId, onMasteryE
   const [x, setX] = useState(2)
   const [y, setY] = useState(1.5)
   const [z, setZ] = useState(1)
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'coordinate_point_position',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'coordinate_point_position', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'x', label: 'X coordinate', min: -3, max: 3, step: 0.1, value: x, onChange: handleChange('x', setX), format: (v) => v.toFixed(1) },

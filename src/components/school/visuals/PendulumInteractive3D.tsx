@@ -5,12 +5,13 @@
  * preset) drive the oscillation and a kinetic/potential energy readout.
  * Does not modify PendulumMotion3D.tsx (untouched).
  */
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Group } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const PIVOT: [number, number, number] = [0, 2.6, 0]
 const GRAVITY_PRESETS: Record<string, number> = { earth: 9.8, moon: 1.6, jupiter: 24.8 }
@@ -63,23 +64,11 @@ export function PendulumInteractive3D({ highlightedControlId, onMasteryEvent, ma
   const [length, setLength] = useState(2)
   const [startAngle, setStartAngle] = useState(30)
   const [gravityPreset, setGravityPreset] = useState<'earth' | 'moon' | 'jupiter'>('earth')
-  const touched = useMemo(() => new Set<string>(), [])
 
   const g = GRAVITY_PRESETS[gravityPreset]
   const period = 2 * Math.PI * Math.sqrt(length / g)
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'pendulum_period',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleNumberChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange: handleNumberChange, mark } = useControlMastery({ defaultConcept: 'pendulum_period', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'length', label: 'String length', min: 0.5, max: 4, step: 0.1, value: length, onChange: handleNumberChange('length', setLength), format: (v) => `${v.toFixed(1)} m` },
@@ -87,7 +76,7 @@ export function PendulumInteractive3D({ highlightedControlId, onMasteryEvent, ma
     {
       kind: 'dropdown', id: 'gravity', label: 'Gravity preset', value: gravityPreset,
       options: [{ value: 'earth', label: 'Earth (9.8)' }, { value: 'moon', label: 'Moon (1.6)' }, { value: 'jupiter', label: 'Jupiter (24.8)' }],
-      onChange: (v) => { setGravityPreset(v as 'earth' | 'moon' | 'jupiter'); touched.add('gravity'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 }) },
+      onChange: (v) => { setGravityPreset(v as 'earth' | 'moon' | 'jupiter'); mark('gravity') },
     },
   ]
 

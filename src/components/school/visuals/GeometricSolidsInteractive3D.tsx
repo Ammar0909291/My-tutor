@@ -4,10 +4,11 @@
  * Additive: a shape selector and scale control drive a live solid plus a
  * dimensions/volume/surface-area readout. Does not modify GeometricSolids3D.tsx.
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 type ShapeType = 'cube' | 'sphere' | 'cylinder' | 'cone'
 
@@ -72,26 +73,18 @@ interface GeometricSolidsInteractive3DProps {
 export function GeometricSolidsInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: GeometricSolidsInteractive3DProps = {}) {
   const [shape, setShape] = useState<ShapeType>('cube')
   const [scale, setScale] = useState(1)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const { dims, volume, area } = geometryFor(shape, scale)
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'solid_volume_surface_area',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'solid_volume_surface_area', threshold: 2, context: masteryContext, onMasteryEvent })
 
   const handleShapeChange = (v: string) => {
     setShape(v as ShapeType)
-    touched.add('shape')
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 })
+    mark('shape')
   }
   const handleScaleChange = (v: number) => {
     setScale(v)
-    touched.add('scale')
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 })
+    mark('scale')
   }
 
   const controls: SimulationControl[] = [

@@ -9,7 +9,8 @@ import { useMemo, useState } from 'react'
 import { Line } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 function blochVector(thetaDeg: number, phiDeg: number) {
   const theta = (thetaDeg * Math.PI) / 180
@@ -74,19 +75,8 @@ interface BlochSphereInteractive3DProps {
 export function BlochSphereInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: BlochSphereInteractive3DProps = {}) {
   const [theta, setTheta] = useState(60)
   const [phi, setPhi] = useState(0)
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'bloch_sphere_superposition',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const markTouched = (id: string) => {
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 })
-  }
+  const { mark: markTouched } = useControlMastery({ defaultConcept: 'bloch_sphere_superposition', threshold: 2, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'theta', label: 'Theta (polar angle)', min: 0, max: 180, step: 1, value: theta, onChange: (v) => { setTheta(v); markTouched('theta') }, format: (v) => `${v.toFixed(0)}°` },

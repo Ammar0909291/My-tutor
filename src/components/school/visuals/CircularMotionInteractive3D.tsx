@@ -11,7 +11,8 @@ import type { Mesh } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 function orbitPoints(radius: number, steps = 48) {
   const pts: [number, number, number][] = []
@@ -73,23 +74,11 @@ export function CircularMotionInteractive3D({ highlightedControlId, onMasteryEve
   const [radius, setRadius] = useState(2.5)
   const [omega, setOmega] = useState(1)
   const [mass, setMass] = useState(2)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const v = omega * radius
   const Fc = mass * omega * omega * radius
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'circular_motion_centripetal_force',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'circular_motion_centripetal_force', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'radius', label: 'Radius', min: 1, max: 4, step: 0.1, value: radius, onChange: handleChange('radius', setRadius), format: (v) => `${v.toFixed(1)} m` },

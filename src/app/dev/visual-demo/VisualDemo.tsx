@@ -77,9 +77,6 @@ const ANIMATED_TEACHING_DEMOS: { label: string; type: VisualType }[] = [
 // plugs into the existing playback engine with zero changes to it.
 const THREE_D_ENGINE_DEMOS: { label: string; type: VisualType }[] = [
   { label: '3D Particle System (production demo)', type: 'three_particle_system' },
-  { label: '3D Wave Simulation (foundation placeholder)', type: 'three_wave_simulation' },
-  { label: '3D Field Visualization (foundation placeholder)', type: 'three_field_visualization' },
-  { label: '3D Structure Visualization (foundation placeholder)', type: 'three_structure_visualization' },
 ]
 
 // 3D Quantum Simulations Phase 1. Five production quantum simulations built on

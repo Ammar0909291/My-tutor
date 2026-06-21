@@ -38,7 +38,6 @@ import { QuantumCircuit } from './QuantumCircuit'
 import { SternGerlach } from './SternGerlach'
 import { EntanglementPair } from './EntanglementPair'
 import { ParticleSystem3D } from './ParticleSystem3D'
-import { WaveSimulation3D, FieldVisualization3D, StructureVisualization3D } from './ThreeDEngineStub'
 import { DoubleSlit3D } from './DoubleSlit3D'
 import { QuantumTunneling3D } from './QuantumTunneling3D'
 import { BlochSphere3D } from './BlochSphere3D'
@@ -106,9 +105,6 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   stern_gerlach: 5,
   entanglement_pair: 5,
   three_particle_system: 5,
-  three_wave_simulation: 5,
-  three_field_visualization: 5,
-  three_structure_visualization: 5,
   three_double_slit: 5,
   three_quantum_tunneling: 5,
   three_bloch_sphere: 5,
@@ -153,9 +149,6 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'stern_gerlach':     return <SternGerlach revealStep={revealStep} />
     case 'entanglement_pair': return <EntanglementPair revealStep={revealStep} />
     case 'three_particle_system':         return <ParticleSystem3D revealStep={revealStep} />
-    case 'three_wave_simulation':         return <WaveSimulation3D revealStep={revealStep} />
-    case 'three_field_visualization':     return <FieldVisualization3D revealStep={revealStep} />
-    case 'three_structure_visualization': return <StructureVisualization3D revealStep={revealStep} />
     case 'three_double_slit':         return <DoubleSlit3D revealStep={revealStep} />
     case 'three_quantum_tunneling':   return <QuantumTunneling3D revealStep={revealStep} />
     case 'three_bloch_sphere':        return <BlochSphere3D revealStep={revealStep} />

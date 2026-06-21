@@ -12,7 +12,8 @@ import type { Group } from 'three'
 import { Html } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const SHELL_NAMES = ['K', 'L', 'M']
 const SHELL_CAPACITY = [2, 8, 8]
@@ -65,27 +66,21 @@ interface ElectronShellsInteractive3DProps {
 export function ElectronShellsInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: ElectronShellsInteractive3DProps = {}) {
   const [atomicNumber, setAtomicNumber] = useState(11)
   const [displayMode, setDisplayMode] = useState<'animated' | 'static'>('animated')
-  const touched = useMemo(() => new Set<string>(), [])
 
   const shellCounts = useMemo(() => fillShells(atomicNumber), [atomicNumber])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'electron_shell_filling',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'electron_shell_filling', threshold: 2, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     {
       kind: 'slider', id: 'atomicNumber', label: 'Atomic number', min: 1, max: 18, step: 1, value: atomicNumber,
-      onChange: (v) => { setAtomicNumber(v); touched.add('atomicNumber'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 }) },
+      onChange: (v) => { setAtomicNumber(v); mark('atomicNumber') },
       format: (v) => `${v}`,
     },
     {
       kind: 'dropdown', id: 'displayMode', label: 'Shell display mode', value: displayMode,
       options: [{ value: 'animated', label: 'Animated' }, { value: 'static', label: 'Static' }],
-      onChange: (v) => { setDisplayMode(v as 'animated' | 'static'); touched.add('displayMode'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 2 }) },
+      onChange: (v) => { setDisplayMode(v as 'animated' | 'static'); mark('displayMode') },
     },
   ]
 

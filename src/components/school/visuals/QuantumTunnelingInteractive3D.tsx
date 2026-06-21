@@ -11,7 +11,8 @@
 import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 function transmissionProbability(barrierHeight: number, barrierWidth: number, energy: number) {
   if (energy >= barrierHeight) return 0.97 // classical-like pass-through (clamped, illustrative)
@@ -69,22 +70,10 @@ export function QuantumTunnelingInteractive3D({ highlightedControlId, onMasteryE
   const [height, setHeight] = useState(3)
   const [width, setWidth] = useState(1)
   const [energy, setEnergy] = useState(1.5)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const T = useMemo(() => transmissionProbability(height, width, energy), [height, width, energy])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'quantum_tunneling_probability',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'quantum_tunneling_probability', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'height', label: 'Barrier height', min: 1, max: 6, step: 0.1, value: height, onChange: handleChange('height', setHeight), format: (v) => v.toFixed(1) },

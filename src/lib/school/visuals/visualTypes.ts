@@ -28,9 +28,6 @@ export type VisualType =
   | 'entanglement_pair'
   // 3D Educational Engine (Foundation Sprint 1) — engine types, not subject visuals
   | 'three_particle_system'
-  | 'three_wave_simulation'
-  | 'three_field_visualization'
-  | 'three_structure_visualization'
   // 3D Quantum Simulations Phase 1
   | 'three_double_slit'
   | 'three_quantum_tunneling'
@@ -83,9 +80,6 @@ export const VISUAL_META: Record<VisualType, { title: string; description: strin
   stern_gerlach:    { title: 'Stern–Gerlach Experiment', description: 'An atom beam split by an inhomogeneous magnet into two discrete spin-up/spin-down spots' },
   entanglement_pair:{ title: 'Entangled Pair',     description: 'A Bell pair separating to two labs, where measuring one instantly correlates the other' },
   three_particle_system: { title: '3D Particle System', description: 'A reusable 3D particle simulation showing particles, motion, proximity interactions, and a highlighted particle' },
-  three_wave_simulation: { title: '3D Wave Simulation', description: 'A reusable 3D wave-simulation engine surface (foundation placeholder)' },
-  three_field_visualization: { title: '3D Field Visualization', description: 'A reusable 3D field-visualization engine surface (foundation placeholder)' },
-  three_structure_visualization: { title: '3D Structure Visualization', description: 'A reusable 3D structure-visualization engine surface (foundation placeholder)' },
   three_double_slit: { title: '3D Double-Slit Experiment', description: 'A 3D double-slit simulation: source, two-slit barrier, propagating wavefronts, and a building interference pattern' },
   three_quantum_tunneling: { title: '3D Quantum Tunneling', description: 'A 3D tunneling simulation: a fixed-height barrier, an incoming wave packet, exponential penetration, and a reduced-amplitude transmitted packet' },
   three_bloch_sphere: { title: '3D Bloch Sphere', description: 'A 3D Bloch sphere: poles, equator, a superposition state vector, and phase precession' },

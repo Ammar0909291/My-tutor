@@ -9,7 +9,8 @@ import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 function elasticCollision(mA: number, vA: number, mB: number, vB: number) {
   const vA2 = ((mA - mB) * vA + 2 * mB * vB) / (mA + mB)
@@ -55,22 +56,10 @@ export function MomentumCollisionInteractive3D({ highlightedControlId, onMastery
   const [mB, setMB] = useState(1)
   const [vA, setVA] = useState(3)
   const [vB, setVB] = useState(-1)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const { vA2, vB2, momentumBefore, momentumTransfer } = useMemo(() => elasticCollision(mA, vA, mB, vB), [mA, vA, mB, vB])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'momentum_conservation',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 4 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'momentum_conservation', threshold: 4, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'massA', label: 'Mass A', min: 0.5, max: 8, step: 0.5, value: mA, onChange: handleChange('massA', setMA), format: (v) => `${v.toFixed(1)} kg` },

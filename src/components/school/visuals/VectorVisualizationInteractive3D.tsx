@@ -5,12 +5,13 @@
  * magnitude readout, direction-component arrows, and a breakdown summary.
  * Does not modify VectorVisualization3D.tsx.
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Html } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const ORIGIN: [number, number, number] = [0, 0, 0]
 
@@ -46,22 +47,10 @@ export function VectorVisualizationInteractive3D({ highlightedControlId, onMaste
   const [vx, setVx] = useState(2.5)
   const [vy, setVy] = useState(1.8)
   const [vz, setVz] = useState(1.2)
-  const touched = useMemo(() => new Set<string>(), [])
 
   const magnitude = Math.sqrt(vx * vx + vy * vy + vz * vz)
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'vector_magnitude_direction',
-    context: masteryContext,
-    onMasteryEvent,
-  })
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
+  const { handleChange } = useControlMastery({ defaultConcept: 'vector_magnitude_direction', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'vx', label: 'Vector X', min: -3, max: 3, step: 0.1, value: vx, onChange: handleChange('vx', setVx), format: (v) => v.toFixed(1) },

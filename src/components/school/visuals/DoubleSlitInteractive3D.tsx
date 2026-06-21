@@ -9,7 +9,8 @@
 import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 /** Small-angle approximation: fringe spacing ∝ wavelength / slit separation, independent of slit width. */
 function fringeSpacing(wavelength: number, separation: number) {
@@ -71,22 +72,10 @@ export function DoubleSlitInteractive3D({ highlightedControlId, onMasteryEvent, 
   const [slitWidth, setSlitWidth] = useState(0.4)
   const [separation, setSeparation] = useState(1.6)
   const [wavelength, setWavelength] = useState(550)
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'double_slit_interference',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { handleChange } = useControlMastery({ defaultConcept: 'double_slit_interference', threshold: 3, context: masteryContext, onMasteryEvent })
 
   const spacing = fringeSpacing(wavelength, separation)
-
-  const handleChange = (id: string, setter: (v: number) => void) => (v: number) => {
-    setter(v)
-    touched.add(id)
-    emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 3 })
-  }
 
   const controls: SimulationControl[] = [
     { kind: 'slider', id: 'slitWidth', label: 'Slit width', min: 0.1, max: 0.8, step: 0.05, value: slitWidth, onChange: handleChange('slitWidth', setSlitWidth), format: (v) => v.toFixed(2) },

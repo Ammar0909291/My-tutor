@@ -9,7 +9,8 @@
 import { useMemo, useState } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 type OrbitalShape = '1s' | '2s' | '2p' | '3d'
 
@@ -82,14 +83,8 @@ interface HydrogenOrbitalInteractive3DProps {
 
 export function HydrogenOrbitalInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: HydrogenOrbitalInteractive3DProps) {
   const [shape, setShape] = useState<OrbitalShape>('1s')
-  const seen = useMemo(() => new Set<OrbitalShape>(['1s']), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'hydrogen_orbital_clouds',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'hydrogen_orbital_clouds', threshold: 4, initialTouched: ['1s'], context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     {
@@ -101,8 +96,7 @@ export function HydrogenOrbitalInteractive3D({ highlightedControlId, onMasteryEv
       onChange: (v) => {
         const next = v as OrbitalShape
         setShape(next)
-        seen.add(next)
-        emit({ interacted: true, challengeAttempted: true, challengeCompleted: seen.size >= 4 })
+        mark(next)
       },
     },
   ]

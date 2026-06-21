@@ -5,13 +5,14 @@
  * swaps the outer-atom geometry and updates the displayed bond angle. Does
  * not modify MolecularShapes3D.tsx (untouched).
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Html } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { MolecularNode3D } from './MolecularNode3D'
 import { Bond3D } from './Bond3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 const CENTER: [number, number, number] = [0, 0, 0]
 const BOND_LEN = 1.4
@@ -67,14 +68,8 @@ interface MolecularShapesInteractive3DProps {
 
 export function MolecularShapesInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: MolecularShapesInteractive3DProps = {}) {
   const [moleculeType, setMoleculeType] = useState<MoleculeType>('tetrahedral')
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'molecular_geometry',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'molecular_geometry', threshold: 1, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     {
@@ -84,7 +79,7 @@ export function MolecularShapesInteractive3D({ highlightedControlId, onMasteryEv
         { value: 'trigonal_planar', label: 'Trigonal planar' },
         { value: 'tetrahedral', label: 'Tetrahedral' },
       ],
-      onChange: (v) => { setMoleculeType(v as MoleculeType); touched.add('moleculeType'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 1 }) },
+      onChange: (v) => { setMoleculeType(v as MoleculeType); mark('moleculeType') },
     },
   ]
 

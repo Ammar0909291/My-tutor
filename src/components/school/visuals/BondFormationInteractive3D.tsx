@@ -5,13 +5,14 @@
  * electron transfer, electron sharing, and a shared electron-sea rendering.
  * Does not modify BondFormation3D.tsx (untouched).
  */
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Html } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { MolecularNode3D } from './MolecularNode3D'
 import { Bond3D } from './Bond3D'
 import { SimulationControlPanel, type SimulationControl } from './SimulationControlPanel'
-import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useControlMastery } from './useControlMastery'
 
 type BondType = 'ionic' | 'covalent' | 'metallic'
 
@@ -82,14 +83,8 @@ interface BondFormationInteractive3DProps {
 
 export function BondFormationInteractive3D({ highlightedControlId, onMasteryEvent, masteryContext }: BondFormationInteractive3DProps = {}) {
   const [bondType, setBondType] = useState<BondType>('covalent')
-  const touched = useMemo(() => new Set<string>(), [])
 
-  const emit = createMasteryEmitter({
-    visualType: 'quantum_interactive',
-    defaultConcept: 'bond_type',
-    context: masteryContext,
-    onMasteryEvent,
-  })
+  const { mark } = useControlMastery({ defaultConcept: 'bond_type', threshold: 1, context: masteryContext, onMasteryEvent })
 
   const controls: SimulationControl[] = [
     {
@@ -99,7 +94,7 @@ export function BondFormationInteractive3D({ highlightedControlId, onMasteryEven
         { value: 'covalent', label: 'Covalent' },
         { value: 'metallic', label: 'Metallic' },
       ],
-      onChange: (v) => { setBondType(v as BondType); touched.add('bondType'); emit({ interacted: true, challengeAttempted: true, challengeCompleted: touched.size >= 1 }) },
+      onChange: (v) => { setBondType(v as BondType); mark('bondType') },
     },
   ]
 
