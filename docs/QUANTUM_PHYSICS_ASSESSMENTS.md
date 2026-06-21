@@ -1,9 +1,11 @@
 # Quantum Physics — Assessment Audit (Task 7)
 
-**Status: design only. No code, no DB, no assessment-engine change.**
-Defines the assessment *progression* across the five tiers requested, mapped to the 7-level / 32-unit
-Master Curriculum. Reuses the platform's existing assessment concepts (subject/topic assessments,
-evidence, mastery) generically — nothing new is built here.
+**Status: spec reconciled to Revision 2 + runtime-verified.** Defines the assessment *progression*
+across the five tiers requested, mapped to the final 7-level / **33-unit / 144-lesson** Master
+Curriculum. Reuses the platform's existing assessment concepts (subject/topic assessments, evidence,
+mastery) generically — nothing new is built. Unit ranges below are reconciled to Revision-2
+numbering (consistency pass; no new assessments). See
+`docs/QUANTUM_PHYSICS_ASSESSMENT_INTEGRATION_REPORT.md`.
 
 ---
 
@@ -34,7 +36,7 @@ evidence, mastery) generically — nothing new is built here.
 - **Item types:** derivations (commutators, uncertainty bound), eigenvalue problems, expectation-value
   computations, ladder-operator manipulation, spin-½ measurement probabilities.
 - **Mastery bar:** 75%; must correctly handle a measurement-collapse problem and a commutator.
-- **Anchor units:** U9–U14.
+- **Anchor units:** U9–U15.
 
 ### Tier 3 — Advanced  (Level 4 · `LevelIndex` 3)
 - **Targets:** identical particles, perturbation theory, time-dependent QM, scattering, entanglement
@@ -42,7 +44,7 @@ evidence, mastery) generically — nothing new is built here.
 - **Item types:** multi-step problem sets (1st/2nd-order corrections, Fermi golden rule, Born
   approximation), Bell/CHSH calculation, density-matrix manipulation, Slater determinants.
 - **Mastery bar:** 75%; must derive a perturbation correction and compute a Bell violation.
-- **Anchor units:** U15–U19.
+- **Anchor units:** U16–U20.
 
 ### Tier 4 — Professional  (Levels 5–6 · `LevelIndex` 4–5)
 - **Targets:** qubits/gates/circuits/algorithms, QEC, cryptography, hardware; statistical QM, open
@@ -51,7 +53,7 @@ evidence, mastery) generically — nothing new is built here.
   QFT by hand on small registers), error-syndrome problems, BB84 protocol walkthrough, Lindblad/
   decoherence reasoning, Dirac-equation conceptual items, Standard-Model classification.
 - **Mastery bar:** 80%; an applied capstone (e.g., design a 3-qubit code; analyze a 2-qubit circuit).
-- **Anchor units:** U20–U29.
+- **Anchor units:** U21–U30.
 
 ### Tier 5 — Research Foundation  (Level 7 · `LevelIndex` 5)
 - **Targets:** gauge theory, renormalization, path integrals, many-body/condensed matter, topological
@@ -60,7 +62,7 @@ evidence, mastery) generically — nothing new is built here.
   critique, a scoped research-question proposal, computational-method design.
 - **Mastery bar:** rubric-based (depth, rigor, originality) rather than percentage; a research-style
   written artifact.
-- **Anchor units:** U30–U32.
+- **Anchor units:** U31–U33.
 
 ---
 
@@ -69,10 +71,10 @@ evidence, mastery) generically — nothing new is built here.
 | Tier | Levels | Units | Dominant skill | Mastery signal |
 |---|---|---|---|---|
 | Beginner | 1–2 | U1–U8 | recall + basic application | 70%, no critical misconception |
-| Intermediate | 3 | U9–U14 | formal derivation | 75% + measurement/commutator |
-| Advanced | 4 | U15–U19 | multi-step problem solving | 75% + perturbation + Bell |
-| Professional | 5–6 | U20–U29 | applied design/analysis | 80% + circuit/code capstone |
-| Research Foundation | 7 | U30–U32 | synthesis & critique | rubric (research artifact) |
+| Intermediate | 3 | U9–U15 | formal derivation | 75% + measurement/commutator |
+| Advanced | 4 | U16–U20 | multi-step problem solving | 75% + perturbation + Bell |
+| Professional | 5–6 | U21–U30 | applied design/analysis | 80% + circuit/code capstone |
+| Research Foundation | 7 | U31–U33 | synthesis & critique | rubric (research artifact) |
 
 ---
 
@@ -94,7 +96,7 @@ deducting score.
 
 ## Summary
 
-A five-tier, mastery-gated progression spanning all 7 levels / 32 units, balancing concept and
+A five-tier, mastery-gated progression spanning all 7 levels / 33 units, balancing concept and
 computation, with per-unit checkpoints and per-level gates. It maps onto existing assessment, evidence,
 and mastery structures with **no engine change** — only content authoring would remain (future, out of
 scope).
