@@ -4,8 +4,16 @@
  * Renders the appropriate SVG visual inside a lightweight card and drives its
  * step-by-step teaching animation via useTeachingPlayback + VisualPlaybackControls.
  * Architecture unchanged: AI response → VisualType → VisualCard → SVG component.
+ *
+ * Sprint U — additive narration wiring: when a caller supplies a
+ * `narrationTimeline` (derived from the real tutor explanation via
+ * narrationSource.ts), the visual advances with narration instead of a timer,
+ * reusing the Sprint S/T infrastructure (tutorVisualSync, narrationProgress,
+ * synchronizedPlayback) unchanged. Omitting `narrationTimeline` (or supplying
+ * one with zero segments) preserves exact Sprint R.1 timer-mode behavior.
  */
 
+import { useEffect, useState } from 'react'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { VISUAL_META } from '@/lib/school/visuals/visualTypes'
 import { useTeachingPlayback } from '@/hooks/useTeachingPlayback'
@@ -20,6 +28,18 @@ import { WaterCycle } from './WaterCycle'
 import { SolarSystem } from './SolarSystem'
 import { ForceDiagram } from './ForceDiagram'
 import { CircuitDiagram } from './CircuitDiagram'
+import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
+import {
+  createNarrationProgress,
+  advance,
+  reset,
+  visualStepForSegment,
+  isNarrationComplete,
+} from '@/lib/visuals/synchronizedPlayback'
+import type { NarrationProgress } from '@/lib/visuals/narrationProgress'
+
+/** Base ms per narration beat before speed scaling — mirrors timer mode's stepDurationMs. */
+const NARRATION_STEP_DURATION_MS = 700
 
 interface VisualCardProps {
   type: VisualType
@@ -27,14 +47,10 @@ interface VisualCardProps {
   autoPlay?: boolean
   /** Initial animation speed multiplier (e.g. the Learn panel's voice speed). */
   speed?: number
-  /**
-   * Sprint U — optional live narration step (1-based). When provided alongside a
-   * narration source, the visual advances in narration mode (driven by this step)
-   * instead of by the timer. Omit (the default) to keep Sprint R.1 timer playback.
-   */
-  narrationStep?: number
-  /** Sprint U — whether a narration source exists for this visual (enables narration mode when narrationStep is also set). */
+  /** Sprint U — additive: true when the caller has real narration to sync to. */
   hasNarration?: boolean
+  /** Sprint U — additive: narration segments derived from the tutor's explanation text. */
+  narrationTimeline?: LessonTimeline
 }
 
 /** Number of teaching steps each visual reveals — drives the timeline length. */
@@ -66,16 +82,68 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
   }
 }
 
-export function VisualCard({ type, autoPlay = true, speed = 1, narrationStep, hasNarration = false }: VisualCardProps) {
+export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, narrationTimeline }: VisualCardProps) {
   const meta = VISUAL_META[type]
   const stepCount = VISUAL_STEP_COUNTS[type]
-  // Sprint U: narration mode is active only when a narration source AND a live
-  // narration step are both supplied; otherwise fall back to Sprint R.1 timer mode.
-  const narrationActive = hasNarration && typeof narrationStep === 'number'
+
+  const totalSegments = narrationTimeline?.segments.length ?? 0
+  // Fallback gate — Task 4: only enter narration mode when there is real
+  // narration to drive it; otherwise behavior is byte-for-byte Sprint R.1 timer mode.
+  const useNarrationMode = !!(hasNarration && totalSegments > 0)
+
+  const [progress, setProgress] = useState<NarrationProgress>(() => createNarrationProgress(totalSegments))
+  const [narrationPlaying, setNarrationPlaying] = useState(autoPlay)
+  const [narrationSpeed, setNarrationSpeed] = useState(speed)
+
+  // Re-baseline narration progress whenever the underlying timeline changes
+  // (e.g. a new tutor message with a different narration length arrives).
+  useEffect(() => {
+    setProgress(createNarrationProgress(totalSegments))
+    setNarrationPlaying(autoPlay)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalSegments])
+
+  // Task 6 — auto-advance one narration beat at a time; speed scales the
+  // interval, never the timer engine itself. Cleared/rescheduled on every
+  // progress/speed change so pause/replay/speed-change all take effect immediately.
+  useEffect(() => {
+    if (!useNarrationMode || !narrationPlaying) return
+    if (progress.currentSegment >= progress.totalSegments) return
+    const id = setTimeout(() => setProgress((p) => advance(p)), NARRATION_STEP_DURATION_MS / narrationSpeed)
+    return () => clearTimeout(id)
+  }, [useNarrationMode, narrationPlaying, progress, narrationSpeed])
+
+  const narrationStep = visualStepForSegment(progress, stepCount)
+
+  // Single hook call (rules-of-hooks safe) — mode switches based on whether
+  // usable narration was supplied; timer engine itself is untouched either way.
   const playback = useTeachingPlayback(
     stepCount,
-    narrationActive ? { mode: 'narration', narrationStep } : { autoPlay, speed }
+    useNarrationMode ? { mode: 'narration', narrationStep, speed: narrationSpeed } : { autoPlay, speed }
   )
+
+  const controls = useNarrationMode
+    ? {
+        isPlaying: narrationPlaying,
+        isComplete: isNarrationComplete(progress),
+        speed: narrationSpeed,
+        onPlay: () => setNarrationPlaying(true),
+        onPause: () => setNarrationPlaying(false),
+        onReplay: () => {
+          setProgress(reset(progress))
+          setNarrationPlaying(true)
+        },
+        onSpeedChange: setNarrationSpeed,
+      }
+    : {
+        isPlaying: playback.isPlaying,
+        isComplete: playback.isComplete,
+        speed: playback.speed,
+        onPlay: playback.play,
+        onPause: playback.pause,
+        onReplay: playback.replay,
+        onSpeedChange: playback.setSpeed,
+      }
 
   return (
     <div
@@ -110,18 +178,16 @@ export function VisualCard({ type, autoPlay = true, speed = 1, narrationStep, ha
         <VisualComponent type={type} revealStep={playback.revealStep} />
       </div>
 
-      {/* playback controls — timer mode only (narration mode is driven externally) */}
-      {!narrationActive && (
-        <VisualPlaybackControls
-          isPlaying={playback.isPlaying}
-          isComplete={playback.isComplete}
-          speed={playback.speed}
-          onPlay={playback.play}
-          onPause={playback.pause}
-          onReplay={playback.replay}
-          onSpeedChange={playback.setSpeed}
-        />
-      )}
+      {/* playback controls */}
+      <VisualPlaybackControls
+        isPlaying={controls.isPlaying}
+        isComplete={controls.isComplete}
+        speed={controls.speed}
+        onPlay={controls.onPlay}
+        onPause={controls.onPause}
+        onReplay={controls.onReplay}
+        onSpeedChange={controls.onSpeedChange}
+      />
 
       {/* screen-reader / fallback description */}
       <p style={{ margin: '6px 0 0', fontSize: 10, color: 'var(--text-dim)', lineHeight: 1.4 }}>

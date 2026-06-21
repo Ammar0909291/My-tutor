@@ -1,121 +1,208 @@
-# Visual Learning Sprint U — Live Narration → Visual Playback Integration · Report
+# Visual Learning Sprint U — Production Narration Wiring Report
 
-## Summary / bottom line
+Connects the already-built Sprint S/T narration-sync infrastructure to the
+real production lesson flow. No infrastructure was rebuilt; everything below
+is additive wiring on top of `teachingTimeline.ts`, `useTeachingPlayback`,
+`lessonSegments.ts`, `tutorVisualSync.ts`, `narrationProgress.ts`,
+`synchronizedPlayback.ts`, and the existing `VisualCard` renderers — none of
+which were modified.
 
-Wires the Sprint S (synchronization) + Sprint T (narration-driven playback) infrastructure into the
-real lesson path. The production `VisualCard` now accepts an optional narration source + live
-`narrationStep`; when both are present it runs in **narration mode** (visual advances with the
-narration segment, not a timer), and `LessonScreen` passes the narration-source presence additively.
-**Crucially, production has no live per-segment narration step yet** (that driver — TTS boundary /
-streamed segments — is Sprint V), so `VisualCard` falls back to **timer mode identical to Sprint R.1
-— zero regression**. The dev panel supplies both source and step to prove narration step N → visual
-step N. **No Tutor Max / AI / prompt / curriculum / intelligence / animation-engine changes.** `tsc` 0
-errors, build exit 0; only `VisualCard`, `LessonScreen` (additive props), and the dev demo page changed.
+## 1. Audit findings
 
-## Audit findings (Task 1 → `docs/LIVE_NARRATION_VISUAL_INTEGRATION_AUDIT.md`)
+See `docs/VISUAL_LEARNING_SPRINT_U_AUDIT.md` for the full trace. Summary:
 
-Pipeline: tutor response (`visual` tag, full message at once — not segmented) → `LessonScreen` →
-`VisualCard` → Sync (S) → Narration playback (T). **Safest insertion point:** VisualCard props +
-the LessonScreen render site — narration mode activates only when `hasNarration` AND a numeric
-`narrationStep` are both supplied; otherwise timer mode (R.1) runs unchanged. **Narration ownership:**
-developer-authored per visual type (`lessonNarration.ts`), never AI-generated, never from Tutor Max.
-**Fallback:** missing live step ⇒ timer mode ⇒ identical to R.1. **Mobile:** narration mode runs no
-rAF loop; no new production timers/listeners.
+- Real production path: `/api/learn/chat` → `ChatMsg.content` (tutor
+  explanation text) + `ChatMsg.visual` (VisualType) →
+  `LessonScreen.tsx:2305` renders `<VisualCard type={msg.visual} autoPlay
+  speed={speed} />` → `VisualCard` drives `useTeachingPlayback` in timer
+  mode → `VisualComponent` renders with `revealStep`.
+- Narration source: `msg.content`, already in production, never previously
+  split into segments.
+- Safest wiring location: one new pure helper called from `LessonScreen`'s
+  existing `VisualCard` call site, plus one conditional branch inside
+  `VisualCard` itself. No other file needed to change.
+- Fallback: absent/empty narration → exact prior Sprint R.1 timer behavior.
 
-## Architecture
+## 2. Files changed
 
-```
-getAuthoredNarration(visualType) → LessonNarration { segments:[{id,text,step}] }   (Task 2, pure)
-        │  toLessonTimeline → buildSyncPlan (Sprint S)            → SyncPlan/status
-        │  createNarrationProgress / advance / retreat / reset    (Sprint T)
-        │  visualStepForSegment(progress, stepCount) → narrationStep
-        ▼
-VisualCard(type, hasNarration, narrationStep)
-        │  narrationActive = hasNarration && typeof narrationStep === 'number'
-        │  useTeachingPlayback(stepCount, narrationActive ? {mode:'narration',narrationStep} : {autoPlay,speed})
-        ▼
-existing SVG renderers (unchanged) — controls hidden in narration mode
-```
-
-## Files changed
-
-**New**
-- `docs/LIVE_NARRATION_VISUAL_INTEGRATION_AUDIT.md` — Task 1 audit.
-- `src/lib/visuals/lessonNarration.ts` — `NarrationSegment`/`LessonNarration` types,
-  `buildLessonNarration`, `narrationSegmentCount`, `toLessonTimeline` (Sprint S adapter),
-  `getAuthoredNarration` (developer-authored text, NOT AI) (Task 2).
-- `src/components/school/visuals/LiveNarrationPlaybackViewer.tsx` — dev-only verification panel (Task 6).
-
-**Modified (all additive, backward compatible)**
-- `src/components/school/visuals/VisualCard.tsx` — optional `hasNarration` + `narrationStep`; narration
-  mode when both present (else timer); timer controls hidden in narration mode (Task 3).
-- `src/components/learn/LessonScreen.tsx` — passes `hasNarration={getAuthoredNarration(msg.visual) != null}`
-  to VisualCard. No live `narrationStep` yet ⇒ timer fallback (Task 4).
-- `src/app/dev/visual-demo/VisualDemo.tsx` — mounts the dev-only Sprint U panel.
-
-**Reused unmodified (git-status verified):** `useTeachingPlayback.ts`, `teachingTimeline.ts`,
-`synchronizedPlayback.ts`, `tutorVisualSync.ts`, `lessonSegments.ts`, all SVG renderers,
-`VisualPlaybackControls.tsx`, `visualAnim.module.css` — Sprint R/R.1/S/T engines unchanged.
-
-## Demonstration results (Task 7)
-
-Ran the five required visuals through the **real production narration source** (`getAuthoredNarration`
-→ sync plan → `synchronizedPlayback`):
-
-```
-number_line:      narration step 1→visual step 1 "Let's draw the number line." … 4→4 "Highlight zero…"
-fraction_bar:     1→1 "Draw the empty bars." … 4→4 "Read the value inside each bar."
-coordinate_plane: 1→1 "Draw the x and y axes." … 4→4 "Plot the point."
-water_cycle:      1→1 "Start with the ground and mountain." … 4→4 "Clouds form above."
-food_chain:       1→1 "Begin with the Sun." … 4→4 "The frog eats the grasshopper."
-VERIFY narration step N → visual step N (all 5): true
-no-narration fallback (unknown type): null ✓
-```
-
-Visual progression follows the narration segment, not a timer. In the dev panel, Next/Previous/Reset
-drive the **real production VisualCard** in narration mode. The demonstration used a temporary script
-deleted immediately after running; no DB rows were seeded.
-
-## Validation results (Task 9)
-
-```
-npx prisma generate                 → ok
-npx tsc --noEmit -p tsconfig.json   → 0 errors
-npm run build                       → exit 0
-git status → only VisualCard.tsx + LessonScreen.tsx (additive props) + VisualDemo.tsx modified
-```
-
-Timer mode still works (it is the production default — no `narrationStep` supplied); narration mode
-works (proven in the dev panel and the demonstration).
-
-## Production safety review (Task 8)
-
-Confirmed unchanged: Tutor Max prompts + adaptation logic, Educational Intelligence, curriculum, XP,
-grading, Visual Mastery, assessment systems, and Sprint R/R.1 animation behavior (engine files
-untouched; VisualCard's default path is byte-for-byte the R.1 timer playback because `hasNarration`
-defaults false and production never supplies `narrationStep`). The only behavioral surface added is
-narration mode, which is inactive in production until a live narration step exists.
-
-## Educational review (Task 10 — architecture suitability, review only)
-
-| Domain | Suitability | Notes |
+| File | Change | Type |
 |---|---|---|
-| CBSE / UP Board | High | Narration-paced board-style build-up for math/science topics. |
-| Programming | Medium-High | Strong for process/flow visuals; code stays text. |
-| Finance | High | Pacing chart/number-line construction to the explanation. |
-| Engineering | High | Each construction step aligned to its spoken step. |
-| Medicine | Medium-High | Pathway/cycle diagrams benefit; richer diagrams later. |
-| Universal Learning | High | Structural (segment ↔ step) — generalizes to any N-step visual with authored narration. |
+| `src/lib/visuals/narrationSource.ts` | **New.** Pure `extractNarrationSegments(text, visualType?) → LessonTimeline`. | New, additive |
+| `src/components/learn/LessonScreen.tsx` | Added import; `VisualCard` call now also passes `hasNarration` + `narrationTimeline={extractNarrationSegments(msg.content, msg.visual)}`. No other JSX touched. | Modified, additive |
+| `src/components/school/visuals/VisualCard.tsx` | Added optional `hasNarration`/`narrationTimeline` props; added a narration-mode branch (own progress state, auto-advance effect, play/pause/replay/speed controls) that drives the existing `useTeachingPlayback({ mode: 'narration', narrationStep })` contract; timer-mode path is untouched when narration is absent. | Modified, additive |
 
-## Roadmap
+No other files were changed. `git diff --name-only` confirms only these two
+production files were touched (plus the two new docs and the new library
+file).
 
-1. **Sprint V (out of scope):** supply the live `narrationStep` from TTS boundary events or streamed
-   tutor segments, activating narration mode in real lessons (no further VisualCard/LessonScreen change
-   needed — the wire is in place).
-2. Author/curate per-step narration for the full 10-visual catalog (10 are seeded; refine wording).
-3. Optionally segment tutor narration to steps via a deterministic mapper (still no prompt change).
-4. Hybrid: narration-driven with a timer fallback if the next segment doesn't arrive within a window.
+## 3. Narration source design (Task 2)
 
-**STOP AFTER REPORT** — no Sprint V, no Tutor Max prompt changes, no Educational Intelligence changes,
-no animation rebuild, no new AI systems. This sprint only connected the completed Sprint S + Sprint T
-infrastructure into the real lesson experience, with a safe timer fallback.
+`src/lib/visuals/narrationSource.ts`:
+
+```ts
+export function extractNarrationSegments(text: string, visualType?: string): LessonTimeline
+```
+
+- Splits on paragraph breaks (`\n+`) first, then sentence boundaries
+  (`(?<=[.!?])\s+`) within a paragraph — deterministic, no AI.
+- Produces one `LessonSegment` per beat, `visualStep = i + 1` (1-based) —
+  the exact convention `tutorVisualSync.ts`'s own
+  `timelineFromNarrationLines()` already uses, so the result is consumed by
+  the existing Sprint S sync layer (`buildSyncPlan`) unchanged.
+- No AI calls, no LLM prompts, no DB writes, no Tutor Max changes — it only
+  restructures text the model already returned.
+
+Verified against the brief's own example:
+
+```
+Input:  "Let's draw the number line.\n\nNow mark zero.\n\nPlace 3/4.\n\nNotice it is closer to 1."
+Output: 4 segments, visualStep 1..4 — exact match.
+```
+
+## 4. LessonScreen wiring (Task 3)
+
+Only the existing `VisualCard` render block was touched (additive props):
+
+```tsx
+<VisualCard
+  type={msg.visual as VisualType}
+  autoPlay
+  speed={speed}
+  hasNarration
+  narrationTimeline={extractNarrationSegments(msg.content, msg.visual)}
+/>
+```
+
+No lesson logic, Tutor Max calls, curriculum logic, or progression logic was
+touched.
+
+## 5. VisualCard wiring (Task 4)
+
+`VisualCard` now branches on `useNarrationMode = hasNarration && narrationTimeline.segments.length > 0`:
+
+- **Narration mode** (new): owns a local `NarrationProgress` (Sprint T type),
+  auto-advances it one segment at a time via `setTimeout` (interval scaled
+  by `narrationSpeed`), derives `narrationStep` via `synchronizedPlayback.ts`'s
+  `visualStepForSegment()`, and feeds it to the *existing*
+  `useTeachingPlayback({ mode: 'narration', narrationStep, speed })` call —
+  the same hook, same call site, same contract Sprint T already built and
+  left unused in production.
+- **Timer mode** (unchanged): `useNarrationMode === false` → identical
+  `useTeachingPlayback({ autoPlay, speed })` call as before Sprint U.
+- Both modes share a single `useTeachingPlayback` call site (rules-of-hooks
+  safe — the hook is always called, only its options object changes) and a
+  single `VisualPlaybackControls` render, switched via a small `controls`
+  object so the UI is identical in shape for both modes.
+
+## 6. Demonstration results (Task 7)
+
+Ran `extractNarrationSegments` → `buildSyncPlan` → segment-by-segment
+`advance()`/`visualStepForSegment()` against all 5 requested production
+visuals, using realistic multi-sentence tutor explanations:
+
+```
+=== number_line (stepCount=4, segments=4, status=ok) ===
+Narration Segment 1 -> Visual Step 1
+Narration Segment 2 -> Visual Step 2
+Narration Segment 3 -> Visual Step 3
+Narration Segment 4 -> Visual Step 4
+
+=== fraction_bar (stepCount=4, segments=4, status=ok) ===
+Segment 1→Step 1, 2→2, 3→3, 4→4
+
+=== coordinate_plane (stepCount=5, segments=5, status=ok) ===
+Segment 1→Step 1 ... 5→5
+
+=== water_cycle (stepCount=6, segments=6, status=ok) ===
+Segment 1→Step 1 ... 6→6
+
+=== food_chain (stepCount=5, segments=5, status=ok) ===
+Segment 1→Step 1 ... 5→5
+```
+
+Every sample produced `status: 'ok'` from `buildSyncPlan` (full coverage, no
+overflow) — narration segment N maps to visual step N for all 5 visuals,
+confirming the wiring is correct end-to-end through the *unmodified* Sprint
+S sync layer. (Demo script was run via `npx tsx` against the real library
+files and discarded — not part of the committed diff.)
+
+## 7. Replay behavior (Task 5)
+
+- **Timer mode**: unchanged — `playback.replay()` still zeroes the rAF
+  elapsed clock and restarts from `revealStep = 0`.
+- **Narration mode**: `onReplay` calls `synchronizedPlayback.ts`'s `reset()`
+  (sets `currentSegment` back to 0) and resumes auto-advance
+  (`setNarrationPlaying(true)`), which re-triggers the segment timer from
+  segment 0 → `narrationStep` 0 → `revealStep` 0, then ticks forward exactly
+  as on first play. Verified by code-path inspection: `reset()` is a pure
+  function from the unmodified `synchronizedPlayback.ts`; no new state
+  machine was introduced beyond the `useState<NarrationProgress>` wrapper.
+
+## 8. Speed behavior (Task 6)
+
+- **Timer mode**: unchanged — speed scales `elapsedRef` accumulation inside
+  `useTeachingPlayback`'s own rAF loop, exactly as before.
+- **Narration mode**: `narrationSpeed` scales the `setTimeout` interval
+  (`NARRATION_STEP_DURATION_MS / narrationSpeed`) that advances
+  `NarrationProgress`, entirely inside `VisualCard` — `useTeachingPlayback`'s
+  timer engine is never invoked in this mode (its narration-mode effect only
+  reacts to `narrationStep` changes, it does not run its own clock). Changing
+  speed mid-playback takes effect on the next scheduled tick because the
+  effect's dependency array includes `narrationSpeed`, so the pending
+  `setTimeout` is cleared and rescheduled at the new interval immediately.
+
+## 9. Production safety review (Task 8)
+
+Confirmed unchanged — `git diff --name-only` shows only `LessonScreen.tsx`
+and `VisualCard.tsx` were modified (plus new files: `narrationSource.ts` and
+this pair of docs):
+
+- Tutor Max prompts — untouched (`/api/learn/chat/route.ts` not modified).
+- AI routes — untouched (`routeAI`, `planVisualTeaching`, `detectVisual`
+  all unmodified).
+- Educational Intelligence Sprints 1–11 — untouched (no EI file in the diff).
+- XP, Grading, Assessments, Curriculum — untouched (no related file in the
+  diff).
+- Lesson synchronization fix (`62c6444`) — untouched; this sprint adds a
+  narration layer purely client-side inside `VisualCard`, with no interaction
+  with session/message persistence.
+- `teachingTimeline.ts`, `useTeachingPlayback`'s timer engine,
+  `lessonSegments.ts`, `tutorVisualSync.ts`, `narrationProgress.ts`,
+  `synchronizedPlayback.ts`, and every `VisualComponent` renderer
+  (`NumberLine`, `FractionBar`, etc.) — all reused as-is, zero line changes.
+
+## 10. Validation (Task 9)
+
+```
+$ npx prisma generate     → Generated Prisma Client (v6.19.3) — OK
+$ npx tsc --noEmit        → 0 errors
+$ npm run build           → succeeded, all routes compiled
+                             (/learn: 30.4 kB, 208 kB First Load JS — unchanged route count)
+```
+
+Sprint R.1 (timer-mode visuals with no narration) is preserved — the
+`useNarrationMode` gate defaults to `false` whenever `hasNarration` is
+falsy or `narrationTimeline` has zero segments, which is exactly the
+pre-Sprint-U render path. Sprint S (`buildSyncPlan`/`narrationForStep`) and
+Sprint T (`narrationProgress`/`synchronizedPlayback`/`useTeachingPlayback`'s
+narration mode) are both consumed unmodified.
+
+## 11. Roadmap (not built — explicitly out of scope this sprint)
+
+- True TTS-boundary-synced narration (driving `narrationStep` from actual
+  speech timing/word-boundary events from `src/lib/tts.ts`'s
+  `speakText`/`handleSpeak`, instead of a fixed-interval auto-advance) would
+  make the sync feel tighter for users who use the existing "Play" (TTS)
+  button, but requires touching the TTS layer — out of scope for this sprint
+  ("DO NOT redesign visual engines").
+- Per-visual-type custom step timing (e.g. a 6-step water cycle pacing
+  narration differently than a 3-step solar system) is possible by tuning
+  `NARRATION_STEP_DURATION_MS` per type, but the brief asked only for
+  correct 1:1 segment→step sync, which is delivered.
+- Sprint V is explicitly not started, per instruction.
+
+---
+
+**STOP AFTER REPORT** — no Sprint V work started. Commit only after this
+report's completion, and only on explicit instruction (per this session's
+established pattern of not committing/pushing without being asked).

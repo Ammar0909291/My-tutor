@@ -14,8 +14,8 @@ import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
-import { getAuthoredNarration } from '@/lib/visuals/lessonNarration'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
+import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // Visual Learning Sprint B: data-driven visuals (graph / number_line). Additive
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
@@ -2305,14 +2305,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
-                        {/* Sprint U: narration source is wired in; production has no live
-                            per-segment narration step yet (Sprint V: TTS/streaming driver), so
-                            VisualCard falls back to timer mode — identical to Sprint R.1. */}
                         <VisualCard
                           type={msg.visual as VisualType}
                           autoPlay
                           speed={speed}
-                          hasNarration={getAuthoredNarration(msg.visual) != null}
+                          hasNarration
+                          narrationTimeline={extractNarrationSegments(msg.content, msg.visual)}
                         />
                       </div>
                     )}
