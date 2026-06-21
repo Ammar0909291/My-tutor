@@ -34,6 +34,11 @@ import { BlochSphereInteractive3D } from '@/components/school/visuals/BlochSpher
 import { DoubleSlitInteractive3D } from '@/components/school/visuals/DoubleSlitInteractive3D'
 import { HydrogenOrbitalInteractive3D } from '@/components/school/visuals/HydrogenOrbitalInteractive3D'
 import { GuidedSimulationMode } from '@/components/school/visuals/GuidedSimulationMode'
+import { ProjectileMotionInteractive3D } from '@/components/school/visuals/ProjectileMotionInteractive3D'
+import { NewtonForcesInteractive3D } from '@/components/school/visuals/NewtonForcesInteractive3D'
+import { MomentumCollisionInteractive3D } from '@/components/school/visuals/MomentumCollisionInteractive3D'
+import { CircularMotionInteractive3D } from '@/components/school/visuals/CircularMotionInteractive3D'
+import { PendulumInteractive3D } from '@/components/school/visuals/PendulumInteractive3D'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -484,6 +489,111 @@ export function VisualDemo() {
               <VisualCard type={type} autoPlay speed={1} />
             </section>
           ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Classical Mechanics Interactive Simulations</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Classical Mechanics Interactive Layer Sprint: live, student-controlled versions of all
+          five Classical Mechanics 3D Foundation simulations, built additively on the same
+          <code> ThreeDVisual</code> host plus the shared, generic <code>SimulationControlPanel</code>
+          and <code>GuidedSimulationMode</code> — identical infrastructure to the Quantum Interactive
+          layer below, just new subject content. Each is wrapped in a guided step-through script and
+          wired to the same mastery collector via <code>onMasteryEvent</code>/<code>masteryContext</code>.
+          The original revealStep-gated <code>ProjectileMotion3D</code>/<code>NewtonForces3D</code>/
+          <code>MomentumCollision3D</code>/<code>CircularMotion3D</code>/<code>PendulumMotion3D</code>
+          above are unmodified.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Projectile motion — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the launch angle and watch how the trajectory shape changes.', highlightedControlId: 'angle' },
+                { instruction: 'Now increase the launch velocity and observe the range grow.', highlightedControlId: 'velocity' },
+                { instruction: 'Compare trajectories under different gravity presets — same launch, very different range.', highlightedControlId: 'gravity' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <ProjectileMotionInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'projectile_motion_range', source: 'learn', subjectSlug: 'classical_mechanics', topicSlug: 'projectile_motion' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Newton&apos;s forces — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the object mass and watch the gravity (weight) vector grow.', highlightedControlId: 'mass' },
+                { instruction: 'Now increase the friction coefficient and observe the friction vector grow.', highlightedControlId: 'friction' },
+                { instruction: 'Notice the vertical forces always stay balanced — the normal force matches gravity exactly.', highlightedControlId: 'gravity' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <NewtonForcesInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'newton_forces_balance', source: 'learn', subjectSlug: 'classical_mechanics', topicSlug: 'newton_forces' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Momentum collision — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Try equal masses with opposite velocities and see how they exchange velocities.', highlightedControlId: 'massA' },
+                { instruction: 'Now make mass A much larger than mass B and observe the difference.', highlightedControlId: 'massB' },
+                { instruction: 'Adjust the velocities and watch total momentum stay conserved before and after.', highlightedControlId: 'velocityA' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <MomentumCollisionInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'momentum_conservation', source: 'learn', subjectSlug: 'classical_mechanics', topicSlug: 'momentum_collision' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Circular motion — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the radius and watch the velocity vector grow.', highlightedControlId: 'radius' },
+                { instruction: 'Now increase the angular velocity and observe the centripetal force grow much faster.', highlightedControlId: 'omega' },
+                { instruction: 'Increase the mass and see how the same motion now requires more centripetal force.', highlightedControlId: 'mass' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <CircularMotionInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'circular_motion_centripetal_force', source: 'learn', subjectSlug: 'classical_mechanics', topicSlug: 'circular_motion' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Pendulum — guided + interactive</h2>
+            <GuidedSimulationMode
+              steps={[
+                { instruction: 'Increase the string length and watch the period grow longer.', highlightedControlId: 'length' },
+                { instruction: 'Change the starting angle — notice the period barely changes for small swings.', highlightedControlId: 'startAngle' },
+                { instruction: 'Switch gravity presets and observe how period depends on gravity.', highlightedControlId: 'gravity' },
+              ]}
+            >
+              {({ highlightedControlId }) => (
+                <PendulumInteractive3D
+                  highlightedControlId={highlightedControlId}
+                  onMasteryEvent={handleMasteryEvent}
+                  masteryContext={{ concept: 'pendulum_period', source: 'learn', subjectSlug: 'classical_mechanics', topicSlug: 'pendulum_motion' }}
+                />
+              )}
+            </GuidedSimulationMode>
+          </section>
         </div>
 
         <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Interactive Quantum Simulations</h1>
