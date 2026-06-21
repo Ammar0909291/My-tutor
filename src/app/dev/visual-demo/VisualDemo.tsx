@@ -29,6 +29,8 @@ import { NarrationDrivenPlaybackViewer } from '@/components/school/visuals/Narra
 import { LiveNarrationPlaybackViewer } from '@/components/school/visuals/LiveNarrationPlaybackViewer'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
+import { QuantumTunnelingInteractive3D } from '@/components/school/visuals/QuantumTunnelingInteractive3D'
+import { BlochSphereInteractive3D } from '@/components/school/visuals/BlochSphereInteractive3D'
 
 // Sprint R.1 — Animated Teaching Engine. Each VisualCard below now builds itself
 // up step-by-step (autoplay) with Play / Pause / Replay / speed controls, instead
@@ -448,6 +450,27 @@ export function VisualDemo() {
               <VisualCard type={type} autoPlay speed={1} />
             </section>
           ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Interactive Quantum Simulations</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          3D Interactive Simulation Layer Phase 1: live, student-controlled versions of two of the
+          quantum simulations above, built additively on the same <code>ThreeDVisual</code> host plus
+          a new generic <code>SimulationControlPanel</code> (sliders/dropdowns/reset). These are
+          student-driven (local state), not <code>revealStep</code>/narration-driven, so they are
+          rendered as standalone components here rather than through <code>VisualCard</code>. The
+          original revealStep-gated <code>QuantumTunneling3D</code>/<code>BlochSphere3D</code> above
+          are unmodified.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Quantum tunneling — interactive</h2>
+            <QuantumTunnelingInteractive3D />
+          </section>
+          <section>
+            <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>Bloch sphere — interactive</h2>
+            <BlochSphereInteractive3D />
+          </section>
         </div>
 
         <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>Quantum Physics — Visual Mastery Challenges</h1>
