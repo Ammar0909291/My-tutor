@@ -37,6 +37,8 @@ import { EnergyLevelDiagram } from './EnergyLevelDiagram'
 import { QuantumCircuit } from './QuantumCircuit'
 import { SternGerlach } from './SternGerlach'
 import { EntanglementPair } from './EntanglementPair'
+import { ParticleSystem3D } from './ParticleSystem3D'
+import { WaveSimulation3D, FieldVisualization3D, StructureVisualization3D } from './ThreeDEngineStub'
 import type { LessonTimeline } from '@/lib/visuals/lessonSegments'
 import {
   createNarrationProgress,
@@ -83,6 +85,10 @@ export const VISUAL_STEP_COUNTS: Record<VisualType, number> = {
   quantum_circuit: 5,
   stern_gerlach: 5,
   entanglement_pair: 5,
+  three_particle_system: 5,
+  three_wave_simulation: 5,
+  three_field_visualization: 5,
+  three_structure_visualization: 5,
 }
 
 function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: number }) {
@@ -106,6 +112,10 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
     case 'quantum_circuit':   return <QuantumCircuit revealStep={revealStep} />
     case 'stern_gerlach':     return <SternGerlach revealStep={revealStep} />
     case 'entanglement_pair': return <EntanglementPair revealStep={revealStep} />
+    case 'three_particle_system':         return <ParticleSystem3D revealStep={revealStep} />
+    case 'three_wave_simulation':         return <WaveSimulation3D revealStep={revealStep} />
+    case 'three_field_visualization':     return <FieldVisualization3D revealStep={revealStep} />
+    case 'three_structure_visualization': return <StructureVisualization3D revealStep={revealStep} />
   }
 }
 

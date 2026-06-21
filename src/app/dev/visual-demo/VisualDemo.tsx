@@ -50,6 +50,18 @@ const ANIMATED_TEACHING_DEMOS: { label: string; type: VisualType }[] = [
 // Quantum Physics — Visual Expansion Sprint Phase 1. The five production
 // VisualCard quantum visuals, each animating step-by-step via the same Sprint
 // R.1 engine + Sprint S/T/U narration infrastructure (unchanged).
+// 3D Educational Engine Foundation Sprint 1. New engine-level VisualTypes
+// (not subject visuals) rendered through the same production VisualCard,
+// switch dispatch, VISUAL_STEP_COUNTS, and revealStep/narration contract as
+// every SVG visual above — proves the React Three Fiber wrapper (ThreeDVisual)
+// plugs into the existing playback engine with zero changes to it.
+const THREE_D_ENGINE_DEMOS: { label: string; type: VisualType }[] = [
+  { label: '3D Particle System (production demo)', type: 'three_particle_system' },
+  { label: '3D Wave Simulation (foundation placeholder)', type: 'three_wave_simulation' },
+  { label: '3D Field Visualization (foundation placeholder)', type: 'three_field_visualization' },
+  { label: '3D Structure Visualization (foundation placeholder)', type: 'three_structure_visualization' },
+]
+
 const QUANTUM_VISUAL_DEMOS: { label: string; type: VisualType }[] = [
   { label: 'Double-slit experiment', type: 'double_slit' },
   { label: 'Wave function ψ(x) & |ψ(x)|²', type: 'wave_function' },
@@ -383,6 +395,24 @@ export function VisualDemo() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
           {QUANTUM_VISUAL_DEMOS.map(({ label, type }) => (
+            <section key={type}>
+              <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
+              <VisualCard type={type} autoPlay speed={1} />
+            </section>
+          ))}
+        </div>
+
+        <h1 style={{ fontSize: 20, fontWeight: 800, margin: '32px 0 4px' }}>3D Educational Engine Foundation</h1>
+        <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
+          Foundation Sprint 1: a reusable React Three Fiber engine plugged into the existing
+          <code> VisualCard</code> ecosystem — same switch dispatch, <code>VISUAL_STEP_COUNTS</code>,
+          revealStep, narration sync, and Play / Pause / Replay / speed controls as every SVG visual
+          above. <code>ParticleSystem3D</code> is the first production demo (particles → movement →
+          interactions → highlighted particle → completed simulation); the other three engine types
+          are registered foundation placeholders for a future sprint.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16, marginTop: 16, marginBottom: 24 }}>
+          {THREE_D_ENGINE_DEMOS.map(({ label, type }) => (
             <section key={type}>
               <h2 style={{ fontSize: 13, fontWeight: 700, margin: '0 0 6px', opacity: 0.8 }}>{label}</h2>
               <VisualCard type={type} autoPlay speed={1} />
