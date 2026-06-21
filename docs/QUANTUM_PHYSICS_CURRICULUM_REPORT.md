@@ -8,12 +8,12 @@ Final report consolidating the Quantum Physics curriculum reconstruction, includ
 ## Summary / bottom line
 
 A complete, from-scratch Quantum Physics curriculum was **designed** (not implemented): **7 levels →
-32 units → 131 lessons**, taking a learner from high-school algebra to research foundations (quantum
+**Revision 2**: 33 units → 144 lessons**, taking a learner from high-school algebra to research foundations (quantum
 computing, quantum information, QFT foundations, particle physics, modern quantum technologies). It is
 wave-first for intuition then axiomatic for rigor, with a math-toolkit thread, spin/entanglement
 before quantum information, and decoherence/error-correction as first-class topics. Validation found
-**no prerequisite gaps and no circular dependencies**; the beginner→research path is continuous. Six
-specification documents were produced. **No code, database, subject registration, Tutor Max,
+**no prerequisite gaps and no circular dependencies**; the beginner→research path is continuous. Seven
+specification documents were produced (incl. the QA audit + this revision). **No code, database, subject registration, Tutor Max,
 Educational Intelligence, or Visual Learning change was made.**
 
 ---
@@ -23,7 +23,7 @@ Educational Intelligence, or Visual Learning change was made.**
 | Doc | Task | Contents |
 |---|---|---|
 | `QUANTUM_PHYSICS_CURRICULUM_RESEARCH.md` | 1 | MIT/Stanford/Caltech/Cambridge/Oxford/ETH + QC-curricula review; prerequisite chains; common mistakes; missing foundations |
-| `QUANTUM_PHYSICS_MASTER_CURRICULUM.md` | 2,3,4 | 7 levels (goals/competencies/prereqs/hours); 32 units; 131 lessons with objectives, prereqs, difficulty |
+| `QUANTUM_PHYSICS_MASTER_CURRICULUM.md` (Revision 2) | 2,3,4 | 7 levels (goals/competencies/prereqs/hours); 33 units; 144 lessons with objectives, prereqs, difficulty |
 | `QUANTUM_PHYSICS_MISCONCEPTIONS.md` | 5 | 20 misconceptions across 6 themes, each anchored to lessons + correction strategy |
 | `QUANTUM_PHYSICS_VISUALS.md` | 6 | 6 reusable existing visuals + 10 proposed new types + narration-sync map (design only) |
 | `QUANTUM_PHYSICS_ASSESSMENTS.md` | 7 | 5-tier progression (beginner→research) mapped to units; per-unit checkpoints; misconception integration |
@@ -36,16 +36,18 @@ Educational Intelligence, or Visual Learning change was made.**
 | Metric | Value |
 |---|---|
 | Levels | 7 |
-| Units | 32 |
-| Lessons | 131 |
-| Total estimated hours | ~400 |
+| Units | 33 |
+| Lessons | 144 |
+| Total estimated hours | ~444 |
 | Misconceptions cataloged | 20 |
 | Reusable existing visuals | 6 |
 | Proposed new visuals | 10 |
 | Assessment tiers | 5 |
 
-**Units per level:** L1=4, L2=4, L3=6, L4=5, L5=5, L6=5, L7=3 → 32.
-**Lessons per level:** L1=17, L2=17, L3=26, L4=19, L5=20, L6=20, L7=12 → 131.
+**Units per level:** L1=4, L2=4, L3=7, L4=5, L5=5, L6=5, L7=3 → 33.
+**Lessons per level:** L1=19, L2=19, L3=31, L4=18, L5=24, L6=20, L7=13 → 144.
+
+> Updated by the Revision Sprint (QA fixes R-Fix-1..4 + 4 optional improvements). See `QUANTUM_PHYSICS_REVISION_REPORT.md` for the full changelog.
 
 ---
 
@@ -55,12 +57,13 @@ Educational Intelligence, or Visual Learning change was made.**
 Every lesson's listed prerequisite refers to an **earlier** lesson id that exists in the Master
 Curriculum. Cross-level dependencies were checked explicitly, e.g.:
 - L6.1 (de Broglie) ← L4.4, L5.5 ✓
-- L9.1 (bra–ket) ← L8.1, L5.4 ✓
-- L16.4 (WKB) ← L8.3, L14.2 ✓
-- L19.1 (tensor products) ← L13.4, L15.1 ✓
-- L21.5 (QFT/Shor) ← L21.1, L5.5 ✓
-- L28.1 (second quantization) ← L12.2, L27.3 ✓
-- L32.3 (frontiers) ← L31.4, L22.4 ✓
+- L9.2 (bra–ket) ← L9.1 (bridge) ← L8.1, L5.4 ✓
+- L15.1 (tensor products) ← L13.4, L9.5 ✓ — now precedes L16.1 (identical particles), fixing the QA-flagged inversion
+- L17.4 (WKB) ← L8.3, L14.2 ✓
+- L20.1 (entanglement) ← L15.1, L16.2 ✓
+- L22.5 (QFT/Shor) ← L22.1, L5.5 ✓
+- L29.1 (second quantization) ← L12.2, L28.3 ✓
+- L33.3 (frontiers) ← L32.5, L23.4 ✓
 No lesson depends on a concept introduced later or absent. **Result: no gaps.**
 
 ### 3.2 No circular dependencies
@@ -69,7 +72,7 @@ strict topological order). Since every edge goes "earlier → later," the depend
 no cycle can exist. **Result: acyclic.**
 
 ### 3.3 Beginner → expert path complete
-A continuous chain exists from L1.1 (functions/units, algebra-only) to L32.4 (designing a research
+A continuous chain exists from L1.1 (functions/units, algebra-only) to L33.4 (designing a research
 question): algebra → calculus/complex numbers → linear algebra/Fourier → classical waves → quantum
 foundations → wave mechanics → formalism → advanced systems → quantum information → modern/field theory
 → research foundations. **Result: complete, no orphan lessons.**
@@ -119,4 +122,4 @@ This remains design only; nothing above was implemented.
 
 Curriculum **design only**. No code, no database, no subject registration, no Tutor Max change, no
 Educational Intelligence change, no Visual Learning change, no seed scripts, no knowledge graphs.
-Six specification documents delivered; validation passed on all five criteria.
+Seven specification documents delivered; validation passed on all five criteria (Revision 2).
