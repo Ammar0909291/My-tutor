@@ -422,6 +422,82 @@ const RULES: MisconceptionRule[] = [
       'एक ही पाठ से दो भिन्न प्रश्न (विषय-वस्तु एवं पात्र-चित्रण) देकर दोनों उत्तरों की तुलना कराएँ।',
     ],
   },
+  // ── Quantum Physics (Subject Library: quantum_physics) ───────────────────
+  // primaryPatterns are Revision-2 lesson slugs (l<unit>-<lesson>); detection is
+  // subjectSlug-scoped, so these never collide with other subjects. One rule per
+  // misconception theme; remediationSteps cover every sub-misconception in the
+  // QUANTUM_PHYSICS_MISCONCEPTIONS catalog for that theme.
+  {
+    type: 'quantum_wave_particle_duality',
+    label: 'Wave–particle duality misunderstood',
+    description: 'Student thinks a quantum object literally "switches" between being a classical wave and a classical particle, treats ψ as a physical wave in 3D space like water, or believes photons travel definite paths through one slit.',
+    primaryPatterns: ['l6-1', 'l6-2', 'l6-3', 'l7-1', 'l9-4'],
+    remediationSteps: [
+      'Reframe around the measurement context, not the object: it is one quantum entity whose statistics look wave-like or particle-like depending on what is measured.',
+      'Build up the single-particle double-slit pattern one detection at a time to show interference emerges statistically.',
+      'Stress that ψ is a complex probability amplitude and |ψ|² is a probability density — show that for two particles ψ lives in 6D configuration space, not real 3D space.',
+      'Contrast which-path information vs. interference (complementarity): measuring the path destroys the fringes.',
+    ],
+  },
+  {
+    type: 'quantum_uncertainty_principle',
+    label: 'Uncertainty principle misunderstood',
+    description: 'Student treats Δx·Δp ≥ ħ/2 as mere measurement disturbance (observer effect), thinks good-enough instruments could beat it, or reads energy–time uncertainty as energy non-conservation.',
+    primaryPatterns: ['l11-3', 'l6-4', 'l6-3', 'l5-5', 'l18-2'],
+    remediationSteps: [
+      'Derive the bound from non-commuting operators / Fourier width so it is clearly intrinsic, separate from any disturbance during measurement.',
+      'Use the wave-packet width tradeoff: narrowing Δx necessarily broadens Δp regardless of instrument quality.',
+      'State explicitly that the bound is fundamental, not technological — no future apparatus removes it.',
+      'Explain energy–time uncertainty as the linewidth–lifetime relation, not a license to violate energy conservation.',
+    ],
+  },
+  {
+    type: 'quantum_measurement_collapse',
+    label: 'Measurement & collapse misunderstood',
+    description: 'Student imagines collapse as a physical force/signal that propagates, believes a conscious observer is required, or thinks an observable only ever holds eigenvalues even before measurement.',
+    primaryPatterns: ['l10-3', 'l9-3', 'l11-4', 'l27-3', 'l20-2'],
+    remediationSteps: [
+      'Frame collapse as an update of the state description on measurement that carries no usable signal (ties to no-signaling).',
+      'Use decoherence: any sufficient interaction with an environment suffices — consciousness is not required.',
+      'Separate superposition from measurement outcome: eigenvalues are the possible results, not the pre-measurement value of the system.',
+      'Verify with a superposition example, asking what is true before vs. after a measurement.',
+    ],
+  },
+  {
+    type: 'quantum_entanglement',
+    label: 'Entanglement misunderstood',
+    description: 'Student thinks entanglement transmits information faster than light, that entangled particles secretly carry local hidden variables, or that measuring one causally yanks the other.',
+    primaryPatterns: ['l20-1', 'l20-2', 'l20-3', 'l24-2'],
+    remediationSteps: [
+      'Show each party\'s marginal statistics (reduced density matrix) are unchanged — correlations only appear when results are compared over a classical channel (no-signaling).',
+      'Walk through a Bell/CHSH bound and its experimental violation to rule out local hidden variables.',
+      'Emphasize correlation vs. causation: frame-dependent ordering means there is no objective "first" collapse that yanks the partner.',
+    ],
+  },
+  {
+    type: 'quantum_tunneling',
+    label: 'Quantum tunneling misunderstood',
+    description: 'Student says the particle "borrows energy" to climb the barrier, thinks tunneling is instantaneous/faster-than-light, or believes wider/taller barriers change only speed and not transmission probability.',
+    primaryPatterns: ['l8-3', 'l17-4'],
+    remediationSteps: [
+      'Show the wavefunction decaying exponentially inside the classically forbidden region — no energy is borrowed and there is no over-the-top trajectory.',
+      'Make the parameter dependence explicit: transmission falls off exponentially with barrier width and with √(barrier height).',
+      'Caution against naive speed claims — tunneling time is subtle and permits no signaling; focus on transmission probability.',
+    ],
+  },
+  {
+    type: 'quantum_computing',
+    label: 'Quantum computing misunderstood',
+    description: 'Student believes a quantum computer tries all answers at once and reads them out, that qubits are just probabilistic bits, that more qubits always means exponential speedup, that qubits are noise-free and copyable, or that error correction just re-measures the qubit.',
+    primaryPatterns: ['l21-1', 'l21-3', 'l21-4', 'l22-1', 'l22-4', 'l22-5', 'l23-1', 'l23-2', 'l23-3', 'l25-6'],
+    remediationSteps: [
+      'Explain that superposition explores amplitudes but measurement yields one outcome — algorithms must engineer interference (e.g. Grover amplitude amplification) so the right answer is amplified.',
+      'Contrast qubits with classical randomness: they carry complex amplitudes (phase) and can interfere and entangle — use the Bloch sphere and an interference example.',
+      'Clarify that speedups are problem-specific (factoring, search, simulation); many problems get no quantum advantage — contrast Shor/Grover scope with general tasks.',
+      'Motivate QEC: decoherence is the central obstacle and the no-cloning theorem forbids copying qubits to back them up.',
+      'Show that direct measurement destroys the state, so error correction uses ancilla entanglement and stabilizer syndrome measurements rather than re-checking the qubit directly.',
+    ],
+  },
 ]
 
 // ── Signal lookback ───────────────────────────────────────────────────────────

@@ -767,6 +767,31 @@ export async function POST(req: Request) {
       console.warn('[learn/chat] curriculum progression context skipped:', err)
     }
 
+    // Misconception alert for SUBJECT_LIBRARY subjects — the same Sprint-CS
+    // engine the school flow uses (line ~388), here scoped to the library
+    // subject's own lesson slugs (its MistakeRecord topicSlugs) instead of KG
+    // node ids. Purely additive context; reuses the existing taxonomy + engine
+    // with no schema or engine change, and never blocks a lesson.
+    if (!schoolCtx) {
+      try {
+        const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
+        const libSubject = findLibrarySubject(subjectCode)
+        if (libSubject) {
+          const lessonSlugs = libSubject.modules.flatMap((m) => m.nodes.map((n) => n.slug))
+          const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy } = await import('@/lib/school/adaptive/misconceptionEngine')
+          const misconceptions = await detectMisconceptions(userId, subjectCode, lessonSlugs, '')
+          const block = buildMisconceptionBlock(misconceptions)
+          if (block) {
+            systemPrompt += block
+            const topHighConfidence = misconceptions.find((m) => m.confidence === 'HIGH')
+            if (topHighConfidence) systemPrompt += buildRemediationStrategy(topHighConfidence)
+          }
+        }
+      } catch {
+        // non-fatal — misconception context is purely additive
+      }
+    }
+
     // Append Adaptive Tutor context — preferences + recent performance trend,
     // so the Tutor adjusts pacing/depth/examples per learner instead of
     // teaching everyone the same way. Additive — independent of other context blocks.
