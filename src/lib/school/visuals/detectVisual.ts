@@ -62,6 +62,19 @@ const MECHANICS_3D_RULES: MatchRule[] = [
   { keywords: ['force diagram', 'net force', 'friction', 'newton laws', "newton's laws"], visual: 'three_newton_forces' },
 ]
 
+// Chemistry 3D rules (Chemistry Production Learning Integration Sprint) —
+// same architecture as MECHANICS_3D_RULES: checked first under the
+// 'chemistry' subject slug so chemistry-topic lesson text matches a 3D
+// simulation; SCIENCE_RULES remains the 2D fallback for chemistry topics
+// this table doesn't cover, exactly mirroring the 'physics' branch.
+const CHEMISTRY_3D_RULES: MatchRule[] = [
+  { keywords: ['atomic structure', 'protons and neutrons', 'nucleus', 'subatomic particle', 'atomic number', 'mass number'], visual: 'three_atomic_structure' },
+  { keywords: ['electron shell', 'electron shells', 'shell configuration', 'k shell', 'l shell', 'm shell', 'electron configuration'], visual: 'three_electron_shells' },
+  { keywords: ['molecular shape', 'molecular geometry', 'bond angle', 'tetrahedral', 'trigonal planar', 'vsepr'], visual: 'three_molecular_shapes' },
+  { keywords: ['bond formation', 'ionic bond', 'covalent bond', 'metallic bond', 'chemical bonding', 'valence electron'], visual: 'three_bond_formation' },
+  { keywords: ['crystal lattice', 'unit cell', 'lattice structure', 'crystalline solid', 'crystal structure'], visual: 'three_crystal_lattice' },
+]
+
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
   { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
@@ -118,6 +131,14 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, MECHANICS_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
   }
 
+  // Chemistry (Subject Library, dedicated 'chemistry' slug — distinct from
+  // the generic 'science' slug). Chemistry Production Learning Integration
+  // Sprint: chemistry 3D rules checked first, then SCIENCE_RULES as the
+  // existing 2D fallback — same two-tier pattern as physics/quantum_physics.
+  if (opts.subjectSlug === 'chemistry') {
+    return matchRules(combined, CHEMISTRY_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
+  }
+
   return null
 }
 
@@ -140,6 +161,9 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     'three_stern_gerlach', 'three_hydrogen_orbital',
     'three_projectile_motion', 'three_newton_forces', 'three_momentum_collision',
     'three_circular_motion', 'three_pendulum_motion',
+    // Chemistry Production Learning Integration Sprint.
+    'three_atomic_structure', 'three_electron_shells', 'three_molecular_shapes',
+    'three_bond_formation', 'three_crystal_lattice',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
@@ -159,6 +183,8 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'three_stern_gerlach', 'three_hydrogen_orbital',
     'three_projectile_motion', 'three_newton_forces', 'three_momentum_collision',
     'three_circular_motion', 'three_pendulum_motion',
+    'three_atomic_structure', 'three_electron_shells', 'three_molecular_shapes',
+    'three_bond_formation', 'three_crystal_lattice',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
