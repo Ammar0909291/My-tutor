@@ -52,6 +52,40 @@ async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
   }
 }
 
+// ─── Sarvam AI TTS (Bulbul v3, Hindi) ────────────────────────────────────────
+// Returns base64-encoded WAV inside a JSON `audios` array — must be decoded,
+// unlike Groq/Yandex which return raw binary directly.
+async function sarvamTTS(text: string): Promise<Buffer | null> {
+  if (!process.env.SARVAM_API_KEY) return null
+  try {
+    const baseUrl = process.env.SARVAM_BASE_URL || 'https://api.sarvam.ai'
+    const response = await fetch(`${baseUrl}/text-to-speech`, {
+      method: 'POST',
+      headers: {
+        'api-subscription-key': process.env.SARVAM_API_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text: text.slice(0, 2500), // REST endpoint limit
+        target_language_code: 'hi-IN',
+        speaker: 'shubh',
+      }),
+      signal: AbortSignal.timeout(15000),
+    })
+    if (!response.ok) {
+      console.error('Sarvam TTS error:', response.status)
+      return null
+    }
+    const data = await response.json()
+    const audio = data?.audios?.[0]
+    if (typeof audio !== 'string' || !audio) return null
+    return Buffer.from(audio, 'base64')
+  } catch (e: any) {
+    console.error('Sarvam TTS exception:', e.message)
+    return null
+  }
+}
+
 // ─── Groq TTS ─────────────────────────────────────────────────────────────────
 async function groqTTS(text: string, selectedVoice: string): Promise<Buffer | null> {
   // playai-tts is primary; tts-1 is legacy fallback
@@ -84,8 +118,18 @@ export async function POST(req: Request) {
     const selectedGroqVoice = VOICE_MAP[voiceKey] || 'aoede'
 
     let buffer: Buffer | null = null
+    let contentType = 'audio/mpeg'
 
-    if (country === 'ru' && process.env.YANDEX_API_KEY) {
+    if (lang === 'hi' && process.env.SARVAM_API_KEY) {
+      console.log('→ TTS: Sarvam (Bulbul v3)')
+      buffer = await sarvamTTS(clean)
+      if (buffer) {
+        contentType = 'audio/wav'
+      } else {
+        console.log('Sarvam TTS failed, falling back to Groq')
+        buffer = await groqTTS(clean, selectedGroqVoice)
+      }
+    } else if (country === 'ru' && process.env.YANDEX_API_KEY) {
       console.log('→ TTS: Yandex SpeechKit')
       buffer = await yandexTTS(clean, voice)
       if (!buffer) {
@@ -103,7 +147,7 @@ export async function POST(req: Request) {
 
     return new NextResponse(buffer.buffer as ArrayBuffer, {
       headers: {
-        'Content-Type': 'audio/mpeg',
+        'Content-Type': contentType,
         'Content-Length': buffer.length.toString(),
         'Cache-Control': 'no-cache',
       },

@@ -505,6 +505,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const initializedRef = useRef(false)
   const autoOpenedPracticeRef = useRef(false)
   const speakingIdRef = useRef<string|null>(null)
+  const serverAudioRef = useRef<HTMLAudioElement|null>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -607,13 +608,46 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // TTS
   const handleStopSpeech = useCallback(() => {
     stopSpeaking(); speakingIdRef.current = null; setSpeakingId(null)
+    if (serverAudioRef.current) {
+      serverAudioRef.current.pause()
+      URL.revokeObjectURL(serverAudioRef.current.src)
+      serverAudioRef.current = null
+    }
   }, [])
+  // Server-side TTS (Sarvam for Hindi) — falls back to the browser
+  // speechSynthesis path on any fetch/playback failure, so worst case
+  // matches pre-existing behavior, never silence.
+  const speakViaServerTTS = useCallback((id: string, text: string, onDone: () => void) => {
+    fetch('/api/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, lang: teachingLanguage, voice: voiceType, country }),
+    })
+      .then((res) => { if (!res.ok) throw new Error('tts failed'); return res.blob() })
+      .then((blob) => {
+        if (speakingIdRef.current !== id) return // superseded while fetching
+        const url = URL.createObjectURL(blob)
+        const audio = new Audio(url)
+        serverAudioRef.current = audio
+        audio.onended = () => { URL.revokeObjectURL(url); onDone() }
+        audio.onerror = () => { URL.revokeObjectURL(url); onDone() }
+        audio.play().catch(() => { URL.revokeObjectURL(url); onDone() })
+      })
+      .catch(() => {
+        speakText(text, teachingLanguage, voiceType, onDone, country, speed)
+      })
+  }, [teachingLanguage, voiceType, country, speed])
   const handleSpeak = useCallback((id: string, text: string) => {
     speakingIdRef.current = id; setSpeakingId(id)
-    speakText(text, teachingLanguage, voiceType, () => {
+    const onDone = () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    }, country, speed)
-  }, [teachingLanguage, voiceType, country, speed])
+    }
+    if (teachingLanguage === 'hi') {
+      speakViaServerTTS(id, text, onDone)
+    } else {
+      speakText(text, teachingLanguage, voiceType, onDone, country, speed)
+    }
+  }, [teachingLanguage, voiceType, country, speed, speakViaServerTTS])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     setVoiceType(v)
     fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ voiceId: v }) }).catch(() => {})
