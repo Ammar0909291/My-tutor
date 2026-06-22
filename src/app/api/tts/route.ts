@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
+import { prisma } from '@/lib/db/prisma'
 
 // ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
 async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
@@ -96,11 +97,19 @@ export async function POST(req: Request) {
   if (!allowed) return rateLimitResponse()
 
   try {
-    const { text, lang = 'en', voice = 'female', country = 'global' } = await req.json()
+    // `country` from the client is intentionally unused for ru-routing below —
+    // it's localStorage-backed, per-browser/device, and can silently diverge
+    // from the user's actual profile (same bypass class as the chat-route bug).
+    // Only the server-side profile lookup is authoritative for that decision.
+    const { text, lang = 'en', voice = 'female' } = await req.json()
     if (!text) return NextResponse.json({ error: 'No text' }, { status: 400 })
 
     const clean = cleanTextForTTS(text)
     if (!clean.trim()) return NextResponse.json({ error: 'Empty' }, { status: 400 })
+
+    const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+    const profileCountry = (profile as any)?.country ?? 'global'
+    const country = profile?.teachingLanguage === 'ru' ? 'ru' : profileCountry
 
     let buffer: Buffer | null = null
     let contentType = 'audio/mpeg'
