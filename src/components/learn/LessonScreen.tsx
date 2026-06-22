@@ -1497,17 +1497,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           </span>
           <div style={{ position: 'relative' }}>
             <button onClick={() => setLangMenuOpen((o) => !o)}
-              className="hidden sm:inline-flex"
               title={t('settings_lang')}
               aria-label={t('settings_lang')}
               style={{
-                alignItems: 'center', justifyContent: 'center', height: 28, padding: '0 8px', borderRadius: 6,
-                fontSize: 14, cursor: 'pointer',
+                display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', borderRadius: 6,
+                fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
                 background: langMenuOpen ? 'rgba(247,129,102,0.15)' : 'transparent',
-                border: `1px solid ${langMenuOpen ? 'rgba(247,129,102,0.4)' : 'transparent'}`,
+                color: langMenuOpen ? 'var(--coral)' : 'var(--text-dim)',
+                border: `1px solid ${langMenuOpen ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
-              {LANG_FLAG[teachingLanguage]}
+              <span style={{ fontSize: 14 }}>{LANG_FLAG[teachingLanguage]}</span>
+              <span>{teachingLanguage.toUpperCase()}</span>
             </button>
             {langMenuOpen && (
               <>
