@@ -1231,7 +1231,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     recognition.lang = LANG_LOCALE[teachingLanguage]
     recognition.interimResults = false
     recognition.maxAlternatives = 1
+    // Defensive fallback: some browsers don't reliably fire onend after
+    // stop() when no final result was captured (a known SpeechRecognition
+    // quirk). If neither onresult nor onend has cleared the ref within a
+    // generous window for a short utterance, force the UI back to idle so
+    // the mic button never gets stuck regardless of browser cooperation.
+    const stuckTimeout = setTimeout(() => {
+      if (speechRecognitionRef.current === recognition) {
+        speechRecognitionRef.current = null
+        setMicState((s) => (s === 'recording' ? 'idle' : s))
+      }
+    }, 9000)
     recognition.onresult = (e: any) => {
+      clearTimeout(stuckTimeout)
       const text = e.results?.[0]?.[0]?.transcript?.trim()
       speechRecognitionRef.current = null
       if (text) {
@@ -1242,8 +1254,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         startRecording()
       }
     }
-    recognition.onerror = () => { speechRecognitionRef.current = null; startRecording() }
+    recognition.onerror = () => { clearTimeout(stuckTimeout); speechRecognitionRef.current = null; startRecording() }
     recognition.onend = () => {
+      clearTimeout(stuckTimeout)
       if (speechRecognitionRef.current === recognition) {
         speechRecognitionRef.current = null
         setMicState((s) => (s === 'recording' ? 'idle' : s))
@@ -1265,8 +1278,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => () => { mediaRecorderRef.current?.stop(); speechRecognitionRef.current?.stop() }, [])
 
   // Stop any in-flight TTS playback on unmount/route change so voice never
-  // keeps speaking after the learner leaves the lesson.
-  useEffect(() => () => { stopSpeaking() }, [])
+  // keeps speaking after the learner leaves the lesson. handleStopSpeech
+  // (not stopSpeaking() alone) so the server-TTS <audio> element (Hindi/
+  // Russian) gets paused/cleaned up too, not just speechSynthesis.
+  useEffect(() => () => { handleStopSpeech() }, [handleStopSpeech])
 
   // File attachment
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
