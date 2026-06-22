@@ -11,6 +11,7 @@ import { captureError } from '@/lib/monitoring'
 import { MessageRole } from '@prisma/client'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
+import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -1117,6 +1118,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         detectedVisualSpec = planVisualTeaching(cleanText).spec
       } catch { /* non-fatal */ }
 
+      // Deterministic, rule-based 3D scene detection (vectors/molecules/coordinate
+      // space) — same non-fatal, no-AI-call pattern as detectedVisualSpec above.
+      // Only fires when the 2D pipeline found nothing, so a message never carries
+      // both a 2D diagram and a 3D scene.
+      let detectedSceneSpec: ReturnType<typeof buildSceneSpec> = null
+      if (!detectedVisualSpec) {
+        try {
+          detectedSceneSpec = buildSceneSpec(cleanText)
+        } catch { /* non-fatal */ }
+      }
+
       await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
@@ -1205,6 +1217,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       return NextResponse.json({
         success: true, text: cleanText, provider,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
+        sceneSpec: detectedSceneSpec ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
       })

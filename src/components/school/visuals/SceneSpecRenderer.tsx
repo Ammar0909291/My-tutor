@@ -5,17 +5,40 @@
  * and draws it through the EXISTING primitives, gated by revealStep exactly like every Foundation
  * component. One interpreter for any spec, instead of one bespoke component per concept.
  *
- * Spike scope: supports labels, vectors/arrows, points/nodes/particles, and trajectories/paths.
- * Other object types (bond, bar, surface) are intentionally not handled yet and are skipped.
+ * Supports labels, vectors/arrows, points/nodes/particles, trajectories/paths, and bonds.
+ * bar / surface object types are not handled yet and are skipped.
  *
- * NOT wired to production: no VisualType, no VisualCard case, no detectVisual rule, no Tutor
- * integration. Renders standalone (used only in the dev demo this sprint).
+ * Wired into the live tutor via buildSceneSpec.ts (route.ts) and LessonScreen.tsx, in
+ * addition to the standalone dev demo.
  */
+import { useMemo } from 'react'
+import { Quaternion, Vector3 } from 'three'
 import { Html } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
 import { visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
+
+/** Plain (headless) connecting cylinder between two atoms — a chemical bond has no direction/arrowhead. */
+function BondLine({ from, to, color = '#9aa4b2', thickness = 0.04 }: { from: [number, number, number]; to: [number, number, number]; color?: string; thickness?: number }) {
+  const { position, length, quaternion } = useMemo(() => {
+    const startV = new Vector3(...from)
+    const endV = new Vector3(...to)
+    const displacement = endV.clone().sub(startV)
+    const len = displacement.length()
+    const direction = displacement.clone().normalize()
+    const quat = new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), direction)
+    const mid = startV.clone().add(direction.multiplyScalar(len / 2))
+    return { position: mid.toArray() as [number, number, number], length: len, quaternion: quat }
+  }, [from, to])
+
+  return (
+    <mesh position={position} quaternion={quaternion}>
+      <cylinderGeometry args={[thickness, thickness, Math.max(length, 0.001), 12]} />
+      <meshStandardMaterial color={color} />
+    </mesh>
+  )
+}
 
 function renderObject(obj: SceneObject, key: number) {
   switch (obj.type) {
@@ -61,8 +84,18 @@ function renderObject(obj: SceneObject, key: number) {
           ))}
         </group>
       )
+    case 'bond':
+      return (
+        <BondLine
+          key={key}
+          from={obj.from ?? [0, 0, 0]}
+          to={obj.to ?? [1, 0, 0]}
+          color={obj.color ?? '#9aa4b2'}
+          thickness={obj.thickness ?? 0.04}
+        />
+      )
     default:
-      // bond / bar / surface not handled in the spike subset — skipped harmlessly.
+      // bar / surface not handled yet — skipped harmlessly.
       return null
   }
 }

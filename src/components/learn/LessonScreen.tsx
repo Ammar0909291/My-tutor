@@ -19,11 +19,17 @@ import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // Visual Learning Sprint B: data-driven visuals (graph / number_line). Additive
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
+import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
+// react-three-fiber needs a real DOM/WebGL context — load client-only, same as Monaco.
+const SceneSpecRenderer = dynamic(
+  () => import('@/components/school/visuals/SceneSpecRenderer').then((m) => m.SceneSpecRenderer),
+  { ssr: false },
+)
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const VOICE_LABELS_BY_LANG: Record<TeachingLang, Record<VoiceType, string>> = {
@@ -339,7 +345,7 @@ function TypingDots() {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -778,7 +784,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
@@ -798,6 +804,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Sprint C: server already validated this with zod; re-validate
       // client-side too (defense in depth — never trust a network payload).
       const responseVisualSpec = parseVisualSpec(data.visualSpec) ?? undefined
+      // Defense in depth, same as responseVisualSpec above — no zod schema exists
+      // for SceneSpec yet (it's plain TS types), so do a minimal shape check
+      // rather than trusting the network payload outright.
+      const rawScene = data.sceneSpec as SceneSpec | undefined
+      const responseSceneSpec = rawScene && typeof rawScene === 'object'
+        && typeof rawScene.id === 'string' && Array.isArray(rawScene.steps)
+        ? rawScene : undefined
       // Lesson-sync bug fix: completion must be detected ONLY from the exact
       // [LESSON_COMPLETE] control tag the system prompt instructs the AI to
       // emit. The previous keyword list also matched ordinary teaching prose
@@ -899,7 +912,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2448,6 +2461,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {!isUser && !msg.streaming && msg.visualSpec && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
                         <VisualRenderer spec={msg.visualSpec} />
+                      </div>
+                    )}
+
+                    {/* 3D scene (vectors / molecules / coordinate space) — only when
+                        the deterministic detector found no 2D VisualSpec for this
+                        message, so a reply never carries both. */}
+                    {!isUser && !msg.streaming && msg.sceneSpec && (
+                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                        <SceneSpecRenderer spec={msg.sceneSpec} />
                       </div>
                     )}
 
