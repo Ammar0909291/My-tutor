@@ -159,16 +159,22 @@ export default async function ProgressPage() {
           ) : (
             <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
               {recentSessions.map((s, i) => (
-                <li key={s.id} style={{ padding: '14px 24px', borderBottom: i < recentSessions.length - 1 ? '1px solid var(--candy-shadow)' : 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ fontSize: 20 }}>{SLUG_ICON[s.subject.slug] ?? '📘'}</span>
-                  <div style={{ flex: 1 }}>
-                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--candy-ink)' }}>{s.subject.name}</p>
-                    <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)', marginTop: 2, fontWeight: 600 }}>
-                      {new Date(s.startedAt).toLocaleDateString(dateLocale, { day: 'numeric', month: 'long' })}
-                      {' · '}
-                      {s._count.messages} {T('progressx_messages')}
-                    </p>
-                  </div>
+                <li key={s.id} style={{ borderBottom: i < recentSessions.length - 1 ? '1px solid var(--candy-shadow)' : 'none' }}>
+                  <Link
+                    href={`/progress/${s.id}`}
+                    style={{ padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', cursor: 'pointer' }}
+                  >
+                    <span style={{ fontSize: 20 }}>{SLUG_ICON[s.subject.slug] ?? '📘'}</span>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--candy-ink)' }}>{s.subject.name}</p>
+                      <p style={{ fontSize: 12, color: 'var(--candy-ink-soft)', marginTop: 2, fontWeight: 600 }}>
+                        {new Date(s.startedAt).toLocaleDateString(dateLocale, { day: 'numeric', month: 'long' })}
+                        {' · '}
+                        {s._count.messages} {T('progressx_messages')}
+                      </p>
+                    </div>
+                    <span style={{ color: 'var(--candy-ink-soft)', fontSize: 16 }}>→</span>
+                  </Link>
                 </li>
               ))}
             </ul>

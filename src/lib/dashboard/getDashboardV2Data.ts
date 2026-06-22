@@ -180,9 +180,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
         },
       },
     }),
-    // Sprint Stabilization: only genuinely completed sessions count toward
-    // today's lesson goal/quest — opening and closing a lesson must not count.
-    prisma.learnSession.count({ where: { userId, status: 'COMPLETED', endedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
+    // Sprint Stabilization: count actual lesson completions (TopicProgress),
+    // not session-end events — a single chat session can complete multiple
+    // lessons, and a session can only "end" (and thus count) once.
+    prisma.topicProgress.count({ where: { userId, status: { in: ['COMPLETED', 'MASTERED'] }, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
     getStudyStreak(userId),
     prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }),
     prisma.weeklyXP.findMany({
