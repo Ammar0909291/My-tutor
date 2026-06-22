@@ -338,7 +338,7 @@ function TypingDots() {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; visualSpec?: VisualSpec }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -765,7 +765,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'YANDEX'|'GROQ'|'FALLBACK'; visual?: string; visualSpec?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
@@ -2286,11 +2286,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                               <span title={`Answered by ${msg.provider}`} style={{
                                 fontSize: 9, fontWeight: 700, letterSpacing: 0.3, fontFamily: 'var(--font-mono)',
                                 padding: '2px 6px', borderRadius: 6, textTransform: 'uppercase',
-                                color: msg.provider === 'YANDEX' ? 'var(--coral)' : msg.provider === 'FALLBACK' ? 'var(--yellow)' : 'var(--green)',
-                                background: msg.provider === 'YANDEX' ? 'rgba(247,129,102,0.12)' : msg.provider === 'FALLBACK' ? 'rgba(210,153,34,0.12)' : 'rgba(126,231,135,0.12)',
-                                border: `1px solid ${msg.provider === 'YANDEX' ? 'rgba(247,129,102,0.35)' : msg.provider === 'FALLBACK' ? 'rgba(210,153,34,0.35)' : 'rgba(126,231,135,0.35)'}`,
+                                color: msg.provider === 'yandex' ? 'var(--coral)' : msg.provider === 'fallback' ? 'var(--yellow)' : 'var(--green)',
+                                background: msg.provider === 'yandex' ? 'rgba(247,129,102,0.12)' : msg.provider === 'fallback' ? 'rgba(210,153,34,0.12)' : 'rgba(126,231,135,0.12)',
+                                border: `1px solid ${msg.provider === 'yandex' ? 'rgba(247,129,102,0.35)' : msg.provider === 'fallback' ? 'rgba(210,153,34,0.35)' : 'rgba(126,231,135,0.35)'}`,
                               }}>
-                                {msg.provider === 'YANDEX' ? 'YandexGPT' : msg.provider === 'FALLBACK' ? 'Fallback' : 'Groq'}
+                                {msg.provider === 'yandex' ? 'YandexGPT' : msg.provider === 'fallback' ? 'Fallback' : 'Groq'}
                               </span>
                             )}
                             <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
