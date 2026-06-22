@@ -6,7 +6,10 @@ import { prisma } from '@/lib/db/prisma'
 
 // ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
 async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
-  if (!process.env.YANDEX_API_KEY || !process.env.YANDEX_FOLDER_ID) return null
+  if (!process.env.YANDEX_API_KEY || !process.env.YANDEX_FOLDER_ID) {
+    console.error('Yandex TTS skipped: YANDEX_API_KEY or YANDEX_FOLDER_ID missing in env')
+    return null
+  }
 
   const yandexVoice = voice === 'female' ? 'alena' : voice === 'warm' ? 'jane' : 'filipp'
 
@@ -27,12 +30,13 @@ async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
       },
     )
     if (!response.ok) {
-      console.error('Yandex TTS error:', response.status)
+      const errBody = await response.text().catch(() => '<unreadable body>')
+      console.error('Yandex TTS error:', response.status, '| body:', errBody)
       return null
     }
     return Buffer.from(await response.arrayBuffer())
   } catch (e: any) {
-    console.error('Yandex TTS exception:', e.message)
+    console.error('Yandex TTS exception:', e.message, '| cause:', e.cause, '| code:', e.cause?.code)
     return null
   }
 }
@@ -121,6 +125,8 @@ export async function POST(req: Request) {
     } else if (country === 'ru' && process.env.YANDEX_API_KEY) {
       console.log('→ TTS: Yandex SpeechKit')
       buffer = await yandexTTS(clean, voice)
+    } else {
+      console.log('→ TTS: no provider branch matched (lang =', lang, ', country =', country, ', YANDEX_API_KEY set =', !!process.env.YANDEX_API_KEY, ')')
     }
     // No other server TTS provider — non-Hindi/non-Russia (and any failure
     // above) returns 503 below so the client uses browser speechSynthesis.
