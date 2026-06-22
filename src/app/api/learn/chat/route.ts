@@ -242,7 +242,11 @@ export async function POST(req: Request) {
     }
 
     const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
-    const country = (profile as any)?.country ?? 'global'
+    const profileCountry = (profile as any)?.country ?? 'global'
+    // Route to YandexGPT whenever EITHER signal says Russian — country alone
+    // can silently disagree with teachingLanguage (e.g. legacy profiles from
+    // before the country field existed), which used to skip Yandex entirely.
+    const country = teachingLang === 'ru' ? 'ru' : profileCountry
     let systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.selfDescription ?? 'level unknown',
