@@ -1,13 +1,14 @@
-// Stress-test the REAL conversational checkpoint classifier against realistic
-// ambiguous student replies. Uses the real Groq API via the same code path the
-// app uses (evaluateCheckpointTurn -> generateJSON -> Groq llama-3.1-8b-instant).
-//
-// Run from project root with a real GROQ_API_KEY in .env:
-//   npx tsx scripts/checkpoint-stress-test.ts
-//
-// No mocking — the whole point is observing real model behavior. Each row is
-// run against a fixed checkpoint question so results are comparable.
-import { evaluateCheckpointTurn } from '../src/lib/school/checkpoints/evaluateCheckpoint'
+// Load .env before anything reads process.env. Next.js auto-loads .env for the
+// app, but a script run directly via tsx does not — so use Node's built-in
+// loader (Node 20.12+/22, no dotenv dependency needed). Wrapped because it
+// throws if .env is absent.
+try { process.loadEnvFile() } catch { /* .env optional — rely on ambient env */ }
+
+// NOTE: the import of evaluateCheckpoint pulls in src/lib/ai/client.ts, which
+// constructs the Groq client (reading process.env.GROQ_API_KEY) at module-load
+// time. ESM evaluates static imports BEFORE any top-level statement, so that
+// client would be built with an empty key before loadEnvFile() above runs.
+// The fix is a DYNAMIC import inside main(), after env is loaded — see below.
 import type { CheckpointNode } from '../src/lib/school/checkpoints/checkpointTypes'
 
 // A real lesson checkpoint: tutor just taught counting numbers, then asked.
@@ -44,6 +45,9 @@ async function main() {
     console.error('GROQ_API_KEY not set — aborting (no mock fallback by design).')
     process.exit(1)
   }
+  // Dynamic import AFTER loadEnvFile() so the Groq client is constructed with
+  // the loaded key (see top-of-file note).
+  const { evaluateCheckpointTurn } = await import('../src/lib/school/checkpoints/evaluateCheckpoint')
   console.log('Checkpoint:', TUTOR_MESSAGE, '\n')
   console.log('label\t| reply\t| checkpointAsked\t| passed\t| nodeId\t| expected')
   console.log('-'.repeat(120))
