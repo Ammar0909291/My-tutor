@@ -6,7 +6,7 @@ import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Sen
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, type VoiceType, type TeachingLang } from '@/lib/tts'
 import { useDraftMessage, clearDraft } from '@/lib/hooks/useDraftMessage'
 import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
@@ -614,9 +614,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       serverAudioRef.current = null
     }
   }, [])
-  // Server-side TTS (Sarvam for Hindi) — falls back to the browser
-  // speechSynthesis path on any fetch/playback failure, so worst case
-  // matches pre-existing behavior, never silence.
+  // Server-side TTS (Sarvam for Hindi, Yandex for Russian) — falls back to
+  // the browser speechSynthesis path on any fetch/playback failure, so
+  // worst case matches pre-existing behavior, never silence.
   const speakViaServerTTS = useCallback((id: string, text: string, onDone: () => void) => {
     fetch('/api/tts', {
       method: 'POST',
@@ -642,7 +642,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const onDone = () => {
       if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
     }
-    if (teachingLanguage === 'hi') {
+    if (SERVER_TTS_LANGS.includes(teachingLanguage)) {
       speakViaServerTTS(id, text, onDone)
     } else {
       speakText(text, teachingLanguage, voiceType, onDone, country, speed)

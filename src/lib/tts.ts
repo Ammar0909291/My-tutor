@@ -12,6 +12,15 @@ export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> 
 // Shared by the settings API and the Tutor Max voice-speed picker — single source of truth.
 export const VOICE_SPEED_OPTIONS = [0.5, 0.75, 1.0, 1.25, 1.5] as const
 
+// Languages with a real server-side TTS provider wired up in /api/tts
+// (hi -> Sarvam, ru -> Yandex). 'en' has none and is expected to fall back
+// to the browser's speechSynthesis by design. This only drives the
+// client's dispatch decision (server-TTS vs. browser-TTS) — the server
+// route's actual provider selection isn't structurally identical (Sarvam
+// keys off `lang`, Yandex keys off the server-derived `country`), so this
+// list must be kept in sync by hand if a provider is added/removed.
+export const SERVER_TTS_LANGS: TeachingLang[] = ['hi', 'ru']
+
 const LANG_LOCALE: Record<TeachingLang, string> = {
   ru: 'ru-RU',
   en: 'en-US',
