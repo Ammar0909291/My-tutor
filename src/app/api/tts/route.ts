@@ -52,7 +52,11 @@ async function sarvamTTS(text: string): Promise<Buffer | null> {
       body: JSON.stringify({
         text: text.slice(0, 2500), // REST endpoint limit
         target_language_code: 'hi-IN',
-        speaker: 'shubh',
+        // This key is provisioned for bulbul:v2 (Sarvam's API confirmed its
+        // valid speakers: anushka/abhilash/manisha/vidya/arya/karun/hitesh).
+        // 'shubh' is a v3-only speaker and is rejected here, so use a valid
+        // v2 speaker. (model omitted → Sarvam defaults to bulbul:v2.)
+        speaker: 'arya',
       }),
       signal: AbortSignal.timeout(15000),
     })
