@@ -21,10 +21,26 @@ export const VOICE_SPEED_OPTIONS = [0.5, 0.75, 1.0, 1.25, 1.5] as const
 // list must be kept in sync by hand if a provider is added/removed.
 export const SERVER_TTS_LANGS: TeachingLang[] = ['hi', 'ru']
 
-const LANG_LOCALE: Record<TeachingLang, string> = {
+export const LANG_LOCALE: Record<TeachingLang, string> = {
   ru: 'ru-RU',
   en: 'en-US',
   hi: 'hi-IN',
+}
+
+// Languages allowed to use the browser's native SpeechRecognition API for
+// mic input, instead of the MediaRecorder -> /api/stt -> Whisper pipeline.
+// Deliberately narrow (English only) — SpeechRecognition is free and fast
+// but unsupported on Firefox and historically flaky on Safari for
+// non-English locales, and a bad transcription silently corrupts what gets
+// sent to the tutor (worse than TTS picking the wrong voice). Only grow
+// this list after manually verifying 'hi'/'ru' recognition quality on real
+// Chrome/Edge devices.
+export const SPEECH_RECOGNITION_LANGS: TeachingLang[] = ['en']
+
+export function canUseSpeechRecognition(lang: TeachingLang): boolean {
+  if (typeof window === 'undefined') return false
+  const hasApi = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window
+  return hasApi && SPEECH_RECOGNITION_LANGS.includes(lang)
 }
 
 // Prime voices list on load — only in browser, never during SSR

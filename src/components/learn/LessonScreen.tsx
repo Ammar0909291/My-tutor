@@ -6,7 +6,7 @@ import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Sen
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
 import { useDraftMessage, clearDraft } from '@/lib/hooks/useDraftMessage'
 import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
@@ -508,6 +508,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const serverAudioRef = useRef<HTMLAudioElement|null>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
+  const speechRecognitionRef = useRef<any>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const sessionIdRef = useRef<string|null>(null)
 
@@ -1193,11 +1194,50 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       }
     }
   }
+  // Browser-native speech recognition (Chrome/Edge only, English only for
+  // now — see SPEECH_RECOGNITION_LANGS in lib/tts.ts). Falls through to the
+  // existing Whisper pipeline (startRecording) on any error or
+  // empty/very-short result, silently — no new error state for the user.
+  function startSpeechRecognition() {
+    const SR: any = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    if (!SR) { startRecording(); return }
+    const recognition = new SR()
+    speechRecognitionRef.current = recognition
+    recognition.lang = LANG_LOCALE[teachingLanguage]
+    recognition.interimResults = false
+    recognition.maxAlternatives = 1
+    recognition.onresult = (e: any) => {
+      const text = e.results?.[0]?.[0]?.transcript?.trim()
+      speechRecognitionRef.current = null
+      if (text) {
+        setInput((prev) => prev ? prev + ' ' + text : text)
+        setMicState('idle')
+        textareaRef.current?.focus()
+      } else {
+        startRecording()
+      }
+    }
+    recognition.onerror = () => { speechRecognitionRef.current = null; startRecording() }
+    recognition.onend = () => {
+      if (speechRecognitionRef.current === recognition) {
+        speechRecognitionRef.current = null
+        setMicState((s) => (s === 'recording' ? 'idle' : s))
+      }
+    }
+    recognition.start()
+    setMicState('recording')
+  }
   function handleMicClick() {
     if (micState === 'processing') return
-    if (micState === 'recording') stopRecording(); else startRecording()
+    if (micState === 'recording') {
+      if (speechRecognitionRef.current) speechRecognitionRef.current.stop()
+      else stopRecording()
+      return
+    }
+    if (canUseSpeechRecognition(teachingLanguage)) startSpeechRecognition()
+    else startRecording()
   }
-  useEffect(() => () => { mediaRecorderRef.current?.stop() }, [])
+  useEffect(() => () => { mediaRecorderRef.current?.stop(); speechRecognitionRef.current?.stop() }, [])
 
   // Stop any in-flight TTS playback on unmount/route change so voice never
   // keeps speaking after the learner leaves the lesson.
