@@ -57,7 +57,11 @@ async function sarvamTTS(text: string): Promise<Buffer | null> {
       signal: AbortSignal.timeout(15000),
     })
     if (!response.ok) {
-      console.error('Sarvam TTS error:', response.status)
+      // Read the full error body — Sarvam returns a JSON/text payload that
+      // names the actual problem (invalid language code, bad speaker, text
+      // encoding, etc), which a bare status code hides.
+      const errBody = await response.text().catch(() => '<unreadable body>')
+      console.error('Sarvam TTS error:', response.status, '| body:', errBody)
       return null
     }
     const data = await response.json()
