@@ -98,6 +98,30 @@ const ACK_CORRECTION_CUES: RegExp[] = [
   /\bnot quite\b/, /\bnot exactly\b/, /\bthat(?:'s| is) (?:incorrect|wrong)\b/, /\byou flipped\b/,
 ]
 
+/**
+ * Discourse markers that contain sequence/contrast TRIGGER words ("first… then", "then") but are
+ * purely conversational, not a real process. Neutralized BEFORE scoring so they cannot fire the
+ * process signals. (Fixes the "First of all… Then again…" adversarial case.)
+ */
+const DISCOURSE_MARKERS: RegExp[] = [/\bfirst of all\b/g, /\bthen again\b/g]
+
+/**
+ * Second-person-pronoun density gate. A turn saturated with "you/your/yourself" is almost always
+ * personal encouragement/meta-talk ("you're picking this up faster than…"), not a teachable
+ * explanation — even when it happens to contain comparative words. Suppresses to 'none'.
+ * (Fixes the "faster than / lower than" encouragement adversarial case.)
+ *
+ * KNOWN v1 LIMITATION — three messy/adversarial cases are deliberately NOT handled by pure regex
+ * and are left for the confidence-based LLM tie-breaker (the `confidence` seam) in a future pass:
+ *   1. "Roe versus Wade" — a proper noun that contains a comparison trigger word.
+ *   2. "as you get comfortable, your confidence increases…" — the as-X-increases-Y pattern firing
+ *      on a non-quantitative subject (feelings), which a regex can't distinguish from a real plot.
+ *   3. "Remember the diagram I showed you before…" — references an already-shown visual; a stateless
+ *      text layer fundamentally cannot know a visual already exists. Must be handled with session
+ *      state at Part 2 wiring time, not here.
+ */
+const SECOND_PERSON_DENSITY_THRESHOLD = 4
+
 function countMatches(lower: string, signals: Signal[]): { score: number; hits: string[] } {
   let score = 0
   const hits: string[] = []
@@ -149,10 +173,18 @@ export function decideVisualization(explanationText: string): VisualizationDecis
   if (ackHit && wordCount < 30) {
     return { shouldVisualize: false, category: 'none', confidence: 0.75, reasoning: `acknowledgement/correction turn (cue ${ackHit.source}, ${wordCount} words)` }
   }
+  const secondPersonCount = (lower.match(/\b(?:you|your|yourself)\b/g) ?? []).length
+  if (secondPersonCount >= SECOND_PERSON_DENSITY_THRESHOLD) {
+    return { shouldVisualize: false, category: 'none', confidence: 0.7, reasoning: `second-person encouragement (you/your ×${secondPersonCount} >= ${SECOND_PERSON_DENSITY_THRESHOLD})` }
+  }
+
+  // Neutralize conversational discourse markers before scoring so they can't fire process cues.
+  let scoringText = lower
+  for (const m of DISCOURSE_MARKERS) scoringText = scoringText.replace(m, ' ')
 
   // ── Score every category ──
   const scored = CATEGORY_PRIORITY.map((cat) => {
-    const { score, hits } = countMatches(lower, CATEGORY_SIGNALS[cat])
+    const { score, hits } = countMatches(scoringText, CATEGORY_SIGNALS[cat])
     return { cat, score, hits }
   })
 
