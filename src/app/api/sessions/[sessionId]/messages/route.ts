@@ -45,6 +45,7 @@ export async function POST(
 
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
+      profile?.displayName ?? session.user.name ?? 'Student',
       profile?.selfDescription ?? 'неизвестный уровень',
       profile?.learningGoals ?? 'общее обучение',
       memoryContext,

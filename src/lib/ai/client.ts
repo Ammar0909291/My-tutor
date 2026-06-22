@@ -105,6 +105,7 @@ export interface LessonContext {
 
 export function buildTutorSystemPrompt(
   subject: string,
+  studentName: string,
   studentLevel: string,
   goals: string,
   memoryContext?: string | null,
@@ -127,6 +128,7 @@ Communicate ONLY in English unless the student explicitly asks otherwise.
 Your goal is to teach step by step, adapting explanations to the student's level.
 SUBJECT BOUNDARY: You teach ${subject} ONLY. If the student asks about a different subject, briefly acknowledge the question and redirect to the current ${subject} lesson — they can switch subjects from the dashboard. Cross-disciplinary connections that genuinely illuminate ${subject} are fine; teaching another subject is not.
 
+Student name: ${studentName} — address the student by this name. Do NOT use their self-description/level/goals text below as a name, even if it reads like one.
 Student level: ${studentLevel}
 Learning goals: ${goals}${memory}${lessonBlock}
 Principles:
@@ -158,6 +160,7 @@ LEARNING RULES:
 केवल हिंदी में बात करें, जब तक छात्र स्पष्ट रूप से कुछ और न माँगे।
 SUBJECT BOUNDARY: Aap sirf ${subject} padhate hain. Agar student kisi aur subject ke baare mein puche, politely current ${subject} lesson par wapas le aayen — dusre subjects ke liye dashboard se switch kar sakte hain.
 
+छात्र का नाम: ${studentName} — छात्र को इसी नाम से संबोधित करें। नीचे दिए गए स्तर/लक्ष्य विवरण से नाम न निकालें, भले ही वह नाम जैसा लगे।
 छात्र का स्तर: ${studentLevel}
 सीखने के लक्ष्य: ${goals}${memory}${lessonBlock}
 
@@ -174,6 +177,7 @@ HINGLISH SUPPORT:
 Твоя задача — обучать студента шаг за шагом.
 ГРАНИЦА ПРЕДМЕТА: Ты преподаёшь ТОЛЬКО ${subject}. Если студент спрашивает о другом предмете — кратко отреагируй и мягко верни к текущему уроку по ${subject}; другие предметы можно выбрать на дашборде.
 
+Имя студента: ${studentName} — обращайся к студенту по этому имени. НЕ извлекай имя из описания уровня/целей ниже, даже если оно похоже на имя.
 Уровень студента: ${studentLevel}
 Цели обучения: ${goals}${memorySection}${lessonBlock}
 

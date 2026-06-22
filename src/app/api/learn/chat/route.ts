@@ -249,6 +249,7 @@ export async function POST(req: Request) {
     const country = teachingLang === 'ru' ? 'ru' : profileCountry
     let systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
+      profile?.displayName ?? session.user.name ?? 'Student',
       profile?.selfDescription ?? 'level unknown',
       profile?.learningGoals ?? profile?.selfDescription ?? 'general learning',
       memoryContext,
