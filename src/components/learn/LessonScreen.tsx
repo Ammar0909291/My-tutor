@@ -32,6 +32,7 @@ const VOICE_LABELS_BY_LANG: Record<TeachingLang, Record<VoiceType, string>> = {
   hi: { male: 'पुरुष',   female: 'महिला',   warm: 'मधुर'   },
 }
 const LANG_FLAG: Record<TeachingLang, string> = { ru: '🇷🇺', en: '🇬🇧', hi: '🇮🇳' }
+const LANG_LABEL: Record<TeachingLang, string> = { ru: 'Русский', en: 'English', hi: 'हिन्दी' }
 const VOICE_MAP: Record<string, VoiceType> = {
   male: 'male', female: 'female', warm: 'warm',
   alexei: 'male', maria: 'female', dmitry: 'warm',
@@ -414,7 +415,7 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId, autoOpenPractice, initialPrompt }: Props) {
+export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage: teachingLanguageProp = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId, autoOpenPractice, initialPrompt }: Props) {
   const { t, lang: uiLang } = useLanguage()
   const { country } = useCountry()
   const { theme } = useTheme()
@@ -441,6 +442,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
   const [speed, setSpeed] = useState(voiceSpeed)
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false)
+
+  // Teaching language — changeable in-session, persisted to profile.teachingLanguage.
+  // route.ts re-reads the profile on every chat turn, so the backend picks up the
+  // new language on the next message; this local state is just for the UI/voice.
+  const [teachingLanguage, setTeachingLanguage] = useState<TeachingLang>(teachingLanguageProp)
+  const [langMenuOpen, setLangMenuOpen] = useState(false)
+  const handleLanguageChange = useCallback((l: TeachingLang) => {
+    setTeachingLanguage(l)
+    setLangMenuOpen(false)
+    fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ teachingLanguage: l }) }).catch(() => {})
+  }, [])
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
 
@@ -1483,7 +1495,47 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           <span className="hidden sm:inline" style={{ fontSize: 12, fontFamily: 'var(--font-mono)', fontVariantNumeric: 'tabular-nums', color: 'var(--text-secondary)', flexShrink: 0 }}>
             {formatTimer(elapsed)}
           </span>
-          <span className="hidden sm:inline" style={{ fontSize: 14 }}>{LANG_FLAG[teachingLanguage]}</span>
+          <div style={{ position: 'relative' }}>
+            <button onClick={() => setLangMenuOpen((o) => !o)}
+              className="hidden sm:inline-flex"
+              title={t('settings_lang')}
+              aria-label={t('settings_lang')}
+              style={{
+                alignItems: 'center', justifyContent: 'center', height: 28, padding: '0 8px', borderRadius: 6,
+                fontSize: 14, cursor: 'pointer',
+                background: langMenuOpen ? 'rgba(247,129,102,0.15)' : 'transparent',
+                border: `1px solid ${langMenuOpen ? 'rgba(247,129,102,0.4)' : 'transparent'}`,
+                transition: 'all 150ms',
+              }}>
+              {LANG_FLAG[teachingLanguage]}
+            </button>
+            {langMenuOpen && (
+              <>
+                <div onClick={() => setLangMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
+                <div style={{
+                  position: 'absolute', top: 'calc(100% + 6px)', right: 0, width: 'max-content', zIndex: 50,
+                  background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
+                }}>
+                  <div style={{ padding: '8px 16px 6px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', borderBottom: '1px solid var(--border-subtle)' }}>
+                    {t('settings_lang')}
+                  </div>
+                  {(['en', 'ru', 'hi'] as TeachingLang[]).map((l) => (
+                    <button key={l} onClick={() => handleLanguageChange(l)}
+                      style={{
+                        padding: '8px 16px', fontSize: 12.5, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', gap: 8,
+                        background: teachingLanguage === l ? 'rgba(247,129,102,0.12)' : 'transparent',
+                        color: teachingLanguage === l ? 'var(--coral)' : 'var(--text-primary)',
+                      }}>
+                      <span>{LANG_FLAG[l]}</span>
+                      <span>{LANG_LABEL[l]}</span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Right — voice buttons */}
