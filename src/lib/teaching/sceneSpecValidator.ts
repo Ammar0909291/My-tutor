@@ -48,6 +48,16 @@ const OBJECT_TYPES: readonly SceneObjectType[] = [
  */
 const MAX_COORD = 1000
 
+/**
+ * Soft sanity bounds — all heuristics, NOT schema rules. Their job is to catch the
+ * shapes a runaway LLM generator produces (a hundred objects crammed into one beat, the
+ * whole explanation dumped into the title) while staying generous for any real scene.
+ */
+const MAX_OBJECTS_PER_STEP = 50
+const MAX_TITLE_LEN = 200
+const MAX_NARRATION_LEN = 1000
+const MAX_TEXT_LEN = 200
+
 /** Object types and the single-position-anchored set vs. endpoint vs. path families. */
 const NEEDS_POSITION: ReadonlySet<SceneObjectType> = new Set<SceneObjectType>([
   'point', 'particle', 'node', 'label', 'bar',
@@ -65,6 +75,15 @@ function isFiniteNumber(v: unknown): v is number {
 
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === 'string' && v.trim().length > 0
+}
+
+/** True only for a structurally valid, finite-numbered Vec3. */
+function isValidVec3(v: unknown): v is [number, number, number] {
+  return Array.isArray(v) && v.length === 3 && v.every(isFiniteNumber)
+}
+
+function vec3Equal(a: readonly number[], b: readonly number[]): boolean {
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2]
 }
 
 /** Validate a single Vec3 field at `path`, pushing any errors. Returns nothing. */
@@ -118,8 +137,18 @@ function checkOptionalString(
   }
 }
 
+/** Optional string with a generous upper length bound (catches "whole explanation dumped into one field"). */
+function checkStringLength(
+  value: unknown, path: string, max: number, errors: SceneSpecValidationError[],
+): void {
+  if (typeof value === 'string' && value.length > max) {
+    errors.push({ path, message: `string length ${value.length} exceeds sanity bound of ${max} characters` })
+  }
+}
+
 function validateObject(
   raw: unknown, path: string, errors: SceneSpecValidationError[], seenIds: Map<string, string>,
+  coords: number[][],
 ): void {
   if (!isPlainObject(raw)) {
     errors.push({ path, message: `expected an object, got ${describe(raw)}` })
@@ -147,7 +176,14 @@ function validateObject(
     }
   }
   checkOptionalString(raw, 'text', path, errors)
+  checkStringLength(raw.text, `${path}.text`, MAX_TEXT_LEN, errors)
   checkOptionalString(raw, 'color', path, errors)
+
+  // Collect every valid coordinate for the spec-level degeneracy check.
+  for (const v of [raw.position, raw.from, raw.to]) {
+    if (isValidVec3(v)) coords.push(v)
+  }
+  if (Array.isArray(raw.points)) for (const p of raw.points) if (isValidVec3(p)) coords.push(p)
   checkOptionalScalar(raw, 'radius', path, errors)
   checkOptionalScalar(raw, 'thickness', path, errors)
   checkOptionalScalar(raw, 'size', path, errors)
@@ -161,6 +197,10 @@ function validateObject(
     if (NEEDS_ENDPOINTS.has(t)) {
       if (raw.from === undefined) errors.push({ path: `${path}.from`, message: `'${t}' requires a 'from' endpoint` })
       if (raw.to === undefined) errors.push({ path: `${path}.to`, message: `'${t}' requires a 'to' endpoint` })
+      // Zero-length endpoint: valid numbers, renders nothing.
+      if (isValidVec3(raw.from) && isValidVec3(raw.to) && vec3Equal(raw.from, raw.to)) {
+        errors.push({ path: `${path}.to`, message: `'${t}' has from === to (zero-length, renders nothing)` })
+      }
     }
     if (NEEDS_POSITION.has(t) && raw.position === undefined) {
       errors.push({ path: `${path}.position`, message: `'${t}' requires a 'position'` })
@@ -197,6 +237,7 @@ function validateObject(
 export function validateSceneSpec(spec: unknown): SceneSpecValidationResult {
   const errors: SceneSpecValidationError[] = []
   const seenIds = new Map<string, string>()
+  const coords: number[][] = []
 
   if (!isPlainObject(spec)) {
     return { valid: false, errors: [{ path: '(root)', message: `expected a SceneSpec object, got ${describe(spec)}` }] }
@@ -205,6 +246,7 @@ export function validateSceneSpec(spec: unknown): SceneSpecValidationResult {
   // Layer 1: top-level required fields.
   if (!isNonEmptyString(spec.id)) errors.push({ path: 'id', message: `required non-empty string, got ${describe(spec.id)}` })
   if (!isNonEmptyString(spec.title)) errors.push({ path: 'title', message: `required non-empty string, got ${describe(spec.title)}` })
+  checkStringLength(spec.title, 'title', MAX_TITLE_LEN, errors)
   if (typeof spec.sceneType !== 'string' || !SCENE_TYPES.includes(spec.sceneType as SceneType)) {
     errors.push({ path: 'sceneType', message: `invalid sceneType ${describe(spec.sceneType)}; expected one of ${SCENE_TYPES.join(', ')}` })
   }
@@ -232,6 +274,7 @@ export function validateSceneSpec(spec: unknown): SceneSpecValidationResult {
     if ('narration' in step && step.narration !== undefined && typeof step.narration !== 'string') {
       errors.push({ path: `${sPath}.narration`, message: `narration must be a string, got ${describe(step.narration)}` })
     }
+    checkStringLength(step.narration, `${sPath}.narration`, MAX_NARRATION_LEN, errors)
     if (!Array.isArray(step.objects)) {
       errors.push({ path: `${sPath}.objects`, message: `required array, got ${describe(step.objects)}` })
       return
@@ -239,8 +282,16 @@ export function validateSceneSpec(spec: unknown): SceneSpecValidationResult {
     if (step.objects.length === 0) {
       errors.push({ path: `${sPath}.objects`, message: 'must contain at least one object' })
     }
-    step.objects.forEach((obj, j) => validateObject(obj, `${sPath}.objects[${j}]`, errors, seenIds))
+    if (step.objects.length > MAX_OBJECTS_PER_STEP) {
+      errors.push({ path: `${sPath}.objects`, message: `${step.objects.length} objects in one step exceeds sanity bound of ${MAX_OBJECTS_PER_STEP} (likely not a single coherent teaching beat)` })
+    }
+    step.objects.forEach((obj, j) => validateObject(obj, `${sPath}.objects[${j}]`, errors, seenIds, coords))
   })
+
+  // Spec-level degeneracy: every positioned object collapsed onto one point renders as nothing.
+  if (coords.length >= 2 && coords.every((c) => vec3Equal(c, coords[0]))) {
+    errors.push({ path: '(root)', message: `all ${coords.length} coordinates are identical (${coords[0].join(', ')}) — degenerate, nothing is spatially distinguishable` })
+  }
 
   return { valid: errors.length === 0, errors }
 }
