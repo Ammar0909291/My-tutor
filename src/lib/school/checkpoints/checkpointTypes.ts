@@ -28,6 +28,13 @@ export interface CheckpointEvaluation {
   expectedAnswer: string | null
   /** Whether the student's reply demonstrates understanding of that question. */
   passed: boolean
+  /**
+   * Whether the reply was a genuine attempt at an answer ("substantive") vs.
+   * non-committal/off-topic/fatigue ("deflect_or_vague"), independent of `passed`.
+   * Lets callers distinguish "attempted and got it wrong" from "didn't meaningfully
+   * attempt" — the latter should never log a misconception.
+   */
+  engagement: 'substantive' | 'deflect_or_vague'
   /** Best-guess KG node the checkpoint relates to (id from the provided list), if any. */
   nodeId: string | null
 }

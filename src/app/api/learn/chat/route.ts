@@ -338,31 +338,36 @@ export async function POST(req: Request) {
               // signal — not a deterministic multi-question score like
               // practice/submit. So it contributes a soft TopicProgress nudge
               // (never MASTERED, never downgrades an already-mastered node) and,
-              // on failure, a MistakeRecord so misconception/weak-topic engines
-              // see it. Mirrors the never-downgrade pattern in
+              // on a substantive failure, a MistakeRecord so misconception/weak-topic
+              // engines see it. Mirrors the never-downgrade pattern in
               // school/practice/submit/route.ts but at lower confidence weight.
+              // Deflect/vague replies ("ok", "I'm tired", "what's next") demonstrate
+              // nothing about understanding either way, so they skip BOTH writes —
+              // a TopicProgress nudge or MistakeRecord there would be a false signal.
               const nodeId = checkpointEval.nodeId
-              ;(async () => {
-                const existing = await prisma.topicProgress.findUnique({
-                  where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
-                  select: { status: true },
-                }).catch(() => null)
-                if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
-                const score = checkpointEval.passed ? 65 : 25
-                await prisma.topicProgress.upsert({
-                  where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
-                  create: { userId, subjectSlug: subjectCode, topicSlug: nodeId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
-                  update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
-                }).catch(() => {})
-                if (!checkpointEval.passed) {
-                  await prisma.mistakeRecord.create({
-                    data: {
-                      userId, subjectSlug: subjectCode, topicSlug: nodeId,
-                      sessionId: learnSession.id, category: 'conversational_checkpoint', questionId: nodeId,
-                    },
+              if (checkpointEval.engagement === 'substantive') {
+                ;(async () => {
+                  const existing = await prisma.topicProgress.findUnique({
+                    where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
+                    select: { status: true },
+                  }).catch(() => null)
+                  if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
+                  const score = checkpointEval.passed ? 65 : 25
+                  await prisma.topicProgress.upsert({
+                    where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
+                    create: { userId, subjectSlug: subjectCode, topicSlug: nodeId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
+                    update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
                   }).catch(() => {})
-                }
-              })().catch(() => {})
+                  if (!checkpointEval.passed) {
+                    await prisma.mistakeRecord.create({
+                      data: {
+                        userId, subjectSlug: subjectCode, topicSlug: nodeId,
+                        sessionId: learnSession.id, category: 'conversational_checkpoint', questionId: nodeId,
+                      },
+                    }).catch(() => {})
+                  }
+                })().catch(() => {})
+              }
             }
           }
         }

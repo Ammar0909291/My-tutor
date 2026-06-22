@@ -40,9 +40,15 @@ Answer these:
 3. expectedAnswer: if yes, a concise (1 sentence) correct/expected answer or key idea, else null.
 4. passed: if yes, does the student's reply demonstrate understanding of that key idea? Be lenient — partial but on-track answers pass. Off-topic, "I don't know", or incorrect answers do not pass. Default false if checkpointAsked is false.
 5. nodeId: if yes and the topic-id list is non-empty, the single best-matching id from that list, else null.
+6. engagement: classify the student's reply INDEPENDENTLY of whether it is correct:
+   - "substantive": a genuine attempt to answer the question — states an answer, an
+     explanation, or a guess, even if wrong or partial.
+   - "deflect_or_vague": does NOT meaningfully attempt the answer — e.g. non-committal
+     ("ok", "yeah", "I think so", "kind of", "maybe"), "I don't know", off-topic,
+     deflecting ("can we move on", "what's next"), or fatigue ("I'm tired").
 
 Return ONLY this JSON shape:
-{"checkpointAsked": boolean, "question": string|null, "expectedAnswer": string|null, "passed": boolean, "nodeId": string|null}`
+{"checkpointAsked": boolean, "question": string|null, "expectedAnswer": string|null, "passed": boolean, "engagement": "substantive"|"deflect_or_vague", "nodeId": string|null}`
 
   const result = await generateJSON(prompt, 400)
   if (!result || typeof result !== 'object' || typeof result.checkpointAsked !== 'boolean') return null
@@ -52,6 +58,7 @@ Return ONLY this JSON shape:
     question: typeof result.question === 'string' ? result.question : null,
     expectedAnswer: typeof result.expectedAnswer === 'string' ? result.expectedAnswer : null,
     passed: typeof result.passed === 'boolean' ? result.passed : false,
+    engagement: result.engagement === 'substantive' ? 'substantive' : 'deflect_or_vague',
     nodeId: typeof result.nodeId === 'string' && nodes.some((n) => n.id === result.nodeId) ? result.nodeId : null,
   }
 }

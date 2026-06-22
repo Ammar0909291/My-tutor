@@ -49,7 +49,7 @@ async function main() {
   // the loaded key (see top-of-file note).
   const { evaluateCheckpointTurn } = await import('../src/lib/school/checkpoints/evaluateCheckpoint')
   console.log('Checkpoint:', TUTOR_MESSAGE, '\n')
-  console.log('label\t| reply\t| checkpointAsked\t| passed\t| nodeId\t| expected')
+  console.log('label\t| reply\t| checkpointAsked\t| passed\t| engagement\t| nodeId\t| expected')
   console.log('-'.repeat(120))
   for (const c of CASES) {
     const r = await evaluateCheckpointTurn(TUTOR_MESSAGE, c.reply, NODES)
@@ -58,7 +58,7 @@ async function main() {
       continue
     }
     console.log(
-      `${c.label}\t| "${c.reply}"\t| asked=${r.checkpointAsked}\t| passed=${r.passed}\t| node=${r.nodeId}\t| expected=${c.expectPass}`,
+      `${c.label}\t| "${c.reply}"\t| asked=${r.checkpointAsked}\t| passed=${r.passed}\t| engagement=${r.engagement}\t| node=${r.nodeId}\t| expected=${c.expectPass}`,
     )
     console.log(`    raw: ${JSON.stringify(r)}`)
   }
