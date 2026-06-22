@@ -1,23 +1,7 @@
-import Groq from 'groq-sdk'
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
-
-// playai-tts valid voices — male/female/warm distinction
-const VOICE_MAP: Record<string, string> = {
-  ru_male:   'charon',
-  ru_female: 'aoede',
-  ru_warm:   'aoede',
-  en_male:   'charon',
-  en_female: 'aoede',
-  en_warm:   'kore',
-  hi_male:   'charon',
-  hi_female: 'aoede',
-  hi_warm:   'kore',
-}
 
 // ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
 async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
@@ -81,24 +65,20 @@ async function sarvamTTS(text: string): Promise<Buffer | null> {
     if (typeof audio !== 'string' || !audio) return null
     return Buffer.from(audio, 'base64')
   } catch (e: any) {
-    console.error('Sarvam TTS exception:', e.message)
+    // Node's fetch (undici) surfaces network failures as a generic
+    // "fetch failed" message; the real cause (DNS/TLS/timeout/ECONNREFUSED)
+    // lives in e.cause. Log both so failures are diagnosable.
+    console.error('Sarvam TTS exception:', e.message, '| cause:', e.cause, '| code:', e.cause?.code)
     return null
   }
 }
 
-// ─── Groq TTS ─────────────────────────────────────────────────────────────────
-async function groqTTS(text: string, selectedVoice: string): Promise<Buffer | null> {
-  // playai-tts is primary; tts-1 is legacy fallback
-  for (const model of ['playai-tts', 'tts-1']) {
-    try {
-      const response = await groq.audio.speech.create({ model, voice: selectedVoice, input: text, response_format: 'mp3' })
-      return Buffer.from(await response.arrayBuffer())
-    } catch (e: any) {
-      console.error('TTS failed with model:', model, e.message)
-    }
-  }
-  return null
-}
+// Note: Groq server-side TTS was removed — its playai-tts model was
+// decommissioned and tts-1 never existed on Groq, so the fallback was a dead
+// remote call that only added a ~13s stall before failing. When a server TTS
+// provider (Sarvam/Yandex) is unavailable or fails, this route returns 503 and
+// the client (LessonScreen) falls back to the browser's speechSynthesis — a
+// local, network-free path that can't fail the way a second remote API can.
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -114,34 +94,23 @@ export async function POST(req: Request) {
     const clean = cleanTextForTTS(text)
     if (!clean.trim()) return NextResponse.json({ error: 'Empty' }, { status: 400 })
 
-    const voiceKey = `${lang}_${voice}` as keyof typeof VOICE_MAP
-    const selectedGroqVoice = VOICE_MAP[voiceKey] || 'aoede'
-
     let buffer: Buffer | null = null
     let contentType = 'audio/mpeg'
 
     if (lang === 'hi' && process.env.SARVAM_API_KEY) {
       console.log('→ TTS: Sarvam (Bulbul v3)')
       buffer = await sarvamTTS(clean)
-      if (buffer) {
-        contentType = 'audio/wav'
-      } else {
-        console.log('Sarvam TTS failed, falling back to Groq')
-        buffer = await groqTTS(clean, selectedGroqVoice)
-      }
+      if (buffer) contentType = 'audio/wav'
     } else if (country === 'ru' && process.env.YANDEX_API_KEY) {
       console.log('→ TTS: Yandex SpeechKit')
       buffer = await yandexTTS(clean, voice)
-      if (!buffer) {
-        console.log('Yandex TTS failed, falling back to Groq')
-        buffer = await groqTTS(clean, selectedGroqVoice)
-      }
-    } else {
-      console.log('→ TTS: Groq')
-      buffer = await groqTTS(clean, selectedGroqVoice)
     }
+    // No other server TTS provider — non-Hindi/non-Russia (and any failure
+    // above) returns 503 below so the client uses browser speechSynthesis.
 
     if (!buffer) {
+      // Client (LessonScreen.speakViaServerTTS) catches this and falls back to
+      // the local browser speechSynthesis path.
       return NextResponse.json({ error: 'TTS unavailable' }, { status: 503 })
     }
 
