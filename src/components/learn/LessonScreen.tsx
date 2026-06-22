@@ -37,8 +37,8 @@ const VOICE_LABELS_BY_LANG: Record<TeachingLang, Record<VoiceType, string>> = {
   en: { male: 'Male',    female: 'Female',  warm: 'Warm'    },
   hi: { male: 'पुरुष',   female: 'महिला',   warm: 'मधुर'   },
 }
-const LANG_FLAG: Record<TeachingLang, string> = { ru: '🇷🇺', en: '🇬🇧', hi: '🇮🇳' }
 const LANG_LABEL: Record<TeachingLang, string> = { ru: 'Русский', en: 'English', hi: 'हिन्दी' }
+const LANG_SHORT: Record<TeachingLang, string> = { en: 'Eng', hi: 'Hindi', ru: 'Ru' }
 const VOICE_MAP: Record<string, VoiceType> = {
   male: 'male', female: 'female', warm: 'warm',
   alexei: 'male', maria: 'female', dmitry: 'warm',
@@ -1520,8 +1520,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 border: `1px solid ${langMenuOpen ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
-              <span style={{ fontSize: 14 }}>{LANG_FLAG[teachingLanguage]}</span>
-              <span>{teachingLanguage.toUpperCase()}</span>
+              <span>Language -{LANG_SHORT.en} -{LANG_SHORT.hi} -{LANG_SHORT.ru}</span>
             </button>
             {langMenuOpen && (
               <>
@@ -1542,7 +1541,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                         background: teachingLanguage === l ? 'rgba(247,129,102,0.12)' : 'transparent',
                         color: teachingLanguage === l ? 'var(--coral)' : 'var(--text-primary)',
                       }}>
-                      <span>{LANG_FLAG[l]}</span>
                       <span>{LANG_LABEL[l]}</span>
                     </button>
                   ))}
