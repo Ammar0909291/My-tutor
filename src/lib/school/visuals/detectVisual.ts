@@ -219,7 +219,10 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     'three_data_structure', 'three_algorithm_visualization',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
-  const cleanText = text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim()
+  // Only strip the matched text when it's a recognized tag. An unrecognized
+  // candidate (typo, or "VISUAL:" appearing incidentally in real prose) is not
+  // a tag at all and must be left in the displayed text, not silently eaten.
+  const cleanText = visual ? text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim() : text
   return { visual, cleanText }
 }
 
