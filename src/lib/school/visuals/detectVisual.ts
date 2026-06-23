@@ -68,7 +68,7 @@ const MECHANICS_3D_RULES: MatchRule[] = [
 // simulation; SCIENCE_RULES remains the 2D fallback for chemistry topics
 // this table doesn't cover, exactly mirroring the 'physics' branch.
 const CHEMISTRY_3D_RULES: MatchRule[] = [
-  { keywords: ['atomic structure', 'protons and neutrons', 'nucleus', 'subatomic particle', 'atomic number', 'mass number'], visual: 'three_atomic_structure' },
+  { keywords: ['atomic structure', 'protons and neutrons', 'atomic nucleus', 'subatomic particle', 'atomic number', 'mass number'], visual: 'three_atomic_structure' },
   { keywords: ['electron shell', 'electron shells', 'shell configuration', 'k shell', 'l shell', 'm shell', 'electron configuration'], visual: 'three_electron_shells' },
   { keywords: ['molecular shape', 'molecular geometry', 'bond angle', 'tetrahedral', 'trigonal planar', 'vsepr'], visual: 'three_molecular_shapes' },
   { keywords: ['bond formation', 'ionic bond', 'covalent bond', 'metallic bond', 'chemical bonding', 'valence electron'], visual: 'three_bond_formation' },
@@ -116,7 +116,10 @@ const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['energy level', 'energy levels', 'spectral line', 'spectral lines', 'line spectrum', 'emission spectrum', 'absorption spectrum', 'atomic transition', 'photon emission', 'bohr model', 'electron transition'], visual: 'energy_level_diagram' },
   { keywords: ['bloch sphere', 'qubit', 'single-qubit', 'superposition state', 'quantum computer'], visual: 'bloch_sphere' },
   { keywords: ['tunnel', 'tunneling', 'tunnelling', 'barrier penetration', 'potential barrier', 'transmission probability'], visual: 'quantum_tunneling' },
-  { keywords: ['square well', 'potential well', 'infinite well', 'energy level', 'energy levels', 'quantized energy', 'stationary state', 'bound state'], visual: 'potential_well' },
+  // 'energy level'/'energy levels' intentionally NOT listed here: energy_level_diagram
+  // (above) matches them first via matchRules' first-match order, so they were dead
+  // duplicates. potential_well stays reachable via its own distinct keywords below.
+  { keywords: ['square well', 'potential well', 'infinite well', 'quantized energy', 'stationary state', 'bound state'], visual: 'potential_well' },
   { keywords: ['wavefunction', 'wave function', 'born rule', 'probability density', 'probability amplitude', 'psi', '|ψ|', 'schrödinger', 'schrodinger'], visual: 'wave_function' },
 ]
 
