@@ -24,6 +24,7 @@ import { extractTriangleParams, buildTriangleScene, checkTriangleConsistency } f
 import { extractMolecule, buildMoleculeScene, checkMoleculeConsistency } from '../src/lib/teaching/sceneGenerators/moleculeGeometry'
 import { extractVectorParams, buildVectorScene, checkVectorConsistency } from '../src/lib/teaching/sceneGenerators/vectorAddition'
 import { extractCircularParams, buildCircularScene, checkCircularConsistency } from '../src/lib/teaching/sceneGenerators/circularMotion'
+import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } from '../src/lib/teaching/sceneGenerators/pendulumMotion'
 
 const PROBE = {
   projectile: {
@@ -115,6 +116,20 @@ async function main() {
     const c = checkCircularConsistency(spec, cParams)
     console.log(`NEW consistency check: ${c.ok ? 'PASS (velocity ⊥ radius, a_c = v²/r toward centre)' : 'FAIL — ' + c.errors.join('; ')}`)
     console.log('EXPECT: r=2, v=4 → a_c = 8 m/s² toward the centre')
+  }
+
+  // ── Pendulum (representative 6th type, not from the original probe) ──────────
+  console.log('\n############ CASE 6: SIMPLE PENDULUM (representative, not from the original probe)')
+  const penText = 'A simple pendulum has a string of length 1 metre and is pulled 20 degrees from the vertical before being released. Describe its swing.'
+  console.log(`ROUTE: ${routeSceneGenerator(penText)}`)
+  const penParams = await extractPendulumParams(penText)
+  if (!penParams) { anyNull = true; console.log('NEW: extractPendulumParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(penParams)}`)
+    const spec = buildPendulumScene(penParams)
+    const c = checkPendulumConsistency(spec, penParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (constant string length, symmetric arc, T=2π√(L/g))' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: L=1, amp=20° → T ≈ 2.01 s, symmetric arc')
   }
 
   console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')

@@ -17,8 +17,9 @@ import { generateTriangleScene } from './triangleAngleSum'
 import { generateMoleculeScene } from './moleculeGeometry'
 import { generateVectorScene } from './vectorAddition'
 import { generateCircularScene } from './circularMotion'
+import { generatePendulumScene } from './pendulumMotion'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum'
 
 interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 
@@ -38,6 +39,15 @@ const ROUTE_RULES: RouteRule[] = [
       'circular motion', 'uniform circular', 'centripetal', 'circular orbit',
       'circular path', 'circular trajectory', 'moves in a circle', 'moving in a circle',
       'around a circle', 'angular velocity',
+    ],
+  },
+  {
+    // Pendulum-specific cues; none overlap the other rules. Placed before
+    // projectile since a pendulum description may say "swings" near motion words.
+    kind: 'pendulum',
+    keywords: [
+      'pendulum', 'simple pendulum', 'swings back and forth', 'swinging bob',
+      'amplitude of the swing', 'oscillates on a string',
     ],
   },
   {
@@ -106,6 +116,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'molecule': return generateMoleculeScene(text)
     case 'vector': return generateVectorScene(text)
     case 'circular': return generateCircularScene(text)
+    case 'pendulum': return generatePendulumScene(text)
     default: return null
   }
 }

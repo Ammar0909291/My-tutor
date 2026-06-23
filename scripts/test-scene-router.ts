@@ -66,6 +66,12 @@ check('"circular trajectory" → circular (not projectile, despite "trajectory")
 check('plain projectile "trajectory" (no "circular") still → projectile',
   routeSceneGenerator('The ball follows a parabolic trajectory after launch.') === 'projectile')
 
+// ── Pendulum (6th type) ──────────────────────────────────────────────────────
+check('pendulum prose → pendulum',
+  routeSceneGenerator('A simple pendulum of length 1 m swings back and forth; find its period.') === 'pendulum')
+check('"swinging bob" → pendulum',
+  routeSceneGenerator('The swinging bob reaches its highest point at the ends of the arc.') === 'pendulum')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)
