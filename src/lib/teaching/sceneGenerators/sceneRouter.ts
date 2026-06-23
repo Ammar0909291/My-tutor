@@ -20,8 +20,9 @@ import { generateCircularScene } from './circularMotion'
 import { generatePendulumScene } from './pendulumMotion'
 import { generateElectronShellScene } from './electronShells'
 import { generateLatticeScene } from './crystalLattice'
+import { generateCollisionScene } from './momentumCollision'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -29,8 +30,10 @@ export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vecto
 //    SceneSpec version would duplicate a working system, not add new coverage.
 //  • Free-body / net-force diagrams — "net force" IS vector addition (the
 //    'vector' generator); open-ended force extraction isn't a clean case.
-//  • Momentum / collision — DEFERRED: its 1D/2D + elastic/inelastic representation
-//    is a genuine scope decision to revisit deliberately, not guess at here.
+//  • 2D / oblique collisions — DEFERRED (same as momentum/collision was before
+//    this module landed): the 'collision' generator below covers 1D only.
+//    A 2D extension needs an impact-angle parameter and a meaningfully larger
+//    geometry problem — a deliberate future scope decision, not a quick add.
 
 interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 
@@ -100,6 +103,21 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Collision keys are momentum/collision-specific ("collide", "collision",
+    // "stick together", "momentum is conserved") — disjoint from vector's
+    // addition-specific vocabulary and from projectile's launch vocabulary, so
+    // checked before vector (its bare 'resultant' key is broader) to make sure
+    // a "find the resultant velocity after the collision" turn lands here, not
+    // on vector addition.
+    kind: 'collision',
+    keywords: [
+      'collide', 'collides', 'collision', 'collisions', 'stick together',
+      'sticks together', 'momentum is conserved', 'conservation of momentum',
+      'elastic collision', 'inelastic collision', 'two objects moving',
+      'two carts', 'two trolleys', 'two balls collide',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -154,6 +172,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'pendulum': return generatePendulumScene(text)
     case 'electron_shells': return generateElectronShellScene(text)
     case 'lattice': return generateLatticeScene(text)
+    case 'collision': return generateCollisionScene(text)
     default: return null
   }
 }

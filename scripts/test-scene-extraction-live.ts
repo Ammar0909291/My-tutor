@@ -27,6 +27,7 @@ import { extractCircularParams, buildCircularScene, checkCircularConsistency } f
 import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } from '../src/lib/teaching/sceneGenerators/pendulumMotion'
 import { extractElement, buildElectronShellScene, checkElectronShellConsistency } from '../src/lib/teaching/sceneGenerators/electronShells'
 import { extractLattice, buildLatticeScene, checkLatticeConsistency } from '../src/lib/teaching/sceneGenerators/crystalLattice'
+import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency } from '../src/lib/teaching/sceneGenerators/momentumCollision'
 
 const PROBE = {
   projectile: {
@@ -160,6 +161,20 @@ async function main() {
     const c = checkLatticeConsistency(spec, latDef)
     console.log(`NEW consistency check: ${c.ok ? 'PASS (sharing rule re-derives atoms/cell)' : 'FAIL — ' + c.errors.join('; ')}`)
     console.log('EXPECT: face-centered cubic → 4 atoms/cell')
+  }
+
+  // ── Momentum/collision (representative 9th type, not from the original probe) ─
+  console.log('\n############ CASE 9: 1D MOMENTUM / COLLISION (representative, not from the original probe)')
+  const colText = 'Two trolleys of mass 2 kg and 3 kg move toward each other at 4 m/s and 1 m/s. They collide and stick together. Find their common velocity afterward.'
+  console.log(`ROUTE: ${routeSceneGenerator(colText)}`)
+  const colParams = await extractCollisionParams(colText)
+  if (!colParams) { anyNull = true; console.log('NEW: extractCollisionParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(colParams)}`)
+    const spec = buildCollisionScene(colParams)
+    const c = checkCollisionConsistency(spec, colParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (momentum conserved, re-derived from drawn vectors)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: m1=2, u1=4, m2=3, u2=-1, perfectly_inelastic → vf = (2*4+3*-1)/5 = 1 m/s')
   }
 
   console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')

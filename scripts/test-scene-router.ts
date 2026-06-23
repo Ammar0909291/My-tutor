@@ -92,6 +92,20 @@ check('standalone "BCC" → lattice',
 check('lattice "crystal structure" does NOT collide with molecule',
   routeSceneGenerator('Explain the FCC crystal structure of copper.') === 'lattice')
 
+// ── Momentum/collision (9th type, 1D only) + its collision reasoning ────────
+check('1D collision prose → collision',
+  routeSceneGenerator('Two trolleys collide and stick together; find their common velocity.') === 'collision')
+check('"elastic collision" → collision',
+  routeSceneGenerator('In an elastic collision between two balls, both momentum and kinetic energy are conserved.') === 'collision')
+check('"conservation of momentum" → collision',
+  routeSceneGenerator('Use conservation of momentum to find the final velocity of the two carts.') === 'collision')
+check('vector "resultant" prose without collision words still → vector (collision does not steal it)',
+  routeSceneGenerator('Find the resultant of two forces using the parallelogram law.') === 'vector')
+check('"resultant velocity after the collision" → collision (collision-specific cue wins over bare resultant)',
+  routeSceneGenerator('Find the resultant velocity of the two carts after the collision.') === 'collision')
+check('projectile text mentioning neither "collide" nor "momentum" still → projectile',
+  routeSceneGenerator('A ball is thrown at 45 degrees with an initial speed of 10 m/s.') === 'projectile')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)
