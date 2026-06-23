@@ -11,7 +11,15 @@
 import type { SceneSpec } from './sceneSpec'
 
 const VECTOR_RE = /\b(vector|force|velocity|displacement|acceleration)\b/i
-const MOLECULE_RE = /\b(atom|molecule|electron|proton|neutron|bond|orbit(al)?)\b/i
+// Deliberately NOT matching electron/proton/neutron/orbital here: those are
+// already handled correctly, with real per-concept visuals (atomic structure,
+// electron shells), by the 2D pipeline's phrase-based rules in detectVisual.ts
+// (e.g. 'protons and neutrons', 'electron shell', '3d orbital'), which runs
+// BEFORE this and gates it off. Matching those bare words here would only
+// catch mentions detectVisual.ts's phrases missed, and incorrectly render
+// this generic 2-atom-1-bond template instead of no scene — worse than
+// showing nothing, per this file's own conservative-by-design philosophy.
+const MOLECULE_RE = /\b(atom|molecule|bond)\b/i
 const COORD_3D_RE = /\b(3d|three[- ]dimensional|x[- ]axis.*y[- ]axis.*z[- ]axis|coordinate space)\b/i
 
 function vectorScene(): SceneSpec {
