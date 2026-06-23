@@ -63,6 +63,14 @@ check('atomic number 30 out of range → null', lookupElement(30) === null)
 check('validateElement rejects a tampered table entry (shells != Z)',
   validateElement({ z: 8, symbol: 'O', name: 'Oxygen', shells: [2, 5] } as any) === null)
 
+// ── Type-coercion guard: bare Number(raw) on a non-number/string input is a
+// silent-wrong-answer trap (Number(true)===1, Number([5])===5) — confirms the
+// fix rejects these instead of resolving to a real element. ──────────────────
+check('boolean true does NOT resolve to Z=1 (Number(true)===1 coercion trap)', lookupElement(true) === null)
+check('boolean false → null', lookupElement(false) === null)
+check('single-element array [5] does NOT resolve to Z=5 (Number([5])===5 coercion trap)', lookupElement([5]) === null)
+check('plain object → null', lookupElement({ z: 8 }) === null)
+
 // ── A few more elements build + check cleanly ────────────────────────────────
 for (const sym of ['H', 'C', 'O', 'Ne', 'Ar', 'Ca']) {
   const def = lookupElement(sym)!

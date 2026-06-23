@@ -81,10 +81,15 @@ export function bohrBuryFill(z: number): number[] {
 /** Find an element by symbol, name, or atomic number in free text / a value. */
 export function lookupElement(raw: unknown): ElementDef | null {
   if (raw == null) return null
-  // numeric atomic number
-  const asNum = Number(raw)
-  if (Number.isInteger(asNum) && asNum >= 1 && asNum <= 20) {
-    return ELEMENTS.find((e) => e.z === asNum) ?? null
+  // numeric atomic number — restricted to actual number/string inputs first,
+  // since bare Number(raw) coerces non-numeric types in surprising ways
+  // (Number(true) === 1, Number([5]) === 5), which would silently resolve a
+  // malformed LLM field to the wrong element instead of rejecting it.
+  if (typeof raw === 'number' || typeof raw === 'string') {
+    const asNum = Number(raw)
+    if (Number.isInteger(asNum) && asNum >= 1 && asNum <= 20) {
+      return ELEMENTS.find((e) => e.z === asNum) ?? null
+    }
   }
   if (typeof raw !== 'string') return null
   const lower = raw.toLowerCase().trim()
