@@ -79,5 +79,9 @@ check('obtuse case (100°,35°,45°) — valid + consistent',
   validateSceneSpec(oSpec).valid && checkTriangleConsistency(oSpec, obtuse).ok)
 check('obtuse vertex A realises 100°', Math.abs(angleAt(oA, oB, oC) - 100) < 0.5, `got ${angleAt(oA, oB, oC).toFixed(2)}°`)
 
+
+// ── Type-coercion guard: malformed field types must not silently coerce ──────
+check('array [60] for angleA does not coerce to 60 (Number([60])===60 coercion trap)', validateTriangleParams({ angleA: [60], angleB: 70 }) === null)
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

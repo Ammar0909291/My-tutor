@@ -78,5 +78,9 @@ check('reject non-positive length', validatePendulumParams({ length: 0, amplitud
 check('reject amplitude > 90°', validatePendulumParams({ length: 1, amplitudeDeg: 120 }) === null)
 check('accept a valid pair', validatePendulumParams({ length: 2, amplitudeDeg: 30 })?.length === 2)
 
+
+// ── Type-coercion guard: malformed field types must not silently coerce ──────
+check('boolean true for length does not coerce to 1 (Number(true)===1 coercion trap)', validatePendulumParams({ length: true, amplitudeDeg: 20 }) === null)
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

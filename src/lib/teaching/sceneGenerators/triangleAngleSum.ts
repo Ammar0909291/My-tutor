@@ -14,7 +14,7 @@
 
 import { generateJSON } from '@/lib/ai/client'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { round, strictNumber, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -30,8 +30,8 @@ const VISUAL_MAX = 20
 export function validateTriangleParams(raw: unknown): TriangleParams | null {
   if (!raw || typeof raw !== 'object') return null
   const o = raw as Record<string, unknown>
-  const angleA = Number(o.angleA)
-  const angleB = Number(o.angleB)
+  const angleA = strictNumber(o.angleA)
+  const angleB = strictNumber(o.angleB)
   if (!Number.isFinite(angleA) || !Number.isFinite(angleB)) return null
   if (angleA <= 0 || angleB <= 0) return null
   if (angleA + angleB >= 180) return null

@@ -21,7 +21,7 @@
 
 import { generateJSON } from '@/lib/ai/client'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { round, strictNumber, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -38,8 +38,8 @@ const ARROW = VISUAL_MAX * 0.4
 export function validateCircularParams(raw: unknown): CircularParams | null {
   if (!raw || typeof raw !== 'object') return null
   const o = raw as Record<string, unknown>
-  const radius = Number(o.radius)
-  const speed = Number(o.speed)
+  const radius = strictNumber(o.radius)
+  const speed = strictNumber(o.speed)
   if (!Number.isFinite(radius) || !Number.isFinite(speed)) return null
   if (radius <= 0 || radius > 1000 || speed <= 0 || speed > 1000) return null
   return { radius, speed }

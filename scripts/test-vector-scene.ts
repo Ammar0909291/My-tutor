@@ -78,5 +78,9 @@ check('reject non-positive magnitude', validateVectorParams({ aMag: 0, aAngleDeg
 check('reject non-finite angle', validateVectorParams({ aMag: 3, aAngleDeg: NaN, bMag: 4, bAngleDeg: 90 }) === null)
 check('accept a valid set', validateVectorParams({ aMag: 3, aAngleDeg: 0, bMag: 4, bAngleDeg: 90 })?.aMag === 3)
 
+
+// ── Type-coercion guard: malformed field types must not silently coerce ──────
+check('boolean true for aMag does not coerce to 1 (Number(true)===1 coercion trap)', validateVectorParams({ aMag: true, aAngleDeg: 0, bMag: 4, bAngleDeg: 90 }) === null)
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

@@ -86,5 +86,9 @@ check('70° → taller than wide (H > R since R/H = 4/tan70° ≈ 1.46 → still
   return Math.abs(ratio - 4 / Math.tan((70 * Math.PI) / 180)) < 0.2
 })())
 
+
+// ── Type-coercion guard: malformed field types must not silently coerce ──────
+check('boolean true for angleDegrees does not coerce to 1 (Number(true)===1 coercion trap)', validateProjectileParams({ angleDegrees: true, speed: 10 }) === null)
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

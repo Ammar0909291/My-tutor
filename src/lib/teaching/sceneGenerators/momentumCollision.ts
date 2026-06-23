@@ -37,7 +37,7 @@
 
 import { generateJSON } from '@/lib/ai/client'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { round, strictNumber, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -59,10 +59,10 @@ export interface CollisionParams {
 export function validateCollisionParams(raw: unknown): CollisionParams | null {
   if (!raw || typeof raw !== 'object') return null
   const o = raw as Record<string, unknown>
-  const m1 = Number(o.m1)
-  const m2 = Number(o.m2)
-  const u1 = Number(o.u1)
-  const u2 = Number(o.u2)
+  const m1 = strictNumber(o.m1)
+  const m2 = strictNumber(o.m2)
+  const u1 = strictNumber(o.u1)
+  const u2 = strictNumber(o.u2)
   if (![m1, m2, u1, u2].every(Number.isFinite)) return null
   if (m1 <= 0 || m2 <= 0 || m1 > 1e6 || m2 > 1e6) return null
   if (Math.abs(u1) > 1e6 || Math.abs(u2) > 1e6) return null

@@ -17,7 +17,7 @@
 
 import { generateJSON } from '@/lib/ai/client'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { round, strictNumber, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -37,9 +37,9 @@ const ARC_SAMPLES = 21
 export function validatePendulumParams(raw: unknown): PendulumParams | null {
   if (!raw || typeof raw !== 'object') return null
   const o = raw as Record<string, unknown>
-  const length = Number(o.length)
-  const amplitudeDeg = Number(o.amplitudeDeg)
-  const gravity = o.gravity == null ? DEFAULT_GRAVITY : Number(o.gravity)
+  const length = strictNumber(o.length)
+  const amplitudeDeg = strictNumber(o.amplitudeDeg)
+  const gravity = o.gravity == null ? DEFAULT_GRAVITY : strictNumber(o.gravity)
   if (!Number.isFinite(length) || length <= 0 || length > 1000) return null
   if (!Number.isFinite(amplitudeDeg) || amplitudeDeg <= 0 || amplitudeDeg > 90) return null
   if (!Number.isFinite(gravity) || gravity <= 0 || gravity > 100) return null

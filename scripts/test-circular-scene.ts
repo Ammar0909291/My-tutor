@@ -84,5 +84,9 @@ check('reject non-positive radius', validateCircularParams({ radius: 0, speed: 4
 check('reject non-positive speed', validateCircularParams({ radius: 2, speed: -1 }) === null)
 check('accept a valid pair', validateCircularParams({ radius: 2, speed: 4 })?.radius === 2)
 
+
+// ── Type-coercion guard: malformed field types must not silently coerce ──────
+check('array [5] for radius does not coerce to 5 (Number([5])===5 coercion trap)', validateCircularParams({ radius: [5], speed: 4 }) === null)
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

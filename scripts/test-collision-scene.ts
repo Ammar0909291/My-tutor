@@ -121,5 +121,9 @@ check('validateCollisionParams — elastic type passed through',
   check('checker catches a tampered (momentum-violating) final velocity', !c.ok, 'checker did not flag tampering')
 }
 
+
+// ── Type-coercion guard: malformed field types must not silently coerce ──────
+check('array [2] for m1 does not coerce to 2 (Number([2])===2 coercion trap)', validateCollisionParams({ m1: [2], m2: 3, u1: 4, u2: -1 }) === null)
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

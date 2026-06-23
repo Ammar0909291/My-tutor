@@ -16,7 +16,7 @@
 
 import { generateJSON } from '@/lib/ai/client'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { round, strictNumber, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -36,10 +36,10 @@ const VISUAL_MAX = 18
 export function validateVectorParams(raw: unknown): VectorParams | null {
   if (!raw || typeof raw !== 'object') return null
   const o = raw as Record<string, unknown>
-  const aMag = Number(o.aMag)
-  const bMag = Number(o.bMag)
-  const aAngleDeg = Number(o.aAngleDeg)
-  const bAngleDeg = Number(o.bAngleDeg)
+  const aMag = strictNumber(o.aMag)
+  const bMag = strictNumber(o.bMag)
+  const aAngleDeg = strictNumber(o.aAngleDeg)
+  const bAngleDeg = strictNumber(o.bAngleDeg)
   if (![aMag, bMag, aAngleDeg, bAngleDeg].every(Number.isFinite)) return null
   if (aMag <= 0 || bMag <= 0 || aMag > 1000 || bMag > 1000) return null
   // Reject a near-canceling pair: the resultant collapses to ~zero, which has no
