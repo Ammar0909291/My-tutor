@@ -56,6 +56,16 @@ check('bare "velocity vector" in projectile text does NOT route to vector',
 check('"resultant of the projectile velocity vectors" → projectile (most-specific-first, documented)',
   routeSceneGenerator('Find the resultant of the projectile velocity vectors.') === 'projectile')
 
+// ── Circular motion (5th type) + its collision reasoning ─────────────────────
+check('circular-motion prose → circular',
+  routeSceneGenerator('A car moves in a circle of radius 50 m; find its centripetal acceleration.') === 'circular')
+check('"uniform circular motion" → circular',
+  routeSceneGenerator('Explain uniform circular motion and the centripetal force.') === 'circular')
+check('"circular trajectory" → circular (not projectile, despite "trajectory")',
+  routeSceneGenerator('The moon follows a nearly circular trajectory around the Earth.') === 'circular')
+check('plain projectile "trajectory" (no "circular") still → projectile',
+  routeSceneGenerator('The ball follows a parabolic trajectory after launch.') === 'projectile')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)

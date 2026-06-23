@@ -23,6 +23,7 @@ import { extractProjectileParams, buildProjectileScene, checkProjectileConsisten
 import { extractTriangleParams, buildTriangleScene, checkTriangleConsistency } from '../src/lib/teaching/sceneGenerators/triangleAngleSum'
 import { extractMolecule, buildMoleculeScene, checkMoleculeConsistency } from '../src/lib/teaching/sceneGenerators/moleculeGeometry'
 import { extractVectorParams, buildVectorScene, checkVectorConsistency } from '../src/lib/teaching/sceneGenerators/vectorAddition'
+import { extractCircularParams, buildCircularScene, checkCircularConsistency } from '../src/lib/teaching/sceneGenerators/circularMotion'
 
 const PROBE = {
   projectile: {
@@ -100,6 +101,20 @@ async function main() {
     const c = checkVectorConsistency(spec, vParams)
     console.log(`NEW consistency check: ${c.ok ? 'PASS (R = A + B, law-of-cosines verified)' : 'FAIL — ' + c.errors.join('; ')}`)
     console.log('EXPECT: ~3 east + ~4 north → |R| ≈ 5 at ~53°')
+  }
+
+  // ── Circular motion (representative 5th type, not from the original probe) ──
+  console.log('\n############ CASE 5: UNIFORM CIRCULAR MOTION (representative, not from the original probe)')
+  const cText = 'A stone tied to a string moves in a circle of radius 2 metres at a constant speed of 4 metres per second. Find its centripetal acceleration.'
+  console.log(`ROUTE: ${routeSceneGenerator(cText)}`)
+  const cParams = await extractCircularParams(cText)
+  if (!cParams) { anyNull = true; console.log('NEW: extractCircularParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(cParams)}`)
+    const spec = buildCircularScene(cParams)
+    const c = checkCircularConsistency(spec, cParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (velocity ⊥ radius, a_c = v²/r toward centre)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: r=2, v=4 → a_c = 8 m/s² toward the centre')
   }
 
   console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')

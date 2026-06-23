@@ -16,8 +16,9 @@ import { generateProjectileScene } from './projectileMotion'
 import { generateTriangleScene } from './triangleAngleSum'
 import { generateMoleculeScene } from './moleculeGeometry'
 import { generateVectorScene } from './vectorAddition'
+import { generateCircularScene } from './circularMotion'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular'
 
 interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 
@@ -27,6 +28,18 @@ interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 // triangle-specific (never bare "angle"). Molecule keywords are chemistry-bonding
 // specific (never bare "water") so they can't collide with the other two.
 const ROUTE_RULES: RouteRule[] = [
+  {
+    // Checked BEFORE projectile: "circular trajectory / circular path" contains
+    // the projectile cue "trajectory", but a genuine projectile turn never says
+    // "circular"/"centripetal", so leading with these circular-specific cues
+    // resolves that overlap toward circular without stealing any projectile turn.
+    kind: 'circular',
+    keywords: [
+      'circular motion', 'uniform circular', 'centripetal', 'circular orbit',
+      'circular path', 'circular trajectory', 'moves in a circle', 'moving in a circle',
+      'around a circle', 'angular velocity',
+    ],
+  },
   {
     kind: 'projectile',
     keywords: [
@@ -92,6 +105,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'triangle': return generateTriangleScene(text)
     case 'molecule': return generateMoleculeScene(text)
     case 'vector': return generateVectorScene(text)
+    case 'circular': return generateCircularScene(text)
     default: return null
   }
 }
