@@ -94,5 +94,18 @@ check('BF3 — valid + consistent', validateSceneSpec(bf3Spec).valid && checkMol
 // ── Unknown molecule → null (don't fabricate geometry) ───────────────────────
 check('unknown molecule returns null', lookupMolecule('xenon hexafluoride') === null)
 
+// ── Malformed LLM output → null, never throws (the type guard at line 49) ────
+check('non-string input (null) → null', lookupMolecule(null) === null)
+check('non-string input (number) → null', lookupMolecule(42) === null)
+check('non-string input (object) → null', lookupMolecule({ name: 'Water' }) === null)
+check('empty string → null', lookupMolecule('') === null)
+
+// ── Ambiguous text (two molecule names present) → longest alias wins ─────────
+// "methane" (7 chars) outscores "water" (5 chars), so a text mentioning both
+// resolves toward the longer, more specific match — documents the real,
+// deterministic tie-break rule rather than leaving it unverified.
+check('text naming both "water" and "methane" → longest alias (methane) wins',
+  lookupMolecule('unlike water, methane is nonpolar')?.name === 'Methane')
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)

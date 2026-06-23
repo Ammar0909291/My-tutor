@@ -66,5 +66,18 @@ check('"cubic close packed" → fcc', lookupLattice('cubic close packed metals')
 check('hexagonal lattice not supported → null', lookupLattice('hexagonal close packed') === null)
 check('unrelated text → null', lookupLattice('the water cycle') === null)
 
+// ── Malformed LLM output → null, never throws (the type guard at line 49) ────
+check('non-string input (null) → null', lookupLattice(null) === null)
+check('non-string input (number) → null', lookupLattice(42) === null)
+check('non-string input (object) → null', lookupLattice({ kind: 'fcc' }) === null)
+check('empty string → null', lookupLattice('') === null)
+
+// ── Ambiguous text (two lattice names present) → longest alias wins ──────────
+// "simple cubic" (12 chars) outscores "fcc" (3 chars), so a text mentioning both
+// resolves toward the longer, more specific match — documents the real,
+// deterministic tie-break rule rather than leaving it unverified.
+check('text naming both "simple cubic" and "fcc" → longest alias (simple cubic) wins',
+  lookupLattice('unlike fcc metals, this one has a simple cubic structure')?.kind === 'simple_cubic')
+
 console.log(`\n=== ${pass} passed, ${fail} failed ===\n`)
 process.exit(fail === 0 ? 0 : 1)
