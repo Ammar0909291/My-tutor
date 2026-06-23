@@ -12,6 +12,7 @@ import { MessageRole } from '@prisma/client'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
+import { generateSceneSpec, isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -1126,6 +1127,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!detectedVisualSpec) {
         try {
           detectedSceneSpec = buildSceneSpec(cleanText)
+        } catch { /* non-fatal */ }
+      }
+
+      // Part 2 (DRAFT, FLAG-GATED): AI SceneSpec generation. Dead by default —
+      // generateSceneSpec() returns null unless ENABLE_AI_SCENE_GENERATION === 'true'.
+      // Runs only when neither deterministic pipeline produced anything, so it can
+      // never override a trusted deterministic visual, and its output is already
+      // structurally validated (validateSceneSpec) inside the generator. Non-fatal:
+      // a failed/blocked LLM call degrades to null and the turn proceeds unchanged.
+      // This is the production wiring, drafted and ready to enable once the
+      // feasibility probe confirms usable output on a Groq-reachable network.
+      if (!detectedVisualSpec && !detectedSceneSpec && isAiSceneGenerationEnabled()) {
+        try {
+          detectedSceneSpec = await generateSceneSpec(cleanText)
         } catch { /* non-fatal */ }
       }
 
