@@ -72,6 +72,16 @@ check('pendulum prose → pendulum',
 check('"swinging bob" → pendulum',
   routeSceneGenerator('The swinging bob reaches its highest point at the ends of the arc.') === 'pendulum')
 
+// ── Electron shells (7th type) + collision reasoning vs molecule ─────────────
+check('electron-configuration prose → electron_shells',
+  routeSceneGenerator('Draw the electron configuration of sodium using the Bohr model.') === 'electron_shells')
+check('"electron shells of oxygen" → electron_shells',
+  routeSceneGenerator('Show the electron shells of an oxygen atom.') === 'electron_shells')
+check('molecule "shares a pair of electrons" still → molecule (no shell keyword)',
+  routeSceneGenerator('A covalent bond forms when two atoms share a pair of electrons in a water molecule.') === 'molecule')
+check('"electron configuration in a water molecule" → electron_shells (explicit shell cue wins)',
+  routeSceneGenerator('What is the electron configuration of oxygen in a water molecule?') === 'electron_shells')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)

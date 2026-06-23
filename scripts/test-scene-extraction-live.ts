@@ -25,6 +25,7 @@ import { extractMolecule, buildMoleculeScene, checkMoleculeConsistency } from '.
 import { extractVectorParams, buildVectorScene, checkVectorConsistency } from '../src/lib/teaching/sceneGenerators/vectorAddition'
 import { extractCircularParams, buildCircularScene, checkCircularConsistency } from '../src/lib/teaching/sceneGenerators/circularMotion'
 import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } from '../src/lib/teaching/sceneGenerators/pendulumMotion'
+import { extractElement, buildElectronShellScene, checkElectronShellConsistency } from '../src/lib/teaching/sceneGenerators/electronShells'
 
 const PROBE = {
   projectile: {
@@ -130,6 +131,20 @@ async function main() {
     const c = checkPendulumConsistency(spec, penParams)
     console.log(`NEW consistency check: ${c.ok ? 'PASS (constant string length, symmetric arc, T=2π√(L/g))' : 'FAIL — ' + c.errors.join('; ')}`)
     console.log('EXPECT: L=1, amp=20° → T ≈ 2.01 s, symmetric arc')
+  }
+
+  // ── Electron shells (representative 7th type, not from the original probe) ──
+  console.log('\n############ CASE 7: ELECTRON SHELLS / BOHR MODEL (representative, not from the original probe)')
+  const elText = 'Draw the Bohr-model electron configuration of a sodium atom, showing how its electrons fill the shells.'
+  console.log(`ROUTE: ${routeSceneGenerator(elText)}`)
+  const elDef = await extractElement(elText)
+  if (!elDef) { anyNull = true; console.log('NEW: extractElement returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted element: ${elDef.name} (${elDef.symbol}, Z=${elDef.z}) → shells ${elDef.shells.join(', ')}`)
+    const spec = buildElectronShellScene(elDef)
+    const c = checkElectronShellConsistency(spec, elDef)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (Z electrons total, Bohr–Bury split verified)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: sodium → 2, 8, 1 (11 electrons)')
   }
 
   console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')

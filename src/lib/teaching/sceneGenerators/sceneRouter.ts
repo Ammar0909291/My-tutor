@@ -18,8 +18,18 @@ import { generateMoleculeScene } from './moleculeGeometry'
 import { generateVectorScene } from './vectorAddition'
 import { generateCircularScene } from './circularMotion'
 import { generatePendulumScene } from './pendulumMotion'
+import { generateElectronShellScene } from './electronShells'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells'
+
+// INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
+//  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
+//    (src/lib/visuals/visualConceptDetector.ts, equation/graph path). Building a
+//    SceneSpec version would duplicate a working system, not add new coverage.
+//  • Free-body / net-force diagrams — "net force" IS vector addition (the
+//    'vector' generator); open-ended force extraction isn't a clean case.
+//  • Momentum / collision — DEFERRED: its 1D/2D + elastic/inelastic representation
+//    is a genuine scope decision to revisit deliberately, not guess at here.
 
 interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 
@@ -62,6 +72,19 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'triangle', 'interior angle', 'interior angles', 'angles of a triangle',
       'angle sum', 'three angles', 'angle a is', 'angle b is',
+    ],
+  },
+  {
+    // Checked BEFORE molecule: an "electron configuration of X" / "Bohr model"
+    // turn is about shells, not bonding. These keys are shell-specific — molecule
+    // text like "atoms share a pair of electrons" contains "electron" but NOT
+    // "electron shell"/"electron configuration"/"bohr model", so molecule turns
+    // are never stolen.
+    kind: 'electron_shells',
+    keywords: [
+      'electron shell', 'electron shells', 'electron configuration',
+      'bohr model', 'bohr diagram', 'energy levels of', 'k shell', 'l shell',
+      'electronic configuration', 'shell diagram',
     ],
   },
   {
@@ -117,6 +140,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'vector': return generateVectorScene(text)
     case 'circular': return generateCircularScene(text)
     case 'pendulum': return generatePendulumScene(text)
+    case 'electron_shells': return generateElectronShellScene(text)
     default: return null
   }
 }
