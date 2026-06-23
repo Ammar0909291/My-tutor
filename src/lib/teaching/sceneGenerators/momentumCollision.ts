@@ -268,7 +268,32 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractCollisionParams(text: string): Promise<CollisionParams | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
-  if (!raw || raw.isCollision !== true) return null
-  return validateCollisionParams(raw)
+  // TEMP DEBUG (remove once live extraction is verified): surface exactly WHY
+  // this returns null on a Groq-reachable network — the parsed response and the
+  // branch that rejected it. generateJSON() already JSON-parses internally, so
+  // this logs the parsed object (or the parse/transport failure) rather than the
+  // pre-parse string, which isn't observable from here.
+  let raw: any
+  try {
+    raw = await generateJSON(buildExtractionPrompt(text), 150)
+  } catch (err) {
+    console.error('[extractCollisionParams DEBUG] generateJSON threw:', err)
+    return null
+  }
+  console.error('[extractCollisionParams DEBUG] parsed Groq response:', JSON.stringify(raw))
+  if (!raw) {
+    console.error('[extractCollisionParams DEBUG] → null: generateJSON returned null/falsy (transport/parse failure or blocked network)')
+    return null
+  }
+  if (raw.isCollision !== true) {
+    console.error(`[extractCollisionParams DEBUG] → null: isCollision !== true (got ${JSON.stringify(raw.isCollision)})`)
+    return null
+  }
+  const validated = validateCollisionParams(raw)
+  if (!validated) {
+    console.error('[extractCollisionParams DEBUG] → null: validateCollisionParams rejected the params (non-finite/non-positive mass, or objects not approaching: u1 - u2 <= 0)')
+    return null
+  }
+  console.error('[extractCollisionParams DEBUG] → OK:', JSON.stringify(validated))
+  return validated
 }
