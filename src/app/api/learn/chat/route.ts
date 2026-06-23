@@ -1129,6 +1129,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal */ }
       }
 
+      // Extend the "never show two visuals for one explanation" guard above to
+      // the one pairing it missed: responseVisual (the LLM's own VISUAL:<type>
+      // tag, parsed earlier) is computed independently of both deterministic
+      // pipelines, so it could previously coexist with detectedVisualSpec or
+      // detectedSceneSpec and render a duplicate/conflicting visual alongside
+      // one of them. The deterministic pipelines are the trusted signal here —
+      // suppress the free-text LLM tag whenever either of them already fired.
+      if (detectedVisualSpec || detectedSceneSpec) {
+        responseVisual = null
+      }
+
       await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
