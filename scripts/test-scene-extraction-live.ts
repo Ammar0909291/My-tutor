@@ -22,6 +22,7 @@ import { routeSceneGenerator } from '../src/lib/teaching/sceneGenerators/sceneRo
 import { extractProjectileParams, buildProjectileScene, checkProjectileConsistency } from '../src/lib/teaching/sceneGenerators/projectileMotion'
 import { extractTriangleParams, buildTriangleScene, checkTriangleConsistency } from '../src/lib/teaching/sceneGenerators/triangleAngleSum'
 import { extractMolecule, buildMoleculeScene, checkMoleculeConsistency } from '../src/lib/teaching/sceneGenerators/moleculeGeometry'
+import { extractVectorParams, buildVectorScene, checkVectorConsistency } from '../src/lib/teaching/sceneGenerators/vectorAddition'
 
 const PROBE = {
   projectile: {
@@ -85,6 +86,20 @@ async function main() {
     const c = checkMoleculeConsistency(spec, mDef)
     console.log(`NEW consistency check: ${c.ok ? 'PASS (bent 104.5°, not linear)' : 'FAIL — ' + c.errors.join('; ')}`)
     console.log(`EXPECT: ${PROBE.molecule.expect}`)
+  }
+
+  // ── Vector addition (NOT an original probe case — representative 4th type) ──
+  console.log('\n############ CASE 4: VECTOR ADDITION (representative, not from the original probe)')
+  const vText = 'Add two forces: one of 3 newtons pointing east and one of 4 newtons pointing north. Find the resultant vector.'
+  console.log(`ROUTE: ${routeSceneGenerator(vText)}`)
+  const vParams = await extractVectorParams(vText)
+  if (!vParams) { anyNull = true; console.log('NEW: extractVectorParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(vParams)}`)
+    const spec = buildVectorScene(vParams)
+    const c = checkVectorConsistency(spec, vParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (R = A + B, law-of-cosines verified)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: ~3 east + ~4 north → |R| ≈ 5 at ~53°')
   }
 
   console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')

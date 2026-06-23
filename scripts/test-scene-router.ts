@@ -46,6 +46,16 @@ check('triangle text without "projectile"/"molecule" → triangle',
 check('"H2O" formula → molecule', routeSceneGenerator('Explain the shape of H2O') === 'molecule')
 check('"CH4 tetrahedral" → molecule', routeSceneGenerator('Why is CH4 tetrahedral?') === 'molecule')
 
+// ── Vector addition (4th type) + its collision reasoning ─────────────────────
+check('vector-addition prose → vector',
+  routeSceneGenerator('Add the two vectors tip-to-tail to find the resultant.') === 'vector')
+check('"parallelogram law" → vector',
+  routeSceneGenerator('Using the parallelogram law, find the resultant of a 3 N and a 4 N force.') === 'vector')
+check('bare "velocity vector" in projectile text does NOT route to vector',
+  routeSceneGenerator('The velocity vector of the projectile follows a parabolic trajectory.') === 'projectile')
+check('"resultant of the projectile velocity vectors" → projectile (most-specific-first, documented)',
+  routeSceneGenerator('Find the resultant of the projectile velocity vectors.') === 'projectile')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)

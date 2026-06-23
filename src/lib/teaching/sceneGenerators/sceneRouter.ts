@@ -15,8 +15,9 @@ import type { SceneSpec } from '../sceneSpec'
 import { generateProjectileScene } from './projectileMotion'
 import { generateTriangleScene } from './triangleAngleSum'
 import { generateMoleculeScene } from './moleculeGeometry'
+import { generateVectorScene } from './vectorAddition'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector'
 
 interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 
@@ -48,6 +49,21 @@ const ROUTE_RULES: RouteRule[] = [
       'h2o', 'h₂o', 'co2', 'co₂', 'ch4', 'ch₄', 'nh3', 'nh₃', 'bf3', 'bf₃',
     ],
   },
+  {
+    // Vector addition keys are addition-specific ("resultant", "parallelogram
+    // law", "vector sum", "tip-to-tail") — never the bare word "vector", which
+    // appears incidentally in projectile text ("velocity vector"). So this rule
+    // can't steal a projectile/triangle/molecule turn, and projectile (checked
+    // first) keeps any genuinely projectile-framed turn even if it also says
+    // "resultant". A pure "add these two vectors" turn has none of the earlier
+    // rules' keywords and lands here.
+    kind: 'vector',
+    keywords: [
+      'vector addition', 'adding vectors', 'add the vectors', 'add these vectors',
+      'resultant vector', 'resultant', 'vector sum', 'sum of the two vectors',
+      'parallelogram law', 'tip-to-tail', 'tip to tail', 'head to tail',
+    ],
+  },
 ]
 
 /**
@@ -75,6 +91,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'projectile': return generateProjectileScene(text)
     case 'triangle': return generateTriangleScene(text)
     case 'molecule': return generateMoleculeScene(text)
+    case 'vector': return generateVectorScene(text)
     default: return null
   }
 }
