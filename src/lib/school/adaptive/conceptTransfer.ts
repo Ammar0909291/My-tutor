@@ -49,8 +49,8 @@ const APPLICATION_MARKERS: RegExp[] = [
   /\b(cost|price|discount|sale|tax|profit|loss|interest|budget|earn|spend|pay|buy|sell|shop)\b/i,
   // Quantities in context
   /\b(recipe|ingredient|cook|bake|litre|kg|kilogram|gram|metre|centimetre|kilometre)\b/i,
-  // People and situations
-  /\b(ram|sita|anita|priya|rahul|student|farmer|shopkeeper|doctor|worker|person|friend)\b/i,
+  // People and situations (name marker handled separately below — RAM-vs-Ram guard)
+  /\b(sita|anita|priya|rahul|student|farmer|shopkeeper|doctor|worker|person|friend)\b/i,
   /\b(a (boy|girl|man|woman|child|family|group|class|team))\b/i,
   // Transport and motion
   /\b(train|car|bus|bicycle|bike|journey|travel|speed|distance|time|reach)\b/i,
@@ -72,8 +72,24 @@ const APPLICATION_MARKERS: RegExp[] = [
   /if\b.{5,60}\bhow\b/i,          // "If X costs ₹Y, how many..."
 ]
 
+/**
+ * Matches the name "Ram" (a common application-question subject) while
+ * excluding the all-caps "RAM" acronym — real curriculum content
+ * (cs.memory_storage, cs.computer_organisation) discusses RAM/ROM memory,
+ * and a routine question like "What is the difference between RAM and ROM?"
+ * must not be misclassified as an application question.
+ */
+function hasRamNameMarker(text: string): boolean {
+  const rx = /\bram\b/gi
+  let m: RegExpExecArray | null
+  while ((m = rx.exec(text)) !== null) {
+    if (m[0] !== 'RAM') return true
+  }
+  return false
+}
+
 function isApplicationQuestion(text: string): boolean {
-  return APPLICATION_MARKERS.some((rx) => rx.test(text))
+  return hasRamNameMarker(text) || APPLICATION_MARKERS.some((rx) => rx.test(text))
 }
 
 // ── Evidence collection ───────────────────────────────────────────────────────
