@@ -38,6 +38,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -54,8 +55,6 @@ export interface CollisionParams {
   u2: number
   collisionType: CollisionType
 }
-
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
 
 /** Validate/normalize extracted params; null (reject) if implausible. */
 export function validateCollisionParams(raw: unknown): CollisionParams | null {
@@ -171,11 +170,6 @@ export function buildCollisionScene(params: CollisionParams): SceneSpec {
 }
 
 // ── Safety-net consistency checker (INDEPENDENT derivation) ──────────────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 /**
  * Re-verify the result via a DIFFERENT path than the build used:

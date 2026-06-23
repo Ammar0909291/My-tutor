@@ -15,6 +15,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── VSEPR table: textbook geometries for common school-curriculum molecules ──
 
@@ -44,8 +45,6 @@ const MOLECULES: MoleculeDef[] = [
 ]
 
 const BOND_LEN = 8
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /** Find a molecule by name/formula in free text. Longest alias first to avoid partial shadowing. */
 export function lookupMolecule(raw: unknown): MoleculeDef | null {
   if (typeof raw !== 'string') return null
@@ -145,11 +144,6 @@ export function buildMoleculeScene(def: MoleculeDef): SceneSpec {
 }
 
 // ── Safety-net consistency checker (deterministic) ───────────────────────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 function angleBetween(c: Vec3, a: Vec3, b: Vec3): number {
   const u = [a[0] - c[0], a[1] - c[1], a[2] - c[2]]

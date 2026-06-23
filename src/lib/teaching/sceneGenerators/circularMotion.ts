@@ -22,6 +22,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -34,8 +35,6 @@ export interface CircularParams {
 
 const VISUAL_MAX = 16
 const ARROW = VISUAL_MAX * 0.4
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /** Validate/normalize extracted parameters; null (reject) if implausible. */
 export function validateCircularParams(raw: unknown): CircularParams | null {
   if (!raw || typeof raw !== 'object') return null
@@ -130,11 +129,6 @@ export function buildCircularScene(params: CircularParams): SceneSpec {
 }
 
 // ── Safety-net consistency checker (independent geometric derivation) ────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 export function checkCircularConsistency(spec: SceneSpec, params: CircularParams): ConsistencyResult {
   const errors: string[] = []

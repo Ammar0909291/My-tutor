@@ -18,6 +18,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -33,8 +34,6 @@ export interface PendulumParams {
 const DEFAULT_GRAVITY = 9.8
 const VISUAL_MAX = 18
 const ARC_SAMPLES = 21
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /** Validate/normalize extracted parameters; null (reject) if implausible. */
 export function validatePendulumParams(raw: unknown): PendulumParams | null {
   if (!raw || typeof raw !== 'object') return null
@@ -129,11 +128,6 @@ export function buildPendulumScene(params: PendulumParams): SceneSpec {
 }
 
 // ── Safety-net consistency checker (independent geometric derivation) ────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 export function checkPendulumConsistency(spec: SceneSpec, params: PendulumParams): ConsistencyResult {
   const errors: string[] = []

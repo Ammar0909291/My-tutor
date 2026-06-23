@@ -17,6 +17,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -32,8 +33,6 @@ export interface VectorParams {
 }
 
 const VISUAL_MAX = 18
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /** Validate/normalize extracted vectors; null (reject) if implausible. */
 export function validateVectorParams(raw: unknown): VectorParams | null {
   if (!raw || typeof raw !== 'object') return null
@@ -126,11 +125,6 @@ export function buildVectorScene(params: VectorParams): SceneSpec {
 }
 
 // ── Safety-net consistency checker (INDEPENDENT derivation) ──────────────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 /**
  * Re-verify the resultant via a DIFFERENT derivation than the build used:

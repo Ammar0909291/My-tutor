@@ -20,6 +20,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -55,8 +56,6 @@ export function validateProjectileParams(raw: unknown): ProjectileParams | null 
 }
 
 // ── Deterministic geometry (real physics, never LLM-generated) ───────────────
-
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
 
 interface ProjectileGeometry {
   scale: number
@@ -147,11 +146,6 @@ export function buildProjectileScene(params: ProjectileParams): SceneSpec {
 }
 
 // ── Safety-net consistency checker (deterministic; option-(a) layer) ─────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 /**
  * Independently verify that the scene's trajectory really is the parabola the

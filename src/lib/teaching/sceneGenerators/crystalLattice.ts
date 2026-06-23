@@ -24,6 +24,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Curated reference data: the three cubic unit cells ───────────────────────
 
@@ -44,8 +45,6 @@ const LATTICES: LatticeDef[] = [
 ]
 
 const HALF = 8 // half the cube side in scene units (cube spans ±8)
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /** Find a lattice type in free text. Longest alias first to avoid partial shadowing. */
 export function lookupLattice(raw: unknown): LatticeDef | null {
   if (typeof raw !== 'string') return null
@@ -140,11 +139,6 @@ export function buildLatticeScene(def: LatticeDef): SceneSpec {
 }
 
 // ── Safety-net consistency checker (independent: the sharing rule) ────────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 export function checkLatticeConsistency(spec: SceneSpec, def: LatticeDef): ConsistencyResult {
   const errors: string[] = []

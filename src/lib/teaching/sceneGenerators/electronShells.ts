@@ -24,6 +24,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Curated reference data: Z = 1–20, Bohr–Bury shell electron counts ────────
 
@@ -60,8 +61,6 @@ const ELEMENTS: ElementDef[] = [
 
 const SHELL_NAMES = ['K', 'L', 'M', 'N']
 const VISUAL_MAX = 16
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /**
  * Independent algorithmic Bohr–Bury fill (for Z ≤ 20): fill K(2), then each further
  * shell up to 8 (the outermost-≤8 rule that holds through calcium). Used by the
@@ -183,11 +182,6 @@ export function buildElectronShellScene(def: ElementDef): SceneSpec {
 }
 
 // ── Safety-net consistency checker (independent derivation) ───────────────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 export function checkElectronShellConsistency(spec: SceneSpec, def: ElementDef): ConsistencyResult {
   const errors: string[] = []

@@ -15,6 +15,7 @@
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
+import { round, type ConsistencyResult } from './shared'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -26,8 +27,6 @@ export interface TriangleParams {
 }
 
 const VISUAL_MAX = 20
-const round = (n: number, dp = 3): number => Math.round(n * 10 ** dp) / 10 ** dp
-
 /** Validate/normalize extracted angles; null (reject) if they can't form a triangle. */
 export function validateTriangleParams(raw: unknown): TriangleParams | null {
   if (!raw || typeof raw !== 'object') return null
@@ -114,11 +113,6 @@ export function buildTriangleScene(params: TriangleParams): SceneSpec {
 }
 
 // ── Safety-net consistency checker (deterministic) ───────────────────────────
-
-export interface ConsistencyResult {
-  ok: boolean
-  errors: string[]
-}
 
 /** Interior angle (degrees) at vertex `v` given its two neighbours, via dot product. */
 function interiorAngle(v: Vec3, n1: Vec3, n2: Vec3): number {
