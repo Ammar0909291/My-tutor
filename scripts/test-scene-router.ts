@@ -82,6 +82,16 @@ check('molecule "shares a pair of electrons" still → molecule (no shell keywor
 check('"electron configuration in a water molecule" → electron_shells (explicit shell cue wins)',
   routeSceneGenerator('What is the electron configuration of oxygen in a water molecule?') === 'electron_shells')
 
+// ── Crystal lattice (8th type) ───────────────────────────────────────────────
+check('"unit cell" prose → lattice',
+  routeSceneGenerator('Draw the simple cubic unit cell and count its atoms.') === 'lattice')
+check('"body-centered cubic" → lattice',
+  routeSceneGenerator('Iron has a body-centered cubic crystal structure.') === 'lattice')
+check('standalone "BCC" → lattice',
+  routeSceneGenerator('The metal has a BCC structure.') === 'lattice')
+check('lattice "crystal structure" does NOT collide with molecule',
+  routeSceneGenerator('Explain the FCC crystal structure of copper.') === 'lattice')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)

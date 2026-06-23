@@ -19,8 +19,9 @@ import { generateVectorScene } from './vectorAddition'
 import { generateCircularScene } from './circularMotion'
 import { generatePendulumScene } from './pendulumMotion'
 import { generateElectronShellScene } from './electronShells'
+import { generateLatticeScene } from './crystalLattice'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -88,6 +89,17 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Lattice keys are crystal-specific (unit cell / cubic-cell names); disjoint
+    // from molecule's bonding vocabulary, so the two never collide.
+    kind: 'lattice',
+    keywords: [
+      'crystal lattice', 'unit cell', 'crystal structure', 'bravais',
+      'simple cubic', 'body-centered cubic', 'body centred cubic',
+      'face-centered cubic', 'face centred cubic', 'cubic close packed',
+      ' bcc', ' fcc', // leading space → match the standalone abbreviations, not substrings
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -141,6 +153,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'circular': return generateCircularScene(text)
     case 'pendulum': return generatePendulumScene(text)
     case 'electron_shells': return generateElectronShellScene(text)
+    case 'lattice': return generateLatticeScene(text)
     default: return null
   }
 }

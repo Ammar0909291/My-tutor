@@ -26,6 +26,7 @@ import { extractVectorParams, buildVectorScene, checkVectorConsistency } from '.
 import { extractCircularParams, buildCircularScene, checkCircularConsistency } from '../src/lib/teaching/sceneGenerators/circularMotion'
 import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } from '../src/lib/teaching/sceneGenerators/pendulumMotion'
 import { extractElement, buildElectronShellScene, checkElectronShellConsistency } from '../src/lib/teaching/sceneGenerators/electronShells'
+import { extractLattice, buildLatticeScene, checkLatticeConsistency } from '../src/lib/teaching/sceneGenerators/crystalLattice'
 
 const PROBE = {
   projectile: {
@@ -145,6 +146,20 @@ async function main() {
     const c = checkElectronShellConsistency(spec, elDef)
     console.log(`NEW consistency check: ${c.ok ? 'PASS (Z electrons total, Bohr–Bury split verified)' : 'FAIL — ' + c.errors.join('; ')}`)
     console.log('EXPECT: sodium → 2, 8, 1 (11 electrons)')
+  }
+
+  // ── Crystal lattice (representative 8th type, not from the original probe) ──
+  console.log('\n############ CASE 8: CRYSTAL LATTICE / UNIT CELL (representative, not from the original probe)')
+  const latText = 'Sodium chloride crystals are based on a face-centered cubic unit cell. Show the unit cell.'
+  console.log(`ROUTE: ${routeSceneGenerator(latText)}`)
+  const latDef = await extractLattice(latText)
+  if (!latDef) { anyNull = true; console.log('NEW: extractLattice returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted lattice: ${latDef.name} → ${latDef.atomsPerCell} atoms/cell`)
+    const spec = buildLatticeScene(latDef)
+    const c = checkLatticeConsistency(spec, latDef)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (sharing rule re-derives atoms/cell)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: face-centered cubic → 4 atoms/cell')
   }
 
   console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')
