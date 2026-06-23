@@ -176,7 +176,10 @@ export function parseWorkedExampleTag(text: string): {
   const concept = match[1].trim()
   const currentStep = parseInt(match[2], 10) || 1
   const stepCount = parseInt(match[3], 10) || currentStep
-  const cleanText = text.replace(/\[WE:[^\]]*\]\s*/i, '').trim()
+  // Strip the EXACT tag we parsed (match[0]), not "the first [WE:...] bracket".
+  // A separate strip regex could remove a different, earlier malformed bracket
+  // and leave the real progress tag visible to the student.
+  const cleanText = text.replace(match[0], '').replace(/\s{2,}/g, ' ').trim()
 
   return {
     state: { concept, stepCount, currentStep, nextQuestion: null, expectedStudentAction: null },
