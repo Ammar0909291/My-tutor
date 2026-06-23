@@ -71,8 +71,18 @@ const GRAPH_KEYWORDS = [
 // numbers, integer comparison).
 const NUMBER_LINE_KEYWORDS = [
   'number line', 'positive number', 'negative number', 'integer', 'integers',
-  'compare', 'comparison',
 ]
+
+// "compare"/"comparison" are far too common across non-math subjects to trigger
+// a number line on their own — "compare these 2 sentences" (English), "compare
+// the 2 causes of the 1857 revolt" (history), "we compared 4 poems" all carry a
+// stray small number and would otherwise render a spurious number line. These
+// cues only count as a number-line signal when a NEGATIVE number is also present
+// (e.g. "compare -5 and 3"), which strongly implies signed-integer comparison
+// rather than incidental prose. Genuine "compare integers / on the number line"
+// phrasings already fire via NUMBER_LINE_KEYWORDS above, independent of this.
+const COMPARISON_CUES = ['compare', 'comparison']
+const SIGNED_NEGATIVE_RE = /(?:^|\s)-\d/
 
 // y = <expression containing x>, e.g. "y = x + 2", "y=-2x+1", "y = x^2 - 2x - 3"
 const EQUATION_RE = /\by\s*=\s*[-+0-9x^*/.()\s]*x[-+0-9x^*/.()\s]*/gi
@@ -444,7 +454,8 @@ export function detectVisualConcept(content: string): DetectedConcept | null {
   const statistics = detectStatisticsConcept(content, lower)
   if (statistics) return statistics
 
-  if (containsAny(lower, NUMBER_LINE_KEYWORDS)) {
+  const comparisonSignal = containsAny(lower, COMPARISON_CUES) && SIGNED_NEGATIVE_RE.test(content)
+  if (containsAny(lower, NUMBER_LINE_KEYWORDS) || comparisonSignal) {
     const highlight = extractHighlightNumbers(content)
     if (highlight.length > 0) {
       return { kind: 'number_line', highlight }
