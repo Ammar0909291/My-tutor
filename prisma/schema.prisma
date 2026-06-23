@@ -396,19 +396,19 @@ model EvidenceRecord {
 }
 
 model PracticeSession {
-  id          String    @id @default(cuid())
-  userId      String
-  subjectSlug String
-  topicSlug   String
+  id             String    @id @default(cuid())
+  userId         String
+  subjectSlug    String
+  topicSlug      String
   // Sprint BM: school chapter practice; null for legacy topic-level sessions
-  chapterId   String?
+  chapterId      String?
   // Sprint BN: "practice" (default) | "assessment"
-  kind        String    @default("practice")
-  questions       Json      // StoredPracticeQuestion[] — includes correct answers (never sent to client)
-  completedAt     DateTime?
-  score           Int?      // 0-100
-  idempotencyKey  String?   @unique  // HIGH-6: client-supplied key; DB unique constraint is the atomic dedup guard
-  createdAt       DateTime  @default(now())
+  kind           String    @default("practice")
+  questions      Json // StoredPracticeQuestion[] — includes correct answers (never sent to client)
+  completedAt    DateTime?
+  score          Int? // 0-100
+  idempotencyKey String?   @unique // HIGH-6: client-supplied key; DB unique constraint is the atomic dedup guard
+  createdAt      DateTime  @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -421,10 +421,10 @@ model MistakeRecord {
   id          String   @id @default(cuid())
   userId      String
   subjectSlug String
-  topicSlug   String   // topic being practiced
-  sessionId   String   // PracticeSession id
-  category    String   // mistake category from taxonomy (e.g. "arithmetic_error")
-  questionId  String   // question id within session
+  topicSlug   String // topic being practiced
+  sessionId   String // PracticeSession id
+  category    String // mistake category from taxonomy (e.g. "arithmetic_error")
+  questionId  String // question id within session
   createdAt   DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -439,19 +439,19 @@ model MistakeRecord {
 // the tutor asks while teaching, evaluated by a lightweight AI classifier.
 // Not part of the Practice/Assessment systems.
 model LearningCheckpoint {
-  id          String   @id @default(cuid())
-  userId      String
-  board       String
-  grade       Int
-  subjectSlug String
-  chapterId   String
-  kgNodeId    String?
-  question    String
-  answer      String
+  id           String   @id @default(cuid())
+  userId       String
+  board        String
+  grade        Int
+  subjectSlug  String
+  chapterId    String
+  kgNodeId     String?
+  question     String
+  answer       String
   userResponse String
-  passed      Boolean
-  hintUsed    Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  passed       Boolean
+  hintUsed     Boolean  @default(false)
+  createdAt    DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -571,17 +571,17 @@ model Payment {
 // ─── Flashcards ───────────────────────────────────────────────────────────────
 
 model Flashcard {
-  id            String    @id @default(cuid())
-  userId        String
-  topic         String
-  question      String
-  answer        String
-  nextReview    DateTime  @default(now())
-  reviewCount   Int       @default(0)
-  easy          Boolean   @default(false)
+  id             String    @id @default(cuid())
+  userId         String
+  topic          String
+  question       String
+  answer         String
+  nextReview     DateTime  @default(now())
+  reviewCount    Int       @default(0)
+  easy           Boolean   @default(false)
   lastReviewedAt DateTime?
-  createdAt     DateTime  @default(now())
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime  @default(now())
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Sprint AP: /api/flashcards filters by (userId, nextReview) for due cards
   // and (userId, lastReviewedAt) for the studied-today count on every load.
@@ -594,14 +594,14 @@ model Flashcard {
 
 model Curriculum {
   id          String   @id @default(cuid())
-  subjectCode String   // subject slug: c, cpp, python, english, javascript, typescript, russian, etc.
+  subjectCode String // subject slug: c, cpp, python, english, javascript, typescript, russian, etc.
   unit        Int
   unitTitle   String
   lesson      Int // lesson number within unit
   lessonTitle String
   lessonGoal  String   @db.Text
   order       Int // global order across all lessons in subject
-  topicSlug   String?  // KG node slug — links this lesson to the knowledge graph
+  topicSlug   String? // KG node slug — links this lesson to the knowledge graph
   createdAt   DateTime @default(now())
 
   @@unique([subjectCode, order])
@@ -610,19 +610,19 @@ model Curriculum {
 }
 
 model StudentProgress {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   userId            String
   subjectCode       String
-  currentLesson     Int      @default(1)
-  completedLessons  Int[]    @default([])
-  lastStudiedAt     DateTime @default(now())
+  currentLesson     Int       @default(1)
+  completedLessons  Int[]     @default([])
+  lastStudiedAt     DateTime  @default(now())
   lastLessonTitle   String?
   lastUnitTitle     String?
   // Sprint N — subject completion tracking
-  isCompleted       Boolean  @default(false)
+  isCompleted       Boolean   @default(false)
   completedAt       DateTime?
-  completionPercent Int      @default(0)
-  updatedAt         DateTime @updatedAt
+  completionPercent Int       @default(0)
+  updatedAt         DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -640,7 +640,7 @@ model FinalAssessmentResult {
   totalQuestions Int      @default(0)
   passed         Boolean  @default(false)
   takenAt        DateTime @default(now())
-  questions      Json?    // stored server-side at generate time; used for server-side grading
+  questions      Json? // stored server-side at generate time; used for server-side grading
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -998,6 +998,13 @@ model RetentionMetric {
 // learning system that feeds mastery via AI-reviewed submissions, and an
 // aggregate knowledge-retention snapshot per user/subject.
 
+// SCAFFOLDING (Subject Library spaced repetition): ReviewSchedule is READ in the
+// tutor context (api/learn/chat/route.ts — "MASTERY & SPACED REPETITION CONTEXT"),
+// but no code WRITES to it yet, so that read currently always returns empty. The
+// read path + RetentionMetric integration are done; only the writer (populate a
+// schedule + advance stage on review outcome) is unbuilt. Kept intentionally as a
+// near-complete feature, not deleted. ReviewAttempt (below) is its attempt-history
+// companion and is not yet referenced anywhere. Do not assume these are live.
 model ReviewSchedule {
   id             String         @id @default(cuid())
   userId         String
@@ -1804,9 +1811,9 @@ model RevisionNotesCache {
   subjectSlug String
   grade       Int
   chapterId   String
-  noteType    String   // "quick" | "exam" | "formula"
+  noteType    String // "quick" | "exam" | "formula"
   language    String   @default("en")
-  content     Json     // structured RevisionNotes payload
+  content     Json // structured RevisionNotes payload
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

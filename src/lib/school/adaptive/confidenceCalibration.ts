@@ -56,23 +56,37 @@ const LOW_CONFIDENCE_PHRASES = [
   "don't know", 'hard to understand', 'tricky', 'not clear', 'a bit confused',
 ]
 
+/** True if the match at `idx` is immediately negated (preceded by "not "/"n't "). */
+function isNegated(lower: string, idx: number): boolean {
+  const before = lower.slice(Math.max(0, idx - 5), idx)
+  return /(?:\bnot|n't)\s$/.test(before)
+}
+
 function scoreText(text: string, phrases: string[]): number {
   const lower = text.toLowerCase()
   let count = 0
   for (const phrase of phrases) {
-    // simple substring match — phrase list is conservative enough that false
-    // positives are rare; word-boundary checking added for short tokens
+    // Word-boundary match for short tokens, substring for longer phrases. In
+    // both cases reject a match that is directly negated — otherwise a HIGH
+    // phrase like 'sure'/'clear to me' fires inside the very common LOW
+    // expressions "not sure" / "not clear to me", polluting the ratio with a
+    // phantom opposite-confidence hit (same overly-broad-keyword class as the
+    // detectVisual fixes).
     if (phrase.length <= 5) {
       const rx = new RegExp(`\\b${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i')
-      if (rx.test(lower)) count++
+      const m = rx.exec(lower)
+      if (m && !isNegated(lower, m.index)) count++
     } else {
-      if (lower.includes(phrase)) count++
+      const idx = lower.indexOf(phrase)
+      if (idx >= 0 && !isNegated(lower, idx)) count++
     }
   }
   return count
 }
 
-function detectLanguageConfidence(texts: string[]): ConfidenceLevel {
+// Exported for unit testing — pure function, no DB. The live caller is
+// getConfidenceProfile below.
+export function detectLanguageConfidence(texts: string[]): ConfidenceLevel {
   if (texts.length === 0) return 'NEUTRAL'
   let totalHigh = 0
   let totalLow = 0

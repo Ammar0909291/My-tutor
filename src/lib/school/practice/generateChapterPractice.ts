@@ -6,6 +6,40 @@ import type { PracticeQuestion } from './practiceTypes'
 
 const BOARD_LABELS: Record<string, string> = { cbse: 'CBSE', up_board: 'UP Board' }
 
+/**
+ * Derive short-answer keywords from a topic/title string: lowercase, split on
+ * whitespace, drop words at/under `minLen` chars, DEDUPE (case-insensitively),
+ * cap to `max`. Dedup matters because real curriculum titles repeat words
+ * ("Cell Cycle and Cell Division" → cell, cycle, division) — without it the
+ * duplicate inflates both the keyword count and the hit count in the scorer,
+ * letting a single mentioned word clear the half-of-keywords threshold.
+ */
+function deriveKeywords(topic: string, minLen: number, max: number): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const w of topic.toLowerCase().split(/\s+/)) {
+    if (w.length <= minLen || seen.has(w)) continue
+    seen.add(w)
+    out.push(w)
+    if (out.length >= max) break
+  }
+  return out
+}
+
+/** Dedupe an already-tokenized keyword list (case-insensitive), preserving order. */
+function dedupeKeywords(keywords: string[], max: number): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const k of keywords) {
+    const key = k.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    out.push(k)
+    if (out.length >= max) break
+  }
+  return out
+}
+
 function gradeGuidance(grade: number): string {
   if (grade <= 6) return 'Use very simple language and short sentences. Test basic recall only. Options must be clearly distinct.'
   if (grade <= 8) return 'Moderate difficulty. Test understanding of core concepts with some simple application.'
@@ -48,7 +82,7 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subj
         id: 'q5', type: 'short_answer', nodeId,
         question: `"${title}" पाठ के बारे में 2-3 वाक्यों में अपने शब्दों में लिखिए।`,
         sampleAnswer: `"${title}" पाठ में ${topic} का अध्ययन किया जाता है। इस पाठ से संबंधित मुख्य विचारों और अवधारणाओं को समझना आगे की पढ़ाई के लिए आवश्यक है।`,
-        keywords: topic.split(/\s+/).filter((w) => w.length > 2).slice(0, 4),
+        keywords: deriveKeywords(topic, 2, 4),
       },
     ]
   }
@@ -84,7 +118,7 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subj
       id: 'q5', type: 'short_answer', nodeId,
       question: `In 2-3 sentences, explain what you understand about "${title}".`,
       sampleAnswer: `${title} covers ${topic} and related ideas. Understanding these concepts helps build a strong foundation for future topics.`,
-      keywords: topic.toLowerCase().split(/\s+/).filter((w) => w.length > 3).slice(0, 4),
+      keywords: deriveKeywords(topic, 3, 4),
     },
   ]
 }
@@ -211,7 +245,7 @@ function validateAndFixQuestion(q: unknown, nodeIds: string[], index: number): P
       id, type: 'short_answer', nodeId,
       question: String(o.question).trim(),
       sampleAnswer: typeof o.sampleAnswer === 'string' ? o.sampleAnswer.trim() : String(o.question),
-      keywords: Array.isArray(o.keywords) ? o.keywords.filter((k): k is string => typeof k === 'string').slice(0, 6) : [],
+      keywords: Array.isArray(o.keywords) ? dedupeKeywords(o.keywords.filter((k): k is string => typeof k === 'string'), 6) : [],
     }
   }
   return null
