@@ -20,6 +20,7 @@ import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
@@ -804,13 +805,22 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Sprint C: server already validated this with zod; re-validate
       // client-side too (defense in depth — never trust a network payload).
       const responseVisualSpec = parseVisualSpec(data.visualSpec) ?? undefined
-      // Defense in depth, same as responseVisualSpec above — no zod schema exists
-      // for SceneSpec yet (it's plain TS types), so do a minimal shape check
-      // rather than trusting the network payload outright.
+      // Defense in depth, same as responseVisualSpec above — full structural
+      // validation (not just a shape guess) via the deterministic SceneSpec
+      // validator, since no zod schema exists for SceneSpec yet (it's plain
+      // TS types). buildSceneSpec.ts only ever emits 3 fixed canned templates,
+      // so this should always pass today; it's a safety net if those
+      // templates drift. On failure, skip rendering and log why — never crash.
       const rawScene = data.sceneSpec as SceneSpec | undefined
-      const responseSceneSpec = rawScene && typeof rawScene === 'object'
-        && typeof rawScene.id === 'string' && Array.isArray(rawScene.steps)
-        ? rawScene : undefined
+      let responseSceneSpec: SceneSpec | undefined
+      if (rawScene) {
+        const result = validateSceneSpec(rawScene)
+        if (result.valid) {
+          responseSceneSpec = rawScene
+        } else {
+          console.warn('[sceneSpec] received invalid SceneSpec, skipping render:', result.errors)
+        }
+      }
       // Lesson-sync bug fix: completion must be detected ONLY from the exact
       // [LESSON_COMPLETE] control tag the system prompt instructs the AI to
       // emit. The previous keyword list also matched ordinary teaching prose
