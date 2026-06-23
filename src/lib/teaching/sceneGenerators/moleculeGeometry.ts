@@ -13,7 +13,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -211,18 +210,4 @@ export async function extractMolecule(text: string): Promise<MoleculeDef | null>
   const raw = await generateJSON(buildExtractionPrompt(text), 100).catch(() => null)
   if (!raw || raw.isMolecule !== true) return null
   return lookupMolecule(raw.molecule)
-}
-
-/**
- * Full pipeline: extract molecule (LLM) → build scene (table-driven) → structural
- * validation → bond-angle consistency check. Returns null unless every stage
- * passes. Extraction stage NEEDS a live Groq test.
- */
-export async function generateMoleculeScene(text: string): Promise<SceneSpec | null> {
-  const def = await extractMolecule(text)
-  if (!def) return null
-  const spec = buildMoleculeScene(def)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkMoleculeConsistency(spec, def).ok) return null
-  return spec
 }

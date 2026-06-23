@@ -18,7 +18,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -234,18 +233,4 @@ export async function extractProjectileParams(text: string): Promise<ProjectileP
   const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
   if (!raw || raw.isProjectile !== true) return null
   return validateProjectileParams(raw)
-}
-
-/**
- * Full pipeline: extract params (LLM) → build scene (deterministic formula) →
- * structural validation → physics consistency check. Returns null unless every
- * stage passes. NEEDS a live Groq test for the extraction stage.
- */
-export async function generateProjectileScene(text: string): Promise<SceneSpec | null> {
-  const params = await extractProjectileParams(text)
-  if (!params) return null
-  const spec = buildProjectileScene(params)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkProjectileConsistency(spec, params).ok) return null
-  return spec
 }

@@ -13,7 +13,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -176,18 +175,4 @@ export async function extractTriangleParams(text: string): Promise<TriangleParam
   const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
   if (!raw || raw.isTriangle !== true) return null
   return validateTriangleParams(raw)
-}
-
-/**
- * Full pipeline: extract (LLM) → build (deterministic) → structural validation →
- * angle consistency check. Returns null unless every stage passes. Extraction
- * stage NEEDS a live Groq test.
- */
-export async function generateTriangleScene(text: string): Promise<SceneSpec | null> {
-  const params = await extractTriangleParams(text)
-  if (!params) return null
-  const spec = buildTriangleScene(params)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkTriangleConsistency(spec, params).ok) return null
-  return spec
 }

@@ -22,7 +22,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -251,18 +250,4 @@ export async function extractElement(text: string): Promise<ElementDef | null> {
   const raw = await generateJSON(buildExtractionPrompt(text), 100).catch(() => null)
   if (!raw || raw.isElement !== true) return null
   return validateElement(lookupElement(raw.element))
-}
-
-/**
- * Full pipeline: extract element (LLM) → build (data-driven) → structural
- * validation → independent consistency check. Returns null unless every stage
- * passes. Extraction stage NEEDS a live Groq test.
- */
-export async function generateElectronShellScene(text: string): Promise<SceneSpec | null> {
-  const def = await extractElement(text)
-  if (!def) return null
-  const spec = buildElectronShellScene(def)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkElectronShellConsistency(spec, def).ok) return null
-  return spec
 }

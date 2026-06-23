@@ -16,7 +16,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -204,18 +203,4 @@ export async function extractPendulumParams(text: string): Promise<PendulumParam
   const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
   if (!raw || raw.isPendulum !== true) return null
   return validatePendulumParams(raw)
-}
-
-/**
- * Full pipeline: extract (LLM) → build (formula) → structural validation →
- * independent consistency check. Returns null unless every stage passes.
- * Extraction stage NEEDS a live Groq test.
- */
-export async function generatePendulumScene(text: string): Promise<SceneSpec | null> {
-  const params = await extractPendulumParams(text)
-  if (!params) return null
-  const spec = buildPendulumScene(params)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkPendulumConsistency(spec, params).ok) return null
-  return spec
 }

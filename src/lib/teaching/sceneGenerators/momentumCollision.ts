@@ -36,7 +36,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -272,18 +271,4 @@ export async function extractCollisionParams(text: string): Promise<CollisionPar
   const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
   if (!raw || raw.isCollision !== true) return null
   return validateCollisionParams(raw)
-}
-
-/**
- * Full pipeline: extract (LLM) → build (formula) → structural validation →
- * independent consistency check. Returns null unless every stage passes.
- * Extraction stage NEEDS a live Groq test.
- */
-export async function generateCollisionScene(text: string): Promise<SceneSpec | null> {
-  const params = await extractCollisionParams(text)
-  if (!params) return null
-  const spec = buildCollisionScene(params)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkCollisionConsistency(spec, params).ok) return null
-  return spec
 }

@@ -22,7 +22,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -212,18 +211,4 @@ export async function extractLattice(text: string): Promise<LatticeDef | null> {
   const raw = await generateJSON(buildExtractionPrompt(text), 100).catch(() => null)
   if (!raw || raw.isLattice !== true) return null
   return lookupLattice(raw.lattice)
-}
-
-/**
- * Full pipeline: extract lattice (LLM) → build (data-driven) → structural
- * validation → independent sharing-rule check. Returns null unless every stage
- * passes. Extraction stage NEEDS a live Groq test.
- */
-export async function generateLatticeScene(text: string): Promise<SceneSpec | null> {
-  const def = await extractLattice(text)
-  if (!def) return null
-  const spec = buildLatticeScene(def)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkLatticeConsistency(spec, def).ok) return null
-  return spec
 }

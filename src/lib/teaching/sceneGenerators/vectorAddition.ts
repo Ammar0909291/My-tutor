@@ -15,7 +15,6 @@
  */
 
 import { generateJSON } from '@/lib/ai/client'
-import { validateSceneSpec } from '../sceneSpecValidator'
 import type { SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
 
@@ -198,18 +197,4 @@ export async function extractVectorParams(text: string): Promise<VectorParams | 
   const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
   if (!raw || raw.isVectorAddition !== true) return null
   return validateVectorParams(raw)
-}
-
-/**
- * Full pipeline: extract (LLM) → build (formula) → structural validation →
- * independent consistency check. Returns null unless every stage passes.
- * Extraction stage NEEDS a live Groq test.
- */
-export async function generateVectorScene(text: string): Promise<SceneSpec | null> {
-  const params = await extractVectorParams(text)
-  if (!params) return null
-  const spec = buildVectorScene(params)
-  if (!validateSceneSpec(spec).valid) return null
-  if (!checkVectorConsistency(spec, params).ok) return null
-  return spec
 }

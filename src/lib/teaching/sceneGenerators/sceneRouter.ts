@@ -162,9 +162,9 @@ export function routeSceneGenerator(text: string): SceneGeneratorKind | null {
 /**
  * Run one generator's extract → build → validate → consistency-check pipeline
  * with lightweight stage logging (log only — never blocks or throws; a logging
- * failure can't break scene generation). Mirrors each generator's own
- * generateXScene() logic so behavior is identical; the logging lives here,
- * once, instead of being duplicated into all 9 generator modules.
+ * failure can't break scene generation). This is the SINGLE home for that
+ * pipeline — each generator exposes only its extract/build/check parts, and the
+ * sequence lives here once rather than being duplicated into all 9 modules.
  */
 async function runWithLogging<P>(
   kind: SceneGeneratorKind,
