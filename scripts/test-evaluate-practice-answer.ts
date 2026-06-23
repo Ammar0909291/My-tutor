@@ -95,5 +95,71 @@ for (const c of CASES) {
   console.log('')
 }
 
-console.log(`=== ${pass} passed, ${fail} failed (of ${CASES.length}) ===\n`)
+// ── Session-level output tests (untested above) ───────────────────────────────
+function check(name: string, cond: boolean, extra?: string) {
+  if (cond) pass++
+  else fail++
+  console.log(`[${cond ? '✓ pass' : '✗ FAIL'}] ${name}${extra && !cond ? `  — ${extra}` : ''}`)
+}
+
+const mcqQ = (id: string, correctIndex: number, nodeId = 'n1'): PracticeQuestion =>
+  ({ id, type: 'mcq', nodeId, question: 'Q', options: ['a','b','c','d'], correctIndex, explanation: '' })
+const ans = (qId: string, value: number | boolean | string): PracticeAnswer => ({ questionId: qId, value })
+
+console.log('\n── session-level outputs ──\n')
+
+// Zero-question session must not divide by zero
+const emptyResult = evaluatePracticeSession('s0', [], [])
+check('zero questions — accuracyPercent is 0 (no divide-by-zero)', emptyResult.accuracyPercent === 0)
+check('zero questions — masteryStatus is needs_practice', emptyResult.masteryStatus === 'needs_practice')
+check('zero questions — correctCount is 0', emptyResult.correctCount === 0)
+check('zero questions — weakNodeIds is empty', emptyResult.weakNodeIds.length === 0)
+
+// 4/4 correct → mastered (meets both MASTERY_THRESHOLD=80 and MIN_QUESTIONS_FOR_MASTERY=4)
+const perfect = evaluatePracticeSession('s1',
+  [mcqQ('a',0), mcqQ('b',1), mcqQ('c',2), mcqQ('d',3)],
+  [ans('a',0), ans('b',1), ans('c',2), ans('d',3)])
+check('4/4 correct → masteryStatus=mastered', perfect.masteryStatus === 'mastered',
+  `got ${perfect.masteryStatus}`)
+check('4/4 correct → accuracyPercent=100', perfect.accuracyPercent === 100)
+check('4/4 correct → correctCount=4', perfect.correctCount === 4)
+check('4/4 correct → weakNodeIds empty', perfect.weakNodeIds.length === 0)
+
+// 3/3 all correct but below MIN_QUESTIONS_FOR_MASTERY=4 → NOT mastered
+const shortPerfect = evaluatePracticeSession('s2',
+  [mcqQ('a',0), mcqQ('b',1), mcqQ('c',2)],
+  [ans('a',0), ans('b',1), ans('c',2)])
+check('3/3 correct but total<4 → NOT mastered (MIN_QUESTIONS_FOR_MASTERY guard)',
+  shortPerfect.masteryStatus !== 'mastered', `got ${shortPerfect.masteryStatus}`)
+
+// 3/5 correct = 60% → good_progress
+const medResult = evaluatePracticeSession('s3',
+  [mcqQ('a',0,'n1'), mcqQ('b',0,'n1'), mcqQ('c',0,'n2'), mcqQ('d',0,'n2'), mcqQ('e',0,'n3')],
+  [ans('a',0), ans('b',0), ans('c',0), ans('d',1), ans('e',1)])
+check('3/5 correct → good_progress', medResult.masteryStatus === 'good_progress',
+  `got ${medResult.masteryStatus}`)
+check('3/5 correct → accuracyPercent=60', medResult.accuracyPercent === 60)
+
+// 1/5 correct = 20% → needs_practice
+const weakResult = evaluatePracticeSession('s4',
+  [mcqQ('a',0,'n1'), mcqQ('b',0,'n2'), mcqQ('c',0,'n2'), mcqQ('d',0,'n3'), mcqQ('e',0,'n3')],
+  [ans('a',0), ans('b',1), ans('c',1), ans('d',1), ans('e',1)])
+check('1/5 correct → needs_practice', weakResult.masteryStatus === 'needs_practice',
+  `got ${weakResult.masteryStatus}`)
+
+// weakNodeIds accumulates nodeIds of every wrong or missing question (deduped)
+check('wrong questions accumulate correct nodeIds in weakNodeIds',
+  weakResult.weakNodeIds.length === 2 &&
+  weakResult.weakNodeIds.includes('n2') &&
+  weakResult.weakNodeIds.includes('n3'),
+  `got ${JSON.stringify(weakResult.weakNodeIds)}`)
+
+// 4/5 correct = 80% = exactly MASTERY_THRESHOLD, total >= MIN_QUESTIONS → mastered
+const edgeResult = evaluatePracticeSession('s5',
+  [mcqQ('a',0), mcqQ('b',0), mcqQ('c',0), mcqQ('d',0), mcqQ('e',0)],
+  [ans('a',0), ans('b',0), ans('c',0), ans('d',0), ans('e',1)])
+check('4/5 = 80% exactly at MASTERY_THRESHOLD → mastered', edgeResult.masteryStatus === 'mastered',
+  `got ${edgeResult.masteryStatus}`)
+
+console.log(`\n=== ${pass} passed, ${fail} failed (of ${CASES.length + 14}) ===\n`)
 process.exit(fail === 0 ? 0 : 1)
