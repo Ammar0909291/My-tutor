@@ -11,11 +11,15 @@ function scoreOne(
   if (q.type === 'true_false') {
     return { isCorrect: answer.value === q.correct, explanation: q.explanation }
   }
-  // Short answer: keyword match — at least half the keywords present and answer ≥ 8 chars
+  // Short answer: keyword match — at least half the keywords present and answer ≥ 8 chars.
+  // No keywords to check against (e.g. fallback-template generation from a short title)
+  // means correctness can only be judged by whether a substantive answer was given —
+  // a fixed >=1 threshold against zero keywords would make the question unpassable.
   const text = String(answer.value ?? '').toLowerCase().trim()
   const hits = q.keywords.filter((kw) => text.includes(kw.toLowerCase()))
-  const threshold = Math.max(1, Math.ceil(q.keywords.length * 0.5))
-  const isCorrect = text.length >= 8 && hits.length >= threshold
+  const isCorrect = q.keywords.length === 0
+    ? text.length >= 8
+    : text.length >= 8 && hits.length >= Math.ceil(q.keywords.length * 0.5)
   return { isCorrect, sampleAnswer: q.sampleAnswer }
 }
 
