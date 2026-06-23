@@ -13,6 +13,7 @@ import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
 import { generateSceneSpec, isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
+import { generateRoutedScene, isParametricSceneGenerationEnabled } from '@/lib/teaching/sceneGenerators/sceneRouter'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -1127,6 +1128,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!detectedVisualSpec) {
         try {
           detectedSceneSpec = buildSceneSpec(cleanText)
+        } catch { /* non-fatal */ }
+      }
+
+      // Part 2 (option C, FLAG-GATED): parameter-driven routed scene generation
+      // (src/lib/teaching/sceneGenerators/sceneRouter.ts) — 9 textbook-standard
+      // scene types where the LLM only extracts parameters and deterministic
+      // code computes all geometry, with an independent consistency check as a
+      // safety net. Dead by default — generateRoutedScene() only fires when
+      // ENABLE_PARAMETRIC_SCENE_GENERATION === 'true' and both deterministic
+      // pipelines above found nothing. Separate flag from, and tried BEFORE,
+      // the older free-form generator below. Non-fatal: any failure at any
+      // pipeline stage degrades to null (logged, not thrown) and the turn
+      // proceeds unchanged.
+      if (!detectedVisualSpec && !detectedSceneSpec && isParametricSceneGenerationEnabled()) {
+        try {
+          detectedSceneSpec = await generateRoutedScene(cleanText)
         } catch { /* non-fatal */ }
       }
 

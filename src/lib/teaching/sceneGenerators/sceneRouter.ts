@@ -8,19 +8,23 @@
  * offline — only the chosen generator's parameter EXTRACTION step ever touches
  * Groq (and that stays isolated inside each generator module).
  *
- * Not wired into production. ENABLE_AI_SCENE_GENERATION stays false.
+ * Wired into the chat route (src/app/api/learn/chat/route.ts) behind its own
+ * flag, ENABLE_PARAMETRIC_SCENE_GENERATION (default OFF) — separate from, and
+ * not a replacement decision for, ENABLE_AI_SCENE_GENERATION (the old
+ * free-form generator, also still default OFF).
  */
 
 import type { SceneSpec } from '../sceneSpec'
-import { generateProjectileScene } from './projectileMotion'
-import { generateTriangleScene } from './triangleAngleSum'
-import { generateMoleculeScene } from './moleculeGeometry'
-import { generateVectorScene } from './vectorAddition'
-import { generateCircularScene } from './circularMotion'
-import { generatePendulumScene } from './pendulumMotion'
-import { generateElectronShellScene } from './electronShells'
-import { generateLatticeScene } from './crystalLattice'
-import { generateCollisionScene } from './momentumCollision'
+import { validateSceneSpec } from '../sceneSpecValidator'
+import { extractProjectileParams, buildProjectileScene, checkProjectileConsistency } from './projectileMotion'
+import { extractTriangleParams, buildTriangleScene, checkTriangleConsistency } from './triangleAngleSum'
+import { extractMolecule, buildMoleculeScene, checkMoleculeConsistency } from './moleculeGeometry'
+import { extractVectorParams, buildVectorScene, checkVectorConsistency } from './vectorAddition'
+import { extractCircularParams, buildCircularScene, checkCircularConsistency } from './circularMotion'
+import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } from './pendulumMotion'
+import { extractElement, buildElectronShellScene, checkElectronShellConsistency } from './electronShells'
+import { extractLattice, buildLatticeScene, checkLatticeConsistency } from './crystalLattice'
+import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency } from './momentumCollision'
 
 export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision'
 
@@ -156,23 +160,69 @@ export function routeSceneGenerator(text: string): SceneGeneratorKind | null {
 }
 
 /**
+ * Run one generator's extract → build → validate → consistency-check pipeline
+ * with lightweight stage logging (log only — never blocks or throws; a logging
+ * failure can't break scene generation). Mirrors each generator's own
+ * generateXScene() logic so behavior is identical; the logging lives here,
+ * once, instead of being duplicated into all 9 generator modules.
+ */
+async function runWithLogging<P>(
+  kind: SceneGeneratorKind,
+  text: string,
+  extract: (text: string) => Promise<P | null>,
+  build: (params: P) => SceneSpec,
+  check: (spec: SceneSpec, params: P) => { ok: boolean; errors: string[] },
+): Promise<SceneSpec | null> {
+  const params = await extract(text).catch(() => null)
+  if (!params) {
+    console.warn(`[sceneRouter] ${kind}: extraction failed or returned null`)
+    return null
+  }
+  console.warn(`[sceneRouter] ${kind}: extraction ok`)
+
+  const spec = build(params)
+  const structural = validateSceneSpec(spec)
+  if (!structural.valid) {
+    console.warn(`[sceneRouter] ${kind}: structural validation failed`, structural.errors)
+    return null
+  }
+  console.warn(`[sceneRouter] ${kind}: structural validation ok`)
+
+  const consistency = check(spec, params)
+  if (!consistency.ok) {
+    console.warn(`[sceneRouter] ${kind}: consistency check failed`, consistency.errors)
+    return null
+  }
+  console.warn(`[sceneRouter] ${kind}: consistency check ok — scene generated`)
+  return spec
+}
+
+/**
  * Full routed pipeline: deterministic route → the matching generator's
- * extract(LLM) → build(formula) → validate → consistency-check. Returns null
- * when nothing routes or any stage fails. The extraction stage NEEDS a live
- * Groq test; the routing stage does not.
+ * extract(LLM) → build(formula) → validate → consistency-check, with
+ * pass/fail logged at each stage. Returns null when nothing routes or any
+ * stage fails. The extraction stage NEEDS a live Groq test; the routing
+ * stage does not.
  */
 export async function generateRoutedScene(text: string): Promise<SceneSpec | null> {
   const kind = routeSceneGenerator(text)
+  if (!kind) return null
+  console.warn(`[sceneRouter] routed to: ${kind}`)
   switch (kind) {
-    case 'projectile': return generateProjectileScene(text)
-    case 'triangle': return generateTriangleScene(text)
-    case 'molecule': return generateMoleculeScene(text)
-    case 'vector': return generateVectorScene(text)
-    case 'circular': return generateCircularScene(text)
-    case 'pendulum': return generatePendulumScene(text)
-    case 'electron_shells': return generateElectronShellScene(text)
-    case 'lattice': return generateLatticeScene(text)
-    case 'collision': return generateCollisionScene(text)
+    case 'projectile': return runWithLogging(kind, text, extractProjectileParams, buildProjectileScene, checkProjectileConsistency)
+    case 'triangle': return runWithLogging(kind, text, extractTriangleParams, buildTriangleScene, checkTriangleConsistency)
+    case 'molecule': return runWithLogging(kind, text, extractMolecule, buildMoleculeScene, checkMoleculeConsistency)
+    case 'vector': return runWithLogging(kind, text, extractVectorParams, buildVectorScene, checkVectorConsistency)
+    case 'circular': return runWithLogging(kind, text, extractCircularParams, buildCircularScene, checkCircularConsistency)
+    case 'pendulum': return runWithLogging(kind, text, extractPendulumParams, buildPendulumScene, checkPendulumConsistency)
+    case 'electron_shells': return runWithLogging(kind, text, extractElement, buildElectronShellScene, checkElectronShellConsistency)
+    case 'lattice': return runWithLogging(kind, text, extractLattice, buildLatticeScene, checkLatticeConsistency)
+    case 'collision': return runWithLogging(kind, text, extractCollisionParams, buildCollisionScene, checkCollisionConsistency)
     default: return null
   }
+}
+
+/** Feature flag — keep parametric routed generation OFF until explicitly enabled. Separate from ENABLE_AI_SCENE_GENERATION (the old free-form generator). */
+export function isParametricSceneGenerationEnabled(): boolean {
+  return process.env.ENABLE_PARAMETRIC_SCENE_GENERATION === 'true'
 }
