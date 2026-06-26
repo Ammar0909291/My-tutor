@@ -61,11 +61,6 @@ export async function generateJSON(
       }],
       max_tokens: maxTokens,
       temperature: 0.3,
-      // openai/gpt-oss-20b is a reasoning model: without these, its raw
-      // reasoning tokens can leak into message.content and break JSON.parse
-      // even when the chat-completion call itself succeeds.
-      response_format: { type: 'json_object' },
-      reasoning_format: 'hidden',
     })
     const text = response.choices[0]?.message?.content ?? '[]'
     // TEMP DEBUG
