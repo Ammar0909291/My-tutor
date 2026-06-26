@@ -200,7 +200,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractPendulumParams(text: string): Promise<PendulumParams | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
-  if (!raw || raw.isPendulum !== true) return null
-  return validatePendulumParams(raw)
+  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractPendulumParams DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractPendulumParams DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isPendulum !== true) {
+    console.error('[extractPendulumParams DEBUG] -> null: raw falsy or isPendulum !== true (got', JSON.stringify(raw?.isPendulum), ')')
+    return null
+  }
+  const validated = validatePendulumParams(raw)
+  if (!validated) console.error('[extractPendulumParams DEBUG] -> null: validatePendulumParams rejected raw:', JSON.stringify(raw))
+  return validated
 }

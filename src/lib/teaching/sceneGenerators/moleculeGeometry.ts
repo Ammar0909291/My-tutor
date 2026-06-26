@@ -207,7 +207,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractMolecule(text: string): Promise<MoleculeDef | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 100).catch(() => null)
-  if (!raw || raw.isMolecule !== true) return null
-  return lookupMolecule(raw.molecule)
+  const raw = await generateJSON(buildExtractionPrompt(text), 100).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractMolecule DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractMolecule DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isMolecule !== true) {
+    console.error('[extractMolecule DEBUG] -> null: raw falsy or isMolecule !== true (got', JSON.stringify(raw?.isMolecule), ')')
+    return null
+  }
+  const looked = lookupMolecule(raw.molecule)
+  if (!looked) console.error('[extractMolecule DEBUG] -> null: lookupMolecule found no match for', JSON.stringify(raw.molecule))
+  return looked
 }

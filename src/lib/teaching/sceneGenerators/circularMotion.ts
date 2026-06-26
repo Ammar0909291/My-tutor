@@ -199,7 +199,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractCircularParams(text: string): Promise<CircularParams | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
-  if (!raw || raw.isCircularMotion !== true) return null
-  return validateCircularParams(raw)
+  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractCircularParams DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractCircularParams DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isCircularMotion !== true) {
+    console.error('[extractCircularParams DEBUG] -> null: raw falsy or isCircularMotion !== true (got', JSON.stringify(raw?.isCircularMotion), ')')
+    return null
+  }
+  const validated = validateCircularParams(raw)
+  if (!validated) console.error('[extractCircularParams DEBUG] -> null: validateCircularParams rejected raw:', JSON.stringify(raw))
+  return validated
 }

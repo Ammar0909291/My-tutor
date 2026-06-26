@@ -208,7 +208,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractLattice(text: string): Promise<LatticeDef | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 100).catch(() => null)
-  if (!raw || raw.isLattice !== true) return null
-  return lookupLattice(raw.lattice)
+  const raw = await generateJSON(buildExtractionPrompt(text), 100).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractLattice DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractLattice DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isLattice !== true) {
+    console.error('[extractLattice DEBUG] -> null: raw falsy or isLattice !== true (got', JSON.stringify(raw?.isLattice), ')')
+    return null
+  }
+  const looked = lookupLattice(raw.lattice)
+  if (!looked) console.error('[extractLattice DEBUG] -> null: lookupLattice found no match for', JSON.stringify(raw.lattice))
+  return looked
 }

@@ -274,9 +274,17 @@ export async function extractCollisionParams(text: string): Promise<CollisionPar
   let raw: any
   try {
     raw = await generateJSON(buildExtractionPrompt(text), 150)
-  } catch {
+  } catch (err) {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractCollisionParams DEBUG] generateJSON threw:', err)
     return null
   }
-  if (!raw || raw.isCollision !== true) return null
-  return validateCollisionParams(raw)
+  console.error('[extractCollisionParams DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isCollision !== true) {
+    console.error('[extractCollisionParams DEBUG] -> null: raw falsy or isCollision !== true (got', JSON.stringify(raw?.isCollision), ')')
+    return null
+  }
+  const validated = validateCollisionParams(raw)
+  if (!validated) console.error('[extractCollisionParams DEBUG] -> null: validateCollisionParams rejected raw:', JSON.stringify(raw))
+  return validated
 }

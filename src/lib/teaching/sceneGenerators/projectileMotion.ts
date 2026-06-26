@@ -230,7 +230,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractProjectileParams(text: string): Promise<ProjectileParams | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
-  if (!raw || raw.isProjectile !== true) return null
-  return validateProjectileParams(raw)
+  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractProjectileParams DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractProjectileParams DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isProjectile !== true) {
+    console.error('[extractProjectileParams DEBUG] -> null: raw falsy or isProjectile !== true (got', JSON.stringify(raw?.isProjectile), ')')
+    return null
+  }
+  const validated = validateProjectileParams(raw)
+  if (!validated) console.error('[extractProjectileParams DEBUG] -> null: validateProjectileParams rejected raw:', JSON.stringify(raw))
+  return validated
 }

@@ -194,7 +194,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractVectorParams(text: string): Promise<VectorParams | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
-  if (!raw || raw.isVectorAddition !== true) return null
-  return validateVectorParams(raw)
+  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractVectorParams DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractVectorParams DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isVectorAddition !== true) {
+    console.error('[extractVectorParams DEBUG] -> null: raw falsy or isVectorAddition !== true (got', JSON.stringify(raw?.isVectorAddition), ')')
+    return null
+  }
+  const validated = validateVectorParams(raw)
+  if (!validated) console.error('[extractVectorParams DEBUG] -> null: validateVectorParams rejected raw:', JSON.stringify(raw))
+  return validated
 }

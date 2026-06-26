@@ -172,7 +172,17 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractTriangleParams(text: string): Promise<TriangleParams | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch(() => null)
-  if (!raw || raw.isTriangle !== true) return null
-  return validateTriangleParams(raw)
+  const raw = await generateJSON(buildExtractionPrompt(text), 150).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractTriangleParams DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractTriangleParams DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isTriangle !== true) {
+    console.error('[extractTriangleParams DEBUG] -> null: raw falsy or isTriangle !== true (got', JSON.stringify(raw?.isTriangle), ')')
+    return null
+  }
+  const validated = validateTriangleParams(raw)
+  if (!validated) console.error('[extractTriangleParams DEBUG] -> null: validateTriangleParams rejected raw:', JSON.stringify(raw))
+  return validated
 }

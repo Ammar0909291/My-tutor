@@ -250,7 +250,19 @@ Reply with ONLY this JSON, no other text:
  */
 export async function extractElement(text: string): Promise<ElementDef | null> {
   if (!text || !text.trim()) return null
-  const raw = await generateJSON(buildExtractionPrompt(text), 100).catch(() => null)
-  if (!raw || raw.isElement !== true) return null
-  return validateElement(lookupElement(raw.element))
+  const raw = await generateJSON(buildExtractionPrompt(text), 100).catch((err) => {
+    // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+    console.error('[extractElement DEBUG] generateJSON threw:', err)
+    return null
+  })
+  console.error('[extractElement DEBUG] raw from generateJSON:', JSON.stringify(raw))
+  if (!raw || raw.isElement !== true) {
+    console.error('[extractElement DEBUG] -> null: raw falsy or isElement !== true (got', JSON.stringify(raw?.isElement), ')')
+    return null
+  }
+  const looked = lookupElement(raw.element)
+  if (!looked) console.error('[extractElement DEBUG] -> null: lookupElement found no match for', JSON.stringify(raw.element))
+  const validated = validateElement(looked)
+  if (looked && !validated) console.error('[extractElement DEBUG] -> null: validateElement rejected', JSON.stringify(looked))
+  return validated
 }

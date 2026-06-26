@@ -47,22 +47,42 @@ export async function generateJSON(
   // generateJSON never throws (callers expect null on failure) — a spent
   // budget degrades to null the same way a provider error does.
   try { await consumeAIBudget() } catch { return null }
+  const fullPrompt = prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.'
+  const model = 'openai/gpt-oss-20b'
+  // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+  console.error('[generateJSON DEBUG] model:', model)
+  console.error('[generateJSON DEBUG] prompt sent to Groq:', fullPrompt)
   try {
     const response = await groq.chat.completions.create({
-      model: 'openai/gpt-oss-20b',
+      model,
       messages: [{
         role: 'user',
-        content: prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.',
+        content: fullPrompt,
       }],
       max_tokens: maxTokens,
       temperature: 0.3,
     })
     const text = response.choices[0]?.message?.content ?? '[]'
+    // TEMP DEBUG
+    console.error('[generateJSON DEBUG] raw Groq response.choices[0].message.content:', JSON.stringify(text))
+    console.error('[generateJSON DEBUG] finish_reason:', response.choices[0]?.finish_reason)
     const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
-    try { return JSON.parse(clean) } catch { return null }
+    try {
+      const parsed = JSON.parse(clean)
+      // TEMP DEBUG
+      console.error('[generateJSON DEBUG] parsed JSON before validation:', JSON.stringify(parsed))
+      return parsed
+    } catch (parseErr: any) {
+      // TEMP DEBUG — this catch previously swallowed parse failures with NO logging at all.
+      console.error('[generateJSON DEBUG] JSON.parse FAILED on cleaned text:', JSON.stringify(clean))
+      console.error('[generateJSON DEBUG] parse error:', parseErr.message)
+      return null
+    }
   } catch (error: any) {
     // Swallowed failure — without reporting it would be invisible in production.
     console.error('Groq JSON error:', error.message)
+    // TEMP DEBUG
+    console.error('[generateJSON DEBUG] full error object:', error)
     captureError(error, { route: 'lib/ai/generateJSON', tags: { provider: 'groq' } })
     return null
   }
