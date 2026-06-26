@@ -52,16 +52,25 @@ export async function generateJSON(
   // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
   console.error('[generateJSON DEBUG] model:', model)
   console.error('[generateJSON DEBUG] prompt sent to Groq:', fullPrompt)
+  const requestBody = {
+    model,
+    messages: [{
+      role: 'user' as const,
+      content: fullPrompt,
+    }],
+    max_tokens: maxTokens,
+    temperature: 0.3,
+  }
+  // TEMP DEBUG — exact outgoing request, immediately before the call. No
+  // optional fields (response_format/reasoning_format/stream/seed/tools/
+  // tool_choice/stop) are set anywhere above — requestBody's own key list
+  // below is the ground truth for what is and isn't sent.
+  console.error('[generateJSON DEBUG] request keys:', Object.keys(requestBody))
+  console.error('[generateJSON DEBUG] full request body:', JSON.stringify(requestBody))
+  console.error('[generateJSON DEBUG] message content length (chars):', fullPrompt.length)
+  console.error('[generateJSON DEBUG] total JSON payload size (bytes):', Buffer.byteLength(JSON.stringify(requestBody), 'utf8'))
   try {
-    const response = await groq.chat.completions.create({
-      model,
-      messages: [{
-        role: 'user',
-        content: fullPrompt,
-      }],
-      max_tokens: maxTokens,
-      temperature: 0.3,
-    })
+    const response = await groq.chat.completions.create(requestBody)
     const text = response.choices[0]?.message?.content ?? '[]'
     // TEMP DEBUG
     console.error('[generateJSON DEBUG] raw Groq response.choices[0].message.content:', JSON.stringify(text))
