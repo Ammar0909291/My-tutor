@@ -268,6 +268,12 @@ export async function POST(req: Request) {
     let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
     let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
+    // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): surface the per-turn
+    // strategy + its advisory output bias out of the school block so the post-AI
+    // visual pipeline can consult them. Null on any non-school turn or failure →
+    // pipeline degrades to today's behavior.
+    let strategyHoisted: import('@/lib/school/adaptive/teachingStrategy').TeachingStrategyType | null = null
+    let outputBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').OutputBias | null = null
     // Sprint CH: did THIS turn activate/continue a worked example?
     let workedExampleActive = false
 
@@ -496,8 +502,14 @@ export async function POST(req: Request) {
           userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, strategyKgNodeIds
         )
         systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
+        // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): additively surface
+        // the strategy + its advisory output bias for the post-AI visual pipeline.
+        // Pure, synchronous; cannot stall the turn.
+        const { deriveOutputBias } = await import('@/lib/school/adaptive/teachingOutputBias')
+        strategyHoisted = teachingStrategy.type
+        outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
       } catch {
-        // non-fatal — strategy context is purely additive
+        // non-fatal — strategy + bias context is purely additive
       }
 
       // Sprint CX: longitudinal learning narrative — let the tutor acknowledge growth over time.
@@ -1159,6 +1171,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           detectedSceneSpec = await generateSceneSpec(cleanText)
         } catch { /* non-fatal */ }
+      }
+
+      // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): let the per-turn
+      // teaching strategy cast an ADVISORY bias over the deterministic 2D visual
+      // candidate above. Additive and null-guarded — on any non-school turn,
+      // missing strategy, or error, outputBiasHoisted is null and this is skipped,
+      // leaving today's behavior unchanged. Never fabricates a spec; the
+      // "never two visuals" guard below still runs last and stays authoritative.
+      //   • SUPPRESS_OPTIONAL: drop the candidate only if it is OPTIONAL
+      //     (non-interactive AND no challenge payload — isOptionalVisual).
+      //   • PROMOTE: keep the candidate as-is (it is already a trusted spec); its
+      //     spec-intended effect on the LLM's own VISUAL tag is the existing default
+      //     when no deterministic spec fired, so nothing extra is done here.
+      // (Explicit "student asked for a visual" override is deferred — see the spec's
+      //  Risk #3; the keyword heuristic is unproven and intentionally out of scope here.)
+      if (strategyHoisted && outputBiasHoisted && detectedVisualSpec) {
+        try {
+          const { isOptionalVisual } = await import('@/lib/school/adaptive/teachingOutputBias')
+          if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisual(detectedVisualSpec)) {
+            detectedVisualSpec = null
+          }
+        } catch { /* non-fatal — output bias is purely advisory */ }
       }
 
       // Extend the "never show two visuals for one explanation" guard above to
