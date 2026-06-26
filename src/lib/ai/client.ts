@@ -17,7 +17,7 @@ export async function generateAIResponse(
   await consumeAIBudget() // propagates AIBudgetExceededError — callers already handle thrown provider errors
   try {
     const response = await groq.chat.completions.create({
-      model: 'llama-3.1-8b-instant',
+      model: 'openai/gpt-oss-20b',
       messages: [
         { role: 'system', content: systemPrompt },
         ...messages.slice(-6),
@@ -49,7 +49,7 @@ export async function generateJSON(
   try { await consumeAIBudget() } catch { return null }
   try {
     const response = await groq.chat.completions.create({
-      model: 'llama-3.1-8b-instant',
+      model: 'openai/gpt-oss-20b',
       messages: [{
         role: 'user',
         content: prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.',
@@ -81,7 +81,7 @@ export async function summarizeSession(
     : 'Summarize this tutoring session in 2 sentences in English.'
   try {
     const response = await groq.chat.completions.create({
-      model: 'llama-3.1-8b-instant',
+      model: 'openai/gpt-oss-20b',
       messages: [
         { role: 'system', content: prompt },
         ...messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),

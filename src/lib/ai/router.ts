@@ -12,7 +12,7 @@ async function callGroq(
 ): Promise<string> {
   await consumeAIBudget()
   const response = await groq.chat.completions.create({
-    model: 'llama-3.1-8b-instant',
+    model: 'openai/gpt-oss-20b',
     messages: [
       { role: 'system', content: systemPrompt },
       ...messages.slice(-6),
@@ -127,7 +127,7 @@ export async function routeJSON(
   try { await consumeAIBudget() } catch { return null }
   try {
     const response = await groq.chat.completions.create({
-      model: 'llama-3.1-8b-instant',
+      model: 'openai/gpt-oss-20b',
       messages: [{
         role: 'user',
         content: prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.',

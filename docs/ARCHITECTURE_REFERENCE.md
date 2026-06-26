@@ -15,7 +15,7 @@
 | Framework | Next.js 14 App Router |
 | Auth | NextAuth v5 (JWT strategy) |
 | Database | PostgreSQL via Prisma ORM (`db push`, no migration files) |
-| AI — Primary | Groq (llama-3.1-8b-instant) for most users |
+| AI — Primary | Groq (openai/gpt-oss-20b) for most users |
 | AI — Regional | YandexGPT (Russia/`country=ru` users only) |
 | AI — JSON | Groq via `routeJSON()` (always, faster for structured output) |
 | Cache | Redis (optional; app runs without it — falls back to in-memory) |

@@ -11,7 +11,7 @@
 
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
-- AI: Groq primary (`llama-3.1-8b-instant`), YandexGPT fallback (Russia only, `country === 'ru'`;
+- AI: Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia only, `country === 'ru'`;
   itself falls back to Groq on missing credentials or any error). Redis optional (app runs without it).
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
   Misconception data is runtime (`MistakeRecord`), NOT in the static KG type.
