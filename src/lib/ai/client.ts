@@ -61,18 +61,33 @@ export async function generateJSON(
       }],
       max_tokens: maxTokens,
       temperature: 0.3,
+      // openai/gpt-oss-20b is a reasoning model: without these, its raw
+      // reasoning tokens can leak into message.content and break JSON.parse
+      // even when the chat-completion call itself succeeds.
+      response_format: { type: 'json_object' },
+      reasoning_format: 'hidden',
     })
     const text = response.choices[0]?.message?.content ?? '[]'
     // TEMP DEBUG
     console.error('[generateJSON DEBUG] raw Groq response.choices[0].message.content:', JSON.stringify(text))
     console.error('[generateJSON DEBUG] finish_reason:', response.choices[0]?.finish_reason)
-    const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    const clean = text.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim()
     try {
       const parsed = JSON.parse(clean)
       // TEMP DEBUG
       console.error('[generateJSON DEBUG] parsed JSON before validation:', JSON.stringify(parsed))
       return parsed
     } catch (parseErr: any) {
+      // Fallback: the model ignored "no other text" and wrapped the JSON in
+      // prose: pull out the first balanced {...} or [...] block and retry.
+      const match = clean.match(/\{[\s\S]*\}|\[[\s\S]*\]/)
+      if (match) {
+        try {
+          const parsed = JSON.parse(match[0])
+          console.error('[generateJSON DEBUG] parsed JSON via prose-extraction fallback:', JSON.stringify(parsed))
+          return parsed
+        } catch { /* fall through to the failure log below */ }
+      }
       // TEMP DEBUG — this catch previously swallowed parse failures with NO logging at all.
       console.error('[generateJSON DEBUG] JSON.parse FAILED on cleaned text:', JSON.stringify(clean))
       console.error('[generateJSON DEBUG] parse error:', parseErr.message)
