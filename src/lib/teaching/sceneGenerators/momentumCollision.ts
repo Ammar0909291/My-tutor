@@ -67,10 +67,13 @@ export function validateCollisionParams(raw: unknown): CollisionParams | null {
   if (m1 <= 0 || m2 <= 0 || m1 > 1e6 || m2 > 1e6) return null
   if (Math.abs(u1) > 1e6 || Math.abs(u2) > 1e6) return null
   const collisionType = o.collisionType === 'elastic' ? 'elastic' : 'perfectly_inelastic'
-  // Reject a non-collision: objects must actually approach (u1 >= u2 means
-  // object 1, behind, catches up to object 2 ahead — the standard 1D setup
-  // with object 1 starting left of object 2 on the line).
-  if (u1 - u2 <= 1e-9) return null
+  // Reject only the physically impossible case: identical velocities (no
+  // relative motion, so no collision can occur). u1 > u2 is NOT required —
+  // the LLM's sign convention for which object gets the negative velocity
+  // varies (see buildExtractionPrompt's sign rule), so this guard must be
+  // symmetric in u1/u2 rather than assuming a fixed "object 1 is faster"
+  // ordering.
+  if (Math.abs(u1 - u2) <= 1e-9) return null
   return { m1, m2, u1, u2, collisionType }
 }
 
@@ -259,41 +262,21 @@ Reply with ONLY this JSON, no other text:
 - Use "perfectly_inelastic" if the objects stick together / combine / move as one after colliding.
 - Use "elastic" if the text says "elastic collision" or the objects bounce off each other.
 - If the collision type is not stated or ambiguous, use "perfectly_inelastic".
-- Use the masses and velocities actually stated; do not invent numbers. Object 1 should be the one moving toward object 2 from behind (assign signs so object 1 starts left, object 2 starts right, on the same line).`
+- Use the masses and velocities actually stated; do not invent numbers. Object 1 should be the one moving toward object 2 from behind (assign signs so object 1 starts left, object 2 starts right, on the same line).
+- Sign convention: use u1 > u2 always (object 1 moves in the positive direction, or is the faster of the two). If the text describes object 2 moving in the opposite direction to object 1, give u2 a negative value. Never assign a negative value to u1 unless both objects move in the negative direction.`
 }
 
 /**
  * Extract validated collision parameters from text via the LLM, or null. Never throws.
- * NOTE: requires a live Groq-reachable network — verify with a real call later.
  */
 export async function extractCollisionParams(text: string): Promise<CollisionParams | null> {
   if (!text || !text.trim()) return null
-  // TEMP DEBUG (remove once live extraction is verified): surface exactly WHY
-  // this returns null on a Groq-reachable network — the parsed response and the
-  // branch that rejected it. generateJSON() already JSON-parses internally, so
-  // this logs the parsed object (or the parse/transport failure) rather than the
-  // pre-parse string, which isn't observable from here.
   let raw: any
   try {
     raw = await generateJSON(buildExtractionPrompt(text), 150)
-  } catch (err) {
-    console.error('[extractCollisionParams DEBUG] generateJSON threw:', err)
+  } catch {
     return null
   }
-  console.error('[extractCollisionParams DEBUG] parsed Groq response:', JSON.stringify(raw))
-  if (!raw) {
-    console.error('[extractCollisionParams DEBUG] → null: generateJSON returned null/falsy (transport/parse failure or blocked network)')
-    return null
-  }
-  if (raw.isCollision !== true) {
-    console.error(`[extractCollisionParams DEBUG] → null: isCollision !== true (got ${JSON.stringify(raw.isCollision)})`)
-    return null
-  }
-  const validated = validateCollisionParams(raw)
-  if (!validated) {
-    console.error('[extractCollisionParams DEBUG] → null: validateCollisionParams rejected the params (non-finite/non-positive mass, or objects not approaching: u1 - u2 <= 0)')
-    return null
-  }
-  console.error('[extractCollisionParams DEBUG] → OK:', JSON.stringify(validated))
-  return validated
+  if (!raw || raw.isCollision !== true) return null
+  return validateCollisionParams(raw)
 }

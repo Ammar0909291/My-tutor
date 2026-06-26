@@ -96,15 +96,17 @@ console.log('\n=== 1D momentum/collision deterministic scene harness ===\n')
     checkCollisionConsistency(specE, pElastic).ok)
 }
 
-// ── validateCollisionParams — reject implausible / non-approaching cases ─────
+// ── validateCollisionParams — reject implausible / no-relative-motion cases ──
 check('validateCollisionParams — valid input accepted',
   validateCollisionParams({ m1: 2, m2: 3, u1: 4, u2: -1, collisionType: 'perfectly_inelastic' }) !== null)
 check('validateCollisionParams — non-finite rejected',
   validateCollisionParams({ m1: 2, m2: 3, u1: 'fast', u2: -1 }) === null)
 check('validateCollisionParams — non-positive mass rejected',
   validateCollisionParams({ m1: 0, m2: 3, u1: 4, u2: -1 }) === null)
-check('validateCollisionParams — objects not approaching (u1 <= u2) rejected',
-  validateCollisionParams({ m1: 2, m2: 3, u1: 1, u2: 4 }) === null)
+check('validateCollisionParams — identical velocities (no relative motion) rejected',
+  validateCollisionParams({ m1: 2, m2: 3, u1: 4, u2: 4 }) === null)
+check('validateCollisionParams — u1 < u2 (opposite sign convention) now accepted, not a false positive',
+  validateCollisionParams({ m1: 2, m2: 3, u1: 1, u2: 4 }) !== null)
 check('validateCollisionParams — defaults to perfectly_inelastic when type omitted',
   validateCollisionParams({ m1: 2, m2: 3, u1: 4, u2: -1 })?.collisionType === 'perfectly_inelastic')
 check('validateCollisionParams — elastic type passed through',
