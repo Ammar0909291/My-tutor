@@ -32,8 +32,9 @@ import { extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistenc
 import { extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency } from './civicsOrgChart'
 import { extractCircuitParams, buildCircuitScene, checkCircuitConsistency } from './electricCircuit'
 import { extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency } from './kinematicsGraphs'
+import { extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkHeightsAndDistancesConsistency } from './heightsAndDistances'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -80,6 +81,19 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'projectile', 'trajectory', 'launch angle', 'launched at', 'thrown at',
       'ballistic', 'initial speed', 'initial velocity', 'parabolic path',
+    ],
+  },
+  {
+    // Checked before 'triangle' since "angle of elevation" problems are also
+    // about a right triangle, but should land on the dedicated heights-and-
+    // distances generator (which solves for height/distance via tan), not
+    // the generic angle-sum generator (which only knows two given angles).
+    kind: 'heights_and_distances',
+    keywords: [
+      'angle of elevation', 'angle of depression', 'heights and distances',
+      'height and distance', 'height of the tower', 'height of a tower',
+      'height of the pole', 'height of the building', 'top of the tower',
+      'foot of the tower',
     ],
   },
   {
@@ -343,6 +357,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'civics_org_chart': return runWithLogging(kind, text, extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency)
     case 'electric_circuit': return runWithLogging(kind, text, extractCircuitParams, buildCircuitScene, checkCircuitConsistency)
     case 'kinematics_graphs': return runWithLogging(kind, text, extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency)
+    case 'heights_and_distances': return runWithLogging(kind, text, extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkHeightsAndDistancesConsistency)
     default: return null
   }
 }
