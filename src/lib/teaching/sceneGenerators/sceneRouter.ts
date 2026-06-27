@@ -31,8 +31,9 @@ import { extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsist
 import { extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency } from './calculusGraph'
 import { extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency } from './civicsOrgChart'
 import { extractCircuitParams, buildCircuitScene, checkCircuitConsistency } from './electricCircuit'
+import { extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency } from './kinematicsGraphs'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -217,6 +218,22 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Kinematics-graph keys are deliberately multi-word and graph-specific
+    // ("position-time graph", "v-t graph"...) rather than bare motion words
+    // ("velocity", "acceleration"), so a genuine projectile/circular/pendulum
+    // turn (which never asks for a time-axis graph) can't land here, and this
+    // rule can't steal those turns either. Checked before molecule/vector
+    // since it shares no vocabulary with either.
+    kind: 'kinematics_graphs',
+    keywords: [
+      'position-time graph', 'position time graph', 'velocity-time graph',
+      'velocity time graph', 'acceleration-time graph', 'acceleration time graph',
+      'displacement-time graph', 'x-t graph', 'v-t graph', 'a-t graph', 's-t graph',
+      'uniformly accelerated motion', 'equations of motion graph',
+      'graph of motion', 'kinematics graph', 'kinematics graphs',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -325,6 +342,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'calculus_graph': return runWithLogging(kind, text, extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency)
     case 'civics_org_chart': return runWithLogging(kind, text, extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency)
     case 'electric_circuit': return runWithLogging(kind, text, extractCircuitParams, buildCircuitScene, checkCircuitConsistency)
+    case 'kinematics_graphs': return runWithLogging(kind, text, extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency)
     default: return null
   }
 }
