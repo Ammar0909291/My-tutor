@@ -889,6 +889,7 @@ enum SubjectType {
   CHEMISTRY
   BIOLOGY
   AI
+  COMPUTER_SCIENCE
 }
 
 enum AssessmentKind {

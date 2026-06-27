@@ -19,6 +19,7 @@ const CATEGORY_TO_TYPE: Record<SubjectCategory, SubjectType> = {
   chemistry: SubjectType.CHEMISTRY,
   biology: SubjectType.BIOLOGY,
   ai: SubjectType.AI,
+  computer_science: SubjectType.COMPUTER_SCIENCE,
 }
 
 /**

@@ -17,6 +17,7 @@ const CATEGORY_ACCENT: Record<SubjectCategory, string> = {
   chemistry: '#FF9600',
   biology: '#FF5FA2',
   ai: '#7C3AED',
+  computer_science: '#1CB0F6',
 }
 
 export default async function SubjectDashboardPage({ params }: { params: { slug: string } }) {

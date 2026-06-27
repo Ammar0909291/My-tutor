@@ -56,6 +56,7 @@ export type SubjectCategory =
   | 'chemistry'
   | 'biology'
   | 'ai'
+  | 'computer_science'
 
 export const CATEGORY_LABELS: Record<SubjectCategory, string> = {
   languages: 'Languages',
@@ -65,6 +66,7 @@ export const CATEGORY_LABELS: Record<SubjectCategory, string> = {
   chemistry: 'Chemistry',
   biology: 'Biology',
   ai: 'Artificial Intelligence',
+  computer_science: 'Computer Science',
 }
 
 const CATEGORY_I18N: Record<SubjectCategory, Record<Lang3, string>> = {
@@ -75,6 +77,7 @@ const CATEGORY_I18N: Record<SubjectCategory, Record<Lang3, string>> = {
   chemistry:   { en: 'Chemistry',               ru: 'Химия',                  hi: 'रसायन विज्ञान' },
   biology:     { en: 'Biology',                 ru: 'Биология',               hi: 'जीव विज्ञान' },
   ai:          { en: 'Artificial Intelligence', ru: 'Искусственный интеллект', hi: 'कृत्रिम बुद्धिमत्ता' },
+  computer_science: { en: 'Computer Science',   ru: 'Информатика',            hi: 'कंप्यूटर विज्ञान' },
 }
 
 export function categoryLabel(category: SubjectCategory, lang: Lang3 = 'en'): string {
@@ -286,6 +289,23 @@ const CHEMISTRY_TREE: CurriculumModule[] = [
   mod('reactions', 'Chemical Reactions', ['Bonding', 'Reactions', 'Balancing Equations'], [1, 3], 10),
   mod('organic_chemistry', 'Organic Chemistry', ['Hydrocarbons', 'Functional Groups'], [3, 4], 10),
   mod('physical_chemistry', 'Physical Chemistry', ['Thermochemistry', 'Kinetics', 'Equilibrium'], [4, 5], 10),
+]
+
+// ─── Computer Science ─────────────────────────────────────────────────────────
+// Lightweight Subject Library tree (mod()-based, mirrors MATH_TREE/PHYSICS_TREE/
+// CHEMISTRY_TREE) — not the "advanced" qUnit/cmUnit pattern, since there is no
+// dedicated master-curriculum doc for Computer Science. Topics are chosen to
+// align with the existing, already production-integrated COMPUTER_SCIENCE_3D_RULES
+// keyword table in detectVisual.ts, so real lesson text naturally triggers the
+// already-built 3D visuals (three_computer_architecture, three_memory_storage,
+// three_network_packet_flow, three_data_structure, three_algorithm_visualization).
+const COMPUTER_SCIENCE_TREE: CurriculumModule[] = [
+  mod('foundations', 'Foundations', ['What Is a Computer', 'Binary & Data Representation', 'Computer Architecture'], [0, 1], 8),
+  mod('data_structures', 'Data Structures', ['Arrays', 'Linked Lists', 'Stacks & Queues', 'Trees & Graphs'], [1, 3], 10),
+  mod('algorithms', 'Algorithms', ['Sorting Algorithms', 'Searching Algorithms', 'Algorithmic Complexity'], [2, 4], 10),
+  mod('memory_storage', 'Memory & Storage', ['Memory Hierarchy', 'Cache', 'RAM vs Storage'], [2, 4], 8),
+  mod('networking', 'Networking', ['Networks & Packets', 'Routers & Protocols', 'The Internet'], [2, 4], 8),
+  mod('operating_systems', 'Operating Systems', ['Processes', 'File Systems', 'Concurrency'], [3, 5], 8),
 ]
 
 // ─── Biology ──────────────────────────────────────────────────────────────────
@@ -940,6 +960,9 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
 
   // Artificial Intelligence
   { slug: 'ai', name: 'Artificial Intelligence', category: 'ai', icon: '🤖', description: 'From AI foundations to generative AI and professional MLOps systems.', modules: AI_TREE },
+
+  // Computer Science
+  { slug: 'computer_science', name: 'Computer Science', category: 'computer_science', icon: '🖥️', description: 'How computers actually work — architecture, data structures, algorithms, memory, and networks.', modules: COMPUTER_SCIENCE_TREE },
 
   // Career & professional skills (Sprint D — chained together by Career Roadmaps)
   { slug: 'databases', name: 'Databases & SQL', category: 'programming', icon: '🗄️', description: 'Query, design, and manage relational databases with SQL.', modules: DATABASES_TREE },
