@@ -106,6 +106,12 @@ check('"resultant velocity after the collision" → collision (collision-specifi
 check('projectile text mentioning neither "collide" nor "momentum" still → projectile',
   routeSceneGenerator('A ball is thrown at 45 degrees with an initial speed of 10 m/s.') === 'projectile')
 
+// ── Free-body diagrams (Classical Mechanics) reuse 'vector', not a new kind ──
+check('"free-body diagram" prose → vector',
+  routeSceneGenerator('Draw a free-body diagram showing the two forces acting on the block.') === 'vector')
+check('"net force on the object" → vector',
+  routeSceneGenerator('Find the net force on the object given gravity and the normal force.') === 'vector')
+
 // ── Unrelated / no-match text → null ─────────────────────────────────────────
 check('history prose → none', routeSceneGenerator('Compare the causes of the 1857 revolt and its aftermath.') === null)
 check('grammar prose → none', routeSceneGenerator('Identify the verb in each of these two sentences.') === null)

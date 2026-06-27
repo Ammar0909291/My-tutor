@@ -169,6 +169,14 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, MECHANICS_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
   }
 
+  // Classical Mechanics (Subject Library, dedicated 'classical_mechanics' slug
+  // — distinct from the generic 'physics' slug). Reuses the same mechanics 3D
+  // rules and SCIENCE_RULES 2D fallback as 'physics' above, since both subjects
+  // teach the same mechanics topics at the same visual fidelity.
+  if (opts.subjectSlug === 'classical_mechanics') {
+    return matchRules(combined, MECHANICS_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
+  }
+
   // Chemistry (Subject Library, dedicated 'chemistry' slug — distinct from
   // the generic 'science' slug). Chemistry Production Learning Integration
   // Sprint: chemistry 3D rules checked first, then SCIENCE_RULES as the

@@ -68,6 +68,18 @@ check('physics + "electric circuit" → circuit_diagram (2D fallback — no 3D m
 check('physics + "force" / "motion" (no 3D cue) → force_diagram via SCIENCE_RULES fallback',
   detectVisual({ subjectSlug: 'physics', chapterTitle: 'Forces and motion' }) === 'force_diagram')
 
+// ── 5b. classical_mechanics: same mechanics 3D rules + 2D fallback as physics ──
+check('classical_mechanics + "projectile motion" → three_projectile_motion (3D)',
+  detectVisual({ subjectSlug: 'classical_mechanics', chapterTitle: 'Projectile motion and launch angle' }) === 'three_projectile_motion')
+check('classical_mechanics + "circular motion" → three_circular_motion (3D)',
+  detectVisual({ subjectSlug: 'classical_mechanics', chapterTitle: 'Uniform circular motion and centripetal force' }) === 'three_circular_motion')
+check('classical_mechanics + "force diagram" / "net force" → three_newton_forces (3D)',
+  detectVisual({ subjectSlug: 'classical_mechanics', chapterTitle: 'Free-body diagram and net force' }) === 'three_newton_forces')
+check('classical_mechanics + "electric circuit" → circuit_diagram (2D fallback — no 3D mechanics match)',
+  detectVisual({ subjectSlug: 'classical_mechanics', chapterTitle: 'Electric circuit and resistance' }) === 'circuit_diagram')
+check('classical_mechanics + no keyword → null',
+  detectVisual({ subjectSlug: 'classical_mechanics', chapterTitle: 'Research literacy and methods' }) === null)
+
 // ── 6. chemistry: 3D chemistry rules ─────────────────────────────────────────
 check('chemistry + "molecular shape" → three_molecular_shapes (3D)',
   detectVisual({ subjectSlug: 'chemistry', chapterTitle: 'Molecular geometry and bond angle' }) === 'three_molecular_shapes')

@@ -498,6 +498,106 @@ const RULES: MisconceptionRule[] = [
       'Show that direct measurement destroys the state, so error correction uses ancilla entanglement and stabilizer syndrome measurements rather than re-checking the qubit directly.',
     ],
   },
+  // ── Classical Mechanics (Subject Library: classical_mechanics) ───────────
+  // primaryPatterns are lesson slugs (l<unit>-<lesson>); detection is
+  // subjectSlug-scoped, so these never collide with Quantum Physics or other
+  // subjects despite sharing the l<unit>-<lesson> slug shape.
+  {
+    type: 'cm_inertia_requires_force',
+    label: 'Motion requires a continuous force',
+    description: 'Student believes a moving object needs a continuous applied force to keep moving, and that it stops "because the force ran out" rather than because of friction/drag — a gap in Newton\'s first law.',
+    primaryPatterns: ['l4-2', 'l4-3', 'l2-3'],
+    remediationSteps: [
+      'Use the ice-skater / frictionless-puck analogy: ask what happens to velocity once the push stops if there is truly no friction.',
+      'Distinguish "an object in motion stays in motion" (zero net force) from "an object speeds up or slows down" (nonzero net force).',
+      'Draw a free-body diagram for a sliding block and ask the student to identify which force is actually responsible for it slowing down.',
+      'Ask: "If you stopped applying force to a hockey puck on ice, would it stop immediately?" and connect the answer back to F = ma with friction as the net force.',
+    ],
+  },
+  {
+    type: 'cm_action_reaction_same_body',
+    label: 'Newton\'s third law pairs misidentified',
+    description: 'Student pairs a force with another force acting on the SAME body (e.g. weight and normal force) instead of recognizing action–reaction pairs always act on two different bodies.',
+    primaryPatterns: ['l4-4', 'l4-5'],
+    remediationSteps: [
+      'State the rule explicitly: "object A exerts a force on B exerts an equal and opposite force on A" — always two different objects.',
+      'Take a book resting on a table: weight (Earth pulls book) pairs with the book pulling Earth up — NOT with the normal force from the table.',
+      'For every free-body diagram drawn, ask "what is the reaction-pair force, and on which other object does it act?"',
+      'Give a contrast pair (e.g. person pushing a wall) and have the student name both forces in each Newton\'s-third-law pair separately from the unrelated forces also acting on each body.',
+    ],
+  },
+  {
+    type: 'cm_centripetal_force_outward',
+    label: 'Centripetal force confused with an outward "centrifugal" push',
+    description: 'Student thinks there is a real outward force flinging an object away from the center during circular motion, rather than understanding centripetal force points inward and is what keeps the object curving.',
+    primaryPatterns: ['l6-1', 'l6-2', 'l6-4', 'l23-1'],
+    remediationSteps: [
+      'Swing a ball on a string and ask which direction the string pulls — toward the center, always.',
+      'Explain that the "outward force" feeling is inertia (the object wants to go straight) combined with viewing things from the rotating frame, not a real force on the object.',
+      'Have the student draw the net-force vector for an object in uniform circular motion and verify it always points toward the center.',
+      'Contrast the inertial-frame view (only centripetal force acts) with the rotating-frame view (an additional pseudo-force appears) explicitly, and label which one is real.',
+    ],
+  },
+  {
+    type: 'cm_energy_conservation_sign',
+    label: 'Sign and reference-point errors in energy conservation',
+    description: 'Student loses track of the sign of potential energy or work, or changes the reference point for height/displacement mid-problem, producing inconsistent energy totals.',
+    primaryPatterns: ['l7-3', 'l7-4', 'l12-3'],
+    remediationSteps: [
+      'Require the student to state the chosen zero-reference for PE explicitly before writing any equation, and keep it fixed for the whole problem.',
+      'Track energy as a running ledger: KE_i + PE_i + W_other = KE_f + PE_f, and check every term has a defined sign.',
+      'Ask the student to verify: "if the object loses height, should PE increase or decrease?" before substituting numbers.',
+      'For elastic PE, double-check the sign of spring compression/extension separately from gravitational height.',
+    ],
+  },
+  {
+    type: 'cm_momentum_energy_confusion',
+    label: 'Momentum conservation confused with energy conservation in collisions',
+    description: 'Student assumes kinetic energy is always conserved in a collision (treating every collision as elastic), or applies momentum conservation incorrectly by ignoring direction (treating momentum as a scalar).',
+    primaryPatterns: ['l8-3', 'l8-4'],
+    remediationSteps: [
+      'State the rule: momentum is ALWAYS conserved in a closed system; kinetic energy is only conserved if the collision is elastic.',
+      'Have the student classify the collision (elastic vs. inelastic) before choosing which conservation law(s) to apply.',
+      'Stress that momentum is a vector — for 1D problems, assign a sign convention for direction before adding velocities.',
+      'Walk through a perfectly inelastic collision and show that momentum conservation alone gives the final velocity, while kinetic energy is NOT conserved — compute and compare KE before/after to make the loss concrete.',
+    ],
+  },
+  {
+    type: 'cm_torque_vs_force',
+    label: 'Torque confused with force; moment of inertia confused with mass',
+    description: 'Student treats torque as just "force" without accounting for lever arm and angle, or expects moment of inertia to depend only on mass and not on how that mass is distributed relative to the rotation axis.',
+    primaryPatterns: ['l13-2', 'l13-3', 'l13-4'],
+    remediationSteps: [
+      'Use a wrench analogy: the same force applied closer to the bolt produces less torque — torque = force × perpendicular lever arm.',
+      'Have the student compute torque for the same force applied at different distances and angles to see both factors matter.',
+      'Compare two objects of equal mass but different mass distribution (e.g. solid disk vs. ring) and ask which is harder to spin up — same mass, different I.',
+      'Connect τ = Iα explicitly back to F = ma, naming the rotational analog of each linear quantity (force↔torque, mass↔I, acceleration↔angular acceleration).',
+    ],
+  },
+  {
+    type: 'cm_angular_momentum_misuse',
+    label: 'Angular momentum conservation misapplied',
+    description: 'Student expects angular momentum to be conserved even when an external torque acts, or confuses angular momentum with linear momentum / angular velocity.',
+    primaryPatterns: ['l14-1', 'l14-2'],
+    remediationSteps: [
+      'State the condition explicitly: angular momentum L = Iω is conserved only when the net external torque is zero.',
+      'Use the classic spinning-skater example: as I decreases (arms pulled in), ω increases so that L = Iω stays constant — make the student compute both before/after.',
+      'Distinguish L (depends on I and ω) from linear momentum p = mv — ask which quantities each one involves.',
+      'Give a case with an external torque present (e.g. friction at a pivot) and ask the student to identify that L is NOT conserved there.',
+    ],
+  },
+  {
+    type: 'cm_shm_period_misconception',
+    label: 'SHM period assumed to depend on amplitude',
+    description: 'Student believes a larger-amplitude oscillation takes longer to complete a cycle (treating period like it depends on amplitude), rather than recognizing that for ideal SHM the period depends only on mass/spring-constant (or length/g for a pendulum).',
+    primaryPatterns: ['l17-1', 'l17-3', 'l18-2'],
+    remediationSteps: [
+      'Show the period formulas explicitly: T = 2π√(m/k) for a spring, T = 2π√(L/g) for a small-angle pendulum — neither contains amplitude.',
+      'Explain why: a larger amplitude means a larger restoring force too, so the extra distance and the extra speed cancel out, keeping the period the same.',
+      'Have the student predict the period for two different amplitudes on the same spring before confirming both are equal.',
+      'Caution that this only holds for ideal SHM (e.g. small-angle pendulum) — connect to where the approximation breaks down at large angles.',
+    ],
+  },
 ]
 
 // ── Signal lookback ───────────────────────────────────────────────────────────

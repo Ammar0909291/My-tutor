@@ -237,6 +237,12 @@ const ROUTE_RULES: RouteRule[] = [
       'vector addition', 'adding vectors', 'add the vectors', 'add these vectors',
       'resultant vector', 'resultant', 'vector sum', 'sum of the two vectors',
       'parallelogram law', 'tip-to-tail', 'tip to tail', 'head to tail',
+      // Classical Mechanics free-body diagrams (Sprint — Classical Mechanics):
+      // a two-force free-body diagram IS vector addition (the forces and their
+      // resultant), so it reuses this generator rather than a dedicated one —
+      // see the "INTENTIONALLY OUT OF SCOPE" note above.
+      'free-body diagram', 'free body diagram', 'net force on the object',
+      'two forces acting on', 'forces acting on the object',
     ],
   },
 ]

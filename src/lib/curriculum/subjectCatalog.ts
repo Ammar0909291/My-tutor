@@ -682,6 +682,227 @@ const QUANTUM_PHYSICS_TREE: CurriculumModule[] = [
   ]),
 ]
 
+// ─── Classical Mechanics (advanced Library subject) ──────────────────────────
+// Faithful encoding of docs/CLASSICAL_MECHANICS_MASTER_CURRICULUM.md:
+// 7 levels → 28 units → 127 lessons, with per-unit difficulty, unit-level
+// prerequisites, and lesson-level prerequisite metadata. Units map to
+// CurriculumModule, lessons to CurriculumNode. 7 pedagogical levels → 0–5
+// LevelIndex (L1→0, L2→1, L3→2, L4→3, L5→4, L6→5, L7→5 — mirrors the same
+// L6/L7 collapse Quantum Physics uses, since LevelIndex tops out at 5).
+// Lessons are authored in strict topological order; every prereq points to an
+// earlier-numbered lesson, so the dependency graph is a DAG by construction.
+
+type CMLesson = { id: string; title: string; prereqs: string[] }
+
+function cmL(id: string, title: string, prereqs: string[] = []): CMLesson {
+  return { id, title, prereqs }
+}
+
+function cmUnit(
+  num: number,
+  title: string,
+  level: LevelIndex,
+  estimatedHours: number,
+  difficulty: Difficulty,
+  prereqUnits: number[],
+  lessons: CMLesson[],
+): CurriculumModule {
+  const lessonSlug = (id: string) => `l${id.replace(/\./g, '-')}`
+  return {
+    slug: `u${num}`,
+    title,
+    levelRange: [level, level],
+    estimatedHours,
+    difficulty,
+    prerequisites: prereqUnits.map((u) => `u${u}`),
+    nodes: lessons.map((l) => ({
+      slug: lessonSlug(l.id),
+      title: l.title,
+      difficulty,
+      prerequisites: l.prereqs.map(lessonSlug),
+    })),
+  }
+}
+
+const CLASSICAL_MECHANICS_TREE: CurriculumModule[] = [
+  // ── Level 1 — Foundations (LevelIndex 0) ──
+  cmUnit(1, 'Mathematical & Measurement Toolkit', 0, 12, 'foundational', [], [
+    cmL('1.1', 'Units, dimensional analysis & significant figures'),
+    cmL('1.2', 'Scalars vs. vectors; vector addition & subtraction', ['1.1']),
+    cmL('1.3', 'Vector components & unit vectors', ['1.2']),
+    cmL('1.4', 'Derivatives & integrals for motion', ['1.1']),
+  ]),
+  cmUnit(2, 'One-Dimensional Kinematics', 0, 10, 'foundational', [1], [
+    cmL('2.1', 'Position, displacement & distance', ['1.4']),
+    cmL('2.2', 'Velocity & speed; reading motion graphs', ['2.1']),
+    cmL('2.3', 'Acceleration & the kinematic equations', ['2.2']),
+    cmL('2.4', 'Free fall & motion under constant acceleration', ['2.3']),
+  ]),
+  cmUnit(3, 'Two-Dimensional Kinematics & Projectile Motion', 0, 10, 'foundational', [2], [
+    cmL('3.1', 'Position, velocity & acceleration as vectors in 2D', ['1.3', '2.3']),
+    cmL('3.2', 'Relative velocity', ['3.1']),
+    cmL('3.3', 'Projectile motion: trajectory, range & time of flight', ['3.1']),
+    cmL('3.4', 'Projectile motion: maximum height & launch-angle optimization', ['3.3']),
+  ]),
+  cmUnit(4, "Forces & Newton's Laws", 0, 10, 'developing', [3], [
+    cmL('4.1', 'The concept of force; types of forces (gravity, normal, tension, applied)', ['2.3']),
+    cmL('4.2', "Newton's first law & inertia", ['4.1']),
+    cmL('4.3', 'Newton\'s second law: F = ma', ['4.2']),
+    cmL('4.4', "Newton's third law & force pairs", ['4.3']),
+    cmL('4.5', 'Free-body diagrams: construction and common errors', ['4.4']),
+  ]),
+
+  // ── Level 2 — Newtonian Dynamics (LevelIndex 1) ──
+  cmUnit(5, "Applications of Newton's Laws", 1, 12, 'developing', [4], [
+    cmL('5.1', 'Friction: static and kinetic', ['4.5']),
+    cmL('5.2', 'Inclined planes & force decomposition', ['5.1']),
+    cmL('5.3', 'Tension, pulleys & connected objects', ['5.1']),
+    cmL('5.4', "Spring forces & Hooke's law", ['4.3']),
+    cmL('5.5', 'Problem-solving with multiple coupled bodies', ['5.2', '5.3']),
+  ]),
+  cmUnit(6, 'Circular Motion', 1, 10, 'developing', [5], [
+    cmL('6.1', 'Uniform circular motion: centripetal acceleration', ['3.1']),
+    cmL('6.2', 'Centripetal force & applications (banked curves, conical pendulum)', ['6.1', '5.2']),
+    cmL('6.3', 'Non-uniform circular motion', ['6.2']),
+    cmL('6.4', 'Rotating reference frames: an introduction to pseudo-forces', ['6.2']),
+  ]),
+  cmUnit(7, 'Work & Energy', 1, 12, 'developing', [5], [
+    cmL('7.1', 'Work done by a force, including variable forces', ['4.3']),
+    cmL('7.2', 'Kinetic energy & the work–energy theorem', ['7.1']),
+    cmL('7.3', 'Potential energy: gravitational and elastic', ['7.1', '5.4']),
+    cmL('7.4', 'Conservation of mechanical energy', ['7.2', '7.3']),
+    cmL('7.5', 'Power', ['7.2']),
+  ]),
+  cmUnit(8, 'Momentum & Collisions', 1, 14, 'developing', [7], [
+    cmL('8.1', 'Linear momentum & impulse', ['4.3']),
+    cmL('8.2', 'Conservation of momentum', ['8.1']),
+    cmL('8.3', 'Elastic collisions', ['8.2', '7.4']),
+    cmL('8.4', 'Inelastic collisions', ['8.2']),
+    cmL('8.5', 'Center of mass & systems of particles', ['8.2']),
+  ]),
+
+  // ── Level 3 — Analytical Reformulation (LevelIndex 2) ──
+  cmUnit(9, 'Mathematical Toolkit II', 2, 14, 'developing', [1], [
+    cmL('9.1', 'Partial derivatives & the gradient', ['1.4']),
+    cmL('9.2', 'Multiple integrals (line/surface intuition)', ['9.1']),
+    cmL('9.3', 'Second-order linear ODEs (general solution methods)', ['1.4']),
+    cmL('9.4', 'Variational reasoning: what it means to minimize a quantity', ['9.2']),
+  ]),
+  cmUnit(10, 'Generalized Coordinates & Constraints', 2, 12, 'proficient', [9, 8], [
+    cmL('10.1', 'Degrees of freedom & generalized coordinates', ['9.1', '8.5']),
+    cmL('10.2', 'Holonomic vs. non-holonomic constraints', ['10.1']),
+    cmL('10.3', "Virtual work & D'Alembert's principle (conceptual bridge)", ['10.2']),
+    cmL('10.4', 'Kinetic and potential energy in generalized coordinates', ['10.1', '7.4']),
+  ]),
+  cmUnit(11, 'Lagrangian Mechanics', 2, 16, 'proficient', [10], [
+    cmL('11.1', 'The principle of least action (conceptual)', ['9.4', '10.3']),
+    cmL('11.2', 'The Lagrangian L = T − V', ['10.4']),
+    cmL('11.3', 'The Euler–Lagrange equation', ['11.1', '11.2']),
+    cmL('11.4', 'Solving simple systems with the Euler–Lagrange equation (pendulum, Atwood machine)', ['11.3']),
+    cmL('11.5', 'Equivalence with Newtonian mechanics — recovering F = ma', ['11.3']),
+  ]),
+  cmUnit(12, 'Symmetry & Conservation', 2, 8, 'proficient', [11], [
+    cmL('12.1', 'Cyclic coordinates & conserved momenta', ['11.3']),
+    cmL('12.2', "Noether's theorem (qualitative): symmetry implies conservation", ['12.1']),
+    cmL('12.3', 'Energy conservation revisited via the Lagrangian', ['12.1', '7.4']),
+  ]),
+
+  // ── Level 4 — Rotational Mechanics & Gravitation (LevelIndex 3) ──
+  cmUnit(13, 'Rotational Kinematics & Dynamics', 3, 12, 'proficient', [8, 11], [
+    cmL('13.1', 'Angular position, velocity & acceleration', ['2.3']),
+    cmL('13.2', 'Torque', ['4.3']),
+    cmL('13.3', 'Moment of inertia: definition and the parallel-axis theorem', ['13.1']),
+    cmL('13.4', 'Rotational form of Newton\'s second law (τ = Iα)', ['13.2', '13.3']),
+  ]),
+  cmUnit(14, 'Angular Momentum & Rolling Motion', 3, 12, 'proficient', [13], [
+    cmL('14.1', 'Angular momentum of a particle and a rigid body', ['13.3']),
+    cmL('14.2', 'Conservation of angular momentum', ['14.1']),
+    cmL('14.3', 'Rolling without slipping', ['13.4', '14.1']),
+    cmL('14.4', 'Rotational kinetic energy & combined translation–rotation problems', ['14.3', '7.4']),
+  ]),
+  cmUnit(15, 'Newtonian Gravitation', 3, 10, 'proficient', [7], [
+    cmL('15.1', "Newton's law of universal gravitation", ['4.3']),
+    cmL('15.2', 'Gravitational potential energy & escape velocity', ['15.1', '7.3']),
+    cmL('15.3', 'Gravitational field & superposition', ['15.1']),
+  ]),
+  cmUnit(16, 'Orbital Mechanics', 3, 12, 'proficient', [15, 14], [
+    cmL('16.1', "Kepler's three laws (empirical statement)", ['15.1']),
+    cmL('16.2', 'Deriving circular-orbit period from gravitation', ['15.1', '14.2']),
+    cmL('16.3', 'Elliptical orbits & energy of an orbit', ['15.2', '16.1']),
+    cmL('16.4', 'Orbital transfers & escape trajectories (conceptual)', ['16.3']),
+  ]),
+
+  // ── Level 5 — Oscillations & Mechanical Waves (LevelIndex 4) ──
+  cmUnit(17, 'Simple Harmonic Motion', 4, 10, 'proficient', [9, 7], [
+    cmL('17.1', 'The SHM equation and its solution', ['9.3']),
+    cmL('17.2', 'Mass–spring systems', ['17.1', '5.4']),
+    cmL('17.3', 'The simple pendulum (small-angle approximation)', ['17.1']),
+    cmL('17.4', 'Energy in simple harmonic motion', ['17.2', '7.4']),
+  ]),
+  cmUnit(18, 'Damped & Driven Oscillations', 4, 10, 'proficient', [17], [
+    cmL('18.1', 'Damped harmonic motion (underdamped/critical/overdamped)', ['17.1']),
+    cmL('18.2', 'Driven oscillations & resonance', ['18.1']),
+    cmL('18.3', 'Quality factor and energy dissipation', ['18.1', '18.2']),
+  ]),
+  cmUnit(19, 'Coupled Oscillators & Normal Modes', 4, 12, 'advanced', [18, 11], [
+    cmL('19.1', 'Two coupled oscillators: equations of motion', ['17.1', '11.3']),
+    cmL('19.2', 'Normal modes & normal-mode frequencies', ['19.1']),
+    cmL('19.3', 'Beats & energy exchange between coupled oscillators', ['19.2']),
+  ]),
+  cmUnit(20, 'Mechanical Waves', 4, 12, 'advanced', [19], [
+    cmL('20.1', 'The wave equation for a stretched string', ['19.1', '9.3']),
+    cmL('20.2', 'Traveling vs. standing waves; superposition', ['20.1']),
+    cmL('20.3', 'Wave energy & power transmission', ['20.2', '7.5']),
+    cmL('20.4', 'The continuum limit: from coupled oscillators to a wave medium', ['19.2', '20.1']),
+  ]),
+
+  // ── Level 6 — Hamiltonian & Rigid-Body Mechanics (LevelIndex 5) ──
+  cmUnit(21, 'Hamiltonian Mechanics', 5, 14, 'advanced', [12], [
+    cmL('21.1', 'Generalized momenta & the Legendre transform (conceptual)', ['12.1']),
+    cmL('21.2', "The Hamiltonian H = T + V and Hamilton's equations", ['21.1']),
+    cmL('21.3', 'Phase space & phase portraits', ['21.2']),
+    cmL('21.4', 'Poisson brackets & conserved quantities (orientation)', ['21.2']),
+  ]),
+  cmUnit(22, 'Rigid-Body Dynamics', 5, 14, 'advanced', [14, 21], [
+    cmL('22.1', 'The inertia tensor', ['13.3']),
+    cmL('22.2', 'Principal axes & moments of inertia', ['22.1']),
+    cmL('22.3', "Euler's equations for rigid-body rotation", ['22.2', '21.2']),
+    cmL('22.4', 'Precession & gyroscopic motion', ['22.3']),
+  ]),
+  cmUnit(23, 'Non-Inertial Reference Frames', 5, 10, 'advanced', [6, 21], [
+    cmL('23.1', 'Pseudo-forces in linearly accelerating frames', ['6.4']),
+    cmL('23.2', 'The Coriolis and centrifugal forces in rotating frames', ['6.4', '23.1']),
+    cmL('23.3', 'Applications: Foucault pendulum, weather systems (conceptual)', ['23.2']),
+  ]),
+  cmUnit(24, 'Central-Force Problem & Scattering', 5, 10, 'advanced', [16, 21], [
+    cmL('24.1', 'The effective potential for central forces', ['21.2', '16.3']),
+    cmL('24.2', 'Classifying orbits by energy (bound vs. unbound)', ['24.1']),
+    cmL('24.3', 'Scattering & the differential cross-section (conceptual)', ['24.2']),
+  ]),
+
+  // ── Level 7 — Research Foundations — Orientation & Literacy (LevelIndex 5) ──
+  cmUnit(25, 'Nonlinear Dynamics & Chaos (orientation)', 5, 10, 'advanced', [21], [
+    cmL('25.1', 'Nonlinear oscillators: the driven pendulum beyond small angles', ['18.2', '21.3']),
+    cmL('25.2', 'Sensitivity to initial conditions & the butterfly effect (conceptual)', ['25.1']),
+    cmL('25.3', 'Bifurcations & strange attractors (orientation, no derivation)', ['25.2']),
+  ]),
+  cmUnit(26, 'Continuum Mechanics Introduction', 5, 10, 'advanced', [22, 20], [
+    cmL('26.1', 'Stress and strain (conceptual)', ['22.1']),
+    cmL('26.2', 'Elasticity & Hooke\'s law for continuous media', ['26.1', '5.4']),
+    cmL('26.3', 'Fluids at rest: pressure and buoyancy (orientation)', ['26.1']),
+  ]),
+  cmUnit(27, 'The Classical–Relativistic Boundary', 5, 10, 'advanced', [21], [
+    cmL('27.1', "The Galilean transformation & its limits", ['3.2']),
+    cmL('27.2', 'Why Newtonian mechanics fails at high speed (conceptual bridge to relativity)', ['27.1']),
+    cmL('27.3', 'The classical limit as an approximation of relativistic mechanics (orientation)', ['27.2']),
+  ]),
+  cmUnit(28, 'Research Literacy & Methods', 5, 10, 'advanced', [25, 26, 27], [
+    cmL('28.1', 'Reading a classical-mechanics research abstract: vocabulary & structure', ['25.3', '26.2']),
+    cmL('28.2', 'How modern classical-mechanics research connects to robotics, astrodynamics & engineering', ['28.1']),
+    cmL('28.3', 'Where this curriculum ends and graduate mechanics begins (map of the field)', ['27.3', '28.1']),
+  ]),
+]
+
 // ─── Subject library (the full, browsable catalogue) ─────────────────────────
 
 export const SUBJECT_LIBRARY: LibrarySubject[] = [
@@ -709,6 +930,7 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
   // Physics
   { slug: 'physics', name: 'Physics', category: 'physics', icon: '⚛️', description: 'Understand how the physical world works, from motion to quantum physics.', modules: PHYSICS_TREE },
   { slug: 'quantum_physics', name: 'Quantum Physics', category: 'physics', icon: '🌀', description: 'A complete journey from high-school algebra to quantum research foundations — wave mechanics, formal QM, quantum information, and modern quantum physics.', modules: QUANTUM_PHYSICS_TREE },
+  { slug: 'classical_mechanics', name: 'Classical Mechanics', category: 'physics', icon: '🪐', description: 'A rigorous path from Newtonian motion to Lagrangian and Hamiltonian mechanics — forces, energy, oscillations, orbits, and rigid-body dynamics.', modules: CLASSICAL_MECHANICS_TREE },
 
   // Chemistry
   { slug: 'chemistry', name: 'Chemistry', category: 'chemistry', icon: '🧪', description: 'From atoms to organic chemistry — explained simply.', modules: CHEMISTRY_TREE },
