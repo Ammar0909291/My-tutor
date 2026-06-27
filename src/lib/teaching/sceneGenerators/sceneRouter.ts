@@ -30,8 +30,9 @@ import { extractTimelineParams, buildTimelineScene, checkTimelineConsistency } f
 import { extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency } from './economicsCurves'
 import { extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency } from './calculusGraph'
 import { extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency } from './civicsOrgChart'
+import { extractCircuitParams, buildCircuitScene, checkCircuitConsistency } from './electricCircuit'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -198,6 +199,24 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Circuit keys are deliberately MULTI-WORD and Kirchhoff/Ohm's-law-specific
+    // ("kirchhoff", "series circuit", "voltage drop", "equivalent resistance"...)
+    // rather than the bare single words ("circuit", "resistance", "voltage",
+    // "battery", "series", "parallel") that the legacy free-form visual
+    // detector (src/lib/school/visuals/detectVisual.ts, 'circuit_diagram')
+    // already uses — that detector is a separate, independently-gated system
+    // (ENABLE_AI_SCENE_GENERATION), so a collision there can't break this
+    // router, but specific phrases keep this rule's intent unambiguous and
+    // avoid stealing a turn that's only vaguely circuit-adjacent.
+    kind: 'electric_circuit',
+    keywords: [
+      'kirchhoff', "kirchhoff's law", 'kirchhoff voltage law', 'kirchhoff current law',
+      'series circuit', 'parallel circuit', 'voltage drop', 'voltage drops',
+      'equivalent resistance', 'total resistance', 'resistors in series',
+      'resistors in parallel', 'current through each resistor',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -299,6 +318,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'economics_curves': return runWithLogging(kind, text, extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency)
     case 'calculus_graph': return runWithLogging(kind, text, extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency)
     case 'civics_org_chart': return runWithLogging(kind, text, extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency)
+    case 'electric_circuit': return runWithLogging(kind, text, extractCircuitParams, buildCircuitScene, checkCircuitConsistency)
     default: return null
   }
 }
