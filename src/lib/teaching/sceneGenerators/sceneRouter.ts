@@ -27,8 +27,9 @@ import { extractLattice, buildLatticeScene, checkLatticeConsistency } from './cr
 import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency } from './momentumCollision'
 import { extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency } from './rayOptics'
 import { extractTimelineParams, buildTimelineScene, checkTimelineConsistency } from './historicalTimeline'
+import { extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency } from './economicsCurves'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -151,6 +152,20 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Economics keys are supply/demand-curve specific ("supply curve",
+    // "demand curve", "equilibrium price", "shifts to the right"...) — no
+    // overlap with any science/math rule's vocabulary above, so it can sit
+    // anywhere in the order. Placed before molecule/vector since it shares
+    // no cues with either.
+    kind: 'economics_curves',
+    keywords: [
+      'supply curve', 'demand curve', 'supply and demand', 'equilibrium price',
+      'equilibrium quantity', 'market equilibrium', 'shifts to the right',
+      'shifts to the left', 'shift in supply', 'shift in demand',
+      'supply shifts', 'demand shifts',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -249,6 +264,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'collision': return runWithLogging(kind, text, extractCollisionParams, buildCollisionScene, checkCollisionConsistency)
     case 'ray_optics': return runWithLogging(kind, text, extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency)
     case 'historical_timeline': return runWithLogging(kind, text, extractTimelineParams, buildTimelineScene, checkTimelineConsistency)
+    case 'economics_curves': return runWithLogging(kind, text, extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency)
     default: return null
   }
 }
