@@ -4,7 +4,7 @@
  *
  * Run with:  npx tsx scripts/test-teaching-output-bias.ts
  */
-import { deriveOutputBias, isOptionalVisual, type OutputBiasKind } from '../src/lib/school/adaptive/teachingOutputBias'
+import { deriveOutputBias, isOptionalVisual, isOptionalVisualTag, type OutputBiasKind } from '../src/lib/school/adaptive/teachingOutputBias'
 import type { TeachingStrategyType } from '../src/lib/school/adaptive/teachingStrategy'
 
 let passed = 0
@@ -66,6 +66,32 @@ check('MOMENTUM_RECOVERY keeps a REQUIRED (challenge) visual', wouldDrop('MOMENT
 check('FOUNDATION_REBUILD (PROMOTE) never drops, even an optional visual', wouldDrop('FOUNDATION_REBUILD', { interactive: false }) === false)
 check('APPLICATION_FOCUS (NEUTRAL) never drops', wouldDrop('APPLICATION_FOCUS', { interactive: false }) === false)
 check('ACCELERATED_GROWTH (NEUTRAL) never drops', wouldDrop('ACCELERATED_GROWTH', { interactive: false }) === false)
+
+// ── isOptionalVisualTag (Sprint W gap fix) — the LLM's own VISUAL:<type> tag ──
+// carries no interactive/challenge payload, so it is unconditionally OPTIONAL
+// whenever present, and never optional when absent.
+check('isOptionalVisualTag: a present tag string → OPTIONAL (true)',
+  isOptionalVisualTag('number_line') === true)
+check('isOptionalVisualTag: a different present tag string → OPTIONAL (true)',
+  isOptionalVisualTag('circuit_diagram') === true)
+check('isOptionalVisualTag: empty string → false (nothing to suppress)',
+  isOptionalVisualTag('') === false)
+check('isOptionalVisualTag: whitespace-only string → false (nothing to suppress)',
+  isOptionalVisualTag('   ') === false)
+check('isOptionalVisualTag: null → false (nothing to suppress)',
+  isOptionalVisualTag(null) === false)
+check('isOptionalVisualTag: undefined → false (nothing to suppress)',
+  isOptionalVisualTag(undefined) === false)
+
+// ── Integration semantics: SUPPRESS_OPTIONAL drops the LLM's own visual tag too ──
+function wouldDropTag(strategy: TeachingStrategyType, visual: string | null): boolean {
+  const bias = deriveOutputBias(strategy)
+  return bias.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisualTag(visual)
+}
+check('MOMENTUM_RECOVERY drops the LLM\'s own VISUAL:<type> tag', wouldDropTag('MOMENTUM_RECOVERY', 'number_line') === true)
+check('FOUNDATION_REBUILD (PROMOTE) never drops the tag', wouldDropTag('FOUNDATION_REBUILD', 'number_line') === false)
+check('APPLICATION_FOCUS (NEUTRAL) never drops the tag', wouldDropTag('APPLICATION_FOCUS', 'number_line') === false)
+check('SUPPRESS_OPTIONAL strategy with no tag present drops nothing', wouldDropTag('CONFIDENCE_BUILDING', null) === false)
 
 console.log(`\n=== ${passed} passed, ${failed} failed ===`)
 process.exit(failed ? 1 : 0)

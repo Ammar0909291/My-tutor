@@ -1219,6 +1219,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal — output bias is purely advisory */ }
       }
 
+      // Sprint W gap fix: the bias above only ever inspected detectedVisualSpec —
+      // the LLM's own free-text VISUAL:<type> tag (responseVisual) was never bias-
+      // weighted at all, so a MOMENTUM_RECOVERY/CONFIDENCE_BUILDING/CONFIDENCE_CORRECTION
+      // turn could still surface a model-suggested visual the strategy explicitly wants
+      // to suppress. responseVisual carries no interactive/challenge payload (it is
+      // just a string), so it is unconditionally OPTIONAL whenever present — see
+      // isOptionalVisualTag. Independent of, and runs alongside, the block above.
+      if (strategyHoisted && outputBiasHoisted && responseVisual) {
+        try {
+          const { isOptionalVisualTag } = await import('@/lib/school/adaptive/teachingOutputBias')
+          if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisualTag(responseVisual)) {
+            responseVisual = null
+          }
+        } catch { /* non-fatal — output bias is purely advisory */ }
+      }
+
       // Extend the "never show two visuals for one explanation" guard above to
       // the one pairing it missed: responseVisual (the LLM's own VISUAL:<type>
       // tag, parsed earlier) is computed independently of both deterministic

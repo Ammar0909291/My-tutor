@@ -63,3 +63,19 @@ export function isOptionalVisual(spec: VisualSpec | null | undefined): boolean {
   const s = spec as { interactive?: boolean; challenge?: unknown }
   return s.interactive !== true && s.challenge == null
 }
+
+/**
+ * Is the LLM's own free-text `VISUAL:<type>` tag OPTIONAL — i.e. safe for
+ * SUPPRESS_OPTIONAL to drop?
+ *
+ * Unlike a `VisualSpec`, this tag carries no `interactive`/`challenge` payload at
+ * all — it is purely the model's own suggestion that a visual would help, with no
+ * structural guarantee it is assessment- or interaction-critical. That makes it
+ * ALWAYS optional whenever it is present: there is no signal on this tag that could
+ * ever justify treating it as REQUIRED. So this is simpler than `isOptionalVisual`
+ * (no field to inspect) but follows the identical "OPTIONAL" contract the route's
+ * SUPPRESS_OPTIONAL branch already relies on.
+ */
+export function isOptionalVisualTag(visual: string | null | undefined): boolean {
+  return typeof visual === 'string' && visual.trim().length > 0
+}
