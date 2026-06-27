@@ -274,6 +274,7 @@ export async function POST(req: Request) {
     // pipeline degrades to today's behavior.
     let strategyHoisted: import('@/lib/school/adaptive/teachingStrategy').TeachingStrategyType | null = null
     let outputBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').OutputBias | null = null
+    let hintBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').HintBiasKind | null = null
     // Sprint CH: did THIS turn activate/continue a worked example?
     let workedExampleActive = false
     // Sprint W: deterministic inline-practice MCQ (generateInlinePractice.ts), computed
@@ -281,6 +282,10 @@ export async function POST(req: Request) {
     // response as a structured field once cleanText is finalized, the same pattern as
     // strategyHoisted/outputBiasHoisted above.
     let inlinePracticeHoisted: import('@/lib/school/practice/generateInlinePractice').InlinePracticeQuestion | null = null
+    // Sprint W gap A: the structured [HINT] tag's extracted text, hoisted the
+    // same way as inlinePracticeHoisted above so it can be attached to the
+    // JSON response once cleanText is finalized.
+    let hintHoisted: string | null = null
 
     if (schoolCtx) {
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
@@ -510,7 +515,7 @@ export async function POST(req: Request) {
         // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): additively surface
         // the strategy + its advisory output bias for the post-AI visual pipeline.
         // Pure, synchronous; cannot stall the turn.
-        const { deriveOutputBias } = await import('@/lib/school/adaptive/teachingOutputBias')
+        const { deriveOutputBias, deriveHintBias } = await import('@/lib/school/adaptive/teachingOutputBias')
         strategyHoisted = teachingStrategy.type
         outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
 
@@ -550,6 +555,22 @@ export async function POST(req: Request) {
               // non-fatal — inline practice is purely additive
             }
           }
+        }
+
+        // Sprint W gap A: a structured [HINT] action type. Previously a hint
+        // was only ever folded into the tutor's own prose (driven by each
+        // strategy's STRATEGY_ACTION_DIRECTIVE text) with no way for the
+        // student to control when it's revealed. The bias is advisory only —
+        // PREFERRED nudges the model to reach for the tag when the student
+        // seems stuck or has gotten the same thing wrong 2+ times in this
+        // conversation; SUPPRESSED tells it not to, since a hint contradicts
+        // that strategy's directive to explain directly; NEUTRAL leaves
+        // today's prose-only behavior as the default with no extra push.
+        hintBiasHoisted = deriveHintBias(teachingStrategy.type)
+        if (hintBiasHoisted === 'PREFERRED') {
+          systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nThe hint must nudge toward the next step only — never state the final answer inside the tag. Omit the tag entirely if the student is not stuck.`
+        } else if (hintBiasHoisted === 'SUPPRESSED') {
+          systemPrompt += `\n\nDo not use a [HINT] tag this turn — explain directly and clearly instead, per this strategy's directive.`
         }
       } catch {
         // non-fatal — strategy + bias context is purely additive
@@ -1174,6 +1195,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal */ }
       }
 
+      // Sprint W gap A: extract the [HINT] tag's text (if the model emitted
+      // one) and strip it from the persisted/returned text. Enforced even
+      // under a SUPPRESSED bias — if the model ignores the "do not use
+      // [HINT]" instruction, the tag is still stripped from the visible text
+      // but its content is discarded rather than surfaced, the same
+      // defense-in-depth pattern as the SUPPRESS_OPTIONAL visual checks below.
+      try {
+        const { parseHintTag } = await import('@/lib/school/tutoring/hintTag')
+        const parsedHint = parseHintTag(cleanText)
+        cleanText = parsedHint.cleanText
+        hintHoisted = hintBiasHoisted === 'SUPPRESSED' ? null : parsedHint.hint
+      } catch { /* non-fatal */ }
+
       // Sprint C/H: deterministic, rule-based visual detection on the final
       // tutor text, now routed through the Teaching Strategy Engine (Sprint H)
       // so a visual only appears when the strategy actually requests one, and
@@ -1261,6 +1295,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { isOptionalVisualTag } = await import('@/lib/school/adaptive/teachingOutputBias')
           if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisualTag(responseVisual)) {
             responseVisual = null
+          }
+        } catch { /* non-fatal — output bias is purely advisory */ }
+      }
+
+      // Sprint W gap C remainder: sceneSpec (rule-based/parametric/free-form,
+      // audit items #3/#4/#5) was never inspected by the bias module at all.
+      // isRequiredSceneSpec is always true when a scene is present — see its
+      // doc comment for why no suppression actually happens here — but this
+      // makes that policy explicit and auditable instead of leaving sceneSpec
+      // as a silent blind spot in the bias layer.
+      if (strategyHoisted && outputBiasHoisted && detectedSceneSpec) {
+        try {
+          const { isRequiredSceneSpec } = await import('@/lib/school/adaptive/teachingOutputBias')
+          if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && !isRequiredSceneSpec(detectedSceneSpec)) {
+            detectedSceneSpec = null
           }
         } catch { /* non-fatal — output bias is purely advisory */ }
       }
@@ -1385,6 +1434,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         inlinePractice: inlinePracticeHoisted ?? undefined,
+        hint: hintHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
       })

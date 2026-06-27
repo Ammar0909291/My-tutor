@@ -4,7 +4,8 @@
  *
  * Run with:  npx tsx scripts/test-teaching-output-bias.ts
  */
-import { deriveOutputBias, isOptionalVisual, isOptionalVisualTag, isOptionalInlinePractice, type OutputBiasKind } from '../src/lib/school/adaptive/teachingOutputBias'
+import { deriveOutputBias, isOptionalVisual, isOptionalVisualTag, isOptionalInlinePractice, isRequiredSceneSpec, deriveHintBias, type OutputBiasKind, type HintBiasKind } from '../src/lib/school/adaptive/teachingOutputBias'
+import type { SceneSpec } from '../src/lib/teaching/sceneSpec'
 import type { TeachingStrategyType } from '../src/lib/school/adaptive/teachingStrategy'
 
 let passed = 0
@@ -123,6 +124,43 @@ check('APPLICATION_FOCUS (NEUTRAL bias) + staleMate → never skipped',
   wouldSkipPractice('APPLICATION_FOCUS', true) === false)
 check('FOUNDATION_REBUILD (PROMOTE bias) + staleMate → never skipped despite being optional',
   wouldSkipPractice('FOUNDATION_REBUILD', true) === false)
+
+// ── isRequiredSceneSpec (Sprint W gap C remainder) ─────────────────────────
+const stubScene = { type: 'rule-based', objects: [] } as unknown as SceneSpec
+check('isRequiredSceneSpec: a present sceneSpec → REQUIRED (true)',
+  isRequiredSceneSpec(stubScene) === true)
+check('isRequiredSceneSpec: null spec → false (nothing to require)',
+  isRequiredSceneSpec(null) === false)
+check('isRequiredSceneSpec: undefined spec → false (nothing to require)',
+  isRequiredSceneSpec(undefined) === false)
+
+// ── Integration semantics: SUPPRESS_OPTIONAL never drops a sceneSpec ────────
+function wouldDropScene(strategy: TeachingStrategyType, spec: SceneSpec | null): boolean {
+  if (!spec) return false // mirrors route.ts's `&& detectedSceneSpec` guard — nothing to drop
+  const bias = deriveOutputBias(strategy)
+  return bias.kind === 'SUPPRESS_OPTIONAL' && !isRequiredSceneSpec(spec)
+}
+check('MOMENTUM_RECOVERY (SUPPRESS_OPTIONAL) never drops a present sceneSpec',
+  wouldDropScene('MOMENTUM_RECOVERY', stubScene) === false)
+check('MOMENTUM_RECOVERY with no scene at all → nothing to drop either way',
+  wouldDropScene('MOMENTUM_RECOVERY', null) === false)
+
+// ── deriveHintBias — all 7 strategy types map to a defensible HintBiasKind ──
+const HINT_EXPECTED: Record<TeachingStrategyType, HintBiasKind> = {
+  FOUNDATION_REBUILD: 'NEUTRAL',
+  MISCONCEPTION_REPAIR: 'PREFERRED',
+  MOMENTUM_RECOVERY: 'PREFERRED',
+  CONFIDENCE_CORRECTION: 'PREFERRED',
+  APPLICATION_FOCUS: 'NEUTRAL',
+  CONFIDENCE_BUILDING: 'SUPPRESSED',
+  ACCELERATED_GROWTH: 'NEUTRAL',
+}
+for (const [strategy, expectedKind] of Object.entries(HINT_EXPECTED) as [TeachingStrategyType, HintBiasKind][]) {
+  check(`deriveHintBias(${strategy}) → ${expectedKind}`, deriveHintBias(strategy) === expectedKind)
+}
+check('deriveHintBias: all 7 strategy types mapped', Object.keys(HINT_EXPECTED).length === 7)
+check('deriveHintBias: unknown strategy → NEUTRAL fallback',
+  deriveHintBias('NOPE' as TeachingStrategyType) === 'NEUTRAL')
 
 console.log(`\n=== ${passed} passed, ${failed} failed ===`)
 process.exit(failed ? 1 : 0)

@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Check, ChevronDown, ChevronUp, Copy, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
+import { Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
@@ -414,8 +414,42 @@ function InlinePracticePrompt({ practice }: { practice: InlinePracticeQuestion }
   )
 }
 
+// ─── Hint action type (Sprint W gap A) ─────────────────────────────────────────
+// Renders the structured [HINT] tag text as a tap-to-reveal candy card —
+// collapsed by default so the student chooses whether to see it (rather than
+// it landing pre-revealed inside the tutor's own prose, which would spoil it
+// unconditionally). Purely local state — the hint text already arrived with
+// the message.
+function HintCard({ hint }: { hint: string }) {
+  const [revealed, setRevealed] = useState(false)
+  return (
+    <Card style={{ padding: 14, maxWidth: '90%' }}>
+      <CandyButton
+        onClick={() => setRevealed((r) => !r)}
+        depth={0}
+        hoverLift={0}
+        activePush={0}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+          background: 'transparent', padding: 0,
+          fontSize: 13, fontWeight: 700, color: 'var(--text-primary)',
+        }}
+      >
+        <Lightbulb size={17} style={{ flexShrink: 0, color: 'var(--candy-yellow-d)' }} />
+        <span style={{ color: 'var(--text-primary)' }}>{revealed ? 'Hint' : 'Need a hint? Tap to reveal'}</span>
+        {revealed ? <ChevronUp size={15} style={{ marginLeft: 'auto', color: 'var(--text-dim)' }} /> : <ChevronDown size={15} style={{ marginLeft: 'auto', color: 'var(--text-dim)' }} />}
+      </CandyButton>
+      {revealed && (
+        <p style={{ fontSize: 13, fontWeight: 500, lineHeight: 1.5, color: 'var(--text-primary)', margin: '10px 0 0' }}>
+          {hint}
+        </p>
+      )}
+    </Card>
+  )
+}
+
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; inlinePractice?: InlinePracticeQuestion }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; inlinePractice?: InlinePracticeQuestion; hint?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -854,7 +888,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; inlinePractice?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
@@ -898,6 +932,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         && rawPractice.options.length === 4 && rawPractice.options.every((o) => typeof o === 'string')
         && typeof rawPractice.answer === 'string'
       ) ? rawPractice : undefined
+      // Sprint W gap A: defense in depth, same pattern as the fields above —
+      // a network payload is never trusted blind.
+      const responseHint = typeof data.hint === 'string' && data.hint.trim().length > 0 ? data.hint : undefined
       // Lesson-sync bug fix: completion must be detected ONLY from the exact
       // [LESSON_COMPLETE] control tag the system prompt instructs the AI to
       // emit. The previous keyword list also matched ordinary teaching prose
@@ -989,7 +1026,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, inlinePractice: responseInlinePractice } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, inlinePractice: responseInlinePractice, hint: responseHint } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2568,6 +2605,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {!isUser && !msg.streaming && msg.inlinePractice && (
                       <div style={{ animation: 'fadeUp 300ms ease-out both' }}>
                         <InlinePracticePrompt practice={msg.inlinePractice} />
+                      </div>
+                    )}
+
+                    {/* Sprint W gap A: structured [HINT] tag — tap-to-reveal card. */}
+                    {!isUser && !msg.streaming && msg.hint && (
+                      <div style={{ animation: 'fadeUp 300ms ease-out both' }}>
+                        <HintCard hint={msg.hint} />
                       </div>
                     )}
 
