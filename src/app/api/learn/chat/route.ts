@@ -508,6 +508,29 @@ export async function POST(req: Request) {
         const { deriveOutputBias } = await import('@/lib/school/adaptive/teachingOutputBias')
         strategyHoisted = teachingStrategy.type
         outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
+
+        // Survey follow-up (practice questions were fully decoupled from
+        // chat): when strategy calls for application practice, or the
+        // strategy-effectiveness reader flagged a stalemate, generate one
+        // inline MCQ from this chapter and have the tutor close the turn
+        // with it. Non-fatal — failure just means no inline question.
+        if (teachingStrategy.type === 'APPLICATION_FOCUS' || teachingStrategy.staleMate) {
+          try {
+            const { generateInlinePractice } = await import('@/lib/school/practice/generateInlinePractice')
+            const { SCHOOL_SUBJECT_META } = await import('@/lib/school/schoolRouting')
+            if (fullChapterForStrategy) {
+              const subjectName = SCHOOL_SUBJECT_META[subjectCode]?.label ?? subjectCode
+              const inlinePractice = await generateInlinePractice(
+                schoolCtx.board, subjectCode, subjectName, schoolCtx.grade, fullChapterForStrategy,
+              ).catch(() => null)
+              if (inlinePractice) {
+                systemPrompt += `\n\nEnd your response with this practice question exactly as written:\n${inlinePractice.question}\nOptions: ${inlinePractice.options.join(' | ')}`
+              }
+            }
+          } catch {
+            // non-fatal — inline practice is purely additive
+          }
+        }
       } catch {
         // non-fatal — strategy + bias context is purely additive
       }

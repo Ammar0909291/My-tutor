@@ -46,6 +46,8 @@ export interface TeachingStrategy {
   insight: string
   /** One-line sub-text for the chapter page card. */
   insightDetail: string
+  /** Same strategy fired 3+ times on this topic with no mastery progress (strategyEffectiveness.ts). */
+  staleMate: boolean
 }
 
 // ── Strategy metadata ─────────────────────────────────────────────────────────
@@ -291,6 +293,7 @@ export async function getTeachingStrategy(
     tutorInstructions: STRATEGY_INSTRUCTIONS[type],
     insight:       meta.insight,
     insightDetail: meta.insightDetail,
+    staleMate:     effectiveness?.staleMate ?? false,
   }
 }
 
