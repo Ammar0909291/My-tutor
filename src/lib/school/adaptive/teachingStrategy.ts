@@ -119,9 +119,22 @@ const STRATEGY_INSTRUCTIONS: Record<TeachingStrategyType, string[]> = {
 
 type TopMisconceptConfidence = 'HIGH' | 'MEDIUM' | 'LOW' | null
 
+// Canonical priority order, used as the final rotation fallback below.
+const ALL_STRATEGIES: TeachingStrategyType[] = [
+  'FOUNDATION_REBUILD', 'MISCONCEPTION_REPAIR', 'MOMENTUM_RECOVERY',
+  'CONFIDENCE_CORRECTION', 'APPLICATION_FOCUS', 'CONFIDENCE_BUILDING', 'ACCELERATED_GROWTH',
+]
+
 /**
  * Deterministic priority-based strategy selection.
  * All parameters are nullable — null means "no data".
+ *
+ * excludeStrategy (docs/STUDENT_MEMORY_AUDIT.md, gap #3): when the
+ * strategy-effectiveness reader detects a stalemate — the same strategy
+ * fired 3+ times on this topic with no mastery progress — pass the stale
+ * dominant strategy here to force rotation to the next-best match instead
+ * of repeating it. Optional and additive: omitting it reproduces the
+ * original first-match-wins behavior exactly.
  */
 export function determineStrategy(
   masteryLevel:            MasteryLevel | null,
@@ -129,29 +142,32 @@ export function determineStrategy(
   transferLevel:           TransferLevel | null,
   calibration:             CalibrationLevel | null,
   momentumLevel:           MomentumLevel | null,
+  excludeStrategy:         TeachingStrategyType | null = null,
 ): TeachingStrategyType {
+  const candidates: TeachingStrategyType[] = []
+
   // 1. FOUNDATION_REBUILD — mastery AT_RISK
-  if (masteryLevel === 'AT_RISK') return 'FOUNDATION_REBUILD'
+  if (masteryLevel === 'AT_RISK') candidates.push('FOUNDATION_REBUILD')
 
   // 2. MISCONCEPTION_REPAIR — HIGH misconception, or FALSE_MASTERY + any misconception
-  if (topMisconceptConfidence === 'HIGH') return 'MISCONCEPTION_REPAIR'
-  if (masteryLevel === 'FALSE_MASTERY' && topMisconceptConfidence !== null) return 'MISCONCEPTION_REPAIR'
+  if (topMisconceptConfidence === 'HIGH') candidates.push('MISCONCEPTION_REPAIR')
+  if (masteryLevel === 'FALSE_MASTERY' && topMisconceptConfidence !== null) candidates.push('MISCONCEPTION_REPAIR')
 
   // 3. MOMENTUM_RECOVERY — disengagement or declining
-  if (momentumLevel === 'DISENGAGEMENT_RISK' || momentumLevel === 'DECLINING_MOMENTUM') return 'MOMENTUM_RECOVERY'
+  if (momentumLevel === 'DISENGAGEMENT_RISK' || momentumLevel === 'DECLINING_MOMENTUM') candidates.push('MOMENTUM_RECOVERY')
 
-  // 4. CONFIDENCE_CORRECTION — overconfident + weak mastery (AT_RISK already returned above)
+  // 4. CONFIDENCE_CORRECTION — overconfident + weak mastery (AT_RISK already excluded above)
   if (calibration === 'OVERCONFIDENT' && masteryLevel === 'FALSE_MASTERY') {
-    return 'CONFIDENCE_CORRECTION'
+    candidates.push('CONFIDENCE_CORRECTION')
   }
 
   // 5. APPLICATION_FOCUS — transfer weak + some mastery base
   if (transferLevel === 'TRANSFER_WEAK' && (masteryLevel === 'TRUE_MASTERY' || masteryLevel === 'DEVELOPING')) {
-    return 'APPLICATION_FOCUS'
+    candidates.push('APPLICATION_FOCUS')
   }
 
   // 6. CONFIDENCE_BUILDING — underconfident
-  if (calibration === 'UNDERCONFIDENT') return 'CONFIDENCE_BUILDING'
+  if (calibration === 'UNDERCONFIDENT') candidates.push('CONFIDENCE_BUILDING')
 
   // 7. ACCELERATED_GROWTH — true mastery + strong transfer + strong momentum
   if (
@@ -159,13 +175,23 @@ export function determineStrategy(
     transferLevel === 'TRANSFER_STRONG' &&
     (momentumLevel === 'STRONG_MOMENTUM' || momentumLevel === 'STABLE_MOMENTUM')
   ) {
-    return 'ACCELERATED_GROWTH'
+    candidates.push('ACCELERATED_GROWTH')
   }
 
   // Default: Application Focus when mastery is solid but transfer is unclear
-  if (masteryLevel === 'TRUE_MASTERY' || masteryLevel === 'DEVELOPING') return 'APPLICATION_FOCUS'
+  if (masteryLevel === 'TRUE_MASTERY' || masteryLevel === 'DEVELOPING') candidates.push('APPLICATION_FOCUS')
 
-  return 'ACCELERATED_GROWTH'
+  candidates.push('ACCELERATED_GROWTH')
+
+  if (!excludeStrategy) return candidates[0]
+
+  const rotated = candidates.find((c) => c !== excludeStrategy)
+  if (rotated) return rotated
+
+  // Every matching rule produced the excluded (stale) strategy — force
+  // rotation to the next strategy in canonical priority order rather than
+  // repeating it a 4th time.
+  return ALL_STRATEGIES.find((s) => s !== excludeStrategy) ?? excludeStrategy
 }
 
 function buildReason(
@@ -203,7 +229,7 @@ export async function getTeachingStrategy(
   chapterId: string,
   kgNodeIds: string[],
 ): Promise<TeachingStrategy> {
-  const [masteryProfile, misconceptions, transferProfile, confidenceProfile, momentumProfile] =
+  const [masteryProfile, misconceptions, transferProfile, confidenceProfile, momentumProfile, effectiveness] =
     await Promise.all([
       import('./masteryIntelligence').then(({ getMasteryProfile }) =>
         getMasteryProfile(userId, board, Number(grade), subjectSlug, chapterId, kgNodeIds)
@@ -224,6 +250,13 @@ export async function getTeachingStrategy(
       import('./learningMomentum').then(({ getLearningMomentum }) =>
         getLearningMomentum(userId)
       ).catch(() => null),
+
+      // docs/STUDENT_MEMORY_AUDIT.md gap #3: read back the strategy-event log
+      // to detect a stalemate (same strategy repeating with no progress) and
+      // feed it into determineStrategy below so it can force a rotation.
+      import('./strategyEffectiveness').then(({ getStrategyEffectiveness }) =>
+        getStrategyEffectiveness(userId, chapterId, prisma)
+      ).catch(() => null),
     ])
 
   const topMisconceptConfidence = (() => {
@@ -239,6 +272,7 @@ export async function getTeachingStrategy(
     transferProfile?.level ?? null,
     confidenceProfile?.calibration ?? null,
     momentumProfile?.level ?? null,
+    effectiveness?.staleMate ? effectiveness.dominantStrategy : null,
   )
 
   const meta = STRATEGY_META[type]
