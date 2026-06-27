@@ -25,8 +25,9 @@ import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } f
 import { extractElement, buildElectronShellScene, checkElectronShellConsistency } from './electronShells'
 import { extractLattice, buildLatticeScene, checkLatticeConsistency } from './crystalLattice'
 import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency } from './momentumCollision'
+import { extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency } from './rayOptics'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -119,6 +120,21 @@ const ROUTE_RULES: RouteRule[] = [
       'sticks together', 'momentum is conserved', 'conservation of momentum',
       'elastic collision', 'inelastic collision', 'two objects moving',
       'two carts', 'two trolleys', 'two balls collide',
+    ],
+  },
+  {
+    // Ray-optics keys are mirror/lens-image-formation specific ("concave
+    // mirror", "focal length", "image distance", "real image"...) — disjoint
+    // from every other rule's vocabulary (no overlap with triangle's "angle",
+    // vector's "resultant", or collision's "collide"), so it can sit anywhere
+    // in the order without stealing another rule's turn. Placed before
+    // molecule/vector since it has no shared cues with either.
+    kind: 'ray_optics',
+    keywords: [
+      'concave mirror', 'convex mirror', 'concave lens', 'convex lens',
+      'mirror formula', 'lens formula', 'focal length', 'image distance',
+      'magnification', 'ray diagram', 'real image', 'virtual image',
+      'image formation', 'converging lens', 'diverging lens',
     ],
   },
   {
@@ -218,6 +234,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'electron_shells': return runWithLogging(kind, text, extractElement, buildElectronShellScene, checkElectronShellConsistency)
     case 'lattice': return runWithLogging(kind, text, extractLattice, buildLatticeScene, checkLatticeConsistency)
     case 'collision': return runWithLogging(kind, text, extractCollisionParams, buildCollisionScene, checkCollisionConsistency)
+    case 'ray_optics': return runWithLogging(kind, text, extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency)
     default: return null
   }
 }
