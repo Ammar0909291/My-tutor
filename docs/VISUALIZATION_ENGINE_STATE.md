@@ -156,25 +156,55 @@ runs:
 
 ## 5. Production wiring status — explicit
 
-**No part of this pipeline (Part 1, Part 1.5, the Part 2 probe, or the
-validator) is imported or reachable from any production code path.**
-Verified by search: none of `visualizationDecision.ts`,
-`visualizationTieBreaker.ts`, `sceneSpecValidator.ts`, or
-`probe-scenespec-generation.ts` is referenced anywhere under `src/app`.
-This is intentional, staged work — each part was built standalone, tested
-in isolation, and explicitly approved one step at a time before moving to
-the next, with no wiring into the live lesson/chat flow at any point.
+**Part 1, Part 1.5, the Part 2 probe, and the validator described above are
+still NOT imported or reachable from any production code path.** Verified
+by search: none of `visualizationDecision.ts`, `visualizationTieBreaker.ts`,
+`sceneSpecValidator.ts`, or `probe-scenespec-generation.ts` is referenced
+anywhere under `src/app`. This is intentional, staged work — each part was
+built standalone, tested in isolation, and explicitly approved one step at
+a time before moving to the next, with no wiring into the live lesson/chat
+flow at any point.
 
-**Distinct from this pipeline:** the live chat route
-(`src/app/api/learn/chat/route.ts`) already imports and calls a separate,
-pre-existing detector, `buildSceneSpec()` from
-`src/lib/teaching/buildSceneSpec.ts` (added in commit `0e212a8`, before
+**This is now distinct from a separate, later, fully-wired system —
+`sceneRouter.ts` + `generateRoutedScene()`.** That system (15 parametric
+generators: projectile/triangle/molecule/vector/circular/pendulum/electron
+shells/lattice/collision/ray_optics/historical_timeline/economics_curves/
+calculus_graph/civics_org_chart/electric_circuit — see
+`src/lib/teaching/sceneGenerators/sceneRouter.ts`) **IS wired into and
+reachable from production**, gated behind
+`ENABLE_PARAMETRIC_SCENE_GENERATION=true` (the default in `.env.example`).
+The interception point is `src/app/api/learn/chat/route.ts` lines
+1234-1248:
+
+```ts
+if (!detectedVisualSpec && !detectedSceneSpec && isParametricSceneGenerationEnabled()) {
+  try {
+    detectedSceneSpec = await generateRoutedScene(cleanText)
+  } catch { /* non-fatal */ }
+}
+```
+
+It runs third in the detection pipeline (after the 2D `planVisualTeaching()`
+check and the older `buildSceneSpec()` 3D detector, before the oldest
+free-form `generateSceneSpec()` generator), and only when nothing earlier
+in the chain already matched. The fallback chain is silent end-to-end: if
+`routeSceneGenerator()` finds no keyword match, or any generator's
+extract/build/validate step fails, `generateRoutedScene()` resolves to
+`null` (never throws — wrapped in `try/catch` here too) and the pipeline
+falls through unchanged to the next, older generator. Flag-off behavior is
+identical to before this system existed.
+
+**Also distinct from both of the above:** the live chat route also
+imports and calls a third, separate, pre-existing detector, `buildSceneSpec()`
+from `src/lib/teaching/buildSceneSpec.ts` (added in commit `0e212a8`, before
 this body of work began). That detector is a different, simpler,
 deterministic keyword-based system (mirroring the existing 2D `VisualSpec`
-detection pattern) that already renders 3D vector/molecule scenes in
-`LessonScreen` today. It is unrelated to — and not affected by — anything
-in this document. Do not conflate the two: `buildSceneSpec.ts` is live
-production code; everything in this document is standalone and unwired.
+detection pattern) that renders 3D vector/molecule scenes in `LessonScreen`.
+It runs before `generateRoutedScene()` in the pipeline and is unaffected by
+it. Do not conflate the three: `buildSceneSpec.ts` and
+`sceneRouter.ts`/`generateRoutedScene()` are both live production code;
+Part 1, Part 1.5, the Part 2 probe, and the validator above remain
+standalone and unwired.
 
 ---
 
@@ -188,5 +218,20 @@ production code; everything in this document is standalone and unwired.
 | `50952fd` | Part 2 feasibility probe (unverified) |
 | `69e03b1` | SceneSpec validator + harness (12/12) |
 | `f201387` | Validator adversarial hardening (20/20) |
+
+All on branch `claude/my-tutor-foundation-KDSUO`.
+
+### Separate system: `sceneRouter.ts` / `generateRoutedScene()` (production-wired)
+
+Not part of the Part 1/1.5/probe/validator pipeline above. Listed here for
+completeness since it shares the "scene generation" name and this doc was
+previously read as covering all scene-generation work.
+
+| Commit | What |
+|---|---|
+| `3d937e1` | Wire the first 9 parametric scene generators into the chat route, flag-gated |
+| `d08e88a` | Document `ENABLE_PARAMETRIC_SCENE_GENERATION` as a dev-only smoke-test flag |
+| `6463d1c` | Enable parametric scene generation in production (`=true`) |
+| (+6 more) | Added ray_optics, historical_timeline, economics_curves, calculus_graph, civics_org_chart, electric_circuit — grew 9 → 15 generators |
 
 All on branch `claude/my-tutor-foundation-KDSUO`.
