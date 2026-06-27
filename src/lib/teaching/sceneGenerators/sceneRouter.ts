@@ -26,8 +26,9 @@ import { extractElement, buildElectronShellScene, checkElectronShellConsistency 
 import { extractLattice, buildLatticeScene, checkLatticeConsistency } from './crystalLattice'
 import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency } from './momentumCollision'
 import { extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency } from './rayOptics'
+import { extractTimelineParams, buildTimelineScene, checkTimelineConsistency } from './historicalTimeline'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -138,6 +139,18 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Timeline keys are date/chronology-specific ("timeline", "chronological
+    // order", "BCE"/"CE"...) — none of the science-generator rules above use
+    // these terms, so this can sit anywhere in the order without collision.
+    // Checked before molecule/vector since it shares no vocabulary with either.
+    kind: 'historical_timeline',
+    keywords: [
+      'timeline', 'historical timeline', 'chronological order', 'in chronological',
+      'sequence of events', 'order of events', 'history of', 'bce', 'b.c.e.',
+      'b.c.', 'over the centuries', 'timeline of events',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -235,6 +248,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'lattice': return runWithLogging(kind, text, extractLattice, buildLatticeScene, checkLatticeConsistency)
     case 'collision': return runWithLogging(kind, text, extractCollisionParams, buildCollisionScene, checkCollisionConsistency)
     case 'ray_optics': return runWithLogging(kind, text, extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency)
+    case 'historical_timeline': return runWithLogging(kind, text, extractTimelineParams, buildTimelineScene, checkTimelineConsistency)
     default: return null
   }
 }
