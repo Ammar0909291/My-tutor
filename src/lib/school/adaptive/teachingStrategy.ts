@@ -117,6 +117,21 @@ const STRATEGY_INSTRUCTIONS: Record<TeachingStrategyType, string[]> = {
   ],
 }
 
+// Single explicit action directive per strategy (survey: "what teaching
+// actions exist beyond visuals" found worked examples/hints/analogies/
+// Socratic checks already run as always-on hardcoded layers, independent
+// of strategy — strategy only added tone via STRATEGY_INSTRUCTIONS above.
+// This sequences which of those existing actions takes priority this turn.
+const STRATEGY_ACTION_DIRECTIVE: Record<TeachingStrategyType, string> = {
+  FOUNDATION_REBUILD:    'Lead with a worked example before theory.',
+  MISCONCEPTION_REPAIR:  'Ask the student to explain their reasoning before you correct anything.',
+  MOMENTUM_RECOVERY:     'Give only one small hint. Do not solve it.',
+  CONFIDENCE_CORRECTION: 'Open with a real-world analogy first.',
+  APPLICATION_FOCUS:     'End this response with the inline practice question provided separately, if one is present.',
+  CONFIDENCE_BUILDING:   'Explain directly and clearly. No questions.',
+  ACCELERATED_GROWTH:    'Challenge with a harder variant after explaining.',
+}
+
 // ── Pure strategy determination ───────────────────────────────────────────────
 
 type TopMisconceptConfidence = 'HIGH' | 'MEDIUM' | 'LOW' | null
@@ -311,6 +326,7 @@ export function buildTeachingStrategyBlock(strategy: TeachingStrategy): string {
   for (const instruction of strategy.tutorInstructions) {
     lines.push(`- ${instruction}`)
   }
+  lines.push(`Action directive: ${STRATEGY_ACTION_DIRECTIVE[strategy.type]}`)
   lines.push('Apply this strategy throughout the session. Do not reference it by name to the student.')
   return lines.join('\n')
 }
