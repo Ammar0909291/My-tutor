@@ -84,3 +84,17 @@ export async function generateInlinePractice(
   const questions = await generator(board, subjectSlug, subjectName, grade, chapter)
   return selectFromQuestions(questions)
 }
+
+const INLINE_PRACTICE_TAG_RE = /\[INLINE_PRACTICE\]/gi
+
+/**
+ * Strip the `[INLINE_PRACTICE]` control tag the system prompt instructs the AI
+ * to end its response with (see route.ts). Pure string transform — case
+ * insensitive, removes every occurrence, trims the result. The structured
+ * InlinePracticeQuestion this tag accompanies is attached to the JSON response
+ * independently of whether the tag is actually present in the AI's text, so
+ * this function only needs to keep the persisted/returned text clean.
+ */
+export function parseInlinePracticeTag(text: string): string {
+  return text.replace(INLINE_PRACTICE_TAG_RE, '').trim()
+}

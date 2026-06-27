@@ -4,7 +4,7 @@
  *
  * Run with:  npx tsx scripts/test-teaching-output-bias.ts
  */
-import { deriveOutputBias, isOptionalVisual, isOptionalVisualTag, type OutputBiasKind } from '../src/lib/school/adaptive/teachingOutputBias'
+import { deriveOutputBias, isOptionalVisual, isOptionalVisualTag, isOptionalInlinePractice, type OutputBiasKind } from '../src/lib/school/adaptive/teachingOutputBias'
 import type { TeachingStrategyType } from '../src/lib/school/adaptive/teachingStrategy'
 
 let passed = 0
@@ -92,6 +92,37 @@ check('MOMENTUM_RECOVERY drops the LLM\'s own VISUAL:<type> tag', wouldDropTag('
 check('FOUNDATION_REBUILD (PROMOTE) never drops the tag', wouldDropTag('FOUNDATION_REBUILD', 'number_line') === false)
 check('APPLICATION_FOCUS (NEUTRAL) never drops the tag', wouldDropTag('APPLICATION_FOCUS', 'number_line') === false)
 check('SUPPRESS_OPTIONAL strategy with no tag present drops nothing', wouldDropTag('CONFIDENCE_BUILDING', null) === false)
+
+// ── isOptionalInlinePractice (Sprint W gap fix) — APPLICATION_FOCUS is always
+// REQUIRED (deliberate choice); staleMate-only triggers under any other
+// strategy are OPTIONAL.
+check('isOptionalInlinePractice: APPLICATION_FOCUS + staleMate=false → REQUIRED (false)',
+  isOptionalInlinePractice('APPLICATION_FOCUS', false) === false)
+check('isOptionalInlinePractice: APPLICATION_FOCUS + staleMate=true → still REQUIRED (false)',
+  isOptionalInlinePractice('APPLICATION_FOCUS', true) === false)
+check('isOptionalInlinePractice: MOMENTUM_RECOVERY + staleMate=true → OPTIONAL (true)',
+  isOptionalInlinePractice('MOMENTUM_RECOVERY', true) === true)
+check('isOptionalInlinePractice: MOMENTUM_RECOVERY + staleMate=false → never fires, but reports false',
+  isOptionalInlinePractice('MOMENTUM_RECOVERY', false) === false)
+check('isOptionalInlinePractice: CONFIDENCE_BUILDING + staleMate=true → OPTIONAL (true)',
+  isOptionalInlinePractice('CONFIDENCE_BUILDING', true) === true)
+check('isOptionalInlinePractice: FOUNDATION_REBUILD + staleMate=true → OPTIONAL (true, not the strategy\'s own choice)',
+  isOptionalInlinePractice('FOUNDATION_REBUILD', true) === true)
+
+// ── Integration semantics: SUPPRESS_OPTIONAL skips generating the practice
+// question entirely when it's only there because of a stalemate ──────────────
+function wouldSkipPractice(strategy: TeachingStrategyType, staleMate: boolean): boolean {
+  const bias = deriveOutputBias(strategy)
+  return bias.kind === 'SUPPRESS_OPTIONAL' && isOptionalInlinePractice(strategy, staleMate)
+}
+check('MOMENTUM_RECOVERY + staleMate → practice question is skipped',
+  wouldSkipPractice('MOMENTUM_RECOVERY', true) === true)
+check('CONFIDENCE_BUILDING + staleMate → practice question is skipped',
+  wouldSkipPractice('CONFIDENCE_BUILDING', true) === true)
+check('APPLICATION_FOCUS (NEUTRAL bias) + staleMate → never skipped',
+  wouldSkipPractice('APPLICATION_FOCUS', true) === false)
+check('FOUNDATION_REBUILD (PROMOTE bias) + staleMate → never skipped despite being optional',
+  wouldSkipPractice('FOUNDATION_REBUILD', true) === false)
 
 console.log(`\n=== ${passed} passed, ${failed} failed ===`)
 process.exit(failed ? 1 : 0)

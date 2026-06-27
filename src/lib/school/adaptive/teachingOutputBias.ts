@@ -79,3 +79,22 @@ export function isOptionalVisual(spec: VisualSpec | null | undefined): boolean {
 export function isOptionalVisualTag(visual: string | null | undefined): boolean {
   return typeof visual === 'string' && visual.trim().length > 0
 }
+
+/**
+ * Is a turn's inline-practice MCQ (generateInlinePractice.ts) OPTIONAL — i.e.
+ * safe for SUPPRESS_OPTIONAL to skip generating entirely?
+ *
+ * The route only ever generates this question under one of two triggers:
+ *  - the strategy is APPLICATION_FOCUS — a deliberate pedagogical choice to
+ *    practice right now, so the question is REQUIRED regardless of staleMate.
+ *  - staleMate alone (any other strategy type) — the question exists purely
+ *    because the strategy-effectiveness reader flagged a stalemate, not
+ *    because the active strategy called for one. That makes it OPTIONAL: a
+ *    MOMENTUM_RECOVERY/CONFIDENCE_BUILDING/CONFIDENCE_CORRECTION turn that
+ *    wants to keep things light shouldn't also have an unrequested quiz
+ *    layered on top just because a stalemate was detected.
+ */
+export function isOptionalInlinePractice(strategy: TeachingStrategyType, staleMate: boolean): boolean {
+  if (strategy === 'APPLICATION_FOCUS') return false
+  return staleMate
+}

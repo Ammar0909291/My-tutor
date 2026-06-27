@@ -276,6 +276,11 @@ export async function POST(req: Request) {
     let outputBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').OutputBias | null = null
     // Sprint CH: did THIS turn activate/continue a worked example?
     let workedExampleActive = false
+    // Sprint W: deterministic inline-practice MCQ (generateInlinePractice.ts), computed
+    // below alongside the strategy block. Hoisted so it can be attached to the JSON
+    // response as a structured field once cleanText is finalized, the same pattern as
+    // strategyHoisted/outputBiasHoisted above.
+    let inlinePracticeHoisted: import('@/lib/school/practice/generateInlinePractice').InlinePracticeQuestion | null = null
 
     if (schoolCtx) {
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
@@ -514,22 +519,36 @@ export async function POST(req: Request) {
         // strategy-effectiveness reader flagged a stalemate, generate one
         // inline MCQ from this chapter and have the tutor close the turn
         // with it. Non-fatal — failure just means no inline question.
+        //
+        // Sprint W output-bias gap fix: APPLICATION_FOCUS deliberately chose this
+        // practice question — it is never optional. But staleMate can fire
+        // alongside ANY strategy, including a SUPPRESS_OPTIONAL one (e.g. a
+        // MOMENTUM_RECOVERY turn for a struggling student). In that case the
+        // question only exists because of stalemate detection, not a deliberate
+        // pedagogical choice, so it counts as OPTIONAL and SUPPRESS_OPTIONAL skips
+        // generating it entirely — consistent with isOptionalInlinePractice.
         if (teachingStrategy.type === 'APPLICATION_FOCUS' || teachingStrategy.staleMate) {
-          try {
-            const { generateInlinePractice } = await import('@/lib/school/practice/generateInlinePractice')
-            const { SCHOOL_SUBJECT_META } = await import('@/lib/school/schoolRouting')
-            if (fullChapterForStrategy) {
-              const subjectName = SCHOOL_SUBJECT_META[subjectCode]?.label ?? subjectCode
-              const inlinePractice = await generateInlinePractice(
-                schoolCtx.board, subjectCode, subjectName, schoolCtx.grade, fullChapterForStrategy,
-                userId, prisma,
-              ).catch(() => null)
-              if (inlinePractice) {
-                systemPrompt += `\n\nEnd your response with this practice question exactly as written:\n${inlinePractice.question}\nOptions: ${inlinePractice.options.join(' | ')}`
+          const { isOptionalInlinePractice } = await import('@/lib/school/adaptive/teachingOutputBias')
+          const practiceIsOptional = isOptionalInlinePractice(teachingStrategy.type, teachingStrategy.staleMate)
+          const suppressPractice = outputBiasHoisted?.kind === 'SUPPRESS_OPTIONAL' && practiceIsOptional
+          if (!suppressPractice) {
+            try {
+              const { generateInlinePractice } = await import('@/lib/school/practice/generateInlinePractice')
+              const { SCHOOL_SUBJECT_META } = await import('@/lib/school/schoolRouting')
+              if (fullChapterForStrategy) {
+                const subjectName = SCHOOL_SUBJECT_META[subjectCode]?.label ?? subjectCode
+                const inlinePractice = await generateInlinePractice(
+                  schoolCtx.board, subjectCode, subjectName, schoolCtx.grade, fullChapterForStrategy,
+                  userId, prisma,
+                ).catch(() => null)
+                if (inlinePractice) {
+                  inlinePracticeHoisted = inlinePractice
+                  systemPrompt += `\n\nEnd your response with a short one-sentence transition inviting the student to try a quick practice question, then end with exactly this tag on its own line and nothing after it: [INLINE_PRACTICE]\nDo not write out the question, its options, or the answer yourself — the app displays them in a separate interactive card.`
+                }
               }
+            } catch {
+              // non-fatal — inline practice is purely additive
             }
-          } catch {
-            // non-fatal — inline practice is purely additive
           }
         }
       } catch {
@@ -1144,6 +1163,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal */ }
       }
 
+      // Sprint W: strip the [INLINE_PRACTICE] control tag from the persisted/
+      // returned text regardless of whether it generated one (hygiene only —
+      // the structured field below is attached independently of this tag, since
+      // it comes from inlinePracticeHoisted, not from parsing the AI's text).
+      if (inlinePracticeHoisted) {
+        try {
+          const { parseInlinePracticeTag } = await import('@/lib/school/practice/generateInlinePractice')
+          cleanText = parseInlinePracticeTag(cleanText)
+        } catch { /* non-fatal */ }
+      }
+
       // Sprint C/H: deterministic, rule-based visual detection on the final
       // tutor text, now routed through the Teaching Strategy Engine (Sprint H)
       // so a visual only appears when the strategy actually requests one, and
@@ -1354,6 +1384,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         success: true, text: cleanText, provider,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
+        inlinePractice: inlinePracticeHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
       })

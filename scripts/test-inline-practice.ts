@@ -7,7 +7,7 @@
  *
  * Run with:  npx tsx scripts/test-inline-practice.ts
  */
-import { generateInlinePractice } from '../src/lib/school/practice/generateInlinePractice'
+import { generateInlinePractice, parseInlinePracticeTag } from '../src/lib/school/practice/generateInlinePractice'
 import type { MCQQuestion, PracticeQuestion } from '../src/lib/school/practice/practiceTypes'
 
 let passed = 0
@@ -162,6 +162,20 @@ async function run() {
     const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, 'user-1', throwingPrisma, gen)
     check('cache lookup throwing → non-fatal, falls through to AI generator', generatorCalls.length > 0 && result?.question === 'What is 2 + 2?')
   }
+
+  // ── parseInlinePracticeTag (Sprint W gap fix) — strips the control tag ──
+  check('tag at end of text, on its own line → stripped, text trimmed',
+    parseInlinePracticeTag('Great work! Try this next.\n[INLINE_PRACTICE]') === 'Great work! Try this next.')
+  check('tag inline mid-sentence → stripped, surrounding text kept',
+    parseInlinePracticeTag('Before [INLINE_PRACTICE] after') === 'Before  after')
+  check('tag is case-insensitive',
+    parseInlinePracticeTag('Done. [inline_practice]') === 'Done.')
+  check('multiple occurrences → all stripped',
+    parseInlinePracticeTag('[INLINE_PRACTICE] middle [INLINE_PRACTICE]') === 'middle')
+  check('no tag present → text returned unchanged (just trimmed)',
+    parseInlinePracticeTag('  Nothing to strip here.  ') === 'Nothing to strip here.')
+  check('empty string → empty string',
+    parseInlinePracticeTag('') === '')
 
   console.log(`\n=== ${passed} passed, ${failed} failed ===`)
   process.exit(failed ? 1 : 0)

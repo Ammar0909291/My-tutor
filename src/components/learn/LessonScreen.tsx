@@ -22,6 +22,7 @@ import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
+import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
@@ -345,8 +346,75 @@ function TypingDots() {
   )
 }
 
+// ─── Inline practice MCQ (Sprint W gap fix) ────────────────────────────────────
+// Renders the structured InlinePracticeQuestion the route attaches alongside an
+// assistant message (msg.inlinePractice) as a dedicated candy-styled card with
+// real answer-capture and immediate scoring feedback, instead of the previous
+// plain markdown text the AI used to write out itself. Purely local state — no
+// new API call, since the question/answer pair already arrived with the message.
+function InlinePracticePrompt({ practice }: { practice: InlinePracticeQuestion }) {
+  const [selected, setSelected] = useState<string | null>(null)
+  const correct = selected !== null && selected === practice.answer
+
+  return (
+    <Card style={{ padding: 18, maxWidth: '90%' }}>
+      <Pill color="var(--candy-purple, var(--coral))" style={{ marginBottom: 10 }}>
+        🎯 Quick check
+      </Pill>
+      <p style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 12px' }}>
+        {practice.question}
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {practice.options.map((opt, i) => {
+          const isSelected = selected === opt
+          const isAnswer = opt === practice.answer
+          const showResult = selected !== null
+          const bg = showResult && isAnswer
+            ? 'rgba(34,197,94,0.12)'
+            : showResult && isSelected
+              ? 'rgba(239,68,68,0.12)'
+              : 'var(--bg-elevated, transparent)'
+          const border = showResult && isAnswer
+            ? '2px solid var(--green, #22c55e)'
+            : showResult && isSelected
+              ? '2px solid var(--red, #ef4444)'
+              : '2px solid var(--border-subtle)'
+          return (
+            <CandyButton
+              key={i}
+              onClick={() => { if (selected === null) setSelected(opt) }}
+              disabled={selected !== null}
+              shadowColor={showResult && isAnswer ? 'var(--green, #22c55e)' : showResult && isSelected ? 'var(--red, #ef4444)' : 'var(--border-subtle)'}
+              style={{
+                width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 10,
+                padding: '10px 14px', borderRadius: 12, background: bg, border,
+                fontSize: 13, fontWeight: 600, color: 'var(--text-primary)',
+              }}
+            >
+              <span style={{
+                width: 24, height: 24, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 11, fontWeight: 800, flexShrink: 0, background: 'var(--border-subtle)', color: 'var(--text-dim)',
+              }}>
+                {['A', 'B', 'C', 'D'][i]}
+              </span>
+              <span>{opt}</span>
+              {showResult && isAnswer && <Check size={15} style={{ marginLeft: 'auto', color: 'var(--green, #22c55e)' }} />}
+              {showResult && isSelected && !isAnswer && <X size={15} style={{ marginLeft: 'auto', color: 'var(--red, #ef4444)' }} />}
+            </CandyButton>
+          )
+        })}
+      </div>
+      {selected !== null && (
+        <p style={{ fontSize: 12, fontWeight: 700, margin: '10px 0 0', color: correct ? 'var(--green, #22c55e)' : 'var(--red, #ef4444)' }}>
+          {correct ? '✓ Correct!' : `✗ Not quite — the answer is "${practice.answer}".`}
+        </p>
+      )}
+    </Card>
+  )
+}
+
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; inlinePractice?: InlinePracticeQuestion }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -785,7 +853,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; inlinePractice?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
@@ -821,6 +889,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           console.warn('[sceneSpec] received invalid SceneSpec, skipping render:', result.errors)
         }
       }
+      // Sprint W: defense in depth, same pattern as responseVisualSpec/responseSceneSpec
+      // above — a network payload is never trusted blind. Shape-validate before render.
+      const rawPractice = data.inlinePractice as InlinePracticeQuestion | undefined
+      const responseInlinePractice = (
+        rawPractice && typeof rawPractice.question === 'string' && Array.isArray(rawPractice.options)
+        && rawPractice.options.length === 4 && rawPractice.options.every((o) => typeof o === 'string')
+        && typeof rawPractice.answer === 'string'
+      ) ? rawPractice : undefined
       // Lesson-sync bug fix: completion must be detected ONLY from the exact
       // [LESSON_COMPLETE] control tag the system prompt instructs the AI to
       // emit. The previous keyword list also matched ordinary teaching prose
@@ -922,7 +998,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, inlinePractice: responseInlinePractice } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2493,6 +2569,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {!isUser && !msg.streaming && msg.sceneSpec && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
                         <SceneSpecRenderer spec={msg.sceneSpec} />
+                      </div>
+                    )}
+
+                    {/* Sprint W: inline practice MCQ — structured candy card, replacing
+                        the old plain-text question the AI used to type out itself. */}
+                    {!isUser && !msg.streaming && msg.inlinePractice && (
+                      <div style={{ animation: 'fadeUp 300ms ease-out both' }}>
+                        <InlinePracticePrompt practice={msg.inlinePractice} />
                       </div>
                     )}
 
