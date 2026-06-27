@@ -34,7 +34,7 @@ export interface Misconception {
 
 // ── Internal taxonomy rule ────────────────────────────────────────────────────
 
-interface MisconceptionRule {
+export interface MisconceptionRule {
   type: string
   /** Student-facing short label (shown on chapter page). */
   label: string
@@ -53,7 +53,8 @@ interface MisconceptionRule {
 
 // ── Taxonomy ──────────────────────────────────────────────────────────────────
 
-const RULES: MisconceptionRule[] = [
+/** Exported read-only for test harnesses (scripts/test-misconception-rules.ts) — never mutated at runtime. */
+export const RULES: readonly MisconceptionRule[] = [
   // ── Mathematics ────────────────────────────────────────────────────────
   {
     type: 'fraction_denominator',
@@ -683,11 +684,11 @@ const CHECKPOINT_LOOKBACK_DAYS = 14
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function matchesPatterns(topicSlug: string, patterns: string[]): boolean {
+export function matchesPatterns(topicSlug: string, patterns: string[]): boolean {
   return patterns.some((p) => topicSlug.includes(p))
 }
 
-function toConfidence(evidenceCount: number): MisconceptionConfidence {
+export function toConfidence(evidenceCount: number): MisconceptionConfidence {
   if (evidenceCount >= 5) return 'HIGH'
   if (evidenceCount >= 3) return 'MEDIUM'
   return 'LOW'
