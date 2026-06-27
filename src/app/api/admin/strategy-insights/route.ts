@@ -72,11 +72,13 @@ export async function GET() {
 
     const counts = new Map<string, number>()
     for (const e of groupEvents) counts.set(e.strategy, (counts.get(e.strategy) ?? 0) + 1)
+    // groupEvents is chronological ascending — use >= so a count tie is broken
+    // in favor of the more recently occurring strategy, not the earliest.
     let dominantStrategy = groupEvents[0].strategy
     let maxCount = 0
     for (const e of groupEvents) {
       const count = counts.get(e.strategy) ?? 0
-      if (count > maxCount) {
+      if (count >= maxCount) {
         maxCount = count
         dominantStrategy = e.strategy
       }
