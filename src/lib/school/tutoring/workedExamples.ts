@@ -56,7 +56,9 @@ function looksLikeProblem(message: string): boolean {
   const hasMathOps = /\d\s*[+\-*/^×÷]\s*\d/.test(message)
   const hasFraction = /\d\/\d/.test(message)
   const hasPercent = /%|\bpercent/i.test(message)
-  const hasVariable = /\b[a-z]\s*[=+\-]/i.test(message)
+  // Require a digit after the operator — otherwise ordinary words like
+  // "e-mail" (letter immediately followed by '-') false-positive as algebra.
+  const hasVariable = /\b[a-z]\s*[=+\-]\s*\d/i.test(message)
   return hasEquation || hasMathOps || hasFraction || hasPercent || hasVariable
 }
 
