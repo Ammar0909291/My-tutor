@@ -1820,3 +1820,22 @@ model RevisionNotesCache {
   @@unique([board, subjectSlug, grade, chapterId, noteType, language])
   @@map("revision_notes_cache")
 }
+
+// ─── Teaching Strategy Engine outcome log (docs/STUDENT_MEMORY_AUDIT.md) ─────
+// Additive-only. Records which TeachingStrategyType fired per turn and
+// whether a visual ultimately rendered, so future work can analyse strategy
+// effectiveness. Write-only from route.ts today; no reader exists yet.
+model TeachingStrategyEvent {
+  id          String   @id @default(cuid())
+  userId      String
+  topicSlug   String
+  strategy    String // TeachingStrategyType value
+  outputBias  String // OutputBias kind value
+  visualFired Boolean // did a visual/scene actually render this turn?
+  sessionId   String? // LearnSession.id if available
+  createdAt   DateTime @default(now())
+
+  @@index([userId, topicSlug])
+  @@index([userId, createdAt])
+  @@map("teaching_strategy_events")
+}

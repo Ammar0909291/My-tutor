@@ -1206,6 +1206,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         responseVisual = null
       }
 
+      // Teaching Strategy Engine outcome log (docs/STUDENT_MEMORY_AUDIT.md):
+      // additive, fire-and-forget, non-fatal — records which strategy fired
+      // and whether a visual ultimately rendered this turn, for future
+      // strategy-effectiveness analysis. Never awaited, never throws, so it
+      // cannot add latency or fail the turn.
+      if (strategyHoisted && outputBiasHoisted && userId) {
+        const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
+        prisma.teachingStrategyEvent.create({
+          data: {
+            userId,
+            topicSlug: schoolCtx?.chapter.id ?? subjectCode,
+            strategy: strategyHoisted,
+            outputBias: outputBiasHoisted.kind,
+            visualFired,
+            sessionId: sessionId ?? null,
+          },
+        }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
+      }
+
       await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
