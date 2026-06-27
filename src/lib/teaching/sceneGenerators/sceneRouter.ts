@@ -37,8 +37,9 @@ import { extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsist
 import { extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency } from './coordinateGeometryLine'
 import { extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency } from './punnettSquare'
 import { extractTorqueParams, buildTorqueScene, checkTorqueConsistency } from './torqueDiagram'
+import { extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency } from './gravitationOrbit'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -59,6 +60,23 @@ interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 // triangle-specific (never bare "angle"). Molecule keywords are chemistry-bonding
 // specific (never bare "water") so they can't collide with the other two.
 const ROUTE_RULES: RouteRule[] = [
+  {
+    // Checked BEFORE 'circular': a satellite/planet orbiting a central mass
+    // under gravity is also "circular motion", but should land on the
+    // dedicated gravitation generator (which derives v=√(GM/r), period, and
+    // escape velocity from mass+radius), not the bare centripetal-motion
+    // generator. Keywords are gravity/orbit-specific ("escape velocity",
+    // "orbits the earth", "central mass"...) — a genuine non-gravity circular-
+    // motion turn (e.g. "a ball moves in a circle") never uses these, so the
+    // 'circular' rule still gets that turn.
+    kind: 'gravitation_orbit',
+    keywords: [
+      'escape velocity', 'orbital period', 'orbital speed', 'orbital velocity',
+      'orbits the earth', 'orbiting the earth', 'orbits a planet', 'satellite orbit',
+      'satellite orbiting', 'gravitational orbit', 'central mass', 'orbit radius',
+      'gravitational force keeps', 'orbits around',
+    ],
+  },
   {
     // Checked BEFORE projectile: "circular trajectory / circular path" contains
     // the projectile cue "trajectory", but a genuine projectile turn never says
@@ -396,6 +414,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'coordinate_geometry_line': return runWithLogging(kind, text, extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency)
     case 'punnett_square': return runWithLogging(kind, text, extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency)
     case 'torque_diagram': return runWithLogging(kind, text, extractTorqueParams, buildTorqueScene, checkTorqueConsistency)
+    case 'gravitation_orbit': return runWithLogging(kind, text, extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency)
     default: return null
   }
 }
