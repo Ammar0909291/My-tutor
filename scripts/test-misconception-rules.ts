@@ -28,6 +28,7 @@ import { join } from 'path'
 import { RULES, matchesPatterns, toConfidence, type MisconceptionRule } from '../src/lib/school/adaptive/misconceptionEngine'
 import { CLASSICAL_MECHANICS_MASTERY_CHALLENGES } from '../src/lib/visuals/classicalMechanicsMasteryChallenges'
 import { COMPUTER_SCIENCE_MASTERY_CHALLENGES } from '../src/lib/visuals/computerScienceMasteryChallenges'
+import { DATA_SCIENCE_MASTERY_CHALLENGES } from '../src/lib/visuals/dataScienceMasteryChallenges'
 
 let pass = 0
 let fail = 0
@@ -116,10 +117,12 @@ function rulesInSection(typePrefix: string): MisconceptionRule[] {
 const csRules = rulesInSection('cs_')
 const cmRules = rulesInSection('cm_')
 const quantumRules = rulesInSection('quantum_')
+const dsRules = rulesInSection('ds_')
 
 check('Computer Science section has the expected 6 rules', csRules.length === 6, `found ${csRules.length}`)
 check('Classical Mechanics section has the expected 8 rules', cmRules.length === 8, `found ${cmRules.length}`)
 check('Quantum Physics section has the expected 6 rules', quantumRules.length === 6, `found ${quantumRules.length}`)
+check('Data Science section has the expected 5 rules', dsRules.length === 5, `found ${dsRules.length}`)
 
 function allPatterns(rules: MisconceptionRule[]): string[] {
   return rules.flatMap((r) => [...r.primaryPatterns, ...(r.secondaryPatterns ?? [])])
@@ -128,11 +131,18 @@ function allPatterns(rules: MisconceptionRule[]): string[] {
 const csPatterns = allPatterns(csRules)
 const cmPatterns = allPatterns(cmRules)
 const quantumPatterns = allPatterns(quantumRules)
+const dsPatterns = allPatterns(dsRules)
 
 check('no Computer Science pattern is a substring of any Classical Mechanics pattern (or vice versa)',
   !csPatterns.some((cs) => cmPatterns.some((cm) => cm.includes(cs) || cs.includes(cm))))
 check('no Computer Science pattern is a substring of any Quantum Physics pattern (or vice versa)',
   !csPatterns.some((cs) => quantumPatterns.some((q) => q.includes(cs) || cs.includes(q))))
+check('no Data Science pattern is a substring of any Computer Science pattern (or vice versa)',
+  !dsPatterns.some((ds) => csPatterns.some((cs) => cs.includes(ds) || ds.includes(cs))))
+check('no Data Science pattern is a substring of any Classical Mechanics pattern (or vice versa)',
+  !dsPatterns.some((ds) => cmPatterns.some((cm) => cm.includes(ds) || ds.includes(cm))))
+check('no Data Science pattern is a substring of any Quantum Physics pattern (or vice versa)',
+  !dsPatterns.some((ds) => quantumPatterns.some((q) => q.includes(ds) || ds.includes(q))))
 // NOTE: Classical Mechanics and Quantum Physics each number their own
 // lessons independently (both as l<unit>-<lesson>), so exact lesson-slug
 // strings DO coincidentally repeat across the two sections (e.g. both
@@ -175,6 +185,11 @@ for (const challenge of CLASSICAL_MECHANICS_MASTERY_CHALLENGES) {
 
 for (const challenge of COMPUTER_SCIENCE_MASTERY_CHALLENGES) {
   check(`[CS challenge ${challenge.id}] misconceptionType "${challenge.misconceptionType}" exists in RULES`,
+    ruleTypes.has(challenge.misconceptionType))
+}
+
+for (const challenge of DATA_SCIENCE_MASTERY_CHALLENGES) {
+  check(`[DS challenge ${challenge.id}] misconceptionType "${challenge.misconceptionType}" exists in RULES`,
     ruleTypes.has(challenge.misconceptionType))
 }
 

@@ -21,7 +21,7 @@ import { buildVisualSpec } from './visualSpecBuilder'
 import { parseVisualSpec, type VisualSpec } from './visualSpec'
 
 /** Which existing visual engine (if any) the strategy selects. Never a new engine type. */
-export type VisualEngine = 'graph' | 'number_line' | 'geometry' | 'process_flow' | 'quantum_interactive' | 'classical_mechanics_interactive' | 'computer_science_interactive' | null
+export type VisualEngine = 'graph' | 'number_line' | 'geometry' | 'process_flow' | 'quantum_interactive' | 'classical_mechanics_interactive' | 'computer_science_interactive' | 'data_science_interactive' | null
 
 /** The Sprint H contract. Additive only — nothing here changes VisualSpec's own shape. */
 export interface VisualTeachingStrategy {

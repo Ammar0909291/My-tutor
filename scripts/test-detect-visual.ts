@@ -110,6 +110,14 @@ check('computer_science + "algorithm" → three_algorithm_visualization',
 check('computer_science + unrecognised keyword → null',
   detectVisual({ subjectSlug: 'computer_science', chapterTitle: 'History of computing pioneers' }) === null)
 
+// ── 10b. data_science (3D only, no 2D fallback) ─────────────────────────────
+check('data_science + "correlation" → three_correlation',
+  detectVisual({ subjectSlug: 'data_science', chapterTitle: 'Positive correlation between two variables' }) === 'three_correlation')
+check('data_science + "clustering" → three_clustering',
+  detectVisual({ subjectSlug: 'data_science', chapterTitle: 'Clustering and cluster centers' }) === 'three_clustering')
+check('data_science + unrecognised keyword → null',
+  detectVisual({ subjectSlug: 'data_science', chapterTitle: 'History of data science as a field' }) === null)
+
 // ── 11. science slug (generic) ───────────────────────────────────────────────
 check('science + "water cycle" → water_cycle',
   detectVisual({ subjectSlug: 'science', chapterTitle: 'Water cycle and evaporation condensation' }) === 'water_cycle')

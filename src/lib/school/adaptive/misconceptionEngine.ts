@@ -675,6 +675,70 @@ export const RULES: readonly MisconceptionRule[] = [
       'Ask the student to distinguish "the same program opened twice" (two processes, one program) from "two different programs running" to check the program-vs-process distinction.',
     ],
   },
+  // ── Data Science (Subject Library: data_science) ──────────────────────────
+  // primaryPatterns are node slugs from DATA_SCIENCE_TREE (subjectCatalog.ts),
+  // shaped `${moduleSlug}-${topic}`; detection is subjectSlug-scoped, so these
+  // never collide with other subjects.
+  {
+    type: 'ds_distribution_misconception',
+    label: 'Mean treated as always typical; outliers ignored',
+    description: 'Student assumes the mean always represents a "typical" value and overlooks how a skewed distribution or a few extreme outliers can pull the mean away from where most of the data actually sits, or confuses standard deviation with simple range.',
+    primaryPatterns: ['foundations-statistical-distribution', 'foundations-data-collection'],
+    remediationSteps: [
+      'Show a small skewed dataset (e.g. salaries with one outlier) where the mean is far from the median, and ask which one better describes "most people".',
+      'Have the student compute mean and median for the same dataset with and without an outlier removed, to see how much each statistic moves.',
+      'Draw a histogram and ask the student to locate the mean vs. the bulk of the data visually, reinforcing that spread (standard deviation) is not the same as the min-to-max range.',
+      'Ask the student to predict whether mean or median better summarizes a given real-world dataset before checking.',
+    ],
+  },
+  {
+    type: 'ds_chart_misreading',
+    label: 'Chart type and axis scale misread',
+    description: 'Student misreads a bar chart\'s height as proportional when the axis does not start at zero, or expects a scatter plot to show a trend line that is not actually fit to the data, conflating "plotted points" with "a fitted model".',
+    primaryPatterns: ['data_visualization-bar-charts', 'data_visualization-scatter-plots', 'data_visualization-trend-lines'],
+    remediationSteps: [
+      'Show the same data plotted with a zero-based axis vs. a truncated axis, and ask which one exaggerates the difference between bars.',
+      'Have the student distinguish raw scattered points from a trend line fit to those points, asking what the trend line represents that individual points don\'t.',
+      'Ask the student to redraw a misleading truncated-axis chart with a proper zero baseline and describe how the visual impression changes.',
+      'Give two charts of the same data with different scales and ask which conclusions are actually supported by the data itself.',
+    ],
+  },
+  {
+    type: 'ds_correlation_causation',
+    label: 'Correlation assumed to imply causation; sign of correlation confused',
+    description: 'Student concludes that because two variables are correlated, one must cause the other (ignoring confounders/coincidence), or confuses the sign of a correlation (assuming a negative correlation means "no relationship" rather than an inverse one).',
+    primaryPatterns: ['correlation_regression-correlation', 'correlation_regression-positive-negative-correlation', 'correlation_regression-regression'],
+    remediationSteps: [
+      'Use a classic spurious-correlation example (e.g. ice cream sales and drowning rates, both driven by summer heat) to show a third variable can explain a correlation without causation.',
+      'Plot a clearly negative-correlation dataset and ask the student to describe the relationship before introducing the term, to check the sign is understood as "inverse", not "absent".',
+      'Have the student name a plausible confounding variable for a given correlated pair before accepting any causal claim.',
+      'Ask the student to distinguish what a regression line predicts (an associated trend) from what it proves (causation), using a concrete example.',
+    ],
+  },
+  {
+    type: 'ds_clustering_misconception',
+    label: 'Clusters assumed to be labeled categories rather than discovered groups',
+    description: 'Student believes clustering (unsupervised learning) starts from known category labels like classification does, rather than discovering groups purely from how points are positioned relative to each other, and assumes cluster count is always obvious or fixed.',
+    primaryPatterns: ['clustering-unsupervised-learning', 'clustering-cluster-centers', 'clustering-grouping-data'],
+    remediationSteps: [
+      'Contrast clustering (no labels given, groups discovered) with classification (labels given in advance) using the same dataset framed both ways.',
+      'Walk through one iteration of assigning points to the nearest cluster center and recomputing the center, to show clusters emerge from geometry, not labels.',
+      'Show the same dataset clustered into 2 vs. 4 groups and ask the student to judge which grouping looks more natural, surfacing that cluster count is a choice, not a fixed fact.',
+      'Ask the student to identify which of two datasets has a more "obvious" natural grouping and explain why, to check the discovered-vs-given-labels distinction.',
+    ],
+  },
+  {
+    type: 'ds_ml_pipeline_misconception',
+    label: 'Model training conflated with prediction; messy data assumed usable as-is',
+    description: 'Student believes a trained model can be used directly on raw, uncleaned data the same way it was trained, or conflates the training phase (learning from labeled examples) with the prediction phase (applying the learned model to new data).',
+    primaryPatterns: ['ml_pipeline-data-cleaning', 'ml_pipeline-feature-preparation', 'ml_pipeline-model-training', 'ml_pipeline-prediction'],
+    remediationSteps: [
+      'Walk through the pipeline stages in order (raw data → cleaning → feature preparation → training → prediction) and ask what would break if cleaning were skipped.',
+      'Give a small dataset with a missing value or inconsistent unit and ask the student to identify why it must be cleaned before training, not just before prediction.',
+      'Ask the student to explain, in their own words, the difference between "the model learns" (training) and "the model is used" (prediction) using a concrete example.',
+      'Have the student trace what happens if a new data point at prediction time is missing a feature the model was trained on.',
+    ],
+  },
 ]
 
 // ── Signal lookback ───────────────────────────────────────────────────────────

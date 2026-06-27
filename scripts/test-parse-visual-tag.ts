@@ -64,10 +64,10 @@ const CASES: Case[] = [
     expectCleanText: 'See the structure.',
   },
   {
-    name: 'Data Science 3D types are NOT in VALID — confirmed still unreachable even via tag',
+    name: 'Data Science 3D types are now in VALID — reachable via explicit tag (Data Science curriculum/visual wiring sprint)',
     text: 'Explanation here.\nVISUAL: three_data_visualization',
-    expectVisual: null,
-    expectCleanText: 'Explanation here.\nVISUAL: three_data_visualization',
+    expectVisual: 'three_data_visualization',
+    expectCleanText: 'Explanation here.',
   },
 
   // ── BUG FIX REGRESSION — false positive must not corrupt real prose ──

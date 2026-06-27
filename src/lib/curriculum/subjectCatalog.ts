@@ -308,6 +308,24 @@ const COMPUTER_SCIENCE_TREE: CurriculumModule[] = [
   mod('operating_systems', 'Operating Systems', ['Processes', 'File Systems', 'Concurrency'], [3, 5], 8),
 ]
 
+// ─── Data Science ─────────────────────────────────────────────────────────────
+// Lightweight Subject Library tree (mod()-based, mirrors COMPUTER_SCIENCE_TREE) —
+// not the "advanced" qUnit/cmUnit pattern, since there is no dedicated
+// master-curriculum doc for Data Science. Topics are chosen to align with a new
+// DATA_SCIENCE_3D_RULES keyword table in detectVisual.ts, so real lesson text
+// naturally triggers the already-built Foundation 3D visuals (three_statistical_
+// distribution, three_data_visualization, three_correlation, three_clustering,
+// three_ml_pipeline) from the Data Science 3D Foundation Sprint
+// (docs/DATA_SCIENCE_3D_FOUNDATION_REPORT.md), which built those components but
+// left them production-unreachable pending curriculum registration.
+const DATA_SCIENCE_TREE: CurriculumModule[] = [
+  mod('foundations', 'Foundations', ['What Is Data Science', 'Data Collection', 'Statistical Distribution'], [0, 1], 8),
+  mod('data_visualization', 'Data Visualization', ['Bar Charts', 'Scatter Plots', 'Trend Lines'], [1, 2], 8),
+  mod('correlation_regression', 'Correlation & Regression', ['Correlation', 'Positive & Negative Correlation', 'Regression'], [2, 3], 10),
+  mod('clustering', 'Clustering', ['Unsupervised Learning', 'Cluster Centers', 'Grouping Data'], [3, 4], 8),
+  mod('ml_pipeline', 'Machine Learning Pipeline', ['Data Cleaning', 'Feature Preparation', 'Model Training', 'Prediction'], [3, 5], 10),
+]
+
 // ─── Biology ──────────────────────────────────────────────────────────────────
 
 const BIOLOGY_TREE: CurriculumModule[] = [
@@ -963,6 +981,9 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
 
   // Computer Science
   { slug: 'computer_science', name: 'Computer Science', category: 'computer_science', icon: '🖥️', description: 'How computers actually work — architecture, data structures, algorithms, memory, and networks.', modules: COMPUTER_SCIENCE_TREE },
+
+  // Data Science
+  { slug: 'data_science', name: 'Data Science', category: 'computer_science', icon: '📊', description: 'Make sense of data — distributions, visualization, correlation, clustering, and machine learning pipelines.', modules: DATA_SCIENCE_TREE },
 
   // Career & professional skills (Sprint D — chained together by Career Roadmaps)
   { slug: 'databases', name: 'Databases & SQL', category: 'programming', icon: '🗄️', description: 'Query, design, and manage relational databases with SQL.', modules: DATABASES_TREE },

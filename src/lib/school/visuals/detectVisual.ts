@@ -108,6 +108,19 @@ const COMPUTER_SCIENCE_3D_RULES: MatchRule[] = [
   { keywords: ['algorithm', 'sorting', 'searching', 'sort algorithm'], visual: 'three_algorithm_visualization' },
 ]
 
+// Data Science 3D rules (Data Science 3D Foundation Sprint follow-up wiring) —
+// same architecture as COMPUTER_SCIENCE_3D_RULES: checked under the
+// 'data_science' subject slug, no pre-existing 2D rule set, so this branch
+// returns the 3D match directly. See docs/DATA_SCIENCE_3D_FOUNDATION_REPORT.md
+// for the 5 visual components this table makes production-reachable.
+const DATA_SCIENCE_3D_RULES: MatchRule[] = [
+  { keywords: ['statistical distribution', 'histogram', 'mean and spread', 'standard deviation', 'distribution curve'], visual: 'three_statistical_distribution' },
+  { keywords: ['data visualization', 'bar chart', 'scatter plot', 'trend line'], visual: 'three_data_visualization' },
+  { keywords: ['correlation', 'positive correlation', 'negative correlation', 'regression'], visual: 'three_correlation' },
+  { keywords: ['clustering', 'cluster center', 'unsupervised learning', 'grouped clusters'], visual: 'three_clustering' },
+  { keywords: ['machine learning pipeline', 'feature preparation', 'data cleaning', 'model training', 'ml pipeline'], visual: 'three_ml_pipeline' },
+]
+
 const QUANTUM_RULES: MatchRule[] = [
   { keywords: ['double slit', 'double-slit', 'two slit', 'interference pattern', 'which-path', 'which path'], visual: 'double_slit' },
   { keywords: ['stern-gerlach', 'stern gerlach', 'spin measurement', 'spin up', 'spin down', 'spin-up', 'spin-down', 'angular momentum quantization', 'silver atom'], visual: 'stern_gerlach' },
@@ -202,6 +215,12 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, COMPUTER_SCIENCE_3D_RULES)
   }
 
+  // Same shape as the 'computer_science' branch above — no pre-existing 2D
+  // Data Science visuals, so this is the only rule set for this subject.
+  if (opts.subjectSlug === 'data_science') {
+    return matchRules(combined, DATA_SCIENCE_3D_RULES)
+  }
+
   return null
 }
 
@@ -233,6 +252,9 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     // Computer Science Production Learning Integration Sprint.
     'three_computer_architecture', 'three_memory_storage', 'three_network_packet_flow',
     'three_data_structure', 'three_algorithm_visualization',
+    // Data Science 3D Foundation Sprint.
+    'three_statistical_distribution', 'three_data_visualization', 'three_correlation',
+    'three_clustering', 'three_ml_pipeline',
   ])
   const visual = VALID.has(candidate) ? candidate as VisualType : null
   // Only strip the matched text when it's a recognized tag. An unrecognized
@@ -261,6 +283,8 @@ export function buildVisualsSystemBlock(availableVisual: VisualType | null): str
     'three_geometric_solids', 'three_transformations',
     'three_computer_architecture', 'three_memory_storage', 'three_network_packet_flow',
     'three_data_structure', 'three_algorithm_visualization',
+    'three_statistical_distribution', 'three_data_visualization', 'three_correlation',
+    'three_clustering', 'three_ml_pipeline',
   ]
   return `\n\nVISUAL LEARNING AID: A visual diagram is available for this topic. When your response contains an explanation where a diagram would genuinely help the student visualise the concept (e.g. showing a number line when explaining integers, a fraction bar when explaining fractions, a circuit when explaining electricity), add the following tag on its own line at the END of your response:
 VISUAL: ${availableVisual}
