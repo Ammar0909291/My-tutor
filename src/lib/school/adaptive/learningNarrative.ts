@@ -201,11 +201,15 @@ export function classifyLearningTrend(signals: NarrativeSignals): LearningTrend 
   // REGRESSION_RISK — clear decline.
   if (improvement <= -MODERATE_DELTA) return 'REGRESSION_RISK'
 
-  // RECOVERY_PHASE — was genuinely weak earlier, now trending up.
-  if (signals.earlierWasWeak && improvement >= MODERATE_DELTA) return 'RECOVERY_PHASE'
-
-  // RAPID_IMPROVEMENT — strong broad gains.
+  // RAPID_IMPROVEMENT — strong broad gains. Checked before RECOVERY_PHASE:
+  // RECOVERY_PHASE's threshold (MODERATE_DELTA) is lower, so checking it
+  // first would make RAPID_IMPROVEMENT unreachable for any student whose
+  // earlier window was weak, no matter how large the recent gain.
   if (improvement >= STRONG_DELTA) return 'RAPID_IMPROVEMENT'
+
+  // RECOVERY_PHASE — was genuinely weak earlier, now trending up (but not
+  // strongly enough to count as RAPID_IMPROVEMENT above).
+  if (signals.earlierWasWeak && improvement >= MODERATE_DELTA) return 'RECOVERY_PHASE'
 
   // STEADY_PROGRESS — consistent moderate gains.
   if (improvement >= MODERATE_DELTA) return 'STEADY_PROGRESS'
