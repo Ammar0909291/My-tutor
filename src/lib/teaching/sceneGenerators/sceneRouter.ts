@@ -36,8 +36,9 @@ import { extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkH
 import { extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsistency } from './demographicPyramid'
 import { extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency } from './coordinateGeometryLine'
 import { extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency } from './punnettSquare'
+import { extractTorqueParams, buildTorqueScene, checkTorqueConsistency } from './torqueDiagram'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -84,6 +85,13 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'projectile', 'trajectory', 'launch angle', 'launched at', 'thrown at',
       'ballistic', 'initial speed', 'initial velocity', 'parabolic path',
+    ],
+  },
+  {
+    kind: 'torque_diagram',
+    keywords: [
+      'torque', 'lever arm', 'moment of force', 'turning effect of force',
+      'rotational equilibrium', 'wrench applied', 'rotational motion of',
     ],
   },
   {
@@ -387,6 +395,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'demographic_pyramid': return runWithLogging(kind, text, extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsistency)
     case 'coordinate_geometry_line': return runWithLogging(kind, text, extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency)
     case 'punnett_square': return runWithLogging(kind, text, extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency)
+    case 'torque_diagram': return runWithLogging(kind, text, extractTorqueParams, buildTorqueScene, checkTorqueConsistency)
     default: return null
   }
 }
