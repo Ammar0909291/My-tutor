@@ -598,6 +598,82 @@ const RULES: MisconceptionRule[] = [
       'Caution that this only holds for ideal SHM (e.g. small-angle pendulum) — connect to where the approximation breaks down at large angles.',
     ],
   },
+  // ── Computer Science (Subject Library: computer_science) ─────────────────
+  // primaryPatterns are node slugs from COMPUTER_SCIENCE_TREE
+  // (subjectCatalog.ts), shaped `${moduleSlug}-${topic}`; detection is
+  // subjectSlug-scoped, so these never collide with other subjects.
+  {
+    type: 'cs_binary_representation',
+    label: 'Binary treated as a separate "computer-only" number system',
+    description: 'Student thinks binary is fundamentally different arithmetic rather than the same base-10 quantity written in base 2, and assumes a negative binary number is just a decimal value with a minus sign prefixed rather than understanding two\'s complement.',
+    primaryPatterns: ['foundations-binary-data-representation', 'foundations-what-is-a-computer'],
+    remediationSteps: [
+      'Convert the same small number (e.g. 13) to binary and back, showing it is the identical quantity in a different base, not a different kind of number.',
+      'Use place-value columns (128/64/32/16/8/4/2/1) the same way decimal place value works, so the pattern is recognizable rather than memorized.',
+      'Walk through two\'s complement on a small bit-width example to show why a sign bit alone is not how negative binary numbers actually work.',
+      'Ask the student to predict the decimal value of a given bit pattern before checking, to surface the misconception directly.',
+    ],
+  },
+  {
+    type: 'cs_complexity_misconception',
+    label: 'Big-O confused with actual runtime / line count',
+    description: 'Student equates "more lines of code" or "more steps written down" with worse time complexity, or assumes an algorithm with smaller Big-O is always faster in practice regardless of input size and constant factors.',
+    primaryPatterns: ['algorithms-algorithmic-complexity', 'algorithms-sorting-algorithms', 'algorithms-searching-algorithms'],
+    remediationSteps: [
+      'Count actual operations (comparisons/swaps) for the same algorithm on inputs of size 10 vs. 100 vs. 1000 to show growth rate, not code length, is what Big-O measures.',
+      'Show a concrete case where an O(n²) algorithm with a tiny constant beats an O(n log n) algorithm for small n, then crosses over for large n.',
+      'Have the student trace linear search vs. binary search by hand on the same sorted list and count comparisons, not lines of pseudocode.',
+      'Ask: "If this algorithm takes 1 second for 1,000 items, roughly how long for 1,000,000?" using the stated complexity class to check the growth-rate understanding.',
+    ],
+  },
+  {
+    type: 'cs_data_structure_access',
+    label: 'Data structure access costs and ordering confused',
+    description: 'Student assumes a linked list has O(1) indexed access like an array, or confuses which end a stack (LIFO) vs. a queue (FIFO) adds/removes from.',
+    primaryPatterns: ['data_structures-arrays', 'data_structures-linked-lists', 'data_structures-stacks-queues'],
+    remediationSteps: [
+      'Have the student physically trace pointer-hopping from the head of a linked list to reach the 5th element, counting each hop, and contrast with array[4] being a single jump.',
+      'Use a stack of plates (only the top is reachable) vs. a line at a ticket counter (first in, first out) as the working analogy for stack vs. queue.',
+      'Ask the student to predict the output order of a sequence of push/pop vs. enqueue/dequeue operations before checking.',
+      'Build a table of operation costs (access, insert-at-front, insert-at-end) for array vs. linked list side by side.',
+    ],
+  },
+  {
+    type: 'cs_memory_hierarchy',
+    label: 'RAM, cache, and storage treated as interchangeable "memory"',
+    description: 'Student conflates RAM (fast, volatile, lost on power-off) with storage (slower, persistent), and thinks cache is just "extra storage" rather than a small, fast layer that exists purely to reduce average access time.',
+    primaryPatterns: ['memory_storage-memory-hierarchy', 'memory_storage-cache', 'memory_storage-ram-vs-storage'],
+    remediationSteps: [
+      'Ask what happens to the contents of each (RAM, cache, disk/SSD) when the power is cut, to surface the volatile-vs-persistent distinction concretely.',
+      'Draw the memory hierarchy as a pyramid by speed and size, and ask why the fastest layer (cache) is also the smallest.',
+      'Use a desk-vs-filing-cabinet-vs-warehouse analogy: papers on the desk (cache/RAM) are fast to reach but limited in number; the warehouse (storage) holds everything but is slow to walk to.',
+      'Give a scenario (closing an unsaved document vs. a saved file) and ask the student to identify which layer each lived in and why the outcome differs.',
+    ],
+  },
+  {
+    type: 'cs_networking_misconception',
+    label: '"The Internet" and "the Web" conflated; packet routing misunderstood',
+    description: 'Student treats "the Internet" and "the World Wide Web" as the same thing, or believes a message travels from sender to receiver as one intact unit along a single fixed path rather than being split into independently-routed packets.',
+    primaryPatterns: ['networking-networks-packets', 'networking-routers-protocols', 'networking-the-internet'],
+    remediationSteps: [
+      'Clarify the layering explicitly: the Internet is the underlying network of networks; the Web (HTTP/browsers) is one application that runs on top of it, alongside email, video calls, etc.',
+      'Trace a single message being broken into multiple packets, each independently routed (possibly via different paths) and reassembled at the destination.',
+      'Use a postal analogy: splitting a long letter into several postcards, each separately addressed and possibly carried by different routes, then reordered on arrival.',
+      'Ask the student to distinguish bandwidth (how much data per second) from latency (how long one packet takes to arrive) with a concrete example of each.',
+    ],
+  },
+  {
+    type: 'cs_process_concurrency',
+    label: 'Concurrency on a single core assumed to be true simultaneity',
+    description: 'Student believes multiple processes on a single-core CPU literally run at the exact same instant rather than being rapidly time-sliced, or conflates a "program" (the static code) with a "process" (a running instance of it).',
+    primaryPatterns: ['operating_systems-processes', 'operating_systems-concurrency'],
+    remediationSteps: [
+      'Walk through a timeline showing the OS scheduler switching between processes in short time slices on a single core, so "running together" looks continuous but is actually interleaved.',
+      'Contrast this explicitly with true parallelism on a multi-core CPU, where separate cores genuinely execute different processes at the same instant.',
+      'Use the analogy of a single chef preparing multiple dishes by quickly switching between them, versus several chefs each cooking one dish at once.',
+      'Ask the student to distinguish "the same program opened twice" (two processes, one program) from "two different programs running" to check the program-vs-process distinction.',
+    ],
+  },
 ]
 
 // ── Signal lookback ───────────────────────────────────────────────────────────

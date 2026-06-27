@@ -32,6 +32,7 @@ const VISUAL_TYPE_LABEL: Record<VisualMasteryEngine, string> = {
   process_flow: 'process flows',
   quantum_interactive: 'quantum physics visuals',
   classical_mechanics_interactive: 'classical mechanics visuals',
+  computer_science_interactive: 'computer science visuals',
 }
 
 function labelFor(visualType: VisualMasteryEngine): string {

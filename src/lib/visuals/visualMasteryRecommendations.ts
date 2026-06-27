@@ -31,6 +31,7 @@ const RECOMMENDATION_TEXT: Record<VisualMasteryEngine, string> = {
   process_flow: 'Practice more process-flow activities',
   quantum_interactive: 'Practice more quantum physics visual challenges',
   classical_mechanics_interactive: 'Practice more classical mechanics visual challenges',
+  computer_science_interactive: 'Practice more computer science visual challenges',
 }
 
 /**
