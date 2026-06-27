@@ -38,8 +38,9 @@ import { extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, chec
 import { extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency } from './punnettSquare'
 import { extractTorqueParams, buildTorqueScene, checkTorqueConsistency } from './torqueDiagram'
 import { extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency } from './gravitationOrbit'
+import { extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency } from './statisticsBarChart'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -60,6 +61,18 @@ interface RouteRule { kind: SceneGeneratorKind; keywords: string[] }
 // triangle-specific (never bare "angle"). Molecule keywords are chemistry-bonding
 // specific (never bare "water") so they can't collide with the other two.
 const ROUTE_RULES: RouteRule[] = [
+  {
+    // Statistics keys are frequency-distribution/bar-chart specific
+    // ("frequency distribution", "frequency table", "tally chart", "mode of
+    // the data"...) — no overlap with any other rule's vocabulary above, so
+    // it can sit anywhere in the order.
+    kind: 'statistics_bar_chart',
+    keywords: [
+      'frequency distribution', 'frequency table', 'tally chart',
+      'bar chart', 'bar graph', 'mode of the data', 'modal class',
+      'class interval', 'grouped frequency',
+    ],
+  },
   {
     // Checked BEFORE 'circular': a satellite/planet orbiting a central mass
     // under gravity is also "circular motion", but should land on the
@@ -415,6 +428,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'punnett_square': return runWithLogging(kind, text, extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency)
     case 'torque_diagram': return runWithLogging(kind, text, extractTorqueParams, buildTorqueScene, checkTorqueConsistency)
     case 'gravitation_orbit': return runWithLogging(kind, text, extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency)
+    case 'statistics_bar_chart': return runWithLogging(kind, text, extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency)
     default: return null
   }
 }
