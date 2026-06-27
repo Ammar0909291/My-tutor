@@ -28,8 +28,9 @@ import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency 
 import { extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency } from './rayOptics'
 import { extractTimelineParams, buildTimelineScene, checkTimelineConsistency } from './historicalTimeline'
 import { extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency } from './economicsCurves'
+import { extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency } from './calculusGraph'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -166,6 +167,20 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Calculus keys are derivative/critical-point specific ("derivative",
+    // "critical point", "local maximum/minimum", "f'(x)"...) — none of these
+    // terms appear in any other rule's vocabulary, so it can sit anywhere in
+    // the order. Placed before molecule/vector since it shares no cues with
+    // either.
+    kind: 'calculus_graph',
+    keywords: [
+      'critical point', 'critical points', 'derivative', 'differentiate',
+      "f'(x)", 'local maximum', 'local minimum', 'inflection point',
+      'graph of the function', 'rate of change of the function',
+      'where the slope is zero', 'maxima and minima',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -265,6 +280,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'ray_optics': return runWithLogging(kind, text, extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency)
     case 'historical_timeline': return runWithLogging(kind, text, extractTimelineParams, buildTimelineScene, checkTimelineConsistency)
     case 'economics_curves': return runWithLogging(kind, text, extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency)
+    case 'calculus_graph': return runWithLogging(kind, text, extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency)
     default: return null
   }
 }
