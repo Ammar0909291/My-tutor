@@ -209,7 +209,10 @@ export function getLessonPlanCardItems(plan: LessonPlan): Array<{ title: string;
   const currentIdx = all.findIndex((c) => c.status === 'current')
   if (currentIdx === -1) return all.slice(0, 4)
 
-  // Window: show up to 1 mastered before current, current, and fill rest with remaining
-  const start = Math.max(0, currentIdx - 1)
+  // Window: show up to 1 item before current, current, and fill rest with remaining.
+  // Clamp the upper bound too — otherwise a current concept near the end of the
+  // list (e.g. currentIdx === all.length - 1) produces a window shorter than 4
+  // even though earlier items exist to fill it.
+  const start = Math.max(0, Math.min(currentIdx - 1, all.length - 4))
   return all.slice(start, start + 4)
 }
