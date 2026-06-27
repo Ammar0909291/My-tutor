@@ -33,8 +33,9 @@ import { extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency } f
 import { extractCircuitParams, buildCircuitScene, checkCircuitConsistency } from './electricCircuit'
 import { extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency } from './kinematicsGraphs'
 import { extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkHeightsAndDistancesConsistency } from './heightsAndDistances'
+import { extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsistency } from './demographicPyramid'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -81,6 +82,14 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'projectile', 'trajectory', 'launch angle', 'launched at', 'thrown at',
       'ballistic', 'initial speed', 'initial velocity', 'parabolic path',
+    ],
+  },
+  {
+    kind: 'demographic_pyramid',
+    keywords: [
+      'population pyramid', 'demographic pyramid', 'age pyramid',
+      'age-sex pyramid', 'age sex structure', 'population structure',
+      'age distribution of population',
     ],
   },
   {
@@ -358,6 +367,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'electric_circuit': return runWithLogging(kind, text, extractCircuitParams, buildCircuitScene, checkCircuitConsistency)
     case 'kinematics_graphs': return runWithLogging(kind, text, extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency)
     case 'heights_and_distances': return runWithLogging(kind, text, extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkHeightsAndDistancesConsistency)
+    case 'demographic_pyramid': return runWithLogging(kind, text, extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsistency)
     default: return null
   }
 }
