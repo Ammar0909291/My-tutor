@@ -23,6 +23,7 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
+import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import styles from './LessonScreen.module.css'
 
@@ -905,9 +906,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // positive silently advanced curriculumProgress.currentLesson, which is
       // exactly what caused Tutor Max's lesson context to drift ahead of the
       // Roadmap's displayed lesson.
-      const hasCompletion = full.toUpperCase().includes('[LESSON_COMPLETE]')
+      const { hasCompletion, cleanText: textAfterCompletion } = parseLessonCompletionTag(full)
+      full = textAfterCompletion
       if (hasCompletion) {
-        full = full.replace(/\[LESSON_COMPLETE\]/i, '').trim()
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
         if (currentLessonData) {
           handleLessonComplete(currentLessonData.order, currentLessonData)
@@ -936,24 +937,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       }
 
       // Collect deterministic check tags ([MATH_ANSWER] / [CODE_ANSWER]) before stripping
-      const mathChecks: Array<{ expected: number; got: number }> = []
-      const codeChecks: Array<{ expected: string; got: string }> = []
-      const mathTagRe = /\[MATH_ANSWER\s+expected=(-?\d+(?:\.\d+)?)\s+got=(-?\d+(?:\.\d+)?)\]/gi
-      const codeTagRe = /\[CODE_ANSWER\s+expected="([^"]*)"\s+got="([^"]*)"\]/gi
-      let mTag: RegExpExecArray | null
-      while ((mTag = mathTagRe.exec(full)) !== null) mathChecks.push({ expected: parseFloat(mTag[1]), got: parseFloat(mTag[2]) })
-      while ((mTag = codeTagRe.exec(full)) !== null) codeChecks.push({ expected: mTag[1], got: mTag[2] })
-      if (mathChecks.length > 0 || codeChecks.length > 0) {
-        full = full.replace(/\[MATH_ANSWER[^\]]*\]/gi, '').replace(/\[CODE_ANSWER[^\]]*\]/gi, '').trim()
-      }
+      const { mathChecks, codeChecks, cleanText: textAfterChecks } = parseMathCodeAnswerTags(full)
+      full = textAfterChecks
 
       // Detect assessment result tag and call evaluation endpoint
-      const assessMatch = full.match(/\[ASSESSMENT_RESULT\s+correctness=(\d+)\s+reasoning=(\d+)\s+confidence=(\d+)\]/i)
-      if (assessMatch) {
-        full = full.replace(assessMatch[0], '').trim()
-        const correctness = parseInt(assessMatch[1], 10)
-        const reasoning = parseInt(assessMatch[2], 10)
-        const confidence = parseInt(assessMatch[3], 10)
+      const { assessment, cleanText: textAfterAssessment } = parseAssessmentResultTag(full)
+      full = textAfterAssessment
+      if (assessment) {
+        const { correctness, reasoning, confidence } = assessment
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
         const topicSlug = currentLessonData?.topicSlug
         if (topicSlug) {
