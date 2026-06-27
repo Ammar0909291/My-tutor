@@ -29,8 +29,9 @@ import { extractRayOpticsParams, buildRayOpticsScene, checkRayOpticsConsistency 
 import { extractTimelineParams, buildTimelineScene, checkTimelineConsistency } from './historicalTimeline'
 import { extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency } from './economicsCurves'
 import { extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency } from './calculusGraph'
+import { extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency } from './civicsOrgChart'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -181,6 +182,22 @@ const ROUTE_RULES: RouteRule[] = [
     ],
   },
   {
+    // Civics keys are institutional-hierarchy specific ("parliament",
+    // "legislature", "federalism", "constitution"...) — no overlap with any
+    // science/math/economics rule's vocabulary above ("government" doesn't
+    // collide with "market equilibrium"/"supply curve" etc.), so it can sit
+    // anywhere in the order. Placed before molecule/vector since it shares
+    // no cues with either.
+    kind: 'civics_org_chart',
+    keywords: [
+      'parliament', 'legislature', 'legislative branch', 'executive branch',
+      'judicial branch', 'federalism', 'government structure',
+      'organizational chart', 'organisational chart', 'org chart',
+      'constitution', 'separation of powers', 'chain of command',
+      'reports to', 'hierarchy of government',
+    ],
+  },
+  {
     kind: 'molecule',
     keywords: [
       'molecule', 'molecular shape', 'molecular geometry', 'bond angle',
@@ -281,6 +298,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'historical_timeline': return runWithLogging(kind, text, extractTimelineParams, buildTimelineScene, checkTimelineConsistency)
     case 'economics_curves': return runWithLogging(kind, text, extractEconomicsParams, buildEconomicsCurveScene, checkEconomicsConsistency)
     case 'calculus_graph': return runWithLogging(kind, text, extractCalculusParams, buildCalculusGraphScene, checkCalculusConsistency)
+    case 'civics_org_chart': return runWithLogging(kind, text, extractOrgChartParams, buildOrgChartScene, checkOrgChartConsistency)
     default: return null
   }
 }
