@@ -34,8 +34,9 @@ import { extractCircuitParams, buildCircuitScene, checkCircuitConsistency } from
 import { extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency } from './kinematicsGraphs'
 import { extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkHeightsAndDistancesConsistency } from './heightsAndDistances'
 import { extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsistency } from './demographicPyramid'
+import { extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency } from './coordinateGeometryLine'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -82,6 +83,14 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'projectile', 'trajectory', 'launch angle', 'launched at', 'thrown at',
       'ballistic', 'initial speed', 'initial velocity', 'parabolic path',
+    ],
+  },
+  {
+    kind: 'coordinate_geometry_line',
+    keywords: [
+      'distance formula', 'section formula', 'midpoint formula',
+      'coordinate geometry', 'slope of the line', 'distance between the points',
+      'distance between two points', 'midpoint of the line segment',
     ],
   },
   {
@@ -368,6 +377,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'kinematics_graphs': return runWithLogging(kind, text, extractKinematicsParams, buildKinematicsGraphScene, checkKinematicsConsistency)
     case 'heights_and_distances': return runWithLogging(kind, text, extractHeightsAndDistancesParams, buildHeightsAndDistancesScene, checkHeightsAndDistancesConsistency)
     case 'demographic_pyramid': return runWithLogging(kind, text, extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsistency)
+    case 'coordinate_geometry_line': return runWithLogging(kind, text, extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency)
     default: return null
   }
 }
