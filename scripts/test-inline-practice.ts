@@ -2,7 +2,8 @@
  * Offline unit harness for inline practice question selection
  * (src/lib/school/practice/generateInlinePractice.ts).
  * Pure logic only — generateChapterPractice is mocked via the
- * injectable generator param, no real AI call or DB needed.
+ * injectable generator param, and PracticeSession lookups are mocked
+ * via a fake prisma object. No real AI call or DB needed.
  *
  * Run with:  npx tsx scripts/test-inline-practice.ts
  */
@@ -18,6 +19,17 @@ function check(name: string, cond: boolean) {
 
 function mockGenerator(questions: PracticeQuestion[]) {
   return async (_b: string, _s: string, _n: string, _g: number, _c: any) => questions
+}
+
+// Mock Prisma: practiceSession.findFirst returns `session` regardless of
+// the where-clause it's called with — the where-clause shape itself is
+// exercised by tsc (the real PracticeSession model), not re-verified here.
+function mockPrisma(session: { questions: unknown } | null) {
+  return {
+    practiceSession: {
+      findFirst: async (_args: unknown) => session,
+    },
+  } as any
 }
 
 const mcq1: MCQQuestion = {
@@ -48,19 +60,19 @@ const chapterStub = { id: 'c1', title: 'Test Chapter', order: 1 } as any
 async function run() {
   // ── No questions at all → null ────────────────────────────────────────
   {
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([]))
     check('empty question list → null', result === null)
   }
 
   // ── Only non-MCQ questions → null (no usable inline question) ──────────
   {
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([trueFalse, shortAnswer]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([trueFalse, shortAnswer]))
     check('no MCQ present → null', result === null)
   }
 
   // ── Single MCQ → returned with correct fields ───────────────────────────
   {
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([mcq1]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([mcq1]))
     check('single MCQ → question text passed through', result?.question === 'What is 2 + 2?')
     check('single MCQ → options passed through unchanged', JSON.stringify(result?.options) === JSON.stringify(['3', '4', '5', '6']))
     check('single MCQ → answer resolved from correctIndex 1', result?.answer === '4')
@@ -68,13 +80,13 @@ async function run() {
 
   // ── Multiple MCQs → picks the FIRST one, not the last ───────────────────
   {
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([mcq1, mcq2]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([mcq1, mcq2]))
     check('multiple MCQs → picks the first MCQ', result?.question === 'What is 2 + 2?')
   }
 
   // ── Mixed array → skips leading non-MCQ types, finds the MCQ ────────────
   {
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([trueFalse, shortAnswer, mcq2]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([trueFalse, shortAnswer, mcq2]))
     check('mixed array → finds MCQ after non-MCQ entries', result?.question === 'What is the capital of France?')
     check('mixed array → answer resolved from correctIndex 2', result?.answer === 'Paris')
   }
@@ -82,14 +94,14 @@ async function run() {
   // ── correctIndex 0 resolves to the first option ─────────────────────────
   {
     const zeroIndexMCQ: MCQQuestion = { ...mcq1, correctIndex: 0 }
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([zeroIndexMCQ]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([zeroIndexMCQ]))
     check('correctIndex 0 → resolves to first option', result?.answer === '3')
   }
 
   // ── correctIndex 3 (last option) resolves correctly ─────────────────────
   {
     const lastIndexMCQ: MCQQuestion = { ...mcq1, correctIndex: 3 }
-    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, mockGenerator([lastIndexMCQ]))
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, mockGenerator([lastIndexMCQ]))
     check('correctIndex 3 → resolves to last option', result?.answer === '6')
   }
 
@@ -97,17 +109,59 @@ async function run() {
   {
     let threw = false
     try {
-      await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, async () => { throw new Error('AI failure') })
+      await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, async () => { throw new Error('AI failure') })
     } catch {
       threw = true
     }
     check('generator throwing propagates to caller', threw === true)
   }
 
-  // ── Default param (real generateChapterPractice) is not invoked here — ──
-  // verified separately by tsc; this harness only exercises the injectable
-  // generator path to stay DB/AI-free.
-  check('harness stays pure (no live AI/DB calls made above)', true)
+  // ── CACHE: no userId/prisma supplied → AI generator path used directly ──
+  {
+    const generatorCalls: number[] = []
+    const gen = async (..._args: any[]) => { generatorCalls.push(1); return [mcq1] }
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, undefined, undefined, gen)
+    check('no userId/prisma → skips cache, calls generator', generatorCalls.length > 0 && result?.question === 'What is 2 + 2?')
+  }
+
+  // ── CACHE HIT: recent PracticeSession with an MCQ → no AI call ──────────
+  {
+    const generatorCalls: number[] = []
+    const gen = async (..._args: any[]) => { generatorCalls.push(1); return [mcq2] }
+    const prisma = mockPrisma({ questions: [trueFalse, mcq1] })
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, 'user-1', prisma, gen)
+    check('cache hit → does not call the AI generator', generatorCalls.length === 0)
+    check('cache hit → returns the MCQ from the cached session', result?.question === 'What is 2 + 2?')
+  }
+
+  // ── CACHE MISS: no session found → falls through to AI generation ───────
+  {
+    const generatorCalls: number[] = []
+    const gen = async (..._args: any[]) => { generatorCalls.push(1); return [mcq2] }
+    const prisma = mockPrisma(null)
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, 'user-1', prisma, gen)
+    check('cache miss (no session) → calls the AI generator', generatorCalls.length > 0)
+    check('cache miss → returns the freshly generated MCQ', result?.question === 'What is the capital of France?')
+  }
+
+  // ── CACHE present but with no usable MCQ → falls through to AI ──────────
+  {
+    const generatorCalls: number[] = []
+    const gen = async (..._args: any[]) => { generatorCalls.push(1); return [mcq2] }
+    const prisma = mockPrisma({ questions: [trueFalse, shortAnswer] })
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, 'user-1', prisma, gen)
+    check('cached session has no MCQ → falls through to AI generator', generatorCalls.length > 0)
+    check('fallback after non-MCQ cache → returns the AI-generated MCQ', result?.question === 'What is the capital of France?')
+  }
+
+  // ── CACHE lookup itself throwing (DB hiccup) is swallowed → falls to AI ──
+  {
+    const generatorCalls: number[] = []
+    const gen = async (..._args: any[]) => { generatorCalls.push(1); return [mcq1] }
+    const throwingPrisma = { practiceSession: { findFirst: async () => { throw new Error('DB down') } } } as any
+    const result = await generateInlinePractice('cbse', 'science', 'Science', 8, chapterStub, 'user-1', throwingPrisma, gen)
+    check('cache lookup throwing → non-fatal, falls through to AI generator', generatorCalls.length > 0 && result?.question === 'What is 2 + 2?')
+  }
 
   console.log(`\n=== ${passed} passed, ${failed} failed ===`)
   process.exit(failed ? 1 : 0)

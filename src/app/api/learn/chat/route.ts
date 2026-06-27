@@ -522,6 +522,7 @@ export async function POST(req: Request) {
               const subjectName = SCHOOL_SUBJECT_META[subjectCode]?.label ?? subjectCode
               const inlinePractice = await generateInlinePractice(
                 schoolCtx.board, subjectCode, subjectName, schoolCtx.grade, fullChapterForStrategy,
+                userId, prisma,
               ).catch(() => null)
               if (inlinePractice) {
                 systemPrompt += `\n\nEnd your response with this practice question exactly as written:\n${inlinePractice.question}\nOptions: ${inlinePractice.options.join(' | ')}`
