@@ -177,6 +177,14 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
     return matchRules(combined, CHEMISTRY_3D_RULES) ?? matchRules(combined, SCIENCE_RULES)
   }
 
+  // Biology (Subject Library, dedicated 'biology' slug — distinct from the
+  // generic 'science' slug, used by senior-secondary stream catalogs).
+  // SCIENCE_RULES already covers food_chain/water_cycle/solar_system, which
+  // are biology/earth-science content — reuse it directly, no 3D fallback yet.
+  if (opts.subjectSlug === 'biology') {
+    return matchRules(combined, SCIENCE_RULES)
+  }
+
   // Computer Science (Subject Library, dedicated 'computer_science' slug).
   // Computer Science Production Learning Integration Sprint: CS 3D rules are the
   // only rule set for this subject (no pre-existing 2D CS visuals), so the
