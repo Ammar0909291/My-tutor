@@ -9,14 +9,19 @@
  * origin to attach credentials to). Communication back to this component
  * is postMessage-only, validated by event.source.
  *
- * React/ReactDOM/react-is/Recharts/d3/mathjs are loaded inside the iframe
- * from same-origin static files (public/vendor/dynamic-visuals/, copied
- * from node_modules at install time by scripts/copy-dynamic-visual-vendor.mjs)
- * rather than a third-party CDN, since the iframe is a separate browsing
- * context with no access to the parent's JS heap.
+ * THREE.js (3D primary path) and React/ReactDOM/react-is/Recharts/d3/mathjs
+ * (2D fallback libs) are loaded inside the iframe from same-origin static
+ * files (public/vendor/dynamic-visuals/, copied from node_modules at install
+ * time by scripts/copy-dynamic-visual-vendor.mjs) rather than a third-party
+ * CDN, since the iframe is a separate browsing context with no access to
+ * the parent's JS heap. THREE ships only as ES modules in v0.150+, so it
+ * is imported via <script type="module"> and re-exposed on window.THREE.
  *
  * Silent fallback on ANY error or timeout: renders nothing rather than a
  * broken iframe or an error message, per the dynamic-engine build spec.
+ * Code-level fallback (3D → 2D) lives one layer up in
+ * generateVisualizationCode.ts: this renderer just runs whichever single
+ * component the generator produced.
  */
 
 import { useEffect, useRef, useState } from 'react'
@@ -25,6 +30,8 @@ import { Card, Pill } from '@/components/ui/candy'
 
 const RENDER_TIMEOUT_MS = 8000
 
+// Classic scripts — execute synchronously in order and populate window globals
+// BEFORE the module script (which has implicit defer semantics) runs.
 const VENDOR_SCRIPTS = [
   '/vendor/dynamic-visuals/react.production.min.js',
   '/vendor/dynamic-visuals/react-dom.production.min.js',
@@ -33,6 +40,8 @@ const VENDOR_SCRIPTS = [
   '/vendor/dynamic-visuals/d3.min.js',
   '/vendor/dynamic-visuals/mathjs.js',
 ]
+
+const THREE_MODULE = '/vendor/dynamic-visuals/three.module.min.js'
 
 function buildSandboxDocument(code: string): string {
   const transformed = code.replace(/export\s+default/, 'return')
@@ -44,22 +53,24 @@ function buildSandboxDocument(code: string): string {
 <body>
 <div id="root"></div>
 ${scriptTags}
-<script>
-(function () {
-  function fail(message) {
-    parent.postMessage({ type: 'dynamic-visual-error', message: String(message) }, '*')
+<script type="module">
+import * as THREE from ${JSON.stringify(THREE_MODULE)};
+window.THREE = THREE;
+function fail(message) {
+  parent.postMessage({ type: 'dynamic-visual-error', message: String(message) }, '*');
+}
+try {
+  var factory = new Function('React', 'ReactDOM', 'THREE', 'recharts', 'd3', 'mathjs', ${JSON.stringify(transformed)});
+  var Component = factory(window.React, window.ReactDOM, window.THREE, window.Recharts, window.d3, window.math);
+  if (typeof Component !== 'function') { fail('generated code did not return a component'); }
+  else {
+    var root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(React.createElement(Component));
+    parent.postMessage({ type: 'dynamic-visual-rendered' }, '*');
   }
-  try {
-    var factory = new Function('React', 'recharts', 'd3', 'mathjs', ${JSON.stringify(transformed)})
-    var Component = factory(window.React, window.Recharts, window.d3, window.math)
-    if (typeof Component !== 'function') { fail('generated code did not return a component'); return }
-    var root = ReactDOM.createRoot(document.getElementById('root'))
-    root.render(React.createElement(Component))
-    parent.postMessage({ type: 'dynamic-visual-rendered' }, '*')
-  } catch (err) {
-    fail(err && err.message ? err.message : 'render failed')
-  }
-})()
+} catch (err) {
+  fail(err && err.message ? err.message : 'render failed');
+}
 </script>
 </body>
 </html>`

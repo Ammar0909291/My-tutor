@@ -1,5 +1,5 @@
 /**
- * Dynamic 2D Visualization Engine — code generation.
+ * Dynamic Visualization Engine — code generation.
  *
  * Wired into the chat route (src/app/api/learn/chat/route.ts) behind
  * ENABLE_DYNAMIC_VISUALIZATION (default OFF), only when neither the
@@ -15,6 +15,13 @@
  * origin or any other. The denylist below is defense-in-depth on top of
  * that boundary, not a substitute for it — it exists so an obviously
  * dangerous generation never reaches the client at all.
+ *
+ * 3D-FIRST WITH 2D FALLBACK: the primary prompt asks for an animated
+ * Three.js scene (THREE, React, ReactDOM in scope). If the model's 3D
+ * output fails our static checks (missing default export, denylisted
+ * identifier, parse failure), we retry once with the legacy 2D recharts
+ * prompt — both prompts target the same single-default-export contract,
+ * so the renderer is agnostic to which one produced the code.
  */
 
 import { generateAIResponse } from '@/lib/ai/client'
@@ -25,7 +32,93 @@ export function isDynamicVisualizationEnabled(): boolean {
   return process.env.ENABLE_DYNAMIC_VISUALIZATION === 'true'
 }
 
-const SYSTEM_PROMPT = `You are a visualization code generator for a student tutoring app.
+// ── Primary prompt: Three.js (3D) ───────────────────────────────────────────
+const SYSTEM_PROMPT_3D = `You are a 3D visualization code generator for a student tutoring app.
+
+Available globals (already in scope, DO NOT import them): THREE, React, ReactDOM.
+
+Return ONLY a single default-exported React functional component.
+No imports. No markdown. No explanation. Raw JS only.
+No JSX — use React.createElement(...) only (the code runs with no transpiler).
+No fetch, no setTimeout, no setInterval, no external resources.
+Do NOT touch window.* or document.* — read size from the canvas ref.
+
+The component must:
+  - render exactly one canvas via React.useRef and React.createElement('canvas', { ref, style: { width: '100%', height: 300 } })
+  - inside React.useEffect(function () { ... }, []), build a THREE.WebGLRenderer attached to that canvas, a PerspectiveCamera, a Scene, ambient + at least one directional/point light, and the concept's geometry
+  - drive an animation loop with requestAnimationFrame
+  - on cleanup, cancelAnimationFrame and renderer.dispose()
+  - make the geometry SPECIFIC to the concept being explained (do not just paste an example)
+
+Example 1 — rotating cube with ambient + directional light:
+export default function Visual() {
+  var ref = React.useRef(null);
+  React.useEffect(function () {
+    var canvas = ref.current; if (!canvas) return;
+    var w = canvas.clientWidth || 320, h = 300;
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setSize(w, h, false);
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b1220);
+    var camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
+    camera.position.set(2.2, 2.2, 3); camera.lookAt(0, 0, 0);
+    var cube = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshStandardMaterial({ color: 0x4f9eff, metalness: 0.1, roughness: 0.4 })
+    );
+    scene.add(cube);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    var dir = new THREE.DirectionalLight(0xffffff, 0.9); dir.position.set(3, 4, 5); scene.add(dir);
+    var raf = 0;
+    function loop() {
+      cube.rotation.x += 0.01; cube.rotation.y += 0.012;
+      renderer.render(scene, camera);
+      raf = requestAnimationFrame(loop);
+    }
+    loop();
+    return function () { cancelAnimationFrame(raf); renderer.dispose(); };
+  }, []);
+  return React.createElement('canvas', { ref: ref, style: { width: '100%', height: 300 } });
+}
+
+Example 2 — animated sphere with orbit motion around a central body:
+export default function Visual() {
+  var ref = React.useRef(null);
+  React.useEffect(function () {
+    var canvas = ref.current; if (!canvas) return;
+    var w = canvas.clientWidth || 320, h = 300;
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setSize(w, h, false);
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000010);
+    var camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+    camera.position.set(0, 2.5, 8); camera.lookAt(0, 0, 0);
+    var sun = new THREE.Mesh(
+      new THREE.SphereGeometry(0.6, 32, 32),
+      new THREE.MeshStandardMaterial({ color: 0xffcc33, emissive: 0x553300 })
+    );
+    scene.add(sun);
+    var planet = new THREE.Mesh(
+      new THREE.SphereGeometry(0.25, 24, 24),
+      new THREE.MeshStandardMaterial({ color: 0x66aaff })
+    );
+    scene.add(planet);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+    var pt = new THREE.PointLight(0xffffff, 1.2, 50); pt.position.set(0, 0, 0); scene.add(pt);
+    var t = 0, raf = 0;
+    function loop() {
+      t += 0.02; planet.position.set(Math.cos(t) * 3, 0, Math.sin(t) * 3);
+      renderer.render(scene, camera);
+      raf = requestAnimationFrame(loop);
+    }
+    loop();
+    return function () { cancelAnimationFrame(raf); renderer.dispose(); };
+  }, []);
+  return React.createElement('canvas', { ref: ref, style: { width: '100%', height: 300 } });
+}`
+
+// ── Fallback prompt: 2D recharts (kept verbatim from the original 2D engine) ─
+const SYSTEM_PROMPT_2D = `You are a visualization code generator for a student tutoring app.
 
 Available libraries (already in scope, do not import them): recharts, d3, mathjs — use these only.
 
@@ -73,6 +166,9 @@ export default function Visual() {
   );
 }`
 
+// Denylist: defense-in-depth on top of the iframe sandbox boundary. Three.js
+// scenes mount via a React ref, so they never need `document.` or `window.`
+// access — the same restrictions used for the 2D engine still hold.
 const DENYLIST = [
   'fetch(', 'XMLHttpRequest', 'import(', 'require(', 'eval(',
   'document.', 'window.', 'localStorage', 'sessionStorage', 'cookie',
@@ -96,9 +192,36 @@ export interface GeneratedVisualization {
 }
 
 /**
- * Generates a visualization component for the given explanation text.
- * Never throws — returns null on any failure (no LLM call made, malformed
- * output, missing default export, or a denylisted identifier).
+ * Run one round of: LLM call → tag parse → fence strip → export check →
+ * denylist check. Returns the validated code string or null. Never throws.
+ */
+async function generateOnce(
+  explanationText: string,
+  systemPrompt: string,
+): Promise<string | null> {
+  try {
+    const raw = await generateAIResponse(
+      [{ role: 'user', content: `Concept to visualize: ${explanationText.trim()}` }],
+      systemPrompt,
+      800,
+    )
+    const code = parseVisualizationCode(raw) ?? stripCodeFences(raw)
+    if (!code) return null
+    if (!/export\s+default/.test(code)) return null
+    if (!isSafe(code)) return null
+    return code
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Generates a visualization component for the given explanation text — 3D
+ * Three.js first, with a single retry against the 2D recharts prompt if the
+ * 3D pass fails our static checks. Never throws — returns null when both
+ * passes fail (LLM error, malformed output, missing default export, or a
+ * denylisted identifier). The iframe sandbox exposes BOTH THREE and the 2D
+ * libs, so whichever code came back will execute in scope.
  */
 export async function generateVisualizationCode(
   explanationText: string,
@@ -106,19 +229,11 @@ export async function generateVisualizationCode(
   if (!isDynamicVisualizationEnabled()) return null
   if (!explanationText || !explanationText.trim()) return null
 
-  try {
-    const raw = await generateAIResponse(
-      [{ role: 'user', content: `Concept to visualize: ${explanationText.trim()}` }],
-      SYSTEM_PROMPT,
-      800,
-    )
-    const code = parseVisualizationCode(raw) ?? stripCodeFences(raw)
-    if (!code) return null
-    if (!/export\s+default/.test(code)) return null
-    if (!isSafe(code)) return null
+  const code3d = await generateOnce(explanationText, SYSTEM_PROMPT_3D)
+  if (code3d) return { code: code3d }
 
-    return { code }
-  } catch {
-    return null
-  }
+  const code2d = await generateOnce(explanationText, SYSTEM_PROMPT_2D)
+  if (code2d) return { code: code2d }
+
+  return null
 }
