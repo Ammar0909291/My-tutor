@@ -42,8 +42,9 @@ import { extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsC
 import { extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency } from './ecologicalPyramid'
 import { extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency } from './logicGate'
 import { extractERDiagramParams, buildERDiagramScene, checkERDiagramConsistency } from './erDiagram'
+import { extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrendConsistency } from './periodicTrends'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -166,6 +167,18 @@ const ROUTE_RULES: RouteRule[] = [
       'entity-relationship diagram', 'entity relationship diagram', 'er diagram',
       'database schema', 'primary key', 'foreign key', 'one-to-many relationship',
       'many-to-many relationship', 'one-to-one relationship', 'database entities',
+    ],
+  },
+  {
+    // Periodic-trend keys are atomic-radius/electronegativity/periodic-table
+    // specific — disjoint from electron_shells' Bohr-model vocabulary (which
+    // never says "electronegativity", "atomic radius", or "periodic table")
+    // and from lattice's crystal-structure vocabulary, so it can sit anywhere
+    // relative to either.
+    kind: 'periodic_trends',
+    keywords: [
+      'electronegativity', 'atomic radius', 'periodic trend', 'periodic trends',
+      'periodicity', 'across the period', 'down the group', 'periodic table trend',
     ],
   },
   {
@@ -468,6 +481,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'ecological_pyramid': return runWithLogging(kind, text, extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency)
     case 'logic_gate': return runWithLogging(kind, text, extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency)
     case 'er_diagram': return runWithLogging(kind, text, extractERDiagramParams, buildERDiagramScene, checkERDiagramConsistency)
+    case 'periodic_trends': return runWithLogging(kind, text, extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrendConsistency)
     default: return null
   }
 }
