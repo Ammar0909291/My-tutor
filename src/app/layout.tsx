@@ -56,12 +56,14 @@ export const metadata: Metadata = {
     title: 'My Tutor — Personal AI Tutor',
     description:
       'Learn programming, mathematics, physics, chemistry, biology, languages and AI with a personalized AI tutor.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'My Tutor — Personal AI Tutor' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'My Tutor — Personal AI Tutor',
     description:
       'Learn programming, mathematics, physics, chemistry, biology, languages and AI with a personalized AI tutor.',
+    images: ['/og-image.png'],
   },
 }
 
