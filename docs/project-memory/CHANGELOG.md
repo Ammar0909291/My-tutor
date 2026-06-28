@@ -4,7 +4,31 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
-## Phase 2, Milestone 1 — Test expansion + latency benchmark + seed extension (pending commit)
+## Phase 2, Milestone 1 — Critical fix: concept IDs + composition enrichment + coverage (b415b0e)
+
+**Critical bug fix**: intentStage was surfacing synthetic concept IDs that don't
+exist in the DB. retrievalStage would always return null conceptContext, making
+the pipeline silently inert. Fixed: all 28 patterns now map to the exact
+`physicsKnowledgeGraph.ts` IDs (`physics.kinematics_1d`, `physics.laws_of_motion`,
+etc.). Coverage expanded from 15 to 28 patterns — all 29 KG nodes now addressed.
+
+**compositionStage enrichment**: `composedContextNote` now includes question shape,
+student emotion, and available asset summary (explanation/visual/probe counts).
+Ready for prompt injection in future turns.
+
+**New scripts**:
+- `scripts/benchmark-eb-pipeline.ts`: 1000-iter latency benchmark. p99=0.038ms offline.
+- `scripts/verify-eb-live.ts`: 19-assertion live pipeline verifier (requires DB).
+
+**Seed extended**: `seed-eb-physics.mjs` now upserts 1 `EbCurriculum` + 9 `EbModule`
+rows (awaiting live DB).
+
+**Tests**: 71/71 assertions in test-eb-pipeline.ts. 2108+ total offline assertions, 0 failures.
+`npx tsc --noEmit` clean.
+
+---
+
+## Phase 2, Milestone 1 — Test expansion + latency benchmark + seed extension (d1398e7)
 
 - `scripts/seed-eb-physics.mjs`: extended with EbCurriculum (1 row,
   `eb.physics.cbse_11_12`) and EbModule (9 rows mapping to PHYSICS_TREE
