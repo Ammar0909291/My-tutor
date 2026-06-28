@@ -239,15 +239,6 @@ async function buildLearnerIntelligenceProfileUncached(
   }
 }
 
-export async function getLearnerProfile(_profileId: string): Promise<LearnerProfile | null> {
-  return null
-}
-
-export async function updateLearnerProfile(
-  _profileId: string,
-  _data: Partial<LearnerProfile>
-): Promise<void> {}
-
 export function humanize(key: string): string {
   return key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
