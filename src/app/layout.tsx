@@ -38,6 +38,7 @@ const baloo2 = Baloo_2({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
   title: {
     default: 'My Tutor — Personal AI Tutor',
     template: '%s | My Tutor',
