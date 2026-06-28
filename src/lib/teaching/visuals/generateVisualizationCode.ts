@@ -43,6 +43,13 @@ No JSX — use React.createElement(...) only (the code runs with no transpiler).
 No fetch, no setTimeout, no setInterval, no external resources.
 Do NOT touch window.* or document.* — read size from the canvas ref.
 
+CRITICAL: You MUST finish the complete component in one response. Always include:
+lights, an animation loop driven by requestAnimationFrame, a cleanup function
+returned from useEffect that calls BOTH cancelAnimationFrame AND renderer.dispose(),
+and the closing return React.createElement('canvas', …) at the end. Never cut off
+mid-function. If the scene would otherwise be too long, simplify the geometry
+(fewer meshes, fewer segments, fewer colors) but ALWAYS finish the component.
+
 The component must:
   - render exactly one canvas via React.useRef and React.createElement('canvas', { ref, style: { width: '100%', height: 300 } })
   - inside React.useEffect(function () { ... }, []), build a THREE.WebGLRenderer attached to that canvas, a PerspectiveCamera, a Scene, ambient + at least one directional/point light, and the concept's geometry
@@ -192,23 +199,50 @@ export interface GeneratedVisualization {
 }
 
 /**
+ * 3D-specific completion check. A truncated Three.js component is the common
+ * failure mode of the original 800-token cap: useEffect body opens, sets up
+ * the scene, then cuts off before the RAF cleanup function is ever returned.
+ * Rejecting these here means a truncated 3D pass falls through to the 2D
+ * retry instead of shipping unmountable code that will throw at iframe
+ * runtime (and leak a renderer + animation loop on every remount).
+ *
+ * Only applied to the 3D pass — the 2D recharts pass returns purely
+ * declarative recharts trees and doesn't have a useEffect lifecycle.
+ */
+function looksComplete3D(code: string): boolean {
+  if (!/React\.useEffect/.test(code)) return true // not a 3D component at all
+  if (!/cancelAnimationFrame/.test(code)) return false
+  if (!/\.dispose\s*\(/.test(code)) return false
+  return true
+}
+
+interface GenerateOnceOpts {
+  maxTokens: number
+  /** Optional extra completeness gate applied AFTER the standard checks. */
+  requireComplete?: (code: string) => boolean
+}
+
+/**
  * Run one round of: LLM call → tag parse → fence strip → export check →
- * denylist check. Returns the validated code string or null. Never throws.
+ * denylist check → optional completeness check. Returns the validated code
+ * string or null. Never throws.
  */
 async function generateOnce(
   explanationText: string,
   systemPrompt: string,
+  opts: GenerateOnceOpts,
 ): Promise<string | null> {
   try {
     const raw = await generateAIResponse(
       [{ role: 'user', content: `Concept to visualize: ${explanationText.trim()}` }],
       systemPrompt,
-      800,
+      opts.maxTokens,
     )
     const code = parseVisualizationCode(raw) ?? stripCodeFences(raw)
     if (!code) return null
     if (!/export\s+default/.test(code)) return null
     if (!isSafe(code)) return null
+    if (opts.requireComplete && !opts.requireComplete(code)) return null
     return code
   } catch {
     return null
@@ -217,11 +251,15 @@ async function generateOnce(
 
 /**
  * Generates a visualization component for the given explanation text — 3D
- * Three.js first, with a single retry against the 2D recharts prompt if the
- * 3D pass fails our static checks. Never throws — returns null when both
- * passes fail (LLM error, malformed output, missing default export, or a
- * denylisted identifier). The iframe sandbox exposes BOTH THREE and the 2D
- * libs, so whichever code came back will execute in scope.
+ * Three.js first (1500-token budget — Three.js scenes need renderer +
+ * camera + lights + animation loop + cleanup, roughly 60-80 lines minimum),
+ * with a single retry against the 2D recharts prompt (800 tokens, fits
+ * easily) if the 3D pass fails any static check including the 3D-only
+ * completeness gate. Never throws — returns null when both passes fail
+ * (LLM error, malformed output, missing default export, denylisted
+ * identifier, or truncated 3D body). The iframe sandbox exposes BOTH
+ * THREE and the 2D libs, so whichever code came back will execute in
+ * scope.
  */
 export async function generateVisualizationCode(
   explanationText: string,
@@ -229,10 +267,15 @@ export async function generateVisualizationCode(
   if (!isDynamicVisualizationEnabled()) return null
   if (!explanationText || !explanationText.trim()) return null
 
-  const code3d = await generateOnce(explanationText, SYSTEM_PROMPT_3D)
+  const code3d = await generateOnce(explanationText, SYSTEM_PROMPT_3D, {
+    maxTokens: 1500,
+    requireComplete: looksComplete3D,
+  })
   if (code3d) return { code: code3d }
 
-  const code2d = await generateOnce(explanationText, SYSTEM_PROMPT_2D)
+  const code2d = await generateOnce(explanationText, SYSTEM_PROMPT_2D, {
+    maxTokens: 800,
+  })
   if (code2d) return { code: code2d }
 
   return null

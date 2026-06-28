@@ -35,6 +35,13 @@ No JSX — use React.createElement(...) only (the code runs with no transpiler).
 No fetch, no setTimeout, no setInterval, no external resources.
 Do NOT touch window.* or document.* — read size from the canvas ref.
 
+CRITICAL: You MUST finish the complete component in one response. Always include:
+lights, an animation loop driven by requestAnimationFrame, a cleanup function
+returned from useEffect that calls BOTH cancelAnimationFrame AND renderer.dispose(),
+and the closing return React.createElement('canvas', …) at the end. Never cut off
+mid-function. If the scene would otherwise be too long, simplify the geometry
+(fewer meshes, fewer segments, fewer colors) but ALWAYS finish the component.
+
 The component must:
   - render exactly one canvas via React.useRef and React.createElement('canvas', { ref, style: { width: '100%', height: 300 } })
   - inside React.useEffect(function () { ... }, []), build a THREE.WebGLRenderer attached to that canvas, a PerspectiveCamera, a Scene, ambient + at least one directional/point light, and the concept's geometry
@@ -125,7 +132,7 @@ async function callGroq(prompt) {
         { role: 'system', content: SYSTEM_PROMPT_3D },
         { role: 'user', content: `Concept to visualize: ${prompt}` },
       ],
-      max_tokens: 800,
+      max_tokens: 1500,
       temperature: 0.3,
     }),
   })
@@ -149,7 +156,7 @@ async function callAnthropic(prompt) {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
-      max_tokens: 900,
+      max_tokens: 1500,
       system: SYSTEM_PROMPT_3D,
       messages: [{ role: 'user', content: `Concept to visualize: ${prompt}` }],
     }),
@@ -208,7 +215,11 @@ async function main() {
     const code = parseTag(raw) ?? stripCodeFences(raw)
     const hasExport = /export\s+default/.test(code)
     const safe = isSafe(code)
-    console.log(`[validation] hasExportDefault=${hasExport} safe=${safe} bytes=${code.length}`)
+    const usesEffect = /React\.useEffect/.test(code)
+    const hasCleanup = /cancelAnimationFrame/.test(code) && /\.dispose\s*\(/.test(code)
+    const complete = !usesEffect || hasCleanup
+    const verdict = hasExport && safe && complete ? 'ACCEPT' : 'REJECT'
+    console.log(`[validation] hasExportDefault=${hasExport} safe=${safe} usesEffect=${usesEffect} hasCleanup=${hasCleanup} complete=${complete} → ${verdict} bytes=${code.length}`)
     console.log('--- raw model output (post-strip) ---')
     console.log(code)
   }
