@@ -895,6 +895,14 @@ export const translations = {
     chapter_ask_examples: 'Приведи примеры',
     chapter_ask_summary: 'Кратко перескажи главу',
     chapter_ask_basics: 'Помоги разобраться с основами',
+    not_found_title: 'Страница потерялась',
+    not_found_body: 'Наш орлёнок везде искал эту страницу, но не нашёл. Возможно, ссылка устарела или адрес введён неверно.',
+    not_found_cta_dashboard: 'На главную',
+    not_found_cta_learn: 'Перейти к обучению',
+    error_title: 'Что-то пошло не так',
+    error_body: 'Произошла непредвиденная ошибка. Попробуйте ещё раз — обычно это помогает.',
+    error_cta_retry: 'Попробовать снова',
+    error_cta_dashboard: 'На главную',
   },
   en: {
     /* ── Landing ── */
@@ -1790,6 +1798,14 @@ export const translations = {
     chapter_ask_examples: 'Give examples',
     chapter_ask_summary: 'Summarize chapter',
     chapter_ask_basics: 'Help me understand basics',
+    not_found_title: 'Page flew off',
+    not_found_body: "Our eagle searched everywhere but couldn't find this page. The link might be old, or the address might be mistyped.",
+    not_found_cta_dashboard: 'Go to dashboard',
+    not_found_cta_learn: 'Go to learn',
+    error_title: 'Something went wrong',
+    error_body: 'An unexpected error occurred. Trying again usually fixes it.',
+    error_cta_retry: 'Try again',
+    error_cta_dashboard: 'Go to dashboard',
   },
   hi: {
     /* ── Landing ── */
@@ -2686,6 +2702,14 @@ export const translations = {
     chapter_ask_examples: 'उदाहरण दो',
     chapter_ask_summary: 'चैप्टर का सार बताओ',
     chapter_ask_basics: 'बेसिक्स समझने में मदद करो',
+    not_found_title: 'पेज नहीं मिला',
+    not_found_body: 'हमारे ईगल ने हर जगह ढूंढा, पर यह पेज नहीं मिला। शायद लिंक पुराना है या पता गलत टाइप हुआ है।',
+    not_found_cta_dashboard: 'डैशबोर्ड पर जाएं',
+    not_found_cta_learn: 'लर्न पर जाएं',
+    error_title: 'कुछ गलत हो गया',
+    error_body: 'एक अनपेक्षित त्रुटि हुई। फिर से कोशिश करने से अक्सर समस्या ठीक हो जाती है।',
+    error_cta_retry: 'फिर कोशिश करें',
+    error_cta_dashboard: 'डैशबोर्ड पर जाएं',
   },
 } as const
 
