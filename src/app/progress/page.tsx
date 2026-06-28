@@ -77,7 +77,7 @@ export default async function ProgressPage() {
       <main style={{ maxWidth: 800, margin: '0 auto', padding: '32px 20px' }}>
 
         {/* Stats row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 24 }}>
+        <div className="grid grid-cols-2 sm:grid-cols-4" style={{ gap: 12, marginBottom: 24 }}>
           {[
             { label: T('progressx_lessons'), value: String(totalSessions), icon: '📚' },
             { label: T('progressx_study_hours'), value: String(studyHours), icon: '⏱' },
