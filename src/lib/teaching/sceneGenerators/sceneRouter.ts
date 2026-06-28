@@ -39,8 +39,9 @@ import { extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency 
 import { extractTorqueParams, buildTorqueScene, checkTorqueConsistency } from './torqueDiagram'
 import { extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency } from './gravitationOrbit'
 import { extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency } from './statisticsBarChart'
+import { extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency } from './ecologicalPyramid'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -130,6 +131,17 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'punnett square', 'monohybrid cross', 'genetic cross', 'parent genotype',
       'dominant and recessive', 'phenotype ratio', 'genotype ratio',
+    ],
+  },
+  {
+    // Energy-pyramid/trophic-level keywords are ecology-specific and never
+    // overlap "food chain" prose generically (a bare food-chain description
+    // with no energy/trophic-level framing should not route here).
+    kind: 'ecological_pyramid',
+    keywords: [
+      'energy pyramid', 'ecological pyramid', 'trophic level', 'trophic pyramid',
+      '10% law', 'ten percent law', 'ten per cent law', 'energy flow in an ecosystem',
+      'energy transfer between trophic levels', 'energy lost at each trophic level',
     ],
   },
   {
@@ -429,6 +441,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'torque_diagram': return runWithLogging(kind, text, extractTorqueParams, buildTorqueScene, checkTorqueConsistency)
     case 'gravitation_orbit': return runWithLogging(kind, text, extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency)
     case 'statistics_bar_chart': return runWithLogging(kind, text, extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency)
+    case 'ecological_pyramid': return runWithLogging(kind, text, extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency)
     default: return null
   }
 }
