@@ -30,7 +30,7 @@ CHANGELOG going forward.
 | Phase | Status |
 |-------|--------|
 | Phase 1 — Architecture (design docs 01-11 under `docs/educational-brain/`) | **Complete.** Verdict A recorded in doc 11 §13: "approve, start milestone 1." |
-| Phase 2 — Milestone 1: spine + asset catalogue for ONE subject (physics) | **In progress.** Step 1 (additive schema) and steps 2-3 (Concept + Misconception backfill, physics only) of doc 10 §9 are done. Steps 4-9 not started. |
+| Phase 2 — Milestone 1: spine + asset catalogue for ONE subject (physics) | **In progress.** Steps 1-3 done (schema, Concept+Edge+Misconception backfill). Decision Pipeline stages 0-2 (Frame/Intent/Retrieval) implemented at b04094c. Steps 4+ not started. |
 | Phase 3+ | Not started. Requires explicit approval before beginning, per standing instruction. |
 
 ---

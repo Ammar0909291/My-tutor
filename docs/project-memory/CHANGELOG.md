@@ -4,6 +4,27 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## Phase 2, Milestone 1 — Decision Pipeline stages 0–2 (b04094c)
+
+- `src/lib/educationalBrain/types.ts`: TurnContext, IntentClassification,
+  ConceptContext, AssetBundle, PipelineSpan types.
+- `src/lib/educationalBrain/frameStage.ts`: Stage 0 — builds TurnContext
+  from userId/sessionId/subjectSlug/userMessage. Pure, synchronous.
+- `src/lib/educationalBrain/intentStage.ts`: Stage 1 — deterministic regex
+  classification. questionShape (5 classes), studentEmotion (4+null),
+  topicSurfaces (15 physics concept patterns → EbConcept ids). No LLM.
+- `src/lib/educationalBrain/retrievalStage.ts`: Stage 2 — read-only Prisma
+  queries. Loads EbConcept + EbConceptEdge neighborhood (up to 10 edges) +
+  EbAssetIdentity bundle. Never throws; shortCircuit on DB error.
+- `src/lib/educationalBrain/pipeline.ts`: orchestrator with
+  ENABLE_EDUCATIONAL_BRAIN_PIPELINE flag (default OFF). Returns null
+  immediately when off — zero overhead on prod traffic.
+- `scripts/test-eb-pipeline.ts`: 36 offline assertions, 36/36 pass.
+- `/api/learn/chat/route.ts` NOT modified.
+- `npx tsc --noEmit` clean.
+
+---
+
 ## Phase 2, Milestone 1 — verification pass + stale-test fix (handoff session)
 
 - Goal of this session: finish the in-progress Milestone-1 work, run all
