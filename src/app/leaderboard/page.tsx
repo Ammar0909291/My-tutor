@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { CandyPage, Card, EagleMascot } from '@/components/ui/candy'
 
@@ -78,7 +79,7 @@ export default function LeaderboardPage() {
                   {entry.rank <= 3 ? RANK_ICON[entry.rank - 1] : `#${entry.rank}`}
                 </span>
                 {entry.image ? (
-                  <img src={entry.image} alt={entry.name} className="w-8 h-8 rounded-full object-cover" />
+                  <Image src={entry.image} alt={entry.name} width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                 ) : (
                   <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs"
                     style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800 }}>

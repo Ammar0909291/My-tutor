@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { useCountry, type Country } from '@/components/Providers'
@@ -269,8 +270,7 @@ export default function SettingsPage() {
         {/* Profile */}
         <Section label={t('profile_title')}>
           <div className="flex items-center gap-4 mb-5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} />
+            <Image src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} unoptimized />
             <div className="min-w-0">
               <p className="font-bold text-sm" style={{ color: 'var(--candy-ink)' }}>{profile?.name || '—'}</p>
               <p className="text-xs mt-0.5" style={{ color: 'var(--candy-ink-soft)' }}>{profile?.email}</p>
