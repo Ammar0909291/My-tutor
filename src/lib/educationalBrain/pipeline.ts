@@ -1,16 +1,13 @@
 /**
- * Educational Brain Decision Pipeline — stages 0–2.
+ * Educational Brain Decision Pipeline — stages 0–4.
  * Gated by ENABLE_EDUCATIONAL_BRAIN_PIPELINE (default OFF).
  * Zero overhead on production traffic when flag is absent/false.
- *
- * Usage (additive, non-invasive — do NOT call from /api/learn/chat directly yet):
- *   import { runEducationalBrainPipeline } from '@/lib/educationalBrain/pipeline'
- *   const ctx = await runEducationalBrainPipeline({ userId, sessionId, subjectSlug, userMessage })
- *   // ctx is null when flag is off; otherwise a TurnContext with intent + retrieval results
  */
 import { frameStage, type FrameInput } from './frameStage'
 import { intentStage } from './intentStage'
 import { retrievalStage } from './retrievalStage'
+import { compositionStage } from './compositionStage'
+import { persistStage } from './persistStage'
 import type { TurnContext } from './types'
 
 export function isEducationalBrainEnabled(): boolean {
@@ -22,6 +19,8 @@ export async function runEducationalBrainPipeline(
 ): Promise<TurnContext | null> {
   if (!isEducationalBrainEnabled()) return null
 
+  const wallStart = Date.now()
+
   // Stage 0 — Frame (pure, synchronous)
   let ctx = frameStage(input)
 
@@ -30,6 +29,15 @@ export async function runEducationalBrainPipeline(
 
   // Stage 2 — Retrieval (async, DB read-only)
   ctx = await retrievalStage(ctx)
+
+  // Stage 3 — Composition (pure, formats concept context)
+  ctx = compositionStage(ctx)
+
+  // Stage 4 — Persist (async, single DB write, non-fatal)
+  ctx = await persistStage(ctx)
+
+  const totalMs = Date.now() - wallStart
+  console.warn(`[EB] pipeline ${totalMs}ms turnId=${ctx.turnId} concept=${ctx.candidateConcept ?? 'none'}`)
 
   return ctx
 }

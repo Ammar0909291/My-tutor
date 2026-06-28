@@ -1509,6 +1509,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // curriculumProgress, so any failed/dropped PATCH left the Roadmap
       // showing a stale lesson while Tutor Max (which always re-reads this
       // DB value fresh, every turn) had already moved on.
+
+      // Educational Brain side-car: fire-and-forget, never awaited, never blocks response.
+      // Activated only when ENABLE_EDUCATIONAL_BRAIN_PIPELINE=true; zero-overhead when off.
+      void import('@/lib/educationalBrain/pipeline').then(({ runEducationalBrainPipeline }) =>
+        runEducationalBrainPipeline({ userId, sessionId, subjectSlug: subjectCode, userMessage: message })
+      ).catch(() => {})
+
       return NextResponse.json({
         success: true, text: cleanText, provider,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,

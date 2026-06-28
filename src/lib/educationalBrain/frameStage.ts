@@ -26,6 +26,7 @@ export function frameStage(input: FrameInput): TurnContext {
     candidateConcept: null,
     conceptContext: null,
     candidateAssets: null,
+    composedContextNote: null,
     shortCircuit: null,
     spans: [{ stage: 'frame', startedAt: start, durationMs: Date.now() - start }],
   }

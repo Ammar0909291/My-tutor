@@ -60,6 +60,9 @@ export interface TurnContext {
   conceptContext: ConceptContext | null
   candidateAssets: AssetBundle | null
 
+  // ── Set by compositionStage ─────────────────────────────────────────────
+  composedContextNote: string | null
+
   // ── Cross-cutting ────────────────────────────────────────────────────────
   shortCircuit: string | null
   spans: PipelineSpan[]
