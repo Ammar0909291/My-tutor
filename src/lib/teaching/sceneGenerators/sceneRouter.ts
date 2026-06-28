@@ -43,8 +43,9 @@ import { extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcolo
 import { extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency } from './logicGate'
 import { extractERDiagramParams, buildERDiagramScene, checkERDiagramConsistency } from './erDiagram'
 import { extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrendConsistency } from './periodicTrends'
+import { extractCellDivisionParams, buildCellDivisionScene, checkCellDivisionConsistency } from './cellDivision'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -127,6 +128,18 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'torque', 'lever arm', 'moment of force', 'turning effect of force',
       'rotational equilibrium', 'wrench applied', 'rotational motion of',
+    ],
+  },
+  {
+    // Cell-division keys are mitosis/meiosis stage-specific ("prophase",
+    // "anaphase", "daughter cells", "haploid"...) — disjoint from
+    // punnett_square's genetics-cross vocabulary below (no "genotype" /
+    // "punnett square" overlap), so checked before it without risk.
+    kind: 'cell_division',
+    keywords: [
+      'mitosis', 'meiosis', 'cell division', 'prophase', 'metaphase',
+      'anaphase', 'telophase', 'daughter cells', 'homologous chromosomes',
+      'haploid cells', 'diploid cells', 'crossing over',
     ],
   },
   {
@@ -482,6 +495,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'logic_gate': return runWithLogging(kind, text, extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency)
     case 'er_diagram': return runWithLogging(kind, text, extractERDiagramParams, buildERDiagramScene, checkERDiagramConsistency)
     case 'periodic_trends': return runWithLogging(kind, text, extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrendConsistency)
+    case 'cell_division': return runWithLogging(kind, text, extractCellDivisionParams, buildCellDivisionScene, checkCellDivisionConsistency)
     default: return null
   }
 }
