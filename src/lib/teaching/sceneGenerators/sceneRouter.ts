@@ -40,8 +40,9 @@ import { extractTorqueParams, buildTorqueScene, checkTorqueConsistency } from '.
 import { extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency } from './gravitationOrbit'
 import { extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency } from './statisticsBarChart'
 import { extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency } from './ecologicalPyramid'
+import { extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency } from './logicGate'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -142,6 +143,17 @@ const ROUTE_RULES: RouteRule[] = [
       'energy pyramid', 'ecological pyramid', 'trophic level', 'trophic pyramid',
       '10% law', 'ten percent law', 'ten per cent law', 'energy flow in an ecosystem',
       'energy transfer between trophic levels', 'energy lost at each trophic level',
+    ],
+  },
+  {
+    // Logic-gate keys are boolean-circuit specific ("logic gate", "truth
+    // table", "AND gate"...) — disjoint from electric_circuit's resistor/
+    // Kirchhoff vocabulary above, so it can sit anywhere relative to it.
+    kind: 'logic_gate',
+    keywords: [
+      'logic gate', 'truth table', 'and gate', 'or gate', 'not gate',
+      'nand gate', 'nor gate', 'xor gate', 'xnor gate', 'boolean circuit',
+      'boolean logic circuit', 'digital logic gate',
     ],
   },
   {
@@ -442,6 +454,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'gravitation_orbit': return runWithLogging(kind, text, extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency)
     case 'statistics_bar_chart': return runWithLogging(kind, text, extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency)
     case 'ecological_pyramid': return runWithLogging(kind, text, extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency)
+    case 'logic_gate': return runWithLogging(kind, text, extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency)
     default: return null
   }
 }
