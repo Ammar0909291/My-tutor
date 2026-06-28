@@ -1,16 +1,4 @@
-export interface LessonContext {
-  topicSlug: string
-  lessonIndex: number
-  totalLessons: number
-}
-
-export function buildLessonContext(_params: Record<string, unknown>): LessonContext {
-  return { topicSlug: '', lessonIndex: 0, totalLessons: 0 }
-}
-
-export function getNextLesson(_ctx: LessonContext): LessonContext | null {
-  return null
-}
+import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 
 export interface Roadmap {
   subject: string
@@ -20,13 +8,25 @@ export interface Roadmap {
 }
 
 export function generateRoadmap(
-  _subjectCode: string,
-  _currentLevel: string,
-  _targetLevel: string | null
+  subjectCode: string,
+  currentLevel: string,
+  targetLevel: string | null
 ): Roadmap | null {
-  return null
+  const subject = findLibrarySubject(subjectCode)
+  if (!subject) return null
+  return {
+    subject: subject.name,
+    currentLevel,
+    targetLevel,
+    milestones: subject.modules.map((m) => m.title),
+  }
 }
 
-export function buildTutorRoadmapContext(_roadmap: Roadmap): string {
-  return ''
+export function buildTutorRoadmapContext(roadmap: Roadmap): string {
+  const targetLine = roadmap.targetLevel ? ` toward "${roadmap.targetLevel}"` : ''
+  const milestones = roadmap.milestones
+    .slice(0, 8)
+    .map((m, i) => `${i + 1}. ${m}`)
+    .join('\n')
+  return `LEARNER ROADMAP for ${roadmap.subject} (currently at "${roadmap.currentLevel}"${targetLine}):\n${milestones}\nStay aligned with this sequence — don't skip ahead of the learner's current level.`
 }
