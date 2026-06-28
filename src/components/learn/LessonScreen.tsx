@@ -33,6 +33,12 @@ const SceneSpecRenderer = dynamic(
   () => import('@/components/school/visuals/SceneSpecRenderer').then((m) => m.SceneSpecRenderer),
   { ssr: false },
 )
+// Renders inside a sandboxed iframe (see DynamicVisualRenderer.tsx) — no need
+// for SSR since it has nothing to render until the AI response arrives.
+const DynamicVisualRenderer = dynamic(
+  () => import('@/components/learn/DynamicVisualRenderer').then((m) => m.DynamicVisualRenderer),
+  { ssr: false },
+)
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const VOICE_LABELS_BY_LANG: Record<TeachingLang, Record<VoiceType, string>> = {
@@ -449,7 +455,7 @@ function HintCard({ hint }: { hint: string }) {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; inlinePractice?: InlinePracticeQuestion; hint?: string }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -888,7 +894,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
       })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
+      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
       if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
@@ -924,6 +930,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           console.warn('[sceneSpec] received invalid SceneSpec, skipping render:', result.errors)
         }
       }
+      // Dynamic 2D Visualization Engine: only ever fires when neither of the
+      // two deterministic pipelines above produced a visual (see route.ts),
+      // so it never overrides a trusted visualSpec/sceneSpec. No structural
+      // validation needed beyond "is it a non-empty string" — the server
+      // already ran the denylist/export-default checks, and the code is
+      // never executed here; it only ever runs inside DynamicVisualRenderer's
+      // sandboxed iframe.
+      const responseDynamicVisualizationCode =
+        typeof data.dynamicVisualizationCode === 'string' && data.dynamicVisualizationCode.trim()
+          ? data.dynamicVisualizationCode
+          : undefined
       // Sprint W: defense in depth, same pattern as responseVisualSpec/responseSceneSpec
       // above — a network payload is never trusted blind. Shape-validate before render.
       const rawPractice = data.inlinePractice as InlinePracticeQuestion | undefined
@@ -1026,7 +1043,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, inlinePractice: responseInlinePractice, hint: responseHint } : m))
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint } : m))
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2597,6 +2614,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {!isUser && !msg.streaming && msg.sceneSpec && (
                       <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
                         <SceneSpecRenderer spec={msg.sceneSpec} />
+                      </div>
+                    )}
+
+                    {/* Dynamic 2D Visualization Engine — unlimited-domain fallback when
+                        no deterministic VisualSpec/SceneSpec fired for this message
+                        (see route.ts). Runs the AI-generated code in a sandboxed iframe. */}
+                    {!isUser && !msg.streaming && msg.dynamicVisualizationCode && (
+                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                        <DynamicVisualRenderer code={msg.dynamicVisualizationCode} />
                       </div>
                     )}
 

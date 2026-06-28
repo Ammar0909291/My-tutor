@@ -1840,3 +1840,19 @@ model TeachingStrategyEvent {
   @@index([userId, createdAt])
   @@map("teaching_strategy_events")
 }
+
+// Dynamic 2D Visualization Engine (src/lib/teaching/visuals/): caches
+// LLM-generated visualization code per normalized concept, so the same
+// concept asked by any student never re-spends a Groq call after the
+// first generation. Global cache (no userId) — the generated code is a
+// pure function of the concept text, not of who asked.
+model VisualizationCache {
+  id          String   @id @default(cuid())
+  conceptKey  String   @unique
+  code        String   @db.Text
+  renderCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("visualization_cache")
+}

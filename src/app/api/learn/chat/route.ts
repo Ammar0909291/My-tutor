@@ -14,6 +14,9 @@ import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
 import { generateSceneSpec, isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
 import { generateRoutedScene, isParametricSceneGenerationEnabled } from '@/lib/teaching/sceneGenerators/sceneRouter'
+import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
+import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
+import { decideVisualization } from '@/lib/teaching/visualizationDecision'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -1225,6 +1228,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Only fires when the 2D pipeline found nothing, so a message never carries
       // both a 2D diagram and a 3D scene.
       let detectedSceneSpec: ReturnType<typeof buildSceneSpec> = null
+      let dynamicVisualizationCode: string | null = null
       if (!detectedVisualSpec) {
         try {
           detectedSceneSpec = buildSceneSpec(cleanText)
@@ -1258,6 +1262,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!detectedVisualSpec && !detectedSceneSpec && isAiSceneGenerationEnabled()) {
         try {
           detectedSceneSpec = await generateSceneSpec(cleanText)
+        } catch { /* non-fatal */ }
+      }
+
+      // Dynamic 2D Visualization Engine: unlimited-domain fallback for when no
+      // deterministic, parametric, or AI SceneSpec pipeline above produced a
+      // visual. Generates a small React component from the explanation text
+      // and ships it to the client as a string — it is never executed on the
+      // server or in this app's render tree; DynamicVisualRenderer.tsx runs it
+      // inside a sandboxed, opaque-origin iframe. Gated on the deterministic
+      // decideVisualization() heuristic (no extra LLM call to decide whether to
+      // visualize) and its own flag, default OFF. Non-fatal: any failure at any
+      // stage degrades to null and the turn proceeds unchanged.
+      if (
+        !detectedVisualSpec &&
+        !detectedSceneSpec &&
+        isDynamicVisualizationEnabled() &&
+        decideVisualization(cleanText).shouldVisualize
+      ) {
+        try {
+          const conceptKey = normalizeConceptKey(cleanText)
+          const cached = await getCachedVisualization(conceptKey)
+          if (cached) {
+            dynamicVisualizationCode = cached.code
+          } else {
+            const generated = await generateVisualizationCode(cleanText)
+            if (generated) {
+              dynamicVisualizationCode = generated.code
+              await saveVisualization(conceptKey, generated.code)
+            }
+          }
         } catch { /* non-fatal */ }
       }
 
@@ -1433,6 +1467,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         success: true, text: cleanText, provider,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
+        dynamicVisualizationCode: dynamicVisualizationCode ?? undefined,
         inlinePractice: inlinePracticeHoisted ?? undefined,
         hint: hintHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
