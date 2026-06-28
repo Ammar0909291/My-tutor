@@ -1856,3 +1856,537 @@ model VisualizationCache {
 
   @@map("visualization_cache")
 }
+
+// ─── Educational Brain (Phase 2, Milestone 1) ─────────────────────────────────
+// Additive only — see docs/educational-brain/10-database-strategy.md and
+// docs/project-memory/NEXT_ACTION.md. No existing table above this line is
+// touched. New models are prefixed `Eb` (Educational Brain) to avoid name
+// collisions with legacy models (notably the existing `Curriculum` model
+// above, which the doc's un-prefixed sketch would have collided with).
+// Architecture is unchanged from the doc; only Prisma identifiers differ.
+
+enum EbAbstractionLevel {
+  concrete
+  symbolic
+  abstract
+  meta
+}
+
+enum EbModality {
+  visual
+  numerical
+  symbolic
+  linguistic
+  kinesthetic
+}
+
+model EbConcept {
+  id                        String             @id // 'physics.kinematics.projectile_motion'
+  title                     String
+  description               String             @db.Text
+  primaryDomain             String
+  alsoInDomains             String[]
+  abstractionLevel          EbAbstractionLevel
+  modality                  EbModality[]
+  authoritativeFormula      String?
+  canonicalDefinitionId     String?
+  difficultyByGrade         Json
+  estimatedMinutesToMastery Json
+  titleTranslations         Json
+  descriptionTranslations   Json
+  createdAt                 DateTime           @default(now())
+  updatedAt                 DateTime           @updatedAt
+  version                   Int                @default(1)
+
+  outgoingEdges  EbConceptEdge[]          @relation("from")
+  incomingEdges  EbConceptEdge[]          @relation("to")
+  objectives     EbObjectiveConcept[]
+  misconceptions EbConceptMisconception[]
+  assets         EbAssetIdentity[]
+
+  @@index([primaryDomain])
+  @@index([id, version])
+  @@map("eb_concept")
+}
+
+enum EbEdgeKind {
+  prerequisite_of
+  part_of
+  is_a
+  analogous_to
+  commonly_confused_with
+}
+
+model EbConceptEdge {
+  id            String     @id @default(uuid())
+  fromConceptId String
+  toConceptId   String
+  edgeKind      EbEdgeKind
+  weight        Float      @default(1.0)
+  createdAt     DateTime   @default(now())
+  source        String?
+
+  fromConcept EbConcept @relation("from", fields: [fromConceptId], references: [id])
+  toConcept   EbConcept @relation("to", fields: [toConceptId], references: [id])
+
+  @@unique([fromConceptId, toConceptId, edgeKind])
+  @@index([toConceptId, edgeKind])
+  @@index([fromConceptId, edgeKind])
+  @@map("eb_concept_edge")
+}
+
+enum EbMisconScope {
+  universal
+  language_specific
+}
+
+model EbMisconception {
+  id                       String        @id // 'physics.kinematics.heavier_falls_faster'
+  title                    String
+  description              String        @db.Text
+  scope                    EbMisconScope @default(universal)
+  language                 String?
+  prevalenceByGrade        Json
+  detectableByProbeIds     String[]
+  repairableByAssetIds     String[]
+  unrepairableWithoutHuman Boolean       @default(false)
+  createdAt                DateTime      @default(now())
+  source                   String?
+
+  concepts EbConceptMisconception[]
+
+  @@map("eb_misconception")
+}
+
+model EbConceptMisconception {
+  conceptId       String
+  misconceptionId String
+  confidence      Float   @default(0.5)
+  source          String?
+
+  concept       EbConcept       @relation(fields: [conceptId], references: [id])
+  misconception EbMisconception @relation(fields: [misconceptionId], references: [id])
+
+  @@id([conceptId, misconceptionId])
+  @@index([misconceptionId])
+  @@map("eb_concept_misconception")
+}
+
+enum EbBloomLevel {
+  remember
+  understand
+  apply
+  analyze
+  evaluate
+  create
+}
+
+model EbLearningObjective {
+  id                String       @id // 'cbse.10.science.physics.7.derive_range'
+  title             String
+  titleTranslations Json
+  bloomLevel        EbBloomLevel
+  examplePrompt     String?      @db.Text
+
+  concepts EbObjectiveConcept[]
+  modules  EbModuleObjective[]
+
+  @@map("eb_learning_objective")
+}
+
+model EbObjectiveConcept {
+  objectiveId String
+  conceptId   String
+  required    Boolean @default(true)
+
+  objective EbLearningObjective @relation(fields: [objectiveId], references: [id])
+  concept   EbConcept           @relation(fields: [conceptId], references: [id])
+
+  @@id([objectiveId, conceptId])
+  @@map("eb_objective_concept")
+}
+
+model EbCurriculum {
+  id            String    @id // 'cbse_class_10_science_2025'
+  title         String
+  authority     String
+  grade         Int
+  language      String
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  metadata      Json
+  createdAt     DateTime  @default(now())
+
+  modules EbModule[]
+
+  @@map("eb_curriculum")
+}
+
+model EbModule {
+  id             String @id // 'cbse.10.sci.physics.7'
+  curriculumId   String
+  title          String
+  orderIndex     Int
+  estimatedHours Int
+
+  curriculum EbCurriculum        @relation(fields: [curriculumId], references: [id])
+  objectives EbModuleObjective[]
+
+  @@index([curriculumId, orderIndex])
+  @@map("eb_module")
+}
+
+model EbModuleObjective {
+  moduleId    String
+  objectiveId String
+  orderIndex  Int
+
+  module    EbModule            @relation(fields: [moduleId], references: [id])
+  objective EbLearningObjective @relation(fields: [objectiveId], references: [id])
+
+  @@id([moduleId, objectiveId])
+  @@index([moduleId, orderIndex])
+  @@map("eb_module_objective")
+}
+
+enum EbAssetFamily {
+  EXPLANATION
+  VISUAL
+  PROBE
+}
+
+enum EbAuthorKind {
+  HUMAN_CURATOR
+  AI_AUTHORED
+  AI_AUTHORED_REVIEWED
+  IMPORTED
+  STUDENT_CONTRIBUTION
+  SYSTEM
+}
+
+enum EbAssetStatus {
+  DRAFT
+  REVIEW
+  ACTIVE
+  SHADOW_ACTIVE
+  EXPERIMENT_VARIANT
+  DEPRECATED
+  RETIRED
+}
+
+enum EbGradeBand {
+  k_5
+  g_6_8
+  g_9_10
+  g_11_12
+  undergrad
+  postgrad
+}
+
+enum EbIPClass {
+  public_domain
+  cc_by
+  cc_by_sa
+  proprietary_licensed
+  fair_use
+  pending
+  unknown
+}
+
+model EbAssetIdentity {
+  assetId                         String        @id @default(uuid())
+  family                          EbAssetFamily
+  familyKind                      String
+  conceptId                       String
+  language                        String
+  gradeBand                       EbGradeBand
+  style                           String?
+  authorId                        String?
+  authorKind                      EbAuthorKind
+  sourceTraceId                   String?
+  createdAt                       DateTime      @default(now())
+  version                         Int           @default(1)
+  parentVersionId                 String?
+  status                          EbAssetStatus @default(DRAFT)
+  deprecationReason               String?
+  qualityScore                    Float         @default(0.5)
+  qualityConfidence               Float         @default(0.1)
+  sampleSize                      Int           @default(0)
+  costCents                       Int           @default(0)
+  tags                            String[]
+  curriculumMappings              Json
+  prerequisiteConceptIds          String[]
+  incompatibilityMisconceptionIds String[]
+  intellectualProperty            EbIPClass     @default(unknown)
+
+  concept     EbConcept      @relation(fields: [conceptId], references: [id])
+  explanation EbExplanation?
+  visual      EbVisual?
+  probe       EbProbe?
+
+  @@unique([conceptId, family, familyKind, language, gradeBand, style, version])
+  @@index([conceptId, family, familyKind, language, gradeBand, status])
+  @@index([conceptId, status, qualityScore])
+  @@index([status])
+  @@index([costCents])
+  @@map("eb_asset_identity")
+}
+
+model EbExplanation {
+  assetId      String          @id
+  content      String          @db.Text
+  contentHash  String
+  length       Int
+  readingLevel Float?
+  asset        EbAssetIdentity @relation(fields: [assetId], references: [assetId])
+
+  @@index([contentHash])
+  @@map("eb_explanation")
+}
+
+enum EbVisualRenderer {
+  katex
+  recharts
+  three
+  animation
+  interactive_widget
+}
+
+model EbVisual {
+  assetId            String           @id
+  renderer           EbVisualRenderer
+  specPayload        Json
+  specHash           String
+  a11yDescription    String           @db.Text
+  estimatedRenderMs  Int              @default(100)
+  deviceCapabilities Json             @default("{}")
+  asset              EbAssetIdentity  @relation(fields: [assetId], references: [assetId])
+
+  @@index([renderer])
+  @@index([specHash])
+  @@map("eb_visual")
+}
+
+enum EbProbeKind {
+  mcq
+  true_false
+  short_answer
+  numeric
+  step_check
+  misconception_probe
+  checkpoint
+}
+
+enum EbDifficulty {
+  foundational
+  developing
+  proficient
+  advanced
+}
+
+model EbProbe {
+  assetId                  String          @id
+  probeKind                EbProbeKind
+  stem                     String          @db.Text
+  choices                  Json
+  correctValue             Json?
+  tolerance                Float?
+  keywords                 String[]
+  sampleAnswer             String?
+  difficulty               EbDifficulty
+  discriminationScore      Float           @default(0.5)
+  targetedMisconceptionIds String[]
+  requiredVisualAssetIds   String[]
+  asset                    EbAssetIdentity @relation(fields: [assetId], references: [assetId])
+
+  @@index([difficulty])
+  @@map("eb_probe")
+}
+
+enum EbSourceKind {
+  book
+  video
+  syllabus
+  research
+  expert_dictation
+  external_ai
+}
+
+model EbKnowledgeAcquisitionTrace {
+  traceId            String       @id @default(uuid())
+  sourceKind         EbSourceKind
+  sourceTitle        String
+  sourceUri          String?
+  contentHash        String
+  licenseClass       EbIPClass
+  licenseDocumentUri String?
+  contributedById    String?
+  ingestedAt         DateTime     @default(now())
+  metadata           Json         @default("{}")
+
+  segments EbSourceSegment[]
+
+  @@map("eb_knowledge_acquisition_trace")
+}
+
+model EbSourceSegment {
+  id              String  @id @default(uuid())
+  traceId         String
+  segmentIndex    Int
+  text            String  @db.Text
+  pageOrTimestamp String?
+  segmentHash     String
+
+  trace EbKnowledgeAcquisitionTrace @relation(fields: [traceId], references: [traceId])
+
+  @@index([traceId, segmentIndex])
+  @@map("eb_source_segment")
+}
+
+model EbLearnerConceptMastery {
+  userId            String
+  conceptId         String
+  language          String
+  masteryScore      Float     @default(0)
+  masteryConfidence Float     @default(0.1)
+  decayedScore      Float     @default(0)
+  attemptCount      Int       @default(0)
+  lastSeenAt        DateTime?
+  firstAttemptAt    DateTime?
+  updatedAt         DateTime  @updatedAt
+
+  @@id([userId, conceptId, language])
+  @@index([userId, language, decayedScore])
+  @@map("eb_learner_concept_mastery")
+}
+
+enum EbMisconStatus {
+  active
+  repaired
+  escalated
+}
+
+model EbLearnerActiveMisconception {
+  userId          String
+  misconceptionId String
+  language        String
+  confidence      Float          @default(0.5)
+  firstDetectedAt DateTime       @default(now())
+  lastDetectedAt  DateTime       @default(now())
+  repairAttempts  Int            @default(0)
+  status          EbMisconStatus @default(active)
+
+  @@id([userId, misconceptionId, language])
+  @@index([userId, status])
+  @@map("eb_learner_active_misconception")
+}
+
+enum EbEvidenceCategory {
+  ASSET_SHOWN
+  PROBE_OUTCOME
+  MISCONCEPTION_DETECTED
+  LEARNER_FEEDBACK
+  RE_ASK
+  SUMMATIVE_OUTCOME
+}
+
+model EbEvidenceEvent {
+  eventId         String             @id @default(uuid())
+  occurredAt      DateTime           @default(now())
+  turnId          String?
+  userId          String
+  sessionId       String?
+  conceptId       String
+  language        String
+  gradeBand       EbGradeBand
+  category        EbEvidenceCategory
+  assetId         String?
+  misconceptionId String?
+  curriculumId    String?
+  outcome         String
+  strength        Float
+  rawScore        Float?
+  contextHash     String?
+
+  @@index([assetId, occurredAt])
+  @@index([conceptId, occurredAt])
+  @@index([userId, occurredAt])
+  @@index([occurredAt])
+  @@map("eb_evidence_event")
+}
+
+model EbAssetScore {
+  assetId           String
+  gradeBand         EbGradeBand
+  language          String
+  learningStyle     String      @default("") // '' = aggregated; populated for stratified scores
+  windowEnd         DateTime
+  qualityScore      Float
+  qualityConfidence Float
+  sampleSize        Int
+  positiveEvents    Int
+  negativeEvents    Int
+
+  @@id([assetId, gradeBand, language, learningStyle, windowEnd])
+  @@index([assetId, windowEnd])
+  @@map("eb_asset_score")
+}
+
+model EbBrainConfig {
+  id            String    @id
+  name          String    @unique
+  value         Json
+  version       Int       @default(1)
+  effectiveFrom DateTime  @default(now())
+  effectiveTo   DateTime?
+  changedBy     String?
+  reason        String?   @db.Text
+
+  @@index([name, version])
+  @@map("eb_brain_config")
+}
+
+enum EbExperimentKind {
+  ASSET_AB
+  STRATEGY_AB
+  RANKING_BANDIT
+  PROMPT_AB
+}
+
+enum EbExperimentStatus {
+  designing
+  running
+  analyzing
+  shipped
+  aborted
+}
+
+model EbExperiment {
+  id               String             @id @default(uuid())
+  kind             EbExperimentKind
+  hypothesis       String             @db.Text
+  primaryMetric    String
+  arms             Json
+  populationTotalN Int?
+  status           EbExperimentStatus
+  startedAt        DateTime?
+  endedAt          DateTime?
+  conclusion       String?            @db.Text
+
+  assignments EbExperimentAssignment[]
+
+  @@map("eb_experiment")
+}
+
+model EbExperimentAssignment {
+  userId       String
+  experimentId String
+  armId        String
+  assignedAt   DateTime @default(now())
+
+  experiment EbExperiment @relation(fields: [experimentId], references: [id])
+
+  @@id([userId, experimentId])
+  @@index([experimentId, armId])
+  @@map("eb_experiment_assignment")
+}
