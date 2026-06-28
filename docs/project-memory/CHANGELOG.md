@@ -4,6 +4,40 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## Phase 2, Milestone 1 — verification pass + stale-test fix (handoff session)
+
+- Goal of this session: finish the in-progress Milestone-1 work, run all
+  validation/tests possible without DB/network, fix any failures, refresh
+  Project Memory, and leave the repo clean for the next session.
+- Synced local to the remote tip of `claude/my-tutor-foundation-KDSUO`
+  (the prior session's `ba65966`, which already contained the additive
+  `Eb*` schema + `seed-eb-physics.mjs` + the bootstrap memory files).
+  No divergent/duplicate work was force-pushed.
+- Restored the sandbox build environment: `npx prisma generate` (Prisma
+  client was absent in the fresh container) and `npm install` (the
+  declared `katex` dependency was not installed). After both, `npx tsc
+  --noEmit` is **fully clean** — the earlier errors were purely
+  environmental (ungenerated client, uninstalled dep), not code defects.
+- Fixed a **stale test**, not a code regression: `buildSceneSpec.ts`'s
+  `VECTOR_RE` had been intentionally narrowed (documented inline) to match
+  only genuine vector-ADDITION phrases, so bare `vector`/`force`/`velocity`/
+  `acceleration`/`displacement` no longer emit a misleading single-arrow
+  scene. `scripts/test-build-scenespec.ts` still asserted the old
+  bare-keyword behavior (6 failures). Updated the harness to assert the
+  documented intended behavior: multi-word phrases (`vector addition`,
+  `resultant vector`, `head-to-tail`, `parallelogram law`) fire the scene;
+  bare motion words now return null (added as regression cases). 25/25 pass.
+- Full offline harness suite: **2066 assertions passing, 0 failing**
+  across all `scripts/test-*.ts` (excludes the two live/demo scripts that
+  require a `GROQ_API_KEY` + network: `test-scene-extraction-live.ts`,
+  `test-visualization-tiebreaker.ts`). See `TEST_RESULTS.md`.
+- No schema, runtime, or pipeline code changed this session — the only
+  edit was the stale test. Milestone-1 data-side scope is unchanged and
+  remains complete; the Decision Pipeline runtime (next chunk) was **not**
+  started, per "do not start new milestones / leave no partial work."
+
+---
+
 ## Phase 2, Milestone 1 — bootstrap Project Memory + additive schema + physics seed
 
 - Discovered that no "Educational Brain Constitution" file and no

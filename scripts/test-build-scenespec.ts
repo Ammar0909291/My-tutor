@@ -21,12 +21,21 @@ type Case = {
 }
 
 const CASES: Case[] = [
-  // ── VECTOR_RE ──
-  { name: 'vector keyword fires vectorScene', text: 'A vector has magnitude and direction.', expectNull: false, expectId: 'auto-vector' },
-  { name: 'force keyword fires vectorScene', text: 'The net force acting on the box is 10N.', expectNull: false, expectId: 'auto-vector' },
-  { name: 'velocity keyword fires vectorScene', text: 'Velocity is the rate of change of position.', expectNull: false, expectId: 'auto-vector' },
-  { name: 'displacement keyword fires vectorScene', text: 'Displacement is a vector quantity, unlike distance.', expectNull: false, expectId: 'auto-vector' },
-  { name: 'acceleration keyword fires vectorScene', text: 'Acceleration is the second derivative of position.', expectNull: false, expectId: 'auto-vector' },
+  // ── VECTOR_RE — narrowed to multi-word vector-ADDITION phrases only ──
+  // VECTOR_RE deliberately matches only genuine vector-addition phrasing; bare
+  // 'vector'/'force'/'velocity'/'acceleration'/'displacement' must NOT fire,
+  // because they appear in almost any motion-physics explanation and would emit
+  // a misleading single-arrow scene (see buildSceneSpec.ts comment above VECTOR_RE).
+  { name: '"vector addition" fires vectorScene', text: 'Vector addition combines two arrows into one.', expectNull: false, expectId: 'auto-vector' },
+  { name: '"resultant vector" fires vectorScene', text: 'The resultant vector points northeast.', expectNull: false, expectId: 'auto-vector' },
+  { name: '"head-to-tail" fires vectorScene', text: 'Place them head-to-tail to add the vectors.', expectNull: false, expectId: 'auto-vector' },
+  { name: '"parallelogram law" fires vectorScene', text: 'Use the parallelogram law to find the sum.', expectNull: false, expectId: 'auto-vector' },
+
+  // ── VECTOR_RE narrowing regression — bare motion words must NOT fire ──
+  { name: 'REGRESSION — bare "vector" alone does not fire vectorScene', text: 'A vector has magnitude and direction.', expectNull: true },
+  { name: 'REGRESSION — bare "force" alone does not fire vectorScene', text: 'The net force acting on the box is 10N.', expectNull: true },
+  { name: 'REGRESSION — bare "velocity" alone does not fire vectorScene', text: 'Velocity is the rate of change of position.', expectNull: true },
+  { name: 'REGRESSION — bare "acceleration" alone does not fire vectorScene', text: 'Acceleration is the second derivative of position.', expectNull: true },
 
   // ── MOLECULE_RE ──
   { name: 'atom keyword fires moleculeScene', text: 'An atom is the smallest unit of an element.', expectNull: false, expectId: 'auto-molecule' },
@@ -93,7 +102,7 @@ for (const c of CASES) {
 console.log('=== template structural validation (validateSceneSpec) ===\n')
 
 const templateCases: { name: string; text: string }[] = [
-  { name: 'vectorScene()', text: 'vector' },
+  { name: 'vectorScene()', text: 'vector addition' },
   { name: 'moleculeScene()', text: 'molecule' },
   { name: 'coordSpaceScene()', text: '3d' },
 ]

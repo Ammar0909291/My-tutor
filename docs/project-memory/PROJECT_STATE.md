@@ -107,19 +107,32 @@ scaling, database strategy, risks/roadmap.
 
 ---
 
-## 3. Validation status (last run this session)
+## 3. Validation status
+
+### Schema/DB checks (from the schema+seed session — require a live DB, not re-runnable in the current sandbox)
 
 | Check | Result |
 |-------|--------|
 | `npx prisma format` / schema validate | ✅ passes (after fixing one `@@id` referencing an optional field) |
 | `npx prisma db push` | ✅ "Your database is now in sync" — additive only, confirmed via `psql` table existence + the legacy table list unchanged |
 | `npx prisma generate` | ✅ |
-| `npx tsc --noEmit` | ✅ zero errors |
 | `npm run build` | ✅ succeeds, all routes compile |
 | `npx tsx scripts/seed-eb-physics.mjs` | ✅ ran once, idempotent re-run-safe, row counts verified directly in Postgres via `psql` |
 
-No test suite run beyond the above (none of the new code has dedicated
-unit tests yet — tracked as remaining work, see `NEXT_ACTION.md`).
+### Re-verified this handoff session (no DB/network required)
+
+| Check | Result |
+|-------|--------|
+| `npx prisma generate` | ✅ regenerated client in fresh container |
+| `npm install` | ✅ installed missing declared dep (`katex`) |
+| `npx tsc --noEmit` | ✅ **zero errors** (earlier sandbox errors were purely environmental: ungenerated client + uninstalled dep) |
+| Offline harness suite (`scripts/test-*.ts`) | ✅ **2066 assertions passing, 0 failing** (see `TEST_RESULTS.md`) |
+
+The `Eb*` runtime code still has no dedicated unit tests (no runtime code
+exists yet — only schema + seed). The 2066 passing assertions cover the
+existing deterministic visualization / adaptive / progress logic. One stale
+test (`test-build-scenespec.ts`) was corrected this session to match the
+intentionally-narrowed `VECTOR_RE` in `buildSceneSpec.ts` — see CHANGELOG.
 
 ---
 

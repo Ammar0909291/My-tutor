@@ -5,6 +5,17 @@
 
 ---
 
+## Repo status at last handoff (verification session)
+
+Clean working tree on `claude/my-tutor-foundation-KDSUO`. `npx tsc --noEmit`
+is clean and the full offline harness suite passes (2066 assertions, 0
+failures) after running `npx prisma generate` + `npm install` in the fresh
+container. One stale test was fixed (`test-build-scenespec.ts`, see CHANGELOG).
+No runtime/schema code changed — Milestone-1 data-side remains complete and
+the Decision Pipeline below is still unstarted. Proceed directly with step 1.
+
+---
+
 ## Immediately next (Milestone 1 continuation)
 
 1. **Decision Pipeline runtime, stages 0-2 only** (doc 03), scoped to
