@@ -25,6 +25,7 @@ import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
+import katex from 'katex'
 import styles from './LessonScreen.module.css'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
@@ -126,7 +127,45 @@ function truncate(text: string, n: number): { preview: string; hasMore: boolean 
 }
 
 // ─── MessageContent ───────────────────────────────────────────────────────────
-function renderInline(text: string, key: string, codeStyle: string): React.ReactNode {
+// LaTeX math: the AI writes display math as \[...\] / $$...$$ (often spanning
+// multiple lines) and inline math as \(...\). Deliberately NOT matching bare
+// $...$ — that collides with plain currency mentions (economics/finance
+// content). Display math is extracted from the FULL message text (via
+// extractDisplayMath) before the caller splits it into lines/blocks, and
+// swapped for a single-line placeholder so a multi-line \[...\] block
+// survives line-splitting intact; renderInline then resolves placeholders
+// (and matches inline \(...\) directly, since that never spans lines).
+const DISPLAY_MATH_RE = /\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]/g
+const PLACEHOLDER_RE = /(\d+)/
+const INLINE_MATH_OR_PLACEHOLDER_RE = /(\\\([\s\S]+?\\\)|\d+)/g
+
+function extractDisplayMath(text: string): { text: string; blocks: string[] } {
+  const blocks: string[] = []
+  const replaced = text.replace(DISPLAY_MATH_RE, (m) => {
+    blocks.push(m)
+    return `${blocks.length - 1}`
+  })
+  return { text: replaced, blocks }
+}
+
+function renderMath(raw: string, key: string, displayMode: boolean): React.ReactNode {
+  const content = raw.slice(2, -2).trim()
+  let html: string
+  try {
+    html = katex.renderToString(content, { throwOnError: false, displayMode })
+  } catch {
+    return raw
+  }
+  return (
+    <span
+      key={key}
+      style={displayMode ? { display: 'block', overflowX: 'auto', margin: '4px 0' } : undefined}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
+}
+
+function renderMarkdownSpans(text: string, key: string, codeStyle: string): React.ReactNode {
   const re = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
   const parts: React.ReactNode[] = []; let last = 0; let i = 0; let m: RegExpExecArray | null
   while ((m = re.exec(text)) !== null) {
@@ -141,28 +180,44 @@ function renderInline(text: string, key: string, codeStyle: string): React.React
   return parts.length === 0 ? text : parts
 }
 
+function renderInline(text: string, key: string, codeStyle: string, mathBlocks: string[] = []): React.ReactNode {
+  const parts: React.ReactNode[] = []; let last = 0; let mi = 0; let m: RegExpExecArray | null
+  INLINE_MATH_OR_PLACEHOLDER_RE.lastIndex = 0
+  while ((m = INLINE_MATH_OR_PLACEHOLDER_RE.exec(text)) !== null) {
+    if (m.index > last) parts.push(renderMarkdownSpans(text.slice(last, m.index), `${key}-t${mi}`, codeStyle))
+    const raw = m[0]
+    const placeholder = raw.match(PLACEHOLDER_RE)
+    if (placeholder) parts.push(renderMath(mathBlocks[Number(placeholder[1])] ?? '', `${key}-m${mi}`, true))
+    else parts.push(renderMath(raw, `${key}-m${mi}`, false))
+    last = m.index + raw.length; mi++
+  }
+  if (last < text.length) parts.push(renderMarkdownSpans(text.slice(last), `${key}-t${mi}`, codeStyle))
+  return parts.length === 0 ? text : parts
+}
+
 function MessageContent({ text, isUser }: { text: string; isUser: boolean }) {
   const codeStyle = `px-1.5 py-0.5 rounded text-[0.82em] font-mono ${isUser ? 'bg-white/20' : 'bg-black/30'} ${isUser ? '' : 'text-[var(--coral)]'}`
+  const { text: textWithPlaceholders, blocks: mathBlocks } = extractDisplayMath(text)
   return (
     <div className="space-y-1">
-      {text.split('\n').map((line, i) => {
+      {textWithPlaceholders.split('\n').map((line, i) => {
         if (!line.trim()) return <div key={i} className="h-1" />
-        if (line.match(/^#+\s/)) return <p key={i} className="font-bold" style={{ color: 'var(--text-primary)' }}>{renderInline(line.replace(/^#+\s/, ''), `${i}`, codeStyle)}</p>
+        if (line.match(/^#+\s/)) return <p key={i} className="font-bold" style={{ color: 'var(--text-primary)' }}>{renderInline(line.replace(/^#+\s/, ''), `${i}`, codeStyle, mathBlocks)}</p>
         const bullet = line.match(/^[-•*]\s+(.*)$/)
         if (bullet) return (
           <div key={i} className="flex gap-2">
             <span className="mt-0.5 shrink-0 text-xs" style={{ color: 'var(--coral)' }}>▸</span>
-            <span>{renderInline(bullet[1], `${i}`, codeStyle)}</span>
+            <span>{renderInline(bullet[1], `${i}`, codeStyle, mathBlocks)}</span>
           </div>
         )
         const num = line.match(/^(\d+)\.\s+(.*)$/)
         if (num) return (
           <div key={i} className="flex gap-2">
             <span className="tabular-nums text-xs mt-0.5 shrink-0 font-mono" style={{ color: 'var(--coral)' }}>{num[1]}.</span>
-            <span>{renderInline(num[2], `${i}`, codeStyle)}</span>
+            <span>{renderInline(num[2], `${i}`, codeStyle, mathBlocks)}</span>
           </div>
         )
-        return <p key={i}>{renderInline(line, `${i}`, codeStyle)}</p>
+        return <p key={i}>{renderInline(line, `${i}`, codeStyle, mathBlocks)}</p>
       })}
     </div>
   )
@@ -257,7 +312,8 @@ function parseLessonBlocks(text: string): LessonBlock[] {
 }
 
 function LessonDocument({ text }: { text: string }) {
-  const blocks = parseLessonBlocks(text)
+  const { text: textWithPlaceholders, blocks: mathBlocks } = extractDisplayMath(text)
+  const blocks = parseLessonBlocks(textWithPlaceholders)
   const codeInline = 'px-1.5 py-0.5 rounded text-[0.85em] font-mono bg-black/20 text-[var(--coral)]'
   return (
     <div style={{ maxWidth: 760, margin: '0 auto', padding: '32px 36px 56px', color: 'var(--text-primary)' }}>
@@ -271,7 +327,7 @@ function LessonDocument({ text }: { text: string }) {
           return (
             <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 10, ...styles }}>
               {b.level === 2 && <span style={{ width: 4, height: 18, borderRadius: 2, background: 'var(--coral)', flexShrink: 0 }} />}
-              <span>{renderInline(b.text, `h${idx}`, codeInline)}</span>
+              <span>{renderInline(b.text, `h${idx}`, codeInline, mathBlocks)}</span>
             </div>
           )
         }
@@ -287,7 +343,7 @@ function LessonDocument({ text }: { text: string }) {
               </div>
               <div style={{ fontSize: 15, lineHeight: 1.7 }}>
                 {b.lines.map((l, j) => l.trim()
-                  ? <p key={j} style={{ margin: j === 0 ? 0 : '4px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline)}</p>
+                  ? <p key={j} style={{ margin: j === 0 ? 0 : '4px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline, mathBlocks)}</p>
                   : <div key={j} style={{ height: 6 }} />)}
               </div>
             </div>
@@ -325,7 +381,7 @@ function LessonDocument({ text }: { text: string }) {
                   <span style={{ flexShrink: 0, color: 'var(--coral)', fontWeight: 700, fontFamily: b.ordered ? 'var(--font-mono)' : undefined }}>
                     {b.ordered ? `${j + 1}.` : '▸'}
                   </span>
-                  <span>{renderInline(item, `${idx}-${j}`, codeInline)}</span>
+                  <span>{renderInline(item, `${idx}-${j}`, codeInline, mathBlocks)}</span>
                 </div>
               ))}
             </div>
@@ -333,7 +389,7 @@ function LessonDocument({ text }: { text: string }) {
         }
         return (
           <div key={idx} style={{ margin: '12px 0', fontSize: 15.5, lineHeight: 1.75 }}>
-            {b.lines.map((l, j) => <p key={j} style={{ margin: j === 0 ? 0 : '6px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline)}</p>)}
+            {b.lines.map((l, j) => <p key={j} style={{ margin: j === 0 ? 0 : '6px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline, mathBlocks)}</p>)}
           </div>
         )
       })}
