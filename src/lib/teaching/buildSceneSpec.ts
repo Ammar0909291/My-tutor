@@ -10,7 +10,16 @@
  */
 import type { SceneSpec } from './sceneSpec'
 
-const VECTOR_RE = /\b(vector|force|velocity|displacement|acceleration)\b/i
+// Vector-addition-specific phrases only — bare 'force'/'velocity'/'acceleration'
+// would (and previously did) match almost any motion-physics explanation,
+// including Newton's-second-law / projectile / circular-motion text, and emit
+// a misleading single-arrow scene. Genuine vector-addition turns use one of
+// these multi-word phrases AND are already handled by the parametric router's
+// dedicated 'vector' generator (sceneRouter.ts) when extraction succeeds —
+// this generic fallback only ever fires when the router didn't route to a
+// specific rule at all, so keeping it tight here means we'd rather show no
+// scene than the wrong scene (this file's own conservative-by-design rule).
+const VECTOR_RE = /\b(vector addition|adding vectors|add the vectors|add these vectors|resultant vector|vector sum|sum of the two vectors|parallelogram law|tip[- ]to[- ]tail|head[- ]to[- ]tail)\b/i
 // Deliberately NOT matching electron/proton/neutron/orbital here: those are
 // already handled correctly, with real per-concept visuals (atomic structure,
 // electron shells), by the 2D pipeline's phrase-based rules in detectVisual.ts
