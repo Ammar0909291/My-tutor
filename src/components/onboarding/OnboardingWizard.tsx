@@ -280,7 +280,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
               <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
                 {L('Tap your class — that’s the last step!', 'अपनी कक्षा चुनें — यह आखिरी कदम है!', 'Выберите класс — это последний шаг!')}
               </p>
-              <div className="grid grid-cols-4 gap-3 mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
                 {SCHOOL_GRADES.map((g) => (
                   <button key={g} onClick={() => handleSchoolFinish(g)} disabled={loading}
                     className="rounded-2xl font-black text-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
