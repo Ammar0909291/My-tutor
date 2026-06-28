@@ -33,7 +33,7 @@ function gradeGuidance(grade: number): string {
   return 'Higher difficulty with analysis and multi-step reasoning.'
 }
 
-function validateQuestion(q: unknown, nodeIds: string[]): PracticeQuestion | null {
+export function validateQuestion(q: unknown, nodeIds: string[]): PracticeQuestion | null {
   if (!q || typeof q !== 'object') return null
   const obj = q as Record<string, unknown>
   const id = String(obj.id ?? '')
