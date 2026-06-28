@@ -4,6 +4,26 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## Phase 2, Milestone 1 — Decision Pipeline stages 3-4 + route wire-up (0724396)
+
+- `src/lib/educationalBrain/compositionStage.ts`: Stage 3 — pure. Formats
+  CONCEPT CONTEXT note from ConceptContext; description truncated at 200 chars;
+  prerequisite neighbors only (≤3); passthrough on shortCircuit/no concept.
+- `src/lib/educationalBrain/persistStage.ts`: Stage 4 — async. Writes
+  EbEvidenceEvent (ASSET_SHOWN / CONCEPT_SURFACE / strength=0.5) per turn that
+  surfaces a concept. Non-fatal; skips on shortCircuit.
+- `src/lib/educationalBrain/types.ts`: added `composedContextNote: string | null`
+  field to TurnContext.
+- `src/lib/educationalBrain/frameStage.ts`: initialises `composedContextNote: null`.
+- `src/lib/educationalBrain/pipeline.ts`: updated to run all 5 stages; adds
+  wall-clock `[EB] pipeline Xms` log.
+- `src/app/api/learn/chat/route.ts`: fire-and-forget side-car via
+  `void import(...).then(run).catch(() => {})` — never blocks chat response.
+- `scripts/test-eb-pipeline.ts`: expanded to 47 assertions (Stage 3 section added).
+- `npx tsc --noEmit`: zero errors. All 47 offline assertions pass.
+
+---
+
 ## Phase 2, Milestone 1 — Decision Pipeline stages 0–2 (b04094c)
 
 - `src/lib/educationalBrain/types.ts`: TurnContext, IntentClassification,

@@ -5,10 +5,11 @@
 
 ---
 
-## Repo status at last handoff (b04094c)
+## Repo status at last handoff (0724396)
 
-Clean working tree. `npx tsc --noEmit` clean. Decision Pipeline stages 0–2
-implemented and tested (36/36 offline assertions). Feature flag
+Clean working tree. `npx tsc --noEmit` zero errors. Decision Pipeline stages 0–4
+implemented and tested (47/47 offline assertions). Fire-and-forget side-car
+wired into `/api/learn/chat/route.ts`. Feature flag
 `ENABLE_EDUCATIONAL_BRAIN_PIPELINE` default OFF.
 
 ---
@@ -19,33 +20,21 @@ implemented and tested (36/36 offline assertions). Feature flag
    - One `EbCurriculum` row mapping to the physics subject.
    - `EbModule` rows from the existing chapter structure.
    - Extend `scripts/seed-eb-physics.mjs` or add a new seed script.
-   - Must be idempotent (upsert), run `npx tsx scripts/seed-eb-physics.mjs`
-     to verify no new errors after the change.
+   - Must be idempotent (upsert).
+   - **Requires live DB** — run with `npx tsx scripts/seed-eb-physics.mjs`.
 
 2. **Confirm pgvector availability** in the target Postgres:
    - `CREATE EXTENSION IF NOT EXISTS vector;` against the dev DB.
    - Record result in `PROJECT_STATE.md`. If unavailable, note as
      environment limitation (not architecture problem).
 
-3. **Minimal Composition + Persist** so a single retrieval-only turn
-   can be served end-to-end and measured against doc 03 §8 (p99 ≤ 600ms):
-   - Add `compositionStage.ts` — takes `TurnContext` with `conceptContext`
-     and appends a brief tutor context note (no LLM; format only).
-   - Add `persistStage.ts` — writes one `EbEvidenceEvent` row for the
-     retrieval (marks that the concept was surfaced for this user turn).
-   - Add to `pipeline.ts` after retrievalStage.
-   - This completes the Milestone 1 success criterion from doc 11 §2.
+3. **Live end-to-end latency measurement** (doc 03 §8 — p99 ≤ 600ms):
+   - Start dev server with `ENABLE_EDUCATIONAL_BRAIN_PIPELINE=true`.
+   - Send a physics question through `/api/learn/chat`.
+   - The `[EB] pipeline Xms` console.warn line is the wall-clock measurement.
+   - Record p50/p95 in `PROJECT_STATE.md`.
 
-4. **Wire pipeline into `/api/learn/chat/route.ts`** as a PARALLEL,
-   non-blocking side-car — ONLY when the flag is `true`. Pattern:
-   ```ts
-   // In route.ts, after the existing response is assembled:
-   runEducationalBrainPipeline({ userId, sessionId, subjectSlug, userMessage })
-     .catch(() => {}) // non-fatal, never awaited on the critical path
-   ```
-   This is additive: the pipeline runs asynchronously alongside the
-   existing response, does NOT block the chat reply, does NOT replace
-   any existing behaviour.
+4. **Curator UI for `EbExplanation` authoring** — post-validation, Phase 2 M2.
 
 ## Do NOT do
 
