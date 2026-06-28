@@ -47,14 +47,40 @@ function gradeGuidance(grade: number): string {
   return 'Higher difficulty. Include analysis and multi-step reasoning appropriate for Class 11-12.'
 }
 
-function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subjectName?: string): PracticeQuestion[] {
+/**
+ * Pick up to `max` OTHER real topic titles from this chapter (case-insensitively
+ * deduped against `topic` and each other) to use as MCQ distractors. These are
+ * genuine curriculum content from the same chapter — plausible-but-wrong, not a
+ * "this option is fake" placeholder — so even a question whose options need to
+ * be assembled without an LLM call still reads like a real wrong answer.
+ */
+function pickDistractorTopics(topic: string, topics: string[], max: number): string[] {
+  const seen = new Set([topic.trim().toLowerCase()])
+  const out: string[] = []
+  for (const t of topics) {
+    const trimmed = t.trim()
+    const key = trimmed.toLowerCase()
+    if (!trimmed || seen.has(key)) continue
+    seen.add(key)
+    out.push(trimmed)
+    if (out.length >= max) break
+  }
+  return out
+}
+
+function fallbackQuestions(chapter: Chapter, nodeId: string, topics: string[], subjectName?: string): PracticeQuestion[] {
   const title = chapterDisplayTitle(chapter.title)
+  const topic = topics[0] ?? title
+  const others = pickDistractorTopics(topic, topics, 3)
   if (subjectName === 'Hindi') {
+    const hindiDistractors = others.length >= 3
+      ? others
+      : [...others, 'पाठ का शीर्षक मात्र', 'इस अध्याय की उपशीर्षक सूची', 'पाठ्यपुस्तक की भूमिका का अंश'].slice(0, 3)
     return [
       {
         id: 'q1', type: 'mcq', nodeId,
         question: `"${title}" पाठ का मुख्य विषय क्या है?`,
-        options: [topic, 'असंबंधित विषय', 'किसी अन्य विषय की बात', 'इनमें से कोई नहीं'],
+        options: [topic, hindiDistractors[0], hindiDistractors[1], hindiDistractors[2]],
         correctIndex: 0,
         explanation: `इस पाठ का मुख्य विषय ${topic} है।`,
       },
@@ -68,7 +94,10 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subj
       {
         id: 'q3', type: 'mcq', nodeId,
         question: `"${title}" पाठ से संबंधित कौन-सा विकल्प सही है?`,
-        options: [`यह ${topic} से संबंधित है`, 'यह पाठ्यक्रम का हिस्सा नहीं है', 'यह केवल उच्च कक्षाओं के लिए है', 'इनमें से कोई नहीं'],
+        options: (() => {
+          const mapped = hindiDistractors.map((d) => `यह ${d} से संबंधित है`)
+          return [`यह ${topic} से संबंधित है`, mapped[0], mapped[1], mapped[2]] as [string, string, string, string]
+        })(),
         correctIndex: 0,
         explanation: `"${title}" पाठ ${topic} की समझ विकसित करता है।`,
       },
@@ -86,11 +115,14 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subj
       },
     ]
   }
+  const distractors = others.length >= 3
+    ? others
+    : [...others, `An earlier topic in this chapter`, `A topic covered in a later chapter`, `A related but distinct ${subjectName ?? 'curriculum'} concept`].slice(0, 3)
   return [
     {
       id: 'q1', type: 'mcq', nodeId,
       question: `Which of the following best describes the main concept in "${title}"?`,
-      options: [topic, 'An unrelated concept', 'A concept from another subject', 'None of the above'],
+      options: [topic, distractors[0], distractors[1], distractors[2]],
       correctIndex: 0,
       explanation: `This chapter focuses on ${topic}.`,
     },
@@ -104,7 +136,7 @@ function fallbackQuestions(chapter: Chapter, nodeId: string, topic: string, subj
     {
       id: 'q3', type: 'mcq', nodeId,
       question: `Studying "${title}" helps students understand which key area?`,
-      options: [topic, 'Unrelated topics', 'Advanced university concepts', 'None of these'],
+      options: [topic, distractors[0], distractors[1], distractors[2]],
       correctIndex: 0,
       explanation: `The chapter develops understanding of ${topic}.`,
     },
@@ -201,6 +233,14 @@ Create EXACTLY 5 questions as a JSON array:
 
 Distribute nodeIds across questions based on the topic list above.
 
+For every "mcq" question, all 3 wrong options must be PLAUSIBLE, curriculum-relevant
+distractors: real ${subjectName} facts, terms, or values a student could genuinely
+confuse with the correct answer (e.g. a common misconception, an adjacent concept
+from this same chapter, a close-but-wrong number/formula/date/term). NEVER use a
+generic filler option like "An unrelated concept", "A concept from another subject",
+"None of the above", or similar meta-commentary about the question itself — every
+option must read as a real, specific candidate answer to the question asked.
+
 Return ONLY this JSON array (no markdown, no explanation):
 [
   {"id":"q1","type":"mcq","nodeId":"<nodeId>","question":"...","options":["A text","B text","C text","D text"],"correctIndex":0,"explanation":"Brief reason"},
@@ -272,5 +312,5 @@ export async function generateChapterPractice(
     if (valid.length >= 3) return valid
   }
 
-  return fallbackQuestions(chapter, nodeIds[0], topics[0], subjectName)
+  return fallbackQuestions(chapter, nodeIds[0], topics, subjectName)
 }
