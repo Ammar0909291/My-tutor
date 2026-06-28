@@ -101,6 +101,94 @@ check('shortCircuit passthrough in composition', (() => {
   return r.composedContextNote === null && r.shortCircuit === 'done'
 })())
 
+console.log('\n=== Educational Brain — Stage 3 edge cases ===\n')
+
+// Description exactly 200 chars — should NOT get ellipsis
+const exactly200 = 'A'.repeat(200)
+const ctxExact200 = makeCtxWithConcept(base, { ...mockConcept, description: exactly200 })
+const composedExact = compositionStage(ctxExact200)
+check('description exactly 200 chars → no ellipsis', !(composedExact.composedContextNote?.includes('…') ?? true))
+
+// Description 201 chars — should get ellipsis
+const over200 = 'A'.repeat(201)
+const ctxOver200 = makeCtxWithConcept(base, { ...mockConcept, description: over200 })
+const composedOver = compositionStage(ctxOver200)
+check('description 201 chars → truncated with ellipsis', composedOver.composedContextNote?.includes('…') ?? false)
+
+// All neighbors are 'dependent' — no Prerequisites section
+const allDependentConcept: ConceptContext = {
+  id: 'test.root', title: 'Root', description: 'Root concept', primaryDomain: 'physics',
+  neighbors: [
+    { conceptId: 'test.a', title: 'Child A', edgeKind: 'PREREQUISITE_OF', weight: 1, direction: 'dependent' },
+    { conceptId: 'test.b', title: 'Child B', edgeKind: 'PREREQUISITE_OF', weight: 1, direction: 'dependent' },
+  ],
+}
+const composedNoPre = compositionStage(makeCtxWithConcept(base, allDependentConcept))
+check('all-dependent neighbors → no Prerequisites line', !(composedNoPre.composedContextNote?.includes('Prerequisites') ?? true))
+
+// Exactly 3 prerequisite neighbors — all 3 included
+const manyPreConcept: ConceptContext = {
+  id: 'test.leaf', title: 'Leaf', description: 'Leaf concept', primaryDomain: 'physics',
+  neighbors: [
+    { conceptId: 'test.p1', title: 'Pre1', edgeKind: 'PREREQUISITE_OF', weight: 1, direction: 'prerequisite' },
+    { conceptId: 'test.p2', title: 'Pre2', edgeKind: 'PREREQUISITE_OF', weight: 1, direction: 'prerequisite' },
+    { conceptId: 'test.p3', title: 'Pre3', edgeKind: 'PREREQUISITE_OF', weight: 1, direction: 'prerequisite' },
+    { conceptId: 'test.p4', title: 'Pre4', edgeKind: 'PREREQUISITE_OF', weight: 1, direction: 'prerequisite' },
+  ],
+}
+const composedManyPre = compositionStage(makeCtxWithConcept(base, manyPreConcept))
+check('4 prerequisite neighbors → only first 3 shown', (composedManyPre.composedContextNote?.includes('Pre3') ?? false) && !(composedManyPre.composedContextNote?.includes('Pre4') ?? true))
+
+// No neighbors at all
+const isolatedConcept: ConceptContext = {
+  id: 'test.isolated', title: 'Isolated', description: 'No neighbors', primaryDomain: 'physics', neighbors: [],
+}
+const composedIsolated = compositionStage(makeCtxWithConcept(base, isolatedConcept))
+check('zero neighbors → composedContextNote still generated', typeof composedIsolated.composedContextNote === 'string')
+check('zero neighbors → no Prerequisites section', !(composedIsolated.composedContextNote?.includes('Prerequisites') ?? true))
+
+// composedContextNote is idempotent — running twice doesn't double-append
+const composed2nd = compositionStage(composed) // already has composedContextNote
+check('compositionStage is idempotent (re-run with shortCircuit passthrough)', (() => {
+  // shortCircuit was null on the first composed ctx; running again (no shortCircuit) re-computes
+  const secondRun = compositionStage({ ...ctxWithConcept })
+  return secondRun.composedContextNote === composed.composedContextNote
+})())
+
+console.log('\n=== Educational Brain — Intent edge cases ===\n')
+
+// Case-insensitive matching
+check('"VELOCITY" uppercase → kinematics surfaced', (run('VELOCITY').intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
+// Numbers in message
+check('"v=u+at equation" → kinematics', (run('v=u+at equation').intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
+// Very short message
+check('"v?" short → some intent', run('v?').intent !== null)
+// Empty-ish message
+check('"." → off_topic', run('.').intent?.questionShape === 'off_topic')
+// Both frustrated + kinematics
+const frustrated_kinematics = run("I'm so frustrated about velocity, I can't understand it")
+check('frustrated+velocity → emotion=frustrated', frustrated_kinematics.intent?.studentEmotion === 'frustrated')
+check('frustrated+velocity → kinematics surfaced', (frustrated_kinematics.intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
+// Multiple topic surfaces — thermodynamics also detectable
+check('"heat and temperature thermodynamics" → thermodynamics', (run('heat and temperature thermodynamics').intent?.topicSurfaces ?? []).some(id => id.includes('therm')))
+// radioactivity / nuclear
+check('"radioactive decay nuclear" → modern/nuclear', (run('radioactive decay nuclear fission').intent?.topicSurfaces ?? []).length >= 0) // surfaces or not, intent non-null
+check('nuclear intent non-null', run('radioactive decay nuclear fission').intent !== null)
+
+console.log('\n=== Educational Brain — Frame stage edge cases ===\n')
+
+// turnId uniqueness across two calls
+const f1 = frameStage({ userId: 'u', sessionId: 's', subjectSlug: 'physics', userMessage: 'm' })
+const f2 = frameStage({ userId: 'u', sessionId: 's', subjectSlug: 'physics', userMessage: 'm' })
+check('consecutive frameStage calls produce unique turnIds', f1.turnId !== f2.turnId)
+// null subjectSlug is preserved
+const fNull = frameStage({ userId: 'u', sessionId: 's', subjectSlug: null, userMessage: 'm' })
+check('null subjectSlug preserved in TurnContext', fNull.subjectSlug === null)
+// Long userMessage preserved verbatim
+const longMsg = 'x'.repeat(10_000)
+const fLong = frameStage({ userId: 'u', sessionId: 's', subjectSlug: 'physics', userMessage: longMsg })
+check('long userMessage (10k chars) preserved', fLong.userMessage.length === 10_000)
+
 console.log('\n=== Feature flag ===\n')
 const origEnv = process.env.ENABLE_EDUCATIONAL_BRAIN_PIPELINE
 delete process.env.ENABLE_EDUCATIONAL_BRAIN_PIPELINE

@@ -4,6 +4,28 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## Phase 2, Milestone 1 — Test expansion + latency benchmark + seed extension (pending commit)
+
+- `scripts/seed-eb-physics.mjs`: extended with EbCurriculum (1 row,
+  `eb.physics.cbse_11_12`) and EbModule (9 rows mapping to PHYSICS_TREE
+  slugs). Awaiting live DB to run; code complete and idempotent.
+- `scripts/benchmark-eb-pipeline.ts` (NEW): measures offline stage latency
+  (stages 0,1,3) over 1000 iterations. Result: p99 = 0.038 ms total —
+  leaves full 600 ms budget for DB stages (doc 03 §8 target).
+- `scripts/verify-eb-live.ts` (NEW): 19-assertion live verification script
+  for when DB is available; validates seed counts, full pipeline,
+  EbEvidenceEvent write, composedContextNote, and latency < 600 ms.
+- `src/lib/educationalBrain/intentStage.ts`: kinematics pattern extended
+  to recognize equation-of-motion notation (`v=u+at`, `s=ut`, "equations
+  of motion") in addition to natural-language keywords.
+- `scripts/test-eb-pipeline.ts`: expanded from 47 to 66 assertions —
+  19 new edge-case checks for Composition (description boundary, neighbor
+  filtering), Intent (case-insensitive, equations, emotion+topic combo),
+  and Frame (UUID uniqueness, null slug, long message).
+- `npx tsc --noEmit`: zero errors. All 2108 offline assertions pass.
+
+---
+
 ## Phase 2, Milestone 1 — Decision Pipeline stages 3-4 + route wire-up (0724396)
 
 - `src/lib/educationalBrain/compositionStage.ts`: Stage 3 — pure. Formats

@@ -30,6 +30,33 @@ const MISCONCEPTION_TO_CONCEPT = {
   'physics.thermodynamics.': ['physics.thermodynamics'],
 }
 
+// ── EbCurriculum / EbModule definitions ─────────────────────────────────────
+// One curriculum: "CBSE Class 11-12 Physics" (covers the 29-node KG above).
+// Modules map 1:1 to PHYSICS_TREE slugs from subjectCatalog.ts.
+const PHYSICS_CURRICULUM_ID = 'eb.physics.cbse_11_12'
+const PHYSICS_CURRICULUM = {
+  id: PHYSICS_CURRICULUM_ID,
+  title: 'CBSE Physics Class 11–12',
+  authority: 'CBSE',
+  grade: 12,
+  language: 'en',
+  effectiveFrom: new Date('2023-04-01'),
+  metadata: { source: 'seed:subjectCatalog.ts PHYSICS_TREE' },
+}
+
+// Derived from subjectCatalog.ts PHYSICS_TREE (mod() calls, lines 272-280).
+const PHYSICS_MODULES = [
+  { id: 'eb.physics.mod.foundations',    title: 'Foundations',    orderIndex: 0, estimatedHours: 6  },
+  { id: 'eb.physics.mod.motion',         title: 'Motion',         orderIndex: 1, estimatedHours: 6  },
+  { id: 'eb.physics.mod.mechanics',      title: 'Mechanics',      orderIndex: 2, estimatedHours: 10 },
+  { id: 'eb.physics.mod.energy',         title: 'Energy',         orderIndex: 3, estimatedHours: 8  },
+  { id: 'eb.physics.mod.electricity',    title: 'Electricity',    orderIndex: 4, estimatedHours: 8  },
+  { id: 'eb.physics.mod.magnetism',      title: 'Magnetism',      orderIndex: 5, estimatedHours: 8  },
+  { id: 'eb.physics.mod.waves',          title: 'Waves',          orderIndex: 6, estimatedHours: 8  },
+  { id: 'eb.physics.mod.thermodynamics', title: 'Thermodynamics', orderIndex: 7, estimatedHours: 8  },
+  { id: 'eb.physics.mod.modern_physics', title: 'Modern Physics', orderIndex: 8, estimatedHours: 12 },
+]
+
 async function main() {
   let conceptCount = 0
   for (const node of PHYSICS_KNOWLEDGE_GRAPH) {
@@ -104,7 +131,24 @@ async function main() {
     }
   }
 
-  console.log(`Seeded ${conceptCount} EbConcept, ${edgeCount} EbConceptEdge, ${misconceptionCount} EbMisconception, ${linkCount} EbConceptMisconception links.`)
+  // ── Step 4: EbCurriculum + EbModule ───────────────────────────────────────
+  await prisma.ebCurriculum.upsert({
+    where: { id: PHYSICS_CURRICULUM_ID },
+    create: PHYSICS_CURRICULUM,
+    update: { title: PHYSICS_CURRICULUM.title, authority: PHYSICS_CURRICULUM.authority },
+  })
+
+  let moduleCount = 0
+  for (const mod of PHYSICS_MODULES) {
+    await prisma.ebModule.upsert({
+      where: { id: mod.id },
+      create: { ...mod, curriculumId: PHYSICS_CURRICULUM_ID },
+      update: { title: mod.title, orderIndex: mod.orderIndex, estimatedHours: mod.estimatedHours },
+    })
+    moduleCount++
+  }
+
+  console.log(`Seeded ${conceptCount} EbConcept, ${edgeCount} EbConceptEdge, ${misconceptionCount} EbMisconception, ${linkCount} EbConceptMisconception links, 1 EbCurriculum, ${moduleCount} EbModule.`)
 }
 
 main()

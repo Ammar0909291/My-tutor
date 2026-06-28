@@ -87,23 +87,31 @@ scaling, database strategy, risks/roadmap.
     6 concept-links total), 6 `EbConceptMisconception` link rows.
   - Run with: `npx tsx scripts/seed-eb-physics.mjs`
 
-### Not yet started (Milestone 1 remaining scope, per doc 11 §2 / doc 10 §9)
+### Milestone 1 remaining (requires live DB)
 
-- Step 4: backfill `EbCurriculum`/`EbModule` views, one per existing
-  subject (starting with physics).
-- Step 5: lazy `EbAssetIdentity` placeholder creation for existing visual
-  generator output (cache-on-first-request pattern).
-- Decision Pipeline stages 0-2 (Frame, Intent, Retrieval) + minimal
-  Composition + Persist, as actual runtime code (not yet started — so far
-  only the data side of Milestone 1 is built).
-- Curator UI for `Explanation` (now `EbExplanation`) authoring.
-- Feature flag for routing 1% of physics-mode users through the new
-  pipeline.
-- Step 6-9 of doc 10 §9 (dual-write, `TopicProgress`→
-  `EbLearnerConceptMastery` migration, `MistakeRecord`→
-  `EbLearnerActiveMisconception` migration, eventual retirement of legacy
-  caches) — explicitly **not** started; these are post-validation cleanup
-  per doc 10 §9, scheduled for "Phase 2 month 5+."
+- **EbCurriculum/EbModule backfill**: `scripts/seed-eb-physics.mjs` is extended
+  with `PHYSICS_CURRICULUM` + `PHYSICS_MODULES` (9 modules matching subjectCatalog
+  PHYSICS_TREE). Awaiting live DB to run. Code is complete and idempotent.
+- **pgvector**: Not yet confirmed in target Postgres. `CREATE EXTENSION IF NOT EXISTS vector;` needed.
+- **Live pipeline validation**: `scripts/verify-eb-live.ts` is ready — 19 assertions
+  covering seed data, full pipeline execution, EbEvidenceEvent write, latency.
+  Awaiting live DB.
+- **Curator UI** for `EbExplanation` authoring — not started (Phase 2 M1 item).
+- **1% feature flag routing** — the feature flag is in place; routing a percentage
+  of users requires a runtime config mechanism (Phase 2 M1 item).
+
+### Milestone 1 done (offline-verifiable)
+
+- Decision Pipeline stages 0–4 implemented and tested (66/66 offline assertions).
+- Side-car integration in `/api/learn/chat/route.ts`.
+- `scripts/seed-eb-physics.mjs` extended with EbCurriculum/EbModule (code complete).
+- Latency benchmark: offline stages p99 = 0.038 ms (trivial overhead vs 600 ms budget).
+
+### Milestones 2–5
+
+Not started. Require explicit user approval to begin each milestone per
+standing instruction (do NOT begin Phase 3 without approval; same applies
+to each milestone as a gate).
 
 ---
 

@@ -5,38 +5,40 @@
 
 ---
 
-## Last run: handoff verification session
+## Last run: Phase 2 Educational Brain continuation session
 
 Environment: sandbox (no outbound network, no DATABASE_URL). DB-dependent
-checks (`prisma db push`, the physics seed) are recorded in `PROJECT_STATE.md`
-§3 from the session that had a live DB; they are not re-runnable here.
-
-### Setup performed first (fresh container)
-```
-npx prisma generate      # Prisma client was absent → regenerated
-npm install              # declared dep 'katex' was uninstalled → installed
-```
+checks (`prisma db push`, the physics seed, live pipeline verification) require
+a live Postgres instance and are not re-runnable here. See `verify-eb-live.ts`
+for the DB-side verification script.
 
 ### Type check
 ```
 npx tsc --noEmit
 ```
 Result: **clean — zero errors.**
-(The errors seen before setup — missing `teachingStrategyEvent`,
-`visualizationCache`, `COMPUTER_SCIENCE` enum, `katex` — were all
-environmental: ungenerated Prisma client + uninstalled dependency. None were
-code defects.)
 
 ### Offline harness suite
 ```
 for f in scripts/test-*.ts; do npx tsx "$f"; done
 ```
-Result: **2066 assertions passing, 0 failing.**
+Result: **2108 assertions passing, 0 failing.**
 
-| Note | Detail |
-|------|--------|
-| Fixed this session | `scripts/test-build-scenespec.ts` — 6 stale assertions updated to match the intentionally-narrowed `VECTOR_RE` (bare `vector`/`force`/`velocity`/`acceleration` now correctly return null; multi-word vector-addition phrases fire). Now 25/25. |
-| Excluded (live/demo, need Groq+network) | `scripts/test-scene-extraction-live.ts`, `scripts/test-visualization-tiebreaker.ts` — no assertion summary by design; require `GROQ_API_KEY`. |
+| Script | Assertions | Notes |
+|--------|-----------|-------|
+| test-eb-pipeline.ts | 66 | Decision Pipeline stages 0,1,3 + feature flag + edge cases |
+| test-misconception-rules.ts | 444 | Largest suite — all misconception pattern checks |
+| test-lesson-plan-card-items.ts | 67 | |
+| test-logic-gate-scene.ts | 66 | |
+| test-teaching-output-bias.ts | 63 | |
+| All others | ~1302 | See per-file list in session output |
+| **Excluded (live)** | — | `test-scene-extraction-live.ts`, `test-visualization-tiebreaker.ts` require `GROQ_API_KEY` |
+
+### Benchmark (offline stages 0+1+3)
+```
+npx tsx scripts/benchmark-eb-pipeline.ts
+```
+Result: **full offline pipeline p99 = 0.038 ms** — leaves 600 ms headroom for DB stages (doc 03 §8 target: p99 ≤ 600 ms total).
 
 ## Reproduce locally
 ```

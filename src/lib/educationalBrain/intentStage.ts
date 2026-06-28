@@ -40,7 +40,7 @@ function classifyEmotion(text: string): StudentEmotion {
 // Only fires for physics sessions (subjectSlug === 'physics').
 
 const PHYSICS_CONCEPT_MAP: { pattern: RegExp; conceptId: string }[] = [
-  { pattern: /\b(kinematics|displacement|velocity|acceleration|motion)\b/i, conceptId: 'physics.kinematics.kinematics_intro' },
+  { pattern: /\b(kinematics|displacement|velocity|acceleration|motion)\b|v\s*=\s*u\s*\+\s*at|s\s*=\s*ut|equations?\s+of\s+motion/i, conceptId: 'physics.kinematics.kinematics_intro' },
   { pattern: /\b(projectile|trajectory|range|launch angle)\b/i, conceptId: 'physics.kinematics.projectile_motion' },
   { pattern: /\b(newton'?s (first|second|third)|force|inertia|f\s*=\s*ma)\b/i, conceptId: 'physics.dynamics.newtons_laws' },
   { pattern: /\b(friction|coefficient of friction|static friction|kinetic friction)\b/i, conceptId: 'physics.dynamics.friction' },
