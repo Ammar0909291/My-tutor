@@ -30,6 +30,19 @@ export function compositionStage(ctx: TurnContext): TurnContext {
   if (prereqs.length > 0) {
     lines.push(`Prerequisites:\n${prereqs.join('\n')}`)
   }
+  if (ctx.intent) {
+    lines.push(`Question shape: ${ctx.intent.questionShape}`)
+    if (ctx.intent.studentEmotion) lines.push(`Student emotion: ${ctx.intent.studentEmotion}`)
+  }
+  if (ctx.candidateAssets) {
+    const { explanationIds, visualIds, probeIds } = ctx.candidateAssets
+    const assetSummary = [
+      explanationIds.length > 0 ? `${explanationIds.length} explanation(s)` : null,
+      visualIds.length > 0 ? `${visualIds.length} visual(s)` : null,
+      probeIds.length > 0 ? `${probeIds.length} probe(s)` : null,
+    ].filter(Boolean).join(', ')
+    if (assetSummary) lines.push(`Available assets: ${assetSummary}`)
+  }
 
   return {
     ...ctx,
