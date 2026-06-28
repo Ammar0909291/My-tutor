@@ -50,13 +50,19 @@ check('confused emotion detected', run("I'm confused about this").intent?.studen
 check('confident emotion detected', run('I got it, makes sense').intent?.studentEmotion === 'confident')
 check('engaged emotion detected', run('Interesting! Tell me more').intent?.studentEmotion === 'engaged')
 check('no emotion → null', run('The capital of France is Paris').intent?.studentEmotion === null)
-check('velocity → kinematics surfaced', (run('What is velocity?').intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
-check('projectile → projectile_motion surfaced', (run('projectile trajectory').intent?.topicSurfaces ?? []).some(id => id.includes('projectile')))
-check("newton's second law → dynamics", (run("Newton's second law F=ma").intent?.topicSurfaces ?? []).some(id => id.includes('dynamics')))
-check('electric circuit → electricity', (run('voltage and current in circuit').intent?.topicSurfaces ?? []).some(id => id.includes('electricity')))
+check('velocity → kinematics_1d surfaced', (run('What is velocity?').intent?.topicSurfaces ?? []).includes('physics.kinematics_1d'))
+check('projectile → kinematics_2d surfaced', (run('projectile trajectory').intent?.topicSurfaces ?? []).includes('physics.kinematics_2d'))
+check("newton's second law → laws_of_motion", (run("Newton's second law F=ma").intent?.topicSurfaces ?? []).includes('physics.laws_of_motion'))
+check('electric circuit → current_electricity', (run('voltage and current in circuit').intent?.topicSurfaces ?? []).includes('physics.current_electricity'))
 check('non-physics subject → no surfaces', (run('photosynthesis process', 'biology').intent?.topicSurfaces ?? []).length === 0)
 check('null subject → no surfaces', (run('velocity', null).intent?.topicSurfaces ?? []).length === 0)
 check('unrecognised text → empty surfaces', (run('some random text here xyz', 'physics').intent?.topicSurfaces ?? []).length === 0)
+// Additional KG-ID correctness checks
+check('gravitation → physics.gravitation', (run('satellite orbit and kepler').intent?.topicSurfaces ?? []).includes('physics.gravitation'))
+check('thermodynamics → physics.thermodynamics', (run('carnot cycle efficiency entropy').intent?.topicSurfaces ?? []).includes('physics.thermodynamics'))
+check('wave optics → physics.wave_optics', (run("Young's double slit experiment").intent?.topicSurfaces ?? []).includes('physics.wave_optics'))
+check('nuclear → physics.nuclei', (run('radioactive decay nuclear fission').intent?.topicSurfaces ?? []).includes('physics.nuclei'))
+check('capacitor → physics.electric_potential', (run('capacitor and capacitance dielectric').intent?.topicSurfaces ?? []).includes('physics.electric_potential'))
 const shortCtx = { ...frameStage({ userId: 'u', sessionId: 's', subjectSlug: 'physics', userMessage: 'test' }), shortCircuit: 'already_done' }
 const afterIntent = intentStage(shortCtx)
 check('intentStage skips when shortCircuit is set', afterIntent.intent === null)
@@ -158,7 +164,7 @@ check('compositionStage is idempotent (re-run with shortCircuit passthrough)', (
 console.log('\n=== Educational Brain — Intent edge cases ===\n')
 
 // Case-insensitive matching
-check('"VELOCITY" uppercase → kinematics surfaced', (run('VELOCITY').intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
+check('"VELOCITY" uppercase → kinematics_1d surfaced', (run('VELOCITY').intent?.topicSurfaces ?? []).includes('physics.kinematics_1d'))
 // Numbers in message
 check('"v=u+at equation" → kinematics', (run('v=u+at equation').intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
 // Very short message
@@ -168,7 +174,7 @@ check('"." → off_topic', run('.').intent?.questionShape === 'off_topic')
 // Both frustrated + kinematics
 const frustrated_kinematics = run("I'm so frustrated about velocity, I can't understand it")
 check('frustrated+velocity → emotion=frustrated', frustrated_kinematics.intent?.studentEmotion === 'frustrated')
-check('frustrated+velocity → kinematics surfaced', (frustrated_kinematics.intent?.topicSurfaces ?? []).some(id => id.includes('kinematics')))
+check('frustrated+velocity → kinematics_1d surfaced', (frustrated_kinematics.intent?.topicSurfaces ?? []).includes('physics.kinematics_1d'))
 // Multiple topic surfaces — thermodynamics also detectable
 check('"heat and temperature thermodynamics" → thermodynamics', (run('heat and temperature thermodynamics').intent?.topicSurfaces ?? []).some(id => id.includes('therm')))
 // radioactivity / nuclear
