@@ -1298,25 +1298,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // decideVisualization() heuristic (no extra LLM call to decide whether to
       // visualize) and its own flag, default OFF. Non-fatal: any failure at any
       // stage degrades to null and the turn proceeds unchanged.
+      // TEMP DEBUG (dynamic-visual diagnosis sprint — remove once verified) —
+      // surfaces exactly which gate is closing when the dynamic engine doesn't
+      // fire, so a "no visual" turn in the UI is traceable in the dev-server
+      // log instead of silently invisible. Cheap (one decideVisualization() per
+      // turn, already deterministic & no-network) and harmless if left in.
+      const dvFlag = isDynamicVisualizationEnabled()
+      const dvDecision = decideVisualization(cleanText)
+      console.log('[dynamic-debug] gates:', {
+        visualSpecAlreadySet: !!detectedVisualSpec,
+        sceneSpecAlreadySet: !!detectedSceneSpec,
+        flagEnabled: dvFlag,
+        shouldVisualize: dvDecision.shouldVisualize,
+        category: dvDecision.category,
+        reasoning: dvDecision.reasoning,
+      })
       if (
         !detectedVisualSpec &&
         !detectedSceneSpec &&
-        isDynamicVisualizationEnabled() &&
-        decideVisualization(cleanText).shouldVisualize
+        dvFlag &&
+        dvDecision.shouldVisualize
       ) {
         try {
           const conceptKey = normalizeConceptKey(cleanText)
           const cached = await getCachedVisualization(conceptKey)
           if (cached) {
             dynamicVisualizationCode = cached.code
+            console.log('[dynamic-debug] cache HIT for concept:', conceptKey.slice(0, 60))
           } else {
+            console.log('[dynamic-debug] cache MISS; calling LLM for concept:', conceptKey.slice(0, 60))
             const generated = await generateVisualizationCode(cleanText)
             if (generated) {
               dynamicVisualizationCode = generated.code
               await saveVisualization(conceptKey, generated.code)
+              console.log('[dynamic-debug] LLM returned code; bytes:', generated.code.length)
+            } else {
+              console.log('[dynamic-debug] LLM returned null (both 3D + 2D passes failed — most often: missing/invalid GROQ_API_KEY)')
             }
           }
-        } catch { /* non-fatal */ }
+        } catch (err) {
+          console.log('[dynamic-debug] threw:', err)
+        }
       }
 
       // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): let the per-turn
