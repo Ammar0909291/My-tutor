@@ -1223,31 +1223,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         detectedVisualSpec = planVisualTeaching(cleanText).spec
       } catch { /* non-fatal */ }
 
-      // Deterministic, rule-based 3D scene detection (vectors/molecules/coordinate
-      // space) — same non-fatal, no-AI-call pattern as detectedVisualSpec above.
-      // Only fires when the 2D pipeline found nothing, so a message never carries
-      // both a 2D diagram and a 3D scene.
       let detectedSceneSpec: ReturnType<typeof buildSceneSpec> = null
       let dynamicVisualizationCode: string | null = null
-      if (!detectedVisualSpec) {
-        try {
-          detectedSceneSpec = buildSceneSpec(cleanText)
-        } catch { /* non-fatal */ }
-      }
 
       // Part 2 (option C, FLAG-GATED): parameter-driven routed scene generation
       // (src/lib/teaching/sceneGenerators/sceneRouter.ts) — 9 textbook-standard
       // scene types where the LLM only extracts parameters and deterministic
       // code computes all geometry, with an independent consistency check as a
       // safety net. Dead by default — generateRoutedScene() only fires when
-      // ENABLE_PARAMETRIC_SCENE_GENERATION === 'true' and both deterministic
-      // pipelines above found nothing. Separate flag from, and tried BEFORE,
-      // the older free-form generator below. Non-fatal: any failure at any
-      // pipeline stage degrades to null (logged, not thrown) and the turn
-      // proceeds unchanged.
-      if (!detectedVisualSpec && !detectedSceneSpec && isParametricSceneGenerationEnabled()) {
+      // ENABLE_PARAMETRIC_SCENE_GENERATION === 'true'. Checked BEFORE the generic
+      // buildSceneSpec fallback below (bug fix): buildSceneSpec's bare-word
+      // VECTOR_RE (/velocity|acceleration|force|.../) matches almost any motion
+      // explanation — including projectile/circular/pendulum/collision text —
+      // and was firing first, producing a generic "auto-vector" scene and
+      // permanently blocking the specific routed generator from ever running.
+      // Non-fatal: any failure at any pipeline stage degrades to null (logged,
+      // not thrown) and the turn proceeds unchanged.
+      if (!detectedVisualSpec && isParametricSceneGenerationEnabled()) {
+        console.log('[scene-debug] parametric scene router invoked for text:', cleanText.slice(0, 200))
         try {
           detectedSceneSpec = await generateRoutedScene(cleanText)
+        } catch (err) {
+          console.log('[scene-debug] generateRoutedScene threw:', err)
+        }
+        console.log('[scene-debug] parametric scene router result:', detectedSceneSpec ? detectedSceneSpec.id : null)
+      }
+
+      // Deterministic, rule-based 3D scene detection (vectors/molecules/coordinate
+      // space) — same non-fatal, no-AI-call pattern as detectedVisualSpec above.
+      // Generic fallback only: fires when nothing more specific (the 2D pipeline
+      // or the parametric router above) matched, so a message never carries both
+      // a 2D diagram and a 3D scene, and a generic vector arrow never preempts a
+      // real projectile/circular/pendulum/collision/etc. scene.
+      if (!detectedVisualSpec && !detectedSceneSpec) {
+        try {
+          detectedSceneSpec = buildSceneSpec(cleanText)
         } catch { /* non-fatal */ }
       }
 
