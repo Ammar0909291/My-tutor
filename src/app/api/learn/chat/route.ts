@@ -13,7 +13,7 @@ import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
 import { generateSceneSpec, isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
-import { generateRoutedScene, isParametricSceneGenerationEnabled } from '@/lib/teaching/sceneGenerators/sceneRouter'
+import { generateRoutedScene, isParametricSceneGenerationEnabled, routeSceneGenerator } from '@/lib/teaching/sceneGenerators/sceneRouter'
 import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
@@ -1239,7 +1239,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // permanently blocking the specific routed generator from ever running.
       // Non-fatal: any failure at any pipeline stage degrades to null (logged,
       // not thrown) and the turn proceeds unchanged.
+      // Did the text match a SPECIFIC parametric-router rule (projectile, circular,
+      // vector, etc.)? Tracked separately from whether generateRoutedScene actually
+      // produced a scene: extraction/build/consistency can still fail downstream
+      // (e.g. the LLM can't pull two clean vector magnitudes out of a Newton's-
+      // second-law explanation that never states two forces numerically). In that
+      // case the text is still recognizably circular-motion/vector-flavored, so the
+      // generic buildSceneSpec fallback below must NOT run — its bare-word VECTOR_RE
+      // would otherwise paper over the failure with a misleading generic single-
+      // arrow "auto-vector" scene for text the router already identified as a
+      // specific (but failed) case. Showing nothing is correct per buildSceneSpec's
+      // own "wrong scene is worse than none" design.
+      let parametricRouteMatched = false
       if (!detectedVisualSpec && isParametricSceneGenerationEnabled()) {
+        parametricRouteMatched = routeSceneGenerator(cleanText) !== null
         console.log('[scene-debug] parametric scene router invoked for text:', cleanText.slice(0, 200))
         try {
           detectedSceneSpec = await generateRoutedScene(cleanText)
@@ -1252,10 +1265,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Deterministic, rule-based 3D scene detection (vectors/molecules/coordinate
       // space) — same non-fatal, no-AI-call pattern as detectedVisualSpec above.
       // Generic fallback only: fires when nothing more specific (the 2D pipeline
-      // or the parametric router above) matched, so a message never carries both
-      // a 2D diagram and a 3D scene, and a generic vector arrow never preempts a
-      // real projectile/circular/pendulum/collision/etc. scene.
-      if (!detectedVisualSpec && !detectedSceneSpec) {
+      // or the parametric router above) matched OR failed, so a message never
+      // carries both a 2D diagram and a 3D scene, a generic vector arrow never
+      // preempts a real projectile/circular/pendulum/collision/etc. scene, and it
+      // never papers over a recognized-but-failed parametric route either.
+      if (!detectedVisualSpec && !detectedSceneSpec && !parametricRouteMatched) {
         try {
           detectedSceneSpec = buildSceneSpec(cleanText)
         } catch { /* non-fatal */ }
