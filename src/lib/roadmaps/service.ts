@@ -271,7 +271,7 @@ export async function syncRoadmapProgress(userId: string, enrollmentId: string) 
   return { overallPct, subjectProgress, capstoneProgress, unlockedCount, isComplete }
 }
 
-function generateCertificateCode(): string {
+export function generateCertificateCode(): string {
   const stamp = Date.now().toString(36).toUpperCase()
   const random = randomBytes(3).toString('hex').toUpperCase()
   return `MT-${stamp}-${random}`
@@ -312,12 +312,12 @@ export async function issueCertificate(userId: string, roadmapId: string, enroll
 
 // ─── Capstone submission + AI review (Part 5, mirrors lib/projects/service) ─
 
-function clampScore(n: unknown, fallback = 50): number {
+export function clampScore(n: unknown, fallback = 50): number {
   const num = typeof n === 'number' && Number.isFinite(n) ? n : fallback
   return Math.max(0, Math.min(100, Math.round(num)))
 }
 
-function buildCapstoneReviewPrompt(opts: { title: string; description: string; requirements: string[]; content: string }): string {
+export function buildCapstoneReviewPrompt(opts: { title: string; description: string; requirements: string[]; content: string }): string {
   return [
     `You are a senior engineer and mentor evaluating a capstone project that marks the end of a career-readiness roadmap — the bar is "would this be acceptable work from a junior professional?"`,
     `Capstone: "${opts.title}" — ${opts.description}`,
