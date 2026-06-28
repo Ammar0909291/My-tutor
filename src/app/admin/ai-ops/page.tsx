@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function AdminAIOpsPage() {
   const [limit, totalLogs, successLogs, providerStats] = await withRetry(() =>
@@ -23,7 +24,7 @@ export default async function AdminAIOpsPage() {
   const errorRate = (totalLogs as number) > 0 ? ((totalLogs as number) - (successLogs as number)) / (totalLogs as number) * 100 : 0
 
   return (
-    <div className="max-w-3xl">
+    <CandyPage legacy className="max-w-3xl">
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>AI Operations</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>Provider status, usage counters, budget limits</p>
@@ -83,6 +84,6 @@ export default async function AdminAIOpsPage() {
         </div>
       )}
       {!lastError && <p className="text-sm" style={{ color: 'var(--green)' }}>No recent AI errors recorded.</p>}
-    </div>
+    </CandyPage>
   )
 }

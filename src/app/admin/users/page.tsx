@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/db/prisma'
 import { UserActions } from '../_components/UserActions'
 import Link from 'next/link'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function AdminUsersPage({ searchParams }: { searchParams: Promise<{ q?: string; role?: string; status?: string }> }) {
   const { q = '', role = 'all', status = 'all' } = await searchParams
@@ -18,7 +19,7 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide" style={{ background: color + '22', color }}>{text}</span>
   )
   return (
-    <div>
+    <CandyPage legacy>
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>Users</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>{total} total · {admins} admins</p>
@@ -56,6 +57,6 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
           </tbody>
         </table>
       </div>
-    </div>
+    </CandyPage>
   )
 }

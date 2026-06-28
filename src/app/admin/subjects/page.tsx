@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/db/prisma'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function AdminSubjectsPage() {
   const subjects = await prisma.subject.findMany({
@@ -8,7 +9,7 @@ export default async function AdminSubjectsPage() {
   })
   const badge = (t: string) => <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase" style={{ background: 'var(--blue-muted)', color: 'var(--blue)' }}>{t}</span>
   return (
-    <div>
+    <CandyPage legacy>
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>Subjects</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>{subjects.length} subjects in catalog</p>
@@ -27,6 +28,6 @@ export default async function AdminSubjectsPage() {
           </div>
         ))}
       </div>
-    </div>
+    </CandyPage>
   )
 }

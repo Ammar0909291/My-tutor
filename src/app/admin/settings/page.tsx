@@ -1,3 +1,5 @@
+import { CandyPage } from '@/components/ui/candy'
+
 export default function AdminSettingsPage() {
   const envKeys = [
     { key: 'DATABASE_URL', desc: 'Postgres connection', secret: true },
@@ -29,7 +31,7 @@ export default function AdminSettingsPage() {
   }
 
   return (
-    <div className="max-w-2xl">
+    <CandyPage legacy className="max-w-2xl">
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>System Settings</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>Environment status and feature flags — read-only</p>
@@ -61,6 +63,6 @@ export default function AdminSettingsPage() {
           </div>
         ))}
       </div>
-    </div>
+    </CandyPage>
   )
 }

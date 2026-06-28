@@ -1,3 +1,5 @@
+import { CandyPage } from '@/components/ui/candy'
+
 export default function AdminKGPage() {
   const domains = [
     { name: 'Mathematics', nodes: '200+', file: 'mathKnowledgeGraph.ts', color: 'var(--blue)' },
@@ -8,7 +10,7 @@ export default function AdminKGPage() {
     { name: 'Social Science', nodes: '160+', file: 'socialScienceKnowledgeGraph.ts', color: 'var(--blue)' },
   ]
   return (
-    <div className="max-w-3xl">
+    <CandyPage legacy className="max-w-3xl">
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>Knowledge Graphs</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>Read-only explorer — KG nodes, misconceptions, mastery weights</p>
@@ -37,6 +39,6 @@ export default function AdminKGPage() {
 }`}</pre>
         <p className="text-xs mt-3" style={{ color: 'var(--text-dim)' }}>Interactive KG editor planned for a future sprint.</p>
       </div>
-    </div>
+    </CandyPage>
   )
 }

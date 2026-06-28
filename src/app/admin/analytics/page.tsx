@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
+import { CandyPage } from '@/components/ui/candy'
 
 async function getStats() {
   const now = new Date()
@@ -32,9 +33,9 @@ export default async function AdminAnalyticsPage() {
       {sub && <p className="text-xs mt-1" style={{ color: 'var(--text-dim)' }}>{sub}</p>}
     </div>
   )
-  if (!s) return <div className="text-sm" style={{ color: 'var(--text-dim)' }}>Analytics unavailable — DB not reachable.</div>
+  if (!s) return <CandyPage legacy className="text-sm" style={{ color: 'var(--text-dim)' }}>Analytics unavailable — DB not reachable.</CandyPage>
   return (
-    <div className="max-w-4xl">
+    <CandyPage legacy className="max-w-4xl">
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>Analytics</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>Platform-wide engagement metrics</p>
@@ -63,6 +64,6 @@ export default async function AdminAnalyticsPage() {
           )
         })}
       </div>
-    </div>
+    </CandyPage>
   )
 }

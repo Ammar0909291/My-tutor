@@ -1,10 +1,12 @@
+import { CandyPage } from '@/components/ui/candy'
+
 export default function AdminCurriculumPage() {
   const boards = [
     { name: 'CBSE', subjects: ['Mathematics','Science','English','Hindi','Sanskrit','Social Science'], grades: '6–12' },
     { name: 'UP Board', subjects: ['Mathematics','Science','English','Hindi','Sanskrit','Social Science'], grades: '6–12' },
   ]
   return (
-    <div className="max-w-3xl">
+    <CandyPage legacy className="max-w-3xl">
       <div className="mb-6">
         <h1 className="text-2xl font-black" style={{ color: 'var(--text-primary)' }}>Curriculum Explorer</h1>
         <p className="text-sm mt-0.5" style={{ color: 'var(--text-dim)' }}>Read-only board / subject / chapter structure</p>
@@ -29,6 +31,6 @@ export default function AdminCurriculumPage() {
           Full chapter and lesson structure defined in <code className="font-mono">src/lib/education/*Catalog.ts</code> files (26 TypeScript catalog modules covering both boards). Interactive curriculum editor planned for a future sprint.
         </p>
       </div>
-    </div>
+    </CandyPage>
   )
 }

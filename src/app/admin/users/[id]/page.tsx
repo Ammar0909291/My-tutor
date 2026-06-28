@@ -2,6 +2,7 @@ import { prisma } from '@/lib/db/prisma'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { UserActions } from '../../_components/UserActions'
+import { CandyPage } from '@/components/ui/candy'
 
 export default async function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -23,7 +24,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
     </div>
   )
   return (
-    <div className="max-w-2xl">
+    <CandyPage legacy className="max-w-2xl">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/admin/users" className="text-xs hover:underline" style={{ color: 'var(--text-dim)' }}>← Users</Link>
         <h1 className="text-xl font-black" style={{ color: 'var(--text-primary)' }}>{user.name ?? user.email}</h1>
@@ -68,6 +69,6 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
           <div className="flex gap-2 flex-wrap">{user.profile.subjects.map(ps => badge(ps.subject.name, 'var(--blue)'))}</div>
         </div>
       )}
-    </div>
+    </CandyPage>
   )
 }
