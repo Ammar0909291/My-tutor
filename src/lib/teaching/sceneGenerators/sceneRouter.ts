@@ -44,8 +44,9 @@ import { extractLogicGateParams, buildLogicGateScene, checkLogicGateConsistency 
 import { extractERDiagramParams, buildERDiagramScene, checkERDiagramConsistency } from './erDiagram'
 import { extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrendConsistency } from './periodicTrends'
 import { extractCellDivisionParams, buildCellDivisionScene, checkCellDivisionConsistency } from './cellDivision'
+import { extractDNAStructureParams, buildDNAStructureScene, checkDNAStructureConsistency } from './dnaStructure'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division' | 'dna_structure'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -128,6 +129,19 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'torque', 'lever arm', 'moment of force', 'turning effect of force',
       'rotational equilibrium', 'wrench applied', 'rotational motion of',
+    ],
+  },
+  {
+    // DNA-structure keys are base-pairing/double-helix specific ("dna
+    // sequence", "base pairing", "watson-crick", "adenine"...) — disjoint
+    // from cell_division's mitosis/meiosis-stage vocabulary below and from
+    // punnett_square's genotype/cross vocabulary, so it can sit anywhere
+    // relative to either.
+    kind: 'dna_structure',
+    keywords: [
+      'dna sequence', 'dna strand', 'base pairing', 'base pair', 'base pairs',
+      'complementary strand', 'double helix', 'watson-crick', 'watson crick',
+      'nitrogenous base', 'adenine', 'thymine', 'guanine', 'cytosine', 'gc content',
     ],
   },
   {
@@ -496,6 +510,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'er_diagram': return runWithLogging(kind, text, extractERDiagramParams, buildERDiagramScene, checkERDiagramConsistency)
     case 'periodic_trends': return runWithLogging(kind, text, extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrendConsistency)
     case 'cell_division': return runWithLogging(kind, text, extractCellDivisionParams, buildCellDivisionScene, checkCellDivisionConsistency)
+    case 'dna_structure': return runWithLogging(kind, text, extractDNAStructureParams, buildDNAStructureScene, checkDNAStructureConsistency)
     default: return null
   }
 }
