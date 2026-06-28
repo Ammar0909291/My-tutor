@@ -186,7 +186,7 @@ Keep it under 60 words, second person ("you"), no headings, no bullet points, no
   }
 }
 
-function buildDeterministicSummary(
+export function buildDeterministicSummary(
   windowLabel: string,
   completed: string[],
   strengths: string[],
