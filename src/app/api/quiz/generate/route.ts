@@ -43,7 +43,7 @@ Return ONLY a JSON array:
       return NextResponse.json({ success: true, questions: Array.isArray(questions) ? questions : [] })
     } catch (error: any) {
       console.error('[quiz/generate] AI error:', error.message)
-      return NextResponse.json({ success: true, questions: [] })
+      return NextResponse.json({ success: false, error: 'Failed to generate quiz' }, { status: 502 })
     }
   } catch (err) {
     if (err instanceof z.ZodError) {
