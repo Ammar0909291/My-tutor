@@ -22,4 +22,7 @@ export type { ProgressRingProps } from './ProgressRing'
 export { EagleMascot } from './Mascot'
 export type { EagleMascotProps } from './Mascot'
 
+export { PageLoadingSkeleton } from './PageLoadingSkeleton'
+export type { PageLoadingSkeletonProps } from './PageLoadingSkeleton'
+
 export { useConfetti } from './useConfetti'
