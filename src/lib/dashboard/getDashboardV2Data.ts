@@ -44,7 +44,7 @@ const SUBJECT_COLOR_MAP: Record<string, { color: string; bgColor: string }> = {
 }
 const DEFAULT_SUBJECT_COLORS = { color: 'var(--pink)', bgColor: 'rgba(255,95,162,0.12)' }
 
-function getLevel(xp: number): { name: string; color: string; next: number | null } {
+export function getLevel(xp: number): { name: string; color: string; next: number | null } {
   if (xp >= 1001) return { name: 'Master',       color: 'var(--yellow)', next: null }
   if (xp >= 601)  return { name: 'Expert',       color: 'var(--blue)',   next: 1001 }
   if (xp >= 301)  return { name: 'Practitioner', color: 'var(--green)',  next: 601 }
@@ -52,7 +52,7 @@ function getLevel(xp: number): { name: string; color: string; next: number | nul
   return           { name: 'Novice',              color: 'var(--purple)',   next: 101 }
 }
 
-function dayBucket(date: Date): 'today' | 'yesterday' | 'earlier' {
+export function dayBucket(date: Date): 'today' | 'yesterday' | 'earlier' {
   const now = new Date()
   const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
   const startOfYesterday = new Date(startOfToday.getTime() - 86400000)
@@ -62,7 +62,7 @@ function dayBucket(date: Date): 'today' | 'yesterday' | 'earlier' {
 }
 
 /** IST calendar-day boundaries as UTC Date objects for Prisma filters. */
-function getISTDayBoundsUTC(): { gte: Date; lt: Date } {
+export function getISTDayBoundsUTC(): { gte: Date; lt: Date } {
   const now = new Date()
   const istDate = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Kolkata',
@@ -75,7 +75,7 @@ function getISTDayBoundsUTC(): { gte: Date; lt: Date } {
   return { gte, lt }
 }
 
-function timeOfDayGreeting(name: string): string {
+export function timeOfDayGreeting(name: string): string {
   const hour = parseInt(
     new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', hour: 'numeric', hourCycle: 'h23' }).format(new Date()),
     10,
@@ -86,7 +86,7 @@ function timeOfDayGreeting(name: string): string {
   return `Good evening, ${name}! 🌙`
 }
 
-function heroSubtitle(streak: number): string {
+export function heroSubtitle(streak: number): string {
   if (streak >= 2) return `You're on a ${streak}-day streak. Let's keep the fire going!`
   if (streak === 1) return "You're on a 1-day streak. Keep it up!"
   return "Let's start a streak today!"
@@ -103,7 +103,7 @@ function emptyContinueLesson(): ContinueLessonData {
   }
 }
 
-function buildPracticeModes(tutorHref: string): PracticeModeData[] {
+export function buildPracticeModes(tutorHref: string): PracticeModeData[] {
   return [
     { id: 'tutor', emoji: '👨‍🏫', name: 'Tutor', description: 'Live lesson with code', href: tutorHref },
     { id: 'quiz',  emoji: '🎯',   name: 'Quiz',  description: 'Test your skills', badge: 'NEW', href: '/quiz' },
@@ -111,7 +111,7 @@ function buildPracticeModes(tutorHref: string): PracticeModeData[] {
   ]
 }
 
-function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string): SkillNodeData[] {
+export function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string): SkillNodeData[] {
   if (allChapters.length === 0) return []
   let idx = allChapters.findIndex((c) => c.status === 'current')
   if (idx === -1) idx = allChapters.length - 1
@@ -129,7 +129,7 @@ function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string
   })
 }
 
-function buildLibrarySkillPath(
+export function buildLibrarySkillPath(
   sp: { currentLesson: number; completedLessons: number[] } | undefined,
   activeEmoji: string,
 ): SkillNodeData[] {
