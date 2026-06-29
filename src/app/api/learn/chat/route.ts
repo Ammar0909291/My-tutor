@@ -17,6 +17,7 @@ import { generateRoutedScene, isParametricSceneGenerationEnabled, routeSceneGene
 import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
+import { decide } from '@/lib/teaching-engine'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -1125,6 +1126,57 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }
     } catch (err) {
       console.warn('[learn/chat] learner intelligence profile skipped:', err)
+    }
+
+    // Teaching Engine (A3): call decide() for KG-backed subjects when a current
+    // concept ID is known. Pure function — zero extra DB calls, zero AI calls.
+    try {
+      if (snapshotCurrentConceptId) {
+        const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
+        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(snapshotCurrentConceptId)
+        if (conceptNode) {
+          const masteredSlugs = topicProgressRowsShared
+            .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED')
+            .map((r) => r.topicSlug)
+          const weakSlugs = topicProgressRowsShared
+            .filter((r) => r.masteryPct > 0 && r.masteryPct < 70)
+            .map((r) => r.topicSlug)
+          const inProgressSlug = topicProgressRowsShared.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+
+          const lp = learningProfileShared as { learningPace?: string; confidenceLevel?: number } | null
+          const learningSpeed: 'slow' | 'normal' | 'fast' =
+            lp?.learningPace === 'FAST' ? 'fast' : lp?.learningPace === 'SLOW' ? 'slow' : 'normal'
+
+          const decision = decide(
+            {
+              level: 'T1',
+              current_concepts_mastered: masteredSlugs,
+              weak_concepts: weakSlugs,
+              misconceptions: [],
+              retention_score: lp?.confidenceLevel ?? 70,
+              learning_speed: learningSpeed,
+              fatigue_level: 'low',
+            },
+            conceptNode,
+            {
+              recently_attempted: inProgressSlug ? [inProgressSlug] : [],
+              success_rate: (subjectAnalyticsShared as { trend?: string } | null)?.trend === 'IMPROVING' ? 80 : 65,
+              time_on_task: 0,
+              error_patterns: (subjectAnalyticsShared as { weakTopics?: string[] } | null)?.weakTopics ?? [],
+            },
+          )
+          const modeNote = decision.mode === 'remediate'
+            ? ' — address prerequisite gaps before new material'
+            : decision.mode === 'reinforce'
+              ? ' — strengthen retention via spaced practice'
+              : decision.mode === 'accelerate'
+                ? ' — reduce scaffolding, move faster'
+                : ' — direct instruction'
+          systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
+        }
+      }
+    } catch (err) {
+      console.warn('[learn/chat] teaching engine skipped:', err)
     }
 
     // Messages arrive newest-first (capped query above) — restore chronological

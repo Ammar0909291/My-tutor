@@ -68,14 +68,14 @@ interface CheckResult {
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
-const REQUIRED_FIELDS: (keyof Concept)[] = [
+const REQUIRED_FIELDS: (keyof Concept & string)[] = [
   'id', 'name', 'domain', 'difficulty', 'bloom',
   'mastery_threshold', 'estimated_hours', 'description',
 ]
 
 // Fields required for the Teaching Engine (src/lib/teaching-engine/index.ts)
 // concept_type drives decideActionType(); its absence degrades to INTERACTIVE_QUESTIONING
-const TEACHING_ENGINE_FIELDS: (keyof Concept)[] = [
+const TEACHING_ENGINE_FIELDS: (keyof Concept & string)[] = [
   'requires', 'unlocks', 'difficulty', 'bloom', 'estimated_hours', 'concept_type',
 ]
 
