@@ -109,7 +109,7 @@ export async function detectTeachingStyle(
 
   // 4. Subject heuristic — VISUAL_FIRST for science (diagrams heavy),
   //    EXAMPLE_FIRST for mathematics (procedures), default STEP_BY_STEP for English/SST
-  if (subjectSlug === 'science') {
+  if (subjectSlug === 'science' || subjectSlug === 'physics') {
     return { style: 'VISUAL_FIRST', confidence: 'low', label: STYLE_LABELS.VISUAL_FIRST }
   }
   if (subjectSlug === 'mathematics') {
