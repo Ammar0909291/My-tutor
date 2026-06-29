@@ -1,0 +1,4478 @@
+{
+  "name": "Biology Teaching Assets",
+  "version": "1.0.0",
+  "status": "placeholder",
+  "build_date": "2026-06-29",
+  "subject": "biology",
+  "assets": [
+    {
+      "id": "asset.bio.found.what-is-biology",
+      "concept_id": "bio.found.what-is-biology",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to recall \"What is Biology\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"What is Biology\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"What is Biology\"",
+        "[TEMPLATE] Key idea 2 for \"What is Biology\"",
+        "[TEMPLATE] Key idea 3 for \"What is Biology\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"What is Biology\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"What is Biology\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"What is Biology\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"What is Biology\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "remember",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"What is Biology\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"What is Biology\""
+      ],
+      "prerequisite_review_triggers": []
+    },
+    {
+      "id": "asset.bio.found.characteristics-of-life",
+      "concept_id": "bio.found.characteristics-of-life",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Characteristics of Living Organisms\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Characteristics of Living Organisms\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Characteristics of Living Organisms\"",
+        "[TEMPLATE] Key idea 2 for \"Characteristics of Living Organisms\"",
+        "[TEMPLATE] Key idea 3 for \"Characteristics of Living Organisms\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Characteristics of Living Organisms\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Characteristics of Living Organisms\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Characteristics of Living Organisms\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Characteristics of Living Organisms\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Characteristics of Living Organisms\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Characteristics of Living Organisms\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.what-is-biology"
+      ]
+    },
+    {
+      "id": "asset.bio.found.classification-need",
+      "concept_id": "bio.found.classification-need",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Need for Classification\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Need for Classification\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Need for Classification\"",
+        "[TEMPLATE] Key idea 2 for \"Need for Classification\"",
+        "[TEMPLATE] Key idea 3 for \"Need for Classification\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Need for Classification\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Need for Classification\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Need for Classification\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Need for Classification\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Need for Classification\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Need for Classification\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.characteristics-of-life"
+      ]
+    },
+    {
+      "id": "asset.bio.found.five-kingdom",
+      "concept_id": "bio.found.five-kingdom",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Five Kingdom Classification\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Five Kingdom Classification\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Five Kingdom Classification\"",
+        "[TEMPLATE] Key idea 2 for \"Five Kingdom Classification\"",
+        "[TEMPLATE] Key idea 3 for \"Five Kingdom Classification\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Five Kingdom Classification\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Five Kingdom Classification\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Five Kingdom Classification\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Five Kingdom Classification\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Five Kingdom Classification\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Five Kingdom Classification\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.classification-need"
+      ]
+    },
+    {
+      "id": "asset.bio.found.binomial-nomenclature",
+      "concept_id": "bio.found.binomial-nomenclature",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Binomial Nomenclature\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Binomial Nomenclature\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Binomial Nomenclature\"",
+        "[TEMPLATE] Key idea 2 for \"Binomial Nomenclature\"",
+        "[TEMPLATE] Key idea 3 for \"Binomial Nomenclature\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Binomial Nomenclature\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Binomial Nomenclature\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Binomial Nomenclature\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Binomial Nomenclature\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Binomial Nomenclature\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Binomial Nomenclature\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.classification-need"
+      ]
+    },
+    {
+      "id": "asset.bio.found.viruses-viroids-lichens",
+      "concept_id": "bio.found.viruses-viroids-lichens",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Viruses, Viroids and Lichens\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Viruses, Viroids and Lichens\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Viruses, Viroids and Lichens\"",
+        "[TEMPLATE] Key idea 2 for \"Viruses, Viroids and Lichens\"",
+        "[TEMPLATE] Key idea 3 for \"Viruses, Viroids and Lichens\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Viruses, Viroids and Lichens\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Viruses, Viroids and Lichens\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Viruses, Viroids and Lichens\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Viruses, Viroids and Lichens\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Viruses, Viroids and Lichens\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Viruses, Viroids and Lichens\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.five-kingdom"
+      ]
+    },
+    {
+      "id": "asset.bio.found.microscopy-basics",
+      "concept_id": "bio.found.microscopy-basics",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Microscopy and Laboratory Techniques\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Microscopy and Laboratory Techniques\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Microscopy and Laboratory Techniques\"",
+        "[TEMPLATE] Key idea 2 for \"Microscopy and Laboratory Techniques\"",
+        "[TEMPLATE] Key idea 3 for \"Microscopy and Laboratory Techniques\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Microscopy and Laboratory Techniques\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Microscopy and Laboratory Techniques\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Microscopy and Laboratory Techniques\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Microscopy and Laboratory Techniques\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Microscopy and Laboratory Techniques\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Microscopy and Laboratory Techniques\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.characteristics-of-life"
+      ]
+    },
+    {
+      "id": "asset.bio.found.biomes-levels-of-organisation",
+      "concept_id": "bio.found.biomes-levels-of-organisation",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Levels of Biological Organisation\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Levels of Biological Organisation\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Levels of Biological Organisation\"",
+        "[TEMPLATE] Key idea 2 for \"Levels of Biological Organisation\"",
+        "[TEMPLATE] Key idea 3 for \"Levels of Biological Organisation\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Levels of Biological Organisation\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Levels of Biological Organisation\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Levels of Biological Organisation\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Levels of Biological Organisation\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Levels of Biological Organisation\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Levels of Biological Organisation\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.characteristics-of-life"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.cell-theory",
+      "concept_id": "bio.cell.cell-theory",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to recall \"Cell Theory\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Cell Theory\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Cell Theory\"",
+        "[TEMPLATE] Key idea 2 for \"Cell Theory\"",
+        "[TEMPLATE] Key idea 3 for \"Cell Theory\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Cell Theory\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Cell Theory\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Cell Theory\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Cell Theory\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "remember",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Cell Theory\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Cell Theory\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.microscopy-basics"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.prokaryotic-cell",
+      "concept_id": "bio.cell.prokaryotic-cell",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Prokaryotic Cell Structure\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Prokaryotic Cell Structure\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Prokaryotic Cell Structure\"",
+        "[TEMPLATE] Key idea 2 for \"Prokaryotic Cell Structure\"",
+        "[TEMPLATE] Key idea 3 for \"Prokaryotic Cell Structure\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Prokaryotic Cell Structure\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Prokaryotic Cell Structure\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Prokaryotic Cell Structure\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Prokaryotic Cell Structure\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Prokaryotic Cell Structure\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Prokaryotic Cell Structure\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-theory"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.eukaryotic-cell",
+      "concept_id": "bio.cell.eukaryotic-cell",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Eukaryotic Cell Structure\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Eukaryotic Cell Structure\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Eukaryotic Cell Structure\"",
+        "[TEMPLATE] Key idea 2 for \"Eukaryotic Cell Structure\"",
+        "[TEMPLATE] Key idea 3 for \"Eukaryotic Cell Structure\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Eukaryotic Cell Structure\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Eukaryotic Cell Structure\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Eukaryotic Cell Structure\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Eukaryotic Cell Structure\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Eukaryotic Cell Structure\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Eukaryotic Cell Structure\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-theory"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.cell-membrane-transport",
+      "concept_id": "bio.cell.cell-membrane-transport",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Cell Membrane and Transport\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Cell Membrane and Transport\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Cell Membrane and Transport\"",
+        "[TEMPLATE] Key idea 2 for \"Cell Membrane and Transport\"",
+        "[TEMPLATE] Key idea 3 for \"Cell Membrane and Transport\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Cell Membrane and Transport\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Cell Membrane and Transport\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Cell Membrane and Transport\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Cell Membrane and Transport\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Cell Membrane and Transport\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Cell Membrane and Transport\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.eukaryotic-cell"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.nucleus-chromosomes",
+      "concept_id": "bio.cell.nucleus-chromosomes",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Nucleus and Chromosomes\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nucleus and Chromosomes\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Nucleus and Chromosomes\"",
+        "[TEMPLATE] Key idea 2 for \"Nucleus and Chromosomes\"",
+        "[TEMPLATE] Key idea 3 for \"Nucleus and Chromosomes\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Nucleus and Chromosomes\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Nucleus and Chromosomes\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Nucleus and Chromosomes\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nucleus and Chromosomes\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Nucleus and Chromosomes\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Nucleus and Chromosomes\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.eukaryotic-cell"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.mitochondria-energy",
+      "concept_id": "bio.cell.mitochondria-energy",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Mitochondria and Energy Organelles\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Mitochondria and Energy Organelles\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Mitochondria and Energy Organelles\"",
+        "[TEMPLATE] Key idea 2 for \"Mitochondria and Energy Organelles\"",
+        "[TEMPLATE] Key idea 3 for \"Mitochondria and Energy Organelles\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Mitochondria and Energy Organelles\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Mitochondria and Energy Organelles\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Mitochondria and Energy Organelles\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mitochondria and Energy Organelles\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Mitochondria and Energy Organelles\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Mitochondria and Energy Organelles\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.eukaryotic-cell"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.chloroplast-structure",
+      "concept_id": "bio.cell.chloroplast-structure",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Chloroplast Structure\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Chloroplast Structure\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Chloroplast Structure\"",
+        "[TEMPLATE] Key idea 2 for \"Chloroplast Structure\"",
+        "[TEMPLATE] Key idea 3 for \"Chloroplast Structure\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Chloroplast Structure\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Chloroplast Structure\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Chloroplast Structure\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Chloroplast Structure\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Chloroplast Structure\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Chloroplast Structure\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.eukaryotic-cell"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.endomembrane-system",
+      "concept_id": "bio.cell.endomembrane-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Endomembrane System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Endomembrane System\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Endomembrane System\"",
+        "[TEMPLATE] Key idea 2 for \"Endomembrane System\"",
+        "[TEMPLATE] Key idea 3 for \"Endomembrane System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Endomembrane System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Endomembrane System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Endomembrane System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Endomembrane System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Endomembrane System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Endomembrane System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.eukaryotic-cell"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.cytoskeleton",
+      "concept_id": "bio.cell.cytoskeleton",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Cytoskeleton and Cell Motility\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Cytoskeleton and Cell Motility\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Cytoskeleton and Cell Motility\"",
+        "[TEMPLATE] Key idea 2 for \"Cytoskeleton and Cell Motility\"",
+        "[TEMPLATE] Key idea 3 for \"Cytoskeleton and Cell Motility\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Cytoskeleton and Cell Motility\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Cytoskeleton and Cell Motility\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Cytoskeleton and Cell Motility\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Cytoskeleton and Cell Motility\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Cytoskeleton and Cell Motility\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Cytoskeleton and Cell Motility\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-membrane-transport",
+        "bio.cell.endomembrane-system"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.cell-cycle",
+      "concept_id": "bio.cell.cell-cycle",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"The Cell Cycle\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"The Cell Cycle\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"The Cell Cycle\"",
+        "[TEMPLATE] Key idea 2 for \"The Cell Cycle\"",
+        "[TEMPLATE] Key idea 3 for \"The Cell Cycle\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"The Cell Cycle\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"The Cell Cycle\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"The Cell Cycle\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"The Cell Cycle\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"The Cell Cycle\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"The Cell Cycle\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.nucleus-chromosomes"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.mitosis",
+      "concept_id": "bio.cell.mitosis",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Mitosis\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Mitosis\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Mitosis\"",
+        "[TEMPLATE] Key idea 2 for \"Mitosis\"",
+        "[TEMPLATE] Key idea 3 for \"Mitosis\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Mitosis\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Mitosis\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Mitosis\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mitosis\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Mitosis\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Mitosis\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-cycle"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.meiosis",
+      "concept_id": "bio.cell.meiosis",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Meiosis\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Meiosis\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Meiosis\"",
+        "[TEMPLATE] Key idea 2 for \"Meiosis\"",
+        "[TEMPLATE] Key idea 3 for \"Meiosis\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Meiosis\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Meiosis\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Meiosis\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Meiosis\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Meiosis\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Meiosis\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.mitosis"
+      ]
+    },
+    {
+      "id": "asset.bio.cell.cell-signalling",
+      "concept_id": "bio.cell.cell-signalling",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Cell Signalling\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Cell Signalling\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Cell Signalling\"",
+        "[TEMPLATE] Key idea 2 for \"Cell Signalling\"",
+        "[TEMPLATE] Key idea 3 for \"Cell Signalling\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Cell Signalling\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Cell Signalling\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Cell Signalling\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Cell Signalling\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Cell Signalling\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Cell Signalling\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-membrane-transport"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.biomolecule-types",
+      "concept_id": "bio.mol.biomolecule-types",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to recall \"Types of Biomolecules\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Types of Biomolecules\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Types of Biomolecules\"",
+        "[TEMPLATE] Key idea 2 for \"Types of Biomolecules\"",
+        "[TEMPLATE] Key idea 3 for \"Types of Biomolecules\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Types of Biomolecules\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Types of Biomolecules\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Types of Biomolecules\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Types of Biomolecules\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "remember",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Types of Biomolecules\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Types of Biomolecules\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.eukaryotic-cell"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.carbohydrates-lipids",
+      "concept_id": "bio.mol.carbohydrates-lipids",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Carbohydrates and Lipids\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Carbohydrates and Lipids\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Carbohydrates and Lipids\"",
+        "[TEMPLATE] Key idea 2 for \"Carbohydrates and Lipids\"",
+        "[TEMPLATE] Key idea 3 for \"Carbohydrates and Lipids\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Carbohydrates and Lipids\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Carbohydrates and Lipids\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Carbohydrates and Lipids\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Carbohydrates and Lipids\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Carbohydrates and Lipids\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Carbohydrates and Lipids\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.biomolecule-types"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.proteins-structure",
+      "concept_id": "bio.mol.proteins-structure",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Proteins and Protein Structure\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Proteins and Protein Structure\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Proteins and Protein Structure\"",
+        "[TEMPLATE] Key idea 2 for \"Proteins and Protein Structure\"",
+        "[TEMPLATE] Key idea 3 for \"Proteins and Protein Structure\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Proteins and Protein Structure\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Proteins and Protein Structure\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Proteins and Protein Structure\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Proteins and Protein Structure\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Proteins and Protein Structure\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Proteins and Protein Structure\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.biomolecule-types"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.enzymes",
+      "concept_id": "bio.mol.enzymes",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Enzymes and Enzyme Kinetics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Enzymes and Enzyme Kinetics\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Enzymes and Enzyme Kinetics\"",
+        "[TEMPLATE] Key idea 2 for \"Enzymes and Enzyme Kinetics\"",
+        "[TEMPLATE] Key idea 3 for \"Enzymes and Enzyme Kinetics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Enzymes and Enzyme Kinetics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Enzymes and Enzyme Kinetics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Enzymes and Enzyme Kinetics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Enzymes and Enzyme Kinetics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Enzymes and Enzyme Kinetics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Enzymes and Enzyme Kinetics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.proteins-structure"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.nucleic-acid-structure",
+      "concept_id": "bio.mol.nucleic-acid-structure",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Nucleic Acid Structure\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nucleic Acid Structure\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Nucleic Acid Structure\"",
+        "[TEMPLATE] Key idea 2 for \"Nucleic Acid Structure\"",
+        "[TEMPLATE] Key idea 3 for \"Nucleic Acid Structure\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Nucleic Acid Structure\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Nucleic Acid Structure\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Nucleic Acid Structure\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nucleic Acid Structure\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Nucleic Acid Structure\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Nucleic Acid Structure\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.biomolecule-types"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.dna-replication",
+      "concept_id": "bio.mol.dna-replication",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"DNA Replication\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"DNA Replication\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"DNA Replication\"",
+        "[TEMPLATE] Key idea 2 for \"DNA Replication\"",
+        "[TEMPLATE] Key idea 3 for \"DNA Replication\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"DNA Replication\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"DNA Replication\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"DNA Replication\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"DNA Replication\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"DNA Replication\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"DNA Replication\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.nucleic-acid-structure",
+        "bio.mol.enzymes"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.transcription",
+      "concept_id": "bio.mol.transcription",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Transcription\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Transcription\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Transcription\"",
+        "[TEMPLATE] Key idea 2 for \"Transcription\"",
+        "[TEMPLATE] Key idea 3 for \"Transcription\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Transcription\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Transcription\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Transcription\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Transcription\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Transcription\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Transcription\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.dna-replication"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.translation-genetic-code",
+      "concept_id": "bio.mol.translation-genetic-code",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Translation and the Genetic Code\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Translation and the Genetic Code\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Translation and the Genetic Code\"",
+        "[TEMPLATE] Key idea 2 for \"Translation and the Genetic Code\"",
+        "[TEMPLATE] Key idea 3 for \"Translation and the Genetic Code\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Translation and the Genetic Code\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Translation and the Genetic Code\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Translation and the Genetic Code\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Translation and the Genetic Code\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Translation and the Genetic Code\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Translation and the Genetic Code\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.transcription"
+      ]
+    },
+    {
+      "id": "asset.bio.mol.gene-regulation",
+      "concept_id": "bio.mol.gene-regulation",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Regulation of Gene Expression\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Regulation of Gene Expression\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Regulation of Gene Expression\"",
+        "[TEMPLATE] Key idea 2 for \"Regulation of Gene Expression\"",
+        "[TEMPLATE] Key idea 3 for \"Regulation of Gene Expression\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Regulation of Gene Expression\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Regulation of Gene Expression\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Regulation of Gene Expression\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Regulation of Gene Expression\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Regulation of Gene Expression\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Regulation of Gene Expression\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.translation-genetic-code"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.mendelian-genetics",
+      "concept_id": "bio.gen.mendelian-genetics",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Mendelian Genetics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Mendelian Genetics\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Mendelian Genetics\"",
+        "[TEMPLATE] Key idea 2 for \"Mendelian Genetics\"",
+        "[TEMPLATE] Key idea 3 for \"Mendelian Genetics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Mendelian Genetics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Mendelian Genetics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Mendelian Genetics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mendelian Genetics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Mendelian Genetics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Mendelian Genetics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.meiosis"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.gene-interactions",
+      "concept_id": "bio.gen.gene-interactions",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Gene Interactions and Extensions of Mendelism\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Gene Interactions and Extensions of Mendelism\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Gene Interactions and Extensions of Mendelism\"",
+        "[TEMPLATE] Key idea 2 for \"Gene Interactions and Extensions of Mendelism\"",
+        "[TEMPLATE] Key idea 3 for \"Gene Interactions and Extensions of Mendelism\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Gene Interactions and Extensions of Mendelism\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Gene Interactions and Extensions of Mendelism\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Gene Interactions and Extensions of Mendelism\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Gene Interactions and Extensions of Mendelism\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Gene Interactions and Extensions of Mendelism\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Gene Interactions and Extensions of Mendelism\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.gen.mendelian-genetics"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.chromosomal-theory-linkage",
+      "concept_id": "bio.gen.chromosomal-theory-linkage",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Chromosomal Theory and Linkage\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Chromosomal Theory and Linkage\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Chromosomal Theory and Linkage\"",
+        "[TEMPLATE] Key idea 2 for \"Chromosomal Theory and Linkage\"",
+        "[TEMPLATE] Key idea 3 for \"Chromosomal Theory and Linkage\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Chromosomal Theory and Linkage\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Chromosomal Theory and Linkage\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Chromosomal Theory and Linkage\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Chromosomal Theory and Linkage\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Chromosomal Theory and Linkage\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Chromosomal Theory and Linkage\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.gen.gene-interactions",
+        "bio.cell.meiosis"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.pedigree-human-genetics",
+      "concept_id": "bio.gen.pedigree-human-genetics",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Pedigree Analysis and Human Genetic Disorders\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Pedigree Analysis and Human Genetic Disorders\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Pedigree Analysis and Human Genetic Disorders\"",
+        "[TEMPLATE] Key idea 2 for \"Pedigree Analysis and Human Genetic Disorders\"",
+        "[TEMPLATE] Key idea 3 for \"Pedigree Analysis and Human Genetic Disorders\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Pedigree Analysis and Human Genetic Disorders\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Pedigree Analysis and Human Genetic Disorders\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Pedigree Analysis and Human Genetic Disorders\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Pedigree Analysis and Human Genetic Disorders\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Pedigree Analysis and Human Genetic Disorders\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Pedigree Analysis and Human Genetic Disorders\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.gen.chromosomal-theory-linkage"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.mutations",
+      "concept_id": "bio.gen.mutations",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Mutations\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Mutations\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Mutations\"",
+        "[TEMPLATE] Key idea 2 for \"Mutations\"",
+        "[TEMPLATE] Key idea 3 for \"Mutations\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Mutations\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Mutations\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Mutations\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mutations\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Mutations\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Mutations\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.translation-genetic-code",
+        "bio.gen.chromosomal-theory-linkage"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.population-genetics",
+      "concept_id": "bio.gen.population-genetics",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Population Genetics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Population Genetics\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Population Genetics\"",
+        "[TEMPLATE] Key idea 2 for \"Population Genetics\"",
+        "[TEMPLATE] Key idea 3 for \"Population Genetics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Population Genetics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Population Genetics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Population Genetics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Population Genetics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Population Genetics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Population Genetics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.gen.pedigree-human-genetics",
+        "bio.gen.mutations"
+      ]
+    },
+    {
+      "id": "asset.bio.gen.genetic-engineering",
+      "concept_id": "bio.gen.genetic-engineering",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Genetic Engineering and Recombinant DNA\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Genetic Engineering and Recombinant DNA\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Genetic Engineering and Recombinant DNA\"",
+        "[TEMPLATE] Key idea 2 for \"Genetic Engineering and Recombinant DNA\"",
+        "[TEMPLATE] Key idea 3 for \"Genetic Engineering and Recombinant DNA\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Genetic Engineering and Recombinant DNA\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Genetic Engineering and Recombinant DNA\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Genetic Engineering and Recombinant DNA\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Genetic Engineering and Recombinant DNA\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Genetic Engineering and Recombinant DNA\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Genetic Engineering and Recombinant DNA\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.gen.mutations",
+        "bio.mol.enzymes"
+      ]
+    },
+    {
+      "id": "asset.bio.evo.origin-of-life",
+      "concept_id": "bio.evo.origin-of-life",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Origin of Life\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Origin of Life\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Origin of Life\"",
+        "[TEMPLATE] Key idea 2 for \"Origin of Life\"",
+        "[TEMPLATE] Key idea 3 for \"Origin of Life\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Origin of Life\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Origin of Life\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Origin of Life\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Origin of Life\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Origin of Life\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Origin of Life\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.biomolecule-types"
+      ]
+    },
+    {
+      "id": "asset.bio.evo.evidence-for-evolution",
+      "concept_id": "bio.evo.evidence-for-evolution",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Evidence for Evolution\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Evidence for Evolution\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Evidence for Evolution\"",
+        "[TEMPLATE] Key idea 2 for \"Evidence for Evolution\"",
+        "[TEMPLATE] Key idea 3 for \"Evidence for Evolution\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Evidence for Evolution\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Evidence for Evolution\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Evidence for Evolution\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Evidence for Evolution\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Evidence for Evolution\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Evidence for Evolution\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.evo.origin-of-life"
+      ]
+    },
+    {
+      "id": "asset.bio.evo.natural-selection",
+      "concept_id": "bio.evo.natural-selection",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Natural Selection and Darwinism\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Natural Selection and Darwinism\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Natural Selection and Darwinism\"",
+        "[TEMPLATE] Key idea 2 for \"Natural Selection and Darwinism\"",
+        "[TEMPLATE] Key idea 3 for \"Natural Selection and Darwinism\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Natural Selection and Darwinism\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Natural Selection and Darwinism\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Natural Selection and Darwinism\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Natural Selection and Darwinism\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Natural Selection and Darwinism\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Natural Selection and Darwinism\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.evo.evidence-for-evolution"
+      ]
+    },
+    {
+      "id": "asset.bio.evo.modern-synthesis-speciation",
+      "concept_id": "bio.evo.modern-synthesis-speciation",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Modern Synthesis and Speciation\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Modern Synthesis and Speciation\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Modern Synthesis and Speciation\"",
+        "[TEMPLATE] Key idea 2 for \"Modern Synthesis and Speciation\"",
+        "[TEMPLATE] Key idea 3 for \"Modern Synthesis and Speciation\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Modern Synthesis and Speciation\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Modern Synthesis and Speciation\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Modern Synthesis and Speciation\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Modern Synthesis and Speciation\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Modern Synthesis and Speciation\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Modern Synthesis and Speciation\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.evo.natural-selection",
+        "bio.gen.population-genetics"
+      ]
+    },
+    {
+      "id": "asset.bio.evo.human-evolution",
+      "concept_id": "bio.evo.human-evolution",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Human Evolution\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Human Evolution\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Human Evolution\"",
+        "[TEMPLATE] Key idea 2 for \"Human Evolution\"",
+        "[TEMPLATE] Key idea 3 for \"Human Evolution\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Human Evolution\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Human Evolution\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Human Evolution\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Human Evolution\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Human Evolution\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Human Evolution\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.evo.modern-synthesis-speciation"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.digestive-system",
+      "concept_id": "bio.physio.digestive-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Human Digestive System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Human Digestive System\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Human Digestive System\"",
+        "[TEMPLATE] Key idea 2 for \"Human Digestive System\"",
+        "[TEMPLATE] Key idea 3 for \"Human Digestive System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Human Digestive System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Human Digestive System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Human Digestive System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Human Digestive System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Human Digestive System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Human Digestive System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.enzymes"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.respiratory-system",
+      "concept_id": "bio.physio.respiratory-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Human Respiratory System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Human Respiratory System\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Human Respiratory System\"",
+        "[TEMPLATE] Key idea 2 for \"Human Respiratory System\"",
+        "[TEMPLATE] Key idea 3 for \"Human Respiratory System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Human Respiratory System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Human Respiratory System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Human Respiratory System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Human Respiratory System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Human Respiratory System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Human Respiratory System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-membrane-transport"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.circulatory-system",
+      "concept_id": "bio.physio.circulatory-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Human Circulatory System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Human Circulatory System\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Human Circulatory System\"",
+        "[TEMPLATE] Key idea 2 for \"Human Circulatory System\"",
+        "[TEMPLATE] Key idea 3 for \"Human Circulatory System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Human Circulatory System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Human Circulatory System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Human Circulatory System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Human Circulatory System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Human Circulatory System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Human Circulatory System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.physio.respiratory-system"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.excretory-system",
+      "concept_id": "bio.physio.excretory-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Excretory System and Osmoregulation\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Excretory System and Osmoregulation\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Excretory System and Osmoregulation\"",
+        "[TEMPLATE] Key idea 2 for \"Excretory System and Osmoregulation\"",
+        "[TEMPLATE] Key idea 3 for \"Excretory System and Osmoregulation\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Excretory System and Osmoregulation\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Excretory System and Osmoregulation\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Excretory System and Osmoregulation\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Excretory System and Osmoregulation\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Excretory System and Osmoregulation\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Excretory System and Osmoregulation\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.physio.circulatory-system"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.nervous-system",
+      "concept_id": "bio.physio.nervous-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Nervous System and Neural Control\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nervous System and Neural Control\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Nervous System and Neural Control\"",
+        "[TEMPLATE] Key idea 2 for \"Nervous System and Neural Control\"",
+        "[TEMPLATE] Key idea 3 for \"Nervous System and Neural Control\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Nervous System and Neural Control\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Nervous System and Neural Control\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Nervous System and Neural Control\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nervous System and Neural Control\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Nervous System and Neural Control\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Nervous System and Neural Control\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-signalling"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.endocrine-system",
+      "concept_id": "bio.physio.endocrine-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Endocrine System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Endocrine System\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Endocrine System\"",
+        "[TEMPLATE] Key idea 2 for \"Endocrine System\"",
+        "[TEMPLATE] Key idea 3 for \"Endocrine System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Endocrine System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Endocrine System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Endocrine System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Endocrine System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Endocrine System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Endocrine System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.physio.nervous-system",
+        "bio.cell.cell-signalling"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.musculoskeletal-system",
+      "concept_id": "bio.physio.musculoskeletal-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Locomotion and Musculoskeletal System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Locomotion and Musculoskeletal System\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Locomotion and Musculoskeletal System\"",
+        "[TEMPLATE] Key idea 2 for \"Locomotion and Musculoskeletal System\"",
+        "[TEMPLATE] Key idea 3 for \"Locomotion and Musculoskeletal System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Locomotion and Musculoskeletal System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Locomotion and Musculoskeletal System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Locomotion and Musculoskeletal System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Locomotion and Musculoskeletal System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Locomotion and Musculoskeletal System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Locomotion and Musculoskeletal System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.physio.nervous-system"
+      ]
+    },
+    {
+      "id": "asset.bio.physio.immune-system-intro",
+      "concept_id": "bio.physio.immune-system-intro",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Immune System Overview\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Immune System Overview\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Immune System Overview\"",
+        "[TEMPLATE] Key idea 2 for \"Immune System Overview\"",
+        "[TEMPLATE] Key idea 3 for \"Immune System Overview\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Immune System Overview\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Immune System Overview\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Immune System Overview\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Immune System Overview\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Immune System Overview\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Immune System Overview\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.physio.circulatory-system"
+      ]
+    },
+    {
+      "id": "asset.bio.plant.photosynthesis",
+      "concept_id": "bio.plant.photosynthesis",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Photosynthesis\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Photosynthesis\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Photosynthesis\"",
+        "[TEMPLATE] Key idea 2 for \"Photosynthesis\"",
+        "[TEMPLATE] Key idea 3 for \"Photosynthesis\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Photosynthesis\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Photosynthesis\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Photosynthesis\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Photosynthesis\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Photosynthesis\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Photosynthesis\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.chloroplast-structure",
+        "bio.mol.enzymes"
+      ]
+    },
+    {
+      "id": "asset.bio.plant.plant-respiration",
+      "concept_id": "bio.plant.plant-respiration",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Respiration in Plants\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Respiration in Plants\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Respiration in Plants\"",
+        "[TEMPLATE] Key idea 2 for \"Respiration in Plants\"",
+        "[TEMPLATE] Key idea 3 for \"Respiration in Plants\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Respiration in Plants\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Respiration in Plants\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Respiration in Plants\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Respiration in Plants\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Respiration in Plants\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Respiration in Plants\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.plant.photosynthesis",
+        "bio.cell.mitochondria-energy"
+      ]
+    },
+    {
+      "id": "asset.bio.plant.plant-water-relations",
+      "concept_id": "bio.plant.plant-water-relations",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Plant Water Relations\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Plant Water Relations\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Plant Water Relations\"",
+        "[TEMPLATE] Key idea 2 for \"Plant Water Relations\"",
+        "[TEMPLATE] Key idea 3 for \"Plant Water Relations\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Plant Water Relations\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Plant Water Relations\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Plant Water Relations\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Plant Water Relations\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Plant Water Relations\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Plant Water Relations\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.cell-membrane-transport"
+      ]
+    },
+    {
+      "id": "asset.bio.plant.mineral-nutrition",
+      "concept_id": "bio.plant.mineral-nutrition",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Mineral Nutrition in Plants\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Mineral Nutrition in Plants\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Mineral Nutrition in Plants\"",
+        "[TEMPLATE] Key idea 2 for \"Mineral Nutrition in Plants\"",
+        "[TEMPLATE] Key idea 3 for \"Mineral Nutrition in Plants\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Mineral Nutrition in Plants\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Mineral Nutrition in Plants\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Mineral Nutrition in Plants\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mineral Nutrition in Plants\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Mineral Nutrition in Plants\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Mineral Nutrition in Plants\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.plant.plant-water-relations"
+      ]
+    },
+    {
+      "id": "asset.bio.plant.plant-growth-hormones",
+      "concept_id": "bio.plant.plant-growth-hormones",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Plant Growth and Hormones\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Plant Growth and Hormones\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Plant Growth and Hormones\"",
+        "[TEMPLATE] Key idea 2 for \"Plant Growth and Hormones\"",
+        "[TEMPLATE] Key idea 3 for \"Plant Growth and Hormones\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Plant Growth and Hormones\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Plant Growth and Hormones\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Plant Growth and Hormones\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Plant Growth and Hormones\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Plant Growth and Hormones\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Plant Growth and Hormones\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.plant.mineral-nutrition"
+      ]
+    },
+    {
+      "id": "asset.bio.repro.asexual-reproduction",
+      "concept_id": "bio.repro.asexual-reproduction",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Asexual Reproduction\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Asexual Reproduction\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Asexual Reproduction\"",
+        "[TEMPLATE] Key idea 2 for \"Asexual Reproduction\"",
+        "[TEMPLATE] Key idea 3 for \"Asexual Reproduction\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Asexual Reproduction\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Asexual Reproduction\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Asexual Reproduction\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Asexual Reproduction\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Asexual Reproduction\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Asexual Reproduction\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.mitosis"
+      ]
+    },
+    {
+      "id": "asset.bio.repro.sexual-reproduction-plants",
+      "concept_id": "bio.repro.sexual-reproduction-plants",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Sexual Reproduction in Flowering Plants\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Sexual Reproduction in Flowering Plants\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Sexual Reproduction in Flowering Plants\"",
+        "[TEMPLATE] Key idea 2 for \"Sexual Reproduction in Flowering Plants\"",
+        "[TEMPLATE] Key idea 3 for \"Sexual Reproduction in Flowering Plants\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Sexual Reproduction in Flowering Plants\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Sexual Reproduction in Flowering Plants\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Sexual Reproduction in Flowering Plants\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Sexual Reproduction in Flowering Plants\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Sexual Reproduction in Flowering Plants\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Sexual Reproduction in Flowering Plants\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.meiosis",
+        "bio.plant.plant-growth-hormones"
+      ]
+    },
+    {
+      "id": "asset.bio.repro.human-reproductive-system",
+      "concept_id": "bio.repro.human-reproductive-system",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Human Reproductive System\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Human Reproductive System\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Human Reproductive System\"",
+        "[TEMPLATE] Key idea 2 for \"Human Reproductive System\"",
+        "[TEMPLATE] Key idea 3 for \"Human Reproductive System\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Human Reproductive System\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Human Reproductive System\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Human Reproductive System\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Human Reproductive System\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Human Reproductive System\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Human Reproductive System\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.meiosis",
+        "bio.physio.endocrine-system"
+      ]
+    },
+    {
+      "id": "asset.bio.repro.fertilisation-development",
+      "concept_id": "bio.repro.fertilisation-development",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Fertilisation and Embryonic Development\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Fertilisation and Embryonic Development\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Fertilisation and Embryonic Development\"",
+        "[TEMPLATE] Key idea 2 for \"Fertilisation and Embryonic Development\"",
+        "[TEMPLATE] Key idea 3 for \"Fertilisation and Embryonic Development\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Fertilisation and Embryonic Development\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Fertilisation and Embryonic Development\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Fertilisation and Embryonic Development\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Fertilisation and Embryonic Development\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Fertilisation and Embryonic Development\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Fertilisation and Embryonic Development\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.repro.human-reproductive-system"
+      ]
+    },
+    {
+      "id": "asset.bio.repro.reproductive-health",
+      "concept_id": "bio.repro.reproductive-health",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Reproductive Health and Contraception\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Reproductive Health and Contraception\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Reproductive Health and Contraception\"",
+        "[TEMPLATE] Key idea 2 for \"Reproductive Health and Contraception\"",
+        "[TEMPLATE] Key idea 3 for \"Reproductive Health and Contraception\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Reproductive Health and Contraception\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Reproductive Health and Contraception\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Reproductive Health and Contraception\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Reproductive Health and Contraception\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Reproductive Health and Contraception\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Reproductive Health and Contraception\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.repro.fertilisation-development"
+      ]
+    },
+    {
+      "id": "asset.bio.dev.gametogenesis-fertilisation-dev",
+      "concept_id": "bio.dev.gametogenesis-fertilisation-dev",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Fundamentals of Animal Development\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Fundamentals of Animal Development\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Fundamentals of Animal Development\"",
+        "[TEMPLATE] Key idea 2 for \"Fundamentals of Animal Development\"",
+        "[TEMPLATE] Key idea 3 for \"Fundamentals of Animal Development\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Fundamentals of Animal Development\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Fundamentals of Animal Development\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Fundamentals of Animal Development\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Fundamentals of Animal Development\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Fundamentals of Animal Development\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Fundamentals of Animal Development\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.repro.fertilisation-development"
+      ]
+    },
+    {
+      "id": "asset.bio.dev.morphogenesis-differentiation",
+      "concept_id": "bio.dev.morphogenesis-differentiation",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Morphogenesis and Cell Differentiation\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Morphogenesis and Cell Differentiation\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Morphogenesis and Cell Differentiation\"",
+        "[TEMPLATE] Key idea 2 for \"Morphogenesis and Cell Differentiation\"",
+        "[TEMPLATE] Key idea 3 for \"Morphogenesis and Cell Differentiation\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Morphogenesis and Cell Differentiation\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Morphogenesis and Cell Differentiation\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Morphogenesis and Cell Differentiation\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Morphogenesis and Cell Differentiation\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Morphogenesis and Cell Differentiation\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Morphogenesis and Cell Differentiation\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.dev.gametogenesis-fertilisation-dev",
+        "bio.mol.gene-regulation"
+      ]
+    },
+    {
+      "id": "asset.bio.dev.stem-cells-regeneration",
+      "concept_id": "bio.dev.stem-cells-regeneration",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Stem Cells and Regeneration\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Stem Cells and Regeneration\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Stem Cells and Regeneration\"",
+        "[TEMPLATE] Key idea 2 for \"Stem Cells and Regeneration\"",
+        "[TEMPLATE] Key idea 3 for \"Stem Cells and Regeneration\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Stem Cells and Regeneration\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Stem Cells and Regeneration\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Stem Cells and Regeneration\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Stem Cells and Regeneration\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "evaluate",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Stem Cells and Regeneration\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Stem Cells and Regeneration\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.dev.morphogenesis-differentiation"
+      ]
+    },
+    {
+      "id": "asset.bio.eco.organism-environment",
+      "concept_id": "bio.eco.organism-environment",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Organisms and their Environment\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Organisms and their Environment\" pending authoring (target depth: foundational).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Organisms and their Environment\"",
+        "[TEMPLATE] Key idea 2 for \"Organisms and their Environment\"",
+        "[TEMPLATE] Key idea 3 for \"Organisms and their Environment\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Organisms and their Environment\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Organisms and their Environment\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Organisms and their Environment\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Organisms and their Environment\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Organisms and their Environment\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Organisms and their Environment\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.found.biomes-levels-of-organisation"
+      ]
+    },
+    {
+      "id": "asset.bio.eco.population-ecology",
+      "concept_id": "bio.eco.population-ecology",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Population Ecology\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Population Ecology\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Population Ecology\"",
+        "[TEMPLATE] Key idea 2 for \"Population Ecology\"",
+        "[TEMPLATE] Key idea 3 for \"Population Ecology\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Population Ecology\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Population Ecology\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Population Ecology\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Population Ecology\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Population Ecology\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Population Ecology\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.eco.organism-environment"
+      ]
+    },
+    {
+      "id": "asset.bio.eco.ecosystem-structure-function",
+      "concept_id": "bio.eco.ecosystem-structure-function",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Ecosystem Structure and Function\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ecosystem Structure and Function\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Ecosystem Structure and Function\"",
+        "[TEMPLATE] Key idea 2 for \"Ecosystem Structure and Function\"",
+        "[TEMPLATE] Key idea 3 for \"Ecosystem Structure and Function\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Ecosystem Structure and Function\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Ecosystem Structure and Function\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Ecosystem Structure and Function\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ecosystem Structure and Function\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Ecosystem Structure and Function\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Ecosystem Structure and Function\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.eco.population-ecology"
+      ]
+    },
+    {
+      "id": "asset.bio.eco.nutrient-cycling",
+      "concept_id": "bio.eco.nutrient-cycling",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Nutrient Cycling and Succession\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nutrient Cycling and Succession\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Nutrient Cycling and Succession\"",
+        "[TEMPLATE] Key idea 2 for \"Nutrient Cycling and Succession\"",
+        "[TEMPLATE] Key idea 3 for \"Nutrient Cycling and Succession\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Nutrient Cycling and Succession\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Nutrient Cycling and Succession\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Nutrient Cycling and Succession\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nutrient Cycling and Succession\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Nutrient Cycling and Succession\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Nutrient Cycling and Succession\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.eco.ecosystem-structure-function"
+      ]
+    },
+    {
+      "id": "asset.bio.eco.biodiversity-conservation",
+      "concept_id": "bio.eco.biodiversity-conservation",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Biodiversity and Conservation\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Biodiversity and Conservation\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Biodiversity and Conservation\"",
+        "[TEMPLATE] Key idea 2 for \"Biodiversity and Conservation\"",
+        "[TEMPLATE] Key idea 3 for \"Biodiversity and Conservation\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Biodiversity and Conservation\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Biodiversity and Conservation\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Biodiversity and Conservation\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Biodiversity and Conservation\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "evaluate",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Biodiversity and Conservation\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Biodiversity and Conservation\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.eco.nutrient-cycling"
+      ]
+    },
+    {
+      "id": "asset.bio.eco.environmental-issues",
+      "concept_id": "bio.eco.environmental-issues",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Environmental Issues and Pollution\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Environmental Issues and Pollution\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Environmental Issues and Pollution\"",
+        "[TEMPLATE] Key idea 2 for \"Environmental Issues and Pollution\"",
+        "[TEMPLATE] Key idea 3 for \"Environmental Issues and Pollution\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Environmental Issues and Pollution\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Environmental Issues and Pollution\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Environmental Issues and Pollution\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Environmental Issues and Pollution\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "evaluate",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Environmental Issues and Pollution\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Environmental Issues and Pollution\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.eco.biodiversity-conservation"
+      ]
+    },
+    {
+      "id": "asset.bio.micro.microbial-diversity",
+      "concept_id": "bio.micro.microbial-diversity",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Microbial Diversity\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Microbial Diversity\" pending authoring (target depth: developing).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Microbial Diversity\"",
+        "[TEMPLATE] Key idea 2 for \"Microbial Diversity\"",
+        "[TEMPLATE] Key idea 3 for \"Microbial Diversity\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Microbial Diversity\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Microbial Diversity\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Microbial Diversity\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Microbial Diversity\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Microbial Diversity\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Microbial Diversity\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.cell.prokaryotic-cell",
+        "bio.found.viruses-viroids-lichens"
+      ]
+    },
+    {
+      "id": "asset.bio.micro.microbial-growth-culture",
+      "concept_id": "bio.micro.microbial-growth-culture",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Microbial Growth and Culture Techniques\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Microbial Growth and Culture Techniques\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Microbial Growth and Culture Techniques\"",
+        "[TEMPLATE] Key idea 2 for \"Microbial Growth and Culture Techniques\"",
+        "[TEMPLATE] Key idea 3 for \"Microbial Growth and Culture Techniques\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Microbial Growth and Culture Techniques\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Microbial Growth and Culture Techniques\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Microbial Growth and Culture Techniques\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Microbial Growth and Culture Techniques\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Microbial Growth and Culture Techniques\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Microbial Growth and Culture Techniques\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.micro.microbial-diversity"
+      ]
+    },
+    {
+      "id": "asset.bio.micro.microbes-in-human-welfare",
+      "concept_id": "bio.micro.microbes-in-human-welfare",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Microbes in Human Welfare\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Microbes in Human Welfare\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Microbes in Human Welfare\"",
+        "[TEMPLATE] Key idea 2 for \"Microbes in Human Welfare\"",
+        "[TEMPLATE] Key idea 3 for \"Microbes in Human Welfare\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Microbes in Human Welfare\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Microbes in Human Welfare\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Microbes in Human Welfare\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Microbes in Human Welfare\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Microbes in Human Welfare\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Microbes in Human Welfare\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.micro.microbial-growth-culture"
+      ]
+    },
+    {
+      "id": "asset.bio.micro.pathogenic-microbes",
+      "concept_id": "bio.micro.pathogenic-microbes",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Pathogenic Microorganisms and Disease\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Pathogenic Microorganisms and Disease\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Pathogenic Microorganisms and Disease\"",
+        "[TEMPLATE] Key idea 2 for \"Pathogenic Microorganisms and Disease\"",
+        "[TEMPLATE] Key idea 3 for \"Pathogenic Microorganisms and Disease\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Pathogenic Microorganisms and Disease\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Pathogenic Microorganisms and Disease\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Pathogenic Microorganisms and Disease\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Pathogenic Microorganisms and Disease\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Pathogenic Microorganisms and Disease\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Pathogenic Microorganisms and Disease\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.micro.microbial-diversity"
+      ]
+    },
+    {
+      "id": "asset.bio.immuno.innate-adaptive-immunity",
+      "concept_id": "bio.immuno.innate-adaptive-immunity",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Innate and Adaptive Immunity\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Innate and Adaptive Immunity\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Innate and Adaptive Immunity\"",
+        "[TEMPLATE] Key idea 2 for \"Innate and Adaptive Immunity\"",
+        "[TEMPLATE] Key idea 3 for \"Innate and Adaptive Immunity\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Innate and Adaptive Immunity\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Innate and Adaptive Immunity\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Innate and Adaptive Immunity\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Innate and Adaptive Immunity\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Innate and Adaptive Immunity\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Innate and Adaptive Immunity\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.physio.immune-system-intro",
+        "bio.micro.pathogenic-microbes"
+      ]
+    },
+    {
+      "id": "asset.bio.immuno.antibody-structure-function",
+      "concept_id": "bio.immuno.antibody-structure-function",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Antibody Structure and Function\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Antibody Structure and Function\" pending authoring (target depth: advanced).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Antibody Structure and Function\"",
+        "[TEMPLATE] Key idea 2 for \"Antibody Structure and Function\"",
+        "[TEMPLATE] Key idea 3 for \"Antibody Structure and Function\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Antibody Structure and Function\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Antibody Structure and Function\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Antibody Structure and Function\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Antibody Structure and Function\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Antibody Structure and Function\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Antibody Structure and Function\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.immuno.innate-adaptive-immunity"
+      ]
+    },
+    {
+      "id": "asset.bio.immuno.vaccination-immunisation",
+      "concept_id": "bio.immuno.vaccination-immunisation",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Vaccination and Immunisation\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Vaccination and Immunisation\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Vaccination and Immunisation\"",
+        "[TEMPLATE] Key idea 2 for \"Vaccination and Immunisation\"",
+        "[TEMPLATE] Key idea 3 for \"Vaccination and Immunisation\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Vaccination and Immunisation\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Vaccination and Immunisation\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Vaccination and Immunisation\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Vaccination and Immunisation\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Vaccination and Immunisation\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Vaccination and Immunisation\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.immuno.antibody-structure-function"
+      ]
+    },
+    {
+      "id": "asset.bio.immuno.immune-disorders",
+      "concept_id": "bio.immuno.immune-disorders",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Immune Disorders\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Immune Disorders\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Immune Disorders\"",
+        "[TEMPLATE] Key idea 2 for \"Immune Disorders\"",
+        "[TEMPLATE] Key idea 3 for \"Immune Disorders\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Immune Disorders\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Immune Disorders\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Immune Disorders\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Immune Disorders\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "evaluate",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Immune Disorders\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Immune Disorders\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.immuno.vaccination-immunisation"
+      ]
+    },
+    {
+      "id": "asset.bio.biotech.biotech-principles",
+      "concept_id": "bio.biotech.biotech-principles",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Principles of Biotechnology\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Principles of Biotechnology\" pending authoring (target depth: proficient).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Principles of Biotechnology\"",
+        "[TEMPLATE] Key idea 2 for \"Principles of Biotechnology\"",
+        "[TEMPLATE] Key idea 3 for \"Principles of Biotechnology\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Principles of Biotechnology\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Principles of Biotechnology\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Principles of Biotechnology\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Principles of Biotechnology\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Principles of Biotechnology\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Principles of Biotechnology\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.gen.genetic-engineering"
+      ]
+    },
+    {
+      "id": "asset.bio.biotech.biotech-process-applications",
+      "concept_id": "bio.biotech.biotech-process-applications",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Biotechnology Process Applications\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Biotechnology Process Applications\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Biotechnology Process Applications\"",
+        "[TEMPLATE] Key idea 2 for \"Biotechnology Process Applications\"",
+        "[TEMPLATE] Key idea 3 for \"Biotechnology Process Applications\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Biotechnology Process Applications\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Biotechnology Process Applications\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Biotechnology Process Applications\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Biotechnology Process Applications\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Biotechnology Process Applications\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Biotechnology Process Applications\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.biotech.biotech-principles"
+      ]
+    },
+    {
+      "id": "asset.bio.biotech.genomics-proteomics",
+      "concept_id": "bio.biotech.genomics-proteomics",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Genomics and Proteomics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Genomics and Proteomics\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Genomics and Proteomics\"",
+        "[TEMPLATE] Key idea 2 for \"Genomics and Proteomics\"",
+        "[TEMPLATE] Key idea 3 for \"Genomics and Proteomics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Genomics and Proteomics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Genomics and Proteomics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Genomics and Proteomics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Genomics and Proteomics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Genomics and Proteomics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Genomics and Proteomics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.biotech.biotech-process-applications"
+      ]
+    },
+    {
+      "id": "asset.bio.biotech.crispr-genome-editing",
+      "concept_id": "bio.biotech.crispr-genome-editing",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"CRISPR and Genome Editing\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"CRISPR and Genome Editing\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"CRISPR and Genome Editing\"",
+        "[TEMPLATE] Key idea 2 for \"CRISPR and Genome Editing\"",
+        "[TEMPLATE] Key idea 3 for \"CRISPR and Genome Editing\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"CRISPR and Genome Editing\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"CRISPR and Genome Editing\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"CRISPR and Genome Editing\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"CRISPR and Genome Editing\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "evaluate",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"CRISPR and Genome Editing\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"CRISPR and Genome Editing\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.biotech.genomics-proteomics"
+      ]
+    },
+    {
+      "id": "asset.bio.bioinfo.bioinformatics-intro",
+      "concept_id": "bio.bioinfo.bioinformatics-intro",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Introduction to Bioinformatics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Introduction to Bioinformatics\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Introduction to Bioinformatics\"",
+        "[TEMPLATE] Key idea 2 for \"Introduction to Bioinformatics\"",
+        "[TEMPLATE] Key idea 3 for \"Introduction to Bioinformatics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Introduction to Bioinformatics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Introduction to Bioinformatics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Introduction to Bioinformatics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Introduction to Bioinformatics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Introduction to Bioinformatics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Introduction to Bioinformatics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.biotech.genomics-proteomics"
+      ]
+    },
+    {
+      "id": "asset.bio.bioinfo.sequence-alignment",
+      "concept_id": "bio.bioinfo.sequence-alignment",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to apply \"Sequence Alignment\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Sequence Alignment\" pending authoring (target depth: expert).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Sequence Alignment\"",
+        "[TEMPLATE] Key idea 2 for \"Sequence Alignment\"",
+        "[TEMPLATE] Key idea 3 for \"Sequence Alignment\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Sequence Alignment\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Sequence Alignment\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Sequence Alignment\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Sequence Alignment\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "apply",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Sequence Alignment\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Sequence Alignment\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.bioinfo.bioinformatics-intro"
+      ]
+    },
+    {
+      "id": "asset.bio.bioinfo.phylogenetics-computational",
+      "concept_id": "bio.bioinfo.phylogenetics-computational",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Computational Phylogenetics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Computational Phylogenetics\" pending authoring (target depth: research).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Computational Phylogenetics\"",
+        "[TEMPLATE] Key idea 2 for \"Computational Phylogenetics\"",
+        "[TEMPLATE] Key idea 3 for \"Computational Phylogenetics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Computational Phylogenetics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Computational Phylogenetics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Computational Phylogenetics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Computational Phylogenetics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for research-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Computational Phylogenetics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Computational Phylogenetics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.bioinfo.sequence-alignment",
+        "bio.evo.modern-synthesis-speciation"
+      ]
+    },
+    {
+      "id": "asset.bio.bioinfo.structural-bioinformatics",
+      "concept_id": "bio.bioinfo.structural-bioinformatics",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Structural Bioinformatics\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Structural Bioinformatics\" pending authoring (target depth: research).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Structural Bioinformatics\"",
+        "[TEMPLATE] Key idea 2 for \"Structural Bioinformatics\"",
+        "[TEMPLATE] Key idea 3 for \"Structural Bioinformatics\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Structural Bioinformatics\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Structural Bioinformatics\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Structural Bioinformatics\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Structural Bioinformatics\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for research-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Structural Bioinformatics\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Structural Bioinformatics\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.bioinfo.sequence-alignment",
+        "bio.mol.proteins-structure"
+      ]
+    },
+    {
+      "id": "asset.bio.sys.systems-biology-intro",
+      "concept_id": "bio.sys.systems-biology-intro",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to explain \"Introduction to Systems Biology\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Introduction to Systems Biology\" pending authoring (target depth: research).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Introduction to Systems Biology\"",
+        "[TEMPLATE] Key idea 2 for \"Introduction to Systems Biology\"",
+        "[TEMPLATE] Key idea 3 for \"Introduction to Systems Biology\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Introduction to Systems Biology\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Introduction to Systems Biology\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Introduction to Systems Biology\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Introduction to Systems Biology\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for research-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "understand",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Introduction to Systems Biology\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Introduction to Systems Biology\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.mol.gene-regulation",
+        "bio.bioinfo.bioinformatics-intro"
+      ]
+    },
+    {
+      "id": "asset.bio.sys.gene-regulatory-networks",
+      "concept_id": "bio.sys.gene-regulatory-networks",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Gene Regulatory Networks\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Gene Regulatory Networks\" pending authoring (target depth: research).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Gene Regulatory Networks\"",
+        "[TEMPLATE] Key idea 2 for \"Gene Regulatory Networks\"",
+        "[TEMPLATE] Key idea 3 for \"Gene Regulatory Networks\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Gene Regulatory Networks\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Gene Regulatory Networks\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Gene Regulatory Networks\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Gene Regulatory Networks\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for research-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Gene Regulatory Networks\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Gene Regulatory Networks\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.sys.systems-biology-intro",
+        "bio.mol.gene-regulation"
+      ]
+    },
+    {
+      "id": "asset.bio.sys.metabolic-network-modelling",
+      "concept_id": "bio.sys.metabolic-network-modelling",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Metabolic Network Modelling\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Metabolic Network Modelling\" pending authoring (target depth: research).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Metabolic Network Modelling\"",
+        "[TEMPLATE] Key idea 2 for \"Metabolic Network Modelling\"",
+        "[TEMPLATE] Key idea 3 for \"Metabolic Network Modelling\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Metabolic Network Modelling\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Metabolic Network Modelling\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Metabolic Network Modelling\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Metabolic Network Modelling\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for research-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "analyze",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Metabolic Network Modelling\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Metabolic Network Modelling\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.sys.gene-regulatory-networks",
+        "bio.plant.plant-respiration"
+      ]
+    },
+    {
+      "id": "asset.bio.sys.synthetic-biology",
+      "concept_id": "bio.sys.synthetic-biology",
+      "version": "1.0.0",
+      "status": "placeholder",
+      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Synthetic Biology\".",
+      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Synthetic Biology\" pending authoring (target depth: research).",
+      "key_ideas": [
+        "[TEMPLATE] Key idea 1 for \"Synthetic Biology\"",
+        "[TEMPLATE] Key idea 2 for \"Synthetic Biology\"",
+        "[TEMPLATE] Key idea 3 for \"Synthetic Biology\""
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "[TEMPLATE] Common misconception about \"Synthetic Biology\" \u2014 to be authored.",
+          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "[TEMPLATE] Visual/diagram suggestion for \"Synthetic Biology\""
+      ],
+      "worked_example_blueprint": {
+        "setup": "[TEMPLATE] Worked example setup for \"Synthetic Biology\"",
+        "steps": [
+          "[TEMPLATE] Step 1",
+          "[TEMPLATE] Step 2"
+        ],
+        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Synthetic Biology\""
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "[TEMPLATE] practice item type"
+        ],
+        "difficulty_progression": "[TEMPLATE] progression appropriate for research-level practice",
+        "suggested_count": 5
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "[TEMPLATE] assessment format"
+        ],
+        "bloom_alignment": "evaluate",
+        "mastery_signal": "[TEMPLATE] mastery signal for \"Synthetic Biology\""
+      },
+      "real_world_applications": [
+        "[TEMPLATE] real-world application of \"Synthetic Biology\""
+      ],
+      "prerequisite_review_triggers": [
+        "bio.sys.metabolic-network-modelling",
+        "bio.biotech.crispr-genome-editing"
+      ]
+    }
+  ]
+}
