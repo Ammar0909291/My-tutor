@@ -1,0 +1,1474 @@
+{
+  "name": "Biology Knowledge Graph",
+  "version": "1.0.0",
+  "status": "production",
+  "build_date": "2026-06-29",
+  "concepts": [
+    {
+      "id": "bio.found.what-is-biology",
+      "name": "What is Biology",
+      "requires": [],
+      "unlocks": [
+        "bio.found.characteristics-of-life"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Biology as the science of life; major branches \u2014 botany, zoology, microbiology, physiology, ecology, genetics; scope and relevance of biology to medicine, agriculture and industry."
+    },
+    {
+      "id": "bio.found.characteristics-of-life",
+      "name": "Characteristics of Living Organisms",
+      "requires": [
+        "bio.found.what-is-biology"
+      ],
+      "unlocks": [
+        "bio.found.biomes-levels-of-organisation",
+        "bio.found.classification-need",
+        "bio.found.microscopy-basics"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Growth, reproduction, metabolism, cellular organisation, response to stimuli, homeostasis and evolution as the defining properties that distinguish living from non-living matter."
+    },
+    {
+      "id": "bio.found.classification-need",
+      "name": "Need for Classification",
+      "requires": [
+        "bio.found.characteristics-of-life"
+      ],
+      "unlocks": [
+        "bio.found.binomial-nomenclature",
+        "bio.found.five-kingdom"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Diversity of life and the rationale for systematic classification; identification, nomenclature and taxonomic hierarchy \u2014 kingdom to species."
+    },
+    {
+      "id": "bio.found.five-kingdom",
+      "name": "Five Kingdom Classification",
+      "requires": [
+        "bio.found.classification-need"
+      ],
+      "unlocks": [
+        "bio.found.viruses-viroids-lichens"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Whittaker's five-kingdom system \u2014 Monera, Protista, Fungi, Plantae, Animalia; basis of classification \u2014 cell structure, body organisation, mode of nutrition, reproduction."
+    },
+    {
+      "id": "bio.found.binomial-nomenclature",
+      "name": "Binomial Nomenclature",
+      "requires": [
+        "bio.found.classification-need"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Linnaean binomial system; rules of nomenclature \u2014 genus and species, italicisation, author citation; ICBN/ICZN conventions."
+    },
+    {
+      "id": "bio.found.viruses-viroids-lichens",
+      "name": "Viruses, Viroids and Lichens",
+      "requires": [
+        "bio.found.five-kingdom"
+      ],
+      "unlocks": [
+        "bio.micro.microbial-diversity"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Acellular nature of viruses; structure of a typical virus \u2014 capsid, genome; viroids as naked infectious RNA; lichens as symbiotic associations of algae and fungi."
+    },
+    {
+      "id": "bio.found.microscopy-basics",
+      "name": "Microscopy and Laboratory Techniques",
+      "requires": [
+        "bio.found.characteristics-of-life"
+      ],
+      "unlocks": [
+        "bio.cell.cell-theory"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Light vs electron microscopy; magnification and resolution; staining techniques; safe handling of laboratory glassware and specimens."
+    },
+    {
+      "id": "bio.found.biomes-levels-of-organisation",
+      "name": "Levels of Biological Organisation",
+      "requires": [
+        "bio.found.characteristics-of-life"
+      ],
+      "unlocks": [
+        "bio.eco.organism-environment"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Hierarchy from molecules to biosphere \u2014 cell, tissue, organ, organ system, organism, population, community, ecosystem, biome, biosphere."
+    },
+    {
+      "id": "bio.cell.cell-theory",
+      "name": "Cell Theory",
+      "requires": [
+        "bio.found.microscopy-basics"
+      ],
+      "unlocks": [
+        "bio.cell.eukaryotic-cell",
+        "bio.cell.prokaryotic-cell"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Historical development of cell theory \u2014 Schleiden, Schwann, Virchow; the cell as the basic structural and functional unit of life."
+    },
+    {
+      "id": "bio.cell.prokaryotic-cell",
+      "name": "Prokaryotic Cell Structure",
+      "requires": [
+        "bio.cell.cell-theory"
+      ],
+      "unlocks": [
+        "bio.micro.microbial-diversity"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Cell wall, plasma membrane, nucleoid, ribosomes, plasmids, flagella and pili in bacteria; absence of membrane-bound organelles."
+    },
+    {
+      "id": "bio.cell.eukaryotic-cell",
+      "name": "Eukaryotic Cell Structure",
+      "requires": [
+        "bio.cell.cell-theory"
+      ],
+      "unlocks": [
+        "bio.cell.cell-membrane-transport",
+        "bio.cell.chloroplast-structure",
+        "bio.cell.endomembrane-system",
+        "bio.cell.mitochondria-energy",
+        "bio.cell.nucleus-chromosomes",
+        "bio.mol.biomolecule-types"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Plant vs animal cell comparison; plasma membrane, cytoplasm, membrane-bound nucleus and organelles; compartmentalisation as an organisational principle."
+    },
+    {
+      "id": "bio.cell.cell-membrane-transport",
+      "name": "Cell Membrane and Transport",
+      "requires": [
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [
+        "bio.cell.cell-signalling",
+        "bio.cell.cytoskeleton",
+        "bio.physio.respiratory-system",
+        "bio.plant.plant-water-relations"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Fluid mosaic model of the plasma membrane; passive transport \u2014 diffusion, osmosis, facilitated diffusion; active transport and the sodium-potassium pump; endocytosis and exocytosis."
+    },
+    {
+      "id": "bio.cell.nucleus-chromosomes",
+      "name": "Nucleus and Chromosomes",
+      "requires": [
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [
+        "bio.cell.cell-cycle"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Nuclear envelope, nucleolus, chromatin; chromosome structure \u2014 centromere, telomere, chromatids; karyotype and chromosome number."
+    },
+    {
+      "id": "bio.cell.mitochondria-energy",
+      "name": "Mitochondria and Energy Organelles",
+      "requires": [
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [
+        "bio.plant.plant-respiration"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Mitochondrial structure \u2014 outer/inner membrane, cristae, matrix; mitochondria as the site of aerobic respiration; semi-autonomous nature."
+    },
+    {
+      "id": "bio.cell.chloroplast-structure",
+      "name": "Chloroplast Structure",
+      "requires": [
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [
+        "bio.plant.photosynthesis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Double membrane, thylakoids, grana, stroma; chlorophyll location; chloroplast as the site of photosynthesis; endosymbiotic origin."
+    },
+    {
+      "id": "bio.cell.endomembrane-system",
+      "name": "Endomembrane System",
+      "requires": [
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [
+        "bio.cell.cytoskeleton"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Endoplasmic reticulum (smooth and rough), Golgi apparatus, lysosomes, vacuoles; protein and lipid synthesis, modification, packaging and secretion pathways."
+    },
+    {
+      "id": "bio.cell.cytoskeleton",
+      "name": "Cytoskeleton and Cell Motility",
+      "requires": [
+        "bio.cell.cell-membrane-transport",
+        "bio.cell.endomembrane-system"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Microfilaments, microtubules and intermediate filaments; roles in shape, intracellular transport, cell division and motility \u2014 cilia and flagella."
+    },
+    {
+      "id": "bio.cell.cell-cycle",
+      "name": "The Cell Cycle",
+      "requires": [
+        "bio.cell.nucleus-chromosomes"
+      ],
+      "unlocks": [
+        "bio.cell.mitosis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Interphase (G1, S, G2) and M phase; checkpoints and cyclin-CDK regulation; significance of regulated progression for growth and genome stability."
+    },
+    {
+      "id": "bio.cell.mitosis",
+      "name": "Mitosis",
+      "requires": [
+        "bio.cell.cell-cycle"
+      ],
+      "unlocks": [
+        "bio.cell.meiosis",
+        "bio.repro.asexual-reproduction"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Stages \u2014 prophase, metaphase, anaphase, telophase; spindle apparatus; significance in growth, repair and asexual reproduction."
+    },
+    {
+      "id": "bio.cell.meiosis",
+      "name": "Meiosis",
+      "requires": [
+        "bio.cell.mitosis"
+      ],
+      "unlocks": [
+        "bio.gen.chromosomal-theory-linkage",
+        "bio.gen.mendelian-genetics",
+        "bio.repro.human-reproductive-system",
+        "bio.repro.sexual-reproduction-plants"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Meiosis I and II; synapsis, crossing over, independent assortment; reductional vs equational division; significance for genetic variation and gamete formation."
+    },
+    {
+      "id": "bio.cell.cell-signalling",
+      "name": "Cell Signalling",
+      "requires": [
+        "bio.cell.cell-membrane-transport"
+      ],
+      "unlocks": [
+        "bio.physio.endocrine-system",
+        "bio.physio.nervous-system"
+      ],
+      "cross_links": [
+        "bio.physio.endocrine-system"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Signal molecules and receptors; signal transduction pathways; second messengers; paracrine, endocrine and autocrine signalling."
+    },
+    {
+      "id": "bio.mol.biomolecule-types",
+      "name": "Types of Biomolecules",
+      "requires": [
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [
+        "bio.evo.origin-of-life",
+        "bio.mol.carbohydrates-lipids",
+        "bio.mol.nucleic-acid-structure",
+        "bio.mol.proteins-structure"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Macromolecules vs micromolecules; carbohydrates, proteins, lipids, nucleic acids as the four major classes; elemental composition of living matter."
+    },
+    {
+      "id": "bio.mol.carbohydrates-lipids",
+      "name": "Carbohydrates and Lipids",
+      "requires": [
+        "bio.mol.biomolecule-types"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Mono-, di- and polysaccharides; structural vs storage carbohydrates; fatty acids, triglycerides, phospholipids and steroids; roles in energy storage and membranes."
+    },
+    {
+      "id": "bio.mol.proteins-structure",
+      "name": "Proteins and Protein Structure",
+      "requires": [
+        "bio.mol.biomolecule-types"
+      ],
+      "unlocks": [
+        "bio.bioinfo.structural-bioinformatics",
+        "bio.mol.enzymes"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Amino acids and peptide bonds; primary, secondary, tertiary and quaternary structure; denaturation; structure-function relationship in enzymes and structural proteins."
+    },
+    {
+      "id": "bio.mol.enzymes",
+      "name": "Enzymes and Enzyme Kinetics",
+      "requires": [
+        "bio.mol.proteins-structure"
+      ],
+      "unlocks": [
+        "bio.gen.genetic-engineering",
+        "bio.mol.dna-replication",
+        "bio.physio.digestive-system",
+        "bio.plant.photosynthesis"
+      ],
+      "cross_links": [
+        "bio.plant.photosynthesis"
+      ],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Enzymes as biological catalysts; active site, substrate specificity, induced fit; factors affecting enzyme activity \u2014 temperature, pH, concentration; competitive and non-competitive inhibition."
+    },
+    {
+      "id": "bio.mol.nucleic-acid-structure",
+      "name": "Nucleic Acid Structure",
+      "requires": [
+        "bio.mol.biomolecule-types"
+      ],
+      "unlocks": [
+        "bio.mol.dna-replication"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Nucleotide composition \u2014 base, sugar, phosphate; DNA double helix (Watson-Crick model); RNA types \u2014 mRNA, tRNA, rRNA; base pairing rules."
+    },
+    {
+      "id": "bio.mol.dna-replication",
+      "name": "DNA Replication",
+      "requires": [
+        "bio.mol.nucleic-acid-structure",
+        "bio.mol.enzymes"
+      ],
+      "unlocks": [
+        "bio.mol.transcription"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Semiconservative replication; helicase, DNA polymerase, primase, ligase; leading and lagging strands, Okazaki fragments; origin of replication."
+    },
+    {
+      "id": "bio.mol.transcription",
+      "name": "Transcription",
+      "requires": [
+        "bio.mol.dna-replication"
+      ],
+      "unlocks": [
+        "bio.mol.translation-genetic-code"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "RNA polymerase and promoter recognition; initiation, elongation, termination; post-transcriptional processing \u2014 splicing, capping, polyadenylation in eukaryotes."
+    },
+    {
+      "id": "bio.mol.translation-genetic-code",
+      "name": "Translation and the Genetic Code",
+      "requires": [
+        "bio.mol.transcription"
+      ],
+      "unlocks": [
+        "bio.gen.mutations",
+        "bio.mol.gene-regulation"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Codons and the genetic code \u2014 degeneracy, universality; ribosome structure and function; initiation, elongation, termination of translation; role of tRNA and aminoacyl synthetases."
+    },
+    {
+      "id": "bio.mol.gene-regulation",
+      "name": "Regulation of Gene Expression",
+      "requires": [
+        "bio.mol.translation-genetic-code"
+      ],
+      "unlocks": [
+        "bio.dev.morphogenesis-differentiation",
+        "bio.sys.gene-regulatory-networks",
+        "bio.sys.systems-biology-intro"
+      ],
+      "cross_links": [
+        "bio.dev.morphogenesis-differentiation"
+      ],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Lac operon as a model of prokaryotic regulation; eukaryotic transcription factors, enhancers and silencers; epigenetic regulation \u2014 methylation, histone modification."
+    },
+    {
+      "id": "bio.gen.mendelian-genetics",
+      "name": "Mendelian Genetics",
+      "requires": [
+        "bio.cell.meiosis"
+      ],
+      "unlocks": [
+        "bio.gen.gene-interactions"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 4,
+      "description": "Mendel's laws of inheritance \u2014 dominance, segregation, independent assortment; monohybrid and dihybrid crosses; Punnett squares; test cross."
+    },
+    {
+      "id": "bio.gen.gene-interactions",
+      "name": "Gene Interactions and Extensions of Mendelism",
+      "requires": [
+        "bio.gen.mendelian-genetics"
+      ],
+      "unlocks": [
+        "bio.gen.chromosomal-theory-linkage"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Incomplete dominance, codominance, multiple alleles, epistasis, polygenic inheritance; deviations from simple Mendelian ratios."
+    },
+    {
+      "id": "bio.gen.chromosomal-theory-linkage",
+      "name": "Chromosomal Theory and Linkage",
+      "requires": [
+        "bio.gen.gene-interactions",
+        "bio.cell.meiosis"
+      ],
+      "unlocks": [
+        "bio.gen.mutations",
+        "bio.gen.pedigree-human-genetics"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Chromosomal basis of inheritance; linkage and recombination frequency; gene mapping concepts; sex-linked inheritance and sex determination systems."
+    },
+    {
+      "id": "bio.gen.pedigree-human-genetics",
+      "name": "Pedigree Analysis and Human Genetic Disorders",
+      "requires": [
+        "bio.gen.chromosomal-theory-linkage"
+      ],
+      "unlocks": [
+        "bio.gen.population-genetics"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Pedigree chart conventions; autosomal and sex-linked disorders \u2014 haemophilia, colour blindness, thalassemia, sickle cell anaemia; chromosomal disorders \u2014 Down, Turner, Klinefelter syndromes."
+    },
+    {
+      "id": "bio.gen.mutations",
+      "name": "Mutations",
+      "requires": [
+        "bio.mol.translation-genetic-code",
+        "bio.gen.chromosomal-theory-linkage"
+      ],
+      "unlocks": [
+        "bio.gen.genetic-engineering",
+        "bio.gen.population-genetics"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Point mutations \u2014 substitution, insertion, deletion; frameshift vs non-frameshift effects; chromosomal mutations \u2014 duplication, deletion, inversion, translocation; mutagens."
+    },
+    {
+      "id": "bio.gen.population-genetics",
+      "name": "Population Genetics",
+      "requires": [
+        "bio.gen.pedigree-human-genetics",
+        "bio.gen.mutations"
+      ],
+      "unlocks": [
+        "bio.evo.modern-synthesis-speciation"
+      ],
+      "cross_links": [
+        "bio.evo.natural-selection"
+      ],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Allele and genotype frequencies; Hardy-Weinberg equilibrium and its assumptions; factors disturbing equilibrium \u2014 mutation, migration, selection, drift."
+    },
+    {
+      "id": "bio.gen.genetic-engineering",
+      "name": "Genetic Engineering and Recombinant DNA",
+      "requires": [
+        "bio.gen.mutations",
+        "bio.mol.enzymes"
+      ],
+      "unlocks": [
+        "bio.biotech.biotech-principles"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Restriction enzymes, vectors, cloning; PCR amplification; gene cloning vs gene expression; applications in producing recombinant proteins."
+    },
+    {
+      "id": "bio.evo.origin-of-life",
+      "name": "Origin of Life",
+      "requires": [
+        "bio.mol.biomolecule-types"
+      ],
+      "unlocks": [
+        "bio.evo.evidence-for-evolution"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Theories of the origin of life \u2014 Oparin-Haldane hypothesis, Miller-Urey experiment; prebiotic chemical evolution; RNA world hypothesis."
+    },
+    {
+      "id": "bio.evo.evidence-for-evolution",
+      "name": "Evidence for Evolution",
+      "requires": [
+        "bio.evo.origin-of-life"
+      ],
+      "unlocks": [
+        "bio.evo.natural-selection"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Fossil record, comparative anatomy \u2014 homologous and analogous structures, embryology, biogeography and molecular evidence supporting common descent."
+    },
+    {
+      "id": "bio.evo.natural-selection",
+      "name": "Natural Selection and Darwinism",
+      "requires": [
+        "bio.evo.evidence-for-evolution"
+      ],
+      "unlocks": [
+        "bio.evo.modern-synthesis-speciation"
+      ],
+      "cross_links": [
+        "bio.gen.population-genetics"
+      ],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Darwin's theory of natural selection; variation, heritability, differential survival and reproduction; adaptation as a product of selection; industrial melanism as a case study."
+    },
+    {
+      "id": "bio.evo.modern-synthesis-speciation",
+      "name": "Modern Synthesis and Speciation",
+      "requires": [
+        "bio.evo.natural-selection",
+        "bio.gen.population-genetics"
+      ],
+      "unlocks": [
+        "bio.bioinfo.phylogenetics-computational",
+        "bio.evo.human-evolution"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Integration of Mendelian genetics with Darwinian selection; mechanisms of speciation \u2014 allopatric, sympatric; reproductive isolation; adaptive radiation."
+    },
+    {
+      "id": "bio.evo.human-evolution",
+      "name": "Human Evolution",
+      "requires": [
+        "bio.evo.modern-synthesis-speciation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Primate evolutionary trends; major hominin fossils \u2014 Australopithecus, Homo habilis, Homo erectus, Homo sapiens; bipedalism and brain size trends."
+    },
+    {
+      "id": "bio.physio.digestive-system",
+      "name": "Human Digestive System",
+      "requires": [
+        "bio.mol.enzymes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 4,
+      "description": "Alimentary canal organisation; digestive glands; mechanical and chemical digestion; absorption of nutrients; common digestive disorders."
+    },
+    {
+      "id": "bio.physio.respiratory-system",
+      "name": "Human Respiratory System",
+      "requires": [
+        "bio.cell.cell-membrane-transport"
+      ],
+      "unlocks": [
+        "bio.physio.circulatory-system"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 4,
+      "description": "Respiratory organs and mechanism of breathing; exchange and transport of gases \u2014 O2 and CO2; regulation of respiration; respiratory disorders."
+    },
+    {
+      "id": "bio.physio.circulatory-system",
+      "name": "Human Circulatory System",
+      "requires": [
+        "bio.physio.respiratory-system"
+      ],
+      "unlocks": [
+        "bio.physio.excretory-system",
+        "bio.physio.immune-system-intro"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Structure of the heart and cardiac cycle; blood composition and blood groups; double circulation; lymphatic system; ECG basics; cardiovascular disorders."
+    },
+    {
+      "id": "bio.physio.excretory-system",
+      "name": "Excretory System and Osmoregulation",
+      "requires": [
+        "bio.physio.circulatory-system"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Structure of the nephron; mechanism of urine formation \u2014 filtration, reabsorption, secretion; osmoregulation; role of ADH and the renin-angiotensin system."
+    },
+    {
+      "id": "bio.physio.nervous-system",
+      "name": "Nervous System and Neural Control",
+      "requires": [
+        "bio.cell.cell-signalling"
+      ],
+      "unlocks": [
+        "bio.physio.endocrine-system",
+        "bio.physio.musculoskeletal-system"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Neuron structure; resting and action potentials; synaptic transmission; central, peripheral and autonomic nervous system organisation; reflex action."
+    },
+    {
+      "id": "bio.physio.endocrine-system",
+      "name": "Endocrine System",
+      "requires": [
+        "bio.physio.nervous-system",
+        "bio.cell.cell-signalling"
+      ],
+      "unlocks": [
+        "bio.repro.human-reproductive-system"
+      ],
+      "cross_links": [
+        "bio.cell.cell-signalling"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Major endocrine glands and their hormones; feedback regulation of hormone secretion; hormone mechanism of action \u2014 second messengers, gene activation."
+    },
+    {
+      "id": "bio.physio.musculoskeletal-system",
+      "name": "Locomotion and Musculoskeletal System",
+      "requires": [
+        "bio.physio.nervous-system"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Types of muscle tissue; sliding filament theory of muscle contraction; skeletal system organisation; joints and movement; disorders of muscles and bones."
+    },
+    {
+      "id": "bio.physio.immune-system-intro",
+      "name": "Immune System Overview",
+      "requires": [
+        "bio.physio.circulatory-system"
+      ],
+      "unlocks": [
+        "bio.immuno.innate-adaptive-immunity"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Innate vs acquired immunity; humoral and cell-mediated immunity; structure of antibodies; lymphoid organs."
+    },
+    {
+      "id": "bio.plant.photosynthesis",
+      "name": "Photosynthesis",
+      "requires": [
+        "bio.cell.chloroplast-structure",
+        "bio.mol.enzymes"
+      ],
+      "unlocks": [
+        "bio.plant.plant-respiration"
+      ],
+      "cross_links": [
+        "bio.mol.enzymes"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Light and dark reactions; photosystems I and II; electron transport and photophosphorylation; Calvin cycle (C3 pathway); C4 and CAM adaptations."
+    },
+    {
+      "id": "bio.plant.plant-respiration",
+      "name": "Respiration in Plants",
+      "requires": [
+        "bio.plant.photosynthesis",
+        "bio.cell.mitochondria-energy"
+      ],
+      "unlocks": [
+        "bio.sys.metabolic-network-modelling"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Glycolysis, Krebs cycle and the electron transport chain; aerobic vs anaerobic respiration; respiratory quotient; relationship between photosynthesis and respiration."
+    },
+    {
+      "id": "bio.plant.plant-water-relations",
+      "name": "Plant Water Relations",
+      "requires": [
+        "bio.cell.cell-membrane-transport"
+      ],
+      "unlocks": [
+        "bio.plant.mineral-nutrition"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Absorption of water by roots; transpiration and the cohesion-tension theory; ascent of sap; stomatal regulation; water potential."
+    },
+    {
+      "id": "bio.plant.mineral-nutrition",
+      "name": "Mineral Nutrition in Plants",
+      "requires": [
+        "bio.plant.plant-water-relations"
+      ],
+      "unlocks": [
+        "bio.plant.plant-growth-hormones"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Essential macro- and micronutrients; deficiency symptoms; nitrogen fixation \u2014 biological and industrial; nutrient uptake mechanisms."
+    },
+    {
+      "id": "bio.plant.plant-growth-hormones",
+      "name": "Plant Growth and Hormones",
+      "requires": [
+        "bio.plant.mineral-nutrition"
+      ],
+      "unlocks": [
+        "bio.repro.sexual-reproduction-plants"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Auxins, gibberellins, cytokinins, abscisic acid and ethylene; phases of plant growth; photoperiodism and vernalisation."
+    },
+    {
+      "id": "bio.repro.asexual-reproduction",
+      "name": "Asexual Reproduction",
+      "requires": [
+        "bio.cell.mitosis"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Binary fission, budding, fragmentation, vegetative propagation; advantages and limitations compared to sexual reproduction."
+    },
+    {
+      "id": "bio.repro.sexual-reproduction-plants",
+      "name": "Sexual Reproduction in Flowering Plants",
+      "requires": [
+        "bio.cell.meiosis",
+        "bio.plant.plant-growth-hormones"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Flower structure; microsporogenesis and megasporogenesis; pollination types; fertilisation and post-fertilisation events \u2014 endosperm and embryo development; seed and fruit formation."
+    },
+    {
+      "id": "bio.repro.human-reproductive-system",
+      "name": "Human Reproductive System",
+      "requires": [
+        "bio.cell.meiosis",
+        "bio.physio.endocrine-system"
+      ],
+      "unlocks": [
+        "bio.repro.fertilisation-development"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Male and female reproductive anatomy; gametogenesis \u2014 spermatogenesis and oogenesis; menstrual cycle and hormonal regulation."
+    },
+    {
+      "id": "bio.repro.fertilisation-development",
+      "name": "Fertilisation and Embryonic Development",
+      "requires": [
+        "bio.repro.human-reproductive-system"
+      ],
+      "unlocks": [
+        "bio.dev.gametogenesis-fertilisation-dev",
+        "bio.repro.reproductive-health"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Fertilisation, cleavage, blastula and gastrula formation; implantation; placenta formation and function; parturition."
+    },
+    {
+      "id": "bio.repro.reproductive-health",
+      "name": "Reproductive Health and Contraception",
+      "requires": [
+        "bio.repro.fertilisation-development"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Reproductive health awareness; methods of contraception; assisted reproductive technologies \u2014 IVF, ZIFT, GIFT; sexually transmitted infections."
+    },
+    {
+      "id": "bio.dev.gametogenesis-fertilisation-dev",
+      "name": "Fundamentals of Animal Development",
+      "requires": [
+        "bio.repro.fertilisation-development"
+      ],
+      "unlocks": [
+        "bio.dev.morphogenesis-differentiation"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Stages from zygote to adult; cleavage patterns; cell fate determination \u2014 totipotency, pluripotency; significance of the embryonic axes."
+    },
+    {
+      "id": "bio.dev.morphogenesis-differentiation",
+      "name": "Morphogenesis and Cell Differentiation",
+      "requires": [
+        "bio.dev.gametogenesis-fertilisation-dev",
+        "bio.mol.gene-regulation"
+      ],
+      "unlocks": [
+        "bio.dev.stem-cells-regeneration"
+      ],
+      "cross_links": [
+        "bio.mol.gene-regulation"
+      ],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Induction and organiser regions; differential gene expression driving cell differentiation; morphogen gradients; classic experiments \u2014 Spemann organiser."
+    },
+    {
+      "id": "bio.dev.stem-cells-regeneration",
+      "name": "Stem Cells and Regeneration",
+      "requires": [
+        "bio.dev.morphogenesis-differentiation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Embryonic vs adult stem cells; pluripotency and induced pluripotent stem cells (iPSCs); regenerative capacity across species; therapeutic applications and ethical considerations."
+    },
+    {
+      "id": "bio.eco.organism-environment",
+      "name": "Organisms and their Environment",
+      "requires": [
+        "bio.found.biomes-levels-of-organisation"
+      ],
+      "unlocks": [
+        "bio.eco.population-ecology"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Habitat and niche; abiotic and biotic factors; adaptations to climatic extremes; concept of acclimatisation."
+    },
+    {
+      "id": "bio.eco.population-ecology",
+      "name": "Population Ecology",
+      "requires": [
+        "bio.eco.organism-environment"
+      ],
+      "unlocks": [
+        "bio.eco.ecosystem-structure-function"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 4,
+      "description": "Population attributes \u2014 density, birth/death rate, age structure; population growth curves \u2014 exponential and logistic; population interactions \u2014 competition, predation, parasitism, mutualism."
+    },
+    {
+      "id": "bio.eco.ecosystem-structure-function",
+      "name": "Ecosystem Structure and Function",
+      "requires": [
+        "bio.eco.population-ecology"
+      ],
+      "unlocks": [
+        "bio.eco.nutrient-cycling"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 4,
+      "description": "Producers, consumers and decomposers; food chains and food webs; ecological pyramids; energy flow and the 10% law."
+    },
+    {
+      "id": "bio.eco.nutrient-cycling",
+      "name": "Nutrient Cycling and Succession",
+      "requires": [
+        "bio.eco.ecosystem-structure-function"
+      ],
+      "unlocks": [
+        "bio.eco.biodiversity-conservation"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Carbon, nitrogen and phosphorus cycles; primary and secondary ecological succession; climax communities."
+    },
+    {
+      "id": "bio.eco.biodiversity-conservation",
+      "name": "Biodiversity and Conservation",
+      "requires": [
+        "bio.eco.nutrient-cycling"
+      ],
+      "unlocks": [
+        "bio.eco.environmental-issues"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Levels of biodiversity \u2014 genetic, species, ecosystem; measuring biodiversity; threats \u2014 habitat loss, invasive species, climate change; conservation strategies \u2014 in-situ and ex-situ."
+    },
+    {
+      "id": "bio.eco.environmental-issues",
+      "name": "Environmental Issues and Pollution",
+      "requires": [
+        "bio.eco.biodiversity-conservation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Air, water and soil pollution sources and effects; ozone depletion; eutrophication; global warming and climate change; sustainable development."
+    },
+    {
+      "id": "bio.micro.microbial-diversity",
+      "name": "Microbial Diversity",
+      "requires": [
+        "bio.cell.prokaryotic-cell",
+        "bio.found.viruses-viroids-lichens"
+      ],
+      "unlocks": [
+        "bio.micro.microbial-growth-culture",
+        "bio.micro.pathogenic-microbes"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Bacteria, archaea, fungi, protozoa and viruses; methods of classification and identification; ubiquity and ecological roles of microbes."
+    },
+    {
+      "id": "bio.micro.microbial-growth-culture",
+      "name": "Microbial Growth and Culture Techniques",
+      "requires": [
+        "bio.micro.microbial-diversity"
+      ],
+      "unlocks": [
+        "bio.micro.microbes-in-human-welfare"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Bacterial growth curve \u2014 lag, log, stationary, death phases; culture media types; aseptic technique; sterilisation methods."
+    },
+    {
+      "id": "bio.micro.microbes-in-human-welfare",
+      "name": "Microbes in Human Welfare",
+      "requires": [
+        "bio.micro.microbial-growth-culture"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Role of microbes in food production \u2014 curd, bread, fermented beverages; antibiotics and their discovery; microbes in sewage treatment and biogas production."
+    },
+    {
+      "id": "bio.micro.pathogenic-microbes",
+      "name": "Pathogenic Microorganisms and Disease",
+      "requires": [
+        "bio.micro.microbial-diversity"
+      ],
+      "unlocks": [
+        "bio.immuno.innate-adaptive-immunity"
+      ],
+      "cross_links": [
+        "bio.immuno.innate-adaptive-immunity"
+      ],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Common bacterial, viral, fungal and protozoan diseases in humans; modes of transmission; Koch's postulates; principles of disease control."
+    },
+    {
+      "id": "bio.immuno.innate-adaptive-immunity",
+      "name": "Innate and Adaptive Immunity",
+      "requires": [
+        "bio.physio.immune-system-intro",
+        "bio.micro.pathogenic-microbes"
+      ],
+      "unlocks": [
+        "bio.immuno.antibody-structure-function"
+      ],
+      "cross_links": [
+        "bio.micro.pathogenic-microbes"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Physical, physiological and cellular barriers of innate immunity; humoral and cell-mediated branches of adaptive immunity; primary and secondary immune response."
+    },
+    {
+      "id": "bio.immuno.antibody-structure-function",
+      "name": "Antibody Structure and Function",
+      "requires": [
+        "bio.immuno.innate-adaptive-immunity"
+      ],
+      "unlocks": [
+        "bio.immuno.vaccination-immunisation"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Immunoglobulin structure \u2014 heavy and light chains, variable and constant regions; antibody classes and their functions; antigen-antibody interaction specificity."
+    },
+    {
+      "id": "bio.immuno.vaccination-immunisation",
+      "name": "Vaccination and Immunisation",
+      "requires": [
+        "bio.immuno.antibody-structure-function"
+      ],
+      "unlocks": [
+        "bio.immuno.immune-disorders"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Active vs passive immunisation; types of vaccines \u2014 live attenuated, inactivated, subunit, mRNA; herd immunity concept; immunisation schedules."
+    },
+    {
+      "id": "bio.immuno.immune-disorders",
+      "name": "Immune Disorders",
+      "requires": [
+        "bio.immuno.vaccination-immunisation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Allergies and hypersensitivity reactions; autoimmune diseases; immunodeficiency \u2014 AIDS as a case study; organ transplant rejection and immunosuppression."
+    },
+    {
+      "id": "bio.biotech.biotech-principles",
+      "name": "Principles of Biotechnology",
+      "requires": [
+        "bio.gen.genetic-engineering"
+      ],
+      "unlocks": [
+        "bio.biotech.biotech-process-applications"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Genetic engineering and bioprocess technology as the two core techniques; tools \u2014 restriction enzymes, vectors, host cells; basic bioreactor design."
+    },
+    {
+      "id": "bio.biotech.biotech-process-applications",
+      "name": "Biotechnology Process Applications",
+      "requires": [
+        "bio.biotech.biotech-principles"
+      ],
+      "unlocks": [
+        "bio.biotech.genomics-proteomics"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Recombinant insulin and vaccine production; transgenic plants and Bt crops; gene therapy concepts; molecular diagnostics \u2014 ELISA, PCR-based detection."
+    },
+    {
+      "id": "bio.biotech.genomics-proteomics",
+      "name": "Genomics and Proteomics",
+      "requires": [
+        "bio.biotech.biotech-process-applications"
+      ],
+      "unlocks": [
+        "bio.bioinfo.bioinformatics-intro",
+        "bio.biotech.crispr-genome-editing"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Genome sequencing strategies; the Human Genome Project; functional vs structural genomics; proteomics and the study of the complete protein complement of a cell."
+    },
+    {
+      "id": "bio.biotech.crispr-genome-editing",
+      "name": "CRISPR and Genome Editing",
+      "requires": [
+        "bio.biotech.genomics-proteomics"
+      ],
+      "unlocks": [
+        "bio.sys.synthetic-biology"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "CRISPR-Cas9 mechanism \u2014 guide RNA, Cas9 nuclease, double-strand break repair; applications in gene knockout and correction; ethical and biosafety considerations."
+    },
+    {
+      "id": "bio.bioinfo.bioinformatics-intro",
+      "name": "Introduction to Bioinformatics",
+      "requires": [
+        "bio.biotech.genomics-proteomics"
+      ],
+      "unlocks": [
+        "bio.bioinfo.sequence-alignment",
+        "bio.sys.systems-biology-intro"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Biological databases \u2014 GenBank, UniProt, PDB; sequence file formats; the role of computation in modern biology."
+    },
+    {
+      "id": "bio.bioinfo.sequence-alignment",
+      "name": "Sequence Alignment",
+      "requires": [
+        "bio.bioinfo.bioinformatics-intro"
+      ],
+      "unlocks": [
+        "bio.bioinfo.phylogenetics-computational",
+        "bio.bioinfo.structural-bioinformatics"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Pairwise alignment \u2014 global (Needleman-Wunsch) and local (Smith-Waterman); scoring matrices; multiple sequence alignment; BLAST search strategy."
+    },
+    {
+      "id": "bio.bioinfo.phylogenetics-computational",
+      "name": "Computational Phylogenetics",
+      "requires": [
+        "bio.bioinfo.sequence-alignment",
+        "bio.evo.modern-synthesis-speciation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 7,
+      "description": "Distance-based and character-based tree-building methods; molecular clock hypothesis; interpreting phylogenetic trees from sequence data."
+    },
+    {
+      "id": "bio.bioinfo.structural-bioinformatics",
+      "name": "Structural Bioinformatics",
+      "requires": [
+        "bio.bioinfo.sequence-alignment",
+        "bio.mol.proteins-structure"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 7,
+      "description": "Protein structure prediction approaches \u2014 homology modelling, ab initio methods; structural databases; relationship between sequence, structure and function."
+    },
+    {
+      "id": "bio.sys.systems-biology-intro",
+      "name": "Introduction to Systems Biology",
+      "requires": [
+        "bio.mol.gene-regulation",
+        "bio.bioinfo.bioinformatics-intro"
+      ],
+      "unlocks": [
+        "bio.sys.gene-regulatory-networks"
+      ],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Holistic vs reductionist approaches to biology; the concept of biological networks \u2014 gene regulatory, metabolic, signalling networks."
+    },
+    {
+      "id": "bio.sys.gene-regulatory-networks",
+      "name": "Gene Regulatory Networks",
+      "requires": [
+        "bio.sys.systems-biology-intro",
+        "bio.mol.gene-regulation"
+      ],
+      "unlocks": [
+        "bio.sys.metabolic-network-modelling"
+      ],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 7,
+      "description": "Network motifs \u2014 feedback and feedforward loops; modelling approaches for transcriptional regulation; emergent properties such as bistability and oscillation."
+    },
+    {
+      "id": "bio.sys.metabolic-network-modelling",
+      "name": "Metabolic Network Modelling",
+      "requires": [
+        "bio.sys.gene-regulatory-networks",
+        "bio.plant.plant-respiration"
+      ],
+      "unlocks": [
+        "bio.sys.synthetic-biology"
+      ],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 7,
+      "description": "Flux balance analysis; stoichiometric modelling of metabolic pathways; constraint-based reconstruction of genome-scale metabolic networks."
+    },
+    {
+      "id": "bio.sys.synthetic-biology",
+      "name": "Synthetic Biology",
+      "requires": [
+        "bio.sys.metabolic-network-modelling",
+        "bio.biotech.crispr-genome-editing"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 7,
+      "description": "Engineering biological circuits from standardised parts; design-build-test cycle; applications in biosensing and biomanufacturing; biosafety considerations."
+    }
+  ]
+}

@@ -11,6 +11,7 @@
  *   physics      →  docs/physics/kg/graph.json           (194 concepts)
  *   chemistry    →  docs/chemistry/kg/graph.json         (187 concepts)
  *   computer_science → docs/computer-science/kg/graph.json (119 concepts)
+ *   biology      →  docs/biology/kg/graph.json            (89 concepts)
  *
  * Adding a new subject: drop a graph.json under docs/{subject}/kg/ and add
  * one entry to SUBJECT_ADAPTERS + one entry to ID_PREFIX_TO_SUBJECT below.
@@ -41,6 +42,7 @@ const SUBJECT_ADAPTERS: Record<string, ReturnType<typeof createSubjectAdapter>> 
   physics:          createSubjectAdapter('physics'),
   chemistry:        createSubjectAdapter('chemistry'),
   computer_science: createSubjectAdapter('computer-science'),
+  biology:          createSubjectAdapter('biology'),
 }
 
 // Maps the first ID segment to the subject name so getKGNode() can route
@@ -50,6 +52,7 @@ const ID_PREFIX_TO_SUBJECT: Record<string, string> = {
   phys: 'physics',
   chem: 'chemistry',
   cs:   'computer_science',
+  bio:  'biology',
 }
 
 // ── Public types ──────────────────────────────────────────────────────────────
@@ -210,6 +213,22 @@ function domainLabel(domain: string): string {
     'cs.theory':  'Theory of Computation',
     'cs.se':      'Software Engineering',
     'cs.ds':      'Data Science & AI',
+    // ── Biology KG: qualified keys ────────────────────────────────────────────
+    'bio.found':   'Foundations of Biology',
+    'bio.cell':    'Cell Biology',
+    'bio.mol':     'Biomolecules & Molecular Biology',
+    'bio.gen':     'Genetics',
+    'bio.evo':     'Evolution',
+    'bio.physio':  'Human Physiology',
+    'bio.plant':   'Plant Physiology',
+    'bio.repro':   'Reproduction',
+    'bio.dev':     'Developmental Biology',
+    'bio.eco':     'Ecology',
+    'bio.micro':   'Microbiology',
+    'bio.immuno':  'Immunology',
+    'bio.biotech': 'Biotechnology',
+    'bio.bioinfo': 'Bioinformatics',
+    'bio.sys':     'Systems Biology',
     // ── 54-node KG domain keys (legacy / other subjects) ─────────────────────
     arithmetic:          'Arithmetic',
     number_systems:      'Number Systems',
