@@ -2,17 +2,28 @@
   "domain_id": "abstract-algebra",
   "domain_name": "Abstract Algebra",
   "id_prefix": "math.abst",
-  "level_range": [4, 7],
-  "description": "The study of algebraic structures — groups, rings, fields, modules, and algebras — defined by abstract axioms. Unifies and generalizes arithmetic, geometry, and symmetry via a common algebraic framework.",
+  "level_range": [
+    4,
+    7
+  ],
+  "description": "The study of algebraic structures \u2014 groups, rings, fields, modules, and algebras \u2014 defined by abstract axioms. Unifies and generalizes arithmetic, geometry, and symmetry via a common algebraic framework.",
   "concepts": [
     {
       "id": "math.abst.algebraic-structure",
       "name": "Algebraic Structure",
-      "aliases": ["algebraic system"],
+      "aliases": [
+        "algebraic system"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.found.axiom", "math.found.set-theory"],
-      "unlocks": ["math.abst.group-theory", "math.abst.ring-theory"],
+      "requires": [
+        "math.found.axiom",
+        "math.found.set-theory"
+      ],
+      "unlocks": [
+        "math.abst.group-theory",
+        "math.abst.ring-theory"
+      ],
       "related": [],
       "cross_links": [],
       "description": "A set together with one or more binary operations satisfying axioms. The same set with different operations yields different structures. Abstract algebra studies these structures independently of the nature of elements.",
@@ -20,458 +31,721 @@
       "estimated_hours": 2,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.1; Herstein, Topics in Algebra"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.1; Herstein, Topics in Algebra"
+      ]
     },
     {
       "id": "math.abst.binary-operation",
       "name": "Binary Operation",
-      "aliases": ["operation", "closed operation"],
+      "aliases": [
+        "operation",
+        "closed operation"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.found.function-set-theoretic"],
-      "unlocks": ["math.abst.group-theory"],
+      "requires": [
+        "math.found.function-set-theoretic"
+      ],
+      "unlocks": [
+        "math.abst.group-theory"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A function *: S×S→S assigning a unique element to each ordered pair. Closure: the result always stays in S. Associativity, commutativity, identity, and inverses are additional properties an operation may have.",
+      "description": "A function *: S\u00d7S\u2192S assigning a unique element to each ordered pair. Closure: the result always stays in S. Associativity, commutativity, identity, and inverses are additional properties an operation may have.",
       "difficulty": "advanced",
       "estimated_hours": 2,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §1.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a71.1"
+      ]
     },
     {
       "id": "math.abst.group-theory",
       "name": "Group",
-      "aliases": ["group axioms"],
+      "aliases": [
+        "group axioms"
+      ],
       "parent": null,
-      "children": ["math.abst.subgroup", "math.abst.cyclic-group", "math.abst.group-homomorphism"],
-      "requires": ["math.abst.binary-operation"],
-      "unlocks": ["math.abst.subgroup", "math.abst.coset"],
+      "children": [
+        "math.abst.subgroup",
+        "math.abst.cyclic-group",
+        "math.abst.group-homomorphism"
+      ],
+      "requires": [
+        "math.abst.binary-operation"
+      ],
+      "unlocks": [
+        "math.abst.subgroup",
+        "math.abst.coset"
+      ],
       "related": [],
-      "cross_links": ["math.linalg.vector-addition"],
-      "description": "A set G with binary operation · satisfying: closure, associativity, identity element e (ge=eg=g), and inverses (∀g, ∃g⁻¹: gg⁻¹=e). Abelian (commutative) group: additionally gh=hg. Examples: (ℤ,+), (GL_n(ℝ),·).",
+      "cross_links": [
+        "math.linalg.vector-addition"
+      ],
+      "description": "A set G with binary operation \u00b7 satisfying: closure, associativity, identity element e (ge=eg=g), and inverses (\u2200g, \u2203g\u207b\u00b9: gg\u207b\u00b9=e). Abelian (commutative) group: additionally gh=hg. Examples: (\u2124,+), (GL_n(\u211d),\u00b7).",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.1; Herstein, Topics in Algebra, Ch.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.1; Herstein, Topics in Algebra, Ch.2"
+      ]
     },
     {
       "id": "math.abst.group-operation",
       "name": "Group Operation Examples",
-      "aliases": ["group table", "Cayley table"],
+      "aliases": [
+        "group table",
+        "Cayley table"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.group-theory"],
+      "requires": [
+        "math.abst.group-theory"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.linalg.vector-addition"],
-      "description": "Concrete groups: (ℤₙ,+) cyclic; (ℤₙ*,·) units mod n; symmetric group Sₙ (permutations); dihedral group D_n (symmetries of n-gon); GL_n (invertible matrices). Cayley table fully describes a finite group.",
+      "cross_links": [
+        "math.linalg.vector-addition"
+      ],
+      "description": "Concrete groups: (\u2124\u2099,+) cyclic; (\u2124\u2099*,\u00b7) units mod n; symmetric group S\u2099 (permutations); dihedral group D_n (symmetries of n-gon); GL_n (invertible matrices). Cayley table fully describes a finite group.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §1.3–1.5"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a71.3\u20131.5"
+      ]
     },
     {
       "id": "math.abst.subgroup",
       "name": "Subgroup",
-      "aliases": ["subgroup criterion"],
+      "aliases": [
+        "subgroup criterion"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.group-theory"],
-      "unlocks": ["math.abst.coset", "math.abst.normal-subgroup"],
+      "requires": [
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.abst.coset",
+        "math.abst.normal-subgroup"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "H≤G iff H is non-empty, closed under the operation, and closed under inverses (subgroup criterion). Equivalently: ∀a,b∈H, ab⁻¹∈H. Trivial subgroups: {e} and G itself.",
+      "description": "H\u2264G iff H is non-empty, closed under the operation, and closed under inverses (subgroup criterion). Equivalently: \u2200a,b\u2208H, ab\u207b\u00b9\u2208H. Trivial subgroups: {e} and G itself.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §2.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a72.1"
+      ]
     },
     {
       "id": "math.abst.cyclic-group",
       "name": "Cyclic Group",
-      "aliases": ["cyclic", "generator", "⟨g⟩"],
+      "aliases": [
+        "cyclic",
+        "generator",
+        "\u27e8g\u27e9"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.group-theory"],
+      "requires": [
+        "math.abst.group-theory"
+      ],
       "unlocks": [],
-      "related": ["math.abst.group-order"],
+      "related": [
+        "math.abst.group-order"
+      ],
       "cross_links": [],
-      "description": "G = ⟨g⟩ = {gⁿ : n∈ℤ}; generated by a single element g. Finite cyclic of order n: ℤₙ≅⟨g⟩. Every subgroup of a cyclic group is cyclic. The cyclic groups are the simplest non-trivial groups.",
+      "description": "G = \u27e8g\u27e9 = {g\u207f : n\u2208\u2124}; generated by a single element g. Finite cyclic of order n: \u2124\u2099\u2245\u27e8g\u27e9. Every subgroup of a cyclic group is cyclic. The cyclic groups are the simplest non-trivial groups.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §2.3"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a72.3"
+      ]
     },
     {
       "id": "math.abst.group-order",
       "name": "Order of Group and Elements",
-      "aliases": ["order of a group", "order of an element"],
+      "aliases": [
+        "order of a group",
+        "order of an element"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.group-theory"],
-      "unlocks": ["math.abst.lagrange-theorem"],
+      "requires": [
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.abst.lagrange-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "|G| = number of elements in G. ord(g) = smallest positive n with gⁿ=e. In finite group: ord(g) divides |G| (Lagrange). Order 1 only for identity; cyclic subgroup ⟨g⟩ has order ord(g).",
+      "description": "|G| = number of elements in G. ord(g) = smallest positive n with g\u207f=e. In finite group: ord(g) divides |G| (Lagrange). Order 1 only for identity; cyclic subgroup \u27e8g\u27e9 has order ord(g).",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §2.3"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a72.3"
+      ]
     },
     {
       "id": "math.abst.coset",
       "name": "Coset",
-      "aliases": ["left coset", "right coset", "aH"],
+      "aliases": [
+        "left coset",
+        "right coset",
+        "aH"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.subgroup"],
-      "unlocks": ["math.abst.lagrange-theorem", "math.abst.normal-subgroup"],
+      "requires": [
+        "math.abst.subgroup"
+      ],
+      "unlocks": [
+        "math.abst.lagrange-theorem",
+        "math.abst.normal-subgroup"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Left coset of H in G: aH = {ah : h∈H}. Cosets partition G; all cosets have the same size |H|. aH=bH iff a⁻¹b∈H. Index [G:H] = |G|/|H| = number of distinct cosets.",
+      "description": "Left coset of H in G: aH = {ah : h\u2208H}. Cosets partition G; all cosets have the same size |H|. aH=bH iff a\u207b\u00b9b\u2208H. Index [G:H] = |G|/|H| = number of distinct cosets.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §3.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a73.2"
+      ]
     },
     {
       "id": "math.abst.lagrange-theorem",
       "name": "Lagrange's Theorem",
-      "aliases": ["Lagrange theorem for groups"],
+      "aliases": [
+        "Lagrange theorem for groups"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.coset"],
+      "requires": [
+        "math.abst.coset"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "If G is finite and H≤G, then |H| divides |G|. Equivalently, [G:H]·|H|=|G|. Corollary: ord(g) divides |G|; groups of prime order are cyclic.",
+      "description": "If G is finite and H\u2264G, then |H| divides |G|. Equivalently, [G:H]\u00b7|H|=|G|. Corollary: ord(g) divides |G|; groups of prime order are cyclic.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §3.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a73.2"
+      ]
     },
     {
       "id": "math.abst.normal-subgroup",
       "name": "Normal Subgroup",
-      "aliases": ["normal", "N◁G", "invariant subgroup"],
+      "aliases": [
+        "normal",
+        "N\u25c1G",
+        "invariant subgroup"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.coset"],
-      "unlocks": ["math.abst.quotient-group"],
+      "requires": [
+        "math.abst.coset"
+      ],
+      "unlocks": [
+        "math.abst.quotient-group"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "N◁G iff gNg⁻¹=N for all g∈G, equivalently gN=Ng (left and right cosets coincide). Kernels of homomorphisms are always normal. Normal subgroups are exactly those for which the quotient group is well-defined.",
+      "description": "N\u25c1G iff gNg\u207b\u00b9=N for all g\u2208G, equivalently gN=Ng (left and right cosets coincide). Kernels of homomorphisms are always normal. Normal subgroups are exactly those for which the quotient group is well-defined.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §3.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a73.1"
+      ]
     },
     {
       "id": "math.abst.quotient-group",
       "name": "Quotient Group",
-      "aliases": ["factor group", "G/N"],
+      "aliases": [
+        "factor group",
+        "G/N"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.normal-subgroup"],
-      "unlocks": ["math.abst.first-isomorphism-theorem"],
+      "requires": [
+        "math.abst.normal-subgroup"
+      ],
+      "unlocks": [
+        "math.abst.first-isomorphism-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "G/N = {gN : g∈G} with operation (aN)(bN)=abN. Well-defined iff N◁G. |G/N|=[G:N]=|G|/|N| (finite case). The quotient 'collapses' N to the identity.",
+      "description": "G/N = {gN : g\u2208G} with operation (aN)(bN)=abN. Well-defined iff N\u25c1G. |G/N|=[G:N]=|G|/|N| (finite case). The quotient 'collapses' N to the identity.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §3.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a73.3"
+      ]
     },
     {
       "id": "math.abst.group-homomorphism",
       "name": "Group Homomorphism",
-      "aliases": ["group map", "φ:G→H"],
+      "aliases": [
+        "group map",
+        "\u03c6:G\u2192H"
+      ],
       "parent": null,
-      "children": ["math.abst.group-isomorphism"],
-      "requires": ["math.abst.group-theory"],
-      "unlocks": ["math.abst.group-isomorphism", "math.abst.first-isomorphism-theorem"],
+      "children": [
+        "math.abst.group-isomorphism"
+      ],
+      "requires": [
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.abst.group-isomorphism",
+        "math.abst.first-isomorphism-theorem"
+      ],
       "related": [],
-      "cross_links": ["math.linalg.linear-map"],
-      "description": "A map φ:G→H with φ(ab)=φ(a)φ(b). Preserves group structure. ker(φ) = {g∈G : φ(g)=eH} is a normal subgroup of G. im(φ) is a subgroup of H.",
+      "cross_links": [
+        "math.linalg.linear-map"
+      ],
+      "description": "A map \u03c6:G\u2192H with \u03c6(ab)=\u03c6(a)\u03c6(b). Preserves group structure. ker(\u03c6) = {g\u2208G : \u03c6(g)=eH} is a normal subgroup of G. im(\u03c6) is a subgroup of H.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Dummit & Foote, Abstract Algebra, §1.6"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a71.6"
+      ]
     },
     {
       "id": "math.abst.group-isomorphism",
       "name": "Group Isomorphism",
-      "aliases": ["isomorphic groups", "G≅H"],
+      "aliases": [
+        "isomorphic groups",
+        "G\u2245H"
+      ],
       "parent": "math.abst.group-homomorphism",
       "children": [],
-      "requires": ["math.abst.group-homomorphism"],
+      "requires": [
+        "math.abst.group-homomorphism"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "A bijective homomorphism φ:G→H. Isomorphic groups are structurally identical. Automorphism: isomorphism G→G. Classify groups up to isomorphism: cyclic groups ℤₙ; abelian groups as products of cyclic groups.",
+      "description": "A bijective homomorphism \u03c6:G\u2192H. Isomorphic groups are structurally identical. Automorphism: isomorphism G\u2192G. Classify groups up to isomorphism: cyclic groups \u2124\u2099; abelian groups as products of cyclic groups.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "analyze",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §1.6"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a71.6"
+      ]
     },
     {
       "id": "math.abst.first-isomorphism-theorem",
       "name": "First Isomorphism Theorem",
-      "aliases": ["fundamental theorem of homomorphisms"],
+      "aliases": [
+        "fundamental theorem of homomorphisms"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.quotient-group", "math.abst.group-homomorphism"],
-      "unlocks": ["math.abst.second-isomorphism-theorem"],
+      "requires": [
+        "math.abst.quotient-group",
+        "math.abst.group-homomorphism"
+      ],
+      "unlocks": [
+        "math.abst.second-isomorphism-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "If φ:G→H is a homomorphism, then G/ker(φ) ≅ im(φ). The quotient by the kernel is isomorphic to the image. Generalizes to rings and modules. Proved by showing the induced map Ḡ→im(φ) is an isomorphism.",
+      "description": "If \u03c6:G\u2192H is a homomorphism, then G/ker(\u03c6) \u2245 im(\u03c6). The quotient by the kernel is isomorphic to the image. Generalizes to rings and modules. Proved by showing the induced map \u1e20\u2192im(\u03c6) is an isomorphism.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §3.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a73.3"
+      ]
     },
     {
       "id": "math.abst.second-isomorphism-theorem",
       "name": "Second and Third Isomorphism Theorems",
-      "aliases": ["diamond isomorphism theorem", "lattice isomorphism theorem"],
+      "aliases": [
+        "diamond isomorphism theorem",
+        "lattice isomorphism theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.first-isomorphism-theorem"],
+      "requires": [
+        "math.abst.first-isomorphism-theorem"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Second (Diamond): If H≤G and N◁G, then HN/N ≅ H/(H∩N). Third: If N◁H◁G, then (G/N)/(H/N) ≅ G/H. Together with the first theorem, they describe the subgroup lattice structure under homomorphisms.",
+      "description": "Second (Diamond): If H\u2264G and N\u25c1G, then HN/N \u2245 H/(H\u2229N). Third: If N\u25c1H\u25c1G, then (G/N)/(H/N) \u2245 G/H. Together with the first theorem, they describe the subgroup lattice structure under homomorphisms.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, §3.3"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a73.3"
+      ]
     },
     {
       "id": "math.abst.group-action",
       "name": "Group Action",
-      "aliases": ["G-set", "orbit", "stabilizer"],
+      "aliases": [
+        "G-set",
+        "orbit",
+        "stabilizer"
+      ],
       "parent": null,
-      "children": ["math.abst.burnside-lemma", "math.abst.sylow-theorems"],
-      "requires": ["math.abst.group-theory", "math.found.function-set-theoretic"],
-      "unlocks": ["math.abst.sylow-theorems"],
+      "children": [
+        "math.abst.burnside-lemma",
+        "math.abst.sylow-theorems"
+      ],
+      "requires": [
+        "math.abst.group-theory",
+        "math.found.function-set-theoretic"
+      ],
+      "unlocks": [
+        "math.abst.sylow-theorems"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A group action of G on set X: a map G×X→X satisfying identity and compatibility. Orbit of x: Gx={gx:g∈G}. Stabilizer of x: Gₓ={g:gx=x}. Orbit-Stabilizer theorem: |Gx|·|Gₓ|=|G|.",
+      "description": "A group action of G on set X: a map G\u00d7X\u2192X satisfying identity and compatibility. Orbit of x: Gx={gx:g\u2208G}. Stabilizer of x: G\u2093={g:gx=x}. Orbit-Stabilizer theorem: |Gx|\u00b7|G\u2093|=|G|.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.4"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.4"
+      ]
     },
     {
       "id": "math.abst.burnside-lemma",
       "name": "Burnside's Lemma",
-      "aliases": ["Burnside's counting theorem", "Cauchy-Frobenius lemma"],
+      "aliases": [
+        "Burnside's counting theorem",
+        "Cauchy-Frobenius lemma"
+      ],
       "parent": "math.abst.group-action",
       "children": [],
-      "requires": ["math.abst.group-action"],
+      "requires": [
+        "math.abst.group-action"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Number of distinct orbits = (1/|G|)∑_{g∈G}|X^g| where X^g is the set fixed by g. Counts distinct colorings/patterns under symmetry. Key tool in combinatorial enumeration (Polya counting).",
+      "description": "Number of distinct orbits = (1/|G|)\u2211_{g\u2208G}|X^g| where X^g is the set fixed by g. Counts distinct colorings/patterns under symmetry. Key tool in combinatorial enumeration (Polya counting).",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Dummit & Foote, Abstract Algebra, §4.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a74.3"
+      ]
     },
     {
       "id": "math.abst.sylow-theorems",
       "name": "Sylow Theorems",
-      "aliases": ["Sylow p-subgroup", "Sylow's theorem"],
+      "aliases": [
+        "Sylow p-subgroup",
+        "Sylow's theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.group-action", "math.nt.prime-numbers"],
+      "requires": [
+        "math.abst.group-action",
+        "math.nt.prime-number"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "For |G|=pᵐ·k (p prime, p∤k): (1) Sylow p-subgroups of order pᵐ exist; (2) they are all conjugate; (3) their number nₚ satisfies nₚ|k and nₚ≡1(mod p). Used to classify groups of given order.",
+      "description": "For |G|=p\u1d50\u00b7k (p prime, p\u2224k): (1) Sylow p-subgroups of order p\u1d50 exist; (2) they are all conjugate; (3) their number n\u209a satisfies n\u209a|k and n\u209a\u22611(mod p). Used to classify groups of given order.",
       "difficulty": "expert",
       "estimated_hours": 7,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Dummit & Foote, Abstract Algebra, §4.5"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a74.5"
+      ]
     },
     {
       "id": "math.abst.symmetric-group",
       "name": "Symmetric Group",
-      "aliases": ["Sₙ", "permutation group"],
+      "aliases": [
+        "S\u2099",
+        "permutation group"
+      ],
       "parent": null,
-      "children": ["math.abst.alternating-group"],
-      "requires": ["math.abst.group-theory"],
-      "unlocks": ["math.abst.alternating-group"],
+      "children": [
+        "math.abst.alternating-group"
+      ],
+      "requires": [
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.abst.alternating-group"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Sₙ = all bijections on {1,…,n}; |Sₙ|=n!. Every finite group embeds in Sₙ (Cayley's theorem). Cycle notation; cycle structure determines conjugacy class. Transpositions generate Sₙ.",
+      "description": "S\u2099 = all bijections on {1,\u2026,n}; |S\u2099|=n!. Every finite group embeds in S\u2099 (Cayley's theorem). Cycle notation; cycle structure determines conjugacy class. Transpositions generate S\u2099.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §1.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a71.3"
+      ]
     },
     {
       "id": "math.abst.alternating-group",
       "name": "Alternating Group",
-      "aliases": ["Aₙ", "even permutation"],
+      "aliases": [
+        "A\u2099",
+        "even permutation"
+      ],
       "parent": "math.abst.symmetric-group",
       "children": [],
-      "requires": ["math.abst.symmetric-group", "math.abst.normal-subgroup"],
+      "requires": [
+        "math.abst.symmetric-group",
+        "math.abst.normal-subgroup"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Aₙ = even permutations (product of even number of transpositions); |Aₙ|=n!/2. A normal subgroup of Sₙ. For n≥5, Aₙ is simple (no proper normal subgroups). Simplicity of A₅ implies quintic is not solvable by radicals.",
+      "description": "A\u2099 = even permutations (product of even number of transpositions); |A\u2099|=n!/2. A normal subgroup of S\u2099. For n\u22655, A\u2099 is simple (no proper normal subgroups). Simplicity of A\u2085 implies quintic is not solvable by radicals.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, §4.6"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a74.6"
+      ]
     },
     {
       "id": "math.abst.ring-theory",
       "name": "Ring",
-      "aliases": ["ring axioms", "commutative ring"],
+      "aliases": [
+        "ring axioms",
+        "commutative ring"
+      ],
       "parent": null,
-      "children": ["math.abst.ideal", "math.abst.ring-homomorphism"],
-      "requires": ["math.abst.group-theory"],
-      "unlocks": ["math.abst.ideal", "math.abst.field"],
+      "children": [
+        "math.abst.ideal",
+        "math.abst.ring-homomorphism"
+      ],
+      "requires": [
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.abst.ideal",
+        "math.abst.field"
+      ],
       "related": [],
-      "cross_links": ["math.linalg.matrix-multiplication"],
-      "description": "A set R with two operations (+,·) where (R,+) is an abelian group, · is associative, and · distributes over +. Commutative ring: ab=ba. Examples: ℤ, ℤₙ, polynomial rings, matrices. Unity 1 if present makes a unital ring.",
+      "cross_links": [
+        "math.linalg.matrix-multiplication"
+      ],
+      "description": "A set R with two operations (+,\u00b7) where (R,+) is an abelian group, \u00b7 is associative, and \u00b7 distributes over +. Commutative ring: ab=ba. Examples: \u2124, \u2124\u2099, polynomial rings, matrices. Unity 1 if present makes a unital ring.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.7"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.7"
+      ]
     },
     {
       "id": "math.abst.ideal",
       "name": "Ideal",
-      "aliases": ["left ideal", "right ideal", "two-sided ideal"],
+      "aliases": [
+        "left ideal",
+        "right ideal",
+        "two-sided ideal"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.ring-theory"],
-      "unlocks": ["math.abst.quotient-ring", "math.abst.prime-ideal"],
+      "requires": [
+        "math.abst.ring-theory"
+      ],
+      "unlocks": [
+        "math.abst.quotient-ring",
+        "math.abst.prime-ideal"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A subset I⊆R such that (I,+)≤(R,+) and for all r∈R, i∈I: ri∈I and ir∈I. Quotient ring R/I is well-defined iff I is an ideal. Principal ideal ⟨a⟩={ra:r∈R} generated by one element.",
+      "description": "A subset I\u2286R such that (I,+)\u2264(R,+) and for all r\u2208R, i\u2208I: ri\u2208I and ir\u2208I. Quotient ring R/I is well-defined iff I is an ideal. Principal ideal \u27e8a\u27e9={ra:r\u2208R} generated by one element.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §7.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a77.3"
+      ]
     },
     {
       "id": "math.abst.quotient-ring",
       "name": "Quotient Ring",
-      "aliases": ["factor ring", "residue ring", "R/I"],
+      "aliases": [
+        "factor ring",
+        "residue ring",
+        "R/I"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.ideal"],
+      "requires": [
+        "math.abst.ideal"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "R/I = {r+I : r∈R} with (r+I)+(s+I)=(r+s)+I and (r+I)(s+I)=rs+I. Analogue of quotient groups. First isomorphism theorem for rings: if φ:R→S is a ring homomorphism, R/ker(φ)≅im(φ).",
+      "description": "R/I = {r+I : r\u2208R} with (r+I)+(s+I)=(r+s)+I and (r+I)(s+I)=rs+I. Analogue of quotient groups. First isomorphism theorem for rings: if \u03c6:R\u2192S is a ring homomorphism, R/ker(\u03c6)\u2245im(\u03c6).",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, §7.4"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a77.4"
+      ]
     },
     {
       "id": "math.abst.prime-ideal",
       "name": "Prime and Maximal Ideals",
-      "aliases": ["prime ideal", "maximal ideal"],
+      "aliases": [
+        "prime ideal",
+        "maximal ideal"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.ideal"],
-      "unlocks": ["math.abst.field"],
+      "requires": [
+        "math.abst.ideal"
+      ],
+      "unlocks": [
+        "math.abst.field"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Prime ideal P: ab∈P ⟹ a∈P or b∈P. R/P is an integral domain. Maximal ideal M: no ideal strictly between M and R. R/M is a field. In commutative rings: every maximal ideal is prime.",
+      "description": "Prime ideal P: ab\u2208P \u27f9 a\u2208P or b\u2208P. R/P is an integral domain. Maximal ideal M: no ideal strictly between M and R. R/M is a field. In commutative rings: every maximal ideal is prime.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, §7.4"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a77.4"
+      ]
     },
     {
       "id": "math.abst.ring-homomorphism",
       "name": "Ring Homomorphism",
-      "aliases": ["ring map"],
+      "aliases": [
+        "ring map"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.ring-theory"],
+      "requires": [
+        "math.abst.ring-theory"
+      ],
       "unlocks": [],
-      "related": ["math.abst.group-homomorphism"],
+      "related": [
+        "math.abst.group-homomorphism"
+      ],
       "cross_links": [],
-      "description": "A map φ:R→S with φ(a+b)=φ(a)+φ(b) and φ(ab)=φ(a)φ(b). Preserves ring structure. ker(φ) is an ideal; im(φ) is a subring. Ring isomorphism: bijective ring homomorphism.",
+      "description": "A map \u03c6:R\u2192S with \u03c6(a+b)=\u03c6(a)+\u03c6(b) and \u03c6(ab)=\u03c6(a)\u03c6(b). Preserves ring structure. ker(\u03c6) is an ideal; im(\u03c6) is a subring. Ring isomorphism: bijective ring homomorphism.",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, §7.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a77.3"
+      ]
     },
     {
       "id": "math.abst.polynomial-ring",
       "name": "Polynomial Ring",
-      "aliases": ["R[x]", "polynomial ring over a ring"],
+      "aliases": [
+        "R[x]",
+        "polynomial ring over a ring"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.ring-theory"],
-      "unlocks": ["math.abst.euclidean-domain"],
+      "requires": [
+        "math.abst.ring-theory"
+      ],
+      "unlocks": [
+        "math.abst.euclidean-domain"
+      ],
       "related": [],
-      "cross_links": ["math.alg.polynomials"],
+      "cross_links": [
+        "math.alg.polynomial"
+      ],
       "description": "R[x]: polynomials with coefficients in ring R under standard addition and multiplication. F[x] for field F is a Euclidean domain with polynomial division algorithm. Irreducible polynomials generate maximal ideals.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.9"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.9"
+      ]
     },
     {
       "id": "math.abst.euclidean-domain",
       "name": "Euclidean Domain",
-      "aliases": ["ED", "Euclidean ring"],
+      "aliases": [
+        "ED",
+        "Euclidean ring"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.polynomial-ring"],
-      "unlocks": ["math.abst.pid"],
+      "requires": [
+        "math.abst.polynomial-ring"
+      ],
+      "unlocks": [
+        "math.abst.pid"
+      ],
       "related": [],
-      "cross_links": ["math.nt.euclidean-algorithm"],
-      "description": "An integral domain R with a Euclidean norm N:R\\{0}→ℕ₀ allowing division with remainder. Examples: ℤ (norm = absolute value), F[x] (norm = degree). In EDs, the Euclidean algorithm computes GCDs.",
+      "cross_links": [
+        "math.nt.euclidean-algorithm"
+      ],
+      "description": "An integral domain R with a Euclidean norm N:R\\{0}\u2192\u2115\u2080 allowing division with remainder. Examples: \u2124 (norm = absolute value), F[x] (norm = degree). In EDs, the Euclidean algorithm computes GCDs.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, §8.1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a78.1"
+      ]
     },
     {
       "id": "math.abst.pid",
       "name": "Principal Ideal Domain",
-      "aliases": ["PID"],
+      "aliases": [
+        "PID"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.euclidean-domain"],
-      "unlocks": ["math.abst.ufd"],
+      "requires": [
+        "math.abst.euclidean-domain"
+      ],
+      "unlocks": [
+        "math.abst.ufd"
+      ],
       "related": [],
       "cross_links": [],
       "description": "An integral domain where every ideal is principal (generated by one element). Every ED is a PID but not conversely. In a PID, every prime ideal is maximal and irreducibles equal primes. Structure theorem for modules over PIDs generalizes Jordan form.",
@@ -479,101 +753,170 @@
       "estimated_hours": 5,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Dummit & Foote, Abstract Algebra, §8.2"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a78.2"
+      ]
     },
     {
       "id": "math.abst.ufd",
       "name": "Unique Factorization Domain",
-      "aliases": ["UFD", "factorial ring"],
+      "aliases": [
+        "UFD",
+        "factorial ring"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.pid"],
+      "requires": [
+        "math.abst.pid"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.nt.fundamental-theorem-arithmetic"],
-      "description": "An integral domain where every non-zero, non-unit element factors uniquely (up to order and units) into irreducibles. Every PID is a UFD. ℤ[x] is a UFD (Gauss's lemma) but not a PID.",
+      "cross_links": [
+        "math.nt.fundamental-theorem-arithmetic"
+      ],
+      "description": "An integral domain where every non-zero, non-unit element factors uniquely (up to order and units) into irreducibles. Every PID is a UFD. \u2124[x] is a UFD (Gauss's lemma) but not a PID.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Dummit & Foote, Abstract Algebra, §8.3"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a78.3"
+      ]
     },
     {
       "id": "math.abst.field",
       "name": "Field",
-      "aliases": ["field axioms", "field theory"],
+      "aliases": [
+        "field axioms",
+        "field theory"
+      ],
       "parent": null,
-      "children": ["math.abst.field-extension", "math.abst.finite-field"],
-      "requires": ["math.abst.ring-theory", "math.abst.prime-ideal"],
-      "unlocks": ["math.abst.field-extension"],
+      "children": [
+        "math.abst.field-extension",
+        "math.abst.finite-field"
+      ],
+      "requires": [
+        "math.abst.ring-theory",
+        "math.abst.prime-ideal"
+      ],
+      "unlocks": [
+        "math.abst.field-extension"
+      ],
       "related": [],
-      "cross_links": ["math.linalg.vector-space"],
-      "description": "A commutative ring where every non-zero element has a multiplicative inverse. Examples: ℚ, ℝ, ℂ, ℤₚ (p prime). The characteristic of a field is 0 or a prime. Fields are the coefficient domains of vector spaces.",
+      "cross_links": [
+        "math.linalg.vector-space"
+      ],
+      "description": "A commutative ring where every non-zero element has a multiplicative inverse. Examples: \u211a, \u211d, \u2102, \u2124\u209a (p prime). The characteristic of a field is 0 or a prime. Fields are the coefficient domains of vector spaces.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.13"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.13"
+      ]
     },
     {
       "id": "math.abst.field-extension",
       "name": "Field Extension",
-      "aliases": ["K/F", "degree of extension"],
+      "aliases": [
+        "K/F",
+        "degree of extension"
+      ],
       "parent": "math.abst.field",
-      "children": ["math.abst.algebraic-extension", "math.abst.galois-theory"],
-      "requires": ["math.abst.field"],
-      "unlocks": ["math.abst.algebraic-extension"],
+      "children": [
+        "math.abst.algebraic-extension",
+        "math.abst.galois-theory"
+      ],
+      "requires": [
+        "math.abst.field"
+      ],
+      "unlocks": [
+        "math.abst.algebraic-extension"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "K is a field extension of F (K/F) if K is a field containing F as subfield. Degree [K:F] = dim_F(K). Tower law: [K:F]=[K:E][E:F]. Extensions are simple (K=F(α)), algebraic, or transcendental.",
+      "description": "K is a field extension of F (K/F) if K is a field containing F as subfield. Degree [K:F] = dim_F(K). Tower law: [K:F]=[K:E][E:F]. Extensions are simple (K=F(\u03b1)), algebraic, or transcendental.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.13"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.13"
+      ]
     },
     {
       "id": "math.abst.algebraic-extension",
       "name": "Algebraic Extension",
-      "aliases": ["algebraic element", "minimal polynomial"],
+      "aliases": [
+        "algebraic element",
+        "minimal polynomial"
+      ],
       "parent": "math.abst.field-extension",
       "children": [],
-      "requires": ["math.abst.field-extension"],
-      "unlocks": ["math.abst.galois-theory"],
+      "requires": [
+        "math.abst.field-extension"
+      ],
+      "unlocks": [
+        "math.abst.galois-theory"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "α is algebraic over F if it satisfies some polynomial with F-coefficients. Minimal polynomial mα(x): the monic irreducible polynomial of least degree satisfied by α. F(α)≅F[x]/(mα(x)); [F(α):F]=deg(mα).",
+      "description": "\u03b1 is algebraic over F if it satisfies some polynomial with F-coefficients. Minimal polynomial m\u03b1(x): the monic irreducible polynomial of least degree satisfied by \u03b1. F(\u03b1)\u2245F[x]/(m\u03b1(x)); [F(\u03b1):F]=deg(m\u03b1).",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Dummit & Foote, Abstract Algebra, §13.1–13.2"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a713.1\u201313.2"
+      ]
     },
     {
       "id": "math.abst.finite-field",
       "name": "Finite Field",
-      "aliases": ["Galois field", "GF(q)", "𝔽_q"],
+      "aliases": [
+        "Galois field",
+        "GF(q)",
+        "\ud835\udd3d_q"
+      ],
       "parent": "math.abst.field",
       "children": [],
-      "requires": ["math.abst.field", "math.nt.prime-numbers"],
+      "requires": [
+        "math.abst.field",
+        "math.nt.prime-number"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.nt.modular-arithmetic"],
-      "description": "Finite fields exist iff |F|=pⁿ (p prime, n≥1), denoted 𝔽_{pⁿ} or GF(pⁿ). Unique up to isomorphism. Multiplicative group is cyclic. Used in coding theory, cryptography, and combinatorics.",
+      "cross_links": [
+        "math.nt.modular-arithmetic"
+      ],
+      "description": "Finite fields exist iff |F|=p\u207f (p prime, n\u22651), denoted \ud835\udd3d_{p\u207f} or GF(p\u207f). Unique up to isomorphism. Multiplicative group is cyclic. Used in coding theory, cryptography, and combinatorics.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Dummit & Foote, Abstract Algebra, §13.5"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a713.5"
+      ]
     },
     {
       "id": "math.abst.galois-theory",
       "name": "Galois Theory",
-      "aliases": ["Galois group", "solvability by radicals"],
+      "aliases": [
+        "Galois group",
+        "solvability by radicals"
+      ],
       "parent": null,
-      "children": ["math.abst.galois-group", "math.abst.galois-correspondence"],
-      "requires": ["math.abst.algebraic-extension", "math.abst.group-theory"],
-      "unlocks": ["math.abst.galois-group"],
+      "children": [
+        "math.abst.galois-group",
+        "math.abst.galois-correspondence"
+      ],
+      "requires": [
+        "math.abst.algebraic-extension",
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.abst.galois-group"
+      ],
       "related": [],
       "cross_links": [],
       "description": "Studies field extensions via their automorphism groups. Fundamental theorem: a bijective correspondence between subfields of a Galois extension K/F and subgroups of Gal(K/F). Resolves classical impossibility problems.",
@@ -581,58 +924,81 @@
       "estimated_hours": 12,
       "bloom": "analyze",
       "mastery_threshold": 0.65,
-      "references": ["Dummit & Foote, Abstract Algebra, Ch.14; Stewart, Galois Theory"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, Ch.14; Stewart, Galois Theory"
+      ]
     },
     {
       "id": "math.abst.galois-group",
       "name": "Galois Group",
-      "aliases": ["Gal(K/F)", "automorphism group of extension"],
+      "aliases": [
+        "Gal(K/F)",
+        "automorphism group of extension"
+      ],
       "parent": "math.abst.galois-theory",
       "children": [],
-      "requires": ["math.abst.galois-theory"],
+      "requires": [
+        "math.abst.galois-theory"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Gal(K/F) = {σ:K→K automorphism fixing F pointwise}. Group under composition. |Gal(K/F)| = [K:F] for Galois extensions. For 𝔽_{pⁿ}/𝔽_p: Gal ≅ ℤₙ (Frobenius generates it).",
+      "description": "Gal(K/F) = {\u03c3:K\u2192K automorphism fixing F pointwise}. Group under composition. |Gal(K/F)| = [K:F] for Galois extensions. For \ud835\udd3d_{p\u207f}/\ud835\udd3d_p: Gal \u2245 \u2124\u2099 (Frobenius generates it).",
       "difficulty": "research",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.60,
-      "references": ["Dummit & Foote, Abstract Algebra, §14.1"]
+      "mastery_threshold": 0.6,
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a714.1"
+      ]
     },
     {
       "id": "math.abst.galois-correspondence",
       "name": "Fundamental Theorem of Galois Theory",
-      "aliases": ["Galois correspondence"],
+      "aliases": [
+        "Galois correspondence"
+      ],
       "parent": "math.abst.galois-theory",
       "children": [],
-      "requires": ["math.abst.galois-group"],
+      "requires": [
+        "math.abst.galois-group"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "For a Galois extension K/F: there is a bijection between intermediate fields E (F⊆E⊆K) and subgroups H of Gal(K/F). Correspondence: E↔Gal(K/E); normal subgroups correspond to Galois subextensions.",
+      "description": "For a Galois extension K/F: there is a bijection between intermediate fields E (F\u2286E\u2286K) and subgroups H of Gal(K/F). Correspondence: E\u2194Gal(K/E); normal subgroups correspond to Galois subextensions.",
       "difficulty": "research",
       "estimated_hours": 8,
       "bloom": "analyze",
       "mastery_threshold": 0.55,
-      "references": ["Dummit & Foote, Abstract Algebra, §14.2"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a714.2"
+      ]
     },
     {
       "id": "math.abst.group-inverse",
       "name": "Group Inverse",
-      "aliases": ["inverse element"],
+      "aliases": [
+        "inverse element"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.abst.group-theory"],
+      "requires": [
+        "math.abst.group-theory"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.linalg.matrix-inverse"],
-      "description": "For every element g in a group G, there exists a unique g⁻¹ such that gg⁻¹=g⁻¹g=e. Uniqueness proved from the axioms: if ga=e and gb=e then a=b.",
+      "cross_links": [
+        "math.linalg.matrix-inverse"
+      ],
+      "description": "For every element g in a group G, there exists a unique g\u207b\u00b9 such that gg\u207b\u00b9=g\u207b\u00b9g=e. Uniqueness proved from the axioms: if ga=e and gb=e then a=b.",
       "difficulty": "advanced",
       "estimated_hours": 1,
       "bloom": "understand",
       "mastery_threshold": 0.95,
-      "references": ["Dummit & Foote, Abstract Algebra, §1.1"]
+      "references": [
+        "Dummit & Foote, Abstract Algebra, \u00a71.1"
+      ]
     }
   ]
 }

@@ -2,543 +2,993 @@
   "domain_id": "algebra",
   "domain_name": "Algebra",
   "id_prefix": "math.alg",
-  "level_range": [2, 5],
+  "level_range": [
+    2,
+    5
+  ],
   "description": "The study of mathematical symbols and the rules for manipulating them, from elementary equations through polynomial systems, logarithms, and abstract algebraic structures.",
   "concepts": [
     {
       "id": "math.alg.expression",
       "name": "Algebraic Expression",
-      "aliases": ["expression", "polynomial expression", "algebraic term"],
+      "aliases": [
+        "expression",
+        "polynomial expression",
+        "algebraic term"
+      ],
       "parent": null,
-      "children": ["math.alg.term", "math.alg.coefficient", "math.alg.like-terms"],
-      "requires": ["math.found.variable", "math.arith.order-of-operations"],
-      "unlocks": ["math.alg.equation", "math.alg.polynomial"],
-      "related": ["math.alg.equation", "math.alg.polynomial"],
+      "children": [
+        "math.alg.term",
+        "math.alg.coefficient",
+        "math.alg.like-terms"
+      ],
+      "requires": [
+        "math.found.variable",
+        "math.arith.order-of-operations"
+      ],
+      "unlocks": [
+        "math.alg.equation",
+        "math.alg.polynomial"
+      ],
+      "related": [
+        "math.alg.equation",
+        "math.alg.polynomial"
+      ],
       "cross_links": [],
       "description": "A combination of numbers, variables, and arithmetic operations that represents a mathematical quantity; does not contain an equality or inequality sign.",
       "difficulty": "developing",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 6-7", "OpenStax Elementary Algebra", "Singapore Math Grade 6"]
+      "references": [
+        "NCERT Grade 6-7",
+        "OpenStax Elementary Algebra",
+        "Singapore Math Grade 6"
+      ]
     },
     {
       "id": "math.alg.term",
       "name": "Term",
-      "aliases": ["algebraic term", "monomial"],
+      "aliases": [
+        "algebraic term",
+        "monomial"
+      ],
       "parent": "math.alg.expression",
       "children": [],
-      "requires": ["math.alg.expression"],
+      "requires": [
+        "math.alg.expression"
+      ],
       "unlocks": [],
-      "related": ["math.alg.coefficient", "math.alg.like-terms"],
+      "related": [
+        "math.alg.coefficient",
+        "math.alg.like-terms"
+      ],
       "cross_links": [],
-      "description": "A single number, variable, or product of numbers and variables in an algebraic expression; separated from other terms by + or −.",
+      "description": "A single number, variable, or product of numbers and variables in an algebraic expression; separated from other terms by + or \u2212.",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "remember",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7", "OpenStax Elementary Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.coefficient",
       "name": "Coefficient",
-      "aliases": ["numerical coefficient", "scalar multiplier"],
+      "aliases": [
+        "numerical coefficient",
+        "scalar multiplier"
+      ],
       "parent": "math.alg.expression",
       "children": [],
-      "requires": ["math.alg.term"],
+      "requires": [
+        "math.alg.term"
+      ],
       "unlocks": [],
-      "related": ["math.alg.term"],
+      "related": [
+        "math.alg.term"
+      ],
       "cross_links": [],
-      "description": "The numerical factor multiplying the variable part of a term; in 3x², the coefficient is 3.",
+      "description": "The numerical factor multiplying the variable part of a term; in 3x\u00b2, the coefficient is 3.",
       "difficulty": "developing",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 7", "OpenStax Elementary Algebra"]
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.like-terms",
       "name": "Like Terms",
-      "aliases": ["similar terms", "combining like terms"],
+      "aliases": [
+        "similar terms",
+        "combining like terms"
+      ],
       "parent": "math.alg.expression",
       "children": [],
-      "requires": ["math.alg.term", "math.alg.coefficient"],
-      "unlocks": ["math.alg.simplification"],
-      "related": ["math.alg.simplification"],
+      "requires": [
+        "math.alg.term",
+        "math.alg.coefficient"
+      ],
+      "unlocks": [
+        "math.alg.simplification"
+      ],
+      "related": [
+        "math.alg.simplification"
+      ],
       "cross_links": [],
       "description": "Terms with identical variable parts (same variables to the same powers); only like terms may be combined by adding or subtracting coefficients.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 7", "OpenStax Elementary Algebra"]
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.simplification",
       "name": "Algebraic Simplification",
-      "aliases": ["simplifying expressions", "collecting terms"],
+      "aliases": [
+        "simplifying expressions",
+        "collecting terms"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.like-terms", "math.alg.expression"],
-      "unlocks": ["math.alg.equation"],
-      "related": ["math.alg.expression"],
+      "requires": [
+        "math.alg.like-terms",
+        "math.alg.expression"
+      ],
+      "unlocks": [
+        "math.alg.equation"
+      ],
+      "related": [
+        "math.alg.expression"
+      ],
       "cross_links": [],
       "description": "Rewriting an algebraic expression in a simpler equivalent form by combining like terms, applying exponent rules, and expanding brackets.",
       "difficulty": "developing",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 7-8", "OpenStax Elementary Algebra"]
+      "references": [
+        "NCERT Grade 7-8",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.equation",
       "name": "Equation",
-      "aliases": ["algebraic equation", "equality"],
+      "aliases": [
+        "algebraic equation",
+        "equality"
+      ],
       "parent": null,
-      "children": ["math.alg.linear-equation-1var", "math.alg.solution-set"],
-      "requires": ["math.alg.expression"],
-      "unlocks": ["math.alg.linear-equation-1var", "math.alg.inequality"],
-      "related": ["math.alg.inequality", "math.alg.expression"],
+      "children": [
+        "math.alg.linear-equation-1var",
+        "math.alg.solution-set"
+      ],
+      "requires": [
+        "math.alg.expression"
+      ],
+      "unlocks": [
+        "math.alg.linear-equation-1var",
+        "math.alg.inequality"
+      ],
+      "related": [
+        "math.alg.inequality",
+        "math.alg.expression"
+      ],
       "cross_links": [],
       "description": "A statement asserting the equality of two algebraic expressions; solving an equation means finding all values of the variable(s) that make it true.",
       "difficulty": "developing",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7", "OpenStax Elementary Algebra", "Singapore Math Grade 7"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax Elementary Algebra",
+        "Singapore Math Grade 7"
+      ]
     },
     {
       "id": "math.alg.solution-set",
       "name": "Solution Set",
-      "aliases": ["solution", "root", "zeros"],
+      "aliases": [
+        "solution",
+        "root",
+        "zeros"
+      ],
       "parent": "math.alg.equation",
       "children": [],
-      "requires": ["math.alg.equation"],
+      "requires": [
+        "math.alg.equation"
+      ],
       "unlocks": [],
-      "related": ["math.alg.equation"],
-      "cross_links": ["math.func.zero-of-function"],
+      "related": [
+        "math.alg.equation"
+      ],
+      "cross_links": [
+        "math.func.zero-of-function"
+      ],
       "description": "The set of all values of the variable(s) satisfying an equation or inequality; may be empty, finite, or infinite.",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 7-8", "OpenStax Elementary Algebra"]
+      "references": [
+        "NCERT Grade 7-8",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.linear-equation-1var",
       "name": "Linear Equation in One Variable",
-      "aliases": ["one-variable linear equation", "ax + b = c"],
+      "aliases": [
+        "one-variable linear equation",
+        "ax + b = c"
+      ],
       "parent": "math.alg.equation",
       "children": [],
-      "requires": ["math.alg.equation", "math.alg.simplification"],
-      "unlocks": ["math.alg.linear-equation-2var", "math.alg.inequality-1var"],
-      "related": ["math.alg.inequality-1var"],
+      "requires": [
+        "math.alg.equation",
+        "math.alg.simplification"
+      ],
+      "unlocks": [
+        "math.alg.linear-equation-2var",
+        "math.alg.inequality-1var"
+      ],
+      "related": [
+        "math.alg.inequality-1var"
+      ],
       "cross_links": [],
-      "description": "An equation of the form ax + b = c with a ≠ 0; has a unique solution x = (c − b)/a.",
+      "description": "An equation of the form ax + b = c with a \u2260 0; has a unique solution x = (c \u2212 b)/a.",
       "difficulty": "developing",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7-8", "Singapore Math Grade 7", "OpenStax Elementary Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7-8",
+        "Singapore Math Grade 7",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.inequality-1var",
       "name": "Linear Inequality in One Variable",
-      "aliases": ["one-variable inequality", "ax + b < c"],
+      "aliases": [
+        "one-variable inequality",
+        "ax + b < c"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.linear-equation-1var"],
-      "unlocks": ["math.alg.inequality-2var"],
-      "related": ["math.alg.linear-equation-1var"],
+      "requires": [
+        "math.alg.linear-equation-1var"
+      ],
+      "unlocks": [
+        "math.alg.inequality-2var"
+      ],
+      "related": [
+        "math.alg.linear-equation-1var"
+      ],
       "cross_links": [],
-      "description": "An inequality of the form ax + b < c (or ≤, >, ≥); solution is an interval, and the direction flips when multiplying by a negative.",
+      "description": "An inequality of the form ax + b < c (or \u2264, >, \u2265); solution is an interval, and the direction flips when multiplying by a negative.",
       "difficulty": "developing",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9", "OpenStax Elementary Algebra", "Singapore Math Grade 8"]
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax Elementary Algebra",
+        "Singapore Math Grade 8"
+      ]
     },
     {
       "id": "math.alg.absolute-value-equations",
       "name": "Absolute Value Equations and Inequalities",
-      "aliases": ["|ax + b| = c", "absolute value inequality"],
+      "aliases": [
+        "|ax + b| = c",
+        "absolute value inequality"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.arith.absolute-value", "math.alg.linear-equation-1var"],
+      "requires": [
+        "math.arith.absolute-value",
+        "math.alg.linear-equation-1var"
+      ],
       "unlocks": [],
-      "related": ["math.arith.absolute-value"],
+      "related": [
+        "math.arith.absolute-value"
+      ],
       "cross_links": [],
       "description": "Equations and inequalities involving the absolute value; solved by splitting into cases based on the sign of the expression inside the absolute value.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra", "Stewart Precalculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "Stewart Precalculus"
+      ]
     },
     {
       "id": "math.alg.linear-equation-2var",
       "name": "Linear Equation in Two Variables",
-      "aliases": ["ax + by = c", "two-variable linear equation"],
+      "aliases": [
+        "ax + by = c",
+        "two-variable linear equation"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.linear-equation-1var"],
-      "unlocks": ["math.alg.system-linear-equations", "math.func.linear-function"],
-      "related": ["math.func.linear-function", "math.geom.line-equation"],
-      "cross_links": ["math.func.linear-function", "math.geom.line-equation"],
+      "requires": [
+        "math.alg.linear-equation-1var"
+      ],
+      "unlocks": [
+        "math.alg.system-linear-equations",
+        "math.func.linear-function"
+      ],
+      "related": [
+        "math.func.linear-function",
+        "math.geom.line-equation"
+      ],
+      "cross_links": [
+        "math.func.linear-function",
+        "math.geom.line-equation"
+      ],
       "description": "An equation of the form ax + by = c with infinitely many solutions forming a line in the coordinate plane.",
       "difficulty": "developing",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9", "Singapore Math Grade 8", "OpenStax Elementary Algebra"]
+      "references": [
+        "NCERT Grade 9",
+        "Singapore Math Grade 8",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.inequality-2var",
       "name": "Linear Inequality in Two Variables",
-      "aliases": ["ax + by < c", "half-plane"],
+      "aliases": [
+        "ax + by < c",
+        "half-plane"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.inequality-1var", "math.alg.linear-equation-2var"],
-      "unlocks": ["math.opt.linear-programming"],
-      "related": ["math.opt.linear-programming"],
-      "cross_links": ["math.opt.linear-programming"],
-      "description": "An inequality ax + by < c (or ≤, >, ≥) whose solution is a half-plane; used in linear programming to define feasible regions.",
+      "requires": [
+        "math.alg.inequality-1var",
+        "math.alg.linear-equation-2var"
+      ],
+      "unlocks": [
+        "math.opt.linear-programming"
+      ],
+      "related": [
+        "math.opt.linear-programming"
+      ],
+      "cross_links": [
+        "math.opt.linear-programming"
+      ],
+      "description": "An inequality ax + by < c (or \u2264, >, \u2265) whose solution is a half-plane; used in linear programming to define feasible regions.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.system-linear-equations",
       "name": "Systems of Linear Equations",
-      "aliases": ["simultaneous equations", "linear system"],
+      "aliases": [
+        "simultaneous equations",
+        "linear system"
+      ],
       "parent": null,
-      "children": ["math.alg.substitution-method", "math.alg.elimination-method"],
-      "requires": ["math.alg.linear-equation-2var"],
-      "unlocks": ["math.linalg.linear-systems", "math.alg.system-3var"],
-      "related": ["math.linalg.linear-systems"],
-      "cross_links": ["math.linalg.linear-systems"],
+      "children": [
+        "math.alg.substitution-method",
+        "math.alg.elimination-method"
+      ],
+      "requires": [
+        "math.alg.linear-equation-2var"
+      ],
+      "unlocks": [
+        "math.linalg.linear-system",
+        "math.alg.system-3var"
+      ],
+      "related": [
+        "math.linalg.linear-systems"
+      ],
+      "cross_links": [
+        "math.linalg.linear-system"
+      ],
       "description": "A collection of linear equations with the same variables; solutions are points (or none, or infinitely many) satisfying all equations simultaneously.",
       "difficulty": "proficient",
       "estimated_hours": 12,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 10", "Singapore Math Grade 9", "OpenStax Intermediate Algebra"]
+      "references": [
+        "NCERT Grade 10",
+        "Singapore Math Grade 9",
+        "OpenStax Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.substitution-method",
       "name": "Substitution Method",
-      "aliases": ["substitution algorithm for linear systems"],
+      "aliases": [
+        "substitution algorithm for linear systems"
+      ],
       "parent": "math.alg.system-linear-equations",
       "children": [],
-      "requires": ["math.alg.system-linear-equations"],
+      "requires": [
+        "math.alg.system-linear-equations"
+      ],
       "unlocks": [],
-      "related": ["math.alg.elimination-method"],
+      "related": [
+        "math.alg.elimination-method"
+      ],
       "cross_links": [],
       "description": "Solving a system of equations by expressing one variable in terms of others from one equation and substituting into the remaining equations.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 10", "OpenStax Intermediate Algebra"]
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.elimination-method",
       "name": "Elimination Method",
-      "aliases": ["addition method", "row operations for 2×2"],
+      "aliases": [
+        "addition method",
+        "row operations for 2\u00d72"
+      ],
       "parent": "math.alg.system-linear-equations",
       "children": [],
-      "requires": ["math.alg.system-linear-equations"],
-      "unlocks": ["math.linalg.gaussian-elimination"],
-      "related": ["math.alg.substitution-method", "math.linalg.gaussian-elimination"],
-      "cross_links": ["math.linalg.gaussian-elimination"],
+      "requires": [
+        "math.alg.system-linear-equations"
+      ],
+      "unlocks": [
+        "math.linalg.row-reduction"
+      ],
+      "related": [
+        "math.alg.substitution-method",
+        "math.linalg.gaussian-elimination"
+      ],
+      "cross_links": [
+        "math.linalg.row-reduction"
+      ],
       "description": "Solving a system of equations by adding or subtracting multiples of equations to eliminate one variable at a time.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 10", "OpenStax Intermediate Algebra"]
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.system-3var",
       "name": "Systems of 3 Equations in 3 Variables",
-      "aliases": ["3×3 linear system"],
+      "aliases": [
+        "3\u00d73 linear system"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.system-linear-equations"],
-      "unlocks": ["math.linalg.gaussian-elimination"],
-      "related": ["math.linalg.gaussian-elimination"],
-      "cross_links": ["math.linalg.gaussian-elimination"],
+      "requires": [
+        "math.alg.system-linear-equations"
+      ],
+      "unlocks": [
+        "math.linalg.row-reduction"
+      ],
+      "related": [
+        "math.linalg.gaussian-elimination"
+      ],
+      "cross_links": [
+        "math.linalg.row-reduction"
+      ],
       "description": "Extension of 2-variable systems; solved by elimination or row reduction, with solutions being a point, a line, a plane, or the empty set.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 12", "OpenStax College Algebra", "Stewart Precalculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 12",
+        "OpenStax College Algebra",
+        "Stewart Precalculus"
+      ]
     },
     {
       "id": "math.alg.polynomial",
       "name": "Polynomial",
-      "aliases": ["polynomial function", "Σaₙxⁿ"],
+      "aliases": [
+        "polynomial function",
+        "\u03a3a\u2099x\u207f"
+      ],
       "parent": null,
-      "children": ["math.alg.degree", "math.alg.polynomial-operations", "math.alg.polynomial-division"],
-      "requires": ["math.alg.expression", "math.arith.exponent-rules"],
-      "unlocks": ["math.alg.factoring", "math.alg.polynomial-roots", "math.func.polynomial-function"],
-      "related": ["math.func.polynomial-function"],
-      "cross_links": ["math.func.polynomial-function", "math.abst.polynomial-ring"],
-      "description": "An expression of the form aₙxⁿ + … + a₁x + a₀ where n ∈ ℕ and aₙ ≠ 0; the degree is n and the set of all polynomials forms a ring.",
+      "children": [
+        "math.alg.degree",
+        "math.alg.polynomial-operations",
+        "math.alg.polynomial-division"
+      ],
+      "requires": [
+        "math.alg.expression",
+        "math.arith.exponent-rules"
+      ],
+      "unlocks": [
+        "math.alg.factoring",
+        "math.alg.polynomial-roots",
+        "math.func.polynomial-function"
+      ],
+      "related": [
+        "math.func.polynomial-function"
+      ],
+      "cross_links": [
+        "math.func.polynomial-function",
+        "math.abst.polynomial-ring"
+      ],
+      "description": "An expression of the form a\u2099x\u207f + \u2026 + a\u2081x + a\u2080 where n \u2208 \u2115 and a\u2099 \u2260 0; the degree is n and the set of all polynomials forms a ring.",
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9-10", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.degree",
       "name": "Degree of a Polynomial",
-      "aliases": ["polynomial degree", "order of polynomial"],
+      "aliases": [
+        "polynomial degree",
+        "order of polynomial"
+      ],
       "parent": "math.alg.polynomial",
       "children": [],
-      "requires": ["math.alg.polynomial"],
+      "requires": [
+        "math.alg.polynomial"
+      ],
       "unlocks": [],
-      "related": ["math.alg.polynomial"],
+      "related": [
+        "math.alg.polynomial"
+      ],
       "cross_links": [],
       "description": "The highest power of the variable in a polynomial; determines the maximum number of roots and the long-run behavior.",
       "difficulty": "proficient",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 9", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.polynomial-operations",
       "name": "Polynomial Operations",
-      "aliases": ["adding polynomials", "multiplying polynomials", "polynomial arithmetic"],
+      "aliases": [
+        "adding polynomials",
+        "multiplying polynomials",
+        "polynomial arithmetic"
+      ],
       "parent": "math.alg.polynomial",
       "children": [],
-      "requires": ["math.alg.polynomial", "math.alg.like-terms"],
-      "unlocks": ["math.alg.polynomial-division"],
-      "related": ["math.alg.polynomial-division"],
+      "requires": [
+        "math.alg.polynomial",
+        "math.alg.like-terms"
+      ],
+      "unlocks": [
+        "math.alg.polynomial-division"
+      ],
+      "related": [
+        "math.alg.polynomial-division"
+      ],
       "cross_links": [],
       "description": "Adding, subtracting, and multiplying polynomials by combining like terms and applying the distributive property; products may use FOIL or the grid method.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9-10", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.polynomial-division",
       "name": "Polynomial Division",
-      "aliases": ["polynomial long division", "synthetic division"],
+      "aliases": [
+        "polynomial long division",
+        "synthetic division"
+      ],
       "parent": "math.alg.polynomial",
       "children": [],
-      "requires": ["math.alg.polynomial-operations"],
-      "unlocks": ["math.alg.remainder-theorem", "math.alg.factor-theorem"],
-      "related": ["math.alg.remainder-theorem"],
+      "requires": [
+        "math.alg.polynomial-operations"
+      ],
+      "unlocks": [
+        "math.alg.remainder-theorem",
+        "math.alg.factor-theorem"
+      ],
+      "related": [
+        "math.alg.remainder-theorem"
+      ],
       "cross_links": [],
       "description": "Dividing polynomial p(x) by divisor d(x) to get quotient q(x) and remainder r(x) with p(x) = d(x)q(x) + r(x) and deg r < deg d.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 10", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.remainder-theorem",
       "name": "Remainder Theorem",
-      "aliases": ["polynomial remainder theorem"],
+      "aliases": [
+        "polynomial remainder theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.polynomial-division"],
-      "unlocks": ["math.alg.factor-theorem"],
-      "related": ["math.alg.factor-theorem"],
+      "requires": [
+        "math.alg.polynomial-division"
+      ],
+      "unlocks": [
+        "math.alg.factor-theorem"
+      ],
+      "related": [
+        "math.alg.factor-theorem"
+      ],
       "cross_links": [],
-      "description": "When a polynomial p(x) is divided by (x − a), the remainder equals p(a); enables efficient evaluation without full division.",
+      "description": "When a polynomial p(x) is divided by (x \u2212 a), the remainder equals p(a); enables efficient evaluation without full division.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.factor-theorem",
       "name": "Factor Theorem",
-      "aliases": ["polynomial factor theorem"],
+      "aliases": [
+        "polynomial factor theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.remainder-theorem"],
-      "unlocks": ["math.alg.polynomial-roots"],
-      "related": ["math.alg.remainder-theorem", "math.alg.polynomial-roots"],
+      "requires": [
+        "math.alg.remainder-theorem"
+      ],
+      "unlocks": [
+        "math.alg.polynomial-roots"
+      ],
+      "related": [
+        "math.alg.remainder-theorem",
+        "math.alg.polynomial-roots"
+      ],
       "cross_links": [],
-      "description": "(x − a) is a factor of p(x) iff p(a) = 0; the remainder theorem at zero remainder.",
+      "description": "(x \u2212 a) is a factor of p(x) iff p(a) = 0; the remainder theorem at zero remainder.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.factoring",
       "name": "Factoring Polynomials",
-      "aliases": ["polynomial factorization", "factoring"],
+      "aliases": [
+        "polynomial factorization",
+        "factoring"
+      ],
       "parent": null,
-      "children": ["math.alg.factoring-gcf", "math.alg.factoring-trinomials", "math.alg.factoring-special"],
-      "requires": ["math.alg.polynomial", "math.alg.factor-theorem"],
-      "unlocks": ["math.alg.polynomial-roots", "math.alg.rational-expressions"],
-      "related": ["math.alg.polynomial-roots"],
+      "children": [
+        "math.alg.factoring-gcf",
+        "math.alg.factoring-trinomials",
+        "math.alg.factoring-special"
+      ],
+      "requires": [
+        "math.alg.polynomial",
+        "math.alg.factor-theorem"
+      ],
+      "unlocks": [
+        "math.alg.polynomial-roots",
+        "math.alg.rational-expressions"
+      ],
+      "related": [
+        "math.alg.polynomial-roots"
+      ],
       "cross_links": [],
       "description": "Expressing a polynomial as a product of lower-degree polynomials; fundamental to solving polynomial equations and simplifying expressions.",
       "difficulty": "proficient",
       "estimated_hours": 15,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9-10", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.factoring-gcf",
       "name": "Factoring out the GCF",
-      "aliases": ["common factor", "factoring common terms"],
+      "aliases": [
+        "common factor",
+        "factoring common terms"
+      ],
       "parent": "math.alg.factoring",
       "children": [],
-      "requires": ["math.alg.factoring"],
+      "requires": [
+        "math.alg.factoring"
+      ],
       "unlocks": [],
-      "related": ["math.nt.gcd"],
-      "cross_links": ["math.nt.gcd"],
+      "related": [
+        "math.nt.gcd"
+      ],
+      "cross_links": [
+        "math.nt.gcd"
+      ],
       "description": "Identifying the greatest common factor of all terms and factoring it out: ab + ac = a(b + c).",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 8-9", "OpenStax Elementary Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 8-9",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.factoring-trinomials",
       "name": "Factoring Trinomials",
-      "aliases": ["factoring ax²+bx+c", "AC method", "trial and error factoring"],
+      "aliases": [
+        "factoring ax\u00b2+bx+c",
+        "AC method",
+        "trial and error factoring"
+      ],
       "parent": "math.alg.factoring",
       "children": [],
-      "requires": ["math.alg.factoring-gcf"],
-      "unlocks": ["math.alg.quadratic-equation"],
-      "related": ["math.alg.quadratic-equation"],
+      "requires": [
+        "math.alg.factoring-gcf"
+      ],
+      "unlocks": [
+        "math.alg.quadratic-equation"
+      ],
+      "related": [
+        "math.alg.quadratic-equation"
+      ],
       "cross_links": [],
       "description": "Factoring a quadratic or higher-degree trinomial into a product of lower-degree polynomials using patterns, the AC method, or the quadratic formula.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 10", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.factoring-special",
       "name": "Special Factoring Patterns",
-      "aliases": ["difference of squares", "sum of cubes", "perfect square trinomial"],
+      "aliases": [
+        "difference of squares",
+        "sum of cubes",
+        "perfect square trinomial"
+      ],
       "parent": "math.alg.factoring",
       "children": [],
-      "requires": ["math.alg.factoring"],
+      "requires": [
+        "math.alg.factoring"
+      ],
       "unlocks": [],
-      "related": ["math.alg.factoring-trinomials"],
+      "related": [
+        "math.alg.factoring-trinomials"
+      ],
       "cross_links": [],
-      "description": "Memorized factoring formulas: a²−b² = (a+b)(a−b), a³±b³ = (a±b)(a²∓ab+b²), (a±b)² = a²±2ab+b².",
+      "description": "Memorized factoring formulas: a\u00b2\u2212b\u00b2 = (a+b)(a\u2212b), a\u00b3\u00b1b\u00b3 = (a\u00b1b)(a\u00b2\u2213ab+b\u00b2), (a\u00b1b)\u00b2 = a\u00b2\u00b12ab+b\u00b2.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 8-9", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 8-9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.quadratic-equation",
       "name": "Quadratic Equation",
-      "aliases": ["ax²+bx+c=0", "second-degree equation"],
+      "aliases": [
+        "ax\u00b2+bx+c=0",
+        "second-degree equation"
+      ],
       "parent": null,
-      "children": ["math.alg.completing-the-square", "math.alg.quadratic-formula", "math.alg.discriminant"],
-      "requires": ["math.alg.factoring-trinomials"],
-      "unlocks": ["math.func.quadratic-function", "math.alg.polynomial-roots"],
-      "related": ["math.func.quadratic-function"],
-      "cross_links": ["math.func.quadratic-function"],
-      "description": "A degree-2 polynomial equation ax² + bx + c = 0; solved by factoring, completing the square, or the quadratic formula; has at most 2 real roots.",
+      "children": [
+        "math.alg.completing-the-square",
+        "math.alg.quadratic-formula",
+        "math.alg.discriminant"
+      ],
+      "requires": [
+        "math.alg.factoring-trinomials"
+      ],
+      "unlocks": [
+        "math.func.quadratic-function",
+        "math.alg.polynomial-roots"
+      ],
+      "related": [
+        "math.func.quadratic-function"
+      ],
+      "cross_links": [
+        "math.func.quadratic-function"
+      ],
+      "description": "A degree-2 polynomial equation ax\u00b2 + bx + c = 0; solved by factoring, completing the square, or the quadratic formula; has at most 2 real roots.",
       "difficulty": "proficient",
       "estimated_hours": 12,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 10-11", "Singapore Math Grade 10", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 10-11",
+        "Singapore Math Grade 10",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.completing-the-square",
       "name": "Completing the Square",
-      "aliases": ["completing-the-square technique", "vertex form conversion"],
+      "aliases": [
+        "completing-the-square technique",
+        "vertex form conversion"
+      ],
       "parent": "math.alg.quadratic-equation",
       "children": [],
-      "requires": ["math.alg.quadratic-equation"],
-      "unlocks": ["math.alg.quadratic-formula"],
-      "related": ["math.alg.quadratic-formula"],
+      "requires": [
+        "math.alg.quadratic-equation"
+      ],
+      "unlocks": [
+        "math.alg.quadratic-formula"
+      ],
+      "related": [
+        "math.alg.quadratic-formula"
+      ],
       "cross_links": [],
-      "description": "Rewriting ax² + bx + c by adding and subtracting (b/2a)² to form a perfect square trinomial; yields vertex form and derives the quadratic formula.",
+      "description": "Rewriting ax\u00b2 + bx + c by adding and subtracting (b/2a)\u00b2 to form a perfect square trinomial; yields vertex form and derives the quadratic formula.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 10-11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 10-11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.quadratic-formula",
       "name": "Quadratic Formula",
-      "aliases": ["x = (−b ± √(b²−4ac)) / 2a"],
+      "aliases": [
+        "x = (\u2212b \u00b1 \u221a(b\u00b2\u22124ac)) / 2a"
+      ],
       "parent": "math.alg.quadratic-equation",
       "children": [],
-      "requires": ["math.alg.completing-the-square"],
-      "unlocks": ["math.alg.discriminant"],
-      "related": ["math.alg.discriminant"],
+      "requires": [
+        "math.alg.completing-the-square"
+      ],
+      "unlocks": [
+        "math.alg.discriminant"
+      ],
+      "related": [
+        "math.alg.discriminant"
+      ],
       "cross_links": [],
-      "description": "The explicit formula x = (−b ± √(b²−4ac)) / (2a) giving all roots of ax² + bx + c = 0; derived from completing the square.",
+      "description": "The explicit formula x = (\u2212b \u00b1 \u221a(b\u00b2\u22124ac)) / (2a) giving all roots of ax\u00b2 + bx + c = 0; derived from completing the square.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 10-11", "Singapore Math Grade 10", "OpenStax College Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 10-11",
+        "Singapore Math Grade 10",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.discriminant",
       "name": "Discriminant",
-      "aliases": ["b²−4ac", "delta", "Δ"],
+      "aliases": [
+        "b\u00b2\u22124ac",
+        "delta",
+        "\u0394"
+      ],
       "parent": "math.alg.quadratic-equation",
       "children": [],
-      "requires": ["math.alg.quadratic-formula"],
+      "requires": [
+        "math.alg.quadratic-formula"
+      ],
       "unlocks": [],
-      "related": ["math.alg.quadratic-formula"],
+      "related": [
+        "math.alg.quadratic-formula"
+      ],
       "cross_links": [],
-      "description": "The expression b² − 4ac: positive → two real roots, zero → one repeated root, negative → two complex roots.",
+      "description": "The expression b\u00b2 \u2212 4ac: positive \u2192 two real roots, zero \u2192 one repeated root, negative \u2192 two complex roots.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "analyze",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.polynomial-roots",
       "name": "Polynomial Roots (Real and Complex)",
-      "aliases": ["zeros of a polynomial", "roots of a polynomial"],
+      "aliases": [
+        "zeros of a polynomial",
+        "roots of a polynomial"
+      ],
       "parent": null,
-      "children": ["math.alg.rational-root-theorem", "math.alg.fundamental-theorem-algebra"],
-      "requires": ["math.alg.factor-theorem", "math.alg.quadratic-equation"],
-      "unlocks": ["math.alg.fundamental-theorem-algebra"],
-      "related": ["math.alg.fundamental-theorem-algebra"],
-      "cross_links": ["math.cx.complex-numbers-roots"],
-      "description": "Values x = a where p(a) = 0; a degree-n polynomial has exactly n roots (counting multiplicity) in ℂ by the Fundamental Theorem of Algebra.",
+      "children": [
+        "math.alg.rational-root-theorem",
+        "math.alg.fundamental-theorem-algebra"
+      ],
+      "requires": [
+        "math.alg.factor-theorem",
+        "math.alg.quadratic-equation"
+      ],
+      "unlocks": [
+        "math.alg.fundamental-theorem-algebra"
+      ],
+      "related": [
+        "math.alg.fundamental-theorem-algebra"
+      ],
+      "cross_links": [
+        "math.cx.complex-numbers-analysis"
+      ],
+      "description": "Values x = a where p(a) = 0; a degree-n polynomial has exactly n roots (counting multiplicity) in \u2102 by the Fundamental Theorem of Algebra.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11-12", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11-12",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.rational-root-theorem",
       "name": "Rational Root Theorem",
-      "aliases": ["rational zeros theorem", "possible rational roots"],
+      "aliases": [
+        "rational zeros theorem",
+        "possible rational roots"
+      ],
       "parent": "math.alg.polynomial-roots",
       "children": [],
-      "requires": ["math.alg.polynomial-roots", "math.nt.divisibility"],
+      "requires": [
+        "math.alg.polynomial-roots",
+        "math.nt.divisibility"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -546,67 +996,121 @@
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.fundamental-theorem-algebra",
       "name": "Fundamental Theorem of Algebra",
-      "aliases": ["FTA", "every polynomial has a complex root"],
+      "aliases": [
+        "FTA",
+        "every polynomial has a complex root"
+      ],
       "parent": "math.alg.polynomial-roots",
       "children": [],
-      "requires": ["math.alg.polynomial-roots", "math.found.complex-numbers"],
+      "requires": [
+        "math.alg.polynomial-roots",
+        "math.found.complex-numbers"
+      ],
       "unlocks": [],
-      "related": ["math.found.complex-numbers"],
-      "cross_links": ["math.cx.fundamental-theorem-algebra"],
-      "description": "Every non-constant polynomial with complex coefficients has at least one complex root; consequently has exactly n roots (with multiplicity) in ℂ.",
+      "related": [
+        "math.found.complex-numbers"
+      ],
+      "cross_links": [
+        "math.cx.fundamental-theorem-algebra"
+      ],
+      "description": "Every non-constant polynomial with complex coefficients has at least one complex root; consequently has exactly n roots (with multiplicity) in \u2102.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.75,
-      "references": ["Gauss 1799 Doctoral Dissertation", "Rudin 1976", "OpenStax College Algebra"]
+      "references": [
+        "Gauss 1799 Doctoral Dissertation",
+        "Rudin 1976",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.complex-polynomial-roots",
       "name": "Complex Roots of Polynomials",
-      "aliases": ["conjugate pairs", "complex root theorem"],
+      "aliases": [
+        "conjugate pairs",
+        "complex root theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.fundamental-theorem-algebra", "math.found.complex-numbers"],
+      "requires": [
+        "math.alg.fundamental-theorem-algebra",
+        "math.found.complex-numbers"
+      ],
       "unlocks": [],
-      "related": ["math.alg.fundamental-theorem-algebra"],
+      "related": [
+        "math.alg.fundamental-theorem-algebra"
+      ],
       "cross_links": [],
-      "description": "Non-real complex roots of polynomials with real coefficients come in conjugate pairs a ± bi; enables factoring over ℝ into linear and irreducible quadratic factors.",
+      "description": "Non-real complex roots of polynomials with real coefficients come in conjugate pairs a \u00b1 bi; enables factoring over \u211d into linear and irreducible quadratic factors.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["OpenStax College Algebra", "NCERT Grade 11"]
+      "references": [
+        "OpenStax College Algebra",
+        "NCERT Grade 11"
+      ]
     },
     {
       "id": "math.alg.rational-expressions",
       "name": "Rational Expressions",
-      "aliases": ["algebraic fractions", "rational functions basics"],
+      "aliases": [
+        "algebraic fractions",
+        "rational functions basics"
+      ],
       "parent": null,
-      "children": ["math.alg.rational-expressions-addition", "math.alg.rational-expressions-multiplication"],
-      "requires": ["math.alg.polynomial", "math.alg.factoring"],
-      "unlocks": ["math.alg.rational-equations", "math.func.rational-function"],
-      "related": ["math.func.rational-function"],
-      "cross_links": ["math.func.rational-function"],
-      "description": "Fractions p(x)/q(x) where p and q are polynomials with q ≠ 0; simplified by factoring and canceling common factors.",
+      "children": [
+        "math.alg.rational-expressions-addition",
+        "math.alg.rational-expressions-multiplication"
+      ],
+      "requires": [
+        "math.alg.polynomial",
+        "math.alg.factoring"
+      ],
+      "unlocks": [
+        "math.alg.rational-equations",
+        "math.func.rational-function"
+      ],
+      "related": [
+        "math.func.rational-function"
+      ],
+      "cross_links": [
+        "math.func.rational-function"
+      ],
+      "description": "Fractions p(x)/q(x) where p and q are polynomials with q \u2260 0; simplified by factoring and canceling common factors.",
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.rational-expressions-addition",
       "name": "Addition of Rational Expressions",
-      "aliases": ["adding rational expressions", "common denominator"],
+      "aliases": [
+        "adding rational expressions",
+        "common denominator"
+      ],
       "parent": "math.alg.rational-expressions",
       "children": [],
-      "requires": ["math.alg.rational-expressions", "math.arith.fraction-addition"],
+      "requires": [
+        "math.alg.rational-expressions",
+        "math.arith.fraction-addition"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -614,16 +1118,23 @@
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.rational-expressions-multiplication",
       "name": "Multiplication of Rational Expressions",
-      "aliases": ["multiplying rational expressions"],
+      "aliases": [
+        "multiplying rational expressions"
+      ],
       "parent": "math.alg.rational-expressions",
       "children": [],
-      "requires": ["math.alg.rational-expressions"],
+      "requires": [
+        "math.alg.rational-expressions"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -631,382 +1142,668 @@
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.rational-equations",
       "name": "Rational Equations",
-      "aliases": ["equations with fractions", "rational algebraic equations"],
+      "aliases": [
+        "equations with fractions",
+        "rational algebraic equations"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.rational-expressions"],
+      "requires": [
+        "math.alg.rational-expressions"
+      ],
       "unlocks": [],
-      "related": ["math.alg.rational-expressions"],
+      "related": [
+        "math.alg.rational-expressions"
+      ],
       "cross_links": [],
       "description": "Equations containing rational expressions; solved by multiplying through by the LCD and checking for extraneous solutions (values that make a denominator zero).",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.exponent-rules",
       "name": "Exponent Rules (Algebraic)",
-      "aliases": ["laws of exponents", "exponent properties"],
+      "aliases": [
+        "laws of exponents",
+        "exponent properties"
+      ],
       "parent": null,
-      "children": ["math.alg.zero-exponent", "math.alg.negative-exponent", "math.alg.fractional-exponent"],
-      "requires": ["math.arith.exponent-rules", "math.alg.expression"],
-      "unlocks": ["math.alg.radicals", "math.alg.exponential-function"],
-      "related": ["math.alg.radicals"],
+      "children": [
+        "math.alg.zero-exponent",
+        "math.alg.negative-exponent",
+        "math.alg.fractional-exponent"
+      ],
+      "requires": [
+        "math.arith.exponent-rules",
+        "math.alg.expression"
+      ],
+      "unlocks": [
+        "math.alg.radicals",
+        "math.alg.exponential-function"
+      ],
+      "related": [
+        "math.alg.radicals"
+      ],
       "cross_links": [],
       "description": "Extension of integer exponent laws to include zero, negative, and rational (fractional) exponents; enables manipulation of exponential and radical expressions.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra", "Singapore Math Grade 9"]
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra",
+        "Singapore Math Grade 9"
+      ]
     },
     {
       "id": "math.alg.zero-exponent",
       "name": "Zero Exponent",
-      "aliases": ["a⁰ = 1"],
+      "aliases": [
+        "a\u2070 = 1"
+      ],
       "parent": "math.alg.exponent-rules",
       "children": [],
-      "requires": ["math.alg.exponent-rules"],
+      "requires": [
+        "math.alg.exponent-rules"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "For any nonzero base a, a⁰ = 1; follows from the quotient rule aⁿ/aⁿ = a⁰ = 1.",
+      "description": "For any nonzero base a, a\u2070 = 1; follows from the quotient rule a\u207f/a\u207f = a\u2070 = 1.",
       "difficulty": "developing",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 7-8", "OpenStax PreAlgebra"]
+      "references": [
+        "NCERT Grade 7-8",
+        "OpenStax PreAlgebra"
+      ]
     },
     {
       "id": "math.alg.negative-exponent",
       "name": "Negative Exponent",
-      "aliases": ["a⁻ⁿ = 1/aⁿ"],
+      "aliases": [
+        "a\u207b\u207f = 1/a\u207f"
+      ],
       "parent": "math.alg.exponent-rules",
       "children": [],
-      "requires": ["math.alg.exponent-rules"],
+      "requires": [
+        "math.alg.exponent-rules"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "a⁻ⁿ = 1/aⁿ for a ≠ 0; enables writing reciprocals as powers and simplifying expressions with negative exponents.",
+      "description": "a\u207b\u207f = 1/a\u207f for a \u2260 0; enables writing reciprocals as powers and simplifying expressions with negative exponents.",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 8-9", "OpenStax PreAlgebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 8-9",
+        "OpenStax PreAlgebra"
+      ]
     },
     {
       "id": "math.alg.fractional-exponent",
       "name": "Fractional Exponent",
-      "aliases": ["rational exponent", "a^(m/n)", "n-th root"],
+      "aliases": [
+        "rational exponent",
+        "a^(m/n)",
+        "n-th root"
+      ],
       "parent": "math.alg.exponent-rules",
       "children": [],
-      "requires": ["math.alg.exponent-rules", "math.alg.radicals"],
+      "requires": [
+        "math.alg.exponent-rules",
+        "math.alg.radicals"
+      ],
       "unlocks": [],
-      "related": ["math.alg.radicals"],
+      "related": [
+        "math.alg.radicals"
+      ],
       "cross_links": [],
-      "description": "a^(m/n) = ⁿ√(aᵐ) = (ⁿ√a)ᵐ; bridge between radical and exponential notation, enabling uniform treatment of roots as powers.",
+      "description": "a^(m/n) = \u207f\u221a(a\u1d50) = (\u207f\u221aa)\u1d50; bridge between radical and exponential notation, enabling uniform treatment of roots as powers.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.radicals",
       "name": "Radical Expressions",
-      "aliases": ["nth roots", "radical simplification", "√", "ⁿ√"],
+      "aliases": [
+        "nth roots",
+        "radical simplification",
+        "\u221a",
+        "\u207f\u221a"
+      ],
       "parent": null,
-      "children": ["math.alg.simplifying-radicals", "math.alg.rationalizing-denominators"],
-      "requires": ["math.arith.square-roots", "math.alg.exponent-rules"],
-      "unlocks": ["math.alg.radical-equations", "math.alg.fractional-exponent"],
-      "related": ["math.alg.fractional-exponent"],
+      "children": [
+        "math.alg.simplifying-radicals",
+        "math.alg.rationalizing-denominators"
+      ],
+      "requires": [
+        "math.arith.square-roots",
+        "math.alg.exponent-rules"
+      ],
+      "unlocks": [
+        "math.alg.radical-equations",
+        "math.alg.fractional-exponent"
+      ],
+      "related": [
+        "math.alg.fractional-exponent"
+      ],
       "cross_links": [],
-      "description": "Expressions involving n-th roots ⁿ√a; simplified by extracting perfect powers from under the radical and rationalizing denominators.",
+      "description": "Expressions involving n-th roots \u207f\u221aa; simplified by extracting perfect powers from under the radical and rationalizing denominators.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.simplifying-radicals",
       "name": "Simplifying Radical Expressions",
-      "aliases": ["radical simplification"],
+      "aliases": [
+        "radical simplification"
+      ],
       "parent": "math.alg.radicals",
       "children": [],
-      "requires": ["math.alg.radicals"],
+      "requires": [
+        "math.alg.radicals"
+      ],
       "unlocks": [],
-      "related": ["math.alg.rationalizing-denominators"],
+      "related": [
+        "math.alg.rationalizing-denominators"
+      ],
       "cross_links": [],
-      "description": "Rewriting a radical by factoring the radicand to extract perfect powers: √(12) = 2√3.",
+      "description": "Rewriting a radical by factoring the radicand to extract perfect powers: \u221a(12) = 2\u221a3.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.rationalizing-denominators",
       "name": "Rationalizing the Denominator",
-      "aliases": ["rationalization", "conjugate multiplication"],
+      "aliases": [
+        "rationalization",
+        "conjugate multiplication"
+      ],
       "parent": "math.alg.radicals",
       "children": [],
-      "requires": ["math.alg.simplifying-radicals"],
+      "requires": [
+        "math.alg.simplifying-radicals"
+      ],
       "unlocks": [],
-      "related": ["math.alg.simplifying-radicals"],
+      "related": [
+        "math.alg.simplifying-radicals"
+      ],
       "cross_links": [],
       "description": "Eliminating radicals from the denominator of a fraction by multiplying numerator and denominator by the conjugate or appropriate radical.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.radical-equations",
       "name": "Radical Equations",
-      "aliases": ["equations with radicals", "√(f(x)) = g(x)"],
+      "aliases": [
+        "equations with radicals",
+        "\u221a(f(x)) = g(x)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.radicals"],
+      "requires": [
+        "math.alg.radicals"
+      ],
       "unlocks": [],
-      "related": ["math.alg.radicals"],
+      "related": [
+        "math.alg.radicals"
+      ],
       "cross_links": [],
       "description": "Equations in which the variable appears under a radical sign; solved by isolating the radical and squaring (requiring check for extraneous solutions).",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.exponential-function",
       "name": "Exponential Function",
-      "aliases": ["aˣ", "exponential growth", "exponential decay"],
+      "aliases": [
+        "a\u02e3",
+        "exponential growth",
+        "exponential decay"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.exponent-rules", "math.func.function-concept"],
-      "unlocks": ["math.alg.logarithm"],
-      "related": ["math.alg.logarithm", "math.func.exponential-function"],
-      "cross_links": ["math.func.exponential-function"],
-      "description": "A function of the form f(x) = aˣ with base a > 0, a ≠ 1; exhibits exponential growth (a > 1) or decay (a < 1) and is the inverse of the logarithm.",
+      "requires": [
+        "math.alg.exponent-rules",
+        "math.func.function-concept"
+      ],
+      "unlocks": [
+        "math.alg.logarithm"
+      ],
+      "related": [
+        "math.alg.logarithm",
+        "math.func.exponential-function"
+      ],
+      "cross_links": [
+        "math.func.exponential-function"
+      ],
+      "description": "A function of the form f(x) = a\u02e3 with base a > 0, a \u2260 1; exhibits exponential growth (a > 1) or decay (a < 1) and is the inverse of the logarithm.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 11-12", "OpenStax College Algebra", "AoPS Precalculus"]
+      "references": [
+        "NCERT Grade 11-12",
+        "OpenStax College Algebra",
+        "AoPS Precalculus"
+      ]
     },
     {
       "id": "math.alg.exponential-equations",
       "name": "Exponential Equations",
-      "aliases": ["equations with exponentials", "aˣ = b"],
+      "aliases": [
+        "equations with exponentials",
+        "a\u02e3 = b"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.exponential-function"],
-      "unlocks": ["math.alg.logarithm"],
-      "related": ["math.alg.logarithm"],
+      "requires": [
+        "math.alg.exponential-function"
+      ],
+      "unlocks": [
+        "math.alg.logarithm"
+      ],
+      "related": [
+        "math.alg.logarithm"
+      ],
       "cross_links": [],
       "description": "Equations in which the unknown appears in an exponent; solved using logarithms or by expressing both sides as powers of the same base.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11-12", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11-12",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.logarithm",
       "name": "Logarithm",
-      "aliases": ["log", "log base a of x", "logₐ(x)"],
+      "aliases": [
+        "log",
+        "log base a of x",
+        "log\u2090(x)"
+      ],
       "parent": null,
-      "children": ["math.alg.logarithm-properties", "math.alg.natural-logarithm", "math.alg.change-of-base"],
-      "requires": ["math.alg.exponential-function"],
-      "unlocks": ["math.alg.logarithmic-equations"],
-      "related": ["math.alg.exponential-function"],
-      "cross_links": ["math.calc.derivative-ln"],
-      "description": "The inverse of the exponential function: logₐ(x) is the exponent to which a must be raised to give x; defined for x > 0, a > 0, a ≠ 1.",
+      "children": [
+        "math.alg.logarithm-properties",
+        "math.alg.natural-logarithm",
+        "math.alg.change-of-base"
+      ],
+      "requires": [
+        "math.alg.exponential-function"
+      ],
+      "unlocks": [
+        "math.alg.logarithmic-equations"
+      ],
+      "related": [
+        "math.alg.exponential-function"
+      ],
+      "cross_links": [
+        "math.calc.derivative-ln"
+      ],
+      "description": "The inverse of the exponential function: log\u2090(x) is the exponent to which a must be raised to give x; defined for x > 0, a > 0, a \u2260 1.",
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11-12", "OpenStax College Algebra", "AoPS Precalculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11-12",
+        "OpenStax College Algebra",
+        "AoPS Precalculus"
+      ]
     },
     {
       "id": "math.alg.logarithm-properties",
       "name": "Logarithm Properties",
-      "aliases": ["log rules", "laws of logarithms"],
+      "aliases": [
+        "log rules",
+        "laws of logarithms"
+      ],
       "parent": "math.alg.logarithm",
       "children": [],
-      "requires": ["math.alg.logarithm"],
-      "unlocks": ["math.alg.logarithmic-equations"],
+      "requires": [
+        "math.alg.logarithm"
+      ],
+      "unlocks": [
+        "math.alg.logarithmic-equations"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Key identities: log(xy) = log x + log y; log(x/y) = log x − log y; log(xᵣ) = r log x; enabling algebraic manipulation of logarithmic expressions.",
+      "description": "Key identities: log(xy) = log x + log y; log(x/y) = log x \u2212 log y; log(x\u1d63) = r log x; enabling algebraic manipulation of logarithmic expressions.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.natural-logarithm",
       "name": "Natural Logarithm",
-      "aliases": ["ln", "log base e", "lnx"],
+      "aliases": [
+        "ln",
+        "log base e",
+        "lnx"
+      ],
       "parent": "math.alg.logarithm",
       "children": [],
-      "requires": ["math.alg.logarithm"],
-      "unlocks": ["math.calc.derivative-ln"],
-      "related": ["math.calc.derivative-ln"],
-      "cross_links": ["math.calc.derivative-ln"],
-      "description": "The logarithm with base e ≈ 2.71828; ln x = log_e x; arises naturally in calculus as the antiderivative of 1/x.",
+      "requires": [
+        "math.alg.logarithm"
+      ],
+      "unlocks": [
+        "math.calc.derivative-ln"
+      ],
+      "related": [
+        "math.calc.derivative-ln"
+      ],
+      "cross_links": [
+        "math.calc.derivative-ln"
+      ],
+      "description": "The logarithm with base e \u2248 2.71828; ln x = log_e x; arises naturally in calculus as the antiderivative of 1/x.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 12", "OpenStax Calculus", "Stewart Calculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 12",
+        "OpenStax Calculus",
+        "Stewart Calculus"
+      ]
     },
     {
       "id": "math.alg.change-of-base",
       "name": "Change of Base Formula",
-      "aliases": ["log base conversion", "logₐ(x) = log(x)/log(a)"],
+      "aliases": [
+        "log base conversion",
+        "log\u2090(x) = log(x)/log(a)"
+      ],
       "parent": "math.alg.logarithm",
       "children": [],
-      "requires": ["math.alg.logarithm-properties"],
+      "requires": [
+        "math.alg.logarithm-properties"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "logₐ(x) = log_b(x) / log_b(a) for any valid base b; allows computation using any convenient base (typically 10 or e).",
+      "description": "log\u2090(x) = log_b(x) / log_b(a) for any valid base b; allows computation using any convenient base (typically 10 or e).",
       "difficulty": "proficient",
       "estimated_hours": 2,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 12", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 12",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.logarithmic-equations",
       "name": "Logarithmic Equations",
-      "aliases": ["equations with logarithms", "log f(x) = g(x)"],
+      "aliases": [
+        "equations with logarithms",
+        "log f(x) = g(x)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.logarithm-properties", "math.alg.exponential-equations"],
+      "requires": [
+        "math.alg.logarithm-properties",
+        "math.alg.exponential-equations"
+      ],
       "unlocks": [],
-      "related": ["math.alg.exponential-equations"],
+      "related": [
+        "math.alg.exponential-equations"
+      ],
       "cross_links": [],
       "description": "Equations in which the unknown appears as an argument of a logarithm; solved by using logarithm properties to condense and then exponentiate.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 12", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 12",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.inequality",
       "name": "Inequality",
-      "aliases": ["algebraic inequality", "<, ≤, >, ≥"],
+      "aliases": [
+        "algebraic inequality",
+        "<, \u2264, >, \u2265"
+      ],
       "parent": null,
-      "children": ["math.alg.inequality-1var", "math.alg.inequality-2var", "math.alg.polynomial-inequality", "math.alg.rational-inequality"],
-      "requires": ["math.alg.equation"],
-      "unlocks": ["math.alg.inequality-1var"],
-      "related": ["math.alg.equation"],
+      "children": [
+        "math.alg.inequality-1var",
+        "math.alg.inequality-2var",
+        "math.alg.polynomial-inequality",
+        "math.alg.rational-inequality"
+      ],
+      "requires": [
+        "math.alg.equation"
+      ],
+      "unlocks": [
+        "math.alg.inequality-1var"
+      ],
+      "related": [
+        "math.alg.equation"
+      ],
       "cross_links": [],
       "description": "A mathematical statement asserting that one expression is greater than or less than another; solutions form intervals or regions rather than isolated points.",
       "difficulty": "developing",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 8-9", "OpenStax Elementary Algebra"]
+      "references": [
+        "NCERT Grade 8-9",
+        "OpenStax Elementary Algebra"
+      ]
     },
     {
       "id": "math.alg.polynomial-inequality",
       "name": "Polynomial Inequality",
-      "aliases": ["p(x) > 0", "sign chart method"],
+      "aliases": [
+        "p(x) > 0",
+        "sign chart method"
+      ],
       "parent": "math.alg.inequality",
       "children": [],
-      "requires": ["math.alg.polynomial-roots", "math.alg.inequality"],
+      "requires": [
+        "math.alg.polynomial-roots",
+        "math.alg.inequality"
+      ],
       "unlocks": [],
-      "related": ["math.alg.rational-inequality"],
+      "related": [
+        "math.alg.rational-inequality"
+      ],
       "cross_links": [],
-      "description": "Inequality p(x) > 0 (or <, ≥, ≤) solved by finding roots, constructing a sign chart, and identifying intervals where the polynomial has the required sign.",
+      "description": "Inequality p(x) > 0 (or <, \u2265, \u2264) solved by finding roots, constructing a sign chart, and identifying intervals where the polynomial has the required sign.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.rational-inequality",
       "name": "Rational Inequality",
-      "aliases": ["p(x)/q(x) > 0", "inequality with fractions"],
+      "aliases": [
+        "p(x)/q(x) > 0",
+        "inequality with fractions"
+      ],
       "parent": "math.alg.inequality",
       "children": [],
-      "requires": ["math.alg.rational-expressions", "math.alg.polynomial-inequality"],
+      "requires": [
+        "math.alg.rational-expressions",
+        "math.alg.polynomial-inequality"
+      ],
       "unlocks": [],
-      "related": ["math.alg.polynomial-inequality"],
+      "related": [
+        "math.alg.polynomial-inequality"
+      ],
       "cross_links": [],
-      "description": "Inequality of the form p(x)/q(x) > 0 (with q ≠ 0); solved using a sign chart based on zeros of p and q.",
+      "description": "Inequality of the form p(x)/q(x) > 0 (with q \u2260 0); solved using a sign chart based on zeros of p and q.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.binomial-theorem",
       "name": "Binomial Theorem",
-      "aliases": ["(a+b)ⁿ expansion", "Pascal's triangle"],
+      "aliases": [
+        "(a+b)\u207f expansion",
+        "Pascal's triangle"
+      ],
       "parent": null,
-      "children": ["math.alg.pascals-triangle"],
-      "requires": ["math.alg.polynomial", "math.disc.combinations", "math.found.proof-by-induction"],
-      "unlocks": ["math.prob.binomial-distribution"],
-      "related": ["math.disc.combinations", "math.prob.binomial-distribution"],
-      "cross_links": ["math.prob.binomial-distribution"],
-      "description": "(a+b)ⁿ = Σ C(n,k) aⁿ⁻ᵏ bᵏ; gives the general expansion of a binomial power in terms of binomial coefficients.",
+      "children": [
+        "math.alg.pascals-triangle"
+      ],
+      "requires": [
+        "math.alg.polynomial",
+        "math.disc.combinations",
+        "math.found.proof-by-induction"
+      ],
+      "unlocks": [
+        "math.prob.discrete-distributions"
+      ],
+      "related": [
+        "math.disc.combinations",
+        "math.prob.binomial-distribution"
+      ],
+      "cross_links": [
+        "math.prob.discrete-distributions"
+      ],
+      "description": "(a+b)\u207f = \u03a3 C(n,k) a\u207f\u207b\u1d4f b\u1d4f; gives the general expansion of a binomial power in terms of binomial coefficients.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra", "AoPS Intermediate Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
     },
     {
       "id": "math.alg.pascals-triangle",
       "name": "Pascal's Triangle",
-      "aliases": ["Pascal triangle", "binomial coefficients table"],
+      "aliases": [
+        "Pascal triangle",
+        "binomial coefficients table"
+      ],
       "parent": "math.alg.binomial-theorem",
       "children": [],
-      "requires": ["math.alg.binomial-theorem"],
+      "requires": [
+        "math.alg.binomial-theorem"
+      ],
       "unlocks": [],
-      "related": ["math.disc.combinations"],
-      "cross_links": ["math.disc.combinations"],
+      "related": [
+        "math.disc.combinations"
+      ],
+      "cross_links": [
+        "math.disc.combinations"
+      ],
       "description": "A triangular array of binomial coefficients C(n,k) where each entry is the sum of the two entries above it; encodes patterns in number theory and combinatorics.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.alg.vietas-formulas",
       "name": "Vieta's Formulas",
-      "aliases": ["Vieta formulas", "Newton's identities (intro)", "root-coefficient relations"],
+      "aliases": [
+        "Vieta formulas",
+        "Newton's identities (intro)",
+        "root-coefficient relations"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.alg.polynomial-roots"],
+      "requires": [
+        "math.alg.polynomial-roots"
+      ],
       "unlocks": [],
-      "related": ["math.alg.polynomial-roots"],
+      "related": [
+        "math.alg.polynomial-roots"
+      ],
       "cross_links": [],
-      "description": "Relationships between the coefficients of a polynomial and symmetric functions of its roots; e.g., for ax²+bx+c, the sum of roots is −b/a and product is c/a.",
+      "description": "Relationships between the coefficients of a polynomial and symmetric functions of its roots; e.g., for ax\u00b2+bx+c, the sum of roots is \u2212b/a and product is c/a.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["AoPS Intermediate Algebra", "NCERT Grade 12", "Hardy & Wright 2008"]
+      "references": [
+        "AoPS Intermediate Algebra",
+        "NCERT Grade 12",
+        "Hardy & Wright 2008"
+      ]
     }
   ]
 }

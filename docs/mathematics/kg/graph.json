@@ -1,14 +1,14 @@
 {
   "name": "Canonical Mathematics Knowledge Graph",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "status": "frozen",
   "build_date": "2026-06-29",
   "statistics": {
     "total_concepts": 908,
     "total_domains": 24,
     "total_requires_edges": 1353,
-    "total_unlocks_edges": 673,
-    "total_cross_links": 386
+    "total_unlocks_edges": 665,
+    "total_cross_links": 363
   },
   "domains": [
     {
@@ -312,7 +312,7 @@
         "math.found.mathematical-language"
       ],
       "cross_links": [
-        "math.abst.abstract-structure"
+        "math.abst.algebraic-structure"
       ],
       "description": "The process of extracting essential properties of mathematical objects while ignoring irrelevant details, enabling the same reasoning to apply across many contexts.",
       "difficulty": "foundational",
@@ -432,17 +432,12 @@
         "math.found.problem-solving",
         "math.found.abstraction"
       ],
-      "unlocks": [
-        "math.de.modeling-with-odes"
-      ],
+      "unlocks": [],
       "related": [
         "math.stats.statistical-modeling",
         "math.opt.formulation"
       ],
-      "cross_links": [
-        "math.de.modeling-with-odes",
-        "math.opt.formulation"
-      ],
+      "cross_links": [],
       "description": "The process of translating a real-world situation into mathematical language, solving the mathematical problem, and interpreting the solution back in context.",
       "difficulty": "developing",
       "estimated_hours": 12,
@@ -534,8 +529,7 @@
         "math.found.mathematical-language"
       ],
       "unlocks": [
-        "math.found.variable",
-        "math.found.equation"
+        "math.found.variable"
       ],
       "related": [
         "math.found.mathematical-symbols"
@@ -668,15 +662,14 @@
       "unlocks": [
         "math.found.proof",
         "math.found.set-theory",
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "related": [
         "math.found.proof",
         "math.disc.boolean-algebra"
       ],
       "cross_links": [
-        "math.disc.boolean-algebra",
-        "math.abst.formal-systems"
+        "math.disc.boolean-circuits"
       ],
       "description": "The branch of mathematics studying the principles of valid reasoning, the structure of mathematical statements, and the formal rules governing deduction.",
       "difficulty": "foundational",
@@ -737,13 +730,13 @@
       "unlocks": [
         "math.found.truth-table",
         "math.found.logical-equivalence",
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "related": [
         "math.found.truth-table"
       ],
       "cross_links": [
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "description": "Operators (\u00ac, \u2227, \u2228, \u2192, \u2194) that combine propositions to form compound statements, each with a precise truth-functional meaning.",
       "difficulty": "foundational",
@@ -768,13 +761,13 @@
       ],
       "unlocks": [
         "math.found.logical-equivalence",
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "related": [
         "math.found.logical-equivalence"
       ],
       "cross_links": [
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "description": "A tabular method for determining the truth value of a compound proposition for every possible combination of truth values of its component propositions.",
       "difficulty": "foundational",
@@ -805,16 +798,12 @@
       ],
       "unlocks": [
         "math.found.proof",
-        "math.found.set-theory",
-        "math.abst.formal-systems"
+        "math.found.set-theory"
       ],
       "related": [
         "math.found.quantifiers"
       ],
-      "cross_links": [
-        "math.abst.formal-systems",
-        "math.abst.model-theory"
-      ],
+      "cross_links": [],
       "description": "An extension of propositional logic that introduces predicates, terms, and quantifiers to express statements about objects and their properties.",
       "difficulty": "developing",
       "estimated_hours": 8,
@@ -913,7 +902,7 @@
         "math.found.truth-table"
       ],
       "cross_links": [
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "description": "Two compound propositions are logically equivalent if they have identical truth values for every assignment of truth values to their component propositions.",
       "difficulty": "foundational",
@@ -1113,7 +1102,7 @@
         "math.found.well-ordering-principle"
       ],
       "cross_links": [
-        "math.disc.recurrence-relations"
+        "math.disc.recurrence-relation"
       ],
       "description": "A proof technique for statements indexed by natural numbers: establish a base case, then show that truth for n implies truth for n+1.",
       "difficulty": "developing",
@@ -1315,9 +1304,7 @@
         "math.found.definition",
         "math.found.conjecture"
       ],
-      "cross_links": [
-        "math.abst.formal-systems"
-      ],
+      "cross_links": [],
       "description": "A statement accepted as true without proof, forming the foundational assumptions of a mathematical theory from which all other results are deduced.",
       "difficulty": "developing",
       "estimated_hours": 3,
@@ -1484,16 +1471,13 @@
         "math.found.logic"
       ],
       "unlocks": [
-        "math.abst.formal-systems",
         "math.found.set-theory-axiomatic"
       ],
       "related": [
         "math.abst.formal-systems",
         "math.found.axiom"
       ],
-      "cross_links": [
-        "math.abst.formal-systems"
-      ],
+      "cross_links": [],
       "description": "A collection of axioms together with the rules of logic from which all theorems of a mathematical theory are derived.",
       "difficulty": "proficient",
       "estimated_hours": 6,
@@ -1537,7 +1521,7 @@
         "math.found.proof"
       ],
       "cross_links": [
-        "math.abst.groups",
+        "math.abst.group-theory",
         "math.top.topological-space"
       ],
       "description": "The mathematical theory of collections of objects (sets), providing the foundational language and framework in which all of modern mathematics is expressed.",
@@ -1776,13 +1760,13 @@
       ],
       "unlocks": [
         "math.found.venn-diagram",
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "related": [
         "math.found.venn-diagram"
       ],
       "cross_links": [
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "description": "The standard operations on sets \u2014 union (\u222a), intersection (\u2229), difference (\\), and complement (A\u1d9c) \u2014 forming a Boolean algebra.",
       "difficulty": "foundational",
@@ -1984,7 +1968,7 @@
         "math.found.ordered-pair"
       ],
       "cross_links": [
-        "math.linalg.vector-spaces"
+        "math.linalg.vector-space"
       ],
       "description": "The Cartesian product A \u00d7 B is the set of all ordered pairs (a, b) where a \u2208 A and b \u2208 B.",
       "difficulty": "developing",
@@ -2050,8 +2034,7 @@
         "math.func.function-concept"
       ],
       "cross_links": [
-        "math.abst.partial-order",
-        "math.graph.directed-graph"
+        "math.graph.graph"
       ],
       "description": "A relation R from A to B is any subset of A \u00d7 B; the relation holds between a and b iff (a, b) \u2208 R.",
       "difficulty": "developing",
@@ -2270,16 +2253,13 @@
         "math.found.transitive-relation"
       ],
       "unlocks": [
-        "math.found.total-order",
-        "math.abst.lattice"
+        "math.found.total-order"
       ],
       "related": [
         "math.found.equivalence-relation",
         "math.abst.lattice"
       ],
-      "cross_links": [
-        "math.abst.lattice"
-      ],
+      "cross_links": [],
       "description": "A reflexive, antisymmetric, and transitive relation on a set, providing a generalized notion of ordering where not all pairs need be comparable.",
       "difficulty": "developing",
       "estimated_hours": 5,
@@ -2336,7 +2316,7 @@
         "math.found.partial-order"
       ],
       "cross_links": [
-        "math.graph.directed-graph"
+        "math.graph.graph"
       ],
       "description": "A graphical representation of a finite partially ordered set where directed edges represent immediate predecessor relationships.",
       "difficulty": "developing",
@@ -2405,9 +2385,7 @@
       "related": [
         "math.found.infinite-set"
       ],
-      "cross_links": [
-        "math.real.real-numbers-uncountable"
-      ],
+      "cross_links": [],
       "description": "The number of elements in a set; for infinite sets, the size is measured via bijections and gives rise to the theory of infinite cardinal numbers.",
       "difficulty": "developing",
       "estimated_hours": 8,
@@ -2461,9 +2439,7 @@
       "related": [
         "math.found.uncountable-set"
       ],
-      "cross_links": [
-        "math.real.real-numbers-uncountable"
-      ],
+      "cross_links": [],
       "description": "A set that is either finite or can be placed in bijection with the natural numbers \u2115; examples include \u2124 and \u211a.",
       "difficulty": "developing",
       "estimated_hours": 4,
@@ -2490,9 +2466,7 @@
       "related": [
         "math.found.countable-set"
       ],
-      "cross_links": [
-        "math.real.real-numbers-uncountable"
-      ],
+      "cross_links": [],
       "description": "A set whose cardinality is strictly greater than that of \u2115; the real numbers \u211d are uncountable (Cantor's diagonal argument).",
       "difficulty": "proficient",
       "estimated_hours": 4,
@@ -2524,9 +2498,7 @@
       "related": [
         "math.abst.formal-systems"
       ],
-      "cross_links": [
-        "math.abst.formal-systems"
-      ],
+      "cross_links": [],
       "description": "The standard axiomatic foundation of mathematics, ZFC, consisting of Zermelo-Fraenkel axioms plus the Axiom of Choice, resolving the paradoxes of naive set theory.",
       "difficulty": "expert",
       "estimated_hours": 30,
@@ -2810,7 +2782,7 @@
       "unlocks": [
         "math.func.real-valued-function",
         "math.calc.limits",
-        "math.real.completeness-axiom"
+        "math.real.completeness"
       ],
       "related": [
         "math.found.complex-numbers",
@@ -2818,7 +2790,7 @@
       ],
       "cross_links": [
         "math.calc.limits",
-        "math.real.completeness-axiom"
+        "math.real.completeness"
       ],
       "description": "The complete ordered field \u211d encompassing all rational and irrational numbers, characterized by the least upper bound (completeness) property.",
       "difficulty": "developing",
@@ -2846,14 +2818,14 @@
       ],
       "unlocks": [
         "math.alg.complex-polynomial-roots",
-        "math.cx.complex-plane"
+        "math.cx.complex-numbers-analysis"
       ],
       "related": [
         "math.found.real-numbers",
         "math.trig.polar-form-complex"
       ],
       "cross_links": [
-        "math.cx.complex-plane",
+        "math.cx.complex-numbers-analysis",
         "math.trig.polar-form-complex"
       ],
       "description": "The field \u2102 = {a + bi : a, b \u2208 \u211d} where i\u00b2 = \u22121, completing the real numbers algebraically (Fundamental Theorem of Algebra) and enabling rotation in the plane.",
@@ -3068,13 +3040,13 @@
         "math.arith.place-value"
       ],
       "unlocks": [
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "related": [
         "math.arith.place-value"
       ],
       "cross_links": [
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "description": "A positional numeral system using b distinct digit symbols; base 2 (binary), base 8 (octal), and base 16 (hexadecimal) are common in computing.",
       "difficulty": "developing",
@@ -3328,7 +3300,7 @@
         "math.found.real-numbers"
       ],
       "cross_links": [
-        "math.geom.coordinate-line"
+        "math.geom.coordinate-plane"
       ],
       "description": "A geometric representation of numbers as points on a line, with a designated origin, unit length, and direction, enabling visualization of arithmetic and order.",
       "difficulty": "foundational",
@@ -3392,7 +3364,7 @@
       ],
       "cross_links": [
         "math.alg.absolute-value-equations",
-        "math.real.metric-space-rn"
+        "math.real.metric-space"
       ],
       "description": "The absolute value |x| of a real number is its distance from zero on the number line: |x| = x if x \u2265 0, and |x| = \u2212x if x < 0.",
       "difficulty": "developing",
@@ -3465,7 +3437,7 @@
       ],
       "cross_links": [
         "math.linalg.matrix-multiplication",
-        "math.abst.ring-multiplication"
+        "math.abst.ring-theory"
       ],
       "description": "A binary operation representing repeated addition; a \u00d7 b is the sum of b copies of a, extended to all number systems via the distributive law.",
       "difficulty": "foundational",
@@ -3906,7 +3878,7 @@
         "math.arith.fraction-multiplication"
       ],
       "cross_links": [
-        "math.abst.field-inverse"
+        "math.abst.field"
       ],
       "description": "The reciprocal of a nonzero number x is 1/x; their product is 1, making the reciprocal the multiplicative inverse in the field of rationals.",
       "difficulty": "developing",
@@ -4108,16 +4080,13 @@
         "math.arith.decimals"
       ],
       "unlocks": [
-        "math.arith.percentage-change",
-        "math.stats.relative-frequency"
+        "math.arith.percentage-change"
       ],
       "related": [
         "math.arith.fractions",
         "math.arith.ratios"
       ],
-      "cross_links": [
-        "math.stats.relative-frequency"
-      ],
+      "cross_links": [],
       "description": "A way of expressing a number as a fraction of 100 (per centum); x% = x/100, widely used in everyday contexts such as interest rates and proportions.",
       "difficulty": "developing",
       "estimated_hours": 10,
@@ -5140,7 +5109,7 @@
       ],
       "cross_links": [
         "math.abst.ring-theory",
-        "math.disc.boolean-algebra"
+        "math.disc.boolean-circuits"
       ],
       "description": "Arithmetic on a finite set of residues {0, 1, \u2026, n\u22121}, where arithmetic operations are defined modulo n; foundational to cryptography.",
       "difficulty": "proficient",
@@ -5776,7 +5745,7 @@
       "children": [],
       "requires": [
         "math.nt.algebraic-integers",
-        "math.abst.field-extensions"
+        "math.abst.field-extension"
       ],
       "unlocks": [],
       "related": [
@@ -5806,7 +5775,7 @@
       "children": [],
       "requires": [
         "math.nt.prime-distribution",
-        "math.cx.complex-analysis"
+        "math.cx.complex-numbers-analysis"
       ],
       "unlocks": [],
       "related": [
@@ -6217,14 +6186,14 @@
         "math.alg.linear-equation-2var"
       ],
       "unlocks": [
-        "math.linalg.linear-systems",
+        "math.linalg.linear-system",
         "math.alg.system-3var"
       ],
       "related": [
         "math.linalg.linear-systems"
       ],
       "cross_links": [
-        "math.linalg.linear-systems"
+        "math.linalg.linear-system"
       ],
       "description": "A collection of linear equations with the same variables; solutions are points (or none, or infinitely many) satisfying all equations simultaneously.",
       "difficulty": "proficient",
@@ -6276,14 +6245,14 @@
         "math.alg.system-linear-equations"
       ],
       "unlocks": [
-        "math.linalg.gaussian-elimination"
+        "math.linalg.row-reduction"
       ],
       "related": [
         "math.alg.substitution-method",
         "math.linalg.gaussian-elimination"
       ],
       "cross_links": [
-        "math.linalg.gaussian-elimination"
+        "math.linalg.row-reduction"
       ],
       "description": "Solving a system of equations by adding or subtracting multiples of equations to eliminate one variable at a time.",
       "difficulty": "proficient",
@@ -6307,13 +6276,13 @@
         "math.alg.system-linear-equations"
       ],
       "unlocks": [
-        "math.linalg.gaussian-elimination"
+        "math.linalg.row-reduction"
       ],
       "related": [
         "math.linalg.gaussian-elimination"
       ],
       "cross_links": [
-        "math.linalg.gaussian-elimination"
+        "math.linalg.row-reduction"
       ],
       "description": "Extension of 2-variable systems; solved by elimination or row reduction, with solutions being a point, a line, a plane, or the empty set.",
       "difficulty": "proficient",
@@ -6780,7 +6749,7 @@
         "math.alg.fundamental-theorem-algebra"
       ],
       "cross_links": [
-        "math.cx.complex-numbers-roots"
+        "math.cx.complex-numbers-analysis"
       ],
       "description": "Values x = a where p(a) = 0; a degree-n polynomial has exactly n roots (counting multiplicity) in \u2102 by the Fundamental Theorem of Algebra.",
       "difficulty": "proficient",
@@ -7544,14 +7513,14 @@
         "math.found.proof-by-induction"
       ],
       "unlocks": [
-        "math.prob.binomial-distribution"
+        "math.prob.discrete-distributions"
       ],
       "related": [
         "math.disc.combinations",
         "math.prob.binomial-distribution"
       ],
       "cross_links": [
-        "math.prob.binomial-distribution"
+        "math.prob.discrete-distributions"
       ],
       "description": "(a+b)\u207f = \u03a3 C(n,k) a\u207f\u207b\u1d4f b\u1d4f; gives the general expansion of a binomial power in terms of binomial coefficients.",
       "difficulty": "proficient",
@@ -9059,7 +9028,7 @@
         "math.geom.midpoint-formula"
       ],
       "cross_links": [
-        "math.linalg.vector-norm"
+        "math.linalg.norm"
       ],
       "description": "The distance between (x\u2081, y\u2081) and (x\u2082, y\u2082) is \u221a((x\u2082\u2212x\u2081)\u00b2 + (y\u2082\u2212y\u2081)\u00b2); a direct application of the Pythagorean theorem in coordinates.",
       "difficulty": "proficient",
@@ -9304,13 +9273,13 @@
       ],
       "unlocks": [
         "math.geom.polar-curves",
-        "math.cx.complex-polar"
+        "math.cx.complex-numbers-analysis"
       ],
       "related": [
         "math.cx.complex-polar"
       ],
       "cross_links": [
-        "math.cx.complex-polar"
+        "math.cx.complex-numbers-analysis"
       ],
       "description": "An alternative 2D coordinate system using distance r from the origin and angle \u03b8 from the positive x-axis; related to Cartesian by x = r cos \u03b8, y = r sin \u03b8.",
       "difficulty": "advanced",
@@ -9370,14 +9339,14 @@
         "math.geom.coordinate-plane"
       ],
       "unlocks": [
-        "math.linalg.linear-transformations"
+        "math.linalg.linear-map"
       ],
       "related": [
         "math.linalg.linear-transformations"
       ],
       "cross_links": [
-        "math.linalg.linear-transformations",
-        "math.abst.group-symmetry"
+        "math.linalg.linear-map",
+        "math.abst.group-action"
       ],
       "description": "Functions mapping the plane to itself that preserve shape properties; isometries (translations, rotations, reflections) preserve distance; dilations scale by a factor.",
       "difficulty": "proficient",
@@ -9431,15 +9400,11 @@
         "math.geom.transformations",
         "math.trig.trig-functions"
       ],
-      "unlocks": [
-        "math.linalg.rotation-matrix"
-      ],
+      "unlocks": [],
       "related": [
         "math.linalg.rotation-matrix"
       ],
-      "cross_links": [
-        "math.linalg.rotation-matrix"
-      ],
+      "cross_links": [],
       "description": "A transformation that turns every point by angle \u03b8 about a fixed center; expressed by a 2\u00d72 rotation matrix.",
       "difficulty": "proficient",
       "estimated_hours": 4,
@@ -9523,13 +9488,13 @@
       ],
       "unlocks": [
         "math.geom.vectors-3d",
-        "math.linalg.vectors"
+        "math.linalg.vector"
       ],
       "related": [
         "math.linalg.vectors"
       ],
       "cross_links": [
-        "math.linalg.vectors"
+        "math.linalg.vector"
       ],
       "description": "A quantity with both magnitude and direction in the plane, represented by an ordered pair; added head-to-tail and scaled by multiplication.",
       "difficulty": "proficient",
@@ -9556,14 +9521,14 @@
         "math.geom.vectors-2d"
       ],
       "unlocks": [
-        "math.linalg.vectors",
+        "math.linalg.vector",
         "math.calc.multivariable-intro"
       ],
       "related": [
         "math.linalg.vectors"
       ],
       "cross_links": [
-        "math.linalg.vectors",
+        "math.linalg.vector",
         "math.calc.multivariable-intro"
       ],
       "description": "Vectors in three-dimensional space; introduced by extending the 2D framework to triples (a, b, c) with dot and cross products.",
@@ -9592,14 +9557,14 @@
         "math.trig.trig-functions"
       ],
       "unlocks": [
-        "math.linalg.inner-product-spaces"
+        "math.linalg.inner-product-space"
       ],
       "related": [
         "math.geom.cross-product",
         "math.linalg.inner-product-spaces"
       ],
       "cross_links": [
-        "math.linalg.inner-product-spaces"
+        "math.linalg.inner-product-space"
       ],
       "description": "The dot product a\u00b7b = \u03a3a\u1d62b\u1d62 = |a||b|cos \u03b8; measures the component of one vector in the direction of another; zero iff orthogonal.",
       "difficulty": "proficient",
@@ -9745,15 +9710,11 @@
         "math.geom.differential-geometry-curves",
         "math.calc.partial-derivatives"
       ],
-      "unlocks": [
-        "math.top.riemannian-geometry"
-      ],
+      "unlocks": [],
       "related": [
         "math.top.riemannian-geometry"
       ],
-      "cross_links": [
-        "math.top.riemannian-geometry"
-      ],
+      "cross_links": [],
       "description": "The study of smooth surfaces in \u211d\u00b3 via first and second fundamental forms, Gaussian curvature K, mean curvature H, and the Gauss-Bonnet theorem.",
       "difficulty": "expert",
       "estimated_hours": 30,
@@ -10447,13 +10408,13 @@
       ],
       "unlocks": [
         "math.trig.de-moivres-theorem",
-        "math.cx.complex-polar"
+        "math.cx.complex-numbers-analysis"
       ],
       "related": [
         "math.cx.complex-polar"
       ],
       "cross_links": [
-        "math.cx.complex-polar"
+        "math.cx.complex-numbers-analysis"
       ],
       "description": "z = r(cos\u03b8 + i sin\u03b8) = re^(i\u03b8); relates the geometry of \u2102 (modulus and argument) to trig functions; multiplication becomes rotation and scaling.",
       "difficulty": "advanced",
@@ -10479,13 +10440,13 @@
         "math.trig.polar-form-complex"
       ],
       "unlocks": [
-        "math.cx.roots-of-unity"
+        "math.cx.complex-numbers-analysis"
       ],
       "related": [
         "math.cx.roots-of-unity"
       ],
       "cross_links": [
-        "math.cx.roots-of-unity"
+        "math.cx.complex-numbers-analysis"
       ],
       "description": "(cos \u03b8 + i sin \u03b8)\u207f = cos(n\u03b8) + i sin(n\u03b8); enables computation of powers and n-th roots of complex numbers and derivation of multiple-angle formulas.",
       "difficulty": "advanced",
@@ -10512,13 +10473,13 @@
         "math.alg.natural-logarithm"
       ],
       "unlocks": [
-        "math.cx.exponential-map"
+        "math.cx.analytic-functions"
       ],
       "related": [
         "math.cx.exponential-map"
       ],
       "cross_links": [
-        "math.cx.exponential-map"
+        "math.cx.analytic-functions"
       ],
       "description": "e^(i\u03b8) = cos \u03b8 + i sin \u03b8; at \u03b8 = \u03c0: e^(i\u03c0) + 1 = 0 (Euler's identity); unifies exponential and trigonometric functions via complex analysis.",
       "difficulty": "advanced",
@@ -11552,13 +11513,13 @@
         "math.found.proof-by-induction"
       ],
       "unlocks": [
-        "math.disc.recurrence-relations"
+        "math.disc.recurrence-relation"
       ],
       "related": [
         "math.disc.recurrence-relations"
       ],
       "cross_links": [
-        "math.disc.recurrence-relations"
+        "math.disc.recurrence-relation"
       ],
       "description": "Sequences defined by a recurrence relation a\u2099 = f(a\u2099\u208b\u2081, a\u2099\u208b\u2082, \u2026) and initial conditions; e.g., Fibonacci: F\u2081 = F\u2082 = 1, F\u2099 = F\u2099\u208b\u2081 + F\u2099\u208b\u2082.",
       "difficulty": "proficient",
@@ -11587,14 +11548,14 @@
       ],
       "unlocks": [
         "math.seq.series-convergence",
-        "math.real.sequences-convergence"
+        "math.real.convergence-sequences"
       ],
       "related": [
         "math.calc.limits"
       ],
       "cross_links": [
         "math.calc.limits",
-        "math.real.sequences-convergence"
+        "math.real.convergence-sequences"
       ],
       "description": "A sequence {a\u2099} converges to L if for every \u03b5 > 0 there exists N such that |a\u2099 \u2212 L| < \u03b5 for all n > N; the \u03b5-N definition of limit.",
       "difficulty": "advanced",
@@ -12092,9 +12053,7 @@
         "math.calc.continuity",
         "math.seq.convergent"
       ],
-      "cross_links": [
-        "math.real.limit-rigorous"
-      ],
+      "cross_links": [],
       "description": "lim_{x\u2192a} f(x) = L means f(x) can be made arbitrarily close to L by taking x sufficiently close (but not equal) to a; formalized by the \u03b5-\u03b4 definition.",
       "difficulty": "advanced",
       "estimated_hours": 15,
@@ -12246,7 +12205,7 @@
       ],
       "cross_links": [
         "math.real.continuity-rigorous",
-        "math.top.continuous-map"
+        "math.top.continuity-top"
       ],
       "description": "f is continuous at a if lim_{x\u2192a} f(x) = f(a); on an interval if continuous at every point; the calculus definition to be sharpened in real analysis.",
       "difficulty": "advanced",
@@ -12299,13 +12258,13 @@
         "math.calc.continuity"
       ],
       "unlocks": [
-        "math.num.bisection-method"
+        "math.num.root-finding"
       ],
       "related": [
         "math.num.bisection-method"
       ],
       "cross_links": [
-        "math.num.bisection-method"
+        "math.num.root-finding"
       ],
       "description": "If f is continuous on [a, b] and N is between f(a) and f(b), then there exists c \u2208 (a, b) with f(c) = N; guarantees roots and intermediate values.",
       "difficulty": "advanced",
@@ -12838,13 +12797,13 @@
       ],
       "unlocks": [
         "math.calc.increasing-decreasing",
-        "math.real.mean-value-theorem"
+        "math.real.mvt"
       ],
       "related": [
         "math.calc.rolles-theorem"
       ],
       "cross_links": [
-        "math.real.mean-value-theorem"
+        "math.real.mvt"
       ],
       "description": "If f is continuous on [a,b] and differentiable on (a,b), there exists c \u2208 (a,b) with f'(c) = (f(b)\u2212f(a))/(b\u2212a); the average rate equals the instantaneous rate somewhere.",
       "difficulty": "advanced",
@@ -13022,13 +12981,13 @@
         "math.calc.local-extrema"
       ],
       "unlocks": [
-        "math.opt.calculus-optimization"
+        "math.opt.unconstrained-optimization"
       ],
       "related": [
         "math.opt.calculus-optimization"
       ],
       "cross_links": [
-        "math.opt.calculus-optimization"
+        "math.opt.unconstrained-optimization"
       ],
       "description": "Finding global maxima and minima of a function on a closed interval or over all reals using critical points, endpoints, and boundary analysis.",
       "difficulty": "advanced",
@@ -13854,13 +13813,13 @@
       ],
       "unlocks": [
         "math.calc.directional-derivative",
-        "math.opt.gradient-descent"
+        "math.opt.gradient-methods"
       ],
       "related": [
         "math.calc.directional-derivative"
       ],
       "cross_links": [
-        "math.opt.gradient-descent"
+        "math.opt.gradient-methods"
       ],
       "description": "\u2207f = (\u2202f/\u2202x, \u2202f/\u2202y, \u2026); the vector of partial derivatives pointing in the direction of steepest ascent; its magnitude is the maximum rate of change.",
       "difficulty": "advanced",
@@ -14055,7 +14014,7 @@
       "children": [],
       "requires": [
         "math.calc.multiple-integrals",
-        "math.linalg.determinants"
+        "math.linalg.determinant"
       ],
       "unlocks": [],
       "related": [],
@@ -14243,9 +14202,7 @@
       "related": [
         "math.calc.divergence-theorem"
       ],
-      "cross_links": [
-        "math.top.differential-forms"
-      ],
+      "cross_links": [],
       "description": "\u222c_S (\u2207\u00d7F)\u00b7dS = \u222e_C F\u00b7dr, where C is the boundary of surface S; generalizes Green's theorem to 3D; a special case of the generalized Stokes' theorem on manifolds.",
       "difficulty": "expert",
       "estimated_hours": 8,
@@ -14274,9 +14231,7 @@
       "related": [
         "math.calc.stokes-theorem"
       ],
-      "cross_links": [
-        "math.top.differential-forms"
-      ],
+      "cross_links": [],
       "description": "\u222d_E \u2207\u00b7F dV = \u222c_S F\u00b7dS, where S is the boundary of solid E; relates the total divergence inside a region to the outward flux through its boundary.",
       "difficulty": "expert",
       "estimated_hours": 8,
@@ -14303,14 +14258,14 @@
         "math.seq.series"
       ],
       "unlocks": [
-        "math.pde.heat-equation"
+        "math.de.heat-equation"
       ],
       "related": [
         "math.pde.heat-equation"
       ],
       "cross_links": [
-        "math.pde.heat-equation",
-        "math.fnal.hilbert-spaces"
+        "math.de.heat-equation",
+        "math.fnal.hilbert-space"
       ],
       "description": "Representing a periodic function as a sum of sines and cosines: f(x) = a\u2080/2 + \u03a3(a\u2099cos(nx) + b\u2099sin(nx)); coefficients given by orthogonality integrals.",
       "difficulty": "expert",
@@ -14369,8 +14324,8 @@
         "math.de.solution-types"
       ],
       "requires": [
-        "math.calc.derivative",
-        "math.calc.antiderivative",
+        "math.calc.derivative-intro",
+        "math.calc.antiderivatives",
         "math.func.function-concept"
       ],
       "unlocks": [
@@ -14550,8 +14505,8 @@
       ],
       "requires": [
         "math.de.ode",
-        "math.calc.antiderivative",
-        "math.calc.integration-techniques"
+        "math.calc.antiderivatives",
+        "math.calc.u-substitution"
       ],
       "unlocks": [
         "math.de.second-order-ode"
@@ -14604,7 +14559,7 @@
       "requires": [
         "math.de.first-order-ode",
         "math.de.ode-linearity",
-        "math.calc.integration-techniques"
+        "math.calc.u-substitution"
       ],
       "unlocks": [],
       "related": [
@@ -14630,15 +14585,13 @@
       "children": [],
       "requires": [
         "math.de.first-order-ode",
-        "math.calc.partial-derivative"
+        "math.calc.partial-derivatives"
       ],
       "unlocks": [],
       "related": [
         "math.de.linear-first-order"
       ],
-      "cross_links": [
-        "math.calc.potential-function"
-      ],
+      "cross_links": [],
       "description": "An ODE M(x,y)dx + N(x,y)dy = 0 where \u2202M/\u2202y = \u2202N/\u2202x. Solution is found by identifying a potential function F such that dF=0.",
       "difficulty": "advanced",
       "estimated_hours": 5,
@@ -14933,7 +14886,7 @@
       "requires": [
         "math.de.wronskian",
         "math.de.second-order-homogeneous",
-        "math.calc.integration-techniques"
+        "math.calc.integration-by-parts"
       ],
       "unlocks": [],
       "related": [
@@ -15104,7 +15057,7 @@
       "children": [],
       "requires": [
         "math.de.laplace-properties",
-        "math.alg.partial-fractions"
+        "math.calc.partial-fractions"
       ],
       "unlocks": [
         "math.de.laplace-ode"
@@ -15529,7 +15482,7 @@
       "children": [],
       "requires": [
         "math.de.fourier-series",
-        "math.seq.convergence"
+        "math.seq.series-convergence"
       ],
       "unlocks": [],
       "related": [],
@@ -15612,7 +15565,7 @@
       ],
       "requires": [
         "math.de.ode",
-        "math.calc.partial-derivative"
+        "math.calc.partial-derivatives"
       ],
       "unlocks": [],
       "related": [],
@@ -15943,8 +15896,8 @@
         "math.linalg.scalar-multiplication"
       ],
       "requires": [
-        "math.arith.real-numbers",
-        "math.geom.coordinates"
+        "math.found.real-numbers",
+        "math.geom.x-y-coordinates"
       ],
       "unlocks": [
         "math.linalg.vector-space",
@@ -15954,8 +15907,8 @@
         "math.geom.2d-vector"
       ],
       "cross_links": [
-        "math.geom.2d-vector",
-        "math.geom.3d-vector"
+        "math.geom.vectors-2d",
+        "math.geom.vectors-3d"
       ],
       "description": "An ordered tuple of numbers (a vector in \u211d\u207f) or an abstract element of a vector space. In \u211d\u207f, vectors represent magnitudes with direction; algebraically they are the fundamental objects of linear algebra.",
       "difficulty": "developing",
@@ -16320,7 +16273,7 @@
       ],
       "requires": [
         "math.linalg.matrix",
-        "math.alg.systems-linear-equations"
+        "math.alg.system-linear-equations"
       ],
       "unlocks": [
         "math.linalg.row-echelon",
@@ -16328,7 +16281,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.alg.systems-linear-equations"
+        "math.alg.system-linear-equations"
       ],
       "description": "A set of m linear equations in n unknowns, written Ax=b. Three outcomes: unique solution (consistent, full column rank), no solution (inconsistent), or infinitely many solutions (dependent). Structure is determined by rank of A and [A|b].",
       "difficulty": "proficient",
@@ -16626,7 +16579,7 @@
       "requires": [
         "math.linalg.vector-addition",
         "math.linalg.scalar-multiplication",
-        "math.found.field"
+        "math.abst.field"
       ],
       "unlocks": [
         "math.linalg.linear-map",
@@ -17570,7 +17523,6 @@
       "unlocks": [],
       "related": [],
       "cross_links": [
-        "math.calc.tensor-calculus",
         "math.cat.tensor-product"
       ],
       "description": "A multilinear map T: V\u00d7\u22ef\u00d7V\u00d7V*\u00d7\u22ef\u00d7V*\u2192F of type (r,s), where r contravariant and s covariant indices. Includes scalars (0,0), vectors (1,0), dual vectors (0,1), and matrices (1,1). Tensor product \u2297 constructs higher-rank tensors.",
@@ -18841,7 +18793,7 @@
       "children": [],
       "requires": [
         "math.prob.pmf",
-        "math.seq.power-series"
+        "math.calc.power-series"
       ],
       "unlocks": [],
       "related": [
@@ -19359,7 +19311,7 @@
       "children": [],
       "requires": [
         "math.stats.estimator",
-        "math.calc.derivative",
+        "math.calc.derivative-rules",
         "math.prob.pdf"
       ],
       "unlocks": [],
@@ -20158,7 +20110,7 @@
       "children": [],
       "requires": [
         "math.disc.counting-principles",
-        "math.arith.factorial"
+        "math.arith.multiplication"
       ],
       "unlocks": [
         "math.disc.combinations"
@@ -20369,8 +20321,8 @@
         "math.disc.divide-conquer-recurrence"
       ],
       "requires": [
-        "math.seq.sequences",
-        "math.alg.polynomials"
+        "math.seq.sequence",
+        "math.alg.polynomial"
       ],
       "unlocks": [
         "math.disc.generating-functions"
@@ -20425,7 +20377,7 @@
       "children": [],
       "requires": [
         "math.disc.recurrence-relation",
-        "math.calc.logarithms"
+        "math.alg.logarithm"
       ],
       "unlocks": [],
       "related": [],
@@ -20783,7 +20735,7 @@
       "parent": null,
       "children": [],
       "requires": [
-        "math.found.propositions",
+        "math.found.proposition",
         "math.found.logical-connectives"
       ],
       "unlocks": [
@@ -20791,7 +20743,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.found.truth-tables"
+        "math.found.truth-table"
       ],
       "description": "The study of logical connectives (\u2227, \u2228, \u00ac, \u2192, \u2194) and their truth-functional properties. Normal forms: DNF, CNF. SAT (satisfiability) problem: determine if a formula is satisfiable. Foundation of digital circuit design.",
       "difficulty": "developing",
@@ -21454,7 +21406,7 @@
       "children": [],
       "requires": [
         "math.abst.group-action",
-        "math.nt.prime-numbers"
+        "math.nt.prime-number"
       ],
       "unlocks": [],
       "related": [],
@@ -21674,7 +21626,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.alg.polynomials"
+        "math.alg.polynomial"
       ],
       "description": "R[x]: polynomials with coefficients in ring R under standard addition and multiplication. F[x] for field F is a Euclidean domain with polynomial division algorithm. Irreducible polynomials generate maximal ideals.",
       "difficulty": "expert",
@@ -21863,7 +21815,7 @@
       "children": [],
       "requires": [
         "math.abst.field",
-        "math.nt.prime-numbers"
+        "math.nt.prime-number"
       ],
       "unlocks": [],
       "related": [],
@@ -21995,7 +21947,7 @@
       ],
       "requires": [
         "math.found.real-numbers",
-        "math.found.ordered-set"
+        "math.found.total-order"
       ],
       "unlocks": [
         "math.real.sup-inf",
@@ -22076,7 +22028,7 @@
       ],
       "requires": [
         "math.real.completeness",
-        "math.seq.sequences"
+        "math.seq.sequence"
       ],
       "unlocks": [
         "math.real.cauchy-sequence",
@@ -22084,7 +22036,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.seq.convergence"
+        "math.seq.series-convergence"
       ],
       "description": "Rigorous definition: a\u2099\u2192L iff \u2200\u03b5>0, \u2203N: n>N \u27f9 |a\u2099\u2212L|<\u03b5. Sequence properties: convergent \u27f9 bounded; limit laws; Bolzano-Weierstrass (every bounded sequence has a convergent subsequence).",
       "difficulty": "expert",
@@ -22140,7 +22092,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.seq.convergence-tests"
+        "math.seq.comparison-test"
       ],
       "description": "Rigorous treatment: \u2211a\u2099 converges iff partial sums form a Cauchy sequence. Absolute convergence (\u2211|a\u2099|<\u221e) implies convergence and rearrangement invariance. Conditional convergence is rearrangement-sensitive (Riemann rearrangement theorem).",
       "difficulty": "expert",
@@ -22191,7 +22143,7 @@
       ],
       "requires": [
         "math.found.set-theory",
-        "math.arith.real-numbers"
+        "math.found.real-numbers"
       ],
       "unlocks": [
         "math.real.open-sets",
@@ -22479,7 +22431,7 @@
       "children": [],
       "requires": [
         "math.real.continuity-rigorous",
-        "math.calc.derivative"
+        "math.calc.derivative-definition"
       ],
       "unlocks": [
         "math.real.mvt",
@@ -22487,7 +22439,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.calc.derivative"
+        "math.calc.derivative-definition"
       ],
       "description": "f\u2032(a) = lim_{h\u21920} [f(a+h)\u2212f(a)]/h. Differentiable \u27f9 continuous; converse fails (|x| at 0). In \u211d\u207f: total derivative Df(a) is a linear map; differentiable implies all partials exist but not conversely.",
       "difficulty": "expert",
@@ -22514,7 +22466,7 @@
       ],
       "related": [],
       "cross_links": [
-        "math.calc.mvt"
+        "math.calc.mean-value-theorem"
       ],
       "description": "If f:[a,b]\u2192\u211d is continuous, differentiable on (a,b), then \u2203c\u2208(a,b) with f\u2032(c)=(f(b)\u2212f(a))/(b\u2212a). Proved via Rolle's theorem. Fundamental tool: f\u2032=0 on interval \u27f9 f constant.",
       "difficulty": "expert",
@@ -22622,7 +22574,7 @@
       "unlocks": [],
       "related": [],
       "cross_links": [
-        "math.calc.ftc"
+        "math.calc.ftc-part1"
       ],
       "description": "Part 1: If f integrable and F(x)=\u222b_a^x f, then F is Lipschitz; if f continuous at x\u2080 then F\u2032(x\u2080)=f(x\u2080). Part 2: If F is an antiderivative of f, then \u222b_a^b f = F(b)\u2212F(a). Proof uses the MVT and Riemann sum properties.",
       "difficulty": "expert",
@@ -22643,7 +22595,7 @@
       "children": [],
       "requires": [
         "math.real.continuity-rigorous",
-        "math.seq.convergence"
+        "math.seq.series-convergence"
       ],
       "unlocks": [
         "math.real.weierstrass-approximation"
@@ -22837,14 +22789,14 @@
       "children": [],
       "requires": [
         "math.found.complex-numbers",
-        "math.trig.polar-complex"
+        "math.trig.polar-form-complex"
       ],
       "unlocks": [
         "math.cx.analytic-functions"
       ],
       "related": [],
       "cross_links": [
-        "math.trig.euler-formula"
+        "math.trig.eulers-formula"
       ],
       "description": "\u2102 = {x+iy : x,y\u2208\u211d}. |z| = \u221a(x\u00b2+y\u00b2), arg(z). Polar form: z=re^{i\u03b8}. Operations: addition, multiplication, conjugation z\u0304=x\u2212iy, |z|\u00b2=zz\u0304. The Riemann sphere adds \u221e by one-point compactification.",
       "difficulty": "advanced",
@@ -22894,7 +22846,7 @@
       "children": [],
       "requires": [
         "math.cx.complex-function",
-        "math.calc.partial-derivative"
+        "math.calc.partial-derivatives"
       ],
       "unlocks": [
         "math.cx.analytic-functions",
@@ -23852,7 +23804,7 @@
       "children": [],
       "requires": [
         "math.top.compactness",
-        "math.found.axiom-of-choice"
+        "math.found.set-theory-axiomatic"
       ],
       "unlocks": [],
       "related": [],
@@ -24264,7 +24216,7 @@
       "unlocks": [],
       "related": [],
       "cross_links": [
-        "math.geom.differential-geometry"
+        "math.geom.differential-geometry-curves"
       ],
       "description": "A manifold with a compatible atlas of C\u221e coordinate charts. Admits smooth functions, vector fields, differential forms, and tensors. Sard's theorem: set of critical values has measure zero. Foundation of differential topology and differential geometry.",
       "difficulty": "research",
@@ -25042,7 +24994,7 @@
       "children": [],
       "requires": [
         "math.fnal.dual-space-functional",
-        "math.calc.derivative"
+        "math.calc.derivative-definition"
       ],
       "unlocks": [],
       "related": [],
@@ -25236,7 +25188,7 @@
       "children": [],
       "requires": [
         "math.num.root-finding",
-        "math.calc.derivative"
+        "math.calc.derivative-definition"
       ],
       "unlocks": [],
       "related": [],
@@ -25265,7 +25217,7 @@
         "math.num.splines"
       ],
       "requires": [
-        "math.alg.polynomials",
+        "math.alg.polynomial",
         "math.linalg.linear-system"
       ],
       "unlocks": [
@@ -25317,7 +25269,7 @@
       "parent": null,
       "children": [],
       "requires": [
-        "math.calc.derivative",
+        "math.calc.derivative-definition",
         "math.num.error-analysis"
       ],
       "unlocks": [],
@@ -25585,7 +25537,7 @@
       "children": [],
       "requires": [
         "math.calc.critical-points",
-        "math.calc.second-derivative-test"
+        "math.calc.concavity"
       ],
       "unlocks": [
         "math.opt.gradient-methods",
@@ -25613,7 +25565,7 @@
       "parent": null,
       "children": [],
       "requires": [
-        "math.calc.second-derivative-test"
+        "math.calc.concavity"
       ],
       "unlocks": [
         "math.opt.convex-optimization"
@@ -25815,9 +25767,7 @@
       ],
       "unlocks": [],
       "related": [],
-      "cross_links": [
-        "math.calc.lagrange-multipliers"
-      ],
+      "cross_links": [],
       "description": "Necessary conditions for optimality in constrained optimization: stationarity (\u2207L=0), primal feasibility, dual feasibility (\u03bb\u1d62\u22650), complementary slackness (\u03bb\u1d62f\u1d62(x*)=0). Sufficient for convex programs. Generalize Lagrange multipliers to inequality constraints.",
       "difficulty": "expert",
       "estimated_hours": 5,
@@ -25836,16 +25786,14 @@
       "parent": null,
       "children": [],
       "requires": [
-        "math.calc.partial-derivative",
+        "math.calc.partial-derivatives",
         "math.opt.unconstrained-optimization"
       ],
       "unlocks": [
         "math.opt.kkt"
       ],
       "related": [],
-      "cross_links": [
-        "math.calc.lagrange-multipliers"
-      ],
+      "cross_links": [],
       "description": "For minimize f(x) subject to g(x)=0: at a local optimum, \u2207f = \u03bb\u2207g (\u2207f parallel to \u2207g). The system \u2207f=\u03bb\u2207g, g(x)=0 has n+1 equations for n+1 unknowns (x,\u03bb). Generalizes to multiple constraints.",
       "difficulty": "proficient",
       "estimated_hours": 5,
@@ -25926,7 +25874,7 @@
       "children": [],
       "requires": [
         "math.opt.gradient-methods",
-        "math.calc.hessian"
+        "math.calc.multivariable-extrema"
       ],
       "unlocks": [],
       "related": [],

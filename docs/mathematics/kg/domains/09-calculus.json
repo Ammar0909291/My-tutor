@@ -2,118 +2,217 @@
   "domain_id": "calculus",
   "domain_name": "Calculus",
   "id_prefix": "math.calc",
-  "level_range": [4, 6],
+  "level_range": [
+    4,
+    6
+  ],
   "description": "The mathematics of continuous change: limits, derivatives, integrals, and their generalizations to multiple variables and vector fields.",
   "concepts": [
     {
       "id": "math.calc.limits",
       "name": "Limit of a Function",
-      "aliases": ["lim f(x)", "limit", "ε-δ definition"],
+      "aliases": [
+        "lim f(x)",
+        "limit",
+        "\u03b5-\u03b4 definition"
+      ],
       "parent": null,
-      "children": ["math.calc.limit-laws", "math.calc.one-sided-limits", "math.calc.limits-at-infinity"],
-      "requires": ["math.func.real-valued-function", "math.found.real-numbers"],
-      "unlocks": ["math.calc.continuity", "math.calc.derivative-definition"],
-      "related": ["math.calc.continuity", "math.seq.convergent"],
-      "cross_links": ["math.real.limit-rigorous"],
-      "description": "lim_{x→a} f(x) = L means f(x) can be made arbitrarily close to L by taking x sufficiently close (but not equal) to a; formalized by the ε-δ definition.",
+      "children": [
+        "math.calc.limit-laws",
+        "math.calc.one-sided-limits",
+        "math.calc.limits-at-infinity"
+      ],
+      "requires": [
+        "math.func.real-valued-function",
+        "math.found.real-numbers"
+      ],
+      "unlocks": [
+        "math.calc.continuity",
+        "math.calc.derivative-definition"
+      ],
+      "related": [
+        "math.calc.continuity",
+        "math.seq.convergent"
+      ],
+      "cross_links": [],
+      "description": "lim_{x\u2192a} f(x) = L means f(x) can be made arbitrarily close to L by taking x sufficiently close (but not equal) to a; formalized by the \u03b5-\u03b4 definition.",
       "difficulty": "advanced",
       "estimated_hours": 15,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Apostol 1967 Calculus Vol 1", "NCERT Grade 11-12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967 Calculus Vol 1",
+        "NCERT Grade 11-12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.limit-laws",
       "name": "Limit Laws",
-      "aliases": ["limit rules", "algebraic limit theorem"],
+      "aliases": [
+        "limit rules",
+        "algebraic limit theorem"
+      ],
       "parent": "math.calc.limits",
       "children": [],
-      "requires": ["math.calc.limits"],
+      "requires": [
+        "math.calc.limits"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "The sum, difference, product, quotient, and power rules for limits: lim(f±g) = limf ± limg, lim(fg) = (limf)(limg), etc.",
+      "description": "The sum, difference, product, quotient, and power rules for limits: lim(f\u00b1g) = limf \u00b1 limg, lim(fg) = (limf)(limg), etc.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.one-sided-limits",
       "name": "One-Sided Limits",
-      "aliases": ["left-hand limit", "right-hand limit", "lim_{x→a⁺}", "lim_{x→a⁻}"],
+      "aliases": [
+        "left-hand limit",
+        "right-hand limit",
+        "lim_{x\u2192a\u207a}",
+        "lim_{x\u2192a\u207b}"
+      ],
       "parent": "math.calc.limits",
       "children": [],
-      "requires": ["math.calc.limits"],
-      "unlocks": ["math.calc.continuity"],
-      "related": ["math.calc.continuity"],
+      "requires": [
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.calc.continuity"
+      ],
+      "related": [
+        "math.calc.continuity"
+      ],
       "cross_links": [],
-      "description": "The right-hand limit lim_{x→a⁺} f(x) and left-hand limit lim_{x→a⁻} f(x); the two-sided limit exists iff both one-sided limits exist and are equal.",
+      "description": "The right-hand limit lim_{x\u2192a\u207a} f(x) and left-hand limit lim_{x\u2192a\u207b} f(x); the two-sided limit exists iff both one-sided limits exist and are equal.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.limits-at-infinity",
       "name": "Limits at Infinity",
-      "aliases": ["lim_{x→∞} f(x)", "horizontal asymptote", "end behavior via limits"],
+      "aliases": [
+        "lim_{x\u2192\u221e} f(x)",
+        "horizontal asymptote",
+        "end behavior via limits"
+      ],
       "parent": "math.calc.limits",
       "children": [],
-      "requires": ["math.calc.limits"],
-      "unlocks": ["math.func.horizontal-asymptote"],
-      "related": ["math.func.horizontal-asymptote"],
+      "requires": [
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.func.horizontal-asymptote"
+      ],
+      "related": [
+        "math.func.horizontal-asymptote"
+      ],
       "cross_links": [],
-      "description": "lim_{x→∞} f(x) = L means f(x) → L as x grows without bound; determines horizontal asymptotes of rational and other functions.",
+      "description": "lim_{x\u2192\u221e} f(x) = L means f(x) \u2192 L as x grows without bound; determines horizontal asymptotes of rational and other functions.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.squeeze-theorem",
       "name": "Squeeze Theorem",
-      "aliases": ["sandwich theorem", "pinching theorem"],
+      "aliases": [
+        "sandwich theorem",
+        "pinching theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.limit-laws"],
+      "requires": [
+        "math.calc.limit-laws"
+      ],
       "unlocks": [],
-      "related": ["math.calc.limits"],
+      "related": [
+        "math.calc.limits"
+      ],
       "cross_links": [],
-      "description": "If g(x) ≤ f(x) ≤ h(x) near a and lim g = lim h = L, then lim f = L; used to compute limits like lim(sinx/x) = 1.",
+      "description": "If g(x) \u2264 f(x) \u2264 h(x) near a and lim g = lim h = L, then lim f = L; used to compute limits like lim(sinx/x) = 1.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.continuity",
       "name": "Continuity",
-      "aliases": ["continuous function", "f continuous at a", "no breaks/holes/jumps"],
+      "aliases": [
+        "continuous function",
+        "f continuous at a",
+        "no breaks/holes/jumps"
+      ],
       "parent": null,
-      "children": ["math.calc.continuity-types", "math.calc.ivt"],
-      "requires": ["math.calc.limits"],
-      "unlocks": ["math.calc.derivative-definition", "math.calc.ivt"],
-      "related": ["math.real.continuity-rigorous"],
-      "cross_links": ["math.real.continuity-rigorous", "math.top.continuous-map"],
-      "description": "f is continuous at a if lim_{x→a} f(x) = f(a); on an interval if continuous at every point; the calculus definition to be sharpened in real analysis.",
+      "children": [
+        "math.calc.continuity-types",
+        "math.calc.ivt"
+      ],
+      "requires": [
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.calc.derivative-definition",
+        "math.calc.ivt"
+      ],
+      "related": [
+        "math.real.continuity-rigorous"
+      ],
+      "cross_links": [
+        "math.real.continuity-rigorous",
+        "math.top.continuity-top"
+      ],
+      "description": "f is continuous at a if lim_{x\u2192a} f(x) = f(a); on an interval if continuous at every point; the calculus definition to be sharpened in real analysis.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Rudin 1976", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.continuity-types",
       "name": "Types of Discontinuity",
-      "aliases": ["removable discontinuity", "jump discontinuity", "infinite discontinuity"],
+      "aliases": [
+        "removable discontinuity",
+        "jump discontinuity",
+        "infinite discontinuity"
+      ],
       "parent": "math.calc.continuity",
       "children": [],
-      "requires": ["math.calc.continuity", "math.calc.one-sided-limits"],
+      "requires": [
+        "math.calc.continuity",
+        "math.calc.one-sided-limits"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -122,236 +221,414 @@
       "estimated_hours": 4,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.ivt",
       "name": "Intermediate Value Theorem",
-      "aliases": ["IVT", "intermediate value property"],
+      "aliases": [
+        "IVT",
+        "intermediate value property"
+      ],
       "parent": "math.calc.continuity",
       "children": [],
-      "requires": ["math.calc.continuity"],
-      "unlocks": ["math.num.bisection-method"],
-      "related": ["math.num.bisection-method"],
-      "cross_links": ["math.num.bisection-method"],
-      "description": "If f is continuous on [a, b] and N is between f(a) and f(b), then there exists c ∈ (a, b) with f(c) = N; guarantees roots and intermediate values.",
+      "requires": [
+        "math.calc.continuity"
+      ],
+      "unlocks": [
+        "math.num.root-finding"
+      ],
+      "related": [
+        "math.num.bisection-method"
+      ],
+      "cross_links": [
+        "math.num.root-finding"
+      ],
+      "description": "If f is continuous on [a, b] and N is between f(a) and f(b), then there exists c \u2208 (a, b) with f(c) = N; guarantees roots and intermediate values.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-intro",
       "name": "Slope of Tangent and Rate of Change",
-      "aliases": ["instantaneous rate of change", "tangent slope", "motivating derivatives"],
+      "aliases": [
+        "instantaneous rate of change",
+        "tangent slope",
+        "motivating derivatives"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.slope", "math.calc.limits"],
-      "unlocks": ["math.calc.derivative-definition"],
-      "related": ["math.calc.derivative-definition"],
+      "requires": [
+        "math.geom.slope",
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.calc.derivative-definition"
+      ],
+      "related": [
+        "math.calc.derivative-definition"
+      ],
       "cross_links": [],
       "description": "The derivative is motivated by the limit of the average rate of change (difference quotient) as the interval shrinks to zero, giving the instantaneous rate.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 11", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 11",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-definition",
       "name": "Derivative (Definition)",
-      "aliases": ["f'(x)", "dy/dx", "Df", "difference quotient limit"],
+      "aliases": [
+        "f'(x)",
+        "dy/dx",
+        "Df",
+        "difference quotient limit"
+      ],
       "parent": null,
-      "children": ["math.calc.differentiability", "math.calc.derivative-rules"],
-      "requires": ["math.calc.continuity", "math.calc.derivative-intro"],
-      "unlocks": ["math.calc.derivative-rules", "math.calc.mean-value-theorem"],
+      "children": [
+        "math.calc.differentiability",
+        "math.calc.derivative-rules"
+      ],
+      "requires": [
+        "math.calc.continuity",
+        "math.calc.derivative-intro"
+      ],
+      "unlocks": [
+        "math.calc.derivative-rules",
+        "math.calc.mean-value-theorem"
+      ],
       "related": [],
-      "cross_links": ["math.real.differentiability-rigorous"],
-      "description": "f'(x) = lim_{h→0} [f(x+h) − f(x)] / h; the instantaneous rate of change of f at x; the slope of the tangent line to the graph at x.",
+      "cross_links": [
+        "math.real.differentiability-rigorous"
+      ],
+      "description": "f'(x) = lim_{h\u21920} [f(x+h) \u2212 f(x)] / h; the instantaneous rate of change of f at x; the slope of the tangent line to the graph at x.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "Apostol 1967", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.differentiability",
       "name": "Differentiability",
-      "aliases": ["differentiable function", "not differentiable at corners"],
+      "aliases": [
+        "differentiable function",
+        "not differentiable at corners"
+      ],
       "parent": "math.calc.derivative-definition",
       "children": [],
-      "requires": ["math.calc.derivative-definition"],
+      "requires": [
+        "math.calc.derivative-definition"
+      ],
       "unlocks": [],
-      "related": ["math.calc.continuity"],
+      "related": [
+        "math.calc.continuity"
+      ],
       "cross_links": [],
       "description": "f is differentiable at a if f'(a) exists; differentiability implies continuity but not vice versa; non-differentiable at corners, cusps, and vertical tangents.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-rules",
       "name": "Basic Differentiation Rules",
-      "aliases": ["power rule", "constant rule", "sum rule for derivatives"],
+      "aliases": [
+        "power rule",
+        "constant rule",
+        "sum rule for derivatives"
+      ],
       "parent": "math.calc.derivative-definition",
       "children": [],
-      "requires": ["math.calc.derivative-definition"],
-      "unlocks": ["math.calc.product-rule", "math.calc.quotient-rule", "math.calc.chain-rule"],
+      "requires": [
+        "math.calc.derivative-definition"
+      ],
+      "unlocks": [
+        "math.calc.product-rule",
+        "math.calc.quotient-rule",
+        "math.calc.chain-rule"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Power rule: d/dx(xⁿ) = nxⁿ⁻¹; constant multiple rule; sum/difference rule; enable differentiation of all polynomials.",
+      "description": "Power rule: d/dx(x\u207f) = nx\u207f\u207b\u00b9; constant multiple rule; sum/difference rule; enable differentiation of all polynomials.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.product-rule",
       "name": "Product Rule",
-      "aliases": ["Leibniz rule", "d(uv)/dx = u'v + uv'"],
+      "aliases": [
+        "Leibniz rule",
+        "d(uv)/dx = u'v + uv'"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-rules"],
+      "requires": [
+        "math.calc.derivative-rules"
+      ],
       "unlocks": [],
-      "related": ["math.calc.quotient-rule", "math.calc.chain-rule"],
+      "related": [
+        "math.calc.quotient-rule",
+        "math.calc.chain-rule"
+      ],
       "cross_links": [],
       "description": "(fg)' = f'g + fg'; enables differentiation of products of functions.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.quotient-rule",
       "name": "Quotient Rule",
-      "aliases": ["d(u/v)/dx = (u'v − uv')/v²"],
+      "aliases": [
+        "d(u/v)/dx = (u'v \u2212 uv')/v\u00b2"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.product-rule"],
+      "requires": [
+        "math.calc.product-rule"
+      ],
       "unlocks": [],
-      "related": ["math.calc.product-rule"],
+      "related": [
+        "math.calc.product-rule"
+      ],
       "cross_links": [],
-      "description": "(f/g)' = (f'g − fg')/g²; enables differentiation of quotients; derivable from product rule and chain rule.",
+      "description": "(f/g)' = (f'g \u2212 fg')/g\u00b2; enables differentiation of quotients; derivable from product rule and chain rule.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.chain-rule",
       "name": "Chain Rule",
-      "aliases": ["d/dx f(g(x)) = f'(g(x))g'(x)", "composite function derivative"],
+      "aliases": [
+        "d/dx f(g(x)) = f'(g(x))g'(x)",
+        "composite function derivative"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-rules", "math.func.composition"],
-      "unlocks": ["math.calc.implicit-differentiation"],
-      "related": ["math.calc.implicit-differentiation"],
+      "requires": [
+        "math.calc.derivative-rules",
+        "math.func.composition"
+      ],
+      "unlocks": [
+        "math.calc.implicit-differentiation"
+      ],
+      "related": [
+        "math.calc.implicit-differentiation"
+      ],
       "cross_links": [],
-      "description": "The derivative of a composite function: (f∘g)'(x) = f'(g(x)) · g'(x); one of the most frequently used differentiation rules.",
+      "description": "The derivative of a composite function: (f\u2218g)'(x) = f'(g(x)) \u00b7 g'(x); one of the most frequently used differentiation rules.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-exponential",
       "name": "Derivative of Exponential Functions",
-      "aliases": ["d/dx eˣ = eˣ", "d/dx aˣ = aˣ ln a"],
+      "aliases": [
+        "d/dx e\u02e3 = e\u02e3",
+        "d/dx a\u02e3 = a\u02e3 ln a"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.chain-rule", "math.func.exponential-function"],
+      "requires": [
+        "math.calc.chain-rule",
+        "math.func.exponential-function"
+      ],
       "unlocks": [],
-      "related": ["math.calc.derivative-ln"],
+      "related": [
+        "math.calc.derivative-ln"
+      ],
       "cross_links": [],
-      "description": "d/dx(eˣ) = eˣ (eˣ is its own derivative); d/dx(aˣ) = aˣ ln a; derived via the chain rule and the natural log definition.",
+      "description": "d/dx(e\u02e3) = e\u02e3 (e\u02e3 is its own derivative); d/dx(a\u02e3) = a\u02e3 ln a; derived via the chain rule and the natural log definition.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-ln",
       "name": "Derivative of Logarithmic Functions",
-      "aliases": ["d/dx ln x = 1/x", "logarithmic differentiation"],
+      "aliases": [
+        "d/dx ln x = 1/x",
+        "logarithmic differentiation"
+      ],
       "parent": null,
-      "children": ["math.calc.logarithmic-differentiation"],
-      "requires": ["math.calc.chain-rule", "math.func.logarithmic-function"],
+      "children": [
+        "math.calc.logarithmic-differentiation"
+      ],
+      "requires": [
+        "math.calc.chain-rule",
+        "math.func.logarithmic-function"
+      ],
       "unlocks": [],
-      "related": ["math.calc.derivative-exponential"],
+      "related": [
+        "math.calc.derivative-exponential"
+      ],
       "cross_links": [],
-      "description": "d/dx(ln x) = 1/x; d/dx(logₐ x) = 1/(x ln a); logarithmic differentiation simplifies products and quotients raised to powers.",
+      "description": "d/dx(ln x) = 1/x; d/dx(log\u2090 x) = 1/(x ln a); logarithmic differentiation simplifies products and quotients raised to powers.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.logarithmic-differentiation",
       "name": "Logarithmic Differentiation",
-      "aliases": ["log differentiation technique", "y = f(x)^g(x)"],
+      "aliases": [
+        "log differentiation technique",
+        "y = f(x)^g(x)"
+      ],
       "parent": "math.calc.derivative-ln",
       "children": [],
-      "requires": ["math.calc.derivative-ln"],
+      "requires": [
+        "math.calc.derivative-ln"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Taking ln of both sides before differentiating; required for variable-base-and-exponent forms like y = xˢⁱⁿˣ.",
+      "description": "Taking ln of both sides before differentiating; required for variable-base-and-exponent forms like y = x\u02e2\u2071\u207f\u02e3.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-trig",
       "name": "Derivatives of Trigonometric Functions",
-      "aliases": ["d/dx sinx = cosx", "trig derivatives"],
+      "aliases": [
+        "d/dx sinx = cosx",
+        "trig derivatives"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-rules", "math.trig.trig-functions", "math.calc.squeeze-theorem"],
-      "unlocks": ["math.calc.derivative-inverse-trig"],
+      "requires": [
+        "math.calc.derivative-rules",
+        "math.trig.trig-functions",
+        "math.calc.squeeze-theorem"
+      ],
+      "unlocks": [
+        "math.calc.derivative-inverse-trig"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "d/dx(sin x) = cos x; d/dx(cos x) = −sin x; d/dx(tan x) = sec²x; and their reciprocals; all derivable from the definition and squeeze theorem.",
+      "description": "d/dx(sin x) = cos x; d/dx(cos x) = \u2212sin x; d/dx(tan x) = sec\u00b2x; and their reciprocals; all derivable from the definition and squeeze theorem.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.derivative-inverse-trig",
       "name": "Derivatives of Inverse Trig Functions",
-      "aliases": ["d/dx arcsin x = 1/√(1−x²)", "inverse trig derivatives"],
+      "aliases": [
+        "d/dx arcsin x = 1/\u221a(1\u2212x\u00b2)",
+        "inverse trig derivatives"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-trig", "math.trig.inverse-trig", "math.calc.implicit-differentiation"],
+      "requires": [
+        "math.calc.derivative-trig",
+        "math.trig.inverse-trig",
+        "math.calc.implicit-differentiation"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "d/dx(arcsin x) = 1/√(1−x²); d/dx(arctan x) = 1/(1+x²); derived via implicit differentiation of the inverse relation.",
+      "description": "d/dx(arcsin x) = 1/\u221a(1\u2212x\u00b2); d/dx(arctan x) = 1/(1+x\u00b2); derived via implicit differentiation of the inverse relation.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.hyperbolic-derivatives",
       "name": "Derivatives of Hyperbolic Functions",
-      "aliases": ["d/dx sinh x = cosh x"],
+      "aliases": [
+        "d/dx sinh x = cosh x"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.trig.hyperbolic-functions", "math.calc.derivative-exponential"],
+      "requires": [
+        "math.trig.hyperbolic-functions",
+        "math.calc.derivative-exponential"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -359,50 +636,89 @@
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.implicit-differentiation",
       "name": "Implicit Differentiation",
-      "aliases": ["implicit derivative", "dy/dx from F(x,y)=0"],
+      "aliases": [
+        "implicit derivative",
+        "dy/dx from F(x,y)=0"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.chain-rule"],
-      "unlocks": ["math.calc.related-rates", "math.calc.derivative-inverse-trig"],
-      "related": ["math.calc.related-rates"],
+      "requires": [
+        "math.calc.chain-rule"
+      ],
+      "unlocks": [
+        "math.calc.related-rates",
+        "math.calc.derivative-inverse-trig"
+      ],
+      "related": [
+        "math.calc.related-rates"
+      ],
       "cross_links": [],
       "description": "Differentiating both sides of an equation in x and y with respect to x, treating y as a function of x via the chain rule; gives dy/dx without solving for y.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.higher-order-derivatives",
       "name": "Higher-Order Derivatives",
-      "aliases": ["second derivative", "f''", "d²y/dx²", "nth derivative"],
+      "aliases": [
+        "second derivative",
+        "f''",
+        "d\u00b2y/dx\u00b2",
+        "nth derivative"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-rules"],
-      "unlocks": ["math.calc.concavity", "math.de.second-order-ode"],
-      "related": ["math.calc.concavity"],
-      "cross_links": ["math.de.second-order-ode"],
+      "requires": [
+        "math.calc.derivative-rules"
+      ],
+      "unlocks": [
+        "math.calc.concavity",
+        "math.de.second-order-ode"
+      ],
+      "related": [
+        "math.calc.concavity"
+      ],
+      "cross_links": [
+        "math.de.second-order-ode"
+      ],
       "description": "The second derivative f'' = (f')' measures the rate of change of the slope; higher derivatives arise in Taylor series, ODEs, and curvature.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.related-rates",
       "name": "Related Rates",
-      "aliases": ["related rates problems"],
+      "aliases": [
+        "related rates problems"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.implicit-differentiation"],
+      "requires": [
+        "math.calc.implicit-differentiation"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -411,151 +727,274 @@
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.lhopitals-rule",
-      "name": "L'Hôpital's Rule",
-      "aliases": ["L'Hopital's rule", "indeterminate forms", "0/0 form"],
+      "name": "L'H\u00f4pital's Rule",
+      "aliases": [
+        "L'Hopital's rule",
+        "indeterminate forms",
+        "0/0 form"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-definition", "math.calc.limits"],
+      "requires": [
+        "math.calc.derivative-definition",
+        "math.calc.limits"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "If lim f/g is indeterminate (0/0 or ∞/∞), then lim f/g = lim f'/g' under appropriate conditions; handles indeterminate forms like 0·∞, 1^∞, etc.",
+      "description": "If lim f/g is indeterminate (0/0 or \u221e/\u221e), then lim f/g = lim f'/g' under appropriate conditions; handles indeterminate forms like 0\u00b7\u221e, 1^\u221e, etc.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.mean-value-theorem",
       "name": "Mean Value Theorem",
-      "aliases": ["MVT", "f'(c) = (f(b)−f(a))/(b−a)"],
+      "aliases": [
+        "MVT",
+        "f'(c) = (f(b)\u2212f(a))/(b\u2212a)"
+      ],
       "parent": null,
-      "children": ["math.calc.rolles-theorem"],
-      "requires": ["math.calc.derivative-definition", "math.calc.continuity"],
-      "unlocks": ["math.calc.increasing-decreasing", "math.real.mean-value-theorem"],
-      "related": ["math.calc.rolles-theorem"],
-      "cross_links": ["math.real.mean-value-theorem"],
-      "description": "If f is continuous on [a,b] and differentiable on (a,b), there exists c ∈ (a,b) with f'(c) = (f(b)−f(a))/(b−a); the average rate equals the instantaneous rate somewhere.",
+      "children": [
+        "math.calc.rolles-theorem"
+      ],
+      "requires": [
+        "math.calc.derivative-definition",
+        "math.calc.continuity"
+      ],
+      "unlocks": [
+        "math.calc.increasing-decreasing",
+        "math.real.mvt"
+      ],
+      "related": [
+        "math.calc.rolles-theorem"
+      ],
+      "cross_links": [
+        "math.real.mvt"
+      ],
+      "description": "If f is continuous on [a,b] and differentiable on (a,b), there exists c \u2208 (a,b) with f'(c) = (f(b)\u2212f(a))/(b\u2212a); the average rate equals the instantaneous rate somewhere.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Rudin 1976", "Apostol 1967", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "Apostol 1967",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.rolles-theorem",
       "name": "Rolle's Theorem",
-      "aliases": ["Rolle's theorem"],
+      "aliases": [
+        "Rolle's theorem"
+      ],
       "parent": "math.calc.mean-value-theorem",
       "children": [],
-      "requires": ["math.calc.mean-value-theorem"],
+      "requires": [
+        "math.calc.mean-value-theorem"
+      ],
       "unlocks": [],
-      "related": ["math.calc.mean-value-theorem"],
+      "related": [
+        "math.calc.mean-value-theorem"
+      ],
       "cross_links": [],
-      "description": "Special case of MVT: if f is continuous on [a,b], differentiable on (a,b), and f(a) = f(b), then there exists c ∈ (a,b) with f'(c) = 0.",
+      "description": "Special case of MVT: if f is continuous on [a,b], differentiable on (a,b), and f(a) = f(b), then there exists c \u2208 (a,b) with f'(c) = 0.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.increasing-decreasing",
       "name": "Increasing and Decreasing Functions",
-      "aliases": ["monotonicity via derivatives", "f' > 0 increasing"],
+      "aliases": [
+        "monotonicity via derivatives",
+        "f' > 0 increasing"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.mean-value-theorem"],
-      "unlocks": ["math.calc.critical-points"],
-      "related": ["math.func.monotonic-function"],
+      "requires": [
+        "math.calc.mean-value-theorem"
+      ],
+      "unlocks": [
+        "math.calc.critical-points"
+      ],
+      "related": [
+        "math.func.monotonic-function"
+      ],
       "cross_links": [],
       "description": "If f' > 0 on an interval, f is increasing; if f' < 0, f is decreasing; follows from the MVT.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.critical-points",
       "name": "Critical Points",
-      "aliases": ["stationary points", "f'(c) = 0 or undefined"],
+      "aliases": [
+        "stationary points",
+        "f'(c) = 0 or undefined"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-rules"],
-      "unlocks": ["math.calc.local-extrema", "math.calc.optimization"],
-      "related": ["math.calc.local-extrema"],
+      "requires": [
+        "math.calc.derivative-rules"
+      ],
+      "unlocks": [
+        "math.calc.local-extrema",
+        "math.calc.optimization"
+      ],
+      "related": [
+        "math.calc.local-extrema"
+      ],
       "cross_links": [],
       "description": "Points where f'(c) = 0 or f'(c) is undefined; candidates for local maxima, minima, and inflection points.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.local-extrema",
       "name": "Local Extrema",
-      "aliases": ["local maximum", "local minimum", "first derivative test", "second derivative test"],
+      "aliases": [
+        "local maximum",
+        "local minimum",
+        "first derivative test",
+        "second derivative test"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.critical-points", "math.calc.increasing-decreasing"],
-      "unlocks": ["math.calc.optimization"],
-      "related": ["math.calc.optimization", "math.calc.concavity"],
+      "requires": [
+        "math.calc.critical-points",
+        "math.calc.increasing-decreasing"
+      ],
+      "unlocks": [
+        "math.calc.optimization"
+      ],
+      "related": [
+        "math.calc.optimization",
+        "math.calc.concavity"
+      ],
       "cross_links": [],
-      "description": "Local max/min at critical points c; first derivative test: sign change of f'; second derivative test: f''(c) > 0 → local min, f''(c) < 0 → local max.",
+      "description": "Local max/min at critical points c; first derivative test: sign change of f'; second derivative test: f''(c) > 0 \u2192 local min, f''(c) < 0 \u2192 local max.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.concavity",
       "name": "Concavity and Inflection Points",
-      "aliases": ["concave up", "concave down", "inflection point", "f'' sign"],
+      "aliases": [
+        "concave up",
+        "concave down",
+        "inflection point",
+        "f'' sign"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.higher-order-derivatives"],
-      "unlocks": ["math.calc.curve-sketching"],
-      "related": ["math.calc.local-extrema"],
+      "requires": [
+        "math.calc.higher-order-derivatives"
+      ],
+      "unlocks": [
+        "math.calc.curve-sketching"
+      ],
+      "related": [
+        "math.calc.local-extrema"
+      ],
       "cross_links": [],
       "description": "f is concave up where f'' > 0 (cup shape) and concave down where f'' < 0 (cap shape); inflection points where concavity changes.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.optimization",
       "name": "Optimization (Calculus)",
-      "aliases": ["applied optimization", "max/min word problems"],
+      "aliases": [
+        "applied optimization",
+        "max/min word problems"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.local-extrema"],
-      "unlocks": ["math.opt.calculus-optimization"],
-      "related": ["math.opt.calculus-optimization"],
-      "cross_links": ["math.opt.calculus-optimization"],
+      "requires": [
+        "math.calc.local-extrema"
+      ],
+      "unlocks": [
+        "math.opt.unconstrained-optimization"
+      ],
+      "related": [
+        "math.opt.calculus-optimization"
+      ],
+      "cross_links": [
+        "math.opt.unconstrained-optimization"
+      ],
       "description": "Finding global maxima and minima of a function on a closed interval or over all reals using critical points, endpoints, and boundary analysis.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.curve-sketching",
       "name": "Curve Sketching",
-      "aliases": ["graphing via calculus", "complete graph analysis"],
+      "aliases": [
+        "graphing via calculus",
+        "complete graph analysis"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.concavity", "math.calc.local-extrema", "math.calc.limits-at-infinity"],
+      "requires": [
+        "math.calc.concavity",
+        "math.calc.local-extrema",
+        "math.calc.limits-at-infinity"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -564,185 +1003,332 @@
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.linearization",
       "name": "Linearization and Differentials",
-      "aliases": ["linear approximation", "tangent line approximation", "dy = f'(x)dx"],
+      "aliases": [
+        "linear approximation",
+        "tangent line approximation",
+        "dy = f'(x)dx"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-definition"],
-      "unlocks": ["math.calc.taylor-series"],
-      "related": ["math.calc.taylor-series"],
+      "requires": [
+        "math.calc.derivative-definition"
+      ],
+      "unlocks": [
+        "math.calc.taylor-series"
+      ],
+      "related": [
+        "math.calc.taylor-series"
+      ],
       "cross_links": [],
-      "description": "Approximating f(x) near a by its tangent line L(x) = f(a) + f'(a)(x−a); the differential df = f'(x)dx is the linearization of the increment.",
+      "description": "Approximating f(x) near a by its tangent line L(x) = f(a) + f'(a)(x\u2212a); the differential df = f'(x)dx is the linearization of the increment.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.antiderivatives",
       "name": "Antiderivatives",
-      "aliases": ["indefinite integral", "∫f(x)dx", "primitive"],
+      "aliases": [
+        "indefinite integral",
+        "\u222bf(x)dx",
+        "primitive"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-rules"],
-      "unlocks": ["math.calc.definite-integral"],
-      "related": ["math.calc.definite-integral"],
+      "requires": [
+        "math.calc.derivative-rules"
+      ],
+      "unlocks": [
+        "math.calc.definite-integral"
+      ],
+      "related": [
+        "math.calc.definite-integral"
+      ],
       "cross_links": [],
-      "description": "F is an antiderivative of f if F' = f; uniquely determined up to a constant; written ∫f(x)dx = F(x) + C.",
+      "description": "F is an antiderivative of f if F' = f; uniquely determined up to a constant; written \u222bf(x)dx = F(x) + C.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.riemann-sums",
       "name": "Riemann Sums",
-      "aliases": ["left/right/midpoint Riemann sum", "∑f(xᵢ*)Δx"],
+      "aliases": [
+        "left/right/midpoint Riemann sum",
+        "\u2211f(x\u1d62*)\u0394x"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.limits"],
-      "unlocks": ["math.calc.definite-integral"],
-      "related": ["math.calc.definite-integral"],
+      "requires": [
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.calc.definite-integral"
+      ],
+      "related": [
+        "math.calc.definite-integral"
+      ],
       "cross_links": [],
-      "description": "Approximations of the area under a curve by summing areas of rectangles with widths Δx and heights f(xᵢ*); the definite integral is their limit as Δx → 0.",
+      "description": "Approximations of the area under a curve by summing areas of rectangles with widths \u0394x and heights f(x\u1d62*); the definite integral is their limit as \u0394x \u2192 0.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Apostol 1967", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.definite-integral",
       "name": "Definite Integral",
-      "aliases": ["∫ₐᵇ f(x)dx", "Riemann integral (basic)", "net area"],
+      "aliases": [
+        "\u222b\u2090\u1d47 f(x)dx",
+        "Riemann integral (basic)",
+        "net area"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.riemann-sums"],
-      "unlocks": ["math.calc.ftc-part1", "math.calc.ftc-part2"],
-      "related": ["math.calc.antiderivatives"],
-      "cross_links": ["math.real.riemann-integral"],
-      "description": "The limit of Riemann sums lim_{n→∞} Σf(xᵢ*)Δx = ∫ₐᵇ f(x)dx; measures signed area between f and the x-axis from a to b.",
+      "requires": [
+        "math.calc.riemann-sums"
+      ],
+      "unlocks": [
+        "math.calc.ftc-part1",
+        "math.calc.ftc-part2"
+      ],
+      "related": [
+        "math.calc.antiderivatives"
+      ],
+      "cross_links": [
+        "math.real.riemann-integral"
+      ],
+      "description": "The limit of Riemann sums lim_{n\u2192\u221e} \u03a3f(x\u1d62*)\u0394x = \u222b\u2090\u1d47 f(x)dx; measures signed area between f and the x-axis from a to b.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Apostol 1967", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.ftc-part1",
       "name": "Fundamental Theorem of Calculus Part 1",
-      "aliases": ["FTC 1", "d/dx ∫ₐˣ f(t)dt = f(x)"],
+      "aliases": [
+        "FTC 1",
+        "d/dx \u222b\u2090\u02e3 f(t)dt = f(x)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.definite-integral", "math.calc.continuity"],
-      "unlocks": ["math.calc.ftc-part2"],
-      "related": ["math.calc.ftc-part2"],
+      "requires": [
+        "math.calc.definite-integral",
+        "math.calc.continuity"
+      ],
+      "unlocks": [
+        "math.calc.ftc-part2"
+      ],
+      "related": [
+        "math.calc.ftc-part2"
+      ],
       "cross_links": [],
-      "description": "If F(x) = ∫ₐˣ f(t)dt and f is continuous, then F'(x) = f(x); differentiation and integration are inverse operations.",
+      "description": "If F(x) = \u222b\u2090\u02e3 f(t)dt and f is continuous, then F'(x) = f(x); differentiation and integration are inverse operations.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "Apostol 1967", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.ftc-part2",
       "name": "Fundamental Theorem of Calculus Part 2",
-      "aliases": ["FTC 2", "∫ₐᵇ f(x)dx = F(b)−F(a)"],
+      "aliases": [
+        "FTC 2",
+        "\u222b\u2090\u1d47 f(x)dx = F(b)\u2212F(a)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.ftc-part1", "math.calc.antiderivatives"],
-      "unlocks": ["math.calc.u-substitution"],
-      "related": ["math.calc.ftc-part1"],
+      "requires": [
+        "math.calc.ftc-part1",
+        "math.calc.antiderivatives"
+      ],
+      "unlocks": [
+        "math.calc.u-substitution"
+      ],
+      "related": [
+        "math.calc.ftc-part1"
+      ],
       "cross_links": [],
-      "description": "If F is any antiderivative of f, then ∫ₐᵇ f(x)dx = F(b) − F(a); enables exact evaluation of definite integrals.",
+      "description": "If F is any antiderivative of f, then \u222b\u2090\u1d47 f(x)dx = F(b) \u2212 F(a); enables exact evaluation of definite integrals.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "Apostol 1967", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.u-substitution",
       "name": "Integration by Substitution",
-      "aliases": ["u-substitution", "change of variable in integration"],
+      "aliases": [
+        "u-substitution",
+        "change of variable in integration"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.ftc-part2", "math.calc.chain-rule"],
-      "unlocks": ["math.calc.integration-by-parts"],
-      "related": ["math.calc.integration-by-parts"],
+      "requires": [
+        "math.calc.ftc-part2",
+        "math.calc.chain-rule"
+      ],
+      "unlocks": [
+        "math.calc.integration-by-parts"
+      ],
+      "related": [
+        "math.calc.integration-by-parts"
+      ],
       "cross_links": [],
-      "description": "Reversing the chain rule: ∫f(g(x))g'(x)dx = ∫f(u)du where u = g(x); the most fundamental integration technique.",
+      "description": "Reversing the chain rule: \u222bf(g(x))g'(x)dx = \u222bf(u)du where u = g(x); the most fundamental integration technique.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.integration-by-parts",
       "name": "Integration by Parts",
-      "aliases": ["IBP", "∫u dv = uv − ∫v du"],
+      "aliases": [
+        "IBP",
+        "\u222bu dv = uv \u2212 \u222bv du"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.u-substitution", "math.calc.product-rule"],
-      "unlocks": ["math.calc.reduction-formulas"],
+      "requires": [
+        "math.calc.u-substitution",
+        "math.calc.product-rule"
+      ],
+      "unlocks": [
+        "math.calc.reduction-formulas"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "∫u dv = uv − ∫v du; reverses the product rule; used for products of trig, exponential, log, and polynomial functions.",
+      "description": "\u222bu dv = uv \u2212 \u222bv du; reverses the product rule; used for products of trig, exponential, log, and polynomial functions.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.trig-integrals",
       "name": "Trigonometric Integrals",
-      "aliases": ["∫sinⁿx cosᵐx dx", "trig integrals"],
+      "aliases": [
+        "\u222bsin\u207fx cos\u1d50x dx",
+        "trig integrals"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.u-substitution", "math.trig.product-to-sum"],
-      "unlocks": ["math.calc.trig-substitution"],
+      "requires": [
+        "math.calc.u-substitution",
+        "math.trig.product-to-sum"
+      ],
+      "unlocks": [
+        "math.calc.trig-substitution"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Integration of products of trig functions using Pythagorean identities, double-angle formulas, and reduction formulas; includes ∫sinⁿx dx, ∫tanⁿx sec^m x dx.",
+      "description": "Integration of products of trig functions using Pythagorean identities, double-angle formulas, and reduction formulas; includes \u222bsin\u207fx dx, \u222btan\u207fx sec^m x dx.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.trig-substitution",
       "name": "Trigonometric Substitution",
-      "aliases": ["trig sub", "x = a sinθ", "x = a tanθ"],
+      "aliases": [
+        "trig sub",
+        "x = a sin\u03b8",
+        "x = a tan\u03b8"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.trig-integrals", "math.trig.trig-identities"],
-      "unlocks": ["math.calc.partial-fractions"],
+      "requires": [
+        "math.calc.trig-integrals",
+        "math.trig.trig-identities"
+      ],
+      "unlocks": [
+        "math.calc.partial-fractions"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Substituting x = a sin θ, a tan θ, or a sec θ to eliminate square roots of the forms a²−x², a²+x², x²−a² in integrands.",
+      "description": "Substituting x = a sin \u03b8, a tan \u03b8, or a sec \u03b8 to eliminate square roots of the forms a\u00b2\u2212x\u00b2, a\u00b2+x\u00b2, x\u00b2\u2212a\u00b2 in integrands.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.partial-fractions",
       "name": "Partial Fraction Decomposition",
-      "aliases": ["partial fractions", "PFD"],
+      "aliases": [
+        "partial fractions",
+        "PFD"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.trig-substitution", "math.alg.rational-expressions", "math.alg.polynomial-roots"],
+      "requires": [
+        "math.calc.trig-substitution",
+        "math.alg.rational-expressions",
+        "math.alg.polynomial-roots"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -751,203 +1337,346 @@
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.reduction-formulas",
       "name": "Reduction Formulas",
-      "aliases": ["recursive integration formulas"],
+      "aliases": [
+        "recursive integration formulas"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.integration-by-parts"],
+      "requires": [
+        "math.calc.integration-by-parts"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Formulas expressing ∫f^n in terms of ∫f^(n-2) or ∫f^(n-1); used for ∫sinⁿx dx, ∫cosⁿx dx, ∫xⁿeˣdx.",
+      "description": "Formulas expressing \u222bf^n in terms of \u222bf^(n-2) or \u222bf^(n-1); used for \u222bsin\u207fx dx, \u222bcos\u207fx dx, \u222bx\u207fe\u02e3dx.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.improper-integrals",
       "name": "Improper Integrals",
-      "aliases": ["∫₁^∞", "∫ over infinite interval", "singularity integrals"],
+      "aliases": [
+        "\u222b\u2081^\u221e",
+        "\u222b over infinite interval",
+        "singularity integrals"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.definite-integral", "math.calc.limits-at-infinity"],
-      "unlocks": ["math.seq.integral-test"],
-      "related": ["math.seq.integral-test"],
+      "requires": [
+        "math.calc.definite-integral",
+        "math.calc.limits-at-infinity"
+      ],
+      "unlocks": [
+        "math.seq.integral-test"
+      ],
+      "related": [
+        "math.seq.integral-test"
+      ],
       "cross_links": [],
       "description": "Definite integrals with infinite limits or integrands with singularities; defined as limits of proper integrals; convergent or divergent.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.integral-area",
       "name": "Area by Integration",
-      "aliases": ["area under curve", "area between curves"],
+      "aliases": [
+        "area under curve",
+        "area between curves"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.definite-integral"],
-      "unlocks": ["math.calc.volume-revolution"],
+      "requires": [
+        "math.calc.definite-integral"
+      ],
+      "unlocks": [
+        "math.calc.volume-revolution"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Area under y = f(x) from a to b is ∫ₐᵇ f(x)dx; area between curves is ∫ₐᵇ [f(x)−g(x)]dx where f ≥ g.",
+      "description": "Area under y = f(x) from a to b is \u222b\u2090\u1d47 f(x)dx; area between curves is \u222b\u2090\u1d47 [f(x)\u2212g(x)]dx where f \u2265 g.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 1"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 1"
+      ]
     },
     {
       "id": "math.calc.volume-revolution",
       "name": "Volumes of Revolution",
-      "aliases": ["disk method", "washer method", "shell method"],
+      "aliases": [
+        "disk method",
+        "washer method",
+        "shell method"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.integral-area"],
+      "requires": [
+        "math.calc.integral-area"
+      ],
       "unlocks": [],
-      "related": ["math.geom.volume"],
+      "related": [
+        "math.geom.volume"
+      ],
       "cross_links": [],
-      "description": "Volume of solid formed by rotating a region: disk method V = π∫f²dx; washer method V = π∫(f²−g²)dx; shell method V = 2π∫xf(x)dx.",
+      "description": "Volume of solid formed by rotating a region: disk method V = \u03c0\u222bf\u00b2dx; washer method V = \u03c0\u222b(f\u00b2\u2212g\u00b2)dx; shell method V = 2\u03c0\u222bxf(x)dx.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.arc-length",
       "name": "Arc Length",
-      "aliases": ["length of curve", "∫√(1+f'²)dx"],
+      "aliases": [
+        "length of curve",
+        "\u222b\u221a(1+f'\u00b2)dx"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.definite-integral", "math.calc.derivative-rules"],
+      "requires": [
+        "math.calc.definite-integral",
+        "math.calc.derivative-rules"
+      ],
       "unlocks": [],
-      "related": ["math.geom.differential-geometry-curves"],
-      "cross_links": ["math.geom.differential-geometry-curves"],
-      "description": "The length of a curve y = f(x) from a to b: L = ∫ₐᵇ √(1 + [f'(x)]²) dx; generalizes to parametric and polar curves.",
+      "related": [
+        "math.geom.differential-geometry-curves"
+      ],
+      "cross_links": [
+        "math.geom.differential-geometry-curves"
+      ],
+      "description": "The length of a curve y = f(x) from a to b: L = \u222b\u2090\u1d47 \u221a(1 + [f'(x)]\u00b2) dx; generalizes to parametric and polar curves.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.surface-area-integral",
       "name": "Surface Area of Revolution",
-      "aliases": ["S = 2π∫f√(1+f'²)dx"],
+      "aliases": [
+        "S = 2\u03c0\u222bf\u221a(1+f'\u00b2)dx"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.arc-length"],
+      "requires": [
+        "math.calc.arc-length"
+      ],
       "unlocks": [],
-      "related": ["math.geom.surface-area"],
+      "related": [
+        "math.geom.surface-area"
+      ],
       "cross_links": [],
-      "description": "The surface area generated by rotating y = f(x) about the x-axis: S = 2π∫ₐᵇ f(x)√(1+[f'(x)]²) dx.",
+      "description": "The surface area generated by rotating y = f(x) about the x-axis: S = 2\u03c0\u222b\u2090\u1d47 f(x)\u221a(1+[f'(x)]\u00b2) dx.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.65,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.power-series",
       "name": "Power Series",
-      "aliases": ["Σcₙ(x−a)ⁿ", "power series representation"],
+      "aliases": [
+        "\u03a3c\u2099(x\u2212a)\u207f",
+        "power series representation"
+      ],
       "parent": null,
-      "children": ["math.calc.radius-of-convergence"],
-      "requires": ["math.seq.series-convergence"],
-      "unlocks": ["math.calc.taylor-series", "math.calc.maclaurin-series"],
-      "related": ["math.calc.taylor-series"],
+      "children": [
+        "math.calc.radius-of-convergence"
+      ],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [
+        "math.calc.taylor-series",
+        "math.calc.maclaurin-series"
+      ],
+      "related": [
+        "math.calc.taylor-series"
+      ],
       "cross_links": [],
-      "description": "A series Σcₙ(x−a)ⁿ defining a function on an interval |x−a| < R where R is the radius of convergence; the natural setting for Taylor series.",
+      "description": "A series \u03a3c\u2099(x\u2212a)\u207f defining a function on an interval |x\u2212a| < R where R is the radius of convergence; the natural setting for Taylor series.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.radius-of-convergence",
       "name": "Radius of Convergence",
-      "aliases": ["R", "interval of convergence"],
+      "aliases": [
+        "R",
+        "interval of convergence"
+      ],
       "parent": "math.calc.power-series",
       "children": [],
-      "requires": ["math.calc.power-series", "math.seq.ratio-test"],
+      "requires": [
+        "math.calc.power-series",
+        "math.seq.ratio-test"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "The radius R such that the power series converges absolutely for |x−a| < R and diverges for |x−a| > R; found via the ratio or root test.",
+      "description": "The radius R such that the power series converges absolutely for |x\u2212a| < R and diverges for |x\u2212a| > R; found via the ratio or root test.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "Rudin 1976", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.taylor-series",
       "name": "Taylor Series",
-      "aliases": ["Taylor expansion", "Σf^(n)(a)(x−a)ⁿ/n!"],
+      "aliases": [
+        "Taylor expansion",
+        "\u03a3f^(n)(a)(x\u2212a)\u207f/n!"
+      ],
       "parent": null,
-      "children": ["math.calc.taylor-remainder"],
-      "requires": ["math.calc.power-series", "math.calc.higher-order-derivatives", "math.calc.linearization"],
-      "unlocks": ["math.calc.maclaurin-series"],
-      "related": ["math.calc.maclaurin-series"],
+      "children": [
+        "math.calc.taylor-remainder"
+      ],
+      "requires": [
+        "math.calc.power-series",
+        "math.calc.higher-order-derivatives",
+        "math.calc.linearization"
+      ],
+      "unlocks": [
+        "math.calc.maclaurin-series"
+      ],
+      "related": [
+        "math.calc.maclaurin-series"
+      ],
       "cross_links": [],
-      "description": "Representing a smooth function as a power series about a point a: f(x) = Σf^(n)(a)(x−a)ⁿ/n!; valid on the radius of convergence.",
+      "description": "Representing a smooth function as a power series about a point a: f(x) = \u03a3f^(n)(a)(x\u2212a)\u207f/n!; valid on the radius of convergence.",
       "difficulty": "advanced",
       "estimated_hours": 12,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "Rudin 1976", "Apostol 1967", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "Apostol 1967",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.maclaurin-series",
       "name": "Maclaurin Series",
-      "aliases": ["Taylor series at 0", "Maclaurin expansion"],
+      "aliases": [
+        "Taylor series at 0",
+        "Maclaurin expansion"
+      ],
       "parent": "math.calc.taylor-series",
       "children": [],
-      "requires": ["math.calc.taylor-series"],
+      "requires": [
+        "math.calc.taylor-series"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Taylor series centered at a = 0; key examples: eˣ = Σxⁿ/n!, sin x = Σ(−1)ⁿx^(2n+1)/(2n+1)!, cos x = Σ(−1)ⁿx^(2n)/(2n)!, 1/(1−x) = Σxⁿ.",
+      "description": "Taylor series centered at a = 0; key examples: e\u02e3 = \u03a3x\u207f/n!, sin x = \u03a3(\u22121)\u207fx^(2n+1)/(2n+1)!, cos x = \u03a3(\u22121)\u207fx^(2n)/(2n)!, 1/(1\u2212x) = \u03a3x\u207f.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "Apostol 1967", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "Apostol 1967",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.taylor-remainder",
       "name": "Taylor Remainder and Error Bound",
-      "aliases": ["Lagrange remainder", "Rₙ(x)", "Taylor error"],
+      "aliases": [
+        "Lagrange remainder",
+        "R\u2099(x)",
+        "Taylor error"
+      ],
       "parent": "math.calc.taylor-series",
       "children": [],
-      "requires": ["math.calc.taylor-series"],
+      "requires": [
+        "math.calc.taylor-series"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.num.error-analysis"],
-      "description": "The error in approximating f by its nth Taylor polynomial: |Rₙ(x)| ≤ M|x−a|^(n+1)/(n+1)! where M bounds |f^(n+1)|; enables precision control.",
+      "cross_links": [
+        "math.num.error-analysis"
+      ],
+      "description": "The error in approximating f by its nth Taylor polynomial: |R\u2099(x)| \u2264 M|x\u2212a|^(n+1)/(n+1)! where M bounds |f^(n+1)|; enables precision control.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "Rudin 1976", "Apostol 1967"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "Rudin 1976",
+        "Apostol 1967"
+      ]
     },
     {
       "id": "math.calc.parametric-curves",
       "name": "Parametric Equations and Curves",
-      "aliases": ["x = f(t), y = g(t)", "parametric curve"],
+      "aliases": [
+        "x = f(t), y = g(t)",
+        "parametric curve"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.func.function-concept", "math.geom.coordinate-plane"],
-      "unlocks": ["math.calc.parametric-calculus"],
+      "requires": [
+        "math.func.function-concept",
+        "math.geom.coordinate-plane"
+      ],
+      "unlocks": [
+        "math.calc.parametric-calculus"
+      ],
       "related": [],
       "cross_links": [],
       "description": "Describing a curve by parametric equations x = f(t), y = g(t); enables representation of curves that are not functions, like circles and epicycloids.",
@@ -955,100 +1684,175 @@
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "NCERT Grade 12", "OpenStax Calculus Vol 2"]
+      "references": [
+        "Stewart Calculus",
+        "NCERT Grade 12",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.parametric-calculus",
       "name": "Calculus of Parametric Curves",
-      "aliases": ["dy/dx = (dy/dt)/(dx/dt)", "arc length parametric"],
+      "aliases": [
+        "dy/dx = (dy/dt)/(dx/dt)",
+        "arc length parametric"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.parametric-curves", "math.calc.chain-rule", "math.calc.definite-integral"],
+      "requires": [
+        "math.calc.parametric-curves",
+        "math.calc.chain-rule",
+        "math.calc.definite-integral"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Differentiation: dy/dx = (dy/dt)/(dx/dt); arc length: L = ∫√((dx/dt)² + (dy/dt)²) dt; area under parametric curve.",
+      "description": "Differentiation: dy/dx = (dy/dt)/(dx/dt); arc length: L = \u222b\u221a((dx/dt)\u00b2 + (dy/dt)\u00b2) dt; area under parametric curve.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.multivariable-intro",
       "name": "Introduction to Multivariable Calculus",
-      "aliases": ["functions of several variables", "f(x,y)", "3D surfaces"],
+      "aliases": [
+        "functions of several variables",
+        "f(x,y)",
+        "3D surfaces"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.derivative-definition", "math.geom.vectors-3d"],
-      "unlocks": ["math.calc.partial-derivatives"],
+      "requires": [
+        "math.calc.derivative-definition",
+        "math.geom.vectors-3d"
+      ],
+      "unlocks": [
+        "math.calc.partial-derivatives"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Extension of calculus to functions of two or more variables; the domain becomes a subset of ℝⁿ and the range ℝᵐ.",
+      "description": "Extension of calculus to functions of two or more variables; the domain becomes a subset of \u211d\u207f and the range \u211d\u1d50.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969 Calculus Vol 2"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969 Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.partial-derivatives",
       "name": "Partial Derivatives",
-      "aliases": ["∂f/∂x", "partial derivative"],
+      "aliases": [
+        "\u2202f/\u2202x",
+        "partial derivative"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.multivariable-intro"],
-      "unlocks": ["math.calc.gradient", "math.calc.chain-rule-multivariable", "math.calc.directional-derivative"],
-      "related": ["math.calc.gradient"],
+      "requires": [
+        "math.calc.multivariable-intro"
+      ],
+      "unlocks": [
+        "math.calc.gradient",
+        "math.calc.chain-rule-multivariable",
+        "math.calc.directional-derivative"
+      ],
+      "related": [
+        "math.calc.gradient"
+      ],
       "cross_links": [],
-      "description": "The partial derivative ∂f/∂x is the derivative of f with respect to x holding all other variables constant; measures rate of change in one coordinate direction.",
+      "description": "The partial derivative \u2202f/\u2202x is the derivative of f with respect to x holding all other variables constant; measures rate of change in one coordinate direction.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "NCERT Grade 12"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "NCERT Grade 12"
+      ]
     },
     {
       "id": "math.calc.gradient",
       "name": "Gradient",
-      "aliases": ["∇f", "grad f", "gradient vector"],
+      "aliases": [
+        "\u2207f",
+        "grad f",
+        "gradient vector"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.partial-derivatives"],
-      "unlocks": ["math.calc.directional-derivative", "math.opt.gradient-descent"],
-      "related": ["math.calc.directional-derivative"],
-      "cross_links": ["math.opt.gradient-descent"],
-      "description": "∇f = (∂f/∂x, ∂f/∂y, …); the vector of partial derivatives pointing in the direction of steepest ascent; its magnitude is the maximum rate of change.",
+      "requires": [
+        "math.calc.partial-derivatives"
+      ],
+      "unlocks": [
+        "math.calc.directional-derivative",
+        "math.opt.gradient-methods"
+      ],
+      "related": [
+        "math.calc.directional-derivative"
+      ],
+      "cross_links": [
+        "math.opt.gradient-methods"
+      ],
+      "description": "\u2207f = (\u2202f/\u2202x, \u2202f/\u2202y, \u2026); the vector of partial derivatives pointing in the direction of steepest ascent; its magnitude is the maximum rate of change.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969"
+      ]
     },
     {
       "id": "math.calc.directional-derivative",
       "name": "Directional Derivative",
-      "aliases": ["Dᵤf", "rate of change in direction u"],
+      "aliases": [
+        "D\u1d64f",
+        "rate of change in direction u"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.gradient"],
+      "requires": [
+        "math.calc.gradient"
+      ],
       "unlocks": [],
-      "related": ["math.calc.gradient"],
+      "related": [
+        "math.calc.gradient"
+      ],
       "cross_links": [],
-      "description": "The rate of change of f at a point in the direction of unit vector u: Dᵤf = ∇f · u; maximized when u is parallel to ∇f.",
+      "description": "The rate of change of f at a point in the direction of unit vector u: D\u1d64f = \u2207f \u00b7 u; maximized when u is parallel to \u2207f.",
       "difficulty": "advanced",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.chain-rule-multivariable",
       "name": "Multivariable Chain Rule",
-      "aliases": ["chain rule for partial derivatives", "∂z/∂t = ∂z/∂x ∂x/∂t + ∂z/∂y ∂y/∂t"],
+      "aliases": [
+        "chain rule for partial derivatives",
+        "\u2202z/\u2202t = \u2202z/\u2202x \u2202x/\u2202t + \u2202z/\u2202y \u2202y/\u2202t"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.partial-derivatives", "math.calc.chain-rule"],
+      "requires": [
+        "math.calc.partial-derivatives",
+        "math.calc.chain-rule"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -1057,32 +1861,62 @@
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.multivariable-extrema",
       "name": "Multivariable Extrema",
-      "aliases": ["critical points of f(x,y)", "second derivative test (multivariable)", "Hessian"],
+      "aliases": [
+        "critical points of f(x,y)",
+        "second derivative test (multivariable)",
+        "Hessian"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.gradient", "math.calc.higher-order-derivatives"],
-      "unlocks": ["math.opt.lagrange-multipliers"],
-      "related": ["math.opt.lagrange-multipliers"],
-      "cross_links": ["math.opt.lagrange-multipliers"],
-      "description": "Critical points where ∇f = 0; classified via the Hessian matrix: D > 0 and fₓₓ > 0 → local min, D > 0 and fₓₓ < 0 → local max, D < 0 → saddle point.",
+      "requires": [
+        "math.calc.gradient",
+        "math.calc.higher-order-derivatives"
+      ],
+      "unlocks": [
+        "math.opt.lagrange-multipliers"
+      ],
+      "related": [
+        "math.opt.lagrange-multipliers"
+      ],
+      "cross_links": [
+        "math.opt.lagrange-multipliers"
+      ],
+      "description": "Critical points where \u2207f = 0; classified via the Hessian matrix: D > 0 and f\u2093\u2093 > 0 \u2192 local min, D > 0 and f\u2093\u2093 < 0 \u2192 local max, D < 0 \u2192 saddle point.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969"
+      ]
     },
     {
       "id": "math.calc.multiple-integrals",
       "name": "Multiple Integrals",
-      "aliases": ["double integral", "triple integral", "iterated integral"],
+      "aliases": [
+        "double integral",
+        "triple integral",
+        "iterated integral"
+      ],
       "parent": null,
-      "children": ["math.calc.double-integrals", "math.calc.triple-integrals"],
-      "requires": ["math.calc.definite-integral", "math.calc.multivariable-intro"],
+      "children": [
+        "math.calc.double-integrals",
+        "math.calc.triple-integrals"
+      ],
+      "requires": [
+        "math.calc.definite-integral",
+        "math.calc.multivariable-intro"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -1091,211 +1925,371 @@
       "estimated_hours": 15,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969"
+      ]
     },
     {
       "id": "math.calc.double-integrals",
       "name": "Double Integrals",
-      "aliases": ["∬_D f(x,y)dA", "double integral over region"],
+      "aliases": [
+        "\u222c_D f(x,y)dA",
+        "double integral over region"
+      ],
       "parent": "math.calc.multiple-integrals",
       "children": [],
-      "requires": ["math.calc.multiple-integrals"],
-      "unlocks": ["math.calc.triple-integrals"],
+      "requires": [
+        "math.calc.multiple-integrals"
+      ],
+      "unlocks": [
+        "math.calc.triple-integrals"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "∬_D f(x,y)dA computes volume under a surface over region D; evaluated by Fubini's theorem as an iterated integral; also in polar coordinates.",
+      "description": "\u222c_D f(x,y)dA computes volume under a surface over region D; evaluated by Fubini's theorem as an iterated integral; also in polar coordinates.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.triple-integrals",
       "name": "Triple Integrals",
-      "aliases": ["∭_E f dV", "triple integral"],
+      "aliases": [
+        "\u222d_E f dV",
+        "triple integral"
+      ],
       "parent": "math.calc.multiple-integrals",
       "children": [],
-      "requires": ["math.calc.double-integrals"],
+      "requires": [
+        "math.calc.double-integrals"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "∭_E f(x,y,z) dV; evaluated via iterated integrals; computable in cylindrical (r,θ,z) and spherical (ρ,φ,θ) coordinates via the Jacobian.",
+      "description": "\u222d_E f(x,y,z) dV; evaluated via iterated integrals; computable in cylindrical (r,\u03b8,z) and spherical (\u03c1,\u03c6,\u03b8) coordinates via the Jacobian.",
       "difficulty": "advanced",
       "estimated_hours": 10,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.change-of-variables",
       "name": "Change of Variables (Jacobian)",
-      "aliases": ["Jacobian", "change of variables theorem", "substitution in multiple integrals"],
+      "aliases": [
+        "Jacobian",
+        "change of variables theorem",
+        "substitution in multiple integrals"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.multiple-integrals", "math.linalg.determinants"],
+      "requires": [
+        "math.calc.multiple-integrals",
+        "math.linalg.determinant"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "For the substitution (x,y) = T(u,v): ∬ f dA = ∬ f(T(u,v))|∂(x,y)/∂(u,v)| du dv; the Jacobian determinant is the scaling factor.",
+      "description": "For the substitution (x,y) = T(u,v): \u222c f dA = \u222c f(T(u,v))|\u2202(x,y)/\u2202(u,v)| du dv; the Jacobian determinant is the scaling factor.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969"
+      ]
     },
     {
       "id": "math.calc.line-integrals",
       "name": "Line Integrals",
-      "aliases": ["∫_C f ds", "∫_C F·dr", "work integral"],
+      "aliases": [
+        "\u222b_C f ds",
+        "\u222b_C F\u00b7dr",
+        "work integral"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.parametric-curves", "math.geom.vectors-3d"],
-      "unlocks": ["math.calc.greens-theorem"],
-      "related": ["math.calc.vector-fields"],
+      "requires": [
+        "math.calc.parametric-curves",
+        "math.geom.vectors-3d"
+      ],
+      "unlocks": [
+        "math.calc.greens-theorem"
+      ],
+      "related": [
+        "math.calc.vector-fields"
+      ],
       "cross_links": [],
-      "description": "Integrals along a curve C: scalar line integral ∫_C f ds measures arc-length-weighted sum; vector line integral ∫_C F·dr computes work done by force field F.",
+      "description": "Integrals along a curve C: scalar line integral \u222b_C f ds measures arc-length-weighted sum; vector line integral \u222b_C F\u00b7dr computes work done by force field F.",
       "difficulty": "expert",
       "estimated_hours": 10,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969"
+      ]
     },
     {
       "id": "math.calc.surface-integrals",
       "name": "Surface Integrals",
-      "aliases": ["∬_S F·dS", "flux integral"],
+      "aliases": [
+        "\u222c_S F\u00b7dS",
+        "flux integral"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.double-integrals", "math.calc.line-integrals"],
-      "unlocks": ["math.calc.stokes-theorem", "math.calc.divergence-theorem"],
+      "requires": [
+        "math.calc.double-integrals",
+        "math.calc.line-integrals"
+      ],
+      "unlocks": [
+        "math.calc.stokes-theorem",
+        "math.calc.divergence-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Integrals over a surface S; scalar: ∬_S f dS; vector (flux): ∬_S F·dS = ∬_S F·n dS; key for Stokes' and Gauss' theorems.",
+      "description": "Integrals over a surface S; scalar: \u222c_S f dS; vector (flux): \u222c_S F\u00b7dS = \u222c_S F\u00b7n dS; key for Stokes' and Gauss' theorems.",
       "difficulty": "expert",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.65,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.vector-fields",
       "name": "Vector Fields",
-      "aliases": ["F(x,y,z)", "conservative field", "potential function"],
+      "aliases": [
+        "F(x,y,z)",
+        "conservative field",
+        "potential function"
+      ],
       "parent": null,
-      "children": ["math.calc.curl-divergence"],
-      "requires": ["math.calc.gradient", "math.geom.vectors-3d"],
-      "unlocks": ["math.calc.line-integrals"],
+      "children": [
+        "math.calc.curl-divergence"
+      ],
+      "requires": [
+        "math.calc.gradient",
+        "math.geom.vectors-3d"
+      ],
+      "unlocks": [
+        "math.calc.line-integrals"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "An assignment of a vector to each point in a region; a field is conservative if F = ∇f for some potential f, in which case ∫_C F·dr is path-independent.",
+      "description": "An assignment of a vector to each point in a region; a field is conservative if F = \u2207f for some potential f, in which case \u222b_C F\u00b7dr is path-independent.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.curl-divergence",
       "name": "Curl and Divergence",
-      "aliases": ["∇×F", "∇·F", "curl", "divergence"],
+      "aliases": [
+        "\u2207\u00d7F",
+        "\u2207\u00b7F",
+        "curl",
+        "divergence"
+      ],
       "parent": "math.calc.vector-fields",
       "children": [],
-      "requires": ["math.calc.vector-fields", "math.calc.partial-derivatives"],
-      "unlocks": ["math.calc.stokes-theorem", "math.calc.divergence-theorem"],
+      "requires": [
+        "math.calc.vector-fields",
+        "math.calc.partial-derivatives"
+      ],
+      "unlocks": [
+        "math.calc.stokes-theorem",
+        "math.calc.divergence-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Curl ∇×F measures rotational tendency; divergence ∇·F measures outward flux density; both are differential operators on vector fields.",
+      "description": "Curl \u2207\u00d7F measures rotational tendency; divergence \u2207\u00b7F measures outward flux density; both are differential operators on vector fields.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "analyze",
       "mastery_threshold": 0.65,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3"
+      ]
     },
     {
       "id": "math.calc.greens-theorem",
       "name": "Green's Theorem",
-      "aliases": ["∮_C P dx + Q dy = ∬_D (∂Q/∂x − ∂P/∂y) dA"],
+      "aliases": [
+        "\u222e_C P dx + Q dy = \u222c_D (\u2202Q/\u2202x \u2212 \u2202P/\u2202y) dA"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.line-integrals", "math.calc.double-integrals"],
-      "unlocks": ["math.calc.stokes-theorem"],
-      "related": ["math.calc.stokes-theorem", "math.calc.divergence-theorem"],
+      "requires": [
+        "math.calc.line-integrals",
+        "math.calc.double-integrals"
+      ],
+      "unlocks": [
+        "math.calc.stokes-theorem"
+      ],
+      "related": [
+        "math.calc.stokes-theorem",
+        "math.calc.divergence-theorem"
+      ],
       "cross_links": [],
       "description": "Relates a line integral around a simple closed curve C to a double integral over the region D it encloses; a special case of Stokes' theorem in 2D.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "analyze",
       "mastery_threshold": 0.65,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Apostol 1969"]
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Apostol 1969"
+      ]
     },
     {
       "id": "math.calc.stokes-theorem",
       "name": "Stokes' Theorem",
-      "aliases": ["∬_S (∇×F)·dS = ∮_C F·dr", "generalized Stokes"],
+      "aliases": [
+        "\u222c_S (\u2207\u00d7F)\u00b7dS = \u222e_C F\u00b7dr",
+        "generalized Stokes"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.surface-integrals", "math.calc.curl-divergence", "math.calc.greens-theorem"],
+      "requires": [
+        "math.calc.surface-integrals",
+        "math.calc.curl-divergence",
+        "math.calc.greens-theorem"
+      ],
       "unlocks": [],
-      "related": ["math.calc.divergence-theorem"],
-      "cross_links": ["math.top.differential-forms"],
-      "description": "∬_S (∇×F)·dS = ∮_C F·dr, where C is the boundary of surface S; generalizes Green's theorem to 3D; a special case of the generalized Stokes' theorem on manifolds.",
+      "related": [
+        "math.calc.divergence-theorem"
+      ],
+      "cross_links": [],
+      "description": "\u222c_S (\u2207\u00d7F)\u00b7dS = \u222e_C F\u00b7dr, where C is the boundary of surface S; generalizes Green's theorem to 3D; a special case of the generalized Stokes' theorem on manifolds.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.60,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Spivak 1965 Calculus on Manifolds"]
+      "mastery_threshold": 0.6,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Spivak 1965 Calculus on Manifolds"
+      ]
     },
     {
       "id": "math.calc.divergence-theorem",
       "name": "Divergence Theorem",
-      "aliases": ["Gauss's theorem", "∭_E ∇·F dV = ∬_S F·dS"],
+      "aliases": [
+        "Gauss's theorem",
+        "\u222d_E \u2207\u00b7F dV = \u222c_S F\u00b7dS"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.surface-integrals", "math.calc.curl-divergence"],
+      "requires": [
+        "math.calc.surface-integrals",
+        "math.calc.curl-divergence"
+      ],
       "unlocks": [],
-      "related": ["math.calc.stokes-theorem"],
-      "cross_links": ["math.top.differential-forms"],
-      "description": "∭_E ∇·F dV = ∬_S F·dS, where S is the boundary of solid E; relates the total divergence inside a region to the outward flux through its boundary.",
+      "related": [
+        "math.calc.stokes-theorem"
+      ],
+      "cross_links": [],
+      "description": "\u222d_E \u2207\u00b7F dV = \u222c_S F\u00b7dS, where S is the boundary of solid E; relates the total divergence inside a region to the outward flux through its boundary.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.60,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 3", "Spivak 1965"]
+      "mastery_threshold": 0.6,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 3",
+        "Spivak 1965"
+      ]
     },
     {
       "id": "math.calc.fourier-series-intro",
       "name": "Fourier Series (Introduction)",
-      "aliases": ["trigonometric series", "aₙcos(nx) + bₙsin(nx)"],
+      "aliases": [
+        "trigonometric series",
+        "a\u2099cos(nx) + b\u2099sin(nx)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.definite-integral", "math.trig.trig-functions", "math.seq.series"],
-      "unlocks": ["math.pde.heat-equation"],
-      "related": ["math.pde.heat-equation"],
-      "cross_links": ["math.pde.heat-equation", "math.fnal.hilbert-spaces"],
-      "description": "Representing a periodic function as a sum of sines and cosines: f(x) = a₀/2 + Σ(aₙcos(nx) + bₙsin(nx)); coefficients given by orthogonality integrals.",
+      "requires": [
+        "math.calc.definite-integral",
+        "math.trig.trig-functions",
+        "math.seq.series"
+      ],
+      "unlocks": [
+        "math.de.heat-equation"
+      ],
+      "related": [
+        "math.pde.heat-equation"
+      ],
+      "cross_links": [
+        "math.de.heat-equation",
+        "math.fnal.hilbert-space"
+      ],
+      "description": "Representing a periodic function as a sum of sines and cosines: f(x) = a\u2080/2 + \u03a3(a\u2099cos(nx) + b\u2099sin(nx)); coefficients given by orthogonality integrals.",
       "difficulty": "expert",
       "estimated_hours": 12,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["Apostol 1967", "Churchill & Brown 2013 Fourier Series", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Apostol 1967",
+        "Churchill & Brown 2013 Fourier Series",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.calc.sequence-limits",
       "name": "Limits of Sequences (Calculus)",
-      "aliases": ["lim aₙ", "sequence convergence"],
+      "aliases": [
+        "lim a\u2099",
+        "sequence convergence"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.calc.limits", "math.seq.sequence"],
-      "unlocks": ["math.seq.series-convergence"],
-      "related": ["math.seq.convergent"],
-      "cross_links": ["math.seq.convergent"],
-      "description": "The limit of a sequence as n → ∞; computed using limit laws, l'Hôpital's rule (via continuous function), and the squeeze theorem.",
+      "requires": [
+        "math.calc.limits",
+        "math.seq.sequence"
+      ],
+      "unlocks": [
+        "math.seq.series-convergence"
+      ],
+      "related": [
+        "math.seq.convergent"
+      ],
+      "cross_links": [
+        "math.seq.convergent"
+      ],
+      "description": "The limit of a sequence as n \u2192 \u221e; computed using limit laws, l'H\u00f4pital's rule (via continuous function), and the squeeze theorem.",
       "difficulty": "advanced",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     }
   ]
 }

@@ -1,0 +1,124 @@
+{
+  "model": "Five-tier progressive track model (T0\u2013T4)",
+  "status": "DEFINED",
+  "note": "Tracks are overlapping level ranges; a learner progresses T0\u2192T1\u2192T2\u2192T3\u2192T4. Each track's entry points are root concepts (no prerequisites) within that track's domains.",
+  "tracks": [
+    {
+      "track_id": "T0",
+      "name": "Absolute Foundations",
+      "level_range": [
+        0,
+        1
+      ],
+      "difficulty": [
+        "foundational"
+      ],
+      "domain_prefixes": [
+        "math.found",
+        "math.arith"
+      ],
+      "description": "Entry-level mathematics. No prerequisites assumed. Covers logic, sets, number sense, and basic arithmetic.",
+      "concept_count": 140,
+      "entry_point_count": 1,
+      "entry_points": [
+        "math.found.mathematical-thinking"
+      ]
+    },
+    {
+      "track_id": "T1",
+      "name": "Pre-University Mathematics",
+      "level_range": [
+        1,
+        3
+      ],
+      "difficulty": [
+        "foundational",
+        "developing",
+        "proficient"
+      ],
+      "domain_prefixes": [
+        "math.nt",
+        "math.alg",
+        "math.geom",
+        "math.trig",
+        "math.func",
+        "math.seq"
+      ],
+      "description": "High-school to pre-university level. Builds on T0. Algebra, geometry, trigonometry, functions, sequences.",
+      "concept_count": 239,
+      "entry_point_count": 0,
+      "entry_points": []
+    },
+    {
+      "track_id": "T2",
+      "name": "Undergraduate Core",
+      "level_range": [
+        2,
+        5
+      ],
+      "difficulty": [
+        "developing",
+        "proficient",
+        "advanced"
+      ],
+      "domain_prefixes": [
+        "math.calc",
+        "math.de",
+        "math.linalg",
+        "math.prob",
+        "math.stats",
+        "math.disc"
+      ],
+      "description": "Standard first/second-year university mathematics. Calculus, differential equations, linear algebra, probability, statistics, discrete mathematics.",
+      "concept_count": 314,
+      "entry_point_count": 0,
+      "entry_points": []
+    },
+    {
+      "track_id": "T3",
+      "name": "Upper Undergraduate / Early Graduate",
+      "level_range": [
+        4,
+        6
+      ],
+      "difficulty": [
+        "advanced",
+        "expert"
+      ],
+      "domain_prefixes": [
+        "math.abst",
+        "math.real",
+        "math.cx",
+        "math.top",
+        "math.num",
+        "math.opt",
+        "math.graph"
+      ],
+      "description": "Third/fourth-year university and early MSc level. Abstract algebra, analysis, topology, numerical methods, optimization.",
+      "concept_count": 169,
+      "entry_point_count": 0,
+      "entry_points": []
+    },
+    {
+      "track_id": "T4",
+      "name": "Graduate / Research Mathematics",
+      "level_range": [
+        6,
+        7
+      ],
+      "difficulty": [
+        "expert",
+        "research"
+      ],
+      "domain_prefixes": [
+        "math.meas",
+        "math.fnal",
+        "math.cat"
+      ],
+      "description": "MSc/PhD-level mathematics. Measure theory, functional analysis, category theory. Requires all prior tracks.",
+      "concept_count": 46,
+      "entry_point_count": 0,
+      "entry_points": []
+    }
+  ]
+}

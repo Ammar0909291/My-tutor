@@ -2,255 +2,436 @@
   "domain_id": "linear-algebra",
   "domain_name": "Linear Algebra",
   "id_prefix": "math.linalg",
-  "level_range": [3, 7],
+  "level_range": [
+    3,
+    7
+  ],
   "description": "The study of vectors, vector spaces, linear maps, and their representation through matrices. Foundational for modern mathematics, data science, physics, and engineering.",
   "concepts": [
     {
       "id": "math.linalg.vector",
       "name": "Vector",
-      "aliases": ["geometric vector", "column vector", "row vector"],
+      "aliases": [
+        "geometric vector",
+        "column vector",
+        "row vector"
+      ],
       "parent": null,
-      "children": ["math.linalg.vector-addition", "math.linalg.scalar-multiplication"],
-      "requires": ["math.arith.real-numbers", "math.geom.coordinates"],
-      "unlocks": ["math.linalg.vector-space", "math.linalg.dot-product"],
-      "related": ["math.geom.2d-vector"],
-      "cross_links": ["math.geom.2d-vector", "math.geom.3d-vector"],
-      "description": "An ordered tuple of numbers (a vector in ℝⁿ) or an abstract element of a vector space. In ℝⁿ, vectors represent magnitudes with direction; algebraically they are the fundamental objects of linear algebra.",
+      "children": [
+        "math.linalg.vector-addition",
+        "math.linalg.scalar-multiplication"
+      ],
+      "requires": [
+        "math.found.real-numbers",
+        "math.geom.x-y-coordinates"
+      ],
+      "unlocks": [
+        "math.linalg.vector-space",
+        "math.linalg.dot-product"
+      ],
+      "related": [
+        "math.geom.2d-vector"
+      ],
+      "cross_links": [
+        "math.geom.vectors-2d",
+        "math.geom.vectors-3d"
+      ],
+      "description": "An ordered tuple of numbers (a vector in \u211d\u207f) or an abstract element of a vector space. In \u211d\u207f, vectors represent magnitudes with direction; algebraically they are the fundamental objects of linear algebra.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, Ch.1; Axler, Linear Algebra Done Right, Ch.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, Ch.1; Axler, Linear Algebra Done Right, Ch.1"
+      ]
     },
     {
       "id": "math.linalg.vector-addition",
       "name": "Vector Addition",
-      "aliases": ["sum of vectors"],
+      "aliases": [
+        "sum of vectors"
+      ],
       "parent": "math.linalg.vector",
       "children": [],
-      "requires": ["math.linalg.vector"],
+      "requires": [
+        "math.linalg.vector"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.scalar-multiplication"],
-      "cross_links": ["math.abst.group-operation"],
-      "description": "Component-wise addition: (a₁,…,aₙ)+(b₁,…,bₙ)=(a₁+b₁,…,aₙ+bₙ). Geometrically, the parallelogram law. Satisfies commutativity, associativity, identity (zero vector), and inverse (negation).",
+      "related": [
+        "math.linalg.scalar-multiplication"
+      ],
+      "cross_links": [
+        "math.abst.group-operation"
+      ],
+      "description": "Component-wise addition: (a\u2081,\u2026,a\u2099)+(b\u2081,\u2026,b\u2099)=(a\u2081+b\u2081,\u2026,a\u2099+b\u2099). Geometrically, the parallelogram law. Satisfies commutativity, associativity, identity (zero vector), and inverse (negation).",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "apply",
       "mastery_threshold": 0.95,
-      "references": ["Strang, Introduction to Linear Algebra, §1.1"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.1"
+      ]
     },
     {
       "id": "math.linalg.scalar-multiplication",
       "name": "Scalar Multiplication",
-      "aliases": ["scaling a vector"],
+      "aliases": [
+        "scaling a vector"
+      ],
       "parent": "math.linalg.vector",
       "children": [],
-      "requires": ["math.linalg.vector"],
+      "requires": [
+        "math.linalg.vector"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.vector-addition"],
+      "related": [
+        "math.linalg.vector-addition"
+      ],
       "cross_links": [],
-      "description": "Multiplying a vector by a scalar c: c(a₁,…,aₙ)=(ca₁,…,caₙ). Stretches or compresses the vector; negation reverses direction. Together with addition gives the vector space structure.",
+      "description": "Multiplying a vector by a scalar c: c(a\u2081,\u2026,a\u2099)=(ca\u2081,\u2026,ca\u2099). Stretches or compresses the vector; negation reverses direction. Together with addition gives the vector space structure.",
       "difficulty": "developing",
       "estimated_hours": 1,
       "bloom": "apply",
       "mastery_threshold": 0.95,
-      "references": ["Strang, Introduction to Linear Algebra, §1.1"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.1"
+      ]
     },
     {
       "id": "math.linalg.dot-product",
       "name": "Dot Product",
-      "aliases": ["inner product (Euclidean)", "scalar product"],
+      "aliases": [
+        "inner product (Euclidean)",
+        "scalar product"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.vector", "math.arith.multiplication"],
-      "unlocks": ["math.linalg.norm", "math.linalg.angle-vectors", "math.linalg.orthogonality"],
-      "related": ["math.linalg.cross-product"],
-      "cross_links": ["math.geom.dot-product"],
-      "description": "a·b = ∑aᵢbᵢ = |a||b|cos θ. Algebraically: sum of products of corresponding components. Geometrically: |a||b|cos(angle). Zero iff vectors are orthogonal.",
+      "requires": [
+        "math.linalg.vector",
+        "math.arith.multiplication"
+      ],
+      "unlocks": [
+        "math.linalg.norm",
+        "math.linalg.angle-vectors",
+        "math.linalg.orthogonality"
+      ],
+      "related": [
+        "math.linalg.cross-product"
+      ],
+      "cross_links": [
+        "math.geom.dot-product"
+      ],
+      "description": "a\u00b7b = \u2211a\u1d62b\u1d62 = |a||b|cos \u03b8. Algebraically: sum of products of corresponding components. Geometrically: |a||b|cos(angle). Zero iff vectors are orthogonal.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §1.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.2"
+      ]
     },
     {
       "id": "math.linalg.norm",
       "name": "Vector Norm",
-      "aliases": ["Euclidean norm", "vector magnitude", "ℓ² norm"],
+      "aliases": [
+        "Euclidean norm",
+        "vector magnitude",
+        "\u2113\u00b2 norm"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.dot-product"],
-      "unlocks": ["math.linalg.unit-vector", "math.linalg.distance"],
-      "related": ["math.linalg.inner-product"],
-      "cross_links": ["math.real.metric-space"],
-      "description": "|v| = √(v·v) = √(∑vᵢ²). More generally, the p-norm: |v|_p = (∑|vᵢ|^p)^{1/p}. Satisfies positivity, homogeneity, and triangle inequality (defines a metric).",
+      "requires": [
+        "math.linalg.dot-product"
+      ],
+      "unlocks": [
+        "math.linalg.unit-vector",
+        "math.linalg.distance"
+      ],
+      "related": [
+        "math.linalg.inner-product"
+      ],
+      "cross_links": [
+        "math.real.metric-space"
+      ],
+      "description": "|v| = \u221a(v\u00b7v) = \u221a(\u2211v\u1d62\u00b2). More generally, the p-norm: |v|_p = (\u2211|v\u1d62|^p)^{1/p}. Satisfies positivity, homogeneity, and triangle inequality (defines a metric).",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §1.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.2"
+      ]
     },
     {
       "id": "math.linalg.unit-vector",
       "name": "Unit Vector",
-      "aliases": ["normalized vector"],
+      "aliases": [
+        "normalized vector"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.norm"],
+      "requires": [
+        "math.linalg.norm"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "A vector of norm 1. Obtained by normalizing: v̂ = v/|v|. Standard basis vectors e₁,…,eₙ are the canonical unit vectors in ℝⁿ.",
+      "description": "A vector of norm 1. Obtained by normalizing: v\u0302 = v/|v|. Standard basis vectors e\u2081,\u2026,e\u2099 are the canonical unit vectors in \u211d\u207f.",
       "difficulty": "developing",
       "estimated_hours": 1,
       "bloom": "apply",
       "mastery_threshold": 0.95,
-      "references": ["Strang, Introduction to Linear Algebra, §1.2"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.2"
+      ]
     },
     {
       "id": "math.linalg.orthogonality",
       "name": "Orthogonality",
-      "aliases": ["perpendicular vectors", "orthogonal vectors"],
+      "aliases": [
+        "perpendicular vectors",
+        "orthogonal vectors"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.dot-product"],
-      "unlocks": ["math.linalg.orthogonal-basis", "math.linalg.gram-schmidt"],
-      "related": ["math.linalg.projection"],
+      "requires": [
+        "math.linalg.dot-product"
+      ],
+      "unlocks": [
+        "math.linalg.orthogonal-basis",
+        "math.linalg.gram-schmidt"
+      ],
+      "related": [
+        "math.linalg.projection"
+      ],
       "cross_links": [],
       "description": "Two vectors are orthogonal iff their dot product is zero. Orthogonality generalizes perpendicularity to arbitrary inner product spaces. Orthogonal vectors are linearly independent.",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §4.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a74.1"
+      ]
     },
     {
       "id": "math.linalg.cross-product",
       "name": "Cross Product",
-      "aliases": ["vector product"],
+      "aliases": [
+        "vector product"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.vector", "math.linalg.dot-product"],
+      "requires": [
+        "math.linalg.vector",
+        "math.linalg.dot-product"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.dot-product"],
-      "cross_links": ["math.geom.cross-product"],
-      "description": "Defined in ℝ³: a×b = (a₂b₃−a₃b₂, a₃b₁−a₁b₃, a₁b₂−a₂b₁). Result is perpendicular to both a and b; magnitude is |a||b|sin θ (area of parallelogram). Anti-commutative.",
+      "related": [
+        "math.linalg.dot-product"
+      ],
+      "cross_links": [
+        "math.geom.cross-product"
+      ],
+      "description": "Defined in \u211d\u00b3: a\u00d7b = (a\u2082b\u2083\u2212a\u2083b\u2082, a\u2083b\u2081\u2212a\u2081b\u2083, a\u2081b\u2082\u2212a\u2082b\u2081). Result is perpendicular to both a and b; magnitude is |a||b|sin \u03b8 (area of parallelogram). Anti-commutative.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Strang, Introduction to Linear Algebra, §1.3"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.3"
+      ]
     },
     {
       "id": "math.linalg.matrix",
       "name": "Matrix",
-      "aliases": ["rectangular array", "m×n matrix"],
+      "aliases": [
+        "rectangular array",
+        "m\u00d7n matrix"
+      ],
       "parent": null,
-      "children": ["math.linalg.matrix-addition", "math.linalg.matrix-multiplication", "math.linalg.matrix-transpose"],
-      "requires": ["math.linalg.vector"],
-      "unlocks": ["math.linalg.determinant", "math.linalg.linear-system", "math.linalg.linear-map"],
+      "children": [
+        "math.linalg.matrix-addition",
+        "math.linalg.matrix-multiplication",
+        "math.linalg.matrix-transpose"
+      ],
+      "requires": [
+        "math.linalg.vector"
+      ],
+      "unlocks": [
+        "math.linalg.determinant",
+        "math.linalg.linear-system",
+        "math.linalg.linear-map"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A rectangular array of numbers with m rows and n columns. Encodes linear transformations (m×n matrix ↔ linear map ℝⁿ→ℝᵐ), system coefficients, data, and more.",
+      "description": "A rectangular array of numbers with m rows and n columns. Encodes linear transformations (m\u00d7n matrix \u2194 linear map \u211d\u207f\u2192\u211d\u1d50), system coefficients, data, and more.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, Ch.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, Ch.2"
+      ]
     },
     {
       "id": "math.linalg.matrix-addition",
       "name": "Matrix Addition",
-      "aliases": ["sum of matrices"],
+      "aliases": [
+        "sum of matrices"
+      ],
       "parent": "math.linalg.matrix",
       "children": [],
-      "requires": ["math.linalg.matrix"],
+      "requires": [
+        "math.linalg.matrix"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.matrix-multiplication"],
+      "related": [
+        "math.linalg.matrix-multiplication"
+      ],
       "cross_links": [],
-      "description": "Component-wise addition of matrices of the same dimensions. Satisfies all vector space axioms — matrices of the same size form a vector space.",
+      "description": "Component-wise addition of matrices of the same dimensions. Satisfies all vector space axioms \u2014 matrices of the same size form a vector space.",
       "difficulty": "proficient",
       "estimated_hours": 1,
       "bloom": "apply",
       "mastery_threshold": 0.95,
-      "references": ["Strang, Introduction to Linear Algebra, §2.1"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.1"
+      ]
     },
     {
       "id": "math.linalg.matrix-multiplication",
       "name": "Matrix Multiplication",
-      "aliases": ["matrix product", "composition of linear maps"],
+      "aliases": [
+        "matrix product",
+        "composition of linear maps"
+      ],
       "parent": "math.linalg.matrix",
       "children": [],
-      "requires": ["math.linalg.matrix", "math.linalg.dot-product"],
-      "unlocks": ["math.linalg.matrix-inverse", "math.linalg.determinant"],
-      "related": ["math.linalg.matrix-transpose"],
-      "cross_links": ["math.abst.ring-theory"],
-      "description": "(AB)_{ij} = ∑_k A_{ik}B_{kj}; requires inner dimensions to match. Non-commutative in general. Associative; distributes over addition. Encodes composition of linear transformations.",
+      "requires": [
+        "math.linalg.matrix",
+        "math.linalg.dot-product"
+      ],
+      "unlocks": [
+        "math.linalg.matrix-inverse",
+        "math.linalg.determinant"
+      ],
+      "related": [
+        "math.linalg.matrix-transpose"
+      ],
+      "cross_links": [
+        "math.abst.ring-theory"
+      ],
+      "description": "(AB)_{ij} = \u2211_k A_{ik}B_{kj}; requires inner dimensions to match. Non-commutative in general. Associative; distributes over addition. Encodes composition of linear transformations.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §2.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.2"
+      ]
     },
     {
       "id": "math.linalg.matrix-transpose",
       "name": "Matrix Transpose",
-      "aliases": ["transpose", "Aᵀ"],
+      "aliases": [
+        "transpose",
+        "A\u1d40"
+      ],
       "parent": "math.linalg.matrix",
       "children": [],
-      "requires": ["math.linalg.matrix"],
-      "unlocks": ["math.linalg.symmetric-matrix"],
+      "requires": [
+        "math.linalg.matrix"
+      ],
+      "unlocks": [
+        "math.linalg.symmetric-matrix"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "(Aᵀ)_{ij} = A_{ji}: rows become columns and vice versa. Key properties: (AB)ᵀ=BᵀAᵀ, (Aᵀ)ᵀ=A. Symmetric matrices satisfy A=Aᵀ.",
+      "description": "(A\u1d40)_{ij} = A_{ji}: rows become columns and vice versa. Key properties: (AB)\u1d40=B\u1d40A\u1d40, (A\u1d40)\u1d40=A. Symmetric matrices satisfy A=A\u1d40.",
       "difficulty": "proficient",
       "estimated_hours": 2,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §2.7"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.7"
+      ]
     },
     {
       "id": "math.linalg.symmetric-matrix",
       "name": "Symmetric Matrix",
-      "aliases": ["symmetric", "skew-symmetric"],
+      "aliases": [
+        "symmetric",
+        "skew-symmetric"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.matrix-transpose"],
-      "unlocks": ["math.linalg.spectral-theorem"],
-      "related": ["math.linalg.positive-definite"],
+      "requires": [
+        "math.linalg.matrix-transpose"
+      ],
+      "unlocks": [
+        "math.linalg.spectral-theorem"
+      ],
+      "related": [
+        "math.linalg.positive-definite"
+      ],
       "cross_links": [],
-      "description": "A = Aᵀ. Symmetric matrices have real eigenvalues and orthogonal eigenvectors (Spectral Theorem). Ubiquitous in physics, statistics (covariance matrices), and optimization (Hessians).",
+      "description": "A = A\u1d40. Symmetric matrices have real eigenvalues and orthogonal eigenvectors (Spectral Theorem). Ubiquitous in physics, statistics (covariance matrices), and optimization (Hessians).",
       "difficulty": "proficient",
       "estimated_hours": 2,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §6.4"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a76.4"
+      ]
     },
     {
       "id": "math.linalg.linear-system",
       "name": "System of Linear Equations",
-      "aliases": ["linear system", "Ax=b"],
+      "aliases": [
+        "linear system",
+        "Ax=b"
+      ],
       "parent": null,
-      "children": ["math.linalg.row-reduction", "math.linalg.augmented-matrix"],
-      "requires": ["math.linalg.matrix", "math.alg.systems-linear-equations"],
-      "unlocks": ["math.linalg.row-echelon", "math.linalg.matrix-inverse"],
+      "children": [
+        "math.linalg.row-reduction",
+        "math.linalg.augmented-matrix"
+      ],
+      "requires": [
+        "math.linalg.matrix",
+        "math.alg.system-linear-equations"
+      ],
+      "unlocks": [
+        "math.linalg.row-echelon",
+        "math.linalg.matrix-inverse"
+      ],
       "related": [],
-      "cross_links": ["math.alg.systems-linear-equations"],
+      "cross_links": [
+        "math.alg.system-linear-equations"
+      ],
       "description": "A set of m linear equations in n unknowns, written Ax=b. Three outcomes: unique solution (consistent, full column rank), no solution (inconsistent), or infinitely many solutions (dependent). Structure is determined by rank of A and [A|b].",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, Ch.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, Ch.2"
+      ]
     },
     {
       "id": "math.linalg.augmented-matrix",
       "name": "Augmented Matrix",
-      "aliases": ["[A|b]"],
+      "aliases": [
+        "[A|b]"
+      ],
       "parent": "math.linalg.linear-system",
       "children": [],
-      "requires": ["math.linalg.linear-system"],
-      "unlocks": ["math.linalg.row-reduction"],
+      "requires": [
+        "math.linalg.linear-system"
+      ],
+      "unlocks": [
+        "math.linalg.row-reduction"
+      ],
       "related": [],
       "cross_links": [],
       "description": "The matrix [A|b] formed by appending the right-hand side column b to the coefficient matrix A. Row operations on [A|b] preserve the solution set and are used to row-reduce to echelon form.",
@@ -258,789 +439,1306 @@
       "estimated_hours": 1,
       "bloom": "understand",
       "mastery_threshold": 0.95,
-      "references": ["Strang, Introduction to Linear Algebra, §2.2"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.2"
+      ]
     },
     {
       "id": "math.linalg.row-reduction",
       "name": "Row Reduction",
-      "aliases": ["Gaussian elimination", "elementary row operations"],
+      "aliases": [
+        "Gaussian elimination",
+        "elementary row operations"
+      ],
       "parent": "math.linalg.linear-system",
       "children": [],
-      "requires": ["math.linalg.augmented-matrix"],
-      "unlocks": ["math.linalg.row-echelon", "math.linalg.lu-factorization"],
+      "requires": [
+        "math.linalg.augmented-matrix"
+      ],
+      "unlocks": [
+        "math.linalg.row-echelon",
+        "math.linalg.lu-factorization"
+      ],
       "related": [],
       "cross_links": [],
       "description": "Three elementary row operations (swap, scale, add multiple of one row to another) transform Ax=b without changing its solution set. Systematic application yields row echelon or reduced row echelon form.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §2.2; Lay, Linear Algebra, §1.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.2; Lay, Linear Algebra, \u00a71.2"
+      ]
     },
     {
       "id": "math.linalg.row-echelon",
       "name": "Row Echelon Form",
-      "aliases": ["REF", "RREF", "reduced row echelon form"],
+      "aliases": [
+        "REF",
+        "RREF",
+        "reduced row echelon form"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.row-reduction"],
-      "unlocks": ["math.linalg.rank", "math.linalg.null-space"],
+      "requires": [
+        "math.linalg.row-reduction"
+      ],
+      "unlocks": [
+        "math.linalg.rank",
+        "math.linalg.null-space"
+      ],
       "related": [],
       "cross_links": [],
       "description": "REF: zeros below each pivot; RREF: additionally, zeros above each pivot and each pivot equals 1. RREF is unique. Pivot columns correspond to basic variables; non-pivot columns to free variables.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Lay, Linear Algebra and Its Applications, §1.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Lay, Linear Algebra and Its Applications, \u00a71.2"
+      ]
     },
     {
       "id": "math.linalg.rank",
       "name": "Rank",
-      "aliases": ["rank of a matrix", "column rank", "row rank"],
+      "aliases": [
+        "rank of a matrix",
+        "column rank",
+        "row rank"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.row-echelon"],
-      "unlocks": ["math.linalg.rank-nullity"],
-      "related": ["math.linalg.null-space"],
+      "requires": [
+        "math.linalg.row-echelon"
+      ],
+      "unlocks": [
+        "math.linalg.rank-nullity"
+      ],
+      "related": [
+        "math.linalg.null-space"
+      ],
       "cross_links": [],
       "description": "The number of pivots in REF; equals the dimension of the column space (column rank) and row space (row rank). Column rank = row rank always. Rank determines existence and uniqueness of solutions to Ax=b.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §3.3"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a73.3"
+      ]
     },
     {
       "id": "math.linalg.matrix-inverse",
       "name": "Matrix Inverse",
-      "aliases": ["invertible matrix", "A⁻¹", "nonsingular matrix"],
+      "aliases": [
+        "invertible matrix",
+        "A\u207b\u00b9",
+        "nonsingular matrix"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.matrix-multiplication", "math.linalg.determinant"],
-      "unlocks": ["math.linalg.cramer-rule"],
-      "related": ["math.linalg.lu-factorization"],
-      "cross_links": ["math.abst.group-inverse"],
-      "description": "A square matrix A is invertible iff det(A)≠0, iff rank(A)=n, iff columns are linearly independent. The inverse A⁻¹ satisfies AA⁻¹=A⁻¹A=I. Computed via [A|I] → [I|A⁻¹] by row reduction.",
+      "requires": [
+        "math.linalg.matrix-multiplication",
+        "math.linalg.determinant"
+      ],
+      "unlocks": [
+        "math.linalg.cramer-rule"
+      ],
+      "related": [
+        "math.linalg.lu-factorization"
+      ],
+      "cross_links": [
+        "math.abst.group-inverse"
+      ],
+      "description": "A square matrix A is invertible iff det(A)\u22600, iff rank(A)=n, iff columns are linearly independent. The inverse A\u207b\u00b9 satisfies AA\u207b\u00b9=A\u207b\u00b9A=I. Computed via [A|I] \u2192 [I|A\u207b\u00b9] by row reduction.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §2.5"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.5"
+      ]
     },
     {
       "id": "math.linalg.determinant",
       "name": "Determinant",
-      "aliases": ["det", "signed volume"],
+      "aliases": [
+        "det",
+        "signed volume"
+      ],
       "parent": null,
-      "children": ["math.linalg.cofactor-expansion", "math.linalg.det-properties"],
-      "requires": ["math.linalg.matrix-multiplication"],
-      "unlocks": ["math.linalg.matrix-inverse", "math.linalg.eigenvalues", "math.linalg.cramer-rule"],
+      "children": [
+        "math.linalg.cofactor-expansion",
+        "math.linalg.det-properties"
+      ],
+      "requires": [
+        "math.linalg.matrix-multiplication"
+      ],
+      "unlocks": [
+        "math.linalg.matrix-inverse",
+        "math.linalg.eigenvalues",
+        "math.linalg.cramer-rule"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A scalar function det: Mₙ(F) → F satisfying: multilinearity in rows, alternating (swap changes sign), det(I)=1. det(A)≠0 iff A invertible. Geometric meaning: signed volume of parallelepiped formed by rows.",
+      "description": "A scalar function det: M\u2099(F) \u2192 F satisfying: multilinearity in rows, alternating (swap changes sign), det(I)=1. det(A)\u22600 iff A invertible. Geometric meaning: signed volume of parallelepiped formed by rows.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, Ch.5; Axler, Linear Algebra Done Right, Ch.10"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, Ch.5; Axler, Linear Algebra Done Right, Ch.10"
+      ]
     },
     {
       "id": "math.linalg.cofactor-expansion",
       "name": "Cofactor Expansion",
-      "aliases": ["Laplace expansion", "cofactor"],
+      "aliases": [
+        "Laplace expansion",
+        "cofactor"
+      ],
       "parent": "math.linalg.determinant",
       "children": [],
-      "requires": ["math.linalg.determinant"],
+      "requires": [
+        "math.linalg.determinant"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "det(A) = ∑_j a_{ij}C_{ij} along any row or column, where C_{ij}=(−1)^{i+j}M_{ij} is the cofactor and M_{ij} is the (i,j) minor. Efficient for small matrices; O(n!) complexity — not used for large n.",
+      "description": "det(A) = \u2211_j a_{ij}C_{ij} along any row or column, where C_{ij}=(\u22121)^{i+j}M_{ij} is the cofactor and M_{ij} is the (i,j) minor. Efficient for small matrices; O(n!) complexity \u2014 not used for large n.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Strang, Introduction to Linear Algebra, §5.1"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a75.1"
+      ]
     },
     {
       "id": "math.linalg.det-properties",
       "name": "Properties of Determinants",
-      "aliases": ["determinant rules"],
+      "aliases": [
+        "determinant rules"
+      ],
       "parent": "math.linalg.determinant",
       "children": [],
-      "requires": ["math.linalg.determinant"],
+      "requires": [
+        "math.linalg.determinant"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Key properties: det(AB)=det(A)det(B), det(Aᵀ)=det(A), det(cA)=cⁿdet(A), det(A⁻¹)=1/det(A). Row operations: swap changes sign, scaling multiplies det by scalar, adding row multiples leaves det unchanged.",
+      "description": "Key properties: det(AB)=det(A)det(B), det(A\u1d40)=det(A), det(cA)=c\u207fdet(A), det(A\u207b\u00b9)=1/det(A). Row operations: swap changes sign, scaling multiplies det by scalar, adding row multiples leaves det unchanged.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §5.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a75.2"
+      ]
     },
     {
       "id": "math.linalg.cramer-rule",
       "name": "Cramer's Rule",
-      "aliases": ["Cramer's rule"],
+      "aliases": [
+        "Cramer's rule"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.determinant", "math.linalg.matrix-inverse"],
+      "requires": [
+        "math.linalg.determinant",
+        "math.linalg.matrix-inverse"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "For Ax=b with det(A)≠0, xᵢ = det(Aᵢ)/det(A), where Aᵢ replaces column i with b. Theoretically important (explicit formula), computationally impractical for large n.",
+      "description": "For Ax=b with det(A)\u22600, x\u1d62 = det(A\u1d62)/det(A), where A\u1d62 replaces column i with b. Theoretically important (explicit formula), computationally impractical for large n.",
       "difficulty": "proficient",
       "estimated_hours": 2,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Strang, Introduction to Linear Algebra, §5.3"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a75.3"
+      ]
     },
     {
       "id": "math.linalg.lu-factorization",
       "name": "LU Factorization",
-      "aliases": ["LU decomposition", "PLU factorization"],
+      "aliases": [
+        "LU decomposition",
+        "PLU factorization"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.row-reduction", "math.linalg.matrix-multiplication"],
+      "requires": [
+        "math.linalg.row-reduction",
+        "math.linalg.matrix-multiplication"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.cholesky"],
-      "cross_links": ["math.num.lu-factorization"],
+      "related": [
+        "math.linalg.cholesky"
+      ],
+      "cross_links": [
+        "math.num.lu-factorization"
+      ],
       "description": "Decomposes A=LU (or PA=LU with pivoting), where L is lower triangular and U is upper triangular. Enables efficient solution of multiple systems with the same A via forward/back substitution.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Strang, Introduction to Linear Algebra, §2.6"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a72.6"
+      ]
     },
     {
       "id": "math.linalg.vector-space",
       "name": "Vector Space",
-      "aliases": ["linear space"],
+      "aliases": [
+        "linear space"
+      ],
       "parent": null,
-      "children": ["math.linalg.subspace", "math.linalg.basis", "math.linalg.dimension"],
-      "requires": ["math.linalg.vector-addition", "math.linalg.scalar-multiplication", "math.found.field"],
-      "unlocks": ["math.linalg.linear-map", "math.linalg.inner-product-space"],
+      "children": [
+        "math.linalg.subspace",
+        "math.linalg.basis",
+        "math.linalg.dimension"
+      ],
+      "requires": [
+        "math.linalg.vector-addition",
+        "math.linalg.scalar-multiplication",
+        "math.abst.field"
+      ],
+      "unlocks": [
+        "math.linalg.linear-map",
+        "math.linalg.inner-product-space"
+      ],
       "related": [],
-      "cross_links": ["math.abst.group-theory", "math.fnal.normed-space"],
-      "description": "A set V with vector addition and scalar multiplication satisfying 8 axioms (closure, commutativity, associativity, identity, inverses, scalar distributivity, vector distributivity, unit scalar). Examples: ℝⁿ, polynomials, function spaces.",
+      "cross_links": [
+        "math.abst.group-theory",
+        "math.fnal.normed-space"
+      ],
+      "description": "A set V with vector addition and scalar multiplication satisfying 8 axioms (closure, commutativity, associativity, identity, inverses, scalar distributivity, vector distributivity, unit scalar). Examples: \u211d\u207f, polynomials, function spaces.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Axler, Linear Algebra Done Right, Ch.1"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.1"
+      ]
     },
     {
       "id": "math.linalg.subspace",
       "name": "Subspace",
-      "aliases": ["linear subspace", "vector subspace"],
+      "aliases": [
+        "linear subspace",
+        "vector subspace"
+      ],
       "parent": "math.linalg.vector-space",
       "children": [],
-      "requires": ["math.linalg.vector-space"],
-      "unlocks": ["math.linalg.null-space", "math.linalg.column-space"],
+      "requires": [
+        "math.linalg.vector-space"
+      ],
+      "unlocks": [
+        "math.linalg.null-space",
+        "math.linalg.column-space"
+      ],
       "related": [],
       "cross_links": [],
       "description": "A subset W of a vector space V that is itself a vector space under the inherited operations. Equivalent condition: W is closed under addition and scalar multiplication and contains the zero vector.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §1.C"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a71.C"
+      ]
     },
     {
       "id": "math.linalg.span",
       "name": "Span",
-      "aliases": ["linear span", "linear hull"],
+      "aliases": [
+        "linear span",
+        "linear hull"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.subspace"],
-      "unlocks": ["math.linalg.basis"],
-      "related": ["math.linalg.linear-independence"],
+      "requires": [
+        "math.linalg.subspace"
+      ],
+      "unlocks": [
+        "math.linalg.basis"
+      ],
+      "related": [
+        "math.linalg.linear-independence"
+      ],
       "cross_links": [],
       "description": "span(S) = the set of all linear combinations of vectors in S. The smallest subspace containing S. A set spans V iff every vector in V can be expressed as a linear combination of vectors in S.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §2.A"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a72.A"
+      ]
     },
     {
       "id": "math.linalg.linear-independence",
       "name": "Linear Independence",
-      "aliases": ["linearly independent", "linearly dependent"],
+      "aliases": [
+        "linearly independent",
+        "linearly dependent"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.span"],
-      "unlocks": ["math.linalg.basis"],
-      "related": ["math.linalg.span"],
-      "cross_links": ["math.de.wronskian"],
-      "description": "Vectors v₁,…,vₖ are linearly independent iff c₁v₁+⋯+cₖvₖ=0 implies all cᵢ=0. Equivalently, no vector in the set is a linear combination of the others. Key property for basis construction.",
+      "requires": [
+        "math.linalg.span"
+      ],
+      "unlocks": [
+        "math.linalg.basis"
+      ],
+      "related": [
+        "math.linalg.span"
+      ],
+      "cross_links": [
+        "math.de.wronskian"
+      ],
+      "description": "Vectors v\u2081,\u2026,v\u2096 are linearly independent iff c\u2081v\u2081+\u22ef+c\u2096v\u2096=0 implies all c\u1d62=0. Equivalently, no vector in the set is a linear combination of the others. Key property for basis construction.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §2.A"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a72.A"
+      ]
     },
     {
       "id": "math.linalg.basis",
       "name": "Basis",
-      "aliases": ["basis of a vector space", "standard basis"],
+      "aliases": [
+        "basis of a vector space",
+        "standard basis"
+      ],
       "parent": "math.linalg.vector-space",
       "children": [],
-      "requires": ["math.linalg.linear-independence", "math.linalg.span"],
-      "unlocks": ["math.linalg.dimension", "math.linalg.coordinates"],
+      "requires": [
+        "math.linalg.linear-independence",
+        "math.linalg.span"
+      ],
+      "unlocks": [
+        "math.linalg.dimension",
+        "math.linalg.coordinates"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A set of vectors that is both linearly independent and spans V. Every vector in V is uniquely expressible as a linear combination of basis vectors. The standard basis of ℝⁿ is {e₁,…,eₙ}.",
+      "description": "A set of vectors that is both linearly independent and spans V. Every vector in V is uniquely expressible as a linear combination of basis vectors. The standard basis of \u211d\u207f is {e\u2081,\u2026,e\u2099}.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §2.B"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a72.B"
+      ]
     },
     {
       "id": "math.linalg.dimension",
       "name": "Dimension",
-      "aliases": ["dimension of a vector space"],
+      "aliases": [
+        "dimension of a vector space"
+      ],
       "parent": "math.linalg.vector-space",
       "children": [],
-      "requires": ["math.linalg.basis"],
-      "unlocks": ["math.linalg.rank-nullity"],
+      "requires": [
+        "math.linalg.basis"
+      ],
+      "unlocks": [
+        "math.linalg.rank-nullity"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "The number of vectors in any basis of V; all bases of V have the same cardinality. dim(ℝⁿ)=n. For subspaces: dim(U)+dim(U⊥)=dim(V).",
+      "description": "The number of vectors in any basis of V; all bases of V have the same cardinality. dim(\u211d\u207f)=n. For subspaces: dim(U)+dim(U\u22a5)=dim(V).",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §2.C"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a72.C"
+      ]
     },
     {
       "id": "math.linalg.coordinates",
       "name": "Coordinates",
-      "aliases": ["coordinate vector", "change of basis"],
+      "aliases": [
+        "coordinate vector",
+        "change of basis"
+      ],
       "parent": null,
-      "children": ["math.linalg.change-of-basis"],
-      "requires": ["math.linalg.basis"],
-      "unlocks": ["math.linalg.change-of-basis"],
+      "children": [
+        "math.linalg.change-of-basis"
+      ],
+      "requires": [
+        "math.linalg.basis"
+      ],
+      "unlocks": [
+        "math.linalg.change-of-basis"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Given an ordered basis β={b₁,…,bₙ}, the coordinate vector [v]_β = (c₁,…,cₙ) where v=∑cᵢbᵢ. Coordinates depend on the choice of basis. Change of basis converts between coordinate representations.",
+      "description": "Given an ordered basis \u03b2={b\u2081,\u2026,b\u2099}, the coordinate vector [v]_\u03b2 = (c\u2081,\u2026,c\u2099) where v=\u2211c\u1d62b\u1d62. Coordinates depend on the choice of basis. Change of basis converts between coordinate representations.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Lay, Linear Algebra, §4.4"]
+      "references": [
+        "Lay, Linear Algebra, \u00a74.4"
+      ]
     },
     {
       "id": "math.linalg.change-of-basis",
       "name": "Change of Basis",
-      "aliases": ["transition matrix", "basis change matrix"],
+      "aliases": [
+        "transition matrix",
+        "basis change matrix"
+      ],
       "parent": "math.linalg.coordinates",
       "children": [],
-      "requires": ["math.linalg.coordinates", "math.linalg.matrix-inverse"],
+      "requires": [
+        "math.linalg.coordinates",
+        "math.linalg.matrix-inverse"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "If β and γ are bases, the change-of-basis matrix P_{β→γ} satisfies [v]_γ = P[v]_β. Matrix representations of a linear map in two bases are related by similarity: B = P⁻¹AP.",
+      "description": "If \u03b2 and \u03b3 are bases, the change-of-basis matrix P_{\u03b2\u2192\u03b3} satisfies [v]_\u03b3 = P[v]_\u03b2. Matrix representations of a linear map in two bases are related by similarity: B = P\u207b\u00b9AP.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Lay, Linear Algebra, §4.7"]
+      "references": [
+        "Lay, Linear Algebra, \u00a74.7"
+      ]
     },
     {
       "id": "math.linalg.null-space",
       "name": "Null Space",
-      "aliases": ["kernel", "ker(A)"],
+      "aliases": [
+        "kernel",
+        "ker(A)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.subspace", "math.linalg.row-echelon"],
-      "unlocks": ["math.linalg.rank-nullity"],
-      "related": ["math.linalg.column-space"],
+      "requires": [
+        "math.linalg.subspace",
+        "math.linalg.row-echelon"
+      ],
+      "unlocks": [
+        "math.linalg.rank-nullity"
+      ],
+      "related": [
+        "math.linalg.column-space"
+      ],
       "cross_links": [],
-      "description": "N(A) = {x : Ax=0}; a subspace of ℝⁿ. Dimension is the nullity of A; its vectors are the solutions to the homogeneous system. Found by row-reducing A and parameterizing free variables.",
+      "description": "N(A) = {x : Ax=0}; a subspace of \u211d\u207f. Dimension is the nullity of A; its vectors are the solutions to the homogeneous system. Found by row-reducing A and parameterizing free variables.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §3.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a73.2"
+      ]
     },
     {
       "id": "math.linalg.column-space",
       "name": "Column Space",
-      "aliases": ["range", "image", "col(A)", "im(A)"],
+      "aliases": [
+        "range",
+        "image",
+        "col(A)",
+        "im(A)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.subspace", "math.linalg.span"],
-      "unlocks": ["math.linalg.rank-nullity"],
-      "related": ["math.linalg.null-space"],
+      "requires": [
+        "math.linalg.subspace",
+        "math.linalg.span"
+      ],
+      "unlocks": [
+        "math.linalg.rank-nullity"
+      ],
+      "related": [
+        "math.linalg.null-space"
+      ],
       "cross_links": [],
-      "description": "C(A) = {Ax : x∈ℝⁿ}; the span of the columns of A; a subspace of ℝᵐ. Ax=b is consistent iff b∈C(A). dim(C(A)) = rank(A).",
+      "description": "C(A) = {Ax : x\u2208\u211d\u207f}; the span of the columns of A; a subspace of \u211d\u1d50. Ax=b is consistent iff b\u2208C(A). dim(C(A)) = rank(A).",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §3.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a73.1"
+      ]
     },
     {
       "id": "math.linalg.rank-nullity",
       "name": "Rank-Nullity Theorem",
-      "aliases": ["dimension theorem"],
+      "aliases": [
+        "dimension theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.rank", "math.linalg.null-space", "math.linalg.column-space", "math.linalg.dimension"],
+      "requires": [
+        "math.linalg.rank",
+        "math.linalg.null-space",
+        "math.linalg.column-space",
+        "math.linalg.dimension"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "For a linear map T:V→W (or m×n matrix A): rank(T) + nullity(T) = dim(V) (= n for matrices). Constrains the sizes of image and kernel.",
+      "description": "For a linear map T:V\u2192W (or m\u00d7n matrix A): rank(T) + nullity(T) = dim(V) (= n for matrices). Constrains the sizes of image and kernel.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §3.C"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a73.C"
+      ]
     },
     {
       "id": "math.linalg.linear-map",
       "name": "Linear Map",
-      "aliases": ["linear transformation", "linear operator", "homomorphism (vector spaces)"],
+      "aliases": [
+        "linear transformation",
+        "linear operator",
+        "homomorphism (vector spaces)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.vector-space", "math.linalg.matrix"],
-      "unlocks": ["math.linalg.kernel-image", "math.linalg.matrix-representation"],
-      "related": ["math.abst.ring-homomorphism"],
-      "cross_links": ["math.abst.group-homomorphism", "math.fnal.bounded-operator"],
-      "description": "A map T:V→W satisfying T(u+v)=T(u)+T(v) and T(cv)=cT(v). Completely determined by its action on a basis. Every linear map between finite-dimensional spaces is represented by a matrix in given bases.",
+      "requires": [
+        "math.linalg.vector-space",
+        "math.linalg.matrix"
+      ],
+      "unlocks": [
+        "math.linalg.kernel-image",
+        "math.linalg.matrix-representation"
+      ],
+      "related": [
+        "math.abst.ring-homomorphism"
+      ],
+      "cross_links": [
+        "math.abst.group-homomorphism",
+        "math.fnal.bounded-operator"
+      ],
+      "description": "A map T:V\u2192W satisfying T(u+v)=T(u)+T(v) and T(cv)=cT(v). Completely determined by its action on a basis. Every linear map between finite-dimensional spaces is represented by a matrix in given bases.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Axler, Linear Algebra Done Right, Ch.3"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.3"
+      ]
     },
     {
       "id": "math.linalg.kernel-image",
       "name": "Kernel and Image of Linear Map",
-      "aliases": ["kernel", "image"],
+      "aliases": [
+        "kernel",
+        "image"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.linear-map"],
+      "requires": [
+        "math.linalg.linear-map"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.rank-nullity"],
-      "cross_links": ["math.abst.group-homomorphism"],
-      "description": "ker(T) = {v : T(v)=0} is a subspace of V; im(T) = {T(v) : v∈V} is a subspace of W. T is injective iff ker(T)={0}; T is surjective iff im(T)=W.",
+      "related": [
+        "math.linalg.rank-nullity"
+      ],
+      "cross_links": [
+        "math.abst.group-homomorphism"
+      ],
+      "description": "ker(T) = {v : T(v)=0} is a subspace of V; im(T) = {T(v) : v\u2208V} is a subspace of W. T is injective iff ker(T)={0}; T is surjective iff im(T)=W.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §3.B"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a73.B"
+      ]
     },
     {
       "id": "math.linalg.matrix-representation",
       "name": "Matrix Representation of Linear Map",
-      "aliases": ["matrix of a linear transformation"],
+      "aliases": [
+        "matrix of a linear transformation"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.linear-map", "math.linalg.basis"],
-      "unlocks": ["math.linalg.change-of-basis"],
+      "requires": [
+        "math.linalg.linear-map",
+        "math.linalg.basis"
+      ],
+      "unlocks": [
+        "math.linalg.change-of-basis"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Given ordered bases β of V and γ of W, the matrix [T]_{γβ} has columns [T(bⱼ)]_γ. Matrix multiplication then corresponds to composition of linear maps: [T∘S]=[T][S].",
+      "description": "Given ordered bases \u03b2 of V and \u03b3 of W, the matrix [T]_{\u03b3\u03b2} has columns [T(b\u2c7c)]_\u03b3. Matrix multiplication then corresponds to composition of linear maps: [T\u2218S]=[T][S].",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Axler, Linear Algebra Done Right, §3.D"]
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a73.D"
+      ]
     },
     {
       "id": "math.linalg.eigenvalues",
       "name": "Eigenvalues and Eigenvectors",
-      "aliases": ["eigenvalue", "eigenvector", "characteristic value"],
+      "aliases": [
+        "eigenvalue",
+        "eigenvector",
+        "characteristic value"
+      ],
       "parent": null,
-      "children": ["math.linalg.characteristic-polynomial", "math.linalg.eigenspace"],
-      "requires": ["math.linalg.matrix-multiplication", "math.linalg.determinant"],
-      "unlocks": ["math.linalg.diagonalization", "math.linalg.spectral-theorem"],
+      "children": [
+        "math.linalg.characteristic-polynomial",
+        "math.linalg.eigenspace"
+      ],
+      "requires": [
+        "math.linalg.matrix-multiplication",
+        "math.linalg.determinant"
+      ],
+      "unlocks": [
+        "math.linalg.diagonalization",
+        "math.linalg.spectral-theorem"
+      ],
       "related": [],
-      "cross_links": ["math.de.char-equation", "math.fnal.spectral-theory"],
-      "description": "Av=λv for a nonzero vector v; λ is an eigenvalue, v is an eigenvector. Eigenvectors are fixed directions under the transformation; eigenvalues give the scaling factors.",
+      "cross_links": [
+        "math.de.char-equation",
+        "math.fnal.spectral-theory"
+      ],
+      "description": "Av=\u03bbv for a nonzero vector v; \u03bb is an eigenvalue, v is an eigenvector. Eigenvectors are fixed directions under the transformation; eigenvalues give the scaling factors.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, Ch.6; Axler, Linear Algebra Done Right, Ch.5"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, Ch.6; Axler, Linear Algebra Done Right, Ch.5"
+      ]
     },
     {
       "id": "math.linalg.characteristic-polynomial",
       "name": "Characteristic Polynomial",
-      "aliases": ["det(A−λI)", "characteristic equation"],
+      "aliases": [
+        "det(A\u2212\u03bbI)",
+        "characteristic equation"
+      ],
       "parent": "math.linalg.eigenvalues",
       "children": [],
-      "requires": ["math.linalg.eigenvalues", "math.linalg.determinant"],
+      "requires": [
+        "math.linalg.eigenvalues",
+        "math.linalg.determinant"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.de.char-equation"],
-      "description": "p(λ) = det(A−λI); eigenvalues are its roots. Degree n polynomial for n×n matrix. Cayley-Hamilton theorem states A satisfies its own characteristic polynomial: p(A)=0.",
+      "cross_links": [
+        "math.de.char-equation"
+      ],
+      "description": "p(\u03bb) = det(A\u2212\u03bbI); eigenvalues are its roots. Degree n polynomial for n\u00d7n matrix. Cayley-Hamilton theorem states A satisfies its own characteristic polynomial: p(A)=0.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §6.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a76.1"
+      ]
     },
     {
       "id": "math.linalg.eigenspace",
       "name": "Eigenspace",
-      "aliases": ["eigenspace of λ"],
+      "aliases": [
+        "eigenspace of \u03bb"
+      ],
       "parent": "math.linalg.eigenvalues",
       "children": [],
-      "requires": ["math.linalg.eigenvalues", "math.linalg.null-space"],
+      "requires": [
+        "math.linalg.eigenvalues",
+        "math.linalg.null-space"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "E_λ = ker(A−λI) = {v : Av=λv}; a subspace of ℝⁿ. Its dimension is the geometric multiplicity of λ. Algebraic multiplicity ≥ geometric multiplicity; equality holds for diagonalizable matrices.",
+      "description": "E_\u03bb = ker(A\u2212\u03bbI) = {v : Av=\u03bbv}; a subspace of \u211d\u207f. Its dimension is the geometric multiplicity of \u03bb. Algebraic multiplicity \u2265 geometric multiplicity; equality holds for diagonalizable matrices.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Strang, Introduction to Linear Algebra, §6.1"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a76.1"
+      ]
     },
     {
       "id": "math.linalg.diagonalization",
       "name": "Diagonalization",
-      "aliases": ["diagonalizable matrix", "A=PDP⁻¹"],
+      "aliases": [
+        "diagonalizable matrix",
+        "A=PDP\u207b\u00b9"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.eigenvalues", "math.linalg.eigenspace", "math.linalg.matrix-inverse"],
-      "unlocks": ["math.linalg.matrix-exponential"],
-      "related": ["math.linalg.spectral-theorem", "math.linalg.jordan-form"],
-      "cross_links": ["math.de.systems-matrix-method"],
-      "description": "A is diagonalizable iff it has n linearly independent eigenvectors. Then A=PDP⁻¹ where D=diag(λ₁,…,λₙ) and P has eigenvectors as columns. Powers: Aᵏ=PDᵏP⁻¹.",
+      "requires": [
+        "math.linalg.eigenvalues",
+        "math.linalg.eigenspace",
+        "math.linalg.matrix-inverse"
+      ],
+      "unlocks": [
+        "math.linalg.matrix-exponential"
+      ],
+      "related": [
+        "math.linalg.spectral-theorem",
+        "math.linalg.jordan-form"
+      ],
+      "cross_links": [
+        "math.de.systems-matrix-method"
+      ],
+      "description": "A is diagonalizable iff it has n linearly independent eigenvectors. Then A=PDP\u207b\u00b9 where D=diag(\u03bb\u2081,\u2026,\u03bb\u2099) and P has eigenvectors as columns. Powers: A\u1d4f=PD\u1d4fP\u207b\u00b9.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Strang, Introduction to Linear Algebra, §6.2"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a76.2"
+      ]
     },
     {
       "id": "math.linalg.matrix-exponential",
       "name": "Matrix Exponential",
-      "aliases": ["e^A", "matrix exponent"],
+      "aliases": [
+        "e^A",
+        "matrix exponent"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.diagonalization", "math.seq.series"],
+      "requires": [
+        "math.linalg.diagonalization",
+        "math.seq.series"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.de.systems-matrix-method"],
-      "description": "e^A = ∑_{k=0}^∞ Aᵏ/k!. For diagonalizable A=PDP⁻¹: e^A = Pe^DP⁻¹. Used to express solutions to x′=Ax as x(t)=e^{At}x(0). Satisfies d/dt e^{At} = Ae^{At}.",
+      "cross_links": [
+        "math.de.systems-matrix-method"
+      ],
+      "description": "e^A = \u2211_{k=0}^\u221e A\u1d4f/k!. For diagonalizable A=PDP\u207b\u00b9: e^A = Pe^DP\u207b\u00b9. Used to express solutions to x\u2032=Ax as x(t)=e^{At}x(0). Satisfies d/dt e^{At} = Ae^{At}.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Strang, Introduction to Linear Algebra, §6.3"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a76.3"
+      ]
     },
     {
       "id": "math.linalg.jordan-form",
       "name": "Jordan Normal Form",
-      "aliases": ["Jordan canonical form", "Jordan block"],
+      "aliases": [
+        "Jordan canonical form",
+        "Jordan block"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.eigenvalues", "math.linalg.diagonalization"],
+      "requires": [
+        "math.linalg.eigenvalues",
+        "math.linalg.diagonalization"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.diagonalization"],
+      "related": [
+        "math.linalg.diagonalization"
+      ],
       "cross_links": [],
-      "description": "Every matrix over ℂ is similar to a block-diagonal matrix with Jordan blocks Jₖ(λ) on the diagonal. Generalizes diagonalization to non-diagonalizable matrices. Jordan blocks have λ on the diagonal and 1s on the superdiagonal.",
+      "description": "Every matrix over \u2102 is similar to a block-diagonal matrix with Jordan blocks J\u2096(\u03bb) on the diagonal. Generalizes diagonalization to non-diagonalizable matrices. Jordan blocks have \u03bb on the diagonal and 1s on the superdiagonal.",
       "difficulty": "expert",
       "estimated_hours": 7,
       "bloom": "analyze",
       "mastery_threshold": 0.75,
-      "references": ["Axler, Linear Algebra Done Right, Ch.8; Horn & Johnson, Matrix Analysis"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.8; Horn & Johnson, Matrix Analysis"
+      ]
     },
     {
       "id": "math.linalg.spectral-theorem",
       "name": "Spectral Theorem",
-      "aliases": ["real spectral theorem", "complex spectral theorem"],
+      "aliases": [
+        "real spectral theorem",
+        "complex spectral theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.symmetric-matrix", "math.linalg.eigenvalues", "math.linalg.orthogonal-basis"],
-      "unlocks": ["math.linalg.positive-definite"],
-      "related": ["math.linalg.diagonalization"],
-      "cross_links": ["math.fnal.spectral-theory"],
-      "description": "Every real symmetric (or complex Hermitian) matrix is orthogonally (unitarily) diagonalizable: A=QΛQᵀ with Q orthogonal and Λ real diagonal. Eigenvalues are real; eigenvectors from different eigenspaces are orthogonal.",
+      "requires": [
+        "math.linalg.symmetric-matrix",
+        "math.linalg.eigenvalues",
+        "math.linalg.orthogonal-basis"
+      ],
+      "unlocks": [
+        "math.linalg.positive-definite"
+      ],
+      "related": [
+        "math.linalg.diagonalization"
+      ],
+      "cross_links": [
+        "math.fnal.spectral-theory"
+      ],
+      "description": "Every real symmetric (or complex Hermitian) matrix is orthogonally (unitarily) diagonalizable: A=Q\u039bQ\u1d40 with Q orthogonal and \u039b real diagonal. Eigenvalues are real; eigenvectors from different eigenspaces are orthogonal.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Axler, Linear Algebra Done Right, Ch.7"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.7"
+      ]
     },
     {
       "id": "math.linalg.positive-definite",
       "name": "Positive Definite Matrix",
-      "aliases": ["positive semidefinite", "PD matrix", "PSD matrix"],
+      "aliases": [
+        "positive semidefinite",
+        "PD matrix",
+        "PSD matrix"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.spectral-theorem"],
-      "unlocks": ["math.linalg.cholesky"],
-      "related": ["math.linalg.symmetric-matrix"],
-      "cross_links": ["math.opt.convex-function"],
-      "description": "A symmetric matrix A is positive definite iff vᵀAv>0 for all nonzero v, iff all eigenvalues are positive, iff all leading principal minors are positive (Sylvester's criterion). PSD: ≥0 instead of >0.",
+      "requires": [
+        "math.linalg.spectral-theorem"
+      ],
+      "unlocks": [
+        "math.linalg.cholesky"
+      ],
+      "related": [
+        "math.linalg.symmetric-matrix"
+      ],
+      "cross_links": [
+        "math.opt.convex-function"
+      ],
+      "description": "A symmetric matrix A is positive definite iff v\u1d40Av>0 for all nonzero v, iff all eigenvalues are positive, iff all leading principal minors are positive (Sylvester's criterion). PSD: \u22650 instead of >0.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Strang, Introduction to Linear Algebra, §6.5; Horn & Johnson, Matrix Analysis"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a76.5; Horn & Johnson, Matrix Analysis"
+      ]
     },
     {
       "id": "math.linalg.cholesky",
       "name": "Cholesky Decomposition",
-      "aliases": ["Cholesky factorization"],
+      "aliases": [
+        "Cholesky factorization"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.positive-definite", "math.linalg.lu-factorization"],
+      "requires": [
+        "math.linalg.positive-definite",
+        "math.linalg.lu-factorization"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.lu-factorization"],
-      "cross_links": ["math.num.cholesky"],
-      "description": "A positive definite matrix A = LLᵀ where L is lower triangular with positive diagonal. More efficient than LU for symmetric positive definite systems (half the work). Widely used in numerical linear algebra.",
+      "related": [
+        "math.linalg.lu-factorization"
+      ],
+      "cross_links": [
+        "math.num.cholesky"
+      ],
+      "description": "A positive definite matrix A = LL\u1d40 where L is lower triangular with positive diagonal. More efficient than LU for symmetric positive definite systems (half the work). Widely used in numerical linear algebra.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Golub & Van Loan, Matrix Computations, §4.2"]
+      "references": [
+        "Golub & Van Loan, Matrix Computations, \u00a74.2"
+      ]
     },
     {
       "id": "math.linalg.inner-product",
       "name": "Inner Product",
-      "aliases": ["inner product space", "bilinear form"],
+      "aliases": [
+        "inner product space",
+        "bilinear form"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.vector-space", "math.linalg.dot-product"],
-      "unlocks": ["math.linalg.inner-product-space"],
+      "requires": [
+        "math.linalg.vector-space",
+        "math.linalg.dot-product"
+      ],
+      "unlocks": [
+        "math.linalg.inner-product-space"
+      ],
       "related": [],
-      "cross_links": ["math.fnal.hilbert-space"],
-      "description": "A generalization of the dot product: a positive-definite symmetric bilinear form (real) or sesquilinear form (complex) ⟨·,·⟩:V×V→F. Induces a norm |v|=√⟨v,v⟩.",
+      "cross_links": [
+        "math.fnal.hilbert-space"
+      ],
+      "description": "A generalization of the dot product: a positive-definite symmetric bilinear form (real) or sesquilinear form (complex) \u27e8\u00b7,\u00b7\u27e9:V\u00d7V\u2192F. Induces a norm |v|=\u221a\u27e8v,v\u27e9.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Axler, Linear Algebra Done Right, Ch.6"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.6"
+      ]
     },
     {
       "id": "math.linalg.inner-product-space",
       "name": "Inner Product Space",
-      "aliases": ["pre-Hilbert space"],
+      "aliases": [
+        "pre-Hilbert space"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.inner-product", "math.linalg.vector-space"],
-      "unlocks": ["math.linalg.orthogonal-basis", "math.linalg.gram-schmidt"],
+      "requires": [
+        "math.linalg.inner-product",
+        "math.linalg.vector-space"
+      ],
+      "unlocks": [
+        "math.linalg.orthogonal-basis",
+        "math.linalg.gram-schmidt"
+      ],
       "related": [],
-      "cross_links": ["math.fnal.hilbert-space"],
-      "description": "A vector space equipped with an inner product. Cauchy-Schwarz inequality: |⟨u,v⟩| ≤ |u||v|. The norm makes it a normed space; if complete, it becomes a Hilbert space.",
+      "cross_links": [
+        "math.fnal.hilbert-space"
+      ],
+      "description": "A vector space equipped with an inner product. Cauchy-Schwarz inequality: |\u27e8u,v\u27e9| \u2264 |u||v|. The norm makes it a normed space; if complete, it becomes a Hilbert space.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Axler, Linear Algebra Done Right, Ch.6"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.6"
+      ]
     },
     {
       "id": "math.linalg.orthogonal-basis",
       "name": "Orthogonal and Orthonormal Basis",
-      "aliases": ["orthonormal basis", "ONB"],
+      "aliases": [
+        "orthonormal basis",
+        "ONB"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.orthogonality", "math.linalg.basis"],
-      "unlocks": ["math.linalg.gram-schmidt", "math.linalg.projection"],
+      "requires": [
+        "math.linalg.orthogonality",
+        "math.linalg.basis"
+      ],
+      "unlocks": [
+        "math.linalg.gram-schmidt",
+        "math.linalg.projection"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A basis where all vectors are mutually orthogonal (orthogonal basis) or additionally unit vectors (orthonormal basis). In an ONB, coordinates of v are simply ⟨v,eᵢ⟩. Expansion: v=∑⟨v,eᵢ⟩eᵢ.",
+      "description": "A basis where all vectors are mutually orthogonal (orthogonal basis) or additionally unit vectors (orthonormal basis). In an ONB, coordinates of v are simply \u27e8v,e\u1d62\u27e9. Expansion: v=\u2211\u27e8v,e\u1d62\u27e9e\u1d62.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Axler, Linear Algebra Done Right, §6.B"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Axler, Linear Algebra Done Right, \u00a76.B"
+      ]
     },
     {
       "id": "math.linalg.gram-schmidt",
       "name": "Gram-Schmidt Process",
-      "aliases": ["Gram-Schmidt orthogonalization"],
+      "aliases": [
+        "Gram-Schmidt orthogonalization"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.orthogonal-basis", "math.linalg.projection"],
-      "unlocks": ["math.linalg.qr-factorization"],
+      "requires": [
+        "math.linalg.orthogonal-basis",
+        "math.linalg.projection"
+      ],
+      "unlocks": [
+        "math.linalg.qr-factorization"
+      ],
       "related": [],
       "cross_links": [],
       "description": "Iteratively converts a linearly independent set into an orthonormal basis: subtract projections onto previous vectors, then normalize. Foundation of QR factorization.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §4.4"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a74.4"
+      ]
     },
     {
       "id": "math.linalg.projection",
       "name": "Orthogonal Projection",
-      "aliases": ["projection onto subspace", "least squares projection"],
+      "aliases": [
+        "projection onto subspace",
+        "least squares projection"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.orthogonality", "math.linalg.inner-product"],
-      "unlocks": ["math.linalg.least-squares"],
-      "related": ["math.linalg.gram-schmidt"],
+      "requires": [
+        "math.linalg.orthogonality",
+        "math.linalg.inner-product"
+      ],
+      "unlocks": [
+        "math.linalg.least-squares"
+      ],
+      "related": [
+        "math.linalg.gram-schmidt"
+      ],
       "cross_links": [],
-      "description": "The projection of v onto subspace W is the closest point in W to v, with v−proj_W(v) ⊥ W. For one vector: proj_u(v) = (v·u/u·u)u. For a subspace with ONB {e₁,…,eₖ}: proj = ∑⟨v,eᵢ⟩eᵢ.",
+      "description": "The projection of v onto subspace W is the closest point in W to v, with v\u2212proj_W(v) \u22a5 W. For one vector: proj_u(v) = (v\u00b7u/u\u00b7u)u. For a subspace with ONB {e\u2081,\u2026,e\u2096}: proj = \u2211\u27e8v,e\u1d62\u27e9e\u1d62.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §4.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a74.2"
+      ]
     },
     {
       "id": "math.linalg.least-squares",
       "name": "Least Squares",
-      "aliases": ["least squares approximation", "normal equations"],
+      "aliases": [
+        "least squares approximation",
+        "normal equations"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.projection", "math.linalg.matrix-transpose"],
+      "requires": [
+        "math.linalg.projection",
+        "math.linalg.matrix-transpose"
+      ],
       "unlocks": [],
-      "related": ["math.stats.linear-regression"],
-      "cross_links": ["math.stats.linear-regression"],
-      "description": "When Ax=b has no solution, the least squares solution minimizes |Ax−b|². Found by the normal equations AᵀAx̂=Aᵀb. Solution: x̂=(AᵀA)⁻¹Aᵀb when AᵀA is invertible.",
+      "related": [
+        "math.stats.linear-regression"
+      ],
+      "cross_links": [
+        "math.stats.linear-regression"
+      ],
+      "description": "When Ax=b has no solution, the least squares solution minimizes |Ax\u2212b|\u00b2. Found by the normal equations A\u1d40Ax\u0302=A\u1d40b. Solution: x\u0302=(A\u1d40A)\u207b\u00b9A\u1d40b when A\u1d40A is invertible.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Strang, Introduction to Linear Algebra, Ch.4"]
+      "references": [
+        "Strang, Introduction to Linear Algebra, Ch.4"
+      ]
     },
     {
       "id": "math.linalg.qr-factorization",
       "name": "QR Factorization",
-      "aliases": ["QR decomposition"],
+      "aliases": [
+        "QR decomposition"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.gram-schmidt"],
+      "requires": [
+        "math.linalg.gram-schmidt"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.lu-factorization"],
-      "cross_links": ["math.num.qr-algorithm"],
-      "description": "A = QR where Q is orthogonal (Qᵀ=Q⁻¹) and R is upper triangular. Computed by Gram-Schmidt or Householder reflections. Used for least squares, eigenvalue computation (QR algorithm).",
+      "related": [
+        "math.linalg.lu-factorization"
+      ],
+      "cross_links": [
+        "math.num.qr-algorithm"
+      ],
+      "description": "A = QR where Q is orthogonal (Q\u1d40=Q\u207b\u00b9) and R is upper triangular. Computed by Gram-Schmidt or Householder reflections. Used for least squares, eigenvalue computation (QR algorithm).",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Strang, Introduction to Linear Algebra, §4.4; Golub & Van Loan, Matrix Computations"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a74.4; Golub & Van Loan, Matrix Computations"
+      ]
     },
     {
       "id": "math.linalg.svd",
       "name": "Singular Value Decomposition",
-      "aliases": ["SVD"],
+      "aliases": [
+        "SVD"
+      ],
       "parent": null,
-      "children": ["math.linalg.singular-values", "math.linalg.pseudoinverse"],
-      "requires": ["math.linalg.spectral-theorem", "math.linalg.qr-factorization"],
+      "children": [
+        "math.linalg.singular-values",
+        "math.linalg.pseudoinverse"
+      ],
+      "requires": [
+        "math.linalg.spectral-theorem",
+        "math.linalg.qr-factorization"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.diagonalization"],
-      "cross_links": ["math.num.svd", "math.opt.pca"],
-      "description": "Any m×n matrix A = UΣVᵀ where U (m×m) and V (n×n) are orthogonal and Σ (m×n) is diagonal with non-negative entries (singular values). Most powerful matrix decomposition; foundation of numerical linear algebra and data science.",
+      "related": [
+        "math.linalg.diagonalization"
+      ],
+      "cross_links": [
+        "math.num.svd",
+        "math.opt.pca"
+      ],
+      "description": "Any m\u00d7n matrix A = U\u03a3V\u1d40 where U (m\u00d7m) and V (n\u00d7n) are orthogonal and \u03a3 (m\u00d7n) is diagonal with non-negative entries (singular values). Most powerful matrix decomposition; foundation of numerical linear algebra and data science.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Strang, Introduction to Linear Algebra, §7.1; Golub & Van Loan, Matrix Computations, Ch.8"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a77.1; Golub & Van Loan, Matrix Computations, Ch.8"
+      ]
     },
     {
       "id": "math.linalg.singular-values",
       "name": "Singular Values",
-      "aliases": ["σᵢ"],
+      "aliases": [
+        "\u03c3\u1d62"
+      ],
       "parent": "math.linalg.svd",
       "children": [],
-      "requires": ["math.linalg.svd", "math.linalg.eigenvalues"],
+      "requires": [
+        "math.linalg.svd",
+        "math.linalg.eigenvalues"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "The singular values σᵢ = √(eigenvalues of AᵀA) = √(eigenvalues of AAᵀ). They generalize eigenvalues to non-square matrices; σ₁ = |A| (operator 2-norm). Encode the 'strength' of each mode of the transformation.",
+      "description": "The singular values \u03c3\u1d62 = \u221a(eigenvalues of A\u1d40A) = \u221a(eigenvalues of AA\u1d40). They generalize eigenvalues to non-square matrices; \u03c3\u2081 = |A| (operator 2-norm). Encode the 'strength' of each mode of the transformation.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Golub & Van Loan, Matrix Computations, §2.4"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Golub & Van Loan, Matrix Computations, \u00a72.4"
+      ]
     },
     {
       "id": "math.linalg.pseudoinverse",
       "name": "Moore-Penrose Pseudoinverse",
-      "aliases": ["pseudoinverse", "A⁺"],
+      "aliases": [
+        "pseudoinverse",
+        "A\u207a"
+      ],
       "parent": "math.linalg.svd",
       "children": [],
-      "requires": ["math.linalg.svd"],
+      "requires": [
+        "math.linalg.svd"
+      ],
       "unlocks": [],
-      "related": ["math.linalg.least-squares"],
+      "related": [
+        "math.linalg.least-squares"
+      ],
       "cross_links": [],
-      "description": "A⁺ = VΣ⁺Uᵀ where Σ⁺ inverts each nonzero singular value and leaves zero singular values as zero. Gives the minimum-norm least squares solution x̂=A⁺b for any system Ax=b.",
+      "description": "A\u207a = V\u03a3\u207aU\u1d40 where \u03a3\u207a inverts each nonzero singular value and leaves zero singular values as zero. Gives the minimum-norm least squares solution x\u0302=A\u207ab for any system Ax=b.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Golub & Van Loan, Matrix Computations, §5.5"]
+      "references": [
+        "Golub & Van Loan, Matrix Computations, \u00a75.5"
+      ]
     },
     {
       "id": "math.linalg.tensor",
       "name": "Tensor",
-      "aliases": ["tensor algebra", "multilinear map"],
+      "aliases": [
+        "tensor algebra",
+        "multilinear map"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.vector-space", "math.linalg.linear-map"],
+      "requires": [
+        "math.linalg.vector-space",
+        "math.linalg.linear-map"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.calc.tensor-calculus", "math.cat.tensor-product"],
-      "description": "A multilinear map T: V×⋯×V×V*×⋯×V*→F of type (r,s), where r contravariant and s covariant indices. Includes scalars (0,0), vectors (1,0), dual vectors (0,1), and matrices (1,1). Tensor product ⊗ constructs higher-rank tensors.",
+      "cross_links": [
+        "math.cat.tensor-product"
+      ],
+      "description": "A multilinear map T: V\u00d7\u22ef\u00d7V\u00d7V*\u00d7\u22ef\u00d7V*\u2192F of type (r,s), where r contravariant and s covariant indices. Includes scalars (0,0), vectors (1,0), dual vectors (0,1), and matrices (1,1). Tensor product \u2297 constructs higher-rank tensors.",
       "difficulty": "expert",
       "estimated_hours": 8,
       "bloom": "understand",
-      "mastery_threshold": 0.70,
-      "references": ["Axler, Linear Algebra Done Right, Appendix; Misner, Thorne & Wheeler, Gravitation, Ch.2 (tensors)"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Axler, Linear Algebra Done Right, Appendix; Misner, Thorne & Wheeler, Gravitation, Ch.2 (tensors)"
+      ]
     },
     {
       "id": "math.linalg.dual-space",
       "name": "Dual Space",
-      "aliases": ["dual vector space", "linear functional", "covector"],
+      "aliases": [
+        "dual vector space",
+        "linear functional",
+        "covector"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.vector-space", "math.linalg.linear-map"],
-      "unlocks": ["math.linalg.tensor"],
+      "requires": [
+        "math.linalg.vector-space",
+        "math.linalg.linear-map"
+      ],
+      "unlocks": [
+        "math.linalg.tensor"
+      ],
       "related": [],
-      "cross_links": ["math.fnal.dual-space-functional"],
-      "description": "V* = Hom(V,F), the space of all linear functionals on V. dim(V*)=dim(V). Dual basis {f¹,…,fⁿ} satisfies fⁱ(eⱼ)=δⁱⱼ. Key in differential geometry (1-forms) and functional analysis.",
+      "cross_links": [
+        "math.fnal.dual-space-functional"
+      ],
+      "description": "V* = Hom(V,F), the space of all linear functionals on V. dim(V*)=dim(V). Dual basis {f\u00b9,\u2026,f\u207f} satisfies f\u2071(e\u2c7c)=\u03b4\u2071\u2c7c. Key in differential geometry (1-forms) and functional analysis.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.75,
-      "references": ["Axler, Linear Algebra Done Right, Ch.3"]
+      "references": [
+        "Axler, Linear Algebra Done Right, Ch.3"
+      ]
     },
     {
       "id": "math.linalg.distance",
       "name": "Distance in Vector Spaces",
-      "aliases": ["metric", "Euclidean distance"],
+      "aliases": [
+        "metric",
+        "Euclidean distance"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.norm"],
+      "requires": [
+        "math.linalg.norm"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.real.metric-space"],
-      "description": "d(u,v) = |u−v|. Euclidean distance in ℝⁿ. The norm induces a metric satisfying non-negativity, symmetry, and triangle inequality.",
+      "cross_links": [
+        "math.real.metric-space"
+      ],
+      "description": "d(u,v) = |u\u2212v|. Euclidean distance in \u211d\u207f. The norm induces a metric satisfying non-negativity, symmetry, and triangle inequality.",
       "difficulty": "proficient",
       "estimated_hours": 1,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §1.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.2"
+      ]
     },
     {
       "id": "math.linalg.angle-vectors",
       "name": "Angle Between Vectors",
-      "aliases": ["angle formula"],
+      "aliases": [
+        "angle formula"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.linalg.dot-product", "math.linalg.norm"],
+      "requires": [
+        "math.linalg.dot-product",
+        "math.linalg.norm"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "cos θ = (a·b)/(|a||b|). θ=π/2 iff a⊥b. Cauchy-Schwarz inequality guarantees this value is in [−1,1], ensuring θ is well-defined.",
+      "description": "cos \u03b8 = (a\u00b7b)/(|a||b|). \u03b8=\u03c0/2 iff a\u22a5b. Cauchy-Schwarz inequality guarantees this value is in [\u22121,1], ensuring \u03b8 is well-defined.",
       "difficulty": "proficient",
       "estimated_hours": 1,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Strang, Introduction to Linear Algebra, §1.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Strang, Introduction to Linear Algebra, \u00a71.2"
+      ]
     }
   ]
 }

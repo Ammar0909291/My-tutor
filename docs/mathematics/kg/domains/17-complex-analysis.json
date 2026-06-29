@@ -2,322 +2,508 @@
   "domain_id": "complex-analysis",
   "domain_name": "Complex Analysis",
   "id_prefix": "math.cx",
-  "level_range": [5, 7],
+  "level_range": [
+    5,
+    7
+  ],
   "description": "The study of complex-valued functions of a complex variable. Distinguished by the rich consequences of complex differentiability, including Cauchy's theorem, residues, and conformal mapping.",
   "concepts": [
     {
       "id": "math.cx.complex-numbers-analysis",
       "name": "Complex Numbers (Analysis)",
-      "aliases": ["ℂ", "complex plane", "Argand diagram"],
+      "aliases": [
+        "\u2102",
+        "complex plane",
+        "Argand diagram"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.found.complex-numbers", "math.trig.polar-complex"],
-      "unlocks": ["math.cx.analytic-functions"],
+      "requires": [
+        "math.found.complex-numbers",
+        "math.trig.polar-form-complex"
+      ],
+      "unlocks": [
+        "math.cx.analytic-functions"
+      ],
       "related": [],
-      "cross_links": ["math.trig.euler-formula"],
-      "description": "ℂ = {x+iy : x,y∈ℝ}. |z| = √(x²+y²), arg(z). Polar form: z=re^{iθ}. Operations: addition, multiplication, conjugation z̄=x−iy, |z|²=zz̄. The Riemann sphere adds ∞ by one-point compactification.",
+      "cross_links": [
+        "math.trig.eulers-formula"
+      ],
+      "description": "\u2102 = {x+iy : x,y\u2208\u211d}. |z| = \u221a(x\u00b2+y\u00b2), arg(z). Polar form: z=re^{i\u03b8}. Operations: addition, multiplication, conjugation z\u0304=x\u2212iy, |z|\u00b2=zz\u0304. The Riemann sphere adds \u221e by one-point compactification.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, Ch.1; Conway, Functions of One Complex Variable, Ch.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, Ch.1; Conway, Functions of One Complex Variable, Ch.1"
+      ]
     },
     {
       "id": "math.cx.complex-function",
       "name": "Complex-Valued Function",
-      "aliases": ["function of a complex variable", "f:ℂ→ℂ"],
+      "aliases": [
+        "function of a complex variable",
+        "f:\u2102\u2192\u2102"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.complex-numbers-analysis", "math.func.function-concept"],
-      "unlocks": ["math.cx.cauchy-riemann", "math.cx.analytic-functions"],
+      "requires": [
+        "math.cx.complex-numbers-analysis",
+        "math.func.function-concept"
+      ],
+      "unlocks": [
+        "math.cx.cauchy-riemann",
+        "math.cx.analytic-functions"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "f(z) = u(x,y) + iv(x,y) where u = Re(f), v = Im(f) are real-valued functions of two real variables. Limits and continuity defined using |z−z₀|→0 analogously to the real case.",
+      "description": "f(z) = u(x,y) + iv(x,y) where u = Re(f), v = Im(f) are real-valued functions of two real variables. Limits and continuity defined using |z\u2212z\u2080|\u21920 analogously to the real case.",
       "difficulty": "advanced",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §2.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a72.1"
+      ]
     },
     {
       "id": "math.cx.cauchy-riemann",
       "name": "Cauchy-Riemann Equations",
-      "aliases": ["CR equations", "∂u/∂x = ∂v/∂y"],
+      "aliases": [
+        "CR equations",
+        "\u2202u/\u2202x = \u2202v/\u2202y"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.complex-function", "math.calc.partial-derivative"],
-      "unlocks": ["math.cx.analytic-functions", "math.cx.harmonic-functions"],
+      "requires": [
+        "math.cx.complex-function",
+        "math.calc.partial-derivatives"
+      ],
+      "unlocks": [
+        "math.cx.analytic-functions",
+        "math.cx.harmonic-functions"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "f=u+iv is complex differentiable at z iff the CR equations hold: ∂u/∂x=∂v/∂y and ∂u/∂y=−∂v/∂x. If u,v have continuous partials satisfying CR, then f is holomorphic. Critical necessary and sufficient conditions for complex differentiability.",
+      "description": "f=u+iv is complex differentiable at z iff the CR equations hold: \u2202u/\u2202x=\u2202v/\u2202y and \u2202u/\u2202y=\u2212\u2202v/\u2202x. If u,v have continuous partials satisfying CR, then f is holomorphic. Critical necessary and sufficient conditions for complex differentiability.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §2.2; Conway, Functions of One Complex Variable, §II.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a72.2; Conway, Functions of One Complex Variable, \u00a7II.2"
+      ]
     },
     {
       "id": "math.cx.analytic-functions",
       "name": "Analytic (Holomorphic) Functions",
-      "aliases": ["holomorphic", "analytic", "entire function"],
+      "aliases": [
+        "holomorphic",
+        "analytic",
+        "entire function"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.cauchy-riemann"],
-      "unlocks": ["math.cx.cauchy-theorem", "math.cx.power-series-cx"],
+      "requires": [
+        "math.cx.cauchy-riemann"
+      ],
+      "unlocks": [
+        "math.cx.cauchy-theorem",
+        "math.cx.power-series-cx"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "f is holomorphic on open U if f′(z) exists at every z∈U. Analytic: can be represented by a power series locally. In ℂ: holomorphic ⟺ analytic (unlike in ℝ). Entire function: holomorphic on all of ℂ.",
+      "description": "f is holomorphic on open U if f\u2032(z) exists at every z\u2208U. Analytic: can be represented by a power series locally. In \u2102: holomorphic \u27fa analytic (unlike in \u211d). Entire function: holomorphic on all of \u2102.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, Ch.2; Stein & Shakarchi, Complex Analysis, Ch.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, Ch.2; Stein & Shakarchi, Complex Analysis, Ch.1"
+      ]
     },
     {
       "id": "math.cx.harmonic-functions",
       "name": "Harmonic Functions (Complex Analysis)",
-      "aliases": ["harmonic conjugate"],
+      "aliases": [
+        "harmonic conjugate"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.cauchy-riemann", "math.de.laplace-equation"],
+      "requires": [
+        "math.cx.cauchy-riemann",
+        "math.de.laplace-equation"
+      ],
       "unlocks": [],
-      "related": ["math.de.harmonic-functions"],
-      "cross_links": ["math.de.harmonic-functions"],
-      "description": "u is harmonic iff Δu = u_{xx}+u_{yy}=0. The real and imaginary parts of a holomorphic function are harmonic. Every harmonic u has a harmonic conjugate v (locally) such that f=u+iv is holomorphic.",
+      "related": [
+        "math.de.harmonic-functions"
+      ],
+      "cross_links": [
+        "math.de.harmonic-functions"
+      ],
+      "description": "u is harmonic iff \u0394u = u_{xx}+u_{yy}=0. The real and imaginary parts of a holomorphic function are harmonic. Every harmonic u has a harmonic conjugate v (locally) such that f=u+iv is holomorphic.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §2.5"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a72.5"
+      ]
     },
     {
       "id": "math.cx.power-series-cx",
-      "name": "Power Series in ℂ",
-      "aliases": ["Taylor series in complex analysis", "radius of convergence"],
+      "name": "Power Series in \u2102",
+      "aliases": [
+        "Taylor series in complex analysis",
+        "radius of convergence"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.analytic-functions", "math.calc.power-series"],
-      "unlocks": ["math.cx.identity-theorem"],
+      "requires": [
+        "math.cx.analytic-functions",
+        "math.calc.power-series"
+      ],
+      "unlocks": [
+        "math.cx.identity-theorem"
+      ],
       "related": [],
-      "cross_links": ["math.calc.power-series"],
-      "description": "∑aₙ(z−z₀)ⁿ converges absolutely in |z−z₀|<R (radius of convergence, R from Hadamard formula). Holomorphic functions are locally equal to their Taylor series. Ratio/root tests work in ℂ as in ℝ.",
+      "cross_links": [
+        "math.calc.power-series"
+      ],
+      "description": "\u2211a\u2099(z\u2212z\u2080)\u207f converges absolutely in |z\u2212z\u2080|<R (radius of convergence, R from Hadamard formula). Holomorphic functions are locally equal to their Taylor series. Ratio/root tests work in \u2102 as in \u211d.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §5.1; Stein & Shakarchi, Complex Analysis, Ch.2"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.1; Stein & Shakarchi, Complex Analysis, Ch.2"
+      ]
     },
     {
       "id": "math.cx.complex-integration",
       "name": "Complex Line Integral",
-      "aliases": ["contour integral", "path integral in ℂ", "∮_C f(z)dz"],
+      "aliases": [
+        "contour integral",
+        "path integral in \u2102",
+        "\u222e_C f(z)dz"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.analytic-functions", "math.calc.line-integrals"],
-      "unlocks": ["math.cx.cauchy-theorem"],
+      "requires": [
+        "math.cx.analytic-functions",
+        "math.calc.line-integrals"
+      ],
+      "unlocks": [
+        "math.cx.cauchy-theorem"
+      ],
       "related": [],
-      "cross_links": ["math.calc.line-integrals"],
-      "description": "∫_C f(z)dz = ∫_a^b f(γ(t))γ′(t)dt for a piecewise C¹ curve γ:[a,b]→ℂ. Satisfies linearity and reversal of path. Estimation lemma: |∫_C f dz| ≤ max|f|·length(C).",
+      "cross_links": [
+        "math.calc.line-integrals"
+      ],
+      "description": "\u222b_C f(z)dz = \u222b_a^b f(\u03b3(t))\u03b3\u2032(t)dt for a piecewise C\u00b9 curve \u03b3:[a,b]\u2192\u2102. Satisfies linearity and reversal of path. Estimation lemma: |\u222b_C f dz| \u2264 max|f|\u00b7length(C).",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, Ch.4; Stein & Shakarchi, Complex Analysis, Ch.1"]
+      "references": [
+        "Ahlfors, Complex Analysis, Ch.4; Stein & Shakarchi, Complex Analysis, Ch.1"
+      ]
     },
     {
       "id": "math.cx.cauchy-theorem",
       "name": "Cauchy's Theorem",
-      "aliases": ["Cauchy integral theorem", "Goursat theorem"],
+      "aliases": [
+        "Cauchy integral theorem",
+        "Goursat theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.complex-integration"],
-      "unlocks": ["math.cx.cauchy-integral-formula", "math.cx.cauchy-goursat"],
+      "requires": [
+        "math.cx.complex-integration"
+      ],
+      "unlocks": [
+        "math.cx.cauchy-integral-formula",
+        "math.cx.cauchy-goursat"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "If f is holomorphic on a simply connected domain D, then ∮_C f(z)dz = 0 for every closed curve C in D. Equivalently, the integral is path-independent. Proved via Green's theorem (with Goursat's refinement removing differentiability assumption on f′).",
+      "description": "If f is holomorphic on a simply connected domain D, then \u222e_C f(z)dz = 0 for every closed curve C in D. Equivalently, the integral is path-independent. Proved via Green's theorem (with Goursat's refinement removing differentiability assumption on f\u2032).",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §4.2; Stein & Shakarchi, Complex Analysis, Ch.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a74.2; Stein & Shakarchi, Complex Analysis, Ch.2"
+      ]
     },
     {
       "id": "math.cx.cauchy-goursat",
       "name": "Cauchy-Goursat Theorem",
-      "aliases": ["Goursat theorem"],
+      "aliases": [
+        "Goursat theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.cauchy-theorem"],
+      "requires": [
+        "math.cx.cauchy-theorem"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Goursat's key insight: Cauchy's theorem holds without assuming f′ is continuous (only that f′ exists). The proof triangulates the region and uses a delicate estimation argument. This makes the theorem apply to all holomorphic functions.",
+      "description": "Goursat's key insight: Cauchy's theorem holds without assuming f\u2032 is continuous (only that f\u2032 exists). The proof triangulates the region and uses a delicate estimation argument. This makes the theorem apply to all holomorphic functions.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Ahlfors, Complex Analysis, §4.2"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a74.2"
+      ]
     },
     {
       "id": "math.cx.cauchy-integral-formula",
       "name": "Cauchy Integral Formula",
-      "aliases": ["CIF"],
+      "aliases": [
+        "CIF"
+      ],
       "parent": null,
-      "children": ["math.cx.higher-derivatives", "math.cx.morera-theorem"],
-      "requires": ["math.cx.cauchy-theorem"],
-      "unlocks": ["math.cx.higher-derivatives"],
+      "children": [
+        "math.cx.higher-derivatives",
+        "math.cx.morera-theorem"
+      ],
+      "requires": [
+        "math.cx.cauchy-theorem"
+      ],
+      "unlocks": [
+        "math.cx.higher-derivatives"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "If f is holomorphic on and inside a simple closed curve C, then f(z₀) = (1/2πi)∮_C f(z)/(z−z₀)dz for z₀ inside C. Recovers function values from boundary values. Foundation of all deeper complex analysis.",
+      "description": "If f is holomorphic on and inside a simple closed curve C, then f(z\u2080) = (1/2\u03c0i)\u222e_C f(z)/(z\u2212z\u2080)dz for z\u2080 inside C. Recovers function values from boundary values. Foundation of all deeper complex analysis.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §4.2; Stein & Shakarchi, Complex Analysis, Ch.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a74.2; Stein & Shakarchi, Complex Analysis, Ch.2"
+      ]
     },
     {
       "id": "math.cx.higher-derivatives",
       "name": "Derivatives of Holomorphic Functions",
-      "aliases": ["holomorphic implies C-infinity"],
+      "aliases": [
+        "holomorphic implies C-infinity"
+      ],
       "parent": "math.cx.cauchy-integral-formula",
       "children": [],
-      "requires": ["math.cx.cauchy-integral-formula"],
+      "requires": [
+        "math.cx.cauchy-integral-formula"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Every holomorphic function has derivatives of all orders: f^{(n)}(z₀) = (n!/2πi) ∮_C f(z)/(z−z₀)^{n+1} dz. Cauchy's inequality: |f^{(n)}(z₀)| ≤ n!M/Rⁿ for |f|≤M on |z−z₀|=R.",
+      "description": "Every holomorphic function has derivatives of all orders: f^{(n)}(z\u2080) = (n!/2\u03c0i) \u222e_C f(z)/(z\u2212z\u2080)^{n+1} dz. Cauchy's inequality: |f^{(n)}(z\u2080)| \u2264 n!M/R\u207f for |f|\u2264M on |z\u2212z\u2080|=R.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §4.2"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a74.2"
+      ]
     },
     {
       "id": "math.cx.morera-theorem",
       "name": "Morera's Theorem",
-      "aliases": ["Morera's theorem"],
+      "aliases": [
+        "Morera's theorem"
+      ],
       "parent": "math.cx.cauchy-integral-formula",
       "children": [],
-      "requires": ["math.cx.cauchy-integral-formula"],
+      "requires": [
+        "math.cx.cauchy-integral-formula"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Converse of Cauchy's theorem: if f is continuous on a domain D and ∮_T f dz=0 for every triangle T⊂D, then f is holomorphic on D. Used to prove holomorphicity without computing derivatives directly.",
+      "description": "Converse of Cauchy's theorem: if f is continuous on a domain D and \u222e_T f dz=0 for every triangle T\u2282D, then f is holomorphic on D. Used to prove holomorphicity without computing derivatives directly.",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Ahlfors, Complex Analysis, §4.3"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a74.3"
+      ]
     },
     {
       "id": "math.cx.liouville-theorem",
       "name": "Liouville's Theorem",
-      "aliases": ["Liouville theorem"],
+      "aliases": [
+        "Liouville theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.higher-derivatives"],
-      "unlocks": ["math.cx.fundamental-theorem-algebra"],
+      "requires": [
+        "math.cx.higher-derivatives"
+      ],
+      "unlocks": [
+        "math.cx.fundamental-theorem-algebra"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Every bounded entire function is constant. Proof: Cauchy's inequality gives f′(z)=0 everywhere for bounded entire f. Sharp contrast with real analysis where bounded non-constant entire functions exist (sin, cos — but not entire on ℝ without analogy).",
+      "description": "Every bounded entire function is constant. Proof: Cauchy's inequality gives f\u2032(z)=0 everywhere for bounded entire f. Sharp contrast with real analysis where bounded non-constant entire functions exist (sin, cos \u2014 but not entire on \u211d without analogy).",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §4.3; Stein & Shakarchi, Complex Analysis, Ch.2"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a74.3; Stein & Shakarchi, Complex Analysis, Ch.2"
+      ]
     },
     {
       "id": "math.cx.fundamental-theorem-algebra",
       "name": "Fundamental Theorem of Algebra (Complex Analysis)",
-      "aliases": ["FTA"],
+      "aliases": [
+        "FTA"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.liouville-theorem"],
+      "requires": [
+        "math.cx.liouville-theorem"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.alg.fundamental-theorem-algebra"],
-      "description": "Every non-constant polynomial with complex coefficients has at least one complex root. Proof via Liouville: if p(z)≠0 everywhere, 1/p is bounded entire, hence constant. Iterating: p has exactly n roots (counted with multiplicity).",
+      "cross_links": [
+        "math.alg.fundamental-theorem-algebra"
+      ],
+      "description": "Every non-constant polynomial with complex coefficients has at least one complex root. Proof via Liouville: if p(z)\u22600 everywhere, 1/p is bounded entire, hence constant. Iterating: p has exactly n roots (counted with multiplicity).",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §5.2"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.2"
+      ]
     },
     {
       "id": "math.cx.identity-theorem",
       "name": "Identity Theorem",
-      "aliases": ["principle of analytic continuation"],
+      "aliases": [
+        "principle of analytic continuation"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.power-series-cx"],
-      "unlocks": ["math.cx.analytic-continuation"],
+      "requires": [
+        "math.cx.power-series-cx"
+      ],
+      "unlocks": [
+        "math.cx.analytic-continuation"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "If f,g are holomorphic on a connected domain D and f=g on a set with a limit point in D, then f≡g on D. Consequence: a holomorphic function is completely determined by its values on any set with a limit point.",
+      "description": "If f,g are holomorphic on a connected domain D and f=g on a set with a limit point in D, then f\u2261g on D. Consequence: a holomorphic function is completely determined by its values on any set with a limit point.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §5.1"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.1"
+      ]
     },
     {
       "id": "math.cx.analytic-continuation",
       "name": "Analytic Continuation",
-      "aliases": ["holomorphic continuation", "Riemann zeta analytic continuation"],
+      "aliases": [
+        "holomorphic continuation",
+        "Riemann zeta analytic continuation"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.identity-theorem"],
+      "requires": [
+        "math.cx.identity-theorem"
+      ],
       "unlocks": [],
-      "related": ["math.cx.riemann-surface"],
+      "related": [
+        "math.cx.riemann-surface"
+      ],
       "cross_links": [],
-      "description": "Extending a holomorphic function beyond its original domain of definition by matching power series on overlapping regions. The continuation is unique (identity theorem). Used to define log z, z^α, and the Riemann zeta function on all of ℂ.",
+      "description": "Extending a holomorphic function beyond its original domain of definition by matching power series on overlapping regions. The continuation is unique (identity theorem). Used to define log z, z^\u03b1, and the Riemann zeta function on all of \u2102.",
       "difficulty": "research",
       "estimated_hours": 7,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["Ahlfors, Complex Analysis, §8.1"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a78.1"
+      ]
     },
     {
       "id": "math.cx.singularities",
       "name": "Singularities",
-      "aliases": ["isolated singularity", "removable singularity", "pole", "essential singularity"],
+      "aliases": [
+        "isolated singularity",
+        "removable singularity",
+        "pole",
+        "essential singularity"
+      ],
       "parent": null,
-      "children": ["math.cx.poles", "math.cx.essential-singularity"],
-      "requires": ["math.cx.analytic-functions"],
-      "unlocks": ["math.cx.laurent-series", "math.cx.residue-theorem"],
+      "children": [
+        "math.cx.poles",
+        "math.cx.essential-singularity"
+      ],
+      "requires": [
+        "math.cx.analytic-functions"
+      ],
+      "unlocks": [
+        "math.cx.laurent-series",
+        "math.cx.residue-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Isolated singularity z₀: f holomorphic in 0<|z−z₀|<r. Types: removable (f bounded near z₀), pole (|f|→∞), essential (neither). Riemann's theorem: removable singularity iff bounded near z₀.",
+      "description": "Isolated singularity z\u2080: f holomorphic in 0<|z\u2212z\u2080|<r. Types: removable (f bounded near z\u2080), pole (|f|\u2192\u221e), essential (neither). Riemann's theorem: removable singularity iff bounded near z\u2080.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "analyze",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §5.1; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.1; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.poles",
       "name": "Poles and Meromorphic Functions",
-      "aliases": ["pole of order n", "meromorphic"],
+      "aliases": [
+        "pole of order n",
+        "meromorphic"
+      ],
       "parent": "math.cx.singularities",
       "children": [],
-      "requires": ["math.cx.singularities"],
-      "unlocks": ["math.cx.residue-theorem"],
+      "requires": [
+        "math.cx.singularities"
+      ],
+      "unlocks": [
+        "math.cx.residue-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "f has a pole of order n at z₀ iff (z−z₀)ⁿf(z) is holomorphic and non-zero at z₀. Meromorphic function: holomorphic except at isolated poles. Meromorphic on ℂ with singularity at ∞ is a rational function.",
+      "description": "f has a pole of order n at z\u2080 iff (z\u2212z\u2080)\u207ff(z) is holomorphic and non-zero at z\u2080. Meromorphic function: holomorphic except at isolated poles. Meromorphic on \u2102 with singularity at \u221e is a rational function.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §5.2"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.2"
+      ]
     },
     {
       "id": "math.cx.essential-singularity",
       "name": "Essential Singularity",
-      "aliases": ["Picard's theorem", "Casorati-Weierstrass"],
+      "aliases": [
+        "Picard's theorem",
+        "Casorati-Weierstrass"
+      ],
       "parent": "math.cx.singularities",
       "children": [],
-      "requires": ["math.cx.singularities"],
+      "requires": [
+        "math.cx.singularities"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -325,212 +511,322 @@
       "difficulty": "research",
       "estimated_hours": 5,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["Ahlfors, Complex Analysis, §5.3; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.3; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.laurent-series",
       "name": "Laurent Series",
-      "aliases": ["Laurent expansion"],
+      "aliases": [
+        "Laurent expansion"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.singularities", "math.cx.power-series-cx"],
-      "unlocks": ["math.cx.residue-theorem"],
+      "requires": [
+        "math.cx.singularities",
+        "math.cx.power-series-cx"
+      ],
+      "unlocks": [
+        "math.cx.residue-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "In the annulus r<|z−z₀|<R: f(z) = ∑_{n=−∞}^∞ aₙ(z−z₀)ⁿ. Principal part: terms with n<0. aₙ = (1/2πi)∮_C f(z)/(z−z₀)^{n+1}dz. Classifies singularities: finite/zero/infinite principal part ↔ removable/pole/essential.",
+      "description": "In the annulus r<|z\u2212z\u2080|<R: f(z) = \u2211_{n=\u2212\u221e}^\u221e a\u2099(z\u2212z\u2080)\u207f. Principal part: terms with n<0. a\u2099 = (1/2\u03c0i)\u222e_C f(z)/(z\u2212z\u2080)^{n+1}dz. Classifies singularities: finite/zero/infinite principal part \u2194 removable/pole/essential.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §5.1; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.1; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.residue",
       "name": "Residue",
-      "aliases": ["Res(f,z₀)", "residue of f at pole"],
+      "aliases": [
+        "Res(f,z\u2080)",
+        "residue of f at pole"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.laurent-series"],
-      "unlocks": ["math.cx.residue-theorem"],
+      "requires": [
+        "math.cx.laurent-series"
+      ],
+      "unlocks": [
+        "math.cx.residue-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Res(f,z₀) = a₋₁ in the Laurent expansion. For a simple pole: Res(f,z₀) = lim_{z→z₀}(z−z₀)f(z). For order-n pole: Res(f,z₀) = (1/(n−1)!) lim_{z→z₀} d^{n-1}/dz^{n-1}[(z−z₀)ⁿf(z)].",
+      "description": "Res(f,z\u2080) = a\u208b\u2081 in the Laurent expansion. For a simple pole: Res(f,z\u2080) = lim_{z\u2192z\u2080}(z\u2212z\u2080)f(z). For order-n pole: Res(f,z\u2080) = (1/(n\u22121)!) lim_{z\u2192z\u2080} d^{n-1}/dz^{n-1}[(z\u2212z\u2080)\u207ff(z)].",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §5.2; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.2; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.residue-theorem",
       "name": "Residue Theorem",
-      "aliases": ["Cauchy residue theorem"],
+      "aliases": [
+        "Cauchy residue theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.residue", "math.cx.cauchy-theorem"],
-      "unlocks": ["math.cx.real-integral-residues"],
+      "requires": [
+        "math.cx.residue",
+        "math.cx.cauchy-theorem"
+      ],
+      "unlocks": [
+        "math.cx.real-integral-residues"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "∮_C f(z)dz = 2πi ∑ Res(f,zₖ) (sum over poles inside C). Generalizes Cauchy's theorem (no poles) and integral formula (simple pole at z₀). The most powerful computational tool in complex analysis.",
+      "description": "\u222e_C f(z)dz = 2\u03c0i \u2211 Res(f,z\u2096) (sum over poles inside C). Generalizes Cauchy's theorem (no poles) and integral formula (simple pole at z\u2080). The most powerful computational tool in complex analysis.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["Ahlfors, Complex Analysis, §5.2; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.2; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.real-integral-residues",
       "name": "Evaluating Real Integrals via Residues",
-      "aliases": ["contour integration", "improper integral via residues"],
+      "aliases": [
+        "contour integration",
+        "improper integral via residues"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.residue-theorem"],
+      "requires": [
+        "math.cx.residue-theorem"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.calc.improper-integrals"],
-      "description": "Techniques for computing real integrals ∫_{-∞}^∞ f(x)dx by extending to a closed contour in ℂ and applying the residue theorem. Jordan's lemma handles exponential factors. Enables evaluation of Gaussian, sinc, and other integrals.",
+      "cross_links": [
+        "math.calc.improper-integrals"
+      ],
+      "description": "Techniques for computing real integrals \u222b_{-\u221e}^\u221e f(x)dx by extending to a closed contour in \u2102 and applying the residue theorem. Jordan's lemma handles exponential factors. Enables evaluation of Gaussian, sinc, and other integrals.",
       "difficulty": "expert",
       "estimated_hours": 7,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Stein & Shakarchi, Complex Analysis, Ch.3; Ahlfors, Complex Analysis, §5.3"]
+      "references": [
+        "Stein & Shakarchi, Complex Analysis, Ch.3; Ahlfors, Complex Analysis, \u00a75.3"
+      ]
     },
     {
       "id": "math.cx.maximum-modulus",
       "name": "Maximum Modulus Principle",
-      "aliases": ["maximum principle", "minimum modulus principle"],
+      "aliases": [
+        "maximum principle",
+        "minimum modulus principle"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.analytic-functions", "math.cx.cauchy-integral-formula"],
+      "requires": [
+        "math.cx.analytic-functions",
+        "math.cx.cauchy-integral-formula"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.de.harmonic-functions"],
-      "description": "If f is holomorphic on a bounded domain D and continuous on D̄, then |f| attains its maximum on the boundary ∂D. Non-constant holomorphic function has no interior maximum. Equivalent to: |f| is subharmonic.",
+      "cross_links": [
+        "math.de.harmonic-functions"
+      ],
+      "description": "If f is holomorphic on a bounded domain D and continuous on D\u0304, then |f| attains its maximum on the boundary \u2202D. Non-constant holomorphic function has no interior maximum. Equivalent to: |f| is subharmonic.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Ahlfors, Complex Analysis, §6.1; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a76.1; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.conformal-mapping",
       "name": "Conformal Mapping",
-      "aliases": ["conformal map", "biholomorphism", "angle-preserving"],
+      "aliases": [
+        "conformal map",
+        "biholomorphism",
+        "angle-preserving"
+      ],
       "parent": null,
-      "children": ["math.cx.mobius-transformation"],
-      "requires": ["math.cx.analytic-functions"],
-      "unlocks": ["math.cx.riemann-mapping"],
+      "children": [
+        "math.cx.mobius-transformation"
+      ],
+      "requires": [
+        "math.cx.analytic-functions"
+      ],
+      "unlocks": [
+        "math.cx.riemann-mapping"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A holomorphic bijection is conformal (angle-preserving) wherever f′≠0. The Jacobian of a conformal map is a rotation-dilation matrix. Used to map complicated domains to simpler ones (disc, upper half-plane) for PDE applications.",
+      "description": "A holomorphic bijection is conformal (angle-preserving) wherever f\u2032\u22600. The Jacobian of a conformal map is a rotation-dilation matrix. Used to map complicated domains to simpler ones (disc, upper half-plane) for PDE applications.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Ahlfors, Complex Analysis, Ch.6; Stein & Shakarchi, Complex Analysis, Ch.8"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Ahlfors, Complex Analysis, Ch.6; Stein & Shakarchi, Complex Analysis, Ch.8"
+      ]
     },
     {
       "id": "math.cx.mobius-transformation",
-      "name": "Möbius Transformation",
-      "aliases": ["linear fractional transformation", "bilinear map", "az+b/cz+d"],
+      "name": "M\u00f6bius Transformation",
+      "aliases": [
+        "linear fractional transformation",
+        "bilinear map",
+        "az+b/cz+d"
+      ],
       "parent": "math.cx.conformal-mapping",
       "children": [],
-      "requires": ["math.cx.conformal-mapping"],
+      "requires": [
+        "math.cx.conformal-mapping"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "f(z) = (az+b)/(cz+d) with ad−bc≠0. Maps circles and lines to circles and lines. Three parameters determine a Möbius transformation (three-point normalization). Forms the group PGL(2,ℂ). Unique map sending three prescribed points to three others.",
+      "description": "f(z) = (az+b)/(cz+d) with ad\u2212bc\u22600. Maps circles and lines to circles and lines. Three parameters determine a M\u00f6bius transformation (three-point normalization). Forms the group PGL(2,\u2102). Unique map sending three prescribed points to three others.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Ahlfors, Complex Analysis, §3.3"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a73.3"
+      ]
     },
     {
       "id": "math.cx.riemann-mapping",
       "name": "Riemann Mapping Theorem",
-      "aliases": ["Riemann mapping theorem"],
+      "aliases": [
+        "Riemann mapping theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.conformal-mapping"],
+      "requires": [
+        "math.cx.conformal-mapping"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Every simply connected proper open subset of ℂ is biholomorphic to the unit disc. The map is unique up to a Möbius transformation of the disc. Proved using normal families and Montel's theorem.",
+      "description": "Every simply connected proper open subset of \u2102 is biholomorphic to the unit disc. The map is unique up to a M\u00f6bius transformation of the disc. Proved using normal families and Montel's theorem.",
       "difficulty": "research",
       "estimated_hours": 8,
       "bloom": "analyze",
       "mastery_threshold": 0.65,
-      "references": ["Ahlfors, Complex Analysis, §6.1; Stein & Shakarchi, Complex Analysis, Ch.8"]
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a76.1; Stein & Shakarchi, Complex Analysis, Ch.8"
+      ]
     },
     {
       "id": "math.cx.argument-principle",
       "name": "Argument Principle",
-      "aliases": ["argument principle", "winding number"],
+      "aliases": [
+        "argument principle",
+        "winding number"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.residue-theorem"],
-      "unlocks": ["math.cx.rouche-theorem"],
+      "requires": [
+        "math.cx.residue-theorem"
+      ],
+      "unlocks": [
+        "math.cx.rouche-theorem"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "(1/2πi)∮_C f′(z)/f(z)dz = Z−P, where Z and P are the numbers of zeros and poles inside C (counted with multiplicity). The integral counts the winding number of f around 0.",
+      "description": "(1/2\u03c0i)\u222e_C f\u2032(z)/f(z)dz = Z\u2212P, where Z and P are the numbers of zeros and poles inside C (counted with multiplicity). The integral counts the winding number of f around 0.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Ahlfors, Complex Analysis, §5.2; Stein & Shakarchi, Complex Analysis, Ch.3"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.2; Stein & Shakarchi, Complex Analysis, Ch.3"
+      ]
     },
     {
       "id": "math.cx.rouche-theorem",
-      "name": "Rouché's Theorem",
-      "aliases": ["Rouche theorem"],
+      "name": "Rouch\u00e9's Theorem",
+      "aliases": [
+        "Rouche theorem"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.argument-principle"],
+      "requires": [
+        "math.cx.argument-principle"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "If |f(z)−g(z)|<|g(z)| on a simple closed contour C, then f and g have the same number of zeros inside C. Used to count zeros of polynomials and prove FTA. Easy to apply when the dominant term is clear.",
+      "description": "If |f(z)\u2212g(z)|<|g(z)| on a simple closed contour C, then f and g have the same number of zeros inside C. Used to count zeros of polynomials and prove FTA. Easy to apply when the dominant term is clear.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Ahlfors, Complex Analysis, §5.2"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Ahlfors, Complex Analysis, \u00a75.2"
+      ]
     },
     {
       "id": "math.cx.riemann-surface",
       "name": "Riemann Surface",
-      "aliases": ["Riemann surface", "branching point", "covering surface"],
+      "aliases": [
+        "Riemann surface",
+        "branching point",
+        "covering surface"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.analytic-continuation", "math.top.topological-space"],
+      "requires": [
+        "math.cx.analytic-continuation",
+        "math.top.topological-space"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.top.covering-space"],
-      "description": "A one-dimensional complex manifold; the natural domain for multivalued functions like log z and √z. Riemann surface of log z is an infinite-sheeted helical cover of ℂ\\ {0}. Compact Riemann surfaces classified by genus.",
+      "cross_links": [
+        "math.top.covering-space"
+      ],
+      "description": "A one-dimensional complex manifold; the natural domain for multivalued functions like log z and \u221az. Riemann surface of log z is an infinite-sheeted helical cover of \u2102\\ {0}. Compact Riemann surfaces classified by genus.",
       "difficulty": "research",
       "estimated_hours": 10,
       "bloom": "analyze",
       "mastery_threshold": 0.55,
-      "references": ["Ahlfors, Complex Analysis, Ch.8; Miranda, Algebraic Curves and Riemann Surfaces"]
+      "references": [
+        "Ahlfors, Complex Analysis, Ch.8; Miranda, Algebraic Curves and Riemann Surfaces"
+      ]
     },
     {
       "id": "math.cx.riemann-zeta",
       "name": "Riemann Zeta Function",
-      "aliases": ["ζ(s)", "Riemann zeta"],
+      "aliases": [
+        "\u03b6(s)",
+        "Riemann zeta"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.cx.analytic-continuation", "math.nt.prime-distribution"],
+      "requires": [
+        "math.cx.analytic-continuation",
+        "math.nt.prime-distribution"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.nt.riemann-hypothesis"],
-      "description": "ζ(s) = ∑n^{-s} for Re(s)>1; analytically continued to ℂ with a single simple pole at s=1. Functional equation: ξ(s)=ξ(1−s). Nontrivial zeros: all known have Re(s)=1/2 (Riemann Hypothesis). Encodes distribution of primes via Euler product.",
+      "cross_links": [
+        "math.nt.riemann-hypothesis"
+      ],
+      "description": "\u03b6(s) = \u2211n^{-s} for Re(s)>1; analytically continued to \u2102 with a single simple pole at s=1. Functional equation: \u03be(s)=\u03be(1\u2212s). Nontrivial zeros: all known have Re(s)=1/2 (Riemann Hypothesis). Encodes distribution of primes via Euler product.",
       "difficulty": "research",
       "estimated_hours": 10,
       "bloom": "analyze",
-      "mastery_threshold": 0.50,
-      "references": ["Davenport, Multiplicative Number Theory; Stein & Shakarchi, Complex Analysis, Ch.6"]
+      "mastery_threshold": 0.5,
+      "references": [
+        "Davenport, Multiplicative Number Theory; Stein & Shakarchi, Complex Analysis, Ch.6"
+      ]
     }
   ]
 }

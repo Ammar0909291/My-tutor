@@ -2,135 +2,221 @@
   "domain_id": "topology",
   "domain_name": "Topology",
   "id_prefix": "math.top",
-  "level_range": [5, 7],
+  "level_range": [
+    5,
+    7
+  ],
   "description": "The study of properties preserved under continuous deformations. Encompasses point-set topology (open sets, convergence, compactness) and algebraic topology (fundamental group, homology, homotopy).",
   "concepts": [
     {
       "id": "math.top.topological-space",
       "name": "Topological Space",
-      "aliases": ["topology", "(X,τ)"],
+      "aliases": [
+        "topology",
+        "(X,\u03c4)"
+      ],
       "parent": null,
-      "children": ["math.top.open-sets", "math.top.basis"],
-      "requires": ["math.found.set-theory"],
-      "unlocks": ["math.top.open-sets", "math.top.continuity-top"],
+      "children": [
+        "math.top.open-sets",
+        "math.top.basis"
+      ],
+      "requires": [
+        "math.found.set-theory"
+      ],
+      "unlocks": [
+        "math.top.open-sets",
+        "math.top.continuity-top"
+      ],
       "related": [],
-      "cross_links": ["math.real.metric-space"],
-      "description": "A set X with a collection τ of subsets (open sets) satisfying: ∅,X∈τ; arbitrary unions of open sets are open; finite intersections of open sets are open. Generalizes the notion of 'neighborhood' beyond metric spaces.",
+      "cross_links": [
+        "math.real.metric-space"
+      ],
+      "description": "A set X with a collection \u03c4 of subsets (open sets) satisfying: \u2205,X\u2208\u03c4; arbitrary unions of open sets are open; finite intersections of open sets are open. Generalizes the notion of 'neighborhood' beyond metric spaces.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, Ch.2; Armstrong, Basic Topology, Ch.1"]
+      "references": [
+        "Munkres, Topology, Ch.2; Armstrong, Basic Topology, Ch.1"
+      ]
     },
     {
       "id": "math.top.open-sets",
       "name": "Open and Closed Sets (Topology)",
-      "aliases": ["open set", "closed set", "topology axioms"],
+      "aliases": [
+        "open set",
+        "closed set",
+        "topology axioms"
+      ],
       "parent": "math.top.topological-space",
       "children": [],
-      "requires": ["math.top.topological-space"],
-      "unlocks": ["math.top.interior-closure", "math.top.connectedness"],
+      "requires": [
+        "math.top.topological-space"
+      ],
+      "unlocks": [
+        "math.top.interior-closure",
+        "math.top.connectedness"
+      ],
       "related": [],
-      "cross_links": ["math.real.open-sets"],
-      "description": "Open sets: elements of τ. Closed sets: complements of open sets. Interior int(A): largest open set in A. Closure cl(A): smallest closed set containing A. Boundary ∂A = cl(A)∩cl(Aᶜ).",
+      "cross_links": [
+        "math.real.open-sets"
+      ],
+      "description": "Open sets: elements of \u03c4. Closed sets: complements of open sets. Interior int(A): largest open set in A. Closure cl(A): smallest closed set containing A. Boundary \u2202A = cl(A)\u2229cl(A\u1d9c).",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Munkres, Topology, §2.1"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Munkres, Topology, \u00a72.1"
+      ]
     },
     {
       "id": "math.top.interior-closure",
       "name": "Interior, Closure, and Boundary",
-      "aliases": ["interior", "closure", "boundary", "dense set"],
+      "aliases": [
+        "interior",
+        "closure",
+        "boundary",
+        "dense set"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.open-sets"],
+      "requires": [
+        "math.top.open-sets"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "int(A) = largest open subset of A. cl(A) = smallest closed set containing A. ∂A = cl(A)\\int(A). Dense: cl(A)=X. Nowhere dense: int(cl(A))=∅. These operations characterize the topology.",
+      "description": "int(A) = largest open subset of A. cl(A) = smallest closed set containing A. \u2202A = cl(A)\\int(A). Dense: cl(A)=X. Nowhere dense: int(cl(A))=\u2205. These operations characterize the topology.",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, §2.2"]
+      "references": [
+        "Munkres, Topology, \u00a72.2"
+      ]
     },
     {
       "id": "math.top.basis",
       "name": "Basis for a Topology",
-      "aliases": ["topological basis", "base"],
+      "aliases": [
+        "topological basis",
+        "base"
+      ],
       "parent": "math.top.topological-space",
       "children": [],
-      "requires": ["math.top.topological-space"],
+      "requires": [
+        "math.top.topological-space"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "A collection ℬ of open sets such that every open set is a union of elements of ℬ. Example: open balls in a metric space form a basis. The order topology on ℝ uses open intervals as a basis. Second-countable: has a countable basis.",
+      "description": "A collection \u212c of open sets such that every open set is a union of elements of \u212c. Example: open balls in a metric space form a basis. The order topology on \u211d uses open intervals as a basis. Second-countable: has a countable basis.",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, §2.2"]
+      "references": [
+        "Munkres, Topology, \u00a72.2"
+      ]
     },
     {
       "id": "math.top.continuity-top",
       "name": "Continuity (Topology)",
-      "aliases": ["continuous map", "homeomorphism"],
+      "aliases": [
+        "continuous map",
+        "homeomorphism"
+      ],
       "parent": null,
-      "children": ["math.top.homeomorphism"],
-      "requires": ["math.top.topological-space"],
-      "unlocks": ["math.top.homeomorphism"],
+      "children": [
+        "math.top.homeomorphism"
+      ],
+      "requires": [
+        "math.top.topological-space"
+      ],
+      "unlocks": [
+        "math.top.homeomorphism"
+      ],
       "related": [],
-      "cross_links": ["math.real.continuity-rigorous"],
-      "description": "f:X→Y is continuous iff f⁻¹(V) is open in X for every open V in Y. Equivalent (for metric spaces) to the ε-δ definition. Composition of continuous maps is continuous. Continuity is a topological property.",
+      "cross_links": [
+        "math.real.continuity-rigorous"
+      ],
+      "description": "f:X\u2192Y is continuous iff f\u207b\u00b9(V) is open in X for every open V in Y. Equivalent (for metric spaces) to the \u03b5-\u03b4 definition. Composition of continuous maps is continuous. Continuity is a topological property.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Munkres, Topology, §2.4"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Munkres, Topology, \u00a72.4"
+      ]
     },
     {
       "id": "math.top.homeomorphism",
       "name": "Homeomorphism",
-      "aliases": ["topologically equivalent", "homeomorphic spaces"],
+      "aliases": [
+        "topologically equivalent",
+        "homeomorphic spaces"
+      ],
       "parent": "math.top.continuity-top",
       "children": [],
-      "requires": ["math.top.continuity-top"],
+      "requires": [
+        "math.top.continuity-top"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "A continuous bijection f:X→Y with continuous inverse. Homeomorphic spaces are topologically identical. Topological properties (compactness, connectedness, genus) are homeomorphism invariants. Classic examples: torus ≇ sphere; coffee cup ≅ donut.",
+      "description": "A continuous bijection f:X\u2192Y with continuous inverse. Homeomorphic spaces are topologically identical. Topological properties (compactness, connectedness, genus) are homeomorphism invariants. Classic examples: torus \u2247 sphere; coffee cup \u2245 donut.",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, §2.4; Armstrong, Basic Topology, Ch.3"]
+      "references": [
+        "Munkres, Topology, \u00a72.4; Armstrong, Basic Topology, Ch.3"
+      ]
     },
     {
       "id": "math.top.compactness",
       "name": "Compactness (Topology)",
-      "aliases": ["compact space", "finite subcover"],
+      "aliases": [
+        "compact space",
+        "finite subcover"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.topological-space"],
-      "unlocks": ["math.top.tychonoff"],
-      "related": ["math.top.connectedness"],
-      "cross_links": ["math.real.compactness"],
+      "requires": [
+        "math.top.topological-space"
+      ],
+      "unlocks": [
+        "math.top.tychonoff"
+      ],
+      "related": [
+        "math.top.connectedness"
+      ],
+      "cross_links": [
+        "math.real.compactness"
+      ],
       "description": "A space X is compact if every open cover has a finite subcover. Key properties: closed subsets of compact spaces are compact; continuous image of compact space is compact; compact Hausdorff spaces are normal. Extends Heine-Borel to abstract settings.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, Ch.3"]
+      "references": [
+        "Munkres, Topology, Ch.3"
+      ]
     },
     {
       "id": "math.top.tychonoff",
       "name": "Tychonoff's Theorem",
-      "aliases": ["Tychonoff theorem", "product of compact spaces"],
+      "aliases": [
+        "Tychonoff theorem",
+        "product of compact spaces"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.compactness", "math.found.axiom-of-choice"],
+      "requires": [
+        "math.top.compactness",
+        "math.found.set-theory-axiomatic"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -138,263 +224,419 @@
       "difficulty": "research",
       "estimated_hours": 6,
       "bloom": "understand",
-      "mastery_threshold": 0.70,
-      "references": ["Munkres, Topology, §5.1"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "Munkres, Topology, \u00a75.1"
+      ]
     },
     {
       "id": "math.top.connectedness",
       "name": "Connectedness (Topology)",
-      "aliases": ["connected space", "path-connected", "locally connected"],
+      "aliases": [
+        "connected space",
+        "path-connected",
+        "locally connected"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.topological-space"],
+      "requires": [
+        "math.top.topological-space"
+      ],
       "unlocks": [],
-      "related": ["math.top.compactness"],
-      "cross_links": ["math.real.connectedness"],
-      "description": "X is connected iff it cannot be written as a union of two disjoint non-empty open sets. Path-connected: any two points connected by a path. Path-connected ⟹ connected; converse fails. Components: maximal connected subsets.",
+      "related": [
+        "math.top.compactness"
+      ],
+      "cross_links": [
+        "math.real.connectedness"
+      ],
+      "description": "X is connected iff it cannot be written as a union of two disjoint non-empty open sets. Path-connected: any two points connected by a path. Path-connected \u27f9 connected; converse fails. Components: maximal connected subsets.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, §3.1"]
+      "references": [
+        "Munkres, Topology, \u00a73.1"
+      ]
     },
     {
       "id": "math.top.separation-axioms",
       "name": "Separation Axioms",
-      "aliases": ["T0", "T1", "T2", "Hausdorff", "T3", "T4", "normal space"],
+      "aliases": [
+        "T0",
+        "T1",
+        "T2",
+        "Hausdorff",
+        "T3",
+        "T4",
+        "normal space"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.topological-space"],
+      "requires": [
+        "math.top.topological-space"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Hierarchy: T₀ (topologically distinguishable), T₁ (points closed), T₂=Hausdorff (distinct points have disjoint neighborhoods), T₃=regular, T₄=normal (disjoint closed sets have disjoint open neighborhoods). Urysohn's lemma holds in normal spaces.",
+      "description": "Hierarchy: T\u2080 (topologically distinguishable), T\u2081 (points closed), T\u2082=Hausdorff (distinct points have disjoint neighborhoods), T\u2083=regular, T\u2084=normal (disjoint closed sets have disjoint open neighborhoods). Urysohn's lemma holds in normal spaces.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Munkres, Topology, Ch.3–4"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Munkres, Topology, Ch.3\u20134"
+      ]
     },
     {
       "id": "math.top.quotient-space",
       "name": "Quotient Space",
-      "aliases": ["quotient topology", "identification space"],
+      "aliases": [
+        "quotient topology",
+        "identification space"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.topological-space", "math.found.equivalence-relation"],
+      "requires": [
+        "math.top.topological-space",
+        "math.found.equivalence-relation"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.abst.quotient-group"],
-      "description": "Given f:X→Y, the quotient topology on Y is the finest topology making f continuous. Examples: circle S¹ = [0,1] with endpoints identified; torus = square with edges identified. Constructs new spaces from old by gluing.",
+      "cross_links": [
+        "math.abst.quotient-group"
+      ],
+      "description": "Given f:X\u2192Y, the quotient topology on Y is the finest topology making f continuous. Examples: circle S\u00b9 = [0,1] with endpoints identified; torus = square with edges identified. Constructs new spaces from old by gluing.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Munkres, Topology, §2.7; Hatcher, Algebraic Topology, §0"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Munkres, Topology, \u00a72.7; Hatcher, Algebraic Topology, \u00a70"
+      ]
     },
     {
       "id": "math.top.product-space",
       "name": "Product Topology",
-      "aliases": ["product space", "Cartesian product topology"],
+      "aliases": [
+        "product space",
+        "Cartesian product topology"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.topological-space"],
-      "unlocks": ["math.top.tychonoff"],
+      "requires": [
+        "math.top.topological-space"
+      ],
+      "unlocks": [
+        "math.top.tychonoff"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Product topology on X×Y: subbasis of sets π₁⁻¹(U) and π₂⁻¹(V). Basis: U×V for open U⊆X, V⊆Y. Projections are continuous. Universal property: f:(Z,τ)→X×Y continuous iff each component is continuous.",
+      "description": "Product topology on X\u00d7Y: subbasis of sets \u03c0\u2081\u207b\u00b9(U) and \u03c0\u2082\u207b\u00b9(V). Basis: U\u00d7V for open U\u2286X, V\u2286Y. Projections are continuous. Universal property: f:(Z,\u03c4)\u2192X\u00d7Y continuous iff each component is continuous.",
       "difficulty": "expert",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Munkres, Topology, §2.5"]
+      "references": [
+        "Munkres, Topology, \u00a72.5"
+      ]
     },
     {
       "id": "math.top.homotopy",
       "name": "Homotopy",
-      "aliases": ["homotopy equivalence", "homotopic maps"],
+      "aliases": [
+        "homotopy equivalence",
+        "homotopic maps"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.continuity-top"],
-      "unlocks": ["math.top.fundamental-group", "math.top.homotopy-equivalence"],
+      "requires": [
+        "math.top.continuity-top"
+      ],
+      "unlocks": [
+        "math.top.fundamental-group",
+        "math.top.homotopy-equivalence"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "Two continuous maps f,g:X→Y are homotopic if there exists a continuous H:X×[0,1]→Y with H(x,0)=f(x) and H(x,1)=g(x). Homotopy is an equivalence relation. Fundamental in algebraic topology and classifying spaces.",
+      "description": "Two continuous maps f,g:X\u2192Y are homotopic if there exists a continuous H:X\u00d7[0,1]\u2192Y with H(x,0)=f(x) and H(x,1)=g(x). Homotopy is an equivalence relation. Fundamental in algebraic topology and classifying spaces.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Hatcher, Algebraic Topology, §1.0; Munkres, Topology, Ch.9"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Hatcher, Algebraic Topology, \u00a71.0; Munkres, Topology, Ch.9"
+      ]
     },
     {
       "id": "math.top.homotopy-equivalence",
       "name": "Homotopy Equivalence",
-      "aliases": ["homotopy type", "deformation retract"],
+      "aliases": [
+        "homotopy type",
+        "deformation retract"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.homotopy"],
+      "requires": [
+        "math.top.homotopy"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "X and Y are homotopy equivalent if ∃f:X→Y, g:Y→X with g∘f≃id_X and f∘g≃id_Y. Weaker than homeomorphism. S¹ and ℝ²\\{0} are homotopy equivalent. Homotopy equivalences induce isomorphisms on homotopy and homology groups.",
+      "description": "X and Y are homotopy equivalent if \u2203f:X\u2192Y, g:Y\u2192X with g\u2218f\u2243id_X and f\u2218g\u2243id_Y. Weaker than homeomorphism. S\u00b9 and \u211d\u00b2\\{0} are homotopy equivalent. Homotopy equivalences induce isomorphisms on homotopy and homology groups.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["Hatcher, Algebraic Topology, §0"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Hatcher, Algebraic Topology, \u00a70"
+      ]
     },
     {
       "id": "math.top.fundamental-group",
       "name": "Fundamental Group",
-      "aliases": ["π₁(X,x₀)", "first homotopy group"],
+      "aliases": [
+        "\u03c0\u2081(X,x\u2080)",
+        "first homotopy group"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.homotopy", "math.abst.group-theory"],
-      "unlocks": ["math.top.covering-space", "math.top.van-kampen"],
+      "requires": [
+        "math.top.homotopy",
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.top.covering-space",
+        "math.top.van-kampen"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "π₁(X,x₀) = homotopy classes of loops based at x₀, with concatenation. π₁(S¹)=ℤ; π₁(Sⁿ)=0 for n≥2; π₁(torus)=ℤ². The fundamental group classifies the 'holes' in 1D that loops can detect. Simply connected: π₁={e}.",
+      "description": "\u03c0\u2081(X,x\u2080) = homotopy classes of loops based at x\u2080, with concatenation. \u03c0\u2081(S\u00b9)=\u2124; \u03c0\u2081(S\u207f)=0 for n\u22652; \u03c0\u2081(torus)=\u2124\u00b2. The fundamental group classifies the 'holes' in 1D that loops can detect. Simply connected: \u03c0\u2081={e}.",
       "difficulty": "expert",
       "estimated_hours": 7,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Hatcher, Algebraic Topology, Ch.1; Munkres, Topology, Ch.9"]
+      "references": [
+        "Hatcher, Algebraic Topology, Ch.1; Munkres, Topology, Ch.9"
+      ]
     },
     {
       "id": "math.top.van-kampen",
       "name": "Seifert-van Kampen Theorem",
-      "aliases": ["van Kampen theorem", "pushout of fundamental groups"],
+      "aliases": [
+        "van Kampen theorem",
+        "pushout of fundamental groups"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.fundamental-group"],
+      "requires": [
+        "math.top.fundamental-group"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "If X=U∪V with U,V open and U∩V path-connected, then π₁(X) is the amalgamated free product π₁(U)*_{π₁(U∩V)}π₁(V). Allows computing π₁ of a space from the π₁ of pieces. Computes π₁ of surfaces and CW complexes.",
+      "description": "If X=U\u222aV with U,V open and U\u2229V path-connected, then \u03c0\u2081(X) is the amalgamated free product \u03c0\u2081(U)*_{\u03c0\u2081(U\u2229V)}\u03c0\u2081(V). Allows computing \u03c0\u2081 of a space from the \u03c0\u2081 of pieces. Computes \u03c0\u2081 of surfaces and CW complexes.",
       "difficulty": "research",
       "estimated_hours": 7,
       "bloom": "apply",
       "mastery_threshold": 0.65,
-      "references": ["Hatcher, Algebraic Topology, §1.2"]
+      "references": [
+        "Hatcher, Algebraic Topology, \u00a71.2"
+      ]
     },
     {
       "id": "math.top.covering-space",
       "name": "Covering Space",
-      "aliases": ["covering map", "universal cover"],
+      "aliases": [
+        "covering map",
+        "universal cover"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.fundamental-group"],
+      "requires": [
+        "math.top.fundamental-group"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.cx.riemann-surface"],
-      "description": "p:Ẽ→X is a covering map if every x∈X has an open neighborhood U such that p⁻¹(U) is a disjoint union of homeomorphic copies. Universal cover: simply connected covering space. Galois correspondence: subgroups of π₁(X) ↔ covering spaces.",
+      "cross_links": [
+        "math.cx.riemann-surface"
+      ],
+      "description": "p:\u1ebc\u2192X is a covering map if every x\u2208X has an open neighborhood U such that p\u207b\u00b9(U) is a disjoint union of homeomorphic copies. Universal cover: simply connected covering space. Galois correspondence: subgroups of \u03c0\u2081(X) \u2194 covering spaces.",
       "difficulty": "research",
       "estimated_hours": 7,
       "bloom": "apply",
       "mastery_threshold": 0.65,
-      "references": ["Hatcher, Algebraic Topology, §1.3; Munkres, Topology, Ch.9"]
+      "references": [
+        "Hatcher, Algebraic Topology, \u00a71.3; Munkres, Topology, Ch.9"
+      ]
     },
     {
       "id": "math.top.simplicial-complex",
       "name": "Simplicial Complex",
-      "aliases": ["simplex", "triangulation", "CW complex"],
+      "aliases": [
+        "simplex",
+        "triangulation",
+        "CW complex"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.topological-space"],
-      "unlocks": ["math.top.homology"],
+      "requires": [
+        "math.top.topological-space"
+      ],
+      "unlocks": [
+        "math.top.homology"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A simplicial complex: a collection of simplices (points, edges, triangles, tetrahedra, …) closed under faces. Provides a combinatorial way to study topological spaces. Every compact manifold admits a triangulation.",
+      "description": "A simplicial complex: a collection of simplices (points, edges, triangles, tetrahedra, \u2026) closed under faces. Provides a combinatorial way to study topological spaces. Every compact manifold admits a triangulation.",
       "difficulty": "expert",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.75,
-      "references": ["Hatcher, Algebraic Topology, §2.1; Munkres, Elements of Algebraic Topology"]
+      "references": [
+        "Hatcher, Algebraic Topology, \u00a72.1; Munkres, Elements of Algebraic Topology"
+      ]
     },
     {
       "id": "math.top.homology",
       "name": "Homology",
-      "aliases": ["singular homology", "simplicial homology", "Hₙ(X)"],
+      "aliases": [
+        "singular homology",
+        "simplicial homology",
+        "H\u2099(X)"
+      ],
       "parent": null,
-      "children": ["math.top.euler-characteristic"],
-      "requires": ["math.top.simplicial-complex", "math.abst.group-theory"],
-      "unlocks": ["math.top.euler-characteristic"],
-      "related": ["math.top.cohomology"],
+      "children": [
+        "math.top.euler-characteristic"
+      ],
+      "requires": [
+        "math.top.simplicial-complex",
+        "math.abst.group-theory"
+      ],
+      "unlocks": [
+        "math.top.euler-characteristic"
+      ],
+      "related": [
+        "math.top.cohomology"
+      ],
       "cross_links": [],
-      "description": "Assigns abelian groups Hₙ(X) (n-th homology groups) to topological spaces. H₀: connected components; H₁: loops not bounding discs; H₂: 2D holes. Functorial and homotopy invariant. Computable via simplicial/CW chain complexes.",
+      "description": "Assigns abelian groups H\u2099(X) (n-th homology groups) to topological spaces. H\u2080: connected components; H\u2081: loops not bounding discs; H\u2082: 2D holes. Functorial and homotopy invariant. Computable via simplicial/CW chain complexes.",
       "difficulty": "research",
       "estimated_hours": 10,
       "bloom": "analyze",
-      "mastery_threshold": 0.60,
-      "references": ["Hatcher, Algebraic Topology, Ch.2; Munkres, Elements of Algebraic Topology"]
+      "mastery_threshold": 0.6,
+      "references": [
+        "Hatcher, Algebraic Topology, Ch.2; Munkres, Elements of Algebraic Topology"
+      ]
     },
     {
       "id": "math.top.euler-characteristic",
       "name": "Euler Characteristic",
-      "aliases": ["χ(X)", "Euler number"],
+      "aliases": [
+        "\u03c7(X)",
+        "Euler number"
+      ],
       "parent": "math.top.homology",
       "children": [],
-      "requires": ["math.top.homology"],
+      "requires": [
+        "math.top.homology"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.disc.planar-graph"],
-      "description": "χ(X) = ∑(-1)ⁿ rank(Hₙ(X)) = V−E+F for polyhedra. Topological invariant: homeomorphic spaces have same χ. Sphere: χ=2; torus: χ=0; genus-g surface: χ=2−2g. Euler-Poincaré formula generalizes V−E+F=2.",
+      "cross_links": [
+        "math.disc.planar-graph"
+      ],
+      "description": "\u03c7(X) = \u2211(-1)\u207f rank(H\u2099(X)) = V\u2212E+F for polyhedra. Topological invariant: homeomorphic spaces have same \u03c7. Sphere: \u03c7=2; torus: \u03c7=0; genus-g surface: \u03c7=2\u22122g. Euler-Poincar\u00e9 formula generalizes V\u2212E+F=2.",
       "difficulty": "expert",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Hatcher, Algebraic Topology, §2.2"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Hatcher, Algebraic Topology, \u00a72.2"
+      ]
     },
     {
       "id": "math.top.cohomology",
       "name": "Cohomology",
-      "aliases": ["de Rham cohomology", "singular cohomology", "H^n(X)"],
+      "aliases": [
+        "de Rham cohomology",
+        "singular cohomology",
+        "H^n(X)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.top.homology"],
+      "requires": [
+        "math.top.homology"
+      ],
       "unlocks": [],
-      "related": ["math.top.homology"],
+      "related": [
+        "math.top.homology"
+      ],
       "cross_links": [],
-      "description": "Dual to homology: H^n(X) = Hom(Hₙ(X),ℤ) (universal coefficients). Has cup product structure making H*(X) a ring. De Rham cohomology: closed/exact differential forms. De Rham's theorem: de Rham ≅ singular (with ℝ coefficients).",
+      "description": "Dual to homology: H^n(X) = Hom(H\u2099(X),\u2124) (universal coefficients). Has cup product structure making H*(X) a ring. De Rham cohomology: closed/exact differential forms. De Rham's theorem: de Rham \u2245 singular (with \u211d coefficients).",
       "difficulty": "research",
       "estimated_hours": 10,
       "bloom": "analyze",
       "mastery_threshold": 0.55,
-      "references": ["Hatcher, Algebraic Topology, Ch.3; Bott & Tu, Differential Forms in Algebraic Topology"]
+      "references": [
+        "Hatcher, Algebraic Topology, Ch.3; Bott & Tu, Differential Forms in Algebraic Topology"
+      ]
     },
     {
       "id": "math.top.manifold",
       "name": "Topological Manifold",
-      "aliases": ["n-manifold", "manifold", "locally Euclidean"],
+      "aliases": [
+        "n-manifold",
+        "manifold",
+        "locally Euclidean"
+      ],
       "parent": null,
-      "children": ["math.top.smooth-manifold"],
-      "requires": ["math.top.topological-space", "math.top.homeomorphism"],
-      "unlocks": ["math.top.smooth-manifold"],
+      "children": [
+        "math.top.smooth-manifold"
+      ],
+      "requires": [
+        "math.top.topological-space",
+        "math.top.homeomorphism"
+      ],
+      "unlocks": [
+        "math.top.smooth-manifold"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "A Hausdorff, second-countable topological space where every point has a neighborhood homeomorphic to ℝⁿ. Examples: curves (1-manifolds), surfaces (2-manifolds), ℝⁿ, spheres Sⁿ. Classification of compact surfaces: connected sum of tori or projective planes.",
+      "description": "A Hausdorff, second-countable topological space where every point has a neighborhood homeomorphic to \u211d\u207f. Examples: curves (1-manifolds), surfaces (2-manifolds), \u211d\u207f, spheres S\u207f. Classification of compact surfaces: connected sum of tori or projective planes.",
       "difficulty": "expert",
       "estimated_hours": 6,
       "bloom": "understand",
       "mastery_threshold": 0.75,
-      "references": ["Munkres, Topology, Ch.9; Lee, Introduction to Topological Manifolds"]
+      "references": [
+        "Munkres, Topology, Ch.9; Lee, Introduction to Topological Manifolds"
+      ]
     },
     {
       "id": "math.top.smooth-manifold",
       "name": "Smooth Manifold",
-      "aliases": ["differentiable manifold", "C∞ manifold"],
+      "aliases": [
+        "differentiable manifold",
+        "C\u221e manifold"
+      ],
       "parent": "math.top.manifold",
       "children": [],
-      "requires": ["math.top.manifold", "math.real.differentiability-rigorous"],
+      "requires": [
+        "math.top.manifold",
+        "math.real.differentiability-rigorous"
+      ],
       "unlocks": [],
       "related": [],
-      "cross_links": ["math.geom.differential-geometry"],
-      "description": "A manifold with a compatible atlas of C∞ coordinate charts. Admits smooth functions, vector fields, differential forms, and tensors. Sard's theorem: set of critical values has measure zero. Foundation of differential topology and differential geometry.",
+      "cross_links": [
+        "math.geom.differential-geometry-curves"
+      ],
+      "description": "A manifold with a compatible atlas of C\u221e coordinate charts. Admits smooth functions, vector fields, differential forms, and tensors. Sard's theorem: set of critical values has measure zero. Foundation of differential topology and differential geometry.",
       "difficulty": "research",
       "estimated_hours": 8,
       "bloom": "understand",
       "mastery_threshold": 0.65,
-      "references": ["Lee, Introduction to Smooth Manifolds; Guillemin & Pollack, Differential Topology"]
+      "references": [
+        "Lee, Introduction to Smooth Manifolds; Guillemin & Pollack, Differential Topology"
+      ]
     }
   ]
 }

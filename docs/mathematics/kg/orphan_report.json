@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "root_nodes_count": 1,
+  "true_orphans_count": 0,
+  "note": "Root nodes (no requires) are expected at Level 0. True orphans have no connections of any kind.",
+  "root_nodes": [
+    "math.found.mathematical-thinking"
+  ],
+  "true_orphans": []
+}

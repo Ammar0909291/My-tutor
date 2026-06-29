@@ -1,5 +1,39 @@
 # Mathematics Knowledge Graph — Changelog
 
+## [1.0.1] — 2026-06-29 — VALIDATION LAYER + EDGE REPAIR
+
+### Added
+- `docs/mathematics/kg/validate.py` — structural validator: cycle detection (DFS), orphan audit, dependency integrity, learner-track model
+- `docs/mathematics/kg/repair.py` — automated edge repair script
+- `docs/mathematics/kg/cycle_report.json` — 0 cycles detected
+- `docs/mathematics/kg/orphan_report.json` — 0 true orphans, 1 intentional root
+- `docs/mathematics/kg/dependency_report.json` — 0 broken edges (after repair)
+- `docs/mathematics/kg/learner_tracks.json` — T0–T4 five-tier progressive track model
+- `docs/mathematics/kg/validation_summary.json` — machine-readable summary (PASS)
+
+### Fixed — 156 broken edges repaired across 20 domain files
+- 42 broken `requires` edges (slug mismatches: antiderivative→antiderivatives, partial-derivative→partial-derivatives, field-extensions→field-extension, etc.)
+- 34 broken `unlocks` edges (missing targets: boolean-algebra→boolean-circuits, completeness-axiom→completeness, etc.)
+- 80 broken `cross_links` (fixed 48, removed 32 aspirational/non-existent targets)
+
+### Graph v1.0.1 Statistics
+- Concepts: **908** (unchanged)
+- Requires edges: **1,353** (unchanged — repairs were in-place substitutions)
+- Unlocks edges: **665** (was 673 — 8 non-existent targets removed)
+- Cross-links: **363** (was 386 — 23 non-existent targets removed)
+- Aspirational cross-links: 1 (math.de.ode → math.phys.classical-mechanics, documented)
+
+### Learner Tracks
+| Track | Name | Concepts |
+|-------|------|----------|
+| T0 | Absolute Foundations | 140 |
+| T1 | Pre-University Mathematics | 239 |
+| T2 | Undergraduate Core | 314 |
+| T3 | Upper Undergraduate / Early Graduate | 169 |
+| T4 | Graduate / Research Mathematics | 46 |
+
+---
+
 ## [1.0.0] — 2026-06-29 — CANONICAL MATHEMATICS KNOWLEDGE GRAPH v1 FROZEN
 
 ### Added — All 24 Domains Complete

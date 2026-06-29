@@ -2,200 +2,368 @@
   "domain_id": "geometry",
   "domain_name": "Geometry",
   "id_prefix": "math.geom",
-  "level_range": [1, 7],
-  "description": "The study of shapes, sizes, positions, and properties of figures in space — from Euclidean plane geometry through coordinate geometry, differential geometry, and modern topology-adjacent topics.",
+  "level_range": [
+    1,
+    7
+  ],
+  "description": "The study of shapes, sizes, positions, and properties of figures in space \u2014 from Euclidean plane geometry through coordinate geometry, differential geometry, and modern topology-adjacent topics.",
   "concepts": [
     {
       "id": "math.geom.point",
       "name": "Point",
-      "aliases": ["geometric point"],
+      "aliases": [
+        "geometric point"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.found.mathematical-thinking"],
-      "unlocks": ["math.geom.line", "math.geom.plane"],
-      "related": ["math.geom.line", "math.geom.plane"],
+      "requires": [
+        "math.found.mathematical-thinking"
+      ],
+      "unlocks": [
+        "math.geom.line",
+        "math.geom.plane"
+      ],
+      "related": [
+        "math.geom.line",
+        "math.geom.plane"
+      ],
       "cross_links": [],
       "description": "A dimensionless location in space with no length, width, or height; the fundamental primitive of Euclidean geometry.",
       "difficulty": "foundational",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements Book I", "NCERT Grade 6", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements Book I",
+        "NCERT Grade 6",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.line",
       "name": "Line",
-      "aliases": ["straight line", "geometric line"],
+      "aliases": [
+        "straight line",
+        "geometric line"
+      ],
       "parent": null,
-      "children": ["math.geom.line-segment", "math.geom.ray"],
-      "requires": ["math.geom.point"],
-      "unlocks": ["math.geom.angle", "math.geom.parallel-lines"],
-      "related": ["math.geom.line-segment", "math.geom.plane"],
-      "cross_links": ["math.geom.line-equation"],
+      "children": [
+        "math.geom.line-segment",
+        "math.geom.ray"
+      ],
+      "requires": [
+        "math.geom.point"
+      ],
+      "unlocks": [
+        "math.geom.angle",
+        "math.geom.parallel-lines"
+      ],
+      "related": [
+        "math.geom.line-segment",
+        "math.geom.plane"
+      ],
+      "cross_links": [
+        "math.geom.line-equation"
+      ],
       "description": "A one-dimensional figure extending infinitely in both directions, determined by any two distinct points.",
       "difficulty": "foundational",
       "estimated_hours": 2,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements", "NCERT Grade 6", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 6",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.line-segment",
       "name": "Line Segment",
-      "aliases": ["segment", "bounded line"],
+      "aliases": [
+        "segment",
+        "bounded line"
+      ],
       "parent": "math.geom.line",
       "children": [],
-      "requires": ["math.geom.line"],
-      "unlocks": ["math.geom.length"],
-      "related": ["math.geom.ray"],
+      "requires": [
+        "math.geom.line"
+      ],
+      "unlocks": [
+        "math.geom.length"
+      ],
+      "related": [
+        "math.geom.ray"
+      ],
       "cross_links": [],
       "description": "The part of a line between two endpoints; has a finite measurable length.",
       "difficulty": "foundational",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements", "NCERT Grade 6"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 6"
+      ]
     },
     {
       "id": "math.geom.ray",
       "name": "Ray",
-      "aliases": ["half-line"],
+      "aliases": [
+        "half-line"
+      ],
       "parent": "math.geom.line",
       "children": [],
-      "requires": ["math.geom.line"],
-      "unlocks": ["math.geom.angle"],
-      "related": ["math.geom.line-segment"],
+      "requires": [
+        "math.geom.line"
+      ],
+      "unlocks": [
+        "math.geom.angle"
+      ],
+      "related": [
+        "math.geom.line-segment"
+      ],
       "cross_links": [],
       "description": "A part of a line with one endpoint that extends infinitely in one direction.",
       "difficulty": "foundational",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements", "NCERT Grade 6"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 6"
+      ]
     },
     {
       "id": "math.geom.plane",
       "name": "Plane",
-      "aliases": ["geometric plane", "flat surface"],
+      "aliases": [
+        "geometric plane",
+        "flat surface"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.line"],
-      "unlocks": ["math.geom.polygon", "math.geom.coordinate-plane"],
-      "related": ["math.geom.line"],
-      "cross_links": ["math.geom.coordinate-plane"],
+      "requires": [
+        "math.geom.line"
+      ],
+      "unlocks": [
+        "math.geom.polygon",
+        "math.geom.coordinate-plane"
+      ],
+      "related": [
+        "math.geom.line"
+      ],
+      "cross_links": [
+        "math.geom.coordinate-plane"
+      ],
       "description": "A two-dimensional flat surface extending infinitely; determined by any three non-collinear points.",
       "difficulty": "foundational",
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements", "NCERT Grade 6", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 6",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.angle",
       "name": "Angle",
-      "aliases": ["geometric angle", "∠", "degrees, radians"],
+      "aliases": [
+        "geometric angle",
+        "\u2220",
+        "degrees, radians"
+      ],
       "parent": null,
-      "children": ["math.geom.angle-types", "math.geom.angle-measurement", "math.geom.angle-pairs"],
-      "requires": ["math.geom.ray"],
-      "unlocks": ["math.geom.triangle", "math.trig.right-triangle-trig"],
-      "related": ["math.geom.triangle", "math.trig.right-triangle-trig"],
-      "cross_links": ["math.trig.angle-measure"],
+      "children": [
+        "math.geom.angle-types",
+        "math.geom.angle-measurement",
+        "math.geom.angle-pairs"
+      ],
+      "requires": [
+        "math.geom.ray"
+      ],
+      "unlocks": [
+        "math.geom.triangle",
+        "math.trig.right-triangle-trig"
+      ],
+      "related": [
+        "math.geom.triangle",
+        "math.trig.right-triangle-trig"
+      ],
+      "cross_links": [
+        "math.trig.angle-measure"
+      ],
       "description": "The figure formed by two rays sharing a common endpoint (vertex); measured in degrees or radians.",
       "difficulty": "foundational",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Euclid Elements", "NCERT Grade 6-7", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 6-7",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.angle-types",
       "name": "Types of Angles",
-      "aliases": ["acute, obtuse, right, straight, reflex angles"],
+      "aliases": [
+        "acute, obtuse, right, straight, reflex angles"
+      ],
       "parent": "math.geom.angle",
       "children": [],
-      "requires": ["math.geom.angle"],
+      "requires": [
+        "math.geom.angle"
+      ],
       "unlocks": [],
-      "related": ["math.geom.angle-measurement"],
+      "related": [
+        "math.geom.angle-measurement"
+      ],
       "cross_links": [],
-      "description": "Classification of angles: acute (0°–90°), right (90°), obtuse (90°–180°), straight (180°), reflex (180°–360°).",
+      "description": "Classification of angles: acute (0\u00b0\u201390\u00b0), right (90\u00b0), obtuse (90\u00b0\u2013180\u00b0), straight (180\u00b0), reflex (180\u00b0\u2013360\u00b0).",
       "difficulty": "foundational",
       "estimated_hours": 2,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 6", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 6",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.angle-measurement",
       "name": "Angle Measurement",
-      "aliases": ["measuring angles", "protractor", "degrees", "radians"],
+      "aliases": [
+        "measuring angles",
+        "protractor",
+        "degrees",
+        "radians"
+      ],
       "parent": "math.geom.angle",
       "children": [],
-      "requires": ["math.geom.angle"],
-      "unlocks": ["math.trig.angle-measure"],
-      "related": ["math.trig.angle-measure"],
-      "cross_links": ["math.trig.angle-measure"],
-      "description": "Angles are measured in degrees (1 full rotation = 360°) or radians (1 full rotation = 2π); a protractor measures angles physically.",
+      "requires": [
+        "math.geom.angle"
+      ],
+      "unlocks": [
+        "math.trig.angle-measure"
+      ],
+      "related": [
+        "math.trig.angle-measure"
+      ],
+      "cross_links": [
+        "math.trig.angle-measure"
+      ],
+      "description": "Angles are measured in degrees (1 full rotation = 360\u00b0) or radians (1 full rotation = 2\u03c0); a protractor measures angles physically.",
       "difficulty": "foundational",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 6-7", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6-7",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.angle-pairs",
       "name": "Angle Pairs",
-      "aliases": ["complementary angles", "supplementary angles", "vertical angles", "linear pair"],
+      "aliases": [
+        "complementary angles",
+        "supplementary angles",
+        "vertical angles",
+        "linear pair"
+      ],
       "parent": "math.geom.angle",
       "children": [],
-      "requires": ["math.geom.angle"],
-      "unlocks": ["math.geom.parallel-lines"],
-      "related": ["math.geom.parallel-lines"],
+      "requires": [
+        "math.geom.angle"
+      ],
+      "unlocks": [
+        "math.geom.parallel-lines"
+      ],
+      "related": [
+        "math.geom.parallel-lines"
+      ],
       "cross_links": [],
-      "description": "Special pairs of angles: complementary (sum 90°), supplementary (sum 180°), vertical angles (equal across an intersection), and linear pairs (supplementary adjacent).",
+      "description": "Special pairs of angles: complementary (sum 90\u00b0), supplementary (sum 180\u00b0), vertical angles (equal across an intersection), and linear pairs (supplementary adjacent).",
       "difficulty": "foundational",
       "estimated_hours": 4,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 7", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.parallel-lines",
       "name": "Parallel Lines",
-      "aliases": ["parallel lines cut by a transversal", "corresponding angles"],
+      "aliases": [
+        "parallel lines cut by a transversal",
+        "corresponding angles"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.angle-pairs", "math.geom.line"],
-      "unlocks": ["math.geom.quadrilateral", "math.geom.geometric-proof"],
-      "related": ["math.geom.perpendicular-lines"],
+      "requires": [
+        "math.geom.angle-pairs",
+        "math.geom.line"
+      ],
+      "unlocks": [
+        "math.geom.quadrilateral",
+        "math.geom.geometric-proof"
+      ],
+      "related": [
+        "math.geom.perpendicular-lines"
+      ],
       "cross_links": [],
       "description": "Lines that never meet; when cut by a transversal they produce equal corresponding angles, alternate interior angles, and co-interior supplementary angles.",
       "difficulty": "developing",
       "estimated_hours": 6,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Euclid Elements Book I", "NCERT Grade 7-9", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements Book I",
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.perpendicular-lines",
       "name": "Perpendicular Lines",
-      "aliases": ["right-angle intersection", "⊥"],
+      "aliases": [
+        "right-angle intersection",
+        "\u22a5"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.angle"],
-      "unlocks": ["math.geom.right-triangle"],
-      "related": ["math.geom.parallel-lines"],
+      "requires": [
+        "math.geom.angle"
+      ],
+      "unlocks": [
+        "math.geom.right-triangle"
+      ],
+      "related": [
+        "math.geom.parallel-lines"
+      ],
       "cross_links": [],
-      "description": "Two lines intersecting at 90°; the perpendicular from a point to a line is the shortest segment from the point to the line.",
+      "description": "Two lines intersecting at 90\u00b0; the perpendicular from a point to a line is the shortest segment from the point to the line.",
       "difficulty": "foundational",
       "estimated_hours": 3,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Euclid Elements", "NCERT Grade 6-7", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 6-7",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.triangle",
       "name": "Triangle",
-      "aliases": ["three-sided polygon", "Δ"],
+      "aliases": [
+        "three-sided polygon",
+        "\u0394"
+      ],
       "parent": null,
       "children": [
         "math.geom.triangle-types",
@@ -206,143 +374,264 @@
         "math.geom.triangle-centers",
         "math.geom.area-triangle"
       ],
-      "requires": ["math.geom.angle", "math.geom.line-segment"],
-      "unlocks": ["math.geom.pythagorean-theorem", "math.trig.right-triangle-trig"],
-      "related": ["math.geom.polygon", "math.geom.pythagorean-theorem"],
-      "cross_links": ["math.trig.right-triangle-trig"],
-      "description": "A polygon with three sides and three angles whose sum is 180°; the simplest non-trivial polygon and the basis of trigonometry.",
+      "requires": [
+        "math.geom.angle",
+        "math.geom.line-segment"
+      ],
+      "unlocks": [
+        "math.geom.pythagorean-theorem",
+        "math.trig.right-triangle-trig"
+      ],
+      "related": [
+        "math.geom.polygon",
+        "math.geom.pythagorean-theorem"
+      ],
+      "cross_links": [
+        "math.trig.right-triangle-trig"
+      ],
+      "description": "A polygon with three sides and three angles whose sum is 180\u00b0; the simplest non-trivial polygon and the basis of trigonometry.",
       "difficulty": "developing",
       "estimated_hours": 20,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Euclid Elements", "NCERT Grade 7-9", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.triangle-types",
       "name": "Types of Triangles",
-      "aliases": ["scalene, isosceles, equilateral, acute, obtuse, right triangle"],
+      "aliases": [
+        "scalene, isosceles, equilateral, acute, obtuse, right triangle"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle"],
+      "requires": [
+        "math.geom.triangle"
+      ],
       "unlocks": [],
-      "related": ["math.geom.triangle"],
+      "related": [
+        "math.geom.triangle"
+      ],
       "cross_links": [],
       "description": "Classification by sides: scalene (all sides different), isosceles (two sides equal), equilateral (all sides equal). By angles: acute, right, obtuse.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "remember",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.triangle-angle-sum",
       "name": "Triangle Angle Sum Theorem",
-      "aliases": ["angle sum = 180°", "interior angles of triangle"],
+      "aliases": [
+        "angle sum = 180\u00b0",
+        "interior angles of triangle"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle", "math.geom.parallel-lines"],
-      "unlocks": ["math.geom.polygon-angle-sum"],
-      "related": ["math.geom.parallel-lines"],
+      "requires": [
+        "math.geom.triangle",
+        "math.geom.parallel-lines"
+      ],
+      "unlocks": [
+        "math.geom.polygon-angle-sum"
+      ],
+      "related": [
+        "math.geom.parallel-lines"
+      ],
       "cross_links": [],
-      "description": "The sum of the three interior angles of any triangle in Euclidean geometry equals 180°.",
+      "description": "The sum of the three interior angles of any triangle in Euclidean geometry equals 180\u00b0.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "understand",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements", "NCERT Grade 7-9", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.right-triangle",
       "name": "Right Triangle",
-      "aliases": ["right-angled triangle", "90° triangle"],
+      "aliases": [
+        "right-angled triangle",
+        "90\u00b0 triangle"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle", "math.geom.perpendicular-lines"],
-      "unlocks": ["math.geom.pythagorean-theorem", "math.trig.right-triangle-trig"],
-      "related": ["math.geom.pythagorean-theorem"],
-      "cross_links": ["math.trig.right-triangle-trig"],
-      "description": "A triangle with one 90° angle; the side opposite the right angle (hypotenuse) is the longest side and satisfies the Pythagorean theorem.",
+      "requires": [
+        "math.geom.triangle",
+        "math.geom.perpendicular-lines"
+      ],
+      "unlocks": [
+        "math.geom.pythagorean-theorem",
+        "math.trig.right-triangle-trig"
+      ],
+      "related": [
+        "math.geom.pythagorean-theorem"
+      ],
+      "cross_links": [
+        "math.trig.right-triangle-trig"
+      ],
+      "description": "A triangle with one 90\u00b0 angle; the side opposite the right angle (hypotenuse) is the longest side and satisfies the Pythagorean theorem.",
       "difficulty": "developing",
       "estimated_hours": 5,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Euclid Elements", "NCERT Grade 7-9", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.pythagorean-theorem",
       "name": "Pythagorean Theorem",
-      "aliases": ["a² + b² = c²", "Pythagoras"],
+      "aliases": [
+        "a\u00b2 + b\u00b2 = c\u00b2",
+        "Pythagoras"
+      ],
       "parent": null,
-      "children": ["math.geom.pythagorean-converse"],
-      "requires": ["math.geom.right-triangle", "math.arith.square-numbers"],
-      "unlocks": ["math.geom.distance-formula", "math.trig.right-triangle-trig", "math.geom.pythagorean-converse"],
-      "related": ["math.nt.pythagorean-triples"],
-      "cross_links": ["math.nt.pythagorean-triples", "math.geom.distance-formula"],
-      "description": "In a right triangle with legs a, b and hypotenuse c: a² + b² = c². One of the most fundamental results in all of mathematics with hundreds of proofs.",
+      "children": [
+        "math.geom.pythagorean-converse"
+      ],
+      "requires": [
+        "math.geom.right-triangle",
+        "math.arith.square-numbers"
+      ],
+      "unlocks": [
+        "math.geom.distance-formula",
+        "math.trig.right-triangle-trig",
+        "math.geom.pythagorean-converse"
+      ],
+      "related": [
+        "math.nt.pythagorean-triples"
+      ],
+      "cross_links": [
+        "math.nt.pythagorean-triples",
+        "math.geom.distance-formula"
+      ],
+      "description": "In a right triangle with legs a, b and hypotenuse c: a\u00b2 + b\u00b2 = c\u00b2. One of the most fundamental results in all of mathematics with hundreds of proofs.",
       "difficulty": "developing",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.95,
-      "references": ["Euclid Elements Book I Prop 47", "NCERT Grade 8-10", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements Book I Prop 47",
+        "NCERT Grade 8-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.pythagorean-converse",
       "name": "Converse of the Pythagorean Theorem",
-      "aliases": ["right triangle test"],
+      "aliases": [
+        "right triangle test"
+      ],
       "parent": "math.geom.pythagorean-theorem",
       "children": [],
-      "requires": ["math.geom.pythagorean-theorem"],
+      "requires": [
+        "math.geom.pythagorean-theorem"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "If a² + b² = c² for sides a, b, c of a triangle, then the triangle is right-angled with hypotenuse c.",
+      "description": "If a\u00b2 + b\u00b2 = c\u00b2 for sides a, b, c of a triangle, then the triangle is right-angled with hypotenuse c.",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Euclid Elements", "NCERT Grade 10", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.congruent-triangles",
       "name": "Congruent Triangles",
-      "aliases": ["triangle congruence", "SSS, SAS, ASA, AAS, HL"],
+      "aliases": [
+        "triangle congruence",
+        "SSS, SAS, ASA, AAS, HL"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle"],
-      "unlocks": ["math.geom.geometric-proof"],
-      "related": ["math.geom.similar-triangles"],
+      "requires": [
+        "math.geom.triangle"
+      ],
+      "unlocks": [
+        "math.geom.geometric-proof"
+      ],
+      "related": [
+        "math.geom.similar-triangles"
+      ],
       "cross_links": [],
       "description": "Two triangles are congruent if they have the same shape and size; established by the congruence criteria SSS, SAS, ASA, AAS, and HL (for right triangles).",
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Euclid Elements", "NCERT Grade 9", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.similar-triangles",
       "name": "Similar Triangles",
-      "aliases": ["triangle similarity", "AA, SAS, SSS similarity"],
+      "aliases": [
+        "triangle similarity",
+        "AA, SAS, SSS similarity"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle", "math.arith.ratios"],
-      "unlocks": ["math.trig.right-triangle-trig"],
-      "related": ["math.geom.congruent-triangles"],
-      "cross_links": ["math.trig.right-triangle-trig"],
+      "requires": [
+        "math.geom.triangle",
+        "math.arith.ratios"
+      ],
+      "unlocks": [
+        "math.trig.right-triangle-trig"
+      ],
+      "related": [
+        "math.geom.congruent-triangles"
+      ],
+      "cross_links": [
+        "math.trig.right-triangle-trig"
+      ],
       "description": "Two triangles are similar if they have the same shape (proportional sides and equal angles); established by AA, SAS, or SSS similarity criteria.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["Euclid Elements", "NCERT Grade 9-10", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 9-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.triangle-centers",
       "name": "Triangle Centers",
-      "aliases": ["centroid", "circumcenter", "incenter", "orthocenter"],
+      "aliases": [
+        "centroid",
+        "circumcenter",
+        "incenter",
+        "orthocenter"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle", "math.geom.congruent-triangles"],
+      "requires": [
+        "math.geom.triangle",
+        "math.geom.congruent-triangles"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -351,182 +640,325 @@
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 9", "AoPS Geometry"]
+      "references": [
+        "NCERT Grade 9",
+        "AoPS Geometry"
+      ]
     },
     {
       "id": "math.geom.area-triangle",
       "name": "Area of a Triangle",
-      "aliases": ["½bh", "triangle area formula", "Heron's formula"],
+      "aliases": [
+        "\u00bdbh",
+        "triangle area formula",
+        "Heron's formula"
+      ],
       "parent": "math.geom.triangle",
       "children": [],
-      "requires": ["math.geom.triangle"],
-      "unlocks": ["math.geom.area-polygon"],
-      "related": ["math.geom.area"],
+      "requires": [
+        "math.geom.triangle"
+      ],
+      "unlocks": [
+        "math.geom.area-polygon"
+      ],
+      "related": [
+        "math.geom.area"
+      ],
       "cross_links": [],
-      "description": "Area = ½ × base × height; also Heron's formula: √(s(s−a)(s−b)(s−c)) where s is the semiperimeter.",
+      "description": "Area = \u00bd \u00d7 base \u00d7 height; also Heron's formula: \u221a(s(s\u2212a)(s\u2212b)(s\u2212c)) where s is the semiperimeter.",
       "difficulty": "developing",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7-9", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.polygon",
       "name": "Polygon",
-      "aliases": ["n-gon", "polygon", "convex polygon"],
+      "aliases": [
+        "n-gon",
+        "polygon",
+        "convex polygon"
+      ],
       "parent": null,
-      "children": ["math.geom.quadrilateral", "math.geom.regular-polygon", "math.geom.polygon-angle-sum", "math.geom.area-polygon"],
-      "requires": ["math.geom.line-segment", "math.geom.triangle"],
-      "unlocks": ["math.geom.area"],
-      "related": ["math.geom.triangle", "math.geom.circle"],
+      "children": [
+        "math.geom.quadrilateral",
+        "math.geom.regular-polygon",
+        "math.geom.polygon-angle-sum",
+        "math.geom.area-polygon"
+      ],
+      "requires": [
+        "math.geom.line-segment",
+        "math.geom.triangle"
+      ],
+      "unlocks": [
+        "math.geom.area"
+      ],
+      "related": [
+        "math.geom.triangle",
+        "math.geom.circle"
+      ],
       "cross_links": [],
       "description": "A closed plane figure bounded by straight line segments; characterized by the number of sides and classified as regular (all sides and angles equal) or irregular.",
       "difficulty": "developing",
       "estimated_hours": 8,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 6-9", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 6-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.polygon-angle-sum",
       "name": "Polygon Angle Sum",
-      "aliases": ["interior angle sum", "(n−2)×180°"],
+      "aliases": [
+        "interior angle sum",
+        "(n\u22122)\u00d7180\u00b0"
+      ],
       "parent": "math.geom.polygon",
       "children": [],
-      "requires": ["math.geom.triangle-angle-sum", "math.geom.polygon"],
+      "requires": [
+        "math.geom.triangle-angle-sum",
+        "math.geom.polygon"
+      ],
       "unlocks": [],
-      "related": ["math.geom.regular-polygon"],
+      "related": [
+        "math.geom.regular-polygon"
+      ],
       "cross_links": [],
-      "description": "The sum of interior angles of a convex n-gon is (n−2)×180°; each interior angle of a regular n-gon is (n−2)×180°/n.",
+      "description": "The sum of interior angles of a convex n-gon is (n\u22122)\u00d7180\u00b0; each interior angle of a regular n-gon is (n\u22122)\u00d7180\u00b0/n.",
       "difficulty": "developing",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 8", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.quadrilateral",
       "name": "Quadrilateral",
-      "aliases": ["four-sided polygon", "parallelogram", "trapezoid", "rectangle", "rhombus", "square"],
+      "aliases": [
+        "four-sided polygon",
+        "parallelogram",
+        "trapezoid",
+        "rectangle",
+        "rhombus",
+        "square"
+      ],
       "parent": "math.geom.polygon",
-      "children": ["math.geom.parallelogram", "math.geom.trapezoid"],
-      "requires": ["math.geom.polygon", "math.geom.parallel-lines"],
+      "children": [
+        "math.geom.parallelogram",
+        "math.geom.trapezoid"
+      ],
+      "requires": [
+        "math.geom.polygon",
+        "math.geom.parallel-lines"
+      ],
       "unlocks": [],
-      "related": ["math.geom.polygon"],
+      "related": [
+        "math.geom.polygon"
+      ],
       "cross_links": [],
       "description": "A polygon with four sides; includes parallelograms, rectangles, rhombuses, squares, trapezoids, and kites, classified by side and angle properties.",
       "difficulty": "developing",
       "estimated_hours": 8,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 8", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.parallelogram",
       "name": "Parallelogram",
-      "aliases": ["rectangle", "rhombus", "square"],
+      "aliases": [
+        "rectangle",
+        "rhombus",
+        "square"
+      ],
       "parent": "math.geom.quadrilateral",
       "children": [],
-      "requires": ["math.geom.quadrilateral"],
+      "requires": [
+        "math.geom.quadrilateral"
+      ],
       "unlocks": [],
-      "related": ["math.geom.trapezoid"],
+      "related": [
+        "math.geom.trapezoid"
+      ],
       "cross_links": [],
-      "description": "A quadrilateral with both pairs of opposite sides parallel; includes rectangles (90° angles), rhombuses (all sides equal), and squares (both).",
+      "description": "A quadrilateral with both pairs of opposite sides parallel; includes rectangles (90\u00b0 angles), rhombuses (all sides equal), and squares (both).",
       "difficulty": "developing",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 8", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.trapezoid",
       "name": "Trapezoid",
-      "aliases": ["trapezium", "one pair of parallel sides"],
+      "aliases": [
+        "trapezium",
+        "one pair of parallel sides"
+      ],
       "parent": "math.geom.quadrilateral",
       "children": [],
-      "requires": ["math.geom.quadrilateral"],
+      "requires": [
+        "math.geom.quadrilateral"
+      ],
       "unlocks": [],
-      "related": ["math.geom.parallelogram"],
+      "related": [
+        "math.geom.parallelogram"
+      ],
       "cross_links": [],
-      "description": "A quadrilateral with exactly one pair of parallel sides (the bases); area = ½(b₁ + b₂)h.",
+      "description": "A quadrilateral with exactly one pair of parallel sides (the bases); area = \u00bd(b\u2081 + b\u2082)h.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 8", "OpenStax Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.regular-polygon",
       "name": "Regular Polygon",
-      "aliases": ["equilateral polygon", "equiangular polygon"],
+      "aliases": [
+        "equilateral polygon",
+        "equiangular polygon"
+      ],
       "parent": "math.geom.polygon",
       "children": [],
-      "requires": ["math.geom.polygon"],
+      "requires": [
+        "math.geom.polygon"
+      ],
       "unlocks": [],
-      "related": ["math.geom.circle"],
+      "related": [
+        "math.geom.circle"
+      ],
       "cross_links": [],
-      "description": "A polygon with all sides equal and all angles equal; inscribed in a circle, approaching the circle as n → ∞.",
+      "description": "A polygon with all sides equal and all angles equal; inscribed in a circle, approaching the circle as n \u2192 \u221e.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 8", "OpenStax Geometry", "AoPS Geometry"]
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax Geometry",
+        "AoPS Geometry"
+      ]
     },
     {
       "id": "math.geom.area-polygon",
       "name": "Area of Polygons",
-      "aliases": ["polygon area", "perimeter and area"],
+      "aliases": [
+        "polygon area",
+        "perimeter and area"
+      ],
       "parent": "math.geom.polygon",
       "children": [],
-      "requires": ["math.geom.area-triangle"],
-      "unlocks": ["math.geom.area"],
-      "related": ["math.geom.area"],
+      "requires": [
+        "math.geom.area-triangle"
+      ],
+      "unlocks": [
+        "math.geom.area"
+      ],
+      "related": [
+        "math.geom.area"
+      ],
       "cross_links": [],
-      "description": "Computing areas of polygons by decomposition into triangles or by standard formulas (parallelogram: bh; trapezoid: ½(b₁+b₂)h; regular polygon: ½ap).",
+      "description": "Computing areas of polygons by decomposition into triangles or by standard formulas (parallelogram: bh; trapezoid: \u00bd(b\u2081+b\u2082)h; regular polygon: \u00bdap).",
       "difficulty": "developing",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 7-9", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.area",
       "name": "Area",
-      "aliases": ["surface area (2D)", "area measure"],
+      "aliases": [
+        "surface area (2D)",
+        "area measure"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.area-polygon"],
-      "unlocks": ["math.geom.surface-area", "math.calc.integral-area"],
-      "related": ["math.geom.surface-area", "math.geom.perimeter"],
-      "cross_links": ["math.calc.integral-area"],
+      "requires": [
+        "math.geom.area-polygon"
+      ],
+      "unlocks": [
+        "math.geom.surface-area",
+        "math.calc.integral-area"
+      ],
+      "related": [
+        "math.geom.surface-area",
+        "math.geom.perimeter"
+      ],
+      "cross_links": [
+        "math.calc.integral-area"
+      ],
       "description": "The measure of the two-dimensional extent of a figure; for curved regions computed via integration.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7-10", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.perimeter",
       "name": "Perimeter",
-      "aliases": ["circumference (circle)", "boundary length"],
+      "aliases": [
+        "circumference (circle)",
+        "boundary length"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.line-segment"],
-      "unlocks": ["math.geom.circle-circumference"],
-      "related": ["math.geom.area"],
+      "requires": [
+        "math.geom.line-segment"
+      ],
+      "unlocks": [
+        "math.geom.circle-circumference"
+      ],
+      "related": [
+        "math.geom.area"
+      ],
       "cross_links": [],
       "description": "The total length of the boundary of a two-dimensional figure; for circles it is called the circumference.",
       "difficulty": "foundational",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 6-8", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6-8",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.circle",
       "name": "Circle",
-      "aliases": ["circumference", "radius", "diameter", "chord", "arc"],
+      "aliases": [
+        "circumference",
+        "radius",
+        "diameter",
+        "chord",
+        "arc"
+      ],
       "parent": null,
       "children": [
         "math.geom.circle-parts",
@@ -535,24 +967,47 @@
         "math.geom.circle-theorems",
         "math.geom.circle-equation"
       ],
-      "requires": ["math.geom.point", "math.geom.line-segment"],
-      "unlocks": ["math.trig.unit-circle"],
-      "related": ["math.trig.unit-circle"],
-      "cross_links": ["math.trig.unit-circle", "math.geom.circle-equation"],
+      "requires": [
+        "math.geom.point",
+        "math.geom.line-segment"
+      ],
+      "unlocks": [
+        "math.trig.unit-circle"
+      ],
+      "related": [
+        "math.trig.unit-circle"
+      ],
+      "cross_links": [
+        "math.trig.unit-circle",
+        "math.geom.circle-equation"
+      ],
       "description": "The set of all points in a plane equidistant from a fixed center point; the fundamental round figure of 2D geometry.",
       "difficulty": "developing",
       "estimated_hours": 12,
       "bloom": "understand",
       "mastery_threshold": 0.85,
-      "references": ["Euclid Elements Book III", "NCERT Grade 9-10", "OpenStax Geometry"]
+      "references": [
+        "Euclid Elements Book III",
+        "NCERT Grade 9-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.circle-parts",
       "name": "Parts of a Circle",
-      "aliases": ["radius", "diameter", "chord", "arc", "sector", "tangent"],
+      "aliases": [
+        "radius",
+        "diameter",
+        "chord",
+        "arc",
+        "sector",
+        "tangent"
+      ],
       "parent": "math.geom.circle",
       "children": [],
-      "requires": ["math.geom.circle"],
+      "requires": [
+        "math.geom.circle"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -560,50 +1015,81 @@
       "difficulty": "developing",
       "estimated_hours": 4,
       "bloom": "remember",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 9", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.circle-circumference",
       "name": "Circumference of a Circle",
-      "aliases": ["C = 2πr", "C = πd"],
+      "aliases": [
+        "C = 2\u03c0r",
+        "C = \u03c0d"
+      ],
       "parent": "math.geom.circle",
       "children": [],
-      "requires": ["math.geom.circle", "math.geom.perimeter"],
+      "requires": [
+        "math.geom.circle",
+        "math.geom.perimeter"
+      ],
       "unlocks": [],
-      "related": ["math.geom.circle-area"],
+      "related": [
+        "math.geom.circle-area"
+      ],
       "cross_links": [],
-      "description": "The perimeter of a circle: C = 2πr = πd, where r is the radius and π ≈ 3.14159…",
+      "description": "The perimeter of a circle: C = 2\u03c0r = \u03c0d, where r is the radius and \u03c0 \u2248 3.14159\u2026",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7-9", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.circle-area",
       "name": "Area of a Circle",
-      "aliases": ["A = πr²"],
+      "aliases": [
+        "A = \u03c0r\u00b2"
+      ],
       "parent": "math.geom.circle",
       "children": [],
-      "requires": ["math.geom.circle", "math.geom.area"],
+      "requires": [
+        "math.geom.circle",
+        "math.geom.area"
+      ],
       "unlocks": [],
-      "related": ["math.geom.circle-circumference"],
+      "related": [
+        "math.geom.circle-circumference"
+      ],
       "cross_links": [],
-      "description": "A = πr²; derivable via integration or as the limit of inscribed regular polygon areas.",
+      "description": "A = \u03c0r\u00b2; derivable via integration or as the limit of inscribed regular polygon areas.",
       "difficulty": "developing",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 7-9", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7-9",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.circle-theorems",
       "name": "Circle Theorems",
-      "aliases": ["inscribed angle theorem", "tangent-chord angle", "power of a point"],
+      "aliases": [
+        "inscribed angle theorem",
+        "tangent-chord angle",
+        "power of a point"
+      ],
       "parent": "math.geom.circle",
       "children": [],
-      "requires": ["math.geom.circle", "math.geom.angle-pairs"],
+      "requires": [
+        "math.geom.circle",
+        "math.geom.angle-pairs"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -611,152 +1097,296 @@
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["Euclid Elements Book III", "NCERT Grade 10", "AoPS Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Euclid Elements Book III",
+        "NCERT Grade 10",
+        "AoPS Geometry"
+      ]
     },
     {
       "id": "math.geom.circle-equation",
       "name": "Equation of a Circle",
-      "aliases": ["(x−h)² + (y−k)² = r²", "standard form circle"],
+      "aliases": [
+        "(x\u2212h)\u00b2 + (y\u2212k)\u00b2 = r\u00b2",
+        "standard form circle"
+      ],
       "parent": "math.geom.circle",
       "children": [],
-      "requires": ["math.geom.circle", "math.geom.coordinate-plane"],
-      "unlocks": ["math.geom.conic-sections"],
-      "related": ["math.geom.conic-sections"],
-      "cross_links": ["math.geom.conic-sections"],
-      "description": "The equation of a circle with center (h, k) and radius r is (x−h)² + (y−k)² = r²; derivable from the distance formula.",
+      "requires": [
+        "math.geom.circle",
+        "math.geom.coordinate-plane"
+      ],
+      "unlocks": [
+        "math.geom.conic-sections"
+      ],
+      "related": [
+        "math.geom.conic-sections"
+      ],
+      "cross_links": [
+        "math.geom.conic-sections"
+      ],
+      "description": "The equation of a circle with center (h, k) and radius r is (x\u2212h)\u00b2 + (y\u2212k)\u00b2 = r\u00b2; derivable from the distance formula.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 11", "OpenStax College Algebra", "Stewart Precalculus"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "Stewart Precalculus"
+      ]
     },
     {
       "id": "math.geom.geometric-proof",
       "name": "Geometric Proof",
-      "aliases": ["Euclidean proof", "two-column proof", "paragraph proof"],
+      "aliases": [
+        "Euclidean proof",
+        "two-column proof",
+        "paragraph proof"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.found.proof", "math.geom.congruent-triangles", "math.geom.parallel-lines"],
+      "requires": [
+        "math.found.proof",
+        "math.geom.congruent-triangles",
+        "math.geom.parallel-lines"
+      ],
       "unlocks": [],
-      "related": ["math.found.proof"],
+      "related": [
+        "math.found.proof"
+      ],
       "cross_links": [],
       "description": "A rigorous deductive argument establishing a geometric truth from axioms, definitions, and previously proved theorems; typically presented in two-column or paragraph form.",
       "difficulty": "proficient",
       "estimated_hours": 20,
       "bloom": "create",
       "mastery_threshold": 0.75,
-      "references": ["Euclid Elements", "NCERT Grade 9-10", "AoPS Geometry"]
+      "references": [
+        "Euclid Elements",
+        "NCERT Grade 9-10",
+        "AoPS Geometry"
+      ]
     },
     {
       "id": "math.geom.length",
       "name": "Length",
-      "aliases": ["distance", "measure of a segment"],
+      "aliases": [
+        "distance",
+        "measure of a segment"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.line-segment"],
-      "unlocks": ["math.geom.distance-formula"],
-      "related": ["math.geom.area", "math.geom.perimeter"],
-      "cross_links": ["math.geom.distance-formula"],
+      "requires": [
+        "math.geom.line-segment"
+      ],
+      "unlocks": [
+        "math.geom.distance-formula"
+      ],
+      "related": [
+        "math.geom.area",
+        "math.geom.perimeter"
+      ],
+      "cross_links": [
+        "math.geom.distance-formula"
+      ],
       "description": "The one-dimensional measure of a line segment; extended to curves via arc length.",
       "difficulty": "foundational",
       "estimated_hours": 2,
       "bloom": "apply",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 6", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 6",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.surface-area",
       "name": "Surface Area",
-      "aliases": ["total surface area", "lateral surface area"],
+      "aliases": [
+        "total surface area",
+        "lateral surface area"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.area", "math.geom.solid-3d"],
-      "unlocks": ["math.calc.surface-area-integral"],
-      "related": ["math.geom.volume"],
-      "cross_links": ["math.calc.surface-area-integral"],
+      "requires": [
+        "math.geom.area",
+        "math.geom.solid-3d"
+      ],
+      "unlocks": [
+        "math.calc.surface-area-integral"
+      ],
+      "related": [
+        "math.geom.volume"
+      ],
+      "cross_links": [
+        "math.calc.surface-area-integral"
+      ],
       "description": "The total area of all faces of a three-dimensional solid; for curved surfaces computed via surface integrals.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9-10", "OpenStax Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.volume",
       "name": "Volume",
-      "aliases": ["3D volume", "capacity"],
+      "aliases": [
+        "3D volume",
+        "capacity"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.solid-3d"],
-      "unlocks": ["math.calc.volume-revolution"],
-      "related": ["math.geom.surface-area"],
-      "cross_links": ["math.calc.volume-revolution"],
+      "requires": [
+        "math.geom.solid-3d"
+      ],
+      "unlocks": [
+        "math.calc.volume-revolution"
+      ],
+      "related": [
+        "math.geom.surface-area"
+      ],
+      "cross_links": [
+        "math.calc.volume-revolution"
+      ],
       "description": "The three-dimensional measure of the space enclosed by a solid; computed by formulas for standard solids or by integration.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9-10", "OpenStax Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.solid-3d",
       "name": "Three-Dimensional Solids",
-      "aliases": ["3D shapes", "prisms", "pyramids", "cones", "spheres", "cylinders"],
+      "aliases": [
+        "3D shapes",
+        "prisms",
+        "pyramids",
+        "cones",
+        "spheres",
+        "cylinders"
+      ],
       "parent": null,
-      "children": ["math.geom.surface-area", "math.geom.volume"],
-      "requires": ["math.geom.polygon"],
-      "unlocks": ["math.geom.surface-area", "math.geom.volume"],
-      "related": ["math.geom.platonic-solids"],
+      "children": [
+        "math.geom.surface-area",
+        "math.geom.volume"
+      ],
+      "requires": [
+        "math.geom.polygon"
+      ],
+      "unlocks": [
+        "math.geom.surface-area",
+        "math.geom.volume"
+      ],
+      "related": [
+        "math.geom.platonic-solids"
+      ],
       "cross_links": [],
-      "description": "Geometric solids: prisms (uniform cross-section), pyramids (apex), cones, cylinders, spheres; characterized by faces, edges, vertices and their counts satisfying Euler's formula V−E+F=2.",
+      "description": "Geometric solids: prisms (uniform cross-section), pyramids (apex), cones, cylinders, spheres; characterized by faces, edges, vertices and their counts satisfying Euler's formula V\u2212E+F=2.",
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "understand",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 9-10", "OpenStax Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.platonic-solids",
       "name": "Platonic Solids",
-      "aliases": ["regular polyhedra", "tetrahedron", "cube", "octahedron", "dodecahedron", "icosahedron"],
+      "aliases": [
+        "regular polyhedra",
+        "tetrahedron",
+        "cube",
+        "octahedron",
+        "dodecahedron",
+        "icosahedron"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.solid-3d", "math.geom.regular-polygon"],
+      "requires": [
+        "math.geom.solid-3d",
+        "math.geom.regular-polygon"
+      ],
       "unlocks": [],
-      "related": ["math.geom.solid-3d"],
-      "cross_links": ["math.top.euler-characteristic"],
+      "related": [
+        "math.geom.solid-3d"
+      ],
+      "cross_links": [
+        "math.top.euler-characteristic"
+      ],
       "description": "The five convex regular polyhedra (tetrahedron, cube, octahedron, dodecahedron, icosahedron); the only regular polyhedra in 3D, classified by Euclid.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "understand",
       "mastery_threshold": 0.75,
-      "references": ["Euclid Elements Book XIII", "AoPS Geometry"]
+      "references": [
+        "Euclid Elements Book XIII",
+        "AoPS Geometry"
+      ]
     },
     {
       "id": "math.geom.coordinate-plane",
       "name": "Coordinate Plane",
-      "aliases": ["Cartesian plane", "xy-plane", "two-dimensional coordinate system"],
+      "aliases": [
+        "Cartesian plane",
+        "xy-plane",
+        "two-dimensional coordinate system"
+      ],
       "parent": null,
-      "children": ["math.geom.x-y-coordinates", "math.geom.quadrants"],
-      "requires": ["math.geom.plane", "math.found.real-numbers"],
-      "unlocks": ["math.geom.distance-formula", "math.geom.midpoint-formula", "math.geom.slope", "math.geom.line-equation"],
-      "related": ["math.geom.line-equation"],
-      "cross_links": ["math.func.graph-of-function"],
-      "description": "The plane ℝ² with two perpendicular number lines (x-axis, y-axis) intersecting at the origin, enabling algebraic representation of geometric objects.",
+      "children": [
+        "math.geom.x-y-coordinates",
+        "math.geom.quadrants"
+      ],
+      "requires": [
+        "math.geom.plane",
+        "math.found.real-numbers"
+      ],
+      "unlocks": [
+        "math.geom.distance-formula",
+        "math.geom.midpoint-formula",
+        "math.geom.slope",
+        "math.geom.line-equation"
+      ],
+      "related": [
+        "math.geom.line-equation"
+      ],
+      "cross_links": [
+        "math.func.graph-of-function"
+      ],
+      "description": "The plane \u211d\u00b2 with two perpendicular number lines (x-axis, y-axis) intersecting at the origin, enabling algebraic representation of geometric objects.",
       "difficulty": "developing",
       "estimated_hours": 6,
       "bloom": "understand",
-      "mastery_threshold": 0.90,
-      "references": ["Descartes 1637 La Géométrie", "NCERT Grade 9", "OpenStax College Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "Descartes 1637 La G\u00e9om\u00e9trie",
+        "NCERT Grade 9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.geom.x-y-coordinates",
       "name": "Cartesian Coordinates",
-      "aliases": ["(x, y)", "ordered pair", "rectangular coordinates"],
+      "aliases": [
+        "(x, y)",
+        "ordered pair",
+        "rectangular coordinates"
+      ],
       "parent": "math.geom.coordinate-plane",
       "children": [],
-      "requires": ["math.geom.coordinate-plane"],
+      "requires": [
+        "math.geom.coordinate-plane"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -765,15 +1395,23 @@
       "estimated_hours": 3,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 9", "OpenStax College Algebra"]
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.geom.quadrants",
       "name": "Quadrants",
-      "aliases": ["four quadrants", "I, II, III, IV"],
+      "aliases": [
+        "four quadrants",
+        "I, II, III, IV"
+      ],
       "parent": "math.geom.coordinate-plane",
       "children": [],
-      "requires": ["math.geom.coordinate-plane"],
+      "requires": [
+        "math.geom.coordinate-plane"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
@@ -782,415 +1420,759 @@
       "estimated_hours": 1,
       "bloom": "remember",
       "mastery_threshold": 0.95,
-      "references": ["NCERT Grade 9"]
+      "references": [
+        "NCERT Grade 9"
+      ]
     },
     {
       "id": "math.geom.distance-formula",
       "name": "Distance Formula",
-      "aliases": ["d = √((x₂−x₁)² + (y₂−y₁)²)", "Euclidean distance"],
+      "aliases": [
+        "d = \u221a((x\u2082\u2212x\u2081)\u00b2 + (y\u2082\u2212y\u2081)\u00b2)",
+        "Euclidean distance"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.pythagorean-theorem", "math.geom.coordinate-plane"],
-      "unlocks": ["math.geom.circle-equation", "math.geom.midpoint-formula"],
-      "related": ["math.geom.midpoint-formula"],
-      "cross_links": ["math.linalg.vector-norm"],
-      "description": "The distance between (x₁, y₁) and (x₂, y₂) is √((x₂−x₁)² + (y₂−y₁)²); a direct application of the Pythagorean theorem in coordinates.",
+      "requires": [
+        "math.geom.pythagorean-theorem",
+        "math.geom.coordinate-plane"
+      ],
+      "unlocks": [
+        "math.geom.circle-equation",
+        "math.geom.midpoint-formula"
+      ],
+      "related": [
+        "math.geom.midpoint-formula"
+      ],
+      "cross_links": [
+        "math.linalg.norm"
+      ],
+      "description": "The distance between (x\u2081, y\u2081) and (x\u2082, y\u2082) is \u221a((x\u2082\u2212x\u2081)\u00b2 + (y\u2082\u2212y\u2081)\u00b2); a direct application of the Pythagorean theorem in coordinates.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra", "OpenStax Geometry"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.midpoint-formula",
       "name": "Midpoint Formula",
-      "aliases": ["midpoint", "((x₁+x₂)/2, (y₁+y₂)/2)"],
+      "aliases": [
+        "midpoint",
+        "((x\u2081+x\u2082)/2, (y\u2081+y\u2082)/2)"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.coordinate-plane"],
+      "requires": [
+        "math.geom.coordinate-plane"
+      ],
       "unlocks": [],
-      "related": ["math.geom.distance-formula"],
+      "related": [
+        "math.geom.distance-formula"
+      ],
       "cross_links": [],
-      "description": "The midpoint of a segment from (x₁, y₁) to (x₂, y₂) is ((x₁+x₂)/2, (y₁+y₂)/2).",
+      "description": "The midpoint of a segment from (x\u2081, y\u2081) to (x\u2082, y\u2082) is ((x\u2081+x\u2082)/2, (y\u2081+y\u2082)/2).",
       "difficulty": "developing",
       "estimated_hours": 2,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.geom.slope",
       "name": "Slope",
-      "aliases": ["gradient", "m = (y₂−y₁)/(x₂−x₁)", "rise over run"],
+      "aliases": [
+        "gradient",
+        "m = (y\u2082\u2212y\u2081)/(x\u2082\u2212x\u2081)",
+        "rise over run"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.coordinate-plane"],
-      "unlocks": ["math.geom.line-equation"],
-      "related": ["math.geom.line-equation", "math.calc.derivative-intro"],
-      "cross_links": ["math.calc.derivative-intro"],
-      "description": "The slope of a line is the ratio of vertical change to horizontal change between any two points; m = (y₂−y₁)/(x₂−x₁); equal for parallel lines, negative reciprocals for perpendicular.",
+      "requires": [
+        "math.geom.coordinate-plane"
+      ],
+      "unlocks": [
+        "math.geom.line-equation"
+      ],
+      "related": [
+        "math.geom.line-equation",
+        "math.calc.derivative-intro"
+      ],
+      "cross_links": [
+        "math.calc.derivative-intro"
+      ],
+      "description": "The slope of a line is the ratio of vertical change to horizontal change between any two points; m = (y\u2082\u2212y\u2081)/(x\u2082\u2212x\u2081); equal for parallel lines, negative reciprocals for perpendicular.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.90,
-      "references": ["NCERT Grade 9-10", "OpenStax College Algebra"]
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 9-10",
+        "OpenStax College Algebra"
+      ]
     },
     {
       "id": "math.geom.line-equation",
       "name": "Equations of Lines",
-      "aliases": ["slope-intercept form", "point-slope form", "standard form of line"],
+      "aliases": [
+        "slope-intercept form",
+        "point-slope form",
+        "standard form of line"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.slope"],
-      "unlocks": ["math.alg.system-linear-equations"],
-      "related": ["math.func.linear-function"],
-      "cross_links": ["math.func.linear-function"],
-      "description": "y = mx + b (slope-intercept), y − y₁ = m(x − x₁) (point-slope), ax + by = c (standard form); three equivalent representations of a line.",
+      "requires": [
+        "math.geom.slope"
+      ],
+      "unlocks": [
+        "math.alg.system-linear-equations"
+      ],
+      "related": [
+        "math.func.linear-function"
+      ],
+      "cross_links": [
+        "math.func.linear-function"
+      ],
+      "description": "y = mx + b (slope-intercept), y \u2212 y\u2081 = m(x \u2212 x\u2081) (point-slope), ax + by = c (standard form); three equivalent representations of a line.",
       "difficulty": "proficient",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 9-11", "OpenStax College Algebra", "Singapore Math Grade 9"]
+      "references": [
+        "NCERT Grade 9-11",
+        "OpenStax College Algebra",
+        "Singapore Math Grade 9"
+      ]
     },
     {
       "id": "math.geom.conic-sections",
       "name": "Conic Sections",
-      "aliases": ["conics", "parabola", "ellipse", "hyperbola", "circle as conic"],
+      "aliases": [
+        "conics",
+        "parabola",
+        "ellipse",
+        "hyperbola",
+        "circle as conic"
+      ],
       "parent": null,
-      "children": ["math.geom.parabola", "math.geom.ellipse", "math.geom.hyperbola"],
-      "requires": ["math.geom.circle-equation", "math.alg.quadratic-equation"],
-      "unlocks": ["math.calc.parametric-curves"],
+      "children": [
+        "math.geom.parabola",
+        "math.geom.ellipse",
+        "math.geom.hyperbola"
+      ],
+      "requires": [
+        "math.geom.circle-equation",
+        "math.alg.quadratic-equation"
+      ],
+      "unlocks": [
+        "math.calc.parametric-curves"
+      ],
       "related": [],
-      "cross_links": ["math.calc.parametric-curves"],
+      "cross_links": [
+        "math.calc.parametric-curves"
+      ],
       "description": "Curves formed by the intersection of a double cone and a plane: circles, ellipses, parabolas, and hyperbolas; unified by the general second-degree equation.",
       "difficulty": "proficient",
       "estimated_hours": 15,
       "bloom": "analyze",
-      "mastery_threshold": 0.80,
-      "references": ["Apollonius of Perga", "NCERT Grade 11", "Stewart Precalculus", "OpenStax Precalculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "Apollonius of Perga",
+        "NCERT Grade 11",
+        "Stewart Precalculus",
+        "OpenStax Precalculus"
+      ]
     },
     {
       "id": "math.geom.parabola",
       "name": "Parabola",
-      "aliases": ["y = ax² + bx + c", "focus-directrix"],
+      "aliases": [
+        "y = ax\u00b2 + bx + c",
+        "focus-directrix"
+      ],
       "parent": "math.geom.conic-sections",
       "children": [],
-      "requires": ["math.geom.conic-sections", "math.alg.quadratic-equation"],
+      "requires": [
+        "math.geom.conic-sections",
+        "math.alg.quadratic-equation"
+      ],
       "unlocks": [],
-      "related": ["math.func.quadratic-function"],
-      "cross_links": ["math.func.quadratic-function"],
-      "description": "A conic section equidistant from a focus and a directrix; graph of a quadratic function; opens up/down (y = ax²+bx+c) or left/right (x = ay²+by+c).",
+      "related": [
+        "math.func.quadratic-function"
+      ],
+      "cross_links": [
+        "math.func.quadratic-function"
+      ],
+      "description": "A conic section equidistant from a focus and a directrix; graph of a quadratic function; opens up/down (y = ax\u00b2+bx+c) or left/right (x = ay\u00b2+by+c).",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax Precalculus", "Stewart Precalculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax Precalculus",
+        "Stewart Precalculus"
+      ]
     },
     {
       "id": "math.geom.ellipse",
       "name": "Ellipse",
-      "aliases": ["x²/a² + y²/b² = 1", "oval"],
+      "aliases": [
+        "x\u00b2/a\u00b2 + y\u00b2/b\u00b2 = 1",
+        "oval"
+      ],
       "parent": "math.geom.conic-sections",
       "children": [],
-      "requires": ["math.geom.conic-sections"],
+      "requires": [
+        "math.geom.conic-sections"
+      ],
       "unlocks": [],
-      "related": ["math.geom.circle"],
+      "related": [
+        "math.geom.circle"
+      ],
       "cross_links": [],
-      "description": "A conic section where the sum of distances from two foci is constant; equation x²/a² + y²/b² = 1; a circle is a special case with equal foci.",
+      "description": "A conic section where the sum of distances from two foci is constant; equation x\u00b2/a\u00b2 + y\u00b2/b\u00b2 = 1; a circle is a special case with equal foci.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 11", "OpenStax Precalculus"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax Precalculus"
+      ]
     },
     {
       "id": "math.geom.hyperbola",
       "name": "Hyperbola",
-      "aliases": ["x²/a² − y²/b² = 1"],
+      "aliases": [
+        "x\u00b2/a\u00b2 \u2212 y\u00b2/b\u00b2 = 1"
+      ],
       "parent": "math.geom.conic-sections",
       "children": [],
-      "requires": ["math.geom.conic-sections"],
+      "requires": [
+        "math.geom.conic-sections"
+      ],
       "unlocks": [],
-      "related": ["math.geom.ellipse"],
+      "related": [
+        "math.geom.ellipse"
+      ],
       "cross_links": [],
-      "description": "A conic section where the difference of distances from two foci is constant; has two branches and asymptotes y = ±(b/a)x.",
+      "description": "A conic section where the difference of distances from two foci is constant; has two branches and asymptotes y = \u00b1(b/a)x.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 11", "OpenStax Precalculus"]
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax Precalculus"
+      ]
     },
     {
       "id": "math.geom.polar-coordinates",
       "name": "Polar Coordinates",
-      "aliases": ["(r, θ)", "radial coordinates", "polar system"],
+      "aliases": [
+        "(r, \u03b8)",
+        "radial coordinates",
+        "polar system"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.coordinate-plane", "math.trig.trig-functions"],
-      "unlocks": ["math.geom.polar-curves", "math.cx.complex-polar"],
-      "related": ["math.cx.complex-polar"],
-      "cross_links": ["math.cx.complex-polar"],
-      "description": "An alternative 2D coordinate system using distance r from the origin and angle θ from the positive x-axis; related to Cartesian by x = r cos θ, y = r sin θ.",
+      "requires": [
+        "math.geom.coordinate-plane",
+        "math.trig.trig-functions"
+      ],
+      "unlocks": [
+        "math.geom.polar-curves",
+        "math.cx.complex-numbers-analysis"
+      ],
+      "related": [
+        "math.cx.complex-polar"
+      ],
+      "cross_links": [
+        "math.cx.complex-numbers-analysis"
+      ],
+      "description": "An alternative 2D coordinate system using distance r from the origin and angle \u03b8 from the positive x-axis; related to Cartesian by x = r cos \u03b8, y = r sin \u03b8.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 12 Physics", "OpenStax Calculus", "Stewart Precalculus"]
+      "references": [
+        "NCERT Grade 12 Physics",
+        "OpenStax Calculus",
+        "Stewart Precalculus"
+      ]
     },
     {
       "id": "math.geom.polar-curves",
       "name": "Polar Curves",
-      "aliases": ["r = f(θ)", "cardioid", "rose curves"],
+      "aliases": [
+        "r = f(\u03b8)",
+        "cardioid",
+        "rose curves"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.polar-coordinates"],
+      "requires": [
+        "math.geom.polar-coordinates"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "Curves expressed in polar form r = f(θ); includes cardioids, roses, lemniscates, and Archimedean spirals.",
+      "description": "Curves expressed in polar form r = f(\u03b8); includes cardioids, roses, lemniscates, and Archimedean spirals.",
       "difficulty": "advanced",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.70,
-      "references": ["OpenStax Calculus Vol 2", "Stewart Calculus"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "OpenStax Calculus Vol 2",
+        "Stewart Calculus"
+      ]
     },
     {
       "id": "math.geom.transformations",
       "name": "Geometric Transformations",
-      "aliases": ["isometries", "rigid motions", "translation", "rotation", "reflection"],
+      "aliases": [
+        "isometries",
+        "rigid motions",
+        "translation",
+        "rotation",
+        "reflection"
+      ],
       "parent": null,
-      "children": ["math.geom.translation", "math.geom.rotation", "math.geom.reflection", "math.geom.dilation"],
-      "requires": ["math.geom.coordinate-plane"],
-      "unlocks": ["math.linalg.linear-transformations"],
-      "related": ["math.linalg.linear-transformations"],
-      "cross_links": ["math.linalg.linear-transformations", "math.abst.group-symmetry"],
+      "children": [
+        "math.geom.translation",
+        "math.geom.rotation",
+        "math.geom.reflection",
+        "math.geom.dilation"
+      ],
+      "requires": [
+        "math.geom.coordinate-plane"
+      ],
+      "unlocks": [
+        "math.linalg.linear-map"
+      ],
+      "related": [
+        "math.linalg.linear-transformations"
+      ],
+      "cross_links": [
+        "math.linalg.linear-map",
+        "math.abst.group-action"
+      ],
       "description": "Functions mapping the plane to itself that preserve shape properties; isometries (translations, rotations, reflections) preserve distance; dilations scale by a factor.",
       "difficulty": "proficient",
       "estimated_hours": 12,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 10", "OpenStax Geometry", "AoPS Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Geometry",
+        "AoPS Geometry"
+      ]
     },
     {
       "id": "math.geom.translation",
       "name": "Translation",
-      "aliases": ["slide", "glide"],
+      "aliases": [
+        "slide",
+        "glide"
+      ],
       "parent": "math.geom.transformations",
       "children": [],
-      "requires": ["math.geom.transformations"],
+      "requires": [
+        "math.geom.transformations"
+      ],
       "unlocks": [],
-      "related": ["math.geom.rotation", "math.geom.reflection"],
+      "related": [
+        "math.geom.rotation",
+        "math.geom.reflection"
+      ],
       "cross_links": [],
       "description": "A transformation that moves every point by the same vector (h, k), preserving shape, size, and orientation.",
       "difficulty": "proficient",
       "estimated_hours": 2,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 10", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.rotation",
       "name": "Rotation",
-      "aliases": ["turn", "rotation by θ about a point"],
+      "aliases": [
+        "turn",
+        "rotation by \u03b8 about a point"
+      ],
       "parent": "math.geom.transformations",
       "children": [],
-      "requires": ["math.geom.transformations", "math.trig.trig-functions"],
-      "unlocks": ["math.linalg.rotation-matrix"],
-      "related": ["math.linalg.rotation-matrix"],
-      "cross_links": ["math.linalg.rotation-matrix"],
-      "description": "A transformation that turns every point by angle θ about a fixed center; expressed by a 2×2 rotation matrix.",
+      "requires": [
+        "math.geom.transformations",
+        "math.trig.trig-functions"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.linalg.rotation-matrix"
+      ],
+      "cross_links": [],
+      "description": "A transformation that turns every point by angle \u03b8 about a fixed center; expressed by a 2\u00d72 rotation matrix.",
       "difficulty": "proficient",
       "estimated_hours": 4,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 10", "OpenStax Geometry", "Lay Linear Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Geometry",
+        "Lay Linear Algebra"
+      ]
     },
     {
       "id": "math.geom.reflection",
       "name": "Reflection",
-      "aliases": ["mirror image", "flip"],
+      "aliases": [
+        "mirror image",
+        "flip"
+      ],
       "parent": "math.geom.transformations",
       "children": [],
-      "requires": ["math.geom.transformations"],
+      "requires": [
+        "math.geom.transformations"
+      ],
       "unlocks": [],
-      "related": ["math.geom.rotation"],
+      "related": [
+        "math.geom.rotation"
+      ],
       "cross_links": [],
       "description": "A transformation that flips every point over a line of reflection, reversing orientation.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
       "mastery_threshold": 0.85,
-      "references": ["NCERT Grade 10", "OpenStax Geometry"]
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.dilation",
       "name": "Dilation",
-      "aliases": ["scaling", "homothety", "enlargement"],
+      "aliases": [
+        "scaling",
+        "homothety",
+        "enlargement"
+      ],
       "parent": "math.geom.transformations",
       "children": [],
-      "requires": ["math.geom.transformations", "math.arith.ratios"],
+      "requires": [
+        "math.geom.transformations",
+        "math.arith.ratios"
+      ],
       "unlocks": [],
-      "related": ["math.geom.similar-triangles"],
+      "related": [
+        "math.geom.similar-triangles"
+      ],
       "cross_links": [],
       "description": "A transformation scaling distances from a center by a constant factor k; produces a similar figure of different size.",
       "difficulty": "proficient",
       "estimated_hours": 3,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 10", "OpenStax Geometry"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 10",
+        "OpenStax Geometry"
+      ]
     },
     {
       "id": "math.geom.vectors-2d",
       "name": "Vectors in 2D",
-      "aliases": ["2D vector", "(a, b)", "directed segment"],
+      "aliases": [
+        "2D vector",
+        "(a, b)",
+        "directed segment"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.coordinate-plane", "math.arith.addition"],
-      "unlocks": ["math.geom.vectors-3d", "math.linalg.vectors"],
-      "related": ["math.linalg.vectors"],
-      "cross_links": ["math.linalg.vectors"],
+      "requires": [
+        "math.geom.coordinate-plane",
+        "math.arith.addition"
+      ],
+      "unlocks": [
+        "math.geom.vectors-3d",
+        "math.linalg.vector"
+      ],
+      "related": [
+        "math.linalg.vectors"
+      ],
+      "cross_links": [
+        "math.linalg.vector"
+      ],
       "description": "A quantity with both magnitude and direction in the plane, represented by an ordered pair; added head-to-tail and scaled by multiplication.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 11", "OpenStax Precalculus", "Stewart Precalculus"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax Precalculus",
+        "Stewart Precalculus"
+      ]
     },
     {
       "id": "math.geom.vectors-3d",
       "name": "Vectors in 3D",
-      "aliases": ["3D vector", "(a, b, c)", "spatial vector"],
+      "aliases": [
+        "3D vector",
+        "(a, b, c)",
+        "spatial vector"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.vectors-2d"],
-      "unlocks": ["math.linalg.vectors", "math.calc.multivariable-intro"],
-      "related": ["math.linalg.vectors"],
-      "cross_links": ["math.linalg.vectors", "math.calc.multivariable-intro"],
+      "requires": [
+        "math.geom.vectors-2d"
+      ],
+      "unlocks": [
+        "math.linalg.vector",
+        "math.calc.multivariable-intro"
+      ],
+      "related": [
+        "math.linalg.vectors"
+      ],
+      "cross_links": [
+        "math.linalg.vector",
+        "math.calc.multivariable-intro"
+      ],
       "description": "Vectors in three-dimensional space; introduced by extending the 2D framework to triples (a, b, c) with dot and cross products.",
       "difficulty": "proficient",
       "estimated_hours": 6,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 12", "Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 12",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.geom.dot-product",
       "name": "Dot Product",
-      "aliases": ["scalar product", "inner product (intro)", "a·b = |a||b|cosθ"],
+      "aliases": [
+        "scalar product",
+        "inner product (intro)",
+        "a\u00b7b = |a||b|cos\u03b8"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.vectors-3d", "math.trig.trig-functions"],
-      "unlocks": ["math.linalg.inner-product-spaces"],
-      "related": ["math.geom.cross-product", "math.linalg.inner-product-spaces"],
-      "cross_links": ["math.linalg.inner-product-spaces"],
-      "description": "The dot product a·b = Σaᵢbᵢ = |a||b|cos θ; measures the component of one vector in the direction of another; zero iff orthogonal.",
+      "requires": [
+        "math.geom.vectors-3d",
+        "math.trig.trig-functions"
+      ],
+      "unlocks": [
+        "math.linalg.inner-product-space"
+      ],
+      "related": [
+        "math.geom.cross-product",
+        "math.linalg.inner-product-spaces"
+      ],
+      "cross_links": [
+        "math.linalg.inner-product-space"
+      ],
+      "description": "The dot product a\u00b7b = \u03a3a\u1d62b\u1d62 = |a||b|cos \u03b8; measures the component of one vector in the direction of another; zero iff orthogonal.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
-      "mastery_threshold": 0.80,
-      "references": ["NCERT Grade 12", "Stewart Calculus", "Lay Linear Algebra"]
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 12",
+        "Stewart Calculus",
+        "Lay Linear Algebra"
+      ]
     },
     {
       "id": "math.geom.cross-product",
       "name": "Cross Product",
-      "aliases": ["vector product", "a × b", "perpendicular vector"],
+      "aliases": [
+        "vector product",
+        "a \u00d7 b",
+        "perpendicular vector"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.vectors-3d"],
+      "requires": [
+        "math.geom.vectors-3d"
+      ],
       "unlocks": [],
-      "related": ["math.geom.dot-product"],
+      "related": [
+        "math.geom.dot-product"
+      ],
       "cross_links": [],
-      "description": "The cross product a × b is a vector perpendicular to both a and b with magnitude |a||b|sin θ; defined only in ℝ³ (and ℝ⁷).",
+      "description": "The cross product a \u00d7 b is a vector perpendicular to both a and b with magnitude |a||b|sin \u03b8; defined only in \u211d\u00b3 (and \u211d\u2077).",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["NCERT Grade 12", "Stewart Calculus", "OpenStax Calculus Vol 2"]
+      "references": [
+        "NCERT Grade 12",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
     },
     {
       "id": "math.geom.differential-geometry-curves",
       "name": "Curves in Space",
-      "aliases": ["parametric curves", "space curves", "arc length", "curvature"],
+      "aliases": [
+        "parametric curves",
+        "space curves",
+        "arc length",
+        "curvature"
+      ],
       "parent": null,
-      "children": ["math.geom.curvature", "math.geom.frenet-serret"],
-      "requires": ["math.calc.parametric-curves", "math.geom.vectors-3d"],
-      "unlocks": ["math.geom.differential-geometry-surfaces"],
-      "related": ["math.geom.differential-geometry-surfaces"],
+      "children": [
+        "math.geom.curvature",
+        "math.geom.frenet-serret"
+      ],
+      "requires": [
+        "math.calc.parametric-curves",
+        "math.geom.vectors-3d"
+      ],
+      "unlocks": [
+        "math.geom.differential-geometry-surfaces"
+      ],
+      "related": [
+        "math.geom.differential-geometry-surfaces"
+      ],
       "cross_links": [],
-      "description": "Smooth curves in ℝⁿ studied via their parametrization; local geometry described by curvature κ and torsion τ via the Frenet-Serret apparatus.",
+      "description": "Smooth curves in \u211d\u207f studied via their parametrization; local geometry described by curvature \u03ba and torsion \u03c4 via the Frenet-Serret apparatus.",
       "difficulty": "advanced",
       "estimated_hours": 12,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["do Carmo 1976 Differential Geometry of Curves and Surfaces", "Pressley 2010 Elementary Differential Geometry"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "do Carmo 1976 Differential Geometry of Curves and Surfaces",
+        "Pressley 2010 Elementary Differential Geometry"
+      ]
     },
     {
       "id": "math.geom.curvature",
       "name": "Curvature",
-      "aliases": ["κ", "geodesic curvature", "normal curvature"],
+      "aliases": [
+        "\u03ba",
+        "geodesic curvature",
+        "normal curvature"
+      ],
       "parent": "math.geom.differential-geometry-curves",
       "children": [],
-      "requires": ["math.geom.differential-geometry-curves", "math.calc.derivative-rules"],
-      "unlocks": ["math.geom.differential-geometry-surfaces"],
+      "requires": [
+        "math.geom.differential-geometry-curves",
+        "math.calc.derivative-rules"
+      ],
+      "unlocks": [
+        "math.geom.differential-geometry-surfaces"
+      ],
       "related": [],
       "cross_links": [],
-      "description": "The rate at which a curve bends; κ = |dT/ds| where T is the unit tangent vector and s is arc length.",
+      "description": "The rate at which a curve bends; \u03ba = |dT/ds| where T is the unit tangent vector and s is arc length.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "analyze",
-      "mastery_threshold": 0.70,
-      "references": ["do Carmo 1976", "Pressley 2010"]
+      "mastery_threshold": 0.7,
+      "references": [
+        "do Carmo 1976",
+        "Pressley 2010"
+      ]
     },
     {
       "id": "math.geom.frenet-serret",
       "name": "Frenet-Serret Formulas",
-      "aliases": ["TNB frame", "Frenet frame", "curvature and torsion"],
+      "aliases": [
+        "TNB frame",
+        "Frenet frame",
+        "curvature and torsion"
+      ],
       "parent": "math.geom.differential-geometry-curves",
       "children": [],
-      "requires": ["math.geom.curvature"],
+      "requires": [
+        "math.geom.curvature"
+      ],
       "unlocks": [],
       "related": [],
       "cross_links": [],
-      "description": "The system T' = κN, N' = −κT + τB, B' = −τN relating the tangent T, normal N, binormal B and encoding all local geometry of a space curve.",
+      "description": "The system T' = \u03baN, N' = \u2212\u03baT + \u03c4B, B' = \u2212\u03c4N relating the tangent T, normal N, binormal B and encoding all local geometry of a space curve.",
       "difficulty": "advanced",
       "estimated_hours": 8,
       "bloom": "analyze",
       "mastery_threshold": 0.65,
-      "references": ["do Carmo 1976", "Pressley 2010"]
+      "references": [
+        "do Carmo 1976",
+        "Pressley 2010"
+      ]
     },
     {
       "id": "math.geom.differential-geometry-surfaces",
       "name": "Differential Geometry of Surfaces",
-      "aliases": ["Gaussian curvature", "first fundamental form", "mean curvature"],
+      "aliases": [
+        "Gaussian curvature",
+        "first fundamental form",
+        "mean curvature"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.differential-geometry-curves", "math.calc.partial-derivatives"],
-      "unlocks": ["math.top.riemannian-geometry"],
-      "related": ["math.top.riemannian-geometry"],
-      "cross_links": ["math.top.riemannian-geometry"],
-      "description": "The study of smooth surfaces in ℝ³ via first and second fundamental forms, Gaussian curvature K, mean curvature H, and the Gauss-Bonnet theorem.",
+      "requires": [
+        "math.geom.differential-geometry-curves",
+        "math.calc.partial-derivatives"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.top.riemannian-geometry"
+      ],
+      "cross_links": [],
+      "description": "The study of smooth surfaces in \u211d\u00b3 via first and second fundamental forms, Gaussian curvature K, mean curvature H, and the Gauss-Bonnet theorem.",
       "difficulty": "expert",
       "estimated_hours": 30,
       "bloom": "analyze",
       "mastery_threshold": 0.65,
-      "references": ["do Carmo 1976", "Pressley 2010", "Spivak 1979 A Comprehensive Introduction to Differential Geometry"]
+      "references": [
+        "do Carmo 1976",
+        "Pressley 2010",
+        "Spivak 1979 A Comprehensive Introduction to Differential Geometry"
+      ]
     },
     {
       "id": "math.geom.geometric-constructions",
       "name": "Geometric Constructions",
-      "aliases": ["compass and straightedge", "ruler and compass constructions"],
+      "aliases": [
+        "compass and straightedge",
+        "ruler and compass constructions"
+      ],
       "parent": null,
       "children": [],
-      "requires": ["math.geom.triangle", "math.geom.circle"],
+      "requires": [
+        "math.geom.triangle",
+        "math.geom.circle"
+      ],
       "unlocks": [],
-      "related": ["math.abst.galois-theory"],
-      "cross_links": ["math.abst.galois-theory"],
+      "related": [
+        "math.abst.galois-theory"
+      ],
+      "cross_links": [
+        "math.abst.galois-theory"
+      ],
       "description": "Constructions achievable using only compass and straightedge; includes bisecting angles and segments, constructing regular polygons; Galois theory classifies which are possible.",
       "difficulty": "proficient",
       "estimated_hours": 10,
       "bloom": "apply",
       "mastery_threshold": 0.75,
-      "references": ["Euclid Elements", "AoPS Geometry", "NCERT Grade 9-10"]
+      "references": [
+        "Euclid Elements",
+        "AoPS Geometry",
+        "NCERT Grade 9-10"
+      ]
     }
   ]
 }
