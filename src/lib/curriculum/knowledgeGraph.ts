@@ -1,18 +1,25 @@
 /**
  * Knowledge Graph bridge layer.
  *
- * The rich node data lives in src/lib/education/*.ts.  This file exposes the
- * KGNode / KnowledgeGraph shape that the rest of the app (learn/chat, curriculum
- * route, learner intelligence) expects, and wires every function to the real data.
+ * The rich node data lives in src/lib/education/*.ts (legacy 54-node KGs) and
+ * docs/{subject}/kg/graph.json (canonical KGs).  This file exposes the
+ * KGNode / KnowledgeGraph shape the rest of the app expects and wires every
+ * function to the right data source.
  *
- * Subject slug → KG mapping:
- *   mathematics            → MATH_KNOWLEDGE_GRAPH   (54 nodes)
- *   physics                → SCIENCE_KNOWLEDGE_GRAPH filtered to physics.* (24 nodes)
- *   chemistry              → SCIENCE_KNOWLEDGE_GRAPH filtered to chemistry.* (17 nodes)
- *   biology                → SCIENCE_KNOWLEDGE_GRAPH filtered to biology.* (20 nodes)
- *   english                → ENGLISH_KNOWLEDGE_GRAPH (38 nodes)
- *   social_science / socials → SOCIAL_SCIENCE_KNOWLEDGE_GRAPH (46 nodes)
- *   (all others)           → null  (falls through to subjectCatalog)
+ * ── Canonical KG adapters (SUBJECT_ADAPTERS) ─────────────────────────────────
+ *   mathematics  →  docs/mathematics/kg/graph.json  (908 concepts)
+ *   physics      →  docs/physics/kg/graph.json      (194 concepts)
+ *   chemistry    →  docs/chemistry/kg/graph.json    (canonical, new)
+ *
+ * Adding a new subject: drop a graph.json under docs/{subject}/kg/ and add
+ * one entry to SUBJECT_ADAPTERS + one entry to ID_PREFIX_TO_SUBJECT below.
+ * No new adapter code is required.
+ *
+ * ── Legacy 54-node KGs (fallback) ────────────────────────────────────────────
+ *   biology        →  SCIENCE_KNOWLEDGE_GRAPH filtered to biology.*
+ *   english        →  ENGLISH_KNOWLEDGE_GRAPH
+ *   social_science →  SOCIAL_SCIENCE_KNOWLEDGE_GRAPH
+ *   (all others)   →  null  (falls through to subjectCatalog)
  */
 
 import {
@@ -22,8 +29,25 @@ import {
   SOCIAL_SCIENCE_KNOWLEDGE_GRAPH,
 } from '@/lib/education'
 import type { KnowledgeNode } from '@/lib/education'
-import { getMathKgNodes } from './mathKgAdapter'
-import { getPhysicsKgNodes } from './physicsKgAdapter'
+import { createSubjectAdapter } from './subjectKgAdapter'
+
+// ── Canonical KG adapter registry ─────────────────────────────────────────────
+// Add one entry per subject that has a canonical graph.json.
+// The adapter is lazy — it only reads the file on first getNodes() call.
+
+const SUBJECT_ADAPTERS: Record<string, ReturnType<typeof createSubjectAdapter>> = {
+  mathematics: createSubjectAdapter('mathematics'),
+  physics:     createSubjectAdapter('physics'),
+  chemistry:   createSubjectAdapter('chemistry'),
+}
+
+// Maps the first ID segment to the subject name so getKGNode() can route
+// phys.em.faradays-law → physics adapter without scanning all adapters.
+const ID_PREFIX_TO_SUBJECT: Record<string, string> = {
+  math: 'mathematics',
+  phys: 'physics',
+  chem: 'chemistry',
+}
 
 // ── Public types ──────────────────────────────────────────────────────────────
 
@@ -73,24 +97,21 @@ function difficultyHours(d: string): number {
 }
 
 /**
- * Group a flat KnowledgeNode[] into KGModule[] by domain key.
+ * Group a flat KnowledgeNode[] into KGModule[] by domain.
  *
- * For science subjects the domain is compound ('physics.kinematics') — we use
- * the SECOND segment so each sub-discipline becomes its own module.
- * For everything else we use the first (and only) segment.
+ * Uses the full compound domain string (e.g. "phys.mech", "math.found") as the
+ * map key so that sub-domain names shared across subjects (e.g. "meas" appears
+ * in both math and physics) resolve to the correct label.  Math short-keys
+ * resolve via the last-segment fallback in domainLabel().
  */
 function groupIntoModules(nodes: KnowledgeNode[]): KGModule[] {
   const map = new Map<string, KGNode[]>()
 
   for (const n of nodes) {
     const parts = n.domain.split('.')
-    // If the top-level domain matches the subject (e.g. all nodes have 'physics.*')
-    // use the second segment so we get meaningful module titles like "Kinematics".
-    // Otherwise use the first segment (math, english, etc. are already meaningful).
     const uniqueTop = new Set(nodes.map((x) => x.domain.split('.')[0]))
-    // Use full domain string as lookup key to avoid collisions between subjects
-    // whose second-segment names overlap (e.g. math.meas=Measure Theory vs
-    // phys.meas=Measurement & Units). Math short-keys still resolve via fallback.
+    // Use full domain string when all nodes share the same top-level prefix so
+    // domainLabel can look up a qualified key like "phys.meas" or "chem.atomic".
     const key = uniqueTop.size === 1 && parts.length > 1 ? n.domain : parts[0]
     const label = domainLabel(key)
     if (!map.has(label)) map.set(label, [])
@@ -140,6 +161,34 @@ function domainLabel(domain: string): string {
     'phys.rel':   'Special Relativity',
     'phys.stat':  'Statistical Mechanics',
     'phys.astro': 'Astrophysics',
+    // ── Chemistry KG: qualified keys ─────────────────────────────────────────
+    'chem.found':   'Chemical Foundations',
+    'chem.atomic':  'Atomic Structure',
+    'chem.period':  'Periodic Table',
+    'chem.bond':    'Chemical Bonding',
+    'chem.state':   'States of Matter',
+    'chem.sol':     'Solutions',
+    'chem.thermo':  'Thermochemistry',
+    'chem.equil':   'Chemical Equilibrium',
+    'chem.redox':   'Redox Reactions',
+    'chem.elect':   'Electrochemistry',
+    'chem.kinet':   'Chemical Kinetics',
+    'chem.solid':   'Solid State',
+    'chem.surface': 'Surface Chemistry',
+    'chem.coord':   'Coordination Chemistry',
+    'chem.sblock':  's-Block Elements',
+    'chem.pblock':  'p-Block Elements',
+    'chem.dblock':  'd & f-Block Elements',
+    'chem.org':     'Organic Fundamentals',
+    'chem.hyd':     'Hydrocarbons',
+    'chem.hal':     'Haloalkanes & Haloarenes',
+    'chem.alc':     'Alcohols, Phenols & Ethers',
+    'chem.carb':    'Carbonyl Compounds',
+    'chem.nitro':   'Nitrogen Compounds',
+    'chem.bio':     'Biomolecules',
+    'chem.poly':    'Polymers',
+    'chem.env':     'Environmental Chemistry',
+    'chem.anal':    'Analytical Chemistry',
     // ── 54-node KG domain keys (legacy / other subjects) ─────────────────────
     arithmetic:          'Arithmetic',
     number_systems:      'Number Systems',
@@ -178,8 +227,9 @@ function domainLabel(domain: string): string {
     economics:           'Economics',
     society:             'Society & Culture',
   }
-  // Try exact key, then fall back to last segment (math short-keys like "found","arith")
+  // Try exact key first (covers both qualified "phys.meas" and 54-node "arithmetic")
   if (labels[domain]) return labels[domain]
+  // Fall back to the last segment so math short-keys ("math.found" → "found") resolve
   const seg = domain.split('.').pop() ?? domain
   return labels[seg] ?? seg.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
@@ -187,23 +237,16 @@ function domainLabel(domain: string): string {
 // ── Subject → raw node array ──────────────────────────────────────────────────
 
 function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
+  // Canonical KG adapters — primary path for all new subjects
+  const adapter = SUBJECT_ADAPTERS[subjectSlug]
+  if (adapter) return adapter.getNodes()
+
+  // Legacy 54-node KGs — fallback for subjects not yet on canonical KGs
   switch (subjectSlug) {
-    case 'mathematics':
-      return getMathKgNodes()
-
-    case 'physics':
-      return getPhysicsKgNodes()
-
-    case 'chemistry':
-      return (SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]).filter((n) =>
-        n.domain.startsWith('chemistry')
-      )
-
     case 'biology':
       return (SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]).filter((n) =>
         n.domain.startsWith('biology')
       )
-
     case 'english':
       return ENGLISH_KNOWLEDGE_GRAPH as KnowledgeNode[]
 
@@ -220,19 +263,18 @@ function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
 
 /** Look up a single KG node by its id/slug across all graphs. */
 export function getKGNode(id: string): KGNode | undefined {
-  // 908-node math KG is primary for math.* IDs
-  if (id.startsWith('math.')) {
-    const mathNode = getMathKgNodes().find((n) => n.id === id)
-    if (mathNode) return toKGNode(mathNode)
+  // Route by ID prefix to the canonical KG adapter (math.*, phys.*, chem.*, …)
+  const prefix = id.split('.')[0]
+  const subject = ID_PREFIX_TO_SUBJECT[prefix]
+  if (subject) {
+    const adapter = SUBJECT_ADAPTERS[subject]
+    if (adapter) {
+      const node = adapter.getNodes().find((n) => n.id === id)
+      if (node) return toKGNode(node)
+    }
   }
 
-  // 194-node physics KG is primary for phys.* IDs
-  if (id.startsWith('phys.')) {
-    const physNode = getPhysicsKgNodes().find((n) => n.id === id)
-    if (physNode) return toKGNode(physNode)
-  }
-
-  // Other subjects + legacy 54-node math IDs (arithmetic.*, geometry.*, etc.)
+  // Legacy 54-node KG fallback (arithmetic.*, geometry.*, physics.*, etc.)
   const allSources = [
     MATH_KNOWLEDGE_GRAPH,
     SCIENCE_KNOWLEDGE_GRAPH,

@@ -1,0 +1,3079 @@
+{
+  "name": "Chemistry Knowledge Graph",
+  "version": "1.0.0",
+  "status": "production",
+  "build_date": "2026-06-29",
+  "concepts": [
+    {
+      "id": "chem.found.matter",
+      "name": "Nature of Matter",
+      "requires": [],
+      "unlocks": [
+        "chem.atomic.atomic-theory",
+        "chem.found.measurement",
+        "chem.found.pure-substances",
+        "chem.found.states-of-matter"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Classification of matter into elements, compounds and mixtures; macroscopic and molecular distinctions between pure substances and mixtures."
+    },
+    {
+      "id": "chem.found.states-of-matter",
+      "name": "States of Matter",
+      "requires": [
+        "chem.found.matter"
+      ],
+      "unlocks": [
+        "chem.state.kinetic-theory"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Solid, liquid and gas phases; interconversion via heating/cooling; plasma as the fourth state."
+    },
+    {
+      "id": "chem.found.pure-substances",
+      "name": "Pure Substances and Mixtures",
+      "requires": [
+        "chem.found.matter"
+      ],
+      "unlocks": [
+        "chem.env.atmosphere",
+        "chem.sol.types",
+        "chem.surface.colloids"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Distinction between elements and compounds; homogeneous and heterogeneous mixtures; separation techniques."
+    },
+    {
+      "id": "chem.found.measurement",
+      "name": "Physical Quantities and SI Units",
+      "requires": [
+        "chem.found.matter"
+      ],
+      "unlocks": [
+        "chem.atomic.electromagnetic-radiation",
+        "chem.elect.conductance",
+        "chem.found.mole-concept",
+        "chem.found.significant-figures",
+        "chem.state.gas-laws",
+        "chem.thermo.system-surroundings"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "SI base units, derived units, prefixes; significant figures; accuracy vs precision; scientific notation."
+    },
+    {
+      "id": "chem.found.significant-figures",
+      "name": "Significant Figures and Error Analysis",
+      "requires": [
+        "chem.found.measurement"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Rules for counting and arithmetic with significant figures; absolute and relative error; propagation of uncertainty."
+    },
+    {
+      "id": "chem.found.mole-concept",
+      "name": "Mole Concept and Avogadro's Number",
+      "requires": [
+        "chem.found.measurement"
+      ],
+      "unlocks": [
+        "chem.found.concentration",
+        "chem.found.stoichiometry",
+        "chem.state.molar-mass-gas"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "The mole as SI unit of amount; Avogadro's number; molar mass; interconversion of mass, moles and number of particles."
+    },
+    {
+      "id": "chem.found.stoichiometry",
+      "name": "Stoichiometry",
+      "requires": [
+        "chem.found.mole-concept"
+      ],
+      "unlocks": [
+        "chem.anal.gravimetric"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Balancing chemical equations; mole ratios; limiting reagent; theoretical and percent yield calculations."
+    },
+    {
+      "id": "chem.found.concentration",
+      "name": "Concentration Units",
+      "requires": [
+        "chem.found.mole-concept"
+      ],
+      "unlocks": [
+        "chem.anal.volumetric",
+        "chem.equil.kw-ph",
+        "chem.kinet.rate",
+        "chem.redox.titrations",
+        "chem.sol.types"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Molarity, molality, mole fraction, mass percent, ppm; interconversion of concentration units; dilution calculations."
+    },
+    {
+      "id": "chem.atomic.atomic-theory",
+      "name": "Atomic Theory",
+      "requires": [
+        "chem.found.matter"
+      ],
+      "unlocks": [
+        "chem.atomic.subatomic-particles"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Dalton's atomic theory; discovery of electron (cathode rays), proton (canal rays) and neutron; nuclear model of the atom."
+    },
+    {
+      "id": "chem.atomic.subatomic-particles",
+      "name": "Subatomic Particles",
+      "requires": [
+        "chem.atomic.atomic-theory"
+      ],
+      "unlocks": [
+        "chem.atomic.atomic-spectra",
+        "chem.period.classification"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Properties of proton, neutron and electron; atomic number, mass number; isotopes, isobars and isotones."
+    },
+    {
+      "id": "chem.atomic.electromagnetic-radiation",
+      "name": "Electromagnetic Radiation",
+      "requires": [
+        "chem.found.measurement"
+      ],
+      "unlocks": [
+        "chem.anal.spectroscopy-anal",
+        "chem.atomic.atomic-spectra",
+        "chem.atomic.photoelectric-effect",
+        "chem.kinet.photochemistry",
+        "chem.org.spectroscopy"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Wave nature of light; wavelength, frequency, speed; electromagnetic spectrum; relationship E = h\u03bd."
+    },
+    {
+      "id": "chem.atomic.atomic-spectra",
+      "name": "Atomic Spectra",
+      "requires": [
+        "chem.atomic.electromagnetic-radiation",
+        "chem.atomic.subatomic-particles"
+      ],
+      "unlocks": [
+        "chem.atomic.bohr-model"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Emission and absorption spectra; hydrogen spectrum; Balmer, Lyman and Paschen series; Rydberg equation."
+    },
+    {
+      "id": "chem.atomic.bohr-model",
+      "name": "Bohr Model of the Atom",
+      "requires": [
+        "chem.atomic.atomic-spectra"
+      ],
+      "unlocks": [
+        "chem.atomic.quantum-numbers"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Postulates of Bohr's model; energy levels in hydrogen; calculation of radii, velocities and energies; limitations."
+    },
+    {
+      "id": "chem.atomic.quantum-numbers",
+      "name": "Quantum Numbers",
+      "requires": [
+        "chem.atomic.bohr-model"
+      ],
+      "unlocks": [
+        "chem.atomic.orbitals"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Principal (n), azimuthal (l), magnetic (ml) and spin (ms) quantum numbers; physical significance; allowed values."
+    },
+    {
+      "id": "chem.atomic.orbitals",
+      "name": "Atomic Orbitals",
+      "requires": [
+        "chem.atomic.quantum-numbers"
+      ],
+      "unlocks": [
+        "chem.atomic.electronic-config",
+        "chem.atomic.quantum-mech-model",
+        "chem.bond.mo-theory",
+        "chem.coord.cft"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Shapes of s, p, d and f orbitals; nodes (radial and angular); orbital energy diagrams; radial distribution functions."
+    },
+    {
+      "id": "chem.atomic.electronic-config",
+      "name": "Electronic Configuration",
+      "requires": [
+        "chem.atomic.orbitals"
+      ],
+      "unlocks": [
+        "chem.dblock.general",
+        "chem.period.modern-periodic-law"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Aufbau principle, Hund's rule, Pauli exclusion principle; writing configurations; anomalous configurations of Cr and Cu."
+    },
+    {
+      "id": "chem.atomic.photoelectric-effect",
+      "name": "Photoelectric Effect and Dual Nature",
+      "requires": [
+        "chem.atomic.electromagnetic-radiation"
+      ],
+      "unlocks": [
+        "chem.atomic.quantum-mech-model"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Einstein's explanation of the photoelectric effect; work function; photon energy; de Broglie wavelength; Heisenberg's uncertainty principle."
+    },
+    {
+      "id": "chem.atomic.quantum-mech-model",
+      "name": "Quantum Mechanical Model",
+      "requires": [
+        "chem.atomic.orbitals",
+        "chem.atomic.photoelectric-effect"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Schr\u00f6dinger wave equation (qualitative); wave function \u03c8 and probability density \u03c8\u00b2; significance of orbital shapes."
+    },
+    {
+      "id": "chem.period.classification",
+      "name": "Early Classification of Elements",
+      "requires": [
+        "chem.atomic.subatomic-particles"
+      ],
+      "unlocks": [
+        "chem.period.modern-periodic-law"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "D\u00f6bereiner's triads, Newlands' octaves, Mendeleev's periodic table; prediction of undiscovered elements; limitations."
+    },
+    {
+      "id": "chem.period.modern-periodic-law",
+      "name": "Modern Periodic Law and Table",
+      "requires": [
+        "chem.period.classification",
+        "chem.atomic.electronic-config"
+      ],
+      "unlocks": [
+        "chem.bond.metallic-bonding",
+        "chem.period.atomic-radius",
+        "chem.period.electron-affinity",
+        "chem.period.ionization-energy",
+        "chem.period.valency",
+        "chem.sblock.hydrogen"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Modern periodic law based on atomic number; long form of periodic table; periods, groups, blocks (s,p,d,f); position of hydrogen."
+    },
+    {
+      "id": "chem.period.atomic-radius",
+      "name": "Atomic and Ionic Radius",
+      "requires": [
+        "chem.period.modern-periodic-law"
+      ],
+      "unlocks": [
+        "chem.period.periodic-properties"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Covalent, van der Waals and ionic radii; trends across periods and down groups; isoelectronic species."
+    },
+    {
+      "id": "chem.period.ionization-energy",
+      "name": "Ionization Energy",
+      "requires": [
+        "chem.period.modern-periodic-law"
+      ],
+      "unlocks": [
+        "chem.bond.ionic-bonding",
+        "chem.period.periodic-properties"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "First and successive ionization energies; trends in the periodic table; anomalies at Groups 2/13 and 15/16; applications."
+    },
+    {
+      "id": "chem.period.electron-affinity",
+      "name": "Electron Affinity and Electronegativity",
+      "requires": [
+        "chem.period.modern-periodic-law"
+      ],
+      "unlocks": [
+        "chem.bond.covalent-bonding",
+        "chem.bond.ionic-bonding",
+        "chem.period.periodic-properties"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Electron gain enthalpy; Pauling and Mulliken electronegativity scales; trends and anomalies; use in predicting bond character."
+    },
+    {
+      "id": "chem.period.periodic-properties",
+      "name": "Periodic Trends Overview",
+      "requires": [
+        "chem.period.atomic-radius",
+        "chem.period.ionization-energy",
+        "chem.period.electron-affinity"
+      ],
+      "unlocks": [
+        "chem.dblock.general",
+        "chem.pblock.group13",
+        "chem.pblock.group14",
+        "chem.pblock.group15",
+        "chem.pblock.group16",
+        "chem.pblock.group17",
+        "chem.pblock.group18",
+        "chem.sblock.alkali"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Metallic and non-metallic character; oxidation states; diagonal relationships; anomalous behaviour of lithium and beryllium."
+    },
+    {
+      "id": "chem.period.valency",
+      "name": "Valency and Oxidation State",
+      "requires": [
+        "chem.period.modern-periodic-law"
+      ],
+      "unlocks": [
+        "chem.redox.oxidation-state"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Valency from electronic configuration; common oxidation states; variable oxidation states; predicting formulae."
+    },
+    {
+      "id": "chem.bond.ionic-bonding",
+      "name": "Ionic Bonding",
+      "requires": [
+        "chem.period.ionization-energy",
+        "chem.period.electron-affinity"
+      ],
+      "unlocks": [
+        "chem.bond.metallic-bonding",
+        "chem.solid.crystal-systems",
+        "chem.solid.ionic-solids"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Formation of ions; lattice energy; Born\u2013Haber cycle; factors affecting ionic bond formation; properties of ionic compounds."
+    },
+    {
+      "id": "chem.bond.covalent-bonding",
+      "name": "Covalent Bonding",
+      "requires": [
+        "chem.period.electron-affinity"
+      ],
+      "unlocks": [
+        "chem.bond.bond-parameters",
+        "chem.bond.coordinate-bond",
+        "chem.bond.hybridization",
+        "chem.bond.resonance",
+        "chem.bond.vsepr",
+        "chem.org.iupac"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Lewis structures; single, double and triple bonds; bond order, length and energy; polar vs non-polar covalent bonds; octet rule and exceptions."
+    },
+    {
+      "id": "chem.bond.vsepr",
+      "name": "VSEPR Theory",
+      "requires": [
+        "chem.bond.covalent-bonding"
+      ],
+      "unlocks": [
+        "chem.bond.polar-molecules"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Valence Shell Electron Pair Repulsion model; prediction of molecular geometry; bond angles; lone pair effects; examples from NH3, H2O, SF6."
+    },
+    {
+      "id": "chem.bond.hybridization",
+      "name": "Hybridization",
+      "requires": [
+        "chem.bond.covalent-bonding"
+      ],
+      "unlocks": [
+        "chem.bond.mo-theory",
+        "chem.org.hybridization-org"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "sp, sp\u00b2, sp\u00b3, sp\u00b3d and sp\u00b3d\u00b2 hybridization; geometry and bond angles; sigma and pi bond framework; examples."
+    },
+    {
+      "id": "chem.bond.mo-theory",
+      "name": "Molecular Orbital Theory",
+      "requires": [
+        "chem.atomic.orbitals",
+        "chem.bond.hybridization"
+      ],
+      "unlocks": [
+        "chem.coord.bonding-complex"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Linear combination of atomic orbitals (LCAO); bonding and antibonding MOs; MO diagrams for H2, O2, N2, NO, CO; bond order and magnetic properties."
+    },
+    {
+      "id": "chem.bond.polar-molecules",
+      "name": "Polarity and Dipole Moment",
+      "requires": [
+        "chem.bond.vsepr"
+      ],
+      "unlocks": [
+        "chem.bond.intermolecular"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Electronegativity difference and bond polarity; resultant dipole moment; factors affecting molecular dipole; applications."
+    },
+    {
+      "id": "chem.bond.intermolecular",
+      "name": "Intermolecular Forces",
+      "requires": [
+        "chem.bond.polar-molecules"
+      ],
+      "unlocks": [
+        "chem.sblock.water",
+        "chem.state.liquids",
+        "chem.surface.surface-tension-chem"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "van der Waals forces (London dispersion, dipole\u2013dipole, dipole\u2013induced dipole); hydrogen bonding; effect on physical properties."
+    },
+    {
+      "id": "chem.bond.metallic-bonding",
+      "name": "Metallic Bonding",
+      "requires": [
+        "chem.period.modern-periodic-law",
+        "chem.bond.ionic-bonding"
+      ],
+      "unlocks": [
+        "chem.solid.crystal-systems",
+        "chem.solid.properties"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Electron-sea model; electron delocalization; band theory (qualitative); relation to electrical conductivity, malleability and lustre."
+    },
+    {
+      "id": "chem.bond.resonance",
+      "name": "Resonance Structures",
+      "requires": [
+        "chem.bond.covalent-bonding"
+      ],
+      "unlocks": [
+        "chem.org.aromaticity",
+        "chem.org.inductive"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Resonance concept; resonance structures and hybrid; stability criteria; examples: ozone, benzene, SO3, CO32\u2212; formal charge."
+    },
+    {
+      "id": "chem.bond.bond-parameters",
+      "name": "Bond Parameters",
+      "requires": [
+        "chem.bond.covalent-bonding"
+      ],
+      "unlocks": [
+        "chem.thermo.bond-enthalpy"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Bond length, bond enthalpy, bond angle and bond order; trends with multiplicity and electronegativity."
+    },
+    {
+      "id": "chem.bond.coordinate-bond",
+      "name": "Coordinate and Dative Bonding",
+      "requires": [
+        "chem.bond.covalent-bonding"
+      ],
+      "unlocks": [
+        "chem.coord.werner-theory"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Formation of coordinate/dative bonds; Lewis acid-base concept; examples: BF3\u00b7NH3, H3O+, NH4+; importance in coordination chemistry."
+    },
+    {
+      "id": "chem.state.kinetic-theory",
+      "name": "Kinetic Molecular Theory of Gases",
+      "requires": [
+        "chem.found.states-of-matter"
+      ],
+      "unlocks": [
+        "chem.state.gas-laws",
+        "chem.state.liquids",
+        "chem.thermo.cp-cv"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Postulates of KMT; pressure as momentum transfer; average kinetic energy proportional to temperature; derivation of ideal gas law qualitatively."
+    },
+    {
+      "id": "chem.state.gas-laws",
+      "name": "Gas Laws",
+      "requires": [
+        "chem.state.kinetic-theory",
+        "chem.found.measurement"
+      ],
+      "unlocks": [
+        "chem.sol.solubility",
+        "chem.state.molar-mass-gas",
+        "chem.state.real-gases"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Boyle's, Charles's and Gay-Lussac's laws; Avogadro's law; ideal gas equation PV = nRT; combined gas law; standard conditions."
+    },
+    {
+      "id": "chem.state.molar-mass-gas",
+      "name": "Molar Mass from Gas Data",
+      "requires": [
+        "chem.state.gas-laws",
+        "chem.found.mole-concept"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Determining molar mass via gas density; molecular formula from empirical formula and molar mass; Graham's law of effusion."
+    },
+    {
+      "id": "chem.state.real-gases",
+      "name": "Real Gases and van der Waals Equation",
+      "requires": [
+        "chem.state.gas-laws"
+      ],
+      "unlocks": [
+        "chem.state.phase-diagram"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Deviations from ideal behaviour; compressibility factor Z; van der Waals constants a and b; liquefaction of gases; critical constants."
+    },
+    {
+      "id": "chem.state.liquids",
+      "name": "Liquid State Properties",
+      "requires": [
+        "chem.bond.intermolecular",
+        "chem.state.kinetic-theory"
+      ],
+      "unlocks": [
+        "chem.sol.vapour-pressure",
+        "chem.state.phase-diagram",
+        "chem.surface.surface-tension-chem"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Vapour pressure; surface tension; viscosity; effect of temperature; capillary action; evaporation and boiling."
+    },
+    {
+      "id": "chem.state.phase-diagram",
+      "name": "Phase Diagrams",
+      "requires": [
+        "chem.state.liquids",
+        "chem.state.real-gases"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Phase equilibria; triple point and critical point; Clausius\u2013Clapeyron equation (qualitative); phase rule (qualitative)."
+    },
+    {
+      "id": "chem.sol.types",
+      "name": "Types of Solutions",
+      "requires": [
+        "chem.found.pure-substances",
+        "chem.found.concentration"
+      ],
+      "unlocks": [
+        "chem.sol.solubility",
+        "chem.sol.vapour-pressure"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Gas-in-gas, gas-in-liquid, liquid-in-liquid, solid-in-liquid solutions; ideal vs non-ideal solutions; like-dissolves-like principle."
+    },
+    {
+      "id": "chem.sol.solubility",
+      "name": "Solubility and Henry's Law",
+      "requires": [
+        "chem.sol.types",
+        "chem.state.gas-laws"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Factors affecting solubility; Henry's law for gas solubility; Kh values; applications in carbonation and diving physiology."
+    },
+    {
+      "id": "chem.sol.vapour-pressure",
+      "name": "Vapour Pressure of Solutions",
+      "requires": [
+        "chem.sol.types",
+        "chem.state.liquids"
+      ],
+      "unlocks": [
+        "chem.sol.activity",
+        "chem.sol.colligative"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Raoult's law for volatile and non-volatile solutes; positive and negative deviations; azeotropes; relative lowering of vapour pressure."
+    },
+    {
+      "id": "chem.sol.colligative",
+      "name": "Colligative Properties",
+      "requires": [
+        "chem.sol.vapour-pressure"
+      ],
+      "unlocks": [
+        "chem.sol.osmosis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Elevation of boiling point, depression of freezing point, osmotic pressure; van't Hoff factor for electrolytes; molar mass determination."
+    },
+    {
+      "id": "chem.sol.osmosis",
+      "name": "Osmosis and Osmotic Pressure",
+      "requires": [
+        "chem.sol.colligative"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Osmosis mechanism; osmotic pressure calculation; isotonic, hypotonic and hypertonic solutions; reverse osmosis; applications."
+    },
+    {
+      "id": "chem.sol.activity",
+      "name": "Activity and Non-ideal Solutions",
+      "requires": [
+        "chem.sol.vapour-pressure"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Activity coefficient; Debye\u2013H\u00fcckel limiting law; ionic strength; activity of electrolytes; deviations in real solutions."
+    },
+    {
+      "id": "chem.thermo.system-surroundings",
+      "name": "System, Surroundings and State Functions",
+      "requires": [
+        "chem.found.measurement"
+      ],
+      "unlocks": [
+        "chem.thermo.first-law"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "System vs surroundings; open, closed and isolated systems; state functions vs path functions; extensive and intensive properties."
+    },
+    {
+      "id": "chem.thermo.first-law",
+      "name": "First Law of Thermodynamics",
+      "requires": [
+        "chem.thermo.system-surroundings"
+      ],
+      "unlocks": [
+        "chem.thermo.cp-cv",
+        "chem.thermo.enthalpy",
+        "chem.thermo.entropy"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Internal energy; \u0394U = q + w; work done by/on gas (PV work); heat at constant volume (qv) and constant pressure (qp); relationship \u0394H = \u0394U + \u0394nRT."
+    },
+    {
+      "id": "chem.thermo.enthalpy",
+      "name": "Enthalpy and Hess's Law",
+      "requires": [
+        "chem.thermo.first-law"
+      ],
+      "unlocks": [
+        "chem.thermo.bond-enthalpy",
+        "chem.thermo.gibbs"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Enthalpy as state function; standard enthalpy of formation, combustion, neutralization; Hess's law; thermochemical equations."
+    },
+    {
+      "id": "chem.thermo.bond-enthalpy",
+      "name": "Bond Enthalpy and Born\u2013Haber Cycle",
+      "requires": [
+        "chem.thermo.enthalpy",
+        "chem.bond.bond-parameters"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Mean bond enthalpy; estimating \u0394H from bond enthalpies; Born\u2013Haber cycle for ionic compounds; lattice enthalpy values."
+    },
+    {
+      "id": "chem.thermo.entropy",
+      "name": "Entropy and Second Law",
+      "requires": [
+        "chem.thermo.first-law"
+      ],
+      "unlocks": [
+        "chem.thermo.gibbs",
+        "chem.thermo.third-law"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Entropy as measure of disorder; second law of thermodynamics; spontaneous processes; standard entropy; entropy changes in reactions."
+    },
+    {
+      "id": "chem.thermo.gibbs",
+      "name": "Gibbs Free Energy and Spontaneity",
+      "requires": [
+        "chem.thermo.enthalpy",
+        "chem.thermo.entropy"
+      ],
+      "unlocks": [
+        "chem.equil.concept",
+        "chem.thermo.electrochemical-thermo"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "\u0394G = \u0394H \u2212 T\u0394S; spontaneity criteria; standard Gibbs energy; relationship \u0394G\u00b0 = \u2212RT ln K; coupling reactions."
+    },
+    {
+      "id": "chem.thermo.third-law",
+      "name": "Third Law and Absolute Entropy",
+      "requires": [
+        "chem.thermo.entropy"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Third law of thermodynamics; absolute entropy from 0 K; standard molar entropy; residual entropy; application to chemical calculations."
+    },
+    {
+      "id": "chem.thermo.cp-cv",
+      "name": "Heat Capacities of Gases",
+      "requires": [
+        "chem.thermo.first-law",
+        "chem.state.kinetic-theory"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Cp and Cv for ideal gases; \u03b3 = Cp/Cv; equipartition theorem (qualitative); Kirchhoff's equation for temperature dependence of \u0394H."
+    },
+    {
+      "id": "chem.thermo.electrochemical-thermo",
+      "name": "Thermodynamics of Cells",
+      "requires": [
+        "chem.thermo.gibbs"
+      ],
+      "unlocks": [
+        "chem.elect.galvanic-cell"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Relationship \u0394G = \u2212nFE; cell EMF and equilibrium constant; temperature dependence of EMF (qualitative); thermodynamic efficiency."
+    },
+    {
+      "id": "chem.equil.concept",
+      "name": "Equilibrium Concept",
+      "requires": [
+        "chem.thermo.gibbs"
+      ],
+      "unlocks": [
+        "chem.equil.kc-kp",
+        "chem.equil.kw-ph"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Dynamic equilibrium; equilibrium in physical and chemical processes; observable characteristics; importance in industrial chemistry."
+    },
+    {
+      "id": "chem.equil.kc-kp",
+      "name": "Equilibrium Constants Kc and Kp",
+      "requires": [
+        "chem.equil.concept"
+      ],
+      "unlocks": [
+        "chem.elect.nernst",
+        "chem.equil.complex-equil",
+        "chem.equil.le-chatelier",
+        "chem.equil.solubility"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Expression for Kc and Kp; Kp/Kc relationship; Kc for homogeneous and heterogeneous equilibria; calculations with ICE tables."
+    },
+    {
+      "id": "chem.equil.le-chatelier",
+      "name": "Le Chatelier's Principle",
+      "requires": [
+        "chem.equil.kc-kp"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Effect of concentration, pressure, temperature and catalyst on equilibrium position; van't Hoff isochore; industrial applications (Haber, Contact)."
+    },
+    {
+      "id": "chem.equil.kw-ph",
+      "name": "Water Ionization and pH",
+      "requires": [
+        "chem.equil.concept",
+        "chem.found.concentration"
+      ],
+      "unlocks": [
+        "chem.equil.acids-bases"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Ionization of water; Kw; pH scale; strong acids and bases; pOH; calculation of [H+] and pH; neutral, acidic and basic solutions."
+    },
+    {
+      "id": "chem.equil.acids-bases",
+      "name": "Acid\u2013Base Theories",
+      "requires": [
+        "chem.equil.kw-ph"
+      ],
+      "unlocks": [
+        "chem.carb.carboxylic",
+        "chem.equil.weak-acid"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Arrhenius, Br\u00f8nsted\u2013Lowry and Lewis theories; conjugate acid\u2013base pairs; amphoteric species; Ka, Kb and pKa; relative strength."
+    },
+    {
+      "id": "chem.equil.weak-acid",
+      "name": "Weak Acid and Base Equilibria",
+      "requires": [
+        "chem.equil.acids-bases"
+      ],
+      "unlocks": [
+        "chem.equil.acid-base-titration",
+        "chem.equil.buffer",
+        "chem.equil.hydrolysis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Degree of dissociation; Ostwald's dilution law; pH of weak acid/base solutions; simplifying approximations; polyprotic acids."
+    },
+    {
+      "id": "chem.equil.buffer",
+      "name": "Buffer Solutions",
+      "requires": [
+        "chem.equil.weak-acid"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Henderson\u2013Hasselbalch equation; buffer capacity and range; preparation of buffers; physiological importance; blood buffering."
+    },
+    {
+      "id": "chem.equil.hydrolysis",
+      "name": "Salt Hydrolysis",
+      "requires": [
+        "chem.equil.weak-acid"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Hydrolysis of salts of weak acid/strong base, strong acid/weak base, and both weak; degree of hydrolysis; pH of salt solutions."
+    },
+    {
+      "id": "chem.equil.solubility",
+      "name": "Solubility Equilibria",
+      "requires": [
+        "chem.equil.kc-kp"
+      ],
+      "unlocks": [
+        "chem.anal.gravimetric"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Solubility product Ksp; relationship between solubility and Ksp; common ion effect; ionic product Q vs Ksp; conditions for precipitation."
+    },
+    {
+      "id": "chem.equil.complex-equil",
+      "name": "Complex Ion Equilibria",
+      "requires": [
+        "chem.equil.kc-kp"
+      ],
+      "unlocks": [
+        "chem.coord.stability"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Formation constants Kf; stepwise formation; stability of complex ions; competition between precipitation and complex formation."
+    },
+    {
+      "id": "chem.equil.acid-base-titration",
+      "name": "Acid\u2013Base Titrations",
+      "requires": [
+        "chem.equil.weak-acid"
+      ],
+      "unlocks": [
+        "chem.anal.volumetric"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Titration curves for strong\u2013strong, strong\u2013weak and weak\u2013weak combinations; equivalence point pH; choice of indicator."
+    },
+    {
+      "id": "chem.redox.oxidation-state",
+      "name": "Oxidation State",
+      "requires": [
+        "chem.period.valency"
+      ],
+      "unlocks": [
+        "chem.redox.balancing"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Rules for assigning oxidation states; determining change in oxidation state; identifying oxidizing and reducing agents."
+    },
+    {
+      "id": "chem.redox.balancing",
+      "name": "Balancing Redox Equations",
+      "requires": [
+        "chem.redox.oxidation-state"
+      ],
+      "unlocks": [
+        "chem.redox.disproportionation",
+        "chem.redox.redox-types",
+        "chem.redox.titrations"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Oxidation number method; ion-electron (half-reaction) method; balancing in acidic and basic media; net ionic equations."
+    },
+    {
+      "id": "chem.redox.disproportionation",
+      "name": "Disproportionation and Comproportionation",
+      "requires": [
+        "chem.redox.balancing"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Self-redox reactions; disproportionation of H2O2, Cl2 in NaOH; comproportionation; thermodynamic criteria via reduction potentials."
+    },
+    {
+      "id": "chem.redox.redox-types",
+      "name": "Types of Redox Reactions",
+      "requires": [
+        "chem.redox.balancing"
+      ],
+      "unlocks": [
+        "chem.redox.activity-series"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Combination, decomposition, displacement and disproportionation as redox reactions; relation to activity series."
+    },
+    {
+      "id": "chem.redox.activity-series",
+      "name": "Activity (Electrochemical) Series",
+      "requires": [
+        "chem.redox.redox-types"
+      ],
+      "unlocks": [
+        "chem.elect.galvanic-cell"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Standard reduction potentials; relative reducing power; predicting feasibility of displacement reactions; hydrogen electrode as reference."
+    },
+    {
+      "id": "chem.redox.titrations",
+      "name": "Redox Titrations",
+      "requires": [
+        "chem.redox.balancing",
+        "chem.found.concentration"
+      ],
+      "unlocks": [
+        "chem.anal.volumetric"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Permanganometry, dichromate and iodometric titrations; calculation of equivalent and molar mass from titration data."
+    },
+    {
+      "id": "chem.elect.galvanic-cell",
+      "name": "Galvanic Cell",
+      "requires": [
+        "chem.redox.activity-series",
+        "chem.thermo.electrochemical-thermo"
+      ],
+      "unlocks": [
+        "chem.elect.batteries",
+        "chem.elect.corrosion",
+        "chem.elect.electrolysis",
+        "chem.elect.standard-electrode"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Cell construction; anode, cathode, salt bridge; cell notation; EMF measurement; relationship \u0394G = \u2212nFE; Daniel cell."
+    },
+    {
+      "id": "chem.elect.standard-electrode",
+      "name": "Standard Electrode Potential",
+      "requires": [
+        "chem.elect.galvanic-cell"
+      ],
+      "unlocks": [
+        "chem.elect.nernst"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Standard hydrogen electrode (SHE); measurement of standard reduction potentials; electrochemical series; predicting spontaneity of redox reactions."
+    },
+    {
+      "id": "chem.elect.nernst",
+      "name": "Nernst Equation",
+      "requires": [
+        "chem.elect.standard-electrode",
+        "chem.equil.kc-kp"
+      ],
+      "unlocks": [
+        "chem.elect.concentration-cell"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Concentration dependence of cell EMF; Nernst equation at 298 K; calculation of EMF under non-standard conditions; relation to equilibrium constant."
+    },
+    {
+      "id": "chem.elect.concentration-cell",
+      "name": "Concentration Cells",
+      "requires": [
+        "chem.elect.nernst"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Cells with identical electrodes at different concentrations; EMF of concentration cells; transference and diffusion; applications."
+    },
+    {
+      "id": "chem.elect.conductance",
+      "name": "Electrolytic Conductance",
+      "requires": [
+        "chem.found.measurement"
+      ],
+      "unlocks": [
+        "chem.elect.electrolysis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Resistance, conductance, conductivity, molar conductivity; Kohlrausch's law; variation with concentration; degree of dissociation from \u039bm."
+    },
+    {
+      "id": "chem.elect.electrolysis",
+      "name": "Electrolysis and Faraday's Laws",
+      "requires": [
+        "chem.elect.galvanic-cell",
+        "chem.elect.conductance"
+      ],
+      "unlocks": [
+        "chem.elect.electrosynthesis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Electrolytic cell; discharge of ions; Faraday's first and second laws; calculation of amount deposited; preferential discharge; industrial applications."
+    },
+    {
+      "id": "chem.elect.batteries",
+      "name": "Batteries and Fuel Cells",
+      "requires": [
+        "chem.elect.galvanic-cell"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Primary (Leclanch\u00e9, alkaline) and secondary (lead-acid, lithium-ion) batteries; hydrogen fuel cell; efficiency and environmental impact."
+    },
+    {
+      "id": "chem.elect.corrosion",
+      "name": "Corrosion",
+      "requires": [
+        "chem.elect.galvanic-cell"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Electrochemical theory of corrosion; rusting mechanism; factors affecting corrosion; prevention methods (galvanizing, cathodic protection, coating)."
+    },
+    {
+      "id": "chem.elect.electrosynthesis",
+      "name": "Electrosynthesis and Industrial Electrolysis",
+      "requires": [
+        "chem.elect.electrolysis"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Chlor-alkali process; electroplating; refining of copper; Hall\u2013H\u00e9roult process for aluminium; advantages over chemical reduction."
+    },
+    {
+      "id": "chem.kinet.rate",
+      "name": "Rate of Reaction",
+      "requires": [
+        "chem.found.concentration"
+      ],
+      "unlocks": [
+        "chem.kinet.photochemistry",
+        "chem.kinet.rate-law"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Average and instantaneous rate; rate in terms of concentration change; factors affecting rate; expressing rate for different stoichiometries."
+    },
+    {
+      "id": "chem.kinet.rate-law",
+      "name": "Rate Law and Order",
+      "requires": [
+        "chem.kinet.rate"
+      ],
+      "unlocks": [
+        "chem.kinet.arrhenius",
+        "chem.kinet.integrated-rate",
+        "chem.kinet.mechanism"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Rate law expression; order with respect to reactants; overall order; rate constant k and its units; determination by initial-rate method."
+    },
+    {
+      "id": "chem.kinet.integrated-rate",
+      "name": "Integrated Rate Laws",
+      "requires": [
+        "chem.kinet.rate-law"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "First-order and second-order integrated rate equations; half-life; graphical determination of order; pseudo-first-order reactions."
+    },
+    {
+      "id": "chem.kinet.arrhenius",
+      "name": "Temperature Dependence and Arrhenius Equation",
+      "requires": [
+        "chem.kinet.rate-law"
+      ],
+      "unlocks": [
+        "chem.kinet.catalysis"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Arrhenius equation; activation energy Ea; frequency factor; Ea from ln k vs 1/T plot; collision theory and transition state theory (qualitative)."
+    },
+    {
+      "id": "chem.kinet.mechanism",
+      "name": "Reaction Mechanisms",
+      "requires": [
+        "chem.kinet.rate-law"
+      ],
+      "unlocks": [
+        "chem.bio.enzymes",
+        "chem.surface.catalytic-mechanism"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Elementary steps; molecularity; rate-determining step; steady-state approximation; relationship between mechanism and rate law."
+    },
+    {
+      "id": "chem.kinet.catalysis",
+      "name": "Catalysis",
+      "requires": [
+        "chem.kinet.arrhenius"
+      ],
+      "unlocks": [
+        "chem.surface.adsorption"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Homogeneous and heterogeneous catalysis; enzyme catalysis (Michaelis\u2013Menten qualitative); catalytic cycle; effect on activation energy; industrial examples."
+    },
+    {
+      "id": "chem.kinet.photochemistry",
+      "name": "Photochemical Reactions",
+      "requires": [
+        "chem.kinet.rate",
+        "chem.atomic.electromagnetic-radiation"
+      ],
+      "unlocks": [
+        "chem.env.ozone"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Primary and secondary processes; quantum yield; photosensitization; Beer\u2013Lambert law; photochemical ozone formation and destruction."
+    },
+    {
+      "id": "chem.solid.crystal-systems",
+      "name": "Crystal Systems",
+      "requires": [
+        "chem.bond.metallic-bonding",
+        "chem.bond.ionic-bonding"
+      ],
+      "unlocks": [
+        "chem.solid.amorphous",
+        "chem.solid.defects",
+        "chem.solid.packing"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Seven crystal systems; Bravais lattices; unit cells; relationship between crystal system and symmetry elements; X-ray diffraction (Bragg's law qualitative)."
+    },
+    {
+      "id": "chem.solid.packing",
+      "name": "Close Packing and Packing Efficiency",
+      "requires": [
+        "chem.solid.crystal-systems"
+      ],
+      "unlocks": [
+        "chem.solid.ionic-solids"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Hexagonal close packing (hcp) and cubic close packing (ccp/fcc); body-centred cubic; coordination number; packing efficiency calculation; voids."
+    },
+    {
+      "id": "chem.solid.ionic-solids",
+      "name": "Ionic Crystal Structures",
+      "requires": [
+        "chem.solid.packing",
+        "chem.bond.ionic-bonding"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Structure of NaCl, CsCl, ZnS, fluorite; radius ratio rule; coordination number; relation to lattice energy."
+    },
+    {
+      "id": "chem.solid.defects",
+      "name": "Crystal Defects",
+      "requires": [
+        "chem.solid.crystal-systems"
+      ],
+      "unlocks": [
+        "chem.solid.properties"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Stoichiometric defects (Schottky, Frenkel); non-stoichiometric defects; impurity defects; effect on density and electrical properties."
+    },
+    {
+      "id": "chem.solid.properties",
+      "name": "Electrical and Magnetic Properties of Solids",
+      "requires": [
+        "chem.solid.defects",
+        "chem.bond.metallic-bonding"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Band theory of conductors, semiconductors and insulators; n-type and p-type semiconductors; ferromagnetic, paramagnetic and diamagnetic materials."
+    },
+    {
+      "id": "chem.solid.amorphous",
+      "name": "Amorphous Solids",
+      "requires": [
+        "chem.solid.crystal-systems"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Distinction between crystalline and amorphous solids; glass as supercooled liquid; anisotropy; applications of amorphous materials."
+    },
+    {
+      "id": "chem.surface.adsorption",
+      "name": "Adsorption",
+      "requires": [
+        "chem.kinet.catalysis"
+      ],
+      "unlocks": [
+        "chem.anal.chromatography",
+        "chem.surface.catalytic-mechanism"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Physisorption vs chemisorption; Freundlich and Langmuir adsorption isotherms; factors affecting adsorption; adsorption in heterogeneous catalysis."
+    },
+    {
+      "id": "chem.surface.colloids",
+      "name": "Colloids",
+      "requires": [
+        "chem.found.pure-substances"
+      ],
+      "unlocks": [
+        "chem.surface.emulsions"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Colloidal state (1\u20131000 nm); lyophilic and lyophobic colloids; Tyndall effect; Brownian motion; coagulation; peptization; dialysis."
+    },
+    {
+      "id": "chem.surface.emulsions",
+      "name": "Emulsions and Gels",
+      "requires": [
+        "chem.surface.colloids"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Oil-in-water and water-in-oil emulsions; emulsifying agents; gels; foam; practical applications in food, pharmaceuticals and cosmetics."
+    },
+    {
+      "id": "chem.surface.surface-tension-chem",
+      "name": "Surface Tension in Chemistry",
+      "requires": [
+        "chem.state.liquids",
+        "chem.bond.intermolecular"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Gibbs adsorption equation (qualitative); surfactants; micelle formation; critical micelle concentration; applications in detergency."
+    },
+    {
+      "id": "chem.surface.catalytic-mechanism",
+      "name": "Mechanism of Heterogeneous Catalysis",
+      "requires": [
+        "chem.surface.adsorption",
+        "chem.kinet.mechanism"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Steps: adsorption, surface reaction, desorption; active sites; poisoning and promotion; industrial examples (Haber, Contact, cracking)."
+    },
+    {
+      "id": "chem.coord.werner-theory",
+      "name": "Werner's Theory",
+      "requires": [
+        "chem.bond.coordinate-bond"
+      ],
+      "unlocks": [
+        "chem.coord.cft",
+        "chem.coord.nomenclature",
+        "chem.coord.stability"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Primary and secondary valency; coordination number; complex ion formulation; Werner's experimental evidence; application to metal ammine complexes."
+    },
+    {
+      "id": "chem.coord.nomenclature",
+      "name": "Nomenclature of Complexes",
+      "requires": [
+        "chem.coord.werner-theory"
+      ],
+      "unlocks": [
+        "chem.coord.isomerism"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "IUPAC rules for naming coordination compounds; naming ligands, central metal and counter ions; anionic and cationic complexes; bridging ligands."
+    },
+    {
+      "id": "chem.coord.isomerism",
+      "name": "Isomerism in Complexes",
+      "requires": [
+        "chem.coord.nomenclature"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Structural isomerism (ionization, hydrate, linkage, coordination); stereoisomerism (geometric cis/trans, optical); conditions for each type."
+    },
+    {
+      "id": "chem.coord.cft",
+      "name": "Crystal Field Theory",
+      "requires": [
+        "chem.coord.werner-theory",
+        "chem.atomic.orbitals"
+      ],
+      "unlocks": [
+        "chem.coord.applications",
+        "chem.coord.bonding-complex",
+        "chem.dblock.organometallics"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Crystal field splitting in octahedral and tetrahedral fields; \u0394o and \u0394t; strong-field vs weak-field ligands; spectrochemical series; high-spin and low-spin complexes; colour and magnetism."
+    },
+    {
+      "id": "chem.coord.bonding-complex",
+      "name": "Bonding in Coordination Compounds",
+      "requires": [
+        "chem.coord.cft",
+        "chem.bond.mo-theory"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Valence bond theory of complexes; hybridization in octahedral, square planar and tetrahedral; limitations of VBT; introduction to LFT/MO for complexes."
+    },
+    {
+      "id": "chem.coord.stability",
+      "name": "Stability Constants",
+      "requires": [
+        "chem.equil.complex-equil",
+        "chem.coord.werner-theory"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Formation constants; EDTA complexation; chelate effect and its thermodynamic origin; applications in analytical chemistry and medicine."
+    },
+    {
+      "id": "chem.coord.applications",
+      "name": "Applications of Coordination Chemistry",
+      "requires": [
+        "chem.coord.cft"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Haemoglobin and chlorophyll as coordination compounds; cisplatin in cancer treatment; photography (thiosulfate); extraction metallurgy."
+    },
+    {
+      "id": "chem.sblock.hydrogen",
+      "name": "Hydrogen",
+      "requires": [
+        "chem.period.modern-periodic-law"
+      ],
+      "unlocks": [
+        "chem.sblock.water"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Position of hydrogen; isotopes; preparation of dihydrogen; properties; hydrides (ionic, covalent, interstitial); water and hydrogen peroxide; fuel cell potential."
+    },
+    {
+      "id": "chem.sblock.alkali",
+      "name": "Alkali Metals",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.sblock.alkaline-earth"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Electronic configuration and general properties; trends in physical and chemical properties; reactions with O2, water and halogens; oxides and hydroxides; important compounds of Na and K."
+    },
+    {
+      "id": "chem.sblock.alkaline-earth",
+      "name": "Alkaline Earth Metals",
+      "requires": [
+        "chem.sblock.alkali"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "General properties; diagonal relationship of Be with Al; anomalous behaviour of Be and Mg; important compounds (CaO, Ca(OH)2, CaCO3, Plaster of Paris, MgSO4)."
+    },
+    {
+      "id": "chem.sblock.water",
+      "name": "Water and its Chemistry",
+      "requires": [
+        "chem.sblock.hydrogen",
+        "chem.bond.intermolecular"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Structure; anomalous properties due to H-bonding; hard and soft water; treatment; heavy water D2O; amphoteric nature; water as solvent."
+    },
+    {
+      "id": "chem.pblock.group13",
+      "name": "Group 13 \u2014 Boron Family",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.pblock.p-block-trends"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Electronic configuration; diagonal relationship B\u2013Si; properties and compounds of B (borax, boron hydrides); Al production (Hall\u2013H\u00e9roult); alums."
+    },
+    {
+      "id": "chem.pblock.group14",
+      "name": "Group 14 \u2014 Carbon Family",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.pblock.p-block-trends"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Allotropes of carbon (diamond, graphite, fullerenes); CO and CO2; silicon and silicates; silicones; Ge, Sn, Pb \u2014 trends in metallic character."
+    },
+    {
+      "id": "chem.pblock.group15",
+      "name": "Group 15 \u2014 Nitrogen Family",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.pblock.p-block-trends"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Nitrogen: diatomic molecule, fixation, ammonia (Haber process), nitric acid (Ostwald process), oxides; phosphorus allotropes, phosphine, oxoacids."
+    },
+    {
+      "id": "chem.pblock.group16",
+      "name": "Group 16 \u2014 Oxygen Family",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.pblock.p-block-trends"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Oxygen: allotropic forms, oxides; ozone (preparation, structure, properties); sulphur allotropes; H2S; SO2; sulphuric acid (Contact process) \u2014 industrial significance."
+    },
+    {
+      "id": "chem.pblock.group17",
+      "name": "Group 17 \u2014 Halogens",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.pblock.p-block-trends"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "General trends; Cl2 preparation, properties and uses; HX acids (bond energy, acid strength); halogen oxoacids; interhalogen compounds; fluorine anomaly."
+    },
+    {
+      "id": "chem.pblock.group18",
+      "name": "Group 18 \u2014 Noble Gases",
+      "requires": [
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Electronic configuration and inertness; discovery; preparation (fractional distillation of air); uses; xenon fluorides and oxides (structure and properties)."
+    },
+    {
+      "id": "chem.pblock.p-block-trends",
+      "name": "Trends Across p-Block",
+      "requires": [
+        "chem.pblock.group13",
+        "chem.pblock.group14",
+        "chem.pblock.group15",
+        "chem.pblock.group16",
+        "chem.pblock.group17"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Comparison of properties across periods and groups of p-block; inert-pair effect; metallic character; anomalous behaviour of first member; diagonal relationships."
+    },
+    {
+      "id": "chem.dblock.general",
+      "name": "Transition Metals \u2014 General Properties",
+      "requires": [
+        "chem.atomic.electronic-config",
+        "chem.period.periodic-properties"
+      ],
+      "unlocks": [
+        "chem.dblock.first-row",
+        "chem.dblock.lanthanides",
+        "chem.dblock.organometallics"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Electronic configurations of d-block elements; variable oxidation states; magnetic properties; coloured ions; catalytic activity; alloy formation; comparison with s and p-block."
+    },
+    {
+      "id": "chem.dblock.first-row",
+      "name": "First-Row Transition Metals",
+      "requires": [
+        "chem.dblock.general"
+      ],
+      "unlocks": [
+        "chem.dblock.oxides-oxyacids"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Individual chemistry of Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn; important compounds and reactions; oxidation state stability; colour and magnetism."
+    },
+    {
+      "id": "chem.dblock.oxides-oxyacids",
+      "name": "Oxides and Oxyanions of Transition Metals",
+      "requires": [
+        "chem.dblock.first-row"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Chromates and dichromates (Cr2O7\u00b2\u207b \u21cc CrO4\u00b2\u207b equilibrium); permanganate (MnO4\u207b) as oxidising agent; vanadium pentoxide; applications in industrial processes."
+    },
+    {
+      "id": "chem.dblock.lanthanides",
+      "name": "Lanthanides and Actinides",
+      "requires": [
+        "chem.dblock.general"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Electronic configurations of 4f and 5f elements; lanthanide contraction and its consequences; oxidation states of lanthanides (+3 stable) and actinides; radioactivity of actinides; uses."
+    },
+    {
+      "id": "chem.dblock.organometallics",
+      "name": "Organometallic Chemistry",
+      "requires": [
+        "chem.coord.cft",
+        "chem.dblock.general"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "18-electron rule; classification of ligands by electron count; Zeise's salt; ferrocene; metal carbonyls; catalysis by organometallics (Wilkinson's, Ziegler\u2013Natta)."
+    },
+    {
+      "id": "chem.org.iupac",
+      "name": "IUPAC Nomenclature",
+      "requires": [
+        "chem.bond.covalent-bonding"
+      ],
+      "unlocks": [
+        "chem.alc.alcohols",
+        "chem.hyd.alkanes",
+        "chem.org.isomerism",
+        "chem.org.purification",
+        "chem.org.spectroscopy"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Naming of alkanes, alkenes, alkynes, cyclic, and branched chains; common functional groups; IUPAC rules for complex molecules; trivial vs systematic names."
+    },
+    {
+      "id": "chem.org.hybridization-org",
+      "name": "Carbon Hybridization",
+      "requires": [
+        "chem.bond.hybridization"
+      ],
+      "unlocks": [
+        "chem.hyd.alkanes",
+        "chem.org.aromaticity",
+        "chem.org.inductive",
+        "chem.org.isomerism"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "sp3, sp2, sp hybridization in organic molecules; geometry and bond angles; sigma and pi framework; implications for reactivity."
+    },
+    {
+      "id": "chem.org.isomerism",
+      "name": "Structural and Stereoisomerism",
+      "requires": [
+        "chem.org.iupac",
+        "chem.org.hybridization-org"
+      ],
+      "unlocks": [
+        "chem.bio.carbohydrates"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Chain, position, functional group and metamerism; cis-trans (geometric) isomerism; optical isomerism (chirality, enantiomers, diastereomers); R/S nomenclature; Fischer projections."
+    },
+    {
+      "id": "chem.org.inductive",
+      "name": "Inductive and Mesomeric Effects",
+      "requires": [
+        "chem.org.hybridization-org",
+        "chem.bond.resonance"
+      ],
+      "unlocks": [
+        "chem.org.reactive-intermediates"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Inductive (+I, \u2212I) effects; electron donation and withdrawal; mesomeric (resonance) effects; hyperconjugation; application to stability and reactivity prediction."
+    },
+    {
+      "id": "chem.org.reactive-intermediates",
+      "name": "Reactive Intermediates",
+      "requires": [
+        "chem.org.inductive"
+      ],
+      "unlocks": [
+        "chem.hal.sn1",
+        "chem.hal.sn2",
+        "chem.org.mechanisms",
+        "chem.poly.addition"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Carbocations (stability order), carbanions (stability), free radicals (stability); generation and reactions; carbenes and nitrenes (introduction)."
+    },
+    {
+      "id": "chem.org.mechanisms",
+      "name": "Organic Reaction Mechanisms",
+      "requires": [
+        "chem.org.reactive-intermediates"
+      ],
+      "unlocks": [
+        "chem.carb.aldehydes",
+        "chem.hyd.alkenes",
+        "chem.nitro.amines",
+        "chem.org.arrow-pushing",
+        "chem.org.carbene-cycloaddition"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Homolytic and heterolytic fission; nucleophile and electrophile; types: SN1, SN2, E1, E2, electrophilic addition, electrophilic aromatic substitution; drawing mechanisms with arrows."
+    },
+    {
+      "id": "chem.org.purification",
+      "name": "Purification Techniques",
+      "requires": [
+        "chem.org.iupac"
+      ],
+      "unlocks": [
+        "chem.org.qualitative"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Simple and fractional distillation; sublimation; crystallization; chromatography (TLC, column, HPLC); extraction; melting/boiling point as purity test."
+    },
+    {
+      "id": "chem.org.qualitative",
+      "name": "Qualitative Organic Analysis",
+      "requires": [
+        "chem.org.purification"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Detection of elements (Lassaigne's test); functional group tests (Tollens', Fehling's, iodoform, Victor Meyer); IR and mass spec (introduction)."
+    },
+    {
+      "id": "chem.org.spectroscopy",
+      "name": "Introduction to Spectroscopy",
+      "requires": [
+        "chem.atomic.electromagnetic-radiation",
+        "chem.org.iupac"
+      ],
+      "unlocks": [
+        "chem.anal.spectroscopy-anal",
+        "chem.carb.spectroscopic-id"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "IR spectroscopy for functional group identification; 1H NMR chemical shift and coupling; mass spectrometry fragmentation patterns; UV-Vis in conjugated systems."
+    },
+    {
+      "id": "chem.org.aromaticity",
+      "name": "Aromaticity",
+      "requires": [
+        "chem.org.hybridization-org",
+        "chem.bond.resonance"
+      ],
+      "unlocks": [
+        "chem.hyd.arenes",
+        "chem.hyd.polycyclic",
+        "chem.nitro.heterocycles"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "H\u00fcckel's rule (4n+2 \u03c0 electrons); aromatic, anti-aromatic, non-aromatic systems; benzene structure; stability; heterocyclic aromatic compounds."
+    },
+    {
+      "id": "chem.org.arrow-pushing",
+      "name": "Electron Flow and Curved Arrows",
+      "requires": [
+        "chem.org.mechanisms"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Conventions for drawing curved arrows; representing electron flow in bond breaking and making; practice with SN2, E2, and addition mechanisms."
+    },
+    {
+      "id": "chem.org.carbene-cycloaddition",
+      "name": "Pericyclic Reactions",
+      "requires": [
+        "chem.org.mechanisms"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Cycloadditions (Diels\u2013Alder [4+2]); electrocyclic reactions; sigmatropic rearrangements; Woodward\u2013Hoffmann rules (qualitative); thermal vs photochemical selectivity."
+    },
+    {
+      "id": "chem.hyd.alkanes",
+      "name": "Alkanes",
+      "requires": [
+        "chem.org.iupac",
+        "chem.org.hybridization-org"
+      ],
+      "unlocks": [
+        "chem.hal.introduction",
+        "chem.hyd.alkenes",
+        "chem.hyd.arenes",
+        "chem.hyd.conformations",
+        "chem.hyd.petroleum"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Sources (petroleum, natural gas); preparation (Wurtz, Kolbe, hydrogenation); physical properties; free-radical halogenation mechanism; combustion; cracking."
+    },
+    {
+      "id": "chem.hyd.alkenes",
+      "name": "Alkenes",
+      "requires": [
+        "chem.hyd.alkanes",
+        "chem.org.mechanisms"
+      ],
+      "unlocks": [
+        "chem.alc.epoxides",
+        "chem.hyd.alkynes",
+        "chem.poly.addition"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Preparation (elimination, dehydrogenation); electrophilic addition (Markovnikov's rule, HBr, H2O, Br2, H2SO4); mechanism; ozonolysis; polymerization."
+    },
+    {
+      "id": "chem.hyd.alkynes",
+      "name": "Alkynes",
+      "requires": [
+        "chem.hyd.alkenes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Preparation from geminal/vicinal dihalides and dehydrohalogenation; acidic nature; electrophilic addition; hydration to ketone (Markovnikov); nucleophilic addition; linear geometry."
+    },
+    {
+      "id": "chem.hyd.arenes",
+      "name": "Benzene and Arenes",
+      "requires": [
+        "chem.org.aromaticity",
+        "chem.hyd.alkanes"
+      ],
+      "unlocks": [
+        "chem.alc.phenols",
+        "chem.hal.haloarenes",
+        "chem.hyd.polycyclic",
+        "chem.nitro.diazonium",
+        "chem.nitro.nitro"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Kekul\u00e9 structure, resonance hybrid; electrophilic aromatic substitution mechanism (nitration, sulfonation, halogenation, Friedel\u2013Crafts); directive effects of substituents; addition vs substitution."
+    },
+    {
+      "id": "chem.hyd.conformations",
+      "name": "Conformational Analysis",
+      "requires": [
+        "chem.hyd.alkanes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Newman projections; eclipsed, staggered, gauche conformations of ethane; ring strain in cycloalkanes; chair and boat cyclohexane; axial and equatorial substituents."
+    },
+    {
+      "id": "chem.hyd.petroleum",
+      "name": "Petroleum Refining",
+      "requires": [
+        "chem.hyd.alkanes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Fractional distillation of crude oil; fractions and uses; cracking and reforming; octane number; antiknocking agents; alternatives to fossil fuels."
+    },
+    {
+      "id": "chem.hyd.polycyclic",
+      "name": "Polycyclic and Heterocyclic Systems",
+      "requires": [
+        "chem.hyd.arenes",
+        "chem.org.aromaticity"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Naphthalene, anthracene (qualitative); furan, thiophene, pyrrole, pyridine; aromaticity; reactions compared to benzene."
+    },
+    {
+      "id": "chem.hal.introduction",
+      "name": "Haloalkanes and Haloarenes \u2014 Introduction",
+      "requires": [
+        "chem.hyd.alkanes"
+      ],
+      "unlocks": [
+        "chem.hal.cfcs",
+        "chem.hal.haloarenes",
+        "chem.hal.sn1",
+        "chem.hal.sn2"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Classification; nomenclature; physical properties; C-X bond polarity; relative reactivity of C-F, C-Cl, C-Br, C-I."
+    },
+    {
+      "id": "chem.hal.sn1",
+      "name": "SN1 Mechanism",
+      "requires": [
+        "chem.org.reactive-intermediates",
+        "chem.hal.introduction"
+      ],
+      "unlocks": [
+        "chem.hal.elimination"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "First-order kinetics; carbocation intermediate; racemization; effect of substrate structure; solvent effects; competition with E1."
+    },
+    {
+      "id": "chem.hal.sn2",
+      "name": "SN2 Mechanism",
+      "requires": [
+        "chem.org.reactive-intermediates",
+        "chem.hal.introduction"
+      ],
+      "unlocks": [
+        "chem.alc.alcohols",
+        "chem.hal.elimination",
+        "chem.hal.organometallics"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Second-order kinetics; backside attack; Walden inversion; steric effects on rate; primary vs tertiary substrates; Finkelstein reaction."
+    },
+    {
+      "id": "chem.hal.elimination",
+      "name": "Elimination Reactions",
+      "requires": [
+        "chem.hal.sn1",
+        "chem.hal.sn2"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "E1 and E2 mechanisms; Saytzeff's rule; Hofmann rule (bulky base); competition between substitution and elimination; factors determining outcome."
+    },
+    {
+      "id": "chem.hal.haloarenes",
+      "name": "Haloarenes",
+      "requires": [
+        "chem.hyd.arenes",
+        "chem.hal.introduction"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Preparation; resonance deactivation; nucleophilic aromatic substitution (Meisenheimer complex); SNAr vs aryne mechanism; Wurtz\u2013Fittig reaction."
+    },
+    {
+      "id": "chem.hal.organometallics",
+      "name": "Organolithium and Grignard Reagents",
+      "requires": [
+        "chem.hal.sn2"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Preparation of RLi and RMgX; reactions with electrophiles (aldehydes, ketones, CO2, esters); quenching; limitations (protic solvents, active hydrogen)."
+    },
+    {
+      "id": "chem.hal.cfcs",
+      "name": "Polyhalogen Compounds and CFCs",
+      "requires": [
+        "chem.hal.introduction"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "CHCl3, CCl4, DDT; CFCs (freons) and ozone depletion; alternatives; environmental regulations."
+    },
+    {
+      "id": "chem.alc.alcohols",
+      "name": "Alcohols",
+      "requires": [
+        "chem.hal.sn2",
+        "chem.org.iupac"
+      ],
+      "unlocks": [
+        "chem.alc.diols-polyols",
+        "chem.alc.ethers",
+        "chem.alc.phenols",
+        "chem.alc.protection",
+        "chem.carb.aldehydes",
+        "chem.nitro.amines"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Classification (1\u00b0, 2\u00b0, 3\u00b0); preparation from haloalkanes, aldehydes/ketones, carboxylic acids; physical properties; hydrogen bonding; reactions: with Na, HX, oxidation, dehydration."
+    },
+    {
+      "id": "chem.alc.phenols",
+      "name": "Phenols",
+      "requires": [
+        "chem.hyd.arenes",
+        "chem.alc.alcohols"
+      ],
+      "unlocks": [
+        "chem.alc.protection"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Preparation (cumene, benzene sulfonation, diazonium salts); acidic character (pKa ~10, stronger than alcohols); resonance explanation; reactions: electrophilic substitution, esterification."
+    },
+    {
+      "id": "chem.alc.ethers",
+      "name": "Ethers",
+      "requires": [
+        "chem.alc.alcohols"
+      ],
+      "unlocks": [
+        "chem.alc.epoxides"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Williamson synthesis; physical properties; reactions with HX (cleavage mechanism); ring opening of epoxides; diethyl ether as solvent."
+    },
+    {
+      "id": "chem.alc.diols-polyols",
+      "name": "Diols and Polyols",
+      "requires": [
+        "chem.alc.alcohols"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Preparation of ethylene glycol; reactions (with periodic acid, pinacol rearrangement); glycerol; sugar alcohols; applications in industry."
+    },
+    {
+      "id": "chem.alc.epoxides",
+      "name": "Epoxides",
+      "requires": [
+        "chem.alc.ethers",
+        "chem.hyd.alkenes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Preparation from alkenes (mCPBA, halohydrin); acid and base catalysed ring opening (regioselectivity); Payne rearrangement; synthetic utility."
+    },
+    {
+      "id": "chem.alc.protection",
+      "name": "Protecting Group Strategy",
+      "requires": [
+        "chem.alc.alcohols",
+        "chem.alc.phenols"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Need for protection/deprotection; THP, MOM, TBS ethers; benzyl and acetyl protection; selective reactions; orthogonal protecting groups."
+    },
+    {
+      "id": "chem.carb.aldehydes",
+      "name": "Aldehydes",
+      "requires": [
+        "chem.alc.alcohols",
+        "chem.org.mechanisms"
+      ],
+      "unlocks": [
+        "chem.bio.carbohydrates",
+        "chem.carb.carboxylic",
+        "chem.carb.ketones"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Preparation (PCC/Swern oxidation, ozonolysis, Rosenmund); physical properties; nucleophilic addition mechanism; reactions with HCN, RMgX, H2NOH, RNHNH2, bisulphite; Cannizzaro reaction."
+    },
+    {
+      "id": "chem.carb.ketones",
+      "name": "Ketones",
+      "requires": [
+        "chem.carb.aldehydes"
+      ],
+      "unlocks": [
+        "chem.carb.alpha-reactions",
+        "chem.carb.spectroscopic-id"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Preparation (Friedel\u2013Crafts, Wacker, hydration of alkynes); comparison with aldehydes in reactivity; Baeyer\u2013Villiger; enol formation and keto-enol tautomerism."
+    },
+    {
+      "id": "chem.carb.alpha-reactions",
+      "name": "Alpha-Carbon Reactions",
+      "requires": [
+        "chem.carb.ketones"
+      ],
+      "unlocks": [
+        "chem.carb.condensation-reactions"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Enol and enolate; aldol condensation (acid and base catalysed); crossed aldol; retro-aldol; Claisen condensation; malonic ester synthesis."
+    },
+    {
+      "id": "chem.carb.carboxylic",
+      "name": "Carboxylic Acids",
+      "requires": [
+        "chem.carb.aldehydes",
+        "chem.equil.acids-bases"
+      ],
+      "unlocks": [
+        "chem.carb.derivatives",
+        "chem.nitro.amino-acids"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Preparation; acidity and pKa; resonance stabilization of carboxylate; inductive effects on acidity; reactions: esterification, acyl chloride, anhydride, decarboxylation."
+    },
+    {
+      "id": "chem.carb.derivatives",
+      "name": "Carboxylic Acid Derivatives",
+      "requires": [
+        "chem.carb.carboxylic"
+      ],
+      "unlocks": [
+        "chem.bio.lipids",
+        "chem.carb.condensation-reactions",
+        "chem.poly.condensation"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Acyl chlorides, anhydrides, esters, amides; reactivity order; nucleophilic acyl substitution mechanism; interconversion; saponification; transesterification."
+    },
+    {
+      "id": "chem.carb.condensation-reactions",
+      "name": "Named Carbonyl Reactions",
+      "requires": [
+        "chem.carb.alpha-reactions",
+        "chem.carb.derivatives"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Perkin, Knoevenagel, Reformatsky, Wittig, Baeyer\u2013Villiger; mechanism and synthetic significance; planning retrosynthetic sequences."
+    },
+    {
+      "id": "chem.carb.spectroscopic-id",
+      "name": "Spectroscopic Identification of Carbonyls",
+      "requires": [
+        "chem.org.spectroscopy",
+        "chem.carb.ketones"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Characteristic IR absorption of C=O; 1H and 13C NMR of aldehydes and ketones; mass spec \u03b1-cleavage and McLafferty rearrangement."
+    },
+    {
+      "id": "chem.nitro.amines",
+      "name": "Amines",
+      "requires": [
+        "chem.alc.alcohols",
+        "chem.org.mechanisms"
+      ],
+      "unlocks": [
+        "chem.nitro.amino-acids",
+        "chem.nitro.diazonium",
+        "chem.nitro.heterocycles",
+        "chem.poly.condensation"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Classification (1\u00b0, 2\u00b0, 3\u00b0); basicity order (3\u00b0 > 2\u00b0 > 1\u00b0 > NH3 vs aniline); preparation from nitro reduction, alkylation, Gabriel synthesis; reactions: with HNO2, acylation, coupling."
+    },
+    {
+      "id": "chem.nitro.diazonium",
+      "name": "Diazonium Salts",
+      "requires": [
+        "chem.nitro.amines",
+        "chem.hyd.arenes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 4,
+      "description": "Preparation from aniline; stability; Balz\u2013Schiemann, Sandmeyer reactions; azo coupling; replacement reactions; importance in dye synthesis."
+    },
+    {
+      "id": "chem.nitro.nitro",
+      "name": "Nitro Compounds",
+      "requires": [
+        "chem.hyd.arenes"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Preparation (nitration of arenes); reduction to aniline (Sn/HCl, catalytic hydrogenation); partial reduction; effect on ring reactivity."
+    },
+    {
+      "id": "chem.nitro.heterocycles",
+      "name": "Nitrogen Heterocycles",
+      "requires": [
+        "chem.org.aromaticity",
+        "chem.nitro.amines"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Pyridine, quinoline, isoquinoline (basicity, electrophilic and nucleophilic substitution); pyrrole, indole, imidazole; biological relevance (DNA bases, alkaloids)."
+    },
+    {
+      "id": "chem.nitro.amino-acids",
+      "name": "Amino Acids",
+      "requires": [
+        "chem.nitro.amines",
+        "chem.carb.carboxylic"
+      ],
+      "unlocks": [
+        "chem.bio.proteins"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Structure of \u03b1-amino acids; essential vs non-essential; zwitterion; isoelectric point; classification by R group; peptide bond; primary structure of proteins."
+    },
+    {
+      "id": "chem.bio.carbohydrates",
+      "name": "Carbohydrates",
+      "requires": [
+        "chem.carb.aldehydes",
+        "chem.org.isomerism"
+      ],
+      "unlocks": [
+        "chem.poly.natural"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Classification (mono/di/polysaccharides); glucose structure (Haworth, chair); anomers; mutarotation; disaccharides (sucrose, lactose, maltose); starch, cellulose, glycogen."
+    },
+    {
+      "id": "chem.bio.proteins",
+      "name": "Proteins",
+      "requires": [
+        "chem.nitro.amino-acids"
+      ],
+      "unlocks": [
+        "chem.bio.enzymes",
+        "chem.bio.nucleic-acids",
+        "chem.bio.vitamins",
+        "chem.poly.natural"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Primary, secondary (\u03b1-helix, \u03b2-sheet), tertiary, quaternary structure; disulfide bridges; denaturation; enzymes (substrate specificity, active site); collagen, haemoglobin."
+    },
+    {
+      "id": "chem.bio.nucleic-acids",
+      "name": "Nucleic Acids",
+      "requires": [
+        "chem.bio.proteins"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Nucleotide components (base, sugar, phosphate); DNA double helix; hydrogen bonding between base pairs; RNA types (mRNA, tRNA, rRNA); replication and transcription (qualitative)."
+    },
+    {
+      "id": "chem.bio.lipids",
+      "name": "Lipids",
+      "requires": [
+        "chem.carb.derivatives"
+      ],
+      "unlocks": [
+        "chem.bio.vitamins"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Fatty acids (saturated and unsaturated); triglycerides; saponification; phospholipids; biological membranes; fat-soluble vitamins; essential fatty acids."
+    },
+    {
+      "id": "chem.bio.vitamins",
+      "name": "Vitamins and Hormones",
+      "requires": [
+        "chem.bio.proteins",
+        "chem.bio.lipids"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Water-soluble (B-complex, C) and fat-soluble (A, D, E, K) vitamins; deficiency diseases; enzyme cofactors; steroid and peptide hormones (qualitative)."
+    },
+    {
+      "id": "chem.bio.enzymes",
+      "name": "Enzyme Kinetics",
+      "requires": [
+        "chem.bio.proteins",
+        "chem.kinet.mechanism"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Michaelis\u2013Menten equation; Km and Vmax; turnover number; competitive and non-competitive inhibition; allosteric regulation; lock-and-key vs induced-fit model."
+    },
+    {
+      "id": "chem.poly.addition",
+      "name": "Addition Polymerization",
+      "requires": [
+        "chem.hyd.alkenes",
+        "chem.org.reactive-intermediates"
+      ],
+      "unlocks": [
+        "chem.poly.properties"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Free-radical, cationic and anionic addition polymerization; chain growth mechanism; polymers: polyethylene, PVC, polystyrene, PTFE, natural rubber."
+    },
+    {
+      "id": "chem.poly.condensation",
+      "name": "Condensation Polymerization",
+      "requires": [
+        "chem.carb.derivatives",
+        "chem.nitro.amines"
+      ],
+      "unlocks": [
+        "chem.poly.biodegradable",
+        "chem.poly.properties"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Step-growth mechanism; loss of small molecule; polymers: nylon-6, nylon-6,6, Dacron (PET), Bakelite, melamine-formaldehyde; co-polymerization."
+    },
+    {
+      "id": "chem.poly.natural",
+      "name": "Natural Polymers",
+      "requires": [
+        "chem.bio.carbohydrates",
+        "chem.bio.proteins"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Starch, cellulose, natural rubber (cis-polyisoprene), silk (fibroin), wool (keratin); latex; vulcanization; comparison with synthetic polymers."
+    },
+    {
+      "id": "chem.poly.properties",
+      "name": "Polymer Properties",
+      "requires": [
+        "chem.poly.addition",
+        "chem.poly.condensation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Number and weight average molar mass; polydispersity; glass transition temperature; crystallinity; mechanical properties (elastomers, plastics, fibres); biodegradability."
+    },
+    {
+      "id": "chem.poly.biodegradable",
+      "name": "Biodegradable and Functional Polymers",
+      "requires": [
+        "chem.poly.condensation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "PLA, PHB, PLGA; green chemistry criteria; conducting polymers (polyacetylene, qualitative); liquid crystals; block copolymers; nano-composites."
+    },
+    {
+      "id": "chem.env.atmosphere",
+      "name": "Atmosphere and Composition",
+      "requires": [
+        "chem.found.pure-substances"
+      ],
+      "unlocks": [
+        "chem.env.air-pollution",
+        "chem.env.ozone",
+        "chem.env.water-pollution"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Layers of the atmosphere; composition; residence times of gases; troposphere chemistry; role of CO2, N2, O2; natural greenhouse effect."
+    },
+    {
+      "id": "chem.env.air-pollution",
+      "name": "Air Pollution",
+      "requires": [
+        "chem.env.atmosphere"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Primary and secondary pollutants; photochemical smog; NOx and hydrocarbons; CO toxicity; particulate matter; acid rain chemistry (SO2/NOx); control strategies."
+    },
+    {
+      "id": "chem.env.ozone",
+      "name": "Ozone Depletion",
+      "requires": [
+        "chem.env.atmosphere",
+        "chem.kinet.photochemistry"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 2,
+      "description": "Chapman cycle; catalytic destruction by Cl from CFCs; polar vortex; Montreal Protocol; recovery timeline; UV-B effects on biology."
+    },
+    {
+      "id": "chem.env.water-pollution",
+      "name": "Water and Soil Pollution",
+      "requires": [
+        "chem.env.atmosphere"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Eutrophication; BOD and COD; heavy metal contamination; pesticides and their fate; soil acidity; green chemistry principles (12 principles, qualitative)."
+    },
+    {
+      "id": "chem.anal.gravimetric",
+      "name": "Gravimetric Analysis",
+      "requires": [
+        "chem.found.stoichiometry",
+        "chem.equil.solubility"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Principles; precipitation, filtration, ignition; calculation from gravimetric factor; sources of error; applications (BaSO4, AgCl); separation and purity."
+    },
+    {
+      "id": "chem.anal.volumetric",
+      "name": "Volumetric Analysis",
+      "requires": [
+        "chem.found.concentration",
+        "chem.equil.acid-base-titration",
+        "chem.redox.titrations"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 3,
+      "description": "Primary standards; standardisation; back-titration; equivalence point vs end point; calculation of unknown concentration; complexometric titrations (EDTA)."
+    },
+    {
+      "id": "chem.anal.chromatography",
+      "name": "Chromatography",
+      "requires": [
+        "chem.surface.adsorption"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Stationary and mobile phases; partition and adsorption chromatography; Rf value (TLC); HPLC; GC; ion-exchange; size-exclusion; applications in purification and analysis."
+    },
+    {
+      "id": "chem.anal.spectroscopy-anal",
+      "name": "Spectroscopic Methods",
+      "requires": [
+        "chem.org.spectroscopy",
+        "chem.atomic.electromagnetic-radiation"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "AAS and flame photometry for metals; ICP-OES; UV-Vis for concentration (Beer\u2013Lambert); IR for structural ID; NMR for molecular structure; mass spec for exact mass."
+    }
+  ]
+}
