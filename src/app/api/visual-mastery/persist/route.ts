@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
 
   await prisma.evidenceRecord.createMany({
     data: evidence.map((e) => ({ ...e, userId: session.user!.id })),
+    skipDuplicates: true,
   })
 
   return NextResponse.json({ saved: evidence.length })

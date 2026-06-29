@@ -36,6 +36,8 @@ export interface VisualMasteryEvidenceInput {
   subjectSlug: string
   topicSlug: string
   type: 'VISUAL'
+  /** Matches EvidenceRecord.engineKey — the visual engine name (e.g. "graph", "number_line"). Gives each engine its own unique row per (user, topic) while the DB @@unique constraint prevents concurrent duplicates. */
+  engineKey: string
   /** Challenge-completion rate for this engine this session, 0-100. 0 when no challenge was attempted (a pure "shown" observation still gets a row, scored 0, so it's never silently dropped). */
   score: number
   /** Always 0 — visual signals are evidence-only and must never be blended into any existing or future weighted-average mastery score by default (see docs/VISUAL_MASTERY_PERSISTENCE_AUDIT.md). */
@@ -59,6 +61,7 @@ export function buildVisualMasteryEvidence(req: VisualMasteryPersistRequest): Vi
     subjectSlug: req.subjectSlug,
     topicSlug: req.topicSlug,
     type: 'VISUAL' as const,
+    engineKey: visualType,
     score: counts.shown > 0 ? Math.round((counts.completed / counts.shown) * 100) : 0,
     weight: 0 as const,
     method: 'visual_mastery' as const,

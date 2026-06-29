@@ -386,11 +386,16 @@ model EvidenceRecord {
   score       Float
   weight      Float        @default(1.0)
   method      String       @default("AI")
+  // Discriminates multiple evidence rows of the same type for the same topic.
+  // VISUAL records set this to the engine name (e.g. "graph", "number_line");
+  // all other callers leave it as "" — giving them one unique row per (topic, type).
+  engineKey   String       @default("")
   notes       Json?
   createdAt   DateTime     @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, subjectSlug, topicSlug, type, engineKey])
   @@index([userId, subjectSlug, topicSlug])
   @@map("evidence_records")
 }

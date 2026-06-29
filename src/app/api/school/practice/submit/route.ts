@@ -36,11 +36,14 @@ export async function POST(req: NextRequest) {
   const questions = ps.questions as unknown as PracticeQuestion[]
   const result = evaluatePracticeSession(sessionId, questions, answers as PracticeAnswer[])
 
-  // Persist score
-  await prisma.practiceSession.update({
-    where: { id: sessionId },
+  // Atomic completion — only the first concurrent submission wins. updateMany with
+  // completedAt: null is the atomic guard; a count of 0 means a concurrent request
+  // already committed, so MistakeRecord creation below is unreachable for the loser.
+  const updated = await prisma.practiceSession.updateMany({
+    where: { id: sessionId, completedAt: null },
     data: { completedAt: new Date(), score: result.accuracyPercent },
   })
+  if (updated.count === 0) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
   // Mastery integration — only for chapter practice sessions
   if (ps.chapterId) {
