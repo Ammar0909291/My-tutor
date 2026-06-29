@@ -47,6 +47,9 @@ next-env.d.ts
 *.tmp.mjs
 beta_results_*.json
 
+# Generated system state — re-run scripts/generate-system-state.ts to refresh
+system_state.json
+
 # Dynamic-visualization sandbox vendor bundles — copied from node_modules at
 # install/build time by scripts/copy-dynamic-visual-vendor.mjs, never hand-edited.
 public/vendor/dynamic-visuals/
