@@ -22,6 +22,7 @@ import {
   SOCIAL_SCIENCE_KNOWLEDGE_GRAPH,
 } from '@/lib/education'
 import type { KnowledgeNode } from '@/lib/education'
+import { getMathKgNodes } from './mathKgAdapter'
 
 // ── Public types ──────────────────────────────────────────────────────────────
 
@@ -54,7 +55,7 @@ function toKGNode(n: KnowledgeNode): KGNode {
     title: n.title,
     description: n.description,
     prerequisites: n.prerequisites,
-    estimatedHours: difficultyHours(n.difficulty),
+    estimatedHours: n.estimated_hours ?? difficultyHours(n.difficulty),
   }
 }
 
@@ -64,6 +65,8 @@ function difficultyHours(d: string): number {
     case 'developing':   return 3
     case 'proficient':   return 4
     case 'advanced':     return 6
+    case 'expert':       return 8
+    case 'research':     return 12
     default:             return 3
   }
 }
@@ -96,6 +99,32 @@ function groupIntoModules(nodes: KnowledgeNode[]): KGModule[] {
 /** Human-readable label for a domain key. */
 function domainLabel(domain: string): string {
   const labels: Record<string, string> = {
+    // ── 908-node math KG sub-domain keys (second segment of "math.<key>.*") ──
+    found:  'Mathematical Foundations',
+    arith:  'Arithmetic',
+    nt:     'Number Theory',
+    alg:    'Algebra',
+    geom:   'Geometry',
+    trig:   'Trigonometry',
+    func:   'Functions',
+    seq:    'Sequences & Series',
+    calc:   'Calculus',
+    de:     'Differential Equations',
+    linalg: 'Linear Algebra',
+    prob:   'Probability',
+    stats:  'Statistics',
+    disc:   'Discrete Mathematics',
+    abst:   'Abstract Algebra',
+    real:   'Real Analysis',
+    cx:     'Complex Analysis',
+    top:    'Topology',
+    meas:   'Measure Theory',
+    fnal:   'Functional Analysis',
+    num:    'Numerical Analysis',
+    opt:    'Optimization',
+    graph:  'Graph Theory',
+    cat:    'Category Theory',
+    // ── 54-node KG domain keys (legacy / other subjects) ─────────────────────
     arithmetic:          'Arithmetic',
     number_systems:      'Number Systems',
     integers:            'Integers',
@@ -141,7 +170,7 @@ function domainLabel(domain: string): string {
 function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
   switch (subjectSlug) {
     case 'mathematics':
-      return MATH_KNOWLEDGE_GRAPH as KnowledgeNode[]
+      return getMathKgNodes()
 
     case 'physics':
       return (SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]).filter((n) =>
@@ -174,6 +203,13 @@ function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
 
 /** Look up a single KG node by its id/slug across all graphs. */
 export function getKGNode(id: string): KGNode | undefined {
+  // 908-node math KG is primary for math.* IDs
+  if (id.startsWith('math.')) {
+    const mathNode = getMathKgNodes().find((n) => n.id === id)
+    if (mathNode) return toKGNode(mathNode)
+  }
+
+  // Other subjects + legacy 54-node math IDs (arithmetic.*, geometry.*, etc.)
   const allSources = [
     MATH_KNOWLEDGE_GRAPH,
     SCIENCE_KNOWLEDGE_GRAPH,

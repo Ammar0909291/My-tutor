@@ -1,6 +1,6 @@
 // India Education Knowledge Graph — Core Type System
 
-export type Difficulty = 'foundational' | 'developing' | 'proficient' | 'advanced'
+export type Difficulty = 'foundational' | 'developing' | 'proficient' | 'advanced' | 'expert' | 'research'
 
 export type MathDomain =
   | 'arithmetic'
@@ -158,6 +158,7 @@ export interface KnowledgeNode {
   description: string
   difficulty: Difficulty
   prerequisites: string[]
+  estimated_hours?: number
 }
 
 export interface Chapter {
