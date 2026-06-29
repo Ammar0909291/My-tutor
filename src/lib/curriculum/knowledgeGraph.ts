@@ -23,6 +23,7 @@ import {
 } from '@/lib/education'
 import type { KnowledgeNode } from '@/lib/education'
 import { getMathKgNodes } from './mathKgAdapter'
+import { getPhysicsKgNodes } from './physicsKgAdapter'
 
 // ── Public types ──────────────────────────────────────────────────────────────
 
@@ -87,7 +88,10 @@ function groupIntoModules(nodes: KnowledgeNode[]): KGModule[] {
     // use the second segment so we get meaningful module titles like "Kinematics".
     // Otherwise use the first segment (math, english, etc. are already meaningful).
     const uniqueTop = new Set(nodes.map((x) => x.domain.split('.')[0]))
-    const key = uniqueTop.size === 1 && parts.length > 1 ? parts[1] : parts[0]
+    // Use full domain string as lookup key to avoid collisions between subjects
+    // whose second-segment names overlap (e.g. math.meas=Measure Theory vs
+    // phys.meas=Measurement & Units). Math short-keys still resolve via fallback.
+    const key = uniqueTop.size === 1 && parts.length > 1 ? n.domain : parts[0]
     const label = domainLabel(key)
     if (!map.has(label)) map.set(label, [])
     map.get(label)!.push(toKGNode(n))
@@ -96,10 +100,10 @@ function groupIntoModules(nodes: KnowledgeNode[]): KGModule[] {
   return Array.from(map.entries()).map(([title, nodes]) => ({ title, nodes }))
 }
 
-/** Human-readable label for a domain key. */
+/** Human-readable label for a domain key or full compound domain string. */
 function domainLabel(domain: string): string {
   const labels: Record<string, string> = {
-    // ── 908-node math KG sub-domain keys (second segment of "math.<key>.*") ──
+    // ── 908-node math KG: short segment keys ("math.<key>.*" → key) ──────────
     found:  'Mathematical Foundations',
     arith:  'Arithmetic',
     nt:     'Number Theory',
@@ -124,6 +128,18 @@ function domainLabel(domain: string): string {
     opt:    'Optimization',
     graph:  'Graph Theory',
     cat:    'Category Theory',
+    // ── 194-node physics KG: qualified keys to avoid collision with math ──────
+    'phys.meas':  'Measurement & Units',
+    'phys.mech':  'Classical Mechanics',
+    'phys.therm': 'Thermodynamics',
+    'phys.wave':  'Waves & Oscillations',
+    'phys.opt':   'Optics',
+    'phys.em':    'Electromagnetism',
+    'phys.mod':   'Modern Physics',
+    'phys.qm':    'Quantum Mechanics',
+    'phys.rel':   'Special Relativity',
+    'phys.stat':  'Statistical Mechanics',
+    'phys.astro': 'Astrophysics',
     // ── 54-node KG domain keys (legacy / other subjects) ─────────────────────
     arithmetic:          'Arithmetic',
     number_systems:      'Number Systems',
@@ -162,7 +178,10 @@ function domainLabel(domain: string): string {
     economics:           'Economics',
     society:             'Society & Culture',
   }
-  return labels[domain] ?? domain.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  // Try exact key, then fall back to last segment (math short-keys like "found","arith")
+  if (labels[domain]) return labels[domain]
+  const seg = domain.split('.').pop() ?? domain
+  return labels[seg] ?? seg.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 // ── Subject → raw node array ──────────────────────────────────────────────────
@@ -173,9 +192,7 @@ function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
       return getMathKgNodes()
 
     case 'physics':
-      return (SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]).filter((n) =>
-        n.domain.startsWith('physics')
-      )
+      return getPhysicsKgNodes()
 
     case 'chemistry':
       return (SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]).filter((n) =>
@@ -207,6 +224,12 @@ export function getKGNode(id: string): KGNode | undefined {
   if (id.startsWith('math.')) {
     const mathNode = getMathKgNodes().find((n) => n.id === id)
     if (mathNode) return toKGNode(mathNode)
+  }
+
+  // 194-node physics KG is primary for phys.* IDs
+  if (id.startsWith('phys.')) {
+    const physNode = getPhysicsKgNodes().find((n) => n.id === id)
+    if (physNode) return toKGNode(physNode)
   }
 
   // Other subjects + legacy 54-node math IDs (arithmetic.*, geometry.*, etc.)
