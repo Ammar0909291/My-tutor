@@ -74,8 +74,8 @@ const IDS = [
   'chem.org.mechanisms',         // proficient  / analyze
   'chem.coord.cft',              // proficient  / analyze
   'chem.poly.biodegradable',     // advanced    / evaluate
-  'chem.bio.enzymes',            // advanced    / analyze
-  'chem.org.carbene-cycloaddition', // expert   / evaluate
+  'chem.bio.enzyme-kinetics',    // advanced    / analyze
+  'chem.org.pericyclic',          // expert     / evaluate
 ]
 
 console.log('\n═══════════════════════════════════════════════════════════')

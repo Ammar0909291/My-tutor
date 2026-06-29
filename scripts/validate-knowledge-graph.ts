@@ -117,7 +117,8 @@ function checkDuplicateIds(concepts: Concept[]): CheckResult {
 
 // ── Check 2: Broken edge references ──────────────────────────────────────────
 
-// Known aspirational targets (future graph extensions — not bugs)
+// Aspirational requires/unlocks that reference future namespaces not yet in this graph.
+// cross_links are always inter-graph by design and are handled separately below.
 const ASPIRATIONAL_PREFIXES = ['math.phys.', 'math.cs.', 'math.eng.']
 function isAspirational(id: string): boolean {
   return ASPIRATIONAL_PREFIXES.some(p => id.startsWith(p))
@@ -126,15 +127,27 @@ function isAspirational(id: string): boolean {
 function checkBrokenRefs(concepts: Concept[]): CheckResult {
   const r = makeResult('Broken edge references')
   const idSet = new Set(concepts.map(c => c.id))
-  const fields: Array<keyof Concept> = ['requires', 'unlocks', 'cross_links']
+
+  // requires/unlocks are intra-graph DAG edges: FAIL when target is absent.
+  // cross_links are explicitly cross-graph references: WARN only, never FAIL.
+  const strictFields: Array<keyof Concept> = ['requires', 'unlocks']
+  const warnFields: Array<keyof Concept>  = ['cross_links']
 
   for (const c of concepts) {
-    for (const field of fields) {
+    for (const field of strictFields) {
       const targets = (c[field] as string[] | undefined) ?? []
       for (const t of targets) {
         if (!idSet.has(t)) {
           const severity = isAspirational(t) ? 'WARN' : 'FAIL'
           fail(r, `[${field}] ${c.id} → "${t}" (not found)`, severity)
+        }
+      }
+    }
+    for (const field of warnFields) {
+      const targets = (c[field] as string[] | undefined) ?? []
+      for (const t of targets) {
+        if (!idSet.has(t)) {
+          fail(r, `[${field}] ${c.id} → "${t}" (cross-graph — not validated)`, 'WARN')
         }
       }
     }
@@ -289,7 +302,7 @@ function checkRequiredFields(concepts: Concept[]): CheckResult {
       const derivable = concepts.filter(c => !c.domain && c.id.split('.').length >= 3).length
       const severity = derivable === count ? 'WARN' : 'FAIL'
       const note = derivable === count
-        ? `— derivable from ID prefix by adapter (src/lib/curriculum/mathKgAdapter.ts)`
+        ? `— derivable from ID prefix by adapter (src/lib/curriculum/subjectKgAdapter.ts)`
         : ''
       fail(r, `"domain" absent on ${count} concept(s) ${note}`.trim(), severity)
     } else {
@@ -322,7 +335,7 @@ function checkTeachingEngineFields(concepts: Concept[]): CheckResult {
     if (count && count > 0) {
       const severity = field === 'concept_type' ? 'WARN' : 'FAIL'
       const note = field === 'concept_type'
-        ? '— inferred from bloom by adapter (mathKgAdapter.ts inferConceptType); advisory only'
+        ? '— inferred from bloom by adapter (subjectKgAdapter.ts inferConceptType); advisory only'
         : '— teaching engine degraded'
       fail(r, `"${field}" absent on ${count}/${concepts.length} concepts ${note}`, severity)
     }
