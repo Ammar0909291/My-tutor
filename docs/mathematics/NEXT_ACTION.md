@@ -1,44 +1,15 @@
 # Next Action
 
-## Current Task
-Build Domain 10: Differential Equations (`math.de`)
+## Status: COMPLETE
 
-## File to Create
-`docs/mathematics/kg/domains/10-differential-equations.json`
+The Canonical Mathematics Knowledge Graph v1.0.0 is FROZEN.
 
-## Scope
-- First-order ODEs: separable, linear (integrating factor), exact, Bernoulli, homogeneous
-- Existence and uniqueness theorems
-- Second-order ODEs: homogeneous, characteristic equation, variation of parameters
-- Higher-order linear ODEs
-- Laplace transforms and inverse transforms
-- Systems of ODEs, phase plane analysis
-- Series solutions, Frobenius method
-- Sturm-Liouville theory
-- Partial differential equations: heat equation, wave equation, Laplace equation
-- Method of separation of variables
-- Boundary value problems
-- Fourier series (applied)
+All 24 domains built, merged, and pushed.
 
-## After Domain 10
-- Commit: `feat(kg): mathematics knowledge graph — domain 10 (differential equations)`
-- Push to origin
-- Update PROJECT_STATE.md
-- Proceed to Domain 11: Linear Algebra
-
-## Long Queue
-11 → Linear Algebra
-12 → Probability
-13 → Statistics
-14 → Discrete Mathematics
-15 → Abstract Algebra
-16 → Real Analysis
-17 → Complex Analysis
-18 → Topology
-19 → Measure Theory
-20 → Functional Analysis
-21 → Numerical Analysis
-22 → Optimization
-23 → Graph Theory
-24 → Category Theory
-→ Merge all into kg/graph.json → Final validation → Freeze v1
+## Possible Future Work (requires explicit user instruction)
+- Educational Brain phase: add teaching assets (explanations, visualizations, assessments, misconceptions) per concept
+- Graph validation tooling: automated orphan detection, cycle checker, coverage analysis
+- Concept expansion: deepen any domain with more atomic concepts
+- Cross-domain validation: verify all cross-link IDs resolve correctly
+- API layer: expose graph over REST/GraphQL
+- Hindi/Sanskrit subject analogues (per CLAUDE.md constraint — do not touch without instruction)
