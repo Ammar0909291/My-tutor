@@ -43,12 +43,9 @@ No JSX — use React.createElement(...) only (the code runs with no transpiler).
 No fetch, no setTimeout, no setInterval, no external resources.
 Do NOT touch window.* or document.* — read size from the canvas ref.
 
-CRITICAL: You MUST finish the complete component in one response. Always include:
-lights, an animation loop driven by requestAnimationFrame, a cleanup function
-returned from useEffect that calls BOTH cancelAnimationFrame AND renderer.dispose(),
-and the closing return React.createElement('canvas', …) at the end. Never cut off
-mid-function. If the scene would otherwise be too long, simplify the geometry
-(fewer meshes, fewer segments, fewer colors) but ALWAYS finish the component.
+CRITICAL: Always complete the full component. Include lights, animation loop,
+cancelAnimationFrame cleanup, and renderer.dispose(). Never cut off mid-function.
+Simplify geometry if needed but always finish.
 
 The component must:
   - render exactly one canvas via React.useRef and React.createElement('canvas', { ref, style: { width: '100%', height: 300 } })
