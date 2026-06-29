@@ -122,78 +122,89 @@ orphan_report = {
     "true_orphans":      true_orphans,
 }
 
-# ── 4. Learner Tracks ─────────────────────────────────────────────────────────
+# ── 4. Learner Tracks (per-concept difficulty assignment) ────────────────────
+# Assignment uses each concept's difficulty field, not domain membership.
+# Domains intentionally span multiple tiers (e.g., math.nt covers L2–L6).
 
-TRACK_DEFS = [
-    {
+DIFF_TO_TRACK = {
+    "foundational": "T0",
+    "developing":   "T1",
+    "proficient":   "T1",
+    "advanced":     "T2",
+    "expert":       "T3",
+    "research":     "T4",
+}
+
+TRACK_META = {
+    "T0": {
         "track_id":   "T0",
         "name":       "Absolute Foundations",
-        "level_range":[0, 1],
+        "level_range":[0, 2],
         "difficulty": ["foundational"],
-        "domain_prefixes": ["math.found", "math.arith"],
+        "assignment": "difficulty ∈ {foundational}",
         "description": "Entry-level mathematics. No prerequisites assumed. "
                         "Covers logic, sets, number sense, and basic arithmetic.",
     },
-    {
+    "T1": {
         "track_id":   "T1",
-        "name":       "Pre-University Mathematics",
-        "level_range":[1, 3],
-        "difficulty": ["foundational", "developing", "proficient"],
-        "domain_prefixes": ["math.nt", "math.alg", "math.geom", "math.trig",
-                            "math.func", "math.seq"],
-        "description": "High-school to pre-university level. Builds on T0. "
-                        "Algebra, geometry, trigonometry, functions, sequences.",
+        "name":       "Pre-University / Early Undergraduate",
+        "level_range":[1, 4],
+        "difficulty": ["developing", "proficient"],
+        "assignment": "difficulty ∈ {developing, proficient}",
+        "description": "Pre-university to first-year university. Algebra, geometry, "
+                        "trigonometry, functions, sequences, introductory number theory.",
     },
-    {
+    "T2": {
         "track_id":   "T2",
         "name":       "Undergraduate Core",
-        "level_range":[2, 5],
-        "difficulty": ["developing", "proficient", "advanced"],
-        "domain_prefixes": ["math.calc", "math.de", "math.linalg",
-                            "math.prob", "math.stats", "math.disc"],
-        "description": "Standard first/second-year university mathematics. "
-                        "Calculus, differential equations, linear algebra, "
-                        "probability, statistics, discrete mathematics.",
+        "level_range":[3, 5],
+        "difficulty": ["advanced"],
+        "assignment": "difficulty ∈ {advanced}",
+        "description": "Standard second/third-year university. Calculus, differential "
+                        "equations, linear algebra, probability, statistics.",
     },
-    {
+    "T3": {
         "track_id":   "T3",
         "name":       "Upper Undergraduate / Early Graduate",
-        "level_range":[4, 6],
-        "difficulty": ["advanced", "expert"],
-        "domain_prefixes": ["math.abst", "math.real", "math.cx",
-                            "math.top", "math.num", "math.opt", "math.graph"],
-        "description": "Third/fourth-year university and early MSc level. "
-                        "Abstract algebra, analysis, topology, numerical methods, optimization.",
+        "level_range":[5, 6],
+        "difficulty": ["expert"],
+        "assignment": "difficulty ∈ {expert}",
+        "description": "Third/fourth-year and early MSc. Abstract algebra, real/complex "
+                        "analysis, topology, numerical methods, optimization.",
     },
-    {
+    "T4": {
         "track_id":   "T4",
         "name":       "Graduate / Research Mathematics",
         "level_range":[6, 7],
-        "difficulty": ["expert", "research"],
-        "domain_prefixes": ["math.meas", "math.fnal", "math.cat"],
-        "description": "MSc/PhD-level mathematics. Measure theory, functional analysis, "
-                        "category theory. Requires all prior tracks.",
+        "difficulty": ["research"],
+        "assignment": "difficulty ∈ {research}",
+        "description": "MSc/PhD level. Measure theory, functional analysis, category "
+                        "theory, research-frontier topics.",
     },
-]
+}
+
+track_buckets = {t: [] for t in TRACK_META}
+for c in concepts:
+    tid = DIFF_TO_TRACK.get(c.get("difficulty", "foundational"), "T0")
+    track_buckets[tid].append(c["id"])
 
 tracks_with_counts = []
-for td in TRACK_DEFS:
-    prefixes = td["domain_prefixes"]
-    members  = [c["id"] for c in concepts
-                if any(c["id"].startswith(p + ".") for p in prefixes)]
+for tid, meta in TRACK_META.items():
+    members      = track_buckets[tid]
     entry_points = [cid for cid in members if not concept_by_id[cid].get("requires")]
     tracks_with_counts.append({
-        **td,
-        "concept_count":    len(members),
+        **meta,
+        "concept_count":     len(members),
         "entry_point_count": len(entry_points),
-        "entry_points":     entry_points[:20],  # first 20 for brevity
+        "entry_points":      entry_points[:20],
     })
 
 learner_tracks = {
-    "model":  "Five-tier progressive track model (T0–T4)",
+    "model":  "Five-tier progressive track model (T0–T4) — per-concept difficulty assignment",
     "status": "DEFINED",
-    "note":   "Tracks are overlapping level ranges; a learner progresses T0→T1→T2→T3→T4. "
-               "Each track's entry points are root concepts (no prerequisites) within that track's domains.",
+    "note":   "Each concept is assigned to a track by its own difficulty field. "
+               "A domain may contribute concepts to multiple tracks (e.g., math.nt spans T1–T4). "
+               "Learner progression: T0 → T1 → T2 → T3 → T4.",
     "tracks": tracks_with_counts,
 }
 

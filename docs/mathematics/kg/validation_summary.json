@@ -24,27 +24,27 @@
     {
       "track": "T0",
       "name": "Absolute Foundations",
-      "concepts": 140
+      "concepts": 67
     },
     {
       "track": "T1",
-      "name": "Pre-University Mathematics",
-      "concepts": 239
+      "name": "Pre-University / Early Undergraduate",
+      "concepts": 432
     },
     {
       "track": "T2",
       "name": "Undergraduate Core",
-      "concepts": 314
+      "concepts": 139
     },
     {
       "track": "T3",
       "name": "Upper Undergraduate / Early Graduate",
-      "concepts": 169
+      "concepts": 225
     },
     {
       "track": "T4",
       "name": "Graduate / Research Mathematics",
-      "concepts": 46
+      "concepts": 45
     }
   ]
 }

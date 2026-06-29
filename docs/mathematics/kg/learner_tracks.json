@@ -1,24 +1,21 @@
 {
-  "model": "Five-tier progressive track model (T0\u2013T4)",
+  "model": "Five-tier progressive track model (T0\u2013T4) \u2014 per-concept difficulty assignment",
   "status": "DEFINED",
-  "note": "Tracks are overlapping level ranges; a learner progresses T0\u2192T1\u2192T2\u2192T3\u2192T4. Each track's entry points are root concepts (no prerequisites) within that track's domains.",
+  "note": "Each concept is assigned to a track by its own difficulty field. A domain may contribute concepts to multiple tracks (e.g., math.nt spans T1\u2013T4). Learner progression: T0 \u2192 T1 \u2192 T2 \u2192 T3 \u2192 T4.",
   "tracks": [
     {
       "track_id": "T0",
       "name": "Absolute Foundations",
       "level_range": [
         0,
-        1
+        2
       ],
       "difficulty": [
         "foundational"
       ],
-      "domain_prefixes": [
-        "math.found",
-        "math.arith"
-      ],
+      "assignment": "difficulty \u2208 {foundational}",
       "description": "Entry-level mathematics. No prerequisites assumed. Covers logic, sets, number sense, and basic arithmetic.",
-      "concept_count": 140,
+      "concept_count": 67,
       "entry_point_count": 1,
       "entry_points": [
         "math.found.mathematical-thinking"
@@ -26,26 +23,18 @@
     },
     {
       "track_id": "T1",
-      "name": "Pre-University Mathematics",
+      "name": "Pre-University / Early Undergraduate",
       "level_range": [
         1,
-        3
+        4
       ],
       "difficulty": [
-        "foundational",
         "developing",
         "proficient"
       ],
-      "domain_prefixes": [
-        "math.nt",
-        "math.alg",
-        "math.geom",
-        "math.trig",
-        "math.func",
-        "math.seq"
-      ],
-      "description": "High-school to pre-university level. Builds on T0. Algebra, geometry, trigonometry, functions, sequences.",
-      "concept_count": 239,
+      "assignment": "difficulty \u2208 {developing, proficient}",
+      "description": "Pre-university to first-year university. Algebra, geometry, trigonometry, functions, sequences, introductory number theory.",
+      "concept_count": 432,
       "entry_point_count": 0,
       "entry_points": []
     },
@@ -53,24 +42,15 @@
       "track_id": "T2",
       "name": "Undergraduate Core",
       "level_range": [
-        2,
+        3,
         5
       ],
       "difficulty": [
-        "developing",
-        "proficient",
         "advanced"
       ],
-      "domain_prefixes": [
-        "math.calc",
-        "math.de",
-        "math.linalg",
-        "math.prob",
-        "math.stats",
-        "math.disc"
-      ],
-      "description": "Standard first/second-year university mathematics. Calculus, differential equations, linear algebra, probability, statistics, discrete mathematics.",
-      "concept_count": 314,
+      "assignment": "difficulty \u2208 {advanced}",
+      "description": "Standard second/third-year university. Calculus, differential equations, linear algebra, probability, statistics.",
+      "concept_count": 139,
       "entry_point_count": 0,
       "entry_points": []
     },
@@ -78,24 +58,15 @@
       "track_id": "T3",
       "name": "Upper Undergraduate / Early Graduate",
       "level_range": [
-        4,
+        5,
         6
       ],
       "difficulty": [
-        "advanced",
         "expert"
       ],
-      "domain_prefixes": [
-        "math.abst",
-        "math.real",
-        "math.cx",
-        "math.top",
-        "math.num",
-        "math.opt",
-        "math.graph"
-      ],
-      "description": "Third/fourth-year university and early MSc level. Abstract algebra, analysis, topology, numerical methods, optimization.",
-      "concept_count": 169,
+      "assignment": "difficulty \u2208 {expert}",
+      "description": "Third/fourth-year and early MSc. Abstract algebra, real/complex analysis, topology, numerical methods, optimization.",
+      "concept_count": 225,
       "entry_point_count": 0,
       "entry_points": []
     },
@@ -107,16 +78,11 @@
         7
       ],
       "difficulty": [
-        "expert",
         "research"
       ],
-      "domain_prefixes": [
-        "math.meas",
-        "math.fnal",
-        "math.cat"
-      ],
-      "description": "MSc/PhD-level mathematics. Measure theory, functional analysis, category theory. Requires all prior tracks.",
-      "concept_count": 46,
+      "assignment": "difficulty \u2208 {research}",
+      "description": "MSc/PhD level. Measure theory, functional analysis, category theory, research-frontier topics.",
+      "concept_count": 45,
       "entry_point_count": 0,
       "entry_points": []
     }
