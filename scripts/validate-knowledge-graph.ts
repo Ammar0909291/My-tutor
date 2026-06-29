@@ -24,7 +24,7 @@
  *   npx tsx scripts/validate-knowledge-graph.ts [path/to/graph.json]
  *   (defaults to docs/mathematics/kg/graph.json)
  *
- * Exit codes: 0 = no FAIL conditions, 1 = one or more FAIL conditions
+ * Exit codes: 0 = status is PASS or PASS_WITH_WARNINGS, 1 = status is FAIL
  */
 
 import fs from 'fs'
@@ -424,10 +424,6 @@ function checkNumericRanges(concepts: Concept[]): CheckResult {
 const filePath = process.argv[2] ?? 'docs/mathematics/kg/graph.json'
 const absPath  = path.resolve(filePath)
 
-console.log(`\nKNOWLEDGE GRAPH VALIDATOR`)
-console.log(`File: ${absPath}`)
-console.log(`${'─'.repeat(60)}`)
-
 let graph: Graph
 try {
   graph = loadGraph(absPath)
@@ -437,8 +433,6 @@ try {
 }
 
 const concepts = graph.concepts ?? []
-console.log(`Graph: ${graph.name ?? '(unnamed)'} v${graph.version ?? '?'}`)
-console.log(`Concepts: ${concepts.length}\n`)
 
 const checks: CheckResult[] = [
   checkDuplicateIds(concepts),
@@ -452,26 +446,68 @@ const checks: CheckResult[] = [
   checkNumericRanges(concepts),
 ]
 
-let anyFail = false
-let anyWarn = false
+// ── Collect results ───────────────────────────────────────────────────────────
+
+const failures: string[] = []
+const warnings: string[] = []
+const infoItems: string[] = []
 
 for (const c of checks) {
-  const icon = c.status === 'PASS' ? '✓' : c.status === 'WARN' ? '⚠' : '✗'
-  console.log(`${icon} [${c.status}] ${c.name}`)
   for (const d of c.details) {
-    const dIcon = c.status === 'FAIL' ? '  ✗' : '  ⚠'
-    console.log(`${dIcon} ${d}`)
+    if (c.status === 'FAIL') failures.push(`[${c.name}] ${d}`)
+    else                     warnings.push(`[${c.name}] ${d}`)
   }
-  for (const i of c.info) {
-    console.log(`  ℹ  ${i}`)
-  }
-  if (c.status === 'FAIL') anyFail = true
-  if (c.status === 'WARN') anyWarn = true
+  for (const i of c.info) infoItems.push(i)
 }
 
-console.log(`\n${'─'.repeat(60)}`)
-const overall = anyFail ? 'FAIL' : anyWarn ? 'PASS (with warnings)' : 'PASS'
-console.log(`Overall: ${overall}`)
-console.log(`${'─'.repeat(60)}\n`)
+const anyFail = failures.length > 0
+const anyWarn = warnings.length > 0
+const status  = anyFail ? 'FAIL' : anyWarn ? 'PASS_WITH_WARNINGS' : 'PASS'
+
+// ── Render ────────────────────────────────────────────────────────────────────
+
+const W = 60
+console.log(`\nKNOWLEDGE GRAPH VALIDATOR`)
+console.log('─'.repeat(W))
+console.log(`subject:   ${graph.name ?? '(unnamed)'} v${graph.version ?? '?'}`)
+console.log(`concepts:  ${concepts.length}`)
+console.log('─'.repeat(W))
+
+console.log()
+for (const c of checks) {
+  const icon = c.status === 'PASS' ? '✓' : c.status === 'WARN' ? '⚠' : '✗'
+  console.log(`  ${icon} ${c.name}`)
+  for (const d of c.details) {
+    console.log(`      ${c.status === 'FAIL' ? '✗' : '⚠'} ${d}`)
+  }
+}
+
+console.log()
+console.log('─'.repeat(W))
+console.log(`status:    ${status}`)
+
+if (failures.length > 0) {
+  console.log(`failures:`)
+  for (const f of failures) console.log(`  · ${f}`)
+} else {
+  console.log(`failures:  none`)
+}
+
+if (warnings.length > 0) {
+  console.log(`warnings:`)
+  for (const w of warnings) console.log(`  · ${w}`)
+} else {
+  console.log(`warnings:  none`)
+}
+
+if (infoItems.length > 0) {
+  console.log(`info:`)
+  for (const i of infoItems) console.log(`  · ${i}`)
+} else {
+  console.log(`info:      none`)
+}
+
+console.log('─'.repeat(W))
+console.log()
 
 process.exit(anyFail ? 1 : 0)
