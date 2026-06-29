@@ -77,7 +77,7 @@ const VALID_DIFFICULTIES = new Set([
   'foundational', 'developing', 'proficient', 'advanced', 'expert', 'research',
 ])
 
-// Old KnowledgeNode type only has these four — used as compat-check
+// Kept for reference — expert/research added to educationTypes.ts Difficulty in Step B
 const LEGACY_DIFFICULTIES = new Set(['foundational', 'developing', 'proficient', 'advanced'])
 
 const VALID_BLOOMS = new Set([
@@ -284,7 +284,17 @@ function checkRequiredFields(concepts: Concept[]): CheckResult {
   }
 
   for (const [field, count] of missingByField) {
-    fail(r, `"${field}" missing or empty on ${count} concept(s)`)
+    if (field === 'domain') {
+      // domain absent but derivable from ID prefix (prefix.subdomain.slug ≥ 3 segments)
+      const derivable = concepts.filter(c => !c.domain && c.id.split('.').length >= 3).length
+      const severity = derivable === count ? 'WARN' : 'FAIL'
+      const note = derivable === count
+        ? `— derivable from ID prefix by adapter (src/lib/curriculum/mathKgAdapter.ts)`
+        : ''
+      fail(r, `"domain" absent on ${count} concept(s) ${note}`.trim(), severity)
+    } else {
+      fail(r, `"${field}" missing or empty on ${count} concept(s)`)
+    }
   }
   return r
 }
@@ -311,7 +321,10 @@ function checkTeachingEngineFields(concepts: Concept[]): CheckResult {
   for (const [field, count] of Object.entries(missing)) {
     if (count && count > 0) {
       const severity = field === 'concept_type' ? 'WARN' : 'FAIL'
-      fail(r, `"${field}" absent on ${count}/${concepts.length} concepts — teaching engine degraded`, severity)
+      const note = field === 'concept_type'
+        ? '— inferred from bloom by adapter (mathKgAdapter.ts inferConceptType); advisory only'
+        : '— teaching engine degraded'
+      fail(r, `"${field}" absent on ${count}/${concepts.length} concepts ${note}`, severity)
     }
   }
 
@@ -337,7 +350,8 @@ function checkEnumValues(concepts: Concept[]): CheckResult {
     fail(r, `Unknown difficulty values: ${[...new Set(badDiff.map(c => c.difficulty))].join(', ')} (${badDiff.length} concepts)`)
   }
   if (legacyOnly.length > 0) {
-    fail(r, `${legacyOnly.length} concepts use difficulty values (expert/research) absent from legacy KnowledgeNode type — breaks src/lib/education/educationTypes.ts Difficulty union`, 'WARN')
+    // expert/research added to educationTypes.ts Difficulty in Step B — no longer a compat issue
+    r.details.push(`ℹ  ${legacyOnly.length} concepts use expert/research difficulty (now in Difficulty union — Step B)`)
   }
   if (badBloom.length > 0) {
     fail(r, `Unknown bloom values: ${[...new Set(badBloom.map(c => c.bloom))].join(', ')} (${badBloom.length} concepts)`)
