@@ -48,20 +48,21 @@ interface CheckResults {
 }
 
 interface ValidationResult {
-  status:          'PASS' | 'WARN' | 'FAIL'
+  status:          'PASS' | 'PASS_WITH_WARNINGS' | 'FAIL'
   checks:          CheckResults
   reachable_count: number
   total_count:     number
   root_nodes:      string[]
   errors:          string[]
   warnings:        string[]
+  info:            string[]
 }
 
 interface SubjectState {
   subject:           string
   graph_path:        string
   concept_count:     number
-  validator_status:  'PASS' | 'WARN' | 'FAIL'
+  validator_status:  'PASS' | 'PASS_WITH_WARNINGS' | 'FAIL'
   validator_checks:  CheckResults
   reachability:      string
   root_nodes:        string[]
@@ -70,6 +71,7 @@ interface SubjectState {
   id_prefix:         string | null
   errors:            string[]
   warnings:          string[]
+  info:              string[]
 }
 
 // ── Validator ─────────────────────────────────────────────────────────────────
@@ -77,6 +79,7 @@ interface SubjectState {
 function validate(concepts: RawConcept[]): ValidationResult {
   const errors:   string[] = []
   const warnings: string[] = []
+  const info:     string[] = []
   const ids = new Set(concepts.map(c => c.id))
 
   // 1. Duplicate IDs
@@ -89,8 +92,9 @@ function validate(concepts: RawConcept[]): ValidationResult {
   const no_duplicates = dupes.length === 0
   if (dupes.length) errors.push(`Duplicate IDs: ${dupes.join(', ')}`)
 
-  // 2. Broken requires/unlocks = FAIL; cross_links = WARN (cross-graph by design)
+  // 2. Broken requires/unlocks = FAIL; cross_links = INFO (cross-graph by design)
   let brokenCount = 0
+  let crossLinkCount = 0
   for (const c of concepts) {
     for (const ref of [...c.requires, ...c.unlocks]) {
       if (!ids.has(ref)) {
@@ -99,9 +103,10 @@ function validate(concepts: RawConcept[]): ValidationResult {
       }
     }
     for (const ref of c.cross_links ?? []) {
-      if (!ids.has(ref)) warnings.push(`cross_link (cross-graph): ${c.id} → ${ref}`)
+      if (!ids.has(ref)) crossLinkCount++
     }
   }
+  if (crossLinkCount > 0) info.push(`${crossLinkCount} external cross-subject link(s) in cross_links (by design)`)
   const no_broken_edges = brokenCount === 0
 
   // 3. Schema — all 10 required fields must be present on every concept
@@ -170,7 +175,7 @@ function validate(concepts: RawConcept[]): ValidationResult {
   }
 
   const failed = Object.values(checks).some(v => !v)
-  const status: ValidationResult['status'] = failed ? 'FAIL' : warnings.length > 0 ? 'WARN' : 'PASS'
+  const status: ValidationResult['status'] = failed ? 'FAIL' : warnings.length > 0 ? 'PASS_WITH_WARNINGS' : 'PASS'
 
   return {
     status,
@@ -180,6 +185,7 @@ function validate(concepts: RawConcept[]): ValidationResult {
     root_nodes:      roots.map(r => r.id),
     errors,
     warnings,
+    info,
   }
 }
 
@@ -247,6 +253,7 @@ const subjects: SubjectState[] = graphs.map(({ dir, file }) => {
     id_prefix:          prefix,
     errors:             result.errors,
     warnings:           result.warnings.slice(0, 10),
+    info:               result.info,
   }
 })
 
@@ -279,7 +286,7 @@ fs.writeFileSync(OUT, JSON.stringify(systemState, null, 2) + '\n')
 console.log(`\nSYSTEM STATE — ${subjects.length} subjects discovered`)
 console.log('─'.repeat(70))
 for (const s of subjects) {
-  const icon   = s.validator_status === 'PASS' ? '✓' : s.validator_status === 'WARN' ? '⚠' : '✗'
+  const icon   = s.validator_status === 'FAIL' ? '✗' : s.validator_status === 'PASS_WITH_WARNINGS' ? '⚠' : '✓'
   const wire   = s.adapter_wired && s.routing_registered ? 'wired' : 'NOT WIRED'
   const prefix = s.id_prefix ? `prefix:${s.id_prefix}` : 'no prefix'
   console.log(
