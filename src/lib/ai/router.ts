@@ -10,17 +10,26 @@ async function callGroq(
   systemPrompt: string,
   maxTokens = 800,
 ): Promise<string> {
-  await consumeAIBudget()
-  const response = await groq.chat.completions.create({
-    model: 'openai/gpt-oss-20b',
+  const req = {
+    model: 'openai/gpt-oss-20b' as const,
     messages: [
-      { role: 'system', content: systemPrompt },
+      { role: 'system' as const, content: systemPrompt },
       ...messages.slice(-6),
     ],
     max_tokens: maxTokens,
     temperature: 0.7,
-  })
-  return response.choices[0]?.message?.content ?? ''
+  }
+  await consumeAIBudget()
+  const response = await groq.chat.completions.create(req)
+  const text = response.choices[0]?.message?.content ?? ''
+  if (text) return text
+  // Empty content (null choice or null message) — transient model issue.
+  // The SDK maxRetries:2 only covers HTTP errors, not 200-OK-with-null-content.
+  // One explicit retry is sufficient for the common transient overload case.
+  console.warn('[routeAI] Groq returned empty content, retrying once')
+  await consumeAIBudget()
+  const retry = await groq.chat.completions.create(req)
+  return retry.choices[0]?.message?.content ?? ''
 }
 
 // ─── YandexGPT (Russia only) ──────────────────────────────────────────────────
