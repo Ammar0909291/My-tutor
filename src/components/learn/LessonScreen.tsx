@@ -415,7 +415,7 @@ function TypingDots() {
 // real answer-capture and immediate scoring feedback, instead of the previous
 // plain markdown text the AI used to write out itself. Purely local state — no
 // new API call, since the question/answer pair already arrived with the message.
-function InlinePracticePrompt({ practice }: { practice: InlinePracticeQuestion }) {
+function InlinePracticePrompt({ practice, onAnswered }: { practice: InlinePracticeQuestion; onAnswered?: (correct: boolean) => void }) {
   const [selected, setSelected] = useState<string | null>(null)
   const correct = selected !== null && selected === practice.answer
 
@@ -445,7 +445,7 @@ function InlinePracticePrompt({ practice }: { practice: InlinePracticeQuestion }
           return (
             <CandyButton
               key={i}
-              onClick={() => { if (selected === null) setSelected(opt) }}
+              onClick={() => { if (selected === null) { setSelected(opt); setTimeout(() => onAnswered?.(opt === practice.answer), 1500) } }}
               disabled={selected !== null}
               shadowColor={showResult && isAnswer ? 'var(--green, #22c55e)' : showResult && isSelected ? 'var(--red, #ef4444)' : 'var(--border-subtle)'}
               style={{
@@ -2686,7 +2686,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                         the old plain-text question the AI used to type out itself. */}
                     {!isUser && !msg.streaming && msg.inlinePractice && (
                       <div style={{ animation: 'fadeUp 300ms ease-out both' }}>
-                        <InlinePracticePrompt practice={msg.inlinePractice} />
+                        <InlinePracticePrompt
+                          practice={msg.inlinePractice}
+                          onAnswered={(correct) => {
+                            if (!sessionId) return
+                            const text = correct
+                              ? (teachingLanguage === 'ru' ? 'Правильно.' : teachingLanguage === 'hi' ? 'Sahi jawab diya.' : 'Got it right.')
+                              : (teachingLanguage === 'ru' ? 'Неправильно.' : teachingLanguage === 'hi' ? 'Galat jawab diya.' : 'Got that wrong.')
+                            sendMessage(sessionId, text, false)
+                          }}
+                        />
                       </div>
                     )}
 
