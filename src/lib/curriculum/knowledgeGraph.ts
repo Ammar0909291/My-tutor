@@ -7,9 +7,10 @@
  * function to the right data source.
  *
  * ── Canonical KG adapters (SUBJECT_ADAPTERS) ─────────────────────────────────
- *   mathematics  →  docs/mathematics/kg/graph.json  (908 concepts)
- *   physics      →  docs/physics/kg/graph.json      (194 concepts)
- *   chemistry    →  docs/chemistry/kg/graph.json    (canonical, new)
+ *   mathematics  →  docs/mathematics/kg/graph.json       (908 concepts)
+ *   physics      →  docs/physics/kg/graph.json           (194 concepts)
+ *   chemistry    →  docs/chemistry/kg/graph.json         (187 concepts)
+ *   computer_science → docs/computer-science/kg/graph.json (119 concepts)
  *
  * Adding a new subject: drop a graph.json under docs/{subject}/kg/ and add
  * one entry to SUBJECT_ADAPTERS + one entry to ID_PREFIX_TO_SUBJECT below.
@@ -36,9 +37,10 @@ import { createSubjectAdapter } from './subjectKgAdapter'
 // The adapter is lazy — it only reads the file on first getNodes() call.
 
 const SUBJECT_ADAPTERS: Record<string, ReturnType<typeof createSubjectAdapter>> = {
-  mathematics: createSubjectAdapter('mathematics'),
-  physics:     createSubjectAdapter('physics'),
-  chemistry:   createSubjectAdapter('chemistry'),
+  mathematics:      createSubjectAdapter('mathematics'),
+  physics:          createSubjectAdapter('physics'),
+  chemistry:        createSubjectAdapter('chemistry'),
+  computer_science: createSubjectAdapter('computer-science'),
 }
 
 // Maps the first ID segment to the subject name so getKGNode() can route
@@ -47,6 +49,7 @@ const ID_PREFIX_TO_SUBJECT: Record<string, string> = {
   math: 'mathematics',
   phys: 'physics',
   chem: 'chemistry',
+  cs:   'computer_science',
 }
 
 // ── Public types ──────────────────────────────────────────────────────────────
@@ -189,6 +192,24 @@ function domainLabel(domain: string): string {
     'chem.poly':    'Polymers',
     'chem.env':     'Environmental Chemistry',
     'chem.anal':    'Analytical Chemistry',
+    // ── Computer Science KG: qualified keys ──────────────────────────────────
+    'cs.found':   'Computing Foundations',
+    'cs.algo':    'Algorithms & Complexity',
+    'cs.prog':    'Programming Fundamentals',
+    'cs.control': 'Control Structures',
+    'cs.data':    'Core Data Types',
+    'cs.func':    'Functions & Modularity',
+    'cs.file':    'File Handling',
+    'cs.struct':  'Data Structures',
+    'cs.oop':     'Object-Oriented Programming',
+    'cs.db':      'Databases',
+    'cs.os':      'Operating Systems',
+    'cs.net':     'Networking',
+    'cs.sec':     'Security',
+    'cs.web':     'Web & Cloud Development',
+    'cs.theory':  'Theory of Computation',
+    'cs.se':      'Software Engineering',
+    'cs.ds':      'Data Science & AI',
     // ── 54-node KG domain keys (legacy / other subjects) ─────────────────────
     arithmetic:          'Arithmetic',
     number_systems:      'Number Systems',

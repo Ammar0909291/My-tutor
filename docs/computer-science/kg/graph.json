@@ -1,0 +1,1959 @@
+{
+  "name": "Computer Science Knowledge Graph",
+  "version": "1.0.0",
+  "status": "production",
+  "build_date": "2026-06-29",
+  "concepts": [
+    {
+      "id": "cs.found.intro-computers",
+      "name": "Introduction to Computers",
+      "requires": [],
+      "unlocks": [
+        "cs.algo.problem-solving",
+        "cs.found.computer-organisation",
+        "cs.found.number-systems",
+        "cs.found.software-concepts",
+        "cs.sec.cyber-ethics-safety"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "History and generations of computers; characteristics of computers \u2014 speed, accuracy, storage, versatility; types \u2014 micro, mini, mainframe, supercomputer; hardware vs software; applications across domains."
+    },
+    {
+      "id": "cs.found.computer-organisation",
+      "name": "Computer Organisation",
+      "requires": [
+        "cs.found.intro-computers"
+      ],
+      "unlocks": [
+        "cs.found.cpu-architecture",
+        "cs.found.memory-storage",
+        "cs.found.os-concepts",
+        "cs.net.networking-basics"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "CPU components \u2014 ALU, control unit, registers; memory hierarchy; input/output devices; system buses \u2014 data, address, control; the fetch-decode-execute cycle."
+    },
+    {
+      "id": "cs.found.number-systems",
+      "name": "Number Systems",
+      "requires": [
+        "cs.found.intro-computers"
+      ],
+      "unlocks": [
+        "cs.found.boolean-logic"
+      ],
+      "cross_links": [
+        "cs.sec.cryptography-basics"
+      ],
+      "difficulty": "foundational",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Decimal, binary, octal and hexadecimal systems; base conversion; binary arithmetic; 1's and 2's complement representation; BCD, ASCII and Unicode."
+    },
+    {
+      "id": "cs.found.boolean-logic",
+      "name": "Boolean Logic and Logic Gates",
+      "requires": [
+        "cs.found.number-systems"
+      ],
+      "unlocks": [
+        "cs.found.cpu-architecture",
+        "cs.sec.cryptography-basics",
+        "cs.theory.finite-automata"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Boolean algebra \u2014 AND, OR, NOT operations and De Morgan's laws; logic gates including NAND, NOR, XOR; truth tables; half adder and full adder circuits."
+    },
+    {
+      "id": "cs.found.memory-storage",
+      "name": "Memory and Storage Systems",
+      "requires": [
+        "cs.found.computer-organisation"
+      ],
+      "unlocks": [
+        "cs.found.pipelining-cache",
+        "cs.os.memory-management-os"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Primary memory \u2014 DRAM, SRAM, ROM variants; secondary storage \u2014 HDD, SSD, optical media; storage units from bit to terabyte; access time vs capacity trade-offs."
+    },
+    {
+      "id": "cs.found.cpu-architecture",
+      "name": "CPU Architecture and Instruction Sets",
+      "requires": [
+        "cs.found.computer-organisation",
+        "cs.found.boolean-logic"
+      ],
+      "unlocks": [
+        "cs.found.pipelining-cache"
+      ],
+      "cross_links": [
+        "cs.algo.asymptotic-notation"
+      ],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Von Neumann vs Harvard architecture; instruction set architecture \u2014 RISC vs CISC; addressing modes; register file organisation; clock cycles and instruction throughput."
+    },
+    {
+      "id": "cs.found.pipelining-cache",
+      "name": "Pipelining and Cache Memory",
+      "requires": [
+        "cs.found.cpu-architecture",
+        "cs.found.memory-storage"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Instruction pipelining and hazards \u2014 structural, data, control; pipeline stalls; cache levels (L1/L2/L3); cache mapping \u2014 direct, associative, set-associative; locality of reference."
+    },
+    {
+      "id": "cs.found.software-concepts",
+      "name": "Software Concepts",
+      "requires": [
+        "cs.found.intro-computers"
+      ],
+      "unlocks": [
+        "cs.found.os-concepts"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "System software vs application software; operating systems, language translators, utility programs; open source vs proprietary licensing; freeware, shareware and firmware."
+    },
+    {
+      "id": "cs.found.os-concepts",
+      "name": "Operating System Fundamentals",
+      "requires": [
+        "cs.found.software-concepts",
+        "cs.found.computer-organisation"
+      ],
+      "unlocks": [
+        "cs.os.process-management"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Functions of an OS \u2014 process, memory, file and I/O management; OS types \u2014 batch, time-sharing, real-time, distributed, mobile; the role of the kernel and system calls."
+    },
+    {
+      "id": "cs.algo.problem-solving",
+      "name": "Problem Solving Methodology",
+      "requires": [
+        "cs.found.intro-computers"
+      ],
+      "unlocks": [
+        "cs.algo.algorithms"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Stages of problem solving \u2014 analysis, algorithm design, coding, testing, documentation; problem decomposition; abstraction and generalisation as design tools."
+    },
+    {
+      "id": "cs.algo.algorithms",
+      "name": "Algorithms",
+      "requires": [
+        "cs.algo.problem-solving"
+      ],
+      "unlocks": [
+        "cs.algo.asymptotic-notation",
+        "cs.algo.flowcharts",
+        "cs.struct.linear-search"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Definition and properties of an algorithm \u2014 finiteness, definiteness, effectiveness; representations \u2014 natural language, pseudocode, flowchart; sequence, selection and iteration constructs."
+    },
+    {
+      "id": "cs.algo.flowcharts",
+      "name": "Flowcharts and Pseudocode",
+      "requires": [
+        "cs.algo.algorithms"
+      ],
+      "unlocks": [
+        "cs.prog.intro-programming"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Flowchart symbols and conventions; constructing flowcharts for linear, conditional and iterative logic; translating between flowcharts and pseudocode."
+    },
+    {
+      "id": "cs.algo.asymptotic-notation",
+      "name": "Asymptotic Notation",
+      "requires": [
+        "cs.algo.algorithms"
+      ],
+      "unlocks": [
+        "cs.algo.time-space-complexity",
+        "cs.theory.finite-automata"
+      ],
+      "cross_links": [
+        "cs.found.cpu-architecture"
+      ],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Big-O, Big-Omega and Big-Theta notation; best, worst and average case analysis; growth rate comparison of common functions; analysing simple loops and nested loops."
+    },
+    {
+      "id": "cs.algo.time-space-complexity",
+      "name": "Time and Space Complexity Analysis",
+      "requires": [
+        "cs.algo.asymptotic-notation"
+      ],
+      "unlocks": [
+        "cs.algo.divide-and-conquer",
+        "cs.algo.greedy-algorithms",
+        "cs.struct.hashing-hash-tables"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Counting elementary operations; recurrence relations for recursive algorithms; the Master theorem (informal); trade-offs between time and space efficiency."
+    },
+    {
+      "id": "cs.algo.divide-and-conquer",
+      "name": "Divide and Conquer",
+      "requires": [
+        "cs.algo.time-space-complexity"
+      ],
+      "unlocks": [
+        "cs.algo.dynamic-programming",
+        "cs.struct.binary-search",
+        "cs.struct.efficient-sorts"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "The divide-conquer-combine paradigm; recurrence-based analysis; classic examples \u2014 binary search, merge sort, quicksort, fast exponentiation."
+    },
+    {
+      "id": "cs.algo.greedy-algorithms",
+      "name": "Greedy Algorithms",
+      "requires": [
+        "cs.algo.time-space-complexity"
+      ],
+      "unlocks": [
+        "cs.algo.dynamic-programming",
+        "cs.struct.minimum-spanning-tree"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Greedy choice property and optimal substructure; activity selection; coin change (greedy case); minimum spanning tree intuition; when greedy fails to give an optimal solution."
+    },
+    {
+      "id": "cs.algo.dynamic-programming",
+      "name": "Dynamic Programming",
+      "requires": [
+        "cs.algo.divide-and-conquer",
+        "cs.algo.greedy-algorithms"
+      ],
+      "unlocks": [
+        "cs.algo.backtracking"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 6,
+      "description": "Overlapping subproblems and optimal substructure; memoisation vs tabulation; classic problems \u2014 Fibonacci, knapsack, longest common subsequence, edit distance."
+    },
+    {
+      "id": "cs.algo.backtracking",
+      "name": "Backtracking",
+      "requires": [
+        "cs.algo.dynamic-programming"
+      ],
+      "unlocks": [
+        "cs.algo.np-completeness"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "State-space search with pruning; the general backtracking template; classic problems \u2014 N-Queens, Sudoku solving, subset generation, permutations."
+    },
+    {
+      "id": "cs.algo.np-completeness",
+      "name": "NP-Completeness and Intractability",
+      "requires": [
+        "cs.algo.backtracking"
+      ],
+      "unlocks": [
+        "cs.theory.complexity-classes"
+      ],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 8,
+      "description": "P vs NP; polynomial-time reductions; NP-complete and NP-hard problems; the Cook-Levin theorem (informal); approximation and heuristic strategies for intractable problems."
+    },
+    {
+      "id": "cs.prog.intro-programming",
+      "name": "Introduction to Programming",
+      "requires": [
+        "cs.algo.flowcharts"
+      ],
+      "unlocks": [
+        "cs.prog.python-basics"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "High-level vs low-level languages; compilers, interpreters and assemblers; source code vs object code; an overview of procedural, object-oriented and functional paradigms."
+    },
+    {
+      "id": "cs.prog.python-basics",
+      "name": "Python Language Basics",
+      "requires": [
+        "cs.prog.intro-programming"
+      ],
+      "unlocks": [
+        "cs.prog.data-types-variables"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Interactive mode vs script mode; tokens \u2014 keywords, identifiers, literals, operators; comments; print() and input(); the role of indentation in Python syntax."
+    },
+    {
+      "id": "cs.prog.data-types-variables",
+      "name": "Data Types and Variables",
+      "requires": [
+        "cs.prog.python-basics"
+      ],
+      "unlocks": [
+        "cs.prog.operators-expressions"
+      ],
+      "cross_links": [],
+      "difficulty": "foundational",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Built-in types \u2014 int, float, complex, bool, str, NoneType; mutable vs immutable objects; variable assignment, multiple assignment and dynamic typing."
+    },
+    {
+      "id": "cs.prog.operators-expressions",
+      "name": "Operators and Expressions",
+      "requires": [
+        "cs.prog.data-types-variables"
+      ],
+      "unlocks": [
+        "cs.control.conditionals",
+        "cs.prog.type-conversion"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Arithmetic, relational, logical, bitwise, assignment, membership and identity operators; operator precedence and associativity; building and evaluating compound expressions."
+    },
+    {
+      "id": "cs.prog.type-conversion",
+      "name": "Type Conversion and Casting",
+      "requires": [
+        "cs.prog.operators-expressions"
+      ],
+      "unlocks": [
+        "cs.prog.input-output"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Implicit vs explicit type conversion; int(), float(), str() and related casting functions; common pitfalls when mixing numeric and string types."
+    },
+    {
+      "id": "cs.prog.input-output",
+      "name": "Input, Output and Formatting",
+      "requires": [
+        "cs.prog.type-conversion"
+      ],
+      "unlocks": [
+        "cs.prog.exception-handling"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "input() and print() with sep/end parameters; formatted output via %-formatting, format() and f-strings; reading and validating multiple input values."
+    },
+    {
+      "id": "cs.prog.exception-handling",
+      "name": "Exception Handling",
+      "requires": [
+        "cs.prog.input-output"
+      ],
+      "unlocks": [
+        "cs.file.text-files"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "try-except-else-finally blocks; raising exceptions; built-in exception hierarchy; custom exceptions; defensive programming versus exception-based control flow."
+    },
+    {
+      "id": "cs.control.conditionals",
+      "name": "Conditional Statements",
+      "requires": [
+        "cs.prog.operators-expressions"
+      ],
+      "unlocks": [
+        "cs.control.loops"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "if, if-else and if-elif-else constructs; nested conditionals; short-circuit evaluation; conditional (ternary) expressions; common decision-making patterns."
+    },
+    {
+      "id": "cs.control.loops",
+      "name": "Iteration \u2014 while and for Loops",
+      "requires": [
+        "cs.control.conditionals"
+      ],
+      "unlocks": [
+        "cs.control.nested-control-patterns",
+        "cs.data.strings"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "while loop semantics; for loop with range() and iterables; break, continue and pass; the else clause on loops; nested loops and common iteration pitfalls."
+    },
+    {
+      "id": "cs.control.nested-control-patterns",
+      "name": "Nested Control Flow Patterns",
+      "requires": [
+        "cs.control.loops"
+      ],
+      "unlocks": [
+        "cs.func.functions"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Combining nested loops and conditionals to solve pattern-printing, matrix traversal and search problems; flag variables and early termination strategies."
+    },
+    {
+      "id": "cs.data.strings",
+      "name": "Strings",
+      "requires": [
+        "cs.control.loops"
+      ],
+      "unlocks": [
+        "cs.data.lists"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "String creation and indexing; positive/negative indexing and slicing; string operators; key methods \u2014 split(), join(), strip(), replace(), find(); string immutability."
+    },
+    {
+      "id": "cs.data.lists",
+      "name": "Lists",
+      "requires": [
+        "cs.data.strings"
+      ],
+      "unlocks": [
+        "cs.data.dictionaries",
+        "cs.data.tuples",
+        "cs.ds.numpy-arrays",
+        "cs.struct.linear-search",
+        "cs.struct.stacks"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "List creation, indexing and slicing; mutating methods \u2014 append(), insert(), remove(), pop(), sort(); list comprehensions; lists used as stacks and queues."
+    },
+    {
+      "id": "cs.data.tuples",
+      "name": "Tuples",
+      "requires": [
+        "cs.data.lists"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Tuple creation, packing and unpacking; indexing and slicing; immutability and its implications; choosing tuples over lists for fixed, heterogeneous records."
+    },
+    {
+      "id": "cs.data.dictionaries",
+      "name": "Dictionaries",
+      "requires": [
+        "cs.data.lists"
+      ],
+      "unlocks": [
+        "cs.data.sets",
+        "cs.db.database-concepts",
+        "cs.struct.hashing-hash-tables"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Key-value pair storage; accessing, updating and deleting entries; methods \u2014 keys(), values(), items(), get(), update(); iterating and nesting dictionaries."
+    },
+    {
+      "id": "cs.data.sets",
+      "name": "Sets",
+      "requires": [
+        "cs.data.dictionaries"
+      ],
+      "unlocks": [
+        "cs.data.comprehensions-iterators"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Unordered unique-element collections; set operators \u2014 union, intersection, difference, symmetric difference; mutating methods; the immutable frozenset."
+    },
+    {
+      "id": "cs.data.comprehensions-iterators",
+      "name": "Comprehensions, Iterators and Generators",
+      "requires": [
+        "cs.data.sets"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "List, dict and set comprehensions; the iterator protocol (__iter__, __next__); generator functions and the yield keyword; lazy evaluation versus eager evaluation."
+    },
+    {
+      "id": "cs.func.functions",
+      "name": "Functions",
+      "requires": [
+        "cs.control.nested-control-patterns"
+      ],
+      "unlocks": [
+        "cs.file.text-files",
+        "cs.func.scope-namespaces",
+        "cs.oop.oop-concepts"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Defining and calling functions; positional, default and keyword arguments; *args and **kwargs; the return statement; docstrings as living documentation."
+    },
+    {
+      "id": "cs.func.scope-namespaces",
+      "name": "Scope and Namespaces",
+      "requires": [
+        "cs.func.functions"
+      ],
+      "unlocks": [
+        "cs.func.recursion"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Local, enclosing, global and built-in (LEGB) scope resolution; the global and nonlocal keywords; namespace lifetime and closures."
+    },
+    {
+      "id": "cs.func.recursion",
+      "name": "Recursion",
+      "requires": [
+        "cs.func.scope-namespaces"
+      ],
+      "unlocks": [
+        "cs.func.lambda-functional",
+        "cs.struct.stacks",
+        "cs.struct.trees"
+      ],
+      "cross_links": [
+        "cs.struct.trees"
+      ],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Base case and recursive case design; the call stack during recursive calls; classic recursive problems \u2014 factorial, Fibonacci, GCD; recursion versus iteration trade-offs."
+    },
+    {
+      "id": "cs.func.lambda-functional",
+      "name": "Lambda Expressions and Functional Tools",
+      "requires": [
+        "cs.func.recursion"
+      ],
+      "unlocks": [
+        "cs.func.modules-packages"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Anonymous functions with lambda; map(), filter() and reduce(); first-class functions and higher-order functions; functional versus imperative style."
+    },
+    {
+      "id": "cs.func.modules-packages",
+      "name": "Modules and Packages",
+      "requires": [
+        "cs.func.lambda-functional"
+      ],
+      "unlocks": [
+        "cs.db.mysql-python",
+        "cs.ds.numpy-arrays",
+        "cs.func.decorators"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Creating and importing modules; import variants; the Python Standard Library (math, random, datetime, os); pip and third-party packages; the __name__ guard."
+    },
+    {
+      "id": "cs.func.decorators",
+      "name": "Decorators",
+      "requires": [
+        "cs.func.modules-packages"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Functions as first-class objects; wrapping functions to add behaviour; the @decorator syntax; practical uses \u2014 logging, timing, memoisation, access control."
+    },
+    {
+      "id": "cs.file.text-files",
+      "name": "Text File Handling",
+      "requires": [
+        "cs.prog.exception-handling",
+        "cs.func.functions"
+      ],
+      "unlocks": [
+        "cs.file.binary-serialisation",
+        "cs.file.csv-files"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Need for persistent storage; open()/close() and the with statement; file modes; read(), readline(), readlines(); write() and writelines(); the file position pointer."
+    },
+    {
+      "id": "cs.file.csv-files",
+      "name": "CSV File Handling",
+      "requires": [
+        "cs.file.text-files"
+      ],
+      "unlocks": [
+        "cs.ds.pandas-dataframes"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "CSV structure and delimiters; the csv module \u2014 reader, writer, DictReader, DictWriter; handling headers; practical tabular-data workflows."
+    },
+    {
+      "id": "cs.file.binary-serialisation",
+      "name": "Binary Files and Serialisation",
+      "requires": [
+        "cs.file.text-files"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Binary versus text file modes; the pickle module \u2014 dump() and load(); object serialisation and deserialisation; persisting structured records to disk."
+    },
+    {
+      "id": "cs.struct.stacks",
+      "name": "Stacks",
+      "requires": [
+        "cs.data.lists",
+        "cs.func.recursion"
+      ],
+      "unlocks": [
+        "cs.struct.queues"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "LIFO discipline; push, pop and peek operations; array-based and list-based implementations; applications \u2014 expression evaluation, backtracking, undo history."
+    },
+    {
+      "id": "cs.struct.queues",
+      "name": "Queues",
+      "requires": [
+        "cs.struct.stacks"
+      ],
+      "unlocks": [
+        "cs.struct.deques-priority-queues",
+        "cs.struct.graph-traversal",
+        "cs.struct.linked-lists"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "FIFO discipline; enqueue and dequeue operations; circular queues; implementation with collections.deque; applications \u2014 scheduling, breadth-first traversal."
+    },
+    {
+      "id": "cs.struct.deques-priority-queues",
+      "name": "Deques and Priority Queues",
+      "requires": [
+        "cs.struct.queues"
+      ],
+      "unlocks": [
+        "cs.struct.heaps"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Double-ended queues and their O(1) operations at both ends; priority queue semantics; heap-backed priority queues versus naive linear-scan implementations."
+    },
+    {
+      "id": "cs.struct.linked-lists",
+      "name": "Singly Linked Lists",
+      "requires": [
+        "cs.struct.queues"
+      ],
+      "unlocks": [
+        "cs.struct.doubly-circular-lists",
+        "cs.struct.trees"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Node structure and head pointer; traversal, insertion and deletion at arbitrary positions; trade-offs versus contiguous arrays; memory representation."
+    },
+    {
+      "id": "cs.struct.doubly-circular-lists",
+      "name": "Doubly and Circular Linked Lists",
+      "requires": [
+        "cs.struct.linked-lists"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Bidirectional traversal with doubly linked nodes; circular list structures; use cases \u2014 undo/redo chains, round-robin scheduling, music playlists."
+    },
+    {
+      "id": "cs.struct.trees",
+      "name": "Trees",
+      "requires": [
+        "cs.struct.linked-lists",
+        "cs.func.recursion"
+      ],
+      "unlocks": [
+        "cs.struct.binary-search-trees",
+        "cs.struct.graphs-representation",
+        "cs.struct.heaps"
+      ],
+      "cross_links": [
+        "cs.func.recursion"
+      ],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Tree terminology \u2014 root, leaf, height, depth; binary trees; tree traversals \u2014 preorder, inorder, postorder, level-order; recursive tree algorithms."
+    },
+    {
+      "id": "cs.struct.binary-search-trees",
+      "name": "Binary Search Trees",
+      "requires": [
+        "cs.struct.trees"
+      ],
+      "unlocks": [
+        "cs.struct.balanced-trees"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "BST ordering property; search, insertion and deletion; in-order traversal yielding sorted output; degeneration to a linked list in the worst case."
+    },
+    {
+      "id": "cs.struct.balanced-trees",
+      "name": "Balanced Search Trees",
+      "requires": [
+        "cs.struct.binary-search-trees"
+      ],
+      "unlocks": [
+        "cs.db.indexing-query-optimisation"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Why unbalanced BSTs degrade to O(n); AVL tree rotations and balance factor; red-black tree invariants (conceptual); B-trees for disk-backed indexes."
+    },
+    {
+      "id": "cs.struct.heaps",
+      "name": "Heaps",
+      "requires": [
+        "cs.struct.trees",
+        "cs.struct.deques-priority-queues"
+      ],
+      "unlocks": [
+        "cs.struct.shortest-path-algorithms"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Min-heap and max-heap invariants; array representation of a binary heap; heapify, insert and extract-min/max; heap sort and priority scheduling."
+    },
+    {
+      "id": "cs.struct.hashing-hash-tables",
+      "name": "Hashing and Hash Tables",
+      "requires": [
+        "cs.data.dictionaries",
+        "cs.algo.time-space-complexity"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "cs.db.indexing-query-optimisation"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Hash functions and uniform distribution; collision resolution \u2014 chaining and open addressing; load factor and dynamic resizing; average O(1) lookup versus worst case."
+    },
+    {
+      "id": "cs.struct.graphs-representation",
+      "name": "Graphs and Their Representations",
+      "requires": [
+        "cs.struct.trees"
+      ],
+      "unlocks": [
+        "cs.struct.graph-traversal"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Directed vs undirected, weighted vs unweighted graphs; adjacency matrix versus adjacency list trade-offs; degree, path, cycle and connectivity terminology."
+    },
+    {
+      "id": "cs.struct.graph-traversal",
+      "name": "Graph Traversal \u2014 BFS and DFS",
+      "requires": [
+        "cs.struct.graphs-representation",
+        "cs.struct.queues"
+      ],
+      "unlocks": [
+        "cs.struct.shortest-path-algorithms"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Breadth-first search using a queue; depth-first search using recursion or a stack; visited-set bookkeeping; applications \u2014 connectivity, cycle detection, topological sort."
+    },
+    {
+      "id": "cs.struct.shortest-path-algorithms",
+      "name": "Shortest Path Algorithms",
+      "requires": [
+        "cs.struct.graph-traversal",
+        "cs.struct.heaps"
+      ],
+      "unlocks": [
+        "cs.struct.minimum-spanning-tree"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Dijkstra's algorithm for non-negative weights; Bellman-Ford for graphs with negative edges; relaxation as the unifying idea; limitations and correctness conditions."
+    },
+    {
+      "id": "cs.struct.minimum-spanning-tree",
+      "name": "Minimum Spanning Trees",
+      "requires": [
+        "cs.struct.shortest-path-algorithms",
+        "cs.algo.greedy-algorithms"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Spanning tree definition and properties; Kruskal's algorithm with union-find; Prim's algorithm with a priority queue; comparing the two greedy strategies."
+    },
+    {
+      "id": "cs.struct.linear-search",
+      "name": "Linear Search",
+      "requires": [
+        "cs.data.lists",
+        "cs.algo.algorithms"
+      ],
+      "unlocks": [
+        "cs.struct.binary-search"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Sequential scan for unsorted data; best, worst and average case analysis; when linear search is preferable to more complex alternatives."
+    },
+    {
+      "id": "cs.struct.binary-search",
+      "name": "Binary Search",
+      "requires": [
+        "cs.struct.linear-search",
+        "cs.algo.divide-and-conquer"
+      ],
+      "unlocks": [
+        "cs.struct.elementary-sorts"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Precondition of sorted input; the halving search strategy; iterative and recursive implementations; off-by-one pitfalls; O(log n) analysis."
+    },
+    {
+      "id": "cs.struct.elementary-sorts",
+      "name": "Elementary Sorting \u2014 Bubble, Selection, Insertion",
+      "requires": [
+        "cs.struct.binary-search"
+      ],
+      "unlocks": [
+        "cs.struct.efficient-sorts"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Bubble sort, selection sort and insertion sort algorithms; in-place sorting and stability; O(n^2) comparison-based analysis; when simple sorts remain practical."
+    },
+    {
+      "id": "cs.struct.efficient-sorts",
+      "name": "Efficient Sorting \u2014 Merge Sort and Quick Sort",
+      "requires": [
+        "cs.struct.elementary-sorts",
+        "cs.algo.divide-and-conquer"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Merge sort's divide-and-conquer recursion and O(n log n) guarantee; quicksort partitioning and pivot choice; average versus worst-case behaviour; stability comparison."
+    },
+    {
+      "id": "cs.oop.oop-concepts",
+      "name": "Object-Oriented Programming Concepts",
+      "requires": [
+        "cs.func.functions"
+      ],
+      "unlocks": [
+        "cs.oop.classes-objects-python",
+        "cs.se.sdlc"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Classes and objects; the four pillars \u2014 encapsulation, abstraction, inheritance, polymorphism; comparing OOP to the procedural paradigm."
+    },
+    {
+      "id": "cs.oop.classes-objects-python",
+      "name": "Classes and Objects in Python",
+      "requires": [
+        "cs.oop.oop-concepts"
+      ],
+      "unlocks": [
+        "cs.oop.encapsulation-abstraction"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Defining classes; the __init__ constructor and self parameter; instance versus class attributes; instance methods; __str__ and __repr__ for readable objects."
+    },
+    {
+      "id": "cs.oop.encapsulation-abstraction",
+      "name": "Encapsulation and Abstraction",
+      "requires": [
+        "cs.oop.classes-objects-python"
+      ],
+      "unlocks": [
+        "cs.oop.inheritance"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Access modifiers by convention \u2014 public, _protected, __private; property decorators for controlled attribute access; abstract base classes and interfaces."
+    },
+    {
+      "id": "cs.oop.inheritance",
+      "name": "Inheritance",
+      "requires": [
+        "cs.oop.encapsulation-abstraction"
+      ],
+      "unlocks": [
+        "cs.oop.polymorphism-overloading"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Single and multiple inheritance; the super() mechanism; method resolution order; overriding versus extending base-class behaviour."
+    },
+    {
+      "id": "cs.oop.polymorphism-overloading",
+      "name": "Polymorphism and Operator Overloading",
+      "requires": [
+        "cs.oop.inheritance"
+      ],
+      "unlocks": [
+        "cs.oop.class-static-methods"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Method overriding as runtime polymorphism; duck typing; overloading operators via dunder methods (__add__, __eq__, __lt__); consistent comparison semantics."
+    },
+    {
+      "id": "cs.oop.class-static-methods",
+      "name": "Class Methods and Static Methods",
+      "requires": [
+        "cs.oop.polymorphism-overloading"
+      ],
+      "unlocks": [
+        "cs.oop.design-patterns-intro"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "@classmethod versus @staticmethod versus instance methods; alternative constructors via classmethods; when a method belongs to the class rather than an instance."
+    },
+    {
+      "id": "cs.oop.design-patterns-intro",
+      "name": "Introduction to Design Patterns",
+      "requires": [
+        "cs.oop.class-static-methods"
+      ],
+      "unlocks": [
+        "cs.se.agile-design-principles"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "The purpose of design patterns as reusable solutions; singleton, factory and observer patterns; composition over inheritance as a guiding principle."
+    },
+    {
+      "id": "cs.db.database-concepts",
+      "name": "Database Concepts",
+      "requires": [
+        "cs.data.dictionaries"
+      ],
+      "unlocks": [
+        "cs.db.er-modeling"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Data versus information; advantages of a DBMS over flat-file storage; schema, instance, relation, tuple and attribute terminology; types of database systems."
+    },
+    {
+      "id": "cs.db.er-modeling",
+      "name": "Entity-Relationship Modeling",
+      "requires": [
+        "cs.db.database-concepts"
+      ],
+      "unlocks": [
+        "cs.db.relational-model"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Entities, attributes and relationships; cardinality \u2014 one-to-one, one-to-many, many-to-many; ER diagram notation; translating an ER model into relational tables."
+    },
+    {
+      "id": "cs.db.relational-model",
+      "name": "The Relational Model",
+      "requires": [
+        "cs.db.er-modeling"
+      ],
+      "unlocks": [
+        "cs.db.normalisation",
+        "cs.db.sql-ddl-dml"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Tables, rows and columns as the relational structure; keys \u2014 primary, candidate, foreign, super key; entity and referential integrity constraints."
+    },
+    {
+      "id": "cs.db.normalisation",
+      "name": "Normalisation",
+      "requires": [
+        "cs.db.relational-model"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Redundancy and update anomalies; functional dependencies; 1NF, 2NF, 3NF and BCNF; the trade-off between normalisation and query performance."
+    },
+    {
+      "id": "cs.db.sql-ddl-dml",
+      "name": "SQL \u2014 DDL and DML Basics",
+      "requires": [
+        "cs.db.relational-model"
+      ],
+      "unlocks": [
+        "cs.db.sql-queries-functions"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "SQL history and standards; DDL \u2014 CREATE TABLE, ALTER TABLE, DROP TABLE; DML \u2014 INSERT, SELECT, UPDATE, DELETE; the WHERE clause and common SQL data types."
+    },
+    {
+      "id": "cs.db.sql-queries-functions",
+      "name": "SQL \u2014 Queries and Aggregate Functions",
+      "requires": [
+        "cs.db.sql-ddl-dml"
+      ],
+      "unlocks": [
+        "cs.db.sql-joins-subqueries"
+      ],
+      "cross_links": [
+        "cs.ds.pandas-dataframes"
+      ],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "SELECT with ORDER BY, GROUP BY and HAVING; aggregate functions \u2014 COUNT, SUM, AVG, MIN, MAX; DISTINCT, LIKE wildcards, BETWEEN, IN and IS NULL."
+    },
+    {
+      "id": "cs.db.sql-joins-subqueries",
+      "name": "SQL \u2014 Joins and Subqueries",
+      "requires": [
+        "cs.db.sql-queries-functions"
+      ],
+      "unlocks": [
+        "cs.db.mysql-python",
+        "cs.db.transactions-acid"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "INNER, LEFT, RIGHT and FULL OUTER joins; self joins and natural joins; correlated and non-correlated subqueries; EXISTS, UNION and views."
+    },
+    {
+      "id": "cs.db.transactions-acid",
+      "name": "Transactions and the ACID Properties",
+      "requires": [
+        "cs.db.sql-joins-subqueries"
+      ],
+      "unlocks": [
+        "cs.db.indexing-query-optimisation",
+        "cs.db.nosql-intro"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Atomicity, consistency, isolation, durability; commit and rollback; concurrent transaction anomalies \u2014 dirty read, lost update; basic locking strategies."
+    },
+    {
+      "id": "cs.db.indexing-query-optimisation",
+      "name": "Indexing and Query Optimisation",
+      "requires": [
+        "cs.db.transactions-acid",
+        "cs.struct.balanced-trees"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "cs.struct.hashing-hash-tables"
+      ],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "B-tree indexes for fast lookup; the trade-off between read speed and write/storage overhead; query execution plans; when an index helps versus hurts performance."
+    },
+    {
+      "id": "cs.db.nosql-intro",
+      "name": "Introduction to NoSQL Databases",
+      "requires": [
+        "cs.db.transactions-acid"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Key-value, document, column-family and graph database models; the CAP theorem trade-offs; when NoSQL is preferred over a relational schema."
+    },
+    {
+      "id": "cs.db.mysql-python",
+      "name": "Connecting Python to MySQL",
+      "requires": [
+        "cs.db.sql-joins-subqueries",
+        "cs.func.modules-packages"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "mysql.connector module; establishing a connection and using a cursor; execute() and executemany(); fetchone()/fetchall(); parameterised queries to prevent SQL injection."
+    },
+    {
+      "id": "cs.os.process-management",
+      "name": "Process Management",
+      "requires": [
+        "cs.found.os-concepts"
+      ],
+      "unlocks": [
+        "cs.os.cpu-scheduling",
+        "cs.os.memory-management-os",
+        "cs.os.threads-concurrency"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Process versus program; process control block; process states \u2014 new, ready, running, waiting, terminated; context switching overhead."
+    },
+    {
+      "id": "cs.os.threads-concurrency",
+      "name": "Threads and Concurrency",
+      "requires": [
+        "cs.os.process-management"
+      ],
+      "unlocks": [
+        "cs.os.synchronisation-deadlocks"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Threads versus processes; the benefits and risks of concurrency; race conditions; the need for synchronisation primitives."
+    },
+    {
+      "id": "cs.os.cpu-scheduling",
+      "name": "CPU Scheduling Algorithms",
+      "requires": [
+        "cs.os.process-management"
+      ],
+      "unlocks": [
+        "cs.os.synchronisation-deadlocks"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Scheduling criteria \u2014 turnaround, waiting time, throughput; FCFS, SJF, round robin and priority scheduling; preemptive versus non-preemptive scheduling."
+    },
+    {
+      "id": "cs.os.synchronisation-deadlocks",
+      "name": "Synchronisation and Deadlocks",
+      "requires": [
+        "cs.os.threads-concurrency",
+        "cs.os.cpu-scheduling"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Mutexes and semaphores; the critical-section problem; the four necessary conditions for deadlock; deadlock prevention, avoidance and detection strategies."
+    },
+    {
+      "id": "cs.os.memory-management-os",
+      "name": "Memory Management",
+      "requires": [
+        "cs.found.memory-storage",
+        "cs.os.process-management"
+      ],
+      "unlocks": [
+        "cs.os.file-systems",
+        "cs.os.virtual-memory"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Contiguous allocation; paging and segmentation; the page table and address translation; internal versus external fragmentation."
+    },
+    {
+      "id": "cs.os.virtual-memory",
+      "name": "Virtual Memory",
+      "requires": [
+        "cs.os.memory-management-os"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Demand paging; page faults and page replacement policies \u2014 FIFO, LRU, optimal; thrashing and the working-set model."
+    },
+    {
+      "id": "cs.os.file-systems",
+      "name": "File Systems",
+      "requires": [
+        "cs.os.memory-management-os"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "File allocation methods \u2014 contiguous, linked, indexed; directory structures; metadata and inodes; journaling for crash recovery."
+    },
+    {
+      "id": "cs.net.networking-basics",
+      "name": "Networking Basics",
+      "requires": [
+        "cs.found.computer-organisation"
+      ],
+      "unlocks": [
+        "cs.net.osi-tcp-ip-models"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "The need for networking; LAN, MAN, WAN and PAN; network topologies \u2014 bus, star, ring, mesh; wired versus wireless transmission media; bandwidth concepts."
+    },
+    {
+      "id": "cs.net.osi-tcp-ip-models",
+      "name": "OSI and TCP/IP Reference Models",
+      "requires": [
+        "cs.net.networking-basics"
+      ],
+      "unlocks": [
+        "cs.net.ip-addressing",
+        "cs.net.tcp-udp-transport"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "The seven OSI layers and their responsibilities; the four-layer TCP/IP model; encapsulation as data passes down the stack; mapping protocols to layers."
+    },
+    {
+      "id": "cs.net.ip-addressing",
+      "name": "IP Addressing and Subnetting",
+      "requires": [
+        "cs.net.osi-tcp-ip-models"
+      ],
+      "unlocks": [
+        "cs.net.dns-dhcp",
+        "cs.net.routing-congestion"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "IPv4 address classes and notation; IPv6 motivation and format; subnet masks and CIDR notation; basic subnetting calculations."
+    },
+    {
+      "id": "cs.net.dns-dhcp",
+      "name": "DNS and DHCP",
+      "requires": [
+        "cs.net.ip-addressing"
+      ],
+      "unlocks": [
+        "cs.net.application-protocols"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Domain name resolution hierarchy; how a DNS query is resolved; DHCP's role in dynamic IP allocation; the lease lifecycle."
+    },
+    {
+      "id": "cs.net.application-protocols",
+      "name": "Application-Layer Protocols",
+      "requires": [
+        "cs.net.dns-dhcp"
+      ],
+      "unlocks": [
+        "cs.net.cloud-computing",
+        "cs.sec.network-web-security",
+        "cs.web.client-server-model"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "HTTP and HTTPS request-response cycle; FTP for file transfer; SMTP, POP3 and IMAP for email; comparing stateless and stateful protocol behaviour."
+    },
+    {
+      "id": "cs.net.tcp-udp-transport",
+      "name": "TCP and UDP \u2014 Transport Layer",
+      "requires": [
+        "cs.net.osi-tcp-ip-models"
+      ],
+      "unlocks": [
+        "cs.net.routing-congestion"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Connection-oriented TCP \u2014 handshake, reliability, flow control; connectionless UDP \u2014 speed versus reliability trade-off; choosing a transport protocol per use case."
+    },
+    {
+      "id": "cs.net.routing-congestion",
+      "name": "Routing and Congestion Control",
+      "requires": [
+        "cs.net.tcp-udp-transport",
+        "cs.net.ip-addressing"
+      ],
+      "unlocks": [
+        "cs.net.wireless-mobile-networks"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Routers, switches and routing tables; distance-vector versus link-state routing concepts; TCP congestion control \u2014 slow start, congestion avoidance."
+    },
+    {
+      "id": "cs.net.wireless-mobile-networks",
+      "name": "Wireless and Mobile Networks",
+      "requires": [
+        "cs.net.routing-congestion"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Wi-Fi standards and CSMA/CA; cellular network generations; mobile IP and handoff between cells; challenges unique to wireless transmission."
+    },
+    {
+      "id": "cs.net.cloud-computing",
+      "name": "Cloud Computing",
+      "requires": [
+        "cs.net.application-protocols"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "IaaS, PaaS and SaaS service models; public, private and hybrid cloud deployment; elasticity and on-demand scaling; trade-offs of outsourcing infrastructure."
+    },
+    {
+      "id": "cs.sec.cyber-ethics-safety",
+      "name": "Cyber Ethics and Online Safety",
+      "requires": [
+        "cs.found.intro-computers"
+      ],
+      "unlocks": [
+        "cs.sec.cryptography-basics"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Netiquette and digital footprint; cybercrime types \u2014 hacking, identity theft, cyberbullying, phishing; safe browsing practices; copyright and software licensing basics."
+    },
+    {
+      "id": "cs.sec.cryptography-basics",
+      "name": "Cryptography Fundamentals",
+      "requires": [
+        "cs.found.boolean-logic",
+        "cs.sec.cyber-ethics-safety"
+      ],
+      "unlocks": [
+        "cs.sec.network-web-security"
+      ],
+      "cross_links": [
+        "cs.found.number-systems"
+      ],
+      "difficulty": "advanced",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Plaintext, ciphertext and the role of keys; symmetric versus asymmetric encryption; the purpose of cryptographic hash functions; digital signatures conceptually."
+    },
+    {
+      "id": "cs.sec.network-web-security",
+      "name": "Network and Web Security",
+      "requires": [
+        "cs.sec.cryptography-basics",
+        "cs.net.application-protocols"
+      ],
+      "unlocks": [
+        "cs.sec.data-protection-privacy"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "TLS/SSL and the HTTPS handshake; firewalls and VPNs; common web vulnerabilities \u2014 SQL injection, XSS, CSRF; the principle of least privilege."
+    },
+    {
+      "id": "cs.sec.data-protection-privacy",
+      "name": "Data Protection and Privacy",
+      "requires": [
+        "cs.sec.network-web-security"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Categorising sensitive personal data; data protection principles; cookies and tracking technologies; an overview of GDPR-style regulatory expectations."
+    },
+    {
+      "id": "cs.web.client-server-model",
+      "name": "The Client-Server Model",
+      "requires": [
+        "cs.net.application-protocols"
+      ],
+      "unlocks": [
+        "cs.web.html-css-basics"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 2,
+      "description": "Roles of client and server; the request-response cycle; static versus dynamic content; how a browser resolves and renders a URL."
+    },
+    {
+      "id": "cs.web.html-css-basics",
+      "name": "HTML and CSS Basics",
+      "requires": [
+        "cs.web.client-server-model"
+      ],
+      "unlocks": [
+        "cs.web.rest-apis"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "HTML document structure and common tags; semantic markup; CSS selectors and the box model; separating content from presentation."
+    },
+    {
+      "id": "cs.web.rest-apis",
+      "name": "REST APIs",
+      "requires": [
+        "cs.web.html-css-basics"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Resources and URIs; HTTP verbs \u2014 GET, POST, PUT, DELETE; status codes; JSON as a data-exchange format; statelessness as a REST constraint."
+    },
+    {
+      "id": "cs.theory.finite-automata",
+      "name": "Finite Automata",
+      "requires": [
+        "cs.found.boolean-logic",
+        "cs.algo.asymptotic-notation"
+      ],
+      "unlocks": [
+        "cs.theory.regular-expressions"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Deterministic and non-deterministic finite automata; state transition diagrams; the languages a finite automaton can recognise."
+    },
+    {
+      "id": "cs.theory.regular-expressions",
+      "name": "Regular Expressions and Regular Languages",
+      "requires": [
+        "cs.theory.finite-automata"
+      ],
+      "unlocks": [
+        "cs.theory.context-free-grammars"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Regular expression syntax; the equivalence of regular expressions and finite automata; pattern matching applications in text processing."
+    },
+    {
+      "id": "cs.theory.context-free-grammars",
+      "name": "Context-Free Grammars",
+      "requires": [
+        "cs.theory.regular-expressions"
+      ],
+      "unlocks": [
+        "cs.theory.turing-machines"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Grammar productions and derivations; parse trees; the role of CFGs in describing programming-language syntax; ambiguity in grammars."
+    },
+    {
+      "id": "cs.theory.turing-machines",
+      "name": "Turing Machines",
+      "requires": [
+        "cs.theory.context-free-grammars"
+      ],
+      "unlocks": [
+        "cs.theory.complexity-classes"
+      ],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 8,
+      "description": "The Turing machine model as a formalisation of computation; the Church-Turing thesis; the halting problem and its undecidability."
+    },
+    {
+      "id": "cs.theory.complexity-classes",
+      "name": "Computational Complexity Classes",
+      "requires": [
+        "cs.theory.turing-machines",
+        "cs.algo.np-completeness"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 8,
+      "description": "The classes P and NP revisited formally; PSPACE and EXPTIME; reductions between problems; open questions in complexity theory."
+    },
+    {
+      "id": "cs.se.sdlc",
+      "name": "Software Development Life Cycle",
+      "requires": [
+        "cs.oop.oop-concepts"
+      ],
+      "unlocks": [
+        "cs.se.version-control-git"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Waterfall, iterative and agile process models; requirements analysis; design, implementation, testing and maintenance phases."
+    },
+    {
+      "id": "cs.se.version-control-git",
+      "name": "Version Control with Git",
+      "requires": [
+        "cs.se.sdlc"
+      ],
+      "unlocks": [
+        "cs.se.software-testing"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Repositories, commits and branches; merging and resolving conflicts; the typical feature-branch workflow; the role of remotes in collaboration."
+    },
+    {
+      "id": "cs.se.software-testing",
+      "name": "Software Testing Fundamentals",
+      "requires": [
+        "cs.se.version-control-git"
+      ],
+      "unlocks": [
+        "cs.se.agile-design-principles"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Unit, integration and system testing; test cases and coverage; black-box versus white-box testing; the cost of defects found late in the lifecycle."
+    },
+    {
+      "id": "cs.se.agile-design-principles",
+      "name": "Agile Practices and Software Design Principles",
+      "requires": [
+        "cs.se.software-testing",
+        "cs.oop.design-patterns-intro"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Agile values and iterative delivery; the SOLID design principles; the value of refactoring; balancing technical debt against delivery speed."
+    },
+    {
+      "id": "cs.ds.numpy-arrays",
+      "name": "NumPy for Numerical Computing",
+      "requires": [
+        "cs.func.modules-packages",
+        "cs.data.lists"
+      ],
+      "unlocks": [
+        "cs.ds.pandas-dataframes"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "ndarray versus Python lists; array creation \u2014 zeros, ones, arange, linspace; broadcasting; vectorised arithmetic; indexing and slicing multi-dimensional arrays."
+    },
+    {
+      "id": "cs.ds.pandas-dataframes",
+      "name": "Pandas for Data Analysis",
+      "requires": [
+        "cs.ds.numpy-arrays",
+        "cs.file.csv-files"
+      ],
+      "unlocks": [
+        "cs.ds.data-visualisation"
+      ],
+      "cross_links": [
+        "cs.db.sql-queries-functions"
+      ],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Series and DataFrame structures; reading and writing CSV data; data exploration with head/info/describe; filtering, grouping and merging DataFrames."
+    },
+    {
+      "id": "cs.ds.data-visualisation",
+      "name": "Data Visualisation with Matplotlib",
+      "requires": [
+        "cs.ds.pandas-dataframes"
+      ],
+      "unlocks": [
+        "cs.ds.intro-machine-learning"
+      ],
+      "cross_links": [],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 3,
+      "description": "Line, bar, scatter and pie charts; histograms for distribution analysis; customising titles, labels and legends; choosing an appropriate chart for the data."
+    },
+    {
+      "id": "cs.ds.intro-machine-learning",
+      "name": "Introduction to Machine Learning",
+      "requires": [
+        "cs.ds.data-visualisation"
+      ],
+      "unlocks": [
+        "cs.ds.supervised-learning-models",
+        "cs.ds.unsupervised-learning-models"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Supervised versus unsupervised learning; training and test splits; overfitting and underfitting; the bias-variance trade-off conceptually."
+    },
+    {
+      "id": "cs.ds.supervised-learning-models",
+      "name": "Supervised Learning Models",
+      "requires": [
+        "cs.ds.intro-machine-learning"
+      ],
+      "unlocks": [
+        "cs.ds.neural-networks-intro"
+      ],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Linear and logistic regression; decision trees; the classification versus regression distinction; evaluating models with accuracy, precision and recall."
+    },
+    {
+      "id": "cs.ds.unsupervised-learning-models",
+      "name": "Unsupervised Learning Models",
+      "requires": [
+        "cs.ds.intro-machine-learning"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "expert",
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "k-means clustering; hierarchical clustering; dimensionality reduction intuition (PCA); evaluating clusters without ground-truth labels."
+    },
+    {
+      "id": "cs.ds.neural-networks-intro",
+      "name": "Introduction to Neural Networks",
+      "requires": [
+        "cs.ds.supervised-learning-models"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "research",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 8,
+      "description": "The perceptron and the artificial neuron; activation functions; forward propagation; gradient-based learning and backpropagation at a conceptual level."
+    }
+  ]
+}
