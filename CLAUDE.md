@@ -38,12 +38,17 @@
   rules. Read this set before changing or extending the Educational Brain; extend it, don't replace it.
 - Canonical pipeline core (KG → Student Memory → `src/lib/teaching-engine/index.ts` `decide()` →
   Teaching Action Generator → Dynamic Lesson Composer) runs for **every** chat turn, school or
-  general/Library. The `src/lib/school/adaptive/*` diagnostic/strategy cluster (mastery level,
-  misconception confidence, momentum, confidence calibration, the synthesized 7-type teaching
-  strategy, spaced revision, next-best-action, daily plan, exam readiness, etc.) is gated behind
-  `if (schoolCtx)` (`route.ts:294-838`) and runs for school-student sessions only — general
-  learners don't get this deeper layer. This gap is the next queued architectural increment, not
-  yet implemented; see `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md` §4.
+  general/Library. The `src/lib/school/adaptive/*` cluster splits in two by board/grade coupling
+  (see `docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md` for the function-by-function
+  evidence): the synthesized 7-type teaching strategy (`teachingStrategy.getTeachingStrategy()`,
+  itself folding in mastery, misconception confidence, concept transfer, confidence calibration,
+  momentum, and stalemate detection) plus spaced revision now run for **both** school and
+  general/Library sessions (`route.ts:294` school branch, `route.ts:964` Library branch, ADR 02,
+  implemented 2026-06-30) — board/grade params on those functions are unused plumbing, verified by
+  reading bodies. `nextBestAction`/`dailyPlan`/`examReadiness` remain school-only — they genuinely
+  walk a board/grade curriculum syllabus tree with no Library equivalent. `prerequisiteRecovery`/
+  `lessonPlanner` remain school-only for now (need a `KnowledgeNode[]` shape reconciliation first —
+  ADR 02 §7 follow-up #1).
 - Two systems are **archived/dormant, never execute against live traffic** — do not extend them
   expecting production effect: `src/lib/educationalBrain/*` (Eb* pipeline, fire-and-forget, gated
   by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off) and `src/lib/curriculum/teachingActionEngine.ts`

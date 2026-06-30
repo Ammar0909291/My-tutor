@@ -279,6 +279,13 @@ export async function POST(req: Request) {
     let strategyHoisted: import('@/lib/school/adaptive/teachingStrategy').TeachingStrategyType | null = null
     let outputBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').OutputBias | null = null
     let hintBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').HintBiasKind | null = null
+    // ADR 02 (docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md): the
+    // topicSlug the strategy-effectiveness log was actually written under this
+    // turn — school path uses schoolCtx.chapter.id, library path uses the
+    // current module's slug. Must match whatever was passed as `chapterId` into
+    // getTeachingStrategy() below, or the staleMate feedback loop silently reads
+    // back zero events forever.
+    let strategyTopicSlugHoisted: string | null = null
     // Sprint CH: did THIS turn activate/continue a worked example?
     let workedExampleActive = false
     // Sprint W: deterministic inline-practice MCQ (generateInlinePractice.ts), computed
@@ -540,6 +547,7 @@ export async function POST(req: Request) {
         // Pure, synchronous; cannot stall the turn.
         const { deriveOutputBias, deriveHintBias } = await import('@/lib/school/adaptive/teachingOutputBias')
         strategyHoisted = teachingStrategy.type
+        strategyTopicSlugHoisted = schoolCtx.chapter.id
         outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
 
         // Survey follow-up (practice questions were fully decoupled from
@@ -950,6 +958,61 @@ export async function POST(req: Request) {
         }
       } catch {
         // non-fatal — misconception context is purely additive
+      }
+    }
+
+    // ADR 02 (docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md):
+    // unified teaching strategy for SUBJECT_LIBRARY subjects. getTeachingStrategy()
+    // synthesizes mastery, misconception confidence, concept transfer, confidence
+    // calibration, momentum, and strategy-effectiveness (staleMate) into one of 7
+    // strategies. Its board/grade params are accepted but verified unused by every
+    // signal it reads (see the ADR's evidence table), so '' / 0 placeholders are
+    // safe. The current module's slug stands in for chapterId and its node slugs
+    // for kgNodeIds — the same substitution the misconception block above uses.
+    // Also sets strategyHoisted/outputBiasHoisted/hintBiasHoisted so the existing
+    // post-AI visual-suppression and [HINT] tag pipeline (already schoolCtx-agnostic)
+    // activates for general learners too, not just the prompt text.
+    if (!schoolCtx) {
+      try {
+        const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
+        const libSubject = findLibrarySubject(subjectCode)
+        if (libSubject) {
+          const progressRows = await prisma.moduleProgress.findMany({
+            where: { userId: session.user.id, subjectId: learnSession.subjectId },
+          })
+          const bySlug = new Map(progressRows.map((p) => [p.moduleSlug, p]))
+          const currentModule = libSubject.modules.find((m) => {
+            const st = bySlug.get(m.slug)?.status
+            return st === 'AVAILABLE' || st === 'IN_PROGRESS'
+          }) ?? libSubject.modules[0]
+
+          if (currentModule) {
+            const moduleNodeSlugs = currentModule.nodes.map((n) => n.slug)
+            const { getTeachingStrategy, buildTeachingStrategyBlock } = await import('@/lib/school/adaptive/teachingStrategy')
+            const teachingStrategy = await getTeachingStrategy(
+              userId, '', 0, subjectCode, currentModule.slug, moduleNodeSlugs,
+            )
+            systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
+
+            const { deriveOutputBias, deriveHintBias } = await import('@/lib/school/adaptive/teachingOutputBias')
+            strategyHoisted = teachingStrategy.type
+            strategyTopicSlugHoisted = currentModule.slug
+            outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
+            hintBiasHoisted = deriveHintBias(teachingStrategy.type)
+            if (hintBiasHoisted === 'PREFERRED') {
+              systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nThe hint must nudge toward the next step only — never state the final answer inside the tag. Omit the tag entirely if the student is not stuck.`
+            } else if (hintBiasHoisted === 'SUPPRESSED') {
+              systemPrompt += `\n\nDo not use a [HINT] tag this turn — explain directly and clearly instead, per this strategy's directive.`
+            }
+
+            const { getDueRevisions, buildRevisionBlock } = await import('@/lib/school/adaptive/spacedRevision')
+            const dueRevisions = await getDueRevisions(userId, subjectCode, moduleNodeSlugs)
+            const revBlock = buildRevisionBlock(dueRevisions)
+            if (revBlock) systemPrompt += revBlock
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] library teaching strategy context skipped:', err)
       }
     }
 
@@ -1555,7 +1618,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         prisma.teachingStrategyEvent.create({
           data: {
             userId,
-            topicSlug: schoolCtx?.chapter.id ?? subjectCode,
+            topicSlug: strategyTopicSlugHoisted ?? subjectCode,
             strategy: strategyHoisted,
             outputBias: outputBiasHoisted.kind,
             visualFired,

@@ -221,13 +221,13 @@ the signal this ADR was violated.
 
 ---
 
-## 4. The real gap (corrected, narrower — queued for next iteration)
+## 4. The real gap (corrected, narrower — CLOSED for its portable half by ADR 02)
 
 Per the corrected §1.2: general/Library learners already receive the
 canonical pipeline's core (KG position, learner intelligence profile,
 Student Memory snapshot, Teaching Engine `decide()`, Teaching Action
 Generator, Lesson Composer, a non-school misconception check). What they
-do **not** receive is the `school/adaptive/*` diagnostic/strategy
+used to not receive is the `school/adaptive/*` diagnostic/strategy
 cluster: explicit mastery level (`TRUE_MASTERY`/`FALSE_MASTERY`/
 `AT_RISK`/`DEVELOPING`), confidence calibration, learning momentum, the
 single synthesized 7-type teaching strategy
@@ -236,14 +236,21 @@ prerequisite recovery, exam readiness, next-best-action, learning
 narrative, and daily plan — all gated behind the single
 `if (schoolCtx)` block at `route.ts:294–838`.
 
-This is a real, still-actionable gap, just smaller than first claimed:
-general learners get *a* decision pipeline, not *the deeper diagnostic
-layer* school students get. `school/adaptive/*`'s functions already take
-`subjectSlug` + `kgNodeIds` as generic parameters; the school-specific
-parts are mainly `board`/`grade`/`chapterId` plumbing, not the diagnostic
-logic itself. This is queued as the next architectural increment for this
-role, to be designed as its own ADR with its own why/benefit/risk/rollout,
-deliberately not attempted in this same iteration.
+**`docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md`
+(2026-06-30, implemented) closed the portable half of this gap.** Reading
+every function body (not just signatures) in the mastery → misconception →
+transfer → confidence → momentum → stalemate → synthesized-strategy chain
+showed `board`/`grade` are unused plumbing throughout — the whole chain is
+keyed on `userId + subjectSlug + chapterId + kgNodeIds`. ADR 02 wired the
+synthesized `getTeachingStrategy()` block plus spaced revision into the
+Library branch of `route.ts`, substituting the current module's slug for
+`chapterId` and its node slugs for `kgNodeIds` — the same substitution
+pattern the pre-existing misconception-engine Library wiring already used.
+`nextBestAction`/`dailyPlan`/`examReadiness` remain genuinely school-only
+(they walk a board/grade syllabus tree with no Library equivalent) — see
+ADR 02 §2 for the evidence split. `prerequisiteRecovery`/`lessonPlanner`
+remain unwired pending a `KnowledgeNode[]` shape reconciliation (ADR 02 §7
+follow-up #1) — the smaller, still-open residue of this gap.
 
 ---
 
@@ -293,9 +300,13 @@ survives as this document's distinct contribution):
 3. ✅ Update `CLAUDE.md` with the canonical-pipeline pointer, deferring to
    `docs/architecture/EDUCATIONAL_BRAIN_V1.md`, and the governance rule
    from §3.
-4. ⬜ (Next loop iteration) Design the general-learner diagnostic-cluster
-   wiring from §4 (corrected, narrower scope) as its own ADR, with its
-   own why/benefit/risk/rollout.
+4. ✅ Designed and implemented the general-learner diagnostic-cluster wiring
+   from §4 as its own ADR with its own why/benefit/risk/rollout — see
+   `docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md`. Portable
+   half (synthesized teaching strategy + spaced revision) shipped; the
+   board/grade-coupled half (`nextBestAction`/`dailyPlan`/`examReadiness`)
+   correctly stays school-only; `prerequisiteRecovery`/`lessonPlanner`
+   queued as ADR 02's own follow-up #1.
 
 ---
 
