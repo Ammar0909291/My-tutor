@@ -14,12 +14,18 @@
  * None of it inspects concept_id content or any subject-specific vocabulary.
  *
  * ARCHIVED — ORPHANED, ZERO LIVE IMPORTERS.
- * Nothing under src/app/ or src/components/ imports this module or
- * src/lib/teaching-engine/index.ts. The live teaching-decision system is
- * src/lib/school/adaptive/*, wired into src/app/api/learn/chat/route.ts.
- * See docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md for the full evidence and
- * decision. Kept in place (not deleted) as a reference implementation —
- * do not build new features on top of this stack without amending that ADR.
+ * decideAction()/getTeachingAsset()/getTeachingAssets() in this file (and
+ * its companions teachingAssetAdapter.ts, teachingAssets.ts) have no
+ * callers anywhere under src/app/ or src/components/. Do not confuse this
+ * with src/lib/teaching-engine/index.ts (decide()) — that one IS live,
+ * statically imported into src/app/api/learn/chat/route.ts and part of
+ * the frozen canonical pipeline documented in
+ * docs/architecture/EDUCATIONAL_BRAIN_V1.md (see also that freeze's
+ * ARCHITECTURE_DECISIONS.md, Finding 2, which independently reaches the
+ * same orphan conclusion about this file). See
+ * docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md for further context. Kept in
+ * place (not deleted) as a reference implementation — do not build new
+ * features on top of this stack without amending that ADR.
  */
 
 import type { StudentState, TeachingDecision, ConceptNode } from '../teaching-engine/types'

@@ -6,12 +6,16 @@
  * ARCHIVED — SHADOW CODE, NOT THE BRAIN OF RECORD.
  * Invoked fire-and-forget after the chat response is already built
  * (src/app/api/learn/chat/route.ts) — its output never reaches a student.
- * The live teaching-decision system is src/lib/school/adaptive/*, wired
- * synchronously into that same route. See
- * docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md for the full evidence and
- * decision. Kept in place (not deleted) as a reference implementation and
- * ideas backlog — do not build new features on top of this pipeline
- * without amending that ADR.
+ * The live teaching-decision system is the canonical pipeline documented
+ * in docs/architecture/EDUCATIONAL_BRAIN_V1.md (Teaching Engine decide()
+ * -> Teaching Action Generator -> Dynamic Lesson Composer, plus the
+ * src/lib/school/adaptive/* supporting/recommendation cluster), wired
+ * synchronously into that same route. This file's status is independently
+ * confirmed in that freeze's ARCHITECTURE_DECISIONS.md, Part 2 ("Two
+ * pipelines, by design"). See also docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md.
+ * Kept in place (not deleted) as a reference implementation and ideas
+ * backlog — do not build new features on top of this pipeline without
+ * amending that ADR.
  */
 import { frameStage, type FrameInput } from './frameStage'
 import { intentStage } from './intentStage'

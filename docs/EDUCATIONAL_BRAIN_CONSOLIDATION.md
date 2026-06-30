@@ -2,90 +2,115 @@
 
 > Author: Chief Educational Brain Architect (Claude session)
 > Date: 2026-06-30
-> Status: **DECIDED** — governs all subsequent Educational Brain work
+> Status: **DECIDED, CORRECTED** — see §0. Governs Educational Brain work
+> not already covered by `docs/architecture/EDUCATIONAL_BRAIN_V1.md` (the
+> authoritative architecture freeze for the canonical pipeline itself).
 > Scope: orchestration/decision-layer architecture only. No curriculum,
 > concept, KG, or teaching-content changes are made or proposed here.
 
 ---
 
-## TL;DR
+## 0. Correction notice (read first)
 
-This codebase contains **three independent implementations** of "decide what
-to teach this student right now" — built 17 days apart by three different
-sessions, none aware of the other two. Only the **oldest** one is actually
-wired into what students see. The two newer ones (one of them mine, built
-yesterday) are fully functional in isolation but **never execute against
-live traffic** — they are orphaned/shadow code.
+This ADR was originally drafted against a stale local checkout. While
+writing it, a **concurrent session** pushed a comprehensive architecture
+freeze — `docs/architecture/{EDUCATIONAL_BRAIN_V1,ENGINE_REFERENCE,
+DATA_FLOW,DEPENDENCY_RULES,EXTENSION_GUIDE,ARCHITECTURE_DECISIONS}.md`
+(commit `6b8e4e0`) — plus several feature commits that wire
+`src/lib/teaching-engine/index.ts` (`decide()`), the Teaching Action
+Generator, and the Dynamic Lesson Composer into the live chat route. That
+freeze is **more current and more thorough** than this document for the
+question "what is the live teaching-decision system." After merging that
+work in, two claims below were corrected before this document was
+committed:
 
-**Decision:** `src/lib/school/adaptive/*` (wired into
-`src/app/api/learn/chat/route.ts`) is declared the **Brain of Record** — the
-one production teaching-decision engine. The other two are archived in
-place (not deleted) with explicit status headers. No new parallel decision
-pipeline may be started without amending this ADR.
+1. **`src/lib/teaching-engine/index.ts` (`decide()`) is LIVE**, not
+   orphaned. The original draft of this document lumped it in with the
+   genuinely-orphaned `src/lib/curriculum/teachingActionEngine.ts` because
+   the two have confusingly similar names and purposes. They are
+   different files. `decide()` is statically imported into
+   `src/app/api/learn/chat/route.ts:20` and is the frozen core of the
+   canonical pipeline per `docs/architecture/EDUCATIONAL_BRAIN_V1.md`.
+   Only `src/lib/curriculum/teachingActionEngine.ts` (+ its
+   `teachingAssetAdapter.ts`/`teachingAssets.ts`/schema companions) is
+   orphaned — confirmed independently by this document's own grep
+   evidence (§1.4) and by the freeze's own `ARCHITECTURE_DECISIONS.md`
+   Finding 2. Two independent sessions reaching the same conclusion about
+   the same file is good corroboration, not a coincidence to discard.
+2. **The general-learner gap is real but narrower than first stated.**
+   The original draft claimed general learners get "none of the adaptive
+   intelligence." Per the freeze's `DATA_FLOW.md` (items 35–48), the
+   canonical pipeline's core — KG context, learner intelligence profile,
+   Student Memory snapshot, Teaching Engine `decide()`, Teaching Action
+   Generator, Dynamic Lesson Composer, and a non-school misconception-engine
+   path — runs for **every** session, school or general/Library. What is
+   genuinely school-only is the larger `school/adaptive/*` diagnostic and
+   strategy-synthesis cluster (mastery level, momentum, confidence
+   calibration, the 7-type synthesized teaching strategy, spaced revision,
+   prerequisite recovery, exam readiness, next-best-action, learning
+   narrative, daily plan, chapter-scoped lesson planner, assessment
+   intelligence) — all inside the single `if (schoolCtx)` gate at
+   `route.ts:294–838`. §4 below is corrected accordingly.
 
-This required zero code behavior changes. It is a documentation and
-governance decision, validated entirely by reading code and git history —
-no curriculum, concept, or teaching-content file was touched.
+This document's remaining, surviving contributions — not already covered
+by the freeze — are: (a) the explicit "two unrelated decision systems
+were each built without checking for the other" governance failure mode
+and a governance rule to prevent a third recurrence, (b) the Eb* spec's
+genuinely valuable but un-extracted design ideas (the freeze documents
+Eb*'s status but does not mine its spec for ideas), and (c) the corrected,
+narrower general-learner diagnostic-cluster gap as the next queued
+increment. Where this document and the freeze cover the same ground, the
+freeze is the source of truth — **read `docs/architecture/EDUCATIONAL_BRAIN_V1.md`
+first.**
 
 ---
 
 ## 1. The Evidence
 
-### 1.1 Three systems, same job, three different days
+### 1.1 Two genuinely orphaned/dormant systems (corrected)
 
-| System | Files | First commit | Last commit | Wired into a live route? | Lines |
-|---|---|---|---|---|---|
-| **`school/adaptive/*`** (Brain of Record) | 18 modules under `src/lib/school/adaptive/` | 2026-06-12 (`7bafd57`) | 2026-06-29 (`f21b3ff`) | **Yes** — `src/app/api/learn/chat/route.ts:293-922`, synchronous, result shapes the actual system prompt sent to the AI | ~3,000+ |
-| **Eb* pipeline** | `src/lib/educationalBrain/*` (7 files) + 21 `Eb*` Prisma models + 11 spec docs under `docs/educational-brain/` | 2026-06-28 | 2026-06-28 (same day, 5 commits) | **No** — invoked fire-and-forget at `route.ts:1515-1517` (`void import(...).then(...).catch(()=>{})`), result discarded, gated by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE` (default off) | 480 |
-| **Canonical-KG Teaching Engine stack** | `src/lib/teaching-engine/`, `src/lib/curriculum/teachingActionEngine.ts`, `teachingAssetAdapter.ts`, `teachingAssets.ts` | 2026-06-29 | 2026-06-29 (same day) | **No** — zero importers anywhere in `src/app/`, `src/components/`, or any other live module (confirmed by grep; only test/validation scripts reference it) | ~1,500+ |
+| System | Files | First commit | Wired into a live route? | Lines |
+|---|---|---|---|---|
+| **Eb* pipeline** | `src/lib/educationalBrain/*` (7 files) + 21 `Eb*` Prisma models + 11 spec docs under `docs/educational-brain/` | 2026-06-28 | **No** — fire-and-forget at `route.ts` (post-response), result discarded, gated by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE` (default off). Confirmed independently by `docs/architecture/ARCHITECTURE_DECISIONS.md` Part 2 ("Two pipelines, by design"). | 480 |
+| **`teachingActionEngine.ts` + Teaching Assets Platform** | `src/lib/curriculum/teachingActionEngine.ts`, `teachingActionSchema.ts`, `teachingAssets.ts`, `teachingAssetAdapter.ts`, `teachingAssetSchema.ts` | 2026-06-29 (my own prior commits, `d446b45`/`78ad2c1`) | **No** — zero importers anywhere in `src/app/`, `src/components/`, or any other live module. Confirmed independently by `docs/architecture/ARCHITECTURE_DECISIONS.md` Finding 2. **Not the same file as** `src/lib/teaching-engine/index.ts`, which IS live (see §0). | ~1,500+ |
 
-All three solve the same problem: given a student's mastery state,
-misconceptions, and position in a knowledge graph, decide what teaching
-strategy/action to take next. All three were built without knowledge of
-the other two — there is no comment, doc reference, or commit message in
-any of the three that mentions either of the other systems.
+Both were built without first checking for prior art against the live
+system, and in my own case, without checking the Eb* pipeline either —
+the exact failure mode §2 generalizes.
 
-### 1.2 What's actually live, precisely
+### 1.2 What's live — defer to the freeze, narrow correction only
 
-`src/app/api/learn/chat/route.ts` (1,548 lines, the single live AI-tutor
-endpoint) branches on `schoolCtx` (set when the session carries a school
-chapter id **and** `profile.userType === 'SCHOOL_STUDENT'`, `route.ts:80-104`):
+`docs/architecture/EDUCATIONAL_BRAIN_V1.md` + `DATA_FLOW.md` are
+authoritative for the full live pipeline trace. The one fact worth
+restating here because it drives §4: per `DATA_FLOW.md` items 35–48, the
+canonical pipeline core (KG context, learner intelligence profile,
+Student Memory, `decide()`, Teaching Action Generator, Lesson Composer,
+non-school misconception path) runs for **every** chat turn regardless of
+`schoolCtx`. The `school/adaptive/*` diagnostic/strategy cluster
+(mastery level, misconception confidence beyond the basic non-school
+check, momentum, calibration, synthesized teaching strategy, spaced
+revision, prerequisite recovery, exam readiness, next-best-action,
+learning narrative, daily plan, chapter-scoped lesson planner, assessment
+intelligence) is the part still gated behind `if (schoolCtx)`
+(`route.ts:294–838`) and does not run for general/Library learners. See
+§4.
 
-- **School students** (`schoolCtx` truthy): the full Brain of Record runs —
-  `masteryIntelligence`, `misconceptionEngine`, `conceptTransfer`,
-  `confidenceCalibration`, `learningMomentum`, `teachingStrategy`
-  (synthesizes the prior five into ONE of 7 strategies, deterministic
-  priority order, no LLM), `spacedRevision`, `prerequisiteRecovery`,
-  `examReadiness`, `nextBestAction`, `learningNarrative`, `dailyPlan`,
-  `lessonPlanner` — each contributes a text block to `systemPrompt` that
-  the AI tutor actually receives (`route.ts:408-922`).
-- **General learners** (`schoolCtx` null — the majority of users, since
-  general learning is the primary product surface): receive only
-  `buildKnowledgeGraphContext()` — a prerequisite-position summary from the
-  canonical/legacy KG bridge. None of the adaptive intelligence modules run
-  for them. **This asymmetry is real and is the most actionable finding in
-  this document — see §4.**
-
-A stale doc claim worth correcting here: `docs/ARCHITECTURE_REFERENCE.md`
+A stale doc claim worth correcting here too: `docs/ARCHITECTURE_REFERENCE.md`
 states `SCHOOL_MODE_ENABLED=false` gates the chapter workspace off. That
-flag (`src/lib/education/index.ts:4`) is in fact **not read anywhere** that
-controls routing — `src/app/dashboard/page.tsx:43` and `src/app/learn/page.tsx`
-route by `profile.userType === 'SCHOOL_STUDENT'` directly. School Mode is
-live today for school-student accounts. The flag is vestigial.
+flag (`src/lib/education/index.ts:4`) is in fact **not read anywhere**
+that controls routing — `src/app/dashboard/page.tsx:43` and
+`src/app/learn/page.tsx` route by `profile.userType === 'SCHOOL_STUDENT'`
+directly. School Mode is live today for school-student accounts. The
+flag is vestigial.
 
-### 1.3 The canonical Knowledge Graph **is** live (correction to an earlier assumption)
+### 1.3 The canonical Knowledge Graph is live (uncontested, both audits agree)
 
-It would be easy to conclude from finding the Teaching Engine stack
-orphaned that the canonical KG platform (`docs/{subject}/kg/graph.json`,
-908+194+187+119+89 = 1,497 concepts across math/physics/chemistry/CS/biology)
-is also disconnected. **It is not.** `src/lib/curriculum/knowledgeGraph.ts`
-is a bridge layer that wraps `subjectKgAdapter.ts` (`createSubjectAdapter()`)
-and is the actual function called by `buildKnowledgeGraphContext()` —
-which both the general-learner path and the school-student path use. The
-curriculum pipeline's KG output reaches students today. What's redundant
-is specifically the **decision/orchestration layer** built on top of it
-(Teaching Engine `decide()`, Teaching Action Engine `decideAction()`,
-Teaching Assets), not the KG data itself.
+The canonical KG platform (`docs/{subject}/kg/graph.json`, 1,497 concepts
+across math/physics/chemistry/CS/biology) is live via
+`src/lib/curriculum/knowledgeGraph.ts` → `subjectKgAdapter.ts`, consumed
+by `buildKnowledgeGraphContext()` for every session. This is confirmed by
+both this document's own grep evidence and `docs/architecture/EDUCATIONAL_BRAIN_V1.md`
+§4 (Engine inventory, "Knowledge" tier).
 
 ### 1.4 Eb* model usage (detail, for anyone tempted to revive it)
 
@@ -95,191 +120,207 @@ read-only; `EbEvidenceEvent` — write-only, never read back). 13 of 21
 (62%) — including `EbExplanation`, `EbVisual`, `EbProbe`, `EbAssetScore`,
 `EbBrainConfig` — have **zero references anywhere** outside their own
 schema declaration. No asset content has ever been created or served by
-this system. The 11-document spec under `docs/educational-brain/` describes
-an 11-stage pipeline (Frame→Intent→Retrieval→Memory→Strategy→Composition→
-Generation→Visual→Probe→Narration→Checkpoint→Persist); only stages 0, 1, 2,
-a partial 5, and a partial 10 have any code, and the implemented
-Composition stage never actually selects or serves asset content — it only
-summarizes concept counts. The spec's own Milestone 1 success criterion
-("a real physics question served end-to-end via a retrieved asset") is not
-met by the current code.
-
-This is not a criticism of the spec's thinking — docs 01-11 are a careful,
-principled design (see §5). It is a statement of fact about what got built
-versus what shipped.
+this system. The 11-document spec under `docs/educational-brain/`
+describes an 11-stage pipeline; only stages 0, 1, 2, a partial 5, and a
+partial 10 have any code, and the implemented Composition stage never
+actually selects or serves asset content — it only summarizes concept
+counts. The spec's own Milestone 1 success criterion ("a real physics
+question served end-to-end via a retrieved asset") is not met by the
+current code. This is not a criticism of the spec's thinking — docs
+01–11 are a careful, principled design (see §5) — it is a statement of
+fact about what got built versus what shipped.
 
 ---
 
 ## 2. Why this happened (root cause)
 
-1. **No single discoverable source of truth.** Nothing in the repo says
-   "the live teaching-decision engine is `school/adaptive/*`." It isn't
-   named "Educational Brain," "Teaching Engine," or anything a session
-   searching for prior art would naturally find. `docs/EDUCATIONAL_BRAIN_AUDIT.md`
-   — the most recent, most comprehensive audit (1,124 lines, dated
-   2026-06-28) — **does not mention `school/adaptive/` at all**, despite it
-   being a mature, 17-day, 18-module, actively-committed system at the time
-   of writing. The audit's own engine inventory (§6, engines A–O) has no
-   entry for it.
-2. **Single-day spec-to-shadow-code drops invite the next single-day drop.**
-   Both the Eb* pipeline and my own Teaching Engine stack were built,
-   tested, and reported as "production reports" within one calendar day,
-   each without first grepping for `decide(` or `TeachingStrategy` or
-   `nextBestAction` against the existing codebase. A multi-week spec
-   document (`docs/educational-brain/`) makes a system look authoritative
-   and "the" design, which discourages the next builder from checking
-   whether something already ships.
+1. **No single discoverable source of truth existed before this freeze.**
+   `docs/EDUCATIONAL_BRAIN_AUDIT.md` (1,124 lines, dated 2026-06-28, the
+   most recent prior audit before the freeze) does not mention
+   `school/adaptive/` at all, despite it being a mature, actively-committed
+   live system at the time of writing. `docs/architecture/EDUCATIONAL_BRAIN_V1.md`
+   (committed the same day as this document) now closes this gap and
+   should be treated as solved going forward — see the validation rule in
+   §6.
+2. **Single-day spec-to-shadow-code drops invite the next single-day
+   drop, and I made this mistake too.** The Eb* pipeline and my own
+   Teaching Action Engine stack were each built and reported as
+   "production" within one calendar day, without first grepping for
+   `decide(`, `TeachingStrategy`, or `nextBestAction` against the existing
+   codebase. I then repeated a milder version of the same error while
+   writing the first draft of this very document — conflating a live file
+   with a similarly-named orphaned one, because I was working from a
+   checkout that had already fallen behind a concurrent session's commits.
+   The fix that generalizes from both: **before declaring something
+   orphaned or live, re-fetch and re-grep against the current remote
+   tip, not a checkout that may be hours stale.**
 3. **Architecture docs drift from code faster than they're corrected** —
-   the `SCHOOL_MODE_ENABLED` example in §1.2 is a second, independent
-   instance of the same root cause: a stale claim in a reference doc sent
-   a future reader (me, twice) down the wrong path until directly verified
-   against route code.
-
-The fix for (1) and (3) is the same: one declared Brain of Record, kept
-in sync with code via the validation rule in §6, with archived alternatives
-labeled in-place rather than left to be rediscovered by accident.
+   the `SCHOOL_MODE_ENABLED` example in §1.2 is an independent instance of
+   the same root cause.
 
 ---
 
 ## 3. The Decision
 
-**`src/lib/school/adaptive/*`, as wired into `src/app/api/learn/chat/route.ts`,
-is the Brain of Record** — the one production teaching-decision system.
+The **canonical pipeline documented in `docs/architecture/EDUCATIONAL_BRAIN_V1.md`**
+(KG → Student Memory → Teaching Engine `decide()` → Teaching Action
+Generator → Dynamic Lesson Composer, plus the `school/adaptive/*`
+diagnostic/strategy/recommendation cluster for school sessions) is the
+Brain of Record — the one production teaching-decision system. This ADR
+does not introduce a second name or a second framing for it; it adopts
+the freeze's framing and terminology going forward.
 
 Governance rule, effective immediately for this role and any future
 session working on Educational Brain architecture:
 
 > Before starting any new "decide what to teach / what strategy / what
-> mastery state" system, you MUST grep `src/lib/school/adaptive/` and
-> `src/app/api/learn/chat/route.ts` first and explain in the proposal why
-> extending the Brain of Record in place is insufficient. A new parallel
-> pipeline is not an acceptable answer to "the existing one feels
-> architecturally rough" — refactor the live system instead (see §6).
+> mastery state" system, you MUST (a) re-fetch the remote tip of the
+> working branch, (b) read `docs/architecture/EDUCATIONAL_BRAIN_V1.md` and
+> grep `src/lib/teaching-engine/`, `src/lib/school/adaptive/`, and
+> `src/app/api/learn/chat/route.ts`, and (c) explain in the proposal why
+> extending the canonical pipeline in place is insufficient. A new
+> parallel pipeline is not an acceptable answer to "the existing one
+> feels architecturally rough" — refactor the live system instead.
 
 ### Why needed
-Three competing implementations in 17 days is an accelerating pattern, not
-a one-off. Without a declared Brain of Record, the most likely next event
-is a fourth rewrite — this time by me, since I hold the "Chief Architect"
-mandate and could easily have proposed "Educational Brain v2" as today's
-deliverable without this audit.
+Two competing dormant implementations built within two days of each other
+(Eb*, then my own) is an accelerating pattern. A third nearly happened
+inside this very document, via stale-checkout conflation rather than a
+deliberate new pipeline — which is its own argument for rule (a) above.
 
 ### Benefits
 - Single place to extend = compounding improvements instead of scattered
   partial ones (the staleMate/strategy-rotation logic already in
-  `teachingStrategy.ts:144-211` is a real, working evidence-feedback
+  `teachingStrategy.ts:144–211` is a real, working evidence-feedback
   mechanism — exactly what the Eb* Evidence Engine spec was trying to
   build from scratch).
-- Removes the discovery cost that produced this ADR in the first place for
-  every future session.
+- Removes the discovery cost that produced this ADR for every future
+  session, on top of what the freeze already removes.
 - Zero migration risk — the declaration changes no code path.
 
 ### Risks
-- Declaring a "winner" might discard good ideas from the other two systems.
+- Declaring a "winner" might discard good ideas from the dormant systems.
   Mitigated in §5 (ideas backlog, not deletion).
-- `school/adaptive/*`'s known weaknesses (≈30 sequential `await import()`
-  calls inline in a 1,548-line route file, string-concatenated prompt
-  blocks rather than structured output) are real and should not be read as
-  "this is fine forever" — see §6 for the in-place refactor path.
+- The canonical pipeline's own known complexity (≈30+ sequential
+  `await import()` calls inline in a 1,600+-line route file,
+  string-concatenated prompt blocks rather than structured output) is
+  real and already disclosed honestly in the freeze's six findings — not
+  re-litigated here.
 
 ### Backward compatibility
-Total — no behavior change. This section of the ADR is pure documentation
-plus two header-comment additions to dormant files (§5), which do not
-affect any code path that executes.
+Total — no behavior change. This document is pure documentation plus two
+header-comment additions to dormant files, corrected to be accurate after
+the merge in §0, which do not affect any code path that executes.
 
 ### Validation strategy
-Re-run the grep evidence in §1 after any future PR touching these systems;
-if a new file under `src/lib/` independently re-implements mastery level,
+Re-run the grep evidence in §1 after any future PR touching these
+systems, **against a freshly fetched remote tip** (see §2 point 2); if a
+new file under `src/lib/` independently re-implements mastery level,
 misconception confidence, or teaching strategy selection, that is itself
 the signal this ADR was violated.
 
 ---
 
-## 4. The real gap this audit found (queued for next iteration, not solved today)
+## 4. The real gap (corrected, narrower — queued for next iteration)
 
-The asymmetry in §1.2 is the most valuable actionable finding: **general
-learners — the larger, primary user segment — get none of the adaptive
-intelligence that school students get.** They receive a static KG-position
-string and nothing about their mastery level, misconceptions, momentum, or
-an explicit teaching strategy. The Brain of Record exists; it is simply
-not invoked for most of the product's users.
+Per the corrected §1.2: general/Library learners already receive the
+canonical pipeline's core (KG position, learner intelligence profile,
+Student Memory snapshot, Teaching Engine `decide()`, Teaching Action
+Generator, Lesson Composer, a non-school misconception check). What they
+do **not** receive is the `school/adaptive/*` diagnostic/strategy
+cluster: explicit mastery level (`TRUE_MASTERY`/`FALSE_MASTERY`/
+`AT_RISK`/`DEVELOPING`), confidence calibration, learning momentum, the
+single synthesized 7-type teaching strategy
+(`teachingStrategy.ts`/`determineStrategy()`), spaced revision,
+prerequisite recovery, exam readiness, next-best-action, learning
+narrative, and daily plan — all gated behind the single
+`if (schoolCtx)` block at `route.ts:294–838`.
 
-This is *not* a new-system problem — it is "wire the existing Brain of
-Record to a second context (general learning) it wasn't originally built
-for." `school/adaptive/*`'s functions already take `subjectSlug` +
-`kgNodeIds` as generic parameters; the school-specific parts are mainly
-`board`/`grade`/`chapterId` plumbing, not the decision logic itself. This
-is the highest-value next architectural increment and is queued as the
-next item in this loop (see CLAUDE.md update), deliberately not attempted
-in the same iteration as this consolidation decision, so each change can
-be validated independently.
+This is a real, still-actionable gap, just smaller than first claimed:
+general learners get *a* decision pipeline, not *the deeper diagnostic
+layer* school students get. `school/adaptive/*`'s functions already take
+`subjectSlug` + `kgNodeIds` as generic parameters; the school-specific
+parts are mainly `board`/`grade`/`chapterId` plumbing, not the diagnostic
+logic itself. This is queued as the next architectural increment for this
+role, to be designed as its own ADR with its own why/benefit/risk/rollout,
+deliberately not attempted in this same iteration.
 
 ---
 
-## 5. What happens to the other two systems
+## 5. What happens to the two dormant systems
 
 **Archived in place, not deleted.** Both contain real design value (the
 Eb* spec's Evidence Engine ranking model and Knowledge Asset versioning
 model in particular are more rigorous than anything in the live system).
-Header comments added (this iteration) to make status undeniable to the
-next reader:
+Header comments added (this iteration, corrected per §0) to make status
+undeniable to the next reader:
 
-- `src/lib/educationalBrain/pipeline.ts` — archived-shadow status comment
-  added; env flag left as-is (default off); code untouched otherwise.
+- `src/lib/educationalBrain/pipeline.ts` — archived-shadow status comment,
+  corrected to cross-reference the freeze's `ARCHITECTURE_DECISIONS.md`
+  Part 2; env flag left as-is (default off); code untouched otherwise.
 - `src/lib/curriculum/teachingActionEngine.ts` — archived-orphan status
-  comment added; code untouched otherwise.
+  comment, corrected to explicitly disambiguate from the live
+  `src/lib/teaching-engine/index.ts` and cross-reference the freeze's
+  Finding 2; code untouched otherwise.
 
 **Ideas backlog extracted for future, evidence-gated proposals** (not
 approved for implementation by this ADR — each would need its own
-why/benefit/risk writeup):
+why/benefit/risk writeup; the freeze does not cover this ground, so it
+survives as this document's distinct contribution):
 1. Evidence-weighted asset ranking (Eb* doc 04) — the live system's
    staleMate detection is single-signal (repeat-strategy-no-progress); a
    proper Beta-binomial confidence-weighted score per teaching strategy,
    stratified by grade/language, would be a genuine upgrade, additive to
    `teachingStrategyEvent`.
 2. Structured `TurnContext` output instead of string-concatenated prompt
-   blocks (Eb* doc 03) — would make the Brain of Record's stages
-   independently testable without a live LLM, addressing the route file's
-   actual weakness without replacing it.
-3. AI Dependency Index tracking (Eb* doc 06, doc 09) — `generateAIResponse`
-   regenerating the explanation body every turn is a real, quantified cost
-   and quality risk; the metric concept is sound even though the original
-   doc's solution (full asset-retrieval rewrite) is the wrong path forward
-   given §1.4's evidence.
+   blocks (Eb* doc 03) — would make the canonical pipeline's stages
+   independently testable without a live LLM, addressing a weakness the
+   freeze's own findings already disclose, without replacing the pipeline.
+3. AI Dependency Index tracking (Eb* doc 06, doc 09) — the AI Router
+   regenerating the explanation body every turn is a real, quantified
+   cost and quality risk; the metric concept is sound even though the
+   original doc's solution (full asset-retrieval rewrite) is the wrong
+   path forward given §1.4's evidence.
 
 ---
 
 ## 6. Implementation roadmap (this ADR's own actions)
 
-1. ✅ Evidence-gathering (this document, §1).
-2. ✅ Add archive-status header comments to the two dormant systems.
-3. ✅ Update `CLAUDE.md` with the Brain of Record pointer and the
-   governance rule from §3.
-4. ⬜ (Next loop iteration) Design the general-learner adaptive-intelligence
-   wiring from §4 as its own ADR, with its own why/benefit/risk/rollout —
-   the next highest-value increment, now that duplication risk is closed
-   off.
+1. ✅ Evidence-gathering (this document, §1) — corrected in §0 after
+   merging a concurrent session's freeze.
+2. ✅ Add archive-status header comments to the two genuinely dormant
+   systems (corrected per §0).
+3. ✅ Update `CLAUDE.md` with the canonical-pipeline pointer, deferring to
+   `docs/architecture/EDUCATIONAL_BRAIN_V1.md`, and the governance rule
+   from §3.
+4. ⬜ (Next loop iteration) Design the general-learner diagnostic-cluster
+   wiring from §4 (corrected, narrower scope) as its own ADR, with its
+   own why/benefit/risk/rollout.
 
 ---
 
-## 7. Appendix — file map
+## 7. Appendix — file map (corrected)
 
 ```
-LIVE — Brain of Record
-  src/lib/school/adaptive/                      18 modules
-  src/app/api/learn/chat/route.ts:293-922        wiring site (school students)
-  src/app/api/learn/chat/route.ts:107-260 (approx) buildKnowledgeGraphContext call (general learners)
-  src/lib/curriculum/knowledgeGraph.ts            canonical + legacy KG bridge (live, both paths)
-  src/lib/curriculum/subjectKgAdapter.ts          canonical graph.json loader (live)
+LIVE — canonical pipeline (authoritative: docs/architecture/EDUCATIONAL_BRAIN_V1.md)
+  src/lib/teaching-engine/{index,types}.ts        decide() — frozen core, runs for every session
+  src/lib/school/adaptive/teachingActionGenerator.ts   TAG — runs for every session
+  src/lib/school/adaptive/lessonComposer.ts            Dynamic Lesson Composer — runs for every session
+  src/lib/memory/                                  Student Memory Engine — runs for every session
+  src/lib/school/adaptive/                         18 modules; diagnostic/strategy/recommendation
+                                                    cluster — school sessions only (route.ts:294-838)
+  src/app/api/learn/chat/route.ts                  wiring site (see DATA_FLOW.md for full 65-step trace)
+  src/lib/curriculum/knowledgeGraph.ts              canonical + legacy KG bridge (live, every session)
+  src/lib/curriculum/subjectKgAdapter.ts             canonical graph.json loader (live)
 
 ARCHIVED — Eb* pipeline (shadow, gated off, never affects response)
-  src/lib/educationalBrain/                       7 files, 480 lines
-  prisma/schema.prisma:1883-2381                  21 Eb* models, 13 with zero runtime usage
-  docs/educational-brain/README.md + 01-11        spec docs (ideas backlog, see §5)
-  src/app/api/learn/chat/route.ts:1515-1517        fire-and-forget invocation site
+  src/lib/educationalBrain/                         7 files, 480 lines
+  prisma/schema.prisma                              21 Eb* models, 13 with zero runtime usage
+  docs/educational-brain/README.md + 01-11          spec docs (ideas backlog, see §5)
+  src/app/api/learn/chat/route.ts                   fire-and-forget invocation site (post-response)
 
-ARCHIVED — Canonical-KG Teaching Engine stack (orphaned, zero importers)
-  src/lib/teaching-engine/
-  src/lib/curriculum/teachingActionEngine.ts
+ARCHIVED — teachingActionEngine.ts + Teaching Assets Platform (orphaned, zero importers)
+  src/lib/curriculum/teachingActionEngine.ts        decideAction() — NOT the same as teaching-engine/decide()
   src/lib/curriculum/teachingActionSchema.ts
   src/lib/curriculum/teachingAssets.ts
   src/lib/curriculum/teachingAssetAdapter.ts

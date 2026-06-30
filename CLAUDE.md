@@ -31,24 +31,32 @@
     mastery_threshold, estimated_hours, description` — never add `domain`/`concept_type` to the
     JSON; they're derived at runtime by `inferDomain()`/`inferConceptType()`.
 
-## Educational Brain — Brain of Record (ADR 01, decided 2026-06-30)
-- The ONE live teaching-decision system is `src/lib/school/adaptive/*` (18 modules), wired
-  synchronously into `src/app/api/learn/chat/route.ts`. It runs for school-student sessions
-  (`schoolCtx` truthy) and shapes the actual system prompt the AI tutor receives. General
-  learners currently get only `buildKnowledgeGraphContext()` — no adaptive intelligence; this
-  asymmetry is the next queued architectural increment, not yet implemented.
-- Two other "decide what to teach" implementations exist in the repo but are **archived/dormant,
-  never execute against live traffic**: `src/lib/educationalBrain/*` (Eb* pipeline, fire-and-forget,
-  gated by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off) and the canonical-KG Teaching Engine
-  stack (`src/lib/teaching-engine/`, `src/lib/curriculum/teachingActionEngine.ts` + sibling files,
-  zero live importers). Both carry archive-status header comments at their top. Do not extend them
-  expecting production effect.
-- Full evidence and rationale: `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`.
-- **Governance rule**: before starting any new "decide what to teach / what strategy / what mastery
-  state" system, grep `src/lib/school/adaptive/` and `src/app/api/learn/chat/route.ts` first and
-  explain why extending the Brain of Record in place is insufficient. A new parallel pipeline is
-  not an acceptable answer to "the existing one feels architecturally rough" — refactor the live
-  system instead.
+## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
+- **Authoritative reference**: `docs/architecture/EDUCATIONAL_BRAIN_V1.md` (+ `ENGINE_REFERENCE.md`,
+  `DATA_FLOW.md`, `DEPENDENCY_RULES.md`, `EXTENSION_GUIDE.md`, `ARCHITECTURE_DECISIONS.md`) — the
+  full frozen architecture, 65-step chat-route data flow, per-engine contracts, and 15 permanent
+  rules. Read this set before changing or extending the Educational Brain; extend it, don't replace it.
+- Canonical pipeline core (KG → Student Memory → `src/lib/teaching-engine/index.ts` `decide()` →
+  Teaching Action Generator → Dynamic Lesson Composer) runs for **every** chat turn, school or
+  general/Library. The `src/lib/school/adaptive/*` diagnostic/strategy cluster (mastery level,
+  misconception confidence, momentum, confidence calibration, the synthesized 7-type teaching
+  strategy, spaced revision, next-best-action, daily plan, exam readiness, etc.) is gated behind
+  `if (schoolCtx)` (`route.ts:294-838`) and runs for school-student sessions only — general
+  learners don't get this deeper layer. This gap is the next queued architectural increment, not
+  yet implemented; see `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md` §4.
+- Two systems are **archived/dormant, never execute against live traffic** — do not extend them
+  expecting production effect: `src/lib/educationalBrain/*` (Eb* pipeline, fire-and-forget, gated
+  by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off) and `src/lib/curriculum/teachingActionEngine.ts`
+  + its Teaching Assets Platform siblings (zero live importers — **not** the same file as the live
+  `src/lib/teaching-engine/index.ts`, which has a confusingly similar name). Both carry
+  archive-status header comments at their top.
+- Full evidence, governance rule, and a corrected map of what's live vs. dormant:
+  `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
+  what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the
+  architecture freeze above, grep `src/lib/teaching-engine/`, `src/lib/school/adaptive/`, and
+  `src/app/api/learn/chat/route.ts`, and explain why extending the canonical pipeline in place is
+  insufficient. A new parallel pipeline is not an acceptable answer to "the existing one feels
+  architecturally rough" — refactor the live system instead.
 
 ## Run locally
 ```
