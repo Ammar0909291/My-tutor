@@ -448,6 +448,25 @@ export async function POST(req: Request) {
         // non-fatal — mastery context is purely additive
       }
 
+      // Phase 2H: assessment intelligence — decide whether an assessment is
+      // appropriate right now, and of what kind. Advisory only: surfaces a
+      // recommendation in the system prompt; never blocks or rewrites any
+      // existing assessment flow.
+      try {
+        const { getAssessmentDecision, buildAssessmentIntelligenceBlock } = await import('@/lib/school/adaptive/assessmentIntelligence')
+        const { getSchoolChapters: _getChaptersForAssessment } = await import('@/lib/school/schoolRouting')
+        const fullChapterForAssessment = _getChaptersForAssessment(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+        if (fullChapterForAssessment) {
+          const assessmentDecision = await getAssessmentDecision(
+            userId, schoolCtx.board, schoolCtx.grade, subjectCode, learnSession.subjectId, fullChapterForAssessment,
+          )
+          systemPrompt += buildAssessmentIntelligenceBlock(assessmentDecision)
+        }
+      } catch {
+        // non-fatal — assessment intelligence context is purely additive
+      }
+
       // Sprint CS: misconception alert — detect specific misunderstanding patterns.
       try {
         const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy } = await import('@/lib/school/adaptive/misconceptionEngine')
