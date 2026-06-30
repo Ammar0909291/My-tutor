@@ -1235,6 +1235,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 misconceptions: snapshot.misconceptions,
               })
               systemPrompt += buildTeachingActionBlock(teachingAction)
+
+              // Phase 3B: Dynamic Lesson Composer — assemble a deterministic,
+              // multi-stage LessonPlan from the TeachingDecision, TeachingAction,
+              // ConceptNode, and Student Memory signals already computed above.
+              // Advisory only; generates no content and never overrides any of
+              // the decisions it reads from.
+              try {
+                const { getLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonComposer')
+                const lessonPlan = await getLessonPlan(decision, teachingAction, conceptNode, {
+                  userId,
+                  board: schoolCtx!.board,
+                  grade: schoolCtx!.grade,
+                  subjectId: learnSession.subjectId,
+                  subjectSlug: subjectCode,
+                  chapter: fullChapterForTAG,
+                  activeMisconceptions: snapshot.misconceptions,
+                  reviewDueConceptIds: reviewDue,
+                })
+                systemPrompt += buildLessonPlanBlock(lessonPlan)
+              } catch {
+                // non-fatal — lesson plan context is purely additive
+              }
             }
           } catch {
             // non-fatal — teaching action context is purely additive
