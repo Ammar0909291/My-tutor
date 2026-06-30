@@ -189,17 +189,46 @@ from an accurate map, not a flattering one.
   future documentation doesn't go looking for a second file that doesn't
   exist.
 
-### Finding 4 — Two generations of "Recommendation Intelligence" coexist
+### Finding 4 — Two generations of "Recommendation Intelligence" coexist — **EVIDENCE SHARPENED 2026-06-30, PROPOSAL WRITTEN (ADR 04), AWAITING EXPLICIT APPROVAL**
 
-- `nextBestAction.ts` (earlier, narrower — self-labels its step 5 as
-  "Phase 2G (Recommendation Intelligence)") and `learningOrchestrator.ts`
-  (broader, 8-tier, the stronger claimant to being *the* canonical
-  cross-engine recommendation aggregator) both exist, both are called
-  from different call sites, and neither has been deprecated in favor of
-  the other.
-- **Ruling:** documented as a cluster with `learningOrchestrator.ts`
-  identified as the primary aggregator (`ENGINE_REFERENCE.md` §22–30).
-  Not merged or deprecated here.
+- **Original finding:** `nextBestAction.ts` (earlier, narrower — self-labels
+  its step 5 as "Phase 2G (Recommendation Intelligence)") and
+  `learningOrchestrator.ts` (broader, 8-tier, the stronger claimant to
+  being *the* canonical cross-engine recommendation aggregator) both
+  exist, both are called from different call sites, and neither has been
+  deprecated in favor of the other.
+- **Sharpened evidence (`docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`):**
+  this is not a clean two-engines-overlap case — it is a single file with
+  mixed live/dead exports. Per-symbol grep across all of `src/` confirms
+  `nextBestAction.ts`'s namesake `getNextBestAction()` (the 5-tier
+  engine), `nextActionHref()`, and its own `NEXT_ACTION_LABELS` export
+  have **zero callers anywhere**, while a fourth export from the same
+  file, `getChapterNextStep()`, is genuinely live (two real call sites:
+  `api/learn/chat/route.ts`, the chapter workspace page). The dead trio's
+  only plausible consumer, `src/components/dashboard/SchoolDashboard.tsx`
+  (a "legacy nextAction card... fallback when orchestrator returned null"),
+  is itself confirmed orphaned — zero importers anywhere in `src/`; the
+  live `/dashboard` route renders `DashboardV2` instead, whose data
+  function (`getDashboardV2Data.ts`) sources recommendations via
+  `learningOrchestrator.ts`'s `getTopRecommendation()` (through
+  `learningNavigator.ts`), with zero references to `nextBestAction.ts`
+  anywhere in the v2 stack. `learningOrchestrator.ts` is confirmed the
+  sole live canonical Recommendation Intelligence aggregator, with a
+  near-strict-superset of `getNextBestAction()`'s logic plus 4 additional
+  signals it never had.
+- **Ruling:** under the current STRICT MODE directive (code changes
+  require explicit prior user approval, gated by a 4-condition proof),
+  this finding's resolution has been written up as **ADR 04, a proposal
+  document, not executed**. ADR 04 proposes surgically removing the three
+  confirmed-dead exports from `nextBestAction.ts` (keeping
+  `getChapterNextStep()` in place) and deleting `SchoolDashboard.tsx` in
+  full, but explicitly defers execution pending the user's sign-off —
+  see ADR 04 §9 for the full four-condition analysis and why condition 4
+  (production-behavior impact) is treated as requiring approval rather
+  than self-clearing from grep evidence alone for a UI-component deletion.
+  `learningOrchestrator.ts` remains identified as the primary aggregator
+  (`ENGINE_REFERENCE.md` §22–30) in the interim; no code has been merged,
+  deprecated, or deleted by this update.
 
 ### Finding 5 — Two generations of curriculum/concept-graph representation coexist
 
@@ -242,5 +271,9 @@ circular dependencies or functional conflicts. Six honest findings are
 recorded for future attention; none blocks this freeze.
 
 **Update 2026-06-30:** Finding 2 is resolved — see its entry in Part 3
-and `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. Five honest
-findings remain open.
+and `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. Finding 4's
+evidence is sharpened and a resolution is proposed but **not executed** —
+see its entry in Part 3 and
+`ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md` (awaiting explicit user
+approval before any code change). Four honest findings remain fully
+open (1, 3, 5, 6).

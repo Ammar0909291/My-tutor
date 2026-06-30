@@ -186,7 +186,18 @@ separately-approved cleanup phase)**:
    same script (`scripts/validate-knowledge-graph.ts`), not two engines.
 4. Two Recommendation Intelligence generations coexist:
    `nextBestAction.ts` (narrower, earlier) and `learningOrchestrator.ts`
-   (8-tier, primary aggregator). Neither deprecated.
+   (8-tier, primary aggregator). **Evidence sharpened 2026-06-30**: this
+   is a split-file case, not a clean two-engine overlap — `nextBestAction.ts`'s
+   `getNextBestAction()`/`nextActionHref()`/`NEXT_ACTION_LABELS` are
+   confirmed zero-caller dead code (their one plausible consumer,
+   `SchoolDashboard.tsx`, is itself an orphaned, unrendered component —
+   `DashboardV2` sources recommendations via `learningOrchestrator.ts`
+   instead), while `nextBestAction.ts`'s fourth export,
+   `getChapterNextStep()`, remains genuinely live. A resolution is
+   **proposed, not executed** — see
+   `docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`,
+   awaiting explicit user approval before any deletion under the current
+   STRICT MODE directive.
 5. Two curriculum/concept-graph representations coexist: the file-based
    canonical KG (`docs/{subject}/kg/graph.json`) and the DB-backed `Eb*`
    model family (24 models, used only by the experimental pipeline). Not

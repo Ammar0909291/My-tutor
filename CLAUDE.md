@@ -62,6 +62,15 @@
   Its Teaching Assets Platform siblings (`teachingAssetSchema.ts`/`teachingAssetAdapter.ts`/
   `teachingAssets.ts`, real curriculum content for all 5 subjects) remain — still zero live
   importers, left untouched as an explicit open question, not this session's to decide.
+- `src/lib/school/adaptive/nextBestAction.ts` is a split file: its namesake `getNextBestAction()`
+  (5-tier engine), `nextActionHref()`, and its own `NEXT_ACTION_LABELS` export are confirmed
+  zero-caller dead code (their one plausible consumer, `src/components/dashboard/SchoolDashboard.tsx`,
+  is itself a confirmed-orphaned, unrendered component — the live `/dashboard` route renders
+  `DashboardV2` instead, which sources recommendations via `learningOrchestrator.ts`). The file's
+  fourth export, `getChapterNextStep()`, remains genuinely live (`route.ts`, the chapter workspace
+  page) and must not be touched. A surgical-removal **proposal** (not executed — requires explicit
+  user approval under STRICT MODE) is written up in
+  `docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the

@@ -4,6 +4,41 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 04 — Next-Best-Action retirement proposal (documentation only, NOT executed)
+
+Operating under the new "Chief Educational Brain Architect — STRICT MODE"
+standing directive: code changes now require explicit prior user approval,
+gated by a 4-condition proof; default action when uncertain is to document
+a proposal rather than execute it. Sharpens `ARCHITECTURE_DECISIONS.md`
+Finding 4's evidence; proposes (does not execute) a resolution.
+
+- **No code deleted, no code modified.** This entry is documentation only.
+- Confirmed via exhaustive per-symbol grep across `src/`:
+  `nextBestAction.ts`'s `getNextBestAction()` (the 5-tier engine),
+  `nextActionHref()`, and its own `NEXT_ACTION_LABELS` export have zero
+  callers anywhere in the codebase. The file's fourth export,
+  `getChapterNextStep()`, is genuinely live (`api/learn/chat/route.ts`,
+  the chapter workspace page) and is explicitly excluded from the
+  proposed deletion scope.
+- Discovered and confirmed a second, adjacent orphan:
+  `src/components/dashboard/SchoolDashboard.tsx` (zero importers anywhere
+  in `src/`) — the live `/dashboard` route renders `DashboardV2` instead,
+  whose data source (`getDashboardV2Data.ts`) sources recommendations via
+  `learningOrchestrator.ts`'s `getTopRecommendation()`, with zero
+  references to `nextBestAction.ts` anywhere in the v2 stack.
+- Wrote `docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`
+  — a proposal (Option C: surgically remove the three dead exports from
+  `nextBestAction.ts`, delete `SchoolDashboard.tsx` in full, fix a stale
+  comment in `assessmentIntelligence.ts`) explicitly marked **not
+  executed**, awaiting the user's explicit sign-off per STRICT MODE's
+  four-condition gate (condition 4, production-behavior impact, is
+  treated as requiring approval for a UI-component deletion rather than
+  self-clearing from grep evidence alone).
+- Updated `ARCHITECTURE_DECISIONS.md` Finding 4 and `PROJECT_STATE.md`'s
+  findings list to reflect the sharpened evidence and proposal status.
+
+---
+
 ## ADR 03 — Retire the orphaned Teaching Action Engine (code deletion + docs)
 
 Operating under the "Educational Brain Architect — Architecture Only"
