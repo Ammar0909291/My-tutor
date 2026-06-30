@@ -238,11 +238,59 @@ unrelated refactors into a single proposal.
 
 ## 7. Follow-ups (not in this increment)
 
-1. Wire `detectPrerequisiteGap`/`buildLessonPlan` for Library subjects once
+1. ~~Wire `detectPrerequisiteGap`/`buildLessonPlan` for Library subjects once
    their `KnowledgeNode[]` shape requirement is reconciled with
-   `CurriculumModule.nodes` (currently `CurriculumNode[]`, a different,
-   simpler shape — needs a mapping or adapter, not attempted here to avoid an
-   under-evidenced wiring).
+   `CurriculumModule.nodes`.~~ **Resolved 2026-06-30, split in two:**
+   - `buildLessonPlan()` (`src/lib/school/adaptive/lessonPlanner.ts`) — **wired.**
+     Reading its full body showed it only ever reads `.id`/`.title` off each
+     `KnowledgeNode` (never `.domain`/`.description`/`.estimated_hours`), so a
+     `CurriculumNode` (`slug`→`id`, `title`→`title`, optional
+     `difficulty`/`prerequisites` with safe defaults) satisfies it with a
+     trivial inline object-literal mapping — no adapter module needed. Wired
+     into the same `if (!schoolCtx)` region in `route.ts` (~line 1019),
+     immediately after the teaching-strategy block, reusing the established
+     current-module substitution pattern. Prompt-injection only — the
+     `currentConceptNodeId`/`nextConceptNodeId` snapshot-persistence write at
+     `route.ts` ~line 1640 stays `schoolCtx`-gated (it also depends on
+     `workedExampleUpdate`/`learnerProfHoisted`, both school-only signals);
+     extending it is a separate, larger change than this increment's
+     single-block scope, so it's left as a still-open follow-up below (item 5).
+     Two of the three data sources `buildLessonPlan` reads degrade to empty
+     for Library turns rather than truly working: `learningCheckpoint` rows
+     are never written outside the `schoolCtx` branch (the table's `board`/
+     `grade` columns are required, not nullable), and `practiceSession.chapterId`
+     is never set by the generic `/api/practice/submit` route. Both failure
+     modes are silent and safe — the function's existing zero-rows fallbacks
+     (`recommendedCheckpoint`/`recommendedPractice` default to `true`) were
+     designed for exactly this "no data yet" case, not introduced by this
+     wiring. `topicProgress` reads work correctly (that table's `topicSlug`
+     keying is already proven `schoolCtx`-agnostic by the pre-existing
+     conversational-checkpoint upsert in the same route file).
+   - `detectPrerequisiteGap()` (`src/lib/school/adaptive/prerequisiteRecovery.ts`)
+     — **investigated, NOT wired, deferred.** Reading its full body surfaced a
+     blocker deeper than a type-shape mismatch: it resolves each prerequisite
+     id through a module-scope-global `KG_BY_ID = new Map(ALL_KG_NODES.map(n
+     => [n.id, n]))` (line 40) — not scoped to the `kgNodes` parameter the
+     caller passes in. For school callers this is necessary, not incidental:
+     `kgNodes` is only the *current chapter's* nodes, but a node's
+     prerequisites routinely point at nodes from *earlier* chapters/grades, so
+     the lookup must reach the full corpus or genuine cross-chapter gaps would
+     be missed — confirmed by checking how `route.ts` calls it (chapter-scoped
+     `kgNodes`, not subject-wide). Library prerequisite slugs (`CurriculumNode.
+     prerequisites`) live in a completely different namespace from
+     `ALL_KG_NODES`'s canonical school KG ids, so every `KG_BY_ID.get(prereqId)`
+     lookup would return `undefined` and the function would silently return
+     `null` on every call — not a crash, but a permanently dead block costing
+     3 DB reads per turn for zero value. Fixing this correctly needs a
+     signature change (accept a caller-supplied corpus map instead of always
+     reading the module-level global) that touches the live, school-critical
+     call site too — exactly the kind of redesign the standing role's working
+     rule ("do not redesign stable architecture without strong evidence") and
+     ADR 02's own original scoping ("not attempted here to avoid a rushed,
+     under-evidenced wiring") both caution against bundling into an additive
+     increment. Left for a dedicated future proposal if Library-subject
+     prerequisite-gap detection turns out to be high-value enough to justify
+     the signature change and the school-path re-verification it would require.
 2. Extract the duplicated `[HINT]` tag instruction text (school + Library
    branches) into a shared helper — pure refactor, separate PR.
 3. Consider whether the standalone mastery/misconception/confidence/momentum
@@ -252,3 +300,10 @@ unrelated refactors into a single proposal.
 4. Consolidate the now-three independent `prisma.moduleProgress.findMany`
    reads in the Library path (curriculum-progression block, this block, and
    any future one) into a single shared read if a fourth consumer appears.
+5. Extend the `currentConceptNodeId`/`nextConceptNodeId` snapshot-persistence
+   write (`route.ts` ~line 1640) to also run for Library sessions, so a
+   Library learner's "current concept" survives across turns the way a school
+   learner's does. Deferred because the write is currently entangled with two
+   other school-only signals (`workedExampleUpdate`, `learnerProfHoisted`) in
+   the same conditional block — untangling those cleanly is a slightly larger
+   change than this increment's single-block-at-a-time scope.

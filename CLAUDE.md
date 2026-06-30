@@ -46,9 +46,13 @@
   general/Library sessions (`route.ts:294` school branch, `route.ts:964` Library branch, ADR 02,
   implemented 2026-06-30) — board/grade params on those functions are unused plumbing, verified by
   reading bodies. `nextBestAction`/`dailyPlan`/`examReadiness` remain school-only — they genuinely
-  walk a board/grade curriculum syllabus tree with no Library equivalent. `prerequisiteRecovery`/
-  `lessonPlanner` remain school-only for now (need a `KnowledgeNode[]` shape reconciliation first —
-  ADR 02 §7 follow-up #1).
+  walk a board/grade curriculum syllabus tree with no Library equivalent. `lessonPlanner.buildLessonPlan()`
+  also now runs for both (`route.ts` ~1019, ADR 02 §7 follow-up #1, implemented 2026-06-30) — it only
+  reads `.id`/`.title` off each node, so a `CurriculumNode` satisfies it with a trivial inline mapping.
+  `prerequisiteRecovery.detectPrerequisiteGap` remains school-only and is NOT a simple shape-reconciliation
+  case: it resolves prerequisite ids through a module-global `KG_BY_ID` keyed on the canonical school KG
+  only, which a Library subject's node slugs can never match — wiring it needs a signature change
+  (caller-supplied corpus map) that touches the live school call site too, deferred (ADR 02 §7 item 1).
 - Two systems are **archived/dormant, never execute against live traffic** — do not extend them
   expecting production effect: `src/lib/educationalBrain/*` (Eb* pipeline, fire-and-forget, gated
   by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off) and `src/lib/curriculum/teachingActionEngine.ts`

@@ -305,8 +305,14 @@ survives as this document's distinct contribution):
    `docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md`. Portable
    half (synthesized teaching strategy + spaced revision) shipped; the
    board/grade-coupled half (`nextBestAction`/`dailyPlan`/`examReadiness`)
-   correctly stays school-only; `prerequisiteRecovery`/`lessonPlanner`
-   queued as ADR 02's own follow-up #1.
+   correctly stays school-only. ADR 02's own follow-up #1
+   (`prerequisiteRecovery`/`lessonPlanner`) is now resolved: `lessonPlanner.
+   buildLessonPlan()` shipped 2026-06-30 (only reads `.id`/`.title`, trivial
+   `CurriculumNode` mapping); `prerequisiteRecovery.detectPrerequisiteGap()`
+   was investigated and found to need a signature change (its `KG_BY_ID`
+   lookup is a module-global keyed on the canonical school KG only, not
+   reachable by Library node slugs) — deferred as a separate, larger proposal
+   rather than bundled into this additive increment.
 
 ---
 

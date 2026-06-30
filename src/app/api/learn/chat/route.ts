@@ -1016,6 +1016,70 @@ export async function POST(req: Request) {
       }
     }
 
+    // ADR 02 follow-up #1 (docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md
+    // §7): lesson plan for SUBJECT_LIBRARY subjects. buildLessonPlan() only reads
+    // `.id`/`.title` off each KnowledgeNode (confirmed by reading its full body —
+    // it never touches `.domain`/`.description`/`.estimated_hours`), so a
+    // CurriculumNode (`slug`, `title`, optional `difficulty`/`prerequisites`) maps
+    // onto it with a trivial field rename — no real KnowledgeNode[] shape work
+    // needed for this function specifically. `detectPrerequisiteGap()` in the same
+    // follow-up item was investigated and NOT wired here: it resolves prerequisite
+    // ids through a module-scope-global `KG_BY_ID = new Map(ALL_KG_NODES...)`
+    // (prerequisiteRecovery.ts:40), which only contains canonical school KG node
+    // ids. Library prerequisite slugs live in a different namespace, so every
+    // lookup would silently miss and the function would always return null — not
+    // a crash, but a permanently-dead block. Fixing that needs a signature change
+    // (accepting a caller-supplied node map) that risks the school path's existing
+    // cross-chapter prerequisite lookups, so it's deferred rather than rushed.
+    //
+    // chapterId/kgNodeIds substitution mirrors the teaching-strategy block above
+    // (current module slug, its node slugs). topicProgress reads already work
+    // (topicSlug is written identically for school and Library elsewhere in this
+    // route — see the conversational-checkpoint TopicProgress upsert above).
+    // learningCheckpoint reads always return empty for Library turns (that table's
+    // `board`/`grade` columns are required and only ever written inside the
+    // schoolCtx branch), and practiceSession reads return empty too (the generic
+    // /api/practice/submit route never sets `chapterId`) — both degrade to safe
+    // defaults (recommendedCheckpoint/recommendedPractice fall back to true) rather
+    // than breaking, the same kind of partial-signal tradeoff ADR 02 already
+    // accepted for spaced revision. Snapshot persistence of currentConceptNodeId
+    // (route.ts ~1640, schoolCtx-gated) is intentionally NOT extended here — kept
+    // to the single prompt-injection block, consistent with ADR 02 §3's "smaller
+    // surface area for a first increment" rationale.
+    if (!schoolCtx) {
+      try {
+        const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
+        const libSubject = findLibrarySubject(subjectCode)
+        if (libSubject) {
+          const progressRows = await prisma.moduleProgress.findMany({
+            where: { userId: session.user.id, subjectId: learnSession.subjectId },
+          })
+          const bySlug = new Map(progressRows.map((p) => [p.moduleSlug, p]))
+          const currentModule = libSubject.modules.find((m) => {
+            const st = bySlug.get(m.slug)?.status
+            return st === 'AVAILABLE' || st === 'IN_PROGRESS'
+          }) ?? libSubject.modules[0]
+
+          if (currentModule) {
+            const planNodes = currentModule.nodes.map((n) => ({
+              id: n.slug,
+              domain: subjectCode,
+              title: n.title,
+              description: '',
+              difficulty: n.difficulty ?? 'developing',
+              prerequisites: n.prerequisites ?? [],
+            }))
+            const { buildLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonPlanner')
+            const plan = await buildLessonPlan(userId, subjectCode, currentModule.slug, currentModule.title, planNodes)
+            const planBlock = buildLessonPlanBlock(plan)
+            if (planBlock) systemPrompt += planBlock
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] library lesson plan context skipped:', err)
+      }
+    }
+
     // Append Adaptive Tutor context — preferences + recent performance trend,
     // so the Tutor adjusts pacing/depth/examples per learner instead of
     // teaching everyone the same way. Additive — independent of other context blocks.
