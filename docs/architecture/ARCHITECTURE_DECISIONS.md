@@ -253,6 +253,50 @@ from an accurate map, not a flattering one.
   routine change; not edited in this freeze (any edit, however small,
   to a frozen-scope file is out of bounds for "freeze only" work).
 
+### Finding 7 — Two of the canonical KG's 10 authored fields never reach a downstream consumer — **PROPOSAL WRITTEN (ADR 05), AWAITING EXPLICIT APPROVAL**
+
+- Unlike Findings 1–6 (all surfaced during the original freeze audit),
+  this finding was opened under the post-freeze "Knowledge Graph
+  Consumption Architecture" priority — forward-looking design work, not a
+  cleanup audit, per the standing instruction to prioritize the systems
+  that consume the Curriculum Pipeline's output over further dead-code
+  hunting.
+- **Evidence:** `subjectKgAdapter.ts`'s internal `RawKGConcept` type
+  already parses `cross_links: string[]` and `mastery_threshold: number`
+  from `graph.json`, but neither `getNodes()` nor `getConceptNode()`
+  exposes them — both are silently dropped before reaching `ConceptNode`
+  (the frozen Teaching Engine input type) or `KnowledgeNode` (the
+  curriculum-layer type). `mastery_threshold` is authored with real
+  per-concept variation in mathematics (12 distinct values, 0.35–0.95
+  across 908 concepts) yet has zero runtime effect: 15+ call sites across
+  `assessmentIntelligence.ts`, `masteryIntelligence.ts`,
+  `evaluateAssessment.ts`, `nextBestAction.ts`, `dailyPlan.ts`,
+  `learningOrchestrator.ts`, `learningNarrative.ts`, `examReadiness.ts`,
+  `achievementEngine.ts`, and `progressReport.ts` all read the single flat
+  `ASSESSMENT_PASS_THRESHOLD = 70` constant instead (also a unit mismatch:
+  KG values are 0–1 fractions, the runtime constant is 0–100). Separately,
+  `ENGINE_REFERENCE.md` §2 incorrectly documented `cross_links` as
+  "always inter-graph by design" — direct inspection of
+  `docs/mathematics/kg/graph.json` found 363 `cross_links` edges, 100%
+  intra-subject, zero true cross-subject links; that documentation claim
+  has been corrected (see `ENGINE_REFERENCE.md` §2/§4).
+- **Ruling:** documented as **ADR 05, a proposal, not executed**. ADR 05
+  proposes a 3-phase resolution: Phase 1 (two new additive
+  `SubjectAdapter` accessors — `getConceptMasteryThreshold()`,
+  `getCrossLinkedConceptIds()` — plus the doc correction; self-evaluated
+  against the four-condition gate as clearing all four, but execution is
+  still deferred pending an explicit follow-up turn, consistent with how
+  ADR 04 was handled); Phase 2 (wiring the mastery-threshold accessor
+  into `assessmentIntelligence.ts`'s chapter-scoped output specifically,
+  explicitly excluding the other ~9 `ASSESSMENT_PASS_THRESHOLD` call
+  sites as a separate, later-scoped candidate — condition 4 flagged as
+  requiring explicit approval); Phase 3 (a `cross_links`-driven "Related
+  Concepts" consumer, deliberately left undesigned pending product
+  intent). See `docs/architecture/ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`
+  for full evidence, the per-subject distribution tables, and the
+  phase-by-phase four-condition analysis. No code has been changed by
+  this finding.
+
 ---
 
 ## Part 4 — Validation results
@@ -272,8 +316,13 @@ recorded for future attention; none blocks this freeze.
 
 **Update 2026-06-30:** Finding 2 is resolved — see its entry in Part 3
 and `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. Finding 4's
-evidence is sharpened and a resolution is proposed but **not executed** —
-see its entry in Part 3 and
-`ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md` (awaiting explicit user
-approval before any code change). Four honest findings remain fully
-open (1, 3, 5, 6).
+evidence is sharpened and a resolution is proposed but **not executed**,
+and per explicit user instruction will **remain unexecuted indefinitely**
+(documentation-only is the final state, not an interim one) — see its
+entry in Part 3 and `ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`.
+Four honest findings remain fully open from the original freeze (1, 3, 5,
+6). A new, seventh finding (Knowledge Graph Consumption Architecture) was
+opened post-freeze under the revised "consume the KG, don't just clean up
+around it" priority — see its entry in Part 3 and
+`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md` (proposal written,
+not executed).

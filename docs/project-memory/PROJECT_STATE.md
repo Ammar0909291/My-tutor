@@ -33,6 +33,7 @@ CHANGELOG going forward.
 | Phase 2 — Milestone 1: spine + asset catalogue for ONE subject (physics) | **In progress.** Steps 1-3 done (schema, Concept+Edge+Misconception backfill). Decision Pipeline stages 0-4 (Frame/Intent/Retrieval/Composition/Persist) implemented at 0724396. Route side-car wired. Steps 4+ (EbCurriculum/EbModule, pgvector, latency measurement) not yet started. |
 | Educational Brain v1.0 — Architecture Freeze (`docs/architecture/`) | **Complete.** Permanent reference for the whole canonical pipeline + 36-engine inventory frozen this session. Documentation only — zero code changes. See §5 below. |
 | Phase 3+ | Not started. Requires explicit approval before beginning, per standing instruction. |
+| Knowledge Graph Consumption Architecture (`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`) | **Proposal written, not executed.** Opened 2026-06-30 under the revised priority directive (architecture > cleanup): two of the canonical KG's 10 authored fields (`cross_links`, `mastery_threshold`) are parsed but never exposed past the Generic Subject Adapter. 3-phase resolution proposed; Phase 1 self-clears the 4-condition gate but awaits an explicit go-ahead before execution. See §4b below. |
 
 ---
 
@@ -213,6 +214,62 @@ conflicts.
 
 ---
 
+## 4b. Knowledge Graph Consumption Architecture — ADR 05 (this session, proposal only)
+
+**Priority pivot, recorded verbatim in spirit:** as of 2026-06-30, the
+standing directive shifted from dead-code/duplication auditing (ADR 03,
+ADR 04) to forward-looking Educational Brain system design. ADR 04 is
+explicitly confirmed by the user to remain **permanently** documentation-
+only — not pending, not an interim state, simply not to be executed.
+Further cleanup work is deprioritized unless it directly blocks one of
+the 12+ named high-impact domains (KG consumption, Teaching Action
+Intelligence, Student Memory evolution, Dynamic Lesson Composition,
+Evidence Engine, Recommendation Intelligence, Mastery Engine,
+Visualization selection, Simulation architecture, Assessment
+architecture, Beginner→Intermediate→Expert progression, Entrance
+examination framework, Curriculum mapping, AI independence, long-term
+scalability).
+
+**First finding under the new priority — `docs/architecture/ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`:**
+- Two of the canonical 10-field KG schema's authored fields —
+  `cross_links` and `mastery_threshold` — are parsed into
+  `subjectKgAdapter.ts`'s internal `RawKGConcept` type but never exposed
+  by `SubjectAdapter.getNodes()`/`getConceptNode()`. Neither
+  `ConceptNode` (frozen Teaching Engine input) nor `KnowledgeNode`
+  (curriculum layer) carries either field.
+- `mastery_threshold` is authored with real per-concept variation in
+  mathematics (12 distinct values, 0.35–0.95 across 908 concepts;
+  physics/chemistry/CS/biology vary less, 3–4 distinct values each) and
+  has **zero runtime effect** — 15+ call sites (`assessmentIntelligence.ts`,
+  `masteryIntelligence.ts`, `evaluateAssessment.ts`, `nextBestAction.ts`,
+  `dailyPlan.ts`, `learningOrchestrator.ts`, `learningNarrative.ts`,
+  `examReadiness.ts`, `achievementEngine.ts`, `progressReport.ts`) all
+  read the single flat `ASSESSMENT_PASS_THRESHOLD = 70` constant instead.
+  Units also mismatch (KG: 0–1 fraction; runtime constant: 0–100 scale).
+- `cross_links` documentation was wrong: `ENGINE_REFERENCE.md` claimed
+  "always inter-graph by design." Direct inspection of
+  `docs/mathematics/kg/graph.json` (363 edges, the only subject with
+  meaningful usage) found 100% intra-subject, zero cross-subject —
+  corrected in `ENGINE_REFERENCE.md` §2 this session.
+- **Proposed 3-phase resolution (ADR 05 §4/§9), none executed yet:**
+  - **Phase 1** — add two new additive `SubjectAdapter` accessors,
+    `getConceptMasteryThreshold(id)` and `getCrossLinkedConceptIds(id)`;
+    zero changes to existing methods or frozen types. Self-evaluated
+    against the 4-condition gate as clearing all four. **Awaiting
+    explicit go-ahead before execution**, per the same end-of-turn-
+    approval-request pattern used for ADR 04.
+  - **Phase 2** — wire the mastery-threshold accessor into
+    `assessmentIntelligence.ts`'s chapter-scoped output specifically
+    (not the other ~9 call sites, deferred). Condition 4 flagged as
+    requiring explicit approval (alters scored output).
+  - **Phase 3** — a `cross_links`-driven "Related Concepts" consumer.
+    Deliberately left undesigned pending product-intent confirmation.
+- Cross-references updated this session: `ARCHITECTURE_DECISIONS.md`
+  (new Finding 7), `ENGINE_REFERENCE.md` §2 (correction) and §4 (open
+  finding note), `CLAUDE.md` (new bullet).
+
+---
+
 ## 4. Constraints carried forward (unchanged, still binding)
 
 - Do NOT create PRs unless explicitly asked. Do NOT push to branches
@@ -222,3 +279,12 @@ conflicts.
 - Do NOT redesign Phase-1-approved architecture without documenting
   objective evidence of a flaw and getting approval first (per the
   Phase 2 kickoff instructions).
+- ADR 04 is permanently documentation-only by explicit user instruction
+  — do not execute it, do not re-raise it for approval.
+- Current priority (2026-06-30 onward): forward-looking Educational
+  Brain architecture (KG consumption, Teaching Action Intelligence,
+  Student Memory, Lesson Composition, Evidence Engine, Recommendation
+  Intelligence, Mastery Engine, Visualization, Simulation, Assessment,
+  progression framework, entrance exam framework, curriculum mapping, AI
+  independence, scalability) over dead-code/cleanup auditing. Do not
+  propose or execute further cleanup unless it blocks one of these.

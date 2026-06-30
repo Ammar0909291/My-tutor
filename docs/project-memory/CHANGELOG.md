@@ -4,6 +4,63 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 05 — Knowledge Graph Consumption Architecture (documentation only, NOT executed) + priority pivot
+
+Operating under a revised standing directive: ADR 04 is confirmed by the
+user to remain **permanently** documentation-only (not pending — final).
+Further dead-code/cleanup auditing is deprioritized; the new priority is
+forward-looking Educational Brain architecture across 12+ named domains
+(KG consumption, Teaching Action Intelligence, Student Memory, Lesson
+Composition, Evidence Engine, Recommendation Intelligence, Mastery
+Engine, Visualization, Simulation, Assessment, Beginner→Intermediate→
+Expert progression, entrance exam framework, curriculum mapping, AI
+independence, scalability). This is the first finding under that pivot.
+
+- **No code changed.** This entry is documentation only.
+- Audited how the canonical 10-field KG schema's authored output is
+  actually consumed downstream of `subjectKgAdapter.ts` (the Generic
+  Subject Adapter). Found two of the 10 fields — `cross_links` and
+  `mastery_threshold` — are parsed into the adapter's internal
+  `RawKGConcept` type but **never exposed** by `SubjectAdapter`'s public
+  `getNodes()`/`getConceptNode()`; neither the frozen Teaching Engine
+  input type (`ConceptNode`) nor the curriculum-layer type
+  (`KnowledgeNode`) carries either field.
+- `mastery_threshold` is authored with genuine per-concept variation in
+  mathematics (12 distinct values, 0.35–0.95 across 908 concepts) and is
+  **completely unused at runtime**: confirmed by repo-wide grep, 15+ call
+  sites (`assessmentIntelligence.ts`, `masteryIntelligence.ts`,
+  `evaluateAssessment.ts`, `nextBestAction.ts`, `dailyPlan.ts`,
+  `learningOrchestrator.ts`, `learningNarrative.ts`, `examReadiness.ts`,
+  `achievementEngine.ts`, `progressReport.ts`) all read a single flat
+  `ASSESSMENT_PASS_THRESHOLD = 70` constant instead — also a unit
+  mismatch (KG: 0–1 fraction, runtime: 0–100 scale).
+- Found and **corrected** a documentation inaccuracy:
+  `ENGINE_REFERENCE.md` §2 claimed `cross_links` are "always inter-graph
+  by design." Direct inspection of `docs/mathematics/kg/graph.json` (363
+  `cross_links` edges, the only subject with meaningful usage — physics
+  has zero, chemistry/CS/biology have 6/10/10 concepts respectively)
+  found **100% are intra-subject**, zero true cross-subject links exist
+  in the corpus today.
+- Wrote `docs/architecture/ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`
+  — proposes a 3-phase resolution, **none executed**: Phase 1 (two new
+  additive `SubjectAdapter` accessors — `getConceptMasteryThreshold()`,
+  `getCrossLinkedConceptIds()` — zero changes to existing methods/frozen
+  types; self-evaluated as clearing all 4 STRICT MODE conditions but
+  execution deferred pending explicit approval, same pattern as ADR 04);
+  Phase 2 (wire the mastery accessor into `assessmentIntelligence.ts`'s
+  chapter output only, explicitly excluding the other ~9
+  `ASSESSMENT_PASS_THRESHOLD` call sites as a separate future candidate;
+  condition 4 flagged as approval-required); Phase 3 (a `cross_links`-
+  driven "Related Concepts" consumer, deliberately left undesigned
+  pending product intent).
+- Updated `ARCHITECTURE_DECISIONS.md` (new Finding 7 + Part 4 update
+  note), `ENGINE_REFERENCE.md` (§2 correction, §4 open-finding note),
+  `PROJECT_STATE.md` (new §4b + phase-status row + constraints update),
+  and `CLAUDE.md` (new Educational Brain bullet) to cross-reference ADR 05
+  and record the priority pivot.
+
+---
+
 ## ADR 04 — Next-Best-Action retirement proposal (documentation only, NOT executed)
 
 Operating under the new "Chief Educational Brain Architect — STRICT MODE"

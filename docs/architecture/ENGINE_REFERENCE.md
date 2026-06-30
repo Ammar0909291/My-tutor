@@ -83,9 +83,19 @@ invoked as `npx tsx scripts/validate-knowledge-graph.ts [path]`.
 
 **Expected behavior:** `requires`/`unlocks` edges must resolve unless
 prefixed as cross-subject "aspirational" links (`math.phys.`, `math.cs.`,
-`math.eng.`); `cross_links` are always inter-graph by design and never
-fail/warn; `domain`/`concept_type` absence is informational only (both are
-adapter-derived, not authoring requirements).
+`math.eng.`); `cross_links` never fail/warn regardless of target; `domain`/
+`concept_type` absence is informational only (both are adapter-derived,
+not authoring requirements).
+
+> **Correction (2026-06-30, ADR 05):** this entry previously claimed
+> `cross_links` "are always inter-graph by design." Direct inspection of
+> `docs/mathematics/kg/graph.json` (363 `cross_links` edges, the only
+> subject with non-trivial usage) found **100% are intra-subject**
+> (`math.*` → `math.*`); zero true cross-subject links exist anywhere in
+> the corpus today. The validator does not enforce inter-graph-ness — it
+> never did. The field is real and authored (36% of mathematics concepts
+> carry at least one), it just isn't used the way this doc described. See
+> `ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md` §2.
 
 **Failure behavior:** Exits non-zero on any FAIL-severity check; missing
 file throws a Node fs error.
@@ -184,6 +194,21 @@ boundary (see `ARCHITECTURE_DECISIONS.md` rule list).
 
 **MUST NOT:** Require new adapter code per subject. Must not write to
 `graph.json`.
+
+> **Open finding (2026-06-30, ADR 05 — proposed, not implemented):**
+> `RawKGConcept` (this file's internal parsed shape) already types two
+> more of the canonical 10 authored fields — `cross_links: string[]` and
+> `mastery_threshold: number` — but neither `getNodes()` nor
+> `getConceptNode()` exposes them; both are silently dropped between
+> parse and output. `mastery_threshold` varies meaningfully in
+> mathematics (12 distinct values, 0.35–0.95 across 908 concepts) and is
+> entirely unused at runtime — every downstream engine instead reads the
+> single flat `ASSESSMENT_PASS_THRESHOLD = 70` constant. ADR 05 proposes
+> (Phase 1, not yet executed) two new additive accessors —
+> `getConceptMasteryThreshold(id)`, `getCrossLinkedConceptIds(id)` — on
+> `SubjectAdapter`, without modifying `getNodes()`/`getConceptNode()` or
+> any frozen type (`ConceptNode`, `KnowledgeNode`). See
+> `ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`.
 
 ---
 

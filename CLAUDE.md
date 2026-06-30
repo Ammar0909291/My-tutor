@@ -68,9 +68,23 @@
   is itself a confirmed-orphaned, unrendered component — the live `/dashboard` route renders
   `DashboardV2` instead, which sources recommendations via `learningOrchestrator.ts`). The file's
   fourth export, `getChapterNextStep()`, remains genuinely live (`route.ts`, the chapter workspace
-  page) and must not be touched. A surgical-removal **proposal** (not executed — requires explicit
-  user approval under STRICT MODE) is written up in
-  `docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`.
+  page) and must not be touched. A surgical-removal **proposal** (not executed, and per explicit
+  user instruction will **stay unexecuted indefinitely** — documentation-only is the final state)
+  is written up in `docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`.
+- **Priority pivot (2026-06-30):** dead-code/duplication auditing (the ADR 03/04 pattern) is
+  deprioritized. Current priority is forward-looking Educational Brain system design: Knowledge
+  Graph consumption, Teaching Action Intelligence, Student Memory evolution, Dynamic Lesson
+  Composition, Evidence Engine, Recommendation Intelligence, Mastery Engine, Visualization
+  selection, Simulation architecture, Assessment architecture, Beginner→Intermediate→Expert
+  progression, entrance examination framework, curriculum mapping architecture, AI independence
+  strategy, long-term scalability. Don't propose/execute further cleanup unless it blocks one of
+  these. First finding under this pivot: two of the canonical KG's 10 authored fields
+  (`cross_links`, `mastery_threshold`) are parsed by `subjectKgAdapter.ts` but never exposed past
+  it — neither `ConceptNode` nor `KnowledgeNode` carries them, and `mastery_threshold` (which
+  varies 0.35–0.95 across mathematics's 908 concepts) has zero runtime effect because every
+  scoring engine reads the flat `ASSESSMENT_PASS_THRESHOLD = 70` constant instead. 3-phase
+  resolution **proposed, not executed** in
+  `docs/architecture/ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the
