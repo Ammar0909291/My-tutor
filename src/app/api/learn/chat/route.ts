@@ -1183,6 +1183,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ? ' — reduce scaffolding, move faster'
                 : ' — direct instruction'
           systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
+
+          // Phase 2F (Teaching Action Intelligence): advisory only — does NOT
+          // override decide()'s action_type (the frozen Teaching Engine has no
+          // input slot for review-due topics). Surfaces snapshot.dueForReview
+          // (computed in Phase 2D, previously unused by any consumer) as a
+          // secondary instruction the tutor can fold in opportunistically.
+          const reviewDue = snapshot.dueForReview.filter((slug) => slug !== conceptNode.id).slice(0, 3)
+          if (reviewDue.length > 0) {
+            systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
+          }
         }
       }
     } catch (err) {
