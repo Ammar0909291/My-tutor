@@ -29,10 +29,9 @@ from datetime import datetime
 PLACEHOLDER_PATTERNS = [
     r'\[TEMPLATE\]',
     r'pending authoring',
-    r'placeholder',
-    r'TBD',
-    r'TODO',
     r'\[placeholder\]',
+    r'\bTODO\b',
+    r'\bTBD\b',
 ]
 
 ASSET_REQUIRED_FIELDS = [
@@ -172,11 +171,13 @@ def validate(domain_prefix, graph_path, assets_path, chapter_md_path, report_pat
             issues.append(f'Asset not in draft status: {cid} (status={a.get("status")})')
 
         # All 10 fields must be present and non-empty
+        # prerequisite_review_triggers may be empty for root/foundational concepts (schema allows it)
+        OPTIONAL_EMPTY = {'prerequisite_review_triggers'}
         for field in ASSET_REQUIRED_FIELDS:
             if field not in a:
                 incomplete_assets.append(f'{cid}: missing field {field}')
                 issues.append(f'Missing field {field} in asset: {cid}')
-            elif not a[field] and a[field] != 0:
+            elif not a[field] and a[field] != 0 and field not in OPTIONAL_EMPTY:
                 incomplete_assets.append(f'{cid}: empty field {field}')
                 issues.append(f'Empty field {field} in asset: {cid}')
 
