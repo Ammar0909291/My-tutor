@@ -290,20 +290,48 @@ If it says FAIL, stop immediately and report "COMMIT_BLOCKED: validation failed"
 
 ## If validation passed — execute in order
 
-### Step 1: Generate domain summary
+### Step 1: Stamp provenance on domain assets
+  KG_COMMIT=$(git -C ${REPO} log --oneline -- docs/mathematics/kg/graph.json | head -1 | cut -d' ' -f1)
+  VALIDATION_COMMIT=$(git -C ${REPO} log --oneline -1 | cut -d' ' -f1)
+  # Use the merge commit for math.found and math.arith retroactively; for new domains use the authoring run
+  GENERATION_COMMIT=$VALIDATION_COMMIT
+  python3 ${PIPELINE_SCRIPTS}/stamp-asset-provenance.py \\
+    ${domainPrefix} ${GRAPH} ${ASSETS} \\
+    $GENERATION_COMMIT $VALIDATION_COMMIT $KG_COMMIT \\
+    --generator-version pipeline-v2 --validation-version 1.1.0
+
+### Step 2: Generate domain manifest (checksums computed after provenance stamp)
+  python3 ${PIPELINE_SCRIPTS}/generate-domain-manifest.py \\
+    ${domainPrefix} ${GRAPH} ${ASSETS} ${chapterMd} ${validationReport} \\
+    $GENERATION_COMMIT $VALIDATION_COMMIT $KG_COMMIT \\
+    pipeline-v2 ${validationReport.replace('validation-report', 'manifest').replace('.md', '.json')}
+
+### Step 3: Generate domain summary
   python3 ${PIPELINE_SCRIPTS}/generate-domain-summary.py ${domainPrefix} ${GRAPH} ${ASSETS} pending ${domainSummary}
 
-### Step 2: Update CURRICULUM_PROGRESS.md from repo state
+### Step 4: Update MATHEMATICS_MANIFEST.json
+  python3 ${PIPELINE_SCRIPTS}/generate-mathematics-manifest.py \\
+    ${GRAPH} ${ASSETS} ${CHAPTERS_DIR} \\
+    ${REPO}/docs/mathematics/domains pending \\
+    ${REPO}/docs/mathematics/MATHEMATICS_MANIFEST.json
+
+### Step 5: Update CANONICAL_CURRICULUM_MANIFEST.json
+  python3 ${PIPELINE_SCRIPTS}/generate-canonical-manifest.py \\
+    ${REPO} pending ${REPO}/docs/CANONICAL_CURRICULUM_MANIFEST.json
+
+### Step 6: Update CURRICULUM_PROGRESS.md from repo state
   python3 ${PIPELINE_SCRIPTS}/update-curriculum-progress.py ${GRAPH} ${ASSETS} ${CHAPTERS_DIR} pending ${progressFile}
 
-### Step 3: Stage all changed files
+### Step 7: Stage all changed files
   git -C ${REPO} add docs/mathematics/teaching-assets/assets.json
   git -C ${REPO} add docs/mathematics/chapters/${domainPrefix.split('.').slice(-1)[0]}.md
   git -C ${REPO} add docs/mathematics/domains/
+  git -C ${REPO} add docs/mathematics/MATHEMATICS_MANIFEST.json
+  git -C ${REPO} add docs/CANONICAL_CURRICULUM_MANIFEST.json
   git -C ${REPO} add docs/mathematics/CURRICULUM_PROGRESS.md
   git -C ${REPO} status
 
-### Step 4: Commit
+### Step 8: Commit
   git -C ${REPO} commit -m "feat(curriculum): Author Mathematics ${domainName} domain (${domainPrefix}, ${conceptCount} concepts)
 
 Completes teaching-asset authoring and chapter markdown assembly for the
@@ -318,28 +346,47 @@ Validation: PASS
 Pipeline production rules v2 enforced:
 - Idempotent chunk authoring (skip-completed-chunks)
 - Pre-commit domain validation (validate-domain-assets.py)
+- Asset provenance stamped (stamp-asset-provenance.py)
+- Domain manifest with SHA-256 checksums (generate-domain-manifest.py)
+- MATHEMATICS_MANIFEST.json updated (generate-mathematics-manifest.py)
+- CANONICAL_CURRICULUM_MANIFEST.json updated (generate-canonical-manifest.py)
 - Auto-updated CURRICULUM_PROGRESS.md from repo state
-- DOMAIN_VALIDATION_REPORT.md generated
-- DOMAIN_SUMMARY.md generated
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_014uZZkmNU25z98rsp8C4rTx"
 
-### Step 5: Get commit hash and update summary + progress files
+### Step 9: Get commit hash and finalize all manifests with real hash
   HASH=$(git -C ${REPO} log --oneline -1 | cut -d' ' -f1)
   echo "Commit hash: $HASH"
+  python3 ${PIPELINE_SCRIPTS}/generate-domain-manifest.py \\
+    ${domainPrefix} ${GRAPH} ${ASSETS} ${chapterMd} ${validationReport} \\
+    $HASH $HASH $KG_COMMIT \\
+    pipeline-v2 ${validationReport.replace('validation-report', 'manifest').replace('.md', '.json')}
   python3 ${PIPELINE_SCRIPTS}/generate-domain-summary.py ${domainPrefix} ${GRAPH} ${ASSETS} $HASH ${domainSummary}
+  python3 ${PIPELINE_SCRIPTS}/generate-mathematics-manifest.py \\
+    ${GRAPH} ${ASSETS} ${CHAPTERS_DIR} \\
+    ${REPO}/docs/mathematics/domains $HASH \\
+    ${REPO}/docs/mathematics/MATHEMATICS_MANIFEST.json
+  python3 ${PIPELINE_SCRIPTS}/generate-canonical-manifest.py \\
+    ${REPO} $HASH ${REPO}/docs/CANONICAL_CURRICULUM_MANIFEST.json
   python3 ${PIPELINE_SCRIPTS}/update-curriculum-progress.py ${GRAPH} ${ASSETS} ${CHAPTERS_DIR} $HASH ${progressFile}
-  git -C ${REPO} add docs/mathematics/domains/${domainPrefix}-summary.md docs/mathematics/CURRICULUM_PROGRESS.md
-  git -C ${REPO} commit -m "chore(curriculum): update progress files for ${domainPrefix} domain
+  git -C ${REPO} add \\
+    docs/mathematics/domains/ \\
+    docs/mathematics/MATHEMATICS_MANIFEST.json \\
+    docs/CANONICAL_CURRICULUM_MANIFEST.json \\
+    docs/mathematics/CURRICULUM_PROGRESS.md
+  git -C ${REPO} commit -m "chore(curriculum): finalize manifests and progress for ${domainPrefix}
 
-Updates CURRICULUM_PROGRESS.md and DOMAIN_SUMMARY.md with commit hash
-and final status after successful ${domainName} domain commit.
+Stamps final commit hash into domain manifest, MATHEMATICS_MANIFEST.json,
+CANONICAL_CURRICULUM_MANIFEST.json, and CURRICULUM_PROGRESS.md.
+
+Checksums in domain manifest reflect committed state (post-provenance-stamp).
+Run verify-curriculum-integrity.py to confirm all checksums pass.
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_014uZZkmNU25z98rsp8C4rTx"
 
-### Step 6: Push
+### Step 10: Push
   git -C ${REPO} push -u origin claude/my-tutor-foundation-KDSUO
 
 ### Step 7: Report

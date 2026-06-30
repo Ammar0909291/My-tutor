@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "arithmetic",
+  "domain_prefix": "math.arith",
+  "domain_name": "Arithmetic",
+  "subject": "mathematics",
+  "concept_count": 58,
+  "asset_count": 58,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-06-30",
+    "validation_commit": "1c354a3"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:d321137b015b0fb6f1da19a6c78ed85accfb7b39045cfb90a8a43c808f07cd73",
+    "domain_assets_sha256": "sha256:922f3dec1c92a43d90be4cf94da678fb589a231478a7e79421fb24e5728756c9",
+    "graph_domain_sha256": "sha256:f9ae419b09efd58248fd497e7defa29b21f9cfadd73e91f9515436eeffbf834b",
+    "validation_report_sha256": "sha256:6fdbdd7c760dea5acf301b488717d8f5775defb82ffba307c83a3a997b311a54"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/arith.md",
+    "docs/mathematics/domains/math.arith-validation-report.md",
+    "docs/mathematics/domains/math.arith-summary.md",
+    "docs/mathematics/domains/math.arith-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "203222c",
+  "created_at": "2026-06-30T22:13:58Z"
+}

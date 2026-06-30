@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "foundations",
+  "domain_prefix": "math.found",
+  "domain_name": "Mathematical Foundations",
+  "subject": "mathematics",
+  "concept_count": 82,
+  "asset_count": 82,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-06-30",
+    "validation_commit": "1c354a3"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:eb599529250f6b7f903b63e7044a60b91bd221f26fb643a458fe9f078c95c54b",
+    "domain_assets_sha256": "sha256:d1c23efb1bede934fe6fa8fa969731e08a054734c9ebd71d4105c54eddfcdf58",
+    "graph_domain_sha256": "sha256:c57f4c78b867a78876561f953878d72b2cc882f01cf72afdd65f80ec604774f7",
+    "validation_report_sha256": "sha256:adba5dfa20c7e6f1d4a71747e96f929243245af3f9e7557a73aa4e313bb42317"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/found.md",
+    "docs/mathematics/domains/math.found-validation-report.md",
+    "docs/mathematics/domains/math.found-summary.md",
+    "docs/mathematics/domains/math.found-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "710a5d3",
+  "created_at": "2026-06-30T22:13:58Z"
+}

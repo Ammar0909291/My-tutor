@@ -1,0 +1,153 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "canonical-curriculum",
+  "campaign": "My Tutor — Canonical Curriculum",
+  "campaign_version": "1.0.0-draft",
+  "objective": "Canonical Knowledge Graph → Canonical Teaching Assets → Canonical Subject Freeze (v1.0) → Curriculum Views (CBSE, ICSE, IB, Cambridge, University) → Educational Brain intelligence layers",
+  "campaign_totals": {
+    "subjects_total": 5,
+    "subjects_complete": 0,
+    "subjects_in_progress": 1,
+    "subjects_not_started": 4,
+    "total_concepts_all_subjects": 1496,
+    "total_drafted_assets": 140,
+    "overall_completion_pct": 9.4
+  },
+  "subjects": [
+    {
+      "subject_id": "mathematics",
+      "subject_dir": "/home/user/My-tutor/docs/mathematics",
+      "status": "in-progress",
+      "kg": {
+        "version": "1.0.1",
+        "status": "frozen",
+        "build_date": "2026-06-29",
+        "concept_count": 908,
+        "domain_count": 24,
+        "file": "/home/user/My-tutor/docs/mathematics/kg/graph.json",
+        "sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870"
+      },
+      "teaching_assets": {
+        "completed_domains": 2,
+        "total_domains": 24,
+        "drafted_assets": 140,
+        "total_concepts": 908,
+        "completion_pct": 15.4
+      },
+      "subject_manifest": {
+        "file": "/home/user/My-tutor/docs/mathematics/MATHEMATICS_MANIFEST.json",
+        "sha256": "sha256:c7de0023b748a69a7b46279f451c1ff558cb0acfb87ccdadbb2ad9f4d0099f88"
+      }
+    },
+    {
+      "subject_id": "physics",
+      "subject_dir": "/home/user/My-tutor/docs/physics",
+      "status": "kg-only",
+      "kg": {
+        "version": "1.0.0",
+        "status": "production",
+        "build_date": "2026-06-29",
+        "concept_count": 194,
+        "domain_count": 11,
+        "file": "/home/user/My-tutor/docs/physics/kg/graph.json",
+        "sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f"
+      },
+      "teaching_assets": {
+        "completed_domains": 0,
+        "total_domains": 11,
+        "drafted_assets": 0,
+        "total_concepts": 194,
+        "completion_pct": 0.0
+      },
+      "subject_manifest": {
+        "file": null,
+        "sha256": null
+      }
+    },
+    {
+      "subject_id": "chemistry",
+      "subject_dir": "/home/user/My-tutor/docs/chemistry",
+      "status": "kg-only",
+      "kg": {
+        "version": "1.0.0",
+        "status": "production",
+        "build_date": "2026-06-29",
+        "concept_count": 186,
+        "domain_count": 0,
+        "file": "/home/user/My-tutor/docs/chemistry/kg/graph.json",
+        "sha256": "sha256:fbf8263377b103c029efa6693b72972f1095ab5b897566f0a257b376e0bc0188"
+      },
+      "teaching_assets": {
+        "completed_domains": 0,
+        "total_domains": 0,
+        "drafted_assets": 0,
+        "total_concepts": 186,
+        "completion_pct": 0.0
+      },
+      "subject_manifest": {
+        "file": null,
+        "sha256": null
+      }
+    },
+    {
+      "subject_id": "biology",
+      "subject_dir": "/home/user/My-tutor/docs/biology",
+      "status": "kg-only",
+      "kg": {
+        "version": "1.0.0",
+        "status": "production",
+        "build_date": "2026-06-29",
+        "concept_count": 89,
+        "domain_count": 0,
+        "file": "/home/user/My-tutor/docs/biology/kg/graph.json",
+        "sha256": "sha256:570be188cedd6db21fdc0890526ce908eaafc75670f9f6dcc878cc6b75bb541a"
+      },
+      "teaching_assets": {
+        "completed_domains": 0,
+        "total_domains": 0,
+        "drafted_assets": 0,
+        "total_concepts": 89,
+        "completion_pct": 0.0
+      },
+      "subject_manifest": {
+        "file": null,
+        "sha256": null
+      }
+    },
+    {
+      "subject_id": "computer_science",
+      "subject_dir": "/home/user/My-tutor/docs/computer-science",
+      "status": "kg-only",
+      "kg": {
+        "version": "1.0.0",
+        "status": "production",
+        "build_date": "2026-06-29",
+        "concept_count": 119,
+        "domain_count": 0,
+        "file": "/home/user/My-tutor/docs/computer-science/kg/graph.json",
+        "sha256": "sha256:4ce12b49f0d39987a2fb0a667dd15d6876f9cc54ec8efb01a1d966587cd19db4"
+      },
+      "teaching_assets": {
+        "completed_domains": 0,
+        "total_domains": 0,
+        "drafted_assets": 0,
+        "total_concepts": 119,
+        "completion_pct": 0.0
+      },
+      "subject_manifest": {
+        "file": null,
+        "sha256": null
+      }
+    }
+  ],
+  "dependency_versions": {
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0",
+    "provenance_version": "1.0.0",
+    "manifest_spec_version": "1.0"
+  },
+  "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
+  "last_commit": "1c354a3",
+  "last_updated": "2026-06-30T22:14:05Z"
+}
