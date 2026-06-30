@@ -1128,41 +1128,51 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       console.warn('[learn/chat] learner intelligence profile skipped:', err)
     }
 
-    // Teaching Engine (A3): call decide() for KG-backed subjects when a current
-    // concept ID is known. Pure function — zero extra DB calls, zero AI calls.
+    // Teaching Engine (A3 + Phase 2C): call decide() with real learner memory.
+    // readLearnerMemoryFromPreload() reuses the already-fetched parallel query
+    // data (topicProgress, learningProfile, subjectAnalytics) and only fetches
+    // the supplemental data (recentMistakes, retentionMetrics, session count).
     try {
       if (snapshotCurrentConceptId) {
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(snapshotCurrentConceptId)
         if (conceptNode) {
-          const masteredSlugs = topicProgressRowsShared
-            .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED')
-            .map((r) => r.topicSlug)
-          const weakSlugs = topicProgressRowsShared
-            .filter((r) => r.masteryPct > 0 && r.masteryPct < 70)
-            .map((r) => r.topicSlug)
-          const inProgressSlug = topicProgressRowsShared.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
-
-          const lp = learningProfileShared as { learningPace?: string; confidenceLevel?: number } | null
-          const learningSpeed: 'slow' | 'normal' | 'fast' =
-            lp?.learningPace === 'FAST' ? 'fast' : lp?.learningPace === 'SLOW' ? 'slow' : 'normal'
-
+          const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
+          const memory = await readLearnerMemoryFromPreload(
+            userId,
+            subjectCode,
+            learnSession.subjectId,
+            {
+              topicProgress: topicProgressRowsShared as Array<{
+                topicSlug: string; status: string; masteryPct: number
+                attempts: number; lastScore: number | null; updatedAt: Date
+              }>,
+              learningProfile: learningProfileShared as {
+                confidenceLevel?: number; learningPace?: string; preferredLearningStyle?: string
+              } | null,
+              subjectAnalytics: subjectAnalyticsShared as {
+                trend?: string; weakTopics?: string[]; strongTopics?: string[]; progressPercent?: number
+              } | null,
+            },
+            { sessionId: learnSession.id },
+          )
+          const snapshot = toTeachingSnapshot(memory)
           const decision = decide(
             {
-              level: 'T1',
-              current_concepts_mastered: masteredSlugs,
-              weak_concepts: weakSlugs,
-              misconceptions: [],
-              retention_score: lp?.confidenceLevel ?? 70,
-              learning_speed: learningSpeed,
-              fatigue_level: 'low',
+              level: snapshot.trackLevel,
+              current_concepts_mastered: snapshot.masteredConcepts,
+              weak_concepts: snapshot.weakConcepts,
+              misconceptions: snapshot.misconceptions,
+              retention_score: snapshot.retentionScore,
+              learning_speed: snapshot.learningSpeed,
+              fatigue_level: snapshot.fatigueLevel,
             },
             conceptNode,
             {
-              recently_attempted: inProgressSlug ? [inProgressSlug] : [],
-              success_rate: (subjectAnalyticsShared as { trend?: string } | null)?.trend === 'IMPROVING' ? 80 : 65,
-              time_on_task: 0,
-              error_patterns: (subjectAnalyticsShared as { weakTopics?: string[] } | null)?.weakTopics ?? [],
+              recently_attempted: snapshot.recentlyAttempted,
+              success_rate: snapshot.successRate,
+              time_on_task: snapshot.timeOnTask,
+              error_patterns: snapshot.errorPatterns,
             },
           )
           const modeNote = decision.mode === 'remediate'
