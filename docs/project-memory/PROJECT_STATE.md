@@ -37,6 +37,7 @@ CHANGELOG going forward.
 | KG Consumption Pipeline contract (`ADR_06_KG_CONSUMPTION_PIPELINE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #1 of the user's 8-item forward-architecture roadmap. Specifies the version/status/shape gate that must sit between the Curriculum Pipeline's output and the Educational Brain's adapter — found zero such gate exists today (no version check, no status check, no runtime shape validation, no CI wiring). Implementation blocked on the same two conditions as ADR 05 Phase 1. See §4c below. |
 | Mastery Intelligence Architecture (`ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #2 of the roadmap. Found five non-unified mastery/progression representations (`MasteryLevel`, `TopicProgress.masteryPct`, `EbLearnerConceptMastery`, `TrackLevel`, `LevelBand`) with no reconciliation. Designates `MasteryLevel` (`masteryIntelligence.ts`) as canonical; proposes (not implemented) extending it to Library Mode, consolidating `learningProfile.ts`'s duplicate classification onto it, and a cross-vocabulary mapping table. Implementation blocked on the same two conditions as ADR 05/06. See §4d below. |
 | Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — items 1-2 of 8 done (ADR 06, ADR 07).** Items 3-8 (Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
+| Educational Brain Bible (`docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md`) | **Established this session.** Single living master document, updated by every ADR going forward. See §4e below. |
 
 ---
 
@@ -405,6 +406,49 @@ marked done).
 blocked on the same two conditions as ADR 05/06: Curriculum Production
 Pipeline declares Canonical Knowledge Graph v1 frozen, AND explicit user
 approval. Next roadmap item: **#3 — Teaching Action Intelligence.**
+
+---
+
+## 4e. Educational Brain Bible established (this session, documentation only)
+
+Per the refined Chief Educational Brain Architect directive (2026-06-30,
+same-day refinement of the 2026-06-30 mode established for ADR 06/07),
+the user introduced a binding requirement to maintain ONE living master
+document — the **Educational Brain Bible** — as the single source of
+truth, updated by every ADR from this point forward, plus an upgraded
+14-section ADR template (renames "Chosen architecture" to "Selected
+design", adds a new "Relationship to the Teaching Engine" section) and a
+standing design test for every ADR: *"How does this make the Educational
+Brain think and teach more like a world-class human teacher?"*
+
+**Created:** `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` — consolidates
+`EDUCATIONAL_BRAIN_V1.md` + companions into one top-level synthesis:
+complete engine map (35 engines, status-tagged LIVE/DORMANT/PROPOSED/
+ORPHANED), engine responsibilities by tier, a component interaction
+diagram, the twelve required flows (data, decision, student learning,
+knowledge, memory, evidence, recommendation, visualization, AI
+interaction, plus scalability/versioning/validation strategy as
+cross-cutting sections), an 11-item risk register, an architecture
+glossary, and an ADR index (ADR 02-07 status, ADR 08-13 roadmap slots).
+Indexes rather than duplicates the detail docs' full content, consistent
+with "ignore refactoring/low-impact work unless it blocks the
+architecture" — re-deriving 80KB+ of existing engine/flow detail into one
+file would itself be exactly that kind of low-impact churn.
+
+**Cross-references updated:** `CLAUDE.md` — "Authoritative reference"
+line now points to the Bible first; the Chief Architect mode bullet
+updated with the 14-section template, the Bible-update-on-every-ADR
+governance rule, the superseded-ADR-marking rule, and the world-class-
+teacher design test.
+
+**No conflicts found** between the new directive and any existing ADR,
+Permanent Rule, or Finding — this is a process/documentation-structure
+refinement, not new evidence against prior architecture. ADRs 02-07
+remain valid; none are superseded by the template upgrade alone (Bible
+§9 records this explicitly so it isn't read as a silent inconsistency).
+
+**Status:** documentation only, zero code changes. Next: ADR 08 —
+Teaching Action Intelligence (roadmap item 3/8).
 
 ---
 

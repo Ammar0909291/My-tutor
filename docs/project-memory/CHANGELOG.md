@@ -4,6 +4,42 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## Educational Brain Bible established (documentation only, no code changed)
+
+Refined Chief Educational Brain Architect directive, same day as the
+ADR 06/07 mode. New binding requirements: maintain ONE living master
+document (the Educational Brain Bible), updated by every ADR going
+forward; upgrade the ADR template to 14 sections (`Chosen architecture`
+renamed `Selected design`, new `Relationship to the Teaching Engine`
+section); every ADR must answer "how does this make the Educational
+Brain think and teach more like a world-class human teacher?"
+
+- **Created** `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` — the new
+  top-level single source of truth: complete 35-engine map (status-tagged
+  LIVE/DORMANT/PROPOSED/ORPHANED), engine responsibilities by tier, a
+  component interaction diagram, all twelve required flows (data,
+  decision, student learning, knowledge, memory, evidence, recommendation,
+  visualization, AI interaction, scalability strategy, versioning
+  strategy, validation strategy), an 11-item risk register, an
+  architecture glossary, and an ADR index. Indexes the existing detail
+  docs (`ENGINE_REFERENCE.md`, `DATA_FLOW.md`, `DEPENDENCY_RULES.md`,
+  `EXTENSION_GUIDE.md`, `ARCHITECTURE_DECISIONS.md`,
+  `EDUCATIONAL_BRAIN_V1.md`) rather than duplicating their content.
+- **Updated** `CLAUDE.md` — authoritative-reference line now points to
+  the Bible first; Chief Architect mode bullet rewritten with the
+  14-section template, the per-ADR Bible-update requirement, the
+  superseded-ADR-marking rule, and the world-class-teacher design test.
+- **Updated** `docs/project-memory/PROJECT_STATE.md` — new §4e, plus a
+  §1 status-table row for the Bible.
+- **No conflicts found** against any prior ADR, Permanent Rule, or
+  Finding — process/structure refinement only. ADRs 02-07 remain valid;
+  the template change does not supersede them (recorded explicitly in
+  Bible §9 so it can't be misread as a silent inconsistency later).
+- **No production code changed. No implementation requested or
+  performed.** Next: ADR 08 — Teaching Action Intelligence (roadmap 3/8).
+
+---
+
 ## ADR 07 — Mastery Intelligence Architecture (specification only, NOT implemented)
 
 Roadmap item 2 of 8. Before drafting, re-read every prior ADR and all six
