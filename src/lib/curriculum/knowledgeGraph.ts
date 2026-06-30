@@ -283,10 +283,6 @@ function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
 
   // Legacy 54-node KGs — fallback for subjects not yet on canonical KGs
   switch (subjectSlug) {
-    case 'biology':
-      return (SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]).filter((n) =>
-        n.domain.startsWith('biology')
-      )
     case 'english':
       return ENGLISH_KNOWLEDGE_GRAPH as KnowledgeNode[]
 

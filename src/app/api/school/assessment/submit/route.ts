@@ -141,6 +141,23 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  // Phase 2B: fire-and-forget memory update for all chapter KG nodes
+  Promise.resolve().then(async () => {
+    if (!chapter.kgNodeIds.length) return
+    const subject = await prisma.subject.findUnique({ where: { slug: ps.subjectSlug }, select: { id: true } })
+    if (!subject) return
+    const { updateMemoryFromAssessment } = await import('@/lib/memory/update-pipeline')
+    await updateMemoryFromAssessment(
+      session.user.id,
+      subject.id,
+      chapter.kgNodeIds.map((nodeId) => ({
+        topicSlug: nodeId,
+        masteryPct: result.accuracyPercent,
+        passed: result.passed,
+      })),
+    )
+  }).catch(() => {})
+
   // Sprint CD: fire-and-forget achievement check after assessment
   Promise.resolve().then(async () => {
     const { updateStudyStreak } = await import('@/lib/school/achievements/streakEngine')

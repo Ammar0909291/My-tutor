@@ -75,8 +75,6 @@ export async function POST(req: Request) {
       ...(parsed.subjectSlug ? [parsed.subjectSlug] : []),
     ]))
 
-    // JWT sessions outlive DB records. If the session userId doesn't exist in the DB
-    // but the email does (different row), resolve to the existing user's id.
     let effectiveUserId = userId
     try {
       await prisma.user.upsert({
@@ -90,16 +88,12 @@ export async function POST(req: Request) {
       })
     } catch (upsertErr: unknown) {
       if (isEmailUniqueConflict(upsertErr)) {
-        // Email already belongs to a different DB row — find that user and use their id
-        const byEmail = session.user.email
-          ? await prisma.user.findUnique({ where: { email: session.user.email } })
-          : null
-        if (!byEmail) throw upsertErr
-        console.warn('[onboarding] session userId mismatch — resolved to existing user')
-        effectiveUserId = byEmail.id
-      } else {
-        throw upsertErr
+        // JWT session userId is absent from DB but email belongs to another account.
+        // Do NOT silently merge — require the user to sign in again with a fresh session.
+        console.warn('[onboarding] session userId absent from DB — session stale, sign-in required')
+        return NextResponse.json({ success: false, error: 'Session expired. Please sign in again.' }, { status: 401 })
       }
+      throw upsertErr
     }
 
     // Find/create each selected subject — same resolution as /api/subjects/enroll so the
@@ -239,7 +233,7 @@ async function handleSchoolStudent(
     return NextResponse.json({ success: false, error: `Grade ${grade} is not offered by ${boardDef.shortName}` }, { status: 400 })
   }
 
-  // Same JWT-session/DB-row resolution as the general path.
+  // Same stale-JWT guard as the general path — reject instead of silently merging accounts.
   let effectiveUserId = userId
   try {
     await prisma.user.upsert({
@@ -253,15 +247,10 @@ async function handleSchoolStudent(
     })
   } catch (upsertErr: unknown) {
     if (isEmailUniqueConflict(upsertErr)) {
-      const byEmail = sessionUser.email
-        ? await prisma.user.findUnique({ where: { email: sessionUser.email } })
-        : null
-      if (!byEmail) throw upsertErr
-      console.warn('[onboarding] session userId mismatch — resolved to existing user')
-      effectiveUserId = byEmail.id
-    } else {
-      throw upsertErr
+      console.warn('[onboarding] session userId absent from DB — session stale, sign-in required')
+      return NextResponse.json({ success: false, error: 'Session expired. Please sign in again.' }, { status: 401 })
     }
+    throw upsertErr
   }
 
   const schoolFields = {

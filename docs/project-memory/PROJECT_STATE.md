@@ -31,6 +31,7 @@ CHANGELOG going forward.
 |-------|--------|
 | Phase 1 — Architecture (design docs 01-11 under `docs/educational-brain/`) | **Complete.** Verdict A recorded in doc 11 §13: "approve, start milestone 1." |
 | Phase 2 — Milestone 1: spine + asset catalogue for ONE subject (physics) | **In progress.** Steps 1-3 done (schema, Concept+Edge+Misconception backfill). Decision Pipeline stages 0-4 (Frame/Intent/Retrieval/Composition/Persist) implemented at 0724396. Route side-car wired. Steps 4+ (EbCurriculum/EbModule, pgvector, latency measurement) not yet started. |
+| Educational Brain v1.0 — Architecture Freeze (`docs/architecture/`) | **Complete.** Permanent reference for the whole canonical pipeline + 36-engine inventory frozen this session. Documentation only — zero code changes. See §5 below. |
 | Phase 3+ | Not started. Requires explicit approval before beginning, per standing instruction. |
 
 ---
@@ -141,6 +142,60 @@ exists yet — only schema + seed). The 2066 passing assertions cover the
 existing deterministic visualization / adaptive / progress logic. One stale
 test (`test-build-scenespec.ts`) was corrected this session to match the
 intentionally-narrowed `VECTOR_RE` in `buildSceneSpec.ts` — see CHANGELOG.
+
+---
+
+## 4a. Educational Brain v1.0 — Architecture Freeze (this session)
+
+Documentation-only freeze of the canonical (non-experimental) pipeline and
+every engine around it, per the standing instruction *"freeze the
+architecture into the permanent reference... do NOT redesign architecture."*
+Zero source files were modified.
+
+**Files created** (`docs/architecture/`):
+- `EDUCATIONAL_BRAIN_V1.md` — overview, system diagram, canonical pipeline,
+  36-row engine inventory table, DB-ownership summary.
+- `ENGINE_REFERENCE.md` — 36 numbered engine entries (responsibility,
+  inputs, outputs, public functions, failure behavior, guarantees,
+  deterministic/probabilistic, MUST NOT).
+- `DATA_FLOW.md` — full 65-step trace of `api/learn/chat/route.ts`, full
+  84-model DB-ownership breakdown, 4 flow diagrams (knowledge/teaching/
+  assessment/memory).
+- `DEPENDENCY_RULES.md` — per-engine may-read/must-NOT-call rules + a
+  summary matrix confirming no circular dependencies.
+- `EXTENSION_GUIDE.md` — 8 extension recipes (new subject, new intelligence
+  engine, new visual type, new assessment type, new teaching action type,
+  new memory signal, new recommendation signal, frozen-forever list).
+- `ARCHITECTURE_DECISIONS.md` — 15 permanent rules, the two-pipelines
+  rationale (canonical vs. experimental EB pipeline), 6 honest findings
+  (documented, not fixed — see below), validation results.
+
+**Honest findings recorded (none fixed, all flagged for a future
+separately-approved cleanup phase)**:
+1. `lessonPlanner.ts` and `lessonComposer.ts` both export a type/function
+   named `LessonPlan`/`buildLessonPlanBlock` — distinct, correctly-scoped
+   engines, no runtime collision, naming hazard only.
+2. `src/lib/curriculum/teachingActionEngine.ts` (`decideAction()`) is a
+   fully-built, Zod-validated, real-data-backed Teaching Action engine with
+   **zero callers** anywhere in `src/` — orphaned, overlaps TAG's job with
+   an incompatible 15-value vs 10-value `TeachingActionType`.
+3. "Curriculum Validator Brain" and "Knowledge Graph Validator" are the
+   same script (`scripts/validate-knowledge-graph.ts`), not two engines.
+4. Two Recommendation Intelligence generations coexist:
+   `nextBestAction.ts` (narrower, earlier) and `learningOrchestrator.ts`
+   (8-tier, primary aggregator). Neither deprecated.
+5. Two curriculum/concept-graph representations coexist: the file-based
+   canonical KG (`docs/{subject}/kg/graph.json`) and the DB-backed `Eb*`
+   model family (24 models, used only by the experimental pipeline). Not
+   synchronized, not unified.
+6. `prisma/schema.prisma`'s comment above `ReviewSchedule` claims no writer
+   exists — stale; `update-pipeline.ts` has been the writer since the
+   Student Memory write-path was built.
+
+**Validation: PASS** — no circular engine dependencies, every engine has
+one owner (two documented naming exceptions above), no undocumented
+public interfaces, no undocumented data flow, no functional/runtime
+conflicts.
 
 ---
 

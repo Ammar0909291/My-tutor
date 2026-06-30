@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/db/prisma'
-import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getGradeSubjects } from '@/lib/school/schoolRouting'
+import { chapterDisplayTitle, SCHOOL_SUBJECT_META, getGradeSubjects, getSchoolChapters } from '@/lib/school/schoolRouting'
 import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
 import { getRecommendedRevisionChapter } from './weakTopics'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
@@ -15,6 +15,8 @@ import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTyp
  *   3. continue_chapter — a subject with study history has an unfinished
  *      current chapter
  *   4. start_next_chapter — everything current is done; move forward
+ *   5. review_due — (Phase 2G) nothing above matched; surface the soonest
+ *      Memory Engine ReviewSchedule entry (Phase 2D) due within 7 days, if any
  */
 
 export type NextActionType =
@@ -22,6 +24,7 @@ export type NextActionType =
   | 'practice_weak'
   | 'continue_chapter'
   | 'start_next_chapter'
+  | 'review_due'
 
 export interface NextBestAction {
   type: NextActionType
@@ -121,6 +124,46 @@ export async function getNextBestAction(
     }
   }
 
+  // 5. Phase 2G (Recommendation Intelligence): nothing else pending — check
+  // whether the Memory Engine's ReviewSchedule (Phase 2D) has a topic due
+  // within 7 days. Best-effort: any failure here just falls through to null,
+  // and this tier can never preempt tiers 1-4, so it cannot change behavior
+  // for any user who currently receives a non-null recommendation.
+  try {
+    const subjects = await prisma.subject.findMany({
+      where: { slug: { in: slugs } },
+      select: { id: true, slug: true },
+    })
+    if (subjects.length > 0) {
+      const subjectIdToSlug = new Map(subjects.map((s) => [s.id, s.slug]))
+      const sevenDaysOut = new Date()
+      sevenDaysOut.setDate(sevenDaysOut.getDate() + 7)
+      const dueRows = await prisma.reviewSchedule.findMany({
+        where: { userId, subjectId: { in: subjects.map((s) => s.id) }, nextReviewAt: { lte: sevenDaysOut } },
+        orderBy: { nextReviewAt: 'asc' },
+        take: 10,
+        select: { subjectId: true, topic: true },
+      })
+      for (const row of dueRows) {
+        const slug = subjectIdToSlug.get(row.subjectId)
+        if (!slug) continue
+        const chapters = getSchoolChapters(board, slug, grade)
+        const chapter = chapters.find((c) => c.kgNodeIds.includes(row.topic))
+        if (!chapter) continue
+        return {
+          type: 'review_due',
+          subjectSlug: slug,
+          subjectLabel: label(slug),
+          chapterId: chapter.id,
+          title: chapterDisplayTitle(chapter.title),
+          reason: 'This topic is due for spaced-repetition review.',
+        }
+      }
+    }
+  } catch {
+    // best-effort enrichment only — fall through to null
+  }
+
   return null
 }
 
@@ -154,4 +197,5 @@ export const NEXT_ACTION_LABELS: Record<NextActionType, { heading: string; cta: 
   practice_weak:      { heading: 'Review', cta: 'Review Weak Areas' },
   continue_chapter:   { heading: 'Continue', cta: 'Continue' },
   start_next_chapter: { heading: 'Start', cta: 'Start Chapter' },
+  review_due:         { heading: 'Review', cta: 'Review Due Topic' },
 }

@@ -36,11 +36,14 @@ export async function POST(req: NextRequest) {
   const questions = ps.questions as unknown as PracticeQuestion[]
   const result = evaluatePracticeSession(sessionId, questions, answers as PracticeAnswer[])
 
-  // Persist score
-  await prisma.practiceSession.update({
-    where: { id: sessionId },
+  // Atomic completion — only the first concurrent submission wins. updateMany with
+  // completedAt: null is the atomic guard; a count of 0 means a concurrent request
+  // already committed, so MistakeRecord creation below is unreachable for the loser.
+  const updated = await prisma.practiceSession.updateMany({
+    where: { id: sessionId, completedAt: null },
     data: { completedAt: new Date(), score: result.accuracyPercent },
   })
+  if (updated.count === 0) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
   // Mastery integration — only for chapter practice sessions
   if (ps.chapterId) {
@@ -106,6 +109,30 @@ export async function POST(req: NextRequest) {
       ),
     )
   }
+
+  // Phase 2B: fire-and-forget memory update — re-fetches profile/subject inside block
+  // because `chapter` and `profile` are scoped to the mastery-integration block above.
+  Promise.resolve().then(async () => {
+    if (!ps.chapterId) return
+    const [subject, prof] = await Promise.all([
+      prisma.subject.findUnique({ where: { slug: ps.subjectSlug }, select: { id: true } }),
+      prisma.profile.findUnique({ where: { userId: session.user.id }, select: { educationBoard: true, grade: true } }),
+    ])
+    if (!subject || !prof?.educationBoard || !prof?.grade) return
+    const chapters = getSchoolChapters(prof.educationBoard, ps.subjectSlug, prof.grade)
+    const ch = chapters.find((c) => c.id === ps.chapterId)
+    if (!ch?.kgNodeIds.length) return
+    const { updateMemoryFromPractice } = await import('@/lib/memory/update-pipeline')
+    await updateMemoryFromPractice(
+      session.user.id,
+      subject.id,
+      ch.kgNodeIds.map((nodeId) => ({
+        topicSlug: nodeId,
+        masteryPct: result.accuracyPercent,
+        passed: result.masteryStatus === 'mastered',
+      })),
+    )
+  }).catch(() => {})
 
   return NextResponse.json(result)
 }

@@ -17,6 +17,7 @@ import { generateRoutedScene, isParametricSceneGenerationEnabled, routeSceneGene
 import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
+import { decide } from '@/lib/teaching-engine'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -445,6 +446,25 @@ export async function POST(req: Request) {
         systemPrompt += buildMasteryIntelligenceBlock(masteryProfile)
       } catch {
         // non-fatal — mastery context is purely additive
+      }
+
+      // Phase 2H: assessment intelligence — decide whether an assessment is
+      // appropriate right now, and of what kind. Advisory only: surfaces a
+      // recommendation in the system prompt; never blocks or rewrites any
+      // existing assessment flow.
+      try {
+        const { getAssessmentDecision, buildAssessmentIntelligenceBlock } = await import('@/lib/school/adaptive/assessmentIntelligence')
+        const { getSchoolChapters: _getChaptersForAssessment } = await import('@/lib/school/schoolRouting')
+        const fullChapterForAssessment = _getChaptersForAssessment(schoolCtx.board, subjectCode, schoolCtx.grade)
+          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+        if (fullChapterForAssessment) {
+          const assessmentDecision = await getAssessmentDecision(
+            userId, schoolCtx.board, schoolCtx.grade, subjectCode, learnSession.subjectId, fullChapterForAssessment,
+          )
+          systemPrompt += buildAssessmentIntelligenceBlock(assessmentDecision)
+        }
+      } catch {
+        // non-fatal — assessment intelligence context is purely additive
       }
 
       // Sprint CS: misconception alert — detect specific misunderstanding patterns.
@@ -1125,6 +1145,126 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }
     } catch (err) {
       console.warn('[learn/chat] learner intelligence profile skipped:', err)
+    }
+
+    // Teaching Engine (A3 + Phase 2C): call decide() with real learner memory.
+    // readLearnerMemoryFromPreload() reuses the already-fetched parallel query
+    // data (topicProgress, learningProfile, subjectAnalytics) and only fetches
+    // the supplemental data (recentMistakes, retentionMetrics, session count).
+    try {
+      if (snapshotCurrentConceptId) {
+        const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
+        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(snapshotCurrentConceptId)
+        if (conceptNode) {
+          const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
+          const memory = await readLearnerMemoryFromPreload(
+            userId,
+            subjectCode,
+            learnSession.subjectId,
+            {
+              topicProgress: topicProgressRowsShared as Array<{
+                topicSlug: string; status: string; masteryPct: number
+                attempts: number; lastScore: number | null; updatedAt: Date
+              }>,
+              learningProfile: learningProfileShared as {
+                confidenceLevel?: number; learningPace?: string; preferredLearningStyle?: string
+              } | null,
+              subjectAnalytics: subjectAnalyticsShared as {
+                trend?: string; weakTopics?: string[]; strongTopics?: string[]; progressPercent?: number
+              } | null,
+            },
+            { sessionId: learnSession.id },
+          )
+          const snapshot = toTeachingSnapshot(memory)
+          const decision = decide(
+            {
+              level: snapshot.trackLevel,
+              current_concepts_mastered: snapshot.masteredConcepts,
+              weak_concepts: snapshot.weakConcepts,
+              misconceptions: snapshot.misconceptions,
+              retention_score: snapshot.retentionScore,
+              learning_speed: snapshot.learningSpeed,
+              fatigue_level: snapshot.fatigueLevel,
+            },
+            conceptNode,
+            {
+              recently_attempted: snapshot.recentlyAttempted,
+              success_rate: snapshot.successRate,
+              time_on_task: snapshot.timeOnTask,
+              error_patterns: snapshot.errorPatterns,
+            },
+          )
+          const modeNote = decision.mode === 'remediate'
+            ? ' — address prerequisite gaps before new material'
+            : decision.mode === 'reinforce'
+              ? ' — strengthen retention via spaced practice'
+              : decision.mode === 'accelerate'
+                ? ' — reduce scaffolding, move faster'
+                : ' — direct instruction'
+          systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
+
+          // Phase 2F (Teaching Action Intelligence): advisory only — does NOT
+          // override decide()'s action_type (the frozen Teaching Engine has no
+          // input slot for review-due topics). Surfaces snapshot.dueForReview
+          // (computed in Phase 2D, previously unused by any consumer) as a
+          // secondary instruction the tutor can fold in opportunistically.
+          const reviewDue = snapshot.dueForReview.filter((slug) => slug !== conceptNode.id).slice(0, 3)
+          if (reviewDue.length > 0) {
+            systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
+          }
+
+          // Phase 3A: Teaching Action Generator — derive a structured
+          // description of HOW to teach this turn from the TeachingDecision
+          // and ConceptNode already computed above. Advisory only; never
+          // overrides decide()'s own action_type/mode/difficulty/time.
+          try {
+            const { getTeachingAction, buildTeachingActionBlock } = await import('@/lib/school/adaptive/teachingActionGenerator')
+            const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
+            const fullChapterForTAG = _getChaptersForTAG(schoolCtx!.board, subjectCode, schoolCtx!.grade)
+              .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+            if (fullChapterForTAG) {
+              const teachingAction = await getTeachingAction(decision, conceptNode, {
+                userId,
+                board: schoolCtx!.board,
+                grade: schoolCtx!.grade,
+                subjectId: learnSession.subjectId,
+                subjectSlug: subjectCode,
+                chapterTitle: schoolCtx!.displayTitle,
+                chapter: fullChapterForTAG,
+                weakConcepts: snapshot.weakConcepts,
+                misconceptions: snapshot.misconceptions,
+              })
+              systemPrompt += buildTeachingActionBlock(teachingAction)
+
+              // Phase 3B: Dynamic Lesson Composer — assemble a deterministic,
+              // multi-stage LessonPlan from the TeachingDecision, TeachingAction,
+              // ConceptNode, and Student Memory signals already computed above.
+              // Advisory only; generates no content and never overrides any of
+              // the decisions it reads from.
+              try {
+                const { getLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonComposer')
+                const lessonPlan = await getLessonPlan(decision, teachingAction, conceptNode, {
+                  userId,
+                  board: schoolCtx!.board,
+                  grade: schoolCtx!.grade,
+                  subjectId: learnSession.subjectId,
+                  subjectSlug: subjectCode,
+                  chapter: fullChapterForTAG,
+                  activeMisconceptions: snapshot.misconceptions,
+                  reviewDueConceptIds: reviewDue,
+                })
+                systemPrompt += buildLessonPlanBlock(lessonPlan)
+              } catch {
+                // non-fatal — lesson plan context is purely additive
+              }
+            }
+          } catch {
+            // non-fatal — teaching action context is purely additive
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[learn/chat] teaching engine skipped:', err)
     }
 
     // Messages arrive newest-first (capped query above) — restore chronological

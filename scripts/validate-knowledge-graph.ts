@@ -15,11 +15,16 @@
  *   8. Difficulty / Bloom value validity
  *   9. Numeric range sanity (mastery_threshold, estimated_hours)
  *
+ * Severity levels:
+ *   FAIL  — graph is invalid; blocks production use
+ *   WARN  — suspicious situation that may indicate a modeling mistake
+ *   INFO  — intentional design feature; purely informational; no status effect
+ *
  * Usage:
  *   npx tsx scripts/validate-knowledge-graph.ts [path/to/graph.json]
  *   (defaults to docs/mathematics/kg/graph.json)
  *
- * Exit codes: 0 = all checks pass, 1 = one or more checks failed/warned
+ * Exit codes: 0 = status is PASS or PASS_WITH_WARNINGS, 1 = status is FAIL
  */
 
 import fs from 'fs'
@@ -56,20 +61,21 @@ interface Graph {
 interface CheckResult {
   name: string
   status: 'PASS' | 'WARN' | 'FAIL'
-  details: string[]
-  count: number     // number of issues found (0 = clean)
+  details: string[]   // WARN and FAIL messages
+  info: string[]      // INFO messages — informational only, do not affect status or exit code
+  count: number
 }
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
-const REQUIRED_FIELDS: (keyof Concept)[] = [
+const REQUIRED_FIELDS: (keyof Concept & string)[] = [
   'id', 'name', 'domain', 'difficulty', 'bloom',
   'mastery_threshold', 'estimated_hours', 'description',
 ]
 
 // Fields required for the Teaching Engine (src/lib/teaching-engine/index.ts)
 // concept_type drives decideActionType(); its absence degrades to INTERACTIVE_QUESTIONING
-const TEACHING_ENGINE_FIELDS: (keyof Concept)[] = [
+const TEACHING_ENGINE_FIELDS: (keyof Concept & string)[] = [
   'requires', 'unlocks', 'difficulty', 'bloom', 'estimated_hours', 'concept_type',
 ]
 
@@ -92,13 +98,19 @@ function loadGraph(filePath: string): Graph {
 }
 
 function makeResult(name: string): CheckResult {
-  return { name, status: 'PASS', details: [], count: 0 }
+  return { name, status: 'PASS', details: [], info: [], count: 0 }
 }
 
+/** Record a WARN or FAIL condition. Degrades the check status accordingly. */
 function fail(r: CheckResult, msg: string, severity: 'WARN' | 'FAIL' = 'FAIL') {
   r.count++
   r.details.push(msg)
   if (severity === 'FAIL' || r.status !== 'FAIL') r.status = severity
+}
+
+/** Record an INFO annotation. Does NOT affect status or exit code. */
+function note(r: CheckResult, msg: string) {
+  r.info.push(msg)
 }
 
 // ── Check 1: Duplicate IDs ────────────────────────────────────────────────────
@@ -117,7 +129,8 @@ function checkDuplicateIds(concepts: Concept[]): CheckResult {
 
 // ── Check 2: Broken edge references ──────────────────────────────────────────
 
-// Known aspirational targets (future graph extensions — not bugs)
+// Aspirational requires/unlocks that reference future namespaces not yet in this graph.
+// cross_links are always inter-graph by design and are handled separately below.
 const ASPIRATIONAL_PREFIXES = ['math.phys.', 'math.cs.', 'math.eng.']
 function isAspirational(id: string): boolean {
   return ASPIRATIONAL_PREFIXES.some(p => id.startsWith(p))
@@ -126,19 +139,44 @@ function isAspirational(id: string): boolean {
 function checkBrokenRefs(concepts: Concept[]): CheckResult {
   const r = makeResult('Broken edge references')
   const idSet = new Set(concepts.map(c => c.id))
-  const fields: Array<keyof Concept> = ['requires', 'unlocks', 'cross_links']
+
+  // requires/unlocks are intra-graph DAG edges: FAIL when target is absent,
+  // unless the target is an explicitly aspirational placeholder (INFO only).
+  // cross_links are explicitly cross-graph references: INFO only, never FAIL or WARN.
+  const strictFields: Array<keyof Concept> = ['requires', 'unlocks']
+  const infoFields: Array<keyof Concept>   = ['cross_links']
+
+  let aspirationalCount  = 0
+  let crossLinkInfoCount = 0
 
   for (const c of concepts) {
-    for (const field of fields) {
+    for (const field of strictFields) {
       const targets = (c[field] as string[] | undefined) ?? []
       for (const t of targets) {
         if (!idSet.has(t)) {
-          const severity = isAspirational(t) ? 'WARN' : 'FAIL'
-          fail(r, `[${field}] ${c.id} → "${t}" (not found)`, severity)
+          if (isAspirational(t)) {
+            aspirationalCount++
+          } else {
+            fail(r, `[${field}] ${c.id} → "${t}" (not found)`)
+          }
         }
       }
     }
+    for (const field of infoFields) {
+      const targets = (c[field] as string[] | undefined) ?? []
+      for (const t of targets) {
+        if (!idSet.has(t)) crossLinkInfoCount++
+      }
+    }
   }
+
+  if (aspirationalCount > 0) {
+    note(r, `${aspirationalCount} aspirational external link(s) in requires/unlocks (future namespace placeholder — by design)`)
+  }
+  if (crossLinkInfoCount > 0) {
+    note(r, `${crossLinkInfoCount} external cross-subject link(s) in cross_links (cross-graph by design)`)
+  }
+
   return r
 }
 
@@ -166,7 +204,7 @@ function checkDisconnected(concepts: Concept[]): CheckResult {
 
   for (const c of concepts) {
     if (!connected.has(c.id)) {
-      fail(r, `"${c.id}" has no connections`, 'WARN')
+      fail(r, `"${c.id}" has no connections`)
     }
   }
   return r
@@ -254,17 +292,17 @@ function checkReachability(concepts: Concept[]): CheckResult {
     }
   }
 
+  note(r, `Reachable: ${visited.size} / ${concepts.length}`)
+  note(r, `Root nodes (${roots.length}): ${roots.map(c => c.id).join(', ')}`)
+
   const unreachable = concepts.filter(c => !visited.has(c.id))
   if (unreachable.length > 0) {
     for (const c of unreachable.slice(0, 10)) {
-      fail(r, `"${c.id}" unreachable from any root — requires=[${(c.requires??[]).join(', ')}]`, 'WARN')
+      fail(r, `"${c.id}" unreachable from any root — requires=[${(c.requires??[]).join(', ')}]`)
     }
-    if (unreachable.length > 10) fail(r, `... and ${unreachable.length - 10} more unreachable nodes`, 'WARN')
+    if (unreachable.length > 10) fail(r, `... and ${unreachable.length - 10} more unreachable nodes`)
   }
 
-  const rootList = roots.map(c => c.id).join(', ')
-  r.details.unshift(`Root nodes (${roots.length}): ${rootList}`)
-  r.details.unshift(`Reachable: ${visited.size} / ${concepts.length}`)
   return r
 }
 
@@ -287,11 +325,11 @@ function checkRequiredFields(concepts: Concept[]): CheckResult {
     if (field === 'domain') {
       // domain absent but derivable from ID prefix (prefix.subdomain.slug ≥ 3 segments)
       const derivable = concepts.filter(c => !c.domain && c.id.split('.').length >= 3).length
-      const severity = derivable === count ? 'WARN' : 'FAIL'
-      const note = derivable === count
-        ? `— derivable from ID prefix by adapter (src/lib/curriculum/mathKgAdapter.ts)`
-        : ''
-      fail(r, `"domain" absent on ${count} concept(s) ${note}`.trim(), severity)
+      if (derivable === count) {
+        note(r, `"domain" absent on ${count} concept(s) — derived at runtime from ID prefix by adapter`)
+      } else {
+        fail(r, `"domain" missing or empty on ${count} concept(s)`)
+      }
     } else {
       fail(r, `"${field}" missing or empty on ${count} concept(s)`)
     }
@@ -320,11 +358,11 @@ function checkTeachingEngineFields(concepts: Concept[]): CheckResult {
 
   for (const [field, count] of Object.entries(missing)) {
     if (count && count > 0) {
-      const severity = field === 'concept_type' ? 'WARN' : 'FAIL'
-      const note = field === 'concept_type'
-        ? '— inferred from bloom by adapter (mathKgAdapter.ts inferConceptType); advisory only'
-        : '— teaching engine degraded'
-      fail(r, `"${field}" absent on ${count}/${concepts.length} concepts ${note}`, severity)
+      if (field === 'concept_type') {
+        note(r, `"concept_type" absent on ${count}/${concepts.length} concepts — inferred from bloom by adapter`)
+      } else {
+        fail(r, `"${field}" absent on ${count}/${concepts.length} concepts — teaching engine degraded`)
+      }
     }
   }
 
@@ -350,8 +388,7 @@ function checkEnumValues(concepts: Concept[]): CheckResult {
     fail(r, `Unknown difficulty values: ${[...new Set(badDiff.map(c => c.difficulty))].join(', ')} (${badDiff.length} concepts)`)
   }
   if (legacyOnly.length > 0) {
-    // expert/research added to educationTypes.ts Difficulty in Step B — no longer a compat issue
-    r.details.push(`ℹ  ${legacyOnly.length} concepts use expert/research difficulty (now in Difficulty union — Step B)`)
+    note(r, `${legacyOnly.length} concept(s) use expert/research difficulty — valid extended difficulty levels`)
   }
   if (badBloom.length > 0) {
     fail(r, `Unknown bloom values: ${[...new Set(badBloom.map(c => c.bloom))].join(', ')} (${badBloom.length} concepts)`)
@@ -387,10 +424,6 @@ function checkNumericRanges(concepts: Concept[]): CheckResult {
 const filePath = process.argv[2] ?? 'docs/mathematics/kg/graph.json'
 const absPath  = path.resolve(filePath)
 
-console.log(`\nKNOWLEDGE GRAPH VALIDATOR`)
-console.log(`File: ${absPath}`)
-console.log(`${'─'.repeat(60)}`)
-
 let graph: Graph
 try {
   graph = loadGraph(absPath)
@@ -400,8 +433,6 @@ try {
 }
 
 const concepts = graph.concepts ?? []
-console.log(`Graph: ${graph.name ?? '(unnamed)'} v${graph.version ?? '?'}`)
-console.log(`Concepts: ${concepts.length}\n`)
 
 const checks: CheckResult[] = [
   checkDuplicateIds(concepts),
@@ -415,22 +446,68 @@ const checks: CheckResult[] = [
   checkNumericRanges(concepts),
 ]
 
-let anyFail = false
-let anyWarn = false
+// ── Collect results ───────────────────────────────────────────────────────────
+
+const failures: string[] = []
+const warnings: string[] = []
+const infoItems: string[] = []
 
 for (const c of checks) {
-  const icon = c.status === 'PASS' ? '✓' : c.status === 'WARN' ? '⚠' : '✗'
-  console.log(`${icon} [${c.status}] ${c.name}`)
   for (const d of c.details) {
-    console.log(`       ${d}`)
+    if (c.status === 'FAIL') failures.push(`[${c.name}] ${d}`)
+    else                     warnings.push(`[${c.name}] ${d}`)
   }
-  if (c.status === 'FAIL') anyFail = true
-  if (c.status === 'WARN') anyWarn = true
+  for (const i of c.info) infoItems.push(i)
 }
 
-console.log(`\n${'─'.repeat(60)}`)
-const overall = anyFail ? 'FAIL' : anyWarn ? 'PASS (with warnings)' : 'PASS'
-console.log(`Overall: ${overall}`)
-console.log(`${'─'.repeat(60)}\n`)
+const anyFail = failures.length > 0
+const anyWarn = warnings.length > 0
+const status  = anyFail ? 'FAIL' : anyWarn ? 'PASS_WITH_WARNINGS' : 'PASS'
+
+// ── Render ────────────────────────────────────────────────────────────────────
+
+const W = 60
+console.log(`\nKNOWLEDGE GRAPH VALIDATOR`)
+console.log('─'.repeat(W))
+console.log(`subject:   ${graph.name ?? '(unnamed)'} v${graph.version ?? '?'}`)
+console.log(`concepts:  ${concepts.length}`)
+console.log('─'.repeat(W))
+
+console.log()
+for (const c of checks) {
+  const icon = c.status === 'PASS' ? '✓' : c.status === 'WARN' ? '⚠' : '✗'
+  console.log(`  ${icon} ${c.name}`)
+  for (const d of c.details) {
+    console.log(`      ${c.status === 'FAIL' ? '✗' : '⚠'} ${d}`)
+  }
+}
+
+console.log()
+console.log('─'.repeat(W))
+console.log(`status:    ${status}`)
+
+if (failures.length > 0) {
+  console.log(`failures:`)
+  for (const f of failures) console.log(`  · ${f}`)
+} else {
+  console.log(`failures:  none`)
+}
+
+if (warnings.length > 0) {
+  console.log(`warnings:`)
+  for (const w of warnings) console.log(`  · ${w}`)
+} else {
+  console.log(`warnings:  none`)
+}
+
+if (infoItems.length > 0) {
+  console.log(`info:`)
+  for (const i of infoItems) console.log(`  · ${i}`)
+} else {
+  console.log(`info:      none`)
+}
+
+console.log('─'.repeat(W))
+console.log()
 
 process.exit(anyFail ? 1 : 0)
