@@ -56,8 +56,12 @@ export interface LearnerMemory {
   confidenceLevel: number            // 0–100, used as retention_score in Teaching Engine
   preferredStyle: 'VISUAL' | 'PRACTICAL' | 'THEORETICAL' | 'BALANCED'
 
-  // Retention by topic slug (from RetentionMetric)
+  // Retention by topic slug (from RetentionMetric, daysUntilReview from ReviewSchedule)
   retentionByTopic: Record<string, TopicRetentionState>
+
+  // Topics whose ReviewSchedule.nextReviewAt falls within the next 7 days,
+  // sorted soonest-first (Phase 2D — Adaptive Engine)
+  dueForReview: string[]
 
   // Derived fields consumed by Teaching Engine
   trackLevel: TrackLevel
@@ -91,4 +95,6 @@ export interface TeachingMemorySnapshot {
   successRate: number              // 0–100
   timeOnTask: number               // seconds
   errorPatterns: string[]
+  // → Phase 2D: review scheduling signal
+  dueForReview: string[]           // topic slugs overdue for spaced-repetition review
 }

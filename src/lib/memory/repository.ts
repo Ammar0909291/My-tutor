@@ -33,6 +33,12 @@ export interface RawRetentionRow {
   lastReviewedAt: Date | null
 }
 
+export interface RawReviewScheduleRow {
+  topic: string
+  nextReviewAt: Date
+  stage: number
+}
+
 export interface RawSubjectAnalytics {
   trend: string
   weakTopics: string[]
@@ -45,6 +51,7 @@ export interface RawLearnerData {
   recentMistakes: RawMistakeRow[]
   learningProfile: RawLearningProfile | null
   retentionMetrics: RawRetentionRow[]
+  reviewSchedules: RawReviewScheduleRow[]
   subjectAnalytics: RawSubjectAnalytics | null
   sessionMessageCount: number
   lastStudyDate: Date | null
@@ -71,6 +78,7 @@ export async function fetchRawLearnerData(
     recentMistakes,
     learningProfile,
     retentionMetrics,
+    reviewSchedules,
     subjectAnalytics,
     sessionMessageCount,
     lastSession,
@@ -96,6 +104,12 @@ export async function fetchRawLearnerData(
         }).catch(() => [])
       : Promise.resolve([]),
     subjectId
+      ? prisma.reviewSchedule.findMany({
+          where: { userId, subjectId },
+          select: { topic: true, nextReviewAt: true, stage: true },
+        }).catch(() => [])
+      : Promise.resolve([]),
+    subjectId
       ? prisma.subjectAnalytics.findUnique({
           where: { userId_subjectId: { userId, subjectId } },
           select: { trend: true, weakTopics: true, strongTopics: true, progressPercent: true },
@@ -118,6 +132,7 @@ export async function fetchRawLearnerData(
     recentMistakes,
     learningProfile,
     retentionMetrics,
+    reviewSchedules,
     subjectAnalytics: subjectAnalytics as RawSubjectAnalytics | null,
     sessionMessageCount,
     lastStudyDate: lastSession?.startedAt ?? null,
@@ -134,10 +149,10 @@ export async function fetchSupplementalData(
   subjectSlug: string,
   subjectId: string,
   sessionId?: string,
-): Promise<Pick<RawLearnerData, 'recentMistakes' | 'retentionMetrics' | 'sessionMessageCount' | 'lastStudyDate'>> {
+): Promise<Pick<RawLearnerData, 'recentMistakes' | 'retentionMetrics' | 'reviewSchedules' | 'sessionMessageCount' | 'lastStudyDate'>> {
   const cutoff = new Date(Date.now() - RECENT_MISTAKE_DAYS * 24 * 60 * 60 * 1000)
 
-  const [recentMistakes, retentionMetrics, sessionMessageCount, lastSession] = await Promise.all([
+  const [recentMistakes, retentionMetrics, reviewSchedules, sessionMessageCount, lastSession] = await Promise.all([
     prisma.mistakeRecord.findMany({
       where: { userId, subjectSlug, createdAt: { gte: cutoff } },
       select: { topicSlug: true, category: true, createdAt: true },
@@ -148,6 +163,12 @@ export async function fetchSupplementalData(
       ? prisma.retentionMetric.findMany({
           where: { userId, subjectId },
           select: { topic: true, masteryScore: true, confidenceScore: true, decayScore: true, reviewCount: true, lastReviewedAt: true },
+        }).catch(() => [])
+      : Promise.resolve([]),
+    subjectId
+      ? prisma.reviewSchedule.findMany({
+          where: { userId, subjectId },
+          select: { topic: true, nextReviewAt: true, stage: true },
         }).catch(() => [])
       : Promise.resolve([]),
     sessionId ? prisma.message.count({ where: { sessionId } }).catch(() => 0) : Promise.resolve(0),
@@ -163,6 +184,7 @@ export async function fetchSupplementalData(
   return {
     recentMistakes,
     retentionMetrics,
+    reviewSchedules,
     sessionMessageCount,
     lastStudyDate: lastSession?.startedAt ?? null,
   }

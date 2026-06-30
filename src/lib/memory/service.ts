@@ -7,6 +7,7 @@ import type {
   RawSubjectAnalytics,
   RawLearningProfile,
   RawRetentionRow,
+  RawReviewScheduleRow,
 } from './repository'
 import type {
   LearnerMemory,
@@ -73,6 +74,14 @@ function deriveSuccessRate(analytics: RawSubjectAnalytics | null): number {
   return 65
 }
 
+// Phase 2D — Adaptive Engine: a topic is "due for review" once its
+// ReviewSchedule.nextReviewAt falls within this horizon.
+const REVIEW_DUE_HORIZON_DAYS = 7
+
+function daysUntil(target: Date): number {
+  return Math.ceil((target.getTime() - Date.now()) / 86_400_000)
+}
+
 // ── Core aggregation ──────────────────────────────────────────────────────────
 
 function aggregate(
@@ -102,17 +111,29 @@ function aggregate(
     }
   }
 
+  // Review schedule map — keyed by topic, used to fill daysUntilReview below
+  // and to derive the dueForReview list (Phase 2D).
+  const scheduleByTopic = new Map<string, RawReviewScheduleRow>()
+  for (const s of raw.reviewSchedules) scheduleByTopic.set(s.topic, s)
+
   // Retention map
   const retentionByTopic: Record<string, TopicRetentionState> = {}
   for (const r of raw.retentionMetrics) {
+    const schedule = scheduleByTopic.get(r.topic)
     retentionByTopic[r.topic] = {
       masteryScore: r.masteryScore,
       confidenceScore: r.confidenceScore,
       decayScore: r.decayScore,
       reviewCount: r.reviewCount,
       lastReviewedAt: r.lastReviewedAt ?? undefined,
+      daysUntilReview: schedule ? daysUntil(schedule.nextReviewAt) : undefined,
     }
   }
+
+  const dueForReview = raw.reviewSchedules
+    .filter((s) => daysUntil(s.nextReviewAt) <= REVIEW_DUE_HORIZON_DAYS)
+    .sort((a, b) => a.nextReviewAt.getTime() - b.nextReviewAt.getTime())
+    .map((s) => s.topic)
 
   // Learning profile
   const lp = raw.learningProfile
@@ -143,6 +164,7 @@ function aggregate(
     confidenceLevel,
     preferredStyle,
     retentionByTopic,
+    dueForReview,
     trackLevel:    deriveTrackLevel(masteredConcepts.length),
     fatigueLevel:  deriveFatigueLevel(raw.sessionMessageCount),
     recentTopics,
@@ -173,8 +195,8 @@ export async function readLearnerMemory(
 /**
  * Preload variant: accepts topicProgress, learningProfile, and subjectAnalytics
  * that were already fetched by the chat route's parallel query block, and only
- * fetches the supplemental data (recentMistakes, retentionMetrics, message count)
- * that isn't available from the preload. Avoids duplicate DB round-trips.
+ * fetches the supplemental data (recentMistakes, retentionMetrics, reviewSchedules,
+ * message count) that isn't available from the preload. Avoids duplicate DB round-trips.
  */
 export async function readLearnerMemoryFromPreload(
   userId: string,
@@ -208,6 +230,7 @@ export async function readLearnerMemoryFromPreload(
       : null,
     recentMistakes:      supp.recentMistakes,
     retentionMetrics:    supp.retentionMetrics,
+    reviewSchedules:     supp.reviewSchedules,
     sessionMessageCount: supp.sessionMessageCount,
     lastStudyDate:       supp.lastStudyDate,
   }
@@ -238,5 +261,6 @@ export function toTeachingSnapshot(memory: LearnerMemory): TeachingMemorySnapsho
     successRate:        memory.successRate,
     timeOnTask:         memory.timeOnTask,
     errorPatterns:      memory.errorPatterns,
+    dueForReview:       memory.dueForReview,
   }
 }
