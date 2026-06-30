@@ -4,6 +4,73 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 07 — Mastery Intelligence Architecture (specification only, NOT implemented)
+
+Roadmap item 2 of 8. Before drafting, re-read every prior ADR and all six
+master architecture documents in full (per the user's new binding
+pre-ADR checklist) — confirmed no conflict with frozen architecture.
+
+- **No code changed.** Specification document only:
+  `docs/architecture/ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`.
+- **Finding (new Finding 8, `ARCHITECTURE_DECISIONS.md`):** five
+  non-unified mastery/progression representations coexist:
+  - `MasteryLevel` (`masteryIntelligence.ts`) — live, 4-value
+    classification, chapter-scoped, computed fresh per call, wired only
+    inside School Mode (`DATA_FLOW.md` confirms it sits inside
+    `route.ts`'s `if (schoolCtx)` gate — never runs for Library
+    learners).
+  - `TopicProgress.masteryPct` — persisted `Int`, independently
+    re-classified by `learningProfile.ts:64-70` with its own ad hoc
+    thresholds, bypassing the canonical engine entirely; line 91 uses a
+    literal hardcoded `70` instead of importing
+    `ASSESSMENT_PASS_THRESHOLD` — already-realized constant drift.
+  - `EbLearnerConceptMastery` — dormant continuous float score
+    (`masteryScore`/`masteryConfidence`/`decayedScore`), concept-scoped,
+    part of the disabled-by-default `Eb*` pipeline, zero live callers.
+  - `TrackLevel` (`teaching-engine/types.ts`) — frozen 5-tier (T0-T4)
+    pedagogical-tier vocabulary, the Teaching Engine's own progression
+    scale.
+  - `LevelBand` (Prisma enum, 6-tier) — used only by the existing
+    goal-based placement/"entrance examination" subsystem
+    (`LearningGoal`/`PlacementAssessment`/`AssessmentAttempt`), confirmed
+    via grep to have zero cross-references to `TrackLevel` or
+    `MasteryLevel`.
+  - `AssessmentDecision.mastery_threshold` (an `assessmentIntelligence.ts`
+    output field) disambiguated from the Canonical KG's own, still-
+    unexposed `mastery_threshold` field (ADR 05 Finding 7) — the former
+    is confirmed to always equal the flat `ASSESSMENT_PASS_THRESHOLD`
+    constant today, despite the field name suggesting per-concept
+    granularity it doesn't have.
+- **Proposed resolution (none executed):** designate `MasteryLevel` as
+  canonical. Three additive, independently-stageable extensions:
+  (a) extend `getMasteryProfile()` to Library Mode (same unused-
+  `board`/`grade`-param evidence pattern ADR 02 already used for
+  `teachingStrategy`/`spacedRevision`/`lessonPlanner`); (b) consolidate
+  `learningProfile.ts`'s duplicate classification onto the canonical
+  engine, removing the hardcoded `70` — flagged as the one genuine
+  behavior-change risk, gated on an equivalence-validation report; (c) a
+  new specification-only static mapping table bridging
+  `MasteryLevel`/`TrackLevel`/`LevelBand` (translation only, no merge —
+  the three serve genuinely different scopes). `EbLearnerConceptMastery`
+  stays explicitly out of scope/dormant.
+- Full 13-section ADR (Problem, Evidence, Alternative designs, Chosen
+  architecture, Trade-offs, Scalability, AI independence impact,
+  Backward compatibility, Validation strategy, Migration strategy,
+  Relationship to previous ADRs, Relationship to the Canonical Knowledge
+  Graph, Future implementation plan) per the user's new binding ADR
+  template.
+- Cross-references updated: `ARCHITECTURE_DECISIONS.md` (new Finding 8 +
+  Part 4 summary), `ENGINE_REFERENCE.md` Engine 7 (scope-note), 
+  `PROJECT_STATE.md` (§1 phase table + new §4d), `CLAUDE.md` (roadmap
+  item 2 marked done).
+- **No implementation proposed, no approval requested**, per this
+  session's binding directive. Implementation remains blocked on (1) the
+  Curriculum Production Pipeline declaring Canonical Knowledge Graph v1
+  frozen, and (2) explicit user approval — neither has occurred.
+- Next roadmap item: **#3 — Teaching Action Intelligence.**
+
+---
+
 ## ADR 06 — Knowledge Graph Consumption Pipeline (specification only, NOT implemented) + strict architecture-only mode
 
 User accepted ADR 05 as documentation-only and explicitly forbade

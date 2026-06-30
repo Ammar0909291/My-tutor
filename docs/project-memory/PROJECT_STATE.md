@@ -35,7 +35,8 @@ CHANGELOG going forward.
 | Phase 3+ | Not started. Requires explicit approval before beginning, per standing instruction. |
 | Knowledge Graph Consumption Architecture (`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`) | **Proposal written, not executed.** Per explicit user instruction (2026-06-30, second pivot): Phase 1 must NOT be implemented — no canonical KG field (`mastery_threshold`, `cross_links`, or any other) may be exposed until the Curriculum Production Pipeline freezes the Canonical Knowledge Graph v1 specification. Status downgraded from "awaiting go-ahead" to "blocked on external v1 freeze + future approval." See §4b below. |
 | KG Consumption Pipeline contract (`ADR_06_KG_CONSUMPTION_PIPELINE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #1 of the user's 8-item forward-architecture roadmap. Specifies the version/status/shape gate that must sit between the Curriculum Pipeline's output and the Educational Brain's adapter — found zero such gate exists today (no version check, no status check, no runtime shape validation, no CI wiring). Implementation blocked on the same two conditions as ADR 05 Phase 1. See §4c below. |
-| Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — item 1 of 8 done (ADR 06).** Items 2-8 (Mastery Intelligence, Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
+| Mastery Intelligence Architecture (`ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #2 of the roadmap. Found five non-unified mastery/progression representations (`MasteryLevel`, `TopicProgress.masteryPct`, `EbLearnerConceptMastery`, `TrackLevel`, `LevelBand`) with no reconciliation. Designates `MasteryLevel` (`masteryIntelligence.ts`) as canonical; proposes (not implemented) extending it to Library Mode, consolidating `learningProfile.ts`'s duplicate classification onto it, and a cross-vocabulary mapping table. Implementation blocked on the same two conditions as ADR 05/06. See §4d below. |
+| Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — items 1-2 of 8 done (ADR 06, ADR 07).** Items 3-8 (Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
 
 ---
 
@@ -304,10 +305,26 @@ list in order, one ADR per turn, architecture-only:
    `mastery_threshold` (that stays exactly where ADR 05 left it).
    Implementation blocked on Curriculum Pipeline v1 freeze + explicit
    approval, per the standing instruction.
-2. **Mastery Intelligence Architecture** — not started. Static vs.
-   evidence-adjusted mastery, global vs. personalized mastery, Beginner→
-   Intermediate→Expert progression, entrance examinations, mastery
-   validation.
+2. **Mastery Intelligence Architecture** — **DONE**,
+   `ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md` (specification only, not
+   implemented). Found five non-unified mastery/progression
+   representations coexisting: `MasteryLevel` (live, chapter-scoped,
+   school-only classification engine), `TopicProgress.masteryPct`
+   (independently re-classified by `learningProfile.ts` with a hardcoded
+   `70`, bypassing the canonical engine), `EbLearnerConceptMastery`
+   (dormant float score, part of the disabled `Eb*` pipeline), `TrackLevel`
+   (Teaching Engine's frozen T0-T4 tier), `LevelBand` (the existing
+   goal/placement "entrance examination" subsystem's 6-tier enum, fully
+   disconnected from the other two). Designates `masteryIntelligence.ts`'s
+   `MasteryLevel` classification as canonical and proposes three additive
+   extensions: (a) extend to Library Mode (same evidence pattern as ADR
+   02), (b) consolidate `learningProfile.ts`'s duplicate logic onto the
+   canonical engine, (c) a specification-only static mapping table
+   bridging `MasteryLevel`/`TrackLevel`/`LevelBand`. `EbLearnerConceptMastery`
+   explicitly stays out of scope/dormant. Implementation blocked on
+   Curriculum Pipeline v1 freeze + explicit approval. New Finding 8 added
+   to `ARCHITECTURE_DECISIONS.md`; `ENGINE_REFERENCE.md` Engine 7 updated
+   with a scope-note cross-reference.
 3. **Teaching Action Intelligence** — not started. Decision hierarchy,
    explanation/visualization/simulation/assessment/remediation selection.
 4. **Dynamic Lesson Composition** — not started. Knowledge-Asset
@@ -331,6 +348,63 @@ document trade-offs, produce implementation specs, validation specs, and
 a migration strategy, estimate scalability to millions of learners,
 preserve backward compatibility with Educational Brain v1 — design only,
 no implementation without separate explicit approval per item.
+
+---
+
+## 4d. Mastery Intelligence Architecture — ADR 07 (this session, proposal only)
+
+**`docs/architecture/ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`** —
+roadmap item #2. Pre-ADR checklist completed first (per the user's new
+binding requirement): re-read `EDUCATIONAL_BRAIN_V1.md`,
+`ENGINE_REFERENCE.md`, `DATA_FLOW.md`, `DEPENDENCY_RULES.md`,
+`EXTENSION_GUIDE.md`, `ARCHITECTURE_DECISIONS.md`, ADR 02-06, and this
+file in full — no conflict found with any frozen rule.
+
+**Finding (new, Finding 8 in `ARCHITECTURE_DECISIONS.md`):** five
+non-unified mastery/progression representations coexist with no
+reconciliation: `MasteryLevel` (live, 4-value classification,
+chapter-scoped, school-only — `DATA_FLOW.md` confirms it's wired only
+inside `route.ts`'s `if (schoolCtx)` gate), `TopicProgress.masteryPct`
+(independently re-classified by `learningProfile.ts:64-70` using its own
+ad hoc thresholds, plus a literal hardcoded `70` at line 91 instead of
+importing `ASSESSMENT_PASS_THRESHOLD` — already-realized constant
+drift), `EbLearnerConceptMastery` (dormant continuous float score,
+concept-scoped, part of the disabled `Eb*` pipeline, zero live callers),
+`TrackLevel` (Teaching Engine's frozen T0-T4 pedagogical tier),
+`LevelBand` (the existing goal/placement "entrance examination"
+subsystem's 6-tier enum — `LearningGoal`/`PlacementAssessment`/
+`AssessmentAttempt` — confirmed via grep to have zero cross-references
+to either `TrackLevel` or `MasteryLevel`).
+
+**Proposed resolution (ADR 07 §4, none executed):** designate
+`masteryIntelligence.ts`'s `MasteryLevel` classification as canonical.
+Three additive, independently-stageable extensions, none implemented:
+(a) extend `getMasteryProfile()` to the Library/general chat path —
+its `board`/`grade` params are confirmed unused in the function body,
+the identical evidence pattern ADR 02 used for `teachingStrategy`/
+`spacedRevision`/`lessonPlanner`; (b) consolidate `learningProfile.ts`'s
+independent re-classification onto the canonical engine, removing the
+duplicate logic and the hardcoded `70` — flagged as the one real
+behavior-change risk in this ADR, requiring an equivalence-validation
+report before any future implementation turn; (c) a new,
+specification-only static mapping table (`masteryVocabulary.ts`, not
+created) bridging `MasteryLevel`/`TrackLevel`/`LevelBand` for
+cross-vocabulary translation (e.g. seeding a new learner's `TrackLevel`
+from a `PlacementAssessment.recommendedLevel`), without merging the
+three vocabularies — they serve genuinely different scopes.
+`EbLearnerConceptMastery` stays explicitly out of scope, left dormant
+per `ARCHITECTURE_DECISIONS.md` Part 2's existing ruling on the `Eb*`
+pipeline as a whole.
+
+**Cross-references updated this session:** `ARCHITECTURE_DECISIONS.md`
+(new Finding 8 + Part 4 summary), `ENGINE_REFERENCE.md` Engine 7
+(scope-note cross-reference to ADR 07), `CLAUDE.md` (roadmap item 2
+marked done).
+
+**Status:** specification only, zero code changes. Implementation
+blocked on the same two conditions as ADR 05/06: Curriculum Production
+Pipeline declares Canonical Knowledge Graph v1 frozen, AND explicit user
+approval. Next roadmap item: **#3 — Teaching Action Intelligence.**
 
 ---
 

@@ -100,13 +100,46 @@
      every `docs/{subject}/kg/graph.json`'s wrapper metadata, `{name, version, status, build_date,
      statistics, domains}`, is silently discarded by `subjectKgAdapter.ts`'s `getRaw()`, which keeps
      only `.concepts`, and zero runtime validation or CI wiring exists for the KG validator script).
-  2. Mastery Intelligence Architecture — not started.
+  2. Mastery Intelligence Architecture — **done**, see
+     `docs/architecture/ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`
+     (found five non-unified mastery/progression representations —
+     `MasteryLevel` school-only classification, `TopicProgress.masteryPct`
+     independently re-classified by `learningProfile.ts` with a hardcoded
+     `70`, dormant `EbLearnerConceptMastery` float score, frozen `TrackLevel`
+     T0-T4, and the placement-exam subsystem's `LevelBand` enum — none
+     reconciled with another; designates `MasteryLevel` as canonical and
+     proposes, without implementing, extending it to Library Mode,
+     consolidating `learningProfile.ts` onto it, and a cross-vocabulary
+     mapping table; new Finding 8 in `ARCHITECTURE_DECISIONS.md`).
   3. Teaching Action Intelligence — not started.
   4. Dynamic Lesson Composition — not started.
   5. Student Memory Evolution — not started.
   6. Recommendation Intelligence — not started.
   7. Visualization & Simulation Architecture — not started.
   8. AI Independence Roadmap — not started.
+- **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding):** the
+  Curriculum Production Pipeline is the ONLY authority for Canonical Subject Knowledge Graphs —
+  do not interfere with it, generate subject knowledge, implement runtime features, modify
+  production code/schemas, expose new Canonical KG fields, or redesign stable architecture without
+  strong evidence. The job here is producing the complete Educational Brain Architecture as one
+  unified design that will eventually become the official implementation blueprint. **Before
+  starting each ADR**: re-read every previous ADR, re-read this project-memory set, re-read the
+  current master architecture documents, verify the proposed design doesn't conflict with existing
+  architecture, and if it does, explain + resolve + update the master architecture before
+  continuing — never allow contradictory ADRs, duplicated systems, or overlapping responsibilities;
+  always prefer one elegant system over multiple similar ones. **Every ADR uses this 13-section
+  template**: Problem, Evidence, Alternative designs, Chosen architecture, Trade-offs, Scalability,
+  AI independence impact, Backward compatibility, Validation strategy, Migration strategy,
+  Relationship to previous ADRs, Relationship to the Canonical Knowledge Graph, Future
+  implementation plan. Do not implement anything and do not request implementation approval inside
+  an ADR — implementation begins only after the Curriculum Production Pipeline declares Canonical
+  Knowledge Graph v1 frozen AND the user explicitly approves. Don't revisit solved problems without
+  new evidence; don't prioritize repository cleanup/minor refactoring/dead-code/naming over
+  architecture unless it blocks the roadmap. Continue autonomously through the 8-item roadmap above;
+  when all 8 ADRs are complete, stop and produce one final **Architecture Completion Report**
+  (overall architecture summary, complete engine map, component dependency diagram in text, ADR
+  index, remaining implementation work, known risks, readiness assessment for implementation) — not
+  due yet, only 2 of 8 roadmap items done as of ADR 07.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the

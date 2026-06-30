@@ -297,6 +297,45 @@ from an accurate map, not a flattering one.
   phase-by-phase four-condition analysis. No code has been changed by
   this finding.
 
+### Finding 8 — Five non-unified mastery/progression representations coexist — **PROPOSAL WRITTEN (ADR 07), AWAITING EXPLICIT APPROVAL**
+
+- Opened under the "Mastery Intelligence Architecture" roadmap item
+  (#2 of 8), forward-looking design work per the standing priority
+  pivot, not a cleanup audit.
+- **Evidence:** five separate representations of "has this student
+  mastered this concept/topic/level" exist with no reconciliation: (1)
+  `MasteryLevel` (`masteryIntelligence.ts`, 4-value classification,
+  chapter-scoped, computed fresh per call, school-only — confirmed wired
+  only inside `route.ts`'s `if (schoolCtx)` gate); (2) `TopicProgress.masteryPct`
+  (persisted `Int`, independently re-classified by `learningProfile.ts`
+  using its own ad hoc thresholds and a literal hardcoded `70` instead of
+  importing `ASSESSMENT_PASS_THRESHOLD` — already-realized drift risk);
+  (3) `EbLearnerConceptMastery` (continuous float score, concept-scoped,
+  part of the dormant `Eb*` pipeline per Part 2, zero live callers); (4)
+  `TrackLevel` (`teaching-engine/types.ts`, frozen 5-tier `T0`–`T4`
+  pedagogical-tier vocabulary); (5) `LevelBand` (Prisma enum, 6-tier,
+  used only by the goal-based placement/"entrance examination" subsystem
+  — `LearningGoal`/`PlacementAssessment`/`AssessmentAttempt` — with zero
+  cross-references to either `TrackLevel` or `MasteryLevel`).
+- **Ruling:** documented as **ADR 07, a proposal, not executed**. ADR 07
+  designates `masteryIntelligence.ts`'s `MasteryLevel` classification as
+  canonical and proposes three additive, independently-stageable
+  extensions: (a) extend it to Library Mode following the exact ADR 02
+  evidence pattern (unused `board`/`grade` params); (b) consolidate
+  `learningProfile.ts`'s independent re-classification onto the
+  canonical engine, removing the duplicate logic and the hardcoded `70`;
+  (c) a new, specification-only static mapping table bridging
+  `MasteryLevel`/`TrackLevel`/`LevelBand` for cross-vocabulary
+  translation, without merging the three (they serve genuinely different
+  scopes). `EbLearnerConceptMastery` remains explicitly out of scope,
+  left dormant per Part 2's existing ruling on the whole `Eb*` pipeline.
+  See `docs/architecture/ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md` for
+  full evidence, the three-extension design, staged migration plan, and
+  validation strategy (notably: extension (b) is flagged as a real
+  behavior change requiring an equivalence-validation report before any
+  future implementation turn, not a pure refactor). No code has been
+  changed by this finding.
+
 ---
 
 ## Part 4 — Validation results
@@ -321,8 +360,10 @@ and per explicit user instruction will **remain unexecuted indefinitely**
 (documentation-only is the final state, not an interim one) — see its
 entry in Part 3 and `ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`.
 Four honest findings remain fully open from the original freeze (1, 3, 5,
-6). A new, seventh finding (Knowledge Graph Consumption Architecture) was
-opened post-freeze under the revised "consume the KG, don't just clean up
-around it" priority — see its entry in Part 3 and
-`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md` (proposal written,
-not executed).
+6). Two further findings were opened post-freeze under the revised
+"consume the KG / design forward" priority: the seventh (Knowledge Graph
+Consumption Architecture) — see `ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`
+(proposal written, not executed) — and the eighth (mastery/progression
+fragmentation, roadmap item #2) — see
+`ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md` (proposal written, not
+executed).

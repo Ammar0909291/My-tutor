@@ -337,6 +337,18 @@ block.
 — that is the Teaching Engine's job; Mastery Intelligence only classifies
 current state.
 
+**Scope note (confirmed 2026-06-30, `ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`):**
+wired only inside the School Mode gate today (`DATA_FLOW.md` §1 step 8,
+`api/learn/chat/route.ts`'s `if (schoolCtx)` block) — does not run for
+Library/general-subject learners. `getMasteryProfile`'s `board`/`grade`
+parameters are confirmed unused in its body, the same pattern ADR 02
+found for `teachingStrategy`/`spacedRevision`/`lessonPlanner` before
+extending those to Library mode. ADR 07 proposes (does not implement) the
+same extension for Mastery Intelligence, plus designates `MasteryLevel`
+as the canonical mastery representation versus four other non-unified
+representations found elsewhere in the codebase — see ADR 07 and
+`ARCHITECTURE_DECISIONS.md` Finding 8.
+
 ---
 
 ## 8. Assessment Intelligence
