@@ -125,7 +125,17 @@
      "Action" layer from `teachingStrategy.ts`'s 7-value "Posture" layer
      and proposes, without implementing, a Library-mode seed-and-persist
      extension; new Finding 9 in `ARCHITECTURE_DECISIONS.md`).
-  4. Dynamic Lesson Composition — not started.
+  4. Dynamic Lesson Composition — **done**, see
+     `docs/architecture/ADR_09_DYNAMIC_LESSON_COMPOSITION.md`
+     (found `composeLessonPlan()` recomputes the full `LessonPlan` from
+     scratch every turn with zero persisted cross-turn stage continuity,
+     despite `buildLessonPlanBlock()`'s own prompt text framing itself as
+     a "multi-turn pacing guide"; proposes, without implementing,
+     generalizing the already-proven Worked Examples tag-emit/parse/
+     persist/resume pattern (`workedExamples.ts`) via a new
+     `contextSnapshot.lessonStageProgress` key and a `planSignature`
+     continuation/replan fingerprint computed in calling code; new
+     Finding 10 in `ARCHITECTURE_DECISIONS.md`).
   5. Student Memory Evolution — not started.
   6. Recommendation Intelligence — not started.
   7. Visualization & Simulation Architecture — not started.
@@ -161,8 +171,8 @@
   finished. Continue autonomously through the 8-item roadmap above; when all 8 ADRs are complete,
   stop and produce one final **Architecture Completion Report** (Bible summary, ADR index,
   architecture summary, complete engine dependency map, remaining implementation work, known
-  risks, readiness assessment for implementation) — not due yet, only 3 of 8 roadmap items done as
-  of ADR 08.
+  risks, readiness assessment for implementation) — not due yet, only 4 of 8 roadmap items done as
+  of ADR 09.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the

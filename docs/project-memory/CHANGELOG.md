@@ -4,6 +4,52 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 09: Dynamic Lesson Composition (documentation only, no code changed)
+
+Roadmap item #4 of 8. Traced `lessonComposer.ts`'s `composeLessonPlan()`
+and found it recomputes a full `LessonPlan` from scratch every turn with
+zero persisted cross-turn continuity — its pure-core signature has no
+turn-history input, and `contextSnapshot` (the established continuity
+store for this tier) has no stage-progress equivalent, despite
+`buildLessonPlanBlock()`'s own prompt text describing itself as a
+"multi-turn pacing guide." Found the codebase already has a
+production-proven solution to exactly this problem, narrowly scoped:
+the Interactive Worked Examples sub-system's AI-emitted-tag/parse/
+persist/resume pattern (`workedExamples.ts`).
+
+- **Created** `docs/architecture/ADR_09_DYNAMIC_LESSON_COMPOSITION.md`
+  — full 14-section ADR. Selected design: generalize the Worked Examples
+  tag pattern to the Lesson Composer's `LessonPlan` via a new
+  `contextSnapshot.lessonStageProgress` key, a new AI-emitted progress
+  tag + parser, and an optional resume-framing parameter on
+  `buildLessonPlanBlock()` — all kept in the calling code (`route.ts`),
+  never inside `composeLessonPlan()`'s pure core. A `planSignature`
+  fingerprint (plan shape, computed in calling code) distinguishes
+  genuine continuation from genuine replan.
+- **Updated** `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` — §3 engine
+  map (row #12), §6.2 (new paragraph), §7 (new risk register row R13),
+  §9 (ADR 09 row), §10 (roadmap status now 4 of 8), §12 (new change-log
+  entry).
+- **Updated** `docs/architecture/ARCHITECTURE_DECISIONS.md` — new
+  Finding 10 in Part 3; Part 4 summary counts updated to ten findings
+  disclosed.
+- **Updated** `docs/project-memory/PROJECT_STATE.md` — new §4g.
+- **Updated** `CLAUDE.md` — roadmap item 4 marked done with a one-line
+  finding summary.
+- **No conflicts found** against any prior ADR or Permanent Rule.
+  Confirmed this proposal touches only the Lesson Composer's
+  `LessonPlan`, neither resolving nor worsening the existing Finding
+  1/R10 naming overlap with `lessonPlanner.ts`. A normalized
+  `LessonStageProgress` Prisma table was considered and rejected as
+  premature, named as a candidate input to ADR 10's deferred
+  Evidence-flow audit instead. A heuristic conversation-history-diffing
+  alternative was rejected as a duplicate mechanism for an
+  already-solved problem class.
+- **No production code changed. No implementation requested or
+  performed.** Next: ADR 10 — Student Memory Evolution (roadmap 5/8).
+
+---
+
 ## ADR 08: Teaching Action Intelligence (documentation only, no code changed)
 
 Roadmap item #3 of 8. Traced the live `decide()` → Teaching Action

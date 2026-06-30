@@ -106,7 +106,7 @@ see ADR 03).
 | 9 | Subject Assessment Requirements | Assessment | `assessment/subjectValidator.ts` | LIVE | — |
 | 10 | Teaching Engine (FROZEN) | Teaching | `teaching-engine/{index,types}.ts` | LIVE, mode-agnostic by construction | ADR 08 (Library extension proposed via callers) |
 | 11 | Teaching Action Generator (TAG) | Teaching | `school/adaptive/teachingActionGenerator.ts` | LIVE, School-Mode-only in practice | ADR 08 (Library extension proposed) |
-| 12 | Dynamic Lesson Composer | Teaching | `school/adaptive/lessonComposer.ts` | LIVE, School-Mode-only in practice | ADR 08 (Library extension proposed); ADR 09 upcoming |
+| 12 | Dynamic Lesson Composer | Teaching | `school/adaptive/lessonComposer.ts` | LIVE, School-Mode-only in practice; recomputes from stage 1 every turn, no cross-turn continuity | ADR 08 (Library extension proposed); ADR 09 (cross-turn stage continuity proposed) |
 | 13 | Confidence Calibration | Teaching support | `confidenceCalibration.ts` | LIVE | — |
 | 14 | Learning Momentum | Teaching support | `learningMomentum.ts` | LIVE | — |
 | 15 | Teaching Strategy Orchestrator (Teaching Posture Intelligence) | Teaching support | `teachingStrategy.ts` | LIVE, both modes (ADR 02) | ADR 02, ADR 08 (relationship to TAG formalized) |
@@ -282,6 +282,31 @@ unused-`board`/`grade`-parameter evidence pattern ADR 02 and ADR 07
 already established — blocked on KG v1 freeze + explicit approval, same
 as every other proposed extension in this Bible.
 
+**ADR 09 finding (Dynamic Lesson Composition, roadmap item #4 — DONE):**
+a separate, downstream gap from ADR 08's existence question. Even where
+the Action layer already runs, `composeLessonPlan()` recomputes a full
+`LessonPlan` from scratch every turn — its signature carries no
+turn-history input, and `contextSnapshot` (the established continuity
+store for this tier) has no equivalent of the stage progress the
+rendered prompt text claims to be a "multi-turn pacing guide" for. The
+codebase already has a proven answer to this exact class of problem,
+narrowly scoped: the Interactive Worked Examples sub-system
+(`workedExamples.ts`) emits a structured `[WE:concept|step|total]` tag,
+parses it server-side, persists it to `contextSnapshot.currentWorkedExample`,
+and reframes the next turn's prompt as "already in progress, do NOT
+restart." **PROPOSED, ADR 09:** generalize that exact pattern to the
+Lesson Composer's `LessonPlan` via a new
+`contextSnapshot.lessonStageProgress` key, a new AI-emitted progress tag
++ parser, and an optional resume-framing parameter on
+`buildLessonPlanBlock()` — all kept in the calling code (`route.ts`),
+never inside `composeLessonPlan()`'s pure core, preserving its existing
+purity guarantee. A `planSignature` fingerprint (computed in the calling
+code from plan *shape*, not content) distinguishes a genuine continuation
+from a genuine replan (e.g. a misconception resolved or a practice
+threshold crossed) — a mismatch is treated as an intentional replan
+event, not an error. Blocked on KG v1 freeze + explicit approval, same as
+every other proposed extension in this Bible.
+
 ### 6.3 Student learning flow (one turn, end to end)
 
 LIVE, synthesized across §6.1/6.2/6.4/6.5: Knowledge Graph node →
@@ -445,6 +470,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
+| R13 | Dynamic Lesson Composer recomputes the full stage sequence from stage 1 every turn — no persisted cross-turn continuity, despite its own rendered prompt text framing it as a "multi-turn pacing guide" | **Already realized in production** | ADR 09 Finding 10 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED `contextSnapshot.lessonStageProgress` + tag-based continuity extension in ADR 09 §4, blocked on KG v1 freeze |
 
 ---
 
@@ -510,7 +536,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 06 | KG Consumption Pipeline | **Proposal, blocked on KG v1 freeze** | Zero version/status/shape gate exists between Curriculum Pipeline output and the runtime adapter |
 | ADR 07 | Mastery Intelligence Architecture | **Proposal, blocked on KG v1 freeze** | Five non-unified mastery/progression representations; `MasteryLevel` designated canonical |
 | ADR 08 | Teaching Action Intelligence (roadmap 3/8) | **Proposal, blocked on KG v1 freeze** | The concrete Action layer (`decide()`→TAG→Composer) is School-Mode-only in practice despite being mode-agnostic by construction; Library extension proposed, Posture/Action layer relationship formalized |
-| ADR 09 | Dynamic Lesson Composition (roadmap 4/8) | Not started | — |
+| ADR 09 | Dynamic Lesson Composition (roadmap 4/8) | **Proposal, blocked on KG v1 freeze** | `composeLessonPlan()` has zero persisted cross-turn stage continuity; proposes generalizing the proven Worked Examples tag-emit/parse/persist/resume pattern via `contextSnapshot.lessonStageProgress` + a `planSignature` continuation/replan fingerprint |
 | ADR 10 | Student Memory Evolution (roadmap 5/8) | Not started | — |
 | ADR 11 | Recommendation Intelligence (roadmap 6/8) | Not started | — |
 | ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | Not started | — |
@@ -530,7 +556,7 @@ ADRs 02–07 — none of them are superseded by this note alone.
 
 ## 10. Roadmap status
 
-3 of 8 items complete (specification-only, per the standing
+4 of 8 items complete (specification-only, per the standing
 implementation-blocked rule):
 
 1. KG Consumption Pipeline — **DONE**, ADR 06
@@ -538,8 +564,10 @@ implementation-blocked rule):
 3. Teaching Action Intelligence — **DONE**, ADR 08 (Action layer is
    School-Mode-only in practice; Library extension + Posture/Action
    relationship proposed, not implemented)
-4. Dynamic Lesson Composition — **next**
-5. Student Memory Evolution — not started
+4. Dynamic Lesson Composition — **DONE**, ADR 09 (Lesson Composer has no
+   cross-turn stage continuity; tag-based continuity extension proposed,
+   not implemented)
+5. Student Memory Evolution — **next**
 6. Recommendation Intelligence — not started
 7. Visualization & Simulation Architecture — not started
 8. AI Independence Roadmap — not started
@@ -587,3 +615,10 @@ yet.
   unseeded `currentConceptNodeId` write site; §7 risk register gains R12;
   §9 ADR index updated for ADR 08; §10 roadmap status moved to 3 of 8. No
   production code changed.
+- **2026-06-30 — updated for ADR 09 (Dynamic Lesson Composition).** §3
+  engine map row #12 updated to record that the Composer recomputes from
+  stage 1 every turn with no cross-turn continuity; §6.2 gains a new
+  paragraph naming the gap and the proposed generalization of the proven
+  Worked Examples tag-emit/parse/persist/resume pattern; §7 risk register
+  gains R13; §9 ADR index updated for ADR 09; §10 roadmap status moved to
+  4 of 8. No production code changed.

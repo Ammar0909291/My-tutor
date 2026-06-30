@@ -377,6 +377,66 @@ from an accurate map, not a flattering one.
   evidence, the selected design, trade-offs, and validation/migration
   strategy. No code has been changed by this finding.
 
+### Finding 10 — The Dynamic Lesson Composer has zero persisted cross-turn stage continuity — **PROPOSAL WRITTEN (ADR 09), AWAITING EXPLICIT APPROVAL**
+
+- Opened under the "Dynamic Lesson Composition" roadmap item (#4 of 8),
+  forward-looking design work per the standing priority pivot, not a
+  cleanup audit. Distinct from Finding 9/ADR 08, which asked *whether* a
+  `LessonPlan` exists for a given turn (gated on Action-layer execution);
+  this finding asks a separate, downstream question — *whether the system
+  knows* a turn's `LessonPlan` is a continuation of a prior turn's plan.
+- **Evidence:** `composeLessonPlan()`'s pure core
+  (`lessonComposer.ts:293`) has no turn-history input in its signature —
+  `(decision, action, assessment, concept, context)` — and is called fresh
+  every turn (`route.ts:1372-1383`) inside the same `try` block as the
+  Teaching Engine decision and TAG call, with no caching or stage-index
+  lookup anywhere in between. `contextSnapshot` — the established
+  continuity store for this tier, already carrying
+  `currentConceptNodeId`, `nextConceptNodeId`,
+  `lastSuccessfulTeachingStyle`, `lastPrerequisiteGap`, and
+  `currentWorkedExample` (`route.ts:~1701-1730`) — has no equivalent key
+  for lesson-stage progress. `buildLessonPlanBlock()`
+  (`lessonComposer.ts:390`) renders the full stage list from stage 1 on
+  every call, and its own prompt text describes itself as a "multi-turn
+  pacing guide" with no state backing that claim.
+  `ENGINE_REFERENCE.md`'s documented contract for this engine ("Side
+  effects: None (pure)") confirms the gap was previously recorded as a
+  fact, not flagged as a limitation. The codebase already contains a
+  directly analogous, production-proven solution for exactly this class
+  of problem, narrowly scoped to one stage type: the Interactive Worked
+  Examples sub-system (`workedExamples.ts`) emits a structured
+  `[WE:concept|currentStep|totalSteps]` tag at the end of the AI's
+  response, parses it server-side with an exact-match-strip regex
+  (`parseWorkedExampleTag()`), persists the result to
+  `contextSnapshot.currentWorkedExample`, and on the next turn passes
+  `resuming: true` to `buildWorkedExampleBlock()`, which instructs the AI
+  "this worked example is ALREADY IN PROGRESS... do NOT restart from step
+  1." `masteryCheckStage()`'s completion-criteria text sources
+  `assessment.mastery_threshold` from the flat `ASSESSMENT_PASS_THRESHOLD`
+  constant, not any per-concept KG value — confirming evidence that the
+  already-open ADR 05/Finding 7 (R3) gap reaches further downstream than
+  previously traced; not elevated to a new finding.
+- **Ruling:** documented as **ADR 09, a proposal, not executed**. ADR 09
+  proposes generalizing the proven Worked Examples tag-emit/parse/
+  persist/resume pattern to the Lesson Composer's general `LessonPlan`:
+  a new `contextSnapshot.lessonStageProgress` key
+  (`{conceptId, planSignature, stageIndex, totalStages}`), a new
+  AI-emitted progress tag + parser mirroring
+  `parseWorkedExampleTag()`'s exact-match-strip discipline, and an
+  optional `progress` parameter on `buildLessonPlanBlock()` mirroring
+  `buildWorkedExampleBlock()`'s `resuming`/`currentStep`/`totalSteps`. A
+  `planSignature` fingerprint, computed in the calling code (`route.ts`)
+  from plan *shape* (never inside `composeLessonPlan()`, to preserve its
+  pure-function guarantee), distinguishes a genuine continuation (shape
+  unchanged turn-to-turn) from a genuine replan (a signal changed — a
+  mismatch is treated as an intentional replan event, not an error). A
+  normalized `LessonStageProgress` Prisma table was considered and
+  rejected as premature for this phase; it is named as a candidate input
+  to ADR 10's deferred Evidence-flow audit instead. See
+  `docs/architecture/ADR_09_DYNAMIC_LESSON_COMPOSITION.md` for full
+  evidence, the selected design, trade-offs, and validation/migration
+  strategy. No code has been changed by this finding.
+
 ---
 
 ## Part 4 — Validation results
@@ -388,7 +448,7 @@ from an accurate map, not a flattering one.
 | No duplicated responsibility | **Pass, with two documented exceptions** (Findings 1 and 2). Both are recorded, neither is silently hidden. |
 | No undocumented public interfaces | **Pass.** Every exported function across all ~35 engines is listed in `ENGINE_REFERENCE.md` with its full signature. |
 | No undocumented data flow | **Pass.** `DATA_FLOW.md` traces all 65 ordered steps of the canonical pipeline plus six domain-specific flow diagrams. |
-| No architectural conflicts | **Pass, with nine findings disclosed** (Part 3 above) — none of which represents a functional bug (no runtime collision, no incorrect behavior observed); all are naming/duplication/staleness/scope-gap findings recorded for future, separately-approved cleanup or extension. |
+| No architectural conflicts | **Pass, with ten findings disclosed** (Part 3 above) — none of which represents a functional bug (no runtime collision, no incorrect behavior observed); all are naming/duplication/staleness/scope-gap findings recorded for future, separately-approved cleanup or extension. |
 
 **Overall: PASS.** The architecture is internally consistent and free of
 circular dependencies or functional conflicts. Six honest findings are
@@ -408,7 +468,9 @@ Consumption Architecture) — see `ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTU
 (proposal written, not executed) — the eighth (mastery/progression
 fragmentation, roadmap item #2) — see
 `ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md` (proposal written, not
-executed) — and the ninth (Teaching Action layer is School-Mode-only in
+executed) — the ninth (Teaching Action layer is School-Mode-only in
 practice, roadmap item #3) — see
 `ADR_08_TEACHING_ACTION_INTELLIGENCE.md` (proposal written, not
-executed).
+executed) — and the tenth (Dynamic Lesson Composer has zero persisted
+cross-turn stage continuity, roadmap item #4) — see
+`ADR_09_DYNAMIC_LESSON_COMPOSITION.md` (proposal written, not executed).

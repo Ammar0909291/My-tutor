@@ -508,6 +508,73 @@ Composition.**
 
 ---
 
+## 4g. ADR 09 — Dynamic Lesson Composition (this session, roadmap 4/8, documentation only)
+
+Pre-ADR checklist completed per the binding governance rule: re-read the
+Educational Brain Bible, ADRs 02-08, `ARCHITECTURE_DECISIONS.md`,
+`ENGINE_REFERENCE.md` (Engine 12/21), and this file before drafting — no
+conflicts found, all prior architecture preserved.
+
+**Audit performed:** read `lessonComposer.ts` in full and confirmed
+`composeLessonPlan()`'s pure core has no turn-history input, and
+`buildLessonPlanBlock()` renders the full stage list from stage 1 on
+every call despite describing itself as a "multi-turn pacing guide."
+Grepped `route.ts` and confirmed the Composer is called exactly once per
+turn (`route.ts:1372-1383`), fully recomputed inside the same `try` block
+as the Teaching Engine decision and TAG call, with no stage-tracking
+logic anywhere. Confirmed `contextSnapshot`'s current key set
+(`currentConceptNodeId`, `nextConceptNodeId`,
+`lastSuccessfulTeachingStyle`, `lastPrerequisiteGap`,
+`currentWorkedExample`) has no lesson-stage-progress equivalent. Read
+`workedExamples.ts` in full and confirmed it already implements a
+production-proven solution to exactly this class of problem — AI-emitted
+`[WE:concept|step|total]` tag, exact-match-strip server-side parse,
+persist to `contextSnapshot.currentWorkedExample`, resume-framing on the
+next turn — narrowly scoped to one stage type. Confirmed
+`masteryCheckStage()`'s `completion_criteria` text sources
+`assessment.mastery_threshold` from the flat `ASSESSMENT_PASS_THRESHOLD`
+constant, confirming (not reopening) the existing ADR 05/Finding 7 (R3)
+gap reaches further downstream than previously traced.
+
+**Created:** `docs/architecture/ADR_09_DYNAMIC_LESSON_COMPOSITION.md` —
+full 14-section ADR. Selected design: generalize the proven Worked
+Examples tag-emit/parse/persist/resume pattern to the Lesson Composer's
+`LessonPlan` via a new `contextSnapshot.lessonStageProgress` key, a new
+AI-emitted progress tag + parser, and an optional resume-framing
+parameter on `buildLessonPlanBlock()` — all additive, all kept in the
+calling code (`route.ts`), never inside `composeLessonPlan()`'s pure
+core. A `planSignature` fingerprint (plan shape, computed in the calling
+code) distinguishes genuine continuation from genuine replan. A
+normalized `LessonStageProgress` Prisma table was considered and rejected
+as premature, named as a candidate input to ADR 10's deferred
+Evidence-flow audit instead. A heuristic conversation-history-diffing
+alternative was rejected as a duplicate mechanism for an already-solved
+problem class.
+
+**Cross-references updated:** Bible §3 (engine map row #12), §6.2 (new
+paragraph naming the gap and the proposed generalization), §7 (new risk
+register row R13), §9 (ADR 09 row), §10 (roadmap status 4 of 8), §12 (new
+change-log entry); `ARCHITECTURE_DECISIONS.md` Part 3 new Finding 10,
+Part 4 summary counts updated to ten findings, closing paragraph gains
+the tenth-finding sentence; `CLAUDE.md` roadmap item 4 marked done.
+
+**No conflicts found** with any existing ADR or Permanent Rule.
+Confirmed this proposal touches only the Lesson Composer's `LessonPlan`
+(not `lessonPlanner.ts`'s differently-shaped type), neither resolving nor
+worsening the existing Finding 1/R10 naming overlap. Confirmed
+`decide()`, TAG, and `composeLessonPlan()`'s pure cores remain completely
+untouched — `planSignature` lives in calling code specifically to
+preserve the Composer's existing purity guarantee (Permanent Rule 4
+analogue).
+
+**Status:** specification only, zero code changes. Implementation
+blocked on the same two conditions as ADR 05/06/07/08: Curriculum
+Production Pipeline declares Canonical Knowledge Graph v1 frozen, AND
+explicit user approval. Next roadmap item: **#5 — Student Memory
+Evolution.**
+
+---
+
 ## 4. Constraints carried forward (unchanged, still binding)
 
 - Do NOT create PRs unless explicitly asked. Do NOT push to branches
