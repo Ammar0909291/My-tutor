@@ -94,6 +94,7 @@ phase('Author')
 
 const AUTHOR_PROMPT = (idx) => `
 You are a world-class mathematics curriculum author producing teaching content for the My Tutor application.
+Every concept you author will be learned by millions of students. Write accordingly.
 
 ## Idempotency check (IMPORTANT — do this FIRST)
 Before doing any authoring, check if this chunk's output already exists and is valid:
@@ -104,12 +105,36 @@ If "MISSING" or an error, proceed with authoring.
 
 ## Your task (if chunk needs authoring)
 Read the input file: ${chunksIn}/chunk-input-${String(idx).padStart(2,'0')}.json
-Author teaching assets for each concept in that file.
 
-## Quality standard
-Match the depth and quality of the existing chapter:
-  /home/user/My-tutor/docs/mathematics/chapters/arith.md
-Do NOT copy — produce original, mathematically accurate content.
+Each concept in the input has: id, name, description, difficulty, bloom, requires[], unlocks[], cross_links[], estimated_hours.
+
+## Educational philosophy (non-negotiable)
+1. **First-principles before formulas.** Begin every concept_summary by explaining WHY this concept
+   exists — what problem it solves, what question it answers, what becomes impossible without it.
+   Never lead with a formula or definition. The definition follows from the intuition.
+
+2. **Conceptual understanding over procedural fluency.** A student who memorizes the quadratic
+   formula but doesn't understand completing-the-square has learned nothing durable. Every
+   concept_summary must build a mental model, not just state facts.
+
+3. **Build toward downstream concepts.** Read the concept's \`unlocks\` array. The concept_summary's
+   final paragraph and the teacher_notes must explicitly name 1-2 of those unlocked concepts and
+   explain what becomes learnable once this concept is mastered. This is how curriculum forms a
+   living knowledge graph in the student's mind.
+
+4. **Research-backed misconceptions.** Common_misconceptions must describe genuine cognitive errors
+   that students actually make — errors that have been documented in mathematics education research
+   or that a thoughtful teacher would recognize immediately. Not surface-level mistakes like
+   "forgetting a negative sign." Dig deeper: why does the wrong intuition feel right?
+
+5. **Motivating, honest applications.** Real_world_applications must show concretely HOW the concept
+   is used — name the field, name the tool, describe the computation. For foundational concepts,
+   everyday examples are fine. For advanced/expert/research concepts, use mathematics, physics,
+   computer science, or engineering — do not invent vague "applications."
+
+6. **Worked examples reveal thinking, not just procedure.** Each step in worked_example_blueprint.steps
+   must explain WHY that step is taken, not just what is done. A student reading the worked example
+   should finish with a new mental model, not just a solved problem.
 
 ## Output format
 Write a JSON array to: ${chunksOut}/chunk-output-${String(idx).padStart(2,'0')}.json
@@ -118,56 +143,58 @@ Each array element (one per concept, in input order):
 {
   "concept_id": "<id from input>",
   "asset": {
-    "learning_objective": "<precise, measurable; start 'Students will be able to...'; match difficulty/bloom>",
-    "concept_summary": "<2-3 paragraphs; mathematically rigorous; depth calibrated to difficulty level>",
-    "key_ideas": ["<5-7 self-contained insights>"],
+    "learning_objective": "<precise, measurable; start 'Students will be able to...'; verb matches bloom level; ends with a success criterion>",
+    "concept_summary": "<3 paragraphs: (1) motivation — the problem this concept solves and why it matters; (2) the concept itself — built up from first principles, definitions from intuition; (3) forward bridge — what this unlocks and why mastering it prepares the learner for the next concepts in the unlocks[] list>",
+    "key_ideas": ["<5-7 insights; each a complete thought that stands alone; reveal structure, not just facts>"],
     "common_misconceptions": [
-      {"misconception": "<wrong belief>", "correction": "<specific corrective action>"},
-      "<min 2 misconceptions>"
+      {"misconception": "<the wrong belief, stated precisely as a student would hold it>", "correction": "<why the wrong belief feels right, and the specific corrective insight that breaks it>"},
+      "<min 3 misconceptions, each revealing a different type of conceptual error>"
     ],
-    "visual_teaching_suggestions": ["<3-5 concrete diagram/interactive ideas>"],
+    "visual_teaching_suggestions": ["<3-5 concrete diagram/interactive/kinesthetic ideas; describe the specific visual structure, not just 'draw a graph'>"],
     "worked_example_blueprint": {
-      "setup": "<concrete problem at appropriate difficulty>",
-      "steps": ["<4-7 explicit numbered steps>"],
-      "expected_outcome": "<what student achieves + what insight they gain>"
+      "setup": "<a real, non-trivial problem at appropriate difficulty — not a textbook copy, not 'let x=1'>",
+      "steps": ["<Step 1: [action]. Why: [the mathematical reason this step is valid/useful]>", "<min 5 steps, each with the why>"],
+      "expected_outcome": "<what the student has solved AND what new insight about the concept they now have>"
     },
     "practice_blueprint": {
-      "item_types": ["<2-4 exercise types>"],
-      "difficulty_progression": "<how exercises ramp from entry to mastery>",
+      "item_types": ["<2-4 exercise types that probe different aspects of understanding>"],
+      "difficulty_progression": "<concrete description: what the easiest item tests vs. what the hardest item tests>",
       "suggested_count": <8-20>
     },
     "assessment_blueprint": {
-      "formats": ["<2-3 assessment formats>"],
-      "bloom_alignment": "<bloom level + cognitive action being assessed>",
-      "mastery_signal": "<observable, specific mastery criterion>"
+      "formats": ["<2-3 assessment formats; at least one must probe understanding not just recall>"],
+      "bloom_alignment": "<bloom level name + the specific cognitive action being assessed>",
+      "mastery_signal": "<an observable, specific criterion — what a student who truly understands will be able to do that a student who merely memorized cannot>"
     },
-    "real_world_applications": ["<3-5 genuine applications; for advanced/research use math/science/engineering>"],
-    "prerequisite_review_triggers": ["<2-4 warning signs of prerequisite gaps>"]
+    "real_world_applications": ["<3-5 applications; each names a field, a use-case, and the specific role this concept plays; for advanced/research difficulty use STEM fields exclusively>"],
+    "prerequisite_review_triggers": ["<2-4 specific observable gaps — if a student cannot do X, they are missing prerequisite Y; be concrete, not generic>"]
   },
   "chapter_extra": {
-    "vocabulary": [{"term": "<technical term>", "definition": "<precise one-sentence definition>"}, "<3-6 terms>"],
-    "teacher_notes": "<2-3 sentences: pedagogical guidance, what to watch for, sequencing>",
-    "student_notes": "<1-2 sentences: encouraging, accessible, written to student directly>",
-    "common_mistakes": ["<3-5 specific procedural errors>"],
-    "cross_topic_connections": "<1-2 sentences: how this connects to cross_links targets in the KG>",
-    "revision_guidance": "<1-2 sentences: when to revisit, what triggers review>"
+    "vocabulary": [{"term": "<technical term>", "definition": "<one-sentence definition that builds from the concept_summary's intuition, not just a dictionary entry>"}, "<4-6 terms>"],
+    "teacher_notes": "<3 sentences: (1) the most common place students get stuck and why; (2) the pedagogical sequencing advice (what to establish first before introducing the formal definition); (3) one concrete classroom activity or discussion prompt>",
+    "student_notes": "<2 sentences: written directly to the student; encouraging without being condescending; connects this concept to something they already know well>",
+    "common_mistakes": ["<4-6 specific procedural or conceptual errors; each described as what a student does wrong and what correct action replaces it>"],
+    "cross_topic_connections": "<2 sentences: names specific concepts from cross_links[] and explains the mathematical relationship — not just 'this is related to X' but 'this appears in X because...' >",
+    "revision_guidance": "<2 sentences: specific trigger for when to revisit (what failure mode signals this concept needs review) and what the review session should focus on>"
   }
 }
 
 ## Difficulty calibration
-- foundational = GCSE / early secondary
-- developing = A-level / late secondary
-- proficient = first-year undergraduate
-- advanced = upper undergraduate
-- expert = early graduate
-- research = active research frontier (teach definitions/open questions, not solutions)
+- foundational = GCSE / early secondary (ages 14-16; build strong intuition, avoid heavy notation)
+- developing = A-level / late secondary (ages 16-18; introduce formal definitions, light proof)
+- proficient = first-year undergraduate (formal definitions, proof by example/induction/contradiction)
+- advanced = upper undergraduate (proof-first; assume mathematical maturity)
+- expert = early graduate (research-adjacent; definitions precise, connections to active research areas)
+- research = active research frontier (teach the open question, the state of known results, not fabricated solutions)
 
 ## Constraints
-- No placeholder text, no [TEMPLATE] strings, no empty fields
-- learning_objective must have a measurable success criterion
-- concept_summary must be mathematically accurate (verify any theorems/formulas)
-- At least 2 misconceptions, 4 worked example steps, 3 key ideas, 2 real-world applications
-- Valid JSON array only — no prose outside the array
+- No placeholder text, no [TEMPLATE] strings, no empty fields, no vague language
+- concept_summary paragraph 1 must open with motivation, never with a definition or formula
+- concept_summary paragraph 3 must explicitly name at least one concept from the \`unlocks\` array
+- At least 3 misconceptions per concept, each revealing a different type of error
+- At least 5 worked example steps, each with an explicit "why"
+- real_world_applications must name a specific field and describe the mechanism, not just claim relevance
+- Valid JSON array only — no prose, no markdown, no comments outside the array
 `
 
 const authorResults = await parallel(
