@@ -85,6 +85,28 @@
   scoring engine reads the flat `ASSESSMENT_PASS_THRESHOLD = 70` constant instead. 3-phase
   resolution **proposed, not executed** in
   `docs/architecture/ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`.
+- **Second pivot / strict architecture-only mode (2026-06-30, binding):** ADR 05 accepted as
+  documentation only — its Phase 1 (exposing `cross_links`/`mastery_threshold`/any other new
+  Canonical KG field) must NOT be implemented until BOTH (a) the external Curriculum Production
+  Pipeline freezes the Canonical Knowledge Graph v1 specification, AND (b) the user explicitly
+  re-approves. Until then: no adapter functions, no runtime/route/schema/production-code changes
+  of any kind without explicit per-item user approval — architecture/documentation only. The user
+  specified an 8-item forward-architecture roadmap to execute in order, one full ADR (evidence +
+  options comparison + trade-offs + specs + migration + scalability-to-millions + backward-compat
+  with Educational Brain v1) per turn, implementation deferred for all 8:
+  1. KG Consumption Pipeline — **done**, see `docs/architecture/ADR_06_KG_CONSUMPTION_PIPELINE.md`
+     (proposes a 4-part load-time gate — schema major-version check, status check, runtime shape
+     validation of the 8 already-consumed fields, diagnostic-only metadata surface — because today
+     every `docs/{subject}/kg/graph.json`'s wrapper metadata, `{name, version, status, build_date,
+     statistics, domains}`, is silently discarded by `subjectKgAdapter.ts`'s `getRaw()`, which keeps
+     only `.concepts`, and zero runtime validation or CI wiring exists for the KG validator script).
+  2. Mastery Intelligence Architecture — not started.
+  3. Teaching Action Intelligence — not started.
+  4. Dynamic Lesson Composition — not started.
+  5. Student Memory Evolution — not started.
+  6. Recommendation Intelligence — not started.
+  7. Visualization & Simulation Architecture — not started.
+  8. AI Independence Roadmap — not started.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the

@@ -33,7 +33,9 @@ CHANGELOG going forward.
 | Phase 2 — Milestone 1: spine + asset catalogue for ONE subject (physics) | **In progress.** Steps 1-3 done (schema, Concept+Edge+Misconception backfill). Decision Pipeline stages 0-4 (Frame/Intent/Retrieval/Composition/Persist) implemented at 0724396. Route side-car wired. Steps 4+ (EbCurriculum/EbModule, pgvector, latency measurement) not yet started. |
 | Educational Brain v1.0 — Architecture Freeze (`docs/architecture/`) | **Complete.** Permanent reference for the whole canonical pipeline + 36-engine inventory frozen this session. Documentation only — zero code changes. See §5 below. |
 | Phase 3+ | Not started. Requires explicit approval before beginning, per standing instruction. |
-| Knowledge Graph Consumption Architecture (`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`) | **Proposal written, not executed.** Opened 2026-06-30 under the revised priority directive (architecture > cleanup): two of the canonical KG's 10 authored fields (`cross_links`, `mastery_threshold`) are parsed but never exposed past the Generic Subject Adapter. 3-phase resolution proposed; Phase 1 self-clears the 4-condition gate but awaits an explicit go-ahead before execution. See §4b below. |
+| Knowledge Graph Consumption Architecture (`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`) | **Proposal written, not executed.** Per explicit user instruction (2026-06-30, second pivot): Phase 1 must NOT be implemented — no canonical KG field (`mastery_threshold`, `cross_links`, or any other) may be exposed until the Curriculum Production Pipeline freezes the Canonical Knowledge Graph v1 specification. Status downgraded from "awaiting go-ahead" to "blocked on external v1 freeze + future approval." See §4b below. |
+| KG Consumption Pipeline contract (`ADR_06_KG_CONSUMPTION_PIPELINE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #1 of the user's 8-item forward-architecture roadmap. Specifies the version/status/shape gate that must sit between the Curriculum Pipeline's output and the Educational Brain's adapter — found zero such gate exists today (no version check, no status check, no runtime shape validation, no CI wiring). Implementation blocked on the same two conditions as ADR 05 Phase 1. See §4c below. |
+| Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — item 1 of 8 done (ADR 06).** Items 2-8 (Mastery Intelligence, Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
 
 ---
 
@@ -268,6 +270,68 @@ scalability).
   (new Finding 7), `ENGINE_REFERENCE.md` §2 (correction) and §4 (open
   finding note), `CLAUDE.md` (new bullet).
 
+**Second pivot (same day, 2026-06-30):** the user accepted ADR 05 as
+documentation only and explicitly forbade implementing Phase 1 — no
+canonical KG field may be exposed (`mastery_threshold`, `cross_links`, or
+any other) until the Curriculum Production Pipeline freezes the
+Canonical Knowledge Graph v1 specification. The user also defined a full
+8-item forward-architecture roadmap (below) and instructed: design only,
+no implementation, no runtime/route/schema changes without explicit
+per-item approval.
+
+---
+
+## 4c. Educational Brain Forward-Architecture Roadmap (8 ADRs, user-specified order)
+
+Per the user's second pivot, the autonomous loop now works through this
+list in order, one ADR per turn, architecture-only:
+
+1. **Educational Brain Knowledge Graph Consumption Pipeline** — **DONE**,
+   `ADR_06_KG_CONSUMPTION_PIPELINE.md` (specification only, not
+   implemented). Designed the version/status/shape gate that should sit
+   between the Curriculum Pipeline's `graph.json` output and
+   `subjectKgAdapter.ts`. Found: zero version gate, zero status gate,
+   zero runtime shape validation, zero CI wiring exist today (the
+   validator script is manual-only, not referenced in `package.json` or
+   any `.github/workflows` file). All 5 live `graph.json` files already
+   carry `version`/`status`/`build_date` wrapper metadata that is
+   silently discarded by `getRaw()` (`subjectKgAdapter.ts:86-92`) before
+   reaching any consumer. Proposes a 4-part gate (Schema Version Gate,
+   Status Gate, Runtime Shape Validation, diagnostic-only Metadata
+   Surface) as a new layer between producer and consumer — zero changes
+   to `ConceptNode`/`KnowledgeNode`/existing `SubjectAdapter` methods.
+   Explicitly does not re-propose exposing `cross_links`/
+   `mastery_threshold` (that stays exactly where ADR 05 left it).
+   Implementation blocked on Curriculum Pipeline v1 freeze + explicit
+   approval, per the standing instruction.
+2. **Mastery Intelligence Architecture** — not started. Static vs.
+   evidence-adjusted mastery, global vs. personalized mastery, Beginner→
+   Intermediate→Expert progression, entrance examinations, mastery
+   validation.
+3. **Teaching Action Intelligence** — not started. Decision hierarchy,
+   explanation/visualization/simulation/assessment/remediation selection.
+4. **Dynamic Lesson Composition** — not started. Knowledge-Asset
+   assembly, adaptive sequencing, multi-modal teaching, recovery paths.
+5. **Student Memory Evolution** — not started. Long-term learner model,
+   persistent/short-term memory, retrieval strategy, forgetting model,
+   evidence updates.
+6. **Recommendation Intelligence** — not started. Short-term
+   recommendations, long-term learning plans, weakness recovery,
+   goal-based learning.
+7. **Visualization & Simulation Architecture** — not started. Visual
+   selection, graphs, animations, interactive simulations, scene
+   generation, rendering independence.
+8. **AI Independence Roadmap** — not started. Measuring/reducing AI
+   dependency, promoting validated assets, knowledge acquisition
+   strategy.
+
+**Per-ADR discipline (binding for all 8):** gather evidence, compare
+multiple architectural approaches, choose the simplest long-term design,
+document trade-offs, produce implementation specs, validation specs, and
+a migration strategy, estimate scalability to millions of learners,
+preserve backward compatibility with Educational Brain v1 — design only,
+no implementation without separate explicit approval per item.
+
 ---
 
 ## 4. Constraints carried forward (unchanged, still binding)
@@ -288,3 +352,11 @@ scalability).
   progression framework, entrance exam framework, curriculum mapping, AI
   independence, scalability) over dead-code/cleanup auditing. Do not
   propose or execute further cleanup unless it blocks one of these.
+- **Strict architecture-only mode (2026-06-30, second pivot, binding for
+  all 8 roadmap ADRs in §4c):** do NOT implement adapter functions, do
+  NOT modify runtime/routes/schemas/production code, without explicit
+  per-item user approval. Do NOT expose `mastery_threshold`,
+  `cross_links`, or any other Canonical Knowledge Graph field until the
+  Curriculum Production Pipeline freezes the Canonical Knowledge Graph
+  v1 specification. ADR 05 Phase 1 specifically remains un-executed
+  under this rule, not merely "awaiting go-ahead."

@@ -4,6 +4,87 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 06 — Knowledge Graph Consumption Pipeline (specification only, NOT implemented) + strict architecture-only mode
+
+User accepted ADR 05 as documentation-only and explicitly forbade
+implementing its Phase 1: no canonical KG field (`mastery_threshold`,
+`cross_links`, or any other) may be exposed until the Curriculum
+Production Pipeline freezes the Canonical Knowledge Graph v1
+specification. User then defined a full 8-item Educational Brain
+forward-architecture roadmap and instructed strict architecture-only
+mode for all of it: no adapter implementation, no runtime/route/schema
+changes, without explicit per-item approval. This entry is item 1 of 8.
+
+- **No code changed, no field exposed.** This entry is a specification
+  document only.
+- Audited the gap between "Curriculum Pipeline produces `graph.json`"
+  and "Educational Brain consumes it." Found zero formal contract exists
+  today:
+  - Every live `graph.json` (5 subjects) already carries a wrapper
+    (`name`, `version`, `status`, `build_date`, `statistics`, `domains`,
+    `concepts`) — confirmed by direct inspection: mathematics is
+    `version 1.0.1, status "frozen"`; physics/chemistry/computer-science/
+    biology are all `version 1.0.0, status "production"` (a vocabulary
+    inconsistency in itself — two different maturity-claim strings for
+    what reads like the same meaning, evidence the producer side's own
+    status vocabulary isn't standardized yet).
+  - `subjectKgAdapter.ts`'s `getRaw()` (lines 86-92) destructures only
+    `raw.concepts` — the entire wrapper (including `version` and
+    `status`) is discarded at that one line and never reaches any
+    consumer, not even for logging.
+  - Zero runtime shape validation: every field assignment in
+    `getNodes()`/`getConceptNode()` is a bare TypeScript `as` cast
+    (compile-time only, erased at runtime) — no Zod, no manual check.
+  - Zero automated pipeline gate: confirmed `validate-knowledge-graph.ts`
+    (the 9-check structural validator) is not referenced in
+    `package.json` (no `prebuild`/`prepush` hook) and no
+    `.github/workflows` file runs it — it is a manual-only CLI script.
+  - The validator itself doesn't enforce version compatibility either —
+    it reads `graph.version` for console display only, never compares it
+    against a supported-version constant.
+- Wrote `docs/architecture/ADR_06_KG_CONSUMPTION_PIPELINE.md` —
+  proposes a 4-part **Knowledge Graph Consumption Gate** as a new layer
+  between the Curriculum Pipeline's output and `subjectKgAdapter.ts`:
+  (a) Schema Version Gate (major-version compatibility check, fail loud
+  on mismatch), (b) Status Gate (only `frozen`/`production`-equivalent
+  statuses loadable by the runtime — turns "don't consume an unfrozen
+  KG" from a documented practice into a structural guarantee), (c)
+  Runtime Shape Validation (boundary-checks the *already-consumed* 8
+  fields, replacing the current compile-time-only `as` casts — does NOT
+  expose any new field), (d) a diagnostic-only Metadata Surface
+  (`getMetadata()`, zero teaching-decision influence). Compared against
+  Option A (leave as-is, rejected — no structural protection exists
+  today) and Option B (build a full versioned-schema migration framework
+  now, rejected as premature — there's no v2 to migrate from yet, the
+  Curriculum Pipeline hasn't even frozen v1). Includes full version-
+  compatibility semantics (MAJOR/MINOR/PATCH), failure-handling design
+  (fail loud in CI/dev/structured logs, fail soft only at the existing
+  per-turn `try`/`catch` layer — Rule 11 preserved), a future-
+  extensibility procedure (formalizes the same discipline already being
+  followed manually for `cross_links`/`mastery_threshold`), an
+  implementation specification (not executed), a validation
+  specification, a staged-trust migration strategy (observe-only mode
+  first, enforcing mode after one clean deploy cycle), and a scalability
+  analysis (`O(subjects)` cost, zero per-request overhead, identical
+  scaling at any learner volume).
+- Zero changes to `ConceptNode`, `KnowledgeNode`,
+  `SubjectAdapter.getNodes()`/`getConceptNode()`, the Teaching Engine,
+  TAG, Lesson Composer, or the Recommendation cluster. Does not
+  re-propose exposing `cross_links`/`mastery_threshold` — that remains
+  exactly where ADR 05 left it, now additionally blocked by this ADR's
+  own not-yet-built gate.
+- Updated `docs/project-memory/PROJECT_STATE.md` (new §4c — the full
+  8-item roadmap with item 1 marked done, items 2-8 listed not-started;
+  phase-status table rows; a new binding "strict architecture-only mode"
+  constraint recorded under §4).
+- Per the user's explicit instruction this turn, this ADR's closing
+  section does **not** ask for approval to implement (unlike ADR 04/05)
+  — implementation is explicitly blocked on two external/future
+  conditions (Curriculum Pipeline v1 freeze + separate explicit
+  approval), not offered as a same-session option.
+
+---
+
 ## ADR 05 — Knowledge Graph Consumption Architecture (documentation only, NOT executed) + priority pivot
 
 Operating under a revised standing directive: ADR 04 is confirmed by the
