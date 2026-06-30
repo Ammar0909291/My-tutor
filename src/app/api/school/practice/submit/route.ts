@@ -110,5 +110,29 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  // Phase 2B: fire-and-forget memory update — re-fetches profile/subject inside block
+  // because `chapter` and `profile` are scoped to the mastery-integration block above.
+  Promise.resolve().then(async () => {
+    if (!ps.chapterId) return
+    const [subject, prof] = await Promise.all([
+      prisma.subject.findUnique({ where: { slug: ps.subjectSlug }, select: { id: true } }),
+      prisma.profile.findUnique({ where: { userId: session.user.id }, select: { educationBoard: true, grade: true } }),
+    ])
+    if (!subject || !prof?.educationBoard || !prof?.grade) return
+    const chapters = getSchoolChapters(prof.educationBoard, ps.subjectSlug, prof.grade)
+    const ch = chapters.find((c) => c.id === ps.chapterId)
+    if (!ch?.kgNodeIds.length) return
+    const { updateMemoryFromPractice } = await import('@/lib/memory/update-pipeline')
+    await updateMemoryFromPractice(
+      session.user.id,
+      subject.id,
+      ch.kgNodeIds.map((nodeId) => ({
+        topicSlug: nodeId,
+        masteryPct: result.accuracyPercent,
+        passed: result.masteryStatus === 'mastered',
+      })),
+    )
+  }).catch(() => {})
+
   return NextResponse.json(result)
 }

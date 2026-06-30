@@ -24,3 +24,9 @@ export {
   readLearnerMemoryFromPreload,
   toTeachingSnapshot,
 } from './service'
+
+export {
+  updateMemoryFromPractice,
+  updateMemoryFromAssessment,
+  updateMemoryFromLesson,
+} from './update-pipeline'
