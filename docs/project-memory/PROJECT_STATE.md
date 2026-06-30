@@ -452,6 +452,62 @@ Teaching Action Intelligence (roadmap item 3/8).
 
 ---
 
+## 4f. ADR 08 — Teaching Action Intelligence (this session, roadmap 3/8, documentation only)
+
+Pre-ADR checklist completed per the binding governance rule: re-read the
+Educational Brain Bible, ADRs 02-07, `ARCHITECTURE_DECISIONS.md`, and this
+file before drafting — no conflicts found, all prior architecture
+preserved.
+
+**Audit performed:** traced the live call chain from `teaching-engine/
+index.ts`'s `decide()` through `teachingActionGenerator.ts` (TAG) to
+`lessonComposer.ts`'s Dynamic Lesson Composer, in `route.ts`. Confirmed
+none of the three engines' signatures or pure cores reference board,
+grade, or School-only context. Confirmed the chain's sole trigger
+condition, `if (snapshotCurrentConceptId)` (`route.ts:1282`), depends on
+`learnSession.contextSnapshot.currentConceptNodeId`, which a full-tree
+grep shows has exactly one write site in all of `src/`
+(`route.ts:1701-1724`) — inside `if (schoolCtx)`. Result: the Action
+layer is mode-agnostic by construction but **School-Mode-only in
+practice** — a genuinely new finding, confirmed absent from
+`ARCHITECTURE_DECISIONS.md` and `ENGINE_REFERENCE.md` before this turn.
+Also formally distinguished this "Action" layer from `teachingStrategy.ts`'s
+7-value "Posture" layer (already dual-mode per ADR 02) — two different
+grains of "how to teach," never previously related to each other in the
+documentation.
+
+**Created:** `docs/architecture/ADR_08_TEACHING_ACTION_INTELLIGENCE.md`
+— full 14-section ADR. Selected design: designate Posture and Action as
+two intentionally distinct canonical layers, formally document their
+relationship, and propose a single additive extension — seed-and-persist
+`currentConceptNodeId` for Library sessions from the same `currentModule`
+resolution already used by the Library-mode Posture block, with zero
+signature/type changes to `decide()`, TAG, or the Composer. Also records
+a minor, non-Finding-worthy doc-accuracy note: TAG's header comment
+overstates `concept_type` as a direct `mapActionType()` input.
+
+**Cross-references updated:** Bible §3 (engine map rows #10-12, #15;
+also corrects a pre-existing inaccuracy in row #12, previously "LIVE,
+both modes," now "LIVE, School-Mode-only in practice"), §6.2 (new
+paragraph tracing the root cause), §7 (new risk register row R12), §9
+(ADR 08 row), §10 (roadmap status 3 of 8), §12 (new change-log entry);
+`ARCHITECTURE_DECISIONS.md` Part 3 new Finding 9, Part 4 summary counts
+updated to nine findings; `CLAUDE.md` roadmap item 3 marked done.
+
+**No conflicts found** with any existing ADR or Permanent Rule. The
+Action layer and Posture layer are not duplicates of each other (ADR
+07's "reject premature unification" precedent applies identically here);
+neither engine in the Action layer is dead code, so no retirement is
+proposed (unlike ADR 03/04).
+
+**Status:** specification only, zero code changes. Implementation
+blocked on the same two conditions as ADR 05/06/07: Curriculum
+Production Pipeline declares Canonical Knowledge Graph v1 frozen, AND
+explicit user approval. Next roadmap item: **#4 — Dynamic Lesson
+Composition.**
+
+---
+
 ## 4. Constraints carried forward (unchanged, still binding)
 
 - Do NOT create PRs unless explicitly asked. Do NOT push to branches

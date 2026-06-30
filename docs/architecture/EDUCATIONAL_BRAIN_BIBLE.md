@@ -104,12 +104,12 @@ see ADR 03).
 | 7 | Mastery Intelligence | Mastery | `school/adaptive/masteryIntelligence.ts` | LIVE, School-Mode-only | ADR 07 (Library extension proposed) |
 | 8 | Assessment Intelligence | Assessment | `school/adaptive/assessmentIntelligence.ts` | LIVE | — |
 | 9 | Subject Assessment Requirements | Assessment | `assessment/subjectValidator.ts` | LIVE | — |
-| 10 | Teaching Engine (FROZEN) | Teaching | `teaching-engine/{index,types}.ts` | LIVE | — (ADR 08 upcoming) |
-| 11 | Teaching Action Generator (TAG) | Teaching | `school/adaptive/teachingActionGenerator.ts` | LIVE | — (ADR 08 upcoming) |
-| 12 | Dynamic Lesson Composer | Teaching | `school/adaptive/lessonComposer.ts` | LIVE, both modes | — (ADR 09 upcoming) |
+| 10 | Teaching Engine (FROZEN) | Teaching | `teaching-engine/{index,types}.ts` | LIVE, mode-agnostic by construction | ADR 08 (Library extension proposed via callers) |
+| 11 | Teaching Action Generator (TAG) | Teaching | `school/adaptive/teachingActionGenerator.ts` | LIVE, School-Mode-only in practice | ADR 08 (Library extension proposed) |
+| 12 | Dynamic Lesson Composer | Teaching | `school/adaptive/lessonComposer.ts` | LIVE, School-Mode-only in practice | ADR 08 (Library extension proposed); ADR 09 upcoming |
 | 13 | Confidence Calibration | Teaching support | `confidenceCalibration.ts` | LIVE | — |
 | 14 | Learning Momentum | Teaching support | `learningMomentum.ts` | LIVE | — |
-| 15 | Teaching Strategy Orchestrator | Teaching support | `teachingStrategy.ts` | LIVE, both modes (ADR 02) | ADR 02 |
+| 15 | Teaching Strategy Orchestrator (Teaching Posture Intelligence) | Teaching support | `teachingStrategy.ts` | LIVE, both modes (ADR 02) | ADR 02, ADR 08 (relationship to TAG formalized) |
 | 16 | Teaching Output Bias | Teaching support | `teachingOutputBias.ts` | LIVE | — |
 | 17 | Teaching Style Detector | Teaching support | `teachingStyle.ts` | LIVE | — |
 | 18 | Misconception Engine | Teaching support | `misconceptionEngine.ts` | LIVE | — |
@@ -259,10 +259,28 @@ via `decide()` — frozen, pure, zero I/O, zero calls to any other engine.
 This is the single decision point for "what should happen this turn"; TAG
 and the Lesson Composer only elaborate its output, never re-decide.
 **Full detail: `DATA_FLOW.md` §4 (Teaching flow), `ENGINE_REFERENCE.md`
-Engine 10.** A dedicated audit of whether this decision hierarchy is
-sufficient for explanation/visualization/simulation/assessment/
-remediation *selection* (as opposed to the existing goal/mode/action/
-difficulty/time fields) is roadmap item #3 — **ADR 08, next**.
+Engine 10.**
+
+**ADR 08 finding (Teaching Action Intelligence, roadmap item #3 —
+DONE):** two distinct-grain layers answer "how to teach this turn" —
+**Teaching Posture Intelligence** (`teachingStrategy.ts`, a 7-value
+longitudinal-signal-synthesized posture, LIVE in both School and Library
+modes since ADR 02) and **Teaching Action Intelligence**
+(`decide()` → TAG → Dynamic Lesson Composer, the concrete-form layer:
+`action_type`/`presentation_mode`/`visual_type`/`interaction_level`/
+`bloom_level`/lesson-stage sequence). ADR 08 designates both as
+canonical, at their respective grains, and does **not** merge them.
+It also found that the Action layer — though every one of its three
+engines (`decide()`, TAG's pure core, the Composer's pure core) is
+mode-agnostic by construction — runs **only in School Mode in practice**,
+because the one piece of state that seeds the chain
+(`learnSession.contextSnapshot.currentConceptNodeId`) has exactly one
+write site in the codebase, and it sits inside `if (schoolCtx)`
+(`route.ts` ~1701). **PROPOSED, ADR 08:** a Library-mode seed-and-persist
+path for `currentConceptNodeId`, using the same trivial-`Chapter`-shape/
+unused-`board`/`grade`-parameter evidence pattern ADR 02 and ADR 07
+already established — blocked on KG v1 freeze + explicit approval, same
+as every other proposed extension in this Bible.
 
 ### 6.3 Student learning flow (one turn, end to end)
 
@@ -426,6 +444,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | Open, audit deferred | §6.6 | Scoped into ADR 10 |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
+| R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
 
 ---
 
@@ -490,7 +509,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 05 | Knowledge Graph Consumption Architecture | **Proposal, blocked on KG v1 freeze** | `cross_links`/`mastery_threshold` parsed but never exposed past the adapter |
 | ADR 06 | KG Consumption Pipeline | **Proposal, blocked on KG v1 freeze** | Zero version/status/shape gate exists between Curriculum Pipeline output and the runtime adapter |
 | ADR 07 | Mastery Intelligence Architecture | **Proposal, blocked on KG v1 freeze** | Five non-unified mastery/progression representations; `MasteryLevel` designated canonical |
-| ADR 08 | Teaching Action Intelligence (roadmap 3/8) | **Next, not yet written** | — |
+| ADR 08 | Teaching Action Intelligence (roadmap 3/8) | **Proposal, blocked on KG v1 freeze** | The concrete Action layer (`decide()`→TAG→Composer) is School-Mode-only in practice despite being mode-agnostic by construction; Library extension proposed, Posture/Action layer relationship formalized |
 | ADR 09 | Dynamic Lesson Composition (roadmap 4/8) | Not started | — |
 | ADR 10 | Student Memory Evolution (roadmap 5/8) | Not started | — |
 | ADR 11 | Recommendation Intelligence (roadmap 6/8) | Not started | — |
@@ -511,13 +530,15 @@ ADRs 02–07 — none of them are superseded by this note alone.
 
 ## 10. Roadmap status
 
-2 of 8 items complete (specification-only, per the standing
+3 of 8 items complete (specification-only, per the standing
 implementation-blocked rule):
 
 1. KG Consumption Pipeline — **DONE**, ADR 06
 2. Mastery Intelligence Architecture — **DONE**, ADR 07
-3. Teaching Action Intelligence — **next**
-4. Dynamic Lesson Composition — not started
+3. Teaching Action Intelligence — **DONE**, ADR 08 (Action layer is
+   School-Mode-only in practice; Library extension + Posture/Action
+   relationship proposed, not implemented)
+4. Dynamic Lesson Composition — **next**
 5. Student Memory Evolution — not started
 6. Recommendation Intelligence — not started
 7. Visualization & Simulation Architecture — not started
@@ -557,3 +578,12 @@ yet.
   index). No production code changed. Supersedes `EDUCATIONAL_BRAIN_V1.md`
   as the canonical entry point; `EDUCATIONAL_BRAIN_V1.md` remains valid as
   detail-layer content, not superseded in substance.
+- **2026-06-30 — updated for ADR 08 (Teaching Action Intelligence).**
+  §3 engine map rows #10-12 and #15 updated to record that the Action
+  layer (`decide()` → TAG → Dynamic Lesson Composer) is mode-agnostic by
+  construction but School-Mode-only in practice (also corrects a
+  pre-existing inaccuracy in row #12, which previously read "LIVE, both
+  modes"); §6.2 gains a new paragraph tracing the root cause to the single
+  unseeded `currentConceptNodeId` write site; §7 risk register gains R12;
+  §9 ADR index updated for ADR 08; §10 roadmap status moved to 3 of 8. No
+  production code changed.

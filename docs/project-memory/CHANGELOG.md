@@ -4,6 +4,47 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 08: Teaching Action Intelligence (documentation only, no code changed)
+
+Roadmap item #3 of 8. Traced the live `decide()` → Teaching Action
+Generator (TAG) → Dynamic Lesson Composer chain and found it is
+mode-agnostic by construction (no engine in the chain references board,
+grade, or School-only context) but **School-Mode-only in practice**: its
+trigger condition depends on `learnSession.contextSnapshot
+.currentConceptNodeId`, which has exactly one write site in all of
+`src/` (`route.ts:1701-1724`), itself inside `if (schoolCtx)`. Formally
+distinguished this concrete "Action" layer from `teachingStrategy.ts`'s
+7-value "Posture" layer (already dual-mode per ADR 02) — two different
+grains of "how to teach," never previously related to each other.
+
+- **Created** `docs/architecture/ADR_08_TEACHING_ACTION_INTELLIGENCE.md`
+  — full 14-section ADR. Selected design: designate Posture and Action as
+  two distinct canonical layers, formally document their relationship,
+  and propose one additive extension — seed-and-persist
+  `currentConceptNodeId` for Library sessions from the existing
+  `currentModule` resolution, with zero signature/type changes to
+  `decide()`, TAG, or the Composer.
+- **Updated** `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` — §3 engine
+  map (rows #10-12, #15; also corrects a pre-existing inaccuracy in row
+  #12, previously "LIVE, both modes," now "LIVE, School-Mode-only in
+  practice"), §6.2 (new paragraph), §7 (new risk register row R12), §9
+  (ADR 08 row), §10 (roadmap status now 3 of 8), §12 (new change-log
+  entry).
+- **Updated** `docs/architecture/ARCHITECTURE_DECISIONS.md` — new
+  Finding 9 in Part 3; Part 4 summary counts updated to nine findings
+  disclosed.
+- **Updated** `docs/project-memory/PROJECT_STATE.md` — new §4f.
+- **Updated** `CLAUDE.md` — roadmap item 3 marked done with a one-line
+  finding summary.
+- **No conflicts found** against any prior ADR or Permanent Rule. Neither
+  engine in the Action layer is dead code, so no retirement is proposed
+  (unlike ADR 03/04); the two layers are not duplicates of each other
+  (ADR 07's "reject premature unification" precedent applies identically).
+- **No production code changed. No implementation requested or
+  performed.** Next: ADR 09 — Dynamic Lesson Composition (roadmap 4/8).
+
+---
+
 ## Educational Brain Bible established (documentation only, no code changed)
 
 Refined Chief Educational Brain Architect directive, same day as the

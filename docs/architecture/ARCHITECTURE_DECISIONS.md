@@ -338,6 +338,47 @@ from an accurate map, not a flattering one.
 
 ---
 
+### Finding 9 — The concrete Teaching Action layer is mode-agnostic by construction but School-Mode-only in practice — **PROPOSAL WRITTEN (ADR 08), AWAITING EXPLICIT APPROVAL**
+
+- Opened under the "Teaching Action Intelligence" roadmap item (#3 of 8),
+  forward-looking design work per the standing priority pivot, not a
+  cleanup audit.
+- **Evidence:** none of the three engines that turn a teaching decision
+  into a concrete in-lesson action — `teaching-engine/index.ts`'s
+  `decide()`, `teachingActionGenerator.ts` (TAG), or
+  `lessonComposer.ts`'s Dynamic Lesson Composer — reference board, grade,
+  or any School-only context in their signatures or pure cores. Yet a
+  full-tree grep for `currentConceptNodeId` (the single field that gates
+  this chain's call site, `route.ts:1282`,
+  `if (snapshotCurrentConceptId)`) returns exactly three matches in all of
+  `src/`: one read (`route.ts:68`), one comment (`route.ts:1045`), and
+  exactly one write (`route.ts:1701-1724`) — and that write sits inside
+  `if (schoolCtx)`, sourced from a school-only lesson-plan resolution. No
+  Library/general session ever populates this field, so the chain never
+  fires for Library learners, despite being architecturally capable of
+  it. This is distinct from `teachingStrategy.ts`'s 7-value posture
+  synthesis (already dual-mode per ADR 02/Finding-adjacent work) — the
+  two are different grains of "how to teach" (longitudinal posture vs.
+  per-turn concrete action) that had never been formally related to each
+  other before this finding.
+- **Ruling:** documented as **ADR 08, a proposal, not executed**. ADR 08
+  designates the Posture layer (`teachingStrategy.ts`) and the Action
+  layer (`decide()` → TAG → Composer) as two intentionally distinct,
+  canonical layers at different grains, formally records their
+  relationship for the first time, and proposes a single additive
+  extension: seed-and-persist `currentConceptNodeId` for Library sessions
+  (sourced from the same `currentModule` resolution already used by the
+  Library-mode Posture block), with no signature, type, or `decide()`/TAG/
+  Composer core changes anywhere. A minor, non-Finding-worthy doc-accuracy
+  note is also recorded: `teachingActionGenerator.ts`'s header comment
+  overstates that `concept_type` is a direct input to `mapActionType()`;
+  it is not part of that function's signature. See
+  `docs/architecture/ADR_08_TEACHING_ACTION_INTELLIGENCE.md` for full
+  evidence, the selected design, trade-offs, and validation/migration
+  strategy. No code has been changed by this finding.
+
+---
+
 ## Part 4 — Validation results
 
 | Check | Result |
@@ -347,11 +388,12 @@ from an accurate map, not a flattering one.
 | No duplicated responsibility | **Pass, with two documented exceptions** (Findings 1 and 2). Both are recorded, neither is silently hidden. |
 | No undocumented public interfaces | **Pass.** Every exported function across all ~35 engines is listed in `ENGINE_REFERENCE.md` with its full signature. |
 | No undocumented data flow | **Pass.** `DATA_FLOW.md` traces all 65 ordered steps of the canonical pipeline plus six domain-specific flow diagrams. |
-| No architectural conflicts | **Pass, with six findings disclosed** (Part 3 above) — none of which represents a functional bug (no runtime collision, no incorrect behavior observed); all are naming/duplication/staleness findings recorded for future, separately-approved cleanup. |
+| No architectural conflicts | **Pass, with nine findings disclosed** (Part 3 above) — none of which represents a functional bug (no runtime collision, no incorrect behavior observed); all are naming/duplication/staleness/scope-gap findings recorded for future, separately-approved cleanup or extension. |
 
 **Overall: PASS.** The architecture is internally consistent and free of
 circular dependencies or functional conflicts. Six honest findings are
-recorded for future attention; none blocks this freeze.
+recorded for future attention from the original freeze; none blocks this
+freeze.
 
 **Update 2026-06-30:** Finding 2 is resolved — see its entry in Part 3
 and `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. Finding 4's
@@ -360,10 +402,13 @@ and per explicit user instruction will **remain unexecuted indefinitely**
 (documentation-only is the final state, not an interim one) — see its
 entry in Part 3 and `ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`.
 Four honest findings remain fully open from the original freeze (1, 3, 5,
-6). Two further findings were opened post-freeze under the revised
+6). Three further findings were opened post-freeze under the revised
 "consume the KG / design forward" priority: the seventh (Knowledge Graph
 Consumption Architecture) — see `ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`
-(proposal written, not executed) — and the eighth (mastery/progression
+(proposal written, not executed) — the eighth (mastery/progression
 fragmentation, roadmap item #2) — see
 `ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md` (proposal written, not
+executed) — and the ninth (Teaching Action layer is School-Mode-only in
+practice, roadmap item #3) — see
+`ADR_08_TEACHING_ACTION_INTELLIGENCE.md` (proposal written, not
 executed).

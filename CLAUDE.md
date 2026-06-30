@@ -115,7 +115,16 @@
      proposes, without implementing, extending it to Library Mode,
      consolidating `learningProfile.ts` onto it, and a cross-vocabulary
      mapping table; new Finding 8 in `ARCHITECTURE_DECISIONS.md`).
-  3. Teaching Action Intelligence — not started.
+  3. Teaching Action Intelligence — **done**, see
+     `docs/architecture/ADR_08_TEACHING_ACTION_INTELLIGENCE.md`
+     (found the concrete `decide()` → Teaching Action Generator → Dynamic
+     Lesson Composer chain is mode-agnostic by construction but
+     School-Mode-only in practice — its trigger field,
+     `contextSnapshot.currentConceptNodeId`, has exactly one write site
+     in `src/`, gated by `if (schoolCtx)`; formally distinguished this
+     "Action" layer from `teachingStrategy.ts`'s 7-value "Posture" layer
+     and proposes, without implementing, a Library-mode seed-and-persist
+     extension; new Finding 9 in `ARCHITECTURE_DECISIONS.md`).
   4. Dynamic Lesson Composition — not started.
   5. Student Memory Evolution — not started.
   6. Recommendation Intelligence — not started.
@@ -152,8 +161,8 @@
   finished. Continue autonomously through the 8-item roadmap above; when all 8 ADRs are complete,
   stop and produce one final **Architecture Completion Report** (Bible summary, ADR index,
   architecture summary, complete engine dependency map, remaining implementation work, known
-  risks, readiness assessment for implementation) — not due yet, only 2 of 8 roadmap items done as
-  of ADR 07.
+  risks, readiness assessment for implementation) — not due yet, only 3 of 8 roadmap items done as
+  of ADR 08.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the
