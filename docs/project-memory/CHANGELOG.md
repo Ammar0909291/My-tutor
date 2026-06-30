@@ -4,6 +4,38 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## Educational Brain v1.0 — Architecture Freeze (docs only, no code changes)
+
+Documentation-only freeze of the canonical (non-experimental) pipeline, per
+the standing instruction to stop building new features/engines/subjects and
+instead produce the permanent architecture reference.
+
+**Created** `docs/architecture/{EDUCATIONAL_BRAIN_V1,ENGINE_REFERENCE,
+DATA_FLOW,DEPENDENCY_RULES,EXTENSION_GUIDE,ARCHITECTURE_DECISIONS}.md`:
+- System architecture diagram, full canonical pipeline trace (65 ordered
+  steps through `api/learn/chat/route.ts`), 36-engine reference (inputs/
+  outputs/public functions/failure behavior/guarantees/deterministic vs.
+  probabilistic/MUST NOT per engine), per-engine dependency rules + a
+  circular-dependency-free summary matrix, 8 extension recipes for future
+  subjects/engines/visual types/assessment types/teaching actions/memory
+  signals/recommendation signals, and 15 permanent architecture rules.
+- 6 honest findings recorded (not fixed — out of scope for a freeze):
+  `lessonPlanner.ts`/`lessonComposer.ts` `LessonPlan` naming overlap;
+  orphaned zero-caller `teachingActionEngine.ts` + Teaching Assets
+  Platform overlapping TAG; "Curriculum Validator Brain" and "Knowledge
+  Graph Validator" are the same script; two coexisting Recommendation
+  Intelligence generations (`nextBestAction.ts` vs
+  `learningOrchestrator.ts`); two coexisting curriculum representations
+  (file-based KG vs. `Eb*` DB models); a stale `ReviewSchedule` schema
+  comment.
+- Validation: PASS — no circular engine dependencies, no undocumented
+  public interfaces or data flow, no functional/runtime conflicts.
+
+Updated `docs/project-memory/PROJECT_STATE.md` with a new freeze-summary
+section. Zero `src/`, `prisma/`, or `docs/{subject}/kg/` files touched.
+
+---
+
 ## Phase 2, Milestone 1 — Critical fix: concept IDs + composition enrichment + coverage (b415b0e)
 
 **Critical bug fix**: intentStage was surfacing synthetic concept IDs that don't
