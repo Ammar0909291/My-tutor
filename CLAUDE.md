@@ -136,10 +136,41 @@
      `contextSnapshot.lessonStageProgress` key and a `planSignature`
      continuation/replan fingerprint computed in calling code; new
      Finding 10 in `ARCHITECTURE_DECISIONS.md`).
+  Items 5-8 below are **superseded** by the 15-item v1.0 completion
+  criteria in the Gap Analysis Discipline rule immediately below — kept
+  here only as a historical record of the original roadmap framing.
   5. Student Memory Evolution — not started.
   6. Recommendation Intelligence — not started.
   7. Visualization & Simulation Architecture — not started.
   8. AI Independence Roadmap — not started.
+- **Architecture Gap Analysis Discipline (2026-06-30, binding, supersedes
+  the fixed "one ADR per roadmap item" assumption above):** the objective
+  is no longer to produce as many ADRs as possible — it is to finish
+  Educational Brain Architecture v1.0, defined by 15 completion criteria
+  (Bible §10.2: KG consumption, Mastery Intelligence, Teaching Action
+  Intelligence, Dynamic Lesson Composition, Student Memory, Recommendation
+  Intelligence, Visualization & Simulation Architecture, Assessment &
+  Mastery Validation, Evidence Engine, AI Independence Strategy,
+  Curriculum Mapping Strategy, Knowledge Asset Lifecycle, Scalability
+  Strategy, Validation & Quality Assurance, Implementation Governance).
+  Before every new ADR, perform an Architecture Gap Analysis: (1) is a
+  major capability still required for the Educational Brain to function
+  as a complete world-class teaching system, (2) is it fundamental enough
+  that undocumented implementation risks a redesign, (3) is it not
+  already fully covered by the Bible, an existing ADR, or any other
+  architecture document in the repo. Write a new ADR **only if all three
+  are YES**; otherwise update the Bible, consolidate, eliminate
+  duplication, cross-reference, and strengthen guidance instead — a topic
+  being discussable is never sufficient reason for a new ADR. When all 15
+  items read DONE: freeze v1.0, mark remaining ADR ideas as future
+  enhancements (not v1 requirements), produce the final Bible and the
+  final Architecture Completion Report, then stop automatically. A
+  pre-existing, previously unindexed 11-chapter proposal document set
+  (`docs/educational-brain/*`) and a live scene-generation/simulation
+  subsystem (`src/lib/teaching/sceneGenerators/*`) were discovered
+  mid-session, overlapping several of the 15 items and absent from the
+  Bible's engine map — reconciliation in progress, see Bible §10.2 and
+  §12 change log.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

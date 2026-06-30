@@ -33,7 +33,7 @@ ADR-08-and-later finding). Each section below states which is which.
 6. §7 — risk register.
 7. §8 — architecture glossary.
 8. §9 — ADR index (every ADR, one line each, current status).
-9. §10 — roadmap status (where the 8-item plan stands).
+9. §10 — v1.0 completion criteria, the Gap Analysis gate, and roadmap status.
 10. §11 — document map (this Bible vs. the detail documents it indexes).
 11. §12 — change log of this Bible itself.
 
@@ -554,29 +554,83 @@ ADRs 02–07 — none of them are superseded by this note alone.
 
 ---
 
-## 10. Roadmap status
+## 10. v1.0 completion criteria & roadmap discipline
 
-4 of 8 items complete (specification-only, per the standing
-implementation-blocked rule):
+**Superseded note:** this section previously tracked a fixed 8-item
+roadmap ("KG Consumption Pipeline" through "AI Independence Roadmap"),
+each item assumed to require exactly one ADR. That assumption is
+**retired as of 2026-06-30 (Gap Analysis Discipline directive)**. The
+objective is no longer "produce 8 ADRs" — it is **finish Educational
+Brain Architecture v1.0**, defined by the 15-item completion criteria in
+§10.2 below. Some criteria are already satisfied by existing engines/ADRs
+with no further work needed; some require consolidation/cross-referencing
+rather than a new document; only the remainder require a new ADR. ADRs
+06-09 (the first four items below) were produced before this discipline
+existed and are retroactively confirmed to have passed the gate (each
+addressed a capability with no prior coverage and material redesign risk
+if undocumented) — they are not retracted.
 
-1. KG Consumption Pipeline — **DONE**, ADR 06
-2. Mastery Intelligence Architecture — **DONE**, ADR 07
-3. Teaching Action Intelligence — **DONE**, ADR 08 (Action layer is
-   School-Mode-only in practice; Library extension + Posture/Action
-   relationship proposed, not implemented)
-4. Dynamic Lesson Composition — **DONE**, ADR 09 (Lesson Composer has no
-   cross-turn stage continuity; tag-based continuity extension proposed,
-   not implemented)
-5. Student Memory Evolution — **next**
-6. Recommendation Intelligence — not started
-7. Visualization & Simulation Architecture — not started
-8. AI Independence Roadmap — not started
+### 10.1 The Architecture Gap Analysis gate (binding, applies to every future ADR)
 
-When all 8 are complete, the next and final deliverable is the
-**Architecture Completion Report** (Bible summary, full ADR index,
-architecture summary, engine dependency map, remaining implementation
-work, known risks, readiness assessment, final recommendation) — not due
-yet.
+Before creating any new ADR, answer three questions in writing, with
+evidence (file paths, grep results, existing Bible/ADR citations — not
+assertion):
+
+1. **Is there a major architectural capability still required** for the
+   Educational Brain to function as a complete world-class teaching
+   system?
+2. **Is this capability fundamental enough** that implementation would be
+   significantly harder, or would risk a redesign, if attempted without
+   documenting it first?
+3. **Is this capability not already fully covered** by the Educational
+   Brain Bible, an existing ADR, or any other architecture document in
+   the repository (e.g. `docs/educational-brain/*`, `EXTENSION_GUIDE.md`)?
+
+**A new ADR may be written only if all three answers are YES.**
+Otherwise: do not create an ADR. Instead, update the Bible, consolidate
+existing architecture, eliminate duplication, cross-reference related
+systems, and strengthen implementation guidance. Discussability is not a
+gate criterion — a topic that could be discussed is not, on its own,
+reason to write an ADR about it.
+
+### 10.2 v1.0 completion criteria (supersedes the old 8-item roadmap)
+
+| # | Capability | Status | Coverage |
+|---|---|---|---|
+| 1 | Canonical Knowledge Graph consumption | **DONE** | ADR 06 |
+| 2 | Mastery Intelligence | **DONE** | ADR 07 |
+| 3 | Teaching Action Intelligence | **DONE** | ADR 08 |
+| 4 | Dynamic Lesson Composition | **DONE** | ADR 09 |
+| 5 | Student Memory | Gap analysis pending | §6.5, `docs/educational-brain/05-memory-system.md` (reconciliation pending) |
+| 6 | Recommendation Intelligence | Gap analysis pending | §6.7 |
+| 7 | Visualization & Simulation Architecture | Gap analysis pending | §6.8, `docs/educational-brain/08-visualization-strategy.md`, live `src/lib/teaching/sceneGenerators/*` (reconciliation pending) |
+| 8 | Assessment & Mastery Validation | Gap analysis pending | Engines 8-9 (live), ADR 07 |
+| 9 | Evidence Engine | Gap analysis pending | §6.6, `docs/educational-brain/04-evidence-engine.md` (reconciliation pending) |
+| 10 | AI Independence Strategy | Gap analysis pending | §6.9, `docs/educational-brain/06-ai-integration.md` (reconciliation pending) |
+| 11 | Curriculum Mapping Strategy | Gap analysis pending | Engine 1 (Curriculum Authority Brain, live) |
+| 12 | Knowledge Asset Lifecycle | Gap analysis pending | ADR 06 (consumption-side only), `docs/educational-brain/01-knowledge-assets.md`, `07-knowledge-acquisition.md` (reconciliation pending) |
+| 13 | Scalability Strategy | Gap analysis pending | §6.10 (cross-cutting, partially specified) |
+| 14 | Validation & Quality Assurance | Gap analysis pending | §6.12 (cross-cutting, partially specified) |
+| 15 | Implementation Governance | Gap analysis pending | This §10.1, CLAUDE.md Chief Architect rules (ungathered into one Bible section) |
+
+A pre-existing, previously unindexed 11-chapter proposal document set,
+`docs/educational-brain/*` (dated 2026-06-29, one day before this Bible's
+creation, status "Phase 1 design only"), covers ground overlapping items
+5, 7, 9, 10, and 12 above. It was never reconciled with this Bible's
+live-grounded architecture and may propose a different "Knowledge Asset"
+decision model than the live `decide()` → TAG → Composer chain. A
+reconciliation audit is in progress (see change log entry below); items 5,
+7, 9, 10, 12 above are marked "reconciliation pending" until it completes
+and conflicts, if any, are resolved here.
+
+When all 15 items read **DONE**: freeze Educational Brain Architecture
+v1.0, mark any remaining ADR ideas as future enhancements (not v1
+requirements), produce the final Bible, and produce the final
+**Architecture Completion Report** (Executive Summary, Bible, Architecture
+Overview, Complete Engine Map, Component Responsibilities, System
+Interactions, Decision/Knowledge/Memory/Teaching/Evidence/AI Interaction
+Flows, ADR Index, Remaining Implementation Work, Known Risks, Readiness
+Assessment) — not due yet.
 
 ---
 
@@ -622,3 +676,21 @@ yet.
   Worked Examples tag-emit/parse/persist/resume pattern; §7 risk register
   gains R13; §9 ADR index updated for ADR 09; §10 roadmap status moved to
   4 of 8. No production code changed.
+- **2026-06-30 — Architecture Gap Analysis Discipline established
+  (binding permanent rule).** §10 rewritten: the fixed 8-item
+  one-ADR-per-item roadmap is retired in favor of a 15-item v1.0
+  completion-criteria checklist, gated by a mandatory 3-question
+  Architecture Gap Analysis before any future ADR (capability still
+  required? fundamental enough to risk redesign if undocumented? not
+  already covered?) — a new ADR may only be written if all three are
+  YES; otherwise the work is Bible consolidation, not a new document.
+  ADRs 06-09 retroactively confirmed to satisfy the gate, not retracted.
+  Also discovered, mid-session, a pre-existing 11-chapter proposal
+  document set (`docs/educational-brain/*`, dated 2026-06-29, never
+  indexed into this Bible) covering ground overlapping 5 of the 15
+  completion-criteria items, plus a live scene-generation/simulation
+  subsystem (`src/lib/teaching/sceneGenerators/*`, ~7600 lines) absent
+  from §3's engine map. Both are flagged "reconciliation pending" in
+  §10.2; a background audit is in progress and this entry will be
+  superseded by a follow-up change-log entry once it completes. No
+  production code changed.
