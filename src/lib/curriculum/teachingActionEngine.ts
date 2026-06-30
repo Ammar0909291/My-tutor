@@ -12,6 +12,14 @@
  * present on ConceptNode/TeachingDecision/TeachingAsset (concept_type, bloom,
  * mode, difficulty, prerequisites, estimated_hours, asset blueprint shapes).
  * None of it inspects concept_id content or any subject-specific vocabulary.
+ *
+ * ARCHIVED — ORPHANED, ZERO LIVE IMPORTERS.
+ * Nothing under src/app/ or src/components/ imports this module or
+ * src/lib/teaching-engine/index.ts. The live teaching-decision system is
+ * src/lib/school/adaptive/*, wired into src/app/api/learn/chat/route.ts.
+ * See docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md for the full evidence and
+ * decision. Kept in place (not deleted) as a reference implementation —
+ * do not build new features on top of this stack without amending that ADR.
  */
 
 import type { StudentState, TeachingDecision, ConceptNode } from '../teaching-engine/types'

@@ -2,6 +2,16 @@
  * Educational Brain Decision Pipeline — stages 0–4.
  * Gated by ENABLE_EDUCATIONAL_BRAIN_PIPELINE (default OFF).
  * Zero overhead on production traffic when flag is absent/false.
+ *
+ * ARCHIVED — SHADOW CODE, NOT THE BRAIN OF RECORD.
+ * Invoked fire-and-forget after the chat response is already built
+ * (src/app/api/learn/chat/route.ts) — its output never reaches a student.
+ * The live teaching-decision system is src/lib/school/adaptive/*, wired
+ * synchronously into that same route. See
+ * docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md for the full evidence and
+ * decision. Kept in place (not deleted) as a reference implementation and
+ * ideas backlog — do not build new features on top of this pipeline
+ * without amending that ADR.
  */
 import { frameStage, type FrameInput } from './frameStage'
 import { intentStage } from './intentStage'

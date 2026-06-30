@@ -31,6 +31,25 @@
     mastery_threshold, estimated_hours, description` — never add `domain`/`concept_type` to the
     JSON; they're derived at runtime by `inferDomain()`/`inferConceptType()`.
 
+## Educational Brain — Brain of Record (ADR 01, decided 2026-06-30)
+- The ONE live teaching-decision system is `src/lib/school/adaptive/*` (18 modules), wired
+  synchronously into `src/app/api/learn/chat/route.ts`. It runs for school-student sessions
+  (`schoolCtx` truthy) and shapes the actual system prompt the AI tutor receives. General
+  learners currently get only `buildKnowledgeGraphContext()` — no adaptive intelligence; this
+  asymmetry is the next queued architectural increment, not yet implemented.
+- Two other "decide what to teach" implementations exist in the repo but are **archived/dormant,
+  never execute against live traffic**: `src/lib/educationalBrain/*` (Eb* pipeline, fire-and-forget,
+  gated by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off) and the canonical-KG Teaching Engine
+  stack (`src/lib/teaching-engine/`, `src/lib/curriculum/teachingActionEngine.ts` + sibling files,
+  zero live importers). Both carry archive-status header comments at their top. Do not extend them
+  expecting production effect.
+- Full evidence and rationale: `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`.
+- **Governance rule**: before starting any new "decide what to teach / what strategy / what mastery
+  state" system, grep `src/lib/school/adaptive/` and `src/app/api/learn/chat/route.ts` first and
+  explain why extending the Brain of Record in place is insufficient. A new parallel pipeline is
+  not an acceptable answer to "the existing one feels architecturally rough" — refactor the live
+  system instead.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
