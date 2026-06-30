@@ -1212,6 +1212,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (reviewDue.length > 0) {
             systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
           }
+
+          // Phase 3A: Teaching Action Generator — derive a structured
+          // description of HOW to teach this turn from the TeachingDecision
+          // and ConceptNode already computed above. Advisory only; never
+          // overrides decide()'s own action_type/mode/difficulty/time.
+          try {
+            const { getTeachingAction, buildTeachingActionBlock } = await import('@/lib/school/adaptive/teachingActionGenerator')
+            const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
+            const fullChapterForTAG = _getChaptersForTAG(schoolCtx!.board, subjectCode, schoolCtx!.grade)
+              .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+            if (fullChapterForTAG) {
+              const teachingAction = await getTeachingAction(decision, conceptNode, {
+                userId,
+                board: schoolCtx!.board,
+                grade: schoolCtx!.grade,
+                subjectId: learnSession.subjectId,
+                subjectSlug: subjectCode,
+                chapterTitle: schoolCtx!.displayTitle,
+                chapter: fullChapterForTAG,
+                weakConcepts: snapshot.weakConcepts,
+                misconceptions: snapshot.misconceptions,
+              })
+              systemPrompt += buildTeachingActionBlock(teachingAction)
+            }
+          } catch {
+            // non-fatal — teaching action context is purely additive
+          }
         }
       }
     } catch (err) {
