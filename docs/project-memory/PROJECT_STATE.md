@@ -175,10 +175,13 @@ separately-approved cleanup phase)**:
 1. `lessonPlanner.ts` and `lessonComposer.ts` both export a type/function
    named `LessonPlan`/`buildLessonPlanBlock` — distinct, correctly-scoped
    engines, no runtime collision, naming hazard only.
-2. `src/lib/curriculum/teachingActionEngine.ts` (`decideAction()`) is a
-   fully-built, Zod-validated, real-data-backed Teaching Action engine with
-   **zero callers** anywhere in `src/` — orphaned, overlaps TAG's job with
-   an incompatible 15-value vs 10-value `TeachingActionType`.
+2. ~~`src/lib/curriculum/teachingActionEngine.ts` (`decideAction()`)...~~
+   **RESOLVED 2026-06-30** — confirmed genuinely dead (zero callers, zero
+   subject content) duplicate of TAG and **deleted**, see
+   `docs/architecture/ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`.
+   The separate `TeachingAsset` content layer (`teachingAssetSchema.ts`/
+   `teachingAssetAdapter.ts`/`teachingAssets.ts`) was left untouched —
+   real curriculum content, out of scope to remove unilaterally.
 3. "Curriculum Validator Brain" and "Knowledge Graph Validator" are the
    same script (`scripts/validate-knowledge-graph.ts`), not two engines.
 4. Two Recommendation Intelligence generations coexist:

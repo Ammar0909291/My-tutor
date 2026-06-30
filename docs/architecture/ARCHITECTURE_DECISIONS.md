@@ -145,31 +145,35 @@ from an accurate map, not a flattering one.
   `lessonPlanner.ts`'s exports to `ChapterRoadmap`/
   `buildChapterRoadmapBlock` — to remove the ambiguity. Not done here.
 
-### Finding 2 — An orphaned, fully-built "Teaching Action Engine" predates and overlaps TAG
+### Finding 2 — An orphaned, fully-built "Teaching Action Engine" predates and overlaps TAG — **RESOLVED 2026-06-30, see ADR 03**
 
-- `src/lib/curriculum/teachingActionEngine.ts` (`decideAction()`),
-  backed by a Zod-validated `TeachingAsset` schema
+- **Original finding:** `src/lib/curriculum/teachingActionEngine.ts`
+  (`decideAction()`), backed by a Zod-validated `TeachingAsset` schema
   (`teachingAssetSchema.ts`) and a working, cached, per-subject adapter
   (`teachingAssetAdapter.ts`) with real data on disk for all five
   canonical subjects (`docs/{subject}/teaching-assets/assets.json`).
-- Confirmed by grep: `decideAction()`, `getTeachingAsset()`, and
-  `getTeachingAssets()` have **zero callers** anywhere in `src/` outside
-  their own files. This is dead code in the sense of "never executed by
-  any live route" — not dead in the sense of "broken" or "incomplete."
-- It solves materially the same problem as the Phase 3A Teaching Action
-  Generator (`teachingActionGenerator.ts`) — both take a
-  `TeachingDecision` + `ConceptNode` and produce a "TeachingAction"
+  Confirmed by grep: `decideAction()`, `getTeachingAsset()`, and
+  `getTeachingAssets()` had **zero callers** anywhere in `src/` outside
+  their own files. It solved materially the same problem as the Phase 3A
+  Teaching Action Generator (`teachingActionGenerator.ts`) — both took a
+  `TeachingDecision` + `ConceptNode` and produced a "TeachingAction"
   describing how to teach — but with incompatible type shapes (15-value
   vs 10-value `TeachingActionType`, different field names) and a
   dependency TAG doesn't have (`TeachingAsset`).
-- **Ruling:** documented as orphaned, unwired infrastructure
-  (`ENGINE_REFERENCE.md` Engine 34). **Recommendation for a future,
-  separately-approved phase:** either (a) formally retire this subsystem,
-  or (b) evaluate whether its richer `TeachingAsset` data (real-world
-  applications, worked-example blueprints, practice/assessment
-  blueprints) should feed TAG instead of being a second, parallel
-  decision engine. Not decided or executed here — this freeze only
-  records the finding.
+- **Resolution (`docs/architecture/ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`):**
+  `teachingActionEngine.ts` and its private `teachingActionSchema.ts`
+  (229 lines, confirmed zero callers, pure decision logic with zero
+  subject content) were **deleted**. This was pure decision-engine
+  duplication of TAG with no curriculum overlap — safe infrastructure
+  hygiene. The `TeachingAsset` **content** layer
+  (`teachingAssetSchema.ts`, `teachingAssetAdapter.ts`,
+  `teachingAssets.ts`, and the real on-disk `assets.json` data) was
+  deliberately left untouched — it holds actual curriculum content
+  (misconceptions, worked-example blueprints, concept summaries), so
+  deciding whether/how to wire it into TAG is out of scope for an
+  architecture-only pass and is left as an explicit open question for a
+  future session (see ADR 03 §6, §11). `ENGINE_REFERENCE.md` Engine 34 now
+  describes only the surviving content layer.
 
 ### Finding 3 — "Curriculum Validator Brain" and "Knowledge Graph Validator" are the same engine in code
 
@@ -236,3 +240,7 @@ from an accurate map, not a flattering one.
 **Overall: PASS.** The architecture is internally consistent and free of
 circular dependencies or functional conflicts. Six honest findings are
 recorded for future attention; none blocks this freeze.
+
+**Update 2026-06-30:** Finding 2 is resolved — see its entry in Part 3
+and `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. Five honest
+findings remain open.

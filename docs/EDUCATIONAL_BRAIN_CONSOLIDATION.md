@@ -72,7 +72,7 @@ first.**
 | System | Files | First commit | Wired into a live route? | Lines |
 |---|---|---|---|---|
 | **Eb* pipeline** | `src/lib/educationalBrain/*` (7 files) + 21 `Eb*` Prisma models + 11 spec docs under `docs/educational-brain/` | 2026-06-28 | **No** — fire-and-forget at `route.ts` (post-response), result discarded, gated by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE` (default off). Confirmed independently by `docs/architecture/ARCHITECTURE_DECISIONS.md` Part 2 ("Two pipelines, by design"). | 480 |
-| **`teachingActionEngine.ts` + Teaching Assets Platform** | `src/lib/curriculum/teachingActionEngine.ts`, `teachingActionSchema.ts`, `teachingAssets.ts`, `teachingAssetAdapter.ts`, `teachingAssetSchema.ts` | 2026-06-29 (my own prior commits, `d446b45`/`78ad2c1`) | **No** — zero importers anywhere in `src/app/`, `src/components/`, or any other live module. Confirmed independently by `docs/architecture/ARCHITECTURE_DECISIONS.md` Finding 2. **Not the same file as** `src/lib/teaching-engine/index.ts`, which IS live (see §0). | ~1,500+ |
+| **Teaching Assets Platform** (content layer; `teachingActionEngine.ts` + `teachingActionSchema.ts` — the duplicate decision-engine half — **deleted 2026-06-30**, see `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`) | `src/lib/curriculum/teachingAssets.ts`, `teachingAssetAdapter.ts`, `teachingAssetSchema.ts` | 2026-06-29 (my own prior commits, `d446b45`/`78ad2c1`) | **No** — zero importers anywhere in `src/app/`, `src/components/`, or any other live module. Confirmed independently by `docs/architecture/ARCHITECTURE_DECISIONS.md` Finding 2 (resolved). **Not the same file as** `src/lib/teaching-engine/index.ts`, which IS live (see §0). | ~1,000 (content layer remaining; ~500 of decision-engine logic deleted) |
 
 Both were built without first checking for prior art against the live
 system, and in my own case, without checking the Eb* pipeline either —
@@ -268,7 +268,15 @@ undeniable to the next reader:
 - `src/lib/curriculum/teachingActionEngine.ts` — archived-orphan status
   comment, corrected to explicitly disambiguate from the live
   `src/lib/teaching-engine/index.ts` and cross-reference the freeze's
-  Finding 2; code untouched otherwise.
+  Finding 2; code untouched otherwise. **Update 2026-06-30:** this file
+  (plus its private `teachingActionSchema.ts`) was confirmed genuinely
+  dead decision logic with zero subject content and was **deleted** — see
+  `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. The separate
+  `TeachingAsset` content layer (`teachingAssetSchema.ts`,
+  `teachingAssetAdapter.ts`, `teachingAssets.ts`, and the on-disk
+  `assets.json` data) was deliberately left archived-in-place, not
+  deleted — it holds real curriculum content, which this session does not
+  unilaterally modify or remove.
 
 **Ideas backlog extracted for future, evidence-gated proposals** (not
 approved for implementation by this ADR — each would need its own
@@ -336,9 +344,11 @@ ARCHIVED — Eb* pipeline (shadow, gated off, never affects response)
   docs/educational-brain/README.md + 01-11          spec docs (ideas backlog, see §5)
   src/app/api/learn/chat/route.ts                   fire-and-forget invocation site (post-response)
 
-ARCHIVED — teachingActionEngine.ts + Teaching Assets Platform (orphaned, zero importers)
+DELETED 2026-06-30 — duplicate decision engine, see ADR 03 (was: orphaned, zero importers)
   src/lib/curriculum/teachingActionEngine.ts        decideAction() — NOT the same as teaching-engine/decide()
   src/lib/curriculum/teachingActionSchema.ts
+
+ARCHIVED — Teaching Assets Platform content layer (orphaned, zero importers, untouched by ADR 03)
   src/lib/curriculum/teachingAssets.ts
   src/lib/curriculum/teachingAssetAdapter.ts
   src/lib/curriculum/teachingAssetSchema.ts

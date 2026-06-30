@@ -53,12 +53,15 @@
   case: it resolves prerequisite ids through a module-global `KG_BY_ID` keyed on the canonical school KG
   only, which a Library subject's node slugs can never match — wiring it needs a signature change
   (caller-supplied corpus map) that touches the live school call site too, deferred (ADR 02 §7 item 1).
-- Two systems are **archived/dormant, never execute against live traffic** — do not extend them
+- One system is **archived/dormant, never executes against live traffic** — do not extend it
   expecting production effect: `src/lib/educationalBrain/*` (Eb* pipeline, fire-and-forget, gated
-  by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off) and `src/lib/curriculum/teachingActionEngine.ts`
-  + its Teaching Assets Platform siblings (zero live importers — **not** the same file as the live
-  `src/lib/teaching-engine/index.ts`, which has a confusingly similar name). Both carry
-  archive-status header comments at their top.
+  by `ENABLE_EDUCATIONAL_BRAIN_PIPELINE`, default off, carries an archive-status header comment).
+  `src/lib/curriculum/teachingActionEngine.ts` (a duplicate, zero-caller "HOW to teach" decision
+  engine, confusingly similar to the live `src/lib/teaching-engine/index.ts`) was confirmed
+  genuinely dead and **deleted 2026-06-30** — see `docs/architecture/ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`.
+  Its Teaching Assets Platform siblings (`teachingAssetSchema.ts`/`teachingAssetAdapter.ts`/
+  `teachingAssets.ts`, real curriculum content for all 5 subjects) remain — still zero live
+  importers, left untouched as an explicit open question, not this session's to decide.
 - Full evidence, governance rule, and a corrected map of what's live vs. dormant:
   `docs/EDUCATIONAL_BRAIN_CONSOLIDATION.md`. **Governance rule**: before starting any new "decide
   what to teach / what strategy / what mastery state" system, re-fetch the remote tip, read the

@@ -95,10 +95,11 @@ Recommendation-cluster engines:
 
 ## 5. Adding a new teaching action type
 
-1. Decide whether it belongs in `TeachingActionType` (TAG, 10 values,
-   live/wired) — not in the orphaned `teachingActionEngine.ts`'s separate
-   15-value vocabulary, unless a future phase explicitly decides to
-   revive and merge that subsystem (see `ARCHITECTURE_DECISIONS.md`).
+1. Confirm the target: `teachingActionGenerator.ts`'s `TeachingActionType`
+   (TAG, 10 values, live/wired) is the **only** `TeachingActionType` in
+   the codebase as of 2026-06-30; the duplicate 15-value vocabulary
+   formerly in `teachingActionEngine.ts` was retired (see
+   `ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`).
 2. Add the new value to `TeachingActionType` in
    `teachingActionGenerator.ts`.
 3. Add a branch to `mapActionType()` (first-match-wins; insert it at the

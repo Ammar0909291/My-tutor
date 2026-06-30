@@ -203,11 +203,13 @@ Narrative, Learning Profile)
 
 ---
 
-## Legacy Teaching Action Engine + Teaching Assets Platform (orphaned)
+## Teaching Assets Platform (content layer, orphaned)
 
-`curriculum/{teachingActionEngine,teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts`
-- ✓ `StudentState`, `TeachingDecision`, `ConceptNode` (caller-supplied),
-  `docs/{subject}/teaching-assets/assets.json` (fs read, cached)
+`curriculum/{teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts`
+(`teachingActionEngine.ts` + `teachingActionSchema.ts` — the duplicate
+decision-engine half — were deleted 2026-06-30, see
+`ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`)
+- ✓ `docs/{subject}/teaching-assets/assets.json` (fs read, cached)
 - ✗ Currently called by **nothing** in `src/`. No live dependency edges
   exist to or from this subsystem today.
 

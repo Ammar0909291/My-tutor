@@ -178,7 +178,7 @@ never calls it and never depends on its output — see `DEPENDENCY_RULES.md`.
 | Visual | Visual Type System | `src/lib/school/visuals/{visualTypes,detectVisual}.ts` | Yes |
 | Generation | AI Router | `src/lib/ai/router.ts` | No (the only probabilistic component) |
 | Experimental | Educational Brain Decision Pipeline | `src/lib/educationalBrain/*` | Yes, but disabled by default |
-| Legacy/orphaned | Teaching Action Engine + Teaching Assets Platform | `src/lib/curriculum/{teachingActionEngine,teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts` | Yes, but **unwired** — see `ARCHITECTURE_DECISIONS.md` |
+| Legacy/orphaned | Teaching Assets Platform (content layer; the duplicate decision-engine half was deleted — see ADR 03) | `src/lib/curriculum/{teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts` | Yes, but **unwired** — see `ARCHITECTURE_DECISIONS.md` |
 | Historical | Closed Beta Stabilization | (completed sprints; see `ENGINE_REFERENCE.md`) | N/A — finished work, not a running engine |
 | Historical | Data Integrity Foundation | `src/lib/db/prisma.ts` (`withRetry`), `$transaction` sites | N/A — finished hardening, now load-bearing code |
 

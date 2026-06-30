@@ -730,40 +730,51 @@ dependency of the canonical pipeline.
 
 ---
 
-## 34. Legacy Teaching Action Engine + Teaching Assets Platform (orphaned, unwired)
+## 34. Teaching Assets Platform (content layer, unwired)
 
-**Files:** `src/lib/curriculum/teachingActionEngine.ts`,
-`teachingAssetSchema.ts`, `teachingAssetAdapter.ts`, `teachingAssets.ts`
+**Files:** `teachingAssetSchema.ts`, `teachingAssetAdapter.ts`,
+`teachingAssets.ts` (all `src/lib/curriculum/`)
 
-**Responsibility (as written):** A second, independent "HOW to teach"
-decision layer — `decideAction(student, decision, asset, concept):
-TeachingAction` — driven by a richer, Zod-validated `TeachingAsset` shape
-(`learning_objective`, `real_world_applications`, `visual_teaching_
-suggestions`, `practice_blueprint`, `assessment_blueprint`) loaded per
-subject from `docs/{subject}/teaching-assets/assets.json` (data exists for
-mathematics, physics, chemistry, biology, computer-science — confirmed on
-disk).
+**Retirement note (2026-06-30):** This engine previously also listed
+`src/lib/curriculum/teachingActionEngine.ts` (`decideAction()`) — a
+second, independent "HOW to teach" decision layer duplicating the Phase
+3A Teaching Action Generator (Engine 11) with an incompatible 15-value
+`TeachingActionType`. That file and its private `teachingActionSchema.ts`
+were confirmed zero-caller, pure decision logic with no subject content,
+and have been **deleted** — see
+`ARCHITECTURE_DECISIONS.md` Finding 2 (resolved) and
+`ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`. What remains below is
+only the content layer, which was deliberately left untouched.
 
-**Confirmed status:** `decideAction()`, `getTeachingAsset()`, and
-`getTeachingAssets()` have **zero callers anywhere in `src/`** outside
-their own files. This is fully-built, schema-validated, data-backed code
-that is not wired into any live route. It predates, and has materially
-overlapping purpose with, the Phase 3A Teaching Action Generator (Engine
-11) — both take a `TeachingDecision` + `ConceptNode` and produce a
-"TeachingAction" describing how to teach — but with **different,
-incompatible type shapes** (`TeachingActionType` here has 15 values:
-`VISUAL_EXPLANATION, INTERACTIVE_DIAGRAM, ANIMATION, SIMULATION, TIMELINE,
-SOCRATIC_QUESTIONING, GUIDED_PROBLEM_SOLVING, CONCEPT_COMPARISON,
-PRACTICE_SESSION, RETRIEVAL_PRACTICE, MISCONCEPTION_INTERVENTION,
-RAPID_REVIEW, WORKED_EXAMPLE, ANALOGY, ASSESSMENT,
-EXPERIMENT_DEMONSTRATION` vs. TAG's 10).
+**Responsibility (as written):** A Zod-validated `TeachingAsset` content
+shape (`learning_objective`, `concept_summary`, `key_ideas`,
+`common_misconceptions`, `visual_teaching_suggestions`,
+`worked_example_blueprint`, `practice_blueprint`, `assessment_blueprint`,
+`real_world_applications`, `prerequisite_review_triggers`) loaded per
+subject from `docs/{subject}/teaching-assets/assets.json` via a
+lazy-load/cache-per-subject adapter (mirrors `subjectKgAdapter.ts`'s
+pattern). Real data exists on disk for mathematics, physics, chemistry,
+biology, computer-science (confirmed). Public functions:
+`getTeachingAsset(subjectSlug, conceptId)`, `getTeachingAssets(subjectSlug)`,
+`getTeachingAssetById(conceptId)` (routes by ID prefix).
 
-**Deterministic:** Yes (pure, table-driven, confirmed no I/O in
-`decideAction` itself).
+**Confirmed status:** `getTeachingAsset()` and `getTeachingAssets()` have
+**zero callers anywhere in `src/`** outside their own files — this is
+working, schema-validated, real-data-backed infrastructure that is not
+wired into any live route. Unlike the deleted decision engine, this is
+**curriculum content** (misconceptions, worked examples, concept
+summaries), not decision logic — under the current standing directive
+this content layer is left as-is; whether/how to wire it into TAG is an
+explicitly open question (see ADR 03 §6, §11), not something this session
+decides unilaterally.
+
+**Deterministic:** Yes (pure fs-read + cache, no I/O beyond the initial
+file load).
 
 **MUST NOT:** Be assumed live by any document or developer reading this
-freeze. See `ARCHITECTURE_DECISIONS.md` for the explicit finding and
-recommended (not executed) disposition.
+freeze. Be deleted or modified without a separate, content-aware decision
+— it backs real production-volume curriculum data, unlike the now-deleted
+decision-engine half.
 
 ---
 

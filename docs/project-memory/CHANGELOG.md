@@ -4,6 +4,41 @@ Newest first. One entry per work session/commit batch.
 
 ---
 
+## ADR 03 — Retire the orphaned Teaching Action Engine (code deletion + docs)
+
+Operating under the "Educational Brain Architect — Architecture Only"
+standing directive (no `route.ts` changes, no curriculum content changes).
+Resolved `ARCHITECTURE_DECISIONS.md` Finding 2.
+
+- **Deleted** `src/lib/curriculum/teachingActionEngine.ts` (169 lines,
+  `decideAction()`) and its private `teachingActionSchema.ts` (60 lines,
+  the 15-value `TeachingActionType` duplicate). Confirmed via exhaustive
+  grep: zero callers anywhere in `src/` (including tests) for either
+  file's exports; git history showed zero functional changes since
+  original authoring (`d446b45`) beyond two archive-comment-only commits.
+  Pure decision logic, zero subject content — safe infrastructure
+  hygiene, no curriculum overlap.
+- **Left untouched**, deliberately: `teachingAssetSchema.ts`,
+  `teachingAssetAdapter.ts`, `teachingAssets.ts`, and the real on-disk
+  `docs/{subject}/teaching-assets/assets.json` content for all five
+  subjects. This is curriculum content (misconceptions, worked examples,
+  concept summaries) — out of scope for this session to modify or wire
+  into the live route per the current standing directive; recorded as an
+  explicit open question for a future, content-aware decision.
+- Full rationale, evidence, options comparison (delete vs. merge into TAG
+  vs. leave as-is), and validation strategy in
+  `docs/architecture/ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`.
+- Updated cross-references in `ARCHITECTURE_DECISIONS.md`,
+  `ENGINE_REFERENCE.md` (Engine 34, rescoped to content-layer-only),
+  `DEPENDENCY_RULES.md`, `EDUCATIONAL_BRAIN_V1.md`, `EXTENSION_GUIDE.md`,
+  `EDUCATIONAL_BRAIN_CONSOLIDATION.md`, `PROJECT_STATE.md`, and added a
+  retirement notice to `docs/TEACHING_ACTION_ENGINE_REPORT.md` (original
+  report kept as historical record, not rewritten).
+- Zero `route.ts`, `prisma/schema.prisma`, or `docs/{subject}/kg/`/
+  `teaching-assets/` changes.
+
+---
+
 ## Educational Brain v1.0 — Architecture Freeze (docs only, no code changes)
 
 Documentation-only freeze of the canonical (non-experimental) pipeline, per

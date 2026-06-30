@@ -2,6 +2,22 @@
 
 Build date: 2026-06-29
 
+> **RETIRED 2026-06-30.** `decideAction()` (`src/lib/curriculum/
+> teachingActionEngine.ts`) and its schema (`teachingActionSchema.ts`)
+> described below were confirmed to have zero callers anywhere in the
+> codebase — this engine never executed against a single live chat turn.
+> It duplicated the live Phase 3A Teaching Action Generator
+> (`src/lib/school/adaptive/teachingActionGenerator.ts`) with an
+> incompatible 15-value `TeachingActionType`. Both files were **deleted**
+> as confirmed-dead infrastructure; see
+> `docs/architecture/ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`
+> for the full evidence and decision record. This report is kept below,
+> unmodified, as a historical record of the original design — the schema
+> and rationale it documents no longer exist in `src/`. The companion
+> `TeachingAsset` content layer (`teachingAssetSchema.ts`/
+> `teachingAssetAdapter.ts`/`teachingAssets.ts`) it depended on was **not**
+> deleted and remains in place.
+
 ## 1. What this phase adds
 
 A deterministic execution layer between the Teaching Engine's decision and
