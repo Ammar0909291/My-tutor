@@ -1,6 +1,6 @@
 # Domain Summary — Algebra (`math.alg`)
 
-*Generated: 2026-07-02 · Commit: `d5e5bbc`*
+*Generated: 2026-07-02 · Commit: `cb9db5d`*
 
 ## This Domain
 
@@ -10,7 +10,7 @@
 | Prefix | `math.alg` |
 | Concepts authored | 59 |
 | New assets created | 59 (placeholder → draft) |
-| Commit | `d5e5bbc` |
+| Commit | `cb9db5d` |
 
 ## Cumulative Mathematics Progress
 

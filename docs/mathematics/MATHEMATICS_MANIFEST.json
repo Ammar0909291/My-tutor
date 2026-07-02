@@ -14,7 +14,7 @@
   "completion_pct": 25.9,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:297409a406fc9629a1c9d0dadf6774f2de0881e60d55b8529369d85861a6ee85",
+    "assets_sha256": "sha256:09c7a43a02e6841e2be48b15ef4a75aa1f4ca7fe2aea3acaace613b460e83693",
     "chapters_listing_sha256": "sha256:687942aafd9315fac1be26880752e2e64414447036015e8ac6ffe781458c0b15"
   },
   "domains": [
@@ -114,11 +114,11 @@
       "validation_verdict": "PASS",
       "checksums": {
         "chapter_sha256": "sha256:f2d6b0c1b57a39803744ba31a9f41a9f9bfbd32934ed7cccc45f1697985f063c",
-        "domain_assets_sha256": "sha256:bc35b3b911d5a0a6181b38e638580d2467c5d2ae586d878829a00682582f57e0",
+        "domain_assets_sha256": "sha256:bd94650b987d78babf552736ff207123030de4075954d8c87c143a470c5e7a03",
         "graph_domain_sha256": "sha256:5dddd4c76f27b05a65d9246b16a504fbdbac0c45b1d2bcf4ec11664002e39ca0",
         "validation_report_sha256": "sha256:231e9646b6149ca57e3261c42ff0fd58f65994b5f9883f7ef1926187917ee5ca"
       },
-      "creation_commit": "d5e5bbc",
+      "creation_commit": "cb9db5d",
       "dependency_versions": {
         "kg_name": "Canonical Mathematics Knowledge Graph",
         "kg_version": "1.0.1",
@@ -417,6 +417,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "d5e5bbc",
-  "last_updated": "2026-07-02T14:39:12Z"
+  "last_commit": "cb9db5d",
+  "last_updated": "2026-07-02T14:39:42Z"
 }

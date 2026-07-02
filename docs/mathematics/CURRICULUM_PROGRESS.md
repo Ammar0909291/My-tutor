@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-02 · Commit: `d5e5bbc`*
+*Last updated: 2026-07-02 · Commit: `cb9db5d`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`d5e5bbc`
+`cb9db5d`
 
 ## Knowledge Graph
 
