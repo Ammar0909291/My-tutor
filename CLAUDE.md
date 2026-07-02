@@ -206,6 +206,19 @@
   Evidence Engine hook point (ADR 13) designed in: `assetEffectivenessSignal` gates
   "revisit" vs. "try different approach." Bible: §3 row #23, §6.7, §7 R15, §9 updated.
   Full design: `docs/architecture/ADR_11_RECOMMENDATION_INTELLIGENCE.md`.
+  **ADR 12 complete (2026-07-02):** Visualization & Simulation Architecture.
+  Confirmed 7 competing visual pipelines (not 6 as ch08 counted — Engine 42
+  Dynamic Visualization `generateVisualizationCode.ts` was unindexed). Two live
+  architectural violations: P2 violation (no concept-keyed persistent cache;
+  VisualizationCache keys on text hash not conceptId), and Permanent Rule 9
+  violation when ENABLE_DYNAMIC_VISUALIZATION=true (second LLM call per turn).
+  Also: two uncoordinated decision points (Teaching Engine visual_type pre-LLM
+  vs. visualizationDecision.ts post-hoc). Proposed: Visual Asset Model — typed
+  renderers, concept-keyed cache `(conceptId, renderer, language, gradeBand)`,
+  background authoring for all LLM-visual calls (zero extra LLM calls per turn
+  after first-time authoring), mandatory a11yDescription, Visual Policy from
+  BrainConfig. Bible: §3 Engine 42 added, §6.8, §7 R16/R17, §9 updated.
+  Full design: `docs/architecture/ADR_12_VISUALIZATION_SIMULATION_ARCHITECTURE.md`.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

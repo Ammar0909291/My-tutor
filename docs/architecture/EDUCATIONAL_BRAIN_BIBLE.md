@@ -137,6 +137,7 @@ see ADR 03).
 | 39 | Parametric Scene Generators (×29) | Visual | `teaching/sceneGenerators/{projectile,triangle,molecule,vector,circular,pendulum,electron_shells,lattice,collision,ray_optics,historical_timeline,economics_curves,calculus_graph,civics_org_chart,electric_circuit,kinematics_graphs,heights_and_distances,demographic_pyramid,coordinate_geometry_line,punnett_square,torque_diagram,gravitation_orbit,statistics_bar_chart,ecological_pyramid,logic_gate,er_diagram,periodic_trends,cell_division,dna_structure}.ts` | LIVE (same flag as #38); each generator: extract(LLM) → build(deterministic formula) → validate → consistency-check | — |
 | 40 | AI Scene Generator | Visual | `teaching/generateSceneSpec.ts` | DORMANT (flag-gated: `ENABLE_AI_SCENE_GENERATION`; off by default); LLM-authored `SceneSpec` path, used when neither #37 nor #38-39 produce a result | — |
 | 41 | Scene Spec Validator | Visual | `teaching/sceneSpecValidator.ts` | LIVE — structural validation of `SceneSpec` JSON; used by all three scene-generation paths (#38–40) and the Router (#38) | — |
+| 42 | Dynamic Visualization Engine | Visual | `teaching/visuals/generateVisualizationCode.ts` | DORMANT (flag-gated: `ENABLE_DYNAMIC_VISUALIZATION`; off by default); LLM-authors a React component string (3D Three.js primary, 2D recharts fallback); sandboxed iframe renderer; **violates Permanent Rule 9 when enabled** (second LLM call per turn; see ADR 12) | ADR 12 |
 
 Full per-engine contract (inputs/outputs/public functions/failure
 behavior/guarantees/MUST NOT) lives in `ENGINE_REFERENCE.md` — this table
@@ -435,12 +436,38 @@ rather than more of the same. All blocked on KG v1 freeze + approval.
 
 ### 6.8 Visualization flow
 
-LIVE for selection (`detectVisual()`, deterministic, keyword/subject-based,
-no LLM); the Visual Type System is a leaf dependency every other engine
-can call. A dedicated audit of visualization *and simulation* selection —
-graphs, animations, interactive simulations, scene generation, and
-rendering independence from any one provider — is roadmap item #7,
-**ADR 12, upcoming**.
+LIVE across seven confirmed pathways (Engines 32, 36-42). The Visual tier
+is a leaf dependency: everything calls into it, it calls into nothing.
+
+**ADR 12 finding (Visualization & Simulation Architecture, roadmap item
+#7 — DONE):** seven competing visual-generation pathways run with no
+unified ranking model, no evidence-based selection, and two confirmed
+architectural violations: (a) **P2 violation** — no concept-keyed
+persistent cache exists; every turn re-generates the same visual for a
+popular concept (`VisualizationCache` at `teaching/visuals/visualizationCache.ts`
+keys on generated-text hash, not on `conceptId`); (b) **Permanent Rule 9
+violation when enabled** — `generateVisualizationCode.ts` (Engine 42)
+calls `generateAIResponse()` inline per turn when
+`ENABLE_DYNAMIC_VISUALIZATION` is true, making the Dynamic Visualization
+Engine a second probabilistic component in the per-turn path; (c) **two
+uncoordinated visual decision points** — the Teaching Engine's
+`TeachingDecision.visual_type` (pre-LLM, ADR 08) and
+`visualizationDecision.ts`'s post-hoc `VisualCategory` classification are
+independent; code order determines which wins. **PROPOSED, ADR 12:**
+Visual Asset Model with typed renderers (`katex | scene_spec | visual_spec |
+dynamic_component | animation | interactive_widget`) and two authoring
+layers — (a) Retrieval layer (per-turn, O(1)): concept-keyed
+`VisualizationCache` lookup by `(conceptId, renderer, language, gradeBand)`;
+(b) Authoring layer (background/once-per-concept): deterministic paths
+synchronous, LLM-authoring paths offline so that zero extra LLM calls
+occur per turn after first-time authoring. Visual Policy table
+(BrainConfig, ADR 10) maps `TeachingDecision.visual_type` → accepted
+renderers in priority order; `visualizationDecision.ts` (Engine 36)
+demoted to observability/logging. Every `VisualAsset` carries mandatory
+`a11yDescription` (empty string fails Layer 1 validation). Parametric
+`extract()` sub-call moved to authoring layer (extracted parameters
+stored in `VisualAsset.specPayload`, zero extraction cost on repeat
+turns for same concept). All blocked on KG v1 freeze + approval.
 
 ### 6.9 AI interaction flow
 
@@ -533,6 +560,8 @@ this section is the cross-cutting summary, not a replacement for them.
 | R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **Partially resolved, ADR 10** — audit confirmed both are in Prisma schema; `EvidenceRecord` consumed by visual-mastery subsystem (not the canonical Teaching pipeline); `EbEvidenceEvent` is dormant Eb* only; full reconciliation deferred to ADR 13 (Evidence Engine) | §6.6, ADR 10 §5 | Scoped into ADR 13 |
 | R14 | `TopicProgress` multi-writer migration risk: migrating four known writers to `ConceptMasteryRecord` single-writer ownership is the highest-risk phase of ADR 10; a partially-migrated state (some writers on old table, some on new) could produce split-brain mastery reads | Open, gated | ADR 10 §10 (Migration Strategy §2c) | 4-phase additive migration (add → migrate readers → migrate writers → deprecate): never cut over atomically; canonical fallback is whichever table has a value; `masteryConfidence = 0.0` flags old-table-derived scores during transition |
 | R15 | In-session signal conflicts are currently resolved by the LLM (probabilistic), not by the Brain (deterministic); a `RAPID_IMPROVEMENT` narrative and a `weak_topic` signal for the same concept can both appear in the system prompt with no priority guarantee — which one the LLM weights is non-deterministic | **Already realized in production** | ADR 11 §2 | PROPOSED Session Recommendation Reconciler (ADR 11 §4.2): deterministic signal priority table + `suppressedBy` audit field; `maxSessionSignals = 3` cap (BrainConfig-owned); blocked on KG v1 freeze |
+| R16 | `generateVisualizationCode.ts` makes a second LLM call per turn when `ENABLE_DYNAMIC_VISUALIZATION` is true — a Permanent Rule 9 violation (the AI Router must be the only probabilistic component); the flag is off by default but the risk is latent in any deployment that enables it | Open, flag-gated | ADR 12 §2, route.ts:17+1597 | PROPOSED in ADR 12 §4.4: move all visual LLM calls to background authoring tasks; per-turn path serves only cached `VisualAsset` records after first-time authoring; blocked on KG v1 freeze |
+| R17 | KG concept slug rename would invalidate `VisualizationCache` entries keyed on `conceptId` without a migration step; orphaned cache rows would be served for renamed concepts | Open, deferred | ADR 12 §12 | KG version gate (ADR 06) must trigger a cache migration (not just invalidation) for affected conceptIds; migration strategy to be specified in ADR 12's future implementation plan |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
@@ -605,7 +634,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 09 | Dynamic Lesson Composition (roadmap 4/8) | **Proposal, blocked on KG v1 freeze** | `composeLessonPlan()` has zero persisted cross-turn stage continuity; proposes generalizing the proven Worked Examples tag-emit/parse/persist/resume pattern via `contextSnapshot.lessonStageProgress` + a `planSignature` continuation/replan fingerprint |
 | ADR 10 | Student Memory Architecture (roadmap 5/8) | **Proposal, blocked on KG v1 freeze** | Eight fragmented memory surfaces with no common contract and four writers to `TopicProgress`; `masteryPct < 70` conflates mastery and retention; proposes six formally owned stores with single-writer invariant, `ConceptMasteryRecord` (mastery/decay split), `BrainConfig` (versioned policy constants), and a 4-phase additive migration |
 | ADR 11 | Recommendation Intelligence (roadmap 6/8) | **Proposal, blocked on KG v1 freeze** | In-session signal injection has no reconciliation layer — conflicting signals (weak topic vs. improvement narrative for same concept) are handed to the LLM; Library Mode has no recommendation tier; proposes a two-layer architecture (Cross-Session Planner + Session Recommendation Reconciler) with a deterministic signal priority table and Library Mode parity |
-| ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | Not started | — |
+| ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | **Proposal, blocked on KG v1 freeze** | Seven competing visual-generation pathways with no unified ranking; P2 violation (no concept-keyed cache); Permanent Rule 9 violation when `ENABLE_DYNAMIC_VISUALIZATION` is true; two uncoordinated visual decision points; proposes Visual Asset Model (typed renderers, concept-keyed cache, background authoring for all LLM visual calls, mandatory a11y, Visual Policy from BrainConfig) |
 | ADR 13 | AI Independence Roadmap (roadmap 8/8) | Not started | — |
 
 **Template note:** ADRs 02–07 were written under the prior 13-section
@@ -849,6 +878,16 @@ Assessment) — not due yet.
   `masteryConfidence = 0.0` flag during transition). §9 ADR index row for
   ADR 10 updated from "Not started" to "Proposal, blocked on KG v1 freeze"
   with one-line finding. No production code changed.
+- **2026-07-02 — Updated for ADR 12 (Visualization & Simulation Architecture,
+  roadmap 7/8).** §3 engine map gains Engine 42 (Dynamic Visualization Engine,
+  `teaching/visuals/generateVisualizationCode.ts`, DORMANT flag-gated, with
+  explicit Permanent Rule 9 violation note). §6.8 Visualization flow expanded
+  with full ADR 12 finding (seven pathways, P2 violation, Permanent Rule 9
+  violation, two-decision-point problem) and Visual Asset Model proposal. §7
+  risk register gains R16 (Permanent Rule 9 violation when flag is enabled)
+  and R17 (KG slug rename breaks concept-keyed cache). §9 ADR index row for
+  ADR 12 updated to "Proposal, blocked on KG v1 freeze." No production code
+  changed.
 - **2026-07-02 — Updated for ADR 11 (Recommendation Intelligence, roadmap
   6/8).** §3 engine map row #23 (Learning Orchestrator) updated to note
   School-Mode-only scope and ADR 11 Library Mode proposal. §6.7 expanded
