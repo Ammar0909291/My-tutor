@@ -8,7 +8,7 @@
 independently on the foundation branch — do NOT touch Mathematics from here.)
 
 ## Latest Commit (update after each domain)
-_(set after commit — see git log for `docs/physics/`)_
+`ebd73c5` — feat(physics): author Measurement & Units domain (phys.meas, 8 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
