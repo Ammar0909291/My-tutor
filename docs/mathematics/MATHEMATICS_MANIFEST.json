@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 4,
-  "drafted_assets": 235,
-  "completion_pct": 25.9,
+  "completed_domains": 5,
+  "drafted_assets": 304,
+  "completion_pct": 33.5,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:a3a26779a01c25dad65ae5aa5fa80e402eebf0ee103bb95ac22516a343436ce6",
-    "chapters_listing_sha256": "sha256:687942aafd9315fac1be26880752e2e64414447036015e8ac6ffe781458c0b15"
+    "assets_sha256": "sha256:0f5383ed6f53c26eec869a065e266916ac8934ece127321d0e8fe977cd82ef82",
+    "chapters_listing_sha256": "sha256:4a9f5955c9372ed0ec38df5c70e4f5d3c8be1f2023d63bb93b9442c4ccdcd50a"
   },
   "domains": [
     {
@@ -135,14 +135,28 @@
       "domain_prefix": "math.geom",
       "domain_name": "Geometry",
       "concept_count": 69,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 69,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/geom.md",
+      "manifest_file": "docs/mathematics/domains/math.geom-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:446ac1540e85d6c518a4ff2a2076b7e2b48819dffe8daa25fc7cc4cbe80cf7ab",
+        "domain_assets_sha256": "sha256:ca1417c26a688f0b55488188a6d3a12a27fc52d74d7a0cc736e1a46417225fe5",
+        "graph_domain_sha256": "sha256:fbe5646b221e358876d140d7410f67e5d933694698f40cfc2d25a28821701374",
+        "validation_report_sha256": "sha256:0ce0a203daaf6961247364e44d205a7ac25804e52aeec9eb22c437d9d49a7cd1"
+      },
+      "creation_commit": "7585c8b",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "trigonometry",
@@ -417,6 +431,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "0f2ac3d",
-  "last_updated": "2026-07-02T14:40:17Z"
+  "last_commit": "7585c8b",
+  "last_updated": "2026-07-02T19:24:58Z"
 }

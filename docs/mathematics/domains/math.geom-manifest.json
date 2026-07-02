@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "geometry",
+  "domain_prefix": "math.geom",
+  "domain_name": "Geometry",
+  "subject": "mathematics",
+  "concept_count": 69,
+  "asset_count": 69,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-02",
+    "validation_commit": "7585c8b"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:446ac1540e85d6c518a4ff2a2076b7e2b48819dffe8daa25fc7cc4cbe80cf7ab",
+    "domain_assets_sha256": "sha256:ca1417c26a688f0b55488188a6d3a12a27fc52d74d7a0cc736e1a46417225fe5",
+    "graph_domain_sha256": "sha256:fbe5646b221e358876d140d7410f67e5d933694698f40cfc2d25a28821701374",
+    "validation_report_sha256": "sha256:0ce0a203daaf6961247364e44d205a7ac25804e52aeec9eb22c437d9d49a7cd1"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/geom.md",
+    "docs/mathematics/domains/math.geom-validation-report.md",
+    "docs/mathematics/domains/math.geom-summary.md",
+    "docs/mathematics/domains/math.geom-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "7585c8b",
+  "created_at": "2026-07-02T19:24:57Z"
+}
