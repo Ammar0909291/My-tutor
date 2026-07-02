@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-02 · Commit: `af3e65a`*
+*Last updated: 2026-07-02 · Commit: `d5e5bbc`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`af3e65a`
+`d5e5bbc`
 
 ## Knowledge Graph
 
@@ -24,8 +24,8 @@
 | 01 | Mathematical Foundations | math.found | 82 | draft ✓ | chapters/found.md ✓ | Complete |
 | 02 | Arithmetic | math.arith | 58 | draft ✓ | chapters/arith.md ✓ | Complete |
 | 03 | Number Theory | math.nt | 36 | draft ✓ | chapters/nt.md ✓ | Complete |
-| 04 | Algebra | math.alg | 59 | placeholder | — | **NEXT** |
-| 05 | Geometry | math.geom | 69 | placeholder | — | Pending |
+| 04 | Algebra | math.alg | 59 | draft ✓ | chapters/alg.md ✓ | Complete |
+| 05 | Geometry | math.geom | 69 | placeholder | — | **NEXT** |
 | 06 | Trigonometry | math.trig | 25 | placeholder | — | Pending |
 | 07 | Functions | math.func | 29 | placeholder | — | Pending |
 | 08 | Sequences and Series | math.seq | 21 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 3/24 domains complete · 176/908 assets drafted · 732/908 remaining
+**Summary:** 4/24 domains complete · 235/908 assets drafted · 673/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -62,12 +62,11 @@ counting, counting-sequence, subitizing, place-value, ones-tens-hundreds, expand
 
 divisibility, divisibility-rules, prime-number, composite-number, sieve-of-eratosthenes, prime-factorization, fundamental-theorem-arithmetic, gcd, euclidean-algorithm, extended-euclidean-algorithm, bezout-identity, lcm, division-algorithm, modular-arithmetic, congruence, residue-classes, modular-inverse, chinese-remainder-theorem, fermats-little-theorem, eulers-theorem, eulers-totient, primality-testing, linear-diophantine, general-diophantine, pythagorean-triples, pells-equation, rsa-basics, induction-applications, prime-distribution, prime-number-theorem, riemann-hypothesis, continued-fractions, algebraic-number-theory, algebraic-integers, number-fields, analytic-number-theory
 
-### math.alg (59 concepts) — IN PROGRESS
+### math.alg (59 concepts) — COMPLETE
 
-0/59 authored. Concepts:
 expression, term, coefficient, like-terms, simplification, equation, solution-set, linear-equation-1var, inequality-1var, absolute-value-equations, linear-equation-2var, inequality-2var, system-linear-equations, substitution-method, elimination-method, system-3var, polynomial, degree, polynomial-operations, polynomial-division, remainder-theorem, factor-theorem, factoring, factoring-gcf, factoring-trinomials, factoring-special, quadratic-equation, completing-the-square, quadratic-formula, discriminant, polynomial-roots, rational-root-theorem, fundamental-theorem-algebra, complex-polynomial-roots, rational-expressions, rational-expressions-addition, rational-expressions-multiplication, rational-equations, exponent-rules, zero-exponent, negative-exponent, fractional-exponent, radicals, simplifying-radicals, rationalizing-denominators, radical-equations, exponential-function, exponential-equations, logarithm, logarithm-properties, natural-logarithm, change-of-base, logarithmic-equations, inequality, polynomial-inequality, rational-inequality, binomial-theorem, pascals-triangle, vietas-formulas
 
-### math.geom (69 concepts) — PENDING
+### math.geom (69 concepts) — IN PROGRESS
 
 0/69 authored. Concepts:
 point, line, line-segment, ray, plane, angle, angle-types, angle-measurement, angle-pairs, parallel-lines, perpendicular-lines, triangle, triangle-types, triangle-angle-sum, right-triangle, pythagorean-theorem, pythagorean-converse, congruent-triangles, similar-triangles, triangle-centers, area-triangle, polygon, polygon-angle-sum, quadrilateral, parallelogram, trapezoid, regular-polygon, area-polygon, area, perimeter, circle, circle-parts, circle-circumference, circle-area, circle-theorems, circle-equation, geometric-proof, length, surface-area, volume, solid-3d, platonic-solids, coordinate-plane, x-y-coordinates, quadrants, distance-formula, midpoint-formula, slope, line-equation, conic-sections, parabola, ellipse, hyperbola, polar-coordinates, polar-curves, transformations, translation, rotation, reflection, dilation, vectors-2d, vectors-3d, dot-product, cross-product, differential-geometry-curves, curvature, frenet-serret, differential-geometry-surfaces, geometric-constructions
@@ -198,5 +197,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Algebra** (`math.alg`) · 59 concepts
+**Geometry** (`math.geom`) · 69 concepts
 

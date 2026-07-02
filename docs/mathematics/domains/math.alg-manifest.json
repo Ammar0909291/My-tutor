@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "algebra",
+  "domain_prefix": "math.alg",
+  "domain_name": "Algebra",
+  "subject": "mathematics",
+  "concept_count": 59,
+  "asset_count": 59,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-02",
+    "validation_commit": "d5e5bbc"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:f2d6b0c1b57a39803744ba31a9f41a9f9bfbd32934ed7cccc45f1697985f063c",
+    "domain_assets_sha256": "sha256:bc35b3b911d5a0a6181b38e638580d2467c5d2ae586d878829a00682582f57e0",
+    "graph_domain_sha256": "sha256:5dddd4c76f27b05a65d9246b16a504fbdbac0c45b1d2bcf4ec11664002e39ca0",
+    "validation_report_sha256": "sha256:231e9646b6149ca57e3261c42ff0fd58f65994b5f9883f7ef1926187917ee5ca"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/alg.md",
+    "docs/mathematics/domains/math.alg-validation-report.md",
+    "docs/mathematics/domains/math.alg-summary.md",
+    "docs/mathematics/domains/math.alg-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "d5e5bbc",
+  "created_at": "2026-07-02T14:39:12Z"
+}
