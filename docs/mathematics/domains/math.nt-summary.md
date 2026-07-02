@@ -1,6 +1,6 @@
 # Domain Summary — Number Theory (`math.nt`)
 
-*Generated: 2026-07-02 · Commit: `70c9ba7`*
+*Generated: 2026-07-02 · Commit: `60095f2`*
 
 ## This Domain
 
@@ -10,7 +10,7 @@
 | Prefix | `math.nt` |
 | Concepts authored | 36 |
 | New assets created | 36 (placeholder → draft) |
-| Commit | `70c9ba7` |
+| Commit | `60095f2` |
 
 ## Cumulative Mathematics Progress
 
