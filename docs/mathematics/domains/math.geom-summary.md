@@ -1,6 +1,6 @@
 # Domain Summary — Geometry (`math.geom`)
 
-*Generated: 2026-07-02 · Commit: `417773e`*
+*Generated: 2026-07-02 · Commit: `a55b5a2`*
 
 ## This Domain
 
@@ -10,7 +10,7 @@
 | Prefix | `math.geom` |
 | Concepts authored | 69 |
 | New assets created | 69 (placeholder → draft) |
-| Commit | `417773e` |
+| Commit | `a55b5a2` |
 
 ## Cumulative Mathematics Progress
 
