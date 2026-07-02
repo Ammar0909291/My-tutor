@@ -270,6 +270,16 @@
   decision, or need user approval. Report after each completed task, then
   continue. Every task must reduce implementation risk without
   interfering with curriculum production.
+  Loop iterations completed so far:
+  (1) 2026-07-02 — `docs/architecture/ARCHITECTURE_COMPLETION_REPORT_V1.md`
+  committed (durable v1.0 record + cross-ADR dependency graph + five-wave
+  sequence).
+  (2) 2026-07-02 — `docs/architecture/VALIDATION_FRAMEWORK_P10.md`
+  committed (Wave 1b spec: 3 test tiers, LLM transcript seam, 4 assertion
+  surfaces, 15-fixture frozen set, CI plan). Verified findings: the
+  39-file vitest suite tests pure REPLICAS of LLM-adjacent logic, not the
+  real modules (replica-drift risk); `.github/workflows/` doesn't exist —
+  nothing runs in CI (extends R6).
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

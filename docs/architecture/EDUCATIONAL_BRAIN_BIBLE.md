@@ -687,7 +687,14 @@ verdict, and CI rejects it before merge. This target is currently not met
 — the chat route has no fixture-based integration test (type checking and
 the assertion suite cover KG structure and isolated engine functions, not
 full-turn behavior). Achieving P10 is an **implementation milestone**, not
-an architecture gap; no new ADR is required.
+an architecture gap; no new ADR is required. The concrete framework
+specification (three-tier structure, LLM transcript seam, 15-fixture
+frozen set v1, CI wiring plan) is `VALIDATION_FRAMEWORK_P10.md`
+(2026-07-02) — it also records two verified findings: the existing
+39-file vitest suite tests pure *replicas* of LLM-adjacent logic rather
+than the real modules (replica-drift risk), and `.github/workflows/` does
+not exist at all, so no test runs in CI today (extends R6 beyond the KG
+validator).
 
 Cross-cutting validation rule: all proposed features must pass (a)
 `npx tsc --noEmit`, (b) the offline assertion suite (zero new
@@ -1033,6 +1040,7 @@ Assessment) — not due yet.
 |---|---|
 | `EDUCATIONAL_BRAIN_BIBLE.md` (this file) | Top-level synthesis, single source of truth, entry point |
 | `ARCHITECTURE_COMPLETION_REPORT_V1.md` | Final v1.0 completion record + cross-ADR dependency graph + dependency-ordered implementation sequence (Waves 0–5); synthesis only — where it and this Bible disagree, this Bible wins |
+| `VALIDATION_FRAMEWORK_P10.md` | Concrete specification of the P10 fixture-replay validation framework (Wave 1b): three test tiers, LLM transcript seam, four assertion surfaces, 15-fixture frozen set v1, CI wiring plan |
 | `EDUCATIONAL_BRAIN_V1.md` | Detailed freeze narrative + system diagram this Bible's §3/§5 summarize |
 | `ENGINE_REFERENCE.md` | Full per-engine contract detail behind this Bible's §3/§4 |
 | `DATA_FLOW.md` | Full step-by-step trace behind this Bible's §6.1–6.6 |
@@ -1227,3 +1235,18 @@ Assessment) — not due yet.
   analysis) — one task per iteration, each reducing implementation risk
   without touching the Curriculum Production Pipeline. No production code
   changed.
+- **2026-07-02 — P10 Validation Framework specified (integration-prep
+  iteration 2).** `VALIDATION_FRAMEWORK_P10.md` created: three-tier test
+  structure (existing pure units / real-module engine-contract tests /
+  pipeline fixture replay), recorded-LLM-transcript seam at
+  `routeAI`/`routeJSON` with fail-loud-on-miss and no live-LLM fallback in
+  CI, four assertion surfaces (decision, prompt-composition, persistence,
+  invariant — the last making Permanent Rule 9's one-LLM-call-per-turn a
+  structural CI check), 15-fixture frozen set v1 including two deliberate
+  behavior-pinning fixtures (R15 signal-conflict, ADR 08 unseeded-concept
+  gap) that flip visibly when their ADRs land, and a CI wiring plan whose
+  steps 1–4 are immediately buildable. Two verified findings recorded in
+  §6.12: the 39-file vitest suite tests pure replicas of LLM-adjacent
+  logic (replica-drift risk, `aiRouterResilience.test.ts:3-5`), and
+  `.github/workflows/` does not exist (no CI at all — extends R6). §11
+  document map updated. No production code changed.
