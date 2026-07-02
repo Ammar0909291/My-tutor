@@ -244,7 +244,32 @@
   Validation & QA → Bible §6.12 expanded with P10 + cross-cutting rule;
   (15) Governance → Bible §10.1 expanded with 9 Chief Architect rules.
   §0 TOC updated (13 §6 subsections). All 15 §10.2 criteria read DONE.
-  Final Architecture Completion Report is the remaining deliverable.
+  **Final Architecture Completion Report DONE (2026-07-02):**
+  `docs/architecture/ARCHITECTURE_COMPLETION_REPORT_V1.md` — durable v1.0
+  completion record: criteria/ADR status tables, cross-ADR dependency
+  graph, five-wave dependency-ordered implementation sequence (Wave 0
+  process gates → Wave 1 additive foundations + Wave 1b P10 fixture
+  harness → Wave 2 engine extensions → Wave 3 memory migration (R14) →
+  Wave 4 asset-model activation (P2/ADI payoff, fixes R16) → Wave 5
+  closure), implementation-gating risks, readiness assessment. Synthesis
+  only; Bible primacy applies.
+- **Third pivot / Integration & Validation Loop (2026-07-02, binding):**
+  v1.0 is FROZEN. The Curriculum Production Pipeline runs independently
+  and remains the ONLY authority for Canonical KGs. Standing mission: do
+  NOT build curriculum, do NOT redesign the Brain, do NOT modify
+  curriculum/KG files, production runtime, routes, schemas, or teaching
+  assets, and do NOT reopen completed ADRs without strong evidence.
+  Instead, loop: audit → pick ONE highest-value integration-preparation
+  task (implementation specs, migration/rollout planning, validation/QA
+  frameworks, testing strategy, dependency analysis, risk analysis,
+  observability planning, version compatibility, developer guides,
+  checklists) → verify zero curriculum overlap → complete it → validate →
+  update Bible/memory only if required → commit → push → repeat. Stop
+  immediately if a task would modify curriculum, redesign frozen
+  architecture, require the KG v1 freeze, need a major architectural
+  decision, or need user approval. Report after each completed task, then
+  continue. Every task must reduce implementation risk without
+  interfering with curriculum production.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

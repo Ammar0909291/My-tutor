@@ -1032,6 +1032,7 @@ Assessment) — not due yet.
 | Document | Role relative to this Bible |
 |---|---|
 | `EDUCATIONAL_BRAIN_BIBLE.md` (this file) | Top-level synthesis, single source of truth, entry point |
+| `ARCHITECTURE_COMPLETION_REPORT_V1.md` | Final v1.0 completion record + cross-ADR dependency graph + dependency-ordered implementation sequence (Waves 0–5); synthesis only — where it and this Bible disagree, this Bible wins |
 | `EDUCATIONAL_BRAIN_V1.md` | Detailed freeze narrative + system diagram this Bible's §3/§5 summarize |
 | `ENGINE_REFERENCE.md` | Full per-engine contract detail behind this Bible's §3/§4 |
 | `DATA_FLOW.md` | Full step-by-step trace behind this Bible's §6.1–6.6 |
@@ -1207,3 +1208,22 @@ Assessment) — not due yet.
   ADR↔Bible coupling, no premature cleanup, no parallel pipeline).
   §0 TOC updated to list all 13 subsections of §6. §10.2 criteria table:
   all 15 rows now read DONE. No production code changed.
+- **2026-07-02 — Final Architecture Completion Report committed; v1.0
+  frozen; integration-preparation phase begins.**
+  `ARCHITECTURE_COMPLETION_REPORT_V1.md` created as the durable record of
+  v1.0 completion (it previously existed only as a session report): final
+  criteria/ADR status tables, a cross-ADR dependency graph extracted from
+  the ADRs' own relationship/migration sections, a dependency-ordered
+  five-wave implementation sequence with per-wave entry/exit validation
+  gates, the implementation-gating risk subset, and the readiness
+  assessment. Synthesis only — no new architectural decisions; Bible
+  primacy applies. §11 document map gains its row. Standing mission from
+  this entry forward (user directive 2026-07-02): architecture is FROZEN;
+  do not generate/modify curriculum, KG content, production runtime,
+  routes, schemas, or teaching assets; do not reopen completed ADRs
+  without strong evidence; work only on integration-preparation tasks
+  (validation frameworks, implementation specs, migration/rollout
+  planning, testing/QA strategy, observability, documentation, dependency
+  analysis) — one task per iteration, each reducing implementation risk
+  without touching the Curriculum Production Pipeline. No production code
+  changed.
