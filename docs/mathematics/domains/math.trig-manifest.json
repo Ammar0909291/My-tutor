@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "trigonometry",
+  "domain_prefix": "math.trig",
+  "domain_name": "Trigonometry",
+  "subject": "mathematics",
+  "concept_count": 25,
+  "asset_count": 25,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-02",
+    "validation_commit": "4b72c8b"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:9a1c08d410477dd7c334293afbb4d877a2026e11f3e0bd6447588897459da0d4",
+    "domain_assets_sha256": "sha256:181f88171e4975300cb697ef76f512558f11ee56945ec44d700f51255d8a2515",
+    "graph_domain_sha256": "sha256:6bd4d1686e60a7401872a62b8d4acc6fb9ac26809ab228766620c8d685a85eed",
+    "validation_report_sha256": "sha256:a958ad0fd7f950b13d12b967e27247c32d3e3e39b77b1605fafeb39402734c29"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/trig.md",
+    "docs/mathematics/domains/math.trig-validation-report.md",
+    "docs/mathematics/domains/math.trig-summary.md",
+    "docs/mathematics/domains/math.trig-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "4b72c8b",
+  "created_at": "2026-07-02T20:34:40Z"
+}

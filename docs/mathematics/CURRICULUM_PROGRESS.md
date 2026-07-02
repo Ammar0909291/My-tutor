@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-02 · Commit: `a55b5a2`*
+*Last updated: 2026-07-02 · Commit: `4b72c8b`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`a55b5a2`
+`4b72c8b`
 
 ## Knowledge Graph
 
@@ -26,8 +26,8 @@
 | 03 | Number Theory | math.nt | 36 | draft ✓ | chapters/nt.md ✓ | Complete |
 | 04 | Algebra | math.alg | 59 | draft ✓ | chapters/alg.md ✓ | Complete |
 | 05 | Geometry | math.geom | 69 | draft ✓ | chapters/geom.md ✓ | Complete |
-| 06 | Trigonometry | math.trig | 25 | placeholder | — | **NEXT** |
-| 07 | Functions | math.func | 29 | placeholder | — | Pending |
+| 06 | Trigonometry | math.trig | 25 | draft ✓ | chapters/trig.md ✓ | Complete |
+| 07 | Functions | math.func | 29 | placeholder | — | **NEXT** |
 | 08 | Sequences and Series | math.seq | 21 | placeholder | — | Pending |
 | 09 | Calculus | math.calc | 76 | placeholder | — | Pending |
 | 10 | Differential Equations | math.de | 56 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 5/24 domains complete · 304/908 assets drafted · 604/908 remaining
+**Summary:** 6/24 domains complete · 329/908 assets drafted · 579/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -70,12 +70,11 @@ expression, term, coefficient, like-terms, simplification, equation, solution-se
 
 point, line, line-segment, ray, plane, angle, angle-types, angle-measurement, angle-pairs, parallel-lines, perpendicular-lines, triangle, triangle-types, triangle-angle-sum, right-triangle, pythagorean-theorem, pythagorean-converse, congruent-triangles, similar-triangles, triangle-centers, area-triangle, polygon, polygon-angle-sum, quadrilateral, parallelogram, trapezoid, regular-polygon, area-polygon, area, perimeter, circle, circle-parts, circle-circumference, circle-area, circle-theorems, circle-equation, geometric-proof, length, surface-area, volume, solid-3d, platonic-solids, coordinate-plane, x-y-coordinates, quadrants, distance-formula, midpoint-formula, slope, line-equation, conic-sections, parabola, ellipse, hyperbola, polar-coordinates, polar-curves, transformations, translation, rotation, reflection, dilation, vectors-2d, vectors-3d, dot-product, cross-product, differential-geometry-curves, curvature, frenet-serret, differential-geometry-surfaces, geometric-constructions
 
-### math.trig (25 concepts) — IN PROGRESS
+### math.trig (25 concepts) — COMPLETE
 
-0/25 authored. Concepts:
 angle-measure, degree-radian-conversion, right-triangle-trig, basic-ratios, special-angles, unit-circle, reference-angles, trig-functions, amplitude-period-phase, trig-graphs, trig-identities, pythagorean-identities, reciprocal-identities, sum-difference-formulas, double-angle-formulas, half-angle-formulas, product-to-sum, inverse-trig, trig-equations, law-of-sines, law-of-cosines, polar-form-complex, de-moivres-theorem, eulers-formula, hyperbolic-functions
 
-### math.func (29 concepts) — PENDING
+### math.func (29 concepts) — IN PROGRESS
 
 0/29 authored. Concepts:
 function-concept, domain-range, function-notation, graph-of-function, real-valued-function, zero-of-function, injectivity, surjectivity, bijection, inverse-functions, composition, even-odd-functions, transformations-functions, periodic-function, linear-function, quadratic-function, vertex-form, polynomial-function, end-behavior, rational-root, rational-function, vertical-asymptote, horizontal-asymptote, exponential-function, logarithmic-function, piecewise-function, step-function, monotonic-function, function-operations
@@ -196,5 +195,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Trigonometry** (`math.trig`) · 25 concepts
+**Functions** (`math.func`) · 29 concepts
 
