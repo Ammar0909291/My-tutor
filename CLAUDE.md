@@ -193,6 +193,19 @@
   4-phase additive migration (add→migrate readers→migrate writers→deprecate).
   Bible updated: §3 row #6, §6.5, §7 (R9 partially resolved, R14 added), §9 ADR index.
   Full design: `docs/architecture/ADR_10_STUDENT_MEMORY_ARCHITECTURE.md`.
+  **ADR 11 complete (2026-07-02):** Recommendation Intelligence. Identified
+  two structurally distinct purposes conflated in the live cluster: Cross-Session
+  Planner (`learningOrchestrator.ts`, 8-priority chain, Dashboard-only) vs.
+  In-Session Signal Injection (`weakTopics`/`narrative`/`dailyPlan`/`examReadiness`,
+  system-prompt only). Key finding: conflicting signals for the same topic (weak_topic
+  vs. RAPID_IMPROVEMENT narrative) are currently resolved probabilistically by the LLM,
+  not deterministically by the Brain. Library Mode has no recommendation tier.
+  Proposed: Two-layer architecture — Session Recommendation Reconciler (pure function,
+  deterministic signal priority table, `maxSessionSignals = 3` cap from BrainConfig)
+  + `getTopLibraryRecommendation()` (subject-only, reads TeachingMemorySnapshot).
+  Evidence Engine hook point (ADR 13) designed in: `assetEffectivenessSignal` gates
+  "revisit" vs. "try different approach." Bible: §3 row #23, §6.7, §7 R15, §9 updated.
+  Full design: `docs/architecture/ADR_11_RECOMMENDATION_INTELLIGENCE.md`.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

@@ -117,7 +117,7 @@ see ADR 03).
 | 20 | Strategy Effectiveness | Teaching support | `strategyEffectiveness.ts` | LIVE | — |
 | 21 | Lesson Planner (chapter roadmap) | Lesson | `lessonPlanner.ts` | LIVE, both modes (ADR 02) | ADR 02 |
 | 22 | Next-Best-Action | Recommendation | `nextBestAction.ts` | **Split**: `getChapterNextStep()` LIVE; `getNextBestAction()`/`nextActionHref()`/`NEXT_ACTION_LABELS` ORPHANED | ADR 04 (proposal, permanently unexecuted) |
-| 23 | Learning Orchestrator | Recommendation | `learningOrchestrator.ts` | LIVE, primary aggregator | ADR 04, ADR 11 upcoming |
+| 23 | Learning Orchestrator | Recommendation | `learningOrchestrator.ts` | LIVE, cross-session planner (School Mode only); Library Mode variant proposed ADR 11 | ADR 04, ADR 11 |
 | 24 | Weak Topics | Recommendation | `weakTopics.ts` | LIVE | — |
 | 25 | Daily Plan | Recommendation | `dailyPlan.ts` | LIVE | — |
 | 26 | Study Plan | Recommendation | `studyPlan.ts` | LIVE | — |
@@ -401,14 +401,37 @@ explicitly scoped into ADR 10 rather than asserted here without evidence.
 LIVE. Nine-engine Recommendation cluster, read-only over Mastery/Memory's
 conclusions, never independently scoring mastery (Permanent Rule 7),
 never called by/calling the Teaching tier (Permanent Rule 12).
-`learningOrchestrator.ts` is the confirmed primary 8-tier cross-engine
-aggregator (`DashboardV2` consumes it via `learningNavigator.ts`).
 `nextBestAction.ts` is a split file — one live export
 (`getChapterNextStep()`), three confirmed-dead exports (proposal to
 remove them, **ADR 04, permanently unexecuted** by explicit user
-instruction). A unification/strategy audit across the full cluster
-(short-term recommendations, long-term plans, weakness recovery,
-goal-based learning) is roadmap item #6, **ADR 11, upcoming**.
+instruction).
+
+**ADR 11 finding (Recommendation Intelligence, roadmap item #6 — DONE):**
+the nine live recommendation engines serve two structurally distinct
+purposes never formally distinguished: (a) **Cross-session planning**
+(`learningOrchestrator.ts`, 8-priority chain, returns ONE recommendation,
+consumed by `DashboardV2` via `learningNavigator.ts`) and (b) **In-session
+signal injection** (`weakTopics`, `learningNarrative`, `dailyPlan`,
+`examReadiness`, independently injected into `systemPrompt` with no
+reconciliation). The in-session path is blind to conflicts: a
+`RAPID_IMPROVEMENT` narrative and a `weak_topic` signal for the same
+topic can simultaneously appear in the system prompt — the LLM must
+resolve the contradiction, which is a pedagogical decision that belongs
+in the deterministic Brain. Library Mode has no recommendation tier: only
+a pre-aggregated `subjectAnalytics.weakTopics` string at route.ts:1099,
+versus five engine calls in School Mode. **PROPOSED, ADR 11:** Two-layer
+Recommendation Architecture — (1) Cross-Session Planner preserves the
+existing 8-priority chain (School Mode) and adds a new subject-only
+`getTopLibraryRecommendation()` function (Library Mode, reads the
+already-computed `TeachingMemorySnapshot`, zero new DB queries); (2)
+Session Recommendation Reconciler (new pure function) applies a
+deterministic **signal priority table** (`BrainConfig`-owned) to suppress
+conflicting signals before `systemPrompt +=`, capping at
+`maxSessionSignals` (default 3). Signal suppression is auditable via the
+`suppressedBy` field. Evidence Engine hook (ADR 13) will add an
+`assetEffectivenessSignal` gate: if the current approach is not working,
+the Reconciler switches from "revisit" to "try a different approach"
+rather than more of the same. All blocked on KG v1 freeze + approval.
 
 ### 6.8 Visualization flow
 
@@ -509,6 +532,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | R8 | No centrally specified scalability target (learner count, sharding, caching tier) | Open | §6.10 | To be specified across ADR 10 (Memory) and ADR 13 (AI cost) |
 | R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **Partially resolved, ADR 10** — audit confirmed both are in Prisma schema; `EvidenceRecord` consumed by visual-mastery subsystem (not the canonical Teaching pipeline); `EbEvidenceEvent` is dormant Eb* only; full reconciliation deferred to ADR 13 (Evidence Engine) | §6.6, ADR 10 §5 | Scoped into ADR 13 |
 | R14 | `TopicProgress` multi-writer migration risk: migrating four known writers to `ConceptMasteryRecord` single-writer ownership is the highest-risk phase of ADR 10; a partially-migrated state (some writers on old table, some on new) could produce split-brain mastery reads | Open, gated | ADR 10 §10 (Migration Strategy §2c) | 4-phase additive migration (add → migrate readers → migrate writers → deprecate): never cut over atomically; canonical fallback is whichever table has a value; `masteryConfidence = 0.0` flags old-table-derived scores during transition |
+| R15 | In-session signal conflicts are currently resolved by the LLM (probabilistic), not by the Brain (deterministic); a `RAPID_IMPROVEMENT` narrative and a `weak_topic` signal for the same concept can both appear in the system prompt with no priority guarantee — which one the LLM weights is non-deterministic | **Already realized in production** | ADR 11 §2 | PROPOSED Session Recommendation Reconciler (ADR 11 §4.2): deterministic signal priority table + `suppressedBy` audit field; `maxSessionSignals = 3` cap (BrainConfig-owned); blocked on KG v1 freeze |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
@@ -580,7 +604,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 08 | Teaching Action Intelligence (roadmap 3/8) | **Proposal, blocked on KG v1 freeze** | The concrete Action layer (`decide()`→TAG→Composer) is School-Mode-only in practice despite being mode-agnostic by construction; Library extension proposed, Posture/Action layer relationship formalized |
 | ADR 09 | Dynamic Lesson Composition (roadmap 4/8) | **Proposal, blocked on KG v1 freeze** | `composeLessonPlan()` has zero persisted cross-turn stage continuity; proposes generalizing the proven Worked Examples tag-emit/parse/persist/resume pattern via `contextSnapshot.lessonStageProgress` + a `planSignature` continuation/replan fingerprint |
 | ADR 10 | Student Memory Architecture (roadmap 5/8) | **Proposal, blocked on KG v1 freeze** | Eight fragmented memory surfaces with no common contract and four writers to `TopicProgress`; `masteryPct < 70` conflates mastery and retention; proposes six formally owned stores with single-writer invariant, `ConceptMasteryRecord` (mastery/decay split), `BrainConfig` (versioned policy constants), and a 4-phase additive migration |
-| ADR 11 | Recommendation Intelligence (roadmap 6/8) | Not started | — |
+| ADR 11 | Recommendation Intelligence (roadmap 6/8) | **Proposal, blocked on KG v1 freeze** | In-session signal injection has no reconciliation layer — conflicting signals (weak topic vs. improvement narrative for same concept) are handed to the LLM; Library Mode has no recommendation tier; proposes a two-layer architecture (Cross-Session Planner + Session Recommendation Reconciler) with a deterministic signal priority table and Library Mode parity |
 | ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | Not started | — |
 | ADR 13 | AI Independence Roadmap (roadmap 8/8) | Not started | — |
 
@@ -825,3 +849,14 @@ Assessment) — not due yet.
   `masteryConfidence = 0.0` flag during transition). §9 ADR index row for
   ADR 10 updated from "Not started" to "Proposal, blocked on KG v1 freeze"
   with one-line finding. No production code changed.
+- **2026-07-02 — Updated for ADR 11 (Recommendation Intelligence, roadmap
+  6/8).** §3 engine map row #23 (Learning Orchestrator) updated to note
+  School-Mode-only scope and ADR 11 Library Mode proposal. §6.7 expanded
+  with ADR 11 finding: two-layer Recommendation Architecture (Cross-Session
+  Planner + Session Recommendation Reconciler with deterministic signal
+  priority table, `maxSessionSignals = 3` cap), Library Mode parity
+  (`getTopLibraryRecommendation()`), and Evidence Engine hook (ADR 13).
+  §7 risk register gains R15 (in-session signal conflicts resolved
+  probabilistically by LLM rather than deterministically by Brain — already
+  realized in production). §9 ADR index row for ADR 11 updated to "Proposal,
+  blocked on KG v1 freeze." No production code changed.
