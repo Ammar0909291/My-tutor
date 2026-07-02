@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-_(set after commit — see git log for `docs/physics/`)_
+`73b2698` — feat(physics): author Thermodynamics domain (phys.therm, 18 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
