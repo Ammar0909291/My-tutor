@@ -2,406 +2,766 @@
   "name": "Physics Teaching Assets",
   "version": "1.0.0",
   "status": "placeholder",
-  "build_date": "2026-06-29",
+  "build_date": "2026-07-02",
   "subject": "physics",
   "assets": [
     {
       "id": "asset.phys.meas.units",
       "concept_id": "phys.meas.units",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to recall \"SI Units and Measurement\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"SI Units and Measurement\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to name the seven SI base units (metre, kilogram, second, ampere, kelvin, mole, candela) and the quantities they measure, express a given physical quantity with the correct unit symbol, and distinguish base units from derived units such as the newton or the joule.",
+      "concept_summary": "Physics is a quantitative science: every claim it makes ultimately rests on measurement, and every measurement is a comparison against an agreed standard called a unit. The International System of Units (SI) fixes seven base units \u2014 the metre (length), kilogram (mass), second (time), ampere (electric current), kelvin (temperature), mole (amount of substance), and candela (luminous intensity) \u2014 from which all other units, like the newton for force or the joule for energy, are derived by multiplication and division. Since the 2019 redefinition, all seven base units are defined by fixing exact values of fundamental constants of nature (for example, the second via the caesium-133 hyperfine transition frequency and the metre via the exact speed of light), so the standards are reproducible in any laboratory rather than tied to a physical artifact.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"SI Units and Measurement\"",
-        "[TEMPLATE] Key idea 2 for \"SI Units and Measurement\"",
-        "[TEMPLATE] Key idea 3 for \"SI Units and Measurement\""
+        "A measurement is a comparison against a standard: stating a quantity always requires both a numerical value and a unit \u2014 '5' is meaningless in physics, '5 m' is not.",
+        "The SI defines exactly seven base units: metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol), and candela (cd).",
+        "Every other unit is a derived unit built from the base units, e.g. m/s for speed, kg\u00b7m/s\u00b2 (the newton) for force, kg\u00b7m\u00b2/s\u00b2 (the joule) for energy.",
+        "Since 2019 each base unit is defined by fixing an exact value of a constant of nature (speed of light, Planck constant, elementary charge, Boltzmann constant, Avogadro constant, caesium transition frequency, luminous efficacy), making the standards universal and artifact-free.",
+        "Unit symbols follow strict conventions: they are case-sensitive (K is kelvin, k is kilo-), never pluralized, and written in roman (upright) type after a space."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"SI Units and Measurement\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The kilogram is a derived unit because it contains the prefix 'kilo-'.",
+          "correction": "Historically anomalous but true: the kilogram \u2014 not the gram \u2014 is the SI base unit of mass. It is the only base unit whose name contains a prefix, kept for continuity with the original metric system."
+        },
+        {
+          "misconception": "Weight and mass are the same quantity, both measured in kilograms.",
+          "correction": "Mass (kg) measures the amount of matter and is the same everywhere; weight is the gravitational force on that mass, measured in newtons, and changes with location (your mass on the Moon is unchanged, your weight is about one-sixth)."
+        },
+        {
+          "misconception": "Units are just labels that can be dropped during calculation and reattached at the end.",
+          "correction": "Units multiply and divide exactly like algebraic symbols. Dropping them hides errors: adding a length to a time, or forgetting that a kilometre is 1000 metres, produces silently wrong answers that unit-tracking would have caught."
+        },
+        {
+          "misconception": "A quantity measured in different units is a different quantity (e.g. 90 km/h and 25 m/s are different speeds).",
+          "correction": "The physical quantity is independent of the unit chosen to express it: 90 km/h and 25 m/s are the same speed. Changing units rescales the number, never the physics."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"SI Units and Measurement\""
+        "A poster of the seven SI base units arranged as a heptagon, each vertex showing the unit symbol, the quantity measured, and the defining constant of nature (the 'SI logo' diagram from the SI Brochure).",
+        "A tree diagram growing derived units from base units: m and s combine to m/s (speed), then with kg to kg\u00b7m/s\u00b2 (newton), then newton \u00d7 m to joule \u2014 showing derivation as visible branching.",
+        "A side-by-side scale comparison strip showing where everyday objects fall on the metre scale (atom ~10\u207b\u00b9\u2070 m, human ~10\u2070 m, Earth ~10\u2077 m) to connect units to physical intuition.",
+        "A short animation of the 2019 redefinition: the old platinum-iridium kilogram cylinder fading out, replaced by a Kibble balance fixing mass via the Planck constant."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"SI Units and Measurement\"",
+        "setup": "A student reads that the kinetic energy of a moving ball is given by E = \u00bdmv\u00b2, with the ball's mass m = 2 kg and speed v = 3 m/s, and is asked to compute the energy and express it in the correct SI unit.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Identify the quantities and their SI units: mass m = 2 kg (base unit), speed v = 3 m/s (derived unit).",
+          "Substitute into the formula: E = \u00bd \u00d7 2 kg \u00d7 (3 m/s)\u00b2 = \u00bd \u00d7 2 \u00d7 9 kg\u00b7m\u00b2/s\u00b2.",
+          "Carry the units through the arithmetic exactly like algebra: E = 9 kg\u00b7m\u00b2/s\u00b2.",
+          "Recognize the derived combination: 1 kg\u00b7m\u00b2/s\u00b2 is defined as 1 joule (J).",
+          "State the final answer with value and unit: E = 9 J."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"SI Units and Measurement\""
+        "expected_outcome": "The student computes 9 joules and can explain that the joule is not a new independent standard but a named shorthand for the base-unit combination kg\u00b7m\u00b2/s\u00b2."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "multiple choice (identify the SI unit for a given quantity)",
+          "matching (quantity \u2194 base unit \u2194 symbol)",
+          "unit-combination derivation (express newton, joule, watt in base units)",
+          "error-spotting (find the unit mistake in a worked line)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct recall of the seven base units and their symbols, progress to expressing common derived units (N, J, W, Pa) in base units, and finish with items where students carry units through a short calculation and name the resulting derived unit.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "short-answer recall quiz",
+          "unit-derivation exercise",
+          "concept check on the constant-based definitions"
         ],
-        "bloom_alignment": "remember",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"SI Units and Measurement\""
+        "bloom_alignment": "Remember \u2014 students must recall the seven base units, their symbols, and the quantities they measure, and recognize standard derived units built from them.",
+        "mastery_signal": "The student names all seven SI base units with correct symbols and quantities, and correctly expresses at least two common derived units in base-unit form, with at least 70% accuracy across varied prompts."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"SI Units and Measurement\""
+        "Medicine dosages (mg per kg of body mass) depend on unambiguous mass units \u2014 a unit error of 1000\u00d7 has caused real hospital overdose incidents.",
+        "GPS positioning works because the second is defined so precisely that satellite clocks can be synchronized to nanoseconds, turning time measurement into metre-level position accuracy.",
+        "The 1999 Mars Climate Orbiter was destroyed because one engineering team supplied thrust data in pound-force-seconds while the navigation software expected newton-seconds.",
+        "International trade in fuel, food, and electricity settles contracts in SI units (litres, kilograms, kilowatt-hours) so both parties agree on exactly how much was delivered."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.2",
+          "Halliday Resnick Walker Ch.1",
+          "SI Brochure 9th edition (BIPM 2019)"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.scalars-vectors",
       "concept_id": "phys.meas.scalars-vectors",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Scalar and Vector Quantities\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Scalar and Vector Quantities\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define scalar and vector quantities, classify common physical quantities (distance, displacement, speed, velocity, mass, force, temperature, momentum) into the two categories, and explain why direction is essential information for vectors.",
+      "concept_summary": "Physical quantities divide into two families by the information needed to specify them. A scalar is completely described by a single number with a unit \u2014 mass, temperature, time, distance, speed, and energy are scalars. A vector needs both a magnitude and a direction \u2014 displacement, velocity, acceleration, force, and momentum are vectors, typically drawn as arrows whose length represents magnitude and whose orientation represents direction. The distinction is not cosmetic: scalars combine by ordinary arithmetic, while vectors combine by geometric rules that account for direction, so treating a vector as a mere number gives wrong answers whenever directions differ.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Scalar and Vector Quantities\"",
-        "[TEMPLATE] Key idea 2 for \"Scalar and Vector Quantities\"",
-        "[TEMPLATE] Key idea 3 for \"Scalar and Vector Quantities\""
+        "A scalar is fully specified by magnitude alone (a number with a unit); a vector requires magnitude and direction.",
+        "Distance and speed are scalars; their directional counterparts, displacement and velocity, are vectors \u2014 a round trip has nonzero distance but zero displacement.",
+        "Vectors are represented graphically as arrows (length = magnitude, orientation = direction) and symbolically with an arrow overhead or boldface type.",
+        "Scalars add by ordinary arithmetic; vectors add by geometric (head-to-tail or parallelogram) rules because directions matter.",
+        "Two vectors are equal only if both their magnitudes and their directions are equal; a negative sign on a vector reverses its direction."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Scalar and Vector Quantities\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Distance and displacement are interchangeable words for the same quantity.",
+          "correction": "Distance is the scalar total path length; displacement is the vector from start point to end point. Walking around a full circle covers a distance of one circumference but produces zero displacement."
+        },
+        {
+          "misconception": "Any quantity that has a sign or can be negative must be a vector.",
+          "correction": "Scalars can be negative too (temperature of \u22125 \u00b0C, potential energy of \u221210 J). What makes a vector is a direction in space, not the possibility of a minus sign."
+        },
+        {
+          "misconception": "The magnitude of a vector can be negative.",
+          "correction": "Magnitude is a length and is always non-negative. The minus sign in a vector expression encodes reversed direction, not negative size."
+        },
+        {
+          "misconception": "Speed and velocity are the same thing.",
+          "correction": "Speed is the scalar magnitude of velocity. A car circling a track at constant 60 km/h has constant speed but continuously changing velocity, because its direction keeps changing."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Scalar and Vector Quantities\""
+        "A two-column sorting board where students drag quantity cards (mass, force, temperature, velocity, energy, momentum\u2026) into 'scalar' and 'vector' columns with instant feedback.",
+        "A map showing a walk from home to school by two different routes: same displacement arrow, different path distances \u2014 displacement drawn as a straight dashed arrow over the wiggly paths.",
+        "An arrow toolkit demonstration: the same 5 N force arrow rotated to different angles, showing that rotating the arrow changes the vector even though its length (magnitude) is unchanged.",
+        "A circular running track with velocity arrows drawn tangent at several points, all the same length, illustrating constant speed with changing velocity."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Scalar and Vector Quantities\"",
+        "setup": "A jogger runs 300 m east along a street, then 400 m north along a cross street. The student must find the total distance travelled and the magnitude of the displacement, and classify each answer as scalar or vector.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Compute total distance as the scalar sum of path lengths: 300 m + 400 m = 700 m.",
+          "Sketch the two legs head-to-tail: 300 m east, then 400 m north, forming the two perpendicular sides of a right triangle.",
+          "Displacement is the straight arrow from start to finish \u2014 the hypotenuse of the triangle.",
+          "Apply the Pythagorean theorem: |displacement| = \u221a(300\u00b2 + 400\u00b2) m = \u221a(250000) m = 500 m.",
+          "State direction as well as magnitude for the vector: 500 m at approximately 53\u00b0 north of east (tan \u03b8 = 400/300).",
+          "Classify: distance 700 m is a scalar (no direction); displacement 500 m at 53\u00b0 N of E is a vector."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Scalar and Vector Quantities\""
+        "expected_outcome": "The student reports distance = 700 m (scalar) and displacement = 500 m directed 53\u00b0 north of east (vector), and can articulate why the two numbers differ."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "classification (scalar or vector?)",
+          "multiple choice on distance vs. displacement scenarios",
+          "short numeric problems computing path length vs. straight-line displacement",
+          "diagram reading (interpret arrows on a motion map)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Start with direct classification of familiar quantities, move to route scenarios contrasting distance with displacement (including round trips with zero displacement), and end with two-leg perpendicular journeys requiring the Pythagorean theorem and a direction statement.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "classification quiz",
+          "scenario-based short answer",
+          "diagram interpretation task"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Scalar and Vector Quantities\""
+        "bloom_alignment": "Understand \u2014 students must explain the scalar/vector distinction in their own words and apply it to classify quantities and interpret simple motion scenarios, beyond memorizing definitions.",
+        "mastery_signal": "The student correctly classifies at least 70% of presented quantities and correctly distinguishes distance from displacement in an unfamiliar route scenario, including recognizing zero displacement on a closed path."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Scalar and Vector Quantities\""
+        "Aircraft navigation must treat wind velocity as a vector: a 50 km/h crosswind pushes a plane off course even when its airspeed (scalar) is unchanged.",
+        "Delivery apps distinguish route distance (what the driver travels, affects fuel) from straight-line displacement (what the crow flies, affects delivery-zone eligibility).",
+        "Physiotherapists analyze the direction of muscle forces, not just their strength, when correcting posture \u2014 the same force magnitude at a wrong angle strains a joint.",
+        "Ocean current charts show water movement as arrows because a ship's drift depends on both how fast and which way the current flows."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.units"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.4",
+          "Halliday Resnick Walker Ch.3"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.dimensions",
       "concept_id": "phys.meas.dimensions",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Dimensional Analysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Dimensional Analysis\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to write the dimensional formula of common physical quantities in terms of M, L, and T, verify the dimensional consistency of a given equation, and use dimensional reasoning to derive the form of simple relations and convert units.",
+      "concept_summary": "Every physical quantity in mechanics can be expressed in terms of the base dimensions mass [M], length [L], and time [T] \u2014 for example velocity is [L T\u207b\u00b9], force is [M L T\u207b\u00b2], and energy is [M L\u00b2 T\u207b\u00b2]. Dimensional analysis exploits the principle of homogeneity: every term added or equated in a valid physical equation must carry the same dimensions, just as one cannot add metres to seconds. This turns dimensions into a powerful checking and discovery tool \u2014 a proposed formula whose sides disagree dimensionally is certainly wrong, and requiring dimensional consistency often reveals the form of an unknown relation up to a dimensionless constant. Its limits matter too: dimensional analysis cannot determine dimensionless factors like \u00bd or 2\u03c0, and it cannot distinguish quantities that share dimensions, such as work and torque.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Dimensional Analysis\"",
-        "[TEMPLATE] Key idea 2 for \"Dimensional Analysis\"",
-        "[TEMPLATE] Key idea 3 for \"Dimensional Analysis\""
+        "The dimensional formula expresses a quantity as powers of base dimensions: velocity [L T\u207b\u00b9], acceleration [L T\u207b\u00b2], force [M L T\u207b\u00b2], energy and work [M L\u00b2 T\u207b\u00b2], pressure [M L\u207b\u00b9 T\u207b\u00b2].",
+        "Principle of homogeneity: all terms added, subtracted, or equated in a physically valid equation must have identical dimensions.",
+        "Dimensional consistency is a necessary but not sufficient test: a dimensionally correct equation can still be numerically wrong (wrong constant), but a dimensionally inconsistent one is always wrong.",
+        "Dimensional analysis can derive the form of a relation (e.g. pendulum period T \u221d \u221a(l/g)) by demanding that the combination of governing quantities be dimensionally consistent.",
+        "Arguments of transcendental functions (sin, exp, log) must be dimensionless, and dimensionless constants like \u00bd or 2\u03c0 are invisible to dimensional analysis.",
+        "Because units follow dimensions, dimensional formulas also drive systematic unit conversion between systems (e.g. converting a force from CGS dynes to SI newtons)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Dimensional Analysis\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "If an equation is dimensionally correct, it must be physically correct.",
+          "correction": "Dimensional consistency is only a necessary condition. E = mv\u00b2 is dimensionally identical to the true kinetic energy E = \u00bdmv\u00b2, yet wrong by a factor of 2 \u2014 dimensional analysis can never see dimensionless constants."
+        },
+        {
+          "misconception": "Dimensions and units are the same thing.",
+          "correction": "A dimension is the abstract kind of quantity ([L] for length); a unit is a particular standard for it (metre, foot, mile). Kilometres and metres are different units with the same dimension."
+        },
+        {
+          "misconception": "Two quantities with the same dimensional formula are the same physical quantity.",
+          "correction": "Work and torque both have dimensions [M L\u00b2 T\u207b\u00b2], yet one is a scalar energy transfer and the other a rotational vector effect. Shared dimensions do not imply shared physics."
+        },
+        {
+          "misconception": "Quantities like angle or refractive index have no place in equations because they have 'no dimensions'.",
+          "correction": "Dimensionless quantities are perfectly legitimate \u2014 they are pure numbers (often ratios of like quantities) and can appear anywhere, including inside sines, exponentials, and logarithms, whose arguments in fact must be dimensionless."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Dimensional Analysis\""
+        "A balance-scale graphic with the two sides of an equation on the two pans, each term reduced to its M-L-T 'weight tags', tipping visibly when a term's dimensions disagree.",
+        "A color-coded dimension table: rows of common quantities, columns for M, L, T exponents, with matching colors so students see families (all energies share one color pattern).",
+        "A step-by-step animation deriving the pendulum period: candidate quantities (m, l, g) with their dimension tags, exponents solved on screen, mass visibly dropping out.",
+        "A 'dimension detector' worksheet overlay where students stamp each term of a suspicious equation with its dimensional formula and circle the mismatch."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Dimensional Analysis\"",
+        "setup": "A student is asked to check whether the equation v\u00b2 = u\u00b2 + 2as is dimensionally consistent, where v and u are velocities, a is acceleration, and s is displacement.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Write the dimensional formula of each symbol: [v] = [u] = L T\u207b\u00b9, [a] = L T\u207b\u00b2, [s] = L.",
+          "Compute dimensions of the left side: [v\u00b2] = (L T\u207b\u00b9)\u00b2 = L\u00b2 T\u207b\u00b2.",
+          "Compute dimensions of the first right-side term: [u\u00b2] = L\u00b2 T\u207b\u00b2.",
+          "Compute dimensions of the second right-side term: [2as] = [a][s] = (L T\u207b\u00b2)(L) = L\u00b2 T\u207b\u00b2 (the pure number 2 is dimensionless).",
+          "Compare: every term has dimensions L\u00b2 T\u207b\u00b2, so the equation is dimensionally homogeneous.",
+          "Conclude carefully: the equation passes the dimensional test, which makes it possibly correct \u2014 the test alone cannot confirm the coefficient 2."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Dimensional Analysis\""
+        "expected_outcome": "The student shows all three terms share dimensions L\u00b2 T\u207b\u00b2 and states the correct scope of the conclusion: dimensional consistency verified, numerical coefficients not verifiable by this method."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "write the dimensional formula of a given quantity",
+          "consistency check of a given equation (pass/fail with working)",
+          "derive the form of a relation by dimensional reasoning",
+          "identify the flaw in a dimensionally illegal expression (e.g. sin of a length)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with writing dimensional formulas for standard mechanics quantities, progress to verifying multi-term equations, then to deriving relations such as the pendulum period or drag-force form, and finish with subtle items on dimensionless arguments and same-dimension different-physics pairs.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "structured problem set with shown working",
+          "error-detection exercise",
+          "short derivation task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Dimensional Analysis\""
+        "bloom_alignment": "Apply \u2014 students must use the homogeneity principle on equations they have not seen before, not merely recall dimensional formulas.",
+        "mastery_signal": "The student verifies or refutes the dimensional consistency of an unfamiliar equation with fully shown M-L-T working, and correctly derives the form of a simple relation, at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Dimensional Analysis\""
+        "Engineers sanity-check simulation output and hand calculations by dimensional audit before trusting results that inform bridge or aircraft design.",
+        "Wind-tunnel testing of scale models relies on dimensional analysis (Reynolds and Mach numbers) to guarantee that a small model's airflow faithfully represents the full-size aircraft.",
+        "Pharmacokinetic models express drug clearance in dimensionally consistent forms so dosing formulas transfer safely between adult and pediatric patients.",
+        "Software for scientific computing embeds dimension-checking in its type system (units-of-measure types) to catch physically meaningless operations at compile time."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.units"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.2",
+          "Halliday Resnick Walker Ch.1"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.errors",
       "concept_id": "phys.meas.errors",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Measurement Errors and Uncertainty\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Measurement Errors and Uncertainty\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to distinguish systematic from random errors, compute absolute, relative, and percentage errors for measured quantities, and propagate uncertainties through sums, differences, products, and quotients to state a result with a justified uncertainty.",
+      "concept_summary": "No measurement is exact: every measured value deviates from the true value, and quantifying that deviation is what separates a scientific measurement from a bare number. Errors fall into two families. Systematic errors shift every reading the same way \u2014 a zero offset on a balance, a slow-running clock, a miscalibrated scale \u2014 and are reduced by better calibration and technique, not by repetition. Random errors scatter readings unpredictably around the true value \u2014 reaction-time variation, thermal fluctuations \u2014 and shrink when many readings are averaged. A complete measurement therefore reports a best estimate (usually the mean) together with an uncertainty (such as the maximum deviation or standard error), written x \u00b1 \u0394x, and simple propagation rules govern how these uncertainties combine: absolute uncertainties add for sums and differences, while relative (percentage) uncertainties add for products, quotients, and powers.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Measurement Errors and Uncertainty\"",
-        "[TEMPLATE] Key idea 2 for \"Measurement Errors and Uncertainty\"",
-        "[TEMPLATE] Key idea 3 for \"Measurement Errors and Uncertainty\""
+        "Error is the deviation of a measured value from the true value; uncertainty is the quantified doubt attached to a result, reported as x \u00b1 \u0394x.",
+        "Systematic errors bias all readings in one direction (calibration offsets, instrumental drift) and are not reduced by averaging; random errors scatter symmetrically and shrink as more readings are averaged.",
+        "Absolute error has the units of the quantity; relative error \u0394x/x and percentage error (\u0394x/x)\u00d7100% are dimensionless and enable comparison across quantities of different sizes.",
+        "For addition and subtraction, absolute uncertainties add: \u0394(a \u00b1 b) = \u0394a + \u0394b (maximum-error convention).",
+        "For multiplication, division, and powers, relative uncertainties add: \u0394z/z = \u0394a/a + \u0394b/b, and for z = a\u207f, \u0394z/z = |n|\u00b7\u0394a/a.",
+        "Precision (spread of repeated readings) and accuracy (closeness to the true value) are independent: a measurement can be precise but inaccurate, or accurate but imprecise."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Measurement Errors and Uncertainty\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Taking more readings and averaging removes all error.",
+          "correction": "Averaging suppresses only random error. A systematic error \u2014 like a balance that reads 0.2 g high \u2014 biases every reading identically and survives any amount of averaging; only calibration or improved method removes it."
+        },
+        {
+          "misconception": "Error means a mistake the experimenter made.",
+          "correction": "In physics, 'error' is the unavoidable, quantifiable uncertainty inherent in any measurement, present even in flawless technique. Blunders (misreading a scale, transcription slips) are a separate category to be found and eliminated, not quantified."
+        },
+        {
+          "misconception": "A more precise measurement is automatically more accurate.",
+          "correction": "Precision and accuracy are independent. A stopped-clock-like instrument can give tightly clustered (precise) readings that are all far from the true value (inaccurate) because of a systematic offset."
+        },
+        {
+          "misconception": "When two measured quantities are subtracted, their uncertainties partially cancel.",
+          "correction": "Uncertainties never cancel \u2014 under the maximum-error convention they add even in subtraction. Subtracting two nearly equal large numbers is dangerous precisely because the absolute uncertainty stays large while the result becomes small, inflating the relative error."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Measurement Errors and Uncertainty\""
+        "The classic dartboard/target diagram contrasting four cases: precise+accurate, precise+inaccurate, imprecise+accurate, imprecise+inaccurate.",
+        "A histogram animation of repeated readings piling up into a bell-shaped spread around the mean, with the mean drifting off the true value when a systematic offset is switched on.",
+        "A number-line 'uncertainty bar' visual showing x \u00b1 \u0394x as an interval, and how intervals widen when two measurements are added or subtracted.",
+        "An interactive slider demo of error propagation: dragging \u0394a/a and \u0394b/b sliders updates the relative uncertainty of a\u00b7b and a/b in real time."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Measurement Errors and Uncertainty\"",
+        "setup": "A student measures a rectangular plate: length l = (10.0 \u00b1 0.1) cm and width w = (5.0 \u00b1 0.1) cm, and must report the area with its uncertainty.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Compute the best-estimate area: A = l \u00d7 w = 10.0 cm \u00d7 5.0 cm = 50.0 cm\u00b2.",
+          "Compute each relative uncertainty: \u0394l/l = 0.1/10.0 = 0.01 (1%), \u0394w/w = 0.1/5.0 = 0.02 (2%).",
+          "Apply the product rule \u2014 relative uncertainties add: \u0394A/A = 0.01 + 0.02 = 0.03 (3%).",
+          "Convert back to an absolute uncertainty: \u0394A = 0.03 \u00d7 50.0 cm\u00b2 = 1.5 cm\u00b2.",
+          "Report the result in standard form: A = (50.0 \u00b1 1.5) cm\u00b2.",
+          "Interpret: the true area is asserted to lie between 48.5 cm\u00b2 and 51.5 cm\u00b2 under the maximum-error convention."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Measurement Errors and Uncertainty\""
+        "expected_outcome": "The student reports A = (50.0 \u00b1 1.5) cm\u00b2, having added relative (not absolute) uncertainties for the product, and can state the meaning of the interval."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "classification of error sources (systematic vs. random vs. blunder)",
+          "computing absolute, relative, and percentage error from data",
+          "uncertainty propagation through sums, differences, products, quotients, and powers",
+          "data-interpretation items on precision vs. accuracy from repeated-readings tables"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Start with identifying error types in described experiments, move to single-quantity error computation from repeated readings, then to two-quantity propagation (area, density, speed), and culminate in multi-step propagation with powers (e.g. g from pendulum data, where the period enters squared).",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "structured numerical problems with uncertainty budgets",
+          "lab-report style data analysis task",
+          "scenario classification quiz"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Measurement Errors and Uncertainty\""
+        "bloom_alignment": "Apply \u2014 students must execute propagation rules on new measurement scenarios and choose the correct rule for each operation, not merely define error types.",
+        "mastery_signal": "The student propagates uncertainty correctly through a two-step calculation (choosing absolute vs. relative addition appropriately) and correctly classifies error sources, at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Measurement Errors and Uncertainty\""
+        "Manufacturing tolerances: an engine piston and cylinder are each machined with stated uncertainties, and propagation determines whether the assembled clearance can ever be out of specification.",
+        "Clinical laboratory results (blood glucose, cholesterol) are reported against reference ranges only after the lab's measurement uncertainty is validated, so borderline values are interpreted correctly.",
+        "Election polling and census estimates carry margins of error \u2014 the same random/systematic distinction explains why bigger samples fix scatter but not a biased sampling method.",
+        "Carbon-dating results are quoted as an age \u00b1 uncertainty, and archaeological conclusions change materially depending on whether that interval spans one century or five."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.units"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.2",
+          "JCGM 100 GUM (Guide to the Expression of Uncertainty in Measurement)"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.significant-figures",
       "concept_id": "phys.meas.significant-figures",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Significant Figures and Precision\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Significant Figures and Precision\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to count the significant figures in any written number, round results correctly, and apply the addition/subtraction and multiplication/division rules so that a calculated result never claims more precision than its least precise input.",
+      "concept_summary": "Significant figures are the digits in a written number that carry real measurement information: how a value is written silently declares how precisely it is known. In 2.30 m the trailing zero is a promise \u2014 the measurement resolved centimetres \u2014 while writing 2.3 m makes no such claim. The counting rules are mechanical (all nonzero digits count; zeros between them count; leading zeros never count; trailing zeros count only when a decimal point fixes them), but the purpose is not: significant figures are a compact shorthand for measurement uncertainty. They govern arithmetic through two rules \u2014 products and quotients keep the fewest significant figures of any factor, while sums and differences keep the coarsest decimal place of any term \u2014 ensuring that calculators' long digit strings never masquerade as precision the instruments never had. Scientific notation removes all ambiguity by displaying exactly the significant digits and nothing else.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Significant Figures and Precision\"",
-        "[TEMPLATE] Key idea 2 for \"Significant Figures and Precision\"",
-        "[TEMPLATE] Key idea 3 for \"Significant Figures and Precision\""
+        "Significant figures encode precision in notation: 2.30 m and 2.3 m state the same length but different confidence in it.",
+        "Counting rules: nonzero digits always count; captive zeros (between nonzero digits) count; leading zeros never count; trailing zeros count only if a decimal point is present (in plain notation, 1200 is ambiguous).",
+        "Multiplication/division rule: the result carries as many significant figures as the least precise factor.",
+        "Addition/subtraction rule: the result is rounded to the coarsest decimal place among the terms (a different rule from the multiplicative one \u2014 the operation decides).",
+        "Scientific notation (e.g. 1.20 \u00d7 10\u00b3) states significant figures unambiguously and is the preferred form for measured values.",
+        "Exact numbers \u2014 counted objects and defined conversion factors (100 cm in a metre) \u2014 have unlimited significant figures and never limit a result."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Significant Figures and Precision\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "All zeros in a number are insignificant.",
+          "correction": "Only leading zeros are automatically insignificant (0.0025 has two sig figs). Captive zeros always count (2.05 has three), and trailing zeros count when a decimal point is present (2.50 has three)."
+        },
+        {
+          "misconception": "More decimal places always means a more precise measurement.",
+          "correction": "Precision is about significant figures relative to the size of the quantity, not decimal places alone: 0.002 m has one significant figure, while 12.3 m \u2014 with one decimal place \u2014 has three and is relatively far more precise."
+        },
+        {
+          "misconception": "You should round every intermediate step to the correct significant figures.",
+          "correction": "Round only the final answer. Rounding at every intermediate step accumulates rounding error; carry extra guard digits through the calculation and apply the significant-figure rule once at the end."
+        },
+        {
+          "misconception": "The sum and product rules are interchangeable \u2014 just keep the fewest sig figs everywhere.",
+          "correction": "The two rules differ. Addition/subtraction is governed by decimal place (12.1 + 0.03 = 12.1), while multiplication/division is governed by count of significant figures. Applying the wrong rule misstates the precision of the result."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Significant Figures and Precision\""
+        "A digit-highlighting overlay that colors each digit of sample numbers green (significant) or grey (not), with a one-line reason appearing on hover for each zero.",
+        "A ruler zoom graphic showing why 2.30 cm differs from 2.3 cm: the finer ruler's millimetre marks justify the extra digit.",
+        "A two-panel flowchart, one panel per arithmetic rule (\u00d7/\u00f7 counts sig figs; +/\u2212 compares decimal places), with a worked mini-example inside each panel.",
+        "A 'calculator honesty' animation: a division producing 3.333333333 on screen, then a stamp trimming it to the justified 3.3 with the excess digits crumbling away."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Significant Figures and Precision\"",
+        "setup": "A student measures a sheet of paper as 29.7 cm long and 21.0 cm wide and computes its area and its perimeter, reporting each with the correct number of significant figures.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Count significant figures in each measurement: 29.7 cm has three; 21.0 cm has three (the trailing zero after the decimal point is significant).",
+          "Compute the raw area: 29.7 cm \u00d7 21.0 cm = 623.7 cm\u00b2.",
+          "Apply the multiplication rule: both factors have three significant figures, so the area keeps three: A = 624 cm\u00b2.",
+          "Compute the raw perimeter: 2 \u00d7 (29.7 + 21.0) cm = 2 \u00d7 50.7 cm = 101.4 cm.",
+          "Apply the addition rule inside the bracket: both terms are known to one decimal place, so 50.7 cm keeps its decimal place; the multiplier 2 is an exact number and imposes no limit.",
+          "Report: area = 624 cm\u00b2 (three significant figures), perimeter = 101.4 cm (one decimal place)."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Significant Figures and Precision\""
+        "expected_outcome": "The student reports 624 cm\u00b2 and 101.4 cm, correctly invoking the count-based rule for the product, the place-based rule for the sum, and the exactness of the counted factor 2."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "count the significant figures in a given number",
+          "round a value to a stated number of significant figures",
+          "arithmetic with correct sig-fig reporting (mixed +, \u2212, \u00d7, \u00f7)",
+          "rewrite ambiguous plain-notation values in scientific notation"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with pure counting across all zero cases, move to rounding drills, then to single-operation arithmetic with correct reporting, and finish with mixed multi-operation problems where the addition and multiplication rules must be applied in the right order.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "rapid-fire counting quiz",
+          "computation set with justified rounding",
+          "error-spotting on a mock lab report"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Significant Figures and Precision\""
+        "bloom_alignment": "Apply \u2014 students must select and execute the correct rule for each operation in unfamiliar calculations, not just recite the counting conventions.",
+        "mastery_signal": "The student reports the results of mixed arithmetic with correctly justified significant figures \u2014 including at least one case where the addition rule and multiplication rule give different-looking outcomes \u2014 at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Significant Figures and Precision\""
+        "Pharmacists compounding medication round doses according to the precision of their balances \u2014 reporting 0.5250 g from a two-decimal balance would be a documentation violation.",
+        "Engineering drawings specify dimensions with exactly the digits manufacturing can hold; an extra written digit implies a tighter, more expensive tolerance.",
+        "Chemistry lab reports are graded on sig-fig discipline because titration results copied at ten calculator digits misrepresent what a burette can actually resolve.",
+        "News reports of '1200 casualties' vs. '1,203 casualties' communicate very different data quality \u2014 the sig-fig idea explains why round numbers signal estimates."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.errors"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.2",
+          "Halliday Resnick Walker Ch.1"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.vector-addition",
       "concept_id": "phys.meas.vector-addition",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Vector Addition and Resolution\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Vector Addition and Resolution\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to add vectors graphically by the head-to-tail (triangle) and parallelogram methods, resolve a vector into perpendicular components using sine and cosine, and compute the magnitude and direction of a resultant analytically from its components.",
+      "concept_summary": "Because vectors carry direction, they cannot be added like ordinary numbers except in the special case where they are parallel. Graphically, vectors add head-to-tail: drawing the second vector from the tip of the first makes the resultant the arrow from the free tail to the free head, and the parallelogram rule is the same construction performed from a common origin. Analytically, the master technique is resolution: any vector can be decomposed into perpendicular components \u2014 typically A\u2093 = A cos \u03b8 and A_y = A sin \u03b8 relative to the x-axis \u2014 and since perpendicular components are independent, vectors are added by summing components axis by axis. The resultant's magnitude follows from the Pythagorean theorem, R = \u221a(R\u2093\u00b2 + R_y\u00b2), and its direction from tan \u03b8 = R_y/R\u2093. Resolution converts geometry into arithmetic and scales to any number of vectors, which is why it is the default method throughout physics.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Vector Addition and Resolution\"",
-        "[TEMPLATE] Key idea 2 for \"Vector Addition and Resolution\"",
-        "[TEMPLATE] Key idea 3 for \"Vector Addition and Resolution\""
+        "Head-to-tail (triangle) rule: place the tail of the second vector at the head of the first; the resultant runs from the first tail to the last head. Vector addition is commutative and associative.",
+        "The parallelogram rule is the same addition drawn from a common origin: the resultant is the diagonal of the parallelogram formed by the two vectors.",
+        "Any vector resolves into perpendicular components: A\u2093 = A cos \u03b8, A_y = A sin \u03b8 (\u03b8 measured from the x-axis); the components are independent of one another.",
+        "To add many vectors, sum the x-components and y-components separately: R\u2093 = \u03a3A\u2093, R_y = \u03a3A_y.",
+        "Recover magnitude and direction from components: R = \u221a(R\u2093\u00b2 + R_y\u00b2), tan \u03b8 = R_y/R\u2093, checking the quadrant from the signs of the components.",
+        "The magnitude of a resultant ranges from |A \u2212 B| (antiparallel) to A + B (parallel) \u2014 only parallel vectors add magnitudes directly."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Vector Addition and Resolution\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The magnitude of the sum of two vectors equals the sum of their magnitudes.",
+          "correction": "That holds only when the vectors point the same way. In general |A + B| can be anything from |A \u2212 B| up to A + B: two 5 N forces at 120\u00b0 to each other combine to just 5 N, and opposing 5 N forces combine to zero."
+        },
+        {
+          "misconception": "The x-component always uses cosine and the y-component always uses sine.",
+          "correction": "Cosine goes with the side adjacent to the given angle. If the angle is measured from the y-axis (as in many incline and compass problems), the roles swap. Draw the triangle and identify adjacent/opposite rather than memorizing 'x means cos'."
+        },
+        {
+          "misconception": "A component of a vector can be larger than the vector's magnitude.",
+          "correction": "A perpendicular component is A cos \u03b8 or A sin \u03b8, and neither sine nor cosine exceeds 1, so no rectangular component can exceed the magnitude. If a computed component comes out larger, an angle or triangle has been misidentified."
+        },
+        {
+          "misconception": "Vectors must act at the same point or the same time to be added.",
+          "correction": "Vector addition is defined for free vectors: displacement legs taken one after another, or forces measured on different days, add by exactly the same rules. The arrows are moved parallel to themselves as needed."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Vector Addition and Resolution\""
+        "An interactive drag-and-drop applet where students chain arrows head-to-tail and watch the resultant update live, including reordering the same vectors to confirm commutativity.",
+        "A parallelogram construction animation: two vectors from a common origin, the parallelogram completing itself, the diagonal appearing as the resultant.",
+        "A component 'shadow' visual: a tilted vector casting projections onto the x- and y-axes like shadows under two perpendicular lights, labeled A cos \u03b8 and A sin \u03b8.",
+        "A river-crossing simulator where students set boat velocity and current velocity vectors and observe the actual path \u2014 the canonical intuition-builder for resultants."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Vector Addition and Resolution\"",
+        "setup": "A hiker walks 4.0 km east, then 3.0 km at 60\u00b0 north of east. The student must find the magnitude and direction of the hiker's resultant displacement by the component method.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Set up axes: x east, y north. Write the first leg in components: A = (4.0, 0) km.",
+          "Resolve the second leg: B\u2093 = 3.0 cos 60\u00b0 = 1.5 km, B_y = 3.0 sin 60\u00b0 \u2248 2.6 km.",
+          "Sum components axis by axis: R\u2093 = 4.0 + 1.5 = 5.5 km; R_y = 0 + 2.6 = 2.6 km.",
+          "Compute the magnitude: R = \u221a(5.5\u00b2 + 2.6\u00b2) = \u221a(30.25 + 6.76) = \u221a37.0 \u2248 6.1 km.",
+          "Compute the direction: tan \u03b8 = 2.6/5.5 \u2192 \u03b8 \u2248 25\u00b0 north of east (both components positive, first quadrant).",
+          "Sanity-check against the bounds: 6.1 km lies between |4.0 \u2212 3.0| = 1.0 km and 4.0 + 3.0 = 7.0 km, as it must."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Vector Addition and Resolution\""
+        "expected_outcome": "The student obtains R \u2248 6.1 km at about 25\u00b0 north of east, with components shown explicitly and the parallel/antiparallel bounds used as a final self-check."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "graphical construction (triangle and parallelogram) with ruler and protractor",
+          "resolving a vector into components for a stated angle convention",
+          "component-method resultant of two or three vectors",
+          "conceptual bound-checking items (possible values of |A + B|)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with collinear and perpendicular pairs where answers are checkable by eye, then general angles requiring resolution, then three-vector sums, and finally items with angles given from the y-axis or as compass bearings to force conscious adjacent/opposite identification.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "structured multi-step problems with component tables",
+          "graphical construction task",
+          "conceptual multiple choice on resultant bounds and component limits"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Vector Addition and Resolution\""
+        "bloom_alignment": "Apply \u2014 students must select axes, resolve, sum, and reconstruct magnitude and direction on journeys and force systems they have not seen before.",
+        "mastery_signal": "The student computes the resultant of two vectors at an arbitrary angle via components \u2014 correct magnitude, correct quadrant-checked direction \u2014 at 80% accuracy across varied angle conventions."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Vector Addition and Resolution\""
+        "Pilots compute heading corrections by adding airspeed and wind-velocity vectors so the resultant ground track points at the destination.",
+        "Ferry and kayak operators angle upstream so the boat-plus-current resultant points straight across the river.",
+        "Structural engineers resolve roof loads and cable tensions into components to check that each support member carries only what it can bear.",
+        "Game physics engines resolve every collision force into components along and perpendicular to contact surfaces to compute realistic motion."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.scalars-vectors"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.4",
+          "Halliday Resnick Walker Ch.3",
+          "H.C. Verma Concepts of Physics Vol.1 Ch.2"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.vector-products",
       "concept_id": "phys.meas.vector-products",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Dot and Cross Products\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Dot and Cross Products\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to compute the dot product A\u00b7B = AB cos \u03b8 and the cross product magnitude |A\u00d7B| = AB sin \u03b8, determine cross-product direction with the right-hand rule, evaluate both products from Cartesian components, and select the appropriate product for physical contexts such as work and torque.",
+      "concept_summary": "Vectors admit two distinct multiplications, each answering a different geometric question. The dot (scalar) product A\u00b7B = AB cos \u03b8 measures alignment: it is the magnitude of one vector times the projection of the other onto it, yielding a scalar that is positive for acute angles, zero for perpendicular vectors, and negative for obtuse ones \u2014 physics uses it wherever only the parallel part of a vector matters, as in work W = F\u00b7d. The cross (vector) product A\u00d7B has magnitude AB sin \u03b8, the area of the parallelogram the two vectors span, and direction perpendicular to both, fixed by the right-hand rule \u2014 physics uses it wherever a turning or circulating effect matters, as in torque \u03c4 = r\u00d7F and magnetic force. The two products differ structurally: the dot product is commutative and vanishes for perpendicular operands, while the cross product is anticommutative (B\u00d7A = \u2212A\u00d7B) and vanishes for parallel operands. In components, A\u00b7B = A\u2093B\u2093 + A_yB_y + A_zB_z, and A\u00d7B is evaluated as a 3\u00d73 determinant with the unit vectors \u00ee, \u0135, k\u0302 in the first row.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Dot and Cross Products\"",
-        "[TEMPLATE] Key idea 2 for \"Dot and Cross Products\"",
-        "[TEMPLATE] Key idea 3 for \"Dot and Cross Products\""
+        "Dot product: A\u00b7B = AB cos \u03b8 \u2014 a scalar measuring how much the vectors align; equals the magnitude of one vector times the projection of the other onto it.",
+        "Cross product: |A\u00d7B| = AB sin \u03b8 with direction perpendicular to both vectors by the right-hand rule; its magnitude is the area of the parallelogram spanned by A and B.",
+        "Zero tests are opposite: A\u00b7B = 0 for perpendicular vectors, A\u00d7B = 0 for parallel (or antiparallel) vectors \u2014 each product 'sees' what the other ignores.",
+        "Algebraic character differs: the dot product is commutative (A\u00b7B = B\u00b7A); the cross product is anticommutative (B\u00d7A = \u2212A\u00d7B), so operand order matters.",
+        "Component formulas: A\u00b7B = A\u2093B\u2093 + A_yB_y + A_zB_z; A\u00d7B expands as the determinant |\u00ee \u0135 k\u0302; A\u2093 A_y A_z; B\u2093 B_y B_z|, with cyclic products \u00ee\u00d7\u0135 = k\u0302, \u0135\u00d7k\u0302 = \u00ee, k\u0302\u00d7\u00ee = \u0135.",
+        "Physical selection rule: alignment-type quantities (work, power P = F\u00b7v, flux) take the dot product; rotation-type quantities (torque, angular momentum L = r\u00d7p, magnetic force F = qv\u00d7B) take the cross product."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Dot and Cross Products\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The cross product of two vectors lies in the plane of those vectors.",
+          "correction": "A\u00d7B is perpendicular to that plane \u2014 perpendicular to both A and B simultaneously. Its direction (up or down out of the plane) is fixed by the right-hand rule, not by either operand's direction."
+        },
+        {
+          "misconception": "If a product of two nonzero vectors is zero, the vectors must be perpendicular.",
+          "correction": "That is true only for the dot product. The cross product vanishes for parallel or antiparallel vectors \u2014 sin 0\u00b0 = sin 180\u00b0 = 0 \u2014 which is the opposite condition."
+        },
+        {
+          "misconception": "Order doesn't matter in vector products, just as in ordinary multiplication.",
+          "correction": "It matters for the cross product: B\u00d7A = \u2212(A\u00d7B), the same magnitude but reversed direction. Swapping r and F in a torque calculation silently reverses the predicted rotation sense."
+        },
+        {
+          "misconception": "The dot product is 'the magnitude of the cross product without the sine' \u2014 two formulas for the same thing.",
+          "correction": "They are different objects answering different questions: the dot product is a scalar (no direction) measuring alignment; the cross product is a vector measuring perpendicular, rotational pairing. Work and torque share units but are physically distinct for exactly this reason."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Dot and Cross Products\""
+        "A projection animation for the dot product: B's shadow falling onto A's line shrinking as \u03b8 grows, hitting zero at 90\u00b0 and going 'negative' (reversed) beyond it.",
+        "A parallelogram-area visual for |A\u00d7B|: two vectors sweeping out a parallelogram whose area grows to maximum at 90\u00b0 and collapses to zero as the vectors align.",
+        "A 3D right-hand-rule interactive: students orient a virtual hand \u2014 fingers along A, curling toward B \u2014 and see the thumb produce A\u00d7B, then swap operands to watch the vector flip.",
+        "A wrench-and-bolt torque demo pairing the same force at several angles with the resulting \u03c4 = rF sin \u03b8 readout, connecting the sine factor to felt turning effectiveness."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Dot and Cross Products\"",
+        "setup": "Given A = 3\u00ee + 4\u0135 and B = 2\u00ee \u2212 \u0135 (both in metres), the student must compute A\u00b7B, the angle between the vectors, and A\u00d7B, interpreting the sign and direction of each result.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Compute the dot product from components: A\u00b7B = (3)(2) + (4)(\u22121) = 6 \u2212 4 = 2 m\u00b2.",
+          "Compute the magnitudes: |A| = \u221a(9 + 16) = 5 m; |B| = \u221a(4 + 1) = \u221a5 m.",
+          "Extract the angle: cos \u03b8 = (A\u00b7B)/(|A||B|) = 2/(5\u221a5) \u2248 0.179, so \u03b8 \u2248 79.7\u00b0 \u2014 nearly perpendicular, consistent with the small positive dot product.",
+          "Compute the cross product via the determinant (z-components are zero): A\u00d7B = k\u0302[(3)(\u22121) \u2212 (4)(2)] = \u221211 k\u0302 m\u00b2.",
+          "Interpret the direction: the negative z-result means A\u00d7B points into the page (right-hand rule: fingers from A toward B curl clockwise).",
+          "Cross-check the magnitude: |A\u00d7B| = |A||B| sin \u03b8 = 5\u00b7\u221a5\u00b7sin 79.7\u00b0 \u2248 11 m\u00b2, matching the determinant result."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Dot and Cross Products\""
+        "expected_outcome": "The student obtains A\u00b7B = 2 m\u00b2, \u03b8 \u2248 80\u00b0, and A\u00d7B = \u221211k\u0302 m\u00b2, and can explain why the dot product is small and positive while the cross product is near its maximum possible magnitude."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "numeric evaluation of both products from magnitudes and angle",
+          "component-form evaluation including the 3\u00d73 determinant",
+          "right-hand-rule direction identification in 3D sketches",
+          "context selection items (does this physical situation need dot or cross?)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Start with magnitude-and-angle evaluations and unit-vector products, progress to full component computations in two then three dimensions, then right-hand-rule direction drills, and finish with mixed physics contexts (work, torque, magnetic force) where students must first choose the correct product.",
+        "suggested_count": 14
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "structured computation problems",
+          "3D direction-identification quiz",
+          "context-matching task (physical quantity \u2194 product type)"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Dot and Cross Products\""
+        "bloom_alignment": "Apply \u2014 students must execute both product computations in unfamiliar configurations and choose the correct product for a described physical situation.",
+        "mastery_signal": "The student evaluates both products from components (including determinant expansion and right-hand-rule direction) and correctly matches products to physical contexts at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Dot and Cross Products\""
+        "Work and power calculations in engine and battery design use the dot product \u2014 only the force component along the motion transfers energy.",
+        "Torque specifications for wheel nuts and engine bolts are cross-product quantities; mechanics apply force perpendicular to the wrench precisely to maximize sin \u03b8.",
+        "Computer graphics engines use cross products to compute surface normals for lighting and dot products to decide how brightly a face reflects toward the camera.",
+        "Electric motors and generators work because magnetic forces on currents follow F = IL\u00d7B \u2014 the cross product's perpendicularity is the operating principle."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.vector-addition"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.4",
+          "Halliday Resnick Walker Ch.3",
+          "H.C. Verma Concepts of Physics Vol.1 Ch.2"
+        ]
+      }
     },
     {
       "id": "asset.phys.meas.unit-conversion",
       "concept_id": "phys.meas.unit-conversion",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Unit Conversion and Prefixes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Unit Conversion and Prefixes\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to convert quantities between units using conversion factors written as ratios equal to one, apply SI prefixes from nano to giga fluently, and convert compound units such as km/h to m/s with correct dimensional bookkeeping.",
+      "concept_summary": "The same physical quantity can be expressed in many units, and conversion between them is multiplication by cleverly written forms of the number one. Because 1000 m and 1 km are the same length, the ratio (1000 m / 1 km) equals exactly 1, and multiplying by it changes the unit label without changing the physical quantity \u2014 units cancel like algebraic factors, which is why the method is called factor-label or dimensional-analysis conversion. SI prefixes systematize the most common factors as powers of ten: kilo (10\u00b3), mega (10\u2076), giga (10\u2079) upward and centi (10\u207b\u00b2), milli (10\u207b\u00b3), micro (10\u207b\u2076), nano (10\u207b\u2079) downward. Compound units convert by chaining one factor per unit \u2014 the classic km/h \u2192 m/s conversion multiplies by (1000 m/km) and (1 h/3600 s), compressing to the famous factor 5/18 \u2014 and units raised to powers need the conversion factor applied to the same power, which is why 1 m\u00b2 is 10\u2074 cm\u00b2, not 10\u00b2 cm\u00b2.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Unit Conversion and Prefixes\"",
-        "[TEMPLATE] Key idea 2 for \"Unit Conversion and Prefixes\"",
-        "[TEMPLATE] Key idea 3 for \"Unit Conversion and Prefixes\""
+        "A conversion factor is a ratio of equal quantities in different units, so it equals exactly 1; multiplying by it changes units, never the physical quantity.",
+        "Arrange each factor so unwanted units cancel diagonally (factor-label method); if the units don't cancel to the target, the setup \u2014 not the arithmetic \u2014 is wrong.",
+        "Core SI prefixes: giga 10\u2079, mega 10\u2076, kilo 10\u00b3, centi 10\u207b\u00b2, milli 10\u207b\u00b3, micro 10\u207b\u2076, nano 10\u207b\u2079 \u2014 each shifts the power of ten, and prefix symbols are case-sensitive (M \u2260 m).",
+        "Compound units convert by chaining one factor per constituent unit: km/h \u2192 m/s uses \u00d7(1000/3600), i.e. multiply by 5/18 (and m/s \u2192 km/h by 18/5).",
+        "Units raised to powers take the conversion factor to that power: 1 m\u00b2 = 10\u2074 cm\u00b2, 1 m\u00b3 = 10\u2076 cm\u00b3 \u2014 squaring and cubing the factor, a step that plain-number intuition misses.",
+        "Defined conversion factors are exact numbers with unlimited significant figures; the measured value alone limits the precision of a converted result."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Unit Conversion and Prefixes\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Converting to a smaller unit means dividing, because the unit is smaller.",
+          "correction": "Smaller unit means more of them, so the number grows: 2 m is 200 cm (multiply by 100). Trust cancellation, not intuition \u2014 write the factor so that metres cancel and the direction takes care of itself."
+        },
+        {
+          "misconception": "Area and volume convert with the same factor as length (1 m\u00b2 = 100 cm\u00b2).",
+          "correction": "Squared units need the squared factor: 1 m\u00b2 = (100 cm)\u00b2 = 10,000 cm\u00b2, and 1 m\u00b3 = 10\u2076 cm\u00b3. Every power on the unit applies to the conversion factor too."
+        },
+        {
+          "misconception": "Changing units changes the physical quantity \u2014 25 m/s is 'more' than 90 km/h because you multiplied by something.",
+          "correction": "Multiplying by a conversion factor is multiplying by one: 90 km/h and 25 m/s are the identical speed. Only the numeral and label trade off against each other."
+        },
+        {
+          "misconception": "Prefix symbols are case-insensitive, so mW and MW are the same unit.",
+          "correction": "Case is meaningful throughout SI: m is milli (10\u207b\u00b3) and M is mega (10\u2076) \u2014 a mW and a MW differ by a factor of a billion. Similar traps: k vs. K, and s (second) inside compound symbols."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Unit Conversion and Prefixes\""
+        "A 'staircase' diagram of SI prefixes from nano to giga where each step is \u00d710\u00b3 (with centi as a labeled half-step), and moving up or down the stairs shifts the decimal point visibly.",
+        "A factor-label 'domino chain' animation: unit fractions snapping together with matching units cancelling in color, leaving only the target unit standing.",
+        "A one-square-metre grid divided into a 100\u00d7100 array of square centimetres, letting students literally count why the area factor is 10\u2074, not 10\u00b2.",
+        "A dual-scale speedometer face (km/h outer ring, m/s inner ring) making the 5/18 relationship a permanent visual anchor."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Unit Conversion and Prefixes\"",
+        "setup": "A road sign limits speed to 90 km/h. The student must express this speed in m/s using the factor-label method, showing all unit cancellations.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Write the starting quantity with its units as a fraction: 90 km/h = 90 km / 1 h.",
+          "Multiply by the length factor arranged so kilometres cancel: \u00d7 (1000 m / 1 km).",
+          "Multiply by the time factor arranged so hours cancel: \u00d7 (1 h / 3600 s).",
+          "Confirm the cancellation: km cancels with km, h cancels with h, leaving m/s \u2014 the target unit, so the setup is correct.",
+          "Compute the number: 90 \u00d7 1000 / 3600 = 25.",
+          "State the result and the shortcut it reveals: 90 km/h = 25 m/s, equivalent to multiplying by 5/18."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Unit Conversion and Prefixes\""
+        "expected_outcome": "The student produces 25 m/s with every unit cancellation shown, and recognizes 5/18 (and its inverse 18/5) as the reusable km/h \u2194 m/s factor."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "single-step prefix conversions (mm \u2194 m, kW \u2194 W, \u03bcs \u2194 s)",
+          "compound-unit conversions (km/h \u2194 m/s, g/cm\u00b3 \u2194 kg/m\u00b3)",
+          "area and volume conversions with squared and cubed factors",
+          "error-spotting items on inverted factors and case-confused prefixes"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with single prefix hops on simple units, then multi-hop prefix chains, then compound units requiring two chained factors, and finish with squared/cubed units and mixed problems (density, pressure) where several traps coincide.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "timed conversion drill",
+          "shown-work problems with required unit cancellation",
+          "error-detection quiz"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Unit Conversion and Prefixes\""
+        "bloom_alignment": "Apply \u2014 students must construct correct conversion chains for unit combinations they have not rehearsed, demonstrating the method rather than recalling specific answers.",
+        "mastery_signal": "The student completes compound and power-of-unit conversions with explicit, correct unit cancellation \u2014 including one area or volume item \u2014 at 70% accuracy or better under light time pressure."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Unit Conversion and Prefixes\""
+        "International recipes, fuel economy figures, and road signs demand everyday conversion between metric and local units for travellers and traders.",
+        "The Gimli Glider incident: an Air Canada 767 ran out of fuel mid-flight in 1983 after fuel was loaded using pounds-to-litres figures instead of kilograms \u2014 a pure unit-conversion failure.",
+        "Medical infusion pumps are programmed in mL/h from prescriptions written in mg/kg/day, a chained compound conversion nurses perform under protocol on every shift.",
+        "Data plans and storage mix MB, GB, and TB; the prefix ladder is exactly how one estimates whether a 4K movie fits on a 64 GB card."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.units"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "c24e40d",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.2",
+          "SI Brochure 9th edition (BIPM 2019)"
+        ]
+      }
     },
     {
       "id": "asset.phys.mech.displacement",
