@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`e7968c6` — feat(physics): author Classical Mechanics domain (phys.mech, 52 concepts)
+_(set after commit — see git log for `docs/physics/`)_
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -33,8 +33,8 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 |---|--------|-----------|----------|--------------|--------------|-------|
 | 01 | Measurement & Units | phys.meas | 8 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 02 | Classical Mechanics | phys.mech | 52 | draft ✓ | chapters/mech.md ✓ | Complete |
-| 03 | Thermodynamics | phys.therm | 18 | placeholder | — | **NEXT** |
-| 04 | Waves & Oscillations | phys.wave | 17 | placeholder | — | Pending |
+| 03 | Thermodynamics | phys.therm | 18 | draft ✓ | chapters/therm.md ✓ | Complete |
+| 04 | Waves & Oscillations | phys.wave | 17 | placeholder | — | **NEXT** |
 | 05 | Optics | phys.opt | 15 | placeholder | — | Pending |
 | 06 | Electromagnetism | phys.em | 35 | placeholder | — | Pending |
 | 07 | Modern Physics | phys.mod | 15 | placeholder | — | Pending |
@@ -43,7 +43,7 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | Pending |
 | 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
 
-**Summary:** 2/11 domains complete · 60/194 assets drafted · 134/194 remaining (30.9%)
+**Summary:** 3/11 domains complete · 78/194 assets drafted · 116/194 remaining (40.2%)
 
 ## Completed Concepts Per Domain
 
@@ -66,8 +66,15 @@ orbital-mechanics, keplers-laws, escape-velocity, satellites, hookes-law,
 stress-strain, pressure-fluids, buoyancy, bernoulli, surface-tension, viscosity
 (13 chunks × 4 concepts, deterministic graph order.)
 
-### phys.therm (18 concepts) — NOT STARTED
-0/18 authored. First unfinished domain — start here next session.
+### phys.therm (18 concepts) — COMPLETE
+All 18 concepts authored: temperature, zeroth-law, thermal-expansion,
+heat-transfer, specific-heat, calorimetry, phase-transitions, ideal-gas-law,
+kinetic-theory, first-law, internal-energy, thermodynamic-processes,
+second-law, entropy, heat-engines, carnot-cycle, refrigerators, third-law
+(5 chunks: 4+4+4+4+2, deterministic graph order.)
+
+### phys.wave (17 concepts) — NOT STARTED
+0/17 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -108,19 +115,19 @@ stress-strain, pressure-fluids, buoyancy, bernoulli, surface-tension, viscosity
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.mech)
+## Validation Status (latest domain: phys.therm)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.mech) | PASS — 0 orphans |
-| KG dependency integrity (phys.mech requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.mech, deep + provenance) | PASS — 52/52 |
-| Prerequisite review triggers = valid KG IDs (all drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.mech) | PASS — 52/52 |
-| Chapter assembly (mech.md) | PASS — 5779 lines |
+| KG orphan audit (phys.therm) | PASS — 0 orphans |
+| KG dependency integrity (phys.therm requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.therm, deep + provenance) | PASS — 18/18 |
+| Prerequisite review triggers = valid KG IDs (all 78 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.therm) | PASS — 18/18 |
+| Chapter assembly (therm.md) | PASS — 2077 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
-| Regression: phys.meas untouched | PASS — 8/8 draft |
+| Regression: phys.meas + phys.mech untouched | PASS — 8/8 and 52/52 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
 
@@ -136,6 +143,6 @@ stress-strain, pressure-fluids, buoyancy, bernoulli, surface-tension, viscosity
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.mech)
-**phys.therm** — Thermodynamics · 18 concepts · plan 5 chunks of 4 (last chunk 2),
-or 3 chunks of 6.
+## Next Planned Domain (after phys.therm)
+**phys.wave** — Waves & Oscillations · 17 concepts · plan 5 chunks
+(4+4+4+4+1) or 4 chunks (4+4+4+5).
