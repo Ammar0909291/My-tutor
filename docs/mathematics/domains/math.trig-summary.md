@@ -1,6 +1,6 @@
 # Domain Summary — Trigonometry (`math.trig`)
 
-*Generated: 2026-07-02 · Commit: `4b72c8b`*
+*Generated: 2026-07-02 · Commit: `a553584`*
 
 ## This Domain
 
@@ -10,7 +10,7 @@
 | Prefix | `math.trig` |
 | Concepts authored | 25 |
 | New assets created | 25 (placeholder → draft) |
-| Commit | `4b72c8b` |
+| Commit | `a553584` |
 
 ## Cumulative Mathematics Progress
 

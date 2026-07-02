@@ -11,11 +11,11 @@
     "verdict": "PASS",
     "validation_script_version": "1.1.0",
     "validated_at": "2026-07-02",
-    "validation_commit": "4b72c8b"
+    "validation_commit": "a553584"
   },
   "checksums": {
     "chapter_sha256": "sha256:9a1c08d410477dd7c334293afbb4d877a2026e11f3e0bd6447588897459da0d4",
-    "domain_assets_sha256": "sha256:181f88171e4975300cb697ef76f512558f11ee56945ec44d700f51255d8a2515",
+    "domain_assets_sha256": "sha256:762aa17d9462dd663f03e4a4f38f3787ae99bf410910dcd56065c5e7871a2a83",
     "graph_domain_sha256": "sha256:6bd4d1686e60a7401872a62b8d4acc6fb9ac26809ab228766620c8d685a85eed",
     "validation_report_sha256": "sha256:a958ad0fd7f950b13d12b967e27247c32d3e3e39b77b1605fafeb39402734c29"
   },
@@ -35,6 +35,6 @@
     "generator_version": "pipeline-v2",
     "validation_version": "1.1.0"
   },
-  "creation_commit": "4b72c8b",
-  "created_at": "2026-07-02T20:34:40Z"
+  "creation_commit": "a553584",
+  "created_at": "2026-07-02T20:35:09Z"
 }

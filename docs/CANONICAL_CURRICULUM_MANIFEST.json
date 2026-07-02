@@ -36,7 +36,7 @@
       },
       "subject_manifest": {
         "file": "./docs/mathematics/MATHEMATICS_MANIFEST.json",
-        "sha256": "sha256:a998d2e81962941f4da2ac6be9287cc07983d0aa9fb8fea590e88f67bccf74e2"
+        "sha256": "sha256:d62606f5d07d5f2342f6b437784b4ebe52030de6e5692062fd4aa80de2ec1738"
       }
     },
     {
@@ -148,6 +148,6 @@
     "manifest_spec_version": "1.0"
   },
   "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
-  "last_commit": "4b72c8b",
-  "last_updated": "2026-07-02T20:34:41Z"
+  "last_commit": "a553584",
+  "last_updated": "2026-07-02T20:35:09Z"
 }
