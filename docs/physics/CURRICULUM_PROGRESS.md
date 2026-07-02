@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`73b2698` — feat(physics): author Thermodynamics domain (phys.therm, 18 concepts)
+_(set after commit — see git log for `docs/physics/`)_
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -34,8 +34,8 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 01 | Measurement & Units | phys.meas | 8 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 02 | Classical Mechanics | phys.mech | 52 | draft ✓ | chapters/mech.md ✓ | Complete |
 | 03 | Thermodynamics | phys.therm | 18 | draft ✓ | chapters/therm.md ✓ | Complete |
-| 04 | Waves & Oscillations | phys.wave | 17 | placeholder | — | **NEXT** |
-| 05 | Optics | phys.opt | 15 | placeholder | — | Pending |
+| 04 | Waves & Oscillations | phys.wave | 17 | draft ✓ | chapters/wave.md ✓ | Complete |
+| 05 | Optics | phys.opt | 15 | placeholder | — | **NEXT** |
 | 06 | Electromagnetism | phys.em | 35 | placeholder | — | Pending |
 | 07 | Modern Physics | phys.mod | 15 | placeholder | — | Pending |
 | 08 | Quantum Mechanics | phys.qm | 12 | placeholder | — | Pending |
@@ -43,7 +43,7 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | Pending |
 | 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
 
-**Summary:** 3/11 domains complete · 78/194 assets drafted · 116/194 remaining (40.2%)
+**Summary:** 4/11 domains complete · 95/194 assets drafted · 99/194 remaining (49.0%)
 
 ## Completed Concepts Per Domain
 
@@ -73,8 +73,15 @@ kinetic-theory, first-law, internal-energy, thermodynamic-processes,
 second-law, entropy, heat-engines, carnot-cycle, refrigerators, third-law
 (5 chunks: 4+4+4+4+2, deterministic graph order.)
 
-### phys.wave (17 concepts) — NOT STARTED
-0/17 authored. First unfinished domain — start here next session.
+### phys.wave (17 concepts) — COMPLETE
+All 17 concepts authored: shm, shm-energy, pendulum, spring-mass,
+damped-oscillations, forced-oscillations, wave-properties, transverse-waves,
+longitudinal-waves, wave-speed, superposition, interference, standing-waves,
+sound-waves, sound-intensity, doppler-effect, beats
+(5 chunks: 4+4+4+4+1, deterministic graph order.)
+
+### phys.opt (15 concepts) — NOT STARTED
+0/15 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -115,19 +122,19 @@ second-law, entropy, heat-engines, carnot-cycle, refrigerators, third-law
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.therm)
+## Validation Status (latest domain: phys.wave)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.therm) | PASS — 0 orphans |
-| KG dependency integrity (phys.therm requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.therm, deep + provenance) | PASS — 18/18 |
-| Prerequisite review triggers = valid KG IDs (all 78 drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.therm) | PASS — 18/18 |
-| Chapter assembly (therm.md) | PASS — 2077 lines |
+| KG orphan audit (phys.wave) | PASS — 0 orphans |
+| KG dependency integrity (phys.wave requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.wave, deep + provenance) | PASS — 17/17 |
+| Prerequisite review triggers = valid KG IDs (all 95 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.wave) | PASS — 17/17 |
+| Chapter assembly (wave.md) | PASS — 1962 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
-| Regression: phys.meas + phys.mech untouched | PASS — 8/8 and 52/52 draft |
+| Regression: meas + mech + therm untouched | PASS — 8/8, 52/52, 18/18 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
 
@@ -143,6 +150,5 @@ second-law, entropy, heat-engines, carnot-cycle, refrigerators, third-law
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.therm)
-**phys.wave** — Waves & Oscillations · 17 concepts · plan 5 chunks
-(4+4+4+4+1) or 4 chunks (4+4+4+5).
+## Next Planned Domain (after phys.wave)
+**phys.opt** — Optics · 15 concepts · plan 4 chunks (4+4+4+3).

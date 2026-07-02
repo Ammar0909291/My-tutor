@@ -7462,854 +7462,1665 @@
     {
       "id": "asset.phys.wave.shm",
       "concept_id": "phys.wave.shm",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Simple Harmonic Motion\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Simple Harmonic Motion\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define simple harmonic motion by its restoring-force condition F = \u2212kx, write and interpret the sinusoidal solutions x(t) = A cos(\u03c9t + \u03c6), relate angular frequency to period and frequency (\u03c9 = 2\u03c0/T = 2\u03c0f), extract amplitude, phase, velocity, and acceleration from the motion equations, and explain why SHM's period is independent of amplitude.",
+      "concept_summary": "Simple harmonic motion is what happens when a restoring force proportional to displacement \u2014 F = \u2212kx, Hooke's law wearing dynamics \u2014 acts alone: substituting into Newton's second law gives a = \u2212(k/m)x = \u2212\u03c9\u00b2x, whose solution is the sinusoid x(t) = A cos(\u03c9t + \u03c6). Every symbol earns its keep: A is the amplitude (maximum excursion, set by how the motion was started), \u03c9 = \u221a(k/m) the angular frequency (set by the system, not the start), \u03c6 the phase constant (where in the cycle it began), and the period T = 2\u03c0/\u03c9 follows as 2\u03c0\u221a(m/k). Velocity and acceleration are the derivatives in spirit: v(t) = \u2212A\u03c9 sin(\u03c9t + \u03c6) peaks at A\u03c9 through the centre where x = 0, while a(t) = \u2212A\u03c9\u00b2x/A... more plainly a = \u2212\u03c9\u00b2x is largest at the extremes where the object is momentarily at rest \u2014 the drumbeat of SHM is speed at the middle, force at the edges. The signature property is isochronism: because both the restoring force and the distance to travel scale with amplitude, the period does not \u2014 big and small swings take the same time, the fact that made pendulum clocks conceivable. SHM's reach is enormous because near any stable equilibrium the force is approximately linear in displacement, so bridges, molecules, quartz crystals, and circuit charges all oscillate harmonically for small excursions \u2014 and its circular shadow (uniform circular motion projected onto a diameter IS SHM) supplies both intuition and the \u03c9 notation.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Simple Harmonic Motion\"",
-        "[TEMPLATE] Key idea 2 for \"Simple Harmonic Motion\"",
-        "[TEMPLATE] Key idea 3 for \"Simple Harmonic Motion\""
+        "Defining condition: restoring force proportional to displacement, F = \u2212kx \u21d2 a = \u2212\u03c9\u00b2x with \u03c9\u00b2 = k/m \u2014 acceleration always aimed at equilibrium, largest at the extremes.",
+        "Solution: x(t) = A cos(\u03c9t + \u03c6) \u2014 amplitude A and phase \u03c6 from initial conditions; \u03c9 from the system alone.",
+        "Frequency dictionary: \u03c9 = 2\u03c0f = 2\u03c0/T; T = 2\u03c0\u221a(m/k) \u2014 stiffer springs quicken, larger masses slow.",
+        "Kinematic profile: v = \u00b1\u03c9\u221a(A\u00b2 \u2212 x\u00b2), maximal (A\u03c9) at the centre; a = \u2212\u03c9\u00b2x, maximal (A\u03c9\u00b2) at the turning points where v = 0.",
+        "Isochronism: period independent of amplitude \u2014 the linear force law's signature, and the clockmaker's foundation.",
+        "Circular-motion shadow: SHM is the projection of uniform circular motion onto a diameter \u2014 the reference-circle picture that explains \u03c9 and the sinusoid at a glance.",
+        "Universality: near any stable equilibrium the potential is approximately parabolic, so small oscillations of almost anything are SHM \u2014 the most reused model in physics."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Simple Harmonic Motion\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A larger amplitude means a longer period \u2014 bigger swings take more time.",
+          "correction": "In SHM the period is amplitude-independent: doubling A doubles both the distance and (via F = \u2212kx) the typical force and speed, and the effects cancel exactly. Big and small oscillations tick at the same rate \u2014 isochronism."
+        },
+        {
+          "misconception": "At the extremes of the motion, everything is zero because the object stops.",
+          "correction": "Velocity is zero there, but acceleration and force are at their MAXIMUM \u2014 the spring is most stretched and pulls hardest exactly where the object pauses. Conversely at the centre velocity peaks while force and acceleration vanish."
+        },
+        {
+          "misconception": "The angular frequency \u03c9 means the object moves in a circle.",
+          "correction": "\u03c9 is borrowed notation: SHM is straight-line motion whose mathematics matches the projection of a reference point moving on a circle. Nothing physical rotates; \u03c9 just counts radians of cycle phase per second (2\u03c0 per full oscillation)."
+        },
+        {
+          "misconception": "Any back-and-forth motion is simple harmonic.",
+          "correction": "SHM requires F \u221d \u2212x specifically. A ball bouncing between walls oscillates but with constant-magnitude forces; large-angle pendulums deviate; only the linear restoring law gives sinusoids and amplitude-free periods."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Simple Harmonic Motion\""
+        "The reference-circle animation: a point moving uniformly on a circle beside its shadow oscillating on a diameter, x(t) = A cos \u03c9t traced live by the shadow.",
+        "A triple-graph stack of x(t), v(t), a(t) sinusoids with phase relationships highlighted: v a quarter-cycle ahead of x, a exactly opposite to x.",
+        "A force-arrow strip of the oscillator at five positions: arrows always pointing home, longest at the extremes, vanishing at the centre.",
+        "An isochronism race: two identical spring-mass systems released from different amplitudes, metronome-synchronized returns filmed side by side.",
+        "A 'parabola-hugging' potential diagram: an arbitrary potential well with its parabolic approximation overlaid near the minimum \u2014 why everything small-oscillates harmonically."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Simple Harmonic Motion\"",
+        "setup": "A 0.50 kg block on a spring with k = 200 N/m is pulled 0.10 m from equilibrium and released from rest. Find \u03c9, T, the maximum speed and maximum acceleration, the speed at x = 0.06 m, and write x(t).",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Angular frequency: \u03c9 = \u221a(k/m) = \u221a(200/0.50) = \u221a400 = 20 rad/s.",
+          "Period: T = 2\u03c0/\u03c9 = 2\u03c0/20 \u2248 0.31 s \u2014 about three oscillations per second.",
+          "Released from rest at maximum excursion \u21d2 A = 0.10 m and \u03c6 = 0 with the cosine form: x(t) = 0.10 cos(20t) m.",
+          "Maximum speed (at the centre): v_max = A\u03c9 = 0.10 \u00d7 20 = 2.0 m/s.",
+          "Maximum acceleration (at the extremes): a_max = A\u03c9\u00b2 = 0.10 \u00d7 400 = 40 m/s\u00b2 \u2014 about 4g at the turnaround.",
+          "Speed at x = 0.06 m: v = \u03c9\u221a(A\u00b2 \u2212 x\u00b2) = 20\u221a(0.01 \u2212 0.0036) = 20 \u00d7 0.08 = 1.6 m/s \u2014 the kinematic profile in action; note the amplitude never entered \u03c9 or T."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Simple Harmonic Motion\""
+        "expected_outcome": "The student computes \u03c9 = 20 rad/s, T \u2248 0.31 s, v_max = 2.0 m/s, a_max = 40 m/s\u00b2, v(0.06) = 1.6 m/s, writes x(t) = 0.10 cos(20t), and can point to where in the cycle each maximum lives."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "\u03c9, T, f computations from k and m (and inversions)",
+          "equation-reading items (extract A, \u03c9, \u03c6, v_max from a given x(t))",
+          "position-velocity-acceleration profile problems (v at given x, where is a maximal?)",
+          "conceptual items on isochronism and the SHM-defining condition"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with system-parameter computations, add equation reading and writing with initial conditions, then profile questions across the cycle, ending with is-it-SHM classification and isochronism reasoning.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "structured computation set",
+          "equation-interpretation tasks",
+          "conceptual classification quiz"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Simple Harmonic Motion\""
+        "bloom_alignment": "Apply \u2014 students must set up and read the SHM equations in unfamiliar configurations and locate kinematic extremes across the cycle; this concept carries the domain's highest mastery threshold (0.85) as its foundation.",
+        "mastery_signal": "The student computes \u03c9, T, v_max, a_max from system parameters, writes x(t) from initial conditions, and answers extreme-location and isochronism items, at 85% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Simple Harmonic Motion\""
+        "Quartz watches count the SHM of a crystal resonating at 32,768 Hz \u2014 timekeeping by isochronism, miniaturized.",
+        "Vehicle suspension tuning sets \u03c9 = \u221a(k/m) so the ride oscillates near 1 Hz \u2014 the frequency bodies find comfortable.",
+        "Seismometers read ground motion against a suspended oscillator's inertia; accelerometers in phones are micro spring-mass SHM systems.",
+        "Molecular vibrations are quantum SHM: infrared spectroscopy identifies chemical bonds by their spring constants.",
+        "AC circuits oscillate with charge obeying the same equation \u2014 the LC circuit is SHM with L as mass and 1/C as stiffness, a preview of electromagnetism."
       ],
       "prerequisite_review_triggers": [
         "phys.mech.hookes-law",
         "phys.mech.newtons-second-law"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.14"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.shm-energy",
       "concept_id": "phys.wave.shm-energy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Energy in Simple Harmonic Motion\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Energy in Simple Harmonic Motion\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe the continuous exchange between kinetic and elastic potential energy in SHM, show the total E = \u00bdkA\u00b2 is constant and amplitude-squared dependent, compute energies and speeds at any displacement, locate where each energy form peaks, and use energy methods to solve SHM problems without time equations.",
+      "concept_summary": "Simple harmonic motion is conservation of energy performing on a spring: the total mechanical energy E = \u00bdkA\u00b2, fixed at the moment of release, sloshes ceaselessly between elastic potential energy U = \u00bdkx\u00b2 (all of E at the turning points, where the spring is fully stretched and the mass momentarily still) and kinetic energy K = \u00bdmv\u00b2 (all of E at the equilibrium crossing, where the spring is relaxed and speed peaks at A\u03c9). At any intermediate displacement the books balance exactly \u2014 K = \u00bdk(A\u00b2 \u2212 x\u00b2) \u2014 which yields the speed-anywhere formula v = \u03c9\u221a(A\u00b2 \u2212 x\u00b2) without touching time, the energy method's characteristic shortcut. Two structural facts carry the physics: energy scales with amplitude SQUARED (doubling a swing quadruples its energy \u2014 the reason loud sounds and big earthquakes cost so disproportionately), and the exchange runs at twice the oscillation frequency (each full cycle visits two turning points and two centre crossings, so U and K each peak twice per period). Averaged over a cycle, the energy splits evenly \u2014 \u27e8K\u27e9 = \u27e8U\u27e9 = E/2 \u2014 a harbinger of equipartition. The parabolic energy-well diagram (U = \u00bdkx\u00b2 with the horizontal E-line at height \u00bdkA\u00b2, K the gap between them) is the concept's master picture: turning points where the line meets the parabola, maximum speed where the gap yawns widest, and \u2014 in the damped oscillations ahead \u2014 the E-line sliding slowly down the well.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Energy in Simple Harmonic Motion\"",
-        "[TEMPLATE] Key idea 2 for \"Energy in Simple Harmonic Motion\"",
-        "[TEMPLATE] Key idea 3 for \"Energy in Simple Harmonic Motion\""
+        "Total energy: E = \u00bdkA\u00b2 = \u00bdmv_max\u00b2 \u2014 constant in ideal SHM, set once by the release conditions.",
+        "The exchange: U = \u00bdkx\u00b2 peaks at the turning points (x = \u00b1A, v = 0); K = \u00bdmv\u00b2 peaks at equilibrium (x = 0, v = A\u03c9); their sum never wavers.",
+        "Energy anywhere: K = \u00bdk(A\u00b2 \u2212 x\u00b2) \u21d2 v = \u03c9\u221a(A\u00b2 \u2212 x\u00b2) \u2014 speeds from bookkeeping, no time equation needed.",
+        "Amplitude-squared law: E \u221d A\u00b2 \u2014 double the amplitude, quadruple the energy; the scaling behind loudness and destructive resonance.",
+        "Double-frequency exchange: U and K each complete two full peaks per oscillation period \u2014 the energy movie runs at 2f.",
+        "Cycle averages: \u27e8K\u27e9 = \u27e8U\u27e9 = E/2 \u2014 the even split that previews equipartition in statistical physics.",
+        "Master picture: the parabolic well U(x) with the horizontal total-energy line \u2014 turning points at the intersections, K as the vertical gap; damping will later lower the line."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Energy in Simple Harmonic Motion\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Kinetic and potential energy are each conserved in the oscillation.",
+          "correction": "Only their SUM is conserved; K and U individually swing between zero and the full E twice per cycle. The oscillation IS the exchange \u2014 freeze either form and the motion stops."
+        },
+        {
+          "misconception": "Doubling the amplitude doubles the energy.",
+          "correction": "E = \u00bdkA\u00b2 is quadratic: double A means four times the energy. The oscillator must be given four times the work to swing twice as far \u2014 and delivers four times the punch."
+        },
+        {
+          "misconception": "Energy exchange completes once per oscillation period.",
+          "correction": "Each period contains two turning points and two equilibrium crossings, so U and K each peak twice per period \u2014 the energy cycle runs at twice the motion's frequency."
+        },
+        {
+          "misconception": "At the halfway displacement x = A/2, the energy is split half-and-half.",
+          "correction": "U = \u00bdk(A/2)\u00b2 = E/4 there \u2014 only a quarter potential, three-quarters kinetic. Energy follows x\u00b2, not x; the half-half split occurs at x = A/\u221a2 \u2248 0.707A."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Energy in Simple Harmonic Motion\""
+        "The parabolic-well master diagram: U(x) = \u00bdkx\u00b2 with the E-line at \u00bdkA\u00b2, the K-gap shaded, turning points marked at the intersections.",
+        "Twin bar-graphs of U and K pulsing beneath an oscillating mass animation, their sum-bar rigid \u2014 with a cycle counter showing two energy peaks per swing.",
+        "An E-versus-A\u00b2 plot from simulated or measured release experiments: a straight line through the origin, the quadratic law as data.",
+        "The x = A/2 pie chart (25% U / 75% K) beside the x = A/\u221a2 pie (50/50) \u2014 energy following the square, not the distance."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Energy in Simple Harmonic Motion\"",
+        "setup": "A 0.50 kg block on a k = 200 N/m spring oscillates with amplitude 0.10 m (the SHM worked example's system). Find the total energy, the speed at x = 0.05 m, the displacement where the energy is half kinetic and half potential, and the new total energy if the amplitude is doubled.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Total energy: E = \u00bdkA\u00b2 = 0.5 \u00d7 200 \u00d7 0.01 = 1.0 J.",
+          "Cross-check via v_max: \u00bdmv_max\u00b2 = 0.5 \u00d7 0.50 \u00d7 (2.0)\u00b2 = 1.0 J \u2713 \u2014 the two faces of E agree.",
+          "Speed at x = 0.05 m: K = E \u2212 \u00bdkx\u00b2 = 1.0 \u2212 0.5 \u00d7 200 \u00d7 0.0025 = 0.75 J \u21d2 v = \u221a(2K/m) = \u221a3 \u2248 1.7 m/s.",
+          "Half-half point: \u00bdkx\u00b2 = E/2 \u21d2 x = A/\u221a2 \u2248 0.071 m \u2014 NOT at A/2, where the split is 25/75.",
+          "Doubled amplitude: E' = \u00bdk(2A)\u00b2 = 4E = 4.0 J \u2014 quadratic scaling in one line.",
+          "Note the method: no time, no phase, no trigonometry \u2014 the energy ledger answered every question the kinematics would have reached more laboriously."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Energy in Simple Harmonic Motion\""
+        "expected_outcome": "The student computes E = 1.0 J two ways, v(0.05) \u2248 1.7 m/s by bookkeeping, locates the 50/50 point at A/\u221a2, and quadruples E for doubled amplitude, crediting the time-free energy method."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "total-energy and v_max computations (both faces of E)",
+          "speed-at-displacement problems via the energy ledger",
+          "energy-split locators (where is U = K? where is K = 3U?)",
+          "amplitude-scaling and graph-interpretation items"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with E computations and cross-checks, add speed-anywhere problems, then split-locator algebra, ending with scaling arguments and well-diagram readings.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set on the energy ledger",
+          "well-diagram interpretation tasks",
+          "scaling-reasoning quiz"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Energy in Simple Harmonic Motion\""
+        "bloom_alignment": "Apply \u2014 students must run the SHM energy ledger in both directions and exploit its time-free shortcuts on unfamiliar oscillators.",
+        "mastery_signal": "The student computes E, speeds at given displacements, and energy-split locations correctly, including one quadratic-scaling item, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Energy in Simple Harmonic Motion\""
+        "Vibration-isolation engineering sizes mounts by the energy an oscillation carries \u2014 E \u221d A\u00b2 is why halving amplitude quarters transmitted energy.",
+        "Earthquake magnitude scales encode energy's steep growth with ground-motion amplitude \u2014 small amplitude differences, vast energy differences.",
+        "Loudspeaker and sonar power budgets follow amplitude-squared: doubling cone excursion quadruples acoustic output.",
+        "Energy-harvesting devices (piezoelectric pavements, vibration harvesters) skim the K-U exchange of ambient oscillations.",
+        "Clock escapements inject tiny energy packets each cycle to top up the E-line against friction \u2014 maintenance of the master diagram in brass."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.shm"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.14"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.pendulum",
       "concept_id": "phys.wave.pendulum",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Simple Pendulum\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Simple Pendulum\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to derive the simple pendulum's SHM approximation for small angles, apply T = 2\u03c0\u221a(L/g), explain the period's independence of mass and (for small swings) amplitude, use pendulums to measure g, and state where the small-angle approximation breaks down.",
+      "concept_summary": "The simple pendulum \u2014 a point mass on a light string of length L \u2014 is gravity's oscillator: displaced by angle \u03b8, it feels a restoring force \u2212mg sin \u03b8 along its arc, and for small angles sin \u03b8 \u2248 \u03b8 turns this into the linear law of SHM with the string's geometry supplying the stiffness. The result is the most famous period formula in physics: T = 2\u03c0\u221a(L/g) \u2014 longer pendulums swing slower (quadruple the length to double the period), stronger gravity quickens the beat, and, remarkably, the mass has vanished entirely: bob mass cancels just as it does in free fall, because gravity both drives and must move the same m. For small swings the period is also amplitude-independent (Galileo's cathedral-lamp observation), which made the pendulum the world's timekeeper for three centuries; at larger angles the sin \u03b8 \u2248 \u03b8 approximation degrades and the true period runs slightly long (about 0.05% at 5\u00b0, 2% at 30\u00b0, 18% at 90\u00b0) \u2014 a systematic error every pendulum lab must reckon with. Inverted, the formula is a gravimeter: measuring L and T yields g = 4\u03c0\u00b2L/T\u00b2, the classic student experiment and the historical method for mapping Earth's gravity (a pendulum clock loses time up a mountain \u2014 g weaker, beat slower). The pendulum thus packages three lessons at once: the small-angle linearization that manufactures SHM from a nonlinear system, the mass cancellation that echoes the equivalence of inertial and gravitational mass, and an honest approximation with a stated domain of validity.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Simple Pendulum\"",
-        "[TEMPLATE] Key idea 2 for \"Simple Pendulum\"",
-        "[TEMPLATE] Key idea 3 for \"Simple Pendulum\""
+        "Restoring mechanism: tangential gravity component \u2212mg sin \u03b8; for small \u03b8 (radians), sin \u03b8 \u2248 \u03b8 linearizes it into SHM along the arc.",
+        "Period: T = 2\u03c0\u221a(L/g) \u2014 length and local gravity only; quadruple L to double T; stronger g, faster tick.",
+        "Mass cancellation: bob mass is absent \u2014 gravity supplies force \u221d m while inertia costs \u221d m, the same cancellation as free fall (equivalence principle's echo).",
+        "Small-swing isochronism: amplitude-independent period for small angles \u2014 Galileo's observation and the clock's licence.",
+        "Approximation budget: true period exceeds the formula by ~0.05% at 5\u00b0, ~2% at 30\u00b0, ~18% at 90\u00b0 \u2014 small-angle means small, and labs should quote the domain.",
+        "Gravimetry: g = 4\u03c0\u00b2L/T\u00b2 \u2014 the pendulum as a precision g-meter, historically the tool that mapped Earth's gravity variations.",
+        "Model fine print: point mass, massless inextensible string, no air or pivot friction \u2014 real (physical) pendulums with distributed mass need the moment-of-inertia generalization."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Simple Pendulum\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A heavier bob swings with a different period.",
+          "correction": "Mass cancels exactly: T = 2\u03c0\u221a(L/g) contains no m. Lead and cork bobs on equal strings keep identical time (air resistance aside) \u2014 the pendulum repeats free fall's mass-independence lesson at the end of a string."
+        },
+        {
+          "misconception": "The pendulum formula works at any swing angle.",
+          "correction": "It rests on sin \u03b8 \u2248 \u03b8. The true period runs longer as amplitude grows \u2014 negligibly below ~10\u00b0, by 2% at 30\u00b0, and drastically toward 90\u00b0. Quote the formula WITH its small-angle condition."
+        },
+        {
+          "misconception": "Doubling the length doubles the period.",
+          "correction": "T \u221d \u221aL: doubling L stretches the period by \u221a2 \u2248 1.41; doubling T needs FOUR times the length. Grandfather clocks are about a metre long because \u221a(1 m/g) sets a one-second half-beat."
+        },
+        {
+          "misconception": "A pendulum clock keeps the same time anywhere \u2014 on a mountain, on the Moon.",
+          "correction": "T depends on local g: weaker gravity slows the beat. A clock loses time at altitude and would tick \u221a6 \u2248 2.4\u00d7 slower on the Moon \u2014 historically, pendulum rate WAS the measurement of g."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Simple Pendulum\""
+        "A force-decomposition diagram at swing angle \u03b8: weight split into string-tension direction and the tangential \u2212mg sin \u03b8 restoring component, with the sin \u03b8 \u2248 \u03b8 chord-arc comparison inset.",
+        "A mass-independence race: lead versus wooden bob on equal strings, released together, filmed staying in phase.",
+        "A period-versus-amplitude data plot from a real or simulated pendulum: flat at small angles, curling upward past ~20\u00b0 \u2014 the approximation's edge made visible.",
+        "A length-scaling ladder: pendulums of L, 2L, 4L beating together every \u221a1 : \u221a2 : 2 \u2014 the square root heard as rhythm.",
+        "A world-gravimetry vignette: the same clock at sea level, on a peak, and on the Moon with its daily gain/loss annotated."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Simple Pendulum\"",
+        "setup": "A pendulum is to beat with a period of 2.0 s (one-second half-swings) where g = 9.8 m/s\u00b2. Find the required length; find the period of the same pendulum on the Moon (g = 1.62 m/s\u00b2); then a student measures 20 oscillations of a 0.80 m pendulum in 35.9 s \u2014 extract g.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Length for T = 2.0 s: L = gT\u00b2/4\u03c0\u00b2 = 9.8 \u00d7 4/(4\u03c0\u00b2) = 9.8/\u03c0\u00b2 \u2248 0.99 m \u2014 the metre-long 'seconds pendulum' of clock history.",
+          "Moon period: T = 2\u03c0\u221a(0.99/1.62) \u2248 2\u03c0 \u00d7 0.782 \u2248 4.9 s \u2014 the beat slows by \u221a(9.8/1.62) \u2248 2.46\u00d7.",
+          "Student measurement: T = 35.9/20 = 1.795 s (timing 20 swings divides the stopwatch error by 20 \u2014 the standard trick).",
+          "Extract g: g = 4\u03c0\u00b2L/T\u00b2 = 4\u03c0\u00b2 \u00d7 0.80/3.222 \u2248 9.80 m/s\u00b2.",
+          "Error sense: a 0.1 s stopwatch slip over 20 swings shifts T by 0.005 s and g by ~0.5% \u2014 quote g \u2248 9.8 \u00b1 0.1 m/s\u00b2.",
+          "Method notes: swings kept under ~10\u00b0 for the formula's validity; mass never asked for \u2014 it cancels."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Simple Pendulum\""
+        "expected_outcome": "The student sizes the seconds pendulum at ~1 m, slows it to 4.9 s on the Moon, and extracts g = 9.80 m/s\u00b2 from timing data with the 20-swing error-division trick and small-angle discipline stated."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "T, L, g computations in all directions",
+          "scaling-reasoning items (length ratios, gravity ratios, clock gain/loss)",
+          "g-measurement data problems with error sense",
+          "validity-judgment items on amplitude and model assumptions"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct period computations, add inversions and scaling ratios, then measurement-and-error problems, ending with validity and clock-drift scenarios.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "laboratory data-analysis task",
+          "conceptual quiz on cancellation and validity"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Simple Pendulum\""
+        "bloom_alignment": "Apply \u2014 students must run the period formula in all directions, design g measurements, and police the small-angle domain in fresh scenarios.",
+        "mastery_signal": "The student computes T/L/g correctly with \u221a-scaling intact, extracts g from timing data, and states the mass-cancellation and small-angle conditions unprompted, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Simple Pendulum\""
+        "Pendulum clocks governed civilization's timekeeping for three centuries; the metre-long seconds pendulum nearly became the metre's definition.",
+        "Gravimetric surveying by pendulum rate mapped Earth's gravity field, ore bodies, and the planet's oblateness before spring gravimeters.",
+        "Foucault pendulums display Earth's rotation in museums worldwide \u2014 the swing plane's slow pirouette is the planet turning beneath it.",
+        "Skyscraper tuned mass dampers are giant engineered pendulums (Taipei 101's 660-tonne sphere) with lengths chosen so T matches the building's sway.",
+        "Playground swings are pendulums: pumping at the natural period is every child's first resonance experiment."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.shm"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.14"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.spring-mass",
       "concept_id": "phys.wave.spring-mass",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Spring-Mass System\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Spring-Mass System\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to apply T = 2\u03c0\u221a(m/k) to horizontal and vertical spring-mass oscillators, show that gravity shifts a vertical system's equilibrium without changing its period, combine springs in series and parallel into effective oscillators, extract k or m from measured periods, and contrast spring-mass scaling with the pendulum's.",
+      "concept_summary": "The spring-mass system is SHM's laboratory standard: a mass m on a spring of stiffness k oscillates with \u03c9 = \u221a(k/m) and T = 2\u03c0\u221a(m/k) \u2014 heavier is slower (more inertia per unit force), stiffer is faster (more force per unit stretch), each by square roots. Its quiet surprise is the vertical case: hanging the mass stretches the spring to a new equilibrium (kx\u2080 = mg), but oscillations ABOUT that shifted centre obey exactly the same period \u2014 gravity relocates the home position and then cancels out of the dynamics, so T = 2\u03c0\u221a(m/k) with no g anywhere. That absence is the sharpest contrast with the pendulum (T = 2\u03c0\u221a(L/g)): the spring clock is portable across planets while the pendulum clock is a gravimeter; one carries its restoring force internally, the other borrows gravity's. Spring combinations inherit Hooke's-law algebra \u2014 parallel springs add stiffness (faster oscillation), series springs add compliance (slower) \u2014 letting one mass-and-spring kit realize any frequency. Run backwards, the period formula is an instrument: T measures m at known k (the principle of inertial balances that weigh astronauts in orbit, where scales read zero but inertia never does) or k at known m (vibration engineers' standard characterization). The system is also the honest template for real-world modelling: car suspensions, building floors, molecular bonds, and microchip resonators are all effective m's on effective k's, tuned through this one formula.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Spring-Mass System\"",
-        "[TEMPLATE] Key idea 2 for \"Spring-Mass System\"",
-        "[TEMPLATE] Key idea 3 for \"Spring-Mass System\""
+        "Period: T = 2\u03c0\u221a(m/k) \u2014 mass slows (\u221am), stiffness quickens (\u221ak); amplitude absent, as SHM demands.",
+        "Vertical systems: gravity shifts equilibrium by x\u2080 = mg/k, then vanishes from the dynamics \u2014 same T about the new centre; measure displacements from IT.",
+        "The g-free clock: no gravity in the spring period \u2014 spring watches work on the Moon unchanged, while pendulums drift; the two formulas are complementary instruments.",
+        "Combinations compose: parallel k_eq = \u03a3k (stiffer, faster), series 1/k_eq = \u03a31/k (softer, slower) \u2014 Hooke's-law algebra imported wholesale.",
+        "Inertial balance: T at known k weighs m without gravity \u2014 how astronauts are 'weighed' in orbit; conversely T at known m measures k.",
+        "Scaling instincts: \u00d74 mass \u2192 \u00d72 period; \u00d74 stiffness \u2192 \u00d7\u00bd period \u2014 square roots throughout.",
+        "Modelling template: suspensions, floors, bonds, and MEMS resonators reduce to effective spring-mass systems \u2014 the formula is the entry point to vibration engineering."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Spring-Mass System\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A vertical spring-mass system oscillates with a different period than a horizontal one, since gravity joins in.",
+          "correction": "Gravity only relocates the equilibrium (stretch mg/k); about that point the net force is again \u2212kx and the period is identical. The constant force shifts the centre, not the clock."
+        },
+        {
+          "misconception": "The oscillation of a hanging mass is centred on the spring's natural length.",
+          "correction": "It is centred on the LOADED equilibrium, where spring force balances weight. Measuring displacements from the natural length imports a spurious constant and wrecks the energy and force bookkeeping."
+        },
+        {
+          "misconception": "Heavier masses oscillate faster because the spring is stretched harder.",
+          "correction": "T = 2\u03c0\u221a(m/k) grows with mass: more inertia per unit restoring force means slower cycles. The larger static stretch changes the centre, not the tempo \u2014 quadruple the mass and the period doubles."
+        },
+        {
+          "misconception": "Spring-mass periods depend on g like the pendulum's.",
+          "correction": "No g appears: the spring supplies its own restoring force. On the Moon the spring watch keeps time while the pendulum clock slows \u2014 the pairing is the classic exam contrast, and the physics of why quartz-and-spring superseded pendulums in portable timekeeping."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Spring-Mass System\""
+        "A horizontal/vertical twin animation: the same m and k oscillating side by side, the vertical one about its shifted equilibrium, both period counters locked together.",
+        "A shifted-well energy diagram for the vertical system: the parabola simply relocated to the loaded equilibrium \u2014 same curvature, same \u03c9.",
+        "A combination bench: one mass run on single, parallel, and series spring rigs with the three periods displayed as \u221a-related.",
+        "An inertial-balance vignette: an astronaut on the ISS body-mass device oscillating on a calibrated spring \u2014 mass from T where weight is useless.",
+        "A pendulum-versus-spring 'Moon test' split screen: pendulum clock slowing, spring watch unmoved."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Spring-Mass System\"",
+        "setup": "A 0.40 kg mass hangs from a spring, stretching it 0.049 m to equilibrium (g = 9.8 m/s\u00b2). Find k, the period of vertical oscillations, the period if a second identical spring is added in parallel, and the mass an astronaut must have if the same single spring oscillates her at T = 2.5 s on an inertial balance.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Stiffness from the static stretch: k = mg/x\u2080 = 0.40 \u00d7 9.8/0.049 = 80 N/m.",
+          "Vertical period (gravity now dismissed): T = 2\u03c0\u221a(m/k) = 2\u03c0\u221a(0.40/80) = 2\u03c0 \u00d7 0.0707 \u2248 0.44 s.",
+          "Note what g did and didn't do: it set the 4.9 cm sag, then vanished \u2014 a horizontal run of the same system gives the same 0.44 s.",
+          "Parallel pair: k_eq = 160 N/m \u21d2 T = 2\u03c0\u221a(0.40/160) \u2248 0.31 s \u2014 stiffness doubled, period divided by \u221a2.",
+          "Inertial balance: m = kT\u00b2/4\u03c0\u00b2 = 80 \u00d7 6.25/39.5 \u2248 12.7 kg... check scale: that's the effective oscillating mass on THIS light spring; real body-mass devices use stiffer springs \u2014 the formula, not the furniture, is the lesson.",
+          "Summarize the instrument readings: static stretch measured k; period then measured m \u2014 one spring, two measurements, no gravity needed for the second."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Spring-Mass System\""
+        "expected_outcome": "The student extracts k = 80 N/m statically, computes the g-free 0.44 s period, quickens it by \u221a2 with a parallel spring, and inverts the formula as an inertial balance, articulating gravity's shift-then-cancel role."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "T, m, k computations in all directions (horizontal and vertical)",
+          "static-stretch-plus-period two-step problems",
+          "combination problems (series/parallel effective oscillators)",
+          "contrast items (spring vs. pendulum scaling, Moon tests, inertial balances)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct period computations, add vertical-equilibrium two-steps, then combinations, ending with instrument inversions and pendulum-contrast reasoning.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "two-step laboratory-style problems",
+          "conceptual contrast quiz"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Spring-Mass System\""
+        "bloom_alignment": "Apply \u2014 students must run the spring-mass formula in all directions, handle the vertical shift correctly, and compose combination oscillators in fresh configurations.",
+        "mastery_signal": "The student solves vertical two-step problems (k from stretch, then T), composes one combination oscillator, and answers the g-dependence contrast correctly, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Spring-Mass System\""
+        "Vehicle suspensions are spring-mass(-damper) systems tuned near 1 Hz; load changes shift ride height (the mg/k sag) and subtly slow the bounce.",
+        "Astronaut body-mass measurement devices on the ISS are inertial balances \u2014 mass from oscillation period where scales read zero.",
+        "MEMS accelerometers and resonators in phones are microscopic spring-mass systems; their \u03c9 = \u221a(k/m) sets sensitivity and drift.",
+        "Bungee systems, trampolines, and gym equipment are engineered spring-mass oscillators with amplitude and frequency budgets.",
+        "Atomic force microscopy cantilevers oscillate as spring-mass systems whose frequency shifts report forces at the nanonewton scale."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.shm"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.14"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.damped-oscillations",
       "concept_id": "phys.wave.damped-oscillations",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Damped Oscillations\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Damped Oscillations\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe how resistive forces drain an oscillator's energy, distinguish underdamped, critically damped, and overdamped regimes, interpret the exponentially decaying amplitude envelope, explain why light damping leaves frequency nearly unchanged while amplitude decays, and match damping regimes to engineering purposes.",
+      "concept_summary": "Real oscillators run down: friction, air drag, and internal losses add a resistive force (in the standard model, proportional to velocity: F = \u2212bv) that continuously converts the oscillation's energy to heat. The result is damped oscillation, and its character depends on how the damping strength compares with the restoring stiffness. Underdamped systems \u2014 the common case \u2014 still oscillate, but inside a shrinking exponential envelope: amplitude decays as A(t) = A\u2080e^(\u2212bt/2m), so equal time intervals lose equal FRACTIONS of amplitude (and, since energy goes as amplitude squared, energy decays twice as fast, \u221d e^(\u2212bt/m)); the oscillation frequency is nudged slightly below the natural \u03c9\u2080, negligibly so for light damping. Crank the damping up and oscillation dies entirely: at critical damping the system returns to equilibrium in the fastest possible time without overshooting \u2014 the designed behaviour of car shock absorbers, analog meter needles, and door closers \u2014 while overdamped systems creep home slowly without oscillating (a door closer set too stiff). The trio of regimes is a design menu: clocks and instruments that must keep ringing want minimal damping (quantified by the quality factor Q, the number of radians of oscillation before the energy drains by e); anything that must settle fast and clean wants critical; anything that must never slam wants slight overdamping. In the energy-well picture from SHM, damping is the total-energy line sliding down the parabola \u2014 the master diagram acquiring its first arrow of time.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Damped Oscillations\"",
-        "[TEMPLATE] Key idea 2 for \"Damped Oscillations\"",
-        "[TEMPLATE] Key idea 3 for \"Damped Oscillations\""
+        "Damping model: resistive force \u2212bv opposing motion converts mechanical energy to heat continuously \u2014 the oscillation's energy account leaks.",
+        "Underdamped motion: oscillation inside a decaying envelope A(t) = A\u2080e^(\u2212bt/2m); equal times lose equal fractions (exponential decay's signature).",
+        "Energy decays twice as fast as amplitude: E \u221d A\u00b2 \u21d2 E(t) = E\u2080e^(\u2212bt/m).",
+        "Light damping barely shifts frequency: \u03c9 \u2248 \u03c9\u2080 for small b \u2014 the clock slows imperceptibly while the swing shrinks visibly.",
+        "Three regimes: underdamped (oscillates, decays), critically damped (fastest non-overshooting return), overdamped (slow creep home, no oscillation).",
+        "Critical damping is a design target, not a failure: shock absorbers, meter needles, and door closers are tuned to it.",
+        "Quality factor Q measures ringing: high Q (tuning fork ~10\u00b3, quartz ~10\u2075) rings long; low Q settles fast \u2014 Q \u2248 2\u03c0 \u00d7 (energy stored)/(energy lost per cycle).",
+        "Energy-well picture: damping slides the total-energy line down the SHM parabola \u2014 turning points migrating inward, the well emptied into heat."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Damped Oscillations\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Damping makes the oscillation slow down \u2014 the period grows dramatically as the swing dies.",
+          "correction": "For light damping the frequency is almost untouched: the pendulum's swings shrink, but each cycle takes nearly the same time (isochronism survives). Only heavy damping near the critical point shifts timing appreciably \u2014 the amplitude, not the clock, is what visibly decays."
+        },
+        {
+          "misconception": "The amplitude decreases by equal amounts each cycle.",
+          "correction": "Decay is exponential, not linear: each cycle loses the same FRACTION (say 5%), so the losses shrink with the amplitude. That is why oscillations fade asymptotically instead of hitting zero on schedule \u2014 and why 'half-life of amplitude' is a meaningful constant."
+        },
+        {
+          "misconception": "More damping always brings the system to rest faster.",
+          "correction": "Only up to the critical point: past it, overdamped systems creep home SLOWER (the heavy syrup effect). The fastest clean return is exactly at critical damping \u2014 which is why shock absorbers are tuned there rather than maximized."
+        },
+        {
+          "misconception": "The lost oscillation energy is destroyed.",
+          "correction": "It is converted to thermal energy in the damper, the air, and the material \u2014 shock absorbers get genuinely hot. The first-law ledger closes exactly; damping is a transfer channel, not a sink into nothing."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Damped Oscillations\""
+        "The canonical underdamped x(t) trace: sinusoid inside the \u00b1A\u2080e^(\u2212bt/2m) envelope, drawn dashed, with equal-fraction decay marked over successive cycles.",
+        "A three-regime comparison plot from identical initial displacement: underdamped ringing, critical's swift clean return, overdamped's slow creep \u2014 one graph, the whole design menu.",
+        "A car-suspension clip: pushing down on a good car (one rebound, settle) versus worn shocks (bouncing on) \u2014 critical versus underdamped, kerbside.",
+        "The energy-well animation: the SHM parabola with the E-line sliding down as heat ticks up in a side-tank, turning points migrating inward.",
+        "A Q-factor gallery: tuning fork (rings for seconds), car suspension (settles in one cycle), quartz crystal (rings for minutes in vacuum) with Q values annotated."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Damped Oscillations\"",
+        "setup": "A 0.50 kg oscillator on a k = 200 N/m spring (\u03c9\u2080 = 20 rad/s) has light damping b = 0.40 kg/s. Its initial amplitude is 0.10 m. Find the amplitude and energy after 5.0 s, the fraction of energy lost per cycle, and verify the light-damping assumption.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Amplitude decay constant: b/2m = 0.40/1.0 = 0.40 s\u207b\u00b9, so A(t) = 0.10 e^(\u22120.40t).",
+          "Amplitude at 5.0 s: A = 0.10 e^(\u22122.0) \u2248 0.014 m \u2014 about 14% of the start.",
+          "Energy decays at twice the rate: E(t) = E\u2080e^(\u2212bt/m) with E\u2080 = \u00bdkA\u2080\u00b2 = 1.0 J \u21d2 E(5.0) = e^(\u22124.0) \u2248 0.018 J \u2014 under 2% remains (amplitude\u00b2, as it must be).",
+          "Per-cycle loss: T \u2248 2\u03c0/\u03c9\u2080 = 0.314 s; energy fraction retained per cycle = e^(\u2212bT/m) = e^(\u22120.126) \u2248 0.88 \u2014 the oscillator loses ~12% of its energy each cycle, equal fractions every cycle.",
+          "Light-damping check: b/2m = 0.40 s\u207b\u00b9 against \u03c9\u2080 = 20 rad/s \u2014 a 2% ratio; the frequency shift is ~0.02% and the SHM clock is effectively untouched.",
+          "Read the structure: amplitude halves every ln2/0.40 \u2248 1.7 s regardless of its current size \u2014 exponential decay's constant-half-life signature."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Damped Oscillations\""
+        "expected_outcome": "The student computes A(5) \u2248 1.4 cm and E(5) \u2248 0.018 J with the \u00d72 rate relation, extracts the constant ~12%-per-cycle loss, and certifies the frequency as effectively unshifted."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "envelope computations (A and E at given times, half-life extraction)",
+          "regime classification from described behaviour or b values",
+          "per-cycle fraction problems and Q-factor estimates",
+          "design-matching items (which regime for which device?)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with envelope evaluations, add the amplitude-energy rate doubling, then regime classification and Q estimates, ending with design-selection justifications.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set on exponential envelopes",
+          "regime-identification quiz",
+          "design-justification tasks"
         ],
-        "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Damped Oscillations\""
+        "bloom_alignment": "Analyze \u2014 students must decompose decaying motion into envelope and oscillation, compare damping regimes, and match them to engineering intents, beyond evaluating exponentials.",
+        "mastery_signal": "The student computes envelope decays with the amplitude/energy rate distinction, classifies the three regimes correctly, and justifies one design choice, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Damped Oscillations\""
+        "Car shock absorbers are tuned near critical damping so wheels track the road instead of bouncing \u2014 worn (underdamped) shocks fail the kerbside push test.",
+        "Earthquake engineering adds dampers to buildings and bridges to bleed oscillation energy before amplitudes grow dangerous.",
+        "Analog meters, door closers, and camera gimbals are critically damped to settle fast without overshoot.",
+        "High-Q resonators \u2014 tuning forks, quartz crystals, superconducting cavities \u2014 are engineered for MINIMAL damping so they ring long and define precise frequencies.",
+        "Vibration isolation in buildings and instruments pairs soft springs with tuned damping to swallow footfall and machinery energy as heat."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.shm-energy"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.14"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.forced-oscillations",
       "concept_id": "phys.wave.forced-oscillations",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Forced Oscillations and Resonance\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Forced Oscillations and Resonance\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe forced oscillation at the driver's frequency, explain resonance as the amplitude peak when driving frequency approaches the natural frequency, relate resonance sharpness and peak height to damping, interpret resonance curves, and analyze resonance's uses and hazards in engineering and daily life.",
+      "concept_summary": "Push an oscillator periodically and, after transients fade, it settles into steady-state oscillation at the DRIVER's frequency \u2014 not its own \u2014 with an amplitude that depends dramatically on how the driving frequency f compares with the system's natural frequency f\u2080. Far below f\u2080 the system placidly follows the push; far above, it barely responds, quivering out of phase; but as f approaches f\u2080 the driver times its pushes to arrive in step with the motion \u2014 each shove adding energy like a well-timed playground push \u2014 and the amplitude climbs to a peak: resonance. Damping is the peak's regulator: in steady state the driver's input balances the damping's drain, so light damping permits enormous resonant amplitudes with a tall, narrow response curve (high Q: selective but explosive), while heavy damping caps the peak into a low, broad hump (unselective but safe). The resonance curve \u2014 amplitude versus driving frequency \u2014 is the concept's master graph, and the phase story rides along: the oscillation lags the driver by ~0\u00b0 well below resonance, exactly 90\u00b0 at it (velocity in phase with force \u2014 maximum power transfer), and ~180\u00b0 above. Resonance is simultaneously civilization's tool and its trap: radios tune, MRI machines image, musical instruments speak, and microwave ovens heat by driving systems at their natural frequencies \u2014 while soldiers break step on bridges, engineers stiffen buildings against earthquake frequencies, and the Tacoma Narrows collapse (aeroelastic flutter, resonance's wilder cousin) hangs in every engineering syllabus as the cautionary photograph.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Forced Oscillations and Resonance\"",
-        "[TEMPLATE] Key idea 2 for \"Forced Oscillations and Resonance\"",
-        "[TEMPLATE] Key idea 3 for \"Forced Oscillations and Resonance\""
+        "Steady-state rule: a driven oscillator oscillates at the DRIVING frequency; the natural frequency governs how LARGE the response is.",
+        "Resonance: amplitude peaks as driving frequency approaches the natural frequency f\u2080 \u2014 pushes arriving in step with the motion feed energy cycle after cycle.",
+        "Damping shapes the peak: light damping \u2192 tall, narrow curve (high Q, selective, dangerous); heavy damping \u2192 low, broad curve (safe, unselective).",
+        "Steady state is a power balance: driver input = damping dissipation; at resonance with light damping, balance is struck only at large amplitude.",
+        "Phase signature: response lags the driver by \u22480\u00b0 below, 90\u00b0 at, and \u2248180\u00b0 above resonance \u2014 the 90\u00b0 point is maximum power transfer.",
+        "Transients: the natural-frequency ringing at switch-on dies at the damping rate, leaving the pure driven response.",
+        "Resonance as tool: tuning circuits, MRI, musical instruments, microwave ovens, swing-pumping \u2014 energy delivered selectively at f\u2080.",
+        "Resonance as hazard: marching soldiers on bridges, earthquake-matched buildings, wine glasses, rattling machinery \u2014 design either detunes f\u2080 away from expected drivers or adds damping."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Forced Oscillations and Resonance\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A driven system oscillates at its own natural frequency.",
+          "correction": "In steady state it oscillates at the DRIVER's frequency, whatever that is; the natural frequency only decides the response's size (huge near f\u2080, small far away). The system's own frequency appears only in the brief switch-on transient."
+        },
+        {
+          "misconception": "Resonance means the amplitude becomes infinite.",
+          "correction": "Only an idealized undamped system diverges. Real systems always have damping, and the steady amplitude settles where driver input equals dissipation \u2014 large, possibly destructive, but finite. Breakage happens when that finite amplitude exceeds the structure's limits."
+        },
+        {
+          "misconception": "The Tacoma Narrows bridge collapsed from simple wind resonance at its natural frequency.",
+          "correction": "The collapse was aeroelastic flutter \u2014 a self-excited interaction where the bridge's own motion organized the wind forces feeding it. It is resonance's more dangerous cousin (motion-synchronized driving), and the standard cautionary tale is best told with that refinement."
+        },
+        {
+          "misconception": "More damping is always the safe engineering choice.",
+          "correction": "Damping caps resonant peaks but also broadens response and wastes energy; instruments, radios, and resonant sensors NEED high Q to function. Engineering chooses per purpose: detune or damp for safety, sharpen Q for selectivity."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Forced Oscillations and Resonance\""
+        "The master resonance-curve family: amplitude versus driving frequency for three damping levels \u2014 the tall-narrow to low-broad progression on one graph.",
+        "A playground-swing timing animation: pushes in step (amplitude climbing) versus mistimed pushes (energy alternately added and removed).",
+        "Barton's pendulums (or simulation): one driver pendulum, many responders of different lengths \u2014 only the length-matched one swings large, phase lag visible.",
+        "The phase-lag dial across the curve: 0\u00b0 \u2192 90\u00b0 \u2192 180\u00b0 as the driving frequency sweeps through resonance.",
+        "A hazard/tool gallery pair: wine-glass shattering and MRI scanner side by side \u2014 same physics, opposite intent; Tacoma Narrows footage with the flutter caption."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Forced Oscillations and Resonance\"",
+        "setup": "A washing machine's drum assembly (m = 10 kg on mounts of k = 4000 N/m) is driven by an unbalanced load as the spin rate ramps up. Find the natural frequency and the spin rate (rpm) at which violent shaking is expected; explain the observed lurch as the machine passes that rate and settles; and evaluate two fixes \u2014 stiffer mounts (k \u00d7 4) versus added damping.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Natural frequency: \u03c9\u2080 = \u221a(k/m) = \u221a400 = 20 rad/s \u21d2 f\u2080 = 20/2\u03c0 \u2248 3.2 Hz.",
+          "Danger rpm: 3.2 Hz \u00d7 60 \u2248 190 rpm \u2014 as the drum accelerates through ~190 rpm, driving frequency crosses f\u2080 and amplitude peaks: the familiar mid-ramp shudder.",
+          "Past resonance: at the 1000+ rpm spin, driving frequency \u226b f\u2080 and the response is small and antiphase \u2014 the machine runs smoother at full speed than during the ramp, exactly as the curve predicts.",
+          "Fix 1, stiffer mounts: \u03c9\u2080 doubles to 40 rad/s (f\u2080 \u2248 6.4 Hz, ~380 rpm) \u2014 resonance still gets crossed during ramp-up, just later; stiffening relocates the peak, it does not remove it.",
+          "Fix 2, added damping: the peak's height collapses (low, broad curve) \u2014 the crossing still happens but the shaking stays modest; this is why machines ship with friction dampers on the drum suspension.",
+          "Design summary: pass through resonance quickly, damp the peak, and never operate steadily at ~190 rpm \u2014 the resonance curve as an owner's manual."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Forced Oscillations and Resonance\""
+        "expected_outcome": "The student locates f\u2080 \u2248 3.2 Hz (\u2248190 rpm), explains the ramp-through lurch and the smooth high-speed run from the response curve, and judges damping (peak-capping) superior to stiffening (peak-moving) for this hazard."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "natural-frequency and danger-frequency computations for driven systems",
+          "resonance-curve reading (peak location, damping comparison, bandwidth)",
+          "phase and steady-state conceptual items",
+          "design-analysis problems (detune vs. damp; tool vs. hazard framing)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with f\u2080 computations and curve readings, add steady-state/transient and phase items, then design evaluations, ending with tool/hazard case analyses.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation and curve-interpretation set",
+          "scenario-analysis problems",
+          "design-justification tasks"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Forced Oscillations and Resonance\""
+        "bloom_alignment": "Apply \u2014 students must locate resonances, read response curves, and deploy the detune-or-damp design logic on driven systems they have not rehearsed.",
+        "mastery_signal": "The student computes danger frequencies, orders response curves by damping, states the steady-state frequency rule, and justifies one design fix, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Forced Oscillations and Resonance\""
+        "Radio and phone tuning circuits are electrical resonators: selecting a station is sliding a high-Q resonance onto its frequency.",
+        "MRI drives nuclear spins exactly at their resonant frequency \u2014 medicine's most valuable image is a resonance phenomenon.",
+        "Musical instruments are resonance products: strings, air columns, and soundboards amplify at their natural frequencies.",
+        "Earthquake engineering detunes buildings from dominant ground-shaking bands and installs dampers; soldiers break step on footbridges (London Millennium Bridge's lateral wobble forced a damper retrofit).",
+        "Microwave ovens drive water molecules near an absorption resonance; ultrasonic cleaners and kidney-stone lithotripsy deliver energy resonantly on purpose."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.damped-oscillations"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.14"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.wave-properties",
       "concept_id": "phys.wave.wave-properties",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Wave Properties: Amplitude, Period, Frequency\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Wave Properties: Amplitude, Period, Frequency\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define a wave as a travelling disturbance transporting energy without net matter transport, identify amplitude, wavelength, period, frequency, and speed on wave diagrams, apply v = f\u03bb and f = 1/T, distinguish snapshot (x-space) from history (t-space) graphs, and distinguish mechanical from electromagnetic waves by their medium requirements.",
+      "concept_summary": "A wave is a disturbance that travels: a pattern moving through a medium (or through space itself) carrying energy and information while the medium's particles merely oscillate about home \u2014 the ripple crosses the pond, the water stays. This decoupling of pattern-motion from matter-motion is the wave idea, and one small vocabulary measures every wave: amplitude A, the maximum displacement from equilibrium (the energy-carrier: intensity scales as A\u00b2); wavelength \u03bb, the spatial repeat distance (crest to crest); period T and frequency f = 1/T, the temporal repeat and its rate, set by the SOURCE; and wave speed v, set by the MEDIUM (string tension and mass, water depth, air's stiffness and density). The master relation chains them: v = f\u03bb \u2014 in each period the pattern advances one wavelength \u2014 and its division of labour is the concept's deepest lesson: when a wave enters a new medium, v changes, f stays loyal to the source, and \u03bb adjusts to balance the books. Two graphs that look identical but answer different questions complete the toolkit: the snapshot (displacement versus position at one instant \u2014 read \u03bb from it) and the history (displacement versus time at one point \u2014 read T from it); confusing them is the classic wave-reading error. Waves divide by their need for a medium \u2014 mechanical waves (sound, water, seismic, string) require one; electromagnetic waves (light, radio) travel through vacuum \u2014 and by geometry into the transverse and longitudinal families the next two concepts formalize.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Wave Properties: Amplitude, Period, Frequency\"",
-        "[TEMPLATE] Key idea 2 for \"Wave Properties: Amplitude, Period, Frequency\"",
-        "[TEMPLATE] Key idea 3 for \"Wave Properties: Amplitude, Period, Frequency\""
+        "A wave transports energy and information, not matter: the pattern travels, the medium's particles oscillate about fixed homes (the floating duck bobs; the ripple passes).",
+        "Core vocabulary: amplitude A (max displacement; energy \u221d A\u00b2), wavelength \u03bb (spatial repeat), period T and frequency f = 1/T (temporal repeat, source-set), speed v (medium-set).",
+        "Master relation: v = f\u03bb \u2014 one wavelength advances per period; with v fixed by the medium, f and \u03bb trade inversely.",
+        "Division of labour: the source sets f; the medium sets v; \u03bb = v/f adjusts \u2014 crossing into a new medium changes \u03bb, never f.",
+        "Two graphs, two questions: snapshot (y vs. x, read \u03bb) versus history (y vs. t, read T) \u2014 same sinusoid shape, different axes, different harvest.",
+        "Mechanical waves need a medium (sound, water, string, seismic); electromagnetic waves do not (light crosses vacuum) \u2014 the moon is silent but visible.",
+        "Frequency ranges as identity: audible sound 20 Hz\u201320 kHz, visible light ~10\u00b9\u2074 Hz \u2014 the same vocabulary spans them all."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Wave Properties: Amplitude, Period, Frequency\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Waves carry the medium along with them \u2014 water travels across the ocean with the wave.",
+          "correction": "The medium oscillates locally while the PATTERN travels: a duck on ripples bobs in place, and ocean water moves in small circles as swells pass. (Breaking surf and currents move water, but that is not the wave motion itself.) Energy crosses the ocean; the water largely stays."
+        },
+        {
+          "misconception": "When a wave enters a new medium, its frequency changes.",
+          "correction": "Frequency is locked to the source \u2014 the rate of wiggles cannot change mid-stream without waves piling up or vanishing. The medium changes the SPEED, and wavelength adjusts as \u03bb = v/f. (This loyalty of f is why colour doesn't change under water.)"
+        },
+        {
+          "misconception": "Bigger amplitude means faster waves.",
+          "correction": "Speed is a medium property (tension, density, stiffness), independent of amplitude in the linear regime: a loud shout and a whisper arrive together. Amplitude carries the ENERGY (\u221d A\u00b2), not the speed."
+        },
+        {
+          "misconception": "A y-versus-t graph shows the wave's shape in space.",
+          "correction": "It shows one point's biography \u2014 read the PERIOD from it, not the wavelength. The spatial shape lives in the snapshot (y vs. x). The two sinusoids look alike; the axes decide what the repeat distance means."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Wave Properties: Amplitude, Period, Frequency\""
+        "The duck-on-ripples clip: pattern crossing the pond, duck bobbing in place \u2014 matter/pattern decoupling in five seconds.",
+        "An annotated master sinusoid: A, \u03bb, crest, trough labelled on a snapshot; then the same curve relabelled as a history with T \u2014 the axes-swap lesson made explicit.",
+        "A v = f\u03bb conveyor animation: wiggle rate (source dial) and pattern speed (medium label) with wavelength visibly stretching or compressing as either changes.",
+        "A medium-crossing animation: wave fronts slowing into a denser medium, frequency counter constant, wavelength shrinking on screen.",
+        "A wave-family sorting board: sound, light, water, seismic P/S, radio, string \u2014 sorted by needs-medium and (previewing) by oscillation direction."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Wave Properties: Amplitude, Period, Frequency\"",
+        "setup": "A radio station broadcasts at 100 MHz (v = 3.0 \u00d7 10\u2078 m/s in air \u2248 vacuum). A sound wave of the same 100 Hz... rather: (a) find the radio wave's wavelength; (b) a 440 Hz concert-A sound travels at 343 m/s in air \u2014 find its wavelength and period; (c) the same 440 Hz note continues into water where sound travels at 1480 m/s \u2014 find the new wavelength and state what stayed fixed.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Radio: \u03bb = v/f = 3.0 \u00d7 10\u2078/1.0 \u00d7 10\u2078 = 3.0 m \u2014 FM antennas are metre-scale for exactly this reason.",
+          "(b) Sound wavelength: \u03bb = 343/440 \u2248 0.78 m; period T = 1/f = 1/440 \u2248 2.3 ms.",
+          "Calibrate: the concert-A wave is about an arm-span, wiggling 440 times per second \u2014 instrument sizes echo these wavelengths.",
+          "(c) Into water: f stays 440 Hz (source-loyal); \u03bb = 1480/440 \u2248 3.4 m \u2014 the wavelength more than quadruples because the medium quickened the pattern.",
+          "Tabulate the division of labour: f unchanged (source), v changed (medium), \u03bb = v/f adjusted (bookkeeping).",
+          "Cross-check the master relation in each row: v = f\u03bb holds \u2014 343 = 440 \u00d7 0.78 \u2713, 1480 = 440 \u00d7 3.36 \u2713."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Wave Properties: Amplitude, Period, Frequency\""
+        "expected_outcome": "The student computes 3.0 m, 0.78 m/2.3 ms, and 3.4 m, and articulates the source-sets-f, medium-sets-v, \u03bb-adjusts division across the medium crossing."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "v = f\u03bb and f = 1/T computations across wave families",
+          "graph-reading items (extract \u03bb from snapshots, T from histories, and never vice versa)",
+          "medium-crossing problems (what changes, what stays)",
+          "classification items (mechanical vs. electromagnetic, needs-medium judgments)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct chain computations, add dual-graph readings, then medium-crossing bookkeeping, ending with classification and scale-calibration items across sound, light, and water.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "graph-interpretation tasks",
+          "conceptual classification quiz"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Wave Properties: Amplitude, Period, Frequency\""
+        "bloom_alignment": "Understand \u2014 students must explain the pattern/matter decoupling, the division of labour among source, medium, and bookkeeping, and read both graph types correctly.",
+        "mastery_signal": "The student runs v = f\u03bb fluently, reads \u03bb and T from the correct graph types, and answers medium-crossing and needs-medium items correctly, at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Wave Properties: Amplitude, Period, Frequency\""
+        "Radio, WiFi, and 5G allocate the electromagnetic spectrum by frequency; antenna sizes are set by \u03bb = v/f \u2014 metre-scale FM masts to centimetre phone antennas.",
+        "Musical pitch is frequency and instrument size tracks wavelength \u2014 a piccolo and a tuba are \u03bb = v/f drawn in brass and wood.",
+        "Sonar and medical ultrasound choose frequencies to trade resolution (short \u03bb) against penetration \u2014 the v = f\u03bb dial in clinical form.",
+        "Earthquake monitoring reads seismic wave speeds and frequencies to locate events and image Earth's interior.",
+        "Ocean-wave forecasting for shipping and surfing runs on period, wavelength, and depth-dependent speed \u2014 the vocabulary at sea."
       ],
       "prerequisite_review_triggers": [
         "phys.meas.units"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.transverse-waves",
       "concept_id": "phys.wave.transverse-waves",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Transverse Waves\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Transverse Waves\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define transverse waves by perpendicular particle oscillation, identify crests and troughs, trace individual particle motion as a travelling transverse wave passes, explain polarization as a transverse-only phenomenon, and classify waves (string, light, S-waves, sound) by their oscillation geometry.",
+      "concept_summary": "A transverse wave is one whose particles oscillate PERPENDICULAR to the direction the wave travels: flick a rope horizontally stretched and the hump runs along it while every rope segment moves only up and down. The geometry names the features \u2014 crests (maximum upward displacement) and troughs (maximum downward) \u2014 and fixes the particle choreography: as a wave moves right, each particle rehearses its left neighbour's motion a moment later, executing vertical SHM with the wave's frequency while going precisely nowhere horizontally. Reading particle velocity off a snapshot is the concept's skill: a particle on the leading edge of an approaching crest is moving up, one just past the crest moving down \u2014 the transverse-velocity map that exam questions probe. Transverse geometry carries an exclusive capability: polarization. Because the oscillation has a whole plane of perpendicular directions to choose from, a transverse wave can be filtered to one direction (vertical slots pass vertical rope waves and block horizontal ones); longitudinal waves, oscillating along the travel line, have no such choice to filter \u2014 so polarization is the experimental fingerprint of transverseness, and the polarization of light (sunglasses, LCD screens, bee navigation) is standing proof that light waves are transverse. The family album: waves on strings and ropes, electromagnetic waves (light, radio \u2014 field oscillations perpendicular to travel), and seismic S-waves, whose transverse shear cannot propagate through liquids \u2014 the observation that revealed Earth's liquid outer core.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Transverse Waves\"",
-        "[TEMPLATE] Key idea 2 for \"Transverse Waves\"",
-        "[TEMPLATE] Key idea 3 for \"Transverse Waves\""
+        "Definition: particle (or field) oscillation perpendicular to propagation \u2014 the wave travels along, the medium bobs across.",
+        "Features: crests and troughs are the perpendicular extremes; amplitude is measured to them from equilibrium.",
+        "Particle choreography: each particle performs vertical SHM at the wave's frequency, copying its upstream neighbour with a delay \u2014 no particle travels with the wave.",
+        "Velocity-map reading: ahead of a crest (wave moving toward you) particles move up; behind it, down \u2014 the snapshot's slopes encode the particle velocities.",
+        "Polarization is transverse-exclusive: perpendicular oscillation has directions to choose, so filters (slots, polaroids) can select one; longitudinal waves cannot be polarized.",
+        "Light is transverse: its polarization (sunglasses, LCDs, glare) is the classical proof; the oscillating entities are electric and magnetic fields, needing no medium.",
+        "Seismic S-waves are transverse shear: they cannot cross liquids \u2014 their shadow zone mapped Earth's molten outer core.",
+        "Mechanical transverse waves need shear stiffness: strings under tension and solids carry them; ideal fluids (no shear) cannot \u2014 previewing why sound in air must be longitudinal."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Transverse Waves\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Particles in a transverse wave travel along with the crest.",
+          "correction": "Each particle only oscillates perpendicular to the travel direction \u2014 up and down for a horizontal rope \u2014 returning home every cycle. The crest is a PATTERN passing through successive particles, like a stadium wave through seated spectators."
+        },
+        {
+          "misconception": "A particle at the crest is moving fastest.",
+          "correction": "At the crest the particle is at its turning point \u2014 momentarily at rest, like SHM at maximum displacement. Maximum particle speed occurs as it passes through equilibrium (the zero crossings of the snapshot)."
+        },
+        {
+          "misconception": "All waves can be polarized if the filter is good enough.",
+          "correction": "Polarization requires a choice of oscillation directions perpendicular to travel \u2014 a transverse privilege. Longitudinal waves oscillate along the one and only travel direction; there is nothing for a filter to select. Sound cannot be polarized, and that is diagnostic."
+        },
+        {
+          "misconception": "Light must be longitudinal since it travels through empty space with nothing to wiggle sideways.",
+          "correction": "Light's oscillating quantities are electric and magnetic FIELDS, which point perpendicular to the travel direction and need no medium. Its polarization behaviour \u2014 verified by every pair of polaroid sunglasses \u2014 certifies the transverse geometry."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Transverse Waves\""
+        "A rope-wave animation with three particles painted: each tracing pure vertical SHM with successive delays while the hump runs along \u2014 choreography and delay in one loop.",
+        "The velocity-map overlay: a snapshot with particle-velocity arrows drawn (up ahead of crests, down behind), then advanced one frame to verify.",
+        "The slot-filter (polarization) demonstration: rope wave through a vertical picket gate passing, through a horizontal one dying \u2014 then the same logic with two polaroid filters and a lamp.",
+        "The stadium-wave clip: spectators (particles) rising and sitting in place while the wave circles the ground \u2014 the perfect human analogy.",
+        "The S-wave shadow-zone diagram: transverse shear waves stopping at the liquid outer core, with the seismographic shadow that mapped it."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Transverse Waves\"",
+        "setup": "A transverse wave y(x, t) travels in the +x direction at 4.0 m/s with amplitude 0.05 m and wavelength 2.0 m along a rope. (a) Find the frequency and period. (b) For a snapshot at t = 0 with a crest at x = 1.0 m, determine the direction of motion of rope particles at x = 0.5 m (leading edge) and x = 1.5 m (trailing edge). (c) Find each particle's maximum speed and compare it with the wave speed.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) f = v/\u03bb = 4.0/2.0 = 2.0 Hz; T = 0.5 s \u2014 the pattern advances one 2 m wavelength every half second.",
+          "(b) Method: the wave moves +x, so each particle is about to do what its LEFT neighbour... rather what the profile to its LEFT shows \u2014 equivalently, shift the snapshot slightly right and see where each particle must go.",
+          "At x = 0.5 m (ahead of the crest): the crest is approaching, so the particle is moving UP toward its coming maximum.",
+          "At x = 1.5 m (behind the crest): the crest has passed; the particle is moving DOWN toward the trough that follows.",
+          "(c) Particles execute SHM with \u03c9 = 2\u03c0f = 4\u03c0 rad/s: v_max = A\u03c9 = 0.05 \u00d7 4\u03c0 \u2248 0.63 m/s \u2014 perpendicular to travel.",
+          "Compare: particle speed (\u2264 0.63 m/s, transverse) versus wave speed (4.0 m/s, longitudinal direction... along the rope's line): different directions, different magnitudes, different owners \u2014 the pattern outruns its dancers."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Transverse Waves\""
+        "expected_outcome": "The student computes f = 2 Hz and T = 0.5 s, assigns up/down particle velocities correctly by the shift-the-snapshot method, and contrasts v_max \u2248 0.63 m/s (particle, perpendicular) with 4.0 m/s (pattern, along travel)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "particle-velocity direction items from snapshots with stated travel direction",
+          "particle vs. wave speed computations and contrasts",
+          "polarization reasoning (what passes, what dies, what it proves)",
+          "classification items (which waves are transverse, and how we know)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with feature identification and particle-motion tracing, add velocity-map readings both travel directions, then particle/wave speed contrasts, ending with polarization logic and the S-wave/liquid-core argument.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "snapshot-analysis tasks",
+          "computation set on particle kinematics",
+          "conceptual quiz on polarization and classification"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Transverse Waves\""
+        "bloom_alignment": "Understand \u2014 students must explain the perpendicular choreography, read particle motion from wave diagrams, and deploy polarization as the transverse fingerprint.",
+        "mastery_signal": "The student assigns particle velocity directions correctly from snapshots in both travel directions, separates particle from wave speed, and explains why sound cannot be polarized, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Transverse Waves\""
+        "Polarized sunglasses cut glare because reflected light is partially polarized \u2014 a transverse-wave filter on your face.",
+        "LCD screens sculpt images with switchable polarization filters \u2014 billions of transverse-wave gates per display.",
+        "Guitar, violin, and piano strings carry transverse waves whose frequencies are the notes \u2014 music as transverse-wave engineering.",
+        "Seismology's S-wave shadow zones revealed Earth's liquid outer core \u2014 transverse waves as planetary interior probes.",
+        "Optical-fibre polarization control and radio antenna orientation (matching a transmitter's polarization) are everyday transverse-geometry engineering."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.wave-properties"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.longitudinal-waves",
       "concept_id": "phys.wave.longitudinal-waves",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Longitudinal Waves\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Longitudinal Waves\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define longitudinal waves by particle oscillation parallel to propagation, identify compressions and rarefactions as the wave's features, translate between displacement and pressure descriptions, explain why fluids carry only longitudinal waves, and analyze sound and seismic P-waves as the family's exemplars.",
+      "concept_summary": "A longitudinal wave oscillates ALONG its travel direction: push-pull a stretched slinky and pulses of squeezed coils (compressions) and stretched coils (rarefactions) run down its length while each coil shuttles back and forth about home. Compressions and rarefactions replace crests and troughs as the features, with wavelength now the compression-to-compression distance \u2014 and the wave admits two equivalent descriptions whose interplay is the concept's finesse: a displacement picture (how far each particle sits from home) and a pressure/density picture (how squeezed each region is), a quarter wavelength out of step with each other \u2014 pressure extremes occur where displacement is ZERO, since maximum compression happens where neighbours have converged from both sides. Sound in air is the family's star: vibrating sources push air molecules into travelling compression-rarefaction trains (at conversational loudness, pressure wiggles of a few pascals on the 101 kPa atmosphere \u2014 hearing is astonishingly sensitive), and sound in fluids MUST be longitudinal because liquids and gases, lacking shear stiffness, cannot snap back sideways \u2014 they resist only compression, so only push-pull waves propagate. That rule powers the seismological classic: P-waves (longitudinal, faster, first to arrive) cross Earth's liquid outer core while transverse S-waves are stopped \u2014 the arrival-time gap and shadow zones together X-rayed the planet. Longitudinal geometry also explains what sound cannot do: with oscillation locked to the single travel direction, there is no sideways choice to filter \u2014 no polarization, the negative fingerprint distinguishing the family.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Longitudinal Waves\"",
-        "[TEMPLATE] Key idea 2 for \"Longitudinal Waves\"",
-        "[TEMPLATE] Key idea 3 for \"Longitudinal Waves\""
+        "Definition: particle oscillation parallel to propagation \u2014 push-pull, not side-to-side; the slinky's compression pulse is the icon.",
+        "Features: compressions (squeezed, high pressure/density) and rarefactions (stretched, low) \u2014 wavelength runs compression to compression.",
+        "Two descriptions, quarter-wave offset: displacement extremes sit at pressure ZEROS and vice versa \u2014 maximum squeeze where particles have converged, i.e. where displacement passes through zero.",
+        "Sound is longitudinal: sources push air into compression trains; audible pressure amplitudes are pascals against the 101 kPa ambient \u2014 tiny ripples on a deep sea.",
+        "Fluids carry only longitudinal waves: no shear stiffness \u2192 no transverse restoring force \u2192 push-pull is the only game in liquids and gases.",
+        "Seismic P-waves: longitudinal, fastest, first-arriving, and able to cross the liquid outer core that blocks S-waves \u2014 the pair is Earth's CT scanner.",
+        "No polarization: oscillation along the unique travel direction leaves nothing for a filter to select \u2014 the family's diagnostic absence.",
+        "Same vocabulary throughout: v = f\u03bb, amplitude, period all apply unchanged; only the oscillation geometry differs from transverse waves."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Longitudinal Waves\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Air molecules travel from the speaker to the ear when sound is heard.",
+          "correction": "Molecules shuttle micrometres about home while the compression PATTERN crosses the room at 343 m/s. What arrives at the ear is the pressure oscillation, not speaker-side air \u2014 the duck-on-ripples lesson in longitudinal costume."
+        },
+        {
+          "misconception": "Longitudinal waves have crests and troughs like any wave drawing.",
+          "correction": "Their features are compressions and rarefactions along the travel line. The familiar sinusoid drawn for sound is a GRAPH of pressure or displacement versus position \u2014 a plot, not a picture of sideways motion; mistaking the graph for the geometry is the classic error."
+        },
+        {
+          "misconception": "Maximum pressure occurs where the particles are displaced farthest.",
+          "correction": "The two descriptions are a quarter wavelength out of step: pressure peaks where displacement is ZERO \u2014 where neighbours from both sides have converged. Displacement extremes are pressure-neutral. Reading one curve as the other misplaces every feature by \u03bb/4."
+        },
+        {
+          "misconception": "Sound can be polarized with a fine enough filter.",
+          "correction": "Polarization requires perpendicular oscillation directions to choose among; longitudinal oscillation is locked along the travel line, offering no choice. Sound's unpolarizability is not a technology gap but the family's defining geometry."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Longitudinal Waves\""
+        "The slinky push-pull demonstration (live, then slow-motion): compression pulses travelling while a marked coil shuttles in place.",
+        "A dual-curve panel: displacement s(x) and pressure \u0394p(x) plotted together with the \u03bb/4 offset highlighted and the converging-neighbours argument illustrated at one compression.",
+        "A loudspeaker-cone animation driving alternating compression (dark bands) and rarefaction (light bands) shells across a room, with a molecule's tiny shuttle inset.",
+        "The P-wave/S-wave planetary cross-section: P-waves refracting through the liquid core, S-waves stopping at it \u2014 arrival-time seismograms beside the picture.",
+        "A 'no-polarization' contrast strip: rope wave through slots (filtered) beside a slinky compression pulse through the same slots (unaffected)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Longitudinal Waves\"",
+        "setup": "A loudspeaker emits a 220 Hz tone in air (v = 343 m/s). (a) Find the wavelength and the distance between a compression and the nearest rarefaction. (b) The same tone enters water (v = 1480 m/s) \u2014 find the new wavelength. (c) An earthquake's P-waves (6.0 km/s) and S-waves (3.5 km/s) reach a station 42 s apart \u2014 how far is the source?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) \u03bb = v/f = 343/220 \u2248 1.56 m; compression-to-rarefaction is half a wavelength: \u2248 0.78 m.",
+          "(b) Frequency stays source-loyal: \u03bb_water = 1480/220 \u2248 6.7 m \u2014 the same note, four times longer in water.",
+          "(c) Set distance d: arrival times are d/3.5 and d/6.0 (km, s); the gap is d(1/3.5 \u2212 1/6.0) = d \u00d7 0.119 s/km.",
+          "Solve: d = 42/0.119 \u2248 353 km \u2014 one station's time gap converts to a source distance.",
+          "Note the method's power: three stations' circles intersect at the epicentre \u2014 the routine of every seismic network, run on the longitudinal/transverse speed difference.",
+          "Collect the theme: all three parts used only v = f\u03bb and arrival bookkeeping \u2014 the shared wave vocabulary doing longitudinal work."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Longitudinal Waves\""
+        "expected_outcome": "The student computes \u03bb = 1.56 m (half-spacing 0.78 m), the water wavelength 6.7 m with f fixed, and the 353 km epicentral distance from the P-S gap, citing the triangulation extension."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "wavelength/feature-spacing computations for sound in various media",
+          "displacement-pressure translation items (locate pressure extremes on displacement curves)",
+          "P-S arrival-gap distance problems",
+          "classification and capability items (why fluids are longitudinal-only; why no polarization)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with v = f\u03bb computations and feature spacings, add the two-description translation, then seismic gap problems, ending with geometry-capability arguments.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "dual-curve interpretation tasks",
+          "conceptual geometry quiz"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Longitudinal Waves\""
+        "bloom_alignment": "Understand \u2014 students must explain the parallel choreography, translate between displacement and pressure pictures, and argue the fluid and polarization consequences of the geometry.",
+        "mastery_signal": "The student computes wavelengths and feature spacings, places pressure extremes at displacement zeros, and explains both the fluids-longitudinal-only rule and sound's unpolarizability, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Longitudinal Waves\""
+        "All of acoustics \u2014 speech, music, hearing \u2014 is longitudinal pressure waves in air; microphone and eardrum alike read the \u0394p trace.",
+        "Medical ultrasound sends megahertz longitudinal waves into tissue, imaging from the echoes of compression pulses.",
+        "Seismic P-waves trigger earthquake early-warning systems: their first arrival buys seconds before the destructive S and surface waves.",
+        "Sonar and echo-sounding map oceans with underwater compression waves at 1480 m/s.",
+        "Pressure-wave hammer in pipelines ('water hammer') is a destructive longitudinal pulse plumbers and engineers design against."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.wave-properties"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.wave-speed",
       "concept_id": "phys.wave.wave-speed",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Wave Speed and the Wave Equation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Wave Speed and the Wave Equation\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state that wave speed is set by the medium's restoring and inertial properties, apply v = \u221a(T/\u03bc) for stretched strings, use representative sound speeds across media, combine medium speed with v = f\u03bb in two-step problems, and explain speed changes at boundaries and with temperature.",
+      "concept_summary": "How fast a wave travels is the medium's decision, and the deciding committee always has two members: a restoring property (how hard the medium snaps back \u2014 tension, stiffness, bulk modulus) and an inertial property (how much mass must be moved \u2014 linear density, volume density). Speed rises with stiffness and falls with inertia, and every mechanical wave-speed formula is this one story in local costume: for a stretched string, v = \u221a(T/\u03bc) \u2014 tension over mass-per-length under a square root, so quadrupling tension doubles the speed (the guitarist's tuning physics: tighter strings, faster waves, higher notes) and thicker strings are slower (why bass strings are wound fat); for sound, v = \u221a(elastic modulus/density), giving the canonical ladder ~343 m/s in air (20 \u00b0C), ~1480 m/s in water, ~5000+ m/s in steel \u2014 denser media are usually FASTER for sound because their enormous stiffness outvotes their inertia, the resolution of the topic's favourite paradox. Temperature moves the air number (\u2248 +0.6 m/s per \u00b0C, via faster molecules), which matters to musicians tuning in cold halls and to sound ranging. Two disciplines complete the concept: wave speed is amplitude-independent (linear regime) and frequency-independent in non-dispersive media \u2014 the pattern's pace belongs to the medium, not to how hard or how often you shake it \u2014 and at boundaries the medium changes, so v changes, f holds loyal to the source, and \u03bb = v/f adjusts, the bookkeeping that becomes refraction. The lightning-thunder gap (light ~instant, sound ~3 s/km) is the concept's everyday laboratory.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Wave Speed and the Wave Equation\"",
-        "[TEMPLATE] Key idea 2 for \"Wave Speed and the Wave Equation\"",
-        "[TEMPLATE] Key idea 3 for \"Wave Speed and the Wave Equation\""
+        "Universal recipe: v = \u221a(restoring/inertia) \u2014 stiffness accelerates, mass retards; every mechanical wave-speed formula instantiates it.",
+        "Strings: v = \u221a(T/\u03bc) \u2014 tension T in newtons over linear density \u03bc in kg/m; \u00d74 tension \u2192 \u00d72 speed; heavier strings slower (bass strings are wound to add \u03bc).",
+        "Sound ladder: ~343 m/s in air (20 \u00b0C), ~1480 m/s in water, ~5000\u20136000 m/s in steel \u2014 stiffness dominates density, so 'denser is faster' for sound (the paradox resolved by the modulus's decisive vote).",
+        "Temperature: air's sound speed grows \u2248 0.6 m/s per \u00b0C (v \u2248 331 + 0.6T_C m/s) \u2014 faster molecules relay compressions sooner.",
+        "Speed is amplitude- and (in non-dispersive media) frequency-independent: shout or whisper, bass or treble \u2014 one arrival time; the medium owns the pace.",
+        "Boundary bookkeeping: crossing media changes v; f stays with the source; \u03bb = v/f adjusts \u2014 the wave-properties division of labour, now with the medium physics underneath.",
+        "Two-step problem pattern: medium properties \u2192 v (square-root formula), then v and f \u2192 \u03bb (or timing) \u2014 the domain's standard computation chain.",
+        "Everyday laboratory: lightning-to-thunder at ~3 s per kilometre; echo timing; the tap-the-rail-hear-it-twice classic."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Wave Speed and the Wave Equation\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Sound travels slower in dense media \u2014 density means resistance.",
+          "correction": "Usually the opposite: water and steel are denser than air AND far faster, because their stiffness (bulk/elastic modulus) grows even more than their density. The speed is a ratio's square root \u2014 \u221a(stiffness/density) \u2014 and stiffness casts the deciding vote across the air-water-steel ladder."
+        },
+        {
+          "misconception": "Turning up the amplitude or frequency makes the wave travel faster.",
+          "correction": "In the linear regime speed belongs to the medium alone: loud and soft arrive together, and (absent dispersion) bass and treble do too \u2014 a concert heard at the back would otherwise smear into chaos. Amplitude carries energy; frequency sets wavelength; neither touches v."
+        },
+        {
+          "misconception": "Doubling a string's tension doubles its wave speed.",
+          "correction": "The square root intervenes: v = \u221a(T/\u03bc), so doubling T multiplies v by \u221a2 \u2248 1.41; doubling the speed needs FOUR times the tension. Tuning pegs work in square roots \u2014 which is why small turns make semitones."
+        },
+        {
+          "misconception": "When a wave slows at a boundary, its frequency drops.",
+          "correction": "Frequency is locked to the source \u2014 wavefronts cannot pile up or vanish at a boundary in steady state. The wavelength contracts instead: \u03bb = v/f with f fixed. (Pitch doesn't change under water; colour doesn't change in glass.)"
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Wave Speed and the Wave Equation\""
+        "The two-member committee graphic: a spring (restoring) and a weight (inertia) voting on v = \u221a(restoring/inertia), recostumed for string, air, water, steel.",
+        "A live string demonstration: pulse timed along a cord at two tensions and along a heavier cord \u2014 the \u221a scaling measured with a stopwatch or slow-motion camera.",
+        "The sound-speed ladder bar chart (air, water, steel) with stiffness and density values annotated, resolving the density paradox numerically.",
+        "The lightning-thunder counting rule illustrated: flash, three seconds per kilometre, rumble \u2014 the concept's field method.",
+        "A boundary animation: wavefronts crossing into a slower medium, spacing (\u03bb) compressing while the crossing rate (f) is counted constant."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Wave Speed and the Wave Equation\"",
+        "setup": "A guitar string of linear density \u03bc = 4.0 \u00d7 10\u207b\u2074 kg/m... check realism: use \u03bc = 4.0 g/m = 4.0 \u00d7 10\u207b\u00b3 kg/m under tension T = 80 N. (a) Find the wave speed on the string. (b) The string plays 220 Hz \u2014 find the wavelength on the string. (c) What tension would raise the same string's wave speed by 12% (two semitones \u2248 \u00d71.122 in frequency at fixed length)? (d) The 220 Hz sound then travels through air at 343 m/s \u2014 find its wavelength in air and explain why it differs from (b).",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) v = \u221a(T/\u03bc) = \u221a(80/0.004) = \u221a20,000 \u2248 141 m/s \u2014 string waves are fast but far below sound-in-steel.",
+          "(b) On the string: \u03bb = v/f = 141/220 \u2248 0.64 m \u2014 set by the string's own medium properties.",
+          "(c) Speed \u00d71.122 needs tension \u00d71.122\u00b2 \u2248 \u00d71.26: T' \u2248 80 \u00d7 1.26 \u2248 101 N \u2014 square-root law run backwards; tuning two semitones costs 26% more tension.",
+          "(d) In air: \u03bb_air = 343/220 \u2248 1.56 m \u2014 same frequency (the source's 220 Hz), different medium, different speed, different wavelength.",
+          "Read the structure: one f, two media, two v's, two \u03bb's \u2014 the source-medium-bookkeeping division with real numbers.",
+          "Reality checks: 141 m/s and 0.64 m suit a guitar's scale; the air wavelength (1.56 m) matches the earlier sound example at this frequency \u2713."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Wave Speed and the Wave Equation\""
+        "expected_outcome": "The student computes 141 m/s and 0.64 m on the string, inverts the square-root law to 101 N for a 12% speed rise, and contrasts the 1.56 m air wavelength with the string wavelength under one shared frequency."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "v = \u221a(T/\u03bc) computations and inversions (find T or \u03bc)",
+          "two-step chains (medium \u2192 v \u2192 \u03bb or timing)",
+          "medium-comparison and temperature items (air/water/steel; cold-hall tuning)",
+          "boundary bookkeeping problems (one f, two media tables)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct string computations, add square-root inversions, then cross-media chains and temperature corrections, ending with boundary tables and echo/lightning field problems.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "comparative-reasoning quiz",
+          "field-method problems (echo, thunder, rail-tap)"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Wave Speed and the Wave Equation\""
+        "bloom_alignment": "Apply \u2014 students must run the medium formulas with square-root discipline and chain them through v = f\u03bb across realistic scenarios.",
+        "mastery_signal": "The student computes and inverts v = \u221a(T/\u03bc), ranks media correctly with the stiffness-over-density argument, and completes one boundary table, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Wave Speed and the Wave Equation\""
+        "Stringed-instrument design and tuning is v = \u221a(T/\u03bc) in luthiery: tension pegs, wound bass strings, scale lengths.",
+        "Lightning ranging (3 s/km), sonar depth-finding, and echo location all convert medium speed into distance.",
+        "Non-destructive testing times ultrasonic pulses through metal \u2014 speed changes reveal cracks and porosity.",
+        "Earthquake early warning exploits P-wave speed to outrun the slower destructive waves electronically.",
+        "Temperature-compensated tuning: orchestras retune as halls warm because air's sound speed drifts 0.6 m/s per \u00b0C."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.transverse-waves",
         "phys.wave.longitudinal-waves"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.superposition",
       "concept_id": "phys.wave.superposition",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Superposition Principle\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Superposition Principle\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state the superposition principle (overlapping waves add displacements algebraically), construct resultant waveforms graphically from overlapping pulses, show that waves pass through each other unchanged, identify constructive and destructive addition, and state the linearity condition under which the principle holds.",
+      "concept_summary": "When two waves occupy the same place at the same time, the medium does something remarkably simple: it adds. The superposition principle states that the resultant displacement at any point and instant is the algebraic sum of the individual waves' displacements \u2014 signs included, so two upward pulses meeting produce a momentary double-height pulse (constructive addition) while an upward meeting an equal downward produces a flat instant of cancellation (destructive) in which the medium is momentarily straight yet still moving, the energy hiding in velocity. The principle's quiet companion is wave independence: after overlapping, waves pass through each other completely unchanged \u2014 each pulse emerges with its own shape, speed, and direction as if the encounter never happened, which is why a room full of crossing conversations, WiFi, and music remains intelligible: waves interpenetrate without collision damage, unlike particles. Graphical superposition is the working skill (align the pulses at the chosen instant, add ordinates point by point, signs respected), and the principle holds wherever the medium responds LINEARLY \u2014 restoring force proportional to displacement \u2014 which is excellent for sound at ordinary loudness, light in vacuum, and gentle water ripples, and fails honestly at extremes (shock waves, breaking surf, nonlinear optics) where waves do distort each other. Superposition is the domain's engine of consequences: run it on continuous waves and interference emerges; run it on counter-propagating waves in a bounded medium and standing waves; on nearly-equal frequencies, beats \u2014 the next three concepts are this one principle wearing three costumes.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Superposition Principle\"",
-        "[TEMPLATE] Key idea 2 for \"Superposition Principle\"",
-        "[TEMPLATE] Key idea 3 for \"Superposition Principle\""
+        "The principle: overlapping waves add displacements algebraically, point by point and instant by instant \u2014 signs included.",
+        "Constructive addition: like-signed displacements reinforce (two +A pulses \u2192 momentary 2A); destructive: opposite signs cancel (+A meets \u2212A \u2192 momentary zero).",
+        "The cancellation instant is not death: the medium is flat but MOVING \u2014 energy resides in velocity, and both pulses re-emerge intact.",
+        "Wave independence: after overlap, each wave proceeds unchanged in shape, speed, and direction \u2014 waves interpenetrate; particles collide.",
+        "Graphical method: freeze the instant, align the two profiles, sum ordinates with signs \u2014 the constructions exam questions are made of.",
+        "Validity condition: linearity of the medium (restoring \u221d displacement) \u2014 superb for ordinary sound, light, gentle ripples; breaks for shocks, breakers, and extreme intensities.",
+        "The consequence engine: interference (continuous waves), standing waves (counter-propagating), and beats (near-equal frequencies) are all superposition specialized \u2014 one principle, three upcoming costumes."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Superposition Principle\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "When waves collide they bounce off or destroy each other like objects.",
+          "correction": "Waves are patterns, not bodies: they overlap, add while coincident, and pass through unchanged \u2014 both pulses emerge with their original shapes and directions. 'Collision' is particle vocabulary; waves interpenetrate."
+        },
+        {
+          "misconception": "When a crest cancels a trough, the waves and their energy are destroyed.",
+          "correction": "The cancellation is one instant at one place: the medium is momentarily flat but moving, the energy stored in velocity, and both pulses re-emerge intact beyond the overlap. Even in sustained destructive interference, energy is not destroyed but redistributed to the constructive regions."
+        },
+        {
+          "misconception": "Superposition means waves blend into one merged wave permanently.",
+          "correction": "The sum describes the medium only WHILE the waves overlap; the constituent waves retain their identities throughout and separate afterwards. Superposition is bookkeeping of coincidence, not fusion."
+        },
+        {
+          "misconception": "Superposition is an exact law of all waves everywhere.",
+          "correction": "It is exact only for linear media. Crank the amplitude \u2014 shock waves, breaking surf, high-power laser optics \u2014 and waves genuinely distort each other. The principle's domain is wide (all of everyday acoustics and optics) but honestly bounded."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Superposition Principle\""
+        "The two-pulse meeting animation, run twice: like pulses (momentary double height) and opposite pulses (momentary flatness with velocity arrows shown), both ending with unchanged pulses departing.",
+        "A frame-by-frame graphical-addition worksheet: five instants of an overlap, students summing ordinates to draw each resultant.",
+        "The 'flat but moving' close-up: the cancellation instant with the medium's velocity field displayed \u2014 energy visible in motion when invisible in shape.",
+        "A crossing-beams demonstration: two flashlight beams or laser pointers intersecting with neither deflected \u2014 wave independence in the air of the classroom.",
+        "A linearity-limit gallery: gentle ripples adding cleanly beside breaking surf and a sonic-boom N-wave \u2014 where the principle retires."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Superposition Principle\"",
+        "setup": "Two pulses travel toward each other on a string at 2.0 m/s: a rectangular pulse of height +2.0 cm and width 2.0 m (leading edge at x = 4.0 m moving right) and one of height \u22121.0 cm and width 2.0 m (leading edge at x = 8.0 m moving left) at t = 0. Sketch/describe the string at t = 1.0 s (full overlap) and t = 2.5 s (after separation), and account for the energy at full overlap.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Locate at t = 1.0 s: each pulse has moved 2.0 m toward the other; both now occupy x = 6.0\u20138.0 m... verify: right-mover spans 6.0\u20138.0, left-mover spans 6.0\u20138.0 \u2014 full overlap.",
+          "Add algebraically in the overlap: +2.0 + (\u22121.0) = +1.0 cm \u2014 the string shows a single rectangular hump of height 1.0 cm over x = 6.0\u20138.0 m.",
+          "Note what the sum hides: the +2 and \u22121 pulses both still exist within that modest hump \u2014 superposition is their coincident bookkeeping.",
+          "At t = 2.5 s: each has moved 5.0 m from start; the +2.0 cm pulse now spans x = 9.0\u201311.0 m moving right, the \u22121.0 cm pulse spans x = 1.0\u20133.0 m moving left \u2014 both with ORIGINAL heights and shapes: independence demonstrated.",
+          "Energy at overlap: the displacement field alone (height 1.0) underestimates the stored energy; the missing share sits in the string's transverse velocities within the overlap \u2014 total energy is conserved throughout.",
+          "Extract the method: locate each pulse at the instant, add ordinates with signs in the overlap, and never expect the encounter to alter the travellers."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Superposition Principle\""
+        "expected_outcome": "The student constructs the +1.0 cm overlap resultant, restores both original pulses after separation, and places the 'missing' overlap energy in the medium's velocity \u2014 the three-part core of superposition."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "graphical pulse-addition constructions at specified instants",
+          "constructive/destructive identification and resultant-amplitude items",
+          "post-overlap independence questions (shapes, speeds, directions afterwards)",
+          "conceptual items on cancellation energy and linearity limits"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with like-pulse additions, add opposite and partial overlaps, then asymmetric-shape constructions, ending with energy accounting and validity-boundary judgments.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "graphical construction tasks",
+          "conceptual short answers",
+          "multi-instant sequence problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Superposition Principle\""
+        "bloom_alignment": "Apply \u2014 students must execute signed graphical addition at arbitrary instants and deploy the independence and energy principles on unfamiliar pulse pairs.",
+        "mastery_signal": "The student constructs correct resultants at overlap instants (signs respected), restores the original pulses afterwards, and explains the cancellation-instant energy, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Superposition Principle\""
+        "Noise-cancelling headphones synthesize the anti-phase wave so superposition erases the drone at the eardrum \u2014 destructive addition as a product.",
+        "Every crowded acoustic space works because sound waves interpenetrate: dozens of conversations cross a room without scrambling each other.",
+        "Radio, WiFi, and cellular signals share the air by superposition; receivers filter frequencies from the summed field.",
+        "Audio mixing IS superposition: a recording is the algebraic sum of tracks, and speakers reproduce the summed waveform.",
+        "Rogue ocean waves arise when swells superpose constructively \u2014 momentary giants from the chance alignment of trains."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.wave-speed"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.interference",
       "concept_id": "phys.wave.interference",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Wave Interference\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Wave Interference\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain interference as sustained superposition of coherent waves, apply the path-difference conditions (\u0394d = n\u03bb constructive, (n+\u00bd)\u03bb destructive), locate maxima and minima in two-source patterns, explain the roles of coherence and comparable amplitudes, and connect energy redistribution to the pattern.",
+      "concept_summary": "Interference is superposition made geography: when two coherent sources \u2014 same frequency, constant phase relationship \u2014 fill a region with waves, the addition rule stamps a stable spatial pattern onto it, with locations of permanent reinforcement and permanent cancellation. The organizing quantity is path difference: at any point, the waves have travelled different distances from their sources, and the difference \u0394d decides their arrival phase \u2014 \u0394d = n\u03bb (whole wavelengths) delivers crest-on-crest, constructive interference and double amplitude (quadruple intensity, since intensity goes as amplitude squared); \u0394d = (n + \u00bd)\u03bb delivers crest-on-trough, destructive interference and, for equal amplitudes, silence or darkness. The two-source pattern \u2014 alternating loud/soft hyperbolic bands fanning out from a speaker pair, or bright/dark fringes from twin slits \u2014 is the classic laboratory realization, walked by students crossing a room with two speakers playing one tone. The fine print carries the physics: coherence is mandatory (independent sources drift in relative phase, washing the pattern into uniform average brightness \u2014 why two lamps don't make fringes), equal amplitudes make the deepest nulls, and energy is never destroyed \u2014 the dead zones' missing energy is exactly the excess delivered to the loud zones: interference redistributes, conservation audits. Historically, interference is the wave phenomenon: Young's double-slit fringes (1801) settled light's wave nature, and the same logic now runs noise-cancelling headphones, anti-reflective lens coatings (thin-film interference), gravitational-wave interferometers, and the iridescence of soap bubbles and butterfly wings.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Wave Interference\"",
-        "[TEMPLATE] Key idea 2 for \"Wave Interference\"",
-        "[TEMPLATE] Key idea 3 for \"Wave Interference\""
+        "Interference = sustained, spatially stable superposition of coherent waves \u2014 the addition rule frozen into a standing geography of loud and quiet.",
+        "Path difference decides phase: \u0394d = n\u03bb \u2192 in step \u2192 constructive (amplitude 2A, intensity 4\u00d7 one source); \u0394d = (n + \u00bd)\u03bb \u2192 opposite \u2192 destructive (zero for equal amplitudes).",
+        "Two-source pattern: alternating maxima and minima along hyperbolic bands \u2014 the central line (\u0394d = 0) always constructive for in-phase sources.",
+        "Coherence is the licence: constant relative phase (same frequency, locked sources) \u2014 independent sources drift and the pattern washes out to uniform average.",
+        "Equal amplitudes deepen nulls: unequal sources leave residual sound/light at the 'dark' locations \u2014 cancellation quality is an amplitude match.",
+        "Energy is redistributed, not destroyed: minima's deficit = maxima's surplus; the average over the pattern equals the incoherent sum \u2014 conservation audits interference.",
+        "Flagship realizations: Young's double slit (light's wave nature, 1801), speaker-pair walks, thin-film colours (soap bubbles, oil slicks, AR coatings), noise cancellation, LIGO."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Wave Interference\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Destructive interference destroys the waves' energy.",
+          "correction": "The energy missing from the quiet bands appears in the loud bands \u2014 the pattern's spatial average matches the no-interference total. Interference is a redistribution ledger that conservation audits exactly; nothing is annihilated."
+        },
+        {
+          "misconception": "Any two sources of the same kind will produce an interference pattern.",
+          "correction": "A STABLE pattern needs coherence \u2014 constant relative phase, hence locked frequencies. Two independent lamps or singers drift in phase millions of times a second; the fringes exist momentarily but wash out to uniformity faster than any eye or ear can follow."
+        },
+        {
+          "misconception": "The bright fringes are where the waves arrive with more energy each.",
+          "correction": "Each wave arrives everywhere with its ordinary amplitude; brightness comes from ADDING IN STEP \u2014 amplitude 2A gives intensity 4\u00d7, paid for by the dark bands' 0. The geometry of arrival phase, not the waves' local strength, draws the pattern."
+        },
+        {
+          "misconception": "Destructive interference requires the waves to have travelled equal distances.",
+          "correction": "Equal paths (\u0394d = 0) give CONSTRUCTIVE interference for in-phase sources \u2014 the central maximum. Destruction needs a half-wavelength offset: \u0394d = \u03bb/2, 3\u03bb/2, \u2026 \u2014 the half-integer family, not the equal-path line."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Wave Interference\""
+        "The two-source ripple-tank overhead: circular wavefronts overlapping into visible hyperbolic bands of churn and calm \u2014 the pattern before any formula.",
+        "A path-difference geometry diagram: one field point, two source distances, \u0394d highlighted, with the n\u03bb / (n+\u00bd)\u03bb verdict table beside it.",
+        "The speaker-pair classroom walk: students crossing the room mapping loud and quiet bands with their ears, then overlaying the predicted hyperbolae.",
+        "Young's double-slit fringe photograph beside its intensity plot \u2014 history's decisive wave evidence, annotated.",
+        "A thin-film iridescence gallery (soap bubble, oil slick, AR-coated lens) with the front/back-surface path-difference cartoon.",
+        "An energy-audit bar chart: intensity across the pattern averaging exactly to the two-source incoherent sum."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Wave Interference\"",
+        "setup": "Two in-phase speakers 3.0 m apart play 686 Hz in air (v = 343 m/s). A listener stands 4.0 m directly in front of speaker A (so distances are: from A, 4.0 m; from B, 5.0 m). (a) Find the wavelength and the path difference. (b) Loud or quiet at the listener's spot? (c) The frequency is now tuned downward \u2014 find the lowest frequency making that spot destructively quiet. (d) State two practical reasons the quiet is imperfect.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) \u03bb = v/f = 343/686 = 0.50 m; geometry gives d_A = 4.0 m, d_B = 5.0 m (3-4-5 triangle), so \u0394d = 1.0 m.",
+          "(b) Test against \u03bb: \u0394d/\u03bb = 1.0/0.50 = 2 \u2014 a whole number: constructive. The listener stands in a LOUD band (amplitude doubled, intensity quadrupled versus one speaker).",
+          "(c) Destructive needs \u0394d = (n + \u00bd)\u03bb: the longest such \u03bb is \u0394d/(\u00bd) = 2.0 m \u2192 f = 343/2.0 \u2248 172 Hz \u2014 the lowest quiet-making frequency; the next (n = 1: \u03bb = 2/3 m) is ~515 Hz.",
+          "(d) Imperfection sources: the speakers' amplitudes differ at the listener (unequal distances \u2192 unequal loudness \u2192 shallow null), and room reflections add extra coherent paths that fill the silence.",
+          "Method summary: geometry \u2192 \u0394d; \u0394d/\u03bb integer or half-integer \u2192 verdict; retuning f moves \u03bb and slides the pattern \u2014 the three-step routine of every interference problem.",
+          "Energy note: the 4\u00d7 intensity here is financed by quiet bands elsewhere in the room \u2014 conservation's audit passes."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Wave Interference\""
+        "expected_outcome": "The student computes \u03bb = 0.50 m and \u0394d = 1.0 m, rules the spot constructive (n = 2), retunes to 172 Hz for destruction, and names amplitude mismatch and reflections as the real-world null-spoilers."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "path-difference verdicts (constructive/destructive/neither) from geometries",
+          "retuning and re-positioning problems (find f or the position for a chosen verdict)",
+          "coherence and amplitude-match conceptual items",
+          "energy-redistribution audits and application explanations (headphones, coatings)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with verdict computations from given distances, add geometric setups (3-4-5 and beyond), then retuning inversions, ending with coherence reasoning and application analyses.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation-and-verdict set",
+          "geometric interference problems",
+          "conceptual quiz on coherence and energy"
         ],
-        "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Wave Interference\""
+        "bloom_alignment": "Analyze \u2014 students must dissect two-source geometries into path differences, apply the phase conditions, and reason about coherence and energy redistribution beyond formula substitution.",
+        "mastery_signal": "The student delivers correct verdicts from geometry, inverts the conditions for frequency or position, and explains both the coherence requirement and the energy audit, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Wave Interference\""
+        "Noise-cancelling headphones manufacture \u0394d = \u03bb/2-equivalent anti-phase sound \u2014 engineered destructive interference at the eardrum.",
+        "Anti-reflective lens and solar-panel coatings tune thin-film thickness so reflected waves cancel \u2014 interference as optical engineering.",
+        "Soap-bubble, oil-slick, and butterfly-wing iridescence are thin-film interference sweeping through colours with thickness and angle.",
+        "LIGO detects gravitational waves as sub-proton-width shifts in an interference pattern \u2014 the principle at its most precise.",
+        "Concert-hall acoustics and stadium PA design fight dead spots created by speaker-pair interference; radio broadcasters manage the same physics between towers."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.superposition"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.standing-waves",
       "concept_id": "phys.wave.standing-waves",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Standing Waves\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Standing Waves\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain standing waves as interference of counter-propagating waves, identify nodes and antinodes, derive the harmonic series for strings fixed at both ends (f_n = nv/2L) and for open and closed air columns, compute allowed frequencies, and connect standing waves to resonance and musical instruments.",
+      "concept_summary": "Confine waves and they organize: a wave reflecting between the fixed ends of a string meets itself coming back, and superposition of the counter-propagating pair produces a standing wave \u2014 a pattern that oscillates in place, travelling nowhere. Its anatomy is fixed points and fat loops: nodes, permanently still (destructive interference always, spaced \u03bb/2 apart), and antinodes, oscillating at doubled amplitude (constructive, midway between nodes). Confinement quantizes: a string fixed at both ends must place nodes at both boundaries, so only wavelengths fitting a whole number of half-wavelengths survive \u2014 \u03bb_n = 2L/n, hence the harmonic series f_n = nv/2L: a fundamental f\u2081 = v/2L and its integer multiples, the private frequency menu that makes a string a musical instrument (and the reason standing waves ARE resonance in bounded media: drive at a menu frequency and the pattern builds). Air columns run the same logic with different boundary rules \u2014 closed ends demand displacement nodes, open ends antinodes \u2014 so an open-open pipe (flute) carries all harmonics f_n = nv/2L while a closed-open pipe (clarinet-like; bottle) carries only odd harmonics f_n = nv/4L, its fundamental an octave below an equal open pipe. Standing waves store rather than transport energy (no net propagation \u2014 the two travelling waves' fluxes cancel) and their signatures are everywhere: string and wind instruments' pitches, microwave-oven hot spots, laser cavities, MRI coils, and \u2014 with the boundaries loosened \u2014 the vibration modes of bridges and buildings that engineers must detune from expected drivers.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Standing Waves\"",
-        "[TEMPLATE] Key idea 2 for \"Standing Waves\"",
-        "[TEMPLATE] Key idea 3 for \"Standing Waves\""
+        "Genesis: two identical counter-propagating waves (typically incident + reflection) superpose into a pattern oscillating in place \u2014 the travelling waves' motion cancels, their oscillation remains.",
+        "Anatomy: nodes (always still, \u03bb/2 apart) and antinodes (double amplitude, midway); adjacent segments oscillate in antiphase.",
+        "Quantization by boundaries: fixed string ends demand nodes \u2192 \u03bb_n = 2L/n \u2192 harmonic menu f_n = nv/2L (n = 1, 2, 3\u2026).",
+        "The fundamental f\u2081 = v/2L sets pitch; harmonics are its integer multiples \u2014 tune by tension (v = \u221a(T/\u03bc)) or length (fretting).",
+        "Air columns: open end \u2248 displacement antinode, closed end = node \u2014 open-open pipes give all harmonics (f_n = nv/2L); closed-open pipes give odd only (f_n = nv/4L), fundamental an octave lower.",
+        "Standing waves are resonance in bounded media: driving at a menu frequency pumps the mode; off-menu driving builds nothing \u2014 the resonance curve reappears with many peaks.",
+        "No net energy transport: the counter-propagating fluxes cancel; energy sloshes between kinetic and potential within each loop \u2014 stored, not shipped.",
+        "Signatures at large: instrument pitches, microwave hot spots (node/antinode grids), laser cavities, organ pipes, and structural vibration modes."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Standing Waves\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A standing wave is a wave that has stopped moving.",
+          "correction": "The PATTERN stands; the medium oscillates vigorously (antinodes at double the travelling wave's amplitude). It is two travelling waves in permanent counter-propagating superposition \u2014 motion organized, not motion ended."
+        },
+        {
+          "misconception": "A string can vibrate at any frequency you like.",
+          "correction": "Freely vibrating, it selects from its harmonic menu f_n = nv/2L \u2014 the boundary conditions admit only node-at-both-ends patterns. (You can force other frequencies by continuous driving, but response is feeble off-menu; plucking excites menu members only.)"
+        },
+        {
+          "misconception": "All pipes carry all harmonics.",
+          "correction": "Boundary rules decide: open-open pipes support the full series, but closed-open pipes support only ODD harmonics (f\u2081, 3f\u2081, 5f\u2081\u2026) \u2014 the missing evens are why a clarinet sounds hollow next to a flute and why a bottle's resonance sits an octave below an equal open tube."
+        },
+        {
+          "misconception": "Nodes are where the wave's energy has been destroyed.",
+          "correction": "Nodes are locations of permanent destructive interference in DISPLACEMENT; the energy resides in the oscillating loops between them (and at a string's nodes, the tension does its bookkeeping). Total energy is stored in the mode \u2014 the audit passes, as always with interference."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Standing Waves\""
+        "The genesis animation: incident and reflected travelling waves shown separately, then summed frame by frame into the standing pattern \u2014 nodes emerging where they always cancel.",
+        "A driven-string (Melde) demonstration or slow-motion clip: sweeping the driver frequency through f\u2081, f\u2082, f\u2083 with the loop count jumping at each menu frequency.",
+        "The harmonic gallery for a fixed-fixed string: n = 1, 2, 3, 4 patterns stacked with \u03bb_n = 2L/n and f_n labelled \u2014 the menu as a poster.",
+        "Air-column boundary cards: open-open versus closed-open pipes with displacement node/antinode positions drawn and the all-vs-odd harmonic series beside each.",
+        "A microwave-oven map: melted-chocolate or thermal-paper hot-spot grid with the \u03bb/2 spacing measured \u2014 c = f\u03bb from kitchen equipment.",
+        "A mode-shape gallery for a bridge deck or building, connecting music's standing waves to structural engineering's."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Standing Waves\"",
+        "setup": "A 0.65 m guitar string has wave speed 286 m/s (from its tension and density). (a) Find the fundamental and the next two harmonics. (b) The guitarist frets the string to 0.433 m \u2014 find the new fundamental. (c) An organ pipe open at both ends plays the same 220 Hz fundamental in air (v = 343 m/s) \u2014 find its length; then find the length if the pipe were closed at one end.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Fundamental: f\u2081 = v/2L = 286/(2 \u00d7 0.65) = 220 Hz (concert A\u2083); harmonics f\u2082 = 440 Hz, f\u2083 = 660 Hz \u2014 the integer ladder.",
+          "(b) Fretted: f\u2081' = 286/(2 \u00d7 0.433) \u2248 330 Hz \u2014 shortening by a third raises the pitch a fifth (220 \u2192 330 Hz): fretboard geometry IS the menu formula.",
+          "(c) Open-open pipe at 220 Hz: L = v/2f\u2081 = 343/440 \u2248 0.78 m.",
+          "Closed-open at the same pitch: L = v/4f\u2081 = 343/880 \u2248 0.39 m \u2014 half the length for the same note, the closed pipe's octave economy.",
+          "Contrast the two pipes' voices: the open pipe adds 440, 660 Hz\u2026; the closed pipe skips to 660, 1100 Hz\u2026 (odd only) \u2014 same fundamental, different timbre.",
+          "Collect the design rules: pitch by v and L (menu formulas); timbre by which harmonics the boundaries admit."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Standing Waves\""
+        "expected_outcome": "The student computes the 220/440/660 Hz ladder, the fretted 330 Hz, and the 0.78 m vs. 0.39 m pipe lengths, reading the all-vs-odd harmonic distinction as timbre."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "harmonic-menu computations for strings (f_n, \u03bb_n, L, or v unknown)",
+          "node/antinode counting and spacing items from mode diagrams",
+          "air-column problems across both boundary types",
+          "design and identification items (fret positions, pipe lengths, which-harmonic-is-missing)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with fundamental computations and mode-diagram reading, add higher harmonics and inversions, then air columns with boundary discrimination, ending with instrument-design and odd-only identification problems.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set on both menu formulas",
+          "mode-diagram interpretation tasks",
+          "instrument-analysis problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Standing Waves\""
+        "bloom_alignment": "Apply \u2014 students must derive and deploy the quantized frequency menus under both boundary regimes on instruments and cavities they have not rehearsed.",
+        "mastery_signal": "The student computes string and pipe harmonic series correctly (including the closed-pipe odd-only rule), reads node/antinode structure from diagrams, and solves one design inversion, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Standing Waves\""
+        "Every string and wind instrument is a standing-wave menu made playable \u2014 frets, valves, and tone holes edit L; tension pegs edit v.",
+        "Microwave ovens contain a 2.45 GHz standing-wave grid; turntables exist because nodes would otherwise leave cold spots.",
+        "Laser cavities sustain optical standing waves between mirrors; the cavity length selects the lasing frequencies.",
+        "MRI RF cavities and musical-hall acoustics manage standing-wave modes \u2014 reinforcing wanted ones, damping room 'boom' at others.",
+        "Structural engineering computes bridge and building mode shapes (standing waves in steel and concrete) to detune them from wind, footfall, and seismic driving."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.interference"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.sound-waves",
       "concept_id": "phys.wave.sound-waves",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Sound Waves\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Sound Waves\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe sound as a longitudinal pressure wave requiring a medium, relate pitch to frequency and loudness to amplitude, state the audible range and the ultrasound/infrasound extensions, use the speed of sound across media and temperature, and explain everyday acoustic phenomena (echoes, timbre, hearing).",
+      "concept_summary": "Sound is the longitudinal family's ambassador to daily life: a vibrating source \u2014 vocal folds, a string, a cone \u2014 pushes its medium into travelling trains of compression and rarefaction, which the ear decodes with astonishing sensitivity (audible pressure wiggles start around 20 \u03bcPa, a billionth of the atmosphere). The perceptual dictionary maps cleanly onto wave vocabulary: pitch is frequency (the audible window spanning roughly 20 Hz to 20 kHz, its ceiling sagging with age \u2014 with infrasound below, the province of elephants, storms, and building sway, and ultrasound above, the province of bats, dogs, and medical imaging); loudness tracks amplitude (formally intensity \u221d amplitude\u00b2, the next concept's business); and timbre \u2014 why a violin and a flute on one note sound different \u2014 is the harmonic recipe, the mix of overtones each instrument's standing-wave menu contributes. Being mechanical, sound requires a medium (the bell in the vacuum jar falls silent \u2014 space is genuinely silent) and travels at the medium's speed: ~343 m/s in 20 \u00b0C air (drifting +0.6 m/s per \u00b0C), ~1480 m/s in water, ~5000+ m/s in steel \u2014 a millionfold slower than light, the gap that delays thunder and separates an echo from its shout. Echo logic (distance = v \u00d7 round-trip-time/2) runs sonar, ultrasound imaging, and the clap-and-count of canyon walls; the ear's own machinery \u2014 eardrum driven by \u0394p, ossicles as impedance-matching levers, cochlea as frequency analyzer \u2014 closes the loop from physics to perception.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Sound Waves\"",
-        "[TEMPLATE] Key idea 2 for \"Sound Waves\"",
-        "[TEMPLATE] Key idea 3 for \"Sound Waves\""
+        "Sound = longitudinal pressure wave from a vibrating source: compression-rarefaction trains; the microphone and eardrum both read \u0394p(t).",
+        "Medium mandatory: no medium, no sound \u2014 the vacuum-jar bell; space is silent while light crosses it.",
+        "Perceptual dictionary: pitch \u2194 frequency; loudness \u2194 amplitude (intensity \u221d A\u00b2); timbre \u2194 harmonic content from the source's standing-wave menu.",
+        "Audible window: ~20 Hz\u201320 kHz (ceiling falls with age); infrasound below (elephants, storms, structures), ultrasound above (bats, sonar, medical imaging).",
+        "Speeds: ~343 m/s in air at 20 \u00b0C (+0.6 m/s per \u00b0C), ~1480 m/s water, ~5000\u20136000 m/s steel \u2014 the stiffness-over-density ladder in action.",
+        "Echo ranging: d = v\u00b7t/2 \u2014 sonar, ultrasound scans, laser-less rangefinding, and the canyon clap.",
+        "Hearing sensitivity spans a millionfold pressure range (20 \u03bcPa threshold to pain ~20 Pa) \u2014 the compression the decibel scale will tame next.",
+        "The sound-light speed gap (~10\u2076\u00d7) times thunder (3 s/km), delays stadium echoes, and syncs badly at long range \u2014 everyday evidence of v_sound."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Sound Waves\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Sound travels through empty space \u2014 movie explosions roar in vacuum.",
+          "correction": "Sound is a mechanical wave: it needs matter to compress. The vacuum-jar bell demonstration is decisive \u2014 pump the air out and the ringing fades to silence while the hammer visibly strikes. Space battles are silent; cinema adds the roar."
+        },
+        {
+          "misconception": "Higher pitch means louder sound (or louder means higher).",
+          "correction": "Pitch and loudness are independent axes: frequency versus amplitude. A piccolo can whisper at 4 kHz and a bass drum can thunder at 60 Hz \u2014 the wave's repetition rate and its size are separate dials."
+        },
+        {
+          "misconception": "Sound travels more slowly in dense media like water and metal.",
+          "correction": "The stiffness term dominates: sound runs ~4\u00d7 faster in water and ~15\u00d7 faster in steel than in air. Rail-tap arrives twice \u2014 first through the steel, then the air \u2014 with the metal signal leading."
+        },
+        {
+          "misconception": "Different instruments playing the same note produce the same wave.",
+          "correction": "They share the fundamental frequency but differ in harmonic recipe \u2014 the amplitudes of the overtones stacked on it. That spectral fingerprint is timbre, and it is why the waveforms (and the sounds) of a flute and violin at A\u2084 differ unmistakably."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Sound Waves\""
+        "The bell-in-vacuum-jar demonstration (live or filmed): sound dying with the air while the striker keeps swinging.",
+        "A microphone-plus-oscilloscope station: students see their own voices as \u0394p(t) traces \u2014 pitch as trace density, loudness as trace height, vowels as shape.",
+        "A frequency-sweep player across 20 Hz\u201320 kHz with a class hands-up census \u2014 the audible window (and its age dependence) measured live.",
+        "Same-note spectra: violin, flute, and tuning fork at A\u2084 with their harmonic bar-charts \u2014 timbre as recipe, visualized.",
+        "An echo-ranging schematic: clap, cliff, stopwatch, d = v\u00b7t/2 \u2014 then the same diagram relabelled as sonar and as obstetric ultrasound.",
+        "The rail-tap twice-heard diagram: one tap, two arrivals, two media speeds."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Sound Waves\"",
+        "setup": "Standing 850 m from a cliff on a 20 \u00b0C day (v = 343 m/s), a hiker claps. (a) When does the echo return? (b) The same clap's sound also travels through a steel pipeline (v = 5100 m/s) beside the trail to a listener 850 m away \u2014 find both arrival times at the listener and the gap. (c) The hiker's whistle is 1.7 kHz \u2014 find its wavelength in air and in the steel.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Echo round trip: t = 2d/v = 1700/343 \u2248 5.0 s \u2014 the classic five-second canyon answer at this distance.",
+          "(b) Through air (one way): 850/343 \u2248 2.48 s; through steel: 850/5100 \u2248 0.17 s.",
+          "Gap: \u2248 2.3 s \u2014 the pipeline listener hears the metal-borne clap first by over two seconds: the rail-tap effect quantified.",
+          "(c) In air: \u03bb = v/f = 343/1700 \u2248 0.20 m.",
+          "In steel: \u03bb = 5100/1700 = 3.0 m \u2014 same 1.7 kHz (source-loyal), fifteen times the wavelength in the faster medium.",
+          "Collect the themes: echo ranging (d = vt/2), the media speed ladder (heard as a time gap), and the f-fixed \u03bb-adjusts bookkeeping \u2014 three concepts in one clap."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Sound Waves\""
+        "expected_outcome": "The student computes the 5.0 s echo, the 2.3 s two-media gap, and the 0.20 m vs. 3.0 m wavelengths, naming the fixed-frequency bookkeeping across media."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "echo and ranging computations (d = vt/2, two-media gaps)",
+          "wavelength/frequency computations across the audible window and media",
+          "perceptual-dictionary items (pitch/loudness/timbre mapping)",
+          "temperature and medium reasoning (cold-day speeds, why space is silent)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with v = f\u03bb and echo computations, add two-media and temperature variants, then perceptual mapping and spectra reading, ending with integrated scenario problems (thunder ranging, rail-tap, ultrasound depth).",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "perception-physics mapping quiz",
+          "scenario-analysis problems"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Sound Waves\""
+        "bloom_alignment": "Understand \u2014 students must explain sound's mechanism, medium dependence, and perceptual dictionary, supported by ranging and wavelength computations.",
+        "mastery_signal": "The student computes echoes and wavelengths across media, maps pitch/loudness/timbre onto wave properties correctly, and explains the medium requirement, at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Sound Waves\""
+        "Medical ultrasound images organs and fetuses by megahertz echo ranging in tissue \u2014 sonar at the bedside.",
+        "Sonar maps seabeds, finds fish shoals, and guides submarines with underwater compression waves.",
+        "Concert-hall and studio acoustics engineer reflections, absorption, and reverberation \u2014 applied echo physics.",
+        "Thunder ranging (3 s/km), avalanche infrasound monitoring, and elephant-call research use the low end of the spectrum.",
+        "Noise control \u2014 from headphone seals to highway barriers \u2014 manages pressure-wave paths through and around media."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.wave-properties"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 9 Ch.12"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.sound-intensity",
       "concept_id": "phys.wave.sound-intensity",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Sound Intensity and the Decibel Scale\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Sound Intensity and the Decibel Scale\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define sound intensity as power per unit area, apply the inverse-square law for point sources, convert between intensity and decibel level using \u03b2 = 10 log(I/I\u2080), manipulate the logarithmic scale (+10 dB per \u00d710 intensity, +3 dB per doubling), and connect levels to hearing thresholds, damage risk, and distance.",
+      "concept_summary": "Loudness needs numbers, and two scales share the work. Physically, sound intensity I is power crossing unit area (W/m\u00b2): a point source's power P spreads over ever-larger spheres, giving the inverse-square law I = P/4\u03c0r\u00b2 \u2014 double the distance, quarter the intensity \u2014 the geometric dilution that makes distance the cheapest noise control. Human hearing, though, spans a preposterous range \u2014 from the threshold I\u2080 = 10\u207b\u00b9\u00b2 W/m\u00b2 to painful ~1 W/m\u00b2, twelve orders of magnitude \u2014 and perceives ratios rather than differences, so acoustics adopts the logarithmic decibel scale: \u03b2 = 10 log\u2081\u2080(I/I\u2080), placing threshold at 0 dB, whisper ~30, conversation ~60, heavy traffic ~85 (the occupational-damage frontier), rock concerts ~110, and pain ~120\u2013130 dB. The scale's arithmetic is the skill: each \u00d710 in intensity adds 10 dB, each doubling adds ~3 dB, and equal dB steps are equal intensity RATIOS \u2014 so 60 dB is not 'twice' 30 dB but a thousand times its intensity, and two equal machines together add 3 dB, not double the number. Combined with the inverse-square law, decibels compute distance effects directly: doubling distance subtracts ~6 dB (quartered intensity), which is why moving away beats ear-covering. Intensity also closes the amplitude loop \u2014 I \u221d (pressure amplitude)\u00b2, inheriting the A\u00b2 energy scaling from oscillations \u2014 and the dB toolkit generalizes across engineering (signal chains, attenuation) far beyond acoustics; hearing-conservation limits (e.g. ~85 dB for 8-hour exposure, halving time per +3 dB) turn the arithmetic into occupational health.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Sound Intensity and the Decibel Scale\"",
-        "[TEMPLATE] Key idea 2 for \"Sound Intensity and the Decibel Scale\"",
-        "[TEMPLATE] Key idea 3 for \"Sound Intensity and the Decibel Scale\""
+        "Intensity I = P/A (W/m\u00b2): acoustic power through unit area \u2014 the physical loudness variable, \u221d (pressure amplitude)\u00b2.",
+        "Point-source spreading: I = P/4\u03c0r\u00b2 \u2014 inverse-square dilution; \u00d72 distance \u2192 \u00bc intensity (\u22126 dB).",
+        "Decibel definition: \u03b2 = 10 log\u2081\u2080(I/I\u2080) with I\u2080 = 10\u207b\u00b9\u00b2 W/m\u00b2 (hearing threshold at 0 dB) \u2014 a ratio scale matched to perception.",
+        "Scale arithmetic: +10 dB per \u00d710 intensity; +3 dB per doubling; equal dB steps = equal ratios \u2014 never treat dB as additive intensity.",
+        "Landmark ladder: 0 threshold, 30 whisper, 60 conversation, 85 damage frontier, 110 concert, 120\u2013130 pain \u2014 calibration worth memorizing.",
+        "Two equal sources: +3 dB, not double-the-number; ten equal sources: +10 dB \u2014 the logarithm compresses crowds.",
+        "Hearing conservation: ~85 dB(A)/8 h with exposure time halving per +3 dB \u2014 the arithmetic as occupational law.",
+        "Perceived loudness roughly doubles per +10 dB \u2014 perception's own compression atop the physics."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Sound Intensity and the Decibel Scale\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Decibels add like intensities \u2014 two 60 dB machines make 120 dB.",
+          "correction": "Doubling intensity adds 3 dB: two 60 dB machines give 63 dB. Decibels are logarithms of ratios; adding the numbers multiplies the ratios \u2014 120 dB would be a million times the intensity of the pair."
+        },
+        {
+          "misconception": "60 dB is twice as intense as 30 dB.",
+          "correction": "It is 10\u00b3 = 1000 times the intensity: every 10 dB is a factor of ten. Equal dB DIFFERENCES are equal intensity RATIOS \u2014 the whole scale is multiplicative."
+        },
+        {
+          "misconception": "Doubling distance halves the intensity.",
+          "correction": "Spherical spreading is inverse-SQUARE: double distance quarters intensity (\u22126 dB). The energy dilutes over area, and area grows with r\u00b2 \u2014 the same geometry as gravity's dilution."
+        },
+        {
+          "misconception": "0 dB means no sound at all.",
+          "correction": "0 dB marks the reference threshold I\u2080 = 10\u207b\u00b9\u00b2 W/m\u00b2 \u2014 a real, barely audible sound. Negative decibels exist (quieter than threshold, inaudible to humans but measurable); silence would be \u2212\u221e dB."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Sound Intensity and the Decibel Scale\""
+        "The expanding-spheres diagram: one source's power painted over 1\u00d7, 4\u00d7, 9\u00d7 areas at r, 2r, 3r \u2014 inverse-square as geometry, with the \u22126 dB per doubling annotated.",
+        "A logarithmic ladder poster: the 0\u2013130 dB landmarks with intensity values alongside \u2014 twelve orders of magnitude on one staircase.",
+        "A sound-level-meter walk: measuring the classroom, corridor, and street, then verifying the \u22126 dB distance rule against a portable speaker.",
+        "The two-machines demo: one, then two identical buzzers metered \u2014 the +3 dB surprise measured live.",
+        "An exposure-time chart: 85 dB/8 h halving per +3 dB down to minutes at concert levels \u2014 the arithmetic as a safety card."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Sound Intensity and the Decibel Scale\"",
+        "setup": "A speaker radiates P = 0.50 W uniformly (point source). (a) Find the intensity and dB level at 2.0 m. (b) At what distance does the level fall to 70 dB? (c) A second identical speaker joins at the same location \u2014 find the new level at 2.0 m. (d) How many such speakers would reach 100 dB at 2.0 m?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) I = P/4\u03c0r\u00b2 = 0.50/(4\u03c0 \u00d7 4) \u2248 9.95 \u00d7 10\u207b\u00b3 W/m\u00b2; \u03b2 = 10 log(9.95 \u00d7 10\u207b\u00b3/10\u207b\u00b9\u00b2) \u2248 10 log(10\u00b9\u2070) = 100 dB \u2014 concert-loud at two metres.",
+          "(b) 70 dB means I = 10\u207b\u2075 W/m\u00b2; r = \u221a(P/4\u03c0I) = \u221a(0.50/(4\u03c0 \u00d7 10\u207b\u2075)) \u2248 \u221a3979 \u2248 63 m \u2014 a 30 dB drop needs ~32\u00d7 the distance (10^{30/20}), matching \u22126 dB per doubling five times.",
+          "(c) Two speakers double I: +3 dB \u2192 103 dB at 2.0 m \u2014 not 200 dB.",
+          "(d) 100 dB is already achieved by ONE speaker at 2.0 m (from part a) \u2014 so one suffices; the instructive variant: from a single 90 dB speaker, reaching 100 dB needs \u00d710 intensity = 10 speakers. State the rule: +10 dB per tenfold source count.",
+          "Audit the arithmetic pattern: \u00d72 sources \u2192 +3 dB; \u00d710 \u2192 +10 dB; \u00d72 distance \u2192 \u22126 dB \u2014 the three moves that solve the whole topic.",
+          "Safety footnote: at 100+ dB, permissible exposure is minutes \u2014 the ladder's upper rungs carry occupational limits, not just adjectives."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Sound Intensity and the Decibel Scale\""
+        "expected_outcome": "The student computes 100 dB at 2 m, the 63 m radius for 70 dB, +3 dB for the doubled source, and deploys the \u00d710-sources/+10 dB rule, reciting the three-move arithmetic."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "intensity and dB computations in both directions",
+          "inverse-square distance problems (find I, r, or \u0394dB)",
+          "source-combination items (2, 10, N equal sources)",
+          "exposure and landmark-calibration questions"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with definition computations and dB conversions, add distance and combination moves, then mixed multi-step scenarios (move away AND add sources), ending with exposure-limit reasoning.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with logarithm discipline",
+          "scenario problems (venues, workplaces)",
+          "conceptual quiz on the ratio scale"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Sound Intensity and the Decibel Scale\""
+        "bloom_alignment": "Apply \u2014 students must execute the logarithmic and inverse-square arithmetic fluently across realistic acoustic scenarios.",
+        "mastery_signal": "The student converts I \u2194 dB both ways, applies the three arithmetic moves (+3, +10, \u22126 dB) correctly in combination, and passes the two-machines trap, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Sound Intensity and the Decibel Scale\""
+        "Occupational hearing conservation is dB arithmetic in law: 85 dB(A)/8 h limits, exposure halving per +3 dB, mandatory protection above.",
+        "Concert, venue, and festival sound design budgets speaker counts and distances in exactly the +3/+10/\u22126 dB moves.",
+        "Environmental noise regulation (aircraft corridors, highways, night-time limits) is written and enforced in decibels.",
+        "Audiology measures hearing loss as threshold shifts in dB; hearing aids amplify by prescribed dB gains per frequency band.",
+        "The dB toolkit runs far beyond sound: signal chains, antenna gains, and attenuation budgets across electrical engineering."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.sound-waves"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.doppler-effect",
       "concept_id": "phys.wave.doppler-effect",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Doppler Effect\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Doppler Effect\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain the Doppler effect as frequency shift from relative motion of source and observer, apply f' = f(v \u00b1 v_o)/(v \u2213 v_s) with correct sign choices, distinguish source motion (wavelength change) from observer motion (encounter-rate change), compute shifts for standard scenarios, and connect the effect to radar, medicine, and astronomy.",
+      "concept_summary": "The Doppler effect is motion written into frequency: when a sound source and an observer approach each other, the observer receives more wave crests per second than the source emits \u2014 higher pitch; when they recede, fewer \u2014 lower pitch: the passing ambulance's signature eee-aww. The mechanism differs instructively by who moves. A moving SOURCE chases its own forward wavefronts, physically compressing wavelengths ahead (and stretching them behind) \u2014 the medium's wave pattern itself is distorted; a moving OBSERVER leaves the pattern untouched but changes the encounter rate, sweeping crests up faster when approaching. Both effects live in one master formula, f' = f(v \u00b1 v_o)/(v \u2213 v_s), where v is the sound speed in the medium, v_o the observer's speed, v_s the source's \u2014 with the sign discipline that carries every problem: choose signs so approach raises f' and recession lowers it (numerator +v_o for observer approaching; denominator \u2212v_s for source approaching). The asymmetry between the cases is real physics, not bookkeeping: at equal speeds the moving-source shift differs from the moving-observer shift (the medium referees), and as v_s \u2192 v the forward wavefronts pile into the sonic-boom cone \u2014 the formula's divergence made audible. The effect's reach is enormous: police and weather radar read speeds from reflected-wave shifts (a double Doppler), medical ultrasound maps blood flow the same way, bats and dolphins hunt with it, and light's version \u2014 governed by relativity but analogous in spirit \u2014 delivers the redshifts on which the expanding universe was discovered.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Doppler Effect\"",
-        "[TEMPLATE] Key idea 2 for \"Doppler Effect\"",
-        "[TEMPLATE] Key idea 3 for \"Doppler Effect\""
+        "Effect: relative approach raises received frequency, recession lowers it \u2014 the moving-siren signature; shift size grows with speed.",
+        "Two mechanisms: moving source compresses/stretches the wavelengths in the medium (pattern distorted); moving observer changes the crest-encounter rate (pattern intact).",
+        "Master formula: f' = f(v \u00b1 v_o)/(v \u2213 v_s) \u2014 v is the medium's sound speed; signs chosen so approach \u2192 f' up, recession \u2192 f' down.",
+        "Sign discipline: observer approaching \u2192 +v_o (numerator); source approaching \u2192 \u2212v_s (denominator); reverse both for recession \u2014 reason from the physics each time.",
+        "The asymmetry is real: equal speeds give different shifts for moving-source vs. moving-observer \u2014 the medium provides the reference frame for sound.",
+        "The pass-by: pitch is high (constant) on approach, drops THROUGH the true frequency at closest passage, low (constant) on recession \u2014 the listener never hears f itself except at the instant of passing.",
+        "Limits: v_s \u2192 v piles wavefronts into the Mach cone (sonic boom) \u2014 the denominator's divergence; supersonic sources outrun their own sound.",
+        "Reflected-wave (double) Doppler: radar and medical ultrasound shift twice \u2014 out and back \u2014 doubling sensitivity to target speed; light's analogue delivers astronomical redshifts."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Doppler Effect\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The siren's pitch drops because the ambulance's engine slows or the sound tires with distance.",
+          "correction": "The source emits one fixed frequency throughout; the RECEIVED frequency depends on relative motion \u2014 high while approaching, low while receding, stepping down as it passes. Loudness fades with distance; pitch shifts with velocity \u2014 different variables, different physics."
+        },
+        {
+          "misconception": "The pitch rises continuously as the source gets closer.",
+          "correction": "For constant approach speed the shifted pitch is CONSTANT (a steady higher note); it does not climb with proximity. The drama is the step DOWN through the true frequency as the source passes \u2014 approach pitch and recession pitch are two plateaus, not a crescendo."
+        },
+        {
+          "misconception": "Only the relative speed matters \u2014 moving source at 30 m/s equals moving observer at 30 m/s.",
+          "correction": "For sound the medium referees: the two cases give different shifts at equal speeds (compare f\u00b7v/(v\u221230) with f\u00b7(v+30)/v). Sound's Doppler is medium-anchored; only light's relativistic Doppler depends purely on relative velocity."
+        },
+        {
+          "misconception": "Doppler shift changes the sound's speed.",
+          "correction": "The wave still travels at the medium's v (343 m/s in air) regardless of source or observer motion. What shifts are wavelength and received frequency \u2014 their product stays the medium's speed. (The source can outrun its sound; the sound cannot hurry.)"
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Doppler Effect\""
+        "The classic wavefront-circles diagram: stationary source (concentric) versus moving source (compressed ahead, stretched behind) versus supersonic (Mach cone) \u2014 the whole topic in three panels.",
+        "A pass-by frequency-versus-time trace: the two plateaus and the step through f at closest approach, synced to an ambulance audio clip.",
+        "An interactive with source- and observer-speed sliders showing the received frequency and the (asymmetric) two-case comparison at equal speeds.",
+        "The double-Doppler radar cartoon: outgoing shift on reception by the car, return shift on reflection \u2014 speed from the summed shift.",
+        "A galaxy-spectrum pair: laboratory lines versus a receding galaxy's redshifted lines \u2014 the effect at cosmological scale (with the relativistic caveat noted)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Doppler Effect\"",
+        "setup": "An ambulance siren emits 700 Hz on a 343 m/s day. (a) Find the frequency heard by a stationary pedestrian as the ambulance approaches at 25 m/s, and after it passes. (b) Find the frequency heard if instead the ambulance is parked and the pedestrian drives toward it at 25 m/s. (c) Compare (a)-approach with (b) and explain the difference.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Approach (source moving, observer still): f' = f\u00b7v/(v \u2212 v_s) = 700 \u00d7 343/318 \u2248 755 Hz \u2014 a steady higher plateau.",
+          "Recession: f' = 700 \u00d7 343/368 \u2248 652 Hz \u2014 the step down through 700 Hz at the pass is 755 \u2192 652, about a whole tone and a half.",
+          "(b) Observer moving toward parked source: f' = f(v + v_o)/v = 700 \u00d7 368/343 \u2248 751 Hz.",
+          "(c) Compare: 755 Hz (source moving) vs. 751 Hz (observer moving) at the same 25 m/s \u2014 unequal, because the moving source distorts the wave pattern itself (shorter \u03bb ahead) while the moving observer merely samples an undistorted pattern faster.",
+          "Verify the sign discipline: both scenarios describe approach, and both formulas raised f' \u2713; recession would flip both signs and lower it.",
+          "Generalize: at speeds \u226a v the two cases converge (\u0394f/f \u2248 v_rel/v \u2248 7% here shows the gap already); as v_s \u2192 v the source case diverges toward the boom \u2014 the asymmetry's two ends."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Doppler Effect\""
+        "expected_outcome": "The student computes 755/652 Hz for the pass-by and 751 Hz for the moving observer, explains the 755-vs-751 asymmetry mechanistically, and states the sign discipline as physics rather than memorization."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "single-motion computations (each case, both directions)",
+          "pass-by problems (both plateaus and the step)",
+          "asymmetry and mechanism explanation items",
+          "application problems (radar double-shift, ultrasound flow, redshift reading)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with one-mover computations and sign drills, add pass-by plateaus and both-moving cases, then asymmetry explanations, ending with reflected-wave and astronomical applications.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with sign-discipline requirements",
+          "mechanism-explanation tasks",
+          "application-analysis problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Doppler Effect\""
+        "bloom_alignment": "Apply \u2014 students must choose the correct formula configuration from the physical situation and execute the shift computations across the standard scenario family.",
+        "mastery_signal": "The student computes shifts for all four single-motion cases with correct signs, produces both pass-by plateaus, and explains the source/observer asymmetry, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Doppler Effect\""
+        "Police radar and speed cameras read vehicle speeds from the double Doppler shift of reflected microwaves.",
+        "Doppler ultrasound maps blood flow and fetal heartbeats \u2014 the shift from moving red blood cells, imaged in colour.",
+        "Weather radar's Doppler mode reads wind fields inside storms, and tornado rotation signatures trigger warnings.",
+        "Bats, dolphins, and sonar systems compensate for their own motion via Doppler when echolocating prey and terrain.",
+        "Astronomy's redshifts and blueshifts \u2014 exoplanet wobbles, binary-star orbits, the expanding universe \u2014 are the effect's grandest ledger (relativistic for light, Doppler in spirit)."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.sound-waves"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.wave.beats",
       "concept_id": "phys.wave.beats",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Beats and Beat Frequency\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Beats and Beat Frequency\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain beats as the slow amplitude modulation produced by superposing waves of nearly equal frequencies, apply f_beat = |f\u2081 \u2212 f\u2082|, describe the alternation of constructive and destructive interference in time, use beats for tuning and small-frequency-difference measurement, and resolve the two-sided ambiguity of a beat measurement.",
+      "concept_summary": "Beats are interference played out in time instead of space: superpose two tones of NEARLY equal frequencies and, at any fixed listening point, the two waves drift slowly in and out of step \u2014 momentarily crest-on-crest (loud), then, as the higher-frequency wave gains phase, crest-on-trough (quiet), then loud again. The result is a single tone of intermediate pitch (the average frequency) whose loudness pulses \u2014 waxing and waning \u2014 at the beat frequency f_beat = |f\u2081 \u2212 f\u2082|: two tones of 440 and 443 Hz beat three times per second. The formula's simplicity hides its power as a measuring instrument: the ear cannot tell 440 from 442 Hz directly, but it counts the 2 Hz pulsation effortlessly \u2014 beats convert a tiny frequency DIFFERENCE into a slow, audible rhythm, which is precisely how musicians tune (adjust until the beats slow and vanish: zero beat = unison) and how piano technicians, radio engineers (heterodyning), and even Doppler flow meters extract small differences from pairs of nearly equal frequencies. Two disciplines complete the concept. First, the absolute value carries an ambiguity: 3 Hz of beating against a 440 Hz reference means the other source is 437 OR 443 Hz \u2014 resolved by nudging one frequency and watching whether the beats speed up or slow down. Second, beats are audible as loudness pulsation only while the difference is small (up to ~10\u201315 Hz); push the difference further and the pulsation blurs into roughness and then into two distinct tones \u2014 the phenomenon's honest domain. Mathematically, beats are the superposition identity cos(2\u03c0f\u2081t) + cos(2\u03c0f\u2082t) = 2cos(2\u03c0f_beat t/2)\u00b7cos(2\u03c0f_avg t): a carrier at the average frequency inside a slow amplitude envelope \u2014 the same envelope idea met in damping, now periodic.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Beats and Beat Frequency\"",
-        "[TEMPLATE] Key idea 2 for \"Beats and Beat Frequency\"",
-        "[TEMPLATE] Key idea 3 for \"Beats and Beat Frequency\""
+        "Beats = interference in time: at one point, two nearly-equal-frequency waves alternate between in-step (loud) and out-of-step (quiet) as their phases drift apart and realign.",
+        "Beat frequency: f_beat = |f\u2081 \u2212 f\u2082| \u2014 the loudness pulses per second equal the frequency difference; the heard pitch is the average (f\u2081 + f\u2082)/2.",
+        "The envelope picture: sum = carrier at f_avg inside a slow envelope; two loudness maxima per envelope cycle give f_beat = \u0394f exactly.",
+        "Measurement power: the ear (or a detector) counts slow pulsations easily, converting imperceptible frequency differences into countable rhythm \u2014 a difference amplifier built from superposition.",
+        "Tuning by zero beat: adjust one source until beats slow, crawl, and vanish \u2014 silence of the pulsation certifies unison; the method of orchestras, piano tuners, and radio heterodynes.",
+        "The two-sided ambiguity: |\u0394f| = 3 Hz against 440 Hz means 437 or 443 Hz \u2014 resolve by perturbing one frequency and watching the beat rate's response.",
+        "Audibility domain: clean beats up to ~10\u201315 Hz difference; beyond, roughness, then two separate tones \u2014 beats are a small-difference phenomenon.",
+        "Family placement: superposition's third costume \u2014 interference organizes amplitude in space, standing waves in bounded space, beats in time."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Beats and Beat Frequency\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Beats are two pitches heard alternately, or a new note at the beat frequency.",
+          "correction": "The ear hears ONE pitch \u2014 the average frequency \u2014 whose LOUDNESS pulses at f_beat. (Only at large beat rates, beyond the beating regime, do two tones separate; and only in special nonlinear circumstances does a difference TONE appear.) Beats are amplitude modulation, not melody."
+        },
+        {
+          "misconception": "The beat frequency is the average of the two frequencies.",
+          "correction": "It is the DIFFERENCE: f_beat = |f\u2081 \u2212 f\u2082|. The average sets the heard pitch; the difference sets the pulsation rate. 440 + 444 Hz gives a 442 Hz tone beating 4 times per second \u2014 two numbers, two jobs."
+        },
+        {
+          "misconception": "Hearing 3 beats per second against a 440 Hz fork tells you the other source is 443 Hz.",
+          "correction": "It tells you 443 OR 437 Hz \u2014 the absolute value hides the sign. Resolve by tightening the string slightly: if the beats slow, you were below (437 side) and are approaching; if they quicken, you were above. One perturbation disambiguates."
+        },
+        {
+          "misconception": "Beats occur for any two frequencies played together.",
+          "correction": "Perceptible beating needs NEARLY equal frequencies (differences up to ~10\u201315 Hz). Larger gaps blur into roughness and then resolve as two distinct pitches \u2014 a major third doesn't beat; it harmonizes. Beats are the physics of the almost-unison."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Beats and Beat Frequency\""
+        "The three-panel construction: wave 1, wave 2 (slightly different f), and their sum showing the slow envelope \u2014 with in-step and out-of-step instants flagged along the time axis.",
+        "A live two-oscillator demonstration (signal generators or phone apps at 440/443 Hz): students count the beats, then close the gap to zero beat by ear.",
+        "An envelope-with-carrier animation: the fast f_avg oscillation riding inside the slow |\u0394f| envelope, loudness meter pulsing in step.",
+        "A tuning-session clip: guitarist or piano technician beating a string against a reference, beats audibly slowing to silence at unison.",
+        "The ambiguity flowchart: 3 Hz beats \u2192 two candidates \u2192 nudge sharp \u2192 beats faster? (was above) / slower? (was below) \u2014 the disambiguation as a decision tree."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Beats and Beat Frequency\"",
+        "setup": "A violinist tunes her A string against a 440 Hz tuning fork and hears 4 beats per second. (a) What are the possible string frequencies? (b) She tightens the string slightly (raising its frequency) and the beat rate rises to 6 per second \u2014 determine the original frequency and the current one. (c) What should she do now, and what will she hear as she approaches perfect tune? (d) If instead she had heard the beats slow to 2 per second on tightening, what was the original frequency?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) f_beat = |f_string \u2212 440| = 4 Hz \u21d2 f_string = 436 Hz or 444 Hz \u2014 the two-sided ambiguity stated.",
+          "(b) Tightening RAISES f_string. The beats sped up (4 \u2192 6 Hz), so the difference GREW: she was already above 440 \u2014 originally 444 Hz, now 446 Hz.",
+          "(c) She should loosen the string (lower f). As f_string descends toward 440, the beats slow \u2014 6, 4, 2, 1 per second, then a slow breathing, then none: zero beat is unison, and the pulsation's death is the tuning certificate.",
+          "(d) Alternative: beats slowing on tightening means the difference SHRANK \u2014 she was below: originally 436 Hz (now 438 Hz, 2 beats), and continued tightening leads through zero beat at 440.",
+          "Collect the method: count beats for |\u0394f|; perturb once for the sign; steer toward zero beat \u2014 three steps, no electronics.",
+          "Note the sensitivity: the ear resolves the 1 Hz endgame effortlessly as a slow wobble \u2014 a 0.2% frequency discrimination delivered by counting, the measurement power of the phenomenon."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Beats and Beat Frequency\""
+        "expected_outcome": "The student produces both candidates (436/444), uses the perturbation response to select 444, prescribes loosening toward zero beat, and solves the mirrored case \u2014 the complete tune-by-beats protocol."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "beat-frequency computations and inversions (find f_beat, or the unknown source pair)",
+          "ambiguity-resolution problems (perturb-and-observe reasoning)",
+          "tuning-protocol scenarios (steer to zero beat)",
+          "conceptual items on the envelope picture and the audibility domain"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct |\u0394f| computations and average-pitch identification, add two-candidate inversions, then perturbation-logic problems, ending with envelope interpretation and domain-boundary judgments.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation and inversion set",
+          "tuning-scenario reasoning problems",
+          "conceptual quiz on the envelope and domain"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Beats and Beat Frequency\""
+        "bloom_alignment": "Apply \u2014 students must run the beat relation in both directions and execute the perturbation protocol that resolves its ambiguity in tuning scenarios.",
+        "mastery_signal": "The student computes beat frequencies, states both candidates unprompted, resolves the sign by perturbation reasoning, and identifies the heard pitch as the average, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Beats and Beat Frequency\""
+        "Musicians and piano technicians tune by beats daily \u2014 zero beat against a reference is the oldest precision-frequency instrument.",
+        "Radio heterodyning mixes signals to produce difference frequencies \u2014 the beat principle inside every superheterodyne receiver since the 1920s.",
+        "Doppler flow and vibration measurement beats the reflected wave against the original; the beat rate reads the target's speed.",
+        "Twin-engine aircraft and ships synchronize propellers by nulling the audible beat between them \u2014 passenger comfort by zero beat.",
+        "Precision metrology beats lasers and atomic clocks against references, counting hertz-level differences between terahertz oscillators \u2014 the concept at its most exquisite."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.interference"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "783f31a",
+        "source_references": [
+          "NCERT Physics Class 11 Ch.15"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.nature-of-light",
