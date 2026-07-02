@@ -182,6 +182,17 @@
   Bible consolidation only (§6.11 Assessment, §2/§6.9 AI Independence,
   §6.4 Curriculum Mapping, §6.10 Scalability, §6.12 Validation & QA,
   §10.1 Governance). Full evidence in Bible §10.2.
+  **ADR 10 complete (2026-07-02):** Student Memory Architecture. Eight
+  fragmented memory surfaces redesigned as six formally owned stores
+  (Session/Student/Knowledge/Teaching/Brain/Long-term) with single-writer
+  invariant. Key proposals: `ConceptMasteryRecord` table (mastery/decay
+  split: `masteryScore` vs. `decayedScore = masteryScore × exp(-Δt/halfLife)`),
+  `BrainConfig` versioned policy store (replaces hardcoded constants),
+  `ActiveMisconception` table (replaces scattered MistakeRecord reads),
+  `SessionMemory` typed schema (formalizes `contextSnapshot` JSONB fields).
+  4-phase additive migration (add→migrate readers→migrate writers→deprecate).
+  Bible updated: §3 row #6, §6.5, §7 (R9 partially resolved, R14 added), §9 ADR index.
+  Full design: `docs/architecture/ADR_10_STUDENT_MEMORY_ARCHITECTURE.md`.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

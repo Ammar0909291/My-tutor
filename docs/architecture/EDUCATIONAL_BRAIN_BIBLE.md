@@ -100,7 +100,7 @@ see ADR 03).
 | 3 | Generic Subject Adapter | Knowledge | `curriculum/subjectKgAdapter.ts` | LIVE | ADR 05 (2 fields unexposed), ADR 06 |
 | 4 | Knowledge Graph Validator | Knowledge | `scripts/validate-knowledge-graph.ts` | LIVE (manual CLI, no CI wiring) | ADR 06 |
 | 5 | Subject Knowledge Graphs (data) | Knowledge | `docs/{subject}/kg/graph.json` × 5 | LIVE (Curriculum Production Pipeline authority) | ADR 06 |
-| 6 | Student Memory Engine | Memory | `memory/{repository,service,update-pipeline,types}.ts` | LIVE | — (ADR 10 upcoming) |
+| 6 | Student Memory Engine | Memory | `memory/{repository,service,update-pipeline,types}.ts` | LIVE | ADR 10 (six-store taxonomy proposed: Session/Student/Knowledge/Teaching/Brain/Long-term; `ConceptMasteryRecord` + `BrainConfig` tables proposed; single-writer ownership rule formalized) |
 | 7 | Mastery Intelligence | Mastery | `school/adaptive/masteryIntelligence.ts` | LIVE, School-Mode-only | ADR 07 (Library extension proposed) |
 | 8 | Assessment Intelligence | Assessment | `school/adaptive/assessmentIntelligence.ts` | LIVE | — |
 | 9 | Subject Assessment Requirements | Assessment | `assessment/subjectValidator.ts` | LIVE | — |
@@ -352,9 +352,35 @@ submit routes, never the chat turn itself). Repository → `service.ts`
 `TeachingMemorySnapshot` → Teaching Engine input. Writes are idempotent
 upserts to `RetentionMetric`/`ReviewSchedule` only — the only two tables
 this engine writes, per Permanent Rule 14. **Full detail: `DATA_FLOW.md`
-§6.** A dedicated audit of the long-term learner model — persistent vs.
-short-term memory, retrieval strategy, a forgetting model, and how
-evidence updates flow into it — is roadmap item #5, **ADR 10, upcoming**.
+§6.**
+
+**ADR 10 finding (Student Memory Architecture, roadmap item #5 — DONE):**
+the current codebase has at least eight distinct memory surfaces
+(`TopicProgress`, `RetentionMetric`, `ReviewSchedule`, `MistakeRecord`,
+`LearningProfile`, `LearnSession`, `Message`, `contextSnapshot`) with no
+common contract and no consistent single-writer ownership — `TopicProgress`
+has four known writers and is the most bug-prone; `RetentionMetric`/
+`ReviewSchedule` enforce single-writer ownership (Permanent Rule 14) and
+are the most reliable. The live code also conflates *best-ever mastery*
+with *current retention* using a single flat `masteryPct < 70` threshold
+(`memory/types.ts:9`). **PROPOSED, ADR 10:** six formally owned memory
+stores — (1) **Session Memory** (`contextSnapshot` JSONB, Redis TTL,
+per-turn typed `SessionMemory` schema with `currentConceptId`,
+`lessonStageProgress`, `pendingProbeId`, `activeMisconceptionsThisSession`,
+etc.), (2) **Student Memory** (Postgres, forever, new `ConceptMasteryRecord`
+table: `masteryScore`, `decayedScore = masteryScore × exp(-Δt/halfLife)`,
+`masteryConfidence`, `masteryLevel`, `lastProbeOutcome`, `sampleSize`;
+`ActiveMisconception` table replacing scattered `MistakeRecord` reads),
+(3) **Knowledge Memory** (KG read-only, ADR 06), (4) **Teaching Memory**
+(Evidence Engine writes, ADR 13), (5) **Brain Memory** (`BrainConfig`
+versioned config store replacing all hardcoded policy constants:
+`masteryThresholds`, `strategySignalWeights`, `visualPolicyByStrategy`,
+`probeTargetFrequency`), (6) **Long-term Memory** (cold Parquet storage,
+Phase 3). Single-writer ownership is the architectural invariant: only
+one component may write each table; readers are many. Mastery update
+formula: `masteryScore += step × probeDifficulty × (1 − masteryScore)`
+(correct); `masteryScore −= step × masteryScore` (incorrect). All blocked
+on KG v1 freeze + explicit approval, same governance gate as ADR 06–09.
 
 ### 6.6 Evidence flow
 
@@ -481,7 +507,8 @@ this section is the cross-cutting summary, not a replacement for them.
 | R6 | No CI wiring for the Knowledge Graph Validator — a malformed `graph.json` could reach runtime undetected | Open | ADR 06 finding | PROPOSED 4-part gate in ADR 06, blocked on KG v1 freeze |
 | R7 | Five non-unified mastery/progression vocabularies risk further silent drift the longer they're not bridged | Open, partially mitigated by documentation | ADR 07 Finding 8 | PROPOSED mapping table, unexecuted |
 | R8 | No centrally specified scalability target (learner count, sharding, caching tier) | Open | §6.10 | To be specified across ADR 10 (Memory) and ADR 13 (AI cost) |
-| R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | Open, audit deferred | §6.6 | Scoped into ADR 10 |
+| R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **Partially resolved, ADR 10** — audit confirmed both are in Prisma schema; `EvidenceRecord` consumed by visual-mastery subsystem (not the canonical Teaching pipeline); `EbEvidenceEvent` is dormant Eb* only; full reconciliation deferred to ADR 13 (Evidence Engine) | §6.6, ADR 10 §5 | Scoped into ADR 13 |
+| R14 | `TopicProgress` multi-writer migration risk: migrating four known writers to `ConceptMasteryRecord` single-writer ownership is the highest-risk phase of ADR 10; a partially-migrated state (some writers on old table, some on new) could produce split-brain mastery reads | Open, gated | ADR 10 §10 (Migration Strategy §2c) | 4-phase additive migration (add → migrate readers → migrate writers → deprecate): never cut over atomically; canonical fallback is whichever table has a value; `masteryConfidence = 0.0` flags old-table-derived scores during transition |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
@@ -552,7 +579,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 07 | Mastery Intelligence Architecture | **Proposal, blocked on KG v1 freeze** | Five non-unified mastery/progression representations; `MasteryLevel` designated canonical |
 | ADR 08 | Teaching Action Intelligence (roadmap 3/8) | **Proposal, blocked on KG v1 freeze** | The concrete Action layer (`decide()`→TAG→Composer) is School-Mode-only in practice despite being mode-agnostic by construction; Library extension proposed, Posture/Action layer relationship formalized |
 | ADR 09 | Dynamic Lesson Composition (roadmap 4/8) | **Proposal, blocked on KG v1 freeze** | `composeLessonPlan()` has zero persisted cross-turn stage continuity; proposes generalizing the proven Worked Examples tag-emit/parse/persist/resume pattern via `contextSnapshot.lessonStageProgress` + a `planSignature` continuation/replan fingerprint |
-| ADR 10 | Student Memory Evolution (roadmap 5/8) | Not started | — |
+| ADR 10 | Student Memory Architecture (roadmap 5/8) | **Proposal, blocked on KG v1 freeze** | Eight fragmented memory surfaces with no common contract and four writers to `TopicProgress`; `masteryPct < 70` conflates mastery and retention; proposes six formally owned stores with single-writer invariant, `ConceptMasteryRecord` (mastery/decay split), `BrainConfig` (versioned policy constants), and a 4-phase additive migration |
 | ADR 11 | Recommendation Intelligence (roadmap 6/8) | Not started | — |
 | ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | Not started | — |
 | ADR 13 | AI Independence Roadmap (roadmap 8/8) | Not started | — |
@@ -786,3 +813,15 @@ Assessment) — not due yet.
   §6.12 Validation & QA, §10.1 Governance). The ADR 12 and ADR 13
   upcoming-labels on Engine rows 32 and 33 in §3 are superseded by this
   renumbering. No production code changed.
+- **2026-07-02 — Updated for ADR 10 (Student Memory Architecture, roadmap
+  5/8).** §3 engine map row #6 updated from "ADR 10 upcoming" to full
+  finding summary (six stores, `ConceptMasteryRecord`, `BrainConfig`,
+  single-writer invariant). §6.5 Memory flow expanded with ADR 10's
+  six-store taxonomy, mastery update formula, and `decayedScore` definition
+  (replacing the prior two-sentence stub and "ADR 10 upcoming" note).
+  §7 risk register: R9 partially resolved (evidence-flow audit scoped into
+  ADR 13 rather than ADR 10 once confirmed), R14 added (TopicProgress
+  multi-writer migration risk, mitigation: 4-phase additive migration with
+  `masteryConfidence = 0.0` flag during transition). §9 ADR index row for
+  ADR 10 updated from "Not started" to "Proposal, blocked on KG v1 freeze"
+  with one-line finding. No production code changed.
