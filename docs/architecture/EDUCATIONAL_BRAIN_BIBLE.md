@@ -27,9 +27,13 @@ ADR-08-and-later finding). Each section below states which is which.
 2. §3 — the complete engine map (every engine, every file, current status).
 3. §4 — engine responsibilities, by tier, with pointers to full contracts.
 4. §5 — component interaction diagram.
-5. §6 — the twelve flows (data, decision, student learning, knowledge,
-   memory, evidence, recommendation, visualization, AI interaction, plus
-   three cross-cutting strategies: scalability, versioning, validation).
+5. §6 — thirteen subsections: data flow (§6.1), decision flow (§6.2),
+   student learning flow (§6.3), knowledge flow & curriculum mapping
+   (§6.4), memory flow (§6.5), evidence flow (§6.6), recommendation flow
+   (§6.7), visualization flow (§6.8), AI interaction & independence
+   strategy (§6.9), scalability strategy (§6.10), versioning strategy
+   (§6.11), validation & quality assurance (§6.12), assessment & mastery
+   validation flow (§6.13).
 6. §7 — risk register.
 7. §8 — architecture glossary.
 8. §9 — ADR index (every ADR, one line each, current status).
@@ -346,7 +350,7 @@ the `incompatibilities` field — assets known to reinforce active
 misconceptions are suppressed for that learner. Gated on KG v1 freeze and
 explicit user approval. **Full design: ADR 14.**
 
-### 6.4 Knowledge flow
+### 6.4 Knowledge flow & curriculum mapping
 
 LIVE. `graph.json` (immutable, 10-field canonical schema) → Generic
 Subject Adapter (`inferDomain`/`inferConceptType`, derived, never stored)
@@ -358,6 +362,22 @@ Validator reads the same file offline, never in the runtime request path.
 the adapter — **PROPOSED, ADR 05**, blocked on Canonical KG v1 freeze.
 The consumption gate itself (version/status/shape validation between
 producer and consumer) is **PROPOSED, ADR 06**, same block condition.
+
+**Curriculum Mapping (consolidation, item 11/15):** above the canonical
+KG layer sits a school curriculum mapping layer.
+`getGradeSubjects(board, grade)` returns the subject set for a given exam
+board and grade; `getSchoolChapters(board, grade, subject)` returns the
+ordered chapter sequence. These are static JS modules under
+`src/lib/curriculum/` — no database queries. A "chapter" is a named group
+of KG concept-node slugs in the board/grade sequence order. The
+Recommendation cluster (ADR 11) and lesson planner walk the ordered chapter
+list; the raw KG provides concept detail. Per P8 (curriculum-agnostic
+core): the Brain's core (assets, graph, decisions, evidence) knows nothing
+about CBSE/ICSE/IB; curricula are **views** over the KG, not hard-coded
+into the asset model. A new curriculum is a configuration (new chapter-slug
+mapping), not a code change. Library Mode bypasses this layer entirely —
+concepts are addressed by KG slug directly (`currentConceptNodeId`, ADR 08
+finding) — so the curriculum mapping layer is a School-Mode-only concern.
 
 ### 6.5 Memory flow
 
@@ -499,7 +519,7 @@ demoted to observability/logging. Every `VisualAsset` carries mandatory
 stored in `VisualAsset.specPayload`, zero extraction cost on repeat
 turns for same concept). All blocked on KG v1 freeze + approval.
 
-### 6.9 AI interaction flow
+### 6.9 AI interaction flow & independence strategy
 
 LIVE. The AI Router (`routeAI()`) is the sole call site for any LLM:
 Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia-only,
@@ -507,18 +527,62 @@ itself falling back to Groq on missing credentials or error). One call
 per turn, no chained/agentic calls, no second LLM call to make a
 decision. Receives only the already-assembled system prompt + message
 history; never reads any Educational Brain engine directly (Permanent
-Rules 9, 10). A dedicated roadmap audit of how to measure and reduce AI
-dependency over time — promoting validated deterministic/cached assets
-over fresh generation, and a knowledge-acquisition strategy that doesn't
-re-derive the same explanation every time — is roadmap item #8, **ADR
-13, upcoming**.
+Rules 9, 10).
+
+**AI Independence Strategy (consolidation, item 10/15 — source:
+`docs/educational-brain/README.md` + `06-ai-integration.md`):** the ten
+governing P-principles, active across every ADR and every design decision:
+
+- **P1 Determinism first** — every layer must produce a defensible answer
+  with no LLM call; the LLM is a synthesis tool (asset author) used only
+  when no existing asset fits, never a runtime decision-maker for behavior
+  that could be deterministic.
+- **P2 Assets, not generations** — generate once, reuse forever; an
+  explanation that varies subtly per request cannot be ranked, improved,
+  or proven correct; the Knowledge Asset is the atomic unit, generation
+  is a creation path, not a replacement for retrieval.
+- **P3 Evidence over opinion** — every ranking, default, and
+  prompt-selection heuristic has an evidence signal attached and a
+  feedback loop that updates it (ADR 13 Evidence Engine).
+- **P4 Composable, not monolithic** — a chain of small pure stages with
+  typed inputs/outputs, each testable, observable, and replaceable
+  without touching others.
+- **P5 Bounded blast radius** — a stage failure degrades the response,
+  never breaks it; fallback chains ensure the Brain always ships a
+  lesson, never an error.
+- **P6 Honest about uncertainty** — quality metrics carry uncertainty
+  bands, not point estimates; `masteryConfidence` field (ADR 10) makes
+  this machine-readable.
+- **P7 Multi-lingual at schema level** — every asset carries explicit
+  `(content, language)` pairs; a Hindi explanation is a different asset
+  with its own evidence and quality score, not a translation of the
+  English asset.
+- **P8 Curriculum-agnostic core** — the Brain's core (assets, graph,
+  decisions, evidence) knows nothing about CBSE/ICSE/IB; curricula are
+  views over the KG, not hard-coded into the asset model (§6.4).
+- **P9 Every AI call leaves a trace that reduces the next** — Type A
+  (Asset Authoring): validated result → permanent Asset (next learner
+  gets retrieval); Type B (Parameter Extraction): result → cache row
+  (next identical input: no call); Type C (Classification): result →
+  deterministic rule in rule-promotion queue (LLM call becomes its own
+  replacement). The Brain shrinks the LLM's role with every call.
+- **P10 Testable end-to-end without a live LLM** — every stage runnable
+  with a recorded transcript; CI verifies behavior on frozen
+  real-learner-shaped fixtures; a regression is a fixture that flips
+  verdict (§6.12).
+
+**AI Dependency Index (ADI):** the fraction of turns that require an LLM
+call. Current architecture: ADI ≈ 1.0 (every turn regenerates content).
+Target at year-5 asset coverage: ADI ≈ 0.005 (~1 in 200 turns triggers
+authoring). The asset model (ADR 14) is the primary mechanism that drives
+ADI toward zero. Violation check: the Permanent Rule 9 violation in Engine
+42 (`generateVisualizationCode.ts`) is an ADI regression when that flag
+is enabled — two LLM calls per turn rather than one (R16 risk register,
+ADR 12).
 
 ### 6.10 Scalability strategy
 
-**LIVE characteristics, synthesized from the engines as built (no new
-design yet — a dedicated cross-cutting scalability pass happens
-implicitly across ADRs 08-13, each scoring its own design against
-"millions of learners," per the binding ADR template):**
+**LIVE characteristics, synthesized from the engines as built:**
 - The Knowledge Graph is static, file-based, process-lifetime-cached —
   reads scale with file size, not with student count, and are O(1) per
   request after first load.
@@ -530,15 +594,59 @@ implicitly across ADRs 08-13, each scoring its own design against
   (the AI Router) is also the one component every other engine is
   explicitly forbidden from depending on for *decisions* — meaning an
   LLM outage degrades response *quality*, never decision *correctness*.
-- Per-ADR scalability scoring to date: ADR 06's KG consumption gate is
-  O(1) per subject load (validated once per process lifetime, not per
-  request); ADR 07's proposed Library Mode extension reuses an existing
-  per-request function with no new query pattern.
-- **Not yet centrally specified:** a target learner count, a database
-  sharding strategy, a caching tier strategy beyond the existing
-  process-lifetime KG cache, and a load-testing plan. These gaps are
-  carried in the risk register (§7) and are explicit inputs to ADR 10
-  (Student Memory at scale) and ADR 13 (AI cost/dependency at scale).
+
+**Scaling targets (consolidation, item 13/15 — source:
+`docs/educational-brain/09-scaling.md`):**
+
+| Axis | Target |
+|------|--------|
+| Learners | 100 M total, 5 M DAU at peak |
+| Concepts | 1 M (school → undergrad, all subjects globally) |
+| Assets | 10 M (~10 per concept × languages × styles) |
+| Curricula | 5,000 (every major board × grade × multi-year revision) |
+| Languages | 200 |
+| Peak QPS | 50,000 turns/sec (5 M DAU × 10 turns/day × peak 2×) |
+| Evidence events/sec | 200,000 (each turn emits ~4 events) |
+
+The decisive scaling property: **retrieval-dominance**. At year-5 asset
+coverage (≥ 99% catalogue hits), 99% of QPS is DB reads + in-process
+graph walk + string composition. The 1% that triggers an LLM call is
+slow (1–3 s) but isolated to its own latency tail. The system scales like
+a CDN.
+
+Per-component scaling decisions:
+- **Concept graph**: fits in process memory at full target scale (~600 MB
+  string-interned); every app server holds same snapshot, refreshed on
+  `GraphChanged` event; no graph database needed.
+- **Asset catalogue**: Postgres + Redis cache + pgvector; sharded by
+  `family` first, then by `hash(conceptId)`. Per-cell cache target: >95%
+  hit rate on `(conceptId, family, familyKind, language, gradeBand)`.
+- **Student Memory**: sharded by `hash(userId)` (all reads/writes are
+  `userId`-scoped; no cross-learner joins; read replicas per shard).
+- **Evidence event log**: append-only, partitioned by day +
+  `hash(conceptId)`; rolling windows in Redis (60 s latency); nightly
+  rollup Spark/Beam job; 90 days hot, 5 years cold object storage.
+- **Session Memory**: Redis cluster, sharded by `sessionId`; TTL 30 min
+  idle; failover recoverable from persisted `Message` table.
+- **BrainConfig**: in-process snapshot ~5 MB; refreshed on `ConfigChanged`
+  pub-sub.
+
+Compute cost at year-5 (ADI ≈ 0.005): **~$0.18/learner/year** all-in
+(infrastructure + AI). At ADI ≈ 1.0 (current architecture): >100× AI
+cost (~$430 M/year at 100 M learners). The asset model (ADR 14) is the
+primary scaling lever.
+
+**Five anti-patterns that break at year-5 scale** (do not introduce):
+(1) per-turn LLM generation of explanations; (2) per-turn system-prompt
+rebuild by string concatenation; (3) per-turn graph queries via Prisma;
+(4) unpartitioned `EvidenceRecord` table; (5) mastery computed by
+replaying full event history (replace with incremental updates + decay
+model per ADR 10).
+
+Capacity planning rule: every new feature must declare its per-turn cost
+(DB reads, LLM calls, write events, latency), its per-learner lifetime
+cost, and (for new LLM call sites) expected QPS and per-call cost. PRs
+missing these declarations are rejected at code review.
 
 ### 6.11 Versioning strategy
 
@@ -558,7 +666,7 @@ this Bible's own proposals — each ADR is immutable once written; a
 superseding ADR must say so explicitly (§9) rather than silently
 overriding.
 
-### 6.12 Validation strategy
+### 6.12 Validation strategy & quality assurance
 
 **LIVE:** `npx tsc --noEmit` (typecheck gate), the offline assertion
 suite (2066+ assertions, `TEST_RESULTS.md`), and the Knowledge Graph
@@ -569,9 +677,65 @@ schema/status/shape problems fail loud instead of silently degrading.
 **PROPOSED, ADR 07:** an equivalence-validation report specifically for
 the `learningProfile.ts` consolidation (flagged as the one real
 behavior-change risk in that ADR) before any future implementation turn.
-Every ADR's "Validation strategy" section (per the 14-section template,
-§9.5 of this Bible) is the authoritative per-proposal validation plan;
-this section is the cross-cutting summary, not a replacement for them.
+
+**Quality Assurance consolidation (item 14/15 — source: P10 principle,
+`docs/educational-brain/README.md`):** P10 ("testable end-to-end without
+a live LLM") is the cross-cutting QA target: every stage must be runnable
+with a recorded LLM transcript; CI must verify behavior on a frozen set
+of real-learner-shaped fixtures; a regression is a fixture that flips
+verdict, and CI rejects it before merge. This target is currently not met
+— the chat route has no fixture-based integration test (type checking and
+the assertion suite cover KG structure and isolated engine functions, not
+full-turn behavior). Achieving P10 is an **implementation milestone**, not
+an architecture gap; no new ADR is required.
+
+Cross-cutting validation rule: all proposed features must pass (a)
+`npx tsc --noEmit`, (b) the offline assertion suite (zero new
+failures), (c) the KG Validator (once CI-wired per ADR 06), and (d)
+the per-proposal validation plan in section 9 of the relevant ADR. Every
+ADR's "Validation strategy" section is the authoritative per-proposal
+plan; this §6.12 is the cross-cutting summary.
+
+Evidence Engine quality: `CuratorQueueEntry` (ADR 13) surfaces assets
+whose `qualityScore` has fallen below the deprecation trigger threshold —
+curator review is the final human quality gate. No asset is deprecated
+by automated evidence alone without `humanReviewRequired` approval (ADR
+13 §4.5, deprecation trigger 1).
+
+### 6.13 Assessment & mastery validation flow
+
+LIVE (School Mode). Engine 8 (`school/adaptive/assessmentIntelligence.ts`)
+determines whether the current turn should deliver a probe question based
+on the teaching strategy, performance history, and time since last
+assessment. Engine 9 (`assessment/subjectValidator.ts`) validates that
+subject-specific assessment requirements are met (minimum concept
+coverage, probe type constraints per board/subject). Both are read-only
+over Student Memory; neither writes mastery data directly — mastery writes
+go through the practice/assessment submit route, not the chat route.
+
+Mastery evaluation: Engine 7 (`masteryIntelligence.ts`) reads
+`TopicProgress` and re-classifies using `masteryPct ≥ 70` threshold,
+producing the `MasteryLevel` value (`NOVICE | DEVELOPING | PROFICIENT |
+MASTERED`) that the Teaching Engine receives. The `70` threshold is a
+hardcoded constant (`ASSESSMENT_PASS_THRESHOLD`); the Canonical KG
+`mastery_threshold` field (which varies 0.35–0.95 across concepts) has
+zero runtime effect — ADR 05 / ADR 07 blocking condition, not
+implemented.
+
+**PROPOSED, ADR 10:** split `masteryPct` into `masteryScore` (best-ever)
+and `decayedScore = masteryScore × exp(-Δt/halfLife)` (current
+retention), enabling the Brain to distinguish "learned but forgotten"
+from "never mastered." Mastery update formula: `masteryScore +=
+step × probeDifficulty × (1 - masteryScore)` on correct probe;
+`masteryScore -= step × masteryScore` on incorrect probe. New
+`ConceptMasteryRecord` table is the single-writer for all mastery
+updates (Permanent Rule 14 extended). Library Mode: mastery evaluation
+is currently school-only; ADR 07 proposes extending `MasteryLevel` as
+the canonical vocabulary to Library Mode (blocked on KG v1 freeze).
+
+No new ADR required for assessment architecture — Engines 8-9 are live
+and architecturally sound; the gaps (Library Mode extension, per-concept
+threshold) are already covered by ADR 05, 07, and 10.
 
 ---
 
@@ -721,6 +885,58 @@ systems, and strengthen implementation guidance. Discussability is not a
 gate criterion — a topic that could be discussed is not, on its own,
 reason to write an ADR about it.
 
+**Chief Architect governance rules (consolidation, item 15/15 —
+binding, sourced from CLAUDE.md; canonical home is now this §10.1):**
+
+1. **Curriculum Production Pipeline authority.** The Curriculum
+   Production Pipeline is the ONLY authority for Canonical Subject
+   Knowledge Graphs. Do not generate subject knowledge, generate teaching
+   assets, interfere with Pipeline output, expose new Canonical KG fields,
+   or redesign stable architecture without strong evidence.
+
+2. **No production code changes without explicit approval.** Every ADR is
+   proposal-only. Implementation begins only after (a) the Curriculum
+   Production Pipeline declares Canonical KG v1 frozen, AND (b) the user
+   explicitly approves each item. ADR 04 is permanently documentation-only
+   (explicit user instruction). ADR 05 Phase 1 is blocked until BOTH gates
+   are met.
+
+3. **Read before writing.** Before starting any ADR: read this Bible,
+   every previous ADR, the project-memory set (CLAUDE.md), and the master
+   architecture documents (`docs/educational-brain/*`). Verify the
+   proposed design doesn't conflict with existing architecture. If it
+   does, resolve the conflict and update the Bible before continuing.
+
+4. **ADR immutability.** Once written, an ADR is immutable. A superseding
+   ADR must say so explicitly in §9 (this Bible) rather than silently
+   overriding. Two conflicting ADRs are always a bug; one must be marked
+   superseded. Prefer one elegant system over multiple similar ones.
+
+5. **Bible primacy.** If anything in this Bible conflicts with a detail
+   document or ADR, this Bible wins. Resolve by editing the losing
+   document, never by leaving two true-sounding answers.
+
+6. **Standing design test.** Every ADR must answer: "How does this make
+   the Educational Brain think and teach more like a world-class human
+   teacher?" A weak answer requires redesigning the ADR, not softening
+   the question.
+
+7. **ADR ↔ Bible coupling.** Every completed ADR must update this Bible
+   (at minimum: ADR index, relevant flow section, risk register if
+   applicable). An ADR that does not update the Bible is not finished.
+
+8. **No premature cleanup.** Do not propose or execute repository cleanup
+   (dead code, naming, refactoring) unless it directly blocks a v1.0
+   completion criterion. Forward-looking architecture takes priority.
+
+9. **No parallel pipeline.** A new parallel pipeline is not an acceptable
+   answer to "the existing one feels architecturally rough" — refactor the
+   live system instead. Before starting any new "decide what to teach /
+   what strategy / what mastery state" system: re-read this Bible, grep
+   `src/lib/teaching-engine/`, `src/lib/school/adaptive/`, and the
+   chat route, and explain why extending the canonical pipeline in place
+   is insufficient.
+
 ### 10.2 v1.0 completion criteria (supersedes the old 8-item roadmap)
 
 | # | Capability | Status | Coverage |
@@ -729,17 +945,17 @@ reason to write an ADR about it.
 | 2 | Mastery Intelligence | **DONE** | ADR 07 |
 | 3 | Teaching Action Intelligence | **DONE** | ADR 08 |
 | 4 | Dynamic Lesson Composition | **DONE** | ADR 09 |
-| 5 | Student Memory | **→ ADR 10** | §6.5, `docs/educational-brain/05-memory-system.md` — live code has 8+ fragmented memory surfaces with no common contract; redesign risk is high without formal design |
-| 6 | Recommendation Intelligence | **→ ADR 11** | §6.7, Engines 22-31 live — 9 engines exist but no formal design for cross-engine coordination, Library-mode extension, or evidence-signal integration |
-| 7 | Visualization & Simulation Architecture | **→ ADR 12** | §6.8, Engines 32,36-41 now in §3 — live code but never architecturally designed; was "upcoming" in Engine 32 row |
-| 8 | Assessment & Mastery Validation | **CONSOLIDATE §6.11** | Engines 8-9 (live), ADR 07 — live assessment architecture works; gaps are documentation only, not design risk |
-| 9 | Evidence Engine | **→ ADR 13** | §6.6, `docs/educational-brain/04-evidence-engine.md` — the core improvement loop (EvidenceEvent→rolling window→nightly rollup→asset ranking) has no ADR; implementing without architecture risks an ad-hoc feedback mechanism |
-| 10 | AI Independence Strategy | **CONSOLIDATE §6.9** | P1-P10 principles in `docs/educational-brain/README.md` — philosophy clear, no novel design decisions; fold into §2 + §6.9 |
-| 11 | Curriculum Mapping Strategy | **CONSOLIDATE §6.4** | Engine 1 (Curriculum Authority Brain, live); §6.4 covers the KG→runtime path; strengthen §6.4 with board/grade→concept mapping description |
-| 12 | Knowledge Asset Lifecycle | **→ ADR 14** | `docs/educational-brain/01-knowledge-assets.md` — the foundational data model for Phase 2 (AssetIdentity, three families, versioning, validation, ranking, deprecation) has no ADR; foundational to items 5, 7, 9 implementation |
-| 13 | Scalability Strategy | **CONSOLIDATE §6.10** | §6.10 partially specified; ch09 (`docs/educational-brain/`) provides detail; fold key decisions into §6.10 |
-| 14 | Validation & Quality Assurance | **CONSOLIDATE §6.12** | §6.12 partially specified; P10 principle + existing validators provide the pattern; no novel design required |
-| 15 | Implementation Governance | **CONSOLIDATE §10.1** | §10.1 has the Gap Analysis gate; CLAUDE.md has Chief Architect rules; consolidate into one place |
+| 5 | Student Memory | **DONE** | ADR 10 — six formally owned stores, `ConceptMasteryRecord` (mastery/decay split), `BrainConfig`, 4-phase additive migration |
+| 6 | Recommendation Intelligence | **DONE** | ADR 11 — two-layer architecture (Cross-Session Planner + Session Recommendation Reconciler), Library Mode parity, Evidence Engine hook |
+| 7 | Visualization & Simulation Architecture | **DONE** | ADR 12 — Visual Asset Model (typed renderers, concept-keyed cache, background authoring, Visual Policy), 7-pipeline finding, P2 + PR9 violations documented |
+| 8 | Assessment & Mastery Validation | **DONE** | §6.13 — Engines 8-9 live (assessment intelligence, subject validator); mastery evaluation via Engine 7; ADR 07 mastery vocabulary; ADR 10 proposed `ConceptMasteryRecord`; no new ADR needed |
+| 9 | Evidence Engine | **DONE** | ADR 13 — three-tier chain (append → EWMA → nightly rollup), six categories, Beta-binomial confidence, three bias counters, single-writer rule |
+| 10 | AI Independence Strategy | **DONE** | §6.9 — P1-P10 principles consolidated, three AI call types (Type A/B/C), ADI concept, connection to ADR 14 (primary ADI driver) |
+| 11 | Curriculum Mapping Strategy | **DONE** | §6.4 — board/grade→concept view layer (`getGradeSubjects`/`getSchoolChapters`), curriculum-agnostic core (P8), School-Mode-only scope, Library Mode KG-slug-direct path |
+| 12 | Knowledge Asset Lifecycle | **DONE** | ADR 14 — three-family AssetIdentity model, DRAFT→RETIRED lifecycle, incompatibilities misconception-gate, five deprecation triggers, four-phase migration |
+| 13 | Scalability Strategy | **DONE** | §6.10 — 100 M learner targets, per-component decisions, retrieval-dominance property, cost model ($0.18/learner/year at year-5), five anti-patterns |
+| 14 | Validation & Quality Assurance | **DONE** | §6.12 — P10 principle consolidated, fixture-based integration test gap named as implementation milestone, cross-cutting validation rule, Evidence Engine quality gate (CuratorQueueEntry) |
+| 15 | Implementation Governance | **DONE** | §10.1 — nine Chief Architect governance rules consolidated (Curriculum Pipeline authority, no-code gate, ADR immutability, Bible primacy, no parallel pipeline, etc.) |
 
 **Gap Analysis complete (2026-07-02) — evidence per item:**
 
@@ -957,3 +1173,37 @@ Assessment) — not due yet.
   archive-status header comment per ADR 14 Phase 1). §9 ADR index row for
   ADR 14 added at "Proposal, blocked on KG v1 freeze." No production code
   changed.
+- **2026-07-02 — Six Bible consolidations complete — Educational Brain
+  Architecture v1.0 criteria all 15/15 DONE.** All six items that the
+  Gap Analysis designated "consolidation-only" are now fully written into
+  the Bible:
+  (8) **Assessment & Mastery Validation** — §6.13 added: live Engines
+  8-9 (assessment intelligence, subject validator), mastery evaluation via
+  Engine 7, ADR 07 mastery vocabulary, ADR 10 proposed `ConceptMasteryRecord`
+  with mastery/decay split; no new ADR warranted.
+  (10) **AI Independence Strategy** — §6.9 expanded to §6.9 "AI interaction
+  flow & independence strategy": P1-P10 principles in full, three AI call
+  types (Type A Asset Authoring / Type B Parameter Extraction / Type C
+  Classification), AI Dependency Index (ADI) concept and year-5 target
+  (ADI ≈ 0.005), connection to ADR 14 as primary ADI driver.
+  (11) **Curriculum Mapping Strategy** — §6.4 retitled "Knowledge flow &
+  curriculum mapping": board/grade→concept view layer (`getGradeSubjects`/
+  `getSchoolChapters`), curriculum-agnostic core (P8), School-Mode-only
+  scope, Library Mode KG-slug-direct path (ADR 08 finding), new curriculum
+  is a configuration not a code change.
+  (13) **Scalability Strategy** — §6.10 expanded with ch09 targets (100 M
+  learners, 5 M DAU, 50 K QPS, 10 M assets, 200 languages), per-component
+  scaling decisions, retrieval-dominance property, cost model ($0.18/
+  learner/year at year-5 vs. ~$430 M/year under current architecture), five
+  anti-patterns, capacity planning rule.
+  (14) **Validation & Quality Assurance** — §6.12 retitled "Validation
+  strategy & quality assurance": P10 principle consolidated, fixture-based
+  integration test gap named as implementation milestone (not architecture
+  gap), cross-cutting validation rule (tsc + assertions + KG validator +
+  per-ADR section 9), Evidence Engine quality gate (`CuratorQueueEntry`).
+  (15) **Implementation Governance** — §10.1 expanded with nine Chief
+  Architect governance rules (Curriculum Pipeline authority, no-code gate,
+  read-before-write, ADR immutability, Bible primacy, standing design test,
+  ADR↔Bible coupling, no premature cleanup, no parallel pipeline).
+  §0 TOC updated to list all 13 subsections of §6. §10.2 criteria table:
+  all 15 rows now read DONE. No production code changed.

@@ -139,10 +139,10 @@
   Items 5-8 below are **superseded** by the 15-item v1.0 completion
   criteria in the Gap Analysis Discipline rule immediately below — kept
   here only as a historical record of the original roadmap framing.
-  5. Student Memory Evolution — not started.
-  6. Recommendation Intelligence — not started.
-  7. Visualization & Simulation Architecture — not started.
-  8. AI Independence Roadmap — not started.
+  5. Student Memory Evolution — **DONE**, ADR 10.
+  6. Recommendation Intelligence — **DONE**, ADR 11.
+  7. Visualization & Simulation Architecture — **DONE**, ADR 12.
+  8. AI Independence Roadmap — **DONE** (consolidation into Bible §6.9).
 - **Architecture Gap Analysis Discipline (2026-06-30, binding, supersedes
   the fixed "one ADR per roadmap item" assumption above):** the objective
   is no longer to produce as many ADRs as possible — it is to finish
@@ -234,6 +234,17 @@
   ADR 11 integration point implemented: assetEffectivenessSignal derives from EbAssetScore.
   R9 fully resolved (confirmed orthogonal). Bible: §6.6, §7 R18, §9 updated.
   Full design: `docs/architecture/ADR_13_EVIDENCE_ENGINE.md`.
+  **Educational Brain Architecture v1.0 COMPLETE (2026-07-02):** All 15
+  completion criteria done. Six Bible consolidation items completed in one
+  pass: (8) Assessment & Mastery Validation → Bible §6.13 added; (10) AI
+  Independence Strategy → Bible §6.9 expanded with P1-P10 + Type A/B/C
+  call taxonomy + ADI concept; (11) Curriculum Mapping → Bible §6.4
+  expanded with board/grade→concept view layer; (13) Scalability → Bible
+  §6.10 expanded with ch09 100M-learner targets + cost model; (14)
+  Validation & QA → Bible §6.12 expanded with P10 + cross-cutting rule;
+  (15) Governance → Bible §10.1 expanded with 9 Chief Architect rules.
+  §0 TOC updated (13 §6 subsections). All 15 §10.2 criteria read DONE.
+  Final Architecture Completion Report is the remaining deliverable.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/
