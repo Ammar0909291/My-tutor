@@ -169,8 +169,19 @@
   (`docs/educational-brain/*`) and a live scene-generation/simulation
   subsystem (`src/lib/teaching/sceneGenerators/*`) were discovered
   mid-session, overlapping several of the 15 items and absent from the
-  Bible's engine map — reconciliation in progress, see Bible §10.2 and
-  §12 change log.
+  Bible's engine map. **Reconciliation complete (2026-07-02):** both
+  were audited. `docs/educational-brain/*` is a complementary Phase 2
+  implementation blueprint — not superseded, not conflicting; ch03
+  explicitly treats live `route.ts` as input; Knowledge Asset model is
+  the content-layer refinement the live chain is designed to serve.
+  `sceneGenerators/*` is live flag-gated code, now documented in Bible
+  §3 as Engines 36-41. **Gap Analysis complete (2026-07-02):** 5 new
+  ADRs warranted — ADR 10 (Student Memory), ADR 11 (Recommendation
+  Intelligence), ADR 12 (Visualization & Simulation Architecture), ADR
+  13 (Evidence Engine), ADR 14 (Knowledge Asset Lifecycle). 6 items need
+  Bible consolidation only (§6.11 Assessment, §2/§6.9 AI Independence,
+  §6.4 Curriculum Mapping, §6.10 Scalability, §6.12 Validation & QA,
+  §10.1 Governance). Full evidence in Bible §10.2.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

@@ -131,6 +131,12 @@ see ADR 03).
 | 34 | Educational Brain Decision Pipeline | Experimental | `educationalBrain/*` | DORMANT (flag off) | — |
 | 35 | Teaching Assets Platform (content layer) | Legacy/orphaned | `curriculum/{teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts` | ORPHANED (content, zero importers) | ADR 03 |
 | — | Teaching Action Engine (decision duplicate of #11) | Legacy | `curriculum/teachingActionEngine.ts` | **DELETED** 2026-06-30 | ADR 03 |
+| 36 | Visualization Decision Engine | Visual | `teaching/visualizationDecision.ts` | LIVE — decides whether to attempt a visual this turn (parametric-scene vs. legacy-visual vs. none) | — |
+| 37 | Deterministic Scene Builder | Visual | `teaching/buildSceneSpec.ts` | LIVE — keyword-based heuristic that builds a `SceneSpec` without an LLM call; first fallback when Scene Router returns null | — |
+| 38 | Scene Spec Router | Visual | `teaching/sceneGenerators/sceneRouter.ts` | LIVE (flag-gated: `ENABLE_PARAMETRIC_SCENE_GENERATION`); routes a cleaned AI response text to the first matching per-concept-type generator via keyword rules | — |
+| 39 | Parametric Scene Generators (×29) | Visual | `teaching/sceneGenerators/{projectile,triangle,molecule,vector,circular,pendulum,electron_shells,lattice,collision,ray_optics,historical_timeline,economics_curves,calculus_graph,civics_org_chart,electric_circuit,kinematics_graphs,heights_and_distances,demographic_pyramid,coordinate_geometry_line,punnett_square,torque_diagram,gravitation_orbit,statistics_bar_chart,ecological_pyramid,logic_gate,er_diagram,periodic_trends,cell_division,dna_structure}.ts` | LIVE (same flag as #38); each generator: extract(LLM) → build(deterministic formula) → validate → consistency-check | — |
+| 40 | AI Scene Generator | Visual | `teaching/generateSceneSpec.ts` | DORMANT (flag-gated: `ENABLE_AI_SCENE_GENERATION`; off by default); LLM-authored `SceneSpec` path, used when neither #37 nor #38-39 produce a result | — |
+| 41 | Scene Spec Validator | Visual | `teaching/sceneSpecValidator.ts` | LIVE — structural validation of `SceneSpec` JSON; used by all three scene-generation paths (#38–40) and the Router (#38) | — |
 
 Full per-engine contract (inputs/outputs/public functions/failure
 behavior/guarantees/MUST NOT) lives in `ENGINE_REFERENCE.md` — this table
@@ -173,7 +179,16 @@ already-computed conclusions; never independently scores mastery
 (hard DAG boundary, Permanent Rule 12).
 
 **Visual tier** — owns "what representation fits this concept." A leaf
-dependency: everything calls into it, it calls into nothing.
+dependency: everything calls into it, it calls into nothing. Comprises
+two sub-clusters: (a) the legacy Visual Type System (`detectVisual.ts` /
+`visualTypes.ts`, Engine 32) that detects whether a legacy `VisualSpec`
+applies, and (b) the Scene Generation cluster (Engines 36-41) that
+produces a typed `SceneSpec` via three cascading paths: parametric
+generator (keyword-routed, 29 per-concept-type generators, flag-gated by
+`ENABLE_PARAMETRIC_SCENE_GENERATION`), deterministic heuristic fallback
+(`buildSceneSpec.ts`), and AI-authored fallback (`generateSceneSpec.ts`,
+flag-gated by `ENABLE_AI_SCENE_GENERATION`). Both flags are off by
+default; the deterministic heuristic always runs.
 
 **Generation tier** — the AI Router. The only probabilistic component in
 the system (Permanent Rule 9); never makes a pedagogical decision
@@ -601,27 +616,76 @@ reason to write an ADR about it.
 | 2 | Mastery Intelligence | **DONE** | ADR 07 |
 | 3 | Teaching Action Intelligence | **DONE** | ADR 08 |
 | 4 | Dynamic Lesson Composition | **DONE** | ADR 09 |
-| 5 | Student Memory | Gap analysis pending | §6.5, `docs/educational-brain/05-memory-system.md` (reconciliation pending) |
-| 6 | Recommendation Intelligence | Gap analysis pending | §6.7 |
-| 7 | Visualization & Simulation Architecture | Gap analysis pending | §6.8, `docs/educational-brain/08-visualization-strategy.md`, live `src/lib/teaching/sceneGenerators/*` (reconciliation pending) |
-| 8 | Assessment & Mastery Validation | Gap analysis pending | Engines 8-9 (live), ADR 07 |
-| 9 | Evidence Engine | Gap analysis pending | §6.6, `docs/educational-brain/04-evidence-engine.md` (reconciliation pending) |
-| 10 | AI Independence Strategy | Gap analysis pending | §6.9, `docs/educational-brain/06-ai-integration.md` (reconciliation pending) |
-| 11 | Curriculum Mapping Strategy | Gap analysis pending | Engine 1 (Curriculum Authority Brain, live) |
-| 12 | Knowledge Asset Lifecycle | Gap analysis pending | ADR 06 (consumption-side only), `docs/educational-brain/01-knowledge-assets.md`, `07-knowledge-acquisition.md` (reconciliation pending) |
-| 13 | Scalability Strategy | Gap analysis pending | §6.10 (cross-cutting, partially specified) |
-| 14 | Validation & Quality Assurance | Gap analysis pending | §6.12 (cross-cutting, partially specified) |
-| 15 | Implementation Governance | Gap analysis pending | This §10.1, CLAUDE.md Chief Architect rules (ungathered into one Bible section) |
+| 5 | Student Memory | **→ ADR 10** | §6.5, `docs/educational-brain/05-memory-system.md` — live code has 8+ fragmented memory surfaces with no common contract; redesign risk is high without formal design |
+| 6 | Recommendation Intelligence | **→ ADR 11** | §6.7, Engines 22-31 live — 9 engines exist but no formal design for cross-engine coordination, Library-mode extension, or evidence-signal integration |
+| 7 | Visualization & Simulation Architecture | **→ ADR 12** | §6.8, Engines 32,36-41 now in §3 — live code but never architecturally designed; was "upcoming" in Engine 32 row |
+| 8 | Assessment & Mastery Validation | **CONSOLIDATE §6.11** | Engines 8-9 (live), ADR 07 — live assessment architecture works; gaps are documentation only, not design risk |
+| 9 | Evidence Engine | **→ ADR 13** | §6.6, `docs/educational-brain/04-evidence-engine.md` — the core improvement loop (EvidenceEvent→rolling window→nightly rollup→asset ranking) has no ADR; implementing without architecture risks an ad-hoc feedback mechanism |
+| 10 | AI Independence Strategy | **CONSOLIDATE §6.9** | P1-P10 principles in `docs/educational-brain/README.md` — philosophy clear, no novel design decisions; fold into §2 + §6.9 |
+| 11 | Curriculum Mapping Strategy | **CONSOLIDATE §6.4** | Engine 1 (Curriculum Authority Brain, live); §6.4 covers the KG→runtime path; strengthen §6.4 with board/grade→concept mapping description |
+| 12 | Knowledge Asset Lifecycle | **→ ADR 14** | `docs/educational-brain/01-knowledge-assets.md` — the foundational data model for Phase 2 (AssetIdentity, three families, versioning, validation, ranking, deprecation) has no ADR; foundational to items 5, 7, 9 implementation |
+| 13 | Scalability Strategy | **CONSOLIDATE §6.10** | §6.10 partially specified; ch09 (`docs/educational-brain/`) provides detail; fold key decisions into §6.10 |
+| 14 | Validation & Quality Assurance | **CONSOLIDATE §6.12** | §6.12 partially specified; P10 principle + existing validators provide the pattern; no novel design required |
+| 15 | Implementation Governance | **CONSOLIDATE §10.1** | §10.1 has the Gap Analysis gate; CLAUDE.md has Chief Architect rules; consolidate into one place |
 
-A pre-existing, previously unindexed 11-chapter proposal document set,
-`docs/educational-brain/*` (dated 2026-06-29, one day before this Bible's
-creation, status "Phase 1 design only"), covers ground overlapping items
-5, 7, 9, 10, and 12 above. It was never reconciled with this Bible's
-live-grounded architecture and may propose a different "Knowledge Asset"
-decision model than the live `decide()` → TAG → Composer chain. A
-reconciliation audit is in progress (see change log entry below); items 5,
-7, 9, 10, 12 above are marked "reconciliation pending" until it completes
-and conflicts, if any, are resolved here.
+**Gap Analysis complete (2026-07-02) — evidence per item:**
+
+*Items 5, 6, 7, 9, 12 → new ADR warranted (all three gate questions YES):*
+- **5 Student Memory**: (1) YES — a learner who "resumes where they left off"
+  in the wrong chapter IS a live, visible failure class; (2) YES — the current
+  codebase has 8+ independent memory surfaces (`Profile`, `LearningProfile`,
+  `TopicProgress`, `RetentionMetric`, `MistakeRecord`, `LearnSession`,
+  `Message`, `VisualizationCache`) with no common contract and multiple
+  writers to each; `docs/educational-brain/05-memory-system.md` formally
+  names this exact bug class; implementing Phase 2 cross-turn state without
+  a unified design will propagate all 8 existing problems; (3) YES — §6.5
+  is two sentences; no ADR exists for memory architecture.
+- **6 Recommendation Intelligence**: (1) YES — recommendations across
+  sessions are essential to a complete tutoring system; (2) YES — 9 live
+  engines with no designed coordination contract; `learningOrchestrator.ts`
+  aggregates them by heuristic, not by a formal priority model; Library-mode
+  extension strategy has never been designed; (3) YES — §6.7 is thin; row
+  23 notes "ADR 11 upcoming."
+- **7 Visualization & Simulation Architecture**: (1) YES — visual
+  representation is a primary teaching modality; (2) YES — 6 engine rows
+  just added to §3 (Engines 36-41) that have never been formally designed as
+  a tier; how parametric/deterministic/AI paths relate, how they evolve
+  toward Knowledge Asset Visual family, and what the coverage extension
+  strategy is — none documented; row 32 noted "ADR 12 upcoming"; (3) YES —
+  §6.8 doesn't yet exist in full; no ADR covers this.
+- **9 Evidence Engine**: (1) YES — the quality-improvement feedback loop is
+  what makes the Brain get better over time, not just more complex; (2) YES
+  — `EvidenceRecord` table exists in Prisma (line 380) but its consumer is
+  unimplemented; `EbEvidenceEvent` (the dormant `educationalBrain/*`
+  pipeline) is a different, incompatible event schema; building the live
+  Evidence Engine without architecture risks a third incompatible
+  implementation; `docs/educational-brain/04-evidence-engine.md` provides a
+  complete spec (event categories, rolling-window aggregator, nightly rollup,
+  bias prevention, A/B experiments, curator triggers) — all unreconciled with
+  the live `EvidenceRecord`; (3) YES — §6.6 is thin; no ADR.
+- **12 Knowledge Asset Lifecycle**: (1) YES — the asset model is the
+  foundational data layer for Phase 2 content serving; (2) YES — items 5, 7,
+  9 all depend on the asset model schema (AssetIdentity, three families,
+  versioning, ranking); designing them without this foundation risks cascading
+  schema changes; (3) YES — ADR 06 covers only the consumption-side KG gate;
+  `docs/educational-brain/01-knowledge-assets.md` provides the full asset
+  lifecycle design but it is not an accepted ADR.
+
+*Items 8, 10, 11, 13, 14, 15 → Bible consolidation only (gate not fully met):*
+- **8 Assessment**: ADR 07 covered mastery; Engines 8-9 live and working;
+  Q2 fails — implementing without further design is low risk; consolidate
+  §6.11.
+- **10 AI Independence**: P1-P10 principles are clear philosophy, not design
+  decisions; Q2 fails — no implementation risk from omitting; consolidate
+  §2/§6.9.
+- **11 Curriculum Mapping**: Engine 1 (Curriculum Authority Brain) live and
+  working; §6.4 covers the flow; Q2 fails; strengthen §6.4.
+- **13 Scalability**: ch09 provides the strategy; Q2 fails — scaling is a
+  Phase 3 concern; consolidate §6.10.
+- **14 Validation & QA**: P10 + existing validators provide the pattern; Q2
+  fails; consolidate §6.12.
+- **15 Governance**: §10.1 + CLAUDE.md Chief Architect rules are already in
+  place; Q2 fails; consolidate §10.1.
 
 When all 15 items read **DONE**: freeze Educational Brain Architecture
 v1.0, mark any remaining ADR ideas as future enhancements (not v1
@@ -647,6 +711,7 @@ Assessment) — not due yet.
 | `ARCHITECTURE_DECISIONS.md` | Permanent rules + findings ledger behind this Bible's §2/§7 |
 | `ADR_NN_*.md` | Individual proposals indexed in this Bible's §9 |
 | `docs/project-memory/PROJECT_STATE.md` | Session-by-session execution log (process record, not architecture) |
+| `docs/educational-brain/README.md` + `01-15-*.md` (11 chapters) | **Phase 2 implementation blueprint** — written 2026-06-29, status "Phase 1 design only, no production code until approval." Not superseded; not conflicting. Treats the current `route.ts` pipeline as input and proposes formalizing it into a 10-stage typed pipeline (`TurnContext` object) with: Knowledge Asset model (Explanation/Visual/Probe families, persisted/versioned/ranked), Evidence Engine (event log → rolling windows → nightly rollup), six Memory stores (Session/Student/Knowledge/Teaching/Brain/Long-term), and an AI Independence strategy (P1-P10 principles). Relationship to this Bible: detail documents for completion-criteria items 5 (ch 05), 7 (ch 08), 9 (ch 04), 10 (ch 06), 12 (ch 01, 07). Gap Analysis gate must be applied per item before each becomes a new ADR or Bible-consolidation task. |
 
 ---
 
@@ -694,3 +759,30 @@ Assessment) — not due yet.
   §10.2; a background audit is in progress and this entry will be
   superseded by a follow-up change-log entry once it completes. No
   production code changed.
+- **2026-07-02 — Reconciliation complete: docs/educational-brain/* and
+  sceneGenerators/* now indexed.** §3 engine map gains 6 new rows
+  (Engines 36-41) for the Scene Generation cluster: Visualization Decision
+  Engine (`teaching/visualizationDecision.ts`, LIVE), Deterministic Scene
+  Builder (`teaching/buildSceneSpec.ts`, LIVE), Scene Spec Router
+  (`teaching/sceneGenerators/sceneRouter.ts`, LIVE flag-gated), Parametric
+  Scene Generators ×29 (`teaching/sceneGenerators/*.ts`, LIVE flag-gated),
+  AI Scene Generator (`teaching/generateSceneSpec.ts`, DORMANT), and Scene
+  Spec Validator (`teaching/sceneSpecValidator.ts`, LIVE). §4 Visual-tier
+  description expanded to describe both sub-clusters. §10.2 all five
+  "reconciliation pending" items resolved — `docs/educational-brain/*`
+  determined to be a complementary Phase 2 implementation blueprint: not
+  superseded, not conflicting; ch03 Decision Pipeline explicitly treats the
+  live `route.ts` as input; the proposed Knowledge Asset model is the
+  content-layer refinement the live chain is designed to eventually serve.
+  §11 Document Map gains an entry for `docs/educational-brain/*` with
+  resolved status. No production code changed.
+- **2026-07-02 — Architecture Gap Analysis complete (items 5-15).** §10.2
+  Gap Analysis verdict recorded with cited evidence for every remaining
+  completion-criteria item. Result: 5 new ADRs warranted (ADR 10 Student
+  Memory, ADR 11 Recommendation Intelligence, ADR 12 Visualization &
+  Simulation Architecture, ADR 13 Evidence Engine, ADR 14 Knowledge Asset
+  Lifecycle); 6 items require Bible consolidation only (§6.11 Assessment,
+  §2/§6.9 AI Independence, §6.4 Curriculum Mapping, §6.10 Scalability,
+  §6.12 Validation & QA, §10.1 Governance). The ADR 12 and ADR 13
+  upcoming-labels on Engine rows 32 and 33 in §3 are superseded by this
+  renumbering. No production code changed.
