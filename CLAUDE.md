@@ -234,6 +234,23 @@
   ADR 11 integration point implemented: assetEffectivenessSignal derives from EbAssetScore.
   R9 fully resolved (confirmed orthogonal). Bible: §6.6, §7 R18, §9 updated.
   Full design: `docs/architecture/ADR_13_EVIDENCE_ENGINE.md`.
+  **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
+  generated content (worked examples, explanations, visual specs, probes) is
+  discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/
+  `teachingAssetSchema.ts`/`teachingAssetAdapter.ts` confirmed ORPHANED (zero live
+  importers) and formally retired by ADR 14 (NOT the implementation path for the
+  Knowledge Asset model). Selected design: three-family `AssetIdentity` model
+  (ExplanationAsset, VisualAsset per ADR 12, ProbeAsset) with shared identity table
+  carrying `incompatibilities` field (prevents serving assets that reinforce active
+  learner misconceptions). Lifecycle: DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED; only
+  ACTIVE served; at most one ACTIVE per `canonicalSlug`. Five evidence-driven
+  deprecation triggers. Four-phase additive migration (schema → passive catalogue →
+  active retrieval → probe assets). Phase 2 endgame: LLM becomes voice-renderer,
+  not content-generator. R9 note: not applicable (ADR 14 introduces its own
+  asset-identity schema, fully compatible with ADR 13 Evidence Engine). R19 added
+  (orphaned Teaching Assets Platform files remain on disk post-retirement). Bible:
+  §3 row #35, §6.3, §7 R19, §9 ADR 14 row added.
+  Full design: `docs/architecture/ADR_14_KNOWLEDGE_ASSET_LIFECYCLE.md`.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

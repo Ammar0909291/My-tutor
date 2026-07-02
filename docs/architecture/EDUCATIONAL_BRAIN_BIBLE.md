@@ -129,7 +129,7 @@ see ADR 03).
 | 32 | Visual Type System | Visual | `school/visuals/{visualTypes,detectVisual}.ts` | LIVE | — (ADR 12 upcoming) |
 | 33 | AI Router | Generation | `ai/router.ts` | LIVE, the only probabilistic component | — (ADR 13 upcoming) |
 | 34 | Educational Brain Decision Pipeline | Experimental | `educationalBrain/*` | DORMANT (flag off) | — |
-| 35 | Teaching Assets Platform (content layer) | Legacy/orphaned | `curriculum/{teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts` | ORPHANED (content, zero importers) | ADR 03 |
+| 35 | Teaching Assets Platform (content layer) | Legacy/orphaned | `curriculum/{teachingAssetSchema,teachingAssetAdapter,teachingAssets}.ts` | ORPHANED (content, zero importers); **formally retired ADR 14** — archive-status header planned per ADR 14 migration Phase 1; NOT the implementation path for the Knowledge Asset model | ADR 03, ADR 14 |
 | — | Teaching Action Engine (decision duplicate of #11) | Legacy | `curriculum/teachingActionEngine.ts` | **DELETED** 2026-06-30 | ADR 03 |
 | 36 | Visualization Decision Engine | Visual | `teaching/visualizationDecision.ts` | LIVE — decides whether to attempt a visual this turn (parametric-scene vs. legacy-visual vs. none) | — |
 | 37 | Deterministic Scene Builder | Visual | `teaching/buildSceneSpec.ts` | LIVE — keyword-based heuristic that builds a `SceneSpec` without an LLM call; first fallback when Scene Router returns null | — |
@@ -331,6 +331,20 @@ Student Memory read → Mastery/Assessment read → Teaching Engine decision
 UI → (separately, on practice/assessment submit, not the chat turn)
 Student Memory write-back. No step in this chain is generated prose
 except the final LLM render.
+
+**PROPOSED, ADR 14 (Knowledge Asset Lifecycle):** all generated content
+(worked examples, explanations, visual specs, probes) is currently
+discarded at turn end — a P2 violation at the content layer. The future
+asset retrieval step (ADR 14 Phase 3 migration) inserts a new stage
+between Student Memory read and Teaching Engine decision: look up an
+existing ACTIVE `AssetIdentity` record for the current `(conceptId,
+teachingAction, renderer, language, gradeBand)` tuple; if found, serve it
+directly and skip LLM generation for that content block. This is the
+primary mechanism by which the LLM's role converges from
+content-generator to voice-renderer (P2 principle). Retrieval is gated on
+the `incompatibilities` field — assets known to reinforce active
+misconceptions are suppressed for that learner. Gated on KG v1 freeze and
+explicit user approval. **Full design: ADR 14.**
 
 ### 6.4 Knowledge flow
 
@@ -579,6 +593,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | R16 | `generateVisualizationCode.ts` makes a second LLM call per turn when `ENABLE_DYNAMIC_VISUALIZATION` is true — a Permanent Rule 9 violation (the AI Router must be the only probabilistic component); the flag is off by default but the risk is latent in any deployment that enables it | Open, flag-gated | ADR 12 §2, route.ts:17+1597 | PROPOSED in ADR 12 §4.4: move all visual LLM calls to background authoring tasks; per-turn path serves only cached `VisualAsset` records after first-time authoring; blocked on KG v1 freeze |
 | R17 | KG concept slug rename would invalidate `VisualizationCache` entries keyed on `conceptId` without a migration step; orphaned cache rows would be served for renamed concepts | Open, deferred | ADR 12 §12 | KG version gate (ADR 06) must trigger a cache migration (not just invalidation) for affected conceptIds; migration strategy to be specified in ADR 12's future implementation plan |
 | R18 | KG concept slug rename would also orphan historical `EbEvidenceEvent` rows keyed on the old `conceptId` — accumulated evidence for a renamed concept becomes permanently inaccessible without a data migration | Open, deferred | ADR 13 §12 | Slug rename must trigger a migration of historical `EbEvidenceEvent` rows; same gate as R17 — both triggered by KG version bump; the Evidence Engine's nightly rollup must detect unknown `conceptId` values and emit a data-quality alert |
+| R19 | Teaching Assets Platform files (`teachingAssets.ts`/`teachingAssetSchema.ts`/`teachingAssetAdapter.ts`) remain on disk with zero importers and are formally retired by ADR 14; a future contributor might try to extend or wire them, bypassing the canonical ADR 14 AssetIdentity model and creating a second competing content layer | Open, accepted | ADR 14 §3, §14 | Archive-status header comment to be added to each file per ADR 14 migration Phase 1; files not deleted so content is preserved for reference; any future contributor must read ADR 14 before modifying these files |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
@@ -653,6 +668,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 11 | Recommendation Intelligence (roadmap 6/8) | **Proposal, blocked on KG v1 freeze** | In-session signal injection has no reconciliation layer — conflicting signals (weak topic vs. improvement narrative for same concept) are handed to the LLM; Library Mode has no recommendation tier; proposes a two-layer architecture (Cross-Session Planner + Session Recommendation Reconciler) with a deterministic signal priority table and Library Mode parity |
 | ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | **Proposal, blocked on KG v1 freeze** | Seven competing visual-generation pathways with no unified ranking; P2 violation (no concept-keyed cache); Permanent Rule 9 violation when `ENABLE_DYNAMIC_VISUALIZATION` is true; two uncoordinated visual decision points; proposes Visual Asset Model (typed renderers, concept-keyed cache, background authoring for all LLM visual calls, mandatory a11y, Visual Policy from BrainConfig) |
 | ADR 13 | Evidence Engine (roadmap 9/15, item #9) | **Proposal, blocked on KG v1 freeze** | Two existing evidence schemas confirmed orthogonal (`EvidenceRecord` = student mastery ledger; `EbEvidenceEvent`/`EbAssetScore` = asset quality event log, currently dormant); proposes adopting `EbEvidenceEvent`/`EbAssetScore` as canonical, wired into the Teaching pipeline's persist stage (stage 10); three-tier chain (append-only log → 60s EWMA worker → nightly rollup); six evidence categories; Beta-binomial confidence; three bias counters; single-writer rule for all Evidence Engine output tables |
+| ADR 14 | Knowledge Asset Lifecycle (roadmap 12/15, item #12) | **Proposal, blocked on KG v1 freeze** | All generated content (worked examples, explanations, visual specs, probes) discarded per-turn — P2 violation at the content layer; `teachingAssets.ts` family confirmed ORPHANED and formally retired; proposes three-family `AssetIdentity` model (ExplanationAsset, VisualAsset per ADR 12, ProbeAsset), DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED lifecycle, five evidence-driven deprecation triggers, concept-keyed retrieval with `incompatibilities` misconception-gate, and four-phase additive migration (schema → passive catalogue → active retrieval → probe assets); Phase 2 endgame: LLM becomes voice-renderer, not content-generator |
 
 **Template note:** ADRs 02–07 were written under the prior 13-section
 template (`Chosen architecture`, no standalone Teaching Engine section).
@@ -925,3 +941,19 @@ Assessment) — not due yet.
   probabilistically by LLM rather than deterministically by Brain — already
   realized in production). §9 ADR index row for ADR 11 updated to "Proposal,
   blocked on KG v1 freeze." No production code changed.
+- **2026-07-02 — Updated for ADR 14 (Knowledge Asset Lifecycle, roadmap
+  item #12/15).** §3 engine map row #35 (Teaching Assets Platform) updated
+  to reference ADR 14 formal retirement verdict: Teaching Assets Platform is
+  ORPHANED with zero importers, formally retired; archive-status header
+  comment planned per ADR 14 migration Phase 1; files not deleted. §6.3
+  Student learning flow gains PROPOSED note: future asset-retrieval stage
+  (ADR 14 Phase 3) between Student Memory read and Teaching Engine will serve
+  ACTIVE `AssetIdentity` records directly — assets found skip LLM generation
+  for that content block, converging the LLM role from content-generator to
+  voice-renderer (P2); `incompatibilities` field suppresses assets that
+  reinforce active learner misconceptions. §7 risk register gains R19
+  (Teaching Assets Platform files remain on disk post-retirement, risk of
+  future re-wiring that bypasses ADR 14 `AssetIdentity` model; mitigation:
+  archive-status header comment per ADR 14 Phase 1). §9 ADR index row for
+  ADR 14 added at "Proposal, blocked on KG v1 freeze." No production code
+  changed.
