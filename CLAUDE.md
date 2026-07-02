@@ -219,6 +219,21 @@
   after first-time authoring), mandatory a11yDescription, Visual Policy from
   BrainConfig. Bible: §3 Engine 42 added, §6.8, §7 R16/R17, §9 updated.
   Full design: `docs/architecture/ADR_12_VISUALIZATION_SIMULATION_ARCHITECTURE.md`.
+  **ADR 13 complete (2026-07-02):** Evidence Engine. Confirmed two existing
+  evidence schemas are orthogonal — `EvidenceRecord` (per-learner mastery ledger,
+  Student Memory Store 2) vs. `EbEvidenceEvent`/`EbAssetScore` (per-asset cross-
+  student quality log, Teaching Memory Store 4). `EbEvidenceEvent` schema already
+  matches ch04's design (conceptId, category, outcome, strength, contextHash).
+  Adopted `EbEvidenceEvent`/`EbAssetScore` as canonical Evidence Engine tables,
+  wired directly into Teaching pipeline's persist stage (not via dormant Eb* pipeline).
+  Three-tier chain: append-only log → 60s EWMA rolling-window worker → nightly
+  authoritative rollup. Six evidence categories, Beta-binomial confidence, three
+  bias counters (exploration budget, inverse propensity weighting, misconception-
+  conditional scoring). New tables: StrategyEffectivenessScore, MisconceptionPrevalence,
+  CuratorQueueEntry. Single-writer rule for all Evidence Engine output tables.
+  ADR 11 integration point implemented: assetEffectivenessSignal derives from EbAssetScore.
+  R9 fully resolved (confirmed orthogonal). Bible: §6.6, §7 R18, §9 updated.
+  Full design: `docs/architecture/ADR_13_EVIDENCE_ENGINE.md`.
 - **Chief Educational Brain Architect mode + per-ADR discipline (2026-06-30, binding, refined
   same day):** the Curriculum Production Pipeline is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not interfere with it, generate subject knowledge, generate teaching

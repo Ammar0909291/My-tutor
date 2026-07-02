@@ -385,17 +385,33 @@ on KG v1 freeze + explicit approval, same governance gate as ADR 06–09.
 
 ### 6.6 Evidence flow
 
-**Partially audited; full audit deferred to ADR 10.** Two distinct,
-non-unified evidence representations exist today: (a) `EvidenceRecord`
-(canonical Prisma model, Learner Longitudinal State bucket), read/written
-by a separate visual-mastery/intelligence-tracking subsystem
-(`visuals/visualMasteryPersistence.ts`, `intelligence/improvementTracking.ts`,
-and their API routes) — **not** wired into the canonical Teaching pipeline
-described in §6.1–6.3; (b) `EbEvidenceEvent` (dormant `Eb*` pipeline,
-write-only, fire-and-forget, the only table the experimental pipeline
-writes — Permanent Rule per `DEPENDENCY_RULES.md`). These two have not
-been confirmed related or unrelated by a focused audit; that audit is
-explicitly scoped into ADR 10 rather than asserted here without evidence.
+**ADR 13 finding (Evidence Engine, roadmap item #9 — DONE):** two distinct
+evidence structures confirmed in `prisma/schema.prisma` with orthogonal
+purposes: (a) `EvidenceRecord` (`evidence_records` table) — per-learner,
+per-topic mastery evidence used by visual-mastery tracking, owned by
+Student Memory (ADR 10 Store 2), NOT the Evidence Engine; (b)
+`EbEvidenceEvent` (`eb_evidence_event`) + `EbAssetScore` (`eb_asset_score`)
+— per-asset cross-student quality event log + rolling-window score, written
+only by the dormant `Eb*` pipeline today. `EbEvidenceEvent`'s schema
+already matches ch04's design (same fields: `conceptId`, `category`,
+`outcome`, `strength`, `contextHash`, stratified by `language`/`gradeBand`).
+**PROPOSED, ADR 13:** adopt `EbEvidenceEvent`/`EbAssetScore` as the
+canonical Evidence Engine tables wired directly into the Teaching pipeline's
+persist stage (stage 10), bypassing the dormant `Eb*` orchestration
+entirely. Three-tier chain: (1) append-only `EbEvidenceEvent` INSERT in
+stage 10 (fire-and-forget); (2) 60-second rolling-window EWMA worker →
+UPSERT `EbAssetScore`; (3) nightly authoritative rollup (30-day window)
+→ OVERWRITE `EbAssetScore` + write `StrategyEffectivenessScore` +
+`MisconceptionPrevalence` + `CuratorQueueEntry`. Six evidence categories:
+`ASSET_SHOWN` (weight 0.0, exposure denominator), `PROBE_OUTCOME` (strong),
+`MISCONCEPTION_DETECTED` (strong negative), `LEARNER_FEEDBACK` (medium),
+`RE_ASK` (medium negative), `SUMMATIVE_OUTCOME` (very strong, delayed).
+Beta-binomial confidence (stratified prior by author kind). Three bias
+counters: 5% exploration budget, inverse propensity weighting, misconception-
+conditional scoring. The Evidence Engine is the single writer of
+`EbAssetScore`/`StrategyEffectivenessScore`/`MisconceptionPrevalence`/
+`CuratorQueueEntry` — new permanent single-writer rule (same pattern as
+ADR 10/Permanent Rule 14). All blocked on KG v1 freeze + approval.
 
 ### 6.7 Recommendation flow
 
@@ -557,11 +573,12 @@ this section is the cross-cutting summary, not a replacement for them.
 | R6 | No CI wiring for the Knowledge Graph Validator — a malformed `graph.json` could reach runtime undetected | Open | ADR 06 finding | PROPOSED 4-part gate in ADR 06, blocked on KG v1 freeze |
 | R7 | Five non-unified mastery/progression vocabularies risk further silent drift the longer they're not bridged | Open, partially mitigated by documentation | ADR 07 Finding 8 | PROPOSED mapping table, unexecuted |
 | R8 | No centrally specified scalability target (learner count, sharding, caching tier) | Open | §6.10 | To be specified across ADR 10 (Memory) and ADR 13 (AI cost) |
-| R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **Partially resolved, ADR 10** — audit confirmed both are in Prisma schema; `EvidenceRecord` consumed by visual-mastery subsystem (not the canonical Teaching pipeline); `EbEvidenceEvent` is dormant Eb* only; full reconciliation deferred to ADR 13 (Evidence Engine) | §6.6, ADR 10 §5 | Scoped into ADR 13 |
+| R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **RESOLVED, ADR 13** — `EvidenceRecord` is Student Memory (per-learner mastery ledger, ADR 10 Store 2); `EbEvidenceEvent`/`EbAssetScore` are Teaching Memory (per-asset cross-student quality log + score, ADR 10 Store 4). Orthogonal purposes; not merged. Evidence Engine adopts `EbEvidenceEvent` as canonical append-only log, wired into Teaching pipeline's persist stage directly | ADR 13 §2, §4.8 | Resolved — no residual risk |
 | R14 | `TopicProgress` multi-writer migration risk: migrating four known writers to `ConceptMasteryRecord` single-writer ownership is the highest-risk phase of ADR 10; a partially-migrated state (some writers on old table, some on new) could produce split-brain mastery reads | Open, gated | ADR 10 §10 (Migration Strategy §2c) | 4-phase additive migration (add → migrate readers → migrate writers → deprecate): never cut over atomically; canonical fallback is whichever table has a value; `masteryConfidence = 0.0` flags old-table-derived scores during transition |
 | R15 | In-session signal conflicts are currently resolved by the LLM (probabilistic), not by the Brain (deterministic); a `RAPID_IMPROVEMENT` narrative and a `weak_topic` signal for the same concept can both appear in the system prompt with no priority guarantee — which one the LLM weights is non-deterministic | **Already realized in production** | ADR 11 §2 | PROPOSED Session Recommendation Reconciler (ADR 11 §4.2): deterministic signal priority table + `suppressedBy` audit field; `maxSessionSignals = 3` cap (BrainConfig-owned); blocked on KG v1 freeze |
 | R16 | `generateVisualizationCode.ts` makes a second LLM call per turn when `ENABLE_DYNAMIC_VISUALIZATION` is true — a Permanent Rule 9 violation (the AI Router must be the only probabilistic component); the flag is off by default but the risk is latent in any deployment that enables it | Open, flag-gated | ADR 12 §2, route.ts:17+1597 | PROPOSED in ADR 12 §4.4: move all visual LLM calls to background authoring tasks; per-turn path serves only cached `VisualAsset` records after first-time authoring; blocked on KG v1 freeze |
 | R17 | KG concept slug rename would invalidate `VisualizationCache` entries keyed on `conceptId` without a migration step; orphaned cache rows would be served for renamed concepts | Open, deferred | ADR 12 §12 | KG version gate (ADR 06) must trigger a cache migration (not just invalidation) for affected conceptIds; migration strategy to be specified in ADR 12's future implementation plan |
+| R18 | KG concept slug rename would also orphan historical `EbEvidenceEvent` rows keyed on the old `conceptId` — accumulated evidence for a renamed concept becomes permanently inaccessible without a data migration | Open, deferred | ADR 13 §12 | Slug rename must trigger a migration of historical `EbEvidenceEvent` rows; same gate as R17 — both triggered by KG version bump; the Evidence Engine's nightly rollup must detect unknown `conceptId` values and emit a data-quality alert |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
@@ -635,7 +652,7 @@ this section is the cross-cutting summary, not a replacement for them.
 | ADR 10 | Student Memory Architecture (roadmap 5/8) | **Proposal, blocked on KG v1 freeze** | Eight fragmented memory surfaces with no common contract and four writers to `TopicProgress`; `masteryPct < 70` conflates mastery and retention; proposes six formally owned stores with single-writer invariant, `ConceptMasteryRecord` (mastery/decay split), `BrainConfig` (versioned policy constants), and a 4-phase additive migration |
 | ADR 11 | Recommendation Intelligence (roadmap 6/8) | **Proposal, blocked on KG v1 freeze** | In-session signal injection has no reconciliation layer — conflicting signals (weak topic vs. improvement narrative for same concept) are handed to the LLM; Library Mode has no recommendation tier; proposes a two-layer architecture (Cross-Session Planner + Session Recommendation Reconciler) with a deterministic signal priority table and Library Mode parity |
 | ADR 12 | Visualization & Simulation Architecture (roadmap 7/8) | **Proposal, blocked on KG v1 freeze** | Seven competing visual-generation pathways with no unified ranking; P2 violation (no concept-keyed cache); Permanent Rule 9 violation when `ENABLE_DYNAMIC_VISUALIZATION` is true; two uncoordinated visual decision points; proposes Visual Asset Model (typed renderers, concept-keyed cache, background authoring for all LLM visual calls, mandatory a11y, Visual Policy from BrainConfig) |
-| ADR 13 | AI Independence Roadmap (roadmap 8/8) | Not started | — |
+| ADR 13 | Evidence Engine (roadmap 9/15, item #9) | **Proposal, blocked on KG v1 freeze** | Two existing evidence schemas confirmed orthogonal (`EvidenceRecord` = student mastery ledger; `EbEvidenceEvent`/`EbAssetScore` = asset quality event log, currently dormant); proposes adopting `EbEvidenceEvent`/`EbAssetScore` as canonical, wired into the Teaching pipeline's persist stage (stage 10); three-tier chain (append-only log → 60s EWMA worker → nightly rollup); six evidence categories; Beta-binomial confidence; three bias counters; single-writer rule for all Evidence Engine output tables |
 
 **Template note:** ADRs 02–07 were written under the prior 13-section
 template (`Chosen architecture`, no standalone Teaching Engine section).
@@ -878,6 +895,15 @@ Assessment) — not due yet.
   `masteryConfidence = 0.0` flag during transition). §9 ADR index row for
   ADR 10 updated from "Not started" to "Proposal, blocked on KG v1 freeze"
   with one-line finding. No production code changed.
+- **2026-07-02 — Updated for ADR 13 (Evidence Engine, roadmap item #9).** §6.6
+  Evidence flow expanded from stub to full ADR 13 finding: `EvidenceRecord` and
+  `EbEvidenceEvent`/`EbAssetScore` confirmed orthogonal (per-learner mastery vs.
+  per-asset quality); `EbEvidenceEvent` adopted as canonical Evidence Engine event
+  log wired directly into Teaching pipeline's persist stage; three-tier chain
+  (append → EWMA → nightly rollup); six categories; Beta-binomial confidence; three
+  bias counters. §7 risk register: R9 fully resolved (no residual risk), R18 added
+  (EbEvidenceEvent rows orphaned on KG slug rename). §9 ADR index row for ADR 13
+  updated to "Proposal, blocked on KG v1 freeze." No production code changed.
 - **2026-07-02 — Updated for ADR 12 (Visualization & Simulation Architecture,
   roadmap 7/8).** §3 engine map gains Engine 42 (Dynamic Visualization Engine,
   `teaching/visuals/generateVisualizationCode.ts`, DORMANT flag-gated, with
