@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 2,
-  "drafted_assets": 140,
-  "completion_pct": 15.4,
+  "completed_domains": 3,
+  "drafted_assets": 176,
+  "completion_pct": 19.4,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:819d9f3964d1f151698ed838314f3a8dc1d2ce0551992720482ff3d08194193f",
-    "chapters_listing_sha256": "sha256:2ec04abf3b353502ba88e3d6c425fa21727bed62e6f197bf09689937303f460d"
+    "assets_sha256": "sha256:261ca2979ca4eeafa56527148cc1bcab433f7c9f850ae1fd59ff275400776862",
+    "chapters_listing_sha256": "sha256:1337e11fe2e107e39710ace02bfbf5313604b53ab5346dd1febdf205494bb612"
   },
   "domains": [
     {
@@ -79,14 +79,28 @@
       "domain_prefix": "math.nt",
       "domain_name": "Number Theory",
       "concept_count": 36,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 36,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/nt.md",
+      "manifest_file": "docs/mathematics/domains/math.nt-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:cee969129ba33994f2327b5244589151cc15d367d9ef3d630ac9408f005b4fa1",
+        "domain_assets_sha256": "sha256:dbfea7eff0e2a5b0e0c89226ab50ecab0cf0ece0c89043cce22dea40c94ba4ef",
+        "graph_domain_sha256": "sha256:feb04fb3df4bdcc2fc6433f5a31d3339a5cae82f5700553560d1f4ec07f7b504",
+        "validation_report_sha256": "sha256:0e0c404a3e3f5b555c83a2e9c943ab874a78baa30116547070f3ac3d74aa5ea1"
+      },
+      "creation_commit": "70c9ba7",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "algebra",
@@ -389,6 +403,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "1c354a3",
-  "last_updated": "2026-06-30T22:14:04Z"
+  "last_commit": "70c9ba7",
+  "last_updated": "2026-07-02T09:53:55Z"
 }
