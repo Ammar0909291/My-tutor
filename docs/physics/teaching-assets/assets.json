@@ -9125,755 +9125,1489 @@
     {
       "id": "asset.phys.opt.nature-of-light",
       "concept_id": "phys.opt.nature-of-light",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Nature of Light: Ray and Wave Models\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nature of Light: Ray and Wave Models\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe light as an electromagnetic wave travelling at c = 3.0 \u00d7 10\u2078 m/s in vacuum, state when the ray model suffices and when the wave model is required, use the wavelength scale of visible light (~400\u2013700 nm), and select the appropriate model for a given optical situation.",
+      "concept_summary": "Optics runs on two complementary models of one entity. Light is physically an electromagnetic wave \u2014 transverse oscillations of electric and magnetic fields needing no medium, crossing vacuum at c = 3.0 \u00d7 10\u2078 m/s (the universal speed limit), with visible wavelengths spanning roughly 400 nm (violet) to 700 nm (red) \u2014 a scale a thousand times finer than a hair. But because those wavelengths are minuscule compared with mirrors, lenses, and rooms, light usually travels in effectively straight lines, and the RAY model \u2014 light as straight arrows that reflect and refract at surfaces \u2014 describes everything from shadows and mirrors to eyeglasses with elementary geometry. The division of labour is set by scale: when light interacts with objects much larger than its wavelength, rays suffice (geometrical optics: reflection, mirrors, refraction, lenses, instruments \u2014 this domain's first half); when apertures or obstacles shrink toward the wavelength, or when beams overlap coherently, the wave character asserts itself \u2014 interference fringes, diffraction spreading, polarization \u2014 and the wave model becomes mandatory (wave optics, the domain's second half). Choosing the model is itself the skill: shadows sharp at door scale, yet fuzzy-edged at hair scale; a lens designer works in rays, a lens coater in waves. Historically the two models fought for centuries \u2014 Newton's corpuscles against Huygens' waves \u2014 until Young's interference fringes (ahead) settled the wave case, and the twentieth century added the photon's final twist, noted here only as a forward pointer: this domain works the classical two-model toolkit.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Nature of Light: Ray and Wave Models\"",
-        "[TEMPLATE] Key idea 2 for \"Nature of Light: Ray and Wave Models\"",
-        "[TEMPLATE] Key idea 3 for \"Nature of Light: Ray and Wave Models\""
+        "Light is a transverse electromagnetic wave: oscillating E and B fields, no medium required, vacuum speed c = 3.0 \u00d7 10\u2078 m/s \u2014 the fastest signal there is.",
+        "Visible wavelengths: ~400 nm (violet) to ~700 nm (red) \u2014 sub-micrometre, which is why light seems ray-like at everyday scales.",
+        "Ray model: light as straight-line arrows changing direction only at surfaces (reflection, refraction) \u2014 the geometry engine of mirrors, lenses, and instruments.",
+        "Model-selection rule: objects/apertures \u226b \u03bb \u2192 rays suffice; features approaching \u03bb, or coherent beam overlap \u2192 wave model mandatory (interference, diffraction, polarization).",
+        "In transparent media light slows to v = c/n (previewing refraction); frequency stays source-loyal, wavelength shortens \u2014 the wave bookkeeping inherited from the waves domain.",
+        "Rectilinear propagation's everyday evidence: sharp shadows, pinhole images, eclipse geometry \u2014 and its fine print: edges soften at wavelength scale (diffraction's preview).",
+        "Historical arc: corpuscles (Newton) vs. waves (Huygens) \u2192 Young's fringes decide for waves (1801) \u2192 electromagnetic identification (Maxwell) \u2192 photon postscript (quantum, out of scope here)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Nature of Light: Ray and Wave Models\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Light needs a medium \u2014 something must be waving.",
+          "correction": "Light's oscillating quantities are electric and magnetic fields, which exist in vacuum; sunlight crosses 150 million km of emptiness. The 19th-century 'ether' was hunted and never found \u2014 the fields themselves are the medium-free wave."
+        },
+        {
+          "misconception": "The ray model is wrong now that we know light is a wave.",
+          "correction": "The ray model is the wave model's large-scale limit, not an error: when \u03bb is tiny compared with the geometry, wavefronts advance as straight rays to superb accuracy. Models are tools with domains \u2014 lens design uses rays because rays are CORRECT there."
+        },
+        {
+          "misconception": "Light always travels at 3 \u00d7 10\u2078 m/s, everywhere.",
+          "correction": "That is the VACUUM speed. In water light travels at ~2.25 \u00d7 10\u2078 m/s, in glass ~2 \u00d7 10\u2078 m/s \u2014 the slowdown ratio n = c/v is the refractive index, and it is the engine of all refraction to come."
+        },
+        {
+          "misconception": "Shadows prove light is made of straight rays, full stop.",
+          "correction": "Shadows are sharp only because \u03bb is so small. Look closely at a shadow's edge, or shrink the obstacle toward micrometres, and the edge blurs and fringes \u2014 diffraction, the wave signature that the ray model deliberately ignores."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Nature of Light: Ray and Wave Models\""
+        "An electromagnetic-wave animation: E and B field arrows oscillating perpendicular to each other and to the travel direction, crossing an empty-space band labelled 'no medium'.",
+        "A scale ladder: visible-light wavelengths (0.4\u20130.7 \u03bcm) against a hair (~70 \u03bcm), a pinhole, a lens, a door \u2014 the geometry that licenses rays.",
+        "A two-model decision card: the same beam drawn as rays hitting a mirror versus as wavefronts squeezing through a slit, with the \u226b\u03bb / ~\u03bb rule stamped between.",
+        "The electromagnetic spectrum strip with the visible sliver highlighted between infrared and ultraviolet, wavelengths and frequencies labelled.",
+        "A laser-through-chalk-dust demonstration: the beam visible as a straight line (ray model live), then aimed through a narrow slit onto a wall to spread (wave model live)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Nature of Light: Ray and Wave Models\"",
+        "setup": "(a) Find the frequency of 600 nm orange light in vacuum. (b) Sunlight takes how long to reach Earth (1.5 \u00d7 10\u00b9\u00b9 m)? (c) Decide which model \u2014 ray or wave \u2014 suits each case: light through a 5 mm camera aperture; light through a 1 \u03bcm slit; a laser crossing a room; two overlapping laser beams making fringes on a wall.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) f = c/\u03bb = 3.0 \u00d7 10\u2078/6.0 \u00d7 10\u207b\u2077 = 5.0 \u00d7 10\u00b9\u2074 Hz \u2014 half a petahertz; visible light oscillates about a million times faster than radio.",
+          "(b) t = d/c = 1.5 \u00d7 10\u00b9\u00b9/3.0 \u00d7 10\u2078 = 500 s \u2248 8.3 minutes \u2014 the Sun we see is eight minutes old.",
+          "(c) 5 mm aperture: 5 \u00d7 10\u207b\u00b3 m \u226b 6 \u00d7 10\u207b\u2077 m (factor ~10\u2074) \u2014 ray model; geometrical optics handles the camera.",
+          "1 \u03bcm slit: only ~2\u03bb \u2014 wave model mandatory; expect strong diffraction spreading.",
+          "Laser across a room: path scale metres \u226b \u03bb \u2014 ray model (a straight beam).",
+          "Overlapping coherent beams: superposition of waves is the PHENOMENON \u2014 wave model regardless of scale; fringes are interference, invisible to ray thinking."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nature of Light: Ray and Wave Models\""
+        "expected_outcome": "The student computes 5 \u00d7 10\u00b9\u2074 Hz and the 8.3-minute solar delay, and sorts the four scenarios correctly by the \u226b\u03bb rule plus the coherent-overlap exception."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "c = f\u03bb computations across the visible band and spectrum",
+          "light-travel-time problems (Sun, Moon, fibre links)",
+          "model-selection judgments with justification",
+          "conceptual items on medium-free propagation and the historical arc"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with frequency/wavelength computations and travel times, add model-selection scenario sets, ending with edge cases (coherent overlap, shadow-edge fine print) and the v = c/n preview.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "model-selection quiz with justifications",
+          "conceptual short answers"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Nature of Light: Ray and Wave Models\""
+        "bloom_alignment": "Understand \u2014 students must explain light's electromagnetic-wave nature, the ray model's status as its large-scale limit, and select models by the wavelength-scale rule.",
+        "mastery_signal": "The student computes f, \u03bb, and travel times correctly and selects the appropriate model with the \u226b\u03bb justification across varied scenarios, at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Nature of Light: Ray and Wave Models\""
+        "Camera, telescope, and eyeglass design runs on the ray model; lens coatings and sensor pixel limits run on the wave model \u2014 one industry, both models daily.",
+        "Fibre-optic communications time light pulses down glass at c/n \u2014 the internet's backbone is applied light-speed bookkeeping.",
+        "Astronomy is light-travel-time made profound: we see the Sun 8 minutes ago, nearby stars years ago, galaxies millions of years ago.",
+        "Laser ranging (Earth-Moon, LIDAR, surveying) converts c into distances with millimetre precision.",
+        "The electromagnetic spectrum beyond the visible \u2014 radio to X-ray \u2014 is the same wave at other wavelengths, one physics from broadcasting to radiology."
       ],
       "prerequisite_review_triggers": [
         "phys.wave.wave-properties"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.9"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.reflection",
       "concept_id": "phys.opt.reflection",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Reflection and Laws of Reflection\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Reflection and Laws of Reflection\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state the laws of reflection (incident ray, reflected ray, and normal coplanar; angle of incidence equals angle of reflection, both measured from the normal), distinguish specular from diffuse reflection, construct plane-mirror images (virtual, upright, equal size, equal distance behind), and solve rotation and multiple-mirror problems.",
+      "concept_summary": "Reflection is light's bounce, and its law is geometry at its cleanest: the reflected ray leaves the surface at the same angle the incident ray arrived, both angles measured from the NORMAL \u2014 the perpendicular to the surface at the point of incidence \u2014 with all three lines in one plane. The normal convention is the topic's discipline (angles from the surface itself are the classic error), and the law holds at EVERY surface: mirrors obey it visibly (specular reflection from smooth surfaces preserves ray organization, giving images), while rough surfaces obey it point by point yet scatter rays every way because their normals vary microscopically (diffuse reflection \u2014 why paper, walls, and the Moon are visible from everywhere but show no images; why a wet road mirrors headlights that a dry one scatters). Applied to a plane mirror, the law constructs the most familiar image in optics: virtual (no light actually passes behind the mirror \u2014 rays only appear to come from there), upright, equal in size, and exactly as far behind the mirror as the object is in front, with left-right appearing swapped (more precisely: front-back reversed). Two classic corollaries reward geometric care: seeing your full height needs a mirror only HALF your height (the ray from your feet reflects at the mirror's midpoint-to-eye level \u2014 independent of distance), and rotating a mirror by \u03b8 swings the reflected ray by 2\u03b8 (the principle of optical levers, galvanometer mirrors, and laser scanners). Reflection is also, quietly, how we see everything that doesn't glow: the page, the world, and the Moon are all diffuse reflectors delivering the law to your eye.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Reflection and Laws of Reflection\"",
-        "[TEMPLATE] Key idea 2 for \"Reflection and Laws of Reflection\"",
-        "[TEMPLATE] Key idea 3 for \"Reflection and Laws of Reflection\""
+        "Laws of reflection: \u03b8_incidence = \u03b8_reflection, both from the NORMAL; incident ray, normal, and reflected ray are coplanar.",
+        "Normal discipline: all optical angles are measured from the perpendicular \u2014 the convention that carries through refraction and Brewster ahead.",
+        "Specular vs. diffuse: smooth surfaces preserve ray order (images); rough surfaces obey the law at each point but scatter (visibility without images) \u2014 same law, different surface statistics.",
+        "Plane-mirror image: virtual, upright, same size, image distance = object distance behind the mirror; formed where reflected rays EXTRAPOLATE, not where light goes.",
+        "Apparent left-right swap is really front-back reversal \u2014 the handedness flip of mirror images.",
+        "Half-height rule: a full-length view needs a mirror half your height, hung correctly \u2014 independent of how far you stand.",
+        "Mirror rotation doubles: rotate the mirror by \u03b8 and the reflected beam turns by 2\u03b8 \u2014 optical levers amplify small twists into large deflections.",
+        "Diffuse reflection is how the non-luminous world is seen at all \u2014 every matte surface is a law-abiding scatterer."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Reflection and Laws of Reflection\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The angles in the law are measured from the mirror's surface.",
+          "correction": "Both angles are measured from the NORMAL \u2014 the perpendicular at the point of incidence. A ray arriving 30\u00b0 from the surface is at 60\u00b0 incidence. The normal convention is universal across reflection, refraction, and polarization; adopting it now prevents every later sign error."
+        },
+        {
+          "misconception": "Rough surfaces break the law of reflection.",
+          "correction": "Every point of a rough surface obeys the law exactly \u2014 but the microscopic normals point every which way, so parallel incident rays leave scattered. Diffuse reflection is the law plus disordered normals, not lawlessness."
+        },
+        {
+          "misconception": "The mirror image is a picture on the mirror's surface, or light focused behind it.",
+          "correction": "The image is VIRTUAL: reflected rays diverge as if from a point behind the mirror, and the brain extrapolates. No light exists behind the glass \u2014 a screen placed there records nothing. The image also sits as far behind as you stand in front, which is why it recedes as you back away."
+        },
+        {
+          "misconception": "To see your whole body you need a full-length mirror, and closer helps.",
+          "correction": "Half your height suffices, at any distance: the geometry (reflection at midpoints between eye and each body point) is distance-independent. Stepping closer enlarges your image angularly but also enlarges the needed... no \u2014 the same half-height mirror keeps working. Try it against a doorframe-taped mirror."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Reflection and Laws of Reflection\""
+        "The canonical ray diagram: surface, dashed normal, incident and reflected rays with equal angles marked FROM THE NORMAL \u2014 the figure to draw a hundred times.",
+        "A specular/diffuse split panel: parallel rays off polished metal (ordered fan) versus off paper drawn with jagged micro-normals (scattered fan) \u2014 same law labelled at each point.",
+        "The plane-mirror image construction: two rays from an object point, reflected by the law, extrapolated dashed behind the mirror to the virtual image point.",
+        "The half-height-mirror geometry: person, mirror on wall, rays from head and feet reflecting to the eye at the mirror's half-points \u2014 with the distance-independence called out.",
+        "A laser-and-rotating-mirror demonstration: mirror turned 10\u00b0, spot swinging 20\u00b0 across the wall \u2014 the 2\u03b8 lever measured live."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Reflection and Laws of Reflection\"",
+        "setup": "A laser beam strikes a plane mirror at 25\u00b0 from the SURFACE. (a) Find the angles of incidence and reflection, and the total deviation of the beam. (b) The mirror is then rotated 5\u00b0 (incident beam fixed) \u2014 find the new deviation and the swing of the reflected beam. (c) A student 1.7 m tall, eyes 10 cm below the top of her head, wants a full-length view \u2014 find the minimum mirror height and its top edge's mounting height.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Angle from the surface 25\u00b0 \u2192 incidence \u03b8 = 90\u00b0 \u2212 25\u00b0 = 65\u00b0 from the normal; reflection = 65\u00b0 likewise.",
+          "Deviation: the beam turns by 180\u00b0 \u2212 2\u03b8 = 180\u00b0 \u2212 130\u00b0 = 50\u00b0.",
+          "(b) Rotating the mirror 5\u00b0 changes \u03b8 to 60\u00b0 (or 70\u00b0, direction depending) and swings the reflected ray by 2 \u00d7 5\u00b0 = 10\u00b0; new deviation 180\u00b0 \u2212 120\u00b0 = 60\u00b0 (rotation toward the normal case) \u2014 the doubling rule verified through the deviation formula.",
+          "(c) Half-height rule: minimum mirror = 1.70/2 = 0.85 m.",
+          "Mounting: the mirror's top must sit halfway between eye level and head top: eyes at 1.60 m, head at 1.70 m \u2192 top edge at 1.65 m; bottom edge then at 0.80 m (halfway between eyes and feet: 1.60/2).",
+          "Note the invariance: none of (c) used her distance from the wall \u2014 the half-height geometry is distance-free, the classic exam twist."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Reflection and Laws of Reflection\""
+        "expected_outcome": "The student converts the surface angle to 65\u00b0 incidence, computes the 50\u00b0 deviation and the 10\u00b0 swing (2\u03b8 rule), and sizes the 0.85 m mirror with its 1.65 m top edge, noting distance independence."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "angle computations with normal-convention conversions",
+          "plane-mirror image construction and property items",
+          "rotation (2\u03b8) and deviation problems",
+          "half-height and multiple-mirror geometry problems"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with angle bookkeeping and image properties, add construction diagrams, then rotation/deviation and half-height geometry, ending with two-mirror (periscope, corner) ray tracing.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation and construction set",
+          "diagram-based problems",
+          "conceptual quiz on specular/diffuse and virtual images"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Reflection and Laws of Reflection\""
+        "bloom_alignment": "Apply \u2014 students must execute the law with the normal convention across mirror geometries, constructions, and the classic corollaries.",
+        "mastery_signal": "The student converts angle conventions correctly, constructs plane-mirror images with extrapolated rays, and solves one rotation and one half-height problem, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Reflection and Laws of Reflection\""
+        "Periscopes, rear-view mirrors, and dental mirrors are applied plane-mirror geometry; corner (retro)reflectors return light to its source \u2014 bicycle reflectors and the lunar ranging arrays.",
+        "Optical levers turn tiny rotations into readable deflections \u2014 galvanometers, atomic-force microscope readouts, laser scanners and barcode readers (the 2\u03b8 rule at work).",
+        "Road-safety engineering distinguishes specular hazards (wet-road glare) from diffuse visibility (matte signage, anti-glare coatings).",
+        "Kaleidoscopes, two-mirror dressing arrangements, and 'infinity mirrors' are multiple-reflection geometry as design.",
+        "Solar cookers and heliostats steer sunlight by the law of reflection at industrial scale."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.nature-of-light"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 10 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.mirrors",
       "concept_id": "phys.opt.mirrors",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Spherical Mirrors and Mirror Formula\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Spherical Mirrors and Mirror Formula\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe concave and convex spherical mirrors (focal length f = R/2), apply the mirror equation 1/f = 1/d_o + 1/d_i and magnification m = \u2212d_i/d_o under a declared sign convention, construct images with the three principal rays, and characterize images (real/virtual, upright/inverted, size) across all object positions.",
+      "concept_summary": "Curve the mirror and reflection starts making optics: a concave (converging) mirror bounces rays parallel to its axis through a single focal point at f = R/2 (half the radius of curvature), while a convex (diverging) mirror spreads them as if from a virtual focus behind the surface. All image behaviour then follows from one equation and one convention. This curriculum uses the real-is-positive convention: object distance d_o positive in front; image distance d_i positive for real images (in front, projectable) and negative for virtual ones (behind); focal length positive for concave, negative for convex; magnification m = \u2212d_i/d_o, negative meaning inverted. (The NCERT/Cartesian convention differs in signs, not physics \u2014 declare one and be consistent.) The mirror equation 1/f = 1/d_o + 1/d_i plus three principal rays (parallel\u2192through focus; through focus\u2192parallel; to centre of curvature\u2192back on itself) generate the whole casebook: a concave mirror images distant objects small, real, and inverted near its focus (telescope primaries), flips through the classic sequence as the object approaches (beyond C: smaller inverted real; at C: same-size; between C and F: enlarged inverted real \u2014 the projector; at F: rays parallel, image at infinity \u2014 the searchlight), and finally, inside F, turns magnifying glass: enlarged, upright, VIRTUAL (the makeup/shaving mirror). Convex mirrors, by contrast, always deliver diminished, upright, virtual images with a wide field of view \u2014 the physics of security mirrors and the passenger-side warning 'objects are closer than they appear'. Two disciplines carry every solve: signs before algebra, and a sanity ray-sketch beside every computation.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Spherical Mirrors and Mirror Formula\"",
-        "[TEMPLATE] Key idea 2 for \"Spherical Mirrors and Mirror Formula\"",
-        "[TEMPLATE] Key idea 3 for \"Spherical Mirrors and Mirror Formula\""
+        "Geometry: focal length f = R/2 \u2014 parallel axial rays converge to (concave) or diverge from (convex) the focus; concave converges, convex diverges.",
+        "Declared sign convention (real-positive): d_o > 0 in front; d_i > 0 real (in front), < 0 virtual (behind); f > 0 concave, < 0 convex; m = \u2212d_i/d_o with m < 0 inverted. (Cartesian/NCERT is an equivalent alternative \u2014 never mix conventions mid-problem.)",
+        "Mirror equation: 1/f = 1/d_o + 1/d_i \u2014 with signs installed, one line solves any configuration.",
+        "Three principal rays: parallel \u2192 focus; focus \u2192 parallel; centre-of-curvature ray retraces \u2014 any two locate the image graphically.",
+        "Concave casebook by object position: beyond C (real, inverted, smaller) \u2192 at C (same size) \u2192 C-to-F (real, inverted, enlarged) \u2192 at F (image at infinity) \u2192 inside F (virtual, upright, enlarged \u2014 the cosmetic mirror).",
+        "Convex mirrors: always virtual, upright, diminished, wide-angle \u2014 security and passenger-side mirrors; the size cue shrinks, hence 'closer than they appear'.",
+        "Real images can be caught on screens (projectors) and inverted; virtual images are extrapolations, upright, uncatchable \u2014 the reflection concept's language upgraded with signs.",
+        "Paraxial fine print: formulas assume small-aperture mirrors and near-axis rays; large apertures blur (spherical aberration) \u2014 why big telescopes go parabolic."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Spherical Mirrors and Mirror Formula\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The focal length equals the radius of curvature.",
+          "correction": "f = R/2: parallel rays cross at HALF the radius. A mirror curved with R = 40 cm focuses at 20 cm \u2014 conflating the two doubles every answer downstream."
+        },
+        {
+          "misconception": "Concave mirrors always magnify (or always inverted).",
+          "correction": "The object's position decides: outside the focus the image is real and inverted (smaller or larger by position); INSIDE the focus it flips to virtual, upright, and enlarged. The makeup mirror and the telescope primary are the same mirror class in different regimes."
+        },
+        {
+          "misconception": "A negative image distance means no image forms.",
+          "correction": "It means a VIRTUAL image (behind the mirror in the real-positive convention) \u2014 perfectly visible to the eye, just not projectable. Signs are location codes, not existence verdicts."
+        },
+        {
+          "misconception": "Blocking half the mirror cuts off half the image.",
+          "correction": "Every point of the mirror receives rays from every object point: covering half dims the image (half the light) but the WHOLE image survives \u2014 image formation is a whole-aperture collaboration, not a pixel map."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Spherical Mirrors and Mirror Formula\""
+        "The principal-ray construction triptych for a concave mirror: object beyond C, between C and F, and inside F \u2014 the casebook drawn.",
+        "A convex-mirror construction with dashed extrapolations to the virtual focus and the always-small-upright image, beside a security-mirror photograph.",
+        "A sign-convention placard (the declared convention in one box) pinned beside every worked solve.",
+        "The searchlight/projector flip: object crossing the focus in an animation, image racing to infinity and returning virtual \u2014 the regime boundary as film.",
+        "A half-covered-mirror demonstration: image intact, dimmer \u2014 the whole-aperture point settled live.",
+        "Spoon optics: face in the bowl (inverted, then magnified upright as you\u8fd1... approach) and in the back (always small upright) \u2014 the casebook in cutlery."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Spherical Mirrors and Mirror Formula\"",
+        "setup": "A concave mirror has R = 40 cm (f = +20 cm). Find the image (position, real/virtual, orientation, magnification) for an object at (a) d_o = 60 cm, (b) d_o = 30 cm, (c) d_o = 10 cm; then (d) a convex mirror with f = \u221220 cm and the object at 30 cm.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) 1/d_i = 1/20 \u2212 1/60 = (3\u22121)/60 = 2/60 \u2192 d_i = +30 cm: real, in front; m = \u221230/60 = \u22120.5 \u2014 inverted, half-size (object beyond C).",
+          "(b) 1/d_i = 1/20 \u2212 1/30 = 1/60 \u2192 d_i = +60 cm: real; m = \u221260/30 = \u22122 \u2014 inverted, doubled (object between C and F: projector regime).",
+          "(c) 1/d_i = 1/20 \u2212 1/10 = \u22121/20 \u2192 d_i = \u221220 cm: VIRTUAL (behind); m = \u2212(\u221220)/10 = +2 \u2014 upright, doubled: the cosmetic-mirror regime inside the focus.",
+          "(d) Convex: 1/d_i = \u22121/20 \u2212 1/30 = \u22125/60 \u2192 d_i = \u221212 cm: virtual; m = +12/30 = +0.4 \u2014 upright, diminished: the security-mirror signature.",
+          "Cross-check each with a two-ray sketch \u2014 positions and orientations agree; note the symmetry of (a) and (b) (60\u219430, conjugate points).",
+          "Collect the pattern: signs told the story before the sketches did \u2014 real/inverted paired, virtual/upright paired, throughout."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Spherical Mirrors and Mirror Formula\""
+        "expected_outcome": "The student solves all four cases with correct signs (30, 60, \u221220, \u221212 cm; m = \u22120.5, \u22122, +2, +0.4), pairs real-with-inverted and virtual-with-upright, and verifies by construction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "mirror-equation solves across the full casebook (find d_i, d_o, or f)",
+          "principal-ray constructions with image characterization",
+          "regime-identification items (which mirror/position for this outcome?)",
+          "applied design problems (dental, security, telescope, cosmetic mirrors)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with equation solves at stated positions, add constructions and characterization, then inverse/design problems, ending with regime-boundary and conjugate-point subtleties.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with mandatory sign declarations",
+          "construction tasks",
+          "design-selection problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Spherical Mirrors and Mirror Formula\""
+        "bloom_alignment": "Apply \u2014 students must run the mirror equation with disciplined signs and verify graphically across unfamiliar configurations.",
+        "mastery_signal": "The student solves concave and convex cases with correct signs and characterizations, including one inside-focus and one design inversion, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Spherical Mirrors and Mirror Formula\""
+        "Reflecting telescopes from Newton's to JWST use concave primaries \u2014 distant objects imaged near the focus, free of chromatic aberration.",
+        "Cosmetic and dental mirrors work inside the focus for upright magnification; solar concentrators work at it for fire.",
+        "Convex security and passenger-side mirrors trade size for field of view \u2014 with the legally mandated 'closer than they appear' warning as sign-convention consumer education.",
+        "Car headlights and searchlights run the mirror backwards: source at the focus, beam parallel.",
+        "Satellite dishes and radio telescopes apply the same focusing geometry to longer wavelengths \u2014 one law across the spectrum."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.reflection"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 10 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.refraction",
       "concept_id": "phys.opt.refraction",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Refraction and Snell's Law\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Refraction and Snell's Law\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain refraction as the bending of light at speed-changing boundaries, define refractive index n = c/v, apply Snell's law n\u2081 sin \u03b8\u2081 = n\u2082 sin \u03b8\u2082, predict bending direction (toward the normal entering slower media, away entering faster), and analyze apparent-depth and everyday refraction phenomena.",
+      "concept_summary": "Refraction is what happens to obliquely arriving light when the medium changes its speed: the transmitted ray bends. The refractive index catalogues the slowdown \u2014 n = c/v, so vacuum is 1, air \u2248 1.0003, water 1.33, crown glass \u2248 1.5, diamond 2.42 \u2014 and Snell's law prices the bend: n\u2081 sin \u03b8\u2081 = n\u2082 sin \u03b8\u2082, angles from the normal as always. Direction follows from the physics: entering a SLOWER (higher-n) medium the ray bends TOWARD the normal; entering a faster medium, AWAY from it \u2014 the marching-band picture (one wheel of the column hitting mud first, wheeling the line around) makes the direction derivable rather than memorized, and the same picture explains why normal-incidence light passes unbent (both 'wheels' slow together) though it still slows. Frequency stays loyal to the source across the boundary while wavelength compresses to \u03bb/n \u2014 the bookkeeping inherited from the waves domain \u2014 and the bend is what the eye cannot correct for: looking into water, rays from a submerged object bend away from the normal on exiting, and the brain's straight-line extrapolation lifts the object to an apparent depth of (real depth)/n \u2014 the \u00bc-shallower pool, the bent-looking straw, the spear-fisher's aim-below rule, and (run in reverse, with the atmosphere's graded n) the flattened Sun at sunset and its two extra minutes of visibility. Refraction is the engine of the domain's second act: lenses are refraction organized by curvature, dispersion is n's colour dependence, and total internal reflection is Snell's law pushed past its own limit \u2014 three concepts all queued behind this law.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Refraction and Snell's Law\"",
-        "[TEMPLATE] Key idea 2 for \"Refraction and Snell's Law\"",
-        "[TEMPLATE] Key idea 3 for \"Refraction and Snell's Law\""
+        "Refraction = bending at a speed boundary: obliquely incident light changes direction where v changes; normal incidence slows without bending.",
+        "Refractive index n = c/v: the slowdown catalogue \u2014 air \u2248 1.00, water 1.33, glass ~1.5, diamond 2.42; larger n, slower light, stronger bending.",
+        "Snell's law: n\u2081 sin \u03b8\u2081 = n\u2082 sin \u03b8\u2082 \u2014 angles from the normal; the boundary's exchange rate for directions.",
+        "Direction rule (derivable): into slower/denser-optical medium \u2192 toward the normal; into faster \u2192 away \u2014 the marching-band/mud picture.",
+        "Crossing bookkeeping: f fixed (source-loyal), v = c/n, \u03bb = \u03bb\u2080/n \u2014 wavelength compresses, colour (frequency) does not change.",
+        "Apparent depth: objects under water appear at (real depth)/n \u2248 \u00be of true depth viewed from above \u2014 the eye extrapolates straight lines that light didn't take.",
+        "Everyday portfolio: bent straws, shallow-looking pools, spear-fishing aim-below, sunset flattening and lingering (graded atmospheric n), shimmering mirages (hot-air n gradients).",
+        "Reversibility: light paths run backwards identically \u2014 Snell's law is symmetric, a fact instruments and fibre design rely on."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Refraction and Snell's Law\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Light always bends when it enters a new medium.",
+          "correction": "At NORMAL incidence light slows but does not bend \u2014 both edges of the wavefront slow together. Bending requires oblique arrival: the direction change is the wavefront wheeling because one side slows first."
+        },
+        {
+          "misconception": "Light bends toward the normal whenever it crosses any boundary.",
+          "correction": "Direction depends on the speed change: toward the normal entering a slower (higher-n) medium, AWAY from it entering a faster one. Water-to-air bends away \u2014 the reversal that produces apparent depth and, pushed far enough, total internal reflection."
+        },
+        {
+          "misconception": "The colour of light changes underwater since its wavelength changes.",
+          "correction": "Perceived colour tracks FREQUENCY, which never changes at a boundary (source-loyal). Wavelength compresses to \u03bb/n as bookkeeping, but a red beam stays red in water \u2014 and resumes its vacuum wavelength on exit."
+        },
+        {
+          "misconception": "The pool's bottom is where it appears \u2014 refraction just blurs things.",
+          "correction": "Refraction systematically LIFTS the apparent position: the bottom appears at ~\u00be of its true depth, sharply, not blurrily. Waders misjudge depth and spear-fishers must aim below the fish's image \u2014 the displacement is geometric and computable, not noise."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Refraction and Snell's Law\""
+        "The marching-band/wavefront diagram: parallel wavefronts hitting a slower medium obliquely, one edge slowing first, the column wheeling toward the normal \u2014 direction derived, not decreed.",
+        "The canonical Snell diagram: boundary, normal, \u03b8\u2081 and \u03b8\u2082 from the normal, with the toward/away rule stamped for both crossings.",
+        "The coin-in-a-cup resurrection demonstration: coin hidden by the rim becomes visible as water is poured \u2014 refraction lifting the image live.",
+        "An apparent-depth construction: rays from a submerged object bending at the surface, extrapolated dashed to the raised virtual image at depth/n.",
+        "A laser through a glass block: visible kinks at entry and exit, emergent ray parallel to incident but displaced \u2014 Snell twice, symmetry on display.",
+        "A sunset diagram with atmospheric n grading: the Sun's rays curving, the disc flattened and visible after geometric sunset."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Refraction and Snell's Law\"",
+        "setup": "Light strikes a water surface (n = 1.33) from air at 45\u00b0. (a) Find the refraction angle. (b) Find light's speed and 550 nm light's wavelength in the water. (c) A coin lies 1.2 m deep \u2014 find its apparent depth viewed from above. (d) The ray inside the water returns to the surface from below at the same 32\u00b0 \u2014 find its exit angle and comment.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Snell: 1.00 \u00d7 sin 45\u00b0 = 1.33 sin \u03b8\u2082 \u2192 sin \u03b8\u2082 = 0.7071/1.33 \u2248 0.532 \u2192 \u03b8\u2082 \u2248 32\u00b0 \u2014 bent toward the normal, as into-slower demands.",
+          "(b) v = c/n = 3.0 \u00d7 10\u2078/1.33 \u2248 2.26 \u00d7 10\u2078 m/s; \u03bb = 550/1.33 \u2248 414 nm \u2014 compressed wavelength, unchanged 5.45 \u00d7 10\u00b9\u2074 Hz frequency (still green).",
+          "(c) Apparent depth = real/n = 1.2/1.33 \u2248 0.90 m \u2014 the coin looks 30 cm shallower; a wader's misjudgment quantified.",
+          "(d) Reversibility: 1.33 sin 32\u00b0 = 1.00 sin \u03b8 \u2192 \u03b8 = 45\u00b0 \u2014 the path runs backwards exactly; exit bends AWAY from the normal (into faster air).",
+          "Flag the sequel: raising the underwater angle raises the exit angle faster (\u00d71.33 on sines) \u2014 at sin \u03b8 = 1/1.33 (\u03b8 \u2248 48.8\u00b0) the exit ray grazes the surface, and beyond it... total internal reflection, next concept.",
+          "Method summary: normal-referenced angles, Snell for directions, n for speeds/wavelengths/depths \u2014 four questions, one law."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Refraction and Snell's Law\""
+        "expected_outcome": "The student computes 32\u00b0, 2.26 \u00d7 10\u2078 m/s and 414 nm (frequency unchanged), 0.90 m apparent depth, and the reversible 45\u00b0 exit, and anticipates the critical-angle cliff at ~49\u00b0."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Snell's-law solves in both crossing directions",
+          "n, v, \u03bb bookkeeping computations",
+          "apparent-depth and displacement problems",
+          "phenomenon-explanation items (straw, sunset, mirage, coin trick)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with single-boundary Snell solves and the direction rule, add speed/wavelength bookkeeping, then apparent depth and slab (double-boundary) problems, ending with phenomenon explanations and reversibility.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "direction-prediction quiz",
+          "phenomenon-analysis short answers"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Refraction and Snell's Law\""
+        "bloom_alignment": "Apply \u2014 students must execute Snell's law with the normal convention and direction rule, and deploy n-bookkeeping across depth and boundary scenarios.",
+        "mastery_signal": "The student solves boundary crossings in both directions with correct bending, computes v/\u03bb/apparent-depth from n, and explains one everyday phenomenon mechanistically, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Refraction and Snell's Law\""
+        "Every lens \u2014 eye, camera, spectacles, microscope \u2014 is refraction curved into focus: Snell's law is the prescription industry's working equation.",
+        "Fibre-optic design begins with Snell at the core-cladding boundary (and lives on its total-internal-reflection limit).",
+        "Swimming-pool safety, fishing (aim below the image), and underwater archaeology all correct for apparent depth.",
+        "Atmospheric refraction flattens and prolongs sunsets, lifts mirages off hot roads, and twinkles stars \u2014 n gradients as weather.",
+        "Gemmology identifies stones by refractive index; diamond's n = 2.42 (with dispersion) is its fire's foundation."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.nature-of-light"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 10 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.total-internal-reflection",
       "concept_id": "phys.opt.total-internal-reflection",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Total Internal Reflection and Critical Angle\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Total Internal Reflection and Critical Angle\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain why total internal reflection occurs only from denser to rarer media beyond the critical angle, compute critical angles via sin \u03b8_c = n\u2082/n\u2081, analyze fibre-optic light guidance, and account for diamond brilliance, prism reflectors, and mirages.",
+      "concept_summary": "Push Snell's law to its limit and it breaks \u2014 productively. Light travelling from an optically denser medium toward a rarer one (water to air, glass to air) bends AWAY from the normal, so the exit angle outruns the incidence angle; at the critical angle \u03b8_c, where sin \u03b8_c = n\u2082/n\u2081, the refracted ray grazes along the surface at 90\u00b0 \u2014 and beyond \u03b8_c, Snell demands sin \u03b8\u2082 > 1, which no angle supplies: refraction becomes impossible and the boundary turns perfect mirror. This is total internal reflection (TIR): 100% of the light reflects \u2014 better than any metallic mirror, which always absorbs a little \u2014 but only under its two conditions: dense-to-rare travel, and incidence beyond \u03b8_c (from air into water TIR can never happen; the ray entering a denser medium bends toward the normal and always gets through). The numbers set the applications: water's \u03b8_c \u2248 48.8\u00b0, crown glass's \u2248 41.8\u00b0 (conveniently under 45\u00b0, so a 45-45-90 prism reflects totally \u2014 binoculars' and periscopes' loss-free mirrors), and diamond's tiny 24.4\u00b0 (light entering a cut stone is trapped into multiple internal bounces before exiting in flashes \u2014 brilliance is TIR engineered by cut). The flagship is the optical fibre: light injected into a glass core strikes the core-cladding wall beyond \u03b8_c and reflects totally, thousands of times, kilometre after kilometre \u2014 the loss-free guidance that carries the internet, endoscopy's view inside the body, and decorative light trees. Nature runs the effect too: a diver looking up sees the sky compressed into a 97\u00b0-wide 'Snell's window' rimmed by mirror, and hot-road mirages are grazing rays bent by air's n-gradient into apparent reflections of the sky.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Total Internal Reflection and Critical Angle\"",
-        "[TEMPLATE] Key idea 2 for \"Total Internal Reflection and Critical Angle\"",
-        "[TEMPLATE] Key idea 3 for \"Total Internal Reflection and Critical Angle\""
+        "Setting: dense \u2192 rare travel bends rays away from the normal, so refraction angles outrun incidence angles \u2014 the prerequisite geometry.",
+        "Critical angle: sin \u03b8_c = n\u2082/n\u2081 (rare over dense) \u2014 where the refracted ray grazes at 90\u00b0; water-air \u2248 48.8\u00b0, glass-air \u2248 41.8\u00b0, diamond-air \u2248 24.4\u00b0.",
+        "Beyond \u03b8_c: Snell would need sin \u03b8\u2082 > 1 \u2014 impossible; ALL light reflects: total internal reflection, a mathematically perfect mirror.",
+        "Two conditions, both mandatory: (1) from denser to rarer medium; (2) incidence beyond the critical angle \u2014 TIR from air into glass is impossible in principle.",
+        "TIR beats metal mirrors: 100% reflection with zero absorption \u2014 why prisms replace mirrors in quality binoculars (glass \u03b8_c < 45\u00b0 makes 45\u00b0 prism faces totally reflecting).",
+        "Optical fibre: core-cladding index step sets \u03b8_c at the wall; rays within the acceptance cone bounce totally down kilometres of glass \u2014 telecommunications, endoscopes, sensors.",
+        "Diamond brilliance: n = 2.42 \u2192 \u03b8_c = 24.4\u00b0 \u2014 most internal rays exceed it, ricocheting until facets release them upward in concentrated flashes; the cut is TIR choreography.",
+        "Nature's exhibits: Snell's window (the diver's 97\u00b0 sky-cone rimmed with mirror) and hot-road mirages (graded-n bending imitating grazing-incidence reflection)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Total Internal Reflection and Critical Angle\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Total internal reflection can happen at any boundary if the angle is steep enough.",
+          "correction": "Only from denser to rarer media: going the other way, rays bend toward the normal and ALWAYS transmit (\u03b8\u2082 < \u03b8\u2081 < 90\u00b0). Air-to-water TIR is impossible at any angle \u2014 the effect's direction condition is absolute."
+        },
+        {
+          "misconception": "At angles just below critical, most light already reflects \u2014 TIR is gradual.",
+          "correction": "Below \u03b8_c both refraction and partial reflection occur (the fraction reflected does grow near \u03b8_c); AT \u03b8_c the transmitted ray grazes; BEYOND it transmission ceases entirely and reflection jumps to exactly 100%. The 'total' is literal and the threshold sharp."
+        },
+        {
+          "misconception": "Optical fibres pipe light like water in a hose \u2014 it just follows the bend.",
+          "correction": "Light travels straight between wall strikes; guidance is thousands of discrete total internal reflections at the core-cladding boundary, each loss-free. Bend the fibre too sharply and strikes fall BELOW \u03b8_c \u2014 light leaks, which is why fibres specify minimum bend radii."
+        },
+        {
+          "misconception": "Diamonds sparkle because the material is intrinsically luminous or 'reflects more'.",
+          "correction": "The sparkle is geometry: the huge n makes \u03b8_c only 24.4\u00b0, so entered light is trapped into multiple total internal reflections until cut facets aim it back out in flashes. A poorly cut diamond of the same material leaks light through its pavilion and looks glassy \u2014 the cut, exploiting TIR, makes the brilliance."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Total Internal Reflection and Critical Angle\""
+        "The angle-sweep diagram: dense-to-rare rays at increasing incidence \u2014 refracting away, grazing at \u03b8_c, then totally reflecting \u2014 three regimes in one figure.",
+        "A laser-in-water-tank (or fibre-teaching-kit) demonstration: the beam escaping at small angles, then trapped and zigzagging down the stream/rod beyond critical \u2014 TIR live.",
+        "A 45-45-90 prism ray path beside a metallic mirror, labelled 100% vs. ~90% reflection \u2014 why binoculars choose glass.",
+        "The fibre cross-section: core, cladding, acceptance cone, and the bounce train \u2014 with a too-tight bend leaking rays below \u03b8_c.",
+        "A diamond cut-path cartoon: rays entering the table, ricocheting off pavilion facets (all beyond 24.4\u00b0), exiting upward \u2014 beside a shallow-cut stone leaking downward.",
+        "Snell's-window photograph from underwater: the bright 97\u00b0 sky disc rimmed by the mirrored under-surface."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Total Internal Reflection and Critical Angle\"",
+        "setup": "(a) Compute the critical angles for water (n = 1.33), crown glass (n = 1.50), and diamond (n = 2.42), each against air. (b) An optical fibre has core n\u2081 = 1.50 and cladding n\u2082 = 1.46 \u2014 find the critical angle at the core wall. (c) Explain with the numbers why a 45\u00b0 glass prism reflects totally but a 45\u00b0 water surface would not.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) sin \u03b8_c = 1/n: water \u03b8_c = arcsin(0.752) \u2248 48.8\u00b0; glass = arcsin(0.667) \u2248 41.8\u00b0; diamond = arcsin(0.413) \u2248 24.4\u00b0 \u2014 the higher the index, the smaller the escape cone.",
+          "(b) Fibre wall: sin \u03b8_c = n\u2082/n\u2081 = 1.46/1.50 = 0.973 \u2192 \u03b8_c \u2248 76.7\u00b0 \u2014 rays must strike the wall glancingly (within ~13\u00b0 of parallel to the axis), which defines the fibre's acceptance cone at the entrance.",
+          "(c) Prism: 45\u00b0 incidence exceeds glass's 41.8\u00b0 critical angle \u2192 total reflection at the hypotenuse, 100% and absorption-free \u2014 the binocular mirror.",
+          "Water at 45\u00b0: below its 48.8\u00b0 critical angle \u2192 light REFRACTS out (plus partial reflection) \u2014 a 45\u00b0 water 'prism' leaks; the 7\u00b0 between the two critical angles decides the technology.",
+          "Cross-check (b)'s design logic: a smaller index step (cladding closer to core) raises \u03b8_c toward 90\u00b0, narrowing acceptance but improving other properties \u2014 fibre engineering lives in this trade.",
+          "Collect the rule: one formula, sin \u03b8_c = n_rare/n_dense, prices every application from gemstones to the internet."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Total Internal Reflection and Critical Angle\""
+        "expected_outcome": "The student computes 48.8\u00b0/41.8\u00b0/24.4\u00b0 and the fibre's 76.7\u00b0, and uses the glass-vs-water comparison to explain why 45\u00b0 prisms work in glass but not water."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "critical-angle computations across media pairs",
+          "TIR-or-not verdicts (direction and angle conditions checked)",
+          "fibre acceptance and bend-loss reasoning problems",
+          "application explanations (prisms, diamonds, Snell's window, mirages)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with \u03b8_c computations and two-condition verdicts, add fibre-wall and prism geometry, then design comparisons (index steps, cuts), ending with natural-phenomenon explanations.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation and verdict set",
+          "design-analysis problems",
+          "phenomenon-explanation short answers"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Total Internal Reflection and Critical Angle\""
+        "bloom_alignment": "Apply \u2014 students must compute critical angles, enforce both TIR conditions, and deploy the effect across fibre, prism, and gemstone geometries.",
+        "mastery_signal": "The student computes \u03b8_c correctly, rejects impossible TIR cases (wrong direction or angle), and explains one engineered and one natural application, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Total Internal Reflection and Critical Angle\""
+        "Fibre-optic telecommunications carry the internet on kilometre-scale chains of total internal reflections in hair-thin glass.",
+        "Endoscopy and borescopes image inside bodies and machines through coherent fibre bundles \u2014 TIR as medical vision.",
+        "Binoculars, periscopes, and SLR viewfinders fold light with TIR prisms \u2014 loss-free where metal mirrors dim.",
+        "Gem cutting maximizes brilliance by keeping internal ray strikes beyond the stone's critical angle \u2014 diamond grading rewards TIR choreography.",
+        "Retroreflective road signs and bicycle reflectors use corner-cube TIR to return headlights to drivers; rain sensors on windscreens detect TIR spoiled by water droplets."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.refraction"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.9"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.lenses",
       "concept_id": "phys.opt.lenses",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Thin Lenses and Lens Formula\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Thin Lenses and Lens Formula\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe converging and diverging thin lenses as organized refraction, apply the thin-lens equation 1/f = 1/d_o + 1/d_i and magnification m = \u2212d_i/d_o under the declared sign convention, construct images with principal rays, and characterize images across all object positions for both lens types.",
+      "concept_summary": "A lens is refraction with a plan: curved surfaces arranged so that Snell's law, applied across the profile, sends parallel axial rays through (or apparently from) a single focal point. Convex/converging lenses (thicker centrally) focus parallel light at f beyond the lens; concave/diverging lenses (thinner centrally) spread it as if from a virtual focus before it. The algebra is the mirror machinery transplanted: under the same real-positive convention (d_o > 0 for real objects; d_i > 0 for real images \u2014 now on the FAR side, where transmitted light actually goes; f > 0 converging, f < 0 diverging; m = \u2212d_i/d_o), the thin-lens equation 1/f = 1/d_o + 1/d_i and three principal rays (parallel\u2192through far focus; through near focus\u2192parallel; through the centre\u2192undeviated, the thin-lens gift) generate the complete casebook. The converging story replays the concave mirror's plot with sides swapped: distant objects image small, real, inverted near f (camera); between 2f and f the image enlarges (projector); at f, parallel rays (collimator); INSIDE f the lens turns magnifying glass \u2014 virtual, upright, enlarged, on the object's own side. Diverging lenses give one verdict always: virtual, upright, diminished (the myopia-correcting spectacle). Real images now form where light genuinely converges \u2014 on screens, sensors, retinas \u2014 on the side OPPOSITE the object; virtual images stand on the object's side, uncatchable. The same disciplines rule: convention declared, signs before algebra, a two-ray sketch as lie detector \u2014 plus the lens-specific classic: covering half the lens dims but never halves the image.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Thin Lenses and Lens Formula\"",
-        "[TEMPLATE] Key idea 2 for \"Thin Lenses and Lens Formula\"",
-        "[TEMPLATE] Key idea 3 for \"Thin Lenses and Lens Formula\""
+        "A lens organizes refraction: two curved surfaces steer all parallel axial rays through one focal point \u2014 converging (convex, f > 0) or diverging (concave, f < 0, virtual focus).",
+        "Thin-lens equation: 1/f = 1/d_o + 1/d_i with the declared convention (real image distances positive on the transmission side); m = \u2212d_i/d_o, negative = inverted.",
+        "Principal rays: parallel \u2192 far focus; near focus \u2192 parallel; centre \u2192 straight through (the thin-lens simplification) \u2014 any two locate the image.",
+        "Converging casebook: beyond 2f \u2192 small/real/inverted (camera); at 2f \u2192 same size; 2f-to-f \u2192 enlarged/real/inverted (projector); at f \u2192 parallel (collimator); inside f \u2192 enlarged/upright/VIRTUAL (magnifier).",
+        "Diverging verdict (always): virtual, upright, diminished, on the object's side \u2014 the nearsightedness corrector.",
+        "Real images live on the far side where light converges (screens, sensors, retina); virtual on the object's side (extrapolations) \u2014 geography plus signs.",
+        "Half-covered lens: whole image, dimmer \u2014 every lens zone images every object point.",
+        "Fine print: 'thin' means thickness \u226a focal length, paraxial rays; f depends on both surface curvatures and glass n (lensmaker's relation, quoted not derived) \u2014 hence also on the surrounding medium."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Thin Lenses and Lens Formula\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A lens's focal length is a fixed property of its shape alone.",
+          "correction": "f depends on the INDEX CONTRAST with the surroundings (lensmaker's relation): a glass lens weakens dramatically underwater (n-contrast shrinks from 1.5:1 to 1.5:1.33) \u2014 why human eyes blur underwater and goggles (restoring an air gap) fix it."
+        },
+        {
+          "misconception": "Covering half the lens produces half an image.",
+          "correction": "Every part of the lens receives light from every object point: half-covering halves the BRIGHTNESS but leaves the whole image intact \u2014 the same whole-aperture logic as mirrors, and a favourite exam trap."
+        },
+        {
+          "misconception": "Diverging lenses are useless since they can't form real images.",
+          "correction": "Their always-virtual, diminished images are exactly what myopic eyes need (pulling far objects' images back onto the retina), and they are essential correctors inside compound instruments \u2014 'no real image alone' is a feature, not a failure."
+        },
+        {
+          "misconception": "The image from a converging lens is always inverted (or always magnified).",
+          "correction": "Position decides, exactly as with concave mirrors: outside f, real and inverted (any size by position); INSIDE f, virtual, upright, and enlarged \u2014 the magnifying-glass regime. One lens, two personalities, the focus as the boundary."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Thin Lenses and Lens Formula\""
+        "The refraction origin: a lens profile drawn as stacked prisms, Snell bending at each surface, rays herded to the focus \u2014 organized refraction visualized.",
+        "The converging principal-ray casebook: beyond 2f, between 2f and f, and inside f \u2014 three constructions, the whole plot.",
+        "A diverging-lens construction with dashed virtual focus and the always-small-upright image, beside a spectacles photograph for myopia.",
+        "A live optical-bench sequence: lamp, lens, screen \u2014 image found, object walked inward, image racing away and vanishing at f, then the lens lifted to the eye as a magnifier inside f.",
+        "The half-covered-lens demonstration: image whole, dimmer \u2014 settled in ten seconds.",
+        "A camera/eye/projector triptych mapping each device onto its casebook regime."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Thin Lenses and Lens Formula\"",
+        "setup": "A converging lens has f = +15 cm. Find and characterize the image for an object at (a) 60 cm, (b) 20 cm, (c) 10 cm; then (d) a diverging lens with f = \u221215 cm and the object at 30 cm. Sketch-verify each.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) 1/d_i = 1/15 \u2212 1/60 = 3/60 \u2192 d_i = +20 cm (real, far side); m = \u221220/60 = \u2212\u2153 \u2014 small, inverted: camera regime (object beyond 2f = 30 cm).",
+          "(b) 1/d_i = 1/15 \u2212 1/20 = 1/60 \u2192 d_i = +60 cm; m = \u22123 \u2014 enlarged, inverted, real: projector regime (between 2f and f); note the conjugate symmetry with (a): 60\u219420.",
+          "(c) 1/d_i = 1/15 \u2212 1/10 = \u22121/30 \u2192 d_i = \u221230 cm (virtual, object's side); m = +3 \u2014 enlarged, upright: the magnifying glass (object inside f).",
+          "(d) 1/d_i = \u22121/15 \u2212 1/30 = \u22123/30 \u2192 d_i = \u221210 cm; m = +\u2153 \u2014 virtual, upright, diminished: the diverging verdict, delivered as always.",
+          "Verify each with two principal rays (centre ray + parallel ray) \u2014 orientations and sides agree; real-inverted and virtual-upright pairings hold throughout.",
+          "Extract the parallels: same equation, same convention, same casebook logic as mirrors \u2014 with 'real' now meaning the transmission side; one toolkit, two devices."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Thin Lenses and Lens Formula\""
+        "expected_outcome": "The student computes +20, +60, \u221230, \u221210 cm with m = \u2212\u2153, \u22123, +3, +\u2153, verifies by construction, and articulates the mirror-lens toolkit transfer with the far-side/real mapping."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "thin-lens equation solves across the casebook (find d_i, d_o, or f)",
+          "principal-ray constructions and characterizations",
+          "regime/design identification (camera, projector, magnifier, corrector)",
+          "conceptual items (half-lens, underwater lens, real-vs-virtual geography)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with equation solves at set positions, add constructions, then design inversions and conjugate pairs, ending with the conceptual classics.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with sign declarations",
+          "construction tasks",
+          "device-mapping problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Thin Lenses and Lens Formula\""
+        "bloom_alignment": "Apply \u2014 students must run the thin-lens machinery with disciplined signs and map devices onto casebook regimes; the toolkit transfer from mirrors is the efficiency test.",
+        "mastery_signal": "The student solves converging and diverging cases with correct signs and characterizations, including one inside-focus magnifier and one design inversion, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Thin Lenses and Lens Formula\""
+        "Cameras and phone lenses work beyond 2f... rather with distant objects imaged small, real, inverted onto sensors \u2014 the casebook's first regime industrialized.",
+        "The eye is a live converging lens focusing on the retina, with accommodation adjusting f \u2014 and spectacles (converging for hyperopia, diverging for myopia) as add-on correctors.",
+        "Projectors run the 2f-to-f regime: small slide, enlarged real image on the wall (inserted inverted so the show is upright).",
+        "Magnifying glasses, loupes, and eyepieces work inside f \u2014 the virtual-enlarged regime as a tool.",
+        "Lighthouse and stage Fresnel lenses collimate from the focus; laser collimators run the casebook's f-regime in reverse."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.refraction"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 10 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.lens-power",
       "concept_id": "phys.opt.lens-power",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Power of a Lens and Lens Combinations\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Power of a Lens and Lens Combinations\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define lens power P = 1/f (dioptres, f in metres) with sign following the lens type, add powers for thin lenses in contact (P = P\u2081 + P\u2082), interpret spectacle prescriptions, and design simple corrective and combination systems.",
+      "concept_summary": "Optometry and optical design price lenses not by focal length but by its reciprocal: power P = 1/f, in dioptres (D) when f is in metres \u2014 a +2.0 D lens focuses at 0.5 m, a \u22122.5 D lens diverges as if from 0.4 m before it. The reciprocal is chosen for one great convenience: for thin lenses in contact (and to good approximation, closely stacked), POWERS ADD \u2014 P = P\u2081 + P\u2082 + \u2026 \u2014 where focal lengths combine by awkward reciprocals. A +3.0 D magnifier pressed against a \u22121.0 D corrector acts as one +2.0 D lens; an optometrist stacks trial lenses in the phoropter and simply sums; a lens designer budgets an instrument's stages in dioptres like a cashier. Signs ride along from the lens types: converging positive, diverging negative \u2014 so spectacle prescriptions read directly (+1.75 D: converging, for hyperopia/presbyopia \u2014 the farsighted eye underpowered for near work; \u22123.50 D: diverging, for myopia \u2014 the nearsighted eye overpowered, focusing distant objects short of the retina). The eye itself is a ~+60 D system (cornea ~+40, adjustable crystalline lens ~+20), so a \u00b1few-dioptre spectacle is a percent-level trim on a powerful machine \u2014 and accommodation is the eye self-adjusting its power to hold images on the retina, a range that narrows with age until reading glasses supply the missing dioptres. The dioptre habit also sharpens intuition: strong lenses are short-focus lenses; halving f doubles P; and 'stronger prescription' means literally more dioptres of correction.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Power of a Lens and Lens Combinations\"",
-        "[TEMPLATE] Key idea 2 for \"Power of a Lens and Lens Combinations\"",
-        "[TEMPLATE] Key idea 3 for \"Power of a Lens and Lens Combinations\""
+        "Definition: P = 1/f \u2014 dioptres (D) with f in METRES; +2 D \u21d2 f = 0.5 m; sign follows the type (converging +, diverging \u2212).",
+        "The additivity payoff: thin lenses in contact combine as P = P\u2081 + P\u2082 + \u2026 \u2014 the reciprocal scale exists to make combination arithmetic trivial.",
+        "Strong = short: more dioptres means shorter focal length \u2014 a +10 D loupe focuses at 10 cm; power and focal length are inverse dials.",
+        "Prescriptions read directly: + values converge (hyperopia, presbyopia \u2014 help for near); \u2212 values diverge (myopia \u2014 push far-object images back onto the retina).",
+        "The eye is ~+60 D (cornea ~+40 fixed, lens ~+20 adjustable): spectacles are percent-level trims; accommodation is live power adjustment, its range shrinking with age (presbyopia).",
+        "Combination design: stack to target power (phoropter fitting), or split a required power across elements (aberration control) \u2014 dioptre budgeting is optical engineering's cash flow.",
+        "Separated lenses need more than addition (P = P\u2081 + P\u2082 \u2212 dP\u2081P\u2082 for separation d) \u2014 quoted as the honest boundary of the contact rule.",
+        "Unit discipline: centimetre focal lengths must convert to metres before P = 1/f \u2014 the factor-100 classic."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Power of a Lens and Lens Combinations\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A stronger (higher-power) lens has a longer focal length.",
+          "correction": "Power and focal length are reciprocals: stronger means SHORTER focus \u2014 a +10 D lens focuses at 10 cm, a +1 D at a full metre. 'Strong' in optics is 'bends harder, focuses closer'."
+        },
+        {
+          "misconception": "Focal lengths add when lenses are combined.",
+          "correction": "POWERS add (thin lenses in contact); focal lengths combine reciprocally: 1/f = 1/f\u2081 + 1/f\u2082. Two +50 cm lenses give +4 D = 25 cm, not 100 cm \u2014 the dioptre exists precisely to spare you the reciprocal algebra."
+        },
+        {
+          "misconception": "A \u22123.50 D prescription means a weaker eye than \u22121.00 D... or that negative power means no lens.",
+          "correction": "The sign is the lens TYPE (diverging), and the magnitude is the correction's strength: \u22123.50 D is a stronger diverging correction for more severe myopia. Negative dioptres are as real as positive \u2014 they subtract power from an over-converging eye."
+        },
+        {
+          "misconception": "Since spectacles are only a few dioptres against the eye's sixty, they can barely matter.",
+          "correction": "Focus is exquisitely sensitive: the retina sits ~22 mm behind a ~60 D system, and a 1 D error displaces the image enough to blur badly. Percent-level trims are exactly the scale vision correction requires \u2014 that sensitivity is WHY fractions of a dioptre are prescribed."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Power of a Lens and Lens Combinations\""
+        "A power-focal-length seesaw graphic: dioptres up, metres down \u2014 +1 D/1 m, +2 D/0.5 m, +10 D/10 cm on the beam.",
+        "The additivity demo: two known trial lenses stacked on an optical bench, the combined focal spot measured against P\u2081 + P\u2082's prediction.",
+        "An annotated spectacle prescription (SPH \u22123.50 D etc.) decoded line by line, beside myopic and hyperopic eye diagrams with their correcting lens types.",
+        "The eye's dioptre budget pie: cornea ~40, lens ~20 (with the accommodation slider), spectacles as a thin \u00b1 trim slice.",
+        "A phoropter photograph with the stack-and-sum fitting logic captioned \u2014 optometry as dioptre arithmetic."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Power of a Lens and Lens Combinations\"",
+        "setup": "(a) Convert: f = +25 cm and f = \u221240 cm to powers. (b) Two thin lenses in contact, +4.0 D and \u22121.5 D: find the combined power and focal length. (c) A myopic eye focuses distant objects 2.0 cm... rather: a student's far point is 50 cm \u2014 find the spectacle power that images distant objects at her far point (thin lens at the eye). (d) A +2.0 D reading lens is stacked on her correction \u2014 what is the net power and its everyday name?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) P = 1/0.25 = +4.0 D; P = 1/(\u22120.40) = \u22122.5 D \u2014 metres first, signs riding the type.",
+          "(b) P = 4.0 \u2212 1.5 = +2.5 D \u2192 f = 1/2.5 = 0.40 m \u2014 one addition replaces the reciprocal grind.",
+          "(c) Correction task: take objects at infinity to a virtual image at the 50 cm far point (her eye's comfortable distance): 1/f = 1/\u221e + 1/(\u22120.50) \u2192 f = \u22120.50 m \u2192 P = \u22122.0 D \u2014 a diverging spectacle, the myopia signature.",
+          "(d) Stack: \u22122.0 + 2.0 = 0 D near the top... precisely: net +0.0 D for near work through that zone \u2014 which is why myopes often READ WITHOUT their distance glasses, and why bifocals carve a lower zone with the reading power added.",
+          "Sanity-check each sign: converging tasks (reading help) demanded +, the myopic correction \u2212, and the stack's cancellation matches lived experience.",
+          "Collect the professional habit: convert to metres, sum in dioptres, convert back only if asked \u2014 the currency in which optics is transacted."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Power of a Lens and Lens Combinations\""
+        "expected_outcome": "The student converts with metre discipline (+4.0, \u22122.5 D), sums the stack (+2.5 D, 0.40 m), derives the \u22122.0 D myopic correction from the far point, and reads the bifocal logic out of the cancelling stack."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "P \u2194 f conversions with unit discipline",
+          "contact-combination sums and inversions",
+          "prescription interpretation and correction design (far/near point problems)",
+          "eye-budget and accommodation reasoning items"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with conversions, add combinations, then correction design from far/near points, ending with bifocal/stacking scenarios and the separated-lens caveat.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "prescription-decoding tasks",
+          "design problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Power of a Lens and Lens Combinations\""
+        "bloom_alignment": "Apply \u2014 students must transact fluently in dioptres: converting, summing, and designing corrections from clinical-style specifications.",
+        "mastery_signal": "The student converts P \u2194 f without unit slips, sums contact combinations, and designs one myopic and one presbyopic correction with correct signs, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Power of a Lens and Lens Combinations\""
+        "Every spectacle and contact-lens prescription on Earth is written in dioptres \u2014 this concept is optometry's native language.",
+        "Phoropter fitting ('better one, or two?') is live dioptre summation to the patient's null.",
+        "Cataract surgery replaces the eye's ~+20 D crystalline lens with an implant whose power is computed per patient from eye geometry.",
+        "Camera lens designers budget element powers (and their signs) to control aberrations while hitting the system's net dioptres.",
+        "Reading glasses off the pharmacy shelf (+1.0 to +3.5 D) are presbyopia's dioptre top-up, self-served."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.lenses"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 10 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.optical-instruments",
       "concept_id": "phys.opt.optical-instruments",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Optical Instruments: Eye, Microscope, Telescope\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Optical Instruments: Eye, Microscope, Telescope\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe the eye as a camera-like adaptive optical instrument, explain the simple magnifier's angular magnification (M \u2248 25 cm/f), analyze the compound microscope (objective real image re-magnified by an eyepiece) and the telescope (M = f_o/f_e), and select instrument designs from their magnification logic.",
+      "concept_summary": "Instruments are the geometrical-optics toolkit assembled into machines for seeing more, and one idea unlocks them all: what limits vision is the ANGLE an object subtends at the eye, and every instrument is a scheme for enlarging that angle. The eye itself is the reference instrument \u2014 cornea and adjustable lens (~+60 D together) imaging the world onto the retina, real and inverted (the brain re-erects), with accommodation focusing from infinity to the near point, conventionally 25 cm, where unaided vision sees things largest. The simple magnifier starts the escalation: a converging lens with the object inside f delivers a virtual, enlarged, comfortably-viewable image, buying angular magnification M \u2248 25 cm/f (a +10 D loupe: \u00d72.5) \u2014 limited to \u00d75\u201310 before aberrations spoil it. The compound microscope escalates by staging: a short-focus OBJECTIVE forms a genuinely enlarged real image inside the tube (the object sits just beyond its focus \u2014 projector regime), and the EYEPIECE then magnifies that image as a loupe; total magnification is the PRODUCT of the two stages (\u00d740 objective \u00d7 \u00d710 eyepiece = \u00d7400), which is how hundreds arrive from centimetres of brass. The telescope solves the opposite problem \u2014 objects enormous but absurdly far \u2014 by angle exchange: a LONG-focus objective forms a small real image of the distant object at its focus, and a SHORT-focus eyepiece views it from close up; angular magnification M = f_o/f_e, whence observatory tubes are long and eyepieces stubby. Newton's move \u2014 swapping the objective lens for a concave mirror \u2014 gives the reflector (no chromatic fringing, mirror scalable to metres), which is why every great modern telescope, Hubble and JWST included, is a mirror instrument. Running through all of it are the casebook regimes of lenses and mirrors: instruments are those regimes, plumbed in series.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Optical Instruments: Eye, Microscope, Telescope\"",
-        "[TEMPLATE] Key idea 2 for \"Optical Instruments: Eye, Microscope, Telescope\"",
-        "[TEMPLATE] Key idea 3 for \"Optical Instruments: Eye, Microscope, Telescope\""
+        "The organizing idea: vision is limited by subtended ANGLE \u2014 every instrument is an angle-enlarging scheme, and 'magnification' means angular gain over the 25 cm naked-eye view.",
+        "The eye: cornea (+~40 D) plus adjustable lens (~+20 D) imaging real-and-inverted onto the retina; accommodation spans infinity to the ~25 cm near point \u2014 the baseline instrument and the comparison standard.",
+        "Simple magnifier: converging lens, object inside f \u2192 virtual enlarged image; M \u2248 25 cm/f (relaxed eye) \u2014 the loupe, capped around \u00d710 by aberrations.",
+        "Compound microscope: objective (short f, object just beyond it \u2014 projector regime) forms an enlarged REAL image in the tube; eyepiece loupes that image; M_total = M_obj \u00d7 M_eye \u2014 magnification by staged multiplication.",
+        "Telescope: long-f objective images the distant object small-but-close at its focus; short-f eyepiece views it; M = f_o/f_e \u2014 angle exchanged, not size; tube length \u2248 f_o + f_e.",
+        "Reflectors: a concave mirror objective (Newton) \u2014 no chromatic aberration, scalable to metres \u2014 is why serious astronomy is mirror astronomy (Hubble, JWST, every observatory).",
+        "Design grammar: microscope wants SHORT objective focus (big first-stage blow-up); telescope wants LONG objective focus (big angle ratio) \u2014 opposite prescriptions from the M formulas.",
+        "Light-gathering is the other half of astronomy: aperture area sets what can be seen at all \u2014 magnification without photons is emptiness enlarged."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Optical Instruments: Eye, Microscope, Telescope\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Telescopes work by making distant objects bigger.",
+          "correction": "They enlarge the ANGLE, not the object: the Moon through \u00d750 subtends 50 times more angle, as if 50\u00d7 closer. And for stars \u2014 points at any magnification \u2014 the primary job is light GATHERING: aperture, not power, is the astronomer's first number."
+        },
+        {
+          "misconception": "More magnification is always a better instrument.",
+          "correction": "Magnification beyond what aperture (diffraction) and optics quality support is 'empty magnification' \u2014 a bigger blur. Binocular and telescope specs balance power against aperture (7\u00d750 beats 20\u00d730 at night); the wave-optics resolution limit ahead makes this quantitative."
+        },
+        {
+          "misconception": "A microscope is just a strong magnifying glass.",
+          "correction": "It is two staged instruments: the objective forms a genuinely enlarged REAL image (a projector inside the tube), and only then does the eyepiece loupe it. The staging is why magnifications multiply into the hundreds \u2014 a single lens cannot get there."
+        },
+        {
+          "misconception": "Since the retinal image is inverted, we should see the world upside down.",
+          "correction": "The brain interprets the inverted retinal image as 'up' by calibration \u2014 inversion is a wiring convention, not an error. (Astronomical telescopes likewise leave images inverted; only terrestrial instruments spend extra optics erecting them.)"
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Optical Instruments: Eye, Microscope, Telescope\""
+        "The subtended-angle master diagram: the same object near and far, the angle at the eye shrinking \u2014 then each instrument drawn as an angle-restoring machine.",
+        "An eye-camera side-by-side: cornea/lens vs. lens, iris vs. aperture, retina vs. sensor, accommodation vs. focusing \u2014 one schematic, two devices.",
+        "The compound-microscope ray diagram: object just beyond the objective's focus, enlarged real image in the tube, eyepiece looping it to a virtual giant \u2014 the two stages colour-coded.",
+        "The telescope ray diagram: parallel rays from a distant point, real image at the shared focal plane, eyepiece re-parallelizing at a steeper angle \u2014 with M = f_o/f_e read off the geometry.",
+        "A refractor/reflector comparison: Galileo's tube beside Newton's mirror beside JWST's segmented primary \u2014 the design lineage in three images.",
+        "A build-it bench activity: two lenses and a metre stick becoming first a microscope (short f first) then a telescope (long f first)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Optical Instruments: Eye, Microscope, Telescope\"",
+        "setup": "(a) A jeweller's loupe has f = 5.0 cm \u2014 find its angular magnification (relaxed eye). (b) A microscope has a \u00d740 objective and \u00d710 eyepiece \u2014 find the total magnification and state each stage's job. (c) A telescope has f_o = 120 cm and f_e = 2.0 cm \u2014 find its magnification and approximate tube length. (d) Explain which single change most improves this telescope for viewing faint galaxies: doubling M with a 1.0 cm eyepiece, or doubling the objective's diameter.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) M \u2248 25 cm/f = 25/5 = \u00d75 \u2014 the loupe presents the gem as if at 5 cm while the eye focuses comfortably.",
+          "(b) M_total = 40 \u00d7 10 = \u00d7400: the objective builds a 40\u00d7 enlarged REAL image inside the tube (projector regime); the eyepiece loupes that image \u00d710 \u2014 staged multiplication, each stage modest.",
+          "(c) M = f_o/f_e = 120/2 = \u00d760; tube \u2248 f_o + f_e = 122 cm \u2014 long objective, stubby eyepiece, the telescope grammar embodied.",
+          "(d) The 1.0 cm eyepiece doubles M to \u00d7120 but adds not one photon; doubling the objective diameter QUADRUPLES the light gathered (area \u221d D\u00b2) \u2014 for faint galaxies, aperture wins decisively. Magnification is cheap; photons are not.",
+          "Cross-check the design grammar: microscope stages both SHORT-focus (blow up the tiny); telescope pairs LONG objective with short eyepiece (exchange the angle) \u2014 opposite prescriptions, one toolkit.",
+          "Note the honest cap: both instruments' useful magnification is bounded by diffraction at their apertures \u2014 the wave-optics sequel."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Optical Instruments: Eye, Microscope, Telescope\""
+        "expected_outcome": "The student computes \u00d75, \u00d7400 (with stage roles), \u00d760 and 122 cm, and argues aperture-over-magnification for faint targets with the D\u00b2 light-gathering law."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "magnifier, microscope, and telescope magnification computations",
+          "instrument-anatomy items (identify stages, regimes, and image characters)",
+          "design-selection problems (choose focal lengths/apertures for stated goals)",
+          "conceptual items (angle vs. size, empty magnification, eye-camera mapping)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with single-formula computations, add two-stage microscope analyses, then telescope design and the aperture/magnification trade, ending with eye-correction integration and empty-magnification judgments.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "ray-diagram analysis tasks",
+          "design-justification problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Optical Instruments: Eye, Microscope, Telescope\""
+        "bloom_alignment": "Apply \u2014 students must run each instrument's magnification logic and select designs from the grammar (short vs. long focus, power vs. aperture) in fresh scenarios.",
+        "mastery_signal": "The student computes all three instrument magnifications, maps stages to casebook regimes, and wins one aperture-vs-magnification design argument, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Optical Instruments: Eye, Microscope, Telescope\""
+        "Microscopy is biology's and medicine's window \u2014 pathology, microbiology, and semiconductor inspection all run staged magnification.",
+        "Telescopes from birdwatching scopes to JWST trade in angle and aperture; every observatory decision is f_o, f_e, and D arithmetic.",
+        "Cameras, from phones to cinema, are the eye's architecture industrialized \u2014 with autofocus as motorized accommodation.",
+        "Binocular specifications (8\u00d742 etc.) encode this concept's two numbers: angular magnification \u00d7 aperture in mm.",
+        "Ophthalmic instruments (retinoscopes, slit lamps) and VR headset optics apply the magnifier and relay logic to the eye itself."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.lens-power",
         "phys.opt.mirrors"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.9"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.dispersion",
       "concept_id": "phys.opt.dispersion",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Dispersion and Prisms\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Dispersion and Prisms\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain dispersion as the wavelength dependence of refractive index (violet bent most, red least in normal dispersion), trace white light's separation through a prism, account for rainbows and chromatic aberration, and distinguish dispersion from other colour phenomena.",
+      "concept_summary": "Snell's law had a secret parameter: the refractive index is not one number per material but a gentle function of wavelength \u2014 in glass, n is slightly larger for violet (~1.53) than for red (~1.51) \u2014 so a boundary bends each colour by its own amount. This is dispersion, and white light entering a prism obliquely exits as the familiar fan: violet deviated most, red least (normal dispersion's rule), with the prism's two refractions accumulating the spread that a parallel-faced slab would largely cancel. Newton's classic double-prism experiment settles what dispersion is NOT: the prism does not manufacture colours (a second inverted prism recombines the fan into white; an isolated spectral colour passes a second prism unsplit) \u2014 white light is a MIXTURE, and the prism is a sorter. The rainbow is dispersion staged by water droplets: sunlight refracts entering each drop, reflects once internally off the back, and refracts leaving, the wavelength-dependent bending concentrating each colour near its own angle (~42\u00b0 for red, ~40\u00b0 for violet from the antisolar point) \u2014 whence the circular arc, red outermost, the observer-specific geometry (every viewer owns a private rainbow), and the secondary bow (two internal reflections, colours reversed, above the primary with Alexander's dark band between). Dispersion also sends optics a bill: a simple lens is a circular prism and focuses violet shorter than red \u2014 chromatic aberration, the colour fringing that plagued early telescopes until achromatic doublets (crown + flint glasses with cancelling dispersions) and Newton's mirror escape (reflection is wavelength-blind) tamed it. Diamond's fire is dispersion's luxury edition: an exceptionally steep n(\u03bb) fans the trapped light of total internal reflection into flashes of colour.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Dispersion and Prisms\"",
-        "[TEMPLATE] Key idea 2 for \"Dispersion and Prisms\"",
-        "[TEMPLATE] Key idea 3 for \"Dispersion and Prisms\""
+        "Dispersion: n = n(\u03bb) \u2014 in transparent media violet sees a slightly larger index than red (normal dispersion), so each colour refracts by its own Snell's law.",
+        "Prism fan: two oblique refractions accumulate the per-colour spread \u2014 violet deviated most, red least; a parallel slab mostly cancels what a prism compounds.",
+        "Newton's verdict: prisms SORT, they don't create \u2014 recombination by an inverted prism restores white; a single sorted colour won't split again. White light is a mixture.",
+        "Rainbow anatomy: refract\u2013internal-reflect\u2013refract in each droplet; per-colour exit angles (~40\u201342\u00b0) build the circular arc, red outside; secondary bow (two reflections) reverses the order with Alexander's dark band between.",
+        "Every rainbow is private: the arc is defined relative to each observer's antisolar point \u2014 no two viewers see the same bow, and it cannot be approached.",
+        "Chromatic aberration: a lens focuses violet shorter than red (a lens is a round prism) \u2014 colour fringing; cured by achromatic doublets (crown+flint cancellation) or avoided entirely by mirrors (reflection is dispersion-free).",
+        "Dispersion 'strength' varies by material: diamond's steep n(\u03bb) gives its fire; low-dispersion glasses (ED, fluorite) are prized precisely for having little.",
+        "Frequency remains the colour's identity: sorting happens because SPEEDS differ by wavelength in the medium \u2014 the waves-domain bookkeeping with a \u03bb-dependent n."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Dispersion and Prisms\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The prism adds colours to the light \u2014 white goes in, the prism paints it.",
+          "correction": "Newton's two experiments refute this: recombining the fan gives back white, and an already-sorted colour passes a second prism unchanged. The colours were present in the mixture; the prism only sorts by wavelength."
+        },
+        {
+          "misconception": "Red light bends most \u2014 it's the strongest colour.",
+          "correction": "In normal dispersion VIOLET bends most (largest n), red least. The rainbow's red is on the OUTSIDE precisely because red's smaller deviation places it at the larger viewing angle \u2014 the memory hook runs through the geometry, not through 'strength'."
+        },
+        {
+          "misconception": "A rainbow is a fixed object in the sky at a definite place you could reach.",
+          "correction": "The bow is a direction-set, not a thing: each observer sees light from the droplets lying at ~42\u00b0 around their own antisolar point. Move, and 'your' rainbow moves; approach, and it recedes \u2014 two people never see the same bow."
+        },
+        {
+          "misconception": "Chromatic aberration means the lens glass is tinted or dirty.",
+          "correction": "It is geometry, not contamination: the same clear glass focuses violet closer than red because n_violet > n_red, so no single screen position is sharp for all colours. The cure is design (doublets, mirrors), not cleaning."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Dispersion and Prisms\""
+        "The prism fan diagram with per-colour Snell angles labelled (n_violet > n_red), beside a slab showing the near-cancellation contrast.",
+        "Newton's double-prism pair: fan recombined to white; single colour passing unsplit \u2014 the two decisive experiments as one figure.",
+        "A droplet cross-section ray trace: refract\u2013reflect\u2013refract with red and violet exit angles marked, assembling into the observer's 42\u00b0 cone and the private-bow geometry.",
+        "A secondary-bow diagram: two internal reflections, reversed colours, Alexander's band annotated between the bows.",
+        "A chromatic-aberration panel: violet and red focal points of one lens with the colour-fringed image, beside the achromatic doublet and the mirror escape.",
+        "A dispersion league table: water 1.331\u20131.343, crown glass 1.51\u20131.53, diamond 2.41\u20132.45 across the visible \u2014 fire quantified."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Dispersion and Prisms\"",
+        "setup": "Crown glass has n = 1.520 for red (660 nm) and n = 1.538 for violet (410 nm). White light strikes a glass surface from air at 60.0\u00b0. (a) Find the refraction angles for red and violet and the angular spread. (b) State which colour ends up deviated more after a full prism and why the slab wouldn't show this. (c) A simple lens made of this glass has f_red = 20.0 cm \u2014 estimate f_violet and the chromatic focal spread (f \u221d 1/(n\u22121) for a thin lens).",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Red: sin \u03b8 = sin 60\u00b0/1.520 = 0.5698 \u2192 \u03b8_red \u2248 34.74\u00b0; violet: sin \u03b8 = 0.8660/1.538 = 0.5631 \u2192 \u03b8_violet \u2248 34.27\u00b0.",
+          "Spread: \u2248 0.47\u00b0 at one surface \u2014 small, but resolvable and compounded by the prism's second surface.",
+          "(b) Violet, with the larger n, is deviated more overall through a prism (both refractions bend it harder); in a parallel slab the exit face undoes the entry's sorting direction, leaving only a tiny lateral colour offset \u2014 geometry decides whether dispersion accumulates or cancels.",
+          "(c) Thin-lens scaling: f \u221d 1/(n\u22121). f_violet = f_red \u00d7 (n_red \u2212 1)/(n_violet \u2212 1) = 20.0 \u00d7 0.520/0.538 \u2248 19.33 cm.",
+          "Chromatic spread: \u2248 0.67 cm \u2014 violet focuses ~7 mm shorter than red on a 20 cm lens: the fringing that ruined early refractors, now quantified.",
+          "Collect the design morals: half a degree per surface and millimetres per focus are why astronomy went to doublets and then to mirrors."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Dispersion and Prisms\""
+        "expected_outcome": "The student computes the per-colour angles (34.74\u00b0 vs. 34.27\u00b0), explains prism-vs-slab accumulation, and derives the ~7 mm chromatic focal spread via the 1/(n\u22121) scaling."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "two-colour Snell computations and spread calculations",
+          "conceptual sorting-vs-creating items (Newton's experiments)",
+          "rainbow geometry questions (angles, order, secondary, privacy)",
+          "chromatic-aberration estimates and design-cure selection"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with per-colour Snell solves, add prism/slab accumulation reasoning, then rainbow anatomy, ending with aberration estimates and doublet/mirror design logic.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "phenomenon-anatomy tasks",
+          "design-reasoning items"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Dispersion and Prisms\""
+        "bloom_alignment": "Understand \u2014 students must explain dispersion's mechanism (n(\u03bb)), its signature phenomena, and its costs and cures, supported by per-colour computations.",
+        "mastery_signal": "The student computes two-colour spreads correctly, retells Newton's sorting argument, orders the rainbow with its geometry, and selects an aberration cure with justification, at 75% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Dispersion and Prisms\""
+        "Spectroscopy \u2014 chemistry's fingerprinting, astronomy's composition-and-redshift science \u2014 begins with dispersive sorting by prisms and gratings.",
+        "Camera and telescope lens design battles chromatic aberration with achromatic/apochromatic doublets and ED glasses; reflector telescopes sidestep it entirely.",
+        "Fibre-optic engineers manage chromatic dispersion spreading data pulses \u2014 long-haul links budget it like a tax.",
+        "Gem grading prices diamond 'fire' \u2014 dispersion's flash \u2014 alongside cut and clarity.",
+        "Rainbows, halos, and sun-dogs are atmospheric dispersion read as weather-optics; photographers chase the geometry this concept computes."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.refraction"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.9"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.wave-optics",
       "concept_id": "phys.opt.wave-optics",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Introduction to Wave Optics\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Introduction to Wave Optics\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state Huygens' principle (every wavefront point acts as a secondary wavelet source), use it to reconstruct reflection and refraction and to predict diffraction, define coherence as the entry condition of interference optics, and explain when wave optics supersedes the ray model.",
+      "concept_summary": "Wave optics is the domain's second act, and Huygens' principle is its engine: every point of a wavefront acts as a source of secondary wavelets, and the wavefront a moment later is their common envelope. The construction earns its keep three times over. First, it REDERIVES geometrical optics: wavelets from a plane wavefront striking a mirror rebuild the reflected front at the equal angle, and wavelets slowed to v = c/n inside a medium rebuild a wheeled front obeying Snell's law exactly \u2014 the ray model recovered as the wave model's envelope, closing the loop opened at the domain's start. Second, it PREDICTS what rays cannot: at an aperture or edge, the wavelets near the boundary have no neighbours to cancel their sideways spread, so light bends into the geometrical shadow \u2014 diffraction, negligible when openings dwarf \u03bb (why shadows look sharp) and dominant when they approach it (why a micrometre slit sprays light). Third, it sets up interference optics' entry requirement: wavelets and beams combine by superposition, but stable patterns need COHERENCE \u2014 a constant phase relationship, in practice light split from ONE source (two slits fed by one beam, thin-film front/back reflections, laser light) \u2014 because independent sources drift phase millions of times per second and wash every pattern to uniformity, which is why two lamps never make fringes and why Young's slit-splitting trick (next) was the move that finally revealed light's wave nature. The scale rule from nature-of-light thus gets its mechanism: rays are the \u226b\u03bb envelope limit; fringes and spreading are the ~\u03bb wavelet limit; one wave, two regimes.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Introduction to Wave Optics\"",
-        "[TEMPLATE] Key idea 2 for \"Introduction to Wave Optics\"",
-        "[TEMPLATE] Key idea 3 for \"Introduction to Wave Optics\""
+        "Huygens' principle: every wavefront point emits secondary wavelets (speed v of the medium); the later wavefront is their envelope \u2014 wave propagation as continuous re-sourcing.",
+        "Reflection recovered: envelope construction at a mirror yields \u03b8_r = \u03b8_i \u2014 the bounce law as wavelet geometry.",
+        "Refraction recovered: wavelets slowed to c/n wheel the envelope toward the normal, reproducing Snell's law quantitatively \u2014 the marching-band picture formalized.",
+        "Diffraction predicted: edge wavelets, missing cancelling neighbours, spread light into the geometric shadow \u2014 strong when apertures ~\u03bb, negligible when \u226b\u03bb; the ray model's licensed domain and its boundary in one construction.",
+        "Wavefronts and rays are duals: rays are the perpendiculars to wavefronts \u2014 plane fronts \u2194 parallel rays, spherical fronts \u2194 radial rays; the two pictures translate freely.",
+        "Coherence: a constant phase relationship between beams \u2014 the entry condition for stable interference; achieved by SPLITTING one source (slits, films, lasers), never by pairing independent lamps.",
+        "Why sunlight seems fringe-free: ordinary sources are incoherent mosaics (random emitters, ~nanosecond phase memory); patterns exist momentarily and average away \u2014 the wave nature hides until coherence is engineered.",
+        "The domain's hinge: geometrical optics = envelope limit (features \u226b \u03bb); wave optics = wavelet limit (features ~ \u03bb, or coherent overlap) \u2014 Young, diffraction, and polarization queue behind this concept."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Introduction to Wave Optics\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Huygens' wavelets are just a mathematical fiction with no physical content.",
+          "correction": "The construction reproduces reflection and Snell's law exactly and predicts diffraction \u2014 real, measurable physics that rays cannot reach. Its status is a valid propagation rule for waves (later formalized by Fresnel and Kirchhoff); 'every point re-radiates' is how waves in fact advance."
+        },
+        {
+          "misconception": "Diffraction proves the ray model was always wrong.",
+          "correction": "The ray model is the wavelet construction's \u226b\u03bb limit \u2014 Huygens DERIVES it, complete with its domain of validity. Sharp door shadows and working cameras are correct ray physics; micrometre slits are outside the licence. One wave theory, two honest regimes."
+        },
+        {
+          "misconception": "Any two light sources of the same colour will interfere stably.",
+          "correction": "Stable fringes need a CONSTANT phase relation. Independent sources \u2014 even identical lamps \u2014 drift phase randomly on nanosecond scales, washing patterns to uniform light. Coherence is engineered by splitting one source; that requirement is why interference optics waited for Young's trick."
+        },
+        {
+          "misconception": "Light doesn't diffract \u2014 sound bends around corners but light plainly doesn't.",
+          "correction": "The difference is scale, not kind: sound's metre wavelengths match doorways (strong bending); light's half-micron waves need micron-scale features to bend visibly. Squint at a streetlamp through a fine curtain, or look at a CD's colours \u2014 light diffracts on cue when the geometry shrinks to its \u03bb."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Introduction to Wave Optics\""
+        "The master wavelet construction: a plane wavefront sprouting semicircular wavelets, the tangent envelope drawn one step later \u2014 propagation as re-sourcing.",
+        "Huygens does reflection and refraction: two-panel constructions rebuilding \u03b8_r = \u03b8_i and Snell's wheel-around, with the ray-duals drawn perpendicular to each front.",
+        "The aperture pair: a wide slit (envelope almost planar, faint edge bending) versus a ~\u03bb slit (wavelets fanning semicircularly) \u2014 the scale rule as pictures.",
+        "A ripple-tank (or simulation) sequence: plane waves through wide and narrow gaps \u2014 the same physics in water, visible to the back row.",
+        "A coherence cartoon: two independent lamps as jittering phase clocks versus one source split to two slits as locked clocks \u2014 why only the latter draws fringes.",
+        "The domain hinge diagram: geometrical optics and wave optics as two panels of one wave theory, gated by feature-size/\u03bb."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Introduction to Wave Optics\"",
+        "setup": "(a) Use Huygens' construction to derive Snell's law: a plane wavefront in air (v\u2081 = c) meets glass (v\u2082 = c/1.5) at incidence \u03b8\u2081 = 45\u00b0; track wavelet radii over one interval and find \u03b8\u2082. (b) Apply the scale rule: estimate whether diffraction matters for 550 nm light at a 5 mm doorway... rather a 5 mm camera iris, and at a 1 \u03bcm slit \u2014 and reconcile with sound at a 1 m doorway (\u03bb \u2248 0.7 m for mid-range).",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) In time t the wavefront's free end travels v\u2081t in air while the trapped end travels v\u2082t = v\u2081t/1.5 in glass \u2014 draw both wavelet arcs from the boundary points.",
+          "The new envelope's geometry gives sin \u03b8\u2081/sin \u03b8\u2082 = v\u2081t/v\u2082t = v\u2081/v\u2082 = n\u2082/n\u2081 \u2014 Snell's law emerges as pure wavelet geometry.",
+          "Solve: sin \u03b8\u2082 = sin 45\u00b0/1.5 = 0.471 \u2192 \u03b8\u2082 \u2248 28.1\u00b0 \u2014 toward the normal, the slowed side wheeling the front.",
+          "(b) Camera iris: 5 \u00d7 10\u207b\u00b3 m / 5.5 \u00d7 10\u207b\u2077 m \u2248 10\u2074 \u2014 spreading angle ~\u03bb/a \u2248 10\u207b\u2074 rad: negligible; rays licensed (though this tiny angle IS the diffraction limit ahead).",
+          "1 \u03bcm slit: a \u2248 2\u03bb \u2014 spreading ~\u03bb/a \u2248 0.5 rad \u2248 30\u00b0: dominant; wave optics mandatory.",
+          "Sound at a doorway: \u03bb/a \u2248 0.7 \u2014 order unity: strong bending, which is why you hear around corners you cannot see around \u2014 the scale rule unifying light and sound in one line."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Introduction to Wave Optics\""
+        "expected_outcome": "The student derives Snell's law from wavelet arcs (\u03b8\u2082 \u2248 28\u00b0), and runs the \u03bb/a estimates (10\u207b\u2074 vs. 0.5 vs. 0.7 rad) to place cameras, micro-slits, and doorways in their correct regimes."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "wavelet-construction tasks (propagate, reflect, refract a given front)",
+          "wavefront-ray translation items",
+          "\u03bb/a regime estimates across scenarios",
+          "coherence judgments (which pairs can interfere stably, and why)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with free-space and reflection constructions, add the Snell derivation, then regime estimates spanning light and sound, ending with coherence-engineering judgments.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "construction tasks",
+          "estimate set",
+          "conceptual quiz on coherence and regimes"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Introduction to Wave Optics\""
+        "bloom_alignment": "Understand \u2014 students must explain the wavelet mechanism, its recovery of ray optics, its diffraction prediction, and the coherence condition, supported by constructions and \u03bb/a estimates.",
+        "mastery_signal": "The student executes the Snell wavelet derivation, sorts scenarios by \u03bb/a correctly, and rules on coherence cases (lamps vs. split sources) with justification, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Introduction to Wave Optics\""
+        "Optical engineering runs both regimes daily: ray-trace the lens stack, then wave-check the diffraction limit and coatings.",
+        "Antenna and audio engineering apply Huygens directly \u2014 phased arrays ARE engineered wavelet sources steering envelopes.",
+        "Holography records and replays entire wavefronts \u2014 Huygens' principle as a storage medium.",
+        "Laser technology is engineered coherence: the property this concept defines is the product lasers sell.",
+        "Ultrasound imaging and seismic migration reconstruct sources from wavefronts \u2014 Huygens run forwards and backwards as algorithms."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.nature-of-light",
         "phys.wave.wave-properties"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.youngs-experiment",
       "concept_id": "phys.opt.youngs-experiment",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Young's Double-Slit Experiment\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Young's Double-Slit Experiment\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe Young's double-slit experiment and its historical role in establishing light's wave nature, derive the fringe conditions from path difference (d sin \u03b8 = m\u03bb bright), apply the fringe-spacing formula \u0394y = \u03bbL/d, and extract wavelengths from measured patterns.",
+      "concept_summary": "Young's double-slit experiment (1801) is where light's wave nature stopped being philosophy: pass one coherent beam through two close slits and the wall beyond shows not two bright stripes but a ladder of equally spaced bright and dark fringes \u2014 interference, inexplicable to particles, natural to waves. The machinery is the waves-domain path-difference logic in optical dress: the two slits, fed by one wavefront, are coherent secondary sources (Huygens made instrument); at a point on the screen the beams have travelled paths differing by \u2248 d sin \u03b8 (slit separation d, angle \u03b8), and whole-wavelength differences land crests together \u2014 bright fringes at d sin \u03b8 = m\u03bb (m = 0, \u00b11, \u00b12\u2026) \u2014 while half-odd differences cancel \u2014 dark at d sin \u03b8 = (m + \u00bd)\u03bb. For a screen at distance L \u226b d and small angles, the geometry linearizes into the workhorse formula: fringes evenly spaced by \u0394y = \u03bbL/d, centred on the always-bright m = 0 midline (equal paths). The formula reads as a design manual: closer slits or longer throw spread the ladder; longer wavelengths space wider (red fringes coarser than blue \u2014 run white light and the centre stays white while colour-fringed orders fan outward, m = 0 being \u03bb-blind). Run backwards, it made Young the first person to MEASURE light's wavelength \u2014 slit separation, screen distance, ruler on the fringes, and out comes half a micrometre, a length no instrument of 1801 could touch directly. The experiment's fine print is the previous concept's lesson embodied: the slits must be narrow (each ~\u03bb, to diffract broadly enough to overlap) and coherently fed (one source split \u2014 two lamps draw nothing); and its long shadow reaches modern physics, where electrons and single photons build the same fringes one arrival at a time \u2014 a door this curriculum marks and leaves ajar for quantum mechanics.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Young's Double-Slit Experiment\"",
-        "[TEMPLATE] Key idea 2 for \"Young's Double-Slit Experiment\"",
-        "[TEMPLATE] Key idea 3 for \"Young's Double-Slit Experiment\""
+        "The experiment: one coherent beam \u2192 two close slits \u2192 screen shows an equally spaced bright/dark fringe ladder \u2014 interference as light's wave signature (1801, the wave-nature verdict).",
+        "Coherent twin sources: the slits split ONE wavefront (Huygens wavelets as apparatus) \u2014 the coherence requirement engineered, not assumed.",
+        "Bright condition: path difference d sin \u03b8 = m\u03bb (m = 0, \u00b11, \u00b12\u2026) \u2014 crest on crest; dark: (m + \u00bd)\u03bb \u2014 crest on trough; the waves-domain conditions in optical units.",
+        "Workhorse formula (L \u226b d, small \u03b8): fringe spacing \u0394y = \u03bbL/d \u2014 even ladder centred on the always-bright, wavelength-blind m = 0 midline.",
+        "Design reading: smaller d or larger L spreads fringes; larger \u03bb spaces wider (red coarser than blue); white light \u2192 white centre, coloured higher orders.",
+        "Inverted, it is a wavelength meter: \u03bb = \u0394y\u00b7d/L \u2014 Young measured ~0.5 \u03bcm with slits, a screen, and a ruler; the standard student lab to this day.",
+        "Fine print: slits narrow enough to diffract into overlap (each ~\u03bb-scale), and small-angle linearization for the even spacing \u2014 the formulas' honest conditions.",
+        "Forward shadow: the same fringes build up from single photons and electrons arriving one by one \u2014 the quantum door this experiment opens (marked here, entered in phys.qm)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Young's Double-Slit Experiment\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "The fringes are just shadows or images of the two slits.",
+          "correction": "Two slits' shadows would be two stripes; the screen instead shows MANY equally spaced fringes spread far beyond the slits' geometric image \u2014 including darkness where either slit alone would deliver light. Only path-difference interference produces that ladder, which is why the experiment was decisive."
+        },
+        {
+          "misconception": "The central fringe is bright because more light goes straight ahead.",
+          "correction": "It is bright because the two paths there are exactly EQUAL \u2014 zero path difference, guaranteed constructive interference at every wavelength (hence the white centre under white light). The explanation is phase bookkeeping, not beam intensity geometry."
+        },
+        {
+          "misconception": "Moving the screen farther washes the pattern out.",
+          "correction": "Larger L SPREADS the ladder (\u0394y = \u03bbL/d grows) \u2014 fringes get wider and easier to measure, dimmer only for light-budget reasons. Compressing d, not stretching L, is also spread; the formula's proportions are the design manual."
+        },
+        {
+          "misconception": "Blue light, being 'stronger', makes wider fringes than red.",
+          "correction": "Spacing follows WAVELENGTH: \u0394y \u221d \u03bb, and red's ~700 nm out-spaces blue's ~450 nm by half again. Under white light the outward colour fanning of each order (blue inner edge, red outer) displays the proportionality directly."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Young's Double-Slit Experiment\""
+        "The canonical apparatus diagram: source, single slit (coherence gate), double slit d apart, screen at L \u2014 with two ray paths to an off-axis point and the d sin \u03b8 path-difference triangle magnified.",
+        "A real fringe photograph beside its intensity plot: the even ladder, labelled orders, the m = 0 centre.",
+        "An interactive with \u03bb, d, L sliders driving live fringe spacing \u2014 the design manual as a control panel.",
+        "The white-light pattern: white central fringe, colour-fanned first and second orders \u2014 \u0394y \u221d \u03bb painted by nature.",
+        "The laser-and-double-slit live demonstration (hair or slide-mounted slits): fringes on the wall, then d halved and the ladder visibly doubling its spacing.",
+        "A one-photon-at-a-time buildup animation (dots accumulating into fringes) as the marked quantum door."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Young's Double-Slit Experiment\"",
+        "setup": "A laser of unknown wavelength illuminates slits d = 0.25 mm apart; on a screen L = 2.4 m away the bright fringes lie \u0394y = 6.1 mm apart. (a) Find \u03bb. (b) Find the angle of the third-order bright fringe. (c) Predict the new spacing if d is halved and if the laser is swapped for a 450 nm blue one. (d) State why sunlight through the same slits (without the single-slit gate) shows no clean ladder.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) \u03bb = \u0394y\u00b7d/L = (6.1 \u00d7 10\u207b\u00b3 \u00d7 2.5 \u00d7 10\u207b\u2074)/2.4 \u2248 6.35 \u00d7 10\u207b\u2077 m \u2248 635 nm \u2014 a red laser, measured with a ruler: Young's 1801 feat re-run.",
+          "(b) Third order: sin \u03b8 = 3\u03bb/d = 3 \u00d7 6.35 \u00d7 10\u207b\u2077/2.5 \u00d7 10\u207b\u2074 \u2248 7.6 \u00d7 10\u207b\u00b3 \u2192 \u03b8 \u2248 0.44\u00b0 \u2014 small angles indeed; the linearization is comfortably licensed.",
+          "(c) Halving d doubles the spacing: \u0394y \u2248 12.2 mm (ladder spreads as slits close); blue swap: \u0394y scales by 450/635 \u2192 \u2248 4.3 mm \u2014 the two design dials exercised.",
+          "(d) Extended incoherent sunlight feeds the two slits with drifting, position-scrambled phases: each source point draws its own shifted ladder and the sum blurs \u2014 no stable pattern without the coherence gate (single slit or laser).",
+          "Audit units once: millimetres and metres converted before the division \u2014 the 10\u00b3 slip is this lab's classic casualty.",
+          "Collect the method: measure \u0394y, know two of (d, L), and the third of the trio with \u03bb follows \u2014 the fringe ladder as a micrometre-scale ruler."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Young's Double-Slit Experiment\""
+        "expected_outcome": "The student extracts \u03bb \u2248 635 nm, places m = 3 at 0.44\u00b0, doubles and re-scales the ladder correctly, and explains the coherence gate's necessity for sunlight."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "fringe-spacing and wavelength extractions (\u0394y = \u03bbL/d in all directions)",
+          "order-angle computations (d sin \u03b8 = m\u03bb) and dark-fringe conditions",
+          "design-dial predictions (change d, L, \u03bb, medium)",
+          "conceptual items (coherence gate, white-light pattern, central-fringe logic)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with direct spacing/wavelength solves, add order angles and dark conditions, then design predictions (including immersion in water: \u03bb/n), ending with coherence and white-light reasoning.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with unit discipline",
+          "pattern-interpretation tasks",
+          "conceptual quiz on coherence and the historical argument"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Young's Double-Slit Experiment\""
+        "bloom_alignment": "Apply \u2014 students must run the fringe formulas in both directions and wield the design dials; this concept carries the domain's highest mastery threshold (0.85) as wave optics' quantitative gate.",
+        "mastery_signal": "The student extracts wavelengths from fringe data, computes order positions with correct conditions, and predicts pattern changes under d/L/\u03bb swaps, at 85% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Young's Double-Slit Experiment\""
+        "The double-slit wavelength lab remains physics education's standard bench measurement of \u03bb with a ruler.",
+        "Interferometric metrology descends from Young: fringe counting measures displacements to nanometres in industry and in LIGO's kilometre arms.",
+        "Diffraction gratings \u2014 Young's slits multiplied \u2014 power every spectrometer from chemistry labs to telescope instruments.",
+        "Optical testing reads surface flatness from fringe ladders (Newton's rings and flats) \u2014 interference as quality control.",
+        "The experiment's single-photon and electron versions anchor quantum mechanics' central mystery \u2014 cited in every introduction to the field."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.wave-optics",
         "phys.wave.interference"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.diffraction",
       "concept_id": "phys.opt.diffraction",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Diffraction of Light\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Diffraction of Light\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define diffraction as the wavelet-driven spreading of waves at apertures and obstacles, apply the \u03bb/a scale rule for its strength, describe diffraction gratings (d sin \u03b8 = m\u03bb with fine spacing) as precision spectral instruments, and explain diffraction's role as the resolution limit of optical systems.",
+      "concept_summary": "Diffraction is the wave model's refusal to draw perfectly sharp shadows: whenever a wavefront meets an aperture or edge, Huygens' wavelets at the boundary \u2014 shorn of the neighbours whose interference enforced straight-line travel \u2014 spread into the geometrical shadow. Its strength is a one-parameter story: the ratio \u03bb/a of wavelength to aperture. Openings huge against \u03bb leak only imperceptibly (doorways for light: crisp shadows, ray optics licensed); openings approaching \u03bb fan waves broadly (doorways for sound, micrometre slits for light); and the spreading angle scales as \u03b8 ~ \u03bb/a \u2014 the estimate that runs the whole topic. Diffraction and interference are one physics at different source counts: two coherent sources gave Young's ladder; a CONTINUUM of wavelet sources across one aperture gives diffraction patterns (the single slit, next concept, integrates this idea); and MANY periodic slits give the diffraction grating \u2014 thousands of coherent sources whose combined interference throws razor-sharp bright orders at d sin \u03b8 = m\u03bb with d now micrometre-fine, spreading colours far wider and cleaner than any prism: the instrument behind laboratory spectrometers, astronomical spectrographs, and a CD's rainbow (its track pitch is a reflection grating). Diffraction's deepest consequence is a LIMIT: every optical instrument admits light through a finite aperture, so every point image is really a small diffraction blur of angular size \u03b8 \u2248 \u03bb/D (the aperture's own \u03bb/a), and two points closer than that blur merge irretrievably \u2014 the resolution limit that caps telescope sharpness (why aperture, again, is astronomy's first number), microscope detail (~\u03bb/2 at best \u2014 why optical microscopes cannot see atoms and electron microscopes, with picometre wavelengths, can), and camera crispness at small f-stops. Diffraction is thus both a tool (gratings) and a tax (resolution) \u2014 the wave nature of light collecting its dues at every aperture.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Diffraction of Light\"",
-        "[TEMPLATE] Key idea 2 for \"Diffraction of Light\"",
-        "[TEMPLATE] Key idea 3 for \"Diffraction of Light\""
+        "Mechanism: boundary wavelets, missing their cancelling neighbours, spread into the shadow \u2014 diffraction is Huygens at an edge; no new law, one construction.",
+        "Scale rule: spreading angle \u03b8 ~ \u03bb/a \u2014 negligible for a \u226b \u03bb (crisp shadows, ray licence), dominant for a ~ \u03bb; the single estimate that sorts every scenario.",
+        "One physics, three source counts: two sources \u2192 Young's fringes; a continuum across one slit \u2192 single-slit pattern (next); many periodic slits \u2192 the grating.",
+        "Diffraction grating: d sin \u03b8 = m\u03bb with thousands of coherent slits \u2014 orders sharpened to needles and colours spread wide; finer rulings (smaller d) throw larger angles.",
+        "Gratings beat prisms for spectroscopy: wider, linear-in-\u03bb dispersion and sharp orders \u2014 the working heart of spectrometers; a CD/DVD's pitch makes it a household reflection grating.",
+        "The resolution tax: a D-wide aperture blurs each point to \u03b8 \u2248 \u03bb/D (Rayleigh's criterion ~1.22 \u03bb/D for circles) \u2014 closer point pairs merge; no lens polish can beat it.",
+        "Consequences by instrument: telescopes resolve \u221d D (aperture is destiny); microscopes bottom out near \u03bb/2 (hence electron microscopy for atoms); cameras blur at very small stops \u2014 'empty magnification' priced at last.",
+        "Everyday sightings: streetlamp streaks through eyelashes/curtains, CD rainbows, the fuzzy edge of any shadow examined closely \u2014 the tax visible to the naked eye."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Diffraction of Light\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Diffraction and interference are two different physical effects.",
+          "correction": "Both are superposition of coherent wavelets; the labels differ by source count (a few discrete sources vs. a continuum or many). The grating makes the unity explicit: it is 'interference' of thousands of slits AND 'diffraction' at each \u2014 one physics, two habits of speech."
+        },
+        {
+          "misconception": "A better-polished lens or bigger magnification can always resolve finer detail.",
+          "correction": "Diffraction sets a floor no craftsmanship undercuts: the aperture itself blurs each point to ~\u03bb/D. Beyond that, magnification enlarges blur \u2014 'empty magnification'. The only physical escapes are bigger D or shorter \u03bb (the electron microscope's route)."
+        },
+        {
+          "misconception": "Gratings are just many-slit prisms \u2014 the prism does the same job.",
+          "correction": "The mechanisms differ (interference vs. dispersion of n) and so do the outputs: gratings spread colours more widely, nearly linearly in \u03bb, into multiple sharp orders with red deviated MOST (opposite to the prism's violet-most) \u2014 the reversal is a favourite exam discriminator."
+        },
+        {
+          "misconception": "Light passing an aperture only gets dimmer, never bent \u2014 bending is for sound.",
+          "correction": "Both bend by the same \u03bb/a rule; sound's metre waves bend at doorways while light's half-micron waves need micron features. Give light its scale \u2014 a fine slit, a CD track, an eyelash \u2014 and it bends and colours on cue."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Diffraction of Light\""
+        "The \u03bb/a triptych: plane waves at a wide, medium, and \u03bb-scale aperture (ripple tank or simulation) \u2014 the scale rule as three photographs.",
+        "A grating-vs-prism spectrum pair: the grating's wide, linear, multi-order fan (red out-flung) against the prism's compressed violet-most fan \u2014 mechanisms contrasted in output.",
+        "The CD-as-grating demonstration: laser onto a disc, orders on the wall, track pitch computed from d sin \u03b8 = m\u03bb.",
+        "An Airy-disc gallery: one star's diffraction blur, two stars resolved/critical/merged at Rayleigh's criterion \u2014 resolution as pictures.",
+        "A telescope-aperture comparison strip: the same double star through 10 cm and 1 m apertures \u2014 D as destiny.",
+        "Everyday-diffraction collage: eyelash streaks on a streetlamp, curtain-mesh star patterns, shadow edges under magnification."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Diffraction of Light\"",
+        "setup": "(a) A grating ruled at 600 lines/mm receives 550 nm green light \u2014 find the angles of the first and second orders, and the highest order visible. (b) A laser on a CD (track pitch 1.6 \u03bcm) throws its first order at 23.3\u00b0 \u2014 verify the pitch story by computing \u03bb. (c) The eye's pupil (D \u2248 3 mm) views two distant headlamps 1.2 m apart \u2014 estimate the distance at which they merge (\u03bb \u2248 550 nm, Rayleigh \u03b8 \u2248 1.22 \u03bb/D).",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) d = 1/600 mm = 1.67 \u00d7 10\u207b\u2076 m. First order: sin \u03b8 = \u03bb/d = 5.5 \u00d7 10\u207b\u2077/1.67 \u00d7 10\u207b\u2076 = 0.330 \u2192 \u03b8\u2081 \u2248 19.3\u00b0; second: sin \u03b8 = 0.660 \u2192 \u03b8\u2082 \u2248 41.3\u00b0.",
+          "Highest order: m \u2264 d/\u03bb = 3.03 \u2192 m = 3 (sin \u03b8 = 0.990, \u03b8 \u2248 81.9\u00b0) \u2014 the grating throws three orders and no more; the sine's ceiling ends the ladder.",
+          "(b) \u03bb = d sin \u03b8 = 1.6 \u00d7 10\u207b\u2076 \u00d7 sin 23.3\u00b0 = 1.6 \u00d7 10\u207b\u2076 \u00d7 0.3955 \u2248 6.3 \u00d7 10\u207b\u2077 m \u2248 633 nm \u2014 a HeNe red laser: the CD's pitch measured a laser, or vice versa, with one sine.",
+          "(c) Rayleigh: \u03b8 = 1.22 \u00d7 5.5 \u00d7 10\u207b\u2077/3 \u00d7 10\u207b\u00b3 \u2248 2.24 \u00d7 10\u207b\u2074 rad.",
+          "Merge distance: L = separation/\u03b8 = 1.2/2.24 \u00d7 10\u207b\u2074 \u2248 5.4 km \u2014 beyond ~5 km the two headlamps fuse into one light: your pupil's diffraction limit, computed.",
+          "Collect the two faces: the same d sin \u03b8 = m\u03bb that BUILT the spectrometer (a, b) also CAPS the eye and every telescope (c) \u2014 tool and tax from one equation family."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Diffraction of Light\""
+        "expected_outcome": "The student computes 19.3\u00b0/41.3\u00b0 and the m = 3 ceiling, extracts 633 nm from the CD, and derives the ~5 km headlamp merge \u2014 wielding diffraction as instrument and as limit."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "grating-equation solves (angles, wavelengths, pitches, highest orders)",
+          "\u03bb/a regime estimates and everyday-sighting explanations",
+          "resolution-limit computations (Rayleigh across eyes, telescopes, microscopes)",
+          "grating-vs-prism discrimination items"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with grating solves and order ceilings, add \u03bb/a estimates, then Rayleigh computations across instruments, ending with tool-vs-tax synthesis and prism contrasts.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set",
+          "instrument-analysis problems",
+          "conceptual discrimination quiz"
         ],
-        "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Diffraction of Light\""
+        "bloom_alignment": "Analyze \u2014 students must connect the wavelet mechanism to both the grating's power and the resolution tax, decomposing instrument performance into aperture, wavelength, and geometry.",
+        "mastery_signal": "The student solves grating problems with order ceilings, runs Rayleigh estimates across two instruments, and articulates the tool/tax duality with the grating-prism contrast, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Diffraction of Light\""
+        "Spectrometers across chemistry, astronomy, and forensics disperse with gratings \u2014 composition, redshift, and dopants read from d sin \u03b8 = m\u03bb.",
+        "Telescope apertures are sized against Rayleigh's criterion; adaptive optics and space placement exist to reach the diffraction limit the atmosphere spoils.",
+        "Microscopy's \u03bb/2 wall routed biology toward electron microscopes and, latterly, super-resolution fluorescence tricks (a Nobel for circumventing, not breaking, the limit).",
+        "Photolithography prints chips at feature sizes fighting the same \u03bb limit \u2014 the industry's march to extreme-UV is diffraction economics.",
+        "CDs/DVDs/Blu-ray read and shimmer by grating optics; laser pointers plus discs make home spectrometry.",
+        "X-ray diffraction (\u03bb ~ atomic spacing) turned crystals into gratings and founded structural biology \u2014 DNA's helix was read from diffraction spots."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.youngs-experiment"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.single-slit",
       "concept_id": "phys.opt.single-slit",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Single-Slit Diffraction\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Single-Slit Diffraction\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe the single-slit diffraction pattern (broad central maximum flanked by weak secondary fringes), derive and apply the minima condition a sin \u03b8 = m\u03bb (m = \u00b11, \u00b12\u2026), compute the central maximum's width, explain the inverse slit-width relationship, and distinguish the single-slit pattern from Young's double-slit ladder.",
+      "concept_summary": "Aim one coherent beam at one narrow slit and the screen shows wave optics' subtlest standard pattern: a broad, bright CENTRAL maximum flanked by dark minima and progressively feebler secondary maxima \u2014 not the even ladder of Young, but a dominated centre with dim sidebands. The machinery is Huygens taken seriously across the opening: every point of the slit's width a is a wavelet source, and the pattern is the interference of that CONTINUUM. The minima condition comes from a pairing argument worth owning: at angle \u03b8 where a sin \u03b8 = \u03bb, the slit splits into two halves whose wavelets cancel pairwise (each top-half point against its bottom-half partner, \u03bb/2 apart in path) \u2014 total darkness; the same split into quarters, sixths\u2026 gives the general minima a sin \u03b8 = m\u03bb (m = \u00b11, \u00b12, \u2026, and emphatically NOT m = 0: the centre, where all wavelets arrive in step, is the pattern's brightest point \u2014 the formula that looks like Young's maxima condition here locates the DARKNESSES, the classic trap). Between the minima, incomplete cancellation leaves secondary maxima, the first only ~4.5% of the central intensity \u2014 whence the visual signature: one fat bright band (width 2\u03bbL/a, twice each sideband's width) trailing dim ripples. The inverse relationship carries the physics: NARROWING the slit WIDENS the pattern (a shrinks, \u03b8 ~ \u03bb/a grows) \u2014 squeeze light harder and it spreads more, the wave nature's defiance of ray intuition, and the resolution tax's origin story told in one variable. Real double-slit patterns wear both physics at once: Young's fine ladder rides inside the single-slit envelope of each slit's own width \u2014 the missing-orders effect that reconciles the two concepts on one screen.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Single-Slit Diffraction\"",
-        "[TEMPLATE] Key idea 2 for \"Single-Slit Diffraction\"",
-        "[TEMPLATE] Key idea 3 for \"Single-Slit Diffraction\""
+        "The pattern: a broad central maximum (double-width), dark minima at a sin \u03b8 = m\u03bb (m = \u00b11, \u00b12, \u2026), and weak secondary maxima (~4.5% then fainter) between them.",
+        "Mechanism: a continuum of Huygens sources across the slit width a; the pattern is their mutual interference \u2014 Young's logic integrated over one opening.",
+        "The pairing derivation: at a sin \u03b8 = \u03bb, top-half and bottom-half wavelets cancel partner-by-partner (\u03bb/2 path offsets) \u2014 darkness by exhaustive pairing; halves\u2192quarters\u2192sixths give m = 2, 3, \u2026.",
+        "The central trap: a sin \u03b8 = m\u03bb locates MINIMA here (m \u2265 1); \u03b8 = 0 is the BRIGHTEST point (all wavelets in step) \u2014 the same-looking formula plays the opposite role to Young's.",
+        "Widths: central maximum spans \u03b8 \u2248 \u00b1\u03bb/a, linear width 2\u03bbL/a \u2014 twice each secondary band; the fat-centre signature.",
+        "Inverse rule: narrower slit \u2192 wider pattern (\u03b8 \u221d 1/a) \u2014 constraining a wave spreads it; the ray model's shadow logic inverted at wavelength scale.",
+        "Wide-slit limit: a \u226b \u03bb shrinks the spreading toward zero and the geometric shadow returns \u2014 ray optics recovered as the envelope's limit, once more.",
+        "Synthesis: real double-slit screens show Young's ladder MODULATED by each slit's single-slit envelope (missing orders where a ladder maximum meets an envelope zero) \u2014 the two patterns are one experiment's two length scales (d and a)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Single-Slit Diffraction\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "a sin \u03b8 = m\u03bb gives the bright fringes, as in Young's experiment.",
+          "correction": "For the single slit it locates the DARK minima \u2014 and m starts at 1, not 0. The centre (\u03b8 = 0) is the pattern's maximum, since all wavelets arrive in phase. Same algebra, opposite role: the double-slit's d-spaced sources reinforce there; the single slit's continuum pairs off and cancels."
+        },
+        {
+          "misconception": "Narrowing the slit sharpens the light into a thinner line.",
+          "correction": "Below wavelength scale the opposite occurs: the central band WIDENS as 1/a \u2014 squeezing a wave spreads it. The ray-intuition (smaller hole, smaller spot) holds only while a \u226b \u03bb; the crossover is the wave nature announcing itself."
+        },
+        {
+          "misconception": "All the bright fringes in the pattern are about equally bright.",
+          "correction": "The single-slit pattern is dominated by its centre: the first secondary maximum is ~4.5% of the central intensity, the next ~1.6%, fading fast. An even ladder signals a DOUBLE slit; the lopsided centre-heavy profile is the single slit's fingerprint."
+        },
+        {
+          "misconception": "Single-slit diffraction and double-slit interference are competing descriptions \u2014 a real experiment shows one or the other.",
+          "correction": "A real double slit shows BOTH at once: the d-scale ladder modulated by each slit's a-scale envelope, with orders going missing where ladder maxima meet envelope zeros. The two length scales coexist on one screen \u2014 the concepts nest, not compete."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Single-Slit Diffraction\""
+        "The canonical intensity profile: fat central maximum, labelled minima at \u00b1\u03bb/a, \u00b12\u03bb/a, and the 4.5%/1.6% secondary bumps \u2014 the fingerprint to recognize on sight.",
+        "The pairing-argument diagram: the slit split into halves with partner wavelets \u03bb/2 apart cancelling \u2014 darkness derived, not decreed.",
+        "A slit-width slider animation (or adjustable-slit laser demo): the slit visibly narrowing while the wall pattern spreads \u2014 the inverse rule performed live.",
+        "The side-by-side fingerprints: single-slit (dominated centre) versus double-slit (even ladder) versus real double-slit (ladder under envelope, missing orders flagged).",
+        "A hair-in-the-beam demonstration: Babinet's complementary pattern from a strand \u2014 measuring a hair's width by its diffraction, the concept as a micrometer.",
+        "The a \u226b \u03bb limit strip: pattern collapsing toward the geometric slit image as the width opens \u2014 ray optics re-emerging."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Single-Slit Diffraction\"",
+        "setup": "A 633 nm laser illuminates a single slit; on a screen 1.5 m away, the central bright band spans 19.0 mm between its two first minima. (a) Find the slit width. (b) Locate the second minima and the approximate position of the first secondary maximum. (c) Predict the central width if the slit is halved, and if the laser is replaced by 450 nm blue. (d) A hair placed in the same beam casts a similar pattern with central width 24 mm \u2014 estimate its thickness.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Central width 2\u03bbL/a = 19.0 mm \u2192 a = 2\u03bbL/width = 2 \u00d7 6.33 \u00d7 10\u207b\u2077 \u00d7 1.5/1.90 \u00d7 10\u207b\u00b2 = 1.0 \u00d7 10\u207b\u2074 m = 0.10 mm.",
+          "(b) Second minima at y = \u00b12\u03bbL/a = \u00b119.0 mm from centre (twice the first's \u00b19.5 mm); the first secondary maximum sits roughly midway between first and second minima, y \u2248 \u00b114 mm, at ~4.5% of the central brightness.",
+          "(c) Halved slit (a \u2192 0.05 mm): width doubles to 38 mm \u2014 the inverse rule in numbers. Blue swap: width scales by 450/633 \u2192 \u2248 13.5 mm \u2014 shorter waves spread less.",
+          "(d) Babinet's principle: an obstacle diffracts like its complementary slit \u2014 a = 2\u03bbL/width = 2 \u00d7 6.33 \u00d7 10\u207b\u2077 \u00d7 1.5/2.40 \u00d7 10\u207b\u00b2 \u2248 7.9 \u00d7 10\u207b\u2075 m \u2248 80 \u03bcm: a human hair, measured by its own shadow's wave-spread.",
+          "Audit the trap once: every position used the MINIMA condition (m = 1, 2) \u2014 no m = 0 exists; the centre stayed bright throughout.",
+          "Collect the design sense: a, \u03bb, and L are the only dials, and the pattern is a ruler for whichever one is unknown \u2014 slit, wavelength, or hair."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Single-Slit Diffraction\""
+        "expected_outcome": "The student extracts a = 0.10 mm from the central width, maps the second minima and secondary maximum, runs both inverse-rule predictions, and measures the 80 \u03bcm hair via Babinet \u2014 with the m \u2265 1 discipline explicit."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "minima-condition solves (find a, \u03bb, L, or positions)",
+          "central-width computations and inverse-rule predictions",
+          "fingerprint discrimination items (single vs. double slit vs. modulated)",
+          "measurement inversions (hair/fibre widths via Babinet)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with minima solves and central widths, add inverse-rule and colour-swap predictions, then fingerprint discrimination and missing-order synthesis, ending with Babinet measurement problems.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with the m \u2265 1 discipline",
+          "pattern-identification tasks",
+          "measurement-design problems"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Single-Slit Diffraction\""
+        "bloom_alignment": "Apply \u2014 students must run the minima condition with its role reversed from Young's, wield the inverse width rule, and read pattern fingerprints on unfamiliar screens.",
+        "mastery_signal": "The student solves slit-width and position problems with correct minima logic (no m = 0), predicts pattern changes under a and \u03bb swaps, and distinguishes the three fingerprints, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Single-Slit Diffraction\""
+        "Slit-function design in spectrometers: entrance-slit width trades brightness against resolution by exactly this pattern.",
+        "Wire and fibre gauging measures micrometre diameters from diffraction spreads (Babinet) \u2014 non-contact metrology on production lines.",
+        "Acoustic and antenna engineering shape beams with aperture width by the same \u03b8 ~ \u03bb/a law \u2014 loudspeaker directivity and radar beamwidth are single-slit physics.",
+        "Photography's small-aperture softness (f/22 blur) is the slit pattern on the sensor \u2014 the practical ceiling of 'stopping down'.",
+        "The eye's floaters and squint-streaks are single-aperture diffraction viewed from inside the instrument."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.diffraction"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.polarization",
       "concept_id": "phys.opt.polarization",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Polarization of Light\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Polarization of Light\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain polarization as the restriction of light's transverse oscillation direction, distinguish unpolarized from linearly polarized light, describe polarization by filters, reflection, and scattering, state the 50% unpolarized-through-polarizer rule and the crossed-polarizer extinction, and use polarization as proof of light's transverse nature.",
+      "concept_summary": "Polarization is the property that certifies light transverse \u2014 and the working principle of every glare-cutting sunglass lens and liquid-crystal screen. Light's electric field oscillates perpendicular to its travel; in ordinary (unpolarized) light from the Sun or a lamp, that oscillation direction is a rapid random shuffle through all perpendicular orientations \u2014 a statistical mixture. A polarizing filter (Polaroid) is a directional gate: it transmits the field component along its transmission axis and absorbs the perpendicular component, so unpolarized light emerges LINEARLY POLARIZED \u2014 one oscillation direction \u2014 carrying exactly half its original intensity (the random mixture averages to 50/50 between any two perpendicular axes). A second polarizer then acts as an analyzer: rotate it and the transmitted light waxes and wanes, from full passage (axes parallel) to EXTINCTION (axes crossed at 90\u00b0) \u2014 the smoking-gun demonstration, impossible for longitudinal waves, that settled light's transverse geometry (sound, the class's longitudinal citizen, can never be polarized). Nature polarizes without filters by two routes this concept surveys qualitatively: REFLECTION \u2014 light glancing off water, glass, or asphalt emerges partially polarized parallel to the surface (horizontally), which is why polarized sunglasses with vertical axes annihilate glare specifically \u2014 and SCATTERING \u2014 sunlight scattered by air molecules polarizes perpendicular to the scattering plane, so patches of blue sky at 90\u00b0 from the Sun are strongly polarized (bees navigate by that sky-compass; photographers deepen skies by rotating a polarizer). The quantitative laws of both the analyzer (Malus) and reflection's perfect-polarization angle (Brewster) are the next concept's business; here the geometry, the 50% and crossed-extinction rules, and the transverse-proof logic are the content.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Polarization of Light\"",
-        "[TEMPLATE] Key idea 2 for \"Polarization of Light\"",
-        "[TEMPLATE] Key idea 3 for \"Polarization of Light\""
+        "Polarization = restriction of the transverse oscillation direction: unpolarized light shuffles all perpendicular field directions; linearly polarized light holds one.",
+        "The polarizing filter: transmits the field component along its axis, absorbs the perpendicular \u2014 unpolarized in, linearly polarized out, at exactly HALF the intensity (the random mixture's 50/50 average).",
+        "Polarizer + analyzer: parallel axes pass, crossed axes EXTINGUISH \u2014 the rotating-analyzer fade is polarization made visible.",
+        "The transverse proof: only waves with perpendicular oscillation choices can be filtered by direction \u2014 polarization certifies light transverse, and its impossibility certifies sound longitudinal (the waves-domain claim, redeemed).",
+        "Polarization by reflection: glancing reflections off water/glass/roads emerge partially polarized HORIZONTALLY (parallel to the surface) \u2014 hence vertical-axis sunglasses kill glare selectively (Brewster's perfect-angle case next).",
+        "Polarization by scattering: molecular scattering polarizes sky-light perpendicular to the scattering plane \u2014 maximal 90\u00b0 from the Sun; bees and Vikings navigated by it, photographers dial it.",
+        "Everyday instrumentation: LCD screens are voltage-controlled polarization gates between crossed polarizers; 3D cinema separates eye-channels by polarization; photographic polarizers cut reflections and deepen skies.",
+        "A rotating polarizer diagnoses light: constant transmission = unpolarized; full fade to extinction = linear; partial fade = partial polarization \u2014 the filter as a measurement instrument."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Polarization of Light\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "A polarizing filter just dims light, like grey sunglasses.",
+          "correction": "It SELECTS a direction: unpolarized light loses exactly half (not an arbitrary fraction), and already-polarized light is passed, faded, or extinguished by ANGLE. The rotating-filter test distinguishes instantly \u2014 neutral grey never fades with rotation; a polarizer against glare or sky does."
+        },
+        {
+          "misconception": "Any wave can be polarized if the filter is fine enough.",
+          "correction": "Only transverse waves offer perpendicular directions to select among. Sound's oscillation lies along its travel \u2014 no choice exists, no filter can gate it. Polarization is a geometry certificate, and light holds one; sound cannot."
+        },
+        {
+          "misconception": "Two polarizers always block more light than one, so crossed polarizers plus a third can only be darker still.",
+          "correction": "Insert a third polarizer at 45\u00b0 BETWEEN crossed ones and light returns \u2014 each stage re-projects the field onto a new axis, and the two 45\u00b0 steps leak through what one 90\u00b0 step forbids. (Malus's cosines, next concept, price it at 12.5%.) Polarizers rotate states, not just absorb \u2014 the classic three-filter surprise."
+        },
+        {
+          "misconception": "Polarized sunglasses cut all light equally \u2014 they're just good shades.",
+          "correction": "Their vertical transmission axis specifically annihilates the HORIZONTALLY polarized glare from roads, water, and hoods while passing ordinary scene light \u2014 which is why they kill reflections that neutral sunglasses only dim, and why rotating them 90\u00b0 (tilting your head) resurrects the glare."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Polarization of Light\""
+        "The oscillation-direction diagram: unpolarized light's shuffling arrows versus the single-direction arrow after a filter, travel direction fixed throughout.",
+        "The picket-fence/rope analogy staged honestly: rope waves through aligned then crossed slots \u2014 with the sound-can't-play disclaimer that upgrades it into the transverse proof.",
+        "Two-polarizer live demonstration on an overhead or against the sky: rotate to fade, cross to extinguish; then the three-filter 45\u00b0 resurrection as the finale.",
+        "A glare pair: photograph of water/car-hood glare with and without a vertical-axis polarizer \u2014 reflection polarization applied.",
+        "The sky-polarization map: polarization strength across the sky dome with the 90\u00b0-from-Sun band highlighted, bee-compass caption.",
+        "An LCD pixel cutaway: backlight, polarizer, voltage-twisted liquid crystal, crossed polarizer \u2014 the concept as every screen in the room."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Polarization of Light\"",
+        "setup": "Unpolarized light of intensity I\u2080 = 800 W/m\u00b2 meets a sequence of ideal polarizers. (a) Find the intensity after one polarizer (axis vertical). (b) A second polarizer is crossed (horizontal) \u2014 find the output. (c) Diagnose three beams tested with a rotating polarizer: beam X never varies; beam Y fades to zero twice per rotation; beam Z dips partially. (d) Explain why a boater's vertical-axis sunglasses kill water glare but tilt-headed viewing revives it.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) Unpolarized through one polarizer: I = I\u2080/2 = 400 W/m\u00b2, emerging vertically polarized \u2014 the 50% rule from averaging the random mixture.",
+          "(b) Crossed second polarizer: the vertical light has zero horizontal component \u2014 I = 0: extinction, the transverse fingerprint.",
+          "(c) X constant \u2192 unpolarized; Y full fade twice/rotation \u2192 linearly polarized (extinction each time the axis crosses its direction); Z partial dip \u2192 partially polarized (a mixture) \u2014 the rotating filter read as an instrument.",
+          "(d) Water glare is reflection-polarized HORIZONTALLY; vertical-axis lenses project it to ~zero while passing vertically polarized and unpolarized scene light at ordinary rates.",
+          "Tilting the head rotates the lens axis toward horizontal \u2014 the glare's direction re-enters the transmission axis and the shine returns: geometry, not lens failure.",
+          "Bank the sequel: intermediate angles need cos\u00b2\u03b8 (Malus) and the perfect reflection angle needs Brewster \u2014 the two quantitative laws queued next."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Polarization of Light\""
+        "expected_outcome": "The student applies the 50% and extinction rules (400 W/m\u00b2, then 0), reads all three rotating-filter diagnoses correctly, and explains glare-killing and its head-tilt failure by axis geometry."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "50%-rule and crossed-extinction computations",
+          "rotating-polarizer diagnosis items",
+          "application explanations (sunglasses, LCD, sky photography, 3D cinema)",
+          "transverse-proof reasoning (why sound fails, what the rope analogy shows)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with the two quantitative rules, add diagnosis scenarios, then application geometry (axes against glare and sky), ending with the three-filter surprise as a conceptual bridge to Malus.",
+        "suggested_count": 10
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation and diagnosis set",
+          "application-geometry explanations",
+          "conceptual quiz on the transverse proof"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Polarization of Light\""
+        "bloom_alignment": "Understand \u2014 students must explain polarization's geometry, its filter and natural mechanisms, and its role as the transverse-nature proof, applying the 50% and extinction rules.",
+        "mastery_signal": "The student applies both rules, diagnoses beams by rotation behaviour, maps sunglass/sky geometries correctly, and delivers the sound-can't-be-polarized argument, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Polarization of Light\""
+        "Polarized sunglasses and camera filters annihilate reflection glare and deepen skies by axis geometry.",
+        "Every LCD \u2014 phones, monitors, instrument panels \u2014 is millions of voltage-controlled polarization gates between crossed filters.",
+        "3D cinema and some AR optics separate eye channels by polarization states.",
+        "Photoelasticity reveals stress in transparent parts as colour fringes between crossed polarizers \u2014 engineering diagnosis by polarized light.",
+        "Sky-polarization compasses guided bees and possibly Viking navigators; polarimetric remote sensing and astronomy read fields and surfaces the same way.",
+        "Chemists assay chiral solutions (sugars, drugs) by their rotation of polarized light \u2014 polarimetry as laboratory routine."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.wave-optics"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.opt.brewsters-law",
       "concept_id": "phys.opt.brewsters-law",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Brewster's Law and Malus's Law\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Brewster's Law and Malus's Law\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state and apply Malus's law I = I\u2080cos\u00b2\u03b8 for polarized light through an analyzer, compute multi-polarizer chains including the three-filter case, state and apply Brewster's law tan \u03b8_B = n\u2082/n\u2081 for complete polarization by reflection, and connect both laws to sunglasses, photography, and laser design.",
+      "concept_summary": "Polarization's two quantitative laws share this concept. MALUS'S LAW prices the analyzer: linearly polarized light of intensity I\u2080 meeting a polarizer whose axis lies at angle \u03b8 to the polarization direction transmits I = I\u2080cos\u00b2\u03b8 \u2014 the field projects as cos \u03b8, and intensity, going as field squared, follows cos\u00b2. The checkpoints anchor it (\u03b8 = 0: all; 45\u00b0: half; 90\u00b0: none), and chains multiply stage by stage, each stage RE-POLARIZING the light along its own axis \u2014 which resolves the three-filter surprise exactly: crossed polarizers pass nothing, but a 45\u00b0 filter inserted between them yields I\u2080/2 \u00d7 cos\u00b245\u00b0 \u00d7 cos\u00b245\u00b0 = I\u2080/8 \u2014 12.5% resurrected through two projections that one direct 90\u00b0 projection forbade. (Unpolarized input still pays its flat 50% at the first filter; cos\u00b2 applies only once a polarization direction exists.) BREWSTER'S LAW completes reflection polarization: at one special incidence angle \u03b8_B, given by tan \u03b8_B = n\u2082/n\u2081, reflected light is COMPLETELY polarized parallel to the surface \u2014 the underlying geometry being that at \u03b8_B the would-be reflected and refracted rays are perpendicular, and the in-plane oscillation direction, aligned along the reflection direction, cannot radiate there (dipoles do not emit along their axis), leaving only the surface-parallel component in the reflected beam. For air-to-glass \u03b8_B \u2248 56.3\u00b0, air-to-water \u2248 53.1\u00b0 \u2014 glancing everyday angles, which is why water and road glare is so strongly polarized and why vertical-axis sunglasses work best near those geometries. The law's quiet masterpiece is the laser Brewster window: a tube-end tilted at \u03b8_B transmits one polarization losslessly (no reflection for it at all), and after thousands of cavity round trips the laser emerges perfectly polarized \u2014 reflection's zero engineered into an instrument. Together the two laws turn the previous concept's geometry into arithmetic: cos\u00b2 for every analyzer angle, tan for the perfect reflection angle.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Brewster's Law and Malus's Law\"",
-        "[TEMPLATE] Key idea 2 for \"Brewster's Law and Malus's Law\"",
-        "[TEMPLATE] Key idea 3 for \"Brewster's Law and Malus's Law\""
+        "Malus's law: I = I\u2080cos\u00b2\u03b8 for POLARIZED light through an analyzer at angle \u03b8 \u2014 field projects as cos \u03b8, intensity as its square; checkpoints 100%/50%/0% at 0\u00b0/45\u00b0/90\u00b0.",
+        "Chains multiply and re-polarize: each stage projects onto its own axis and outputs light polarized THERE \u2014 compute stage by stage, never end to end.",
+        "The three-filter resolution: crossed = 0, but a 45\u00b0 middle stage gives I\u2080/2 \u2192 \u00d7cos\u00b245\u00b0 \u2192 \u00d7cos\u00b245\u00b0 = I\u2080/8 \u2014 two projections leak what one forbids; the previous concept's surprise, priced.",
+        "Unpolarized input rule stands apart: flat 50% at the first polarizer (average of cos\u00b2 over all directions), and cos\u00b2 only thereafter.",
+        "Brewster's law: tan \u03b8_B = n\u2082/n\u2081 \u2014 at this incidence the reflected beam is COMPLETELY polarized parallel to the surface; air-glass \u2248 56.3\u00b0, air-water \u2248 53.1\u00b0.",
+        "The mechanism: at \u03b8_B reflected and refracted directions are perpendicular; in-plane dipoles in the medium cannot radiate along their own axis \u2014 the in-plane component deserts the reflection entirely.",
+        "Complement: at \u03b8_B the reflected light is all surface-parallel; the TRANSMITTED beam is correspondingly enriched in the in-plane component (partially polarized) \u2014 energy bookkeeping across the boundary.",
+        "Applications as geometry: vertical-axis sunglasses against ~53\u00b0 water glare; polarizing camera filters dialled by Malus; laser Brewster windows transmitting one polarization losslessly into perfect beam polarization."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Brewster's Law and Malus's Law\" \u2014 to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception \u2014 to be authored."
+          "misconception": "Malus's law uses cos \u03b8 \u2014 half the light passes at 60\u00b0, since cos 60\u00b0 = 0.5.",
+          "correction": "Intensity follows the SQUARE: I = I\u2080cos\u00b2\u03b8, so 60\u00b0 passes cos\u00b260\u00b0 = 25%. The field projects as cos \u03b8; intensity, as energy, squares it \u2014 the 45\u00b0-is-half checkpoint (cos\u00b245\u00b0 = \u00bd) is the anchor to memorize."
+        },
+        {
+          "misconception": "Malus's cos\u00b2 applies to unpolarized light too \u2014 just use the filter angle.",
+          "correction": "Unpolarized light has no direction to measure \u03b8 from: it pays a flat 50% at the first polarizer (the cos\u00b2 averaged over the random mixture). Malus's law begins at the SECOND filter, once a polarization direction exists."
+        },
+        {
+          "misconception": "A multi-polarizer chain can be computed from the net angle between first and last axes.",
+          "correction": "Each stage re-polarizes along its own axis, so transmission multiplies stage by stage. Crossed filters (net 90\u00b0) pass zero directly, yet with a 45\u00b0 middle stage pass 12.5% \u2014 the end-to-end shortcut gets exactly this wrong, which is the three-filter lesson."
+        },
+        {
+          "misconception": "Brewster's angle is where reflection is strongest, or just another name for the critical angle.",
+          "correction": "\u03b8_B is where the reflected light is completely POLARIZED (and the in-plane component's reflection is zero \u2014 reflection there is weak, not strong). The critical angle is a different beast entirely: dense-to-rare total reflection via sin \u03b8_c = n\u2082/n\u2081. Brewster uses TANGENT, works in either direction, and polarizes rather than traps."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Brewster's Law and Malus's Law\""
+        "The projection diagram behind Malus: the polarized field arrow, its cos \u03b8 component along the analyzer axis, and the intensity's cos\u00b2 \u2014 with the 0\u00b0/45\u00b0/90\u00b0 checkpoints tabulated.",
+        "A cos\u00b2\u03b8 transmission curve with a rotating-analyzer photo sequence pinned at its checkpoints.",
+        "The three-filter chain computed on screen: I\u2080 \u2192 I\u2080/2 \u2192 I\u2080/4 \u2192 I\u2080/8 stage by stage, beside the live demonstration.",
+        "The Brewster geometry: incident, reflected, and refracted rays with the 90\u00b0 reflected-refracted angle marked, in-plane dipoles drawn radiating nothing along the reflection direction.",
+        "A glare-angle diagram: eye, water surface, ~53\u00b0 geometry, horizontally polarized reflection, and the vertical sunglass axis annihilating it.",
+        "A laser-tube cutaway: Brewster windows at 56\u00b0, the lossless polarization surviving thousands of passes into a perfectly polarized beam."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Brewster's Law and Malus's Law\"",
+        "setup": "(a) Vertically polarized light of I\u2080 = 600 W/m\u00b2 meets an analyzer at 30\u00b0 \u2014 find the output. (b) Unpolarized 600 W/m\u00b2 passes filters at 0\u00b0, 45\u00b0, and 90\u00b0 \u2014 find the final intensity, and compare with the middle filter removed. (c) Find Brewster's angle for air-to-water (n = 1.33) and air-to-glass (n = 1.50), and state the reflected light's polarization direction. (d) Explain the laser Brewster window's job.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "(a) I = 600 cos\u00b230\u00b0 = 600 \u00d7 0.75 = 450 W/m\u00b2, now polarized along the analyzer's 30\u00b0 axis \u2014 projection then re-polarization.",
+          "(b) Stage 1 (unpolarized rule): 300 W/m\u00b2 at 0\u00b0. Stage 2: 300 cos\u00b245\u00b0 = 150 at 45\u00b0. Stage 3: 150 cos\u00b245\u00b0 = 75 W/m\u00b2 \u2014 one eighth of I\u2080... of the original 600: 75 W/m\u00b2 emerges through crossed ends via the 45\u00b0 bridge.",
+          "Middle removed: 300 cos\u00b290\u00b0 = 0 \u2014 the resurrection quantified: 75 vs. 0, the three-filter surprise as arithmetic.",
+          "(c) Water: \u03b8_B = arctan 1.33 \u2248 53.1\u00b0; glass: arctan 1.50 \u2248 56.3\u00b0 \u2014 reflected beams completely polarized PARALLEL to the surface (horizontally, for horizontal surfaces): the sunglass geometry's exact angles.",
+          "(d) A tube window tilted at \u03b8_B reflects NONE of the in-plane polarization \u2014 that component transits losslessly on every one of thousands of cavity passes, while the perpendicular component bleeds by reflection each pass: the survivor defines the laser's perfect polarization.",
+          "Collect the two-law toolkit: cos\u00b2 (squared!) stage by stage for analyzers; tan \u03b8_B = n\u2082/n\u2081 for reflection's perfect-polarization angle \u2014 and never confuse Brewster's tangent with the critical angle's sine."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Brewster's Law and Malus's Law\""
+        "expected_outcome": "The student computes 450 W/m\u00b2 (cos\u00b2 discipline), the 75-vs-0 three-filter contrast stage by stage, both Brewster angles with the horizontal polarization statement, and narrates the Brewster-window survival argument."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Malus computations at assorted angles (with the unpolarized first-stage rule)",
+          "multi-filter chain problems (including order-dependence and the three-filter family)",
+          "Brewster-angle computations across boundaries (both directions)",
+          "application and discrimination items (sunglass geometry, laser windows, Brewster vs. critical angle)"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with single-analyzer Malus solves and checkpoints, add chains and the unpolarized rule, then Brewster computations with polarization statements, ending with design applications and the tangent-vs-sine discrimination.",
+        "suggested_count": 12
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "computation set with stage-by-stage requirements",
+          "design-application problems",
+          "discrimination quiz (Malus vs. flat-50%; Brewster vs. critical)"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Brewster's Law and Malus's Law\""
+        "bloom_alignment": "Apply \u2014 students must execute both laws with their sign... their squared and tangent disciplines across chains and boundaries, and deploy them in the standard optical designs.",
+        "mastery_signal": "The student computes analyzer chains correctly (cos\u00b2, stage-wise, unpolarized rule respected), both Brewster angles with polarization directions, and wins the three-filter and Brewster-vs-critical discriminations, at 80% accuracy or better."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Brewster's Law and Malus's Law\""
+        "Polarized sunglasses and camera polarizers are Malus dials against Brewster-angle glare \u2014 the two laws worn on faces and lenses.",
+        "Laser engineering polarizes beams with Brewster windows and tunes intensities with rotating analyzers \u2014 both laws as components.",
+        "LCD brightness control is Malus's law voltage-actuated between crossed polarizers, pixel by pixel.",
+        "Polarimetry (sugar assay, pharmaceutical chirality, stress photoelasticity) measures rotation angles through crossed analyzers priced by cos\u00b2.",
+        "Photography's sky-and-water craft \u2014 reflections dialled out at ~53\u201356\u00b0, skies deepened \u2014 is field-applied Brewster geometry.",
+        "Optical communication and quantum-optics experiments prepare and measure polarization states with exactly these two laws."
       ],
       "prerequisite_review_triggers": [
         "phys.opt.polarization"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "c83bc8c",
+        "kg_build_date": "2026-06-29",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-02T00:00:00Z",
+        "generation_commit": "2bcbddc",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.10"
+        ]
+      }
     },
     {
       "id": "asset.phys.em.electric-charge",

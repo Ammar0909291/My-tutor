@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`00990b6` — feat(physics): author Waves & Oscillations domain (phys.wave, 17 concepts)
+_(set after commit — see git log for `docs/physics/`)_
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -35,15 +35,15 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 02 | Classical Mechanics | phys.mech | 52 | draft ✓ | chapters/mech.md ✓ | Complete |
 | 03 | Thermodynamics | phys.therm | 18 | draft ✓ | chapters/therm.md ✓ | Complete |
 | 04 | Waves & Oscillations | phys.wave | 17 | draft ✓ | chapters/wave.md ✓ | Complete |
-| 05 | Optics | phys.opt | 15 | placeholder | — | **NEXT** |
-| 06 | Electromagnetism | phys.em | 35 | placeholder | — | Pending |
+| 05 | Optics | phys.opt | 15 | draft ✓ | chapters/opt.md ✓ | Complete |
+| 06 | Electromagnetism | phys.em | 35 | placeholder | — | **NEXT** |
 | 07 | Modern Physics | phys.mod | 15 | placeholder | — | Pending |
 | 08 | Quantum Mechanics | phys.qm | 12 | placeholder | — | Pending |
 | 09 | Special Relativity | phys.rel | 8 | placeholder | — | Pending |
 | 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | Pending |
 | 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
 
-**Summary:** 4/11 domains complete · 95/194 assets drafted · 99/194 remaining (49.0%)
+**Summary:** 5/11 domains complete · 110/194 assets drafted · 84/194 remaining (56.7%)
 
 ## Completed Concepts Per Domain
 
@@ -80,8 +80,17 @@ longitudinal-waves, wave-speed, superposition, interference, standing-waves,
 sound-waves, sound-intensity, doppler-effect, beats
 (5 chunks: 4+4+4+4+1, deterministic graph order.)
 
-### phys.opt (15 concepts) — NOT STARTED
-0/15 authored. First unfinished domain — start here next session.
+### phys.opt (15 concepts) — COMPLETE
+All 15 concepts authored: nature-of-light, reflection, mirrors, refraction,
+total-internal-reflection, lenses, lens-power, optical-instruments,
+dispersion, wave-optics, youngs-experiment, diffraction, single-slit,
+polarization, brewsters-law
+(4 chunks: 4+4+4+3, deterministic graph order. Pedagogical audit: 3/15
+concepts fully audited (20%) + all-concept worked-example arithmetic
+sweep — PASS, 0 defects; see phys.opt-validation-report.md.)
+
+### phys.em (35 concepts) — NOT STARTED
+0/35 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -122,21 +131,22 @@ sound-waves, sound-intensity, doppler-effect, beats
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.wave)
+## Validation Status (latest domain: phys.opt)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.wave) | PASS — 0 orphans |
-| KG dependency integrity (phys.wave requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.wave, deep + provenance) | PASS — 17/17 |
-| Prerequisite review triggers = valid KG IDs (all 95 drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.wave) | PASS — 17/17 |
-| Chapter assembly (wave.md) | PASS — 1962 lines |
+| KG orphan audit (phys.opt) | PASS — 0 orphans |
+| KG dependency integrity (phys.opt requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.opt, deep + provenance) | PASS — 15/15 |
+| Prerequisite review triggers = valid KG IDs (all 110 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.opt) | PASS — 15/15 |
+| Chapter assembly (opt.md) | PASS — 1765 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
-| Regression: meas + mech + therm untouched | PASS — 8/8, 52/52, 18/18 draft |
+| Regression: meas + mech + therm + wave untouched | PASS — 8/8, 52/52, 18/18, 17/17 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
+| Pedagogical audit (3 concepts + arithmetic sweep) | PASS — 26/26 items, 0 defects |
 
 ## Session Resumption Checklist
 
@@ -150,5 +160,6 @@ sound-waves, sound-intensity, doppler-effect, beats
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.wave)
-**phys.opt** — Optics · 15 concepts · plan 4 chunks (4+4+4+3).
+## Next Planned Domain (after phys.opt)
+**phys.em** — Electromagnetism · 35 concepts · the last heavyweight;
+plan ~9 chunks of 4 (final chunk 3).
