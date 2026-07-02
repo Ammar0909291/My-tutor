@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-_(set after commit — see git log for `docs/physics/`)_
+`b1abc9d` — feat(physics): author Classical Mechanics domain (phys.mech, 52 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
