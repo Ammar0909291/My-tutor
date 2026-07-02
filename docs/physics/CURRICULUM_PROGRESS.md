@@ -3,12 +3,14 @@
 *Source of truth for all sessions. Do not rely on conversation memory.*
 
 ## Branch
-`claude/physics-curriculum-production-2x8byo` (Physics production branch, based on
-`claude/my-tutor-foundation-KDSUO` at `c24e40d`; Mathematics production continues
-independently on the foundation branch — do NOT touch Mathematics from here.)
+`claude/my-tutor-foundation-KDSUO` — the ONLY canonical working branch as of
+2026-07-02. The temporary isolation branch `claude/physics-curriculum-production-2x8byo`
+(used for domain 01 only) was fast-forward merged into the foundation branch at
+`ec87189` and must not receive further development. Mathematics production continues
+independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`ebd73c5` — feat(physics): author Measurement & Units domain (phys.meas, 8 concepts)
+_(set after commit — see git log for `docs/physics/`)_
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -23,14 +25,15 @@ cannot be pointed at it unmodified — the Python-equivalent pipeline steps docu
 below handle the lookup by `key`/prefix instead. Also note the KG ships with
 `total_cross_links: 0` — cross-link authoring belongs to a future KG revision by the
 Curriculum Production Pipeline, not to teaching-asset sessions.
+KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f`.
 
 ## Teaching-Asset Production Status
 
 | # | Domain | ID Prefix | Concepts | Asset Status | Chapter File | Notes |
 |---|--------|-----------|----------|--------------|--------------|-------|
 | 01 | Measurement & Units | phys.meas | 8 | draft ✓ | chapters/meas.md ✓ | Complete |
-| 02 | Classical Mechanics | phys.mech | 52 | placeholder | — | **NEXT** |
-| 03 | Thermodynamics | phys.therm | 18 | placeholder | — | Pending |
+| 02 | Classical Mechanics | phys.mech | 52 | draft ✓ | chapters/mech.md ✓ | Complete |
+| 03 | Thermodynamics | phys.therm | 18 | placeholder | — | **NEXT** |
 | 04 | Waves & Oscillations | phys.wave | 17 | placeholder | — | Pending |
 | 05 | Optics | phys.opt | 15 | placeholder | — | Pending |
 | 06 | Electromagnetism | phys.em | 35 | placeholder | — | Pending |
@@ -40,7 +43,7 @@ Curriculum Production Pipeline, not to teaching-asset sessions.
 | 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | Pending |
 | 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
 
-**Summary:** 1/11 domains complete · 8/194 assets drafted · 186/194 remaining
+**Summary:** 2/11 domains complete · 60/194 assets drafted · 134/194 remaining (30.9%)
 
 ## Completed Concepts Per Domain
 
@@ -48,8 +51,23 @@ Curriculum Production Pipeline, not to teaching-asset sessions.
 All 8 concepts authored: units, scalars-vectors, dimensions, errors,
 significant-figures, vector-addition, vector-products, unit-conversion
 
-### phys.mech (52 concepts) — NOT STARTED
-0/52 authored. First unfinished domain — start here next session.
+### phys.mech (52 concepts) — COMPLETE
+All 52 concepts authored: displacement, velocity, acceleration, kinematics-1d,
+kinematics-2d, projectile-motion, relative-motion, circular-motion, force,
+newtons-first-law, newtons-second-law, newtons-third-law, free-body-diagram,
+friction, tension, normal-force, inclined-plane, work, kinetic-energy,
+potential-energy, work-energy-theorem, conservation-of-energy, power,
+conservative-forces, momentum, impulse, conservation-of-momentum,
+collisions-elastic, collisions-inelastic, center-of-mass, angular-kinematics,
+torque, moment-of-inertia, rotational-dynamics, angular-momentum,
+conservation-of-angular-momentum, rolling-motion, equilibrium,
+universal-gravitation, gravitational-field, gravitational-potential,
+orbital-mechanics, keplers-laws, escape-velocity, satellites, hookes-law,
+stress-strain, pressure-fluids, buoyancy, bernoulli, surface-tension, viscosity
+(13 chunks × 4 concepts, deterministic graph order.)
+
+### phys.therm (18 concepts) — NOT STARTED
+0/18 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -61,7 +79,8 @@ significant-figures, vector-addition, vector-products, unit-conversion
    revision_guidance}}`. Skip chunks whose outputs already exist.
 3. **Deterministic merge** — single read-modify-write pass into
    `teaching-assets/assets.json`: replace the 10 authorable fields on matching
-   `concept_id`, set `version: 1.1.0`, `status: draft`, attach `provenance`,
+   `concept_id`, set `version: 1.1.0`, `status: draft`, attach `provenance`
+   (with `source_references` drawn from the concept's own KG `references`),
    update file `build_date`. Semantics of `scripts/merge-teaching-asset-batch.ts`.
 4. **Deterministic assembly** — render `chapters/{prefix}.md` from chunks + KG
    (pure templating, template of `scripts/assemble-chapter-markdown.ts`, header
@@ -69,13 +88,15 @@ significant-figures, vector-addition, vector-products, unit-conversion
 5. **Validate** — Python equivalents of `scripts/validate-teaching-assets.ts`
    (6 structural checks) + the domain-level Mathematics report checks
    (count/prereq/unlocks/duplicates/orphans/cross-links/completeness/quality/
-   cycle detection/deep schema/bloom alignment).
+   cycle detection/deep schema/bloom alignment) + regression checks that
+   previously drafted domains and the KG sha256 are untouched.
    **Physics convention:** `prerequisite_review_triggers` are strict KG concept
    IDs (the TS validator's check 6 requires this; Mathematics drafts used
    behavioral descriptions instead and would fail that check as written).
 6. **Domain artifacts** — write `domains/phys.{prefix}-validation-report.md`,
    `-summary.md`, `-manifest.json` (with sha256 checksums).
-7. **Update this file**, commit, push. One domain per session turn, then STOP.
+7. **Update this file**, commit, push to `claude/my-tutor-foundation-KDSUO`.
+   One domain per session turn, then STOP.
 
 ## Build Verification Notes
 
@@ -87,22 +108,25 @@ significant-figures, vector-addition, vector-products, unit-conversion
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status
+## Validation Status (latest domain: phys.mech)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.meas) | PASS — 0 orphans |
-| KG dependency integrity (phys.meas requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.meas, deep) | PASS |
-| Prerequisite review triggers = valid KG IDs | PASS |
-| Bloom alignment asset ↔ KG (phys.meas) | PASS |
-| Chapter assembly (meas.md) | PASS — 888 lines |
+| KG orphan audit (phys.mech) | PASS — 0 orphans |
+| KG dependency integrity (phys.mech requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.mech, deep + provenance) | PASS — 52/52 |
+| Prerequisite review triggers = valid KG IDs (all drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.mech) | PASS — 52/52 |
+| Chapter assembly (mech.md) | PASS — 5779 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
+| Regression: phys.meas untouched | PASS — 8/8 draft |
+| Physics KG sha256 unchanged | PASS |
+| Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
 
 ## Session Resumption Checklist
 
-1. `git fetch origin claude/physics-curriculum-production-2x8byo` and check out that branch
+1. `git fetch origin claude/my-tutor-foundation-KDSUO` and check out that branch
 2. Read this file to determine the current domain and next unfinished chunk
 3. Check `docs/physics/teaching-assets/assets.json` — domains with `status: draft` are complete
 4. Check `docs/physics/chapters/` — present `.md` files are assembled and committed
@@ -110,8 +134,8 @@ significant-figures, vector-addition, vector-products, unit-conversion
 6. Do NOT regenerate already-drafted assets
 7. Do NOT modify `docs/physics/kg/graph.json`
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
+9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.meas)
-**phys.mech** — Classical Mechanics · 52 concepts · largest Physics domain;
-plan ~13 chunks of 4 concepts (or 7 of 8) and author across parallel agents
-if session budget allows.
+## Next Planned Domain (after phys.mech)
+**phys.therm** — Thermodynamics · 18 concepts · plan 5 chunks of 4 (last chunk 2),
+or 3 chunks of 6.
