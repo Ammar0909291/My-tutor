@@ -1250,3 +1250,17 @@ Assessment) — not due yet.
   logic (replica-drift risk, `aiRouterResilience.test.ts:3-5`), and
   `.github/workflows/` does not exist (no CI at all — extends R6). §11
   document map updated. No production code changed.
+- **2026-07-02 — CI baseline measured; P10 spec amended (integration-prep
+  iteration 3).** Ran the actual gates the framework proposes: vitest is
+  **green** (39 files, 506 passed / 1 skipped, ~10 s) and runs without a
+  database or a generated Prisma client — so the CI vitest gate is
+  deployable immediately with zero infrastructure flake risk.
+  `npx tsc --noEmit` is **not zero-error**: 662 errors / 98 files
+  measured with an ungenerated Prisma client (`prisma generate` fails on
+  engine download in sandboxed environments; the clean baseline is
+  smaller but known-nonzero per project memory). Consequence:
+  `VALIDATION_FRAMEWORK_P10.md` §6 step 2 redesigned from a zero-error
+  gate to a **type-error ratchet** (committed baseline count; fail only
+  on increase; any PR may lower it; converts to a hard gate at zero).
+  Spec §1 evidence table gains both measurements. No production code
+  changed.

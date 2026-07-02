@@ -280,6 +280,13 @@
   39-file vitest suite tests pure REPLICAS of LLM-adjacent logic, not the
   real modules (replica-drift risk); `.github/workflows/` doesn't exist —
   nothing runs in CI (extends R6).
+  (3) 2026-07-02 — CI baseline measured, spec amended: vitest GREEN
+  (506/507, ~10 s, needs no DB and no generated Prisma client);
+  `tsc --noEmit` NOT clean (662 errors/98 files with ungenerated client;
+  clean baseline smaller but nonzero) → CI type gate redesigned as a
+  ratchet (fail only on count increase), not zero-error. Note:
+  `prisma generate` fails on engine download in sandboxed envs
+  (ECONNRESET) — type baselines differ by environment.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

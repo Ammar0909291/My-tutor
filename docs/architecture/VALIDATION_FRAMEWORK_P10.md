@@ -26,6 +26,8 @@ a fixture that flips verdict, and CI rejects it before merge.
 | The chat pipeline (65-step flow, `DATA_FLOW.md` §1) has **zero** end-to-end test coverage | no test imports the route or drives it over HTTP |
 | **No CI exists at all** — `.github/workflows/` is absent | verified; even the existing suite runs only when someone remembers to run it |
 | The LLM seams are `routeAI`/`routeJSON` (`src/lib/ai/router.ts`) and `generateAIResponse`/`generateJSON`/`chatWithFallback` (`src/lib/ai/client.ts`) | export inspection |
+| The vitest suite is **green**: 39 files, 506 passed / 1 skipped, ~10 s, and it runs **without a database and without a generated Prisma client** | `npx vitest run`, 2026-07-02, in an environment where `prisma generate` had not succeeded |
+| `npx tsc --noEmit` is **not zero-error** on this branch: 662 errors across 98 files measured with an ungenerated Prisma client (39 × TS2305 on `@prisma/client` + type-`unknown` cascades); the clean-client baseline is smaller but known-nonzero (project memory: "pre-existing stripe/subscription errors are expected on feature branches") | measured 2026-07-02; `prisma generate` fails in sandboxed environments on engine download (ECONNRESET), so the contaminated and clean baselines differ by environment |
 
 Two named failure classes follow from this state:
 
@@ -185,9 +187,21 @@ a visible, reviewed fixture flip instead of a silent change.
 `.github/workflows/validate.yml` (new file — test scaffolding, not
 production runtime; buildable as integration-prep):
 
-1. `npm ci`
-2. `npx tsc --noEmit`
-3. `npx vitest run` (Tiers 1–2)
+1. `npm ci` (postinstall runs `prisma generate`; CI must have network to
+   the Prisma engine CDN or a cached engine — sandboxed environments
+   without it cannot reproduce the clean type baseline, see §1)
+2. **Type-error ratchet** — NOT a zero-error gate. Measured 2026-07-02:
+   the branch has hundreds of pre-existing type errors, so
+   `npx tsc --noEmit` as a hard gate would be red on day one and would
+   either block all merges or (worse) train people to ignore CI. Instead:
+   count errors (`tsc --noEmit | grep -cE "error TS"`), compare against
+   `tsc-baseline.txt` committed in-repo; **fail only if the count
+   increases**; any PR may lower the baseline, none may raise it. The
+   baseline number is captured by the first CI run (clean generated
+   client), not from sandbox measurements.
+3. `npx vitest run` (Tiers 1–2) — hard gate; verified green (506/507,
+   ~10 s) and independent of DB and generated client, so this gate is
+   deployable immediately with zero flake risk from infrastructure.
 4. `npx tsx scripts/validate-knowledge-graph.ts` for all 5 shipped
    subjects (**closes R6** — the validator currently has zero CI wiring;
    read-only over `docs/*/kg/graph.json`, so it cannot interfere with the
@@ -198,7 +212,8 @@ production runtime; buildable as integration-prep):
 Steps 1–4 are immediately buildable. Step 5 lands with the first T3a
 fixtures. Per-wave exit gates then reference named fixture subsets
 (e.g., Wave 2 exit = fixtures 6, 10, 11, 12 flipped-and-reviewed + rest
-green).
+green). Long-term, the ratchet in step 2 trends the baseline to zero and
+then converts to a hard gate.
 
 ## 7. Build order (all pre-gate except where marked)
 
