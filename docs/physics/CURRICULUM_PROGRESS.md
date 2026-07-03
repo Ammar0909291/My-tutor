@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`PENDING` — feat(physics): author Electromagnetism domain (phys.em, 35 concepts) — will be corrected to the real hash in a follow-up commit, per established pattern
+`83c40bf` — feat(physics): author Electromagnetism domain (phys.em, 35 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
