@@ -5,13 +5,13 @@
   "campaign_version": "1.0.0-draft",
   "objective": "Canonical Knowledge Graph → Canonical Teaching Assets → Canonical Subject Freeze (v1.0) → Curriculum Views (CBSE, ICSE, IB, Cambridge, University) → Educational Brain intelligence layers",
   "campaign_totals": {
-    "subjects_total": 5,
+    "subjects_total": 6,
     "subjects_complete": 0,
     "subjects_in_progress": 1,
-    "subjects_not_started": 4,
-    "total_concepts_all_subjects": 1496,
+    "subjects_not_started": 5,
+    "total_concepts_all_subjects": 1712,
     "total_drafted_assets": 379,
-    "overall_completion_pct": 25.3
+    "overall_completion_pct": 22.1
   },
   "subjects": [
     {
@@ -138,6 +138,31 @@
         "file": null,
         "sha256": null
       }
+    },
+    {
+      "subject_id": "english",
+      "subject_dir": "./docs/english",
+      "status": "kg-only",
+      "kg": {
+        "version": "1.0.0",
+        "status": "production",
+        "build_date": "2026-07-03",
+        "concept_count": 216,
+        "domain_count": 12,
+        "file": "./docs/english/kg/graph.json",
+        "sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8"
+      },
+      "teaching_assets": {
+        "completed_domains": 0,
+        "total_domains": 12,
+        "drafted_assets": 0,
+        "total_concepts": 216,
+        "completion_pct": 0.0
+      },
+      "subject_manifest": {
+        "file": null,
+        "sha256": null
+      }
     }
   ],
   "dependency_versions": {
@@ -148,6 +173,6 @@
     "manifest_spec_version": "1.0"
   },
   "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
-  "last_commit": "7d8a2de",
-  "last_updated": "2026-07-03T07:43:00Z"
+  "last_commit": "6f7dedc",
+  "last_updated": "2026-07-03T15:24:00Z"
 }
