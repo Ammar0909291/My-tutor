@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 1/12 domains complete
 
 ## Latest Commit (update after each session)
-`PENDING` — feat(english): author Foundational Literacy & Phonics domain (eng.phonics, 14 concepts)
+`a8dce95` — feat(english): author Foundational Literacy & Phonics domain (eng.phonics, 14 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
