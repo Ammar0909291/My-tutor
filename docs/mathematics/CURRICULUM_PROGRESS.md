@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-02 · Commit: `a553584`*
+*Last updated: 2026-07-03 · Commit: `c396377`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`a553584`
+`c396377`
 
 ## Knowledge Graph
 
@@ -27,8 +27,8 @@
 | 04 | Algebra | math.alg | 59 | draft ✓ | chapters/alg.md ✓ | Complete |
 | 05 | Geometry | math.geom | 69 | draft ✓ | chapters/geom.md ✓ | Complete |
 | 06 | Trigonometry | math.trig | 25 | draft ✓ | chapters/trig.md ✓ | Complete |
-| 07 | Functions | math.func | 29 | placeholder | — | **NEXT** |
-| 08 | Sequences and Series | math.seq | 21 | placeholder | — | Pending |
+| 07 | Functions | math.func | 29 | draft ✓ | chapters/func.md ✓ | Complete |
+| 08 | Sequences and Series | math.seq | 21 | placeholder | — | **NEXT** |
 | 09 | Calculus | math.calc | 76 | placeholder | — | Pending |
 | 10 | Differential Equations | math.de | 56 | placeholder | — | Pending |
 | 11 | Linear Algebra | math.linalg | 61 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 6/24 domains complete · 329/908 assets drafted · 579/908 remaining
+**Summary:** 7/24 domains complete · 358/908 assets drafted · 550/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -74,12 +74,11 @@ point, line, line-segment, ray, plane, angle, angle-types, angle-measurement, an
 
 angle-measure, degree-radian-conversion, right-triangle-trig, basic-ratios, special-angles, unit-circle, reference-angles, trig-functions, amplitude-period-phase, trig-graphs, trig-identities, pythagorean-identities, reciprocal-identities, sum-difference-formulas, double-angle-formulas, half-angle-formulas, product-to-sum, inverse-trig, trig-equations, law-of-sines, law-of-cosines, polar-form-complex, de-moivres-theorem, eulers-formula, hyperbolic-functions
 
-### math.func (29 concepts) — IN PROGRESS
+### math.func (29 concepts) — COMPLETE
 
-0/29 authored. Concepts:
 function-concept, domain-range, function-notation, graph-of-function, real-valued-function, zero-of-function, injectivity, surjectivity, bijection, inverse-functions, composition, even-odd-functions, transformations-functions, periodic-function, linear-function, quadratic-function, vertex-form, polynomial-function, end-behavior, rational-root, rational-function, vertical-asymptote, horizontal-asymptote, exponential-function, logarithmic-function, piecewise-function, step-function, monotonic-function, function-operations
 
-### math.seq (21 concepts) — PENDING
+### math.seq (21 concepts) — IN PROGRESS
 
 0/21 authored. Concepts:
 sequence, arithmetic-sequence, geometric-sequence, recursive-sequences, convergent, divergent-sequence, series, partial-sums, arithmetic-series, geometric-series, infinite-geometric-series, series-convergence, divergence-test, comparison-test, ratio-test, root-test, integral-test, alternating-series, absolute-convergence, harmonic-series, telescoping-series
@@ -195,5 +194,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Functions** (`math.func`) · 29 concepts
+**Sequences and Series** (`math.seq`) · 21 concepts
 

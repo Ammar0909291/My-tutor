@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "functions",
+  "domain_prefix": "math.func",
+  "domain_name": "Functions",
+  "subject": "mathematics",
+  "concept_count": 29,
+  "asset_count": 29,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_commit": "c396377"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:31b94b8b10085861a7fed5b6335f5cd2769a40dc6c4a71dafd4b540db5920920",
+    "domain_assets_sha256": "sha256:3411d8c0afa3d15ed22101642d1d6e41c8dc21465e76869a050e58f0bd2a1fd1",
+    "graph_domain_sha256": "sha256:5de7f342ff926c44870d186e0c18449a1b65d805087884ca91b7edca9eaa6622",
+    "validation_report_sha256": "sha256:64549f72444ccdabf96a25d4e35454c3aa127b67979efe45869c5700f9fe89d5"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/func.md",
+    "docs/mathematics/domains/math.func-validation-report.md",
+    "docs/mathematics/domains/math.func-summary.md",
+    "docs/mathematics/domains/math.func-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "c396377",
+  "created_at": "2026-07-03T03:36:38Z"
+}
