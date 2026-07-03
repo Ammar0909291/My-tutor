@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`83c40bf` — feat(physics): author Electromagnetism domain (phys.em, 35 concepts)
+`PENDING` — feat(physics): author Modern Physics domain (phys.mod, 15 concepts) — will be corrected to the real hash in a follow-up commit, per established pattern
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -37,13 +37,13 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 04 | Waves & Oscillations | phys.wave | 17 | draft ✓ | chapters/wave.md ✓ | Complete |
 | 05 | Optics | phys.opt | 15 | draft ✓ | chapters/opt.md ✓ | Complete |
 | 06 | Electromagnetism | phys.em | 35 | draft ✓ | chapters/em.md ✓ | Complete |
-| 07 | Modern Physics | phys.mod | 15 | placeholder | — | **NEXT** |
-| 08 | Quantum Mechanics | phys.qm | 12 | placeholder | — | Pending |
+| 07 | Modern Physics | phys.mod | 15 | draft ✓ | chapters/mod.md ✓ | Complete |
+| 08 | Quantum Mechanics | phys.qm | 12 | placeholder | — | **NEXT** |
 | 09 | Special Relativity | phys.rel | 8 | placeholder | — | Pending |
 | 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | Pending |
 | 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
 
-**Summary:** 6/11 domains complete · 145/194 assets drafted · 49/194 remaining (74.7%)
+**Summary:** 7/11 domains complete · 160/194 assets drafted · 34/194 remaining (82.5%)
 
 ## Completed Concepts Per Domain
 
@@ -103,8 +103,20 @@ maxwells-equations, electromagnetic-waves
 difficulty bands + full-domain worked-example arithmetic sweep (108 checks)
 — PASS, 0 defects; see phys.em-validation-report.md.)
 
-### phys.mod (15 concepts) — NOT STARTED
-0/15 authored. First unfinished domain — start here next session.
+### phys.mod (15 concepts) — COMPLETE
+All 15 concepts authored: photoelectric-effect, photons, compton-effect,
+de-broglie, wave-particle-duality, bohr-model, atomic-spectra, x-rays,
+radioactivity, radioactive-decay, nuclear-reactions, binding-energy,
+nuclear-fission, nuclear-fusion, nuclear-models
+(4 chunks: 4+4+4+3, deterministic graph order. Pedagogical audit: 7/15
+concepts fully audited (46.7%) across beginner/intermediate/advanced
+difficulty bands + full-domain worked-example arithmetic sweep (65 checks;
+1 defect found in the nuclear-fusion energy-density comparison — a 10,000x
+vs. correct 100,000x ratio — found and fixed before commit) — PASS, 0
+defects remaining; see phys.mod-validation-report.md.)
+
+### phys.qm (12 concepts) — NOT STARTED
+0/12 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -145,22 +157,22 @@ difficulty bands + full-domain worked-example arithmetic sweep (108 checks)
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.em)
+## Validation Status (latest domain: phys.mod)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.em) | PASS — 0 orphans |
-| KG dependency integrity (phys.em requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.em, deep + provenance) | PASS — 35/35 |
-| Prerequisite review triggers = valid KG IDs (all 145 drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.em) | PASS — 35/35 |
-| Chapter assembly (em.md) | PASS — 3949 lines |
+| KG orphan audit (phys.mod) | PASS — 0 orphans |
+| KG dependency integrity (phys.mod requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.mod, deep + provenance) | PASS — 15/15 |
+| Prerequisite review triggers = valid KG IDs (all 160 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.mod) | PASS — 15/15 |
+| Chapter assembly (mod.md) | PASS — 1689 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
-| Regression: meas + mech + therm + wave + opt untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15 draft |
+| Regression: meas + mech + therm + wave + opt + em untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
-| Pedagogical audit (10 concepts, 3 difficulty bands, + arithmetic sweep) | PASS — 20 audit items + 108 arithmetic checks, 0 defects |
+| Pedagogical audit (7 concepts, 3 difficulty bands, + arithmetic sweep) | PASS — 14 audit items + 65 arithmetic checks; 1 defect found and fixed, 0 remaining |
 
 ## Session Resumption Checklist
 
@@ -174,5 +186,5 @@ difficulty bands + full-domain worked-example arithmetic sweep (108 checks)
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.em)
-**phys.mod** — Modern Physics · 15 concepts.
+## Next Planned Domain (after phys.mod)
+**phys.qm** — Quantum Mechanics · 12 concepts.
