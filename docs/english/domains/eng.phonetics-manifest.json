@@ -1,0 +1,54 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "pronunciation_phonetics",
+  "domain_prefix": "eng.phonetics",
+  "domain_name": "Pronunciation & Phonetics",
+  "subject": "english",
+  "concept_count": 14,
+  "asset_count": 14,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.phonetics.speech-sounds-overview",
+        "eng.phonetics.consonant-sounds",
+        "eng.phonetics.ipa-basics",
+        "eng.phonetics.accents-and-dialects",
+        "eng.phonetics.prosody"
+      ],
+      "coverage": "100% phonetic/IPA/articulation/stress/pronunciation verification sweep (42 checks across all 14 concepts) + 35.7% full structured review (5/14) spanning entry-point/pivot/convergence/high-risk/capstone concept roles",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:7a2dcfae3fb75c5b29e647a588bb9e244984c6783d7cc0fcda361c9657ad4da5",
+    "assets_file_sha256": "sha256:77483c19f1a8e9f49f74a39333821bd7497494081771a78cf5ed06cbc06ac9ee",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:26aae2b4e744018f861f3143e35c64825c2e7b3178d444c11be96ab2ba30eda5"
+  },
+  "generated_files": [
+    "docs/english/chapters/phonetics.md",
+    "docs/english/domains/eng.phonetics-validation-report.md",
+    "docs/english/domains/eng.phonetics-summary.md",
+    "docs/english/domains/eng.phonetics-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "de3629a",
+  "created_at": "2026-07-03T00:00:00Z"
+}

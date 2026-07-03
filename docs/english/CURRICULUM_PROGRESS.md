@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 1/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 2/12 domains complete
 
 ## Latest Commit (update after each session)
-`a8dce95` — feat(english): author Foundational Literacy & Phonics domain (eng.phonics, 14 concepts)
+`PENDING` — feat(english): author Pronunciation & Phonetics domain (eng.phonetics, 14 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -37,8 +37,8 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | # | Domain | ID Prefix | Concepts | Asset Status | Chapter File | Notes |
 |---|--------|-----------|----------|--------------|--------------|-------|
 | 01 | Foundational Literacy & Phonics | eng.phonics | 14 | draft ✓ | chapters/phonics.md ✓ | Complete — entry point (2 roots) |
-| 02 | Pronunciation & Phonetics | eng.phonetics | 14 | placeholder | — | **NEXT** |
-| 03 | Vocabulary Development | eng.vocab | 20 | placeholder | — | |
+| 02 | Pronunciation & Phonetics | eng.phonetics | 14 | draft ✓ | chapters/phonetics.md ✓ | Complete — RP convention |
+| 03 | Vocabulary Development | eng.vocab | 20 | placeholder | — | **NEXT** |
 | 04 | Grammar & Syntax | eng.grammar | 43 | placeholder | — | Largest domain |
 | 05 | Reading | eng.reading | 16 | placeholder | — | |
 | 06 | Writing | eng.writing | 20 | placeholder | — | |
@@ -49,7 +49,7 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 1/12 domains complete · 14/216 assets drafted · 202/216 remaining (6.5%)
+**Summary:** 2/12 domains complete · 28/216 assets drafted · 188/216 remaining (13.0%)
 
 ## Completed Concepts Per Domain
 
@@ -67,6 +67,25 @@ concept roles + full-domain phonetic/orthographic verification sweep
 (60 checks, every worked example's phonetic/orthographic claims
 independently verified before commit per this session's requirement) —
 PASS, 0 defects found; see eng.phonics-validation-report.md.)
+
+### eng.phonetics (14 concepts) — COMPLETE
+All 14 concepts authored: speech-sounds-overview, articulation-organs,
+consonant-sounds, vowel-sounds, ipa-basics, minimal-pairs,
+syllable-stress, sentence-stress, intonation-patterns, connected-speech,
+rhythm-and-timing, accents-and-dialects, phonetic-transcription, prosody
+(2 chunks: 4+10, deterministic graph order — converges at ipa-basics
+after parallel consonant/vowel classification systems, then a mostly
+linear stress→intonation→connected-speech→rhythm→accents chain to the
+phonetic-transcription/prosody capstone pair. Uses Received Pronunciation
+(RP, non-rhotic British English per Roach's textbook, this domain's own
+cited reference) as its consistent phonetic-notation convention,
+explicitly distinct from eng.phonics' American-English conventions — see
+the note at the top of chapters/phonetics.md. Pedagogical audit: 100%
+phonetic/IPA/articulation/stress/pronunciation verification sweep across
+all 14 concepts (42 checks, independently verified against Roach's RP
+framework in place of numeric recomputation per this session's explicit
+instruction) + 5/14 concepts (35.7%) full structured review — PASS, 0
+defects found; see eng.phonetics-validation-report.md.)
 
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
@@ -122,18 +141,21 @@ Biology, and Computer Science.
    entries) — domains with `status: draft` are complete
 4. Check `docs/english/chapters/` — present `.md` files are assembled and committed
 5. Resume at the first domain with `status: placeholder` in the table above
-6. Do NOT regenerate already-drafted assets (eng.phonics is done)
+6. Do NOT regenerate already-drafted assets (eng.phonics and eng.phonetics are done)
 7. Do NOT modify `docs/english/kg/graph.json` without an explicit,
    deliberate version bump and user approval
 8. Do NOT touch Mathematics, Physics, Chemistry, Biology, Computer
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.phonics)
+## Next Planned Domain (after eng.phonetics)
 
-**eng.phonetics** — Pronunciation & Phonetics · 14 concepts. Rationale:
-it is the only domain whose sole prerequisite (`eng.phonics.phonemic-
-awareness`) is now satisfied and complete, following the same
-deterministic topological-order progression used throughout the Physics
-campaign — each domain is produced only once its upstream dependencies
-are drafted.
+**eng.vocab** — Vocabulary Development · 20 concepts. Rationale: its
+sole prerequisite (`eng.phonics.decoding-fluency`) is already satisfied,
+and it is next in the domain's established topological production order
+(phonics → phonetics → vocab → grammar → ...). Note: `eng.listening` (8
+concepts) is also now fully unblocked, since its prerequisite
+`eng.phonetics.prosody` just completed — but `eng.vocab` is prioritized
+first per the established domain order, since it is smaller-scope-per-
+downstream-impact (feeds grammar, reading, writing, speaking, and
+literature) and was always the KG's designated third domain.
