@@ -1,0 +1,69 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "reading",
+  "domain_prefix": "eng.reading",
+  "domain_name": "Reading",
+  "subject": "english",
+  "concept_count": 16,
+  "asset_count": 16,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.reading.print-to-meaning",
+        "eng.reading.reading-fluency",
+        "eng.reading.literal-comprehension",
+        "eng.reading.main-idea-and-details",
+        "eng.reading.inference-in-reading",
+        "eng.reading.summarizing",
+        "eng.reading.predicting-and-confirming",
+        "eng.reading.text-structure",
+        "eng.reading.genre-recognition",
+        "eng.reading.authors-purpose-and-tone",
+        "eng.reading.compare-and-contrast-texts",
+        "eng.reading.skimming-and-scanning",
+        "eng.reading.close-reading",
+        "eng.reading.critical-reading",
+        "eng.reading.evaluating-sources",
+        "eng.reading.reading-across-genres"
+      ],
+      "coverage": "100% full-concept structured review (16/16, given the domain's smaller size) + 18 independent verification checks against standard reading-science and literacy-instruction references",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names used from the start, continuing the practice established at eng.grammar."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:b9c60a18e14259576dc9c36865ace5bcda3ca10412887f0ddbd483ce655534e0",
+    "assets_file_sha256": "sha256:b2788f109990d50f2698c94475cc8cb750c0e4eae30a27426d67a384f4d2f0dd",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:b4ac96f7df963dfd72235c582b411458ce1de6ec25494796b604366cb09e2307"
+  },
+  "generated_files": [
+    "docs/english/chapters/reading.md",
+    "docs/english/domains/eng.reading-validation-report.md",
+    "docs/english/domains/eng.reading-summary.md",
+    "docs/english/domains/eng.reading-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "050a0b6",
+  "created_at": "2026-07-03T00:00:00Z"
+}

@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 4/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 5/12 domains complete
 
 ## Latest Commit (update after each session)
-`afc4c58` — feat(english): author Grammar & Syntax domain (eng.grammar, 43 concepts)
+(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Reading domain (eng.reading, 16 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -40,8 +40,8 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 02 | Pronunciation & Phonetics | eng.phonetics | 14 | draft ✓ | chapters/phonetics.md ✓ | Complete — RP convention |
 | 03 | Vocabulary Development | eng.vocab | 20 | draft ✓ | chapters/vocab.md ✓ | Complete |
 | 04 | Grammar & Syntax | eng.grammar | 43 | draft ✓ | chapters/grammar.md ✓ | Complete — largest domain |
-| 05 | Reading | eng.reading | 16 | placeholder | — | **NEXT** |
-| 06 | Writing | eng.writing | 20 | placeholder | — | |
+| 05 | Reading | eng.reading | 16 | draft ✓ | chapters/reading.md ✓ | Complete |
+| 06 | Writing | eng.writing | 20 | placeholder | — | **NEXT** |
 | 07 | Listening | eng.listening | 8 | placeholder | — | Smallest domain |
 | 08 | Speaking | eng.speaking | 10 | placeholder | — | |
 | 09 | Composition & Rhetoric | eng.composition | 16 | placeholder | — | Pre-university layer |
@@ -49,7 +49,7 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 4/12 domains complete · 91/216 assets drafted · 125/216 remaining (42.1%)
+**Summary:** 5/12 domains complete · 107/216 assets drafted · 109/216 remaining (49.5%)
 
 ## Completed Concepts Per Domain
 
@@ -138,6 +138,24 @@ point/pivotal/highest-load-bearing/tense-system-opener/highest-complexity/
 highest-frequency-error/advanced-synthesis/capstone concept roles — PASS;
 see eng.grammar-validation-report.md.)
 
+### eng.reading (16 concepts) — COMPLETE
+All 16 concepts authored: print-to-meaning, reading-fluency,
+literal-comprehension, main-idea-and-details, inference-in-reading,
+summarizing, predicting-and-confirming, text-structure, genre-recognition,
+authors-purpose-and-tone, compare-and-contrast-texts, skimming-and-scanning,
+close-reading, critical-reading, evaluating-sources, reading-across-genres
+(3 chunks: 5+4+7, deterministic graph order — the domain proceeds from the
+print-to-meaning bridging concept (Simple View of Reading) through fluency
+and literal comprehension into the main-idea/inference branch, splits into
+a summarizing/text-structure/genre track and a prediction/purpose-tone
+track, reconverges at compare-and-contrast-texts, and closes through the
+skimming-scanning/close-reading/critical-reading/evaluating-sources
+sequence into the reading-across-genres capstone. Zero pre-merge
+correction cycles required. Pedagogical audit: 100% full-concept
+structured review (16/16, given the domain's smaller size) + 18
+independent verification checks against standard reading-science
+references, 0 defects found — PASS; see eng.reading-validation-report.md.)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -199,9 +217,9 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.grammar)
+## Next Planned Domain (after eng.reading)
 
-**eng.reading** — Reading · 16 concepts. Rationale: it is next in the
+**eng.writing** — Writing · 20 concepts. Rationale: it is next in the
 domain's established topological production order (phonics → phonetics →
-vocab → grammar → reading → ...), and eng.grammar's completion satisfies
-its cross-domain prerequisite dependencies.
+vocab → grammar → reading → writing → ...), and eng.reading's completion
+satisfies its cross-domain prerequisite dependencies.
