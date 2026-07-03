@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 2/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 3/12 domains complete
 
 ## Latest Commit (update after each session)
-`8027e59` — feat(english): author Pronunciation & Phonetics domain (eng.phonetics, 14 concepts)
+(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Vocabulary Development domain (eng.vocab, 20 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -38,8 +38,8 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 |---|--------|-----------|----------|--------------|--------------|-------|
 | 01 | Foundational Literacy & Phonics | eng.phonics | 14 | draft ✓ | chapters/phonics.md ✓ | Complete — entry point (2 roots) |
 | 02 | Pronunciation & Phonetics | eng.phonetics | 14 | draft ✓ | chapters/phonetics.md ✓ | Complete — RP convention |
-| 03 | Vocabulary Development | eng.vocab | 20 | placeholder | — | **NEXT** |
-| 04 | Grammar & Syntax | eng.grammar | 43 | placeholder | — | Largest domain |
+| 03 | Vocabulary Development | eng.vocab | 20 | draft ✓ | chapters/vocab.md ✓ | Complete |
+| 04 | Grammar & Syntax | eng.grammar | 43 | placeholder | — | Largest domain — **NEXT** |
 | 05 | Reading | eng.reading | 16 | placeholder | — | |
 | 06 | Writing | eng.writing | 20 | placeholder | — | |
 | 07 | Listening | eng.listening | 8 | placeholder | — | Smallest domain |
@@ -49,7 +49,7 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 2/12 domains complete · 28/216 assets drafted · 188/216 remaining (13.0%)
+**Summary:** 3/12 domains complete · 48/216 assets drafted · 168/216 remaining (22.2%)
 
 ## Completed Concepts Per Domain
 
@@ -86,6 +86,28 @@ all 14 concepts (42 checks, independently verified against Roach's RP
 framework in place of numeric recomputation per this session's explicit
 instruction) + 5/14 concepts (35.7%) full structured review — PASS, 0
 defects found; see eng.phonetics-validation-report.md.)
+
+### eng.vocab (20 concepts) — COMPLETE
+All 20 concepts authored: word-recognition, context-clues, synonyms-antonyms,
+word-families, compound-words, prefixes, suffixes, roots-and-origins,
+word-formation-processes, homonyms-homophones, multiple-meaning-words,
+connotation-denotation, collocations, idioms, phrasal-verbs,
+register-and-formality, academic-vocabulary, etymology,
+thesaurus-and-dictionary-skills, semantic-fields
+(4 chunks: 7+4+3+6, deterministic graph order — a converge/diverge/reconverge
+structure pivoting at roots-and-origins/word-formation-processes, splitting
+into a homonymy/polysemy track and a connotation/collocation/idiom/
+phrasal-verb track, reconverging at register-and-formality/
+academic-vocabulary, and closing through etymology/thesaurus-skills into the
+semantic-fields capstone. One pre-merge correction cycle: 13/20 concepts
+initially used non-schema-conformant field names for the worked-example,
+practice, and assessment blueprints (e.g. `outcome` instead of
+`expected_outcome`); caught during chapter assembly, corrected mechanically
+before any merge — not a content-accuracy defect. Pedagogical audit: 100%
+factual/linguistic verification sweep across all 20 concepts (51 checks,
+0 content defects found) + 6/20 concepts fully audited (30%) spanning
+entry-point/synthesis-pivot/high-risk/bridge/cross-subject/capstone concept
+roles — PASS; see eng.vocab-validation-report.md.)
 
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
@@ -148,14 +170,11 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.phonetics)
+## Next Planned Domain (after eng.vocab)
 
-**eng.vocab** — Vocabulary Development · 20 concepts. Rationale: its
-sole prerequisite (`eng.phonics.decoding-fluency`) is already satisfied,
-and it is next in the domain's established topological production order
-(phonics → phonetics → vocab → grammar → ...). Note: `eng.listening` (8
-concepts) is also now fully unblocked, since its prerequisite
-`eng.phonetics.prosody` just completed — but `eng.vocab` is prioritized
-first per the established domain order, since it is smaller-scope-per-
-downstream-impact (feeds grammar, reading, writing, speaking, and
-literature) and was always the KG's designated third domain.
+**eng.grammar** — Grammar & Syntax · 43 concepts (the largest domain).
+Rationale: it is next in the domain's established topological production
+order (phonics → phonetics → vocab → grammar → ...), and eng.vocab's
+completion (specifically `word-recognition` unlocking
+`eng.grammar.word-classes-overview`) satisfies its first cross-domain
+dependency.
