@@ -1,6 +1,6 @@
 # Domain Summary — Functions (`math.func`)
 
-*Generated: 2026-07-03 · Commit: `c396377`*
+*Generated: 2026-07-03 · Commit: `62e1d2d`*
 
 ## This Domain
 
@@ -10,7 +10,7 @@
 | Prefix | `math.func` |
 | Concepts authored | 29 |
 | New assets created | 29 (placeholder → draft) |
-| Commit | `c396377` |
+| Commit | `62e1d2d` |
 
 ## Cumulative Mathematics Progress
 
