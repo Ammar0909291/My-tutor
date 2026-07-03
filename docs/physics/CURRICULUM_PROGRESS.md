@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`aea3980` — feat(physics): author Quantum Mechanics domain (phys.qm, 12 concepts)
+`PENDING` — feat(physics): author Special Relativity domain (phys.rel, 8 concepts) — will be corrected to the real hash in a follow-up commit, per established pattern
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -39,11 +39,11 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 06 | Electromagnetism | phys.em | 35 | draft ✓ | chapters/em.md ✓ | Complete |
 | 07 | Modern Physics | phys.mod | 15 | draft ✓ | chapters/mod.md ✓ | Complete |
 | 08 | Quantum Mechanics | phys.qm | 12 | draft ✓ | chapters/qm.md ✓ | Complete |
-| 09 | Special Relativity | phys.rel | 8 | placeholder | — | **NEXT** |
-| 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | Pending |
+| 09 | Special Relativity | phys.rel | 8 | draft ✓ | chapters/rel.md ✓ | Complete |
+| 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | **NEXT** |
 | 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
 
-**Summary:** 8/11 domains complete · 172/194 assets drafted · 22/194 remaining (88.7%)
+**Summary:** 9/11 domains complete · 180/194 assets drafted · 14/194 remaining (92.8%)
 
 ## Completed Concepts Per Domain
 
@@ -127,7 +127,18 @@ every numeric value in the domain independently recomputed before commit
 per this session's expanded requirement) — PASS, 0 defects found; see
 phys.qm-validation-report.md.)
 
-### phys.rel (8 concepts) — NOT STARTED
+### phys.rel (8 concepts) — COMPLETE
+All 8 concepts authored: postulates, simultaneity, time-dilation,
+length-contraction, lorentz-transform, relativistic-momentum, mass-energy,
+spacetime
+(2 chunks: 4+4, deterministic graph order — a linear dependency chain.
+Pedagogical audit: 4/8 concepts fully audited (50%) spanning
+proficient/advanced/expert difficulty tiers + full-domain worked-example
+arithmetic recomputation (31 checks, every numeric value in the domain
+independently recomputed before commit per this session's requirement) —
+PASS, 0 defects found; see phys.rel-validation-report.md.)
+
+### phys.stat (8 concepts) — NOT STARTED
 0/8 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
@@ -169,22 +180,22 @@ phys.qm-validation-report.md.)
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.qm)
+## Validation Status (latest domain: phys.rel)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.qm) | PASS — 0 orphans |
-| KG dependency integrity (phys.qm requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.qm, deep + provenance) | PASS — 12/12 |
-| Prerequisite review triggers = valid KG IDs (all 172 drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.qm) | PASS — 12/12 |
-| Chapter assembly (qm.md) | PASS — 1370 lines |
+| KG orphan audit (phys.rel) | PASS — 0 orphans |
+| KG dependency integrity (phys.rel requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.rel, deep + provenance) | PASS — 8/8 |
+| Prerequisite review triggers = valid KG IDs (all 180 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.rel) | PASS — 8/8 |
+| Chapter assembly (rel.md) | PASS — 909 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
-| Regression: meas + mech + therm + wave + opt + em + mod untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35, 15/15 draft |
+| Regression: meas + mech + therm + wave + opt + em + mod + qm untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35, 15/15, 12/12 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
-| Pedagogical audit (5 concepts + full-domain arithmetic recomputation) | PASS — 20 audit items + 86 arithmetic checks, 0 defects |
+| Pedagogical audit (4 concepts + full-domain arithmetic recomputation) | PASS — 16 audit items + 31 arithmetic checks, 0 defects |
 
 ## Session Resumption Checklist
 
@@ -198,5 +209,5 @@ phys.qm-validation-report.md.)
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.qm)
-**phys.rel** — Special Relativity · 8 concepts.
+## Next Planned Domain (after phys.rel)
+**phys.stat** — Statistical Mechanics · 8 concepts.

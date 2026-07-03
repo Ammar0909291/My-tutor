@@ -1,0 +1,52 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "special_relativity",
+  "domain_prefix": "phys.rel",
+  "domain_name": "Special Relativity",
+  "subject": "physics",
+  "concept_count": 8,
+  "asset_count": 8,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "phys.rel.postulates",
+        "phys.rel.time-dilation",
+        "phys.rel.lorentz-transform",
+        "phys.rel.spacetime"
+      ],
+      "coverage": "50% full audit (4/8) spanning proficient/advanced/expert difficulty tiers + full-domain worked-example arithmetic recomputation (31 checks)",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:f482077ee3d6cc952b2bd91c1950affc90bd74ac09a36c5f3402b0081ae27d3b",
+    "assets_file_sha256": "sha256:0dbc77faad43b6eea74646df74551dfa8408a9f45614d0f3c16110f82d2bba80",
+    "graph_sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f",
+    "validation_report_sha256": "sha256:132f8d2dde32a468a61330cea6a5e053c4795f1aa28855616bd7272593272f84"
+  },
+  "generated_files": [
+    "docs/physics/chapters/rel.md",
+    "docs/physics/domains/phys.rel-validation-report.md",
+    "docs/physics/domains/phys.rel-summary.md",
+    "docs/physics/domains/phys.rel-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Physics Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "c83bc8c",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "04bad88",
+  "created_at": "2026-07-03T13:52:29Z"
+}
