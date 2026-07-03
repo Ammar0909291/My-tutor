@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 2/12 domains complete
 
 ## Latest Commit (update after each session)
-`PENDING` — feat(english): author Pronunciation & Phonetics domain (eng.phonetics, 14 concepts)
+`8027e59` — feat(english): author Pronunciation & Phonetics domain (eng.phonetics, 14 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
