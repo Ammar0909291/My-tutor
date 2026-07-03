@@ -1,0 +1,57 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "electromagnetism",
+  "domain_prefix": "phys.em",
+  "domain_name": "Electromagnetism",
+  "subject": "physics",
+  "concept_count": 35,
+  "asset_count": 35,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "phys.em.electric-charge",
+        "phys.em.ohms-law",
+        "phys.em.magnetic-field",
+        "phys.em.gauss-law",
+        "phys.em.kirchhoffs-laws",
+        "phys.em.faradays-law",
+        "phys.em.biot-savart",
+        "phys.em.self-inductance",
+        "phys.em.maxwells-equations",
+        "phys.em.electromagnetic-waves"
+      ],
+      "coverage": "28.6% full audit (10/35) across beginner/intermediate/advanced difficulty bands + worked-example arithmetic sweep of all 35 (108 checks)",
+      "defects_found": 0
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:fff073bf04257076c49d8edf45dbdf48e22391adf3d2e054d9682ff266189c7e",
+    "assets_file_sha256": "sha256:2066021785438977884a3f728205db002a3de6b636c6c3e29c231b8471fa34b9",
+    "graph_sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f",
+    "validation_report_sha256": "sha256:16df25c6e643d07b9cb9559275a4a03976f9912517ae12286c909f63b9c47f6a"
+  },
+  "generated_files": [
+    "docs/physics/chapters/em.md",
+    "docs/physics/domains/phys.em-validation-report.md",
+    "docs/physics/domains/phys.em-summary.md",
+    "docs/physics/domains/phys.em-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Physics Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "c83bc8c",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "c6ad1bb",
+  "created_at": "2026-07-03T08:59:46Z"
+}
