@@ -9,8 +9,10 @@
 `ec87189` and must not receive further development. Mathematics production continues
 independently on this same foundation branch — do NOT touch Mathematics files.
 
+## Status: PHYSICS COMPLETE — 194/194 concepts, 11/11 domains (100%)
+
 ## Latest Commit (update after each domain)
-`ccc745e` — feat(physics): author Statistical Mechanics domain (phys.stat, 8 concepts)
+`PENDING` — feat(physics): author Astrophysics domain (phys.astro, 6 concepts) — FINAL Physics domain
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -41,9 +43,9 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 08 | Quantum Mechanics | phys.qm | 12 | draft ✓ | chapters/qm.md ✓ | Complete |
 | 09 | Special Relativity | phys.rel | 8 | draft ✓ | chapters/rel.md ✓ | Complete |
 | 10 | Statistical Mechanics | phys.stat | 8 | draft ✓ | chapters/stat.md ✓ | Complete |
-| 11 | Astrophysics | phys.astro | 6 | placeholder | — | **NEXT** |
+| 11 | Astrophysics | phys.astro | 6 | draft ✓ | chapters/astro.md ✓ | Complete |
 
-**Summary:** 10/11 domains complete · 188/194 assets drafted · 6/194 remaining (96.9%)
+**Summary:** 11/11 domains complete · 194/194 assets drafted · 0/194 remaining (100% — PHYSICS COMPLETE)
 
 ## Completed Concepts Per Domain
 
@@ -152,8 +154,27 @@ non-arithmetic Unicode text-encoding corruption was found and fixed
 during authoring, before validation or commit; see
 phys.stat-validation-report.md.)
 
-### phys.astro (6 concepts) — NOT STARTED
-0/6 authored. First unfinished domain — start here next session.
+### phys.astro (6 concepts) — COMPLETE
+All 6 concepts authored: stellar-structure, stellar-evolution, cosmology,
+dark-matter, black-holes, gravitational-waves
+(1 chunk of 6, deterministic graph order — a mostly linear dependency
+chain with one branch at stellar-structure. Pedagogical audit: 4/6
+concepts fully audited (66.7%) spanning expert/research difficulty tiers
++ full-domain worked-example arithmetic recomputation (22 checks, every
+numeric value in the domain independently recomputed before commit per
+this session's requirement) — PASS, 0 defects found; see
+phys.astro-validation-report.md.)
+
+## PHYSICS SUBJECT COMPLETE (2026-07-03)
+
+All 11 domains, 194/194 concepts, fully authored, validated, and
+pedagogically audited. Zero Knowledge Graph issues discovered across the
+entire subject. The Physics Knowledge Graph (`docs/physics/kg/graph.json`,
+sha256 `79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f`)
+remained unchanged throughout the entire campaign. See
+`docs/physics/domains/phys.astro-validation-report.md` for the final
+domain's full validation record, and each `phys.{prefix}-validation-report.md`
+for the complete per-domain history.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -194,22 +215,23 @@ phys.stat-validation-report.md.)
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.stat)
+## Validation Status (latest domain: phys.astro — FINAL)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.stat) | PASS — 0 orphans |
-| KG dependency integrity (phys.stat requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.stat, deep + provenance) | PASS — 8/8 |
-| Prerequisite review triggers = valid KG IDs (all 188 drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.stat) | PASS — 8/8 |
-| Chapter assembly (stat.md) | PASS — 913 lines |
-| Subject-wide asset coverage | PASS — 194/194 |
-| Regression: meas + mech + therm + wave + opt + em + mod + qm + rel untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35, 15/15, 12/12, 8/8 draft |
+| KG orphan audit (phys.astro) | PASS — 0 orphans |
+| KG dependency integrity (phys.astro requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.astro, deep + provenance) | PASS — 6/6 |
+| Prerequisite review triggers = valid KG IDs (all 194 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.astro) | PASS — 6/6 |
+| Chapter assembly (astro.md) | PASS — 686 lines |
+| Subject-wide asset coverage | PASS — **194/194 (100%)** |
+| No orphan assets / no orphan concepts | PASS — 0/0 |
+| Regression: meas + mech + therm + wave + opt + em + mod + qm + rel + stat untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35, 15/15, 12/12, 8/8, 8/8 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
-| Pedagogical audit (4 concepts + full-domain arithmetic recomputation) | PASS — 16 audit items + 30 arithmetic checks, 0 arithmetic defects (1 non-arithmetic text-encoding defect found and fixed pre-commit during authoring) |
+| Pedagogical audit (4 concepts + full-domain arithmetic recomputation) | PASS — 16 audit items + 22 arithmetic checks, 0 defects |
 
 ## Session Resumption Checklist
 
@@ -223,6 +245,9 @@ phys.stat-validation-report.md.)
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.stat)
-**phys.astro** — Astrophysics · 6 concepts. Final Physics domain — after this,
-all 194/194 Physics concepts will be complete.
+## Next Planned Domain
+None — Physics is complete (194/194 concepts, 11/11 domains). Recommended
+next curriculum subject: **Chemistry** (`docs/chemistry/kg/graph.json`,
+187 concepts, prefix `chem.`) — not started, 0/187 concepts drafted. This
+tracker's per-domain workflow is retained as a reference template for
+whichever subject production resumes with next.
