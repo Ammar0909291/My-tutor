@@ -1,6 +1,6 @@
 # Domain Summary — Sequences and Series (`math.seq`)
 
-*Generated: 2026-07-03 · Commit: `efa9db0`*
+*Generated: 2026-07-03 · Commit: `7d8a2de`*
 
 ## This Domain
 
@@ -10,7 +10,7 @@
 | Prefix | `math.seq` |
 | Concepts authored | 21 |
 | New assets created | 21 (placeholder → draft) |
-| Commit | `efa9db0` |
+| Commit | `7d8a2de` |
 
 ## Cumulative Mathematics Progress
 
