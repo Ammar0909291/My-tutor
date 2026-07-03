@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-03 · Commit: `62e1d2d`*
+*Last updated: 2026-07-03 · Commit: `efa9db0`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`62e1d2d`
+`efa9db0`
 
 ## Knowledge Graph
 
@@ -28,8 +28,8 @@
 | 05 | Geometry | math.geom | 69 | draft ✓ | chapters/geom.md ✓ | Complete |
 | 06 | Trigonometry | math.trig | 25 | draft ✓ | chapters/trig.md ✓ | Complete |
 | 07 | Functions | math.func | 29 | draft ✓ | chapters/func.md ✓ | Complete |
-| 08 | Sequences and Series | math.seq | 21 | placeholder | — | **NEXT** |
-| 09 | Calculus | math.calc | 76 | placeholder | — | Pending |
+| 08 | Sequences and Series | math.seq | 21 | draft ✓ | chapters/seq.md ✓ | Complete |
+| 09 | Calculus | math.calc | 76 | placeholder | — | **NEXT** |
 | 10 | Differential Equations | math.de | 56 | placeholder | — | Pending |
 | 11 | Linear Algebra | math.linalg | 61 | placeholder | — | Pending |
 | 12 | Probability | math.prob | 49 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 7/24 domains complete · 358/908 assets drafted · 550/908 remaining
+**Summary:** 8/24 domains complete · 379/908 assets drafted · 529/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -78,12 +78,11 @@ angle-measure, degree-radian-conversion, right-triangle-trig, basic-ratios, spec
 
 function-concept, domain-range, function-notation, graph-of-function, real-valued-function, zero-of-function, injectivity, surjectivity, bijection, inverse-functions, composition, even-odd-functions, transformations-functions, periodic-function, linear-function, quadratic-function, vertex-form, polynomial-function, end-behavior, rational-root, rational-function, vertical-asymptote, horizontal-asymptote, exponential-function, logarithmic-function, piecewise-function, step-function, monotonic-function, function-operations
 
-### math.seq (21 concepts) — IN PROGRESS
+### math.seq (21 concepts) — COMPLETE
 
-0/21 authored. Concepts:
 sequence, arithmetic-sequence, geometric-sequence, recursive-sequences, convergent, divergent-sequence, series, partial-sums, arithmetic-series, geometric-series, infinite-geometric-series, series-convergence, divergence-test, comparison-test, ratio-test, root-test, integral-test, alternating-series, absolute-convergence, harmonic-series, telescoping-series
 
-### math.calc (76 concepts) — PENDING
+### math.calc (76 concepts) — IN PROGRESS
 
 0/76 authored. Concepts:
 limits, limit-laws, one-sided-limits, limits-at-infinity, squeeze-theorem, continuity, continuity-types, ivt, derivative-intro, derivative-definition, differentiability, derivative-rules, product-rule, quotient-rule, chain-rule, derivative-exponential, derivative-ln, logarithmic-differentiation, derivative-trig, derivative-inverse-trig, hyperbolic-derivatives, implicit-differentiation, higher-order-derivatives, related-rates, lhopitals-rule, mean-value-theorem, rolles-theorem, increasing-decreasing, critical-points, local-extrema, concavity, optimization, curve-sketching, linearization, antiderivatives, riemann-sums, definite-integral, ftc-part1, ftc-part2, u-substitution, integration-by-parts, trig-integrals, trig-substitution, partial-fractions, reduction-formulas, improper-integrals, integral-area, volume-revolution, arc-length, surface-area-integral, power-series, radius-of-convergence, taylor-series, maclaurin-series, taylor-remainder, parametric-curves, parametric-calculus, multivariable-intro, partial-derivatives, gradient, directional-derivative, chain-rule-multivariable, multivariable-extrema, multiple-integrals, double-integrals, triple-integrals, change-of-variables, line-integrals, surface-integrals, vector-fields, curl-divergence, greens-theorem, stokes-theorem, divergence-theorem, fourier-series-intro, sequence-limits
@@ -194,5 +193,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Sequences and Series** (`math.seq`) · 21 concepts
+**Calculus** (`math.calc`) · 76 concepts
 
