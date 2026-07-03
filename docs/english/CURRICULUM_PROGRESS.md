@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: KNOWLEDGE GRAPH COMPLETE (V1) — teaching assets NOT STARTED
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 1/12 domains complete
 
 ## Latest Commit (update after each session)
-`d298f09` — feat(english): author Canonical English Knowledge Graph V1 (216 concepts, 12 domains)
+`PENDING` — feat(english): author Foundational Literacy & Phonics domain (eng.phonics, 14 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -36,8 +36,8 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 
 | # | Domain | ID Prefix | Concepts | Asset Status | Chapter File | Notes |
 |---|--------|-----------|----------|--------------|--------------|-------|
-| 01 | Foundational Literacy & Phonics | eng.phonics | 14 | placeholder | — | Entry point (2 roots) |
-| 02 | Pronunciation & Phonetics | eng.phonetics | 14 | placeholder | — | |
+| 01 | Foundational Literacy & Phonics | eng.phonics | 14 | draft ✓ | chapters/phonics.md ✓ | Complete — entry point (2 roots) |
+| 02 | Pronunciation & Phonetics | eng.phonetics | 14 | placeholder | — | **NEXT** |
 | 03 | Vocabulary Development | eng.vocab | 20 | placeholder | — | |
 | 04 | Grammar & Syntax | eng.grammar | 43 | placeholder | — | Largest domain |
 | 05 | Reading | eng.reading | 16 | placeholder | — | |
@@ -49,7 +49,24 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 0/12 domains complete · 0/216 assets drafted · 216/216 remaining (0%) — teaching-asset production has not yet begun.
+**Summary:** 1/12 domains complete · 14/216 assets drafted · 202/216 remaining (6.5%)
+
+## Completed Concepts Per Domain
+
+### eng.phonics (14 concepts) — COMPLETE
+All 14 concepts authored: print-concepts, phonemic-awareness,
+alphabet-recognition, rhyming, blending-segmenting,
+letter-sound-correspondence, consonants, short-vowels, consonant-blends,
+digraphs, long-vowels-silent-e, sight-words, syllable-types,
+decoding-fluency
+(2 chunks: 7+7, deterministic graph order — a converge-branch-reconverge
+dependency structure pivoting at letter-sound-correspondence and
+culminating at decoding-fluency. Pedagogical audit: 5/14 concepts fully
+audited (35.7%) spanning root/pivotal/high-risk/irregular/capstone
+concept roles + full-domain phonetic/orthographic verification sweep
+(60 checks, every worked example's phonetic/orthographic claims
+independently verified before commit per this session's requirement) —
+PASS, 0 defects found; see eng.phonics-validation-report.md.)
 
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
@@ -100,29 +117,23 @@ Biology, and Computer Science.
 ## Session Resumption Checklist
 
 1. `git fetch origin claude/my-tutor-foundation-KDSUO` and check out that branch
-2. Read this file to determine current status
-3. If teaching-asset production has not started: create
-   `docs/english/teaching-assets/assets.json` as a full placeholder
-   scaffold (216 entries, all `status: placeholder`) before authoring the
-   first domain — mirror `docs/physics/teaching-assets/assets.json`'s
-   original structure exactly
-4. Resume at the first domain with `status: placeholder` in the table above
-5. Do NOT modify `docs/english/kg/graph.json` without an explicit,
+2. Read this file to determine the current domain and next unfinished chunk
+3. Check `docs/english/teaching-assets/assets.json` (now exists, 216
+   entries) — domains with `status: draft` are complete
+4. Check `docs/english/chapters/` — present `.md` files are assembled and committed
+5. Resume at the first domain with `status: placeholder` in the table above
+6. Do NOT regenerate already-drafted assets (eng.phonics is done)
+7. Do NOT modify `docs/english/kg/graph.json` without an explicit,
    deliberate version bump and user approval
-6. Do NOT touch Mathematics, Physics, Chemistry, Biology, Computer
+8. Do NOT touch Mathematics, Physics, Chemistry, Biology, Computer
    Science, or the Educational Brain
-7. Push ONLY to `claude/my-tutor-foundation-KDSUO`
+9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain
+## Next Planned Domain (after eng.phonics)
 
-**Recommended first production domain: `eng.phonics` (Foundational
-Literacy & Phonics, 14 concepts).** Rationale: it is the graph's true
-entry point (both root nodes live here), it is the smallest reasonable
-starting domain alongside `eng.listening` (8 concepts, but listening
-requires `eng.phonetics` which itself requires `eng.phonics`, so phonics
-is the only domain with zero upstream dependencies), and establishing the
-foundational-literacy chapter first gives every subsequent domain a
-completed, citable prerequisite anchor — exactly mirroring how Physics
-began teaching-asset production with `phys.meas` (Measurement & Units,
-its own smallest/most foundational domain) rather than jumping to a
-mid-graph domain.
+**eng.phonetics** — Pronunciation & Phonetics · 14 concepts. Rationale:
+it is the only domain whose sole prerequisite (`eng.phonics.phonemic-
+awareness`) is now satisfied and complete, following the same
+deterministic topological-order progression used throughout the Physics
+campaign — each domain is produced only once its upstream dependencies
+are drafted.
