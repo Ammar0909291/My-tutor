@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`7d6e93e` — feat(physics): author Special Relativity domain (phys.rel, 8 concepts)
+`PENDING` — feat(physics): author Statistical Mechanics domain (phys.stat, 8 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -40,10 +40,10 @@ KG sha256 (must stay constant): `79d9b356f14ea65f3df270da8063c3b1e4c1da1b1125588
 | 07 | Modern Physics | phys.mod | 15 | draft ✓ | chapters/mod.md ✓ | Complete |
 | 08 | Quantum Mechanics | phys.qm | 12 | draft ✓ | chapters/qm.md ✓ | Complete |
 | 09 | Special Relativity | phys.rel | 8 | draft ✓ | chapters/rel.md ✓ | Complete |
-| 10 | Statistical Mechanics | phys.stat | 8 | placeholder | — | **NEXT** |
-| 11 | Astrophysics | phys.astro | 6 | placeholder | — | Pending |
+| 10 | Statistical Mechanics | phys.stat | 8 | draft ✓ | chapters/stat.md ✓ | Complete |
+| 11 | Astrophysics | phys.astro | 6 | placeholder | — | **NEXT** |
 
-**Summary:** 9/11 domains complete · 180/194 assets drafted · 14/194 remaining (92.8%)
+**Summary:** 10/11 domains complete · 188/194 assets drafted · 6/194 remaining (96.9%)
 
 ## Completed Concepts Per Domain
 
@@ -138,8 +138,22 @@ arithmetic recomputation (31 checks, every numeric value in the domain
 independently recomputed before commit per this session's requirement) —
 PASS, 0 defects found; see phys.rel-validation-report.md.)
 
-### phys.stat (8 concepts) — NOT STARTED
-0/8 authored. First unfinished domain — start here next session.
+### phys.stat (8 concepts) — COMPLETE
+All 8 concepts authored: probability-basics, boltzmann-factor,
+partition-function, maxwell-boltzmann, fermi-dirac, bose-einstein,
+entropy-statistical, free-energy
+(2 chunks: 4+4, deterministic graph order — a hub-and-spoke dependency
+graph radiating from partition-function. Pedagogical audit: 4/8 concepts
+fully audited (50%) spanning advanced/expert difficulty tiers +
+full-domain worked-example arithmetic recomputation (30 checks, every
+numeric value in the domain independently recomputed before commit per
+this session's requirement) — PASS, 0 arithmetic defects found. One
+non-arithmetic Unicode text-encoding corruption was found and fixed
+during authoring, before validation or commit; see
+phys.stat-validation-report.md.)
+
+### phys.astro (6 concepts) — NOT STARTED
+0/6 authored. First unfinished domain — start here next session.
 
 ## Workflow (Python-equivalent pipeline, mirrors Mathematics)
 
@@ -180,22 +194,22 @@ PASS, 0 defects found; see phys.rel-validation-report.md.)
 - Local re-verification: `npx tsx scripts/validate-teaching-assets.ts physics`
   (expects exit 0 for drafted domains under the Physics trigger convention).
 
-## Validation Status (latest domain: phys.rel)
+## Validation Status (latest domain: phys.stat)
 
 | Check | Result |
 |-------|--------|
 | KG cycle detection (194 concepts) | PASS — 0 cycles |
-| KG orphan audit (phys.rel) | PASS — 0 orphans |
-| KG dependency integrity (phys.rel requires+unlocks) | PASS — 0 broken edges |
-| Teaching asset schema (phys.rel, deep + provenance) | PASS — 8/8 |
-| Prerequisite review triggers = valid KG IDs (all 180 drafted) | PASS |
-| Bloom alignment asset ↔ KG (phys.rel) | PASS — 8/8 |
-| Chapter assembly (rel.md) | PASS — 909 lines |
+| KG orphan audit (phys.stat) | PASS — 0 orphans |
+| KG dependency integrity (phys.stat requires+unlocks) | PASS — 0 broken edges |
+| Teaching asset schema (phys.stat, deep + provenance) | PASS — 8/8 |
+| Prerequisite review triggers = valid KG IDs (all 188 drafted) | PASS |
+| Bloom alignment asset ↔ KG (phys.stat) | PASS — 8/8 |
+| Chapter assembly (stat.md) | PASS — 913 lines |
 | Subject-wide asset coverage | PASS — 194/194 |
-| Regression: meas + mech + therm + wave + opt + em + mod + qm untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35, 15/15, 12/12 draft |
+| Regression: meas + mech + therm + wave + opt + em + mod + qm + rel untouched | PASS — 8/8, 52/52, 18/18, 17/17, 15/15, 35/35, 15/15, 12/12, 8/8 draft |
 | Physics KG sha256 unchanged | PASS |
 | Mathematics / Educational Brain untouched | PASS — diff confined to docs/physics |
-| Pedagogical audit (4 concepts + full-domain arithmetic recomputation) | PASS — 16 audit items + 31 arithmetic checks, 0 defects |
+| Pedagogical audit (4 concepts + full-domain arithmetic recomputation) | PASS — 16 audit items + 30 arithmetic checks, 0 arithmetic defects (1 non-arithmetic text-encoding defect found and fixed pre-commit during authoring) |
 
 ## Session Resumption Checklist
 
@@ -209,5 +223,6 @@ PASS, 0 defects found; see phys.rel-validation-report.md.)
 8. Do NOT touch Mathematics, Chemistry, Biology, Computer Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after phys.rel)
-**phys.stat** — Statistical Mechanics · 8 concepts.
+## Next Planned Domain (after phys.stat)
+**phys.astro** — Astrophysics · 6 concepts. Final Physics domain — after this,
+all 194/194 Physics concepts will be complete.
