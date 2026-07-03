@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`PENDING` — feat(physics): author Statistical Mechanics domain (phys.stat, 8 concepts)
+`ccc745e` — feat(physics): author Statistical Mechanics domain (phys.stat, 8 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
