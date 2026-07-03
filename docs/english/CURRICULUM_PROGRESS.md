@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: KNOWLEDGE GRAPH COMPLETE (V1) — teaching assets NOT STARTED
 
 ## Latest Commit (update after each session)
-`PENDING` — feat(english): author Canonical English Knowledge Graph V1 (216 concepts, 12 domains)
+`d298f09` — feat(english): author Canonical English Knowledge Graph V1 (216 concepts, 12 domains)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
