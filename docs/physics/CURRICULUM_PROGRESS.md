@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`PENDING` — feat(physics): author Special Relativity domain (phys.rel, 8 concepts) — will be corrected to the real hash in a follow-up commit, per established pattern
+`7d6e93e` — feat(physics): author Special Relativity domain (phys.rel, 8 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
