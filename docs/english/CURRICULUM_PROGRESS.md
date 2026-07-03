@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 3/12 domains complete
 
 ## Latest Commit (update after each session)
-(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Vocabulary Development domain (eng.vocab, 20 concepts)
+`4b878c5` — feat(english): author Vocabulary Development domain (eng.vocab, 20 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
