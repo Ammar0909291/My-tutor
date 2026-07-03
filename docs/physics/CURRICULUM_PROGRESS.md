@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`PENDING` — feat(physics): author Quantum Mechanics domain (phys.qm, 12 concepts) — will be corrected to the real hash in a follow-up commit, per established pattern
+`aea3980` — feat(physics): author Quantum Mechanics domain (phys.qm, 12 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
