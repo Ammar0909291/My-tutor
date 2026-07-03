@@ -10,7 +10,7 @@
 independently on this same foundation branch — do NOT touch Mathematics files.
 
 ## Latest Commit (update after each domain)
-`PENDING` — feat(physics): author Modern Physics domain (phys.mod, 15 concepts) — will be corrected to the real hash in a follow-up commit, per established pattern
+`f66c39d` — feat(physics): author Modern Physics domain (phys.mod, 15 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
