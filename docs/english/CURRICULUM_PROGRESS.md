@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 11/12 domains complete
+## Status: TEACHING ASSET PRODUCTION COMPLETE — 12/12 domains complete (216/216 concepts, 100%)
 
 ## Latest Commit (update after each session)
-`4bcb1e3` — feat(english): author Linguistics Foundations domain (eng.linguistics, 18 concepts)
+(pending — updated in the dashboard-refresh follow-up commit)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -47,9 +47,9 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 09 | Composition & Rhetoric | eng.composition | 16 | draft ✓ | chapters/composition.md ✓ | Complete — pre-university layer |
 | 10 | Literature Fundamentals | eng.literature | 25 | draft ✓ | chapters/literature.md ✓ | Complete — largest remaining domain |
 | 11 | Linguistics Foundations | eng.linguistics | 18 | draft ✓ | chapters/linguistics.md ✓ | Complete — survey level |
-| 12 | Advanced Communication | eng.communication | 12 | placeholder | — | **NEXT** — capstone domain |
+| 12 | Advanced Communication | eng.communication | 12 | draft ✓ | chapters/communication.md ✓ | Complete — capstone domain |
 
-**Summary:** 11/12 domains complete · 204/216 assets drafted · 12/216 remaining (94.4%)
+**Summary:** 12/12 domains complete · 216/216 assets drafted · 0 remaining (**100% — SUBJECT COMPLETE**)
 
 ## Completed Concepts Per Domain
 
@@ -280,6 +280,30 @@ dissected at every level. Zero pre-merge correction cycles. Pedagogical
 audit: 100% full structured review (18/18) + 24 verification checks,
 0 defects — PASS; see eng.linguistics-validation-report.md.)
 
+### eng.communication (12 concepts) — COMPLETE
+All 12 concepts authored: academic-writing-advanced,
+research-methodology-writing, technical-writing, business-writing,
+media-literacy, digital-communication, discourse-markers-advanced,
+cross-cultural-communication, professional-communication,
+negotiation-language, presentation-design, editing-for-publication
+(3 chunks: 4+4+4, deterministic graph order — the academic/professional
+writing tract (advanced academic → methodology/technical/business), the
+literacy and channel tract (media literacy, digital communication,
+advanced discourse markers, cross-cultural communication), and the
+integrated capstones (professional communication → negotiation;
+presentation design; editing-for-publication). Grounded in the KG's own
+cited references (Common Core Anchor Standards, Purdue OWL); Swales's
+research-space moves, Hall's high/low context, Fisher & Ury's
+position/interest distinction, the Stanford lateral-reading findings,
+and the assertion-evidence slide research all correctly attributed; one
+continuous professional scenario (the district water study researched,
+documented, negotiated, presented, and published) threads every worked
+example, closing the Amara narrative arc begun in the literature domain.
+Zero pre-merge correction cycles. Pedagogical audit: 100% full
+structured review (12/12) + 18 verification checks, 0 defects — PASS;
+see eng.communication-validation-report.md. **With this domain the
+English subject campaign is COMPLETE: 12/12 domains, 216/216 assets.**)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -341,10 +365,13 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.linguistics)
+## Next Planned Domain
 
-**eng.communication** — Advanced Communication · 12 concepts (the final
-domain — the English campaign completes with it). Rationale: it is last
-in the domain's established topological production order, and its
-cross-domain prerequisites are satisfied by the completed speaking,
-writing, composition, and linguistics domains.
+None — the English subject is complete (12/12 domains, 216/216 assets,
+all validated and pedagogically audited with zero defects). Per the
+global tracker (`docs/CURRICULUM_PROGRESS.md`), the remaining
+NOT-STARTED subjects in the campaign are Chemistry, Biology, and
+Computer Science teaching assets (their Canonical KGs already exist and
+are frozen). Runtime integration of English remains an explicit,
+separate follow-up requiring user approval (see the Runtime Integration
+section above).
