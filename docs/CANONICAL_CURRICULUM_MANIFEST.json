@@ -173,6 +173,6 @@
     "manifest_spec_version": "1.0"
   },
   "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
-  "last_commit": "cfcb7b0",
-  "last_updated": "2026-07-03T19:34:31Z"
+  "last_commit": "4dfdbfe",
+  "last_updated": "2026-07-04T01:29:26Z"
 }
