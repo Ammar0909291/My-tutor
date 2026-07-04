@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 11/12 domains complete
 
 ## Latest Commit (update after each session)
-(pending — updated in the dashboard-refresh follow-up commit)
+`4bcb1e3` — feat(english): author Linguistics Foundations domain (eng.linguistics, 18 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
