@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 7/12 domains complete
 
 ## Latest Commit (update after each session)
-(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Listening domain (eng.listening, 8 concepts)
+`7ac6281` — feat(english): author Listening domain (eng.listening, 8 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
