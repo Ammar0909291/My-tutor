@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 7/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 8/12 domains complete
 
 ## Latest Commit (update after each session)
-`7ac6281` — feat(english): author Listening domain (eng.listening, 8 concepts)
+(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Speaking domain (eng.speaking, 10 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -43,13 +43,13 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 05 | Reading | eng.reading | 16 | draft ✓ | chapters/reading.md ✓ | Complete |
 | 06 | Writing | eng.writing | 20 | draft ✓ | chapters/writing.md ✓ | Complete |
 | 07 | Listening | eng.listening | 8 | draft ✓ | chapters/listening.md ✓ | Complete — smallest domain |
-| 08 | Speaking | eng.speaking | 10 | placeholder | — | **NEXT** |
-| 09 | Composition & Rhetoric | eng.composition | 16 | placeholder | — | Pre-university layer |
+| 08 | Speaking | eng.speaking | 10 | draft ✓ | chapters/speaking.md ✓ | Complete |
+| 09 | Composition & Rhetoric | eng.composition | 16 | placeholder | — | Pre-university layer — **NEXT** |
 | 10 | Literature Fundamentals | eng.literature | 25 | placeholder | — | |
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 7/12 domains complete · 135/216 assets drafted · 81/216 remaining (62.5%)
+**Summary:** 8/12 domains complete · 145/216 assets drafted · 71/216 remaining (67.1%)
 
 ## Completed Concepts Per Domain
 
@@ -193,6 +193,22 @@ speech. Zero pre-merge correction cycles. Pedagogical audit: 100% full
 structured review (8/8) + 17 verification checks, 0 defects — PASS; see
 eng.listening-validation-report.md.)
 
+### eng.speaking (10 concepts) — COMPLETE
+All 10 concepts authored: oral-fluency, pronunciation-in-conversation,
+conversation-skills, asking-and-answering-questions, storytelling-orally,
+discussion-skills, public-speaking-basics, presentation-skills,
+debate-skills, non-verbal-communication
+(2 chunks: 5+5, deterministic graph order — the fluency/pronunciation
+production foundation (flipping phonetics receptive→productive), the
+conversation-skills interactional pivot, the question/discussion/
+public-speaking/presentation chain to the debate capstone (whose rebuttal
+engine is critical-listening's claim-tracking, per the KG cross-link),
+with storytelling and non-verbal communication as parallel branches.
+Includes the correct debunking of the Mehrabian '93% nonverbal' myth.
+Zero pre-merge correction cycles. Pedagogical audit: 100% full
+structured review (10/10) + 17 verification checks, 0 defects — PASS;
+see eng.speaking-validation-report.md.)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -254,9 +270,10 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.listening)
+## Next Planned Domain (after eng.speaking)
 
-**eng.speaking** — Speaking · 10 concepts. Rationale: it is next in the
-domain's established topological production order (... → listening →
-speaking → composition → ...), and its cross-domain prerequisites are
-satisfied by the completed phonetics and listening domains.
+**eng.composition** — Composition & Rhetoric · 16 concepts (the
+pre-university layer). Rationale: it is next in the domain's established
+topological production order (... → speaking → composition → ...), and
+its cross-domain prerequisites are satisfied by the completed writing and
+reading domains.

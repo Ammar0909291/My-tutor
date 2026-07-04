@@ -12561,503 +12561,923 @@
     {
       "id": "asset.eng.speaking.oral-fluency",
       "concept_id": "eng.speaking.oral-fluency",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Oral Fluency\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Oral Fluency\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to speak at a natural pace with appropriate pausing and minimal hesitation, using connected-speech processes rather than word-by-word delivery.",
+      "concept_summary": "ORAL FLUENCY is speaking at a natural pace with appropriate pausing and minimal hesitation — the Speaking domain's entry point, building directly on connected-speech (from Pronunciation & Phonetics): the reductions, linkings, and assimilations that phonetics taught receptively are precisely what a fluent speaker now produces, since word-by-word citation-form delivery sounds robotic and effortful. Fluency has a PACE dimension (a natural rate, neither labored nor rushed), a PAUSING dimension (pauses placed at phrase and clause boundaries, where they aid comprehension, rather than mid-phrase, where they disrupt it), and a HESITATION dimension (minimizing disruptive fillers and false starts). Critically, fluency is NOT the same as accuracy or speed: a speaker can be highly fluent while making grammatical errors, and speaking faster is not speaking more fluently — the parallel to reading-fluency's 'fluency is not just speed' principle is exact. Strategic pausing is a fluency TOOL, not a fluency failure: skilled speakers pause deliberately at meaningful boundaries for emphasis and processing time.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Oral Fluency\"",
-        "[TEMPLATE] Key idea 2 for \"Oral Fluency\"",
-        "[TEMPLATE] Key idea 3 for \"Oral Fluency\""
+        "Oral fluency produces the connected-speech processes learned receptively in phonetics — linking, reduction, assimilation — since word-by-word citation-form delivery sounds unnatural and effortful",
+        "Pause PLACEMENT matters more than pause quantity: pauses at phrase and clause boundaries aid the listener (mirroring prosodic phrasing), while mid-phrase pauses disrupt comprehension — the same boundary structure that governs written punctuation governs spoken pausing",
+        "Fluency is distinct from accuracy: a speaker can be fluent (smooth, natural pace) while making grammatical errors, and accurate while disfluent — the two dimensions develop somewhat independently and are assessed separately in speaking exams (CEFR treats fluency as its own scale)",
+        "Fluency is not speed: rushing produces MORE disfluency (false starts, repairs) not less, exactly paralleling reading-fluency's 'fluency is not just fast' principle from the Reading domain",
+        "Hesitation management is trainable: replacing disruptive fillers ('um, uh' at random points) with strategic silent pauses at boundaries, and using fluency-buying devices (rephrasing, discourse markers like 'well,' 'you know') to hold the floor while planning"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Oral Fluency\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Speaking faster means speaking more fluently.",
+          "correction": "Fluency is natural pace with well-placed pausing, not maximum speed — rushing typically produces MORE disfluency (false starts, mid-phrase breakdowns, repairs) because speech planning cannot keep up, exactly paralleling the reading domain's finding that inappropriate speed undermines rather than demonstrates fluency."
+        },
+        {
+          "misconception": "All pausing is a sign of disfluency to be eliminated.",
+          "correction": "Pause PLACEMENT distinguishes fluent from disfluent pausing — pauses at phrase and clause boundaries are a fluency TOOL (aiding listener comprehension, buying planning time, creating emphasis), while only mid-phrase pauses at unnatural points disrupt communication; skilled speakers pause deliberately and often, at the right places."
+        },
+        {
+          "misconception": "A fluent speaker is necessarily an accurate speaker, and vice versa.",
+          "correction": "Fluency (smooth, natural delivery) and accuracy (grammatical correctness) are distinct, separately-developing dimensions — a speaker can deliver grammatically flawed speech smoothly, or grammatically perfect speech haltingly; speaking assessment frameworks like the CEFR treat them as separate scales precisely because learners routinely show different levels on each."
+        },
+        {
+          "misconception": "Careful speakers should pronounce each word fully and separately for maximum clarity.",
+          "correction": "Word-by-word citation-form delivery actually sounds LESS natural and can be harder to follow, because listeners expect the connected-speech processes (linking, reduction) that characterize all fluent English — deliberately suppressing them produces robotic-sounding speech; clarity comes from good pausing and stress placement, not from isolating every word."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Oral Fluency\""
+        "A pause-placement diagram showing the same sentence with boundary pauses (fluent) versus mid-phrase pauses (disfluent), pause positions marked",
+        "A two-axis fluency/accuracy grid showing the four combinations (fluent+accurate, fluent+inaccurate, disfluent+accurate, disfluent+inaccurate) with brief speaker descriptions",
+        "A filler-replacement chart: disruptive random 'um' → strategic boundary pause or discourse marker"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Oral Fluency\"",
+        "setup": "Two speakers deliver the same sentence: Speaker A says 'I... want to... go to the... store later' (pauses mid-phrase, each word fully separate). Speaker B says 'I wanna go to the store | later on' (connected speech, one boundary pause). Analyze both deliveries against the three fluency dimensions and explain which is more fluent and why.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Analyze Speaker A's pausing: pauses fall mid-phrase ('want to... go') at unnatural points, forcing the listener to hold incomplete phrases open — disruptive placement despite the slow, 'careful' intent.",
+          "Analyze Speaker A's connectedness: fully separated citation forms ('want to' rather than the natural reduction) sound effortful and robotic — suppressing connected speech reduced rather than improved clarity.",
+          "Analyze Speaker B's delivery: connected-speech reduction ('wanna' — the natural spoken form of unstressed 'want to'), pausing only at the clause boundary ('| later on'), natural pace throughout.",
+          "Apply the three dimensions: Speaker B wins on pace (natural), pausing (boundary-placed), and hesitation (none mid-phrase) — Speaker B is more fluent even though Speaker A spoke more 'carefully.'",
+          "Note the register caveat: 'wanna' is standard in casual spoken English but would be avoided in careful formal address — connected-speech reduction is register-sensitive (from eng.vocab.register-and-formality), though even formal fluent speech still links and reduces more than citation-form delivery."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Oral Fluency\""
+        "expected_outcome": "The learner correctly identifies Speaker B as more fluent using the pace/pausing/hesitation dimensions, explains why Speaker A's 'careful' word-by-word delivery is actually less fluent, and notes the register-sensitivity of reduction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Mark the natural pause boundaries in a transcribed sentence for fluent delivery",
+          "Classify described pause placements as boundary (fluent) or mid-phrase (disfluent)",
+          "Identify where connected-speech reduction would naturally occur in a phrase",
+          "Evaluate a described speech sample separately on fluency and accuracy dimensions"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with boundary-marking on short sentences, progress to classifying pause placements and reduction points, then to separate fluency/accuracy evaluation of longer described samples.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Boundary-marking task",
+          "Classification task",
+          "Evaluation task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Oral Fluency\""
+        "bloom_alignment": "Apply — learners must apply pause-placement, connected-speech, and hesitation-management principles to produce and evaluate natural spoken delivery.",
+        "mastery_signal": "The learner can mark natural pause boundaries, distinguish fluent from disfluent pausing, and evaluate fluency separately from accuracy, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Boundary marking: mark where a fluent speaker would pause in a given two-clause sentence. | Classification: is a pause after 'I want to...' boundary or mid-phrase? | Evaluation: rate a described sample separately for fluency and accuracy."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Oral Fluency\""
+        "Oral fluency is a separately-scored dimension in every major speaking examination (IELTS, Cambridge, TOEFL), making it directly assessment-relevant",
+        "Professional contexts — interviews, meetings, phone calls — reward natural-paced, well-paused speech, which listeners experience as confidence and competence",
+        "Fluency-building techniques (boundary pausing, filler replacement) are core tools in speech coaching and second-language speaking instruction"
       ],
       "prerequisite_review_triggers": [
         "eng.phonetics.connected-speech"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.pronunciation-in-conversation",
       "concept_id": "eng.speaking.pronunciation-in-conversation",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Pronunciation in Conversation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Pronunciation in Conversation\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to apply accurate pronunciation, stress, and intonation in spontaneous spoken interaction, not just in prepared or careful speech.",
+      "concept_summary": "PRONUNCIATION IN CONVERSATION is applying accurate pronunciation, stress, and intonation in SPONTANEOUS spoken interaction — the crucial step beyond oral-fluency, converting the entire Pronunciation & Phonetics toolkit (segmental accuracy, word and sentence stress, intonation patterns, prosody — via the cross-link to eng.phonetics.prosody) from careful, monitored performance into real-time habit. The defining challenge is the ATTENTION SHIFT: in spontaneous conversation, the speaker's attention is on meaning, the interlocutor, and what to say next — not on articulation — so pronunciation features that survive only under deliberate monitoring collapse under conversational load. The practical priorities under load are (1) maintaining the stress and intonation patterns that carry meaning (misplaced stress and flat intonation damage intelligibility more than most segmental slips), (2) keeping meaning-critical segmental contrasts (the minimal-pair distinctions), and (3) INTELLIGIBILITY as the goal rather than accent elimination — a widely accepted principle in modern pronunciation teaching: clear, comprehensible speech in one's own accent, not imitation of any single 'perfect' accent.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Pronunciation in Conversation\"",
-        "[TEMPLATE] Key idea 2 for \"Pronunciation in Conversation\"",
-        "[TEMPLATE] Key idea 3 for \"Pronunciation in Conversation\""
+        "Spontaneous conversation shifts attention from articulation to meaning and interaction — pronunciation features that survive only under deliberate monitoring collapse under conversational load, so the goal is converting phonetics knowledge into automatic habit",
+        "Under load, suprasegmentals are the priority: misplaced word stress and flat or wrong intonation damage intelligibility more than most individual-sound slips — a stress-misplaced word is frequently unrecognizable even with every segment correct",
+        "Meaning-critical segmental contrasts (the minimal-pair distinctions from eng.phonetics.minimal-pairs) rank next: contrasts that distinguish words the conversation actually needs must be maintained, while sub-phonemic accent coloring can be left alone",
+        "Intelligibility, not accent elimination, is the goal — the modern pronunciation-teaching consensus: clear, comprehensible speech in the speaker's own accent, since accents-and-dialects (from eng.phonetics) established that no accent is inherently 'correct'",
+        "Intonation carries interactional meaning in conversation specifically: question versus statement contours, politeness signaling, and turn-yielding versus turn-holding cues (previewing conversation-skills) — flat intonation in interaction doesn't just sound dull, it drops real communicative signals"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Pronunciation in Conversation\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Good pronunciation in conversation means eliminating your accent.",
+          "correction": "The goal of pronunciation work is INTELLIGIBILITY — clear, comprehensible speech — not accent elimination; as established at eng.phonetics.accents-and-dialects, no accent is inherently correct, and the modern pronunciation-teaching consensus targets the features that affect comprehensibility (stress, intonation, meaning-critical contrasts) while leaving accent identity intact."
+        },
+        {
+          "misconception": "If pronunciation is accurate in careful, prepared speech, it will automatically be accurate in conversation.",
+          "correction": "Spontaneous conversation redirects attention to meaning and interaction, and pronunciation features maintained only by deliberate monitoring collapse under that load — the careful-speech-to-conversation gap is a well-documented phenomenon, and closing it requires practice under genuine conversational conditions, not more careful-speech drilling."
+        },
+        {
+          "misconception": "Individual sound accuracy matters more than stress and intonation.",
+          "correction": "The priority runs the other way under conversational load — a word with misplaced stress is frequently unrecognizable to listeners even when every individual sound is correct, while a word with slightly off segments but correct stress usually survives; suprasegmentals carry the larger intelligibility load, which is why they are the first priority when attention is scarce."
+        },
+        {
+          "misconception": "Flat intonation is merely a stylistic issue that makes speech sound boring.",
+          "correction": "In conversation, intonation carries real interactional signals — question versus statement identity, politeness, and turn-yielding versus turn-holding cues — so flat intonation doesn't just sound dull, it drops genuine communicative information, causing listeners to miss questions, misread attitude, or talk over the speaker."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Pronunciation in Conversation\""
+        "An attention-budget diagram contrasting careful speech (attention on articulation) with conversation (attention on meaning/interlocutor), showing which pronunciation features survive the shift",
+        "An intelligibility priority pyramid: stress & intonation at the base, meaning-critical contrasts in the middle, accent coloring at the top (lowest priority)",
+        "A stress-misplacement demonstration card: a word stressed correctly and incorrectly, with listener-recognition consequences noted"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Pronunciation in Conversation\"",
+        "setup": "A learner pronounces every segment of 'photography' correctly but stresses it PHO-to-graph-y (first syllable) in fast conversation, and their conversational partner fails to recognize the word. Separately, the same learner says 'dat' for 'that' and is understood perfectly. Analyze both events against the intelligibility priorities.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Analyze the 'photography' failure: correct segments, wrong stress — English listeners identify words substantially by stress pattern (pho-TOG-ra-phy), so first-syllable stress presents an unrecognizable rhythmic shape despite perfect segments; this confirms suprasegmentals' top priority.",
+          "Analyze the 'dat' success: the /ð/→/d/ substitution is a common accent feature that rarely creates minimal-pair confusion in context ('dat book' has no competing 'dat' meaning) — a sub-critical segmental variation that intelligibility-first priorities correctly leave alone.",
+          "Rank the two 'errors' by communicative cost: the stress error caused actual communication failure; the segmental variation caused none — the priorities predicted exactly this outcome.",
+          "Derive the practice implication: this learner's highest-value pronunciation work is word-stress patterns (especially in longer Latinate words), not /ð/ drilling.",
+          "Connect to the attention-budget: in conversation the learner cannot monitor everything, so training should automate the high-cost features (stress) first, letting low-cost accent coloring remain unmonitored."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Pronunciation in Conversation\""
+        "expected_outcome": "The learner correctly explains why the stress error broke communication while the segmental variation didn't, and correctly prioritizes stress-pattern training over accent-feature elimination."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Rank described pronunciation deviations by intelligibility cost",
+          "Identify the stress pattern of multisyllabic words likely to arise in conversation",
+          "Identify the interactional signal carried by a described intonation contour",
+          "Diagnose whether a described communication failure was segmental or suprasegmental in origin"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with clear-cut stress versus segment cost comparisons, progress to intonation-signal identification, then to diagnosing realistic mixed communication-failure scenarios.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Ranking task",
+          "Diagnosis task",
+          "Identification task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Pronunciation in Conversation\""
+        "bloom_alignment": "Apply — learners must apply intelligibility-first priorities to diagnose and rank pronunciation issues in spontaneous-interaction scenarios.",
+        "mastery_signal": "The learner can rank pronunciation deviations by intelligibility cost, diagnose failure sources as segmental or suprasegmental, and identify intonation's interactional signals, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Ranking: which harms intelligibility more — misplaced stress or a /ð/→/d/ substitution? | Diagnosis: why wasn't 'comFORtable' recognized despite correct sounds? | Identification: what does a rising contour on 'You're leaving' signal?"
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Pronunciation in Conversation\""
+        "Intelligibility-focused pronunciation is the modern standard in ESL teaching and speaking assessment, directly shaping how learners' speech is evaluated",
+        "Workplace and academic conversation reward automatic (unmonitored) clear pronunciation, since monitored pronunciation collapses exactly when stakes and cognitive load rise",
+        "Voice-interface technology and international teamwork both make stress/intonation-first clarity increasingly valuable across accents"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.oral-fluency"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.conversation-skills",
       "concept_id": "eng.speaking.conversation-skills",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Conversation Skills\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Conversation Skills\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to manage turn-taking, initiate and close conversations appropriately, and maintain topical coherence in dialogue.",
+      "concept_summary": "CONVERSATION SKILLS is managing turn-taking, initiating and closing conversations, and maintaining topical coherence in dialogue — the domain's interactional pivot, where speaking stops being solo production (fluency, pronunciation) and becomes joint activity governed by largely unspoken rules. TURN-TAKING runs on signals: speakers yield turns with falling intonation, grammatical completion, and gaze (drawing on pronunciation-in-conversation's intonation cues), and listeners project these completion points to time their entry — with interruption (taking the turn mid-utterance) distinct from overlap at a completion point. INITIATING follows conventional openings (greeting, small-talk on-ramp, topic launch), and CLOSING is a genuine skill of its own: conversations end through pre-closing signals ('anyway...', 'well, it's been great...') that let both parties wind down jointly, rather than through abrupt unilateral exit. TOPICAL COHERENCE means connecting contributions to what came before — responding to the interlocutor's turn before shifting topic, and marking shifts when they happen ('oh, that reminds me...') — the conversational counterpart of the cohesion principle from writing.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Conversation Skills\"",
-        "[TEMPLATE] Key idea 2 for \"Conversation Skills\"",
-        "[TEMPLATE] Key idea 3 for \"Conversation Skills\""
+        "Turn-taking runs on projectable completion signals — falling intonation, grammatical completion, and gaze — that listeners use to time their entry; smooth turn exchange is a joint achievement, not just politeness",
+        "Interruption (entering mid-utterance, before a completion point) is functionally distinct from overlap at a completion point — brief overlap at completion signals engagement in many conversational styles, while genuine interruption takes the floor away",
+        "Conversation openings follow conventional sequences (greeting → small-talk on-ramp → topic launch), and closings use PRE-CLOSING signals ('anyway...', 'well, listen...') that propose ending jointly — abrupt unilateral exits violate the joint-activity structure",
+        "Topical coherence connects each contribution to the prior turn: respond to what the interlocutor said before shifting, and MARK shifts when making them ('oh, that reminds me...', 'changing the subject...') — the spoken counterpart of writing's transitions-and-cohesion",
+        "Backchannel signals ('mm-hm,' 'right,' nodding — from active-listening's engagement tools) are the listener's half of turn management: they signal continued attention WITHOUT claiming a turn, keeping the current speaker's floor intact"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Conversation Skills\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Good conversation just means waiting silently for your turn to talk.",
+          "correction": "Conversation is a joint activity requiring active work in BOTH roles — as listener, backchanneling ('mm-hm,' nodding) signals engagement without claiming the floor; as prospective speaker, projecting the current speaker's completion point times a smooth entry; passive silent waiting misses both jobs and often produces either dead gaps or collisions."
+        },
+        {
+          "misconception": "All overlap in conversation is rude interruption.",
+          "correction": "Overlap AT a completion point (brief simultaneous speech as turns exchange) is normal and in many conversational styles signals engagement, while interruption — seizing the floor mid-utterance before any completion point — is the genuinely turn-violating behavior; conflating the two misreads engaged conversation as rudeness and can make a speaker's own timing overly hesitant."
+        },
+        {
+          "misconception": "Conversations can simply be ended by saying goodbye whenever you want to leave.",
+          "correction": "Closings are jointly negotiated through pre-closing signals ('anyway...', 'well, it's been great...') that PROPOSE winding down and give the other party a chance to agree or add final items — an abrupt 'goodbye' without pre-closing reads as cutting the other person off, which is why closings routinely take several turns."
+        },
+        {
+          "misconception": "Changing the topic whenever something occurs to you is fine as long as the new topic is interesting.",
+          "correction": "Topical coherence expects each contribution to connect to the prior turn — an unmarked topic jump ignores the interlocutor's contribution and reads as not listening; when a shift is genuinely wanted, marking it ('oh, that reminds me...', 'total change of subject, but...') acknowledges the jump and maintains the joint structure, exactly as transitions mark shifts in writing."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Conversation Skills\""
+        "A turn-exchange timeline showing completion signals (falling intonation + grammatical completion) and a listener's well-timed entry, versus a mid-utterance interruption",
+        "A conversation-arc diagram: opening sequence → topic development (with coherent linked turns) → pre-closing signals → closing",
+        "A backchannel-versus-turn-claim comparison showing 'mm-hm' (floor stays with speaker) versus a full turn entry"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Conversation Skills\"",
+        "setup": "Analyze this exchange for conversation-skill successes and failures: A: 'So the trip was amazing — we hiked every single day and—' B: 'I bought a new car last week.' A: '...oh. Nice.' B: 'Yeah anyway gotta go, bye.' [leaves immediately]",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Identify failure 1 — interruption: B entered mid-utterance ('every single day and—'), before any completion point (no falling intonation, no grammatical completion), seizing rather than receiving the turn.",
+          "Identify failure 2 — topical incoherence: B's contribution ('new car') has no connection to A's turn (the trip) and carries no shift marker — an unmarked topic jump that ignores A's contribution entirely, which A's deflated '...oh. Nice.' registers.",
+          "Identify failure 3 — abrupt closing: 'gotta go, bye' plus immediate exit compresses pre-closing and closing into one unilateral move, giving A no chance to wind down jointly.",
+          "Repair the exchange: B waits for A's completion point, responds to the trip first ('Every day? Where did you hike?'), later marks any shift ('Oh, that reminds me — big news on my end...'), and closes with a pre-closing sequence ('Listen, I've got to run in a minute... but let's catch up properly soon. Take care!').",
+          "Confirm the repaired version succeeds on all three systems: turn-taking (entry at completion), coherence (respond-then-shift, marked), and closing (jointly negotiated)."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Conversation Skills\""
+        "expected_outcome": "The learner correctly identifies the interruption, the unmarked topic jump, and the abrupt closing, and produces a repaired version demonstrating completion-point entry, respond-then-shift coherence, and pre-closing sequence."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Identify completion signals and interruptions in a transcribed exchange",
+          "Classify a topic change as coherent, marked-shift, or unmarked jump",
+          "Compose a pre-closing sequence for a described conversation",
+          "Repair a transcribed exchange containing turn-taking and coherence violations"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with identifying clear violations in short exchanges, progress to classifying subtler topic-management moves, then to composing repairs and full well-managed exchanges.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Analysis task",
+          "Classification task",
+          "Repair task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Conversation Skills\""
+        "bloom_alignment": "Apply — learners must apply turn-taking, coherence, and opening/closing conventions to analyze and repair conversational exchanges.",
+        "mastery_signal": "The learner can identify turn-taking and coherence violations and produce repaired exchanges with completion-point entries, marked shifts, and pre-closing sequences, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Analysis: find the interruption in a transcribed exchange. | Classification: is 'oh, that reminds me...' a marked shift or an unmarked jump? | Repair: rewrite an abrupt conversation ending with a proper pre-closing sequence."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Conversation Skills\""
+        "Turn-taking and topic management are the backbone of every social, academic, and professional conversation — from small talk to meetings to interviews",
+        "Speaking examinations (IELTS, Cambridge) score interactional management — initiating, responding, and developing the interlocutor's topics — as an explicit criterion",
+        "Cross-cultural and remote communication (video calls, where gaze and timing cues degrade) make explicit turn-taking awareness increasingly valuable"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.pronunciation-in-conversation"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.asking-and-answering-questions",
       "concept_id": "eng.speaking.asking-and-answering-questions",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Asking and Answering Questions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Asking and Answering Questions\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to formulate clear spoken questions and provide relevant, appropriately complete spoken answers.",
+      "concept_summary": "ASKING AND ANSWERING QUESTIONS is formulating clear spoken questions and providing relevant, complete spoken answers — the question-answer exchange being conversation's most frequent structured sequence, built directly on conversation-skills' turn structure and applying eng.grammar.question-formation's machinery (yes/no inversion, wh-questions, question tags) in real time. On the ASKING side, the craft is matching question form to information need: OPEN questions (wh-forms inviting elaboration: 'What was the trip like?') generate conversation, while CLOSED questions (yes/no forms: 'Was the trip good?') generate confirmation — a mismatch produces either interrogation-style dead ends or unfocused rambling. Rising intonation can also turn a declarative into a question in speech ('You're leaving?'), a spoken-channel resource writing lacks. On the ANSWERING side, the craft is RELEVANCE and CALIBRATION: answering the question actually asked (not the question one wishes had been asked), at appropriate completeness — enough to satisfy the information need (a bare 'yes' to 'What did you think of the proposal?' fails), without hijacking the turn into a monologue — and using answer-plus-extension ('Yes — mainly because...') to keep the conversation developing.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Asking and Answering Questions\"",
-        "[TEMPLATE] Key idea 2 for \"Asking and Answering Questions\"",
-        "[TEMPLATE] Key idea 3 for \"Asking and Answering Questions\""
+        "Open questions (wh-forms: what/how/why) invite elaboration and generate conversation; closed questions (yes/no forms) request confirmation — skilled speakers match the form to the information need, mixing both deliberately",
+        "The grammatical machinery is eng.grammar.question-formation live: subject-auxiliary inversion, do-support, and wh-fronting under real-time pressure — plus a spoken-only resource: rising intonation converting a declarative into a question ('You're leaving?')",
+        "Answer RELEVANCE means answering the question actually asked — an answer to a different, preferred question ('How much will it cost?' answered with benefits talk) is a recognized evasion pattern that listeners notice, connecting to critical-listening's evasion detection",
+        "Answer CALIBRATION means appropriate completeness: a bare 'yes/no' underserves an open question, while a monologue overserves a closed one — the answer-plus-extension pattern ('Yes — mainly because...') satisfies the need and hands back a developable turn",
+        "Follow-up questions built on the previous answer ('You mentioned the deadline — what's driving that?') are the strongest coherence tool in the question-asker's kit, demonstrating the listening the prior answer received (from active-listening)"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Asking and Answering Questions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Any grammatically correct question is a well-formed conversational question.",
+          "correction": "Question CHOICE matters beyond grammar — a closed yes/no question where elaboration was wanted produces a dead-end 'yes,' and a broad open question where a specific fact was needed produces rambling; the skill is matching open versus closed form to the actual information need, not just forming the question correctly."
+        },
+        {
+          "misconception": "A longer answer is always a better, more helpful answer.",
+          "correction": "Answer calibration cuts both ways — under-answering (bare 'yes' to an open question) fails the information need, but over-answering (a monologue in response to a simple closed question) hijacks the turn structure and buries the requested information; the target is completeness proportional to the question, often via a concise answer plus one developable extension."
+        },
+        {
+          "misconception": "Answering a related question you'd rather address is an acceptable substitute for answering the question asked.",
+          "correction": "Question-dodging — answering a preferred adjacent question ('What will it cost?' met with benefit talk) — is a recognizable evasion pattern that attentive listeners detect (exactly what critical-listening trains them to catch), and it damages the answerer's credibility; if the asked question can't be answered, saying so directly ('I don't have the cost figures yet') preserves trust better than substitution."
+        },
+        {
+          "misconception": "Rising intonation on a statement is sloppy speech rather than genuine question formation.",
+          "correction": "Declarative questions ('You're leaving?') are a fully standard spoken-English question resource — the rising contour alone carries the interrogative function without inversion — and they serve a distinct pragmatic role (checking/confirming something just inferred) that inverted questions don't quite duplicate; this is a spoken-channel capability writing lacks, not an error."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Asking and Answering Questions\""
+        "An open-versus-closed question decision chart: 'want elaboration? → wh-form; want confirmation? → yes/no form' with example pairs",
+        "An answer-calibration gauge from under-answering (bare yes) through calibrated (answer + extension) to over-answering (monologue)",
+        "A dodge-detection card showing a question, a substituted answer, and the credibility cost"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Asking and Answering Questions\"",
+        "setup": "In a job interview, the interviewer asks: 'Why did you leave your last position?' Evaluate three candidate answers: (a) 'Personal reasons.' (b) 'Well, let me tell you about my achievements there — I led three major projects...' (c) 'The role had stopped growing — I'd automated most of my own responsibilities — and I wanted a team where I could keep building. That's actually what drew me to this opening.'",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Classify the question: an open wh-question ('why') inviting a substantive, elaborated answer — the interviewer wants reasoning, not confirmation.",
+          "Evaluate (a): under-calibrated — 'personal reasons' is technically responsive but so incomplete for an open question that it reads as concealment, likely inviting a probing follow-up under worse conditions.",
+          "Evaluate (b): a dodge — it substitutes the preferred question ('what were your achievements?') for the asked one ('why did you leave?'); an attentive interviewer registers the evasion, and the unanswered question now hangs over the interview.",
+          "Evaluate (c): calibrated and relevant — it answers the asked question directly (role stopped growing), gives proportionate elaboration (one concrete supporting detail), and extends toward the conversation's shared purpose (linking to the new role), handing back a developable turn.",
+          "Extract the general pattern: answer the asked question first, at proportionate depth, then extend — and where an answer genuinely can't be given, say so directly rather than substituting."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Asking and Answering Questions\""
+        "expected_outcome": "The learner correctly classifies the question as open, diagnoses (a) as under-calibration and (b) as a dodge, and identifies (c)'s answer-then-extend structure as the calibrated response."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Choose open versus closed question form for a specified information need",
+          "Evaluate answers for relevance and calibration (under/over/calibrated, dodge)",
+          "Compose an answer-plus-extension response to a given open question",
+          "Compose a follow-up question building on a given previous answer"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with form-need matching and clear calibration judgments, progress to dodge detection, then to composing calibrated answers and coherence-building follow-ups.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Selection task",
+          "Evaluation task",
+          "Composition task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Asking and Answering Questions\""
+        "bloom_alignment": "Apply — learners must apply question-form selection and answer-calibration principles to compose and evaluate real conversational question-answer exchanges.",
+        "mastery_signal": "The learner can match question form to information need, detect dodges and calibration failures, and compose calibrated answer-plus-extension responses, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Selection: open or closed form to learn someone's opinion of a film? | Evaluation: is this answer calibrated, under-answered, or a dodge? | Composition: write an answer-plus-extension to 'How did the launch go?'"
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Asking and Answering Questions\""
+        "Interviews (job, journalistic, academic) are structured entirely as question-answer exchanges, rewarding calibration and punishing dodges",
+        "Teaching, coaching, and management depend on open-question craft to elicit thinking rather than yes/no compliance",
+        "Speaking examinations explicitly assess responding relevantly and at appropriate length to examiner questions"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.conversation-skills"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.storytelling-orally",
       "concept_id": "eng.speaking.storytelling-orally",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Oral Storytelling\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Oral Storytelling\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to recount a narrative aloud with clear sequencing, vocal expression, and audience engagement.",
+      "concept_summary": "ORAL STORYTELLING is recounting a narrative aloud with clear sequencing, expression, and audience engagement — narrative-writing's craft (character, setting, plot, chronological sequence) transposed to the spoken channel, where three new resources and constraints appear. First, DELIVERY becomes a narrative instrument: pacing changes, strategic pauses before reveals, pitch and volume shifts, and character voices carry work that written narrative assigns to word choice alone (the prosody toolkit, now at performance scale — and via the cross-link to dramatic structure, the teller manages tension the way a playwright does). Second, the audience is LIVE: a teller reads engagement in real time (faces, laughter, restlessness — the visible counterpart of backchannels from conversation-skills) and adapts — compressing a sagging section, expanding a landing one — an option no written text has. Third, the listener CANNOT RE-READ: oral narrative must be structured for one-pass comprehension — clear chronological signposting ('so then...', 'meanwhile...'), few characters kept distinct, and no dependence on details a listener could only get by looking back. The classic shape — orientation ('so last summer, my brother and I...'), complication building to a peak, then resolution/punchline — is engineered precisely for one-pass listening.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Oral Storytelling\"",
-        "[TEMPLATE] Key idea 2 for \"Oral Storytelling\"",
-        "[TEMPLATE] Key idea 3 for \"Oral Storytelling\""
+        "Oral narrative keeps narrative-writing's core (character, setting, plot, chronological sequence) but gains delivery as an instrument: pacing shifts, the strategic pause before a reveal, pitch/volume changes, and character voices do work that written narrative assigns to word choice",
+        "The live audience is a feedback channel: tellers read engagement in real time (the visible counterpart of conversational backchannels) and adapt — compressing sagging sections, expanding landing ones — an adaptive capability no fixed written text possesses",
+        "One-pass comprehension is the governing constraint: listeners cannot re-read, so oral stories need explicit chronological signposting ('so then...', 'meanwhile...'), a small cast kept verbally distinct, and no load-bearing details a listener would need to look back for",
+        "The classic oral shape — orientation ('so last summer...'), complication building to a peak, resolution/punchline — is engineered for one-pass listening: orientation loads context up front, the build sustains attention, and the peak-then-release shape (echoing dramatic structure, per the cross-link) makes the payoff land",
+        "The strategic pause is oral storytelling's signature device: silence immediately before the reveal or punchline concentrates attention exactly where the payoff arrives — a timing resource written prose can only approximate"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Oral Storytelling\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Telling a story aloud is just reading a written story out loud, or reciting a memorized text.",
+          "correction": "Oral storytelling is a distinct performance craft — delivery (pacing, pauses, voices) carries narrative work, the live audience feeds back and the teller adapts in real time, and the structure itself must serve one-pass listening; a written story read verbatim typically fails aloud precisely because it was engineered for a reader who can re-read, not a listener who can't."
+        },
+        {
+          "misconception": "More detail always makes an oral story richer and better.",
+          "correction": "The one-pass constraint punishes detail loads that a reader could handle — too many characters, nested subplots, or precise details the listener must retain all overload listening memory; effective oral stories are SELECTIVE (few characters, one clear throughline, vivid but few details), compressing exactly the way flash fiction taught, for a different reason."
+        },
+        {
+          "misconception": "Pausing during a story is a sign the teller has lost their place.",
+          "correction": "The strategic pause is oral storytelling's most powerful timing device — silence just before the reveal concentrates the audience's attention precisely where the payoff lands; skilled tellers pause MORE than nervous ones, but at chosen moments, exactly paralleling oral-fluency's boundary-pause principle at performance scale."
+        },
+        {
+          "misconception": "A well-prepared story should be delivered identically regardless of the audience's reaction.",
+          "correction": "Reading and adapting to the live audience is half the craft — compressing a section that's sagging, expanding one that's landing, adjusting pace to the room — a teller who ignores visible audience signals discards oral storytelling's unique advantage over fixed text and delivers a recitation rather than a performance."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Oral Storytelling\""
+        "A story-arc diagram (orientation → complication/build → peak → resolution) annotated with delivery choices at each stage (pace, volume, the pre-reveal pause)",
+        "A written-versus-oral comparison of the same story moment: adjective-driven on the page, delivery-driven aloud",
+        "An audience-feedback loop diagram: tell → read signals → adapt → continue"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Oral Storytelling\"",
+        "setup": "A learner retells this written line aloud: 'After searching every room with growing panic, she finally found the missing ring in the last place she looked: inside the birthday cake.' Plan the oral delivery — signposting, pacing, and pause placement — for maximum one-pass impact.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Restructure the opening for oral orientation: 'So she's tearing through the house — every room, getting more and more frantic —' (present-tense immediacy and explicit sequencing replace the written participial phrase).",
+          "Plan the build's delivery: accelerate pace slightly and raise energy through the searching ('bedroom — nothing. Kitchen — nothing. She's checked everywhere—'), the repetition itself signposting the sequence for one-pass listeners.",
+          "Place the strategic pause: full stop before the reveal — 'And then she looks at the birthday cake. [pause] The ring was IN the cake.' — silence concentrating attention exactly before the payoff.",
+          "Mark the delivery contrasts: fast/rising through the build, dead stop at the pause, then slow, stressed delivery of the reveal ('IN. The. Cake.') — pace and stress doing what italics and word choice did on the page.",
+          "Note the audience-adaptation contingency: if the room is leaning in during the search, extend it one more room ('even the bathroom — nothing!'); if restless, cut straight to the cake — the plan includes its own adaptation points."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Oral Storytelling\""
+        "expected_outcome": "The learner produces an oral delivery plan with explicit signposting, a build-pause-reveal pacing shape, delivery contrasts replacing written devices, and predefined audience-adaptation points."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Restructure a written narrative passage for one-pass oral delivery",
+          "Mark the strategic pause and pace changes on a story's arc",
+          "Identify one-pass overload risks (too many characters/details) in a story plan and compress",
+          "Plan audience-adaptation points (where to expand or cut) for a prepared story"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with pause/pace marking on short prepared anecdotes, progress to restructuring written passages for oral delivery, then to full arc planning with compression and adaptation points.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Delivery-planning task",
+          "Restructuring task",
+          "Compression task"
         ],
-        "bloom_alignment": "create",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Oral Storytelling\""
+        "bloom_alignment": "Create — learners must generate original oral narrative deliveries, making deliberate structural, pacing, and adaptation choices for a live listening audience.",
+        "mastery_signal": "The learner can restructure narrative for one-pass listening, place strategic pauses and pace changes deliberately, and plan audience-adaptation points, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Delivery planning: mark the pre-reveal pause in a given anecdote. | Restructuring: convert a written paragraph into an oral telling with signposting. | Compression: cut a five-character story plan to two characters for oral telling."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Oral Storytelling\""
+        "Oral storytelling drives persuasive and professional communication — pitches, toasts, interviews, and teaching all run on well-told anecdotes",
+        "The one-pass structuring discipline transfers directly to presentations and lectures, where audiences also cannot re-read",
+        "Storytelling performance traditions (from stand-up to oral history) are living professional crafts built on exactly these delivery techniques"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.conversation-skills"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.discussion-skills",
       "concept_id": "eng.speaking.discussion-skills",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Discussion Skills\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Discussion Skills\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to contribute productively to group discussion, building on others' ideas and disagreeing respectfully with reasons.",
+      "concept_summary": "DISCUSSION SKILLS is contributing productively to group discussion, including building on others' ideas and respectfully disagreeing — scaling conversation-skills and asking-and-answering-questions from two-party dialogue up to the multi-party setting, where turn-taking becomes competitive (several potential next speakers), and where the goal shifts from social exchange to collective progress on a topic. The core productive moves are BUILDING ('Adding to what Maya said...' — extending another's idea rather than just queueing one's own), respectful DISAGREEING (challenging the idea, not the person, with reasons: 'I see it differently, because...' — applying persuasive-writing-basics' claim-plus-reasons standard aloud), INVITING (drawing in quiet participants: 'Sam, you've worked on this — what do you think?'), and SYNTHESIZING (pulling threads together: 'So we seem to agree on X, and the open question is Y'). The anti-patterns are equally learnable: serial monologuing (waiting to deliver a prepared point regardless of the current thread — the group-scale version of the reply-planning trap from active-listening), idea-repetition without attribution, and disagreement that attacks the speaker rather than engaging the reasoning.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Discussion Skills\"",
-        "[TEMPLATE] Key idea 2 for \"Discussion Skills\"",
-        "[TEMPLATE] Key idea 3 for \"Discussion Skills\""
+        "Group discussion scales dialogue up: turn-taking becomes competitive (multiple potential next speakers), and the goal shifts from social exchange to collective progress on the topic — contributions are judged by what they add to the group's thinking",
+        "BUILDING is the signature productive move: explicitly extending another's idea ('Adding to what Maya said...') creates cumulative group reasoning, and the attribution itself signals the listening that active-listening trained",
+        "Respectful DISAGREEMENT targets the idea, never the person, and comes with reasons ('I see it differently, because...') — the spoken application of persuasive-writing-basics' claim-plus-reasons standard, where a bare 'I disagree' contributes nothing the group can engage with",
+        "INVITING and SYNTHESIZING are the group-maintenance moves: drawing in quiet participants distributes the floor, and periodic synthesis ('so we agree on X; the open question is Y') converts scattered turns into collective progress",
+        "The core anti-pattern is serial monologuing — waiting to deliver a prepared point regardless of the current thread — the group-scale version of active-listening's reply-planning trap: the monologuer is present but not participating in the group's actual reasoning"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Discussion Skills\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Contributing a lot of airtime means contributing a lot to the discussion.",
+          "correction": "Contributions are judged by what they ADD to the group's collective thinking, not by duration or frequency — a brief build on another's idea or a well-timed synthesis often advances the discussion more than minutes of monologue, and dominating airtime actively suppresses the distributed thinking that makes group discussion worth having."
+        },
+        {
+          "misconception": "Disagreeing in a group is inherently rude or disruptive.",
+          "correction": "Reasoned disagreement is one of discussion's most valuable contributions — it stress-tests ideas before the group commits to them; what makes disagreement destructive is targeting the person or asserting without reasons, while 'I see it differently, because...' aimed at the idea is precisely the respectful-disagreement form that productive groups depend on."
+        },
+        {
+          "misconception": "Preparing your point in advance and delivering it when you get the floor is good discussion practice.",
+          "correction": "Serial monologuing — delivering a prepared point regardless of where the discussion has moved — is the group-scale reply-planning trap: the point often addresses a thread the group left two turns ago, ignores intervening contributions, and signals non-listening; prepared THINKING is valuable, but the delivery must connect to the live thread ('this relates to what was just said...') or explicitly mark the return ('going back to the budget question...')."
+        },
+        {
+          "misconception": "If quiet participants wanted to speak, they would; drawing them in puts them on the spot.",
+          "correction": "In competitive multi-party turn-taking, floor access is unevenly distributed by temperament, status, and conversational style — a well-formed invitation ('Sam, you've worked on this — what do you think?') opens the floor rather than pressuring, especially when tied to the person's known expertise; groups that never invite systematically lose the input of exactly the members least likely to seize the floor."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Discussion Skills\""
+        "A four-move card set: BUILD ('adding to...'), DISAGREE-WITH-REASONS ('I see it differently because...'), INVITE ('what do you think, ...?'), SYNTHESIZE ('so we agree on X...')",
+        "A discussion-map diagram showing turns as nodes with build/disagree/synthesize edges, versus a serial-monologue map of disconnected nodes",
+        "An idea-versus-person disagreement contrast card: 'That estimate misses the shipping cost' versus 'You always get the numbers wrong'"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Discussion Skills\"",
+        "setup": "In a study-group discussion about a class project, Maya says: 'I think we should survey students about cafeteria food.' Evaluate four possible responses: (a) 'Anyway, my idea is we should do a poster about recycling.' (b) 'Bad idea, surveys are boring.' (c) 'Building on that — a survey could work, and if we add two or three interview questions we'd get quotes for the report too.' (d) [to a silent member] 'Priya, you did a survey project last year — what worked?'",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Evaluate (a): serial monologuing — it ignores Maya's contribution entirely and delivers a prepared, unconnected point; the group thread breaks, and Maya's idea receives no engagement.",
+          "Evaluate (b): destructive disagreement — it rejects without reasons ('boring' is a bare verdict) and gives the group nothing to engage with; contrast the repaired form: 'I'm not sure a survey alone works — response rates are usually low — what if we paired it with interviews?'",
+          "Evaluate (c): a model BUILD — it credits the idea, extends it concretely (adding interviews), and advances the group's plan; note it took less airtime than (a) while contributing more.",
+          "Evaluate (d): a model INVITE — it opens the floor to a quiet member, tied to her known relevant experience, distributing the discussion's thinking capacity.",
+          "Add the missing move: after several turns, a SYNTHESIS would consolidate — 'So: survey plus a few interviews, and Priya's warning about timing — the open question is who drafts the questions.'"
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Discussion Skills\""
+        "expected_outcome": "The learner correctly diagnoses (a) as monologuing and (b) as reasonless disagreement, identifies (c) and (d) as model build and invite moves, and composes an appropriate synthesis turn."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Classify discussion turns as build, disagree-with-reasons, invite, synthesize, monologue, or bare rejection",
+          "Repair a destructive disagreement into idea-focused, reasoned form",
+          "Compose a build turn extending a given contribution",
+          "Compose a synthesis turn for a given multi-turn discussion excerpt"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with classifying clearly-marked turns, progress to repairing destructive moves, then to composing builds and syntheses for realistic multi-turn excerpts.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Classification task",
+          "Repair task",
+          "Composition task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Discussion Skills\""
+        "bloom_alignment": "Apply — learners must apply the productive discussion moves to classify, repair, and compose contributions in multi-party discussion scenarios.",
+        "mastery_signal": "The learner can classify discussion moves, repair destructive disagreement into reasoned form, and compose build and synthesis turns, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Classification: is 'adding to Maya's point...' a build or a monologue? | Repair: rewrite 'that's a terrible idea' as respectful reasoned disagreement. | Composition: write the synthesis turn for a given three-way discussion excerpt."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Discussion Skills\""
+        "Meetings, seminars, and team projects run on exactly these moves — building, reasoned disagreement, inviting, synthesis — and reward participants who perform them",
+        "Group-discussion tasks are a scored component of speaking examinations and many job assessment centers",
+        "Facilitation and leadership roles are substantially professionalized discussion-skills: the invite and synthesize moves are the facilitator's core toolkit"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.asking-and-answering-questions"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.public-speaking-basics",
       "concept_id": "eng.speaking.public-speaking-basics",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Public Speaking Basics\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Public Speaking Basics\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to speak clearly and confidently to an audience, applying basic techniques for voice projection, eye contact, and managing nervousness.",
+      "concept_summary": "PUBLIC SPEAKING BASICS is speaking clearly and confidently to an audience, including basic techniques for managing nervousness — the shift from the interactive, turn-based settings of discussion to SUSTAINED SOLO address, where the speaker holds the floor alone and the audience's channel back is nonverbal only. Three technique clusters carry the concept. VOICE: projection (supporting volume from breath, aimed at the back of the room), deliberate pace (nervous speakers rush — consciously slowing toward a measured rate with boundary pauses, oral-fluency's principle at address scale), and vocal variety (the prosody toolkit deployed to sustain attention across minutes rather than turns). PRESENCE: eye contact distributed across the audience (brief genuine contact with individuals in different sections, not a fixed stare or a scan over heads), grounded posture, and purposeful rather than anxious movement. NERVOUSNESS: the central reframe is that stage fright is near-universal and physiologically an arousal response that does not reliably show — audiences see far less nervousness than speakers feel (the 'illusion of transparency,' a documented effect) — and it is managed, not eliminated, through preparation (the strongest single anxiety reducer), slow pre-speech breathing, rehearsed strong openings (scripting the first 30 seconds carries the speaker through peak anxiety), and reframing arousal as readiness.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Public Speaking Basics\"",
-        "[TEMPLATE] Key idea 2 for \"Public Speaking Basics\"",
-        "[TEMPLATE] Key idea 3 for \"Public Speaking Basics\""
+        "Public speaking is sustained solo address: the speaker holds the floor for minutes without turn exchange, and the audience's feedback channel is nonverbal only — a fundamentally different attention structure from conversation and discussion",
+        "Voice techniques: projection supported from breath (aimed at the back row), deliberately measured pace with boundary pauses (nervous speakers rush — oral-fluency's pausing principle at address scale), and vocal variety (pitch/volume/pace shifts) to sustain attention across minutes",
+        "Presence techniques: eye contact distributed as brief genuine contact with individuals across audience sections (not a fixed stare, not scanning over heads), grounded posture, and purposeful movement",
+        "Nervousness is near-universal and does not reliably show: audiences perceive far less anxiety than speakers feel (the documented 'illusion of transparency') — knowing this alone reduces the anxiety spiral",
+        "Nervousness is managed, not eliminated: thorough preparation is the strongest single reducer; slow pre-speech breathing calms the arousal response; scripting the first 30 seconds carries the speaker through peak anxiety (which is highest at the start); and reframing arousal as readiness ('I'm activated, not endangered') converts the same physiology into energy"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Public Speaking Basics\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Confident speakers don't feel nervous.",
+          "correction": "Stage fright is near-universal, including among experienced professional speakers — the difference is management, not absence: preparation, breathing, rehearsed openings, and arousal-reframing let experienced speakers perform through the same physiology that novices experience as disabling; waiting to feel no fear before speaking means waiting forever."
+        },
+        {
+          "misconception": "The audience can see exactly how nervous you are.",
+          "correction": "The 'illusion of transparency' is a documented effect: speakers systematically overestimate how visible their internal anxiety is, because they feel it vividly while audiences see only mild external signs, if any — shaking hands and racing heart are largely invisible from ten feet away, and knowing this breaks the anxiety spiral ('they can see I'm nervous, which makes me more nervous...')."
+        },
+        {
+          "misconception": "Good public speaking means speaking quickly and energetically without pausing.",
+          "correction": "Nervous speakers characteristically RUSH, and rushing compounds every other problem (breath, articulation, audience processing) — measured pace with deliberate boundary pauses is the mark of authority, gives the audience processing time, and gives the speaker breathing and thinking room; the pause that feels endless to the speaker reads as composure to the audience."
+        },
+        {
+          "misconception": "Eye contact means fixing on one friendly face, or sweeping continuously over the whole room.",
+          "correction": "Effective eye contact is brief genuine contact with individuals distributed across audience sections — a few seconds per person, moving between sections — which reads to each region of the audience as being personally addressed; fixing on one face excludes everyone else (and unnerves the target), while continuous scanning over heads reads as evasive and connects with no one."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Public Speaking Basics\""
+        "A nervousness-management toolkit card: prepare thoroughly → breathe slow before → script the first 30 seconds → reframe arousal as readiness",
+        "An eye-contact distribution diagram: audience in sections, brief contact moving between individuals across sections",
+        "An 'illusion of transparency' split view: the speaker's vivid internal state versus what the audience actually perceives"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Public Speaking Basics\"",
+        "setup": "A student must give a 3-minute talk and reports: 'My heart races, I'll rush through it, I'll stare at my notes, and everyone will see how terrified I am.' Build the management plan addressing each reported fear with the matching technique.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Address 'everyone will see': apply the illusion-of-transparency correction — the audience perceives a fraction of felt anxiety; the racing heart is invisible from the audience's seats. This reframe alone typically lowers the spiral.",
+          "Address 'my heart races': reframe the arousal as readiness (the same physiology as excitement), and add slow pre-speech breathing (extended exhales) in the minutes before speaking to damp the response.",
+          "Address 'I'll rush': plan a deliberately measured pace with marked boundary pauses in the notes ('pause' written at each section break), knowing the pause that feels long from inside reads as composure from outside.",
+          "Address 'I'll stare at my notes': script and REHEARSE the first 30 seconds until it needs no notes — peak anxiety is at the start, and a rehearsed opening carries the speaker through it while establishing eye contact early; then reduce notes to keyword cues.",
+          "Consolidate: the plan is preparation-heavy by design (the strongest single reducer) — rehearse the full talk aloud twice, the opening five times, with the breathing-and-reframe routine as the pre-talk ritual."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Public Speaking Basics\""
+        "expected_outcome": "The learner produces a complete management plan pairing each reported fear with its matching evidence-based technique, centered on preparation, the rehearsed opening, pacing with pauses, and the transparency/arousal reframes."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Match nervousness symptoms to their management techniques",
+          "Mark boundary pauses and pace cues into a short talk script",
+          "Plan an eye-contact distribution pattern for a described room",
+          "Script and rehearse a 30-second talk opening"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with technique-matching, progress to marking delivery cues into scripts, then to full management-plan construction and rehearsed-opening delivery.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Matching task",
+          "Script-markup task",
+          "Planning task"
         ],
-        "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Public Speaking Basics\""
+        "bloom_alignment": "Apply — learners must apply voice, presence, and nervousness-management techniques to plan and deliver short audience-facing talks.",
+        "mastery_signal": "The learner can match management techniques to nervousness symptoms, mark pacing and pauses into a script, and produce a rehearsed strong opening, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Matching: which technique addresses rushing? | Script markup: mark the pauses in a 60-second talk script. | Planning: write the pre-talk routine for a nervous speaker."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Public Speaking Basics\""
+        "Public speaking situations pervade academic and professional life: class presentations, meeting updates, toasts, interviews, and community settings",
+        "Public-speaking anxiety is among the most commonly reported fears, and its evidence-based management techniques are directly life-applicable",
+        "The voice and presence toolkit transfers to video calls and recorded media, where projection, pace, and camera 'eye contact' follow the same principles"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.discussion-skills"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.presentation-skills",
       "concept_id": "eng.speaking.presentation-skills",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Presentation Skills\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Presentation Skills\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to organize and deliver a structured spoken presentation supported by visual or other aids.",
+      "concept_summary": "PRESENTATION SKILLS is organizing and delivering a structured spoken presentation supported by visual or other aids — public-speaking-basics' delivery craft now joined to STRUCTURE and AIDS. The structure is essay-structure's architecture transposed to speech under the one-pass constraint from oral storytelling: an opening that hooks and previews ('Tell them what you'll tell them'), a body of a few clearly signposted main points (spoken signposting — 'the second reason is...' — replacing the visible paragraph breaks a reader gets), and a closing that synthesizes and lands a final message ('tell them what you told them' — the redundancy is a feature, engineered for listeners who cannot re-read). VISUAL AIDS have one governing rule: the aid SUPPORTS the speaker, never substitutes — slides carry what speech carries badly (images, charts, key numbers, minimal text), while text-dense slides create the read-along failure mode in which the audience reads instead of listening and the speaker turns narrator of their own slides. Delivery integrates the aid: speak to the audience, not the screen; reveal information when it becomes relevant; and design the talk to survive the aid failing entirely.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Presentation Skills\"",
-        "[TEMPLATE] Key idea 2 for \"Presentation Skills\"",
-        "[TEMPLATE] Key idea 3 for \"Presentation Skills\""
+        "Presentation structure is essay architecture under the one-pass constraint: preview opening ('tell them what you'll tell them'), a few signposted main points, synthesis closing ('tell them what you told them') — the deliberate redundancy is engineered for listeners who cannot re-read",
+        "Spoken SIGNPOSTING replaces visible structure: 'the second reason is...', 'that brings me to...', 'so what does this mean?' do for listeners what headings and paragraph breaks do for readers — the transitions-and-cohesion system at presentation scale",
+        "The governing aid rule: the aid SUPPORTS, never substitutes — slides carry what speech carries badly (images, charts, key figures, minimal text), while the speech carries the reasoning and narrative",
+        "Text-dense slides create the read-along failure mode: the audience reads ahead (silent reading is faster than speech), stops listening, and the speaker becomes a narrator lagging behind their own slides — the strongest argument for minimal slide text",
+        "Delivery integrates rather than defers to the aid: face and speak to the audience (not the screen), reveal content when it becomes relevant, and build the talk to survive total aid failure — if the slides ARE the talk, there is no talk"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Presentation Skills\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Slides should contain the full content of the talk so the audience doesn't miss anything.",
+          "correction": "Text-dense slides trigger the read-along failure: audiences read faster than speakers talk, finish the slide early, stop listening, and the presentation collapses into narrated reading — slides should carry what speech carries badly (visuals, charts, key figures), while the full content lives in the SPEECH; audiences who need complete text should get a handout afterward, not a slide wall during."
+        },
+        {
+          "misconception": "Repeating your main points in the opening and closing is redundant padding.",
+          "correction": "The preview-develop-recap redundancy is deliberately engineered for one-pass listening — readers can revisit a thesis and re-check structure, but listeners cannot, so the spoken form re-supplies structure at the start (orientation), throughout (signposting), and at the end (consolidation); what reads as repetition on paper functions as navigation aloud."
+        },
+        {
+          "misconception": "A good presentation is mostly about good slides.",
+          "correction": "The presentation IS the talk — structure, reasoning, delivery, and audience connection — with the aid in a supporting role; the practical test is aid failure: a presenter whose talk survives the projector dying had a presentation with visual support, while one who cannot proceed had slides with a narrator, which is why experienced presenters build the talk first and the slides after."
+        },
+        {
+          "misconception": "Presenting means walking the audience through each slide, reading what it says.",
+          "correction": "Speaking to the screen (or reading slides verbatim) breaks audience connection and adds nothing the audience can't read themselves — the presenter faces the audience, uses the slide as a shared visual reference ('as this chart shows — the spike is here'), and supplies the reasoning and narrative the slide deliberately omits."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Presentation Skills\""
+        "A structure skeleton: HOOK + PREVIEW → point 1 [signpost] → point 2 [signpost] → point 3 [signpost] → RECAP + FINAL MESSAGE",
+        "A slide makeover pair: a 90-word bullet wall versus its remake as one chart plus a five-word headline",
+        "An aid-failure stress-test card: 'If the projector dies, does your talk survive?'"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Presentation Skills\"",
+        "setup": "A student's draft presentation on school recycling has slides averaging 80 words of bullets, no opening preview, points in random order, and a closing slide reading 'Thank you. Questions?'. Redesign it using presentation structure and the aid-supports rule.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Build the structure first, slides second: choose three main points and a logical order (problem scale → proposed program → what students can do), then draft the opening hook plus preview ('Our school throws away 200kg of recyclables weekly. In the next five minutes: how big the problem is, the program that fixes it, and the one thing you can do this week.').",
+          "Add spoken signposting between points: 'So that's the scale of the problem. That brings me to the program itself...' — navigation the audience can follow with ears alone.",
+          "Remake the slides under the supports-not-substitutes rule: the 80-word bullet walls become one image or chart per slide with a short headline ('200kg / week' over a photo of the waste) — the reasoning moves into the speech where it belongs.",
+          "Replace the closing: 'Thank you. Questions?' becomes a recap plus landing message ('Big problem, working program, one action: bring a bottle to the blue bin this week') — the synthesis-not-repetition principle from essay conclusions, spoken.",
+          "Run the aid-failure stress test: with the redesign, the talk survives a dead projector completely — structure, signposts, and reasoning all live in the speech."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Presentation Skills\""
+        "expected_outcome": "The learner rebuilds the presentation talk-first with preview/signposts/recap structure, converts text-wall slides into minimal visual support, and passes the aid-failure stress test."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Draft the preview opening and recap closing for a given topic and three points",
+          "Insert spoken signposts between the sections of a talk outline",
+          "Remake a text-dense slide into minimal visual support plus spoken content",
+          "Apply the aid-failure stress test to a described presentation and diagnose"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with structure drafting for given points, progress to signposting and slide remakes, then to full talk-first redesign of flawed presentations.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Structure-drafting task",
+          "Slide-remake task",
+          "Diagnosis task"
         ],
-        "bloom_alignment": "create",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Presentation Skills\""
+        "bloom_alignment": "Create — learners must generate original structured presentations with integrated visual support, making deliberate structure, signposting, and aid-design choices.",
+        "mastery_signal": "The learner can build preview/signpost/recap presentation structure, remake text-dense slides into supporting visuals, and pass the aid-failure test, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Structure drafting: write the preview sentence for a three-point talk. | Slide remake: convert an 80-word bullet slide into visual support. | Diagnosis: what failure mode do text-dense slides create, and why?"
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Presentation Skills\""
+        "Structured presentations are core currency in professional life — project updates, pitches, conference talks, and academic defenses",
+        "Slide-design discipline (minimal text, visual support) is standard guidance in professional communication training",
+        "Presentation structure and signposting transfer directly to webinars and video presentations, where audience attention is even more fragile"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.public-speaking-basics"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.debate-skills",
       "concept_id": "eng.speaking.debate-skills",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Debate Skills\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Debate Skills\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to construct and orally defend an argument, and rebut an opposing position, within a structured debate format.",
+      "concept_summary": "DEBATE SKILLS is constructing and orally defending an argument, and rebutting an opposing position, within a structured format — the Speaking domain's capstone, converging discussion-skills' reasoned disagreement and presentation-skills' structured delivery, and pairing productively with critical-listening (via the cross-link): the debater LISTENS critically to the opponent's case and SPEAKS the rebuttal that critical listening exposes. Debate's constructive side applies persuasive-writing-basics' architecture aloud: a clear claim, organized reasons with evidence, delivered with presentation-skills' signposted structure inside strict time limits. Its distinctive skill is REBUTTAL: responding to the opponent's actual argument — quoting or accurately restating it, then attacking its evidence, its assumptions, or the link between its premises and conclusion (critical-listening's claim-tracking in productive form) — as opposed to the strawman fallacy (rebutting a distorted, weaker version of what was said) or ad hominem (attacking the speaker rather than the argument, discussion-skills' idea-not-person rule under adversarial pressure). Structured formats (timed speeches, alternating sides, designated rebuttal turns) exist precisely to keep the clash on arguments; and because sides are often ASSIGNED, debate trains arguing a position independent of personal belief — an exercise in understanding both sides, directly strengthening the debater's grasp of the issue and their own eventual view.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Debate Skills\"",
-        "[TEMPLATE] Key idea 2 for \"Debate Skills\"",
-        "[TEMPLATE] Key idea 3 for \"Debate Skills\""
+        "Debate's constructive case is persuasive-writing-basics aloud: a clear claim, organized reasons with evidence, signposted delivery (from presentation-skills) inside strict time limits — time discipline forces the selectivity that flash fiction and presentations already trained",
+        "REBUTTAL is debate's signature skill: engage the opponent's ACTUAL argument — restate it accurately, then attack its evidence, its assumptions, or its premise-conclusion link — the productive twin of critical-listening's claim-tracking, which is what makes the cross-link between these two capstones real",
+        "The two cardinal rebuttal fouls: STRAWMAN (rebutting a distorted, weaker version of what was said — accurate restatement is the built-in antidote) and AD HOMINEM (attacking the speaker, not the argument — discussion-skills' idea-not-person rule holding under adversarial pressure)",
+        "Structured formats (timed alternating speeches, designated rebuttal turns, points of information) are not arbitrary ritual: they guarantee both sides equal floor, force listening during the opponent's speeches, and keep the clash on arguments rather than interruption contests",
+        "Debating ASSIGNED sides — arguing well for a position one may not hold — is the format's deepest training: it forces genuine understanding of both sides' best cases, inoculates against strawmanning (you must know the real opposing case to argue either side), and sharpens rather than corrupts the debater's eventual own view"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Debate Skills\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Winning a debate means talking over, interrupting, or out-shouting the opponent.",
+          "correction": "Structured debate exists precisely to remove volume and interruption from the contest — formats allocate equal timed floor to each side, and judges score argument quality, evidence, and rebuttal engagement; shouting over an opponent in formal debate loses points (and in informal argument, loses audiences), because the contest is between arguments, not decibels."
+        },
+        {
+          "misconception": "A good rebuttal attacks whatever is easiest to attack in the general vicinity of the opponent's position.",
+          "correction": "Rebutting a distorted or conveniently weakened version of the opponent's argument is the STRAWMAN fallacy — judges and attentive audiences notice that the actual argument still stands untouched; strong rebuttal begins by restating the opponent's argument accurately (often more strongly than they put it), then defeats THAT — the only rebuttal that actually moves the debate."
+        },
+        {
+          "misconception": "Arguing for an assigned position you don't believe is dishonest.",
+          "correction": "Assigned-side debate is a reasoning exercise, not a sincerity performance — the format is understood by all parties as exploring the best case for each side, which trains the ability to understand opposing positions from the inside (the antidote to strawmanning) and routinely deepens or refines the debater's own eventual view; the skill of constructing the best case for a position one doubts is also precisely the skill of stress-testing one's own beliefs."
+        },
+        {
+          "misconception": "Debate is won entirely in your own prepared speeches, so the opponent's speeches are time to rehearse yours.",
+          "correction": "Rebuttal — the scored engagement with what the opponent actually argued — is impossible without critically listening to their speeches (tracking claims, flagging unsupported assertions, spotting assumption gaps, exactly critical-listening's method); a debater who rehearses through the opponent's speech delivers pre-canned material that engages nothing, the debate-scale version of the reply-planning trap that has recurred since active-listening."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Debate Skills\""
+        "A rebuttal-anatomy diagram: restate accurately → choose the attack point (evidence / assumption / premise-conclusion link) → deliver with a signpost ('My opponent argues X. The evidence for X fails because...')",
+        "A foul-chart pairing strawman and ad hominem with their antidotes (accurate restatement; idea-not-person)",
+        "A debate-format timeline showing alternating timed speeches with the listening-and-noting work marked during the opponent's turns"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Debate Skills\"",
+        "setup": "In a school debate on 'Homework should be abolished,' the opposition argues: 'Studies show homework has little benefit for primary students, and it cuts into family time and sleep.' Evaluate three rebuttals by the proposition: (a) 'My opponent just hates working hard.' (b) 'My opponent wants children to learn nothing at all.' (c) 'My opponent cited studies on PRIMARY students — but this debate covers all ages, and the same research literature shows clear homework benefits in secondary school. The family-time concern argues for LIMITS, not abolition.'",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Evaluate (a): ad hominem — it attacks the speaker's supposed character and engages zero content of the argument; the opponent's evidence and reasoning stand completely untouched.",
+          "Evaluate (b): strawman — the opposition argued for abolishing homework, not learning; rebutting the distorted 'learn nothing' version leaves the actual argument (limited benefit + costs) intact, and attentive judges score it as a miss.",
+          "Evaluate (c) against the rebuttal anatomy: it RESTATES the actual argument accurately (primary-student studies, family time), attacks the evidence's SCOPE (primary findings generalized to all ages — an assumption gap), and turns the remaining premise (family time) toward a weaker conclusion than abolition (limits) — engaging every component of what was actually said.",
+          "Trace where (c) came from: critical listening during the opposition speech — tracking the claims, noting the primary-students qualifier, flagging the abolition-versus-limits gap — the rebuttal was BUILT from listening, not prepared in advance.",
+          "Extract the pattern: accurate restatement is both the ethical standard and the tactical advantage — the rebuttal that engages the real argument is the only one that removes it."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Debate Skills\""
+        "expected_outcome": "The learner correctly identifies (a) as ad hominem and (b) as strawman, dissects (c) against the rebuttal anatomy (restate → attack scope/assumption → redirect premise), and traces (c) to critical listening during the opponent's speech."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Classify rebuttals as ad hominem, strawman, or genuine engagement",
+          "Restate an opposing argument accurately before attacking it",
+          "Choose and justify the attack point (evidence / assumption / link) for a given argument",
+          "Construct a timed constructive case (claim + two evidenced reasons + signposts) for an assigned side"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with foul classification, progress to accurate restatement and attack-point selection, then to full timed constructive cases and live rebuttal construction from tracked claims.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Classification task",
+          "Rebuttal-construction task",
+          "Timed case task"
         ],
-        "bloom_alignment": "evaluate",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Debate Skills\""
+        "bloom_alignment": "Evaluate — learners must evaluate opposing arguments' evidence, assumptions, and logic in real time, and construct calibrated rebuttals and defenses under format constraints.",
+        "mastery_signal": "The learner can classify rebuttal fouls, restate opposing arguments accurately, construct anatomy-complete rebuttals, and deliver a timed signposted case for an assigned side, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Classification: is 'my opponent clearly hasn't read the research' ad hominem? | Rebuttal construction: restate and rebut a given argument, naming your attack point. | Timed case: deliver a 90-second case for an assigned position with two evidenced reasons."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Debate Skills\""
+        "Debate training is a proven developer of critical thinking, argumentation, and public speaking, with competitive formats from school level to international circuits",
+        "Professional life runs on informal debate — defending proposals, challenging plans, negotiating — where rebuttal-anatomy discipline and foul-avoidance directly transfer",
+        "Understanding strawman and ad hominem from the producer's side sharpens their detection as a consumer (completing the loop with critical-listening and media literacy)"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.discussion-skills",
         "eng.speaking.presentation-skills"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.speaking.non-verbal-communication",
       "concept_id": "eng.speaking.non-verbal-communication",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Non-Verbal Communication\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Non-Verbal Communication\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "Learners will be able to describe how body language, eye contact, gesture, and facial expression function as components of spoken communication, and use them congruently with their verbal message.",
+      "concept_summary": "NON-VERBAL COMMUNICATION is body language, eye contact, gesture, and facial expression as components of spoken communication — the visible channel running alongside the words and the prosody, completing the three-channel picture of face-to-face speech (words, voice, body). The channel's components each carry identifiable work: POSTURE and ORIENTATION signal engagement and openness (facing the interlocutor, leaning in — versus turned-away or closed positions); EYE CONTACT manages both connection and conversation traffic (its turn-taking role from conversation-skills, its audience-connection role from public speaking); GESTURE illustrates and emphasizes speech (iconic gestures sketching what words describe, beat gestures marking stress rhythm); and FACIAL EXPRESSION carries affect continuously. The governing principle is CONGRUENCE: when the verbal and nonverbal channels agree, the message is reinforced; when they conflict (saying 'I'm fine' with slumped posture and averted gaze), listeners tend to believe the nonverbal channel — the visible counterpart of the words-prosody mismatch from active-listening. Two essential cautions: popular claims that '93% of communication is nonverbal' are a MISREADING of narrow experiments (the Mehrabian studies concerned only feelings-attitude judgments under channel conflict, as Mehrabian himself has stressed — words carry the propositional content); and nonverbal norms are CULTURALLY VARIABLE (eye-contact expectations, gesture meanings, and personal distance differ substantially across cultures — via the cross-link to cross-cultural communication), so no single decoding dictionary is universal.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Non-Verbal Communication\"",
-        "[TEMPLATE] Key idea 2 for \"Non-Verbal Communication\"",
-        "[TEMPLATE] Key idea 3 for \"Non-Verbal Communication\""
+        "Face-to-face speech runs on three channels — words, voice (prosody), and body (the nonverbal channel) — with the nonverbal components each carrying identifiable work: posture/orientation (engagement), eye contact (connection and turn traffic), gesture (illustration and emphasis), facial expression (continuous affect)",
+        "Gesture divides usefully: ICONIC gestures sketch what the words describe (hands showing the size of the fish), while BEAT gestures mark the speech's stress rhythm (the hand tapping on stressed syllables — the visible twin of sentence stress)",
+        "CONGRUENCE is the governing principle: agreeing channels reinforce the message; conflicting channels ('I'm fine' with slumped posture and averted gaze) get resolved by listeners in the nonverbal channel's favor — the visible counterpart of active-listening's words-prosody mismatch",
+        "The '93% of communication is nonverbal' claim is a misreading: the underlying Mehrabian experiments concerned only feelings-and-attitude judgments under deliberate channel conflict, as Mehrabian himself has emphasized — words carry the propositional content, and no lecture was ever delivered by posture alone",
+        "Nonverbal norms are culturally variable — eye-contact expectations (directness as respect versus disrespect), gesture meanings (emblems that are benign in one culture and offensive in another), and comfortable personal distance all differ across cultures — so decoding must be context-sensitive, not dictionary-based (previewing cross-cultural communication)"
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Non-Verbal Communication\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "93% of communication is nonverbal, so words barely matter.",
+          "correction": "The famous 93% figure misreads narrow experiments (Mehrabian's studies of single-word feelings judgments under deliberate word-tone-face conflict, a limitation Mehrabian himself has stressed) — the propositional content of communication travels overwhelmingly in the words, as any phone call or book proves; the accurate claim is that nonverbal channels dominate specifically for AFFECT judgments when channels conflict, which is important but far narrower."
+        },
+        {
+          "misconception": "Body language is a precise code — crossed arms mean defensiveness, touching the nose means lying.",
+          "correction": "Nonverbal signals are probabilistic, context-dependent, and multiply-caused — crossed arms may mean cold, comfort, or habit; no single cue reliably indicates lying (decades of deception research show even trained observers barely beat chance on single cues) — competent reading uses clusters of signals, changes from a person's baseline, and context, never a one-cue dictionary."
+        },
+        {
+          "misconception": "Nonverbal norms are universal — good eye contact and firm gestures mean the same everywhere.",
+          "correction": "Nonverbal conventions vary substantially across cultures: sustained direct eye contact reads as engaged confidence in some cultures and as disrespect in others; specific hand emblems are friendly in one country and gravely offensive in another; comfortable conversational distance varies by culture — treating one culture's norms as universal produces systematic misreadings (the cross-cultural communication concept develops this fully)."
+        },
+        {
+          "misconception": "Since nonverbal behavior is natural, it can't or shouldn't be deliberately managed.",
+          "correction": "Nonverbal congruence is partly manageable and worth managing — facing the interlocutor, uncrossing arms, allowing natural gesture, matching expression to message — not as fakery but as removing accidental noise: a speaker whose habitual slouch contradicts their genuine enthusiasm is being mis-read, and aligning the visible channel with the actual intended message is clarity work, exactly like pronunciation."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Non-Verbal Communication\""
+        "A three-channel diagram (words / voice / body) with the congruence rule and the conflict-resolution arrow toward the nonverbal channel",
+        "A gesture-type card: iconic (hands sketching the fish) versus beat (hand marking stressed syllables)",
+        "A cluster-versus-single-cue reading card: one crossed-arm cue (ambiguous) versus a cluster with baseline change (informative)"
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Non-Verbal Communication\"",
+        "setup": "A team member says 'Sure, I'm happy to take that task' while leaning away, arms crossed, eyes on the table, in a flat voice. Analyze the three channels, apply the congruence principle, and determine the appropriate response — including why a one-cue 'crossed arms = resistance' reading would be inadequate.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Separate the channels: words = clear agreement ('happy to take it'); voice = flat prosody (no enthusiasm marking); body = lean-away, crossed arms, averted gaze — a cluster of low-engagement signals.",
+          "Apply the congruence principle: the verbal channel conflicts with BOTH the vocal and visible channels — and under channel conflict, listeners reasonably weight the nonverbal side for the affect judgment: the agreement is likely reluctant.",
+          "Apply the cluster-and-baseline discipline: no single cue would justify the reading (crossed arms alone might be temperature or habit) — the inference rests on the CLUSTER (posture + gaze + prosody together) and, if known, a change from this person's usual animated baseline.",
+          "Note the scope limit (the anti-93% point): the nonverbal channels signal the affect (reluctance), but the propositional content still came from the words — nothing in the posture says WHICH task or what the reluctance is about; the body flags THAT something is off, not WHAT.",
+          "Choose the response: an active-listening check that opens the door without accusing — 'You said yes, but I want to check: is the timing on this actually workable for you?' — verifying the channel conflict rather than either ignoring it or over-reading it."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Non-Verbal Communication\""
+        "expected_outcome": "The learner separates the three channels, resolves the conflict toward the nonverbal cluster for the affect judgment while crediting the words with the content, avoids one-cue decoding, and composes a verification response rather than an accusation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "Separate the word/voice/body channels in a described interaction and judge congruence",
+          "Classify gestures as iconic or beat in described speech",
+          "Critique a one-cue body-language reading and rebuild it on cluster-and-baseline evidence",
+          "Compose a verification response to a described channel conflict"
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with clear congruent/conflicting channel judgments, progress to gesture classification and cluster reasoning, then to full three-channel analyses with composed verification responses.",
+        "suggested_count": 6
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "Channel-analysis task",
+          "Classification task",
+          "Critique task"
         ],
-        "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Non-Verbal Communication\""
+        "bloom_alignment": "Understand — learners must comprehend the nonverbal channel's components, the congruence principle and its scope limits, and the cluster/cultural cautions on decoding.",
+        "mastery_signal": "The learner can analyze channel congruence, correctly scope what nonverbal signals do and don't convey, and avoid one-cue and culture-blind decoding, at 75% accuracy or better.",
+        "assessment_note": "Sample item shapes: Channel analysis: are the channels congruent in a described exchange? | Classification: is hands-sketching-a-spiral iconic or beat? | Critique: what's wrong with 'she touched her nose, so she's lying'?"
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Non-Verbal Communication\""
+        "Reading channel congruence supports management, negotiation, teaching, and care work, where verbal assent with nonverbal reluctance is a daily and consequential pattern",
+        "Presenters and interviewees benefit directly from congruence management — aligning posture, gesture, and expression with their intended message",
+        "Cross-cultural work and travel make norm-variability awareness practically essential, from eye-contact calibration to gesture safety"
       ],
       "prerequisite_review_triggers": [
         "eng.speaking.conversation-skills"
-      ]
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "d298f09",
+        "kg_build_date": "2026-07-03",
+        "domain_version": "1.0.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-04T02:30:00Z",
+        "generation_commit": "0157fd1",
+        "source_references": [
+          "CEFR Companion Volume — Spoken Production/Interaction Scales",
+          "Cambridge English Speaking Skills"
+        ]
+      }
     },
     {
       "id": "asset.eng.composition.audience-and-purpose",
