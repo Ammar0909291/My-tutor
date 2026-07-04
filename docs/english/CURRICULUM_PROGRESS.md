@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 5/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 6/12 domains complete
 
 ## Latest Commit (update after each session)
-`cfcb7b0` — feat(english): author Reading domain (eng.reading, 16 concepts)
+(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Writing domain (eng.writing, 20 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -41,15 +41,15 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 03 | Vocabulary Development | eng.vocab | 20 | draft ✓ | chapters/vocab.md ✓ | Complete |
 | 04 | Grammar & Syntax | eng.grammar | 43 | draft ✓ | chapters/grammar.md ✓ | Complete — largest domain |
 | 05 | Reading | eng.reading | 16 | draft ✓ | chapters/reading.md ✓ | Complete |
-| 06 | Writing | eng.writing | 20 | placeholder | — | **NEXT** |
-| 07 | Listening | eng.listening | 8 | placeholder | — | Smallest domain |
+| 06 | Writing | eng.writing | 20 | draft ✓ | chapters/writing.md ✓ | Complete |
+| 07 | Listening | eng.listening | 8 | placeholder | — | Smallest domain — **NEXT** |
 | 08 | Speaking | eng.speaking | 10 | placeholder | — | |
 | 09 | Composition & Rhetoric | eng.composition | 16 | placeholder | — | Pre-university layer |
 | 10 | Literature Fundamentals | eng.literature | 25 | placeholder | — | |
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 5/12 domains complete · 107/216 assets drafted · 109/216 remaining (49.5%)
+**Summary:** 6/12 domains complete · 127/216 assets drafted · 89/216 remaining (58.8%)
 
 ## Completed Concepts Per Domain
 
@@ -156,6 +156,28 @@ structured review (16/16, given the domain's smaller size) + 18
 independent verification checks against standard reading-science
 references, 0 defects found — PASS; see eng.reading-validation-report.md.)
 
+### eng.writing (20 concepts) — COMPLETE
+All 20 concepts authored: handwriting-and-formation, spelling-strategies,
+sentence-writing, paragraph-structure, topic-sentences, supporting-details,
+transitions-and-cohesion, narrative-writing, descriptive-writing,
+expository-writing, persuasive-writing-basics, the-writing-process,
+outlining-and-planning, drafting, revising-for-content,
+editing-and-proofreading, essay-structure, thesis-statements,
+citations-and-referencing, creative-writing-forms
+(4 chunks: 6+5+5+4, deterministic graph order — the domain proceeds from
+the handwriting/spelling motor-and-encoding foundation through the
+sentence→paragraph composition sequence, splits at transitions-and-cohesion
+into the four writing-purpose branches (narrative/descriptive/expository/
+persuasive), runs the five-stage recursive writing-process sequence, and
+closes through the essay-structure/thesis/citations academic capstone
+alongside the creative-writing-forms creative capstone. The domain's
+signature design: reading-domain skills mirrored in productive form
+(main-idea→paragraph-unity, calibration test→topic-sentences/thesis,
+signal words→transitions). Zero pre-merge correction cycles required.
+Pedagogical audit: 100% verification sweep across all 20 concepts (22
+checks, 0 defects found) + 7/20 concepts fully audited (35%) — PASS;
+see eng.writing-validation-report.md.)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -217,9 +239,11 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.reading)
+## Next Planned Domain (after eng.writing)
 
-**eng.writing** — Writing · 20 concepts. Rationale: it is next in the
-domain's established topological production order (phonics → phonetics →
-vocab → grammar → reading → writing → ...), and eng.reading's completion
-satisfies its cross-domain prerequisite dependencies.
+**eng.listening** — Listening · 8 concepts (the smallest domain).
+Rationale: it is next in the domain's established topological production
+order (phonics → phonetics → vocab → grammar → reading → writing →
+listening → ...), and its cross-domain prerequisite
+(`eng.phonetics.prosody`) has been satisfied since eng.phonetics
+completed.
