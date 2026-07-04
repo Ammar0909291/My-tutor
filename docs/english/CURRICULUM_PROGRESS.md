@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 10/12 domains complete
 
 ## Latest Commit (update after each session)
-(pending — updated in the dashboard-refresh follow-up commit)
+`f672092` — feat(english): author Literature Fundamentals domain (eng.literature, 25 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
