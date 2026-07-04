@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 8/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 9/12 domains complete
 
 ## Latest Commit (update after each session)
-`fcc6ab7` — feat(english): author Speaking domain (eng.speaking, 10 concepts)
+(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Composition & Rhetoric domain (eng.composition, 16 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -44,12 +44,12 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 06 | Writing | eng.writing | 20 | draft ✓ | chapters/writing.md ✓ | Complete |
 | 07 | Listening | eng.listening | 8 | draft ✓ | chapters/listening.md ✓ | Complete — smallest domain |
 | 08 | Speaking | eng.speaking | 10 | draft ✓ | chapters/speaking.md ✓ | Complete |
-| 09 | Composition & Rhetoric | eng.composition | 16 | placeholder | — | Pre-university layer — **NEXT** |
-| 10 | Literature Fundamentals | eng.literature | 25 | placeholder | — | |
+| 09 | Composition & Rhetoric | eng.composition | 16 | draft ✓ | chapters/composition.md ✓ | Complete — pre-university layer |
+| 10 | Literature Fundamentals | eng.literature | 25 | placeholder | — | **NEXT** |
 | 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 8/12 domains complete · 145/216 assets drafted · 71/216 remaining (67.1%)
+**Summary:** 9/12 domains complete · 161/216 assets drafted · 55/216 remaining (74.5%)
 
 ## Completed Concepts Per Domain
 
@@ -209,6 +209,27 @@ Zero pre-merge correction cycles. Pedagogical audit: 100% full
 structured review (10/10) + 17 verification checks, 0 defects — PASS;
 see eng.speaking-validation-report.md.)
 
+### eng.composition (16 concepts) — COMPLETE
+All 16 concepts authored: audience-and-purpose, claim-evidence-reasoning,
+argumentation-basics, counterargument-and-rebuttal, logical-fallacies,
+rhetorical-appeals, rhetorical-devices, figurative-language-in-composition,
+style-voice-and-tone, persuasive-techniques, rhetorical-analysis,
+comparative-essay-writing, research-paper-writing,
+academic-writing-conventions, plagiarism-and-citation-ethics,
+editing-for-style
+(3 chunks: 6+5+5, deterministic graph order — the audience-and-purpose
+gateway, parallel argumentation (claim-evidence-reasoning →
+argumentation-basics → counterargument/fallacies) and appeals
+(ethos-pathos-logos → devices → figurative language → style-voice-tone)
+tracks, converging at persuasive-techniques and rhetorical-analysis, then
+the academic capstone chain (comparative essay, research paper, academic
+conventions, citation ethics, editing-for-style). Grounded in the KG's own
+cited references (Aristotle's Rhetoric, Corbett & Connors); Toulmin's
+warrant, Howard's patchwriting, and the Fowler/Williams style tradition
+all correctly attributed. Zero pre-merge correction cycles. Pedagogical
+audit: 100% full structured review (16/16) + 20 verification checks,
+0 defects — PASS; see eng.composition-validation-report.md.)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -270,10 +291,10 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.speaking)
+## Next Planned Domain (after eng.composition)
 
-**eng.composition** — Composition & Rhetoric · 16 concepts (the
-pre-university layer). Rationale: it is next in the domain's established
-topological production order (... → speaking → composition → ...), and
-its cross-domain prerequisites are satisfied by the completed writing and
-reading domains.
+**eng.literature** — Literature Fundamentals · 25 concepts (the largest
+remaining domain). Rationale: it is next in the domain's established
+topological production order (... → composition → literature → ...), and
+its cross-domain prerequisites are satisfied by the completed reading and
+writing domains.
