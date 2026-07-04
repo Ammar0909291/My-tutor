@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION COMPLETE — 12/12 domains complete (216/216 concepts, 100%)
 
 ## Latest Commit (update after each session)
-(pending — updated in the dashboard-refresh follow-up commit)
+`42adc41` — feat(english): author Advanced Communication domain (eng.communication, 12 concepts) — ENGLISH SUBJECT COMPLETE
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
