@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 9/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 10/12 domains complete
 
 ## Latest Commit (update after each session)
-`e70a3a7` — feat(english): author Composition & Rhetoric domain (eng.composition, 16 concepts)
+(pending — updated in the dashboard-refresh follow-up commit)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -45,11 +45,11 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 07 | Listening | eng.listening | 8 | draft ✓ | chapters/listening.md ✓ | Complete — smallest domain |
 | 08 | Speaking | eng.speaking | 10 | draft ✓ | chapters/speaking.md ✓ | Complete |
 | 09 | Composition & Rhetoric | eng.composition | 16 | draft ✓ | chapters/composition.md ✓ | Complete — pre-university layer |
-| 10 | Literature Fundamentals | eng.literature | 25 | placeholder | — | **NEXT** |
-| 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | Survey level only |
+| 10 | Literature Fundamentals | eng.literature | 25 | draft ✓ | chapters/literature.md ✓ | Complete — largest remaining domain |
+| 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | **NEXT** — survey level only |
 | 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
 
-**Summary:** 9/12 domains complete · 161/216 assets drafted · 55/216 remaining (74.5%)
+**Summary:** 10/12 domains complete · 186/216 assets drafted · 30/216 remaining (86.1%)
 
 ## Completed Concepts Per Domain
 
@@ -230,6 +230,31 @@ all correctly attributed. Zero pre-merge correction cycles. Pedagogical
 audit: 100% full structured review (16/16) + 20 verification checks,
 0 defects — PASS; see eng.composition-validation-report.md.)
 
+### eng.literature (25 concepts) — COMPLETE
+All 25 concepts authored: narrative-elements, plot-structure,
+character-development, setting-and-atmosphere, point-of-view,
+theme-and-message, literary-devices-overview, metaphor-and-simile,
+symbolism, irony, foreshadowing-and-suspense, imagery, poetry-basics,
+poetic-forms, meter-and-rhyme, drama-basics, dramatic-structure,
+prose-fiction, prose-nonfiction, short-story-study, novel-study,
+literary-genres-overview, literary-periods-survey,
+literary-criticism-intro, comparative-literature-intro
+(5 chunks: 5+5+5+5+5, deterministic graph order — the narrative-elements
+gateway and four element concepts; theme → the device track (metaphor →
+symbolism/imagery, irony, foreshadowing); the poetry track (basics →
+forms → meter-and-rhyme); the drama track (basics → dramatic-structure);
+the prose track (fiction, nonfiction) feeding the whole-work capstones
+(short-story-study, novel-study); the terminal survey chain (genres →
+periods → criticism → comparative literature). Grounded in the KG's own
+cited references (Abrams & Harpham, Norton Anthology); Poe's unity of
+effect, Freytag's pyramid, Aristotle's peripeteia/anagnorisis, Wimsatt &
+Beardsley's fallacies, Fish's interpretive communities, Goethe's 1827
+Weltliteratur all correctly attributed; a single running micro-narrative
+(the Amara drought story) threads every worked example. Zero pre-merge
+correction cycles. Pedagogical audit: 100% full structured review (25/25)
++ 25 verification checks, 0 defects — PASS; see
+eng.literature-validation-report.md.)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -291,10 +316,10 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.composition)
+## Next Planned Domain (after eng.literature)
 
-**eng.literature** — Literature Fundamentals · 25 concepts (the largest
-remaining domain). Rationale: it is next in the domain's established
-topological production order (... → composition → literature → ...), and
-its cross-domain prerequisites are satisfied by the completed reading and
-writing domains.
+**eng.linguistics** — Linguistics Foundations · 18 concepts (survey
+level). Rationale: it is next in the domain's established topological
+production order (... → literature → linguistics → communication), and
+its cross-domain prerequisites are satisfied by the completed grammar,
+phonetics, and vocabulary domains.
