@@ -323,6 +323,13 @@
   validator on every push/PR. R6 → Mitigated (CI half). Ratchet exercised
   in all 3 modes locally; 6/6 KGs PASS; vitest 506/507. Test scaffolding
   only — no production code.
+  (6) 2026-07-04 — `docs/architecture/WAVE_0_APPROVAL_CHECKLIST.md`
+  created: the G2 approval instrument — 21 gated items (W0-1…W5-3, plus
+  W5-4 already done) from
+  ADRs 05-14 + R20 + P10 GATED seams, each with stable ID, source,
+  dependencies, approval checkbox. NOTHING approved; checking a box +
+  committing (`governance: approve <IDs>`) is the approval act. Use these
+  IDs in future implementation commits.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

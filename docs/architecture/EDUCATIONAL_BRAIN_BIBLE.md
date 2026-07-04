@@ -1042,6 +1042,7 @@ Assessment) — not due yet.
 | `EDUCATIONAL_BRAIN_BIBLE.md` (this file) | Top-level synthesis, single source of truth, entry point |
 | `ARCHITECTURE_COMPLETION_REPORT_V1.md` | Final v1.0 completion record + cross-ADR dependency graph + dependency-ordered implementation sequence (Waves 0–5); synthesis only — where it and this Bible disagree, this Bible wins |
 | `VALIDATION_FRAMEWORK_P10.md` | Concrete specification of the P10 fixture-replay validation framework (Wave 1b): three test tiers, LLM transcript seam, four assertion surfaces, 15-fixture frozen set v1, CI wiring plan |
+| `WAVE_0_APPROVAL_CHECKLIST.md` | The per-item implementation approval instrument: every gated item (W0-1…W5-4) with source ADR, dependencies, and an approval checkbox — nothing on it is approved by default; checking a box + committing IS the G2 approval record |
 | `EDUCATIONAL_BRAIN_V1.md` | Detailed freeze narrative + system diagram this Bible's §3/§5 summarize |
 | `ENGINE_REFERENCE.md` | Full per-engine contract detail behind this Bible's §3/§4 |
 | `DATA_FLOW.md` | Full step-by-step trace behind this Bible's §6.1–6.6 |
@@ -1304,3 +1305,15 @@ Assessment) — not due yet.
   touched. Local validation: ratchet exercised in all three modes, YAML
   parsed, vitest green, six/six KG validations PASS via the exact
   workflow loop.
+- **2026-07-04 — Wave 0 approval checklist created (integration-prep
+  iteration 6).** `WAVE_0_APPROVAL_CHECKLIST.md` — the G2 approval
+  instrument: all 21 gated implementation items consolidated from ADRs
+  05–14 migration sections, the completion report's five waves, R20
+  (English registration, W0-2), and the P10 GATED seams (W1-5/W1-6),
+  each with stable ID, source citation, dependency column, and an
+  unchecked approval box. Records the two Wave 0 gates' live status
+  (mathematics KG frozen; campaign 1.0.0-draft → G1 not met; G2 no
+  approvals). W5-4 (CI validator wiring) marked done pre-gate. §11
+  document map updated. Nothing approved by this document's existence;
+  checking a box + committing is the approval act. No production code
+  changed.
