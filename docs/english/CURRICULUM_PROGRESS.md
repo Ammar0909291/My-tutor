@@ -7,10 +7,10 @@
 with the Mathematics and Physics production campaigns. Do NOT touch
 Mathematics or Physics files from an English session, and vice versa.
 
-## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 10/12 domains complete
+## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 11/12 domains complete
 
 ## Latest Commit (update after each session)
-`f672092` — feat(english): author Literature Fundamentals domain (eng.literature, 25 concepts)
+(pending — updated in the dashboard-refresh follow-up commit)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
@@ -46,10 +46,10 @@ English KG sha256: see `docs/english/kg/graph.json`'s manifest entry in
 | 08 | Speaking | eng.speaking | 10 | draft ✓ | chapters/speaking.md ✓ | Complete |
 | 09 | Composition & Rhetoric | eng.composition | 16 | draft ✓ | chapters/composition.md ✓ | Complete — pre-university layer |
 | 10 | Literature Fundamentals | eng.literature | 25 | draft ✓ | chapters/literature.md ✓ | Complete — largest remaining domain |
-| 11 | Linguistics Foundations | eng.linguistics | 18 | placeholder | — | **NEXT** — survey level only |
-| 12 | Advanced Communication | eng.communication | 12 | placeholder | — | Capstone domain |
+| 11 | Linguistics Foundations | eng.linguistics | 18 | draft ✓ | chapters/linguistics.md ✓ | Complete — survey level |
+| 12 | Advanced Communication | eng.communication | 12 | placeholder | — | **NEXT** — capstone domain |
 
-**Summary:** 10/12 domains complete · 186/216 assets drafted · 30/216 remaining (86.1%)
+**Summary:** 11/12 domains complete · 204/216 assets drafted · 12/216 remaining (94.4%)
 
 ## Completed Concepts Per Domain
 
@@ -255,6 +255,31 @@ correction cycles. Pedagogical audit: 100% full structured review (25/25)
 + 25 verification checks, 0 defects — PASS; see
 eng.literature-validation-report.md.)
 
+### eng.linguistics (18 concepts) — COMPLETE
+All 18 concepts authored: what-is-linguistics, phonology-intro,
+morphology-intro, syntax-theory-intro, semantics-intro, pragmatics-intro,
+discourse-analysis-intro, sociolinguistics-intro,
+historical-linguistics-intro, language-families,
+language-acquisition-intro, psycholinguistics-intro,
+applied-linguistics-intro, dialectology, bilingualism-and-multilingualism,
+translation-studies-intro, corpus-linguistics-intro,
+computational-linguistics-intro
+(4 chunks: 5+5+4+4, deterministic graph order — the what-is-linguistics
+gateway and levels tower (phonology → morphology → syntax → semantics),
+pragmatics → discourse, the society wing (sociolinguistics → dialectology)
+and history wing (historical linguistics → language families), the mind
+wing (acquisition → psycholinguistics), and the applied terminal chain
+(applied linguistics → bilingualism → translation studies; corpus →
+computational). Grounded in the KG's own cited references (Fromkin/
+Rodman/Hyams, Yule); Hockett's design features, Grimm's Law, Grice's
+maxims, Labov's variable method, Berko's wug test, Nida's equivalence,
+Ferguson's diglossia, Fishman's transmission priority all correctly
+attributed; one running specimen utterance ('Could you unlock the
+gate?', continuous with the literature domain's Amara narrative)
+dissected at every level. Zero pre-merge correction cycles. Pedagogical
+audit: 100% full structured review (18/18) + 24 verification checks,
+0 defects — PASS; see eng.linguistics-validation-report.md.)
+
 ## Workflow (mirrors Physics exactly, once teaching-asset production begins)
 
 1. **Extract domain slice** — filter `graph.json` concepts by `eng.{prefix}.`
@@ -316,10 +341,10 @@ Biology, and Computer Science.
    Science, or the Educational Brain
 9. Push ONLY to `claude/my-tutor-foundation-KDSUO`
 
-## Next Planned Domain (after eng.literature)
+## Next Planned Domain (after eng.linguistics)
 
-**eng.linguistics** — Linguistics Foundations · 18 concepts (survey
-level). Rationale: it is next in the domain's established topological
-production order (... → literature → linguistics → communication), and
-its cross-domain prerequisites are satisfied by the completed grammar,
-phonetics, and vocabulary domains.
+**eng.communication** — Advanced Communication · 12 concepts (the final
+domain — the English campaign completes with it). Rationale: it is last
+in the domain's established topological production order, and its
+cross-domain prerequisites are satisfied by the completed speaking,
+writing, composition, and linguistics domains.
