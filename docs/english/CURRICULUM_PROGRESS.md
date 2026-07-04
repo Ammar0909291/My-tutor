@@ -10,7 +10,7 @@ Mathematics or Physics files from an English session, and vice versa.
 ## Status: TEACHING ASSET PRODUCTION IN PROGRESS — 8/12 domains complete
 
 ## Latest Commit (update after each session)
-(pending — updated in the dashboard-refresh follow-up commit) — feat(english): author Speaking domain (eng.speaking, 10 concepts)
+`fcc6ab7` — feat(english): author Speaking domain (eng.speaking, 10 concepts)
 
 ## Knowledge Graph
 | File | Concepts | Domains | Status |
