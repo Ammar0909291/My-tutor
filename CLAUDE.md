@@ -330,6 +330,21 @@
   dependencies, approval checkbox. NOTHING approved; checking a box +
   committing (`governance: approve <IDs>`) is the approval act. Use these
   IDs in future implementation commits.
+  (7) 2026-07-04 — **LOOP STOPPED at its designed terminal state.** After
+  a fresh repo read (no pipeline movement past d622336-era commits; docs
+  verified in sync), no meaningful non-implementation work remains: every
+  remaining task requires production implementation (Tier 2 tests /
+  transcript harness / fixtures / all 21 checklist items), the Canonical
+  KG v1 freeze (G1), explicit user approval (G2), or an external event
+  (first hosted CI run to capture `scripts/ci/tsc-baseline.txt`).
+  Preparation readiness is 100% of what is reachable without those gates.
+  Do NOT restart this loop to hunt for tasks — resume work only when one
+  of these unblocks: (a) pipeline pushes new KG/asset output → re-run
+  6-subject validation + doc sync; (b) owner checks boxes in
+  WAVE_0_APPROVAL_CHECKLIST.md → implement approved items in dependency
+  order; (c) first hosted CI run → commit the ratchet baseline; (d) a
+  directive explicitly re-permits building test scaffolding → build Tier
+  2 tests + transcript harness per VALIDATION_FRAMEWORK_P10.md §7.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/
