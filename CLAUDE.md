@@ -27,9 +27,29 @@
   - computer_science → `docs/computer-science/kg/graph.json` (119 concepts, prefix `cs.`)
   - biology → `docs/biology/kg/graph.json` (89 concepts, prefix `bio.`) — shipped 2026-06-29,
     see `docs/biology/VALIDATION_REPORT.md` for full validator/smoke-test/regression evidence
+  - english → `docs/english/kg/graph.json` (216 concepts, 12 domains, prefix `eng.`) — authored by
+    the Curriculum Production Pipeline 2026-07-03/04, validator PASS 216/216 reachable, but **NOT
+    yet registered** in the runtime registry (`knowledgeGraph.ts` `SUBJECT_ADAPTERS`/
+    `ID_PREFIX_TO_SUBJECT` have 5 subjects; `case 'english'` still routes to the legacy static
+    `ENGLISH_KNOWLEDGE_GRAPH`). Registration is the standard 2-line change but is production code
+    → gated on explicit user approval (Wave 0 approval item, recorded 2026-07-04).
+  - Chemistry count correction (2026-07-04): 186 concepts per validator + dashboard (was
+    recorded as 187 here).
   - Canonical 10-field schema only: `id, name, requires, unlocks, cross_links, difficulty, bloom,
     mastery_threshold, estimated_hours, description` — never add `domain`/`concept_type` to the
     JSON; they're derived at runtime by `inferDomain()`/`inferConceptType()`.
+  - **Curriculum Production Pipeline status (read from repo 2026-07-04, commit d622336):**
+    Mathematics KG **v1.0.1 status=frozen** (first subject to reach the freeze state ADR 06's
+    gate checks); Physics teaching assets 100% (194/194), English 100% (216/216), Mathematics
+    41.7% (379/908, 8/24 domains), Chemistry/Biology/CS not started. Campaign overall
+    `1.0.0-draft`, `subjects_complete: 0` — the full Canonical Subject Freeze has NOT been
+    declared, so implementation Wave 0 remains closed (and user approval is still required
+    regardless). Authoritative dashboards: `docs/CURRICULUM_PROGRESS.md` (auto-generated),
+    `docs/CANONICAL_CURRICULUM_MANIFEST.json` (includes per-KG sha256 + status). Pipeline asset
+    format (`docs/{subject}/teaching-assets/assets.json`: concept-keyed, carries `provenance`,
+    `status`, worked-example/assessment/visual blueprints) is compatible with ADR 14's
+    AssetIdentity catalogue — it is a curated *source* for ADR 14 Phase 2 population, not a
+    competing asset model.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
@@ -287,6 +307,15 @@
   ratchet (fail only on count increase), not zero-error. Note:
   `prisma generate` fails on engine download in sandboxed envs
   (ECONNRESET) — type baselines differ by environment.
+  (4) 2026-07-04 — Curriculum Pipeline sync at d622336: English KG
+  authored (216 concepts, PASS) but NOT registered in runtime registry →
+  R20 + Wave 0 approval item; Mathematics KG v1.0.1 FROZEN (first
+  subject at ADR 06's freeze state; campaign still 1.0.0-draft → Wave 0
+  gate not met); all 6 KGs re-validated PASS; pipeline asset format
+  confirmed compatible with ADR 14 (curated source for Phase 2, not a
+  competing model); superseded banners on SYSTEM_AUDIT.md +
+  project-memory/NEXT_ACTION.md; P10 spec CI step 4 corrected to 6
+  subjects with file-path CLI usage.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

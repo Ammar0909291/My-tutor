@@ -1,5 +1,13 @@
 # My Tutor — System Audit
 
+> **⚠️ HISTORICAL SNAPSHOT (superseded 2026-07-04).** This audit predates
+> the Educational Brain architecture phase and several findings are no
+> longer true — e.g. "Zero tests" (a 39-file vitest suite now exists and
+> is green, 506/507) and the tsc error count (measured 662 with an
+> ungenerated Prisma client on 2026-07-02, see
+> `docs/architecture/VALIDATION_FRAMEWORK_P10.md` §1). For current state
+> read `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` first.
+
 **Date:** 2026-06-16  
 **Branch:** `claude/my-tutor-foundation-KDSUO`  
 **Auditor:** Claude Code (read-only, no code changes)

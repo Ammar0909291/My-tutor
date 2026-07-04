@@ -202,10 +202,13 @@ production runtime; buildable as integration-prep):
 3. `npx vitest run` (Tiers 1–2) — hard gate; verified green (506/507,
    ~10 s) and independent of DB and generated client, so this gate is
    deployable immediately with zero flake risk from infrastructure.
-4. `npx tsx scripts/validate-knowledge-graph.ts` for all 5 shipped
-   subjects (**closes R6** — the validator currently has zero CI wiring;
-   read-only over `docs/*/kg/graph.json`, so it cannot interfere with the
-   Curriculum Production Pipeline)
+4. KG validator for every shipped subject (6 as of 2026-07-04 — English
+   joined; the CLI takes a file path and defaults to mathematics):
+   `for s in mathematics physics chemistry biology computer-science english; do
+   npx tsx scripts/validate-knowledge-graph.ts docs/$s/kg/graph.json; done`
+   (**closes R6** — the validator currently has zero CI wiring; read-only
+   over `docs/*/kg/graph.json`, so it cannot interfere with the Curriculum
+   Production Pipeline). All 6 graphs verified PASS on 2026-07-04.
 5. Tier 3a job: Postgres service container → `prisma db push` → seed →
    `next build && next start` → fixture replay
 
