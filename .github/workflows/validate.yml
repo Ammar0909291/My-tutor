@@ -1,0 +1,51 @@
+# CI validation gate — VALIDATION_FRAMEWORK_P10.md §6 steps 1–4.
+# Test scaffolding only: no production runtime is built or deployed here.
+# Step 5 (Tier 3a fixture replay with a Postgres service) lands with the
+# first fixtures per the spec; it is intentionally absent from this file.
+name: validate
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  validate:
+    name: types-ratchet, vitest, knowledge-graphs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # postinstall runs `prisma generate` (needs network to the Prisma
+      # engine CDN — available on hosted runners).
+      - name: Install dependencies
+        run: npm ci
+
+      # Fails only if the type-error count increases over the committed
+      # baseline (scripts/ci/tsc-baseline.txt). Bootstrap mode (no baseline
+      # committed yet) reports the count and passes — capture the baseline
+      # from this step's log on the first green run.
+      - name: Type-error ratchet
+        run: bash scripts/ci/tsc-ratchet.sh
+
+      # Hard gate. Verified green and independent of DB and generated
+      # Prisma client (506/507, ~10 s as of 2026-07-02).
+      - name: Unit & contract tests (vitest)
+        run: npx vitest run
+
+      # Consumption-side validation of every shipped Canonical Knowledge
+      # Graph (read-only over docs/*/kg/graph.json — cannot interfere with
+      # the Curriculum Production Pipeline). Closes risk R6.
+      - name: Knowledge Graph validator (all shipped subjects)
+        run: |
+          set -e
+          for s in mathematics physics chemistry biology computer-science english; do
+            echo "=== ${s} ==="
+            npx tsx scripts/validate-knowledge-graph.ts "docs/${s}/kg/graph.json"
+          done

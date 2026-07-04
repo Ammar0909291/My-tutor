@@ -755,7 +755,7 @@ threshold) are already covered by ADR 05, 07, and 10.
 | R3 | `mastery_threshold` authored with real per-concept variation (0.35–0.95) has zero runtime effect; every engine reads a flat constant instead | **Already realized in production** | ADR 05 Finding 7 | PROPOSED Phase 1/2 in ADR 05, blocked on KG v1 freeze |
 | R4 | Two generations of curriculum/concept-graph representation coexist unsynchronized (file-based KG vs. `Eb*` DB tables) | Open, documented, not scheduled for resolution | Finding 5, `DATA_FLOW.md` §2 | None proposed yet — explicitly out of scope until an ADR names it |
 | R5 | Dormant `Eb*` Educational Brain Decision Pipeline could silently diverge from the canonical pipeline's data model if either evolves without the other in mind | Open, low likelihood while flag stays off | `ARCHITECTURE_DECISIONS.md` Part 2 | Mitigated by strict non-dependency rule (`DEPENDENCY_RULES.md`); re-evaluate before any flag-flip |
-| R6 | No CI wiring for the Knowledge Graph Validator — a malformed `graph.json` could reach runtime undetected | Open | ADR 06 finding | PROPOSED 4-part gate in ADR 06, blocked on KG v1 freeze |
+| R6 | No CI wiring for the Knowledge Graph Validator — a malformed `graph.json` could reach runtime undetected | **Mitigated 2026-07-04** — `.github/workflows/validate.yml` runs the validator on all 6 shipped subjects on every push/PR (plus vitest and a type-error ratchet); pending confirmation of the first green hosted run. The runtime load-time gate half of the risk remains PROPOSED (ADR 06, blocked on KG v1 freeze) | ADR 06 finding; `VALIDATION_FRAMEWORK_P10.md` §6 | CI validator wiring built (steps 1–4); ADR 06 load-time gate still blocked on KG v1 freeze |
 | R7 | Five non-unified mastery/progression vocabularies risk further silent drift the longer they're not bridged | Open, partially mitigated by documentation | ADR 07 Finding 8 | PROPOSED mapping table, unexecuted |
 | R8 | No centrally specified scalability target (learner count, sharding, caching tier) | Open | §6.10 | To be specified across ADR 10 (Memory) and ADR 13 (AI cost) |
 | R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **RESOLVED, ADR 13** — `EvidenceRecord` is Student Memory (per-learner mastery ledger, ADR 10 Store 2); `EbEvidenceEvent`/`EbAssetScore` are Teaching Memory (per-asset cross-student quality log + score, ADR 10 Store 4). Orthogonal purposes; not merged. Evidence Engine adopts `EbEvidenceEvent` as canonical append-only log, wired into Teaching pipeline's persist stage directly | ADR 13 §2, §4.8 | Resolved — no residual risk |
@@ -1289,3 +1289,18 @@ Assessment) — not due yet.
   milestone) given superseded-by-Bible banners. CLAUDE.md subject facts
   corrected (English row added; chemistry 186, not 187). No production
   code changed.
+- **2026-07-04 — CI validation gate built (integration-prep iteration
+  5; P10 spec §6 steps 1–4).** `.github/workflows/validate.yml` and
+  `scripts/ci/tsc-ratchet.sh` committed — on every push/PR: npm ci →
+  type-error ratchet (fails only on count increase over the committed
+  baseline; bootstrap mode passes and prints the count until
+  `scripts/ci/tsc-baseline.txt` is captured from the first hosted run's
+  clean Prisma client) → vitest (hard gate, verified 506/507 green) →
+  KG validator over all six shipped subjects (read-only; every future
+  Curriculum Pipeline push now gets an automatic consumption-side
+  regression check). R6 updated to Mitigated (CI half; the ADR 06
+  runtime load-time gate half remains blocked on KG v1 freeze). Test
+  scaffolding only — no production runtime, routes, schema, or APIs
+  touched. Local validation: ratchet exercised in all three modes, YAML
+  parsed, vitest green, six/six KG validations PASS via the exact
+  workflow loop.

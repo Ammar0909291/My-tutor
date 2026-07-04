@@ -316,6 +316,13 @@
   competing model); superseded banners on SYSTEM_AUDIT.md +
   project-memory/NEXT_ACTION.md; P10 spec CI step 4 corrected to 6
   subjects with file-path CLI usage.
+  (5) 2026-07-04 — CI gate BUILT (P10 §6 steps 1–4):
+  `.github/workflows/validate.yml` + `scripts/ci/tsc-ratchet.sh` — npm ci
+  → type-error ratchet (bootstrap mode until `scripts/ci/tsc-baseline.txt`
+  is captured from the first hosted run) → vitest hard gate → 6-subject KG
+  validator on every push/PR. R6 → Mitigated (CI half). Ratchet exercised
+  in all 3 modes locally; 6/6 KGs PASS; vitest 506/507. Test scaffolding
+  only — no production code.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/
