@@ -102,6 +102,10 @@ model User {
   mistakeRecords          MistakeRecord[]
   learningCheckpoints     LearningCheckpoint[]
 
+  // W1-2 (implements W0-ADR-10): Educational Brain student memory stores
+  conceptMasteryRecords ConceptMasteryRecord[]
+  activeMisconceptions  ActiveMisconception[]
+
   @@map("users")
 }
 
@@ -2394,4 +2398,92 @@ model EbExperimentAssignment {
   @@id([userId, experimentId])
   @@index([experimentId, armId])
   @@map("eb_experiment_assignment")
+}
+
+// ─── Educational Brain — Student Memory (W1-2, implements ADR 10 Phase 1) ────
+// Additive only: no existing table above is touched. Nothing reads or writes
+// these tables yet (Wave 2 wires the readers/writers per ADR 10 §10).
+
+// Canonical mastery classification (ADR 07 + ADR 10).
+// Single source of truth: the Persist stage of the chat-route pipeline.
+enum MasteryLevel {
+  NOT_STARTED
+  INTRODUCED
+  DEVELOPING
+  PROFICIENT
+  MASTERED
+}
+
+// Per-(user, concept) mastery record — replaces the scattered masteryPct reads
+// that currently happen against TopicProgress (added in later sprints).
+// The two scores are never conflated: masteryScore is the best score achieved,
+// decayedScore is current retention after the forgetting curve is applied.
+model ConceptMasteryRecord {
+  userId            String
+  conceptId         String       // KG node slug, e.g. "math.algebra.linear_equations"
+
+  masteryScore      Float        @default(0)    // 0–1, best score achieved
+  decayedScore      Float        @default(0)    // 0–1, current retention (masteryScore × decay)
+  masteryConfidence Float        @default(0)    // 0–1, statistical confidence in the score
+  masteryLevel      MasteryLevel @default(NOT_STARTED)  // canonical enum
+
+  lastProbeOutcome  String?      // "pass" | "fail" | "partial"
+  lastSeenAt        DateTime     @default(now())
+  attemptCount      Int          @default(0)
+  sampleSize        Int          @default(0)    // effective # of graded interactions
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, conceptId])
+  @@index([userId, masteryLevel])
+  @@index([userId, decayedScore])
+  @@map("concept_mastery_records")
+}
+
+// Versioned policy store: formalises hardcoded Teaching Brain constants into
+// named, auditable, experiment-capable config rows (ADR 10 §4.4 / ADR 05).
+// Read-only at runtime — no teaching-path code may write to this table.
+model BrainConfig {
+  id            String    @id
+  name          String    @unique  // e.g. "mastery_thresholds", "probe_target_frequency"
+  value         Json                // typed payload varies by name
+  version       Int       @default(1)
+  effectiveFrom DateTime  @default(now())
+  effectiveTo   DateTime?
+  changedBy     String?
+  reason        String?   @db.Text
+
+  @@index([name, effectiveFrom])
+  @@map("brain_config")
+}
+
+// Active misconception confidence — Bayesian update per detection/repair event.
+// Replaces the count-based heuristic (LOW=2, MEDIUM=3-4, HIGH=5+ occurrences)
+// used today in the misconception signal block.
+enum MisconceptionStatus {
+  ACTIVE
+  REPAIR_IN_PROGRESS
+  REPAIRED
+  ESCALATED
+}
+
+model ActiveMisconception {
+  userId          String
+  misconceptionId String              // canonical slug, e.g. "math.add.carrying_error"
+  topicSlug       String              // KG node slug the misconception applies to
+  confidence      Float               @default(0.5)  // 0–1, Bayesian posterior
+  firstDetectedAt DateTime            @default(now())
+  lastDetectedAt  DateTime            @default(now())
+  repairAttempts  Int                 @default(0)
+  lastRepairAt    DateTime?
+  status          MisconceptionStatus @default(ACTIVE)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, misconceptionId])
+  @@index([userId, status])
+  @@index([userId, topicSlug])
+  @@map("active_misconceptions")
 }
