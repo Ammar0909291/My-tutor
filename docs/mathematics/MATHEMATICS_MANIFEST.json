@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 22,
-  "drafted_assets": 877,
-  "completion_pct": 96.6,
+  "completed_domains": 23,
+  "drafted_assets": 892,
+  "completion_pct": 98.2,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:4589f20d0846b8d25e386126bcb87a7a126c2933a370cb3755997079bb0afa04",
-    "chapters_listing_sha256": "sha256:00937ed494c2956f1ca0cc4457dbaaf7bc5251173e2e4914f94cc8e7a14c0892"
+    "assets_sha256": "sha256:f336d92d135fc6d998265b861ad0e8f5efbc74f10db04ee7433dbd6f5556dccc",
+    "chapters_listing_sha256": "sha256:75b9781c2b28b01e0039797c510bbca9193a285ea030fea55a3b84bd975cf528"
   },
   "domains": [
     {
@@ -567,14 +567,28 @@
       "domain_prefix": "math.cat",
       "domain_name": "Category Theory",
       "concept_count": 15,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 15,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/cat.md",
+      "manifest_file": "docs/mathematics/domains/math.cat-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:6f13942bc66ece3dbb8a63429434ce35d8a49b2b939a6bbadf22cf496b096d2b",
+        "domain_assets_sha256": "sha256:ec1da639748d443ab16588ddfbb451aa5a4f52a057763889ff64a35e86df411d",
+        "graph_domain_sha256": "sha256:12edbc3b46ba148e915865eeb026dfa1320c77467eb8db5b262bc33359464054",
+        "validation_report_sha256": "sha256:6db2329ad1fea55f9acb10c38a319f2c5b35deb9f1713bef4997159d0ec8b1d6"
+      },
+      "creation_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
     }
   ],
   "dependency_versions": {
@@ -583,6 +597,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
-  "last_updated": "2026-07-05T18:42:12Z"
+  "last_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
+  "last_updated": "2026-07-05T19:14:36Z"
 }

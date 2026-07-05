@@ -1,16 +1,19 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `math.opt complete`*
+*Last updated: 2026-07-05 · Commit: `452c310e07a613b5df7e25b98a27c19aa7429f7e`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
+
+## Latest Commit
+`452c310e07a613b5df7e25b98a27c19aa7429f7e`
 
 ## Knowledge Graph
 
 | File | Concepts | Domains | Status |
 |------|----------|---------|--------|
-| `docs/mathematics/kg/graph.json` | 908 | 24 | FROZEN v1.0.1 |
+| `docs/mathematics/kg/graph.json` | 908 | 24 | FROZEN v1.0.0 (FULL_PRODUCTION_APPROVAL, 97.25/100) |
 
 **Do not modify `graph.json` or any `kg/domains/*.json` file.**
 
@@ -28,22 +31,22 @@
 | 08 | Sequences and Series | math.seq | 21 | draft ✓ | chapters/seq.md ✓ | Complete |
 | 09 | Calculus | math.calc | 76 | draft ✓ | chapters/calc.md ✓ | Complete |
 | 10 | Differential Equations | math.de | 56 | draft ✓ | chapters/de.md ✓ | Complete |
-| 11 | Linear Algebra | math.linalg | 61 | draft ✓ | chapters/linalg.md ✓ | Complete (Mohd) |
+| 11 | Linear Algebra | math.linalg | 61 | draft ✓ | chapters/linalg.md ✓ | Complete |
 | 12 | Probability | math.prob | 49 | draft ✓ | chapters/prob.md ✓ | Complete |
 | 13 | Statistics | math.stats | 40 | draft ✓ | chapters/stats.md ✓ | Complete |
-| 14 | Discrete Mathematics | math.disc | 32 | draft ✓ | chapters/disc.md ✓ | Complete (Mohd) |
+| 14 | Discrete Mathematics | math.disc | 32 | draft ✓ | chapters/disc.md ✓ | Complete |
 | 15 | Abstract Algebra | math.abst | 37 | draft ✓ | chapters/abst.md ✓ | Complete |
-| 16 | Real Analysis | math.real | 30 | draft ✓ | chapters/real.md ✓ | Complete (Mohd) |
+| 16 | Real Analysis | math.real | 30 | draft ✓ | chapters/real.md ✓ | Complete |
 | 17 | Complex Analysis | math.cx | 31 | draft ✓ | chapters/cx.md ✓ | Complete |
 | 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
 | 19 | Measure Theory | math.meas | 13 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
-| 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
+| 21 | Numerical Analysis | math.num | 16 | placeholder | — | **NEXT** |
 | 22 | Optimization | math.opt | 16 | draft ✓ | chapters/opt.md ✓ | Complete |
 | 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
-| 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
+| 24 | Category Theory | math.cat | 15 | draft ✓ | chapters/cat.md ✓ | Complete |
 
-**Summary:** 20/24 domains complete · 861/908 assets drafted · 47/908 remaining
+**Summary:** 23/24 domains complete · 892/908 assets drafted · 16/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -87,7 +90,7 @@ limits, limit-laws, one-sided-limits, limits-at-infinity, squeeze-theorem, conti
 
 ode, ode-order, ode-linearity, solution-types, ivp, existence-uniqueness, first-order-ode, separable, linear-first-order, exact-ode, bernoulli, homogeneous-ode, slope-field, euler-method, second-order-ode, second-order-linear, second-order-homogeneous, wronskian, char-equation, undetermined-coefficients, variation-of-parameters, harmonic-oscillator, resonance, higher-order-ode, laplace-transform, laplace-properties, inverse-laplace, laplace-ode, convolution-theorem, systems-ode, systems-matrix-method, phase-plane, stability-analysis, series-solution, frobenius-method, bessel-equation, legendre-equation, sturm-liouville, eigenfunction-expansion, bvp, fourier-series, fourier-convergence, fourier-sine-cosine, fourier-transform, pde, pde-classification, separation-of-variables-pde, heat-equation, wave-equation, laplace-equation, harmonic-functions, poisson-equation, greens-function, nonlinear-ode, bifurcation, chaos
 
-### math.linalg (61 concepts) — COMPLETE (Mohd)
+### math.linalg (61 concepts) — COMPLETE
 
 vector, vector-addition, scalar-multiplication, dot-product, norm, unit-vector, orthogonality, cross-product, matrix, matrix-addition, matrix-multiplication, matrix-transpose, symmetric-matrix, linear-system, augmented-matrix, row-reduction, row-echelon, rank, matrix-inverse, determinant, cofactor-expansion, det-properties, cramer-rule, lu-factorization, vector-space, subspace, span, linear-independence, basis, dimension, coordinates, change-of-basis, null-space, column-space, rank-nullity, linear-map, kernel-image, matrix-representation, eigenvalues, characteristic-polynomial, eigenspace, diagonalization, matrix-exponential, jordan-form, spectral-theorem, positive-definite, cholesky, inner-product, inner-product-space, orthogonal-basis, gram-schmidt, projection, least-squares, qr-factorization, svd, singular-values, pseudoinverse, tensor, dual-space, distance, angle-vectors
 
@@ -99,44 +102,81 @@ sample-space, event, probability-measure, probability-axioms, classical-probabil
 
 population-sample, descriptive-statistics, measures-of-center, measures-of-spread, percentile, data-visualization, sampling, sampling-distribution, standard-error, estimator, bias-variance, consistency, mle, method-of-moments, confidence-interval, ci-mean, ci-proportion, hypothesis-testing, test-statistic, p-value, type-errors, power, z-test, t-test, chi-squared-test, anova, two-way-anova, correlation, linear-regression, multiple-regression, covariance-matrix, normal-distribution, normal-approximation, nonparametric, bayesian-inference, conjugate-prior, credible-interval, experimental-design, sufficient-statistic, rao-blackwell
 
-### math.disc (32 concepts) — COMPLETE (Mohd)
+### math.disc (32 concepts) — COMPLETE
 
-propositional-logic, predicates-quantifiers, proof-techniques, mathematical-induction, strong-induction, recursion, sets, relations, functions, counting-principle, permutations, combinations, binomial-coefficients, pigeonhole, inclusion-exclusion, generating-functions, recurrence-relations, graph-basics, graph-types, graph-connectivity, trees, spanning-trees, graph-coloring, planar-graphs, eulerian-hamiltonian, network-flow, boolean-algebra, logic-gates, finite-automata, regular-languages, context-free-grammars, turing-machines
+counting-principles, permutations, combinations, binomial-theorem, combinatorics, stars-bars, pigeonhole, inclusion-exclusion, derangements, recurrence-relation, linear-recurrence, divide-conquer-recurrence, generating-functions, ogf, egf, graph, graph-types, graph-representation, graph-connectivity, euler-hamiltonian, graph-trees, spanning-tree, graph-coloring, planar-graph, propositional-logic, boolean-circuits, predicate-logic-disc, asymptotic-notation, algorithm-complexity, complexity-classes, catalan-numbers, stirling-numbers
 
 ### math.abst (37 concepts) — COMPLETE
 
 algebraic-structure, binary-operation, group-theory, group-operation, subgroup, cyclic-group, group-order, coset, lagrange-theorem, normal-subgroup, quotient-group, group-homomorphism, group-isomorphism, first-isomorphism-theorem, second-isomorphism-theorem, group-action, burnside-lemma, sylow-theorems, symmetric-group, alternating-group, ring-theory, ideal, quotient-ring, prime-ideal, ring-homomorphism, polynomial-ring, euclidean-domain, pid, ufd, field, field-extension, algebraic-extension, finite-field, galois-theory, galois-group, galois-correspondence, group-inverse
 
-### math.real (30 concepts) — COMPLETE (Mohd)
+### math.real (30 concepts) — COMPLETE
 
-real-number-axioms, completeness-axiom, supremum-infimum, archimedean-property, sequences-real, cauchy-sequences, completeness-metric, limits-real, continuity-real, uniform-continuity, differentiability-real, mean-value-theorem-real, taylor-theorem-real, riemann-integral, riemann-stieltjes, lebesgue-measure, measurable-sets, measurable-functions, lebesgue-integral, convergence-theorems, lp-spaces, metric-spaces, open-closed-sets, compactness, connectedness, baire-category, banach-spaces, hilbert-spaces, fourier-analysis-real, uniform-convergence
+completeness, sup-inf, archimedean, convergence-sequences, cauchy-sequence, series-rigorous, absolute-convergence, metric-space, open-sets, completeness-metric, compactness, connectedness, continuity-rigorous, uniform-continuity, lipschitz-continuity, extreme-value-theorem, ivt, differentiability-rigorous, mvt, taylor-rigorous, riemann-integral, riemann-integrability, ftc-rigorous, uniform-convergence, pointwise-convergence, weierstrass-approximation, fixed-point-theorem, baire-category, implicit-function-theorem, inverse-function-theorem
 
 ### math.cx (31 concepts) — COMPLETE
 
 complex-numbers-analysis, complex-function, cauchy-riemann, analytic-functions, harmonic-functions, power-series-cx, complex-integration, cauchy-theorem, cauchy-goursat, cauchy-integral-formula, higher-derivatives, morera-theorem, liouville-theorem, fundamental-theorem-algebra, identity-theorem, analytic-continuation, singularities, poles, essential-singularity, laurent-series, residue, residue-theorem, real-integral-residues, maximum-modulus, conformal-mapping, mobius-transformation, riemann-mapping, argument-principle, rouche-theorem, riemann-surface, riemann-zeta
 
-### math.fnal (18 concepts) — COMPLETE
+### math.top (23 concepts) — COMPLETE
 
-normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
-
-### math.graph (16 concepts) — COMPLETE
-
-graph, graph-invariants, graph-operations, connectivity, tree, minimum-spanning-tree, shortest-path, maximum-flow, matching, eulerian-circuit, hamiltonian-cycle, graph-coloring, algebraic-graph-theory, ramsey-theory, extremal-graph-theory, random-graph
+topological-space, open-sets, interior-closure, basis, continuity-top, homeomorphism, compactness, tychonoff, connectedness, separation-axioms, quotient-space, product-space, homotopy, homotopy-equivalence, fundamental-group, van-kampen, covering-space, simplicial-complex, homology, euler-characteristic, cohomology, manifold, smooth-manifold
 
 ### math.meas (13 concepts) — COMPLETE
 
 sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, simple-function, lebesgue-integral, convergence-theorems, lp-space, l2-space, product-measure, radon-nikodym, abstract-measure-spaces
 
-## Remaining Domains
+### math.fnal (18 concepts) — COMPLETE
 
-| Domain | Concepts | Notes |
-|--------|----------|-------|
-| ~~math.top~~ | ~~23~~ | ~~Topology — COMPLETE~~ |
-| ~~math.meas~~ | ~~13~~ | ~~Measure Theory — COMPLETE~~ |
-| ~~math.fnal~~ | ~~18~~ | ~~Functional Analysis — COMPLETE~~ |
-| math.num | 16 | Numerical Analysis |
-| ~~math.opt~~ | ~~16~~ | ~~Optimization — COMPLETE~~ |
-| ~~math.graph~~ | ~~16~~ | ~~Graph Theory — COMPLETE~~ |
-| math.cat | 15 | Category Theory |
+normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
 
-**Remaining: 2 domains · 31 concepts**
+### math.num (16 concepts) — IN PROGRESS
+
+0/16 authored. Concepts:
+floating-point, error-analysis, root-finding, newtons-method, interpolation, splines, numerical-differentiation, numerical-integration, lu-factorization, cholesky, iterative-linear, qr-algorithm, svd, euler-method, runge-kutta, stiff-ode
+
+### math.opt (16 concepts) — COMPLETE
+
+unconstrained-optimization, convex-function, convex-set, convex-optimization, linear-programming, quadratic-programming, semidefinite-programming, duality, kkt, lagrange-multipliers, gradient-methods, stochastic-gradient, newton-optimization, pca, integer-programming, dynamic-programming
+
+### math.graph (16 concepts) — COMPLETE
+
+graph, graph-invariants, graph-operations, connectivity, tree, minimum-spanning-tree, shortest-path, maximum-flow, matching, eulerian-circuit, hamiltonian-cycle, graph-coloring, algebraic-graph-theory, ramsey-theory, extremal-graph-theory, random-graph
+
+### math.cat (15 concepts) — COMPLETE
+
+category, morphism-types, functor, natural-transformation, functor-category, yoneda-lemma, representable-functor, limits, equalizer, pullback, adjunction, monad, tensor-product, topos, higher-category
+
+## Workflow Optimizations in Use
+
+1. **Pre-sliced chunk inputs** — domain concepts split into chunks of 9 before agent authoring; each agent reads only its slice.
+2. **Skip-completed-chunks logic** — pipeline checks for existing output files; only missing chunks run.
+3. **Parallel authoring** — 4 agents author their chunks simultaneously.
+4. **Deterministic merge** — `merge-and-assemble.py` merges all chunk outputs in a single read-modify-write pass.
+5. **Deterministic assembly** — chapter markdown rendered from chunk files + KG data; no LLM call, pure templating.
+6. **Domain validation** — `validate-domain-assets.py` runs before every commit; domain blocked on FAIL.
+7. **Resume from repo** — completed domains detected from `status: draft` in assets.json + chapter file presence.
+8. **One domain at a time** — next domain only starts after: validation PASS + merge + assemble + commit + progress update.
+
+## Build Verification Notes
+
+- `npm run build` requires `node_modules` (not present in cloud container; `npm install` blocked
+  by network policy). All `tsc --noEmit` errors are missing-module errors, not code issues.
+- Python KG validator (`docs/mathematics/kg/validate.py`) runs cleanly; KG score 97.25/100.
+- Build must be re-verified locally after pulling `claude/my-tutor-foundation-KDSUO`.
+
+## Session Resumption Checklist
+
+1. `git fetch && git pull origin claude/my-tutor-foundation-KDSUO`
+2. Read this file to determine current domain and next unfinished chunk
+3. Check `docs/mathematics/teaching-assets/assets.json` — domains with all `status: draft` are complete
+4. Check `docs/mathematics/chapters/` — present `.md` files are assembled and committed
+5. Resume at the first domain where assets are still `placeholder`
+6. **Do NOT regenerate already-drafted assets**
+7. **Do NOT modify `docs/mathematics/kg/` files**
+8. Run `scripts/pipeline/validate-domain-assets.py` before committing any domain
+
+## Next Planned Domain
+
+**Numerical Analysis** (`math.num`) · 16 concepts
+

@@ -10,8 +10,8 @@
     "subjects_in_progress": 1,
     "subjects_not_started": 5,
     "total_concepts_all_subjects": 1712,
-    "total_drafted_assets": 877,
-    "overall_completion_pct": 51.2
+    "total_drafted_assets": 892,
+    "overall_completion_pct": 52.1
   },
   "subjects": [
     {
@@ -28,15 +28,15 @@
         "sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870"
       },
       "teaching_assets": {
-        "completed_domains": 22,
+        "completed_domains": 23,
         "total_domains": 24,
-        "drafted_assets": 877,
+        "drafted_assets": 892,
         "total_concepts": 908,
-        "completion_pct": 96.6
+        "completion_pct": 98.2
       },
       "subject_manifest": {
         "file": "./docs/mathematics/MATHEMATICS_MANIFEST.json",
-        "sha256": "sha256:89febc3f3441e4bc59751fb205b32fa88f77a7118ae5c00d6a6602449a2c34b6"
+        "sha256": "sha256:b27e167d24e58174b9f6c219eed0d9b6a5c3c3207cc59b3ce5d50bdacee9f11e"
       }
     },
     {
@@ -173,6 +173,6 @@
     "manifest_spec_version": "1.0"
   },
   "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
-  "last_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
-  "last_updated": "2026-07-05T18:42:12Z"
+  "last_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
+  "last_updated": "2026-07-05T19:15:00Z"
 }
