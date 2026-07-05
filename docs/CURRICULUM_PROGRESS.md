@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `69dfdf1894371d16896b54a6fbbb713f2f4fda8f`*
+*Last updated: 2026-07-05 · Commit: `a319c25`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`69dfdf1894371d16896b54a6fbbb713f2f4fda8f`
+`a319c25`
 
 ## Knowledge Graph
 
@@ -38,7 +38,7 @@
 | 15 | Abstract Algebra | math.abst | 37 | placeholder | — | Pending |
 | 16 | Real Analysis | math.real | 30 | draft ✓ | chapters/real.md ✓ | Complete |
 | 17 | Complex Analysis | math.cx | 31 | placeholder | — | Pending |
-| 18 | Topology | math.top | 23 | placeholder | — | Pending |
+| 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
 | 19 | Measure Theory | math.meas | 13 | placeholder | — | Pending |
 | 20 | Functional Analysis | math.fnal | 18 | placeholder | — | Pending |
 | 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 13/24 domains complete · 634/908 assets drafted · 274/908 remaining
+**Summary:** 14/24 domains complete · 657/908 assets drafted · 251/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -122,9 +122,8 @@ completeness, sup-inf, archimedean, convergence-sequences, cauchy-sequence, seri
 0/31 authored. Concepts:
 complex-numbers-analysis, complex-function, cauchy-riemann, analytic-functions, harmonic-functions, power-series-cx, complex-integration, cauchy-theorem, cauchy-goursat, cauchy-integral-formula, higher-derivatives, morera-theorem, liouville-theorem, fundamental-theorem-algebra, identity-theorem, analytic-continuation, singularities, poles, essential-singularity, laurent-series, residue, residue-theorem, real-integral-residues, maximum-modulus, conformal-mapping, mobius-transformation, riemann-mapping, argument-principle, rouche-theorem, riemann-surface, riemann-zeta
 
-### math.top (23 concepts) — PENDING
+### math.top (23 concepts) — COMPLETE
 
-0/23 authored. Concepts:
 topological-space, open-sets, interior-closure, basis, continuity-top, homeomorphism, compactness, tychonoff, connectedness, separation-axioms, quotient-space, product-space, homotopy, homotopy-equivalence, fundamental-group, van-kampen, covering-space, simplicial-complex, homology, euler-characteristic, cohomology, manifold, smooth-manifold
 
 ### math.meas (13 concepts) — PENDING

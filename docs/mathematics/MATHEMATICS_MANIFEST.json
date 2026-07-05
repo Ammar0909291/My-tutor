@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 13,
-  "drafted_assets": 634,
-  "completion_pct": 69.8,
+  "completed_domains": 14,
+  "drafted_assets": 657,
+  "completion_pct": 72.4,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:2c2e041e0e5baa408cb0d89a2015281cdf54d5cf214d0bf17ad0229b3ec2e0e3",
-    "chapters_listing_sha256": "sha256:a68e88e5b6a416de2073afd873f53775f1896678424f0c9fa7ccac7b9a228234"
+    "assets_sha256": "sha256:17055f3ac81b9673975f4baeddeaefe221f636d10c62382a53da10555465b9c8",
+    "chapters_listing_sha256": "sha256:8bdcf5a3f691d96b8c88ef3ab36139bcec393f144b1fc6f4273311aadb55a7ea"
   },
   "domains": [
     {
@@ -443,14 +443,28 @@
       "domain_prefix": "math.top",
       "domain_name": "Topology",
       "concept_count": 23,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 23,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/top.md",
+      "manifest_file": "docs/mathematics/domains/math.top-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:7b51d8f811915db48cb8ad1f54e9b65e7ef83ffbc89776f2ce83024ad2f27092",
+        "domain_assets_sha256": "sha256:58d0141c3661aad1af4420f8090184e4757e81597b789a18d08f2059e482b9f8",
+        "graph_domain_sha256": "sha256:0b6b9b1dec97a841e769e1f6d5a5fa77777c3934c109a3a9219ca89a05497ad9",
+        "validation_report_sha256": "sha256:366c42f3596c2cb04917ec945b0c9c8c747f2592f27791ece55b79813f6c7272"
+      },
+      "creation_commit": "a319c25",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "measure-theory",
@@ -543,6 +557,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "69dfdf1894371d16896b54a6fbbb713f2f4fda8f",
-  "last_updated": "2026-07-05T14:08:59Z"
+  "last_commit": "a319c25",
+  "last_updated": "2026-07-05T14:47:25Z"
 }
