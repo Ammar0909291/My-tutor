@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 10,
-  "drafted_assets": 511,
-  "completion_pct": 56.3,
+  "completed_domains": 11,
+  "drafted_assets": 572,
+  "completion_pct": 63.0,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:62d47ab641a7ebf194254572fb9fe5b16501b454292b526d9fc0da9f104979ad",
-    "chapters_listing_sha256": "sha256:4b130a1da749f6d30c328890adfa7c629970955b4ec10aab49fbae7e099ddc76"
+    "assets_sha256": "sha256:f83257c15f93b5477026550696c1a4dc154dec2f9884e755200dd8bc30e19e8c",
+    "chapters_listing_sha256": "sha256:7535fc5f7ab335cd157cd3bd02809979a8291a00404250cfa3e478d631ce47a3"
   },
   "domains": [
     {
@@ -303,14 +303,28 @@
       "domain_prefix": "math.linalg",
       "domain_name": "Linear Algebra",
       "concept_count": 61,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 61,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/linalg.md",
+      "manifest_file": "docs/mathematics/domains/math.linalg-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:0733ffb1139c55a3aaa3be10597368ba1c4c61efc461ab7fc54a6c811deed1df",
+        "domain_assets_sha256": "sha256:1cfae701a485c72e2aa7f0ea2724bea175756cd71faefdcf20f78cc099e3938f",
+        "graph_domain_sha256": "sha256:a9635bd484d16cb673d83ec5919190f5fd8247414acfd31f6e4112a6cbc7a082",
+        "validation_report_sha256": "sha256:455a8c765b088d2c451c7be1d011d8b250244966eef11540826dace994011a2e"
+      },
+      "creation_commit": "7b1d8735b0077e907e0d4d6e050339c156886112",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "7b1d8735b0077e907e0d4d6e050339c156886112",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "probability",
@@ -501,6 +515,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "e877a75d1653a4d52cdd2fb72f2e8b52c33351bf",
-  "last_updated": "2026-07-05T08:11:55Z"
+  "last_commit": "7b1d8735b0077e907e0d4d6e050339c156886112",
+  "last_updated": "2026-07-05T09:36:54Z"
 }

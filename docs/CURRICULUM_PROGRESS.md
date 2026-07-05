@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `e877a75d1653a4d52cdd2fb72f2e8b52c33351bf`*
+*Last updated: 2026-07-05 · Commit: `7b1d8735b0077e907e0d4d6e050339c156886112`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`e877a75d1653a4d52cdd2fb72f2e8b52c33351bf`
+`7b1d8735b0077e907e0d4d6e050339c156886112`
 
 ## Knowledge Graph
 
@@ -31,8 +31,8 @@
 | 08 | Sequences and Series | math.seq | 21 | draft ✓ | chapters/seq.md ✓ | Complete |
 | 09 | Calculus | math.calc | 76 | draft ✓ | chapters/calc.md ✓ | Complete |
 | 10 | Differential Equations | math.de | 56 | draft ✓ | chapters/de.md ✓ | Complete |
-| 11 | Linear Algebra | math.linalg | 61 | placeholder | — | **NEXT** |
-| 12 | Probability | math.prob | 49 | placeholder | — | Pending |
+| 11 | Linear Algebra | math.linalg | 61 | draft ✓ | chapters/linalg.md ✓ | Complete |
+| 12 | Probability | math.prob | 49 | placeholder | — | **NEXT** |
 | 13 | Statistics | math.stats | 40 | placeholder | — | Pending |
 | 14 | Discrete Mathematics | math.disc | 32 | placeholder | — | Pending |
 | 15 | Abstract Algebra | math.abst | 37 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 10/24 domains complete · 511/908 assets drafted · 397/908 remaining
+**Summary:** 11/24 domains complete · 572/908 assets drafted · 336/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -90,12 +90,11 @@ limits, limit-laws, one-sided-limits, limits-at-infinity, squeeze-theorem, conti
 
 ode, ode-order, ode-linearity, solution-types, ivp, existence-uniqueness, first-order-ode, separable, linear-first-order, exact-ode, bernoulli, homogeneous-ode, slope-field, euler-method, second-order-ode, second-order-linear, second-order-homogeneous, wronskian, char-equation, undetermined-coefficients, variation-of-parameters, harmonic-oscillator, resonance, higher-order-ode, laplace-transform, laplace-properties, inverse-laplace, laplace-ode, convolution-theorem, systems-ode, systems-matrix-method, phase-plane, stability-analysis, series-solution, frobenius-method, bessel-equation, legendre-equation, sturm-liouville, eigenfunction-expansion, bvp, fourier-series, fourier-convergence, fourier-sine-cosine, fourier-transform, pde, pde-classification, separation-of-variables-pde, heat-equation, wave-equation, laplace-equation, harmonic-functions, poisson-equation, greens-function, nonlinear-ode, bifurcation, chaos
 
-### math.linalg (61 concepts) — IN PROGRESS
+### math.linalg (61 concepts) — COMPLETE
 
-0/61 authored. Concepts:
 vector, vector-addition, scalar-multiplication, dot-product, norm, unit-vector, orthogonality, cross-product, matrix, matrix-addition, matrix-multiplication, matrix-transpose, symmetric-matrix, linear-system, augmented-matrix, row-reduction, row-echelon, rank, matrix-inverse, determinant, cofactor-expansion, det-properties, cramer-rule, lu-factorization, vector-space, subspace, span, linear-independence, basis, dimension, coordinates, change-of-basis, null-space, column-space, rank-nullity, linear-map, kernel-image, matrix-representation, eigenvalues, characteristic-polynomial, eigenspace, diagonalization, matrix-exponential, jordan-form, spectral-theorem, positive-definite, cholesky, inner-product, inner-product-space, orthogonal-basis, gram-schmidt, projection, least-squares, qr-factorization, svd, singular-values, pseudoinverse, tensor, dual-space, distance, angle-vectors
 
-### math.prob (49 concepts) — PENDING
+### math.prob (49 concepts) — IN PROGRESS
 
 0/49 authored. Concepts:
 sample-space, event, probability-measure, probability-axioms, classical-probability, combinatorial-probability, conditional-probability, total-probability, bayes-theorem, independence, bayesian-inference, random-variable, discrete-rv, continuous-rv, pmf, pdf, cdf, quantile, distribution, discrete-distributions, continuous-distributions, normal-distribution, standard-normal, expected-value, linearity-expectation, law-of-unconscious, variance, standard-deviation, moments, mgf, characteristic-function, covariance, correlation, joint-distribution, marginal-distribution, conditional-distribution, conditional-expectation, chebyshev, markov-inequality, lln, clt, convergence-types, generating-function, markov-chain, transition-matrix, stationary-distribution, ergodicity, martingale, poisson-process
@@ -191,5 +190,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Linear Algebra** (`math.linalg`) · 61 concepts
+**Probability** (`math.prob`) · 49 concepts
 
