@@ -17,6 +17,19 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { nextRuntime }) => {
+    // Next.js always emits a full source map for the Edge runtime bundle
+    // (src/middleware.ts) in production, regardless of any experimental
+    // sourcemap flag. That map isn't needed to execute the middleware —
+    // only the code is — but Vercel counts it toward the Edge Function
+    // size limit (1 MB on Hobby), so it's what was pushing the deployed
+    // bundle over the cap. Disabling it here only affects the edge
+    // compilation; server/client source maps are unaffected.
+    if (nextRuntime === "edge") {
+      config.devtool = false;
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig;
