@@ -1,4 +1,8 @@
-import { auth } from '@/lib/auth'
+// Use the Edge-safe auth instance here, not '@/lib/auth' (which pulls in
+// Prisma/bcryptjs/OAuth-provider code that isn't Edge-compatible and
+// bloats the Edge Function bundle well past Vercel's size limit).
+// See src/lib/auth/edge-config.ts.
+import { auth } from '@/lib/auth/edge'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { slidingWindow, classifyApiPath, clientIp, RL_TIERS } from '@/lib/rateLimitEdge'
