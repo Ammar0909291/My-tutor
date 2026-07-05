@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
+import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -77,7 +78,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
     }
 
-    await prisma.message.create({
+    const assistantMessage = await prisma.message.create({
       data: {
         sessionId,
         role: MessageRole.ASSISTANT,
@@ -85,6 +86,20 @@ export async function POST(req: Request) {
         inputTokens: completion.usage?.prompt_tokens ?? null,
         outputTokens: completion.usage?.completion_tokens ?? null,
       },
+    })
+
+    // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — errors silently discarded.
+    // Phase 1 proxy: subject slug stands in for conceptId until KG tracking is wired (Wave 2).
+    appendEvidenceEvent({
+      userId,
+      sessionId,
+      turnId:    assistantMessage.id,
+      conceptId: learnSession.subject.slug,
+      language:  teachingLang,
+      gradeBand: GradeBand.ADULT,
+      category:  EvidenceCategory.ASSET_SHOWN,
+      outcome:   'shown',
+      strength:  0.0,
     })
 
     return NextResponse.json({ success: true, text })
