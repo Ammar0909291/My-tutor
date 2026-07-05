@@ -8,10 +8,10 @@
     "subjects_total": 6,
     "subjects_complete": 0,
     "subjects_in_progress": 1,
-    "subjects_not_started": 4,
-    "total_concepts_all_subjects": 1496,
+    "subjects_not_started": 5,
+    "total_concepts_all_subjects": 1712,
     "total_drafted_assets": 455,
-    "overall_completion_pct": 30.4
+    "overall_completion_pct": 26.6
   },
   "subjects": [
     {
@@ -173,6 +173,6 @@
     "manifest_spec_version": "1.0"
   },
   "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
-  "last_commit": "c6ad1bbe7d9b798851447a2e094ae00d2fe728a9",
-  "last_updated": "2026-07-05T03:29:00Z"
+  "last_commit": "9dde4c2ed56217c06cd22e9fac9123f6ba86d49b",
+  "last_updated": "2026-07-05T03:30:11Z"
 }
