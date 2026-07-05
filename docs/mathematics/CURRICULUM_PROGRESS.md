@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `452c310e07a613b5df7e25b98a27c19aa7429f7e`*
+*Last updated: 2026-07-05 · Commit: `526e3beeaa0b21c3207c1033cf312bfcca1c9305`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`452c310e07a613b5df7e25b98a27c19aa7429f7e`
+`526e3beeaa0b21c3207c1033cf312bfcca1c9305`
 
 ## Knowledge Graph
 
@@ -41,12 +41,12 @@
 | 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
 | 19 | Measure Theory | math.meas | 13 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
-| 21 | Numerical Analysis | math.num | 16 | placeholder | — | **NEXT** |
+| 21 | Numerical Analysis | math.num | 16 | draft ✓ | chapters/num.md ✓ | Complete |
 | 22 | Optimization | math.opt | 16 | draft ✓ | chapters/opt.md ✓ | Complete |
 | 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
 | 24 | Category Theory | math.cat | 15 | draft ✓ | chapters/cat.md ✓ | Complete |
 
-**Summary:** 23/24 domains complete · 892/908 assets drafted · 16/908 remaining
+**Summary:** 24/24 domains complete · 908/908 assets drafted · 0/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -130,9 +130,8 @@ sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, sim
 
 normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
 
-### math.num (16 concepts) — IN PROGRESS
+### math.num (16 concepts) — COMPLETE
 
-0/16 authored. Concepts:
 floating-point, error-analysis, root-finding, newtons-method, interpolation, splines, numerical-differentiation, numerical-integration, lu-factorization, cholesky, iterative-linear, qr-algorithm, svd, euler-method, runge-kutta, stiff-ode
 
 ### math.opt (16 concepts) — COMPLETE
@@ -176,7 +175,4 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 7. **Do NOT modify `docs/mathematics/kg/` files**
 8. Run `scripts/pipeline/validate-domain-assets.py` before committing any domain
 
-## Next Planned Domain
-
-**Numerical Analysis** (`math.num`) · 16 concepts
 

@@ -11,11 +11,11 @@
     "verdict": "PASS",
     "validation_script_version": "1.1.0",
     "validated_at": "2026-07-05",
-    "validation_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e"
+    "validation_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305"
   },
   "checksums": {
     "chapter_sha256": "sha256:6f13942bc66ece3dbb8a63429434ce35d8a49b2b939a6bbadf22cf496b096d2b",
-    "domain_assets_sha256": "sha256:ec1da639748d443ab16588ddfbb451aa5a4f52a057763889ff64a35e86df411d",
+    "domain_assets_sha256": "sha256:c40010277d6fd63afacfde2eb3fcd1b8a800caaeeff4a97ee15772d0bd3e058b",
     "graph_domain_sha256": "sha256:12edbc3b46ba148e915865eeb026dfa1320c77467eb8db5b262bc33359464054",
     "validation_report_sha256": "sha256:6db2329ad1fea55f9acb10c38a319f2c5b35deb9f1713bef4997159d0ec8b1d6"
   },
@@ -30,11 +30,11 @@
     "kg_version": "1.0.1",
     "kg_status": "frozen",
     "kg_build_date": "2026-06-29",
-    "kg_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
+    "kg_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305",
     "asset_schema_version": "1.0.0",
     "generator_version": "pipeline-v2",
     "validation_version": "1.1.0"
   },
-  "creation_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
-  "created_at": "2026-07-05T19:14:23Z"
+  "creation_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305",
+  "created_at": "2026-07-05T19:18:27Z"
 }

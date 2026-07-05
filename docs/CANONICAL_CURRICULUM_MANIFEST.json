@@ -6,18 +6,18 @@
   "objective": "Canonical Knowledge Graph → Canonical Teaching Assets → Canonical Subject Freeze (v1.0) → Curriculum Views (CBSE, ICSE, IB, Cambridge, University) → Educational Brain intelligence layers",
   "campaign_totals": {
     "subjects_total": 6,
-    "subjects_complete": 0,
-    "subjects_in_progress": 1,
+    "subjects_complete": 1,
+    "subjects_in_progress": 0,
     "subjects_not_started": 5,
     "total_concepts_all_subjects": 1712,
-    "total_drafted_assets": 892,
-    "overall_completion_pct": 52.1
+    "total_drafted_assets": 908,
+    "overall_completion_pct": 53.0
   },
   "subjects": [
     {
       "subject_id": "mathematics",
       "subject_dir": "./docs/mathematics",
-      "status": "in-progress",
+      "status": "complete",
       "kg": {
         "version": "1.0.1",
         "status": "frozen",
@@ -28,15 +28,15 @@
         "sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870"
       },
       "teaching_assets": {
-        "completed_domains": 23,
+        "completed_domains": 24,
         "total_domains": 24,
-        "drafted_assets": 892,
+        "drafted_assets": 908,
         "total_concepts": 908,
-        "completion_pct": 98.2
+        "completion_pct": 100.0
       },
       "subject_manifest": {
         "file": "./docs/mathematics/MATHEMATICS_MANIFEST.json",
-        "sha256": "sha256:b27e167d24e58174b9f6c219eed0d9b6a5c3c3207cc59b3ce5d50bdacee9f11e"
+        "sha256": "sha256:02d1c7649e073d501ce92c19d8132d82829a7cb88b7ca06d91e95258f8cb83f8"
       }
     },
     {
@@ -173,6 +173,6 @@
     "manifest_spec_version": "1.0"
   },
   "verification_instructions": "To verify curriculum integrity: for each subject, re-run generate-domain-manifest.py for each domain and compare checksums.domain_assets_sha256 and checksums.chapter_sha256 against this manifest. A mismatch means a generated file was modified outside the pipeline.",
-  "last_commit": "452c310e07a613b5df7e25b98a27c19aa7429f7e",
-  "last_updated": "2026-07-05T19:15:00Z"
+  "last_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305",
+  "last_updated": "2026-07-05T19:18:34Z"
 }
