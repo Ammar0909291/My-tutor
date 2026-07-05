@@ -337,6 +337,156 @@ model ActiveMisconception {
   @@map("active_misconceptions")
 }
 
+// ─── Knowledge Asset System (W1-4, implements ADR 14 Phase 1) ───────────────
+// Additive schema only. Tables are empty and completely unused after this batch.
+// Single writer for quality fields: Evidence Engine (ADR 13).
+// Serving path (retrieval, generation, ingestion) is Wave 2.
+
+enum AssetFamily {
+  EXPLANATION
+  VISUAL
+  PROBE
+}
+
+// Full lifecycle state machine per ADR 14 §4.5.
+// Only ACTIVE assets are served to learners; all others are inert.
+enum AssetStatus {
+  DRAFT
+  REVIEW
+  ACTIVE
+  DEPRECATED
+  RETIRED
+}
+
+enum AuthorKind {
+  HUMAN_CURATOR
+  AI_AUTHORED
+  AI_AUTHORED_REVIEWED
+  IMPORTED
+}
+
+enum ExplanationStyle {
+  RIGOROUS
+  CONCRETE
+  ANALOGY
+  VISUAL_FIRST
+}
+
+// Typed renderer discriminators from ADR 12 §4.2.
+enum VisualRenderer {
+  KATEX
+  SCENE_SPEC
+  VISUAL_SPEC
+  DYNAMIC_COMPONENT
+  ANIMATION             // Phase 3+
+  INTERACTIVE_WIDGET    // Phase 3+
+}
+
+enum ProbeDifficulty {
+  FOUNDATIONAL
+  DEVELOPING
+  PROFICIENT
+  ADVANCED
+}
+
+// Central identity table for all knowledge assets (ADR 14 §4.1 Design C).
+// One row per versioned asset; cross-asset queries go through this table.
+// Quality fields are single-writer: Evidence Engine only (ADR 13 invariant).
+model AssetIdentity {
+  assetId          String      @id @default(uuid())
+  family           AssetFamily
+  familyKind       String      // discriminator: ExplanationKind | ProbeKind | VisualRenderer slug
+  conceptId        String      // KG concept slug
+  language         String      // BCP-47, e.g. "en", "ru"
+  gradeBand        GradeBand   // reuses W1-3 enum
+  authorId         String      // userId or 'SYSTEM_AI' sentinel
+  authorKind       AuthorKind
+  status           AssetStatus @default(DRAFT)
+  version          Int         @default(1)
+  parentVersionId  String?     // self-FK: previous version in same canonicalSlug group
+
+  canonicalSlug    String      // deterministic hash of (conceptId, familyKind, language)
+
+  // Evidence — single writer: Evidence Engine (ADR 13)
+  qualityScore     Float       @default(0)
+  qualityConfidence Float      @default(0)
+  sampleSize       Int         @default(0)
+
+  // Content
+  contentHash      String      // SHA-256 of family-table payload
+  tags             String[]    // e.g. ['good_for_visual_learners', 'requires_calc']
+
+  // Provenance
+  sourceTraceId       String?
+  intellectualProperty String  // 'public_domain' | 'cc_by' | 'proprietary' | ...
+  curriculumMappings  Json     // Array<{ curriculumId: string; codeRef: string }>
+  deprecationReason   String?  @db.Text
+
+  // Safety gates (ADR 14 §4.1 / ch01 §5)
+  incompatibilities String[]   // [misconceptionId] — gates serving to learner with that misconception
+  prerequisites     String[]   // [conceptId] — asset-level prerequisites beyond concept-level
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  parent   AssetIdentity?  @relation("AssetVersionChain", fields: [parentVersionId], references: [assetId])
+  children AssetIdentity[] @relation("AssetVersionChain")
+
+  explanationAsset ExplanationAsset?
+  visualAsset      VisualAsset?
+  probeAsset       ProbeAsset?
+
+  @@index([conceptId, family, familyKind, language, gradeBand, status])
+  @@index([canonicalSlug, status])
+  @@index([status, qualityScore])
+  @@map("asset_identity")
+}
+
+// Explanation family table (ADR 14 §4.2).
+model ExplanationAsset {
+  assetId                String           @id
+  content                String           @db.Text
+  style                  ExplanationStyle
+  readingLevel           Float            // Flesch-Kincaid score
+  lengthChars            Int
+  targetedMisconceptions String[]         // [misconceptionId] this asset is designed to repair
+
+  identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map("explanation_assets")
+}
+
+// Visual family table (ADR 14 §4.3, ADR 12 §4.1).
+model VisualAsset {
+  assetId         String         @id
+  renderer        VisualRenderer
+  specPayload     Json           // typed by renderer: SceneSpec | VisualSpec | LatexString | ...
+  a11yDescription String         @db.Text  // mandatory — empty fails Layer 1 validation
+
+  identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map("visual_assets")
+}
+
+// Probe family table (ADR 14 §4.4).
+model ProbeAsset {
+  assetId                String          @id
+  stem                   String          @db.Text
+  choices                Json?           // ProbeChoice[] — null for non-MCQ kinds
+  correctValue           String?         // for true_false / numeric / short_answer
+  tolerance              Float?          // for numeric answer tolerance
+  keywords               String[]        // for short_answer keyword scoring
+  sampleAnswer           String?         @db.Text
+  difficulty             ProbeDifficulty
+  discriminationScore    Float?          // IRT-like signal 0–1; updated by Evidence Engine
+  targetedMisconceptions String[]        // [misconceptionId] that wrong choices map to
+  requiredVisuals        String[]        // [assetId] that must be on screen with this probe
+
+  identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map("probe_assets")
+}
+
 // ─── Evidence Engine (W1-3, implements ADR 13 Phase 1) ───────────────────────
 // Append-only event log. Single writer: the Persist stage of the chat-route.
 // No FK to User — denormalized intentionally for lock-free INSERT performance
