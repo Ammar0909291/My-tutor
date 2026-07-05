@@ -18,6 +18,7 @@ import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
 import { decide } from '@/lib/teaching-engine'
+import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -1691,9 +1692,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
       }
 
-      await withRetry(() => prisma.message.create({
+      const assistantMessage = await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
+
+      // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — never blocks the response.
+      // Phase 1 proxy: subject slug stands in for conceptId until KG tracking is wired (Wave 2).
+      appendEvidenceEvent({
+        userId,
+        sessionId,
+        turnId:    assistantMessage.id,
+        conceptId: learnSession.subject.slug,
+        language:  teachingLang,
+        gradeBand: GradeBand.ADULT,
+        category:  EvidenceCategory.ASSET_SHOWN,
+        outcome:   'shown',
+        strength:  0.0,
+      })
 
       // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
       // snapshot. Write once when either the lesson concept changed (BY) or the

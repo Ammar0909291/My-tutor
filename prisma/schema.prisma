@@ -2487,3 +2487,56 @@ model ActiveMisconception {
   @@index([userId, topicSlug])
   @@map("active_misconceptions")
 }
+
+// ─── Evidence Engine (W1-3, implements ADR 13 Phase 1) ───────────────────────
+// Append-only event log. Single writer: the Persist stage of the chat-route.
+// No FK to User — denormalized intentionally for lock-free INSERT performance
+// on the hot path (ADR 13 §5 Design C, §10 Phase 1 spec).
+
+enum EvidenceCategory {
+  ASSET_SHOWN          // strength always 0.0 — consumed-ness, not effectiveness
+  PROBE_OUTCOME        // strength: 1.0 pass / 0.0 fail / 0.5 partial
+  MISCONCEPTION_DETECTED
+  LEARNER_FEEDBACK
+  RE_ASK
+  SUMMATIVE_OUTCOME
+}
+
+enum GradeBand {
+  EARLY              // grades K-2 / ages 5-7
+  ELEMENTARY         // grades 3-5 / ages 8-10
+  MIDDLE             // grades 6-8 / ages 11-13
+  HIGH               // grades 9-12 / ages 14-17
+  UNDERGRADUATE
+  ADULT
+}
+
+model EvidenceEvent {
+  eventId        String          @id @default(uuid())
+  occurredAt     DateTime        @default(now())
+
+  // Denormalized — no FK, lock-free INSERT on hot path
+  userId         String
+  sessionId      String?
+  turnId         String?         // assistant Message.id, set when available
+
+  conceptId      String          // KG node slug (Phase 1: subject slug proxy)
+  language       String          // BCP-47, e.g. "ru", "en"
+  gradeBand      GradeBand
+
+  category       EvidenceCategory
+  assetId        String?         // Knowledge Asset id (Phase 3+)
+  misconceptionId String?        // canonical misconception slug
+  curriculumId   String?         // board/chapter/topic composite key
+
+  outcome        String          // "pass" | "fail" | "partial" | "shown" | etc.
+  strength       Float           // 0–1 signal weight per category spec
+  rawScore       Float?          // raw probe score when applicable
+  contextHash    String?         // hash of turn context for deduplication
+
+  @@index([userId, conceptId])
+  @@index([userId, occurredAt])
+  @@index([sessionId, occurredAt])
+  @@index([conceptId, category])
+  @@map("evidence_events")
+}
