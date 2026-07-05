@@ -106,10 +106,10 @@ def main():
             'status': 'complete' if is_complete else ('in-progress' if drafted > 0 else 'not-started'),
             'chapter_file': chapter_path if has_chapter else None,
             'manifest_file': os.path.join(domains_dir, f'{prefix}-manifest.json') if dm else None,
-            'validation_verdict': dm['validation']['verdict'] if dm else None,
-            'checksums': dm['checksums'] if dm else None,
-            'creation_commit': dm['creation_commit'] if dm else None,
-            'dependency_versions': dm['dependency_versions'] if dm else None,
+            'validation_verdict': dm.get('validation', {}).get('verdict') if dm else None,
+            'checksums': dm.get('checksums') if dm else None,
+            'creation_commit': dm.get('creation_commit') if dm else None,
+            'dependency_versions': dm.get('dependency_versions') if dm else None,
         }
         domain_entries.append(entry)
 

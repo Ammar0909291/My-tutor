@@ -15,8 +15,8 @@
   },
   "checksums": {
     "chapter_sha256": "sha256:0ad82dd26e0d59e273f39d384c27a2caa44cc82bc900b0678ff0bf437f9d86dd",
-    "domain_assets_sha256": "sha256:ca76ef6cef4240d7a45481fad5fe869eae21936bd5d83ec49e2198f325e9ed8c",
-    "graph_domain_sha256": "sha256:5ff7ad94a5953dcc2799702e0a6f57098f5f889c32341ff49339da9a20002248",
+    "domain_assets_sha256": "sha256:54baa730a73dc44432e738233c7edb95478984503f1675db2f33a717096d45a7",
+    "graph_domain_sha256": "sha256:355e5cc6bc43b62b6816feb52c3ad38702703015311a761dcef10bf3c7ddbe43",
     "validation_report_sha256": "sha256:0981f3f91517da6f362b515228e817c950a826fedb930f5f970b0a25a5ddd54f"
   },
   "generated_files": [
