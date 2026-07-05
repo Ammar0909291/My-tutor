@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { generateCoachInsights } from '@/lib/analytics/coachInsights'
+import { computeMasteryPct, deriveTopicStatus } from '@/lib/mastery/topicMasteryFormula'
 
 const schema = z.object({
   subjectSlug: z.string().min(1),
@@ -91,11 +92,8 @@ export async function POST(req: Request) {
     const topicProgress = await withRetry(() => prisma.$transaction(async (tx) => {
       const key = { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } }
       const existing = await tx.topicProgress.findUnique({ where: key })
-      const masteryPct = existing ? Math.round((existing.masteryPct + score) / 2) : score
-      let status = existing?.status ?? 'IN_PROGRESS'
-      if (status === 'NOT_STARTED' || status === 'IN_PROGRESS') {
-        status = masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS'
-      }
+      const masteryPct = computeMasteryPct(existing?.masteryPct ?? null, score)
+      const status = deriveTopicStatus(existing?.status ?? 'IN_PROGRESS', masteryPct)
       return tx.topicProgress.upsert({
         where: key,
         create: { userId, subjectSlug, topicSlug, status, masteryPct, attempts: 1, lastScore: score },
