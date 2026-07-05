@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 9,
-  "drafted_assets": 455,
-  "completion_pct": 50.1,
+  "completed_domains": 10,
+  "drafted_assets": 511,
+  "completion_pct": 56.3,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:eb81022f30390dbcdd34cb5c317d513b6dadc02b9c7409bd179a4d6a2175fb7a",
-    "chapters_listing_sha256": "sha256:7c049ba9350a37dc99c58144e363bfd63a82a5c9ebcf5426014ba40fa4b5676b"
+    "assets_sha256": "sha256:62d47ab641a7ebf194254572fb9fe5b16501b454292b526d9fc0da9f104979ad",
+    "chapters_listing_sha256": "sha256:4b130a1da749f6d30c328890adfa7c629970955b4ec10aab49fbae7e099ddc76"
   },
   "domains": [
     {
@@ -275,14 +275,28 @@
       "domain_prefix": "math.de",
       "domain_name": "Differential Equations",
       "concept_count": 56,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 56,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/de.md",
+      "manifest_file": "docs/mathematics/domains/math.de-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:b9ff270ab0ce8782a28e757e667003ef3101d6f9907cb15e300bdfc68be783a4",
+        "domain_assets_sha256": "sha256:7d080adb8f04e3a1d137f129b567f60814864c7b3fa2a6c9b2dc187c6dc46e97",
+        "graph_domain_sha256": "sha256:50555b0708464bd038e7e0aa2a7004a4f331a8c504dc37bebe6da38cb79d0ca3",
+        "validation_report_sha256": "sha256:f81846a4ab83e48a83ffb5ee31cb8486f2c4917484528d37104ed878a1d4cf80"
+      },
+      "creation_commit": "e877a75d1653a4d52cdd2fb72f2e8b52c33351bf",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "linear-algebra",
@@ -487,6 +501,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "9dde4c2ed56217c06cd22e9fac9123f6ba86d49b",
-  "last_updated": "2026-07-05T03:30:11Z"
+  "last_commit": "e877a75d1653a4d52cdd2fb72f2e8b52c33351bf",
+  "last_updated": "2026-07-05T08:11:55Z"
 }
