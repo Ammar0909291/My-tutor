@@ -1,11 +1,12 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { LanguageToggle } from '@/components/ui/LanguageToggle'
+import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 
 type State = 'idle' | 'loading' | 'sent' | 'error'
 
 export default function ForgotPasswordPage() {
+  const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [state, setState] = useState<State>('idle')
   const [errorMsg, setErrorMsg] = useState('')
@@ -22,13 +23,13 @@ export default function ForgotPasswordPage() {
       })
       const data = await res.json()
       if (!res.ok || !data.success) {
-        setErrorMsg(data.error ?? 'Произошла ошибка. Попробуй ещё раз.')
+        setErrorMsg(data.error ?? t('error_default'))
         setState('error')
       } else {
         setState('sent')
       }
     } catch {
-      setErrorMsg('Нет соединения с сервером.')
+      setErrorMsg(t('error_no_connection'))
       setState('error')
     }
   }
@@ -49,24 +50,24 @@ export default function ForgotPasswordPage() {
           <div className="text-center">
             <div className="text-5xl mb-5">📬</div>
             <h1 className="text-2xl font-black mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              Письмо отправлено
+              {t('fp_sent_title')}
             </h1>
             <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Мы отправили ссылку для сброса пароля на{' '}
+              {t('fp_sent_desc_pre')}{' '}
               <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{email}</span>.
-              Проверь папку со спамом, если письмо не пришло.
+              {' '}{t('fp_sent_desc_post')}
             </p>
             <Link href="/auth/login" className="btn-primary block w-full py-3 text-center text-sm font-bold">
-              Вернуться к входу
+              {t('fp_back_to_login')}
             </Link>
           </div>
         ) : (
           <>
             <h1 className="text-2xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              Забыл пароль?
+              {t('fp_title')}
             </h1>
             <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-              Введи свой email и мы пришлём ссылку для сброса пароля.
+              {t('fp_sub')}
             </p>
 
             {(state === 'error') && (
@@ -89,14 +90,14 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit" disabled={state === 'loading'}
                 className="btn-primary w-full py-3 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
-                {state === 'loading' ? 'Отправка...' : 'Отправить ссылку'}
+                {state === 'loading' ? t('fp_sending') : t('fp_submit')}
               </button>
             </form>
 
             <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Вспомнил пароль?{' '}
+              {t('fp_remembered')}{' '}
               <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: 'var(--accent-primary)' }}>
-                Войти
+                {t('login_submit')}
               </Link>
             </p>
           </>

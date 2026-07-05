@@ -3,7 +3,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
-import { LanguageToggle } from '@/components/ui/LanguageToggle'
+import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 
 type State = 'idle' | 'loading' | 'success' | 'error'
 
@@ -19,6 +19,7 @@ function ResetPasswordForm() {
   const router = useRouter()
   const params = useSearchParams()
   const token = params.get('token') ?? ''
+  const { t } = useLanguage()
 
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
@@ -28,20 +29,21 @@ function ResetPasswordForm() {
 
   useEffect(() => {
     if (!token) {
-      setErrorMsg('Ссылка для сброса пароля недействительна или устарела.')
+      setErrorMsg(t('rp_invalid_link'))
       setState('error')
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (password !== confirm) {
-      setErrorMsg('Пароли не совпадают.')
+      setErrorMsg(t('rp_mismatch'))
       setState('error')
       return
     }
     if (password.length < 8) {
-      setErrorMsg('Пароль должен содержать минимум 8 символов.')
+      setErrorMsg(t('rp_min_length'))
       setState('error')
       return
     }
@@ -56,21 +58,21 @@ function ResetPasswordForm() {
       })
       const data = await res.json()
       if (!res.ok || !data.success) {
-        setErrorMsg(data.error ?? 'Произошла ошибка.')
+        setErrorMsg(data.error ?? t('error_default'))
         setState('error')
       } else {
         setState('success')
         setTimeout(() => router.push('/auth/login'), 3000)
       }
     } catch {
-      setErrorMsg('Нет соединения с сервером.')
+      setErrorMsg(t('error_no_connection'))
       setState('error')
     }
   }
 
   const strength = password.length === 0 ? 0 : password.length < 8 ? 1 : password.length < 12 ? 2 : 3
   const strengthColors = ['transparent', '#F85149', '#E3B341', '#56D364']
-  const strengthLabels = ['', 'Слабый', 'Средний', 'Надёжный']
+  const strengthLabels = ['', t('rp_strength_weak'), t('rp_strength_medium'), t('rp_strength_strong')]
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative" style={{ background: 'var(--bg-base)' }}>
@@ -87,22 +89,22 @@ function ResetPasswordForm() {
           <div className="text-center">
             <div className="text-5xl mb-5">✅</div>
             <h1 className="text-2xl font-black mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              Пароль изменён
+              {t('rp_success_title')}
             </h1>
             <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-              Новый пароль установлен. Перенаправляю на страницу входа…
+              {t('rp_success_desc')}
             </p>
             <Link href="/auth/login" className="btn-primary block w-full py-3 text-center text-sm font-bold">
-              Войти сейчас
+              {t('rp_login_now')}
             </Link>
           </div>
         ) : (
           <>
             <h1 className="text-2xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-              Новый пароль
+              {t('rp_title')}
             </h1>
             <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-              Придумай надёжный пароль для своего аккаунта.
+              {t('rp_sub')}
             </p>
 
             {(state === 'error') && (
@@ -115,13 +117,13 @@ function ResetPasswordForm() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>
-                  Новый пароль
+                  {t('rp_new_password_label')}
                 </label>
                 <div className="relative">
                   <input
                     type={showPwd ? 'text' : 'password'} value={password}
                     onChange={(e) => { setPassword(e.target.value); setState('idle') }}
-                    required placeholder="Минимум 8 символов" className="input-field pr-10"
+                    required placeholder={t('signup_password_placeholder')} className="input-field pr-10"
                     disabled={!token}
                   />
                   <button type="button" onClick={() => setShowPwd(!showPwd)}
@@ -147,30 +149,30 @@ function ResetPasswordForm() {
 
               <div>
                 <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>
-                  Подтвердить пароль
+                  {t('rp_confirm_label')}
                 </label>
                 <input
                   type={showPwd ? 'text' : 'password'} value={confirm}
                   onChange={(e) => { setConfirm(e.target.value); setState('idle') }}
-                  required placeholder="Повтори пароль" className="input-field"
+                  required placeholder={t('rp_confirm_placeholder')} className="input-field"
                   style={confirm && confirm !== password ? { borderColor: '#F85149' } : undefined}
                   disabled={!token}
                 />
                 {confirm && confirm !== password && (
-                  <p className="mt-1 text-xs" style={{ color: '#F85149' }}>Пароли не совпадают</p>
+                  <p className="mt-1 text-xs" style={{ color: '#F85149' }}>{t('rp_confirm_mismatch')}</p>
                 )}
               </div>
 
               <button type="submit"
                 disabled={state === 'loading' || !token || password !== confirm || password.length < 8}
                 className="btn-primary w-full py-3 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
-                {state === 'loading' ? 'Сохранение...' : 'Установить пароль'}
+                {state === 'loading' ? t('rp_saving') : t('rp_submit')}
               </button>
             </form>
 
             <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
               <Link href="/auth/forgot-password" className="font-semibold hover:underline" style={{ color: 'var(--accent-primary)' }}>
-                Запросить новую ссылку
+                {t('rp_request_new_link')}
               </Link>
             </p>
           </>

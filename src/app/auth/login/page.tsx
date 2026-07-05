@@ -5,16 +5,13 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
+import type { TranslationKey } from '@/lib/i18n'
 
-const NEXTAUTH_ERROR_KEYS: Record<string, 'error_invalid' | 'error_required'> = {
+const NEXTAUTH_ERROR_KEYS: Record<string, TranslationKey> = {
   CredentialsSignin: 'error_invalid',
-}
-
-const NEXTAUTH_ERROR_FALLBACK: Record<string, string> = {
-  OAuthAccountNotLinked: 'Этот email уже используется другим способом входа',
-  OAuthSignin: 'Ошибка входа через Google. Попробуй ещё раз.',
-  Callback: 'Ошибка авторизации. Попробуй ещё раз.',
-  Default: 'Произошла ошибка. Попробуй ещё раз.',
+  OAuthAccountNotLinked: 'error_oauth_account_not_linked',
+  OAuthSignin: 'error_oauth_signin',
+  Callback: 'error_callback',
 }
 
 export default function LoginPage() {
@@ -39,8 +36,7 @@ function LoginForm() {
   useEffect(() => {
     const errorCode = params.get('error')
     if (errorCode) {
-      const key = NEXTAUTH_ERROR_KEYS[errorCode]
-      setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[errorCode] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+      setError(t(NEXTAUTH_ERROR_KEYS[errorCode] ?? 'error_default'))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
@@ -54,10 +50,9 @@ function LoginForm() {
       const result = await signIn('credentials', { email, password, redirect: false })
       setLoading(false)
 
-      if (!result) { setError(NEXTAUTH_ERROR_FALLBACK.Default); return }
+      if (!result) { setError(t('error_default')); return }
       if (result.error) {
-        const key = NEXTAUTH_ERROR_KEYS[result.error]
-        setError(key ? t(key) : (NEXTAUTH_ERROR_FALLBACK[result.error] ?? NEXTAUTH_ERROR_FALLBACK.Default))
+        setError(t(NEXTAUTH_ERROR_KEYS[result.error] ?? 'error_default'))
         return
       }
 
@@ -65,7 +60,7 @@ function LoginForm() {
       window.location.href = callbackUrl
     } catch {
       setLoading(false)
-      setError(NEXTAUTH_ERROR_FALLBACK.Default)
+      setError(t('error_default'))
     }
   }
 
