@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `math.fnal complete`*
+*Last updated: 2026-07-05 · Commit: `math.graph complete`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
@@ -40,10 +40,10 @@
 | 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
 | 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
 | 22 | Optimization | math.opt | 16 | placeholder | — | Pending |
-| 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
+| 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 18/24 domains complete · 809/908 assets drafted · 99/908 remaining
+**Summary:** 19/24 domains complete · 848/908 assets drafted · 60/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -119,6 +119,10 @@ complex-numbers-analysis, complex-function, cauchy-riemann, analytic-functions, 
 
 normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
 
+### math.graph (16 concepts) — COMPLETE
+
+graph, graph-invariants, graph-operations, connectivity, tree, minimum-spanning-tree, shortest-path, maximum-flow, matching, eulerian-circuit, hamiltonian-cycle, graph-coloring, algebraic-graph-theory, ramsey-theory, extremal-graph-theory, random-graph
+
 ## Remaining Domains
 
 | Domain | Concepts | Notes |
@@ -127,8 +131,8 @@ normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-
 | math.meas | 13 | Measure Theory |
 | ~~math.fnal~~ | ~~18~~ | ~~Functional Analysis — COMPLETE~~ |
 | math.num | 16 | Numerical Analysis |
-| math.opt | 16 | Optimization |
-| math.graph | 16 | Graph Theory |
+| math.opt | 16 | Optimization (Mohd) |
+| ~~math.graph~~ | ~~16~~ | ~~Graph Theory — COMPLETE~~ |
 | math.cat | 15 | Category Theory |
 
-**Remaining: 6 domains · 99 concepts**
+**Remaining: 5 domains · 60 concepts**
