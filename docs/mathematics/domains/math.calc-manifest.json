@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "calculus",
+  "domain_prefix": "math.calc",
+  "domain_name": "Calculus",
+  "subject": "mathematics",
+  "concept_count": 76,
+  "asset_count": 76,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-05",
+    "validation_commit": "c6ad1bbe7d9b798851447a2e094ae00d2fe728a9"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:4ee05364cd56a44db1d8d12fe97e86c478d0fb8bc2b71c890af5dae9195bfc06",
+    "domain_assets_sha256": "sha256:8524737d7bba06dd3d5c4af7f4bbee4b5e2d1c53320c8b7bc7e656189cbdf3b2",
+    "graph_domain_sha256": "sha256:4969b84be374752207b23df3666850001a73cfaa12e99f9889aa9c3291b76194",
+    "validation_report_sha256": "sha256:e2697085d5f551e88b449aeb2c56fd5e5886d784081bb9bbb2d1ccc021fba2a6"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/calc.md",
+    "docs/mathematics/domains/math.calc-validation-report.md",
+    "docs/mathematics/domains/math.calc-summary.md",
+    "docs/mathematics/domains/math.calc-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "1.0.0",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "c6ad1bbe7d9b798851447a2e094ae00d2fe728a9",
+  "created_at": "2026-07-05T03:27:41Z"
+}

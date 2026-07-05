@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-03 · Commit: `7d8a2de`*
+*Last updated: 2026-07-05 · Commit: `c6ad1bbe7d9b798851447a2e094ae00d2fe728a9`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`7d8a2de`
+`c6ad1bbe7d9b798851447a2e094ae00d2fe728a9`
 
 ## Knowledge Graph
 
@@ -29,8 +29,8 @@
 | 06 | Trigonometry | math.trig | 25 | draft ✓ | chapters/trig.md ✓ | Complete |
 | 07 | Functions | math.func | 29 | draft ✓ | chapters/func.md ✓ | Complete |
 | 08 | Sequences and Series | math.seq | 21 | draft ✓ | chapters/seq.md ✓ | Complete |
-| 09 | Calculus | math.calc | 76 | placeholder | — | **NEXT** |
-| 10 | Differential Equations | math.de | 56 | placeholder | — | Pending |
+| 09 | Calculus | math.calc | 76 | draft ✓ | chapters/calc.md ✓ | Complete |
+| 10 | Differential Equations | math.de | 56 | placeholder | — | **NEXT** |
 | 11 | Linear Algebra | math.linalg | 61 | placeholder | — | Pending |
 | 12 | Probability | math.prob | 49 | placeholder | — | Pending |
 | 13 | Statistics | math.stats | 40 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 8/24 domains complete · 379/908 assets drafted · 529/908 remaining
+**Summary:** 9/24 domains complete · 455/908 assets drafted · 453/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -82,12 +82,11 @@ function-concept, domain-range, function-notation, graph-of-function, real-value
 
 sequence, arithmetic-sequence, geometric-sequence, recursive-sequences, convergent, divergent-sequence, series, partial-sums, arithmetic-series, geometric-series, infinite-geometric-series, series-convergence, divergence-test, comparison-test, ratio-test, root-test, integral-test, alternating-series, absolute-convergence, harmonic-series, telescoping-series
 
-### math.calc (76 concepts) — IN PROGRESS
+### math.calc (76 concepts) — COMPLETE
 
-0/76 authored. Concepts:
 limits, limit-laws, one-sided-limits, limits-at-infinity, squeeze-theorem, continuity, continuity-types, ivt, derivative-intro, derivative-definition, differentiability, derivative-rules, product-rule, quotient-rule, chain-rule, derivative-exponential, derivative-ln, logarithmic-differentiation, derivative-trig, derivative-inverse-trig, hyperbolic-derivatives, implicit-differentiation, higher-order-derivatives, related-rates, lhopitals-rule, mean-value-theorem, rolles-theorem, increasing-decreasing, critical-points, local-extrema, concavity, optimization, curve-sketching, linearization, antiderivatives, riemann-sums, definite-integral, ftc-part1, ftc-part2, u-substitution, integration-by-parts, trig-integrals, trig-substitution, partial-fractions, reduction-formulas, improper-integrals, integral-area, volume-revolution, arc-length, surface-area-integral, power-series, radius-of-convergence, taylor-series, maclaurin-series, taylor-remainder, parametric-curves, parametric-calculus, multivariable-intro, partial-derivatives, gradient, directional-derivative, chain-rule-multivariable, multivariable-extrema, multiple-integrals, double-integrals, triple-integrals, change-of-variables, line-integrals, surface-integrals, vector-fields, curl-divergence, greens-theorem, stokes-theorem, divergence-theorem, fourier-series-intro, sequence-limits
 
-### math.de (56 concepts) — PENDING
+### math.de (56 concepts) — IN PROGRESS
 
 0/56 authored. Concepts:
 ode, ode-order, ode-linearity, solution-types, ivp, existence-uniqueness, first-order-ode, separable, linear-first-order, exact-ode, bernoulli, homogeneous-ode, slope-field, euler-method, second-order-ode, second-order-linear, second-order-homogeneous, wronskian, char-equation, undetermined-coefficients, variation-of-parameters, harmonic-oscillator, resonance, higher-order-ode, laplace-transform, laplace-properties, inverse-laplace, laplace-ode, convolution-theorem, systems-ode, systems-matrix-method, phase-plane, stability-analysis, series-solution, frobenius-method, bessel-equation, legendre-equation, sturm-liouville, eigenfunction-expansion, bvp, fourier-series, fourier-convergence, fourier-sine-cosine, fourier-transform, pde, pde-classification, separation-of-variables-pde, heat-equation, wave-equation, laplace-equation, harmonic-functions, poisson-equation, greens-function, nonlinear-ode, bifurcation, chaos
@@ -193,5 +192,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Calculus** (`math.calc`) · 76 concepts
+**Differential Equations** (`math.de`) · 56 concepts
 

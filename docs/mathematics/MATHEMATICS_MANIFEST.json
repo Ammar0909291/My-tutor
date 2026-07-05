@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 8,
-  "drafted_assets": 379,
-  "completion_pct": 41.7,
+  "completed_domains": 9,
+  "drafted_assets": 455,
+  "completion_pct": 50.1,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:92749cce1e573053e18814b1ac401420e1df96938f6d7bf16d393841aafeda69",
-    "chapters_listing_sha256": "sha256:ec26c68d48f8f120659f5a224decfaa5183eb0a1701c28c6b0c8459ff2a7d286"
+    "assets_sha256": "sha256:eb81022f30390dbcdd34cb5c317d513b6dadc02b9c7409bd179a4d6a2175fb7a",
+    "chapters_listing_sha256": "sha256:7c049ba9350a37dc99c58144e363bfd63a82a5c9ebcf5426014ba40fa4b5676b"
   },
   "domains": [
     {
@@ -247,14 +247,28 @@
       "domain_prefix": "math.calc",
       "domain_name": "Calculus",
       "concept_count": 76,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 76,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/calc.md",
+      "manifest_file": "docs/mathematics/domains/math.calc-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:4ee05364cd56a44db1d8d12fe97e86c478d0fb8bc2b71c890af5dae9195bfc06",
+        "domain_assets_sha256": "sha256:8524737d7bba06dd3d5c4af7f4bbee4b5e2d1c53320c8b7bc7e656189cbdf3b2",
+        "graph_domain_sha256": "sha256:4969b84be374752207b23df3666850001a73cfaa12e99f9889aa9c3291b76194",
+        "validation_report_sha256": "sha256:e2697085d5f551e88b449aeb2c56fd5e5886d784081bb9bbb2d1ccc021fba2a6"
+      },
+      "creation_commit": "c6ad1bbe7d9b798851447a2e094ae00d2fe728a9",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "1.0.0",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "differential-equations",
@@ -473,6 +487,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "7d8a2de",
-  "last_updated": "2026-07-03T07:43:00Z"
+  "last_commit": "c6ad1bbe7d9b798851447a2e094ae00d2fe728a9",
+  "last_updated": "2026-07-05T03:27:41Z"
 }
