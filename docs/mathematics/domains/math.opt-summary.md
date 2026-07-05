@@ -1,6 +1,6 @@
 # Domain Summary — Optimization (`math.opt`)
 
-*Generated: 2026-07-05 · Commit: `a99431046f9e6061c8db5aa611f6619b506bd2be`*
+*Generated: 2026-07-05 · Commit: `146f512f2da20075bcc3b3bab4a3677d16129567`*
 
 ## This Domain
 
@@ -10,16 +10,16 @@
 | Prefix | `math.opt` |
 | Concepts authored | 16 |
 | New assets created | 16 (placeholder → draft) |
-| Commit | `a99431046f9e6061c8db5aa611f6619b506bd2be` |
+| Commit | `146f512f2da20075bcc3b3bab4a3677d16129567` |
 
 ## Cumulative Mathematics Progress
 
 | Metric | Value |
 |--------|-------|
-| Domains complete | 21 / 24 |
-| Concepts authored | 864 / 908 |
-| Concepts remaining | 44 |
-| Completion | 95.2% |
+| Domains complete | 22 / 24 |
+| Concepts authored | 877 / 908 |
+| Concepts remaining | 31 |
+| Completion | 96.6% |
 
 ## Completed Domains
 
@@ -41,13 +41,13 @@
 - Real Analysis (`math.real`) — 30 concepts
 - Complex Analysis (`math.cx`) — 31 concepts
 - Topology (`math.top`) — 23 concepts
+- Measure Theory (`math.meas`) — 13 concepts
 - Functional Analysis (`math.fnal`) — 18 concepts
 - Optimization (`math.opt`) — 16 concepts
 - Graph Theory (`math.graph`) — 16 concepts
 
 ## Remaining Domains
 
-- Measure Theory (`math.meas`) — 13 concepts
 - Numerical Analysis (`math.num`) — 16 concepts
 - Category Theory (`math.cat`) — 15 concepts
 
@@ -55,10 +55,10 @@
 
 | Item | Estimate |
 |------|----------|
-| Remaining domains | 3 |
-| Remaining concepts | 44 |
-| Avg concepts/domain (remaining) | 15 |
-| Estimated sessions at current pace | ~3 (1 domain/session) |
+| Remaining domains | 2 |
+| Remaining concepts | 31 |
+| Avg concepts/domain (remaining) | 16 |
+| Estimated sessions at current pace | ~2 (1 domain/session) |
 
 ## Campaign Context
 

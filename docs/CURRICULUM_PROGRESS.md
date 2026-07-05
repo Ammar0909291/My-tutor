@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `a99431046f9e6061c8db5aa611f6619b506bd2be`*
+*Last updated: 2026-07-05 · Commit: `146f512f2da20075bcc3b3bab4a3677d16129567`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`a99431046f9e6061c8db5aa611f6619b506bd2be`
+`146f512f2da20075bcc3b3bab4a3677d16129567`
 
 ## Knowledge Graph
 
@@ -39,14 +39,14 @@
 | 16 | Real Analysis | math.real | 30 | draft ✓ | chapters/real.md ✓ | Complete |
 | 17 | Complex Analysis | math.cx | 31 | draft ✓ | chapters/cx.md ✓ | Complete |
 | 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
-| 19 | Measure Theory | math.meas | 13 | placeholder | — | **NEXT** |
+| 19 | Measure Theory | math.meas | 13 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
-| 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
+| 21 | Numerical Analysis | math.num | 16 | placeholder | — | **NEXT** |
 | 22 | Optimization | math.opt | 16 | draft ✓ | chapters/opt.md ✓ | Complete |
 | 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 21/24 domains complete · 864/908 assets drafted · 44/908 remaining
+**Summary:** 22/24 domains complete · 877/908 assets drafted · 31/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -122,16 +122,15 @@ complex-numbers-analysis, complex-function, cauchy-riemann, analytic-functions, 
 
 topological-space, open-sets, interior-closure, basis, continuity-top, homeomorphism, compactness, tychonoff, connectedness, separation-axioms, quotient-space, product-space, homotopy, homotopy-equivalence, fundamental-group, van-kampen, covering-space, simplicial-complex, homology, euler-characteristic, cohomology, manifold, smooth-manifold
 
-### math.meas (13 concepts) — IN PROGRESS
+### math.meas (13 concepts) — COMPLETE
 
-0/13 authored. Concepts:
 sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, simple-function, lebesgue-integral, convergence-theorems, lp-space, l2-space, product-measure, radon-nikodym, abstract-measure-spaces
 
 ### math.fnal (18 concepts) — COMPLETE
 
 normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
 
-### math.num (16 concepts) — PENDING
+### math.num (16 concepts) — IN PROGRESS
 
 0/16 authored. Concepts:
 floating-point, error-analysis, root-finding, newtons-method, interpolation, splines, numerical-differentiation, numerical-integration, lu-factorization, cholesky, iterative-linear, qr-algorithm, svd, euler-method, runge-kutta, stiff-ode
@@ -180,5 +179,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Measure Theory** (`math.meas`) · 13 concepts
+**Numerical Analysis** (`math.num`) · 16 concepts
 

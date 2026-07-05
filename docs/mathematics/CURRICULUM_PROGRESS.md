@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `math.graph complete`*
+*Last updated: 2026-07-05 · Commit: `math.opt complete`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
@@ -35,15 +35,15 @@
 | 15 | Abstract Algebra | math.abst | 37 | draft ✓ | chapters/abst.md ✓ | Complete |
 | 16 | Real Analysis | math.real | 30 | draft ✓ | chapters/real.md ✓ | Complete (Mohd) |
 | 17 | Complex Analysis | math.cx | 31 | draft ✓ | chapters/cx.md ✓ | Complete |
-| 18 | Topology | math.top | 23 | placeholder | — | Pending |
-| 19 | Measure Theory | math.meas | 13 | placeholder | — | Pending |
+| 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
+| 19 | Measure Theory | math.meas | 13 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
 | 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
-| 22 | Optimization | math.opt | 16 | placeholder | — | Pending |
+| 22 | Optimization | math.opt | 16 | draft ✓ | chapters/opt.md ✓ | Complete |
 | 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 19/24 domains complete · 848/908 assets drafted · 60/908 remaining
+**Summary:** 20/24 domains complete · 861/908 assets drafted · 47/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -123,16 +123,20 @@ normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-
 
 graph, graph-invariants, graph-operations, connectivity, tree, minimum-spanning-tree, shortest-path, maximum-flow, matching, eulerian-circuit, hamiltonian-cycle, graph-coloring, algebraic-graph-theory, ramsey-theory, extremal-graph-theory, random-graph
 
+### math.meas (13 concepts) — COMPLETE
+
+sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, simple-function, lebesgue-integral, convergence-theorems, lp-space, l2-space, product-measure, radon-nikodym, abstract-measure-spaces
+
 ## Remaining Domains
 
 | Domain | Concepts | Notes |
 |--------|----------|-------|
-| math.top | 23 | Topology |
-| math.meas | 13 | Measure Theory |
+| ~~math.top~~ | ~~23~~ | ~~Topology — COMPLETE~~ |
+| ~~math.meas~~ | ~~13~~ | ~~Measure Theory — COMPLETE~~ |
 | ~~math.fnal~~ | ~~18~~ | ~~Functional Analysis — COMPLETE~~ |
 | math.num | 16 | Numerical Analysis |
-| math.opt | 16 | Optimization (Mohd) |
+| ~~math.opt~~ | ~~16~~ | ~~Optimization — COMPLETE~~ |
 | ~~math.graph~~ | ~~16~~ | ~~Graph Theory — COMPLETE~~ |
 | math.cat | 15 | Category Theory |
 
-**Remaining: 5 domains · 60 concepts**
+**Remaining: 2 domains · 31 concepts**

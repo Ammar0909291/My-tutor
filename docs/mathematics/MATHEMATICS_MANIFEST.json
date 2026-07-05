@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 21,
-  "drafted_assets": 864,
-  "completion_pct": 95.2,
+  "completed_domains": 22,
+  "drafted_assets": 877,
+  "completion_pct": 96.6,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:bf04b2cbe949f866207f857878638cf4f308388d28d5815d434855d7df1d2f3d",
-    "chapters_listing_sha256": "sha256:25e7771358f54ceb01d2e6467c1e47c0267d499b226d7170e3a4eb9f9a9934f9"
+    "assets_sha256": "sha256:4589f20d0846b8d25e386126bcb87a7a126c2933a370cb3755997079bb0afa04",
+    "chapters_listing_sha256": "sha256:00937ed494c2956f1ca0cc4457dbaaf7bc5251173e2e4914f94cc8e7a14c0892"
   },
   "domains": [
     {
@@ -483,9 +483,9 @@
       "domain_prefix": "math.meas",
       "domain_name": "Measure Theory",
       "concept_count": 13,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
+      "assets_drafted": 13,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/meas.md",
       "manifest_file": null,
       "validation_verdict": null,
       "checksums": null,
@@ -532,11 +532,11 @@
       "validation_verdict": "PASS",
       "checksums": {
         "chapter_sha256": "sha256:b9913f41a6a6129109da50b6442f6af43732085f7e11e774498fa384198c97b6",
-        "domain_assets_sha256": "sha256:684462c8604fbe472d337b7ac03446fb67feaf1d91355d24162b029a8d82b6d3",
+        "domain_assets_sha256": "sha256:8ec1b05f423dd0c899a873ba854f868cfc45dcdc41a6d143961214a10a8f3cdf",
         "graph_domain_sha256": "sha256:76834046090d528e52fa735a9de0e303fe221b7b270b08827e48085130eb2bdc",
         "validation_report_sha256": "sha256:64d5696ee47949609eba0b3092b71740cc9563e51bd9d7b6c0191c36ad4f65b0"
       },
-      "creation_commit": "a99431046f9e6061c8db5aa611f6619b506bd2be",
+      "creation_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
       "dependency_versions": {
         "kg_name": "Canonical Mathematics Knowledge Graph",
         "kg_version": "1.0.1",
@@ -583,6 +583,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "a99431046f9e6061c8db5aa611f6619b506bd2be",
-  "last_updated": "2026-07-05T18:38:44Z"
+  "last_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
+  "last_updated": "2026-07-05T18:42:12Z"
 }

@@ -11,11 +11,11 @@
     "verdict": "PASS",
     "validation_script_version": "1.1.0",
     "validated_at": "2026-07-05",
-    "validation_commit": "a99431046f9e6061c8db5aa611f6619b506bd2be"
+    "validation_commit": "146f512f2da20075bcc3b3bab4a3677d16129567"
   },
   "checksums": {
     "chapter_sha256": "sha256:b9913f41a6a6129109da50b6442f6af43732085f7e11e774498fa384198c97b6",
-    "domain_assets_sha256": "sha256:684462c8604fbe472d337b7ac03446fb67feaf1d91355d24162b029a8d82b6d3",
+    "domain_assets_sha256": "sha256:8ec1b05f423dd0c899a873ba854f868cfc45dcdc41a6d143961214a10a8f3cdf",
     "graph_domain_sha256": "sha256:76834046090d528e52fa735a9de0e303fe221b7b270b08827e48085130eb2bdc",
     "validation_report_sha256": "sha256:64d5696ee47949609eba0b3092b71740cc9563e51bd9d7b6c0191c36ad4f65b0"
   },
@@ -35,6 +35,6 @@
     "generator_version": "curriculum-pipeline-v1.0",
     "validation_version": "1.1.0"
   },
-  "creation_commit": "a99431046f9e6061c8db5aa611f6619b506bd2be",
-  "created_at": "2026-07-05T18:38:35Z"
+  "creation_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
+  "created_at": "2026-07-05T18:42:06Z"
 }
