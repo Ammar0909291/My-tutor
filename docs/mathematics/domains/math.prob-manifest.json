@@ -1,0 +1,38 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "probability",
+  "domain_prefix": "math.prob",
+  "domain_name": "Probability",
+  "subject": "mathematics",
+  "concept_count": 49,
+  "asset_count": 49,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-05",
+    "validation_commit": "pipeline-prob-v1"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:0ad82dd26e0d59e273f39d384c27a2caa44cc82bc900b0678ff0bf437f9d86dd",
+    "domain_assets_sha256": "sha256:ca76ef6cef4240d7a45481fad5fe869eae21936bd5d83ec49e2198f325e9ed8c",
+    "graph_domain_sha256": "sha256:5ff7ad94a5953dcc2799702e0a6f57098f5f889c32341ff49339da9a20002248",
+    "validation_report_sha256": "sha256:0981f3f91517da6f362b515228e817c950a826fedb930f5f970b0a25a5ddd54f"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/prob.md",
+    "docs/mathematics/validation/PROB_VALIDATION_REPORT.md",
+    "docs/mathematics/domains/math.prob-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "4ae2048",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2"
+  },
+  "status": "complete",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "notes": "All 49 concepts authored and validated. Validation PASS. Pedagogical audit passed (11/49 concepts audited)."
+}
