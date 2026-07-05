@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 12,
-  "drafted_assets": 604,
-  "completion_pct": 66.5,
+  "completed_domains": 13,
+  "drafted_assets": 634,
+  "completion_pct": 69.8,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:20a6041cc73d0324904fbd2d447ea1e3d1213e87d1081429bdf2c37854089274",
-    "chapters_listing_sha256": "sha256:95f647be305fd4a2cb34391199bb965dc96c8a4ed3ff27fd0d2c099035a6ee80"
+    "assets_sha256": "sha256:2c2e041e0e5baa408cb0d89a2015281cdf54d5cf214d0bf17ad0229b3ec2e0e3",
+    "chapters_listing_sha256": "sha256:a68e88e5b6a416de2073afd873f53775f1896678424f0c9fa7ccac7b9a228234"
   },
   "domains": [
     {
@@ -366,7 +366,7 @@
       "validation_verdict": "PASS",
       "checksums": {
         "chapter_sha256": "sha256:799480b6a3bb6e50375d5d0bdfe499ef55979db109572ac7701cbb1bf36077e3",
-        "domain_assets_sha256": "sha256:b760cf2790666871d6eed36bc1e63fb009ec9902f44f46820cc9181e2c1f31d7",
+        "domain_assets_sha256": "sha256:5b5d734fb1be6ba94052a2d1aef856f33a683e20440ddc255e342d5c4c567ae2",
         "graph_domain_sha256": "sha256:b39aa6aa8115158745e25e44c415ac4016d9259f660ba8736d5300161526e7dd",
         "validation_report_sha256": "sha256:2233b988e6328029bb4bbca8dd27f28e582736e8347426ef7a1fe64031ccbab9"
       },
@@ -401,14 +401,28 @@
       "domain_prefix": "math.real",
       "domain_name": "Real Analysis",
       "concept_count": 30,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 30,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/real.md",
+      "manifest_file": "docs/mathematics/domains/math.real-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:c90d5f839f8d2f61fa8936857d6990a522df45c5fdc5f2e6e16c1ffdca9165bf",
+        "domain_assets_sha256": "sha256:43a33c5935f355b786ee4a45807d443aeadd7cea9cea64033d826c043b9b8789",
+        "graph_domain_sha256": "sha256:fec2dbafa982b41bff517a7e77c5e779ca2043760e93095cf894d5ecde2ebcfc",
+        "validation_report_sha256": "sha256:0a62586415fee530ed525b155ce9475da77b1e7dc699dbd1af2d6656a99bfc97"
+      },
+      "creation_commit": "69dfdf1894371d16896b54a6fbbb713f2f4fda8f",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae204810215a15bf6ab35990a754745e7b9de62",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "complex-analysis",
@@ -529,6 +543,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "f152927ed1523997bc3e7fed771762b6f9f3177b",
-  "last_updated": "2026-07-05T13:27:44Z"
+  "last_commit": "69dfdf1894371d16896b54a6fbbb713f2f4fda8f",
+  "last_updated": "2026-07-05T14:08:59Z"
 }
