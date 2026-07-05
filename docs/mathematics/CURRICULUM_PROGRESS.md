@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `c6ad1bbe7d9b798851447a2e094ae00d2fe728a9`*
+*Last updated: 2026-07-05 · Commit: `pending — math.prob authoring complete`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
@@ -30,9 +30,9 @@
 | 07 | Functions | math.func | 29 | draft ✓ | chapters/func.md ✓ | Complete |
 | 08 | Sequences and Series | math.seq | 21 | draft ✓ | chapters/seq.md ✓ | Complete |
 | 09 | Calculus | math.calc | 76 | draft ✓ | chapters/calc.md ✓ | Complete |
-| 10 | Differential Equations | math.de | 56 | placeholder | — | **NEXT** |
-| 11 | Linear Algebra | math.linalg | 61 | placeholder | — | Pending |
-| 12 | Probability | math.prob | 49 | placeholder | — | Pending |
+| 10 | Differential Equations | math.de | 56 | draft ✓ | chapters/de.md ✓ | Complete |
+| 11 | Linear Algebra | math.linalg | 61 | placeholder | — | Assigned: Mohd |
+| 12 | Probability | math.prob | 49 | draft ✓ | chapters/prob.md ✓ | Complete |
 | 13 | Statistics | math.stats | 40 | placeholder | — | Pending |
 | 14 | Discrete Mathematics | math.disc | 32 | placeholder | — | Pending |
 | 15 | Abstract Algebra | math.abst | 37 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 9/24 domains complete · 455/908 assets drafted · 453/908 remaining
+**Summary:** 11/24 domains complete · 560/908 assets drafted · 348/908 remaining (math.linalg assigned to Mohd)
 
 ## Completed Concepts Per Domain
 
@@ -86,9 +86,9 @@ sequence, arithmetic-sequence, geometric-sequence, recursive-sequences, converge
 
 limits, limit-laws, one-sided-limits, limits-at-infinity, squeeze-theorem, continuity, continuity-types, ivt, derivative-intro, derivative-definition, differentiability, derivative-rules, product-rule, quotient-rule, chain-rule, derivative-exponential, derivative-ln, logarithmic-differentiation, derivative-trig, derivative-inverse-trig, hyperbolic-derivatives, implicit-differentiation, higher-order-derivatives, related-rates, lhopitals-rule, mean-value-theorem, rolles-theorem, increasing-decreasing, critical-points, local-extrema, concavity, optimization, curve-sketching, linearization, antiderivatives, riemann-sums, definite-integral, ftc-part1, ftc-part2, u-substitution, integration-by-parts, trig-integrals, trig-substitution, partial-fractions, reduction-formulas, improper-integrals, integral-area, volume-revolution, arc-length, surface-area-integral, power-series, radius-of-convergence, taylor-series, maclaurin-series, taylor-remainder, parametric-curves, parametric-calculus, multivariable-intro, partial-derivatives, gradient, directional-derivative, chain-rule-multivariable, multivariable-extrema, multiple-integrals, double-integrals, triple-integrals, change-of-variables, line-integrals, surface-integrals, vector-fields, curl-divergence, greens-theorem, stokes-theorem, divergence-theorem, fourier-series-intro, sequence-limits
 
-### math.de (56 concepts) — IN PROGRESS
+### math.de (56 concepts) — COMPLETE
 
-0/56 authored. Concepts:
+56/56 drafted. Concepts:
 ode, ode-order, ode-linearity, solution-types, ivp, existence-uniqueness, first-order-ode, separable, linear-first-order, exact-ode, bernoulli, homogeneous-ode, slope-field, euler-method, second-order-ode, second-order-linear, second-order-homogeneous, wronskian, char-equation, undetermined-coefficients, variation-of-parameters, harmonic-oscillator, resonance, higher-order-ode, laplace-transform, laplace-properties, inverse-laplace, laplace-ode, convolution-theorem, systems-ode, systems-matrix-method, phase-plane, stability-analysis, series-solution, frobenius-method, bessel-equation, legendre-equation, sturm-liouville, eigenfunction-expansion, bvp, fourier-series, fourier-convergence, fourier-sine-cosine, fourier-transform, pde, pde-classification, separation-of-variables-pde, heat-equation, wave-equation, laplace-equation, harmonic-functions, poisson-equation, greens-function, nonlinear-ode, bifurcation, chaos
 
 ### math.linalg (61 concepts) — PENDING
@@ -96,9 +96,9 @@ ode, ode-order, ode-linearity, solution-types, ivp, existence-uniqueness, first-
 0/61 authored. Concepts:
 vector, vector-addition, scalar-multiplication, dot-product, norm, unit-vector, orthogonality, cross-product, matrix, matrix-addition, matrix-multiplication, matrix-transpose, symmetric-matrix, linear-system, augmented-matrix, row-reduction, row-echelon, rank, matrix-inverse, determinant, cofactor-expansion, det-properties, cramer-rule, lu-factorization, vector-space, subspace, span, linear-independence, basis, dimension, coordinates, change-of-basis, null-space, column-space, rank-nullity, linear-map, kernel-image, matrix-representation, eigenvalues, characteristic-polynomial, eigenspace, diagonalization, matrix-exponential, jordan-form, spectral-theorem, positive-definite, cholesky, inner-product, inner-product-space, orthogonal-basis, gram-schmidt, projection, least-squares, qr-factorization, svd, singular-values, pseudoinverse, tensor, dual-space, distance, angle-vectors
 
-### math.prob (49 concepts) — PENDING
+### math.prob (49 concepts) — COMPLETE
 
-0/49 authored. Concepts:
+49/49 drafted. Concepts:
 sample-space, event, probability-measure, probability-axioms, classical-probability, combinatorial-probability, conditional-probability, total-probability, bayes-theorem, independence, bayesian-inference, random-variable, discrete-rv, continuous-rv, pmf, pdf, cdf, quantile, distribution, discrete-distributions, continuous-distributions, normal-distribution, standard-normal, expected-value, linearity-expectation, law-of-unconscious, variance, standard-deviation, moments, mgf, characteristic-function, covariance, correlation, joint-distribution, marginal-distribution, conditional-distribution, conditional-expectation, chebyshev, markov-inequality, lln, clt, convergence-types, generating-function, markov-chain, transition-matrix, stationary-distribution, ergodicity, martingale, poisson-process
 
 ### math.stats (40 concepts) — PENDING
@@ -192,5 +192,6 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Differential Equations** (`math.de`) · 56 concepts
+**Statistics** (`math.stats`) · 40 concepts
+(math.de complete; math.linalg assigned to Mohd; math.prob complete)
 
