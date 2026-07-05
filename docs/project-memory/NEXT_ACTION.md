@@ -1,5 +1,13 @@
 # Next Action
 
+> **⚠️ SUPERSEDED (2026-07-04).** This file describes the dormant Eb*
+> pipeline milestone (pre-architecture-phase work) and is kept as a
+> historical snapshot only. Current direction lives in: `CLAUDE.md`
+> (standing mission + Integration & Validation Loop),
+> `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` (single source of
+> truth), and `docs/architecture/ARCHITECTURE_COMPLETION_REPORT_V1.md`
+> (implementation sequencing). Do not act on the steps below.
+
 > *Single source of truth for "what should I do next." Read this first.
 > Update it before stopping any work session.*
 

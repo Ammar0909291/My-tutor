@@ -1,0 +1,71 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "linguistics_foundations",
+  "domain_prefix": "eng.linguistics",
+  "domain_name": "Linguistics Foundations",
+  "subject": "english",
+  "concept_count": 18,
+  "asset_count": 18,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-04",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.linguistics.what-is-linguistics",
+        "eng.linguistics.phonology-intro",
+        "eng.linguistics.morphology-intro",
+        "eng.linguistics.syntax-theory-intro",
+        "eng.linguistics.semantics-intro",
+        "eng.linguistics.pragmatics-intro",
+        "eng.linguistics.discourse-analysis-intro",
+        "eng.linguistics.sociolinguistics-intro",
+        "eng.linguistics.historical-linguistics-intro",
+        "eng.linguistics.language-families",
+        "eng.linguistics.language-acquisition-intro",
+        "eng.linguistics.psycholinguistics-intro",
+        "eng.linguistics.applied-linguistics-intro",
+        "eng.linguistics.dialectology",
+        "eng.linguistics.bilingualism-and-multilingualism",
+        "eng.linguistics.translation-studies-intro",
+        "eng.linguistics.corpus-linguistics-intro",
+        "eng.linguistics.computational-linguistics-intro"
+      ],
+      "coverage": "100% full structured review (18/18) + 24 independent verification checks against general-linguistics (Hockett design features, phoneme/allophone, Hindi aspiration contrast, eight inflectional suffixes, Chomsky grammaticality split), pragmatics/discourse (Grice, Austin/Searle, Brown & Levinson, Halliday & Hasan, Sacks/Schegloff/Jefferson), sociolinguistics (Labov, matched guise, prestige), historical (Grimm's Law, Great Vowel Shift, Jones 1786, family placements), acquisition/psycholinguistics (Berko wug, U-shape, garden paths, aphasia), and applied/corpus/computational (Nida, skopos, Grosjean, Ferguson, Fishman, Brown Corpus/BNC, Firth, NLP eras) references",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names used from the start; authored in 4 chunks (5+5+4+4)."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:280a4c03a0bbc1c7cad1db1a415527de63172f1fc3687cdd89b10f2ae81dbb0b",
+    "assets_file_sha256": "sha256:0e5b178dc2f5eefe1b28b9799fb60421c7405a6ce395823c484d6445681f8351",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:73c711fabf1297fa859189edef64a20e3488bb2964413971d7538be6affbdeb1"
+  },
+  "generated_files": [
+    "docs/english/chapters/linguistics.md",
+    "docs/english/domains/eng.linguistics-validation-report.md",
+    "docs/english/domains/eng.linguistics-summary.md",
+    "docs/english/domains/eng.linguistics-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "8e87b3f",
+  "created_at": "2026-07-04T07:30:00Z"
+}

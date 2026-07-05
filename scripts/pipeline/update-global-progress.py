@@ -25,6 +25,7 @@ SUBJECTS = [
     ('chemistry',        'Chemistry',        'docs/chemistry'),
     ('biology',          'Biology',          'docs/biology'),
     ('computer_science', 'Computer Science', 'docs/computer-science'),
+    ('english',          'English',          'docs/english'),
 ]
 
 

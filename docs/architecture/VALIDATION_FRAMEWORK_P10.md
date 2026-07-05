@@ -202,18 +202,29 @@ production runtime; buildable as integration-prep):
 3. `npx vitest run` (Tiers 1–2) — hard gate; verified green (506/507,
    ~10 s) and independent of DB and generated client, so this gate is
    deployable immediately with zero flake risk from infrastructure.
-4. `npx tsx scripts/validate-knowledge-graph.ts` for all 5 shipped
-   subjects (**closes R6** — the validator currently has zero CI wiring;
-   read-only over `docs/*/kg/graph.json`, so it cannot interfere with the
-   Curriculum Production Pipeline)
+4. KG validator for every shipped subject (6 as of 2026-07-04 — English
+   joined; the CLI takes a file path and defaults to mathematics):
+   `for s in mathematics physics chemistry biology computer-science english; do
+   npx tsx scripts/validate-knowledge-graph.ts docs/$s/kg/graph.json; done`
+   (**closes R6** — the validator currently has zero CI wiring; read-only
+   over `docs/*/kg/graph.json`, so it cannot interfere with the Curriculum
+   Production Pipeline). All 6 graphs verified PASS on 2026-07-04.
 5. Tier 3a job: Postgres service container → `prisma db push` → seed →
    `next build && next start` → fixture replay
 
-Steps 1–4 are immediately buildable. Step 5 lands with the first T3a
-fixtures. Per-wave exit gates then reference named fixture subsets
-(e.g., Wave 2 exit = fixtures 6, 10, 11, 12 flipped-and-reviewed + rest
-green). Long-term, the ratchet in step 2 trends the baseline to zero and
-then converts to a hard gate.
+**Steps 1–4 BUILT (2026-07-04):** `.github/workflows/validate.yml` +
+`scripts/ci/tsc-ratchet.sh` committed. Local validation: ratchet
+exercised in all three modes (bootstrap/no-baseline → pass with count
+printed; count > baseline → exit 1; count < baseline → pass with
+ratchet-down notice); YAML parses; vitest green (39 files, 506/507);
+all six KG validations PASS via the exact loop the workflow runs. The
+baseline file (`scripts/ci/tsc-baseline.txt`) is deliberately NOT
+committed from the sandbox — capture it from the first hosted CI run's
+ratchet-step log (clean generated Prisma client), then commit it to arm
+the ratchet. Step 5 lands with the first T3a fixtures. Per-wave exit
+gates then reference named fixture subsets (e.g., Wave 2 exit = fixtures
+6, 10, 11, 12 flipped-and-reviewed + rest green). Long-term, the ratchet
+in step 2 trends the baseline to zero and then converts to a hard gate.
 
 ## 7. Build order (all pre-gate except where marked)
 

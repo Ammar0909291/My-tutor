@@ -30,6 +30,7 @@ KNOWN_SUBJECTS = [
     ('chemistry',      'docs/chemistry',      'docs/chemistry/CHEMISTRY_MANIFEST.json'),
     ('biology',        'docs/biology',        'docs/biology/BIOLOGY_MANIFEST.json'),
     ('computer_science', 'docs/computer-science', 'docs/computer-science/CS_MANIFEST.json'),
+    ('english',        'docs/english',        'docs/english/ENGLISH_MANIFEST.json'),
 ]
 
 

@@ -5,7 +5,7 @@
   "campaign_version": "1.0.0-draft",
   "objective": "Canonical Knowledge Graph → Canonical Teaching Assets → Canonical Subject Freeze (v1.0) → Curriculum Views (CBSE, ICSE, IB, Cambridge, University) → Educational Brain intelligence layers",
   "campaign_totals": {
-    "subjects_total": 5,
+    "subjects_total": 6,
     "subjects_complete": 0,
     "subjects_in_progress": 1,
     "subjects_not_started": 4,
@@ -132,6 +132,31 @@
         "total_domains": 0,
         "drafted_assets": 0,
         "total_concepts": 119,
+        "completion_pct": 0.0
+      },
+      "subject_manifest": {
+        "file": null,
+        "sha256": null
+      }
+    },
+    {
+      "subject_id": "english",
+      "subject_dir": "./docs/english",
+      "status": "kg-only",
+      "kg": {
+        "version": "1.0.0",
+        "status": "production",
+        "build_date": "2026-07-03",
+        "concept_count": 216,
+        "domain_count": 12,
+        "file": "./docs/english/kg/graph.json",
+        "sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8"
+      },
+      "teaching_assets": {
+        "completed_domains": 0,
+        "total_domains": 12,
+        "drafted_assets": 0,
+        "total_concepts": 216,
         "completion_pct": 0.0
       },
       "subject_manifest": {

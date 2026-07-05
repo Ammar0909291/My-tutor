@@ -1,0 +1,54 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "foundational_literacy_phonics",
+  "domain_prefix": "eng.phonics",
+  "domain_name": "Foundational Literacy & Phonics",
+  "subject": "english",
+  "concept_count": 14,
+  "asset_count": 14,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.phonics.phonemic-awareness",
+        "eng.phonics.letter-sound-correspondence",
+        "eng.phonics.digraphs",
+        "eng.phonics.sight-words",
+        "eng.phonics.decoding-fluency"
+      ],
+      "coverage": "35.7% full audit (5/14) spanning root/pivotal/high-risk/irregular/capstone concept roles + full-domain phonetic/orthographic verification (60 checks)",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:03fe1712c46c031a775eb4deb9066eff8e3a9ca688b11e6238376035fe2dd971",
+    "assets_file_sha256": "sha256:3ee5e548b533c68a14a83037d3757c4561482875cbf2a678af58f0ccab977d5e",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:3b0dc8781907ab129f9a6740dd5b965abc3e7fa7f342b61f4c625ee2ba5dc2b8"
+  },
+  "generated_files": [
+    "docs/english/chapters/phonics.md",
+    "docs/english/domains/eng.phonics-validation-report.md",
+    "docs/english/domains/eng.phonics-summary.md",
+    "docs/english/domains/eng.phonics-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "a945b3c",
+  "created_at": "2026-07-03T00:00:00Z"
+}

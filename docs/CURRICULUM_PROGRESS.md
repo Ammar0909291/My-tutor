@@ -14,6 +14,7 @@ Last updated: 2026-07-05 03:24 UTC · Commit: `c6ad1bbe7d9b798851447a2e094ae00d2
 | Chemistry | 0/27 | 0/186 | 0.0% | not started |
 | Biology | 0/15 | 0/89 | 0.0% | not started |
 | Computer Science | 0/17 | 0/119 | 0.0% | not started |
+| English | 12/12 | 216/216 | 100.0% | complete |
 
 **Overall campaign: 565/1496 concepts drafted (37.8%)**
 
@@ -28,10 +29,10 @@ Last updated: 2026-07-05 03:24 UTC · Commit: `c6ad1bbe7d9b798851447a2e094ae00d2
 ## Physics
 
 - KG: v1.0.0 (production), 194 concepts, 11 domains
-- Completed domains (5): `phys.meas`, `phys.mech`, `phys.therm`, `phys.wave`, `phys.opt`
-- Concepts: 110 drafted, 84 remaining (56.7%)
-- Latest subject commit: 4b72c8b 2026-07-02 docs(curriculum): refresh global dashboard and record phys.opt commit hash
-- Next domain: `phys.em`
+- Completed domains (11): `phys.meas`, `phys.mech`, `phys.therm`, `phys.wave`, `phys.opt`, `phys.em`, `phys.mod`, `phys.qm`, `phys.rel`, `phys.stat`, `phys.astro`
+- Concepts: 194 drafted, 0 remaining (100.0%)
+- Latest subject commit: 6f7dedc 2026-07-03 docs(curriculum): refresh global dashboard and record phys.astro commit hash — Physics 100% complete
+- Next domain: ALL COMPLETE
 
 ## Chemistry
 
@@ -56,4 +57,12 @@ Last updated: 2026-07-05 03:24 UTC · Commit: `c6ad1bbe7d9b798851447a2e094ae00d2
 - Concepts: 0 drafted, 119 remaining (0.0%)
 - Latest subject commit: 78ad2c1 2026-06-29 Add Teaching Assets Platform v1.0 — generic HOW-to-teach layer over the KG
 - Next domain: `cs.algo`
+
+## English
+
+- KG: v1.0.0 (production), 216 concepts, 12 domains
+- Completed domains (12): `eng.phonics`, `eng.phonetics`, `eng.vocab`, `eng.grammar`, `eng.reading`, `eng.writing`, `eng.listening`, `eng.speaking`, `eng.composition`, `eng.literature`, `eng.linguistics`, `eng.communication`
+- Concepts: 216 drafted, 0 remaining (100.0%)
+- Latest subject commit: 42adc41 2026-07-04 feat(english): author Advanced Communication domain (eng.communication, 12 concepts) — ENGLISH SUBJECT COMPLETE
+- Next domain: ALL COMPLETE
 

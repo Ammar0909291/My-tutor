@@ -1,0 +1,61 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "listening",
+  "domain_prefix": "eng.listening",
+  "domain_name": "Listening",
+  "subject": "english",
+  "concept_count": 8,
+  "asset_count": 8,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-04",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.listening.active-listening",
+        "eng.listening.listening-for-gist",
+        "eng.listening.listening-for-detail",
+        "eng.listening.distinguishing-sounds-in-speech",
+        "eng.listening.following-instructions",
+        "eng.listening.note-taking-while-listening",
+        "eng.listening.listening-comprehension-strategies",
+        "eng.listening.critical-listening"
+      ],
+      "coverage": "100% full structured review (8/8, given the domain's small size) + 17 independent verification checks against communication-skills, listening-pedagogy, phonetics, and second-language-acquisition references",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names used from the start; the domain's 8 concepts were authored in a single chunk."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:1ab49b66cf73fbb2e3f31cc9843ff1d90f14eeaac4a69e4a2d9c9e76ecd2fb67",
+    "assets_file_sha256": "sha256:c42b6c98cf5178ebb95fac23f0bf560c5f9fe5b603fcc786486d8c5cc33ca2da",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:3d297b3cec4a61fefef5689c4d5ac74dd10d26c99d85e427c0ab04d19eca9fba"
+  },
+  "generated_files": [
+    "docs/english/chapters/listening.md",
+    "docs/english/domains/eng.listening-validation-report.md",
+    "docs/english/domains/eng.listening-summary.md",
+    "docs/english/domains/eng.listening-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "4105898",
+  "created_at": "2026-07-04T00:00:00Z"
+}

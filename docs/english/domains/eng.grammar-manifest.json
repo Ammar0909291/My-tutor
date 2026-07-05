@@ -1,0 +1,61 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "grammar_and_syntax",
+  "domain_prefix": "eng.grammar",
+  "domain_name": "Grammar & Syntax",
+  "subject": "english",
+  "concept_count": 43,
+  "asset_count": 43,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.grammar.word-classes-overview",
+        "eng.grammar.word-order",
+        "eng.grammar.clauses",
+        "eng.grammar.present-tenses",
+        "eng.grammar.conditionals",
+        "eng.grammar.subject-verb-agreement",
+        "eng.grammar.parallel-structure",
+        "eng.grammar.run-on-sentences-and-comma-splices"
+      ],
+      "coverage": "100% grammatical-accuracy verification sweep (45 checks across all 43 concepts) + 18.6% full structured review (8/43) spanning entry-point/pivotal/highest-load-bearing/tense-system-opener/highest-complexity/highest-frequency-error/advanced-synthesis/capstone concept roles",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names (expected_outcome, item_types/suggested_count, formats/bloom_alignment/mastery_signal) used from the first authoring chunk onward, applying the lesson learned from eng.vocab's mid-session correction cycle."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:3a96c8e470f5a81b6b37a1f7a2c680aeab5829f1c4d2c09c481325ff4c602bf7",
+    "assets_file_sha256": "sha256:aefb142c651156c4ffb0cacf6c3007c765f254f08d3abc3c260690f9e2b50b65",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:827311d1fa9390e788d3c3110d669a23ebe3c0ad3acefdf62237430df5b903d3"
+  },
+  "generated_files": [
+    "docs/english/chapters/grammar.md",
+    "docs/english/domains/eng.grammar-validation-report.md",
+    "docs/english/domains/eng.grammar-summary.md",
+    "docs/english/domains/eng.grammar-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "f0ad8cc",
+  "created_at": "2026-07-03T00:00:00Z"
+}

@@ -1,0 +1,60 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "vocabulary_development",
+  "domain_prefix": "eng.vocab",
+  "domain_name": "Vocabulary Development",
+  "subject": "english",
+  "concept_count": 20,
+  "asset_count": 20,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.vocab.word-recognition",
+        "eng.vocab.word-formation-processes",
+        "eng.vocab.multiple-meaning-words",
+        "eng.vocab.collocations",
+        "eng.vocab.academic-vocabulary",
+        "eng.vocab.semantic-fields"
+      ],
+      "coverage": "100% factual/linguistic verification sweep (51 checks across all 20 concepts) + 30% full structured review (6/20) spanning entry-point/synthesis-pivot/high-risk/bridge/cross-subject/capstone concept roles",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 1,
+      "type": "schema field-naming (pre-merge, not a content-accuracy defect)",
+      "description": "13 of 20 concepts (chunks 2-4 of 4) initially used non-conformant field names for worked_example_blueprint.outcome (should be expected_outcome), practice_blueprint.task_types (should be item_types, missing suggested_count), and assessment_blueprint.objectives_assessed/sample_item_shapes (should be formats/bloom_alignment/mastery_signal) per teachingAssetSchema.ts. Caught during chapter assembly before merge; corrected mechanically with no change to underlying pedagogical content."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:0a61e1e2053fca9b0ca248904125bac90a4848eb6345753cbc59e102181de274",
+    "assets_file_sha256": "sha256:8b9eb5ed38ea5b2421780a6a2e62afada33767f5d6e763e1e767d8f3e5ef39a9",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:3949e83889a0b47c1eb1f52c1598dce515ee9cc1a1e3f00055e7b3f96ace543d"
+  },
+  "generated_files": [
+    "docs/english/chapters/vocab.md",
+    "docs/english/domains/eng.vocab-validation-report.md",
+    "docs/english/domains/eng.vocab-summary.md",
+    "docs/english/domains/eng.vocab-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "625c2b6",
+  "created_at": "2026-07-03T00:00:00Z"
+}

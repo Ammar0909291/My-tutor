@@ -755,7 +755,7 @@ threshold) are already covered by ADR 05, 07, and 10.
 | R3 | `mastery_threshold` authored with real per-concept variation (0.35–0.95) has zero runtime effect; every engine reads a flat constant instead | **Already realized in production** | ADR 05 Finding 7 | PROPOSED Phase 1/2 in ADR 05, blocked on KG v1 freeze |
 | R4 | Two generations of curriculum/concept-graph representation coexist unsynchronized (file-based KG vs. `Eb*` DB tables) | Open, documented, not scheduled for resolution | Finding 5, `DATA_FLOW.md` §2 | None proposed yet — explicitly out of scope until an ADR names it |
 | R5 | Dormant `Eb*` Educational Brain Decision Pipeline could silently diverge from the canonical pipeline's data model if either evolves without the other in mind | Open, low likelihood while flag stays off | `ARCHITECTURE_DECISIONS.md` Part 2 | Mitigated by strict non-dependency rule (`DEPENDENCY_RULES.md`); re-evaluate before any flag-flip |
-| R6 | No CI wiring for the Knowledge Graph Validator — a malformed `graph.json` could reach runtime undetected | Open | ADR 06 finding | PROPOSED 4-part gate in ADR 06, blocked on KG v1 freeze |
+| R6 | No CI wiring for the Knowledge Graph Validator — a malformed `graph.json` could reach runtime undetected | **Mitigated 2026-07-04** — `.github/workflows/validate.yml` runs the validator on all 6 shipped subjects on every push/PR (plus vitest and a type-error ratchet); pending confirmation of the first green hosted run. The runtime load-time gate half of the risk remains PROPOSED (ADR 06, blocked on KG v1 freeze) | ADR 06 finding; `VALIDATION_FRAMEWORK_P10.md` §6 | CI validator wiring built (steps 1–4); ADR 06 load-time gate still blocked on KG v1 freeze |
 | R7 | Five non-unified mastery/progression vocabularies risk further silent drift the longer they're not bridged | Open, partially mitigated by documentation | ADR 07 Finding 8 | PROPOSED mapping table, unexecuted |
 | R8 | No centrally specified scalability target (learner count, sharding, caching tier) | Open | §6.10 | To be specified across ADR 10 (Memory) and ADR 13 (AI cost) |
 | R9 | Evidence flow (`EvidenceRecord` vs. `EbEvidenceEvent`) not yet confirmed related or unrelated | **RESOLVED, ADR 13** — `EvidenceRecord` is Student Memory (per-learner mastery ledger, ADR 10 Store 2); `EbEvidenceEvent`/`EbAssetScore` are Teaching Memory (per-asset cross-student quality log + score, ADR 10 Store 4). Orthogonal purposes; not merged. Evidence Engine adopts `EbEvidenceEvent` as canonical append-only log, wired into Teaching pipeline's persist stage directly | ADR 13 §2, §4.8 | Resolved — no residual risk |
@@ -765,6 +765,7 @@ threshold) are already covered by ADR 05, 07, and 10.
 | R17 | KG concept slug rename would invalidate `VisualizationCache` entries keyed on `conceptId` without a migration step; orphaned cache rows would be served for renamed concepts | Open, deferred | ADR 12 §12 | KG version gate (ADR 06) must trigger a cache migration (not just invalidation) for affected conceptIds; migration strategy to be specified in ADR 12's future implementation plan |
 | R18 | KG concept slug rename would also orphan historical `EbEvidenceEvent` rows keyed on the old `conceptId` — accumulated evidence for a renamed concept becomes permanently inaccessible without a data migration | Open, deferred | ADR 13 §12 | Slug rename must trigger a migration of historical `EbEvidenceEvent` rows; same gate as R17 — both triggered by KG version bump; the Evidence Engine's nightly rollup must detect unknown `conceptId` values and emit a data-quality alert |
 | R19 | Teaching Assets Platform files (`teachingAssets.ts`/`teachingAssetSchema.ts`/`teachingAssetAdapter.ts`) remain on disk with zero importers and are formally retired by ADR 14; a future contributor might try to extend or wire them, bypassing the canonical ADR 14 AssetIdentity model and creating a second competing content layer | Open, accepted | ADR 14 §3, §14 | Archive-status header comment to be added to each file per ADR 14 migration Phase 1; files not deleted so content is preserved for reference; any future contributor must read ADR 14 before modifying these files |
+| R20 | Canonical English KG (216 concepts, validator PASS, authored by the Curriculum Pipeline 2026-07-03/04) exists on disk but is not registered in the runtime registry — `knowledgeGraph.ts` `SUBJECT_ADAPTERS`/`ID_PREFIX_TO_SUBJECT` carry 5 subjects and `case 'english'` routes to the legacy static `ENGLISH_KNOWLEDGE_GRAPH`; English learners are served the old graph while a richer canonical one sits unused, and any new pipeline subject will repeat this gap until registered | Open, gated | Discovered 2026-07-04; `knowledgeGraph.ts:41-56, 286`; `docs/CURRICULUM_PROGRESS.md` | Registration is the standard 2-registry-line change (CLAUDE.md subject pattern) but is production code — recorded as a Wave 0 per-item approval entry; do NOT register without explicit user approval |
 | R10 | Two unrelated engines share the name `LessonPlan`/`buildLessonPlanBlock` — real readability hazard, no runtime collision | Open, low severity | Finding 1 | Rename recommended for a future, separately-approved cleanup phase — not scheduled |
 | R11 | `nextBestAction.ts` carries three confirmed-dead exports that will never be removed (ADR 04 permanently unexecuted by explicit user instruction) | Open by design, accepted | Finding 4, ADR 04 | None — explicitly accepted as a permanent state, not a risk requiring closure |
 | R12 | Teaching Action Intelligence (`decide()` → TAG → Lesson Composer) — the concrete HOW-to-teach layer — never runs for Library/general learners, though none of its three engines requires School context; the gap is an unseeded piece of session state, not a designed boundary | **Already realized in production** | ADR 08 Finding 9 (`ARCHITECTURE_DECISIONS.md`) | PROPOSED Library-mode seed-and-persist extension in ADR 08 §4(a), blocked on KG v1 freeze |
@@ -1041,6 +1042,7 @@ Assessment) — not due yet.
 | `EDUCATIONAL_BRAIN_BIBLE.md` (this file) | Top-level synthesis, single source of truth, entry point |
 | `ARCHITECTURE_COMPLETION_REPORT_V1.md` | Final v1.0 completion record + cross-ADR dependency graph + dependency-ordered implementation sequence (Waves 0–5); synthesis only — where it and this Bible disagree, this Bible wins |
 | `VALIDATION_FRAMEWORK_P10.md` | Concrete specification of the P10 fixture-replay validation framework (Wave 1b): three test tiers, LLM transcript seam, four assertion surfaces, 15-fixture frozen set v1, CI wiring plan |
+| `WAVE_0_APPROVAL_CHECKLIST.md` | The per-item implementation approval instrument: every gated item (W0-1…W5-4) with source ADR, dependencies, and an approval checkbox — nothing on it is approved by default; checking a box + committing IS the G2 approval record |
 | `EDUCATIONAL_BRAIN_V1.md` | Detailed freeze narrative + system diagram this Bible's §3/§5 summarize |
 | `ENGINE_REFERENCE.md` | Full per-engine contract detail behind this Bible's §3/§4 |
 | `DATA_FLOW.md` | Full step-by-step trace behind this Bible's §6.1–6.6 |
@@ -1263,4 +1265,55 @@ Assessment) — not due yet.
   gate to a **type-error ratchet** (committed baseline count; fail only
   on increase; any PR may lower it; converts to a hard gate at zero).
   Spec §1 evidence table gains both measurements. No production code
+  changed.
+- **2026-07-04 — Curriculum Pipeline sync (integration-prep iteration 4;
+  repository re-read at commit d622336).** The Curriculum Production
+  Pipeline advanced independently: **English** authored as a sixth
+  canonical subject (216 concepts, 12 domains, `eng.` prefix,
+  status=production, validator PASS 216/216 reachable); **Physics**
+  teaching assets 100% (194/194); **Mathematics KG bumped to v1.0.1
+  status=frozen** — the first subject to reach the freeze state ADR 06's
+  gate checks (campaign remains `1.0.0-draft`, `subjects_complete: 0`, so
+  the Wave 0 gate is NOT yet met and user approval is still required
+  regardless). All six KGs re-validated PASS with the consumption-side
+  validator. New risk R20: the canonical English KG is not registered in
+  the runtime registry (`SUBJECT_ADAPTERS` has 5 subjects;
+  `case 'english'` routes to the legacy static graph) — registration is a
+  gated Wave 0 approval item, not an architecture change. Verified the
+  pipeline's asset format (`docs/{subject}/teaching-assets/assets.json`:
+  concept-keyed, `provenance`/`status` fields, worked-example/assessment/
+  visual blueprints) is **compatible with ADR 14's AssetIdentity model**
+  — a curated source for Phase 2 catalogue population, not a competing
+  asset layer; no ADR reopened. Stale pre-architecture snapshots
+  (`docs/SYSTEM_AUDIT.md` 2026-06-16 "zero tests";
+  `docs/project-memory/NEXT_ACTION.md` pointing at the dormant Eb*
+  milestone) given superseded-by-Bible banners. CLAUDE.md subject facts
+  corrected (English row added; chemistry 186, not 187). No production
+  code changed.
+- **2026-07-04 — CI validation gate built (integration-prep iteration
+  5; P10 spec §6 steps 1–4).** `.github/workflows/validate.yml` and
+  `scripts/ci/tsc-ratchet.sh` committed — on every push/PR: npm ci →
+  type-error ratchet (fails only on count increase over the committed
+  baseline; bootstrap mode passes and prints the count until
+  `scripts/ci/tsc-baseline.txt` is captured from the first hosted run's
+  clean Prisma client) → vitest (hard gate, verified 506/507 green) →
+  KG validator over all six shipped subjects (read-only; every future
+  Curriculum Pipeline push now gets an automatic consumption-side
+  regression check). R6 updated to Mitigated (CI half; the ADR 06
+  runtime load-time gate half remains blocked on KG v1 freeze). Test
+  scaffolding only — no production runtime, routes, schema, or APIs
+  touched. Local validation: ratchet exercised in all three modes, YAML
+  parsed, vitest green, six/six KG validations PASS via the exact
+  workflow loop.
+- **2026-07-04 — Wave 0 approval checklist created (integration-prep
+  iteration 6).** `WAVE_0_APPROVAL_CHECKLIST.md` — the G2 approval
+  instrument: all 21 gated implementation items consolidated from ADRs
+  05–14 migration sections, the completion report's five waves, R20
+  (English registration, W0-2), and the P10 GATED seams (W1-5/W1-6),
+  each with stable ID, source citation, dependency column, and an
+  unchecked approval box. Records the two Wave 0 gates' live status
+  (mathematics KG frozen; campaign 1.0.0-draft → G1 not met; G2 no
+  approvals). W5-4 (CI validator wiring) marked done pre-gate. §11
+  document map updated. Nothing approved by this document's existence;
+  checking a box + committing is the approval act. No production code
   changed.

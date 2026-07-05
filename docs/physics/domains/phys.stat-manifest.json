@@ -1,0 +1,53 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "statistical_mechanics",
+  "domain_prefix": "phys.stat",
+  "domain_name": "Statistical Mechanics",
+  "subject": "physics",
+  "concept_count": 8,
+  "asset_count": 8,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "phys.stat.probability-basics",
+        "phys.stat.partition-function",
+        "phys.stat.fermi-dirac",
+        "phys.stat.entropy-statistical"
+      ],
+      "coverage": "50% full audit (4/8) spanning advanced/expert difficulty tiers + full-domain worked-example arithmetic recomputation (30 checks)",
+      "defects_found_and_fixed": 1,
+      "defects_remaining": 0,
+      "defect_note": "one Unicode text-encoding corruption in partition-function's concept_summary prose (⟨E�987 instead of ⟨E⟩), found via the standard post-write JSON/corruption scan and fixed before any validation or commit; not an arithmetic, factual, or notational defect"
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:e67141892dc3af2b8a11778774f4d8b884f6b69c7deb830f3e44a9ccd06fad61",
+    "assets_file_sha256": "sha256:6a97871e48936da3f6fbe0f83093ce814aee246e4f8022b21b33e441e422411c",
+    "graph_sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f",
+    "validation_report_sha256": "sha256:f0321f2e238d160dedfb469cfe2be407b1620e281feacb1c5b922cb009e7e840"
+  },
+  "generated_files": [
+    "docs/physics/chapters/stat.md",
+    "docs/physics/domains/phys.stat-validation-report.md",
+    "docs/physics/domains/phys.stat-summary.md",
+    "docs/physics/domains/phys.stat-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Physics Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "c83bc8c",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "fc2f9ee",
+  "created_at": "2026-07-03T00:00:00Z"
+}
