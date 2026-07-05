@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `pending`*
+*Last updated: 2026-07-05 · Commit: `math.fnal complete`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
@@ -37,13 +37,13 @@
 | 17 | Complex Analysis | math.cx | 31 | draft ✓ | chapters/cx.md ✓ | Complete |
 | 18 | Topology | math.top | 23 | placeholder | — | Pending |
 | 19 | Measure Theory | math.meas | 13 | placeholder | — | Pending |
-| 20 | Functional Analysis | math.fnal | 18 | placeholder | — | Pending |
+| 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
 | 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
 | 22 | Optimization | math.opt | 16 | placeholder | — | Pending |
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 17/24 domains complete · 791/908 assets drafted · 117/908 remaining
+**Summary:** 18/24 domains complete · 809/908 assets drafted · 99/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -115,16 +115,20 @@ real-number-axioms, completeness-axiom, supremum-infimum, archimedean-property, 
 
 complex-numbers-analysis, complex-function, cauchy-riemann, analytic-functions, harmonic-functions, power-series-cx, complex-integration, cauchy-theorem, cauchy-goursat, cauchy-integral-formula, higher-derivatives, morera-theorem, liouville-theorem, fundamental-theorem-algebra, identity-theorem, analytic-continuation, singularities, poles, essential-singularity, laurent-series, residue, residue-theorem, real-integral-residues, maximum-modulus, conformal-mapping, mobius-transformation, riemann-mapping, argument-principle, rouche-theorem, riemann-surface, riemann-zeta
 
+### math.fnal (18 concepts) — COMPLETE
+
+normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
+
 ## Remaining Domains
 
 | Domain | Concepts | Notes |
 |--------|----------|-------|
 | math.top | 23 | Topology |
 | math.meas | 13 | Measure Theory |
-| math.fnal | 18 | Functional Analysis |
+| ~~math.fnal~~ | ~~18~~ | ~~Functional Analysis — COMPLETE~~ |
 | math.num | 16 | Numerical Analysis |
 | math.opt | 16 | Optimization |
 | math.graph | 16 | Graph Theory |
 | math.cat | 15 | Category Theory |
 
-**Remaining: 7 domains · 117 concepts**
+**Remaining: 6 domains · 99 concepts**
