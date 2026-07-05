@@ -9,13 +9,13 @@
   "kg_file": "docs/mathematics/kg/graph.json",
   "total_concepts": 908,
   "total_domains": 24,
-  "completed_domains": 11,
-  "drafted_assets": 572,
-  "completion_pct": 63.0,
+  "completed_domains": 12,
+  "drafted_assets": 604,
+  "completion_pct": 66.5,
   "checksums": {
     "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
-    "assets_sha256": "sha256:f83257c15f93b5477026550696c1a4dc154dec2f9884e755200dd8bc30e19e8c",
-    "chapters_listing_sha256": "sha256:7535fc5f7ab335cd157cd3bd02809979a8291a00404250cfa3e478d631ce47a3"
+    "assets_sha256": "sha256:20a6041cc73d0324904fbd2d447ea1e3d1213e87d1081429bdf2c37854089274",
+    "chapters_listing_sha256": "sha256:95f647be305fd4a2cb34391199bb965dc96c8a4ed3ff27fd0d2c099035a6ee80"
   },
   "domains": [
     {
@@ -359,14 +359,28 @@
       "domain_prefix": "math.disc",
       "domain_name": "Discrete Mathematics",
       "concept_count": 32,
-      "assets_drafted": 0,
-      "status": "not-started",
-      "chapter_file": null,
-      "manifest_file": null,
-      "validation_verdict": null,
-      "checksums": null,
-      "creation_commit": null,
-      "dependency_versions": null
+      "assets_drafted": 32,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/disc.md",
+      "manifest_file": "docs/mathematics/domains/math.disc-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:799480b6a3bb6e50375d5d0bdfe499ef55979db109572ac7701cbb1bf36077e3",
+        "domain_assets_sha256": "sha256:b760cf2790666871d6eed36bc1e63fb009ec9902f44f46820cc9181e2c1f31d7",
+        "graph_domain_sha256": "sha256:b39aa6aa8115158745e25e44c415ac4016d9259f660ba8736d5300161526e7dd",
+        "validation_report_sha256": "sha256:2233b988e6328029bb4bbca8dd27f28e582736e8347426ef7a1fe64031ccbab9"
+      },
+      "creation_commit": "f152927ed1523997bc3e7fed771762b6f9f3177b",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
     },
     {
       "domain_id": "abstract-algebra",
@@ -515,6 +529,6 @@
     "validation_version": "1.1.0",
     "provenance_version": "1.0.0"
   },
-  "last_commit": "7b1d8735b0077e907e0d4d6e050339c156886112",
-  "last_updated": "2026-07-05T09:36:54Z"
+  "last_commit": "f152927ed1523997bc3e7fed771762b6f9f3177b",
+  "last_updated": "2026-07-05T13:27:44Z"
 }

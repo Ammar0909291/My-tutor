@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `7b1d8735b0077e907e0d4d6e050339c156886112`*
+*Last updated: 2026-07-05 · Commit: `f152927ed1523997bc3e7fed771762b6f9f3177b`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`7b1d8735b0077e907e0d4d6e050339c156886112`
+`f152927ed1523997bc3e7fed771762b6f9f3177b`
 
 ## Knowledge Graph
 
@@ -34,7 +34,7 @@
 | 11 | Linear Algebra | math.linalg | 61 | draft ✓ | chapters/linalg.md ✓ | Complete |
 | 12 | Probability | math.prob | 49 | placeholder | — | **NEXT** |
 | 13 | Statistics | math.stats | 40 | placeholder | — | Pending |
-| 14 | Discrete Mathematics | math.disc | 32 | placeholder | — | Pending |
+| 14 | Discrete Mathematics | math.disc | 32 | draft ✓ | chapters/disc.md ✓ | Complete |
 | 15 | Abstract Algebra | math.abst | 37 | placeholder | — | Pending |
 | 16 | Real Analysis | math.real | 30 | placeholder | — | Pending |
 | 17 | Complex Analysis | math.cx | 31 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 11/24 domains complete · 572/908 assets drafted · 336/908 remaining
+**Summary:** 12/24 domains complete · 604/908 assets drafted · 304/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -104,9 +104,8 @@ sample-space, event, probability-measure, probability-axioms, classical-probabil
 0/40 authored. Concepts:
 population-sample, descriptive-statistics, measures-of-center, measures-of-spread, percentile, data-visualization, sampling, sampling-distribution, standard-error, estimator, bias-variance, consistency, mle, method-of-moments, confidence-interval, ci-mean, ci-proportion, hypothesis-testing, test-statistic, p-value, type-errors, power, z-test, t-test, chi-squared-test, anova, two-way-anova, correlation, linear-regression, multiple-regression, covariance-matrix, normal-distribution, normal-approximation, nonparametric, bayesian-inference, conjugate-prior, credible-interval, experimental-design, sufficient-statistic, rao-blackwell
 
-### math.disc (32 concepts) — PENDING
+### math.disc (32 concepts) — COMPLETE
 
-0/32 authored. Concepts:
 counting-principles, permutations, combinations, binomial-theorem, combinatorics, stars-bars, pigeonhole, inclusion-exclusion, derangements, recurrence-relation, linear-recurrence, divide-conquer-recurrence, generating-functions, ogf, egf, graph, graph-types, graph-representation, graph-connectivity, euler-hamiltonian, graph-trees, spanning-tree, graph-coloring, planar-graph, propositional-logic, boolean-circuits, predicate-logic-disc, asymptotic-notation, algorithm-complexity, complexity-classes, catalan-numbers, stirling-numbers
 
 ### math.abst (37 concepts) — PENDING
