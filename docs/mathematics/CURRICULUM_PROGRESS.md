@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `math.opt complete`*
+*Last updated: 2026-07-05 · Commit: `math.num complete`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
@@ -38,12 +38,12 @@
 | 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
 | 19 | Measure Theory | math.meas | 13 | draft ✓ | chapters/meas.md ✓ | Complete |
 | 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
-| 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
+| 21 | Numerical Analysis | math.num | 16 | draft ✓ | chapters/num.md ✓ | Complete |
 | 22 | Optimization | math.opt | 16 | draft ✓ | chapters/opt.md ✓ | Complete |
 | 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 20/24 domains complete · 861/908 assets drafted · 47/908 remaining
+**Summary:** 23/24 domains complete · 893/908 assets drafted · 15/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -127,6 +127,10 @@ graph, graph-invariants, graph-operations, connectivity, tree, minimum-spanning-
 
 sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, simple-function, lebesgue-integral, convergence-theorems, lp-space, l2-space, product-measure, radon-nikodym, abstract-measure-spaces
 
+### math.num (16 concepts) — COMPLETE
+
+floating-point, error-analysis, root-finding, newtons-method, interpolation, splines, numerical-differentiation, numerical-integration, lu-factorization, cholesky, iterative-linear, qr-algorithm, svd, euler-method, runge-kutta, stiff-ode
+
 ## Remaining Domains
 
 | Domain | Concepts | Notes |
@@ -134,9 +138,9 @@ sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, sim
 | ~~math.top~~ | ~~23~~ | ~~Topology — COMPLETE~~ |
 | ~~math.meas~~ | ~~13~~ | ~~Measure Theory — COMPLETE~~ |
 | ~~math.fnal~~ | ~~18~~ | ~~Functional Analysis — COMPLETE~~ |
-| math.num | 16 | Numerical Analysis |
+| ~~math.num~~ | ~~16~~ | ~~Numerical Analysis — COMPLETE~~ |
 | ~~math.opt~~ | ~~16~~ | ~~Optimization — COMPLETE~~ |
 | ~~math.graph~~ | ~~16~~ | ~~Graph Theory — COMPLETE~~ |
 | math.cat | 15 | Category Theory |
 
-**Remaining: 2 domains · 31 concepts**
+**Remaining: 1 domain · 15 concepts**
