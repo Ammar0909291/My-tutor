@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `pending — math.prob authoring complete`*
+*Last updated: 2026-07-05 · Commit: `774cc1eb2459ba3e8098144d3bdccebdb4617694`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
