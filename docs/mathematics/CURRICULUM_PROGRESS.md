@@ -1,7 +1,7 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `774cc1eb2459ba3e8098144d3bdccebdb4617694`*
+*Last updated: 2026-07-05 · Branch: `claude/math-linalg-curriculum-34wonr`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
@@ -31,9 +31,9 @@
 | 08 | Sequences and Series | math.seq | 21 | draft ✓ | chapters/seq.md ✓ | Complete |
 | 09 | Calculus | math.calc | 76 | draft ✓ | chapters/calc.md ✓ | Complete |
 | 10 | Differential Equations | math.de | 56 | draft ✓ | chapters/de.md ✓ | Complete |
-| 11 | Linear Algebra | math.linalg | 61 | placeholder | — | Assigned: Mohd |
+| 11 | Linear Algebra | math.linalg | 61 | draft ✓ | chapters/linalg.md ✓ | Complete (Mohd) |
 | 12 | Probability | math.prob | 49 | draft ✓ | chapters/prob.md ✓ | Complete |
-| 13 | Statistics | math.stats | 40 | placeholder | — | Pending |
+| 13 | Statistics | math.stats | 40 | draft ✓ | chapters/stats.md ✓ | Complete |
 | 14 | Discrete Mathematics | math.disc | 32 | placeholder | — | Pending |
 | 15 | Abstract Algebra | math.abst | 37 | placeholder | — | Pending |
 | 16 | Real Analysis | math.real | 30 | placeholder | — | Pending |
@@ -46,7 +46,7 @@
 | 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 11/24 domains complete · 560/908 assets drafted · 348/908 remaining (math.linalg assigned to Mohd)
+**Summary:** 13/24 domains complete · 650/908 assets drafted · 258/908 remaining (math.linalg=Mohd, math.stats=complete)
 
 ## Completed Concepts Per Domain
 
@@ -190,8 +190,12 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 7. **Do NOT modify `docs/mathematics/kg/` files**
 8. Run `scripts/pipeline/validate-domain-assets.py` before committing any domain
 
+## Completed: math.stats (40 concepts)
+
+population-sample, descriptive-statistics, measures-of-center, measures-of-spread, percentile, data-visualization, sampling, sampling-distribution, standard-error, estimator, bias-variance, consistency, mle, method-of-moments, confidence-interval, ci-mean, ci-proportion, hypothesis-testing, test-statistic, p-value, type-errors, power, z-test, t-test, chi-squared-test, anova, two-way-anova, correlation, linear-regression, multiple-regression, covariance-matrix, normal-distribution, normal-approximation, nonparametric, bayesian-inference, conjugate-prior, credible-interval, experimental-design, sufficient-statistic, rao-blackwell
+
 ## Next Planned Domain
 
-**Statistics** (`math.stats`) · 40 concepts
-(math.de complete; math.linalg assigned to Mohd; math.prob complete)
+**Discrete Mathematics** (`math.disc`) · 32 concepts
+(math.stats complete 2026-07-05; math.linalg=Mohd)
 
