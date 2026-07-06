@@ -5,26 +5,25 @@
 import { describe, it, expect } from 'vitest'
 import { z } from 'zod'
 import { coachSchema } from '@/lib/ai/coachSchema'
+import { settingsSchema } from '@/lib/settingsSchema'
 
-// NOTE: coachSchema above now imports the real schema from
-// src/lib/ai/coachSchema.ts (extracted out of src/app/api/coach/route.ts).
-// quizSchema/settingsSchema/practiceSchema below are still local replicas —
-// out of scope for this pass (one schema at a time); note settingsSchema
-// in particular is already missing two real fields (country, voiceSpeed)
-// present in src/app/api/settings/route.ts's schema, a pre-existing drift
-// for a future investigation.
+// NOTE: coachSchema and settingsSchema above now import the real schemas
+// from src/lib/ai/coachSchema.ts and src/lib/settingsSchema.ts
+// (extracted out of their respective routes). Investigated settingsSchema
+// specifically: the old local replica here had only 2 of the real
+// schema's 4 fields (missing country, voiceSpeed) with no comment, other
+// test, or design convention anywhere suggesting that was an intentional
+// subset — genuine replica-drift, not a deliberate scope choice. Fixed by
+// importing the real schema; new describe blocks below cover the
+// previously-untested country/voiceSpeed bounds.
+// quizSchema/practiceSchema below are still local replicas — out of scope
+// for this pass (one schema at a time).
 
 // Quiz schema (from /api/quiz/generate/route.ts)
 const quizSchema = z.object({
   subject: z.string().min(1).max(200),
   topic: z.string().max(200).optional(),
   lang: z.enum(['ru', 'en', 'hi']).default('en'),
-})
-
-// Settings schema (from /api/settings/route.ts)
-const settingsSchema = z.object({
-  voiceId: z.string().max(100).optional(),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
 })
 
 // Practice schema (from /api/practice/submit/route.ts)
@@ -83,6 +82,38 @@ describe('Settings voiceId bounds', () => {
 
   it('rejects voiceId exceeding 100 chars', () => {
     expect(() => settingsSchema.parse({ voiceId: 'a'.repeat(101) })).toThrow()
+  })
+})
+
+describe('Settings country bounds', () => {
+  it('accepts each valid country literal', () => {
+    expect(() => settingsSchema.parse({ country: 'ru' })).not.toThrow()
+    expect(() => settingsSchema.parse({ country: 'in' })).not.toThrow()
+    expect(() => settingsSchema.parse({ country: 'global' })).not.toThrow()
+  })
+
+  it('rejects a country value outside the enum', () => {
+    expect(() => settingsSchema.parse({ country: 'us' })).toThrow()
+  })
+
+  it('country is optional', () => {
+    expect(() => settingsSchema.parse({})).not.toThrow()
+  })
+})
+
+describe('Settings voiceSpeed bounds', () => {
+  it('accepts each valid voiceSpeed literal', () => {
+    for (const speed of [0.5, 0.75, 1.0, 1.25, 1.5]) {
+      expect(() => settingsSchema.parse({ voiceSpeed: speed })).not.toThrow()
+    }
+  })
+
+  it('rejects a voiceSpeed value not in the fixed set', () => {
+    expect(() => settingsSchema.parse({ voiceSpeed: 2.0 })).toThrow()
+  })
+
+  it('voiceSpeed is optional', () => {
+    expect(() => settingsSchema.parse({})).not.toThrow()
   })
 })
 
