@@ -2,12 +2,14 @@
  * HIGH-2: Email canonicalization — same identity regardless of case.
  * HIGH-1: Ban check logic.
  * MED-8: JWT invalidation on isDeleted.
+ *
+ * Contract test against the REAL production functions
+ * (src/lib/auth/email.ts, src/lib/auth/banGuard.ts, used by
+ * src/lib/auth/config.ts) rather than hand-copied replicas.
  */
 import { describe, it, expect } from 'vitest'
-
-function canonicalEmail(raw: string): string {
-  return raw.trim().toLowerCase()
-}
+import { canonicalEmail } from '@/lib/auth/email'
+import { isSignInAllowed, resolveJwtSub } from '@/lib/auth/banGuard'
 
 describe('HIGH-2: email canonicalization', () => {
   it('lowercases mixed-case email', () => {
@@ -30,55 +32,37 @@ describe('HIGH-2: email canonicalization', () => {
 })
 
 describe('HIGH-1: ban bypass prevention', () => {
-  function signInAllowed(dbUser: { isDeleted: boolean } | null): boolean {
-    if (!dbUser) return true // first OAuth sign-in: allow (NextAuth will create the row)
-    return !dbUser.isDeleted
-  }
-
   it('active user is allowed', () => {
-    expect(signInAllowed({ isDeleted: false })).toBe(true)
+    expect(isSignInAllowed({ isDeleted: false })).toBe(true)
   })
 
   it('deleted user is denied', () => {
-    expect(signInAllowed({ isDeleted: true })).toBe(false)
+    expect(isSignInAllowed({ isDeleted: true })).toBe(false)
   })
 
   it('new OAuth user (no DB row yet) is allowed through', () => {
-    expect(signInAllowed(null)).toBe(true)
+    expect(isSignInAllowed(null)).toBe(true)
   })
 })
 
 describe('MED-8: JWT token invalidation on ban', () => {
-  function resolveTokenSub(
-    byId: { id: string; isDeleted: boolean } | null,
-    byEmail: { id: string; isDeleted: boolean } | null,
-    currentSub: string,
-  ): string | undefined {
-    if (!byId) {
-      if (byEmail && !byEmail.isDeleted) return byEmail.id
-      return undefined
-    }
-    if (byId.isDeleted) return undefined
-    return currentSub
-  }
-
   it('active user keeps their sub', () => {
-    expect(resolveTokenSub({ id: 'u1', isDeleted: false }, null, 'u1')).toBe('u1')
+    expect(resolveJwtSub({ id: 'u1', isDeleted: false }, null, 'u1')).toBe('u1')
   })
 
   it('deleted user gets sub set to undefined (immediate invalidation)', () => {
-    expect(resolveTokenSub({ id: 'u1', isDeleted: true }, null, 'u1')).toBeUndefined()
+    expect(resolveJwtSub({ id: 'u1', isDeleted: true }, null, 'u1')).toBeUndefined()
   })
 
   it('missing user row with matching email heals to email-based id', () => {
-    expect(resolveTokenSub(null, { id: 'u2', isDeleted: false }, 'old')).toBe('u2')
+    expect(resolveJwtSub(null, { id: 'u2', isDeleted: false }, 'old')).toBe('u2')
   })
 
   it('missing user row with deleted email-match returns undefined', () => {
-    expect(resolveTokenSub(null, { id: 'u2', isDeleted: true }, 'old')).toBeUndefined()
+    expect(resolveJwtSub(null, { id: 'u2', isDeleted: true }, 'old')).toBeUndefined()
   })
 
   it('missing user row with no email match returns undefined', () => {
-    expect(resolveTokenSub(null, null, 'old')).toBeUndefined()
+    expect(resolveJwtSub(null, null, 'old')).toBeUndefined()
   })
 })
