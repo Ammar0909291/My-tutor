@@ -1059,9 +1059,14 @@ export async function POST(req: Request) {
             const revBlock = buildRevisionBlock(dueRevisions)
             if (revBlock) systemPrompt += revBlock
 
-            // W2-1 (ADR 08 §4a): seed conceptId for Library mode — first node if no snapshot yet.
+            // W2-1 (ADR 08 §4a): seed conceptId for Library mode — canonical KG entry concept if
+            // no snapshot yet. Resolves moduleSlug → KG domain → cross-domain entry concept ID
+            // so the Teaching Engine gate (snapshotCurrentConceptId → getConceptNode) can fire.
             if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
-              libraryConceptNodeIdHoisted = snapshotCurrentConceptId ?? currentModule.nodes[0]?.slug ?? null
+              const { resolveLibraryEntryConceptId } = await import('@/lib/curriculum/libraryConceptResolver')
+              libraryConceptNodeIdHoisted = snapshotCurrentConceptId
+                ?? resolveLibraryEntryConceptId(subjectCode, currentModule.slug)
+                ?? null
             }
           }
         }
@@ -1874,8 +1879,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       // W2-1 (ADR 08 §4a): Library-mode concept persist — parallel to school block above.
       // ENABLE_LIBRARY_CONCEPT_TRACKING defaults off (Phase 1 observe cycle; Phase 2 flips it on).
+      // libraryLessonPlanHoisted.currentConcept.nodeId is a subjectCatalog slug (not a canonical
+      // KG ID) — use only libraryConceptNodeIdHoisted which Writer B seeds with the correct ID.
       if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
-        const newLibConceptId = libraryLessonPlanHoisted?.currentConcept?.nodeId ?? libraryConceptNodeIdHoisted
+        const newLibConceptId = libraryConceptNodeIdHoisted
         if (newLibConceptId && newLibConceptId !== snapshotCurrentConceptId) {
           prisma.learnSession.update({
             where: { id: sessionId },
