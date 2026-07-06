@@ -42,35 +42,43 @@ export interface RevisionChapter {
   severity: number
 }
 
-function recencyMultiplier(createdAt: Date, now: number): number {
+export function recencyMultiplier(createdAt: Date, now: number): number {
   const ageDays = (now - createdAt.getTime()) / 86400000
   if (ageDays <= 7) return 2.0
   if (ageDays <= 14) return 1.5
   return 1.0
 }
 
-export async function getWeakTopics(userId: string): Promise<WeakTopic[]> {
-  const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000)
-  const mistakes = await prisma.mistakeRecord.findMany({
-    where: { userId, createdAt: { gte: since } },
-    select: { subjectSlug: true, topicSlug: true, category: true, createdAt: true },
-  }).catch(() => [] as { subjectSlug: string; topicSlug: string; category: string; createdAt: Date }[])
-  if (mistakes.length === 0) return []
+export function getCategoryWeight(category: string): number {
+  return CATEGORY_WEIGHTS[category] ?? 1
+}
 
-  // Exclude topics that have since been mastered
-  const nodeIds = [...new Set(mistakes.map((m) => m.topicSlug))]
-  const masteredRows = await prisma.topicProgress.findMany({
-    where: { userId, topicSlug: { in: nodeIds }, status: 'MASTERED' },
-    select: { subjectSlug: true, topicSlug: true },
-  }).catch(() => [] as { subjectSlug: string; topicSlug: string }[])
-  const mastered = new Set(masteredRows.map((r) => `${r.subjectSlug}:${r.topicSlug}`))
+export interface MistakeInput {
+  subjectSlug: string
+  topicSlug: string
+  category: string
+  createdAt: Date
+}
 
-  const now = Date.now()
+/**
+ * Pure severity scoring + ranking over already-fetched mistake rows and an
+ * already-resolved mastered-topic set. Extracted from getWeakTopics so the
+ * scoring/aggregation logic (weight lookup, recency decay, per-topic
+ * accumulation, mastery exclusion, sort + cap) can be unit tested without
+ * a DB; the two Prisma queries that produce its inputs remain in
+ * getWeakTopics below.
+ */
+export function computeWeakTopics(
+  mistakes: MistakeInput[],
+  masteredKeys: Set<string>,
+  now: number,
+  maxResults: number = MAX_WEAK_TOPICS,
+): WeakTopic[] {
   const scores = new Map<string, WeakTopic>()
   for (const m of mistakes) {
     const key = `${m.subjectSlug}:${m.topicSlug}`
-    if (mastered.has(key)) continue
-    const weight = CATEGORY_WEIGHTS[m.category] ?? 1
+    if (masteredKeys.has(key)) continue
+    const weight = getCategoryWeight(m.category)
     const score = weight * recencyMultiplier(m.createdAt, now)
     const existing = scores.get(key)
     if (existing) {
@@ -89,7 +97,26 @@ export async function getWeakTopics(userId: string): Promise<WeakTopic[]> {
 
   return [...scores.values()]
     .sort((a, b) => b.severity - a.severity)
-    .slice(0, MAX_WEAK_TOPICS)
+    .slice(0, maxResults)
+}
+
+export async function getWeakTopics(userId: string): Promise<WeakTopic[]> {
+  const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000)
+  const mistakes = await prisma.mistakeRecord.findMany({
+    where: { userId, createdAt: { gte: since } },
+    select: { subjectSlug: true, topicSlug: true, category: true, createdAt: true },
+  }).catch(() => [] as { subjectSlug: string; topicSlug: string; category: string; createdAt: Date }[])
+  if (mistakes.length === 0) return []
+
+  // Exclude topics that have since been mastered
+  const nodeIds = [...new Set(mistakes.map((m) => m.topicSlug))]
+  const masteredRows = await prisma.topicProgress.findMany({
+    where: { userId, topicSlug: { in: nodeIds }, status: 'MASTERED' },
+    select: { subjectSlug: true, topicSlug: true },
+  }).catch(() => [] as { subjectSlug: string; topicSlug: string }[])
+  const mastered = new Set(masteredRows.map((r) => `${r.subjectSlug}:${r.topicSlug}`))
+
+  return computeWeakTopics(mistakes, mastered, Date.now())
 }
 
 export async function getWeakTopicsForSubject(userId: string, subjectSlug: string): Promise<WeakTopic[]> {
