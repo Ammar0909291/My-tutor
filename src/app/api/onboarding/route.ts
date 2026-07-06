@@ -7,6 +7,7 @@ import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subje
 import { getBoard } from '@/lib/education'
 import { captureError } from '@/lib/monitoring'
 import { schoolOnboardingSchema } from '@/lib/schoolOnboardingSchema'
+import { shouldSkipSchoolOnboarding } from '@/lib/schoolOnboardingGuard'
 
 // CRITICAL-3 (Sprint D): the old check matched any error whose message
 // contained "Unique constraint", which could mask an unrelated write
@@ -258,7 +259,7 @@ async function handleSchoolStudent(
     const existing = await tx.profile.findUnique({ where: { userId: effectiveUserId } })
     const user = await tx.user.findUnique({ where: { id: effectiveUserId }, select: { onboardingCompleted: true } })
 
-    if (existing && user?.onboardingCompleted && existing.educationBoard) {
+    if (shouldSkipSchoolOnboarding(existing, user?.onboardingCompleted)) {
       // LOW-4: guard against silent data loss — do not overwrite board/grade for a
       // fully-completed school onboarding. Return without error so the client can
       // redirect to the dashboard as if onboarding had just completed.
