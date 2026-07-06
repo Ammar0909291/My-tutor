@@ -7,6 +7,7 @@ import { getSchoolChapters, getChapterPosition, schoolSubjectCode, chapterDispla
 import { withRetry } from '@/lib/db/withRetry'
 import type { PracticeQuestion, PracticeAnswer } from '@/lib/school/practice/practiceTypes'
 import { ASSESSMENT_PASS_THRESHOLD } from '@/lib/school/assessment/assessmentTypes'
+import { buildWeakNodeMistakeRecords } from '@/lib/mistakeRecords'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -129,14 +130,12 @@ export async function POST(req: NextRequest) {
 
   // Weak topic detection
   if (result.weakNodeIds.length > 0) {
+    const weakNodeMistakeRecords = buildWeakNodeMistakeRecords(
+      result.weakNodeIds, session.user.id, ps.subjectSlug, sessionId, 'chapter_assessment',
+    )
     await Promise.all(
-      result.weakNodeIds.map((nodeId) =>
-        prisma.mistakeRecord.create({
-          data: {
-            userId: session.user.id, subjectSlug: ps.subjectSlug,
-            topicSlug: nodeId, sessionId, category: 'chapter_assessment', questionId: nodeId,
-          },
-        }).catch(() => {}),
+      weakNodeMistakeRecords.map((data) =>
+        prisma.mistakeRecord.create({ data }).catch(() => {}),
       ),
     )
   }

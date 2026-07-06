@@ -386,15 +386,48 @@ const STAGE_LABEL: Record<LessonStageType, string> = {
  * the other adaptive intelligence modules. Lists the stage sequence so the
  * tutor can pace the conversation across multiple turns; never forces the
  * tutor to follow it rigidly within a single reply.
+ *
+ * W2-2 (ADR 09): optional `progress` parameter enables stage-continuity framing.
+ * When omitted: today's exact behavior (backward compatible).
+ * When provided: adds "stages 1-N already covered" framing and tracking instruction.
  */
-export function buildLessonPlanBlock(plan: LessonPlan): string {
+export function buildLessonPlanBlock(
+  plan: LessonPlan,
+  progress?: { stageIndex: number; totalStages: number },
+): string {
   if (plan.stages.length === 0) return ''
 
   const lines: string[] = ['\n\nLESSON PLAN']
   lines.push(`Suggested stage sequence for this concept (~${plan.total_estimated_minutes} min total):`)
   plan.stages.forEach((stage, i) => {
-    lines.push(`${i + 1}. ${STAGE_LABEL[stage.stage_type]} (~${stage.estimated_minutes} min, ${stage.interaction_mode}): ${stage.objective} Done when: ${stage.completion_criteria}`)
+    const covered = progress !== undefined && i < progress.stageIndex
+    lines.push(
+      `${i + 1}. ${STAGE_LABEL[stage.stage_type]} (~${stage.estimated_minutes} min, ${stage.interaction_mode}): ${stage.objective} Done when: ${stage.completion_criteria}${covered ? ' [ALREADY COVERED]' : ''}`,
+    )
   })
+  if (progress !== undefined && progress.stageIndex > 0 && progress.stageIndex < plan.stages.length) {
+    lines.push(`Stages 1–${progress.stageIndex} already covered this session. Continue from stage ${progress.stageIndex + 1}.`)
+  }
   lines.push('This is a multi-turn pacing guide, not a script for one reply — move through stages naturally as the conversation progresses. Do not reference this plan directly to the student.')
+  if (progress !== undefined) {
+    lines.push('LESSON STAGE TRACKING (required): At the very END of your response, on its own line, emit [LESSON:<n>] where <n> is the 0-based index of the stage you just covered. This tag is stripped before the student sees it — never reference it in your visible text.')
+  }
   return lines.join('\n')
+}
+
+/**
+ * W2-2 (ADR 09): Parse the [LESSON:<stageIndex>] progress tag from tutor response text.
+ * Mirrors parseWorkedExampleTag() exactly — exact-match strip, never throws.
+ * Returns stageIndex = null when no tag found (no signal, not an error).
+ */
+export function parseLessonProgressTag(text: string): {
+  stageIndex: number | null
+  cleanText: string
+} {
+  const match = text.match(/\[LESSON:\s*(\d+)\s*\]/i)
+  if (!match) return { stageIndex: null, cleanText: text }
+  const stageIndex = parseInt(match[1], 10)
+  // Strip the EXACT tag we parsed (match[0]) — not a "first bracket" heuristic.
+  const cleanText = text.replace(match[0], '').replace(/\s{2,}/g, ' ').trim()
+  return { stageIndex, cleanText }
 }

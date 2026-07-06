@@ -3,18 +3,22 @@
  *
  * Tests for curriculum progress aggregation logic.
  *
- * From curriculum/progress/route.ts:
- *   completionPercent = Math.round((completedLessons.length / totalLessons) * 100)
- *   isCompleted = completionPercent >= 100
+ * Lesson-based half tests the REAL production formula
+ * (computeLessonCompletionPercent / isLessonSetCompleted from
+ * src/lib/lessonProgress.ts, used by curriculum/progress/route.ts). A prior
+ * replica of this formula independently re-derived isCompleted from the
+ * *rounded* percentage (percent >= 100), which diverges from production for
+ * counts like 199/200: percent rounds to 100 while the real route's raw-count
+ * comparison (199 >= 200) is still false. See the regression test below.
  *
- * From topic-progress semantics:
- *   MASTERED topics count as "complete" in knowledge graph progress
- *   IN_PROGRESS topics do NOT count
+ * KG-based half (below) remains a hand-written model — not backed by a single
+ * canonical production function — and is unchanged.
  */
 
 import { describe, it, expect } from 'vitest'
+import { computeLessonCompletionPercent, isLessonSetCompleted } from '@/lib/lessonProgress'
 
-// ── Pure progress computation helpers ─────────────────────────────────────────
+// ── Pure progress computation helpers (KG-based section only) ────────────────
 
 function computeCompletionPercent(completedCount: number, totalLessons: number): number {
   if (totalLessons === 0) return 0
@@ -48,41 +52,46 @@ function computeKGCompletionPercent(topics: TopicProgress[], totalTopics: number
 
 describe('lesson-based completionPercent', () => {
   it('0 of 10 completed → 0%', () => {
-    expect(computeCompletionPercent(0, 10)).toBe(0)
+    expect(computeLessonCompletionPercent(0, 10)).toBe(0)
   })
 
   it('5 of 10 completed → 50%', () => {
-    expect(computeCompletionPercent(5, 10)).toBe(50)
+    expect(computeLessonCompletionPercent(5, 10)).toBe(50)
   })
 
   it('10 of 10 completed → 100%', () => {
-    expect(computeCompletionPercent(10, 10)).toBe(100)
+    expect(computeLessonCompletionPercent(10, 10)).toBe(100)
   })
 
   it('1 of 3 completed → 33% (rounded)', () => {
-    expect(computeCompletionPercent(1, 3)).toBe(33)
+    expect(computeLessonCompletionPercent(1, 3)).toBe(33)
   })
 
   it('2 of 3 completed → 67% (rounded)', () => {
-    expect(computeCompletionPercent(2, 3)).toBe(67)
+    expect(computeLessonCompletionPercent(2, 3)).toBe(67)
   })
 
-  it('totalLessons=0 → 0% (no divide-by-zero)', () => {
-    expect(computeCompletionPercent(0, 0)).toBe(0)
+  it('completionPercent is capped at 100 even if completedCount > totalLessons', () => {
+    expect(computeLessonCompletionPercent(12, 10)).toBe(100)
   })
 
-  it('isCompleted when completionPercent >= 100', () => {
-    expect(isCompleted(100)).toBe(true)
+  it('isLessonSetCompleted true when completedCount >= totalLessons', () => {
+    expect(isLessonSetCompleted(10, 10)).toBe(true)
   })
 
-  it('not isCompleted when completionPercent < 100', () => {
-    expect(isCompleted(99)).toBe(false)
+  it('isLessonSetCompleted false when completedCount < totalLessons', () => {
+    expect(isLessonSetCompleted(9, 10)).toBe(false)
   })
 
   it('result is always an integer', () => {
     for (const [done, total] of [[1, 7], [3, 8], [5, 9], [7, 12]]) {
-      expect(Number.isInteger(computeCompletionPercent(done, total))).toBe(true)
+      expect(Number.isInteger(computeLessonCompletionPercent(done, total))).toBe(true)
     }
+  })
+
+  it('regression: 199 of 200 rounds completionPercent to 100, but isLessonSetCompleted stays false (compares raw counts, not the rounded percent)', () => {
+    expect(computeLessonCompletionPercent(199, 200)).toBe(100)
+    expect(isLessonSetCompleted(199, 200)).toBe(false)
   })
 })
 
@@ -166,12 +175,12 @@ describe('completedLessons dedup logic', () => {
     // Mirrors atomic SQL dedup: only unique lesson numbers count
     const completedLessons = [1, 2, 3, 2, 1] // with duplicates
     const uniqueCompleted = [...new Set(completedLessons)]
-    expect(computeCompletionPercent(uniqueCompleted.length, 10)).toBe(30)
+    expect(computeLessonCompletionPercent(uniqueCompleted.length, 10)).toBe(30)
   })
 
   it('array with all unique lessons counts correctly', () => {
     const completedLessons = [1, 2, 3, 4, 5]
     const unique = [...new Set(completedLessons)]
-    expect(computeCompletionPercent(unique.length, 10)).toBe(50)
+    expect(computeLessonCompletionPercent(unique.length, 10)).toBe(50)
   })
 })

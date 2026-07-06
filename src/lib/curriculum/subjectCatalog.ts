@@ -11,6 +11,8 @@
  * index that maps onto the same Beginner→Expert spirit as `SkillLevel`.
  */
 
+import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
+
 // ─── Level system (shared by every subject) ──────────────────────────────────
 
 export const LEVELS = [
@@ -994,9 +996,10 @@ export const SUBJECT_LIBRARY: LibrarySubject[] = [
 
 /** All subjects visible to new users in discovery UIs (library, onboarding, enroll).
  *  Subjects with visible: false are hidden from browsing but remain fully functional
- *  for already-enrolled users. Restore any subject by setting visible: true. */
+ *  for already-enrolled users. Restore any subject by setting visible: true.
+ *  Educational Brain rollout: only subjects in EDUCATIONAL_BRAIN_SUBJECTS are shown. */
 export const VISIBLE_SUBJECT_LIBRARY: LibrarySubject[] = SUBJECT_LIBRARY.filter(
-  (s) => s.visible !== false,
+  (s) => s.visible !== false && isEduBrainEnabled(s.slug),
 )
 
 export function findLibrarySubject(slug: string): LibrarySubject | undefined {

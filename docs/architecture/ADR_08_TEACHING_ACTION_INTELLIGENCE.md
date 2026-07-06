@@ -268,6 +268,11 @@ Mirrors ADR 02's and ADR 07 §4(a)'s precedent exactly:
    `Chapter` mapping ADR 02 §7's follow-up already built for
    `lessonPlanner` (`{ id: module.slug, order: 0, title: module.title,
    kgNodeIds: module.nodes.map(n => n.slug) }`).
+   **[Implementation detail superseded 2026-07-06]** `module.nodes[0]?.slug` must
+   NOT be used as the initial `currentConceptNodeId` — subjectCatalog slugs do not
+   resolve through `getConceptNode()` (exact-match against canonical KG IDs). Use
+   `resolveLibraryEntryConceptId(subjectCode, currentModule.slug)` from
+   `src/lib/curriculum/libraryConceptResolver.ts` instead.
 4. No change to `TeachingActionType`'s 10-value union, `LessonStageType`'s
    10-value union, or any existing function signature — only new call
    sites in the Library branch of `route.ts`, exactly as ADR 02/07

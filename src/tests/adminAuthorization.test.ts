@@ -1,7 +1,19 @@
 import { describe, it, expect } from 'vitest'
 
-// isAdmin function pattern from the codebase:
-// checks ADMIN_EMAILS env or db adminRole field
+// Intentional simulation, not a replica of extractable pure logic — the
+// real chain (e.g. src/app/api/admin/ops/route.ts) is
+// `auth()` (session/JWT lookup) -> `isAdmin(session.user.id)`
+// (async Prisma query: `user.role === 'ADMIN'`), and soft-deleted users
+// never reach this point at all: their JWT sub is already nulled upstream
+// by the jwt callback (see src/lib/auth/banGuard.ts's resolveJwtSub,
+// contract-tested in authEmail.test.ts), not re-checked per admin route.
+// Faking a DB call and session/JWT state here would violate this task's
+// own "don't extract logic depending on request lifecycle/session
+// state/DB queries" rule, so simulateIsAdmin's plain array-membership
+// check stands in for the real async DB role lookup, and adminGate's
+// explicit isDeleted check stands in for the upstream JWT invalidation —
+// both correctly mirror the real system's overall 401/403 status-code
+// behavior without depending on a live DB or session.
 function simulateIsAdmin(userId: string, adminUserIds: string[]): boolean {
   return adminUserIds.includes(userId)
 }

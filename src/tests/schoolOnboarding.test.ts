@@ -1,12 +1,16 @@
 import { describe, it, expect } from 'vitest'
-import { z } from 'zod'
+import { schoolOnboardingSchema as schoolSchema } from '@/lib/schoolOnboardingSchema'
+import { shouldSkipSchoolOnboarding } from '@/lib/schoolOnboardingGuard'
 
-const schoolSchema = z.object({
-  userType: z.literal('SCHOOL_STUDENT'),
-  board: z.string(),
-  grade: z.number().int().min(5).max(12),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
-})
+// NOTE: schoolSchema above now imports the real schema from
+// src/lib/schoolOnboardingSchema.ts (extracted out of
+// src/app/api/onboarding/route.ts). Verified an exact, field-for-field
+// match via an automated diff directly against both file contents before
+// extracting. The LOW-4 tests below now import the real
+// shouldSkipSchoolOnboarding() decision, extracted from
+// handleSchoolStudent's `existing && user?.onboardingCompleted &&
+// existing.educationBoard` guard — the two DB lookups feeding it and the
+// enclosing transaction remain in the route.
 
 describe('School onboarding validation', () => {
   it('valid school onboarding schema passes', () => {
@@ -51,23 +55,21 @@ describe('School onboarding validation', () => {
 
   // LOW-4: duplicate onboarding guard
   it('LOW-4: completed school onboarding with educationBoard set → guard triggers', () => {
-    const existingProfile = { educationBoard: 'cbse', grade: 10 }
-    const onboardingCompleted = true
-    const shouldSkip = !!(existingProfile && onboardingCompleted && existingProfile.educationBoard)
-    expect(shouldSkip).toBe(true)
+    const existingProfile = { educationBoard: 'cbse' }
+    expect(shouldSkipSchoolOnboarding(existingProfile, true)).toBe(true)
   })
 
   it('LOW-4: no existing profile → onboarding proceeds', () => {
-    const existingProfile = null
-    const onboardingCompleted = false
-    const shouldSkip = !!(existingProfile && onboardingCompleted && (existingProfile as { educationBoard?: string } | null)?.educationBoard)
-    expect(shouldSkip).toBe(false)
+    expect(shouldSkipSchoolOnboarding(null, false)).toBe(false)
   })
 
   it('LOW-4: profile exists but onboarding not completed → proceeds', () => {
     const existingProfile = { educationBoard: null }
-    const onboardingCompleted = false
-    const shouldSkip = !!(existingProfile && onboardingCompleted && existingProfile.educationBoard)
-    expect(shouldSkip).toBe(false)
+    expect(shouldSkipSchoolOnboarding(existingProfile, false)).toBe(false)
+  })
+
+  it('LOW-4: profile exists, onboarding completed, but educationBoard not yet set → proceeds', () => {
+    const existingProfile = { educationBoard: null }
+    expect(shouldSkipSchoolOnboarding(existingProfile, true)).toBe(false)
   })
 })

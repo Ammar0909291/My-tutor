@@ -1,21 +1,12 @@
 /**
  * HIGH-7: IST streak engine — day boundary correctness.
- * Tests the pure date-helper behaviour by directly controlling Date.now().
+ * Tests the real exported pure functions from streakEngine.ts directly
+ * (istDateStr, istPrevDay, computeStreakTransition) rather than a
+ * hand-copied replica, so a change to the real IST math cannot silently
+ * diverge from what this suite asserts.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-
-// ── inline the two pure helpers from streakEngine (they're module-private) ──
-const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000
-
-function istDateStr(date: Date): string {
-  return new Date(date.getTime() + IST_OFFSET_MS).toISOString().slice(0, 10)
-}
-
-function istPrevDay(istDay: string): string {
-  const d = new Date(istDay + 'T00:00:00Z')
-  d.setUTCDate(d.getUTCDate() - 1)
-  return d.toISOString().slice(0, 10)
-}
+import { istDateStr, istPrevDay, computeStreakTransition } from '@/lib/school/achievements/streakEngine'
 
 describe('IST date helpers (HIGH-7)', () => {
   it('23:59 IST maps to the correct IST date, not the next UTC date', () => {
@@ -51,6 +42,65 @@ describe('IST date helpers (HIGH-7)', () => {
     const beforeMidnightIST = new Date('2026-06-16T18:29:00Z') // 23:59 IST Jun 16
     const afterMidnightIST  = new Date('2026-06-16T18:31:00Z') // 00:01 IST Jun 17
     expect(istDateStr(beforeMidnightIST)).not.toBe(istDateStr(afterMidnightIST))
+  })
+})
+
+describe('computeStreakTransition (pure decision logic, HIGH-7)', () => {
+  it('first ever record starts a streak of 1', () => {
+    const now = new Date('2026-06-17T10:00:00Z')
+    const result = computeStreakTransition(null, now)
+    expect(result).toEqual({ currentStreak: 1, longestStreak: 1, totalActiveDays: 1, isNewDay: true })
+  })
+
+  it('consecutive IST day extends the streak and bumps longestStreak', () => {
+    const now = new Date('2026-06-16T19:00:00Z') // 00:30 IST Jun 17
+    const existing = {
+      currentStreak: 3,
+      longestStreak: 5,
+      totalActiveDays: 10,
+      lastActiveDate: new Date('2026-06-15T18:30:00Z'), // 00:00 IST Jun 16 — yesterday
+    }
+    const result = computeStreakTransition(existing, now)
+    expect(result).toEqual({ currentStreak: 4, longestStreak: 5, totalActiveDays: 11, isNewDay: true })
+  })
+
+  it('a new streak can overtake the previous longestStreak', () => {
+    const now = new Date('2026-06-16T19:00:00Z')
+    const existing = {
+      currentStreak: 5,
+      longestStreak: 5,
+      totalActiveDays: 20,
+      lastActiveDate: new Date('2026-06-15T18:30:00Z'),
+    }
+    const result = computeStreakTransition(existing, now)
+    expect(result.currentStreak).toBe(6)
+    expect(result.longestStreak).toBe(6)
+  })
+
+  it('already recorded today (IST) is a no-op — isNewDay false, counts unchanged', () => {
+    const now = new Date('2026-06-16T19:00:00Z') // 00:30 IST Jun 17
+    const existing = {
+      currentStreak: 5,
+      longestStreak: 5,
+      totalActiveDays: 20,
+      lastActiveDate: new Date('2026-06-16T18:40:00Z'), // 00:10 IST Jun 17 — same IST day
+    }
+    const result = computeStreakTransition(existing, now)
+    expect(result).toEqual({ currentStreak: 5, longestStreak: 5, totalActiveDays: 20, isNewDay: false })
+  })
+
+  it('a missed IST day resets the streak to 1 but preserves longestStreak', () => {
+    const now = new Date('2026-06-17T19:00:00Z') // IST Jun 18
+    const existing = {
+      currentStreak: 7,
+      longestStreak: 10,
+      totalActiveDays: 30,
+      lastActiveDate: new Date('2026-06-15T18:30:00Z'), // IST Jun 16 — two days ago, gap
+    }
+    const result = computeStreakTransition(existing, now)
+    expect(result.currentStreak).toBe(1)
+    expect(result.longestStreak).toBe(10)
+    expect(result.isNewDay).toBe(true)
   })
 })
 

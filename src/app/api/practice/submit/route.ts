@@ -5,17 +5,9 @@ import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { generateCoachInsights } from '@/lib/analytics/coachInsights'
-
-const schema = z.object({
-  subjectSlug: z.string().min(1),
-  topicSlug: z.string().min(1),
-  questions: z.array(z.object({
-    question: z.string(),
-    correctIndex: z.number().optional(),
-  })).max(100).default([]),
-  correct: z.array(z.boolean()).min(1).max(100),
-  idempotencyKey: z.string().max(128).optional(),
-})
+import { computeMasteryPct, deriveTopicStatus } from '@/lib/mastery/topicMasteryFormula'
+import { buildPracticeMistakeRecords } from '@/lib/mistakeRecords'
+import { practiceSubmitSchema } from '@/lib/practiceSubmitSchema'
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -27,7 +19,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectSlug, topicSlug, questions, correct, idempotencyKey } = schema.parse(body)
+    const { subjectSlug, topicSlug, questions, correct, idempotencyKey } = practiceSubmitSchema.parse(body)
 
     const total = correct.length
     const correctCount = correct.filter(Boolean).length
@@ -37,10 +29,6 @@ export async function POST(req: Request) {
       question: questions[i]?.question ?? null,
       correct: isCorrect,
     }))
-
-    const mistakeIndexes = correct
-      .map((isCorrect, i) => (isCorrect ? -1 : i))
-      .filter((i) => i >= 0)
 
     // HIGH-6 / CRITICAL-5 (Sprint D): if idempotencyKey is supplied the DB
     // unique constraint is the atomic dedup guard — two concurrent requests
@@ -64,17 +52,9 @@ export async function POST(req: Request) {
             ...(idempotencyKey ? { idempotencyKey } : {}),
           },
         })
-        if (mistakeIndexes.length > 0) {
-          await tx.mistakeRecord.createMany({
-            data: mistakeIndexes.map((i) => ({
-              userId,
-              subjectSlug,
-              topicSlug,
-              sessionId: ps.id,
-              category: topicSlug,
-              questionId: `${ps.id}-${i}`,
-            })),
-          })
+        const mistakeRecords = buildPracticeMistakeRecords(correct, userId, subjectSlug, topicSlug, ps.id)
+        if (mistakeRecords.length > 0) {
+          await tx.mistakeRecord.createMany({ data: mistakeRecords })
         }
         return ps
       }))
@@ -91,11 +71,8 @@ export async function POST(req: Request) {
     const topicProgress = await withRetry(() => prisma.$transaction(async (tx) => {
       const key = { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } }
       const existing = await tx.topicProgress.findUnique({ where: key })
-      const masteryPct = existing ? Math.round((existing.masteryPct + score) / 2) : score
-      let status = existing?.status ?? 'IN_PROGRESS'
-      if (status === 'NOT_STARTED' || status === 'IN_PROGRESS') {
-        status = masteryPct >= 80 ? 'MASTERED' : masteryPct >= 50 ? 'COMPLETED' : 'IN_PROGRESS'
-      }
+      const masteryPct = computeMasteryPct(existing?.masteryPct ?? null, score)
+      const status = deriveTopicStatus(existing?.status ?? 'IN_PROGRESS', masteryPct)
       return tx.topicProgress.upsert({
         where: key,
         create: { userId, subjectSlug, topicSlug, status, masteryPct, attempts: 1, lastScore: score },

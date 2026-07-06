@@ -4,14 +4,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { sendWelcomeEmail } from "@/lib/email";
 import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rateLimit";
-
-const registerSchema = z.object({
-  // LOW-1: trim before length check so "  A " (3 chars, 1 non-space) is rejected.
-  name: z.string().trim().min(2, 'Name must be at least 2 characters').max(80),
-  email: z.string().email(),
-  password: z.string().min(8).max(100),
-  referralCode: z.string().optional(),
-});
+import { registerSchema } from "@/lib/registerSchema";
 
 export async function POST(req: Request) {
   // Pre-auth endpoint — limit per IP to stop registration spam (Sprint AQ).
