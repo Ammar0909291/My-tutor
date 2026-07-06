@@ -273,6 +273,9 @@ export async function POST(req: Request) {
     let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
     let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
+    // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
+    let libraryConceptNodeIdHoisted: string | null = null
+    let libraryLessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): surface the per-turn
     // strategy + its advisory output bias out of the school block so the post-AI
     // visual pipeline can consult them. Null on any non-school turn or failure →
@@ -1010,6 +1013,11 @@ export async function POST(req: Request) {
             const dueRevisions = await getDueRevisions(userId, subjectCode, moduleNodeSlugs)
             const revBlock = buildRevisionBlock(dueRevisions)
             if (revBlock) systemPrompt += revBlock
+
+            // W2-1 (ADR 08 §4a): seed conceptId for Library mode — first node if no snapshot yet.
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+              libraryConceptNodeIdHoisted = snapshotCurrentConceptId ?? currentModule.nodes[0]?.slug ?? null
+            }
           }
         }
       } catch (err) {
@@ -1074,6 +1082,10 @@ export async function POST(req: Request) {
             const plan = await buildLessonPlan(userId, subjectCode, currentModule.slug, currentModule.title, planNodes)
             const planBlock = buildLessonPlanBlock(plan)
             if (planBlock) systemPrompt += planBlock
+            // W2-1 (ADR 08 §4a): hoist for post-AI persist.
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+              libraryLessonPlanHoisted = plan
+            }
           }
         }
       } catch (err) {
@@ -1740,6 +1752,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Sprint CB: persist prereq gap only when high-confidence (avoid noisy writes)
                 ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
                 ...workedExampleField,
+              },
+            },
+          }).catch(() => {})
+        }
+      }
+
+      // W2-1 (ADR 08 §4a): Library-mode concept persist — parallel to school block above.
+      // ENABLE_LIBRARY_CONCEPT_TRACKING defaults off (Phase 1 observe cycle; Phase 2 flips it on).
+      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+        const newLibConceptId = libraryLessonPlanHoisted?.currentConcept?.nodeId ?? libraryConceptNodeIdHoisted
+        if (newLibConceptId && newLibConceptId !== snapshotCurrentConceptId) {
+          prisma.learnSession.update({
+            where: { id: sessionId },
+            data: {
+              contextSnapshot: {
+                ...(snapshot ?? {}),
+                currentConceptNodeId: newLibConceptId,
               },
             },
           }).catch(() => {})
