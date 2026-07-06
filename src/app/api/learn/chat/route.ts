@@ -72,6 +72,14 @@ export async function POST(req: Request) {
     const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
       ? snapshot.currentWorkedExample as { concept: string; currentStep: number; stepCount: number }
       : null
+    // W2-2 (ADR 09): lesson stage progress carried across turns
+    const snapshotLessonStageProgress = (
+      snapshot?.lessonStageProgress &&
+      typeof snapshot.lessonStageProgress === 'object' &&
+      typeof (snapshot.lessonStageProgress as Record<string, unknown>).conceptId === 'string'
+    ) ? snapshot.lessonStageProgress as {
+      conceptId: string; planSignature: string; stageIndex: number; totalStages: number
+    } : null
 
     const subjectCode = learnSession.subject.slug
 
@@ -276,6 +284,8 @@ export async function POST(req: Request) {
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
     let libraryLessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
+    // W2-2 (ADR 09): lesson stage progress — hoisted for post-AI tag-parse + persist.
+    let lessonStageProgressHoisted: { conceptId: string; planSignature: string; stageIndex: number; totalStages: number } | null = null
     // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): surface the per-turn
     // strategy + its advisory output bias out of the school block so the post-AI
     // visual pipeline can consult them. Null on any non-school turn or failure →
@@ -1393,7 +1403,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   activeMisconceptions: snapshot.misconceptions,
                   reviewDueConceptIds: reviewDue,
                 })
-                systemPrompt += buildLessonPlanBlock(lessonPlan)
+                // W2-2 (ADR 09): stage-continuity framing — planSignature computed here
+                // (not inside the Composer) so composeLessonPlan() stays pure.
+                if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1') {
+                  const planSignature = lessonPlan.stages.map(s => s.stage_type).join('|')
+                  const signatureMatches =
+                    snapshotLessonStageProgress !== null &&
+                    snapshotLessonStageProgress.conceptId === lessonPlan.concept_id &&
+                    snapshotLessonStageProgress.planSignature === planSignature &&
+                    snapshotLessonStageProgress.stageIndex < lessonPlan.stages.length
+                  const resumeStageIndex = signatureMatches ? snapshotLessonStageProgress!.stageIndex : 0
+                  lessonStageProgressHoisted = {
+                    conceptId: lessonPlan.concept_id,
+                    planSignature,
+                    stageIndex: resumeStageIndex,
+                    totalStages: lessonPlan.stages.length,
+                  }
+                  systemPrompt += buildLessonPlanBlock(lessonPlan, {
+                    stageIndex: resumeStageIndex,
+                    totalStages: lessonPlan.stages.length,
+                  })
+                } else {
+                  systemPrompt += buildLessonPlanBlock(lessonPlan)
+                }
               } catch {
                 // non-fatal — lesson plan context is purely additive
               }
@@ -1453,6 +1485,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             cleanText = we.cleanText
             if (we.done) workedExampleUpdate = 'clear'
             else if (we.state) workedExampleUpdate = { concept: we.state.concept, currentStep: we.state.currentStep, stepCount: we.state.stepCount }
+          } catch { /* non-fatal */ }
+        }
+
+        // W2-2 (ADR 09): extract and strip the [LESSON:<n>] stage-progress tag
+        if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1' && lessonStageProgressHoisted !== null) {
+          try {
+            const { parseLessonProgressTag } = await import('@/lib/school/adaptive/lessonComposer')
+            const lp = parseLessonProgressTag(cleanText)
+            cleanText = lp.cleanText
+            if (lp.stageIndex !== null) {
+              // stageIndex emitted = stage just covered; next stage = emitted + 1
+              lessonStageProgressHoisted = {
+                ...lessonStageProgressHoisted,
+                stageIndex: lp.stageIndex + 1,
+              }
+            }
           } catch { /* non-fatal */ }
         }
       } else {
@@ -1730,8 +1778,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const newNextId = lessonPlanHoisted?.nextConcept?.nodeId ?? null
         const conceptChanged = !!newCurrentId && newCurrentId !== snapshotCurrentConceptId
         const workedExampleChanged = workedExampleUpdate !== null
+        // W2-2 (ADR 09): lesson stage progress changed whenever a lessonPlan block was rendered this turn
+        const lessonStageProgressChanged = lessonStageProgressHoisted !== null
 
-        if (conceptChanged || workedExampleChanged) {
+        if (conceptChanged || workedExampleChanged || lessonStageProgressChanged) {
           // Sprint CH: compute the next worked-example memory value
           let workedExampleField: Record<string, unknown> = {}
           if (workedExampleUpdate === 'clear') {
@@ -1752,6 +1802,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Sprint CB: persist prereq gap only when high-confidence (avoid noisy writes)
                 ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
                 ...workedExampleField,
+                // W2-2 (ADR 09): persist lesson stage progress
+                ...(lessonStageProgressHoisted ? { lessonStageProgress: lessonStageProgressHoisted } : {}),
               },
             },
           }).catch(() => {})
