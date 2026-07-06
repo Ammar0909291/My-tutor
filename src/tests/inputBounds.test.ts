@@ -4,13 +4,15 @@
  */
 import { describe, it, expect } from 'vitest'
 import { z } from 'zod'
+import { coachSchema } from '@/lib/ai/coachSchema'
 
-// Coach schema (from /api/coach/route.ts)
-const coachSchema = z.object({
-  messages: z.array(
-    z.object({ role: z.enum(['system', 'user', 'assistant']), content: z.string().max(8000) })
-  ).max(50),
-})
+// NOTE: coachSchema above now imports the real schema from
+// src/lib/ai/coachSchema.ts (extracted out of src/app/api/coach/route.ts).
+// quizSchema/settingsSchema/practiceSchema below are still local replicas —
+// out of scope for this pass (one schema at a time); note settingsSchema
+// in particular is already missing two real fields (country, voiceSpeed)
+// present in src/app/api/settings/route.ts's schema, a pre-existing drift
+// for a future investigation.
 
 // Quiz schema (from /api/quiz/generate/route.ts)
 const quizSchema = z.object({
