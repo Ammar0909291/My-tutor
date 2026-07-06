@@ -19,6 +19,7 @@ import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
 import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
+import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -82,6 +83,7 @@ export async function POST(req: Request) {
     } : null
 
     const subjectCode = learnSession.subject.slug
+    const ebEnabled = isEduBrainEnabled(subjectCode)
 
     // ─── School Mode (Sprint BI) ───
     // When the session carries a school chapter id and the learner is a school
@@ -954,7 +956,7 @@ export async function POST(req: Request) {
     try {
       const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
       const librarySubject = findLibrarySubject(learnSession.subject.slug)
-      if (librarySubject) {
+      if (librarySubject && ebEnabled) {
         const progressRows = await prisma.moduleProgress.findMany({
           where: { userId: session.user.id, subjectId: learnSession.subjectId },
         })
@@ -988,7 +990,7 @@ export async function POST(req: Request) {
     // subject's own lesson slugs (its MistakeRecord topicSlugs) instead of KG
     // node ids. Purely additive context; reuses the existing taxonomy + engine
     // with no schema or engine change, and never blocks a lesson.
-    if (!schoolCtx) {
+    if (!schoolCtx && ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1019,7 +1021,7 @@ export async function POST(req: Request) {
     // Also sets strategyHoisted/outputBiasHoisted/hintBiasHoisted so the existing
     // post-AI visual-suppression and [HINT] tag pipeline (already schoolCtx-agnostic)
     // activates for general learners too, not just the prompt text.
-    if (!schoolCtx) {
+    if (!schoolCtx && ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1098,7 +1100,7 @@ export async function POST(req: Request) {
     // (route.ts ~1640, schoolCtx-gated) is intentionally NOT extended here — kept
     // to the single prompt-injection block, consistent with ADR 02 §3's "smaller
     // surface area for a first increment" rationale.
-    if (!schoolCtx) {
+    if (!schoolCtx && ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
