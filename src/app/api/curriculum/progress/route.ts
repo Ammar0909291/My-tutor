@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { awardXP } from '@/lib/xp'
 import { generateJSON } from '@/lib/ai/client'
 import { getSchoolChapters } from '@/lib/school/schoolRouting'
+import { computeLessonCompletionPercent, isLessonSetCompleted } from '@/lib/lessonProgress'
 
 const schema = z.object({
   subjectCode: z.string(),
@@ -86,9 +87,11 @@ export async function PATCH(req: Request) {
       : [completedLesson]
 
     const completionPercent = totalLessons
-      ? Math.min(100, Math.round((completedLessons.length / totalLessons) * 100))
+      ? computeLessonCompletionPercent(completedLessons.length, totalLessons)
       : (existing?.completionPercent ?? 0)
-    const isCompleted = totalLessons ? completedLessons.length >= totalLessons : (existing?.isCompleted ?? false)
+    const isCompleted = totalLessons
+      ? isLessonSetCompleted(completedLessons.length, totalLessons)
+      : (existing?.isCompleted ?? false)
     const completedAt = isCompleted ? (existing?.completedAt ?? new Date()) : null
 
     const progress = await prisma.studentProgress.upsert({
