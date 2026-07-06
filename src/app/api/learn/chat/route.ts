@@ -1120,7 +1120,9 @@ export async function POST(req: Request) {
           }) ?? libSubject.modules[0]
 
           if (currentModule) {
-            const planNodes = currentModule.nodes.map((n) => ({
+            const { resolveLibraryDomainNodes } = await import('@/lib/curriculum/libraryConceptResolver')
+            const kgDomainNodes = resolveLibraryDomainNodes(subjectCode, currentModule.slug)
+            const planNodes = kgDomainNodes ?? currentModule.nodes.map((n) => ({
               id: n.slug,
               domain: subjectCode,
               title: n.title,

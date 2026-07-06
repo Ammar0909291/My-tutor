@@ -32,6 +32,26 @@ const MODULE_TO_KG_DOMAIN: Readonly<Record<string, Record<string, string>>> = {
 }
 
 /**
+ * Returns the full ordered list of canonical KG nodes for the domain mapped
+ * from the given subject + module combination, or null if no mapping exists.
+ * Order matches the pedagogical sequence authored in the KG JSON file.
+ * Used by the Library lesson plan block (route.ts) so buildLessonPlan()
+ * receives canonical KG IDs that match TopicProgress rows written by the
+ * frontend (Namespace A).
+ */
+export function resolveLibraryDomainNodes(
+  subjectCode: string,
+  moduleSlug: string,
+): import('@/lib/education').KnowledgeNode[] | null {
+  const domainPrefix = MODULE_TO_KG_DOMAIN[subjectCode]?.[moduleSlug]
+  if (!domainPrefix) return null
+
+  const nodes = createSubjectAdapter(subjectCode).getNodes()
+  const domainNodes = nodes.filter(n => n.domain === domainPrefix)
+  return domainNodes.length > 0 ? domainNodes : null
+}
+
+/**
  * Returns the canonical KG concept ID that is the cross-domain entry point
  * for the given subject + module combination, or null if no mapping exists.
  *
