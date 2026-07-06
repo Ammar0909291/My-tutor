@@ -106,6 +106,8 @@ model User {
   conceptMasteryRecords ConceptMasteryRecord[]
   activeMisconceptions  ActiveMisconception[]
 
+  lessonBookmarks LessonBookmark[]
+
   @@map("users")
 }
 
@@ -1148,6 +1150,23 @@ model StudySession {
 
   @@index([userId, date])
   @@map("study_sessions")
+}
+
+// Learn window bookmark button (previously a client-only Set that reset on
+// every page load) — one row per bookmarked lesson, keyed by the same
+// subjectCode + lessonOrder pair StudentProgress already uses.
+model LessonBookmark {
+  id          String   @id @default(cuid())
+  userId      String
+  subjectCode String
+  lessonOrder Int
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectCode, lessonOrder])
+  @@index([userId, subjectCode])
+  @@map("lesson_bookmarks")
 }
 
 model PerformanceMetric {

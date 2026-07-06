@@ -16,7 +16,9 @@
     "seed": "tsx scripts/seed.ts",
     "seed:eb-physics": "npx tsx scripts/seed-eb-physics.mjs",
     "postinstall": "prisma generate && node scripts/copy-dynamic-visual-vendor.mjs",
-    "test": "vitest run"
+    "test": "vitest run",
+    "e2e:seed": "tsx e2e/seed-test-user.ts",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

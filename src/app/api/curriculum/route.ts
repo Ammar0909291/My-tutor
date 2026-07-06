@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db/prisma'
 import type { Curriculum } from '@/types'
 import { findLibrarySubject, renderCurriculumTree } from '@/lib/curriculum/subjectCatalog'
 import { getKnowledgeGraph, getAvailableNodes } from '@/lib/curriculum/knowledgeGraph'
+import { resolveCurriculumSource } from '@/lib/curriculum/resolveCurriculumSource'
 
 const schema = z.object({ subjectSlug: z.string() })
 
@@ -37,14 +38,14 @@ export async function GET(req: Request) {
       topicProgressRows.filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION').map((r) => r.topicSlug)
     )
     const availableNodes = graph ? getAvailableNodes(graph, completedSlugs).map((n) => n.slug) : []
+    const libSubject = findLibrarySubject(subject)
 
-    // The canonical Knowledge-Graph pipeline must win over any legacy `Curriculum`
-    // DB rows (e.g. the original c/cpp/python/english seed data) whenever one
-    // exists for this subject — otherwise a subject with old seeded rows (english)
-    // would resolve to stale content instead of the same production KG pipeline
-    // used by mathematics/physics. Checked unconditionally, before the
-    // `lessons.length === 0` legacy-fallback branch below.
-    if (graph) {
+    // Priority: canonical KG > legacy Curriculum DB rows > Subject Library catalog.
+    // See resolveCurriculumSource for why this order matters (it's the exact fix
+    // for the bug where English's canonical KG was shadowed by stale legacy rows).
+    const source = resolveCurriculumSource(!!graph, lessons.length, !!libSubject)
+
+    if (source === 'kg' && graph) {
       let order = 1
       // Tier-1 subjects: synthesise from KG so topicSlug === KG node slug everywhere.
       // This is the critical connection: lesson.topicSlug → KG node → assessment → mastery.
@@ -70,32 +71,28 @@ export async function GET(req: Request) {
       })
     }
 
-    if (lessons.length === 0) {
+    if (source === 'library-catalog' && libSubject) {
       let order = 1
-
-      const libSubject = findLibrarySubject(subject)
-      if (libSubject) {
-        const syntheticLessons = libSubject.modules.flatMap((module, modIdx) =>
-          module.nodes.map((node, nodeIdx) => ({
-            id: `${subject}-${modIdx + 1}-${nodeIdx + 1}`,
-            subjectCode: subject,
-            unit: modIdx + 1,
-            unitTitle: module.title,
-            lesson: nodeIdx + 1,
-            lessonTitle: node.title,
-            lessonGoal: node.title,
-            order: order++,
-            topicSlug: node.slug,
-          }))
-        )
-        return NextResponse.json({
-          success: true,
-          lessons: syntheticLessons,
-          progress: progress ?? { currentLesson: 1, completedLessons: [] },
-          topicProgress: topicProgressRows,
-          availableNodes,
-        })
-      }
+      const syntheticLessons = libSubject.modules.flatMap((module, modIdx) =>
+        module.nodes.map((node, nodeIdx) => ({
+          id: `${subject}-${modIdx + 1}-${nodeIdx + 1}`,
+          subjectCode: subject,
+          unit: modIdx + 1,
+          unitTitle: module.title,
+          lesson: nodeIdx + 1,
+          lessonTitle: node.title,
+          lessonGoal: node.title,
+          order: order++,
+          topicSlug: node.slug,
+        }))
+      )
+      return NextResponse.json({
+        success: true,
+        lessons: syntheticLessons,
+        progress: progress ?? { currentLesson: 1, completedLessons: [] },
+        topicProgress: topicProgressRows,
+        availableNodes,
+      })
     }
 
     // Legacy curriculum rows (c/cpp) predate the knowledge-graph linkage and have

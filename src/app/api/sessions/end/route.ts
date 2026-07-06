@@ -60,6 +60,16 @@ export async function POST(req: Request) {
 
     // Session count is tracked via learnSession.count; no extra action needed here
 
+    // Record real study time — StudySession existed but nothing ever wrote to
+    // it, so anything reading from it (admin analytics, the Learn window's
+    // "Today's Goal" ring) was always empty. Additive-only, no schema change.
+    const minutesStudied = Math.round((Date.now() - learnSession.startedAt.getTime()) / 60000)
+    if (minutesStudied > 0) {
+      await prisma.studySession.create({
+        data: { userId: session.user.id, subjectId: learnSession.subjectId, minutes: minutesStudied, source: 'learn_session' },
+      }).catch((err) => console.error('[sessions/end] StudySession write failed', err))
+    }
+
     // +10 XP for completing a session
     await prisma.user.update({
       where: { id: session.user.id },

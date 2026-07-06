@@ -85,6 +85,10 @@ const NON_CODE_SUBJECTS = ['english', 'russian', 'hindi', 'german', 'arabic', 'm
 
 // ─── "My Tutor" redesign tokens (Learn window only — approved exception to the
 // standing "don't redesign UI" rule, scoped to this screen) ───────────────────
+// Kept as literal hex (not var(--indigo)) because many call sites append a hex
+// alpha suffix directly (e.g. `${UI.indigo}18`) — CSS custom properties can't be
+// suffixed that way. --indigo/--indigo-hover in src/styles/tokens.css are the
+// canonical theme-token definition of this same color; keep both in sync.
 const UI = {
   indigo: '#6C5CE7', indigoDark: '#5A4BD1',
   green: '#22C55E', greenBg: 'rgba(34,197,94,0.1)', greenBorder: 'rgba(34,197,94,0.3)',
@@ -759,6 +763,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [knowledgeMapOpen, setKnowledgeMapOpen] = useState(false)
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const [bookmarkedLessons, setBookmarkedLessons] = useState<Set<number>>(new Set())
+  // Real cross-session minutes studied today (from StudySession rows written on
+  // session end), fetched once on mount as the baseline for the "Today's Goal"
+  // ring; the live current-session `elapsed` timer is added on top of this.
+  const [todayBaselineMinutes, setTodayBaselineMinutes] = useState(0)
+
+  // Accessibility: Escape closes whichever header/panel dropdown is open —
+  // these menus only close today via an invisible click-outside overlay,
+  // which is unreachable by keyboard.
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Escape') return
+      setSubjectMenuOpen(false)
+      setLangMenuOpen(false)
+      setSpeedMenuOpen(false)
+      setMoreMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   // Assessment / promotion
   const [promotionResult, setPromotionResult] = useState<PromotionResult | null>(null)
@@ -837,6 +860,42 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [messages, atBottom])
 
   useEffect(() => { setMicSupported(typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getUserMedia) }, [])
+
+  // Today's Goal baseline — real minutes already studied today, across all
+  // subjects, from completed sessions (fetched once; the live session's
+  // elapsed time is added on top locally so the ring updates in real time).
+  useEffect(() => {
+    fetch('/api/study-time/today')
+      .then((r) => r.json())
+      .then((d) => { if (d.success) setTodayBaselineMinutes(d.minutesToday) })
+      .catch(() => {})
+  }, [])
+
+  // Bookmarked lessons — persisted per subject (previously a client-only Set
+  // that silently reset on every page refresh). bookmarksToggledRef guards
+  // against a real race: if the user clicks bookmark before this initial GET
+  // resolves, the optimistic click state must win — otherwise the slower,
+  // now-stale GET response arrives afterward and silently reverts the click.
+  const bookmarksToggledRef = useRef(false)
+  useEffect(() => {
+    fetch(`/api/curriculum/bookmark?subject=${subjectSlug}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.success && !bookmarksToggledRef.current) setBookmarkedLessons(new Set<number>(d.bookmarkedLessons)) })
+      .catch(() => {})
+  }, [subjectSlug])
+
+  const toggleBookmark = useCallback((lessonOrder: number) => {
+    bookmarksToggledRef.current = true
+    setBookmarkedLessons((prev) => {
+      const next = new Set(prev)
+      next.has(lessonOrder) ? next.delete(lessonOrder) : next.add(lessonOrder)
+      return next
+    })
+    fetch('/api/curriculum/bookmark', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subjectCode: subjectSlug, lessonOrder }),
+    }).catch(() => {})
+  }, [subjectSlug])
 
   // Fetch curriculum — query by the enrolled subject's own slug. The legacy
   // `Curriculum` table only has rows for c/cpp/python/english (the original 4
@@ -1712,7 +1771,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // ── Layout ────────────────────────────────────────────────────────────────
   // ── Left icon nav rail (Learn window redesign) ──────────────────────────
   const goalTargetMin = 60
-  const goalDoneMin = Math.min(goalTargetMin, Math.floor(elapsed / 60))
+  const goalDoneMin = Math.min(goalTargetMin, todayBaselineMinutes + Math.floor(elapsed / 60))
   const goalPct = Math.round((goalDoneMin / goalTargetMin) * 100)
   const NAV_ITEMS: { key: string; label: string; icon: React.ReactNode; href?: string; onClick?: () => void; active?: boolean }[] = [
     { key: 'learn', label: teachingLanguage === 'ru' ? 'Учёба' : 'Learn', icon: <BookOpen size={20} />, href: '/learn', active: true },
@@ -1751,7 +1810,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
         <div style={{ flex: 1 }} />
 
-        {/* Today's Goal ring — approximated from this session's elapsed time vs a 60-min target */}
+        {/* Today's Goal ring — real cross-session minutes today (StudySession) + this session's live elapsed time, vs a 60-min target */}
         <div style={{ width: '100%', padding: '10px 6px', textAlign: 'center' }}>
           <p style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>
             {teachingLanguage === 'ru' ? 'Цель на день' : "Today's Goal"}
@@ -1843,6 +1902,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 <button
                   onClick={() => setSubjectMenuOpen((v) => !v)}
                   title={switchLabel}
+                  aria-label={switchLabel}
+                  aria-haspopup="menu"
+                  aria-expanded={subjectMenuOpen}
                   style={{
                     display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer',
                     padding: '2px 8px 2px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700,
@@ -1901,6 +1963,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             <button onClick={() => setLangMenuOpen((o) => !o)}
               title={t('settings_lang')}
               aria-label={t('settings_lang')}
+              aria-haspopup="menu"
+              aria-expanded={langMenuOpen}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5, height: 30, padding: '0 10px', borderRadius: 8,
                 fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
@@ -1964,6 +2028,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             <button onClick={() => setSpeedMenuOpen((o) => !o)}
               title={t('settings_voice_speed')}
               aria-label={`${t('settings_voice_speed')}: ${speed}x`}
+              aria-haspopup="menu"
+              aria-expanded={speedMenuOpen}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5,
                 height: 30, padding: '0 10px', borderRadius: 8, fontSize: 11.5, fontWeight: 700, cursor: 'pointer',
@@ -2759,12 +2825,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               {/* Bookmark current lesson */}
               {currentLessonData && (
                 <button
-                  onClick={() => setBookmarkedLessons((prev) => {
-                    const next = new Set(prev)
-                    next.has(currentLessonData.order) ? next.delete(currentLessonData.order) : next.add(currentLessonData.order)
-                    return next
-                  })}
+                  onClick={() => toggleBookmark(currentLessonData.order)}
                   title={teachingLanguage === 'ru' ? 'Сохранить урок' : 'Bookmark this lesson'}
+                  aria-label={teachingLanguage === 'ru' ? 'Сохранить урок' : 'Bookmark this lesson'}
+                  aria-pressed={bookmarkedLessons.has(currentLessonData.order)}
                   style={{
                     width: 30, height: 30, borderRadius: 8, flexShrink: 0, border: '1px solid var(--border-default)',
                     background: bookmarkedLessons.has(currentLessonData.order) ? `${UI.indigo}18` : 'transparent',
@@ -2778,6 +2842,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               {/* More menu — houses Practice / Insights / Maximize, decluttering the input row */}
               <div style={{ position: 'relative', flexShrink: 0 }}>
                 <button onClick={() => setMoreMenuOpen((v) => !v)}
+                  title={teachingLanguage === 'ru' ? 'Ещё' : 'More options'}
+                  aria-label={teachingLanguage === 'ru' ? 'Ещё' : 'More options'}
+                  aria-haspopup="menu"
+                  aria-expanded={moreMenuOpen}
                   style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', color: 'var(--text-dim)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <MoreVertical size={15} />
                 </button>
@@ -3127,6 +3195,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
                   <button onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
                     title={teachingLanguage === 'ru' ? 'Прикрепить файл' : 'Attach file'}
+                    aria-label={teachingLanguage === 'ru' ? 'Прикрепить файл' : 'Attach file'}
                     style={{
                       width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', border: 'none',
                       background: attachedFile ? UI.indigo : 'transparent',
@@ -3139,6 +3208,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   <input ref={imageInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleImageSelect} />
                   <button onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
                     title={teachingLanguage === 'ru' ? 'Фото' : 'Photo'}
+                    aria-label={teachingLanguage === 'ru' ? 'Фото' : 'Photo'}
                     style={{
                       width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', fontSize: 14, border: 'none',
                       background: selectedImage ? UI.indigo : 'transparent',
@@ -3167,6 +3237,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   {micSupported && (
                     <button onClick={handleMicClick} disabled={isStreaming || !sessionId || micState === 'processing'}
                       className={micState === 'recording' ? 'mic-rec' : ''}
+                      title={micState === 'recording' ? (teachingLanguage === 'ru' ? 'Остановить запись' : 'Stop recording') : (teachingLanguage === 'ru' ? 'Голосовой ввод' : 'Voice input')}
+                      aria-label={micState === 'recording' ? (teachingLanguage === 'ru' ? 'Остановить запись' : 'Stop recording') : (teachingLanguage === 'ru' ? 'Голосовой ввод' : 'Voice input')}
                       style={{
                         width: 28, height: 28, borderRadius: '50%', flexShrink: 0, border: 'none',
                         cursor: micState === 'processing' ? 'not-allowed' : 'pointer',
@@ -3185,6 +3257,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 {/* Send — separate circular indigo button, matching the mockup */}
                 <button onClick={handleSend}
                   disabled={(!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId}
+                  title={teachingLanguage === 'ru' ? 'Отправить' : 'Send'}
+                  aria-label={teachingLanguage === 'ru' ? 'Отправить' : 'Send'}
                   style={{
                     width: 40, height: 40, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none',
                     background: UI.indigo, color: '#fff',
