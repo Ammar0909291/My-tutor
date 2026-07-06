@@ -1,11 +1,19 @@
 import { describe, it, expect } from 'vitest'
+import { isAdminEmailMatch } from '@/lib/auth/email'
 
-// isAdmin logic: check ADMIN_EMAILS env OR db role
-// From the codebase: admin is determined by ADMIN_EMAILS env var or db adminRole
-function isAdminByEmail(email: string, adminEmails: string): boolean {
-  return adminEmails.split(',').map(e => e.trim().toLowerCase()).includes(email.toLowerCase())
-}
-
+// NOTE: the Role type and canAccess*() functions below do NOT correspond to
+// any current production code — investigated and confirmed via
+// prisma/schema.prisma + a repo-wide search: the real PlatformRole enum is
+// only STUDENT | ADMIN (src/lib/auth/admin.ts's isAdmin() checks
+// `role === 'ADMIN'`), and the only other role enum, OrgMemberRole
+// (OWNER | ADMIN | TEACHER | MEMBER), is unrelated and used for org
+// membership, not page/route gating. SCHOOL_ADMIN, PLATFORM_ADMIN, and
+// every canAccess*() function name below have zero references anywhere in
+// src/app or src/lib. This block tests an aspirational/not-yet-built
+// four-tier role model, not production behavior — left as-is (extracting
+// or "fixing" it would mean implementing new authorization functionality,
+// which is out of scope here) but documented so it isn't mistaken for
+// replica-drift of something real.
 type Role = 'STUDENT' | 'TEACHER' | 'SCHOOL_ADMIN' | 'PLATFORM_ADMIN'
 
 function canAccessAdminDashboard(role: Role): boolean {
@@ -68,14 +76,14 @@ describe('Role enforcement', () => {
   })
 
   it('admin email matching is case-insensitive', () => {
-    expect(isAdminByEmail('Admin@Test.Com', 'admin@test.com,other@test.com')).toBe(true)
+    expect(isAdminEmailMatch('Admin@Test.Com', 'admin@test.com,other@test.com')).toBe(true)
   })
 
   it('non-admin email not in list → false', () => {
-    expect(isAdminByEmail('user@test.com', 'admin@test.com')).toBe(false)
+    expect(isAdminEmailMatch('user@test.com', 'admin@test.com')).toBe(false)
   })
 
   it('empty admin emails list → no one is admin', () => {
-    expect(isAdminByEmail('admin@test.com', '')).toBe(false)
+    expect(isAdminEmailMatch('admin@test.com', '')).toBe(false)
   })
 })
