@@ -6,25 +6,24 @@ import { describe, it, expect } from 'vitest'
 import { z } from 'zod'
 import { coachSchema } from '@/lib/ai/coachSchema'
 import { settingsSchema } from '@/lib/settingsSchema'
+import { quizSchema } from '@/lib/quizSchema'
 
-// NOTE: coachSchema and settingsSchema above now import the real schemas
-// from src/lib/ai/coachSchema.ts and src/lib/settingsSchema.ts
-// (extracted out of their respective routes). Investigated settingsSchema
-// specifically: the old local replica here had only 2 of the real
-// schema's 4 fields (missing country, voiceSpeed) with no comment, other
-// test, or design convention anywhere suggesting that was an intentional
-// subset — genuine replica-drift, not a deliberate scope choice. Fixed by
-// importing the real schema; new describe blocks below cover the
-// previously-untested country/voiceSpeed bounds.
-// quizSchema/practiceSchema below are still local replicas — out of scope
-// for this pass (one schema at a time).
-
-// Quiz schema (from /api/quiz/generate/route.ts)
-const quizSchema = z.object({
-  subject: z.string().min(1).max(200),
-  topic: z.string().max(200).optional(),
-  lang: z.enum(['ru', 'en', 'hi']).default('en'),
-})
+// NOTE: coachSchema, settingsSchema, and quizSchema above now import the
+// real schemas from src/lib/ai/coachSchema.ts, src/lib/settingsSchema.ts,
+// and src/lib/quizSchema.ts (extracted out of their respective routes).
+// Investigated settingsSchema specifically: the old local replica here had
+// only 2 of the real schema's 4 fields (missing country, voiceSpeed) with
+// no comment, other test, or design convention anywhere suggesting that
+// was an intentional subset — genuine replica-drift, not a deliberate
+// scope choice. Fixed by importing the real schema; the describe blocks
+// below cover the previously-untested country/voiceSpeed bounds.
+// Investigated quizSchema separately: the old local replica was an exact,
+// field-for-field match to the real schema (no drift, nothing missing) —
+// still extracted for the same reason coachSchema was: an un-imported
+// duplicate that happens to be accurate today is exactly how
+// settingsSchema's drift started.
+// practiceSchema below is still a local replica — out of scope for this
+// pass (one schema at a time).
 
 // Practice schema (from /api/practice/submit/route.ts)
 const practiceSchema = z.object({

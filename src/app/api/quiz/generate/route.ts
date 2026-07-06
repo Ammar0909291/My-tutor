@@ -3,12 +3,7 @@ import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { chatWithFallback } from '@/lib/ai/client'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
-
-const schema = z.object({
-  subject: z.string().min(1).max(200),
-  topic: z.string().max(200).optional(),
-  lang: z.enum(['ru', 'en', 'hi']).default('en'),
-})
+import { quizSchema } from '@/lib/quizSchema'
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -19,7 +14,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { subject, topic, lang } = schema.parse(body)
+    const { subject, topic, lang } = quizSchema.parse(body)
 
     const topicStr = topic || subject
     const langInstruction = lang === 'ru' ? 'in Russian' : lang === 'hi' ? 'in Hindi' : 'in English'
