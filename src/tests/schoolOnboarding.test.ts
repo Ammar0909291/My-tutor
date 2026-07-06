@@ -1,12 +1,14 @@
 import { describe, it, expect } from 'vitest'
-import { z } from 'zod'
+import { schoolOnboardingSchema as schoolSchema } from '@/lib/schoolOnboardingSchema'
 
-const schoolSchema = z.object({
-  userType: z.literal('SCHOOL_STUDENT'),
-  board: z.string(),
-  grade: z.number().int().min(5).max(12),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
-})
+// NOTE: schoolSchema above now imports the real schema from
+// src/lib/schoolOnboardingSchema.ts (extracted out of
+// src/app/api/onboarding/route.ts). Verified an exact, field-for-field
+// match via an automated diff directly against both file contents before
+// extracting. The LOW-4 duplicate-onboarding-guard tests below (a
+// separate hand-copy of the `existing && onboardingCompleted &&
+// existing.educationBoard` condition from handleSchoolStudent) were out
+// of scope for this investigation and are untouched.
 
 describe('School onboarding validation', () => {
   it('valid school onboarding schema passes', () => {

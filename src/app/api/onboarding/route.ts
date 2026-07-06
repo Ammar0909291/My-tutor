@@ -6,6 +6,7 @@ import { SubjectType, type Subject } from '@prisma/client'
 import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { getBoard } from '@/lib/education'
 import { captureError } from '@/lib/monitoring'
+import { schoolOnboardingSchema } from '@/lib/schoolOnboardingSchema'
 
 // CRITICAL-3 (Sprint D): the old check matched any error whose message
 // contained "Unique constraint", which could mask an unrelated write
@@ -44,14 +45,6 @@ const generalSchema = z.object({
   message: 'At least one subject is required', path: ['subjectSlugs'],
 })
 
-// School students make exactly 3 onboarding decisions: user type, board, grade.
-const schoolSchema = z.object({
-  userType: z.literal('SCHOOL_STUDENT'),
-  board: z.string(),
-  grade: z.number().int().min(5).max(12),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
-})
-
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) {
@@ -64,7 +57,7 @@ export async function POST(req: Request) {
     const body = await req.json()
 
     if (body?.userType === 'SCHOOL_STUDENT') {
-      return handleSchoolStudent(session.user, userId, schoolSchema.parse(body))
+      return handleSchoolStudent(session.user, userId, schoolOnboardingSchema.parse(body))
     }
 
     const parsed = generalSchema.parse(body)
@@ -221,7 +214,7 @@ export async function POST(req: Request) {
 async function handleSchoolStudent(
   sessionUser: { name?: string | null; email?: string | null },
   userId: string,
-  parsed: z.infer<typeof schoolSchema>,
+  parsed: z.infer<typeof schoolOnboardingSchema>,
 ) {
   const { board, grade, teachingLanguage } = parsed
 
