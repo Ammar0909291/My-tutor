@@ -185,12 +185,11 @@ Response format:
 - Format code blocks in markdown with the language specified
 
 LEARNING RULES:
-1. After each explanation ask: "Got it? Reply: yes / no / partially"
-2. If "no" — choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
-3. If "partially" — ask "What exactly is unclear?"
-4. NEVER move to next topic without confirmation of understanding
-5. Max 3-4 sentences + code, then a question or task
-6. Short student replies = fatigue → make it more engaging`
+1. Gauge understanding from what the student actually types back — do not force a fixed "yes / no / partially" reply format
+2. If the student seems confused, choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
+3. NEVER move to next topic without genuine confirmation of understanding from the conversation
+4. Max 3-4 sentences + code, then a natural follow-up question or task
+5. Short student replies = fatigue → make it more engaging`
   }
 
   if (teachingLanguage === 'hi') {
@@ -221,9 +220,9 @@ HINGLISH SUPPORT:
 Цели обучения: ${goals}${memorySection}${lessonBlock}
 
 ПРАВИЛА ОБУЧЕНИЯ:
-1. После каждого объяснения спроси: "Понял? Отвечай: да / нет / частично"
-2. Если "нет" — выбери ДРУГОЙ подход
-3. Максимум 3-4 предложения + код, потом вопрос или задание`
+1. Оценивай понимание по тому, что студент сам пишет в ответ — не требуй жёсткого формата "да / нет / частично"
+2. Если студент выглядит растерянным — выбери ДРУГОЙ подход
+3. Максимум 3-4 предложения + код, потом естественный вопрос или задание`
 }
 
 export function buildCurriculumPrompt(subject: string, selfDescription: string, treeBlock?: string | null) {

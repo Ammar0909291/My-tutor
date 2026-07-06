@@ -38,33 +38,40 @@ export async function GET(req: Request) {
     )
     const availableNodes = graph ? getAvailableNodes(graph, completedSlugs).map((n) => n.slug) : []
 
+    // The canonical Knowledge-Graph pipeline must win over any legacy `Curriculum`
+    // DB rows (e.g. the original c/cpp/python/english seed data) whenever one
+    // exists for this subject — otherwise a subject with old seeded rows (english)
+    // would resolve to stale content instead of the same production KG pipeline
+    // used by mathematics/physics. Checked unconditionally, before the
+    // `lessons.length === 0` legacy-fallback branch below.
+    if (graph) {
+      let order = 1
+      // Tier-1 subjects: synthesise from KG so topicSlug === KG node slug everywhere.
+      // This is the critical connection: lesson.topicSlug → KG node → assessment → mastery.
+      const syntheticLessons = graph.modules.flatMap((module, modIdx) =>
+        module.nodes.map((node, nodeIdx) => ({
+          id: `${subject}-${modIdx + 1}-${nodeIdx + 1}`,
+          subjectCode: subject,
+          unit: modIdx + 1,
+          unitTitle: module.title,
+          lesson: nodeIdx + 1,
+          lessonTitle: node.title,
+          lessonGoal: node.description,
+          order: order++,
+          topicSlug: node.slug,
+        }))
+      )
+      return NextResponse.json({
+        success: true,
+        lessons: syntheticLessons,
+        progress: progress ?? { currentLesson: 1, completedLessons: [] },
+        topicProgress: topicProgressRows,
+        availableNodes,
+      })
+    }
+
     if (lessons.length === 0) {
       let order = 1
-
-      if (graph) {
-        // Tier-1 subjects: synthesise from KG so topicSlug === KG node slug everywhere.
-        // This is the critical connection: lesson.topicSlug → KG node → assessment → mastery.
-        const syntheticLessons = graph.modules.flatMap((module, modIdx) =>
-          module.nodes.map((node, nodeIdx) => ({
-            id: `${subject}-${modIdx + 1}-${nodeIdx + 1}`,
-            subjectCode: subject,
-            unit: modIdx + 1,
-            unitTitle: module.title,
-            lesson: nodeIdx + 1,
-            lessonTitle: node.title,
-            lessonGoal: node.description,
-            order: order++,
-            topicSlug: node.slug,
-          }))
-        )
-        return NextResponse.json({
-          success: true,
-          lessons: syntheticLessons,
-          progress: progress ?? { currentLesson: 1, completedLessons: [] },
-          topicProgress: topicProgressRows,
-          availableNodes,
-        })
-      }
 
       const libSubject = findLibrarySubject(subject)
       if (libSubject) {

@@ -624,26 +624,21 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
   )
 }
 
-// "What would you like to do?" quick-prompt buttons + "Quick Check" inline quiz —
-// occupies the right-hand rail for non-programming subjects (mockup's right panel).
+// "What would you like to do?" quick-prompt buttons — occupies the right-hand
+// rail for non-programming subjects (mockup's right panel). Quick Check
+// (multiple-choice) intentionally lives inline in the chat feed via
+// InlinePracticePrompt, directly under the explanation/diagram it follows —
+// not duplicated here.
 function QuickActionsAndCheck({
-  teachingLanguage, messages, sessionId, sendMessage, setActiveTab, quickCheckSelected, setQuickCheckSelected, currentLessonTitle,
+  teachingLanguage, sessionId, sendMessage, setActiveTab,
 }: {
   teachingLanguage: TeachingLang
-  messages: ChatMsg[]
   sessionId: string | null
   sendMessage: (sid: string, text: string, showInUI?: boolean) => Promise<void>
   setActiveTab: (tab: ActiveTab) => void
-  quickCheckSelected: Record<string, string>
-  setQuickCheckSelected: React.Dispatch<React.SetStateAction<Record<string, string>>>
-  currentLessonTitle?: string
 }) {
   const ICONS = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }
   const actions = QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en
-  const quickCheckMsg = [...messages].reverse().find((m) => m.role === 'assistant' && m.inlinePractice)
-  const practice = quickCheckMsg?.inlinePractice
-  const selected = quickCheckMsg ? quickCheckSelected[quickCheckMsg.id] : undefined
-  const OPTION_LABELS = ['A', 'B', 'C', 'D']
 
   const askForAction = (prompt: string) => {
     if (!sessionId) return
@@ -682,90 +677,6 @@ function QuickActionsAndCheck({
           })}
         </div>
       </div>
-
-      {/* Quick Check */}
-      <div style={{ borderRadius: 12, border: '1px solid var(--border-subtle)', background: 'var(--bg-surface)', padding: 14 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
-          <ListChecks size={15} style={{ color: UI.indigo }} />
-          <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--text-primary)' }}>
-            {teachingLanguage === 'ru' ? 'Быстрая проверка' : 'Quick Check'}
-          </p>
-        </div>
-
-        {practice ? (
-          <>
-            <p style={{ fontSize: 12.5, color: 'var(--text-primary)', lineHeight: 1.5, marginBottom: 10 }}>{practice.question}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {practice.options.map((opt, i) => {
-                const isSelected = selected === opt
-                const isCorrect = opt === practice.answer
-                const showCorrect = !!selected && isCorrect
-                const showWrong = isSelected && !isCorrect
-                return (
-                  <button key={i}
-                    onClick={() => quickCheckMsg && setQuickCheckSelected((prev) => ({ ...prev, [quickCheckMsg.id]: opt }))}
-                    disabled={!!selected}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px', borderRadius: 8, textAlign: 'left',
-                      fontSize: 12, fontWeight: 600, cursor: selected ? 'default' : 'pointer',
-                      background: showCorrect ? UI.greenBg : showWrong ? UI.redBg : 'var(--bg-elevated)',
-                      color: showCorrect ? UI.green : showWrong ? UI.red : 'var(--text-primary)',
-                      border: `1px solid ${showCorrect ? UI.greenBorder : showWrong ? UI.redBorder : 'var(--border-subtle)'}`,
-                    }}>
-                    <span style={{
-                      width: 18, height: 18, borderRadius: '50%', flexShrink: 0, fontSize: 10, fontWeight: 700,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      background: showCorrect ? UI.green : showWrong ? UI.red : 'var(--bg-surface)',
-                      color: showCorrect || showWrong ? '#fff' : 'var(--text-dim)',
-                      border: showCorrect || showWrong ? 'none' : '1px solid var(--border-default)',
-                    }}>
-                      {showCorrect ? <Check size={11} /> : OPTION_LABELS[i]}
-                    </span>
-                    {opt}
-                  </button>
-                )
-              })}
-            </div>
-            <button
-              onClick={() => {
-                if (!sessionId) return
-                const msg = teachingLanguage === 'ru'
-                  ? `Дай мне ещё один короткий проверочный вопрос по теме "${currentLessonTitle ?? ''}".`
-                  : `Give me another quick check question on "${currentLessonTitle ?? 'this topic'}".`
-                sendMessage(sessionId, msg, false)
-              }}
-              disabled={!selected || !sessionId}
-              style={{
-                marginTop: 12, width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700,
-                cursor: (!selected || !sessionId) ? 'not-allowed' : 'pointer',
-                background: UI.indigo, color: '#fff', border: 'none', opacity: (!selected || !sessionId) ? 0.5 : 1,
-              }}>
-              {teachingLanguage === 'ru' ? 'Следующий вопрос' : 'Next Question'} →
-            </button>
-          </>
-        ) : (
-          <>
-            <p style={{ fontSize: 11.5, color: 'var(--text-dim)', marginBottom: 10 }}>
-              {teachingLanguage === 'ru' ? 'Пока нет проверочного вопроса по этой теме.' : 'No quick check question yet for this topic.'}
-            </p>
-            <button
-              onClick={() => {
-                if (!sessionId) return
-                const msg = teachingLanguage === 'ru'
-                  ? `Дай мне короткий проверочный вопрос по теме "${currentLessonTitle ?? ''}".`
-                  : `Give me a quick check question on "${currentLessonTitle ?? 'this topic'}".`
-                sendMessage(sessionId, msg, false)
-              }}
-              disabled={!sessionId}
-              style={{
-                width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: sessionId ? 'pointer' : 'not-allowed',
-                background: `${UI.indigo}18`, color: UI.indigo, border: `1px solid ${UI.indigo}44`,
-              }}>
-              {teachingLanguage === 'ru' ? 'Получить вопрос' : 'Get a quick check question'}
-            </button>
-          </>
-        )}
-      </div>
     </div>
   )
 }
@@ -783,6 +694,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [input, setInput] = useState('')
   const [isStreaming, setIsStreaming] = useState(false)
   const [initError, setInitError] = useState('')
+  // FIX 1 (stabilization): gate — the Educational Brain / AI teaching only
+  // begins once the learner presses "Start Lesson"; selecting a lesson alone
+  // must not trigger session creation or the opening tutor message.
+  const [lessonStarted, setLessonStarted] = useState(false)
   const [speakingId, setSpeakingId] = useState<string|null>(null)
   const [micState, setMicState] = useState<MicState>('idle')
   const [micSupported, setMicSupported] = useState(false)
@@ -844,7 +759,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [knowledgeMapOpen, setKnowledgeMapOpen] = useState(false)
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const [bookmarkedLessons, setBookmarkedLessons] = useState<Set<number>>(new Set())
-  const [quickCheckSelected, setQuickCheckSelected] = useState<Record<string, string>>({})
 
   // Assessment / promotion
   const [promotionResult, setPromotionResult] = useState<PromotionResult | null>(null)
@@ -1432,37 +1346,39 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       endSession()
     }
   }, [])
-  useEffect(() => {
+  // FIX 1 (stabilization): the lesson/session no longer auto-starts on mount —
+  // it only starts when the learner explicitly presses "Start Lesson" (see the
+  // empty-state button below). Same session-creation + opening-message logic
+  // as before, just moved from an unconditional mount effect into a callback.
+  const startLesson = useCallback(async () => {
     if (initializedRef.current) return
     initializedRef.current = true
-    async function init() {
-      try {
-        const res = await fetch('/api/sessions', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
-        })
-        const data = await res.json()
-        if (!data.success) { setInitError(data.error ?? 'Error'); return }
-        const sid = data.data.id; setSessionId(sid)
-        const lessonRef = resumeLessonTitle
-          ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
-          : null
-        const opening = teachingLanguage === 'ru'
-          ? (pastSessionsSummary || lessonRef
-            ? `Привет! ${lessonRef ? `Ты работал над темой ${lessonRef}. ` : ''}${pastSessionsSummary ? `В прошлый раз: "${pastSessionsSummary}". ` : ''}Продолжи с того места. Уровень: "${levelDescription}". 3-4 предложения.`
-            : `Начни урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
-          : teachingLanguage === 'hi'
-          ? (pastSessionsSummary || lessonRef
-            ? `Namaste! ${lessonRef ? `Aap ${lessonRef} par kaam kar rahe the. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue karein. Level: "${levelDescription}". 3-4 sentences.`
-            : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation do. 3-4 sentences.`)
-          : (pastSessionsSummary || lessonRef
-            ? `Hi! ${lessonRef ? `You were working on ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue from there. Level: "${levelDescription}". 3-4 sentences.`
-            : `Start the lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself as "Tutor Max" and begin teaching. 3-4 sentences.`)
-        await sendMessage(sid, opening, false)
-        if (initialPrompt) await sendMessage(sid, initialPrompt, true)
-      } catch { setInitError('Connection failed. Please refresh the page.') }
-    }
-    init()
+    setLessonStarted(true)
+    try {
+      const res = await fetch('/api/sessions', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
+      })
+      const data = await res.json()
+      if (!data.success) { setInitError(data.error ?? 'Error'); return }
+      const sid = data.data.id; setSessionId(sid)
+      const lessonRef = resumeLessonTitle
+        ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
+        : null
+      const opening = teachingLanguage === 'ru'
+        ? (pastSessionsSummary || lessonRef
+          ? `Привет! ${lessonRef ? `Ты работал над темой ${lessonRef}. ` : ''}${pastSessionsSummary ? `В прошлый раз: "${pastSessionsSummary}". ` : ''}Продолжи с того места. Уровень: "${levelDescription}". 3-4 предложения.`
+          : `Начни урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
+        : teachingLanguage === 'hi'
+        ? (pastSessionsSummary || lessonRef
+          ? `Namaste! ${lessonRef ? `Aap ${lessonRef} par kaam kar rahe the. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue karein. Level: "${levelDescription}". 3-4 sentences.`
+          : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation do. 3-4 sentences.`)
+        : (pastSessionsSummary || lessonRef
+          ? `Hi! ${lessonRef ? `You were working on ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue from there. Level: "${levelDescription}". 3-4 sentences.`
+          : `Start the lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself as "Tutor Max" and begin teaching. 3-4 sentences.`)
+      await sendMessage(sid, opening, false)
+      if (initialPrompt) await sendMessage(sid, initialPrompt, true)
+    } catch { setInitError('Connection failed. Please refresh the page.') }
   }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId, initialPrompt])
 
   // Vision send
@@ -2624,13 +2540,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             {isNotebook ? (
               <QuickActionsAndCheck
                 teachingLanguage={teachingLanguage}
-                messages={messages}
                 sessionId={sessionId}
                 sendMessage={sendMessage}
                 setActiveTab={setActiveTab}
-                quickCheckSelected={quickCheckSelected}
-                setQuickCheckSelected={setQuickCheckSelected}
-                currentLessonTitle={currentLessonData?.lessonTitle}
               />
             ) : (
             <>
@@ -2964,8 +2876,30 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               className="dot-grid"
               style={{ flex: 1, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 14, background: 'var(--bg-void)', position: 'relative' }}>
 
-              {/* Welcome / empty state — EagleMascot replaces the generic initials avatar */}
-              {messages.length === 0 && (
+              {/* FIX 1 (stabilization): "Start Lesson" gate — selecting/opening a
+                  lesson only selects it; the AI does not start teaching until the
+                  learner presses this button. */}
+              {!lessonStarted && messages.length === 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 14, paddingTop: 40 }}>
+                  <EagleMascot variant="hero" size={56} />
+                  {currentLessonData && (
+                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', textAlign: 'center' }}>
+                      {currentLessonData.lessonTitle}
+                    </p>
+                  )}
+                  <button
+                    onClick={startLesson}
+                    style={{
+                      padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
+                      background: UI.indigo, color: '#fff', border: 'none',
+                    }}>
+                    {t('start_lesson_btn')}
+                  </button>
+                </div>
+              )}
+
+              {/* Welcome / loading state — EagleMascot replaces the generic initials avatar */}
+              {lessonStarted && messages.length === 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
                   <EagleMascot variant="hero" size={56} />
                   <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>

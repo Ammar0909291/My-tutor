@@ -823,6 +823,7 @@ export const translations = {
     coach_time_60: '1 час',
     coach_time_120: '2 часа',
     /* ── Sprint N: Progression & Completion ── */
+    start_lesson_btn: '▶ Начать урок',
     complete_lesson_btn: '✅ Завершить урок',
     lesson_completed_btn: '✓ Урок завершён',
     progress_lesson_label: 'Урок',
@@ -1725,6 +1726,7 @@ export const translations = {
     coach_time_60: '1 hour',
     coach_time_120: '2 hours',
     /* ── Sprint N: Progression & Completion ── */
+    start_lesson_btn: '▶ Start Lesson',
     complete_lesson_btn: '✅ Complete Lesson',
     lesson_completed_btn: '✓ Lesson Completed',
     progress_lesson_label: 'Lesson',
@@ -2616,6 +2618,7 @@ export const translations = {
     coach_time_60: '1 hour',
     coach_time_120: '2 hours',
     /* ── Sprint N: Progression & Completion ── */
+    start_lesson_btn: '▶ पाठ शुरू करें',
     complete_lesson_btn: '✅ पाठ पूरा करें',
     lesson_completed_btn: '✓ पाठ पूर्ण',
     progress_lesson_label: 'पाठ',
