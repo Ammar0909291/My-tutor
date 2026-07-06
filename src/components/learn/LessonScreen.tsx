@@ -790,6 +790,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     } catch { /* ignore */ }
   }, [subjectSlug, curriculumLessons.length])
 
+  const handleLessonRestart = useCallback(async (lessonOrder: number, topicSlug?: string) => {
+    try {
+      const res = await fetch('/api/curriculum/progress', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectCode: subjectSlug, lessonOrder, topicSlug }),
+      })
+      const data = await res.json()
+      if (data.success) setCurriculumProgress(data.progress)
+    } catch { /* ignore */ }
+  }, [subjectSlug])
+
   // TTS
   const handleStopSpeech = useCallback(() => {
     stopSpeaking(); speakingIdRef.current = null; setSpeakingId(null)
@@ -1924,13 +1936,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   </span>
                 </div>
                 {curriculumProgress.completedLessons.includes(currentLessonData.order) ? (
-                  <div style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700,
-                    background: 'rgba(63,185,80,0.1)', color: 'var(--green)', border: '1px solid rgba(63,185,80,0.3)',
-                  }}>
-                    {t('lesson_completed_btn')}
-                  </div>
+                  <button
+                    onClick={() => handleLessonRestart(currentLessonData.order, (currentLessonData as { topicSlug?: string }).topicSlug)}
+                    title={teachingLanguage === 'ru' ? 'Нажмите, чтобы начать урок заново' : 'Click to restart this lesson'}
+                    style={{
+                      width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                      padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                      background: 'rgba(63,185,80,0.1)', color: 'var(--green)',
+                      border: '1px solid rgba(63,185,80,0.3)',
+                    }}>
+                    <span>{t('lesson_completed_btn')}</span>
+                    <span style={{ opacity: 0.7, fontSize: 10 }}>↺ {teachingLanguage === 'ru' ? 'Начать заново' : 'Restart'}</span>
+                  </button>
                 ) : (
                   <button
                     onClick={() => handleLessonComplete(currentLessonData.order, currentLessonData)}

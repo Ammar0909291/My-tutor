@@ -8,18 +8,17 @@
  *
  * ── Canonical KG adapters (SUBJECT_ADAPTERS) ─────────────────────────────────
  *   mathematics  →  docs/mathematics/kg/graph.json       (908 concepts)
- *   physics      →  docs/physics/kg/graph.json           (194 concepts)
- *   chemistry    →  docs/chemistry/kg/graph.json         (187 concepts)
+ *   physics      →  docs/physics/kg/graph.json           (216 concepts)
+ *   chemistry    →  docs/chemistry/kg/graph.json         (186 concepts)
  *   computer_science → docs/computer-science/kg/graph.json (119 concepts)
  *   biology      →  docs/biology/kg/graph.json            (89 concepts)
+ *   english      →  docs/english/kg/graph.json           (216 concepts)
  *
  * Adding a new subject: drop a graph.json under docs/{subject}/kg/ and add
  * one entry to SUBJECT_ADAPTERS + one entry to ID_PREFIX_TO_SUBJECT below.
  * No new adapter code is required.
  *
  * ── Legacy 54-node KGs (fallback) ────────────────────────────────────────────
- *   biology        →  SCIENCE_KNOWLEDGE_GRAPH filtered to biology.*
- *   english        →  ENGLISH_KNOWLEDGE_GRAPH
  *   social_science →  SOCIAL_SCIENCE_KNOWLEDGE_GRAPH
  *   (all others)   →  null  (falls through to subjectCatalog)
  */
@@ -43,6 +42,7 @@ const SUBJECT_ADAPTERS: Record<string, ReturnType<typeof createSubjectAdapter>> 
   chemistry:        createSubjectAdapter('chemistry'),
   computer_science: createSubjectAdapter('computer-science'),
   biology:          createSubjectAdapter('biology'),
+  english:          createSubjectAdapter('english'),
 }
 
 // Maps the first ID segment to the subject name so getKGNode() can route
@@ -53,6 +53,7 @@ const ID_PREFIX_TO_SUBJECT: Record<string, string> = {
   chem: 'chemistry',
   cs:   'computer_science',
   bio:  'biology',
+  eng:  'english',
 }
 
 // ── Public types ──────────────────────────────────────────────────────────────
@@ -283,9 +284,6 @@ function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {
 
   // Legacy 54-node KGs — fallback for subjects not yet on canonical KGs
   switch (subjectSlug) {
-    case 'english':
-      return ENGLISH_KNOWLEDGE_GRAPH as KnowledgeNode[]
-
     case 'social_science':
     case 'socials':
       return SOCIAL_SCIENCE_KNOWLEDGE_GRAPH as KnowledgeNode[]
