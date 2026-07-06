@@ -44,13 +44,6 @@ interface ProfileData {
   grade: number | null
 }
 
-// Mirrors the education board registry (kept static — see OnboardingWizard)
-const SCHOOL_BOARDS = [
-  { id: 'cbse', shortName: 'CBSE' },
-  { id: 'up_board', shortName: 'UP Board' },
-]
-const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
-
 const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '10px 14px',
@@ -95,10 +88,6 @@ export default function SettingsPage() {
 
   // Profile state
   const [profile, setProfile] = useState<ProfileData | null>(null)
-  // School section state (Sprint BF)
-  const [schoolBoard, setSchoolBoard] = useState('')
-  const [schoolGrade, setSchoolGrade] = useState<number | null>(null)
-  const [schoolSave, setSchoolSave] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [profileName, setProfileName] = useState('')
   const [profileLevel, setProfileLevel] = useState('')
   const [profileSave, setProfileSave] = useState<'idle' | 'saving' | 'saved'>('idle')
@@ -143,8 +132,6 @@ export default function SettingsPage() {
           setProfile(p)
           setProfileName(p.name)
           setProfileLevel(p.selfDescription)
-          setSchoolBoard(p.educationBoard ?? '')
-          setSchoolGrade(p.grade)
         }
       })
       .catch(() => {})
@@ -213,26 +200,6 @@ export default function SettingsPage() {
         setProfileSave('idle')
       }
     } catch { setProfileSave('idle') }
-  }
-
-
-  async function handleSchoolSave() {
-    if (!schoolBoard || schoolGrade === null) return
-    setSchoolSave('saving')
-    try {
-      const res = await fetch('/api/user/profile', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ educationBoard: schoolBoard, grade: schoolGrade }),
-      })
-      const d = await res.json() as { success?: boolean }
-      if (d.success) {
-        setSchoolSave('saved')
-        setTimeout(() => setSchoolSave('idle'), 2000)
-      } else {
-        setSchoolSave('error')
-      }
-    } catch { setSchoolSave('error') }
   }
 
   function handleLangClick(key: TeachingLang) {
@@ -340,48 +307,8 @@ export default function SettingsPage() {
         </Section>
 
 
-        {/* My School — board/grade context switcher. Shown for any learner who
-            has ever used School Mode (SCHOOL_STUDENT, or a GENERAL_LEARNER who
-            opted in via /modes), so it's always reachable, not a one-time choice. */}
-        {(profile?.userType === 'SCHOOL_STUDENT' || !!profile?.educationBoard) && (
-          <Section label="My School 🎒">
-            <p className="text-xs mb-4" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>
-              Switch board or class anytime — each combination keeps its own separate progress.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
-                  Board
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {SCHOOL_BOARDS.map((b) => (
-                    <ChoiceButton key={b.id} active={schoolBoard === b.id} onClick={() => setSchoolBoard(b.id)}>
-                      {b.shortName}
-                    </ChoiceButton>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--candy-ink-soft)' }}>
-                  Class
-                </label>
-                <div className="grid grid-cols-4 gap-2">
-                  {SCHOOL_GRADES.map((g) => (
-                    <ChoiceButton key={g} active={schoolGrade === g} onClick={() => setSchoolGrade(g)}>
-                      {g}
-                    </ChoiceButton>
-                  ))}
-                </div>
-              </div>
-              <CandyButton
-                onClick={handleSchoolSave}
-                disabled={schoolSave === 'saving' || !schoolBoard || schoolGrade === null}
-                style={{ width: '100%', padding: '12px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (schoolSave === 'saving' || !schoolBoard || schoolGrade === null) ? 0.6 : 1 }}>
-                {schoolSave === 'saved' ? '✓ Switched' : schoolSave === 'saving' ? '...' : schoolSave === 'error' ? 'Failed — try again' : 'Switch board / class'}
-              </CandyButton>
-            </div>
-          </Section>
-        )}
+        {/* My School (board/grade context switcher) intentionally hidden from
+            the UI — School Mode itself and /api/user/profile are untouched. */}
 
         {/* Teaching language — changes immediately */}
         <Section label={t('settings_lang')}>

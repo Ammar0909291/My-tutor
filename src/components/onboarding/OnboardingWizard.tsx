@@ -9,19 +9,14 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
 import { CandyPage } from '@/components/ui/candy'
 
+// Mirrors the current EDUCATIONAL_BRAIN_SUBJECTS rollout gate
+// (src/lib/curriculum/subjectRollout.ts) — kept in sync so the fallback
+// shown before /api/subjects/library responds never flashes a subject the
+// live registry would filter out.
 const FALLBACK_SUBJECTS = [
-  { id: 'c',          slug: 'c',          name: 'C',          icon: 'C',   accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)' },
-  { id: 'cpp',        slug: 'cpp',        name: 'C++',        icon: 'C++', accent: '#79C0FF', subAccent: 'rgba(121,192,255,0.08)' },
-  { id: 'python',     slug: 'python',     name: 'Python',     icon: '🐍',  accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
-  { id: 'english',    slug: 'english',    name: 'English',    icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
-  { id: 'javascript', slug: 'javascript', name: 'JavaScript', icon: 'JS',  accent: '#F7DF1E', subAccent: 'rgba(247,223,30,0.08)' },
-  { id: 'typescript', slug: 'typescript', name: 'TypeScript', icon: 'TS',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
-  { id: 'russian',    slug: 'russian',    name: 'Russian',    icon: 'Рус', accent: '#A371F7', subAccent: 'rgba(163,113,247,0.08)' },
-  { id: 'java',   slug: 'java',   name: 'Java',   icon: '☕',  accent: '#E76F00', subAccent: 'rgba(231,111,0,0.08)' },
-  { id: 'csharp', slug: 'csharp', name: 'C#',     icon: 'C#',  accent: '#9B4993', subAccent: 'rgba(155,73,147,0.08)' },
-  { id: 'go',     slug: 'go',     name: 'Go',     icon: 'Go',  accent: '#00ACD7', subAccent: 'rgba(0,172,215,0.08)' },
-  { id: 'rust',   slug: 'rust',   name: 'Rust',   icon: '⚙',  accent: '#CE422B', subAccent: 'rgba(206,66,43,0.08)' },
-  { id: 'ai',     slug: 'ai',     name: 'AI',     icon: '🤖', accent: '#7C3AED', subAccent: 'rgba(124,58,237,0.08)' },
+  { id: 'english',     slug: 'english',     name: 'English',     icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
+  { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
+  { id: 'physics',     slug: 'physics',     name: 'Physics',     icon: '⚛️',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
 ]
 
 const VOICES = [
@@ -207,20 +202,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
               <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
                 {L('We’ll personalize everything around your answer.', 'हम आपके उत्तर के अनुसार सब कुछ व्यक्तिगत बनाएंगे।', 'Мы персонализируем всё под ваш ответ.')}
               </p>
+              {/* School Student onboarding path intentionally hidden from the
+                  UI (presentation layer only — the mode==='school' steps
+                  below, /api/onboarding, and School Mode itself are untouched). */}
               <div className="space-y-4 mb-2">
-                <button onClick={() => setMode('school')}
-                  className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
-                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', minHeight: 88 }}>
-                  <span className="text-3xl shrink-0">🎒</span>
-                  <div>
-                    <div className="font-bold text-base" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                      {L('School Student', 'स्कूल विद्यार्थी', 'Школьник')}
-                    </div>
-                    <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                      {L('I study in Class 5–12 (CBSE / UP Board)', 'मैं कक्षा 5–12 में पढ़ता/पढ़ती हूँ (CBSE / UP बोर्ड)', 'Я учусь в 5–12 классе (CBSE / UP Board)')}
-                    </div>
-                  </div>
-                </button>
                 <button onClick={() => setMode('general')}
                   className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', minHeight: 88 }}>

@@ -32,10 +32,9 @@ const LEVEL_LADDER = [
 const STEPS = ['how1', 'how2', 'how3', 'how4'] as const
 
 const SUBJECTS = [
-  { slug: 'c',       icon: 'C',   accent: 'var(--orange)', desc_key: 'subj_c_desc'       as const },
-  { slug: 'cpp',     icon: 'C++', accent: 'var(--blue)',   desc_key: 'subj_cpp_desc'     as const },
-  { slug: 'python',  icon: '🐍',  accent: 'var(--green)',  desc_key: 'subj_python_desc'  as const },
-  { slug: 'english', icon: '🇬🇧', accent: 'var(--yellow)', desc_key: 'subj_english_desc' as const },
+  { slug: 'english',     icon: '🇬🇧', accent: 'var(--yellow)', desc_key: 'subj_english_desc' as const },
+  { slug: 'mathematics', icon: '∑',   accent: 'var(--green)',  desc_key: 'subj_math_desc'    as const },
+  { slug: 'physics',     icon: '⚛️',  accent: 'var(--blue)',   desc_key: 'subj_physics_desc' as const },
 ]
 
 const FAQ_KEYS = [
@@ -425,7 +424,7 @@ export default function HomePage() {
                 <span className={styles.subjStrip} style={{ background: s.accent }} />
                 <div className={styles.subjIcon} style={{ color: s.accent }}>{s.icon}</div>
                 <p className={styles.subjName}>
-                  {s.slug === 'c' ? 'C' : s.slug === 'cpp' ? 'C++' : s.slug === 'python' ? 'Python' : 'English'}
+                  {s.slug === 'english' ? 'English' : s.slug === 'mathematics' ? 'Mathematics' : 'Physics'}
                 </p>
                 <p className={styles.subjDesc}>{t(s.desc_key)}</p>
                 <span className={styles.subjLink} style={{ color: s.accent }}>{t('subj_start')}</span>
