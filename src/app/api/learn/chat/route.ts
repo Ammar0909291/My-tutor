@@ -311,8 +311,13 @@ export async function POST(req: Request) {
     // same way as inlinePracticeHoisted above so it can be attached to the
     // JSON response once cleanText is finalized.
     let hintHoisted: string | null = null
+    // W2-4 (ADR 11 §4.2): in-session signals collected when the reconciler flag is ON.
+    // null = flag OFF (signals bypass reconciler and inject directly into systemPrompt).
+    // [] or populated = flag ON (signals accumulate here and are reconciled once after collection).
+    let pendingSignals: import('@/lib/school/adaptive/sessionRecommendationReconciler').InSessionSignal[] | null = null
 
     if (schoolCtx) {
+      if (process.env.ENABLE_SESSION_RECOMMENDATION_RECONCILER === '1') pendingSignals = []
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
       // can be passed to buildGuidedTeachingPrompt below.
       let guidedWeakTopicTitles: string[] = []
@@ -449,7 +454,12 @@ export async function POST(req: Request) {
           `- Recommended action: ${actionLabel}`,
         ]
         if (weakTop.length > 0) lines.push(`- Weak topics: ${weakTop.map((t) => t.title).join(', ')}`)
-        systemPrompt += `\n\nSTUDENT STATUS:\n${lines.join('\n')}\nWhen weak topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this status block explicitly.`
+        const statusBlock = `\n\nSTUDENT STATUS:\n${lines.join('\n')}\nWhen weak topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this status block explicitly.`
+        if (pendingSignals !== null) {
+          pendingSignals.push({ source: 'weak_topic', priority: 3, payload: statusBlock })
+        } else {
+          systemPrompt += statusBlock
+        }
       } catch (err) {
         console.warn('[learn/chat] student status context skipped:', err)
       }
@@ -631,7 +641,12 @@ export async function POST(req: Request) {
         const narrative = await getLearningNarrative(
           userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, narrativeKgNodeIds
         )
-        systemPrompt += buildLearningNarrativeBlock(narrative)
+        const narrativeBlock = buildLearningNarrativeBlock(narrative)
+        if (pendingSignals !== null && narrative !== null) {
+          pendingSignals.push({ source: 'narrative', priority: 1, payload: narrativeBlock, trend: narrative.trend as import('@/lib/school/adaptive/sessionRecommendationReconciler').LearningTrend })
+        } else {
+          systemPrompt += narrativeBlock
+        }
       } catch {
         // non-fatal — narrative context is purely additive
       }
@@ -643,7 +658,12 @@ export async function POST(req: Request) {
         const dailyTasks = await getDailyStudyPlan(userId, schoolCtx.board, schoolCtx.grade)
         const taskIdx = dailyTasks.findIndex((t) => t.chapterId === schoolCtx!.chapter.id)
         if (taskIdx !== -1) {
-          systemPrompt += `\n\nDAILY STUDY PLAN: Task ${taskIdx + 1} of ${dailyTasks.length} for today. Keep the session focused and within the chapter scope.`
+          const dailyPlanBlock = `\n\nDAILY STUDY PLAN: Task ${taskIdx + 1} of ${dailyTasks.length} for today. Keep the session focused and within the chapter scope.`
+          if (pendingSignals !== null) {
+            pendingSignals.push({ source: 'daily_plan', priority: 4, payload: dailyPlanBlock })
+          } else {
+            systemPrompt += dailyPlanBlock
+          }
         }
       } catch {
         // non-fatal — plan context is purely additive
@@ -797,10 +817,23 @@ export async function POST(req: Request) {
           const nodeMap = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n.title]))
           const readiness = await getExamReadinessForSubject(userId, schoolCtx.board, schoolCtx.grade, subjectCode)
           const block = buildExamReadinessBlock(readiness, (id) => nodeMap.get(id) ?? id)
-          if (block) systemPrompt += block
+          if (block) {
+            if (pendingSignals !== null) {
+              pendingSignals.push({ source: 'exam_readiness', priority: 2, payload: block })
+            } else {
+              systemPrompt += block
+            }
+          }
         }
       } catch (err) {
         console.warn('[learn/chat] exam readiness context skipped:', err)
+      }
+
+      // W2-4 (ADR 11 §4.2): reconcile and inject collected in-session signals.
+      if (pendingSignals !== null && pendingSignals.length > 0) {
+        const { reconcileSessionSignals } = await import('@/lib/school/adaptive/sessionRecommendationReconciler')
+        const reconciled = reconcileSessionSignals(pendingSignals)
+        if (reconciled.systemPromptBlock) systemPrompt += reconciled.systemPromptBlock
       }
 
       // Sprint CF: mock test insights block — inject most recent mock result for this subject
