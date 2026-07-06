@@ -1,5 +1,6 @@
 import type { Profile, ProfileSubject, Subject, UserType } from '@prisma/client'
 import { getGradeSubjects, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
+import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 
 export interface NavSubject {
   slug: string
@@ -30,5 +31,10 @@ export function getUserNavSubjects(profile: ProfileForNav, isSchool: boolean): N
       name: SCHOOL_SUBJECT_META[slug]?.label ?? slug,
     }))
   }
-  return profile.subjects.map((ps) => ({ slug: ps.subject.slug, name: ps.subject.name }))
+  // UI-visibility filter (presentation layer only): only surface subjects
+  // still in the Educational Brain rollout gate. Enrollment rows for other
+  // subjects are untouched and keep working if reached by direct URL.
+  return profile.subjects
+    .filter((ps) => isEduBrainEnabled(ps.subject.slug))
+    .map((ps) => ({ slug: ps.subject.slug, name: ps.subject.name }))
 }

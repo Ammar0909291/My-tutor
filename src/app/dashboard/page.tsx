@@ -39,8 +39,6 @@ export default async function DashboardPage({ searchParams }: { searchParams?: {
   // and enters School Mode explicitly with ?mode=school.
   const wantsLibrary = searchParams?.mode === 'library'
   const wantsSchool = searchParams?.mode === 'school'
-  const hasSchoolAccess = !!profile.educationBoard && !!profile.grade
-  const isSchoolStudent = profile.userType === 'SCHOOL_STUDENT'
   const modeOverride = wantsLibrary ? 'library' : wantsSchool ? 'school' : undefined
 
   // Both Library Mode and School Mode render through the same DashboardV2
@@ -50,26 +48,10 @@ export default async function DashboardPage({ searchParams }: { searchParams?: {
   // dashboard shell, navigation, and visual identity never change between
   // modes — only the content cards inside it do.
   const data = await getDashboardV2Data(userId, modeOverride)
-  const isSchoolAccountInLibraryMode = wantsLibrary && isSchoolStudent && hasSchoolAccess
-  const isGeneralLearnerWithSchoolAccess = !isSchoolStudent && hasSchoolAccess
 
-  return (
-    <>
-      {isSchoolAccountInLibraryMode && (
-        <div style={{ textAlign: 'center', padding: '8px 0', fontSize: 12 }}>
-          <a href="/dashboard" style={{ color: 'var(--candy-purple, #8B5CF6)', fontWeight: 700, textDecoration: 'none' }}>
-            ← Back to School Mode
-          </a>
-        </div>
-      )}
-      {isGeneralLearnerWithSchoolAccess && (
-        <div style={{ textAlign: 'center', padding: '8px 0', fontSize: 12 }}>
-          <a href="/dashboard?mode=school" style={{ color: 'var(--candy-purple, #8B5CF6)', fontWeight: 700, textDecoration: 'none' }}>
-            🎒 Switch to School Mode
-          </a>
-        </div>
-      )}
-      <DashboardV2 data={data} />
-    </>
-  )
+  // School Mode entry banners intentionally hidden from the UI (presentation
+  // layer only — /dashboard?mode=school and School Mode itself are untouched
+  // and remain reachable by direct URL for already-enrolled users).
+
+  return <DashboardV2 data={data} />
 }

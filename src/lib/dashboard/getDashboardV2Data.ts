@@ -10,6 +10,7 @@ import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadiness'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
+import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 import { getLeagueForXP, currentWeekString } from '@/lib/xp'
 import type {
   DashboardV2Data,
@@ -215,8 +216,12 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   // modeOverride lets the caller (the ?mode= query param on /dashboard)
   // request the non-default view while keeping the same DashboardV2 shell.
   const hasSchoolAccess = !!profile.educationBoard && !!profile.grade
-  const defaultIsSchool = profile.userType === 'SCHOOL_STUDENT' && hasSchoolAccess
-  const isSchool = modeOverride === 'library' ? false : modeOverride === 'school' ? hasSchoolAccess : defaultIsSchool
+  // UI-visibility: School Mode is hidden from normal navigation, so the
+  // default (no ?mode= override) landing experience is always Library Mode
+  // regardless of userType. Direct navigation to the existing
+  // /dashboard?mode=school URL still works unchanged for already-enrolled
+  // school users — School Mode data/logic themselves are untouched.
+  const isSchool = modeOverride === 'school' ? hasSchoolAccess : false
   const userRole = (user.role as 'ADMIN' | 'USER') ?? 'USER'
 
   let continueLesson: ContinueLessonData
@@ -314,7 +319,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       }
     }
   } else {
-    const enrolledSubjects = profile.subjects ?? []
+    // UI-visibility filter (presentation layer only): only show subjects
+    // still in the Educational Brain rollout — enrollment/DB rows for other
+    // subjects are untouched and keep working if reached by direct URL.
+    const enrolledSubjects = (profile.subjects ?? []).filter((ps) => isEduBrainEnabled(ps.subject.slug))
     const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
     dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
 

@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CandyButton, CandyPage, EagleMascot } from '@/components/ui/candy'
 
@@ -17,46 +16,11 @@ interface Props {
   boards: BoardOption[]
 }
 
-export default function ModesPicker({ hasSchoolAccess, currentBoard, currentGrade, boards }: Props) {
+// School Mode entry point intentionally hidden from the UI (presentation-layer
+// only — School Mode routes/APIs/logic are untouched and remain reachable by
+// direct URL for already-enrolled users).
+export default function ModesPicker(_props: Props) {
   const router = useRouter()
-  const [showPicker, setShowPicker] = useState(false)
-  const [boardId, setBoardId] = useState(currentBoard ?? boards[0]?.id ?? '')
-  const [grade, setGrade] = useState<number | ''>(currentGrade ?? '')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const selectedBoard = boards.find((b) => b.id === boardId)
-  const currentBoardName = boards.find((b) => b.id === currentBoard)?.shortName
-
-  async function enterSchoolMode() {
-    if (hasSchoolAccess && !showPicker) {
-      router.push('/dashboard?mode=school')
-      return
-    }
-    if (!grade) {
-      setError('Please select a grade')
-      return
-    }
-    setLoading(true)
-    setError(null)
-    try {
-      const res = await fetch('/api/profile/school-mode', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ board: boardId, grade }),
-      })
-      const data = await res.json()
-      if (!data.success) {
-        setError(data.error ?? 'Something went wrong')
-        setLoading(false)
-        return
-      }
-      router.push('/dashboard?mode=school')
-    } catch {
-      setError('Something went wrong')
-      setLoading(false)
-    }
-  }
 
   return (
     <CandyPage style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 16px' }}>
@@ -81,67 +45,6 @@ export default function ModesPicker({ hasSchoolAccess, currentBoard, currentGrad
             style={{ width: '100%', background: 'var(--candy-blue, #3B9EFF)', color: '#fff', fontWeight: 800, padding: '12px 0', borderRadius: 14 }}
           >
             Enter Library Mode
-          </CandyButton>
-        </Card>
-
-        <Card style={{ padding: 20 }}>
-          <div style={{ fontSize: 28, marginBottom: 8 }}>🎒</div>
-          <div style={{ fontWeight: 800, fontSize: 18, color: 'var(--candy-ink)' }}>School Mode</div>
-          <p style={{ color: 'var(--candy-ink-soft)', fontSize: 13, margin: '4px 0 14px' }}>
-            Board-aligned chapters, exams, mock tests, and exam readiness for your grade.
-          </p>
-
-          {hasSchoolAccess && !showPicker && currentBoardName && currentGrade && (
-            <div style={{ marginBottom: 14, fontSize: 13, color: 'var(--candy-ink-soft)', fontWeight: 700 }}>
-              Current: {currentBoardName} · Class {currentGrade}{' '}
-              <button
-                type="button"
-                onClick={() => setShowPicker(true)}
-                style={{ color: 'var(--candy-green, #58CC02)', fontWeight: 800, background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}
-              >
-                Change
-              </button>
-            </div>
-          )}
-
-          {showPicker && (
-            <div style={{ marginBottom: 14, display: 'grid', gap: 10 }}>
-              <select
-                value={boardId}
-                onChange={(e) => { setBoardId(e.target.value); setGrade('') }}
-                style={{
-                  padding: '10px 12px', borderRadius: 10, border: '2px solid var(--candy-shadow)', fontWeight: 700,
-                  background: '#fff', color: '#3C3B54', colorScheme: 'light',
-                }}
-              >
-                {boards.map((b) => (
-                  <option key={b.id} value={b.id} style={{ color: '#3C3B54', background: '#fff' }}>{b.shortName}</option>
-                ))}
-              </select>
-              <select
-                value={grade}
-                onChange={(e) => setGrade(e.target.value ? Number(e.target.value) : '')}
-                style={{
-                  padding: '10px 12px', borderRadius: 10, border: '2px solid var(--candy-shadow)', fontWeight: 700,
-                  background: '#fff', color: '#3C3B54', colorScheme: 'light',
-                }}
-              >
-                <option value="" style={{ color: '#8B8AA3', background: '#fff' }}>Select grade</option>
-                {selectedBoard?.grades.map((g) => (
-                  <option key={g} value={g} style={{ color: '#3C3B54', background: '#fff' }}>Class {g}</option>
-                ))}
-              </select>
-              {error && <div style={{ color: 'var(--candy-red, #FF4B4B)', fontSize: 12, fontWeight: 700 }}>{error}</div>}
-            </div>
-          )}
-
-          <CandyButton
-            onClick={() => (hasSchoolAccess && !showPicker ? enterSchoolMode() : showPicker ? enterSchoolMode() : setShowPicker(true))}
-            disabled={loading}
-            shadowColor="var(--candy-green-d, #2E9B00)"
-            style={{ width: '100%', background: 'var(--candy-green, #58CC02)', color: '#fff', fontWeight: 800, padding: '12px 0', borderRadius: 14, opacity: loading ? 0.6 : 1 }}
-          >
-            {loading ? 'Setting up…' : hasSchoolAccess && !showPicker ? 'Enter School Mode' : showPicker ? 'Confirm & Enter' : 'Enter School Mode'}
           </CandyButton>
         </Card>
       </div>
