@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 202,
+    "total_concepts": 209,
     "total_domains": 11,
-    "total_requires_edges": 244,
-    "total_unlocks_edges": 244,
+    "total_requires_edges": 258,
+    "total_unlocks_edges": 258,
     "total_cross_links": 0
   },
   "domains": [
@@ -49,7 +49,7 @@
     {
       "key": "qm",
       "name": "Quantum Mechanics",
-      "count": 12
+      "count": 19
     },
     {
       "key": "rel",
@@ -1850,7 +1850,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mech.hamiltons-equations"
+        "phys.mech.hamiltons-equations",
+        "phys.qm.scattering-theory-born-approximation"
       ]
     },
     {
@@ -4877,7 +4878,9 @@
         "phys.qm.hydrogen-atom-qm",
         "phys.qm.perturbation-theory",
         "phys.qm.selection-rules",
-        "phys.qm.spin"
+        "phys.qm.spin",
+        "phys.qm.density-matrix",
+        "phys.qm.scattering-theory-born-approximation"
       ]
     },
     {
@@ -4956,7 +4959,9 @@
       "children": [],
       "unlocks": [
         "phys.qm.perturbation-theory",
-        "phys.qm.selection-rules"
+        "phys.qm.selection-rules",
+        "phys.qm.variational-method",
+        "phys.qm.angular-momentum-addition"
       ]
     },
     {
@@ -4985,7 +4990,9 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.qm.pauli-exclusion"
+        "phys.qm.pauli-exclusion",
+        "phys.qm.angular-momentum-addition",
+        "phys.qm.density-matrix"
       ]
     },
     {
@@ -5013,7 +5020,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.stat.fermi-dirac"
+        "phys.stat.fermi-dirac",
+        "phys.qm.identical-particles"
       ]
     },
     {
@@ -5039,7 +5047,9 @@
         "Griffiths Introduction to Quantum Mechanics Ch.2"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.qm.wkb-approximation"
+      ]
     },
     {
       "id": "phys.qm.perturbation-theory",
@@ -5064,7 +5074,9 @@
         "Griffiths Introduction to Quantum Mechanics Ch.6"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.qm.variational-method"
+      ]
     },
     {
       "id": "phys.qm.selection-rules",
@@ -5088,6 +5100,213 @@
       "mastery_threshold": 0.8,
       "references": [
         "Griffiths Introduction to Quantum Mechanics Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.variational-method",
+      "name": "Variational Method and Variational Principle",
+      "aliases": [
+        "variational principle",
+        "variational method",
+        "trial wavefunction",
+        "Rayleigh-Ritz method"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.hydrogen-atom-qm",
+        "phys.qm.perturbation-theory"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The variational principle states that for any normalised trial state |ψ⟩, the expectation value ⟨ψ|H|ψ⟩ ≥ E₀ (ground-state energy); minimising over a parametric family of trial wavefunctions gives an upper bound on E₀. The helium atom ground state is the canonical worked example.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.7",
+        "Sakurai Modern Quantum Mechanics Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.wkb-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.wkb-approximation",
+      "name": "WKB Approximation (Semiclassical Limit)",
+      "aliases": [
+        "WKB",
+        "Wentzel-Kramers-Brillouin",
+        "semiclassical approximation",
+        "JWKB"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.quantum-tunneling",
+        "phys.qm.variational-method"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The WKB approximation applies when the potential varies slowly on the scale of the de Broglie wavelength; it gives ψ ∝ exp(±i∫p dx/ℏ) in classically allowed regions and exponential decay in forbidden regions, recovering the exact Gamow tunneling formula.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.9",
+        "Sakurai Modern Quantum Mechanics Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.identical-particles",
+      "name": "Identical Particles and the Symmetrization Postulate",
+      "aliases": [
+        "identical particles",
+        "symmetrization postulate",
+        "bosons",
+        "fermions",
+        "exchange symmetry",
+        "anti-symmetrization"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin",
+        "phys.qm.pauli-exclusion"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The symmetrization postulate requires multi-particle wavefunctions to be symmetric under particle exchange (bosons) or antisymmetric (fermions); the Slater determinant constructs antisymmetric states and the spin-statistics theorem ties spin to exchange symmetry.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.5",
+        "Sakurai Modern Quantum Mechanics Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.angular-momentum-addition",
+      "name": "Addition of Angular Momenta and Clebsch-Gordan Coefficients",
+      "aliases": [
+        "angular momentum addition",
+        "Clebsch-Gordan coefficients",
+        "CG coefficients",
+        "coupled basis",
+        "total angular momentum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin",
+        "phys.qm.hydrogen-atom-qm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "When two angular momenta j₁ and j₂ are combined, the total J ranges from |j₁−j₂| to j₁+j₂; Clebsch-Gordan coefficients ⟨j₁m₁j₂m₂|JM⟩ give the change-of-basis between the uncoupled {m₁,m₂} and coupled {J,M} representations.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.4 §4.4",
+        "Sakurai Modern Quantum Mechanics Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.scattering-theory-born-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.scattering-theory-born-approximation",
+      "name": "Scattering Theory and the Born Approximation",
+      "aliases": [
+        "Born approximation",
+        "scattering theory",
+        "differential cross-section",
+        "Lippmann-Schwinger equation",
+        "partial wave analysis"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.angular-momentum-addition",
+        "phys.mech.hamiltonian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Scattering theory describes how particles scatter off a potential V; the Lippmann-Schwinger equation |ψ⟩ = |φ⟩ + G₀V|ψ⟩ generates the Born series, whose first term gives the differential cross-section dσ/dΩ ∝ |Ṽ(q)|² in terms of the Fourier transform of the potential.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.11",
+        "Sakurai Modern Quantum Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.s-matrix-basics"
+      ]
+    },
+    {
+      "id": "phys.qm.s-matrix-basics",
+      "name": "S-Matrix and Scattering Amplitudes",
+      "aliases": [
+        "S-matrix",
+        "scattering matrix",
+        "T-matrix",
+        "scattering amplitude"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.scattering-theory-born-approximation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The S-matrix (scattering matrix) maps in-states to out-states: S = 1 + 2πiT; unitarity of S encodes conservation of probability. The T-matrix elements give scattering amplitudes, and the optical theorem relates Im f(θ=0) to the total cross-section.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Sakurai Modern Quantum Mechanics Ch.7",
+        "Weinberg Lectures on Quantum Mechanics Ch.8"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.density-matrix",
+      "name": "Density Matrix and Mixed Quantum States",
+      "aliases": [
+        "density matrix",
+        "density operator",
+        "mixed state",
+        "von Neumann equation",
+        "reduced density matrix"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.spin"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The density operator ρ = Σᵢpᵢ|ψᵢ⟩⟨ψᵢ| represents statistical mixtures of quantum states; pure states satisfy ρ² = ρ while mixed states have Tr(ρ²) < 1. The von Neumann equation iℏ∂ρ/∂t = [H,ρ] governs time evolution.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Sakurai Modern Quantum Mechanics Ch.3",
+        "Weinberg Lectures on Quantum Mechanics Ch.2"
       ],
       "children": [],
       "unlocks": []
