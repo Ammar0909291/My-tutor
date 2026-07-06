@@ -1326,13 +1326,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             { sessionId: learnSession.id },
           )
           const snapshot = toTeachingSnapshot(memory)
+
+          // W2-3 (ADR 10 Phase 2b): read ConceptMasteryRecord for the active concept.
+          // DB read runs BEFORE decide() so the Teaching Engine stays pure — it only
+          // sees its inputs, never touches the DB itself. Snapshot is immutable after
+          // this block; no write path is introduced here.
+          let conceptMasterySnapshot: {
+            masteryScore: number; decayedScore: number
+            masteryLevel: string; masteryConfidence: number
+          } | null = null
+          if (process.env.ENABLE_CONCEPT_MASTERY_READ === '1') {
+            try {
+              const cmr = await prisma.conceptMasteryRecord.findUnique({
+                where: { userId_conceptId: { userId, conceptId: snapshotCurrentConceptId } },
+                select: { masteryScore: true, decayedScore: true, masteryLevel: true, masteryConfidence: true },
+              })
+              if (cmr) conceptMasterySnapshot = cmr
+            } catch { /* non-fatal: ConceptMasteryRecord may not exist yet; degrade to existing behavior */ }
+          }
+
           const decision = decide(
             {
               level: snapshot.trackLevel,
               current_concepts_mastered: snapshot.masteredConcepts,
-              weak_concepts: snapshot.weakConcepts,
+              // W2-3: if CMR indicates current concept has decayed below mastery threshold,
+              // ensure it appears in weak_concepts for this turn's Teaching Engine decision.
+              weak_concepts: conceptMasterySnapshot !== null && conceptMasterySnapshot.decayedScore < 0.7
+                ? [...new Set([...snapshot.weakConcepts, snapshotCurrentConceptId])]
+                : snapshot.weakConcepts,
               misconceptions: snapshot.misconceptions,
-              retention_score: snapshot.retentionScore,
+              // W2-3: use CMR decayedScore (0–1) as retention signal when available —
+              // more accurate than the static confidenceLevel from LearningProfile.
+              retention_score: conceptMasterySnapshot !== null
+                ? Math.round(conceptMasterySnapshot.decayedScore * 100)
+                : snapshot.retentionScore,
               learning_speed: snapshot.learningSpeed,
               fatigue_level: snapshot.fatigueLevel,
             },
