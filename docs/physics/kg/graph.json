@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 209,
+    "total_concepts": 216,
     "total_domains": 11,
-    "total_requires_edges": 258,
-    "total_unlocks_edges": 258,
+    "total_requires_edges": 266,
+    "total_unlocks_edges": 266,
     "total_cross_links": 0
   },
   "domains": [
@@ -59,7 +59,7 @@
     {
       "key": "stat",
       "name": "Statistical Mechanics",
-      "count": 8
+      "count": 15
     },
     {
       "key": "astro",
@@ -5632,7 +5632,9 @@
         "phys.stat.bose-einstein",
         "phys.stat.entropy-statistical",
         "phys.stat.fermi-dirac",
-        "phys.stat.free-energy"
+        "phys.stat.free-energy",
+        "phys.stat.grand-canonical-ensemble",
+        "phys.stat.fluctuations-correlations"
       ]
     },
     {
@@ -5762,6 +5764,217 @@
       "mastery_threshold": 0.8,
       "references": [
         "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.phase-transitions"
+      ]
+    },
+    {
+      "id": "phys.stat.grand-canonical-ensemble",
+      "name": "Grand Canonical Ensemble",
+      "aliases": [
+        "grand canonical ensemble",
+        "grand partition function",
+        "open system",
+        "fugacity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac",
+        "phys.stat.bose-einstein"
+      ],
+      "cross_links": [],
+      "description": "The grand canonical ensemble describes systems in contact with both a heat bath and a particle reservoir; the grand partition function \u039e = \u03a3 e^(\u2212\u03b2(E\u1d62\u2212\u03bcN\u1d62)) generates all thermodynamic averages for open systems, and Fermi-Dirac and Bose-Einstein distributions follow directly from it.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Reif Fundamentals of Statistical Mechanics Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.chemical-potential"
+      ]
+    },
+    {
+      "id": "phys.stat.chemical-potential",
+      "name": "Chemical Potential and Thermodynamic Equilibrium",
+      "aliases": [
+        "chemical potential",
+        "mu",
+        "electrochemical potential",
+        "partial molar Gibbs energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.grand-canonical-ensemble"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac"
+      ],
+      "cross_links": [],
+      "description": "The chemical potential \u03bc = (\u2202F/\u2202N)_{T,V} is the free energy cost of adding one particle; it equalises between subsystems at equilibrium, governs diffusion across boundaries, and sets the Fermi energy at T = 0 for fermions.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Kittel Introduction to Solid State Physics Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.fluctuations-correlations",
+      "name": "Fluctuations, Response Functions, and Correlations",
+      "aliases": [
+        "fluctuations",
+        "susceptibility",
+        "response function",
+        "fluctuation-dissipation theorem",
+        "correlation function"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Thermodynamic fluctuations of an observable A satisfy \u27e8(\u0394A)\u00b2\u27e9 = kT\u00b2(\u2202\u27e8A\u27e9/\u2202T); the fluctuation-dissipation theorem connects equilibrium fluctuations to linear response coefficients, and two-point correlation functions encode spatial order.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Reif Fundamentals of Statistical Mechanics Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.ising-model"
+      ]
+    },
+    {
+      "id": "phys.stat.phase-transitions",
+      "name": "Phase Transitions and Landau Mean-Field Theory",
+      "aliases": [
+        "phase transition",
+        "order parameter",
+        "Landau theory",
+        "mean-field theory",
+        "first-order transition",
+        "second-order transition"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.free-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A phase transition is a discontinuous or singular change in macroscopic properties at a critical point; Landau's mean-field theory expands the free energy in powers of an order parameter \u03b7: F = a\u2080 + a\u2082\u03b7\u00b2 + a\u2084\u03b7\u2074 + \u2026, with the sign of a\u2082(T) distinguishing ordered from disordered phases.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.11",
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.1-4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.ising-model"
+      ]
+    },
+    {
+      "id": "phys.stat.ising-model",
+      "name": "Ising Model",
+      "aliases": [
+        "Ising model",
+        "lattice spin model",
+        "exact solution",
+        "transfer matrix"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.phase-transitions",
+        "phys.stat.fluctuations-correlations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Ising model assigns binary spins \u03c3\u1d62 = \u00b11 to lattice sites with nearest-neighbour coupling H = \u2212J\u03a3\u03c3\u1d62\u03c3\u2c7c; the 1D model is exactly solvable by the transfer matrix (no phase transition), while the 2D model (Onsager, 1944) exhibits a continuous phase transition at kTc/J \u2248 2.269.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.12",
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.phase-transitions-critical-phenomena",
+        "phys.stat.monte-carlo-basics"
+      ]
+    },
+    {
+      "id": "phys.stat.phase-transitions-critical-phenomena",
+      "name": "Critical Phenomena, Scaling Laws, and Universality",
+      "aliases": [
+        "critical phenomena",
+        "critical exponents",
+        "scaling laws",
+        "universality",
+        "renormalization group"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.ising-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Near a critical point, thermodynamic quantities diverge as power laws |T\u2212Tc|^\u03b1,\u03b2,\u03b3,\u03bd,\u03b7; universality groups materials into classes sharing critical exponents regardless of microscopic details; the Wilson renormalization group provides the theoretical foundation via scale invariance and fixed points.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.6-10",
+        "Pathria Statistical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.monte-carlo-basics",
+      "name": "Monte Carlo Methods in Statistical Physics",
+      "aliases": [
+        "Monte Carlo simulation",
+        "Metropolis algorithm",
+        "detailed balance",
+        "Markov chain Monte Carlo",
+        "MCMC"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.ising-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Monte Carlo simulation samples phase space stochastically; the Metropolis algorithm accepts new configurations with probability min(1, e^(\u2212\u03b2\u0394E)), satisfying detailed balance and converging to the Boltzmann distribution. The Ising model is the canonical teaching example for diagnosing critical slowing down.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Newman & Barkema Monte Carlo Methods in Statistical Physics Ch.1-4",
+        "Pathria Statistical Mechanics Ch.16"
       ],
       "children": [],
       "unlocks": []
