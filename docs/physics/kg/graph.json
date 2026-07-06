@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 194,
+    "total_concepts": 202,
     "total_domains": 11,
-    "total_requires_edges": 235,
-    "total_unlocks_edges": 235,
+    "total_requires_edges": 244,
+    "total_unlocks_edges": 244,
     "total_cross_links": 0
   },
   "domains": [
@@ -19,7 +19,7 @@
     {
       "key": "mech",
       "name": "Classical Mechanics",
-      "count": 52
+      "count": 60
     },
     {
       "key": "therm",
@@ -431,7 +431,8 @@
       "unlocks": [
         "phys.mech.circular-motion",
         "phys.mech.projectile-motion",
-        "phys.mech.relative-motion"
+        "phys.mech.relative-motion",
+        "phys.mech.generalized-coordinates"
       ]
     },
     {
@@ -968,7 +969,9 @@
         "Halliday Resnick Ch.8"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.mech.generalized-coordinates"
+      ]
     },
     {
       "id": "phys.mech.momentum",
@@ -1720,6 +1723,248 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.generalized-coordinates",
+      "name": "Generalized Coordinates and Configuration Space",
+      "aliases": [
+        "generalized coordinates",
+        "configuration space",
+        "degrees of freedom",
+        "holonomic constraints"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.conservative-forces",
+        "phys.mech.kinematics-2d"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum"
+      ],
+      "cross_links": [],
+      "description": "Generalized coordinates are a minimal set of independent parameters that uniquely specify the configuration of a mechanical system subject to holonomic constraints; the number of independent coordinates equals the degrees of freedom.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.1",
+        "Landau & Lifshitz Mechanics Ch.1",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.euler-lagrange-equation"
+      ]
+    },
+    {
+      "id": "phys.mech.euler-lagrange-equation",
+      "name": "The Euler-Lagrange Equation and Hamilton's Principle",
+      "aliases": [
+        "Euler-Lagrange equation",
+        "Lagrangian",
+        "Hamilton's principle",
+        "principle of stationary action",
+        "action integral"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.generalized-coordinates"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Hamilton's principle states that the action S = ∫L dt is stationary for the physical path; varying S yields the Euler-Lagrange equation d/dt(∂L/∂ṡᵢ) − ∂L/∂qᵢ = 0, where L = T − V is the Lagrangian.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.1-2",
+        "Landau & Lifshitz Mechanics Ch.2",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.cyclic-coordinates-conservation-laws",
+        "phys.mech.hamiltonian"
+      ]
+    },
+    {
+      "id": "phys.mech.cyclic-coordinates-conservation-laws",
+      "name": "Cyclic Coordinates and Noether's Theorem",
+      "aliases": [
+        "cyclic coordinate",
+        "ignorable coordinate",
+        "Noether's theorem",
+        "conservation laws from symmetry"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum",
+        "phys.mech.conservation-of-momentum"
+      ],
+      "cross_links": [],
+      "description": "A generalized coordinate is cyclic if ∂L/∂qᵢ = 0; the conjugate momentum pᵢ = ∂L/∂ṡᵢ is then conserved. Noether's theorem generalises this: every continuous symmetry of the Lagrangian implies a conserved quantity.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.2",
+        "Landau & Lifshitz Mechanics §6-7",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.hamiltonian",
+      "name": "The Hamiltonian and Legendre Transform",
+      "aliases": [
+        "Hamiltonian",
+        "Legendre transform",
+        "canonical momenta",
+        "phase space"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta pᵢ = ∂L/∂ṡᵢ are conjugate to the generalised coordinates, and H equals the total energy for natural systems.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.8",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Taylor Classical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.hamiltons-equations"
+      ]
+    },
+    {
+      "id": "phys.mech.hamiltons-equations",
+      "name": "Hamilton's Equations of Motion",
+      "aliases": [
+        "Hamilton's equations",
+        "canonical equations of motion",
+        "Hamiltonian mechanics"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hamiltonian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Hamilton's equations ṡᵢ = ∂H/∂pᵢ and ṗᵢ = −∂H/∂qᵢ give 2N coupled first-order equations governing trajectories in phase space, equivalent to the Euler-Lagrange equations but symmetric in q and p.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.8",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Taylor Classical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.poisson-brackets"
+      ]
+    },
+    {
+      "id": "phys.mech.poisson-brackets",
+      "name": "Poisson Brackets and Phase Space Dynamics",
+      "aliases": [
+        "Poisson bracket",
+        "{f,g}",
+        "phase space flow",
+        "Liouville's theorem"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hamiltons-equations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Poisson bracket {f,g} = Σ(∂f/∂qᵢ ∂g/∂pᵢ − ∂f/∂pᵢ ∂g/∂qᵢ) encodes dynamics: df/dt = {f,H}. Fundamental brackets {qᵢ,pⱼ} = δᵢⱼ prefigure quantum commutators; Liouville's theorem states phase-space volume is conserved.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.9",
+        "Landau & Lifshitz Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.canonical-transformations"
+      ]
+    },
+    {
+      "id": "phys.mech.canonical-transformations",
+      "name": "Canonical Transformations and Generating Functions",
+      "aliases": [
+        "canonical transformation",
+        "generating function",
+        "symplectomorphism",
+        "point transformation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.poisson-brackets"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Canonical transformations (Qᵢ, Pᵢ) = (Qᵢ(q,p,t), Pᵢ(q,p,t)) preserve Hamilton's equations and Poisson bracket structure; they are generated by four types of generating functions F₁–F₄ that mix coordinates and momenta.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.hamilton-jacobi-equation"
+      ]
+    },
+    {
+      "id": "phys.mech.hamilton-jacobi-equation",
+      "name": "Hamilton-Jacobi Equation and Action-Angle Variables",
+      "aliases": [
+        "Hamilton-Jacobi equation",
+        "HJ equation",
+        "action-angle variables",
+        "Hamilton's principal function"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.canonical-transformations"
+      ],
+      "related": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "cross_links": [],
+      "description": "The Hamilton-Jacobi equation −∂S/∂t = H(q, ∂S/∂q, t) reduces mechanics to a single PDE for Hamilton's principal function S; separation of variables yields action-angle variables (J,θ) for integrable systems and is the classical precursor to the Schrödinger equation.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.10",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Goldstein Classical Mechanics Ch.11"
       ],
       "children": [],
       "unlocks": []
