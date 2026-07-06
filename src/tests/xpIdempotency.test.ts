@@ -3,8 +3,15 @@
  * MED-5: Flashcard XP per-day guard.
  */
 import { describe, it, expect } from 'vitest'
+import { isFlashcardXpAllowed } from '@/lib/xp'
 
-// Simulate the atomic lesson-completion guard from curriculum/progress
+// The real atomic lesson-completion guard (src/app/api/curriculum/progress/
+// route.ts PATCH) is a raw `UPDATE ... WHERE NOT (lesson = ANY(...))` SQL
+// statement — its idempotency guarantee comes from Postgres row-locking on
+// that statement, not from any pure JS function. There is nothing
+// equivalent to import here; this Set-based version is a deliberate
+// same-shape simulation of the concept (first-write-wins), not a replica
+// of extractable production logic.
 function completeLessonOnce(
   completedLessons: Set<number>,
   lesson: number,
@@ -37,41 +44,33 @@ describe('CRIT-1: XP idempotency', () => {
   })
 })
 
-// Simulate flashcard XP per-day guard
-function flashcardXpAllowed(lastReviewedAt: Date | null, now: Date): boolean {
-  if (!lastReviewedAt) return true
-  const startOfTodayUtc = new Date(now)
-  startOfTodayUtc.setUTCHours(0, 0, 0, 0)
-  return lastReviewedAt < startOfTodayUtc
-}
-
 describe('MED-5: flashcard XP farming prevention', () => {
   const today = new Date('2026-06-16T12:00:00Z')
   const startOfToday = new Date('2026-06-16T00:00:00Z')
   const yesterday = new Date('2026-06-15T23:59:00Z')
 
   it('first review (no lastReviewedAt) earns XP', () => {
-    expect(flashcardXpAllowed(null, today)).toBe(true)
+    expect(isFlashcardXpAllowed(null, today)).toBe(true)
   })
 
   it('review earlier today does NOT earn XP again', () => {
     const reviewedToday = new Date('2026-06-16T08:00:00Z')
-    expect(flashcardXpAllowed(reviewedToday, today)).toBe(false)
+    expect(isFlashcardXpAllowed(reviewedToday, today)).toBe(false)
   })
 
   it('review yesterday DOES earn XP today', () => {
-    expect(flashcardXpAllowed(yesterday, today)).toBe(true)
+    expect(isFlashcardXpAllowed(yesterday, today)).toBe(true)
   })
 
   it('review exactly at UTC midnight does NOT earn XP again same day', () => {
-    expect(flashcardXpAllowed(startOfToday, today)).toBe(false)
+    expect(isFlashcardXpAllowed(startOfToday, today)).toBe(false)
   })
 
   it('repeated PATCH calls same day: only first earns XP', () => {
     let lastReviewed: Date | null = null
     let xpAwarded = 0
     for (let i = 0; i < 5; i++) {
-      if (flashcardXpAllowed(lastReviewed, today)) {
+      if (isFlashcardXpAllowed(lastReviewed, today)) {
         xpAwarded++
         lastReviewed = today
       }
