@@ -3,36 +3,29 @@
  * Validates Zod schemas directly without hitting routes or DB.
  */
 import { describe, it, expect } from 'vitest'
-import { z } from 'zod'
 import { coachSchema } from '@/lib/ai/coachSchema'
 import { settingsSchema } from '@/lib/settingsSchema'
 import { quizSchema } from '@/lib/quizSchema'
+import { practiceSubmitSchema as practiceSchema } from '@/lib/practiceSubmitSchema'
 
-// NOTE: coachSchema, settingsSchema, and quizSchema above now import the
-// real schemas from src/lib/ai/coachSchema.ts, src/lib/settingsSchema.ts,
-// and src/lib/quizSchema.ts (extracted out of their respective routes).
+// All four schemas below now import the real production schemas
+// (src/lib/ai/coachSchema.ts, src/lib/settingsSchema.ts,
+// src/lib/quizSchema.ts, src/lib/practiceSubmitSchema.ts — each extracted
+// out of its respective route) instead of hand-copied local replicas.
 // Investigated settingsSchema specifically: the old local replica here had
 // only 2 of the real schema's 4 fields (missing country, voiceSpeed) with
 // no comment, other test, or design convention anywhere suggesting that
 // was an intentional subset — genuine replica-drift, not a deliberate
 // scope choice. Fixed by importing the real schema; the describe blocks
 // below cover the previously-untested country/voiceSpeed bounds.
-// Investigated quizSchema separately: the old local replica was an exact,
-// field-for-field match to the real schema (no drift, nothing missing) —
-// still extracted for the same reason coachSchema was: an un-imported
-// duplicate that happens to be accurate today is exactly how
-// settingsSchema's drift started.
-// practiceSchema below is still a local replica — out of scope for this
-// pass (one schema at a time).
-
-// Practice schema (from /api/practice/submit/route.ts)
-const practiceSchema = z.object({
-  subjectSlug: z.string().min(1),
-  topicSlug: z.string().min(1),
-  questions: z.array(z.object({ question: z.string(), correctIndex: z.number().optional() })).max(100).default([]),
-  correct: z.array(z.boolean()).min(1).max(100),
-  idempotencyKey: z.string().max(128).optional(),
-})
+// Investigated quizSchema and practiceSchema separately: both were exact,
+// field-for-field matches to their real schemas (confirmed by direct
+// whitespace-normalized diff against the current route files, re-read
+// fresh rather than assumed — practiceSchema's route had already been
+// refactored twice in earlier QA passes, though not its schema) — no
+// drift, nothing missing. Extracted anyway for the same reason coachSchema
+// was: an un-imported duplicate that happens to be accurate today is
+// exactly how settingsSchema's drift started.
 
 describe('Coach message bounds', () => {
   it('accepts valid messages array', () => {

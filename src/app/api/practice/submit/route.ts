@@ -7,17 +7,7 @@ import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { generateCoachInsights } from '@/lib/analytics/coachInsights'
 import { computeMasteryPct, deriveTopicStatus } from '@/lib/mastery/topicMasteryFormula'
 import { buildPracticeMistakeRecords } from '@/lib/mistakeRecords'
-
-const schema = z.object({
-  subjectSlug: z.string().min(1),
-  topicSlug: z.string().min(1),
-  questions: z.array(z.object({
-    question: z.string(),
-    correctIndex: z.number().optional(),
-  })).max(100).default([]),
-  correct: z.array(z.boolean()).min(1).max(100),
-  idempotencyKey: z.string().max(128).optional(),
-})
+import { practiceSubmitSchema } from '@/lib/practiceSubmitSchema'
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -29,7 +19,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectSlug, topicSlug, questions, correct, idempotencyKey } = schema.parse(body)
+    const { subjectSlug, topicSlug, questions, correct, idempotencyKey } = practiceSubmitSchema.parse(body)
 
     const total = correct.length
     const correctCount = correct.filter(Boolean).length
