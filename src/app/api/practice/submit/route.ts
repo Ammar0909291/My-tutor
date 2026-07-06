@@ -6,6 +6,7 @@ import { withRetry } from '@/lib/db/withRetry'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { generateCoachInsights } from '@/lib/analytics/coachInsights'
 import { computeMasteryPct, deriveTopicStatus } from '@/lib/mastery/topicMasteryFormula'
+import { buildPracticeMistakeRecords } from '@/lib/mistakeRecords'
 
 const schema = z.object({
   subjectSlug: z.string().min(1),
@@ -39,10 +40,6 @@ export async function POST(req: Request) {
       correct: isCorrect,
     }))
 
-    const mistakeIndexes = correct
-      .map((isCorrect, i) => (isCorrect ? -1 : i))
-      .filter((i) => i >= 0)
-
     // HIGH-6 / CRITICAL-5 (Sprint D): if idempotencyKey is supplied the DB
     // unique constraint is the atomic dedup guard — two concurrent requests
     // with the same key cannot both succeed; the second hits P2002 and we
@@ -65,17 +62,9 @@ export async function POST(req: Request) {
             ...(idempotencyKey ? { idempotencyKey } : {}),
           },
         })
-        if (mistakeIndexes.length > 0) {
-          await tx.mistakeRecord.createMany({
-            data: mistakeIndexes.map((i) => ({
-              userId,
-              subjectSlug,
-              topicSlug,
-              sessionId: ps.id,
-              category: topicSlug,
-              questionId: `${ps.id}-${i}`,
-            })),
-          })
+        const mistakeRecords = buildPracticeMistakeRecords(correct, userId, subjectSlug, topicSlug, ps.id)
+        if (mistakeRecords.length > 0) {
+          await tx.mistakeRecord.createMany({ data: mistakeRecords })
         }
         return ps
       }))
