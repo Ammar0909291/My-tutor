@@ -79,6 +79,11 @@ export default async function AdminOpsPage() {
     { name: 'SMTP_HOST', set: !!process.env.SMTP_HOST },
     { name: 'SMTP_USER', set: !!process.env.SMTP_USER },
     { name: 'SMTP_PASS', set: !!process.env.SMTP_PASS },
+    // Google Sign-In is fully feature-gated on these two being set (see
+    // src/lib/auth/config.ts) — surfaced here so "why is the Google button
+    // missing" is answerable from this page instead of the Vercel dashboard.
+    { name: 'GOOGLE_CLIENT_ID', set: !!process.env.GOOGLE_CLIENT_ID },
+    { name: 'GOOGLE_CLIENT_SECRET', set: !!process.env.GOOGLE_CLIENT_SECRET },
     { name: 'ADMIN_EMAILS', set: !!process.env.ADMIN_EMAILS },
     { name: 'MONITORING_WEBHOOK_URL', set: !!process.env.MONITORING_WEBHOOK_URL },
   ]

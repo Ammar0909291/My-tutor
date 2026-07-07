@@ -13,6 +13,7 @@ export default function AdminSettingsPage() {
     { key: 'ADMIN_EMAILS', desc: 'Admin bootstrap allowlist (CSV)', secret: false },
     { key: 'AI_GLOBAL_RPM', desc: 'Global AI rate limit (req/min)', secret: false },
     { key: 'GOOGLE_CLIENT_ID', desc: 'Google OAuth client', secret: false },
+    { key: 'GOOGLE_CLIENT_SECRET', desc: 'Google OAuth secret — both required to show Google Sign-In', secret: true },
   ]
 
   const flags = [

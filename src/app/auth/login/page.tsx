@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, Suspense } from 'react'
-import { signIn } from 'next-auth/react'
+import { signIn, getProviders } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
@@ -64,6 +64,16 @@ function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // Root-cause fix: whether to show the Google button now tracks NextAuth's
+  // own provider list (populated server-side from GOOGLE_CLIENT_ID/SECRET —
+  // see src/lib/auth/config.ts) instead of a second, independently-set
+  // NEXT_PUBLIC_GOOGLE_ENABLED flag that had no automatic link to it and was
+  // never documented as a required deploy variable.
+  const [googleAvailable, setGoogleAvailable] = useState(false)
+
+  useEffect(() => {
+    getProviders().then((providers) => setGoogleAvailable(Boolean(providers?.google))).catch(() => setGoogleAvailable(false))
+  }, [])
 
   useEffect(() => {
     const errorCode = params.get('error')
@@ -153,8 +163,9 @@ function LoginForm() {
           </div>
 
           <Card style={{ padding: 24 }}>
-            {/* Google — only shown when GOOGLE_CLIENT_ID/SECRET are configured */}
-            {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+            {/* Google — only shown when NextAuth actually has the provider registered
+                (i.e. GOOGLE_CLIENT_ID/SECRET are configured server-side) */}
+            {googleAvailable && (
               <>
                 <button onClick={handleGoogle} disabled={googleLoading}
                   className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
