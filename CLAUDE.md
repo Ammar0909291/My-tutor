@@ -11,17 +11,23 @@
   not just code/commands inside it — goes inside one ``` fence. Markdown headers/tables/checklists
   outside a fence do NOT satisfy this; wrap the whole thing.
 
-## Workflow preference (ALWAYS follow)
-- On EVERY prompt, before writing any code or taking any action: first read and understand the
-  request the way the lead developer on this project would — what it actually needs, what it
-  touches, what's ambiguous or missing.
-- Then propose anything worth adding or removing from the request as understood (scope
-  corrections, missing pieces, unnecessary parts) — surface this to the user rather than silently
-  deciding either way.
-- Only after that understanding + suggestion step, start implementing.
-- This does not override the standing rule of asking before risky/ambiguous actions (via
-  AskUserQuestion) or the "no implementation without explicit approval" governance gates
-  elsewhere in this file — it's the thinking step that precedes those, not a replacement for them.
+## Workflow preference (ALWAYS follow — updated 2026-07-07, supersedes the prior version below)
+- On EVERY prompt: first read and understand it the way the lead developer on this project would
+  — what it actually needs, what it touches, what's ambiguous or missing.
+- Then decide yourself what to add or remove from the request as understood (scope corrections,
+  missing pieces, unnecessary parts) — do NOT stop and ask the user via AskUserQuestion for this.
+  State plainly, in one short block at the start of the reply, exactly what was redefined/applied.
+- Then immediately start working (building) on the prompt as redefined — no waiting for a
+  confirmation round on scope.
+- This is a standing, explicit pre-authorization to proceed without a scope-confirmation pause —
+  it does NOT extend to: (a) the Educational Brain G1/G2 governance gates elsewhere in this file
+  (Canonical KG v1 freeze + explicit per-item approval before implementation — those still require
+  real, separate user sign-off, no exceptions via this preference), or (b) genuinely risky/hard-to-
+  reverse actions (force push, resets, destructive git ops, anything affecting shared/production
+  state) — those still get flagged and confirmed first, per standing safety practice.
+- Prior version (2026-07-07, superseded): propose additions/removals and WAIT for the user's
+  answer before implementing. Replaced because it added a confirmation round-trip the user wants
+  removed for ordinary scope decisions.
 
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
