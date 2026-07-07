@@ -11,6 +11,18 @@
   not just code/commands inside it — goes inside one ``` fence. Markdown headers/tables/checklists
   outside a fence do NOT satisfy this; wrap the whole thing.
 
+## Workflow preference (ALWAYS follow)
+- On EVERY prompt, before writing any code or taking any action: first read and understand the
+  request the way the lead developer on this project would — what it actually needs, what it
+  touches, what's ambiguous or missing.
+- Then propose anything worth adding or removing from the request as understood (scope
+  corrections, missing pieces, unnecessary parts) — surface this to the user rather than silently
+  deciding either way.
+- Only after that understanding + suggestion step, start implementing.
+- This does not override the standing rule of asking before risky/ambiguous actions (via
+  AskUserQuestion) or the "no implementation without explicit approval" governance gates
+  elsewhere in this file — it's the thinking step that precedes those, not a replacement for them.
+
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
 - AI: Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia only, `country === 'ru'`;
