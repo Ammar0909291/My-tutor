@@ -29,7 +29,14 @@
   answer before implementing. Replaced because it added a confirmation round-trip the user wants
   removed for ordinary scope decisions.
 
-## Permanent Research Workflow (MANDATORY for every research/architecture/science task — added 2026-07-07)
+## Permanent Research Workflow (RETIRED 2026-07-07 — see override note, kept below for history only)
+- **OVERRIDE (2026-07-07, binding, supersedes everything below):** do NOT critique, analyze,
+  improve, or rewrite prompts going forward, for research/architecture/science tasks or any other
+  kind. No PROMPT IMPROVEMENTS section, no FINAL PROMPT rewrite, no "improved version" substituted
+  for what was actually asked. Execute every prompt exactly as given, as-is. This fully retires
+  the analyze/improve/rewrite mechanism described below (Steps 1-4 in spirit); it does NOT retire
+  ordinary good-faith execution quality (depth, no filler, correctness) — it only stops the
+  practice of changing what was asked before doing it.
 - Scope: applies to research, architecture, and science-track prompts (the Master Teaching
   Science / Decision Science / architecture-review series) — distinct from ordinary build/dev
   tasks, which follow the Workflow preference above. This does NOT touch or loosen the
