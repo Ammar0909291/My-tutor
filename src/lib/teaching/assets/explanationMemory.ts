@@ -15,7 +15,7 @@ import { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, GradeBand } fro
 import type { ExplanationKind } from './assetIdentity'
 import type { StudentState } from './studentState'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
-import { decideCaptureAction, type LineageAsset } from './versioning'
+import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
 
 export interface ExplanationMatch {
@@ -95,7 +95,7 @@ export interface CaptureExplanationInput {
  * asset is untouched until a reviewer explicitly promotes the new version
  * (see reviewExplanationAsset, which then deprecates the old one).
  */
-export async function captureGeneratedExplanation(input: CaptureExplanationInput): Promise<void> {
+export async function captureGeneratedExplanation(input: CaptureExplanationInput): Promise<CaptureOutcome> {
   try {
     const familyKind: ExplanationKind = input.familyKind ?? 'core_explanation'
     const canonicalSlug = `${input.conceptId}:${familyKind}:${input.language}`
@@ -110,9 +110,11 @@ export async function captureGeneratedExplanation(input: CaptureExplanationInput
       .map((a) => ({ assetId: a.assetId, contentHash: a.contentHash, content: a.explanationAsset!.content, version: a.version }))
 
     const decision = decideCaptureAction(input.content, contentHash, lineageRows)
-    if (decision.action === 'skip-duplicate') return
+    if (decision.action === 'skip-duplicate') {
+      return { action: 'skipped-duplicate', matchedAssetId: decision.matchedAssetId }
+    }
 
-    await prisma.assetIdentity.create({
+    const created = await prisma.assetIdentity.create({
       data: {
         family: AssetFamily.EXPLANATION,
         familyKind,
@@ -142,9 +144,14 @@ export async function captureGeneratedExplanation(input: CaptureExplanationInput
         },
       },
     })
+
+    return decision.action === 'new-version'
+      ? { action: 'versioned', assetId: created.assetId, parentVersionId: decision.parentVersionId }
+      : { action: 'inserted', assetId: created.assetId }
   } catch (err) {
     // Capture is best-effort background enrichment — never surface to the turn.
     console.warn('[explanationMemory] captureGeneratedExplanation failed:', err)
+    return { action: 'error', message: err instanceof Error ? err.message : String(err) }
   }
 }
 

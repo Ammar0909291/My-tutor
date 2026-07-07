@@ -26,6 +26,20 @@ export type CaptureDecision =
   | { action: 'new-version'; parentVersionId: string; nextVersion: number; similarity: number }
   | { action: 'new-lineage' }
 
+/**
+ * Observable result of an actual capture attempt (explanationMemory.ts /
+ * teachingActionRepository.ts's capture functions) — a superset of
+ * CaptureDecision that also covers validation rejection and unexpected
+ * errors, so callers (the ingestion pipeline's health tracker) can tell
+ * "nothing to do, duplicate" apart from "something is wrong."
+ */
+export type CaptureOutcome =
+  | { action: 'inserted'; assetId: string }
+  | { action: 'versioned'; assetId: string; parentVersionId: string }
+  | { action: 'skipped-duplicate'; matchedAssetId: string }
+  | { action: 'rejected'; reason: string }
+  | { action: 'error'; message: string }
+
 export function decideCaptureAction(
   candidateContent: string,
   candidateContentHash: string,

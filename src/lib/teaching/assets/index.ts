@@ -18,9 +18,15 @@ export { jaccardSimilarity, hashContent, DUPLICATE_SIMILARITY_THRESHOLD } from '
 export { decideCaptureAction, type CaptureDecision, type LineageAsset } from './versioning'
 export { rankAsset, rankAssets, computeFreshness, parseManualPriority, type RankableAsset, type RankedAsset, type RankingFactors } from './ranking'
 export {
-  getConceptAssetCounts, getDuplicateCandidates, getSubjectRepositoryReport,
+  getConceptAssetCounts, getDuplicateCandidates, getSubjectRepositoryReport, getVersionChainCount,
   type ConceptAssetCounts, type DuplicateCandidate, type SubjectRepositoryReport,
 } from './repositoryStats'
+export { captureTracker, type CaptureHealthStats } from './captureTracker'
+export type { CaptureOutcome } from './versioning'
+export { validateExplanationCandidate, validateProbeCandidate, type ValidationResult, type ValidateExplanationInput, type ValidateProbeInput } from './validation'
+export { decomposeLesson, type DecomposedSection } from './lessonDecomposition'
+export { extractProbes, type ExtractedProbe } from './probeExtraction'
+export { ingestGeneratedLesson, type IngestLessonInput, type IngestLessonResult, type IngestedExplanation, type IngestedProbe } from './pipeline'
 
 /**
  * Kill switch — defaults to enabled. Safe to leave on: with zero ACTIVE

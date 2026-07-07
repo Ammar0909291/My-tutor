@@ -16,6 +16,7 @@ import { prisma } from '@/lib/db/prisma'
 import { AssetFamily, AssetStatus } from '@prisma/client'
 import { getKnowledgeGraph, getAllNodes } from '@/lib/curriculum/knowledgeGraph'
 import { jaccardSimilarity, DUPLICATE_SIMILARITY_THRESHOLD } from './similarity'
+import { captureTracker, type CaptureHealthStats } from './captureTracker'
 
 export interface ConceptAssetCounts {
   conceptId: string
@@ -49,6 +50,13 @@ export interface SubjectRepositoryReport {
   conceptsWithZeroAssetsTotal: number
   assetsNeedingReview: number // DRAFT + REVIEW, both families, any concept
   duplicateCandidates: DuplicateCandidate[]
+  // Task 6 additions — automatic-growth pipeline health, on top of the
+  // Phase 4 completeness fields above.
+  conceptsWithZeroExplanations: number // ACTIVE explanationCount === 0, distinct from conceptsWithZeroAssets (which requires BOTH families empty)
+  conceptsWithZeroProbes: number       // ACTIVE probeCount === 0
+  averageAssetsPerConcept: number      // mean ACTIVE (explanation + probe) count across this subject's concepts
+  versionChains: number                // canonicalSlug lineages (any family, any status) with more than one version
+  captureHealth: CaptureHealthStats    // process-local capture attempt outcomes since last restart — see captureTracker.ts
 }
 
 const ZERO_ASSET_LIST_CAP = 50
@@ -133,19 +141,34 @@ export async function getDuplicateCandidates(subjectSlug: string, limit = DUPLIC
   return candidates
 }
 
+/** Count of canonicalSlug lineages (any family/status, scoped to this
+ * subject) that have grown past version 1 — i.e. a generation was captured
+ * as a genuinely improved rewrite rather than a duplicate or a fresh
+ * concept. Grouped at the database level, so this is cheap at any scale. */
+export async function getVersionChainCount(subjectSlug: string): Promise<number> {
+  const groups = await prisma.assetIdentity.groupBy({
+    by: ['canonicalSlug'],
+    where: { conceptId: { startsWith: subjectPrefix(subjectSlug) } },
+    _max: { version: true },
+  })
+  return groups.filter((g) => (g._max.version ?? 0) > 1).length
+}
+
 export async function getSubjectRepositoryReport(subjectSlug: string): Promise<SubjectRepositoryReport> {
-  const [conceptCounts, duplicateCandidates, assetsNeedingReview] = await Promise.all([
+  const [conceptCounts, duplicateCandidates, assetsNeedingReview, versionChains] = await Promise.all([
     getConceptAssetCounts(subjectSlug),
     getDuplicateCandidates(subjectSlug),
     prisma.assetIdentity.count({
       where: { status: { in: [AssetStatus.DRAFT, AssetStatus.REVIEW] }, conceptId: { startsWith: subjectPrefix(subjectSlug) } },
     }),
+    getVersionChainCount(subjectSlug),
   ])
 
   const totalConcepts = conceptCounts.length
   const conceptsWithExplanations = conceptCounts.filter((c) => c.explanationCount > 0).length
   const conceptsWithProbes = conceptCounts.filter((c) => c.probeCount > 0).length
   const zeroAssetConcepts = conceptCounts.filter((c) => c.explanationCount === 0 && c.probeCount === 0).map((c) => c.conceptId)
+  const totalAssetCount = conceptCounts.reduce((sum, c) => sum + c.explanationCount + c.probeCount, 0)
 
   return {
     subjectSlug,
@@ -158,6 +181,11 @@ export async function getSubjectRepositoryReport(subjectSlug: string): Promise<S
     conceptsWithZeroAssetsTotal: zeroAssetConcepts.length,
     assetsNeedingReview,
     duplicateCandidates,
+    conceptsWithZeroExplanations: totalConcepts - conceptsWithExplanations,
+    conceptsWithZeroProbes: totalConcepts - conceptsWithProbes,
+    averageAssetsPerConcept: totalConcepts > 0 ? Math.round((totalAssetCount / totalConcepts) * 100) / 100 : 0,
+    versionChains,
+    captureHealth: captureTracker.stats(),
   }
 }
 

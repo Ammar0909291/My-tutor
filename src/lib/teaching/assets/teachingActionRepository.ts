@@ -17,7 +17,7 @@ import type { ProbeKind, ProbeChoice } from './assetIdentity'
 import type { StudentState } from './studentState'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
 import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch } from './explanationMemory'
-import { decideCaptureAction, type LineageAsset } from './versioning'
+import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
 
 export interface ProbeMatch {
@@ -79,7 +79,7 @@ export interface CaptureProbeInput {
 
 /** Same dedup/versioning contract as captureGeneratedExplanation — see that
  * function's docstring. Compares against the probe's `stem` text. */
-export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<void> {
+export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<CaptureOutcome> {
   try {
     const probeKind: ProbeKind = input.probeKind ?? 'mcq'
     const canonicalSlug = `${input.conceptId}:${probeKind}:${input.language}`
@@ -94,9 +94,11 @@ export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<v
       .map((a) => ({ assetId: a.assetId, contentHash: a.contentHash, content: a.probeAsset!.stem, version: a.version }))
 
     const decision = decideCaptureAction(input.stem, contentHash, lineageRows)
-    if (decision.action === 'skip-duplicate') return
+    if (decision.action === 'skip-duplicate') {
+      return { action: 'skipped-duplicate', matchedAssetId: decision.matchedAssetId }
+    }
 
-    await prisma.assetIdentity.create({
+    const created = await prisma.assetIdentity.create({
       data: {
         family: AssetFamily.PROBE,
         familyKind: probeKind,
@@ -128,8 +130,13 @@ export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<v
         },
       },
     })
+
+    return decision.action === 'new-version'
+      ? { action: 'versioned', assetId: created.assetId, parentVersionId: decision.parentVersionId }
+      : { action: 'inserted', assetId: created.assetId }
   } catch (err) {
     console.warn('[teachingActionRepository] captureGeneratedProbe failed:', err)
+    return { action: 'error', message: err instanceof Error ? err.message : String(err) }
   }
 }
 

@@ -42,11 +42,15 @@ export type ExplanationKind =
   | 'exam_oriented'
   | 'common_misconception_note'
 
-// familyKind discriminator values for the Probe family (ADR 14 §4.4)
+// familyKind discriminator values for the Probe family (ADR 14 §4.4).
+// 'fill_blank' added (automatic probe extraction, 2026-07) — same additive
+// pattern as ExplanationKind above, no schema change (familyKind is a plain
+// String column).
 export type ProbeKind =
   | 'mcq'
   | 'true_false'
   | 'short_answer'
+  | 'fill_blank'
   | 'numeric'
   | 'step_check'
   | 'misconception_probe'

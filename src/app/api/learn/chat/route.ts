@@ -21,7 +21,7 @@ import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 import {
-  assembleLesson, buildStudentState, captureGeneratedExplanation, isExplanationMemoryEnabled,
+  assembleLesson, buildStudentState, ingestGeneratedLesson, isExplanationMemoryEnabled,
   type StudentState, type AssembledLesson,
 } from '@/lib/teaching/assets'
 
@@ -1579,15 +1579,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
       }
 
-      // Phase 2 capture: persist a successful LLM generation as a DRAFT for
-      // future reuse. Fire-and-forget — never awaited, never blocks the turn.
+      // Phase 2/5 capture: decompose a successful LLM generation into
+      // whichever labelled sections and assessment items it actually
+      // contains and persist each as a DRAFT for future reuse. Fire-and-
+      // forget — never awaited, never blocks the turn.
       if (memoryState && !assembled) {
-        void captureGeneratedExplanation({
+        void ingestGeneratedLesson({
           conceptId: memoryState.conceptId,
           subjectSlug: memoryState.subjectSlug,
           language: memoryState.language,
           gradeBand: memoryState.gradeBand,
-          content: text,
+          rawContent: text,
           authorId: 'SYSTEM_AI',
         })
       }
