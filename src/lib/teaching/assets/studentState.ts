@@ -39,12 +39,36 @@ export function gradeToGradeBand(grade?: number | null): GradeBand {
   return GradeBand.UNDERGRADUATE
 }
 
-function inferExperienceLevel(currentLevel?: string | null, targetLevel?: string | null): StudentState['experienceLevel'] {
+export function inferExperienceLevel(currentLevel?: string | null, targetLevel?: string | null): StudentState['experienceLevel'] {
   const text = `${currentLevel ?? ''} ${targetLevel ?? ''}`.toLowerCase()
   if (/beginner|novice|new to|just starting/.test(text)) return 'beginner'
   if (/expert|advanced|proficient|professional/.test(text)) return 'expert'
   if (/intermediate|some experience|comfortable/.test(text)) return 'intermediate'
   return undefined
+}
+
+/**
+ * A single, subject-agnostic "how plain should the language be" signal for
+ * prompt-building, derived only from fields that already exist on Profile —
+ * no new schema, no per-subject special-casing. Library/general learners are
+ * classified from their self-reported currentLevel/targetLevel (the same
+ * signal inferExperienceLevel already uses); School Mode learners (who
+ * rarely set those) fall back to grade; with no signal at all, defaults to
+ * the safest option — plain language — matching onboarding's own default.
+ */
+export function resolveContentRegister(input: {
+  grade?: number | null
+  currentLevel?: string | null
+  targetLevel?: string | null
+}): 'beginner' | 'intermediate' | 'expert' {
+  const fromLevel = inferExperienceLevel(input.currentLevel, input.targetLevel)
+  if (fromLevel) return fromLevel
+  if (input.grade != null) {
+    if (input.grade <= 5) return 'beginner'
+    if (input.grade <= 12) return 'intermediate'
+    return 'expert'
+  }
+  return 'beginner'
 }
 
 export function buildStudentState(input: StudentStateInput): StudentState {

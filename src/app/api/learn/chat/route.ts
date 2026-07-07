@@ -21,9 +21,10 @@ import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 import {
-  assembleLesson, buildStudentState, ingestGeneratedLesson, isExplanationMemoryEnabled,
+  assembleLesson, buildStudentState, ingestGeneratedLesson, isExplanationMemoryEnabled, resolveContentRegister,
   type StudentState, type AssembledLesson,
 } from '@/lib/teaching/assets'
+import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -277,6 +278,15 @@ export async function POST(req: Request) {
     // can silently disagree with teachingLanguage (e.g. legacy profiles from
     // before the country field existed), which used to skip Yandex entirely.
     const country = teachingLang === 'ru' ? 'ru' : profileCountry
+    // Drives NOTATION RULES in buildTutorSystemPrompt (IPA/phonetic notation
+    // gating) — derived only from level/grade, never from subject, so it
+    // applies uniformly whether the student is doing English phonics, math,
+    // or anything else.
+    const contentRegister = resolveContentRegister({
+      grade: profile?.grade,
+      currentLevel: profile?.currentLevel,
+      targetLevel: (profile as any)?.targetLevel,
+    })
     let systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.displayName ?? session.user.name ?? 'Student',
@@ -286,6 +296,7 @@ export async function POST(req: Request) {
       teachingLang,
       lessonCtx,
       learnSession.subject.type,
+      contentRegister,
     )
 
     // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
@@ -1669,6 +1680,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         cleanText = parsedHint.cleanText
         hintHoisted = hintBiasHoisted === 'SUPPRESSED' ? null : parsedHint.hint
       } catch { /* non-fatal */ }
+
+      // Beginner IPA/phonetic-notation safety net: buildTutorSystemPrompt's
+      // NOTATION RULES block (gated on contentRegister above) is the primary
+      // fix — this catches the rare case where the model ignores it anyway,
+      // for beginners only. Intermediate/expert responses are left untouched
+      // since IPA is allowed (optionally/fully) at those registers.
+      if (contentRegister === 'beginner') {
+        cleanText = stripIpaNotation(cleanText)
+      }
 
       // Sprint C/H: deterministic, rule-based visual detection on the final
       // tutor text, now routed through the Teaching Strategy Engine (Sprint H)

@@ -3,7 +3,7 @@
  * Route.ts and admin API routes should import from here rather than reaching
  * into individual files directly.
  */
-export { buildStudentState, gradeToGradeBand, type StudentState, type StudentStateInput } from './studentState'
+export { buildStudentState, gradeToGradeBand, resolveContentRegister, type StudentState, type StudentStateInput } from './studentState'
 export { scoreMatch, pickBest, DEFAULT_CONFIDENCE_THRESHOLD, type MatchableAsset, type MatchOptions } from './matcher'
 export {
   findBestExplanation, captureGeneratedExplanation, listExplanationsForReview, reviewExplanationAsset,
