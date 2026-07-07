@@ -12,6 +12,7 @@ import tokenStyles from '@/components/ui/candy/tokens.module.css'
 export function MarkChapterCompleteButton({ subject, chapterId }: { subject: string; chapterId: string }) {
   const router = useRouter()
   const [state, setState] = useState<'idle' | 'saving' | 'done' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const fireConfetti = useConfetti()
 
   async function handleClick() {
@@ -29,9 +30,11 @@ export function MarkChapterCompleteButton({ subject, chapterId }: { subject: str
         router.refresh()
       } else {
         setState('error')
+        setErrorMessage(typeof d.error === 'string' ? d.error : null)
       }
     } catch {
       setState('error')
+      setErrorMessage(null)
     }
   }
 
@@ -53,8 +56,11 @@ export function MarkChapterCompleteButton({ subject, chapterId }: { subject: str
           opacity: saving ? 0.7 : 1,
         }}>
         {saving ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />}
-        {done ? 'Completed!' : saving ? 'Saving…' : state === 'error' ? 'Failed — tap to retry' : 'Mark as complete'}
+        {done ? 'Completed!' : saving ? 'Saving…' : state === 'error' ? 'Not yet — tap to retry' : 'Mark as complete'}
       </CandyButton>
+      {state === 'error' && errorMessage && (
+        <p style={{ marginTop: 8, fontSize: 12, color: 'var(--candy-red)', maxWidth: 320 }}>{errorMessage}</p>
+      )}
     </span>
   )
 }
