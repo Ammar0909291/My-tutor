@@ -1,0 +1,856 @@
+{
+  "domain_id": "real-analysis",
+  "domain_name": "Real Analysis",
+  "id_prefix": "math.real",
+  "level_range": [
+    5,
+    7
+  ],
+  "description": "The rigorous study of the real number system, sequences, series, continuity, differentiation, and integration using \u03b5-\u03b4 methods. Provides the theoretical foundation for calculus and functional analysis.",
+  "concepts": [
+    {
+      "id": "math.real.completeness",
+      "name": "Completeness of \u211d",
+      "aliases": [
+        "completeness axiom",
+        "least upper bound property",
+        "supremum"
+      ],
+      "parent": null,
+      "children": [
+        "math.real.sup-inf"
+      ],
+      "requires": [
+        "math.found.real-numbers",
+        "math.found.total-order"
+      ],
+      "unlocks": [
+        "math.real.sup-inf",
+        "math.real.archimedean"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.fnal.completeness"
+      ],
+      "description": "Every non-empty subset of \u211d bounded above has a supremum (least upper bound). Equivalently: every Cauchy sequence in \u211d converges. This is what distinguishes \u211d from \u211a and is the basis of all convergence arguments.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.1; Abbot, Understanding Analysis, Ch.1"
+      ]
+    },
+    {
+      "id": "math.real.sup-inf",
+      "name": "Supremum and Infimum",
+      "aliases": [
+        "least upper bound",
+        "greatest lower bound",
+        "sup",
+        "inf"
+      ],
+      "parent": "math.real.completeness",
+      "children": [],
+      "requires": [
+        "math.real.completeness"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "sup(S) = least upper bound of S; inf(S) = greatest lower bound. For bounded sets: sup/inf always exist in \u211d (completeness). sup is attained iff it is a maximum; similarly for inf.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a71.7\u20131.10"
+      ]
+    },
+    {
+      "id": "math.real.archimedean",
+      "name": "Archimedean Property",
+      "aliases": [
+        "Archimedean property of \u211d"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.completeness"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "For any real x, there exists a natural number n with n>x. Equivalently: the naturals are unbounded in \u211d. Corollary: \u211a is dense in \u211d (between any two reals there is a rational).",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a71.20"
+      ]
+    },
+    {
+      "id": "math.real.convergence-sequences",
+      "name": "Convergence of Sequences",
+      "aliases": [
+        "limit of sequence",
+        "\u03b5-N definition"
+      ],
+      "parent": null,
+      "children": [
+        "math.real.cauchy-sequence"
+      ],
+      "requires": [
+        "math.real.completeness",
+        "math.seq.sequence"
+      ],
+      "unlocks": [
+        "math.real.cauchy-sequence",
+        "math.real.series-rigorous"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.seq.series-convergence"
+      ],
+      "description": "Rigorous definition: a\u2099\u2192L iff \u2200\u03b5>0, \u2203N: n>N \u27f9 |a\u2099\u2212L|<\u03b5. Sequence properties: convergent \u27f9 bounded; limit laws; Bolzano-Weierstrass (every bounded sequence has a convergent subsequence).",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.3; Abbot, Understanding Analysis, Ch.2"
+      ]
+    },
+    {
+      "id": "math.real.cauchy-sequence",
+      "name": "Cauchy Sequence",
+      "aliases": [
+        "Cauchy criterion"
+      ],
+      "parent": "math.real.convergence-sequences",
+      "children": [],
+      "requires": [
+        "math.real.convergence-sequences"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.fnal.completeness"
+      ],
+      "description": "A sequence where terms become arbitrarily close: \u2200\u03b5>0, \u2203N: m,n>N \u27f9 |a\u2098\u2212a\u2099|<\u03b5. In \u211d: Cauchy \u27fa convergent (completeness). Foundation for defining completeness in metric spaces.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a73.11"
+      ]
+    },
+    {
+      "id": "math.real.series-rigorous",
+      "name": "Series (Rigorous)",
+      "aliases": [
+        "convergence of series",
+        "absolute convergence"
+      ],
+      "parent": null,
+      "children": [
+        "math.real.absolute-convergence"
+      ],
+      "requires": [
+        "math.real.convergence-sequences",
+        "math.seq.series"
+      ],
+      "unlocks": [
+        "math.real.absolute-convergence"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.seq.comparison-test"
+      ],
+      "description": "Rigorous treatment: \u2211a\u2099 converges iff partial sums form a Cauchy sequence. Absolute convergence (\u2211|a\u2099|<\u221e) implies convergence and rearrangement invariance. Conditional convergence is rearrangement-sensitive (Riemann rearrangement theorem).",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.3; Abbot, Understanding Analysis, Ch.2"
+      ]
+    },
+    {
+      "id": "math.real.absolute-convergence",
+      "name": "Absolute Convergence",
+      "aliases": [
+        "absolutely convergent"
+      ],
+      "parent": "math.real.series-rigorous",
+      "children": [],
+      "requires": [
+        "math.real.series-rigorous"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.seq.absolute-convergence"
+      ],
+      "description": "\u2211a\u2099 absolutely converges iff \u2211|a\u2099| converges. Implies convergence of \u2211a\u2099. Absolutely convergent series may be rearranged to any order without changing the sum. Conditionally convergent series can be rearranged to any value.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a73.47"
+      ]
+    },
+    {
+      "id": "math.real.metric-space",
+      "name": "Metric Space",
+      "aliases": [
+        "metric",
+        "distance function",
+        "(X,d)"
+      ],
+      "parent": null,
+      "children": [
+        "math.real.open-sets",
+        "math.real.completeness-metric"
+      ],
+      "requires": [
+        "math.found.set-theory",
+        "math.found.real-numbers"
+      ],
+      "unlocks": [
+        "math.real.open-sets",
+        "math.real.completeness-metric",
+        "math.real.compactness"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.top.topological-space",
+        "math.fnal.normed-space"
+      ],
+      "description": "A set X with a metric d:X\u00d7X\u2192\u211d\u22650 satisfying: d(x,y)=0\u27fax=y, symmetry, triangle inequality. Examples: \u211d\u207f (Euclidean), C([a,b]) (sup metric), discrete metric. Generalizes real analysis to abstract spaces.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.2; Munkres, Topology, Ch.2"
+      ]
+    },
+    {
+      "id": "math.real.open-sets",
+      "name": "Open and Closed Sets",
+      "aliases": [
+        "open set",
+        "closed set",
+        "interior",
+        "closure"
+      ],
+      "parent": "math.real.metric-space",
+      "children": [],
+      "requires": [
+        "math.real.metric-space"
+      ],
+      "unlocks": [
+        "math.real.compactness",
+        "math.real.connectedness"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.top.open-sets"
+      ],
+      "description": "Open ball: B(x,r)={y:d(x,y)<r}. Open set: every point is interior (surrounded by an open ball inside the set). Closed set: complement is open, equivalently contains all its limit points. Closure: smallest closed set containing S.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a72.18\u20132.26"
+      ]
+    },
+    {
+      "id": "math.real.completeness-metric",
+      "name": "Completeness of Metric Spaces",
+      "aliases": [
+        "complete metric space",
+        "Banach space (completeness)"
+      ],
+      "parent": "math.real.metric-space",
+      "children": [],
+      "requires": [
+        "math.real.metric-space",
+        "math.real.cauchy-sequence"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.fnal.completeness"
+      ],
+      "description": "A metric space is complete iff every Cauchy sequence converges. \u211d\u207f is complete; \u211a is not. Completion: every metric space embeds densely into a complete space. The Baire category theorem holds in complete metric spaces.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a73.11"
+      ]
+    },
+    {
+      "id": "math.real.compactness",
+      "name": "Compactness",
+      "aliases": [
+        "compact set",
+        "Heine-Borel theorem",
+        "sequential compactness"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.open-sets"
+      ],
+      "unlocks": [
+        "math.real.extreme-value-theorem"
+      ],
+      "related": [
+        "math.real.connectedness"
+      ],
+      "cross_links": [
+        "math.top.compactness"
+      ],
+      "description": "A set K is compact if every open cover has a finite subcover. Heine-Borel (in \u211d\u207f): compact \u27fa closed and bounded. Sequential compactness: every sequence has a convergent subsequence (equivalent in metric spaces).",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a72.31; Munkres, Topology, Ch.3"
+      ]
+    },
+    {
+      "id": "math.real.connectedness",
+      "name": "Connectedness",
+      "aliases": [
+        "connected set",
+        "path-connected"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.open-sets"
+      ],
+      "unlocks": [
+        "math.real.ivt"
+      ],
+      "related": [
+        "math.real.compactness"
+      ],
+      "cross_links": [
+        "math.top.connectedness"
+      ],
+      "description": "A set E is connected if it cannot be written as the union of two non-empty separated sets. Intervals in \u211d are the only connected subsets. Preserved under continuous maps. Intermediate Value Theorem: consequence of connectedness.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a72.45"
+      ]
+    },
+    {
+      "id": "math.real.continuity-rigorous",
+      "name": "Continuity (\u03b5-\u03b4)",
+      "aliases": [
+        "epsilon-delta continuity",
+        "\u03b5-\u03b4 definition"
+      ],
+      "parent": null,
+      "children": [
+        "math.real.uniform-continuity",
+        "math.real.lipschitz-continuity"
+      ],
+      "requires": [
+        "math.real.metric-space",
+        "math.calc.continuity"
+      ],
+      "unlocks": [
+        "math.real.extreme-value-theorem",
+        "math.real.ivt"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.calc.continuity"
+      ],
+      "description": "f is continuous at a iff \u2200\u03b5>0, \u2203\u03b4>0: |x\u2212a|<\u03b4 \u27f9 |f(x)\u2212f(a)|<\u03b5. Equivalently: sequences x\u2099\u2192a \u27f9 f(x\u2099)\u2192f(a). In metric spaces: preimages of open sets are open.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.4; Abbot, Understanding Analysis, Ch.4"
+      ]
+    },
+    {
+      "id": "math.real.uniform-continuity",
+      "name": "Uniform Continuity",
+      "aliases": [
+        "uniformly continuous"
+      ],
+      "parent": "math.real.continuity-rigorous",
+      "children": [],
+      "requires": [
+        "math.real.continuity-rigorous"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.real.lipschitz-continuity"
+      ],
+      "cross_links": [],
+      "description": "f is uniformly continuous on E iff \u2200\u03b5>0, \u2203\u03b4>0: |x\u2212y|<\u03b4 \u27f9 |f(x)\u2212f(y)|<\u03b5 (\u03b4 depends only on \u03b5, not on x). Every continuous function on a compact set is uniformly continuous (Heine-Cantor theorem).",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a74.18"
+      ]
+    },
+    {
+      "id": "math.real.lipschitz-continuity",
+      "name": "Lipschitz Continuity",
+      "aliases": [
+        "Lipschitz condition"
+      ],
+      "parent": "math.real.continuity-rigorous",
+      "children": [],
+      "requires": [
+        "math.real.uniform-continuity"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.de.existence-uniqueness"
+      ],
+      "description": "|f(x)\u2212f(y)| \u2264 L|x\u2212y| for some constant L (Lipschitz constant). Lipschitz \u27f9 uniformly continuous \u27f9 continuous. Important in ODE existence-uniqueness (Picard-Lindel\u00f6f) and optimization.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a74; Royden, Real Analysis, Ch.5"
+      ]
+    },
+    {
+      "id": "math.real.extreme-value-theorem",
+      "name": "Extreme Value Theorem",
+      "aliases": [
+        "EVT",
+        "Weierstrass extreme value theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.compactness",
+        "math.real.continuity-rigorous"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.calc.optimization"
+      ],
+      "description": "A continuous function on a compact (closed, bounded in \u211d\u207f) set attains its maximum and minimum. Proof: image of compact set under continuous map is compact; compact sets in \u211d have a max and min.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a74.16"
+      ]
+    },
+    {
+      "id": "math.real.ivt",
+      "name": "Intermediate Value Theorem (Rigorous)",
+      "aliases": [
+        "IVT",
+        "Bolzano's theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.connectedness",
+        "math.real.continuity-rigorous"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.calc.ivt"
+      ],
+      "description": "If f:[a,b]\u2192\u211d is continuous and f(a)<c<f(b), then \u2203x\u2208(a,b) with f(x)=c. Proof: connected image of connected set is connected; connected subsets of \u211d are intervals.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a74.23; Abbot, Understanding Analysis, \u00a74.5"
+      ]
+    },
+    {
+      "id": "math.real.differentiability-rigorous",
+      "name": "Differentiability (Rigorous)",
+      "aliases": [
+        "derivative definition",
+        "differentiable function"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.continuity-rigorous",
+        "math.calc.derivative-definition"
+      ],
+      "unlocks": [
+        "math.real.mvt",
+        "math.real.taylor-rigorous"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.calc.derivative-definition"
+      ],
+      "description": "f\u2032(a) = lim_{h\u21920} [f(a+h)\u2212f(a)]/h. Differentiable \u27f9 continuous; converse fails (|x| at 0). In \u211d\u207f: total derivative Df(a) is a linear map; differentiable implies all partials exist but not conversely.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.5"
+      ]
+    },
+    {
+      "id": "math.real.mvt",
+      "name": "Mean Value Theorem (Rigorous)",
+      "aliases": [
+        "MVT"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.differentiability-rigorous"
+      ],
+      "unlocks": [
+        "math.real.taylor-rigorous"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.calc.mean-value-theorem"
+      ],
+      "description": "If f:[a,b]\u2192\u211d is continuous, differentiable on (a,b), then \u2203c\u2208(a,b) with f\u2032(c)=(f(b)\u2212f(a))/(b\u2212a). Proved via Rolle's theorem. Fundamental tool: f\u2032=0 on interval \u27f9 f constant.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a75.10"
+      ]
+    },
+    {
+      "id": "math.real.taylor-rigorous",
+      "name": "Taylor's Theorem (Rigorous)",
+      "aliases": [
+        "Taylor's theorem with remainder"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.mvt"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.calc.taylor-series"
+      ],
+      "description": "f(x) = \u2211_{k=0}^n f^{(k)}(a)/k! (x\u2212a)^k + R_n(x) where the Lagrange remainder R_n(x) = f^{(n+1)}(c)/(n+1)! (x\u2212a)^{n+1} for some c between a and x. Gives quantitative error bounds for polynomial approximations.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a75.15"
+      ]
+    },
+    {
+      "id": "math.real.riemann-integral",
+      "name": "Riemann Integral (Rigorous)",
+      "aliases": [
+        "Riemann sum",
+        "Darboux integral"
+      ],
+      "parent": null,
+      "children": [
+        "math.real.riemann-integrability"
+      ],
+      "requires": [
+        "math.real.continuity-rigorous",
+        "math.calc.definite-integral"
+      ],
+      "unlocks": [
+        "math.real.riemann-integrability",
+        "math.real.ftc-rigorous"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.meas.lebesgue-integral"
+      ],
+      "description": "Partition P of [a,b]; upper/lower Darboux sums U(f,P) and L(f,P). f is Riemann integrable iff inf U(f,P) = sup L(f,P). Riemann integrable functions are bounded; continuous functions are integrable.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.6; Abbot, Understanding Analysis, Ch.7"
+      ]
+    },
+    {
+      "id": "math.real.riemann-integrability",
+      "name": "Riemann Integrability",
+      "aliases": [
+        "Lebesgue criterion for Riemann integrability"
+      ],
+      "parent": "math.real.riemann-integral",
+      "children": [],
+      "requires": [
+        "math.real.riemann-integral"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.meas.measure-zero"
+      ],
+      "description": "f is Riemann integrable on [a,b] iff f is bounded and its set of discontinuities has Lebesgue measure zero. Continuous functions and monotone functions are integrable. A function with infinitely many discontinuities can still be integrable.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Royden, Real Analysis, Ch.4"
+      ]
+    },
+    {
+      "id": "math.real.ftc-rigorous",
+      "name": "Fundamental Theorem of Calculus (Rigorous)",
+      "aliases": [
+        "FTC Part 1 and 2"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.riemann-integral",
+        "math.real.differentiability-rigorous"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.calc.ftc-part1"
+      ],
+      "description": "Part 1: If f integrable and F(x)=\u222b_a^x f, then F is Lipschitz; if f continuous at x\u2080 then F\u2032(x\u2080)=f(x\u2080). Part 2: If F is an antiderivative of f, then \u222b_a^b f = F(b)\u2212F(a). Proof uses the MVT and Riemann sum properties.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a76.20; Abbot, Understanding Analysis, Ch.7"
+      ]
+    },
+    {
+      "id": "math.real.uniform-convergence",
+      "name": "Uniform Convergence",
+      "aliases": [
+        "uniformly convergent sequence of functions"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.continuity-rigorous",
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [
+        "math.real.weierstrass-approximation"
+      ],
+      "related": [
+        "math.real.pointwise-convergence"
+      ],
+      "cross_links": [
+        "math.de.fourier-convergence"
+      ],
+      "description": "f\u2099\u2192f uniformly on E iff \u2200\u03b5>0, \u2203N: n>N \u27f9 sup_{x\u2208E}|f\u2099(x)\u2212f(x)|<\u03b5. Uniform limit of continuous functions is continuous; integrates termwise; differentiates termwise if derivatives converge uniformly.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, Ch.7; Abbot, Understanding Analysis, Ch.6"
+      ]
+    },
+    {
+      "id": "math.real.pointwise-convergence",
+      "name": "Pointwise Convergence",
+      "aliases": [
+        "pointwise limit"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.convergence-sequences"
+      ],
+      "unlocks": [
+        "math.real.uniform-convergence"
+      ],
+      "related": [
+        "math.real.uniform-convergence"
+      ],
+      "cross_links": [],
+      "description": "f\u2099\u2192f pointwise on E iff \u2200x\u2208E, \u2200\u03b5>0, \u2203N(x,\u03b5): n>N \u27f9 |f\u2099(x)\u2212f(x)|<\u03b5. Weaker than uniform convergence; the limit of continuous functions need not be continuous. Dini's theorem: monotone pointwise limit on compact set is uniform.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a77.1"
+      ]
+    },
+    {
+      "id": "math.real.weierstrass-approximation",
+      "name": "Weierstrass Approximation Theorem",
+      "aliases": [
+        "Stone-Weierstrass theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.uniform-convergence",
+        "math.real.compactness"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.fnal.dense-subspace"
+      ],
+      "description": "Every continuous function on [a,b] can be uniformly approximated by polynomials. Proved by Bernstein polynomials. Stone-Weierstrass generalizes to compact Hausdorff spaces with algebras separating points.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a77.26; Rudin, Real and Complex Analysis, Ch.5"
+      ]
+    },
+    {
+      "id": "math.real.fixed-point-theorem",
+      "name": "Banach Fixed-Point Theorem",
+      "aliases": [
+        "contraction mapping theorem",
+        "fixed point theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.lipschitz-continuity",
+        "math.real.completeness-metric"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.de.existence-uniqueness"
+      ],
+      "description": "A contraction mapping T on a complete metric space (|d(Tx,Ty)| \u2264 k\u00b7d(x,y), k<1) has a unique fixed point, attained in the limit of iterated applications T^n(x\u2080). Used to prove ODE existence-uniqueness (Picard iteration).",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a79.23 (implicit function); Coddington & Levinson, Ch.1"
+      ]
+    },
+    {
+      "id": "math.real.baire-category",
+      "name": "Baire Category Theorem",
+      "aliases": [
+        "Baire category",
+        "meager set",
+        "residual set"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.completeness-metric",
+        "math.real.open-sets"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.fnal.open-mapping-theorem"
+      ],
+      "description": "A complete metric space cannot be written as a countable union of nowhere dense sets. Equivalently: a countable intersection of dense open sets is dense. Key consequence: functions with everywhere-defined derivative cannot be continuous but nowhere differentiable (wait \u2014 no: Baire implies such functions exist and form a residual set).",
+      "difficulty": "research",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a75.6; Royden, Real Analysis, Ch.7"
+      ]
+    },
+    {
+      "id": "math.real.implicit-function-theorem",
+      "name": "Implicit Function Theorem",
+      "aliases": [
+        "IFT"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.differentiability-rigorous",
+        "math.linalg.matrix-inverse"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.real.inverse-function-theorem"
+      ],
+      "cross_links": [
+        "math.calc.implicit-differentiation"
+      ],
+      "description": "If F:\u211d\u207f\u00d7\u211d\u1d50\u2192\u211d\u1d50 is C\u00b9 and F(a,b)=0 with \u2202F/\u2202y invertible at (a,b), then locally y is a C\u00b9 function of x with y(a)=b. Used to solve equations implicitly near known solutions.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a79.28; Munkres, Analysis on Manifolds"
+      ]
+    },
+    {
+      "id": "math.real.inverse-function-theorem",
+      "name": "Inverse Function Theorem",
+      "aliases": [
+        "IFT for inverse functions"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.real.differentiability-rigorous",
+        "math.linalg.matrix-inverse"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.real.implicit-function-theorem"
+      ],
+      "cross_links": [],
+      "description": "If f:\u211d\u207f\u2192\u211d\u207f is C\u00b9 and Df(a) is invertible, then f is locally invertible near a with C\u00b9 inverse satisfying D(f\u207b\u00b9)(f(a)) = [Df(a)]\u207b\u00b9. Proved using the Banach fixed-point theorem.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin, Principles of Mathematical Analysis, \u00a79.24"
+      ]
+    }
+  ]
+}

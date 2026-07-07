@@ -1,0 +1,6158 @@
+{
+  "name": "Physics Knowledge Graph",
+  "version": "1.0.0",
+  "status": "production",
+  "build_date": "2026-06-29",
+  "statistics": {
+    "total_concepts": 216,
+    "total_domains": 11,
+    "total_requires_edges": 266,
+    "total_unlocks_edges": 266,
+    "total_cross_links": 0
+  },
+  "domains": [
+    {
+      "key": "meas",
+      "name": "Measurement & Units",
+      "count": 8
+    },
+    {
+      "key": "mech",
+      "name": "Classical Mechanics",
+      "count": 60
+    },
+    {
+      "key": "therm",
+      "name": "Thermodynamics",
+      "count": 18
+    },
+    {
+      "key": "wave",
+      "name": "Waves & Oscillations",
+      "count": 17
+    },
+    {
+      "key": "opt",
+      "name": "Optics",
+      "count": 15
+    },
+    {
+      "key": "em",
+      "name": "Electromagnetism",
+      "count": 35
+    },
+    {
+      "key": "mod",
+      "name": "Modern Physics",
+      "count": 15
+    },
+    {
+      "key": "qm",
+      "name": "Quantum Mechanics",
+      "count": 19
+    },
+    {
+      "key": "rel",
+      "name": "Special Relativity",
+      "count": 8
+    },
+    {
+      "key": "stat",
+      "name": "Statistical Mechanics",
+      "count": 15
+    },
+    {
+      "key": "astro",
+      "name": "Astrophysics",
+      "count": 6
+    }
+  ],
+  "concepts": [
+    {
+      "id": "phys.meas.units",
+      "name": "SI Units and Measurement",
+      "aliases": [
+        "SI system",
+        "metric units"
+      ],
+      "parent": null,
+      "requires": [],
+      "related": [
+        "phys.meas.unit-conversion"
+      ],
+      "cross_links": [],
+      "description": "The International System of Units defines seven base units used to express all physical quantities.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 11 Ch.2",
+        "Halliday Resnick Ch.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.electric-charge",
+        "phys.meas.dimensions",
+        "phys.meas.errors",
+        "phys.meas.scalars-vectors",
+        "phys.meas.unit-conversion",
+        "phys.mech.displacement",
+        "phys.therm.temperature",
+        "phys.wave.wave-properties"
+      ]
+    },
+    {
+      "id": "phys.meas.scalars-vectors",
+      "name": "Scalar and Vector Quantities",
+      "aliases": [
+        "scalars",
+        "vectors"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.meas.vector-addition"
+      ],
+      "cross_links": [],
+      "description": "Scalars have magnitude only while vectors have both magnitude and direction.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 11 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.meas.vector-addition",
+        "phys.mech.force"
+      ]
+    },
+    {
+      "id": "phys.meas.dimensions",
+      "name": "Dimensional Analysis",
+      "aliases": [
+        "dimensional formula",
+        "dimensions"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Dimensional analysis checks the consistency of equations by examining the dimensions of each term.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.meas.errors",
+      "name": "Measurement Errors and Uncertainty",
+      "aliases": [
+        "experimental error",
+        "uncertainty"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.meas.significant-figures"
+      ],
+      "cross_links": [],
+      "description": "Measurement errors quantify the deviation of a measured value from the true value.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.2"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.meas.significant-figures"
+      ]
+    },
+    {
+      "id": "phys.meas.significant-figures",
+      "name": "Significant Figures and Precision",
+      "aliases": [
+        "sig figs",
+        "significant digits"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.errors"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Significant figures indicate the precision of a measurement by specifying which digits are meaningful.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.meas.vector-addition",
+      "name": "Vector Addition and Resolution",
+      "aliases": [
+        "vector decomposition",
+        "component method"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.scalars-vectors"
+      ],
+      "related": [
+        "phys.meas.vector-products"
+      ],
+      "cross_links": [],
+      "description": "Vectors are added by the parallelogram law or by resolving them into orthogonal components.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.meas.vector-products",
+        "phys.mech.kinematics-2d"
+      ]
+    },
+    {
+      "id": "phys.meas.vector-products",
+      "name": "Dot and Cross Products",
+      "aliases": [
+        "scalar product",
+        "vector product"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.vector-addition"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The dot product yields a scalar and the cross product yields a vector perpendicular to both operands.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.4",
+        "H.C. Verma Vol.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.torque",
+        "phys.mech.work"
+      ]
+    },
+    {
+      "id": "phys.meas.unit-conversion",
+      "name": "Unit Conversion and Prefixes",
+      "aliases": [
+        "SI prefixes",
+        "unit conversion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.meas.dimensions"
+      ],
+      "cross_links": [],
+      "description": "Unit conversion uses multiplicative factors or SI prefixes to express quantities in different units.",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 11 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.displacement",
+      "name": "Displacement and Distance",
+      "aliases": [
+        "displacement",
+        "distance"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.mech.velocity"
+      ],
+      "cross_links": [],
+      "description": "Displacement is the vector change in position while distance is the total scalar path length.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 9 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.velocity"
+      ]
+    },
+    {
+      "id": "phys.mech.velocity",
+      "name": "Speed and Velocity",
+      "aliases": [
+        "speed",
+        "velocity",
+        "average velocity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.displacement"
+      ],
+      "related": [
+        "phys.mech.acceleration"
+      ],
+      "cross_links": [],
+      "description": "Velocity is the rate of change of displacement with time; speed is its scalar counterpart.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 9 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.acceleration"
+      ]
+    },
+    {
+      "id": "phys.mech.acceleration",
+      "name": "Acceleration",
+      "aliases": [
+        "uniform acceleration",
+        "instantaneous acceleration"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.velocity"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Acceleration is the rate of change of velocity with respect to time.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 9 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.kinematics-1d"
+      ]
+    },
+    {
+      "id": "phys.mech.kinematics-1d",
+      "name": "Kinematics in One Dimension",
+      "aliases": [
+        "1D kinematics",
+        "equations of motion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.acceleration"
+      ],
+      "related": [
+        "phys.mech.kinematics-2d"
+      ],
+      "cross_links": [],
+      "description": "Kinematic equations relate displacement, velocity, acceleration and time for uniform acceleration in one dimension.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.angular-kinematics",
+        "phys.mech.kinematics-2d",
+        "phys.mech.newtons-second-law"
+      ]
+    },
+    {
+      "id": "phys.mech.kinematics-2d",
+      "name": "Kinematics in Two Dimensions",
+      "aliases": [
+        "2D kinematics",
+        "motion in a plane"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinematics-1d",
+        "phys.meas.vector-addition"
+      ],
+      "related": [
+        "phys.mech.projectile-motion"
+      ],
+      "cross_links": [],
+      "description": "Two-dimensional kinematics applies vector decomposition to analyse motion in a plane.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.circular-motion",
+        "phys.mech.projectile-motion",
+        "phys.mech.relative-motion",
+        "phys.mech.generalized-coordinates"
+      ]
+    },
+    {
+      "id": "phys.mech.projectile-motion",
+      "name": "Projectile Motion",
+      "aliases": [
+        "projectile",
+        "trajectory"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinematics-2d"
+      ],
+      "related": [
+        "phys.mech.circular-motion"
+      ],
+      "cross_links": [],
+      "description": "Projectile motion combines uniform horizontal velocity with uniformly accelerated vertical motion under gravity.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.4"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.relative-motion",
+      "name": "Relative Motion and Reference Frames",
+      "aliases": [
+        "relative velocity",
+        "frames of reference"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinematics-2d"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Relative motion describes the velocity and position of one object as observed from a moving reference frame.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.postulates"
+      ]
+    },
+    {
+      "id": "phys.mech.circular-motion",
+      "name": "Uniform Circular Motion",
+      "aliases": [
+        "centripetal acceleration",
+        "circular motion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinematics-2d",
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.mech.angular-kinematics"
+      ],
+      "cross_links": [],
+      "description": "Uniform circular motion involves constant speed along a circular path with centripetal acceleration directed toward the centre.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.angular-kinematics",
+        "phys.mech.orbital-mechanics"
+      ]
+    },
+    {
+      "id": "phys.mech.force",
+      "name": "Force and Interaction",
+      "aliases": [
+        "force",
+        "contact force",
+        "field force"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.scalars-vectors"
+      ],
+      "related": [
+        "phys.mech.newtons-first-law"
+      ],
+      "cross_links": [],
+      "description": "A force is a vector quantity representing an interaction that can change an object's state of motion.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 9 Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.newtons-first-law",
+        "phys.mech.newtons-second-law"
+      ]
+    },
+    {
+      "id": "phys.mech.newtons-first-law",
+      "name": "Newton's First Law \u2014 Inertia",
+      "aliases": [
+        "law of inertia",
+        "first law"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.force"
+      ],
+      "related": [
+        "phys.mech.newtons-second-law"
+      ],
+      "cross_links": [],
+      "description": "An object remains at rest or in uniform motion unless acted upon by a net external force.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 9 Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.equilibrium"
+      ]
+    },
+    {
+      "id": "phys.mech.newtons-second-law",
+      "name": "Newton's Second Law \u2014 F=ma",
+      "aliases": [
+        "second law",
+        "F=ma"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinematics-1d",
+        "phys.mech.force"
+      ],
+      "related": [
+        "phys.mech.newtons-third-law"
+      ],
+      "cross_links": [],
+      "description": "The net force on a body equals the product of its mass and acceleration: F = ma.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 9 Ch.9",
+        "H.C. Verma Vol.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.circular-motion",
+        "phys.mech.free-body-diagram",
+        "phys.mech.hookes-law",
+        "phys.mech.momentum",
+        "phys.mech.newtons-third-law",
+        "phys.mech.pressure-fluids",
+        "phys.mech.universal-gravitation",
+        "phys.mech.work",
+        "phys.wave.shm"
+      ]
+    },
+    {
+      "id": "phys.mech.newtons-third-law",
+      "name": "Newton's Third Law \u2014 Action-Reaction",
+      "aliases": [
+        "third law",
+        "action-reaction"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "For every action force there is an equal and opposite reaction force acting on a different body.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 9 Ch.9"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.free-body-diagram",
+      "name": "Free Body Diagrams",
+      "aliases": [
+        "FBD",
+        "force diagram"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.mech.friction",
+        "phys.mech.tension"
+      ],
+      "cross_links": [],
+      "description": "A free body diagram isolates a body and represents all external forces acting on it as vectors.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.friction",
+        "phys.mech.normal-force",
+        "phys.mech.tension"
+      ]
+    },
+    {
+      "id": "phys.mech.friction",
+      "name": "Friction Forces",
+      "aliases": [
+        "static friction",
+        "kinetic friction",
+        "friction"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.free-body-diagram"
+      ],
+      "related": [
+        "phys.mech.inclined-plane"
+      ],
+      "cross_links": [],
+      "description": "Friction is a contact force that opposes relative motion between surfaces in contact.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.inclined-plane"
+      ]
+    },
+    {
+      "id": "phys.mech.tension",
+      "name": "Tension in Strings and Ropes",
+      "aliases": [
+        "tension",
+        "string tension"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.free-body-diagram"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Tension is the pulling force transmitted through a string or rope connecting objects.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.normal-force",
+      "name": "Normal Force and Constraint Forces",
+      "aliases": [
+        "normal force",
+        "constraint force"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.free-body-diagram"
+      ],
+      "related": [
+        "phys.mech.friction"
+      ],
+      "cross_links": [],
+      "description": "The normal force is the perpendicular contact force exerted by a surface on an object resting on it.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.inclined-plane"
+      ]
+    },
+    {
+      "id": "phys.mech.inclined-plane",
+      "name": "Motion on Inclined Planes",
+      "aliases": [
+        "inclined plane",
+        "ramp"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.friction",
+        "phys.mech.normal-force"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Motion on an inclined plane is analysed by resolving gravitational and normal forces along and perpendicular to the slope.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.work",
+      "name": "Work Done by a Force",
+      "aliases": [
+        "work",
+        "mechanical work"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law",
+        "phys.meas.vector-products"
+      ],
+      "related": [
+        "phys.mech.kinetic-energy"
+      ],
+      "cross_links": [],
+      "description": "Work is the scalar product of force and displacement, measuring energy transfer by a force.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.kinetic-energy",
+        "phys.mech.potential-energy",
+        "phys.mech.power",
+        "phys.therm.first-law"
+      ]
+    },
+    {
+      "id": "phys.mech.kinetic-energy",
+      "name": "Kinetic Energy",
+      "aliases": [
+        "KE",
+        "translational KE"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.work"
+      ],
+      "related": [
+        "phys.mech.potential-energy"
+      ],
+      "cross_links": [],
+      "description": "Kinetic energy is the energy possessed by an object due to its motion, equal to \u00bdmv\u00b2.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.collisions-elastic",
+        "phys.mech.conservation-of-energy",
+        "phys.mech.rolling-motion",
+        "phys.mech.work-energy-theorem"
+      ]
+    },
+    {
+      "id": "phys.mech.potential-energy",
+      "name": "Potential Energy",
+      "aliases": [
+        "PE",
+        "gravitational PE",
+        "elastic PE"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.work"
+      ],
+      "related": [
+        "phys.mech.kinetic-energy"
+      ],
+      "cross_links": [],
+      "description": "Potential energy is stored energy associated with an object's position in a conservative force field.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.conservation-of-energy",
+        "phys.mech.gravitational-potential"
+      ]
+    },
+    {
+      "id": "phys.mech.work-energy-theorem",
+      "name": "Work-Energy Theorem",
+      "aliases": [
+        "work-energy principle"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinetic-energy"
+      ],
+      "related": [
+        "phys.mech.conservation-of-energy"
+      ],
+      "cross_links": [],
+      "description": "The net work done on an object equals the change in its kinetic energy.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.conservation-of-energy",
+      "name": "Conservation of Mechanical Energy",
+      "aliases": [
+        "energy conservation",
+        "mechanical energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinetic-energy",
+        "phys.mech.potential-energy"
+      ],
+      "related": [
+        "phys.mech.conservative-forces"
+      ],
+      "cross_links": [],
+      "description": "In the absence of non-conservative forces, the total mechanical energy of a system remains constant.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.bernoulli",
+        "phys.mech.conservative-forces",
+        "phys.mech.escape-velocity"
+      ]
+    },
+    {
+      "id": "phys.mech.power",
+      "name": "Power",
+      "aliases": [
+        "mechanical power",
+        "rate of work"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.work"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Power is the rate at which work is done or energy is transferred, measured in watts.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.conservative-forces",
+      "name": "Conservative and Non-Conservative Forces",
+      "aliases": [
+        "conservative force",
+        "path independence"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.conservation-of-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Conservative forces do path-independent work and have associated potential energies; non-conservative forces dissipate energy.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Halliday Resnick Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.generalized-coordinates"
+      ]
+    },
+    {
+      "id": "phys.mech.momentum",
+      "name": "Linear Momentum",
+      "aliases": [
+        "momentum",
+        "linear momentum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.mech.impulse"
+      ],
+      "cross_links": [],
+      "description": "Linear momentum is the product of mass and velocity, a conserved vector quantity in isolated systems.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.center-of-mass",
+        "phys.mech.impulse"
+      ]
+    },
+    {
+      "id": "phys.mech.impulse",
+      "name": "Impulse and Momentum Change",
+      "aliases": [
+        "impulse",
+        "impulse-momentum theorem"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.momentum"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Impulse is the product of force and time interval and equals the change in momentum of the object.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.conservation-of-momentum"
+      ]
+    },
+    {
+      "id": "phys.mech.conservation-of-momentum",
+      "name": "Conservation of Linear Momentum",
+      "aliases": [
+        "momentum conservation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.impulse"
+      ],
+      "related": [
+        "phys.mech.collisions-elastic"
+      ],
+      "cross_links": [],
+      "description": "The total linear momentum of an isolated system is conserved when no net external force acts on it.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.collisions-elastic",
+        "phys.mech.collisions-inelastic"
+      ]
+    },
+    {
+      "id": "phys.mech.collisions-elastic",
+      "name": "Elastic Collisions",
+      "aliases": [
+        "elastic collision",
+        "perfectly elastic"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.conservation-of-momentum",
+        "phys.mech.kinetic-energy"
+      ],
+      "related": [
+        "phys.mech.collisions-inelastic"
+      ],
+      "cross_links": [],
+      "description": "In an elastic collision both linear momentum and kinetic energy are conserved.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.collisions-inelastic",
+      "name": "Inelastic Collisions",
+      "aliases": [
+        "inelastic collision",
+        "perfectly inelastic"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.conservation-of-momentum"
+      ],
+      "related": [
+        "phys.mech.collisions-elastic"
+      ],
+      "cross_links": [],
+      "description": "In an inelastic collision momentum is conserved but kinetic energy is not; in perfectly inelastic collisions the bodies stick together.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.center-of-mass",
+      "name": "Center of Mass",
+      "aliases": [
+        "CoM",
+        "centre of mass"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.momentum"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The center of mass is the mass-weighted average position of a system, which moves as if all external forces acted there.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.moment-of-inertia"
+      ]
+    },
+    {
+      "id": "phys.mech.angular-kinematics",
+      "name": "Angular Kinematics",
+      "aliases": [
+        "rotational kinematics",
+        "angular motion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.kinematics-1d",
+        "phys.mech.circular-motion"
+      ],
+      "related": [
+        "phys.mech.torque"
+      ],
+      "cross_links": [],
+      "description": "Angular kinematics describes rotational motion using angular displacement, velocity, and acceleration analogous to linear kinematics.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.torque"
+      ]
+    },
+    {
+      "id": "phys.mech.torque",
+      "name": "Torque",
+      "aliases": [
+        "moment of force",
+        "torque"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.angular-kinematics",
+        "phys.meas.vector-products"
+      ],
+      "related": [
+        "phys.mech.moment-of-inertia"
+      ],
+      "cross_links": [],
+      "description": "Torque is the rotational equivalent of force, equal to the cross product of the position vector and force.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.equilibrium",
+        "phys.mech.moment-of-inertia"
+      ]
+    },
+    {
+      "id": "phys.mech.moment-of-inertia",
+      "name": "Moment of Inertia",
+      "aliases": [
+        "rotational inertia",
+        "moment of inertia"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.torque",
+        "phys.mech.center-of-mass"
+      ],
+      "related": [
+        "phys.mech.rotational-dynamics"
+      ],
+      "cross_links": [],
+      "description": "Moment of inertia quantifies a body's resistance to angular acceleration and depends on mass distribution about the rotation axis.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.rotational-dynamics"
+      ]
+    },
+    {
+      "id": "phys.mech.rotational-dynamics",
+      "name": "Rotational Dynamics",
+      "aliases": [
+        "torque and angular acceleration",
+        "rotational Newton's second law"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.moment-of-inertia"
+      ],
+      "related": [
+        "phys.mech.angular-momentum"
+      ],
+      "cross_links": [],
+      "description": "Rotational dynamics relates net torque to angular acceleration via \u03c4 = I\u03b1, the rotational form of Newton's second law.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.angular-momentum",
+        "phys.mech.rolling-motion"
+      ]
+    },
+    {
+      "id": "phys.mech.angular-momentum",
+      "name": "Angular Momentum",
+      "aliases": [
+        "rotational momentum",
+        "L"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.rotational-dynamics"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum"
+      ],
+      "cross_links": [],
+      "description": "Angular momentum is the rotational analogue of linear momentum, equal to the product of moment of inertia and angular velocity.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.conservation-of-angular-momentum"
+      ]
+    },
+    {
+      "id": "phys.mech.conservation-of-angular-momentum",
+      "name": "Conservation of Angular Momentum",
+      "aliases": [
+        "angular momentum conservation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.angular-momentum"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The total angular momentum of an isolated system remains constant when no net external torque acts on it.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.rolling-motion",
+      "name": "Rolling Without Slipping",
+      "aliases": [
+        "rolling motion",
+        "pure rolling"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.rotational-dynamics",
+        "phys.mech.kinetic-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Rolling without slipping combines translation and rotation such that the contact point has zero instantaneous velocity.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.equilibrium",
+      "name": "Static Equilibrium",
+      "aliases": [
+        "equilibrium",
+        "static balance"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.torque",
+        "phys.mech.newtons-first-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A body is in static equilibrium when the net force and net torque acting on it are both zero.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.universal-gravitation",
+      "name": "Newton's Law of Universal Gravitation",
+      "aliases": [
+        "law of gravitation",
+        "gravitational force"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.mech.gravitational-field"
+      ],
+      "cross_links": [],
+      "description": "Every mass attracts every other mass with a force proportional to the product of their masses and inversely proportional to the square of their separation.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.stellar-structure",
+        "phys.mech.gravitational-field"
+      ]
+    },
+    {
+      "id": "phys.mech.gravitational-field",
+      "name": "Gravitational Field and Field Lines",
+      "aliases": [
+        "gravitational field",
+        "g-field"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.universal-gravitation"
+      ],
+      "related": [
+        "phys.mech.gravitational-potential"
+      ],
+      "cross_links": [],
+      "description": "The gravitational field at a point is the gravitational force per unit mass experienced by a test mass placed there.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.gravitational-potential"
+      ]
+    },
+    {
+      "id": "phys.mech.gravitational-potential",
+      "name": "Gravitational Potential Energy",
+      "aliases": [
+        "gravitational PE",
+        "gravitational potential"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.gravitational-field",
+        "phys.mech.potential-energy"
+      ],
+      "related": [
+        "phys.mech.orbital-mechanics"
+      ],
+      "cross_links": [],
+      "description": "Gravitational potential energy is the work done against gravity to bring a mass from infinity to a given point.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.escape-velocity",
+        "phys.mech.orbital-mechanics"
+      ]
+    },
+    {
+      "id": "phys.mech.orbital-mechanics",
+      "name": "Circular Orbital Mechanics",
+      "aliases": [
+        "orbital mechanics",
+        "satellite orbit"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.gravitational-potential",
+        "phys.mech.circular-motion"
+      ],
+      "related": [
+        "phys.mech.keplers-laws"
+      ],
+      "cross_links": [],
+      "description": "Circular orbital mechanics balances gravitational attraction with centripetal acceleration to determine orbital speed and period.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.keplers-laws",
+        "phys.mech.satellites"
+      ]
+    },
+    {
+      "id": "phys.mech.keplers-laws",
+      "name": "Kepler's Laws of Planetary Motion",
+      "aliases": [
+        "Kepler's laws",
+        "planetary motion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.orbital-mechanics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Kepler's three laws describe elliptical orbits, equal-area sweeping, and the period-radius relationship for planetary motion.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.escape-velocity",
+      "name": "Escape Velocity",
+      "aliases": [
+        "escape speed"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.gravitational-potential",
+        "phys.mech.conservation-of-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Escape velocity is the minimum speed needed for an object to escape a gravitational field without further propulsion.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.satellites",
+      "name": "Artificial Satellites and Geostationary Orbits",
+      "aliases": [
+        "satellites",
+        "geostationary orbit"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.orbital-mechanics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Artificial satellites orbit Earth with periods determined by altitude; geostationary satellites match Earth's rotation period.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.8"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.hookes-law",
+      "name": "Hooke's Law and Spring Force",
+      "aliases": [
+        "Hooke's law",
+        "spring constant"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.mech.stress-strain"
+      ],
+      "cross_links": [],
+      "description": "Hooke's law states that the restoring force of a spring is proportional to its displacement from equilibrium: F = \u2212kx.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.stress-strain",
+        "phys.wave.shm"
+      ]
+    },
+    {
+      "id": "phys.mech.stress-strain",
+      "name": "Stress, Strain, and Elastic Moduli",
+      "aliases": [
+        "Young's modulus",
+        "elastic modulus",
+        "stress-strain"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hookes-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Stress is force per unit area; strain is fractional deformation; their ratio defines the elastic modulus of a material.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.9"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.pressure-fluids",
+      "name": "Pressure in Fluids",
+      "aliases": [
+        "fluid pressure",
+        "hydrostatic pressure"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.mech.buoyancy"
+      ],
+      "cross_links": [],
+      "description": "Pressure in a static fluid increases with depth and acts equally in all directions (Pascal's principle).",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.bernoulli",
+        "phys.mech.buoyancy",
+        "phys.mech.surface-tension"
+      ]
+    },
+    {
+      "id": "phys.mech.buoyancy",
+      "name": "Buoyancy and Archimedes' Principle",
+      "aliases": [
+        "buoyant force",
+        "Archimedes principle"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.pressure-fluids"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Archimedes' principle states that the buoyant force on a submerged object equals the weight of fluid displaced.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.bernoulli",
+      "name": "Bernoulli's Equation and Fluid Flow",
+      "aliases": [
+        "Bernoulli's principle",
+        "Bernoulli equation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.pressure-fluids",
+        "phys.mech.conservation-of-energy"
+      ],
+      "related": [
+        "phys.mech.viscosity"
+      ],
+      "cross_links": [],
+      "description": "Bernoulli's equation expresses conservation of energy in steady, incompressible fluid flow along a streamline.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.viscosity"
+      ]
+    },
+    {
+      "id": "phys.mech.surface-tension",
+      "name": "Surface Tension and Capillarity",
+      "aliases": [
+        "surface tension",
+        "capillary action"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.pressure-fluids"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Surface tension is the energy per unit area at a liquid surface arising from cohesive intermolecular forces.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.viscosity",
+      "name": "Viscosity and Stokes' Law",
+      "aliases": [
+        "viscosity",
+        "Stokes drag"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.bernoulli"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Viscosity measures a fluid's internal resistance to flow; Stokes' law gives the drag force on a sphere moving through a viscous fluid.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.generalized-coordinates",
+      "name": "Generalized Coordinates and Configuration Space",
+      "aliases": [
+        "generalized coordinates",
+        "configuration space",
+        "degrees of freedom",
+        "holonomic constraints"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.conservative-forces",
+        "phys.mech.kinematics-2d"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum"
+      ],
+      "cross_links": [],
+      "description": "Generalized coordinates are a minimal set of independent parameters that uniquely specify the configuration of a mechanical system subject to holonomic constraints; the number of independent coordinates equals the degrees of freedom.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.1",
+        "Landau & Lifshitz Mechanics Ch.1",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.euler-lagrange-equation"
+      ]
+    },
+    {
+      "id": "phys.mech.euler-lagrange-equation",
+      "name": "The Euler-Lagrange Equation and Hamilton's Principle",
+      "aliases": [
+        "Euler-Lagrange equation",
+        "Lagrangian",
+        "Hamilton's principle",
+        "principle of stationary action",
+        "action integral"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.generalized-coordinates"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Hamilton's principle states that the action S = ∫L dt is stationary for the physical path; varying S yields the Euler-Lagrange equation d/dt(∂L/∂ṡᵢ) − ∂L/∂qᵢ = 0, where L = T − V is the Lagrangian.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.1-2",
+        "Landau & Lifshitz Mechanics Ch.2",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.cyclic-coordinates-conservation-laws",
+        "phys.mech.hamiltonian"
+      ]
+    },
+    {
+      "id": "phys.mech.cyclic-coordinates-conservation-laws",
+      "name": "Cyclic Coordinates and Noether's Theorem",
+      "aliases": [
+        "cyclic coordinate",
+        "ignorable coordinate",
+        "Noether's theorem",
+        "conservation laws from symmetry"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum",
+        "phys.mech.conservation-of-momentum"
+      ],
+      "cross_links": [],
+      "description": "A generalized coordinate is cyclic if ∂L/∂qᵢ = 0; the conjugate momentum pᵢ = ∂L/∂ṡᵢ is then conserved. Noether's theorem generalises this: every continuous symmetry of the Lagrangian implies a conserved quantity.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.2",
+        "Landau & Lifshitz Mechanics §6-7",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.hamiltonian",
+      "name": "The Hamiltonian and Legendre Transform",
+      "aliases": [
+        "Hamiltonian",
+        "Legendre transform",
+        "canonical momenta",
+        "phase space"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta pᵢ = ∂L/∂ṡᵢ are conjugate to the generalised coordinates, and H equals the total energy for natural systems.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.8",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Taylor Classical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.hamiltons-equations",
+        "phys.qm.scattering-theory-born-approximation"
+      ]
+    },
+    {
+      "id": "phys.mech.hamiltons-equations",
+      "name": "Hamilton's Equations of Motion",
+      "aliases": [
+        "Hamilton's equations",
+        "canonical equations of motion",
+        "Hamiltonian mechanics"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hamiltonian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Hamilton's equations ṡᵢ = ∂H/∂pᵢ and ṗᵢ = −∂H/∂qᵢ give 2N coupled first-order equations governing trajectories in phase space, equivalent to the Euler-Lagrange equations but symmetric in q and p.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.8",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Taylor Classical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.poisson-brackets"
+      ]
+    },
+    {
+      "id": "phys.mech.poisson-brackets",
+      "name": "Poisson Brackets and Phase Space Dynamics",
+      "aliases": [
+        "Poisson bracket",
+        "{f,g}",
+        "phase space flow",
+        "Liouville's theorem"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hamiltons-equations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Poisson bracket {f,g} = Σ(∂f/∂qᵢ ∂g/∂pᵢ − ∂f/∂pᵢ ∂g/∂qᵢ) encodes dynamics: df/dt = {f,H}. Fundamental brackets {qᵢ,pⱼ} = δᵢⱼ prefigure quantum commutators; Liouville's theorem states phase-space volume is conserved.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.9",
+        "Landau & Lifshitz Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.canonical-transformations"
+      ]
+    },
+    {
+      "id": "phys.mech.canonical-transformations",
+      "name": "Canonical Transformations and Generating Functions",
+      "aliases": [
+        "canonical transformation",
+        "generating function",
+        "symplectomorphism",
+        "point transformation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.poisson-brackets"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Canonical transformations (Qᵢ, Pᵢ) = (Qᵢ(q,p,t), Pᵢ(q,p,t)) preserve Hamilton's equations and Poisson bracket structure; they are generated by four types of generating functions F₁–F₄ that mix coordinates and momenta.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.hamilton-jacobi-equation"
+      ]
+    },
+    {
+      "id": "phys.mech.hamilton-jacobi-equation",
+      "name": "Hamilton-Jacobi Equation and Action-Angle Variables",
+      "aliases": [
+        "Hamilton-Jacobi equation",
+        "HJ equation",
+        "action-angle variables",
+        "Hamilton's principal function"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.canonical-transformations"
+      ],
+      "related": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "cross_links": [],
+      "description": "The Hamilton-Jacobi equation −∂S/∂t = H(q, ∂S/∂q, t) reduces mechanics to a single PDE for Hamilton's principal function S; separation of variables yields action-angle variables (J,θ) for integrable systems and is the classical precursor to the Schrödinger equation.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.10",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Goldstein Classical Mechanics Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.therm.temperature",
+      "name": "Temperature and Thermal Equilibrium",
+      "aliases": [
+        "temperature",
+        "thermal equilibrium"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.therm.zeroth-law"
+      ],
+      "cross_links": [],
+      "description": "Temperature measures the average kinetic energy of particles; thermal equilibrium exists when two bodies in contact have equal temperatures.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.heat-transfer",
+        "phys.therm.ideal-gas-law",
+        "phys.therm.thermal-expansion",
+        "phys.therm.zeroth-law"
+      ]
+    },
+    {
+      "id": "phys.therm.zeroth-law",
+      "name": "Zeroth Law of Thermodynamics",
+      "aliases": [
+        "zeroth law",
+        "thermometric property"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.temperature"
+      ],
+      "related": [
+        "phys.therm.ideal-gas-law"
+      ],
+      "cross_links": [],
+      "description": "If two systems are each in thermal equilibrium with a third, they are in thermal equilibrium with each other.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.ideal-gas-law"
+      ]
+    },
+    {
+      "id": "phys.therm.thermal-expansion",
+      "name": "Thermal Expansion",
+      "aliases": [
+        "thermal expansion",
+        "linear expansion",
+        "volumetric expansion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.temperature"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Thermal expansion describes how solids, liquids, and gases change dimensions with temperature.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.therm.heat-transfer",
+      "name": "Heat Transfer: Conduction, Convection, Radiation",
+      "aliases": [
+        "conduction",
+        "convection",
+        "radiation heat"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.temperature"
+      ],
+      "related": [
+        "phys.therm.specific-heat"
+      ],
+      "cross_links": [],
+      "description": "Heat transfers between systems by conduction (contact), convection (fluid flow), or radiation (electromagnetic waves).",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.specific-heat"
+      ]
+    },
+    {
+      "id": "phys.therm.specific-heat",
+      "name": "Specific Heat Capacity",
+      "aliases": [
+        "specific heat",
+        "heat capacity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.heat-transfer"
+      ],
+      "related": [
+        "phys.therm.calorimetry"
+      ],
+      "cross_links": [],
+      "description": "Specific heat capacity is the amount of heat required to raise the temperature of unit mass of a substance by one degree.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.calorimetry"
+      ]
+    },
+    {
+      "id": "phys.therm.calorimetry",
+      "name": "Calorimetry",
+      "aliases": [
+        "calorimetry",
+        "heat measurement"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.specific-heat"
+      ],
+      "related": [
+        "phys.therm.phase-transitions"
+      ],
+      "cross_links": [],
+      "description": "Calorimetry measures heat exchange using the principle that heat lost by a hot body equals heat gained by a cold body.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.phase-transitions"
+      ]
+    },
+    {
+      "id": "phys.therm.phase-transitions",
+      "name": "Phase Transitions and Latent Heat",
+      "aliases": [
+        "latent heat",
+        "phase change",
+        "melting",
+        "evaporation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.calorimetry"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Phase transitions absorb or release latent heat at constant temperature as a substance changes between solid, liquid, and gas phases.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.therm.ideal-gas-law",
+      "name": "Ideal Gas Law",
+      "aliases": [
+        "PV=nRT",
+        "ideal gas",
+        "gas laws"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.zeroth-law",
+        "phys.therm.temperature"
+      ],
+      "related": [
+        "phys.therm.kinetic-theory"
+      ],
+      "cross_links": [],
+      "description": "The ideal gas law PV = nRT relates pressure, volume, amount, and absolute temperature of an ideal gas.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.kinetic-theory"
+      ]
+    },
+    {
+      "id": "phys.therm.kinetic-theory",
+      "name": "Kinetic Theory of Gases",
+      "aliases": [
+        "kinetic theory",
+        "molecular speed"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.ideal-gas-law"
+      ],
+      "related": [
+        "phys.therm.internal-energy"
+      ],
+      "cross_links": [],
+      "description": "Kinetic theory derives macroscopic gas properties from the statistical mechanics of molecular motion.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.probability-basics",
+        "phys.therm.internal-energy"
+      ]
+    },
+    {
+      "id": "phys.therm.first-law",
+      "name": "First Law of Thermodynamics",
+      "aliases": [
+        "first law",
+        "energy conservation thermo"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.internal-energy",
+        "phys.mech.work"
+      ],
+      "related": [
+        "phys.therm.thermodynamic-processes"
+      ],
+      "cross_links": [],
+      "description": "The first law states that heat added to a system equals the increase in internal energy plus the work done by the system: \u0394U = Q \u2212 W.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.thermodynamic-processes"
+      ]
+    },
+    {
+      "id": "phys.therm.internal-energy",
+      "name": "Internal Energy of a System",
+      "aliases": [
+        "internal energy",
+        "U"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.kinetic-theory"
+      ],
+      "related": [
+        "phys.therm.first-law"
+      ],
+      "cross_links": [],
+      "description": "Internal energy is the total kinetic and potential energy of all molecules in a thermodynamic system.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.first-law"
+      ]
+    },
+    {
+      "id": "phys.therm.thermodynamic-processes",
+      "name": "Thermodynamic Processes",
+      "aliases": [
+        "isothermal",
+        "adiabatic",
+        "isobaric",
+        "isochoric"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.first-law"
+      ],
+      "related": [
+        "phys.therm.second-law"
+      ],
+      "cross_links": [],
+      "description": "Thermodynamic processes (isothermal, adiabatic, isobaric, isochoric) describe how state variables change when constraints are applied.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.heat-engines",
+        "phys.therm.second-law"
+      ]
+    },
+    {
+      "id": "phys.therm.second-law",
+      "name": "Second Law of Thermodynamics",
+      "aliases": [
+        "second law",
+        "Kelvin-Planck",
+        "Clausius"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.thermodynamic-processes"
+      ],
+      "related": [
+        "phys.therm.entropy"
+      ],
+      "cross_links": [],
+      "description": "The second law states that heat spontaneously flows from hot to cold, and no engine can be 100% efficient.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.entropy"
+      ]
+    },
+    {
+      "id": "phys.therm.entropy",
+      "name": "Entropy and Disorder",
+      "aliases": [
+        "entropy",
+        "S"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.second-law"
+      ],
+      "related": [
+        "phys.therm.carnot-cycle"
+      ],
+      "cross_links": [],
+      "description": "Entropy is a state function measuring the dispersal of energy; it increases in all irreversible processes.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Halliday Resnick Ch.20"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.probability-basics",
+        "phys.therm.carnot-cycle",
+        "phys.therm.third-law"
+      ]
+    },
+    {
+      "id": "phys.therm.heat-engines",
+      "name": "Heat Engines and Efficiency",
+      "aliases": [
+        "heat engine",
+        "thermal efficiency"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.thermodynamic-processes"
+      ],
+      "related": [
+        "phys.therm.carnot-cycle"
+      ],
+      "cross_links": [],
+      "description": "A heat engine converts part of the heat absorbed from a hot reservoir into work while rejecting heat to a cold reservoir.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.carnot-cycle"
+      ]
+    },
+    {
+      "id": "phys.therm.carnot-cycle",
+      "name": "Carnot Cycle",
+      "aliases": [
+        "Carnot engine",
+        "Carnot efficiency"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.entropy",
+        "phys.therm.heat-engines"
+      ],
+      "related": [
+        "phys.therm.refrigerators"
+      ],
+      "cross_links": [],
+      "description": "The Carnot cycle is the most efficient possible heat engine cycle operating between two fixed temperature reservoirs.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.therm.refrigerators"
+      ]
+    },
+    {
+      "id": "phys.therm.refrigerators",
+      "name": "Refrigerators and Heat Pumps",
+      "aliases": [
+        "refrigerator",
+        "heat pump",
+        "COP"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.carnot-cycle"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A refrigerator uses work to transfer heat from a cold reservoir to a hot reservoir; the coefficient of performance measures its efficiency.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.12"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.therm.third-law",
+      "name": "Third Law of Thermodynamics",
+      "aliases": [
+        "third law",
+        "absolute zero"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.entropy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The third law states that the entropy of a perfect crystal approaches zero as temperature approaches absolute zero.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Atkins Physical Chemistry"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.shm",
+      "name": "Simple Harmonic Motion",
+      "aliases": [
+        "SHM",
+        "simple harmonic motion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hookes-law",
+        "phys.mech.newtons-second-law"
+      ],
+      "related": [
+        "phys.wave.shm-energy"
+      ],
+      "cross_links": [],
+      "description": "Simple harmonic motion is periodic oscillation in which the restoring force is proportional to and directed opposite the displacement.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.pendulum",
+        "phys.wave.shm-energy",
+        "phys.wave.spring-mass"
+      ]
+    },
+    {
+      "id": "phys.wave.shm-energy",
+      "name": "Energy in Simple Harmonic Motion",
+      "aliases": [
+        "SHM energy",
+        "potential and kinetic in SHM"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.shm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "In SHM the total mechanical energy remains constant while kinetic and potential energies interchange sinusoidally.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.damped-oscillations"
+      ]
+    },
+    {
+      "id": "phys.wave.pendulum",
+      "name": "Simple Pendulum",
+      "aliases": [
+        "simple pendulum",
+        "pendulum period"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.shm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A simple pendulum undergoes approximate SHM for small angles with period T = 2\u03c0\u221a(L/g).",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.spring-mass",
+      "name": "Spring-Mass System",
+      "aliases": [
+        "spring-mass oscillator"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.shm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A mass on a spring executes SHM with angular frequency \u03c9 = \u221a(k/m) and period T = 2\u03c0\u221a(m/k).",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.damped-oscillations",
+      "name": "Damped Oscillations",
+      "aliases": [
+        "damped oscillation",
+        "damping"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.shm-energy"
+      ],
+      "related": [
+        "phys.wave.forced-oscillations"
+      ],
+      "cross_links": [],
+      "description": "Damped oscillations occur when a resistive force causes the amplitude to decrease exponentially with time.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.forced-oscillations"
+      ]
+    },
+    {
+      "id": "phys.wave.forced-oscillations",
+      "name": "Forced Oscillations and Resonance",
+      "aliases": [
+        "resonance",
+        "forced vibration"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.damped-oscillations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Forced oscillations occur when an external periodic force drives a system; resonance is maximum amplitude when the driving frequency matches the natural frequency.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.wave-properties",
+      "name": "Wave Properties: Amplitude, Period, Frequency",
+      "aliases": [
+        "wave properties",
+        "wavelength",
+        "frequency"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.wave.transverse-waves",
+        "phys.wave.longitudinal-waves"
+      ],
+      "cross_links": [],
+      "description": "Waves are characterised by amplitude, wavelength, period, frequency, and phase, related by v = f\u03bb.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.nature-of-light",
+        "phys.opt.wave-optics",
+        "phys.wave.longitudinal-waves",
+        "phys.wave.sound-waves",
+        "phys.wave.transverse-waves"
+      ]
+    },
+    {
+      "id": "phys.wave.transverse-waves",
+      "name": "Transverse Waves",
+      "aliases": [
+        "transverse wave",
+        "shear wave"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.wave-properties"
+      ],
+      "related": [
+        "phys.wave.longitudinal-waves"
+      ],
+      "cross_links": [],
+      "description": "In transverse waves the particle displacement is perpendicular to the direction of wave propagation.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.wave-speed"
+      ]
+    },
+    {
+      "id": "phys.wave.longitudinal-waves",
+      "name": "Longitudinal Waves",
+      "aliases": [
+        "longitudinal wave",
+        "compression wave"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.wave-properties"
+      ],
+      "related": [
+        "phys.wave.transverse-waves"
+      ],
+      "cross_links": [],
+      "description": "In longitudinal waves the particle displacement is parallel to the direction of wave propagation, forming compressions and rarefactions.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.wave-speed"
+      ]
+    },
+    {
+      "id": "phys.wave.wave-speed",
+      "name": "Wave Speed and the Wave Equation",
+      "aliases": [
+        "wave speed",
+        "wave equation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.transverse-waves",
+        "phys.wave.longitudinal-waves"
+      ],
+      "related": [
+        "phys.wave.superposition"
+      ],
+      "cross_links": [],
+      "description": "Wave speed is determined by the medium's properties; the wave equation relates displacement to position and time.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.superposition"
+      ]
+    },
+    {
+      "id": "phys.wave.superposition",
+      "name": "Superposition Principle",
+      "aliases": [
+        "superposition",
+        "wave superposition"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.wave-speed"
+      ],
+      "related": [
+        "phys.wave.interference"
+      ],
+      "cross_links": [],
+      "description": "The superposition principle states that the resultant displacement is the algebraic sum of displacements of individual waves.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.interference"
+      ]
+    },
+    {
+      "id": "phys.wave.interference",
+      "name": "Wave Interference",
+      "aliases": [
+        "constructive interference",
+        "destructive interference"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.superposition"
+      ],
+      "related": [
+        "phys.wave.standing-waves",
+        "phys.wave.beats"
+      ],
+      "cross_links": [],
+      "description": "Wave interference is the superposition of two or more waves producing regions of reinforcement or cancellation.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.youngs-experiment",
+        "phys.wave.beats",
+        "phys.wave.standing-waves"
+      ]
+    },
+    {
+      "id": "phys.wave.standing-waves",
+      "name": "Standing Waves",
+      "aliases": [
+        "standing wave",
+        "stationary wave",
+        "nodes",
+        "antinodes"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.interference"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Standing waves form when two identical waves travel in opposite directions, producing fixed nodes and antinodes.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.sound-waves",
+      "name": "Sound Waves",
+      "aliases": [
+        "sound",
+        "acoustic waves"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.wave-properties"
+      ],
+      "related": [
+        "phys.wave.sound-intensity"
+      ],
+      "cross_links": [],
+      "description": "Sound waves are longitudinal mechanical waves that propagate through a medium via pressure fluctuations.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 9 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.doppler-effect",
+        "phys.wave.sound-intensity"
+      ]
+    },
+    {
+      "id": "phys.wave.sound-intensity",
+      "name": "Sound Intensity and the Decibel Scale",
+      "aliases": [
+        "sound intensity",
+        "decibel",
+        "dB"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.sound-waves"
+      ],
+      "related": [
+        "phys.wave.doppler-effect"
+      ],
+      "cross_links": [],
+      "description": "Sound intensity is power per unit area; the decibel scale logarithmically measures intensity relative to a reference level.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.doppler-effect",
+      "name": "Doppler Effect",
+      "aliases": [
+        "Doppler shift",
+        "Doppler effect"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.sound-waves"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Doppler effect is the change in observed frequency due to relative motion between source and observer.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.wave.beats",
+      "name": "Beats and Beat Frequency",
+      "aliases": [
+        "beats",
+        "beat frequency"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.interference"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Beats are periodic variations in amplitude produced by the superposition of two waves of slightly different frequencies.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.nature-of-light",
+      "name": "Nature of Light: Ray and Wave Models",
+      "aliases": [
+        "nature of light",
+        "ray model",
+        "wave model"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.wave-properties"
+      ],
+      "related": [
+        "phys.opt.reflection"
+      ],
+      "cross_links": [],
+      "description": "Light exhibits both ray (geometric) and wave (physical) behaviour depending on the scale of the optical phenomena.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.reflection",
+        "phys.opt.refraction",
+        "phys.opt.wave-optics"
+      ]
+    },
+    {
+      "id": "phys.opt.reflection",
+      "name": "Reflection and Laws of Reflection",
+      "aliases": [
+        "reflection",
+        "law of reflection"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.nature-of-light"
+      ],
+      "related": [
+        "phys.opt.mirrors"
+      ],
+      "cross_links": [],
+      "description": "The law of reflection states that the angle of incidence equals the angle of reflection with both angles measured from the normal.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.mirrors"
+      ]
+    },
+    {
+      "id": "phys.opt.mirrors",
+      "name": "Spherical Mirrors and Mirror Formula",
+      "aliases": [
+        "concave mirror",
+        "convex mirror",
+        "mirror formula"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.reflection"
+      ],
+      "related": [
+        "phys.opt.lenses"
+      ],
+      "cross_links": [],
+      "description": "The mirror formula 1/f = 1/v + 1/u relates focal length, image distance, and object distance for spherical mirrors.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.optical-instruments"
+      ]
+    },
+    {
+      "id": "phys.opt.refraction",
+      "name": "Refraction and Snell's Law",
+      "aliases": [
+        "refraction",
+        "Snell's law"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.nature-of-light"
+      ],
+      "related": [
+        "phys.opt.total-internal-reflection"
+      ],
+      "cross_links": [],
+      "description": "Snell's law n\u2081sin\u03b8\u2081 = n\u2082sin\u03b8\u2082 describes how light bends at an interface between media of different refractive indices.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.dispersion",
+        "phys.opt.lenses",
+        "phys.opt.total-internal-reflection"
+      ]
+    },
+    {
+      "id": "phys.opt.total-internal-reflection",
+      "name": "Total Internal Reflection and Critical Angle",
+      "aliases": [
+        "TIR",
+        "critical angle",
+        "optical fibre"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.refraction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Total internal reflection occurs when light hits a boundary at an angle greater than the critical angle and all light is reflected.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.9"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.lenses",
+      "name": "Thin Lenses and Lens Formula",
+      "aliases": [
+        "convex lens",
+        "concave lens",
+        "lens formula"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.refraction"
+      ],
+      "related": [
+        "phys.opt.lens-power"
+      ],
+      "cross_links": [],
+      "description": "The thin lens formula 1/f = 1/v \u2212 1/u relates focal length, image distance, and object distance for thin lenses.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.lens-power"
+      ]
+    },
+    {
+      "id": "phys.opt.lens-power",
+      "name": "Power of a Lens and Lens Combinations",
+      "aliases": [
+        "lens power",
+        "dioptre",
+        "lens combination"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.lenses"
+      ],
+      "related": [
+        "phys.opt.optical-instruments"
+      ],
+      "cross_links": [],
+      "description": "The power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.optical-instruments"
+      ]
+    },
+    {
+      "id": "phys.opt.optical-instruments",
+      "name": "Optical Instruments: Eye, Microscope, Telescope",
+      "aliases": [
+        "microscope",
+        "telescope",
+        "human eye"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.lens-power",
+        "phys.opt.mirrors"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Optical instruments use combinations of lenses and mirrors to magnify images for the human eye.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.9"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.dispersion",
+      "name": "Dispersion and Prisms",
+      "aliases": [
+        "dispersion",
+        "prism",
+        "spectrum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.refraction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Dispersion is the separation of white light into its constituent wavelengths by a prism due to wavelength-dependent refractive index.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.9"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.wave-optics",
+      "name": "Introduction to Wave Optics",
+      "aliases": [
+        "wave optics",
+        "physical optics",
+        "Huygens principle"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.nature-of-light",
+        "phys.wave.wave-properties"
+      ],
+      "related": [
+        "phys.opt.youngs-experiment"
+      ],
+      "cross_links": [],
+      "description": "Wave optics treats light as a wave and uses Huygens' principle to explain interference and diffraction phenomena.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.polarization",
+        "phys.opt.youngs-experiment"
+      ]
+    },
+    {
+      "id": "phys.opt.youngs-experiment",
+      "name": "Young's Double-Slit Experiment",
+      "aliases": [
+        "Young's experiment",
+        "YDSE",
+        "double-slit"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.wave-optics",
+        "phys.wave.interference"
+      ],
+      "related": [
+        "phys.opt.diffraction"
+      ],
+      "cross_links": [],
+      "description": "Young's double-slit experiment demonstrates light interference producing a pattern of alternating bright and dark fringes.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.diffraction"
+      ]
+    },
+    {
+      "id": "phys.opt.diffraction",
+      "name": "Diffraction of Light",
+      "aliases": [
+        "diffraction",
+        "diffraction pattern"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.youngs-experiment"
+      ],
+      "related": [
+        "phys.opt.single-slit"
+      ],
+      "cross_links": [],
+      "description": "Diffraction is the bending and spreading of waves around obstacles or through apertures, observable when the aperture size is comparable to wavelength.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.single-slit"
+      ]
+    },
+    {
+      "id": "phys.opt.single-slit",
+      "name": "Single-Slit Diffraction",
+      "aliases": [
+        "single slit",
+        "single-slit pattern"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.diffraction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Single-slit diffraction produces a central maximum flanked by progressively weaker secondary maxima when light passes through a narrow slit.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.polarization",
+      "name": "Polarization of Light",
+      "aliases": [
+        "polarization",
+        "polarised light"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.wave-optics"
+      ],
+      "related": [
+        "phys.opt.brewsters-law"
+      ],
+      "cross_links": [],
+      "description": "Polarization describes the orientation of the electric field oscillation in transverse electromagnetic waves.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.opt.brewsters-law"
+      ]
+    },
+    {
+      "id": "phys.opt.brewsters-law",
+      "name": "Brewster's Law and Malus's Law",
+      "aliases": [
+        "Brewster's angle",
+        "Malus's law",
+        "polarizer"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.polarization"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Brewster's law gives the angle at which reflected light is completely polarized; Malus's law relates transmitted intensity to analyser angle.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.electric-charge",
+      "name": "Electric Charge and Conservation",
+      "aliases": [
+        "electric charge",
+        "charge",
+        "charge conservation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.em.coulombs-law"
+      ],
+      "cross_links": [],
+      "description": "Electric charge is a fundamental property of matter that is quantised and conserved in all interactions.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.coulombs-law",
+        "phys.em.electric-current"
+      ]
+    },
+    {
+      "id": "phys.em.coulombs-law",
+      "name": "Coulomb's Law",
+      "aliases": [
+        "Coulomb's law",
+        "electrostatic force"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-charge"
+      ],
+      "related": [
+        "phys.em.electric-field"
+      ],
+      "cross_links": [],
+      "description": "Coulomb's law states that the electrostatic force between two point charges is proportional to their product and inversely proportional to the square of their separation.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.electric-field",
+        "phys.mod.bohr-model"
+      ]
+    },
+    {
+      "id": "phys.em.electric-field",
+      "name": "Electric Field and Field Lines",
+      "aliases": [
+        "electric field",
+        "E-field"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.coulombs-law"
+      ],
+      "related": [
+        "phys.em.electric-dipole",
+        "phys.em.gauss-law"
+      ],
+      "cross_links": [],
+      "description": "The electric field at a point is the electrostatic force per unit positive test charge placed at that point.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.electric-dipole",
+        "phys.em.gauss-law",
+        "phys.em.magnetic-force"
+      ]
+    },
+    {
+      "id": "phys.em.electric-dipole",
+      "name": "Electric Dipole",
+      "aliases": [
+        "dipole",
+        "electric dipole moment"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-field"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An electric dipole consists of two equal and opposite charges separated by a small distance; it experiences torque in a uniform field.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.1"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.gauss-law",
+      "name": "Gauss's Law",
+      "aliases": [
+        "Gauss law",
+        "Gauss's theorem"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-field"
+      ],
+      "related": [
+        "phys.em.electric-potential"
+      ],
+      "cross_links": [],
+      "description": "Gauss's law relates the total electric flux through a closed surface to the enclosed charge: \u03a6 = Q_enc/\u03b5\u2080.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.1",
+        "Halliday Resnick Ch.23"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.electric-potential",
+        "phys.em.maxwells-equations"
+      ]
+    },
+    {
+      "id": "phys.em.electric-potential",
+      "name": "Electric Potential and Potential Difference",
+      "aliases": [
+        "electric potential",
+        "voltage",
+        "potential difference"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.gauss-law"
+      ],
+      "related": [
+        "phys.em.capacitance"
+      ],
+      "cross_links": [],
+      "description": "Electric potential is the work done per unit charge to bring a positive test charge from infinity to a given point.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.2"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.capacitance",
+        "phys.em.ohms-law"
+      ]
+    },
+    {
+      "id": "phys.em.capacitance",
+      "name": "Capacitance and Capacitors",
+      "aliases": [
+        "capacitor",
+        "capacitance",
+        "C"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-potential"
+      ],
+      "related": [
+        "phys.em.energy-capacitor",
+        "phys.em.dielectrics"
+      ],
+      "cross_links": [],
+      "description": "Capacitance measures a capacitor's ability to store electric charge; C = Q/V.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.2"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.dielectrics",
+        "phys.em.energy-capacitor",
+        "phys.em.lc-circuits",
+        "phys.em.rc-circuits"
+      ]
+    },
+    {
+      "id": "phys.em.dielectrics",
+      "name": "Dielectrics and Polarization",
+      "aliases": [
+        "dielectric",
+        "permittivity",
+        "polarisation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.capacitance"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Dielectrics are insulators that become polarized in an electric field, increasing capacitance by reducing the internal field.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.energy-capacitor",
+      "name": "Energy Stored in a Capacitor",
+      "aliases": [
+        "capacitor energy",
+        "stored energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.capacitance"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The energy stored in a charged capacitor is U = \u00bdCV\u00b2 = Q\u00b2/2C, stored in the electric field between the plates.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.electric-current",
+      "name": "Electric Current and Drift Velocity",
+      "aliases": [
+        "electric current",
+        "drift velocity",
+        "current"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-charge"
+      ],
+      "related": [
+        "phys.em.ohms-law"
+      ],
+      "cross_links": [],
+      "description": "Electric current is the rate of flow of charge; drift velocity is the average velocity of charge carriers under an electric field.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.magnetic-field",
+        "phys.em.ohms-law"
+      ]
+    },
+    {
+      "id": "phys.em.ohms-law",
+      "name": "Ohm's Law and Resistance",
+      "aliases": [
+        "Ohm's law",
+        "resistance",
+        "V=IR"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-current",
+        "phys.em.electric-potential"
+      ],
+      "related": [
+        "phys.em.resistivity"
+      ],
+      "cross_links": [],
+      "description": "Ohm's law states that the current through a conductor is proportional to the voltage across it: V = IR.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.ac-basics",
+        "phys.em.dc-circuits",
+        "phys.em.electrical-power",
+        "phys.em.resistivity"
+      ]
+    },
+    {
+      "id": "phys.em.resistivity",
+      "name": "Resistivity and Conductivity",
+      "aliases": [
+        "resistivity",
+        "conductivity",
+        "specific resistance"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.ohms-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Resistivity is a material property relating resistance to geometry; conductivity is its reciprocal.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.dc-circuits",
+      "name": "Series and Parallel Circuits",
+      "aliases": [
+        "series circuit",
+        "parallel circuit",
+        "DC circuits"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.ohms-law"
+      ],
+      "related": [
+        "phys.em.kirchhoffs-laws"
+      ],
+      "cross_links": [],
+      "description": "In series circuits the same current flows through all components; in parallel circuits the same voltage appears across each branch.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.emf",
+        "phys.em.kirchhoffs-laws"
+      ]
+    },
+    {
+      "id": "phys.em.kirchhoffs-laws",
+      "name": "Kirchhoff's Current and Voltage Laws",
+      "aliases": [
+        "KCL",
+        "KVL",
+        "Kirchhoff's laws"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.dc-circuits"
+      ],
+      "related": [
+        "phys.em.wheatstone-bridge"
+      ],
+      "cross_links": [],
+      "description": "Kirchhoff's current law states charge conservation at junctions; Kirchhoff's voltage law states energy conservation around loops.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.potentiometer",
+        "phys.em.rc-circuits",
+        "phys.em.wheatstone-bridge"
+      ]
+    },
+    {
+      "id": "phys.em.wheatstone-bridge",
+      "name": "Wheatstone Bridge",
+      "aliases": [
+        "Wheatstone bridge",
+        "bridge circuit"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.kirchhoffs-laws"
+      ],
+      "related": [
+        "phys.em.potentiometer"
+      ],
+      "cross_links": [],
+      "description": "The Wheatstone bridge is a circuit for precise measurement of an unknown resistance by balancing four resistances.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.potentiometer",
+      "name": "Potentiometer",
+      "aliases": [
+        "potentiometer",
+        "potential divider"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.kirchhoffs-laws"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A potentiometer measures EMF and internal resistance by comparing potential differences along a uniform resistance wire.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.electrical-power",
+      "name": "Electrical Power and Joule Heating",
+      "aliases": [
+        "electrical power",
+        "Joule heating",
+        "P=IV"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.ohms-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Electrical power is the rate of energy dissipation; Joule heating P = I\u00b2R converts electrical energy to heat in a resistor.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 10 Ch.12"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.emf",
+      "name": "EMF, Internal Resistance, and Terminal Voltage",
+      "aliases": [
+        "EMF",
+        "electromotive force",
+        "internal resistance"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.dc-circuits"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "EMF is the energy supplied per unit charge by a source; terminal voltage is reduced by the voltage drop across internal resistance.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.rc-circuits",
+      "name": "RC Circuits: Charging and Discharging",
+      "aliases": [
+        "RC circuit",
+        "RC time constant"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.capacitance",
+        "phys.em.kirchhoffs-laws"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "In an RC circuit the capacitor charges and discharges exponentially with time constant \u03c4 = RC.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Halliday Resnick Ch.27"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.magnetic-field",
+      "name": "Magnetic Field and Field Lines",
+      "aliases": [
+        "magnetic field",
+        "B-field",
+        "magnetic flux density"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-current"
+      ],
+      "related": [
+        "phys.em.magnetic-force"
+      ],
+      "cross_links": [],
+      "description": "A magnetic field exerts forces on moving charges and current-carrying conductors; field lines indicate its direction and strength.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.magnetic-flux",
+        "phys.em.magnetic-force",
+        "phys.em.magnetic-materials"
+      ]
+    },
+    {
+      "id": "phys.em.magnetic-force",
+      "name": "Magnetic Force on Moving Charges \u2014 Lorentz Force",
+      "aliases": [
+        "Lorentz force",
+        "magnetic force",
+        "qvB"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-field",
+        "phys.em.electric-field"
+      ],
+      "related": [
+        "phys.em.biot-savart"
+      ],
+      "cross_links": [],
+      "description": "The Lorentz force F = q(E + v \u00d7 B) acts on a charge q moving with velocity v in electric and magnetic fields.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.biot-savart"
+      ]
+    },
+    {
+      "id": "phys.em.biot-savart",
+      "name": "Biot-Savart Law",
+      "aliases": [
+        "Biot-Savart",
+        "magnetic field of current"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-force"
+      ],
+      "related": [
+        "phys.em.amperes-law"
+      ],
+      "cross_links": [],
+      "description": "The Biot-Savart law gives the infinitesimal magnetic field contribution dB from a current element Id\ud835\udc59.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.amperes-law"
+      ]
+    },
+    {
+      "id": "phys.em.amperes-law",
+      "name": "Ampere's Circuital Law",
+      "aliases": [
+        "Ampere's law",
+        "Amperian loop"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.biot-savart"
+      ],
+      "related": [
+        "phys.em.solenoid"
+      ],
+      "cross_links": [],
+      "description": "Ampere's law relates the line integral of magnetic field around a closed loop to the enclosed current.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.maxwells-equations",
+        "phys.em.solenoid"
+      ]
+    },
+    {
+      "id": "phys.em.solenoid",
+      "name": "Magnetic Field of a Solenoid and Toroid",
+      "aliases": [
+        "solenoid",
+        "toroid",
+        "solenoid field"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.amperes-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The solenoid produces a uniform axial magnetic field B = \u03bc\u2080nI inside; a toroid confines the field within its core.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.4"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.magnetic-materials",
+      "name": "Dia-, Para-, and Ferromagnetism",
+      "aliases": [
+        "magnetic materials",
+        "ferromagnetism",
+        "paramagnetism",
+        "diamagnetism"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-field"
+      ],
+      "related": [
+        "phys.em.magnetic-dipole"
+      ],
+      "cross_links": [],
+      "description": "Materials are classified as diamagnetic, paramagnetic, or ferromagnetic based on their response to external magnetic fields.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.magnetic-dipole"
+      ]
+    },
+    {
+      "id": "phys.em.magnetic-dipole",
+      "name": "Magnetic Dipole and Earth's Magnetism",
+      "aliases": [
+        "magnetic dipole",
+        "bar magnet",
+        "geomagnetic field"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-materials"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A magnetic dipole has a moment m = NIA; Earth behaves as a giant magnetic dipole with geographic and magnetic poles.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.magnetic-flux",
+      "name": "Magnetic Flux",
+      "aliases": [
+        "magnetic flux",
+        "\u03a6"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-field"
+      ],
+      "related": [
+        "phys.em.faradays-law"
+      ],
+      "cross_links": [],
+      "description": "Magnetic flux \u03a6 = B\u00b7A is the total magnetic field passing perpendicularly through a surface area A.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.faradays-law"
+      ]
+    },
+    {
+      "id": "phys.em.faradays-law",
+      "name": "Faraday's Law of Electromagnetic Induction",
+      "aliases": [
+        "Faraday's law",
+        "electromagnetic induction"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-flux"
+      ],
+      "related": [
+        "phys.em.lenzs-law"
+      ],
+      "cross_links": [],
+      "description": "Faraday's law states that the induced EMF equals the negative rate of change of magnetic flux through a circuit: \u03b5 = \u2212d\u03a6/dt.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.ac-basics",
+        "phys.em.lenzs-law",
+        "phys.em.maxwells-equations",
+        "phys.em.self-inductance"
+      ]
+    },
+    {
+      "id": "phys.em.lenzs-law",
+      "name": "Lenz's Law and Induced EMF Direction",
+      "aliases": [
+        "Lenz's law",
+        "opposing flux"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.faradays-law"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Lenz's law states that the direction of induced current opposes the change in magnetic flux that caused it.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.self-inductance",
+      "name": "Self-Inductance",
+      "aliases": [
+        "self-inductance",
+        "inductance",
+        "L"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.faradays-law"
+      ],
+      "related": [
+        "phys.em.mutual-inductance",
+        "phys.em.lc-circuits"
+      ],
+      "cross_links": [],
+      "description": "Self-inductance measures a coil's ability to oppose changes in its own current by inducing a back-EMF: \u03b5 = \u2212L dI/dt.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.lc-circuits",
+        "phys.em.mutual-inductance"
+      ]
+    },
+    {
+      "id": "phys.em.mutual-inductance",
+      "name": "Mutual Inductance and Transformers",
+      "aliases": [
+        "mutual inductance",
+        "transformer",
+        "M"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.self-inductance"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Mutual inductance describes the EMF induced in one coil by a changing current in another; transformers use this principle to change voltage levels.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.ac-basics",
+      "name": "Alternating Current: Peak and RMS Values",
+      "aliases": [
+        "AC",
+        "alternating current",
+        "RMS",
+        "peak value"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.ohms-law",
+        "phys.em.faradays-law"
+      ],
+      "related": [
+        "phys.em.lc-circuits"
+      ],
+      "cross_links": [],
+      "description": "Alternating current varies sinusoidally with time; RMS values equal peak values divided by \u221a2 for power calculations.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.lc-circuits"
+      ]
+    },
+    {
+      "id": "phys.em.lc-circuits",
+      "name": "LC Oscillations and Resonance",
+      "aliases": [
+        "LC circuit",
+        "LC oscillation",
+        "RLC",
+        "resonance"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.self-inductance",
+        "phys.em.capacitance",
+        "phys.em.ac-basics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An LC circuit oscillates at resonant frequency f = 1/(2\u03c0\u221aLC) as energy alternates between inductor and capacitor.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.maxwells-equations",
+      "name": "Maxwell's Equations and Displacement Current",
+      "aliases": [
+        "Maxwell's equations",
+        "displacement current"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.gauss-law",
+        "phys.em.amperes-law",
+        "phys.em.faradays-law"
+      ],
+      "related": [
+        "phys.em.electromagnetic-waves"
+      ],
+      "cross_links": [],
+      "description": "Maxwell's four equations unify electricity and magnetism and predict electromagnetic wave propagation through displacement current.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Electrodynamics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.electromagnetic-waves"
+      ]
+    },
+    {
+      "id": "phys.em.electromagnetic-waves",
+      "name": "Electromagnetic Waves and the EM Spectrum",
+      "aliases": [
+        "EM waves",
+        "electromagnetic spectrum",
+        "radio waves",
+        "microwaves"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.maxwells-equations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Electromagnetic waves are self-sustaining oscillations of electric and magnetic fields that propagate at the speed of light.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.8"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.photoelectric-effect",
+        "phys.rel.postulates"
+      ]
+    },
+    {
+      "id": "phys.mod.photoelectric-effect",
+      "name": "Photoelectric Effect",
+      "aliases": [
+        "photoelectric effect",
+        "photoemission"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electromagnetic-waves"
+      ],
+      "related": [
+        "phys.mod.photons"
+      ],
+      "cross_links": [],
+      "description": "The photoelectric effect is the emission of electrons from a metal surface when light of sufficient frequency falls on it, explained by photon quantisation.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.photons"
+      ]
+    },
+    {
+      "id": "phys.mod.photons",
+      "name": "Photons and Quantization of Light",
+      "aliases": [
+        "photon",
+        "light quanta",
+        "E=hf"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.photoelectric-effect"
+      ],
+      "related": [
+        "phys.mod.compton-effect"
+      ],
+      "cross_links": [],
+      "description": "Light is quantised into photons each carrying energy E = hf, explaining phenomena that classical wave theory cannot.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.bohr-model",
+        "phys.mod.compton-effect",
+        "phys.mod.de-broglie",
+        "phys.mod.x-rays"
+      ]
+    },
+    {
+      "id": "phys.mod.compton-effect",
+      "name": "Compton Scattering",
+      "aliases": [
+        "Compton effect",
+        "Compton scattering"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.photons"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Compton scattering is the increase in wavelength of X-rays scattered by electrons, confirming the particle nature of photons.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mod.de-broglie",
+      "name": "de Broglie Hypothesis \u2014 Matter Waves",
+      "aliases": [
+        "de Broglie wavelength",
+        "matter waves"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.photons"
+      ],
+      "related": [
+        "phys.mod.wave-particle-duality"
+      ],
+      "cross_links": [],
+      "description": "De Broglie proposed that every moving particle has an associated wavelength \u03bb = h/p, unifying wave and particle pictures.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.wave-particle-duality"
+      ]
+    },
+    {
+      "id": "phys.mod.wave-particle-duality",
+      "name": "Wave-Particle Duality",
+      "aliases": [
+        "wave-particle duality",
+        "complementarity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.de-broglie"
+      ],
+      "related": [
+        "phys.qm.wave-function"
+      ],
+      "cross_links": [],
+      "description": "Wave-particle duality is the principle that quantum objects exhibit both wave and particle properties depending on the experiment.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.wave-function"
+      ]
+    },
+    {
+      "id": "phys.mod.bohr-model",
+      "name": "Bohr Model of the Hydrogen Atom",
+      "aliases": [
+        "Bohr model",
+        "Bohr atom"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.coulombs-law",
+        "phys.mod.photons"
+      ],
+      "related": [
+        "phys.mod.atomic-spectra"
+      ],
+      "cross_links": [],
+      "description": "Bohr's model of hydrogen assumes quantised circular orbits, giving discrete energy levels En = \u221213.6/n\u00b2 eV.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.atomic-spectra"
+      ]
+    },
+    {
+      "id": "phys.mod.atomic-spectra",
+      "name": "Atomic Spectra and Energy Levels",
+      "aliases": [
+        "atomic spectrum",
+        "spectral lines",
+        "emission spectrum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.bohr-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Atomic spectra arise from electrons transitioning between discrete energy levels, emitting or absorbing photons of specific frequencies.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.radioactivity"
+      ]
+    },
+    {
+      "id": "phys.mod.x-rays",
+      "name": "X-Rays and Their Properties",
+      "aliases": [
+        "X-rays",
+        "X-radiation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.photons"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "X-rays are high-energy electromagnetic radiation produced by accelerating electrons into a metal target, used in medical imaging and crystallography.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mod.radioactivity",
+      "name": "Radioactivity: Alpha, Beta, Gamma Decay",
+      "aliases": [
+        "radioactivity",
+        "alpha decay",
+        "beta decay",
+        "gamma decay"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.atomic-spectra"
+      ],
+      "related": [
+        "phys.mod.radioactive-decay"
+      ],
+      "cross_links": [],
+      "description": "Radioactivity is the spontaneous emission of alpha particles, beta particles, or gamma rays from unstable atomic nuclei.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.radioactive-decay"
+      ]
+    },
+    {
+      "id": "phys.mod.radioactive-decay",
+      "name": "Radioactive Decay Law and Half-Life",
+      "aliases": [
+        "decay law",
+        "half-life",
+        "radioactive decay"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.radioactivity"
+      ],
+      "related": [
+        "phys.mod.nuclear-reactions"
+      ],
+      "cross_links": [],
+      "description": "Radioactive decay follows an exponential law N = N\u2080e^(\u2212\u03bbt); the half-life is the time for half the nuclei to decay.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.nuclear-reactions"
+      ]
+    },
+    {
+      "id": "phys.mod.nuclear-reactions",
+      "name": "Nuclear Reactions and Q-Value",
+      "aliases": [
+        "nuclear reaction",
+        "Q-value",
+        "transmutation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.radioactive-decay"
+      ],
+      "related": [
+        "phys.mod.binding-energy"
+      ],
+      "cross_links": [],
+      "description": "Nuclear reactions conserve charge, mass number, and energy; the Q-value is the energy released or absorbed.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.binding-energy"
+      ]
+    },
+    {
+      "id": "phys.mod.binding-energy",
+      "name": "Nuclear Binding Energy and Mass Defect",
+      "aliases": [
+        "binding energy",
+        "mass defect",
+        "nuclear stability"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.nuclear-reactions"
+      ],
+      "related": [
+        "phys.mod.nuclear-fission",
+        "phys.mod.nuclear-fusion"
+      ],
+      "cross_links": [],
+      "description": "Nuclear binding energy is the energy equivalent of the mass defect \u2014 the difference between free nucleon masses and the nucleus mass.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.nuclear-fission",
+        "phys.mod.nuclear-fusion",
+        "phys.mod.nuclear-models"
+      ]
+    },
+    {
+      "id": "phys.mod.nuclear-fission",
+      "name": "Nuclear Fission and Chain Reactions",
+      "aliases": [
+        "nuclear fission",
+        "chain reaction",
+        "fission"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.binding-energy"
+      ],
+      "related": [
+        "phys.mod.nuclear-fusion"
+      ],
+      "cross_links": [],
+      "description": "Nuclear fission splits a heavy nucleus into lighter fragments releasing enormous energy; a chain reaction sustains continuous fission.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mod.nuclear-fusion",
+      "name": "Nuclear Fusion and Stellar Energy",
+      "aliases": [
+        "nuclear fusion",
+        "fusion",
+        "stellar nucleosynthesis"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.binding-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Nuclear fusion combines light nuclei into heavier ones releasing energy; it powers stars and is the basis of hydrogen bombs.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.stellar-structure"
+      ]
+    },
+    {
+      "id": "phys.mod.nuclear-models",
+      "name": "Nuclear Models: Shell Model",
+      "aliases": [
+        "nuclear shell model",
+        "nuclear structure"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.binding-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The nuclear shell model explains magic numbers and nuclear stability by assigning nucleons to quantised energy shells.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Krane Modern Physics"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.wave-function",
+      "name": "Wave Function and Probability Interpretation",
+      "aliases": [
+        "wave function",
+        "probability density",
+        "psi"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.wave-particle-duality"
+      ],
+      "related": [
+        "phys.qm.uncertainty-principle"
+      ],
+      "cross_links": [],
+      "description": "The wave function \u03c8 is a complex amplitude whose squared modulus gives the probability density of finding a particle at a location.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.schrodinger-equation",
+        "phys.qm.uncertainty-principle"
+      ]
+    },
+    {
+      "id": "phys.qm.schrodinger-equation",
+      "name": "Time-Dependent Schr\u00f6dinger Equation",
+      "aliases": [
+        "Schrodinger equation",
+        "TDSE",
+        "quantum wave equation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.wave-function"
+      ],
+      "related": [
+        "phys.qm.operators"
+      ],
+      "cross_links": [],
+      "description": "The Schr\u00f6dinger equation i\u210f\u2202\u03c8/\u2202t = \u0124\u03c8 governs the time evolution of the quantum wave function.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.1"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.harmonic-oscillator-qm",
+        "phys.qm.hydrogen-atom-qm",
+        "phys.qm.operators",
+        "phys.qm.particle-in-box",
+        "phys.qm.quantum-tunneling"
+      ]
+    },
+    {
+      "id": "phys.qm.uncertainty-principle",
+      "name": "Heisenberg's Uncertainty Principle",
+      "aliases": [
+        "uncertainty principle",
+        "Heisenberg",
+        "\u0394x\u0394p"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.wave-function"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Heisenberg's uncertainty principle states that \u0394x\u00b7\u0394p \u2265 \u210f/2, setting a fundamental limit on simultaneous measurement precision.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.11",
+        "Griffiths Ch.3"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.operators",
+      "name": "Quantum Operators and Observables",
+      "aliases": [
+        "quantum operators",
+        "Hermitian operators",
+        "observables"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Physical observables in quantum mechanics are represented by Hermitian operators whose eigenvalues give measurement outcomes.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.hydrogen-atom-qm",
+        "phys.qm.perturbation-theory",
+        "phys.qm.selection-rules",
+        "phys.qm.spin",
+        "phys.qm.density-matrix",
+        "phys.qm.scattering-theory-born-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.particle-in-box",
+      "name": "Particle in an Infinite Square Well",
+      "aliases": [
+        "particle in a box",
+        "infinite square well"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "related": [
+        "phys.qm.harmonic-oscillator-qm"
+      ],
+      "cross_links": [],
+      "description": "The infinite square well is an exactly solvable quantum model giving quantised energies En = n\u00b2\u03c0\u00b2\u210f\u00b2/(2mL\u00b2).",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.harmonic-oscillator-qm",
+      "name": "Quantum Harmonic Oscillator",
+      "aliases": [
+        "QHO",
+        "quantum harmonic oscillator"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The quantum harmonic oscillator has equally spaced energy levels En = (n+\u00bd)\u210f\u03c9, solved by ladder operators.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.hydrogen-atom-qm",
+      "name": "Quantum Treatment of Hydrogen Atom",
+      "aliases": [
+        "hydrogen atom QM",
+        "spherical harmonics",
+        "quantum numbers"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.schrodinger-equation",
+        "phys.qm.operators"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The quantum mechanical hydrogen atom gives four quantum numbers (n, l, m, s) and exact wavefunctions via separation of variables.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.perturbation-theory",
+        "phys.qm.selection-rules",
+        "phys.qm.variational-method",
+        "phys.qm.angular-momentum-addition"
+      ]
+    },
+    {
+      "id": "phys.qm.spin",
+      "name": "Electron Spin and the Stern-Gerlach Experiment",
+      "aliases": [
+        "electron spin",
+        "spin",
+        "Stern-Gerlach"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators"
+      ],
+      "related": [
+        "phys.qm.pauli-exclusion"
+      ],
+      "cross_links": [],
+      "description": "Electron spin is an intrinsic quantum number with half-integer values, demonstrated by spatial quantisation in the Stern-Gerlach experiment.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.pauli-exclusion",
+        "phys.qm.angular-momentum-addition",
+        "phys.qm.density-matrix"
+      ]
+    },
+    {
+      "id": "phys.qm.pauli-exclusion",
+      "name": "Pauli Exclusion Principle",
+      "aliases": [
+        "Pauli exclusion",
+        "exclusion principle",
+        "fermions"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Pauli exclusion principle states that no two identical fermions can occupy the same quantum state simultaneously.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.12",
+        "Griffiths Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.fermi-dirac",
+        "phys.qm.identical-particles"
+      ]
+    },
+    {
+      "id": "phys.qm.quantum-tunneling",
+      "name": "Quantum Tunneling",
+      "aliases": [
+        "tunneling",
+        "quantum tunnelling",
+        "barrier penetration"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Quantum tunneling is the penetration of a particle through a potential barrier even when its energy is less than the barrier height.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.2"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.wkb-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.perturbation-theory",
+      "name": "Time-Independent Perturbation Theory",
+      "aliases": [
+        "perturbation theory",
+        "first-order perturbation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.hydrogen-atom-qm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Perturbation theory approximates energy corrections and eigenstate mixing when a small perturbation is added to a solvable Hamiltonian.",
+      "difficulty": "research",
+      "estimated_hours": 12,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.6"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.variational-method"
+      ]
+    },
+    {
+      "id": "phys.qm.selection-rules",
+      "name": "Selection Rules and Transition Probabilities",
+      "aliases": [
+        "selection rules",
+        "forbidden transitions",
+        "dipole transitions"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.hydrogen-atom-qm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Selection rules restrict which quantum transitions are allowed; they arise from conservation laws and matrix element calculations.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.variational-method",
+      "name": "Variational Method and Variational Principle",
+      "aliases": [
+        "variational principle",
+        "variational method",
+        "trial wavefunction",
+        "Rayleigh-Ritz method"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.hydrogen-atom-qm",
+        "phys.qm.perturbation-theory"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The variational principle states that for any normalised trial state |ψ⟩, the expectation value ⟨ψ|H|ψ⟩ ≥ E₀ (ground-state energy); minimising over a parametric family of trial wavefunctions gives an upper bound on E₀. The helium atom ground state is the canonical worked example.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.7",
+        "Sakurai Modern Quantum Mechanics Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.wkb-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.wkb-approximation",
+      "name": "WKB Approximation (Semiclassical Limit)",
+      "aliases": [
+        "WKB",
+        "Wentzel-Kramers-Brillouin",
+        "semiclassical approximation",
+        "JWKB"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.quantum-tunneling",
+        "phys.qm.variational-method"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The WKB approximation applies when the potential varies slowly on the scale of the de Broglie wavelength; it gives ψ ∝ exp(±i∫p dx/ℏ) in classically allowed regions and exponential decay in forbidden regions, recovering the exact Gamow tunneling formula.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.9",
+        "Sakurai Modern Quantum Mechanics Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.identical-particles",
+      "name": "Identical Particles and the Symmetrization Postulate",
+      "aliases": [
+        "identical particles",
+        "symmetrization postulate",
+        "bosons",
+        "fermions",
+        "exchange symmetry",
+        "anti-symmetrization"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin",
+        "phys.qm.pauli-exclusion"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The symmetrization postulate requires multi-particle wavefunctions to be symmetric under particle exchange (bosons) or antisymmetric (fermions); the Slater determinant constructs antisymmetric states and the spin-statistics theorem ties spin to exchange symmetry.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.5",
+        "Sakurai Modern Quantum Mechanics Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.angular-momentum-addition",
+      "name": "Addition of Angular Momenta and Clebsch-Gordan Coefficients",
+      "aliases": [
+        "angular momentum addition",
+        "Clebsch-Gordan coefficients",
+        "CG coefficients",
+        "coupled basis",
+        "total angular momentum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin",
+        "phys.qm.hydrogen-atom-qm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "When two angular momenta j₁ and j₂ are combined, the total J ranges from |j₁−j₂| to j₁+j₂; Clebsch-Gordan coefficients ⟨j₁m₁j₂m₂|JM⟩ give the change-of-basis between the uncoupled {m₁,m₂} and coupled {J,M} representations.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.4 §4.4",
+        "Sakurai Modern Quantum Mechanics Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.scattering-theory-born-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.scattering-theory-born-approximation",
+      "name": "Scattering Theory and the Born Approximation",
+      "aliases": [
+        "Born approximation",
+        "scattering theory",
+        "differential cross-section",
+        "Lippmann-Schwinger equation",
+        "partial wave analysis"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.angular-momentum-addition",
+        "phys.mech.hamiltonian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Scattering theory describes how particles scatter off a potential V; the Lippmann-Schwinger equation |ψ⟩ = |φ⟩ + G₀V|ψ⟩ generates the Born series, whose first term gives the differential cross-section dσ/dΩ ∝ |Ṽ(q)|² in terms of the Fourier transform of the potential.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.11",
+        "Sakurai Modern Quantum Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.s-matrix-basics"
+      ]
+    },
+    {
+      "id": "phys.qm.s-matrix-basics",
+      "name": "S-Matrix and Scattering Amplitudes",
+      "aliases": [
+        "S-matrix",
+        "scattering matrix",
+        "T-matrix",
+        "scattering amplitude"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.scattering-theory-born-approximation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The S-matrix (scattering matrix) maps in-states to out-states: S = 1 + 2πiT; unitarity of S encodes conservation of probability. The T-matrix elements give scattering amplitudes, and the optical theorem relates Im f(θ=0) to the total cross-section.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Sakurai Modern Quantum Mechanics Ch.7",
+        "Weinberg Lectures on Quantum Mechanics Ch.8"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.density-matrix",
+      "name": "Density Matrix and Mixed Quantum States",
+      "aliases": [
+        "density matrix",
+        "density operator",
+        "mixed state",
+        "von Neumann equation",
+        "reduced density matrix"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.spin"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The density operator ρ = Σᵢpᵢ|ψᵢ⟩⟨ψᵢ| represents statistical mixtures of quantum states; pure states satisfy ρ² = ρ while mixed states have Tr(ρ²) < 1. The von Neumann equation iℏ∂ρ/∂t = [H,ρ] governs time evolution.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Sakurai Modern Quantum Mechanics Ch.3",
+        "Weinberg Lectures on Quantum Mechanics Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.rel.postulates",
+      "name": "Postulates of Special Relativity",
+      "aliases": [
+        "postulates",
+        "Einstein's postulates",
+        "special relativity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.relative-motion",
+        "phys.em.electromagnetic-waves"
+      ],
+      "related": [
+        "phys.rel.simultaneity"
+      ],
+      "cross_links": [],
+      "description": "Einstein's two postulates are that the laws of physics are the same in all inertial frames and the speed of light is constant.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.11",
+        "Taylor & Wheeler Spacetime Physics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.simultaneity"
+      ]
+    },
+    {
+      "id": "phys.rel.simultaneity",
+      "name": "Relativity of Simultaneity",
+      "aliases": [
+        "simultaneity",
+        "relativity of time"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.postulates"
+      ],
+      "related": [
+        "phys.rel.time-dilation"
+      ],
+      "cross_links": [],
+      "description": "Events that are simultaneous in one inertial frame may not be simultaneous in another frame moving relative to it.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Taylor & Wheeler Spacetime Physics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.time-dilation"
+      ]
+    },
+    {
+      "id": "phys.rel.time-dilation",
+      "name": "Time Dilation",
+      "aliases": [
+        "time dilation",
+        "twin paradox",
+        "proper time"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.simultaneity"
+      ],
+      "related": [
+        "phys.rel.length-contraction"
+      ],
+      "cross_links": [],
+      "description": "A moving clock runs slower than a stationary one; the dilated time \u0394t = \u03b3\u0394\u03c4 where \u03b3 = 1/\u221a(1\u2212v\u00b2/c\u00b2).",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12",
+        "Taylor & Wheeler"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.length-contraction"
+      ]
+    },
+    {
+      "id": "phys.rel.length-contraction",
+      "name": "Length Contraction",
+      "aliases": [
+        "Lorentz contraction",
+        "length contraction"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.time-dilation"
+      ],
+      "related": [
+        "phys.rel.lorentz-transform"
+      ],
+      "cross_links": [],
+      "description": "A moving object is measured to be shorter along the direction of motion by the factor 1/\u03b3 relative to its rest length.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Taylor & Wheeler Spacetime Physics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.lorentz-transform"
+      ]
+    },
+    {
+      "id": "phys.rel.lorentz-transform",
+      "name": "Lorentz Transformations",
+      "aliases": [
+        "Lorentz transformation",
+        "LT"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.length-contraction"
+      ],
+      "related": [
+        "phys.rel.relativistic-momentum"
+      ],
+      "cross_links": [],
+      "description": "The Lorentz transformations relate spacetime coordinates of events measured in two inertial frames in relative motion.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Taylor & Wheeler Spacetime Physics",
+        "Griffiths Electrodynamics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.relativistic-momentum"
+      ]
+    },
+    {
+      "id": "phys.rel.relativistic-momentum",
+      "name": "Relativistic Momentum and Energy",
+      "aliases": [
+        "relativistic momentum",
+        "relativistic energy",
+        "\u03b3mv"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.lorentz-transform"
+      ],
+      "related": [
+        "phys.rel.mass-energy"
+      ],
+      "cross_links": [],
+      "description": "Relativistic momentum is p = \u03b3mv and total energy E = \u03b3mc\u00b2; together they form the energy-momentum four-vector.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Taylor & Wheeler Spacetime Physics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.mass-energy"
+      ]
+    },
+    {
+      "id": "phys.rel.mass-energy",
+      "name": "Mass-Energy Equivalence: E=mc\u00b2",
+      "aliases": [
+        "E=mc\u00b2",
+        "mass-energy equivalence",
+        "rest energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.relativistic-momentum"
+      ],
+      "related": [
+        "phys.rel.spacetime"
+      ],
+      "cross_links": [],
+      "description": "Mass-energy equivalence E = mc\u00b2 states that mass and energy are interconvertible, with rest mass representing stored energy.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 12",
+        "Taylor & Wheeler"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.rel.spacetime"
+      ]
+    },
+    {
+      "id": "phys.rel.spacetime",
+      "name": "Spacetime Interval and Four-Vectors",
+      "aliases": [
+        "spacetime",
+        "four-vector",
+        "invariant interval"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.mass-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The spacetime interval s\u00b2 = c\u00b2t\u00b2 \u2212 x\u00b2 is invariant under Lorentz transformations; four-vectors generalise this to all relativistic quantities.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Taylor & Wheeler Spacetime Physics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.black-holes",
+        "phys.astro.cosmology"
+      ]
+    },
+    {
+      "id": "phys.stat.probability-basics",
+      "name": "Probability Distributions in Physics",
+      "aliases": [
+        "probability distributions",
+        "statistical mechanics intro"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.kinetic-theory",
+        "phys.therm.entropy"
+      ],
+      "related": [
+        "phys.stat.boltzmann-factor"
+      ],
+      "cross_links": [],
+      "description": "Statistical mechanics describes macroscopic behaviour through probability distributions over microscopic states.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.boltzmann-factor"
+      ]
+    },
+    {
+      "id": "phys.stat.boltzmann-factor",
+      "name": "Boltzmann Factor and Statistical Weight",
+      "aliases": [
+        "Boltzmann factor",
+        "statistical weight",
+        "e^-E/kT"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.probability-basics"
+      ],
+      "related": [
+        "phys.stat.partition-function"
+      ],
+      "cross_links": [],
+      "description": "The Boltzmann factor e^(\u2212E/kT) gives the relative probability of a microstate at energy E in thermal equilibrium at temperature T.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.maxwell-boltzmann",
+        "phys.stat.partition-function"
+      ]
+    },
+    {
+      "id": "phys.stat.partition-function",
+      "name": "Partition Function",
+      "aliases": [
+        "partition function",
+        "Z",
+        "statistical sum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.boltzmann-factor"
+      ],
+      "related": [
+        "phys.stat.free-energy"
+      ],
+      "cross_links": [],
+      "description": "The partition function Z = \u03a3e^(\u2212E_i/kT) sums Boltzmann factors over all microstates and encodes all thermodynamic information.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.bose-einstein",
+        "phys.stat.entropy-statistical",
+        "phys.stat.fermi-dirac",
+        "phys.stat.free-energy",
+        "phys.stat.grand-canonical-ensemble",
+        "phys.stat.fluctuations-correlations"
+      ]
+    },
+    {
+      "id": "phys.stat.maxwell-boltzmann",
+      "name": "Maxwell-Boltzmann Speed Distribution",
+      "aliases": [
+        "Maxwell-Boltzmann distribution",
+        "molecular speed distribution"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.boltzmann-factor"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Maxwell-Boltzmann distribution gives the probability distribution of molecular speeds in an ideal gas in equilibrium.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.13",
+        "Reif"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.fermi-dirac",
+      "name": "Fermi-Dirac Statistics",
+      "aliases": [
+        "Fermi-Dirac distribution",
+        "fermion statistics",
+        "Fermi energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function",
+        "phys.qm.pauli-exclusion"
+      ],
+      "related": [
+        "phys.stat.bose-einstein"
+      ],
+      "cross_links": [],
+      "description": "Fermi-Dirac statistics describe the thermal occupation of quantum states by fermions, with the Fermi energy as the chemical potential at T=0.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Kittel Introduction to Solid State Physics"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.bose-einstein",
+      "name": "Bose-Einstein Statistics",
+      "aliases": [
+        "Bose-Einstein distribution",
+        "boson statistics",
+        "BEC"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac"
+      ],
+      "cross_links": [],
+      "description": "Bose-Einstein statistics describe bosons that can occupy the same quantum state; at low temperatures they condense into the ground state.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.entropy-statistical",
+      "name": "Statistical Definition of Entropy",
+      "aliases": [
+        "Boltzmann entropy",
+        "S=k ln W",
+        "statistical entropy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Boltzmann's formula S = k ln \u03a9 defines entropy as the logarithm of the number of accessible microstates, linking statistical and thermodynamic entropy.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.free-energy",
+      "name": "Helmholtz and Gibbs Free Energy",
+      "aliases": [
+        "Helmholtz free energy",
+        "Gibbs free energy",
+        "A",
+        "G"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Helmholtz free energy F = U \u2212 TS and Gibbs free energy G = H \u2212 TS are thermodynamic potentials that determine equilibrium under different constraints.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.phase-transitions"
+      ]
+    },
+    {
+      "id": "phys.stat.grand-canonical-ensemble",
+      "name": "Grand Canonical Ensemble",
+      "aliases": [
+        "grand canonical ensemble",
+        "grand partition function",
+        "open system",
+        "fugacity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac",
+        "phys.stat.bose-einstein"
+      ],
+      "cross_links": [],
+      "description": "The grand canonical ensemble describes systems in contact with both a heat bath and a particle reservoir; the grand partition function \u039e = \u03a3 e^(\u2212\u03b2(E\u1d62\u2212\u03bcN\u1d62)) generates all thermodynamic averages for open systems, and Fermi-Dirac and Bose-Einstein distributions follow directly from it.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Reif Fundamentals of Statistical Mechanics Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.chemical-potential"
+      ]
+    },
+    {
+      "id": "phys.stat.chemical-potential",
+      "name": "Chemical Potential and Thermodynamic Equilibrium",
+      "aliases": [
+        "chemical potential",
+        "mu",
+        "electrochemical potential",
+        "partial molar Gibbs energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.grand-canonical-ensemble"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac"
+      ],
+      "cross_links": [],
+      "description": "The chemical potential \u03bc = (\u2202F/\u2202N)_{T,V} is the free energy cost of adding one particle; it equalises between subsystems at equilibrium, governs diffusion across boundaries, and sets the Fermi energy at T = 0 for fermions.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Kittel Introduction to Solid State Physics Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.fluctuations-correlations",
+      "name": "Fluctuations, Response Functions, and Correlations",
+      "aliases": [
+        "fluctuations",
+        "susceptibility",
+        "response function",
+        "fluctuation-dissipation theorem",
+        "correlation function"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Thermodynamic fluctuations of an observable A satisfy \u27e8(\u0394A)\u00b2\u27e9 = kT\u00b2(\u2202\u27e8A\u27e9/\u2202T); the fluctuation-dissipation theorem connects equilibrium fluctuations to linear response coefficients, and two-point correlation functions encode spatial order.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Reif Fundamentals of Statistical Mechanics Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.ising-model"
+      ]
+    },
+    {
+      "id": "phys.stat.phase-transitions",
+      "name": "Phase Transitions and Landau Mean-Field Theory",
+      "aliases": [
+        "phase transition",
+        "order parameter",
+        "Landau theory",
+        "mean-field theory",
+        "first-order transition",
+        "second-order transition"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.free-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A phase transition is a discontinuous or singular change in macroscopic properties at a critical point; Landau's mean-field theory expands the free energy in powers of an order parameter \u03b7: F = a\u2080 + a\u2082\u03b7\u00b2 + a\u2084\u03b7\u2074 + \u2026, with the sign of a\u2082(T) distinguishing ordered from disordered phases.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.11",
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.1-4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.ising-model"
+      ]
+    },
+    {
+      "id": "phys.stat.ising-model",
+      "name": "Ising Model",
+      "aliases": [
+        "Ising model",
+        "lattice spin model",
+        "exact solution",
+        "transfer matrix"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.phase-transitions",
+        "phys.stat.fluctuations-correlations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Ising model assigns binary spins \u03c3\u1d62 = \u00b11 to lattice sites with nearest-neighbour coupling H = \u2212J\u03a3\u03c3\u1d62\u03c3\u2c7c; the 1D model is exactly solvable by the transfer matrix (no phase transition), while the 2D model (Onsager, 1944) exhibits a continuous phase transition at kTc/J \u2248 2.269.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.12",
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.phase-transitions-critical-phenomena",
+        "phys.stat.monte-carlo-basics"
+      ]
+    },
+    {
+      "id": "phys.stat.phase-transitions-critical-phenomena",
+      "name": "Critical Phenomena, Scaling Laws, and Universality",
+      "aliases": [
+        "critical phenomena",
+        "critical exponents",
+        "scaling laws",
+        "universality",
+        "renormalization group"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.ising-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Near a critical point, thermodynamic quantities diverge as power laws |T\u2212Tc|^\u03b1,\u03b2,\u03b3,\u03bd,\u03b7; universality groups materials into classes sharing critical exponents regardless of microscopic details; the Wilson renormalization group provides the theoretical foundation via scale invariance and fixed points.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.6-10",
+        "Pathria Statistical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.monte-carlo-basics",
+      "name": "Monte Carlo Methods in Statistical Physics",
+      "aliases": [
+        "Monte Carlo simulation",
+        "Metropolis algorithm",
+        "detailed balance",
+        "Markov chain Monte Carlo",
+        "MCMC"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.ising-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Monte Carlo simulation samples phase space stochastically; the Metropolis algorithm accepts new configurations with probability min(1, e^(\u2212\u03b2\u0394E)), satisfying detailed balance and converging to the Boltzmann distribution. The Ising model is the canonical teaching example for diagnosing critical slowing down.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Newman & Barkema Monte Carlo Methods in Statistical Physics Ch.1-4",
+        "Pathria Statistical Mechanics Ch.16"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.astro.stellar-structure",
+      "name": "Stellar Structure and the Main Sequence",
+      "aliases": [
+        "stellar structure",
+        "main sequence",
+        "HR diagram"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.universal-gravitation",
+        "phys.mod.nuclear-fusion"
+      ],
+      "related": [
+        "phys.astro.stellar-evolution"
+      ],
+      "cross_links": [],
+      "description": "Stars are self-gravitating plasma balls in hydrostatic equilibrium whose energy source is core nuclear fusion.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Carroll & Ostlie Modern Astrophysics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.cosmology",
+        "phys.astro.stellar-evolution"
+      ]
+    },
+    {
+      "id": "phys.astro.stellar-evolution",
+      "name": "Stellar Evolution and End States",
+      "aliases": [
+        "stellar evolution",
+        "red giant",
+        "white dwarf",
+        "neutron star",
+        "supernova"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.astro.stellar-structure"
+      ],
+      "related": [
+        "phys.astro.black-holes"
+      ],
+      "cross_links": [],
+      "description": "Stars evolve from the main sequence through red giant, and end as white dwarfs, neutron stars, or black holes depending on their mass.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Carroll & Ostlie Modern Astrophysics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.black-holes"
+      ]
+    },
+    {
+      "id": "phys.astro.cosmology",
+      "name": "Big Bang Cosmology",
+      "aliases": [
+        "Big Bang",
+        "cosmology",
+        "Hubble expansion"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.spacetime",
+        "phys.astro.stellar-structure"
+      ],
+      "related": [
+        "phys.astro.dark-matter"
+      ],
+      "cross_links": [],
+      "description": "Big Bang cosmology describes the origin and evolution of the universe from a hot, dense initial state through expansion and cooling.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Ryden Introduction to Cosmology"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.dark-matter"
+      ]
+    },
+    {
+      "id": "phys.astro.dark-matter",
+      "name": "Dark Matter and Dark Energy",
+      "aliases": [
+        "dark matter",
+        "dark energy",
+        "cosmological constant"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.astro.cosmology"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Dark matter and dark energy are inferred from gravitational and cosmological observations but their physical nature remains unknown.",
+      "difficulty": "research",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Ryden Introduction to Cosmology",
+        "Bertone et al. 2004"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.astro.black-holes",
+      "name": "Black Holes and Schwarzschild Radius",
+      "aliases": [
+        "black hole",
+        "Schwarzschild radius",
+        "event horizon"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.astro.stellar-evolution",
+        "phys.rel.spacetime"
+      ],
+      "related": [
+        "phys.astro.gravitational-waves"
+      ],
+      "cross_links": [],
+      "description": "A black hole is a region of spacetime where gravity is so strong that nothing, not even light, can escape from within the Schwarzschild radius.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Carroll & Ostlie Modern Astrophysics",
+        "Hartle Gravity"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.gravitational-waves"
+      ]
+    },
+    {
+      "id": "phys.astro.gravitational-waves",
+      "name": "Gravitational Waves",
+      "aliases": [
+        "gravitational waves",
+        "LIGO",
+        "GW"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.astro.black-holes"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Gravitational waves are ripples in spacetime caused by accelerating massive objects, first directly detected by LIGO in 2015.",
+      "difficulty": "research",
+      "estimated_hours": 12,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abbott et al. 2016 PRL",
+        "LIGO Scientific Collaboration"
+      ],
+      "children": [],
+      "unlocks": []
+    }
+  ]
+}

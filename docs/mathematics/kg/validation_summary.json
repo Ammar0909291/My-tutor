@@ -1,0 +1,50 @@
+{
+  "graph_version": "1.0.1",
+  "build_date": "2026-06-29",
+  "total_concepts": 908,
+  "total_domains": 24,
+  "validation_date": "2026-06-29",
+  "checks": {
+    "cycle_detection": "PASS",
+    "orphan_audit": "PASS",
+    "dependency_integrity": "PASS",
+    "learner_tracks": "DEFINED"
+  },
+  "overall_status": "PASS",
+  "metrics": {
+    "cycles_found": 0,
+    "root_nodes": 1,
+    "true_orphans": 0,
+    "broken_requires": 0,
+    "broken_unlocks": 0,
+    "broken_cross_links": 0,
+    "aspirational_cross_links": 1
+  },
+  "learner_track_summary": [
+    {
+      "track": "T0",
+      "name": "Absolute Foundations",
+      "concepts": 67
+    },
+    {
+      "track": "T1",
+      "name": "Pre-University / Early Undergraduate",
+      "concepts": 432
+    },
+    {
+      "track": "T2",
+      "name": "Undergraduate Core",
+      "concepts": 139
+    },
+    {
+      "track": "T3",
+      "name": "Upper Undergraduate / Early Graduate",
+      "concepts": 225
+    },
+    {
+      "track": "T4",
+      "name": "Graduate / Research Mathematics",
+      "concepts": 45
+    }
+  ]
+}

@@ -5,18 +5,50 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
-import type { TranslationKey } from '@/lib/i18n'
+import { AuthBackLink } from '@/components/auth/AuthBackLink'
+import { Card, CandyButton, EagleMascot } from '@/components/ui/candy'
+import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
-const NEXTAUTH_ERROR_KEYS: Record<string, TranslationKey> = {
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '12px 14px',
+  borderRadius: 14,
+  border: '1px solid var(--candy-shadow)',
+  background: 'var(--candy-card)',
+  color: 'var(--candy-ink)',
+  fontSize: 14,
+}
+
+const NEXTAUTH_ERROR_KEYS: Record<string, 'error_invalid' | 'error_required'> = {
   CredentialsSignin: 'error_invalid',
-  OAuthAccountNotLinked: 'error_oauth_account_not_linked',
+}
+
+const NEXTAUTH_ERROR_I18N_KEYS: Record<string, 'error_oauth_linked' | 'error_oauth_signin' | 'error_oauth_callback' | 'error_generic'> = {
+  OAuthAccountNotLinked: 'error_oauth_linked',
   OAuthSignin: 'error_oauth_signin',
-  Callback: 'error_callback',
+  Callback: 'error_oauth_callback',
+  Default: 'error_generic',
+}
+
+// CRITICAL-1 (Sprint D): callbackUrl comes from the query string, so it must
+// be a same-origin relative path — never a full URL or protocol-relative
+// (//evil.example) string an attacker could plant in a phishing link.
+function safeCallbackUrl(raw: string | null): string {
+  if (!raw) return '/dashboard'
+  if (!raw.startsWith('/') || raw.startsWith('//')) return '/dashboard'
+  try {
+    // New URL() with a base resolves relative paths and rejects anything
+    // that isn't actually same-origin once resolved (e.g. "/\evil.com").
+    const resolved = new URL(raw, window.location.origin)
+    return resolved.origin === window.location.origin ? `${resolved.pathname}${resolved.search}${resolved.hash}` : '/dashboard'
+  } catch {
+    return '/dashboard'
+  }
 }
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen" style={{ background: 'var(--bg-base)' }} />}>
+    <Suspense fallback={<div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }} />}>
       <LoginForm />
     </Suspense>
   )
@@ -36,7 +68,9 @@ function LoginForm() {
   useEffect(() => {
     const errorCode = params.get('error')
     if (errorCode) {
-      setError(t(NEXTAUTH_ERROR_KEYS[errorCode] ?? 'error_default'))
+      const translationKey = NEXTAUTH_ERROR_KEYS[errorCode]
+      const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[errorCode] ?? 'error_generic'
+      setError(translationKey ? t(translationKey) : t(fallbackKey))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
@@ -50,17 +84,18 @@ function LoginForm() {
       const result = await signIn('credentials', { email, password, redirect: false })
       setLoading(false)
 
-      if (!result) { setError(t('error_default')); return }
+      if (!result) { setError(t('error_generic')); return }
       if (result.error) {
-        setError(t(NEXTAUTH_ERROR_KEYS[result.error] ?? 'error_default'))
+        const translationKey = NEXTAUTH_ERROR_KEYS[result.error]
+        const fallbackKey = NEXTAUTH_ERROR_I18N_KEYS[result.error] ?? 'error_generic'
+        setError(translationKey ? t(translationKey) : t(fallbackKey))
         return
       }
 
-      const callbackUrl = params.get('callbackUrl') ?? '/dashboard'
-      window.location.href = callbackUrl
+      window.location.href = safeCallbackUrl(params.get('callbackUrl'))
     } catch {
       setLoading(false)
-      setError(t('error_default'))
+      setError(t('error_generic'))
     }
   }
 
@@ -76,144 +111,107 @@ function LoginForm() {
   ]
 
   return (
-    <div className="min-h-screen flex" style={{ background: 'var(--bg-base)' }}>
-      <style>{`
-        @keyframes floatCard {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
-      `}</style>
-
+    <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)', display: 'flex' }}>
       {/* Left decorative panel (desktop) */}
       <div className="hidden lg:flex flex-col justify-between w-[45%] p-12 relative overflow-hidden"
-        style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border-default)' }}>
+        style={{ background: 'var(--candy-card)', borderRight: '1px solid var(--candy-shadow)' }}>
         <div className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(247,129,102,0.1) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(121,192,255,0.08) 0%, transparent 50%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59,158,255,0.08) 0%, transparent 50%)' }} />
         <div className="relative">
-          <div className="flex items-center gap-2 mb-16">
-            <span className="text-xl">🔥</span>
-            <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+          <div className="flex items-center gap-2 mb-12">
+            <EagleMascot variant="logo" size={36} />
+            <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--candy-red)' }}>My Tutor</span>
           </div>
-          <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+          <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--candy-ink)' }}>
             &ldquo;{t('left_quote')}&rdquo;
           </blockquote>
           <div className="flex flex-col gap-2">
             {features.map((f) => (
               <span key={f.text} className="text-sm px-3 py-1.5 rounded-lg inline-block w-fit"
-                style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}>
+                style={{ background: 'var(--candy-bg)', color: 'var(--candy-ink-soft)', border: '1px solid var(--candy-shadow)' }}>
                 {f.emoji} {f.text}
               </span>
             ))}
           </div>
-
-          {/* Floating product preview cards */}
-          <div className="relative mt-10" style={{ height: '180px' }}>
-            {/* Card 1 — subject pill */}
-            <div style={{
-              position: 'absolute', top: 0, left: 0,
-              animation: 'floatCard 4s ease-in-out infinite',
-              background: 'var(--bg-elevated)', border: '1px solid var(--border-default)',
-              borderRadius: 12, padding: '10px 16px', fontSize: 13,
-              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-              display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap',
-            }}>
-              🎯 {lang === 'ru' ? 'Язык C · Урок 3' : lang === 'hi' ? 'C भाषा · पाठ 3' : 'C Language · Lesson 3'}
-            </div>
-            {/* Card 2 — chat bubble */}
-            <div style={{
-              position: 'absolute', top: 44, left: 24,
-              animation: 'floatCard 4s ease-in-out infinite 1.3s',
-              background: 'rgba(247,129,102,0.12)', border: '1px solid rgba(247,129,102,0.3)',
-              borderRadius: 12, padding: '10px 16px', fontSize: 13,
-              color: 'var(--text-primary)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-              maxWidth: 240,
-            }}>
-              💬 {lang === 'ru' ? 'Отлично! Ты понял указатели 🎉' : lang === 'hi' ? 'शाबाश! पॉइंटर्स समझ आए 🎉' : 'Great! You understood pointers 🎉'}
-            </div>
-            {/* Card 3 — code snippet */}
-            <div style={{
-              position: 'absolute', top: 96, left: 12,
-              animation: 'floatCard 4s ease-in-out infinite 2.6s',
-              background: 'var(--bg-base)', border: '1px solid var(--border-default)',
-              borderRadius: 12, padding: '10px 16px', fontSize: 12,
-              color: '#79C0FF', boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-              fontFamily: 'monospace',
-            }}>
-              <span style={{ color: '#FF7B72' }}>int</span>
-              <span style={{ color: 'var(--text-primary)' }}> *ptr = &amp;x;</span>
-            </div>
-          </div>
         </div>
-        <p className="relative text-xs" style={{ color: 'var(--text-dim)' }}>🎓 {t('left_social')}</p>
+        <p className="relative text-xs" style={{ color: 'var(--candy-ink-soft)' }}>🎓 {t('left_social')}</p>
       </div>
 
       {/* Right form panel */}
       <div className="flex-1 flex items-center justify-center p-6 relative">
+        <div className="absolute top-5 left-5"><AuthBackLink href="/" label={t('nav_back_home')} icon="home" /></div>
         <div className="absolute top-5 right-5"><LanguageToggle /></div>
 
-        <div className="w-full max-w-sm animate-slide-up">
-          {/* Logo (mobile) */}
-          <div className="lg:hidden flex items-center gap-2 justify-center mb-8">
-            <span className="text-2xl">🔥</span>
-            <span className="font-bold text-lg" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
+        <div className="w-full max-w-sm">
+          {/* Eagle guide (mobile + desktop) */}
+          <div className="flex items-center gap-3 mb-6">
+            <EagleMascot variant="hero" size={56} />
+            <div>
+              <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>Welcome back</h1>
+              <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', margin: 0 }}>{t('login_sub')}</p>
+            </div>
           </div>
 
-          <h1 className="text-2xl font-black mb-1" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('login_title')}</h1>
-          <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('login_sub')}</p>
-
-          {/* Google */}
-          <button onClick={handleGoogle} disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
-            style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
-            <GoogleIcon />
-            {googleLoading ? t('login_google_loading') : t('login_google')}
-          </button>
-
-          {/* Divider */}
-          <div className="relative my-5">
-            <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }} /></div>
-            <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--bg-base)', color: 'var(--text-dim)' }}>{t('login_or')}</span></div>
-          </div>
-
-          {/* Error */}
-          {error && (
-            <div className="mb-5 p-3.5 rounded-xl text-sm animate-scale-in"
-              style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)', color: '#F85149' }}>
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_email')}</label>
-              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError(null) }} required
-                placeholder="your@email.com" className="input-field" />
-            </div>
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-dim)' }}>{t('login_password')}</label>
-                <Link href="/auth/forgot-password" className="text-xs hover:underline" style={{ color: 'var(--accent-primary)' }}>
-                  {t('login_forgot')}
-                </Link>
-              </div>
-              <div className="relative">
-                <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); setError(null) }} required
-                  placeholder="••••••••" className="input-field pr-10" />
-                <button type="button" onClick={() => setShowPwd(!showPwd)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
-                  style={{ color: 'var(--text-dim)' }}>
-                  {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
+          <Card style={{ padding: 24 }}>
+            {/* Google — only shown when GOOGLE_CLIENT_ID/SECRET are configured */}
+            {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+              <>
+                <button onClick={handleGoogle} disabled={googleLoading}
+                  className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"
+                  style={{ background: '#fff', color: '#333', border: '1px solid #e5e7eb' }}>
+                  <GoogleIcon />
+                  {googleLoading ? t('login_google_loading') : t('login_google')}
                 </button>
-              </div>
-            </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full py-3 mt-1 text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed">
-              {loading ? t('login_loading') : t('login_submit')}
-            </button>
-          </form>
 
-          <p className="text-center mt-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {/* Divider */}
+                <div className="relative my-5">
+                  <div className="absolute inset-0 flex items-center"><div className="w-full" style={{ borderTop: '1px solid var(--candy-shadow)' }} /></div>
+                  <div className="relative flex justify-center"><span className="px-3 text-xs" style={{ background: 'var(--candy-card)', color: 'var(--candy-ink-soft)' }}>{t('login_or')}</span></div>
+                </div>
+              </>
+            )}
+
+            {/* Error */}
+            {error && (
+              <div className="mb-5 p-3.5 rounded-xl text-sm"
+                style={{ background: 'rgba(255, 75, 75, 0.08)', border: '1px solid rgba(255, 75, 75, 0.2)', color: 'var(--candy-red)' }}>
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: 'var(--candy-ink-soft)' }}>{t('login_email')}</label>
+                <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError(null) }} required
+                  placeholder="your@email.com" style={inputStyle} />
+              </div>
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--candy-ink-soft)' }}>{t('login_password')}</label>
+                  <Link href="/auth/forgot-password" className="text-xs hover:underline" style={{ color: 'var(--candy-red)' }}>
+                    {t('login_forgot')}
+                  </Link>
+                </div>
+                <div className="relative">
+                  <input type={showPwd ? 'text' : 'password'} value={password} onChange={(e) => { setPassword(e.target.value); setError(null) }} required
+                    placeholder="••••••••" style={{ ...inputStyle, paddingRight: 40 }} />
+                  <button type="button" onClick={() => setShowPwd(!showPwd)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                    style={{ color: 'var(--candy-ink-soft)' }}>
+                    {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
+                  </button>
+                </div>
+              </div>
+              <CandyButton type="submit" disabled={loading} className="w-full" shadowColor="var(--candy-purple-d)"
+                style={{ padding: '12px', marginTop: 4, borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: loading ? 0.5 : 1 }}>
+                {loading ? t('login_loading') : t('login_submit')}
+              </CandyButton>
+            </form>
+          </Card>
+
+          <p className="text-center mt-6 text-sm" style={{ color: 'var(--candy-ink-soft)' }}>
             {t('login_no_account')}{' '}
-            <Link href="/auth/signup" className="font-semibold hover:underline" style={{ color: 'var(--accent-primary)' }}>{t('login_signup_link')}</Link>
+            <Link href="/auth/signup" className="font-semibold hover:underline" style={{ color: 'var(--candy-red)' }}>{t('login_signup_link')}</Link>
           </p>
         </div>
       </div>

@@ -5,28 +5,110 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
+  // Migrations and db push connect directly (Neon: the non-pooled URL;
+  // Supabase: the session-mode pooler URL, since Supabase's direct host is
+  // IPv6-only and unreachable from Vercel's IPv4-only egress — see
+  // .env.example). The app itself always uses the pooled DATABASE_URL above.
   directUrl = env("DIRECT_URL")
+}
+
+// ─── Platform roles ───────────────────────────────────────────────────────────
+
+enum PlatformRole {
+  STUDENT
+  ADMIN
 }
 
 // ─── Auth (NextAuth v5 required tables) ───────────────────────────────────────
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  image         String?
+  id                  String       @id @default(cuid())
+  name                String?
+  email               String       @unique
+  emailVerified       DateTime?
+  image               String?
   passwordHash        String?
-  onboardingCompleted Boolean   @default(false)
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  role                PlatformRole @default(STUDENT)
+  onboardingCompleted Boolean      @default(false)
+  xpPoints            Int          @default(0)
+  referralCode        String?      @unique
+  referredBy          String?
+  freeSessionsExtra   Int          @default(0)
+  telegramChatId      String?
+  isDeleted           Boolean      @default(false)
+  deletedAt           DateTime?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
 
-  accounts      Account[]
-  sessions      AuthSession[]
-  profile       Profile?
-  learnSessions LearnSession[]
-  subscription  Subscription?
-  learningPaths LearningPath[]
+  accounts                 Account[]
+  sessions                 AuthSession[]
+  profile                  Profile?
+  learnSessions            LearnSession[]
+  subscription             Subscription?
+  payments                 Payment[]
+  learningPaths            LearningPath[]
+  flashcards               Flashcard[]
+  studentProgress          StudentProgress[]
+  finalAssessmentResults   FinalAssessmentResult[]
+  subjectCertificates      SubjectCertificate[]
+  referralsGiven           Referral[]                @relation("referrer")
+  weeklyXP                 WeeklyXP[]
+  assessmentResults        AssessmentResult[]
+  subjectAssessmentResults SubjectAssessmentResult[]
+  coachProfile             CoachProfile?
+  assessmentAttempts       AssessmentAttempt[]
+  moduleProgress           ModuleProgress[]
+  topicProgress            TopicProgress[]
+
+  learningAnalytics  LearningAnalytics?
+  learningProfile    LearningProfile?
+  subjectAnalytics   SubjectAnalytics[]
+  retentionMetrics   RetentionMetric[]
+  studySessions      StudySession[]
+  performanceMetrics PerformanceMetric[]
+  coachInsights      CoachInsight[]
+  yandexUsageLogs    YandexUsageLog[]
+
+  reviewSchedules     ReviewSchedule[]
+  reviewAttempts      ReviewAttempt[]
+  projectSubmissions  ProjectSubmission[]
+  knowledgeRetentions KnowledgeRetention[]
+
+  roadmapEnrollments  RoadmapEnrollment[]
+  milestones          Milestone[]
+  capstoneSubmissions CapstoneSubmission[]
+  certificates        Certificate[]
+  careerProfile       CareerProfile?
+  jobReadiness        JobReadiness?
+
+  xpTransactions    XpTransaction[]
+  userLevel         UserLevel?
+  userAchievements  UserAchievement[]
+  studyStreak       StudyStreak?
+  challengeProgress ChallengeProgress[]
+  activityLogs      ActivityLog[]
+  socialProfile     SocialProfile?
+  clientEvents      ClientEvent[]
+  pushSubscriptions PushSubscription[]
+
+  emailVerificationTokens EmailVerificationToken[]
+
+  guardianLinksAsStudent  GuardianLink[]       @relation("GuardianLinkStudent")
+  guardianLinksAsGuardian GuardianLink[]       @relation("GuardianLinkGuardian")
+  teacherNotesAuthored    TeacherNote[]        @relation("TeacherNoteAuthor")
+  teacherNotesReceived    TeacherNote[]        @relation("TeacherNoteRecipient")
+  organizationsOwned      Organization[]       @relation("OrganizationOwner")
+  organizationMemberships OrganizationMember[] @relation("OrganizationMembership")
+  evidenceRecords         EvidenceRecord[]
+  practiceSessions        PracticeSession[]
+  mistakeRecords          MistakeRecord[]
+  learningCheckpoints     LearningCheckpoint[]
+
+  // W1-2 (implements W0-ADR-10): Educational Brain student memory stores
+  conceptMasteryRecords ConceptMasteryRecord[]
+  activeMisconceptions  ActiveMisconception[]
+
+  lessonBookmarks LessonBookmark[]
 
   @@map("users")
 }
@@ -71,21 +153,57 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
+model EmailVerificationToken {
+  id        String    @id @default(cuid())
+  userId    String
+  token     String    @unique
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  usedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("email_verification_tokens")
+}
+
 // ─── Student Profile ──────────────────────────────────────────────────────────
 
-model Profile {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  displayName String
-  selfDescription  String          @db.Text
-  currentLevel     String?
-  learningGoals    String?         @db.Text
-  voiceId          String?
-  teachingLanguage TeachingLanguage @default(ru)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+enum UserType {
+  GENERAL_LEARNER
+  SCHOOL_STUDENT
+}
 
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Profile {
+  id               String           @id @default(cuid())
+  userId           String           @unique
+  displayName      String
+  selfDescription  String           @db.Text
+  // School Mode (Sprint BF): set once at onboarding; board/grade stay null for
+  // general learners. educationBoard holds a board id from the education
+  // registry ('cbse', 'up_board', ...) — validated in the API layer.
+  userType         UserType         @default(GENERAL_LEARNER)
+  educationBoard   String?
+  grade            Int?
+  currentLevel     String?
+  targetLevel      String?
+  learningGoals    String?          @db.Text
+  voiceId          String?
+  speechRate       Float            @default(1.0)
+  teachingLanguage TeachingLanguage @default(en)
+  country          String           @default("global")
+  voiceSpeed       Float            @default(1.0)
+  confusedTopics   String[]         @default([])
+  masteredTopics   String[]         @default([])
+  totalSessions    Int              @default(0)
+  totalMessages    Int              @default(0)
+  lastStudiedTopic String?
+  streakDays       Int              @default(0)
+  lastStudyDate    DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   subjects ProfileSubject[]
 
   @@map("profiles")
@@ -94,16 +212,29 @@ model Profile {
 // ─── Subjects ─────────────────────────────────────────────────────────────────
 
 model Subject {
-  id          String  @id @default(cuid())
-  slug        String  @unique
+  id          String      @id @default(cuid())
+  slug        String      @unique
   name        String
   // c | cpp | python | english
   type        SubjectType
-  description String? @db.Text
+  description String?     @db.Text
 
   profileSubjects ProfileSubject[]
   learnSessions   LearnSession[]
   learningPaths   LearningPath[]
+  assessments     SubjectAssessment[]
+  learningGoals   LearningGoal[]
+  moduleProgress  ModuleProgress[]
+
+  subjectAnalytics   SubjectAnalytics[]
+  retentionMetrics   RetentionMetric[]
+  studySessions      StudySession[]
+  performanceMetrics PerformanceMetric[]
+  coachInsights      CoachInsight[]
+
+  reviewSchedules     ReviewSchedule[]
+  projects            Project[]
+  knowledgeRetentions KnowledgeRetention[]
 
   @@map("subjects")
 }
@@ -116,11 +247,230 @@ model ProfileSubject {
   notes     String?  @db.Text
   createdAt DateTime @default(now())
 
+  // Per-subject independent tracking — each enrolled subject keeps its own
+  // level/target/progress/estimate, separate from the legacy single
+  // Profile.currentLevel (which now only reflects the user's "primary" subject).
+  // Level system: 0 Complete Beginner · 1 Beginner · 2 Intermediate
+  //               3 Advanced · 4 Professional · 5 Expert
+  currentLevelIndex  Int      @default(0)
+  targetLevelIndex   Int?
+  progressPercent    Int      @default(0)
+  estimatedHoursLeft Int?
+  isActive           Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   subject Subject @relation(fields: [subjectId], references: [id])
 
   @@unique([profileId, subjectId])
   @@map("profile_subjects")
+}
+
+// ─── Assessments (per-subject quizzes / exams / mastery checks) ──────────────
+
+model SubjectAssessment {
+  id         String         @id @default(cuid())
+  subjectId  String
+  kind       AssessmentKind @default(LESSON_QUIZ)
+  levelIndex Int            @default(0)
+  moduleSlug String
+  title      String
+  // Array of { question, options, correctIndex, explanation }
+  questions  Json
+  passScore  Int            @default(70)
+  createdAt  DateTime       @default(now())
+
+  subject Subject                   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  results SubjectAssessmentResult[]
+
+  @@unique([subjectId, moduleSlug])
+  @@index([subjectId, levelIndex, moduleSlug])
+  @@map("subject_assessments")
+}
+
+model SubjectAssessmentResult {
+  id           String   @id @default(cuid())
+  userId       String
+  assessmentId String
+  score        Int
+  passed       Boolean
+  // Learner's submitted answers, for review
+  answers      Json?
+  createdAt    DateTime @default(now())
+
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessment SubjectAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@index([userId, assessmentId])
+  @@map("subject_assessment_results")
+}
+
+// ─── Module Progress (per-subject curriculum-tree progression / unlocking) ───
+// Tracks the learner's progress through SUBJECT_LIBRARY curriculum modules,
+// independently per enrolled subject. Status drives the unlock chain:
+// COMPLETED → next module becomes AVAILABLE → ... → rest stay LOCKED.
+
+model ModuleProgress {
+  id          String       @id @default(cuid())
+  userId      String
+  subjectId   String
+  moduleSlug  String
+  status      ModuleStatus @default(LOCKED)
+  masteryPct  Int          @default(0)
+  bestScore   Int?
+  completedAt DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectId, moduleSlug])
+  @@index([userId, subjectId])
+  @@map("module_progress")
+}
+
+enum ModuleStatus {
+  LOCKED
+  AVAILABLE
+  IN_PROGRESS
+  COMPLETED
+}
+
+// ─── Topic Progress (knowledge-graph node tracking) ──────────────────────────
+
+model TopicProgress {
+  id             String      @id @default(cuid())
+  userId         String
+  subjectSlug    String
+  topicSlug      String
+  status         TopicStatus @default(NOT_STARTED)
+  masteryPct     Int         @default(0)
+  attempts       Int         @default(0)
+  lastScore      Int?
+  completedAt    DateTime?
+  revisionCount  Int         @default(0)
+  lastRevisionAt DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectSlug, topicSlug])
+  @@index([userId, subjectSlug])
+  @@map("topic_progress")
+}
+
+enum TopicStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  MASTERED
+  SKIPPED
+  REVISION
+}
+
+// ─── Evidence Records (Sprint M — Assessment Integrity) ──────────────────────
+
+enum EvidenceType {
+  QUIZ
+  PRACTICE
+  PROJECT
+  REVIEW
+  ASSESSMENT
+  // Visual Learning Sprint M — visual mastery signals (graph/number_line/
+  // geometry/process_flow shown/interacted/completed summaries). Always
+  // written with weight 0 (see EvidenceRecord.weight) so existing/future
+  // weighted-average mastery computations never blend these in implicitly.
+  VISUAL
+}
+
+model EvidenceRecord {
+  id          String       @id @default(cuid())
+  userId      String
+  subjectSlug String
+  topicSlug   String
+  type        EvidenceType
+  score       Float
+  weight      Float        @default(1.0)
+  method      String       @default("AI")
+  // Discriminates multiple evidence rows of the same type for the same topic.
+  // VISUAL records set this to the engine name (e.g. "graph", "number_line");
+  // all other callers leave it as "" — giving them one unique row per (topic, type).
+  engineKey   String       @default("")
+  notes       Json?
+  createdAt   DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectSlug, topicSlug, type, engineKey])
+  @@index([userId, subjectSlug, topicSlug])
+  @@map("evidence_records")
+}
+
+model PracticeSession {
+  id             String    @id @default(cuid())
+  userId         String
+  subjectSlug    String
+  topicSlug      String
+  // Sprint BM: school chapter practice; null for legacy topic-level sessions
+  chapterId      String?
+  // Sprint BN: "practice" (default) | "assessment"
+  kind           String    @default("practice")
+  questions      Json // StoredPracticeQuestion[] — includes correct answers (never sent to client)
+  completedAt    DateTime?
+  score          Int? // 0-100
+  idempotencyKey String?   @unique // HIGH-6: client-supplied key; DB unique constraint is the atomic dedup guard
+  createdAt      DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, subjectSlug, topicSlug])
+  @@index([userId, chapterId])
+  @@map("practice_sessions")
+}
+
+model MistakeRecord {
+  id          String   @id @default(cuid())
+  userId      String
+  subjectSlug String
+  topicSlug   String // topic being practiced
+  sessionId   String // PracticeSession id
+  category    String // mistake category from taxonomy (e.g. "arithmetic_error")
+  questionId  String // question id within session
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, subjectSlug])
+  @@index([userId, subjectSlug, topicSlug])
+  @@index([userId, subjectSlug, category])
+  @@map("mistake_records")
+}
+
+// Sprint BS: lightweight in-session understanding checks — micro-checkpoints
+// the tutor asks while teaching, evaluated by a lightweight AI classifier.
+// Not part of the Practice/Assessment systems.
+model LearningCheckpoint {
+  id           String   @id @default(cuid())
+  userId       String
+  board        String
+  grade        Int
+  subjectSlug  String
+  chapterId    String
+  kgNodeId     String?
+  question     String
+  answer       String
+  userResponse String
+  passed       Boolean
+  hintUsed     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, subjectSlug, chapterId])
+  @@index([userId, subjectSlug, createdAt])
+  @@map("learning_checkpoints")
 }
 
 // ─── Learning Path (Claude-generated curriculum) ─────────────────────────────
@@ -141,49 +491,52 @@ model LearningPath {
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   subject Subject @relation(fields: [subjectId], references: [id])
 
+  @@index([userId, subjectId])
   @@map("learning_paths")
 }
 
 // ─── Learn Sessions ───────────────────────────────────────────────────────────
 
 model LearnSession {
-  id          String        @id @default(cuid())
-  userId      String
-  subjectId   String
-  title       String?
-  status      SessionStatus @default(ACTIVE)
+  id              String        @id @default(cuid())
+  userId          String
+  subjectId       String
+  title           String?
+  status          SessionStatus @default(ACTIVE)
   // Snapshot of context sent to Claude at session start
   contextSnapshot Json?
   // Detected mood/engagement level from Claude's analysis
   moodAnalysis    Json?
-  summary     String?   @db.Text
-  startedAt   DateTime  @default(now())
-  endedAt     DateTime?
-  updatedAt   DateTime  @updatedAt
+  summary         String?       @db.Text
+  startedAt       DateTime      @default(now())
+  endedAt         DateTime?
+  updatedAt       DateTime      @updatedAt
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   subject  Subject   @relation(fields: [subjectId], references: [id])
   messages Message[]
 
+  @@index([userId, subjectId])
+  @@index([userId, status])
   @@map("learn_sessions")
 }
 
 // ─── Messages ─────────────────────────────────────────────────────────────────
 
 model Message {
-  id        String      @id @default(cuid())
-  sessionId String
-  role      MessageRole
-  content   String      @db.Text
+  id           String      @id @default(cuid())
+  sessionId    String
+  role         MessageRole
+  content      String      @db.Text
   // If voice: transcript + audio file reference
-  audioUrl  String?
+  audioUrl     String?
   // If code: language + snippet
-  codeSnippet String?   @db.Text
+  codeSnippet  String?     @db.Text
   codeLanguage String?
   // Token usage for cost tracking
   inputTokens  Int?
   outputTokens Int?
-  createdAt DateTime @default(now())
+  createdAt    DateTime    @default(now())
 
   session LearnSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
@@ -194,20 +547,337 @@ model Message {
 // ─── Subscription ─────────────────────────────────────────────────────────────
 
 model Subscription {
-  id                   String             @id @default(cuid())
-  userId               String             @unique
-  stripeCustomerId     String?            @unique
-  stripeSubscriptionId String?            @unique
-  stripePriceId        String?
-  stripeCurrentPeriodEnd DateTime?
-  status               SubscriptionStatus @default(FREE)
-  freeSessionUsed      Boolean            @default(false)
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  plan              String    @default("free") // free | basic | pro | annual
+  planExpiresAt     DateTime?
+  lessonsThisMonth  Int       @default(0)
+  monthResetAt      DateTime  @default(now())
+  // YooKassa payment tracking
+  yookassaPaymentId String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("subscriptions")
+}
+
+// ─── Payment Records ──────────────────────────────────────────────────────────
+
+model Payment {
+  id         String   @id @default(cuid())
+  userId     String
+  yookassaId String   @unique
+  plan       String // basic | pro | annual
+  amount     Int // in kopecks
+  currency   String   @default("RUB")
+  status     String   @default("pending") // pending | succeeded | canceled
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+// ─── Flashcards ───────────────────────────────────────────────────────────────
+
+model Flashcard {
+  id             String    @id @default(cuid())
+  userId         String
+  topic          String
+  question       String
+  answer         String
+  nextReview     DateTime  @default(now())
+  reviewCount    Int       @default(0)
+  easy           Boolean   @default(false)
+  lastReviewedAt DateTime?
+  createdAt      DateTime  @default(now())
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Sprint AP: /api/flashcards filters by (userId, nextReview) for due cards
+  // and (userId, lastReviewedAt) for the studied-today count on every load.
+  @@index([userId, nextReview])
+  @@index([userId, lastReviewedAt])
+  @@map("flashcards")
+}
+
+// ─── Structured Curriculum ───────────────────────────────────────────────────
+
+model Curriculum {
+  id          String   @id @default(cuid())
+  subjectCode String // subject slug: c, cpp, python, english, javascript, typescript, russian, etc.
+  unit        Int
+  unitTitle   String
+  lesson      Int // lesson number within unit
+  lessonTitle String
+  lessonGoal  String   @db.Text
+  order       Int // global order across all lessons in subject
+  topicSlug   String? // KG node slug — links this lesson to the knowledge graph
+  createdAt   DateTime @default(now())
+
+  @@unique([subjectCode, order])
+  @@index([subjectCode])
+  @@map("curriculum")
+}
+
+model StudentProgress {
+  id                String    @id @default(cuid())
+  userId            String
+  subjectCode       String
+  currentLesson     Int       @default(1)
+  completedLessons  Int[]     @default([])
+  lastStudiedAt     DateTime  @default(now())
+  lastLessonTitle   String?
+  lastUnitTitle     String?
+  // Sprint N — subject completion tracking
+  isCompleted       Boolean   @default(false)
+  completedAt       DateTime?
+  completionPercent Int       @default(0)
+  updatedAt         DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectCode])
+  @@map("student_progress")
+}
+
+// ─── Sprint N — Final Assessment & Subject Certificates ──────────────────────
+
+model FinalAssessmentResult {
+  id             String   @id @default(cuid())
+  userId         String
+  subjectCode    String
+  score          Int      @default(0)
+  totalQuestions Int      @default(0)
+  passed         Boolean  @default(false)
+  takenAt        DateTime @default(now())
+  questions      Json? // stored server-side at generate time; used for server-side grading
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectCode])
+  @@map("final_assessment_results")
+}
+
+model SubjectCertificate {
+  id              String   @id @default(cuid())
+  userId          String
+  subjectCode     String
+  subjectName     String
+  certificateCode String   @unique
+  recipientName   String
+  totalLessons    Int
+  score           Int
+  issuedAt        DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectCode])
+  @@map("subject_certificates")
+}
+
+// ─── Curriculum Assessments (module gating) ──────────────────────────────────
+
+model Assessment {
+  id           String         @id @default(cuid())
+  subjectCode  String // 'python' | 'c' | 'cpp' | 'english' | ...
+  levelBand    String // 'beginner' | 'intermediate' | 'advanced' | 'professional' | 'expert'
+  moduleIndex  Int // position of the module within the level band
+  moduleTitle  String
+  type         AssessmentType @default(QUIZ)
+  passingScore Int            @default(70) // percentage required to pass
+
+  results AssessmentResult[]
+
+  @@unique([subjectCode, levelBand, moduleIndex])
+  @@index([subjectCode])
+  @@map("assessments")
+}
+
+model AssessmentResult {
+  id           String   @id @default(cuid())
+  userId       String
+  assessmentId String
+  score        Int // percentage 0-100
+  passed       Boolean
+  masteryPct   Int      @default(0)
+  completedAt  DateTime @default(now())
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@index([userId, assessmentId])
+  @@map("assessment_results")
+}
+
+enum AssessmentType {
+  QUIZ
+  CHALLENGE
+  PROJECT
+}
+
+// ─── Coach: Placement Interview & Personalized Plan (Sprint 1, additive) ─────
+
+model CoachProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  notes     String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  learningGoals LearningGoal[]
+
+  @@map("coach_profiles")
+}
+
+model LearningGoal {
+  id               String         @id @default(cuid())
+  coachProfileId   String
+  subjectId        String
+  // Interview answers
+  claimedLevel     LevelBand
+  targetLevel      LevelBand
+  reason           LearningReason
+  dailyMinutes     Int
+  // Recommendation produced after placement (or carried over from claimedLevel if skipped)
+  recommendedLevel LevelBand?
+  status           GoalStatus     @default(INTERVIEW)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  coachProfile CoachProfile         @relation(fields: [coachProfileId], references: [id], onDelete: Cascade)
+  subject      Subject              @relation(fields: [subjectId], references: [id])
+  assessment   PlacementAssessment?
+  estimate     LearningEstimate?
+  commitment   StudyCommitment?
+
+  @@unique([coachProfileId, subjectId])
+  @@map("learning_goals")
+}
+
+model PlacementAssessment {
+  id             String          @id @default(cuid())
+  learningGoalId String          @unique
+  subjectCode    String
+  // Generated MCQ questions: [{question, options[], correctIndex, explanation, skill}]
+  questions      Json
+  status         PlacementStatus @default(PENDING)
+  createdAt      DateTime        @default(now())
+
+  learningGoal LearningGoal        @relation(fields: [learningGoalId], references: [id], onDelete: Cascade)
+  attempts     AssessmentAttempt[]
+
+  @@map("placement_assessments")
+}
+
+model AssessmentAttempt {
+  id                    String    @id @default(cuid())
+  placementAssessmentId String
+  userId                String
+  // Submitted answers: [{questionIndex, selectedIndex, correct}]
+  answers               Json
+  score                 Int // percentage 0-100
+  recommendedLevel      LevelBand
+  strengths             String[]  @default([])
+  weaknesses            String[]  @default([])
+  createdAt             DateTime  @default(now())
+
+  placementAssessment PlacementAssessment @relation(fields: [placementAssessmentId], references: [id], onDelete: Cascade)
+  user                User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("assessment_attempts")
+}
+
+model LearningEstimate {
+  id              String   @id @default(cuid())
+  learningGoalId  String   @unique
+  estimatedHours  Int
+  estimatedWeeks  Int
+  estimatedMonths Int
+  pathSummary     String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  learningGoal LearningGoal @relation(fields: [learningGoalId], references: [id], onDelete: Cascade)
+
+  @@map("learning_estimates")
+}
+
+model StudyCommitment {
+  id             String   @id @default(cuid())
+  learningGoalId String   @unique
+  dailyMinutes   Int
+  label          String
+  createdAt      DateTime @default(now())
+
+  learningGoal LearningGoal @relation(fields: [learningGoalId], references: [id], onDelete: Cascade)
+
+  @@map("study_commitments")
+}
+
+enum LevelBand {
+  COMPLETE_BEGINNER
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  PROFESSIONAL
+  EXPERT
+}
+
+enum LearningReason {
+  CAREER
+  JOB_CHANGE
+  SCHOOL
+  UNIVERSITY
+  BUSINESS
+  PERSONAL_INTEREST
+}
+
+enum GoalStatus {
+  INTERVIEW
+  PLACEMENT_OFFERED
+  PLACEMENT_IN_PROGRESS
+  PLACED
+  PLAN_READY
+}
+
+enum PlacementStatus {
+  PENDING
+  COMPLETED
+  SKIPPED
+}
+
+// ─── Referrals ────────────────────────────────────────────────────────────────
+
+model Referral {
+  id         String    @id @default(cuid())
+  referrerId String
+  referredId String?
+  code       String    @unique
+  used       Boolean   @default(false)
+  usedAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  referrer User @relation("referrer", fields: [referrerId], references: [id], onDelete: Cascade)
+
+  @@map("referrals")
+}
+
+// ─── Weekly XP (leaderboard) ──────────────────────────────────────────────────
+
+model WeeklyXP {
+  id     String @id @default(cuid())
+  userId String
+  week   String // "2026-W23"
+  xp     Int    @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, week])
+  @@map("weekly_xp")
 }
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
@@ -223,6 +893,23 @@ enum SubjectType {
   CPP
   PYTHON
   ENGLISH
+  // Broad categories used by the multi-subject library (Subject Library) —
+  // specific subjects within a category are distinguished by slug/name, not type.
+  LANGUAGE
+  PROGRAMMING
+  MATHEMATICS
+  PHYSICS
+  CHEMISTRY
+  BIOLOGY
+  AI
+  COMPUTER_SCIENCE
+}
+
+enum AssessmentKind {
+  LESSON_QUIZ
+  MODULE_EXAM
+  PRACTICAL
+  MASTERY
 }
 
 enum SessionStatus {
@@ -237,10 +924,1790 @@ enum MessageRole {
   SYSTEM
 }
 
-enum SubscriptionStatus {
-  FREE
+// ─── Sprint 3: Learning Analytics + AI Personalization ───────────────────────
+// Additive-only models; no existing fields/models touched.
+
+model LearningAnalytics {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  totalStudyMinutes    Int       @default(0)
+  currentStreakDays    Int       @default(0)
+  longestStreakDays    Int       @default(0)
+  lastStudyDate        DateTime?
+  lessonsCompleted     Int       @default(0)
+  assessmentsPassed    Int       @default(0)
+  projectsCompleted    Int       @default(0)
+  overallCompletionPct Int       @default(0)
+  updatedAt            DateTime  @updatedAt
+  createdAt            DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("learning_analytics")
+}
+
+model LearningProfile {
+  id                     String           @id @default(cuid())
+  userId                 String           @unique
+  preferredLearningStyle LearningStyle    @default(BALANCED)
+  preferredLessonLength  LessonLengthPref @default(MEDIUM)
+  preferredDifficulty    DifficultyPref   @default(ADAPTIVE)
+  preferredSubjectOrder  String[]         @default([])
+  confidenceLevel        Int              @default(50)
+  learningPace           LearningPace     @default(STEADY)
+  updatedAt              DateTime         @updatedAt
+  createdAt              DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("learning_profiles")
+}
+
+model SubjectAnalytics {
+  id                String         @id @default(cuid())
+  userId            String
+  subjectId         String
+  progressPercent   Int            @default(0)
+  studyMinutes      Int            @default(0)
+  lessonsCompleted  Int            @default(0)
+  assessmentsPassed Int            @default(0)
+  strongTopics      String[]       @default([])
+  weakTopics        String[]       @default([])
+  trend             TrendDirection @default(STEADY)
+  lastStudiedAt     DateTime?
+  updatedAt         DateTime       @updatedAt
+  createdAt         DateTime       @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectId])
+  @@map("subject_analytics")
+}
+
+model RetentionMetric {
+  id              String    @id @default(cuid())
+  userId          String
+  subjectId       String
+  topic           String
+  masteryScore    Int       @default(0)
+  confidenceScore Int       @default(0)
+  decayScore      Int       @default(0)
+  reviewCount     Int       @default(0)
+  lastReviewedAt  DateTime?
+  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectId, topic])
+  @@index([userId, subjectId, masteryScore])
+  @@map("retention_metrics")
+}
+
+// ─── Spaced Repetition + Mastery + Projects (Sprint C) ───────────────────────
+// Additive-only; builds on RetentionMetric (per-topic mastery/confidence) by
+// layering a review schedule + attempt log on top, plus a project-based
+// learning system that feeds mastery via AI-reviewed submissions, and an
+// aggregate knowledge-retention snapshot per user/subject.
+
+// SCAFFOLDING (Subject Library spaced repetition): ReviewSchedule is READ in the
+// tutor context (api/learn/chat/route.ts — "MASTERY & SPACED REPETITION CONTEXT"),
+// but no code WRITES to it yet, so that read currently always returns empty. The
+// read path + RetentionMetric integration are done; only the writer (populate a
+// schedule + advance stage on review outcome) is unbuilt. Kept intentionally as a
+// near-complete feature, not deleted. ReviewAttempt (below) is its attempt-history
+// companion and is not yet referenced anywhere. Do not assume these are live.
+model ReviewSchedule {
+  id             String         @id @default(cuid())
+  userId         String
+  subjectId      String
+  topic          String
+  stage          Int            @default(0)
+  nextReviewAt   DateTime       @default(now())
+  lastOutcome    ReviewOutcome?
+  lastReviewedAt DateTime?
+  updatedAt      DateTime       @updatedAt
+  createdAt      DateTime       @default(now())
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject  Subject         @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  attempts ReviewAttempt[]
+
+  @@unique([userId, subjectId, topic])
+  @@index([userId, nextReviewAt])
+  @@map("review_schedules")
+}
+
+model ReviewAttempt {
+  id               String        @id @default(cuid())
+  reviewScheduleId String
+  userId           String
+  outcome          ReviewOutcome
+  score            Int           @default(0)
+  createdAt        DateTime      @default(now())
+
+  reviewSchedule ReviewSchedule @relation(fields: [reviewScheduleId], references: [id], onDelete: Cascade)
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("review_attempts")
+}
+
+enum ReviewOutcome {
+  AGAIN
+  HARD
+  GOOD
+  EASY
+}
+
+model Project {
+  id             String   @id @default(cuid())
+  subjectId      String
+  slug           String
+  title          String
+  description    String   @db.Text
+  topics         String[] @default([])
+  levelIndex     Int      @default(0)
+  estimatedHours Int      @default(2)
+  createdAt      DateTime @default(now())
+
+  subject     Subject             @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  submissions ProjectSubmission[]
+
+  @@unique([subjectId, slug])
+  @@map("projects")
+}
+
+model ProjectSubmission {
+  id          String        @id @default(cuid())
+  userId      String
+  projectId   String
+  status      ProjectStatus @default(NOT_STARTED)
+  content     String?       @db.Text
+  score       Int?
+  completedAt DateTime?
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project  Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  feedback ProjectFeedback?
+
+  @@unique([userId, projectId])
+  @@index([userId, status])
+  @@map("project_submissions")
+}
+
+model ProjectFeedback {
+  id            String   @id @default(cuid())
+  submissionId  String   @unique
+  aiReview      String   @db.Text
+  strengths     String[] @default([])
+  improvements  String[] @default([])
+  masteryImpact Json     @default("{}")
+  createdAt     DateTime @default(now())
+
+  submission ProjectSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@map("project_feedback")
+}
+
+enum ProjectStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  COMPLETED
+}
+
+model KnowledgeRetention {
+  id               String         @id @default(cuid())
+  userId           String
+  subjectId        String?
+  retentionScore   Int            @default(0)
+  conceptsTracked  Int            @default(0)
+  conceptsMastered Int            @default(0)
+  trend            TrendDirection @default(STEADY)
+  computedAt       DateTime       @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject? @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectId])
+  @@map("knowledge_retention")
+}
+
+model StudySession {
+  id        String   @id @default(cuid())
+  userId    String
+  subjectId String?
+  date      DateTime @default(now())
+  minutes   Int      @default(0)
+  source    String   @default("learn_session")
+  createdAt DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject? @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+
+  @@index([userId, date])
+  @@map("study_sessions")
+}
+
+// Learn window bookmark button (previously a client-only Set that reset on
+// every page load) — one row per bookmarked lesson, keyed by the same
+// subjectCode + lessonOrder pair StudentProgress already uses.
+model LessonBookmark {
+  id          String   @id @default(cuid())
+  userId      String
+  subjectCode String
+  lessonOrder Int
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectCode, lessonOrder])
+  @@index([userId, subjectCode])
+  @@map("lesson_bookmarks")
+}
+
+model PerformanceMetric {
+  id           String    @id @default(cuid())
+  userId       String
+  subjectId    String
+  topic        String
+  timesCorrect Int       @default(0)
+  timesMissed  Int       @default(0)
+  lastSeenAt   DateTime?
+  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime  @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subjectId, topic])
+  @@map("performance_metrics")
+}
+
+model CoachInsight {
+  id        String           @id @default(cuid())
+  userId    String
+  subjectId String?
+  kind      CoachInsightKind @default(GENERAL)
+  message   String           @db.Text
+  severity  InsightSeverity  @default(INFO)
+  dismissed Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject? @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+
+  @@index([userId, dismissed])
+  @@map("coach_insights")
+}
+
+enum LearningStyle {
+  VISUAL
+  PRACTICAL
+  THEORETICAL
+  BALANCED
+}
+
+enum LessonLengthPref {
+  SHORT
+  MEDIUM
+  LONG
+}
+
+enum DifficultyPref {
+  EASIER
+  ADAPTIVE
+  HARDER
+}
+
+enum LearningPace {
+  SLOW
+  STEADY
+  FAST
+}
+
+enum TrendDirection {
+  IMPROVING
+  STEADY
+  DECLINING
+}
+
+enum CoachInsightKind {
+  PROGRESS
+  STREAK_RISK
+  REVIEW_NEEDED
+  PACE_ESTIMATE
+  FOCUS_RECOMMENDATION
+  GENERAL
+}
+
+enum InsightSeverity {
+  INFO
+  POSITIVE
+  WARNING
+}
+
+// ─── YandexGPT usage monitoring + spending protection ────────────────────────
+// Additive-only; logs every Yandex/Groq/fallback AI completion call so usage,
+// cost, and provider health can be tracked without touching existing flows.
+
+model YandexUsageLog {
+  id               String     @id @default(cuid())
+  userId           String?
+  subject          String?
+  teachingLanguage String
+  provider         AIProvider
+  requestTokens    Int        @default(0)
+  responseTokens   Int        @default(0)
+  estimatedCost    Float      @default(0)
+  success          Boolean
+  errorMessage     String?    @db.Text
+  createdAt        DateTime   @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([userId])
+  @@index([provider])
+  @@map("yandex_usage_logs")
+}
+
+// Singleton row (id always "singleton") holding admin-configurable spending
+// guardrails. When a limit is hit, the router skips Yandex and uses the
+// fallback provider — lessons are never interrupted.
+model AiUsageLimit {
+  id                  String   @id @default("singleton")
+  dailyRequestLimit   Int      @default(500)
+  monthlyCostLimitUsd Float    @default(20)
+  maxTokensPerRequest Int      @default(2000)
+  updatedAt           DateTime @updatedAt
+
+  @@map("ai_usage_limits")
+}
+
+enum AIProvider {
+  YANDEX
+  GROQ
+  FALLBACK
+}
+
+// ─── Career Roadmaps + Certifications + Job Readiness (Sprint D) ─────────────
+// Additive layer on top of Subject/ProfileSubject/ModuleProgress (Sprint B)
+// and RetentionMetric/Project (Sprint C): a Roadmap bundles existing library
+// subjects into a career outcome ("Backend Developer", "English Fluency"),
+// auto-enrolls the learner in each one, tracks milestones as they progress,
+// gates a capstone project at the end, and — on completion — issues a
+// verifiable certificate plus rolls everything into a Job Readiness score.
+
+model Roadmap {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  description      String   @db.Text
+  outcome          String
+  // Ordered SUBJECT_LIBRARY slugs the roadmap auto-enrolls the learner in.
+  requiredSubjects String[] @default([])
+  estimatedWeeks   Int      @default(12)
+  createdAt        DateTime @default(now())
+
+  enrollments  RoadmapEnrollment[]
+  milestones   Milestone[]
+  capstone     CapstoneProject?
+  certificates Certificate[]
+
+  @@map("roadmaps")
+}
+
+model RoadmapEnrollment {
+  id          String        @id @default(cuid())
+  userId      String
+  roadmapId   String
+  status      RoadmapStatus @default(ACTIVE)
+  progressPct Int           @default(0)
+  startedAt   DateTime      @default(now())
+  completedAt DateTime?
+  updatedAt   DateTime      @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roadmap      Roadmap       @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  milestones   Milestone[]
+  certificates Certificate[]
+
+  @@unique([userId, roadmapId])
+  @@index([userId, status])
+  @@map("roadmap_enrollments")
+}
+
+enum RoadmapStatus {
   ACTIVE
-  CANCELED
-  PAST_DUE
-  TRIALING
+  COMPLETED
+  PAUSED
+}
+
+model Milestone {
+  id           String        @id @default(cuid())
+  enrollmentId String
+  roadmapId    String
+  userId       String
+  kind         MilestoneKind
+  title        String
+  description  String        @db.Text
+  achievedAt   DateTime?
+  createdAt    DateTime      @default(now())
+
+  enrollment RoadmapEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  roadmap    Roadmap           @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, kind, title])
+  @@index([userId, achievedAt])
+  @@map("milestones")
+}
+
+enum MilestoneKind {
+  SUBJECT_COMPLETE
+  ROADMAP_PROGRESS
+  CAPSTONE_COMPLETE
+  ROADMAP_COMPLETE
+}
+
+model CapstoneProject {
+  id             String   @id @default(cuid())
+  roadmapId      String   @unique
+  slug           String
+  title          String
+  description    String   @db.Text
+  requirements   String[] @default([])
+  estimatedHours Int      @default(10)
+  createdAt      DateTime @default(now())
+
+  roadmap     Roadmap              @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  submissions CapstoneSubmission[]
+
+  @@map("capstone_projects")
+}
+
+model CapstoneSubmission {
+  id           String        @id @default(cuid())
+  userId       String
+  capstoneId   String
+  status       ProjectStatus @default(NOT_STARTED)
+  content      String?       @db.Text
+  score        Int?
+  aiReview     String?       @db.Text
+  strengths    String[]      @default([])
+  improvements String[]      @default([])
+  completedAt  DateTime?
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  capstone CapstoneProject @relation(fields: [capstoneId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, capstoneId])
+  @@index([userId, status])
+  @@map("capstone_submissions")
+}
+
+model Certificate {
+  id              String   @id @default(cuid())
+  certificateCode String   @unique
+  userId          String
+  roadmapId       String
+  enrollmentId    String
+  recipientName   String
+  roadmapTitle    String
+  issuedAt        DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roadmap    Roadmap           @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  enrollment RoadmapEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roadmapId])
+  @@index([certificateCode])
+  @@map("certificates")
+}
+
+model CareerProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  targetRole      String?
+  activeRoadmapId String?
+  skills          String[] @default([])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("career_profiles")
+}
+
+model JobReadiness {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  score            Int      @default(0)
+  label            String
+  skillsScore      Int      @default(0)
+  projectsScore    Int      @default(0)
+  assessmentsScore Int      @default(0)
+  masteryScore     Int      @default(0)
+  roadmapScore     Int      @default(0)
+  computedAt       DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("job_readiness")
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// Sprint E — Gamification, Achievements & Social Learning Foundation
+// XP, levels, achievements, streaks, activity heatmap, challenges, and a
+// minimal extensible social layer. Built on top of existing systems
+// (User.xpPoints, WeeklyXP, Profile.streakDays) — does not replace them.
+// ───────────────────────────────────────────────────────────────────────────
+
+enum XpAction {
+  LESSON_COMPLETED
+  QUIZ_PASSED
+  ASSESSMENT_PASSED
+  PROJECT_COMPLETED
+  REVIEW_COMPLETED
+  ROADMAP_MILESTONE
+  CAPSTONE_COMPLETED
+  CERTIFICATE_EARNED
+  OTHER
+}
+
+model XpTransaction {
+  id        String   @id @default(cuid())
+  userId    String
+  amount    Int
+  action    XpAction
+  reason    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("xp_transactions")
+}
+
+model UserLevel {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  level     Int      @default(1)
+  tier      String
+  xpInLevel Int      @default(0)
+  xpToNext  Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_levels")
+}
+
+enum AchievementCategory {
+  LEARNING
+  PROJECTS
+  STREAKS
+  SUBJECTS
+  ROADMAPS
+  CERTIFICATES
+}
+
+model Achievement {
+  id          String              @id @default(cuid())
+  slug        String              @unique
+  category    AchievementCategory
+  title       String
+  description String
+  icon        String
+  tier        Int                 @default(1)
+  createdAt   DateTime            @default(now())
+
+  unlocks UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@map("user_achievements")
+}
+
+model StudyStreak {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  currentStreak   Int       @default(0)
+  longestStreak   Int       @default(0)
+  totalActiveDays Int       @default(0)
+  lastActiveDate  DateTime?
+  updatedAt       DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("study_streaks")
+}
+
+enum ChallengePeriod {
+  WEEKLY
+  DAILY
+}
+
+enum ChallengeMetric {
+  LESSONS_COMPLETED
+  STUDY_DAYS
+  PROJECTS_COMPLETED
+  REVIEWS_COMPLETED
+  ASSESSMENTS_PASSED
+}
+
+enum ChallengeStatus {
+  ACTIVE
+  COMPLETED
+  EXPIRED
+}
+
+model LearningChallenge {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  period      ChallengePeriod
+  metric      ChallengeMetric
+  target      Int
+  title       String
+  description String
+  xpReward    Int             @default(0)
+  createdAt   DateTime        @default(now())
+
+  progress ChallengeProgress[]
+
+  @@map("learning_challenges")
+}
+
+model ChallengeProgress {
+  id          String          @id @default(cuid())
+  userId      String
+  challengeId String
+  periodKey   String
+  progress    Int             @default(0)
+  status      ChallengeStatus @default(ACTIVE)
+  completedAt DateTime?
+  updatedAt   DateTime        @updatedAt
+
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge LearningChallenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, challengeId, periodKey])
+  @@index([userId, periodKey])
+  @@map("challenge_progress")
+}
+
+enum ActivityKind {
+  ACHIEVEMENT_UNLOCKED
+  LEVEL_UP
+  STREAK_MILESTONE
+  CHALLENGE_COMPLETED
+}
+
+model ActivityLog {
+  id        String       @id @default(cuid())
+  userId    String
+  kind      ActivityKind
+  title     String
+  detail    String?
+  subject   String?
+  createdAt DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("activity_logs")
+}
+
+model SocialProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  displayName String?
+  bio         String?
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("social_profiles")
+}
+
+// ─── Sprint F: Mobile/PWA — lightweight client analytics (Part 12) ───────────
+enum ClientEventKind {
+  PWA_INSTALL_PROMPT
+  PWA_INSTALLED
+  OFFLINE_SESSION
+  SESSION_RECOVERY
+  VIEWPORT_CLASS
+}
+
+model ClientEvent {
+  id        String          @id @default(cuid())
+  userId    String
+  kind      ClientEventKind
+  detail    String?
+  createdAt DateTime        @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, kind, createdAt])
+  @@map("client_events")
+}
+
+// ─── Sprint F: Push notification foundation (Part 8 — architecture only) ─────
+// Stores opt-in Web Push subscriptions per device. Nothing subscribes/sends
+// yet — this only lays the groundwork alongside the existing Telegram/email
+// reminder system in lib/notifications + api/cron/reminders.
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  topics    String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("push_subscriptions")
+}
+
+// ─── Sprint G: Learning Intelligence — guardian links (parent/teacher) ───────
+// Read-only visibility into a student's learning data for a linked parent or
+// teacher. The student creates an invite code; a guardian redeems it to form
+// an ACTIVE link (and the student can revoke at any time). This adds no new
+// write paths into core learning data — guardians only ever read aggregated
+// reports. Teachers additionally get a separate TeacherNote channel below for
+// goals/module recommendations, layered on top of (never editing) curriculum data.
+enum GuardianRelationship {
+  PARENT
+  TEACHER
+}
+
+enum GuardianLinkStatus {
+  PENDING
+  ACTIVE
+  REVOKED
+}
+
+model GuardianLink {
+  id           String               @id @default(cuid())
+  studentId    String
+  guardianId   String?
+  relationship GuardianRelationship
+  status       GuardianLinkStatus   @default(PENDING)
+  inviteCode   String               @unique
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+
+  student  User  @relation("GuardianLinkStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  guardian User? @relation("GuardianLinkGuardian", fields: [guardianId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, status])
+  @@index([guardianId, status])
+  @@map("guardian_links")
+}
+
+enum TeacherNoteKind {
+  GOAL
+  MODULE_RECOMMENDATION
+  NOTE
+}
+
+enum TeacherNoteStatus {
+  ACTIVE
+  COMPLETED
+  DISMISSED
+}
+
+// Lightweight teacher → student channel for goals/module recommendations.
+// Purely additive notes alongside existing curriculum/roadmap data — teachers
+// never edit student records directly ("No direct database editing" in spec).
+model TeacherNote {
+  id          String            @id @default(cuid())
+  teacherId   String
+  studentId   String
+  kind        TeacherNoteKind   @default(NOTE)
+  subjectSlug String?
+  title       String
+  detail      String?           @db.Text
+  status      TeacherNoteStatus @default(ACTIVE)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  teacher User @relation("TeacherNoteAuthor", fields: [teacherId], references: [id], onDelete: Cascade)
+  student User @relation("TeacherNoteRecipient", fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, status])
+  @@index([teacherId, createdAt])
+  @@map("teacher_notes")
+}
+
+// ─── Sprint G: Organization foundation (Part 7 — architecture only) ──────────
+// Schools / training centers / corporate learning. Not multi-tenant yet — no
+// data isolation or org-scoped queries elsewhere in the app. Just the shape so
+// a future sprint can build on it without a breaking migration.
+enum OrganizationKind {
+  SCHOOL
+  TRAINING_CENTER
+  CORPORATE
+}
+
+enum OrgMemberRole {
+  OWNER
+  ADMIN
+  TEACHER
+  MEMBER
+}
+
+model Organization {
+  id        String           @id @default(cuid())
+  name      String
+  kind      OrganizationKind @default(SCHOOL)
+  ownerId   String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  owner   User                 @relation("OrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members OrganizationMember[]
+
+  @@index([ownerId])
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id             String        @id @default(cuid())
+  organizationId String
+  userId         String
+  role           OrgMemberRole @default(MEMBER)
+  joinedAt       DateTime      @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation("OrganizationMembership", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@map("organization_members")
+}
+
+// ─── Chapter content cache (Sprint BL — chapter learning workspace) ─────────
+// Global cache (not per-user) for AI-generated chapter summaries/objectives,
+// keyed by board+subject+grade+chapter+language so all students share results.
+
+model ChapterContentCache {
+  id          String   @id @default(cuid())
+  board       String
+  subjectSlug String
+  grade       Int
+  chapterId   String
+  language    String   @default("en")
+  summary     String
+  objectives  Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([board, subjectSlug, grade, chapterId, language])
+  @@map("chapter_content_cache")
+}
+
+// Sprint CI: AI-generated revision notes / sheets, cached globally per
+// board/subject/grade/chapter/noteType (same pattern as ChapterContentCache).
+model RevisionNotesCache {
+  id          String   @id @default(cuid())
+  board       String
+  subjectSlug String
+  grade       Int
+  chapterId   String
+  noteType    String // "quick" | "exam" | "formula"
+  language    String   @default("en")
+  content     Json // structured RevisionNotes payload
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([board, subjectSlug, grade, chapterId, noteType, language])
+  @@map("revision_notes_cache")
+}
+
+// ─── Teaching Strategy Engine outcome log (docs/STUDENT_MEMORY_AUDIT.md) ─────
+// Additive-only. Records which TeachingStrategyType fired per turn and
+// whether a visual ultimately rendered, so future work can analyse strategy
+// effectiveness. Write-only from route.ts today; no reader exists yet.
+model TeachingStrategyEvent {
+  id          String   @id @default(cuid())
+  userId      String
+  topicSlug   String
+  strategy    String // TeachingStrategyType value
+  outputBias  String // OutputBias kind value
+  visualFired Boolean // did a visual/scene actually render this turn?
+  sessionId   String? // LearnSession.id if available
+  createdAt   DateTime @default(now())
+
+  @@index([userId, topicSlug])
+  @@index([userId, createdAt])
+  @@map("teaching_strategy_events")
+}
+
+// Dynamic 2D Visualization Engine (src/lib/teaching/visuals/): caches
+// LLM-generated visualization code per normalized concept, so the same
+// concept asked by any student never re-spends a Groq call after the
+// first generation. Global cache (no userId) — the generated code is a
+// pure function of the concept text, not of who asked.
+model VisualizationCache {
+  id          String   @id @default(cuid())
+  conceptKey  String   @unique
+  code        String   @db.Text
+  renderCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("visualization_cache")
+}
+
+// ─── Educational Brain (Phase 2, Milestone 1) ─────────────────────────────────
+// Additive only — see docs/educational-brain/10-database-strategy.md and
+// docs/project-memory/NEXT_ACTION.md. No existing table above this line is
+// touched. New models are prefixed `Eb` (Educational Brain) to avoid name
+// collisions with legacy models (notably the existing `Curriculum` model
+// above, which the doc's un-prefixed sketch would have collided with).
+// Architecture is unchanged from the doc; only Prisma identifiers differ.
+
+enum EbAbstractionLevel {
+  concrete
+  symbolic
+  abstract
+  meta
+}
+
+enum EbModality {
+  visual
+  numerical
+  symbolic
+  linguistic
+  kinesthetic
+}
+
+model EbConcept {
+  id                        String             @id // 'physics.kinematics.projectile_motion'
+  title                     String
+  description               String             @db.Text
+  primaryDomain             String
+  alsoInDomains             String[]
+  abstractionLevel          EbAbstractionLevel
+  modality                  EbModality[]
+  authoritativeFormula      String?
+  canonicalDefinitionId     String?
+  difficultyByGrade         Json
+  estimatedMinutesToMastery Json
+  titleTranslations         Json
+  descriptionTranslations   Json
+  createdAt                 DateTime           @default(now())
+  updatedAt                 DateTime           @updatedAt
+  version                   Int                @default(1)
+
+  outgoingEdges  EbConceptEdge[]          @relation("from")
+  incomingEdges  EbConceptEdge[]          @relation("to")
+  objectives     EbObjectiveConcept[]
+  misconceptions EbConceptMisconception[]
+  assets         EbAssetIdentity[]
+
+  @@index([primaryDomain])
+  @@index([id, version])
+  @@map("eb_concept")
+}
+
+enum EbEdgeKind {
+  prerequisite_of
+  part_of
+  is_a
+  analogous_to
+  commonly_confused_with
+}
+
+model EbConceptEdge {
+  id            String     @id @default(uuid())
+  fromConceptId String
+  toConceptId   String
+  edgeKind      EbEdgeKind
+  weight        Float      @default(1.0)
+  createdAt     DateTime   @default(now())
+  source        String?
+
+  fromConcept EbConcept @relation("from", fields: [fromConceptId], references: [id])
+  toConcept   EbConcept @relation("to", fields: [toConceptId], references: [id])
+
+  @@unique([fromConceptId, toConceptId, edgeKind])
+  @@index([toConceptId, edgeKind])
+  @@index([fromConceptId, edgeKind])
+  @@map("eb_concept_edge")
+}
+
+enum EbMisconScope {
+  universal
+  language_specific
+}
+
+model EbMisconception {
+  id                       String        @id // 'physics.kinematics.heavier_falls_faster'
+  title                    String
+  description              String        @db.Text
+  scope                    EbMisconScope @default(universal)
+  language                 String?
+  prevalenceByGrade        Json
+  detectableByProbeIds     String[]
+  repairableByAssetIds     String[]
+  unrepairableWithoutHuman Boolean       @default(false)
+  createdAt                DateTime      @default(now())
+  source                   String?
+
+  concepts EbConceptMisconception[]
+
+  @@map("eb_misconception")
+}
+
+model EbConceptMisconception {
+  conceptId       String
+  misconceptionId String
+  confidence      Float   @default(0.5)
+  source          String?
+
+  concept       EbConcept       @relation(fields: [conceptId], references: [id])
+  misconception EbMisconception @relation(fields: [misconceptionId], references: [id])
+
+  @@id([conceptId, misconceptionId])
+  @@index([misconceptionId])
+  @@map("eb_concept_misconception")
+}
+
+enum EbBloomLevel {
+  remember
+  understand
+  apply
+  analyze
+  evaluate
+  create
+}
+
+model EbLearningObjective {
+  id                String       @id // 'cbse.10.science.physics.7.derive_range'
+  title             String
+  titleTranslations Json
+  bloomLevel        EbBloomLevel
+  examplePrompt     String?      @db.Text
+
+  concepts EbObjectiveConcept[]
+  modules  EbModuleObjective[]
+
+  @@map("eb_learning_objective")
+}
+
+model EbObjectiveConcept {
+  objectiveId String
+  conceptId   String
+  required    Boolean @default(true)
+
+  objective EbLearningObjective @relation(fields: [objectiveId], references: [id])
+  concept   EbConcept           @relation(fields: [conceptId], references: [id])
+
+  @@id([objectiveId, conceptId])
+  @@map("eb_objective_concept")
+}
+
+model EbCurriculum {
+  id            String    @id // 'cbse_class_10_science_2025'
+  title         String
+  authority     String
+  grade         Int
+  language      String
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  metadata      Json
+  createdAt     DateTime  @default(now())
+
+  modules EbModule[]
+
+  @@map("eb_curriculum")
+}
+
+model EbModule {
+  id             String @id // 'cbse.10.sci.physics.7'
+  curriculumId   String
+  title          String
+  orderIndex     Int
+  estimatedHours Int
+
+  curriculum EbCurriculum        @relation(fields: [curriculumId], references: [id])
+  objectives EbModuleObjective[]
+
+  @@index([curriculumId, orderIndex])
+  @@map("eb_module")
+}
+
+model EbModuleObjective {
+  moduleId    String
+  objectiveId String
+  orderIndex  Int
+
+  module    EbModule            @relation(fields: [moduleId], references: [id])
+  objective EbLearningObjective @relation(fields: [objectiveId], references: [id])
+
+  @@id([moduleId, objectiveId])
+  @@index([moduleId, orderIndex])
+  @@map("eb_module_objective")
+}
+
+enum EbAssetFamily {
+  EXPLANATION
+  VISUAL
+  PROBE
+}
+
+enum EbAuthorKind {
+  HUMAN_CURATOR
+  AI_AUTHORED
+  AI_AUTHORED_REVIEWED
+  IMPORTED
+  STUDENT_CONTRIBUTION
+  SYSTEM
+}
+
+enum EbAssetStatus {
+  DRAFT
+  REVIEW
+  ACTIVE
+  SHADOW_ACTIVE
+  EXPERIMENT_VARIANT
+  DEPRECATED
+  RETIRED
+}
+
+enum EbGradeBand {
+  k_5
+  g_6_8
+  g_9_10
+  g_11_12
+  undergrad
+  postgrad
+}
+
+enum EbIPClass {
+  public_domain
+  cc_by
+  cc_by_sa
+  proprietary_licensed
+  fair_use
+  pending
+  unknown
+}
+
+model EbAssetIdentity {
+  assetId                         String        @id @default(uuid())
+  family                          EbAssetFamily
+  familyKind                      String
+  conceptId                       String
+  language                        String
+  gradeBand                       EbGradeBand
+  style                           String?
+  authorId                        String?
+  authorKind                      EbAuthorKind
+  sourceTraceId                   String?
+  createdAt                       DateTime      @default(now())
+  version                         Int           @default(1)
+  parentVersionId                 String?
+  status                          EbAssetStatus @default(DRAFT)
+  deprecationReason               String?
+  qualityScore                    Float         @default(0.5)
+  qualityConfidence               Float         @default(0.1)
+  sampleSize                      Int           @default(0)
+  costCents                       Int           @default(0)
+  tags                            String[]
+  curriculumMappings              Json
+  prerequisiteConceptIds          String[]
+  incompatibilityMisconceptionIds String[]
+  intellectualProperty            EbIPClass     @default(unknown)
+
+  concept     EbConcept      @relation(fields: [conceptId], references: [id])
+  explanation EbExplanation?
+  visual      EbVisual?
+  probe       EbProbe?
+
+  @@unique([conceptId, family, familyKind, language, gradeBand, style, version])
+  @@index([conceptId, family, familyKind, language, gradeBand, status])
+  @@index([conceptId, status, qualityScore])
+  @@index([status])
+  @@index([costCents])
+  @@map("eb_asset_identity")
+}
+
+model EbExplanation {
+  assetId      String          @id
+  content      String          @db.Text
+  contentHash  String
+  length       Int
+  readingLevel Float?
+  asset        EbAssetIdentity @relation(fields: [assetId], references: [assetId])
+
+  @@index([contentHash])
+  @@map("eb_explanation")
+}
+
+enum EbVisualRenderer {
+  katex
+  recharts
+  three
+  animation
+  interactive_widget
+}
+
+model EbVisual {
+  assetId            String           @id
+  renderer           EbVisualRenderer
+  specPayload        Json
+  specHash           String
+  a11yDescription    String           @db.Text
+  estimatedRenderMs  Int              @default(100)
+  deviceCapabilities Json             @default("{}")
+  asset              EbAssetIdentity  @relation(fields: [assetId], references: [assetId])
+
+  @@index([renderer])
+  @@index([specHash])
+  @@map("eb_visual")
+}
+
+enum EbProbeKind {
+  mcq
+  true_false
+  short_answer
+  numeric
+  step_check
+  misconception_probe
+  checkpoint
+}
+
+enum EbDifficulty {
+  foundational
+  developing
+  proficient
+  advanced
+}
+
+model EbProbe {
+  assetId                  String          @id
+  probeKind                EbProbeKind
+  stem                     String          @db.Text
+  choices                  Json
+  correctValue             Json?
+  tolerance                Float?
+  keywords                 String[]
+  sampleAnswer             String?
+  difficulty               EbDifficulty
+  discriminationScore      Float           @default(0.5)
+  targetedMisconceptionIds String[]
+  requiredVisualAssetIds   String[]
+  asset                    EbAssetIdentity @relation(fields: [assetId], references: [assetId])
+
+  @@index([difficulty])
+  @@map("eb_probe")
+}
+
+enum EbSourceKind {
+  book
+  video
+  syllabus
+  research
+  expert_dictation
+  external_ai
+}
+
+model EbKnowledgeAcquisitionTrace {
+  traceId            String       @id @default(uuid())
+  sourceKind         EbSourceKind
+  sourceTitle        String
+  sourceUri          String?
+  contentHash        String
+  licenseClass       EbIPClass
+  licenseDocumentUri String?
+  contributedById    String?
+  ingestedAt         DateTime     @default(now())
+  metadata           Json         @default("{}")
+
+  segments EbSourceSegment[]
+
+  @@map("eb_knowledge_acquisition_trace")
+}
+
+model EbSourceSegment {
+  id              String  @id @default(uuid())
+  traceId         String
+  segmentIndex    Int
+  text            String  @db.Text
+  pageOrTimestamp String?
+  segmentHash     String
+
+  trace EbKnowledgeAcquisitionTrace @relation(fields: [traceId], references: [traceId])
+
+  @@index([traceId, segmentIndex])
+  @@map("eb_source_segment")
+}
+
+model EbLearnerConceptMastery {
+  userId            String
+  conceptId         String
+  language          String
+  masteryScore      Float     @default(0)
+  masteryConfidence Float     @default(0.1)
+  decayedScore      Float     @default(0)
+  attemptCount      Int       @default(0)
+  lastSeenAt        DateTime?
+  firstAttemptAt    DateTime?
+  updatedAt         DateTime  @updatedAt
+
+  @@id([userId, conceptId, language])
+  @@index([userId, language, decayedScore])
+  @@map("eb_learner_concept_mastery")
+}
+
+enum EbMisconStatus {
+  active
+  repaired
+  escalated
+}
+
+model EbLearnerActiveMisconception {
+  userId          String
+  misconceptionId String
+  language        String
+  confidence      Float          @default(0.5)
+  firstDetectedAt DateTime       @default(now())
+  lastDetectedAt  DateTime       @default(now())
+  repairAttempts  Int            @default(0)
+  status          EbMisconStatus @default(active)
+
+  @@id([userId, misconceptionId, language])
+  @@index([userId, status])
+  @@map("eb_learner_active_misconception")
+}
+
+enum EbEvidenceCategory {
+  ASSET_SHOWN
+  PROBE_OUTCOME
+  MISCONCEPTION_DETECTED
+  LEARNER_FEEDBACK
+  RE_ASK
+  SUMMATIVE_OUTCOME
+}
+
+model EbEvidenceEvent {
+  eventId         String             @id @default(uuid())
+  occurredAt      DateTime           @default(now())
+  turnId          String?
+  userId          String
+  sessionId       String?
+  conceptId       String
+  language        String
+  gradeBand       EbGradeBand
+  category        EbEvidenceCategory
+  assetId         String?
+  misconceptionId String?
+  curriculumId    String?
+  outcome         String
+  strength        Float
+  rawScore        Float?
+  contextHash     String?
+
+  @@index([assetId, occurredAt])
+  @@index([conceptId, occurredAt])
+  @@index([userId, occurredAt])
+  @@index([occurredAt])
+  @@map("eb_evidence_event")
+}
+
+model EbAssetScore {
+  assetId           String
+  gradeBand         EbGradeBand
+  language          String
+  learningStyle     String      @default("") // '' = aggregated; populated for stratified scores
+  windowEnd         DateTime
+  qualityScore      Float
+  qualityConfidence Float
+  sampleSize        Int
+  positiveEvents    Int
+  negativeEvents    Int
+
+  @@id([assetId, gradeBand, language, learningStyle, windowEnd])
+  @@index([assetId, windowEnd])
+  @@map("eb_asset_score")
+}
+
+model EbBrainConfig {
+  id            String    @id
+  name          String    @unique
+  value         Json
+  version       Int       @default(1)
+  effectiveFrom DateTime  @default(now())
+  effectiveTo   DateTime?
+  changedBy     String?
+  reason        String?   @db.Text
+
+  @@index([name, version])
+  @@map("eb_brain_config")
+}
+
+enum EbExperimentKind {
+  ASSET_AB
+  STRATEGY_AB
+  RANKING_BANDIT
+  PROMPT_AB
+}
+
+enum EbExperimentStatus {
+  designing
+  running
+  analyzing
+  shipped
+  aborted
+}
+
+model EbExperiment {
+  id               String             @id @default(uuid())
+  kind             EbExperimentKind
+  hypothesis       String             @db.Text
+  primaryMetric    String
+  arms             Json
+  populationTotalN Int?
+  status           EbExperimentStatus
+  startedAt        DateTime?
+  endedAt          DateTime?
+  conclusion       String?            @db.Text
+
+  assignments EbExperimentAssignment[]
+
+  @@map("eb_experiment")
+}
+
+model EbExperimentAssignment {
+  userId       String
+  experimentId String
+  armId        String
+  assignedAt   DateTime @default(now())
+
+  experiment EbExperiment @relation(fields: [experimentId], references: [id])
+
+  @@id([userId, experimentId])
+  @@index([experimentId, armId])
+  @@map("eb_experiment_assignment")
+}
+
+// ─── Educational Brain — Student Memory (W1-2, implements ADR 10 Phase 1) ────
+// Additive only: no existing table above is touched. Nothing reads or writes
+// these tables yet (Wave 2 wires the readers/writers per ADR 10 §10).
+
+// Canonical mastery classification (ADR 07 + ADR 10).
+// Single source of truth: the Persist stage of the chat-route pipeline.
+enum MasteryLevel {
+  NOT_STARTED
+  INTRODUCED
+  DEVELOPING
+  PROFICIENT
+  MASTERED
+}
+
+// Per-(user, concept) mastery record — replaces the scattered masteryPct reads
+// that currently happen against TopicProgress (added in later sprints).
+// The two scores are never conflated: masteryScore is the best score achieved,
+// decayedScore is current retention after the forgetting curve is applied.
+model ConceptMasteryRecord {
+  userId            String
+  conceptId         String       // KG node slug, e.g. "math.algebra.linear_equations"
+
+  masteryScore      Float        @default(0)    // 0–1, best score achieved
+  decayedScore      Float        @default(0)    // 0–1, current retention (masteryScore × decay)
+  masteryConfidence Float        @default(0)    // 0–1, statistical confidence in the score
+  masteryLevel      MasteryLevel @default(NOT_STARTED)  // canonical enum
+
+  lastProbeOutcome  String?      // "pass" | "fail" | "partial"
+  lastSeenAt        DateTime     @default(now())
+  attemptCount      Int          @default(0)
+  sampleSize        Int          @default(0)    // effective # of graded interactions
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, conceptId])
+  @@index([userId, masteryLevel])
+  @@index([userId, decayedScore])
+  @@map("concept_mastery_records")
+}
+
+// Versioned policy store: formalises hardcoded Teaching Brain constants into
+// named, auditable, experiment-capable config rows (ADR 10 §4.4 / ADR 05).
+// Read-only at runtime — no teaching-path code may write to this table.
+model BrainConfig {
+  id            String    @id
+  name          String    @unique  // e.g. "mastery_thresholds", "probe_target_frequency"
+  value         Json                // typed payload varies by name
+  version       Int       @default(1)
+  effectiveFrom DateTime  @default(now())
+  effectiveTo   DateTime?
+  changedBy     String?
+  reason        String?   @db.Text
+
+  @@index([name, effectiveFrom])
+  @@map("brain_config")
+}
+
+// Active misconception confidence — Bayesian update per detection/repair event.
+// Replaces the count-based heuristic (LOW=2, MEDIUM=3-4, HIGH=5+ occurrences)
+// used today in the misconception signal block.
+enum MisconceptionStatus {
+  ACTIVE
+  REPAIR_IN_PROGRESS
+  REPAIRED
+  ESCALATED
+}
+
+model ActiveMisconception {
+  userId          String
+  misconceptionId String              // canonical slug, e.g. "math.add.carrying_error"
+  topicSlug       String              // KG node slug the misconception applies to
+  confidence      Float               @default(0.5)  // 0–1, Bayesian posterior
+  firstDetectedAt DateTime            @default(now())
+  lastDetectedAt  DateTime            @default(now())
+  repairAttempts  Int                 @default(0)
+  lastRepairAt    DateTime?
+  status          MisconceptionStatus @default(ACTIVE)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, misconceptionId])
+  @@index([userId, status])
+  @@index([userId, topicSlug])
+  @@map("active_misconceptions")
+}
+
+// ─── Knowledge Asset System (W1-4, implements ADR 14 Phase 1) ───────────────
+// Additive schema only. Tables are empty and completely unused after this batch.
+// Single writer for quality fields: Evidence Engine (ADR 13).
+// Serving path (retrieval, generation, ingestion) is Wave 2.
+
+enum AssetFamily {
+  EXPLANATION
+  VISUAL
+  PROBE
+}
+
+// Full lifecycle state machine per ADR 14 §4.5.
+// Only ACTIVE assets are served to learners; all others are inert.
+enum AssetStatus {
+  DRAFT
+  REVIEW
+  ACTIVE
+  DEPRECATED
+  RETIRED
+}
+
+enum AuthorKind {
+  HUMAN_CURATOR
+  AI_AUTHORED
+  AI_AUTHORED_REVIEWED
+  IMPORTED
+}
+
+enum ExplanationStyle {
+  RIGOROUS
+  CONCRETE
+  ANALOGY
+  VISUAL_FIRST
+}
+
+// Typed renderer discriminators from ADR 12 §4.2.
+enum VisualRenderer {
+  KATEX
+  SCENE_SPEC
+  VISUAL_SPEC
+  DYNAMIC_COMPONENT
+  ANIMATION             // Phase 3+
+  INTERACTIVE_WIDGET    // Phase 3+
+}
+
+enum ProbeDifficulty {
+  FOUNDATIONAL
+  DEVELOPING
+  PROFICIENT
+  ADVANCED
+}
+
+// Central identity table for all knowledge assets (ADR 14 §4.1 Design C).
+// One row per versioned asset; cross-asset queries go through this table.
+// Quality fields are single-writer: Evidence Engine only (ADR 13 invariant).
+model AssetIdentity {
+  assetId          String      @id @default(uuid())
+  family           AssetFamily
+  familyKind       String      // discriminator: ExplanationKind | ProbeKind | VisualRenderer slug
+  conceptId        String      // KG concept slug
+  language         String      // BCP-47, e.g. "en", "ru"
+  gradeBand        GradeBand   // reuses W1-3 enum
+  authorId         String      // userId or 'SYSTEM_AI' sentinel
+  authorKind       AuthorKind
+  status           AssetStatus @default(DRAFT)
+  version          Int         @default(1)
+  parentVersionId  String?     // self-FK: previous version in same canonicalSlug group
+
+  canonicalSlug    String      // deterministic hash of (conceptId, familyKind, language)
+
+  // Evidence — single writer: Evidence Engine (ADR 13)
+  qualityScore     Float       @default(0)
+  qualityConfidence Float      @default(0)
+  sampleSize       Int         @default(0)
+
+  // Content
+  contentHash      String      // SHA-256 of family-table payload
+  tags             String[]    // e.g. ['good_for_visual_learners', 'requires_calc']
+
+  // Provenance
+  sourceTraceId       String?
+  intellectualProperty String  // 'public_domain' | 'cc_by' | 'proprietary' | ...
+  curriculumMappings  Json     // Array<{ curriculumId: string; codeRef: string }>
+  deprecationReason   String?  @db.Text
+
+  // Safety gates (ADR 14 §4.1 / ch01 §5)
+  incompatibilities String[]   // [misconceptionId] — gates serving to learner with that misconception
+  prerequisites     String[]   // [conceptId] — asset-level prerequisites beyond concept-level
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  parent   AssetIdentity?  @relation("AssetVersionChain", fields: [parentVersionId], references: [assetId])
+  children AssetIdentity[] @relation("AssetVersionChain")
+
+  explanationAsset ExplanationAsset?
+  visualAsset      VisualAsset?
+  probeAsset       ProbeAsset?
+
+  @@index([conceptId, family, familyKind, language, gradeBand, status])
+  @@index([canonicalSlug, status])
+  @@index([status, qualityScore])
+  @@map("asset_identity")
+}
+
+// Explanation family table (ADR 14 §4.2).
+model ExplanationAsset {
+  assetId                String           @id
+  content                String           @db.Text
+  style                  ExplanationStyle
+  readingLevel           Float            // Flesch-Kincaid score
+  lengthChars            Int
+  targetedMisconceptions String[]         // [misconceptionId] this asset is designed to repair
+
+  identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map("explanation_assets")
+}
+
+// Visual family table (ADR 14 §4.3, ADR 12 §4.1).
+model VisualAsset {
+  assetId         String         @id
+  renderer        VisualRenderer
+  specPayload     Json           // typed by renderer: SceneSpec | VisualSpec | LatexString | ...
+  a11yDescription String         @db.Text  // mandatory — empty fails Layer 1 validation
+
+  identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map("visual_assets")
+}
+
+// Probe family table (ADR 14 §4.4).
+model ProbeAsset {
+  assetId                String          @id
+  stem                   String          @db.Text
+  choices                Json?           // ProbeChoice[] — null for non-MCQ kinds
+  correctValue           String?         // for true_false / numeric / short_answer
+  tolerance              Float?          // for numeric answer tolerance
+  keywords               String[]        // for short_answer keyword scoring
+  sampleAnswer           String?         @db.Text
+  difficulty             ProbeDifficulty
+  discriminationScore    Float?          // IRT-like signal 0–1; updated by Evidence Engine
+  targetedMisconceptions String[]        // [misconceptionId] that wrong choices map to
+  requiredVisuals        String[]        // [assetId] that must be on screen with this probe
+
+  identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map("probe_assets")
+}
+
+// ─── Evidence Engine (W1-3, implements ADR 13 Phase 1) ───────────────────────
+// Append-only event log. Single writer: the Persist stage of the chat-route.
+// No FK to User — denormalized intentionally for lock-free INSERT performance
+// on the hot path (ADR 13 §5 Design C, §10 Phase 1 spec).
+
+enum EvidenceCategory {
+  ASSET_SHOWN          // strength always 0.0 — consumed-ness, not effectiveness
+  PROBE_OUTCOME        // strength: 1.0 pass / 0.0 fail / 0.5 partial
+  MISCONCEPTION_DETECTED
+  LEARNER_FEEDBACK
+  RE_ASK
+  SUMMATIVE_OUTCOME
+}
+
+enum GradeBand {
+  EARLY              // grades K-2 / ages 5-7
+  ELEMENTARY         // grades 3-5 / ages 8-10
+  MIDDLE             // grades 6-8 / ages 11-13
+  HIGH               // grades 9-12 / ages 14-17
+  UNDERGRADUATE
+  ADULT
+}
+
+model EvidenceEvent {
+  eventId        String          @id @default(uuid())
+  occurredAt     DateTime        @default(now())
+
+  // Denormalized — no FK, lock-free INSERT on hot path
+  userId         String
+  sessionId      String?
+  turnId         String?         // assistant Message.id, set when available
+
+  conceptId      String          // KG node slug (Phase 1: subject slug proxy)
+  language       String          // BCP-47, e.g. "ru", "en"
+  gradeBand      GradeBand
+
+  category       EvidenceCategory
+  assetId        String?         // Knowledge Asset id (Phase 3+)
+  misconceptionId String?        // canonical misconception slug
+  curriculumId   String?         // board/chapter/topic composite key
+
+  outcome        String          // "pass" | "fail" | "partial" | "shown" | etc.
+  strength       Float           // 0–1 signal weight per category spec
+  rawScore       Float?          // raw probe score when applicable
+  contextHash    String?         // hash of turn context for deduplication
+
+  @@index([userId, conceptId])
+  @@index([userId, occurredAt])
+  @@index([sessionId, occurredAt])
+  @@index([conceptId, category])
+  @@map("evidence_events")
 }

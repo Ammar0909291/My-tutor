@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { chatWithFallback } from '@/lib/ai/client'
-import { MessageRole, SubscriptionStatus } from '@prisma/client'
+import { summarizeSession, generateJSON } from '@/lib/ai/client'
+import { MessageRole } from '@prisma/client'
 
 const schema = z.object({ sessionId: z.string() })
 
@@ -37,26 +37,13 @@ export async function POST(req: Request) {
     let summary: string | null = null
 
     if (learnSession.messages.length > 0) {
-      const transcript = learnSession.messages
-        .map((m) => `${m.role === MessageRole.USER ? 'Студент' : 'Репетитор'}: ${m.content}`)
-        .join('\n')
-        .slice(0, 6000)
-
       try {
-        const completion = await chatWithFallback({
-          messages: [
-            {
-              role: 'system',
-              content:
-                'Ты помощник, который кратко резюмирует учебные сессии. Отвечай только на русском языке.',
-            },
-            {
-              role: 'user',
-              content: `Напиши краткое резюме этого урока в 2-3 предложениях на русском языке. Укажи тему урока и что было изучено.\n\nТранскрипт урока:\n${transcript}`,
-            },
-          ],
-        })
-        summary = completion.choices[0]?.message?.content ?? null
+        const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+        const lang = profile?.teachingLanguage ?? 'en'
+        const msgs = learnSession.messages
+          .slice(0, 30)
+          .map((m) => ({ role: m.role === MessageRole.USER ? 'user' : 'assistant', content: m.content.slice(0, 300) }))
+        summary = await summarizeSession(msgs, lang) || null
       } catch (err) {
         console.error('[sessions/end] summary generation failed', err)
       }
@@ -71,11 +58,79 @@ export async function POST(req: Request) {
       },
     })
 
-    // Mark free session as used so the user is prompted to subscribe next time
-    await prisma.subscription.updateMany({
-      where: { userId: session.user.id, status: SubscriptionStatus.FREE, freeSessionUsed: false },
-      data: { freeSessionUsed: true },
+    // Session count is tracked via learnSession.count; no extra action needed here
+
+    // Record real study time — StudySession existed but nothing ever wrote to
+    // it, so anything reading from it (admin analytics, the Learn window's
+    // "Today's Goal" ring) was always empty. Additive-only, no schema change.
+    const minutesStudied = Math.round((Date.now() - learnSession.startedAt.getTime()) / 60000)
+    if (minutesStudied > 0) {
+      await prisma.studySession.create({
+        data: { userId: session.user.id, subjectId: learnSession.subjectId, minutes: minutesStudied, source: 'learn_session' },
+      }).catch((err) => console.error('[sessions/end] StudySession write failed', err))
+    }
+
+    // +10 XP for completing a session
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: { xpPoints: { increment: 10 } },
     })
+
+    // Update streak logic
+    try {
+      const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      yesterday.setHours(0, 0, 0, 0)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      const lastStudy = profile?.lastStudyDate
+      const isConsecutive = lastStudy && lastStudy >= yesterday && lastStudy < today
+      const newStreak = isConsecutive ? (profile?.streakDays ?? 0) + 1 : 1
+      await prisma.profile.update({
+        where: { userId: session.user.id },
+        data: {
+          streakDays: newStreak,
+          lastStudyDate: new Date(),
+          totalSessions: { increment: 1 },
+        },
+      })
+    } catch (err) {
+      console.error('[sessions/end] streak update failed', err)
+    }
+
+    // Generate flashcards from session content
+    if (learnSession.messages.length > 2) {
+      try {
+        const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+        const lang = profile?.teachingLanguage ?? 'en'
+        const lastMessages = learnSession.messages
+          .slice(-20)
+          .map((m) => `${m.role === MessageRole.USER ? 'Student' : 'Tutor'}: ${m.content.slice(0, 300)}`)
+          .join('\n')
+
+        const flashcards = await generateJSON(
+          `Based on this tutoring session content, create 3 flashcard Q&A pairs about the key concepts. Return ONLY JSON array: [{"question":"...","answer":"...","topic":"..."}]. Keep answers under 2 sentences. Language: ${lang}\n\nSession:\n${lastMessages}`,
+          800,
+        )
+
+        if (Array.isArray(flashcards) && flashcards.length > 0) {
+          const tomorrow = new Date()
+          tomorrow.setDate(tomorrow.getDate() + 1)
+          await prisma.flashcard.createMany({
+            data: flashcards.map((f: { question: string; answer: string; topic: string }) => ({
+              userId: session.user.id,
+              topic: f.topic ?? learnSession.subject.name,
+              question: f.question,
+              answer: f.answer,
+              nextReview: tomorrow,
+            })),
+          })
+        }
+      } catch (err) {
+        console.error('[sessions/end] flashcard generation failed', err)
+      }
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {

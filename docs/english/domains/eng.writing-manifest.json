@@ -1,0 +1,60 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "writing",
+  "domain_prefix": "eng.writing",
+  "domain_name": "Writing",
+  "subject": "english",
+  "concept_count": 20,
+  "asset_count": 20,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-04",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.writing.handwriting-and-formation",
+        "eng.writing.sentence-writing",
+        "eng.writing.transitions-and-cohesion",
+        "eng.writing.the-writing-process",
+        "eng.writing.revising-for-content",
+        "eng.writing.thesis-statements",
+        "eng.writing.creative-writing-forms"
+      ],
+      "coverage": "100% verification sweep (22 checks across all 20 concepts) + 35% full structured review (7/20) spanning entry-point/transition-point/branch-pivot/metacognitive-frame/highest-leverage-stage/recursive-keystone/creative-capstone concept roles",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names used from the start, continuing the practice established at eng.grammar and eng.reading."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:5f69fe798ad759542437a15e99bd763e0d7e63daf62e6dc9a0db140f9bdfe8be",
+    "assets_file_sha256": "sha256:3738d45201313d79e51cbd4267f82a28fc2270aa29bde3652ba993af5ab16d3c",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:721de5337f3862eefc48c23200b407eacf3ce7bc88bdca565894ea14658f3fa4"
+  },
+  "generated_files": [
+    "docs/english/chapters/writing.md",
+    "docs/english/domains/eng.writing-validation-report.md",
+    "docs/english/domains/eng.writing-summary.md",
+    "docs/english/domains/eng.writing-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "d367ff4",
+  "created_at": "2026-07-04T00:00:00Z"
+}

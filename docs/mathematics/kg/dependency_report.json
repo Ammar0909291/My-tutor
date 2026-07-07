@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "broken_requires_count": 0,
+  "broken_unlocks_count": 0,
+  "broken_cross_links_count": 0,
+  "aspirational_cross_links_count": 1,
+  "broken_requires": [],
+  "broken_unlocks": [],
+  "broken_cross_links": [],
+  "aspirational_cross_links": [
+    {
+      "source": "math.de.ode",
+      "target": "math.phys.classical-mechanics"
+    }
+  ]
+}

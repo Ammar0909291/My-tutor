@@ -1,0 +1,1840 @@
+{
+  "domain_id": "arithmetic",
+  "domain_name": "Arithmetic",
+  "id_prefix": "math.arith",
+  "level_range": [
+    0,
+    3
+  ],
+  "description": "The study of numbers and the four fundamental operations \u2014 addition, subtraction, multiplication, division \u2014 extended to integers, fractions, decimals, and ratios.",
+  "concepts": [
+    {
+      "id": "math.arith.counting",
+      "name": "Counting",
+      "aliases": [
+        "enumeration",
+        "one-to-one correspondence",
+        "cardinality-finite"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.counting-sequence",
+        "math.arith.subitizing"
+      ],
+      "requires": [
+        "math.found.natural-numbers"
+      ],
+      "unlocks": [
+        "math.arith.addition",
+        "math.arith.place-value"
+      ],
+      "related": [
+        "math.found.natural-numbers"
+      ],
+      "cross_links": [
+        "math.disc.combinatorics"
+      ],
+      "description": "The process of establishing a bijection between a finite set and an initial segment of the natural numbers to determine its size.",
+      "difficulty": "foundational",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 1",
+        "Singapore Math Grade 1",
+        "CK-12 Grade 1"
+      ]
+    },
+    {
+      "id": "math.arith.counting-sequence",
+      "name": "Counting Sequence",
+      "aliases": [
+        "number sequence",
+        "rote counting"
+      ],
+      "parent": "math.arith.counting",
+      "children": [],
+      "requires": [
+        "math.arith.counting"
+      ],
+      "unlocks": [
+        "math.arith.place-value"
+      ],
+      "related": [
+        "math.arith.counting"
+      ],
+      "cross_links": [],
+      "description": "The ordered sequence 1, 2, 3, \u2026 used to assign a unique natural number to each element of a finite set.",
+      "difficulty": "foundational",
+      "estimated_hours": 4,
+      "bloom": "remember",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 1",
+        "Singapore Math Grade 1"
+      ]
+    },
+    {
+      "id": "math.arith.subitizing",
+      "name": "Subitizing",
+      "aliases": [
+        "perceptual subitizing",
+        "instant recognition of quantity"
+      ],
+      "parent": "math.arith.counting",
+      "children": [],
+      "requires": [
+        "math.arith.counting"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.counting"
+      ],
+      "cross_links": [],
+      "description": "The perceptual ability to instantly recognize the cardinality of a small set (\u22644) without counting each element.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Clements 1999 Subitizing"
+      ]
+    },
+    {
+      "id": "math.arith.place-value",
+      "name": "Place Value",
+      "aliases": [
+        "positional notation",
+        "base-10 system",
+        "decimal place value"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.ones-tens-hundreds",
+        "math.arith.expanded-form"
+      ],
+      "requires": [
+        "math.arith.counting"
+      ],
+      "unlocks": [
+        "math.arith.addition",
+        "math.arith.subtraction",
+        "math.arith.rounding"
+      ],
+      "related": [
+        "math.arith.number-base"
+      ],
+      "cross_links": [
+        "math.arith.number-base"
+      ],
+      "description": "The positional system in which the value of a digit depends on its position within a numeral; in base 10, each position represents a power of 10.",
+      "difficulty": "foundational",
+      "estimated_hours": 10,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 1-4",
+        "Singapore Math Grade 1-4",
+        "CK-12 Grade 2"
+      ]
+    },
+    {
+      "id": "math.arith.ones-tens-hundreds",
+      "name": "Ones, Tens, Hundreds",
+      "aliases": [
+        "units, tens, hundreds",
+        "positional grouping"
+      ],
+      "parent": "math.arith.place-value",
+      "children": [],
+      "requires": [
+        "math.arith.place-value"
+      ],
+      "unlocks": [
+        "math.arith.carrying",
+        "math.arith.borrowing"
+      ],
+      "related": [
+        "math.arith.expanded-form"
+      ],
+      "cross_links": [],
+      "description": "The first three positional columns in base-10 notation, representing 10\u2070, 10\u00b9, and 10\u00b2 respectively.",
+      "difficulty": "foundational",
+      "estimated_hours": 4,
+      "bloom": "remember",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 2-4",
+        "Singapore Math Grade 2"
+      ]
+    },
+    {
+      "id": "math.arith.expanded-form",
+      "name": "Expanded Form",
+      "aliases": [
+        "expanded notation"
+      ],
+      "parent": "math.arith.place-value",
+      "children": [],
+      "requires": [
+        "math.arith.place-value"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.ones-tens-hundreds"
+      ],
+      "cross_links": [],
+      "description": "Writing a number as the sum of the values of each of its digits multiplied by the corresponding power of 10 (e.g., 345 = 300 + 40 + 5).",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 3-4",
+        "Singapore Math Grade 2"
+      ]
+    },
+    {
+      "id": "math.arith.number-base",
+      "name": "Number Base",
+      "aliases": [
+        "base-n notation",
+        "binary",
+        "hexadecimal",
+        "positional numeral system"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.place-value"
+      ],
+      "unlocks": [
+        "math.disc.boolean-circuits"
+      ],
+      "related": [
+        "math.arith.place-value"
+      ],
+      "cross_links": [
+        "math.disc.boolean-circuits"
+      ],
+      "description": "A positional numeral system using b distinct digit symbols; base 2 (binary), base 8 (octal), and base 16 (hexadecimal) are common in computing.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "CK-12 PreAlgebra",
+        "NCERT Grade 6"
+      ]
+    },
+    {
+      "id": "math.arith.addition",
+      "name": "Addition",
+      "aliases": [
+        "summation",
+        "plus",
+        "sum"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.carrying",
+        "math.arith.column-addition",
+        "math.arith.mental-addition"
+      ],
+      "requires": [
+        "math.arith.counting",
+        "math.arith.place-value"
+      ],
+      "unlocks": [
+        "math.arith.subtraction",
+        "math.arith.multiplication"
+      ],
+      "related": [
+        "math.arith.subtraction"
+      ],
+      "cross_links": [
+        "math.linalg.vector-addition",
+        "math.abst.group-operation"
+      ],
+      "description": "The binary operation combining two quantities into their total; the foundation of all arithmetic and the additive structure of every number system.",
+      "difficulty": "foundational",
+      "estimated_hours": 12,
+      "bloom": "apply",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 1-3",
+        "Singapore Math Grade 1-3",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.carrying",
+      "name": "Carrying (Regrouping)",
+      "aliases": [
+        "regrouping",
+        "carrying over"
+      ],
+      "parent": "math.arith.addition",
+      "children": [],
+      "requires": [
+        "math.arith.addition",
+        "math.arith.ones-tens-hundreds"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.borrowing"
+      ],
+      "cross_links": [],
+      "description": "The algorithm step in multi-digit addition where a digit sum \u2265 10 results in carrying 1 to the next column.",
+      "difficulty": "foundational",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 2-3",
+        "Singapore Math Grade 2"
+      ]
+    },
+    {
+      "id": "math.arith.column-addition",
+      "name": "Column Addition",
+      "aliases": [
+        "vertical addition",
+        "standard addition algorithm"
+      ],
+      "parent": "math.arith.addition",
+      "children": [],
+      "requires": [
+        "math.arith.carrying"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.addition"
+      ],
+      "cross_links": [],
+      "description": "The standard written algorithm for adding multi-digit numbers by aligning place values and adding column by column from right to left.",
+      "difficulty": "foundational",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 2-4",
+        "Singapore Math Grade 2-3"
+      ]
+    },
+    {
+      "id": "math.arith.mental-addition",
+      "name": "Mental Addition",
+      "aliases": [
+        "mental math addition",
+        "mental calculation"
+      ],
+      "parent": "math.arith.addition",
+      "children": [],
+      "requires": [
+        "math.arith.addition"
+      ],
+      "unlocks": [
+        "math.arith.mental-arithmetic"
+      ],
+      "related": [
+        "math.arith.estimation"
+      ],
+      "cross_links": [],
+      "description": "Strategies for computing sums in one's head without writing, including making tens, decomposing numbers, and using number bonds.",
+      "difficulty": "foundational",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Singapore Math",
+        "NCERT Grade 2-4"
+      ]
+    },
+    {
+      "id": "math.arith.subtraction",
+      "name": "Subtraction",
+      "aliases": [
+        "minus",
+        "difference",
+        "taking away"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.borrowing"
+      ],
+      "requires": [
+        "math.arith.addition"
+      ],
+      "unlocks": [
+        "math.arith.negative-numbers",
+        "math.arith.multiplication"
+      ],
+      "related": [
+        "math.arith.addition"
+      ],
+      "cross_links": [],
+      "description": "The inverse operation to addition, computing the difference between two quantities; requires the concept of additive inverse for extension to negative numbers.",
+      "difficulty": "foundational",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 1-3",
+        "Singapore Math Grade 1-3",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.borrowing",
+      "name": "Borrowing (Regrouping in Subtraction)",
+      "aliases": [
+        "decomposing",
+        "regrouping in subtraction"
+      ],
+      "parent": "math.arith.subtraction",
+      "children": [],
+      "requires": [
+        "math.arith.subtraction",
+        "math.arith.ones-tens-hundreds"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.carrying"
+      ],
+      "cross_links": [],
+      "description": "The algorithm step in multi-digit subtraction where a digit is insufficient for the column subtraction, requiring borrowing from the next higher column.",
+      "difficulty": "foundational",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 2-3",
+        "Singapore Math Grade 2"
+      ]
+    },
+    {
+      "id": "math.arith.negative-numbers",
+      "name": "Negative Numbers",
+      "aliases": [
+        "integers below zero",
+        "signed numbers",
+        "additive inverse"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.subtraction",
+        "math.found.integers"
+      ],
+      "unlocks": [
+        "math.arith.integer-arithmetic",
+        "math.arith.number-line"
+      ],
+      "related": [
+        "math.arith.number-line",
+        "math.found.integers"
+      ],
+      "cross_links": [],
+      "description": "Numbers less than zero, arising naturally as additive inverses; their arithmetic requires careful attention to sign rules.",
+      "difficulty": "developing",
+      "estimated_hours": 8,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "Singapore Math Grade 5",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.number-line",
+      "name": "Number Line",
+      "aliases": [
+        "real line model",
+        "number ray"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.counting"
+      ],
+      "unlocks": [
+        "math.arith.negative-numbers",
+        "math.arith.ordering"
+      ],
+      "related": [
+        "math.arith.negative-numbers",
+        "math.found.real-numbers"
+      ],
+      "cross_links": [
+        "math.geom.coordinate-plane"
+      ],
+      "description": "A geometric representation of numbers as points on a line, with a designated origin, unit length, and direction, enabling visualization of arithmetic and order.",
+      "difficulty": "foundational",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6",
+        "Singapore Math Grade 4",
+        "CK-12"
+      ]
+    },
+    {
+      "id": "math.arith.ordering",
+      "name": "Ordering Numbers",
+      "aliases": [
+        "comparing numbers",
+        "greater than, less than"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.number-line"
+      ],
+      "unlocks": [
+        "math.arith.absolute-value"
+      ],
+      "related": [
+        "math.found.total-order"
+      ],
+      "cross_links": [],
+      "description": "Determining the relative size of numbers using the relations <, >, \u2264, \u2265, based on their position on the number line.",
+      "difficulty": "foundational",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 1-5",
+        "Singapore Math Grade 2-4"
+      ]
+    },
+    {
+      "id": "math.arith.absolute-value",
+      "name": "Absolute Value",
+      "aliases": [
+        "|x|",
+        "magnitude",
+        "distance from zero"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.negative-numbers",
+        "math.arith.number-line"
+      ],
+      "unlocks": [
+        "math.alg.absolute-value-equations"
+      ],
+      "related": [
+        "math.arith.negative-numbers"
+      ],
+      "cross_links": [
+        "math.alg.absolute-value-equations",
+        "math.real.metric-space"
+      ],
+      "description": "The absolute value |x| of a real number is its distance from zero on the number line: |x| = x if x \u2265 0, and |x| = \u2212x if x < 0.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "OpenStax PreAlgebra",
+        "CK-12"
+      ]
+    },
+    {
+      "id": "math.arith.integer-arithmetic",
+      "name": "Integer Arithmetic",
+      "aliases": [
+        "operations on integers",
+        "signed arithmetic"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.negative-numbers",
+        "math.arith.multiplication"
+      ],
+      "unlocks": [
+        "math.nt.divisibility",
+        "math.arith.fractions"
+      ],
+      "related": [
+        "math.found.integers"
+      ],
+      "cross_links": [],
+      "description": "The four arithmetic operations applied to the set of integers, including the sign rules for multiplication and division of signed numbers.",
+      "difficulty": "developing",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6-7",
+        "Singapore Math Grade 5-6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.multiplication",
+      "name": "Multiplication",
+      "aliases": [
+        "times",
+        "product",
+        "repeated addition"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.multiplication-table",
+        "math.arith.long-multiplication",
+        "math.arith.mental-multiplication"
+      ],
+      "requires": [
+        "math.arith.addition"
+      ],
+      "unlocks": [
+        "math.arith.division",
+        "math.arith.exponentiation",
+        "math.nt.divisibility"
+      ],
+      "related": [
+        "math.arith.division",
+        "math.arith.addition"
+      ],
+      "cross_links": [
+        "math.linalg.matrix-multiplication",
+        "math.abst.ring-theory"
+      ],
+      "description": "A binary operation representing repeated addition; a \u00d7 b is the sum of b copies of a, extended to all number systems via the distributive law.",
+      "difficulty": "foundational",
+      "estimated_hours": 15,
+      "bloom": "apply",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 2-4",
+        "Singapore Math Grade 2-4",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.multiplication-table",
+      "name": "Multiplication Table",
+      "aliases": [
+        "times table",
+        "multiplication facts"
+      ],
+      "parent": "math.arith.multiplication",
+      "children": [],
+      "requires": [
+        "math.arith.multiplication"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.mental-multiplication"
+      ],
+      "cross_links": [],
+      "description": "The memorized table of products for integers 1 through 12, enabling rapid mental multiplication.",
+      "difficulty": "foundational",
+      "estimated_hours": 8,
+      "bloom": "remember",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 3-4",
+        "Singapore Math Grade 3"
+      ]
+    },
+    {
+      "id": "math.arith.long-multiplication",
+      "name": "Long Multiplication",
+      "aliases": [
+        "standard multiplication algorithm",
+        "column multiplication"
+      ],
+      "parent": "math.arith.multiplication",
+      "children": [],
+      "requires": [
+        "math.arith.multiplication-table",
+        "math.arith.carrying"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.long-division"
+      ],
+      "cross_links": [],
+      "description": "The standard written algorithm for multiplying multi-digit numbers by partial products aligned by place value.",
+      "difficulty": "foundational",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 4-5",
+        "Singapore Math Grade 3-4"
+      ]
+    },
+    {
+      "id": "math.arith.mental-multiplication",
+      "name": "Mental Multiplication",
+      "aliases": [
+        "mental arithmetic multiplication"
+      ],
+      "parent": "math.arith.multiplication",
+      "children": [],
+      "requires": [
+        "math.arith.multiplication-table"
+      ],
+      "unlocks": [
+        "math.arith.mental-arithmetic"
+      ],
+      "related": [
+        "math.arith.mental-addition"
+      ],
+      "cross_links": [],
+      "description": "Strategies for multiplying numbers mentally, including doubling, halving, distributive decomposition, and patterns with powers of 10.",
+      "difficulty": "developing",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Singapore Math",
+        "NCERT Grade 4-5"
+      ]
+    },
+    {
+      "id": "math.arith.division",
+      "name": "Division",
+      "aliases": [
+        "\u00f7",
+        "quotient",
+        "sharing equally",
+        "grouping"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.long-division",
+        "math.arith.remainder",
+        "math.arith.divisor-dividend"
+      ],
+      "requires": [
+        "math.arith.multiplication"
+      ],
+      "unlocks": [
+        "math.arith.fractions",
+        "math.nt.divisibility"
+      ],
+      "related": [
+        "math.arith.multiplication",
+        "math.arith.fractions"
+      ],
+      "cross_links": [
+        "math.nt.divisibility"
+      ],
+      "description": "The inverse operation to multiplication; a \u00f7 b finds how many times b fits into a, with a possible remainder for integers.",
+      "difficulty": "foundational",
+      "estimated_hours": 12,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 3-5",
+        "Singapore Math Grade 3-5",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.long-division",
+      "name": "Long Division",
+      "aliases": [
+        "standard division algorithm"
+      ],
+      "parent": "math.arith.division",
+      "children": [],
+      "requires": [
+        "math.arith.division",
+        "math.arith.long-multiplication"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.remainder"
+      ],
+      "cross_links": [],
+      "description": "The step-by-step algorithm for dividing multi-digit numbers, producing a quotient and remainder.",
+      "difficulty": "developing",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 4-5",
+        "Singapore Math Grade 4-5"
+      ]
+    },
+    {
+      "id": "math.arith.remainder",
+      "name": "Remainder",
+      "aliases": [
+        "modulus (informal)",
+        "remainder after division"
+      ],
+      "parent": "math.arith.division",
+      "children": [],
+      "requires": [
+        "math.arith.division"
+      ],
+      "unlocks": [
+        "math.nt.modular-arithmetic"
+      ],
+      "related": [
+        "math.nt.divisibility"
+      ],
+      "cross_links": [
+        "math.nt.modular-arithmetic"
+      ],
+      "description": "The amount left over after integer division; if a = bq + r with 0 \u2264 r < b, then r is the remainder of a \u00f7 b.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 4-5",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.divisor-dividend",
+      "name": "Divisor and Dividend",
+      "aliases": [
+        "dividend",
+        "divisor",
+        "quotient",
+        "division vocabulary"
+      ],
+      "parent": "math.arith.division",
+      "children": [],
+      "requires": [
+        "math.arith.division"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.divisibility"
+      ],
+      "cross_links": [],
+      "description": "In a \u00f7 b = q, a is the dividend, b is the divisor, and q is the quotient; standard vocabulary for the components of a division expression.",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "remember",
+      "mastery_threshold": 0.95,
+      "references": [
+        "NCERT Grade 3-5"
+      ]
+    },
+    {
+      "id": "math.arith.order-of-operations",
+      "name": "Order of Operations",
+      "aliases": [
+        "PEMDAS",
+        "BODMAS",
+        "BIDMAS",
+        "operator precedence"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.addition",
+        "math.arith.subtraction",
+        "math.arith.multiplication",
+        "math.arith.division"
+      ],
+      "unlocks": [
+        "math.alg.expression"
+      ],
+      "related": [
+        "math.alg.expression"
+      ],
+      "cross_links": [],
+      "description": "The conventional rules governing the sequence in which operations are performed in an expression: parentheses, exponents, multiplication/division, addition/subtraction.",
+      "difficulty": "developing",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 5-6",
+        "Singapore Math Grade 4-5",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.fractions",
+      "name": "Fractions",
+      "aliases": [
+        "rational fractions",
+        "p/q",
+        "common fractions",
+        "proper and improper fractions"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.fraction-equivalence",
+        "math.arith.fraction-simplification",
+        "math.arith.fraction-addition",
+        "math.arith.fraction-multiplication",
+        "math.arith.mixed-numbers",
+        "math.arith.improper-fractions"
+      ],
+      "requires": [
+        "math.arith.division",
+        "math.found.rational-numbers"
+      ],
+      "unlocks": [
+        "math.arith.decimals",
+        "math.arith.percentages",
+        "math.arith.ratios"
+      ],
+      "related": [
+        "math.arith.decimals",
+        "math.arith.percentages"
+      ],
+      "cross_links": [
+        "math.alg.rational-expressions"
+      ],
+      "description": "A representation of a rational number as a ratio p/q of two integers, where q \u2260 0, expressing a part-whole or part-part relationship.",
+      "difficulty": "developing",
+      "estimated_hours": 20,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 5-7",
+        "Singapore Math Grade 5-6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.fraction-equivalence",
+      "name": "Equivalent Fractions",
+      "aliases": [
+        "fraction equivalence",
+        "equal fractions"
+      ],
+      "parent": "math.arith.fractions",
+      "children": [],
+      "requires": [
+        "math.arith.fractions"
+      ],
+      "unlocks": [
+        "math.arith.fraction-simplification"
+      ],
+      "related": [
+        "math.arith.fraction-simplification"
+      ],
+      "cross_links": [],
+      "description": "Two fractions a/b and c/d are equivalent if ad = bc; multiplying numerator and denominator by the same nonzero number preserves the fraction's value.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 5-6",
+        "Singapore Math Grade 5"
+      ]
+    },
+    {
+      "id": "math.arith.fraction-simplification",
+      "name": "Fraction Simplification",
+      "aliases": [
+        "reducing fractions",
+        "lowest terms",
+        "simplest form"
+      ],
+      "parent": "math.arith.fractions",
+      "children": [],
+      "requires": [
+        "math.arith.fraction-equivalence",
+        "math.nt.gcd"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.gcd"
+      ],
+      "cross_links": [],
+      "description": "Writing a fraction in its simplest (lowest) form by dividing numerator and denominator by their greatest common divisor.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6",
+        "Singapore Math Grade 5"
+      ]
+    },
+    {
+      "id": "math.arith.fraction-addition",
+      "name": "Addition and Subtraction of Fractions",
+      "aliases": [
+        "adding fractions",
+        "subtracting fractions",
+        "common denominator"
+      ],
+      "parent": "math.arith.fractions",
+      "children": [],
+      "requires": [
+        "math.arith.fractions",
+        "math.nt.lcm"
+      ],
+      "unlocks": [
+        "math.alg.rational-expressions-addition"
+      ],
+      "related": [
+        "math.arith.fraction-multiplication"
+      ],
+      "cross_links": [],
+      "description": "Adding or subtracting fractions by finding a common denominator and combining numerators; requires knowledge of LCM.",
+      "difficulty": "developing",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6-7",
+        "Singapore Math Grade 5-6"
+      ]
+    },
+    {
+      "id": "math.arith.fraction-multiplication",
+      "name": "Multiplication and Division of Fractions",
+      "aliases": [
+        "multiplying fractions",
+        "dividing fractions",
+        "reciprocal"
+      ],
+      "parent": "math.arith.fractions",
+      "children": [
+        "math.arith.fraction-reciprocal"
+      ],
+      "requires": [
+        "math.arith.fractions"
+      ],
+      "unlocks": [
+        "math.arith.ratios"
+      ],
+      "related": [
+        "math.arith.fraction-addition"
+      ],
+      "cross_links": [],
+      "description": "Multiplying fractions by multiplying numerators and denominators separately; dividing fractions by multiplying by the reciprocal of the divisor.",
+      "difficulty": "developing",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6-7",
+        "Singapore Math Grade 5-6"
+      ]
+    },
+    {
+      "id": "math.arith.fraction-reciprocal",
+      "name": "Reciprocal",
+      "aliases": [
+        "multiplicative inverse",
+        "1/x",
+        "flip"
+      ],
+      "parent": "math.arith.fraction-multiplication",
+      "children": [],
+      "requires": [
+        "math.arith.fractions"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.fraction-multiplication"
+      ],
+      "cross_links": [
+        "math.abst.field"
+      ],
+      "description": "The reciprocal of a nonzero number x is 1/x; their product is 1, making the reciprocal the multiplicative inverse in the field of rationals.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.mixed-numbers",
+      "name": "Mixed Numbers",
+      "aliases": [
+        "mixed fractions",
+        "whole and fraction"
+      ],
+      "parent": "math.arith.fractions",
+      "children": [],
+      "requires": [
+        "math.arith.fractions"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.improper-fractions"
+      ],
+      "cross_links": [],
+      "description": "A number expressed as a whole part plus a proper fraction (e.g., 3\u00bd), convertible to and from improper fractions.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 5-6",
+        "Singapore Math Grade 5"
+      ]
+    },
+    {
+      "id": "math.arith.improper-fractions",
+      "name": "Improper Fractions",
+      "aliases": [
+        "top-heavy fractions"
+      ],
+      "parent": "math.arith.fractions",
+      "children": [],
+      "requires": [
+        "math.arith.fractions"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.mixed-numbers"
+      ],
+      "cross_links": [],
+      "description": "A fraction where the numerator is greater than or equal to the denominator (e.g., 7/3), representing a quantity \u2265 1.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 5-6"
+      ]
+    },
+    {
+      "id": "math.arith.decimals",
+      "name": "Decimals",
+      "aliases": [
+        "decimal fractions",
+        "decimal notation"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.decimal-operations",
+        "math.arith.repeating-decimals",
+        "math.arith.terminating-decimals"
+      ],
+      "requires": [
+        "math.arith.fractions",
+        "math.arith.place-value"
+      ],
+      "unlocks": [
+        "math.arith.percentages",
+        "math.arith.rounding"
+      ],
+      "related": [
+        "math.arith.fractions",
+        "math.arith.percentages"
+      ],
+      "cross_links": [],
+      "description": "A notation for rational numbers using powers of 10 in positions to the right of a decimal point, extending place-value notation to fractions.",
+      "difficulty": "developing",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6-7",
+        "Singapore Math Grade 5-6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.decimal-operations",
+      "name": "Decimal Operations",
+      "aliases": [
+        "adding decimals",
+        "multiplying decimals",
+        "decimal arithmetic"
+      ],
+      "parent": "math.arith.decimals",
+      "children": [],
+      "requires": [
+        "math.arith.decimals"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.decimals"
+      ],
+      "cross_links": [],
+      "description": "The four arithmetic operations applied to decimal numbers, requiring careful alignment of decimal points for addition/subtraction and place-value tracking for multiplication.",
+      "difficulty": "developing",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6-7",
+        "Singapore Math Grade 5-6"
+      ]
+    },
+    {
+      "id": "math.arith.terminating-decimals",
+      "name": "Terminating Decimals",
+      "aliases": [
+        "finite decimals"
+      ],
+      "parent": "math.arith.decimals",
+      "children": [],
+      "requires": [
+        "math.arith.decimals"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.repeating-decimals"
+      ],
+      "cross_links": [],
+      "description": "A decimal whose digits end after finitely many places; corresponds exactly to fractions whose denominators have only 2 and 5 as prime factors.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.repeating-decimals",
+      "name": "Repeating Decimals",
+      "aliases": [
+        "recurring decimals",
+        "0.333...",
+        "bar notation"
+      ],
+      "parent": "math.arith.decimals",
+      "children": [],
+      "requires": [
+        "math.arith.decimals"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.terminating-decimals",
+        "math.found.rational-numbers"
+      ],
+      "cross_links": [],
+      "description": "A decimal in which a block of digits repeats infinitely; every rational number has either a terminating or repeating decimal expansion.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 7-9",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.percentages",
+      "name": "Percentages",
+      "aliases": [
+        "percent",
+        "per cent",
+        "%"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.percentage-calculations",
+        "math.arith.percentage-change"
+      ],
+      "requires": [
+        "math.arith.fractions",
+        "math.arith.decimals"
+      ],
+      "unlocks": [
+        "math.arith.percentage-change"
+      ],
+      "related": [
+        "math.arith.fractions",
+        "math.arith.ratios"
+      ],
+      "cross_links": [],
+      "description": "A way of expressing a number as a fraction of 100 (per centum); x% = x/100, widely used in everyday contexts such as interest rates and proportions.",
+      "difficulty": "developing",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7-8",
+        "Singapore Math Grade 5-6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.percentage-calculations",
+      "name": "Percentage Calculations",
+      "aliases": [
+        "finding a percent",
+        "percent of a quantity"
+      ],
+      "parent": "math.arith.percentages",
+      "children": [],
+      "requires": [
+        "math.arith.percentages"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.percentage-change"
+      ],
+      "cross_links": [],
+      "description": "Computing percentages, finding what percent one number is of another, and finding the whole given a part and a percent.",
+      "difficulty": "developing",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7-8",
+        "Singapore Math Grade 6"
+      ]
+    },
+    {
+      "id": "math.arith.percentage-change",
+      "name": "Percentage Change",
+      "aliases": [
+        "percent increase",
+        "percent decrease",
+        "percentage difference"
+      ],
+      "parent": "math.arith.percentages",
+      "children": [],
+      "requires": [
+        "math.arith.percentage-calculations"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.percentages"
+      ],
+      "cross_links": [],
+      "description": "Expressing the change in a quantity as a percentage of its original value: (new \u2212 old) / old \u00d7 100%.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 8",
+        "Singapore Math Grade 6"
+      ]
+    },
+    {
+      "id": "math.arith.ratios",
+      "name": "Ratio",
+      "aliases": [
+        "ratio",
+        "a:b",
+        "rate"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.proportion",
+        "math.arith.unit-rate"
+      ],
+      "requires": [
+        "math.arith.fractions"
+      ],
+      "unlocks": [
+        "math.arith.proportion",
+        "math.arith.direct-variation"
+      ],
+      "related": [
+        "math.arith.percentages",
+        "math.arith.proportion"
+      ],
+      "cross_links": [
+        "math.func.linear-function"
+      ],
+      "description": "A comparison of two quantities by division, expressing how many times one is contained in the other; written a:b or a/b.",
+      "difficulty": "developing",
+      "estimated_hours": 8,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6-7",
+        "Singapore Math Grade 5-6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.proportion",
+      "name": "Proportion",
+      "aliases": [
+        "equal ratios",
+        "proportionality"
+      ],
+      "parent": "math.arith.ratios",
+      "children": [],
+      "requires": [
+        "math.arith.ratios"
+      ],
+      "unlocks": [
+        "math.arith.direct-variation",
+        "math.arith.inverse-variation"
+      ],
+      "related": [
+        "math.arith.direct-variation"
+      ],
+      "cross_links": [
+        "math.func.linear-function"
+      ],
+      "description": "An equation stating that two ratios are equal (a/b = c/d); used to solve scale problems, map reading, and many applied problems.",
+      "difficulty": "developing",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7-8",
+        "Singapore Math Grade 6"
+      ]
+    },
+    {
+      "id": "math.arith.unit-rate",
+      "name": "Unit Rate",
+      "aliases": [
+        "rate per unit",
+        "unit price"
+      ],
+      "parent": "math.arith.ratios",
+      "children": [],
+      "requires": [
+        "math.arith.ratios"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.proportion"
+      ],
+      "cross_links": [],
+      "description": "A ratio whose denominator is 1, expressing the amount of one quantity per single unit of another (e.g., km/h, price per kg).",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7",
+        "Singapore Math Grade 6"
+      ]
+    },
+    {
+      "id": "math.arith.direct-variation",
+      "name": "Direct Variation",
+      "aliases": [
+        "direct proportion",
+        "y = kx"
+      ],
+      "parent": "math.arith.proportion",
+      "children": [],
+      "requires": [
+        "math.arith.proportion"
+      ],
+      "unlocks": [
+        "math.func.linear-function"
+      ],
+      "related": [
+        "math.arith.inverse-variation",
+        "math.func.linear-function"
+      ],
+      "cross_links": [
+        "math.func.linear-function"
+      ],
+      "description": "A relationship where y = kx for a constant k, meaning y is proportional to x and the graph passes through the origin.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 8",
+        "Singapore Math Grade 7",
+        "OpenStax Prealgebra"
+      ]
+    },
+    {
+      "id": "math.arith.inverse-variation",
+      "name": "Inverse Variation",
+      "aliases": [
+        "inverse proportion",
+        "y = k/x"
+      ],
+      "parent": "math.arith.proportion",
+      "children": [],
+      "requires": [
+        "math.arith.proportion"
+      ],
+      "unlocks": [
+        "math.func.rational-function"
+      ],
+      "related": [
+        "math.arith.direct-variation"
+      ],
+      "cross_links": [
+        "math.func.rational-function"
+      ],
+      "description": "A relationship where y = k/x for a constant k, meaning y decreases as x increases and their product is constant.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax Prealgebra"
+      ]
+    },
+    {
+      "id": "math.arith.rounding",
+      "name": "Rounding",
+      "aliases": [
+        "rounding off",
+        "approximation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.place-value",
+        "math.arith.decimals"
+      ],
+      "unlocks": [
+        "math.arith.estimation",
+        "math.arith.significant-figures"
+      ],
+      "related": [
+        "math.arith.estimation"
+      ],
+      "cross_links": [
+        "math.num.floating-point"
+      ],
+      "description": "Approximating a number to a specified number of significant figures or decimal places by replacing it with the nearest representable value.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "Singapore Math Grade 4",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.estimation",
+      "name": "Estimation",
+      "aliases": [
+        "approximation",
+        "mental estimation",
+        "order-of-magnitude estimate"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.rounding"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.rounding",
+        "math.arith.significant-figures"
+      ],
+      "cross_links": [
+        "math.num.error-analysis"
+      ],
+      "description": "The process of finding an approximate value for a calculation using rounding or simplified numbers, emphasizing reasonableness of answers.",
+      "difficulty": "developing",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 6-8",
+        "Singapore Math Grade 5-6"
+      ]
+    },
+    {
+      "id": "math.arith.significant-figures",
+      "name": "Significant Figures",
+      "aliases": [
+        "significant digits",
+        "sig figs"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.rounding",
+        "math.arith.decimals"
+      ],
+      "unlocks": [
+        "math.num.floating-point"
+      ],
+      "related": [
+        "math.arith.rounding"
+      ],
+      "cross_links": [
+        "math.num.floating-point"
+      ],
+      "description": "The meaningful digits in a number that carry information about its precision, used in scientific measurement and numerical computation.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11 Physics",
+        "OpenStax Chemistry"
+      ]
+    },
+    {
+      "id": "math.arith.exponentiation",
+      "name": "Exponentiation",
+      "aliases": [
+        "powers",
+        "indices",
+        "a\u207f"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.exponent-rules",
+        "math.arith.square-numbers",
+        "math.arith.cube-numbers"
+      ],
+      "requires": [
+        "math.arith.multiplication"
+      ],
+      "unlocks": [
+        "math.arith.square-roots",
+        "math.arith.scientific-notation",
+        "math.alg.exponent-rules"
+      ],
+      "related": [
+        "math.arith.square-roots",
+        "math.alg.logarithm"
+      ],
+      "cross_links": [
+        "math.alg.exponential-function"
+      ],
+      "description": "The operation a\u207f representing a multiplied by itself n times; extended to rational and real exponents via roots and limits.",
+      "difficulty": "developing",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7-8",
+        "Singapore Math Grade 6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.exponent-rules",
+      "name": "Exponent Rules",
+      "aliases": [
+        "laws of exponents",
+        "index laws",
+        "power rules"
+      ],
+      "parent": "math.arith.exponentiation",
+      "children": [],
+      "requires": [
+        "math.arith.exponentiation"
+      ],
+      "unlocks": [
+        "math.alg.exponent-rules"
+      ],
+      "related": [
+        "math.alg.exponent-rules"
+      ],
+      "cross_links": [],
+      "description": "The algebraic laws governing exponentiation: a\u1d50\u00b7a\u207f = a\u1d50\u207a\u207f, (a\u1d50)\u207f = a\u1d50\u207f, (ab)\u207f = a\u207fb\u207f, a\u2070 = 1, a\u207b\u207f = 1/a\u207f.",
+      "difficulty": "developing",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 7-8",
+        "Singapore Math Grade 7",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.square-numbers",
+      "name": "Perfect Squares",
+      "aliases": [
+        "square numbers",
+        "n\u00b2"
+      ],
+      "parent": "math.arith.exponentiation",
+      "children": [],
+      "requires": [
+        "math.arith.exponentiation"
+      ],
+      "unlocks": [
+        "math.arith.square-roots"
+      ],
+      "related": [
+        "math.arith.square-roots",
+        "math.geom.area"
+      ],
+      "cross_links": [
+        "math.geom.area"
+      ],
+      "description": "Integers of the form n\u00b2 (1, 4, 9, 16, 25, \u2026); recognizing them enables rapid mental square roots.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "remember",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 8",
+        "Singapore Math Grade 6"
+      ]
+    },
+    {
+      "id": "math.arith.cube-numbers",
+      "name": "Perfect Cubes",
+      "aliases": [
+        "cube numbers",
+        "n\u00b3"
+      ],
+      "parent": "math.arith.exponentiation",
+      "children": [],
+      "requires": [
+        "math.arith.exponentiation"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.geom.volume"
+      ],
+      "cross_links": [
+        "math.geom.volume"
+      ],
+      "description": "Integers of the form n\u00b3 (1, 8, 27, 64, 125, \u2026); arising in volume calculations and polynomial factorization.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 8"
+      ]
+    },
+    {
+      "id": "math.arith.square-roots",
+      "name": "Square Roots",
+      "aliases": [
+        "\u221a",
+        "principal square root",
+        "radical"
+      ],
+      "parent": null,
+      "children": [
+        "math.arith.irrational-roots"
+      ],
+      "requires": [
+        "math.arith.square-numbers"
+      ],
+      "unlocks": [
+        "math.alg.radicals",
+        "math.geom.pythagorean-theorem"
+      ],
+      "related": [
+        "math.arith.exponentiation",
+        "math.alg.radicals"
+      ],
+      "cross_links": [
+        "math.alg.radicals",
+        "math.geom.pythagorean-theorem"
+      ],
+      "description": "The square root \u221ax of a nonneg real x is the nonneg number y such that y\u00b2 = x; extends to n-th roots for positive integers n.",
+      "difficulty": "developing",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 8",
+        "OpenStax PreAlgebra",
+        "Singapore Math Grade 7"
+      ]
+    },
+    {
+      "id": "math.arith.irrational-roots",
+      "name": "Irrational Square Roots",
+      "aliases": [
+        "\u221a2, \u221a3, \u221a5",
+        "surds"
+      ],
+      "parent": "math.arith.square-roots",
+      "children": [],
+      "requires": [
+        "math.arith.square-roots",
+        "math.found.irrational-numbers"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.found.irrational-numbers"
+      ],
+      "cross_links": [],
+      "description": "Square roots of non-perfect-square integers (e.g., \u221a2, \u221a3) that are irrational; their proofs use the uniqueness of prime factorization.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 9",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.arith.scientific-notation",
+      "name": "Scientific Notation",
+      "aliases": [
+        "standard form",
+        "a \u00d7 10\u207f"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.exponentiation",
+        "math.arith.decimals"
+      ],
+      "unlocks": [
+        "math.arith.significant-figures"
+      ],
+      "related": [
+        "math.arith.significant-figures"
+      ],
+      "cross_links": [],
+      "description": "Writing a number as a \u00d7 10\u207f where 1 \u2264 |a| < 10 and n is an integer, enabling compact representation of very large or very small quantities.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 8-11",
+        "OpenStax PreAlgebra",
+        "CK-12"
+      ]
+    },
+    {
+      "id": "math.arith.mental-arithmetic",
+      "name": "Mental Arithmetic",
+      "aliases": [
+        "mental math",
+        "mental calculation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.mental-addition",
+        "math.arith.mental-multiplication"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.arith.estimation"
+      ],
+      "cross_links": [],
+      "description": "The ability to perform arithmetic computations quickly and accurately without written work, using strategies like decomposition, compensation, and memorized facts.",
+      "difficulty": "developing",
+      "estimated_hours": 10,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Singapore Math",
+        "NCERT Grade 4-6"
+      ]
+    }
+  ]
+}

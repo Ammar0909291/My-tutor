@@ -1,0 +1,602 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "subject",
+  "subject": "mathematics",
+  "subject_name": "Canonical Mathematics Knowledge Graph",
+  "kg_version": "1.0.1",
+  "kg_status": "frozen",
+  "kg_build_date": "2026-06-29",
+  "kg_file": "docs/mathematics/kg/graph.json",
+  "total_concepts": 908,
+  "total_domains": 24,
+  "completed_domains": 24,
+  "drafted_assets": 908,
+  "completion_pct": 100.0,
+  "checksums": {
+    "kg_sha256": "sha256:3dddf4ac2eed5b527c2da186e73b09b1775877b482b0b07d98077f0010eda870",
+    "assets_sha256": "sha256:073a8c57058e1eb60f35e773a9fec4c9b5ee9ce9ff5cdc1106a46ba37cc76b20",
+    "chapters_listing_sha256": "sha256:f1c793f2b3d3cebf16f4022eeeada24bbadbff7cc8d8e094345127f9ba7e7e22"
+  },
+  "domains": [
+    {
+      "domain_id": "foundations",
+      "domain_prefix": "math.found",
+      "domain_name": "Mathematical Foundations",
+      "concept_count": 82,
+      "assets_drafted": 82,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/found.md",
+      "manifest_file": "docs/mathematics/domains/math.found-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:eb599529250f6b7f903b63e7044a60b91bd221f26fb643a458fe9f078c95c54b",
+        "domain_assets_sha256": "sha256:d1c23efb1bede934fe6fa8fa969731e08a054734c9ebd71d4105c54eddfcdf58",
+        "graph_domain_sha256": "sha256:c57f4c78b867a78876561f953878d72b2cc882f01cf72afdd65f80ec604774f7",
+        "validation_report_sha256": "sha256:adba5dfa20c7e6f1d4a71747e96f929243245af3f9e7557a73aa4e313bb42317"
+      },
+      "creation_commit": "710a5d3",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "arithmetic",
+      "domain_prefix": "math.arith",
+      "domain_name": "Arithmetic",
+      "concept_count": 58,
+      "assets_drafted": 58,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/arith.md",
+      "manifest_file": "docs/mathematics/domains/math.arith-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:d321137b015b0fb6f1da19a6c78ed85accfb7b39045cfb90a8a43c808f07cd73",
+        "domain_assets_sha256": "sha256:922f3dec1c92a43d90be4cf94da678fb589a231478a7e79421fb24e5728756c9",
+        "graph_domain_sha256": "sha256:f9ae419b09efd58248fd497e7defa29b21f9cfadd73e91f9515436eeffbf834b",
+        "validation_report_sha256": "sha256:6fdbdd7c760dea5acf301b488717d8f5775defb82ffba307c83a3a997b311a54"
+      },
+      "creation_commit": "203222c",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "number-theory",
+      "domain_prefix": "math.nt",
+      "domain_name": "Number Theory",
+      "concept_count": 36,
+      "assets_drafted": 36,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/nt.md",
+      "manifest_file": "docs/mathematics/domains/math.nt-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:cee969129ba33994f2327b5244589151cc15d367d9ef3d630ac9408f005b4fa1",
+        "domain_assets_sha256": "sha256:2fadd75e79c6b35796d3b809164cf4c3f02fd42bb74519c427b105b0bd7f1b51",
+        "graph_domain_sha256": "sha256:feb04fb3df4bdcc2fc6433f5a31d3339a5cae82f5700553560d1f4ec07f7b504",
+        "validation_report_sha256": "sha256:0e0c404a3e3f5b555c83a2e9c943ab874a78baa30116547070f3ac3d74aa5ea1"
+      },
+      "creation_commit": "af3e65a",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "algebra",
+      "domain_prefix": "math.alg",
+      "domain_name": "Algebra",
+      "concept_count": 59,
+      "assets_drafted": 59,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/alg.md",
+      "manifest_file": "docs/mathematics/domains/math.alg-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:f2d6b0c1b57a39803744ba31a9f41a9f9bfbd32934ed7cccc45f1697985f063c",
+        "domain_assets_sha256": "sha256:683994fa3eb28835f14b8a4b866976a1d55ad5b41838311247cca09b1c2b544e",
+        "graph_domain_sha256": "sha256:5dddd4c76f27b05a65d9246b16a504fbdbac0c45b1d2bcf4ec11664002e39ca0",
+        "validation_report_sha256": "sha256:231e9646b6149ca57e3261c42ff0fd58f65994b5f9883f7ef1926187917ee5ca"
+      },
+      "creation_commit": "0f2ac3d",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "geometry",
+      "domain_prefix": "math.geom",
+      "domain_name": "Geometry",
+      "concept_count": 69,
+      "assets_drafted": 69,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/geom.md",
+      "manifest_file": "docs/mathematics/domains/math.geom-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:446ac1540e85d6c518a4ff2a2076b7e2b48819dffe8daa25fc7cc4cbe80cf7ab",
+        "domain_assets_sha256": "sha256:8df1327f4107d6bd804273f465b74920856c2ecf8415fa8dcab059f16055ebae",
+        "graph_domain_sha256": "sha256:fbe5646b221e358876d140d7410f67e5d933694698f40cfc2d25a28821701374",
+        "validation_report_sha256": "sha256:0ce0a203daaf6961247364e44d205a7ac25804e52aeec9eb22c437d9d49a7cd1"
+      },
+      "creation_commit": "a55b5a2",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "trigonometry",
+      "domain_prefix": "math.trig",
+      "domain_name": "Trigonometry",
+      "concept_count": 25,
+      "assets_drafted": 25,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/trig.md",
+      "manifest_file": "docs/mathematics/domains/math.trig-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:9a1c08d410477dd7c334293afbb4d877a2026e11f3e0bd6447588897459da0d4",
+        "domain_assets_sha256": "sha256:762aa17d9462dd663f03e4a4f38f3787ae99bf410910dcd56065c5e7871a2a83",
+        "graph_domain_sha256": "sha256:6bd4d1686e60a7401872a62b8d4acc6fb9ac26809ab228766620c8d685a85eed",
+        "validation_report_sha256": "sha256:a958ad0fd7f950b13d12b967e27247c32d3e3e39b77b1605fafeb39402734c29"
+      },
+      "creation_commit": "a553584",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "functions",
+      "domain_prefix": "math.func",
+      "domain_name": "Functions",
+      "concept_count": 29,
+      "assets_drafted": 29,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/func.md",
+      "manifest_file": "docs/mathematics/domains/math.func-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:31b94b8b10085861a7fed5b6335f5cd2769a40dc6c4a71dafd4b540db5920920",
+        "domain_assets_sha256": "sha256:462d72e0e4720f9a23406b7fda2e33aca8f99ed957507927cf6630c19b48562d",
+        "graph_domain_sha256": "sha256:5de7f342ff926c44870d186e0c18449a1b65d805087884ca91b7edca9eaa6622",
+        "validation_report_sha256": "sha256:64549f72444ccdabf96a25d4e35454c3aa127b67979efe45869c5700f9fe89d5"
+      },
+      "creation_commit": "62e1d2d",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "sequences-series",
+      "domain_prefix": "math.seq",
+      "domain_name": "Sequences and Series",
+      "concept_count": 21,
+      "assets_drafted": 21,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/seq.md",
+      "manifest_file": "docs/mathematics/domains/math.seq-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:16df08134e03af1e543830cf84e3f3f2a8fbcb880998cb9437d86e5f21873d9a",
+        "domain_assets_sha256": "sha256:bbb9ea2218ddaa4a52eaee9f919c79b38b3fe4c5637f0df27e87d1cb9f52d4b1",
+        "graph_domain_sha256": "sha256:9b3a0a426e3eb1396e7005fe7dcf43dc06fc69b61b437e60d70794208c3ff848",
+        "validation_report_sha256": "sha256:f9cee2cbcafd61fd62ca4a7907d93676a926f6db25d0d8f4b7cf4fd32288c3f9"
+      },
+      "creation_commit": "7d8a2de",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "calculus",
+      "domain_prefix": "math.calc",
+      "domain_name": "Calculus",
+      "concept_count": 76,
+      "assets_drafted": 76,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/calc.md",
+      "manifest_file": "docs/mathematics/domains/math.calc-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:4ee05364cd56a44db1d8d12fe97e86c478d0fb8bc2b71c890af5dae9195bfc06",
+        "domain_assets_sha256": "sha256:8524737d7bba06dd3d5c4af7f4bbee4b5e2d1c53320c8b7bc7e656189cbdf3b2",
+        "graph_domain_sha256": "sha256:4969b84be374752207b23df3666850001a73cfaa12e99f9889aa9c3291b76194",
+        "validation_report_sha256": "sha256:e2697085d5f551e88b449aeb2c56fd5e5886d784081bb9bbb2d1ccc021fba2a6"
+      },
+      "creation_commit": "c6ad1bbe7d9b798851447a2e094ae00d2fe728a9",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "1.0.0",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "differential-equations",
+      "domain_prefix": "math.de",
+      "domain_name": "Differential Equations",
+      "concept_count": 56,
+      "assets_drafted": 56,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/de.md",
+      "manifest_file": "docs/mathematics/domains/math.de-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:b9ff270ab0ce8782a28e757e667003ef3101d6f9907cb15e300bdfc68be783a4",
+        "domain_assets_sha256": "sha256:7d080adb8f04e3a1d137f129b567f60814864c7b3fa2a6c9b2dc187c6dc46e97",
+        "graph_domain_sha256": "sha256:50555b0708464bd038e7e0aa2a7004a4f331a8c504dc37bebe6da38cb79d0ca3",
+        "validation_report_sha256": "sha256:f81846a4ab83e48a83ffb5ee31cb8486f2c4917484528d37104ed878a1d4cf80"
+      },
+      "creation_commit": "e877a75d1653a4d52cdd2fb72f2e8b52c33351bf",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "linear-algebra",
+      "domain_prefix": "math.linalg",
+      "domain_name": "Linear Algebra",
+      "concept_count": 61,
+      "assets_drafted": 61,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/linalg.md",
+      "manifest_file": "docs/mathematics/domains/math.linalg-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:0733ffb1139c55a3aaa3be10597368ba1c4c61efc461ab7fc54a6c811deed1df",
+        "domain_assets_sha256": "sha256:1cfae701a485c72e2aa7f0ea2724bea175756cd71faefdcf20f78cc099e3938f",
+        "graph_domain_sha256": "sha256:a9635bd484d16cb673d83ec5919190f5fd8247414acfd31f6e4112a6cbc7a082",
+        "validation_report_sha256": "sha256:455a8c765b088d2c451c7be1d011d8b250244966eef11540826dace994011a2e"
+      },
+      "creation_commit": "7b1d8735b0077e907e0d4d6e050339c156886112",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "7b1d8735b0077e907e0d4d6e050339c156886112",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "probability",
+      "domain_prefix": "math.prob",
+      "domain_name": "Probability",
+      "concept_count": 49,
+      "assets_drafted": 49,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/prob.md",
+      "manifest_file": "docs/mathematics/domains/math.prob-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:0ad82dd26e0d59e273f39d384c27a2caa44cc82bc900b0678ff0bf437f9d86dd",
+        "domain_assets_sha256": "sha256:54baa730a73dc44432e738233c7edb95478984503f1675db2f33a717096d45a7",
+        "graph_domain_sha256": "sha256:355e5cc6bc43b62b6816feb52c3ad38702703015311a761dcef10bf3c7ddbe43",
+        "validation_report_sha256": "sha256:0981f3f91517da6f362b515228e817c950a826fedb930f5f970b0a25a5ddd54f"
+      },
+      "creation_commit": null,
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2"
+      }
+    },
+    {
+      "domain_id": "statistics",
+      "domain_prefix": "math.stats",
+      "domain_name": "Statistics",
+      "concept_count": 40,
+      "assets_drafted": 40,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/stats.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "discrete-mathematics",
+      "domain_prefix": "math.disc",
+      "domain_name": "Discrete Mathematics",
+      "concept_count": 32,
+      "assets_drafted": 32,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/disc.md",
+      "manifest_file": "docs/mathematics/domains/math.disc-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:799480b6a3bb6e50375d5d0bdfe499ef55979db109572ac7701cbb1bf36077e3",
+        "domain_assets_sha256": "sha256:5b5d734fb1be6ba94052a2d1aef856f33a683e20440ddc255e342d5c4c567ae2",
+        "graph_domain_sha256": "sha256:b39aa6aa8115158745e25e44c415ac4016d9259f660ba8736d5300161526e7dd",
+        "validation_report_sha256": "sha256:2233b988e6328029bb4bbca8dd27f28e582736e8347426ef7a1fe64031ccbab9"
+      },
+      "creation_commit": "f152927ed1523997bc3e7fed771762b6f9f3177b",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "abstract-algebra",
+      "domain_prefix": "math.abst",
+      "domain_name": "Abstract Algebra",
+      "concept_count": 37,
+      "assets_drafted": 37,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/abst.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "real-analysis",
+      "domain_prefix": "math.real",
+      "domain_name": "Real Analysis",
+      "concept_count": 30,
+      "assets_drafted": 30,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/real.md",
+      "manifest_file": "docs/mathematics/domains/math.real-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:c90d5f839f8d2f61fa8936857d6990a522df45c5fdc5f2e6e16c1ffdca9165bf",
+        "domain_assets_sha256": "sha256:43a33c5935f355b786ee4a45807d443aeadd7cea9cea64033d826c043b9b8789",
+        "graph_domain_sha256": "sha256:fec2dbafa982b41bff517a7e77c5e779ca2043760e93095cf894d5ecde2ebcfc",
+        "validation_report_sha256": "sha256:0a62586415fee530ed525b155ce9475da77b1e7dc699dbd1af2d6656a99bfc97"
+      },
+      "creation_commit": "69dfdf1894371d16896b54a6fbbb713f2f4fda8f",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae204810215a15bf6ab35990a754745e7b9de62",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "complex-analysis",
+      "domain_prefix": "math.cx",
+      "domain_name": "Complex Analysis",
+      "concept_count": 31,
+      "assets_drafted": 31,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/cx.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "topology",
+      "domain_prefix": "math.top",
+      "domain_name": "Topology",
+      "concept_count": 23,
+      "assets_drafted": 23,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/top.md",
+      "manifest_file": "docs/mathematics/domains/math.top-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:7b51d8f811915db48cb8ad1f54e9b65e7ef83ffbc89776f2ce83024ad2f27092",
+        "domain_assets_sha256": "sha256:58d0141c3661aad1af4420f8090184e4757e81597b789a18d08f2059e482b9f8",
+        "graph_domain_sha256": "sha256:0b6b9b1dec97a841e769e1f6d5a5fa77777c3934c109a3a9219ca89a05497ad9",
+        "validation_report_sha256": "sha256:366c42f3596c2cb04917ec945b0c9c8c747f2592f27791ece55b79813f6c7272"
+      },
+      "creation_commit": "a319c25",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "4ae2048",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "measure-theory",
+      "domain_prefix": "math.meas",
+      "domain_name": "Measure Theory",
+      "concept_count": 13,
+      "assets_drafted": 13,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/meas.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "functional-analysis",
+      "domain_prefix": "math.fnal",
+      "domain_name": "Functional Analysis",
+      "concept_count": 18,
+      "assets_drafted": 18,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/fnal.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "numerical-analysis",
+      "domain_prefix": "math.num",
+      "domain_name": "Numerical Analysis",
+      "concept_count": 16,
+      "assets_drafted": 16,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/num.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "optimization",
+      "domain_prefix": "math.opt",
+      "domain_name": "Optimization",
+      "concept_count": 16,
+      "assets_drafted": 16,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/opt.md",
+      "manifest_file": "docs/mathematics/domains/math.opt-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:b9913f41a6a6129109da50b6442f6af43732085f7e11e774498fa384198c97b6",
+        "domain_assets_sha256": "sha256:8ec1b05f423dd0c899a873ba854f868cfc45dcdc41a6d143961214a10a8f3cdf",
+        "graph_domain_sha256": "sha256:76834046090d528e52fa735a9de0e303fe221b7b270b08827e48085130eb2bdc",
+        "validation_report_sha256": "sha256:64d5696ee47949609eba0b3092b71740cc9563e51bd9d7b6c0191c36ad4f65b0"
+      },
+      "creation_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "curriculum-pipeline-v1.0",
+        "validation_version": "1.1.0"
+      }
+    },
+    {
+      "domain_id": "graph-theory",
+      "domain_prefix": "math.graph",
+      "domain_name": "Graph Theory",
+      "concept_count": 16,
+      "assets_drafted": 16,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/graph.md",
+      "manifest_file": null,
+      "validation_verdict": null,
+      "checksums": null,
+      "creation_commit": null,
+      "dependency_versions": null
+    },
+    {
+      "domain_id": "category-theory",
+      "domain_prefix": "math.cat",
+      "domain_name": "Category Theory",
+      "concept_count": 15,
+      "assets_drafted": 15,
+      "status": "complete",
+      "chapter_file": "docs/mathematics/chapters/cat.md",
+      "manifest_file": "docs/mathematics/domains/math.cat-manifest.json",
+      "validation_verdict": "PASS",
+      "checksums": {
+        "chapter_sha256": "sha256:6f13942bc66ece3dbb8a63429434ce35d8a49b2b939a6bbadf22cf496b096d2b",
+        "domain_assets_sha256": "sha256:c40010277d6fd63afacfde2eb3fcd1b8a800caaeeff4a97ee15772d0bd3e058b",
+        "graph_domain_sha256": "sha256:12edbc3b46ba148e915865eeb026dfa1320c77467eb8db5b262bc33359464054",
+        "validation_report_sha256": "sha256:6db2329ad1fea55f9acb10c38a319f2c5b35deb9f1713bef4997159d0ec8b1d6"
+      },
+      "creation_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305",
+      "dependency_versions": {
+        "kg_name": "Canonical Mathematics Knowledge Graph",
+        "kg_version": "1.0.1",
+        "kg_status": "frozen",
+        "kg_build_date": "2026-06-29",
+        "kg_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "pipeline-v2",
+        "validation_version": "1.1.0"
+      }
+    }
+  ],
+  "dependency_versions": {
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0",
+    "provenance_version": "1.0.0"
+  },
+  "last_commit": "526e3beeaa0b21c3207c1033cf312bfcca1c9305",
+  "last_updated": "2026-07-05T19:18:34Z"
+}

@@ -1,0 +1,78 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "literature_fundamentals",
+  "domain_prefix": "eng.literature",
+  "domain_name": "Literature Fundamentals",
+  "subject": "english",
+  "concept_count": 25,
+  "asset_count": 25,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-04",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.literature.narrative-elements",
+        "eng.literature.plot-structure",
+        "eng.literature.character-development",
+        "eng.literature.setting-and-atmosphere",
+        "eng.literature.point-of-view",
+        "eng.literature.theme-and-message",
+        "eng.literature.literary-devices-overview",
+        "eng.literature.metaphor-and-simile",
+        "eng.literature.symbolism",
+        "eng.literature.irony",
+        "eng.literature.foreshadowing-and-suspense",
+        "eng.literature.imagery",
+        "eng.literature.poetry-basics",
+        "eng.literature.poetic-forms",
+        "eng.literature.meter-and-rhyme",
+        "eng.literature.drama-basics",
+        "eng.literature.dramatic-structure",
+        "eng.literature.prose-fiction",
+        "eng.literature.prose-nonfiction",
+        "eng.literature.short-story-study",
+        "eng.literature.novel-study",
+        "eng.literature.literary-genres-overview",
+        "eng.literature.literary-periods-survey",
+        "eng.literature.literary-criticism-intro",
+        "eng.literature.comparative-literature-intro"
+      ],
+      "coverage": "100% full structured review (25/25) + 25 independent verification checks against literary-theory and poetics (Poe unity of effect, Freytag, Aristotle's Poetics, sonnet traditions, haiku scholarship, metrical feet, Richards tenor/vehicle), critical-theory (Wimsatt & Beardsley, Brooks, Fish), literary-history (period chain, Lyrical Ballads, Weltliteratur 1827), and comparative-literature methodology (tertium comparationis, influence vs parallel, Parry-Lord) references",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names used from the start; authored in 5 chunks (5+5+5+5+5)."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:291fbaf444514306d445148abe05a1aec794211aada3df6da2d6e5ce05dabfa7",
+    "assets_file_sha256": "sha256:97af0afb284bebcbf5dcdbd2c4b9640e6d4375a7dc9f444934a6cdc6137ffb40",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:b0f5492db8cf078be22871268e304376870c356c475886aa0ace9b5f3bb81cb3"
+  },
+  "generated_files": [
+    "docs/english/chapters/literature.md",
+    "docs/english/domains/eng.literature-validation-report.md",
+    "docs/english/domains/eng.literature-summary.md",
+    "docs/english/domains/eng.literature-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "962b35b",
+  "created_at": "2026-07-04T05:30:00Z"
+}

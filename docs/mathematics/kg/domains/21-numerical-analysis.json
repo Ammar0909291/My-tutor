@@ -1,0 +1,443 @@
+{
+  "domain_id": "numerical-analysis",
+  "domain_name": "Numerical Analysis",
+  "id_prefix": "math.num",
+  "level_range": [
+    4,
+    6
+  ],
+  "description": "The design, analysis, and implementation of algorithms for solving mathematical problems approximately on computers. Covers error analysis, root finding, interpolation, numerical integration, linear systems, and numerical ODEs.",
+  "concepts": [
+    {
+      "id": "math.num.floating-point",
+      "name": "Floating-Point Arithmetic",
+      "aliases": [
+        "IEEE 754",
+        "machine epsilon",
+        "rounding error"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.arith.scientific-notation",
+        "math.arith.significant-figures"
+      ],
+      "unlocks": [
+        "math.num.error-analysis"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Floating-point numbers: \u00b1m \u00d7 2^e with mantissa m and exponent e. Machine epsilon \u03b5: smallest number with 1+\u03b5\u22601. IEEE 754 standard: 32-bit (single), 64-bit (double). Catastrophic cancellation, overflow, underflow.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Higham, Accuracy and Stability of Numerical Algorithms, Ch.2; Trefethen & Bau, Numerical Linear Algebra, Lecture 13"
+      ]
+    },
+    {
+      "id": "math.num.error-analysis",
+      "name": "Error Analysis",
+      "aliases": [
+        "absolute error",
+        "relative error",
+        "truncation error",
+        "round-off error"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.num.floating-point"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Absolute error: |x\u0302\u2212x|. Relative error: |x\u0302\u2212x|/|x|. Sources: round-off (finite precision), truncation (approximation of infinite process). Forward/backward error analysis; condition number \u03ba(A) measures problem sensitivity.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, Ch.1; Higham, Accuracy and Stability, Ch.1"
+      ]
+    },
+    {
+      "id": "math.num.root-finding",
+      "name": "Root-Finding Methods",
+      "aliases": [
+        "bisection",
+        "Newton's method",
+        "secant method",
+        "fixed-point iteration"
+      ],
+      "parent": null,
+      "children": [
+        "math.num.newtons-method"
+      ],
+      "requires": [
+        "math.calc.continuity",
+        "math.real.ivt"
+      ],
+      "unlocks": [
+        "math.num.newtons-method"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Bisection: O(log(1/\u03b5)) iterations, guaranteed. Newton's method: quadratic convergence near a root (but requires f\u2032). Secant: superlinear, no derivatives. Brent's method combines bisection + secant for robustness.",
+      "difficulty": "proficient",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, Ch.2; Trefethen & Bau, Numerical Linear Algebra"
+      ]
+    },
+    {
+      "id": "math.num.newtons-method",
+      "name": "Newton's Method",
+      "aliases": [
+        "Newton-Raphson"
+      ],
+      "parent": "math.num.root-finding",
+      "children": [],
+      "requires": [
+        "math.num.root-finding",
+        "math.calc.derivative-definition"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.opt.gradient-methods"
+      ],
+      "description": "x\u2099\u208a\u2081 = x\u2099 \u2212 f(x\u2099)/f\u2032(x\u2099). Quadratic convergence near simple roots: error at step n+1 is O((error at step n)\u00b2). Fails or converges slowly near multiple roots or saddle points. Generalizes to systems: x\u2099\u208a\u2081 = x\u2099 \u2212 [J(x\u2099)]\u207b\u00b9F(x\u2099).",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Burden & Faires, Numerical Analysis, \u00a72.3"
+      ]
+    },
+    {
+      "id": "math.num.interpolation",
+      "name": "Polynomial Interpolation",
+      "aliases": [
+        "Lagrange interpolation",
+        "Newton's divided differences",
+        "spline interpolation"
+      ],
+      "parent": null,
+      "children": [
+        "math.num.splines"
+      ],
+      "requires": [
+        "math.alg.polynomial",
+        "math.linalg.linear-system"
+      ],
+      "unlocks": [
+        "math.num.splines"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Given n+1 data points, the unique interpolating polynomial of degree \u2264n. Lagrange form: L(x)=\u2211y\u1d62\u220f_{j\u2260i}(x\u2212x\u2c7c)/(x\u1d62\u2212x\u2c7c). Newton form: nested multiplication. Runge's phenomenon: high-degree polynomials oscillate at edges.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, Ch.3"
+      ]
+    },
+    {
+      "id": "math.num.splines",
+      "name": "Spline Interpolation",
+      "aliases": [
+        "cubic spline",
+        "B-spline"
+      ],
+      "parent": "math.num.interpolation",
+      "children": [],
+      "requires": [
+        "math.num.interpolation"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Piecewise polynomial curves with continuity conditions across breakpoints. Cubic splines: C\u00b2; natural splines add boundary conditions. B-splines form a basis for spline spaces and are numerically stable. Avoid Runge's phenomenon.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Burden & Faires, Numerical Analysis, \u00a73.4; de Boor, A Practical Guide to Splines"
+      ]
+    },
+    {
+      "id": "math.num.numerical-differentiation",
+      "name": "Numerical Differentiation",
+      "aliases": [
+        "finite difference",
+        "forward difference",
+        "centered difference"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.calc.derivative-definition",
+        "math.num.error-analysis"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Forward: f\u2032(x) \u2248 (f(x+h)\u2212f(x))/h, error O(h). Centered: (f(x+h)\u2212f(x\u2212h))/(2h), error O(h\u00b2). Richardson extrapolation improves accuracy. Trade-off: small h reduces truncation error but increases round-off.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, Ch.4"
+      ]
+    },
+    {
+      "id": "math.num.numerical-integration",
+      "name": "Numerical Integration",
+      "aliases": [
+        "numerical quadrature",
+        "trapezoidal rule",
+        "Simpson's rule",
+        "Gaussian quadrature"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.calc.definite-integral",
+        "math.num.interpolation"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Trapezoidal rule: O(h\u00b2) per panel. Simpson's rule: O(h\u2074). Composite rules for [a,b]. Gaussian quadrature: n-point rule exact for degree \u22642n\u22121 polynomials; uses Legendre polynomial nodes and weights. Adaptive methods control error automatically.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, Ch.4"
+      ]
+    },
+    {
+      "id": "math.num.lu-factorization",
+      "name": "LU Factorization (Numerical)",
+      "aliases": [
+        "Gaussian elimination with pivoting"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.lu-factorization",
+        "math.num.error-analysis"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.num.cholesky"
+      ],
+      "cross_links": [
+        "math.linalg.lu-factorization"
+      ],
+      "description": "Partial pivoting ensures numerical stability: PA=LU. Operation count O(n\u00b3/3). Condition number \u03ba(A)=|A||A\u207b\u00b9| governs error amplification: relative error \u2264 \u03ba(A) \u00d7 relative residual.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Golub & Van Loan, Matrix Computations, Ch.3; Trefethen & Bau, Numerical Linear Algebra, Lecture 20"
+      ]
+    },
+    {
+      "id": "math.num.cholesky",
+      "name": "Cholesky Factorization (Numerical)",
+      "aliases": [
+        "Cholesky algorithm"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.cholesky",
+        "math.num.lu-factorization"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.linalg.cholesky"
+      ],
+      "description": "For symmetric positive definite A: A=LL\u1d40, computed in O(n\u00b3/6) flops \u2014 half the cost of LU. Backward stable. Test for positive definiteness: Cholesky fails iff A is not positive definite.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Golub & Van Loan, Matrix Computations, \u00a74.2"
+      ]
+    },
+    {
+      "id": "math.num.iterative-linear",
+      "name": "Iterative Methods for Linear Systems",
+      "aliases": [
+        "Jacobi",
+        "Gauss-Seidel",
+        "conjugate gradient",
+        "GMRES"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.linear-system",
+        "math.num.error-analysis"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Jacobi and Gauss-Seidel: simple splitting methods; converge for strictly diagonally dominant A. Conjugate gradient: optimal for SPD systems, O(\u221a\u03ba) iterations. GMRES for general A. Preconditioning reduces condition number.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Golub & Van Loan, Matrix Computations, Ch.11; Saad, Iterative Methods for Sparse Linear Systems"
+      ]
+    },
+    {
+      "id": "math.num.qr-algorithm",
+      "name": "QR Algorithm",
+      "aliases": [
+        "QR iteration",
+        "eigenvalue computation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.qr-factorization",
+        "math.linalg.eigenvalues"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.linalg.qr-factorization"
+      ],
+      "description": "Iteratively computes eigenvalues: A\u2080=A, A_{k+1}=R\u2096Q\u2096 (QR decomposition of A\u2096). Converges to quasi-upper triangular form with eigenvalues on diagonal. With shifts, converges cubically for symmetric A. Foundation of LAPACK's dgeev.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Golub & Van Loan, Matrix Computations, Ch.8; Trefethen & Bau, Numerical Linear Algebra, Lecture 28"
+      ]
+    },
+    {
+      "id": "math.num.svd",
+      "name": "SVD (Numerical)",
+      "aliases": [
+        "numerical SVD computation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.svd",
+        "math.num.qr-algorithm"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.linalg.svd"
+      ],
+      "description": "Computed via bidiagonalization (Golub-Reinsch): first reduce A to bidiagonal B by Householder reflectors, then apply QR-like iteration. Backward stable; gives singular values to machine precision. Cost O(mn\u00b2) for m\u2265n.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Golub & Van Loan, Matrix Computations, Ch.8.6"
+      ]
+    },
+    {
+      "id": "math.num.euler-method",
+      "name": "Euler's Method (Numerical ODE)",
+      "aliases": [
+        "forward Euler",
+        "explicit Euler"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.euler-method",
+        "math.num.error-analysis"
+      ],
+      "unlocks": [
+        "math.num.runge-kutta"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.de.euler-method"
+      ],
+      "description": "y\u2099\u208a\u2081 = y\u2099 + hf(t\u2099,y\u2099). Global error O(h); local truncation error O(h\u00b2). Simple but often too inaccurate; stiff equations require implicit Euler (y\u2099\u208a\u2081 = y\u2099 + hf(t\u2099\u208a\u2081,y\u2099\u208a\u2081)) for stability.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, \u00a75.1"
+      ]
+    },
+    {
+      "id": "math.num.runge-kutta",
+      "name": "Runge-Kutta Methods",
+      "aliases": [
+        "RK4",
+        "Runge-Kutta",
+        "adaptive step-size"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.num.euler-method"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "RK4: classic fourth-order method; evaluates f at four points per step; global error O(h\u2074). Embedded pairs (Dormand-Prince, Fehlberg) estimate error and control step size adaptively. Butcher tableau encodes all RK methods.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Burden & Faires, Numerical Analysis, \u00a75.2; Hairer, N\u00f8rsett & Wanner, Solving ODEs I"
+      ]
+    },
+    {
+      "id": "math.num.stiff-ode",
+      "name": "Stiff ODEs and Implicit Methods",
+      "aliases": [
+        "stiff equation",
+        "implicit Euler",
+        "backward differentiation formula"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.num.runge-kutta"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Stiff ODEs have widely separated eigenvalues; explicit methods need tiny steps. Implicit Euler (backward Euler), trapezoidal rule, and BDF methods are A-stable or stiffly stable. Require solving nonlinear equations at each step.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Hairer & Wanner, Solving ODEs II: Stiff and Differential-Algebraic Problems"
+      ]
+    }
+  ]
+}

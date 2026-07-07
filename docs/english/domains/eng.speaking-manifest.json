@@ -1,0 +1,63 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "speaking",
+  "domain_prefix": "eng.speaking",
+  "domain_name": "Speaking",
+  "subject": "english",
+  "concept_count": 10,
+  "asset_count": 10,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-04",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "eng.speaking.oral-fluency",
+        "eng.speaking.pronunciation-in-conversation",
+        "eng.speaking.conversation-skills",
+        "eng.speaking.asking-and-answering-questions",
+        "eng.speaking.storytelling-orally",
+        "eng.speaking.discussion-skills",
+        "eng.speaking.public-speaking-basics",
+        "eng.speaking.presentation-skills",
+        "eng.speaking.debate-skills",
+        "eng.speaking.non-verbal-communication"
+      ],
+      "coverage": "100% full structured review (10/10) + 17 independent verification checks against speaking-pedagogy, conversation-analysis, pronunciation-research, and communication-psychology references (including the correct debunking of the Mehrabian '93%' misreading)",
+      "defects_found_and_fixed": 0,
+      "defects_remaining": 0
+    },
+    "correction_cycles": {
+      "count": 0,
+      "note": "Correct schema field names used from the start; authored in 2 chunks (5+5)."
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:79379fb450fbf7066bde6dae2de0f15d8eea62b1b0f63af4d2b7ad55cd4b5739",
+    "assets_file_sha256": "sha256:1854b6c56a7e9762fe2b8d6fc44fb764776816a3e9a40b5f7e0c4609bad67032",
+    "graph_sha256": "sha256:d8f6140932bae1658cd774e05fb1e2df2bc9130a565676c758655dca9ce44fd8",
+    "validation_report_sha256": "sha256:db4cbcb371f7eb2711b260e8b9346b8e9c3315c0bdf4ee41e121081b47dd306f"
+  },
+  "generated_files": [
+    "docs/english/chapters/speaking.md",
+    "docs/english/domains/eng.speaking-validation-report.md",
+    "docs/english/domains/eng.speaking-summary.md",
+    "docs/english/domains/eng.speaking-manifest.json",
+    "docs/english/teaching-assets/assets.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical English Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-07-03",
+    "kg_commit": "d298f09",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "0157fd1",
+  "created_at": "2026-07-04T00:00:00Z"
+}

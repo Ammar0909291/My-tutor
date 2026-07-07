@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "thermodynamics",
+  "domain_prefix": "phys.therm",
+  "domain_name": "Thermodynamics",
+  "subject": "physics",
+  "concept_count": 18,
+  "asset_count": 18,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-02",
+    "validation_method": "python-equivalent (node_modules unavailable in container)"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:29d7952af8f6b6f09fa35059d55c04c767fa221b98ec3ab0a45489e4e4d92a0b",
+    "assets_file_sha256": "sha256:78b6ef5c70f2aa388e986ca93ca427904a2e9e139128437edfb6af96cc021332",
+    "graph_sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f",
+    "validation_report_sha256": "sha256:b573ce8ae6ed1b29b3583b1242cab1d22c34fd98bc491a9900f18e61bf1a3281"
+  },
+  "generated_files": [
+    "docs/physics/chapters/therm.md",
+    "docs/physics/domains/phys.therm-validation-report.md",
+    "docs/physics/domains/phys.therm-summary.md",
+    "docs/physics/domains/phys.therm-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Physics Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "c83bc8c",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "7585c8b",
+  "created_at": "2026-07-02T15:09:37Z"
+}

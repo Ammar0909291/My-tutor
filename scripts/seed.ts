@@ -4,8 +4,20 @@
  * Seeds the four core subjects. Idempotent — safe to run multiple times.
  */
 import { PrismaClient, SubjectType } from "@prisma/client";
+import { SUBJECT_LIBRARY, type SubjectCategory } from "../src/lib/curriculum/subjectCatalog";
 
 const prisma = new PrismaClient();
+
+const CATEGORY_TO_TYPE: Record<SubjectCategory, SubjectType> = {
+  languages: SubjectType.LANGUAGE,
+  programming: SubjectType.PROGRAMMING,
+  mathematics: SubjectType.MATHEMATICS,
+  physics: SubjectType.PHYSICS,
+  chemistry: SubjectType.CHEMISTRY,
+  biology: SubjectType.BIOLOGY,
+  ai: SubjectType.AI,
+  computer_science: SubjectType.COMPUTER_SCIENCE,
+};
 
 const SUBJECTS = [
   {
@@ -42,6 +54,24 @@ async function main() {
       where: { slug: subject.slug },
       update: { name: subject.name, description: subject.description },
       create: subject,
+    });
+    console.log(`  ✓ ${result.name} (${result.id})`);
+  }
+
+  console.log("Seeding Subject Library (multi-subject ecosystem)…");
+
+  const existingSlugs = new Set(SUBJECTS.map((s) => s.slug));
+  for (const lib of SUBJECT_LIBRARY) {
+    if (existingSlugs.has(lib.slug)) continue; // already seeded above with its legacy type
+    const result = await prisma.subject.upsert({
+      where: { slug: lib.slug },
+      update: { name: lib.name, description: lib.description },
+      create: {
+        slug: lib.slug,
+        name: lib.name,
+        type: CATEGORY_TO_TYPE[lib.category],
+        description: lib.description,
+      },
     });
     console.log(`  ✓ ${result.name} (${result.id})`);
   }

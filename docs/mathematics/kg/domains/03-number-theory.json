@@ -1,0 +1,1139 @@
+{
+  "domain_id": "number-theory",
+  "domain_name": "Number Theory",
+  "id_prefix": "math.nt",
+  "level_range": [
+    2,
+    7
+  ],
+  "description": "The study of integers and their properties, including divisibility, prime numbers, modular arithmetic, and Diophantine equations.",
+  "concepts": [
+    {
+      "id": "math.nt.divisibility",
+      "name": "Divisibility",
+      "aliases": [
+        "divides",
+        "a | b",
+        "divisor"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.divisibility-rules"
+      ],
+      "requires": [
+        "math.arith.division",
+        "math.found.integers"
+      ],
+      "unlocks": [
+        "math.nt.prime-number",
+        "math.nt.gcd",
+        "math.nt.lcm"
+      ],
+      "related": [
+        "math.arith.remainder",
+        "math.nt.prime-number"
+      ],
+      "cross_links": [
+        "math.abst.ring-theory"
+      ],
+      "description": "An integer b is divisible by a (written a | b) if there exists an integer k such that b = ak; the foundation of number theory.",
+      "difficulty": "developing",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "Rosen 2018",
+        "Hardy & Wright 2008 An Introduction to the Theory of Numbers"
+      ]
+    },
+    {
+      "id": "math.nt.divisibility-rules",
+      "name": "Divisibility Rules",
+      "aliases": [
+        "divisibility tests",
+        "rules for 2, 3, 5, 9, 11"
+      ],
+      "parent": "math.nt.divisibility",
+      "children": [],
+      "requires": [
+        "math.nt.divisibility"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.divisibility"
+      ],
+      "cross_links": [],
+      "description": "Shortcuts to determine divisibility by small numbers (2, 3, 4, 5, 6, 8, 9, 10, 11) from the decimal representation of a number.",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.nt.prime-number",
+      "name": "Prime Number",
+      "aliases": [
+        "prime",
+        "irreducible integer"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.prime-factorization",
+        "math.nt.sieve-of-eratosthenes"
+      ],
+      "requires": [
+        "math.nt.divisibility"
+      ],
+      "unlocks": [
+        "math.nt.fundamental-theorem-arithmetic",
+        "math.nt.prime-factorization"
+      ],
+      "related": [
+        "math.nt.composite-number",
+        "math.nt.fundamental-theorem-arithmetic"
+      ],
+      "cross_links": [
+        "math.nt.fundamental-theorem-arithmetic"
+      ],
+      "description": "A natural number greater than 1 whose only positive divisors are 1 and itself; the building blocks of all positive integers.",
+      "difficulty": "developing",
+      "estimated_hours": 5,
+      "bloom": "remember",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6",
+        "Hardy & Wright 2008",
+        "Rosen 2018"
+      ]
+    },
+    {
+      "id": "math.nt.composite-number",
+      "name": "Composite Number",
+      "aliases": [
+        "composite",
+        "non-prime integer > 1"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.prime-number"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.prime-number"
+      ],
+      "cross_links": [],
+      "description": "A positive integer greater than 1 that is not prime; equivalently, one with at least one divisor other than 1 and itself.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.9,
+      "references": [
+        "NCERT Grade 6"
+      ]
+    },
+    {
+      "id": "math.nt.sieve-of-eratosthenes",
+      "name": "Sieve of Eratosthenes",
+      "aliases": [
+        "prime sieve",
+        "sieve method"
+      ],
+      "parent": "math.nt.prime-number",
+      "children": [],
+      "requires": [
+        "math.nt.prime-number",
+        "math.nt.divisibility"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.prime-number"
+      ],
+      "cross_links": [],
+      "description": "An ancient algorithm for finding all primes up to a limit by iteratively marking multiples of each prime as composite.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "Hardy & Wright 2008"
+      ]
+    },
+    {
+      "id": "math.nt.prime-factorization",
+      "name": "Prime Factorization",
+      "aliases": [
+        "prime decomposition",
+        "factor tree"
+      ],
+      "parent": "math.nt.prime-number",
+      "children": [],
+      "requires": [
+        "math.nt.prime-number",
+        "math.nt.divisibility"
+      ],
+      "unlocks": [
+        "math.nt.gcd",
+        "math.nt.lcm",
+        "math.nt.fundamental-theorem-arithmetic"
+      ],
+      "related": [
+        "math.nt.fundamental-theorem-arithmetic"
+      ],
+      "cross_links": [],
+      "description": "Writing a composite integer as a product of prime powers; unique up to order (the Fundamental Theorem of Arithmetic).",
+      "difficulty": "developing",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "Rosen 2018",
+        "OpenStax PreAlgebra"
+      ]
+    },
+    {
+      "id": "math.nt.fundamental-theorem-arithmetic",
+      "name": "Fundamental Theorem of Arithmetic",
+      "aliases": [
+        "unique factorization theorem",
+        "UFT",
+        "prime factorization uniqueness"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.prime-factorization"
+      ],
+      "unlocks": [
+        "math.nt.gcd",
+        "math.nt.lcm"
+      ],
+      "related": [
+        "math.nt.prime-factorization",
+        "math.abst.ufd"
+      ],
+      "cross_links": [
+        "math.abst.ufd"
+      ],
+      "description": "Every integer greater than 1 is either prime or can be expressed uniquely (up to order) as a product of prime numbers.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Hardy & Wright 2008",
+        "Niven et al 1991 An Introduction to the Theory of Numbers"
+      ]
+    },
+    {
+      "id": "math.nt.gcd",
+      "name": "Greatest Common Divisor",
+      "aliases": [
+        "GCD",
+        "HCF",
+        "greatest common factor"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.euclidean-algorithm"
+      ],
+      "requires": [
+        "math.nt.divisibility",
+        "math.nt.prime-factorization"
+      ],
+      "unlocks": [
+        "math.arith.fraction-simplification",
+        "math.nt.bezout-identity"
+      ],
+      "related": [
+        "math.nt.lcm"
+      ],
+      "cross_links": [],
+      "description": "The largest positive integer dividing two given integers a and b; computable efficiently via the Euclidean algorithm.",
+      "difficulty": "developing",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "Rosen 2018",
+        "Hardy & Wright 2008"
+      ]
+    },
+    {
+      "id": "math.nt.euclidean-algorithm",
+      "name": "Euclidean Algorithm",
+      "aliases": [
+        "Euclid's algorithm",
+        "GCD algorithm"
+      ],
+      "parent": "math.nt.gcd",
+      "children": [
+        "math.nt.extended-euclidean-algorithm"
+      ],
+      "requires": [
+        "math.nt.gcd",
+        "math.arith.remainder"
+      ],
+      "unlocks": [
+        "math.nt.extended-euclidean-algorithm",
+        "math.nt.bezout-identity"
+      ],
+      "related": [
+        "math.nt.gcd"
+      ],
+      "cross_links": [],
+      "description": "An efficient algorithm computing GCD(a, b) by repeatedly replacing (a, b) with (b, a mod b) until the remainder is zero.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Euclid Elements Book VII",
+        "Rosen 2018",
+        "CLRS Introduction to Algorithms"
+      ]
+    },
+    {
+      "id": "math.nt.extended-euclidean-algorithm",
+      "name": "Extended Euclidean Algorithm",
+      "aliases": [
+        "extended Euclid",
+        "B\u00e9zout coefficients algorithm"
+      ],
+      "parent": "math.nt.euclidean-algorithm",
+      "children": [],
+      "requires": [
+        "math.nt.euclidean-algorithm"
+      ],
+      "unlocks": [
+        "math.nt.modular-inverse"
+      ],
+      "related": [
+        "math.nt.bezout-identity"
+      ],
+      "cross_links": [],
+      "description": "Extension of the Euclidean algorithm that also computes integers x, y such that ax + by = GCD(a, b), enabling computation of modular inverses.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "CLRS 2009"
+      ]
+    },
+    {
+      "id": "math.nt.bezout-identity",
+      "name": "B\u00e9zout's Identity",
+      "aliases": [
+        "Bezout's lemma",
+        "linear combination of GCD"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.extended-euclidean-algorithm",
+        "math.nt.gcd"
+      ],
+      "unlocks": [
+        "math.nt.linear-diophantine"
+      ],
+      "related": [
+        "math.nt.extended-euclidean-algorithm"
+      ],
+      "cross_links": [],
+      "description": "For integers a and b, there exist integers x and y such that ax + by = GCD(a, b); a cornerstone of elementary number theory.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Hardy & Wright 2008",
+        "Niven et al 1991",
+        "Rosen 2018"
+      ]
+    },
+    {
+      "id": "math.nt.lcm",
+      "name": "Least Common Multiple",
+      "aliases": [
+        "LCM",
+        "lowest common multiple"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.prime-factorization",
+        "math.nt.gcd"
+      ],
+      "unlocks": [
+        "math.arith.fraction-addition"
+      ],
+      "related": [
+        "math.nt.gcd"
+      ],
+      "cross_links": [],
+      "description": "The smallest positive integer divisible by both a and b; related to GCD by lcm(a, b) = ab / GCD(a, b).",
+      "difficulty": "developing",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 6",
+        "Rosen 2018"
+      ]
+    },
+    {
+      "id": "math.nt.division-algorithm",
+      "name": "Division Algorithm",
+      "aliases": [
+        "integer division theorem",
+        "quotient-remainder theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.found.well-ordering-principle",
+        "math.arith.division"
+      ],
+      "unlocks": [
+        "math.nt.modular-arithmetic"
+      ],
+      "related": [
+        "math.arith.remainder",
+        "math.nt.divisibility"
+      ],
+      "cross_links": [],
+      "description": "For integers a and b > 0, there exist unique integers q (quotient) and r (remainder) with a = bq + r and 0 \u2264 r < b.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Hardy & Wright 2008",
+        "Rosen 2018",
+        "Niven et al 1991"
+      ]
+    },
+    {
+      "id": "math.nt.modular-arithmetic",
+      "name": "Modular Arithmetic",
+      "aliases": [
+        "clock arithmetic",
+        "arithmetic mod n",
+        "congruences"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.congruence",
+        "math.nt.residue-classes"
+      ],
+      "requires": [
+        "math.nt.division-algorithm",
+        "math.arith.remainder"
+      ],
+      "unlocks": [
+        "math.nt.congruence",
+        "math.nt.chinese-remainder-theorem",
+        "math.nt.modular-inverse"
+      ],
+      "related": [
+        "math.found.equivalence-relation"
+      ],
+      "cross_links": [
+        "math.abst.ring-theory",
+        "math.disc.boolean-circuits"
+      ],
+      "description": "Arithmetic on a finite set of residues {0, 1, \u2026, n\u22121}, where arithmetic operations are defined modulo n; foundational to cryptography.",
+      "difficulty": "proficient",
+      "estimated_hours": 12,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "Hardy & Wright 2008",
+        "Ireland & Rosen 1990 A Classical Introduction to Modern Number Theory"
+      ]
+    },
+    {
+      "id": "math.nt.congruence",
+      "name": "Congruence",
+      "aliases": [
+        "a \u2261 b (mod n)",
+        "congruence modulo n"
+      ],
+      "parent": "math.nt.modular-arithmetic",
+      "children": [],
+      "requires": [
+        "math.nt.modular-arithmetic",
+        "math.found.equivalence-relation"
+      ],
+      "unlocks": [
+        "math.nt.residue-classes"
+      ],
+      "related": [
+        "math.found.equivalence-class"
+      ],
+      "cross_links": [],
+      "description": "Two integers a and b are congruent modulo n (a \u2261 b (mod n)) if n | (a \u2212 b); congruence is an equivalence relation partitioning \u2124 into residue classes.",
+      "difficulty": "proficient",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "Hardy & Wright 2008"
+      ]
+    },
+    {
+      "id": "math.nt.residue-classes",
+      "name": "Residue Classes",
+      "aliases": [
+        "congruence classes",
+        "\u2124/n\u2124"
+      ],
+      "parent": "math.nt.modular-arithmetic",
+      "children": [],
+      "requires": [
+        "math.nt.congruence"
+      ],
+      "unlocks": [
+        "math.abst.quotient-ring"
+      ],
+      "related": [
+        "math.found.equivalence-class",
+        "math.abst.quotient-ring"
+      ],
+      "cross_links": [
+        "math.abst.quotient-ring"
+      ],
+      "description": "The n residue classes {[0], [1], \u2026, [n\u22121]} modulo n form a ring \u2124/n\u2124; a field when n is prime.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "Dummit & Foote 2003"
+      ]
+    },
+    {
+      "id": "math.nt.modular-inverse",
+      "name": "Modular Inverse",
+      "aliases": [
+        "multiplicative inverse mod n",
+        "a\u207b\u00b9 mod n"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.modular-arithmetic",
+        "math.nt.extended-euclidean-algorithm"
+      ],
+      "unlocks": [
+        "math.nt.rsa-basics"
+      ],
+      "related": [
+        "math.nt.congruence"
+      ],
+      "cross_links": [],
+      "description": "An integer b such that ab \u2261 1 (mod n); exists iff GCD(a, n) = 1, computable via the extended Euclidean algorithm.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rosen 2018",
+        "Ireland & Rosen 1990"
+      ]
+    },
+    {
+      "id": "math.nt.chinese-remainder-theorem",
+      "name": "Chinese Remainder Theorem",
+      "aliases": [
+        "CRT"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.congruence",
+        "math.nt.gcd"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.congruence"
+      ],
+      "cross_links": [
+        "math.abst.ring-theory"
+      ],
+      "description": "If n\u2081, \u2026, n\u2096 are pairwise coprime, the system x \u2261 a\u1d62 (mod n\u1d62) has a unique solution modulo n\u2081\u22efn\u2096; has applications in cryptography and fast arithmetic.",
+      "difficulty": "advanced",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rosen 2018",
+        "Ireland & Rosen 1990",
+        "Hardy & Wright 2008"
+      ]
+    },
+    {
+      "id": "math.nt.fermats-little-theorem",
+      "name": "Fermat's Little Theorem",
+      "aliases": [
+        "Fermat's theorem",
+        "a\u1d56 \u2261 a (mod p)"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.modular-arithmetic",
+        "math.nt.prime-number"
+      ],
+      "unlocks": [
+        "math.nt.eulers-theorem",
+        "math.nt.primality-testing"
+      ],
+      "related": [
+        "math.nt.eulers-theorem"
+      ],
+      "cross_links": [],
+      "description": "If p is prime and p \u2224 a, then a\u1d56\u207b\u00b9 \u2261 1 (mod p); fundamental to primality testing and RSA cryptography.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Hardy & Wright 2008",
+        "Rosen 2018",
+        "Ireland & Rosen 1990"
+      ]
+    },
+    {
+      "id": "math.nt.eulers-theorem",
+      "name": "Euler's Theorem",
+      "aliases": [
+        "Euler's generalization of Fermat",
+        "a\u1d60\u207d\u207f\u207e \u2261 1 (mod n)"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.eulers-totient"
+      ],
+      "requires": [
+        "math.nt.fermats-little-theorem"
+      ],
+      "unlocks": [
+        "math.nt.rsa-basics"
+      ],
+      "related": [
+        "math.nt.fermats-little-theorem",
+        "math.nt.eulers-totient"
+      ],
+      "cross_links": [],
+      "description": "If GCD(a, n) = 1, then a^\u03c6(n) \u2261 1 (mod n), where \u03c6(n) is Euler's totient function; generalizes Fermat's Little Theorem.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Hardy & Wright 2008",
+        "Ireland & Rosen 1990"
+      ]
+    },
+    {
+      "id": "math.nt.eulers-totient",
+      "name": "Euler's Totient Function",
+      "aliases": [
+        "\u03c6(n)",
+        "phi function",
+        "Euler's phi"
+      ],
+      "parent": "math.nt.eulers-theorem",
+      "children": [],
+      "requires": [
+        "math.nt.divisibility",
+        "math.nt.prime-factorization"
+      ],
+      "unlocks": [
+        "math.nt.rsa-basics"
+      ],
+      "related": [
+        "math.nt.eulers-theorem"
+      ],
+      "cross_links": [],
+      "description": "\u03c6(n) counts the number of integers in {1, \u2026, n} coprime to n; computable as n\u220f(1 \u2212 1/p) over primes p dividing n.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Hardy & Wright 2008",
+        "Rosen 2018"
+      ]
+    },
+    {
+      "id": "math.nt.primality-testing",
+      "name": "Primality Testing",
+      "aliases": [
+        "prime testing",
+        "Miller-Rabin",
+        "AKS"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.fermats-little-theorem"
+      ],
+      "unlocks": [
+        "math.nt.rsa-basics"
+      ],
+      "related": [
+        "math.nt.prime-number"
+      ],
+      "cross_links": [],
+      "description": "Algorithms for determining whether a number is prime; ranging from trial division to probabilistic (Miller-Rabin) and deterministic (AKS) polynomial-time tests.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Rosen 2018",
+        "Crandall & Pomerance 2005 Prime Numbers"
+      ]
+    },
+    {
+      "id": "math.nt.linear-diophantine",
+      "name": "Linear Diophantine Equations",
+      "aliases": [
+        "ax + by = c",
+        "linear Diophantine"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.bezout-identity",
+        "math.nt.gcd"
+      ],
+      "unlocks": [
+        "math.nt.general-diophantine"
+      ],
+      "related": [
+        "math.nt.bezout-identity"
+      ],
+      "cross_links": [],
+      "description": "Equations ax + by = c with integer unknowns; solvable iff GCD(a, b) | c, and when solvable have infinitely many integer solutions.",
+      "difficulty": "advanced",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rosen 2018",
+        "Niven et al 1991",
+        "Ireland & Rosen 1990"
+      ]
+    },
+    {
+      "id": "math.nt.general-diophantine",
+      "name": "Diophantine Equations",
+      "aliases": [
+        "polynomial Diophantine equations",
+        "integer polynomial equations"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.pells-equation",
+        "math.nt.pythagorean-triples"
+      ],
+      "requires": [
+        "math.nt.linear-diophantine"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.algebraic-number-theory"
+      ],
+      "cross_links": [
+        "math.nt.algebraic-number-theory"
+      ],
+      "description": "Polynomial equations with two or more unknowns for which integer (or rational) solutions are sought; Fermat's Last Theorem is the most famous example.",
+      "difficulty": "expert",
+      "estimated_hours": 20,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Silverman 2006 A Friendly Introduction to Number Theory",
+        "Ireland & Rosen 1990"
+      ]
+    },
+    {
+      "id": "math.nt.pythagorean-triples",
+      "name": "Pythagorean Triples",
+      "aliases": [
+        "Pythagorean triplets",
+        "(3,4,5)",
+        "a\u00b2 + b\u00b2 = c\u00b2"
+      ],
+      "parent": "math.nt.general-diophantine",
+      "children": [],
+      "requires": [
+        "math.nt.general-diophantine",
+        "math.geom.pythagorean-theorem"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.geom.pythagorean-theorem"
+      ],
+      "cross_links": [
+        "math.geom.pythagorean-theorem"
+      ],
+      "description": "Integer solutions (a, b, c) to a\u00b2 + b\u00b2 = c\u00b2; the primitive triples are parametrized by m > n > 0 with GCD(m,n)=1: a = m\u00b2\u2212n\u00b2, b = 2mn, c = m\u00b2+n\u00b2.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Hardy & Wright 2008",
+        "Niven et al 1991"
+      ]
+    },
+    {
+      "id": "math.nt.pells-equation",
+      "name": "Pell's Equation",
+      "aliases": [
+        "x\u00b2 \u2212 Dy\u00b2 = 1",
+        "Pell equation"
+      ],
+      "parent": "math.nt.general-diophantine",
+      "children": [],
+      "requires": [
+        "math.nt.general-diophantine"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.continued-fractions"
+      ],
+      "cross_links": [],
+      "description": "The Diophantine equation x\u00b2 \u2212 Dy\u00b2 = 1 (D not a perfect square); has infinitely many solutions generated from the fundamental solution via continued fractions.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Ireland & Rosen 1990",
+        "Hardy & Wright 2008"
+      ]
+    },
+    {
+      "id": "math.nt.rsa-basics",
+      "name": "RSA Cryptography (Number-Theoretic Basis)",
+      "aliases": [
+        "RSA",
+        "public-key cryptography basics"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.eulers-theorem",
+        "math.nt.primality-testing",
+        "math.nt.modular-inverse"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.eulers-theorem"
+      ],
+      "cross_links": [],
+      "description": "The number-theoretic foundation of RSA encryption: choose large primes p, q; n = pq; public exponent e coprime to \u03c6(n); private exponent d = e\u207b\u00b9 mod \u03c6(n).",
+      "difficulty": "advanced",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Rivest Shamir Adleman 1978",
+        "Rosen 2018",
+        "Stinson 2006 Cryptography"
+      ]
+    },
+    {
+      "id": "math.nt.induction-applications",
+      "name": "Induction in Number Theory",
+      "aliases": [
+        "number-theoretic induction",
+        "inductive proofs in number theory"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.found.proof-by-induction",
+        "math.nt.divisibility"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.found.proof-by-induction"
+      ],
+      "cross_links": [],
+      "description": "Application of mathematical induction to prove divisibility results, summation formulas, and inequalities about integers.",
+      "difficulty": "proficient",
+      "estimated_hours": 8,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rosen 2018",
+        "Hardy & Wright 2008"
+      ]
+    },
+    {
+      "id": "math.nt.prime-distribution",
+      "name": "Distribution of Primes",
+      "aliases": [
+        "prime number theorem",
+        "\u03c0(x)",
+        "density of primes"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.prime-number-theorem",
+        "math.nt.riemann-hypothesis"
+      ],
+      "requires": [
+        "math.nt.prime-number",
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.nt.analytic-number-theory"
+      ],
+      "related": [
+        "math.nt.prime-number-theorem"
+      ],
+      "cross_links": [
+        "math.cx.riemann-zeta"
+      ],
+      "description": "The study of how primes are distributed among the integers; the Prime Number Theorem states \u03c0(x) ~ x/ln(x) as x \u2192 \u221e.",
+      "difficulty": "expert",
+      "estimated_hours": 15,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Hardy & Wright 2008",
+        "Davenport 2000 Multiplicative Number Theory"
+      ]
+    },
+    {
+      "id": "math.nt.prime-number-theorem",
+      "name": "Prime Number Theorem",
+      "aliases": [
+        "PNT",
+        "\u03c0(x) ~ x/ln x"
+      ],
+      "parent": "math.nt.prime-distribution",
+      "children": [],
+      "requires": [
+        "math.nt.prime-distribution",
+        "math.cx.complex-integration"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.nt.riemann-hypothesis"
+      ],
+      "cross_links": [
+        "math.cx.riemann-zeta"
+      ],
+      "description": "The asymptotic law \u03c0(x) ~ x/log x describing how the count of primes up to x grows; proved via complex analysis of the Riemann zeta function.",
+      "difficulty": "research",
+      "estimated_hours": 20,
+      "bloom": "analyze",
+      "mastery_threshold": 0.6,
+      "references": [
+        "Davenport 2000",
+        "Apostol 1976 Introduction to Analytic Number Theory"
+      ]
+    },
+    {
+      "id": "math.nt.riemann-hypothesis",
+      "name": "Riemann Hypothesis",
+      "aliases": [
+        "RH",
+        "zeros of zeta function"
+      ],
+      "parent": "math.nt.prime-distribution",
+      "children": [],
+      "requires": [
+        "math.nt.prime-number-theorem",
+        "math.cx.riemann-zeta"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.cx.riemann-zeta"
+      ],
+      "cross_links": [
+        "math.cx.riemann-zeta"
+      ],
+      "description": "The conjecture that all non-trivial zeros of the Riemann zeta function have real part 1/2; equivalent to the best possible error term in the Prime Number Theorem. Unsolved (Clay Millennium Problem).",
+      "difficulty": "research",
+      "estimated_hours": 100,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.5,
+      "references": [
+        "Riemann 1859",
+        "Davenport 2000",
+        "Bombieri 2000 Clay Problem Statement"
+      ]
+    },
+    {
+      "id": "math.nt.continued-fractions",
+      "name": "Continued Fractions",
+      "aliases": [
+        "CF",
+        "simple continued fraction",
+        "[a\u2080; a\u2081, a\u2082, \u2026]"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.euclidean-algorithm",
+        "math.seq.convergent"
+      ],
+      "unlocks": [
+        "math.nt.pells-equation"
+      ],
+      "related": [
+        "math.nt.pells-equation"
+      ],
+      "cross_links": [],
+      "description": "Representations of real numbers as nested fractions a\u2080 + 1/(a\u2081 + 1/(a\u2082 + \u2026)); rational numbers terminate; quadratic irrationals have periodic CFs.",
+      "difficulty": "advanced",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Hardy & Wright 2008",
+        "Niven et al 1991"
+      ]
+    },
+    {
+      "id": "math.nt.algebraic-number-theory",
+      "name": "Algebraic Number Theory",
+      "aliases": [
+        "algebraic integers",
+        "number fields"
+      ],
+      "parent": null,
+      "children": [
+        "math.nt.algebraic-integers",
+        "math.nt.number-fields"
+      ],
+      "requires": [
+        "math.nt.general-diophantine",
+        "math.abst.ring-theory"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.abst.galois-theory"
+      ],
+      "cross_links": [
+        "math.abst.galois-theory"
+      ],
+      "description": "The study of algebraic integers and number fields, extending number theory to rings of integers in finite extensions of \u211a; includes class groups and ideal theory.",
+      "difficulty": "research",
+      "estimated_hours": 60,
+      "bloom": "analyze",
+      "mastery_threshold": 0.6,
+      "references": [
+        "Marcus 1977 Number Fields",
+        "Neukirch 1999 Algebraic Number Theory"
+      ]
+    },
+    {
+      "id": "math.nt.algebraic-integers",
+      "name": "Algebraic Integers",
+      "aliases": [
+        "integral algebraic elements"
+      ],
+      "parent": "math.nt.algebraic-number-theory",
+      "children": [],
+      "requires": [
+        "math.nt.algebraic-number-theory",
+        "math.abst.ring-theory"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Roots of monic polynomials with integer coefficients; they generalize the ordinary integers \u2124 to rings of integers in number fields.",
+      "difficulty": "research",
+      "estimated_hours": 20,
+      "bloom": "analyze",
+      "mastery_threshold": 0.6,
+      "references": [
+        "Marcus 1977",
+        "Neukirch 1999"
+      ]
+    },
+    {
+      "id": "math.nt.number-fields",
+      "name": "Number Fields",
+      "aliases": [
+        "algebraic number fields",
+        "[\u211a:K] finite"
+      ],
+      "parent": "math.nt.algebraic-number-theory",
+      "children": [],
+      "requires": [
+        "math.nt.algebraic-integers",
+        "math.abst.field-extension"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.abst.galois-theory"
+      ],
+      "cross_links": [
+        "math.abst.galois-theory"
+      ],
+      "description": "Finite extensions K/\u211a; their rings of integers \ud835\udcaa_K generalize \u2124, and factorization of ideals replaces unique factorization of elements.",
+      "difficulty": "research",
+      "estimated_hours": 30,
+      "bloom": "analyze",
+      "mastery_threshold": 0.55,
+      "references": [
+        "Marcus 1977",
+        "Neukirch 1999"
+      ]
+    },
+    {
+      "id": "math.nt.analytic-number-theory",
+      "name": "Analytic Number Theory",
+      "aliases": [
+        "L-functions",
+        "Dirichlet series"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.nt.prime-distribution",
+        "math.cx.complex-numbers-analysis"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.cx.riemann-zeta"
+      ],
+      "cross_links": [
+        "math.cx.riemann-zeta"
+      ],
+      "description": "The use of complex analysis and real analysis to study number-theoretic problems, particularly the distribution of primes via L-functions and Dirichlet series.",
+      "difficulty": "research",
+      "estimated_hours": 60,
+      "bloom": "analyze",
+      "mastery_threshold": 0.55,
+      "references": [
+        "Apostol 1976",
+        "Davenport 2000"
+      ]
+    }
+  ]
+}

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { allowed } = await checkRateLimit(`rl:stt:${session.user.id}`, 30, 60)
+    const { allowed } = await checkRateLimit(`rl:stt:${session.user.id}`, 20, 60)
     if (!allowed) return rateLimitResponse()
 
     const formData = await req.formData()
@@ -23,16 +23,30 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'No audio' }, { status: 400 })
     }
 
-    const transcription = await groq.audio.transcriptions.create({
-      file: audioFile,
-      model: 'whisper-large-v3',
-      language: lang,
-      response_format: 'json',
-    })
+    if (!process.env.GROQ_API_KEY) {
+      console.error('[stt] GROQ_API_KEY not configured')
+      return NextResponse.json({ error: 'Speech recognition unavailable' }, { status: 503 })
+    }
+
+    let transcription
+    try {
+      transcription = await groq.audio.transcriptions.create({
+        file: audioFile,
+        model: 'whisper-large-v3',
+        language: lang,
+        response_format: 'json',
+      })
+    } catch (groqErr: unknown) {
+      const status = (groqErr as any)?.status
+      const msg = (groqErr as any)?.message ?? 'unknown'
+      console.error('[stt] Groq transcription failed:', status, msg)
+      throw groqErr
+    }
 
     return NextResponse.json({ text: transcription.text })
-  } catch (error: any) {
-    console.error('STT error:', error.message)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'STT error'
+    console.error('[stt] error:', msg)
+    return NextResponse.json({ error: 'Speech recognition unavailable' }, { status: 503 })
   }
 }

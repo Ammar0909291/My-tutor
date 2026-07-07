@@ -18,6 +18,7 @@ export const UP_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'up.eng.5.ch8', order: 8, title: 'Stories and Poems', kgNodeIds: ['literature.prose.stories', 'literature.poetry.basic'] },
         { id: 'up.eng.5.ch9', order: 9, title: 'Describing Words (Adjectives)', kgNodeIds: ['grammar.parts_of_speech.adjectives_adverbs'] },
         { id: 'up.eng.5.ch10', order: 10, title: 'Writing Sentences and Short Paragraphs', kgNodeIds: ['writing.sentences_paragraphs.basics'] },
+        { id: 'up.eng.5.ch11', order: 11, title: 'Articles — A, An and The', kgNodeIds: ['grammar.articles.usage'] },
       ],
     },
     {
@@ -35,6 +36,7 @@ export const UP_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'up.eng.6.ch10', order: 10, title: 'Adverbs', kgNodeIds: ['grammar.parts_of_speech.adjectives_adverbs'] },
         { id: 'up.eng.6.ch11', order: 11, title: 'Prepositions', kgNodeIds: ['grammar.parts_of_speech.prepositions_conjunctions'] },
         { id: 'up.eng.6.ch12', order: 12, title: 'Word Formation — Prefixes and Suffixes', kgNodeIds: ['vocabulary.word_formation.affixes'] },
+        { id: 'up.eng.6.ch13', order: 13, title: 'Articles — Definite and Indefinite Usage', kgNodeIds: ['grammar.articles.usage'] },
       ],
     },
     {
@@ -103,7 +105,7 @@ export const UP_ENGLISH_CATALOG: BoardSubjectCatalog = {
         { id: 'up.eng.10.ch8', order: 8, title: 'Essay Writing — Argumentative and Narrative', kgNodeIds: ['writing.essay_types.expository_argumentative'] },
         { id: 'up.eng.10.ch9', order: 9, title: 'Formal Writing — Letters, Reports, Notices', kgNodeIds: ['writing.formal_informal.letters'] },
         { id: 'up.eng.10.ch10', order: 10, title: 'Word Power — Vocabulary Building', kgNodeIds: ['vocabulary.idioms_phrases.fixed_expressions', 'vocabulary.word_formation.affixes'] },
-        { id: 'up.eng.10.ch11', order: 11, title: 'Grammar — Error Correction and Editing', kgNodeIds: ['grammar.sentences.types_structure', 'grammar.punctuation.basics'] },
+        { id: 'up.eng.10.ch11', order: 11, title: 'Grammar — Error Correction and Editing', kgNodeIds: ['grammar.sentences.types_structure', 'grammar.punctuation.basics', 'grammar.articles.usage'] },
         { id: 'up.eng.10.ch12', order: 12, title: 'Speaking and Listening', kgNodeIds: ['communication.speaking.pronunciation', 'communication.listening.comprehension'] },
       ],
     },

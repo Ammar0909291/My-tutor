@@ -1,186 +1,175 @@
-import OpenAI from 'openai'
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import Groq from 'groq-sdk'
+import { consumeAIBudget } from '@/lib/ai/budget'
+import { captureError } from '@/lib/monitoring'
 
-export const TUTOR_MODEL = 'google/gemma-3-27b-it:free'
-
-// Fallback chain — tried in order when a model returns 429, 404, or 5xx
-export const FALLBACK_MODELS = [
-  'google/gemma-3-27b-it:free',
-  'meta-llama/llama-3.3-70b-instruct:free',
-  'mistralai/mistral-7b-instruct:free',
-  'deepseek/deepseek-chat:free',
-  'microsoft/phi-4:free',
-]
-
-const globalForAI = globalThis as unknown as { ai: OpenAI | undefined }
-
-export const ai = globalForAI.ai ?? new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
-  // Placeholder prevents the SDK from throwing at import time when the key is
-  // absent (e.g. during build). Real requests fail gracefully via try/catch.
-  apiKey: process.env.OPENROUTER_API_KEY || 'missing-openrouter-key',
-  defaultHeaders: {
-    'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
-    'X-Title': 'My Tutor',
-  },
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || '',
+  timeout: 20000,
+  maxRetries: 2,
 })
 
-if (process.env.NODE_ENV !== 'production') globalForAI.ai = ai
-
-function isRetryableError(err: unknown): boolean {
-  if (err instanceof OpenAI.APIError) {
-    // 404 = model not found on OpenRouter, also retry to try next model
-    return err.status === 404 || err.status === 429 || err.status >= 500
-  }
-  const msg = err instanceof Error ? err.message : String(err)
-  return msg.includes('404') || msg.includes('429') || msg.includes('Rate limit') || msg.includes('rate_limit')
-}
-
-type ChatParams = Parameters<typeof ai.chat.completions.create>[0]
-type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string }
-
-// ─── Gemini fallback (streaming) ──────────────────────────────────────────────
-
-async function* geminiStream(messages: ChatMessage[]): AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY not set')
-
-  const genAI = new GoogleGenerativeAI(apiKey)
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
-
-  const system = messages.find((m) => m.role === 'system')?.content ?? ''
-  const history = messages
-    .filter((m) => m.role !== 'system')
-    .slice(0, -1)
-    .map((m) => ({
-      role: m.role === 'user' ? 'user' as const : 'model' as const,
-      parts: [{ text: m.content }],
-    }))
-  const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
-
-  const chat = model.startChat({
-    systemInstruction: { role: 'user', parts: [{ text: system }] },
-    history,
-  })
-
-  const result = await chat.sendMessageStream(lastMsg)
-
-  for await (const chunk of result.stream) {
-    const text = chunk.text()
-    if (text) {
-      yield {
-        id: 'gemini',
-        object: 'chat.completion.chunk',
-        created: Date.now(),
-        model: 'gemini-2.0-flash',
-        choices: [{ index: 0, delta: { content: text }, finish_reason: null, logprobs: null }],
-      } as OpenAI.Chat.Completions.ChatCompletionChunk
-    }
-  }
-}
-
-async function geminiComplete(
-  messages: ChatMessage[],
-  generationConfig?: { temperature?: number; maxOutputTokens?: number },
+export async function generateAIResponse(
+  messages: { role: 'user' | 'assistant'; content: string }[],
+  systemPrompt: string,
+  maxTokens = 800,
+  lang: 'ru' | 'en' | 'hi' = 'en',
 ): Promise<string> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY not set')
-
-  const genAI = new GoogleGenerativeAI(apiKey)
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
-
-  const system = messages.find((m) => m.role === 'system')?.content ?? ''
-  const history = messages
-    .filter((m) => m.role !== 'system')
-    .slice(0, -1)
-    .map((m) => ({
-      role: m.role === 'user' ? 'user' as const : 'model' as const,
-      parts: [{ text: m.content }],
-    }))
-  const lastMsg = messages.filter((m) => m.role !== 'system').at(-1)?.content ?? ''
-
-  const chat = model.startChat({ systemInstruction: { role: 'user', parts: [{ text: system }] }, history, generationConfig })
-  const result = await chat.sendMessage(lastMsg)
-  return result.response.text()
-}
-
-// ─── Public API ───────────────────────────────────────────────────────────────
-
-/** Non-streaming completion with OpenRouter fallback chain, then Gemini. */
-export async function chatWithFallback(
-  params: Omit<ChatParams, 'model' | 'stream'>
-): Promise<OpenAI.Chat.Completions.ChatCompletion> {
-  let lastErr: unknown
-  for (const model of FALLBACK_MODELS) {
-    try {
-      return await ai.chat.completions.create({ ...params, model, stream: false })
-    } catch (err) {
-      if (isRetryableError(err)) { lastErr = err; continue }
-      throw err
-    }
-  }
-
-  // All OpenRouter models exhausted — try Gemini
-  if (process.env.GEMINI_API_KEY) {
-    const messages = (params.messages ?? []) as ChatMessage[]
-    const text = await geminiComplete(messages, {
-      temperature: typeof params.temperature === 'number' ? params.temperature : undefined,
-      maxOutputTokens: typeof params.max_tokens === 'number' ? params.max_tokens : undefined,
+  await consumeAIBudget() // propagates AIBudgetExceededError — callers already handle thrown provider errors
+  try {
+    const response = await groq.chat.completions.create({
+      model: 'openai/gpt-oss-20b',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages.slice(-6),
+      ],
+      max_tokens: maxTokens,
+      temperature: 0.7,
     })
-    return {
-      id: 'gemini-fallback',
-      object: 'chat.completion',
-      created: Date.now(),
-      model: 'gemini-2.0-flash',
-      choices: [{ index: 0, message: { role: 'assistant', content: text }, finish_reason: 'stop', logprobs: null }],
-      usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
-    } as OpenAI.Chat.Completions.ChatCompletion
-  }
-
-  throw lastErr
-}
-
-/** Streaming completion with OpenRouter fallback chain, then Gemini. */
-export async function chatStreamWithFallback(
-  params: Omit<ChatParams, 'model' | 'stream'>
-): Promise<{ stream: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>; model: string }> {
-  let lastErr: unknown
-  for (const model of FALLBACK_MODELS) {
-    try {
-      const stream = await ai.chat.completions.create({ ...params, model, stream: true })
-      return { stream, model }
-    } catch (err) {
-      if (isRetryableError(err)) { lastErr = err; continue }
-      throw err
+    return response.choices[0]?.message?.content ?? ''
+  } catch (error: any) {
+    console.error('Groq error:', error.message)
+    if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
+      const timeoutMsg: Record<string, string> = {
+        en: 'Taking longer than usual. Please try again.',
+        ru: 'Думаю дольше обычного. Попробуй ещё раз.',
+        hi: 'Thoda time lag raha hai. Please try again.',
+      }
+      return timeoutMsg[lang] || timeoutMsg.en
     }
+    throw error
   }
-
-  // All OpenRouter models exhausted — try Gemini
-  if (process.env.GEMINI_API_KEY) {
-    const messages = (params.messages ?? []) as ChatMessage[]
-    return { stream: geminiStream(messages), model: 'gemini-2.0-flash' }
-  }
-
-  throw lastErr
 }
 
-// ─── System Prompt ────────────────────────────────────────────────────────────
+export async function generateJSON(
+  prompt: string,
+  maxTokens = 1500,
+): Promise<any> {
+  // generateJSON never throws (callers expect null on failure) — a spent
+  // budget degrades to null the same way a provider error does.
+  try { await consumeAIBudget() } catch { return null }
+  const fullPrompt = prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.'
+  const model = 'openai/gpt-oss-20b'
+  // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
+  console.error('[generateJSON DEBUG] model:', model)
+  console.error('[generateJSON DEBUG] prompt sent to Groq:', fullPrompt)
+  const requestBody = {
+    model,
+    messages: [{
+      role: 'user' as const,
+      content: fullPrompt,
+    }],
+    max_tokens: maxTokens,
+    temperature: 0.3,
+  }
+  // TEMP DEBUG — exact outgoing request, immediately before the call. No
+  // optional fields (response_format/reasoning_format/stream/seed/tools/
+  // tool_choice/stop) are set anywhere above — requestBody's own key list
+  // below is the ground truth for what is and isn't sent.
+  console.error('[generateJSON DEBUG] request keys:', Object.keys(requestBody))
+  console.error('[generateJSON DEBUG] full request body:', JSON.stringify(requestBody))
+  console.error('[generateJSON DEBUG] message content length (chars):', fullPrompt.length)
+  console.error('[generateJSON DEBUG] total JSON payload size (bytes):', Buffer.byteLength(JSON.stringify(requestBody), 'utf8'))
+  try {
+    const response = await groq.chat.completions.create(requestBody)
+    const text = response.choices[0]?.message?.content ?? '[]'
+    // TEMP DEBUG
+    console.error('[generateJSON DEBUG] raw Groq response.choices[0].message.content:', JSON.stringify(text))
+    console.error('[generateJSON DEBUG] finish_reason:', response.choices[0]?.finish_reason)
+    const clean = text.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim()
+    try {
+      const parsed = JSON.parse(clean)
+      // TEMP DEBUG
+      console.error('[generateJSON DEBUG] parsed JSON before validation:', JSON.stringify(parsed))
+      return parsed
+    } catch (parseErr: any) {
+      // Fallback: the model ignored "no other text" and wrapped the JSON in
+      // prose: pull out the first balanced {...} or [...] block and retry.
+      const match = clean.match(/\{[\s\S]*\}|\[[\s\S]*\]/)
+      if (match) {
+        try {
+          const parsed = JSON.parse(match[0])
+          console.error('[generateJSON DEBUG] parsed JSON via prose-extraction fallback:', JSON.stringify(parsed))
+          return parsed
+        } catch { /* fall through to the failure log below */ }
+      }
+      // TEMP DEBUG — this catch previously swallowed parse failures with NO logging at all.
+      console.error('[generateJSON DEBUG] JSON.parse FAILED on cleaned text:', JSON.stringify(clean))
+      console.error('[generateJSON DEBUG] parse error:', parseErr.message)
+      return null
+    }
+  } catch (error: any) {
+    // Swallowed failure — without reporting it would be invisible in production.
+    console.error('Groq JSON error:', error.message)
+    // TEMP DEBUG
+    console.error('[generateJSON DEBUG] full error object:', error)
+    captureError(error, { route: 'lib/ai/generateJSON', tags: { provider: 'groq' } })
+    return null
+  }
+}
+
+export async function summarizeSession(
+  messages: { role: string; content: string }[],
+  lang: string,
+): Promise<string> {
+  if (!process.env.GROQ_API_KEY) return ''
+  try { await consumeAIBudget() } catch { return '' }
+  const prompt = lang === 'ru'
+    ? 'Summarize this tutoring session in 2 sentences in Russian.'
+    : lang === 'hi'
+    ? 'इस session को 2 sentences में summarize करें।'
+    : 'Summarize this tutoring session in 2 sentences in English.'
+  try {
+    const response = await groq.chat.completions.create({
+      model: 'openai/gpt-oss-20b',
+      messages: [
+        { role: 'system', content: prompt },
+        ...messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
+      ],
+      max_tokens: 200,
+    })
+    return response.choices[0]?.message?.content ?? ''
+  } catch { return '' }
+}
+
+// ─── System Prompts ───────────────────────────────────────────────────────────
+
+export interface LessonContext {
+  currentLesson: number
+  totalLessons: number
+  lessonTitle: string
+  lessonGoal: string
+  unitTitle: string
+  completedLessons: number[]
+}
 
 export function buildTutorSystemPrompt(
   subject: string,
+  studentName: string,
   studentLevel: string,
   goals: string,
   memoryContext?: string | null,
-  teachingLanguage: 'ru' | 'en' | 'hi' = 'ru',
+  teachingLanguage: 'ru' | 'en' | 'hi' = 'en',
+  lessonCtx?: LessonContext | null,
+  _subjectType?: string,
 ) {
+  const lessonBlock = lessonCtx
+    ? teachingLanguage === 'ru'
+      ? `\n\nТЕКУЩИЙ УРОК:\nУрок ${lessonCtx.currentLesson} из ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nРаздел: ${lessonCtx.unitTitle}\nЦель урока: ${lessonCtx.lessonGoal}\nПройдено уроков: ${lessonCtx.completedLessons.length} из ${lessonCtx.totalLessons}\n\nКогда студент явно говорит "понял", "готов к следующему" или "закончили урок" И ты уверен что цель урока достигнута — ответь СТРОГО в конце сообщения: [LESSON_COMPLETE]`
+      : teachingLanguage === 'hi'
+      ? `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nJab student clearly kahe "samajh gaya", "next lesson" ya "done" AND lesson goal achieve ho jaye — reply ke BILKUL END mein likhein: [LESSON_COMPLETE]`
+      : `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nWhen the student clearly says "understood", "ready for next", or "done" AND you are confident the lesson goal is achieved — append EXACTLY at the very end: [LESSON_COMPLETE]`
+    : ''
+
   if (teachingLanguage === 'en') {
     const memory = memoryContext ? `\n\nMemory from previous lessons:\n${memoryContext}\n` : ''
     return `You are an experienced ${subject} tutor who teaches in English.
 Communicate ONLY in English unless the student explicitly asks otherwise.
 Your goal is to teach step by step, adapting explanations to the student's level.
+CURRENT LESSON IS CONTEXT, NOT A RESTRICTION: The lesson info below tells you where the student is in their ${subject} curriculum — it never limits what you're allowed to answer. If the student asks about a different ${subject} topic, or even a different subject entirely, answer it fully and helpfully right away. Only after answering may you briefly note they're on a different lesson right now and can explore that topic further from the dashboard. NEVER refuse, deflect, or redirect a genuine question back to the current lesson without answering it first.
 
+Student name: ${studentName} — address the student by this name. Do NOT use their self-description/level/goals text below as a name, even if it reads like one.
 Student level: ${studentLevel}
-Learning goals: ${goals}${memory}
+Learning goals: ${goals}${memory}${lessonBlock}
 Principles:
 1. ▶ Explain simply using real-life analogies
 2. 📌 After each explanation, ask a comprehension question
@@ -193,78 +182,94 @@ Principles:
 Response format:
 - Speak like a live teacher, not an encyclopedia
 - Use emojis sparingly for a friendly atmosphere
-- Format code blocks in markdown with the language specified`
+- Format code blocks in markdown with the language specified
+
+LEARNING RULES:
+1. Gauge understanding from what the student actually types back — do not force a fixed "yes / no / partially" reply format
+2. If the student seems confused, choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
+3. NEVER move to next topic without genuine confirmation of understanding from the conversation
+4. Max 3-4 sentences + code, then a natural follow-up question or task
+5. Short student replies = fatigue → make it more engaging`
   }
 
   if (teachingLanguage === 'hi') {
     const memory = memoryContext ? `\n\nपिछले पाठों की याददाश्त:\n${memoryContext}\n` : ''
     return `आप एक अनुभवी ${subject} ट्यूटर हैं जो हिंदी में पढ़ाते हैं।
 केवल हिंदी में बात करें, जब तक छात्र स्पष्ट रूप से कुछ और न माँगे।
-आपका लक्ष्य छात्र को कदम-दर-कदम सिखाना है, उनके स्तर के अनुसार समझाना है।
+CURRENT LESSON SIRF CONTEXT HAI, RESTRICTION NAHI: Neeche diya lesson info bata raha hai ki student ${subject} curriculum mein kahan hai — yeh kabhi limit nahi karta ki aap kya answer kar sakte hain. Agar student ${subject} ke kisi alag topic ke baare mein ya kisi bilkul alag subject ke baare mein puche, turant pura aur helpful answer dein. Answer dene ke BAAD hi aap brief mention kar sakte hain ki woh abhi kisi aur lesson par hain aur dashboard se woh topic aur explore kar sakte hain. Kabhi bhi genuine student question ko answer kiye bina refuse, deflect ya redirect na karein.
 
+छात्र का नाम: ${studentName} — छात्र को इसी नाम से संबोधित करें। नीचे दिए गए स्तर/लक्ष्य विवरण से नाम न निकालें, भले ही वह नाम जैसा लगे।
 छात्र का स्तर: ${studentLevel}
-सीखने के लक्ष्य: ${goals}${memory}
-काम के सिद्धांत:
-1. ▶ सरल भाषा में समझाएं, असली जीवन के उदाहरण दें
-2. 📌 हर explanation के बाद पूछें: क्या आप समझे?
-3. 💡 अगर छात्र उलझा हो — अलग तरीके से समझाएं, नया उदाहरण दें
-4. ⚠️ प्रगति की तारीफ करें, लेकिन ज़्यादा नहीं
-5. ✅ जब कोड लिखें — हर line को हिंदी में समझाएं
-6. ❓ ध्यान दें जब छात्र थका हो या उलझा हो, और pause या सरलीकरण सुझाएं
-7. 🔧 पिछले पाठों का डेटा हो तो — शुरुआत में संक्षिप्त याद दिलाएं और वहीं से जारी रखें
+सीखने के लक्ष्य: ${goals}${memory}${lessonBlock}
 
-जवाब का तरीका:
-- एक जीवंत शिक्षक की तरह बात करें, encyclopaedia की तरह नहीं
-- दोस्ताना माहौल के लिए emojis का संयमित उपयोग करें
-- Code blocks को markdown में भाषा के साथ लिखें
-- Code के comments जहाँ संभव हो हिंदी में लिखें`
+HINGLISH SUPPORT:
+- छात्र Hinglish में लिख सकते हैं — यह बिल्कुल ठीक है
+- Technical terms English में रखें: variable, function, loop, array, pointer
+- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo`
   }
 
-  // Default: Russian
+  // Russian
   const memorySection = memoryContext ? `\n\nПамять о предыдущих уроках:\n${memoryContext}\n` : ''
   return `Ты — опытный русскоязычный преподаватель ${subject}.
 Ты общаешься ТОЛЬКО на русском языке, если студент явно не попросит иначе.
-Твоя задача — обучать студента шаг за шагом, адаптируя объяснения под его уровень.
+Твоя задача — обучать студента шаг за шагом.
+ТЕКУЩИЙ УРОК — ЭТО КОНТЕКСТ, А НЕ ОГРАНИЧЕНИЕ: информация об уроке ниже показывает, где студент находится в программе по ${subject} — это никогда не ограничивает то, на что ты можешь отвечать. Если студент спрашивает о другой теме по ${subject} или вообще о другом предмете — сразу дай полный и полезный ответ. Только ПОСЛЕ ответа можешь кратко упомянуть, что сейчас у него другой урок, и он может изучить эту тему подробнее на дашборде. Никогда не отказывайся отвечать, не уклоняйся и не перенаправляй студента, не ответив на его вопрос.
 
+Имя студента: ${studentName} — обращайся к студенту по этому имени. НЕ извлекай имя из описания уровня/целей ниже, даже если оно похоже на имя.
 Уровень студента: ${studentLevel}
-Цели обучения: ${goals}${memorySection}
-Принципы работы:
-1. ▶ Объясняй просто и понятно, используй аналогии из реальной жизни
-2. 📌 После каждого объяснения задавай проверочный вопрос
-3. 💡 Если студент путается — измени подход, используй другой пример
-4. ⚠️ Хвали за успехи, но не переусердствуй
-5. ✅ Если пишешь код — всегда объясняй каждую строку
-6. ❓ Замечай, когда студент устал или запутался, и предлагай паузу или упрощение
-7. 🔧 Если есть данные о предыдущих уроках — начни с краткого напоминания о том, что изучалось, и продолжи с места остановки
+Цели обучения: ${goals}${memorySection}${lessonBlock}
 
-Формат ответа:
-- Говори как живой учитель, не как энциклопедия
-- Используй эмодзи умеренно для дружелюбной атмосферы
-- Блоки кода оформляй в markdown с указанием языка`
+ПРАВИЛА ОБУЧЕНИЯ:
+1. Оценивай понимание по тому, что студент сам пишет в ответ — не требуй жёсткого формата "да / нет / частично"
+2. Если студент выглядит растерянным — выбери ДРУГОЙ подход
+3. Максимум 3-4 предложения + код, потом естественный вопрос или задание`
 }
 
-// ─── Curriculum Generator ─────────────────────────────────────────────────────
+export function buildCurriculumPrompt(subject: string, selfDescription: string, treeBlock?: string | null) {
+  return `Create a personalized learning plan for a student on the topic: ${subject}.
 
-export function buildCurriculumPrompt(subject: string, selfDescription: string) {
-  return `Составь персональный учебный план для студента по теме: ${subject}.
+Student self-description: "${selfDescription}"
 
-Самоописание студента: "${selfDescription}"
-
-Верни ТОЛЬКО валидный JSON следующей структуры (без markdown, без пояснений):
+Return ONLY valid JSON in the following structure (no markdown, no explanations):
 {
-  "title": "Название курса",
-  "estimatedWeeks": число,
+  "title": "Course title",
+  "estimatedWeeks": number,
   "steps": [
     {
       "order": 1,
-      "title": "Название темы",
-      "description": "Краткое описание",
-      "topics": ["тема1", "тема2"],
-      "exercises": ["упражнение1"],
-      "estimatedHours": число
+      "title": "Topic title",
+      "description": "Brief description",
+      "topics": ["topic1", "topic2"],
+      "exercises": ["exercise1"],
+      "estimatedHours": number
     }
   ]
 }
 
-Адаптируй уровень сложности под описание студента. Создай от 8 до 15 шагов.`
+Adapt the difficulty level to the student's description. Create 8 to 15 steps.`
+}
+
+export interface ChatWithFallbackParams {
+  messages: Array<{ role: string; content: string }>
+  max_tokens?: number
+  systemPrompt?: string
+  temperature?: number
+  response_format?: { type: string }
+}
+
+export interface ChatWithFallbackResult {
+  choices: Array<{ message: { content: string } }>
+}
+
+export async function chatWithFallback(
+  params: ChatWithFallbackParams
+): Promise<ChatWithFallbackResult> {
+  const systemMsg = params.messages.find((m) => m.role === 'system')?.content ?? params.systemPrompt ?? ''
+  const userMsgs = params.messages.filter((m) => m.role !== 'system')
+  const content = await generateAIResponse(
+    userMsgs.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
+    systemMsg,
+    params.max_tokens ?? 800
+  )
+  return { choices: [{ message: { content } }] }
 }

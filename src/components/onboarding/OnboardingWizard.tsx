@@ -1,40 +1,28 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Check, Play } from 'lucide-react'
-import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
-import { VOICE_SETTINGS, speakText } from '@/lib/tts'
-import type { TeachingLang } from '@/lib/tts'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import { speakText } from '@/lib/tts'
+import type { TeachingLang, VoiceType } from '@/lib/tts'
+import { useCountry } from '@/components/Providers'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
+import { CandyPage } from '@/components/ui/candy'
 
-const SUBJECTS = [
-  { slug: 'c',       icon: 'C',   accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)',  desc: 'Системное программирование · Память · Скорость' },
-  { slug: 'cpp',     icon: 'C++', accent: '#79C0FF', subAccent: 'rgba(121,192,255,0.08)', desc: 'ООП · STL · Высокая производительность' },
-  { slug: 'python',  icon: '🐍',  accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)',  desc: 'Быстрый старт · Читаемость · Универсальность' },
-  { slug: 'english', icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)',  desc: 'IT English · Документация · Коммуникация' },
+// Mirrors the current EDUCATIONAL_BRAIN_SUBJECTS rollout gate
+// (src/lib/curriculum/subjectRollout.ts) — kept in sync so the fallback
+// shown before /api/subjects/library responds never flashes a subject the
+// live registry would filter out.
+const FALLBACK_SUBJECTS = [
+  { id: 'english',     slug: 'english',     name: 'English',     icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
+  { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
+  { id: 'physics',     slug: 'physics',     name: 'Physics',     icon: '⚛️',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
 ]
-
-const TEACHING_LANGS: { key: TeachingLang; icon: string; accent: string; subAccent: string }[] = [
-  { key: 'ru', icon: '🇷🇺', accent: '#F78166', subAccent: 'rgba(247,129,102,0.1)'  },
-  { key: 'en', icon: '🇬🇧', accent: '#79C0FF', subAccent: 'rgba(121,192,255,0.08)' },
-  { key: 'hi', icon: '🇮🇳', accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)'  },
-]
-
-const LANG_LABEL_KEY = {
-  ru: 'ob_lang_ru',
-  en: 'ob_lang_en',
-  hi: 'ob_lang_hi',
-} as const
-
-const LANG_DESC_KEY = {
-  ru: 'ob_lang_ru_desc',
-  en: 'ob_lang_en_desc',
-  hi: 'ob_lang_hi_desc',
-} as const
 
 const VOICES = [
-  { key: 'male',   labelKey: 'voice_male'   as const, icon: '👨‍🏫', pitch: 0.75, rate: 0.85 },
-  { key: 'female', labelKey: 'voice_female' as const, icon: '👩‍🏫', pitch: 1.25, rate: 0.9  },
-  { key: 'warm',   labelKey: 'voice_warm'   as const, icon: '😊',   pitch: 1.0,  rate: 0.87 },
+  { key: 'male',   labelKey: 'voice_male'   as const, icon: '👨‍🏫' },
+  { key: 'female', labelKey: 'voice_female' as const, icon: '👩‍🏫' },
+  { key: 'warm',   labelKey: 'voice_warm'   as const, icon: '😊'  },
 ]
 
 const PREVIEW_TEXT: Record<TeachingLang, string> = {
@@ -44,62 +32,142 @@ const PREVIEW_TEXT: Record<TeachingLang, string> = {
 }
 
 const PLACEHOLDER_CYCLE = [
-  'Я никогда не программировал, хочу начать с нуля...',
-  'Знаю основы Python, хочу перейти на C...',
-  'Учил C в университете но многое забыл...',
+  'I have never programmed before, want to start from scratch...',
+  'I know basic Python, want to move to C...',
+  'Studied C at university but forgot a lot...',
 ]
 
 const STEPS_COUNT = 4
 
+// Mirrors the education board registry (src/lib/education) — kept as a small
+// static list so the full catalog module stays out of the client bundle.
+const SCHOOL_BOARDS = [
+  { id: 'cbse', shortName: 'CBSE', name: 'Central Board of Secondary Education', icon: '🏛️' },
+  { id: 'up_board', shortName: 'UP Board', name: 'Uttar Pradesh Board (UPMSP)', icon: '📚' },
+]
+const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
+
+type LearnerMode = 'school' | 'general' | null
+
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
-  const router = useRouter()
-  const { t, setLang } = useLanguage()
+  const { t } = useLanguage()
+  const { country } = useCountry()
+  const [mode, setMode] = useState<LearnerMode>(null)
+  const [boardId, setBoardId] = useState('')
+  const [grade, setGrade] = useState<number | null>(null)
+  const [schoolStep, setSchoolStep] = useState(1) // 1 = board, 2 = grade
   const [step, setStep] = useState(1)
-  const [subjectSlug, setSubjectSlug] = useState('')
-  const [teachingLang, setTeachingLang] = useState<TeachingLang>('ru')
+  const [subjects, setSubjects] = useState<{ id: string; slug: string; name: string; icon?: string }[]>(FALLBACK_SUBJECTS)
+  const [subjectSlugs, setSubjectSlugs] = useState<string[]>([])
+  const [skillLevel, setSkillLevel] = useState<SkillLevel | ''>('')
   const [description, setDescription] = useState('')
-  const [voiceKey, setVoiceKey] = useState('male')
+  const [voiceKey, setVoiceKey] = useState('female')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [placeholderIdx, setPlaceholderIdx] = useState(0)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  // Derive teaching language from country selection
+  const teachingLang: TeachingLang = country === 'ru' ? 'ru' : country === 'in' ? 'hi' : 'en'
+
+  useEffect(() => {
+    // Fetch the full Subject Library (not just the legacy 4-subject /api/subjects)
+    // so every catalog entry — languages, programming, mathematics, sciences — is
+    // selectable at onboarding and resolves correctly against /api/onboarding.
+    fetch('/api/subjects/library').then(r => r.json()).then((data: { success?: boolean; categories?: { subjects: { slug: string; name: string; icon?: string }[] }[] }) => {
+      if (data?.success && Array.isArray(data.categories)) {
+        const flat = data.categories.flatMap((c) => c.subjects.map((s) => ({ id: s.slug, slug: s.slug, name: s.name, icon: s.icon })))
+        if (flat.length > 0) setSubjects(flat)
+      }
+    }).catch(() => {})
+  }, [])
 
   useEffect(() => {
     const id = setInterval(() => setPlaceholderIdx((i) => (i + 1) % PLACEHOLDER_CYCLE.length), 3000)
     return () => clearInterval(id)
   }, [])
 
-  const canProceed1 = subjectSlug !== ''
+  const canProceed1 = subjectSlugs.length > 0
+
+  function toggleSubject(slug: string) {
+    setSubjectSlugs((prev) => prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug])
+  }
+  const canProceed2 = skillLevel !== ''
   const canProceed3 = description.trim().length >= 20
+
+  // Tri-lingual inline label helper (same pattern as the level step below)
+  const L = (en: string, hi: string, ru: string) => (teachingLang === 'hi' ? hi : teachingLang === 'ru' ? ru : en)
+
+  async function handleSchoolFinish(selectedGrade: number) {
+    setGrade(selectedGrade)
+    setLoading(true); setError('')
+    try {
+      const res = await fetch('/api/onboarding', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userType: 'SCHOOL_STUDENT',
+          board: boardId,
+          grade: selectedGrade,
+          teachingLanguage: teachingLang,
+        }),
+      })
+      const data = await res.json()
+      if (!data.success) {
+        setError(data.error ?? t('ob_error_generic'))
+        setLoading(false); return
+      }
+      window.location.href = '/dashboard'
+    } catch {
+      setError(t('ob_error_network'))
+      setLoading(false)
+    }
+  }
 
   async function handleFinish() {
     setLoading(true); setError('')
-    const res = await fetch('/api/onboarding', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        subjectSlug,
-        selfDescription: description.trim(),
-        voiceChoice: voiceKey,
-        teachingLanguage: teachingLang,
-      }),
-    })
-    const data = await res.json()
-    if (!data.success) {
-      setError(data.error ?? 'Не удалось сохранить. Попробуй ещё раз.')
-      setLoading(false); return
+    try {
+      const res = await fetch('/api/onboarding', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subjectSlugs,
+          currentLevel: skillLevel || 'beginner',
+          selfDescription: description.trim(),
+          voiceChoice: voiceKey,
+          teachingLanguage: teachingLang,
+        }),
+      })
+      const data = await res.json()
+      if (!data.success) {
+        setError(data.error ?? t('ob_error_generic'))
+        setLoading(false); return
+      }
+      window.location.href = '/dashboard'
+    } catch {
+      setError(t('ob_error_network'))
+      setLoading(false)
     }
-    window.location.href = '/dashboard'
   }
 
   function handleVoicePreview(v: typeof VOICES[0]) {
-    speakText(PREVIEW_TEXT[teachingLang], { pitch: v.pitch, rate: v.rate }, undefined, teachingLang)
+    speakText(PREVIEW_TEXT[teachingLang], teachingLang, v.key as VoiceType, undefined, country)
   }
 
-  const progressPct = ((step - 1) / (STEPS_COUNT - 1)) * 100
+  // Path-aware progress: school = type + board + grade (3); general = type + 4 legacy steps (5)
+  const totalSteps = mode === 'school' ? 3 : mode === 'general' ? STEPS_COUNT + 1 : 3
+  const currentStep = mode === null ? 1 : mode === 'school' ? 1 + schoolStep : 1 + step
+  const progressPct = ((currentStep - 1) / (totalSteps - 1)) * 100
+
+  const SUBJ_ICON: Record<string, string> = { c: 'C', cpp: 'C++', python: '🐍', english: '🇬🇧' }
+  const SUBJ_ACCENT: Record<string, string> = { c: '#F78166', cpp: '#79C0FF', python: '#56D364', english: '#E3B341' }
+  const SUBJ_SUB: Record<string, string> = {
+    c: 'rgba(247,129,102,0.1)', cpp: 'rgba(121,192,255,0.08)',
+    python: 'rgba(86,211,100,0.08)', english: 'rgba(227,179,65,0.08)',
+  }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-base)' }}>
+    <CandyPage legacy className="flex flex-col">
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--border-default)' }}>
@@ -107,107 +175,214 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           <span>🔥</span>
           <span className="font-bold text-sm" style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-heading)' }}>My Tutor</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
-            {t('ob_step')} {step} {t('ob_of')} {STEPS_COUNT}
+            {t('ob_step')} {currentStep} {t('ob_of')} {totalSteps}
           </span>
-          <LanguageToggle />
+          <ThemeToggle />
         </div>
       </div>
 
       {/* Progress bar */}
       <div className="h-[3px]" style={{ background: 'var(--bg-elevated)' }}>
         <div className="h-full transition-all duration-500 ease-out"
-          style={{ width: `${progressPct + 100 / STEPS_COUNT}%`, background: 'var(--accent-primary)' }} />
+          style={{ width: `${progressPct + 100 / totalSteps}%`, background: 'var(--accent-primary)' }} />
       </div>
 
       {/* Content */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-lg">
 
-          {/* Step 1 — Subject */}
-          {step === 1 && (
+          {/* Step 0 — Who are you? */}
+          {mode === null && (
             <div className="animate-scale-in">
-              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s1_title')}</h1>
-              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {SUBJECTS.map((s) => {
-                  const selected = subjectSlug === s.slug
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {L(userName ? `Hi ${userName}! Who are you?` : 'Who are you?', userName ? `नमस्ते ${userName}! आप कौन हैं?` : 'आप कौन हैं?', userName ? `Привет, ${userName}! Кто вы?` : 'Кто вы?')}
+              </h1>
+              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
+                {L('We’ll personalize everything around your answer.', 'हम आपके उत्तर के अनुसार सब कुछ व्यक्तिगत बनाएंगे।', 'Мы персонализируем всё под ваш ответ.')}
+              </p>
+              {/* School Student onboarding path intentionally hidden from the
+                  UI (presentation layer only — the mode==='school' steps
+                  below, /api/onboarding, and School Mode itself are untouched). */}
+              <div className="space-y-4 mb-2">
+                <button onClick={() => setMode('general')}
+                  className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', minHeight: 88 }}>
+                  <span className="text-3xl shrink-0">🚀</span>
+                  <div>
+                    <div className="font-bold text-base" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                      {L('General Learner', 'सामान्य शिक्षार्थी', 'Самообучение')}
+                    </div>
+                    <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                      {L('I want to learn programming, languages and more', 'मैं प्रोग्रामिंग, भाषाएँ और बहुत कुछ सीखना चाहता/चाहती हूँ', 'Хочу изучать программирование, языки и многое другое')}
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* School Step 1 — Board */}
+          {mode === 'school' && schoolStep === 1 && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {L('Choose your curriculum', 'अपना बोर्ड चुनें', 'Выберите программу')}
+              </h1>
+              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
+                {L('Which board does your school follow?', 'आपका स्कूल किस बोर्ड का पालन करता है?', 'Какой программе следует ваша школа?')}
+              </p>
+              <div className="space-y-4 mb-8">
+                {SCHOOL_BOARDS.map((b) => {
+                  const selected = boardId === b.id
                   return (
-                    <button key={s.slug} onClick={() => setSubjectSlug(s.slug)}
-                      className="p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5 relative"
+                    <button key={b.id} onClick={() => { setBoardId(b.id); setSchoolStep(2) }}
+                      className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
                       style={{
-                        background: selected ? s.subAccent : 'var(--bg-surface)',
-                        border: `1px solid ${selected ? s.accent : 'var(--border-default)'}`,
-                        boxShadow: selected ? `0 0 20px ${s.accent}20` : 'none',
-                        minHeight: 120,
+                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
+                        border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                        minHeight: 88,
                       }}>
-                      {selected && (
-                        <div className="absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center"
-                          style={{ background: s.accent }}>
-                          <Check size={11} strokeWidth={3} color="#fff" />
-                        </div>
-                      )}
-                      <div className="text-2xl mb-3 font-black" style={{ color: s.slug === 'c' || s.slug === 'cpp' ? s.accent : undefined }}>{s.icon}</div>
-                      <div className="font-bold text-sm mb-1" style={{ color: selected ? s.accent : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                        {s.slug === 'c' ? 'C' : s.slug === 'cpp' ? 'C++' : s.slug === 'python' ? 'Python' : 'English'}
+                      <span className="text-3xl shrink-0">{b.icon}</span>
+                      <div>
+                        <div className="font-bold text-base" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{b.shortName}</div>
+                        <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{b.name}</div>
                       </div>
-                      <div className="text-xs leading-snug" style={{ color: 'var(--text-secondary)' }}>{s.desc}</div>
                     </button>
                   )
                 })}
               </div>
-              <button onClick={() => setStep(2)} disabled={!canProceed1} className="btn-primary w-full py-3.5 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
-                {t('ob_next')}
+              <button onClick={() => setMode(null)} className="btn-ghost w-full py-3">{t('ob_back')}</button>
+            </div>
+          )}
+
+          {/* School Step 2 — Grade */}
+          {mode === 'school' && schoolStep === 2 && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {L('Which class are you in?', 'आप किस कक्षा में हैं?', 'В каком вы классе?')}
+              </h1>
+              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
+                {L('Tap your class — that’s the last step!', 'अपनी कक्षा चुनें — यह आखिरी कदम है!', 'Выберите класс — это последний шаг!')}
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+                {SCHOOL_GRADES.map((g) => (
+                  <button key={g} onClick={() => handleSchoolFinish(g)} disabled={loading}
+                    className="rounded-2xl font-black text-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
+                    style={{
+                      background: grade === g ? 'var(--coral-muted)' : 'var(--bg-surface)',
+                      border: `1px solid ${grade === g ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                      color: grade === g ? 'var(--accent-primary)' : 'var(--text-primary)',
+                      fontFamily: 'var(--font-heading)',
+                      minHeight: 64,
+                    }}>
+                    {g}
+                  </button>
+                ))}
+              </div>
+              {error && (
+                <div className="mb-4 p-3.5 rounded-xl text-sm"
+                  style={{ background: 'var(--red-muted)', border: '1px solid var(--coral-border)', color: 'var(--red)' }}>
+                  {error}
+                </div>
+              )}
+              <button onClick={() => setSchoolStep(1)} disabled={loading} className="btn-ghost w-full py-3 disabled:opacity-50">
+                {loading ? t('ob_saving') : t('ob_back')}
               </button>
             </div>
           )}
 
-          {/* Step 2 — Teaching language */}
-          {step === 2 && (
+          {/* Step 1 — Subject */}
+          {mode === 'general' && step === 1 && (
             <div className="animate-scale-in">
-              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_lang_title')}</h1>
-              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('ob_lang_sub')}</p>
-              <div className="grid grid-cols-3 gap-4 mb-8">
-                {TEACHING_LANGS.map((l) => {
-                  const selected = teachingLang === l.key
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s1_title')}</h1>
+              <p className={subjectSlugs.length > 0 ? 'text-sm mb-2' : 'text-sm mb-8'} style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
+              {subjectSlugs.length > 0 && (
+                <p className="text-xs mb-6 font-semibold" style={{ color: 'var(--accent-primary)' }}>
+                  {teachingLang === 'ru'
+                    ? `Выбрано: ${subjectSlugs.length}`
+                    : teachingLang === 'hi'
+                    ? `${subjectSlugs.length} चुने गए`
+                    : `${subjectSlugs.length} selected`}
+                </p>
+              )}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {subjects.map((s) => {
+                  const selected = subjectSlugs.includes(s.slug)
+                  const accent = SUBJ_ACCENT[s.slug] ?? '#F78166'
+                  const subAccent = SUBJ_SUB[s.slug] ?? 'rgba(247,129,102,0.1)'
+                  const icon = s.icon ?? SUBJ_ICON[s.slug] ?? s.name
                   return (
-                    <button key={l.key} onClick={() => { setTeachingLang(l.key); setLang(l.key) }}
-                      className="p-5 rounded-2xl text-center transition-all duration-200 hover:-translate-y-0.5 relative flex flex-col items-center gap-3"
+                    <button key={s.slug} onClick={() => toggleSubject(s.slug)}
+                      className="p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5 relative"
                       style={{
-                        background: selected ? l.subAccent : 'var(--bg-surface)',
-                        border: `1px solid ${selected ? l.accent : 'var(--border-default)'}`,
-                        boxShadow: selected ? `0 0 20px ${l.accent}20` : 'none',
+                        background: selected ? subAccent : 'var(--bg-surface)',
+                        border: `1px solid ${selected ? accent : 'var(--border-default)'}`,
+                        boxShadow: selected ? `0 0 20px ${accent}20` : 'none',
                         minHeight: 120,
                       }}>
                       {selected && (
                         <div className="absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center"
-                          style={{ background: l.accent }}>
+                          style={{ background: accent }}>
                           <Check size={11} strokeWidth={3} color="#fff" />
                         </div>
                       )}
-                      <span className="text-3xl">{l.icon}</span>
-                      <div className="font-bold text-sm" style={{ color: selected ? l.accent : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                        {t(LANG_LABEL_KEY[l.key])}
-                      </div>
-                      <div className="text-xs leading-snug" style={{ color: 'var(--text-secondary)' }}>
-                        {t(LANG_DESC_KEY[l.key])}
+                      <div className="text-2xl mb-3 font-black" style={{ color: (s.slug === 'c' || s.slug === 'cpp') ? accent : undefined }}>{icon}</div>
+                      <div className="font-bold text-sm mb-1" style={{ color: selected ? accent : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                        {s.name}
                       </div>
                     </button>
                   )
                 })}
               </div>
               <div className="flex gap-3">
-                <button onClick={() => setStep(1)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
-                <button onClick={() => setStep(3)} className="btn-primary flex-1 py-3.5 font-bold">
+                <button onClick={() => setMode(null)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStep(2)} disabled={!canProceed1} className="btn-primary flex-1 py-3.5 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
                   {t('ob_next')}
                 </button>
               </div>
             </div>
           )}
 
-          {/* Step 3 — Level description */}
-          {step === 3 && (
+          {/* Step 2 — Current skill level (drives curriculum generation) */}
+          {mode === 'general' && step === 2 && (
+            <div className="animate-scale-in">
+              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+                {teachingLang === 'ru' ? 'Какой у вас текущий уровень?' : 'What is your current level?'}
+              </h1>
+              <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+                {teachingLang === 'ru' ? 'Это поможет построить персональную программу обучения.' : 'This helps us build your personalized learning roadmap.'}
+              </p>
+              <div className="space-y-2.5 mb-6">
+                {SKILL_LEVELS.map((lvl) => {
+                  const selected = skillLevel === lvl.key
+                  return (
+                    <button key={lvl.key} onClick={() => setSkillLevel(lvl.key)}
+                      className="w-full flex flex-col items-start gap-0.5 p-4 rounded-xl text-left transition-all duration-200"
+                      style={{
+                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
+                        border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
+                        boxShadow: selected ? 'var(--coral-glow)' : 'none',
+                      }}>
+                      <span className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                        {lvl.label}
+                      </span>
+                      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{lvl.description}</span>
+                    </button>
+                  )
+                })}
+              </div>
+              <div className="flex gap-3">
+                <button onClick={() => setStep(1)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStep(3)} disabled={!canProceed2} className="btn-primary flex-1 py-3 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                  {t('ob_next')}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3 — Self description */}
+          {mode === 'general' && step === 3 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s2_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s2_sub')}</p>
@@ -242,7 +417,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
 
           {/* Step 4 — Voice */}
-          {step === 4 && (
+          {mode === 'general' && step === 4 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s3_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s3_sub')}</p>
@@ -253,22 +428,25 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                     <button key={v.key} onClick={() => setVoiceKey(v.key)}
                       className="w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-200"
                       style={{
-                        background: selected ? 'rgba(247,129,102,0.08)' : 'var(--bg-surface)',
+                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
                         border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                        boxShadow: selected ? '0 0 16px rgba(247,129,102,0.1)' : 'none',
+                        boxShadow: selected ? 'var(--coral-glow)' : 'none',
                       }}>
                       <span className="text-2xl w-10 text-center shrink-0">{v.icon}</span>
                       <div className="flex-1 min-w-0">
                         <div className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{t(v.labelKey)}</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button
+                        <span
+                          role="button"
+                          tabIndex={0}
                           onClick={(e) => { e.stopPropagation(); handleVoicePreview(v) }}
-                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors"
+                          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); handleVoicePreview(v) } }}
+                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer"
                           style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-default)' }}
                           title={t('ob_s3_preview')}>
                           <Play size={10} fill="currentColor" strokeWidth={0} /> ▶
-                        </button>
+                        </span>
                         <div className="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all"
                           style={{ borderColor: selected ? 'var(--accent-primary)' : 'var(--text-dim)', background: selected ? 'var(--accent-primary)' : 'transparent' }}>
                           {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -281,7 +459,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
 
               {error && (
                 <div className="mb-4 p-3.5 rounded-xl text-sm"
-                  style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.2)', color: '#F85149' }}>
+                  style={{ background: 'var(--red-muted)', border: '1px solid var(--coral-border)', color: 'var(--red)' }}>
                   {error}
                 </div>
               )}
@@ -296,6 +474,6 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
         </div>
       </div>
-    </div>
+    </CandyPage>
   )
 }

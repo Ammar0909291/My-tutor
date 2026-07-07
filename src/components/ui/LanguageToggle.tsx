@@ -11,27 +11,42 @@ interface LangContextValue {
 }
 
 const LangContext = createContext<LangContextValue>({
-  lang: 'ru',
+  lang: 'en',
   setLang: () => {},
-  t: (key) => translations.ru[key] ?? key,
+  t: (key) => translations.en[key] ?? key,
 })
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('ru')
+  const [mounted, setMounted] = useState(false)
+  const [lang, setLangState] = useState<Lang>('en')
 
   useEffect(() => {
-    const stored = localStorage.getItem('mt_lang') as Lang | null
-    if (stored === 'ru' || stored === 'en' || stored === 'hi') setLangState(stored)
+    const stored = localStorage.getItem('mytutor_lang') as Lang | null
+    if (stored && ['ru', 'en', 'hi'].includes(stored)) setLangState(stored)
+    setMounted(true)
   }, [])
 
-  function setLang(l: Lang) {
-    setLangState(l)
-    localStorage.setItem('mt_lang', l)
+  const effectiveLang = mounted ? lang : 'en'
+
+  const setLang = (newLang: Lang) => {
+    setLangState(newLang)
+    localStorage.setItem('mytutor_lang', newLang)
+    fetch('/api/settings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ teachingLanguage: newLang }),
+    }).catch(() => {})
   }
 
-  const t = (key: TranslationKey) => tFn(lang, key)
+  const t = (key: TranslationKey): string => {
+    return tFn(effectiveLang, key)
+  }
 
-  return <LangContext.Provider value={{ lang, setLang, t }}>{children}</LangContext.Provider>
+  return (
+    <LangContext.Provider value={{ lang: effectiveLang, setLang, t }}>
+      {children}
+    </LangContext.Provider>
+  )
 }
 
 export function useLanguage() {
@@ -40,11 +55,16 @@ export function useLanguage() {
 
 export function LanguageToggle({ className = '' }: { className?: string }) {
   const { lang, setLang } = useLanguage()
+  // Mounted guard: server always renders lang='en'; the active highlight is only
+  // applied after hydration so SSR and client markup match (no hydration error).
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+  const active = mounted ? lang : 'en'
   return (
     <div className={`lang-toggle ${className}`}>
-      <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => setLang('ru')}>RU</button>
-      <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
-      <button className={`lang-btn ${lang === 'hi' ? 'active' : ''}`} onClick={() => setLang('hi')}>HI</button>
+      <button className={`lang-btn ${active === 'ru' ? 'active' : ''}`} onClick={() => setLang('ru')}>RU</button>
+      <button className={`lang-btn ${active === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
+      <button className={`lang-btn ${active === 'hi' ? 'active' : ''}`} onClick={() => setLang('hi')}>HI</button>
     </div>
   )
 }

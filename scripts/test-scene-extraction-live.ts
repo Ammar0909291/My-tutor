@@ -1,0 +1,184 @@
+/**
+ * LIVE-GROQ extraction harness — NEEDS a real GROQ_API_KEY and a Groq-reachable
+ * network (e.g. run from India; the dev sandbox blocks api.groq.com → it will
+ * report the calls returned null and exit non-zero, which is EXPECTED there).
+ *
+ * Purpose: a single, direct before/after for the THREE cases the free-form Part 2
+ * generator got wrong tonight. For each EXACT probe text it:
+ *   1. routes it (deterministic, offline) to a generator,
+ *   2. runs that generator's extractX() (LLM — reads parameters from the text),
+ *   3. builds the scene deterministically + runs the consistency checker,
+ *   4. prints OLD free-form failure vs NEW parameter-driven result.
+ *
+ * The geometry correctness is already proven offline (see test-projectile/
+ * triangle/molecule-scene.ts). What THIS harness validates that those cannot is
+ * the one remaining network-dependent link: does the LLM reliably EXTRACT the
+ * right parameters (45°/10 m/s, 60°/70°, "water") from real explanation text?
+ *
+ * Run with:  npx tsx scripts/test-scene-extraction-live.ts
+ */
+
+import { routeSceneGenerator } from '../src/lib/teaching/sceneGenerators/sceneRouter'
+import { extractProjectileParams, buildProjectileScene, checkProjectileConsistency } from '../src/lib/teaching/sceneGenerators/projectileMotion'
+import { extractTriangleParams, buildTriangleScene, checkTriangleConsistency } from '../src/lib/teaching/sceneGenerators/triangleAngleSum'
+import { extractMolecule, buildMoleculeScene, checkMoleculeConsistency } from '../src/lib/teaching/sceneGenerators/moleculeGeometry'
+import { extractVectorParams, buildVectorScene, checkVectorConsistency } from '../src/lib/teaching/sceneGenerators/vectorAddition'
+import { extractCircularParams, buildCircularScene, checkCircularConsistency } from '../src/lib/teaching/sceneGenerators/circularMotion'
+import { extractPendulumParams, buildPendulumScene, checkPendulumConsistency } from '../src/lib/teaching/sceneGenerators/pendulumMotion'
+import { extractElement, buildElectronShellScene, checkElectronShellConsistency } from '../src/lib/teaching/sceneGenerators/electronShells'
+import { extractLattice, buildLatticeScene, checkLatticeConsistency } from '../src/lib/teaching/sceneGenerators/crystalLattice'
+import { extractCollisionParams, buildCollisionScene, checkCollisionConsistency } from '../src/lib/teaching/sceneGenerators/momentumCollision'
+
+const PROBE = {
+  projectile: {
+    text: 'When you throw a ball at a 45-degree angle with an initial speed of 10 meters per second, it follows a parabolic trajectory. It starts at the origin, rises to a peak height, then falls back to the ground. The horizontal velocity stays constant the whole time, while gravity continuously slows the vertical velocity until it reverses.',
+    oldFailure: 'free-form generator produced a NON-parabolic trajectory',
+    expect: 'angle≈45°, speed≈10 m/s → parabola correct by construction',
+  },
+  triangle: {
+    text: 'Consider a triangle with vertices at A, B, and C. The three interior angles of any triangle always add up to 180 degrees. If angle A is 60 degrees and angle B is 70 degrees, then angle C must be 50 degrees, since 60 plus 70 plus 50 equals 180.',
+    oldFailure: 'free-form generator placed vertices that did NOT match the claimed angles',
+    expect: 'A≈60°, B≈70° → vertices realise 60/70/50°, sum 180°',
+  },
+  molecule: {
+    text: 'A covalent bond forms when two atoms share a pair of electrons. Take a water molecule: the oxygen atom shares one electron pair with each of two hydrogen atoms, forming two single covalent bonds. The shared electrons sit between the two nuclei, holding the atoms together.',
+    oldFailure: 'free-form generator drew a LINEAR water molecule instead of bent ~104.5°',
+    expect: 'molecule=water → bent, 104.5° bond angle by construction',
+  },
+}
+
+async function main() {
+  console.log('\n=== LIVE-GROQ extraction before/after harness (needs Groq-reachable network) ===\n')
+  let anyNull = false
+
+  // ── Projectile ──
+  console.log('############ CASE 1: PROJECTILE MOTION')
+  console.log(`ROUTE: ${routeSceneGenerator(PROBE.projectile.text)}`)
+  console.log(`OLD (free-form): ${PROBE.projectile.oldFailure}`)
+  const pParams = await extractProjectileParams(PROBE.projectile.text)
+  if (!pParams) { anyNull = true; console.log('NEW: extractProjectileParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(pParams)}`)
+    const spec = buildProjectileScene(pParams)
+    const c = checkProjectileConsistency(spec, pParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (parabolic by construction)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log(`EXPECT: ${PROBE.projectile.expect}`)
+  }
+
+  // ── Triangle ──
+  console.log('\n############ CASE 2: TRIANGLE ANGLE SUM')
+  console.log(`ROUTE: ${routeSceneGenerator(PROBE.triangle.text)}`)
+  console.log(`OLD (free-form): ${PROBE.triangle.oldFailure}`)
+  const tParams = await extractTriangleParams(PROBE.triangle.text)
+  if (!tParams) { anyNull = true; console.log('NEW: extractTriangleParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(tParams)}`)
+    const spec = buildTriangleScene(tParams)
+    const c = checkTriangleConsistency(spec, tParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (vertices realise the stated angles, sum 180°)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log(`EXPECT: ${PROBE.triangle.expect}`)
+  }
+
+  // ── Molecule ──
+  console.log('\n############ CASE 3: COVALENT BOND / MOLECULE GEOMETRY')
+  console.log(`ROUTE: ${routeSceneGenerator(PROBE.molecule.text)}`)
+  console.log(`OLD (free-form): ${PROBE.molecule.oldFailure}`)
+  const mDef = await extractMolecule(PROBE.molecule.text)
+  if (!mDef) { anyNull = true; console.log('NEW: extractMolecule returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted molecule: ${mDef.name} (${mDef.geometry}, ${mDef.bondAngle}°)`)
+    const spec = buildMoleculeScene(mDef)
+    const c = checkMoleculeConsistency(spec, mDef)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (bent 104.5°, not linear)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log(`EXPECT: ${PROBE.molecule.expect}`)
+  }
+
+  // ── Vector addition (NOT an original probe case — representative 4th type) ──
+  console.log('\n############ CASE 4: VECTOR ADDITION (representative, not from the original probe)')
+  const vText = 'Add two forces: one of 3 newtons pointing east and one of 4 newtons pointing north. Find the resultant vector.'
+  console.log(`ROUTE: ${routeSceneGenerator(vText)}`)
+  const vParams = await extractVectorParams(vText)
+  if (!vParams) { anyNull = true; console.log('NEW: extractVectorParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(vParams)}`)
+    const spec = buildVectorScene(vParams)
+    const c = checkVectorConsistency(spec, vParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (R = A + B, law-of-cosines verified)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: ~3 east + ~4 north → |R| ≈ 5 at ~53°')
+  }
+
+  // ── Circular motion (representative 5th type, not from the original probe) ──
+  console.log('\n############ CASE 5: UNIFORM CIRCULAR MOTION (representative, not from the original probe)')
+  const cText = 'A stone tied to a string moves in a circle of radius 2 metres at a constant speed of 4 metres per second. Find its centripetal acceleration.'
+  console.log(`ROUTE: ${routeSceneGenerator(cText)}`)
+  const cParams = await extractCircularParams(cText)
+  if (!cParams) { anyNull = true; console.log('NEW: extractCircularParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(cParams)}`)
+    const spec = buildCircularScene(cParams)
+    const c = checkCircularConsistency(spec, cParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (velocity ⊥ radius, a_c = v²/r toward centre)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: r=2, v=4 → a_c = 8 m/s² toward the centre')
+  }
+
+  // ── Pendulum (representative 6th type, not from the original probe) ──────────
+  console.log('\n############ CASE 6: SIMPLE PENDULUM (representative, not from the original probe)')
+  const penText = 'A simple pendulum has a string of length 1 metre and is pulled 20 degrees from the vertical before being released. Describe its swing.'
+  console.log(`ROUTE: ${routeSceneGenerator(penText)}`)
+  const penParams = await extractPendulumParams(penText)
+  if (!penParams) { anyNull = true; console.log('NEW: extractPendulumParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(penParams)}`)
+    const spec = buildPendulumScene(penParams)
+    const c = checkPendulumConsistency(spec, penParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (constant string length, symmetric arc, T=2π√(L/g))' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: L=1, amp=20° → T ≈ 2.01 s, symmetric arc')
+  }
+
+  // ── Electron shells (representative 7th type, not from the original probe) ──
+  console.log('\n############ CASE 7: ELECTRON SHELLS / BOHR MODEL (representative, not from the original probe)')
+  const elText = 'Draw the Bohr-model electron configuration of a sodium atom, showing how its electrons fill the shells.'
+  console.log(`ROUTE: ${routeSceneGenerator(elText)}`)
+  const elDef = await extractElement(elText)
+  if (!elDef) { anyNull = true; console.log('NEW: extractElement returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted element: ${elDef.name} (${elDef.symbol}, Z=${elDef.z}) → shells ${elDef.shells.join(', ')}`)
+    const spec = buildElectronShellScene(elDef)
+    const c = checkElectronShellConsistency(spec, elDef)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (Z electrons total, Bohr–Bury split verified)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: sodium → 2, 8, 1 (11 electrons)')
+  }
+
+  // ── Crystal lattice (representative 8th type, not from the original probe) ──
+  console.log('\n############ CASE 8: CRYSTAL LATTICE / UNIT CELL (representative, not from the original probe)')
+  const latText = 'Sodium chloride crystals are based on a face-centered cubic unit cell. Show the unit cell.'
+  console.log(`ROUTE: ${routeSceneGenerator(latText)}`)
+  const latDef = await extractLattice(latText)
+  if (!latDef) { anyNull = true; console.log('NEW: extractLattice returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted lattice: ${latDef.name} → ${latDef.atomsPerCell} atoms/cell`)
+    const spec = buildLatticeScene(latDef)
+    const c = checkLatticeConsistency(spec, latDef)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (sharing rule re-derives atoms/cell)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: face-centered cubic → 4 atoms/cell')
+  }
+
+  // ── Momentum/collision (representative 9th type, not from the original probe) ─
+  console.log('\n############ CASE 9: 1D MOMENTUM / COLLISION (representative, not from the original probe)')
+  const colText = 'Two trolleys of mass 2 kg and 3 kg move toward each other at 4 m/s and 1 m/s. They collide and stick together. Find their common velocity afterward.'
+  console.log(`ROUTE: ${routeSceneGenerator(colText)}`)
+  const colParams = await extractCollisionParams(colText)
+  if (!colParams) { anyNull = true; console.log('NEW: extractCollisionParams returned null (LLM unreachable or refused).') }
+  else {
+    console.log(`NEW extracted params: ${JSON.stringify(colParams)}`)
+    const spec = buildCollisionScene(colParams)
+    const c = checkCollisionConsistency(spec, colParams)
+    console.log(`NEW consistency check: ${c.ok ? 'PASS (momentum conserved, re-derived from drawn vectors)' : 'FAIL — ' + c.errors.join('; ')}`)
+    console.log('EXPECT: m1=2, u1=4, m2=3, u2=-1, perfectly_inelastic → vf = (2*4+3*-1)/5 = 1 m/s')
+  }
+
+  console.log('\n=== End. If any case shows "returned null", re-run on a Groq-reachable network. ===\n')
+  process.exit(anyNull ? 1 : 0)
+}
+
+main()

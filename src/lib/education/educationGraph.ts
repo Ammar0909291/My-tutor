@@ -3,23 +3,107 @@ import { MATH_KNOWLEDGE_GRAPH } from './mathKnowledgeGraph'
 import { SCIENCE_KNOWLEDGE_GRAPH } from './scienceKnowledgeGraph'
 import { ENGLISH_KNOWLEDGE_GRAPH } from './englishKnowledgeGraph'
 import { SOCIAL_SCIENCE_KNOWLEDGE_GRAPH } from './socialScienceKnowledgeGraph'
+import { HINDI_KNOWLEDGE_GRAPH } from './hindiKnowledgeGraph'
+import { SANSKRIT_KNOWLEDGE_GRAPH } from './sanskritKnowledgeGraph'
+import { ACCOUNTANCY_KNOWLEDGE_GRAPH } from './accountancyKnowledgeGraph'
+import { BUSINESS_STUDIES_KNOWLEDGE_GRAPH } from './businessStudiesKnowledgeGraph'
+import { COMPUTER_SCIENCE_KNOWLEDGE_GRAPH } from './computerScienceKnowledgeGraph'
+import { PHYSICS_KNOWLEDGE_GRAPH } from './physicsKnowledgeGraph'
+import { CHEMISTRY_KNOWLEDGE_GRAPH } from './chemistryKnowledgeGraph'
+import { BIOLOGY_KNOWLEDGE_GRAPH } from './biologyKnowledgeGraph'
+import { ECONOMICS_KNOWLEDGE_GRAPH } from './economicsKnowledgeGraph'
+import { HISTORY_KNOWLEDGE_GRAPH } from './historyKnowledgeGraph'
+import { GEOGRAPHY_KNOWLEDGE_GRAPH } from './geographyKnowledgeGraph'
+import { POLITICAL_SCIENCE_KNOWLEDGE_GRAPH } from './politicalScienceKnowledgeGraph'
+import { INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH } from './informationTechnologyKnowledgeGraph'
+import { SOCIOLOGY_KNOWLEDGE_GRAPH } from './sociologyKnowledgeGraph'
+import { PSYCHOLOGY_KNOWLEDGE_GRAPH } from './psychologyKnowledgeGraph'
+import { URDU_KNOWLEDGE_GRAPH } from './urduKnowledgeGraph'
+import { CBSE_INFORMATION_TECHNOLOGY_CATALOG } from './cbseInformationTechnologyCatalog'
+import { UP_INFORMATION_TECHNOLOGY_CATALOG } from './upInformationTechnologyCatalog'
+import { CBSE_SOCIOLOGY_CATALOG } from './cbseSociologyCatalog'
+import { UP_SOCIOLOGY_CATALOG } from './upSociologyCatalog'
+import { CBSE_PSYCHOLOGY_CATALOG } from './cbsePsychologyCatalog'
+import { UP_PSYCHOLOGY_CATALOG } from './upPsychologyCatalog'
+import { CBSE_URDU_CATALOG } from './cbseUrduCatalog'
+import { UP_URDU_CATALOG } from './upUrduCatalog'
+import { CBSE_ACCOUNTANCY_CATALOG } from './cbseAccountancyCatalog'
+import { UP_ACCOUNTANCY_CATALOG } from './upAccountancyCatalog'
+import { CBSE_BUSINESS_STUDIES_CATALOG } from './cbseBusinessStudiesCatalog'
+import { UP_BUSINESS_STUDIES_CATALOG } from './upBusinessStudiesCatalog'
+import { CBSE_COMPUTER_SCIENCE_CATALOG } from './cbseComputerScienceCatalog'
+import { UP_COMPUTER_SCIENCE_CATALOG } from './upComputerScienceCatalog'
 import { UP_MATH_CATALOG } from './upMathCatalog'
-import { UP_SCIENCE_CATALOG } from './upScienceCatalog'
 import { UP_ENGLISH_CATALOG } from './upEnglishCatalog'
-import { UP_SOCIAL_SCIENCE_CATALOG } from './upSocialScienceCatalog'
+import { UP_HINDI_CATALOG } from './upHindiCatalog'
+import { UP_SANSKRIT_CATALOG } from './upSanskritCatalog'
+import { CBSE_MATH_CATALOG } from './cbseMathCatalog'
+import { CBSE_ENGLISH_CATALOG } from './cbseEnglishCatalog'
+import { CBSE_HINDI_CATALOG } from './cbseHindiCatalog'
+import { CBSE_SANSKRIT_CATALOG } from './cbseSanskritCatalog'
+// Sprint DC: senior-secondary streams are owned by standalone subjects; the
+// bundled Science/SST catalogs are trimmed to grades 5–10 in BOARD_CATALOGS.
+import {
+  CBSE_SCIENCE_CATALOG_5_10,
+  CBSE_SOCIAL_SCIENCE_CATALOG_5_10,
+  UP_SCIENCE_CATALOG_5_10,
+  UP_SOCIAL_SCIENCE_CATALOG_5_10,
+  CBSE_STREAM_CATALOGS,
+  UP_STREAM_CATALOGS,
+} from './streamCatalogs'
 
 export const ALL_KG_NODES: KnowledgeNode[] = [
   ...MATH_KNOWLEDGE_GRAPH,
   ...SCIENCE_KNOWLEDGE_GRAPH,
   ...ENGLISH_KNOWLEDGE_GRAPH,
   ...SOCIAL_SCIENCE_KNOWLEDGE_GRAPH,
+  ...HINDI_KNOWLEDGE_GRAPH,
+  ...SANSKRIT_KNOWLEDGE_GRAPH,
+  ...ACCOUNTANCY_KNOWLEDGE_GRAPH,
+  ...BUSINESS_STUDIES_KNOWLEDGE_GRAPH,
+  ...COMPUTER_SCIENCE_KNOWLEDGE_GRAPH,
+  ...PHYSICS_KNOWLEDGE_GRAPH,
+  ...CHEMISTRY_KNOWLEDGE_GRAPH,
+  ...BIOLOGY_KNOWLEDGE_GRAPH,
+  ...ECONOMICS_KNOWLEDGE_GRAPH,
+  ...HISTORY_KNOWLEDGE_GRAPH,
+  ...GEOGRAPHY_KNOWLEDGE_GRAPH,
+  ...POLITICAL_SCIENCE_KNOWLEDGE_GRAPH,
+  ...INFORMATION_TECHNOLOGY_KNOWLEDGE_GRAPH,
+  ...SOCIOLOGY_KNOWLEDGE_GRAPH,
+  ...PSYCHOLOGY_KNOWLEDGE_GRAPH,
+  ...URDU_KNOWLEDGE_GRAPH,
 ]
 
 export const BOARD_CATALOGS: BoardSubjectCatalog[] = [
   UP_MATH_CATALOG,
-  UP_SCIENCE_CATALOG,
+  UP_SCIENCE_CATALOG_5_10,
   UP_ENGLISH_CATALOG,
-  UP_SOCIAL_SCIENCE_CATALOG,
+  UP_HINDI_CATALOG,
+  UP_SANSKRIT_CATALOG,
+  UP_SOCIAL_SCIENCE_CATALOG_5_10,
+  ...UP_STREAM_CATALOGS,
+  CBSE_MATH_CATALOG,
+  CBSE_SCIENCE_CATALOG_5_10,
+  CBSE_SOCIAL_SCIENCE_CATALOG_5_10,
+  ...CBSE_STREAM_CATALOGS,
+  CBSE_ENGLISH_CATALOG,
+  CBSE_HINDI_CATALOG,
+  CBSE_SANSKRIT_CATALOG,
+  CBSE_ACCOUNTANCY_CATALOG,
+  UP_ACCOUNTANCY_CATALOG,
+  CBSE_BUSINESS_STUDIES_CATALOG,
+  UP_BUSINESS_STUDIES_CATALOG,
+  CBSE_COMPUTER_SCIENCE_CATALOG,
+  UP_COMPUTER_SCIENCE_CATALOG,
+  CBSE_INFORMATION_TECHNOLOGY_CATALOG,
+  UP_INFORMATION_TECHNOLOGY_CATALOG,
+  CBSE_SOCIOLOGY_CATALOG,
+  UP_SOCIOLOGY_CATALOG,
+  CBSE_PSYCHOLOGY_CATALOG,
+  UP_PSYCHOLOGY_CATALOG,
+  CBSE_URDU_CATALOG,
+  UP_URDU_CATALOG,
 ]
 
 /** All KG nodes introduced in a specific chapter */

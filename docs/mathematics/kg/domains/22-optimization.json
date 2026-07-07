@@ -1,0 +1,455 @@
+{
+  "domain_id": "optimization",
+  "domain_name": "Optimization",
+  "id_prefix": "math.opt",
+  "level_range": [
+    4,
+    7
+  ],
+  "description": "The mathematical theory of finding extrema of functions subject to constraints. Encompasses continuous optimization (convex, nonlinear), discrete optimization, and algorithmic methods.",
+  "concepts": [
+    {
+      "id": "math.opt.unconstrained-optimization",
+      "name": "Unconstrained Optimization",
+      "aliases": [
+        "minimization",
+        "maximization",
+        "global optimum",
+        "local optimum"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.calc.critical-points",
+        "math.calc.concavity"
+      ],
+      "unlocks": [
+        "math.opt.gradient-methods",
+        "math.opt.convex-optimization"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Find min f(x) over x\u2208\u211d\u207f. Necessary condition: \u2207f(x*)=0. Sufficient: \u2207\u00b2f(x*) positive definite (second-order condition). Local vs global optima. Functions with many local minima require global optimization.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Nocedal & Wright, Numerical Optimization, Ch.1; Boyd & Vandenberghe, Convex Optimization, Ch.9"
+      ]
+    },
+    {
+      "id": "math.opt.convex-function",
+      "name": "Convex Function",
+      "aliases": [
+        "convex function",
+        "strictly convex",
+        "Jensen's inequality"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.calc.concavity"
+      ],
+      "unlocks": [
+        "math.opt.convex-optimization"
+      ],
+      "related": [
+        "math.opt.convex-set"
+      ],
+      "cross_links": [
+        "math.linalg.positive-definite"
+      ],
+      "description": "f is convex iff f(\u03bbx+(1\u2212\u03bb)y) \u2264 \u03bbf(x)+(1\u2212\u03bb)f(y). Equivalent: \u2207\u00b2f \u2ab0 0. Jensen's inequality: f(E[X]) \u2264 E[f(X)]. Every local minimum of a convex function is global. Key property underlying convex optimization.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Boyd & Vandenberghe, Convex Optimization, Ch.3"
+      ]
+    },
+    {
+      "id": "math.opt.convex-set",
+      "name": "Convex Set",
+      "aliases": [
+        "convex hull",
+        "convex combination"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.vector"
+      ],
+      "unlocks": [
+        "math.opt.convex-optimization"
+      ],
+      "related": [
+        "math.opt.convex-function"
+      ],
+      "cross_links": [],
+      "description": "A set C is convex iff for any x,y\u2208C and \u03bb\u2208[0,1]: \u03bbx+(1\u2212\u03bb)y\u2208C. Convex hull: smallest convex set containing S. Examples: halfspaces, polyhedra, balls, simplices. Intersection of convex sets is convex.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Boyd & Vandenberghe, Convex Optimization, Ch.2"
+      ]
+    },
+    {
+      "id": "math.opt.convex-optimization",
+      "name": "Convex Optimization",
+      "aliases": [
+        "convex program"
+      ],
+      "parent": null,
+      "children": [
+        "math.opt.linear-programming",
+        "math.opt.quadratic-programming",
+        "math.opt.semidefinite-programming"
+      ],
+      "requires": [
+        "math.opt.convex-function",
+        "math.opt.convex-set"
+      ],
+      "unlocks": [
+        "math.opt.duality"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Minimize a convex function f over a convex set C: every local minimum is global. Standard form: minimize f\u2080(x) subject to f\u1d62(x)\u22640 (convex) and h\u1d62(x)=0 (affine). Efficiently solvable in polynomial time (interior-point methods).",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyd & Vandenberghe, Convex Optimization"
+      ]
+    },
+    {
+      "id": "math.opt.linear-programming",
+      "name": "Linear Programming",
+      "aliases": [
+        "LP",
+        "simplex method",
+        "linear optimization"
+      ],
+      "parent": "math.opt.convex-optimization",
+      "children": [],
+      "requires": [
+        "math.opt.convex-optimization",
+        "math.linalg.linear-system"
+      ],
+      "unlocks": [
+        "math.opt.duality"
+      ],
+      "related": [
+        "math.opt.integer-programming"
+      ],
+      "cross_links": [],
+      "description": "Minimize c\u1d40x subject to Ax\u2264b, x\u22650. Optimal at a vertex of the feasible polytope. Simplex algorithm: walks vertices; exponential worst case, polynomial in practice. Interior-point (Karmarkar): polynomial time. LP dual: maximize b\u1d40y, A\u1d40y=c, y\u22650.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Bertsimas & Tsitsiklis, Introduction to Linear Optimization"
+      ]
+    },
+    {
+      "id": "math.opt.quadratic-programming",
+      "name": "Quadratic Programming",
+      "aliases": [
+        "QP",
+        "quadratic optimization"
+      ],
+      "parent": "math.opt.convex-optimization",
+      "children": [],
+      "requires": [
+        "math.opt.linear-programming",
+        "math.linalg.positive-definite"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Minimize \u00bdx\u1d40Qx+c\u1d40x subject to Ax\u2264b. Convex if Q\u2ab00. Active-set and interior-point methods solve QPs. SVM training is a QP. Generalizes LP; basis of sequential quadratic programming (SQP) for nonlinear programs.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nocedal & Wright, Numerical Optimization, Ch.16"
+      ]
+    },
+    {
+      "id": "math.opt.semidefinite-programming",
+      "name": "Semidefinite Programming",
+      "aliases": [
+        "SDP",
+        "semidefinite optimization"
+      ],
+      "parent": "math.opt.convex-optimization",
+      "children": [],
+      "requires": [
+        "math.opt.convex-optimization",
+        "math.linalg.positive-definite"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Minimize C\u2022X subject to A\u1d62\u2022X=b\u1d62, X\u2ab00 (positive semidefinite). Generalizes LP and QP. Interior-point methods solve SDPs in polynomial time. Used in control theory, combinatorial optimization relaxations, and matrix completion.",
+      "difficulty": "research",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Vandenberghe & Boyd, Semidefinite Programming, SIAM Review 1996"
+      ]
+    },
+    {
+      "id": "math.opt.duality",
+      "name": "Duality Theory",
+      "aliases": [
+        "Lagrange dual",
+        "strong duality",
+        "weak duality",
+        "Slater's condition"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.opt.convex-optimization"
+      ],
+      "unlocks": [
+        "math.opt.kkt"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Lagrange dual: g(\u03bb,\u03bd) = inf_x L(x,\u03bb,\u03bd) where L is the Lagrangian. Weak duality: d*\u2264p* always. Strong duality (d*=p*): holds for convex problems under Slater's constraint qualification (strictly feasible point). Dual certifies optimality.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Boyd & Vandenberghe, Convex Optimization, Ch.5"
+      ]
+    },
+    {
+      "id": "math.opt.kkt",
+      "name": "KKT Conditions",
+      "aliases": [
+        "Karush-Kuhn-Tucker",
+        "optimality conditions",
+        "complementary slackness"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.opt.duality",
+        "math.opt.lagrange-multipliers"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Necessary conditions for optimality in constrained optimization: stationarity (\u2207L=0), primal feasibility, dual feasibility (\u03bb\u1d62\u22650), complementary slackness (\u03bb\u1d62f\u1d62(x*)=0). Sufficient for convex programs. Generalize Lagrange multipliers to inequality constraints.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyd & Vandenberghe, Convex Optimization, Ch.5; Nocedal & Wright, Numerical Optimization, Ch.12"
+      ]
+    },
+    {
+      "id": "math.opt.lagrange-multipliers",
+      "name": "Lagrange Multipliers",
+      "aliases": [
+        "method of Lagrange multipliers"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.calc.partial-derivatives",
+        "math.opt.unconstrained-optimization"
+      ],
+      "unlocks": [
+        "math.opt.kkt"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "For minimize f(x) subject to g(x)=0: at a local optimum, \u2207f = \u03bb\u2207g (\u2207f parallel to \u2207g). The system \u2207f=\u03bb\u2207g, g(x)=0 has n+1 equations for n+1 unknowns (x,\u03bb). Generalizes to multiple constraints.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyd & Vandenberghe, Convex Optimization, \u00a74.2"
+      ]
+    },
+    {
+      "id": "math.opt.gradient-methods",
+      "name": "Gradient Descent",
+      "aliases": [
+        "steepest descent",
+        "gradient method",
+        "step size"
+      ],
+      "parent": null,
+      "children": [
+        "math.opt.stochastic-gradient"
+      ],
+      "requires": [
+        "math.opt.unconstrained-optimization",
+        "math.calc.gradient"
+      ],
+      "unlocks": [
+        "math.opt.stochastic-gradient",
+        "math.opt.newton-optimization"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.num.newtons-method"
+      ],
+      "description": "x\u2096\u208a\u2081 = x\u2096 \u2212 \u03b1\u2096\u2207f(x\u2096). Converges for convex f with Lipschitz gradient: rate O(1/k). Strongly convex: linear (geometric) convergence. Step size by line search or fixed rule. Most widely used optimization algorithm in machine learning.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Nocedal & Wright, Numerical Optimization, Ch.3; Bubeck, Convex Optimization: Algorithms and Complexity"
+      ]
+    },
+    {
+      "id": "math.opt.stochastic-gradient",
+      "name": "Stochastic Gradient Descent",
+      "aliases": [
+        "SGD",
+        "mini-batch gradient descent"
+      ],
+      "parent": "math.opt.gradient-methods",
+      "children": [],
+      "requires": [
+        "math.opt.gradient-methods",
+        "math.prob.expected-value"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "x\u2096\u208a\u2081 = x\u2096 \u2212 \u03b1\u2096 \u2207f\u1d62\u2096(x\u2096) using a random sample index i\u2096. Computationally cheap per iteration for large datasets. Converges with diminishing step sizes. Mini-batch SGD: average gradient over a random batch. Foundation of neural network training.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Bottou, Curtis & Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 2018"
+      ]
+    },
+    {
+      "id": "math.opt.newton-optimization",
+      "name": "Newton's Method for Optimization",
+      "aliases": [
+        "Newton optimization",
+        "quasi-Newton",
+        "BFGS",
+        "L-BFGS"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.opt.gradient-methods",
+        "math.calc.multivariable-extrema"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "x\u2096\u208a\u2081 = x\u2096 \u2212 [\u2207\u00b2f(x\u2096)]\u207b\u00b9\u2207f(x\u2096). Quadratic convergence near a strong minimizer. Requires Hessian (expensive); quasi-Newton (BFGS) approximates Hessian from gradients. L-BFGS: limited memory variant for large-scale problems.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nocedal & Wright, Numerical Optimization, Ch.6\u20137"
+      ]
+    },
+    {
+      "id": "math.opt.pca",
+      "name": "Principal Component Analysis",
+      "aliases": [
+        "PCA",
+        "dimensionality reduction"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.svd",
+        "math.stats.covariance-matrix"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.linalg.svd"
+      ],
+      "description": "Find the k principal directions (eigenvectors of covariance matrix \u03a3X) maximizing variance. Equivalent to truncated SVD of the centered data matrix. Reduces dimension while preserving maximum variance. Applications in statistics, ML, and image compression.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Jolliffe, Principal Component Analysis; Bishop, PRML, Ch.12"
+      ]
+    },
+    {
+      "id": "math.opt.integer-programming",
+      "name": "Integer Programming",
+      "aliases": [
+        "ILP",
+        "mixed integer programming",
+        "branch and bound"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.opt.linear-programming"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.disc.complexity-classes"
+      ],
+      "description": "LP with integer (or binary) constraints on variables. NP-hard in general. Solution methods: branch and bound, branch and cut, LP relaxation + cutting planes. Applications: scheduling, network design, combinatorial optimization.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Wolsey, Integer Programming; Bertsimas & Tsitsiklis, Introduction to Linear Optimization, Ch.11"
+      ]
+    },
+    {
+      "id": "math.opt.dynamic-programming",
+      "name": "Dynamic Programming",
+      "aliases": [
+        "Bellman equation",
+        "optimal substructure",
+        "memoization"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.disc.recurrence-relation"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Optimization method exploiting optimal substructure: optimal solution contains optimal solutions to subproblems. Bellman equation: V*(s) = max_a [r(s,a) + \u03b3V*(s\u2032)]. Applications: shortest paths, knapsack, sequence alignment, reinforcement learning.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Bellman, Dynamic Programming; Cormen et al., Introduction to Algorithms, Ch.15"
+      ]
+    }
+  ]
+}

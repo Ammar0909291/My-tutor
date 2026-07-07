@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
-import { chatWithFallback, buildTutorSystemPrompt } from '@/lib/ai/client'
+import { generateAIResponse, buildTutorSystemPrompt } from '@/lib/ai/client'
 import { analyzeStudentMood } from '@/lib/ai/mood'
 import { prisma } from '@/lib/db/prisma'
 import { getSessionState, setSessionState } from '@/lib/redis/client'
@@ -41,10 +41,11 @@ export async function POST(
 
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
-    const teachingLang = (profile?.teachingLanguage ?? 'ru') as 'ru' | 'en' | 'hi'
+    const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
 
     const systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
+      profile?.displayName ?? session.user.name ?? 'Student',
       profile?.selfDescription ?? 'неизвестный уровень',
       profile?.learningGoals ?? 'общее обучение',
       memoryContext,
@@ -62,18 +63,17 @@ export async function POST(
       { role: 'user' as const, content },
     ]
 
-    const completion = await chatWithFallback({ messages })
+    const historyMessages = messages
+      .filter((m) => m.role !== 'system')
+      .map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
 
-    const assistantContent = completion.choices[0].message.content ?? ''
-    const usage = completion.usage
+    const assistantContent = await generateAIResponse(historyMessages, systemPrompt)
 
     const assistantMessage = await prisma.message.create({
       data: {
         sessionId,
         role: MessageRole.ASSISTANT,
         content: assistantContent,
-        inputTokens: usage?.prompt_tokens ?? null,
-        outputTokens: usage?.completion_tokens ?? null,
       },
     })
 

@@ -1,0 +1,603 @@
+# Project State — Educational Brain
+
+> *Source of truth for "what phase, what sprint, what's actually built."
+> Updated at the end of every work session. Cross-check against the repo,
+> not against memory — if this drifts from reality, fix this file.*
+
+---
+
+## 0. Bootstrap note
+
+This file (and `NEXT_ACTION.md`, `CHANGELOG.md`) did not exist before this
+session. Earlier instructions referred to an "Educational Brain
+Constitution" and a `docs/project-memory/` directory as already-existing,
+already-read documents. Neither existed in the repository. A repo-wide
+search (`find . -iname '*constitution*'`, `find . -ipath '*project*memory*'`)
+returned nothing prior to this session.
+
+**Resolution applied**: `docs/educational-brain/` (12 documents, authored
+and committed in the immediately preceding session) is the only artifact
+that matches the description of a Constitution / Phase-1 record, so it is
+treated as that record. This directory (`docs/project-memory/`) is created
+now, as the first concrete act of Phase 2, to satisfy the standing
+requirement that Phase 2 work be tracked in PROJECT_STATE / NEXT_ACTION /
+CHANGELOG going forward.
+
+---
+
+## 1. Phase status
+
+| Phase | Status |
+|-------|--------|
+| Phase 1 — Architecture (design docs 01-11 under `docs/educational-brain/`) | **Complete.** Verdict A recorded in doc 11 §13: "approve, start milestone 1." |
+| Phase 2 — Milestone 1: spine + asset catalogue for ONE subject (physics) | **In progress.** Steps 1-3 done (schema, Concept+Edge+Misconception backfill). Decision Pipeline stages 0-4 (Frame/Intent/Retrieval/Composition/Persist) implemented at 0724396. Route side-car wired. Steps 4+ (EbCurriculum/EbModule, pgvector, latency measurement) not yet started. |
+| Educational Brain v1.0 — Architecture Freeze (`docs/architecture/`) | **Complete.** Permanent reference for the whole canonical pipeline + 36-engine inventory frozen this session. Documentation only — zero code changes. See §5 below. |
+| Phase 3+ | Not started. Requires explicit approval before beginning, per standing instruction. |
+| Knowledge Graph Consumption Architecture (`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`) | **Proposal written, not executed.** Per explicit user instruction (2026-06-30, second pivot): Phase 1 must NOT be implemented — no canonical KG field (`mastery_threshold`, `cross_links`, or any other) may be exposed until the Curriculum Production Pipeline freezes the Canonical Knowledge Graph v1 specification. Status downgraded from "awaiting go-ahead" to "blocked on external v1 freeze + future approval." See §4b below. |
+| KG Consumption Pipeline contract (`ADR_06_KG_CONSUMPTION_PIPELINE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #1 of the user's 8-item forward-architecture roadmap. Specifies the version/status/shape gate that must sit between the Curriculum Pipeline's output and the Educational Brain's adapter — found zero such gate exists today (no version check, no status check, no runtime shape validation, no CI wiring). Implementation blocked on the same two conditions as ADR 05 Phase 1. See §4c below. |
+| Mastery Intelligence Architecture (`ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #2 of the roadmap. Found five non-unified mastery/progression representations (`MasteryLevel`, `TopicProgress.masteryPct`, `EbLearnerConceptMastery`, `TrackLevel`, `LevelBand`) with no reconciliation. Designates `MasteryLevel` (`masteryIntelligence.ts`) as canonical; proposes (not implemented) extending it to Library Mode, consolidating `learningProfile.ts`'s duplicate classification onto it, and a cross-vocabulary mapping table. Implementation blocked on the same two conditions as ADR 05/06. See §4d below. |
+| Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — items 1-2 of 8 done (ADR 06, ADR 07).** Items 3-8 (Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
+| Educational Brain Bible (`docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md`) | **Established this session.** Single living master document, updated by every ADR going forward. See §4e below. |
+
+---
+
+## 2. What exists in the repository right now
+
+### Architecture record (Phase 1 — read-only reference, do not redesign without new evidence)
+
+`docs/educational-brain/README.md` + `01` through `11` — the full design:
+asset model, knowledge graph, decision pipeline, evidence engine, memory
+system, AI integration, knowledge acquisition, visualization strategy,
+scaling, database strategy, risks/roadmap.
+
+### Phase 2 implementation so far
+
+- **`prisma/schema.prisma`** — additive Educational Brain tables appended
+  after `VisualizationCache` (the last legacy model). All new models are
+  prefixed `Eb` (Educational Brain) to avoid colliding with the existing
+  legacy `Curriculum` model (the doc 10 schema sketch used an unprefixed
+  `Curriculum`, which would have collided). This is a naming-only
+  deviation from doc 10; the architecture is unchanged. Models added:
+  `EbConcept`, `EbConceptEdge`, `EbMisconception`, `EbConceptMisconception`,
+  `EbLearningObjective`, `EbObjectiveConcept`, `EbCurriculum`, `EbModule`,
+  `EbModuleObjective`, `EbAssetIdentity`, `EbExplanation`, `EbVisual`,
+  `EbProbe`, `EbKnowledgeAcquisitionTrace`, `EbSourceSegment`,
+  `EbLearnerConceptMastery`, `EbLearnerActiveMisconception`,
+  `EbEvidenceEvent`, `EbAssetScore`, `EbBrainConfig`, `EbExperiment`,
+  `EbExperimentAssignment`. Pushed via `prisma db push` (no migration files
+  in this repo, per CLAUDE.md convention). `npx tsc --noEmit` and
+  `npm run build` both pass after the change.
+  - **Deferred, not yet implemented**: `pgvector` embedding columns
+    (`AssetIdentity.embedding`, `SourceSegment.embedding` in doc 10) were
+    *omitted* from the Prisma model — the sandbox Postgres instance has no
+    confirmed `pgvector` extension, and adding an `Unsupported("vector(...)")`
+    column without the extension installed would break `db push`. Tracked
+    as a Milestone-1 follow-up: confirm `CREATE EXTENSION vector` works in
+    the target environment, then add the columns additively.
+  - No existing legacy table, column, or model was modified, renamed, or
+    dropped. Zero risk to current production functionality.
+- **`scripts/seed-eb-physics.mjs`** — deterministic one-shot backfill
+  (doc 10 §9 steps 2-3, scoped to one subject per Milestone 1's plan):
+  reads `src/lib/education/physicsKnowledgeGraph.ts` (29
+  `KnowledgeNode`s) → upserts `EbConcept` + `EbConceptEdge`
+  (`prerequisite_of`, from each node's `prerequisites[]`); reads the
+  physics-tagged rules in `src/lib/school/adaptive/misconceptionEngine.ts`
+  → upserts `EbMisconception` + `EbConceptMisconception` (best-effort
+  pattern-to-concept mapping, documented inline in the script, confidence
+  0.5). Idempotent (`upsert` throughout) — safe to re-run.
+  - **Verified result** (this session, against the local dev Postgres):
+    29 `EbConcept` rows, 29 `EbConceptEdge` rows, 4 `EbMisconception` rows
+    (of the 5 physics-tagged rules in `misconceptionEngine.ts` — one,
+    `force_motion`, ended up sharing the same target concept as another
+    rule via the mapping table, so distinct-misconception count is 4 with
+    6 concept-links total), 6 `EbConceptMisconception` link rows.
+  - Run with: `npx tsx scripts/seed-eb-physics.mjs`
+
+### Milestone 1 remaining (requires live DB)
+
+- **EbCurriculum/EbModule backfill**: `scripts/seed-eb-physics.mjs` is extended
+  with `PHYSICS_CURRICULUM` + `PHYSICS_MODULES` (9 modules matching subjectCatalog
+  PHYSICS_TREE). Awaiting live DB to run. Code is complete and idempotent.
+- **pgvector**: Not yet confirmed in target Postgres. `CREATE EXTENSION IF NOT EXISTS vector;` needed.
+- **Live pipeline validation**: `scripts/verify-eb-live.ts` is ready — 19 assertions
+  covering seed data, full pipeline execution, EbEvidenceEvent write, latency.
+  Awaiting live DB.
+- **Curator UI** for `EbExplanation` authoring — not started (Phase 2 M1 item).
+- **1% feature flag routing** — the feature flag is in place; routing a percentage
+  of users requires a runtime config mechanism (Phase 2 M1 item).
+
+### Milestone 1 done (offline-verifiable)
+
+- Decision Pipeline stages 0–4 implemented and tested (66/66 offline assertions).
+- Side-car integration in `/api/learn/chat/route.ts`.
+- `scripts/seed-eb-physics.mjs` extended with EbCurriculum/EbModule (code complete).
+- Latency benchmark: offline stages p99 = 0.038 ms (trivial overhead vs 600 ms budget).
+
+### Milestones 2–5
+
+Not started. Require explicit user approval to begin each milestone per
+standing instruction (do NOT begin Phase 3 without approval; same applies
+to each milestone as a gate).
+
+---
+
+## 3. Validation status
+
+### Schema/DB checks (from the schema+seed session — require a live DB, not re-runnable in the current sandbox)
+
+| Check | Result |
+|-------|--------|
+| `npx prisma format` / schema validate | ✅ passes (after fixing one `@@id` referencing an optional field) |
+| `npx prisma db push` | ✅ "Your database is now in sync" — additive only, confirmed via `psql` table existence + the legacy table list unchanged |
+| `npx prisma generate` | ✅ |
+| `npm run build` | ✅ succeeds, all routes compile |
+| `npx tsx scripts/seed-eb-physics.mjs` | ✅ ran once, idempotent re-run-safe, row counts verified directly in Postgres via `psql` |
+
+### Re-verified this handoff session (no DB/network required)
+
+| Check | Result |
+|-------|--------|
+| `npx prisma generate` | ✅ regenerated client in fresh container |
+| `npm install` | ✅ installed missing declared dep (`katex`) |
+| `npx tsc --noEmit` | ✅ **zero errors** (earlier sandbox errors were purely environmental: ungenerated client + uninstalled dep) |
+| Offline harness suite (`scripts/test-*.ts`) | ✅ **2066 assertions passing, 0 failing** (see `TEST_RESULTS.md`) |
+
+The `Eb*` runtime code still has no dedicated unit tests (no runtime code
+exists yet — only schema + seed). The 2066 passing assertions cover the
+existing deterministic visualization / adaptive / progress logic. One stale
+test (`test-build-scenespec.ts`) was corrected this session to match the
+intentionally-narrowed `VECTOR_RE` in `buildSceneSpec.ts` — see CHANGELOG.
+
+---
+
+## 4a. Educational Brain v1.0 — Architecture Freeze (this session)
+
+Documentation-only freeze of the canonical (non-experimental) pipeline and
+every engine around it, per the standing instruction *"freeze the
+architecture into the permanent reference... do NOT redesign architecture."*
+Zero source files were modified.
+
+**Files created** (`docs/architecture/`):
+- `EDUCATIONAL_BRAIN_V1.md` — overview, system diagram, canonical pipeline,
+  36-row engine inventory table, DB-ownership summary.
+- `ENGINE_REFERENCE.md` — 36 numbered engine entries (responsibility,
+  inputs, outputs, public functions, failure behavior, guarantees,
+  deterministic/probabilistic, MUST NOT).
+- `DATA_FLOW.md` — full 65-step trace of `api/learn/chat/route.ts`, full
+  84-model DB-ownership breakdown, 4 flow diagrams (knowledge/teaching/
+  assessment/memory).
+- `DEPENDENCY_RULES.md` — per-engine may-read/must-NOT-call rules + a
+  summary matrix confirming no circular dependencies.
+- `EXTENSION_GUIDE.md` — 8 extension recipes (new subject, new intelligence
+  engine, new visual type, new assessment type, new teaching action type,
+  new memory signal, new recommendation signal, frozen-forever list).
+- `ARCHITECTURE_DECISIONS.md` — 15 permanent rules, the two-pipelines
+  rationale (canonical vs. experimental EB pipeline), 6 honest findings
+  (documented, not fixed — see below), validation results.
+
+**Honest findings recorded (none fixed, all flagged for a future
+separately-approved cleanup phase)**:
+1. `lessonPlanner.ts` and `lessonComposer.ts` both export a type/function
+   named `LessonPlan`/`buildLessonPlanBlock` — distinct, correctly-scoped
+   engines, no runtime collision, naming hazard only.
+2. ~~`src/lib/curriculum/teachingActionEngine.ts` (`decideAction()`)...~~
+   **RESOLVED 2026-06-30** — confirmed genuinely dead (zero callers, zero
+   subject content) duplicate of TAG and **deleted**, see
+   `docs/architecture/ADR_03_RETIRE_ORPHANED_TEACHING_ACTION_ENGINE.md`.
+   The separate `TeachingAsset` content layer (`teachingAssetSchema.ts`/
+   `teachingAssetAdapter.ts`/`teachingAssets.ts`) was left untouched —
+   real curriculum content, out of scope to remove unilaterally.
+3. "Curriculum Validator Brain" and "Knowledge Graph Validator" are the
+   same script (`scripts/validate-knowledge-graph.ts`), not two engines.
+4. Two Recommendation Intelligence generations coexist:
+   `nextBestAction.ts` (narrower, earlier) and `learningOrchestrator.ts`
+   (8-tier, primary aggregator). **Evidence sharpened 2026-06-30**: this
+   is a split-file case, not a clean two-engine overlap — `nextBestAction.ts`'s
+   `getNextBestAction()`/`nextActionHref()`/`NEXT_ACTION_LABELS` are
+   confirmed zero-caller dead code (their one plausible consumer,
+   `SchoolDashboard.tsx`, is itself an orphaned, unrendered component —
+   `DashboardV2` sources recommendations via `learningOrchestrator.ts`
+   instead), while `nextBestAction.ts`'s fourth export,
+   `getChapterNextStep()`, remains genuinely live. A resolution is
+   **proposed, not executed** — see
+   `docs/architecture/ADR_04_NEXT_BEST_ACTION_RETIREMENT_PROPOSAL.md`,
+   awaiting explicit user approval before any deletion under the current
+   STRICT MODE directive.
+5. Two curriculum/concept-graph representations coexist: the file-based
+   canonical KG (`docs/{subject}/kg/graph.json`) and the DB-backed `Eb*`
+   model family (24 models, used only by the experimental pipeline). Not
+   synchronized, not unified.
+6. `prisma/schema.prisma`'s comment above `ReviewSchedule` claims no writer
+   exists — stale; `update-pipeline.ts` has been the writer since the
+   Student Memory write-path was built.
+
+**Validation: PASS** — no circular engine dependencies, every engine has
+one owner (two documented naming exceptions above), no undocumented
+public interfaces, no undocumented data flow, no functional/runtime
+conflicts.
+
+---
+
+## 4b. Knowledge Graph Consumption Architecture — ADR 05 (this session, proposal only)
+
+**Priority pivot, recorded verbatim in spirit:** as of 2026-06-30, the
+standing directive shifted from dead-code/duplication auditing (ADR 03,
+ADR 04) to forward-looking Educational Brain system design. ADR 04 is
+explicitly confirmed by the user to remain **permanently** documentation-
+only — not pending, not an interim state, simply not to be executed.
+Further cleanup work is deprioritized unless it directly blocks one of
+the 12+ named high-impact domains (KG consumption, Teaching Action
+Intelligence, Student Memory evolution, Dynamic Lesson Composition,
+Evidence Engine, Recommendation Intelligence, Mastery Engine,
+Visualization selection, Simulation architecture, Assessment
+architecture, Beginner→Intermediate→Expert progression, Entrance
+examination framework, Curriculum mapping, AI independence, long-term
+scalability).
+
+**First finding under the new priority — `docs/architecture/ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`:**
+- Two of the canonical 10-field KG schema's authored fields —
+  `cross_links` and `mastery_threshold` — are parsed into
+  `subjectKgAdapter.ts`'s internal `RawKGConcept` type but never exposed
+  by `SubjectAdapter.getNodes()`/`getConceptNode()`. Neither
+  `ConceptNode` (frozen Teaching Engine input) nor `KnowledgeNode`
+  (curriculum layer) carries either field.
+- `mastery_threshold` is authored with real per-concept variation in
+  mathematics (12 distinct values, 0.35–0.95 across 908 concepts;
+  physics/chemistry/CS/biology vary less, 3–4 distinct values each) and
+  has **zero runtime effect** — 15+ call sites (`assessmentIntelligence.ts`,
+  `masteryIntelligence.ts`, `evaluateAssessment.ts`, `nextBestAction.ts`,
+  `dailyPlan.ts`, `learningOrchestrator.ts`, `learningNarrative.ts`,
+  `examReadiness.ts`, `achievementEngine.ts`, `progressReport.ts`) all
+  read the single flat `ASSESSMENT_PASS_THRESHOLD = 70` constant instead.
+  Units also mismatch (KG: 0–1 fraction; runtime constant: 0–100 scale).
+- `cross_links` documentation was wrong: `ENGINE_REFERENCE.md` claimed
+  "always inter-graph by design." Direct inspection of
+  `docs/mathematics/kg/graph.json` (363 edges, the only subject with
+  meaningful usage) found 100% intra-subject, zero cross-subject —
+  corrected in `ENGINE_REFERENCE.md` §2 this session.
+- **Proposed 3-phase resolution (ADR 05 §4/§9), none executed yet:**
+  - **Phase 1** — add two new additive `SubjectAdapter` accessors,
+    `getConceptMasteryThreshold(id)` and `getCrossLinkedConceptIds(id)`;
+    zero changes to existing methods or frozen types. Self-evaluated
+    against the 4-condition gate as clearing all four. **Awaiting
+    explicit go-ahead before execution**, per the same end-of-turn-
+    approval-request pattern used for ADR 04.
+  - **Phase 2** — wire the mastery-threshold accessor into
+    `assessmentIntelligence.ts`'s chapter-scoped output specifically
+    (not the other ~9 call sites, deferred). Condition 4 flagged as
+    requiring explicit approval (alters scored output).
+  - **Phase 3** — a `cross_links`-driven "Related Concepts" consumer.
+    Deliberately left undesigned pending product-intent confirmation.
+- Cross-references updated this session: `ARCHITECTURE_DECISIONS.md`
+  (new Finding 7), `ENGINE_REFERENCE.md` §2 (correction) and §4 (open
+  finding note), `CLAUDE.md` (new bullet).
+
+**Second pivot (same day, 2026-06-30):** the user accepted ADR 05 as
+documentation only and explicitly forbade implementing Phase 1 — no
+canonical KG field may be exposed (`mastery_threshold`, `cross_links`, or
+any other) until the Curriculum Production Pipeline freezes the
+Canonical Knowledge Graph v1 specification. The user also defined a full
+8-item forward-architecture roadmap (below) and instructed: design only,
+no implementation, no runtime/route/schema changes without explicit
+per-item approval.
+
+---
+
+## 4c. Educational Brain Forward-Architecture Roadmap (8 ADRs, user-specified order)
+
+Per the user's second pivot, the autonomous loop now works through this
+list in order, one ADR per turn, architecture-only:
+
+1. **Educational Brain Knowledge Graph Consumption Pipeline** — **DONE**,
+   `ADR_06_KG_CONSUMPTION_PIPELINE.md` (specification only, not
+   implemented). Designed the version/status/shape gate that should sit
+   between the Curriculum Pipeline's `graph.json` output and
+   `subjectKgAdapter.ts`. Found: zero version gate, zero status gate,
+   zero runtime shape validation, zero CI wiring exist today (the
+   validator script is manual-only, not referenced in `package.json` or
+   any `.github/workflows` file). All 5 live `graph.json` files already
+   carry `version`/`status`/`build_date` wrapper metadata that is
+   silently discarded by `getRaw()` (`subjectKgAdapter.ts:86-92`) before
+   reaching any consumer. Proposes a 4-part gate (Schema Version Gate,
+   Status Gate, Runtime Shape Validation, diagnostic-only Metadata
+   Surface) as a new layer between producer and consumer — zero changes
+   to `ConceptNode`/`KnowledgeNode`/existing `SubjectAdapter` methods.
+   Explicitly does not re-propose exposing `cross_links`/
+   `mastery_threshold` (that stays exactly where ADR 05 left it).
+   Implementation blocked on Curriculum Pipeline v1 freeze + explicit
+   approval, per the standing instruction.
+2. **Mastery Intelligence Architecture** — **DONE**,
+   `ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md` (specification only, not
+   implemented). Found five non-unified mastery/progression
+   representations coexisting: `MasteryLevel` (live, chapter-scoped,
+   school-only classification engine), `TopicProgress.masteryPct`
+   (independently re-classified by `learningProfile.ts` with a hardcoded
+   `70`, bypassing the canonical engine), `EbLearnerConceptMastery`
+   (dormant float score, part of the disabled `Eb*` pipeline), `TrackLevel`
+   (Teaching Engine's frozen T0-T4 tier), `LevelBand` (the existing
+   goal/placement "entrance examination" subsystem's 6-tier enum, fully
+   disconnected from the other two). Designates `masteryIntelligence.ts`'s
+   `MasteryLevel` classification as canonical and proposes three additive
+   extensions: (a) extend to Library Mode (same evidence pattern as ADR
+   02), (b) consolidate `learningProfile.ts`'s duplicate logic onto the
+   canonical engine, (c) a specification-only static mapping table
+   bridging `MasteryLevel`/`TrackLevel`/`LevelBand`. `EbLearnerConceptMastery`
+   explicitly stays out of scope/dormant. Implementation blocked on
+   Curriculum Pipeline v1 freeze + explicit approval. New Finding 8 added
+   to `ARCHITECTURE_DECISIONS.md`; `ENGINE_REFERENCE.md` Engine 7 updated
+   with a scope-note cross-reference.
+3. **Teaching Action Intelligence** — not started. Decision hierarchy,
+   explanation/visualization/simulation/assessment/remediation selection.
+4. **Dynamic Lesson Composition** — not started. Knowledge-Asset
+   assembly, adaptive sequencing, multi-modal teaching, recovery paths.
+5. **Student Memory Evolution** — not started. Long-term learner model,
+   persistent/short-term memory, retrieval strategy, forgetting model,
+   evidence updates.
+6. **Recommendation Intelligence** — not started. Short-term
+   recommendations, long-term learning plans, weakness recovery,
+   goal-based learning.
+7. **Visualization & Simulation Architecture** — not started. Visual
+   selection, graphs, animations, interactive simulations, scene
+   generation, rendering independence.
+8. **AI Independence Roadmap** — not started. Measuring/reducing AI
+   dependency, promoting validated assets, knowledge acquisition
+   strategy.
+
+**Per-ADR discipline (binding for all 8):** gather evidence, compare
+multiple architectural approaches, choose the simplest long-term design,
+document trade-offs, produce implementation specs, validation specs, and
+a migration strategy, estimate scalability to millions of learners,
+preserve backward compatibility with Educational Brain v1 — design only,
+no implementation without separate explicit approval per item.
+
+---
+
+## 4d. Mastery Intelligence Architecture — ADR 07 (this session, proposal only)
+
+**`docs/architecture/ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`** —
+roadmap item #2. Pre-ADR checklist completed first (per the user's new
+binding requirement): re-read `EDUCATIONAL_BRAIN_V1.md`,
+`ENGINE_REFERENCE.md`, `DATA_FLOW.md`, `DEPENDENCY_RULES.md`,
+`EXTENSION_GUIDE.md`, `ARCHITECTURE_DECISIONS.md`, ADR 02-06, and this
+file in full — no conflict found with any frozen rule.
+
+**Finding (new, Finding 8 in `ARCHITECTURE_DECISIONS.md`):** five
+non-unified mastery/progression representations coexist with no
+reconciliation: `MasteryLevel` (live, 4-value classification,
+chapter-scoped, school-only — `DATA_FLOW.md` confirms it's wired only
+inside `route.ts`'s `if (schoolCtx)` gate), `TopicProgress.masteryPct`
+(independently re-classified by `learningProfile.ts:64-70` using its own
+ad hoc thresholds, plus a literal hardcoded `70` at line 91 instead of
+importing `ASSESSMENT_PASS_THRESHOLD` — already-realized constant
+drift), `EbLearnerConceptMastery` (dormant continuous float score,
+concept-scoped, part of the disabled `Eb*` pipeline, zero live callers),
+`TrackLevel` (Teaching Engine's frozen T0-T4 pedagogical tier),
+`LevelBand` (the existing goal/placement "entrance examination"
+subsystem's 6-tier enum — `LearningGoal`/`PlacementAssessment`/
+`AssessmentAttempt` — confirmed via grep to have zero cross-references
+to either `TrackLevel` or `MasteryLevel`).
+
+**Proposed resolution (ADR 07 §4, none executed):** designate
+`masteryIntelligence.ts`'s `MasteryLevel` classification as canonical.
+Three additive, independently-stageable extensions, none implemented:
+(a) extend `getMasteryProfile()` to the Library/general chat path —
+its `board`/`grade` params are confirmed unused in the function body,
+the identical evidence pattern ADR 02 used for `teachingStrategy`/
+`spacedRevision`/`lessonPlanner`; (b) consolidate `learningProfile.ts`'s
+independent re-classification onto the canonical engine, removing the
+duplicate logic and the hardcoded `70` — flagged as the one real
+behavior-change risk in this ADR, requiring an equivalence-validation
+report before any future implementation turn; (c) a new,
+specification-only static mapping table (`masteryVocabulary.ts`, not
+created) bridging `MasteryLevel`/`TrackLevel`/`LevelBand` for
+cross-vocabulary translation (e.g. seeding a new learner's `TrackLevel`
+from a `PlacementAssessment.recommendedLevel`), without merging the
+three vocabularies — they serve genuinely different scopes.
+`EbLearnerConceptMastery` stays explicitly out of scope, left dormant
+per `ARCHITECTURE_DECISIONS.md` Part 2's existing ruling on the `Eb*`
+pipeline as a whole.
+
+**Cross-references updated this session:** `ARCHITECTURE_DECISIONS.md`
+(new Finding 8 + Part 4 summary), `ENGINE_REFERENCE.md` Engine 7
+(scope-note cross-reference to ADR 07), `CLAUDE.md` (roadmap item 2
+marked done).
+
+**Status:** specification only, zero code changes. Implementation
+blocked on the same two conditions as ADR 05/06: Curriculum Production
+Pipeline declares Canonical Knowledge Graph v1 frozen, AND explicit user
+approval. Next roadmap item: **#3 — Teaching Action Intelligence.**
+
+---
+
+## 4e. Educational Brain Bible established (this session, documentation only)
+
+Per the refined Chief Educational Brain Architect directive (2026-06-30,
+same-day refinement of the 2026-06-30 mode established for ADR 06/07),
+the user introduced a binding requirement to maintain ONE living master
+document — the **Educational Brain Bible** — as the single source of
+truth, updated by every ADR from this point forward, plus an upgraded
+14-section ADR template (renames "Chosen architecture" to "Selected
+design", adds a new "Relationship to the Teaching Engine" section) and a
+standing design test for every ADR: *"How does this make the Educational
+Brain think and teach more like a world-class human teacher?"*
+
+**Created:** `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` — consolidates
+`EDUCATIONAL_BRAIN_V1.md` + companions into one top-level synthesis:
+complete engine map (35 engines, status-tagged LIVE/DORMANT/PROPOSED/
+ORPHANED), engine responsibilities by tier, a component interaction
+diagram, the twelve required flows (data, decision, student learning,
+knowledge, memory, evidence, recommendation, visualization, AI
+interaction, plus scalability/versioning/validation strategy as
+cross-cutting sections), an 11-item risk register, an architecture
+glossary, and an ADR index (ADR 02-07 status, ADR 08-13 roadmap slots).
+Indexes rather than duplicates the detail docs' full content, consistent
+with "ignore refactoring/low-impact work unless it blocks the
+architecture" — re-deriving 80KB+ of existing engine/flow detail into one
+file would itself be exactly that kind of low-impact churn.
+
+**Cross-references updated:** `CLAUDE.md` — "Authoritative reference"
+line now points to the Bible first; the Chief Architect mode bullet
+updated with the 14-section template, the Bible-update-on-every-ADR
+governance rule, the superseded-ADR-marking rule, and the world-class-
+teacher design test.
+
+**No conflicts found** between the new directive and any existing ADR,
+Permanent Rule, or Finding — this is a process/documentation-structure
+refinement, not new evidence against prior architecture. ADRs 02-07
+remain valid; none are superseded by the template upgrade alone (Bible
+§9 records this explicitly so it isn't read as a silent inconsistency).
+
+**Status:** documentation only, zero code changes. Next: ADR 08 —
+Teaching Action Intelligence (roadmap item 3/8).
+
+---
+
+## 4f. ADR 08 — Teaching Action Intelligence (this session, roadmap 3/8, documentation only)
+
+Pre-ADR checklist completed per the binding governance rule: re-read the
+Educational Brain Bible, ADRs 02-07, `ARCHITECTURE_DECISIONS.md`, and this
+file before drafting — no conflicts found, all prior architecture
+preserved.
+
+**Audit performed:** traced the live call chain from `teaching-engine/
+index.ts`'s `decide()` through `teachingActionGenerator.ts` (TAG) to
+`lessonComposer.ts`'s Dynamic Lesson Composer, in `route.ts`. Confirmed
+none of the three engines' signatures or pure cores reference board,
+grade, or School-only context. Confirmed the chain's sole trigger
+condition, `if (snapshotCurrentConceptId)` (`route.ts:1282`), depends on
+`learnSession.contextSnapshot.currentConceptNodeId`, which a full-tree
+grep shows has exactly one write site in all of `src/`
+(`route.ts:1701-1724`) — inside `if (schoolCtx)`. Result: the Action
+layer is mode-agnostic by construction but **School-Mode-only in
+practice** — a genuinely new finding, confirmed absent from
+`ARCHITECTURE_DECISIONS.md` and `ENGINE_REFERENCE.md` before this turn.
+Also formally distinguished this "Action" layer from `teachingStrategy.ts`'s
+7-value "Posture" layer (already dual-mode per ADR 02) — two different
+grains of "how to teach," never previously related to each other in the
+documentation.
+
+**Created:** `docs/architecture/ADR_08_TEACHING_ACTION_INTELLIGENCE.md`
+— full 14-section ADR. Selected design: designate Posture and Action as
+two intentionally distinct canonical layers, formally document their
+relationship, and propose a single additive extension — seed-and-persist
+`currentConceptNodeId` for Library sessions from the same `currentModule`
+resolution already used by the Library-mode Posture block, with zero
+signature/type changes to `decide()`, TAG, or the Composer. Also records
+a minor, non-Finding-worthy doc-accuracy note: TAG's header comment
+overstates `concept_type` as a direct `mapActionType()` input.
+
+**Cross-references updated:** Bible §3 (engine map rows #10-12, #15;
+also corrects a pre-existing inaccuracy in row #12, previously "LIVE,
+both modes," now "LIVE, School-Mode-only in practice"), §6.2 (new
+paragraph tracing the root cause), §7 (new risk register row R12), §9
+(ADR 08 row), §10 (roadmap status 3 of 8), §12 (new change-log entry);
+`ARCHITECTURE_DECISIONS.md` Part 3 new Finding 9, Part 4 summary counts
+updated to nine findings; `CLAUDE.md` roadmap item 3 marked done.
+
+**No conflicts found** with any existing ADR or Permanent Rule. The
+Action layer and Posture layer are not duplicates of each other (ADR
+07's "reject premature unification" precedent applies identically here);
+neither engine in the Action layer is dead code, so no retirement is
+proposed (unlike ADR 03/04).
+
+**Status:** specification only, zero code changes. Implementation
+blocked on the same two conditions as ADR 05/06/07: Curriculum
+Production Pipeline declares Canonical Knowledge Graph v1 frozen, AND
+explicit user approval. Next roadmap item: **#4 — Dynamic Lesson
+Composition.**
+
+---
+
+## 4g. ADR 09 — Dynamic Lesson Composition (this session, roadmap 4/8, documentation only)
+
+Pre-ADR checklist completed per the binding governance rule: re-read the
+Educational Brain Bible, ADRs 02-08, `ARCHITECTURE_DECISIONS.md`,
+`ENGINE_REFERENCE.md` (Engine 12/21), and this file before drafting — no
+conflicts found, all prior architecture preserved.
+
+**Audit performed:** read `lessonComposer.ts` in full and confirmed
+`composeLessonPlan()`'s pure core has no turn-history input, and
+`buildLessonPlanBlock()` renders the full stage list from stage 1 on
+every call despite describing itself as a "multi-turn pacing guide."
+Grepped `route.ts` and confirmed the Composer is called exactly once per
+turn (`route.ts:1372-1383`), fully recomputed inside the same `try` block
+as the Teaching Engine decision and TAG call, with no stage-tracking
+logic anywhere. Confirmed `contextSnapshot`'s current key set
+(`currentConceptNodeId`, `nextConceptNodeId`,
+`lastSuccessfulTeachingStyle`, `lastPrerequisiteGap`,
+`currentWorkedExample`) has no lesson-stage-progress equivalent. Read
+`workedExamples.ts` in full and confirmed it already implements a
+production-proven solution to exactly this class of problem — AI-emitted
+`[WE:concept|step|total]` tag, exact-match-strip server-side parse,
+persist to `contextSnapshot.currentWorkedExample`, resume-framing on the
+next turn — narrowly scoped to one stage type. Confirmed
+`masteryCheckStage()`'s `completion_criteria` text sources
+`assessment.mastery_threshold` from the flat `ASSESSMENT_PASS_THRESHOLD`
+constant, confirming (not reopening) the existing ADR 05/Finding 7 (R3)
+gap reaches further downstream than previously traced.
+
+**Created:** `docs/architecture/ADR_09_DYNAMIC_LESSON_COMPOSITION.md` —
+full 14-section ADR. Selected design: generalize the proven Worked
+Examples tag-emit/parse/persist/resume pattern to the Lesson Composer's
+`LessonPlan` via a new `contextSnapshot.lessonStageProgress` key, a new
+AI-emitted progress tag + parser, and an optional resume-framing
+parameter on `buildLessonPlanBlock()` — all additive, all kept in the
+calling code (`route.ts`), never inside `composeLessonPlan()`'s pure
+core. A `planSignature` fingerprint (plan shape, computed in the calling
+code) distinguishes genuine continuation from genuine replan. A
+normalized `LessonStageProgress` Prisma table was considered and rejected
+as premature, named as a candidate input to ADR 10's deferred
+Evidence-flow audit instead. A heuristic conversation-history-diffing
+alternative was rejected as a duplicate mechanism for an already-solved
+problem class.
+
+**Cross-references updated:** Bible §3 (engine map row #12), §6.2 (new
+paragraph naming the gap and the proposed generalization), §7 (new risk
+register row R13), §9 (ADR 09 row), §10 (roadmap status 4 of 8), §12 (new
+change-log entry); `ARCHITECTURE_DECISIONS.md` Part 3 new Finding 10,
+Part 4 summary counts updated to ten findings, closing paragraph gains
+the tenth-finding sentence; `CLAUDE.md` roadmap item 4 marked done.
+
+**No conflicts found** with any existing ADR or Permanent Rule.
+Confirmed this proposal touches only the Lesson Composer's `LessonPlan`
+(not `lessonPlanner.ts`'s differently-shaped type), neither resolving nor
+worsening the existing Finding 1/R10 naming overlap. Confirmed
+`decide()`, TAG, and `composeLessonPlan()`'s pure cores remain completely
+untouched — `planSignature` lives in calling code specifically to
+preserve the Composer's existing purity guarantee (Permanent Rule 4
+analogue).
+
+**Status:** specification only, zero code changes. Implementation
+blocked on the same two conditions as ADR 05/06/07/08: Curriculum
+Production Pipeline declares Canonical Knowledge Graph v1 frozen, AND
+explicit user approval. Next roadmap item: **#5 — Student Memory
+Evolution.**
+
+---
+
+## 4. Constraints carried forward (unchanged, still binding)
+
+- Do NOT create PRs unless explicitly asked. Do NOT push to branches
+  other than `claude/my-tutor-foundation-KDSUO`.
+- Do NOT redesign UI, navigation, or touch Hindi/Sanskrit subject
+  architecture.
+- Do NOT redesign Phase-1-approved architecture without documenting
+  objective evidence of a flaw and getting approval first (per the
+  Phase 2 kickoff instructions).
+- ADR 04 is permanently documentation-only by explicit user instruction
+  — do not execute it, do not re-raise it for approval.
+- Current priority (2026-06-30 onward): forward-looking Educational
+  Brain architecture (KG consumption, Teaching Action Intelligence,
+  Student Memory, Lesson Composition, Evidence Engine, Recommendation
+  Intelligence, Mastery Engine, Visualization, Simulation, Assessment,
+  progression framework, entrance exam framework, curriculum mapping, AI
+  independence, scalability) over dead-code/cleanup auditing. Do not
+  propose or execute further cleanup unless it blocks one of these.
+- **Strict architecture-only mode (2026-06-30, second pivot, binding for
+  all 8 roadmap ADRs in §4c):** do NOT implement adapter functions, do
+  NOT modify runtime/routes/schemas/production code, without explicit
+  per-item user approval. Do NOT expose `mastery_threshold`,
+  `cross_links`, or any other Canonical Knowledge Graph field until the
+  Curriculum Production Pipeline freezes the Canonical Knowledge Graph
+  v1 specification. ADR 05 Phase 1 specifically remains un-executed
+  under this rule, not merely "awaiting go-ahead."

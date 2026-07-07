@@ -1,0 +1,1584 @@
+{
+  "domain_id": "differential-equations",
+  "domain_name": "Differential Equations",
+  "id_prefix": "math.de",
+  "level_range": [
+    4,
+    7
+  ],
+  "description": "The study of equations relating functions to their derivatives. Encompasses ordinary differential equations (ODEs), systems of ODEs, Laplace transform methods, series solutions, and partial differential equations (PDEs).",
+  "concepts": [
+    {
+      "id": "math.de.ode",
+      "name": "Ordinary Differential Equation",
+      "aliases": [
+        "ODE",
+        "differential equation"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.ode-order",
+        "math.de.ode-linearity",
+        "math.de.solution-types"
+      ],
+      "requires": [
+        "math.calc.derivative-intro",
+        "math.calc.antiderivatives",
+        "math.func.function-concept"
+      ],
+      "unlocks": [
+        "math.de.first-order-ode",
+        "math.de.second-order-ode"
+      ],
+      "related": [
+        "math.de.pde"
+      ],
+      "cross_links": [
+        "math.phys.classical-mechanics"
+      ],
+      "description": "An equation involving an unknown function of one variable and its derivatives. The order is the highest derivative present; the degree is the power of that highest derivative.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations",
+        "Tenenbaum & Pollard, Ordinary Differential Equations"
+      ]
+    },
+    {
+      "id": "math.de.ode-order",
+      "name": "Order of a Differential Equation",
+      "aliases": [
+        "ODE order"
+      ],
+      "parent": "math.de.ode",
+      "children": [],
+      "requires": [
+        "math.de.ode"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.ode-linearity"
+      ],
+      "cross_links": [],
+      "description": "The order of an ODE is determined by the highest derivative appearing in it. A first-order ODE involves only y\u2032; second-order involves y\u2033, etc.",
+      "difficulty": "advanced",
+      "estimated_hours": 1,
+      "bloom": "remember",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.1"
+      ]
+    },
+    {
+      "id": "math.de.ode-linearity",
+      "name": "Linearity of Differential Equations",
+      "aliases": [
+        "linear ODE",
+        "nonlinear ODE"
+      ],
+      "parent": "math.de.ode",
+      "children": [],
+      "requires": [
+        "math.de.ode"
+      ],
+      "unlocks": [
+        "math.de.linear-first-order",
+        "math.de.second-order-linear"
+      ],
+      "related": [
+        "math.de.ode-order"
+      ],
+      "cross_links": [
+        "math.linalg.linear-map"
+      ],
+      "description": "An ODE is linear if it can be written as a linear combination of y and its derivatives with coefficients depending only on the independent variable. Nonlinear ODEs include products of y and its derivatives.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.1"
+      ]
+    },
+    {
+      "id": "math.de.solution-types",
+      "name": "Types of Solutions",
+      "aliases": [
+        "general solution",
+        "particular solution",
+        "singular solution"
+      ],
+      "parent": "math.de.ode",
+      "children": [],
+      "requires": [
+        "math.de.ode"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.ivp"
+      ],
+      "cross_links": [],
+      "description": "A general solution contains arbitrary constants equal in number to the ODE order. A particular solution fixes those constants from initial/boundary conditions. Singular solutions are not obtainable from the general solution.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Tenenbaum & Pollard, Ordinary Differential Equations, Ch.2"
+      ]
+    },
+    {
+      "id": "math.de.ivp",
+      "name": "Initial Value Problem",
+      "aliases": [
+        "IVP",
+        "Cauchy problem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.ode",
+        "math.de.solution-types"
+      ],
+      "unlocks": [
+        "math.de.existence-uniqueness"
+      ],
+      "related": [
+        "math.de.bvp"
+      ],
+      "cross_links": [],
+      "description": "An ODE together with conditions specifying the value of the solution and its derivatives at a single point (the initial point). Determines a unique solution under appropriate smoothness conditions.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.2"
+      ]
+    },
+    {
+      "id": "math.de.existence-uniqueness",
+      "name": "Existence and Uniqueness Theorem",
+      "aliases": [
+        "Picard-Lindel\u00f6f theorem",
+        "Cauchy-Lipschitz theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.ivp",
+        "math.real.lipschitz-continuity"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.solution-types"
+      ],
+      "cross_links": [
+        "math.real.fixed-point-theorem"
+      ],
+      "description": "If f(x,y) and \u2202f/\u2202y are continuous in a rectangle around (x\u2080,y\u2080), then the IVP y\u2032=f(x,y), y(x\u2080)=y\u2080 has a unique solution in some interval around x\u2080. Proved via Picard iteration.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Coddington & Levinson, Theory of Ordinary Differential Equations, Ch.1"
+      ]
+    },
+    {
+      "id": "math.de.first-order-ode",
+      "name": "First-Order ODE",
+      "aliases": [
+        "first-order differential equation"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.separable",
+        "math.de.linear-first-order",
+        "math.de.exact-ode",
+        "math.de.bernoulli",
+        "math.de.homogeneous-ode"
+      ],
+      "requires": [
+        "math.de.ode",
+        "math.calc.antiderivatives",
+        "math.calc.u-substitution"
+      ],
+      "unlocks": [
+        "math.de.second-order-ode"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An ODE involving only the first derivative y\u2032. Solution methods include separation of variables, integrating factors, exact equations, substitution, and Bernoulli's equation technique.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.2"
+      ]
+    },
+    {
+      "id": "math.de.separable",
+      "name": "Separable Differential Equation",
+      "aliases": [
+        "separation of variables (ODE)"
+      ],
+      "parent": "math.de.first-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.first-order-ode",
+        "math.calc.definite-integral"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.linear-first-order"
+      ],
+      "cross_links": [],
+      "description": "An ODE of the form dy/dx = g(x)h(y); rearranged as dy/h(y) = g(x)dx and integrated on both sides. One of the most elementary solution techniques.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a72.2"
+      ]
+    },
+    {
+      "id": "math.de.linear-first-order",
+      "name": "Linear First-Order ODE",
+      "aliases": [
+        "integrating factor method"
+      ],
+      "parent": "math.de.first-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.first-order-ode",
+        "math.de.ode-linearity",
+        "math.calc.u-substitution"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.separable"
+      ],
+      "cross_links": [],
+      "description": "An ODE of the form y\u2032 + P(x)y = Q(x). Solved by multiplying by the integrating factor \u03bc(x)=e^{\u222bP dx}, making the left side an exact derivative.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a72.1"
+      ]
+    },
+    {
+      "id": "math.de.exact-ode",
+      "name": "Exact Differential Equation",
+      "aliases": [
+        "exact ODE"
+      ],
+      "parent": "math.de.first-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.first-order-ode",
+        "math.calc.partial-derivatives"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.linear-first-order"
+      ],
+      "cross_links": [],
+      "description": "An ODE M(x,y)dx + N(x,y)dy = 0 where \u2202M/\u2202y = \u2202N/\u2202x. Solution is found by identifying a potential function F such that dF=0.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Tenenbaum & Pollard, Ordinary Differential Equations, Ch.4"
+      ]
+    },
+    {
+      "id": "math.de.bernoulli",
+      "name": "Bernoulli Equation",
+      "aliases": [
+        "Bernoulli ODE"
+      ],
+      "parent": "math.de.first-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.linear-first-order"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.homogeneous-ode"
+      ],
+      "cross_links": [],
+      "description": "An ODE of the form y\u2032 + P(x)y = Q(x)y\u207f. Linearized by the substitution v = y^{1-n}, converting to a linear first-order ODE in v.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a72.4"
+      ]
+    },
+    {
+      "id": "math.de.homogeneous-ode",
+      "name": "Homogeneous First-Order ODE",
+      "aliases": [
+        "homogeneous ODE substitution"
+      ],
+      "parent": "math.de.first-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.first-order-ode",
+        "math.de.separable"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.bernoulli"
+      ],
+      "cross_links": [],
+      "description": "An ODE of the form dy/dx = F(y/x). Solved by the substitution v = y/x, transforming it into a separable equation in v and x.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Tenenbaum & Pollard, Ordinary Differential Equations, Ch.3"
+      ]
+    },
+    {
+      "id": "math.de.slope-field",
+      "name": "Slope Field",
+      "aliases": [
+        "direction field"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.first-order-ode"
+      ],
+      "unlocks": [
+        "math.de.phase-plane"
+      ],
+      "related": [
+        "math.de.euler-method"
+      ],
+      "cross_links": [],
+      "description": "A graphical representation of a first-order ODE by drawing short tangent-line segments at a grid of points (x,y), revealing the qualitative behavior of solutions without solving explicitly.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a71.3"
+      ]
+    },
+    {
+      "id": "math.de.euler-method",
+      "name": "Euler's Method",
+      "aliases": [
+        "forward Euler",
+        "Euler numerical method"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.first-order-ode",
+        "math.de.ivp"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.slope-field"
+      ],
+      "cross_links": [
+        "math.num.euler-method"
+      ],
+      "description": "The simplest numerical method for ODEs: step forward in x by h, updating y by y_{n+1} = y_n + h\u00b7f(x_n, y_n). Error per step O(h\u00b2); global error O(h).",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a78.1"
+      ]
+    },
+    {
+      "id": "math.de.second-order-ode",
+      "name": "Second-Order ODE",
+      "aliases": [
+        "second-order differential equation"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.second-order-linear",
+        "math.de.second-order-homogeneous",
+        "math.de.char-equation",
+        "math.de.undetermined-coefficients",
+        "math.de.variation-of-parameters"
+      ],
+      "requires": [
+        "math.de.first-order-ode"
+      ],
+      "unlocks": [
+        "math.de.higher-order-ode",
+        "math.de.systems-ode"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An ODE involving the second derivative y\u2033. Of primary physical importance (Newton's second law, harmonic oscillators, beam equations). Standard form: y\u2033 + P(x)y\u2032 + Q(x)y = G(x).",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.3"
+      ]
+    },
+    {
+      "id": "math.de.second-order-linear",
+      "name": "Second-Order Linear ODE",
+      "aliases": [
+        "linear second-order ODE"
+      ],
+      "parent": "math.de.second-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.second-order-ode",
+        "math.de.ode-linearity"
+      ],
+      "unlocks": [
+        "math.de.second-order-homogeneous"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An ODE y\u2033 + P(x)y\u2032 + Q(x)y = G(x). When G=0 it is homogeneous; when G\u22600 it is nonhomogeneous. Solutions form a vector space (superposition principle applies for homogeneous case).",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.1"
+      ]
+    },
+    {
+      "id": "math.de.second-order-homogeneous",
+      "name": "Homogeneous Second-Order Linear ODE",
+      "aliases": [
+        "homogeneous linear ODE"
+      ],
+      "parent": "math.de.second-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.second-order-linear"
+      ],
+      "unlocks": [
+        "math.de.char-equation",
+        "math.de.wronskian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The equation y\u2033 + P(x)y\u2032 + Q(x)y = 0. Two linearly independent solutions y\u2081, y\u2082 form a fundamental set; general solution is c\u2081y\u2081 + c\u2082y\u2082. Linearity determined by the Wronskian.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.2"
+      ]
+    },
+    {
+      "id": "math.de.wronskian",
+      "name": "Wronskian",
+      "aliases": [
+        "Wronskian determinant"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.second-order-homogeneous",
+        "math.linalg.determinant"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.second-order-homogeneous"
+      ],
+      "cross_links": [
+        "math.linalg.linear-independence"
+      ],
+      "description": "W(y\u2081,y\u2082) = y\u2081y\u2082\u2032 \u2212 y\u2081\u2032y\u2082; nonzero at some point iff y\u2081 and y\u2082 are linearly independent. Abel's theorem gives W(x) = W(x\u2080)exp(\u2212\u222bP dx).",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.3"
+      ]
+    },
+    {
+      "id": "math.de.char-equation",
+      "name": "Characteristic Equation",
+      "aliases": [
+        "auxiliary equation",
+        "characteristic polynomial (ODE)"
+      ],
+      "parent": "math.de.second-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.second-order-homogeneous",
+        "math.alg.quadratic-formula"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.undetermined-coefficients"
+      ],
+      "cross_links": [
+        "math.linalg.characteristic-polynomial"
+      ],
+      "description": "For constant-coefficient ODE ay\u2033+by\u2032+cy=0, substituting y=e^{rx} yields the characteristic equation ar\u00b2+br+c=0. The three cases (distinct real, repeated, complex roots) yield distinct solution forms.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.4\u20133.6"
+      ]
+    },
+    {
+      "id": "math.de.undetermined-coefficients",
+      "name": "Method of Undetermined Coefficients",
+      "aliases": [
+        "undetermined coefficients"
+      ],
+      "parent": "math.de.second-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.second-order-linear",
+        "math.de.char-equation"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.variation-of-parameters"
+      ],
+      "cross_links": [],
+      "description": "A technique for finding a particular solution to ay\u2033+by\u2032+cy=G(x) when G(x) is a polynomial, exponential, sine, cosine, or product thereof. Assumes a trial solution of the same form as G(x) and solves for unknown coefficients.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.5"
+      ]
+    },
+    {
+      "id": "math.de.variation-of-parameters",
+      "name": "Variation of Parameters",
+      "aliases": [
+        "method of variation of parameters"
+      ],
+      "parent": "math.de.second-order-ode",
+      "children": [],
+      "requires": [
+        "math.de.wronskian",
+        "math.de.second-order-homogeneous",
+        "math.calc.integration-by-parts"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.undetermined-coefficients"
+      ],
+      "cross_links": [],
+      "description": "A general technique for finding particular solutions to y\u2033+P(x)y\u2032+Q(x)y=G(x) using the known fundamental set {y\u2081,y\u2082}. Sets y_p = u\u2081y\u2081+u\u2082y\u2082 and imposes conditions to determine u\u2081\u2032,u\u2082\u2032 via the Wronskian.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.7"
+      ]
+    },
+    {
+      "id": "math.de.harmonic-oscillator",
+      "name": "Harmonic Oscillator",
+      "aliases": [
+        "simple harmonic motion",
+        "damped oscillation",
+        "forced oscillation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.char-equation",
+        "math.de.undetermined-coefficients"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.resonance"
+      ],
+      "cross_links": [
+        "math.trig.trig-functions"
+      ],
+      "description": "The ODE my\u2033+by\u2032+ky=F(t) models spring-mass-damper systems. Cases: undamped (b=0), underdamped (b\u00b2<4mk), critically damped (b\u00b2=4mk), overdamped (b\u00b2>4mk). Each case determines the transient behavior.",
+      "difficulty": "advanced",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.8"
+      ]
+    },
+    {
+      "id": "math.de.resonance",
+      "name": "Resonance",
+      "aliases": [
+        "pure resonance",
+        "practical resonance"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.harmonic-oscillator"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.harmonic-oscillator"
+      ],
+      "cross_links": [],
+      "description": "When the forcing frequency matches the natural frequency of an undamped oscillator, the amplitude grows without bound (pure resonance). In damped systems, resonance occurs at a slightly different frequency (practical resonance).",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a73.9"
+      ]
+    },
+    {
+      "id": "math.de.higher-order-ode",
+      "name": "Higher-Order Linear ODE",
+      "aliases": [
+        "nth-order linear ODE"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.second-order-linear",
+        "math.alg.polynomial-roots"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.linalg.vector-space"
+      ],
+      "description": "An nth-order linear ODE has n linearly independent solutions forming an n-dimensional solution space. Constant-coefficient case solved by characteristic polynomial of degree n; methods generalize from second-order case.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.4"
+      ]
+    },
+    {
+      "id": "math.de.laplace-transform",
+      "name": "Laplace Transform",
+      "aliases": [
+        "Laplace transform method"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.laplace-properties",
+        "math.de.inverse-laplace",
+        "math.de.laplace-ode"
+      ],
+      "requires": [
+        "math.de.second-order-ode",
+        "math.calc.improper-integrals",
+        "math.calc.integration-by-parts"
+      ],
+      "unlocks": [
+        "math.de.laplace-ode",
+        "math.de.convolution-theorem"
+      ],
+      "related": [
+        "math.de.fourier-series"
+      ],
+      "cross_links": [
+        "math.fnal.fourier-transform"
+      ],
+      "description": "The integral transform \u2112{f}(s) = \u222b\u2080^\u221e e^{\u2212st}f(t)dt converting differential equations into algebraic equations in s. Transforms derivatives into polynomial multiplication in s.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.6"
+      ]
+    },
+    {
+      "id": "math.de.laplace-properties",
+      "name": "Laplace Transform Properties",
+      "aliases": [
+        "linearity of Laplace",
+        "shifting theorems"
+      ],
+      "parent": "math.de.laplace-transform",
+      "children": [],
+      "requires": [
+        "math.de.laplace-transform"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.inverse-laplace"
+      ],
+      "cross_links": [],
+      "description": "Key properties: linearity (\u2112{af+bg}=a\u2112{f}+b\u2112{g}), first shifting theorem (\u2112{e^{at}f}(s)=F(s\u2212a)), second shifting theorem (Heaviside step), derivative rule (\u2112{f\u2032}=sF(s)\u2212f(0)), convolution.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a76.1\u20136.4"
+      ]
+    },
+    {
+      "id": "math.de.inverse-laplace",
+      "name": "Inverse Laplace Transform",
+      "aliases": [
+        "inverse Laplace",
+        "partial fractions Laplace"
+      ],
+      "parent": "math.de.laplace-transform",
+      "children": [],
+      "requires": [
+        "math.de.laplace-properties",
+        "math.calc.partial-fractions"
+      ],
+      "unlocks": [
+        "math.de.laplace-ode"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The process of recovering f(t) from its Laplace transform F(s). Standard technique: use partial fraction decomposition to match to known transform pairs from tables.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a76.2"
+      ]
+    },
+    {
+      "id": "math.de.laplace-ode",
+      "name": "Solving ODEs with Laplace Transform",
+      "aliases": [
+        "Laplace ODE method"
+      ],
+      "parent": "math.de.laplace-transform",
+      "children": [],
+      "requires": [
+        "math.de.inverse-laplace",
+        "math.de.ivp"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Workflow: take Laplace transform of ODE to get algebraic equation in Y(s), solve for Y(s), take inverse Laplace to obtain y(t). Initial conditions are automatically incorporated in the transform step.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a76.3"
+      ]
+    },
+    {
+      "id": "math.de.convolution-theorem",
+      "name": "Convolution Theorem (Laplace)",
+      "aliases": [
+        "convolution integral"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.laplace-transform"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.laplace-properties"
+      ],
+      "cross_links": [
+        "math.fnal.convolution"
+      ],
+      "description": "\u2112{f*g}(s) = F(s)\u00b7G(s), where (f*g)(t)=\u222b\u2080^t f(\u03c4)g(t\u2212\u03c4)d\u03c4 is the convolution. Allows recovery of the inverse Laplace of a product without full partial-fraction decomposition.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a76.6"
+      ]
+    },
+    {
+      "id": "math.de.systems-ode",
+      "name": "Systems of ODEs",
+      "aliases": [
+        "ODE system",
+        "system of differential equations"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.systems-matrix-method",
+        "math.de.phase-plane"
+      ],
+      "requires": [
+        "math.de.second-order-ode",
+        "math.linalg.matrix",
+        "math.linalg.eigenvalues"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.linalg.diagonalization"
+      ],
+      "description": "A set of ODEs involving multiple dependent variables: x\u2032=Ax+b (linear) or x\u2032=f(x) (nonlinear). First-order systems can represent nth-order scalar ODEs via state-vector reduction.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.7"
+      ]
+    },
+    {
+      "id": "math.de.systems-matrix-method",
+      "name": "Matrix Method for Linear Systems",
+      "aliases": [
+        "eigenvalue method for ODE systems"
+      ],
+      "parent": "math.de.systems-ode",
+      "children": [],
+      "requires": [
+        "math.de.systems-ode",
+        "math.linalg.eigenvalues",
+        "math.linalg.diagonalization"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.phase-plane"
+      ],
+      "cross_links": [
+        "math.linalg.matrix-exponential"
+      ],
+      "description": "For x\u2032=Ax, solutions are of the form x=e^{\u03bbt}v where (\u03bb,v) are eigenvalue-eigenvector pairs of A. Three cases: distinct real, repeated, complex conjugate eigenvalues \u2014 each producing a distinct fundamental matrix.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a77.5\u20137.8"
+      ]
+    },
+    {
+      "id": "math.de.phase-plane",
+      "name": "Phase Plane Analysis",
+      "aliases": [
+        "phase portrait",
+        "autonomous systems",
+        "equilibrium stability"
+      ],
+      "parent": "math.de.systems-ode",
+      "children": [],
+      "requires": [
+        "math.de.systems-ode",
+        "math.de.slope-field"
+      ],
+      "unlocks": [
+        "math.de.stability-analysis"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "For 2D autonomous systems x\u2032=f(x,y), y\u2032=g(x,y), trajectories in the xy-plane (phase plane) reveal global solution behavior. Equilibria classified by eigenvalue structure: nodes, spirals, saddles, centers.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strogatz, Nonlinear Dynamics and Chaos, Ch.5\u20136"
+      ]
+    },
+    {
+      "id": "math.de.stability-analysis",
+      "name": "Stability Analysis",
+      "aliases": [
+        "Lyapunov stability",
+        "asymptotic stability"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.phase-plane"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.phase-plane"
+      ],
+      "cross_links": [],
+      "description": "Classification of equilibria of ODEs: stable (Lyapunov), asymptotically stable, or unstable. Linearization near equilibria using the Jacobian determines local stability; Lyapunov functions give global results.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Strogatz, Nonlinear Dynamics and Chaos, Ch.6; Perko, Differential Equations and Dynamical Systems"
+      ]
+    },
+    {
+      "id": "math.de.series-solution",
+      "name": "Series Solution of ODEs",
+      "aliases": [
+        "power series method for ODEs"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.frobenius-method"
+      ],
+      "requires": [
+        "math.de.second-order-linear",
+        "math.calc.power-series"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.calc.taylor-series"
+      ],
+      "description": "Assumes y=\u2211a\u2099x\u207f and substitutes into the ODE to determine the recurrence relation for coefficients a\u2099. Valid when x=0 is an ordinary point of the ODE.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.5"
+      ]
+    },
+    {
+      "id": "math.de.frobenius-method",
+      "name": "Frobenius Method",
+      "aliases": [
+        "method of Frobenius",
+        "extended power series method"
+      ],
+      "parent": "math.de.series-solution",
+      "children": [],
+      "requires": [
+        "math.de.series-solution"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "For ODEs with a regular singular point at x=0, seeks solutions of the form y=x\u02b3\u2211a\u2099x\u207f. The indicial equation determines r. Three subcases based on root difference: distinct non-integer, integer, or equal roots.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a75.5\u20135.7"
+      ]
+    },
+    {
+      "id": "math.de.bessel-equation",
+      "name": "Bessel's Equation",
+      "aliases": [
+        "Bessel functions",
+        "Bessel equation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.frobenius-method"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.legendre-equation"
+      ],
+      "cross_links": [
+        "math.fnal.special-functions"
+      ],
+      "description": "x\u00b2y\u2033+xy\u2032+(x\u00b2\u2212\u03bd\u00b2)y=0; solutions are Bessel functions J\u1d65(x) and Y\u1d65(x). Arise in problems with cylindrical symmetry; J\u1d65 regular at origin, Y\u1d65 singular.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a75.7; Watson, Bessel Functions"
+      ]
+    },
+    {
+      "id": "math.de.legendre-equation",
+      "name": "Legendre's Equation",
+      "aliases": [
+        "Legendre polynomials",
+        "Legendre equation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.series-solution"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.bessel-equation"
+      ],
+      "cross_links": [
+        "math.fnal.special-functions"
+      ],
+      "description": "(1\u2212x\u00b2)y\u2033\u22122xy\u2032+n(n+1)y=0; polynomial solutions are Legendre polynomials P\u2099(x). Arise in problems with spherical symmetry. Form an orthogonal basis on [\u22121,1].",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a75.3"
+      ]
+    },
+    {
+      "id": "math.de.sturm-liouville",
+      "name": "Sturm-Liouville Theory",
+      "aliases": [
+        "Sturm-Liouville problem",
+        "SL theory"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.second-order-linear",
+        "math.de.bvp",
+        "math.linalg.inner-product"
+      ],
+      "unlocks": [
+        "math.de.eigenfunction-expansion"
+      ],
+      "related": [
+        "math.de.fourier-series"
+      ],
+      "cross_links": [
+        "math.fnal.spectral-theory"
+      ],
+      "description": "The boundary value problem (p(x)y\u2032)\u2032+q(x)y+\u03bbw(x)y=0 with boundary conditions. Has countably many eigenvalues \u03bb\u2099 and orthogonal eigenfunctions \u03c6\u2099 forming a complete set in L\u00b2([a,b],w).",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Birkhoff & Rota, Ordinary Differential Equations, Ch.10"
+      ]
+    },
+    {
+      "id": "math.de.eigenfunction-expansion",
+      "name": "Eigenfunction Expansion",
+      "aliases": [
+        "generalized Fourier series"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.sturm-liouville"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.fourier-series"
+      ],
+      "cross_links": [
+        "math.fnal.hilbert-space"
+      ],
+      "description": "Expanding a function f in terms of eigenfunctions \u03c6\u2099 of a Sturm-Liouville problem: f(x)=\u2211c\u2099\u03c6\u2099(x) with c\u2099=\u27e8f,\u03c6\u2099\u27e9/\u27e8\u03c6\u2099,\u03c6\u2099\u27e9. Generalizes Fourier series to arbitrary weighted inner products.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Birkhoff & Rota, Ordinary Differential Equations, Ch.10"
+      ]
+    },
+    {
+      "id": "math.de.bvp",
+      "name": "Boundary Value Problem",
+      "aliases": [
+        "BVP",
+        "two-point boundary value problem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.second-order-ode"
+      ],
+      "unlocks": [
+        "math.de.sturm-liouville"
+      ],
+      "related": [
+        "math.de.ivp"
+      ],
+      "cross_links": [],
+      "description": "An ODE with conditions specified at two or more distinct points. Unlike IVPs, existence and uniqueness are not guaranteed; a BVP may have no solution, a unique solution, or infinitely many solutions.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a710.1"
+      ]
+    },
+    {
+      "id": "math.de.fourier-series",
+      "name": "Fourier Series",
+      "aliases": [
+        "Fourier expansion",
+        "trigonometric series"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.fourier-convergence",
+        "math.de.fourier-sine-cosine"
+      ],
+      "requires": [
+        "math.de.bvp",
+        "math.calc.definite-integral",
+        "math.trig.trig-functions"
+      ],
+      "unlocks": [
+        "math.de.heat-equation",
+        "math.de.wave-equation",
+        "math.de.fourier-transform"
+      ],
+      "related": [
+        "math.de.sturm-liouville",
+        "math.seq.series"
+      ],
+      "cross_links": [
+        "math.fnal.fourier-transform"
+      ],
+      "description": "Represents a periodic function as f(x)=a\u2080/2+\u2211(a\u2099cos(n\u03c0x/L)+b\u2099sin(n\u03c0x/L)), with coefficients computed by orthogonality integrals. Cornerstone of classical and modern analysis.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.10; K\u00f6rner, Fourier Analysis"
+      ]
+    },
+    {
+      "id": "math.de.fourier-convergence",
+      "name": "Convergence of Fourier Series",
+      "aliases": [
+        "Dirichlet conditions",
+        "Gibbs phenomenon"
+      ],
+      "parent": "math.de.fourier-series",
+      "children": [],
+      "requires": [
+        "math.de.fourier-series",
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.real.pointwise-convergence"
+      ],
+      "description": "Dirichlet's theorem: if f is piecewise smooth, the Fourier series converges to f(x) at continuity points and to [f(x\u207a)+f(x\u207b)]/2 at jumps. Near jump discontinuities, overshoot is ~9% (Gibbs phenomenon).",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "K\u00f6rner, Fourier Analysis, Ch.1\u20133"
+      ]
+    },
+    {
+      "id": "math.de.fourier-sine-cosine",
+      "name": "Fourier Sine and Cosine Series",
+      "aliases": [
+        "half-range expansions"
+      ],
+      "parent": "math.de.fourier-series",
+      "children": [],
+      "requires": [
+        "math.de.fourier-series"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "On [0,L], a function can be extended as an odd function (yielding a pure sine series) or an even function (yielding a pure cosine series), matching different boundary conditions in PDE applications.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, \u00a710.4"
+      ]
+    },
+    {
+      "id": "math.de.fourier-transform",
+      "name": "Fourier Transform",
+      "aliases": [
+        "continuous Fourier transform"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.fourier-series",
+        "math.calc.improper-integrals"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.laplace-transform"
+      ],
+      "cross_links": [
+        "math.fnal.fourier-transform",
+        "math.meas.l2-space"
+      ],
+      "description": "The integral transform f\u0302(\u03c9)=\u222b_{-\u221e}^\u221e f(t)e^{\u2212i\u03c9t}dt for non-periodic functions. Converts differentiation to multiplication by i\u03c9; used for solving ODEs/PDEs on the whole real line.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Boyce & DiPrima, Elementary Differential Equations, Ch.10; Folland, Fourier Analysis"
+      ]
+    },
+    {
+      "id": "math.de.pde",
+      "name": "Partial Differential Equation",
+      "aliases": [
+        "PDE"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.pde-classification",
+        "math.de.heat-equation",
+        "math.de.wave-equation",
+        "math.de.laplace-equation"
+      ],
+      "requires": [
+        "math.de.ode",
+        "math.calc.partial-derivatives"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "An equation involving partial derivatives of an unknown function of several variables. Classified (for linear second-order) as elliptic, parabolic, or hyperbolic based on the discriminant of the principal part.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Evans, Partial Differential Equations; Strauss, Partial Differential Equations"
+      ]
+    },
+    {
+      "id": "math.de.pde-classification",
+      "name": "Classification of Second-Order PDEs",
+      "aliases": [
+        "elliptic parabolic hyperbolic PDE"
+      ],
+      "parent": "math.de.pde",
+      "children": [],
+      "requires": [
+        "math.de.pde"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.heat-equation",
+        "math.de.wave-equation",
+        "math.de.laplace-equation"
+      ],
+      "cross_links": [],
+      "description": "For Au_{xx}+Bu_{xy}+Cu_{yy}+lower=0, the discriminant B\u00b2\u22124AC determines: elliptic (<0), parabolic (=0), hyperbolic (>0). Each class has distinct mathematical structure and physical interpretation.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Evans, Partial Differential Equations, Ch.1"
+      ]
+    },
+    {
+      "id": "math.de.separation-of-variables-pde",
+      "name": "Separation of Variables (PDE)",
+      "aliases": [
+        "PDE separation method"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.pde",
+        "math.de.fourier-series",
+        "math.de.bvp"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.heat-equation",
+        "math.de.wave-equation",
+        "math.de.laplace-equation"
+      ],
+      "cross_links": [],
+      "description": "Assumes u(x,t)=X(x)T(t) (or analogous in other variables), splitting the PDE into ODEs for each factor, linked by a separation constant. Yields eigenvalue problems for X, then Fourier series expansions.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strauss, Partial Differential Equations, Ch.1\u20134"
+      ]
+    },
+    {
+      "id": "math.de.heat-equation",
+      "name": "Heat Equation",
+      "aliases": [
+        "diffusion equation"
+      ],
+      "parent": "math.de.pde",
+      "children": [],
+      "requires": [
+        "math.de.separation-of-variables-pde",
+        "math.de.fourier-series"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.wave-equation"
+      ],
+      "cross_links": [],
+      "description": "u_t = k\u00b7u_{xx} (parabolic). Models heat diffusion and Brownian motion. Solved on finite intervals by separation of variables + Fourier series; on the full line by Fourier transform giving Gaussian kernel solution.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strauss, Partial Differential Equations, Ch.1; Evans, PDE, Ch.2"
+      ]
+    },
+    {
+      "id": "math.de.wave-equation",
+      "name": "Wave Equation",
+      "aliases": [
+        "one-dimensional wave equation"
+      ],
+      "parent": "math.de.pde",
+      "children": [],
+      "requires": [
+        "math.de.separation-of-variables-pde",
+        "math.de.fourier-series"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.heat-equation"
+      ],
+      "cross_links": [],
+      "description": "u_{tt} = c\u00b2u_{xx} (hyperbolic). Models string vibrations, acoustics, and light. D'Alembert's solution u=f(x+ct)+g(x\u2212ct) on the infinite line; Fourier series on finite intervals.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Strauss, Partial Differential Equations, Ch.2"
+      ]
+    },
+    {
+      "id": "math.de.laplace-equation",
+      "name": "Laplace's Equation",
+      "aliases": [
+        "Laplace equation",
+        "harmonic functions PDE"
+      ],
+      "parent": "math.de.pde",
+      "children": [
+        "math.de.harmonic-functions"
+      ],
+      "requires": [
+        "math.de.separation-of-variables-pde"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.poisson-equation"
+      ],
+      "cross_links": [
+        "math.cx.harmonic-functions"
+      ],
+      "description": "\u2207\u00b2u = u_{xx}+u_{yy} = 0 (elliptic). Solutions are harmonic functions, satisfying the mean value property and maximum principle. Solved on disks/rectangles by separation; on complex domains by conformal mapping.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Evans, PDE, Ch.2; Strauss, PDE, Ch.6"
+      ]
+    },
+    {
+      "id": "math.de.harmonic-functions",
+      "name": "Harmonic Functions",
+      "aliases": [
+        "harmonic function theory"
+      ],
+      "parent": "math.de.laplace-equation",
+      "children": [],
+      "requires": [
+        "math.de.laplace-equation"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.cx.analytic-functions",
+        "math.cx.cauchy-riemann"
+      ],
+      "description": "Functions satisfying \u2207\u00b2u=0. Key properties: mean value property (value at a point equals average over any surrounding sphere/circle), maximum/minimum principle (extrema only on boundary), uniqueness of Dirichlet problem.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Evans, PDE, \u00a72.2"
+      ]
+    },
+    {
+      "id": "math.de.poisson-equation",
+      "name": "Poisson's Equation",
+      "aliases": [
+        "Poisson equation"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.laplace-equation"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.laplace-equation"
+      ],
+      "cross_links": [
+        "math.de.greens-function"
+      ],
+      "description": "\u2207\u00b2u = f; the nonhomogeneous version of Laplace's equation. Arises in electrostatics (Poisson's equation for potential), Newtonian gravity. Solved by Green's functions when f is a source term.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Evans, PDE, \u00a72.2"
+      ]
+    },
+    {
+      "id": "math.de.greens-function",
+      "name": "Green's Function",
+      "aliases": [
+        "Green's function method"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.de.poisson-equation",
+        "math.de.ivp"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.poisson-equation"
+      ],
+      "cross_links": [
+        "math.fnal.distributions"
+      ],
+      "description": "The Green's function G(x,\u03be) is the response to a unit point source: LG=\u03b4(x\u2212\u03be). Allows expressing solutions to Lu=f as u(x)=\u222bG(x,\u03be)f(\u03be)d\u03be. Encodes both operator and boundary conditions.",
+      "difficulty": "research",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Evans, PDE, \u00a72.4; Stakgold & Holst, Green's Functions and Boundary Value Problems"
+      ]
+    },
+    {
+      "id": "math.de.nonlinear-ode",
+      "name": "Nonlinear ODE",
+      "aliases": [
+        "nonlinear differential equation"
+      ],
+      "parent": null,
+      "children": [
+        "math.de.bifurcation",
+        "math.de.chaos"
+      ],
+      "requires": [
+        "math.de.first-order-ode",
+        "math.de.stability-analysis"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.systems-ode"
+      ],
+      "cross_links": [],
+      "description": "An ODE in which the unknown function or its derivatives appear nonlinearly. General analytic solutions rarely exist; qualitative theory (phase plane, Lyapunov, bifurcation) and numerical methods are primary tools.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Strogatz, Nonlinear Dynamics and Chaos"
+      ]
+    },
+    {
+      "id": "math.de.bifurcation",
+      "name": "Bifurcation Theory",
+      "aliases": [
+        "bifurcation",
+        "bifurcation diagram"
+      ],
+      "parent": "math.de.nonlinear-ode",
+      "children": [],
+      "requires": [
+        "math.de.nonlinear-ode",
+        "math.de.stability-analysis"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.chaos"
+      ],
+      "cross_links": [],
+      "description": "A bifurcation is a qualitative change in the solution structure of a system as a parameter crosses a critical value. Classic types: saddle-node, pitchfork, transcritical, Hopf. Each has a canonical normal form.",
+      "difficulty": "research",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Strogatz, Nonlinear Dynamics and Chaos, Ch.3; Guckenheimer & Holmes, Nonlinear Oscillations"
+      ]
+    },
+    {
+      "id": "math.de.chaos",
+      "name": "Chaotic Dynamics",
+      "aliases": [
+        "chaos theory",
+        "sensitive dependence on initial conditions",
+        "strange attractor"
+      ],
+      "parent": "math.de.nonlinear-ode",
+      "children": [],
+      "requires": [
+        "math.de.nonlinear-ode",
+        "math.de.bifurcation"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.de.bifurcation"
+      ],
+      "cross_links": [],
+      "description": "Deterministic systems exhibiting sensitive dependence on initial conditions: nearby trajectories diverge exponentially (positive Lyapunov exponent). Lorenz attractor is the canonical example. Not the same as randomness.",
+      "difficulty": "research",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.6,
+      "references": [
+        "Strogatz, Nonlinear Dynamics and Chaos, Ch.9\u201312"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "optics",
+  "domain_prefix": "phys.opt",
+  "domain_name": "Optics",
+  "subject": "physics",
+  "concept_count": 15,
+  "asset_count": 15,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-02",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "phys.opt.mirrors",
+        "phys.opt.youngs-experiment",
+        "phys.opt.brewsters-law"
+      ],
+      "coverage": "20% full audit + worked-example arithmetic sweep of all 15",
+      "defects_found": 0
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:3ddedf14d2cbe7bc8522860c06481054f1614c9a8dd9f92640b588767583ef51",
+    "assets_file_sha256": "sha256:96b6894e2c66126be4d1edaa5ef5d041bb7f651680a078ba11e54783d64802c6",
+    "graph_sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f",
+    "validation_report_sha256": "sha256:e210a52ba4ff9580f8999d096592adcbcd3f734f70c0ece55542301ce0c63386"
+  },
+  "generated_files": [
+    "docs/physics/chapters/opt.md",
+    "docs/physics/domains/phys.opt-validation-report.md",
+    "docs/physics/domains/phys.opt-summary.md",
+    "docs/physics/domains/phys.opt-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Physics Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "c83bc8c",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "2bcbddc",
+  "created_at": "2026-07-02T20:14:14Z"
+}

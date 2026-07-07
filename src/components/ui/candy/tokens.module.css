@@ -1,0 +1,46 @@
+/*
+ * Candy design tokens — canonical palette for the gamified "candy" visual
+ * language introduced by dashboard v2 (design/dashboard-approved.html).
+ *
+ * Apply `.candyTheme` (or `composes: candyTheme from ...`) on the root
+ * element of any screen built from src/components/ui/candy/*. It defines
+ * the full light-mode palette plus a [data-theme='dark'] override for the
+ * neutral tokens (--candy-bg/card/ink/ink-soft/shadow).
+ *
+ * The candy/brand hues (purple, blue, green, yellow, orange, red, pink) are
+ * intentionally IDENTICAL in both themes — only the neutral surface/text
+ * tokens flip for dark mode, matching the approved dashboard mockup.
+ *
+ * These are namespaced with a `--candy-` prefix so they never collide with
+ * the app-wide semantic tokens (--purple/--blue/--green/--yellow/--red etc.)
+ * defined in src/styles/tokens.css.
+ */
+
+.candyTheme {
+  --candy-bg: #F0F4FF;
+  --candy-card: #FFFFFF;
+  --candy-ink: #3C3B54;
+  --candy-ink-soft: #8B8AA3;
+
+  --candy-purple: #8B5CF6;
+  --candy-purple-d: #7C3AED;
+  --candy-blue: #3B9EFF;
+  --candy-blue-d: #2B7FD9;
+  --candy-green: #58CC02;
+  --candy-green-d: #46A302;
+  --candy-yellow: #FFC800;
+  --candy-yellow-d: #E6AC00;
+  --candy-orange: #FF9600;
+  --candy-red: #FF4B4B;
+  --candy-pink: #FF5FA2;
+
+  --candy-shadow: #E0E4F5;
+}
+
+:global([data-theme='dark']) .candyTheme {
+  --candy-bg: #0D1117;
+  --candy-card: #161B22;
+  --candy-ink: #E6EDF3;
+  --candy-ink-soft: #8B949E;
+  --candy-shadow: rgba(0, 0, 0, 0.45);
+}

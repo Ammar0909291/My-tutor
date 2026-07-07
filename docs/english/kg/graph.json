@@ -1,0 +1,5402 @@
+{
+  "name": "Canonical English Knowledge Graph",
+  "version": "1.0.0",
+  "status": "production",
+  "build_date": "2026-07-03",
+  "statistics": {
+    "total_concepts": 216,
+    "total_domains": 12,
+    "total_requires_edges": 274,
+    "total_unlocks_edges": 274,
+    "total_cross_links": 20
+  },
+  "domains": [
+    {
+      "key": "phonics",
+      "name": "Foundational Literacy & Phonics",
+      "count": 14
+    },
+    {
+      "key": "phonetics",
+      "name": "Pronunciation & Phonetics",
+      "count": 14
+    },
+    {
+      "key": "vocab",
+      "name": "Vocabulary Development",
+      "count": 20
+    },
+    {
+      "key": "grammar",
+      "name": "Grammar & Syntax",
+      "count": 43
+    },
+    {
+      "key": "reading",
+      "name": "Reading",
+      "count": 16
+    },
+    {
+      "key": "writing",
+      "name": "Writing",
+      "count": 20
+    },
+    {
+      "key": "listening",
+      "name": "Listening",
+      "count": 8
+    },
+    {
+      "key": "speaking",
+      "name": "Speaking",
+      "count": 10
+    },
+    {
+      "key": "composition",
+      "name": "Composition & Rhetoric",
+      "count": 16
+    },
+    {
+      "key": "literature",
+      "name": "Literature Fundamentals",
+      "count": 25
+    },
+    {
+      "key": "linguistics",
+      "name": "Linguistics Foundations",
+      "count": 18
+    },
+    {
+      "key": "communication",
+      "name": "Advanced Communication",
+      "count": 12
+    }
+  ],
+  "concepts": [
+    {
+      "id": "eng.phonics.print-concepts",
+      "name": "Print Concepts",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [],
+      "unlocks": [
+        "eng.phonics.alphabet-recognition"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Awareness that print carries meaning and follows conventional directionality (left-to-right, top-to-bottom) and word boundaries.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.85,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.phonemic-awareness",
+      "name": "Phonemic Awareness",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [],
+      "unlocks": [
+        "eng.phonics.rhyming",
+        "eng.phonics.blending-segmenting",
+        "eng.phonetics.speech-sounds-overview"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The ability to identify and manipulate individual sounds (phonemes) in spoken words, independent of print.",
+      "difficulty": "foundational",
+      "estimated_hours": 3,
+      "bloom": "remember",
+      "mastery_threshold": 0.85,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.alphabet-recognition",
+      "name": "Alphabet Recognition",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.print-concepts"
+      ],
+      "unlocks": [
+        "eng.phonics.letter-sound-correspondence",
+        "eng.writing.handwriting-and-formation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Recognizing and naming the twenty-six uppercase and lowercase letters of the English alphabet.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.9,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.rhyming",
+      "name": "Rhyming",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.phonemic-awareness"
+      ],
+      "unlocks": [
+        "eng.phonics.blending-segmenting"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Recognizing and producing words that share ending sounds, an early phonological awareness skill.",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.blending-segmenting",
+      "name": "Blending and Segmenting",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.phonemic-awareness",
+        "eng.phonics.rhyming"
+      ],
+      "unlocks": [
+        "eng.phonics.letter-sound-correspondence"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Combining individual sounds into whole words (blending) and breaking words into their component sounds (segmenting).",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.letter-sound-correspondence",
+      "name": "Letter-Sound Correspondence",
+      "aliases": [
+        "grapheme-phoneme correspondence",
+        "GPC"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.alphabet-recognition",
+        "eng.phonics.blending-segmenting"
+      ],
+      "unlocks": [
+        "eng.phonics.consonants",
+        "eng.phonics.short-vowels",
+        "eng.phonics.sight-words"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The systematic mapping between written letters (graphemes) and their corresponding spoken sounds (phonemes).",
+      "difficulty": "foundational",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.consonants",
+      "name": "Consonant Sounds",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.letter-sound-correspondence"
+      ],
+      "unlocks": [
+        "eng.phonics.consonant-blends"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The single-letter consonant phonemes of English and their standard spellings.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.short-vowels",
+      "name": "Short Vowel Sounds",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.letter-sound-correspondence"
+      ],
+      "unlocks": [
+        "eng.phonics.digraphs",
+        "eng.phonics.long-vowels-silent-e"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The five short vowel phonemes (a, e, i, o, u) in closed one-syllable words such as \"cat\" and \"pen\".",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.consonant-blends",
+      "name": "Consonant Blends",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.consonants"
+      ],
+      "unlocks": [
+        "eng.phonics.digraphs"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Two or three adjacent consonants whose individual sounds are each pronounced, such as \"bl\", \"str\", \"sk\".",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.digraphs",
+      "name": "Consonant and Vowel Digraphs",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.consonant-blends",
+        "eng.phonics.short-vowels"
+      ],
+      "unlocks": [
+        "eng.phonics.syllable-types"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Two-letter combinations representing a single new sound, such as \"sh\", \"ch\", \"th\", and \"ai\".",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.long-vowels-silent-e",
+      "name": "Long Vowels and Silent E",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.short-vowels"
+      ],
+      "unlocks": [
+        "eng.phonics.syllable-types"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The long vowel sounds and the silent-e pattern that lengthens a preceding vowel, as in \"cake\" versus \"cak\".",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.sight-words",
+      "name": "High-Frequency Sight Words",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.letter-sound-correspondence"
+      ],
+      "unlocks": [
+        "eng.phonics.decoding-fluency"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.vocab.word-recognition"
+      ],
+      "description": "Common words that are recognized instantly by sight, including many with irregular spelling-sound correspondences.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.syllable-types",
+      "name": "Syllable Types",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.digraphs",
+        "eng.phonics.long-vowels-silent-e"
+      ],
+      "unlocks": [
+        "eng.phonics.decoding-fluency",
+        "eng.writing.spelling-strategies"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The six standard English syllable patterns (closed, open, silent-e, vowel team, r-controlled, consonant-le) used to decode multisyllabic words.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonics.decoding-fluency",
+      "name": "Decoding Fluency",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.syllable-types",
+        "eng.phonics.sight-words"
+      ],
+      "unlocks": [
+        "eng.vocab.word-recognition",
+        "eng.reading.print-to-meaning"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The ability to read connected text accurately, automatically, and with appropriate expression, integrating all foundational phonics skills.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "National Reading Panel (2000) Teaching Children to Read",
+        "Common Core State Standards — Foundational Skills (K-5)"
+      ]
+    },
+    {
+      "id": "eng.phonetics.speech-sounds-overview",
+      "name": "Overview of Speech Sounds",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.phonemic-awareness"
+      ],
+      "unlocks": [
+        "eng.phonetics.articulation-organs"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An introduction to how spoken English sounds are produced, classified, and studied as physical events distinct from spelling.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.articulation-organs",
+      "name": "Organs of Articulation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.speech-sounds-overview"
+      ],
+      "unlocks": [
+        "eng.phonetics.consonant-sounds",
+        "eng.phonetics.vowel-sounds"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The vocal tract structures (lips, teeth, tongue, palate, vocal folds) and how their positioning shapes speech sounds.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.consonant-sounds",
+      "name": "Consonant Phoneme Classification",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.articulation-organs"
+      ],
+      "unlocks": [
+        "eng.phonetics.ipa-basics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Classifying English consonant phonemes by place of articulation, manner of articulation, and voicing.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.vowel-sounds",
+      "name": "Vowel Phoneme Classification",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.articulation-organs"
+      ],
+      "unlocks": [
+        "eng.phonetics.ipa-basics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Classifying English vowel phonemes by tongue height, tongue backness, and lip rounding, including monophthongs and diphthongs.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.ipa-basics",
+      "name": "IPA Basics for English",
+      "aliases": [
+        "International Phonetic Alphabet"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.consonant-sounds",
+        "eng.phonetics.vowel-sounds"
+      ],
+      "unlocks": [
+        "eng.phonetics.minimal-pairs",
+        "eng.phonetics.syllable-stress",
+        "eng.phonetics.phonetic-transcription"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The International Phonetic Alphabet symbols used to represent the standard phonemes of English.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.minimal-pairs",
+      "name": "Minimal Pairs",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.ipa-basics"
+      ],
+      "unlocks": [
+        "eng.phonetics.phonetic-transcription",
+        "eng.listening.distinguishing-sounds-in-speech"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Pairs of words that differ by exactly one phoneme, used to teach and test perception of sound contrasts.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.syllable-stress",
+      "name": "Word Stress",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.ipa-basics"
+      ],
+      "unlocks": [
+        "eng.phonetics.sentence-stress"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The relative prominence given to one syllable within a multisyllabic word, which can distinguish meaning and word class.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.sentence-stress",
+      "name": "Sentence Stress",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.syllable-stress"
+      ],
+      "unlocks": [
+        "eng.phonetics.intonation-patterns"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The pattern of emphasized content words versus reduced function words across a spoken sentence.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.intonation-patterns",
+      "name": "Intonation Patterns",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.sentence-stress"
+      ],
+      "unlocks": [
+        "eng.phonetics.connected-speech",
+        "eng.phonetics.prosody"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Rising and falling pitch patterns across an utterance that signal meaning distinctions such as statements, questions, and emphasis.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.connected-speech",
+      "name": "Connected Speech",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.intonation-patterns"
+      ],
+      "unlocks": [
+        "eng.phonetics.rhythm-and-timing",
+        "eng.speaking.oral-fluency"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Features of natural spoken English including elision, assimilation, and linking that alter how words sound in sequence.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.rhythm-and-timing",
+      "name": "Rhythm and Timing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.connected-speech"
+      ],
+      "unlocks": [
+        "eng.phonetics.accents-and-dialects"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The stress-timed rhythm of English, in which stressed syllables recur at roughly regular intervals regardless of unstressed syllables between them.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.accents-and-dialects",
+      "name": "Accents and Dialects",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.rhythm-and-timing"
+      ],
+      "unlocks": [
+        "eng.linguistics.sociolinguistics-intro"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.linguistics.sociolinguistics-intro"
+      ],
+      "description": "Systematic regional and social variation in pronunciation across varieties of English.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.phonetic-transcription",
+      "name": "Phonetic Transcription",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.ipa-basics",
+        "eng.phonetics.minimal-pairs"
+      ],
+      "unlocks": [
+        "eng.phonetics.prosody"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Transcribing spoken English words and utterances using IPA symbols.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.phonetics.prosody",
+      "name": "Prosody",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.intonation-patterns",
+        "eng.phonetics.phonetic-transcription"
+      ],
+      "unlocks": [
+        "eng.listening.active-listening",
+        "eng.linguistics.what-is-linguistics"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.speaking.pronunciation-in-conversation"
+      ],
+      "description": "The combined system of stress, rhythm, and intonation that conveys meaning, attitude, and emotion beyond individual word sounds.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Roach, P. English Phonetics and Phonology",
+        "Cambridge English Pronunciation in Use"
+      ]
+    },
+    {
+      "id": "eng.vocab.word-recognition",
+      "name": "Word Recognition",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.decoding-fluency"
+      ],
+      "unlocks": [
+        "eng.vocab.context-clues",
+        "eng.vocab.synonyms-antonyms",
+        "eng.vocab.word-families",
+        "eng.grammar.word-classes-overview"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.phonics.sight-words"
+      ],
+      "description": "Recognizing printed words as meaningful units linked to spoken vocabulary already known.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.context-clues",
+      "name": "Context Clues",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-recognition"
+      ],
+      "unlocks": [
+        "eng.vocab.homonyms-homophones",
+        "eng.reading.print-to-meaning"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Using surrounding words and sentences to infer the meaning of an unfamiliar word.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.synonyms-antonyms",
+      "name": "Synonyms and Antonyms",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-recognition"
+      ],
+      "unlocks": [
+        "eng.vocab.connotation-denotation",
+        "eng.vocab.thesaurus-and-dictionary-skills"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words with the same or similar meaning (synonyms) and words with opposite meaning (antonyms).",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.word-families",
+      "name": "Word Families",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-recognition"
+      ],
+      "unlocks": [
+        "eng.vocab.compound-words",
+        "eng.vocab.prefixes",
+        "eng.vocab.suffixes"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Groups of words that share a common base word or root and related meaning.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.compound-words",
+      "name": "Compound Words",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-families"
+      ],
+      "unlocks": [
+        "eng.vocab.word-formation-processes"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words formed by combining two or more independent words into a single new word.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.prefixes",
+      "name": "Prefixes",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-families"
+      ],
+      "unlocks": [
+        "eng.vocab.roots-and-origins"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Word parts added to the beginning of a base word or root that change its meaning.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.suffixes",
+      "name": "Suffixes",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-families"
+      ],
+      "unlocks": [
+        "eng.vocab.roots-and-origins"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Word parts added to the end of a base word or root that change its meaning or grammatical category.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.roots-and-origins",
+      "name": "Greek and Latin Roots",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.prefixes",
+        "eng.vocab.suffixes"
+      ],
+      "unlocks": [
+        "eng.vocab.word-formation-processes",
+        "eng.vocab.etymology"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Common Greek and Latin word roots underlying a large portion of English academic and scientific vocabulary.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.word-formation-processes",
+      "name": "Word Formation Processes",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.roots-and-origins",
+        "eng.vocab.compound-words"
+      ],
+      "unlocks": [
+        "eng.vocab.academic-vocabulary",
+        "eng.linguistics.morphology-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The systematic processes — derivation, compounding, conversion, blending, and clipping — by which English creates new words.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.homonyms-homophones",
+      "name": "Homonyms and Homophones",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.context-clues"
+      ],
+      "unlocks": [
+        "eng.vocab.multiple-meaning-words"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words that are spelled alike but differ in meaning (homonyms), and words that sound alike but differ in spelling and meaning (homophones).",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.multiple-meaning-words",
+      "name": "Multiple-Meaning Words",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.homonyms-homophones"
+      ],
+      "unlocks": [
+        "eng.vocab.thesaurus-and-dictionary-skills"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Single words with several distinct but related meanings (polysemy), disambiguated by context.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.connotation-denotation",
+      "name": "Connotation and Denotation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.synonyms-antonyms"
+      ],
+      "unlocks": [
+        "eng.vocab.collocations",
+        "eng.vocab.register-and-formality"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A word's literal dictionary meaning (denotation) versus its emotional or cultural association (connotation).",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.collocations",
+      "name": "Collocations",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.connotation-denotation"
+      ],
+      "unlocks": [
+        "eng.vocab.idioms",
+        "eng.vocab.phrasal-verbs"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.linguistics.corpus-linguistics-intro"
+      ],
+      "description": "Combinations of words that habitually co-occur in natural English, such as \"make a decision\" rather than \"do a decision\".",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.idioms",
+      "name": "Idioms",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.collocations"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.linguistics.pragmatics-intro"
+      ],
+      "description": "Fixed expressions whose overall meaning cannot be derived from the literal meaning of their individual words.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.phrasal-verbs",
+      "name": "Phrasal Verbs",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.collocations"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Verb-plus-particle combinations, such as \"give up\" or \"look after\", that function as a single semantic unit.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.register-and-formality",
+      "name": "Register and Formality",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.connotation-denotation"
+      ],
+      "unlocks": [
+        "eng.vocab.academic-vocabulary",
+        "eng.communication.digital-communication"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Choosing vocabulary appropriate to a communicative context, ranging from informal/colloquial to formal/academic register.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.academic-vocabulary",
+      "name": "Academic Vocabulary",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.register-and-formality",
+        "eng.vocab.word-formation-processes"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "General, discipline-neutral vocabulary that recurs frequently across academic texts (the Academic Word List tradition).",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.etymology",
+      "name": "Etymology",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.roots-and-origins"
+      ],
+      "unlocks": [
+        "eng.vocab.semantic-fields",
+        "eng.linguistics.historical-linguistics-intro"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.linguistics.historical-linguistics-intro"
+      ],
+      "description": "The historical origin and semantic change of words over time, including borrowing between languages.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.thesaurus-and-dictionary-skills",
+      "name": "Thesaurus and Dictionary Skills",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.synonyms-antonyms",
+        "eng.vocab.multiple-meaning-words"
+      ],
+      "unlocks": [
+        "eng.vocab.semantic-fields"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Efficient and accurate use of dictionaries and thesauruses, including interpreting entries, parts of speech, and usage labels.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.vocab.semantic-fields",
+      "name": "Semantic Fields",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.thesaurus-and-dictionary-skills",
+        "eng.vocab.etymology"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Groups of words related in meaning that structure a shared conceptual domain, such as vocabulary for emotions or weather.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Nation, I.S.P. Learning Vocabulary in Another Language",
+        "Oxford Word Skills"
+      ]
+    },
+    {
+      "id": "eng.grammar.word-classes-overview",
+      "name": "Overview of Word Classes",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.word-recognition"
+      ],
+      "unlocks": [
+        "eng.grammar.nouns",
+        "eng.grammar.verbs",
+        "eng.grammar.prepositions",
+        "eng.grammar.conjunctions",
+        "eng.grammar.interjections"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "An introduction to the eight traditional parts of speech as functional categories of English words.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.nouns",
+      "name": "Nouns",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-classes-overview"
+      ],
+      "unlocks": [
+        "eng.grammar.pronouns",
+        "eng.grammar.adjectives",
+        "eng.grammar.articles-and-determiners",
+        "eng.grammar.subject-and-predicate",
+        "eng.grammar.subject-verb-agreement"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words naming people, places, things, or ideas, including common, proper, countable, uncountable, and collective nouns.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.pronouns",
+      "name": "Pronouns",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.nouns"
+      ],
+      "unlocks": [
+        "eng.grammar.pronoun-antecedent-agreement"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words that substitute for nouns, including personal, possessive, reflexive, relative, and indefinite pronouns.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.verbs",
+      "name": "Verbs",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-classes-overview"
+      ],
+      "unlocks": [
+        "eng.grammar.adverbs",
+        "eng.grammar.subject-and-predicate",
+        "eng.grammar.present-tenses",
+        "eng.grammar.subject-verb-agreement"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words expressing action or state of being, including main verbs and auxiliary (helping) verbs.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.adjectives",
+      "name": "Adjectives",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.nouns"
+      ],
+      "unlocks": [
+        "eng.grammar.adverbs",
+        "eng.grammar.comparatives-and-superlatives"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words that modify nouns by describing quality, quantity, or type.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.adverbs",
+      "name": "Adverbs",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.verbs",
+        "eng.grammar.adjectives"
+      ],
+      "unlocks": [
+        "eng.grammar.comparatives-and-superlatives"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words that modify verbs, adjectives, or other adverbs, typically expressing manner, time, place, or degree.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.prepositions",
+      "name": "Prepositions",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-classes-overview"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Words that show the relationship of a noun or pronoun to another word in the sentence, typically expressing location, time, or direction.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.conjunctions",
+      "name": "Conjunctions",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-classes-overview"
+      ],
+      "unlocks": [
+        "eng.grammar.compound-sentences"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Words that connect words, phrases, or clauses, including coordinating, subordinating, and correlative conjunctions.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.interjections",
+      "name": "Interjections",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-classes-overview"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Words or phrases expressing sudden emotion, typically standing independently of the surrounding sentence structure.",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.articles-and-determiners",
+      "name": "Articles and Determiners",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.nouns"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Words such as \"a\", \"an\", \"the\", and other determiners that specify or quantify the noun they precede.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.subject-and-predicate",
+      "name": "Subject and Predicate",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.nouns",
+        "eng.grammar.verbs"
+      ],
+      "unlocks": [
+        "eng.grammar.word-order"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The two fundamental structural parts of an English sentence: the subject (who or what) and the predicate (what is said about it).",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.word-order",
+      "name": "Basic Word Order",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.subject-and-predicate"
+      ],
+      "unlocks": [
+        "eng.grammar.sentence-types-by-function",
+        "eng.grammar.phrases"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The canonical Subject-Verb-Object word order of English declarative sentences.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.sentence-types-by-function",
+      "name": "Sentence Types by Function",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-order"
+      ],
+      "unlocks": [
+        "eng.grammar.question-formation",
+        "eng.grammar.negation",
+        "eng.grammar.capitalization-rules"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The four functional sentence types: declarative, interrogative, imperative, and exclamatory.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.question-formation",
+      "name": "Question Formation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.sentence-types-by-function"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Forming yes/no questions and wh-questions through subject-auxiliary inversion and question words.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.negation",
+      "name": "Negation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.sentence-types-by-function"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Forming negative sentences using \"not\", auxiliary verbs, and negative words such as \"never\" and \"no\".",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.phrases",
+      "name": "Phrases",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.word-order"
+      ],
+      "unlocks": [
+        "eng.grammar.clauses"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Groups of related words functioning as a single grammatical unit without a subject-verb pair: noun, verb, prepositional, adjectival, and adverbial phrases.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.clauses",
+      "name": "Independent and Dependent Clauses",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.phrases"
+      ],
+      "unlocks": [
+        "eng.grammar.simple-sentences",
+        "eng.grammar.comma-usage",
+        "eng.linguistics.syntax-theory-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Word groups containing a subject and a verb; independent clauses can stand alone while dependent clauses cannot.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.simple-sentences",
+      "name": "Simple Sentences",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.clauses"
+      ],
+      "unlocks": [
+        "eng.grammar.compound-sentences",
+        "eng.grammar.sentence-fragments",
+        "eng.writing.sentence-writing"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Sentences consisting of exactly one independent clause.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.compound-sentences",
+      "name": "Compound Sentences",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.simple-sentences",
+        "eng.grammar.conjunctions"
+      ],
+      "unlocks": [
+        "eng.grammar.complex-sentences",
+        "eng.grammar.parallel-structure",
+        "eng.grammar.colons-semicolons-dashes",
+        "eng.grammar.run-on-sentences-and-comma-splices"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Sentences formed by joining two or more independent clauses with a coordinating conjunction, semicolon, or conjunctive adverb.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.complex-sentences",
+      "name": "Complex Sentences",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.compound-sentences"
+      ],
+      "unlocks": [
+        "eng.grammar.sentence-combining"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Sentences formed by joining an independent clause with one or more dependent clauses.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.sentence-combining",
+      "name": "Sentence Combining",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.complex-sentences"
+      ],
+      "unlocks": [
+        "eng.linguistics.what-is-linguistics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Deliberately varying sentence length and structure by combining simple sentences into compound and complex forms for fluency and style.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.present-tenses",
+      "name": "Present Tenses",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.verbs"
+      ],
+      "unlocks": [
+        "eng.grammar.past-tenses",
+        "eng.grammar.future-tenses",
+        "eng.grammar.modals",
+        "eng.grammar.gerunds-and-infinitives",
+        "eng.grammar.subject-verb-agreement"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The simple, continuous, perfect, and perfect continuous present tense forms and their uses.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.past-tenses",
+      "name": "Past Tenses",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.present-tenses"
+      ],
+      "unlocks": [
+        "eng.grammar.tense-consistency",
+        "eng.grammar.conditionals"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The simple, continuous, perfect, and perfect continuous past tense forms and their uses.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.future-tenses",
+      "name": "Future Tenses",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.present-tenses"
+      ],
+      "unlocks": [
+        "eng.grammar.tense-consistency"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The various ways English expresses future time, including \"will\", \"going to\", and present forms used for scheduled events.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.tense-consistency",
+      "name": "Tense Consistency",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.past-tenses",
+        "eng.grammar.future-tenses"
+      ],
+      "unlocks": [
+        "eng.grammar.active-and-passive-voice",
+        "eng.grammar.direct-and-indirect-speech"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Maintaining logically consistent verb tense across a sentence or passage, avoiding unmotivated tense shifts.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.modals",
+      "name": "Modal Verbs",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.present-tenses"
+      ],
+      "unlocks": [
+        "eng.grammar.conditionals"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Auxiliary verbs such as can, could, may, might, must, shall, should, will, and would that express ability, possibility, permission, or obligation.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.conditionals",
+      "name": "Conditional Sentences",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.modals",
+        "eng.grammar.past-tenses"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.linguistics.semantics-intro"
+      ],
+      "description": "The zero, first, second, and third conditional structures expressing real, possible, hypothetical, and counterfactual conditions.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.active-and-passive-voice",
+      "name": "Active and Passive Voice",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.tense-consistency"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Sentence structures in which the subject performs the action (active) or receives the action (passive).",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.direct-and-indirect-speech",
+      "name": "Direct and Indirect Speech",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.tense-consistency"
+      ],
+      "unlocks": [
+        "eng.grammar.quotation-marks"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.writing.narrative-writing"
+      ],
+      "description": "Reporting another person's exact words (direct speech) versus paraphrasing them with appropriate tense and pronoun shifts (indirect/reported speech).",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.gerunds-and-infinitives",
+      "name": "Gerunds and Infinitives",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.present-tenses"
+      ],
+      "unlocks": [
+        "eng.grammar.participles-and-participial-phrases"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The -ing verb form used as a noun (gerund) and the \"to + base verb\" form (infinitive), and the verbs that govern each.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.participles-and-participial-phrases",
+      "name": "Participles and Participial Phrases",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.gerunds-and-infinitives"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Present and past participle forms used as adjectives or within participial phrases modifying a noun.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.subject-verb-agreement",
+      "name": "Subject-Verb Agreement",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.nouns",
+        "eng.grammar.verbs",
+        "eng.grammar.present-tenses"
+      ],
+      "unlocks": [
+        "eng.grammar.pronoun-antecedent-agreement"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The grammatical rule that a verb must agree in number and person with its subject.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.pronoun-antecedent-agreement",
+      "name": "Pronoun-Antecedent Agreement",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.pronouns",
+        "eng.grammar.subject-verb-agreement"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "The rule that a pronoun must agree in number and gender with the noun it refers back to.",
+      "difficulty": "proficient",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.comparatives-and-superlatives",
+      "name": "Comparatives and Superlatives",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.adjectives",
+        "eng.grammar.adverbs"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Adjective and adverb forms used to compare two items (comparative) or three or more items (superlative).",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.parallel-structure",
+      "name": "Parallel Structure",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.compound-sentences"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.composition.style-voice-and-tone"
+      ],
+      "description": "Using matching grammatical forms for items joined in a series or comparison, avoiding mismatched structures.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.capitalization-rules",
+      "name": "Capitalization Rules",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.sentence-types-by-function"
+      ],
+      "unlocks": [
+        "eng.grammar.end-punctuation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Conventions governing when letters must be capitalized: sentence beginnings, proper nouns, titles, and the pronoun \"I\".",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.end-punctuation",
+      "name": "End Punctuation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.capitalization-rules"
+      ],
+      "unlocks": [
+        "eng.grammar.comma-usage"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The period, question mark, and exclamation point used to close a sentence according to its function.",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.comma-usage",
+      "name": "Comma Usage",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.end-punctuation",
+        "eng.grammar.clauses"
+      ],
+      "unlocks": [
+        "eng.grammar.apostrophes",
+        "eng.grammar.quotation-marks",
+        "eng.grammar.colons-semicolons-dashes",
+        "eng.grammar.run-on-sentences-and-comma-splices"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Rules governing commas in lists, compound sentences, introductory elements, and nonessential information.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.apostrophes",
+      "name": "Apostrophes",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.comma-usage"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Using apostrophes to show possession and to mark omitted letters in contractions.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.quotation-marks",
+      "name": "Quotation Marks",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.direct-and-indirect-speech",
+        "eng.grammar.comma-usage"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Punctuation conventions for marking direct quotations, titles of short works, and dialogue.",
+      "difficulty": "proficient",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.colons-semicolons-dashes",
+      "name": "Colons, Semicolons, and Dashes",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.comma-usage",
+        "eng.grammar.compound-sentences"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Advanced punctuation marks used to join related clauses, introduce lists or explanations, and add emphasis.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.sentence-fragments",
+      "name": "Sentence Fragments",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.simple-sentences"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Incomplete sentences lacking a subject, a verb, or a complete thought, and strategies for correcting them.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.grammar.run-on-sentences-and-comma-splices",
+      "name": "Run-On Sentences and Comma Splices",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.compound-sentences",
+        "eng.grammar.comma-usage"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Errors where two independent clauses are incorrectly joined without proper punctuation or a conjunction, and how to correct them.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Quirk, Greenbaum, Leech & Svartvik A Comprehensive Grammar of the English Language",
+        "Swan, M. Practical English Usage"
+      ]
+    },
+    {
+      "id": "eng.reading.print-to-meaning",
+      "name": "From Print to Meaning",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.decoding-fluency",
+        "eng.vocab.context-clues"
+      ],
+      "unlocks": [
+        "eng.reading.reading-fluency"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The bridging skill of connecting accurately decoded print to comprehended meaning, uniting decoding and vocabulary knowledge.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.reading-fluency",
+      "name": "Reading Fluency",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.print-to-meaning"
+      ],
+      "unlocks": [
+        "eng.reading.literal-comprehension",
+        "eng.reading.skimming-and-scanning"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Reading connected text accurately, at an appropriate rate, and with expression that reflects meaning.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.literal-comprehension",
+      "name": "Literal Comprehension",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.reading-fluency"
+      ],
+      "unlocks": [
+        "eng.reading.main-idea-and-details"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Understanding information that is explicitly stated in a text.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.main-idea-and-details",
+      "name": "Main Idea and Supporting Details",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.literal-comprehension"
+      ],
+      "unlocks": [
+        "eng.reading.inference-in-reading",
+        "eng.reading.summarizing",
+        "eng.reading.text-structure"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Identifying a text's central idea and the specific details that develop or support it.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.inference-in-reading",
+      "name": "Inference in Reading",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.main-idea-and-details"
+      ],
+      "unlocks": [
+        "eng.reading.predicting-and-confirming",
+        "eng.reading.authors-purpose-and-tone",
+        "eng.reading.close-reading"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Drawing logical conclusions from textual evidence that is implied but not directly stated.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.summarizing",
+      "name": "Summarizing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.main-idea-and-details"
+      ],
+      "unlocks": [
+        "eng.reading.compare-and-contrast-texts"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Condensing a text's essential content into a concise restatement in one's own words.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.predicting-and-confirming",
+      "name": "Predicting and Confirming",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.inference-in-reading"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Forming reasonable predictions about upcoming text content and revising them as new information is read.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.text-structure",
+      "name": "Text Structure",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.main-idea-and-details"
+      ],
+      "unlocks": [
+        "eng.reading.genre-recognition",
+        "eng.reading.compare-and-contrast-texts"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Recognizing organizational patterns in text, including narrative sequence, cause-effect, compare-contrast, problem-solution, and description.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.genre-recognition",
+      "name": "Genre Recognition",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.text-structure"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.literature.literary-genres-overview"
+      ],
+      "description": "Identifying a text's genre (fiction, nonfiction, poetry, drama, and their subtypes) and the conventions associated with it.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.authors-purpose-and-tone",
+      "name": "Author's Purpose and Tone",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.inference-in-reading"
+      ],
+      "unlocks": [
+        "eng.reading.close-reading"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Identifying why an author wrote a text (to inform, persuade, entertain) and the attitude conveyed through word choice.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.compare-and-contrast-texts",
+      "name": "Comparing and Contrasting Texts",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.text-structure",
+        "eng.reading.summarizing"
+      ],
+      "unlocks": [
+        "eng.reading.reading-across-genres"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Analyzing similarities and differences between two or more texts on a shared topic, theme, or form.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.skimming-and-scanning",
+      "name": "Skimming and Scanning",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.reading-fluency"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Rapidly surveying a text for its general idea (skimming) or locating specific information (scanning).",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.close-reading",
+      "name": "Close Reading",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.inference-in-reading",
+        "eng.reading.authors-purpose-and-tone"
+      ],
+      "unlocks": [
+        "eng.reading.critical-reading",
+        "eng.literature.narrative-elements"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Careful, deliberate analysis of a short passage's precise language, structure, and meaning.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.critical-reading",
+      "name": "Critical Reading",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.close-reading"
+      ],
+      "unlocks": [
+        "eng.reading.evaluating-sources",
+        "eng.composition.rhetorical-analysis"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.communication.media-literacy"
+      ],
+      "description": "Evaluating a text's credibility, evidence, assumptions, and bias rather than accepting its claims at face value.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.evaluating-sources",
+      "name": "Evaluating Sources",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.critical-reading"
+      ],
+      "unlocks": [
+        "eng.reading.reading-across-genres",
+        "eng.communication.media-literacy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Assessing the reliability, authority, currency, and relevance of a written source.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.reading.reading-across-genres",
+      "name": "Reading Across Genres",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.evaluating-sources",
+        "eng.reading.compare-and-contrast-texts"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.literature.comparative-literature-intro"
+      ],
+      "description": "Synthesizing understanding across multiple texts and genres on a related topic or theme.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Common Core State Standards — Reading",
+        "British Council LearnEnglish Reading Skills"
+      ]
+    },
+    {
+      "id": "eng.writing.handwriting-and-formation",
+      "name": "Handwriting and Letter Formation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.alphabet-recognition"
+      ],
+      "unlocks": [
+        "eng.writing.spelling-strategies"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Forming legible printed and cursive letters with correct stroke direction, size, and spacing.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "remember",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.spelling-strategies",
+      "name": "Spelling Strategies",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonics.syllable-types",
+        "eng.writing.handwriting-and-formation"
+      ],
+      "unlocks": [
+        "eng.writing.sentence-writing"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Applying phonics patterns, morphology, and visual memory to spell words accurately.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.sentence-writing",
+      "name": "Sentence Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.simple-sentences",
+        "eng.writing.spelling-strategies"
+      ],
+      "unlocks": [
+        "eng.writing.paragraph-structure"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Composing grammatically complete, meaningful sentences.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.paragraph-structure",
+      "name": "Paragraph Structure",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.sentence-writing"
+      ],
+      "unlocks": [
+        "eng.writing.topic-sentences"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Organizing a group of related sentences around a single controlling idea.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.topic-sentences",
+      "name": "Topic Sentences",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.paragraph-structure"
+      ],
+      "unlocks": [
+        "eng.writing.supporting-details"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Writing a sentence that states the main idea a paragraph will develop.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.supporting-details",
+      "name": "Supporting Details",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.topic-sentences"
+      ],
+      "unlocks": [
+        "eng.writing.transitions-and-cohesion"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Selecting and organizing specific facts, examples, and explanations that develop a topic sentence.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.transitions-and-cohesion",
+      "name": "Transitions and Cohesion",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.supporting-details"
+      ],
+      "unlocks": [
+        "eng.writing.narrative-writing",
+        "eng.writing.descriptive-writing",
+        "eng.writing.expository-writing",
+        "eng.writing.persuasive-writing-basics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Using transitional words and phrases to link ideas smoothly within and between paragraphs.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.narrative-writing",
+      "name": "Narrative Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.transitions-and-cohesion"
+      ],
+      "unlocks": [
+        "eng.writing.the-writing-process",
+        "eng.writing.creative-writing-forms"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.grammar.direct-and-indirect-speech"
+      ],
+      "description": "Writing that recounts a sequence of real or imagined events, developed through characters, setting, and plot.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.descriptive-writing",
+      "name": "Descriptive Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.transitions-and-cohesion"
+      ],
+      "unlocks": [
+        "eng.writing.creative-writing-forms"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Writing that creates a vivid impression of a person, place, object, or experience through sensory detail.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.expository-writing",
+      "name": "Expository Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.transitions-and-cohesion"
+      ],
+      "unlocks": [
+        "eng.writing.the-writing-process",
+        "eng.writing.essay-structure"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.communication.technical-writing"
+      ],
+      "description": "Writing that explains, informs, or clarifies a topic using facts, definitions, and examples.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.persuasive-writing-basics",
+      "name": "Persuasive Writing Basics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.transitions-and-cohesion"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Writing that states a position and supports it with reasons intended to convince a reader.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.the-writing-process",
+      "name": "The Writing Process",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.narrative-writing",
+        "eng.writing.expository-writing"
+      ],
+      "unlocks": [
+        "eng.writing.outlining-and-planning"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The recursive stages of planning, drafting, revising, editing, and publishing that structure effective composition.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.outlining-and-planning",
+      "name": "Outlining and Planning",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.the-writing-process"
+      ],
+      "unlocks": [
+        "eng.writing.drafting"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Organizing ideas and evidence into a logical structure before drafting.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.drafting",
+      "name": "Drafting",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.outlining-and-planning"
+      ],
+      "unlocks": [
+        "eng.writing.revising-for-content"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Producing an initial full version of a piece of writing focused on content over polish.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.revising-for-content",
+      "name": "Revising for Content",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.drafting"
+      ],
+      "unlocks": [
+        "eng.writing.editing-and-proofreading"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Reworking a draft's ideas, organization, and evidence for clarity and effectiveness.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.editing-and-proofreading",
+      "name": "Editing and Proofreading",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.revising-for-content"
+      ],
+      "unlocks": [
+        "eng.writing.essay-structure"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Correcting grammar, spelling, punctuation, and mechanical errors in a near-final draft.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.essay-structure",
+      "name": "Essay Structure",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.editing-and-proofreading",
+        "eng.writing.expository-writing"
+      ],
+      "unlocks": [
+        "eng.writing.thesis-statements",
+        "eng.composition.audience-and-purpose"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The conventional multi-paragraph essay form: introduction, body paragraphs, and conclusion.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.thesis-statements",
+      "name": "Thesis Statements",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.essay-structure"
+      ],
+      "unlocks": [
+        "eng.writing.citations-and-referencing"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A single sentence that states an essay's central argument or purpose and previews its development.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.citations-and-referencing",
+      "name": "Citations and Referencing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.thesis-statements"
+      ],
+      "unlocks": [
+        "eng.composition.research-paper-writing"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Formally acknowledging sources used in writing, following a consistent citation style.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.writing.creative-writing-forms",
+      "name": "Creative Writing Forms",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.narrative-writing",
+        "eng.writing.descriptive-writing"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.literature.poetic-forms"
+      ],
+      "description": "Exploring imaginative writing forms beyond standard prose, including flash fiction, dialogue, and free verse.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core State Standards — Writing",
+        "Oxford Guide to Effective Writing and Speaking"
+      ]
+    },
+    {
+      "id": "eng.listening.active-listening",
+      "name": "Active Listening",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.prosody"
+      ],
+      "unlocks": [
+        "eng.listening.listening-for-gist",
+        "eng.listening.distinguishing-sounds-in-speech"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Attending fully to a speaker, including verbal and nonverbal signals of engagement and understanding.",
+      "difficulty": "foundational",
+      "estimated_hours": 1,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.listening-for-gist",
+      "name": "Listening for Gist",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.listening.active-listening"
+      ],
+      "unlocks": [
+        "eng.listening.listening-for-detail",
+        "eng.listening.listening-comprehension-strategies"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Understanding the overall topic or general meaning of spoken language without processing every word.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.listening-for-detail",
+      "name": "Listening for Detail",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.listening.listening-for-gist"
+      ],
+      "unlocks": [
+        "eng.listening.following-instructions",
+        "eng.listening.note-taking-while-listening"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Extracting specific factual information from spoken language.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.distinguishing-sounds-in-speech",
+      "name": "Distinguishing Sounds in Speech",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.minimal-pairs",
+        "eng.listening.active-listening"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Perceiving fine phonetic contrasts between similar-sounding words in connected speech.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.following-instructions",
+      "name": "Following Spoken Instructions",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.listening.listening-for-detail"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Understanding and correctly executing a sequence of spoken directions.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.note-taking-while-listening",
+      "name": "Note-Taking While Listening",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.listening.listening-for-detail"
+      ],
+      "unlocks": [
+        "eng.listening.listening-comprehension-strategies"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Recording key information from spoken language efficiently while continuing to listen.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.listening-comprehension-strategies",
+      "name": "Listening Comprehension Strategies",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.listening.note-taking-while-listening",
+        "eng.listening.listening-for-gist"
+      ],
+      "unlocks": [
+        "eng.listening.critical-listening"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Metacognitive strategies such as predicting, inferring, and monitoring understanding while listening.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.listening.critical-listening",
+      "name": "Critical Listening",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.listening.listening-comprehension-strategies"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.speaking.debate-skills"
+      ],
+      "description": "Evaluating a speaker's argument, evidence, and possible bias while listening.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Listening Scales",
+        "Cambridge English Listening Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.oral-fluency",
+      "name": "Oral Fluency",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.connected-speech"
+      ],
+      "unlocks": [
+        "eng.speaking.pronunciation-in-conversation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Speaking at a natural pace with appropriate pausing and minimal hesitation.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.pronunciation-in-conversation",
+      "name": "Pronunciation in Conversation",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.oral-fluency"
+      ],
+      "unlocks": [
+        "eng.speaking.conversation-skills"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.phonetics.prosody"
+      ],
+      "description": "Applying accurate pronunciation, stress, and intonation in spontaneous spoken interaction.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.conversation-skills",
+      "name": "Conversation Skills",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.pronunciation-in-conversation"
+      ],
+      "unlocks": [
+        "eng.speaking.asking-and-answering-questions",
+        "eng.speaking.storytelling-orally",
+        "eng.speaking.non-verbal-communication"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Managing turn-taking, initiating and closing conversations, and maintaining topical coherence in dialogue.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.asking-and-answering-questions",
+      "name": "Asking and Answering Questions",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.conversation-skills"
+      ],
+      "unlocks": [
+        "eng.speaking.discussion-skills"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Formulating clear spoken questions and providing relevant, complete spoken answers.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.storytelling-orally",
+      "name": "Oral Storytelling",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.conversation-skills"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.literature.dramatic-structure"
+      ],
+      "description": "Recounting a narrative aloud with clear sequencing, expression, and audience engagement.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.discussion-skills",
+      "name": "Discussion Skills",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.asking-and-answering-questions"
+      ],
+      "unlocks": [
+        "eng.speaking.public-speaking-basics",
+        "eng.speaking.debate-skills"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Contributing productively to group discussion, including building on others' ideas and respectfully disagreeing.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.public-speaking-basics",
+      "name": "Public Speaking Basics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.discussion-skills"
+      ],
+      "unlocks": [
+        "eng.speaking.presentation-skills"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Speaking clearly and confidently to an audience, including basic techniques for managing nervousness.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.presentation-skills",
+      "name": "Presentation Skills",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.public-speaking-basics"
+      ],
+      "unlocks": [
+        "eng.speaking.debate-skills",
+        "eng.communication.professional-communication",
+        "eng.communication.presentation-design"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Organizing and delivering a structured spoken presentation supported by visual or other aids.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.debate-skills",
+      "name": "Debate Skills",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.discussion-skills",
+        "eng.speaking.presentation-skills"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.listening.critical-listening"
+      ],
+      "description": "Constructing and orally defending an argument, and rebutting an opposing position, within a structured format.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.speaking.non-verbal-communication",
+      "name": "Non-Verbal Communication",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.conversation-skills"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.communication.cross-cultural-communication"
+      ],
+      "description": "Body language, eye contact, gesture, and facial expression as components of spoken communication.",
+      "difficulty": "developing",
+      "estimated_hours": 1,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "CEFR Companion Volume — Spoken Production/Interaction Scales",
+        "Cambridge English Speaking Skills"
+      ]
+    },
+    {
+      "id": "eng.composition.audience-and-purpose",
+      "name": "Audience and Purpose",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.essay-structure"
+      ],
+      "unlocks": [
+        "eng.composition.claim-evidence-reasoning",
+        "eng.composition.rhetorical-appeals"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Analyzing the intended reader and communicative goal to guide choices in a piece of writing.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.claim-evidence-reasoning",
+      "name": "Claim, Evidence, and Reasoning",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.audience-and-purpose"
+      ],
+      "unlocks": [
+        "eng.composition.argumentation-basics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The structure of a sound argument: a claim, the evidence supporting it, and the reasoning connecting evidence to claim.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.argumentation-basics",
+      "name": "Argumentation Basics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.claim-evidence-reasoning"
+      ],
+      "unlocks": [
+        "eng.composition.counterargument-and-rebuttal",
+        "eng.composition.logical-fallacies"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Constructing a logically structured argument that states and defends a position.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.counterargument-and-rebuttal",
+      "name": "Counterargument and Rebuttal",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.argumentation-basics"
+      ],
+      "unlocks": [
+        "eng.composition.persuasive-techniques"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.communication.negotiation-language"
+      ],
+      "description": "Anticipating opposing viewpoints and responding to them to strengthen an argument's persuasiveness.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.logical-fallacies",
+      "name": "Logical Fallacies",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.argumentation-basics"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Common errors in reasoning that undermine an argument's validity, such as ad hominem, straw man, and false dilemma.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.rhetorical-appeals",
+      "name": "Rhetorical Appeals: Ethos, Pathos, Logos",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.audience-and-purpose"
+      ],
+      "unlocks": [
+        "eng.composition.rhetorical-devices",
+        "eng.composition.persuasive-techniques"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The three classical modes of persuasion: appeals to credibility (ethos), emotion (pathos), and logic (logos).",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.rhetorical-devices",
+      "name": "Rhetorical Devices",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.rhetorical-appeals"
+      ],
+      "unlocks": [
+        "eng.composition.figurative-language-in-composition",
+        "eng.composition.rhetorical-analysis"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.literature.literary-devices-overview"
+      ],
+      "description": "Deliberate stylistic and structural techniques — such as repetition, parallelism, and antithesis — used to enhance persuasive or expressive effect.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.figurative-language-in-composition",
+      "name": "Figurative Language in Composition",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.rhetorical-devices"
+      ],
+      "unlocks": [
+        "eng.composition.style-voice-and-tone"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Using metaphor, imagery, and other non-literal language purposefully in expository and persuasive writing.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.style-voice-and-tone",
+      "name": "Style, Voice, and Tone",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.figurative-language-in-composition"
+      ],
+      "unlocks": [
+        "eng.composition.editing-for-style"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.grammar.parallel-structure"
+      ],
+      "description": "The distinctive choices of diction, sentence structure, and attitude that constitute a writer's individual style.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.persuasive-techniques",
+      "name": "Advanced Persuasive Techniques",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.rhetorical-appeals",
+        "eng.composition.counterargument-and-rebuttal"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Combining rhetorical appeals with counterargument and evidence to construct sophisticated persuasive writing.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.rhetorical-analysis",
+      "name": "Rhetorical Analysis",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.rhetorical-devices",
+        "eng.reading.critical-reading"
+      ],
+      "unlocks": [
+        "eng.composition.comparative-essay-writing",
+        "eng.composition.research-paper-writing"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Analyzing how a text's rhetorical choices achieve its persuasive or communicative effect on its audience.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.comparative-essay-writing",
+      "name": "Comparative Essay Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.rhetorical-analysis"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Writing an essay that systematically analyzes similarities and differences between two texts, ideas, or works.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.research-paper-writing",
+      "name": "Research Paper Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.writing.citations-and-referencing",
+        "eng.composition.rhetorical-analysis"
+      ],
+      "unlocks": [
+        "eng.composition.academic-writing-conventions"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Producing an extended, evidence-based paper that synthesizes multiple sources around an original thesis.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "create",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.academic-writing-conventions",
+      "name": "Academic Writing Conventions",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.research-paper-writing"
+      ],
+      "unlocks": [
+        "eng.composition.plagiarism-and-citation-ethics",
+        "eng.composition.editing-for-style",
+        "eng.communication.academic-writing-advanced"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The formal conventions of academic prose, including objectivity, hedging, and disciplinary style.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.plagiarism-and-citation-ethics",
+      "name": "Plagiarism and Citation Ethics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.academic-writing-conventions"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "The ethical and academic-integrity principles governing proper attribution of others' ideas and words.",
+      "difficulty": "advanced",
+      "estimated_hours": 1,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.composition.editing-for-style",
+      "name": "Editing for Style",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.style-voice-and-tone",
+        "eng.composition.academic-writing-conventions"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Revising a draft specifically for concision, precision, and stylistic consistency, beyond correctness alone.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Aristotle Rhetoric (trans. Kennedy)",
+        "Corbett & Connors Classical Rhetoric for the Modern Student"
+      ]
+    },
+    {
+      "id": "eng.literature.narrative-elements",
+      "name": "Narrative Elements",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.close-reading"
+      ],
+      "unlocks": [
+        "eng.literature.plot-structure",
+        "eng.literature.character-development",
+        "eng.literature.setting-and-atmosphere",
+        "eng.literature.point-of-view",
+        "eng.literature.drama-basics"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The fundamental components of a story: plot, character, setting, and conflict.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.plot-structure",
+      "name": "Plot Structure",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.narrative-elements"
+      ],
+      "unlocks": [
+        "eng.literature.theme-and-message",
+        "eng.literature.foreshadowing-and-suspense",
+        "eng.literature.dramatic-structure",
+        "eng.literature.prose-fiction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The conventional arc of a narrative: exposition, rising action, climax, falling action, and resolution.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.character-development",
+      "name": "Character Development",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.narrative-elements"
+      ],
+      "unlocks": [
+        "eng.literature.theme-and-message"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "How authors reveal and evolve character through action, dialogue, and description, including protagonist, antagonist, and characterization technique.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.setting-and-atmosphere",
+      "name": "Setting and Atmosphere",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.narrative-elements"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "The time and place of a narrative and the mood it evokes for the reader.",
+      "difficulty": "proficient",
+      "estimated_hours": 1,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.point-of-view",
+      "name": "Point of View",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.narrative-elements"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "The narrative perspective from which a story is told: first person, second person, third person limited, and third person omniscient.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.theme-and-message",
+      "name": "Theme and Message",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.plot-structure",
+        "eng.literature.character-development"
+      ],
+      "unlocks": [
+        "eng.literature.literary-devices-overview",
+        "eng.literature.prose-nonfiction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The central underlying idea or insight about life that a literary work explores.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.literary-devices-overview",
+      "name": "Overview of Literary Devices",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.theme-and-message"
+      ],
+      "unlocks": [
+        "eng.literature.metaphor-and-simile",
+        "eng.literature.irony",
+        "eng.literature.poetry-basics"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.composition.rhetorical-devices"
+      ],
+      "description": "An introduction to the figurative, structural, and sound-based techniques writers use to create literary effect.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.metaphor-and-simile",
+      "name": "Metaphor and Simile",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.literary-devices-overview"
+      ],
+      "unlocks": [
+        "eng.literature.symbolism",
+        "eng.literature.imagery"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Figurative comparisons that describe one thing directly as another (metaphor) or explicitly using \"like\"/\"as\" (simile).",
+      "difficulty": "advanced",
+      "estimated_hours": 1,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.symbolism",
+      "name": "Symbolism",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.metaphor-and-simile"
+      ],
+      "unlocks": [
+        "eng.literature.short-story-study"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The use of an object, person, or event to represent a larger idea beyond its literal meaning.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.irony",
+      "name": "Irony",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.literary-devices-overview"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Verbal, situational, and dramatic irony, in which meaning or outcome contrasts with expectation.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.foreshadowing-and-suspense",
+      "name": "Foreshadowing and Suspense",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.plot-structure"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Narrative techniques that hint at future events and generate reader anticipation or tension.",
+      "difficulty": "advanced",
+      "estimated_hours": 1,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.imagery",
+      "name": "Imagery",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.metaphor-and-simile"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Language that evokes sensory experience — sight, sound, touch, taste, and smell — in the reader.",
+      "difficulty": "advanced",
+      "estimated_hours": 1,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.poetry-basics",
+      "name": "Poetry Basics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.literary-devices-overview"
+      ],
+      "unlocks": [
+        "eng.literature.poetic-forms",
+        "eng.literature.literary-genres-overview"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The fundamental features distinguishing poetry from prose, including line, stanza, and condensed language.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.poetic-forms",
+      "name": "Poetic Forms",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.poetry-basics"
+      ],
+      "unlocks": [
+        "eng.literature.meter-and-rhyme"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.writing.creative-writing-forms"
+      ],
+      "description": "Conventional poetic structures such as the sonnet, haiku, ballad, and free verse.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.meter-and-rhyme",
+      "name": "Meter and Rhyme",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.poetic-forms"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "The patterns of stressed and unstressed syllables (meter) and end-sound repetition (rhyme scheme) in verse.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.drama-basics",
+      "name": "Drama Basics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.narrative-elements"
+      ],
+      "unlocks": [
+        "eng.literature.dramatic-structure",
+        "eng.literature.literary-genres-overview"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The distinguishing features of drama as a genre performed for an audience: dialogue, stage directions, and acts/scenes.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.dramatic-structure",
+      "name": "Dramatic Structure",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.drama-basics",
+        "eng.literature.plot-structure"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.speaking.storytelling-orally"
+      ],
+      "description": "The organization of a play into acts and scenes and the conventions of dramatic tension and resolution.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.prose-fiction",
+      "name": "Prose Fiction",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.plot-structure"
+      ],
+      "unlocks": [
+        "eng.literature.short-story-study",
+        "eng.literature.literary-genres-overview"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Extended imaginative narrative in prose form, encompassing the short story and the novel.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.prose-nonfiction",
+      "name": "Prose Nonfiction",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.theme-and-message"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Factual prose forms including the essay, memoir, biography, and journalism.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.short-story-study",
+      "name": "Short Story Study",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.prose-fiction",
+        "eng.literature.symbolism"
+      ],
+      "unlocks": [
+        "eng.literature.novel-study"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Close analysis of the short story form, whose compression demands economy of plot, character, and theme.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.novel-study",
+      "name": "Novel Study",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.short-story-study"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Sustained analysis of a full-length novel's plot, character, theme, and structure across an extended narrative.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.literary-genres-overview",
+      "name": "Overview of Literary Genres",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.prose-fiction",
+        "eng.literature.poetry-basics",
+        "eng.literature.drama-basics"
+      ],
+      "unlocks": [
+        "eng.literature.literary-periods-survey"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.reading.genre-recognition"
+      ],
+      "description": "A survey of the major literary genres — fiction, poetry, drama, and nonfiction — and their principal subtypes.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.literary-periods-survey",
+      "name": "Survey of Literary Periods",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.literary-genres-overview"
+      ],
+      "unlocks": [
+        "eng.literature.literary-criticism-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey introduction to major literary-historical periods and movements in English-language literature.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.literary-criticism-intro",
+      "name": "Introduction to Literary Criticism",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.literary-periods-survey"
+      ],
+      "unlocks": [
+        "eng.literature.comparative-literature-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of major critical approaches to interpreting literature, including historical, formalist, and reader-response criticism.",
+      "difficulty": "research",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.literature.comparative-literature-intro",
+      "name": "Introduction to Comparative Literature",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.literature.literary-criticism-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.reading.reading-across-genres"
+      ],
+      "description": "A survey introduction to studying literary works across languages, cultures, and traditions in relation to one another.",
+      "difficulty": "research",
+      "estimated_hours": 3,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Abrams & Harpham A Glossary of Literary Terms",
+        "The Norton Anthology of English Literature"
+      ]
+    },
+    {
+      "id": "eng.linguistics.what-is-linguistics",
+      "name": "What Is Linguistics?",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.grammar.sentence-combining",
+        "eng.phonetics.prosody"
+      ],
+      "unlocks": [
+        "eng.linguistics.phonology-intro",
+        "eng.linguistics.morphology-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey introduction to linguistics as the scientific, descriptive study of human language.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.phonology-intro",
+      "name": "Introduction to Phonology",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.what-is-linguistics"
+      ],
+      "unlocks": [
+        "eng.linguistics.historical-linguistics-intro",
+        "eng.linguistics.language-acquisition-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of phonology as the study of the abstract sound system of a language, distinct from phonetics' study of physical sound.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.morphology-intro",
+      "name": "Introduction to Morphology",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.what-is-linguistics",
+        "eng.vocab.word-formation-processes"
+      ],
+      "unlocks": [
+        "eng.linguistics.syntax-theory-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of morphology as the study of word-internal structure and the morpheme as the smallest unit of meaning.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.syntax-theory-intro",
+      "name": "Introduction to Syntactic Theory",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.morphology-intro",
+        "eng.grammar.clauses"
+      ],
+      "unlocks": [
+        "eng.linguistics.semantics-intro",
+        "eng.linguistics.language-acquisition-intro",
+        "eng.linguistics.computational-linguistics-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of syntax as the formal study of sentence structure, distinct from prescriptive school grammar.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.semantics-intro",
+      "name": "Introduction to Semantics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.syntax-theory-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.pragmatics-intro",
+        "eng.linguistics.translation-studies-intro"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.grammar.conditionals"
+      ],
+      "description": "A survey of semantics as the study of linguistic meaning at the word and sentence level.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.pragmatics-intro",
+      "name": "Introduction to Pragmatics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.semantics-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.discourse-analysis-intro",
+        "eng.linguistics.sociolinguistics-intro"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.vocab.idioms"
+      ],
+      "description": "A survey of pragmatics as the study of how context shapes meaning in language use.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.discourse-analysis-intro",
+      "name": "Introduction to Discourse Analysis",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.pragmatics-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.corpus-linguistics-intro",
+        "eng.communication.discourse-markers-advanced"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of how meaning and coherence are constructed across stretches of connected text or talk beyond the single sentence.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.sociolinguistics-intro",
+      "name": "Introduction to Sociolinguistics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.phonetics.accents-and-dialects",
+        "eng.linguistics.pragmatics-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.applied-linguistics-intro",
+        "eng.linguistics.dialectology",
+        "eng.communication.cross-cultural-communication"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.phonetics.accents-and-dialects"
+      ],
+      "description": "A survey of how language varies and functions in relation to social factors such as class, gender, and identity.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.historical-linguistics-intro",
+      "name": "Introduction to Historical Linguistics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.etymology",
+        "eng.linguistics.phonology-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.language-families"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.vocab.etymology"
+      ],
+      "description": "A survey of how languages change over time in sound, structure, and meaning.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.language-families",
+      "name": "Language Families",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.historical-linguistics-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of the genealogical classification of the world's languages into related families, including the Indo-European family.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.language-acquisition-intro",
+      "name": "Introduction to Language Acquisition",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.syntax-theory-intro",
+        "eng.linguistics.phonology-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.psycholinguistics-intro",
+        "eng.linguistics.applied-linguistics-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of how children and learners acquire first and additional languages.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.psycholinguistics-intro",
+      "name": "Introduction to Psycholinguistics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.language-acquisition-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of the mental processes underlying language comprehension, production, and storage.",
+      "difficulty": "research",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.applied-linguistics-intro",
+      "name": "Introduction to Applied Linguistics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.sociolinguistics-intro",
+        "eng.linguistics.language-acquisition-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.bilingualism-and-multilingualism"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of practical applications of linguistic theory, including language teaching, testing, and policy.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.dialectology",
+      "name": "Dialectology",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.sociolinguistics-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "The systematic study of regional and social dialects as a specialized branch of sociolinguistics.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.bilingualism-and-multilingualism",
+      "name": "Bilingualism and Multilingualism",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.applied-linguistics-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.translation-studies-intro"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of how individuals and societies acquire, use, and are shaped by more than one language.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.translation-studies-intro",
+      "name": "Introduction to Translation Studies",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.bilingualism-and-multilingualism",
+        "eng.linguistics.semantics-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "A survey of the theory and practice of transferring meaning between languages.",
+      "difficulty": "research",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.corpus-linguistics-intro",
+      "name": "Introduction to Corpus Linguistics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.discourse-analysis-intro"
+      ],
+      "unlocks": [
+        "eng.linguistics.computational-linguistics-intro"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.vocab.collocations"
+      ],
+      "description": "A survey of using large, structured collections of authentic text to study language empirically.",
+      "difficulty": "research",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.linguistics.computational-linguistics-intro",
+      "name": "Introduction to Computational Linguistics",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.corpus-linguistics-intro",
+        "eng.linguistics.syntax-theory-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.communication.digital-communication"
+      ],
+      "description": "A survey of computational and statistical approaches to processing and modeling human language.",
+      "difficulty": "research",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Fromkin, Rodman & Hyams An Introduction to Language",
+        "Yule, G. The Study of Language"
+      ]
+    },
+    {
+      "id": "eng.communication.academic-writing-advanced",
+      "name": "Advanced Academic Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.composition.academic-writing-conventions"
+      ],
+      "unlocks": [
+        "eng.communication.research-methodology-writing",
+        "eng.communication.technical-writing",
+        "eng.communication.business-writing",
+        "eng.communication.editing-for-publication"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Producing sophisticated academic prose for advanced coursework and research contexts, extending academic writing conventions.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.research-methodology-writing",
+      "name": "Writing Research Methodology",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.communication.academic-writing-advanced"
+      ],
+      "unlocks": [
+        "eng.communication.editing-for-publication"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Describing and justifying the methods used in an original research project in written form.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.technical-writing",
+      "name": "Technical Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.communication.academic-writing-advanced"
+      ],
+      "unlocks": [
+        "eng.communication.presentation-design"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.writing.expository-writing"
+      ],
+      "description": "Writing clear, precise, and audience-appropriate documentation of processes, products, or systems.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.business-writing",
+      "name": "Business Writing",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.communication.academic-writing-advanced"
+      ],
+      "unlocks": [
+        "eng.communication.professional-communication"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Writing clear, professional correspondence and documents for workplace contexts, including memos, reports, and emails.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.media-literacy",
+      "name": "Media Literacy",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.reading.evaluating-sources"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.reading.critical-reading"
+      ],
+      "description": "Critically analyzing and evaluating messages, sources, and techniques used across print, broadcast, and digital media.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.digital-communication",
+      "name": "Digital Communication",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.vocab.register-and-formality"
+      ],
+      "unlocks": [
+        "eng.communication.cross-cultural-communication"
+      ],
+      "related": [],
+      "cross_links": [
+        "eng.linguistics.computational-linguistics-intro"
+      ],
+      "description": "Conventions and register choices for email, messaging, and online discourse.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.discourse-markers-advanced",
+      "name": "Advanced Discourse Markers",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.discourse-analysis-intro"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Sophisticated cohesive devices that signal logical relationships between ideas across extended spoken and written discourse.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.cross-cultural-communication",
+      "name": "Cross-Cultural Communication",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.linguistics.sociolinguistics-intro",
+        "eng.communication.digital-communication"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.speaking.non-verbal-communication"
+      ],
+      "description": "Adapting communication style and expectations across different cultural and linguistic communities.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.professional-communication",
+      "name": "Professional Communication",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.communication.business-writing",
+        "eng.speaking.presentation-skills"
+      ],
+      "unlocks": [
+        "eng.communication.negotiation-language"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Integrated written and spoken communication skills appropriate to professional and workplace settings.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.negotiation-language",
+      "name": "Negotiation Language",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.communication.professional-communication"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "eng.composition.counterargument-and-rebuttal"
+      ],
+      "description": "Language strategies for reaching agreement, managing disagreement, and building consensus in spoken interaction.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.presentation-design",
+      "name": "Presentation Design",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.speaking.presentation-skills",
+        "eng.communication.technical-writing"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Designing visual and structural support materials that clarify and reinforce a spoken presentation.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    },
+    {
+      "id": "eng.communication.editing-for-publication",
+      "name": "Editing for Publication",
+      "aliases": [],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "eng.communication.research-methodology-writing",
+        "eng.communication.academic-writing-advanced"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Preparing a finished piece of writing to professional publication standards, including final proofreading and formatting.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Common Core Anchor Standards for College and Career Readiness",
+        "Purdue OWL (Online Writing Lab)"
+      ]
+    }
+  ]
+}

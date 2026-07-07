@@ -1,0 +1,513 @@
+{
+  "domain_id": "functional-analysis",
+  "domain_name": "Functional Analysis",
+  "id_prefix": "math.fnal",
+  "level_range": [
+    6,
+    7
+  ],
+  "description": "The study of infinite-dimensional vector spaces \u2014 normed spaces, Banach spaces, Hilbert spaces \u2014 and operators on them. Unifies classical analysis, quantum mechanics, and modern PDE theory.",
+  "concepts": [
+    {
+      "id": "math.fnal.normed-space",
+      "name": "Normed Space",
+      "aliases": [
+        "normed vector space",
+        "(X,|\u00b7|)"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.vector-space",
+        "math.linalg.norm"
+      ],
+      "unlocks": [
+        "math.fnal.completeness",
+        "math.fnal.banach-space"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.linalg.norm",
+        "math.real.metric-space"
+      ],
+      "description": "A vector space X with norm |\u00b7|:X\u2192[0,\u221e) satisfying: |x|=0\u27fax=0, |\u03b1x|=|\u03b1||x|, |x+y|\u2264|x|+|y|. The norm induces a metric d(x,y)=|x\u2212y|. Examples: (\u211d\u207f,|\u00b7|_p), C([a,b]) with sup-norm.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Functional Analysis, Ch.1; Conway, A Course in Functional Analysis"
+      ]
+    },
+    {
+      "id": "math.fnal.completeness",
+      "name": "Completeness",
+      "aliases": [
+        "Cauchy completeness in normed spaces"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.normed-space",
+        "math.real.cauchy-sequence"
+      ],
+      "unlocks": [
+        "math.fnal.banach-space"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.real.completeness-metric"
+      ],
+      "description": "A normed space is complete iff every Cauchy sequence converges. Not all normed spaces are complete (e.g., C([0,1]) with L\u00b9 norm is not; its completion is L\u00b9). Completeness is essential for fixed-point theorems and spectral theory.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.9,
+      "references": [
+        "Rudin, Functional Analysis, \u00a71.4"
+      ]
+    },
+    {
+      "id": "math.fnal.banach-space",
+      "name": "Banach Space",
+      "aliases": [
+        "Banach space",
+        "complete normed space"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.completeness"
+      ],
+      "unlocks": [
+        "math.fnal.open-mapping-theorem",
+        "math.fnal.hahn-banach"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.meas.lp-space"
+      ],
+      "description": "A complete normed vector space. Examples: \u211d\u207f (any norm), L\u1d56(\u03bc) for 1\u2264p\u2264\u221e, C(K) with sup norm, \u2113\u1d56 sequence spaces. The Riesz-Fischer theorem: L\u1d56 is complete. Most functional analysis theorems require completeness.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Functional Analysis, Ch.1; Conway, A Course in Functional Analysis, Ch.1"
+      ]
+    },
+    {
+      "id": "math.fnal.hilbert-space",
+      "name": "Hilbert Space",
+      "aliases": [
+        "Hilbert space",
+        "complete inner product space"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.linalg.inner-product-space",
+        "math.fnal.banach-space"
+      ],
+      "unlocks": [
+        "math.fnal.spectral-theory",
+        "math.fnal.riesz-representation"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.meas.l2-space",
+        "math.linalg.inner-product"
+      ],
+      "description": "A complete inner product space. Projection theorem: every closed convex subset has a unique nearest point. Riesz representation: every continuous linear functional is \u27e8\u00b7,y\u27e9 for some y. Orthonormal bases exist (Gram-Schmidt / Zorn).",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Functional Analysis, Ch.4; Conway, A Course in Functional Analysis, Ch.1"
+      ]
+    },
+    {
+      "id": "math.fnal.bounded-operator",
+      "name": "Bounded Linear Operator",
+      "aliases": [
+        "bounded operator",
+        "|T|",
+        "operator norm"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.banach-space",
+        "math.linalg.linear-map"
+      ],
+      "unlocks": [
+        "math.fnal.spectral-theory",
+        "math.fnal.open-mapping-theorem"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.linalg.linear-map"
+      ],
+      "description": "T:X\u2192Y linear is bounded iff |T| = sup_{|x|\u22641}|Tx|<\u221e, equivalently continuous everywhere. B(X,Y) = space of bounded operators; Banach space under operator norm. T bounded iff maps bounded sets to bounded sets.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Rudin, Functional Analysis, \u00a72.1"
+      ]
+    },
+    {
+      "id": "math.fnal.dual-space-functional",
+      "name": "Dual Space",
+      "aliases": [
+        "X*",
+        "dual Banach space",
+        "continuous linear functional"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.bounded-operator"
+      ],
+      "unlocks": [
+        "math.fnal.hahn-banach"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.linalg.dual-space"
+      ],
+      "description": "X* = B(X,\ud835\udd42) = bounded linear functionals on X; a Banach space under |f|=sup_{|x|\u22641}|f(x)|. Canonical examples: (L\u1d56)* \u2245 Lq (1/p+1/q=1), (C(K))* = regular Borel measures (Riesz). Reflexive spaces X \u2245 X**.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Functional Analysis, Ch.3"
+      ]
+    },
+    {
+      "id": "math.fnal.hahn-banach",
+      "name": "Hahn-Banach Theorem",
+      "aliases": [
+        "Hahn-Banach extension theorem",
+        "separation theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.dual-space-functional"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "A bounded linear functional on a subspace can be extended to the whole space with the same norm. Geometric form: disjoint convex sets can be separated by a hyperplane. Implies: X* separates points; dual determines the space.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Functional Analysis, \u00a73.2; Conway, A Course in Functional Analysis, Ch.IV"
+      ]
+    },
+    {
+      "id": "math.fnal.open-mapping-theorem",
+      "name": "Open Mapping Theorem",
+      "aliases": [
+        "Banach-Schauder theorem",
+        "inverse mapping theorem"
+      ],
+      "parent": null,
+      "children": [
+        "math.fnal.closed-graph-theorem"
+      ],
+      "requires": [
+        "math.fnal.banach-space",
+        "math.fnal.bounded-operator"
+      ],
+      "unlocks": [
+        "math.fnal.closed-graph-theorem"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.real.baire-category"
+      ],
+      "description": "A surjective bounded linear operator between Banach spaces is open (images of open sets are open). Consequence: a bijective bounded linear operator has a bounded inverse. Proved using the Baire category theorem.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin, Functional Analysis, \u00a72.11; Conway, A Course in Functional Analysis, \u00a7III.5"
+      ]
+    },
+    {
+      "id": "math.fnal.closed-graph-theorem",
+      "name": "Closed Graph Theorem",
+      "aliases": [
+        "closed graph"
+      ],
+      "parent": "math.fnal.open-mapping-theorem",
+      "children": [],
+      "requires": [
+        "math.fnal.open-mapping-theorem"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "A linear map T:X\u2192Y between Banach spaces with closed graph (x\u2099\u2192x, Tx\u2099\u2192y \u27f9 y=Tx) is bounded. Makes it easier to verify boundedness by checking the graph condition rather than the norm estimate.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin, Functional Analysis, \u00a72.15"
+      ]
+    },
+    {
+      "id": "math.fnal.uniform-boundedness",
+      "name": "Uniform Boundedness Principle",
+      "aliases": [
+        "Banach-Steinhaus theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.bounded-operator",
+        "math.real.baire-category"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "If {T\u03b1} is a family of bounded linear operators from Banach X to normed Y with sup_\u03b1|T\u03b1x|<\u221e for each x, then sup_\u03b1|T\u03b1|<\u221e (uniformly bounded in operator norm). Proved via Baire category. Prevents pointwise-convergent sequences of operators from 'blowing up'.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin, Functional Analysis, \u00a72.5; Conway, \u00a7III.14"
+      ]
+    },
+    {
+      "id": "math.fnal.riesz-representation",
+      "name": "Riesz Representation Theorem",
+      "aliases": [
+        "Riesz-Fr\u00e9chet theorem",
+        "dual of Hilbert space"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.hilbert-space"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "Every bounded linear functional on a Hilbert space H is of the form f(x)=\u27e8x,y\u27e9 for a unique y\u2208H with |f|=|y|. This establishes a (conjugate-linear) isometric isomorphism H\u2245H*. Hilbert spaces are self-dual.",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Functional Analysis, \u00a74.4; Conway, \u00a7I.3"
+      ]
+    },
+    {
+      "id": "math.fnal.spectral-theory",
+      "name": "Spectral Theory",
+      "aliases": [
+        "spectrum",
+        "resolvent",
+        "spectral theorem"
+      ],
+      "parent": null,
+      "children": [
+        "math.fnal.compact-operator-spectrum"
+      ],
+      "requires": [
+        "math.fnal.bounded-operator",
+        "math.fnal.hilbert-space"
+      ],
+      "unlocks": [
+        "math.fnal.compact-operator-spectrum"
+      ],
+      "related": [],
+      "cross_links": [
+        "math.linalg.eigenvalues",
+        "math.linalg.spectral-theorem"
+      ],
+      "description": "Spectrum \u03c3(T) = {\u03bb : T\u2212\u03bbI not invertible}. Resolvent \u03c1(T) = \u2102\\\u03c3(T). For self-adjoint operators: \u03c3(T)\u2286\u211d. Spectral theorem: every normal operator on Hilbert space diagonalizes via a spectral measure. Generalizes matrix diagonalization to infinite dimensions.",
+      "difficulty": "research",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Rudin, Functional Analysis, Ch.11\u201312; Conway, A Course in Functional Analysis, Ch.IX"
+      ]
+    },
+    {
+      "id": "math.fnal.compact-operator-spectrum",
+      "name": "Compact Operators",
+      "aliases": [
+        "compact operator",
+        "Fredholm theory"
+      ],
+      "parent": "math.fnal.spectral-theory",
+      "children": [],
+      "requires": [
+        "math.fnal.spectral-theory"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "T is compact if it maps bounded sets to precompact sets. Compact operators have discrete spectrum (only 0 is possible accumulation point); non-zero eigenvalues have finite multiplicity. Fredholm alternative: Tx=\u03bbx has a theory analogous to finite-dimensional systems.",
+      "difficulty": "research",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.6,
+      "references": [
+        "Rudin, Functional Analysis, Ch.4; Conway, A Course in Functional Analysis, Ch.VII"
+      ]
+    },
+    {
+      "id": "math.fnal.fourier-transform",
+      "name": "Fourier Transform (Functional Analysis)",
+      "aliases": [
+        "L\u00b2 Fourier transform",
+        "Plancherel theorem"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.hilbert-space",
+        "math.meas.l2-space"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.de.fourier-transform",
+        "math.de.fourier-series"
+      ],
+      "description": "The Fourier transform extends from L\u00b9\u2229L\u00b2 to a unitary operator on L\u00b2(\u211d) (Plancherel theorem): |f\u0302|_2 = |f|_2. Makes L\u00b2(\u211d) self-dual. Foundation of spectral theory for differential operators and signal processing.",
+      "difficulty": "research",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.65,
+      "references": [
+        "Rudin, Real and Complex Analysis, Ch.9; Stein & Shakarchi, Real Analysis, Ch.5"
+      ]
+    },
+    {
+      "id": "math.fnal.distributions",
+      "name": "Distributions",
+      "aliases": [
+        "generalized functions",
+        "Schwartz distributions",
+        "weak derivative"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.dual-space-functional",
+        "math.calc.derivative-definition"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.de.greens-function"
+      ],
+      "description": "Continuous linear functionals on the space \ud835\udc9f of test functions (C\u221e with compact support). Dirac \u03b4: \u03b4(\u03c6)=\u03c6(0). Every locally integrable function defines a distribution. Differentiation always possible: \u27e8T\u2032,\u03c6\u27e9=\u2212\u27e8T,\u03c6\u2032\u27e9. Foundation of modern PDE theory.",
+      "difficulty": "research",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.6,
+      "references": [
+        "Rudin, Functional Analysis, Ch.6; H\u00f6rmander, The Analysis of Linear Partial Differential Operators, Ch.1"
+      ]
+    },
+    {
+      "id": "math.fnal.special-functions",
+      "name": "Special Functions",
+      "aliases": [
+        "Gamma function",
+        "Beta function",
+        "Bessel functions (FA)",
+        "Legendre polynomials (FA)"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.hilbert-space",
+        "math.de.bessel-equation"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.de.bessel-equation",
+        "math.de.legendre-equation"
+      ],
+      "description": "\u0393(z) = \u222b\u2080^\u221e t^{z-1}e^{-t}dt (meromorphic extension of factorial). B(x,y) = \u0393(x)\u0393(y)/\u0393(x+y). Orthogonal polynomials (Hermite, Laguerre, Legendre, Chebyshev) arise as eigenfunctions of Sturm-Liouville problems and form ONBs in weighted L\u00b2 spaces.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Whittaker & Watson, A Course of Modern Analysis; Lebedev, Special Functions and Their Applications"
+      ]
+    },
+    {
+      "id": "math.fnal.dense-subspace",
+      "name": "Dense Subspaces and Approximation",
+      "aliases": [
+        "density",
+        "approximation theory"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.fnal.banach-space"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.real.weierstrass-approximation"
+      ],
+      "description": "A subspace S\u2286X is dense iff cl(S)=X: every point in X can be approximated arbitrarily closely by elements of S. Examples: polynomials dense in C([0,1]) (Weierstrass); C\u221e dense in L\u1d56; trigonometric polynomials dense in L\u00b2 (Fourier).",
+      "difficulty": "expert",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Functional Analysis, \u00a71; Royden, Real Analysis, Ch.7"
+      ]
+    },
+    {
+      "id": "math.fnal.convolution",
+      "name": "Convolution",
+      "aliases": [
+        "f*g",
+        "convolution product"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.meas.lebesgue-integral"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.de.convolution-theorem",
+        "math.de.fourier-transform"
+      ],
+      "description": "(f*g)(x) = \u222bf(x\u2212y)g(y)dy. Young's inequality: |f*g|_r \u2264 |f|_p|g|_q (1/r=1/p+1/q\u22121). Fourier transform converts convolution to multiplication: \u2131(f*g)=\u2131(f)\u00b7\u2131(g). Used in smoothing, differential equations, and signal processing.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin, Real and Complex Analysis, \u00a77.1"
+      ]
+    }
+  ]
+}

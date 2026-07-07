@@ -1,0 +1,40 @@
+/* Shared progressive-reveal animations for Animated Teaching Engine (Sprint R.1).
+   Each revealed SVG group mounts when its timeline step is reached, playing a one-shot
+   "appear" animation so the diagram builds up like a teacher drawing it. */
+
+.reveal {
+  animation: vReveal 0.42s ease-out both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes vReveal {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Line / path "drawing" effect. Requires pathLength={1} + strokeDasharray={1} on the element. */
+.drawLine {
+  animation: vDraw 0.55s ease-out both;
+}
+
+@keyframes vDraw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Gentle slide-up for labels so text "writes in" rather than popping. */
+.writeIn {
+  animation: vWrite 0.4s ease-out both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes vWrite {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .drawLine, .writeIn { animation: none; }
+}

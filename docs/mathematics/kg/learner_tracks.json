@@ -1,0 +1,90 @@
+{
+  "model": "Five-tier progressive track model (T0\u2013T4) \u2014 per-concept difficulty assignment",
+  "status": "DEFINED",
+  "note": "Each concept is assigned to a track by its own difficulty field. A domain may contribute concepts to multiple tracks (e.g., math.nt spans T1\u2013T4). Learner progression: T0 \u2192 T1 \u2192 T2 \u2192 T3 \u2192 T4.",
+  "tracks": [
+    {
+      "track_id": "T0",
+      "name": "Absolute Foundations",
+      "level_range": [
+        0,
+        2
+      ],
+      "difficulty": [
+        "foundational"
+      ],
+      "assignment": "difficulty \u2208 {foundational}",
+      "description": "Entry-level mathematics. No prerequisites assumed. Covers logic, sets, number sense, and basic arithmetic.",
+      "concept_count": 67,
+      "entry_point_count": 1,
+      "entry_points": [
+        "math.found.mathematical-thinking"
+      ]
+    },
+    {
+      "track_id": "T1",
+      "name": "Pre-University / Early Undergraduate",
+      "level_range": [
+        1,
+        4
+      ],
+      "difficulty": [
+        "developing",
+        "proficient"
+      ],
+      "assignment": "difficulty \u2208 {developing, proficient}",
+      "description": "Pre-university to first-year university. Algebra, geometry, trigonometry, functions, sequences, introductory number theory.",
+      "concept_count": 432,
+      "entry_point_count": 0,
+      "entry_points": []
+    },
+    {
+      "track_id": "T2",
+      "name": "Undergraduate Core",
+      "level_range": [
+        3,
+        5
+      ],
+      "difficulty": [
+        "advanced"
+      ],
+      "assignment": "difficulty \u2208 {advanced}",
+      "description": "Standard second/third-year university. Calculus, differential equations, linear algebra, probability, statistics.",
+      "concept_count": 139,
+      "entry_point_count": 0,
+      "entry_points": []
+    },
+    {
+      "track_id": "T3",
+      "name": "Upper Undergraduate / Early Graduate",
+      "level_range": [
+        5,
+        6
+      ],
+      "difficulty": [
+        "expert"
+      ],
+      "assignment": "difficulty \u2208 {expert}",
+      "description": "Third/fourth-year and early MSc. Abstract algebra, real/complex analysis, topology, numerical methods, optimization.",
+      "concept_count": 225,
+      "entry_point_count": 0,
+      "entry_points": []
+    },
+    {
+      "track_id": "T4",
+      "name": "Graduate / Research Mathematics",
+      "level_range": [
+        6,
+        7
+      ],
+      "difficulty": [
+        "research"
+      ],
+      "assignment": "difficulty \u2208 {research}",
+      "description": "MSc/PhD level. Measure theory, functional analysis, category theory, research-frontier topics.",
+      "concept_count": 45,
+      "entry_point_count": 0,
+      "entry_points": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "modern_physics",
+  "domain_prefix": "phys.mod",
+  "domain_name": "Modern Physics",
+  "subject": "physics",
+  "concept_count": 15,
+  "asset_count": 15,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-03",
+    "validation_method": "python-equivalent (node_modules unavailable in container)",
+    "pedagogical_audit": {
+      "verdict": "PASS",
+      "concepts_fully_audited": [
+        "phys.mod.photoelectric-effect",
+        "phys.mod.photons",
+        "phys.mod.bohr-model",
+        "phys.mod.radioactive-decay",
+        "phys.mod.compton-effect",
+        "phys.mod.binding-energy",
+        "phys.mod.nuclear-models"
+      ],
+      "coverage": "46.7% full audit (7/15) across beginner/intermediate/advanced difficulty bands + worked-example arithmetic sweep of all 15 (65 checks)",
+      "defects_found_and_fixed": 1,
+      "defects_remaining": 0,
+      "defect_note": "nuclear-fusion worked example stated a 10,000x energy-density ratio vs. TNT; corrected to the arithmetically verified 100,000x"
+    }
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:f0847dbae70685fcbaf55488e6b087b60c1bd72262fb7fc650f01ae2942aafd8",
+    "assets_file_sha256": "sha256:c82315c0c9c8c8023763f98a53d6489b66c6b4c3fd77d4e687b436ad6e79c3d6",
+    "graph_sha256": "sha256:79d9b356f14ea65f3df270da8063c3b1e4c1da1b11255887406022c3a755117f",
+    "validation_report_sha256": "sha256:f64094bf3d2d0b75842a6ebc88456177b05c95470b8224b6a09a0992fd2368c6"
+  },
+  "generated_files": [
+    "docs/physics/chapters/mod.md",
+    "docs/physics/domains/phys.mod-validation-report.md",
+    "docs/physics/domains/phys.mod-summary.md",
+    "docs/physics/domains/phys.mod-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Physics Knowledge Graph",
+    "kg_version": "1.0.0",
+    "kg_status": "production (treated as frozen, read-only)",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "c83bc8c",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "pipeline-v2",
+    "validation_version": "1.1.0"
+  },
+  "base_commit": "a7ae39b",
+  "created_at": "2026-07-03T09:25:40Z"
+}

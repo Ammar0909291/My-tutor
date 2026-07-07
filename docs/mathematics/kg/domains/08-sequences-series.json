@@ -1,0 +1,642 @@
+{
+  "domain_id": "sequences-series",
+  "domain_name": "Sequences and Series",
+  "id_prefix": "math.seq",
+  "level_range": [
+    3,
+    6
+  ],
+  "description": "The study of ordered lists of numbers and their summations, from arithmetic and geometric sequences through infinite series convergence theory.",
+  "concepts": [
+    {
+      "id": "math.seq.sequence",
+      "name": "Sequence",
+      "aliases": [
+        "infinite sequence",
+        "ordered list",
+        "a\u2081, a\u2082, a\u2083, \u2026"
+      ],
+      "parent": null,
+      "children": [
+        "math.seq.arithmetic-sequence",
+        "math.seq.geometric-sequence",
+        "math.seq.recursive-sequences"
+      ],
+      "requires": [
+        "math.func.function-concept",
+        "math.found.natural-numbers"
+      ],
+      "unlocks": [
+        "math.seq.series"
+      ],
+      "related": [
+        "math.seq.series",
+        "math.calc.sequence-limits"
+      ],
+      "cross_links": [
+        "math.calc.sequence-limits"
+      ],
+      "description": "A function from \u2115 (or a subset) to a set, listing its values as an ordered collection a\u2081, a\u2082, a\u2083, \u2026",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "Stewart Precalculus"
+      ]
+    },
+    {
+      "id": "math.seq.arithmetic-sequence",
+      "name": "Arithmetic Sequence",
+      "aliases": [
+        "arithmetic progression",
+        "AP",
+        "common difference"
+      ],
+      "parent": "math.seq.sequence",
+      "children": [],
+      "requires": [
+        "math.seq.sequence"
+      ],
+      "unlocks": [
+        "math.seq.arithmetic-series"
+      ],
+      "related": [
+        "math.seq.geometric-sequence"
+      ],
+      "cross_links": [],
+      "description": "A sequence where each term differs from the previous by a fixed common difference d: a\u2099 = a\u2081 + (n\u22121)d.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "Singapore Math Grade 9"
+      ]
+    },
+    {
+      "id": "math.seq.geometric-sequence",
+      "name": "Geometric Sequence",
+      "aliases": [
+        "geometric progression",
+        "GP",
+        "common ratio"
+      ],
+      "parent": "math.seq.sequence",
+      "children": [],
+      "requires": [
+        "math.seq.sequence"
+      ],
+      "unlocks": [
+        "math.seq.geometric-series"
+      ],
+      "related": [
+        "math.seq.arithmetic-sequence"
+      ],
+      "cross_links": [],
+      "description": "A sequence where each term is multiplied by a fixed common ratio r: a\u2099 = a\u2081 \u00b7 r\u207f\u207b\u00b9.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "Singapore Math Grade 9"
+      ]
+    },
+    {
+      "id": "math.seq.recursive-sequences",
+      "name": "Recursive Sequences",
+      "aliases": [
+        "recurrence relation",
+        "a\u2099 = f(a\u2099\u208b\u2081)",
+        "Fibonacci sequence"
+      ],
+      "parent": "math.seq.sequence",
+      "children": [],
+      "requires": [
+        "math.seq.sequence",
+        "math.found.proof-by-induction"
+      ],
+      "unlocks": [
+        "math.disc.recurrence-relation"
+      ],
+      "related": [
+        "math.disc.recurrence-relations"
+      ],
+      "cross_links": [
+        "math.disc.recurrence-relation"
+      ],
+      "description": "Sequences defined by a recurrence relation a\u2099 = f(a\u2099\u208b\u2081, a\u2099\u208b\u2082, \u2026) and initial conditions; e.g., Fibonacci: F\u2081 = F\u2082 = 1, F\u2099 = F\u2099\u208b\u2081 + F\u2099\u208b\u2082.",
+      "difficulty": "proficient",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "Rosen 2018 Discrete Mathematics",
+        "AoPS Intermediate Algebra"
+      ]
+    },
+    {
+      "id": "math.seq.convergent",
+      "name": "Convergent Sequence",
+      "aliases": [
+        "sequence limit",
+        "lim a\u2099 = L",
+        "convergence of a sequence"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.seq.sequence",
+        "math.calc.limits"
+      ],
+      "unlocks": [
+        "math.seq.series-convergence",
+        "math.real.convergence-sequences"
+      ],
+      "related": [
+        "math.calc.limits"
+      ],
+      "cross_links": [
+        "math.calc.limits",
+        "math.real.convergence-sequences"
+      ],
+      "description": "A sequence {a\u2099} converges to L if for every \u03b5 > 0 there exists N such that |a\u2099 \u2212 L| < \u03b5 for all n > N; the \u03b5-N definition of limit.",
+      "difficulty": "advanced",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus",
+        "Apostol 1967"
+      ]
+    },
+    {
+      "id": "math.seq.divergent-sequence",
+      "name": "Divergent Sequence",
+      "aliases": [
+        "sequence divergence",
+        "no limit"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.seq.convergent"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.seq.convergent"
+      ],
+      "cross_links": [],
+      "description": "A sequence that does not converge; includes sequences tending to \u00b1\u221e and oscillating sequences like (\u22121)\u207f.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus"
+      ]
+    },
+    {
+      "id": "math.seq.series",
+      "name": "Series",
+      "aliases": [
+        "infinite series",
+        "\u03a3a\u2099",
+        "sum of a sequence"
+      ],
+      "parent": null,
+      "children": [
+        "math.seq.partial-sums"
+      ],
+      "requires": [
+        "math.seq.sequence"
+      ],
+      "unlocks": [
+        "math.seq.arithmetic-series",
+        "math.seq.geometric-series"
+      ],
+      "related": [
+        "math.seq.sequence"
+      ],
+      "cross_links": [],
+      "description": "The sum of the terms of a sequence; formally defined as the limit of partial sums; may converge or diverge.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
+    },
+    {
+      "id": "math.seq.partial-sums",
+      "name": "Partial Sums",
+      "aliases": [
+        "S\u2099",
+        "nth partial sum"
+      ],
+      "parent": "math.seq.series",
+      "children": [],
+      "requires": [
+        "math.seq.series"
+      ],
+      "unlocks": [
+        "math.seq.series-convergence"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The nth partial sum S\u2099 = a\u2081 + a\u2082 + \u2026 + a\u2099; the series \u03a3a\u2099 converges iff the sequence {S\u2099} converges.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 11",
+        "Stewart Calculus"
+      ]
+    },
+    {
+      "id": "math.seq.arithmetic-series",
+      "name": "Arithmetic Series",
+      "aliases": [
+        "sum of AP",
+        "S\u2099 = n(a\u2081+a\u2099)/2"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.seq.arithmetic-sequence",
+        "math.seq.series"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.seq.geometric-series"
+      ],
+      "cross_links": [],
+      "description": "The sum of the first n terms of an AP: S\u2099 = n(a\u2081 + a\u2099)/2 = n(2a\u2081 + (n\u22121)d)/2.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "Singapore Math Grade 9"
+      ]
+    },
+    {
+      "id": "math.seq.geometric-series",
+      "name": "Geometric Series",
+      "aliases": [
+        "sum of GP",
+        "S\u2099 = a(1\u2212r\u207f)/(1\u2212r)",
+        "infinite geometric series"
+      ],
+      "parent": null,
+      "children": [
+        "math.seq.infinite-geometric-series"
+      ],
+      "requires": [
+        "math.seq.geometric-sequence",
+        "math.seq.series"
+      ],
+      "unlocks": [
+        "math.seq.infinite-geometric-series"
+      ],
+      "related": [
+        "math.seq.arithmetic-series"
+      ],
+      "cross_links": [],
+      "description": "The sum of the first n terms of a GP: S\u2099 = a(1\u2212r\u207f)/(1\u2212r); extends to an infinite series converging to a/(1\u2212r) when |r| < 1.",
+      "difficulty": "proficient",
+      "estimated_hours": 6,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra",
+        "AoPS Intermediate Algebra"
+      ]
+    },
+    {
+      "id": "math.seq.infinite-geometric-series",
+      "name": "Infinite Geometric Series",
+      "aliases": [
+        "sum to infinity",
+        "S\u221e = a/(1\u2212r)"
+      ],
+      "parent": "math.seq.geometric-series",
+      "children": [],
+      "requires": [
+        "math.seq.geometric-series"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "When |r| < 1, the infinite GP converges: S\u221e = a/(1\u2212r); when |r| \u2265 1 it diverges.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax College Algebra"
+      ]
+    },
+    {
+      "id": "math.seq.series-convergence",
+      "name": "Convergence of Series",
+      "aliases": [
+        "series convergence",
+        "sum converges"
+      ],
+      "parent": null,
+      "children": [
+        "math.seq.divergence-test",
+        "math.seq.comparison-test",
+        "math.seq.ratio-test",
+        "math.seq.integral-test",
+        "math.seq.alternating-series"
+      ],
+      "requires": [
+        "math.seq.partial-sums",
+        "math.seq.convergent"
+      ],
+      "unlocks": [
+        "math.calc.power-series"
+      ],
+      "related": [
+        "math.calc.power-series"
+      ],
+      "cross_links": [
+        "math.calc.power-series"
+      ],
+      "description": "A series \u03a3a\u2099 converges if its sequence of partial sums converges; multiple tests determine convergence for specific series types.",
+      "difficulty": "advanced",
+      "estimated_hours": 20,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus",
+        "Apostol 1967",
+        "OpenStax Calculus Vol 2"
+      ]
+    },
+    {
+      "id": "math.seq.divergence-test",
+      "name": "Divergence Test (nth Term Test)",
+      "aliases": [
+        "nth term test for divergence",
+        "if a\u2099 \u2192 0 is necessary"
+      ],
+      "parent": "math.seq.series-convergence",
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "If lim a\u2099 \u2260 0, then \u03a3a\u2099 diverges; the converse is false (the harmonic series diverges despite terms \u2192 0).",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
+    },
+    {
+      "id": "math.seq.comparison-test",
+      "name": "Comparison Test",
+      "aliases": [
+        "direct comparison",
+        "limit comparison test"
+      ],
+      "parent": "math.seq.series-convergence",
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.seq.ratio-test"
+      ],
+      "cross_links": [],
+      "description": "If 0 \u2264 a\u2099 \u2264 b\u2099 and \u03a3b\u2099 converges, then \u03a3a\u2099 converges; if a\u2099 \u2265 b\u2099 \u2265 0 and \u03a3b\u2099 diverges, then \u03a3a\u2099 diverges.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
+    },
+    {
+      "id": "math.seq.ratio-test",
+      "name": "Ratio Test",
+      "aliases": [
+        "D'Alembert's ratio test",
+        "L = lim|a\u2099\u208a\u2081/a\u2099|"
+      ],
+      "parent": "math.seq.series-convergence",
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.seq.root-test"
+      ],
+      "cross_links": [],
+      "description": "If L = lim|a\u2099\u208a\u2081/a\u2099| < 1, series converges absolutely; L > 1, diverges; L = 1, inconclusive.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
+    },
+    {
+      "id": "math.seq.root-test",
+      "name": "Root Test",
+      "aliases": [
+        "Cauchy's root test",
+        "L = lim|a\u2099|^(1/n)"
+      ],
+      "parent": "math.seq.series-convergence",
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.seq.ratio-test"
+      ],
+      "cross_links": [],
+      "description": "If L = lim|a\u2099|^(1/n) < 1, series converges absolutely; L > 1, diverges; L = 1, inconclusive.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus"
+      ]
+    },
+    {
+      "id": "math.seq.integral-test",
+      "name": "Integral Test",
+      "aliases": [
+        "Cauchy's integral test"
+      ],
+      "parent": "math.seq.series-convergence",
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence",
+        "math.calc.improper-integrals"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [
+        "math.calc.improper-integrals"
+      ],
+      "description": "If f is positive, continuous, and decreasing on [1, \u221e), then \u03a3f(n) and \u222b\u2081^\u221e f(x)dx either both converge or both diverge.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus",
+        "OpenStax Calculus Vol 2"
+      ]
+    },
+    {
+      "id": "math.seq.alternating-series",
+      "name": "Alternating Series",
+      "aliases": [
+        "Leibniz test",
+        "alternating series test",
+        "\u03a3(\u22121)\u207fa\u2099"
+      ],
+      "parent": "math.seq.series-convergence",
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [
+        "math.seq.absolute-convergence"
+      ],
+      "related": [
+        "math.seq.absolute-convergence"
+      ],
+      "cross_links": [],
+      "description": "\u03a3(\u22121)\u207fa\u2099 converges if {a\u2099} is positive, decreasing, and tends to 0 (Leibniz's alternating series test).",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Rudin 1976",
+        "Stewart Calculus"
+      ]
+    },
+    {
+      "id": "math.seq.absolute-convergence",
+      "name": "Absolute and Conditional Convergence",
+      "aliases": [
+        "absolute convergence",
+        "conditional convergence"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.seq.alternating-series"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "\u03a3a\u2099 converges absolutely if \u03a3|a\u2099| converges (stronger); conditionally if \u03a3a\u2099 converges but \u03a3|a\u2099| diverges; Riemann rearrangement theorem.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "Rudin 1976",
+        "Apostol 1967"
+      ]
+    },
+    {
+      "id": "math.seq.harmonic-series",
+      "name": "Harmonic Series",
+      "aliases": [
+        "\u03a31/n",
+        "p-series"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.seq.series-convergence"
+      ],
+      "unlocks": [],
+      "related": [
+        "math.seq.comparison-test"
+      ],
+      "cross_links": [],
+      "description": "The series \u03a31/n diverges (proved by Cauchy condensation or integral test); the p-series \u03a31/n\u1d56 converges iff p > 1.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Hardy 1920 A Course of Pure Mathematics",
+        "Rudin 1976"
+      ]
+    },
+    {
+      "id": "math.seq.telescoping-series",
+      "name": "Telescoping Series",
+      "aliases": [
+        "telescoping sum"
+      ],
+      "parent": null,
+      "children": [],
+      "requires": [
+        "math.seq.partial-sums"
+      ],
+      "unlocks": [],
+      "related": [],
+      "cross_links": [],
+      "description": "A series \u03a3(b\u2099 \u2212 b\u2099\u208a\u2081) where most terms cancel; the nth partial sum equals b\u2081 \u2212 b\u2099\u208a\u2081, enabling exact evaluation.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Grade 11",
+        "OpenStax Calculus Vol 2"
+      ]
+    }
+  ]
+}

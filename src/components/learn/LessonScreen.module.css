@@ -1,0 +1,56 @@
+/*
+ * Candy re-skin for the lesson workspace (/learn) and the panels it renders
+ * (PracticePanel, InsightsPanel, FinalAssessmentModal, LearnerPositionPanel,
+ * VisualCard).
+ *
+ * LessonScreen is a large, high-traffic streaming/voice/Monaco component
+ * styled almost entirely with inline `style={{}}` blocks that reference the
+ * app-wide semantic tokens (--bg-*, --text-*, --border-*, --coral, …). Rather
+ * than touch ~180 inline styles (and risk the chat/voice behaviour), this
+ * class re-points those CSS custom properties at the canonical candy tokens.
+ * Because custom properties cascade, every inline style + child panel under
+ * this root re-skins to the candy palette automatically — no JSX/logic
+ * changes. This is the inverse of dashboard.module.css aliasing --bg → --candy-*.
+ *
+ * Monaco keeps its own dedicated editor theme (defineTheme in LessonScreen) —
+ * a code editor staying on its own palette is expected and intentional.
+ */
+.learnCandy {
+  composes: candyTheme from '../ui/candy/tokens.module.css';
+
+  /* Surfaces */
+  --bg-void: var(--candy-bg);
+  --bg-base: var(--candy-bg);
+  --bg-surface: var(--candy-card);
+  --bg-card: var(--candy-card);
+  --bg-elevated: var(--candy-card);
+  --bg-hover: rgba(139, 92, 246, 0.08);
+  --bg-overlay: var(--candy-bg);
+
+  /* Text */
+  --text-primary: var(--candy-ink);
+  --text-secondary: var(--candy-ink-soft);
+  --text-dim: var(--candy-ink-soft);
+
+  /* Borders */
+  --border-subtle: var(--candy-shadow);
+  --border-default: var(--candy-shadow);
+  --border-muted: var(--candy-shadow);
+  --border-emphasis: var(--candy-ink-soft);
+
+  /* Brand accent — coral → candy purple (matches the dashboard accent) */
+  --coral: var(--candy-purple);
+  --coral-hover: var(--candy-purple-d);
+  --coral-muted: rgba(139, 92, 246, 0.12);
+  --coral-border: rgba(139, 92, 246, 0.25);
+  --accent-primary: var(--candy-purple);
+
+  /* Semantic hues → candy equivalents */
+  --blue: var(--candy-blue);
+  --green: var(--candy-green);
+  --yellow: var(--candy-yellow);
+  --purple: var(--candy-purple);
+  --red: var(--candy-red);
+
+  font-family: var(--font-nunito), 'Nunito', sans-serif;
+}
