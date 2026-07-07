@@ -17,6 +17,8 @@ import type { ProbeKind, ProbeChoice } from './assetIdentity'
 import type { StudentState } from './studentState'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
 import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch } from './explanationMemory'
+import { decideCaptureAction, type LineageAsset } from './versioning'
+import { hashContent } from './similarity'
 
 export interface ProbeMatch {
   assetId: string
@@ -75,9 +77,25 @@ export interface CaptureProbeInput {
   authorId: string
 }
 
+/** Same dedup/versioning contract as captureGeneratedExplanation — see that
+ * function's docstring. Compares against the probe's `stem` text. */
 export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<void> {
   try {
     const probeKind: ProbeKind = input.probeKind ?? 'mcq'
+    const canonicalSlug = `${input.conceptId}:${probeKind}:${input.language}`
+    const contentHash = hashContent(input.stem)
+
+    const existingLineage = await prisma.assetIdentity.findMany({
+      where: { canonicalSlug, family: AssetFamily.PROBE },
+      include: { probeAsset: true },
+    })
+    const lineageRows: LineageAsset[] = existingLineage
+      .filter((a) => a.probeAsset)
+      .map((a) => ({ assetId: a.assetId, contentHash: a.contentHash, content: a.probeAsset!.stem, version: a.version }))
+
+    const decision = decideCaptureAction(input.stem, contentHash, lineageRows)
+    if (decision.action === 'skip-duplicate') return
+
     await prisma.assetIdentity.create({
       data: {
         family: AssetFamily.PROBE,
@@ -88,8 +106,10 @@ export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<v
         authorId: input.authorId,
         authorKind: AuthorKind.AI_AUTHORED,
         status: AssetStatus.DRAFT,
-        canonicalSlug: `${input.conceptId}:${probeKind}:${input.language}`,
-        contentHash: `p${input.stem.length}`,
+        version: decision.action === 'new-version' ? decision.nextVersion : 1,
+        parentVersionId: decision.action === 'new-version' ? decision.parentVersionId : undefined,
+        canonicalSlug,
+        contentHash,
         tags: [input.subjectSlug, probeKind],
         intellectualProperty: 'proprietary',
         curriculumMappings: [],
@@ -122,11 +142,18 @@ export async function listProbesForReview(status: AssetStatus = AssetStatus.DRAF
   })
 }
 
+/** Same "deprecate, never overwrite" contract as reviewExplanationAsset. */
 export async function reviewProbeAsset(assetId: string, action: 'approve' | 'reject') {
-  return prisma.assetIdentity.update({
-    where: { assetId },
-    data: { status: action === 'approve' ? AssetStatus.ACTIVE : AssetStatus.RETIRED },
+  if (action === 'reject') {
+    return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.RETIRED } })
+  }
+
+  const target = await prisma.assetIdentity.findUniqueOrThrow({ where: { assetId } })
+  await prisma.assetIdentity.updateMany({
+    where: { canonicalSlug: target.canonicalSlug, family: AssetFamily.PROBE, status: AssetStatus.ACTIVE, assetId: { not: assetId } },
+    data: { status: AssetStatus.DEPRECATED, deprecationReason: `Superseded by newer approved version ${assetId}` },
   })
+  return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.ACTIVE } })
 }
 
 // ─── Lesson assembly ──────────────────────────────────────────────────────────

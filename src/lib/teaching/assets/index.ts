@@ -14,6 +14,13 @@ export {
   type ProbeMatch, type CaptureProbeInput, type AssembledLesson,
 } from './teachingActionRepository'
 export type { ExplanationKind, ProbeKind, ProbeChoice } from './assetIdentity'
+export { jaccardSimilarity, hashContent, DUPLICATE_SIMILARITY_THRESHOLD } from './similarity'
+export { decideCaptureAction, type CaptureDecision, type LineageAsset } from './versioning'
+export { rankAsset, rankAssets, computeFreshness, parseManualPriority, type RankableAsset, type RankedAsset, type RankingFactors } from './ranking'
+export {
+  getConceptAssetCounts, getDuplicateCandidates, getSubjectRepositoryReport,
+  type ConceptAssetCounts, type DuplicateCandidate, type SubjectRepositoryReport,
+} from './repositoryStats'
 
 /**
  * Kill switch — defaults to enabled. Safe to leave on: with zero ACTIVE

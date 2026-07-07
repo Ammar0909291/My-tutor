@@ -15,6 +15,8 @@ import { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, GradeBand } fro
 import type { ExplanationKind } from './assetIdentity'
 import type { StudentState } from './studentState'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
+import { decideCaptureAction, type LineageAsset } from './versioning'
+import { hashContent } from './similarity'
 
 export interface ExplanationMatch {
   assetId: string
@@ -82,11 +84,33 @@ export interface CaptureExplanationInput {
   authorId: string // userId, or 'SYSTEM_AI' for background capture with no attributable user
 }
 
-/** Phase 2: capture. Fire-and-forget — never awaited on the response hot path. */
+/**
+ * Phase 2: capture. Fire-and-forget — never awaited on the response hot
+ * path. Deduplicates and versions against the existing lineage (same
+ * conceptId + familyKind + language) before writing:
+ *   - exact or near-duplicate of the latest version → skipped, no new row
+ *   - meaningfully different → new row, versioned (parentVersionId → latest)
+ *   - nothing comparable exists yet → new lineage (version 1)
+ * A new version is always an INSERT, never an UPDATE — an existing ACTIVE
+ * asset is untouched until a reviewer explicitly promotes the new version
+ * (see reviewExplanationAsset, which then deprecates the old one).
+ */
 export async function captureGeneratedExplanation(input: CaptureExplanationInput): Promise<void> {
   try {
     const familyKind: ExplanationKind = input.familyKind ?? 'core_explanation'
     const canonicalSlug = `${input.conceptId}:${familyKind}:${input.language}`
+    const contentHash = hashContent(input.content)
+
+    const existingLineage = await prisma.assetIdentity.findMany({
+      where: { canonicalSlug, family: AssetFamily.EXPLANATION },
+      include: { explanationAsset: true },
+    })
+    const lineageRows: LineageAsset[] = existingLineage
+      .filter((a) => a.explanationAsset)
+      .map((a) => ({ assetId: a.assetId, contentHash: a.contentHash, content: a.explanationAsset!.content, version: a.version }))
+
+    const decision = decideCaptureAction(input.content, contentHash, lineageRows)
+    if (decision.action === 'skip-duplicate') return
 
     await prisma.assetIdentity.create({
       data: {
@@ -98,8 +122,10 @@ export async function captureGeneratedExplanation(input: CaptureExplanationInput
         authorId: input.authorId,
         authorKind: AuthorKind.AI_AUTHORED,
         status: AssetStatus.DRAFT,
+        version: decision.action === 'new-version' ? decision.nextVersion : 1,
+        parentVersionId: decision.action === 'new-version' ? decision.parentVersionId : undefined,
         canonicalSlug,
-        contentHash: hashContent(input.content),
+        contentHash,
         tags: deriveTags(input.subjectSlug, familyKind),
         intellectualProperty: 'proprietary',
         curriculumMappings: [],
@@ -122,16 +148,6 @@ export async function captureGeneratedExplanation(input: CaptureExplanationInput
   }
 }
 
-function hashContent(content: string): string {
-  // Lightweight non-cryptographic hash — good enough for dedup/debug, avoids
-  // a Node crypto import in a file also used by edge-adjacent code paths.
-  let hash = 0
-  for (let i = 0; i < content.length; i++) {
-    hash = (hash * 31 + content.charCodeAt(i)) | 0
-  }
-  return `h${(hash >>> 0).toString(16)}`
-}
-
 function deriveTags(subjectSlug: string, familyKind: string): string[] {
   return [subjectSlug, familyKind]
 }
@@ -147,9 +163,22 @@ export async function listExplanationsForReview(status: AssetStatus = AssetStatu
   })
 }
 
+/**
+ * Approving a new version never overwrites the previously-approved one: the
+ * old ACTIVE asset in the same lineage is moved to DEPRECATED (fully
+ * preserved, just no longer served — findBestExplanation only reads
+ * ACTIVE), and the new one becomes ACTIVE. At most one ACTIVE per
+ * canonicalSlug at any time (ADR 14 §4.1).
+ */
 export async function reviewExplanationAsset(assetId: string, action: 'approve' | 'reject') {
-  return prisma.assetIdentity.update({
-    where: { assetId },
-    data: { status: action === 'approve' ? AssetStatus.ACTIVE : AssetStatus.RETIRED },
+  if (action === 'reject') {
+    return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.RETIRED } })
+  }
+
+  const target = await prisma.assetIdentity.findUniqueOrThrow({ where: { assetId } })
+  await prisma.assetIdentity.updateMany({
+    where: { canonicalSlug: target.canonicalSlug, family: AssetFamily.EXPLANATION, status: AssetStatus.ACTIVE, assetId: { not: assetId } },
+    data: { status: AssetStatus.DEPRECATED, deprecationReason: `Superseded by newer approved version ${assetId}` },
   })
+  return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.ACTIVE } })
 }
