@@ -50,7 +50,15 @@
   for approval on this text-level rewrite; assume approval unless an improvement would
   fundamentally change the objective (flag that explicitly rather than silently substituting a
   different objective).
-- Execute ONLY the final (improved) prompt, never the original once it's been improved.
+- Execute ONLY the final (improved) prompt, never the original once it's been improved. No
+  permission-seeking language at all for this — not "may I proceed," not a soft narrated pause,
+  not even a preamble framed as asking. State the final prompt and go straight to executing it.
+- Once a FINAL PROMPT has been produced and executed for a given research topic (e.g. the Master
+  Teacher Decision Science taxonomy), that becomes the canonical, latest version of the work. If
+  the same or a near-identical prompt is sent again later, do not restart Step 1-2 from scratch —
+  recognize it's already been through this improvement cycle, and either re-present the already-
+  improved version or push it further with genuinely new discoveries, never regress to re-doing
+  the same analysis or re-deriving an already-superseded flat/unmerged structure.
 - Continuous discovery: keep questioning conclusions while researching; apply a better
   architecture/taxonomy/framework the moment it emerges, without waiting for a new prompt.
 - Whenever research changes a conclusion from an earlier phase, produce an ARCHITECTURAL
