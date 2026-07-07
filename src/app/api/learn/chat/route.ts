@@ -20,6 +20,10 @@ import { decideVisualization } from '@/lib/teaching/visualizationDecision'
 import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
+import {
+  assembleLesson, buildStudentState, captureGeneratedExplanation, isExplanationMemoryEnabled,
+  type StudentState, type AssembledLesson,
+} from '@/lib/teaching/assets'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -131,6 +135,13 @@ export async function POST(req: Request) {
     ])
 
     let lessonCtx: LessonContext | null = null
+    // Explanation Memory / Teaching Action Repository (approved exception to
+    // ADR 14's implementation gate) needs the real canonical-KG concept id for
+    // this turn, not just the lesson number lessonCtx carries. The KG-backed
+    // branch below already computes each synthetic lesson's topicSlug (= KG
+    // node slug) to resolve "current lesson" — captured here without changing
+    // LessonContext's shape or any existing consumer of it.
+    let resolvedConceptId: string | null = null
     if (curriculumLessons.length > 0) {
       const currentOrder = studentProgress?.currentLesson ?? 1
       const currentLesson = (curriculumLessons as any[]).find((l) => l.order === currentOrder) ?? curriculumLessons[0]
@@ -189,6 +200,7 @@ export async function POST(req: Request) {
                 .filter((l) => completedSlugs.has(l.topicSlug))
                 .map((l) => l.order),
             }
+            resolvedConceptId = currentLesson.topicSlug
           }
         }
       } catch {
@@ -1519,17 +1531,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }))
 
     try {
-      const { text, provider } = await routeAI(
-        [...historyMessages, { role: 'user', content: message }],
-        systemPrompt,
-        country,
-        1024,
-        teachingLang,
-        { userId, subject: learnSession.subject.slug },
-      )
+      // Explanation Memory / Teaching Action Repository (approved exception to
+      // ADR 14's implementation gate — see WAVE_0_APPROVAL_CHECKLIST.md W1-4/
+      // W4-1/W4-3). Tries to assemble the turn from previously reviewed,
+      // ACTIVE Knowledge Assets before paying for an LLM call. Safe no-op
+      // today: nothing is ACTIVE until a human reviewer promotes a DRAFT via
+      // the admin review endpoint, so assembleLesson() always returns null
+      // and the LLM path below runs exactly as before.
+      let memoryState: StudentState | null = null
+      let assembled: AssembledLesson | null = null
+      if (isExplanationMemoryEnabled() && resolvedConceptId) {
+        try {
+          memoryState = buildStudentState({
+            conceptId: resolvedConceptId,
+            subjectSlug: learnSession.subject.slug,
+            teachingLanguage: teachingLang,
+            grade: profile?.grade,
+            currentLevel: profile?.currentLevel,
+            targetLevel: profile?.targetLevel,
+            userMessage: message,
+          })
+          assembled = await assembleLesson(memoryState)
+        } catch (err) {
+          console.warn('[learn/chat] explanation memory lookup failed, falling back to LLM:', err)
+        }
+      }
+
+      let text: string
+      let provider: string
+      if (assembled) {
+        text = assembled.text
+        provider = 'memory'
+      } else {
+        const routed = await routeAI(
+          [...historyMessages, { role: 'user', content: message }],
+          systemPrompt,
+          country,
+          1024,
+          teachingLang,
+          { userId, subject: learnSession.subject.slug },
+        )
+        text = routed.text
+        provider = routed.provider
+      }
 
       if (!text) {
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+      }
+
+      // Phase 2 capture: persist a successful LLM generation as a DRAFT for
+      // future reuse. Fire-and-forget — never awaited, never blocks the turn.
+      if (memoryState && !assembled) {
+        void captureGeneratedExplanation({
+          conceptId: memoryState.conceptId,
+          subjectSlug: memoryState.subjectSlug,
+          language: memoryState.language,
+          gradeBand: memoryState.gradeBand,
+          content: text,
+          authorId: 'SYSTEM_AI',
+        })
       }
 
       // Sprint BW: extract and strip VISUAL:<type> tag before persisting/returning.
@@ -1826,15 +1886,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }))
 
       // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — never blocks the response.
-      // Phase 1 proxy: subject slug stands in for conceptId until KG tracking is wired (Wave 2).
+      // Wave 2 (this build): real KG concept id + gradeBand when Explanation
+      // Memory resolved them for this turn; otherwise the original Phase 1
+      // proxy (subject slug, ADULT) so non-memory turns (school mode, subjects
+      // without a canonical KG) are completely unaffected.
       appendEvidenceEvent({
         userId,
         sessionId,
         turnId:    assistantMessage.id,
-        conceptId: learnSession.subject.slug,
+        conceptId: memoryState?.conceptId ?? learnSession.subject.slug,
         language:  teachingLang,
-        gradeBand: GradeBand.ADULT,
+        gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
         category:  EvidenceCategory.ASSET_SHOWN,
+        assetId:   assembled?.usedAssetIds[0],
         outcome:   'shown',
         strength:  0.0,
       })

@@ -345,6 +345,34 @@
   order; (c) first hosted CI run → commit the ratchet baseline; (d) a
   directive explicitly re-permits building test scaffolding → build Tier
   2 tests + transcript harness per VALIDATION_FRAMEWORK_P10.md §7.
+  (8) 2026-07-07 — **G2 exception granted: ADR 14 Phase 2/3 implemented**
+  ("Explanation Memory" + "Teaching Action Repository", explicit owner
+  chat instruction, out of the normal G1/G2 sequence — G1 KG-freeze still
+  not declared). Discovered mid-task that W1-3 (Evidence Engine Phase 1)
+  and W1-4 (AssetIdentity + three family tables, empty) were ALREADY
+  implemented in the codebase (`src/lib/teaching/evidence/evidenceEngine.ts`,
+  `src/lib/teaching/assets/assetIdentity.ts`) despite their checklist boxes
+  reading unchecked — checklist corrected to match reality rather than
+  building a duplicate schema. Built on top, EXPLANATION + PROBE families
+  only (VISUAL intentionally untouched — ADR 12/W4-2 territory): Student
+  State builder (`studentState.ts`, grade→GradeBand mapping), a pure
+  confidence matcher (`matcher.ts`, calibrated so a freshly human-approved
+  ACTIVE asset with zero accumulated evidence clears the default threshold
+  on concept+language+gradeBand fit alone — qualityScore/qualityConfidence
+  are Evidence-Engine-owned per the schema's single-writer invariant and
+  can only ever add bonus confidence, never gate a floor), capture
+  (`explanationMemory.ts`/`teachingActionRepository.ts`, DRAFT after every
+  LLM generation), an admin review endpoint
+  (`/api/admin/knowledge-assets`, DB-role-gated, approve/reject), and
+  `assembleLesson()` wired into `route.ts` immediately before the LLM
+  call. Live-verified end-to-end via local Postgres + direct HTTP calls:
+  DRAFT is never served; after admin approval the real chat endpoint
+  returns `provider: "memory"` with the exact stored content and the LLM
+  is never invoked; combined explanation+quiz assembly works; with the
+  catalogue empty (today's real state — nothing was pre-populated per the
+  task's own "do not populate thousands of explanations now" instruction)
+  the LLM path is provably unchanged from before this build. Scope: only
+  physics/mathematics/english (the three live curriculums).
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

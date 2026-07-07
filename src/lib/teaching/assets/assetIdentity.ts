@@ -17,7 +17,12 @@ export {
   GradeBand,
 } from '@prisma/client'
 
-// familyKind discriminator values for the Explanation family (ADR 14 §4.2)
+// familyKind discriminator values for the Explanation family (ADR 14 §4.2).
+// Extended (Explanation Memory / Teaching Action Repository build, 2026-07)
+// with the fuller set of reusable text-based teaching actions a human
+// teacher might reach for — memory tricks, FAQs, summaries, flashcards,
+// exam-oriented framing, real-world examples, story framing. familyKind is
+// a plain String column (no schema change needed to add these).
 export type ExplanationKind =
   | 'definition'
   | 'core_explanation'
@@ -27,6 +32,15 @@ export type ExplanationKind =
   | 'hint_tier_3'
   | 'misconception_repair'
   | 'prerequisite_recovery'
+  | 'real_world_example'
+  | 'story_based'
+  | 'memory_trick'
+  | 'faq'
+  | 'summary'
+  | 'revision_notes'
+  | 'flashcard'
+  | 'exam_oriented'
+  | 'common_misconception_note'
 
 // familyKind discriminator values for the Probe family (ADR 14 §4.4)
 export type ProbeKind =

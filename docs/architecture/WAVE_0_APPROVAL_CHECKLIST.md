@@ -34,8 +34,8 @@ reference them in commits (e.g. `implements W2-3`).
 |---|---|---|---|---|
 | W1-1 | ADR 06 KG consumption gate (version/status/shape/diagnostic surface) in `subjectKgAdapter.ts` | ADR 06 §Future plan | W0-1 | [ ] |
 | W1-2 | ADR 10 Phase 1: create `ConceptMasteryRecord`, `BrainConfig`, `ActiveMisconception` tables + typed `SessionMemory` schema (additive `prisma db push`; no reader/writer migration) | ADR 10 §10 | — | [ ] |
-| W1-3 | ADR 13 Phase 1: `appendEvidenceEvent()` fire-and-forget in chat-route persist stage (append-only; nothing reads it) | ADR 13 §10 | — | [ ] |
-| W1-4 | ADR 14 Phase 1: create `AssetIdentity` + three family tables (empty) | ADR 14 §10 | — | [ ] |
+| W1-3 | ADR 13 Phase 1: `appendEvidenceEvent()` fire-and-forget in chat-route persist stage (append-only; nothing reads it) | ADR 13 §10 | — | [x] already implemented in the codebase (`src/lib/teaching/evidence/evidenceEngine.ts`, wired at the route.ts persist stage) — checklist updated to match reality, 2026-07-07 |
+| W1-4 | ADR 14 Phase 1: create `AssetIdentity` + three family tables (empty) | ADR 14 §10 | — | [x] already implemented in the codebase (`src/lib/teaching/assets/assetIdentity.ts` + schema) — checklist updated to match reality, 2026-07-07 |
 | W1-5 | P10 T3b seam: extract chat-route orchestration into an importable function (test-only refactor of `route.ts`) | `VALIDATION_FRAMEWORK_P10.md` §2/§7 (GATED) | — | [ ] |
 | W1-6 | P10 client seam: env-override for provider base URL so the transcript player can serve T3a over HTTP | `VALIDATION_FRAMEWORK_P10.md` §3 (GATED) | — | [ ] |
 
@@ -68,9 +68,9 @@ no fixture regression.
 
 | ID | Item | Source | Depends on | Approved |
 |---|---|---|---|---|
-| W4-1 | ADR 14 Phase 2: passive catalogue population (generated content persisted as DRAFT; pipeline `teaching-assets/assets.json` ingested as curated source; nothing served) | ADR 14 §10 | W1-4 | [ ] |
-| W4-2 | ADR 12 Phases 2–3: concept-keyed visual cache; all visual LLM calls to background authoring — **fixes R16; `ENABLE_DYNAMIC_VISUALIZATION` stays off everywhere until this lands** | ADR 12 §4; R16, R17 | W1-4 | [ ] |
-| W4-3 | ADR 14 Phase 3: active retrieval (ACTIVE assets served; per-block LLM skip; `incompatibilities` gate live) | ADR 14 §10 | W4-1, W1-3 | [ ] |
+| W4-1 | ADR 14 Phase 2: passive catalogue population (generated content persisted as DRAFT; pipeline `teaching-assets/assets.json` ingested as curated source; nothing served) | ADR 14 §10 | W1-4 | [x] approved by project owner as an explicit exception (chat instruction, 2026-07-07, out of G1/G2 sequence — G1 KG-freeze not yet declared). Scope: EXPLANATION + PROBE families only for physics/mathematics/english (the three live curriculums); `teaching-assets/assets.json` ingestion not built. Implements `captureGeneratedExplanation`/`captureGeneratedProbe` in `src/lib/teaching/assets/`. |
+| W4-2 | ADR 12 Phases 2–3: concept-keyed visual cache; all visual LLM calls to background authoring — **fixes R16; `ENABLE_DYNAMIC_VISUALIZATION` stays off everywhere until this lands** | ADR 12 §4; R16, R17 | W1-4 | [ ] not in scope of this build — VISUAL family intentionally untouched (see W4-1 note) |
+| W4-3 | ADR 14 Phase 3: active retrieval (ACTIVE assets served; per-block LLM skip; `incompatibilities` gate live) | ADR 14 §10 | W4-1, W1-3 | [x] approved by project owner as an explicit exception (chat instruction, 2026-07-07, out of G1/G2 sequence). `findBestExplanation`/`findBestProbe`/`assembleLesson` wired into `src/app/api/learn/chat/route.ts` before the LLM call; `incompatibilities` gate implemented in the matcher (`activeMisconceptionIds` param) but not yet fed real data from `ActiveMisconception` — defaults to no-op. Live-verified: with an ACTIVE asset present, the route returns `provider: "memory"` and skips the LLM entirely; with none present (the default, empty-catalogue state), behavior is unchanged from before this build. |
 | W4-4 | ADR 13 Phases 2–3: EWMA worker + nightly rollup + bias counters; `assetEffectivenessSignal` into the ADR 11 Reconciler | ADR 13 §10 | W1-3, W2-4 | [ ] |
 
 Exit gate: ADI measurably falls on a replay corpus; served-asset turns
