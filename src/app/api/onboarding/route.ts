@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { SubjectType, type Subject } from '@prisma/client'
 import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
+import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { getBoard } from '@/lib/education'
 import { captureError } from '@/lib/monitoring'
 import { schoolOnboardingSchema } from '@/lib/schoolOnboardingSchema'
@@ -62,7 +63,13 @@ export async function POST(req: Request) {
     }
 
     const parsed = generalSchema.parse(body)
-    const { currentLevel, selfDescription, voiceChoice, teachingLanguage } = parsed
+    // Normalize onto the 3 canonical tiers (src/lib/curriculum/levels.ts) at
+    // the point of storage — the wizard only ever sends beginner/intermediate/
+    // advanced, but the schema still accepts two wider legacy values; storing
+    // the normalized form means every downstream reader of Profile.currentLevel
+    // only ever has to handle one system.
+    const currentLevel = normalizeToCanonicalLevel(parsed.currentLevel)
+    const { selfDescription, voiceChoice, teachingLanguage } = parsed
     // Accept either the legacy single `subjectSlug` or the new multi-select `subjectSlugs` — dedupe and keep order.
     const subjectSlugs = Array.from(new Set([
       ...(parsed.subjectSlugs ?? []),

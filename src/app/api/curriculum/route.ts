@@ -7,6 +7,8 @@ import type { Curriculum } from '@/types'
 import { findLibrarySubject, renderCurriculumTree } from '@/lib/curriculum/subjectCatalog'
 import { getKnowledgeGraph, getAvailableNodes } from '@/lib/curriculum/knowledgeGraph'
 import { resolveCurriculumSource } from '@/lib/curriculum/resolveCurriculumSource'
+import { computeCurriculumEntryOrder, getPlacementFloorSlugs } from '@/lib/curriculum/placement'
+import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 
 const schema = z.object({ subjectSlug: z.string() })
 
@@ -19,7 +21,7 @@ export async function GET(req: Request) {
   if (!subject) return NextResponse.json({ success: false, error: 'subject param required' }, { status: 400 })
 
   try {
-    const [lessons, progress, topicProgressRows] = await Promise.all([
+    const [lessons, progress, topicProgressRows, profile] = await Promise.all([
       prisma.curriculum.findMany({
         where: { subjectCode: subject },
         orderBy: { order: 'asc' },
@@ -30,6 +32,10 @@ export async function GET(req: Request) {
       prisma.topicProgress.findMany({
         where: { userId: session.user.id, subjectSlug: subject },
       }),
+      prisma.profile.findUnique({
+        where: { userId: session.user.id },
+        select: { currentLevel: true },
+      }),
     ])
 
     // Compute which knowledge-graph nodes are currently unlocked for the learner
@@ -37,7 +43,14 @@ export async function GET(req: Request) {
     const completedSlugs = new Set(
       topicProgressRows.filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION').map((r) => r.topicSlug)
     )
-    const availableNodes = graph ? getAvailableNodes(graph, completedSlugs).map((n) => n.slug) : []
+    const level = normalizeToCanonicalLevel(profile?.currentLevel)
+    // Placement (see src/lib/curriculum/placement.ts): nodes before the
+    // learner's level-appropriate entry point are unlocked for prerequisite
+    // purposes ONLY — never merged into completedSlugs/topicProgressRows,
+    // which stay genuinely earned and are returned to the client unchanged.
+    const placementFloorSlugs = graph && !progress ? getPlacementFloorSlugs(graph, level) : new Set<string>()
+    const unlockedSlugs = new Set([...completedSlugs, ...placementFloorSlugs])
+    const availableNodes = graph ? getAvailableNodes(graph, unlockedSlugs).map((n) => n.slug) : []
     const libSubject = findLibrarySubject(subject)
 
     // Priority: canonical KG > legacy Curriculum DB rows > Subject Library catalog.
@@ -62,10 +75,14 @@ export async function GET(req: Request) {
           topicSlug: node.slug,
         }))
       )
+      // Only applies before any real progress row exists — once a learner has
+      // genuinely completed anything, their real StudentProgress row (never
+      // faked) takes over and this placement default is never consulted again.
+      const defaultProgress = { currentLesson: computeCurriculumEntryOrder(graph, level), completedLessons: [] as number[] }
       return NextResponse.json({
         success: true,
         lessons: syntheticLessons,
-        progress: progress ?? { currentLesson: 1, completedLessons: [] },
+        progress: progress ?? defaultProgress,
         topicProgress: topicProgressRows,
         availableNodes,
       })

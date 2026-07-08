@@ -9,6 +9,15 @@
  * lightweight Subject Library browsing/enrollment layer that sits next to
  * (not instead of) the tech roadmap system. Levels here use a simple 0–5
  * index that maps onto the same Beginner→Expert spirit as `SkillLevel`.
+ *
+ * NOTE (2026-07-08): this 6-tier LEVELS/levelLabel is NOT the canonical
+ * curriculum-entry-point level system — that's CurriculumLevel in
+ * src/lib/curriculum/levels.ts (3 tiers: beginner/intermediate/advanced,
+ * the ones actually reachable through onboarding). This file's LEVELS is
+ * kept for the Subject Library page's per-enrollment level badge
+ * (`levelLabel(enrollment.currentLevelIndex)`) and for modulesForLevelSpan's
+ * per-module level metadata (see LEVEL_TO_INDEX in curriculum/engine.ts for
+ * the mapping between the two systems).
  */
 
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'

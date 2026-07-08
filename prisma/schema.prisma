@@ -719,6 +719,13 @@ enum AssessmentType {
 }
 
 // ─── Coach: Placement Interview & Personalized Plan (Sprint 1, additive) ─────
+// NOTE (2026-07-08): CoachProfile/LearningGoal/PlacementAssessment/
+// AssessmentAttempt below (and the LevelBand enum they use) are confirmed
+// dead — nothing in src/ ever creates a row in any of these four models,
+// they are only defensively read in case one someday exists. The canonical,
+// live curriculum-entry-point level system is CurriculumLevel in
+// src/lib/curriculum/levels.ts. Not restructured/removed here (no schema
+// change made) to avoid an unrelated migration — documentation only.
 
 model CoachProfile {
   id        String   @id @default(cuid())
