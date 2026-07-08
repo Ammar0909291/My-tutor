@@ -37,7 +37,15 @@ export const authConfig: NextAuthConfig = {
         // HIGH-2: normalize email before lookup so casing differences don't create duplicate identities.
         const email = canonicalEmail(parsed.data.email)
         const { password } = parsed.data
-        const user = await prisma.user.findUnique({ where: { email } })
+        // Scoped select (not a bare findUnique): this is the one query in the
+        // login path with no surrounding try/catch, so a schema-drift column
+        // this route never touches (e.g. a migration not yet deployed to
+        // this database) can't take login down — only the columns actually
+        // used below are requested.
+        const user = await prisma.user.findUnique({
+          where: { email },
+          select: { id: true, email: true, name: true, image: true, passwordHash: true, isDeleted: true },
+        })
         if (!user?.passwordHash) return null
         if (user.isDeleted) return null  // soft-deleted accounts cannot log in
         const valid = await bcrypt.compare(password, user.passwordHash)

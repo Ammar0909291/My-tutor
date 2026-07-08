@@ -19,7 +19,10 @@ export async function POST(req: Request) {
     const email = parsed.email.trim().toLowerCase()
     const { password, referralCode } = parsed
 
-    const existing = await prisma.user.findUnique({ where: { email } });
+    // Scoped selects (not bare findUnique): registration only needs
+    // existence/id, so a schema-drift column neither check touches can't
+    // take signup down.
+    const existing = await prisma.user.findUnique({ where: { email }, select: { id: true } });
     if (existing) {
       return NextResponse.json({ success: false, error: "Email already registered" }, { status: 409 });
     }
@@ -32,7 +35,7 @@ export async function POST(req: Request) {
     // Resolve referrer if a code was passed
     let referrerId: string | null = null
     if (referralCode) {
-      const referrer = await prisma.user.findUnique({ where: { referralCode } })
+      const referrer = await prisma.user.findUnique({ where: { referralCode }, select: { id: true } })
       if (referrer) referrerId = referrer.id
     }
 
