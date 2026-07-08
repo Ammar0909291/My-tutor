@@ -65,6 +65,15 @@ export interface KGNode {
   description: string
   prerequisites: string[]
   estimatedHours?: number
+  /**
+   * The concept's own authored difficulty tag (foundational/developing/
+   * proficient/advanced/expert/research) — already present on every
+   * KnowledgeNode and already consumed by difficultyHours() below; simply
+   * forwarded here so placement.ts can pick a level-appropriate entry node.
+   * This is a per-CONCEPT tag, not a property of the learner — see
+   * src/lib/curriculum/levels.ts for the learner-level axis.
+   */
+  difficulty?: string
 }
 
 export interface KGModule {
@@ -88,6 +97,7 @@ function toKGNode(n: KnowledgeNode): KGNode {
     description: n.description,
     prerequisites: n.prerequisites,
     estimatedHours: n.estimated_hours ?? difficultyHours(n.difficulty),
+    difficulty: n.difficulty,
   }
 }
 

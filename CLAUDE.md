@@ -445,6 +445,47 @@
   task's own "do not populate thousands of explanations now" instruction)
   the LLM path is provably unchanged from before this build. Scope: only
   physics/mathematics/english (the three live curriculums).
+  (9) 2026-07-08 — **G2 exception granted: curriculum-level placement
+  implemented** (explicit owner chat instruction, out of the normal
+  G1/G2 sequence — G1 KG-freeze still not declared). Root cause fixed:
+  a prior investigation found six independent learner-level enums in
+  the repo, of which only `Profile.currentLevel` (beginner/intermediate/
+  advanced, set at onboarding) was actually reachable — but its only
+  live effect was cosmetic AI-prompt text; every learner always started
+  at lesson 1 regardless of selected level. Canonicalized on
+  `CurriculumLevel` (`src/lib/curriculum/levels.ts`, 3 tiers, the one
+  the onboarding UI actually offers) with `normalizeToCanonicalLevel()`
+  mapping every legacy value onto it; deprecated (not removed, no
+  migration) `mastery/levels.ts`'s unused `MASTERY_LEVELS` and
+  `subjectCatalog.ts`'s 6-tier `LEVELS` (kept only for the Subject
+  Library page's enrollment badge), and documented the `LevelBand`
+  enum + Coach-Placement models (`CoachProfile`/`LearningGoal`/
+  `PlacementAssessment`/`AssessmentAttempt`) as confirmed dead (zero
+  writers anywhere) via a schema comment only, no structural change.
+  Implementation: `src/lib/curriculum/placement.ts` (new) computes a
+  level-appropriate entry order from each subject's own already-authored
+  per-node `difficulty` tag (foundational/developing/proficient/
+  advanced/expert/research — forwarded onto `KGNode` in
+  `knowledgeGraph.ts`, previously computed-but-dropped after
+  `difficultyHours()`); wired into `/api/curriculum`'s GET (entry-order
+  default + prerequisite-unlock floor) and `getDashboardV2Data.ts`
+  (same default, so dashboard/Continue Learning/Current Lesson never
+  disagree with `/learn`). Explicitly does NOT write fake completions —
+  `StudentProgress.completedLessons`/`TopicProgress` stay genuinely
+  empty until really earned; only the *default* starting `currentLesson`
+  and which nodes count as prerequisite-unlocked change, and only until
+  a real progress row exists. No schema/migration changes at all — fully
+  derived from data that already existed. Scope: Subject-Library/KG-backed
+  subjects only (physics/mathematics/chemistry/biology/computer_science/
+  english) — School Mode intentionally excluded (walks an external
+  board/grade-prescribed chapter order that shouldn't be skipped on a
+  self-reported level). Live-verified against the real physics KG (216
+  concepts) with three real accounts: beginner→lesson 1 ("SI Units and
+  Measurement"), intermediate→lesson 7 ("Dot and Cross Products"),
+  advanced→lesson 32 ("Conservative and Non-Conservative Forces",
+  correctly crossing into a later unit) — dashboard's Continue
+  Learning/Current Lesson widget matched exactly for all three. Full
+  suite 630/631, tsc clean, build succeeds.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/
