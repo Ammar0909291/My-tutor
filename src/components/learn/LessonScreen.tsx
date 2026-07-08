@@ -1279,7 +1279,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       } else if (NON_CODE_SUBJECTS.includes(subjectSlug)) {
         setCode(full)
       }
-      handleSpeak(aid, full)
+      // Voice no longer auto-plays on arrival (including the lesson-start
+      // greeting) — playback only starts from the explicit play button on
+      // each message (handleSpeak, wired to that button below).
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Error: ${msg}`, streaming: false } : m))
@@ -1470,7 +1472,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       } else if (NON_CODE_SUBJECTS.includes(subjectSlug)) {
         setCode(full)
       }
-      handleSpeak(aid, full)
+      // Voice no longer auto-plays on arrival — see the sendMessage handler above.
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Analysis error: ${msg}`, streaming: false } : m))
