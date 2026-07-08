@@ -46,7 +46,10 @@ export async function POST(req: NextRequest) {
     if (!EMAIL_RE.test(normalized)) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
     }
-    const user = await prisma.user.findUnique({ where: { email: normalized } })
+    const user = await prisma.user.findUnique({
+      where: { email: normalized },
+      select: { passwordHash: true },
+    })
     if (!user || !user.passwordHash) {
       return safeResponse()
     }

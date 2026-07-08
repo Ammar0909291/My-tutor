@@ -27,6 +27,78 @@ function smtpReady() {
 const FROM = () => process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
 const APP_URL = () => process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
 
+function emailDomain(addr: string): string | null {
+  const match = addr.match(/@([^\s>]+)/)
+  return match ? match[1].toLowerCase() : null
+}
+
+// ─── Diagnostics (admin-triggered test send) ───────────────────────────────────
+//
+// The password-reset endpoint deliberately never reveals SMTP failures to the
+// caller (anti-enumeration — see forgot-password/route.ts), so an SMTP outage
+// or misconfiguration is otherwise only visible in server logs. This gives an
+// admin an on-demand way to see the EXACT failure reason (or confirm a real
+// send actually reached the provider) without needing platform log access.
+export interface EmailDiagnostics {
+  success: boolean
+  error?: string
+  smtpConfigured: boolean
+  host: string
+  port: number
+  secure: boolean
+  from: string
+  fromDomainMismatchWarning?: string
+  smtpErrorCode?: string | null
+  smtpResponseCode?: number | null
+  smtpResponse?: string | null
+}
+
+export async function sendTestEmail(to: string): Promise<EmailDiagnostics> {
+  const host = process.env.SMTP_HOST ?? 'smtp.gmail.com'
+  const port = Number(process.env.SMTP_PORT ?? 587)
+  const secure = process.env.SMTP_SECURE === 'true'
+  const from = FROM()
+
+  // A very common cause of "sent successfully, never arrives": the FROM
+  // domain doesn't match the authenticated SMTP account's domain, so the
+  // receiving server's SPF/DKIM alignment check fails and it silently
+  // spam-folders or drops the message — nodemailer/the SMTP server report
+  // no error at all in that case, so this is flagged as a warning regardless
+  // of whether the send below succeeds.
+  const fromDomain = emailDomain(from)
+  const userDomain = process.env.SMTP_USER ? emailDomain(process.env.SMTP_USER) : null
+  const fromDomainMismatchWarning = fromDomain && userDomain && fromDomain !== userDomain
+    ? `FROM address is @${fromDomain} but SMTP_USER is @${userDomain} — mismatched sender domains commonly fail SPF/DKIM checks at the receiving end, causing the email to be silently dropped or spam-filtered even though sending itself reports success. Set SMTP_FROM to an address on the same domain as SMTP_USER, or configure SPF/DKIM for the custom domain with your email provider.`
+    : undefined
+
+  if (!smtpReady()) {
+    return { success: false, error: 'SMTP not configured (SMTP_HOST/SMTP_USER/SMTP_PASS missing)', smtpConfigured: false, host, port, secure, from, fromDomainMismatchWarning }
+  }
+
+  try {
+    const transport = makeTransport()
+    await transport.verify()
+    await transport.sendMail({
+      from,
+      to,
+      subject: 'My Tutor — test email',
+      text: `This is a test email sent from the /admin/ops diagnostics panel at ${new Date().toISOString()}. If you received this, SMTP delivery is working.`,
+    })
+    return { success: true, smtpConfigured: true, host, port, secure, from, fromDomainMismatchWarning }
+  } catch (err) {
+    const errObj = err as Error & { code?: string; command?: string; response?: string; responseCode?: number }
+    return {
+      success: false,
+      error: errObj.message ?? String(err),
+      smtpConfigured: true,
+      host, port, secure, from, fromDomainMismatchWarning,
+      smtpErrorCode: errObj.code ?? null,
+      smtpResponseCode: errObj.responseCode ?? null,
+      smtpResponse: errObj.response ?? null,
+    }
+  }
+}
+
 // ─── Welcome email ────────────────────────────────────────────────────────────
 
 export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
