@@ -1,10 +1,21 @@
-version: 1.0.0
+version: 1.1.0
 subject:
   id: mathematics
   name: Mathematics
+vision: Canonical mathematics curriculum spanning absolute beginner through active researcher.
 learning_path:
-  start_level: absolute_beginner
-  end_level: university
+  stages:
+    - Absolute Beginner
+    - Early Numeracy
+    - Primary
+    - Middle School
+    - Secondary
+    - Higher Secondary
+    - Undergraduate Foundation
+    - Undergraduate Advanced
+    - Graduate
+    - Research Preparation
+    - Active Researcher
 curriculum_structure:
   - Subject
   - Domain
@@ -12,6 +23,7 @@ curriculum_structure:
   - Topic
   - Concept
   - Micro Concept
+research_goal: Curriculum includes foundations, advanced mathematics, proof writing, mathematical communication, research methods, literature reading, open problems, and specialization tracks.
 domains:
   - Foundations of Mathematics
   - Arithmetic
@@ -31,8 +43,18 @@ domains:
   - Logic
   - Combinatorics
   - Graph Theory
+  - Topology
+  - Real Analysis
+  - Complex Analysis
+  - Abstract Algebra
+  - Differential Geometry
+  - Functional Analysis
+  - Measure Theory
+  - Optimization
   - Mathematical Modeling
   - Differential Equations
-  - Complex Numbers
-  - Vectors
-status: draft
+  - Numerical Methods
+  - Dynamical Systems
+  - Category Theory
+  - Research Methodology
+status: evolving
