@@ -1,0 +1,38 @@
+version: 1.0.0
+subject:
+  id: mathematics
+  name: Mathematics
+learning_path:
+  start_level: absolute_beginner
+  end_level: university
+curriculum_structure:
+  - Subject
+  - Domain
+  - Chapter
+  - Topic
+  - Concept
+  - Micro Concept
+domains:
+  - Foundations of Mathematics
+  - Arithmetic
+  - Number Systems
+  - Algebra
+  - Geometry
+  - Coordinate Geometry
+  - Trigonometry
+  - Mensuration
+  - Statistics
+  - Probability
+  - Calculus
+  - Linear Algebra
+  - Discrete Mathematics
+  - Number Theory
+  - Set Theory
+  - Logic
+  - Combinatorics
+  - Graph Theory
+  - Mathematical Modeling
+  - Differential Equations
+  - Complex Numbers
+  - Vectors
+status: draft
