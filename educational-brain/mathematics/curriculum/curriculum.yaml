@@ -1,60 +1,75 @@
-version: 1.1.0
-subject:
-  id: mathematics
-  name: Mathematics
-vision: Canonical mathematics curriculum spanning absolute beginner through active researcher.
-learning_path:
-  stages:
-    - Absolute Beginner
-    - Early Numeracy
-    - Primary
-    - Middle School
-    - Secondary
-    - Higher Secondary
-    - Undergraduate Foundation
-    - Undergraduate Advanced
-    - Graduate
-    - Research Preparation
-    - Active Researcher
-curriculum_structure:
-  - Subject
-  - Domain
-  - Chapter
-  - Topic
-  - Concept
-  - Micro Concept
-research_goal: Curriculum includes foundations, advanced mathematics, proof writing, mathematical communication, research methods, literature reading, open problems, and specialization tracks.
-domains:
-  - Foundations of Mathematics
-  - Arithmetic
-  - Number Systems
-  - Algebra
-  - Geometry
-  - Coordinate Geometry
-  - Trigonometry
-  - Mensuration
-  - Statistics
-  - Probability
-  - Calculus
-  - Linear Algebra
-  - Discrete Mathematics
-  - Number Theory
-  - Set Theory
-  - Logic
-  - Combinatorics
-  - Graph Theory
-  - Topology
-  - Real Analysis
-  - Complex Analysis
-  - Abstract Algebra
-  - Differential Geometry
-  - Functional Analysis
-  - Measure Theory
-  - Optimization
-  - Mathematical Modeling
-  - Differential Equations
-  - Numerical Methods
-  - Dynamical Systems
-  - Category Theory
-  - Research Methodology
-status: evolving
+version: 2.0.0
+subject: Mathematics
+scope: Complete human mathematical knowledge from absolute beginner to current research frontier.
+levels:
+- Absolute Beginner
+- Early Numeracy
+- Primary
+- Middle School
+- Secondary
+- Higher Secondary
+- Olympiad
+- Undergraduate
+- Graduate
+- Doctoral
+- Researcher
+- Frontier Research
+hierarchy:
+- Subject
+- Domain
+- Chapter
+- Topic
+- Concept
+- Micro Concept
+canonical_domains:
+- Foundations of Mathematics
+- Arithmetic
+- Number Systems
+- Fractions Decimals Percentages
+- Ratios Rates Proportions
+- Pre-Algebra
+- Algebra
+- Geometry
+- Coordinate Geometry
+- Trigonometry
+- Mensuration
+- Functions
+- Sequences and Series
+- Vectors
+- Matrices
+- Linear Algebra
+- Complex Numbers
+- Set Theory
+- Mathematical Logic
+- Proof Techniques
+- Combinatorics
+- Graph Theory
+- Probability
+- Statistics
+- Real Analysis
+- Complex Analysis
+- Topology
+- Differential Geometry
+- Abstract Algebra
+- Number Theory
+- Calculus
+- Multivariable Calculus
+- Differential Equations
+- Functional Analysis
+- Measure Theory
+- Numerical Analysis
+- Optimization
+- Mathematical Modeling
+- Dynamical Systems
+- Category Theory
+- Algebraic Topology
+- Algebraic Geometry
+- Representation Theory
+- Operator Theory
+- Ergodic Theory
+- Information Theory
+- Cryptography
+- Mathematical Physics
+- Computational Mathematics
+- Research Methodology
+rule: Every domain will be exhaustively decomposed into chapters, topics, concepts and micro concepts before authoring teaching content.
