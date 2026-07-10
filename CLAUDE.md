@@ -331,6 +331,31 @@
   instruction: further iterations continue this loop (audit whole system → highest-ROI task →
   reuse-before-create check → deliver → repeat) until Educational Brain architecture is
   complete, an owner-only decision arises, or a genuine vision-level contradiction is found.
+- **Delivery 12** (2026-07-10, in-repo, same continuous-mode iteration as Delivery 11):
+  the **Teaching Action Library** — `educational-brain/teaching-actions/`: the
+  transcription of Delivery 2 §6, the 27-action catalog (6 families: SHOW, TELL, DO,
+  TEST-THINKING, ORGANIZE, SOCIAL) that the action selector (`decision-engine/04`'s
+  seven-filter funnel) dispatches into. Named independently by validation/03,
+  validation/06, and the Architecture Audit (Gap 1 of 8, ranked first) as the single
+  highest-remaining-ROI authoring gap: Filters 2, 4, and 6 of the selector cannot run at
+  all without this catalog, for any concept lacking a per-concept entry (currently 3 of
+  ~1,800 concepts across all subjects). Reuse-first check confirmed every action was
+  already referenced by name somewhere in the tree before this delivery (Demonstration,
+  Worked Example, Analogy, Drawing, Matching, Error Analysis, Game, Concept Map, Thought
+  Experiment, Role-Play, Prediction) — none redefined, all completed to the full 27 (5
+  SHOW / 4 TELL / 5 DO / 5 TEST-THINKING / 4 ORGANIZE / 4 SOCIAL) with knowledge-type
+  fit, setup-cost tier, and persona notes per action. Notable content: the chocolate-
+  covered-broccoli guard on Game (mastery must be re-verified outside the game skin
+  before certifying — direct citation from assessment/08); the stability guard on Error
+  Analysis (only plant a flaw once the correct schema is solid, or the flaw may be
+  learned); Matching's bidirectional-translation diagnostic (one-way success with
+  reverse failure names exactly what to teach next); Retrieval-Schedule Prompt as the
+  action populating session OPENING. Deliberately did NOT re-author the 12-persona
+  table (Delivery 2 §9, still `motivation/`, planned) or the Cognitive Load Engine's
+  intrinsic/extraneous/germane theory (Delivery 2 §5, still `cognitive-load/`, planned)
+  — avoided duplicating ownership of libraries not yet due. `educational-brain/README.md`
+  updated: Delivery 12 registered, `teaching-actions/` moved from planned to authored.
+  Knowledge only — no runtime/schema/curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

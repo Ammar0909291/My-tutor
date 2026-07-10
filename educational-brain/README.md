@@ -36,6 +36,31 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Delivery 12** (in-repo, 2026-07-10): the **Teaching Action Library** —
+  `teaching-actions/`: the transcription of Delivery 2 §6, the 27-action
+  catalog (6 families: SHOW, TELL, DO, TEST-THINKING, ORGANIZE, SOCIAL)
+  the action selector (`decision-engine/04`'s seven-filter funnel)
+  dispatches into. Named by three independent audits as the single
+  highest-remaining-ROI gap: Filters 2, 4, and 6 of the selector cannot
+  run at all without this catalog, for any concept lacking a per-concept
+  entry (currently 3 of ~1,800). Every action was already referenced by
+  name somewhere in the tree before this delivery (Demonstration, Worked
+  Example, Analogy, Drawing, Matching, Error Analysis, Game, Concept Map,
+  Thought Experiment, Role-Play, Prediction) — none redefined, all
+  completed to the full 27 with knowledge-type fit, setup-cost tier, and
+  persona notes per action. Notable content: the chocolate-covered-
+  broccoli guard on Game (mastery must be re-verified outside the game
+  skin before certifying); the stability guard on Error Analysis (only
+  plant a flaw once the correct schema is solid, or the flaw may be
+  learned); the Matching action's bidirectional-translation diagnostic
+  (one-way success with reverse failure names exactly what to teach
+  next); Retrieval-Schedule Prompt as the action that populates session
+  OPENING. Deliberately did not re-author the 12-persona table (Delivery
+  2 §9, still `motivation/`) or the Cognitive Load Engine's load theory
+  (Delivery 2 §5, still `cognitive-load/`) — persona names used
+  generically exactly as already cited elsewhere; load costs are a
+  simple 3-tier tag, not a restatement of that other library. Knowledge
+  only — no runtime/schema/curriculum changes.
 - **Delivery 11** (in-repo, 2026-07-10): the **Foundations Library** —
   `foundations/`: the transcription of Delivery 1's four universal
   engines, cited by name and by number throughout this tree since
@@ -252,6 +277,12 @@ educational-brain/
                               load-bearing sentence, matched energy),
                               and all 23 Universal Teaching Principles
                               cited by number throughout this tree
+  teaching-actions/         ← Teaching Action Library (Delivery 12): the
+                              27-action dispatch catalog (SHOW/TELL/DO/
+                              TEST-THINKING/ORGANIZE/SOCIAL) the action
+                              selector's Filters 2, 4, and 6 dispatch
+                              into — per-action knowledge-type fit, setup
+                              cost, persona notes, and failure modes
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended
@@ -264,7 +295,6 @@ as empty placeholders):
   curiosity/          ← triggers, chains, by-age/subject/personality (Delivery 2 §3)
   misconceptions/     ← birth taxonomy, evolution, 7-step repair + per-concept libraries (Delivery 2 §4)
   cognitive-load/     ← intrinsic/extraneous/germane, chunking, density rules (Delivery 2 §5)
-  teaching-actions/   ← the 27-action dispatch library (Delivery 2 §6)
   transfer/           ← the transfer ladder + six rules (Delivery 2 §7)
   memory/             ← spacing, retrieval, interleaving, review-by-type (Delivery 2 §8)
   motivation/         ← the 12 learner personas (Delivery 2 §9)
