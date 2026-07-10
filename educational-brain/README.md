@@ -36,6 +36,31 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Correction 4 — Session Boundaries in an Asynchronous Medium**
+  (in-repo, 2026-07-10, red-team iteration, extends Delivery 7):
+  `decision-engine/07-lesson-planning-engine.md §8` added. Red-team
+  finding: every per-session budget in the tree (2 visible failures,
+  lesson one's budget of 1, one-failure-state-per-session, question
+  ceilings) and the protected CLOSE are defined against "the session"
+  as a unit — but the product is an open-ended async chat where no
+  file defined what a session boundary IS, silently making every
+  budget unmeasurable and every CLOSE optional (a learner can vanish
+  mid-CORE, possibly right after a failure — Universal Principle 14
+  unenforceable when the learner ends the session unilaterally).
+  Added three rules: (1) the boundary is a generous inactivity gap
+  (~30 min default, attention-span-scaled; within = same session,
+  budgets continue, no re-greeting; past = new session, budgets
+  reset, `placement/06 §2`'s gap table governs from 3 days up) —
+  generous because the failure modes are asymmetric; (2) an abandoned
+  session's CLOSE is a debt paid first at the next return (retro-close
+  in one breath via the OPENING's existing continuity greeting; never
+  an interrogation of the disappearance); (3) failure-then-vanish is
+  flagged with WHAT the last event was, and the return opens with an
+  engineered win before anything else — Principle 14 applied
+  retroactively; a flagged failure-then-vanish with no return is named
+  as the clearest churn signature the product produces and an
+  authoring flag on the concept that produced the terminal failure.
+  Knowledge-correction only — no runtime/schema/curriculum changes.
 - **Correction 3 — Reading-Load Signature** (in-repo, 2026-07-10,
   red-team iteration, extends Delivery 8 rather than a new delivery):
   `student-state/05-behaviour-profile.md §7` added. Red-team question

@@ -495,6 +495,24 @@
   collision resolved by connecting first-lesson/07's oral-first entry
   nodes to the accommodation boundary). Signature-never-diagnosis;
   no new library; knowledge-correction only. Red-team mode continues.
+- **Correction 4 — Session Boundaries in an Asynchronous Medium** (2026-07-10,
+  in-repo, red-team iteration): `educational-brain/decision-engine/07-lesson-
+  planning-engine.md §8` added, extending Delivery 7. Red-team finding: every
+  per-session budget in the tree and the protected CLOSE are defined against
+  "the session" as a unit, but the product is an open-ended async chat and no
+  file defined the boundary — making every budget unmeasurable and every CLOSE
+  optional (learner can vanish mid-CORE right after a failure; Universal
+  Principle 14 unenforceable unilaterally). Three rules added: (1) boundary =
+  generous inactivity gap (~30 min default, attention-span-scaled; within =
+  same session/budgets continue/no re-greet; past = new session/budgets reset/
+  placement/06 §2 gap table governs 3d+); (2) an abandoned session's CLOSE is
+  a debt paid first at next return (retro-close via the OPENING's existing
+  continuity greeting, never an interrogation of the disappearance);
+  (3) failure-then-vanish flagged with the last-event state; the return opens
+  with an engineered win before anything else; flagged failure-then-vanish
+  with no return = the clearest churn signature the product produces and an
+  authoring flag on the concept that produced the terminal failure.
+  Knowledge-correction only. Red-team mode continues.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
