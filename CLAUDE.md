@@ -477,6 +477,24 @@
   rather than attempting resolution or misrepresenting an unresolved
   state as settled. Knowledge-correction only — no runtime/schema/
   curriculum changes. Continuous critical-review mode continues.
+- **Correction 3 — Reading-Load Signature** (2026-07-10, in-repo, red-team
+  iteration): `educational-brain/student-state/05-behaviour-profile.md §7`
+  added, extending Delivery 8. Red-team review ("what would make this fail
+  for 100,000 real students?") found the product's primary delivery medium
+  is dense text while dyslexia-like reading difficulty had only 3 passing
+  mentions in the whole tree — the digital twin's "surfaces but never
+  diagnoses" limit had no authored consequence after surfacing. Added a
+  detection signature (cross-modal check from assessment/06 §4: performance
+  splits by channel not content; trigger = errors correlating with text
+  LENGTH not content difficulty, distinguished from the "skips
+  instructions" habit) and 5 standing adaptations reusing existing
+  machinery only (voice channel default via existing TTS/STT; burst limits
+  tighten one register step while register never drops; oral assessment
+  default with the accommodate-vs-measure boundary honored for English
+  decoding targets; load-bearing sentence never text-only; English-subject
+  collision resolved by connecting first-lesson/07's oral-first entry
+  nodes to the accommodation boundary). Signature-never-diagnosis;
+  no new library; knowledge-correction only. Red-team mode continues.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

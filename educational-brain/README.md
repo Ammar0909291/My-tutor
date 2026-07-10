@@ -36,6 +36,34 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Correction 3 — Reading-Load Signature** (in-repo, 2026-07-10,
+  red-team iteration, extends Delivery 8 rather than a new delivery):
+  `student-state/05-behaviour-profile.md §7` added. Red-team question
+  ("if 100,000 real students started tomorrow, what would make this
+  Brain fail?") found that the product's primary delivery medium is
+  dense text while the tree's entire treatment of dyslexia-like reading
+  difficulty was 3 passing mentions — one accommodation paragraph
+  (`assessment/06 §4`) and the digital twin's "surfaces but never
+  diagnoses" honest limit, which surfaced with no authored consequence
+  (a decision path that dead-ends). At 5–10% population prevalence this
+  is thousands of failing learners at scale, not an edge case. Added: a
+  detection signature built entirely on the already-authored cross-modal
+  check (performance splits by channel, not content — reading-load
+  fails written-only; knowledge gaps fail both), the trigger pattern
+  distinguishing it from the "skips instructions" habit, and five
+  standing adaptations that reuse existing machinery (voice channel
+  defaulted on both directions via the product's existing TTS/STT;
+  burst limits tightened one register step while register itself never
+  drops — the infantilization guard; oral assessment default with
+  `assessment/06 §4`'s accommodate-vs-measure boundary honored verbatim
+  for English decoding; load-bearing sentence never text-only; the
+  English-subject collision resolved by connecting `first-lesson/07`'s
+  oral-first entry nodes with the accommodation boundary). Explicitly
+  not a remediation program, not diagnostic language, not a new
+  library — a connection of parts each already authored and never
+  joined. All standing laws hold (signature-never-diagnosis,
+  minimum-evidence hardening, descriptions-never-verdicts).
+  Knowledge-correction only — no runtime/schema/curriculum changes.
 - **Correction 2 — Decision Matrix Silent Cells** (in-repo, 2026-07-10,
   critical-review iteration, extends Delivery 7 rather than a new
   delivery): `decision-engine/03-decision-matrix.md §6, §8` — critical
