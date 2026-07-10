@@ -553,6 +553,46 @@
   million-student answer (7 bodies of accumulable-only knowledge).
   Knowledge only — no runtime/schema/curriculum changes.
 
+- **WAVE 0 IMPLEMENTED** (2026-07-10, commits 8e1bec5 + 131fa9e, G2 satisfied by
+  explicit owner Wave-0 instruction; Brain frozen per the Final Sign-off, faithful
+  implementation only — every change cites its Brain rule):
+  (1) AssetIdentity activated — `src/lib/teaching/assets/brainSeedAssets.ts` (data-only
+  transcription of the 4 authored concept entries: 9 EXPLANATION + 5 PROBE assets with
+  distractor-mapped misconceptionIds, every item citing its educational-brain source
+  section) + `scripts/brain/seed-knowledge-assets.ts` (`npm run seed:brain-assets`;
+  idempotent; KG-validates conceptIds before writing; default ACTIVE as HUMAN_CURATOR
+  transcriptions of the frozen audited Brain, `--draft` for the admin-review flow,
+  `--dry-run` DB-free; seed canonicalSlug convention appends `:gradeBand` so each band
+  is its own lineage under ADR 14 §4.1). Once seeded, assembleLesson() serves authored
+  content (`provider: 'memory'`) for those concepts.
+  (2) Evidence capture — `src/lib/teaching/signals.ts` (`<!--SIGNAL-->` per Blueprint
+  Phase 3: correctness/confidence/confusion/phrase/probe; parsed+stripped before all
+  other tag parsers; fabrication forbidden for non-answers); route.ts writes
+  PROBE_OUTCOME (correctness × server-measured latency from message timestamps —
+  foundations/03 §7's one genuine text-channel instrument, captured at ingress — ×
+  confidence) and MISCONCEPTION_DETECTED (verbatim phrase) per validation/08 §2;
+  signal rows + TeachingStrategyEvent rows make the L5 decision-consequence join
+  queryable.
+  (3) First-lesson protocol — `src/lib/teaching/firstLessonGuard.ts`: first-lesson/02
+  §2 hard limits, 04 §1 flow, 03 behaviour, 07 subject adaptations (English ORAL/
+  "phoneme" banned; math counting-with-meaning; physics "SI" banned), foundations/03
+  §5 adult-register guard; fires only for Library beginners at lesson 1 with zero
+  completions; injected LAST (overrides advisory blocks).
+  (4) Placement verification — `src/lib/teaching/placementVerification.ts`: pure
+  three-bracket machine (below→at→above, nerve-settler first per assessment/02 §2;
+  affect budget 2 failures §6; DOWNWARD-only silent adjustment per placement/01 §2 +
+  02 §4 — StudentProgress.currentLesson moves to levelBelow()'s entry order, no fake
+  completions); pending-probe tracking separates ask-turn from answer-turn (no
+  double questions); state in contextSnapshot.placementVerification. Scope:
+  unverified intermediate/advanced Library learners, KG subjects, zero completions.
+  (5) Decision Engine for Library — ENABLE_LIBRARY_CONCEPT_TRACKING now DEFAULTS ON
+  (`=0` reverts): concept seeding + snapshot persist run for Library, so decide()
+  fires and TEACHING ENGINE DECISION reaches Library prompts (Blueprint Phase 5,
+  ADR 08 §4a). School Mode paths untouched throughout.
+  Validation: suite 655 passed/1 skipped (25 new tests), tsc clean. No schema
+  changes. No architecture defects found requiring a Brain unfreeze; one flow gap
+  (ask-turn vs answer-turn) was an implementation concern, solved in implementation.
+
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
   the single living master document (complete engine map, all flows, scalability/versioning/
