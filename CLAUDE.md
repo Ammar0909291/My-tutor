@@ -123,6 +123,20 @@
     AssetIdentity catalogue — it is a curated *source* for ADR 14 Phase 2 population, not a
     competing asset model.
 
+## Educational Brain — Knowledge Base (the moat, 2026-07-10)
+- `educational-brain/` (repo root) is the permanent authored teaching-science knowledge tree —
+  distinct from `docs/educational-brain/` (ch01-ch11 implementation blueprints) and
+  `docs/architecture/` (engine ADRs/Bible). Charter: reduce AI reasoning over time by authoring
+  educational knowledge once for permanent retrieval. Deliveries 1-2 (Recovery Engine, Adaptive
+  Rules, Voice Model, Concept Schema, seed concepts; the ten Delivery-2 layers incl. 23 Universal
+  Teaching Principles) were chat-authored and are pending transcription into this tree — the
+  tree's README records this. Delivery 3 (2026-07-10, first in-repo): the **Assessment Design
+  Library**, `educational-brain/assessment/` — 10 documents + index (foundations/quality metrics/
+  anti-patterns; binary-search diagnosis + flowcharts; distractor science + golden probes;
+  confidence & calibration; mastery gates + evidence hierarchy; oral/visual/practical modality;
+  by level/age/subject/persona; per-teaching-action illusion-puncturing assessment; failed-
+  assessment recovery protocol; rubrics). Knowledge only — no runtime/schema/curriculum changes.
+
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
   the single living master document (complete engine map, all flows, scalability/versioning/
