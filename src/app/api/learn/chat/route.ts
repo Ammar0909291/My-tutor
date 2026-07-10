@@ -46,6 +46,13 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { sessionId, message } = schema.parse(body)
 
+    // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
+    // learner response latency is measured server-side from message
+    // timestamps — the one instrument the text channel genuinely provides
+    // (foundations/03 §7 availability table). Captured at ingress, before
+    // prompt-assembly DB work can contaminate the reading.
+    const turnReceivedAt = Date.now()
+
     // Sprint AP: cap history at the most recent messages instead of loading the
     // whole session. 30 messages ≈ 15 exchanges is more context than the model
     // meaningfully uses, and long-running sessions (100+ messages) were paying
@@ -73,6 +80,13 @@ export async function POST(req: Request) {
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
     const lastSuccessfulTeachingStyle = typeof snapshot?.lastSuccessfulTeachingStyle === 'string' ? snapshot.lastSuccessfulTeachingStyle : null
     const snapshotCurrentConceptId = typeof snapshot?.currentConceptNodeId === 'string' ? snapshot.currentConceptNodeId : null
+    // Wave 0 Step 4 (Blueprint Phase 3): placement verification state carried across turns
+    const snapshotPlacement = (snapshot?.placementVerification && typeof snapshot.placementVerification === 'object')
+      ? snapshot.placementVerification as import('@/lib/teaching/placementVerification').PlacementVerificationState
+      : null
+    const snapshotPendingProbe = (snapshot?.pendingPlacementProbe === 'below' || snapshot?.pendingPlacementProbe === 'at' || snapshot?.pendingPlacementProbe === 'above')
+      ? snapshot.pendingPlacementProbe
+      : null
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
     // Sprint CH: active worked example carried across turns
     const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
@@ -1085,7 +1099,9 @@ export async function POST(req: Request) {
             // W2-1 (ADR 08 §4a): seed conceptId for Library mode — canonical KG entry concept if
             // no snapshot yet. Resolves moduleSlug → KG domain → cross-domain entry concept ID
             // so the Teaching Engine gate (snapshotCurrentConceptId → getConceptNode) can fire.
-            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+            // Wave 0 Step 5 (Blueprint Phase 5): DEFAULTS ON — decide() now
+            // fires for Library mode; set ENABLE_LIBRARY_CONCEPT_TRACKING=0 to revert.
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
               const { resolveLibraryEntryConceptId } = await import('@/lib/curriculum/libraryConceptResolver')
               libraryConceptNodeIdHoisted = snapshotCurrentConceptId
                 ?? resolveLibraryEntryConceptId(subjectCode, currentModule.slug)
@@ -1158,7 +1174,8 @@ export async function POST(req: Request) {
             const planBlock = buildLessonPlanBlock(plan)
             if (planBlock) systemPrompt += planBlock
             // W2-1 (ADR 08 §4a): hoist for post-AI persist.
-            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+            // Wave 0 Step 5: defaults on (see the tracking gate above).
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
               libraryLessonPlanHoisted = plan
             }
           }
@@ -1531,6 +1548,63 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       console.warn('[learn/chat] teaching engine skipped:', err)
     }
 
+    // ─── Wave 0 Steps 2–4: Educational Brain deterministic blocks ───────────
+    // Library mode only (School Mode walks a board-prescribed sequence and
+    // has its own checkpoint evidence pipeline). Injected AFTER all advisory
+    // blocks so mandatory rules read last. Every block cites its Brain source.
+    let placementProbeActive = false
+    let placementLevelHoisted: 'intermediate' | 'advanced' | null = null
+    let placementAskedProbeHoisted: 'below' | 'at' | 'above' | null = null
+    if (!schoolCtx) {
+      try {
+        const { buildSignalInstruction } = await import('@/lib/teaching/signals')
+        const { isFirstLessonContext, buildFirstLessonBlock } = await import('@/lib/teaching/firstLessonGuard')
+        const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')
+
+        // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
+        systemPrompt += buildSignalInstruction()
+
+        // Step 4: placement verification — self-report is a hypothesis
+        // (placement/01 §1). Scope: KG-backed subject, intermediate/advanced
+        // claim, nothing completed yet, not yet verified (placementVerification.ts
+        // header documents why beginners are excluded).
+        const level = profile?.currentLevel === 'advanced' ? 'advanced'
+          : profile?.currentLevel === 'intermediate' ? 'intermediate' : null
+        const nothingCompleted = (studentProgress?.completedLessons?.length ?? 0) === 0
+        if (level && resolvedConceptId && nothingCompleted && !(snapshotPlacement?.verified)) {
+          const state = snapshotPlacement ?? emptyPlacementState()
+          if (snapshotPendingProbe) {
+            // A probe question is already in flight — this turn's job is
+            // tagging the answer, never stacking a second question
+            // (conversation-engine/06 §1 question ceiling).
+            systemPrompt += buildPlacementAwaitBlock(snapshotPendingProbe)
+            placementProbeActive = true
+            placementLevelHoisted = level
+          } else {
+            const probe = nextProbe(state)
+            if (probe && lessonCtx) {
+              systemPrompt += buildPlacementProbeBlock(probe, learnSession.subject.name, lessonCtx.lessonTitle)
+              placementAskedProbeHoisted = probe
+              placementLevelHoisted = level
+            }
+          }
+        }
+
+        // Step 3: deterministic first-lesson protocol (Blueprint Phase 1;
+        // first-lesson/02 §2, 04 §1, 07). Last block = overriding rules.
+        if (isFirstLessonContext({
+          isSchoolMode: false,
+          currentLevel: profile?.currentLevel,
+          currentLessonOrder: lessonCtx?.currentLesson,
+          completedLessonCount: studentProgress?.completedLessons?.length ?? 0,
+        })) {
+          systemPrompt += buildFirstLessonBlock(subjectCode)
+        }
+      } catch (err) {
+        console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
+      }
+    }
+
     // Messages arrive newest-first (capped query above) — restore chronological
     // order for the AI payload.
     const historyMessages = [...learnSession.messages]
@@ -1589,6 +1663,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!text) {
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
       }
+
+      // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
+      // tag FIRST — before asset capture and every other tag parser — so
+      // the tag never leaks into stored messages, captured assets, or the
+      // client. The parsed signal drives evidence + placement below.
+      const { parseSignalTag } = await import('@/lib/teaching/signals')
+      const signalParse = parseSignalTag(text)
+      const teachingSignal = signalParse.signal
+      text = signalParse.cleanText
 
       // Phase 2/5 capture: decompose a successful LLM generation into
       // whichever labelled sections and assessment items it actually
@@ -1925,6 +2008,49 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         strength:  0.0,
       })
 
+      // Wave 0 Step 2 — Evidence Architecture §2 contracts (validation/08):
+      // ASSESSMENT contract: every answer attempt writes correctness ×
+      // latency-vs-baseline (server-measured, foundations/03 §7) × stated
+      // behavioral confidence. The per-turn signal row is also the
+      // decision-consequence JOIN enabler (loop L5): turn N's
+      // TeachingStrategyEvent joins turn N+1's outcome by session ordering.
+      if (teachingSignal && teachingSignal.correctness !== undefined) {
+        const lastAssistantMsg = learnSession.messages.find((m) => m.role === MessageRole.ASSISTANT)
+        const latencySec = lastAssistantMsg
+          ? Math.max(0, Math.round((turnReceivedAt - new Date(lastAssistantMsg.createdAt).getTime()) / 1000))
+          : null
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.PROBE_OUTCOME,
+          outcome:   `${teachingSignal.correctness ? 'pass' : 'fail'}` +
+                     `|conf=${teachingSignal.confidence ?? 'na'}` +
+                     `|confusion=${teachingSignal.confusion === true}` +
+                     (teachingSignal.probe ? `|placement=${teachingSignal.probe}` : ''),
+          strength:  teachingSignal.correctness ? 1.0 : 0.0,
+          rawScore:  latencySec ?? undefined,
+        })
+      }
+      // MISCONCEPTION contract (student-state/03 §1: verbatim phrase evidence —
+      // "the learner's own phrasing is the elicit-step script for the repair").
+      if (teachingSignal?.phrase) {
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.MISCONCEPTION_DETECTED,
+          outcome:   teachingSignal.phrase.slice(0, 200),
+          strength:  0.5,
+        })
+      }
+
       // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
       // snapshot. Write once when either the lesson concept changed (BY) or the
       // worked-example state changed (CH).
@@ -1965,22 +2091,76 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      // W2-1 (ADR 08 §4a): Library-mode concept persist — parallel to school block above.
-      // ENABLE_LIBRARY_CONCEPT_TRACKING defaults off (Phase 1 observe cycle; Phase 2 flips it on).
+      // W2-1 (ADR 08 §4a) + Wave 0 Steps 4/5: Library-mode snapshot persist.
+      // Step 5 (Blueprint Phase 5): concept tracking now DEFAULTS ON so the
+      // Teaching Engine decide() gate fires for Library mode — set
+      // ENABLE_LIBRARY_CONCEPT_TRACKING=0 to revert to the observe-only cycle.
+      // Step 4 (Blueprint Phase 3): the parsed SIGNAL and placement
+      // verification state persist here, so the NEXT turn's decisions read
+      // deterministic snapshot state instead of re-inferring from history
+      // (decision-engine/08 §3's update contract — "the ledger is the truth").
       // libraryLessonPlanHoisted.currentConcept.nodeId is a subjectCatalog slug (not a canonical
       // KG ID) — use only libraryConceptNodeIdHoisted which Writer B seeds with the correct ID.
-      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
-        const newLibConceptId = libraryConceptNodeIdHoisted
-        if (newLibConceptId && newLibConceptId !== snapshotCurrentConceptId) {
-          prisma.learnSession.update({
-            where: { id: sessionId },
-            data: {
-              contextSnapshot: {
-                ...(snapshot ?? {}),
-                currentConceptNodeId: newLibConceptId,
+      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
+        try {
+          const newLibConceptId = libraryConceptNodeIdHoisted
+          const conceptChanged = !!newLibConceptId && newLibConceptId !== snapshotCurrentConceptId
+
+          // Placement verification fold (pure state machine — placementVerification.ts)
+          let placementUpdate: Record<string, unknown> = {}
+          // Robustness: if a probe answer arrived with correctness but the
+          // LLM omitted the probe attribute, attribute it to the in-flight
+          // pending probe rather than losing the evidence.
+          const answeredProbe = teachingSignal?.probe ?? (placementProbeActive ? snapshotPendingProbe : null)
+          if (placementProbeActive && answeredProbe && teachingSignal?.correctness !== undefined) {
+            const { emptyPlacementState, recordProbeResult, levelBelow } = await import('@/lib/teaching/placementVerification')
+            const prev = snapshotPlacement ?? emptyPlacementState()
+            const nextState = recordProbeResult(prev, {
+              probe: answeredProbe,
+              correctness: teachingSignal.correctness,
+              confidence: teachingSignal.confidence,
+            })
+            placementUpdate = { placementVerification: nextState, pendingPlacementProbe: null }
+            // placement/01 §2: downward adjustment is automatic and SILENT
+            // (placement/02 §4 — the learner never hears about it). Upward
+            // never happens here. No fake completions are written — only the
+            // default starting position moves (placement.ts constraint).
+            if (nextState.verified && nextState.outcome === 'adjusted_down' && placementLevelHoisted) {
+              const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+              const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
+              const graph = getKnowledgeGraph(subjectCode)
+              if (graph) {
+                const lowered = computeCurriculumEntryOrder(graph, levelBelow(placementLevelHoisted))
+                prisma.studentProgress.update({
+                  where: { userId_subjectCode: { userId, subjectCode: progressCode } },
+                  data: { currentLesson: lowered },
+                }).catch(() => {})
+              }
+            }
+          }
+
+          // A probe question asked this turn goes in flight for the next turn.
+          if (placementAskedProbeHoisted && Object.keys(placementUpdate).length === 0) {
+            placementUpdate = { pendingPlacementProbe: placementAskedProbeHoisted }
+          }
+
+          const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0) {
+            prisma.learnSession.update({
+              where: { id: sessionId },
+              data: {
+                contextSnapshot: {
+                  ...(snapshot ?? {}),
+                  ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
+                  ...signalUpdate,
+                  ...placementUpdate,
+                },
               },
-            },
-          }).catch(() => {})
+            }).catch(() => {})
+          }
+        } catch (err) {
+          console.warn('[learn/chat] wave-0 library persist skipped:', err)
         }
       }
 
