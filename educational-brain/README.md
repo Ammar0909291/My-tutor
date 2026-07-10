@@ -46,6 +46,12 @@ will eventually retrieve from.
   Motivation Engine, Universal Teaching Principles (23 laws).
 - **Delivery 3** (this tree's first in-repo content): the **Assessment Design
   Library** — `assessment/`.
+- **Delivery 5** (in-repo): the **Curriculum Integration Layer** —
+  `concepts/`: the binding spec attaching Brain knowledge to canonical KG
+  concept IDs (curriculum = WHAT, Brain = HOW, no second hierarchy), the
+  concept-entry template/authoring contract, the coverage manifest with
+  expansion protocol, and three full-depth seed entries (one per live
+  subject) as the permanent quality bar.
 
 Documents in this tree cite Delivery 1/2 knowledge by name (e.g. "the Recovery
 Engine", "the latency × correctness grid", "Universal Principle 17") and
@@ -60,6 +66,13 @@ Authored now:
 educational-brain/
   README.md                 ← this file
   assessment/               ← Assessment Design Library (Delivery 3)
+  concepts/                 ← Curriculum Integration Layer (Delivery 5):
+                              per-concept teaching moat entries keyed to
+                              canonical KG concept IDs — binding spec,
+                              entry template, coverage manifest, and seed
+                              entries (math.arith.fractions,
+                              phys.mech.newtons-first-law,
+                              eng.phonics.letter-sound-correspondence)
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended

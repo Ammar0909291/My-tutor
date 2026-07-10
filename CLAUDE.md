@@ -136,6 +136,20 @@
   confidence & calibration; mastery gates + evidence hierarchy; oral/visual/practical modality;
   by level/age/subject/persona; per-teaching-action illusion-puncturing assessment; failed-
   assessment recovery protocol; rubrics). Knowledge only — no runtime/schema/curriculum changes.
+- Delivery 5 (2026-07-10, in-repo): **Curriculum Integration Layer**, `educational-brain/concepts/`
+  — binds Brain knowledge to canonical KG concept IDs (curriculum = WHAT, Brain = HOW; entries
+  keyed 1:1 to `docs/{subject}/kg/graph.json` IDs, no second hierarchy, KG authoritative on any
+  divergence). Contains the binding spec (README), the concept-entry template/authoring contract
+  (TEMPLATE.md, reuse-by-reference law: universal engines referenced, never copied), the coverage
+  manifest + expansion protocol (COVERAGE.md: placement entry points → cut-nodes → misconception
+  hubs → prerequisite order; partial entries don't count as coverage), and three full-depth seed
+  entries that ARE the quality bar: `math.arith.fractions`, `phys.mech.newtons-first-law`,
+  `eng.phonics.letter-sound-correspondence` — each anchored to verified KG node data with mental
+  models, misconception libraries (verbatim probes + characteristic phrases), explanation/analogy/
+  anti-analogy/demonstration libraries, discovery lesson (or argued direct-instruction call),
+  teaching-action dispatch, voice teaching, concrete assessment gate sets, concept-specific
+  recovery notes, memory typing, transfer maps, and curriculum feedback. Knowledge only — no
+  runtime/schema/curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
