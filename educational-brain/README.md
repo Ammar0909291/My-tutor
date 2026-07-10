@@ -52,6 +52,29 @@ will eventually retrieve from.
   concept-entry template/authoring contract, the coverage manifest with
   expansion protocol, and three full-depth seed entries (one per live
   subject) as the permanent quality bar.
+- **Delivery 8** (in-repo): the **Student State Model** — `student-state/`:
+  the permanent learner representation (weather vs climate: the Decision
+  Engine's momentary states read their priors from, and write evidence back
+  into, this standing model). Eight dimensions under seven design laws
+  (evidence-backed + dated, decaying, per-domain, descriptions-never-
+  verdicts, hypothesis-not-fact, asymmetric caution, never-judges): the
+  8-rung per-concept knowledge ladder mapped to machine entry points (the
+  structural ban on re-teaching from zero), the misconception ledger
+  (separate from knowledge — competing knowledge, with strength, verbatim
+  evidence, repair history, no-ERASED-status lifecycle, birth-type
+  regression priors), the standing confidence/calibration profile (the
+  build-slow/collapse-steep asymmetry; personalized affect budgets), the
+  behaviour profile (affinities as statistics never identities), the
+  emotional model (triggers, recovery speed, flow conditions, imported
+  history, personalized recovery list), per-concept memory statuses as
+  views over the Memory Engine (+ the personal forgetting rate), teaching
+  history (breakthrough verbatims + representation-family inheritance +
+  the summarization policy), trajectory (velocity/acceleration/plateau
+  diagnosis tree/momentum/readiness), and the assembled digital twin
+  (eight mandatory questions, decision provenance, six-learner audit —
+  learner types are regions of the model space, not architectures).
+  ADR 10's runtime stores referenced as the code-side containers; no
+  schemas here.
 - **Delivery 7** (in-repo): the **Teaching Decision Engine** —
   `decision-engine/`: the executive layer that retrieves DECISIONS, not
   documents — every teaching state and transition, every learner state with
@@ -116,6 +139,15 @@ educational-brain/
                               engine, lesson planning engine, and the
                               per-turn teaching loop with the retrieval
                               ledger (what is retrieved vs still invented)
+  student-state/            ← Student State Model (Delivery 8): the
+                              permanent learner representation the Decision
+                              Engine reasons over — eight standing
+                              dimensions (knowledge ladder, misconception
+                              ledger, confidence profile, behaviour
+                              profile, emotional model, memory statuses,
+                              teaching history, trajectory) assembled into
+                              the student digital twin with decision
+                              provenance and the six-learner audit
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended
