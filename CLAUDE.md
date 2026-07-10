@@ -401,6 +401,34 @@
   Knowledge only — no runtime/schema/curriculum changes. Continuous mode continues:
   next iteration re-abstracts the whole Brain again and re-asks the single highest-
   impact-weakness question before selecting further work.
+- **Delivery 14** (2026-07-10, in-repo, continuous-mode iteration):
+  `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` —
+  English's true zero-prerequisite entry node (`requires: []` in the live KG).
+  Re-abstraction found `concepts/COVERAGE.md`'s own expansion protocol ranks
+  "placement entry points first," above cut-nodes and misconception hubs —
+  yet all 3 Delivery 5 seed entries (fractions, Newton's First Law,
+  letter-sound-correspondence) are cut-nodes/misconception hubs, not entry
+  points. This concept is the exact node `first-lesson/07 §1` names as the
+  origin of the platform's own documented English-lesson-one failure — the
+  single most evidence-grounded coverage gap in the tree. Chosen over
+  continuing the universal-engine track (Mental Model Library, D2 §1):
+  citation check found Mental Models far thinner in scattered citations than
+  Misconceptions was pre-Delivery-13 (much of its core insight already
+  absorbed into Universal Principle 6), while concept coverage remained the
+  most quantifiable gap and 3 major force-multiplier engines (Foundations,
+  Teaching Actions, Misconceptions) had just become available to validate
+  against genuinely new content. Applied the new misconception birth-
+  taxonomy diagnostic procedure to a concept for the first time since it was
+  authored, surfacing 3 new misconceptions (language contamination on the
+  word "sound" itself — Type 3; syllable/phoneme-counting overgeneralization
+  — Type 1; rhyme-only "same sound" from rhyme-first instruction — Type 5)
+  as a genuine stress-test of Deliveries 11-13 against new content. Full
+  entry at the seed quality bar (all TEMPLATE.md required sections).
+  `concepts/COVERAGE.md` updated (english now 2/216, delivery history
+  recorded); `eng.phonics.print-concepts` (the KG's other zero-prerequisite
+  entry node) recorded as the immediate next coverage priority, not
+  authored this delivery. Knowledge only — no runtime/schema/curriculum
+  changes. Continuous mode continues.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

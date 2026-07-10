@@ -36,6 +36,39 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Delivery 14** (in-repo, 2026-07-10): `concepts/english/
+  eng.phonics.phonemic-awareness.md` — English's true zero-prerequisite
+  entry node, authored ahead of file order because `concepts/
+  COVERAGE.md`'s own expansion protocol ranks placement entry points
+  above cut-nodes and misconception hubs, yet all 3 Delivery 5 seed
+  entries are cut-nodes/hubs, not entry points. This is the exact
+  concept `first-lesson/07 §1` names as the origin of the platform's
+  own documented English-lesson-one failure — chosen over continuing
+  the universal-engine track (Mental Model Library, D2 §1) because a
+  citation check found Mental Models far thinner in scattered
+  citations than Misconceptions was before Delivery 13 (much of its
+  core insight already absorbed into Universal Principle 6), while
+  concept coverage remained the most quantifiable, most evidence-
+  grounded gap in the tree — and because 3 major force-multiplier
+  engines (Foundations, Teaching Actions, Misconceptions) had just
+  become available to validate against genuinely new content rather
+  than further self-referential authoring. Applied the newly-authored
+  misconception birth-taxonomy diagnostic procedure to a concept for
+  the first time, surfacing 3 new misconceptions (language
+  contamination on the word "sound" itself — Type 3; syllable/phoneme-
+  counting overgeneralization — Type 1; rhyme-only "same sound" from
+  rhyme-first instruction — Type 5) as a genuine stress-test of
+  Deliveries 11–13. Full entry at the seed quality bar: mental models,
+  misconception library, explanation/analogy/demonstration libraries,
+  an argued direct-instruction call (not discovery-framework) with
+  reasoning specific to attention-shift concepts, teaching-action
+  dispatch from the new 27-action catalog, voice teaching applying the
+  new Voice-First Learning Model, assessment explaining the KG's
+  unusually high 0.85 mastery threshold, recovery notes applying the
+  new Recovery Engine, memory/transfer maps. `eng.phonics.print-
+  concepts` (the KG's other zero-prerequisite entry node) recorded as
+  the immediate next coverage priority, not authored this delivery.
+  Knowledge only — no runtime/schema/curriculum changes.
 - **Delivery 13** (in-repo, 2026-07-10): the **Misconception Evolution
   Library** — `misconceptions/`: the transcription of Delivery 2 §4, the
   generic birth-type taxonomy and universal repair sequence every
@@ -249,10 +282,12 @@ educational-brain/
   concepts/                 ← Curriculum Integration Layer (Delivery 5):
                               per-concept teaching moat entries keyed to
                               canonical KG concept IDs — binding spec,
-                              entry template, coverage manifest, and seed
+                              entry template, coverage manifest, and
                               entries (math.arith.fractions,
                               phys.mech.newtons-first-law,
-                              eng.phonics.letter-sound-correspondence)
+                              eng.phonics.letter-sound-correspondence,
+                              eng.phonics.phonemic-awareness — Delivery 14,
+                              English's true zero-prerequisite entry node)
   first-lesson/             ← First Lesson Standard (Delivery 6): the
                               universal standards for teaching a complete
                               beginner — beginner definition/detection,

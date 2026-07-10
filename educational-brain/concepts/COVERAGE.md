@@ -7,7 +7,7 @@ Updated in the same commit as any entry added.
 |---|---|---|---|
 | mathematics | 908 | 1 | `math.arith.fractions` |
 | physics | 216 | 1 | `phys.mech.newtons-first-law` |
-| english | 216 | 1 | `eng.phonics.letter-sound-correspondence` |
+| english | 216 | 2 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` |
 | chemistry | 186 | 0 | — |
 | biology | 89 | 0 | — |
 | computer_science | 119 | 0 | — |
@@ -41,3 +41,20 @@ future author and to the retrieval engine.
 - **Delivery 5** (2026-07-10): integration layer authored (README, TEMPLATE,
   this manifest) + 3 seed entries, one per live-curriculum subject, each
   anchored to a verified canonical KG node.
+- **Delivery 14** (2026-07-10): `eng.phonics.phonemic-awareness` — English's
+  true zero-prerequisite entry node (`requires: []`), authored ahead of file
+  order per this manifest's own expansion protocol priority 1 ("placement
+  entry points first," above cut-nodes and misconception hubs — all 3
+  Delivery 5 seed entries are cut-nodes/misconception hubs, not entry
+  points). This is the exact node `../first-lesson/07 §1` names as the
+  origin of the platform's own documented English-lesson-one failure.
+  Applied the newly-authored `../misconceptions/01-birth-taxonomy.md §7`
+  diagnostic procedure to a concept for the first time since that
+  taxonomy was written, surfacing 3 new misconceptions (language
+  contamination on the word "sound" itself; syllable/phoneme-counting
+  overgeneralization; rhyme-only "same sound" from rhyme-first
+  instruction) as a validation stress-test of Deliveries 11–13's generic
+  engines against genuinely new content. `eng.phonics.print-concepts`
+  (the KG's other zero-prerequisite entry node) remains the next
+  highest-priority gap per this same protocol — not authored this
+  delivery, recorded as the immediate next coverage item.
