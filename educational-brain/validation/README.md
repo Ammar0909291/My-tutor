@@ -67,3 +67,32 @@ records they are pending transcription) and treats every cite-only
 reference as a gap to be measured. It does not audit the runtime code,
 the architecture ADRs, or the Curriculum Production Pipeline — those are
 a separate system, documented in `docs/architecture/`.
+
+## Document 07 — Architecture Audit (added after Deliveries 9–10)
+
+`07-architecture-audit.md` is a cross-system audit that reads both the
+authored Brain (Deliveries 1–10) AND the actual runtime code (`route.ts`,
+`teaching-engine/index.ts`, `placement.ts`, `teachingStrategy.ts`,
+`curriculum/route.ts`, `onboarding/route.ts`, `getDashboardV2Data.ts`)
+and compares what the Brain says should happen against what the code does.
+
+It covers:
+- Complete runtime trace for a Library mode learner
+- 8 ranked AI-reasoning gaps (what the AI still invents that authored
+  knowledge could replace)
+- Human tutor micro-decision audit for three concepts
+  (letter-sound correspondence / fractions / Newton's First Law)
+- Orchestration audit (the orchestrator exists; the content does not reach
+  it — the disconnection mechanism named precisely)
+- Reorganization vs. new library analysis (no new library warranted; the
+  AssetIdentity pipeline is the right bridge)
+- Unnecessary reteaching: three identified patterns (invisible restart,
+  premature TRUE_MASTERY, stalemate loops back to same concept)
+- Architect review: 8 findings, gap summary table, 7-step priority order
+
+The audit's honest conclusion: 0 of the 52 authored retrievable layers
+are retrieved at runtime today. The connection paths that need to be
+activated (not built from scratch) are: AssetIdentity EXPLANATION + PROBE
+import from `concepts/`, first-lesson constraint enforcement in route.ts,
+Library mode binary-search placement, and `decide()` firing unconditionally
+for Library mode.
