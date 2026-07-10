@@ -36,6 +36,39 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Correction 1 — Voice Channel Reality** (in-repo, 2026-07-10, critical-
+  review iteration, extends Delivery 11 rather than a new delivery):
+  `foundations/03-voice-first-learning-model.md §7` added. Critical-review
+  mode ("assume every previous decision may be wrong, attempt to break
+  it") found that this file and every document that cites its four
+  instruments (latency, prosody, hesitation location, self-corrections)
+  silently assumed voice signals reach the teaching decision layer. Verified
+  against the live runtime (`src/components/learn/LessonScreen.tsx`,
+  `src/app/api/stt/route.ts`) that the product DOES have real voice
+  input/output (MediaRecorder → Whisper STT / browser SpeechRecognition,
+  plus TTS) — the assumption of "no voice channel" would have been wrong —
+  but the STT endpoint requests Whisper's `json` format (bare text only)
+  and returns exactly `{ text }`, discarding every timing/prosodic signal
+  before it ever reaches `route.ts`. All four instruments are therefore
+  architecturally unavailable to the decision layer today, in EITHER
+  channel — worse than "not yet retrieved" (this tree's usual gap), this
+  is signal captured by the client and then actively discarded by one
+  implementation choice, never designed to reach the Brain at all. Added:
+  an honest per-instrument availability table (self-corrections fully
+  available from text today; latency partially so; prosody available in
+  neither channel without new infrastructure), a cost-ranked list of cheap
+  recovery steps for whoever eventually works Migration Blueprint runtime
+  phases (switching Whisper's response format to `verbose_json` recovers
+  segment timestamps at zero infrastructure cost), and an explicit
+  naming of the Migration Blueprint's `<!--SIGNAL-->` tag as an LLM-self-
+  report SUBSTITUTE for this signal, not equivalent to real instrumentation.
+  `concepts/TEMPLATE.md`'s Voice teaching section updated to point future
+  concept authors here once, centrally, rather than re-litigating the
+  channel-reality gap in every entry (Delivery 14's own phonemic-awareness
+  entry is named as the corrected example, not rewritten, per that same
+  no-duplication rule). Knowledge-correction only — no runtime/schema/
+  curriculum changes; the finding itself will inform future Migration
+  Blueprint runtime work but implements nothing.
 - **Delivery 14** (in-repo, 2026-07-10): `concepts/english/
   eng.phonics.phonemic-awareness.md` — English's true zero-prerequisite
   entry node, authored ahead of file order because `concepts/

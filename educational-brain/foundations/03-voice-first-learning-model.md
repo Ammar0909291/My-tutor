@@ -7,6 +7,12 @@ is said, not only from whether it is right. This is the cheapest
 diagnostic channel that exists (`../assessment/02 §7`) because it costs
 zero extra questions and runs underneath everything else the learner does.
 
+**Read §7 before applying §1's instruments to any real session.** This
+document was authored describing what a tutor CAN read from voice in
+principle. §7, added under critical-review, states plainly what the
+actual runtime today does and does not deliver of that signal — the gap
+is real, verified against the live code, and larger than "not yet wired."
+
 ## 1. The instruments
 
 Four independent signals, read together, feeding the student state
@@ -129,3 +135,90 @@ verbal habit, not epistemic doubt) or say "I'm sure!" while every
 instrument reads GUESSING (overconfidence). The voice model's job is to
 supply the behavioral half of that pair; `../assessment/04` owns what the
 tutor does with the resulting calibration profile.
+
+## 7. Channel reality — what actually reaches the teaching layer today
+
+Added under critical review (`../validation/07-architecture-audit.md`'s
+method applied to this file specifically): §§1–6 above describe what a
+tutor CAN read from voice. This section verifies, against the live
+runtime code, what the product actually captures and delivers to the
+teaching decision layer — because a document that quietly assumes signal
+availability it doesn't have is worse than one that names the gap, and
+every concept entry's required "Voice teaching" section (`../concepts/
+TEMPLATE.md`) inherits whatever this file gets wrong here.
+
+**The product has real voice input — this is not a cosmetic label.**
+`src/components/learn/LessonScreen.tsx` implements an actual microphone
+pipeline: `MediaRecorder` captures audio, which is sent to
+`src/app/api/stt/route.ts` and transcribed by Groq's `whisper-large-v3`;
+a faster path uses the browser's native `SpeechRecognition` API where
+available (Chrome/Edge, English only today). Text-to-speech exists for
+output. Voice is a genuine, live input/output channel in this product —
+the earlier working assumption in this file that voice signals are
+simply absent was wrong, and is corrected here.
+
+**But every instrument in §1 is discarded before the teaching layer ever
+sees a turn.** The STT endpoint requests `response_format: 'json'` from
+Whisper — which returns bare transcribed text only — and returns exactly
+`{ text: transcription.text }` to the client. No segment-level
+timestamps, no per-word confidence, no pause locations, no pitch or
+energy data survive the transcription step. The client then sends that
+plain text string to the chat endpoint exactly as if the learner had
+typed it. By the time `route.ts` (or any Brain-adjacent code) sees the
+turn, it is indistinguishable from a typed message — **latency,
+prosody, hesitation location, and self-corrections-mid-utterance are all
+architecturally unavailable to the decision layer today, regardless of
+whether the learner used voice or text to answer.** This is not "not yet
+wired" in the sense the rest of this tree uses that phrase (content that
+exists but isn't retrieved) — it is signal that is captured by the
+client, actively discarded by a specific implementation choice in one
+API route, and was never designed to reach the Brain at all.
+
+**What this means for every instrument in §1, honestly:**
+
+| Instrument | Available today? | Why |
+|---|---|---|
+| Latency vs. baseline | NO from voice; PARTIALLY from text | Recording start/stop timestamps exist client-side (`mediaRecorderRef`) but are never sent to the backend. Text-channel message send-time IS available server-side today (ordinary timestamps on `Message` rows) and could support a real latency-vs-baseline read with no new capture work — the gap is voice-specific, not universal. |
+| Prosody | NO | Requires audio-feature analysis (pitch, energy contour) that no part of the current pipeline performs. Whisper transcribes words; it does not analyze how they were said. This instrument has no current data source in either channel. |
+| Hesitation location | NO from voice; WEAK proxy from text | A pause mid-recording is invisible after transcription to plain text (no timestamps kept). In text, a learner's typing pattern (an edited message, an ellipsis, "wait...") is a weak but real proxy — visible in the final text sent, not requiring new capture. |
+| Self-corrections | NO from voice; YES from text | If a learner types "6... wait, no, 8," this is fully visible in the plain text and requires no additional capture — this is the one instrument the text channel already delivers as well as voice could, given the current STT format. |
+
+**What would be cheap to recover, if this gap is ever closed** (ranked by
+implementation cost, for whoever eventually works the Migration
+Blueprint's runtime phases — this is a note for that future work, not a
+design authored here):
+1. Switch the STT request to Whisper's `verbose_json` format instead of
+   `json` — this alone recovers per-segment timestamps (start/end of each
+   spoken phrase) at zero additional infrastructure cost, enabling a real
+   pause-location read from voice turns.
+2. Send the client's already-captured recording start/stop timestamps
+   alongside the transcript — recovers total response latency for voice
+   turns with no new capture, only a payload addition.
+3. True prosody/pitch analysis would require a dedicated audio-features
+   step beyond Whisper (Whisper transcribes; it does not classify tone) —
+   this is the one instrument with no cheap path and would need new
+   infrastructure, not a request-parameter change.
+
+**Relationship to the Migration Blueprint's structured signal tag**
+(`docs/architecture/MIGRATION_BLUEPRINT_V1.md` Phase 3): that mechanism
+has the LLM self-report its own read of the learner's state via a
+`<!--SIGNAL-->` tag embedded in its response. This is worth naming
+explicitly as what it actually is: a substitute for the instruments in
+this file, generated by the same model that is also trying to teach the
+concept, not an independent measurement. It is a reasonable interim
+mechanism given the channel reality above, but it is not equivalent to
+real voice instrumentation, and should not be described as satisfying
+this file's requirements — it is a different, weaker, self-reported
+signal filling the gap this section names.
+
+**The correction this section makes to every concept entry authored so
+far**: `../concepts/english/eng.phonics.phonemic-awareness.md`'s Voice
+Teaching section (Delivery 14) states "every success and every failure
+is audible" without this caveat — that statement is true of what a human
+tutor hearing the learner live would perceive, and is false as a
+description of what reaches the teaching decision layer in the product
+today, for exactly the reasons in this section. Concept authors should
+write Voice Teaching sections describing the ideal tutor's perception
+(§§1–6's model), while this section is the standing, single place that
+states what's actually deliverable — concept entries should not each
+re-litigate the channel-reality gap individually.

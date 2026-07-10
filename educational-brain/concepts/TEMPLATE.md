@@ -64,7 +64,11 @@ fit and why, when non-obvious.
 ## Voice teaching (required)
 How this concept sounds when taught and when failing: what to listen for,
 this concept's characteristic hesitations and misreadings, pronunciation
-stakes if any, the load-bearing sentence to slow down on.
+stakes if any, the load-bearing sentence to slow down on. Describe the
+IDEAL tutor's perception (a human hearing the learner live) — do not
+re-state what the runtime actually captures today; that channel-reality
+gap is owned centrally by `../foundations/03-voice-first-learning-model.md
+§7`, not repeated per entry.
 
 ## Assessment (required — items, not policy)
 - Diagnostic: the golden probe if one exists; distractor-mapped items

@@ -429,6 +429,38 @@
   entry node) recorded as the immediate next coverage priority, not
   authored this delivery. Knowledge only — no runtime/schema/curriculum
   changes. Continuous mode continues.
+- **Correction 1 — Voice Channel Reality** (2026-07-10, in-repo, critical-
+  review iteration): `educational-brain/foundations/03-voice-first-
+  learning-model.md §7` added, extending Delivery 11 rather than a new
+  delivery. Critical-review mode ("assume every prior decision may be
+  wrong, attempt to break it") checked whether the Voice-First Learning
+  Model's four instruments (latency, prosody, hesitation location, self-
+  corrections) actually reach the teaching decision layer, since this
+  concept is required in every future concept entry's "Voice teaching"
+  section. Verified against the live runtime
+  (`src/components/learn/LessonScreen.tsx`, `src/app/api/stt/route.ts`):
+  the product genuinely has voice input/output (MediaRecorder → Whisper
+  STT via Groq / browser SpeechRecognition, plus TTS) — but the STT
+  endpoint requests plain `json` (bare text) from Whisper and returns
+  only `{ text }`, discarding every timing/prosodic signal before
+  `route.ts` ever sees the turn. All four instruments are therefore
+  unavailable to the decision layer today in EITHER channel — a sharper
+  finding than this tree's usual "not yet retrieved" gap, since this is
+  signal captured client-side and then actively discarded by one
+  implementation choice. Added an honest per-instrument availability
+  table, a cost-ranked recovery list (switching to Whisper's
+  `verbose_json` format recovers segment timestamps at zero
+  infrastructure cost) for future Migration Blueprint runtime work, and
+  named the Blueprint's `<!--SIGNAL-->` tag explicitly as an LLM-self-
+  report substitute for this signal, not equivalent to real
+  instrumentation. `concepts/TEMPLATE.md` updated so future concept
+  authors point to this section once rather than re-litigating the gap
+  per entry; Delivery 14's phonemic-awareness entry named as the
+  corrected example, not rewritten (same no-duplication rule).
+  Knowledge-correction only — implements nothing, informs future runtime
+  work. Continuous mode continues: next iteration re-abstracts and
+  re-asks the single highest-impact-weakness question, per the
+  standing critical-review protocol.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
