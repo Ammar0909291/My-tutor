@@ -36,14 +36,43 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
-- **Delivery 1** (chat-authored, pending transcription into this tree):
-  Recovery Engine, Adaptive Teaching Rules, Voice-First Learning Model,
-  Canonical Per-Concept Schema, seed concepts (Equals Sign; Letter-Sound
-  Correspondence & Blending).
-- **Delivery 2** (chat-authored, pending transcription): Mental Model Library,
-  Discovery Framework, Curiosity Engine, Misconception Evolution, Cognitive
-  Load Engine, Teaching Action Library, Transfer Library, Memory Engine,
-  Motivation Engine, Universal Teaching Principles (23 laws).
+- **Delivery 11** (in-repo, 2026-07-10): the **Foundations Library** —
+  `foundations/`: the transcription of Delivery 1's four universal
+  engines, cited by name and by number throughout this tree since
+  Delivery 3 but never before written down. Contains the Recovery Engine
+  (the base script library for every stuck-learner utterance, the
+  non-verbal distress protocol, the personalization hook into the
+  Emotional Model, and the relationship to the escalation engine's
+  recovery-failure ladder), the Adaptive Teaching Rules ("the D1 grid" —
+  the speed × correctness × confidence grid governing every advance/hold/
+  step-back decision, the fluency-gate rule, and the explicit connection
+  to `decide()`'s partial, undocumented encoding of the same grid found
+  in the Architecture Audit), the Voice-First Learning Model (the four
+  detection instruments, the wait-time law, the load-bearing-sentence
+  rule, matched energy / the mockery effect, and the register-never-
+  drops-on-error rule), and all 23 Universal Teaching Principles — 11
+  reconstructed to match every prior citation exactly, 12 authored for
+  the first time by formalizing rules the tree was already following
+  without a name. Resolves the single largest set of dangling citations
+  in the Brain (`../validation/06-highest-roi-recommendation.md`'s named
+  highest-ROI step). Confirmed, before writing anything, that Delivery
+  1's originally-scoped "Canonical Per-Concept Schema" item is already
+  fully satisfied by `concepts/TEMPLATE.md` (Delivery 5) — not
+  re-authored, to avoid duplicating an already-correct document.
+  Knowledge only — no runtime/schema/curriculum changes.
+- **Delivery 1** (originally chat-authored; Recovery Engine, Adaptive
+  Teaching Rules, and Voice-First Learning Model now transcribed in-repo
+  as Delivery 11 above): the Canonical Per-Concept Schema item is
+  satisfied by `concepts/TEMPLATE.md` (Delivery 5). Remaining, still not
+  yet authored: the seed concept for Equals Sign (Letter-Sound
+  Correspondence already has a full entry under Delivery 5) — recorded
+  as a `concepts/COVERAGE.md` backlog item, not a universal-engine gap.
+- **Delivery 2** (chat-authored, pending transcription — Universal
+  Teaching Principles moved to Delivery 11 above; remaining items below
+  still pending): Mental Model Library, Discovery Framework, Curiosity
+  Engine, Misconception Evolution, Cognitive Load Engine, Teaching Action
+  Library (27 actions), Transfer Library, Memory Engine, Motivation
+  Engine.
 - **Delivery 10** (in-repo): the **Student Placement & Category Progression Engine** —
   `placement/`: the permanent rules for WHERE teaching begins, sitting between
   the curriculum (WHAT) and the teaching engine (HOW). Eight documents: the
@@ -209,6 +238,20 @@ educational-brain/
                               beginner / false-advanced / returning /
                               patchy-history / multi-branch / shame-bias),
                               and gap validation against the vision
+  foundations/              ← Foundations Library (Delivery 11): the
+                              Delivery 1 transcription — the Recovery
+                              Engine (base script library, non-verbal
+                              distress protocol, personalization hook,
+                              escalation-ladder relationship), the
+                              Adaptive Teaching Rules ("the D1 grid" —
+                              speed × correctness × confidence, the
+                              fluency gate, the runtime connection to
+                              decide()'s partial encoding), the
+                              Voice-First Learning Model (the four
+                              detection instruments, wait-time law,
+                              load-bearing sentence, matched energy),
+                              and all 23 Universal Teaching Principles
+                              cited by number throughout this tree
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended
@@ -216,7 +259,6 @@ organization — directories are created when their content is authored, never
 as empty placeholders):
 
 ```
-  foundations/        ← Delivery 1 transcription: recovery, adaptive rules, voice model, concept schema
   mental-models/      ← model stages, versioning, replacement rules (Delivery 2 §1)
   discovery/          ← the 6-step Discovery Framework + worked designs (Delivery 2 §2)
   curiosity/          ← triggers, chains, by-age/subject/personality (Delivery 2 §3)
@@ -226,13 +268,21 @@ as empty placeholders):
   transfer/           ← the transfer ladder + six rules (Delivery 2 §7)
   memory/             ← spacing, retrieval, interleaving, review-by-type (Delivery 2 §8)
   motivation/         ← the 12 learner personas (Delivery 2 §9)
-  principles/         ← the Universal Teaching Principles (Delivery 2 §10)
-  explanations/       ← per-concept explanation libraries (Delivery 1 schema §3)
+  explanations/       ← per-concept explanation libraries (Delivery 1 schema §3;
+                        note: the schema itself is already delivered as
+                        concepts/TEMPLATE.md, Delivery 5 — not re-authored)
   visual-teaching/    ← visual/diagram/animation design knowledge
-  voice/              ← voice-first tutoring knowledge beyond the D1 model
+  voice/              ← voice-first tutoring knowledge beyond the foundations/ model
   prerequisites/      ← prerequisite-diagnosis protocols per subject
   rubrics/            ← cross-cutting rubrics (assessment/10-rubrics.md seeds this)
 ```
+
+(The Universal Teaching Principles, originally planned as a separate
+`principles/` directory under Delivery 2 §10, were authored as
+`foundations/04-universal-teaching-principles.md` instead — Delivery 11
+judged a fourth file inside the already-created `foundations/` directory
+to be less duplicative than a second single-purpose directory for what
+is, in practice, one document.)
 
 ## Authoring rules for this tree
 

@@ -270,6 +270,67 @@
   (all seven vision questions answered; remaining gaps: cut-node lists for non-math subjects,
   just-in-time scheduling in lesson-planning engine, Expert level definition, multi-subject
   session-choice rule). Knowledge only — no runtime/schema/curriculum changes.
+- **Architecture Audit** (2026-07-10, in-repo): `educational-brain/validation/
+  07-architecture-audit.md` — cross-system audit reading both Deliveries 1-10 and the
+  actual runtime code (route.ts, teaching-engine/index.ts, placement.ts, teachingStrategy.ts,
+  curriculum/route.ts, onboarding/route.ts) to compare authored Brain vs. actual runtime
+  behavior. Key finding: 0 of 52 authored retrievable layers are retrieved at runtime today —
+  the Brain and the runtime are parallel universes; no runtime path reads any file in
+  educational-brain/. decide() is school-mode-only in practice; all 35 strategy instructions
+  are hardcoded TypeScript strings; the AssetIdentity pipeline (ADR 14) is wired but carries
+  no authored content (assembleLesson() always returns null). 8 ranked AI-reasoning gaps,
+  human tutor micro-decision audit for 3 concepts, orchestration analysis (route.ts IS the
+  orchestrator — no new layer needed), and a 7-step priority order for closing the gaps.
+- **Migration Blueprint V1** (2026-07-10, in-repo): `docs/architecture/MIGRATION_BLUEPRINT_V1.md`
+  — the architectural connection plan from current runtime to full Educational Brain
+  execution. Full responsibility map (14 domains, intended vs. actual owner, gap per domain);
+  duplication inventory with single-owner resolution per pair; 7-phase runtime migration
+  roadmap (Phase 0: activate AssetIdentity with existing 3 concept entries, zero code; Phase 1:
+  first-lesson deterministic constraint block; Phase 2: sessionPhase state machine in
+  contextSnapshot; Phase 3: placement verification + structured `<!--SIGNAL-->` tag from the
+  LLM — the key mechanism that turns OBSERVE→CLASSIFY into code instead of AI re-inference;
+  Phase 4: POLICY asset family extending AssetIdentity to carry decision-matrix instructions;
+  Phase 5: unconditional decide() for Library mode; Phase 6: category progression via
+  categoryConfidence map; Phase 7: transcribe Deliveries 1-2); Library Mode full architecture
+  (per-step execution, LLM CAN/CANNOT boundary, School Mode dependency audit); category
+  progression reusing the KG's existing difficulty-tag hierarchy (no new hierarchy invented);
+  the continuous OBSERVE→THINK→ACT→WAIT loop mechanism. Every phase justified against "why
+  can this NOT be solved using something already in Git" — architecture only, no code written.
+  All 7 phases involving runtime/schema/route changes remain gated on the standing G1/G2
+  governance rule below (per-item user approval before implementation); Phase 7 (D1/D2
+  transcription) is knowledge authoring, not code, and is not G2-gated.
+- **Delivery 11** (2026-07-10, in-repo): the **Foundations Library** —
+  `educational-brain/foundations/`: the transcription of Delivery 1's four universal engines
+  (Recovery Engine, Adaptive Teaching Rules / "the D1 grid", Voice-First Learning Model, and
+  all 23 Universal Teaching Principles), cited by name and by number throughout the tree since
+  Delivery 3 but never before written down — identified by the Architecture Audit and
+  Migration Blueprint as the single highest-ROI remaining Brain-authoring gap (resolves the
+  largest set of dangling citations in the tree in one pass). Before authoring anything,
+  confirmed via reuse-first check that Delivery 1's originally-scoped "Canonical Per-Concept
+  Schema" item is already fully satisfied by `concepts/TEMPLATE.md` (Delivery 5) — not
+  re-authored, avoiding duplication. Contents: the Recovery Engine (base script library for
+  8 stuck-learner utterances, non-verbal distress protocol, the personalization hook into the
+  Emotional Model's recovery-speed/what-restores fields, and the relationship to the
+  escalation engine's 3-rung recovery-failure ladder); the Adaptive Teaching Rules (the
+  speed × correctness × confidence grid — fluent-mastery/FRAGILE/MISCONCEIVING/CONFUSED
+  quadrants — the 3-fluent-successes advance trigger, and an explicit finding that
+  teaching-engine/index.ts's `decide()` only partially and implicitly encodes this grid today,
+  lacking any speed/confidence signal — exactly the gap Migration Blueprint Phase 3's
+  structured signal tag is designed to close); the Voice-First Learning Model (4 detection
+  instruments — latency-vs-baseline, prosody, hesitation location, self-corrections — the
+  wait-time law, load-bearing-sentence rule, matched energy/mockery effect, register-never-
+  drops-on-error); and all 23 Universal Teaching Principles (11 reconstructed to match every
+  pre-existing numbered citation exactly — 1,2,3,5,8,9,14,17,19,22,23 — 12 authored for the
+  first time — 4,6,7,10,11,12,13,15,16,18,20,21 — each formalizing a rule the tree already
+  followed without a name, none invented without prior grounding). `educational-brain/README.md`
+  updated: Delivery 11 registered, `foundations/` moved from "planned" to "authored," the
+  planned `principles/` directory folded into `foundations/04` instead of created separately
+  (avoiding a single-document directory), Delivery 1/2 provenance notes corrected to reflect
+  what's now transcribed vs. still pending. Knowledge only — no runtime/schema/curriculum
+  changes. Continuous autonomous architecture mode in effect per 2026-07-10 standing
+  instruction: further iterations continue this loop (audit whole system → highest-ROI task →
+  reuse-before-create check → deliver → repeat) until Educational Brain architecture is
+  complete, an owner-only decision arises, or a genuine vision-level contradiction is found.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
