@@ -168,6 +168,27 @@
   failure→root-cause→one-artifact-same-week feedback loop (lesson-one failures lead the entire
   authoring queue). Reuses Deliveries 1-3 + 5 by reference. Knowledge only — no runtime/schema/
   curriculum changes.
+- Delivery 7 (2026-07-10, in-repo): **Teaching Decision Engine**, `educational-brain/decision-engine/`
+  — the executive layer deciding WHAT TO DO NEXT every turn; the Brain retrieves DECISIONS, not
+  documents. 8 docs + README (repo-audit map: what existing decision logic was found and how each
+  piece is reused/extended — D1 adaptive rules → transitions/rungs, D2 §6 dispatch → selector,
+  assessment/05 §4 + /09 → assessment interiors, first-lesson/04 → locked lesson-one config;
+  runtime decide()/ADR 08/09/11/Bible explicitly NOT redesigned — this is the pedagogy the code
+  pipeline will retrieve). Contents: teaching state machine (session wraps concept machine;
+  OBSERVATION as stance; RECOVERY preempts everything, exits one step below entry; full transition
+  table), student state engine (affect > cognitive > drive priority bands; voice/behaviour/learning
+  detection per state; failure-spiral/boredom-slide/repair-path trajectories; detection-honesty
+  rules), decision matrix (affect-band preemption rule collapses ~180 cells; concrete decisions per
+  teaching-state × cognitive/drive state), seven-filter action selector (authored concept-entry
+  dispatch wins outright; knowledge-type → state-legality → learner constraints → history/affinity →
+  load → tie-break; 3 worked traces), escalation engine (per-failure ladders, one-dimension-per-rung
+  law, six standing moves w/ triggers), conversation engine (quiz/interview/lecture/robot registers
+  w/ antidotes; max-2-questions-in-a-row; react+move+invite turn skeleton; contingency+continuity),
+  lesson planning engine (invariant session shape; fluency-gated triad; compaction protocol;
+  summit-ending soft trigger; stuck-concept protocol), teaching loop (8-strategy closed set;
+  learner-model update contract; retrieval ledger — retrieved vs still-invented residue, aligned
+  with ADR 14's LLM-as-voice-renderer endgame; human-tutor audit with 5 recorded audit-forced
+  changes). Knowledge only — no runtime/schema/curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

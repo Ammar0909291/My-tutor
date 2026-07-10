@@ -52,6 +52,19 @@ will eventually retrieve from.
   concept-entry template/authoring contract, the coverage manifest with
   expansion protocol, and three full-depth seed entries (one per live
   subject) as the permanent quality bar.
+- **Delivery 7** (in-repo): the **Teaching Decision Engine** —
+  `decision-engine/`: the executive layer that retrieves DECISIONS, not
+  documents — every teaching state and transition, every learner state with
+  voice/behaviour/learning detection, the state×state decision matrix
+  (affect-band preemption + compact cognitive matrix), the seven-filter
+  action selector with worked traces, failure-escalation ladders, the
+  conversation engine (anti-quiz/interview/lecture/robot rules + the
+  react-move-invite turn skeleton), the lesson planning engine (pacing,
+  compaction, summit-ending), and the per-turn teaching loop with the
+  eight-strategy closed set, the learner-model update contract, and the
+  retrieval ledger. Unifies Deliveries 1–6 by reference; runtime engines
+  (ADR 08/09/11, the Bible) untouched — this is the pedagogy they will
+  retrieve.
 - **Delivery 6** (in-repo): the **First Lesson Standard** — `first-lesson/`:
   the universal standards for teaching a complete beginner, born from the
   platform's own observed failure to reliably teach the first lesson of
@@ -95,6 +108,14 @@ educational-brain/
                               deltas, the AI anti-library, subject
                               adaptations anchored to the real KG entry
                               nodes, and the compounding feedback loop
+  decision-engine/          ← Teaching Decision Engine (Delivery 7): the
+                              layer that decides WHAT TO DO NEXT every
+                              turn — teaching state machine, student state
+                              engine, decision matrix, seven-filter action
+                              selector, escalation ladders, conversation
+                              engine, lesson planning engine, and the
+                              per-turn teaching loop with the retrieval
+                              ledger (what is retrieved vs still invented)
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended
