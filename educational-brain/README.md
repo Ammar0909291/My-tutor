@@ -52,6 +52,19 @@ will eventually retrieve from.
   concept-entry template/authoring contract, the coverage manifest with
   expansion protocol, and three full-depth seed entries (one per live
   subject) as the permanent quality bar.
+- **Delivery 6** (in-repo): the **First Lesson Standard** — `first-lesson/`:
+  the universal standards for teaching a complete beginner, born from the
+  platform's own observed failure to reliably teach the first lesson of
+  English. Eight documents: the complete-beginner definition (informal
+  knowledge is the only foundation), never-rules + hard limits (1 concept,
+  ≤3 words, 2-slot working memory), tutor behaviour, the corrected flow
+  (demonstrate before explain; echo before solo; lesson one completes at
+  lesson two's opening retrieval), failure-state lesson-one deltas
+  ("I'm scared" / "I'm stupid" added), the 16-entry AI anti-library,
+  subject adaptations anchored to the verified KG entry nodes
+  (eng.phonics.print-concepts/phonemic-awareness,
+  math.found.mathematical-thinking, phys.meas.units), and the
+  failure→artifact feedback loop.
 
 Documents in this tree cite Delivery 1/2 knowledge by name (e.g. "the Recovery
 Engine", "the latency × correctness grid", "Universal Principle 17") and
@@ -73,6 +86,15 @@ educational-brain/
                               entries (math.arith.fractions,
                               phys.mech.newtons-first-law,
                               eng.phonics.letter-sound-correspondence)
+  first-lesson/             ← First Lesson Standard (Delivery 6): the
+                              universal standards for teaching a complete
+                              beginner — beginner definition/detection,
+                              never-rules + hard cognitive limits, tutor
+                              behaviour, the corrected lesson flow +
+                              measurable completion criteria, failure-state
+                              deltas, the AI anti-library, subject
+                              adaptations anchored to the real KG entry
+                              nodes, and the compounding feedback loop
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended

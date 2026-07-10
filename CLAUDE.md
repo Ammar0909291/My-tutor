@@ -150,6 +150,24 @@
   teaching-action dispatch, voice teaching, concrete assessment gate sets, concept-specific
   recovery notes, memory typing, transfer maps, and curriculum feedback. Knowledge only — no
   runtime/schema/curriculum changes.
+- Delivery 6 (2026-07-10, in-repo): **First Lesson Standard**, `educational-brain/first-lesson/`
+  — universal standards for teaching a complete beginner (motivated by the platform's own observed
+  failure to reliably teach English lesson one). 8 docs + index: complete-beginner definition/
+  detection (informal knowledge is the only attachable foundation; false/returning beginners;
+  adult shame vs child fragility), never-rules + hard limits (1 concept, ≤3 new words ×3 uses,
+  2-sentence bursts, ≤6 questions, failure budget 1, WM treated as 2 slots), tutor behaviour
+  (wait time, redirect-never-mark-wrong, scripted 30-second close), corrected flow (anchor →
+  demonstrate → explain-after → echo/supported/prompted → ONE solo → invisible confirm → close;
+  completion criteria C1-C4 with C2 = next-session opening retrieval, so lesson one formally
+  completes at lesson two), failure-state lesson-one deltas (+ "I'm scared"/"I'm stupid"; one
+  failure state per session max), 16-entry AI anti-library (quiz-first, definition-first,
+  echo-advancement, register drift, invisible restart...), subject adaptations anchored to
+  verified KG entry nodes (eng.phonics.print-concepts + phonemic-awareness — English lesson one
+  is ORAL, print-optional; math.found.mathematical-thinking — counting-with-meaning floor;
+  phys.meas.units — need-creation before names, "SI" banned from lesson one), and the
+  failure→root-cause→one-artifact-same-week feedback loop (lesson-one failures lead the entire
+  authoring queue). Reuses Deliveries 1-3 + 5 by reference. Knowledge only — no runtime/schema/
+  curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
