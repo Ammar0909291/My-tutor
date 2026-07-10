@@ -44,6 +44,25 @@ will eventually retrieve from.
   Discovery Framework, Curiosity Engine, Misconception Evolution, Cognitive
   Load Engine, Teaching Action Library, Transfer Library, Memory Engine,
   Motivation Engine, Universal Teaching Principles (23 laws).
+- **Delivery 9** (in-repo): the **Human Tutor Validation & Gap Audit** —
+  `validation/`: a comprehensive audit of Deliveries 1–8 as one integrated
+  system. Six documents: three complete session simulations (fearful
+  beginner / misconceiving adult / bored advanced) with every decision
+  traced turn-by-turn to its source file and section; four failure-replay
+  analyses of platform-observed failures with prevention diagnosis; a
+  complete AI-dependency inventory (52 retrievable layers confirmed; 13
+  partially-retrieved engines pending Delivery 1–2 transcription; 3
+  authorized residue categories); a duplication audit (5 proper-layering
+  findings; 2 real redundancy issues with resolution protocols; 4 minor
+  cross-reference gaps); 10 missing human teaching science domains (ranked
+  by learner impact: relationship capital, worked example design,
+  vocabulary pre-teaching, error analysis design, metacognitive instruction,
+  interleaving design, retrieval practice design, wait-time calibration,
+  pre-assessment design, explanation construction rules); and the
+  highest-ROI recommendation: transcribing Deliveries 1–2 into the repo
+  tree resolves all 13 partially-retrieved layers simultaneously and
+  converts the action selector from a procedure with empty libraries to a
+  fully operational dispatch engine.
 - **Delivery 3** (this tree's first in-repo content): the **Assessment Design
   Library** — `assessment/`.
 - **Delivery 5** (in-repo): the **Curriculum Integration Layer** —
@@ -148,6 +167,14 @@ educational-brain/
                               teaching history, trajectory) assembled into
                               the student digital twin with decision
                               provenance and the six-learner audit
+  validation/               ← Human Tutor Validation & Gap Audit (Delivery
+                              9): three session simulations with full
+                              decision traces; four failure replays; the
+                              complete retrieved-vs-invented inventory (52
+                              retrievable layers, 13 partially-retrieved
+                              engines, 3 authorized residue categories);
+                              duplication audit; 10 missing knowledge
+                              domains; highest-ROI recommendation
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended

@@ -1,0 +1,69 @@
+# Validation & Gap Audit — Delivery 9
+
+A comprehensive audit of Deliveries 1–8 as one integrated system. Every
+prior delivery **authored** knowledge; this delivery **tests** it. It asks
+one question of every authored rule:
+
+> **"Where exactly is this stored — and can the runtime retrieve it, or
+> does the AI still have to invent it?"**
+
+If the answer is a file and section in this tree, the knowledge is
+retrieved. If the answer is "the LLM infers it at runtime," the knowledge
+is missing. The ledger in `03-ai-dependency-audit.md` is the measure of
+the moat's current depth.
+
+## Method
+
+**Session simulation**: three complete teaching sessions are traced turn
+by turn, every decision mapped to its source document and section, every
+gap recorded where a source is missing or pending transcription.
+
+**Failure replay**: four failures the platform has already experienced
+are re-run through the authored Brain — what would have prevented them,
+what was still missing.
+
+**Full inventory**: every teaching decision layer catalogued as
+RETRIEVED, PARTIALLY-RETRIEVED, or STILL-INVENTED, with the specific
+files responsible.
+
+**Duplication audit**: every place two or more files address the same
+content — separated into proper layering (different functional roles) vs.
+real redundancy (same rule in the same role in two places).
+
+**Missing knowledge**: human teaching science domains that are absent
+from the Brain entirely — not pending transcription, but never authored.
+
+**Highest-ROI recommendation**: the single authoring step that would
+move the most improvisation to retrieval.
+
+## Summary of findings
+
+| Dimension | Finding |
+|---|---|
+| Session traceability | 100% of decisions have an authored rule to point at; ~40% of those rules are cite-only references to Deliveries 1–2 pending transcription |
+| Failure replay | 4 platform failures replayed; 3 fully preventable by knowledge already in-tree; 1 preventable only after Delivery 1 transcription |
+| AI dependency | 22 retrievable rule layers authored; 13 universal engines pending transcription; 3 categories of authorized residue |
+| Duplication | 2 real redundancy issues found (both resolvable at Delivery 1/2 transcription); 5 apparent duplications confirmed as proper layering |
+| Missing knowledge | 10 human teaching science domains never yet authored, ranked by learner impact |
+| Highest-ROI next step | Transcribe Deliveries 1–2 into `foundations/` — single delivery that resolves 13 pending dependencies across every existing file |
+
+## Reading order
+
+| File | Contents |
+|---|---|
+| [01-session-simulations.md](01-session-simulations.md) | Three complete teaching sessions, every turn traced to its source |
+| [02-failure-replay.md](02-failure-replay.md) | Four platform failures re-run through the authored Brain |
+| [03-ai-dependency-audit.md](03-ai-dependency-audit.md) | The complete retrieved-vs-invented inventory |
+| [04-duplication-audit.md](04-duplication-audit.md) | What is proper layering and what is real redundancy |
+| [05-missing-knowledge.md](05-missing-knowledge.md) | Human teaching science domains not yet authored |
+| [06-highest-roi-recommendation.md](06-highest-roi-recommendation.md) | The single highest-ROI next authoring step and its evidence |
+
+## Scope and limits
+
+This audit covers: the complete in-tree Brain as of Delivery 8 —
+`assessment/`, `concepts/`, `first-lesson/`, `decision-engine/`,
+`student-state/`. It cites Deliveries 1–2 by name (as the tree's README
+records they are pending transcription) and treats every cite-only
+reference as a gap to be measured. It does not audit the runtime code,
+the architecture ADRs, or the Curriculum Production Pipeline — those are
+a separate system, documented in `docs/architecture/`.

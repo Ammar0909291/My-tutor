@@ -218,6 +218,32 @@
   — unexplainable decision = invented decision; six-learner audit passes with one architecture;
   honest limits: surfaces-but-never-diagnoses disabilities). Knowledge only — no runtime/schema/
   curriculum changes.
+- Delivery 9 (2026-07-10, in-repo): **Human Tutor Validation & Gap Audit**,
+  `educational-brain/validation/` — comprehensive audit of Deliveries 1–8 as one integrated
+  system. Six documents: (1) three complete session simulations (fearful beginner
+  eng.phonics.letter-sound-correspondence / misconceiving adult math.arith.fractions / bored
+  advanced phys.mech.newtons-first-law) with every decision traced turn-by-turn to its source
+  file and section; (2) four failure replays (English lesson one collapse, invisible restart,
+  assessment-first teaching, confidence collapse) — 3 fully preventable by in-tree knowledge,
+  1 preventable only after Delivery 1 transcription; (3) full AI-dependency inventory:
+  52 retrievable rule layers confirmed, 13 partially-retrieved layers each depending on
+  Deliveries 1–2 pending transcription, 3 authorized residue categories (surface wording /
+  voice rendering / novel utterances); the selector problem documented — the action selector
+  (decision-engine/04) is a complete 7-filter procedure with empty libraries for 99.8% of
+  concepts; (4) duplication audit: 5 proper-layering findings confirmed, 2 real redundancy
+  issues (latency×correctness grid and Universal Principle inline restatements, both resolvable
+  at Delivery 1/2 transcription time), 4 minor cross-reference gaps; (5) 10 missing human
+  teaching science domains not yet authored — relationship capital (HIGH, every session), worked
+  example design rules (HIGH), vocabulary pre-teaching (MEDIUM), error analysis design (MEDIUM),
+  metacognitive strategy instruction (MEDIUM), interleaved practice design (MEDIUM), spaced
+  retrieval practice design (MEDIUM), wait-time calibration (HIGH FREQUENCY), pre-assessment
+  design (LOW), explanation construction rules (LOW); (6) highest-ROI recommendation:
+  transcribing Deliveries 1–2 into `foundations/` and the nine planned libraries — the Recovery
+  Engine alone has 6 file dependencies; the Universal Teaching Principles are cited in every
+  file but their content is nowhere; the action selector's filters 2–6 all reference pending
+  libraries. Success criteria defined: re-run the three session simulations after transcription
+  and confirm the "Gaps surfaced" list shrinks to surface wording only. Knowledge only — no
+  runtime/schema/curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
