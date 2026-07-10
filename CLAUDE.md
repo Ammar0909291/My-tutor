@@ -461,6 +461,22 @@
   work. Continuous mode continues: next iteration re-abstracts and
   re-asks the single highest-impact-weakness question, per the
   standing critical-review protocol.
+- **Correction 2 — Decision Matrix Silent Cells** (2026-07-10, in-repo,
+  critical-review iteration): `educational-brain/decision-engine/03-
+  decision-matrix.md §6, §8` extended, not a new delivery. Critical
+  review found the matrix silently left 5 cells unhandled: CONFUSED
+  during ASSESSMENT, and CONFUSED/GUESSING/MISCONCEIVING/FRAGILE during
+  TRANSITION/CLOSING — every other cognitive/drive state is named in
+  both sections; these were simply absent, a genuine missing-decision-
+  path gap rather than an intentional omission. Added rules for all 5:
+  CONFUSED-during-ASSESSMENT aborts the item without scoring it (mirrors
+  GUESSING's existing non-decisive-item rule) and routes to the
+  escalation engine before resuming; the 4 CLOSING cells each honor
+  CLOSING's existing "never sacrificed to content" protection by turning
+  the unresolved state into the close's open loop or next-session queue
+  rather than attempting resolution or misrepresenting an unresolved
+  state as settled. Knowledge-correction only — no runtime/schema/
+  curriculum changes. Continuous critical-review mode continues.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

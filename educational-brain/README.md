@@ -36,6 +36,24 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Correction 2 — Decision Matrix Silent Cells** (in-repo, 2026-07-10,
+  critical-review iteration, extends Delivery 7 rather than a new
+  delivery): `decision-engine/03-decision-matrix.md §6, §8` — critical
+  review found the matrix silently left 5 teaching-state × student-state
+  cells unhandled: CONFUSED during ASSESSMENT (§6), and CONFUSED,
+  GUESSING, MISCONCEIVING, FRAGILE during TRANSITION/CLOSING (§8) — a
+  genuine missing-decision-path gap, not a design choice (the file names
+  every other cognitive/drive state in both sections; these four/one were
+  simply absent). Added: CONFUSED-during-ASSESSMENT aborts the item
+  without scoring it (an item answered from confusion decides nothing,
+  same non-decisive principle as GUESSING) and routes to the escalation
+  engine before resuming. CONFUSED/GUESSING/MISCONCEIVING/FRAGILE-during-
+  CLOSING each honor CLOSING's existing "never sacrificed to content"
+  protection (`decision-engine/01 §2`) by turning the unresolved state
+  into the close's mandatory open loop or next-session queue item rather
+  than attempting resolution or, worse, closing with language that
+  misrepresents an unresolved state as settled. Knowledge-correction
+  only — no runtime/schema/curriculum changes.
 - **Correction 1 — Voice Channel Reality** (in-repo, 2026-07-10, critical-
   review iteration, extends Delivery 11 rather than a new delivery):
   `foundations/03-voice-first-learning-model.md §7` added. Critical-review
