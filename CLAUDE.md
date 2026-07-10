@@ -189,6 +189,35 @@
   learner-model update contract; retrieval ledger — retrieved vs still-invented residue, aligned
   with ADR 14's LLM-as-voice-renderer endgame; human-tutor audit with 5 recorded audit-forced
   changes). Knowledge only — no runtime/schema/curriculum changes.
+- Delivery 8 (2026-07-10, in-repo): **Student State Model**, `educational-brain/student-state/`
+  — the permanent learner representation the Decision Engine reasons over (weather vs climate:
+  decision-engine/02's momentary states read priors from and write evidence into this standing
+  model via 08 §3's update contract; ADR 10's six runtime stores referenced as code-side
+  containers, no schemas authored). 10 docs + README (audit map). Eight dimensions under seven
+  design laws (evidence-backed+dated, decaying, per-domain, descriptions-never-verdicts,
+  hypothesis-not-fact, asymmetric caution, never-judges/never-leaks): 8-rung per-concept knowledge
+  ladder (UNKNOWN→RECOGNIZED→IMITATES→ASSISTED→INDEPENDENT→AUTOMATIC→TRANSFER→EXPERT, each rung
+  mapped to evidence + machine entry point — the structural ban on re-teaching from zero; rungs
+  move down via memory modulation, high-water mark kept), misconception ledger (separate from
+  knowledge; strength DOMINANT/UNDER-LOAD/RESIDUAL; verbatim phrase evidence; repair history w/
+  burned-collision tracking; lifecycle has no ERASED status, DORMANT-VERIFIED keeps re-checks
+  forever; birth-type regression priors, 2 regrowths → re-rate HIGH + repair-path redesign flag),
+  confidence model (5 chronic patterns; build-slow/collapse-steep asymmetry → personalized affect
+  budgets; calibration L0-L3 as taught skill; target = calibration not height), behaviour profile
+  (rusher/overthinker w/ condition tags; affinities = min-evidence-across-concepts statistics,
+  never learning-style identities; measured attention span; persistence-scaled struggle budgets),
+  emotional model (triggers engineered out; recovery speed personalizes Recovery Engine pacing;
+  flow protection; imported-history externalization targets; per-learner what-restores list;
+  robustness licensed as explicitly as fragility flagged), memory statuses (7 statuses derived
+  from Memory Engine data, never duplicating scheduling; personal forgetting rate as the key
+  personalization), teaching history (append-raw/read-summaries; breakthrough verbatims + severe
+  negative events never summarized; representation-family inheritance to sibling concepts),
+  trajectory (velocity per effort-time; acceleration as earliest warning; plateau diagnosis tree —
+  consolidation≠emergency, don't thrash; regression routing; momentum spent deliberately;
+  readiness = derived three-way answer), digital twin (8 mandatory questions; decision provenance
+  — unexplainable decision = invented decision; six-learner audit passes with one architecture;
+  honest limits: surfaces-but-never-diagnoses disabilities). Knowledge only — no runtime/schema/
+  curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
