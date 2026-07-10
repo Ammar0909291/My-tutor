@@ -44,6 +44,28 @@ will eventually retrieve from.
   Discovery Framework, Curiosity Engine, Misconception Evolution, Cognitive
   Load Engine, Teaching Action Library, Transfer Library, Memory Engine,
   Motivation Engine, Universal Teaching Principles (23 laws).
+- **Delivery 10** (in-repo): the **Student Placement & Category Progression Engine** —
+  `placement/`: the permanent rules for WHERE teaching begins, sitting between
+  the curriculum (WHAT) and the teaching engine (HOW). Eight documents: the
+  placement law + two placement errors + the human-tutor model (why great tutors
+  never start from lesson one); the self-report trust model (systematic under- and
+  over-reporting mechanics; trust calibration by age/context; three-bracket
+  verification; adjustment without insult; the miscalibration-direction record);
+  the full placement protocol (category spine search; per-branch frontier records;
+  patchy-history flag; placement modes A/B/C; what placement does NOT do); the
+  category mastery definition (gate concepts AUTOMATIC + STABLE + one transfer
+  event; ANCHORED/PROBABLE/UNCERTAIN/UNKNOWN confidence levels; the never-reteach
+  law — never enter a mastered category as a teaching target; decay ≠ demotion;
+  FORGOTTEN ≠ UNKNOWN — storage survives); the progression engine (promotion
+  criteria; the progression guarantee; demotion triggers; regression repair
+  targeting only the specific gap; patchy-history just-in-time repair; cross-
+  category prerequisites; multi-subject independence); resumption after absence
+  (decay timeline by gap length; warm-up vs. reteach; cascade-unlock protocol;
+  re-placement from high-water mark; the returning learner's emotional state);
+  six student simulations fully traced (false-beginner A; false-advanced B;
+  returning learner C; patchy-history D; multi-branch E; adult shame-bias F);
+  vision + human-tutor validation and remaining gap inventory. Knowledge only —
+  no runtime/schema/curriculum changes.
 - **Delivery 9** (in-repo): the **Human Tutor Validation & Gap Audit** —
   `validation/`: a comprehensive audit of Deliveries 1–8 as one integrated
   system. Six documents: three complete session simulations (fearful
@@ -175,6 +197,18 @@ educational-brain/
                               engines, 3 authorized residue categories);
                               duplication audit; 10 missing knowledge
                               domains; highest-ROI recommendation
+  placement/                ← Student Placement & Category Progression
+                              Engine (Delivery 10): the permanent rules
+                              for WHERE teaching begins — category mastery
+                              definition (ANCHORED/PROBABLE/UNCERTAIN/
+                              UNKNOWN), the never-reteach law, self-report
+                              trust model, placement protocol (binary-
+                              search at category level), promotion/
+                              demotion/regression-repair, resumption after
+                              absence, six student simulations (false-
+                              beginner / false-advanced / returning /
+                              patchy-history / multi-branch / shame-bias),
+                              and gap validation against the vision
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended

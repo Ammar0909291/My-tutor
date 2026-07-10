@@ -244,6 +244,32 @@
   libraries. Success criteria defined: re-run the three session simulations after transcription
   and confirm the "Gaps surfaced" list shrinks to surface wording only. Knowledge only — no
   runtime/schema/curriculum changes.
+- Delivery 10 (2026-07-10, in-repo): **Student Placement & Category Progression Engine**,
+  `educational-brain/placement/` — the permanent rules for WHERE teaching begins; sits between
+  curriculum (WHAT) and the teaching engine (HOW). Eight documents: placement foundations (the
+  placement law; two placement errors and their asymmetry; the human-tutor model; scope of the
+  engine); the self-report trust model (systematic under/over-reporting mechanics by age and shame;
+  trust calibration table; three-bracket verification protocol; adjustment without insult;
+  miscalibration-direction as a persistent learner model field); the placement protocol (category
+  spine search via binary search on cut-nodes from assessment/02; per-branch frontier records;
+  modes A/B/C; patchy-history flag; what placement does NOT do — no fake completions, no invented
+  prerequisites); category mastery definition (gate concepts AUTOMATIC + STABLE + one transfer
+  event = ANCHORED; ANCHORED/PROBABLE/UNCERTAIN/UNKNOWN confidence levels; the never-reteach law
+  — mastered categories never entered as teaching targets; decay ≠ demotion; FORGOTTEN ≠ UNKNOWN
+  — storage survives, cued-recovery is the treatment; asymmetry of earn vs. lose); the
+  progression engine (promotion criteria; the progression guarantee; demotion triggers — all three
+  must hold; regression repair targeting specific gate concepts only; just-in-time prerequisite
+  repair for patchy histories; multi-subject independence); resumption protocol (decay timeline
+  by gap length; warm-up protocol vs. reteaching; cascade-unlock expectation; re-placement from
+  high-water mark; the returning learner's emotional state); six full student simulations traced
+  (A: false-beginner, protective conservatism detected; B: false-advanced, Dunning-Kruger,
+  two-failure-budget downward search; C: returns after 14 months, cascade recovery, high-water
+  mark protocol; D: expert arithmetic / weak fractions, active misconception M1, never-reteach
+  for ANCHORED Categories 1-3; E: strong algebra/weak geometry, per-branch asymmetric placement;
+  F: adult 20-year gap, shame bias, informal-competence framing); vision + human-tutor validation
+  (all seven vision questions answered; remaining gaps: cut-node lists for non-math subjects,
+  just-in-time scheduling in lesson-planning engine, Expert level definition, multi-subject
+  session-choice rule). Knowledge only — no runtime/schema/curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
