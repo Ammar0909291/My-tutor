@@ -513,6 +513,45 @@
   with no return = the clearest churn signature the product produces and an
   authoring flag on the concept that produced the terminal failure.
   Knowledge-correction only. Red-team mode continues.
+- **First-Principles Review** (2026-07-10, verbal only, no files — treated as
+  standing architectural truth unless proven wrong): answered "why would a
+  student pay for My Tutor when perfect free LLMs exist?" Four structural
+  moats no general assistant can have: (1) the incentive stance — assistants
+  are structurally loyal to present comfort, a tutor to future competence
+  (withholds answers, schedules struggle, refuses hollow advancement;
+  enforcement must live in code, not prompts); (2) verified learner state —
+  manufactured by deliberately scheduled instrumented probes, not recalled
+  from transcripts; (3) cross-learner teaching evidence — which repairs/
+  probes/actions measurably work, accumulated only by the venue where
+  learning happens, in no training corpus; (4) proactive scheduling.
+  Verdict: "the Educational Brain is the moat" is wrong as written — the
+  Brain is the BLUEPRINT for the instrument that manufactures the moat;
+  explanation/analogy prose is a depreciating asset (future-generatable);
+  hand-authoring 1,800 full prose entries would race commoditization — the
+  durable part of an entry is its instrument sections. Priorities reordered:
+  evidence capture wiring > stance enforcement in code > proactive spine >
+  probe/misconception skeletons for cut-nodes > capture-measure-rank assets;
+  further prose-only universal engines PAUSED.
+- **Delivery 15 — Evidence Architecture** (2026-07-10, in-repo, Phase 2):
+  `educational-brain/validation/08-evidence-architecture.md` + quality-bar
+  amendment in `concepts/COVERAGE.md`. The First-Principles Review applied
+  to the whole tree: moat classification per library (assessment/
+  misconceptions/student-state/placement/first-lesson HIGH; teaching-actions
+  MIXED — catalog is prose, moat is the outcome table it enables; concepts
+  SPLIT — instrument sections HIGH, prose sections LOW; conversation-engine/
+  principles prose LOW-but-retained as enforcement spec); unified
+  per-component evidence contracts (consolidating decision-engine/08 §3,
+  student-state/06 §7, escalation law 3, first-lesson/08 — plus the one
+  addition: decisions must be JOINED to next-turn consequences); 8 missing
+  evidence loops (recovery aggregation, anti-analogy growth from Type-6
+  births, per-concept decay norms, action outcome table, decision-consequence
+  join, placement prior retuning, curriculum-feedback-as-events, voice
+  forfeiture); authoring pivot — INSTRUMENTED SKELETON is now a valid
+  concept-entry class (instruments at seed quality, prose deferred; labeled,
+  separate coverage column; rich-prose-no-instruments still invalid);
+  entries reframed as bundles of falsifiable predictions; the
+  million-student answer (7 bodies of accumulable-only knowledge).
+  Knowledge only — no runtime/schema/curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

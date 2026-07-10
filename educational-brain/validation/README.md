@@ -96,3 +96,25 @@ activated (not built from scratch) are: AssetIdentity EXPLANATION + PROBE
 import from `concepts/`, first-lesson constraint enforcement in route.ts,
 Library mode binary-search placement, and `decide()` firing unconditionally
 for Library mode.
+
+## Document 08 — Evidence Architecture (added under the First-Principles Review)
+
+`08-evidence-architecture.md` re-evaluates the entire Brain against the
+First-Principles Review's standard: not document quality but "does this
+component generate proprietary educational evidence no general AI can
+possess?" Contents: a moat classification of every library (HIGH /
+MIXED / SPLIT / LOW as evidence producers); the unified per-component
+evidence contract (what every component owes after each teaching
+interaction — consolidating the contracts already scattered in
+decision-engine/08 §3, student-state/06 §7, decision-engine/05 law 3,
+first-lesson/08); eight missing evidence loops where the Brain teaches
+but learns nothing (recovery never aggregates; anti-analogy lists don't
+grow from Type-6 births; no per-concept decay norms; the 27-action
+catalog has no outcome table; decisions never joined to consequences;
+placement priors never retune; curriculum feedback is prose not events;
+voice evidence structurally forfeited); the authoring pivot (skeleton-
+first concept entries — instruments before prose — amending
+concepts/COVERAGE.md's quality bar); and the million-student answer
+(seven bodies of knowledge that could exist nowhere else). The
+entry-as-falsifiable-predictions reframe: every authored claim in a
+concept entry states its test.

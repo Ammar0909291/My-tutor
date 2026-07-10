@@ -31,10 +31,22 @@ Coverage grows in leverage order, not file order:
 
 ## Entry quality bar
 
-The three seed entries ARE the bar. An entry thinner than the seeds is not
-merged; it is finished first. Coverage counts only full-template entries —
-partial entries are worse than none because they read as "covered" to every
-future author and to the retrieval engine.
+The three seed entries ARE the bar for full entries. An entry thinner than
+the seeds is not merged; it is finished first. Coverage counts only
+full-template entries — partial entries are worse than none because they
+read as "covered" to every future author and to the retrieval engine.
+
+**Amendment (Evidence Architecture audit, `../validation/08-evidence-
+architecture.md §4`)**: a second valid entry class now exists — the
+**instrumented skeleton**: misconception library (verbatim phrases, probes,
+collision designs), golden probe, distractor maps, and mastery gate set
+complete at seed quality, with explanation/analogy/demonstration prose
+deliberately thin or deferred. Rationale: the instrument sections
+manufacture proprietary evidence; the prose sections are future-
+generatable and evidence-rankable once served. A skeleton entry MUST be
+labeled as such at the top of the file and counts in a separate coverage
+column. The reverse (rich prose, no instruments) remains invalid. The
+expansion protocol's priority order is unchanged.
 
 ## Delivery history
 
