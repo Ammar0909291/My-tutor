@@ -356,6 +356,51 @@
   — avoided duplicating ownership of libraries not yet due. `educational-brain/README.md`
   updated: Delivery 12 registered, `teaching-actions/` moved from planned to authored.
   Knowledge only — no runtime/schema/curriculum changes.
+- **Chief Architect Review** (2026-07-10, in-repo, no files changed — verbal audit only):
+  a brutally honest 16-category scored review of Deliveries 1-12 (0-10 per category,
+  explicit "why not higher," specific delivery/file blamed per gap). Key scores: EB
+  completeness 4/10, teaching quality 2/10, reduction of AI reasoning 1/10 (0 of 52
+  layers retrieved), repo organization 7/10 (strongest area), overall architecture
+  4/10. Percentage estimates: EB architecture ~35% complete, runtime architecture
+  ~30%, runtime implementation ~12%, overall teaching system ~8-10%. Concept coverage
+  (3/1800, 0.17%) named as the single most damning number. Recommended parallel-track
+  next steps: Migration Blueprint Phases 0-3 implementation (G2-gated) + concept
+  coverage expansion + the 3 critical remaining libraries (misconceptions, mental
+  models, cognitive load), ranked above continuing to author lower-impact universal
+  engines (motivation, discovery, curiosity, transfer) in isolation.
+- **Delivery 13** (2026-07-10, in-repo, continuous-mode iteration): the
+  **Misconception Evolution Library** — `educational-brain/misconceptions/`: the
+  transcription of Delivery 2 §4. Selected via the continuous-mode protocol's single
+  question ("what is the single highest-impact weakness preventing a 9/10 Educational
+  Brain?") over the strongest competing candidate, raw concept-coverage expansion —
+  reasoning: one new concept entry helps only that concept; generic misconception
+  theory is a force multiplier for every misconception library ever written, and
+  expanding coverage without it first locks in inconsistent per-entry birth-type
+  logic. Reuse-first check (grepped every "birth type"/"regrowth"/"Delivery 2 §4"
+  citation before writing) found the taxonomy ~80% reconstructable from scattered
+  citations — birth types 1, 2, 4, 5, 6 already named with specific meaning across
+  `concepts/`, `decision-engine/05`, `assessment/08`; type 3 named only in
+  `student-state/03`'s regression-prior table with no explanation — the identical
+  pattern that made Universal Principles low-risk to formalize in Delivery 11.
+  Contents: all 6 birth types (overgeneralization, perceptual intuition, language
+  contamination, notation-induced, instruction-induced, analogy overextension) each
+  with generic mechanism, diagnostic signature, and new cross-subject examples beyond
+  the 2 already in the tree (English irregular verbs, ice density, "theory"
+  contamination, apostrophe notation, atomic indivisibility, the water-circuit
+  analogy) proving the taxonomy generalizes; a 7-question diagnostic decision
+  procedure for classifying a new misconception's birth type when authoring any of
+  the ~1,800 uncovered concepts; the full generic 7-step repair sequence
+  (elicit→commit→collide→replace→contrast→apply→re-probe) with per-birth-type
+  collision-design rules; the precise two-condition operational definition of
+  "burned collision"; and the metastasis-chain mechanism with a new just-in-time
+  chain-check trigger extending `placement/05`'s absent-prerequisite logic to
+  corrupted (ACTIVE-misconception) prerequisites. Deliberately did NOT restate
+  `student-state/03`'s ledger structure, status lifecycle, or regression-prior
+  table — referenced, not duplicated. `educational-brain/README.md` updated:
+  Delivery 13 registered, `misconceptions/` moved from planned to authored.
+  Knowledge only — no runtime/schema/curriculum changes. Continuous mode continues:
+  next iteration re-abstracts the whole Brain again and re-asks the single highest-
+  impact-weakness question before selecting further work.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

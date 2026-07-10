@@ -36,6 +36,42 @@ will eventually retrieve from.
 
 ## Provenance and delivery history
 
+- **Delivery 13** (in-repo, 2026-07-10): the **Misconception Evolution
+  Library** — `misconceptions/`: the transcription of Delivery 2 §4, the
+  generic birth-type taxonomy and universal repair sequence every
+  concept entry's misconception library depends on. Chosen via the
+  continuous-mode protocol's single question ("what is the single
+  highest-impact weakness preventing a 9/10 Educational Brain?") over
+  the strongest competing candidate, raw concept-coverage expansion —
+  reasoning: one new concept entry helps only that concept, while the
+  generic misconception theory is a force multiplier for every
+  misconception library ever written, past and future, and expanding
+  coverage without it first would lock in inconsistent, improvised
+  birth-type logic across a growing set of entries. Reuse-first check
+  found the taxonomy already ~80% reconstructable from scattered
+  citations (birth types 1, 2, 4, 5, 6 all already named with specific
+  meaning across `concepts/`, `decision-engine/05`, `assessment/08`;
+  type 3 named only in `student-state/03`'s regression-prior table with
+  no explanation) — the same pattern that made Universal Principles
+  low-risk to formalize in Delivery 11. Contents: all 6 birth types
+  (overgeneralization, perceptual intuition, language contamination,
+  notation-induced, instruction-induced, analogy overextension) each
+  with generic mechanism, diagnostic signature, and NEW cross-subject
+  examples beyond the 2 already in the tree (English irregular verbs,
+  ice density, "theory" contamination, apostrophe notation, atomic
+  indivisibility, the water-circuit analogy) to prove the taxonomy
+  generalizes; a 7-question diagnostic decision procedure for
+  identifying a new misconception's birth type when authoring any of
+  the ~1,800 uncovered concepts; the full generic 7-step repair sequence
+  (elicit→commit→collide→replace→contrast→apply→re-probe) with
+  per-birth-type collision-design rules; the precise operational
+  definition of "burned collision" (two necessary conditions, not just
+  "used once"); and the metastasis-chain mechanism with a new just-in-
+  time chain-check trigger extending `placement/05`'s absent-prerequisite
+  logic to corrupted (ACTIVE-misconception) prerequisites. Deliberately
+  did NOT restate `student-state/03`'s ledger structure, status
+  lifecycle, or regression-prior table — referenced, not duplicated.
+  Knowledge only — no runtime/schema/curriculum changes.
 - **Delivery 12** (in-repo, 2026-07-10): the **Teaching Action Library** —
   `teaching-actions/`: the transcription of Delivery 2 §6, the 27-action
   catalog (6 families: SHOW, TELL, DO, TEST-THINKING, ORGANIZE, SOCIAL)
@@ -283,6 +319,16 @@ educational-brain/
                               selector's Filters 2, 4, and 6 dispatch
                               into — per-action knowledge-type fit, setup
                               cost, persona notes, and failure modes
+  misconceptions/           ← Misconception Evolution Library (Delivery
+                              13): the 6-type birth taxonomy (generic
+                              mechanism, diagnostic signature, cross-
+                              subject examples, and a diagnostic
+                              procedure for classifying new
+                              misconceptions), the full 7-step repair
+                              sequence with per-birth-type collision
+                              design, the precise "burned collision"
+                              definition, and the metastasis-chain
+                              just-in-time repair trigger
 ```
 
 Planned libraries (authored in future deliveries; listed here as the intended
@@ -293,7 +339,6 @@ as empty placeholders):
   mental-models/      ← model stages, versioning, replacement rules (Delivery 2 §1)
   discovery/          ← the 6-step Discovery Framework + worked designs (Delivery 2 §2)
   curiosity/          ← triggers, chains, by-age/subject/personality (Delivery 2 §3)
-  misconceptions/     ← birth taxonomy, evolution, 7-step repair + per-concept libraries (Delivery 2 §4)
   cognitive-load/     ← intrinsic/extraneous/germane, chunking, density rules (Delivery 2 §5)
   transfer/           ← the transfer ladder + six rules (Delivery 2 §7)
   memory/             ← spacing, retrieval, interleaving, review-by-type (Delivery 2 §8)
