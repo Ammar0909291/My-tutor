@@ -1492,6 +1492,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             systemPrompt += `\n- LAST-ANSWER READ (hesitant-correct — FRAGILE): do not advance yet. One more problem of the SAME type and difficulty now; advance only after a fluent, confident success. If this one is quicker, say so ("that one was quicker — feel it?").`
           }
 
+          // Wave 1 (Runtime Guardian): the authored HOW for the action
+          // decide() just selected — retrieved from the Brain's action
+          // catalog / repair sequence instead of improvised per turn.
+          // Library only: School Mode already receives the Teaching Action
+          // Generator's structured block for the same purpose (ADR 08).
+          if (!schoolCtx) {
+            const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
+            systemPrompt += buildActionProcedureBlock(decision.action_type)
+          }
+
           // Phase 2F (Teaching Action Intelligence): advisory only — does NOT
           // override decide()'s action_type (the frozen Teaching Engine has no
           // input slot for review-due topics). Surfaces snapshot.dueForReview
