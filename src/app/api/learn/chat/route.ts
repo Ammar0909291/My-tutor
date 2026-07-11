@@ -1596,8 +1596,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // the episode state machine that makes per-session rules enforceable.
     let sessionEpisodeHoisted: import('@/lib/teaching/sessionLifecycle').SessionEpisode | null = null
     let sessionEpisodeFreshHoisted = false
+    // CTO iteration (recovery guard — decision-engine/03 §0 preemption):
+    // a failure-state utterance in the learner's message is detected
+    // deterministically (Principle 20: stated state is ground truth) and
+    // preempts calibration, assessment, and the asset memory path this turn.
+    let recoveryKeyHoisted: import('@/lib/teaching/recoveryGuard').FailureStateKey | null = null
     if (!schoolCtx) {
       try {
+        const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
+        recoveryKeyHoisted = detectFailureState(message)
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
         const { isFirstLessonContext, buildFirstLessonBlock } = await import('@/lib/teaching/firstLessonGuard')
         const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')
@@ -1670,7 +1677,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } catch { /* non-fatal — worst case is a redundant (bounded) re-verification */ }
         }
 
-        if (level && resolvedConceptId && nothingCompleted && !(placementPrevHoisted?.verified)) {
+        if (level && resolvedConceptId && nothingCompleted && !(placementPrevHoisted?.verified) && !recoveryKeyHoisted) {
           const state = placementPrevHoisted ?? emptyPlacementState()
           if (snapshotPendingProbe) {
             // A probe question is already in flight — this turn's job is
@@ -1699,6 +1706,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         })) {
           systemPrompt += buildFirstLessonBlock(subjectCode)
           firstLessonActiveHoisted = true
+        }
+
+        // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
+        // scripts; first-lesson/05 deltas) — injected LAST of all blocks:
+        // the affect band outranks every teaching instruction above it.
+        if (recoveryKeyHoisted) {
+          const { buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
+          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted)
         }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
@@ -1730,7 +1745,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // first-lesson flow (demonstrate-first, echo-before-solo, never open
       // with a quiz; first-lesson/02 §1 + 04 §1). Lesson one is delivered by
       // the LLM under the mandatory protocol block injected above.
-      if (isExplanationMemoryEnabled() && resolvedConceptId && !firstLessonActiveHoisted) {
+      // Recovery guard: same exclusion when a failure state fired this turn
+      // — no content enters a flooded mind (foundations/04 P5); serving a
+      // stored explanation+quiz to a learner who just said "I give up" is
+      // the exact violation the preemption rule exists to prevent.
+      if (isExplanationMemoryEnabled() && resolvedConceptId && !firstLessonActiveHoisted && !recoveryKeyHoisted) {
         try {
           memoryState = buildStudentState({
             conceptId: resolvedConceptId,
@@ -2153,6 +2172,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           category:  EvidenceCategory.MISCONCEPTION_DETECTED,
           outcome:   teachingSignal.phrase.slice(0, 200),
           strength:  0.5,
+        })
+      }
+
+      // RECOVERY evidence (validation/08 §2 RECOVERY contract, the L1
+      // writer side: entering state × what was tried; what-followed arrives
+      // as the next turn's signal, joinable by session ordering).
+      if (recoveryKeyHoisted) {
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.LEARNER_FEEDBACK,
+          outcome:   `recovery:${recoveryKeyHoisted}`,
+          strength:  0.0,
         })
       }
 
