@@ -1384,9 +1384,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // data (topicProgress, learningProfile, subjectAnalytics) and only fetches
     // the supplemental data (recentMistakes, retentionMetrics, session count).
     try {
-      if (snapshotCurrentConceptId) {
+      // Red-team fix D4 (Blueprint Phase 5 / ADR 08 §4a): the FIRST Library
+      // turn of a session has no snapshot concept yet, but the entry concept
+      // was already resolved earlier this request (libraryConceptNodeIdHoisted)
+      // — use it, so no Library turn bypasses decide().
+      const activeConceptIdForDecide = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted
+      if (activeConceptIdForDecide) {
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
-        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(snapshotCurrentConceptId)
+        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
         if (conceptNode) {
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
@@ -1420,7 +1425,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (process.env.ENABLE_CONCEPT_MASTERY_READ === '1') {
             try {
               const cmr = await prisma.conceptMasteryRecord.findUnique({
-                where: { userId_conceptId: { userId, conceptId: snapshotCurrentConceptId } },
+                where: { userId_conceptId: { userId, conceptId: activeConceptIdForDecide } },
                 select: { masteryScore: true, decayedScore: true, masteryLevel: true, masteryConfidence: true },
               })
               if (cmr) conceptMasterySnapshot = cmr
@@ -1434,7 +1439,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // W2-3: if CMR indicates current concept has decayed below mastery threshold,
               // ensure it appears in weak_concepts for this turn's Teaching Engine decision.
               weak_concepts: conceptMasterySnapshot !== null && conceptMasterySnapshot.decayedScore < 0.7
-                ? [...new Set([...snapshot.weakConcepts, snapshotCurrentConceptId])]
+                ? [...new Set([...snapshot.weakConcepts, activeConceptIdForDecide])]
                 : snapshot.weakConcepts,
               misconceptions: snapshot.misconceptions,
               // W2-3: use CMR decayedScore (0–1) as retention signal when available —
@@ -1555,6 +1560,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let placementProbeActive = false
     let placementLevelHoisted: 'intermediate' | 'advanced' | null = null
     let placementAskedProbeHoisted: 'below' | 'at' | 'above' | null = null
+    // Red-team fix D3: placement state inherited across sessions (see below)
+    let placementPrevHoisted: import('@/lib/teaching/placementVerification').PlacementVerificationState | null = snapshotPlacement
+    let placementInheritedHoisted = false
+    // Red-team fix D1: first-lesson turns must never be served from the
+    // asset memory path (a static explanation+probe assembly cannot honor
+    // first-lesson/04 §1's flow or 02 §1's never-quiz-first rule).
+    let firstLessonActiveHoisted = false
     if (!schoolCtx) {
       try {
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
@@ -1571,8 +1583,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const level = profile?.currentLevel === 'advanced' ? 'advanced'
           : profile?.currentLevel === 'intermediate' ? 'intermediate' : null
         const nothingCompleted = (studentProgress?.completedLessons?.length ?? 0) === 0
-        if (level && resolvedConceptId && nothingCompleted && !(snapshotPlacement?.verified)) {
-          const state = snapshotPlacement ?? emptyPlacementState()
+
+        // Red-team fix D3 (assessment/02 §1: "Placement… runs once, at
+        // entry"): contextSnapshot is per-session, so without inheritance a
+        // verified learner opening a NEW session before completing a lesson
+        // would be re-probed. Inherit a CONCLUDED verification from the
+        // learner's most recent other session in this subject. Narrow query:
+        // only runs for the unverified-eligible population.
+        if (level && nothingCompleted && !placementPrevHoisted) {
+          try {
+            const prevSession = await prisma.learnSession.findFirst({
+              where: { userId, subjectId: learnSession.subjectId, id: { not: sessionId } },
+              orderBy: { updatedAt: 'desc' },
+              select: { contextSnapshot: true },
+            })
+            const prevSnap = prevSession?.contextSnapshot as Record<string, unknown> | null
+            const prevPlacement = (prevSnap?.placementVerification && typeof prevSnap.placementVerification === 'object')
+              ? prevSnap.placementVerification as import('@/lib/teaching/placementVerification').PlacementVerificationState
+              : null
+            if (prevPlacement?.verified) {
+              placementPrevHoisted = prevPlacement
+              placementInheritedHoisted = true
+            }
+          } catch { /* non-fatal — worst case is a redundant (bounded) re-verification */ }
+        }
+
+        if (level && resolvedConceptId && nothingCompleted && !(placementPrevHoisted?.verified)) {
+          const state = placementPrevHoisted ?? emptyPlacementState()
           if (snapshotPendingProbe) {
             // A probe question is already in flight — this turn's job is
             // tagging the answer, never stacking a second question
@@ -1599,6 +1636,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           completedLessonCount: studentProgress?.completedLessons?.length ?? 0,
         })) {
           systemPrompt += buildFirstLessonBlock(subjectCode)
+          firstLessonActiveHoisted = true
         }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
@@ -1625,7 +1663,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // and the LLM path below runs exactly as before.
       let memoryState: StudentState | null = null
       let assembled: AssembledLesson | null = null
-      if (isExplanationMemoryEnabled() && resolvedConceptId) {
+      // Red-team fix D1: never serve a first-lesson turn from the asset
+      // memory path — a static explanation+probe assembly cannot honor the
+      // first-lesson flow (demonstrate-first, echo-before-solo, never open
+      // with a quiz; first-lesson/02 §1 + 04 §1). Lesson one is delivered by
+      // the LLM under the mandatory protocol block injected above.
+      if (isExplanationMemoryEnabled() && resolvedConceptId && !firstLessonActiveHoisted) {
         try {
           memoryState = buildStudentState({
             conceptId: resolvedConceptId,
@@ -2114,7 +2157,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const answeredProbe = teachingSignal?.probe ?? (placementProbeActive ? snapshotPendingProbe : null)
           if (placementProbeActive && answeredProbe && teachingSignal?.correctness !== undefined) {
             const { emptyPlacementState, recordProbeResult, levelBelow } = await import('@/lib/teaching/placementVerification')
-            const prev = snapshotPlacement ?? emptyPlacementState()
+            // Red-team fix D3: fold onto the inherited/current state, not
+            // only this session's snapshot.
+            const prev = placementPrevHoisted ?? emptyPlacementState()
             const nextState = recordProbeResult(prev, {
               probe: answeredProbe,
               correctness: teachingSignal.correctness,
@@ -2140,8 +2185,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
 
           // A probe question asked this turn goes in flight for the next turn.
-          if (placementAskedProbeHoisted && Object.keys(placementUpdate).length === 0) {
+          // Red-team fix D2: only when the LLM actually spoke this turn — a
+          // memory-served (assembled) turn never delivered the probe question,
+          // so persisting it would make the next turn's await-block assert a
+          // question that was never asked.
+          if (placementAskedProbeHoisted && !assembled && Object.keys(placementUpdate).length === 0) {
             placementUpdate = { pendingPlacementProbe: placementAskedProbeHoisted }
+          }
+          // Red-team fix D3: a verification concluded in an earlier session is
+          // copied into THIS session's snapshot once, so subsequent turns skip
+          // the cross-session lookup (assessment/02 §1: placement runs once).
+          if (placementInheritedHoisted && placementPrevHoisted && Object.keys(placementUpdate).length === 0) {
+            placementUpdate = { placementVerification: placementPrevHoisted }
           }
 
           const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
