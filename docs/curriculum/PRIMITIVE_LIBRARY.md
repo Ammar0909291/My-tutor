@@ -3572,3 +3572,1121 @@ GR-2 (P55 follows). The explanation of WHY the analogy works is mandatory — th
 - **English:** "What does the passive voice feel like — what is the experience of reading it, compared to the active voice? Build an analogy from something outside language."
 
 ---
+
+## CATEGORY F — REGULATION
+
+*Control the teaching process itself — pacing, load, feedback, metacognition, scaffolding. The control plane of the Educational Brain. Category F primitives do not introduce content; they manage the conditions under which content is processed.*
+
+---
+
+### P49 — CONFIRMATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Very High
+
+**1. Purpose:**  
+Signal that the student's reasoning is on track — targeted at the process, not the product.
+
+**2. Cognitive Objective:**  
+Reinforce productive reasoning strategies so the student continues using them; distinguish correct reasoning from merely correct answers.
+
+**3. When to Use:**  
+- After any elicitation (E-category) where the student's reasoning is sound  
+- In formative assessment sequences (P90) after P55 (WAIT TIME)
+
+**4. When NOT to Use:**  
+- As generic praise ("great job!") — P49 must confirm the specific reasoning, not the general performance  
+- After an incorrect answer — use P50 (DISCONFIRMATION) instead  
+- During P29 (CONFLICT RESOLUTION PAUSE) — confirmation terminates the processing
+
+**5. Student States Supported:**  
+S0–S9 (universal; especially important for S6 — Low Confidence)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `reasoning_target`: the specific reasoning element being confirmed ("that reasoning is sound" not "you're correct")
+
+**8. Expected Student Response:**  
+Student continues the current reasoning approach; confidence increases.
+
+**9. Success Signal:**  
+Student builds on the confirmed reasoning in their next response.
+
+**10. Failure Signal:**  
+Student stops after confirmation and waits for the next question (confirmation received as a full stop, not an encouragement to continue).
+
+**11. Recovery:**  
+Follow P49 immediately with P53 (ELABORATION REQUEST) to signal that the reasoning should continue.
+
+**12. Typical Misconceptions Addressed:**  
+None — process primitive. But P49 reinforces the reasoning strategies that prevent misconceptions.
+
+**13. Compatible Primitives:**  
+GR-2 applies in assessment sequences; P53 (ELABORATION REQUEST) frequently follows; P90 (FORMATIVE ASSESSMENT WITH FEEDBACK) uses P49 in its expansion.
+
+**14. Incompatible Primitives:**  
+P28 (COGNITIVE CONFLICT INDUCTION) immediately after P49 — do not confirm and then immediately challenge.
+
+**15. Composition Constraints:**  
+P49 must identify the specific reasoning element confirmed. Generic confirmations without a `reasoning_target` are not valid P49 instances.
+
+**16. Subject Examples:**  
+- **Mathematics:** "That reasoning is correct — you checked each input separately rather than counting total arrows. That's exactly the right approach."  
+- **Physics:** "Your logic is sound: you identified the net force direction before calculating magnitude. That order matters."  
+- **English:** "You cited a specific line before stating your interpretation. That's the right method — evidence before claim."
+
+---
+
+### P50 — DISCONFIRMATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Signal that the student's reasoning needs revision — without providing the correct answer.
+
+**2. Cognitive Objective:**  
+Redirect student processing toward error identification without removing the cognitive demand — the student must find the error themselves.
+
+**3. When to Use:**  
+- After an incorrect student response  
+- When the error is in the reasoning process, not just the answer
+
+**4. When NOT to Use:**  
+- As generic correction ("that's wrong") — P50 must redirect to a specific element  
+- For S6 (Low Confidence) students without first deploying P54 (PRODUCTIVE STRUGGLE PERMISSION) — unexplained disconfirmation can trigger shutdown  
+- When the error requires schema repair (P50 is insufficient for misconceptions — use P28)
+
+**5. Student States Supported:**  
+S0–S9 (universal; calibrate delivery for S6)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `redirect_target`: the specific element in the student's reasoning that needs revision ("check what happens when x = 0")  
+- `redirect_framing`: non-evaluative language ("that's interesting — but check…" rather than "that's wrong")
+
+**8. Expected Student Response:**  
+Student self-corrects by re-examining the `redirect_target`.
+
+**9. Success Signal:**  
+Student identifies their error through re-examination and corrects it.
+
+**10. Failure Signal:**  
+Student repeats the same error; or student becomes confused about what needs revision.
+
+**11. Recovery:**  
+Use P51 (ERROR DIAGNOSIS FACILITATION) to help the student identify whether the error is procedural or conceptual; then route to P52 (TARGETED REDIRECT) or Schema Repair chain.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but disconfirmation without the correct answer forces active error-identification rather than passive correction-reception.
+
+**13. Compatible Primitives:**  
+P51 (ERROR DIAGNOSIS FACILITATION) follows when the student cannot self-correct; P52 (TARGETED REDIRECT) for more specific redirection.
+
+**14. Incompatible Primitives:**  
+P49 (CONFIRMATION) for the same response — never confirm and disconfirm the same reasoning.
+
+**15. Composition Constraints:**  
+`redirect_target` must be specified — generic disconfirmation ("not quite") is not P50. The correct answer must not be provided — if it is provided, this becomes P31 (SCHEMA REPLACEMENT), not P50.
+
+**16. Subject Examples:**  
+- **Mathematics:** "That's an interesting approach — but check what happens to input 2 specifically. Look at just input 2."  
+- **Physics:** "Look at your force diagram again. Is gravity the only vertical force? Check the surface."  
+- **English:** "Your identification might be right — but check the grammatical subject of this sentence. Who or what is performing the action?"
+
+---
+
+### P51 — ERROR DIAGNOSIS FACILITATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Actively help the student identify the cause of their error — not just the fact of it.
+
+**2. Cognitive Objective:**  
+Make error analysis a learning event: distinguishing procedural errors (wrong execution of a known rule) from conceptual errors (wrong understanding of the underlying idea) is itself a metacognitive skill.
+
+**3. When to Use:**  
+- After P50 (DISCONFIRMATION) when the student cannot self-correct  
+- Whenever an error occurs that requires understanding its type before routing to the appropriate remediation
+
+**4. When NOT to Use:**  
+- When the error type is already clear (go directly to the appropriate remediation)  
+- As a substitute for the remediation itself — diagnosis leads to remedy, not replaces it
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `error_instance`: the specific error to diagnose  
+- `diagnosis_question`: "Was that a calculation error, or did you use the wrong rule? Let's check which one."
+
+**8. Expected Student Response:**  
+Student identifies the type of error: procedural (wrong execution) or conceptual (wrong model).
+
+**9. Success Signal:**  
+Student correctly categorises their error AND can state what went wrong specifically.
+
+**10. Failure Signal:**  
+Student cannot categorise the error; or categorises it incorrectly (believes it is procedural when it is conceptual).
+
+**11. Recovery:**  
+Run the procedure step-by-step while asking after each step whether that step is correct — the first step the student agrees is wrong identifies the error location.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but conceptual error identification routes to Schema Repair chain; procedural error identification routes to P52 (TARGETED REDIRECT).
+
+**13. Compatible Primitives:**  
+P50 (DISCONFIRMATION) before; P52 (TARGETED REDIRECT) for procedural errors after; P26 (SCHEMA ACTIVATION) for conceptual errors after.
+
+**14. Incompatible Primitives:**  
+P31 (SCHEMA REPLACEMENT) before P51 — replace before diagnosing cannot be targeted.
+
+**15. Composition Constraints:**  
+P51 in the P90 (FORMATIVE ASSESSMENT WITH FEEDBACK) expansion follows P55 and [P49|P50].
+
+**16. Subject Examples:**  
+- **Mathematics:** "Let's figure out what went wrong. First question: do you think the rule you used is the right rule for this problem type? Or did you apply the right rule but make a calculation error somewhere?"  
+- **Physics:** "Let's diagnose: did you set up the force diagram incorrectly, or did you set it up correctly but make an arithmetic error in the net force calculation?"  
+- **English:** "Let's find the error: did you apply the passive-voice criterion correctly? Or did you apply the criterion but make a mistake in identifying the grammatical subject?"
+
+---
+
+### P52 — TARGETED REDIRECT
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Move student attention from an unproductive or wrong focus to the right one.
+
+**2. Cognitive Objective:**  
+Re-orient the student's analysis without telling them the answer — shift the frame of attack, not the answer.
+
+**3. When to Use:**  
+- After P51 reveals a procedural error  
+- When the student is working on the right problem but examining the wrong aspect of it
+
+**4. When NOT to Use:**  
+- When the error is conceptual (use Schema Repair chain instead)  
+- When the student's current focus is correct (do not redirect correct attention)
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `wrong_focus`: what the student is currently examining  
+- `right_focus`: what they should be examining  
+- `redirect_phrase`: "Let's focus on [right_focus] for a moment — just [right_focus]."
+
+**8. Expected Student Response:**  
+Student redirects attention and finds the path forward from the new focus.
+
+**9. Success Signal:**  
+Student, having redirected, identifies the correct next step.
+
+**10. Failure Signal:**  
+Student cannot make progress even with redirected attention.
+
+**11. Recovery:**  
+If targeted redirect fails, move to P84 (LOAD MANAGEMENT) — break the problem into smaller sub-problems and redirect within a simpler scope.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — procedural redirection. For conceptual errors, route to Schema Repair chain.
+
+**13. Compatible Primitives:**  
+P51 (ERROR DIAGNOSIS FACILITATION) before; P34 (CLOSED QUESTION) after to test the redirected focus.
+
+**14. Incompatible Primitives:**  
+P31 (SCHEMA REPLACEMENT) immediately after P52 — procedural redirect and schema replacement are different remediation paths; do not combine without diagnosis.
+
+**15. Composition Constraints:**  
+`right_focus` must be a specific element, not a general directive ("look more carefully" is not P52).
+
+**16. Subject Examples:**  
+- **Mathematics:** "Don't look at the whole diagram — focus only on input 2. Just input 2. How many arrows leave input 2?"  
+- **Physics:** "Don't calculate yet. Focus only on the direction of each force. Get the directions right before you touch numbers."  
+- **English:** "Don't read the whole sentence yet. Focus only on the main verb. What is the verb in this sentence?"
+
+---
+
+### P53 — ELABORATION REQUEST
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Ask the student to extend or deepen a correct response.
+
+**2. Cognitive Objective:**  
+Convert a surface-level correct answer into a deeply encoded one — depth of elaboration directly predicts retention.
+
+**3. When to Use:**  
+- After a correct but brief response  
+- After P49 (CONFIRMATION) to signal that more depth is expected  
+- When the student's response is correct but reveals shallow encoding
+
+**4. When NOT to Use:**  
+- After an incorrect response (use P50 + P51 instead)  
+- When the student has already elaborated fully
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S0 (with scaffolding)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `elaboration_target`: the specific aspect of the correct response to elaborate  
+- `elaboration_question`: "Good — can you say more about why?" / "What else is true about that?"
+
+**8. Expected Student Response:**  
+Student produces a deeper, more elaborated response that connects the concept to other knowledge.
+
+**9. Success Signal:**  
+Elaboration makes a connection to another concept or explains a reason that was not present in the original response.
+
+**10. Failure Signal:**  
+Student restates the original response without deepening; student says "I don't know why."
+
+**11. Recovery:**  
+Use P58 (ELABORATIVE INTERROGATION) — a more structured "why is this true?" sequence.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but elaboration surfaces whether the correct answer is schema-based (can elaborate) or memorised (cannot).
+
+**13. Compatible Primitives:**  
+P49 (CONFIRMATION) before; P58 (ELABORATIVE INTERROGATION) as a deeper version.
+
+**14. Incompatible Primitives:**  
+P50 (DISCONFIRMATION) immediately after P53 — do not request elaboration and then disconfirm the elaboration.
+
+**15. Composition Constraints:**  
+`elaboration_target` must be specific — "say more" without a target is not P53.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Good — can you say more about why single-valuedness matters? What breaks if you allow multiple outputs?"  
+- **Physics:** "Right — now why does mass cancel out in free fall? Say more about the mechanism."  
+- **English:** "Correct — say more about why this structure is passive. What in the grammar makes it so?"
+
+---
+
+### P54 — PRODUCTIVE STRUGGLE PERMISSION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Explicitly signal that not-knowing is acceptable and expected in the current moment.
+
+**2. Cognitive Objective:**  
+Lower the psychological stakes of cognitive demand, enabling students who would otherwise shut down under challenge to engage with difficult material.
+
+**3. When to Use:**  
+- Before any elicitation that has a high difficulty ceiling  
+- For S6 (Low Confidence) students at the start of a challenging sequence  
+- GR-8: must precede any primitive that will likely produce student failure on first attempt
+
+**4. When NOT to Use:**  
+- When the student is already confident and the challenge is well-matched to ability  
+- After a student has already succeeded — productive struggle permission before success is motivational; after success it becomes condescending
+
+**5. Student States Supported:**  
+S6 (primary); S0 (moderate — novices benefit from normalised struggle); S9 (moderate)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — purely verbal/relational
+
+**7. Inputs Required:**  
+- `struggle_permission_statement`: specific language that normalises not-knowing ("take your time — this is supposed to be challenging"; "it's normal if this takes a few tries")
+
+**8. Expected Student Response:**  
+Student attempts the challenging task without withdrawing; willingness to try increases.
+
+**9. Success Signal:**  
+Student attempts the task; attempts may fail but student persists rather than stops.
+
+**10. Failure Signal:**  
+Student still refuses to attempt despite explicit permission; or student treats permission as confirmation that they cannot do it.
+
+**11. Recovery:**  
+Reduce the task demand (P84 LOAD MANAGEMENT); pair with P70 (COMPETENCE EVIDENCE) to establish that the student has already succeeded at a related task.
+
+**12. Typical Misconceptions Addressed:**  
+None — motivational/regulatory primitive.
+
+**13. Compatible Primitives:**  
+P70 (COMPETENCE EVIDENCE) before; GR-8: any high-difficulty elicitation after.
+
+**14. Incompatible Primitives:**  
+P68 (MASTERY SELF-DECLARATION) immediately after P54 — permission to struggle contradicts mastery declaration.
+
+**15. Composition Constraints:**  
+GR-8: P54 must precede any primitive where first-attempt failure is likely. This rule is particularly important for S6 students.
+
+**16. Subject Examples:**  
+- **Mathematics:** "This next problem is hard. Take your time — it's supposed to require several tries. There's no rush, and getting it wrong first is part of the process."  
+- **Physics:** "You may not get this on the first try — and that's fine. Struggle with it. The thinking you do while struggling is the learning."  
+- **English:** "This passage is deliberately ambiguous. You're not supposed to have an immediate answer. Sit with it."
+
+---
+
+### P55 — WAIT TIME
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Universal
+
+**1. Purpose:**  
+Create deliberate silence after asking a question — minimum 5 seconds before any follow-up.
+
+**2. Cognitive Objective:**  
+Allow cognitive processing to complete: students who are given wait time produce higher quality, more elaborate responses and engage more students in responding.
+
+**3. When to Use:**  
+- GR-2: after every elicitation primitive (P34–P48, P74–P80)  
+- After P29 (CONFLICT RESOLUTION PAUSE) — an extended form of wait time  
+- After any question where the student is expected to produce reasoning (not just recall)
+
+**4. When NOT to Use:**  
+- Between non-elicitation primitives where no student response is expected
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — universal
+
+**7. Inputs Required:**  
+- `wait_duration`: minimum 5 seconds; 10+ seconds for complex questions or S2/S7 during conflict  
+- `silence_signal`: no teacher speech, no hint, no verbal filler during the wait
+
+**8. Expected Student Response:**  
+Student is actively processing during the wait; produces a higher-quality response than they would have without the wait.
+
+**9. Success Signal:**  
+Student response after wait time is more elaborated, more reasoned, or more accurate than responses without wait time.
+
+**10. Failure Signal:**  
+Teacher breaks wait time before the minimum duration; teacher provides hints during the wait.
+
+**11. Recovery:**  
+If the student appears frozen (not processing): use P54 (PRODUCTIVE STRUGGLE PERMISSION) to normalise the struggle, then re-apply P55.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but P55 is the mechanism that allows P28 (COGNITIVE CONFLICT INDUCTION) and P29 (CONFLICT RESOLUTION PAUSE) to produce their effect.
+
+**13. Compatible Primitives:**  
+Every elicitation primitive; P29 (CONFLICT RESOLUTION PAUSE) is an extended variant.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2: P55 is mandatory after every E-category primitive. Minimum duration: 5 seconds. P29 uses 10+ seconds. This is the most commonly violated rule in teaching — it must be enforced by the composition engine.
+
+**16. Subject Examples:**  
+- **Mathematics:** [Ask question] [5 seconds of silence. No hints, no "take your time," no filler. Just wait.] [Student responds.]  
+- **Physics:** [Ask question] [5 seconds minimum. For conflict-induction scenarios: 10 seconds minimum.]  
+- **English:** [Ask interpretive question] [5 seconds. If the question is interpretive and complex: 10+ seconds.]
+
+---
+
+### P63 — SELF-MONITORING TRIGGER
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Prompt the student to check their own understanding before the session advances.
+
+**2. Cognitive Objective:**  
+Develop metacognitive self-monitoring as a habitual practice — the student learns to interrupt their own processing to verify comprehension.
+
+**3. When to Use:**  
+- Before advancing to a new concept or harder protocol stage  
+- After a complex explanation to verify retention before building on it  
+- As a mid-session pacing checkpoint
+
+**4. When NOT to Use:**  
+- More than once per major section (overuse reduces effectiveness)  
+- As a substitute for actual assessment (self-monitoring is metacognitive; P74–P80 are the actual assessments)
+
+**5. Student States Supported:**  
+S0–S9 (universal; especially S1 who may not self-monitor naturally)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `monitoring_question`: "Before we continue — how clear is this so far?" / "What are you confident about? What are you unsure of?"
+
+**8. Expected Student Response:**  
+Student distinguishes between what they understand and what they don't; gives a differentiated self-assessment.
+
+**9. Success Signal:**  
+Student produces a calibrated self-assessment (matches actual performance level).
+
+**10. Failure Signal:**  
+Student says "everything is clear" when errors are visible; or "nothing is clear" when performance is adequate. Both are calibration failures.
+
+**11. Recovery:**  
+Use P64 (CONFIDENCE CALIBRATION) to compare self-assessment with actual performance.
+
+**12. Typical Misconceptions Addressed:**  
+Illusion of knowing (student believes they understand but cannot demonstrate it).
+
+**13. Compatible Primitives:**  
+P64 (CONFIDENCE CALIBRATION) follows when calibration needs to be verified; P40 (METACOGNITIVE PROMPT) is a more specific version.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows the monitoring question). Use at natural session breaks, not arbitrarily.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Before we move to examples with three variables — how solid does the two-variable case feel? What, if anything, is still fuzzy?"  
+- **Physics:** "We're about to apply Newton's Second Law to more complex systems. What are you confident about so far? What would you like to revisit?"  
+- **English:** "Before we read the next passage — what do you feel you've got about identifying implied claims? What are you still uncertain about?"
+
+---
+
+### P64 — CONFIDENCE CALIBRATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Measure the gap between student confidence and student accuracy, and address both together.
+
+**2. Cognitive Objective:**  
+Identify the most dangerous student state (high confidence + low accuracy = S7) and the most underused state (low confidence + high accuracy = S6), both of which require targeted intervention that differs from normal instruction.
+
+**3. When to Use:**  
+- After P63 (SELF-MONITORING TRIGGER) when calibration needs to be verified  
+- GR-4: P64 can trigger Schema Repair chain if it reveals high confidence + wrong answer  
+- Periodically for all students as a confidence-accuracy gap monitor
+
+**4. When NOT to Use:**  
+- As the first primitive in a session (no performance baseline exists yet)
+
+**5. Student States Supported:**  
+S0–S9 (calibration is universal); outputs determine routing: high conf + high acc → advance; high conf + low acc → Schema Repair; low conf + high acc → P70 (COMPETENCE EVIDENCE).
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `confidence_question`: "How confident are you that that's correct? 1–5."  
+- `accuracy_check`: the actual correctness of the student's response  
+- `calibration_matrix`: [high/low confidence] × [high/low accuracy] → routing decision
+
+**8. Expected Student Response:**  
+Student rates their confidence on a simple scale.
+
+**9. Success Signal:**  
+Student's stated confidence matches their actual accuracy (well-calibrated).
+
+**10. Failure Signal:**  
+Gap between stated confidence and actual accuracy (either direction).
+
+**11. Recovery:**  
+High confidence + low accuracy: GR-4 — enter Schema Repair chain. Low confidence + high accuracy: deploy P70 (COMPETENCE EVIDENCE) to close the confidence gap.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but high confidence + wrong answer is the primary indicator of a misconception requiring P26→P32 repair.
+
+**13. Compatible Primitives:**  
+P63 (SELF-MONITORING TRIGGER) before; P70 (COMPETENCE EVIDENCE) for low-confidence/high-accuracy cases; P26 (SCHEMA ACTIVATION) for high-confidence/low-accuracy cases (GR-4 satisfied).
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-4: P64 (like P41) can trigger the Schema Repair chain. The `calibration_matrix` routing must be implemented deterministically — not LLM-decided.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You classified it as a function. How confident are you — 1 is a guess, 5 is certain?" [Student: "5."] [Teacher: "Let's verify." — if wrong, GR-4 applies.]  
+- **Physics:** "You calculated 30 N. Confidence level?" [Student: "4."] [Check: 30 N is wrong.] [High confidence + wrong → enter Schema Repair.]  
+- **English:** "You said this is passive. Confidence?" [Student: "2."] [Check: it is passive.] [Low confidence + right → deploy P70.]
+
+---
+
+### P65 — ERROR ATTRIBUTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Guide the student to identify whether an error was procedural or conceptual.
+
+**2. Cognitive Objective:**  
+Build metacognitive error-classification — the student learns to diagnose the source of their own mistakes, enabling self-directed remediation.
+
+**3. When to Use:**  
+- After P51 (ERROR DIAGNOSIS FACILITATION) — the error has been identified; now the student attributes it  
+- When a student keeps repeating the same type of error without understanding why
+
+**4. When NOT to Use:**  
+- In real-time during a timed task — error attribution requires reflection  
+- For errors that are clearly procedural without any conceptual component
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S8 (adult learners benefit from explicit error-type understanding)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `error_instance`: the specific error to attribute  
+- `attribution_question`: "Was that a wrong rule or a wrong execution of the right rule?"
+
+**8. Expected Student Response:**  
+Student correctly categorises the error as procedural or conceptual and can state what would need to change to fix it.
+
+**9. Success Signal:**  
+Student correctly categorises AND identifies the specific locus of the error.
+
+**10. Failure Signal:**  
+Student incorrectly categorises (calls a conceptual error procedural, or vice versa).
+
+**11. Recovery:**  
+Run P51 (ERROR DIAGNOSIS FACILITATION) step by step to lead the student to the correct categorisation.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — metacognitive primitive. However, consistent misattribution (always calling conceptual errors procedural) is itself a metacognitive pattern that requires attention.
+
+**13. Compatible Primitives:**  
+P51 (ERROR DIAGNOSIS FACILITATION) before; P66 (STRATEGY AWARENESS) often follows — understanding error type is adjacent to understanding strategy choice.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+P65 must follow an error event — it cannot fire when no error is present.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You got the classification wrong. Was that because you used the wrong criterion? Or because you applied the right criterion incorrectly to this specific case?"  
+- **Physics:** "Your force calculation was wrong. Was it because you forgot a force (wrong rule application), or because you made an arithmetic error (right rule, wrong execution)?"  
+- **English:** "You identified it incorrectly. Was it because your rule for passive voice is wrong? Or because your rule is right but you misidentified the grammatical subject?"
+
+---
+
+### P66 — STRATEGY AWARENESS
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Low
+
+**1. Purpose:**  
+Direct the student to identify which strategy they are using and why it was chosen.
+
+**2. Cognitive Objective:**  
+Convert implicit strategy use to explicit metacognitive knowledge — the student who can name their strategy can choose strategies rather than use them by default.
+
+**3. When to Use:**  
+- After the student has successfully used a strategy across several problems  
+- For S5 students who need to build strategic repertoire, not just procedural fluency
+
+**4. When NOT to Use:**  
+- Before the strategy has been used successfully (naming a strategy before executing it is the inverse order)  
+- For S0 students who have not yet developed any strategies
+
+**5. Student States Supported:**  
+S3, S5 (primary); S8 (adult learners benefit from explicit strategy vocabulary)
+
+**6. CPA Stage Compatibility:**  
+A (strategy awareness is abstract — it operates on the meta-level)
+
+**7. Inputs Required:**  
+- `strategy_question`: "What strategy are you using here? Why did you choose it?"
+
+**8. Expected Student Response:**  
+Student names the strategy and provides a reason for choosing it over alternatives.
+
+**9. Success Signal:**  
+Student names the strategy AND articulates when it is and is not appropriate.
+
+**10. Failure Signal:**  
+Student cannot name the strategy ("I just did it"); or names the strategy without being able to say when it applies.
+
+**11. Recovery:**  
+Provide the strategy name; ask the student to describe what the strategy does and when they would use it.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — metacognitive primitive.
+
+**13. Compatible Primitives:**  
+P65 (ERROR ATTRIBUTION) often precedes — understanding errors leads to understanding strategy; P67 (TRANSFER READINESS CHECK) follows — knowing your strategy enables transfer readiness assessment.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Strategy must have been employed at least once before P66 fires.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You just used a 'check each input separately' strategy for classification. What other strategies could you have used? Why did you choose this one?"  
+- **Physics:** "What strategy did you use to identify the forces in this system? Is that always your first step? Why?"  
+- **English:** "You started by looking for the main verb. Is that your general strategy? When does that strategy fail?"
+
+---
+
+### P67 — TRANSFER READINESS CHECK
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Low
+
+**1. Purpose:**  
+Direct the student to assess their own readiness to apply the concept in a new context before attempting it.
+
+**2. Cognitive Objective:**  
+Prevent premature transfer attempts that fail and erode confidence — build self-assessment of knowledge-application readiness.
+
+**3. When to Use:**  
+- Before introducing a transfer task (P39 TRANSFER PROMPT)  
+- When the student is about to attempt applying a concept to a significantly new context
+
+**4. When NOT to Use:**  
+- After the transfer attempt (the check is before, not after)  
+- When the student has already demonstrated successful transfer
+
+**5. Student States Supported:**  
+S1, S5 (primary); S3, S8 (moderate)
+
+**6. CPA Stage Compatibility:**  
+A (transfer readiness is abstract metacognition)
+
+**7. Inputs Required:**  
+- `target_transfer_context`: the new context the student is about to apply the concept in  
+- `readiness_question`: "Before you try this in [new context] — what would you need to know to succeed? Do you feel ready?"
+
+**8. Expected Student Response:**  
+Student assesses readiness accurately — identifies what they know and what they would need.
+
+**9. Success Signal:**  
+Student accurately identifies the knowledge requirements for the transfer task; self-assessment matches actual performance.
+
+**10. Failure Signal:**  
+Student overestimates readiness (attempts and fails); or underestimates (refuses to attempt but would succeed).
+
+**11. Recovery:**  
+For overestimate: use P64 (CONFIDENCE CALIBRATION) after the failed attempt. For underestimate: use P70 (COMPETENCE EVIDENCE) to establish actual capability before the transfer attempt.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — regulatory primitive.
+
+**13. Compatible Primitives:**  
+P39 (TRANSFER PROMPT) follows; P64 (CONFIDENCE CALIBRATION) for calibration verification.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Must precede the transfer attempt it is preparing the student for.
+
+**16. Subject Examples:**  
+- **Mathematics:** "We've been working with functions in the context of number relationships. You're about to apply the concept to programming. What would you need to know about programming for the function concept to transfer? Do you feel ready to try?"  
+- **Physics:** "We've been applying Newton's Second Law to simple systems. You're about to apply it to a system with three forces. What's different about that? Do you feel ready?"  
+- **English:** "We've identified passive voice in simple sentences. You're about to read a complex academic passage and identify passive constructions throughout. What might be harder? Are you ready?"
+
+---
+
+### P68 — MASTERY SELF-DECLARATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Low
+
+**1. Purpose:**  
+Invite the student to explicitly state that they have understood the concept.
+
+**2. Cognitive Objective:**  
+Create accountability through self-declaration: a student who has publicly claimed mastery will attend more carefully to inconsistency when it appears in subsequent sessions.
+
+**3. When to Use:**  
+- After P32 (SCHEMA CONSOLIDATION) and P33 (DISCRIMINATION TRAINING) are complete  
+- At natural session closing points as a self-assessment  
+- Before P91 (MASTERY VERIFICATION) — the self-declaration precedes the formal gate
+
+**4. When NOT to Use:**  
+- Before P21 + P22 + P32 are complete — mastery declaration before consolidation is premature  
+- GR-6 violation: P68 must not follow P91 — the verification is the gate, not the declaration
+
+**5. Student States Supported:**  
+S1, S3, S5 (primarily); S0 (with scaffolding)
+
+**6. CPA Stage Compatibility:**  
+A (self-declaration is abstract metacognition)
+
+**7. Inputs Required:**  
+- `declaration_question`: "Do you feel you have this concept? What can you now do that you couldn't before?"
+
+**8. Expected Student Response:**  
+Student declares mastery AND can articulate what they can now do.
+
+**9. Success Signal:**  
+Student declares mastery with a specific capability statement ("I can now classify any correspondence as a function or not").
+
+**10. Failure Signal:**  
+Student declares mastery without being able to articulate a capability; or refuses to declare.
+
+**11. Recovery:**  
+If student cannot articulate a capability: use P44 (DEFINITION CONSTRUCTION) or P42 (EXAMPLE GENERATION) to surface what they have learned; return to P68 after.
+
+**12. Typical Misconceptions Addressed:**  
+None directly.
+
+**13. Compatible Primitives:**  
+P91 (MASTERY VERIFICATION) follows after self-declaration (formal gate); P32 (SCHEMA CONSOLIDATION) before.
+
+**14. Incompatible Primitives:**  
+P28 (COGNITIVE CONFLICT INDUCTION) immediately after — do not challenge the schema immediately after mastery declaration without a new domain.
+
+**15. Composition Constraints:**  
+GR-6: P91 (MASTERY VERIFICATION) must be terminal. P68 precedes P91 but P91 is the actual gate — P68 is the self-assessment that precedes the formal test.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Do you feel you have the function concept? What can you now do with functions that you couldn't do at the start of this session?"  
+- **Physics:** "Are you ready to use Newton's Second Law independently? Describe one type of problem you could now set up and solve."  
+- **English:** "Do you feel confident identifying passive voice in any sentence you encounter? Describe how you would approach a new sentence."
+
+---
+
+### P81 — SCAFFOLDING
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Provide temporary structural support for a primitive that the student cannot yet execute independently.
+
+**2. Cognitive Objective:**  
+Enable participation in a task that is slightly beyond independent ability — the scaffolding holds the parts the student cannot yet hold, allowing the student to focus cognitive resources on the target learning.
+
+**3. When to Use:**  
+- When a task is within the student's Zone of Proximal Development (slightly beyond current independent ability)  
+- When P11 (PARTIAL WORKED EXAMPLE) logic is applied to non-procedural tasks  
+- Before P82 (FADING) begins
+
+**4. When NOT to Use:**  
+- For tasks already within independent ability (scaffolding without need becomes dependence)  
+- As a permanent support (scaffolding that does not eventually fade is a crutch)
+
+**5. Student States Supported:**  
+S0, S4, S6 (primary); S1, S9 (moderate)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — scaffolding applies at any abstraction level
+
+**7. Inputs Required:**  
+- `scaffold_type`: the structural support provided (partial answer, visual organiser, worked first step, answer space structure)  
+- `target_primitive`: which primitive is being scaffolded  
+- `scaffold_withdrawal_plan`: when and how P82 will remove this scaffold
+
+**8. Expected Student Response:**  
+Student uses the scaffold to engage with the task; attempts the unsupported components.
+
+**9. Success Signal:**  
+Student completes the scaffolded task AND can identify which parts they did independently.
+
+**10. Failure Signal:**  
+Student cannot engage even with the scaffold; scaffold is insufficient for the task.
+
+**11. Recovery:**  
+Reduce the task scope (P84 LOAD MANAGEMENT); provide a stronger scaffold; step back to a prerequisite concept.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — load management primitive.
+
+**13. Compatible Primitives:**  
+P82 (FADING) always follows scaffolding (the withdrawal plan); P84 (LOAD MANAGEMENT) before to determine what scaffold is needed.
+
+**14. Incompatible Primitives:**  
+P91 (MASTERY VERIFICATION) during scaffolded task — mastery cannot be verified when scaffolding is present.
+
+**15. Composition Constraints:**  
+Named Compound P12 (FADED WORKED EXAMPLE) instantiates P81→P82 at the worked-example level. P81 without P82 in the withdrawal plan is an incomplete specification.
+
+**16. Subject Examples:**  
+- **Mathematics:** [Before asking student to classify independently] "I'll give you a checklist: Step 1 — list all inputs. Step 2 — count arrows from each input. Step 3 — if any input has more than one arrow: not a function. Use the checklist." [P82 removes the checklist in the next iteration.]  
+- **Physics:** [Before asking student to draw free-body diagram] "I'll give you the axes — x is horizontal, y is vertical. You draw the force arrows." [P82 removes axes in next diagram.]  
+- **English:** [Before asking student to identify passive voice] "The passive formula is: [object of action] + [form of 'to be'] + [past participle]. Check each sentence against this template." [P82 removes template later.]
+
+---
+
+### P82 — FADING
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Systematically remove support that was previously provided, transferring responsibility to the student.
+
+**2. Cognitive Objective:**  
+Build independence: the student who can perform with support learns to perform without it through deliberate scaffold withdrawal.
+
+**3. When to Use:**  
+- After P81 (SCAFFOLDING) has been successfully used  
+- In each P10→P82→P10 cycle of Named Compound P12 (FADED WORKED EXAMPLE)
+
+**4. When NOT to Use:**  
+- Before the student has demonstrated success with the scaffold  
+- All at once — fading must be gradual (one scaffold element per iteration)
+
+**5. Student States Supported:**  
+S0, S1, S4 (primary — students transitioning from supported to independent)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `scaffold_to_remove`: which specific support element is being withdrawn  
+- `remaining_support`: what support remains after this fading step  
+- `fading_rationale`: "Last time I provided [X]. This time, you'll do [X] yourself."
+
+**8. Expected Student Response:**  
+Student successfully completes the task without the removed scaffold element.
+
+**9. Success Signal:**  
+Student performs the previously scaffolded component independently.
+
+**10. Failure Signal:**  
+Student cannot perform without the removed scaffold; performance degrades significantly.
+
+**11. Recovery:**  
+Restore the scaffold; establish the specific component that failed; address it directly before re-attempting fading.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but fading reveals the exact point at which independent performance breaks down.
+
+**13. Compatible Primitives:**  
+P81 (SCAFFOLDING) always precedes; P82 appears between P10 instances in Named Compound P12.
+
+**14. Incompatible Primitives:**  
+P91 (MASTERY VERIFICATION) immediately after a single P82 — mastery cannot be verified from one successfully faded task.
+
+**15. Composition Constraints:**  
+One scaffold element removed per fading step. Named Compound P12 uses P82 twice (P10→P82→P10→P82→P10). Full specification must name the specific scaffold element being removed.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Last time I gave you the checklist. This time: no checklist. You remember the three steps — apply them yourself."  
+- **Physics:** "Last time I drew the axes. This time, you choose your axes and draw them before placing the force arrows."  
+- **English:** "Last time you had the formula template. This time, identify the passive sentence without the template. Use the knowledge, not the reference."
+
+---
+
+### P83 — INTERLEAVING CONTROL
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Deliberately introduce a related concept into the current practice session to require discrimination between the two.
+
+**2. Cognitive Objective:**  
+Disrupt blocked practice and the illusion of mastery it creates — the student who can do concept A in a block of A-problems has not demonstrated that they can identify A-problems when they appear alongside B-problems.
+
+**3. When to Use:**  
+- After the student has demonstrated solid performance on the target concept in isolation  
+- When the concept is adjacent to another concept that students commonly confuse with it
+
+**4. When NOT to Use:**  
+- Before the target concept is established (interleaving requires something to interleave with)  
+- When the related concept has not been taught (students cannot discriminate what they haven't learned)
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary — students with basic concept mastery ready for discrimination training)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `target_concept`: the concept being practiced  
+- `interleaved_concept`: the related concept being introduced  
+- `discrimination_signal`: how the student should identify which concept applies in each case
+
+**8. Expected Student Response:**  
+Student correctly identifies which concept applies to each problem in the interleaved set.
+
+**9. Success Signal:**  
+Student's accuracy on interleaved problems matches accuracy on blocked problems; discrimination is reliable.
+
+**10. Failure Signal:**  
+Student accuracy drops significantly in interleaved practice; student cannot reliably identify which concept applies.
+
+**11. Recovery:**  
+Return to blocked practice for one concept; use P33 (DISCRIMINATION TRAINING) to sharpen the boundary; reintroduce interleaving at lower density.
+
+**12. Typical Misconceptions Addressed:**  
+Context-dependent schema activation (student can identify a function in a "function lesson" but not when the problem could be from several possible concept areas).
+
+**13. Compatible Primitives:**  
+P88 (RETRIEVAL PRACTICE) in Named Compound P57 (INTERLEAVED PRACTICE); P33 (DISCRIMINATION TRAINING) before to prepare the discrimination criterion.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+Named Compound P57 = P88 + P83. The interleaved concept must have been taught before interleaving is introduced.
+
+**16. Subject Examples:**  
+- **Mathematics:** "I'm going to give you 6 problems — some involve functions, some involve relations that are not functions. You must identify which is which for each one."  
+- **Physics:** "I'll give you 5 scenarios: some require Newton's First Law, some Newton's Second Law. Identify which law applies before solving."  
+- **English:** "Here are 8 sentences — some are passive, some are active, some are stative. Identify each one and justify."
+
+---
+
+### P84 — LOAD MANAGEMENT
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Partition a complex task into sequenced parts to keep working memory within capacity.
+
+**2. Cognitive Objective:**  
+Reduce extraneous cognitive load so that germane load (learning) can occur — the student cannot learn when working memory is completely occupied by task management.
+
+**3. When to Use:**  
+- When a task has more than 3 simultaneous demands  
+- When a student is failing on a multi-step task  
+- Before P23 (DECOMPOSITION) — load management sets up the decomposition
+
+**4. When NOT to Use:**  
+- For tasks within the student's current working memory capacity (unnecessary partitioning reduces the challenge)
+
+**5. Student States Supported:**  
+S0, S4 (primary — students with limited working memory capacity for the task); S9 (moderate — second-language processing adds cognitive load)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `task_components`: the full set of components in the task  
+- `partition_plan`: which components to address first, second, etc.  
+- `load_constraint`: the maximum number of simultaneous demands appropriate for this student
+
+**8. Expected Student Response:**  
+Student successfully completes the first partition; can then proceed to the second with the first established.
+
+**9. Success Signal:**  
+Student completes each partition successfully; the partitioned approach leads to eventual task completion.
+
+**10. Failure Signal:**  
+Student cannot complete even the first partition; the first partition is itself too complex.
+
+**11. Recovery:**  
+Reduce partition size further; return to prerequisite concepts if the first partition requires knowledge not yet in place.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but overwhelm prevents learning; load management enables the conditions where misconceptions can be addressed.
+
+**13. Compatible Primitives:**  
+P23 (DECOMPOSITION) — decomposition is load management's mechanism; P81 (SCAFFOLDING) often pairs.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+The partition plan must be sequenced by prerequisite dependency (what must be done first before the next part can be attempted).
+
+**16. Subject Examples:**  
+- **Mathematics:** "This composition problem has three parts. First — just apply g to x = 2. Don't think about f yet. Just g." [After success] "Good. Now apply f to the result you got. Don't look back at g."  
+- **Physics:** "Three forces acting. Let's handle one at a time. First — the gravitational force only. Magnitude and direction. Nothing else yet."  
+- **English:** "Three implied claims in this passage. Let's find them one at a time. Focus only on the first paragraph."
+
+---
+
+### P85 — PACING CONTROL
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Regulate the rate of information introduction based on student processing state rather than a fixed time schedule.
+
+**2. Cognitive Objective:**  
+Match the rate of new content introduction to the rate at which working memory can process and transfer each item — prevent accumulation of unprocessed information.
+
+**3. When to Use:**  
+- Throughout every session — pacing should be adaptive, not fixed  
+- When a student's response latency increases (processing is close to capacity)  
+- When moving between major protocol stages
+
+**4. When NOT to Use:**  
+- Cannot be "not used" — pacing is always active; the question is whether it is controlled explicitly or left to default
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `processing_signal`: student response latency, response quality, or explicit request for a pause  
+- `pacing_action`: slow (introduce next item only after processing is confirmed); steady (normal advance rate); fast (accelerate for S5 when processing is ahead of content)
+
+**8. Expected Student Response:**  
+Session advances at the rate where each item is processed before the next is introduced.
+
+**9. Success Signal:**  
+Student response quality remains stable as new items are introduced; no degradation in performance.
+
+**10. Failure Signal:**  
+Student response quality degrades as the session advances (new items are being introduced before prior ones are processed).
+
+**11. Recovery:**  
+Pause new content introduction; allow the student to process what has been introduced; return to the last successfully processed item and re-engage from there.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but overloaded students cannot process corrections, making misconceptions uncorrectable.
+
+**13. Compatible Primitives:**  
+P84 (LOAD MANAGEMENT) — pacing is load management over time; P55 (WAIT TIME) is a single-instance pacing event; P85 is the session-level version.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+P85 is a session-level primitive that runs alongside all others — it is a monitor and control, not a discrete step. Compose as a continuous regulation layer.
+
+**16. Subject Examples:**  
+- **Mathematics:** [After student gives correct but slow response] "Let's hold here for a moment. Make sure that classification is solid before we add the next variable."  
+- **Physics:** [After student gives rushed response with unnoticed error] "Slow down. Walk me through the force diagram step by step before we calculate anything."  
+- **English:** [S9 student processing in second language] "We're covering this at a pace that works for you. Tell me when you're ready for the next sentence."
+
+---
+
+### P86 — MODALITY SWITCHING
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Move between verbal, visual, kinesthetic, and symbolic modes of presentation.
+
+**2. Cognitive Objective:**  
+Build multiple representation nodes for the same concept — each switch encodes the concept in a different representation system, creating a richer network that is more robust to retrieval cues from any direction.
+
+**3. When to Use:**  
+- When a student is stuck in one modality (cannot grasp the symbolic but can describe the concrete)  
+- When moving between CPA stages (P25 ABSTRACTION LADDER in the process direction; P86 in the modality direction)  
+- After a representation has been unsuccessful — switch modality rather than repeat
+
+**4. When NOT to Use:**  
+- When the student is making progress in the current modality  
+- For S6 students who are stabilised in one modality — switching adds load
+
+**5. Student States Supported:**  
+S0, S1, S4, S9 (primary — students who benefit from multiple entry points); S5 (when one modality is a known gap)
+
+**6. CPA Stage Compatibility:**  
+C↔P↔A (P86 manages modality within and across CPA levels)
+
+**7. Inputs Required:**  
+- `current_modality`: the current representation mode (verbal, visual, symbolic, kinesthetic)  
+- `target_modality`: the mode to switch to  
+- `switch_rationale`: why this switch serves the student's current need
+
+**8. Expected Student Response:**  
+Student engages successfully with the target modality.
+
+**9. Success Signal:**  
+Student's comprehension or performance improves after the switch.
+
+**10. Failure Signal:**  
+Student is equally or more stuck in the new modality.
+
+**11. Recovery:**  
+Return to the modality where the student was most successful; add a bridge step connecting the two modalities.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but different modalities often reveal different misconceptions — a student who seems to understand verbally may reveal a misconception when asked to draw.
+
+**13. Compatible Primitives:**  
+P06, P07, P08 — the concrete/perceptual/abstract input primitives are the target-modality inputs that P86 switches between.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+The switch must be purposeful — switching modality as a random variation is not P86. The `switch_rationale` must be specified.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You're stuck on the symbolic definition. Let's switch: draw an arrow diagram for the same concept. Sometimes the visual makes the symbol click."  
+- **Physics:** "You understand the formula but not the mechanism. Let's switch: describe in words — no equations — what physically happens when you double the mass and keep force the same."  
+- **English:** "You understand the grammar rule but keep mis-identifying examples. Let's switch: instead of reading, I'll say a sentence aloud. Listen for the grammatical pattern in speech."
+
+---
