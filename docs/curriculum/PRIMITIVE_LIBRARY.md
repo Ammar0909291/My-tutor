@@ -2203,3 +2203,1372 @@ The inference must precede the definition. The definition is confirmation, not i
 - **English:** "Read this sentence: 'Her laconic response surprised everyone — she had usually spoken at length.' What does 'laconic' mean? What in the surrounding sentence tells you?"
 
 ---
+
+## CATEGORY D — SCHEMA REPAIR
+
+*Modify an incorrect existing mental model. The repair chain fires only when an incorrect schema is detected (via P41 or P64). Only fire for S2 (Misconception Carrier) and S7 (High Confidence Incorrect) student states. The canonical repair chain is P26→P27→P28→P29→P30→P31→P32.*
+
+---
+
+### P26 — SCHEMA ACTIVATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Surface the student's existing mental model before instruction so that repair can be targeted precisely.
+
+**2. Cognitive Objective:**  
+Make the incorrect schema explicit and available for examination — you cannot repair what you cannot see.
+
+**3. When to Use:**  
+- As the first step of the Schema Repair chain whenever a misconception has been detected  
+- Before any schema-targeting instruction — if you don't know what schema you're working with, you cannot target it
+
+**4. When NOT to Use:**  
+- When no prior schema exists (S0 on a genuinely new concept — no schema to activate)  
+- When the existing schema is known to be correct (no repair needed)
+
+**5. Student States Supported:**  
+S2, S7 (primary repair targets); S1 (moderate — may have a partially incorrect schema)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — schema activation can occur at any abstraction level
+
+**7. Inputs Required:**  
+- `activation_probe`: a question that prompts the student to articulate their understanding ("Before I explain anything — what do you think [concept] means?")
+
+**8. Expected Student Response:**  
+Student states their existing understanding — including the incorrect schema.
+
+**9. Success Signal:**  
+Student explicitly articulates a schema (correct or incorrect) that is now visible and available for the repair sequence.
+
+**10. Failure Signal:**  
+Student says "I don't know" without articulating anything; or student performs a meta-response ("I know I've heard of it") without stating a schema.
+
+**11. Recovery:**  
+Offer a completion frame: "Some people think [concept] means X — do you agree with that?" This surfaces agreement/disagreement without requiring independent schema recall.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — this is the diagnostic step that precedes misconception-specific repair.
+
+**13. Compatible Primitives:**  
+P27 (SCHEMA EXPOSURE) follows if the schema is implicit; P28 (COGNITIVE CONFLICT INDUCTION) follows if the schema is explicit and incorrect.
+
+**14. Incompatible Primitives:**  
+P31 (SCHEMA REPLACEMENT) before P26 — replacement without activation is information transmission that bounces off the incorrect schema without dislodging it.
+
+**15. Composition Constraints:**  
+Must be the first primitive in any Schema Repair chain. GR-4 (chain may only be entered after P41 or P64 returns a misconception signal) applies to the chain; P26 is the chain's entry point.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Before I say anything — in your own words, what makes something a function? Don't look it up. Just tell me what you currently think."  
+- **Physics:** "What do you think 'force' means? Not the textbook definition — what does it mean to you right now?"  
+- **English:** "What do you think 'passive voice' means? Tell me in your own words."
+
+---
+
+### P27 — SCHEMA EXPOSURE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Make a hidden or implicit incorrect schema fully visible to the student — students often hold unconscious models that operate below explicit awareness.
+
+**2. Cognitive Objective:**  
+Convert implicit knowledge to explicit knowledge so the student can compare their current model with the correct one.
+
+**3. When to Use:**  
+- When P26 reveals a partially stated or unclear schema  
+- When the student's errors indicate a schema that they cannot articulate on their own  
+- Between P26 and P28 when the schema needs to be crystallised before conflict can be induced
+
+**4. When NOT to Use:**  
+- When the student has already stated their schema clearly in P26 (skip directly to P28)  
+- When the schema has not yet been activated (P26 must fire first)
+
+**5. Student States Supported:**  
+S2, S7 (primary); S1 (moderate)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `inferred_schema`: the implicit schema inferred from the student's errors and P26 response  
+- `exposure_statement`: "What I'm hearing is that you think [inferred_schema]. Is that right?"
+
+**8. Expected Student Response:**  
+Student confirms or corrects the inferred schema; either way, a clear schema is now on the table.
+
+**9. Success Signal:**  
+Student confirms the inferred schema or provides a clearer version — the schema is now explicit and shared.
+
+**10. Failure Signal:**  
+Student denies any schema ("I don't really think that either"); student agrees passively without genuine recognition.
+
+**11. Recovery:**  
+Provide a concrete example of the student's schema in action: "You said X — let me show you what that would mean in practice. Is this what you meant?"
+
+**12. Typical Misconceptions Addressed:**  
+Any misconception that the student holds implicitly without being able to articulate it.
+
+**13. Compatible Primitives:**  
+P26 (SCHEMA ACTIVATION) before; P28 (COGNITIVE CONFLICT INDUCTION) after — once the schema is explicit, induce conflict with it.
+
+**14. Incompatible Primitives:**  
+P31 (SCHEMA REPLACEMENT) immediately after P27 — conflict has not yet been induced; the old schema will resist replacement.
+
+**15. Composition Constraints:**  
+P27 is optional in the repair chain — it fires only when P26 produces an unclear or implicit schema. Skip directly to P28 when P26 produces a clear, explicit schema.
+
+**16. Subject Examples:**  
+- **Mathematics:** "What I'm hearing is: you think a function can have multiple outputs for one input, as long as they're all listed. Is that what you believe?"  
+- **Physics:** "It sounds like your model says: more mass = more gravity-pulled downward force = faster fall. Is that what's going on in your thinking?"  
+- **English:** "I think I hear you saying: passive voice means the sentence is about something being done, not about someone doing it. Is that what you think the distinction is?"
+
+---
+
+### P28 — COGNITIVE CONFLICT INDUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Create a situation where the student's existing schema produces a demonstrably wrong prediction, creating experienced dissonance rather than declared error.
+
+**2. Cognitive Objective:**  
+Trigger schema-change motivation: the student must experience their existing model as inadequate before they will accept a replacement.
+
+**3. When to Use:**  
+- After P26 or P27 — the schema is active and explicit  
+- When the student has been told the correct answer multiple times but the schema persists  
+- GR-4: only after P41 or P64 has confirmed a misconception
+
+**4. When NOT to Use:**  
+- GR-5: never with S6 (Low Confidence) — conflict deepens anxiety; use P30 (BRIDGE CONSTRUCTION) instead  
+- When the incorrect schema is not yet explicit (P26/P27 must have fired)  
+- When the conflict scenario requires knowledge the student does not yet have
+
+**5. Student States Supported:**  
+S2 (primary); S7 (primary — especially important; high-confidence incorrect students require experiential disconfirmation)
+
+**6. CPA Stage Compatibility:**  
+C, P (conflict is most powerful at the concrete or perceptual level — abstract-level conflict can be dismissed as "a special case")
+
+**7. Inputs Required:**  
+- `conflict_scenario_slot`: a concrete or perceptual situation where the student's schema predicts outcome X but the actual outcome is Y  
+- `prediction_prompt`: "Given what you said, what should happen in this case?"
+
+**8. Expected Student Response:**  
+Student predicts based on their schema; then observes the actual outcome; experiences felt contradiction.
+
+**9. Success Signal:**  
+Student spontaneously says "but that doesn't make sense" or equivalent — the conflict is registered.
+
+**10. Failure Signal:**  
+Student explains away the conflict without revising the schema ("oh that's a special case"); student does not register the contradiction.
+
+**11. Recovery:**  
+Use a more dramatic conflict scenario; present 2–3 conflict cases in sequence to prevent each being explained as a special case; use P29 (CONFLICT RESOLUTION PAUSE) to ensure the student processes rather than dismisses.
+
+**12. Typical Misconceptions Addressed:**  
+This primitive initiates repair for any identified misconception (content-independent).
+
+**13. Compatible Primitives:**  
+P14 (PREDICTION) and P15 (OBSERVATION) are the mechanism of P28; P29 (CONFLICT RESOLUTION PAUSE) immediately after.
+
+**14. Incompatible Primitives:**  
+GR-5: P28 incompatible with S6. P49 (CONFIRMATION) immediately after — never confirm the incorrect schema while inducing conflict.
+
+**15. Composition Constraints:**  
+GR-4 (only fires after misconception signal); GR-5 (forbidden for S6). The conflict must be student-experienced, not teacher-stated. "You're wrong" is not P28. The scenario that makes the schema produce a visible wrong answer is P28.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You said any correspondence where every input is used can be a function. I'm going to show you a case where every input is used but it's definitely not a function. Predict: is this a function? [Show vending machine that gives 3 different items for button B3.] Now apply your rule."  
+- **Physics:** "You said heavier objects fall faster. I'm going to drop two objects — this 10 kg ball and this 1 kg ball — from the same height simultaneously. Predict: which one hits first? [Drop them.] What do you observe?"  
+- **English:** "You said passive voice means the subject isn't named. Here's a passive sentence where the subject IS named: 'The door was opened by the wind.' Apply your rule. Is this passive or not?"
+
+---
+
+### P29 — CONFLICT RESOLUTION PAUSE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+After inducing conflict, create deliberate silence and wait without resolving the conflict for the student.
+
+**2. Cognitive Objective:**  
+Allow the student to process cognitive dissonance — the resolution pause is itself a cognitive event. Skipping it forces premature resolution that cements a surface-level fix rather than genuine schema change.
+
+**3. When to Use:**  
+- Immediately after P28 (COGNITIVE CONFLICT INDUCTION) — always  
+- After any moment where the student has experienced a contradiction
+
+**4. When NOT to Use:**  
+- When the conflict has already been resolved by the student (no need to hold a pause that has already naturally concluded)
+
+**5. Student States Supported:**  
+S2, S7 (the students who have just experienced conflict)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — the pause is independent of abstraction level
+
+**7. Inputs Required:**  
+- `wait_duration`: minimum 10 seconds (longer than P55's 5-second minimum — conflict requires more processing time)  
+- `silence_signal`: no teacher speech, no follow-up question, no hint — deliberate silence
+
+**8. Expected Student Response:**  
+Student processes the conflict; may express confusion, ask a question, or begin revising their schema aloud.
+
+**9. Success Signal:**  
+Student initiates a question ("but then how does…") or begins revising their stated schema.
+
+**10. Failure Signal:**  
+Teacher breaks the silence prematurely; student goes passive (waits for teacher rather than processing).
+
+**11. Recovery:**  
+If the student goes passive, use P35 (OPEN QUESTION): "What are you thinking right now?" — this is not resolving the conflict, just re-engaging the student's active processing.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — this is a process primitive that allows the conflict (which targets specific misconceptions) to take effect.
+
+**13. Compatible Primitives:**  
+P28 (COGNITIVE CONFLICT INDUCTION) immediately before; P30 (BRIDGE CONSTRUCTION) after.
+
+**14. Incompatible Primitives:**  
+P49 (CONFIRMATION) or P50 (DISCONFIRMATION) during the pause — feedback during the pause terminates the processing.
+
+**15. Composition Constraints:**  
+Minimum duration: 10 seconds. P29 always follows P28 in the Schema Repair chain; skipping it is the most common primitive execution error.
+
+**16. Subject Examples:**  
+- **Mathematics:** [After P28] [Silence. Wait 10–15 seconds. No additional prompting. If the student speaks, respond only with "keep thinking."]  
+- **Physics:** [After demonstrating that both balls hit simultaneously] [Silence. Wait. Let the student process.]  
+- **English:** [After P28 conflict scenario] [Silence. Do not explain yet. Wait for the student to speak first.]
+
+---
+
+### P30 — BRIDGE CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Build an explicit conceptual bridge between the student's old (incorrect) schema and the correct one.
+
+**2. Cognitive Objective:**  
+Reduce the psychological cost of schema revision: not "your old idea was completely wrong" but "your old idea was partially right for a specific class of cases — here is what needs to be extended."
+
+**3. When to Use:**  
+- After P29 (CONFLICT RESOLUTION PAUSE) — the student has processed the conflict and is ready to receive the bridge  
+- For S6 (Low Confidence) students where P28 is contraindicated — bridge directly from the existing schema without inducing conflict first
+
+**4. When NOT to Use:**  
+- Before P28 for S2 or S7 students — bridging without conflict allows the old schema to coexist with the new one rather than being replaced  
+- When the old schema has no salvageable elements that can be bridged
+
+**5. Student States Supported:**  
+S2, S6, S7 (primary)
+
+**6. CPA Stage Compatibility:**  
+C, P (the bridge is most effective when stated in concrete or perceptual terms, not abstract)
+
+**7. Inputs Required:**  
+- `valid_domain_slot`: the specific class of cases where the old schema WAS correct  
+- `extension_statement`: what needs to change to handle the cases where the old schema fails
+
+**8. Expected Student Response:**  
+Student accepts the bridge; can state what was right about their old model and what needed to change.
+
+**9. Success Signal:**  
+Student articulates: "So my old idea worked for [cases] but not for [new cases] because [reason]."
+
+**10. Failure Signal:**  
+Student rejects the bridge ("but my old idea still seems right"); student accepts verbally but reverts to old schema on next application.
+
+**11. Recovery:**  
+Add another conflict example (P28) if S2/S7; for S6, make the bridge more gradual — smaller extension step.
+
+**12. Typical Misconceptions Addressed:**  
+The bridge is the first constructive step of any misconception repair — it works with any misconception once conflict has been induced.
+
+**13. Compatible Primitives:**  
+P29 (CONFLICT RESOLUTION PAUSE) before; P31 (SCHEMA REPLACEMENT) after.
+
+**14. Incompatible Primitives:**  
+P68 (MASTERY SELF-DECLARATION) after P30 — the schema has been bridged but not yet replaced or consolidated.
+
+**15. Composition Constraints:**  
+P30 must follow either P29 (for S2/S7) or P26 (directly, for S6). It precedes P31 in all repair chains.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Your rule — 'every input must be used' — is actually a property of some functions (surjective ones). You had a real property, just not the defining property. The defining property is about the inputs having exactly one output each, regardless of whether all outputs are used."  
+- **Physics:** "Your intuition — 'heavier objects are pulled harder by gravity' — is correct. More mass, more gravitational force. The reason they still fall at the same rate is that more mass also makes them harder to accelerate. These two effects cancel each other exactly."  
+- **English:** "Your definition — 'passive voice is when nothing is doing something' — captures a common USE of passive voice but not its grammar. The grammatical definition is about structure: the object of the action becomes the grammatical subject."
+
+---
+
+### P31 — SCHEMA REPLACEMENT
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Explicitly install a new schema in place of the old one — name both the old model and the new model explicitly.
+
+**2. Cognitive Objective:**  
+Produce a conscious, explicit transition: the student knows WHAT changed, not just that something changed.
+
+**3. When to Use:**  
+- After P30 (BRIDGE CONSTRUCTION) — the bridge has been built; now explicitly install the replacement  
+- When the new schema needs to be crystallised into a named, retrievable form
+
+**4. When NOT to Use:**  
+- Before P30 — replacement without bridging produces two competing schemas, not one correct schema  
+- When the schema is being extended (not replaced) — use P30 alone or P30 followed by P32
+
+**5. Student States Supported:**  
+S2, S7 (primary)
+
+**6. CPA Stage Compatibility:**  
+P, A (replacement is usually stated at the perceptual or abstract level)
+
+**7. Inputs Required:**  
+- `old_schema_label`: name for the old model ("the 'all-inputs-used' rule")  
+- `new_schema_statement`: the correct schema stated explicitly  
+- `replacement_marker`: explicit statement that the new schema replaces the old ("From this point forward, when you think [concept], think [new schema], not [old schema]")
+
+**8. Expected Student Response:**  
+Student can state the new schema; can articulate what has changed.
+
+**9. Success Signal:**  
+Student states the new schema in their own words; names what was wrong about the old one.
+
+**10. Failure Signal:**  
+Student states the new schema but retains the old language ("so it's like [old schema] but also…"); student cannot name what changed.
+
+**11. Recovery:**  
+Use P38 (REFORMULATION PROMPT) — "Say that again but without using the words from your old rule."
+
+**12. Typical Misconceptions Addressed:**  
+This is the core replacement step for any identified misconception.
+
+**13. Compatible Primitives:**  
+P30 (BRIDGE CONSTRUCTION) before; P32 (SCHEMA CONSOLIDATION) immediately after — the new schema is fragile.
+
+**14. Incompatible Primitives:**  
+P68 (MASTERY SELF-DECLARATION) immediately after P31 — the new schema needs consolidation before mastery can be claimed.
+
+**15. Composition Constraints:**  
+Must follow P30 in the repair chain. The `replacement_marker` is mandatory — the explicit naming of the transition is what makes this a cognitive event rather than just information transfer.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Replace 'every input must be used' with: 'every input must map to exactly ONE output.' That's the whole rule. One input, exactly one output. Hold that."  
+- **Physics:** "Replace 'heavier means faster' with: 'net force determines acceleration, and gravity + mass cancel exactly for free fall.' Heavier isn't faster — that model is retired."  
+- **English:** "Replace 'passive means agentless' with: 'passive means the grammatical subject is the receiver of the action, regardless of whether the agent is named.' That is the rule."
+
+---
+
+### P32 — SCHEMA CONSOLIDATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Reinforce the new schema with 2–4 confirming examples immediately after replacement.
+
+**2. Cognitive Objective:**  
+Stabilise the new schema before the session ends — the schema installed in P31 is fragile and will revert to the prior incorrect schema without immediate consolidation.
+
+**3. When to Use:**  
+- Immediately after P31 (SCHEMA REPLACEMENT) — always  
+- Before the session ends whenever a schema has been replaced  
+- When a student's new schema is correct but not yet automatic
+
+**4. When NOT to Use:**  
+- Before P31 — consolidating without first replacing installs the wrong schema more firmly
+
+**5. Student States Supported:**  
+S2, S7 (primarily — post-repair consolidation)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — confirmation examples should span at least two levels to ensure the schema is generalized
+
+**7. Inputs Required:**  
+- `consolidation_examples`: 2–4 new instances where the new schema applies correctly  
+- `application_question`: "Apply your new rule to each of these. [instance 1]. [instance 2]. [instance 3]."
+
+**8. Expected Student Response:**  
+Student correctly applies the new schema to all consolidation instances.
+
+**9. Success Signal:**  
+All consolidation instances classified correctly using the new schema; student can explain each using new schema language.
+
+**10. Failure Signal:**  
+Student applies old schema language to the consolidation instances; mixed results (some correct, some reverted).
+
+**11. Recovery:**  
+Add more consolidation instances; use P33 (DISCRIMINATION TRAINING) to sharpen the boundary between old and new schema.
+
+**12. Typical Misconceptions Addressed:**  
+Schema fragility: the newly installed schema is consolidated against immediate reversion.
+
+**13. Compatible Primitives:**  
+P31 (SCHEMA REPLACEMENT) immediately before; P33 (DISCRIMINATION TRAINING) after to sharpen boundaries.
+
+**14. Incompatible Primitives:**  
+P28 (COGNITIVE CONFLICT INDUCTION) during consolidation — inducing new conflict while consolidating a fragile schema destabilises the replacement.
+
+**15. Composition Constraints:**  
+Minimum 2 confirming examples; maximum cognitive load is high post-replacement, so consolidation examples should be simpler than the conflict scenario.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Apply your new rule to these three: [mapping where one input maps to nothing — not a function, no output]; [mapping where three inputs all go to the same output — IS a function, each has one]; [mapping where one input maps to two outputs — NOT a function]. Apply the rule you just stated."  
+- **Physics:** "Three free-fall scenarios: [100 kg object]; [1 g feather in vacuum]; [lead ball vs. paper ball in air]. Apply your new understanding: what determines fall rate?"  
+- **English:** "Three sentences. For each: is it passive? State your reason using the new definition — not the old one." [Show: 'The glass was broken.'; 'She broke the glass.'; 'The glass was broken by her.']
+
+---
+
+### P33 — DISCRIMINATION TRAINING
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Situational
+
+**1. Purpose:**  
+Explicitly distinguish the newly installed schema from the old incorrect one AND from adjacent concepts that might be confused with it.
+
+**2. Cognitive Objective:**  
+Sharpen the concept's boundaries by naming and distinguishing common sources of confusion — preventing the repaired schema from being confused with related but distinct concepts.
+
+**3. When to Use:**  
+- After P32 (SCHEMA CONSOLIDATION) — the schema is stable; now sharpen its boundaries  
+- Whenever two adjacent concepts are systematically confused (function vs. injection; force vs. pressure; passive vs. stative)
+
+**4. When NOT to Use:**  
+- Before P31/P32 — discrimination requires a stable new schema to discriminate from  
+- When there are no adjacent concepts that are commonly confused with the target
+
+**5. Student States Supported:**  
+S2, S7 (post-repair); S3 (latent schema needing boundary sharpening); S5 (fine-grained distinctions)
+
+**6. CPA Stage Compatibility:**  
+P, A (discrimination is usually at perceptual or abstract level)
+
+**7. Inputs Required:**  
+- `target_schema`: the correct schema just installed  
+- `confusion_candidates`: the old schema + any adjacent concepts commonly confused with the target  
+- `discrimination_question`: "What makes [concept A] different from [concept B]? Where exactly is the line?"
+
+**8. Expected Student Response:**  
+Student names the specific criterion that separates the target from each confusion candidate.
+
+**9. Success Signal:**  
+Student can state the distinguishing criterion for each confusion candidate; can generate an instance that is in the target but not the confusion candidate and vice versa.
+
+**10. Failure Signal:**  
+Student cannot find any distinction ("they seem the same to me"); student applies the wrong criterion.
+
+**11. Recovery:**  
+Use P17 (CONTRAST) with a minimal pair between target and each confusion candidate — return to contrast as the discrimination mechanism.
+
+**12. Typical Misconceptions Addressed:**  
+Adjacent-concept conflation (function/injection; mass/weight; subject/topic; passive/stative).
+
+**13. Compatible Primitives:**  
+P32 (SCHEMA CONSOLIDATION) before; P17 (CONTRAST) can be embedded within P33 for each confusion pair.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+Each confusion candidate requires its own minimal pair (P17-style) to separate. Do not attempt to discriminate more than 2 confusion candidates in a single Teaching Action.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Now: what distinguishes a function from an injective function? Draw an arrow diagram that is a function but NOT injective. Where is the line?"  
+- **Physics:** "Distinguish force from pressure — they're often confused. What is the precise difference? Give me a situation where pressure is high but force is low."  
+- **English:** "Distinguish passive voice from stative voice: 'The wall was painted' (passive — someone painted it) vs. 'The wall is blue' (stative — description, not action). State the criterion that separates them."
+
+---
+
+## CATEGORY E — ELICITATION
+
+*Drive student cognitive production rather than reception. Every E-category primitive requires the student to generate, construct, or produce output — not simply receive and absorb. Production is the highest-encoding mode. GR-2 applies to all E-category primitives: P55 (WAIT TIME) must follow every elicitation.*
+
+---
+
+### P34 — CLOSED QUESTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Very High
+
+**1. Purpose:**  
+Ask a question with one correct answer to test specific recall or application.
+
+**2. Cognitive Objective:**  
+Verify that a specific fact, criterion, or procedure step has been stored accurately and can be retrieved on demand.
+
+**3. When to Use:**  
+- When a specific, unambiguous answer is the target  
+- As a low-stakes retrieval check mid-session  
+- To confirm that a prerequisite is in place before advancing
+
+**4. When NOT to Use:**  
+- Immediately after P95 (INTERPRETIVE FRAME) — closed questions contradict the multi-interpretation frame  
+- As the primary elicitation for schema testing — P35 (OPEN QUESTION) is more revealing  
+- When the answer depends on the student's reasoning process, not just the correct answer
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `question_slot`: the specific question with one correct answer  
+- `correct_answer`: the expected response (for comparison)
+
+**8. Expected Student Response:**  
+Student states the correct answer; ideally can also state why.
+
+**9. Success Signal:**  
+Correct answer stated.
+
+**10. Failure Signal:**  
+Incorrect answer; or correct answer by guessing (verify with P36 PROBING QUESTION: "why?").
+
+**11. Recovery:**  
+For factual recall failure: P56 (SPACED RETRIEVAL) indicates this concept needs re-encounter; for application failure: P52 (TARGETED REDIRECT) to the missed criterion.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but incorrect answers reveal which facts are not stored or are stored incorrectly.
+
+**13. Compatible Primitives:**  
+GR-2: P55 (WAIT TIME) must follow immediately; P36 (PROBING QUESTION) after a correct answer to verify reasoning.
+
+**14. Incompatible Primitives:**  
+P95 (INTERPRETIVE FRAME) immediately before — contradicts the single-answer form.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows); GR-9 (closed questions in assessment mode require session context before firing). Never use P34 as the sole elicitation — pair with P36 to verify reasoning.
+
+**16. Subject Examples:**  
+- **Mathematics:** "What is the definition of a function? One sentence."  
+- **Physics:** "What is Newton's Second Law? State it as an equation."  
+- **English:** "What is the grammatical structure of a passive sentence? State it."
+
+---
+
+### P35 — OPEN QUESTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Very High
+
+**1. Purpose:**  
+Ask a question with multiple valid responses to surface student reasoning rather than just recall.
+
+**2. Cognitive Objective:**  
+Reveal the student's schema — an open question shows HOW the student is thinking, not just WHAT they know.
+
+**3. When to Use:**  
+- When understanding the student's reasoning process is more important than confirming a specific fact  
+- At the end of a conflict-resolution pause (P29) to re-engage processing  
+- When exploring the depth or structure of a schema
+
+**4. When NOT to Use:**  
+- When a specific, unambiguous answer is the target (use P34)  
+- As the first primitive in a sequence with S6 (Low Confidence) — open questions feel threatening when confidence is low; precede with P54 (PRODUCTIVE STRUGGLE PERMISSION)
+
+**5. Student States Supported:**  
+S0–S9 (universal; calibrate to confidence level)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `open_question_slot`: a question that accepts multiple valid responses  
+- `reasoning_invitation`: optional — "Tell me your thinking, not just the answer."
+
+**8. Expected Student Response:**  
+Student produces a response AND some reasoning behind it.
+
+**9. Success Signal:**  
+Student response reveals schema structure (correct or incorrect); student provides reasoning.
+
+**10. Failure Signal:**  
+Student says "I don't know" without further elaboration; student provides only a one-word answer with no reasoning.
+
+**11. Recovery:**  
+Use P54 (PRODUCTIVE STRUGGLE PERMISSION) to lower stakes; convert to a partially scaffolded version ("some people say X — what do you think of that?").
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but open questions surface misconceptions for targeting.
+
+**13. Compatible Primitives:**  
+GR-2: P55 (WAIT TIME) must follow; P36 (PROBING QUESTION) after to deepen the response; P73 (GENUINE INTEREST SIGNAL) when the response is interesting.
+
+**14. Incompatible Primitives:**  
+P34 (CLOSED QUESTION) immediately after an open question on the same topic — the closed question retroactively constrains the open question's answer space.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Open questions must be genuinely open — teacher must have no single expected answer in mind.
+
+**16. Subject Examples:**  
+- **Mathematics:** "What makes the function concept so important — why does it matter that one input gives exactly one output?"  
+- **Physics:** "In your own words: why does a heavier object not fall faster than a lighter one?"  
+- **English:** "What does this poem seem to be about — not the surface events, but the underlying concern?"
+
+---
+
+### P36 — PROBING QUESTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Ask a follow-up question that deepens a specific part of a student's response — not a new topic, but a cut deeper into the same topic.
+
+**2. Cognitive Objective:**  
+Force elaboration: surface-level correct answers often mask shallow encoding; probing reveals whether the student has genuine understanding or pattern-matching competence.
+
+**3. When to Use:**  
+- After any student response that is correct but brief  
+- When a student's reasoning seems incomplete  
+- After P34 or P35 to verify the reasoning behind a correct answer
+
+**4. When NOT to Use:**  
+- When the student has already elaborated fully  
+- Immediately after a P50 (DISCONFIRMATION) — probing a just-disconfirmed response before redirect is confusing
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `response_excerpt`: the specific part of the student's response to probe  
+- `probing_question`: "Why?" / "What made you say that?" / "Can you give an example of that?" / "What would happen if [X changed]?"
+
+**8. Expected Student Response:**  
+Student elaborates on the specific element probed; deepens the reasoning.
+
+**9. Success Signal:**  
+Student elaboration reveals sound underlying reasoning OR reveals a specific gap that can now be targeted.
+
+**10. Failure Signal:**  
+Student cannot elaborate ("I just know it"); student restates the original response without adding depth.
+
+**11. Recovery:**  
+Provide a partial answer as a starting point ("some people would say it's because — does that match your thinking?"); use P38 (REFORMULATION PROMPT) to force a different representation.
+
+**12. Typical Misconceptions Addressed:**  
+Hollow correctness (student states the right answer for the wrong reason — detected by probing).
+
+**13. Compatible Primitives:**  
+P34 or P35 before; P53 (ELABORATION REQUEST) is a close relative — when the response is correct, use P53 rather than P36.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities; P36 should not be used so frequently it feels interrogative rather than curious.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows the probing question, not the original question — the probe is an elicitation and requires its own wait time).
+
+**16. Subject Examples:**  
+- **Mathematics:** [After student says "it's a function"] "Why? What specific feature makes it a function?"  
+- **Physics:** [After student says "acceleration increases"] "Why does it increase? What is causing the change?"  
+- **English:** [After student identifies implied claim] "What in the sentence specifically led you to that inference? Point to the word or phrase."
+
+---
+
+### P37 — COUNTEREXAMPLE QUESTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Ask the student to find a case where their stated rule does not work.
+
+**2. Cognitive Objective:**  
+Force the student to test the boundary of their own generalisation — the most efficient technique for revealing over-generalisation or under-generalisation.
+
+**3. When to Use:**  
+- After P21 (GENERALISATION) — the student has stated a rule; now test it  
+- When a student's rule seems correct but its boundaries are unclear  
+- When P22 (SPECIALISATION) has revealed an over-generalised rule
+
+**4. When NOT to Use:**  
+- When the student's schema is already known to be incorrect (P28 is more effective at that stage)  
+- When the rule has no counterexamples (the rule is correct as stated — do not manufacture false counterexamples)
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S0 with significant scaffolding (counterexample generation is cognitively demanding)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `student_rule_statement`: the rule the student has stated  
+- `counterexample_question`: "Can you think of a case where your rule doesn't work? Try to break it."
+
+**8. Expected Student Response:**  
+Student produces a counterexample to their own rule; or confirms the rule holds by failing to find a counterexample.
+
+**9. Success Signal:**  
+Student finds a genuine counterexample and recognises it as a boundary case for their rule.
+
+**10. Failure Signal:**  
+Student cannot produce any candidate counterexample; student produces a non-counterexample and calls it one.
+
+**11. Recovery:**  
+Provide a hint domain ("what about cases where [specific feature] is different?"); scaffold the counterexample generation with a partial example.
+
+**12. Typical Misconceptions Addressed:**  
+Over-generalised schemas (student's rule includes non-examples); under-generalised schemas (student's rule excludes valid examples — revealed when the student cannot find counterexamples that others would find).
+
+**13. Compatible Primitives:**  
+P21 (GENERALISATION) before; P28 (COGNITIVE CONFLICT INDUCTION) if the student's rule IS wrong and a counterexample has been found.
+
+**14. Incompatible Primitives:**  
+P32 (SCHEMA CONSOLIDATION) before counterexample testing — do not consolidate before the rule's boundaries are tested.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The student must have stated a generalisation before P37 can be applied.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You said every formula defines a function. Can you think of a formula that does NOT define a function? Try to break your rule."  
+- **Physics:** "You said larger net force always means faster movement. Can you think of a case where a large net force does not produce fast movement?"  
+- **English:** "You said you can always identify passive voice by looking for 'was' or 'is'. Can you think of a sentence that has 'was' in it but is NOT passive?"
+
+---
+
+### P38 — REFORMULATION PROMPT
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Ask the student to express the same concept in a different way, without using specific vocabulary from their previous statement.
+
+**2. Cognitive Objective:**  
+Force deeper encoding by requiring multiple representations — a student who truly understands can express it multiple ways; a student who has memorised can only retrieve the single stored form.
+
+**3. When to Use:**  
+- After a student has given a correct but formulaic answer  
+- When a student is over-relying on specific vocabulary without demonstrating comprehension  
+- After P31 (SCHEMA REPLACEMENT) — verify the new schema can be expressed independently of its stated form
+
+**4. When NOT to Use:**  
+- After an incorrect answer (reformulate the correct answer, not a wrong one)  
+- When the student has already demonstrated understanding through multiple representations
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S0 with scaffolding
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `student_statement`: the statement to be reformulated  
+- `excluded_terms`: the specific vocabulary the student must not use  
+- `reformulation_prompt`: "Can you say that again without using the word [X]? Try a different way to express the same idea."
+
+**8. Expected Student Response:**  
+Student produces a reformulation using different vocabulary that captures the same meaning.
+
+**9. Success Signal:**  
+Reformulation is semantically equivalent to the original but uses different language — demonstrates flexible access to the concept.
+
+**10. Failure Signal:**  
+Student cannot reformulate; student substitutes a synonym for the excluded term without actually reformulating.
+
+**11. Recovery:**  
+Provide a starting frame ("think about what the concept does, rather than what it is called") or switch to P47 (DIAGRAM CONSTRUCTION) — a visual reformulation.
+
+**12. Typical Misconceptions Addressed:**  
+Verbal memorisation without schema (the student has stored a definition string, not a schema).
+
+**13. Compatible Primitives:**  
+P34 or P35 before; P47 (DIAGRAM CONSTRUCTION) as an alternative when verbal reformulation fails.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The excluded terms must be specific — "say it differently" is not a valid P38 prompt.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You said 'each input maps to exactly one output.' Say the same thing without using the words 'input', 'output', or 'maps.'"  
+- **Physics:** "You said F = ma. Express the same relationship as a sentence with no equations and no variable names."  
+- **English:** "You said 'passive voice is when the subject receives the action.' Say the same thing without using the word 'passive' or 'action'."
+
+---
+
+### P39 — TRANSFER PROMPT
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Ask the student to apply the current concept in a context they have not yet seen it applied in.
+
+**2. Cognitive Objective:**  
+Initiate transfer before the student would naturally attempt it — builds the concept as a tool for new contexts rather than a fact associated with the teaching context.
+
+**3. When to Use:**  
+- After P22 (SPECIALISATION) has confirmed operational understanding  
+- When cross-subject or cross-domain application is a learning goal  
+- Toward the end of a Teaching Action sequence, before P87 (TRANSFER BRIDGING)
+
+**4. When NOT to Use:**  
+- Before the student has demonstrated the concept in its original context  
+- For S6 (Low Confidence) students before confidence has been established  
+- When the transfer domain requires significant new knowledge not yet covered
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S8 (adult learners benefit from cross-domain transfer)
+
+**6. CPA Stage Compatibility:**  
+P, A (transfer is usually at perceptual or abstract level)
+
+**7. Inputs Required:**  
+- `transfer_domain_slot`: a different context where the concept applies  
+- `transfer_question`: "Where else would this apply? What does [concept] look like in [domain]?"
+
+**8. Expected Student Response:**  
+Student identifies a valid application of the concept in the new domain.
+
+**9. Success Signal:**  
+Student identifies a structurally valid application and can explain why the concept applies there.
+
+**10. Failure Signal:**  
+Student identifies a superficially similar application that is structurally different; student cannot identify any transfer.
+
+**11. Recovery:**  
+Provide the transfer domain and ask the student to identify HOW the concept applies within it (constrained transfer rather than open discovery).
+
+**12. Typical Misconceptions Addressed:**  
+Context-boundedness (student believes the concept is specific to the teaching context and does not generalise).
+
+**13. Compatible Primitives:**  
+P76 (TRANSFER PROBE) in assessment mode is the formal version; P87 (TRANSFER BRIDGING) lays the connection that P39 tests.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Transfer prompts should only fire after P22 confirms operational mastery in the original context.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Functions appear in programming. A function in Python takes inputs and returns outputs. How does the mathematical definition of function map to a programming function? Where does 'exactly one output' show up?"  
+- **Physics:** "Newton's Second Law governs more than falling objects. Where does F = ma appear in the design of an elevator? Walk me through it."  
+- **English:** "You've identified passive voice in academic writing. Does passive voice appear in advertising? What purpose would it serve in that context?"
+
+---
+
+### P40 — METACOGNITIVE PROMPT
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Prompt the student to reflect on their own confidence, certainty, or reasoning process.
+
+**2. Cognitive Objective:**  
+Initiate self-monitoring: the student evaluates their own understanding rather than only producing responses to teacher evaluation.
+
+**3. When to Use:**  
+- Mid-session, after a student has produced a substantive response  
+- When a student seems uncertain but has not expressed it  
+- Before advancing to a harder concept — check that the foundation is solid by the student's own assessment
+
+**4. When NOT to Use:**  
+- When a student is in a genuine panic state (S6, acute anxiety) — metacognitive demand adds load  
+- As a substitute for actual testing (P74–P80 are the formal assessment mechanism)
+
+**5. Student States Supported:**  
+S1, S3, S5, S8 (primary); S0 (with simplification); S6 (cautiously)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `metacognitive_question`: "How confident are you in that answer?" / "What would you need to know to be more certain?" / "What are you still unsure about?"
+
+**8. Expected Student Response:**  
+Student rates or describes their confidence level AND articulates what they are uncertain about.
+
+**9. Success Signal:**  
+Student accurately identifies their own uncertainty (calibrated self-assessment).
+
+**10. Failure Signal:**  
+Student claims full confidence when errors are present; or student claims no confidence when responses are correct (both are calibration failures, detected by P64).
+
+**11. Recovery:**  
+Use P64 (CONFIDENCE CALIBRATION) to compare stated confidence with actual performance; show the student the gap between the two.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but P40 surfaces the gap between felt certainty and actual correctness.
+
+**13. Compatible Primitives:**  
+P64 (CONFIDENCE CALIBRATION) follows when the self-assessment needs to be compared to actual performance; P63 (SELF-MONITORING TRIGGER) is a simpler version.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). P40 produces data for P64; the two often fire in sequence.
+
+**16. Subject Examples:**  
+- **Mathematics:** "How confident are you that you could classify a new function you've never seen before? What's your uncertainty about?"  
+- **Physics:** "What part of the force-diagram setup are you least certain about? What would you need to feel solid?"  
+- **English:** "How confident are you that you could identify an implied claim in a passage you've never read? What's still unclear?"
+
+---
+
+### P41 — DIAGNOSTIC QUESTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Ask a question designed specifically to reveal the presence or absence of a particular misconception.
+
+**2. Cognitive Objective:**  
+Precision diagnosis: the question is crafted so that only a specific wrong model would produce a specific wrong answer — enabling targeted repair rather than general remediation.
+
+**3. When to Use:**  
+- When a specific misconception is suspected (from prior session data or typical error patterns)  
+- Before entering the Schema Repair chain (GR-4 requires P41 or P64 to confirm a misconception before P26 fires)  
+- As a session-opening diagnostic
+
+**4. When NOT to Use:**  
+- As a substitute for P34 (CLOSED QUESTION) when no specific misconception is suspected  
+- When the question would also be answered incorrectly by students without the target misconception (the question must be discriminating)
+
+**5. Student States Supported:**  
+S2 (primary diagnostic target); S7 (primary); S1 (screening)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — but C-level diagnostic questions are often most revealing (concrete scenarios surface implicit misconceptions better than abstract ones)
+
+**7. Inputs Required:**  
+- `target_misconception`: the specific misconception being diagnosed  
+- `diagnostic_scenario`: a concrete scenario that the target misconception would misclassify  
+- `diagnostic_question`: the question that, if answered incorrectly in the expected way, confirms the misconception
+
+**8. Expected Student Response:**  
+Either the schema-correct response (misconception absent) or the characteristic wrong response (misconception present).
+
+**9. Success Signal:**  
+If the student answers correctly: no misconception signal; continue. If the student answers with the characteristic wrong answer: misconception confirmed; enter Schema Repair chain (GR-4 satisfied).
+
+**10. Failure Signal:**  
+Student answers incorrectly but NOT with the characteristic wrong answer — unknown error type; switch to P35 (OPEN QUESTION) to understand the actual schema before targeting.
+
+**11. Recovery:**  
+If the diagnostic is inconclusive, use P26 (SCHEMA ACTIVATION) to surface the schema directly and examine it.
+
+**12. Typical Misconceptions Addressed:**  
+This primitive is the trigger mechanism for all misconception-specific repair; content of the misconception depends on the Knowledge Graph's misconception catalogue for the current concept.
+
+**13. Compatible Primitives:**  
+GR-4: P26 (SCHEMA ACTIVATION) enters the repair chain if P41 confirms misconception. P64 (CONFIDENCE CALIBRATION) after — compare confidence to the diagnostic result.
+
+**14. Incompatible Primitives:**  
+P31 (SCHEMA REPLACEMENT) before P41 — do not attempt replacement before diagnosis.
+
+**15. Composition Constraints:**  
+GR-4 requires P41 (or P64) to confirm before Schema Repair chain begins. P41 must be designed with one specific misconception as the target — general probing questions are not valid P41 instances.
+
+**16. Subject Examples:**  
+- **Mathematics:** [Targeting "all inputs must be used" misconception] "Is this a function: the rule that assigns to each even number its double, but leaves all odd numbers unassigned?" [Expected wrong answer from the misconception: "No — not all inputs are covered."]  
+- **Physics:** [Targeting "heavier falls faster" misconception] "A 5 kg ball and a 10 kg ball are dropped simultaneously from the same height in a vacuum. Which hits first?" [Expected wrong answer: "The 10 kg ball."]  
+- **English:** [Targeting "passive = agentless" misconception] "Is 'The glass was broken by the wind' in passive voice?" [Expected wrong answer: "No — we know the agent (the wind)."]
+
+---
+
+### P42 — EXAMPLE GENERATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Direct the student to generate their own example of the concept — not recall a given example, but produce a new one.
+
+**2. Cognitive Objective:**  
+Test that the concept is operational (can be used to produce new instances) rather than just recognisable (can be identified among presented instances).
+
+**3. When to Use:**  
+- After P22 (SPECIALISATION) — the student has applied the rule to given cases; now produce new ones  
+- After P31 (SCHEMA REPLACEMENT) — test that the new schema can generate examples  
+- As a higher-level check than P18 (CLASSIFICATION)
+
+**4. When NOT to Use:**  
+- Before P22 — generation requires a schema, not just pattern-recognition  
+- For S0 students on entirely new concepts (generation without schema produces guessing)
+
+**5. Student States Supported:**  
+S1, S2, S3, S5 (primary); S0 (only after schema is established); S8, S9 (generation is especially effective for language learners)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — students can generate examples at any level
+
+**7. Inputs Required:**  
+- `concept_slot`: the concept for which an example must be generated  
+- `generation_constraints`: any constraints on the example ("it must not involve numbers" / "it must be from physics, not mathematics")  
+- `generation_question`: "Give me your own example of [concept] — one I haven't shown you."
+
+**8. Expected Student Response:**  
+Student produces a valid example that satisfies the concept's defining criterion.
+
+**9. Success Signal:**  
+The generated example is valid AND the student can confirm it is valid by applying the criterion.
+
+**10. Failure Signal:**  
+Student produces an invalid example (confuses with an adjacent concept); student reproduces a previously shown example rather than generating a new one.
+
+**11. Recovery:**  
+For invalid example: use it as a contrast (P17) to the kind of example needed; for reproduction: require a constraint that makes reproduction impossible.
+
+**12. Typical Misconceptions Addressed:**  
+Hollow recall (student can state and recognise the concept but not generate novel instances).
+
+**13. Compatible Primitives:**  
+P22 (SPECIALISATION) before; P43 (NON-EXAMPLE GENERATION) paired — generate both an example and a non-example in sequence.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Generation constraints must be explicit; unconstrained generation often produces trivial reproductions.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Give me your own example of a function — not one I've shown you. It doesn't have to involve numbers. Use anything."  
+- **Physics:** "Give me a situation from everyday life where Newton's Second Law applies. Make it one we haven't discussed."  
+- **English:** "Write a passive sentence about something that happened in this room today — not one of my examples."
+
+---
+
+### P43 — NON-EXAMPLE GENERATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Direct the student to generate a counterexample — an instance that does NOT belong to the concept category.
+
+**2. Cognitive Objective:**  
+Test boundary understanding: the student must know not just what the concept is but what it is not — where the boundary falls.
+
+**3. When to Use:**  
+- Paired with P42 (EXAMPLE GENERATION) — generating both types tests both sides of the concept boundary  
+- After P37 (COUNTEREXAMPLE QUESTION) fails to find a student-generated counterexample  
+- When the concept has a boundary that is commonly violated
+
+**4. When NOT to Use:**  
+- Before P42 — first generate examples (understanding the concept); then generate non-examples (understanding its limits)  
+- When no natural non-examples exist for the concept
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S2 and S7 (non-example generation surfaces the boundaries the misconception violates)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `concept_slot`: the concept whose boundary is being tested  
+- `non_example_question`: "Give me something that is ALMOST [concept] but is not — something that looks like it but fails the criterion."
+
+**8. Expected Student Response:**  
+Student produces a valid non-example — close enough to be interesting, but failing on the critical criterion.
+
+**9. Success Signal:**  
+The generated non-example is genuinely close (not trivially unrelated) AND fails on the correct criterion.
+
+**10. Failure Signal:**  
+Student generates a trivially unrelated non-example; or generates an example (cannot find the boundary).
+
+**11. Recovery:**  
+Use P17 (CONTRAST) to show a minimal pair; then ask the student to generate a new non-example using the same dimension that the pair used.
+
+**12. Typical Misconceptions Addressed:**  
+Boundary errors (student does not know where the concept ends); adjacent-concept conflation.
+
+**13. Compatible Primitives:**  
+P42 (EXAMPLE GENERATION) before; P33 (DISCRIMINATION TRAINING) to formalise the boundary once non-examples are being generated correctly.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Non-example must be adjacent (close to the concept), not trivially distant.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Give me something that looks like a function — has inputs and outputs — but fails to be one. Make it subtle."  
+- **Physics:** "Give me a situation that looks like Newton's Second Law applies but where the system is not actually accelerating — where F_net is zero."  
+- **English:** "Give me a sentence that looks passive but is actually active. Try to fool me."
+
+---
+
+### P44 — DEFINITION CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Direct the student to write or state the definition of the concept in their own words without prompting.
+
+**2. Cognitive Objective:**  
+Test whether the concept exists as a generative schema (can produce a definition) or only as a recognition schema (can identify examples but not articulate the principle).
+
+**3. When to Use:**  
+- After P21 (GENERALISATION) and P22 (SPECIALISATION) — the student has worked with the concept extensively  
+- As a mid-session check before advancing to complex protocol stages  
+- After P31 (SCHEMA REPLACEMENT) to verify the new schema has been fully internalised
+
+**4. When NOT to Use:**  
+- Before the student has encountered multiple instances — definitions constructed too early are incomplete or borrowed  
+- As a verbatim recall task (the student must generate their own definition, not reproduce the teacher's)
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S2, S7 post-repair
+
+**6. CPA Stage Compatibility:**  
+P, A (definitions operate at perceptual or abstract level)
+
+**7. Inputs Required:**  
+- `concept_slot`: the concept to be defined  
+- `definition_question`: "Define [concept] in your own words — not my words, yours."
+
+**8. Expected Student Response:**  
+Student produces a definition that is both correct and in their own language.
+
+**9. Success Signal:**  
+Definition is correct; uses student's own language; can be applied to classify new instances.
+
+**10. Failure Signal:**  
+Definition is verbatim the teacher's definition (recall, not schema); definition is too narrow or too broad.
+
+**11. Recovery:**  
+P38 (REFORMULATION PROMPT) to force different language; or if the definition is wrong, use P36 (PROBING QUESTION) to understand which criterion the student has misidentified.
+
+**12. Typical Misconceptions Addressed:**  
+Definitional errors (wrong criteria in the definition); verbatim recall without schema.
+
+**13. Compatible Primitives:**  
+P38 (REFORMULATION PROMPT) often pairs; P42 (EXAMPLE GENERATION) follows — generate an example consistent with the definition; P37 (COUNTEREXAMPLE QUESTION) to test the definition.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The student's own language is mandatory — if the student reproduces the teacher's exact phrasing, it is not P44.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Define 'function.' Your words. I'll tell you if it passes."  
+- **Physics:** "State Newton's Second Law in your own words — no equations."  
+- **English:** "Define 'passive voice' in your own terms — what makes a sentence passive?"
+
+---
+
+### P45 — PROBLEM CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Low
+
+**1. Purpose:**  
+Direct the student to create their own problem of a specific type.
+
+**2. Cognitive Objective:**  
+Test the highest level of operational understanding: to construct a problem, the student must understand the problem type's structure — what makes a problem of this type difficult, solvable, and valid.
+
+**3. When to Use:**  
+- For S5 (Mathematically Mature) who needs challenge beyond application  
+- After the student has demonstrated fluent problem-solving  
+- As a diagnostic for deep structural understanding
+
+**4. When NOT to Use:**  
+- Before the student can solve problems of the type  
+- For S0 or S6 — problem construction is the highest-demand primitive; do not deploy before confidence is established
+
+**5. Student States Supported:**  
+S5 (primary); S3 (moderate — latent schema benefits from construction challenge)
+
+**6. CPA Stage Compatibility:**  
+P, A
+
+**7. Inputs Required:**  
+- `problem_type_slot`: the type of problem to construct  
+- `difficulty_constraints`: e.g., "Make it require at least three steps" or "Make it have a surprising answer"  
+- `construction_question`: "Create your own [problem type] problem. Make it interesting."
+
+**8. Expected Student Response:**  
+A valid, solvable problem of the specified type.
+
+**9. Success Signal:**  
+Student's problem is structurally valid, solvable, and at the specified difficulty level.
+
+**10. Failure Signal:**  
+Student produces a trivial problem (extremely easy); or an unsolvable problem (missing information); or a problem of the wrong type.
+
+**11. Recovery:**  
+Ask the student to solve their own problem — this reveals whether it is valid and how difficult it actually is.
+
+**12. Typical Misconceptions Addressed:**  
+None directly, but problem construction reveals the student's implicit model of what the problem type is.
+
+**13. Compatible Primitives:**  
+P44 (DEFINITION CONSTRUCTION) before; P46 (PROCEDURE CONSTRUCTION) as an even higher-level demand.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Difficulty constraints must be explicit; unconstrained problem construction often produces trivial instances.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Create a function from a non-mathematical domain — something I haven't seen. Make the single-valuedness condition interesting to verify."  
+- **Physics:** "Create a force problem where the net force is non-zero but the acceleration appears to be zero. Can you construct a scenario where that's possible?"  
+- **English:** "Write a sentence that looks like it uses passive voice but actually doesn't. Make it subtle enough to fool someone who knows the rule."
+
+---
+
+### P46 — PROCEDURE CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Low
+
+**1. Purpose:**  
+Direct the student to design a step-by-step procedure for solving a problem type.
+
+**2. Cognitive Objective:**  
+Test the deepest level of procedural understanding: the student must understand not just HOW to execute the procedure but WHY each step is necessary and what would fail if it were omitted.
+
+**3. When to Use:**  
+- For S5 (Mathematically Mature) who has mastered the procedure and needs metacognitive challenge  
+- When the aim is to build transferable problem-solving strategies, not just concept-specific procedures
+
+**4. When NOT to Use:**  
+- Before the student has mastered the procedure themselves  
+- For S0 or S1 students who have not internalised the procedure
+
+**5. Student States Supported:**  
+S5 (primary); S3 (moderate)
+
+**6. CPA Stage Compatibility:**  
+A (procedure construction is abstract — the student is designing, not doing)
+
+**7. Inputs Required:**  
+- `problem_type_slot`: the type of problem whose solution procedure is being constructed  
+- `construction_question`: "Write a step-by-step procedure that a student who had never solved this type of problem could follow."
+
+**8. Expected Student Response:**  
+A complete, ordered procedure that correctly solves the problem type with a justification for each step.
+
+**9. Success Signal:**  
+The procedure is complete, ordered correctly, and every step is justified.
+
+**10. Failure Signal:**  
+Critical step is missing; steps are in wrong order; student cannot explain why any specific step is required.
+
+**11. Recovery:**  
+Ask the student to apply their own procedure to a specific instance — the failure point in the application reveals the missing or incorrect step.
+
+**12. Typical Misconceptions Addressed:**  
+Procedural-without-conceptual mastery (student can execute but cannot explain structure).
+
+**13. Compatible Primitives:**  
+P45 (PROBLEM CONSTRUCTION) before; P59 (SELF-EXPLANATION) follows — the student explains why each step is necessary.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Each step must have a justification — an unjustified procedure is an incomplete P46.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Write a step-by-step algorithm for classifying any correspondence as a function or not. Include what to check first, what to check if that passes, and what the final decision rule is."  
+- **Physics:** "Write the general procedure for setting up any Newton's Second Law problem. Include every step from reading the problem to stating the answer."  
+- **English:** "Write a step-by-step procedure for identifying passive voice in any sentence. Include steps for handling edge cases."
+
+---
+
+### P47 — DIAGRAM CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Direct the student to draw or build a visual representation of the concept.
+
+**2. Cognitive Objective:**  
+Produce understanding through construction: the act of building the diagram reveals understanding in ways that verbal explanation cannot, because the diagram must be structurally correct to be valid.
+
+**3. When to Use:**  
+- After P07 (PERCEPTUAL REPRESENTATION) — the student has seen a diagram; now construct their own  
+- When the concept has spatial or structural properties that are best expressed visually  
+- As an alternative reformulation when verbal description (P38) fails
+
+**4. When NOT to Use:**  
+- For concepts with no meaningful visual representation  
+- For S9 students whose language barrier makes verbal explanation harder — P47 removes the language constraint
+
+**5. Student States Supported:**  
+S0–S9 (universal; P47 is a language-independent elicitation)
+
+**6. CPA Stage Compatibility:**  
+P (exclusively — diagram construction is a perceptual-level activity)
+
+**7. Inputs Required:**  
+- `concept_slot`: the concept to be diagrammed  
+- `diagram_constraints`: which structural features must appear ("include at least 3 inputs")  
+- `construction_question`: "Draw a diagram that shows [concept]. Include [constraints]."
+
+**8. Expected Student Response:**  
+A structurally correct diagram with the required features present.
+
+**9. Success Signal:**  
+Diagram is structurally correct; the defining features of the concept are visually identifiable.
+
+**10. Failure Signal:**  
+Critical structural feature is absent or incorrectly drawn; diagram represents a related but different concept.
+
+**11. Recovery:**  
+Point to the structural feature that is missing or wrong using P01 (ATTEND) and P52 (TARGETED REDIRECT); provide a partial diagram (P81 SCAFFOLDING) for the student to complete.
+
+**12. Typical Misconceptions Addressed:**  
+Structural misconceptions (incorrect mental model of the concept's structure — the diagram makes the error visible).
+
+**13. Compatible Primitives:**  
+P07 (PERCEPTUAL REPRESENTATION) before; P17 (CONTRAST) to compare student's diagram with a correct one; P43 (NON-EXAMPLE GENERATION) as a parallel — draw a non-example diagram.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows — after the construction question, before the student shows their work). The diagram must be student-constructed from memory, not copied.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Draw an arrow diagram that represents a function with 3 inputs. Now draw one that is NOT a function. Label the part that makes each one what it is."  
+- **Physics:** "Draw a free-body diagram for an object sitting on a table. Show all forces with arrows. Label magnitude and direction."  
+- **English:** "Draw a diagram showing the grammatical structure of a passive sentence — subject, verb phrase, agent. Use boxes and arrows."
+
+---
+
+### P48 — ANALOGY CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Low
+
+**1. Purpose:**  
+Direct the student to invent their own analogy for the concept.
+
+**2. Cognitive Objective:**  
+Test structural comprehension at the deepest level: the student must understand the STRUCTURE of the concept, not just its content, because only structural understanding enables analogical reasoning.
+
+**3. When to Use:**  
+- For S5 students who have mastered the concept and need the highest-level comprehension challenge  
+- When the student needs to build a personal conceptual hook for retention  
+- As a session closing challenge
+
+**4. When NOT to Use:**  
+- For S0 students who have not internalised the concept structure  
+- When the student has not yet demonstrated the ability to explain the concept in their own words (P44 must precede)
+
+**5. Student States Supported:**  
+S3, S5 (primary); S8 (adult learners with extensive real-world knowledge benefit from analogy construction)
+
+**6. CPA Stage Compatibility:**  
+P, A (analogies operate at the structural/abstract level)
+
+**7. Inputs Required:**  
+- `concept_slot`: the concept to be analogized  
+- `analogy_question`: "What does [concept] remind you of? Explain why the comparison works — what structure do they share?"
+
+**8. Expected Student Response:**  
+A valid analogy — a different domain where the same structural relationship holds — with an explanation of what makes the analogy apt.
+
+**9. Success Signal:**  
+The analogy captures the defining structural feature of the concept, not just a surface resemblance.
+
+**10. Failure Signal:**  
+The analogy is based on surface resemblance, not structural similarity; student cannot explain why the analogy works at a structural level.
+
+**11. Recovery:**  
+Provide a known analogy and ask the student to explain why it works structurally; then ask the student to improve on it or find a different one.
+
+**12. Typical Misconceptions Addressed:**  
+Hollow comprehension (student can explain the concept but has no structural understanding of its pattern).
+
+**13. Compatible Primitives:**  
+P44 (DEFINITION CONSTRUCTION) before; P73 (GENUINE INTEREST SIGNAL) often follows — student-invented analogies are often genuinely interesting.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The explanation of WHY the analogy works is mandatory — the analogy without the explanation is not P48.
+
+**16. Subject Examples:**  
+- **Mathematics:** "What does a function remind you of? It can be from any domain — food, relationships, nature, anything. Explain why your comparison captures the 'exactly one output' structure."  
+- **Physics:** "What in real life reminds you of Newton's Second Law? Your analogy must capture the three-way relationship between force, mass, and acceleration."  
+- **English:** "What does the passive voice feel like — what is the experience of reading it, compared to the active voice? Build an analogy from something outside language."
+
+---
