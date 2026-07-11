@@ -4690,3 +4690,1268 @@ The switch must be purposeful — switching modality as a random variation is no
 - **English:** "You understand the grammar rule but keep mis-identifying examples. Let's switch: instead of reading, I'll say a sentence aloud. Listen for the grammatical pattern in speech."
 
 ---
+
+## CATEGORY G — ASSESSMENT
+
+*Reveal the student's cognitive state for routing decisions. Assessment primitives produce signals used by the Protocol Selection Engine or Adaptation Engine to determine the next Teaching Action. GR-9: assessment primitives may not appear in the first Teaching Action of a session unless the session type is diagnostic. GR-2: P55 (WAIT TIME) must follow every probe.*
+
+---
+
+### P74 — CLASSIFICATION PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Present an unfamiliar instance for the student to classify — reveals whether the defining criterion has been internalised.
+
+**2. Cognitive Objective:**  
+Produce a binary assessment signal (criterion internalised vs. not) that routes the session to continuation or remediation.
+
+**3. When to Use:**  
+- After P18 (CLASSIFICATION) practice has occurred — the probe is a fresh instance under assessment conditions  
+- In P91 (MASTERY VERIFICATION) as the fourth probe in sequence  
+- In P90 (FORMATIVE ASSESSMENT WITH FEEDBACK) as part of the probe selection
+
+**4. When NOT to Use:**  
+- GR-9: not in the first Teaching Action unless session type is diagnostic  
+- When the student has not been taught the classification criterion
+
+**5. Student States Supported:**  
+S0–S9 (universal — the probe works for any student who has received the concept instruction)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `probe_instance_slot`: an unfamiliar instance requiring classification  
+- `criterion_slot`: the criterion being tested (known to the assessment engine, not stated to the student)  
+- `classification_question`: "Is this [concept]? Give your reason."
+
+**8. Expected Student Response:**  
+Student classifies the instance AND provides a criterion-based justification.
+
+**9. Success Signal:**  
+Correct classification with correct criterion-based justification.
+
+**10. Failure Signal:**  
+Incorrect classification; OR correct classification with surface-feature justification (criterion not internalised).
+
+**11. Recovery:**  
+Route to P52 (TARGETED REDIRECT) if the error is in application; route to Schema Repair chain if the error reveals a misconception.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — reveals misconceptions for subsequent repair.
+
+**13. Compatible Primitives:**  
+P55 (WAIT TIME) must follow (GR-2); P50 (DISCONFIRMATION) for incorrect responses; P91 uses P74 as its fourth probe.
+
+**14. Incompatible Primitives:**  
+GR-9: not in the first Teaching Action.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The probe instance must be genuinely unfamiliar — a previously seen instance does not test internalisation.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Is this a function: the rule that assigns to each integer its absolute value? Justify your answer using the definition."  
+- **Physics:** "This object has three forces acting on it. Is it accelerating? Give your reason."  
+- **English:** "Is this sentence in passive voice? 'The committee approved the proposal.' Justify."
+
+---
+
+### P75 — BOUNDARY PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Present an edge case — an instance that is technically within the concept but barely — to reveal schema depth.
+
+**2. Cognitive Objective:**  
+Test whether the student's schema includes the concept's boundary conditions, not just its prototypical instances.
+
+**3. When to Use:**  
+- After P74 (CLASSIFICATION PROBE) passes — basic classification confirmed; now test boundaries  
+- In P91 (MASTERY VERIFICATION) as the third probe in sequence
+
+**4. When NOT to Use:**  
+- Before P74 passes — boundary probes are more challenging than classification probes; sequence them correctly  
+- GR-9 applies
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary — students with a basic schema who are being extended toward expert understanding)
+
+**6. CPA Stage Compatibility:**  
+P, A
+
+**7. Inputs Required:**  
+- `boundary_instance_slot`: a technically valid instance that is at the extreme edge of the concept  
+- `boundary_question`: "Is [boundary instance] [concept]? This is harder than the previous questions — take your time."
+
+**8. Expected Student Response:**  
+Student correctly classifies the edge case AND articulates WHY it falls within the boundary.
+
+**9. Success Signal:**  
+Correct classification with correct boundary reasoning.
+
+**10. Failure Signal:**  
+Incorrect classification of the boundary case; OR correct classification but inability to articulate the boundary reasoning.
+
+**11. Recovery:**  
+Use P17 (CONTRAST) with the boundary case and a near-boundary non-example; use P36 (PROBING QUESTION) to deepen the reasoning.
+
+**12. Typical Misconceptions Addressed:**  
+Boundary misconceptions (student's schema excludes valid edge cases or includes near-miss non-examples).
+
+**13. Compatible Primitives:**  
+P74 (CLASSIFICATION PROBE) before; P55 (WAIT TIME) must follow (GR-2); P91 uses P75 as its third probe.
+
+**14. Incompatible Primitives:**  
+GR-9 applies.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Boundary cases must be technically valid — "almost" valid instances are non-examples, not boundary probes.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Is this a function: a rule that maps every real number to the same value, π? It only has one output for every input — but does it satisfy the criterion?"  
+- **Physics:** "An object has two equal and opposite forces acting on it. The net force is zero. Is Newton's Second Law applicable? What does it tell you?"  
+- **English:** "'The door remained closed.' Is this passive voice? Why or why not?"
+
+---
+
+### P76 — TRANSFER PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Present the concept in a domain the student has not yet seen it applied in — tests cross-domain transfer as the highest mastery indicator.
+
+**2. Cognitive Objective:**  
+Test whether the student's schema is abstract enough to apply in new domains — cross-domain transfer is evidence of deep, generalisable understanding.
+
+**3. When to Use:**  
+- After P74 and P75 pass — basic classification and boundary conditions confirmed  
+- In P91 (MASTERY VERIFICATION) as the second probe in sequence
+
+**4. When NOT to Use:**  
+- Before P74 and P75 — transfer is the highest mastery test, not the first  
+- GR-9 applies
+
+**5. Student States Supported:**  
+S3, S5 (primary — transfer requires a generalisable schema); S1 (challenge level)
+
+**6. CPA Stage Compatibility:**  
+P, A (transfer operates at the structural level)
+
+**7. Inputs Required:**  
+- `transfer_domain_slot`: a domain the student has not yet applied the concept in  
+- `transfer_question`: "How does [concept] apply in [transfer domain]? What would [concept] mean there?"
+
+**8. Expected Student Response:**  
+Student identifies a structurally valid application of the concept in the transfer domain.
+
+**9. Success Signal:**  
+Student's transfer application is structurally correct and the student can explain why the concept applies there.
+
+**10. Failure Signal:**  
+Student cannot identify any transfer application; or identifies a superficially similar but structurally different application.
+
+**11. Recovery:**  
+Provide the transfer domain; constrain the question ("in programming, functions take inputs and return outputs — what property of mathematical functions does that parallel?"); route to P39 (TRANSFER PROMPT) for teaching-mode treatment of transfer.
+
+**12. Typical Misconceptions Addressed:**  
+Context-boundedness (concept exists as a domain-specific rule rather than a domain-independent schema).
+
+**13. Compatible Primitives:**  
+P75 (BOUNDARY PROBE) before; P55 (WAIT TIME) must follow (GR-2); P91 uses P76 as its second probe.
+
+**14. Incompatible Primitives:**  
+GR-9 applies.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The transfer domain must be genuinely new — previously-discussed applications are not transfer probes.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Functions appear in programming. In Python, a function takes inputs and returns a value. What property of mathematical functions does the Python function capture? What property does it NOT necessarily capture?"  
+- **Physics:** "Newton's Second Law governs your car's braking. A car has mass 1,500 kg. When you apply the brakes, what happens to the net force and the acceleration? Apply the law to this new context."  
+- **English:** "Passive voice appears in scientific writing. Why might a scientist choose passive voice in a methods section? What purpose does it serve there that it might not serve in a narrative?"
+
+---
+
+### P77 — GENERATION PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Direct the student to generate an original instance of the concept without a template.
+
+**2. Cognitive Objective:**  
+Test whether the concept is generative (the student can produce new instances) — retrieval and explanation are insufficient; generation is the evidence.
+
+**3. When to Use:**  
+- In P91 (MASTERY VERIFICATION) as the first probe in sequence  
+- As the highest-demand assessment after transfer probe passes
+
+**4. When NOT to Use:**  
+- Before classification and boundary probes — generation is the hardest probe; sequence last in P91  
+- GR-9 applies
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — student can generate at any level
+
+**7. Inputs Required:**  
+- `generation_constraints`: constraints that make reproduction of shown examples impossible  
+- `generation_question`: "Generate your own [concept] — one I haven't shown you. It must satisfy the criterion."
+
+**8. Expected Student Response:**  
+Student generates a valid, original instance that satisfies the concept's defining criterion.
+
+**9. Success Signal:**  
+Generated instance is valid AND novel (not a reproduction of a seen example).
+
+**10. Failure Signal:**  
+Student reproduces a seen example; student generates an invalid instance; student cannot generate anything.
+
+**11. Recovery:**  
+Route to P42 (EXAMPLE GENERATION) as a teaching-mode version of this probe (same cognitive demand, in teaching context); use generation constraints to prevent reproduction.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — the highest-level diagnostic probe.
+
+**13. Compatible Primitives:**  
+P55 (WAIT TIME) must follow (GR-2); P91 uses P77 as its first probe.
+
+**14. Incompatible Primitives:**  
+GR-9 applies.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Must be the first probe in P91 MASTERY VERIFICATION expansion (P77→P76→P75→P74→P78). Generation constraints are mandatory.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Generate a function that involves neither numbers nor letters — use any other domain. Verify that it satisfies the criterion. Don't use anything I've shown you."  
+- **Physics:** "Create a new scenario — not one we've discussed — where Newton's Second Law applies. State all forces, the net force, the mass, and the resulting acceleration."  
+- **English:** "Write two sentences: one passive, one active. They should be about the same event. Don't use any of my examples."
+
+---
+
+### P78 — EXPLANATION PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Ask the student to explain the concept as if to someone who has never heard it.
+
+**2. Cognitive Objective:**  
+Reveal the structure of the student's schema including gaps, conflations, and the relative emphasis the student places on different features.
+
+**3. When to Use:**  
+- In P91 (MASTERY VERIFICATION) as the fifth and final probe  
+- After generation probe — explanation follows demonstration  
+- As a session-closing probe in lieu of a full P91
+
+**4. When NOT to Use:**  
+- As the only assessment (explanation reveals schema structure but not operational competence)  
+- GR-9 applies
+
+**5. Student States Supported:**  
+S0–S9 (universal — explanation reveals schema at whatever level the student has built it)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `audience_framing`: "Explain [concept] to someone who has never heard of it. Assume they know [prerequisite] but nothing else."  
+- `explanation_question`: "Go ahead — explain it to me as if I'm encountering it for the first time."
+
+**8. Expected Student Response:**  
+Student produces a coherent explanation that covers the defining criterion, includes at least one example, and addresses common misconceptions.
+
+**9. Success Signal:**  
+Explanation is correct; includes the defining criterion; would genuinely help a novice understand the concept.
+
+**10. Failure Signal:**  
+Explanation omits the defining criterion; explanation is technically correct but incomprehensible to a novice; student explains surface features rather than structure.
+
+**11. Recovery:**  
+Use P44 (DEFINITION CONSTRUCTION) to re-establish the criterion; use P38 (REFORMULATION PROMPT) to improve the explanation's accessibility.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — reveals gaps for subsequent repair.
+
+**13. Compatible Primitives:**  
+P77 (GENERATION PROBE) before in P91 sequence; P55 (WAIT TIME) must follow (GR-2); P91 uses P78 as its fifth and final probe.
+
+**14. Incompatible Primitives:**  
+GR-9 applies.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Must be the last probe in P91 MASTERY VERIFICATION expansion (P77→P76→P75→P74→P78). Audience framing is mandatory — "explain it to me" without audience context is not P78.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Explain functions to someone who has never heard the term. They know what numbers are, they know about sets — but they've never been taught what makes a function."  
+- **Physics:** "Explain Newton's Second Law to someone who understands what forces and motion are but has never studied physics formally."  
+- **English:** "Explain passive voice to someone who is fluent in English but has never been taught grammar terminology."
+
+---
+
+### P79 — PREDICTION PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Ask the student what will happen in a scenario they have not yet seen — tests whether the student has a generative model.
+
+**2. Cognitive Objective:**  
+Distinguish a generative model (the student can predict before seeing) from a receptive model (the student can understand after seeing but not predict before).
+
+**3. When to Use:**  
+- When prediction about a new scenario is required to confirm operational understanding  
+- As an alternative to P77 (GENERATION PROBE) for concepts where prediction is more natural than generation
+
+**4. When NOT to Use:**  
+- When the student would need knowledge not yet taught to make the prediction  
+- GR-9 applies
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary)
+
+**6. CPA Stage Compatibility:**  
+C, P (prediction is most revealing at concrete or perceptual levels)
+
+**7. Inputs Required:**  
+- `prediction_scenario_slot`: a new scenario the student has not seen  
+- `prediction_question`: "Before I show you — what do you predict will happen when [scenario]?"
+
+**8. Expected Student Response:**  
+Student predicts correctly AND provides a reasoning chain.
+
+**9. Success Signal:**  
+Correct prediction with correct reasoning chain (not lucky guess).
+
+**10. Failure Signal:**  
+Incorrect prediction; OR correct prediction with incorrect reasoning ("it works because it looks similar to the last example").
+
+**11. Recovery:**  
+If prediction incorrect: P14+P15 sequence in teaching mode on the scenario; if correct prediction with wrong reasoning: P36 (PROBING QUESTION) to surface the actual reasoning.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — generative-model test.
+
+**13. Compatible Primitives:**  
+P55 (WAIT TIME) must follow (GR-2); P15 (OBSERVATION) follows to reveal actual outcome.
+
+**14. Incompatible Primitives:**  
+GR-9 applies.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). Prediction must be made before the outcome is revealed — never show the outcome and then ask for a "prediction."
+
+**16. Subject Examples:**  
+- **Mathematics:** "Before I tell you: is f(g(x)) always defined for all x where both f and g are defined? Predict — yes or no — and give your reason."  
+- **Physics:** "Before the demonstration: an object is moving at constant velocity. If I apply a net force in the same direction as its motion, what will happen to its speed over the next second? Predict."  
+- **English:** "Before you read the second half of the passage: given the argument structure so far, predict what the writer's conclusion will be."
+
+---
+
+### P80 — DUAL-TASK PROBE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Present the concept alongside a plausible-but-wrong alternative and ask the student to distinguish them, testing both positive and negative classification simultaneously.
+
+**2. Cognitive Objective:**  
+Replicate real-world disambiguation conditions where the concept must be identified among confusable alternatives — the highest ecological validity of any assessment probe.
+
+**3. When to Use:**  
+- After P74 passes — basic classification confirmed; now add the confusable alternative  
+- When the concept has a specific, commonly-confused near-miss that is the primary discrimination challenge
+
+**4. When NOT to Use:**  
+- Before P74 (CLASSIFICATION PROBE) — the dual task requires prior classification competence  
+- GR-9 applies
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary — requires concept AND near-miss concepts both to be established)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `positive_instance_slot`: a valid instance of the concept  
+- `negative_instance_slot`: a confusable near-miss non-example  
+- `dual_question`: "Here are two things: [A] and [B]. Which is [concept] and which is not? What makes one work and the other fail?"
+
+**8. Expected Student Response:**  
+Student correctly classifies both instances AND states the specific feature that distinguishes them.
+
+**9. Success Signal:**  
+Both classifications correct with a criterion-based distinguishing feature stated.
+
+**10. Failure Signal:**  
+One or both classifications incorrect; OR both correct but distinguishing reasoning is based on surface features.
+
+**11. Recovery:**  
+Return to P17 (CONTRAST) with the same pair in teaching mode; use P33 (DISCRIMINATION TRAINING) on the confusable pair.
+
+**12. Typical Misconceptions Addressed:**  
+Adjacent-concept conflation — the most common structural error across all domains.
+
+**13. Compatible Primitives:**  
+P74 (CLASSIFICATION PROBE) before; P55 (WAIT TIME) must follow (GR-2); P17 (CONTRAST) in teaching mode if probe fails.
+
+**14. Incompatible Primitives:**  
+GR-9 applies.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The negative instance must be a confusable near-miss, not an obviously unrelated non-example.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Here is a function: [bijective arrow diagram]. Here is not a function: [diagram where one input maps to two outputs]. What exactly makes the second fail? Name the specific feature."  
+- **Physics:** "Here are two scenarios. In Scenario A, a car is braking — slowing from 60 to 0 km/h. In Scenario B, a car is coasting at constant 60 km/h. Which one involves a net force? What makes Scenario B have no net force?"  
+- **English:** "'The glass was broken' — passive. 'The glass is broken' — which one is passive and which is stative? What is the grammatical distinction?"
+
+---
+
+## CATEGORY H — RETENTION
+
+*Move learning from working memory to long-term storage. Retention primitives operate on concepts that have been taught and need to be consolidated for retrieval beyond the session. Two Named Compounds (P57, P89) are in this category.*
+
+---
+
+### P56 — SPACED RETRIEVAL
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Prompt recall of a concept after a time gap from the original learning.
+
+**2. Cognitive Objective:**  
+Exploit the spacing effect: recall after a delay is more powerful than recall immediately after learning because the retrieval after forgetting strengthens the memory trace more than uninterrupted retention.
+
+**3. When to Use:**  
+- In a follow-up session after a concept has been taught  
+- When a concept is at risk of being forgotten before it is used again  
+- As the core mechanism of Named Compound P89 (SPACED REPETITION)
+
+**4. When NOT to Use:**  
+- Immediately after teaching (no space has elapsed — this is regular retrieval, not spaced retrieval)  
+- When the gap is so long that the concept has been completely forgotten without any retrieval cue having been provided
+
+**5. Student States Supported:**  
+S0–S9 (universal — retention is universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `elapsed_time_slot`: time since original learning (drives interval scheduling)  
+- `retrieval_cue`: a minimal prompt that initiates recall without providing the answer  
+- `retrieval_question`: "You learned about [concept] [time] ago. Without looking it up — what do you remember?"
+
+**8. Expected Student Response:**  
+Student recalls key features of the concept; accuracy may be reduced compared to original session.
+
+**9. Success Signal:**  
+Student recalls the defining criterion and at least one example; performance is above chance.
+
+**10. Failure Signal:**  
+Student cannot recall anything; or recalls only surface features without the defining criterion.
+
+**11. Recovery:**  
+Provide the retrieval cue and wait; if still inaccessible, brief re-teach (shortened Teaching Protocol) followed by scheduling the next spaced retrieval at a shorter interval.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but spaced retrieval surfaces which elements of the schema are decaying fastest.
+
+**13. Compatible Primitives:**  
+P62 (SPACED REVIEW SCHEDULING) schedules the next P56 event; P88 (RETRIEVAL PRACTICE) is the same principle under test conditions.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+`elapsed_time_slot` must be non-zero. P56 must be scheduled by P62 (SPACED REVIEW SCHEDULING) in the prior session.
+
+**16. Subject Examples:**  
+- **Mathematics:** "We covered functions two weeks ago. Without any materials — what's the definition of a function? What makes something a function?"  
+- **Physics:** "We discussed Newton's Second Law in the last session. State the law. Give me one example of it in action that we haven't discussed."  
+- **English:** "You identified passive voice last session. Remind me — what is passive voice? How do you identify it?"
+
+---
+
+### P57 — INTERLEAVED PRACTICE
+**Type:** Named Compound &nbsp;|&nbsp; **Expansion:** `P88 + P83`
+
+**1. Purpose:**  
+Combine retrieval practice on the current concept with retrieval practice on related prior concepts in a mixed set.
+
+**2. Cognitive Objective:**  
+Build discrimination ability and prevent the illusion of mastery through blocked practice — the student who can do a concept in a block of same-type problems has not demonstrated they can identify that concept type when it appears among other types.
+
+**3. When to Use:**  
+- After the current concept has been established  
+- After at least one adjacent concept has been taught (interleaving requires something to interleave with)
+
+**4. When NOT to Use:**  
+- Before the student can solve problems of both types independently  
+- When adjacent concepts have not yet been taught
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+All inputs from P88 (RETRIEVAL PRACTICE) applied to the mixed set; `interleaved_concept_slot` from P83.
+
+**8. Expected Student Response:**  
+Student correctly identifies which concept applies to each problem and solves accordingly.
+
+**9. Success Signal:**  
+Discrimination accuracy in the interleaved set matches or approaches accuracy in blocked practice.
+
+**10. Failure Signal:**  
+Significant accuracy drop in interleaved vs. blocked practice — discrimination is unreliable.
+
+**11. Recovery:**  
+Return to blocked practice for the failing concept; use P33 (DISCRIMINATION TRAINING) to sharpen the boundary; reintroduce interleaving.
+
+**12. Typical Misconceptions Addressed:**  
+Context-dependent activation (student recognises concept by teaching context, not by criterion).
+
+**13. Compatible Primitives:**  
+P88 (RETRIEVAL PRACTICE) and P83 (INTERLEAVING CONTROL) are the expansion; P89 (SPACED REPETITION) can combine with P57 for maximum retention effect.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-10 (expand before validation): validate as P88+P83. Both expansion primitives must have their inputs specified independently.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Mixed problem set: classify functions, identify domains, and evaluate compositions — in random order. You don't know which type is coming."  
+- **Physics:** "Mixed problems: Newton's First Law vs. Second vs. Third. Identify which applies before solving."  
+- **English:** "Mixed identification: passive, active, and stative. Classify each sentence type, then justify."
+
+---
+
+### P58 — ELABORATIVE INTERROGATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Ask "Why is this true?" questions after a correct response to force connection-making between the new knowledge and existing schemas.
+
+**2. Cognitive Objective:**  
+Deepen encoding by requiring the student to connect the new concept to prior knowledge — the connections multiply retrieval pathways and increase the concept's accessibility.
+
+**3. When to Use:**  
+- After any correct response to a factual or procedural question  
+- As the primary method for converting correct-but-shallow knowledge into deeply encoded understanding
+
+**4. When NOT to Use:**  
+- After an incorrect response — use P51 (ERROR DIAGNOSIS FACILITATION) instead  
+- When the student cannot provide a "why" because it requires knowledge not yet taught
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S0 (with scaffolding)
+
+**6. CPA Stage Compatibility:**  
+P, A (elaborative interrogation operates at the structural and abstract level)
+
+**7. Inputs Required:**  
+- `correct_statement`: the student's correct response  
+- `why_question`: "Why is that true? What does that connect to that you already know?"
+
+**8. Expected Student Response:**  
+Student produces a "why" explanation that connects the fact to prior knowledge.
+
+**9. Success Signal:**  
+Student's explanation makes a genuine connection to a prior concept — the new knowledge is embedded in the existing knowledge network.
+
+**10. Failure Signal:**  
+Student cannot explain why ("it just is"); student restates the fact without connecting it to anything.
+
+**11. Recovery:**  
+Provide a partial connection: "Think about [prior concept] — how does this relate?" Guide toward the connection without providing it.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — retention primitive. But elaborative interrogation reveals which parts of the schema have no connections (and are therefore most vulnerable to forgetting).
+
+**13. Compatible Primitives:**  
+P53 (ELABORATION REQUEST) is a lighter version; P58 is more specifically connection-focused.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 follows). The "why" question must target the connection to prior knowledge — a "why" about the current concept alone is not P58.
+
+**16. Subject Examples:**  
+- **Mathematics:** "You correctly said that a bijective function has a unique inverse. Why is that true? What property of functions makes the inverse possible?"  
+- **Physics:** "You correctly said the net force is zero when an object moves at constant velocity. Why does zero net force imply constant velocity? What law are you drawing on?"  
+- **English:** "You correctly identified the passive voice. Why does passive voice exist at all? What problem does it solve that active voice can't?"
+
+---
+
+### P59 — SELF-EXPLANATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Direct the student to narrate their own reasoning step by step, out loud or in writing.
+
+**2. Cognitive Objective:**  
+Force error-checking that silent processing does not — the act of narrating reasoning exposes inconsistencies that remain hidden when the student just thinks.
+
+**3. When to Use:**  
+- During or after problem solving, when the student should articulate their process  
+- For S5 students who perform correctly but have low metacognitive access to their own process  
+- As preparation for P46 (PROCEDURE CONSTRUCTION)
+
+**4. When NOT to Use:**  
+- Before the student has any reasoning to explain (S0 on genuinely new content — there is nothing to explain yet)
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S8 (adult learners benefit from explicit self-explanation)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `process_to_explain`: the reasoning process to be narrated  
+- `self_explanation_prompt`: "Walk me through exactly what you were thinking when you solved that."
+
+**8. Expected Student Response:**  
+Student provides a step-by-step narration of their reasoning, including the decisions at each step.
+
+**9. Success Signal:**  
+Narration is accurate and reveals genuine reasoning structure; student can identify which step was the critical decision point.
+
+**10. Failure Signal:**  
+Student narrates only the final answer, not the process; or narrates steps without being able to say why each step was taken.
+
+**11. Recovery:**  
+Ask the student to slow-think: "Do it again, but say every thought out loud as you have it — even the thoughts that seem wrong or uncertain."
+
+**12. Typical Misconceptions Addressed:**  
+Unconscious misconception application (student applies an incorrect schema automatically without noticing).
+
+**13. Compatible Primitives:**  
+P40 (METACOGNITIVE PROMPT) before — prime self-monitoring; P58 (ELABORATIVE INTERROGATION) can follow — ask "why" about specific steps the student narrated.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-2 (P55 after the self-explanation prompt). The narration must be process-level, not product-level — "I got 9" is not self-explanation.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Walk me through every step you took to classify that function. Tell me what you looked at, what you thought, and why you made each decision."  
+- **Physics:** "Narrate your reasoning as you draw the force diagram. Say what you're placing and why, in the order you place it."  
+- **English:** "Talk me through how you identified the implied claim — what did you read first, what did you notice, what did you conclude?"
+
+---
+
+### P60 — VARIATION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Present the same concept in 3–4 different representations in rapid succession.
+
+**2. Cognitive Objective:**  
+Multiply the concept's encoding pathways — each representation adds a node in the conceptual network, making the concept retrievable from more entry points.
+
+**3. When to Use:**  
+- After the concept has been established in at least one representation  
+- When the concept has multiple valid representations that are each informative  
+- As a session closing to anchor the concept in multiple forms
+
+**4. When NOT to Use:**  
+- With more than 4 representations in a single Teaching Action — more is diminishing returns and excessive load  
+- When the representations are so different that transitioning between them produces confusion rather than enrichment
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S0 (with scaffolding)
+
+**6. CPA Stage Compatibility:**  
+C, P, A (the variation is ACROSS levels — the power is in showing C, P, and A of the same concept)
+
+**7. Inputs Required:**  
+- `representation_set`: 3–4 representations of the same concept  
+- `unification_statement`: explicit statement that all 4 represent the same concept ("All of these are the same function — look for what's the same across all four forms.")
+
+**8. Expected Student Response:**  
+Student can identify what is the same across all representations — the defining criterion appears in each, differently encoded.
+
+**9. Success Signal:**  
+Student can state the defining criterion in terms of each representation; can move between representations when asked.
+
+**10. Failure Signal:**  
+Student treats the representations as different concepts; or cannot identify any commonality.
+
+**11. Recovery:**  
+Use P16 (COMPARISON) with the representation pair that shows the most obvious commonality; add representations one at a time.
+
+**12. Typical Misconceptions Addressed:**  
+Representation-bound schema (student believes the concept IS the formula, or IS the diagram — not understanding that these are representations of the same underlying structure).
+
+**13. Compatible Primitives:**  
+P25 (ABSTRACTION LADDER) traversal is the movement between representations; P16 (COMPARISON) within the variation set.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+3–4 representations maximum. The `unification_statement` is mandatory — without it, variation produces fragmentation, not consolidation.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Here is the function f(x) = 2x as: (1) a vending machine rule, (2) an arrow diagram, (3) a table of values, (4) a graph. All four are the same function. In each one, find the 'exactly one output per input' property."  
+- **Physics:** "Newton's Second Law as: (1) the equation F = ma, (2) a free-body diagram, (3) a real situation description, (4) a graph of force vs. acceleration. All four represent the same relationship."  
+- **English:** "Passive voice as: (1) a grammatical formula, (2) a tree diagram, (3) a colour-coded sentence, (4) a spoken example. All four are passive voice. Find the common structure."
+
+---
+
+### P61 — SUMMARY CONSTRUCTION
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Direct the student to write a summary of what was learned in the session.
+
+**2. Cognitive Objective:**  
+Force prioritisation — the act of deciding what to include in a summary reveals what is and is not understood; the summary is not repetition but active selection.
+
+**3. When to Use:**  
+- At the end of any significant Teaching Action sequence  
+- As a session-closing retention activity  
+- Before the next session to activate prior learning (doubles as P56 SPACED RETRIEVAL at session start)
+
+**4. When NOT to Use:**  
+- When the session covered only one small concept (summary of a single item is just restatement)  
+- Mid-session in a way that interrupts the flow
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S8 (adult learners benefit from explicit session summaries)
+
+**6. CPA Stage Compatibility:**  
+A (summary is abstract-level synthesis)
+
+**7. Inputs Required:**  
+- `session_scope`: what the student is summarising  
+- `summary_prompt`: "Write a summary of what we covered today — what can you now do that you couldn't do before?"
+
+**8. Expected Student Response:**  
+A summary that includes the defining criterion, at least one example, and a statement of what is now possible.
+
+**9. Success Signal:**  
+Summary is accurate; covers the defining criterion; identifies a new capability.
+
+**10. Failure Signal:**  
+Summary is pure repetition of teaching language; student cannot state a new capability.
+
+**11. Recovery:**  
+Use P68 (MASTERY SELF-DECLARATION) as a prerequisite — the student must state a new capability before summarising.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but summary construction reveals which misconceptions remain unresolved (they appear in the summary).
+
+**13. Compatible Primitives:**  
+P68 (MASTERY SELF-DECLARATION) before; P62 (SPACED REVIEW SCHEDULING) follows — schedule when the summary will be revisited.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+The summary must contain a new-capability statement — "I can now [X]" — to be considered complete.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Write a summary of today's session on functions. Three things: (1) the definition in your own words, (2) one example that makes it concrete, (3) one thing you can now do that you couldn't do this morning."  
+- **Physics:** "Summarise Newton's Second Law as we've discussed it: the concept, the formula, and one application you could now set up independently."  
+- **English:** "Write a summary of passive voice. What is it, how do you identify it, and when would you use it in your own writing?"
+
+---
+
+### P62 — SPACED REVIEW SCHEDULING
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Set a specific future time for re-encountering the concept.
+
+**2. Cognitive Objective:**  
+Make the spacing schedule explicit and student-owned: scheduling a future retrieval event is itself a metacognitive act that increases the likelihood of the retrieval occurring.
+
+**3. When to Use:**  
+- At the end of any session where a concept has been taught  
+- In conjunction with P62 (this primitive) and P56 (SPACED RETRIEVAL) to create a schedule
+
+**4. When NOT to Use:**  
+- When the concept is already part of an active spaced repetition schedule  
+- For concepts mastered so firmly that no decay is expected (rare)
+
+**5. Student States Supported:**  
+S0–S9 (universal — all students benefit from scheduled retrieval)
+
+**6. CPA Stage Compatibility:**  
+A (scheduling is abstract; the scheduled event will be at the appropriate level)
+
+**7. Inputs Required:**  
+- `review_schedule`: the specific time gap before first review (based on Evidence Engine data or default schedule: 24 hours → 1 week → 1 month)  
+- `scheduling_statement`: "We'll revisit this in [time gap]. When we do, you'll be asked to explain it from memory."
+
+**8. Expected Student Response:**  
+Student acknowledges the schedule; notes it if using a physical system.
+
+**9. Success Signal:**  
+The scheduled retrieval event occurs and P56 fires at the scheduled time.
+
+**10. Failure Signal:**  
+No scheduled event occurs; concept decays without retrieval.
+
+**11. Recovery:**  
+If the concept has decayed significantly at retrieval: provide a shorter interval for the next scheduled review.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — retention scheduling primitive.
+
+**13. Compatible Primitives:**  
+P61 (SUMMARY CONSTRUCTION) before; P56 (SPACED RETRIEVAL) is the execution of the schedule.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+The review schedule must be specific (a time, not "sometime") and communicated to the student explicitly.
+
+**16. Subject Examples:**  
+- **Mathematics:** "In 48 hours, you'll be asked to explain functions from memory. We're scheduling that now. When that session starts, I won't give you any reminders — you'll retrieve from scratch."  
+- **Physics:** "Next session, in one week, we'll start with Newton's Second Law cold — before any prompting. That's scheduled."  
+- **English:** "In three days, you'll identify passive voice in a new passage — first thing, no review first. That's the test."
+
+---
+
+### P87 — TRANSFER BRIDGING
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** Medium
+
+**1. Purpose:**  
+Explicitly construct the connection between the current concept and a future concept where it will be applied.
+
+**2. Cognitive Objective:**  
+Lay a transfer path now so the student recognises the connection when they encounter the future concept — prospective encoding that activates when the downstream concept appears.
+
+**3. When to Use:**  
+- At the end of a concept session when a downstream concept is known  
+- When introducing a prerequisite concept to a student who will later study the dependent concept
+
+**4. When NOT to Use:**  
+- When the downstream concept is unknown or highly uncertain  
+- When the student will not encounter the downstream concept for a very long time (the bridge must be short enough to cross)
+
+**5. Student States Supported:**  
+S1, S3, S5 (primary); S8 (adult learners with long-term goals benefit from explicit transfer bridges)
+
+**6. CPA Stage Compatibility:**  
+A (transfer bridging is abstract — the downstream concept is described in its application)
+
+**7. Inputs Required:**  
+- `current_concept_slot`: the concept just taught  
+- `downstream_concept_slot`: the future concept where the current one will be applied  
+- `bridge_statement`: "What we're doing now — [current concept] — is the foundation of [downstream concept], which you'll encounter when [context]. You'll see exactly why [current concept] matters at that point."
+
+**8. Expected Student Response:**  
+Student acknowledges the downstream connection; may ask a follow-up about the downstream concept.
+
+**9. Success Signal:**  
+When the downstream concept is encountered in a future session, the student spontaneously references the current concept.
+
+**10. Failure Signal:**  
+Student does not recall the bridge at the downstream encounter (bridge was too abstract or too distant).
+
+**11. Recovery:**  
+At the downstream encounter, reference the bridge explicitly: "Remember when we said [current concept] would matter for [downstream concept]? This is that moment."
+
+**12. Typical Misconceptions Addressed:**  
+None directly — prospective transfer encoding.
+
+**13. Compatible Primitives:**  
+P61 (SUMMARY CONSTRUCTION) before; P62 (SPACED REVIEW SCHEDULING) after — schedule the bridge's downstream encounter.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+The bridge statement must be specific — naming both the current and downstream concepts explicitly. "This will be useful later" is not P87.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Functions are the building block of derivatives. When you reach calculus, the derivative is defined as a limit of a function's difference quotient — you'll need to know functions inside out. We've just built that foundation."  
+- **Physics:** "Newton's Second Law governs every dynamics problem you'll encounter. When we get to rotational motion, the same law appears as τ = Iα — force becomes torque, mass becomes moment of inertia. The structure is identical."  
+- **English:** "Passive voice will appear in every academic text you read. When we study argumentative writing, you'll need to identify when a writer is using passive to avoid naming an agent — this is that skill."
+
+---
+
+### P88 — RETRIEVAL PRACTICE
+**Type:** True Primitive &nbsp;|&nbsp; **Reuse Frequency:** High
+
+**1. Purpose:**  
+Recall a previously learned concept from memory under test conditions — not re-study.
+
+**2. Cognitive Objective:**  
+Exploit the testing effect: active retrieval from memory is more powerful than passive re-reading because the retrieval attempt strengthens the memory trace whether the retrieval succeeds or not.
+
+**3. When to Use:**  
+- As the primary study/practice mechanism (preferred over re-reading)  
+- At session start to prime schemas from prior sessions  
+- In Named Compound P57 (INTERLEAVED PRACTICE) as the retrieval component
+
+**4. When NOT to Use:**  
+- Before the concept has been taught (cannot retrieve what was never stored)  
+- As the first activity in the very first session on a concept
+
+**5. Student States Supported:**  
+S0–S9 (universal for concepts previously taught)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- `retrieval_cue`: a minimal prompt that initiates retrieval without giving the answer  
+- `retrieval_test`: the specific recall task (definition, classification, explanation, application)
+
+**8. Expected Student Response:**  
+Student retrieves the concept from memory with some accuracy.
+
+**9. Success Signal:**  
+Retrieval is accurate and complete.
+
+**10. Failure Signal:**  
+Student cannot retrieve anything (complete forgetting — schedule re-teach with shorter interval); partial retrieval (retrieve main criterion but not details — provide corrective feedback and reschedule).
+
+**11. Recovery:**  
+For complete forgetting: re-teach with P10 (WORKED EXAMPLE PRESENTATION) before the next P88 event. For partial: provide the missing elements and immediately attempt retrieval again.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — but retrieval failure reveals which elements are decaying fastest and is diagnostic for scheduling.
+
+**13. Compatible Primitives:**  
+P83 (INTERLEAVING CONTROL) in Named Compound P57; P56 (SPACED RETRIEVAL) is the same primitive with the spacing dimension added.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+The retrieval must be from memory — no materials, notes, or hints available during the retrieval attempt.
+
+**16. Subject Examples:**  
+- **Mathematics:** "Without any materials: state the definition of a function. Give one example. Classify this case: [new instance]."  
+- **Physics:** "From memory: state Newton's Second Law. Give its equation. Apply it to: [new scenario not previously seen]."  
+- **English:** "Without reference: what is passive voice? Give one example. Is this sentence passive: [new sentence]?"
+
+---
+
+### P89 — SPACED REPETITION
+**Type:** Named Compound &nbsp;|&nbsp; **Expansion:** `P56 × [interval schedule]`
+
+**1. Purpose:**  
+Re-encounter a concept at systematically increasing intervals after initial learning.
+
+**2. Cognitive Objective:**  
+Maximise long-term retention through optimal spacing: earlier re-encounters produce weaker retention improvements than later re-encounters (the spacing effect), so the interval schedule is the intervention.
+
+**3. When to Use:**  
+- For any concept that needs long-term retention (most concepts)  
+- As the primary long-term retention mechanism in the Evidence Engine's scheduling output
+
+**4. When NOT to Use:**  
+- For concepts that will only be used once (no value in spacing if no future application)  
+- Without a specific interval schedule (P89 without an interval schedule is just P56)
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+All inputs from P56 applied at each interval; `interval_schedule`: the specific sequence of gaps (default: 1 day → 7 days → 30 days → 90 days).
+
+**8. Expected Student Response:**  
+At each interval: retrieval with accuracy appropriate to the interval (accuracy may drop before each retrieval; the retrieval restores it).
+
+**9. Success Signal:**  
+Accuracy at each retrieval event improves relative to the previous one over the full schedule.
+
+**10. Failure Signal:**  
+Accuracy does not improve across retrievals; concept is not consolidating despite repetition.
+
+**11. Recovery:**  
+Reduce interval length; supplement with additional elaboration (P58 ELABORATIVE INTERROGATION) at each retrieval event to strengthen encoding.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — the retention system for all concepts.
+
+**13. Compatible Primitives:**  
+P56 (SPACED RETRIEVAL) is the atomic unit; P62 (SPACED REVIEW SCHEDULING) manages the schedule; P57 (INTERLEAVED PRACTICE) combined with P89 for maximum discrimination + retention.
+
+**14. Incompatible Primitives:**  
+No hard incompatibilities.
+
+**15. Composition Constraints:**  
+GR-10 (expand before validation): validate as P56 applied at each interval point in the schedule. Interval schedule must be specified — default or Evidence Engine-adapted. Named Compound P89 is the temporal orchestration of P56, not a different primitive.
+
+**16. Subject Examples:**  
+- **Mathematics:** [Day 1] Teach function concept. [Day 2] Cold retrieval. [Day 9] Cold retrieval. [Day 39] Cold retrieval. [Day 129] Cold retrieval. Each retrieval: no materials, define + classify + generate.  
+- **Physics:** Same spaced retrieval schedule for Newton's Second Law.  
+- **English:** Same for passive voice identification.
+
+---
+
+## NAMED COMPOUNDS — CROSS-CATEGORY
+
+*These two Named Compounds span multiple categories and are listed separately because they cannot be fully assigned to a single category.*
+
+---
+
+### P90 — FORMATIVE ASSESSMENT WITH FEEDBACK
+**Type:** Named Compound &nbsp;|&nbsp; **Expansion:** `[P74–P80 selection] → P55 → [P49 | P50] → P51 → P35 → P55`  
+**Effective Category:** Cross-category G (Assessment) + F (Regulation)
+
+**1. Purpose:**  
+Assess the student's current understanding and provide immediate, targeted feedback on the specific error — not generic feedback.
+
+**2. Cognitive Objective:**  
+Produce the highest single-intervention effect size (d ≈ 0.90+) by combining assessment signal with the targeted feedback that assessment enables — the assessment without feedback is measurement; the feedback without assessment is generic.
+
+**3. When to Use:**  
+- At natural checkpoint moments in a session  
+- After a concept has been introduced and needs verification before advancing  
+- In lieu of P91 (MASTERY VERIFICATION) when the session is not yet at mastery-gate level
+
+**4. When NOT to Use:**  
+- As a substitute for P91 when the session is at the gate — P91 is the mastery gate; P90 is an interim checkpoint  
+- When no targeted feedback can be provided (feedback must be specific to be effective)
+
+**5. Student States Supported:**  
+S0–S9 (universal)
+
+**6. CPA Stage Compatibility:**  
+C, P, A
+
+**7. Inputs Required:**  
+- All inputs for the selected G-category probe  
+- `feedback_specificity`: the specific error type that the feedback will address  
+- `follow_up_question_slot`: the P35 (OPEN QUESTION) that follows the feedback
+
+**8. Expected Student Response:**  
+After the full P90 sequence: student can articulate what was wrong and why; performance on the next probe improves.
+
+**9. Success Signal:**  
+Student's P35 response after feedback reveals genuine schema update; performance on the next assessment probe is improved.
+
+**10. Failure Signal:**  
+Student receives feedback but cannot articulate what changed; the next probe shows no improvement.
+
+**11. Recovery:**  
+If feedback is not taken up: route to Schema Repair chain (P26→P32) for deeper misconception work; the feedback-only path is insufficient.
+
+**12. Typical Misconceptions Addressed:**  
+Any misconception detectable by the G-category probe selected in the expansion.
+
+**13. Compatible Primitives:**  
+The expansion uses P74–P80 (any probe), P55, P49/P50, P51, P35.
+
+**14. Incompatible Primitives:**  
+P91 immediately after P90 — give the student time to integrate feedback before the mastery gate.
+
+**15. Composition Constraints:**  
+GR-10 (expand before validation): validate as probe → P55 → [P49|P50] → P51 → P35 → P55. The feedback (P51 step) must be targeted at the specific error revealed by the probe. Generic feedback ("try again") is not a valid P90 instance.
+
+**16. Subject Examples:**  
+- **Mathematics:** [P74: "Is this a function?"] [P55: 5s wait] [P50: "That's not right — look specifically at input 3"] [P51: "Was that a wrong criterion or did you apply the right criterion incorrectly?"] [P35: "Tell me what you now think the issue is"] [P55: wait]  
+- **Physics:** [P79: "What will the acceleration be?"] [P55] [P49: "Your reasoning is on the right track — but check the direction"] [P51: diagnosis] [P35: "What do you now think about the direction?"] [P55]  
+- **English:** [P74: "Is this passive?"] [P55] [P50: "Not quite — look at the grammatical subject"] [P51: "Is it the criterion or the subject-identification that went wrong?"] [P35: "Explain what you now see"] [P55]
+
+---
+
+### P91 — MASTERY VERIFICATION
+**Type:** Named Compound &nbsp;|&nbsp; **Expansion:** `P77 → P76 → P75 → P74 → P78`  
+**Effective Category:** Terminal assessment compound
+
+**1. Purpose:**  
+Administer a five-probe mastery gate and do not advance until the gate is passed.
+
+**2. Cognitive Objective:**  
+Enforce mastery before progression: the gate prevents concept deficit accumulation — deficits that compound with every subsequent concept built on an unmastered foundation.
+
+**3. When to Use:**  
+- At the end of every Teaching Protocol, when the concept's mastery criterion has been met  
+- GR-6: P91 must be the terminal primitive in its Teaching Action
+
+**4. When NOT to Use:**  
+- Before P68 (MASTERY SELF-DECLARATION) — the self-declaration precedes the formal gate  
+- Immediately after P90 (FORMATIVE ASSESSMENT WITH FEEDBACK) — allow integration time  
+- When the session has not yet reached the mastery stage of the Protocol
+
+**5. Student States Supported:**  
+S0–S9 (universal — the gate applies regardless of student state)
+
+**6. CPA Stage Compatibility:**  
+C, P, A — the probe set tests across levels
+
+**7. Inputs Required:**  
+- All inputs for P77, P76, P75, P74, P78 in sequence  
+- `mastery_threshold`: pass criterion (default: 4/5 probes passed with criterion-based justification)
+
+**8. Expected Student Response:**  
+Student passes ≥ 4 of 5 probes with criterion-based justification in each.
+
+**9. Success Signal:**  
+≥ 4/5 probes passed with justification. Advance to the next concept or protocol.
+
+**10. Failure Signal:**  
+≤ 3/5 probes passed. Do not advance. Identify the specific probe failures and route to the appropriate remediation.
+
+**11. Recovery:**  
+For classification probe failure: targeted practice with P18 + P17. For boundary probe failure: P17 with boundary pair + P22. For transfer probe failure: P39 TRANSFER PROMPT in teaching mode. For generation probe failure: P42 EXAMPLE GENERATION in teaching mode. For explanation probe failure: P44 DEFINITION CONSTRUCTION.
+
+**12. Typical Misconceptions Addressed:**  
+None directly — the gate detects all remaining misconceptions and routes to their specific remediation before advancing.
+
+**13. Compatible Primitives:**  
+P68 (MASTERY SELF-DECLARATION) before; nothing after (GR-6: P91 is terminal).
+
+**14. Incompatible Primitives:**  
+GR-6: nothing follows P91 in its Teaching Action. P68 cannot follow P91 — the self-declaration precedes the gate, not follows it.
+
+**15. Composition Constraints:**  
+GR-6 (P91 is terminal in its Teaching Action); GR-10 (expand before validation): validate as P77→P76→P75→P74→P78. `mastery_threshold` must be specified. Probe sequence is fixed: Generation → Transfer → Boundary → Classification → Explanation.
+
+**16. Subject Examples:**  
+- **Mathematics:** [P77] "Generate a function not from mathematics." [P76] "How does function appear in programming?" [P75] "Is the empty function a function?" [P74] "Classify: [new instance]." [P78] "Explain functions to a novice." Pass: 4/5 with justification.  
+- **Physics:** [P77] "Create a Newton's Second Law scenario." [P76] "Apply to a satellite in orbit." [P75] "Object at rest with two equal forces — apply." [P74] "Classify: is this system accelerating?" [P78] "Explain Newton's Second Law to a novice."  
+- **English:** [P77] "Write a passive and active sentence." [P76] "Where does passive appear in scientific writing?" [P75] "Is 'The glass is broken' passive?" [P74] "Is this sentence passive?" [P78] "Explain passive voice to a novice."
+
+---
+
+## COVERAGE ANALYSIS
+
+### Total Primitive Count
+
+| Category | Count | Type Breakdown |
+|---|---|---|
+| A — Activation | 11 | 10 True Primitives + 1 (P95 new, TP) |
+| B — Input | 8 | 7 True Primitives + 1 Named Compound (P12) |
+| C — Processing | 15 | 12 True Primitives + 3 New (P92, P93, P94 — all TP) |
+| D — Schema Repair | 8 | 8 True Primitives |
+| E — Elicitation | 15 | 15 True Primitives |
+| F — Regulation | 19 | 19 True Primitives |
+| G — Assessment | 7 | 7 True Primitives |
+| H — Retention | 10 | 8 True Primitives + 2 Named Compounds (P57, P89) |
+| Named Compounds (standalone) | 2 | P90, P91 |
+| **TOTAL** | **95** | **90 True Primitives + 5 Named Compounds** |
+
+---
+
+### Category Distribution
+
+| Category | % of Library | Primary Function |
+|---|---|---|
+| F — Regulation | 20% | Session control plane |
+| E — Elicitation | 16% | Student production |
+| A — Activation | 12% | Entry-point priming |
+| C — Processing | 16% | Comprehension operations |
+| B — Input | 8% | Content introduction |
+| D — Schema Repair | 8% | Misconception correction |
+| H — Retention | 11% | Long-term storage |
+| G — Assessment | 7% | Cognitive state detection |
+| Named Compounds | 5% | Compound operations |
+
+---
+
+### Coverage Analysis by Subject
+
+#### Mathematics (908 concepts)
+- **Primitives Required:** All 95 items. No mathematics-specific new primitives were required.
+- **Primary primitive clusters in use:** P06-P08 (CPA for arithmetic/algebra), P17 (CONTRAST for concept boundary work), D-category chain (for common misconceptions across 908 concepts), P74/P80 (classification probes for all concept types)
+- **Confidence:** Full coverage for all 10 domains (arithmetic, algebra, geometry, calculus, statistics, discrete, linear algebra, number theory, proof, applied)
+
+#### Physics (194 concepts)
+- **Primitives Required:** All 95 items + **P92 THOUGHT EXPERIMENT** (new, C-category)
+- **Rationale for P92:** Physics instruction requires constrained derivation scenarios (Galilean thought experiments, limiting cases, idealized systems) that are distinct from P14/P15 (prediction+observation) and P92 cannot be decomposed into existing primitives without losing its "derivation without calculation" character
+- **Confidence:** Full coverage for all physics domains, including P92 for mechanics, electromagnetism, and thermodynamics
+
+#### English (216 concepts, 12 domains)
+- **Primitives Required:** All 95 items + **P93 TEMPORAL SEQUENCE ASSEMBLY** (Phonics), **P94 CONTEXTUAL INFERENCE** (Vocabulary), **P95 INTERPRETIVE FRAME** (Literature)
+- **Rationale for P93:** Phonics instruction requires working with temporal auditory sequences in working memory — this is categorically different from any visual processing primitive and cannot be decomposed into existing library items
+- **Rationale for P94:** Vocabulary acquisition via contextual inference is a distinct cognitive operation (reading for meaning, not recognition or classification) that is not reducible to P18 (CLASSIFICATION) or P35 (OPEN QUESTION)
+- **Rationale for P95:** Literary analysis requires an explicit frame-setter that prevents single-correct-answer cognitive set from blocking interpretive engagement — this is an Activation-category operation with no existing equivalent
+- **Confidence:** Full coverage for all 12 English domains (phonics, phonology, vocabulary, grammar, syntax, writing, reading comprehension, literature, media literacy, academic writing, spoken language, second language)
+
+---
+
+### Missing Primitives
+
+**None identified** for the three-subject Mathematics/Physics/English scope at v1.
+
+Potential candidates for Phase 2 expansion (Chemistry, Biology, Computer Science):
+
+| Candidate | Needed For | Rationale |
+|---|---|---|
+| STRUCTURAL FORMULA PARSING | Chemistry | 2D/3D molecular structure reading may require a distinct spatial primitive |
+| HYPOTHESIS FORMATION | Biology | Scientific method's formal hypothesis step may warrant its own primitive |
+| ALGORITHM TRACING | Computer Science | Step-by-step code execution tracking may be distinct from P23 (DECOMPOSITION) |
+
+These are **not confirmed new primitives** — they should be tested against the Atomicity Test before admission. Each candidate may reduce to existing primitives with appropriate content slots.
+
+---
+
+### Confidence Assessment: Completeness for Three-Subject v1
+
+| Dimension | Assessment | Evidence |
+|---|---|---|
+| Mathematics completeness | **HIGH** | 908 concepts decomposable using existing 95 items; reference implementation (math.func.function-concept) uses 36 Teaching Actions fully specified with these primitives |
+| Physics completeness | **HIGH** | 194 concepts; P92 (THOUGHT EXPERIMENT) closes the only identified gap; remaining Physics concept types (mechanics, E&M, thermodynamics, optics, modern physics) fully covered |
+| English completeness | **HIGH** | 216 concepts across 12 domains; P93/P94/P95 close the phonics/vocabulary/literature gaps; grammar, writing, reading comprehension, and spoken language covered by existing primitives |
+| Grammar rule completeness | **HIGH** | 10 composition rules cover all identified invalid compositions; no known valid composition is blocked |
+| Named Compound completeness | **HIGH** | 5 compounds cover the most important empirically-validated effect-size combinations |
+| Phase 1 launch readiness | **HIGH** | Library is stable for the 50 Rank-A concepts in the Three-Subject Educational Brain Roadmap |
+
+---
+
+### Primitive Invocation Frequency Estimates
+
+Based on the reference implementation (math.func.function-concept) and the three-subject scope:
+
+| Frequency Tier | Primitives | Expected invocations per 1,000 concepts |
+|---|---|---|
+| Universal | P01, P55 | ~10,000–15,000 each |
+| Very High | P14, P15, P17, P34, P35, P49 | ~5,000–8,000 each |
+| High | P02, P06, P07, P08, P10, P17, P18, P20, P21, P22, P36, P41, P42, P50, P51, P52, P64, P74, P80, P81, P82, P84, P85, P88 | ~2,000–5,000 each |
+| Medium | ~40 primitives | ~500–2,000 each |
+| Situational | P28, P29, P71, P92, P93, P94, P95 and D-category | ~50–500 each |
+
+**Total estimated primitive invocations for 1,318 concepts at full Protocol depth:** 1.9–2.5 million
+
+**Unique primitive specifications:** 95
+
+**Compression ratio:** ~20,000:95 ≈ **210:1** (unique primitive specifications to total invocations)
+
+---
+
+### Document Completeness
+
+| Section | Status |
+|---|---|
+| Summary Table (95 items) | COMPLETE |
+| Composition Grammar Quick Reference | COMPLETE |
+| Category A — Activation (11 items) | COMPLETE — full 17-field spec |
+| Category B — Input (8 items) | COMPLETE — full 17-field spec |
+| Category C — Processing (15 items) | COMPLETE — full 17-field spec |
+| Category D — Schema Repair (8 items) | COMPLETE — full 17-field spec |
+| Category E — Elicitation (15 items) | COMPLETE — full 17-field spec |
+| Category F — Regulation (19 items) | COMPLETE — full 17-field spec |
+| Category G — Assessment (7 items) | COMPLETE — full 17-field spec |
+| Category H — Retention (10 items) | COMPLETE — full 17-field spec |
+| Named Compounds P90, P91 | COMPLETE — full spec |
+| Coverage Analysis | COMPLETE |
+
+---
+
+*This document is the canonical specification for all Teaching Primitive composition in the Educational Brain. Every Teaching Protocol authored from this point forward references primitive IDs from this library. Every primitive invocation is concept-independent. The AI voices the compositions; the library specifies the cognitive operations.*
+
+*Cross-reference:*  
+*— `docs/architecture/EDUCATIONAL_BRAIN_PRIMITIVE_ARCHITECTURE.md` (final architectural decision, frozen)*  
+*— `docs/architecture/TEACHING_PRIMITIVE_ARCHITECTURE.md` (discovery document, 91-primitive basis)*  
+*— `docs/curriculum/TEACHING_ASSET_PHILOSOPHY.md` (authoring philosophy, AI Removal Test)*  
+*— `docs/THREE_SUBJECT_EDUCATIONAL_BRAIN_ROADMAP.md` (launch roadmap, three-subject scope)*
