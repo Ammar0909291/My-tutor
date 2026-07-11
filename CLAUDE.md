@@ -100,11 +100,11 @@
   - biology → `docs/biology/kg/graph.json` (89 concepts, prefix `bio.`) — shipped 2026-06-29,
     see `docs/biology/VALIDATION_REPORT.md` for full validator/smoke-test/regression evidence
   - english → `docs/english/kg/graph.json` (216 concepts, 12 domains, prefix `eng.`) — authored by
-    the Curriculum Production Pipeline 2026-07-03/04, validator PASS 216/216 reachable, but **NOT
-    yet registered** in the runtime registry (`knowledgeGraph.ts` `SUBJECT_ADAPTERS`/
-    `ID_PREFIX_TO_SUBJECT` have 5 subjects; `case 'english'` still routes to the legacy static
-    `ENGLISH_KNOWLEDGE_GRAPH`). Registration is the standard 2-line change but is production code
-    → gated on explicit user approval (Wave 0 approval item, recorded 2026-07-04).
+    the Curriculum Production Pipeline 2026-07-03/04, validator PASS 216/216 reachable, **registered**
+    in the runtime registry (`knowledgeGraph.ts` `SUBJECT_ADAPTERS` has all 6 subjects including
+    `english: createSubjectAdapter('english')`, and `ID_PREFIX_TO_SUBJECT` maps `eng → 'english'`).
+    `ENGLISH_KNOWLEDGE_GRAPH` (legacy 54-node) remains imported only as a legacy-ID fallback;
+    canonical `eng.*` nodes route through the adapter. Confirmed by code read 2026-07-11.
   - Chemistry count correction (2026-07-04): 186 concepts per validator + dashboard (was
     recorded as 187 here).
   - Canonical 10-field schema only: `id, name, requires, unlocks, cross_links, difficulty, bloom,
@@ -476,8 +476,9 @@
   `prisma generate` fails on engine download in sandboxed envs
   (ECONNRESET) — type baselines differ by environment.
   (4) 2026-07-04 — Curriculum Pipeline sync at d622336: English KG
-  authored (216 concepts, PASS) but NOT registered in runtime registry →
-  R20 + Wave 0 approval item; Mathematics KG v1.0.1 FROZEN (first
+  authored (216 concepts, PASS); subsequently registered in runtime registry
+  (SUBJECT_ADAPTERS + ID_PREFIX_TO_SUBJECT, confirmed by code read 2026-07-11;
+  R20 / Wave 0 approval item resolved by implementation); Mathematics KG v1.0.1 FROZEN (first
   subject at ADR 06's freeze state; campaign still 1.0.0-draft → Wave 0
   gate not met); all 6 KGs re-validated PASS; pipeline asset format
   confirmed compatible with ADR 14 (curated source for Phase 2, not a
