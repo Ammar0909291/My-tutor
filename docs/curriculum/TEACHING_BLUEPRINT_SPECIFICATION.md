@@ -70,7 +70,7 @@ These cannot be derived from the KG automatically. They must be authored by the 
 | `misconceptions[]` | Named misconceptions MC1…MCn with: name, description, trigger signal, conflict_evidence, bridge_text, replacement_text, discrimination_pairs | Schema Repair chain content slots |
 | `elicitation_banks[]` | Authored question sets per elicitation type (P34–P48) | E-category content slots |
 | `probe_items[]` | 2–5 authored items per probe type (P74–P80) | G-category content slots |
-| `transfer_contexts[]` | Cross-domain application scenarios for P76 | P76 content slot |
+| `transfer_contexts[]` | Cross-domain application scenarios for P76. Transfer scenarios reference a cross-linked concept but do not require the cross-linked Blueprint to be authored first. | P76 content slot |
 | `retrieval_items[]` | Retrieval practice items for P88/P56 | H-category content slots |
 | `s6_adaptations` | Per-TA delivery adaptations for S6 students | S6 regulation override |
 | `s9_adaptations` | Language simplifications + visual-first routing for S9 | S9 protocol modifier |
@@ -95,6 +95,7 @@ cpa_entry_stage:
     domain = physics AND bloom = Analyse|Evaluate: C (thought experiment still needs anchor)
     domain = english/phonics: C (physical letters/sounds before written symbols)
     domain = english/literature: P (text is the concrete object; P95 at opening)
+    domain = english/grammar_syntax: PPA (Pattern → Production → Application; see note below)
 
 plausible_student_states:
     difficulty ≤ 2: S0, S3, S6, S9 most common
@@ -107,6 +108,8 @@ session_cap:
     estimated_hours 0.5–1h: max 5 TAs per session
     estimated_hours ≥ 1h: max 7 TAs per session (PA-3 hard limit)
 ```
+
+**PPA staging note (english/grammar_syntax):** Grammar and syntax concepts have no physical manipulative and no pictorial representation that precedes the language itself — CPA's Concrete stage cannot be derived. Use PPA instead: **Pattern** (P10 showing real sentences that exhibit the rule), **Production** (P34/P35 eliciting student construction of new sentences following the pattern), **Application** (P76 transfer to unfamiliar sentence contexts). PPA maps onto CPA stages C→P→A for the purpose of all grammar rules that reference CPA stage.
 
 ### Phase 2 — Objective and State Design
 
@@ -235,14 +238,11 @@ A completed Blueprint produces a self-contained teaching package with the follow
 | 4 | Prerequisite Check | 1–3 gap-detection questions with minimum in-session repair instructions | P41[prereq] |
 | 5 | Protocol Library | One Protocol per student state; each with: entry condition, TA sequence, success/failure exit, CPA stage, duration estimate | Grammar §3 |
 | 6 | Misconception Engine | Named MCs with: trigger signal, authored P26/P27/P28/P30/P31/P32/P33 content, S6-safe path | Grammar §6 |
-| 7 | CPA Visual Sequence | Ordered visual assets per CPA stage with modality labels and introduction timing rules | Grammar §4 |
-| 8 | Assessment Battery | 2–5 items per probe type (P74–P80), ordered by Bloom level | Grammar §7 |
-| 9 | Mastery Gate | P91 expansion: 5 authored probe items in canonical order P77→P76→P75→P74→P78 | Grammar §7.3 |
-| 10 | Retrieval Schedule | P89 expansion: 5-interval schedule with authored retrieval items per interval | Grammar §8.2 |
-| 11 | S6 Adaptation Layer | Per-TA delivery overrides for low-confidence routing; replaces P28 with P30 | GR-5 |
-| 12 | S9 Adaptation Layer | Language simplifications, visual-first routing rules, P13 narration triggers | Protocol modifier |
+| 7 | Assessment Battery | 2–5 items per probe type (P74–P80), ordered by Bloom level | Grammar §7 |
+| 8 | Mastery Gate | P91 expansion: 5 authored probe items in canonical order P77→P76→P75→P74→P78 | Grammar §7.3 |
+| 9 | Retrieval Schedule | P89 expansion: 5-interval schedule with authored retrieval items per interval | Grammar §8.2 |
 
-**Package completeness signal:** A Blueprint emits `PACKAGE_READY` when components 0–9 are present and all V-checks pass. Components 11–12 are required only if S6/S9 are in the plausible state set.
+**Package completeness signal:** A Blueprint emits `PACKAGE_READY` when components 0–9 are present and all V-checks pass. S6/S9 adaptation notes (delivery overrides for low-confidence routing, language simplifications, visual-first rules, P13 narration triggers) are authored within each Protocol entry in Component 5 — they are not standalone components.
 
 ---
 
@@ -259,9 +259,8 @@ A completed Blueprint produces a self-contained teaching package with the follow
 ┌────────────────────────────────────────────────────────────────────────┐
 │                       TEACHING BLUEPRINT                               │
 │  Learning Objective · Student State Matrix · Diagnostic Battery       │
-│  Protocol Library · Misconception Engine · CPA Visual Sequence        │
+│  Protocol Library · Misconception Engine                              │
 │  Assessment Battery · Mastery Gate · Retrieval Schedule               │
-│  S6/S9 Adaptations                                                    │
 │  Status: DRAFT → READY (all 20 V-checks pass)                        │
 └──────────────────────────────┬─────────────────────────────────────────┘
                                │ Protocol pointer (from student state)
@@ -920,14 +919,7 @@ replacement_text:
 discrimination_pairs: []
 s6_path: 
 
-## 7. CPA Visual Sequence
-| CPA Stage | Modality | diagram_id | Introduction timing |
-|---|---|---|---|
-| C | | | |
-| P | | | |
-| A | | | |
-
-## 8. Assessment Battery
+## 7. Assessment Battery
 | Probe | Item | Expected signal |
 |---|---|---|
 | P74 | | |
@@ -936,25 +928,19 @@ s6_path:
 | P77 | | |
 | P78 | | |
 
-## 9. Mastery Gate (P91 expansion)
+## 8. Mastery Gate (P91 expansion)
 P77: [generation item] → expected: CORRECT
 P76: [transfer item] → expected: CORRECT
 P75: [boundary item] → expected: CORRECT
 P74: [classification item] → expected: CORRECT
 P78: [explanation item] → expected: CORRECT
 
-## 10. Retrieval Schedule (P89 expansion)
+## 9. Retrieval Schedule (P89 expansion)
 Interval 1 (1 day): [retrieval item]
 Interval 2 (3 days): [retrieval item]
 Interval 3 (7 days): [retrieval item]
 Interval 4 (21 days): [retrieval item]
 Interval 5 (60 days): [retrieval item]
-
-## 11. S6 Adaptation Layer (if applicable)
-[Per-TA delivery overrides]
-
-## 12. S9 Adaptation Layer (if applicable)
-[Language simplifications; visual routing; phoneme notes]
 
 ---
 V-check status: [ ] V-1 through V-20 all PASS

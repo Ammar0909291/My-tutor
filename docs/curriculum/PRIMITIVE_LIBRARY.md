@@ -1188,7 +1188,7 @@ Must follow at least one P10 in the sequence. Gaps should be progressively harde
 ---
 
 ### P12 — FADED WORKED EXAMPLE
-**Type:** Named Compound &nbsp;|&nbsp; **Expansion:** `P10 → P82 → P10 → P82 → P10`
+**Type:** Named Compound &nbsp;|&nbsp; **Expansion:** `P10 → P82[fade_target: specify what support element is removed at this step] → P10 → P82[fade_target: specify what support element is removed at this step] → P10`
 
 **1. Purpose:**  
 Systematically withdraw procedural scaffolding across three worked examples, moving the student from complete observation to near-complete independence.
