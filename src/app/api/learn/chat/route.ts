@@ -322,6 +322,9 @@ export async function POST(req: Request) {
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
+    // CTO iteration (session lifecycle): due-review count hoisted from the
+    // library revision block for the OPENING's review-first enforcement.
+    let libraryDueRevisionCountHoisted = 0
     let libraryLessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     // W2-2 (ADR 09): lesson stage progress — hoisted for post-AI tag-parse + persist.
     let lessonStageProgressHoisted: { conceptId: string; planSignature: string; stageIndex: number; totalStages: number } | null = null
@@ -1095,6 +1098,7 @@ export async function POST(req: Request) {
             const dueRevisions = await getDueRevisions(userId, subjectCode, moduleNodeSlugs)
             const revBlock = buildRevisionBlock(dueRevisions)
             if (revBlock) systemPrompt += revBlock
+            libraryDueRevisionCountHoisted = dueRevisions.length
 
             // W2-1 (ADR 08 §4a): seed conceptId for Library mode — canonical KG entry concept if
             // no snapshot yet. Resolves moduleSlug → KG domain → cross-domain entry concept ID
@@ -1588,6 +1592,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // asset memory path (a static explanation+probe assembly cannot honor
     // first-lesson/04 §1's flow or 02 §1's never-quiz-first rule).
     let firstLessonActiveHoisted = false
+    // CTO iteration (session lifecycle — decision-engine/07 §1/§6/§8):
+    // the episode state machine that makes per-session rules enforceable.
+    let sessionEpisodeHoisted: import('@/lib/teaching/sessionLifecycle').SessionEpisode | null = null
+    let sessionEpisodeFreshHoisted = false
     if (!schoolCtx) {
       try {
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
@@ -1596,6 +1604,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
         systemPrompt += buildSignalInstruction()
+
+        // Session lifecycle (07 §8): boundary measured from real message
+        // timestamps — the newest loaded message predates this turn's user
+        // insert, so the gap is genuine learner inactivity, never LLM-claimed.
+        {
+          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock } = await import('@/lib/teaching/sessionLifecycle')
+          const lastMsgAt = learnSession.messages[0]?.createdAt
+            ? new Date(learnSession.messages[0].createdAt).getTime()
+            : null
+          const prevEpisode = (snapshot?.sessionEpisode && typeof snapshot.sessionEpisode === 'object')
+            ? snapshot.sessionEpisode as import('@/lib/teaching/sessionLifecycle').SessionEpisode
+            : null
+          const prevLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+            ? snapshot.lastSignal as { correctness?: boolean }
+            : null
+          const boundary = isNewEpisode(lastMsgAt, turnReceivedAt)
+          sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
+          sessionEpisodeFreshHoisted = boundary
+          if (boundary) {
+            // OPENING (07 §1 + §8 rules 2–3): engineered win first when
+            // owed → one-breath continuity → due reviews BEFORE new content.
+            systemPrompt += buildOpeningBlock({
+              dueReviewCount: libraryDueRevisionCountHoisted,
+              retroWinOwed: sessionEpisodeHoisted.retroWinOwed,
+              isFreshBoundary: true,
+              hadPreviousEpisode: prevEpisode !== null || lastMsgAt !== null,
+            })
+          } else if (sessionEpisodeHoisted.phase === 'CLOSING') {
+            // Affect budget spent earlier this session (07 §6): the close
+            // instruction holds until a boundary resets the episode.
+            systemPrompt += buildAffectCloseBlock()
+          }
+        }
 
         // Step 4: placement verification — self-report is a hypothesis
         // (placement/01 §1). Scope: KG-backed subject, intermediate/advanced
@@ -2273,7 +2314,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0) {
+          // Session lifecycle fold (07 §1/§6): this turn's signal advances
+          // the episode machine — OPENING→CORE on the first answered item,
+          // CORE→CLOSING when the affect budget is spent (1 in lesson one).
+          let episodeUpdate: Record<string, unknown> = {}
+          if (sessionEpisodeHoisted) {
+            const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+            const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+              isFirstLesson: firstLessonActiveHoisted,
+            })
+            if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
+              episodeUpdate = { sessionEpisode: nextEpisode }
+            }
+          }
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0) {
             prisma.learnSession.update({
               where: { id: sessionId },
               data: {
@@ -2282,6 +2337,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
                   ...signalUpdate,
                   ...placementUpdate,
+                  ...episodeUpdate,
                 },
               },
             }).catch(() => {})
