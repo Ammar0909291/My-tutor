@@ -593,6 +593,40 @@
   changes. No architecture defects found requiring a Brain unfreeze; one flow gap
   (ask-turn vs answer-turn) was an implementation concern, solved in implementation.
 
+- **CTO ITERATIONS 1–3 + ENGINEERING STOP DECLARED** (2026-07-10, commits e3d46cb,
+  5222e9d, 6d89ecf; continuous-CTO mode, runtime lane only — no Brain authoring):
+  (1) Library mastery evidence loop — the SIGNAL is Library's conversational
+  checkpoint: writes TopicProgress with school-checkpoint semantics (65/25, never
+  COMPLETED/MASTERED — conversational evidence can't certify gates per assessment/05
+  §3); confident-wrong writes MistakeRecord('signal_confident_wrong') routing the D1
+  grid's dangerous quadrant through the ALREADY-running detectMisconceptions()→
+  MISCONCEPTION_REPAIR machinery; hesitant-wrong deliberately writes none (fast=
+  misconception, hedged=guess); TEACHING ENGINE DECISION block carries a deterministic
+  LAST-ANSWER READ overlay (fast-wrong→elicit/commit/collide; hesitant-correct→FRAGILE
+  hold) supplying the speed/confidence read the frozen decide() lacks.
+  (2) Session lifecycle state machine — `src/lib/teaching/sessionLifecycle.ts`:
+  boundary = 30-min inactivity gap from real message timestamps (07 §8 rule 1);
+  fresh episode → OPENING block (engineered win FIRST when previous episode ended on
+  failure [retroWinOwed, §8 r3] → one-breath continuity → due reviews BEFORE new
+  content); OPENING→CORE on first answered signal; CORE→CLOSING at affect budget
+  (2 failures; 1 lesson-one); CLOSING block = close-on-a-win script (07 §6). Episode
+  rides the existing snapshot persist.
+  (3) Deterministic recovery triggering — `src/lib/teaching/recoveryGuard.ts`:
+  two-tier utterance detection (strong identity utterances anywhere; mild ones only
+  when message ≤80 chars IS the utterance), authored scripts retrieved from
+  foundations/01 §3 + first-lesson/05 deltas, injected LAST preempting everything
+  (03 §0, P5, P20); suppresses placement calibration AND the asset memory path on
+  recovery turns; LEARNER_FEEDBACK `recovery:<state>` evidence = L1 writer side.
+  Suite 690 passed/1 skipped, tsc clean throughout. **STOP CONDITION DECLARED
+  REACHED**: every remaining improvement candidate fails the no-real-data constraint
+  (signal calibration, probe quality, decay curves, mastery thresholds, spacing,
+  session-gap tuning, placement priors L6, evidence-loop READERS which would read
+  empty tables, further decision-matrix cells — those fire on states like BORED/
+  FATIGUED whose detection needs behavioral baselines) or is gated on content
+  production (concept coverage, non-math cut-nodes) or owner decisions (data
+  governance for minors' verbatim capture; snapshot optimistic-concurrency hygiene
+  pass). Next stage of improvement must come from production learning data.
+
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
   the single living master document (complete engine map, all flows, scalability/versioning/
