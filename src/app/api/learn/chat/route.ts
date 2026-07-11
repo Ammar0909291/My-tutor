@@ -1467,6 +1467,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 : ' — direct instruction'
           systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
 
+          // CTO iteration — the D1 grid read (foundations/02 §1), previously
+          // invisible to the decision layer: the previous turn's captured
+          // signal classifies the learner's last answer into the grid's
+          // quadrants, and the two quadrants that change the next move are
+          // stated deterministically (decision-matrix/03 cells, retrieved
+          // not improvised). decide()'s frozen signature has no
+          // speed/confidence input (its documented gap, foundations/02 §5)
+          // — this overlay supplies exactly that read without touching the
+          // frozen engine.
+          // NOTE: `snapshot` here is the TeachingMemorySnapshot (shadowed) —
+          // the session contextSnapshot is read via learnSession directly.
+          const sessionSnap = learnSession.contextSnapshot as Record<string, unknown> | null
+          const prevSignal = (sessionSnap?.lastSignal && typeof sessionSnap.lastSignal === 'object')
+            ? sessionSnap.lastSignal as { correctness?: boolean; confidence?: string }
+            : undefined
+          if (prevSignal?.correctness === false && prevSignal?.confidence === 'high') {
+            systemPrompt += `\n- LAST-ANSWER READ (fast-wrong — misconception signature, the grid's dangerous quadrant): do NOT spot-correct and move on. Elicit their reasoning, get them to commit to it, then present one concrete case where their rule visibly breaks — repair before any new content.`
+          } else if (prevSignal?.correctness === true && prevSignal?.confidence === 'low') {
+            systemPrompt += `\n- LAST-ANSWER READ (hesitant-correct — FRAGILE): do not advance yet. One more problem of the SAME type and difficulty now; advance only after a fluent, confident success. If this one is quicker, say so ("that one was quicker — feel it?").`
+          }
+
           // Phase 2F (Teaching Action Intelligence): advisory only — does NOT
           // override decide()'s action_type (the frozen Teaching Engine has no
           // input slot for review-due topics). Surfaces snapshot.dueForReview
@@ -2092,6 +2113,57 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           outcome:   teachingSignal.phrase.slice(0, 200),
           strength:  0.5,
         })
+      }
+
+      // CTO iteration — Library mastery evidence loop. Before this block,
+      // Library signals were captured as evidence but nothing updated
+      // mastery state from them: a learner could traverse the entire
+      // curriculum without any verified progression (Universal Principle 3:
+      // correctness evidence must drive advancement; student-state/02:
+      // evidence moves rungs). The SIGNAL is Library mode's conversational
+      // checkpoint — this mirrors the school checkpoint's exact
+      // TopicProgress semantics (same table, same scores, same
+      // MASTERED/COMPLETED guard) so both modes accumulate comparable
+      // evidence. Deliberately NEVER writes COMPLETED/MASTERED and never
+      // exceeds the school checkpoint's 65 — conversational evidence alone
+      // must not certify mastery (assessment/05 §3: gates need delayed +
+      // transfer components; those stay owned by the existing completion/
+      // assessment flows).
+      if (!schoolCtx && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
+        const signalCorrect = teachingSignal.correctness
+        const signalConfidence = teachingSignal.confidence
+        ;(async () => {
+          const existing = await prisma.topicProgress.findUnique({
+            where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId } },
+            select: { status: true },
+          }).catch(() => null)
+          if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
+          const score = signalCorrect ? 65 : 25
+          await prisma.topicProgress.upsert({
+            where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId } },
+            create: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
+            update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
+          }).catch(() => {})
+          // The D1 grid's dangerous quadrant (foundations/02 §1): a
+          // confident WRONG answer is a misconception signature, not a
+          // slip. Writing the MistakeRecord routes it through machinery
+          // that already runs for Library mode — detectMisconceptions()
+          // reads this table, so next turn's prompt carries the
+          // misconception block and the strategy selector can pick
+          // MISCONCEPTION_REPAIR. Hesitant wrong answers (CONFUSED/
+          // GUESSING quadrant) deliberately do NOT write one — that
+          // would be a false misconception signal (decision-engine/02:
+          // latency/confidence decides, "fast = misconception, hedged =
+          // guess").
+          if (!signalCorrect && signalConfidence === 'high') {
+            await prisma.mistakeRecord.create({
+              data: {
+                userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId,
+                sessionId: learnSession.id, category: 'signal_confident_wrong', questionId: resolvedConceptId,
+              },
+            }).catch(() => {})
+          }
+        })().catch(() => {})
       }
 
       // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
