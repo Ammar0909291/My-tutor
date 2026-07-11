@@ -9,18 +9,20 @@
 ## 0. Concept Profile
 
 ```
-id:                  phys.mech.newtons-first-law
+concept_id:          phys.mech.newtons-first-law
 name:                Newton's First Law (Law of Inertia)
-domain:              physics / mechanics
+domain:              Classical Mechanics (Physics)
+difficulty:          developing (2)
 bloom:               understand
-difficulty:          2 (developing)
+prerequisites:       [phys.meas.scalars-vectors, phys.meas.units]
 mastery_threshold:   0.75
 estimated_hours:     3
-requires:            [phys.meas.scalars-vectors, phys.meas.units]
 unlocks:             [phys.mech.newtons-second-law, phys.mech.equilibrium,
                       phys.mech.friction]
 cross_links:         [phys.mech.force-concept, phys.mech.newtons-second-law]
-cpa_entry_stage:     C
+session_cap:         7 TAs (estimated_hours ≥ 1h → PA-3 hard limit)
+cpa_entry_stage:     C (sliding/rolling objects observed before introducing Newton's statement; difficulty ≤ 2 with accelerated P track)
+status:              READY
 ```
 
 **Core idea:** Newton's First Law (Law of Inertia): An object at rest remains at rest, and an object in motion remains in motion at constant velocity, unless acted upon by a net external force. The law has two implications that students must understand separately: (1) rest is not the natural state — uniform motion is equally natural; (2) the relevant quantity is NET force (vector sum of all forces), not the presence of any single force.

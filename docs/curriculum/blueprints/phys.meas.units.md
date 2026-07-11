@@ -9,18 +9,20 @@
 ## 0. Concept Profile
 
 ```
-id:                  phys.meas.units
+concept_id:          phys.meas.units
 name:                SI Base Units
-domain:              physics / measurement
+domain:              Measurement & Units (Physics)
+difficulty:          foundational (1)
 bloom:               remember
-difficulty:          1 (foundational)
+prerequisites:       []
 mastery_threshold:   0.70
 estimated_hours:     2
-requires:            []
 unlocks:             [phys.meas.scalars-vectors, phys.meas.derived-units,
                       phys.meas.unit-conversion]
 cross_links:         [chem.meas.mole-concept, chem.thermo.temperature]
-cpa_entry_stage:     C
+session_cap:         7 TAs (estimated_hours ≥ 1h → PA-3 hard limit)
+cpa_entry_stage:     C (physical objects each labeled with their SI unit before introducing the system; difficulty ≤ 2)
+status:              READY
 ```
 
 **Core idea:** The International System of Units (SI) defines seven base units — each representing a fundamental, independently measurable physical quantity. Every other unit in science is derived from these seven. The base units are: metre (m, length), kilogram (kg, mass), second (s, time), ampere (A, electric current), kelvin (K, thermodynamic temperature), mole (mol, amount of substance), candela (cd, luminous intensity).

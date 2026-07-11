@@ -9,18 +9,20 @@
 ## 0. Concept Profile
 
 ```
-id:                  phys.meas.scalars-vectors
+concept_id:          phys.meas.scalars-vectors
 name:                Scalars and Vectors
-domain:              physics / measurement
+domain:              Measurement & Units (Physics)
+difficulty:          foundational (1)
 bloom:               understand
-difficulty:          1 (foundational)
+prerequisites:       [phys.meas.units]
 mastery_threshold:   0.70
 estimated_hours:     2
-requires:            [phys.meas.units]
 unlocks:             [phys.mech.newtons-first-law, phys.mech.newtons-second-law,
                       phys.mech.velocity-acceleration, phys.mech.momentum]
 cross_links:         [math.alg.coordinate-geometry]
-cpa_entry_stage:     C
+session_cap:         7 TAs (estimated_hours ≥ 1h → PA-3 hard limit)
+cpa_entry_stage:     C (everyday objects classified by feel before introducing scalar/vector distinction; difficulty ≤ 2)
+status:              READY
 ```
 
 **Core idea:** Physical quantities divide into two families. A scalar has magnitude only — the number fully specifies it. A vector has magnitude AND direction — specifying just the number is incomplete. The critical consequence: you cannot combine vectors by adding magnitudes alone; direction determines the outcome. Everyday pairs that students confuse: speed (scalar) vs. velocity (vector); distance (scalar) vs. displacement (vector).
