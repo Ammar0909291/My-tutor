@@ -1356,20 +1356,49 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // description of HOW to teach this turn from the TeachingDecision
           // and ConceptNode already computed above. Advisory only; never
           // overrides decide()'s own action_type/mode/difficulty/time.
+          //
+          // For KG-backed Library sessions (Phase 1B) a synthetic Chapter is
+          // constructed from the active KG concept so TAG and the Lesson
+          // Composer can run without a school context. board/grade are unused
+          // by both functions (confirmed in ADR 02 evidence table); the
+          // synthetic chapter's kgNodeIds = [conceptNode.id] correctly scopes
+          // getAssessmentDecision's DB queries to this single concept.
           try {
             const { getTeachingAction, buildTeachingActionBlock } = await import('@/lib/school/adaptive/teachingActionGenerator')
-            const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
-            const fullChapterForTAG = _getChaptersForTAG(schoolCtx!.board, subjectCode, schoolCtx!.grade)
-              .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-            if (fullChapterForTAG) {
+
+            // Resolve the chapter shape: real school chapter when available,
+            // synthetic KG-concept chapter for Library Mode.
+            let chapterForTAG: { id: string; order: number; title: string; kgNodeIds: string[] } | null = null
+            let boardForTAG = ''
+            let gradeForTAG = 0
+            let chapterTitleForTAG = conceptNode.title
+
+            if (schoolCtx) {
+              const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
+              chapterForTAG = _getChaptersForTAG(schoolCtx.board, subjectCode, schoolCtx.grade)
+                .find((c: { id: string }) => c.id === schoolCtx!.chapter.id) ?? null
+              boardForTAG = schoolCtx.board
+              gradeForTAG = schoolCtx.grade
+              chapterTitleForTAG = schoolCtx.displayTitle
+            } else {
+              // Library Mode: synthetic chapter — one concept, no board/grade coupling.
+              chapterForTAG = {
+                id: conceptNode.id,
+                order: 1,
+                title: conceptNode.title,
+                kgNodeIds: [conceptNode.id],
+              }
+            }
+
+            if (chapterForTAG) {
               const teachingAction = await getTeachingAction(decision, conceptNode, {
                 userId,
-                board: schoolCtx!.board,
-                grade: schoolCtx!.grade,
+                board: boardForTAG,
+                grade: gradeForTAG,
                 subjectId: learnSession.subjectId,
                 subjectSlug: subjectCode,
-                chapterTitle: schoolCtx!.displayTitle,
-                chapter: fullChapterForTAG,
+                chapterTitle: chapterTitleForTAG,
+                chapter: chapterForTAG,
                 weakConcepts: snapshot.weakConcepts,
                 misconceptions: snapshot.misconceptions,
               })
@@ -1384,11 +1413,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const { getLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonComposer')
                 const lessonPlan = await getLessonPlan(decision, teachingAction, conceptNode, {
                   userId,
-                  board: schoolCtx!.board,
-                  grade: schoolCtx!.grade,
+                  board: boardForTAG,
+                  grade: gradeForTAG,
                   subjectId: learnSession.subjectId,
                   subjectSlug: subjectCode,
-                  chapter: fullChapterForTAG,
+                  chapter: chapterForTAG,
                   activeMisconceptions: snapshot.misconceptions,
                   reviewDueConceptIds: reviewDue,
                 })
