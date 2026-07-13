@@ -1295,14 +1295,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptId)
         if (conceptNode) {
-          // Phase 1C: Blueprint Retrieval — resolve the Teaching Blueprint for
-          // this concept (metadata only). Non-fatal: a missing blueprint does not
-          // prevent the Teaching Engine from running. Content injection is deferred
-          // to a later phase; `blueprintRef` exposes the identity/status metadata
-          // so downstream code can gate on blueprint availability without re-reading.
-          const { loadBlueprint } = await import('@/lib/curriculum/blueprintLoader')
+          // Phase 1C: Blueprint Retrieval — resolve Teaching Blueprint metadata.
+          // Phase 1D: Blueprint Content — parse Sections 1 (Concept Spine),
+          // 4 (Misconception Library), 5 (Explanation Library) and inject as
+          // structured educational context into the system prompt. Non-fatal:
+          // a missing or unparseable blueprint never blocks the Teaching Engine.
+          const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock } = await import('@/lib/curriculum/blueprintLoader')
           const blueprintResult = loadBlueprint(activeConceptId)
           const blueprintRef = blueprintResult.found ? blueprintResult.blueprint : null
+
+          if (blueprintRef) {
+            try {
+              const contentResult = loadBlueprintContent(activeConceptId)
+              if (contentResult.found) {
+                const block = buildBlueprintContextBlock(contentResult.content)
+                if (block) systemPrompt += block
+              }
+            } catch {
+              // non-fatal — blueprint context is purely additive
+            }
+          }
 
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
