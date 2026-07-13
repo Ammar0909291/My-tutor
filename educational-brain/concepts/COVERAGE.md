@@ -6,7 +6,7 @@ Updated in the same commit as any entry added.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 1 | `math.arith.fractions` |
-| physics | 194 | 13 | `phys.meas.*` (8 concepts complete), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law` |
+| physics | 194 | 16 | `phys.meas.*` (8 concepts complete), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion` |
 | english | 216 | 1 | `eng.phonics.letter-sound-correspondence` |
 | chemistry | 186 | 0 | — |
 | biology | 89 | 0 | — |
@@ -42,5 +42,9 @@ future author and to the retrieval engine.
   this manifest) + 3 seed entries, one per live-curriculum subject, each
   anchored to a verified canonical KG node.
 - **Physics blueprint production** (2026-07-13): physics domain expansion begins;
-  `phys.meas.units`, `phys.meas.scalars-vectors`, `phys.meas.dimensions` authored
-  (topological order, measurement & units domain).
+  batches 1–5 complete: `phys.meas.units`, `phys.meas.scalars-vectors`, `phys.meas.dimensions`,
+  `phys.meas.errors`, `phys.meas.significant-figures`, `phys.meas.vector-addition`,
+  `phys.meas.vector-products`, `phys.meas.unit-conversion`, `phys.mech.displacement`,
+  `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`,
+  `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`,
+  `phys.mech.projectile-motion` (16/194 concepts).
