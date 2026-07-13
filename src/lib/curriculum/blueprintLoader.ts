@@ -254,6 +254,136 @@ function extractExplanations(content: string): ExplanationEntry[] {
   return entries
 }
 
+// ── Component-format extractors (Phase 2) ────────────────────────────────────
+//
+// 144 PACKAGE_READY + 51 READY blueprints use the older "## Component N —"
+// format. Phase 2 activates these by mapping Component-format sections to the
+// same BlueprintContent shape used by the new Section-format, so all physics
+// blueprints feed into the Phase 1D prompt injection without file changes.
+//
+// Mapping:
+//   Component 0 (Concept Identity)  → ConceptSpine (minimal — name + domain)
+//   Component 1 (Explanation Blocks) → explanations[]
+//   Component 3 (Misconception Engine) → misconceptions[]
+
+/** True when the blueprint uses the old Component-format headers. */
+function isComponentFormat(content: string): boolean {
+  return /^## Component 0 — /m.test(content)
+}
+
+/**
+ * Extracts the raw text of a component section.
+ * Returns null if the component header is absent.
+ */
+function extractComponentSection(content: string, componentNum: number): string | null {
+  const startRe = new RegExp(`## Component ${componentNum} — [^\\n]+\\n`)
+  const endRe = /^## Component \d+ — /m
+
+  const startMatch = startRe.exec(content)
+  if (!startMatch) return null
+
+  const afterStart = content.slice(startMatch.index + startMatch[0].length)
+  const endMatch = endRe.exec(afterStart)
+  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+}
+
+/**
+ * Builds a minimal ConceptSpine from Component 0's YAML block.
+ * Returns null if the identity block is missing.
+ */
+function extractComponentConceptSpine(content: string): ConceptSpine | null {
+  const raw = extractComponentSection(content, 0)
+  if (!raw) return null
+
+  // Pull from the YAML block inside Component 0.
+  const yamlBlock = /```(?:yaml)?\s*([\s\S]*?)```/.exec(raw)?.[1] ?? ''
+  const field = (key: string): string =>
+    new RegExp(`^\\s*${key}:\\s*(.+)$`, 'm').exec(yamlBlock)?.[1]?.trim() ?? ''
+
+  const name = field('name')
+  const domain = field('domain')
+  if (!name) return null
+
+  return {
+    definition: `${name} is a concept in ${domain || 'physics'}.`,
+    whyItMatters: '',
+    quantitiesTable: null,
+  }
+}
+
+/**
+ * Maps Component 1's "### Block 1-X — Title" subsections to ExplanationEntry[].
+ * Block 1-A → id="A", Block 1-B → id="B", etc.
+ */
+function extractComponentExplanations(content: string): ExplanationEntry[] {
+  const raw = extractComponentSection(content, 1)
+  if (!raw) return []
+
+  const entries: ExplanationEntry[] = []
+  const blocks = raw.split(/(?=### Block 1-[A-Z] — )/).filter(b => /^### Block 1-[A-Z] — /.test(b))
+
+  for (const block of blocks) {
+    const headerMatch = /### Block 1-([A-Z]) — ([^\n]+)/.exec(block)
+    if (!headerMatch) continue
+    const id = headerMatch[1]
+    const label = headerMatch[2].trim()
+    const text = block.slice(block.indexOf('\n') + 1).trim()
+    entries.push({ id, label, text })
+  }
+
+  return entries
+}
+
+/**
+ * Maps Component 3's "### MC-SLUG" subsections to MisconceptionEntry[].
+ * Assigns sequential ids MC-1, MC-2, … (Component format uses slug keys,
+ * not numeric ids).
+ */
+function extractComponentMisconceptions(content: string): MisconceptionEntry[] {
+  const raw = extractComponentSection(content, 3)
+  if (!raw) return []
+
+  const entries: MisconceptionEntry[] = []
+  // Split by "### MC-" slug headers.
+  const blocks = raw.split(/(?=### MC-)/).filter(b => b.trim().startsWith('### MC-'))
+
+  let seq = 0
+  for (const block of blocks) {
+    seq++
+    const headerMatch = /### (MC-[A-Z0-9_-]+)/.exec(block)
+    if (!headerMatch) continue
+
+    // Convert slug to readable title: MC-RMS-IS-AVERAGE → "RMS Is Average"
+    const slugTitle = headerMatch[1]
+      .replace(/^MC-/, '')
+      .replace(/-/g, ' ')
+      .toLowerCase()
+      .replace(/\b\w/g, c => c.toUpperCase())
+
+    const id = `MC-${seq}`
+
+    // Extract fields from bullet-style entries.
+    const trigger = /\*\*trigger_signal:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
+    const bridge = /\*\*bridge_text \[P30\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n---|\n##|$)/.exec(block)?.[1]?.trim() ?? ''
+    const replacement = /\*\*replacement_text \[P31\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n---|\n##|$)/.exec(block)?.[1]?.trim() ?? ''
+
+    // Characteristic phrase: extract the quoted part of the trigger signal.
+    const phraseMatch = /"([^"]{10,})"/.exec(trigger)
+    const characteristicPhrase = phraseMatch?.[1]?.trim() ?? trigger.split('.')[0]?.trim() ?? ''
+
+    entries.push({
+      id,
+      title: slugTitle,
+      probeQuestion: trigger,
+      characteristicPhrase,
+      bridge,
+      replacementConcept: replacement,
+    })
+  }
+
+  return entries
+}
+
 // ── Public API — metadata (Phase 1C) ─────────────────────────────────────────
 
 /**
@@ -323,11 +453,23 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
   }
 
   try {
-    const content: BlueprintContent = {
-      conceptId,
-      conceptSpine: extractConceptSpine(rawContent),
-      misconceptions: extractMisconceptions(rawContent),
-      explanations: extractExplanations(rawContent),
+    let content: BlueprintContent
+    if (isComponentFormat(rawContent)) {
+      // Phase 2: Component-format blueprint (144 PACKAGE_READY + 51 READY).
+      content = {
+        conceptId,
+        conceptSpine: extractComponentConceptSpine(rawContent),
+        misconceptions: extractComponentMisconceptions(rawContent),
+        explanations: extractComponentExplanations(rawContent),
+      }
+    } else {
+      // Phase 1D: New Section-format blueprint (14 new-format blueprints).
+      content = {
+        conceptId,
+        conceptSpine: extractConceptSpine(rawContent),
+        misconceptions: extractMisconceptions(rawContent),
+        explanations: extractExplanations(rawContent),
+      }
     }
     contentCache.set(conceptId, content)
     return { found: true, content }
