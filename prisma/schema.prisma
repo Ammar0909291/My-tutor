@@ -5,8 +5,10 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  // Migrations and db push connect directly (Neon: the non-pooled URL).
-  // The app itself always uses the pooled DATABASE_URL above.
+  // Migrations and db push connect directly (Neon: the non-pooled URL;
+  // Supabase: the session-mode pooler URL, since Supabase's direct host is
+  // IPv6-only and unreachable from Vercel's IPv4-only egress — see
+  // .env.example). The app itself always uses the pooled DATABASE_URL above.
   directUrl = env("DIRECT_URL")
 }
 
