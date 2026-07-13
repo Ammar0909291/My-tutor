@@ -135,6 +135,9 @@ export async function POST(req: Request) {
 
     // For KG-backed subjects (math/physics/chemistry/biology) there are no DB
     // curriculum rows, so synthesise lessonCtx from the knowledge graph instead.
+    // kgCurrentConceptId is hoisted so the Teaching Engine and snapshot-persist
+    // blocks below can seed currentConceptNodeId for Library Mode sessions.
+    let kgCurrentConceptId: string | null = null
     if (lessonCtx === null) {
       try {
         const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
@@ -177,6 +180,12 @@ export async function POST(req: Request) {
               completedLessons: syntheticLessons
                 .filter((l) => completedSlugs.has(l.topicSlug))
                 .map((l) => l.order),
+            }
+            // Hoist the active KG concept ID for Library Mode Teaching Engine seeding.
+            // snapshotCurrentConceptId takes precedence if already persisted; this is
+            // the fallback for the first turn of a fresh KG-backed Library session.
+            if (!schoolCtx && !snapshotCurrentConceptId) {
+              kgCurrentConceptId = currentLesson.topicSlug
             }
           }
         }
@@ -1278,10 +1287,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // readLearnerMemoryFromPreload() reuses the already-fetched parallel query
     // data (topicProgress, learningProfile, subjectAnalytics) and only fetches
     // the supplemental data (recentMistakes, retentionMetrics, session count).
+    // For KG-backed Library sessions (e.g. Physics), kgCurrentConceptId provides
+    // the active concept when snapshotCurrentConceptId has not yet been seeded.
+    const activeConceptId = snapshotCurrentConceptId ?? kgCurrentConceptId
     try {
-      if (snapshotCurrentConceptId) {
+      if (activeConceptId) {
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
-        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(snapshotCurrentConceptId)
+        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptId)
         if (conceptNode) {
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
@@ -1729,6 +1741,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             },
           }).catch(() => {})
         }
+      }
+
+      // KG-backed Library Mode: seed currentConceptNodeId into the snapshot on
+      // the first turn of a fresh session (when snapshotCurrentConceptId was null).
+      // Subsequent turns already carry the persisted value and skip this write.
+      if (!schoolCtx && !snapshotCurrentConceptId && kgCurrentConceptId) {
+        prisma.learnSession.update({
+          where: { id: sessionId },
+          data: {
+            contextSnapshot: {
+              ...(snapshot ?? {}),
+              currentConceptNodeId: kgCurrentConceptId,
+            },
+          },
+        }).catch(() => {})
       }
 
       // Auto-save lesson position on every interaction so Dashboard/Library
