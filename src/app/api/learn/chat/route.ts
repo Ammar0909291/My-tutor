@@ -1433,7 +1433,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             masteryScore: number; decayedScore: number
             masteryLevel: string; masteryConfidence: number
           } | null = null
-          if (process.env.ENABLE_CONCEPT_MASTERY_READ === '1') {
+          if (process.env.ENABLE_CONCEPT_MASTERY_READ === '1' && snapshotCurrentConceptId) {
             try {
               const cmr = await prisma.conceptMasteryRecord.findUnique({
                 where: { userId_conceptId: { userId, conceptId: snapshotCurrentConceptId } },
@@ -1449,7 +1449,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               current_concepts_mastered: snapshot.masteredConcepts,
               // W2-3: if CMR indicates current concept has decayed below mastery threshold,
               // ensure it appears in weak_concepts for this turn's Teaching Engine decision.
-              weak_concepts: conceptMasterySnapshot !== null && conceptMasterySnapshot.decayedScore < 0.7
+              weak_concepts: conceptMasterySnapshot !== null && conceptMasterySnapshot.decayedScore < 0.7 && snapshotCurrentConceptId
                 ? [...new Set([...snapshot.weakConcepts, snapshotCurrentConceptId])]
                 : snapshot.weakConcepts,
               misconceptions: snapshot.misconceptions,
@@ -1507,7 +1507,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             let chapterForTAG: { id: string; order: number; title: string; kgNodeIds: string[] } | null = null
             let boardForTAG = ''
             let gradeForTAG = 0
-            let chapterTitleForTAG = conceptNode.title
+            let chapterTitleForTAG = conceptNode.name ?? conceptNode.id
 
             if (schoolCtx) {
               const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
@@ -1521,7 +1521,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               chapterForTAG = {
                 id: conceptNode.id,
                 order: 1,
-                title: conceptNode.title,
+                title: conceptNode.name ?? conceptNode.id,
                 kgNodeIds: [conceptNode.id],
               }
             }
