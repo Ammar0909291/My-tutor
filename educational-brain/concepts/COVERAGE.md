@@ -6,7 +6,7 @@ Updated in the same commit as any entry added.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 1 | `math.arith.fractions` |
-| physics | 194 | 49 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed`, `phys.em.electric-field`, `phys.em.magnetic-field`, `phys.opt.reflection`, `phys.opt.refraction`, `phys.opt.wave-optics`, `phys.wave.doppler-effect`, `phys.wave.sound-intensity`, `phys.em.electric-dipole`, `phys.em.gauss-law`, `phys.em.magnetic-flux`, `phys.em.magnetic-force`, `phys.em.magnetic-materials`, `phys.therm.kinetic-theory`, `phys.therm.calorimetry`, `phys.wave.superposition`, `phys.opt.mirrors`, `phys.opt.total-internal-reflection`, `phys.opt.lenses` |
+| physics | 194 | 52 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed`, `phys.em.electric-field`, `phys.em.magnetic-field`, `phys.opt.reflection`, `phys.opt.refraction`, `phys.opt.wave-optics`, `phys.wave.doppler-effect`, `phys.wave.sound-intensity`, `phys.em.electric-dipole`, `phys.em.gauss-law`, `phys.em.magnetic-flux`, `phys.em.magnetic-force`, `phys.em.magnetic-materials`, `phys.therm.kinetic-theory`, `phys.therm.calorimetry`, `phys.wave.superposition`, `phys.opt.mirrors`, `phys.opt.total-internal-reflection`, `phys.opt.lenses`, `phys.opt.dispersion`, `phys.opt.polarization`, `phys.mech.newtons-second-law` |
 | english | 216 | 1 | `eng.phonics.letter-sound-correspondence` |
 | chemistry | 186 | 0 | — |
 | biology | 89 | 0 | — |
@@ -66,4 +66,6 @@ future author and to the retrieval engine.
   batch 15: `phys.therm.kinetic-theory`, `phys.therm.calorimetry`,
   `phys.wave.superposition` (46/194 concepts);
   batch 16: `phys.opt.mirrors`, `phys.opt.total-internal-reflection`,
-  `phys.opt.lenses` (49/194 concepts).
+  `phys.opt.lenses` (49/194 concepts);
+  batch 17: `phys.opt.dispersion`, `phys.opt.polarization`,
+  `phys.mech.newtons-second-law` (52/194 concepts).
