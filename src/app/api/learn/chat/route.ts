@@ -1397,6 +1397,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
         if (conceptNode) {
+          // Phase 1C/1D: Blueprint Retrieval + Content Injection.
+          // Resolves Teaching Blueprint metadata and injects Concept Spine,
+          // Misconception Library, and Explanation Library into the system
+          // prompt. Supports all four blueprint formats (Component A,
+          // Protocol B, Section C, Spine D). Non-fatal — a missing or
+          // unparseable blueprint never blocks the Teaching Engine.
+          try {
+            const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock } = await import('@/lib/curriculum/blueprintLoader')
+            const blueprintResult = loadBlueprint(activeConceptIdForDecide)
+            if (blueprintResult.found) {
+              const contentResult = loadBlueprintContent(activeConceptIdForDecide)
+              if (contentResult.found) {
+                const block = buildBlueprintContextBlock(contentResult.content)
+                if (block) systemPrompt += block
+              }
+            }
+          } catch {
+            // non-fatal — blueprint context is purely additive
+          }
+
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
             userId,
@@ -1512,48 +1532,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
           }
 
-          // Phase 3A: Teaching Action Generator — derive a structured
-          // description of HOW to teach this turn from the TeachingDecision
-          // and ConceptNode already computed above. Advisory only; never
-          // overrides decide()'s own action_type/mode/difficulty/time.
+          // Phase 3A: Teaching Action Generator + Phase 3B: Dynamic Lesson Composer.
+          // Runs for School Mode (real chapter) and Library Mode (synthetic chapter
+          // scoped to the single active KG concept — board/grade are unused by both
+          // functions, confirmed ADR 02). Advisory only; never overrides decide().
           try {
             const { getTeachingAction, buildTeachingActionBlock } = await import('@/lib/school/adaptive/teachingActionGenerator')
             const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
-            const fullChapterForTAG = _getChaptersForTAG(schoolCtx!.board, subjectCode, schoolCtx!.grade)
-              .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-            if (fullChapterForTAG) {
+
+            // Resolve chapter: real school chapter or synthetic Library chapter.
+            let chapterForTAG: { id: string; order: number; title: string; kgNodeIds: string[] } | null = null
+            let boardForTAG = ''
+            let gradeForTAG = 0
+            let chapterTitleForTAG = conceptNode.name ?? conceptNode.id
+
+            if (schoolCtx) {
+              const fullChapterForTAG = _getChaptersForTAG(schoolCtx.board, subjectCode, schoolCtx.grade)
+                .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+              chapterForTAG = fullChapterForTAG ?? null
+              boardForTAG = schoolCtx.board
+              gradeForTAG = schoolCtx.grade
+              chapterTitleForTAG = schoolCtx.displayTitle
+            } else {
+              // Library Mode: synthetic chapter — one concept, no board/grade coupling.
+              chapterForTAG = {
+                id: conceptNode.id,
+                order: 1,
+                title: conceptNode.name ?? conceptNode.id,
+                kgNodeIds: [conceptNode.id],
+              }
+            }
+
+            if (chapterForTAG) {
               const teachingAction = await getTeachingAction(decision, conceptNode, {
                 userId,
-                board: schoolCtx!.board,
-                grade: schoolCtx!.grade,
+                board: boardForTAG,
+                grade: gradeForTAG,
                 subjectId: learnSession.subjectId,
                 subjectSlug: subjectCode,
-                chapterTitle: schoolCtx!.displayTitle,
-                chapter: fullChapterForTAG,
+                chapterTitle: chapterTitleForTAG,
+                chapter: chapterForTAG,
                 weakConcepts: snapshot.weakConcepts,
                 misconceptions: snapshot.misconceptions,
               })
               systemPrompt += buildTeachingActionBlock(teachingAction)
 
-              // Phase 3B: Dynamic Lesson Composer — assemble a deterministic,
-              // multi-stage LessonPlan from the TeachingDecision, TeachingAction,
-              // ConceptNode, and Student Memory signals already computed above.
-              // Advisory only; generates no content and never overrides any of
-              // the decisions it reads from.
+              // Phase 3B: Dynamic Lesson Composer.
               try {
                 const { getLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonComposer')
                 const lessonPlan = await getLessonPlan(decision, teachingAction, conceptNode, {
                   userId,
-                  board: schoolCtx!.board,
-                  grade: schoolCtx!.grade,
+                  board: boardForTAG,
+                  grade: gradeForTAG,
                   subjectId: learnSession.subjectId,
                   subjectSlug: subjectCode,
-                  chapter: fullChapterForTAG,
+                  chapter: chapterForTAG,
                   activeMisconceptions: snapshot.misconceptions,
                   reviewDueConceptIds: reviewDue,
                 })
-                // W2-2 (ADR 09): stage-continuity framing — planSignature computed here
-                // (not inside the Composer) so composeLessonPlan() stays pure.
+                // W2-2 (ADR 09): stage-continuity framing.
                 if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1') {
                   const planSignature = lessonPlan.stages.map(s => s.stage_type).join('|')
                   const signatureMatches =
