@@ -6,7 +6,7 @@ Updated in the same commit as any entry added.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 1 | `math.arith.fractions` |
-| physics | 194 | 10 | `phys.meas.units`, `phys.meas.scalars-vectors`, `phys.meas.dimensions`, `phys.meas.errors`, `phys.meas.significant-figures`, `phys.meas.vector-addition`, `phys.meas.vector-products`, `phys.meas.unit-conversion`, `phys.mech.displacement`, `phys.mech.newtons-first-law` |
+| physics | 194 | 13 | `phys.meas.*` (8 concepts complete), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law` |
 | english | 216 | 1 | `eng.phonics.letter-sound-correspondence` |
 | chemistry | 186 | 0 | — |
 | biology | 89 | 0 | — |
