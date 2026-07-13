@@ -1295,6 +1295,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptId)
         if (conceptNode) {
+          // Phase 1C: Blueprint Retrieval — resolve the Teaching Blueprint for
+          // this concept (metadata only). Non-fatal: a missing blueprint does not
+          // prevent the Teaching Engine from running. Content injection is deferred
+          // to a later phase; `blueprintRef` exposes the identity/status metadata
+          // so downstream code can gate on blueprint availability without re-reading.
+          const { loadBlueprint } = await import('@/lib/curriculum/blueprintLoader')
+          const blueprintResult = loadBlueprint(activeConceptId)
+          const blueprintRef = blueprintResult.found ? blueprintResult.blueprint : null
+
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
             userId,
