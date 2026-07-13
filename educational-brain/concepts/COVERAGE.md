@@ -6,7 +6,7 @@ Updated in the same commit as any entry added.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 1 | `math.arith.fractions` |
-| physics | 216 | 1 | `phys.mech.newtons-first-law` |
+| physics | 194 | 4 | `phys.meas.units`, `phys.meas.scalars-vectors`, `phys.meas.dimensions`, `phys.mech.newtons-first-law` |
 | english | 216 | 1 | `eng.phonics.letter-sound-correspondence` |
 | chemistry | 186 | 0 | — |
 | biology | 89 | 0 | — |
@@ -41,3 +41,6 @@ future author and to the retrieval engine.
 - **Delivery 5** (2026-07-10): integration layer authored (README, TEMPLATE,
   this manifest) + 3 seed entries, one per live-curriculum subject, each
   anchored to a verified canonical KG node.
+- **Physics blueprint production** (2026-07-13): physics domain expansion begins;
+  `phys.meas.units`, `phys.meas.scalars-vectors`, `phys.meas.dimensions` authored
+  (topological order, measurement & units domain).
