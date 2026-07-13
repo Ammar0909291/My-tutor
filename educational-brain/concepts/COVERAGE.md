@@ -6,7 +6,7 @@ Updated in the same commit as any entry added.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 1 | `math.arith.fractions` |
-| physics | 194 | 28 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current` |
+| physics | 194 | 31 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed` |
 | english | 216 | 1 | `eng.phonics.letter-sound-correspondence` |
 | chemistry | 186 | 0 | — |
 | biology | 89 | 0 | — |
@@ -52,4 +52,6 @@ future author and to the retrieval engine.
   batch 7: `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`
   (22/194 concepts); batch 8: `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`,
   `phys.wave.sound-waves` (25/194 concepts); batch 9: `phys.opt.nature-of-light`,
-  `phys.em.coulombs-law`, `phys.em.electric-current` (28/194 concepts).
+  `phys.em.coulombs-law`, `phys.em.electric-current` (28/194 concepts);
+  batch 10: `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`,
+  `phys.wave.wave-speed` (31/194 concepts).
