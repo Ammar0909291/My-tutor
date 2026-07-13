@@ -1,5 +1,5 @@
 /**
- * Blueprint Loader — Phase 1C / Phase 1D.
+ * Blueprint Loader — Phase 1C / Phase 1D / TQ-1 / TQ-2.
  *
  * Resolves a canonical concept ID (e.g. "phys.meas.units") to its
  * Teaching Blueprint file (docs/curriculum/blueprints/{id}.md), loads it,
@@ -7,6 +7,13 @@
  *
  *   Blueprint         — structural metadata only (Phase 1C).
  *   BlueprintContent  — educational content from Sections 1, 4, 5 (Phase 1D).
+ *
+ * TQ-1/TQ-2: also loads the EB Concept Entry
+ * (educational-brain/concepts/{subject}/{id}.md) and extracts:
+ *   - Recovery notes: "shrink to:" question + M{n} recovery triggers
+ *   - Analogy library: anti-analogies to avoid
+ *   - Voice teaching: "what to listen for" detection cues
+ *   - Explanation library: opening scenario (youngest/most concrete entry)
  *
  * Three blueprint formats exist in the corpus; all are handled:
  *
@@ -32,7 +39,7 @@
  *   Section 4 — Misconception Library  (MC entries: title, probe, bridge, fix)
  *   Section 5 — Explanation Library    (Explanation A/B/C full texts)
  *
- * Sections intentionally NOT parsed:
+ * Sections intentionally NOT parsed (blueprint file):
  *   Section 2  Four-Stage CPA+ Mental Model
  *   Section 3  Why Beginners Fail / Diagnostic Battery
  *   Section 6  Analogy Library
@@ -45,6 +52,7 @@
  *   Section 13 Memory and Review
  *   Section 14 Transfer Map
  *   Section 15 Curriculum Feedback
+ * (These sections are now sourced from the EB Concept Entry instead — TQ-1/TQ-2.)
  *
  * Caching: separate Maps for metadata and content — callers that only need
  * metadata pay no content-parsing cost.
@@ -125,15 +133,78 @@ export type BlueprintContentResult =
   | { found: true; content: BlueprintContent }
   | { found: false; reason: string }
 
+// ── EB Concept Entry types (TQ-1 / TQ-2) ─────────────────────────────────────
+
+/**
+ * Teaching intelligence extracted from the EB Concept Entry
+ * (educational-brain/concepts/{subject}/{id}.md).
+ *
+ * These fields fill the injection gap: the blueprint file carries execution
+ * protocols; the EB entry carries the pedagogical intelligence (recovery
+ * moves, voice cues, what to avoid). Both are now injected into every turn.
+ */
+export interface EBConceptContext {
+  conceptId: string
+  /**
+   * TQ-1: "Shrink to" question from Recovery notes — the emergency anchor
+   * when the learner is completely stuck. Verbatim as authored.
+   */
+  recoveryShrinkTo: string | null
+  /**
+   * TQ-1: Misconception-specific recovery triggers from Recovery notes.
+   * Each is a named probe + action string, e.g. for M2: give this probe,
+   * if answer is X then do Y.
+   */
+  recoveryTriggers: Array<{ label: string; text: string }>
+  /**
+   * TQ-1: Anti-analogies to avoid, from the Analogy library.
+   * Each is the full "anti-analogy to avoid" note as authored.
+   */
+  antiAnalogies: string[]
+  /**
+   * TQ-1: Voice detection cues from Voice teaching "what to listen for".
+   * Each entry maps a learner utterance pattern to its diagnostic implication.
+   */
+  voiceDetectionCues: string[]
+  /**
+   * TQ-2: Opening scenario — the youngest / most concrete explanation from
+   * the Explanation library (Age 10-12, or first entry). Used to anchor the
+   * lesson opening with a concrete scenario before any formal definition.
+   */
+  openingScenario: string | null
+}
+
+export type EBConceptContextResult =
+  | { found: true; context: EBConceptContext }
+  | { found: false; reason: string }
+
 // ── Internal caches ───────────────────────────────────────────────────────────
 
 const metaCache = new Map<string, Blueprint>()
 const contentCache = new Map<string, BlueprintContent>()
+const ebContextCache = new Map<string, EBConceptContext>()
 
 // ── Path resolution ───────────────────────────────────────────────────────────
 
 export function blueprintFilePath(conceptId: string): string {
   return path.join(process.cwd(), 'docs', 'curriculum', 'blueprints', `${conceptId}.md`)
+}
+
+/** Maps a concept ID prefix to its subject folder under educational-brain/concepts/. */
+function subjectFolderForConceptId(conceptId: string): string | null {
+  if (conceptId.startsWith('phys.')) return 'physics'
+  if (conceptId.startsWith('math.')) return 'mathematics'
+  if (conceptId.startsWith('eng.')) return 'english'
+  if (conceptId.startsWith('chem.')) return 'chemistry'
+  if (conceptId.startsWith('bio.')) return 'biology'
+  if (conceptId.startsWith('cs.')) return 'computer_science'
+  return null
+}
+
+export function ebConceptEntryPath(conceptId: string): string | null {
+  const subject = subjectFolderForConceptId(conceptId)
+  if (!subject) return null
+  return path.join(process.cwd(), 'educational-brain', 'concepts', subject, `${conceptId}.md`)
 }
 
 // ── Metadata extractors (Phase 1C) ────────────────────────────────────────────
@@ -566,6 +637,148 @@ function extractComponentMisconceptions(content: string): MisconceptionEntry[] {
   return entries
 }
 
+// ── EB Concept Entry parsers (TQ-1 / TQ-2) ───────────────────────────────────
+
+/**
+ * Returns the raw text of a top-level `## SectionName` block from an EB entry.
+ * EB entries use `## Title` (no number prefix).
+ */
+function extractEBSection(content: string, sectionTitle: string): string | null {
+  const startRe = new RegExp(`^## ${sectionTitle}\\s*\\n`, 'm')
+  const startMatch = startRe.exec(content)
+  if (!startMatch) return null
+  const afterStart = content.slice(startMatch.index + startMatch[0].length)
+  // End at the next ## heading.
+  const endMatch = /^## /m.exec(afterStart)
+  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+}
+
+/**
+ * TQ-1: Parses the "## Recovery notes" section of an EB entry.
+ * Extracts the "shrink to:" question and any M{n} recovery trigger blocks.
+ */
+function parseEBRecoveryNotes(content: string): {
+  shrinkTo: string | null
+  triggers: Array<{ label: string; text: string }>
+} {
+  const raw = extractEBSection(content, 'Recovery notes')
+  if (!raw) return { shrinkTo: null, triggers: [] }
+
+  // "shrink to: ..." — grab everything up to the end of that sentence/clause.
+  const shrinkMatch = /shrink to:\s*([^.]+(?:\.[^*\n]+)*)/i.exec(raw)
+  const shrinkTo = shrinkMatch ? shrinkMatch[1].trim().replace(/\s+/g, ' ') : null
+
+  // M{n} recovery triggers: lines starting with "*M{n} recovery ..." italics blocks.
+  const triggers: Array<{ label: string; text: string }> = []
+  const triggerRe = /\*(M\d+[^:]*(?:recovery[^:]*)?(?:trigger[^:]*)?)\*:\s*([\s\S]+?)(?=\n\n\*M\d+|\n\n\*[A-Z]|\n---|\n##|$)/gi
+  let m: RegExpExecArray | null
+  while ((m = triggerRe.exec(raw)) !== null) {
+    const label = m[1].trim()
+    const text = m[2].trim().replace(/\s+/g, ' ')
+    if (text.length > 10) {
+      triggers.push({ label, text })
+    }
+  }
+
+  return { shrinkTo, triggers }
+}
+
+/**
+ * TQ-1: Parses "Anti-analogy to avoid:" entries from the "## Analogy library" section.
+ */
+function parseEBAntiAnalogies(content: string): string[] {
+  const raw = extractEBSection(content, 'Analogy library')
+  if (!raw) return []
+
+  const results: string[] = []
+  // Match "**Anti-analogy to avoid**:" or "- **Anti-analogy to avoid**:" blocks.
+  const re = /\*\*Anti-analogy to avoid\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n\*\*|\n##|$)/gi
+  let m: RegExpExecArray | null
+  while ((m = re.exec(raw)) !== null) {
+    const text = m[1].trim().replace(/\s+/g, ' ')
+    if (text.length > 10) results.push(text)
+  }
+  return results
+}
+
+/**
+ * TQ-1: Parses the "What to listen for:" block from the "## Voice teaching" section.
+ * Returns individual detection cue strings.
+ */
+function parseEBVoiceDetectionCues(content: string): string[] {
+  const raw = extractEBSection(content, 'Voice teaching')
+  if (!raw) return []
+
+  // Find "What to listen for:" paragraph.
+  const listenMatch = /\*What to listen for\*:\s*([\s\S]+?)(?=\n\n\*|\n##|$)/i.exec(raw)
+  if (!listenMatch) return []
+
+  const block = listenMatch[1].trim()
+  // Split on semicolons or line breaks that separate individual cues.
+  return block
+    .split(/;\s*|\n(?=learner )/)
+    .map(s => s.trim().replace(/\s+/g, ' '))
+    .filter(s => s.length > 10)
+}
+
+/**
+ * TQ-2: Extracts the opening scenario — the youngest / most concrete explanation
+ * from the "## Explanation library" section (Age 10-12 entry, or the first entry).
+ */
+function parseEBOpeningScenario(content: string): string | null {
+  const raw = extractEBSection(content, 'Explanation library')
+  if (!raw) return null
+
+  // Prefer "Age 10-12" entry (story/concrete anchor).
+  const ageMatch = /- \*\*Age 10[–-]12[^*]*\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n##|$)/i.exec(raw)
+  if (ageMatch) return ageMatch[1].trim().replace(/\s+/g, ' ')
+
+  // Fallback: first bullet entry regardless of label.
+  const firstMatch = /- \*\*[^*]+\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n##|$)/.exec(raw)
+  return firstMatch ? firstMatch[1].trim().replace(/\s+/g, ' ') : null
+}
+
+// ── Public API — EB Concept Entry (TQ-1 / TQ-2) ──────────────────────────────
+
+/**
+ * Loads and parses the EB Concept Entry for the given conceptId.
+ * Returns { found: false } gracefully when no EB entry exists yet.
+ * Never throws.
+ */
+export function loadEBConceptContext(conceptId: string): EBConceptContextResult {
+  if (ebContextCache.has(conceptId)) {
+    return { found: true, context: ebContextCache.get(conceptId)! }
+  }
+
+  const filePath = ebConceptEntryPath(conceptId)
+  if (!filePath || !fs.existsSync(filePath)) {
+    return { found: false, reason: `No EB concept entry for "${conceptId}"` }
+  }
+
+  let raw: string
+  try {
+    raw = fs.readFileSync(filePath, 'utf-8')
+  } catch (err) {
+    return { found: false, reason: `Failed to read EB entry: ${String(err)}` }
+  }
+
+  try {
+    const { shrinkTo, triggers } = parseEBRecoveryNotes(raw)
+    const context: EBConceptContext = {
+      conceptId,
+      recoveryShrinkTo: shrinkTo,
+      recoveryTriggers: triggers,
+      antiAnalogies: parseEBAntiAnalogies(raw),
+      voiceDetectionCues: parseEBVoiceDetectionCues(raw),
+      openingScenario: parseEBOpeningScenario(raw),
+    }
+    ebContextCache.set(conceptId, context)
+    return { found: true, context }
+  } catch (err) {
+    return { found: false, reason: `Failed to parse EB entry: ${String(err)}` }
+  }
+}
+
 // ── Public API — metadata (Phase 1C) ─────────────────────────────────────────
 
 /**
@@ -607,6 +820,7 @@ export function getCachedBlueprint(conceptId: string): Blueprint | null {
 export function clearBlueprintCache(): void {
   metaCache.clear()
   contentCache.clear()
+  ebContextCache.clear()
 }
 
 // ── Public API — educational content (Phase 1D) ───────────────────────────────
@@ -683,9 +897,15 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
  * Advisory only — the tutor adapts to the conversation; this block is a
  * structured reference, not a script.
  *
+ * Pass `ebContext` (TQ-1/TQ-2) to also inject recovery notes, anti-analogies,
+ * voice detection cues, and the opening scenario from the EB Concept Entry.
+ *
  * Returns an empty string when content is empty (e.g. old-format blueprint).
  */
-export function buildBlueprintContextBlock(content: BlueprintContent): string {
+export function buildBlueprintContextBlock(
+  content: BlueprintContent,
+  ebContext?: EBConceptContext | null,
+): string {
   const lines: string[] = []
   let hasContent = false
 
@@ -708,6 +928,17 @@ export function buildBlueprintContextBlock(content: BlueprintContent): string {
         lines.push(`\nCore quantities:\n${quantitiesTable}`)
       }
     }
+  }
+
+  // TQ-2 — Opening scenario (concrete anchor before any formal definition)
+  if (ebContext?.openingScenario) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push('\nOPENING SCENARIO — start with this concrete anchor before any formal definition:')
+    lines.push(ebContext.openingScenario)
   }
 
   // Section 4 — Misconception Library
@@ -737,6 +968,52 @@ export function buildBlueprintContextBlock(content: BlueprintContent): string {
     lines.push('\nEXPLANATION LIBRARY — choose the explanation best suited to the student\'s level and the current teaching mode:')
     for (const exp of content.explanations) {
       lines.push(`\nExplanation ${exp.id} — ${exp.label}:\n${exp.text}`)
+    }
+  }
+
+  // TQ-1 — Anti-analogies (avoid these — they install misconceptions)
+  if (ebContext?.antiAnalogies && ebContext.antiAnalogies.length > 0) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push('\nANALOGIES TO AVOID — these are known to install misconceptions; do not use them:')
+    for (const aa of ebContext.antiAnalogies) {
+      lines.push(`• ${aa}`)
+    }
+  }
+
+  // TQ-1 — Voice detection cues
+  if (ebContext?.voiceDetectionCues && ebContext.voiceDetectionCues.length > 0) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push('\nVOICE DETECTION — if you hear these, act immediately:')
+    for (const cue of ebContext.voiceDetectionCues) {
+      lines.push(`• ${cue}`)
+    }
+  }
+
+  // TQ-1 — Recovery notes
+  const hasRecovery =
+    ebContext?.recoveryShrinkTo ||
+    (ebContext?.recoveryTriggers && ebContext.recoveryTriggers.length > 0)
+
+  if (hasRecovery) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push('\nRECOVERY NOTES — when the student is stuck or confused:')
+    if (ebContext!.recoveryShrinkTo) {
+      lines.push(`Emergency anchor (shrink to this when fully stuck): ${ebContext!.recoveryShrinkTo}`)
+    }
+    for (const t of ebContext!.recoveryTriggers) {
+      lines.push(`${t.label}: ${t.text}`)
     }
   }
 

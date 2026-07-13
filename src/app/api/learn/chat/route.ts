@@ -1404,12 +1404,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Protocol B, Section C, Spine D). Non-fatal — a missing or
           // unparseable blueprint never blocks the Teaching Engine.
           try {
-            const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock } = await import('@/lib/curriculum/blueprintLoader')
+            const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock, loadEBConceptContext } = await import('@/lib/curriculum/blueprintLoader')
             const blueprintResult = loadBlueprint(activeConceptIdForDecide)
             if (blueprintResult.found) {
               const contentResult = loadBlueprintContent(activeConceptIdForDecide)
               if (contentResult.found) {
-                const block = buildBlueprintContextBlock(contentResult.content)
+                // TQ-1/TQ-2: load EB Concept Entry for recovery notes,
+                // anti-analogies, voice cues, and opening scenario.
+                const ebResult = loadEBConceptContext(activeConceptIdForDecide)
+                const ebContext = ebResult.found ? ebResult.context : null
+                const block = buildBlueprintContextBlock(contentResult.content, ebContext)
                 if (block) systemPrompt += block
               }
             }
