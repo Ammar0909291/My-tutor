@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { isFlashcardXpAllowed } from '@/lib/xp'
 
 export async function GET() {
   const session = await auth()
@@ -63,9 +64,7 @@ export async function PATCH(req: Request) {
     })
     if (!card) return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 })
 
-    const startOfTodayUtc = new Date(now)
-    startOfTodayUtc.setUTCHours(0, 0, 0, 0)
-    const alreadyReviewedToday = card.lastReviewedAt !== null && card.lastReviewedAt >= startOfTodayUtc
+    const xpAllowed = isFlashcardXpAllowed(card.lastReviewedAt, now)
 
     await prisma.flashcard.update({
       where: { id, userId: session.user.id },
@@ -78,7 +77,7 @@ export async function PATCH(req: Request) {
     })
 
     // +2 XP only on the first review of this card today (MED-5 farm guard).
-    if (!alreadyReviewedToday) {
+    if (xpAllowed) {
       await prisma.user.update({
         where: { id: session.user.id },
         data: { xpPoints: { increment: 2 } },

@@ -7,6 +7,7 @@ import { getSchoolChapters } from '@/lib/school/schoolRouting'
 import { evaluateMockTest } from '@/lib/school/exams/mockTestEngine'
 import { ALL_KG_NODES } from '@/lib/education'
 import type { PracticeQuestion, PracticeAnswer } from '@/lib/school/practice/practiceTypes'
+import { buildWeakNodeMistakeRecords } from '@/lib/mistakeRecords'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -69,18 +70,12 @@ export async function POST(req: NextRequest) {
 
   // Record weak topics as mistake records for exam readiness + future planning
   if (result.weakTopicIds.length > 0) {
+    const weakTopicMistakeRecords = buildWeakNodeMistakeRecords(
+      result.weakTopicIds, session.user.id, ps.subjectSlug, sessionId, 'mock_test',
+    )
     await Promise.all(
-      result.weakTopicIds.map((nodeId: string) =>
-        prisma.mistakeRecord.create({
-          data: {
-            userId: session.user.id,
-            subjectSlug: ps.subjectSlug,
-            topicSlug: nodeId,
-            sessionId,
-            category: 'mock_test',
-            questionId: nodeId,
-          },
-        }).catch(() => null)
+      weakTopicMistakeRecords.map((data) =>
+        prisma.mistakeRecord.create({ data }).catch(() => null)
       )
     )
   }

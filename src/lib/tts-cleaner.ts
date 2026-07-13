@@ -58,6 +58,8 @@ const CURRENCY_NAMES: Record<string, string> = {
   '€': 'euro',
 }
 
+import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
+
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
@@ -68,6 +70,12 @@ function pluralize(value: string, singular: string): string {
 
 export function cleanTextForTTS(text: string): string {
   let t = text
+  // IPA/phonetic notation is written for the eye, not the ear — a speech
+  // engine either skips it or mispronounces it letter-by-letter regardless
+  // of the student's level, so this runs unconditionally (independent of
+  // the beginner-only stripping in the chat route, which is about what's
+  // shown on screen).
+  t = stripIpaNotation(t)
   // Remove [CODE]...[/CODE] blocks entirely
   t = t.replace(/\[CODE\][\s\S]*?\[\/CODE\]/gi, '')
   // Remove triple backtick code blocks

@@ -4,14 +4,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { sendWelcomeEmail } from "@/lib/email";
 import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rateLimit";
-
-const registerSchema = z.object({
-  // LOW-1: trim before length check so "  A " (3 chars, 1 non-space) is rejected.
-  name: z.string().trim().min(2, 'Name must be at least 2 characters').max(80),
-  email: z.string().email(),
-  password: z.string().min(8).max(100),
-  referralCode: z.string().optional(),
-});
+import { registerSchema } from "@/lib/registerSchema";
 
 export async function POST(req: Request) {
   // Pre-auth endpoint — limit per IP to stop registration spam (Sprint AQ).
@@ -26,7 +19,10 @@ export async function POST(req: Request) {
     const email = parsed.email.trim().toLowerCase()
     const { password, referralCode } = parsed
 
-    const existing = await prisma.user.findUnique({ where: { email } });
+    // Scoped selects (not bare findUnique): registration only needs
+    // existence/id, so a schema-drift column neither check touches can't
+    // take signup down.
+    const existing = await prisma.user.findUnique({ where: { email }, select: { id: true } });
     if (existing) {
       return NextResponse.json({ success: false, error: "Email already registered" }, { status: 409 });
     }
@@ -39,7 +35,7 @@ export async function POST(req: Request) {
     // Resolve referrer if a code was passed
     let referrerId: string | null = null
     if (referralCode) {
-      const referrer = await prisma.user.findUnique({ where: { referralCode } })
+      const referrer = await prisma.user.findUnique({ where: { referralCode }, select: { id: true } })
       if (referrer) referrerId = referrer.id
     }
 

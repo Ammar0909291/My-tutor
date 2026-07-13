@@ -4,8 +4,11 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { SubjectType, type Subject } from '@prisma/client'
 import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
+import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { getBoard } from '@/lib/education'
 import { captureError } from '@/lib/monitoring'
+import { schoolOnboardingSchema } from '@/lib/schoolOnboardingSchema'
+import { shouldSkipSchoolOnboarding } from '@/lib/schoolOnboardingGuard'
 
 // CRITICAL-3 (Sprint D): the old check matched any error whose message
 // contained "Unique constraint", which could mask an unrelated write
@@ -44,14 +47,6 @@ const generalSchema = z.object({
   message: 'At least one subject is required', path: ['subjectSlugs'],
 })
 
-// School students make exactly 3 onboarding decisions: user type, board, grade.
-const schoolSchema = z.object({
-  userType: z.literal('SCHOOL_STUDENT'),
-  board: z.string(),
-  grade: z.number().int().min(5).max(12),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
-})
-
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) {
@@ -64,11 +59,17 @@ export async function POST(req: Request) {
     const body = await req.json()
 
     if (body?.userType === 'SCHOOL_STUDENT') {
-      return handleSchoolStudent(session.user, userId, schoolSchema.parse(body))
+      return handleSchoolStudent(session.user, userId, schoolOnboardingSchema.parse(body))
     }
 
     const parsed = generalSchema.parse(body)
-    const { currentLevel, selfDescription, voiceChoice, teachingLanguage } = parsed
+    // Normalize onto the 3 canonical tiers (src/lib/curriculum/levels.ts) at
+    // the point of storage — the wizard only ever sends beginner/intermediate/
+    // advanced, but the schema still accepts two wider legacy values; storing
+    // the normalized form means every downstream reader of Profile.currentLevel
+    // only ever has to handle one system.
+    const currentLevel = normalizeToCanonicalLevel(parsed.currentLevel)
+    const { selfDescription, voiceChoice, teachingLanguage } = parsed
     // Accept either the legacy single `subjectSlug` or the new multi-select `subjectSlugs` — dedupe and keep order.
     const subjectSlugs = Array.from(new Set([
       ...(parsed.subjectSlugs ?? []),
@@ -221,7 +222,7 @@ export async function POST(req: Request) {
 async function handleSchoolStudent(
   sessionUser: { name?: string | null; email?: string | null },
   userId: string,
-  parsed: z.infer<typeof schoolSchema>,
+  parsed: z.infer<typeof schoolOnboardingSchema>,
 ) {
   const { board, grade, teachingLanguage } = parsed
 
@@ -265,7 +266,7 @@ async function handleSchoolStudent(
     const existing = await tx.profile.findUnique({ where: { userId: effectiveUserId } })
     const user = await tx.user.findUnique({ where: { id: effectiveUserId }, select: { onboardingCompleted: true } })
 
-    if (existing && user?.onboardingCompleted && existing.educationBoard) {
+    if (shouldSkipSchoolOnboarding(existing, user?.onboardingCompleted)) {
       // LOW-4: guard against silent data loss — do not overwrite board/grade for a
       // fully-completed school onboarding. Return without error so the client can
       // redirect to the dashboard as if onboarding had just completed.

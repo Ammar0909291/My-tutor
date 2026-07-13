@@ -142,6 +142,33 @@ export interface LessonContext {
   completedLessons: number[]
 }
 
+type ContentRegister = 'beginner' | 'intermediate' | 'expert'
+
+// Controls whether the tutor may use IPA/phonetic notation, gated purely on
+// the student's content register (never on subject) — see
+// src/lib/teaching/assets/studentState.ts:resolveContentRegister for how
+// callers derive this from the student's level/grade.
+function notationRulesBlock(register: ContentRegister, lang: 'ru' | 'en' | 'hi'): string {
+  const blocks: Record<ContentRegister, Record<'ru' | 'en' | 'hi', string>> = {
+    beginner: {
+      en: `\n\nNOTATION RULES: Never use IPA (International Phonetic Alphabet) notation such as /æ/, /ʃ/, /θ/, or any other Unicode phonetic symbols — beginners find them confusing and they are read badly aloud. When explaining a sound or pronunciation, describe it in plain words with a familiar example word instead (e.g. say "the short a sound, like in apple" instead of writing /æ/). Only use IPA if the student explicitly asks for the phonetic/IPA spelling of a word.`,
+      hi: `\n\nNOTATION RULES: IPA (International Phonetic Alphabet) notation jaise /æ/, /ʃ/, /θ/, ya koi bhi Unicode phonetic symbol kabhi use na karein — beginners ke liye yeh confusing hote hain aur bolne mein bhi ajeeb lagte hain. Kisi sound ya pronunciation ko explain karte waqt plain words aur ek familiar example word use karein (jaise "apple wale a jaisi short a sound" bolein, /æ/ likhne ke bajaye). IPA sirf tab use karein jab student khud explicitly IPA/phonetic spelling maange.`,
+      ru: `\n\nПРАВИЛА ЗАПИСИ: Никогда не используй транскрипцию МФА (IPA) вроде /æ/, /ʃ/, /θ/ или любые другие фонетические символы Unicode — новичкам они непонятны и плохо звучат при озвучке. Объясняя звук или произношение, описывай его простыми словами со знакомым примером вместо символов. Используй IPA только если студент сам явно попросил фонетическую транскрипцию слова.`,
+    },
+    intermediate: {
+      en: `\n\nNOTATION RULES: Prefer plain-language sound descriptions with a familiar example word first. You may add IPA notation in parentheses after the plain-language explanation if it's genuinely useful, but never rely on IPA alone.`,
+      hi: `\n\nNOTATION RULES: Pehle plain-language sound description aur ek familiar example word dein. Agar genuinely useful ho to IPA notation ko brackets mein plain explanation ke baad add kar sakte hain, lekin sirf IPA par depend na karein.`,
+      ru: `\n\nПРАВИЛА ЗАПИСИ: Сначала объясняй звук простыми словами со знакомым примером. Транскрипцию МФА (IPA) можно добавить в скобках после объяснения, если это действительно полезно, но не полагайся только на неё.`,
+    },
+    expert: {
+      en: `\n\nNOTATION RULES: IPA notation and linguistic/technical terminology are allowed whenever appropriate for this student's level.`,
+      hi: `\n\nNOTATION RULES: Is student ke level ke hisaab se IPA notation aur linguistic/technical terminology allowed hai jab bhi appropriate ho.`,
+      ru: `\n\nПРАВИЛА ЗАПИСИ: Транскрипция МФА (IPA) и лингвистическая/техническая терминология допустимы, когда это уместно для уровня студента.`,
+    },
+  }
+  return blocks[register][lang]
+}
+
 export function buildTutorSystemPrompt(
   subject: string,
   studentName: string,
@@ -151,7 +178,9 @@ export function buildTutorSystemPrompt(
   teachingLanguage: 'ru' | 'en' | 'hi' = 'en',
   lessonCtx?: LessonContext | null,
   _subjectType?: string,
+  contentRegister: ContentRegister = 'beginner',
 ) {
+  const notationBlock = notationRulesBlock(contentRegister, teachingLanguage)
   const lessonBlock = lessonCtx
     ? teachingLanguage === 'ru'
       ? `\n\nТЕКУЩИЙ УРОК:\nУрок ${lessonCtx.currentLesson} из ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nРаздел: ${lessonCtx.unitTitle}\nЦель урока: ${lessonCtx.lessonGoal}\nПройдено уроков: ${lessonCtx.completedLessons.length} из ${lessonCtx.totalLessons}\n\nКогда студент явно говорит "понял", "готов к следующему" или "закончили урок" И ты уверен что цель урока достигнута — ответь СТРОГО в конце сообщения: [LESSON_COMPLETE]`
@@ -185,12 +214,11 @@ Response format:
 - Format code blocks in markdown with the language specified
 
 LEARNING RULES:
-1. After each explanation ask: "Got it? Reply: yes / no / partially"
-2. If "no" — choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
-3. If "partially" — ask "What exactly is unclear?"
-4. NEVER move to next topic without confirmation of understanding
-5. Max 3-4 sentences + code, then a question or task
-6. Short student replies = fatigue → make it more engaging`
+1. Gauge understanding from what the student actually types back — do not force a fixed "yes / no / partially" reply format
+2. If the student seems confused, choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
+3. NEVER move to next topic without genuine confirmation of understanding from the conversation
+4. Max 3-4 sentences + code, then a natural follow-up question or task
+5. Short student replies = fatigue → make it more engaging${notationBlock}`
   }
 
   if (teachingLanguage === 'hi') {
@@ -206,7 +234,7 @@ CURRENT LESSON SIRF CONTEXT HAI, RESTRICTION NAHI: Neeche diya lesson info bata 
 HINGLISH SUPPORT:
 - छात्र Hinglish में लिख सकते हैं — यह बिल्कुल ठीक है
 - Technical terms English में रखें: variable, function, loop, array, pointer
-- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo`
+- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo${notationBlock}`
   }
 
   // Russian
@@ -221,9 +249,9 @@ HINGLISH SUPPORT:
 Цели обучения: ${goals}${memorySection}${lessonBlock}
 
 ПРАВИЛА ОБУЧЕНИЯ:
-1. После каждого объяснения спроси: "Понял? Отвечай: да / нет / частично"
-2. Если "нет" — выбери ДРУГОЙ подход
-3. Максимум 3-4 предложения + код, потом вопрос или задание`
+1. Оценивай понимание по тому, что студент сам пишет в ответ — не требуй жёсткого формата "да / нет / частично"
+2. Если студент выглядит растерянным — выбери ДРУГОЙ подход
+3. Максимум 3-4 предложения + код, потом естественный вопрос или задание${notationBlock}`
 }
 
 export function buildCurriculumPrompt(subject: string, selfDescription: string, treeBlock?: string | null) {

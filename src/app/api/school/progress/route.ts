@@ -41,6 +41,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Unknown chapter' }, { status: 400 })
     }
 
+    // Mastery gate: refuse to mark complete if the most recent in-chat
+    // comprehension checkpoint for this chapter was failed and never
+    // retried successfully. A chapter with no checkpoint at all is
+    // unaffected (no evidence either way) — this only blocks the one
+    // case where a demonstrated failure would otherwise be silently
+    // overridden by a UI click.
+    if (action === 'complete') {
+      const lastCheckpoint = await withRetry(() => prisma.learningCheckpoint.findFirst({
+        where: { userId, subjectSlug: subject, chapterId },
+        orderBy: { createdAt: 'desc' },
+        select: { passed: true },
+      }))
+      if (lastCheckpoint && !lastCheckpoint.passed) {
+        return NextResponse.json({
+          success: false,
+          error: 'This chapter has an unresolved comprehension checkpoint — keep working with the tutor until you pass it before marking the chapter complete.',
+        }, { status: 409 })
+      }
+    }
+
     const code = schoolSubjectCode(profile.educationBoard, subject, profile.grade)
     const existing = await withRetry(() => prisma.studentProgress.findUnique({
       where: { userId_subjectCode: { userId, subjectCode: code } },

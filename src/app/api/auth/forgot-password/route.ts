@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { randomBytes, createHash } from 'crypto'
+import { randomBytes } from 'crypto'
 import { prisma } from '@/lib/db/prisma'
 import { sendPasswordResetEmail } from '@/lib/email'
 import { checkRateLimit, rateLimitResponse, getClientIp } from '@/lib/rateLimit'
+import { hashResetToken } from '@/lib/auth/resetToken'
 
 const TOKEN_IDENTIFIER_PREFIX = 'password-reset:'
 const EXPIRY_MS = 60 * 60 * 1000 // 1 hour
@@ -45,7 +46,10 @@ export async function POST(req: NextRequest) {
     if (!EMAIL_RE.test(normalized)) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
     }
-    const user = await prisma.user.findUnique({ where: { email: normalized } })
+    const user = await prisma.user.findUnique({
+      where: { email: normalized },
+      select: { passwordHash: true },
+    })
     if (!user || !user.passwordHash) {
       return safeResponse()
     }
@@ -54,7 +58,7 @@ export async function POST(req: NextRequest) {
     // SHA-256 hash. A DB read gives the attacker the hash, not the raw token,
     // so active reset links cannot be used from a stolen DB snapshot.
     const rawToken = randomBytes(32).toString('hex')
-    const tokenHash = createHash('sha256').update(rawToken).digest('hex')
+    const tokenHash = hashResetToken(rawToken)
     const identifier = `${TOKEN_IDENTIFIER_PREFIX}${normalized}`
     const expires = new Date(Date.now() + EXPIRY_MS)
 

@@ -11,6 +11,78 @@
   not just code/commands inside it — goes inside one ``` fence. Markdown headers/tables/checklists
   outside a fence do NOT satisfy this; wrap the whole thing.
 
+## Workflow preference (ALWAYS follow — updated 2026-07-07, supersedes the prior version below)
+- On EVERY prompt: first read and understand it the way the lead developer on this project would
+  — what it actually needs, what it touches, what's ambiguous or missing.
+- Then decide yourself what to add or remove from the request as understood (scope corrections,
+  missing pieces, unnecessary parts) — do NOT stop and ask the user via AskUserQuestion for this.
+  State plainly, in one short block at the start of the reply, exactly what was redefined/applied.
+- Then immediately start working (building) on the prompt as redefined — no waiting for a
+  confirmation round on scope.
+- This is a standing, explicit pre-authorization to proceed without a scope-confirmation pause —
+  it does NOT extend to: (a) the Educational Brain G1/G2 governance gates elsewhere in this file
+  (Canonical KG v1 freeze + explicit per-item approval before implementation — those still require
+  real, separate user sign-off, no exceptions via this preference), or (b) genuinely risky/hard-to-
+  reverse actions (force push, resets, destructive git ops, anything affecting shared/production
+  state) — those still get flagged and confirmed first, per standing safety practice.
+- Prior version (2026-07-07, superseded): propose additions/removals and WAIT for the user's
+  answer before implementing. Replaced because it added a confirmation round-trip the user wants
+  removed for ordinary scope decisions.
+
+## Permanent Research Workflow (RETIRED 2026-07-07 — see override note, kept below for history only)
+- **OVERRIDE (2026-07-07, binding, supersedes everything below):** do NOT critique, analyze,
+  improve, or rewrite prompts going forward, for research/architecture/science tasks or any other
+  kind. No PROMPT IMPROVEMENTS section, no FINAL PROMPT rewrite, no "improved version" substituted
+  for what was actually asked. Execute every prompt exactly as given, as-is. This fully retires
+  the analyze/improve/rewrite mechanism described below (Steps 1-4 in spirit); it does NOT retire
+  ordinary good-faith execution quality (depth, no filler, correctness) — it only stops the
+  practice of changing what was asked before doing it.
+- Scope: applies to research, architecture, and science-track prompts (the Master Teaching
+  Science / Decision Science / architecture-review series) — distinct from ordinary build/dev
+  tasks, which follow the Workflow preference above. This does NOT touch or loosen the
+  Educational Brain G1/G2 production-code governance gate elsewhere in this file — a "final
+  prompt" rewrite is a text-level improvement to a research question, never authorization to
+  implement production code without separate, explicit per-item sign-off.
+- Role for these tasks: not a prompt executor — Chief Architect / Chief Educational Scientist /
+  Chief Learning Researcher / Chief Systems Thinker. Improve both the prompt and the project's
+  architecture; never blindly execute a prompt that can be improved. Discover the best truth;
+  don't defend prior design decisions just because they're prior.
+- Before executing: critically analyze the prompt — missing areas, weak/incorrect/hidden
+  assumptions, better ordering/terminology/scope, missing research questions, redundancy,
+  anything deserving deeper investigation. Challenge it as a peer Chief Architect would; don't
+  agree just because it was suggested.
+- Produce a PROMPT IMPROVEMENTS section (Added / Removed / Modified / Unchanged, each with
+  reasoning) before executing.
+- Then show the FINAL PROMPT — the rewritten version incorporating every improvement. Don't pause
+  for approval on this text-level rewrite; assume approval unless an improvement would
+  fundamentally change the objective (flag that explicitly rather than silently substituting a
+  different objective).
+- Execute ONLY the final (improved) prompt, never the original once it's been improved. No
+  permission-seeking language at all for this — not "may I proceed," not a soft narrated pause,
+  not even a preamble framed as asking. State the final prompt and go straight to executing it.
+- Once a FINAL PROMPT has been produced and executed for a given research topic (e.g. the Master
+  Teacher Decision Science taxonomy), that becomes the canonical, latest version of the work. If
+  the same or a near-identical prompt is sent again later, do not restart Step 1-2 from scratch —
+  recognize it's already been through this improvement cycle, and either re-present the already-
+  improved version or push it further with genuinely new discoveries, never regress to re-doing
+  the same analysis or re-deriving an already-superseded flat/unmerged structure.
+- Continuous discovery: keep questioning conclusions while researching; apply a better
+  architecture/taxonomy/framework the moment it emerges, without waiting for a new prompt.
+- Whenever research changes a conclusion from an earlier phase, produce an ARCHITECTURAL
+  REVISIONS section: previous assumption, new discovery, why the old idea was incomplete, why the
+  new one is better, impact on previous phases, whether previous documents need updating. Truth
+  over consistency with prior phases.
+- Reason, where appropriate, as a multidisciplinary panel (education, cognitive science,
+  neuroscience, psychology, learning science, instructional design, curriculum design, human
+  tutoring, linguistics, math/science education, AI, knowledge engineering, systems architecture,
+  HCI) — let the disciplines disagree, then synthesize the strongest conclusion.
+- Output quality: no filler; depth over length; one profound discovery beats fifty shallow
+  observations; always surface Biggest Discovery, Biggest Weakness, Biggest Risk, Biggest
+  Opportunity, and Biggest Architectural Improvement.
+- Ultimate objective for this track: not completing tasks — discovering and designing the world's
+  greatest AI teacher. Every research phase should permanently improve My Tutor's architecture;
+  write every document as permanent research-library material, worth reading years later.
+
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
 - AI: Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia only, `country === 'ru'`;
@@ -50,6 +122,102 @@
     `status`, worked-example/assessment/visual blueprints) is compatible with ADR 14's
     AssetIdentity catalogue — it is a curated *source* for ADR 14 Phase 2 population, not a
     competing asset model.
+
+## Educational Brain — Knowledge Base (the moat, 2026-07-10)
+- `educational-brain/` (repo root) is the permanent authored teaching-science knowledge tree —
+  distinct from `docs/educational-brain/` (ch01-ch11 implementation blueprints) and
+  `docs/architecture/` (engine ADRs/Bible). Charter: reduce AI reasoning over time by authoring
+  educational knowledge once for permanent retrieval. Deliveries 1-2 (Recovery Engine, Adaptive
+  Rules, Voice Model, Concept Schema, seed concepts; the ten Delivery-2 layers incl. 23 Universal
+  Teaching Principles) were chat-authored and are pending transcription into this tree — the
+  tree's README records this. Delivery 3 (2026-07-10, first in-repo): the **Assessment Design
+  Library**, `educational-brain/assessment/` — 10 documents + index (foundations/quality metrics/
+  anti-patterns; binary-search diagnosis + flowcharts; distractor science + golden probes;
+  confidence & calibration; mastery gates + evidence hierarchy; oral/visual/practical modality;
+  by level/age/subject/persona; per-teaching-action illusion-puncturing assessment; failed-
+  assessment recovery protocol; rubrics). Knowledge only — no runtime/schema/curriculum changes.
+- Delivery 5 (2026-07-10, in-repo): **Curriculum Integration Layer**, `educational-brain/concepts/`
+  — binds Brain knowledge to canonical KG concept IDs (curriculum = WHAT, Brain = HOW; entries
+  keyed 1:1 to `docs/{subject}/kg/graph.json` IDs, no second hierarchy, KG authoritative on any
+  divergence). Contains the binding spec (README), the concept-entry template/authoring contract
+  (TEMPLATE.md, reuse-by-reference law: universal engines referenced, never copied), the coverage
+  manifest + expansion protocol (COVERAGE.md: placement entry points → cut-nodes → misconception
+  hubs → prerequisite order; partial entries don't count as coverage), and three full-depth seed
+  entries that ARE the quality bar: `math.arith.fractions`, `phys.mech.newtons-first-law`,
+  `eng.phonics.letter-sound-correspondence` — each anchored to verified KG node data with mental
+  models, misconception libraries (verbatim probes + characteristic phrases), explanation/analogy/
+  anti-analogy/demonstration libraries, discovery lesson (or argued direct-instruction call),
+  teaching-action dispatch, voice teaching, concrete assessment gate sets, concept-specific
+  recovery notes, memory typing, transfer maps, and curriculum feedback. Knowledge only — no
+  runtime/schema/curriculum changes.
+- Delivery 6 (2026-07-10, in-repo): **First Lesson Standard**, `educational-brain/first-lesson/`
+  — universal standards for teaching a complete beginner (motivated by the platform's own observed
+  failure to reliably teach English lesson one). 8 docs + index: complete-beginner definition/
+  detection (informal knowledge is the only attachable foundation; false/returning beginners;
+  adult shame vs child fragility), never-rules + hard limits (1 concept, ≤3 new words ×3 uses,
+  2-sentence bursts, ≤6 questions, failure budget 1, WM treated as 2 slots), tutor behaviour
+  (wait time, redirect-never-mark-wrong, scripted 30-second close), corrected flow (anchor →
+  demonstrate → explain-after → echo/supported/prompted → ONE solo → invisible confirm → close;
+  completion criteria C1-C4 with C2 = next-session opening retrieval, so lesson one formally
+  completes at lesson two), failure-state lesson-one deltas (+ "I'm scared"/"I'm stupid"; one
+  failure state per session max), 16-entry AI anti-library (quiz-first, definition-first,
+  echo-advancement, register drift, invisible restart...), subject adaptations anchored to
+  verified KG entry nodes (eng.phonics.print-concepts + phonemic-awareness — English lesson one
+  is ORAL, print-optional; math.found.mathematical-thinking — counting-with-meaning floor;
+  phys.meas.units — need-creation before names, "SI" banned from lesson one), and the
+  failure→root-cause→one-artifact-same-week feedback loop (lesson-one failures lead the entire
+  authoring queue). Reuses Deliveries 1-3 + 5 by reference. Knowledge only — no runtime/schema/
+  curriculum changes.
+- Delivery 7 (2026-07-10, in-repo): **Teaching Decision Engine**, `educational-brain/decision-engine/`
+  — the executive layer deciding WHAT TO DO NEXT every turn; the Brain retrieves DECISIONS, not
+  documents. 8 docs + README (repo-audit map: what existing decision logic was found and how each
+  piece is reused/extended — D1 adaptive rules → transitions/rungs, D2 §6 dispatch → selector,
+  assessment/05 §4 + /09 → assessment interiors, first-lesson/04 → locked lesson-one config;
+  runtime decide()/ADR 08/09/11/Bible explicitly NOT redesigned — this is the pedagogy the code
+  pipeline will retrieve). Contents: teaching state machine (session wraps concept machine;
+  OBSERVATION as stance; RECOVERY preempts everything, exits one step below entry; full transition
+  table), student state engine (affect > cognitive > drive priority bands; voice/behaviour/learning
+  detection per state; failure-spiral/boredom-slide/repair-path trajectories; detection-honesty
+  rules), decision matrix (affect-band preemption rule collapses ~180 cells; concrete decisions per
+  teaching-state × cognitive/drive state), seven-filter action selector (authored concept-entry
+  dispatch wins outright; knowledge-type → state-legality → learner constraints → history/affinity →
+  load → tie-break; 3 worked traces), escalation engine (per-failure ladders, one-dimension-per-rung
+  law, six standing moves w/ triggers), conversation engine (quiz/interview/lecture/robot registers
+  w/ antidotes; max-2-questions-in-a-row; react+move+invite turn skeleton; contingency+continuity),
+  lesson planning engine (invariant session shape; fluency-gated triad; compaction protocol;
+  summit-ending soft trigger; stuck-concept protocol), teaching loop (8-strategy closed set;
+  learner-model update contract; retrieval ledger — retrieved vs still-invented residue, aligned
+  with ADR 14's LLM-as-voice-renderer endgame; human-tutor audit with 5 recorded audit-forced
+  changes). Knowledge only — no runtime/schema/curriculum changes.
+- Delivery 8 (2026-07-10, in-repo): **Student State Model**, `educational-brain/student-state/`
+  — the permanent learner representation the Decision Engine reasons over (weather vs climate:
+  decision-engine/02's momentary states read priors from and write evidence into this standing
+  model via 08 §3's update contract; ADR 10's six runtime stores referenced as code-side
+  containers, no schemas authored). 10 docs + README (audit map). Eight dimensions under seven
+  design laws (evidence-backed+dated, decaying, per-domain, descriptions-never-verdicts,
+  hypothesis-not-fact, asymmetric caution, never-judges/never-leaks): 8-rung per-concept knowledge
+  ladder (UNKNOWN→RECOGNIZED→IMITATES→ASSISTED→INDEPENDENT→AUTOMATIC→TRANSFER→EXPERT, each rung
+  mapped to evidence + machine entry point — the structural ban on re-teaching from zero; rungs
+  move down via memory modulation, high-water mark kept), misconception ledger (separate from
+  knowledge; strength DOMINANT/UNDER-LOAD/RESIDUAL; verbatim phrase evidence; repair history w/
+  burned-collision tracking; lifecycle has no ERASED status, DORMANT-VERIFIED keeps re-checks
+  forever; birth-type regression priors, 2 regrowths → re-rate HIGH + repair-path redesign flag),
+  confidence model (5 chronic patterns; build-slow/collapse-steep asymmetry → personalized affect
+  budgets; calibration L0-L3 as taught skill; target = calibration not height), behaviour profile
+  (rusher/overthinker w/ condition tags; affinities = min-evidence-across-concepts statistics,
+  never learning-style identities; measured attention span; persistence-scaled struggle budgets),
+  emotional model (triggers engineered out; recovery speed personalizes Recovery Engine pacing;
+  flow protection; imported-history externalization targets; per-learner what-restores list;
+  robustness licensed as explicitly as fragility flagged), memory statuses (7 statuses derived
+  from Memory Engine data, never duplicating scheduling; personal forgetting rate as the key
+  personalization), teaching history (append-raw/read-summaries; breakthrough verbatims + severe
+  negative events never summarized; representation-family inheritance to sibling concepts),
+  trajectory (velocity per effort-time; acceleration as earliest warning; plateau diagnosis tree —
+  consolidation≠emergency, don't thrash; regression routing; momentum spent deliberately;
+  readiness = derived three-way answer), digital twin (8 mandatory questions; decision provenance
+  — unexplainable decision = invented decision; six-learner audit passes with one architecture;
+  honest limits: surfaces-but-never-diagnoses disabilities). Knowledge only — no runtime/schema/
+  curriculum changes.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —
@@ -345,6 +513,75 @@
   order; (c) first hosted CI run → commit the ratchet baseline; (d) a
   directive explicitly re-permits building test scaffolding → build Tier
   2 tests + transcript harness per VALIDATION_FRAMEWORK_P10.md §7.
+  (8) 2026-07-07 — **G2 exception granted: ADR 14 Phase 2/3 implemented**
+  ("Explanation Memory" + "Teaching Action Repository", explicit owner
+  chat instruction, out of the normal G1/G2 sequence — G1 KG-freeze still
+  not declared). Discovered mid-task that W1-3 (Evidence Engine Phase 1)
+  and W1-4 (AssetIdentity + three family tables, empty) were ALREADY
+  implemented in the codebase (`src/lib/teaching/evidence/evidenceEngine.ts`,
+  `src/lib/teaching/assets/assetIdentity.ts`) despite their checklist boxes
+  reading unchecked — checklist corrected to match reality rather than
+  building a duplicate schema. Built on top, EXPLANATION + PROBE families
+  only (VISUAL intentionally untouched — ADR 12/W4-2 territory): Student
+  State builder (`studentState.ts`, grade→GradeBand mapping), a pure
+  confidence matcher (`matcher.ts`, calibrated so a freshly human-approved
+  ACTIVE asset with zero accumulated evidence clears the default threshold
+  on concept+language+gradeBand fit alone — qualityScore/qualityConfidence
+  are Evidence-Engine-owned per the schema's single-writer invariant and
+  can only ever add bonus confidence, never gate a floor), capture
+  (`explanationMemory.ts`/`teachingActionRepository.ts`, DRAFT after every
+  LLM generation), an admin review endpoint
+  (`/api/admin/knowledge-assets`, DB-role-gated, approve/reject), and
+  `assembleLesson()` wired into `route.ts` immediately before the LLM
+  call. Live-verified end-to-end via local Postgres + direct HTTP calls:
+  DRAFT is never served; after admin approval the real chat endpoint
+  returns `provider: "memory"` with the exact stored content and the LLM
+  is never invoked; combined explanation+quiz assembly works; with the
+  catalogue empty (today's real state — nothing was pre-populated per the
+  task's own "do not populate thousands of explanations now" instruction)
+  the LLM path is provably unchanged from before this build. Scope: only
+  physics/mathematics/english (the three live curriculums).
+  (9) 2026-07-08 — **G2 exception granted: curriculum-level placement
+  implemented** (explicit owner chat instruction, out of the normal
+  G1/G2 sequence — G1 KG-freeze still not declared). Root cause fixed:
+  a prior investigation found six independent learner-level enums in
+  the repo, of which only `Profile.currentLevel` (beginner/intermediate/
+  advanced, set at onboarding) was actually reachable — but its only
+  live effect was cosmetic AI-prompt text; every learner always started
+  at lesson 1 regardless of selected level. Canonicalized on
+  `CurriculumLevel` (`src/lib/curriculum/levels.ts`, 3 tiers, the one
+  the onboarding UI actually offers) with `normalizeToCanonicalLevel()`
+  mapping every legacy value onto it; deprecated (not removed, no
+  migration) `mastery/levels.ts`'s unused `MASTERY_LEVELS` and
+  `subjectCatalog.ts`'s 6-tier `LEVELS` (kept only for the Subject
+  Library page's enrollment badge), and documented the `LevelBand`
+  enum + Coach-Placement models (`CoachProfile`/`LearningGoal`/
+  `PlacementAssessment`/`AssessmentAttempt`) as confirmed dead (zero
+  writers anywhere) via a schema comment only, no structural change.
+  Implementation: `src/lib/curriculum/placement.ts` (new) computes a
+  level-appropriate entry order from each subject's own already-authored
+  per-node `difficulty` tag (foundational/developing/proficient/
+  advanced/expert/research — forwarded onto `KGNode` in
+  `knowledgeGraph.ts`, previously computed-but-dropped after
+  `difficultyHours()`); wired into `/api/curriculum`'s GET (entry-order
+  default + prerequisite-unlock floor) and `getDashboardV2Data.ts`
+  (same default, so dashboard/Continue Learning/Current Lesson never
+  disagree with `/learn`). Explicitly does NOT write fake completions —
+  `StudentProgress.completedLessons`/`TopicProgress` stay genuinely
+  empty until really earned; only the *default* starting `currentLesson`
+  and which nodes count as prerequisite-unlocked change, and only until
+  a real progress row exists. No schema/migration changes at all — fully
+  derived from data that already existed. Scope: Subject-Library/KG-backed
+  subjects only (physics/mathematics/chemistry/biology/computer_science/
+  english) — School Mode intentionally excluded (walks an external
+  board/grade-prescribed chapter order that shouldn't be skipped on a
+  self-reported level). Live-verified against the real physics KG (216
+  concepts) with three real accounts: beginner→lesson 1 ("SI Units and
+  Measurement"), intermediate→lesson 7 ("Dot and Cross Products"),
+  advanced→lesson 32 ("Conservative and Non-Conservative Forces",
+  correctly crossing into a later unit) — dashboard's Continue
+  Learning/Current Lesson widget matched exactly for all three. Full
+  suite 630/631, tsc clean, build succeeds.
   **ADR 14 complete (2026-07-02):** Knowledge Asset Lifecycle. Confirmed all
   generated content (worked examples, explanations, visual specs, probes) is
   discarded per-turn — a P2 violation at the content layer. `teachingAssets.ts`/

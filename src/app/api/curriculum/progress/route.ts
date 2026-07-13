@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { awardXP } from '@/lib/xp'
 import { generateJSON } from '@/lib/ai/client'
 import { getSchoolChapters } from '@/lib/school/schoolRouting'
+import { computeLessonCompletionPercent, isLessonSetCompleted } from '@/lib/lessonProgress'
 
 const schema = z.object({
   subjectCode: z.string(),
@@ -14,6 +15,57 @@ const schema = z.object({
   lessonTitle: z.string().optional(),
   lessonGoal: z.string().optional(),
 })
+
+const resetSchema = z.object({
+  subjectCode: z.string(),
+  lessonOrder: z.number().int().positive(),
+  topicSlug: z.string().optional(),
+})
+
+export async function DELETE(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+
+  try {
+    const body = await req.json()
+    const { subjectCode, lessonOrder, topicSlug } = resetSchema.parse(body)
+
+    // Remove this lesson from completedLessons atomically
+    await prisma.$executeRaw`
+      UPDATE student_progress
+      SET "completedLessons" = array_remove("completedLessons", ${lessonOrder}::int4),
+          "isCompleted" = false,
+          "completedAt" = NULL,
+          "updatedAt" = NOW()
+      WHERE "userId" = ${session.user.id}
+        AND "subjectCode" = ${subjectCode}
+    `
+
+    // Reset TopicProgress so the lesson is treated as not started
+    if (topicSlug) {
+      const subjectSlug = subjectCode.split(':')[1] ?? subjectCode
+      await prisma.topicProgress.updateMany({
+        where: { userId: session.user.id, subjectSlug, topicSlug },
+        data: { status: 'NOT_STARTED', masteryPct: 0 },
+      })
+    }
+
+    const progress = await prisma.studentProgress.findUnique({
+      where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
+    })
+
+    return NextResponse.json({
+      success: true,
+      progress: progress ?? { currentLesson: 1, completedLessons: [] },
+    })
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
+    }
+    console.error('[DELETE /api/curriculum/progress]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
+}
 
 export async function GET(req: Request) {
   const session = await auth()
@@ -86,9 +138,11 @@ export async function PATCH(req: Request) {
       : [completedLesson]
 
     const completionPercent = totalLessons
-      ? Math.min(100, Math.round((completedLessons.length / totalLessons) * 100))
+      ? computeLessonCompletionPercent(completedLessons.length, totalLessons)
       : (existing?.completionPercent ?? 0)
-    const isCompleted = totalLessons ? completedLessons.length >= totalLessons : (existing?.isCompleted ?? false)
+    const isCompleted = totalLessons
+      ? isLessonSetCompleted(completedLessons.length, totalLessons)
+      : (existing?.isCompleted ?? false)
     const completedAt = isCompleted ? (existing?.completedAt ?? new Date()) : null
 
     const progress = await prisma.studentProgress.upsert({

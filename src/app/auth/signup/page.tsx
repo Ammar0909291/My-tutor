@@ -1,6 +1,6 @@
 'use client'
-import { useState } from 'react'
-import { signIn } from 'next-auth/react'
+import { useState, useEffect } from 'react'
+import { signIn, getProviders } from 'next-auth/react'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
@@ -27,6 +27,12 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // Root-cause fix: mirrors the login page — see the comment there.
+  const [googleAvailable, setGoogleAvailable] = useState(false)
+
+  useEffect(() => {
+    getProviders().then((providers) => setGoogleAvailable(Boolean(providers?.google))).catch(() => setGoogleAvailable(false))
+  }, [])
 
   const clearError = () => setError(null)
 
@@ -111,7 +117,7 @@ export default function SignupPage() {
           </div>
 
           <Card style={{ padding: 24 }}>
-            {process.env.NEXT_PUBLIC_GOOGLE_ENABLED === 'true' && (
+            {googleAvailable && (
               <>
                 <button onClick={handleGoogle} disabled={googleLoading}
                   className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-5 disabled:opacity-50"

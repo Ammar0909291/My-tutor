@@ -1,24 +1,40 @@
 import { describe, it, expect } from 'vitest'
+import { registerSchema } from '@/lib/registerSchema'
 
 // Pure state machine tests — no Prisma needed
 describe('New student journey state machine', () => {
+  // NOTE: registerSchema above now imports the real schema from
+  // src/lib/registerSchema.ts (extracted out of
+  // src/app/api/auth/register/route.ts). Investigated fresh against
+  // current production code: the old inline schema here was missing the
+  // real schema's referralCode field entirely — genuine replica-drift,
+  // not an intentional subset, since referralCode drives real production
+  // behavior (referrer resolution, +1 free session credit to the
+  // referrer, a Referral record) in the route. Added coverage for it
+  // below. The separate general-learner-onboarding schema test further
+  // down tests a different route (/api/onboarding) and is out of scope
+  // for this investigation.
+
   // Registration produces valid user shape
   it('registration schema produces correct user shape', () => {
-    const { z } = require('zod')
-    const registerSchema = z.object({
-      name: z.string().trim().min(2).max(80),
-      email: z.string().email(),
-      password: z.string().min(8).max(100),
-    })
     const result = registerSchema.safeParse({ name: 'Alice', email: 'alice@test.com', password: 'password123' })
     expect(result.success).toBe(true)
   })
 
   it('registration rejects whitespace-only name', () => {
-    const { z } = require('zod')
-    const registerSchema = z.object({ name: z.string().trim().min(2).max(80) })
-    const result = registerSchema.safeParse({ name: '   ' })
+    const result = registerSchema.safeParse({ name: '   ', email: 'alice@test.com', password: 'password123' })
     expect(result.success).toBe(false)
+  })
+
+  it('registration accepts an optional referralCode', () => {
+    const result = registerSchema.safeParse({ name: 'Alice', email: 'alice@test.com', password: 'password123', referralCode: 'ABC123' })
+    expect(result.success).toBe(true)
+  })
+
+  it('registration succeeds without a referralCode (it is optional)', () => {
+    const result = registerSchema.safeParse({ name: 'Alice', email: 'alice@test.com', password: 'password123' })
+    expect(result.success).toBe(true)
+    expect(result.success && result.data.referralCode).toBeUndefined()
   })
 
   // Onboarding state transitions

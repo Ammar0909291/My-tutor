@@ -1,19 +1,10 @@
 import { NextResponse } from 'next/server'
-import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { chatWithFallback } from '@/lib/ai/client'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
-
-const schema = z.object({
-  messages: z.array(
-    z.object({
-      role: z.enum(['system', 'user', 'assistant']),
-      content: z.string().max(8000),
-    })
-  ).max(50),
-})
+import { coachSchema } from '@/lib/ai/coachSchema'
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -24,7 +15,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { messages } = schema.parse(body)
+    const { messages } = coachSchema.parse(body)
 
     const systemMsg = messages.find((m) => m.role === 'system')?.content ?? 'You are a helpful coding coach.'
     const chatMessages = messages

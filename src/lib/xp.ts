@@ -33,6 +33,19 @@ export function getLeagueForXP(weeklyXP: number): LeagueTier {
   return tier
 }
 
+/**
+ * MED-5: a flashcard only earns XP once per calendar day (UTC), to prevent
+ * farming by repeatedly reviewing the same card. Extracted verbatim from
+ * src/app/api/flashcards/route.ts PATCH so it can be contract-tested
+ * directly instead of via a hand-copied replica.
+ */
+export function isFlashcardXpAllowed(lastReviewedAt: Date | null, now: Date): boolean {
+  const startOfTodayUtc = new Date(now)
+  startOfTodayUtc.setUTCHours(0, 0, 0, 0)
+  const alreadyReviewedToday = lastReviewedAt !== null && lastReviewedAt >= startOfTodayUtc
+  return !alreadyReviewedToday
+}
+
 export async function awardXP(userId: string, amount: number): Promise<void> {
   const week = currentWeekString()
   await Promise.all([

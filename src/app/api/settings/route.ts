@@ -2,15 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-
-const schema = z.object({
-  voiceId: z.string().max(100).optional(),
-  teachingLanguage: z.enum(['ru', 'en', 'hi']).optional(),
-  country: z.enum(['ru', 'in', 'global']).optional(),
-  voiceSpeed: z.union([
-    z.literal(0.5), z.literal(0.75), z.literal(1.0), z.literal(1.25), z.literal(1.5),
-  ]).optional(),
-})
+import { settingsSchema } from '@/lib/settingsSchema'
 
 export async function GET() {
   const session = await auth()
@@ -35,7 +27,7 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { voiceId, teachingLanguage, country, voiceSpeed } = schema.parse(body)
+    const { voiceId, teachingLanguage, country, voiceSpeed } = settingsSchema.parse(body)
 
     const data: { voiceId?: string; teachingLanguage?: 'ru' | 'en' | 'hi'; country?: string; voiceSpeed?: number } = {}
     if (voiceId !== undefined) data.voiceId = voiceId

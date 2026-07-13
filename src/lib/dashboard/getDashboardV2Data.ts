@@ -10,6 +10,10 @@ import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadiness'
 import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
+import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
+import { getKnowledgeGraph } from '@/lib/curriculum/knowledgeGraph'
+import { computeCurriculumEntryOrder } from '@/lib/curriculum/placement'
+import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { getLeagueForXP, currentWeekString } from '@/lib/xp'
 import type {
   DashboardV2Data,
@@ -173,6 +177,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
           select: {
             displayName: true,
             userType: true,
+            currentLevel: true,
             educationBoard: true,
             grade: true,
             subjects: { where: { isActive: true }, include: { subject: true }, orderBy: { createdAt: 'asc' } },
@@ -215,8 +220,12 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   // modeOverride lets the caller (the ?mode= query param on /dashboard)
   // request the non-default view while keeping the same DashboardV2 shell.
   const hasSchoolAccess = !!profile.educationBoard && !!profile.grade
-  const defaultIsSchool = profile.userType === 'SCHOOL_STUDENT' && hasSchoolAccess
-  const isSchool = modeOverride === 'library' ? false : modeOverride === 'school' ? hasSchoolAccess : defaultIsSchool
+  // UI-visibility: School Mode is hidden from normal navigation, so the
+  // default (no ?mode= override) landing experience is always Library Mode
+  // regardless of userType. Direct navigation to the existing
+  // /dashboard?mode=school URL still works unchanged for already-enrolled
+  // school users — School Mode data/logic themselves are untouched.
+  const isSchool = modeOverride === 'school' ? hasSchoolAccess : false
   const userRole = (user.role as 'ADMIN' | 'USER') ?? 'USER'
 
   let continueLesson: ContinueLessonData
@@ -314,7 +323,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       }
     }
   } else {
-    const enrolledSubjects = profile.subjects ?? []
+    // UI-visibility filter (presentation layer only): only show subjects
+    // still in the Educational Brain rollout — enrollment/DB rows for other
+    // subjects are untouched and keep working if reached by direct URL.
+    const enrolledSubjects = (profile.subjects ?? []).filter((ps) => isEduBrainEnabled(ps.subject.slug))
     const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
     dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
 
@@ -331,6 +343,17 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     }))
     const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
 
+    // Same placement logic as /api/curriculum's GET handler (see
+    // src/lib/curriculum/placement.ts) — before any real StudentProgress row
+    // exists, "Lesson 1" defaults to the learner's level-appropriate entry
+    // point instead of always literally 1, so the dashboard never disagrees
+    // with what /learn actually shows. Once a real row exists it always wins.
+    const curriculumLevel = normalizeToCanonicalLevel(profile.currentLevel)
+    const defaultCurrentLesson = (slug: string): number => {
+      const graph = getKnowledgeGraph(slug)
+      return graph ? computeCurriculumEntryOrder(graph, curriculumLevel) : 1
+    }
+
     const activePs = [...enrolledSubjects].sort((a, b) => {
       const ta = spMap.get(a.subject.slug)?.lastStudiedAt?.getTime() ?? 0
       const tb = spMap.get(b.subject.slug)?.lastStudiedAt?.getTime() ?? 0
@@ -341,7 +364,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       const slug = activePs.subject.slug
       const sp = spMap.get(slug)
       const lib = findLibrarySubject(slug)
-      const lessonNum = sp?.currentLesson ?? 1
+      const lessonNum = sp?.currentLesson ?? defaultCurrentLesson(slug)
       const href = `/learn?subject=${slug}`
       continueLesson = {
         emoji: lib?.icon ?? '📘',
@@ -352,7 +375,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
         href,
       }
       practiceModes = buildPracticeModes(href)
-      skillPath = buildLibrarySkillPath(sp, lib?.icon ?? '📘')
+      skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘')
     } else {
       continueLesson = emptyContinueLesson()
       practiceModes = buildPracticeModes('/learn')
@@ -370,7 +393,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
         icon: lib?.icon ?? '📘',
         color: colors.color,
         bgColor: colors.bgColor,
-        currentLesson: sp?.currentLesson ?? 1,
+        currentLesson: sp?.currentLesson ?? defaultCurrentLesson(slug),
         lastLessonTitle: sp?.lastLessonTitle ?? null,
         completionPercent: sp?.completionPercent ?? 0,
         href: `/learn?subject=${slug}`,

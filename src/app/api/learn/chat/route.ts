@@ -18,6 +18,13 @@ import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
 import { decide } from '@/lib/teaching-engine'
+import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
+import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
+import {
+  assembleLesson, buildStudentState, ingestGeneratedLesson, isExplanationMemoryEnabled, resolveContentRegister,
+  type StudentState, type AssembledLesson,
+} from '@/lib/teaching/assets'
+import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 
 const schema = z.object({
   sessionId: z.string(),
@@ -71,8 +78,17 @@ export async function POST(req: Request) {
     const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
       ? snapshot.currentWorkedExample as { concept: string; currentStep: number; stepCount: number }
       : null
+    // W2-2 (ADR 09): lesson stage progress carried across turns
+    const snapshotLessonStageProgress = (
+      snapshot?.lessonStageProgress &&
+      typeof snapshot.lessonStageProgress === 'object' &&
+      typeof (snapshot.lessonStageProgress as Record<string, unknown>).conceptId === 'string'
+    ) ? snapshot.lessonStageProgress as {
+      conceptId: string; planSignature: string; stageIndex: number; totalStages: number
+    } : null
 
     const subjectCode = learnSession.subject.slug
+    const ebEnabled = isEduBrainEnabled(subjectCode)
 
     // ─── School Mode (Sprint BI) ───
     // When the session carries a school chapter id and the learner is a school
@@ -120,6 +136,13 @@ export async function POST(req: Request) {
     ])
 
     let lessonCtx: LessonContext | null = null
+    // Explanation Memory / Teaching Action Repository (approved exception to
+    // ADR 14's implementation gate) needs the real canonical-KG concept id for
+    // this turn, not just the lesson number lessonCtx carries. The KG-backed
+    // branch below already computes each synthetic lesson's topicSlug (= KG
+    // node slug) to resolve "current lesson" — captured here without changing
+    // LessonContext's shape or any existing consumer of it.
+    let resolvedConceptId: string | null = null
     if (curriculumLessons.length > 0) {
       const currentOrder = studentProgress?.currentLesson ?? 1
       const currentLesson = (curriculumLessons as any[]).find((l) => l.order === currentOrder) ?? curriculumLessons[0]
@@ -187,6 +210,7 @@ export async function POST(req: Request) {
             if (!schoolCtx && !snapshotCurrentConceptId) {
               kgCurrentConceptId = currentLesson.topicSlug
             }
+            resolvedConceptId = currentLesson.topicSlug
           }
         }
       } catch {
@@ -263,6 +287,15 @@ export async function POST(req: Request) {
     // can silently disagree with teachingLanguage (e.g. legacy profiles from
     // before the country field existed), which used to skip Yandex entirely.
     const country = teachingLang === 'ru' ? 'ru' : profileCountry
+    // Drives NOTATION RULES in buildTutorSystemPrompt (IPA/phonetic notation
+    // gating) — derived only from level/grade, never from subject, so it
+    // applies uniformly whether the student is doing English phonics, math,
+    // or anything else.
+    const contentRegister = resolveContentRegister({
+      grade: profile?.grade,
+      currentLevel: profile?.currentLevel,
+      targetLevel: (profile as any)?.targetLevel,
+    })
     let systemPrompt = buildTutorSystemPrompt(
       learnSession.subject.name,
       profile?.displayName ?? session.user.name ?? 'Student',
@@ -272,6 +305,7 @@ export async function POST(req: Request) {
       teachingLang,
       lessonCtx,
       learnSession.subject.type,
+      contentRegister,
     )
 
     // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
@@ -281,6 +315,11 @@ export async function POST(req: Request) {
     let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
     let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
+    // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
+    let libraryConceptNodeIdHoisted: string | null = null
+    let libraryLessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
+    // W2-2 (ADR 09): lesson stage progress — hoisted for post-AI tag-parse + persist.
+    let lessonStageProgressHoisted: { conceptId: string; planSignature: string; stageIndex: number; totalStages: number } | null = null
     // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): surface the per-turn
     // strategy + its advisory output bias out of the school block so the post-AI
     // visual pipeline can consult them. Null on any non-school turn or failure →
@@ -306,8 +345,13 @@ export async function POST(req: Request) {
     // same way as inlinePracticeHoisted above so it can be attached to the
     // JSON response once cleanText is finalized.
     let hintHoisted: string | null = null
+    // W2-4 (ADR 11 §4.2): in-session signals collected when the reconciler flag is ON.
+    // null = flag OFF (signals bypass reconciler and inject directly into systemPrompt).
+    // [] or populated = flag ON (signals accumulate here and are reconciled once after collection).
+    let pendingSignals: import('@/lib/school/adaptive/sessionRecommendationReconciler').InSessionSignal[] | null = null
 
     if (schoolCtx) {
+      if (process.env.ENABLE_SESSION_RECOMMENDATION_RECONCILER === '1') pendingSignals = []
       // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
       // can be passed to buildGuidedTeachingPrompt below.
       let guidedWeakTopicTitles: string[] = []
@@ -444,7 +488,12 @@ export async function POST(req: Request) {
           `- Recommended action: ${actionLabel}`,
         ]
         if (weakTop.length > 0) lines.push(`- Weak topics: ${weakTop.map((t) => t.title).join(', ')}`)
-        systemPrompt += `\n\nSTUDENT STATUS:\n${lines.join('\n')}\nWhen weak topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this status block explicitly.`
+        const statusBlock = `\n\nSTUDENT STATUS:\n${lines.join('\n')}\nWhen weak topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this status block explicitly.`
+        if (pendingSignals !== null) {
+          pendingSignals.push({ source: 'weak_topic', priority: 3, payload: statusBlock })
+        } else {
+          systemPrompt += statusBlock
+        }
       } catch (err) {
         console.warn('[learn/chat] student status context skipped:', err)
       }
@@ -626,7 +675,12 @@ export async function POST(req: Request) {
         const narrative = await getLearningNarrative(
           userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, narrativeKgNodeIds
         )
-        systemPrompt += buildLearningNarrativeBlock(narrative)
+        const narrativeBlock = buildLearningNarrativeBlock(narrative)
+        if (pendingSignals !== null && narrative !== null) {
+          pendingSignals.push({ source: 'narrative', priority: 1, payload: narrativeBlock, trend: narrative.trend as import('@/lib/school/adaptive/sessionRecommendationReconciler').LearningTrend })
+        } else {
+          systemPrompt += narrativeBlock
+        }
       } catch {
         // non-fatal — narrative context is purely additive
       }
@@ -638,7 +692,12 @@ export async function POST(req: Request) {
         const dailyTasks = await getDailyStudyPlan(userId, schoolCtx.board, schoolCtx.grade)
         const taskIdx = dailyTasks.findIndex((t) => t.chapterId === schoolCtx!.chapter.id)
         if (taskIdx !== -1) {
-          systemPrompt += `\n\nDAILY STUDY PLAN: Task ${taskIdx + 1} of ${dailyTasks.length} for today. Keep the session focused and within the chapter scope.`
+          const dailyPlanBlock = `\n\nDAILY STUDY PLAN: Task ${taskIdx + 1} of ${dailyTasks.length} for today. Keep the session focused and within the chapter scope.`
+          if (pendingSignals !== null) {
+            pendingSignals.push({ source: 'daily_plan', priority: 4, payload: dailyPlanBlock })
+          } else {
+            systemPrompt += dailyPlanBlock
+          }
         }
       } catch {
         // non-fatal — plan context is purely additive
@@ -792,10 +851,23 @@ export async function POST(req: Request) {
           const nodeMap = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n.title]))
           const readiness = await getExamReadinessForSubject(userId, schoolCtx.board, schoolCtx.grade, subjectCode)
           const block = buildExamReadinessBlock(readiness, (id) => nodeMap.get(id) ?? id)
-          if (block) systemPrompt += block
+          if (block) {
+            if (pendingSignals !== null) {
+              pendingSignals.push({ source: 'exam_readiness', priority: 2, payload: block })
+            } else {
+              systemPrompt += block
+            }
+          }
         }
       } catch (err) {
         console.warn('[learn/chat] exam readiness context skipped:', err)
+      }
+
+      // W2-4 (ADR 11 §4.2): reconcile and inject collected in-session signals.
+      if (pendingSignals !== null && pendingSignals.length > 0) {
+        const { reconcileSessionSignals } = await import('@/lib/school/adaptive/sessionRecommendationReconciler')
+        const reconciled = reconcileSessionSignals(pendingSignals)
+        if (reconciled.systemPromptBlock) systemPrompt += reconciled.systemPromptBlock
       }
 
       // Sprint CF: mock test insights block — inject most recent mock result for this subject
@@ -916,7 +988,7 @@ export async function POST(req: Request) {
     try {
       const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
       const librarySubject = findLibrarySubject(learnSession.subject.slug)
-      if (librarySubject) {
+      if (librarySubject && ebEnabled) {
         const progressRows = await prisma.moduleProgress.findMany({
           where: { userId: session.user.id, subjectId: learnSession.subjectId },
         })
@@ -950,7 +1022,7 @@ export async function POST(req: Request) {
     // subject's own lesson slugs (its MistakeRecord topicSlugs) instead of KG
     // node ids. Purely additive context; reuses the existing taxonomy + engine
     // with no schema or engine change, and never blocks a lesson.
-    if (!schoolCtx) {
+    if (!schoolCtx && ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -981,7 +1053,7 @@ export async function POST(req: Request) {
     // Also sets strategyHoisted/outputBiasHoisted/hintBiasHoisted so the existing
     // post-AI visual-suppression and [HINT] tag pipeline (already schoolCtx-agnostic)
     // activates for general learners too, not just the prompt text.
-    if (!schoolCtx) {
+    if (!schoolCtx && ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1018,6 +1090,16 @@ export async function POST(req: Request) {
             const dueRevisions = await getDueRevisions(userId, subjectCode, moduleNodeSlugs)
             const revBlock = buildRevisionBlock(dueRevisions)
             if (revBlock) systemPrompt += revBlock
+
+            // W2-1 (ADR 08 §4a): seed conceptId for Library mode — canonical KG entry concept if
+            // no snapshot yet. Resolves moduleSlug → KG domain → cross-domain entry concept ID
+            // so the Teaching Engine gate (snapshotCurrentConceptId → getConceptNode) can fire.
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+              const { resolveLibraryEntryConceptId } = await import('@/lib/curriculum/libraryConceptResolver')
+              libraryConceptNodeIdHoisted = snapshotCurrentConceptId
+                ?? resolveLibraryEntryConceptId(subjectCode, currentModule.slug)
+                ?? null
+            }
           }
         }
       } catch (err) {
@@ -1055,7 +1137,7 @@ export async function POST(req: Request) {
     // (route.ts ~1640, schoolCtx-gated) is intentionally NOT extended here — kept
     // to the single prompt-injection block, consistent with ADR 02 §3's "smaller
     // surface area for a first increment" rationale.
-    if (!schoolCtx) {
+    if (!schoolCtx && ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1070,7 +1152,9 @@ export async function POST(req: Request) {
           }) ?? libSubject.modules[0]
 
           if (currentModule) {
-            const planNodes = currentModule.nodes.map((n) => ({
+            const { resolveLibraryDomainNodes } = await import('@/lib/curriculum/libraryConceptResolver')
+            const kgDomainNodes = resolveLibraryDomainNodes(subjectCode, currentModule.slug)
+            const planNodes = kgDomainNodes ?? currentModule.nodes.map((n) => ({
               id: n.slug,
               domain: subjectCode,
               title: n.title,
@@ -1082,6 +1166,10 @@ export async function POST(req: Request) {
             const plan = await buildLessonPlan(userId, subjectCode, currentModule.slug, currentModule.title, planNodes)
             const planBlock = buildLessonPlanBlock(plan)
             if (planBlock) systemPrompt += planBlock
+            // W2-1 (ADR 08 §4a): hoist for post-AI persist.
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+              libraryLessonPlanHoisted = plan
+            }
           }
         }
       } catch (err) {
@@ -1336,13 +1424,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             { sessionId: learnSession.id },
           )
           const snapshot = toTeachingSnapshot(memory)
+
+          // W2-3 (ADR 10 Phase 2b): read ConceptMasteryRecord for the active concept.
+          // DB read runs BEFORE decide() so the Teaching Engine stays pure — it only
+          // sees its inputs, never touches the DB itself. Snapshot is immutable after
+          // this block; no write path is introduced here.
+          let conceptMasterySnapshot: {
+            masteryScore: number; decayedScore: number
+            masteryLevel: string; masteryConfidence: number
+          } | null = null
+          if (process.env.ENABLE_CONCEPT_MASTERY_READ === '1') {
+            try {
+              const cmr = await prisma.conceptMasteryRecord.findUnique({
+                where: { userId_conceptId: { userId, conceptId: snapshotCurrentConceptId } },
+                select: { masteryScore: true, decayedScore: true, masteryLevel: true, masteryConfidence: true },
+              })
+              if (cmr) conceptMasterySnapshot = cmr
+            } catch { /* non-fatal: ConceptMasteryRecord may not exist yet; degrade to existing behavior */ }
+          }
+
           const decision = decide(
             {
               level: snapshot.trackLevel,
               current_concepts_mastered: snapshot.masteredConcepts,
-              weak_concepts: snapshot.weakConcepts,
+              // W2-3: if CMR indicates current concept has decayed below mastery threshold,
+              // ensure it appears in weak_concepts for this turn's Teaching Engine decision.
+              weak_concepts: conceptMasterySnapshot !== null && conceptMasterySnapshot.decayedScore < 0.7
+                ? [...new Set([...snapshot.weakConcepts, snapshotCurrentConceptId])]
+                : snapshot.weakConcepts,
               misconceptions: snapshot.misconceptions,
-              retention_score: snapshot.retentionScore,
+              // W2-3: use CMR decayedScore (0–1) as retention signal when available —
+              // more accurate than the static confidenceLevel from LearningProfile.
+              retention_score: conceptMasterySnapshot !== null
+                ? Math.round(conceptMasterySnapshot.decayedScore * 100)
+                : snapshot.retentionScore,
               learning_speed: snapshot.learningSpeed,
               fatigue_level: snapshot.fatigueLevel,
             },
@@ -1442,7 +1557,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   activeMisconceptions: snapshot.misconceptions,
                   reviewDueConceptIds: reviewDue,
                 })
-                systemPrompt += buildLessonPlanBlock(lessonPlan)
+                // W2-2 (ADR 09): stage-continuity framing — planSignature computed here
+                // (not inside the Composer) so composeLessonPlan() stays pure.
+                if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1') {
+                  const planSignature = lessonPlan.stages.map(s => s.stage_type).join('|')
+                  const signatureMatches =
+                    snapshotLessonStageProgress !== null &&
+                    snapshotLessonStageProgress.conceptId === lessonPlan.concept_id &&
+                    snapshotLessonStageProgress.planSignature === planSignature &&
+                    snapshotLessonStageProgress.stageIndex < lessonPlan.stages.length
+                  const resumeStageIndex = signatureMatches ? snapshotLessonStageProgress!.stageIndex : 0
+                  lessonStageProgressHoisted = {
+                    conceptId: lessonPlan.concept_id,
+                    planSignature,
+                    stageIndex: resumeStageIndex,
+                    totalStages: lessonPlan.stages.length,
+                  }
+                  systemPrompt += buildLessonPlanBlock(lessonPlan, {
+                    stageIndex: resumeStageIndex,
+                    totalStages: lessonPlan.stages.length,
+                  })
+                } else {
+                  systemPrompt += buildLessonPlanBlock(lessonPlan)
+                }
               } catch {
                 // non-fatal — lesson plan context is purely additive
               }
@@ -1467,17 +1604,67 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }))
 
     try {
-      const { text, provider } = await routeAI(
-        [...historyMessages, { role: 'user', content: message }],
-        systemPrompt,
-        country,
-        1024,
-        teachingLang,
-        { userId, subject: learnSession.subject.slug },
-      )
+      // Explanation Memory / Teaching Action Repository (approved exception to
+      // ADR 14's implementation gate — see WAVE_0_APPROVAL_CHECKLIST.md W1-4/
+      // W4-1/W4-3). Tries to assemble the turn from previously reviewed,
+      // ACTIVE Knowledge Assets before paying for an LLM call. Safe no-op
+      // today: nothing is ACTIVE until a human reviewer promotes a DRAFT via
+      // the admin review endpoint, so assembleLesson() always returns null
+      // and the LLM path below runs exactly as before.
+      let memoryState: StudentState | null = null
+      let assembled: AssembledLesson | null = null
+      if (isExplanationMemoryEnabled() && resolvedConceptId) {
+        try {
+          memoryState = buildStudentState({
+            conceptId: resolvedConceptId,
+            subjectSlug: learnSession.subject.slug,
+            teachingLanguage: teachingLang,
+            grade: profile?.grade,
+            currentLevel: profile?.currentLevel,
+            targetLevel: profile?.targetLevel,
+            userMessage: message,
+          })
+          assembled = await assembleLesson(memoryState)
+        } catch (err) {
+          console.warn('[learn/chat] explanation memory lookup failed, falling back to LLM:', err)
+        }
+      }
+
+      let text: string
+      let provider: string
+      if (assembled) {
+        text = assembled.text
+        provider = 'memory'
+      } else {
+        const routed = await routeAI(
+          [...historyMessages, { role: 'user', content: message }],
+          systemPrompt,
+          country,
+          1024,
+          teachingLang,
+          { userId, subject: learnSession.subject.slug },
+        )
+        text = routed.text
+        provider = routed.provider
+      }
 
       if (!text) {
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+      }
+
+      // Phase 2/5 capture: decompose a successful LLM generation into
+      // whichever labelled sections and assessment items it actually
+      // contains and persist each as a DRAFT for future reuse. Fire-and-
+      // forget — never awaited, never blocks the turn.
+      if (memoryState && !assembled) {
+        void ingestGeneratedLesson({
+          conceptId: memoryState.conceptId,
+          subjectSlug: memoryState.subjectSlug,
+          language: memoryState.language,
+          gradeBand: memoryState.gradeBand,
+          rawContent: text,
+          authorId: 'SYSTEM_AI',
+        })
       }
 
       // Sprint BW: extract and strip VISUAL:<type> tag before persisting/returning.
@@ -1502,6 +1689,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             cleanText = we.cleanText
             if (we.done) workedExampleUpdate = 'clear'
             else if (we.state) workedExampleUpdate = { concept: we.state.concept, currentStep: we.state.currentStep, stepCount: we.state.stepCount }
+          } catch { /* non-fatal */ }
+        }
+
+        // W2-2 (ADR 09): extract and strip the [LESSON:<n>] stage-progress tag
+        if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1' && lessonStageProgressHoisted !== null) {
+          try {
+            const { parseLessonProgressTag } = await import('@/lib/school/adaptive/lessonComposer')
+            const lp = parseLessonProgressTag(cleanText)
+            cleanText = lp.cleanText
+            if (lp.stageIndex !== null) {
+              // stageIndex emitted = stage just covered; next stage = emitted + 1
+              lessonStageProgressHoisted = {
+                ...lessonStageProgressHoisted,
+                stageIndex: lp.stageIndex + 1,
+              }
+            }
           } catch { /* non-fatal */ }
         }
       } else {
@@ -1539,6 +1742,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         cleanText = parsedHint.cleanText
         hintHoisted = hintBiasHoisted === 'SUPPRESSED' ? null : parsedHint.hint
       } catch { /* non-fatal */ }
+
+      // Beginner IPA/phonetic-notation safety net: buildTutorSystemPrompt's
+      // NOTATION RULES block (gated on contentRegister above) is the primary
+      // fix — this catches the rare case where the model ignores it anyway,
+      // for beginners only. Intermediate/expert responses are left untouched
+      // since IPA is allowed (optionally/fully) at those registers.
+      if (contentRegister === 'beginner') {
+        cleanText = stripIpaNotation(cleanText)
+      }
 
       // Sprint C/H: deterministic, rule-based visual detection on the final
       // tutor text, now routed through the Teaching Strategy Engine (Sprint H)
@@ -1753,9 +1965,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
       }
 
-      await withRetry(() => prisma.message.create({
+      const assistantMessage = await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
       }))
+
+      // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — never blocks the response.
+      // Wave 2 (this build): real KG concept id + gradeBand when Explanation
+      // Memory resolved them for this turn; otherwise the original Phase 1
+      // proxy (subject slug, ADULT) so non-memory turns (school mode, subjects
+      // without a canonical KG) are completely unaffected.
+      appendEvidenceEvent({
+        userId,
+        sessionId,
+        turnId:    assistantMessage.id,
+        conceptId: memoryState?.conceptId ?? learnSession.subject.slug,
+        language:  teachingLang,
+        gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+        category:  EvidenceCategory.ASSET_SHOWN,
+        assetId:   assembled?.usedAssetIds[0],
+        outcome:   'shown',
+        strength:  0.0,
+      })
 
       // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
       // snapshot. Write once when either the lesson concept changed (BY) or the
@@ -1765,8 +1995,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const newNextId = lessonPlanHoisted?.nextConcept?.nodeId ?? null
         const conceptChanged = !!newCurrentId && newCurrentId !== snapshotCurrentConceptId
         const workedExampleChanged = workedExampleUpdate !== null
+        // W2-2 (ADR 09): lesson stage progress changed whenever a lessonPlan block was rendered this turn
+        const lessonStageProgressChanged = lessonStageProgressHoisted !== null
 
-        if (conceptChanged || workedExampleChanged) {
+        if (conceptChanged || workedExampleChanged || lessonStageProgressChanged) {
           // Sprint CH: compute the next worked-example memory value
           let workedExampleField: Record<string, unknown> = {}
           if (workedExampleUpdate === 'clear') {
@@ -1787,6 +2019,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Sprint CB: persist prereq gap only when high-confidence (avoid noisy writes)
                 ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
                 ...workedExampleField,
+                // W2-2 (ADR 09): persist lesson stage progress
+                ...(lessonStageProgressHoisted ? { lessonStageProgress: lessonStageProgressHoisted } : {}),
+              },
+            },
+          }).catch(() => {})
+        }
+      }
+
+      // W2-1 (ADR 08 §4a): Library-mode concept persist — parallel to school block above.
+      // ENABLE_LIBRARY_CONCEPT_TRACKING defaults off (Phase 1 observe cycle; Phase 2 flips it on).
+      // libraryLessonPlanHoisted.currentConcept.nodeId is a subjectCatalog slug (not a canonical
+      // KG ID) — use only libraryConceptNodeIdHoisted which Writer B seeds with the correct ID.
+      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+        const newLibConceptId = libraryConceptNodeIdHoisted
+        if (newLibConceptId && newLibConceptId !== snapshotCurrentConceptId) {
+          prisma.learnSession.update({
+            where: { id: sessionId },
+            data: {
+              contextSnapshot: {
+                ...(snapshot ?? {}),
+                currentConceptNodeId: newLibConceptId,
               },
             },
           }).catch(() => {})

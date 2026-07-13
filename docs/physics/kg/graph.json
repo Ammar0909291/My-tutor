@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 194,
+    "total_concepts": 216,
     "total_domains": 11,
-    "total_requires_edges": 235,
-    "total_unlocks_edges": 235,
+    "total_requires_edges": 266,
+    "total_unlocks_edges": 266,
     "total_cross_links": 0
   },
   "domains": [
@@ -19,7 +19,7 @@
     {
       "key": "mech",
       "name": "Classical Mechanics",
-      "count": 52
+      "count": 60
     },
     {
       "key": "therm",
@@ -49,7 +49,7 @@
     {
       "key": "qm",
       "name": "Quantum Mechanics",
-      "count": 12
+      "count": 19
     },
     {
       "key": "rel",
@@ -59,7 +59,7 @@
     {
       "key": "stat",
       "name": "Statistical Mechanics",
-      "count": 8
+      "count": 15
     },
     {
       "key": "astro",
@@ -431,7 +431,8 @@
       "unlocks": [
         "phys.mech.circular-motion",
         "phys.mech.projectile-motion",
-        "phys.mech.relative-motion"
+        "phys.mech.relative-motion",
+        "phys.mech.generalized-coordinates"
       ]
     },
     {
@@ -968,7 +969,9 @@
         "Halliday Resnick Ch.8"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.mech.generalized-coordinates"
+      ]
     },
     {
       "id": "phys.mech.momentum",
@@ -1720,6 +1723,249 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.generalized-coordinates",
+      "name": "Generalized Coordinates and Configuration Space",
+      "aliases": [
+        "generalized coordinates",
+        "configuration space",
+        "degrees of freedom",
+        "holonomic constraints"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.conservative-forces",
+        "phys.mech.kinematics-2d"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum"
+      ],
+      "cross_links": [],
+      "description": "Generalized coordinates are a minimal set of independent parameters that uniquely specify the configuration of a mechanical system subject to holonomic constraints; the number of independent coordinates equals the degrees of freedom.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.1",
+        "Landau & Lifshitz Mechanics Ch.1",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.euler-lagrange-equation"
+      ]
+    },
+    {
+      "id": "phys.mech.euler-lagrange-equation",
+      "name": "The Euler-Lagrange Equation and Hamilton's Principle",
+      "aliases": [
+        "Euler-Lagrange equation",
+        "Lagrangian",
+        "Hamilton's principle",
+        "principle of stationary action",
+        "action integral"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.generalized-coordinates"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Hamilton's principle states that the action S = ∫L dt is stationary for the physical path; varying S yields the Euler-Lagrange equation d/dt(∂L/∂ṡᵢ) − ∂L/∂qᵢ = 0, where L = T − V is the Lagrangian.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.1-2",
+        "Landau & Lifshitz Mechanics Ch.2",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.cyclic-coordinates-conservation-laws",
+        "phys.mech.hamiltonian"
+      ]
+    },
+    {
+      "id": "phys.mech.cyclic-coordinates-conservation-laws",
+      "name": "Cyclic Coordinates and Noether's Theorem",
+      "aliases": [
+        "cyclic coordinate",
+        "ignorable coordinate",
+        "Noether's theorem",
+        "conservation laws from symmetry"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "related": [
+        "phys.mech.conservation-of-angular-momentum",
+        "phys.mech.conservation-of-momentum"
+      ],
+      "cross_links": [],
+      "description": "A generalized coordinate is cyclic if ∂L/∂qᵢ = 0; the conjugate momentum pᵢ = ∂L/∂ṡᵢ is then conserved. Noether's theorem generalises this: every continuous symmetry of the Lagrangian implies a conserved quantity.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.2",
+        "Landau & Lifshitz Mechanics §6-7",
+        "Taylor Classical Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.hamiltonian",
+      "name": "The Hamiltonian and Legendre Transform",
+      "aliases": [
+        "Hamiltonian",
+        "Legendre transform",
+        "canonical momenta",
+        "phase space"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta pᵢ = ∂L/∂ṡᵢ are conjugate to the generalised coordinates, and H equals the total energy for natural systems.",
+      "difficulty": "expert",
+      "estimated_hours": 6,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.8",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Taylor Classical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.hamiltons-equations",
+        "phys.qm.scattering-theory-born-approximation"
+      ]
+    },
+    {
+      "id": "phys.mech.hamiltons-equations",
+      "name": "Hamilton's Equations of Motion",
+      "aliases": [
+        "Hamilton's equations",
+        "canonical equations of motion",
+        "Hamiltonian mechanics"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hamiltonian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Hamilton's equations ṡᵢ = ∂H/∂pᵢ and ṗᵢ = −∂H/∂qᵢ give 2N coupled first-order equations governing trajectories in phase space, equivalent to the Euler-Lagrange equations but symmetric in q and p.",
+      "difficulty": "expert",
+      "estimated_hours": 7,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.8",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Taylor Classical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.poisson-brackets"
+      ]
+    },
+    {
+      "id": "phys.mech.poisson-brackets",
+      "name": "Poisson Brackets and Phase Space Dynamics",
+      "aliases": [
+        "Poisson bracket",
+        "{f,g}",
+        "phase space flow",
+        "Liouville's theorem"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.hamiltons-equations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Poisson bracket {f,g} = Σ(∂f/∂qᵢ ∂g/∂pᵢ − ∂f/∂pᵢ ∂g/∂qᵢ) encodes dynamics: df/dt = {f,H}. Fundamental brackets {qᵢ,pⱼ} = δᵢⱼ prefigure quantum commutators; Liouville's theorem states phase-space volume is conserved.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.9",
+        "Landau & Lifshitz Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.canonical-transformations"
+      ]
+    },
+    {
+      "id": "phys.mech.canonical-transformations",
+      "name": "Canonical Transformations and Generating Functions",
+      "aliases": [
+        "canonical transformation",
+        "generating function",
+        "symplectomorphism",
+        "point transformation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.poisson-brackets"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Canonical transformations (Qᵢ, Pᵢ) = (Qᵢ(q,p,t), Pᵢ(q,p,t)) preserve Hamilton's equations and Poisson bracket structure; they are generated by four types of generating functions F₁–F₄ that mix coordinates and momenta.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.hamilton-jacobi-equation"
+      ]
+    },
+    {
+      "id": "phys.mech.hamilton-jacobi-equation",
+      "name": "Hamilton-Jacobi Equation and Action-Angle Variables",
+      "aliases": [
+        "Hamilton-Jacobi equation",
+        "HJ equation",
+        "action-angle variables",
+        "Hamilton's principal function"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.canonical-transformations"
+      ],
+      "related": [
+        "phys.qm.schrodinger-equation"
+      ],
+      "cross_links": [],
+      "description": "The Hamilton-Jacobi equation −∂S/∂t = H(q, ∂S/∂q, t) reduces mechanics to a single PDE for Hamilton's principal function S; separation of variables yields action-angle variables (J,θ) for integrable systems and is the classical precursor to the Schrödinger equation.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldstein Classical Mechanics Ch.10",
+        "Landau & Lifshitz Mechanics Ch.7",
+        "Goldstein Classical Mechanics Ch.11"
       ],
       "children": [],
       "unlocks": []
@@ -4632,7 +4878,9 @@
         "phys.qm.hydrogen-atom-qm",
         "phys.qm.perturbation-theory",
         "phys.qm.selection-rules",
-        "phys.qm.spin"
+        "phys.qm.spin",
+        "phys.qm.density-matrix",
+        "phys.qm.scattering-theory-born-approximation"
       ]
     },
     {
@@ -4711,7 +4959,9 @@
       "children": [],
       "unlocks": [
         "phys.qm.perturbation-theory",
-        "phys.qm.selection-rules"
+        "phys.qm.selection-rules",
+        "phys.qm.variational-method",
+        "phys.qm.angular-momentum-addition"
       ]
     },
     {
@@ -4740,7 +4990,9 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.qm.pauli-exclusion"
+        "phys.qm.pauli-exclusion",
+        "phys.qm.angular-momentum-addition",
+        "phys.qm.density-matrix"
       ]
     },
     {
@@ -4768,7 +5020,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.stat.fermi-dirac"
+        "phys.stat.fermi-dirac",
+        "phys.qm.identical-particles"
       ]
     },
     {
@@ -4794,7 +5047,9 @@
         "Griffiths Introduction to Quantum Mechanics Ch.2"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.qm.wkb-approximation"
+      ]
     },
     {
       "id": "phys.qm.perturbation-theory",
@@ -4819,7 +5074,9 @@
         "Griffiths Introduction to Quantum Mechanics Ch.6"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.qm.variational-method"
+      ]
     },
     {
       "id": "phys.qm.selection-rules",
@@ -4843,6 +5100,213 @@
       "mastery_threshold": 0.8,
       "references": [
         "Griffiths Introduction to Quantum Mechanics Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.variational-method",
+      "name": "Variational Method and Variational Principle",
+      "aliases": [
+        "variational principle",
+        "variational method",
+        "trial wavefunction",
+        "Rayleigh-Ritz method"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.hydrogen-atom-qm",
+        "phys.qm.perturbation-theory"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The variational principle states that for any normalised trial state |ψ⟩, the expectation value ⟨ψ|H|ψ⟩ ≥ E₀ (ground-state energy); minimising over a parametric family of trial wavefunctions gives an upper bound on E₀. The helium atom ground state is the canonical worked example.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.7",
+        "Sakurai Modern Quantum Mechanics Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.wkb-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.wkb-approximation",
+      "name": "WKB Approximation (Semiclassical Limit)",
+      "aliases": [
+        "WKB",
+        "Wentzel-Kramers-Brillouin",
+        "semiclassical approximation",
+        "JWKB"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.quantum-tunneling",
+        "phys.qm.variational-method"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The WKB approximation applies when the potential varies slowly on the scale of the de Broglie wavelength; it gives ψ ∝ exp(±i∫p dx/ℏ) in classically allowed regions and exponential decay in forbidden regions, recovering the exact Gamow tunneling formula.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.9",
+        "Sakurai Modern Quantum Mechanics Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.identical-particles",
+      "name": "Identical Particles and the Symmetrization Postulate",
+      "aliases": [
+        "identical particles",
+        "symmetrization postulate",
+        "bosons",
+        "fermions",
+        "exchange symmetry",
+        "anti-symmetrization"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin",
+        "phys.qm.pauli-exclusion"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The symmetrization postulate requires multi-particle wavefunctions to be symmetric under particle exchange (bosons) or antisymmetric (fermions); the Slater determinant constructs antisymmetric states and the spin-statistics theorem ties spin to exchange symmetry.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.5",
+        "Sakurai Modern Quantum Mechanics Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.angular-momentum-addition",
+      "name": "Addition of Angular Momenta and Clebsch-Gordan Coefficients",
+      "aliases": [
+        "angular momentum addition",
+        "Clebsch-Gordan coefficients",
+        "CG coefficients",
+        "coupled basis",
+        "total angular momentum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.spin",
+        "phys.qm.hydrogen-atom-qm"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "When two angular momenta j₁ and j₂ are combined, the total J ranges from |j₁−j₂| to j₁+j₂; Clebsch-Gordan coefficients ⟨j₁m₁j₂m₂|JM⟩ give the change-of-basis between the uncoupled {m₁,m₂} and coupled {J,M} representations.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.4 §4.4",
+        "Sakurai Modern Quantum Mechanics Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.scattering-theory-born-approximation"
+      ]
+    },
+    {
+      "id": "phys.qm.scattering-theory-born-approximation",
+      "name": "Scattering Theory and the Born Approximation",
+      "aliases": [
+        "Born approximation",
+        "scattering theory",
+        "differential cross-section",
+        "Lippmann-Schwinger equation",
+        "partial wave analysis"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.angular-momentum-addition",
+        "phys.mech.hamiltonian"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Scattering theory describes how particles scatter off a potential V; the Lippmann-Schwinger equation |ψ⟩ = |φ⟩ + G₀V|ψ⟩ generates the Born series, whose first term gives the differential cross-section dσ/dΩ ∝ |Ṽ(q)|² in terms of the Fourier transform of the potential.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Griffiths Introduction to Quantum Mechanics Ch.11",
+        "Sakurai Modern Quantum Mechanics Ch.7"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.qm.s-matrix-basics"
+      ]
+    },
+    {
+      "id": "phys.qm.s-matrix-basics",
+      "name": "S-Matrix and Scattering Amplitudes",
+      "aliases": [
+        "S-matrix",
+        "scattering matrix",
+        "T-matrix",
+        "scattering amplitude"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.scattering-theory-born-approximation"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The S-matrix (scattering matrix) maps in-states to out-states: S = 1 + 2πiT; unitarity of S encodes conservation of probability. The T-matrix elements give scattering amplitudes, and the optical theorem relates Im f(θ=0) to the total cross-section.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Sakurai Modern Quantum Mechanics Ch.7",
+        "Weinberg Lectures on Quantum Mechanics Ch.8"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.qm.density-matrix",
+      "name": "Density Matrix and Mixed Quantum States",
+      "aliases": [
+        "density matrix",
+        "density operator",
+        "mixed state",
+        "von Neumann equation",
+        "reduced density matrix"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.qm.operators",
+        "phys.qm.spin"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The density operator ρ = Σᵢpᵢ|ψᵢ⟩⟨ψᵢ| represents statistical mixtures of quantum states; pure states satisfy ρ² = ρ while mixed states have Tr(ρ²) < 1. The von Neumann equation iℏ∂ρ/∂t = [H,ρ] governs time evolution.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Sakurai Modern Quantum Mechanics Ch.3",
+        "Weinberg Lectures on Quantum Mechanics Ch.2"
       ],
       "children": [],
       "unlocks": []
@@ -5168,7 +5632,9 @@
         "phys.stat.bose-einstein",
         "phys.stat.entropy-statistical",
         "phys.stat.fermi-dirac",
-        "phys.stat.free-energy"
+        "phys.stat.free-energy",
+        "phys.stat.grand-canonical-ensemble",
+        "phys.stat.fluctuations-correlations"
       ]
     },
     {
@@ -5298,6 +5764,217 @@
       "mastery_threshold": 0.8,
       "references": [
         "Reif Fundamentals of Statistical Mechanics"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.phase-transitions"
+      ]
+    },
+    {
+      "id": "phys.stat.grand-canonical-ensemble",
+      "name": "Grand Canonical Ensemble",
+      "aliases": [
+        "grand canonical ensemble",
+        "grand partition function",
+        "open system",
+        "fugacity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac",
+        "phys.stat.bose-einstein"
+      ],
+      "cross_links": [],
+      "description": "The grand canonical ensemble describes systems in contact with both a heat bath and a particle reservoir; the grand partition function \u039e = \u03a3 e^(\u2212\u03b2(E\u1d62\u2212\u03bcN\u1d62)) generates all thermodynamic averages for open systems, and Fermi-Dirac and Bose-Einstein distributions follow directly from it.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Reif Fundamentals of Statistical Mechanics Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.chemical-potential"
+      ]
+    },
+    {
+      "id": "phys.stat.chemical-potential",
+      "name": "Chemical Potential and Thermodynamic Equilibrium",
+      "aliases": [
+        "chemical potential",
+        "mu",
+        "electrochemical potential",
+        "partial molar Gibbs energy"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.grand-canonical-ensemble"
+      ],
+      "related": [
+        "phys.stat.fermi-dirac"
+      ],
+      "cross_links": [],
+      "description": "The chemical potential \u03bc = (\u2202F/\u2202N)_{T,V} is the free energy cost of adding one particle; it equalises between subsystems at equilibrium, governs diffusion across boundaries, and sets the Fermi energy at T = 0 for fermions.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Kittel Introduction to Solid State Physics Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.fluctuations-correlations",
+      "name": "Fluctuations, Response Functions, and Correlations",
+      "aliases": [
+        "fluctuations",
+        "susceptibility",
+        "response function",
+        "fluctuation-dissipation theorem",
+        "correlation function"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.partition-function"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Thermodynamic fluctuations of an observable A satisfy \u27e8(\u0394A)\u00b2\u27e9 = kT\u00b2(\u2202\u27e8A\u27e9/\u2202T); the fluctuation-dissipation theorem connects equilibrium fluctuations to linear response coefficients, and two-point correlation functions encode spatial order.",
+      "difficulty": "expert",
+      "estimated_hours": 9,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.4",
+        "Reif Fundamentals of Statistical Mechanics Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.ising-model"
+      ]
+    },
+    {
+      "id": "phys.stat.phase-transitions",
+      "name": "Phase Transitions and Landau Mean-Field Theory",
+      "aliases": [
+        "phase transition",
+        "order parameter",
+        "Landau theory",
+        "mean-field theory",
+        "first-order transition",
+        "second-order transition"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.free-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A phase transition is a discontinuous or singular change in macroscopic properties at a critical point; Landau's mean-field theory expands the free energy in powers of an order parameter \u03b7: F = a\u2080 + a\u2082\u03b7\u00b2 + a\u2084\u03b7\u2074 + \u2026, with the sign of a\u2082(T) distinguishing ordered from disordered phases.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.11",
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.1-4"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.ising-model"
+      ]
+    },
+    {
+      "id": "phys.stat.ising-model",
+      "name": "Ising Model",
+      "aliases": [
+        "Ising model",
+        "lattice spin model",
+        "exact solution",
+        "transfer matrix"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.phase-transitions",
+        "phys.stat.fluctuations-correlations"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Ising model assigns binary spins \u03c3\u1d62 = \u00b11 to lattice sites with nearest-neighbour coupling H = \u2212J\u03a3\u03c3\u1d62\u03c3\u2c7c; the 1D model is exactly solvable by the transfer matrix (no phase transition), while the 2D model (Onsager, 1944) exhibits a continuous phase transition at kTc/J \u2248 2.269.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "analyze",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Pathria Statistical Mechanics Ch.12",
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.5"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.stat.phase-transitions-critical-phenomena",
+        "phys.stat.monte-carlo-basics"
+      ]
+    },
+    {
+      "id": "phys.stat.phase-transitions-critical-phenomena",
+      "name": "Critical Phenomena, Scaling Laws, and Universality",
+      "aliases": [
+        "critical phenomena",
+        "critical exponents",
+        "scaling laws",
+        "universality",
+        "renormalization group"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.ising-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Near a critical point, thermodynamic quantities diverge as power laws |T\u2212Tc|^\u03b1,\u03b2,\u03b3,\u03bd,\u03b7; universality groups materials into classes sharing critical exponents regardless of microscopic details; the Wilson renormalization group provides the theoretical foundation via scale invariance and fixed points.",
+      "difficulty": "expert",
+      "estimated_hours": 12,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Goldenfeld Lectures on Phase Transitions and the RG Ch.6-10",
+        "Pathria Statistical Mechanics Ch.13"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.stat.monte-carlo-basics",
+      "name": "Monte Carlo Methods in Statistical Physics",
+      "aliases": [
+        "Monte Carlo simulation",
+        "Metropolis algorithm",
+        "detailed balance",
+        "Markov chain Monte Carlo",
+        "MCMC"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.stat.ising-model"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Monte Carlo simulation samples phase space stochastically; the Metropolis algorithm accepts new configurations with probability min(1, e^(\u2212\u03b2\u0394E)), satisfying detailed balance and converging to the Boltzmann distribution. The Ising model is the canonical teaching example for diagnosing critical slowing down.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "apply",
+      "mastery_threshold": 0.85,
+      "references": [
+        "Newman & Barkema Monte Carlo Methods in Statistical Physics Ch.1-4",
+        "Pathria Statistical Mechanics Ch.16"
       ],
       "children": [],
       "unlocks": []

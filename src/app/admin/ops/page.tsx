@@ -2,6 +2,8 @@ import { prisma } from '@/lib/db/prisma'
 import { redis } from '@/lib/redis/client'
 import { getFailureCounters } from '@/lib/monitoring'
 import { Card, Pill, SectionTitle } from '@/components/ui/candy'
+import { auth } from '@/lib/auth'
+import { TestEmailPanel } from '@/components/admin/TestEmailPanel'
 
 interface OpsData {
   health: { db: boolean; redis: string; uptime: number }
@@ -36,6 +38,7 @@ function EnvRow({ name, set }: { name: string; set: boolean }) {
 }
 
 export default async function AdminOpsPage() {
+  const session = await auth()
   let data: OpsData | null = null
 
   try {
@@ -79,6 +82,11 @@ export default async function AdminOpsPage() {
     { name: 'SMTP_HOST', set: !!process.env.SMTP_HOST },
     { name: 'SMTP_USER', set: !!process.env.SMTP_USER },
     { name: 'SMTP_PASS', set: !!process.env.SMTP_PASS },
+    // Google Sign-In is fully feature-gated on these two being set (see
+    // src/lib/auth/config.ts) — surfaced here so "why is the Google button
+    // missing" is answerable from this page instead of the Vercel dashboard.
+    { name: 'GOOGLE_CLIENT_ID', set: !!process.env.GOOGLE_CLIENT_ID },
+    { name: 'GOOGLE_CLIENT_SECRET', set: !!process.env.GOOGLE_CLIENT_SECRET },
     { name: 'ADMIN_EMAILS', set: !!process.env.ADMIN_EMAILS },
     { name: 'MONITORING_WEBHOOK_URL', set: !!process.env.MONITORING_WEBHOOK_URL },
   ]
@@ -209,11 +217,15 @@ export default async function AdminOpsPage() {
         <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: 'var(--candy-ink-soft)', marginBottom: 8 }}>
           Recommended
         </p>
-        <div>
+        <div style={{ marginBottom: 16 }}>
           {recommendedEnv.map((e) => (
             <EnvRow key={e.name} name={e.name} set={e.set} />
           ))}
         </div>
+        <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: 'var(--candy-ink-soft)', marginBottom: 8 }}>
+          Send a test email
+        </p>
+        <TestEmailPanel defaultTo={session?.user?.email ?? ''} />
       </Card>
 
       {/* Panel 4: AI Provider Configuration */}

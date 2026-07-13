@@ -1,5 +1,6 @@
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
+import { isAdminEmailMatch } from '@/lib/auth/email'
 
 // ─── DB-role check ────────────────────────────────────────────────────────────
 
@@ -25,13 +26,7 @@ export async function requireAdmin(): Promise<void> {
 // Once a user is ADMIN in the DB, the env var is no longer needed for that user.
 
 export function isAdminEmail(email: string): boolean {
-  const raw = process.env.ADMIN_EMAILS ?? ''
-  if (!raw.trim()) return false
-  return raw
-    .split(',')
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean)
-    .includes(email.toLowerCase())
+  return isAdminEmailMatch(email, process.env.ADMIN_EMAILS ?? '')
 }
 
 // Promote a user to ADMIN if their email is in ADMIN_EMAILS. Call after login.

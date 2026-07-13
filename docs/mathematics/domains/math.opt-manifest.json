@@ -1,0 +1,40 @@
+{
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "optimization",
+  "domain_prefix": "math.opt",
+  "domain_name": "Optimization",
+  "subject": "mathematics",
+  "concept_count": 16,
+  "asset_count": 16,
+  "validation": {
+    "verdict": "PASS",
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-05",
+    "validation_commit": "146f512f2da20075bcc3b3bab4a3677d16129567"
+  },
+  "checksums": {
+    "chapter_sha256": "sha256:b9913f41a6a6129109da50b6442f6af43732085f7e11e774498fa384198c97b6",
+    "domain_assets_sha256": "sha256:8ec1b05f423dd0c899a873ba854f868cfc45dcdc41a6d143961214a10a8f3cdf",
+    "graph_domain_sha256": "sha256:76834046090d528e52fa735a9de0e303fe221b7b270b08827e48085130eb2bdc",
+    "validation_report_sha256": "sha256:64d5696ee47949609eba0b3092b71740cc9563e51bd9d7b6c0191c36ad4f65b0"
+  },
+  "generated_files": [
+    "docs/mathematics/chapters/opt.md",
+    "docs/mathematics/domains/math.opt-validation-report.md",
+    "docs/mathematics/domains/math.opt-summary.md",
+    "docs/mathematics/domains/math.opt-manifest.json"
+  ],
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "curriculum-pipeline-v1.0",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "146f512f2da20075bcc3b3bab4a3677d16129567",
+  "created_at": "2026-07-05T18:42:06Z"
+}

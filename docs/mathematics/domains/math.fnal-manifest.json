@@ -1,0 +1,24 @@
+{
+  "domain": "math.fnal",
+  "name": "Functional Analysis",
+  "status": "draft",
+  "build_date": "2026-07-05",
+  "kg_version": "1.0.1",
+  "kg_commit": "4ae2048",
+  "concepts_total": 18,
+  "assets_authored": 18,
+  "assets_draft": 18,
+  "assets_placeholder": 0,
+  "validation": {
+    "verdict": "PASS",
+    "checks_passed": 8,
+    "checks_total": 8,
+    "date": "2026-07-05"
+  },
+  "pedagogical_audit": {
+    "verdict": "PASS",
+    "concepts_audited": 18,
+    "concepts_passed": 18,
+    "sample_pct": 100
+  }
+}

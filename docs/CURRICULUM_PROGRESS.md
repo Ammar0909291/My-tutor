@@ -1,13 +1,13 @@
 # Mathematics Curriculum Production — Progress Tracker
 
 *Source of truth for all sessions. Do not rely on conversation memory.*
-*Last updated: 2026-07-05 · Commit: `7b1d8735b0077e907e0d4d6e050339c156886112`*
+*Last updated: 2026-07-05 · Commit: `146f512f2da20075bcc3b3bab4a3677d16129567`*
 
 ## Branch
 `claude/my-tutor-foundation-KDSUO`
 
 ## Latest Commit
-`7b1d8735b0077e907e0d4d6e050339c156886112`
+`146f512f2da20075bcc3b3bab4a3677d16129567`
 
 ## Knowledge Graph
 
@@ -32,21 +32,21 @@
 | 09 | Calculus | math.calc | 76 | draft ✓ | chapters/calc.md ✓ | Complete |
 | 10 | Differential Equations | math.de | 56 | draft ✓ | chapters/de.md ✓ | Complete |
 | 11 | Linear Algebra | math.linalg | 61 | draft ✓ | chapters/linalg.md ✓ | Complete |
-| 12 | Probability | math.prob | 49 | placeholder | — | **NEXT** |
-| 13 | Statistics | math.stats | 40 | placeholder | — | Pending |
-| 14 | Discrete Mathematics | math.disc | 32 | placeholder | — | Pending |
-| 15 | Abstract Algebra | math.abst | 37 | placeholder | — | Pending |
-| 16 | Real Analysis | math.real | 30 | placeholder | — | Pending |
-| 17 | Complex Analysis | math.cx | 31 | placeholder | — | Pending |
-| 18 | Topology | math.top | 23 | placeholder | — | Pending |
-| 19 | Measure Theory | math.meas | 13 | placeholder | — | Pending |
-| 20 | Functional Analysis | math.fnal | 18 | placeholder | — | Pending |
-| 21 | Numerical Analysis | math.num | 16 | placeholder | — | Pending |
-| 22 | Optimization | math.opt | 16 | placeholder | — | Pending |
-| 23 | Graph Theory | math.graph | 16 | placeholder | — | Pending |
+| 12 | Probability | math.prob | 49 | draft ✓ | chapters/prob.md ✓ | Complete |
+| 13 | Statistics | math.stats | 40 | draft ✓ | chapters/stats.md ✓ | Complete |
+| 14 | Discrete Mathematics | math.disc | 32 | draft ✓ | chapters/disc.md ✓ | Complete |
+| 15 | Abstract Algebra | math.abst | 37 | draft ✓ | chapters/abst.md ✓ | Complete |
+| 16 | Real Analysis | math.real | 30 | draft ✓ | chapters/real.md ✓ | Complete |
+| 17 | Complex Analysis | math.cx | 31 | draft ✓ | chapters/cx.md ✓ | Complete |
+| 18 | Topology | math.top | 23 | draft ✓ | chapters/top.md ✓ | Complete |
+| 19 | Measure Theory | math.meas | 13 | draft ✓ | chapters/meas.md ✓ | Complete |
+| 20 | Functional Analysis | math.fnal | 18 | draft ✓ | chapters/fnal.md ✓ | Complete |
+| 21 | Numerical Analysis | math.num | 16 | placeholder | — | **NEXT** |
+| 22 | Optimization | math.opt | 16 | draft ✓ | chapters/opt.md ✓ | Complete |
+| 23 | Graph Theory | math.graph | 16 | draft ✓ | chapters/graph.md ✓ | Complete |
 | 24 | Category Theory | math.cat | 15 | placeholder | — | Pending |
 
-**Summary:** 11/24 domains complete · 572/908 assets drafted · 336/908 remaining
+**Summary:** 22/24 domains complete · 877/908 assets drafted · 31/908 remaining
 
 ## Completed Concepts Per Domain
 
@@ -94,64 +94,53 @@ ode, ode-order, ode-linearity, solution-types, ivp, existence-uniqueness, first-
 
 vector, vector-addition, scalar-multiplication, dot-product, norm, unit-vector, orthogonality, cross-product, matrix, matrix-addition, matrix-multiplication, matrix-transpose, symmetric-matrix, linear-system, augmented-matrix, row-reduction, row-echelon, rank, matrix-inverse, determinant, cofactor-expansion, det-properties, cramer-rule, lu-factorization, vector-space, subspace, span, linear-independence, basis, dimension, coordinates, change-of-basis, null-space, column-space, rank-nullity, linear-map, kernel-image, matrix-representation, eigenvalues, characteristic-polynomial, eigenspace, diagonalization, matrix-exponential, jordan-form, spectral-theorem, positive-definite, cholesky, inner-product, inner-product-space, orthogonal-basis, gram-schmidt, projection, least-squares, qr-factorization, svd, singular-values, pseudoinverse, tensor, dual-space, distance, angle-vectors
 
-### math.prob (49 concepts) — IN PROGRESS
+### math.prob (49 concepts) — COMPLETE
 
-0/49 authored. Concepts:
 sample-space, event, probability-measure, probability-axioms, classical-probability, combinatorial-probability, conditional-probability, total-probability, bayes-theorem, independence, bayesian-inference, random-variable, discrete-rv, continuous-rv, pmf, pdf, cdf, quantile, distribution, discrete-distributions, continuous-distributions, normal-distribution, standard-normal, expected-value, linearity-expectation, law-of-unconscious, variance, standard-deviation, moments, mgf, characteristic-function, covariance, correlation, joint-distribution, marginal-distribution, conditional-distribution, conditional-expectation, chebyshev, markov-inequality, lln, clt, convergence-types, generating-function, markov-chain, transition-matrix, stationary-distribution, ergodicity, martingale, poisson-process
 
-### math.stats (40 concepts) — PENDING
+### math.stats (40 concepts) — COMPLETE
 
-0/40 authored. Concepts:
 population-sample, descriptive-statistics, measures-of-center, measures-of-spread, percentile, data-visualization, sampling, sampling-distribution, standard-error, estimator, bias-variance, consistency, mle, method-of-moments, confidence-interval, ci-mean, ci-proportion, hypothesis-testing, test-statistic, p-value, type-errors, power, z-test, t-test, chi-squared-test, anova, two-way-anova, correlation, linear-regression, multiple-regression, covariance-matrix, normal-distribution, normal-approximation, nonparametric, bayesian-inference, conjugate-prior, credible-interval, experimental-design, sufficient-statistic, rao-blackwell
 
-### math.disc (32 concepts) — PENDING
+### math.disc (32 concepts) — COMPLETE
 
-0/32 authored. Concepts:
 counting-principles, permutations, combinations, binomial-theorem, combinatorics, stars-bars, pigeonhole, inclusion-exclusion, derangements, recurrence-relation, linear-recurrence, divide-conquer-recurrence, generating-functions, ogf, egf, graph, graph-types, graph-representation, graph-connectivity, euler-hamiltonian, graph-trees, spanning-tree, graph-coloring, planar-graph, propositional-logic, boolean-circuits, predicate-logic-disc, asymptotic-notation, algorithm-complexity, complexity-classes, catalan-numbers, stirling-numbers
 
-### math.abst (37 concepts) — PENDING
+### math.abst (37 concepts) — COMPLETE
 
-0/37 authored. Concepts:
 algebraic-structure, binary-operation, group-theory, group-operation, subgroup, cyclic-group, group-order, coset, lagrange-theorem, normal-subgroup, quotient-group, group-homomorphism, group-isomorphism, first-isomorphism-theorem, second-isomorphism-theorem, group-action, burnside-lemma, sylow-theorems, symmetric-group, alternating-group, ring-theory, ideal, quotient-ring, prime-ideal, ring-homomorphism, polynomial-ring, euclidean-domain, pid, ufd, field, field-extension, algebraic-extension, finite-field, galois-theory, galois-group, galois-correspondence, group-inverse
 
-### math.real (30 concepts) — PENDING
+### math.real (30 concepts) — COMPLETE
 
-0/30 authored. Concepts:
 completeness, sup-inf, archimedean, convergence-sequences, cauchy-sequence, series-rigorous, absolute-convergence, metric-space, open-sets, completeness-metric, compactness, connectedness, continuity-rigorous, uniform-continuity, lipschitz-continuity, extreme-value-theorem, ivt, differentiability-rigorous, mvt, taylor-rigorous, riemann-integral, riemann-integrability, ftc-rigorous, uniform-convergence, pointwise-convergence, weierstrass-approximation, fixed-point-theorem, baire-category, implicit-function-theorem, inverse-function-theorem
 
-### math.cx (31 concepts) — PENDING
+### math.cx (31 concepts) — COMPLETE
 
-0/31 authored. Concepts:
 complex-numbers-analysis, complex-function, cauchy-riemann, analytic-functions, harmonic-functions, power-series-cx, complex-integration, cauchy-theorem, cauchy-goursat, cauchy-integral-formula, higher-derivatives, morera-theorem, liouville-theorem, fundamental-theorem-algebra, identity-theorem, analytic-continuation, singularities, poles, essential-singularity, laurent-series, residue, residue-theorem, real-integral-residues, maximum-modulus, conformal-mapping, mobius-transformation, riemann-mapping, argument-principle, rouche-theorem, riemann-surface, riemann-zeta
 
-### math.top (23 concepts) — PENDING
+### math.top (23 concepts) — COMPLETE
 
-0/23 authored. Concepts:
 topological-space, open-sets, interior-closure, basis, continuity-top, homeomorphism, compactness, tychonoff, connectedness, separation-axioms, quotient-space, product-space, homotopy, homotopy-equivalence, fundamental-group, van-kampen, covering-space, simplicial-complex, homology, euler-characteristic, cohomology, manifold, smooth-manifold
 
-### math.meas (13 concepts) — PENDING
+### math.meas (13 concepts) — COMPLETE
 
-0/13 authored. Concepts:
 sigma-algebra, measure, lebesgue-measure, measure-zero, measurable-function, simple-function, lebesgue-integral, convergence-theorems, lp-space, l2-space, product-measure, radon-nikodym, abstract-measure-spaces
 
-### math.fnal (18 concepts) — PENDING
+### math.fnal (18 concepts) — COMPLETE
 
-0/18 authored. Concepts:
 normed-space, completeness, banach-space, hilbert-space, bounded-operator, dual-space-functional, hahn-banach, open-mapping-theorem, closed-graph-theorem, uniform-boundedness, riesz-representation, spectral-theory, compact-operator-spectrum, fourier-transform, distributions, special-functions, dense-subspace, convolution
 
-### math.num (16 concepts) — PENDING
+### math.num (16 concepts) — IN PROGRESS
 
 0/16 authored. Concepts:
 floating-point, error-analysis, root-finding, newtons-method, interpolation, splines, numerical-differentiation, numerical-integration, lu-factorization, cholesky, iterative-linear, qr-algorithm, svd, euler-method, runge-kutta, stiff-ode
 
-### math.opt (16 concepts) — PENDING
+### math.opt (16 concepts) — COMPLETE
 
-0/16 authored. Concepts:
 unconstrained-optimization, convex-function, convex-set, convex-optimization, linear-programming, quadratic-programming, semidefinite-programming, duality, kkt, lagrange-multipliers, gradient-methods, stochastic-gradient, newton-optimization, pca, integer-programming, dynamic-programming
 
-### math.graph (16 concepts) — PENDING
+### math.graph (16 concepts) — COMPLETE
 
-0/16 authored. Concepts:
 graph, graph-invariants, graph-operations, connectivity, tree, minimum-spanning-tree, shortest-path, maximum-flow, matching, eulerian-circuit, hamiltonian-cycle, graph-coloring, algebraic-graph-theory, ramsey-theory, extremal-graph-theory, random-graph
 
 ### math.cat (15 concepts) — PENDING
@@ -190,5 +179,5 @@ category, morphism-types, functor, natural-transformation, functor-category, yon
 
 ## Next Planned Domain
 
-**Probability** (`math.prob`) · 49 concepts
+**Numerical Analysis** (`math.num`) · 16 concepts
 

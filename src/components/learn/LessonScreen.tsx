@@ -2,7 +2,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X } from 'lucide-react'
+import {
+  Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
+  BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
+  Bookmark, MoreVertical, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
+  Network, ListChecks,
+} from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
@@ -77,6 +82,43 @@ const LANG_BADGE: Record<string, { label: string; accent: string }> = {
 }
 // Subjects that aren't programming languages render their lesson canvas as markdown/plaintext.
 const NON_CODE_SUBJECTS = ['english', 'russian', 'hindi', 'german', 'arabic', 'mathematics', 'physics', 'chemistry', 'biology']
+
+// ─── "My Tutor" redesign tokens (Learn window only — approved exception to the
+// standing "don't redesign UI" rule, scoped to this screen) ───────────────────
+// Kept as literal hex (not var(--indigo)) because many call sites append a hex
+// alpha suffix directly (e.g. `${UI.indigo}18`) — CSS custom properties can't be
+// suffixed that way. --indigo/--indigo-hover in src/styles/tokens.css are the
+// canonical theme-token definition of this same color; keep both in sync.
+const UI = {
+  indigo: '#6C5CE7', indigoDark: '#5A4BD1',
+  green: '#22C55E', greenBg: 'rgba(34,197,94,0.1)', greenBorder: 'rgba(34,197,94,0.3)',
+  red: '#EF4444', redBg: 'rgba(239,68,68,0.08)', redBorder: 'rgba(239,68,68,0.25)',
+  amber: '#F59E0B',
+  card: 'var(--bg-surface)', page: 'var(--bg-void)', border: 'var(--border-subtle)',
+  textPrimary: 'var(--text-primary)', textSecondary: 'var(--text-secondary)', textDim: 'var(--text-dim)',
+}
+
+// Quick-action prompts sent verbatim as a user turn (right-panel "What would you like to do?").
+const QUICK_ACTIONS: Record<TeachingLang, { key: string; icon: 'simpler'|'example'|'diagram'|'challenge'; label: string; prompt: string }[]> = {
+  en: [
+    { key: 'simpler',  icon: 'simpler',  label: 'Explain in simpler way',   prompt: 'Can you explain that in a simpler way?' },
+    { key: 'example',  icon: 'example',  label: 'Show real-life example',  prompt: 'Can you show me a real-life example of this?' },
+    { key: 'diagram',  icon: 'diagram',  label: 'Give me a diagram',       prompt: 'Can you give me a diagram to visualize this?' },
+    { key: 'challenge',icon: 'challenge',label: 'Challenge me',            prompt: 'Challenge me with a harder question on this topic.' },
+  ],
+  ru: [
+    { key: 'simpler',  icon: 'simpler',  label: 'Объясни проще',            prompt: 'Можешь объяснить это проще?' },
+    { key: 'example',  icon: 'example',  label: 'Пример из жизни',          prompt: 'Покажи пример из реальной жизни.' },
+    { key: 'diagram',  icon: 'diagram',  label: 'Дай диаграмму',            prompt: 'Дай диаграмму для наглядности.' },
+    { key: 'challenge',icon: 'challenge',label: 'Испытай меня',             prompt: 'Дай мне более сложный вопрос по этой теме.' },
+  ],
+  hi: [
+    { key: 'simpler',  icon: 'simpler',  label: 'Aasan tarike se samjhao',  prompt: 'Isse aasan tarike se samjha sakte ho?' },
+    { key: 'example',  icon: 'example',  label: 'Real-life example dikhao',prompt: 'Isse real-life example ke saath dikhao.' },
+    { key: 'diagram',  icon: 'diagram',  label: 'Diagram do',              prompt: 'Isko samjhane ke liye ek diagram do.' },
+    { key: 'challenge',icon: 'challenge',label: 'Challenge do',            prompt: 'Mujhe iss topic pe ek mushkil sawal do.' },
+  ],
+}
 const LANG_MAP: Record<string, string> = {
   c: 'c', cpp: 'cpp', python: 'python', javascript: 'javascript', typescript: 'typescript',
   java: 'java', csharp: 'csharp', go: 'go', rust: 'rust',
@@ -554,7 +596,7 @@ function Panel({ children, style, accentColor = 'var(--coral)' }: { children: Re
   return (
     <Card
       style={{
-        boxShadow: `0 4px 0 ${accentColor}, 0 4px 16px rgba(0,0,0,0.25)`,
+        boxShadow: `0 0 0 1px ${accentColor}22, 0 1px 3px rgba(0,0,0,0.06)`,
         border: '1px solid var(--panel-border)',
         borderRadius: 16,
         display: 'flex',
@@ -586,6 +628,63 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
   )
 }
 
+// "What would you like to do?" quick-prompt buttons — occupies the right-hand
+// rail for non-programming subjects (mockup's right panel). Quick Check
+// (multiple-choice) intentionally lives inline in the chat feed via
+// InlinePracticePrompt, directly under the explanation/diagram it follows —
+// not duplicated here.
+function QuickActionsAndCheck({
+  teachingLanguage, sessionId, sendMessage, setActiveTab,
+}: {
+  teachingLanguage: TeachingLang
+  sessionId: string | null
+  sendMessage: (sid: string, text: string, showInUI?: boolean) => Promise<void>
+  setActiveTab: (tab: ActiveTab) => void
+}) {
+  const ICONS = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }
+  const actions = QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en
+
+  const askForAction = (prompt: string) => {
+    if (!sessionId) return
+    sendMessage(sessionId, prompt, true)
+    setActiveTab('chat')
+  }
+
+  return (
+    <div style={{ flex: 1, overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {/* What would you like to do? */}
+      <div>
+        <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>
+          {teachingLanguage === 'ru' ? 'Что бы вы хотели сделать?' : 'What would you like to do?'}
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {actions.map((a) => {
+            const Icon = ICONS[a.icon]
+            const palette: Record<typeof a.icon, { bg: string; fg: string }> = {
+              simpler: { bg: `${UI.indigo}14`, fg: UI.indigo },
+              example: { bg: 'rgba(121,192,255,0.12)', fg: '#3B82F6' },
+              diagram: { bg: 'rgba(34,197,94,0.12)', fg: UI.green },
+              challenge: { bg: 'rgba(245,158,11,0.12)', fg: UI.amber },
+            }
+            const c = palette[a.icon]
+            return (
+              <button key={a.key} onClick={() => askForAction(a.prompt)} disabled={!sessionId}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderRadius: 10,
+                  background: c.bg, color: c.fg, border: 'none', cursor: sessionId ? 'pointer' : 'not-allowed',
+                  fontSize: 12.5, fontWeight: 700, textAlign: 'left',
+                }}>
+                <Icon size={15} style={{ flexShrink: 0 }} />
+                {a.label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage: teachingLanguageProp = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId, autoOpenPractice, initialPrompt }: Props) {
   const { t, lang: uiLang } = useLanguage()
@@ -599,6 +698,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [input, setInput] = useState('')
   const [isStreaming, setIsStreaming] = useState(false)
   const [initError, setInitError] = useState('')
+  // FIX 1 (stabilization): gate — the Educational Brain / AI teaching only
+  // begins once the learner presses "Start Lesson"; selecting a lesson alone
+  // must not trigger session creation or the opening tutor message.
+  const [lessonStarted, setLessonStarted] = useState(false)
   const [speakingId, setSpeakingId] = useState<string|null>(null)
   const [micState, setMicState] = useState<MicState>('idle')
   const [micSupported, setMicSupported] = useState(false)
@@ -657,6 +760,28 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [availableTopicSlugs, setAvailableTopicSlugs] = useState<string[]>([])
   const [lockReasons, setLockReasons] = useState<Record<string, { missingPrereqs: { slug: string; title: string }[] }>>({})
   const [expandedLockedTopic, setExpandedLockedTopic] = useState<string | null>(null)
+  const [knowledgeMapOpen, setKnowledgeMapOpen] = useState(false)
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false)
+  const [bookmarkedLessons, setBookmarkedLessons] = useState<Set<number>>(new Set())
+  // Real cross-session minutes studied today (from StudySession rows written on
+  // session end), fetched once on mount as the baseline for the "Today's Goal"
+  // ring; the live current-session `elapsed` timer is added on top of this.
+  const [todayBaselineMinutes, setTodayBaselineMinutes] = useState(0)
+
+  // Accessibility: Escape closes whichever header/panel dropdown is open —
+  // these menus only close today via an invisible click-outside overlay,
+  // which is unreachable by keyboard.
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Escape') return
+      setSubjectMenuOpen(false)
+      setLangMenuOpen(false)
+      setSpeedMenuOpen(false)
+      setMoreMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   // Assessment / promotion
   const [promotionResult, setPromotionResult] = useState<PromotionResult | null>(null)
@@ -736,6 +861,42 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   useEffect(() => { setMicSupported(typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getUserMedia) }, [])
 
+  // Today's Goal baseline — real minutes already studied today, across all
+  // subjects, from completed sessions (fetched once; the live session's
+  // elapsed time is added on top locally so the ring updates in real time).
+  useEffect(() => {
+    fetch('/api/study-time/today')
+      .then((r) => r.json())
+      .then((d) => { if (d.success) setTodayBaselineMinutes(d.minutesToday) })
+      .catch(() => {})
+  }, [])
+
+  // Bookmarked lessons — persisted per subject (previously a client-only Set
+  // that silently reset on every page refresh). bookmarksToggledRef guards
+  // against a real race: if the user clicks bookmark before this initial GET
+  // resolves, the optimistic click state must win — otherwise the slower,
+  // now-stale GET response arrives afterward and silently reverts the click.
+  const bookmarksToggledRef = useRef(false)
+  useEffect(() => {
+    fetch(`/api/curriculum/bookmark?subject=${subjectSlug}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.success && !bookmarksToggledRef.current) setBookmarkedLessons(new Set<number>(d.bookmarkedLessons)) })
+      .catch(() => {})
+  }, [subjectSlug])
+
+  const toggleBookmark = useCallback((lessonOrder: number) => {
+    bookmarksToggledRef.current = true
+    setBookmarkedLessons((prev) => {
+      const next = new Set(prev)
+      next.has(lessonOrder) ? next.delete(lessonOrder) : next.add(lessonOrder)
+      return next
+    })
+    fetch('/api/curriculum/bookmark', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subjectCode: subjectSlug, lessonOrder }),
+    }).catch(() => {})
+  }, [subjectSlug])
+
   // Fetch curriculum — query by the enrolled subject's own slug. The legacy
   // `Curriculum` table only has rows for c/cpp/python/english (the original 4
   // seeded subjects); the Subject Library has since grown to dozens of subjects,
@@ -789,6 +950,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       }
     } catch { /* ignore */ }
   }, [subjectSlug, curriculumLessons.length])
+
+  const handleLessonRestart = useCallback(async (lessonOrder: number, topicSlug?: string) => {
+    try {
+      const res = await fetch('/api/curriculum/progress', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectCode: subjectSlug, lessonOrder, topicSlug }),
+      })
+      const data = await res.json()
+      if (data.success) setCurriculumProgress(data.progress)
+    } catch { /* ignore */ }
+  }, [subjectSlug])
 
   // TTS
   const handleStopSpeech = useCallback(() => {
@@ -1106,7 +1279,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       } else if (NON_CODE_SUBJECTS.includes(subjectSlug)) {
         setCode(full)
       }
-      handleSpeak(aid, full)
+      // Voice no longer auto-plays on arrival (including the lesson-start
+      // greeting) — playback only starts from the explicit play button on
+      // each message (handleSpeak, wired to that button below).
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Error: ${msg}`, streaming: false } : m))
@@ -1232,37 +1407,39 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       endSession()
     }
   }, [])
-  useEffect(() => {
+  // FIX 1 (stabilization): the lesson/session no longer auto-starts on mount —
+  // it only starts when the learner explicitly presses "Start Lesson" (see the
+  // empty-state button below). Same session-creation + opening-message logic
+  // as before, just moved from an unconditional mount effect into a callback.
+  const startLesson = useCallback(async () => {
     if (initializedRef.current) return
     initializedRef.current = true
-    async function init() {
-      try {
-        const res = await fetch('/api/sessions', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
-        })
-        const data = await res.json()
-        if (!data.success) { setInitError(data.error ?? 'Error'); return }
-        const sid = data.data.id; setSessionId(sid)
-        const lessonRef = resumeLessonTitle
-          ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
-          : null
-        const opening = teachingLanguage === 'ru'
-          ? (pastSessionsSummary || lessonRef
-            ? `Привет! ${lessonRef ? `Ты работал над темой ${lessonRef}. ` : ''}${pastSessionsSummary ? `В прошлый раз: "${pastSessionsSummary}". ` : ''}Продолжи с того места. Уровень: "${levelDescription}". 3-4 предложения.`
-            : `Начни урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
-          : teachingLanguage === 'hi'
-          ? (pastSessionsSummary || lessonRef
-            ? `Namaste! ${lessonRef ? `Aap ${lessonRef} par kaam kar rahe the. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue karein. Level: "${levelDescription}". 3-4 sentences.`
-            : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation do. 3-4 sentences.`)
-          : (pastSessionsSummary || lessonRef
-            ? `Hi! ${lessonRef ? `You were working on ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue from there. Level: "${levelDescription}". 3-4 sentences.`
-            : `Start the lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself as "Tutor Max" and begin teaching. 3-4 sentences.`)
-        await sendMessage(sid, opening, false)
-        if (initialPrompt) await sendMessage(sid, initialPrompt, true)
-      } catch { setInitError('Connection failed. Please refresh the page.') }
-    }
-    init()
+    setLessonStarted(true)
+    try {
+      const res = await fetch('/api/sessions', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
+      })
+      const data = await res.json()
+      if (!data.success) { setInitError(data.error ?? 'Error'); return }
+      const sid = data.data.id; setSessionId(sid)
+      const lessonRef = resumeLessonTitle
+        ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
+        : null
+      const opening = teachingLanguage === 'ru'
+        ? (pastSessionsSummary || lessonRef
+          ? `Привет! ${lessonRef ? `Ты работал над темой ${lessonRef}. ` : ''}${pastSessionsSummary ? `В прошлый раз: "${pastSessionsSummary}". ` : ''}Продолжи с того места. Уровень: "${levelDescription}". 3-4 предложения.`
+          : `Начни урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
+        : teachingLanguage === 'hi'
+        ? (pastSessionsSummary || lessonRef
+          ? `Namaste! ${lessonRef ? `Aap ${lessonRef} par kaam kar rahe the. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue karein. Level: "${levelDescription}". 3-4 sentences.`
+          : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation do. 3-4 sentences.`)
+        : (pastSessionsSummary || lessonRef
+          ? `Hi! ${lessonRef ? `You were working on ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue from there. Level: "${levelDescription}". 3-4 sentences.`
+          : `Start the lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself as "Tutor Max" and begin teaching. 3-4 sentences.`)
+      await sendMessage(sid, opening, false)
+      if (initialPrompt) await sendMessage(sid, initialPrompt, true)
+    } catch { setInitError('Connection failed. Please refresh the page.') }
   }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId, initialPrompt])
 
   // Vision send
@@ -1295,7 +1472,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       } else if (NON_CODE_SUBJECTS.includes(subjectSlug)) {
         setCode(full)
       }
-      handleSpeak(aid, full)
+      // Voice no longer auto-plays on arrival — see the sendMessage handler above.
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Analysis error: ${msg}`, streaming: false } : m))
@@ -1575,8 +1752,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     ? Math.round((currentUnit.completedCount / currentUnit.totalLessons) * 100)
     : 0
 
-  const backLabel = teachingLanguage === 'ru' ? '← Главная' : '← Home'
-
   if (initError) {
     return (
       <div className={`${styles.learnCandy} min-h-screen flex items-center justify-center p-6`} style={{ background: 'var(--bg-void)' }}>
@@ -1596,8 +1771,71 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }
 
   // ── Layout ────────────────────────────────────────────────────────────────
+  // ── Left icon nav rail (Learn window redesign) ──────────────────────────
+  const goalTargetMin = 60
+  const goalDoneMin = Math.min(goalTargetMin, todayBaselineMinutes + Math.floor(elapsed / 60))
+  const goalPct = Math.round((goalDoneMin / goalTargetMin) * 100)
+  const NAV_ITEMS: { key: string; label: string; icon: React.ReactNode; href?: string; onClick?: () => void; active?: boolean }[] = [
+    { key: 'learn', label: teachingLanguage === 'ru' ? 'Учёба' : 'Learn', icon: <BookOpen size={20} />, href: '/learn', active: true },
+    { key: 'practice', label: teachingLanguage === 'ru' ? 'Практика' : 'Practice', icon: <Dumbbell size={20} />, onClick: () => currentLessonData?.topicSlug && setPracticeOpen((v) => !v) },
+    { key: 'progress', label: teachingLanguage === 'ru' ? 'Прогресс' : 'Progress', icon: <BarChart3 size={20} />, href: '/progress' },
+    { key: 'library', label: teachingLanguage === 'ru' ? 'Библиотека' : 'Library', icon: <LibraryIcon size={20} />, href: '/library' },
+    { key: 'profile', label: teachingLanguage === 'ru' ? 'Профиль' : 'Profile', icon: <User size={20} />, href: '/settings' },
+    { key: 'settings', label: teachingLanguage === 'ru' ? 'Настройки' : 'Settings', icon: <SettingsIcon size={20} />, href: '/settings' },
+  ]
+
   return (
-    <div className={`${styles.learnCandy} pb-mobile-nav`} style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-void)', color: 'var(--text-primary)', overflow: 'hidden' }}>
+    <div className={`${styles.learnCandy} pb-mobile-nav`} style={{ height: '100vh', display: 'flex', background: 'var(--bg-void)', color: 'var(--text-primary)', overflow: 'hidden' }}>
+
+      {/* ══ LEFT ICON NAV RAIL ══════════════════════════════════════════ */}
+      <nav className="hidden md:flex" style={{
+        width: 84, flexShrink: 0, flexDirection: 'column', alignItems: 'center',
+        padding: '16px 8px', gap: 4, background: 'var(--bg-surface)',
+        borderRight: '1px solid var(--border-subtle)',
+      }}>
+        {NAV_ITEMS.map((item) => {
+          const body = (
+            <div style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+              padding: '8px 4px', borderRadius: 10, width: '100%', cursor: 'pointer',
+              color: item.active ? UI.indigo : 'var(--text-dim)',
+              background: item.active ? `${UI.indigo}14` : 'transparent',
+            }}>
+              {item.icon}
+              <span style={{ fontSize: 9.5, fontWeight: item.active ? 700 : 500, textAlign: 'center' }}>{item.label}</span>
+            </div>
+          )
+          return item.href
+            ? <Link key={item.key} href={item.href} style={{ width: '100%', textDecoration: 'none' }}>{body}</Link>
+            : <button key={item.key} onClick={item.onClick} style={{ width: '100%', border: 'none', background: 'none', padding: 0 }}>{body}</button>
+        })}
+
+        <div style={{ flex: 1 }} />
+
+        {/* Today's Goal ring — real cross-session minutes today (StudySession) + this session's live elapsed time, vs a 60-min target */}
+        <div style={{ width: '100%', padding: '10px 6px', textAlign: 'center' }}>
+          <p style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>
+            {teachingLanguage === 'ru' ? 'Цель на день' : "Today's Goal"}
+          </p>
+          <div style={{ position: 'relative', width: 56, height: 56, margin: '0 auto' }}>
+            <svg width={56} height={56} viewBox="0 0 56 56" style={{ transform: 'rotate(-90deg)' }}>
+              <circle cx={28} cy={28} r={24} fill="none" stroke="var(--border-subtle)" strokeWidth={5} />
+              <circle cx={28} cy={28} r={24} fill="none" stroke={UI.indigo} strokeWidth={5} strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 24} strokeDashoffset={2 * Math.PI * 24 * (1 - goalPct / 100)}
+                style={{ transition: 'stroke-dashoffset 600ms ease' }} />
+            </svg>
+            <span style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: 'var(--text-primary)' }}>
+              {goalPct}%
+            </span>
+          </div>
+          <p style={{ fontSize: 9.5, color: 'var(--text-dim)', marginTop: 6 }}>{goalDoneMin} / {goalTargetMin} min</p>
+          <Link href="/progress" style={{ fontSize: 9.5, color: UI.indigo, fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: 2 }}>
+            {teachingLanguage === 'ru' ? 'Прогресс →' : 'View Progress →'}
+          </Link>
+        </div>
+      </nav>
+
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
       {/* XP Celebration — candy Card + EagleMascot + confetti (useConfetti fired alongside setXpCelebration above) */}
       {xpCelebration && (
@@ -1622,21 +1860,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         />
       )}
 
-      {/* ══ TOP BAR (56px) — candy chrome, same family as Dashboard V2's TopBar ══ */}
+      {/* ══ TOP BAR (56px) — "My Tutor" logo lockup redesign ══════════════ */}
       <header style={{
         height: 56, flexShrink: 0,
         background: 'var(--bg-surface)',
-        boxShadow: '0 4px 0 var(--border-subtle)',
+        borderBottom: '1px solid var(--border-subtle)',
         padding: '0 18px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
         position: 'relative', zIndex: 5,
       }}>
-        {/* Left */}
+        {/* Left — logo lockup */}
         <Link href="/dashboard"
-          style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: 13, fontWeight: 500, whiteSpace: 'nowrap', flexShrink: 0 }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--coral)' }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)' }}>
-          {backLabel}
+          style={{ display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none', flexShrink: 0 }}>
+          <div style={{
+            width: 32, height: 32, borderRadius: 9, flexShrink: 0,
+            background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff',
+          }}>
+            <BookOpen size={17} />
+          </div>
+          <div className="hidden sm:block" style={{ lineHeight: 1.15 }}>
+            <p style={{ fontSize: 13.5, fontWeight: 800, color: 'var(--text-primary)' }}>My Tutor</p>
+            <p style={{ fontSize: 9.5, color: 'var(--text-dim)', fontWeight: 500 }}>
+              {teachingLanguage === 'ru' ? 'Личный ИИ-репетитор' : 'Personal AI Tutor'}
+            </p>
+          </div>
         </Link>
 
         {/* Center */}
@@ -1656,6 +1904,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 <button
                   onClick={() => setSubjectMenuOpen((v) => !v)}
                   title={switchLabel}
+                  aria-label={switchLabel}
+                  aria-haspopup="menu"
+                  aria-expanded={subjectMenuOpen}
                   style={{
                     display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer',
                     padding: '2px 8px 2px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700,
@@ -1714,15 +1965,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             <button onClick={() => setLangMenuOpen((o) => !o)}
               title={t('settings_lang')}
               aria-label={t('settings_lang')}
+              aria-haspopup="menu"
+              aria-expanded={langMenuOpen}
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', borderRadius: 6,
-                fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
-                background: langMenuOpen ? 'rgba(247,129,102,0.15)' : 'transparent',
-                color: langMenuOpen ? 'var(--coral)' : 'var(--text-dim)',
-                border: `1px solid ${langMenuOpen ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
+                display: 'inline-flex', alignItems: 'center', gap: 5, height: 30, padding: '0 10px', borderRadius: 8,
+                fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
+                background: langMenuOpen ? `${UI.indigo}18` : 'var(--bg-elevated)',
+                color: langMenuOpen ? UI.indigo : 'var(--text-secondary)',
+                border: `1px solid ${langMenuOpen ? `${UI.indigo}55` : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
-              <span>Language -{LANG_SHORT.en} -{LANG_SHORT.hi} -{LANG_SHORT.ru}</span>
+              <Globe2 size={13} />
+              <span className="hidden sm:inline">{LANG_LABEL[teachingLanguage]}</span>
+              <ChevronDown size={11} style={{ transform: langMenuOpen ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }} />
             </button>
             {langMenuOpen && (
               <>
@@ -1752,38 +2007,43 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           </div>
         </div>
 
-        {/* Right — voice buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
-          {(['male', 'female', 'warm'] as VoiceType[]).map((k) => {
-            const isActive = voiceType === k
-            return (
-              <button key={k} onClick={() => handleVoiceChange(k)}
-                title={VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
-                style={{
-                  width: 30, height: 30, borderRadius: 10, fontSize: 11, fontWeight: 700, cursor: 'pointer',
-                  background: isActive ? 'var(--coral)' : 'var(--bg-elevated)',
-                  color: isActive ? '#fff' : 'var(--text-dim)',
-                  border: 'none',
-                  boxShadow: isActive ? '0 2px 0 var(--coral-hover)' : '0 2px 0 var(--border-subtle)',
-                  transition: 'all 150ms',
-                }}>
-                {mounted ? voiceShortLabel[k] : { male: 'M', female: 'F', warm: 'W' }[k]}
-              </button>
-            )
-          })}
+        {/* Right — voice, speed, theme, avatar */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+          <div className="hidden lg:flex" style={{ gap: 4 }}>
+            {(['male', 'female', 'warm'] as VoiceType[]).map((k) => {
+              const isActive = voiceType === k
+              return (
+                <button key={k} onClick={() => handleVoiceChange(k)}
+                  title={VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
+                  style={{
+                    width: 26, height: 26, borderRadius: 8, fontSize: 10.5, fontWeight: 700, cursor: 'pointer',
+                    background: isActive ? UI.indigo : 'var(--bg-elevated)',
+                    color: isActive ? '#fff' : 'var(--text-dim)',
+                    border: 'none', transition: 'all 150ms',
+                  }}>
+                  {mounted ? voiceShortLabel[k] : { male: 'M', female: 'F', warm: 'W' }[k]}
+                </button>
+              )
+            })}
+          </div>
           <div style={{ position: 'relative' }}>
             <button onClick={() => setSpeedMenuOpen((o) => !o)}
               title={t('settings_voice_speed')}
               aria-label={`${t('settings_voice_speed')}: ${speed}x`}
+              aria-haspopup="menu"
+              aria-expanded={speedMenuOpen}
               style={{
-                height: 28, padding: '0 10px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                display: 'inline-flex', alignItems: 'center', gap: 5,
+                height: 30, padding: '0 10px', borderRadius: 8, fontSize: 11.5, fontWeight: 700, cursor: 'pointer',
                 whiteSpace: 'nowrap', flexShrink: 0,
-                background: speedMenuOpen ? 'rgba(247,129,102,0.15)' : 'transparent',
-                color: speedMenuOpen ? 'var(--coral)' : 'var(--text-dim)',
-                border: `1px solid ${speedMenuOpen ? 'rgba(247,129,102,0.4)' : 'var(--border-default)'}`,
+                background: speedMenuOpen ? `${UI.indigo}18` : 'var(--bg-elevated)',
+                color: speedMenuOpen ? UI.indigo : 'var(--text-secondary)',
+                border: `1px solid ${speedMenuOpen ? `${UI.indigo}55` : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
-              Speed: {speed}x
+              <Gauge size={13} />
+              <span>{speed}x</span>
+              <ChevronDown size={11} style={{ transform: speedMenuOpen ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }} />
             </button>
             {speedMenuOpen && (
               <>
@@ -1800,8 +2060,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     <button key={s} onClick={() => handleSpeedChange(s)}
                       style={{
                         padding: '8px 16px', fontSize: 12.5, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
-                        background: speed === s ? 'rgba(247,129,102,0.12)' : 'transparent',
-                        color: speed === s ? 'var(--coral)' : 'var(--text-primary)',
+                        background: speed === s ? `${UI.indigo}18` : 'transparent',
+                        color: speed === s ? UI.indigo : 'var(--text-primary)',
                       }}
                       onMouseEnter={(e) => { if (speed !== s) (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-hover)' }}
                       onMouseLeave={(e) => { if (speed !== s) (e.currentTarget as HTMLButtonElement).style.background = 'transparent' }}>
@@ -1813,6 +2073,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             )}
           </div>
           <ThemeToggle />
+          <div style={{
+            width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+            background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }} title={displayName ?? 'Student'}>
+            {(displayName ?? 'S').trim().charAt(0).toUpperCase()}
+          </div>
         </div>
       </header>
 
@@ -1841,7 +2108,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       {/* ══ 3-PANEL GRID ══════════════════════════════════════════════════ */}
       {/* Mobile: single column, one panel visible per activeTab. Desktop (md+): all three side by side. */}
       <div
-        className={maximizedPanel ? 'grid grid-cols-1' : 'grid grid-cols-1 md:grid-cols-[25%_45%_30%]'}
+        className={
+          maximizedPanel ? 'grid grid-cols-1'
+          : isNotebook ? 'grid grid-cols-1 md:grid-cols-[22%_50%_28%]'
+          : 'grid grid-cols-1 md:grid-cols-[25%_45%_30%]'
+        }
         style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: 16, padding: 16 }}
       >
 
@@ -1849,18 +2120,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         {/* On mobile only the active tab's panel is rendered (full width); on desktop all three sit side by side via display:contents */}
         <div className={activeTab !== 'curriculum' ? 'hidden md:contents' : 'contents'}
           style={maximizedPanel && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined}>
-        <Panel style={{ overflow: 'hidden' }} accentColor="#F78166">
+        <Panel style={{ overflow: 'hidden' }} accentColor={UI.indigo}>
           <div style={{ flexDirection: 'column', height: '100%' }}
             className={activeTab !== 'curriculum' ? 'hidden md:flex' : 'flex'}>
             {/* Header */}
             <PanelHeader>
-              <span style={{ fontSize: 14 }}>📚</span>
-              <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)', flex: 1 }}>
-                {teachingLanguage === 'ru' ? 'Программа' : 'Roadmap'}
+              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
+                {teachingLanguage === 'ru' ? 'Программа обучения' : 'Learning Roadmap'}
               </span>
-              <span style={{ padding: '2px 8px', borderRadius: 12, fontSize: 10, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>
-                {badge.label}
-              </span>
+              {totalLessons > 0 && currentLessonData && (
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)' }}>
+                  {currentLessonData.order} {teachingLanguage === 'ru' ? 'из' : 'of'} {totalLessons}
+                </span>
+              )}
               {/* Maximize/restore — desktop only */}
               <button
                 className="hidden md:flex"
@@ -1871,17 +2143,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               </button>
             </PanelHeader>
 
-            {/* Knowledge Graph Position Panel */}
-            <LearnerPositionPanel
-              subjectSlug={subjectSlug}
-              teachingLanguage={teachingLanguage}
-              onGapClick={(topicSlug) => {
-                const lesson = curriculumLessons.find((l) => l.topicSlug === topicSlug)
-                if (lesson && lesson.order < curriculumProgress.currentLesson && sessionId) {
-                  navigateToLesson(lesson.order)
-                }
-              }}
-            />
+            {/* Subject-wide completion — mockup's "13% Complete" strip */}
+            {totalLessons > 0 && (
+              <div style={{ padding: '10px 12px 8px', borderBottom: '1px solid var(--border-subtle)' }}>
+                <div style={{ height: 6, borderRadius: 3, background: 'var(--bg-elevated)', overflow: 'hidden' }}>
+                  <div style={{ height: '100%', width: `${xpProgress}%`, background: UI.indigo, borderRadius: 3, transition: 'width 600ms ease' }} />
+                </div>
+                <p style={{ fontSize: 10.5, color: 'var(--text-dim)', fontWeight: 700, marginTop: 5 }}>
+                  {xpProgress}% {teachingLanguage === 'ru' ? 'завершено' : 'Complete'}
+                </p>
+              </div>
+            )}
+
+            {/* Knowledge Graph Position Panel — collapsed behind the "Knowledge Map" card below by default */}
+            {knowledgeMapOpen && (
+              <LearnerPositionPanel
+                subjectSlug={subjectSlug}
+                teachingLanguage={teachingLanguage}
+                onGapClick={(topicSlug) => {
+                  const lesson = curriculumLessons.find((l) => l.topicSlug === topicSlug)
+                  if (lesson && lesson.order < curriculumProgress.currentLesson && sessionId) {
+                    navigateToLesson(lesson.order)
+                  }
+                }}
+              />
+            )}
 
             {/* Revision mode banner */}
             {revisionTopic && (
@@ -1907,8 +2193,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
             {/* Goal card for current lesson */}
             {currentLessonData?.lessonGoal && (
-              <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: 'rgba(247,129,102,0.05)' }}>
-                <p style={{ fontSize: 10, color: 'var(--coral)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+              <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: `${UI.indigo}0c` }}>
+                <p style={{ fontSize: 10, color: UI.indigo, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
                   🎯 {teachingLanguage === 'ru' ? 'Цель' : 'Goal'}
                 </p>
                 <p style={{ fontSize: 11, color: 'var(--text-primary)', marginTop: 3, lineHeight: 1.4 }}>{currentLessonData.lessonGoal}</p>
@@ -1924,19 +2210,24 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   </span>
                 </div>
                 {curriculumProgress.completedLessons.includes(currentLessonData.order) ? (
-                  <div style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700,
-                    background: 'rgba(63,185,80,0.1)', color: 'var(--green)', border: '1px solid rgba(63,185,80,0.3)',
-                  }}>
-                    {t('lesson_completed_btn')}
-                  </div>
+                  <button
+                    onClick={() => handleLessonRestart(currentLessonData.order, (currentLessonData as { topicSlug?: string }).topicSlug)}
+                    title={teachingLanguage === 'ru' ? 'Нажмите, чтобы начать урок заново' : 'Click to restart this lesson'}
+                    style={{
+                      width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                      padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                      background: 'rgba(63,185,80,0.1)', color: 'var(--green)',
+                      border: '1px solid rgba(63,185,80,0.3)',
+                    }}>
+                    <span>{t('lesson_completed_btn')}</span>
+                    <span style={{ opacity: 0.7, fontSize: 10 }}>↺ {teachingLanguage === 'ru' ? 'Начать заново' : 'Restart'}</span>
+                  </button>
                 ) : (
                   <button
                     onClick={() => handleLessonComplete(currentLessonData.order, currentLessonData)}
                     style={{
                       width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                      background: 'var(--coral)', color: '#fff', border: 'none',
+                      background: UI.indigo, color: '#fff', border: 'none',
                     }}>
                     {t('complete_lesson_btn')}
                   </button>
@@ -1990,8 +2281,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                       transition: 'transform 200ms', display: 'inline-block',
                     }}>▶</span>
                     <span style={{
-                      background: unitComplete ? 'rgba(63,185,80,0.15)' : 'rgba(247,129,102,0.15)',
-                      color: unitComplete ? 'var(--green)' : 'var(--coral)',
+                      background: unitComplete ? 'rgba(63,185,80,0.15)' : `${UI.indigo}18`,
+                      color: unitComplete ? 'var(--green)' : UI.indigo,
                       borderRadius: 4, padding: '1px 5px', fontSize: 9, fontWeight: 700, flexShrink: 0,
                     }}>{unitComplete ? '✅' : `U${unit.number}`}</span>
                     <span style={{
@@ -2038,7 +2329,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                         const iconColor = (isMastered || isCompleted) ? 'var(--green)'
                           : isRevision ? '#79C0FF'
                           : isSkipped ? '#F59E0B'
-                          : isCurrent ? 'var(--coral)'
+                          : isCurrent ? UI.indigo
                           : 'var(--text-dim)'
 
                         return (
@@ -2055,12 +2346,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                                 display: 'flex', alignItems: 'flex-start', gap: 6,
                                 padding: '5px 8px', borderRadius: 6,
                                 cursor: (canNavigate || isLocked) ? 'pointer' : 'default',
-                                background: isCurrent ? 'rgba(247,129,102,0.1)'
+                                background: isCurrent ? `${UI.indigo}14`
                                   : isRevision ? 'rgba(121,192,255,0.07)'
                                   : isSkipWarningShown ? 'rgba(245,158,11,0.07)'
                                   : isLockExpanded ? 'rgba(239,68,68,0.05)'
                                   : 'transparent',
-                                border: isCurrent ? '1px solid rgba(247,129,102,0.3)'
+                                border: isCurrent ? `1px solid ${UI.indigo}4d`
                                   : isRevision ? '1px solid rgba(121,192,255,0.2)'
                                   : isSkipWarningShown ? '1px solid rgba(245,158,11,0.25)'
                                   : isLockExpanded ? '1px solid rgba(239,68,68,0.15)'
@@ -2079,7 +2370,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                                   color: (isCompleted || isMastered) ? 'var(--border-emphasis)'
                                     : isRevision ? '#79C0FF'
                                     : isSkipped ? '#F59E0B'
-                                    : isCurrent ? 'var(--coral)'
+                                    : isCurrent ? UI.indigo
                                     : isPrevious ? 'var(--text-secondary)'
                                     : 'var(--text-dim)',
                                   overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
@@ -2100,7 +2391,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 2, flexWrap: 'wrap' }}>
                                   {isCurrent && (
                                     <>
-                                      <span style={{ fontSize: 9, color: 'var(--text-dim)' }}>
+                                      <span style={{
+                                        fontSize: 9, fontWeight: 700, padding: '1px 6px', borderRadius: 10,
+                                        background: `${UI.indigo}18`, color: UI.indigo,
+                                      }}>
                                         {teachingLanguage === 'ru' ? 'Текущий' : 'Current'}
                                       </span>
                                       {sessionId && !assessmentLoading && (
@@ -2117,8 +2411,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                                           }}
                                           style={{
                                             fontSize: 9, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
-                                            background: 'rgba(247,129,102,0.1)', color: 'var(--coral)',
-                                            border: '1px solid rgba(247,129,102,0.3)', fontWeight: 600,
+                                            background: `${UI.indigo}18`, color: UI.indigo,
+                                            border: `1px solid ${UI.indigo}4d`, fontWeight: 600,
                                           }}>
                                           {t('assess_start')}
                                         </button>
@@ -2242,7 +2536,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 <div style={{ height: 5, borderRadius: 3, background: 'var(--bg-elevated)', overflow: 'hidden' }}>
                   <div style={{
                     height: '100%', width: `${xpProgress}%`,
-                    background: 'linear-gradient(90deg, var(--coral), var(--coral-hover))',
+                    background: UI.indigo,
                     borderRadius: 3, transition: 'width 600ms ease',
                   }} />
                 </div>
@@ -2257,29 +2551,74 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 </div>
               </div>
             )}
+
+            {/* Knowledge Map / Unit Overview nav cards */}
+            <div style={{ padding: 10, display: 'flex', flexDirection: 'column', gap: 8, borderTop: '1px solid var(--border-subtle)', flexShrink: 0 }}>
+              <button onClick={() => setKnowledgeMapOpen((v) => !v)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10, padding: '9px 10px', borderRadius: 10, cursor: 'pointer',
+                  background: knowledgeMapOpen ? `${UI.indigo}14` : 'var(--bg-elevated)',
+                  border: `1px solid ${knowledgeMapOpen ? `${UI.indigo}55` : 'var(--border-subtle)'}`, textAlign: 'left',
+                }}>
+                <span style={{
+                  width: 30, height: 30, borderRadius: 8, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: `${UI.indigo}18`, color: UI.indigo,
+                }}><Network size={15} /></span>
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
+                    {teachingLanguage === 'ru' ? 'Карта знаний' : 'Knowledge Map'}
+                  </p>
+                  <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
+                    {teachingLanguage === 'ru' ? 'Как эта тема связана' : 'See how this topic connects'}
+                  </p>
+                </span>
+                <ChevronDown size={13} style={{ color: 'var(--text-dim)', transform: knowledgeMapOpen ? 'rotate(180deg)' : 'rotate(-90deg)', transition: 'transform 150ms', flexShrink: 0 }} />
+              </button>
+
+              <button onClick={() => setExpandedUnits(curriculumUnits.map((u) => u.number))}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10, padding: '9px 10px', borderRadius: 10, cursor: 'pointer',
+                  background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', textAlign: 'left',
+                }}>
+                <span style={{
+                  width: 30, height: 30, borderRadius: 8, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'rgba(63,185,80,0.15)', color: 'var(--green)',
+                }}><ListChecks size={15} /></span>
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
+                    {teachingLanguage === 'ru' ? 'Обзор раздела' : 'Unit Overview'}
+                  </p>
+                  <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
+                    {teachingLanguage === 'ru' ? 'Все темы этого раздела' : 'See all concepts in this unit'}
+                  </p>
+                </span>
+                <ChevronDown size={13} style={{ color: 'var(--text-dim)', transform: 'rotate(-90deg)', flexShrink: 0 }} />
+              </button>
+            </div>
           </div>
         </Panel>
         </div>
 
-        {/* ══ PANEL 2 — CODE EDITOR (45%) ═══════════════════════════════ */}
+        {/* ══ PANEL 2 — CODE EDITOR (45%) / QUICK ACTIONS + QUICK CHECK for non-code subjects ══ */}
         <div className={activeTab !== 'code' ? 'hidden md:contents' : 'contents'}
           style={maximizedPanel && maximizedPanel !== 'code' ? { display: 'none' } : undefined}>
-        <Panel accentColor="#79C0FF">
+        <Panel accentColor={isNotebook ? UI.indigo : '#79C0FF'} style={{ order: isNotebook ? 3 : 2 }}>
           <div style={{ flexDirection: 'column', height: '100%' }}
             className={activeTab !== 'code' ? 'hidden md:flex' : 'flex'}>
+            {isNotebook ? (
+              <QuickActionsAndCheck
+                teachingLanguage={teachingLanguage}
+                sessionId={sessionId}
+                sendMessage={sendMessage}
+                setActiveTab={setActiveTab}
+              />
+            ) : (
+            <>
             {/* Header */}
             <PanelHeader>
               <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 10, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>{badge.label}</span>
-              {isNotebook ? (
-                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  📖 {currentLessonData ? currentLessonData.lessonTitle : (teachingLanguage === 'ru' ? 'Учебный материал' : 'Lesson Notes')}
-                </span>
-              ) : (
-                <>
-                  <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
-                  <span style={{ color: 'var(--coral)', fontSize: 12, animation: 'blink 1s infinite' }}>_</span>
-                </>
-              )}
+              <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
+              <span style={{ color: 'var(--coral)', fontSize: 12, animation: 'blink 1s infinite' }}>_</span>
               <div style={{ flex: 1 }} />
               <button onClick={handleCopy}
                 style={{
@@ -2303,11 +2642,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               </button>
             </PanelHeader>
 
-            {/* Lesson canvas — formatted learning document for non-programming subjects, Monaco code editor otherwise */}
-            <div style={{ flex: 1, minHeight: 0, overflow: isNotebook ? 'auto' : 'hidden', background: isNotebook ? 'var(--bg-card)' : undefined }}>
-              {isNotebook ? (
-                <LessonDocument text={code} />
-              ) : (
+            {/* Lesson canvas — Monaco code editor for programming subjects */}
+            <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
                 <MonacoEditor
                   height="100%" language={language} value={code} theme={monacoTheme}
                   beforeMount={handleEditorBeforeMount}
@@ -2323,7 +2659,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     overviewRulerBorder: false, overviewRulerLanes: 0,
                   }}
                 />
-              )}
             </div>
 
             {/* Status bar */}
@@ -2416,14 +2751,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 </div>
               </div>
             )}
+            </>
+            )}
           </div>
         </Panel>
         </div>
 
-        {/* ══ PANEL 3 — TUTOR CHAT (30%) ════════════════════════════════ */}
+        {/* ══ PANEL 3 — TUTOR CHAT (promoted to center/wide for non-code subjects) ══ */}
         <div className={activeTab !== 'chat' ? 'hidden md:contents' : 'contents'}
           style={maximizedPanel && maximizedPanel !== 'chat' ? { display: 'none' } : undefined}>
-        <Panel accentColor="#3FB950">
+        <Panel accentColor={isNotebook ? UI.indigo : '#3FB950'} style={{ order: isNotebook ? 2 : 3 }}>
           <div style={{ flexDirection: 'column', height: '100%', position: 'relative' }}
             className={activeTab !== 'chat' ? 'hidden md:flex' : 'flex'}>
 
@@ -2456,14 +2793,94 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   ))}
                 </div>
               )}
-              {/* Maximize/restore — desktop only */}
-              <button
-                className="hidden md:flex"
-                onClick={() => setMaximizedPanel(maximizedPanel === 'chat' ? null : 'chat')}
-                title={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 22, height: 22, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 11, flexShrink: 0 }}>
-                {maximizedPanel === 'chat' ? '⊡' : '⊞'}
-              </button>
+
+              {/* "I get it / Not clear" — reacts to the latest tutor message (mockup's global reaction pills) */}
+              {(() => {
+                const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
+                if (!lastAssistant) return null
+                return (
+                  <div className="hidden lg:flex" style={{ gap: 6, flexShrink: 0 }}>
+                    <button
+                      onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
+                      disabled={isStreaming || !sessionId}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 4, padding: '5px 10px', borderRadius: 20,
+                        fontSize: 11, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.indigo}44`,
+                        background: `${UI.indigo}14`, color: UI.indigo,
+                      }}>
+                      <ThumbsUp size={12} /> {teachingLanguage === 'ru' ? 'Понял' : 'I get it'}
+                    </button>
+                    <button
+                      onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
+                      disabled={isStreaming || !sessionId}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 4, padding: '5px 10px', borderRadius: 20,
+                        fontSize: 11, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.red}44`,
+                        background: UI.redBg, color: UI.red,
+                      }}>
+                      <ThumbsDown size={12} /> {teachingLanguage === 'ru' ? 'Не понял' : 'Not clear'}
+                    </button>
+                  </div>
+                )
+              })()}
+
+              {/* Bookmark current lesson */}
+              {currentLessonData && (
+                <button
+                  onClick={() => toggleBookmark(currentLessonData.order)}
+                  title={teachingLanguage === 'ru' ? 'Сохранить урок' : 'Bookmark this lesson'}
+                  aria-label={teachingLanguage === 'ru' ? 'Сохранить урок' : 'Bookmark this lesson'}
+                  aria-pressed={bookmarkedLessons.has(currentLessonData.order)}
+                  style={{
+                    width: 30, height: 30, borderRadius: 8, flexShrink: 0, border: '1px solid var(--border-default)',
+                    background: bookmarkedLessons.has(currentLessonData.order) ? `${UI.indigo}18` : 'transparent',
+                    color: bookmarkedLessons.has(currentLessonData.order) ? UI.indigo : 'var(--text-dim)',
+                    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                  <Bookmark size={14} fill={bookmarkedLessons.has(currentLessonData.order) ? UI.indigo : 'none'} />
+                </button>
+              )}
+
+              {/* More menu — houses Practice / Insights / Maximize, decluttering the input row */}
+              <div style={{ position: 'relative', flexShrink: 0 }}>
+                <button onClick={() => setMoreMenuOpen((v) => !v)}
+                  title={teachingLanguage === 'ru' ? 'Ещё' : 'More options'}
+                  aria-label={teachingLanguage === 'ru' ? 'Ещё' : 'More options'}
+                  aria-haspopup="menu"
+                  aria-expanded={moreMenuOpen}
+                  style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', color: 'var(--text-dim)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MoreVertical size={15} />
+                </button>
+                {moreMenuOpen && (
+                  <>
+                    <div onClick={() => setMoreMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
+                    <div style={{
+                      position: 'absolute', top: 'calc(100% + 6px)', right: 0, width: 190, zIndex: 50,
+                      background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
+                      boxShadow: '0 8px 24px rgba(0,0,0,0.25)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
+                    }}>
+                      {currentLessonData?.topicSlug && (
+                        <button onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v); setMoreMenuOpen(false) }}
+                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                          ✏️ {teachingLanguage === 'ru' ? 'Практика' : 'Practice'}
+                        </button>
+                      )}
+                      {currentLessonData?.topicSlug && (
+                        <button onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v); setMoreMenuOpen(false) }}
+                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                          📊 {teachingLanguage === 'ru' ? 'Аналитика' : 'Practice insights'}
+                        </button>
+                      )}
+                      <button
+                        className="hidden md:flex"
+                        onClick={() => { setMaximizedPanel(maximizedPanel === 'chat' ? null : 'chat'); setMoreMenuOpen(false) }}
+                        style={{ alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                        {maximizedPanel === 'chat' ? '⊡' : '⊞'} {maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             </PanelHeader>
 
             {/* Insights Panel (Sprint P) */}
@@ -2529,8 +2946,30 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               className="dot-grid"
               style={{ flex: 1, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 14, background: 'var(--bg-void)', position: 'relative' }}>
 
-              {/* Welcome / empty state — EagleMascot replaces the generic initials avatar */}
-              {messages.length === 0 && (
+              {/* FIX 1 (stabilization): "Start Lesson" gate — selecting/opening a
+                  lesson only selects it; the AI does not start teaching until the
+                  learner presses this button. */}
+              {!lessonStarted && messages.length === 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 14, paddingTop: 40 }}>
+                  <EagleMascot variant="hero" size={56} />
+                  {currentLessonData && (
+                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', textAlign: 'center' }}>
+                      {currentLessonData.lessonTitle}
+                    </p>
+                  )}
+                  <button
+                    onClick={startLesson}
+                    style={{
+                      padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
+                      background: UI.indigo, color: '#fff', border: 'none',
+                    }}>
+                    {t('start_lesson_btn')}
+                  </button>
+                </div>
+              )}
+
+              {/* Welcome / loading state — EagleMascot replaces the generic initials avatar */}
+              {lessonStarted && messages.length === 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
                   <EagleMascot variant="hero" size={56} />
                   <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
@@ -2562,14 +3001,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     {!isUser && (
                       <Card className="group/bubble" style={{
                         maxWidth: '90%',
-                        background: isSpeaking ? 'var(--bg-elevated)' : 'var(--candy-card, var(--bg-base))',
-                        borderRadius: '4px 18px 18px 18px',
-                        padding: '12px 14px',
-                        boxShadow: isSpeaking ? '0 4px 0 var(--coral)' : '0 4px 0 var(--border-subtle)',
-                        transition: 'box-shadow 200ms',
+                        background: 'var(--bg-surface)',
+                        borderRadius: 14,
+                        border: `1px solid ${isSpeaking ? `${UI.indigo}55` : 'var(--border-subtle)'}`,
+                        padding: '14px 16px',
+                        boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                        transition: 'border-color 200ms',
                       }}>
                         {msg.content
-                          ? <div className="animate-message" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                          ? <div className="animate-message" style={{ fontSize: 13.5, lineHeight: 1.7, color: 'var(--text-primary)' }}>
                               <MessageContent text={displayText} isUser={false} />
                             </div>
                           : <TypingDots />
@@ -2577,7 +3017,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
                         {cached?.hasMore && (
                           <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
-                            style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: 'var(--coral)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                            style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                             {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
                             <ChevronDown size={11} style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
                           </button>
@@ -2614,31 +3054,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                           </div>
                         )}
 
-                        {/* Comprehension buttons after tutor message — candy pill buttons */}
-                        {!msg.streaming && msg.content && (
-                          <div style={{ display: 'flex', gap: 6, marginTop: 8 }}>
-                            <CandyButton
-                              onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
-                              disabled={isStreaming || !sessionId}
-                              depth={2} activeDepth={0} shadowColor="var(--green)"
-                              style={{
-                                padding: '3px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer', border: 'none',
-                                background: 'var(--green)', color: '#fff',
-                              }}>
-                              ✓ {teachingLanguage === 'ru' ? 'Понял' : 'Got it'}
-                            </CandyButton>
-                            <CandyButton
-                              onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
-                              disabled={isStreaming || !sessionId}
-                              depth={2} activeDepth={0} shadowColor="var(--red)"
-                              style={{
-                                padding: '3px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer', border: 'none',
-                                background: 'var(--red)', color: '#fff',
-                              }}>
-                              ✗ {teachingLanguage === 'ru' ? 'Не понял' : 'Not clear'}
-                            </CandyButton>
-                          </div>
-                        )}
                       </Card>
                     )}
 
@@ -2711,8 +3126,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                       <div style={{ animation: 'slideInRight 200ms ease-out both', maxWidth: '75%' }}>
                         <div style={{
                           padding: '12px 14px', borderRadius: '18px 18px 4px 18px', fontSize: 13, lineHeight: 1.5,
-                          background: 'linear-gradient(135deg, var(--coral), var(--coral-hover))', color: 'var(--text-inverse)',
-                          boxShadow: '0 4px 0 var(--coral-hover)',
+                          background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`, color: '#fff',
                         }}>
                           <MessageContent text={displayText} isUser={true} />
                         </div>
@@ -2756,7 +3170,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={selectedImage.preview} alt="preview" style={{ width: 36, height: 36, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border-subtle)' }} />
-                  <span style={{ fontSize: 11, color: 'var(--coral)', flex: 1 }}>📸 {teachingLanguage === 'ru' ? 'Изображение выбрано' : 'Image selected'}</span>
+                  <span style={{ fontSize: 11, color: UI.indigo, flex: 1 }}>📸 {teachingLanguage === 'ru' ? 'Изображение выбрано' : 'Image selected'}</span>
                   <button onClick={() => setSelectedImage(null)} style={{ color: 'var(--border-emphasis)', background: 'none', border: 'none', cursor: 'pointer' }}><X size={13} /></button>
                 </div>
               )}
@@ -2771,142 +3185,103 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 </div>
               )}
 
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6 }}>
-                {/* Attach */}
-                <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
-                <CandyButton onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
-                  depth={2} activeDepth={0} shadowColor={attachedFile ? 'var(--blue)' : 'var(--border-subtle)'}
-                  style={{
-                    width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', border: 'none',
-                    background: attachedFile ? 'var(--blue)' : 'var(--bg-elevated)',
-                    color: attachedFile ? '#fff' : 'var(--border-emphasis)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                  <Paperclip size={13} />
-                </CandyButton>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                {/* Pill: attach + camera + textarea + mic, one rounded container */}
+                <div style={{
+                  flex: 1, display: 'flex', alignItems: 'center', gap: 4, padding: '4px 6px', borderRadius: 22,
+                  background: 'var(--bg-surface)',
+                  border: `1px solid ${micState === 'recording' ? UI.red : input ? UI.indigo : 'var(--border-default)'}`,
+                  boxShadow: input ? `0 0 0 3px ${UI.indigo}18` : 'none',
+                  transition: 'border-color 150ms, box-shadow 150ms',
+                }}>
+                  <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
+                  <button onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                    title={teachingLanguage === 'ru' ? 'Прикрепить файл' : 'Attach file'}
+                    aria-label={teachingLanguage === 'ru' ? 'Прикрепить файл' : 'Attach file'}
+                    style={{
+                      width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', border: 'none',
+                      background: attachedFile ? UI.indigo : 'transparent',
+                      color: attachedFile ? '#fff' : 'var(--text-dim)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                    <Paperclip size={14} />
+                  </button>
 
-                {/* Camera */}
-                <input ref={imageInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleImageSelect} />
-                <CandyButton onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
-                  depth={2} activeDepth={0} shadowColor={selectedImage ? 'var(--coral-hover)' : 'var(--border-subtle)'}
-                  style={{
-                    width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', fontSize: 14, border: 'none',
-                    background: selectedImage ? 'var(--coral)' : 'var(--bg-elevated)',
-                    color: selectedImage ? '#fff' : 'var(--border-emphasis)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                  📸
-                </CandyButton>
+                  <input ref={imageInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleImageSelect} />
+                  <button onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
+                    title={teachingLanguage === 'ru' ? 'Фото' : 'Photo'}
+                    aria-label={teachingLanguage === 'ru' ? 'Фото' : 'Photo'}
+                    style={{
+                      width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', fontSize: 14, border: 'none',
+                      background: selectedImage ? UI.indigo : 'transparent',
+                      color: selectedImage ? '#fff' : 'var(--text-dim)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                    <ImageIcon size={14} />
+                  </button>
 
-                {/* Practice button */}
-                {currentLessonData?.topicSlug && (
-                  <button
-                    onClick={async () => {
-                      setInsightsOpen(false)
-                      // Sprint R: merge learner intelligence profile with practice analysis
-                      // to auto-set difficulty and focus categories before opening.
-                      if (!practiceOpen) {
-                        try {
-                          const [analysisRes, profileRes] = await Promise.all([
-                            fetch(`/api/practice/analysis?subject=${subjectSlug}`).then((r) => r.json()).catch(() => null),
-                            fetch(`/api/learner/profile-insights?subject=${subjectSlug}`).then((r) => r.json()).catch(() => null),
-                          ])
-                          // Learner profile takes precedence over raw analysis for difficulty
-                          const difficulty = profileRes?.meta?.recommendedDifficulty
-                            ?? analysisRes?.recommendedDifficulty
-                            ?? 2
-                          const focusFromProfile = (profileRes?.meta?.weakConcepts ?? []).slice(0, 3)
-                          const focusFromAnalysis = analysisRes?.recommendedFocusCategories ?? []
-                          const focus = focusFromProfile.length > 0 ? focusFromProfile : focusFromAnalysis
-                          setPracticeDifficulty(difficulty)
-                          setPracticeFocusCategories(focus)
-                        } catch {}
-                      }
-                      setPracticeOpen((v) => !v)
+                  <textarea
+                    ref={textareaRef}
+                    value={input}
+                    onChange={handleTextareaChange}
+                    onKeyDown={handleKeyDown}
+                    disabled={isStreaming || !sessionId}
+                    placeholder={micState === 'recording' ? t('lesson_recording') : micState === 'processing' ? t('lesson_processing') : isStreaming ? t('lesson_responding') : t('lesson_placeholder')}
+                    rows={1}
+                    style={{
+                      flex: 1, padding: '6px 4px', resize: 'none', outline: 'none', fontSize: 13, lineHeight: 1.5,
+                      background: 'transparent', border: 'none', color: 'var(--text-primary)',
+                      fontFamily: 'inherit', minHeight: 28, maxHeight: 96,
                     }}
-                    title={practiceScore !== null ? `Practice: ${practiceScore}%` : (teachingLanguage === 'ru' ? 'Практика' : teachingLanguage === 'hi' ? 'अभ्यास' : 'Practice')}
-                    style={{
-                      width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', fontSize: 13, border: 'none',
-                      background: practiceOpen ? 'var(--candy-purple)' : practiceScore !== null ? 'var(--green)' : 'var(--bg-elevated)',
-                      color: practiceOpen || practiceScore !== null ? '#fff' : 'var(--border-emphasis)',
-                      boxShadow: practiceOpen ? '0 2px 0 var(--candy-purple-d)' : practiceScore !== null ? '0 2px 0 var(--green)' : '0 2px 0 var(--border-subtle)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                    {practiceScore !== null ? '✓' : '✏️'}
-                  </button>
-                )}
+                  />
 
-                {/* Insights button (Sprint P) */}
-                {currentLessonData?.topicSlug && (
-                  <button
-                    onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v) }}
-                    title={teachingLanguage === 'ru' ? 'Аналитика практики' : teachingLanguage === 'hi' ? 'अभ्यास विश्लेषण' : 'Practice insights'}
-                    style={{
-                      width: 30, height: 30, borderRadius: 10, flexShrink: 0, cursor: 'pointer', fontSize: 13, border: 'none',
-                      background: insightsOpen ? 'var(--yellow)' : 'var(--bg-elevated)',
-                      color: insightsOpen ? '#fff' : 'var(--border-emphasis)',
-                      boxShadow: insightsOpen ? '0 2px 0 var(--yellow)' : '0 2px 0 var(--border-subtle)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                    📊
-                  </button>
-                )}
+                  {/* Mic */}
+                  {micSupported && (
+                    <button onClick={handleMicClick} disabled={isStreaming || !sessionId || micState === 'processing'}
+                      className={micState === 'recording' ? 'mic-rec' : ''}
+                      title={micState === 'recording' ? (teachingLanguage === 'ru' ? 'Остановить запись' : 'Stop recording') : (teachingLanguage === 'ru' ? 'Голосовой ввод' : 'Voice input')}
+                      aria-label={micState === 'recording' ? (teachingLanguage === 'ru' ? 'Остановить запись' : 'Stop recording') : (teachingLanguage === 'ru' ? 'Голосовой ввод' : 'Voice input')}
+                      style={{
+                        width: 28, height: 28, borderRadius: '50%', flexShrink: 0, border: 'none',
+                        cursor: micState === 'processing' ? 'not-allowed' : 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: micState === 'recording' ? UI.red : 'transparent',
+                        color: micState === 'recording' ? '#fff' : 'var(--text-dim)',
+                        opacity: micState === 'processing' ? 0.6 : 1,
+                      }}>
+                      {micState === 'recording'
+                        ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 6.5, fontWeight: 700, gap: 1 }}><Mic size={11} />REC</span>
+                        : <Mic size={14} />}
+                    </button>
+                  )}
+                </div>
 
-                {/* Textarea */}
-                <textarea
-                  ref={textareaRef}
-                  value={input}
-                  onChange={handleTextareaChange}
-                  onKeyDown={handleKeyDown}
-                  disabled={isStreaming || !sessionId}
-                  placeholder={micState === 'recording' ? t('lesson_recording') : micState === 'processing' ? t('lesson_processing') : isStreaming ? t('lesson_responding') : t('lesson_placeholder')}
-                  rows={1}
-                  style={{
-                    flex: 1, padding: '7px 10px', borderRadius: 10, resize: 'none', outline: 'none', fontSize: 13, lineHeight: 1.5,
-                    background: 'var(--bg-surface)',
-                    border: `1px solid ${micState === 'recording' ? 'var(--red)' : micState === 'processing' ? 'var(--border-emphasis)' : input ? 'var(--coral)' : 'var(--border-default)'}`,
-                    color: 'var(--text-primary)',
-                    fontFamily: 'inherit',
-                    minHeight: 34, maxHeight: 96,
-                    boxShadow: input ? '0 0 0 3px rgba(247,129,102,0.1)' : 'none',
-                    transition: 'border-color 150ms, box-shadow 150ms',
-                  }}
-                />
-
-                {/* Mic */}
-                {micSupported && (
-                  <CandyButton onClick={handleMicClick} disabled={isStreaming || !sessionId || micState === 'processing'}
-                    className={micState === 'recording' ? 'mic-rec' : ''}
-                    depth={2} activeDepth={0}
-                    shadowColor={micState === 'recording' ? 'var(--red)' : micState === 'processing' ? 'var(--border-subtle)' : 'var(--border-subtle)'}
-                    style={micState === 'recording' ? { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'var(--red)', color: '#fff' }
-                      : micState === 'processing' ? { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-elevated)', color: 'var(--text-dim)', border: 'none', opacity: 0.7 }
-                      : { width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-elevated)', color: 'var(--border-emphasis)', border: 'none' }}>
-                    {micState === 'recording'
-                      ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 7, fontWeight: 700, gap: 1 }}><Mic size={11} />REC</span>
-                      : micState === 'processing'
-                      ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 7, fontWeight: 700, gap: 1 }}><Mic size={11} />...</span>
-                      : <Mic size={14} />}
-                  </CandyButton>
-                )}
-
-                {/* Send */}
-                <CandyButton onClick={handleSend}
+                {/* Send — separate circular indigo button, matching the mockup */}
+                <button onClick={handleSend}
                   disabled={(!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId}
-                  depth={2} activeDepth={0} shadowColor="var(--coral-hover)"
+                  title={teachingLanguage === 'ru' ? 'Отправить' : 'Send'}
+                  aria-label={teachingLanguage === 'ru' ? 'Отправить' : 'Send'}
                   style={{
-                    width: 32, height: 32, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none',
-                    background: 'var(--coral)', color: '#fff',
+                    width: 40, height: 40, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none',
+                    background: UI.indigo, color: '#fff',
                     opacity: (!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId ? 0.4 : 1,
                     transition: 'opacity 150ms',
                   }}>
-                  <Send size={14} style={{ transform: 'translateX(1px)' }} />
-                </CandyButton>
+                  <Send size={16} style={{ transform: 'translateX(1px)' }} />
+                </button>
               </div>
 
-              <p style={{ fontSize: 10, color: 'var(--text-dim)', textAlign: 'center', marginTop: 6 }}>
-                {t('lesson_hint')}{micSupported ? ' · 🎙' : ''}
-              </p>
+              {/* Disclaimer + current topic breadcrumb — matches mockup's footer row */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 8 }}>
+                <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
+                  ⓘ {teachingLanguage === 'ru' ? 'ИИ может ошибаться. Проверяйте важное.' : 'AI can make mistakes. Check important info.'}
+                </p>
+                {currentUnit && (
+                  <span style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                    {currentUnit.title}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </Panel>
@@ -2923,6 +3298,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           .lesson-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
+      </div>{/* end right column (nav rail sibling) */}
     </div>
   )
 }

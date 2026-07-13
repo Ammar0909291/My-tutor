@@ -1,69 +1,40 @@
 {
-  "domain": "math.disc",
-  "name": "Discrete Mathematics",
-  "status": "draft",
-  "build_date": "2026-07-11",
-  "kg_version": "1.0.1",
-  "kg_commit": "4ae2048",
-  "asset_schema_version": "1.0.0",
-  "generator_version": "pipeline-v2",
-  "concepts_total": 32,
-  "assets_authored": 32,
-  "assets_draft": 32,
-  "assets_placeholder": 0,
+  "manifest_version": "1.0",
+  "manifest_type": "domain",
+  "domain_id": "discrete-mathematics",
+  "domain_prefix": "math.disc",
+  "domain_name": "Discrete Mathematics",
+  "subject": "mathematics",
+  "concept_count": 32,
+  "asset_count": 32,
   "validation": {
     "verdict": "PASS",
-    "checks_passed": 8,
-    "checks_total": 8,
-    "date": "2026-07-11"
+    "validation_script_version": "1.1.0",
+    "validated_at": "2026-07-05",
+    "validation_commit": "f152927ed1523997bc3e7fed771762b6f9f3177b"
   },
-  "pedagogical_audit": {
-    "verdict": "PASS",
-    "concepts_audited": 10,
-    "concepts_passed": 10,
-    "sample_pct": 31
+  "checksums": {
+    "chapter_sha256": "sha256:799480b6a3bb6e50375d5d0bdfe499ef55979db109572ac7701cbb1bf36077e3",
+    "domain_assets_sha256": "sha256:5b5d734fb1be6ba94052a2d1aef856f33a683e20440ddc255e342d5c4c567ae2",
+    "graph_domain_sha256": "sha256:b39aa6aa8115158745e25e44c415ac4016d9259f660ba8736d5300161526e7dd",
+    "validation_report_sha256": "sha256:2233b988e6328029bb4bbca8dd27f28e582736e8347426ef7a1fe64031ccbab9"
   },
-  "chapter_file": "docs/mathematics/chapters/disc.md",
-  "validation_report": "docs/mathematics/validation/DISC_VALIDATION_REPORT.md",
-  "source_references": [
-    "Rosen, Discrete Mathematics and Its Applications, 8th ed., McGraw-Hill.",
-    "Graham, Knuth, Patashnik, Concrete Mathematics, 2nd ed., Addison-Wesley.",
-    "Sipser, Introduction to the Theory of Computation, 3rd ed., Cengage.",
-    "Diestel, Graph Theory, 5th ed., Springer.",
-    "Cormen et al., Introduction to Algorithms, 4th ed., MIT Press."
+  "generated_files": [
+    "docs/mathematics/chapters/disc.md",
+    "/tmp/claude-0/-home-user-My-tutor/86493af4-ba82-5d69-935b-e0795bf1ff02/scratchpad/disc-validate-report.txt",
+    "/tmp/claude-0/-home-user-My-tutor/86493af4-ba82-5d69-935b-e0795bf1ff02/scratchpad/math.disc-summary.md",
+    "docs/mathematics/domains/math.disc-manifest.json"
   ],
-  "concepts": [
-    "math.disc.counting-principles",
-    "math.disc.permutations",
-    "math.disc.combinations",
-    "math.disc.binomial-theorem",
-    "math.disc.combinatorics",
-    "math.disc.stars-bars",
-    "math.disc.pigeonhole",
-    "math.disc.inclusion-exclusion",
-    "math.disc.derangements",
-    "math.disc.recurrence-relation",
-    "math.disc.linear-recurrence",
-    "math.disc.divide-conquer-recurrence",
-    "math.disc.generating-functions",
-    "math.disc.ogf",
-    "math.disc.egf",
-    "math.disc.graph",
-    "math.disc.graph-types",
-    "math.disc.graph-representation",
-    "math.disc.graph-connectivity",
-    "math.disc.euler-hamiltonian",
-    "math.disc.graph-trees",
-    "math.disc.spanning-tree",
-    "math.disc.graph-coloring",
-    "math.disc.planar-graph",
-    "math.disc.propositional-logic",
-    "math.disc.boolean-circuits",
-    "math.disc.predicate-logic-disc",
-    "math.disc.asymptotic-notation",
-    "math.disc.algorithm-complexity",
-    "math.disc.complexity-classes",
-    "math.disc.catalan-numbers",
-    "math.disc.stirling-numbers"
-  ]
+  "dependency_versions": {
+    "kg_name": "Canonical Mathematics Knowledge Graph",
+    "kg_version": "1.0.1",
+    "kg_status": "frozen",
+    "kg_build_date": "2026-06-29",
+    "kg_commit": "1b29d3761dff78ee47021b2961acc5a2ee6ebd8f",
+    "asset_schema_version": "1.0.0",
+    "generator_version": "curriculum-pipeline-v1.0",
+    "validation_version": "1.1.0"
+  },
+  "creation_commit": "f152927ed1523997bc3e7fed771762b6f9f3177b",
+  "created_at": "2026-07-05T13:30:58Z"
 }
