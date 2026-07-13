@@ -8,10 +8,24 @@
  *   Blueprint         — structural metadata only (Phase 1C).
  *   BlueprintContent  — educational content from Sections 1, 4, 5 (Phase 1D).
  *
- * Blueprint format: blueprints using the new 16-section template have headers
- * of the form "## Section N — Name". Older blueprints use "## N. Name". Only
- * new-format blueprints yield populated BlueprintContent; old-format blueprints
- * return empty misconceptions/explanations and a null conceptSpine.
+ * Three blueprint formats exist in the corpus; all are handled:
+ *
+ *   Format A — Component-format (133 blueprints):
+ *     Headers: "## Component N — Name"
+ *     → extractComponentConceptSpine/MC/Explanations (full injection)
+ *
+ *   Format B — Protocol-format (47 blueprints, "## N. Title"):
+ *     Section 1 = Learning Objectives, Section 5 = Protocol Library.
+ *     → Concept spine extracted from Section 1 boundary statement +
+ *       "**Core idea:**" / "**Key vocabulary:**" header fields when present.
+ *     → Misconceptions: not in MC-N format; zero MC entries (graceful).
+ *     → Explanations: not in Explanation X format; zero entries (graceful).
+ *
+ *   Format C — Section-format (14 blueprints, "## Section N — Name"):
+ *     Section 1 = Concept Spine ("**Core Claim:**" or "**One-sentence definition:**")
+ *     Section 4 = Misconception Library ("### MC-N:")
+ *     Section 5 = Explanation Library ("### Explanation X — ")
+ *     → Full injection (spine uses "**Core Claim:**" as fallback for definition).
  *
  * Sections parsed (Phase 1D):
  *   Section 1 — Concept Spine   (definition, why-it-matters, quantities table)
@@ -20,7 +34,7 @@
  *
  * Sections intentionally NOT parsed:
  *   Section 2  Four-Stage CPA+ Mental Model
- *   Section 3  Why Beginners Fail
+ *   Section 3  Why Beginners Fail / Diagnostic Battery
  *   Section 6  Analogy Library
  *   Section 7  Demonstration Library
  *   Section 8  Discovery Lesson
@@ -196,7 +210,10 @@ function extractConceptSpine(content: string): ConceptSpine | null {
   const raw = extractNewFormatSection(content, 1)
   if (!raw) return null
 
-  const definition = /\*\*One-sentence definition:\*\*\s*\n([^\n]+)/.exec(raw)?.[1]?.trim() ?? ''
+  const definition =
+    /\*\*One-sentence definition:\*\*\s*\n([^\n]+)/.exec(raw)?.[1]?.trim() ??
+    /\*\*Core Claim:\*\*\s+([^\n]+)/.exec(raw)?.[1]?.trim() ??
+    ''
   const whyMatch = /\*\*Why it matters:\*\*\s*\n([\s\S]+?)(?=\n\*\*|$)/.exec(raw)
   const whyItMatters = whyMatch?.[1]?.trim() ?? ''
 
@@ -254,6 +271,157 @@ function extractExplanations(content: string): ExplanationEntry[] {
   return entries
 }
 
+// ── Protocol-format extractors (Format B: ## N. Title) ───────────────────────
+//
+// 47 blueprints use a numbered-section format (## 0. Concept Profile,
+// ## 1. Learning Objective, ## 6. Misconception Engine, etc.).  The standard
+// Section-format and Component-format extractors do not match these headers,
+// so all three injections returned empty/null for these foundational concepts.
+// These extractors recover spine, misconceptions, and a learning-objective
+// explanation from the Protocol-format structure.
+
+function extractSpineFormatSection(content: string, sectionNum: number): string | null {
+  // Matches "## N. Title" (no dash — only digits followed by dot).
+  const startRe = new RegExp(`## ${sectionNum}\\. [^\\n]+\\n`)
+  const endRe = /^## \d+\. /m
+
+  const startMatch = startRe.exec(content)
+  if (!startMatch) return null
+
+  const afterStart = content.slice(startMatch.index + startMatch[0].length)
+  const endMatch = endRe.exec(afterStart)
+  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+}
+
+function extractSpineFormatConceptSpine(content: string): ConceptSpine | null {
+  const raw = extractSpineFormatSection(content, 1)
+  if (!raw) return null
+
+  const definition =
+    /\*\*One-sentence definition:\*\*\s+([^\n]+)/.exec(raw)?.[1]?.trim() ??
+    /\*\*Core Claim:\*\*\s+([^\n]+)/.exec(raw)?.[1]?.trim() ??
+    ''
+  const whyMatch = /\*\*(?:Why it matters|The core insight):\*\*\s+([\s\S]+?)(?=\n\*\*|$)/.exec(raw)
+  const whyItMatters = whyMatch?.[1]?.trim() ?? ''
+  const tableMatch = /(\|[^\n]+\|\n\|[-| :]+\|\n(?:\|[^\n]+\|\n?)+)/.exec(raw)
+  const quantitiesTable = tableMatch?.[1]?.trim() ?? null
+
+  if (!definition && !whyItMatters) return null
+  return { definition, whyItMatters, quantitiesTable }
+}
+
+function extractSpineFormatMisconceptions(content: string): MisconceptionEntry[] {
+  const raw = extractSpineFormatSection(content, 4)
+  if (!raw) return []
+
+  const entries: MisconceptionEntry[] = []
+  // Split on "### MC-N:" style headers used in Spine-format.
+  const blocks = raw.split(/(?=### MC-\d+:)/).filter(b => /^### MC-\d+:/.test(b))
+
+  let seq = 0
+  for (const block of blocks) {
+    seq++
+    const headerMatch = /### (MC-\d+): "?([^"\n]+)"?/.exec(block)
+    if (!headerMatch) continue
+    const id = headerMatch[1]
+    const title = headerMatch[2].trim()
+
+    const probe = /- \*\*Probe:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
+    const phrase = /- \*\*Characteristic phrase:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
+    const bridge = /- \*\*Bridge \[P30\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n###|$)/.exec(block)?.[1]?.trim() ?? ''
+    const replacement = /- \*\*Replacement \[P31\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n###|$)/.exec(block)?.[1]?.trim() ?? ''
+
+    entries.push({ id, title, probeQuestion: probe, characteristicPhrase: phrase, bridge, replacementConcept: replacement })
+  }
+  return entries
+}
+
+function extractSpineFormatExplanations(content: string): ExplanationEntry[] {
+  const raw = extractSpineFormatSection(content, 5)
+  if (!raw) return []
+
+  const entries: ExplanationEntry[] = []
+  // Format: "**Explanation A — Label:**" (bold, not ### heading)
+  const blocks = raw.split(/(?=\*\*Explanation [A-Z] — )/).filter(b => /^\*\*Explanation [A-Z] — /.test(b))
+
+  for (const block of blocks) {
+    const headerMatch = /\*\*Explanation ([A-Z]) — ([^*:]+)(?:\*\*:?|\*\*)\s*\n/.exec(block)
+    if (!headerMatch) continue
+    const id = headerMatch[1]
+    const label = headerMatch[2].trim()
+    const text = block.slice(block.indexOf('\n') + 1).trim()
+    entries.push({ id, label, text })
+  }
+  return entries
+}
+
+function extractProtocolSection(content: string, sectionNum: number): string | null {
+  const startRe = new RegExp(`## ${sectionNum}\\. [^\\n]+\\n`)
+  const endRe = /^## \d+\. /m
+
+  const startMatch = startRe.exec(content)
+  if (!startMatch) return null
+
+  const afterStart = content.slice(startMatch.index + startMatch[0].length)
+  const endMatch = endRe.exec(afterStart)
+  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+}
+
+function extractProtocolConceptSpine(content: string): ConceptSpine | null {
+  const raw = extractProtocolSection(content, 0)
+  if (!raw) return null
+
+  const coreIdea = /\*\*Core idea:\*\*\s*([^\n]+(?:\n(?!\*\*)[^\n]+)*)/.exec(raw)?.[1]?.trim()
+  const vocabMatch = /\*\*Key vocabulary:\*\*\s*([^\n]+)/.exec(raw)
+
+  // Fallback: build a minimal definition from the concept name when no Core idea field.
+  const nameMatch = /^name:\s*(.+)$/m.exec(raw)
+  const domainMatch = /^domain:\s*(.+)$/m.exec(raw)
+  const fallbackDef = nameMatch
+    ? `${nameMatch[1].trim()} — a concept in ${domainMatch?.[1]?.trim() ?? 'physics'}.`
+    : ''
+
+  const definition = coreIdea ?? fallbackDef
+  const whyItMatters = vocabMatch ? `Key vocabulary: ${vocabMatch[1].trim()}` : ''
+
+  if (!definition && !whyItMatters) return null
+  return { definition, whyItMatters, quantitiesTable: null }
+}
+
+function extractProtocolMisconceptions(content: string): MisconceptionEntry[] {
+  const raw = extractProtocolSection(content, 6)
+  if (!raw) return []
+
+  const entries: MisconceptionEntry[] = []
+  const blocks = raw.split(/(?=### MC-\d+ — )/).filter(b => /^### MC-\d+ — /.test(b))
+
+  let seq = 0
+  for (const block of blocks) {
+    seq++
+    const headerMatch = /### (MC-\d+) — ([^\n]+)/.exec(block)
+    if (!headerMatch) continue
+    const id = headerMatch[1]
+    const title = headerMatch[2].trim()
+
+    const symptom = /\*\*Observable symptom:\*\*\s*([^\n]+(?:\n(?!\*\*)[^\n]+)*)/.exec(block)?.[1]?.trim() ?? ''
+    const repairMatch = /\*\*Repair chain:\*\*\s*([^\n]+)/.exec(block)
+    const bridge = repairMatch ? repairMatch[1].trim() : ''
+
+    entries.push({ id, title, probeQuestion: symptom, characteristicPhrase: symptom.slice(0, 80), bridge, replacementConcept: '' })
+  }
+  return entries
+}
+
+function extractProtocolExplanations(content: string): ExplanationEntry[] {
+  const raw = extractProtocolSection(content, 1)
+  if (!raw) return []
+
+  // Use the Learning Objective section as a single explanation entry.
+  const text = raw.replace(/\*\*Accuracy threshold:[^*]+\*\*/g, '').trim()
+  if (!text) return []
+  return [{ id: 'A', label: 'Learning Objective', text }]
+}
+
 // ── Component-format extractors (Phase 2) ────────────────────────────────────
 //
 // 144 PACKAGE_READY + 51 READY blueprints use the older "## Component N —"
@@ -269,6 +437,20 @@ function extractExplanations(content: string): ExplanationEntry[] {
 /** True when the blueprint uses the old Component-format headers. */
 function isComponentFormat(content: string): boolean {
   return /^## Component 0 — /m.test(content)
+}
+
+/** True when the blueprint uses the Protocol-format headers (## N. Title, ## 0. Concept Profile). */
+function isProtocolFormat(content: string): boolean {
+  return /^## 0\. Concept Profile/m.test(content)
+}
+
+/**
+ * True when the blueprint uses the Spine-format headers
+ * (## 0. Concept Metadata, ## 1. Concept Spine, ## 4. Misconception Library).
+ * 24 phys.mod/qm/rel/stat blueprints use this format.
+ */
+function isSpineFormat(content: string): boolean {
+  return /^## 0\. Concept Metadata/m.test(content)
 }
 
 /**
@@ -455,15 +637,31 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
   try {
     let content: BlueprintContent
     if (isComponentFormat(rawContent)) {
-      // Phase 2: Component-format blueprint (144 PACKAGE_READY + 51 READY).
+      // Phase 2: Component-format blueprint (## Component N —).
       content = {
         conceptId,
         conceptSpine: extractComponentConceptSpine(rawContent),
         misconceptions: extractComponentMisconceptions(rawContent),
         explanations: extractComponentExplanations(rawContent),
       }
+    } else if (isProtocolFormat(rawContent)) {
+      // Protocol-format blueprint (## N. Title, ## 0. Concept Profile — 47 foundational blueprints).
+      content = {
+        conceptId,
+        conceptSpine: extractProtocolConceptSpine(rawContent),
+        misconceptions: extractProtocolMisconceptions(rawContent),
+        explanations: extractProtocolExplanations(rawContent),
+      }
+    } else if (isSpineFormat(rawContent)) {
+      // Spine-format blueprint (## 0. Concept Metadata, ## 1. Concept Spine — 24 blueprints).
+      content = {
+        conceptId,
+        conceptSpine: extractSpineFormatConceptSpine(rawContent),
+        misconceptions: extractSpineFormatMisconceptions(rawContent),
+        explanations: extractSpineFormatExplanations(rawContent),
+      }
     } else {
-      // Phase 1D: New Section-format blueprint (14 new-format blueprints).
+      // Section-format blueprint (## Section N — Name — 14 blueprints).
       content = {
         conceptId,
         conceptSpine: extractConceptSpine(rawContent),
