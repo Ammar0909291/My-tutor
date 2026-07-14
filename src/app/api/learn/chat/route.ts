@@ -1080,8 +1080,28 @@ export async function POST(req: Request) {
           if (currentModule) {
             const moduleNodeSlugs = currentModule.nodes.map((n) => n.slug)
             const { getTeachingStrategy, buildTeachingStrategyBlock } = await import('@/lib/school/adaptive/teachingStrategy')
+            // Phase B (2026-07-14): beginner evidence from data already in hand
+            // (plus one cheap count) so an unknown/struggling learner defaults to
+            // FOUNDATION_REBUILD instead of APPLICATION_FOCUS. Every field
+            // degrades to a no-signal value on error — never blocks the turn.
+            const recoveryMistakeCount = await prisma.mistakeRecord.count({
+              where: {
+                userId, subjectSlug: subjectCode, category: 'recovery_signal',
+                createdAt: { gte: new Date(Date.now() - 7 * 86400000) },
+              },
+            }).catch(() => 0)
+            const snapLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+              ? snapshot.lastSignal as { correctness?: boolean }
+              : null
             const teachingStrategy = await getTeachingStrategy(
               userId, '', 0, subjectCode, currentModule.slug, moduleNodeSlugs,
+              {
+                profileLevel: profile?.currentLevel ?? null,
+                sessionFailureCount: snapshotSessionFailureCount,
+                recoveryMistakeCount,
+                lastSignalIncorrect: snapLastSignal?.correctness === false,
+                hasPrerequisiteGap: snapshotLastPrereqGap !== null,
+              },
             )
             systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
 
@@ -1091,7 +1111,7 @@ export async function POST(req: Request) {
             outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
             hintBiasHoisted = deriveHintBias(teachingStrategy.type)
             if (hintBiasHoisted === 'PREFERRED') {
-              systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nThe hint must nudge toward the next step only — never state the final answer inside the tag. Omit the tag entirely if the student is not stuck.`
+              systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nHINT POLICY: a hint must reveal the MISSING CONCEPT, never the next calculation step, and must always be EASIER than the problem itself. Good: "Before measuring the shortcut, picture walking along the two sides of the street corner." Bad: "Use Pythagoras" / "Find the square root". If the student is missing the underlying concept, or cannot do the calculation the hint would require, do not hint at all — teach that missing piece plainly in your response and omit the tag.`
             } else if (hintBiasHoisted === 'SUPPRESSED') {
               systemPrompt += `\n\nDo not use a [HINT] tag this turn — explain directly and clearly instead, per this strategy's directive.`
             }
@@ -1336,7 +1356,17 @@ export async function POST(req: Request) {
 
         // Assessment protocol — subject-aware, with deterministic validation instructions
         // for STEM and programming subjects.
-        try {
+        // Assessment gate (2026-07-14 teaching-quality Phase A.4): a formal
+        // 3-question exam is examiner behaviour, not teaching — never offer it
+        // to a beginner, or to anyone already struggling this session
+        // (sessionFailureCount, P1). The protocol text is REPLACED (not merely
+        // omitted) so an explicit "test me" from a struggling learner gets a
+        // teaching-shaped answer instead of an improvised exam.
+        const assessmentSuppressed =
+          profile?.currentLevel === 'beginner' || snapshotSessionFailureCount >= 2
+        if (assessmentSuppressed) {
+          systemPrompt += `\n\nASSESSMENT GATE: Do NOT run a formal multi-question assessment in this session, even if the learner asks to be tested. This learner needs teaching first. If they ask to be assessed, weave ONE Stage 1–2 question (observation or recognition — see the QUESTION STAGE POLICY) into your teaching, react warmly to whatever they answer, and continue teaching. Never emit an [ASSESSMENT_RESULT ...] tag this session.`
+        } else try {
           const { getAssessmentRequirement } = await import('@/lib/assessment/subjectValidator')
           const req = getAssessmentRequirement(subjectCode)
           const deterministicExtra = [
