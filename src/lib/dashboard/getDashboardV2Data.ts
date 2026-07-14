@@ -155,32 +155,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 
-  // ── DIAGNOSTIC: probe each table individually BEFORE the batch ─────────────
-  console.log('[DIAG:getDashboardV2Data] entering, userId:', userId, 'week:', week)
-  const diagQueries: Array<[string, () => Promise<unknown>]> = [
-    ['user.findUnique',         () => prisma.user.findUnique({ where: { id: userId }, select: { id: true } })],
-    ['topicProgress.count(today)', () => prisma.topicProgress.count({ where: { userId } })],
-    ['studyStreak.findUnique',  () => prisma.studyStreak.findUnique({ where: { userId } })],
-    ['weeklyXP.findUnique',     () => prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } })],
-    ['weeklyXP.findMany',       () => prisma.weeklyXP.findMany({ where: { week }, take: 1 })],
-    ['learnSession.findMany',   () => prisma.learnSession.findMany({ where: { userId }, take: 1 })],
-    ['subjectCertificate.count',() => prisma.subjectCertificate.count({ where: { userId } })],
-    ['certificate.count',       () => prisma.certificate.count({ where: { userId } })],
-    ['practiceSession.count',   () => prisma.practiceSession.count({ where: { userId } })],
-    ['topicProgress.count(all)', () => prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } })],
-    ['studentProgress.findMany',() => prisma.studentProgress.findMany({ where: { userId }, take: 1 })],
-  ]
-  for (const [label, fn] of diagQueries) {
-    try {
-      await fn()
-      console.log('[DIAG:getDashboardV2Data] ✓', label)
-    } catch (err: any) {
-      console.error('[DIAG:getDashboardV2Data] ✗', label, '— code:', err?.code, 'message:', err?.message, 'meta:', JSON.stringify(err?.meta))
-    }
-  }
-  console.log('[DIAG:getDashboardV2Data] probe pass complete — starting real batch')
-  // ── END DIAGNOSTIC PROBE ─────────────────────────────────────────────────────
-
+  console.log('[Q1] batch start')
   const [
     user,
     sessionsTodayCount,
@@ -192,9 +167,9 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     roadmapCertCount,
     practiceCountToday,
     topicsMastered,
-  ] = await withRetry(() => {
-    console.log('[DIAG:getDashboardV2Data] Promise.all starting — 10 queries')
-    return Promise.all([
+  ] = await (async () => {
+    try {
+      return await withRetry(() => Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -264,11 +239,15 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     prisma.subjectCertificate.count({ where: { userId } }).catch(() => 0),
     prisma.certificate.count({ where: { userId } }).catch(() => 0),
     prisma.practiceSession.count({ where: { userId, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }).catch(() => 0),
-    prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } }).catch(() => 0),
-  ])
-  })
+      prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } }).catch(() => 0),
+      ]))
+    } catch (err: any) {
+      console.error('[FAILED Q1] batch', err?.code, err?.message, err?.meta)
+      throw err
+    }
+  })()
+  console.log('[Q1 OK] batch complete')
 
-  console.log('[DIAG:getDashboardV2Data] batch complete — user:', !!user, 'profile:', !!user?.profile)
   if (!user) redirect('/auth/login')
   if (!user.profile) redirect('/onboarding')
 
@@ -390,22 +369,25 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
     dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
 
-    const studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
-      where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
-      select: {
-        subjectCode: true,
-        currentLesson: true,
-        completedLessons: true,
-        lastStudiedAt: true,
-        lastLessonTitle: true,
-        completionPercent: true,
-      },
-    })).catch((err) => {
-      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
-        console.error('[dashboard] student_progress unavailable:', err?.code, err?.message)
-      }
-      return []
-    })
+    console.log('[Q2] studentProgress')
+    let studentProgressList: { subjectCode: string; currentLesson: number; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
+    try {
+      studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
+        where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
+        select: {
+          subjectCode: true,
+          currentLesson: true,
+          completedLessons: true,
+          lastStudiedAt: true,
+          lastLessonTitle: true,
+          completionPercent: true,
+        },
+      }))
+      console.log('[Q2 OK] studentProgress', studentProgressList.length)
+    } catch (err: any) {
+      console.error('[FAILED Q2] studentProgress', err?.code, err?.message, err?.meta)
+      throw err
+    }
     const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
 
     // Same placement logic as /api/curriculum's GET handler (see
@@ -477,9 +459,11 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   // League
   const myXP = myWeeklyXP?.xp ?? 0
   const tier = getLeagueForXP(myXP)
+  console.log('[Q3] rank')
   const myRank = myWeeklyXP
-    ? await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } }).then((n) => n + 1).catch(() => null)
+    ? await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } }).then((n) => { console.log('[Q3 OK] rank', n + 1); return n + 1 }).catch((err) => { console.error('[FAILED Q3] rank', err?.code, err?.message); return null })
     : null
+  if (!myWeeklyXP) console.log('[Q3 SKIP] no weeklyXP row')
 
   const entries: LeagueEntry[] = weeklyTop.map((e, i) => {
     const isMe = e.userId === userId
@@ -558,7 +542,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     },
   ]
 
-  console.log('[DIAG:getDashboardV2Data] returning data successfully')
+  console.log('[Q4] returning data')
   return {
     topBar: {
       streak: streak.currentStreak,
