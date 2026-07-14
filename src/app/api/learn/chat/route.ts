@@ -1684,6 +1684,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // deterministically (Principle 20: stated state is ground truth) and
     // preempts calibration, assessment, and the asset memory path this turn.
     let recoveryKeyHoisted: import('@/lib/teaching/recoveryGuard').FailureStateKey | null = null
+    // Phases C–G (2026-07-14): server-side conversation state machine —
+    // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
+    // turn's evidence, persisted on the existing snapshot ride.
+    let conversationStateHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
     if (!schoolCtx) {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
@@ -1795,14 +1799,46 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // inject a deterministic instruction block so the LLM honors the
         // request instead of blocking on LEARNING RULE 3. Fires before
         // RECOVERY so recovery still wins if both are somehow present.
-        const AUTONOMY_RE = /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
-        if (AUTONOMY_RE.test(message)) {
-          systemPrompt +=
-            '\n\nLEARNER AUTONOMY — the student has explicitly asked to move on. ' +
-            'Honor this immediately: do not press them to confirm understanding again. ' +
-            'Briefly acknowledge what was covered and what they should review later, ' +
-            'then append [LESSON_COMPLETE] at the very end of your response so the ' +
-            'session advances to the next concept.'
+        // (Detection moved into conversationState.ts for testability.)
+        const { detectAutonomyRequest, buildAutonomyBlock } = await import('@/lib/teaching/conversationState')
+        if (detectAutonomyRequest(message)) {
+          systemPrompt += buildAutonomyBlock()
+        }
+
+        // Phases C–G (2026-07-14): the conversation state machine. The
+        // SERVER decides the teaching phase (OBSERVE→…→TRANSFER), whether
+        // this turn teaches/shows/asks (Phase E counters), the question-
+        // stage ceiling (no OBSERVE→calculation jumps), the response
+        // length budget (Phase D — struggle shortens), worked-example-
+        // first (Phase F), and whether a visual leads (Phase G). One
+        // compact TURN DIRECTIVE carries the decisions; the LLM teaches
+        // inside them instead of judging pacing itself.
+        {
+          const {
+            readConversationState, decideNextMove, responseBudget,
+            buildTurnDirective, decideVisualFirst,
+          } = await import('@/lib/teaching/conversationState')
+          const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+          conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
+          const workedExampleFirst =
+            snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD'
+          const nextMove = decideNextMove(conversationStateHoisted, {
+            recoveryTurn: recoveryKeyHoisted !== null,
+            workedExampleFirst,
+          })
+          const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
+          const availableVisual = detectVisual({
+            subjectSlug: subjectCode,
+            chapterTitle: lessonCtx?.unitTitle ?? '',
+            lessonTitle: lessonCtx?.lessonTitle,
+          })
+          systemPrompt += buildTurnDirective({
+            state: conversationStateHoisted,
+            nextMove,
+            maxParagraphs: responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
+            workedExampleFirst,
+            visualType: decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+          })
         }
 
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
@@ -2508,7 +2544,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
           }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0) {
+          // Phases C–G (2026-07-14): fold this turn's evidence into the
+          // conversation state machine — did the assistant actually ask a
+          // question (deterministic text check), did the learner's answer
+          // succeed (SIGNAL), did a recovery utterance fire — and persist.
+          let conversationStateUpdate: Record<string, unknown> = {}
+          if (conversationStateHoisted) {
+            const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
+            conversationStateUpdate = {
+              conversationState: advanceConversationState(conversationStateHoisted, {
+                askedQuestion: repliesWithQuestion(cleanText),
+                signalCorrect: teachingSignal?.correctness ?? null,
+                recoveryFired: recoveryKeyHoisted !== null,
+              }),
+            }
+          }
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0) {
             prisma.learnSession.update({
               where: { id: sessionId },
               data: {
@@ -2519,6 +2571,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ...placementUpdate,
                   ...episodeUpdate,
                   ...failureCountUpdate,
+                  ...conversationStateUpdate,
                 },
               },
             }).catch(() => {})

@@ -224,7 +224,7 @@ LEARNING RULES:
 1. Gauge understanding from what the student actually types back — do not force a fixed "yes / no / partially" reply format
 2. If the student seems confused, choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
 3. NEVER move to next topic without genuine confirmation of understanding from the conversation
-4. Max 3-4 sentences + code, then — only when the QUESTION STAGE POLICY allows another question this turn — a natural follow-up question or small task; otherwise end with an invitation ("tell me when you're ready" / "try saying it back in your own words when you want")
+4. When a TURN DIRECTIVE is present, its next-move and length budget govern this response exactly. Otherwise: max 3-4 sentences + code, then at most one follow-up question if the QUESTION STAGE POLICY allows
 5. Short student replies = fatigue → make it more engaging${notationBlock}`
   }
 
