@@ -6,52 +6,87 @@ import { DashboardV2 } from '@/components/dashboard/v2/DashboardV2'
 import { getDashboardV2Data } from '@/lib/dashboard/getDashboardV2Data'
 
 export default async function DashboardPage({ searchParams }: { searchParams?: { mode?: string } }) {
-  const session = await auth()
-  if (!session?.user?.id) redirect('/auth/login')
-  const userId = session.user.id
+  // ── DIAGNOSTIC INSTRUMENTATION — remove after root cause confirmed ──────────
+  const t0 = Date.now()
+  console.log('[DIAG:dashboard] STEP 1 — page entered')
 
-  // MED-1 (onboarding-redirect flakiness on refresh): treat the existence of a
-  // Profile as the single source of truth for "is onboarded", and read it with
-  // withRetry so a transient DB hiccup right after onboarding doesn't redirect a
-  // freshly-onboarded user back into the wizard. If a Profile exists but the
-  // onboardingCompleted flag is stale, self-heal it — this is the same auto-heal
-  // pattern /coach and /learn use, so no two pages disagree on what "onboarded"
-  // means and bounce the user between /dashboard and /onboarding on a hard refresh.
-  const user = await withRetry(() => prisma.user.findUnique({
-    where: { id: userId },
-    select: {
-      onboardingCompleted: true,
-      profile: { select: { userType: true, educationBoard: true, grade: true } },
-    },
-  }))
-  if (!user?.profile) redirect('/onboarding')
-  if (!user.onboardingCompleted) {
-    await withRetry(() => prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } }))
+  // eslint-disable-next-line prefer-const
+  let session: { user?: { id?: string } } | null = null
+  try {
+    session = await auth() as any
+    console.log('[DIAG:dashboard] STEP 2 — auth() completed', {
+      hasSession: !!session,
+      hasUser: !!session?.user,
+      userId: session?.user?.id ?? 'MISSING',
+    })
+  } catch (err: any) {
+    console.error('[DIAG:dashboard] STEP 2 FAILED — auth() threw', err?.message ?? err)
+    throw err
   }
-  const profile = user.profile
 
-  // Cross-system navigation (Stabilization Sprint): a SCHOOL_STUDENT can opt
-  // into viewing the Library/General experience via ?mode=library without
-  // changing their stored profile, curriculum, or progress data. Default
-  // landing behavior (no query param) is unchanged. Dual Learning Modes: a
-  // GENERAL_LEARNER who has opted into School Mode (board/grade set without
-  // changing userType) keeps Library as their default landing experience
-  // and enters School Mode explicitly with ?mode=school.
+  if (!session?.user?.id) {
+    console.log('[DIAG:dashboard] STEP 2b — no userId, redirecting to login')
+    redirect('/auth/login')
+  }
+  const userId = session!.user!.id!
+
+  console.log('[DIAG:dashboard] STEP 3 — fetching user+profile from DB')
+  let dbUser: { onboardingCompleted: boolean; profile: { userType: string; educationBoard: string | null; grade: string | null } | null } | null = null
+  try {
+    dbUser = await withRetry(() => prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        onboardingCompleted: true,
+        profile: { select: { userType: true, educationBoard: true, grade: true } },
+      },
+    })) as any
+    console.log('[DIAG:dashboard] STEP 3 complete — user found:', !!dbUser, 'profile:', !!dbUser?.profile)
+  } catch (err: any) {
+    console.error('[DIAG:dashboard] STEP 3 FAILED — prisma.user.findUnique threw', {
+      code: err?.code,
+      message: err?.message,
+      meta: err?.meta,
+    })
+    throw err
+  }
+
+  if (!dbUser?.profile) {
+    console.log('[DIAG:dashboard] STEP 3b — no profile, redirecting to onboarding')
+    redirect('/onboarding')
+  }
+  if (!dbUser!.onboardingCompleted) {
+    console.log('[DIAG:dashboard] STEP 4 — auto-healing onboardingCompleted flag')
+    try {
+      await withRetry(() => prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } }))
+      console.log('[DIAG:dashboard] STEP 4 complete — flag healed')
+    } catch (err: any) {
+      console.error('[DIAG:dashboard] STEP 4 FAILED — prisma.user.update threw', {
+        code: err?.code, message: err?.message,
+      })
+      throw err
+    }
+  }
+
   const wantsLibrary = searchParams?.mode === 'library'
   const wantsSchool = searchParams?.mode === 'school'
   const modeOverride = wantsLibrary ? 'library' : wantsSchool ? 'school' : undefined
 
-  // Both Library Mode and School Mode render through the same DashboardV2
-  // shell — getDashboardV2Data branches internally on userType/modeOverride
-  // and attaches school-only content (navigator action, daily plan,
-  // academic journey, exam readiness) via the optional `school` field. The
-  // dashboard shell, navigation, and visual identity never change between
-  // modes — only the content cards inside it do.
-  const data = await getDashboardV2Data(userId, modeOverride)
+  console.log('[DIAG:dashboard] STEP 5 — calling getDashboardV2Data', { modeOverride })
+  let data: Awaited<ReturnType<typeof getDashboardV2Data>>
+  try {
+    data = await getDashboardV2Data(userId, modeOverride)
+    console.log('[DIAG:dashboard] STEP 6 — getDashboardV2Data completed in', Date.now() - t0, 'ms')
+  } catch (err: any) {
+    console.error('[DIAG:dashboard] STEP 5 FAILED — getDashboardV2Data threw', {
+      code: err?.code,
+      message: err?.message,
+      meta: err?.meta,
+      stack: err?.stack?.split('\n').slice(0, 8).join('\n'),
+    })
+    throw err
+  }
 
-  // School Mode entry banners intentionally hidden from the UI (presentation
-  // layer only — /dashboard?mode=school and School Mode itself are untouched
-  // and remain reachable by direct URL for already-enrolled users).
-
+  console.log('[DIAG:dashboard] STEP 7 — rendering DashboardV2')
   return <DashboardV2 data={data} />
+  // ── END DIAGNOSTIC INSTRUMENTATION ──────────────────────────────────────────
 }

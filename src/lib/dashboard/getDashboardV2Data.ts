@@ -155,6 +155,32 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 
+  // ── DIAGNOSTIC: probe each table individually BEFORE the batch ─────────────
+  console.log('[DIAG:getDashboardV2Data] entering, userId:', userId, 'week:', week)
+  const diagQueries: Array<[string, () => Promise<unknown>]> = [
+    ['user.findUnique',         () => prisma.user.findUnique({ where: { id: userId }, select: { id: true } })],
+    ['topicProgress.count(today)', () => prisma.topicProgress.count({ where: { userId } })],
+    ['studyStreak.findUnique',  () => prisma.studyStreak.findUnique({ where: { userId } })],
+    ['weeklyXP.findUnique',     () => prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } })],
+    ['weeklyXP.findMany',       () => prisma.weeklyXP.findMany({ where: { week }, take: 1 })],
+    ['learnSession.findMany',   () => prisma.learnSession.findMany({ where: { userId }, take: 1 })],
+    ['subjectCertificate.count',() => prisma.subjectCertificate.count({ where: { userId } })],
+    ['certificate.count',       () => prisma.certificate.count({ where: { userId } })],
+    ['practiceSession.count',   () => prisma.practiceSession.count({ where: { userId } })],
+    ['topicProgress.count(all)', () => prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } })],
+    ['studentProgress.findMany',() => prisma.studentProgress.findMany({ where: { userId }, take: 1 })],
+  ]
+  for (const [label, fn] of diagQueries) {
+    try {
+      await fn()
+      console.log('[DIAG:getDashboardV2Data] ✓', label)
+    } catch (err: any) {
+      console.error('[DIAG:getDashboardV2Data] ✗', label, '— code:', err?.code, 'message:', err?.message, 'meta:', JSON.stringify(err?.meta))
+    }
+  }
+  console.log('[DIAG:getDashboardV2Data] probe pass complete — starting real batch')
+  // ── END DIAGNOSTIC PROBE ─────────────────────────────────────────────────────
+
   const [
     user,
     sessionsTodayCount,
@@ -166,7 +192,9 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     roadmapCertCount,
     practiceCountToday,
     topicsMastered,
-  ] = await withRetry(() => Promise.all([
+  ] = await withRetry(() => {
+    console.log('[DIAG:getDashboardV2Data] Promise.all starting — 10 queries')
+    return Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -232,8 +260,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     prisma.certificate.count({ where: { userId } }).catch(() => 0),
     prisma.practiceSession.count({ where: { userId, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }).catch(() => 0),
     prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } }).catch(() => 0),
-  ]))
+  ])
+  })
 
+  console.log('[DIAG:getDashboardV2Data] batch complete — user:', !!user, 'profile:', !!user?.profile)
   if (!user) redirect('/auth/login')
   if (!user.profile) redirect('/onboarding')
 
@@ -518,6 +548,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     },
   ]
 
+  console.log('[DIAG:getDashboardV2Data] returning data successfully')
   return {
     topBar: {
       streak: streak.currentStreak,
