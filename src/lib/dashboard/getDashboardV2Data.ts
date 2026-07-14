@@ -216,7 +216,12 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     // Sprint Stabilization: count actual lesson completions (TopicProgress),
     // not session-end events — a single chat session can complete multiple
     // lessons, and a session can only "end" (and thus count) once.
-    prisma.topicProgress.count({ where: { userId, status: { in: ['COMPLETED', 'MASTERED'] }, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
+    prisma.topicProgress.count({ where: { userId, status: { in: ['COMPLETED', 'MASTERED'] }, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] topic_progress (today) unavailable:', err?.code, err?.message)
+      }
+      return 0
+    }),
     // Analytics tables (study_streaks, weekly_xp) were added in a later
     // schema migration. Guard against production DBs where prisma db push
     // has not yet been run — P2021 (table does not exist) must not crash
@@ -395,7 +400,12 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
         lastLessonTitle: true,
         completionPercent: true,
       },
-    }))
+    })).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] student_progress unavailable:', err?.code, err?.message)
+      }
+      return []
+    })
     const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
 
     // Same placement logic as /api/curriculum's GET handler (see
@@ -468,7 +478,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   const myXP = myWeeklyXP?.xp ?? 0
   const tier = getLeagueForXP(myXP)
   const myRank = myWeeklyXP
-    ? (await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } })) + 1
+    ? await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } }).then((n) => n + 1).catch(() => null)
     : null
 
   const entries: LeagueEntry[] = weeklyTop.map((e, i) => {
