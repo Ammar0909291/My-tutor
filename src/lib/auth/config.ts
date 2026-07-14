@@ -66,19 +66,62 @@ export const authConfig: NextAuthConfig = {
           select: { isDeleted: true },
         })
         // If the user row doesn't exist yet (first OAuth sign-in), allow through —
-        // NextAuth will create it. If it exists and is deleted, block.
+        // the jwt callback creates the DB row. If it exists and is deleted, block.
         if (!isSignInAllowed(dbUser)) return false
       } catch {
         // DB unreachable — fail open so auth isn't broken by transient DB errors.
       }
       return true
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
-        token.sub = user.id
-        // Auto-promote ADMIN_EMAILS users to ADMIN role on their first sign-in
-        if (user.id && user.email) {
-          await maybeBootstrapAdmin(user.id, user.email).catch(() => {})
+        // GOOGLE-OAUTH-FIX: NextAuth v5 with JWT strategy has no PrismaAdapter,
+        // so OAuth sign-ins never create a DB User row automatically. Without a
+        // row, the re-validation branch below calls prisma.user.findUnique(sub)
+        // → null → resolveJwtSub(null, null, ...) → undefined → token invalidated
+        // → user silently logged out immediately after the Google callback.
+        //
+        // Fix: for any non-credentials provider (Google, etc.), upsert the User
+        // row now. Then read back the actual DB id and set token.sub to it —
+        // this handles the case where the email already exists (a credentials
+        // user linking Google for the first time), ensuring token.sub always
+        // matches a real DB id rather than an opaque Google sub string.
+        if (account && account.provider !== 'credentials') {
+          try {
+            const email = canonicalEmail(user.email!)
+            await prisma.user.upsert({
+              where: { email },
+              update: {
+                name: user.name ?? undefined,
+                image: user.image ?? undefined,
+              },
+              create: {
+                id: user.id,          // Google sub — valid as a DB id for new accounts
+                email,
+                name: user.name ?? 'Student',
+                image: user.image ?? null,
+              },
+            })
+            // Re-read the actual DB id — may differ when email already existed
+            // (credentials account predates the Google sign-in).
+            const dbUser = await prisma.user.findUnique({
+              where: { email },
+              select: { id: true },
+            })
+            if (dbUser) token.sub = dbUser.id
+          } catch (err) {
+            // Upsert failed — keep token.sub as Google sub; the re-validation
+            // byEmail fallback will attempt recovery on the next request.
+            console.error('[jwt/oauth] user upsert failed:', err)
+          }
+        } else {
+          token.sub = user.id
+        }
+
+        // Auto-promote ADMIN_EMAILS users to ADMIN role on their first sign-in.
+        // Use token.sub (real DB id) not user.id (may be Google sub for OAuth).
+        if (token.sub && user.email) {
+          await maybeBootstrapAdmin(token.sub as string, user.email).catch(() => {})
         }
         return token
       }

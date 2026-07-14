@@ -62,6 +62,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, data: existingSession, resumed: true }, { status: 200 });
     }
 
+    // Close any stale ACTIVE sessions older than 24h (sendBeacon may not have fired
+    // on mobile or after a crash). This prevents orphaned ACTIVE rows accumulating.
+    await prisma.learnSession.updateMany({
+      where: {
+        userId: session.user.id,
+        subjectId: subject.id,
+        status: "ACTIVE",
+        startedAt: { lt: cutoff },
+      },
+      data: { status: "COMPLETED", endedAt: new Date() },
+    }).catch(() => {}); // best-effort — never block session creation
+
     const [profile, activePath] = await Promise.all([
       prisma.profile.findUnique({ where: { userId: session.user.id } }),
       prisma.learningPath.findFirst({
