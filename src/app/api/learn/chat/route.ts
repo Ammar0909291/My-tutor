@@ -88,6 +88,8 @@ export async function POST(req: Request) {
       ? snapshot.pendingPlacementProbe
       : null
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
+    // P1: cumulative failure counter — incremented on recovery turns and false SIGNALs
+    const snapshotSessionFailureCount = typeof snapshot?.sessionFailureCount === 'number' ? snapshot.sessionFailureCount : 0
     // Sprint CH: active worked example carried across turns
     const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
       ? snapshot.currentWorkedExample as { concept: string; currentStep: number; stepCount: number }
@@ -1759,12 +1761,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           firstLessonActiveHoisted = true
         }
 
+        // P3 — Learner autonomy: when the student explicitly asks to move on,
+        // inject a deterministic instruction block so the LLM honors the
+        // request instead of blocking on LEARNING RULE 3. Fires before
+        // RECOVERY so recovery still wins if both are somehow present.
+        const AUTONOMY_RE = /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
+        if (AUTONOMY_RE.test(message)) {
+          systemPrompt +=
+            '\n\nLEARNER AUTONOMY — the student has explicitly asked to move on. ' +
+            'Honor this immediately: do not press them to confirm understanding again. ' +
+            'Briefly acknowledge what was covered and what they should review later, ' +
+            'then append [LESSON_COMPLETE] at the very end of your response so the ' +
+            'session advances to the next concept.'
+        }
+
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
         // scripts; first-lesson/05 deltas) — injected LAST of all blocks:
         // the affect band outranks every teaching instruction above it.
         if (recoveryKeyHoisted) {
           const { buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
-          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted)
+          // P2: pass session failure count so the script escalates on repeated struggle
+          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted, snapshotSessionFailureCount)
         }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
@@ -2241,6 +2258,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           outcome:   `recovery:${recoveryKeyHoisted}`,
           strength:  0.0,
         })
+
+        // P4 — Affect budget: recovery turns emit no SIGNAL tag so
+        // applySignalToEpisode() never sees them, leaving the episode
+        // frozen. Synthesize a false-signal failure event here so the
+        // session lifecycle advances toward CLOSING at the same rate as
+        // a learner-signaled failure would.
+        if (sessionEpisodeHoisted) {
+          try {
+            const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+            const syntheticSignal = { correctness: false as const, confidence: undefined, confusion: true }
+            sessionEpisodeHoisted = applySignalToEpisode(sessionEpisodeHoisted, syntheticSignal, {
+              isFirstLesson: firstLessonActiveHoisted,
+            })
+          } catch { /* non-fatal */ }
+        }
+
+        // P5 — Recovery memory: write a MistakeRecord so decide() enters
+        // remediate mode on the next turn for this concept. Fire-and-forget.
+        if (!schoolCtx && resolvedConceptId) {
+          prisma.mistakeRecord.create({
+            data: {
+              userId,
+              subjectSlug: subjectCode,
+              topicSlug: resolvedConceptId,
+              sessionId: learnSession.id,
+              category: 'recovery_signal',
+              questionId: resolvedConceptId,
+            },
+          }).catch(() => {})
+        }
       }
 
       // CTO iteration — Library mastery evidence loop. Before this block,
@@ -2401,21 +2448,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
 
+          // P1: accumulate session failure count — increments on recovery
+          // utterances AND false SIGNAL outcomes so escalation has a real
+          // count (decision-engine/05: per-failure ladders).
+          const failureThisTurn = recoveryKeyHoisted !== null || teachingSignal?.correctness === false
+          const newSessionFailureCount = failureThisTurn ? snapshotSessionFailureCount + 1 : snapshotSessionFailureCount
+          const failureCountUpdate = failureThisTurn ? { sessionFailureCount: newSessionFailureCount } : {}
+
           // Session lifecycle fold (07 §1/§6): this turn's signal advances
           // the episode machine — OPENING→CORE on the first answered item,
           // CORE→CLOSING when the affect budget is spent (1 in lesson one).
+          // P4: sessionEpisodeHoisted may have been updated by the recovery
+          // block above (synthetic signal), so we use the (possibly updated)
+          // hoisted value directly and skip re-applying applySignalToEpisode
+          // for recovery turns to avoid double-counting.
           let episodeUpdate: Record<string, unknown> = {}
           if (sessionEpisodeHoisted) {
-            const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
-            const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
-              isFirstLesson: firstLessonActiveHoisted,
-            })
-            if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
-              episodeUpdate = { sessionEpisode: nextEpisode }
+            if (recoveryKeyHoisted) {
+              // P4: episode already advanced via synthetic signal above
+              episodeUpdate = { sessionEpisode: sessionEpisodeHoisted }
+            } else {
+              const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+              const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+                isFirstLesson: firstLessonActiveHoisted,
+              })
+              if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
+                episodeUpdate = { sessionEpisode: nextEpisode }
+              }
             }
           }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0) {
             prisma.learnSession.update({
               where: { id: sessionId },
               data: {
@@ -2425,6 +2488,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ...signalUpdate,
                   ...placementUpdate,
                   ...episodeUpdate,
+                  ...failureCountUpdate,
                 },
               },
             }).catch(() => {})
