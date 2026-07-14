@@ -109,6 +109,40 @@ export const authConfig: NextAuthConfig = {
               select: { id: true },
             })
             if (dbUser) token.sub = dbUser.id
+            // Populate the accounts table so the DB accurately reflects which
+            // OAuth provider authenticated the user (no PrismaAdapter required).
+            if (token.sub) {
+              await prisma.account.upsert({
+                where: {
+                  provider_providerAccountId: {
+                    provider: account.provider,
+                    providerAccountId: account.providerAccountId,
+                  },
+                },
+                update: {
+                  access_token: account.access_token ?? null,
+                  id_token: account.id_token ?? null,
+                  refresh_token: account.refresh_token ?? null,
+                  expires_at: account.expires_at ?? null,
+                  token_type: account.token_type ?? null,
+                  scope: account.scope ?? null,
+                  session_state: typeof account.session_state === 'string' ? account.session_state : null,
+                },
+                create: {
+                  userId: token.sub as string,
+                  type: account.type,
+                  provider: account.provider,
+                  providerAccountId: account.providerAccountId,
+                  access_token: account.access_token ?? null,
+                  id_token: account.id_token ?? null,
+                  refresh_token: account.refresh_token ?? null,
+                  expires_at: account.expires_at ?? null,
+                  token_type: account.token_type ?? null,
+                  scope: account.scope ?? null,
+                  session_state: typeof account.session_state === 'string' ? account.session_state : null,
+                },
+              }).catch((err) => console.error('[jwt/oauth] account upsert failed:', err))
+            }
           } catch (err) {
             // Upsert failed — keep token.sub as Google sub; the re-validation
             // byEmail fallback will attempt recovery on the next request.
