@@ -189,19 +189,44 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     // not session-end events — a single chat session can complete multiple
     // lessons, and a session can only "end" (and thus count) once.
     prisma.topicProgress.count({ where: { userId, status: { in: ['COMPLETED', 'MASTERED'] }, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
-    getStudyStreak(userId),
-    prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }),
+    // Analytics tables (study_streaks, weekly_xp) were added in a later
+    // schema migration. Guard against production DBs where prisma db push
+    // has not yet been run — P2021 (table does not exist) must not crash
+    // the dashboard. Connection errors (P1001/P1008) still bubble up via
+    // withRetry so transient outages aren't silently hidden.
+    getStudyStreak(userId).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] study_streaks unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return { currentStreak: 0, longestStreak: 0, totalActiveDays: 0, isNewDay: false }
+    }),
+    prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] weekly_xp unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return null
+    }),
     prisma.weeklyXP.findMany({
       where: { week, user: { isDeleted: false } },
       orderBy: { xp: 'desc' },
       take: LEADERBOARD_SIZE,
       include: { user: { select: { id: true, name: true } } },
+    }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] weekly_xp leaderboard unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return []
     }),
     prisma.learnSession.findMany({
       where: { userId },
       orderBy: { startedAt: 'desc' },
       take: 10,
       include: { subject: { select: { name: true, slug: true } } },
+    }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] learn_sessions unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return []
     }),
     prisma.subjectCertificate.count({ where: { userId } }).catch(() => 0),
     prisma.certificate.count({ where: { userId } }).catch(() => 0),
