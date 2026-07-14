@@ -12,7 +12,13 @@ export default async function OnboardingPage() {
     select: { onboardingCompleted: true, name: true, profile: { select: { id: true } } },
   })
 
-  if (user?.onboardingCompleted) redirect('/dashboard')
+  // LOOP-FIX-2: require profile to exist before redirecting back to /dashboard.
+  // If onboardingCompleted=true but profile=null (data integrity gap), the
+  // dashboard page's !user?.profile check fires → redirect('/onboarding') →
+  // and this line fires back → redirect('/dashboard') → infinite loop.
+  // With the profile guard, a profile-less user sees the onboarding form and
+  // can complete it properly instead of bouncing forever.
+  if (user?.onboardingCompleted && user?.profile) redirect('/dashboard')
 
   return <OnboardingWizard userName={user?.name ?? session.user.name} />
 }

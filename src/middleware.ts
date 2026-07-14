@@ -40,7 +40,7 @@ export default auth(function middleware(req: NextRequest) {
   }
 
   // ─── Page-route auth protection ────────────────────────────────────────────
-  const session = (req as unknown as { auth?: { user?: unknown } }).auth
+  const session = (req as unknown as { auth?: { user?: { id?: string } } }).auth
 
   const isProtected = PROTECTED.some((p) => pathname === p || pathname.startsWith(p + '/'))
   const isAdminPath = ADMIN_PATHS.some((p) => pathname === p || pathname.startsWith(p + '/'))
@@ -52,7 +52,17 @@ export default auth(function middleware(req: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  if (isAuthOnly && session) {
+  // LOOP-FIX-1: check session?.user?.id, not just !!session. The edge auth
+  // config has no JWT callback and never validates the user against the DB —
+  // it decodes the JWT cookie for signature/expiry only. The dashboard page's
+  // auth() (full Node config) CAN set token.sub = undefined (via
+  // resolveJwtSub) and update the cookie when the user isn't found in DB.
+  // That leaves a JWT that is cryptographically valid but has no user ID.
+  // Redirecting auth-only pages to /dashboard based on !!session alone causes
+  // an infinite loop: dashboard → /auth/login (missing id) → middleware →
+  // /dashboard → …. Requiring a non-empty user.id breaks the cycle: a session
+  // with no id is treated as unauthenticated from the middleware's perspective.
+  if (isAuthOnly && session?.user?.id) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
 
