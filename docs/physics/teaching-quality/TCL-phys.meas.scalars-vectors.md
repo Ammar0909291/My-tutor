@@ -3,6 +3,7 @@
 
 **Status:** CANDIDATE ASSETS — not yet in production blueprint  
 **Concept ID:** `phys.meas.scalars-vectors`  
+**TCL Version:** 2.0 — Educational Brain Teaching Assets Standard  
 **Authored against:** EB Concept Entry v1.0 + Teaching Blueprint v1.0  
 **Date:** 2026-07-14  
 **Asset count:** 10  
@@ -12,13 +13,10 @@
 
 ## Purpose
 
-These are candidate entries for the Teaching Content Library — the asset pool from
-which the AI retrieves explanations rather than generating them from scratch.
-
-Each intervention teaches scalar/vector quantities from a different mental model.
-Every one of them reaches the same destination (the direction criterion) by a
-completely different road. The AI selects based on the student's detected state,
-prior session history, and which misconceptions are active.
+The Teaching Content Library is the asset pool from which the Teaching Engine retrieves
+interventions rather than generating them from scratch. Every intervention is a decision
+node — it knows when to be chosen, what success looks like, what failure looks like, and
+where to route next. Together, the ten interventions form a Teaching Decision Graph.
 
 The core insight every intervention must install:
 
@@ -27,13 +25,82 @@ The core insight every intervention must install:
 
 ---
 
-## Intervention 1 — The Incomplete Sentence
+## Intervention Graph Overview
 
-**Teaching Strategy:** Everyday Life Story  
-**Target learner:** Age 10–14, first encounter, any cultural background  
-**Why this strategy works:** Every learner has experienced being given incomplete
-information and feeling the gap. This intervention makes the incompleteness *physical*
-and *personal* before naming anything.
+```
+Entry points (no prior attempt):   SV-01 (default) · SV-10 (young/anxious) · SV-06 (curious)
+
+After SV-01 fails:                 SV-10 → SV-06 → SV-05
+After SV-02 fails:                 SV-01 → SV-10
+After SV-03 fails:                 SV-05 → SV-04
+After SV-04 fails:                 SV-05
+After SV-05 fails:                 SV-01
+After SV-06 fails:                 SV-01
+After SV-07 fails:                 SV-04 → SV-02
+After SV-08 fails:                 SV-04
+After SV-09 fails:                 SV-04
+After SV-10 fails:                 Prerequisite check (phys.meas.units)
+
+After any success:                 Novel-quantity probe → if criterion operative → mastery gate
+                                   If M1 still latent → SV-06 (criterion test)
+```
+
+---
+
+## SV-01 — The Incomplete Sentence
+
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-01 |
+| Title | The Incomplete Sentence |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Everyday Life Story |
+| Target Learner | Age 10–14, first encounter, any cultural background |
+| Difficulty | Beginner |
+| CPA Stage | Concrete |
+| Bloom Level | Understand |
+| Estimated Duration | 3–5 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | None |
+| Voice Requirement | Recommended — the "Go." pause lands hardest when spoken |
+| Interaction Type | Story + Question |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+Every learner has experienced being given incomplete instructions and feeling the
+incompleteness in their body before they can name it. The post-office scenario
+produces that feeling — the student will not move, or will ask "which way?" —
+before any physics vocabulary appears. The gap becomes real before it becomes named.
+
+**Mental model installed:**
+"A measurement is like a sentence. A scalar is a complete sentence — one number tells
+you everything. A vector is an unfinished sentence — you haven't said everything until
+you specify a direction. The test is: can I act on this measurement? If not, it's
+missing a direction."
+
+**Misconceptions prevented:** M1 — installs the criterion before the names, so the
+names become labels for a felt distinction rather than entries in a list.
+
+**Misconceptions recovered:** M1 — when the student is recalling lists rather than
+applying the criterion, this returns them to the root question: is the sentence finished?
+
+**Prerequisite knowledge assumed:** Colloquial understanding of distance and direction.
+No physics terminology required. "800 metres away" and "north" must be meaningful.
+
+**Cognitive load:** Very low. One situation, one instruction, one felt gap, one criterion.
 
 ### Teaching Script
 
@@ -76,26 +143,101 @@ The test is not "what category is this?" — the test is "is the sentence finish
 A student who learns to ask "is the sentence finished?" can classify any physical
 quantity they will ever encounter.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M1 — list recall.** By teaching the criterion before the names, the names become
-labels for a distinction the student already understands, not entries in a list to
-memorise.
+**Success signals:**
+- Student does not move (or asks "which way?") before being prompted — the incompleteness lands physically
+- Student says "Oh — so direction IS part of the measurement, not extra info"
+- Student can finish the sentence for a new quantity: "Force is 10 newtons ___" and feels the gap
 
-### Best Time to Use
+**Failure signals:**
+- Student says "I'd just walk any direction and look around" — incompleteness not felt
+- Student says "So scalars are simpler, better to use" — missing that vectors aren't optional
+- Student repeats the names (scalar/vector) without being able to state the criterion
 
-First explanation. Ideal opening for any student at the very start of the concept.
-Works across ages — the 'go' instruction is universally legible.
+### Recovery Graph
+
+**If successful →** Novel-quantity probe: "Is electric current scalar or vector? Use the sentence test."
+Then SV-06 (Sorting Game) to verify the criterion is operative across multiple quantities.
+
+**If unsuccessful →** SV-10 (Hot and Cold Don't Point) — shift to the most primitive sensory
+contrast. If SV-10 also fails, check that `phys.meas.units` is secure before returning.
+
+### Retrieval Tags
+
+`first-explanation` `default-opening` `child` `teen` `adult` `voice-lesson` `classroom`
+`self-study` `low-confidence` `M1-recovery` `zero-prior-knowledge`
+
+### AI Retrieval Notes
+
+**When to choose:** First session, no prior exposure to scalars/vectors, any age 10 or above.
+Default opening intervention when no student state signals a more specific match.
+
+**When to avoid:** Student has already encountered the definition and needs a different mental
+model entry point. Purely text-based asynchronous session where the "Go." pause doesn't land.
+
+**Naturally followed by:** SV-06 (Sorting Game) to test whether the criterion is now operative;
+or direct novel-quantity classification practice.
 
 ---
 
-## Intervention 2 — The Weather Forecast
+## SV-02 — The Weather Forecast
 
-**Teaching Strategy:** Real-world Observation  
-**Target learner:** Age 12+, any level, particularly strong for visual learners  
-**Why this strategy works:** Weather forecasts are seen daily. The student already
-consumes scalar and vector information every morning without knowing it. This
-intervention names the distinction they already implicitly use.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-02 |
+| Title | The Weather Forecast |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Real-world Observation |
+| Target Learner | Age 12+, any level, particularly strong for visual and contextual learners |
+| Difficulty | Beginner |
+| CPA Stage | Concrete → Representational |
+| Bloom Level | Understand |
+| Estimated Duration | 4–6 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | Diagram — Recommended (weather forecast screenshot or image enriches significantly; works without) |
+| Voice Requirement | Optional |
+| Interaction Type | Observation + Question |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The student already navigates scalar and vector information daily in weather forecasts
+without knowing it. This intervention names a distinction the student is already making
+intuitively. The naming should not be the learning — recognising an already-familiar
+thing in physics terms produces immediate ownership.
+
+**Mental model installed:**
+"Some measurements fully describe a quantity with one number — temperature, 22°C.
+Others require a number plus a direction to be actionable — wind velocity, 30 km/h
+from the northwest. The forecast tells you both because both are physically real.
+I've been reading scalars and vectors every morning without knowing the words."
+
+**Misconceptions prevented:** M2 — wind speed (scalar) and wind velocity (vector) appear
+side by side in the forecast, modelling the distinction naturally without requiring
+pre-existing physics vocabulary.
+
+**Misconceptions recovered:** M2 — when the student uses "speed" and "velocity"
+interchangeably, the forecast concretely demonstrates that physics chose two different
+words because they carry two different amounts of information.
+
+**Prerequisite knowledge assumed:** Can interpret a weather forecast; knows that wind has
+both speed and direction; knows that temperature is "just a number."
+
+**Cognitive load:** Very low — familiar context eliminates almost all extraneous load.
+The distinction rides on an already-understood domain.
 
 ### Teaching Script
 
@@ -135,26 +277,101 @@ The student already navigates scalar and vector information daily. Physics is na
 something they do intuitively. The naming *should not be the learning* — the
 distinction already exists in their experience.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M2 — speed = velocity.** The forecast explicitly models this: wind *speed* is 30 km/h
-(scalar), wind *velocity* is 30 km/h from the northwest (vector). The distinction is
-introduced naturally without the student needing to already know the words.
+**Success signals:**
+- Student says "Oh — so wind *speed* is scalar but wind *velocity* is a vector, that's why they're different words"
+- Student spontaneously says "temperature doesn't point anywhere"
+- Student can apply the criterion: "rainfall amount — that's a scalar, just a number"
 
-### Best Time to Use
+**Failure signals:**
+- Student says "But I always knew which way the wind was blowing" — misses that the physics quantity still requires direction
+- Student says "Weather is complicated, that's why you need both pieces" — attributes the need for direction to weather complexity, not physical necessity
+- Student connects the observation but cannot transfer the criterion to a new quantity
 
-First explanation or recovery. Particularly effective when the student is sceptical
-about why the distinction matters — real-world relevance is immediate.
+### Recovery Graph
+
+**If successful →** SV-07 (Interrogation) to deepen the M2 distinction; or probe with
+a novel quantity: "Is rainfall amount scalar or vector? Is rainfall velocity scalar or vector?"
+
+**If unsuccessful →** SV-01 (Incomplete Sentence) — simpler language-based entry;
+or SV-10 for younger learners.
+
+### Retrieval Tags
+
+`first-explanation` `real-world` `teen` `adult` `visual-learner` `contextual-learner`
+`M2-recovery` `self-study` `classroom` `sceptical-student`
+
+### AI Retrieval Notes
+
+**When to choose:** Student is sceptical about why the distinction matters (real-world
+relevance is immediate). Student has already heard definitions but needs grounding in
+observable reality. Student is 12+ with reliable access to weather information.
+
+**When to avoid:** Student is younger than 12 and has limited weather-reading experience.
+Student lives somewhere with minimal wind (makes the direction less salient).
+
+**Naturally followed by:** SV-07 (Interrogation) to extend M2 reasoning; or direct
+classification practice using quantity pairs (speed/velocity, temperature/wind velocity).
 
 ---
 
-## Intervention 3 — The Treasure Map
+## SV-03 — The Treasure Map
 
-**Teaching Strategy:** Analogy  
-**Target learner:** Age 10–13, strong imagination, story-oriented learners  
-**Why this strategy works:** Treasure maps encode scalar and vector information
-in a format children already recognise. The analogy makes the distinction tactile and
-spatially concrete. It also makes the consequence of ignoring direction vivid.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-03 |
+| Title | The Treasure Map |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Analogy |
+| Target Learner | Age 10–13, strong imagination, story-oriented learners |
+| Difficulty | Beginner |
+| CPA Stage | Representational |
+| Bloom Level | Understand |
+| Estimated Duration | 4–5 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | Diagram — Recommended (even a crude hand-drawn circle around a tree amplifies the scenario dramatically) |
+| Voice Requirement | Optional |
+| Interaction Type | Story + Challenge |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The treasure map encodes scalar and vector information in a spatially concrete,
+emotionally engaging format. The consequence of missing direction is vivid and
+personal — you can't find the treasure. The student experiences that direction
+isn't added information; it's the difference between an answer and no answer.
+
+**Mental model installed:**
+"A vector without direction doesn't narrow down the answer — it gives you a whole
+circle of equally-possible locations. Direction is what collapses infinite possibilities
+into one. Removing direction from a vector quantity doesn't simplify — it makes the
+measurement useless."
+
+**Misconceptions prevented:** M4 — the treasure map makes ignoring direction produce
+no answer, not a simplified answer. The circle-of-possibilities is the anti-M4 image.
+
+**Misconceptions recovered:** M4 — when the student is treating direction as optional
+decoration on a "real" magnitude, the circle image makes clear that the magnitude
+alone gave them nothing actionable.
+
+**Prerequisite knowledge assumed:** Basic spatial reasoning; familiar with the concept
+of searching in a circle; no physics terminology required.
+
+**Cognitive load:** Low — the story provides its own scaffolding; the circle versus point
+contrast is visually natural.
 
 ### Teaching Script
 
@@ -193,27 +410,101 @@ The direction is not decoration on a vector — it is *operative information* th
 determines what happens. The treasure map makes 'operative' concrete: without the
 direction, you can't act.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M4 — magnitude is the real value, direction is annotation.** The treasure map
-makes clear that ignoring direction doesn't give you a simplified version of the
-answer — it gives you *no answer at all*.
+**Success signals:**
+- Student says "Without the direction, 50 paces is useless — you'd be searching in a circle"
+- Student generates the test independently: "if removing direction makes the measurement useless, it was a vector"
+- Student transfers: "push 10 newtons — which way? So force is a vector."
 
-### Best Time to Use
+**Failure signals:**
+- Student says "I'd search near the tree and get lucky" — not feeling the mathematical impossibility
+- Student says "You could use GPS to find it" — anachronistic thinking deflects the story
+- Story is engaging but student cannot transfer the principle: "I see the map thing but what does that have to do with physics?"
 
-First explanation for younger learners (10–13). Also excellent for recovery when
-the student is treating direction as optional decoration.
+### Recovery Graph
+
+**If successful →** SV-04 (Two People, One Number) to install the prediction-failure
+consequence of M4 and cement the operational importance of direction.
+
+**If unsuccessful →** SV-05 (Three-Step Walk) — embodied experiment makes direction's
+consequence physical rather than spatial-imaginative.
+
+### Retrieval Tags
+
+`first-explanation` `child` `teen` `imaginative-learner` `story-learner` `M4-recovery`
+`voice-lesson` `classroom`
+
+### AI Retrieval Notes
+
+**When to choose:** Student is 10–13 and responds to narrative. Student has been told
+the definition but treats direction as optional. Visual diagram of the circle is available.
+
+**When to avoid:** Student is highly literal and resists analogical reasoning ("but treasure
+maps aren't physics"). Student is 14+ and may find the scenario childish.
+
+**Naturally followed by:** SV-04 (Two People, One Number) to test whether the M4 insight
+generalises from spatial navigation to force prediction.
 
 ---
 
-## Intervention 4 — Two People, One Number
+## SV-04 — Two People, One Number
 
-**Teaching Strategy:** Visual Mental Picture  
-**Target learner:** Any age, strong for learners who think in scenes  
-**Why this strategy works:** Most physics failures on this concept happen because
-the student treats opposite vectors as equivalent — 'the number is the same.' This
-intervention creates a vivid, sticky visual that makes opposite vectors *feel*
-like completely different physical situations, before any definition.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-04 |
+| Title | Two People, One Number |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Visual Mental Picture |
+| Target Learner | Any age; strongest for learners who think in scenes; strong recovery intervention |
+| Difficulty | Beginner → Intermediate |
+| CPA Stage | Concrete → Representational |
+| Bloom Level | Understand → Apply |
+| Estimated Duration | 4–6 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | Diagram — Recommended (simple tug-of-war sketch cements the two-picture contrast) |
+| Voice Requirement | Recommended — the prediction request and pause before revealing the answer are most effective live |
+| Interaction Type | Demonstration (thought experiment with explicit prediction) |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The student is asked to predict the outcome before being told. When the prediction is
+wrong (most students say "20 newtons" for the opposite-direction case), the surprise
+creates a memory anchor. The student has now *experienced* the consequence of ignoring
+direction — not been told it. That experience is retrievable in future calculations
+when they are tempted to add magnitudes without tracking direction.
+
+**Mental model installed:**
+"Two forces with the same number produce completely different physical outcomes when
+their directions differ. Identical magnitudes, opposite results. The direction is not
+a label on the force — it is the information that determines what physically happens.
+I can't treat force as a number alone; the number is incomplete."
+
+**Misconceptions prevented:** M4 — the two-picture contrast makes treating magnitude
+as the complete description demonstrably wrong before any definition.
+
+**Misconceptions recovered:** M4 — strongest single intervention for a student who is
+correctly labelling quantities as vectors but then dropping direction from calculations.
+The box-doesn't-move memory fires when they later try to add magnitudes as scalars.
+
+**Prerequisite knowledge assumed:** Intuitive sense that forces can push in different
+directions; no formal definition needed. The word "newtons" must be familiar enough
+not to derail the intervention.
+
+**Cognitive load:** Low — two pictures, one comparison, one question.
 
 ### Teaching Script
 
@@ -256,27 +547,107 @@ Two forces with identical numbers produce completely different physical outcomes
 when their directions differ. This is the strongest possible demonstration that
 direction is not a label — it is predictive information.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M4 — magnitude-only thinking.** After this, the student has a memory: the box
-doesn't move. They've *felt* the consequence of ignoring direction. This memory
-is retrievable when they later try to add forces as scalars.
+**Success signals:**
+- Student correctly predicts the box doesn't move before being told (rare but definitive)
+- Student is surprised and says "Oh — the direction is what determines what actually happens"
+- Student generates a second example: "same thing with two people pushing a car from opposite sides"
 
-### Best Time to Use
+**Failure signals:**
+- Student is confused about why the forces cancel — lacks the prerequisite intuition about opposing pulls
+- Student says "The box would wobble" — not grasping cancellation
+- Student says "This is about forces, not scalars and vectors" — fails to generalise to the classification criterion
 
-Recovery — particularly when the student is getting calculations wrong by adding
-magnitudes without tracking direction. Also strong as a second explanation after
-any first explanation has been tried and failed.
+### Recovery Graph
+
+**If successful →** Novel-quantity probe; then SV-06 (Sorting Game) to test whether
+the criterion is now operative across a range of quantities.
+
+**If unsuccessful →** SV-05 (Three-Step Walk) — more embodied, no force-cancellation
+reasoning required; the student discovers direction consequences through their own movement.
+
+### Retrieval Tags
+
+`recovery` `second-explanation` `visual-learner` `teen` `adult` `classroom`
+`M4-recovery` `voice-lesson` `prediction-failure`
+
+### AI Retrieval Notes
+
+**When to choose:** Student is getting calculation answers wrong by adding magnitudes
+without tracking direction. Student has passed verbal understanding but is not using
+direction operationally. Strong as second or third intervention.
+
+**When to avoid:** Student has not yet encountered forces (may produce confusion about
+cancellation before the scalar/vector distinction is clear). For very young learners,
+the force-cancellation inference may be too abstract — use SV-05 instead.
+
+**Naturally followed by:** Classification practice using force-specific examples;
+or SV-06 (Sorting Game) to generalise the criterion beyond force.
 
 ---
 
-## Intervention 5 — The Three-Step Walk
+## SV-05 — The Three-Step Walk
 
-**Teaching Strategy:** Simple Experiment  
-**Target learner:** Any age; strongly embodied learners, kinaesthetic preference  
-**Why this strategy works:** The student discovers the vector/scalar distinction
-through their own body. The surprise of the result — 7 steps walked, yet only
-5 steps from start — is memorable and produces genuine curiosity.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-05 |
+| Title | The Three-Step Walk |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Simple Experiment |
+| Target Learner | Any age; primary for kinaesthetic/embodied learners; strong follow-up for any learner |
+| Difficulty | Beginner |
+| CPA Stage | Concrete |
+| Bloom Level | Apply |
+| Estimated Duration | 5–8 min (physical); 3–5 min (narrated) |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | Physical Demonstration — Recommended; narrated visualisation also works |
+| Voice Requirement | Required (physical version) · Recommended (narrated version) |
+| Interaction Type | Experiment |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The student makes a concrete prediction (7 steps), physically tests it, and is
+surprised by the result (5 steps). The gap between prediction and measurement creates
+genuine curiosity — not a question the teacher asked, but one the student's own body
+posed. This productive confusion motivates the explanation that follows.
+The Pythagorean result is the proof that direction was not optional — scalar addition
+gave the wrong answer.
+
+**Mental model installed:**
+"Distance is arithmetic on a path — you add the steps as you go. Displacement is a
+straight line from start to finish, with a direction. These are different measurements
+of the same journey. They agree only when the path is straight. The Pythagorean
+result (7 walked ≠ 5 from start) is not a coincidence — it's what happens when
+you track direction properly and scalar-addition doesn't apply."
+
+**Misconceptions prevented:** M3 — experiencing direction as "which way the path bends"
+rather than "which way the arrow points" dissolves the idea that direction is an
+absolute cosmetic label on a quantity.
+
+**Misconceptions recovered:** M3 — when the student can't use signed directions in
+calculations because they treat direction as "forward/backward" rather than as a
+component of how numbers combine, the walk produces the felt experience of direction
+mattering to the *result*, not just the *label*.
+
+**Prerequisite knowledge assumed:** Can count steps; has intuitive sense of "how far
+from where I started." No prior physics required.
+
+**Cognitive load:** Very low for the physical action; the productive surprise generates
+intrinsic motivation for the explanation.
 
 ### Teaching Script
 
@@ -318,28 +689,102 @@ track direction (displacement, a vector) or don't (distance, a scalar). Both num
 are real. They answer different questions. This is not a naming convention — it's a
 computational difference with practical consequences.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M3 — direction is absolute/forward-only.** By experiencing the path and the result
-simultaneously, the student feels that direction is about *how the numbers combine*,
-not just which way the arrow points.
+**Success signals:**
+- Student is genuinely surprised that 7 walked ≠ 5 from start
+- Student says "Oh — because I changed direction in the middle, so you can't just add"
+- Student states the distinction: "Distance is total path; displacement is where I actually ended up"
 
-### Best Time to Use
+**Failure signals:**
+- Student says "I already knew it would be 5 because of Pythagoras" — no productive surprise; they already have this knowledge
+- Student is disoriented by north/east and cannot execute the experiment
+- Student says "So which one is the 'real' distance?" — confused about why two measurements of the same trip exist
 
-First session for kinaesthetic learners, or as an early follow-up to any other
-explanation when the student seems to understand the words but not the *consequence*.
-Can be done with the student physically walking, or narrated as a visualisation.
+### Recovery Graph
+
+**If successful →** Displacement calculation problems (numeric, not just narrative);
+then SV-07 or SV-06 to generalise the criterion beyond distance/displacement.
+
+**If unsuccessful →** SV-01 (Incomplete Sentence) — student needs a language-based
+entry point rather than an embodied one.
+
+### Retrieval Tags
+
+`first-explanation` `kinaesthetic-learner` `child` `teen` `experiment` `classroom`
+`voice-lesson` `M3-recovery` `follow-up` `physical-activity`
+
+### AI Retrieval Notes
+
+**When to choose:** Student learns by doing; classroom or live session where movement
+is possible. Student understands the verbal definition but doesn't use direction in
+calculations. Narrated version works for any session type.
+
+**When to avoid:** Student already knows the Pythagorean theorem deeply and won't be
+surprised. Session is purely asynchronous text-only with no visualisation capability.
+
+**Naturally followed by:** Numeric displacement problems (3 m north, 4 m east: find
+displacement magnitude and direction); then SV-06 to test the criterion on non-spatial quantities.
 
 ---
 
-## Intervention 6 — The Sorting Game
+## SV-06 — The Sorting Game
 
-**Teaching Strategy:** Guided Discovery  
-**Target learner:** Any age; strong for curious, self-directed learners; excellent
-for students who resist being told things but respond to discovering them  
-**Why this strategy works:** The student arrives at the criterion themselves. When
-a learner generates their own rule, they own it. They cannot forget something they
-discovered — only something they were told.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-06 |
+| Title | The Sorting Game |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Guided Discovery |
+| Target Learner | Any age; primary for curious, self-directed, discussion-oriented learners |
+| Difficulty | Beginner |
+| CPA Stage | Abstract |
+| Bloom Level | Analyze |
+| Estimated Duration | 6–10 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | None — or list of quantities on a whiteboard/screen |
+| Voice Requirement | Recommended — discussion is the mechanism |
+| Interaction Type | Challenge |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The student arrives at the criterion themselves. A learner who generates their own
+rule owns it — they cannot forget something they discovered, only something they were
+told. The open-ended sorting challenge also reveals which classification errors the
+student makes naturally, giving the teacher direct diagnostic information.
+
+**Mental model installed:**
+"The scalar/vector criterion is a real distinction in nature — not a label physicists
+invented. I found the rule myself from the quantities. The names 'scalar' and 'vector'
+are the physicists' names for the groups I made."
+
+**Misconceptions prevented:** M1 — experiencing that the criterion generates the list
+(rather than the list being the content) makes list-recall structurally impossible.
+The student classified things *before* knowing the names.
+
+**Misconceptions recovered:** M1 — the strongest intervention for a student who has
+been recalling from lists. Forces the student to reason from first principles rather
+than retrieve.
+
+**Prerequisite knowledge assumed:** Can name common physical quantities and has
+sufficient familiarity with each to consider whether it needs a direction. Some
+exposure to physics vocabulary (force, velocity, mass, etc.) is needed.
+
+**Cognitive load:** Medium — open-ended task with no scaffolded right/wrong signal.
+Active reasoning required throughout. Not suitable as a zero-knowledge first contact.
 
 ### Teaching Script
 
@@ -392,29 +837,104 @@ The criterion "does this need a direction?" is discoverable by a twelve-year-old
 from first principles. That means it is a *real distinction in nature*, not an
 arbitrary label assigned by physicists. The student who discovers it owns it.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M1 — list-recall.** The antidote to list-recall is experiencing that the list
-is not the point — the criterion generates the list. This intervention makes the
-student generate the list themselves, making it impossible to mistake memorisation
-for understanding.
+**Success signals:**
+- Student generates the direction criterion spontaneously without prompting
+- Student can defend their classification when challenged ("why did you put velocity there?")
+- Student says "So I can figure out any new quantity — I don't need to remember a list"
 
-### Best Time to Use
+**Failure signals:**
+- Student groups by intuition but cannot state any rule
+- Student says "I don't know enough physics to sort these" — insufficient prerequisite knowledge
+- Student generates the wrong criterion ("ones that have units in metres") and defends it even when the force-test reveals it fails
 
-First explanation for curious, discussion-oriented learners. Also powerful as a
-second explanation when the first explanation produced correct vocabulary but no
-real understanding (the student parrots definitions but cannot classify novel quantities).
+### Recovery Graph
+
+**If successful →** Test with five novel quantities not in the game (power, impulse,
+electric field, pressure, magnetic flux). If the student can classify all five using
+the criterion, mastery is operative. Advance to mastery gate.
+
+**If unsuccessful →** SV-01 (Incomplete Sentence) — provide the criterion directly
+via a concrete scenario rather than through open discovery.
+
+### Retrieval Tags
+
+`first-explanation` `second-explanation` `curious-learner` `teen` `adult` `self-directed`
+`discussion-learner` `M1-recovery` `classroom` `voice-lesson` `criterion-test`
+
+### AI Retrieval Notes
+
+**When to choose:** Student has just received any other explanation and can state the
+names but hasn't proven the criterion is operative. Excellent criterion-test after
+any prior intervention succeeds. Also strong as a first explanation for curious,
+analytically-inclined students who prefer to discover over being told.
+
+**When to avoid:** Student has minimal physics vocabulary and will not be able to
+reason about whether "500 joules" needs a direction. Use SV-01 or SV-10 first.
+
+**Naturally followed by:** Novel-quantity classification probe (five quantities not in
+the game). If the student can classify all five with justification → mastery gate.
 
 ---
 
-## Intervention 7 — The Interrogation
+## SV-07 — The Interrogation
 
-**Teaching Strategy:** Socratic Dialogue  
-**Target learner:** Age 14+; strong for analytical students who learn through
-questioning; excellent for students who feel they 'already know this'  
-**Why this strategy works:** The Socratic method exposes what the student does not
-yet know without telling them they're wrong. The student discovers the gap in their
-understanding by being asked to act on their claim, not by being corrected.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-07 |
+| Title | The Interrogation |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Socratic Dialogue |
+| Target Learner | Age 14+; analytical students; students who claim to already know this |
+| Difficulty | Intermediate |
+| CPA Stage | Abstract |
+| Bloom Level | Analyze → Evaluate |
+| Estimated Duration | 5–8 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | None |
+| Voice Requirement | Required — the dynamic is entirely verbal; pausing is the mechanism |
+| Interaction Type | Dialogue |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The Socratic method exposes what the student does not know without telling them they
+are wrong. The student discovers the gap in their own understanding by being asked to
+act on their claim. The intersection scenario makes the incompleteness of "60 km/h"
+personally consequential — the student realises they gave an answer that couldn't
+actually keep anyone safe.
+
+**Mental model installed:**
+"Velocity without direction is not a simpler version of velocity — it's incomplete
+information. I proved this to myself by trying to use it. The criterion is not a rule
+I was given; it's something I derived by testing whether my own answer was sufficient."
+
+**Misconceptions prevented:** M2 — the velocity/speed distinction is made vivid by
+the student experiencing the gap in their own answer about the car.
+
+**Misconceptions recovered:** M2 — directly probes the student's conflation by asking
+them to complete the velocity description and making clear what information is missing
+and why it matters.
+
+**Prerequisite knowledge assumed:** Can make and defend a claim; has sufficient
+metacognitive ability to reflect on their own answers; familiar enough with velocity
+in everyday life to give an initial answer.
+
+**Cognitive load:** Medium-High — requires metacognitive awareness (examining one's
+own answers for sufficiency). Not suitable for anxious or low-confidence learners.
 
 ### Teaching Script
 
@@ -473,30 +993,108 @@ The student who reaches the conclusion through their own reasoning — not throu
 being told — has a fundamentally different relationship with the concept. They have
 now experienced that the criterion is *necessary*, not arbitrary.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M2 — speed and velocity are the same.** The car intersection scenario makes the
-distinction between speed (60 km/h, no direction, scalar) and velocity (60 km/h north,
-vector) consequential and vivid. The student experiences why the physics term 'velocity'
-carries more information than the everyday term 'speed.'
+**Success signals:**
+- Student spontaneously corrects their own answer: "Actually, 60 km/h isn't complete — I'd need to say north or towards the junction"
+- Student invents their own names for the two categories before being given the words
+- Student says "I thought I knew what velocity meant and I actually didn't"
 
-### Best Time to Use
+**Failure signals:**
+- Student becomes defensive or anxious when questioned ("you're confusing me on purpose")
+- Student cannot generate the missing information even when told "something is missing"
+- Student says "OK, velocity needs direction" but gives no reason — rote compliance, not understanding
 
-First explanation for older, confident, or analytically-minded students. Particularly
-good when the student starts the session by saying 'I already know what vectors are' —
-the interrogation reveals whether they actually do.
+### Recovery Graph
+
+**If successful →** Novel-quantity probe ("Is power a scalar or vector? Reason it out.");
+then SV-06 (Sorting Game) to test criterion across multiple quantities.
+
+**If unsuccessful →** SV-04 (Two People, One Number) — needs a concrete visual
+demonstration of the consequence; the abstract verbal approach didn't suit this student.
+Then SV-02 (Weather Forecast) to ground M2 in familiar observation.
+
+### Retrieval Tags
+
+`first-explanation` `teen` `adult` `analytical-learner` `high-confidence`
+`confident-student` `voice-lesson` `classroom` `M2-recovery` `Socratic`
+
+### AI Retrieval Notes
+
+**When to choose:** Student says "I already know what vectors are" at the start of
+the session — use this to find out. Student is 14+ and responds to intellectual
+challenge. Student has good metacognitive awareness and won't feel attacked by being
+questioned.
+
+**When to avoid:** Low-confidence or anxious student — being questioned on claims can
+feel threatening. Student under 13 — metacognitive demands are too high. Text-only
+session where conversational pausing is ineffective.
+
+**Naturally followed by:** SV-06 (Sorting Game) to verify the criterion is operative;
+or direct novel-quantity classification.
 
 ---
 
-## Intervention 8 — The Ship's Navigator
+## SV-08 — The Ship's Navigator
 
-**Teaching Strategy:** Historical Discovery  
-**Target learner:** Age 13+; strong for history-minded learners and students who
-want to know *why* physics has the concepts it does  
-**Why this strategy works:** The scalar/vector distinction was not invented by
-mathematicians for abstract reasons — it was forced on navigators and engineers
-by practical problems that could not be solved without it. Telling this story
-makes the distinction feel necessary rather than academic.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-08 |
+| Title | The Ship's Navigator |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Historical Discovery |
+| Target Learner | Age 13+; history-minded, contextually-motivated learners; adult learners |
+| Difficulty | Intermediate |
+| CPA Stage | Representational → Abstract |
+| Bloom Level | Understand → Analyze |
+| Estimated Duration | 5–7 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | Diagram — Optional (a chart with three bearing lines transforms the story dramatically; works without) |
+| Voice Requirement | Optional |
+| Interaction Type | Story |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+The scalar/vector distinction was not invented by mathematicians — it was forced on
+navigators by necessity. When the student learns that the distinction solved real
+problems that killed people when ignored, the concept acquires a weight that
+"it will appear on your exam" cannot provide. Historical necessity is the strongest
+possible answer to "why does this matter?"
+
+**Mental model installed:**
+"The vector concept was discovered by necessity, not invented by physics professors.
+Three numbers without bearings are useless at sea. Three numbers with bearings give
+a precise position. The same is true of every force, velocity, and displacement in
+physics. The direction was always part of the measurement — navigators just named it
+before physicists did."
+
+**Misconceptions prevented:** M4 — in the navigator's log, direction is not decoration
+on the distance sailed; it is literally the information that makes the distance useful.
+Without bearings, the three numbers tell you nothing about where the ship is.
+
+**Misconceptions recovered:** M4 — when the student treats direction as supplemental
+to the "real" magnitude, the navigator story makes clear that the magnitude with no
+bearing was useless for centuries.
+
+**Prerequisite knowledge assumed:** Basic compass directions; understanding that ships
+navigate by tracking position; some appreciation that historical problems motivated
+scientific language.
+
+**Cognitive load:** Low-Medium — the narrative is self-supporting; the log comparison
+is the key mechanism.
 
 ### Teaching Script
 
@@ -546,28 +1144,103 @@ The scalar/vector distinction was forced on humans by the physical world, not in
 by physicists. Navigation, engineering, and artillery all independently required the
 concept. Physics formalised something that necessity had already discovered.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M4 — direction is annotation.** In the navigator's log, direction is not a label
-on the distance — it is literally the information that makes the distance useful.
-The student cannot walk away thinking direction is optional decoration.
+**Success signals:**
+- Student says "So 400 miles with no bearing is literally useless — you know nothing about where you are"
+- Student transfers: "Same as force — 50 newtons with no direction tells me nothing about what moves"
+- Student asks "Did physicists learn from navigators?" — historically engaged and reasoning beyond the content
 
-### Best Time to Use
+**Failure signals:**
+- Student is unfamiliar with maritime navigation and cannot visualise the problem
+- Student says "They should have just used GPS" — anachronistic thinking blocks the story
+- Student says "Interesting story but I still don't see how it applies to physics problems" — fails to transfer
 
-Strong as a second explanation for historically-curious students, or for students
-who ask 'why does this matter?' or 'why does physics need these words?' Also effective
-for adult learners who respond to context and real-world motivation.
+### Recovery Graph
+
+**If successful →** Displacement calculation practice; or SV-07 (Interrogation) to
+test whether M2 (speed/velocity) is also resolved.
+
+**If unsuccessful →** SV-04 (Two People, One Number) — needs an immediate visual
+prediction failure rather than a narrative historical argument.
+
+### Retrieval Tags
+
+`second-explanation` `adult` `teen` `history-minded` `contextually-motivated`
+`M4-recovery` `self-study` `curious-learner` `why-does-this-matter`
+
+### AI Retrieval Notes
+
+**When to choose:** Student has asked "why does physics need these words?" or "when
+will I use this?" Student responds to context and motivation. Adult learner who
+has not been in a physics classroom for years and needs a non-textbook entry point.
+
+**When to avoid:** Student under 13 and unfamiliar with navigation. Student who
+resists stories and wants mathematical treatment immediately.
+
+**Naturally followed by:** Displacement problems; or SV-09 (Structural Engineer) to
+extend the historical-necessity argument into a modern professional context.
 
 ---
 
-## Intervention 9 — The Structural Engineer
+## SV-09 — The Structural Engineer
 
-**Teaching Strategy:** Engineer's Perspective  
-**Target learner:** Age 14+; technically-minded learners, students aiming for
-engineering or applied science  
-**Why this strategy works:** Engineers deal with forces on structures daily. A bridge
-doesn't care about the *magnitude* of the wind force — it cares about *which face the
-wind is hitting*. This intervention grounds the distinction in professional necessity.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-09 |
+| Title | The Structural Engineer |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Engineer's Perspective |
+| Target Learner | Age 14+; technically-minded learners; students aiming for engineering or applied science |
+| Difficulty | Intermediate |
+| CPA Stage | Abstract → Transfer |
+| Bloom Level | Apply → Analyze |
+| Estimated Duration | 5–7 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | Diagram — Recommended (bridge cross-section with force arrows from different directions transforms the scenario) |
+| Voice Requirement | Optional |
+| Interaction Type | Demonstration (professional scenario) |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+Engineers deal with forces on structures daily. The bridge scenario makes treating
+a vector as a scalar not an abstract error but a professional failure with physical
+consequences. The student can identify with the engineer role and experience the
+inadequacy of magnitude-only information at a professional level.
+
+**Mental model installed:**
+"In engineering, ignoring direction doesn't produce a simpler problem — it produces
+the wrong problem entirely. 50,000 newtons with no direction doesn't let me start
+the design; it tells me only the worst-case size, not where to put the steel.
+Every force, velocity, and displacement in physics requires direction for exactly
+the same reason: direction determines what happens."
+
+**Misconceptions prevented:** M4 — direction is not an annotation on the force; it
+is the information that determines the entire structural response.
+
+**Misconceptions recovered:** M4 — for the student who is correctly identifying
+quantities as vectors but then dropping direction from calculations, the bridge
+story provides the professional consequence of exactly that error.
+
+**Prerequisite knowledge assumed:** Some sense of how structures support loads;
+sufficient motivation from engineering or applied contexts. The word "newtons" must be
+familiar. Not suitable for students with zero physics or engineering context.
+
+**Cognitive load:** Low-Medium — professional context is intrinsically motivating for
+the target learner; the bridge is a universal reference.
 
 ### Teaching Script
 
@@ -615,30 +1288,103 @@ a *prediction failure*. The engineer who ignores direction builds the wrong thin
 The physicist who ignores direction gets the wrong answer. The distinction is grounded
 in the difference between predictions that work and predictions that don't.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M4 — direction is annotation.** For engineers, direction is not decoration on a
-force — it is the information that determines design choices. The bridge story gives
-the student a professional memory: ignoring direction doesn't produce a simpler
-problem; it produces the wrong problem.
+**Success signals:**
+- Student says "So 50,000 newtons with no direction is actually LESS useful than it looks — I can't start the design"
+- Student generates a second engineering case: "same with a building — roof load vs. side load are completely different"
+- Student states the consequence: "treating a force as a scalar gives you the wrong structure"
 
-### Best Time to Use
+**Failure signals:**
+- Student is not motivated by engineering and cannot identify with the scenario
+- Student says "Engineers just use safety margins, so direction doesn't matter as much"
+- Student says "I understand the engineering part but what does this have to do with scalars and vectors?"
 
-First or second explanation for technically-minded students, aspiring engineers, or
-students who have asked 'when will I ever use this?' Also effective when a student
-is correctly identifying vectors by name but not actually using direction in calculations.
+### Recovery Graph
+
+**If successful →** Advance directly to force problems where direction is operationally
+required; or SV-06 (Sorting Game) to verify the criterion generalises beyond force.
+
+**If unsuccessful →** SV-04 (Two People, One Number) — simpler visual,
+same M4 target, no engineering context required; direct prediction test.
+
+### Retrieval Tags
+
+`first-explanation` `second-explanation` `teen` `adult` `technical-learner`
+`aspiring-engineer` `M4-recovery` `self-study` `why-does-this-matter` `applied-physics`
+
+### AI Retrieval Notes
+
+**When to choose:** Student has expressed interest in engineering or applied science.
+Student has asked "when will I use this in real life?" Student is getting force
+calculations right in classification but wrong in application (dropping direction).
+
+**When to avoid:** Student has no engineering or applied-science interest and will not
+identify with the professional scenario. Student under 14 for whom the bridge design
+context is too removed from their experience.
+
+**Naturally followed by:** Force calculation problems with direction; or SV-08
+(Ship's Navigator) to add the historical-necessity dimension.
 
 ---
 
-## Intervention 10 — Hot and Cold Don't Point
+## SV-10 — Hot and Cold Don't Point
 
-**Teaching Strategy:** Child-friendly Explanation  
-**Target learner:** Age 8–12, complete beginners, or adult learners who are anxious
-and need to start very simply  
-**Why this strategy works:** Children have clear physical intuitions about hot and
-cold (no direction) versus being pushed or thrown (direction matters). This
-intervention uses the most familiar physical experiences in the learner's life to
-build the distinction before any physics vocabulary appears.
+### Identity
+
+| Field | Value |
+|---|---|
+| Intervention ID | SV-10 |
+| Title | Hot and Cold Don't Point |
+| Concept ID | phys.meas.scalars-vectors |
+| Version | 1.0 |
+
+### Teaching Metadata
+
+| Field | Value |
+|---|---|
+| Teaching Strategy | Child-friendly Explanation |
+| Target Learner | Age 8–12 (primary); anxious adult beginners (secondary) |
+| Difficulty | Beginner |
+| CPA Stage | Concrete |
+| Bloom Level | Remember → Understand |
+| Estimated Duration | 3–5 minutes |
+
+### Delivery Metadata
+
+| Field | Value |
+|---|---|
+| Visual Requirement | None |
+| Voice Requirement | Recommended — the ball-throw mime is most effective live |
+| Interaction Type | Story + Question |
+
+### Pedagogical Metadata
+
+**Why this strategy works:**
+Warmth and thrown balls are among the earliest physical experiences a child has.
+The contrast between "hot is just everywhere" (no direction) and "a ball has a
+direction and you can't catch it without knowing which way" is pre-conceptual —
+the child has already felt both sides of the distinction in their body. Physics
+is naming an already-known difference.
+
+**Mental model installed:**
+"Hot is just a number. A thrown ball has a direction. These are different kinds of
+experiences and different kinds of measurements. My own body already knows the
+difference. Physics has names for the two kinds: scalar and vector."
+
+**Misconceptions prevented:** M1 — the criterion ("does it have a direction it's
+pointing?") is installed as a *test*, not a list. The student ends with a question
+to ask, not a category to remember.
+
+**Misconceptions recovered:** M1 — the deepest recovery intervention; suitable for
+a student who is completely lost and needs the simplest possible re-entry point.
+Also the prerequisite-gap indicator: if this fails, the issue is not scalar/vector
+knowledge but the foundation concept (`phys.meas.units`).
+
+**Prerequisite knowledge assumed:** None beyond basic sensory experience (feeling
+heat, throwing and catching objects). No physics vocabulary required.
+
+**Cognitive load:** Minimal — two maximally familiar, maximally contrasted scenarios.
 
 ### Teaching Script
 
@@ -687,94 +1433,167 @@ The most fundamental sensory experiences a child has — warmth has no direction
 a thrown object always has one — are already a perfect model of the scalar/vector
 distinction. Physics is naming what the body already knows.
 
-### Common Misconception It Prevents
+### Success Model
 
-**M1 — list recall.** By ending with the test question ("does this have a direction
-it's pointing?"), the intervention installs the criterion alongside the names. The
-student doesn't have a list of examples — they have a question to ask of any
-new quantity they meet.
+**Success signals:**
+- Student nods or says "Oh — temperature just IS, it doesn't point. A ball's direction matters."
+- Student applies the test unprompted to a new quantity: "So force points — it's a vector. Temperature doesn't — it's a scalar."
+- Student says "That's much simpler than I thought"
 
-### Best Time to Use
+**Failure signals:**
+- Student says "But heat does come from somewhere — like the sun" — conflates the heat source with the quantity
+- Student says "The ball's speed matters too, not just direction" — introduces M2 rather than resolving M1
+- Student is anxious and cannot commit to the test even after seeing the worked examples
 
-First explanation for children (8–12) or for adult beginners who are anxious or
-have had bad experiences with physics. Also effective as the recovery-from-zero
-script — the simplest, most accessible explanation when the student has failed to
-grasp the concept through any other approach.
+### Recovery Graph
 
----
+**If successful →** SV-06 (Sorting Game) — test whether the criterion is now
+operative on novel quantities not used in this intervention.
 
-## Asset Summary Table
+**If unsuccessful →** Prerequisite check. If a student cannot engage with this
+intervention, the issue is likely not scalar/vector knowledge — it is that
+`phys.meas.units` (physical quantities and their measurement) is not yet secure.
+Do not re-attempt this concept; address the prerequisite first.
 
-| # | Title | Strategy | Target | Misconception | Best Time |
-|---|-------|----------|--------|---------------|-----------|
-| 1 | The Incomplete Sentence | Everyday Life Story | Age 10–14, first encounter | M1 | First explanation |
-| 2 | The Weather Forecast | Real-world Observation | Age 12+, any level | M2 | First or recovery |
-| 3 | The Treasure Map | Analogy | Age 10–13, imaginative | M4 | First or recovery |
-| 4 | Two People, One Number | Visual Mental Picture | Any age, visual | M4 | Recovery |
-| 5 | The Three-Step Walk | Simple Experiment | Any age, kinaesthetic | M3 | First or follow-up |
-| 6 | The Sorting Game | Guided Discovery | Any age, self-directed | M1 | First or second |
-| 7 | The Interrogation | Socratic Dialogue | Age 14+, analytical | M2 | First (confident students) |
-| 8 | The Ship's Navigator | Historical Discovery | Age 13+, history-minded | M4 | Second or motivational |
-| 9 | The Structural Engineer | Engineer's Perspective | Age 14+, technical | M4 | First or follow-up |
-| 10 | Hot and Cold Don't Point | Child-friendly | Age 8–12 or anxious adult | M1 | First or recovery-from-zero |
+### Retrieval Tags
 
----
+`first-explanation` `recovery-from-zero` `child` `anxious-adult` `low-confidence`
+`M1-recovery` `voice-lesson` `classroom` `self-study` `zero-prior-knowledge`
+`prerequisite-check-on-failure`
 
-## Selection Logic (for AI retrieval)
+### AI Retrieval Notes
 
-When selecting an explanation for a student, the AI should prefer:
+**When to choose:** Student is 8–12. Student is anxious or has expressed difficulty
+with physics before. Student has failed one or more other interventions and needs
+re-entry at the simplest possible level. Default second attempt after SV-01 fails.
 
-1. **If M1 active** (can't classify novel quantities): Interventions 1, 6, or 10.
-   Install the criterion, not more examples.
+**When to avoid:** Student is 14+ and has basic physics vocabulary — the scenario
+may feel too simple and produce disengagement. Student who explicitly wants a
+mathematical or technical explanation.
 
-2. **If M2 active** (speed = velocity): Interventions 2 or 7.
-   Make the speed/velocity gap personally consequential.
-
-3. **If M3 active** (direction is absolute/arrow-only): Intervention 5.
-   Walking the path makes direction about how numbers combine, not about arrows.
-
-4. **If M4 active** (treats magnitude as the real value): Interventions 3, 4, 8, or 9.
-   All four make ignoring direction produce a wrong or unusable answer.
-
-5. **If no prior explanation tried**: Intervention 1 (the default opening) or
-   Intervention 10 (for young or anxious learners).
-
-6. **If the student has failed the first explanation**: Do NOT use the same mental
-   model. Pick from a different row in this table. The failure means the mental
-   model didn't attach — a paraphrase of the same model will not attach either.
-
-7. **After any explanation succeeds**: Probe with a novel quantity (one not used in
-   any explanation given). If the student can classify it using the criterion, the
-   concept is operative. If they can only recall the examples from the explanation,
-   M1 is still latent.
+**Naturally followed by:** SV-06 (Sorting Game) to test whether the criterion is
+operative; or simple classification questions using the test ("does this point?").
+If this intervention fails, check `phys.meas.units` before retrying `phys.meas.scalars-vectors`.
 
 ---
 
-## Authoring Notes
+## Teaching Decision Graph
 
-These interventions were written against the constraint that each must reach the
-direction criterion from a fundamentally different *starting intuition*:
+### Intervention Index
 
-- Intervention 1 starts from *incompleteness of language*
-- Intervention 2 starts from *daily information consumption*
-- Intervention 3 starts from *spatial navigation*
-- Intervention 4 starts from *physical prediction failure*
-- Intervention 5 starts from *embodied measurement*
-- Intervention 6 starts from *self-generated classification*
-- Intervention 7 starts from *interrogating what you already said*
-- Intervention 8 starts from *historical professional necessity*
-- Intervention 9 starts from *engineering design consequence*
-- Intervention 10 starts from *most primitive sensory experience*
+| ID | Title | Strategy | CPA | Bloom | Duration | Primary Misconception |
+|---|---|---|---|---|---|---|
+| SV-01 | The Incomplete Sentence | Everyday Life Story | Concrete | Understand | 3–5 min | M1 |
+| SV-02 | The Weather Forecast | Real-world Observation | Concrete→Rep | Understand | 4–6 min | M2 |
+| SV-03 | The Treasure Map | Analogy | Representational | Understand | 4–5 min | M4 |
+| SV-04 | Two People, One Number | Visual Mental Picture | Concrete→Rep | Understand→Apply | 4–6 min | M4 |
+| SV-05 | The Three-Step Walk | Simple Experiment | Concrete | Apply | 5–8 min | M3 |
+| SV-06 | The Sorting Game | Guided Discovery | Abstract | Analyze | 6–10 min | M1 |
+| SV-07 | The Interrogation | Socratic Dialogue | Abstract | Analyze→Evaluate | 5–8 min | M2 |
+| SV-08 | The Ship's Navigator | Historical Discovery | Rep→Abstract | Understand→Analyze | 5–7 min | M4 |
+| SV-09 | The Structural Engineer | Engineer's Perspective | Abstract→Transfer | Apply→Analyze | 5–7 min | M4 |
+| SV-10 | Hot and Cold Don't Point | Child-friendly | Concrete | Remember→Understand | 3–5 min | M1 |
 
-No two interventions share a starting intuition. This is the property that makes
-the library useful: when one mental model fails to attach, the student has not
-exhausted the concept — they have exhausted one entry point.
+### Recovery Graph — Complete
 
-The library is exhausted only when all ten entry points have been tried.
-In practice, mastery is achieved from the first or second well-matched explanation.
+| If this intervention fails → | Try next |
+|---|---|
+| SV-01 | SV-10 (simpler sensory entry) · then SV-06 (generate criterion) |
+| SV-02 | SV-01 (language-based entry) · or SV-10 (younger learner) |
+| SV-03 | SV-05 (embodied, not spatial-imaginative) · then SV-04 |
+| SV-04 | SV-05 (embodied; no force-cancellation reasoning required) |
+| SV-05 | SV-01 (language-based entry point instead of embodied) |
+| SV-06 | SV-01 (provide criterion directly; discovery approach failed) |
+| SV-07 | SV-04 (concrete visual consequence) · then SV-02 (ground M2) |
+| SV-08 | SV-04 (immediate visual; historical story didn't transfer) |
+| SV-09 | SV-04 (same M4 target, no engineering context required) |
+| SV-10 | Prerequisite check — address `phys.meas.units` before retrying |
+
+### Misconception → Intervention Map
+
+| Active Misconception | Primary | Secondary | Tertiary |
+|---|---|---|---|
+| M1 — list-recall | SV-01 · SV-10 · SV-06 | — | — |
+| M2 — speed = velocity | SV-02 · SV-07 | — | — |
+| M3 — direction absolute | SV-05 | — | — |
+| M4 — magnitude-only | SV-03 · SV-04 · SV-08 · SV-09 | — | — |
+| None detected | SV-01 (default) · SV-10 (young/anxious) | SV-06 (curious) | — |
+
+### Starting Intuition Map (no two interventions share an entry point)
+
+| Intervention | Starting Intuition |
+|---|---|
+| SV-01 | Incompleteness of language |
+| SV-02 | Daily information consumption |
+| SV-03 | Spatial navigation |
+| SV-04 | Physical prediction failure |
+| SV-05 | Embodied measurement |
+| SV-06 | Self-generated classification |
+| SV-07 | Interrogating what you already said |
+| SV-08 | Historical professional necessity |
+| SV-09 | Engineering design consequence |
+| SV-10 | Most primitive sensory experience |
+
+### Retrieval Tag Index
+
+| Tag | Interventions |
+|---|---|
+| `first-explanation` | SV-01, SV-02, SV-03, SV-05, SV-06, SV-07, SV-09, SV-10 |
+| `recovery` | SV-04 |
+| `second-explanation` | SV-04, SV-06, SV-08, SV-09 |
+| `recovery-from-zero` | SV-10 |
+| `M1-recovery` | SV-01, SV-06, SV-10 |
+| `M2-recovery` | SV-02, SV-07 |
+| `M3-recovery` | SV-05 |
+| `M4-recovery` | SV-03, SV-04, SV-08, SV-09 |
+| `child` (8–12) | SV-01, SV-03, SV-05, SV-10 |
+| `teen` (12–18) | SV-01–SV-09 |
+| `adult` | SV-02, SV-04, SV-07, SV-08, SV-09, SV-10 |
+| `low-confidence` | SV-01, SV-10 |
+| `high-confidence` | SV-07 |
+| `voice-lesson` | SV-01, SV-03, SV-04, SV-05, SV-06, SV-07, SV-10 |
+| `classroom` | SV-01, SV-04, SV-05, SV-06, SV-07, SV-10 |
+| `self-study` | SV-02, SV-06, SV-08, SV-09, SV-10 |
+| `kinaesthetic-learner` | SV-05 |
+| `visual-learner` | SV-02, SV-04 |
+| `analytical-learner` | SV-06, SV-07 |
+| `curious-learner` | SV-06, SV-08 |
+| `technical-learner` | SV-09 |
+| `aspiring-engineer` | SV-09 |
+| `criterion-test` | SV-06 |
+| `prerequisite-check-on-failure` | SV-10 |
+| `zero-prior-knowledge` | SV-01, SV-10 |
+
+---
+
+## Authoring Notes — v2.0 Standard
+
+This file is the canonical implementation of the Teaching Content Library v2.0 format.
+The metadata structure here is the permanent standard for every future TCL asset.
+
+**What makes this format a decision graph, not a list:**
+
+Every intervention knows:
+1. Its own identity and teaching metadata
+2. What it is doing pedagogically (mental model, prerequisite knowledge, cognitive load)
+3. What success and failure look like (concrete observable signals)
+4. Where to route next in both cases (never loops, always progresses)
+5. Its retrieval tags for AI selection
+6. When it should be chosen and when it should be avoided
+
+**The non-duplication invariant:**
+No two interventions share a starting intuition. When one fails, the next candidate
+addresses the same concept from a different root. The Teaching Engine navigating this
+graph never repeats the same mental model — only the same destination.
+
+**The prerequisite-check rule:**
+If SV-10 fails (the simplest possible intervention), the issue is the prerequisite
+concept (`phys.meas.units`), not this concept. The Teaching Engine must route to
+the prerequisite rather than continuing to attempt interventions for this concept.
 
 ---
 
 *CANDIDATE ASSETS — pending integration into `docs/curriculum/blueprints/phys.meas.scalars-vectors.md`*  
 *All assets grounded in EB Concept Entry v1.0 misconception library and explanation library.*  
-*Do not modify the blueprint until these have been validated against student sessions.*
+*Teaching scripts unchanged from v1.0. All metadata added in v2.0 upgrade.*  
+*This format is the permanent Teaching Content Library standard for all future Physics concepts.*
