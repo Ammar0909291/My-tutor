@@ -124,3 +124,67 @@ returns hungry. The plan's unused material is tomorrow's OPEN.
   sessions of evidence is stale — re-derived from the current ledger,
   not patched. The learner model is the source of truth; the plan is a
   cached view of it.
+
+## 8. Session boundaries in an asynchronous medium (added under red-team review)
+
+Everything above — the session shape, every per-session budget (2
+visible failures; lesson one's budget of 1; one failure state per
+session; question ceilings), the protected CLOSE, the summit-ending —
+is defined against "the session" as a unit. A live human tutor gets
+that unit for free: the lesson has a room, a clock, and a goodbye. This
+product does not. It is an open-ended chat: the learner can leave
+mid-CORE without a word, return in twenty minutes or three weeks, and
+nothing in the medium marks where one session ended and another began.
+Before this section, no file defined the boundary — which silently made
+every budget above unmeasurable and every CLOSE optional. Three rules
+close the gap:
+
+**Rule 1 — the boundary is an inactivity gap, and it is generous.**
+A session ends when the learner has been silent past a boundary
+threshold — as a default, ~30 minutes of inactivity, personal-attention-
+span-scaled (`../student-state/05 §4`); a return inside the threshold is
+the SAME session (a bathroom break, a dinner interruption — budgets and
+state continue exactly where they were, and the tutor does not restart
+or re-greet, which would be the invisible-restart anti-pattern at
+micro-scale). A return past it is a NEW session: budgets reset, the
+session machine re-enters at OPENING, and the gap-length table
+(`../placement/06 §2`) governs what that OPENING contains from 3 days
+upward. The threshold errs generous because the failure modes are
+asymmetric: treating one session as two costs a redundant greeting;
+treating two sessions as one carries yesterday's spent affect budget
+into a learner who has slept, recovered, and deserves a fresh one.
+
+**Rule 2 — an abandoned session's CLOSE is a debt, paid first at the
+next return.** When a learner vanishes mid-session, the CLOSE — the
+named win, the forecast, the open loop — never ran. Its duties do not
+evaporate; they transfer to the next session's OPENING, which begins by
+closing the previous session retroactively, in one breath, before
+anything else: "last time you nailed the tricky one with the unlike
+denominators — that's where we pick up." This is the greeting-with-
+continuity the OPENING already requires (01 §2), pointed deliberately
+at the unclosed session's banked material. What it must never be: an
+interrogation of the disappearance ("what happened? you just left!"),
+which converts an ordinary life interruption into an account the
+learner owes — the fastest way to teach them that leaving has a social
+cost and returning has a toll.
+
+**Rule 3 — a failure-then-vanish is flagged, and the return opens with
+an engineered win.** The one genuinely dangerous abandonment is the
+learner who disappears immediately after a visible failure or a
+failure-state utterance: their session ended, unilaterally, on exactly
+the note Universal Principle 14 exists to prevent — and the tutor had
+no chance to run the ending protocol. The session log marks this
+(`../first-lesson/08 §2` already collects abandonment-mid-session as a
+feedback signal; this rule adds the state it must carry: WHAT the last
+event before the vanish was). At the next return, before any due
+review, before the retro-close, before anything: one unmissable,
+genuine success in the first exchanges — Principle 14 applied
+retroactively at the earliest moment the tutor gets. The learner's last
+memory of the subject is currently the failure; the first minutes of
+the return exist to overwrite it. If the learner does NOT return within
+the resumption windows, that flagged failure-then-vanish is among the
+highest-severity signals the feedback loop holds — a learner whose last
+recorded event is a failure and whose next event is nothing is the
+single clearest churn signature an education product produces, and
+every one of them is an authoring flag on whatever concept and step
+produced the terminal failure.

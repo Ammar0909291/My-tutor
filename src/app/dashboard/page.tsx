@@ -6,17 +6,14 @@ import { DashboardV2 } from '@/components/dashboard/v2/DashboardV2'
 import { getDashboardV2Data } from '@/lib/dashboard/getDashboardV2Data'
 
 export default async function DashboardPage({ searchParams }: { searchParams?: { mode?: string } }) {
+  console.log('[D1] auth start')
   const session = await auth()
+  console.log('[D2] auth complete', { id: session?.user?.id ?? 'MISSING' })
+
   if (!session?.user?.id) redirect('/auth/login')
   const userId = session.user.id
 
-  // MED-1 (onboarding-redirect flakiness on refresh): treat the existence of a
-  // Profile as the single source of truth for "is onboarded", and read it with
-  // withRetry so a transient DB hiccup right after onboarding doesn't redirect a
-  // freshly-onboarded user back into the wizard. If a Profile exists but the
-  // onboardingCompleted flag is stale, self-heal it — this is the same auto-heal
-  // pattern /coach and /learn use, so no two pages disagree on what "onboarded"
-  // means and bounce the user between /dashboard and /onboarding on a hard refresh.
+  console.log('[D3] user fetch start')
   const user = await withRetry(() => prisma.user.findUnique({
     where: { id: userId },
     select: {
@@ -24,34 +21,21 @@ export default async function DashboardPage({ searchParams }: { searchParams?: {
       profile: { select: { userType: true, educationBoard: true, grade: true } },
     },
   }))
+  console.log('[D4] user fetch complete', { found: !!user, profile: !!user?.profile })
+
   if (!user?.profile) redirect('/onboarding')
   if (!user.onboardingCompleted) {
     await withRetry(() => prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } }))
   }
-  const profile = user.profile
 
-  // Cross-system navigation (Stabilization Sprint): a SCHOOL_STUDENT can opt
-  // into viewing the Library/General experience via ?mode=library without
-  // changing their stored profile, curriculum, or progress data. Default
-  // landing behavior (no query param) is unchanged. Dual Learning Modes: a
-  // GENERAL_LEARNER who has opted into School Mode (board/grade set without
-  // changing userType) keeps Library as their default landing experience
-  // and enters School Mode explicitly with ?mode=school.
   const wantsLibrary = searchParams?.mode === 'library'
   const wantsSchool = searchParams?.mode === 'school'
   const modeOverride = wantsLibrary ? 'library' : wantsSchool ? 'school' : undefined
 
-  // Both Library Mode and School Mode render through the same DashboardV2
-  // shell — getDashboardV2Data branches internally on userType/modeOverride
-  // and attaches school-only content (navigator action, daily plan,
-  // academic journey, exam readiness) via the optional `school` field. The
-  // dashboard shell, navigation, and visual identity never change between
-  // modes — only the content cards inside it do.
+  console.log('[D5] dashboard data start', { modeOverride })
   const data = await getDashboardV2Data(userId, modeOverride)
+  console.log('[D6] dashboard data complete')
 
-  // School Mode entry banners intentionally hidden from the UI (presentation
-  // layer only — /dashboard?mode=school and School Mode itself are untouched
-  // and remain reachable by direct URL for already-enrolled users).
-
+  console.log('[D7] render start')
   return <DashboardV2 data={data} />
 }

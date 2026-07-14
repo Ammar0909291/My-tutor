@@ -218,6 +218,414 @@
   — unexplainable decision = invented decision; six-learner audit passes with one architecture;
   honest limits: surfaces-but-never-diagnoses disabilities). Knowledge only — no runtime/schema/
   curriculum changes.
+- Delivery 9 (2026-07-10, in-repo): **Human Tutor Validation & Gap Audit**,
+  `educational-brain/validation/` — comprehensive audit of Deliveries 1–8 as one integrated
+  system. Six documents: (1) three complete session simulations (fearful beginner
+  eng.phonics.letter-sound-correspondence / misconceiving adult math.arith.fractions / bored
+  advanced phys.mech.newtons-first-law) with every decision traced turn-by-turn to its source
+  file and section; (2) four failure replays (English lesson one collapse, invisible restart,
+  assessment-first teaching, confidence collapse) — 3 fully preventable by in-tree knowledge,
+  1 preventable only after Delivery 1 transcription; (3) full AI-dependency inventory:
+  52 retrievable rule layers confirmed, 13 partially-retrieved layers each depending on
+  Deliveries 1–2 pending transcription, 3 authorized residue categories (surface wording /
+  voice rendering / novel utterances); the selector problem documented — the action selector
+  (decision-engine/04) is a complete 7-filter procedure with empty libraries for 99.8% of
+  concepts; (4) duplication audit: 5 proper-layering findings confirmed, 2 real redundancy
+  issues (latency×correctness grid and Universal Principle inline restatements, both resolvable
+  at Delivery 1/2 transcription time), 4 minor cross-reference gaps; (5) 10 missing human
+  teaching science domains not yet authored — relationship capital (HIGH, every session), worked
+  example design rules (HIGH), vocabulary pre-teaching (MEDIUM), error analysis design (MEDIUM),
+  metacognitive strategy instruction (MEDIUM), interleaved practice design (MEDIUM), spaced
+  retrieval practice design (MEDIUM), wait-time calibration (HIGH FREQUENCY), pre-assessment
+  design (LOW), explanation construction rules (LOW); (6) highest-ROI recommendation:
+  transcribing Deliveries 1–2 into `foundations/` and the nine planned libraries — the Recovery
+  Engine alone has 6 file dependencies; the Universal Teaching Principles are cited in every
+  file but their content is nowhere; the action selector's filters 2–6 all reference pending
+  libraries. Success criteria defined: re-run the three session simulations after transcription
+  and confirm the "Gaps surfaced" list shrinks to surface wording only. Knowledge only — no
+  runtime/schema/curriculum changes.
+- Delivery 10 (2026-07-10, in-repo): **Student Placement & Category Progression Engine**,
+  `educational-brain/placement/` — the permanent rules for WHERE teaching begins; sits between
+  curriculum (WHAT) and the teaching engine (HOW). Eight documents: placement foundations (the
+  placement law; two placement errors and their asymmetry; the human-tutor model; scope of the
+  engine); the self-report trust model (systematic under/over-reporting mechanics by age and shame;
+  trust calibration table; three-bracket verification protocol; adjustment without insult;
+  miscalibration-direction as a persistent learner model field); the placement protocol (category
+  spine search via binary search on cut-nodes from assessment/02; per-branch frontier records;
+  modes A/B/C; patchy-history flag; what placement does NOT do — no fake completions, no invented
+  prerequisites); category mastery definition (gate concepts AUTOMATIC + STABLE + one transfer
+  event = ANCHORED; ANCHORED/PROBABLE/UNCERTAIN/UNKNOWN confidence levels; the never-reteach law
+  — mastered categories never entered as teaching targets; decay ≠ demotion; FORGOTTEN ≠ UNKNOWN
+  — storage survives, cued-recovery is the treatment; asymmetry of earn vs. lose); the
+  progression engine (promotion criteria; the progression guarantee; demotion triggers — all three
+  must hold; regression repair targeting specific gate concepts only; just-in-time prerequisite
+  repair for patchy histories; multi-subject independence); resumption protocol (decay timeline
+  by gap length; warm-up protocol vs. reteaching; cascade-unlock expectation; re-placement from
+  high-water mark; the returning learner's emotional state); six full student simulations traced
+  (A: false-beginner, protective conservatism detected; B: false-advanced, Dunning-Kruger,
+  two-failure-budget downward search; C: returns after 14 months, cascade recovery, high-water
+  mark protocol; D: expert arithmetic / weak fractions, active misconception M1, never-reteach
+  for ANCHORED Categories 1-3; E: strong algebra/weak geometry, per-branch asymmetric placement;
+  F: adult 20-year gap, shame bias, informal-competence framing); vision + human-tutor validation
+  (all seven vision questions answered; remaining gaps: cut-node lists for non-math subjects,
+  just-in-time scheduling in lesson-planning engine, Expert level definition, multi-subject
+  session-choice rule). Knowledge only — no runtime/schema/curriculum changes.
+- **Architecture Audit** (2026-07-10, in-repo): `educational-brain/validation/
+  07-architecture-audit.md` — cross-system audit reading both Deliveries 1-10 and the
+  actual runtime code (route.ts, teaching-engine/index.ts, placement.ts, teachingStrategy.ts,
+  curriculum/route.ts, onboarding/route.ts) to compare authored Brain vs. actual runtime
+  behavior. Key finding: 0 of 52 authored retrievable layers are retrieved at runtime today —
+  the Brain and the runtime are parallel universes; no runtime path reads any file in
+  educational-brain/. decide() is school-mode-only in practice; all 35 strategy instructions
+  are hardcoded TypeScript strings; the AssetIdentity pipeline (ADR 14) is wired but carries
+  no authored content (assembleLesson() always returns null). 8 ranked AI-reasoning gaps,
+  human tutor micro-decision audit for 3 concepts, orchestration analysis (route.ts IS the
+  orchestrator — no new layer needed), and a 7-step priority order for closing the gaps.
+- **Migration Blueprint V1** (2026-07-10, in-repo): `docs/architecture/MIGRATION_BLUEPRINT_V1.md`
+  — the architectural connection plan from current runtime to full Educational Brain
+  execution. Full responsibility map (14 domains, intended vs. actual owner, gap per domain);
+  duplication inventory with single-owner resolution per pair; 7-phase runtime migration
+  roadmap (Phase 0: activate AssetIdentity with existing 3 concept entries, zero code; Phase 1:
+  first-lesson deterministic constraint block; Phase 2: sessionPhase state machine in
+  contextSnapshot; Phase 3: placement verification + structured `<!--SIGNAL-->` tag from the
+  LLM — the key mechanism that turns OBSERVE→CLASSIFY into code instead of AI re-inference;
+  Phase 4: POLICY asset family extending AssetIdentity to carry decision-matrix instructions;
+  Phase 5: unconditional decide() for Library mode; Phase 6: category progression via
+  categoryConfidence map; Phase 7: transcribe Deliveries 1-2); Library Mode full architecture
+  (per-step execution, LLM CAN/CANNOT boundary, School Mode dependency audit); category
+  progression reusing the KG's existing difficulty-tag hierarchy (no new hierarchy invented);
+  the continuous OBSERVE→THINK→ACT→WAIT loop mechanism. Every phase justified against "why
+  can this NOT be solved using something already in Git" — architecture only, no code written.
+  All 7 phases involving runtime/schema/route changes remain gated on the standing G1/G2
+  governance rule below (per-item user approval before implementation); Phase 7 (D1/D2
+  transcription) is knowledge authoring, not code, and is not G2-gated.
+- **Delivery 11** (2026-07-10, in-repo): the **Foundations Library** —
+  `educational-brain/foundations/`: the transcription of Delivery 1's four universal engines
+  (Recovery Engine, Adaptive Teaching Rules / "the D1 grid", Voice-First Learning Model, and
+  all 23 Universal Teaching Principles), cited by name and by number throughout the tree since
+  Delivery 3 but never before written down — identified by the Architecture Audit and
+  Migration Blueprint as the single highest-ROI remaining Brain-authoring gap (resolves the
+  largest set of dangling citations in the tree in one pass). Before authoring anything,
+  confirmed via reuse-first check that Delivery 1's originally-scoped "Canonical Per-Concept
+  Schema" item is already fully satisfied by `concepts/TEMPLATE.md` (Delivery 5) — not
+  re-authored, avoiding duplication. Contents: the Recovery Engine (base script library for
+  8 stuck-learner utterances, non-verbal distress protocol, the personalization hook into the
+  Emotional Model's recovery-speed/what-restores fields, and the relationship to the
+  escalation engine's 3-rung recovery-failure ladder); the Adaptive Teaching Rules (the
+  speed × correctness × confidence grid — fluent-mastery/FRAGILE/MISCONCEIVING/CONFUSED
+  quadrants — the 3-fluent-successes advance trigger, and an explicit finding that
+  teaching-engine/index.ts's `decide()` only partially and implicitly encodes this grid today,
+  lacking any speed/confidence signal — exactly the gap Migration Blueprint Phase 3's
+  structured signal tag is designed to close); the Voice-First Learning Model (4 detection
+  instruments — latency-vs-baseline, prosody, hesitation location, self-corrections — the
+  wait-time law, load-bearing-sentence rule, matched energy/mockery effect, register-never-
+  drops-on-error); and all 23 Universal Teaching Principles (11 reconstructed to match every
+  pre-existing numbered citation exactly — 1,2,3,5,8,9,14,17,19,22,23 — 12 authored for the
+  first time — 4,6,7,10,11,12,13,15,16,18,20,21 — each formalizing a rule the tree already
+  followed without a name, none invented without prior grounding). `educational-brain/README.md`
+  updated: Delivery 11 registered, `foundations/` moved from "planned" to "authored," the
+  planned `principles/` directory folded into `foundations/04` instead of created separately
+  (avoiding a single-document directory), Delivery 1/2 provenance notes corrected to reflect
+  what's now transcribed vs. still pending. Knowledge only — no runtime/schema/curriculum
+  changes. Continuous autonomous architecture mode in effect per 2026-07-10 standing
+  instruction: further iterations continue this loop (audit whole system → highest-ROI task →
+  reuse-before-create check → deliver → repeat) until Educational Brain architecture is
+  complete, an owner-only decision arises, or a genuine vision-level contradiction is found.
+- **Delivery 12** (2026-07-10, in-repo, same continuous-mode iteration as Delivery 11):
+  the **Teaching Action Library** — `educational-brain/teaching-actions/`: the
+  transcription of Delivery 2 §6, the 27-action catalog (6 families: SHOW, TELL, DO,
+  TEST-THINKING, ORGANIZE, SOCIAL) that the action selector (`decision-engine/04`'s
+  seven-filter funnel) dispatches into. Named independently by validation/03,
+  validation/06, and the Architecture Audit (Gap 1 of 8, ranked first) as the single
+  highest-remaining-ROI authoring gap: Filters 2, 4, and 6 of the selector cannot run at
+  all without this catalog, for any concept lacking a per-concept entry (currently 3 of
+  ~1,800 concepts across all subjects). Reuse-first check confirmed every action was
+  already referenced by name somewhere in the tree before this delivery (Demonstration,
+  Worked Example, Analogy, Drawing, Matching, Error Analysis, Game, Concept Map, Thought
+  Experiment, Role-Play, Prediction) — none redefined, all completed to the full 27 (5
+  SHOW / 4 TELL / 5 DO / 5 TEST-THINKING / 4 ORGANIZE / 4 SOCIAL) with knowledge-type
+  fit, setup-cost tier, and persona notes per action. Notable content: the chocolate-
+  covered-broccoli guard on Game (mastery must be re-verified outside the game skin
+  before certifying — direct citation from assessment/08); the stability guard on Error
+  Analysis (only plant a flaw once the correct schema is solid, or the flaw may be
+  learned); Matching's bidirectional-translation diagnostic (one-way success with
+  reverse failure names exactly what to teach next); Retrieval-Schedule Prompt as the
+  action populating session OPENING. Deliberately did NOT re-author the 12-persona
+  table (Delivery 2 §9, still `motivation/`, planned) or the Cognitive Load Engine's
+  intrinsic/extraneous/germane theory (Delivery 2 §5, still `cognitive-load/`, planned)
+  — avoided duplicating ownership of libraries not yet due. `educational-brain/README.md`
+  updated: Delivery 12 registered, `teaching-actions/` moved from planned to authored.
+  Knowledge only — no runtime/schema/curriculum changes.
+- **Chief Architect Review** (2026-07-10, in-repo, no files changed — verbal audit only):
+  a brutally honest 16-category scored review of Deliveries 1-12 (0-10 per category,
+  explicit "why not higher," specific delivery/file blamed per gap). Key scores: EB
+  completeness 4/10, teaching quality 2/10, reduction of AI reasoning 1/10 (0 of 52
+  layers retrieved), repo organization 7/10 (strongest area), overall architecture
+  4/10. Percentage estimates: EB architecture ~35% complete, runtime architecture
+  ~30%, runtime implementation ~12%, overall teaching system ~8-10%. Concept coverage
+  (3/1800, 0.17%) named as the single most damning number. Recommended parallel-track
+  next steps: Migration Blueprint Phases 0-3 implementation (G2-gated) + concept
+  coverage expansion + the 3 critical remaining libraries (misconceptions, mental
+  models, cognitive load), ranked above continuing to author lower-impact universal
+  engines (motivation, discovery, curiosity, transfer) in isolation.
+- **Delivery 13** (2026-07-10, in-repo, continuous-mode iteration): the
+  **Misconception Evolution Library** — `educational-brain/misconceptions/`: the
+  transcription of Delivery 2 §4. Selected via the continuous-mode protocol's single
+  question ("what is the single highest-impact weakness preventing a 9/10 Educational
+  Brain?") over the strongest competing candidate, raw concept-coverage expansion —
+  reasoning: one new concept entry helps only that concept; generic misconception
+  theory is a force multiplier for every misconception library ever written, and
+  expanding coverage without it first locks in inconsistent per-entry birth-type
+  logic. Reuse-first check (grepped every "birth type"/"regrowth"/"Delivery 2 §4"
+  citation before writing) found the taxonomy ~80% reconstructable from scattered
+  citations — birth types 1, 2, 4, 5, 6 already named with specific meaning across
+  `concepts/`, `decision-engine/05`, `assessment/08`; type 3 named only in
+  `student-state/03`'s regression-prior table with no explanation — the identical
+  pattern that made Universal Principles low-risk to formalize in Delivery 11.
+  Contents: all 6 birth types (overgeneralization, perceptual intuition, language
+  contamination, notation-induced, instruction-induced, analogy overextension) each
+  with generic mechanism, diagnostic signature, and new cross-subject examples beyond
+  the 2 already in the tree (English irregular verbs, ice density, "theory"
+  contamination, apostrophe notation, atomic indivisibility, the water-circuit
+  analogy) proving the taxonomy generalizes; a 7-question diagnostic decision
+  procedure for classifying a new misconception's birth type when authoring any of
+  the ~1,800 uncovered concepts; the full generic 7-step repair sequence
+  (elicit→commit→collide→replace→contrast→apply→re-probe) with per-birth-type
+  collision-design rules; the precise two-condition operational definition of
+  "burned collision"; and the metastasis-chain mechanism with a new just-in-time
+  chain-check trigger extending `placement/05`'s absent-prerequisite logic to
+  corrupted (ACTIVE-misconception) prerequisites. Deliberately did NOT restate
+  `student-state/03`'s ledger structure, status lifecycle, or regression-prior
+  table — referenced, not duplicated. `educational-brain/README.md` updated:
+  Delivery 13 registered, `misconceptions/` moved from planned to authored.
+  Knowledge only — no runtime/schema/curriculum changes. Continuous mode continues:
+  next iteration re-abstracts the whole Brain again and re-asks the single highest-
+  impact-weakness question before selecting further work.
+- **Delivery 14** (2026-07-10, in-repo, continuous-mode iteration):
+  `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` —
+  English's true zero-prerequisite entry node (`requires: []` in the live KG).
+  Re-abstraction found `concepts/COVERAGE.md`'s own expansion protocol ranks
+  "placement entry points first," above cut-nodes and misconception hubs —
+  yet all 3 Delivery 5 seed entries (fractions, Newton's First Law,
+  letter-sound-correspondence) are cut-nodes/misconception hubs, not entry
+  points. This concept is the exact node `first-lesson/07 §1` names as the
+  origin of the platform's own documented English-lesson-one failure — the
+  single most evidence-grounded coverage gap in the tree. Chosen over
+  continuing the universal-engine track (Mental Model Library, D2 §1):
+  citation check found Mental Models far thinner in scattered citations than
+  Misconceptions was pre-Delivery-13 (much of its core insight already
+  absorbed into Universal Principle 6), while concept coverage remained the
+  most quantifiable gap and 3 major force-multiplier engines (Foundations,
+  Teaching Actions, Misconceptions) had just become available to validate
+  against genuinely new content. Applied the new misconception birth-
+  taxonomy diagnostic procedure to a concept for the first time since it was
+  authored, surfacing 3 new misconceptions (language contamination on the
+  word "sound" itself — Type 3; syllable/phoneme-counting overgeneralization
+  — Type 1; rhyme-only "same sound" from rhyme-first instruction — Type 5)
+  as a genuine stress-test of Deliveries 11-13 against new content. Full
+  entry at the seed quality bar (all TEMPLATE.md required sections).
+  `concepts/COVERAGE.md` updated (english now 2/216, delivery history
+  recorded); `eng.phonics.print-concepts` (the KG's other zero-prerequisite
+  entry node) recorded as the immediate next coverage priority, not
+  authored this delivery. Knowledge only — no runtime/schema/curriculum
+  changes. Continuous mode continues.
+- **Correction 1 — Voice Channel Reality** (2026-07-10, in-repo, critical-
+  review iteration): `educational-brain/foundations/03-voice-first-
+  learning-model.md §7` added, extending Delivery 11 rather than a new
+  delivery. Critical-review mode ("assume every prior decision may be
+  wrong, attempt to break it") checked whether the Voice-First Learning
+  Model's four instruments (latency, prosody, hesitation location, self-
+  corrections) actually reach the teaching decision layer, since this
+  concept is required in every future concept entry's "Voice teaching"
+  section. Verified against the live runtime
+  (`src/components/learn/LessonScreen.tsx`, `src/app/api/stt/route.ts`):
+  the product genuinely has voice input/output (MediaRecorder → Whisper
+  STT via Groq / browser SpeechRecognition, plus TTS) — but the STT
+  endpoint requests plain `json` (bare text) from Whisper and returns
+  only `{ text }`, discarding every timing/prosodic signal before
+  `route.ts` ever sees the turn. All four instruments are therefore
+  unavailable to the decision layer today in EITHER channel — a sharper
+  finding than this tree's usual "not yet retrieved" gap, since this is
+  signal captured client-side and then actively discarded by one
+  implementation choice. Added an honest per-instrument availability
+  table, a cost-ranked recovery list (switching to Whisper's
+  `verbose_json` format recovers segment timestamps at zero
+  infrastructure cost) for future Migration Blueprint runtime work, and
+  named the Blueprint's `<!--SIGNAL-->` tag explicitly as an LLM-self-
+  report substitute for this signal, not equivalent to real
+  instrumentation. `concepts/TEMPLATE.md` updated so future concept
+  authors point to this section once rather than re-litigating the gap
+  per entry; Delivery 14's phonemic-awareness entry named as the
+  corrected example, not rewritten (same no-duplication rule).
+  Knowledge-correction only — implements nothing, informs future runtime
+  work. Continuous mode continues: next iteration re-abstracts and
+  re-asks the single highest-impact-weakness question, per the
+  standing critical-review protocol.
+- **Correction 2 — Decision Matrix Silent Cells** (2026-07-10, in-repo,
+  critical-review iteration): `educational-brain/decision-engine/03-
+  decision-matrix.md §6, §8` extended, not a new delivery. Critical
+  review found the matrix silently left 5 cells unhandled: CONFUSED
+  during ASSESSMENT, and CONFUSED/GUESSING/MISCONCEIVING/FRAGILE during
+  TRANSITION/CLOSING — every other cognitive/drive state is named in
+  both sections; these were simply absent, a genuine missing-decision-
+  path gap rather than an intentional omission. Added rules for all 5:
+  CONFUSED-during-ASSESSMENT aborts the item without scoring it (mirrors
+  GUESSING's existing non-decisive-item rule) and routes to the
+  escalation engine before resuming; the 4 CLOSING cells each honor
+  CLOSING's existing "never sacrificed to content" protection by turning
+  the unresolved state into the close's open loop or next-session queue
+  rather than attempting resolution or misrepresenting an unresolved
+  state as settled. Knowledge-correction only — no runtime/schema/
+  curriculum changes. Continuous critical-review mode continues.
+- **Correction 3 — Reading-Load Signature** (2026-07-10, in-repo, red-team
+  iteration): `educational-brain/student-state/05-behaviour-profile.md §7`
+  added, extending Delivery 8. Red-team review ("what would make this fail
+  for 100,000 real students?") found the product's primary delivery medium
+  is dense text while dyslexia-like reading difficulty had only 3 passing
+  mentions in the whole tree — the digital twin's "surfaces but never
+  diagnoses" limit had no authored consequence after surfacing. Added a
+  detection signature (cross-modal check from assessment/06 §4: performance
+  splits by channel not content; trigger = errors correlating with text
+  LENGTH not content difficulty, distinguished from the "skips
+  instructions" habit) and 5 standing adaptations reusing existing
+  machinery only (voice channel default via existing TTS/STT; burst limits
+  tighten one register step while register never drops; oral assessment
+  default with the accommodate-vs-measure boundary honored for English
+  decoding targets; load-bearing sentence never text-only; English-subject
+  collision resolved by connecting first-lesson/07's oral-first entry
+  nodes to the accommodation boundary). Signature-never-diagnosis;
+  no new library; knowledge-correction only. Red-team mode continues.
+- **Correction 4 — Session Boundaries in an Asynchronous Medium** (2026-07-10,
+  in-repo, red-team iteration): `educational-brain/decision-engine/07-lesson-
+  planning-engine.md §8` added, extending Delivery 7. Red-team finding: every
+  per-session budget in the tree and the protected CLOSE are defined against
+  "the session" as a unit, but the product is an open-ended async chat and no
+  file defined the boundary — making every budget unmeasurable and every CLOSE
+  optional (learner can vanish mid-CORE right after a failure; Universal
+  Principle 14 unenforceable unilaterally). Three rules added: (1) boundary =
+  generous inactivity gap (~30 min default, attention-span-scaled; within =
+  same session/budgets continue/no re-greet; past = new session/budgets reset/
+  placement/06 §2 gap table governs 3d+); (2) an abandoned session's CLOSE is
+  a debt paid first at next return (retro-close via the OPENING's existing
+  continuity greeting, never an interrogation of the disappearance);
+  (3) failure-then-vanish flagged with the last-event state; the return opens
+  with an engineered win before anything else; flagged failure-then-vanish
+  with no return = the clearest churn signature the product produces and an
+  authoring flag on the concept that produced the terminal failure.
+  Knowledge-correction only. Red-team mode continues.
+- **First-Principles Review** (2026-07-10, verbal only, no files — treated as
+  standing architectural truth unless proven wrong): answered "why would a
+  student pay for My Tutor when perfect free LLMs exist?" Four structural
+  moats no general assistant can have: (1) the incentive stance — assistants
+  are structurally loyal to present comfort, a tutor to future competence
+  (withholds answers, schedules struggle, refuses hollow advancement;
+  enforcement must live in code, not prompts); (2) verified learner state —
+  manufactured by deliberately scheduled instrumented probes, not recalled
+  from transcripts; (3) cross-learner teaching evidence — which repairs/
+  probes/actions measurably work, accumulated only by the venue where
+  learning happens, in no training corpus; (4) proactive scheduling.
+  Verdict: "the Educational Brain is the moat" is wrong as written — the
+  Brain is the BLUEPRINT for the instrument that manufactures the moat;
+  explanation/analogy prose is a depreciating asset (future-generatable);
+  hand-authoring 1,800 full prose entries would race commoditization — the
+  durable part of an entry is its instrument sections. Priorities reordered:
+  evidence capture wiring > stance enforcement in code > proactive spine >
+  probe/misconception skeletons for cut-nodes > capture-measure-rank assets;
+  further prose-only universal engines PAUSED.
+- **Delivery 15 — Evidence Architecture** (2026-07-10, in-repo, Phase 2):
+  `educational-brain/validation/08-evidence-architecture.md` + quality-bar
+  amendment in `concepts/COVERAGE.md`. The First-Principles Review applied
+  to the whole tree: moat classification per library (assessment/
+  misconceptions/student-state/placement/first-lesson HIGH; teaching-actions
+  MIXED — catalog is prose, moat is the outcome table it enables; concepts
+  SPLIT — instrument sections HIGH, prose sections LOW; conversation-engine/
+  principles prose LOW-but-retained as enforcement spec); unified
+  per-component evidence contracts (consolidating decision-engine/08 §3,
+  student-state/06 §7, escalation law 3, first-lesson/08 — plus the one
+  addition: decisions must be JOINED to next-turn consequences); 8 missing
+  evidence loops (recovery aggregation, anti-analogy growth from Type-6
+  births, per-concept decay norms, action outcome table, decision-consequence
+  join, placement prior retuning, curriculum-feedback-as-events, voice
+  forfeiture); authoring pivot — INSTRUMENTED SKELETON is now a valid
+  concept-entry class (instruments at seed quality, prose deferred; labeled,
+  separate coverage column; rich-prose-no-instruments still invalid);
+  entries reframed as bundles of falsifiable predictions; the
+  million-student answer (7 bodies of accumulable-only knowledge).
+  Knowledge only — no runtime/schema/curriculum changes.
+
+- **WAVE 0 IMPLEMENTED** (2026-07-10, commits 8e1bec5 + 131fa9e, G2 satisfied by
+  explicit owner Wave-0 instruction; Brain frozen per the Final Sign-off, faithful
+  implementation only — every change cites its Brain rule):
+  (1) AssetIdentity activated — `src/lib/teaching/assets/brainSeedAssets.ts` (data-only
+  transcription of the 4 authored concept entries: 9 EXPLANATION + 5 PROBE assets with
+  distractor-mapped misconceptionIds, every item citing its educational-brain source
+  section) + `scripts/brain/seed-knowledge-assets.ts` (`npm run seed:brain-assets`;
+  idempotent; KG-validates conceptIds before writing; default ACTIVE as HUMAN_CURATOR
+  transcriptions of the frozen audited Brain, `--draft` for the admin-review flow,
+  `--dry-run` DB-free; seed canonicalSlug convention appends `:gradeBand` so each band
+  is its own lineage under ADR 14 §4.1). Once seeded, assembleLesson() serves authored
+  content (`provider: 'memory'`) for those concepts.
+  (2) Evidence capture — `src/lib/teaching/signals.ts` (`<!--SIGNAL-->` per Blueprint
+  Phase 3: correctness/confidence/confusion/phrase/probe; parsed+stripped before all
+  other tag parsers; fabrication forbidden for non-answers); route.ts writes
+  PROBE_OUTCOME (correctness × server-measured latency from message timestamps —
+  foundations/03 §7's one genuine text-channel instrument, captured at ingress — ×
+  confidence) and MISCONCEPTION_DETECTED (verbatim phrase) per validation/08 §2;
+  signal rows + TeachingStrategyEvent rows make the L5 decision-consequence join
+  queryable.
+  (3) First-lesson protocol — `src/lib/teaching/firstLessonGuard.ts`: first-lesson/02
+  §2 hard limits, 04 §1 flow, 03 behaviour, 07 subject adaptations (English ORAL/
+  "phoneme" banned; math counting-with-meaning; physics "SI" banned), foundations/03
+  §5 adult-register guard; fires only for Library beginners at lesson 1 with zero
+  completions; injected LAST (overrides advisory blocks).
+  (4) Placement verification — `src/lib/teaching/placementVerification.ts`: pure
+  three-bracket machine (below→at→above, nerve-settler first per assessment/02 §2;
+  affect budget 2 failures §6; DOWNWARD-only silent adjustment per placement/01 §2 +
+  02 §4 — StudentProgress.currentLesson moves to levelBelow()'s entry order, no fake
+  completions); pending-probe tracking separates ask-turn from answer-turn (no
+  double questions); state in contextSnapshot.placementVerification. Scope:
+  unverified intermediate/advanced Library learners, KG subjects, zero completions.
+  (5) Decision Engine for Library — ENABLE_LIBRARY_CONCEPT_TRACKING now DEFAULTS ON
+  (`=0` reverts): concept seeding + snapshot persist run for Library, so decide()
+  fires and TEACHING ENGINE DECISION reaches Library prompts (Blueprint Phase 5,
+  ADR 08 §4a). School Mode paths untouched throughout.
+  Validation: suite 655 passed/1 skipped (25 new tests), tsc clean. No schema
+  changes. No architecture defects found requiring a Brain unfreeze; one flow gap
+  (ask-turn vs answer-turn) was an implementation concern, solved in implementation.
+
+- **CTO ITERATIONS 1–3 + ENGINEERING STOP DECLARED** (2026-07-10, commits e3d46cb,
+  5222e9d, 6d89ecf; continuous-CTO mode, runtime lane only — no Brain authoring):
+  (1) Library mastery evidence loop — the SIGNAL is Library's conversational
+  checkpoint: writes TopicProgress with school-checkpoint semantics (65/25, never
+  COMPLETED/MASTERED — conversational evidence can't certify gates per assessment/05
+  §3); confident-wrong writes MistakeRecord('signal_confident_wrong') routing the D1
+  grid's dangerous quadrant through the ALREADY-running detectMisconceptions()→
+  MISCONCEPTION_REPAIR machinery; hesitant-wrong deliberately writes none (fast=
+  misconception, hedged=guess); TEACHING ENGINE DECISION block carries a deterministic
+  LAST-ANSWER READ overlay (fast-wrong→elicit/commit/collide; hesitant-correct→FRAGILE
+  hold) supplying the speed/confidence read the frozen decide() lacks.
+  (2) Session lifecycle state machine — `src/lib/teaching/sessionLifecycle.ts`:
+  boundary = 30-min inactivity gap from real message timestamps (07 §8 rule 1);
+  fresh episode → OPENING block (engineered win FIRST when previous episode ended on
+  failure [retroWinOwed, §8 r3] → one-breath continuity → due reviews BEFORE new
+  content); OPENING→CORE on first answered signal; CORE→CLOSING at affect budget
+  (2 failures; 1 lesson-one); CLOSING block = close-on-a-win script (07 §6). Episode
+  rides the existing snapshot persist.
+  (3) Deterministic recovery triggering — `src/lib/teaching/recoveryGuard.ts`:
+  two-tier utterance detection (strong identity utterances anywhere; mild ones only
+  when message ≤80 chars IS the utterance), authored scripts retrieved from
+  foundations/01 §3 + first-lesson/05 deltas, injected LAST preempting everything
+  (03 §0, P5, P20); suppresses placement calibration AND the asset memory path on
+  recovery turns; LEARNER_FEEDBACK `recovery:<state>` evidence = L1 writer side.
+  Suite 690 passed/1 skipped, tsc clean throughout. **STOP CONDITION DECLARED
+  REACHED**: every remaining improvement candidate fails the no-real-data constraint
+  (signal calibration, probe quality, decay curves, mastery thresholds, spacing,
+  session-gap tuning, placement priors L6, evidence-loop READERS which would read
+  empty tables, further decision-matrix cells — those fire on states like BORED/
+  FATIGUED whose detection needs behavioral baselines) or is gated on content
+  production (concept coverage, non-math cut-nodes) or owner decisions (data
+  governance for minors' verbatim capture; snapshot optimistic-concurrency hygiene
+  pass). Next stage of improvement must come from production learning data.
 
 ## Educational Brain — architecture (frozen 2026-06-30, read before any teaching-decision work)
 - **Authoritative reference (read this FIRST)**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` —

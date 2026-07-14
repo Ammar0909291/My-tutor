@@ -46,6 +46,13 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { sessionId, message } = schema.parse(body)
 
+    // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
+    // learner response latency is measured server-side from message
+    // timestamps — the one instrument the text channel genuinely provides
+    // (foundations/03 §7 availability table). Captured at ingress, before
+    // prompt-assembly DB work can contaminate the reading.
+    const turnReceivedAt = Date.now()
+
     // Sprint AP: cap history at the most recent messages instead of loading the
     // whole session. 30 messages ≈ 15 exchanges is more context than the model
     // meaningfully uses, and long-running sessions (100+ messages) were paying
@@ -73,6 +80,13 @@ export async function POST(req: Request) {
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
     const lastSuccessfulTeachingStyle = typeof snapshot?.lastSuccessfulTeachingStyle === 'string' ? snapshot.lastSuccessfulTeachingStyle : null
     const snapshotCurrentConceptId = typeof snapshot?.currentConceptNodeId === 'string' ? snapshot.currentConceptNodeId : null
+    // Wave 0 Step 4 (Blueprint Phase 3): placement verification state carried across turns
+    const snapshotPlacement = (snapshot?.placementVerification && typeof snapshot.placementVerification === 'object')
+      ? snapshot.placementVerification as import('@/lib/teaching/placementVerification').PlacementVerificationState
+      : null
+    const snapshotPendingProbe = (snapshot?.pendingPlacementProbe === 'below' || snapshot?.pendingPlacementProbe === 'at' || snapshot?.pendingPlacementProbe === 'above')
+      ? snapshot.pendingPlacementProbe
+      : null
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
     // Sprint CH: active worked example carried across turns
     const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
@@ -308,6 +322,9 @@ export async function POST(req: Request) {
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
+    // CTO iteration (session lifecycle): due-review count hoisted from the
+    // library revision block for the OPENING's review-first enforcement.
+    let libraryDueRevisionCountHoisted = 0
     let libraryLessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     // W2-2 (ADR 09): lesson stage progress — hoisted for post-AI tag-parse + persist.
     let lessonStageProgressHoisted: { conceptId: string; planSignature: string; stageIndex: number; totalStages: number } | null = null
@@ -1081,11 +1098,14 @@ export async function POST(req: Request) {
             const dueRevisions = await getDueRevisions(userId, subjectCode, moduleNodeSlugs)
             const revBlock = buildRevisionBlock(dueRevisions)
             if (revBlock) systemPrompt += revBlock
+            libraryDueRevisionCountHoisted = dueRevisions.length
 
             // W2-1 (ADR 08 §4a): seed conceptId for Library mode — canonical KG entry concept if
             // no snapshot yet. Resolves moduleSlug → KG domain → cross-domain entry concept ID
             // so the Teaching Engine gate (snapshotCurrentConceptId → getConceptNode) can fire.
-            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+            // Wave 0 Step 5 (Blueprint Phase 5): DEFAULTS ON — decide() now
+            // fires for Library mode; set ENABLE_LIBRARY_CONCEPT_TRACKING=0 to revert.
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
               const { resolveLibraryEntryConceptId } = await import('@/lib/curriculum/libraryConceptResolver')
               libraryConceptNodeIdHoisted = snapshotCurrentConceptId
                 ?? resolveLibraryEntryConceptId(subjectCode, currentModule.slug)
@@ -1158,7 +1178,8 @@ export async function POST(req: Request) {
             const planBlock = buildLessonPlanBlock(plan)
             if (planBlock) systemPrompt += planBlock
             // W2-1 (ADR 08 §4a): hoist for post-AI persist.
-            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
+            // Wave 0 Step 5: defaults on (see the tracking gate above).
+            if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
               libraryLessonPlanHoisted = plan
             }
           }
@@ -1367,10 +1388,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // data (topicProgress, learningProfile, subjectAnalytics) and only fetches
     // the supplemental data (recentMistakes, retentionMetrics, session count).
     try {
-      if (snapshotCurrentConceptId) {
+      // Red-team fix D4 (Blueprint Phase 5 / ADR 08 §4a): the FIRST Library
+      // turn of a session has no snapshot concept yet, but the entry concept
+      // was already resolved earlier this request (libraryConceptNodeIdHoisted)
+      // — use it, so no Library turn bypasses decide().
+      const activeConceptIdForDecide = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted
+      if (activeConceptIdForDecide) {
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
-        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(snapshotCurrentConceptId)
+        const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
         if (conceptNode) {
+          // Phase 1C/1D: Blueprint Retrieval + Content Injection.
+          // Resolves Teaching Blueprint metadata and injects Concept Spine,
+          // Misconception Library, and Explanation Library into the system
+          // prompt. Supports all four blueprint formats (Component A,
+          // Protocol B, Section C, Spine D). Non-fatal — a missing or
+          // unparseable blueprint never blocks the Teaching Engine.
+          try {
+            const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock, loadEBConceptContext } = await import('@/lib/curriculum/blueprintLoader')
+            const blueprintResult = loadBlueprint(activeConceptIdForDecide)
+            if (blueprintResult.found) {
+              const contentResult = loadBlueprintContent(activeConceptIdForDecide)
+              if (contentResult.found) {
+                // TQ-1/TQ-2: load EB Concept Entry for recovery notes,
+                // anti-analogies, voice cues, and opening scenario.
+                const ebResult = loadEBConceptContext(activeConceptIdForDecide)
+                const ebContext = ebResult.found ? ebResult.context : null
+                const block = buildBlueprintContextBlock(contentResult.content, ebContext)
+                if (block) systemPrompt += block
+              }
+            }
+          } catch {
+            // non-fatal — blueprint context is purely additive
+          }
+
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
             userId,
@@ -1403,7 +1453,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (process.env.ENABLE_CONCEPT_MASTERY_READ === '1') {
             try {
               const cmr = await prisma.conceptMasteryRecord.findUnique({
-                where: { userId_conceptId: { userId, conceptId: snapshotCurrentConceptId } },
+                where: { userId_conceptId: { userId, conceptId: activeConceptIdForDecide } },
                 select: { masteryScore: true, decayedScore: true, masteryLevel: true, masteryConfidence: true },
               })
               if (cmr) conceptMasterySnapshot = cmr
@@ -1417,7 +1467,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // W2-3: if CMR indicates current concept has decayed below mastery threshold,
               // ensure it appears in weak_concepts for this turn's Teaching Engine decision.
               weak_concepts: conceptMasterySnapshot !== null && conceptMasterySnapshot.decayedScore < 0.7
-                ? [...new Set([...snapshot.weakConcepts, snapshotCurrentConceptId])]
+                ? [...new Set([...snapshot.weakConcepts, activeConceptIdForDecide])]
                 : snapshot.weakConcepts,
               misconceptions: snapshot.misconceptions,
               // W2-3: use CMR decayedScore (0–1) as retention signal when available —
@@ -1445,6 +1495,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 : ' — direct instruction'
           systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
 
+          // CTO iteration — the D1 grid read (foundations/02 §1), previously
+          // invisible to the decision layer: the previous turn's captured
+          // signal classifies the learner's last answer into the grid's
+          // quadrants, and the two quadrants that change the next move are
+          // stated deterministically (decision-matrix/03 cells, retrieved
+          // not improvised). decide()'s frozen signature has no
+          // speed/confidence input (its documented gap, foundations/02 §5)
+          // — this overlay supplies exactly that read without touching the
+          // frozen engine.
+          // NOTE: `snapshot` here is the TeachingMemorySnapshot (shadowed) —
+          // the session contextSnapshot is read via learnSession directly.
+          const sessionSnap = learnSession.contextSnapshot as Record<string, unknown> | null
+          const prevSignal = (sessionSnap?.lastSignal && typeof sessionSnap.lastSignal === 'object')
+            ? sessionSnap.lastSignal as { correctness?: boolean; confidence?: string }
+            : undefined
+          if (prevSignal?.correctness === false && prevSignal?.confidence === 'high') {
+            systemPrompt += `\n- LAST-ANSWER READ (fast-wrong — misconception signature, the grid's dangerous quadrant): do NOT spot-correct and move on. Elicit their reasoning, get them to commit to it, then present one concrete case where their rule visibly breaks — repair before any new content.`
+          } else if (prevSignal?.correctness === true && prevSignal?.confidence === 'low') {
+            systemPrompt += `\n- LAST-ANSWER READ (hesitant-correct — FRAGILE): do not advance yet. One more problem of the SAME type and difficulty now; advance only after a fluent, confident success. If this one is quicker, say so ("that one was quicker — feel it?").`
+          }
+
+          // Wave 1 (Runtime Guardian): the authored HOW for the action
+          // decide() just selected — retrieved from the Brain's action
+          // catalog / repair sequence instead of improvised per turn.
+          // Library only: School Mode already receives the Teaching Action
+          // Generator's structured block for the same purpose (ADR 08).
+          if (!schoolCtx) {
+            const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
+            systemPrompt += buildActionProcedureBlock(decision.action_type)
+          }
+
           // Phase 2F (Teaching Action Intelligence): advisory only — does NOT
           // override decide()'s action_type (the frozen Teaching Engine has no
           // input slot for review-due topics). Surfaces snapshot.dueForReview
@@ -1455,48 +1536,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
           }
 
-          // Phase 3A: Teaching Action Generator — derive a structured
-          // description of HOW to teach this turn from the TeachingDecision
-          // and ConceptNode already computed above. Advisory only; never
-          // overrides decide()'s own action_type/mode/difficulty/time.
+          // Phase 3A: Teaching Action Generator + Phase 3B: Dynamic Lesson Composer.
+          // Runs for School Mode (real chapter) and Library Mode (synthetic chapter
+          // scoped to the single active KG concept — board/grade are unused by both
+          // functions, confirmed ADR 02). Advisory only; never overrides decide().
           try {
             const { getTeachingAction, buildTeachingActionBlock } = await import('@/lib/school/adaptive/teachingActionGenerator')
             const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
-            const fullChapterForTAG = _getChaptersForTAG(schoolCtx!.board, subjectCode, schoolCtx!.grade)
-              .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-            if (fullChapterForTAG) {
+
+            // Resolve chapter: real school chapter or synthetic Library chapter.
+            let chapterForTAG: { id: string; order: number; title: string; kgNodeIds: string[] } | null = null
+            let boardForTAG = ''
+            let gradeForTAG = 0
+            let chapterTitleForTAG = conceptNode.name ?? conceptNode.id
+
+            if (schoolCtx) {
+              const fullChapterForTAG = _getChaptersForTAG(schoolCtx.board, subjectCode, schoolCtx.grade)
+                .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
+              chapterForTAG = fullChapterForTAG ?? null
+              boardForTAG = schoolCtx.board
+              gradeForTAG = schoolCtx.grade
+              chapterTitleForTAG = schoolCtx.displayTitle
+            } else {
+              // Library Mode: synthetic chapter — one concept, no board/grade coupling.
+              chapterForTAG = {
+                id: conceptNode.id,
+                order: 1,
+                title: conceptNode.name ?? conceptNode.id,
+                kgNodeIds: [conceptNode.id],
+              }
+            }
+
+            if (chapterForTAG) {
               const teachingAction = await getTeachingAction(decision, conceptNode, {
                 userId,
-                board: schoolCtx!.board,
-                grade: schoolCtx!.grade,
+                board: boardForTAG,
+                grade: gradeForTAG,
                 subjectId: learnSession.subjectId,
                 subjectSlug: subjectCode,
-                chapterTitle: schoolCtx!.displayTitle,
-                chapter: fullChapterForTAG,
+                chapterTitle: chapterTitleForTAG,
+                chapter: chapterForTAG,
                 weakConcepts: snapshot.weakConcepts,
                 misconceptions: snapshot.misconceptions,
               })
               systemPrompt += buildTeachingActionBlock(teachingAction)
 
-              // Phase 3B: Dynamic Lesson Composer — assemble a deterministic,
-              // multi-stage LessonPlan from the TeachingDecision, TeachingAction,
-              // ConceptNode, and Student Memory signals already computed above.
-              // Advisory only; generates no content and never overrides any of
-              // the decisions it reads from.
+              // Phase 3B: Dynamic Lesson Composer.
               try {
                 const { getLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonComposer')
                 const lessonPlan = await getLessonPlan(decision, teachingAction, conceptNode, {
                   userId,
-                  board: schoolCtx!.board,
-                  grade: schoolCtx!.grade,
+                  board: boardForTAG,
+                  grade: gradeForTAG,
                   subjectId: learnSession.subjectId,
                   subjectSlug: subjectCode,
-                  chapter: fullChapterForTAG,
+                  chapter: chapterForTAG,
                   activeMisconceptions: snapshot.misconceptions,
                   reviewDueConceptIds: reviewDue,
                 })
-                // W2-2 (ADR 09): stage-continuity framing — planSignature computed here
-                // (not inside the Composer) so composeLessonPlan() stays pure.
+                // W2-2 (ADR 09): stage-continuity framing.
                 if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1') {
                   const planSignature = lessonPlan.stages.map(s => s.stage_type).join('|')
                   const signatureMatches =
@@ -1531,6 +1629,148 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       console.warn('[learn/chat] teaching engine skipped:', err)
     }
 
+    // ─── Wave 0 Steps 2–4: Educational Brain deterministic blocks ───────────
+    // Library mode only (School Mode walks a board-prescribed sequence and
+    // has its own checkpoint evidence pipeline). Injected AFTER all advisory
+    // blocks so mandatory rules read last. Every block cites its Brain source.
+    let placementProbeActive = false
+    let placementLevelHoisted: 'intermediate' | 'advanced' | null = null
+    let placementAskedProbeHoisted: 'below' | 'at' | 'above' | null = null
+    // Red-team fix D3: placement state inherited across sessions (see below)
+    let placementPrevHoisted: import('@/lib/teaching/placementVerification').PlacementVerificationState | null = snapshotPlacement
+    let placementInheritedHoisted = false
+    // Red-team fix D1: first-lesson turns must never be served from the
+    // asset memory path (a static explanation+probe assembly cannot honor
+    // first-lesson/04 §1's flow or 02 §1's never-quiz-first rule).
+    let firstLessonActiveHoisted = false
+    // CTO iteration (session lifecycle — decision-engine/07 §1/§6/§8):
+    // the episode state machine that makes per-session rules enforceable.
+    let sessionEpisodeHoisted: import('@/lib/teaching/sessionLifecycle').SessionEpisode | null = null
+    let sessionEpisodeFreshHoisted = false
+    // CTO iteration (recovery guard — decision-engine/03 §0 preemption):
+    // a failure-state utterance in the learner's message is detected
+    // deterministically (Principle 20: stated state is ground truth) and
+    // preempts calibration, assessment, and the asset memory path this turn.
+    let recoveryKeyHoisted: import('@/lib/teaching/recoveryGuard').FailureStateKey | null = null
+    if (!schoolCtx) {
+      try {
+        const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
+        recoveryKeyHoisted = detectFailureState(message)
+        const { buildSignalInstruction } = await import('@/lib/teaching/signals')
+        const { isFirstLessonContext, buildFirstLessonBlock } = await import('@/lib/teaching/firstLessonGuard')
+        const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')
+
+        // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
+        systemPrompt += buildSignalInstruction()
+
+        // Session lifecycle (07 §8): boundary measured from real message
+        // timestamps — the newest loaded message predates this turn's user
+        // insert, so the gap is genuine learner inactivity, never LLM-claimed.
+        {
+          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock } = await import('@/lib/teaching/sessionLifecycle')
+          const lastMsgAt = learnSession.messages[0]?.createdAt
+            ? new Date(learnSession.messages[0].createdAt).getTime()
+            : null
+          const prevEpisode = (snapshot?.sessionEpisode && typeof snapshot.sessionEpisode === 'object')
+            ? snapshot.sessionEpisode as import('@/lib/teaching/sessionLifecycle').SessionEpisode
+            : null
+          const prevLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+            ? snapshot.lastSignal as { correctness?: boolean }
+            : null
+          const boundary = isNewEpisode(lastMsgAt, turnReceivedAt)
+          sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
+          sessionEpisodeFreshHoisted = boundary
+          if (boundary) {
+            // OPENING (07 §1 + §8 rules 2–3): engineered win first when
+            // owed → one-breath continuity → due reviews BEFORE new content.
+            systemPrompt += buildOpeningBlock({
+              dueReviewCount: libraryDueRevisionCountHoisted,
+              retroWinOwed: sessionEpisodeHoisted.retroWinOwed,
+              isFreshBoundary: true,
+              hadPreviousEpisode: prevEpisode !== null || lastMsgAt !== null,
+            })
+          } else if (sessionEpisodeHoisted.phase === 'CLOSING') {
+            // Affect budget spent earlier this session (07 §6): the close
+            // instruction holds until a boundary resets the episode.
+            systemPrompt += buildAffectCloseBlock()
+          }
+        }
+
+        // Step 4: placement verification — self-report is a hypothesis
+        // (placement/01 §1). Scope: KG-backed subject, intermediate/advanced
+        // claim, nothing completed yet, not yet verified (placementVerification.ts
+        // header documents why beginners are excluded).
+        const level = profile?.currentLevel === 'advanced' ? 'advanced'
+          : profile?.currentLevel === 'intermediate' ? 'intermediate' : null
+        const nothingCompleted = (studentProgress?.completedLessons?.length ?? 0) === 0
+
+        // Red-team fix D3 (assessment/02 §1: "Placement… runs once, at
+        // entry"): contextSnapshot is per-session, so without inheritance a
+        // verified learner opening a NEW session before completing a lesson
+        // would be re-probed. Inherit a CONCLUDED verification from the
+        // learner's most recent other session in this subject. Narrow query:
+        // only runs for the unverified-eligible population.
+        if (level && nothingCompleted && !placementPrevHoisted) {
+          try {
+            const prevSession = await prisma.learnSession.findFirst({
+              where: { userId, subjectId: learnSession.subjectId, id: { not: sessionId } },
+              orderBy: { updatedAt: 'desc' },
+              select: { contextSnapshot: true },
+            })
+            const prevSnap = prevSession?.contextSnapshot as Record<string, unknown> | null
+            const prevPlacement = (prevSnap?.placementVerification && typeof prevSnap.placementVerification === 'object')
+              ? prevSnap.placementVerification as import('@/lib/teaching/placementVerification').PlacementVerificationState
+              : null
+            if (prevPlacement?.verified) {
+              placementPrevHoisted = prevPlacement
+              placementInheritedHoisted = true
+            }
+          } catch { /* non-fatal — worst case is a redundant (bounded) re-verification */ }
+        }
+
+        if (level && resolvedConceptId && nothingCompleted && !(placementPrevHoisted?.verified) && !recoveryKeyHoisted) {
+          const state = placementPrevHoisted ?? emptyPlacementState()
+          if (snapshotPendingProbe) {
+            // A probe question is already in flight — this turn's job is
+            // tagging the answer, never stacking a second question
+            // (conversation-engine/06 §1 question ceiling).
+            systemPrompt += buildPlacementAwaitBlock(snapshotPendingProbe)
+            placementProbeActive = true
+            placementLevelHoisted = level
+          } else {
+            const probe = nextProbe(state)
+            if (probe && lessonCtx) {
+              systemPrompt += buildPlacementProbeBlock(probe, learnSession.subject.name, lessonCtx.lessonTitle)
+              placementAskedProbeHoisted = probe
+              placementLevelHoisted = level
+            }
+          }
+        }
+
+        // Step 3: deterministic first-lesson protocol (Blueprint Phase 1;
+        // first-lesson/02 §2, 04 §1, 07). Last block = overriding rules.
+        if (isFirstLessonContext({
+          isSchoolMode: false,
+          currentLevel: profile?.currentLevel,
+          currentLessonOrder: lessonCtx?.currentLesson,
+          completedLessonCount: studentProgress?.completedLessons?.length ?? 0,
+        })) {
+          systemPrompt += buildFirstLessonBlock(subjectCode)
+          firstLessonActiveHoisted = true
+        }
+
+        // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
+        // scripts; first-lesson/05 deltas) — injected LAST of all blocks:
+        // the affect band outranks every teaching instruction above it.
+        if (recoveryKeyHoisted) {
+          const { buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
+          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted)
+        }
+      } catch (err) {
+        console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
+      }
+    }
+
     // Messages arrive newest-first (capped query above) — restore chronological
     // order for the AI payload.
     const historyMessages = [...learnSession.messages]
@@ -1551,7 +1791,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // and the LLM path below runs exactly as before.
       let memoryState: StudentState | null = null
       let assembled: AssembledLesson | null = null
-      if (isExplanationMemoryEnabled() && resolvedConceptId) {
+      // Red-team fix D1: never serve a first-lesson turn from the asset
+      // memory path — a static explanation+probe assembly cannot honor the
+      // first-lesson flow (demonstrate-first, echo-before-solo, never open
+      // with a quiz; first-lesson/02 §1 + 04 §1). Lesson one is delivered by
+      // the LLM under the mandatory protocol block injected above.
+      // Recovery guard: same exclusion when a failure state fired this turn
+      // — no content enters a flooded mind (foundations/04 P5); serving a
+      // stored explanation+quiz to a learner who just said "I give up" is
+      // the exact violation the preemption rule exists to prevent.
+      if (isExplanationMemoryEnabled() && resolvedConceptId && !firstLessonActiveHoisted && !recoveryKeyHoisted) {
         try {
           memoryState = buildStudentState({
             conceptId: resolvedConceptId,
@@ -1589,6 +1838,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!text) {
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
       }
+
+      // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
+      // tag FIRST — before asset capture and every other tag parser — so
+      // the tag never leaks into stored messages, captured assets, or the
+      // client. The parsed signal drives evidence + placement below.
+      const { parseSignalTag } = await import('@/lib/teaching/signals')
+      const signalParse = parseSignalTag(text)
+      const teachingSignal = signalParse.signal
+      text = signalParse.cleanText
 
       // Phase 2/5 capture: decompose a successful LLM generation into
       // whichever labelled sections and assessment items it actually
@@ -1925,6 +2183,117 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         strength:  0.0,
       })
 
+      // Wave 0 Step 2 — Evidence Architecture §2 contracts (validation/08):
+      // ASSESSMENT contract: every answer attempt writes correctness ×
+      // latency-vs-baseline (server-measured, foundations/03 §7) × stated
+      // behavioral confidence. The per-turn signal row is also the
+      // decision-consequence JOIN enabler (loop L5): turn N's
+      // TeachingStrategyEvent joins turn N+1's outcome by session ordering.
+      if (teachingSignal && teachingSignal.correctness !== undefined) {
+        const lastAssistantMsg = learnSession.messages.find((m) => m.role === MessageRole.ASSISTANT)
+        const latencySec = lastAssistantMsg
+          ? Math.max(0, Math.round((turnReceivedAt - new Date(lastAssistantMsg.createdAt).getTime()) / 1000))
+          : null
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.PROBE_OUTCOME,
+          outcome:   `${teachingSignal.correctness ? 'pass' : 'fail'}` +
+                     `|conf=${teachingSignal.confidence ?? 'na'}` +
+                     `|confusion=${teachingSignal.confusion === true}` +
+                     (teachingSignal.probe ? `|placement=${teachingSignal.probe}` : ''),
+          strength:  teachingSignal.correctness ? 1.0 : 0.0,
+          rawScore:  latencySec ?? undefined,
+        })
+      }
+      // MISCONCEPTION contract (student-state/03 §1: verbatim phrase evidence —
+      // "the learner's own phrasing is the elicit-step script for the repair").
+      if (teachingSignal?.phrase) {
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.MISCONCEPTION_DETECTED,
+          outcome:   teachingSignal.phrase.slice(0, 200),
+          strength:  0.5,
+        })
+      }
+
+      // RECOVERY evidence (validation/08 §2 RECOVERY contract, the L1
+      // writer side: entering state × what was tried; what-followed arrives
+      // as the next turn's signal, joinable by session ordering).
+      if (recoveryKeyHoisted) {
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.LEARNER_FEEDBACK,
+          outcome:   `recovery:${recoveryKeyHoisted}`,
+          strength:  0.0,
+        })
+      }
+
+      // CTO iteration — Library mastery evidence loop. Before this block,
+      // Library signals were captured as evidence but nothing updated
+      // mastery state from them: a learner could traverse the entire
+      // curriculum without any verified progression (Universal Principle 3:
+      // correctness evidence must drive advancement; student-state/02:
+      // evidence moves rungs). The SIGNAL is Library mode's conversational
+      // checkpoint — this mirrors the school checkpoint's exact
+      // TopicProgress semantics (same table, same scores, same
+      // MASTERED/COMPLETED guard) so both modes accumulate comparable
+      // evidence. Deliberately NEVER writes COMPLETED/MASTERED and never
+      // exceeds the school checkpoint's 65 — conversational evidence alone
+      // must not certify mastery (assessment/05 §3: gates need delayed +
+      // transfer components; those stay owned by the existing completion/
+      // assessment flows).
+      if (!schoolCtx && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
+        const signalCorrect = teachingSignal.correctness
+        const signalConfidence = teachingSignal.confidence
+        ;(async () => {
+          const existing = await prisma.topicProgress.findUnique({
+            where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId } },
+            select: { status: true },
+          }).catch(() => null)
+          if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
+          const score = signalCorrect ? 65 : 25
+          await prisma.topicProgress.upsert({
+            where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId } },
+            create: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
+            update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
+          }).catch(() => {})
+          // The D1 grid's dangerous quadrant (foundations/02 §1): a
+          // confident WRONG answer is a misconception signature, not a
+          // slip. Writing the MistakeRecord routes it through machinery
+          // that already runs for Library mode — detectMisconceptions()
+          // reads this table, so next turn's prompt carries the
+          // misconception block and the strategy selector can pick
+          // MISCONCEPTION_REPAIR. Hesitant wrong answers (CONFUSED/
+          // GUESSING quadrant) deliberately do NOT write one — that
+          // would be a false misconception signal (decision-engine/02:
+          // latency/confidence decides, "fast = misconception, hedged =
+          // guess").
+          if (!signalCorrect && signalConfidence === 'high') {
+            await prisma.mistakeRecord.create({
+              data: {
+                userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId,
+                sessionId: learnSession.id, category: 'signal_confident_wrong', questionId: resolvedConceptId,
+              },
+            }).catch(() => {})
+          }
+        })().catch(() => {})
+      }
+
       // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
       // snapshot. Write once when either the lesson concept changed (BY) or the
       // worked-example state changed (CH).
@@ -1965,22 +2334,103 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      // W2-1 (ADR 08 §4a): Library-mode concept persist — parallel to school block above.
-      // ENABLE_LIBRARY_CONCEPT_TRACKING defaults off (Phase 1 observe cycle; Phase 2 flips it on).
+      // W2-1 (ADR 08 §4a) + Wave 0 Steps 4/5: Library-mode snapshot persist.
+      // Step 5 (Blueprint Phase 5): concept tracking now DEFAULTS ON so the
+      // Teaching Engine decide() gate fires for Library mode — set
+      // ENABLE_LIBRARY_CONCEPT_TRACKING=0 to revert to the observe-only cycle.
+      // Step 4 (Blueprint Phase 3): the parsed SIGNAL and placement
+      // verification state persist here, so the NEXT turn's decisions read
+      // deterministic snapshot state instead of re-inferring from history
+      // (decision-engine/08 §3's update contract — "the ledger is the truth").
       // libraryLessonPlanHoisted.currentConcept.nodeId is a subjectCatalog slug (not a canonical
       // KG ID) — use only libraryConceptNodeIdHoisted which Writer B seeds with the correct ID.
-      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING === '1') {
-        const newLibConceptId = libraryConceptNodeIdHoisted
-        if (newLibConceptId && newLibConceptId !== snapshotCurrentConceptId) {
-          prisma.learnSession.update({
-            where: { id: sessionId },
-            data: {
-              contextSnapshot: {
-                ...(snapshot ?? {}),
-                currentConceptNodeId: newLibConceptId,
+      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
+        try {
+          const newLibConceptId = libraryConceptNodeIdHoisted
+          const conceptChanged = !!newLibConceptId && newLibConceptId !== snapshotCurrentConceptId
+
+          // Placement verification fold (pure state machine — placementVerification.ts)
+          let placementUpdate: Record<string, unknown> = {}
+          // Robustness: if a probe answer arrived with correctness but the
+          // LLM omitted the probe attribute, attribute it to the in-flight
+          // pending probe rather than losing the evidence.
+          const answeredProbe = teachingSignal?.probe ?? (placementProbeActive ? snapshotPendingProbe : null)
+          if (placementProbeActive && answeredProbe && teachingSignal?.correctness !== undefined) {
+            const { emptyPlacementState, recordProbeResult, levelBelow } = await import('@/lib/teaching/placementVerification')
+            // Red-team fix D3: fold onto the inherited/current state, not
+            // only this session's snapshot.
+            const prev = placementPrevHoisted ?? emptyPlacementState()
+            const nextState = recordProbeResult(prev, {
+              probe: answeredProbe,
+              correctness: teachingSignal.correctness,
+              confidence: teachingSignal.confidence,
+            })
+            placementUpdate = { placementVerification: nextState, pendingPlacementProbe: null }
+            // placement/01 §2: downward adjustment is automatic and SILENT
+            // (placement/02 §4 — the learner never hears about it). Upward
+            // never happens here. No fake completions are written — only the
+            // default starting position moves (placement.ts constraint).
+            if (nextState.verified && nextState.outcome === 'adjusted_down' && placementLevelHoisted) {
+              const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+              const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
+              const graph = getKnowledgeGraph(subjectCode)
+              if (graph) {
+                const lowered = computeCurriculumEntryOrder(graph, levelBelow(placementLevelHoisted))
+                prisma.studentProgress.update({
+                  where: { userId_subjectCode: { userId, subjectCode: progressCode } },
+                  data: { currentLesson: lowered },
+                }).catch(() => {})
+              }
+            }
+          }
+
+          // A probe question asked this turn goes in flight for the next turn.
+          // Red-team fix D2: only when the LLM actually spoke this turn — a
+          // memory-served (assembled) turn never delivered the probe question,
+          // so persisting it would make the next turn's await-block assert a
+          // question that was never asked.
+          if (placementAskedProbeHoisted && !assembled && Object.keys(placementUpdate).length === 0) {
+            placementUpdate = { pendingPlacementProbe: placementAskedProbeHoisted }
+          }
+          // Red-team fix D3: a verification concluded in an earlier session is
+          // copied into THIS session's snapshot once, so subsequent turns skip
+          // the cross-session lookup (assessment/02 §1: placement runs once).
+          if (placementInheritedHoisted && placementPrevHoisted && Object.keys(placementUpdate).length === 0) {
+            placementUpdate = { placementVerification: placementPrevHoisted }
+          }
+
+          const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
+
+          // Session lifecycle fold (07 §1/§6): this turn's signal advances
+          // the episode machine — OPENING→CORE on the first answered item,
+          // CORE→CLOSING when the affect budget is spent (1 in lesson one).
+          let episodeUpdate: Record<string, unknown> = {}
+          if (sessionEpisodeHoisted) {
+            const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+            const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+              isFirstLesson: firstLessonActiveHoisted,
+            })
+            if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
+              episodeUpdate = { sessionEpisode: nextEpisode }
+            }
+          }
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0) {
+            prisma.learnSession.update({
+              where: { id: sessionId },
+              data: {
+                contextSnapshot: {
+                  ...(snapshot ?? {}),
+                  ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
+                  ...signalUpdate,
+                  ...placementUpdate,
+                  ...episodeUpdate,
+                },
               },
-            },
-          }).catch(() => {})
+            }).catch(() => {})
+          }
+        } catch (err) {
+          console.warn('[learn/chat] wave-0 library persist skipped:', err)
         }
       }
 

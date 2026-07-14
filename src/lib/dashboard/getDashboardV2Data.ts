@@ -155,6 +155,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 
+  console.log('[Q1] batch start')
   const [
     user,
     sessionsTodayCount,
@@ -166,7 +167,9 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     roadmapCertCount,
     practiceCountToday,
     topicsMastered,
-  ] = await withRetry(() => Promise.all([
+  ] = await (async () => {
+    try {
+      return await withRetry(() => Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -188,26 +191,62 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     // Sprint Stabilization: count actual lesson completions (TopicProgress),
     // not session-end events — a single chat session can complete multiple
     // lessons, and a session can only "end" (and thus count) once.
-    prisma.topicProgress.count({ where: { userId, status: { in: ['COMPLETED', 'MASTERED'] }, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }),
-    getStudyStreak(userId),
-    prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }),
+    prisma.topicProgress.count({ where: { userId, status: { in: ['COMPLETED', 'MASTERED'] }, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] topic_progress (today) unavailable:', err?.code, err?.message)
+      }
+      return 0
+    }),
+    // Analytics tables (study_streaks, weekly_xp) were added in a later
+    // schema migration. Guard against production DBs where prisma db push
+    // has not yet been run — P2021 (table does not exist) must not crash
+    // the dashboard. Connection errors (P1001/P1008) still bubble up via
+    // withRetry so transient outages aren't silently hidden.
+    getStudyStreak(userId).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] study_streaks unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return { currentStreak: 0, longestStreak: 0, totalActiveDays: 0, isNewDay: false }
+    }),
+    prisma.weeklyXP.findUnique({ where: { userId_week: { userId, week } } }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] weekly_xp unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return null
+    }),
     prisma.weeklyXP.findMany({
       where: { week, user: { isDeleted: false } },
       orderBy: { xp: 'desc' },
       take: LEADERBOARD_SIZE,
       include: { user: { select: { id: true, name: true } } },
+    }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] weekly_xp leaderboard unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return []
     }),
     prisma.learnSession.findMany({
       where: { userId },
       orderBy: { startedAt: 'desc' },
       take: 10,
       include: { subject: { select: { name: true, slug: true } } },
+    }).catch((err) => {
+      if (err?.code !== 'P1001' && err?.code !== 'P1002' && err?.code !== 'P1008' && err?.code !== 'P1017') {
+        console.error('[dashboard] learn_sessions unavailable — run prisma db push:', err?.message ?? err)
+      }
+      return []
     }),
     prisma.subjectCertificate.count({ where: { userId } }).catch(() => 0),
     prisma.certificate.count({ where: { userId } }).catch(() => 0),
     prisma.practiceSession.count({ where: { userId, completedAt: { gte: istBounds.gte, lt: istBounds.lt } } }).catch(() => 0),
-    prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } }).catch(() => 0),
-  ]))
+      prisma.topicProgress.count({ where: { userId, status: 'MASTERED' } }).catch(() => 0),
+      ]))
+    } catch (err: any) {
+      console.error('[FAILED Q1] batch', err?.code, err?.message, err?.meta)
+      throw err
+    }
+  })()
+  console.log('[Q1 OK] batch complete')
 
   if (!user) redirect('/auth/login')
   if (!user.profile) redirect('/onboarding')
@@ -330,17 +369,25 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
     dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
 
-    const studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
-      where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
-      select: {
-        subjectCode: true,
-        currentLesson: true,
-        completedLessons: true,
-        lastStudiedAt: true,
-        lastLessonTitle: true,
-        completionPercent: true,
-      },
-    }))
+    console.log('[Q2] studentProgress')
+    let studentProgressList: { subjectCode: string; currentLesson: number; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
+    try {
+      studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
+        where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
+        select: {
+          subjectCode: true,
+          currentLesson: true,
+          completedLessons: true,
+          lastStudiedAt: true,
+          lastLessonTitle: true,
+          completionPercent: true,
+        },
+      }))
+      console.log('[Q2 OK] studentProgress', studentProgressList.length)
+    } catch (err: any) {
+      console.error('[FAILED Q2] studentProgress', err?.code, err?.message, err?.meta)
+      throw err
+    }
     const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
 
     // Same placement logic as /api/curriculum's GET handler (see
@@ -412,9 +459,11 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   // League
   const myXP = myWeeklyXP?.xp ?? 0
   const tier = getLeagueForXP(myXP)
+  console.log('[Q3] rank')
   const myRank = myWeeklyXP
-    ? (await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } })) + 1
+    ? await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } }).then((n) => { console.log('[Q3 OK] rank', n + 1); return n + 1 }).catch((err) => { console.error('[FAILED Q3] rank', err?.code, err?.message); return null })
     : null
+  if (!myWeeklyXP) console.log('[Q3 SKIP] no weeklyXP row')
 
   const entries: LeagueEntry[] = weeklyTop.map((e, i) => {
     const isMe = e.userId === userId
@@ -493,6 +542,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     },
   ]
 
+  console.log('[Q4] returning data')
   return {
     topBar: {
       streak: streak.currentStreak,

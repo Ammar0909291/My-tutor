@@ -108,3 +108,85 @@ a brittle one left fighting flees).
 - **What hooks them** (recorded per trigger type: surprise /
   contradiction / secret / personal stake / challenge): the anchor and
   curiosity-hook selection for every new concept reads this first.
+
+## 7. Reading-load signature (added under red-team review)
+
+The gap this section closes, stated honestly: the product's primary
+delivery medium is dense text, and before this section the tree's only
+treatment of reading difficulty was one accommodation paragraph
+(`../assessment/06 §4`) and the digital twin's honest limit ("surfaces
+but never diagnoses" — `10-digital-twin.md`). Surfacing with no authored
+consequence is a decision path that dead-ends: the tutor notices and
+then has no rule for what changes. For a population of real learners,
+5–10% arrive with dyslexia-like reading difficulty — at scale that is
+not an edge case; it is thousands of learners meeting a wall of text.
+
+**All standing laws apply at full strength**: this is a SIGNATURE
+(evidence-backed statistics about what happens when this learner meets
+text), never a diagnosis, never a label spoken to the learner, never
+"you might be dyslexic" — the platform is not qualified to diagnose and
+must not (the twin's honest limit stands). What it records is only:
+*text-heavy turns reliably produce X for this learner; text-light turns
+don't.*
+
+**Detection signature** (the disambiguation that matters — reading
+difficulty vs. knowledge difficulty):
+- Performance SPLITS by channel, not by content: the same item failed
+  in written form succeeds when read aloud by the tutor (TTS) or
+  presented orally. A knowledge gap fails in both channels; a reading-
+  load problem fails only in one. This single cross-modal check —
+  already authored as a general instrument in `../assessment/06 §4` —
+  is the entire detection protocol; nothing new is needed to detect,
+  only the standing rule to RUN the check when the pattern below
+  appears.
+- Trigger pattern for running the check: errors and abandonment that
+  correlate with the LENGTH of the text presented rather than the
+  difficulty of the content; long latency on text-heavy turns with
+  normal latency on short ones; quality that collapses specifically
+  when instructions arrive as paragraph blocks (distinguish from
+  "skips instructions," §2 — the skipper doesn't read by choice; this
+  learner is paying a heavy toll to read).
+
+**Standing adaptations once the signature is evidenced** (minimum
+evidence count across different concepts, exactly as §3's hardening
+rule requires — one bad day with a long paragraph is a data point, not
+a signature):
+- **Default the voice channel on, both directions**: TTS for tutor
+  turns (the product has it — every explanation offered spoken),
+  microphone input normalized as the expected reply channel, not the
+  fallback. This is the voice-dependence affinity (§3) applied with a
+  cause, and it costs nothing the product doesn't already have.
+- **Burst limits tighten one register step**: whatever this learner's
+  age/register would normally allow (`../decision-engine/06 §1`), text
+  bursts shrink one level — an established adult with this signature
+  gets novice-length bursts IN TEXT while keeping adult register in
+  vocabulary and tone (register and burst length are independent
+  dimensions; conflating them is the infantilization error,
+  `../foundations/03 §5`).
+- **Assessment channel defaults to oral** per `../assessment/06 §4`'s
+  accommodation rule — with that file's own boundary honored verbatim:
+  when reading IS the measured target (English phonics/decoding), the
+  target is measured honestly, gently, privately — accommodation
+  everywhere else, never silent dropping of the target itself.
+- **Never load-bearing text**: the one sentence that carries the
+  mechanism (`../foundations/03 §3`) is always ALSO delivered in the
+  low-cost channel for this learner — spoken, or as a diagram — never
+  only buried in a paragraph they are paying full toll to parse.
+- **The English-subject collision, named**: for this learner in
+  English specifically, text is simultaneously the obstacle AND the
+  curriculum. The resolution is already authored, distributed across
+  two files, and only needs connecting: English's own entry nodes are
+  ORAL (`../first-lesson/07 §1` — print-optional lesson one), and the
+  accommodate-vs-measure boundary (`../assessment/06 §4`) governs
+  everything after. A reading-load learner in English is not an
+  exception to the curriculum; they are the learner the oral-first
+  sequencing was designed for, taken at its word.
+
+**What this section deliberately does not do**: no remediation program
+for reading difficulty itself (that is the English curriculum's job,
+taught through its own KG sequence, not a side-channel therapy); no
+diagnostic terminology in anything spoken to the learner or family; no
+new library — detection reuses `../assessment/06 §4`'s cross-modal
+check, adaptations reuse §3's affinity machinery, the voice channel
+reuses what the product ships. This is a connection of existing parts
+that were each authored and never joined.

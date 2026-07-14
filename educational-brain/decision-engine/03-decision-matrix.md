@@ -136,6 +136,18 @@ CONFUSED · GUESSING · MISCONCEIVING · FRAGILE · CONFIDENT · CURIOUS · BORE
 The interior is owned by `../assessment/05 §4` (next-item policy) and
 `../assessment/09` (failure). The matrix adds only the state-reads:
 
+- **CONFUSED** (added under critical review — this cell was previously
+  silent) → the item is not measuring cleanly; genuine effortful
+  confusion mid-assessment means the item was miscalibrated for where
+  this learner actually is, not that the learner has failed it. Abort
+  THIS item without scoring it as a failure or a pass — an item answered
+  from confusion decides nothing either way (the same non-decisive
+  principle GUESSING already applies below). Route to the escalation
+  engine's explanation-failure ladder (`../decision-engine/05 §1`)
+  BEFORE any further assessment items — confusion answered with more
+  measurement compounds the load rather than resolving it. Resume
+  assessment only after the underlying confusion has been addressed
+  outside the assessment frame, on a fresh item.
 - **GUESSING** → confidence elicitation is now mandatory per item
   (`../assessment/04 §2`) and the stop rule tightens: a guessed pass
   decides nothing, so don't count it.
@@ -177,3 +189,34 @@ The interior is owned by `../assessment/05 §4` (next-item policy) and
 - **BORED** → the close names what was SKIPPED as the achievement
   ("you cleared in one day what's planned for three") — pace itself
   becomes the reward.
+- **CONFUSED** (added under critical review — this cell, and the three
+  below, were previously silent) → CLOSING is scripted, protected, and
+  "never sacrificed to content" (`../decision-engine/01 §2`) — the close
+  must NOT attempt to resolve the confusion; that would violate CLOSING's
+  own protection rule. Instead, turn the unresolved confusion INTO the
+  close's mandatory open loop, honestly: "that part's still fuzzy — that's
+  exactly where we start tomorrow." Never manufacture a fake resolution to
+  end on an artificial high; naming genuine unfinished business truthfully
+  is itself a form of the named win (the learner leaves knowing exactly
+  where they stand, which is more trustworthy than false reassurance).
+- **GUESSING** → do not let the session end with a guess quietly treated
+  as settled fact. Name it plainly without alarm ("that last one was a bit
+  of a guess — we'll nail it down properly tomorrow") and add it to the
+  next session's OPENING retrieval queue (`../decision-engine/07 §1`) —
+  the close's job is honest bookkeeping, not resolution.
+- **MISCONCEIVING** → if a misconception surfaces this late, there is no
+  time left to run the repair sequence properly — the 7-step process
+  (`../misconceptions/02-the-repair-sequence.md`) needs its own dedicated
+  CORE slot (`../decision-engine/07 §4`), never the tail end of a
+  protected close. Log the ledger entry (`../student-state/03`) and
+  schedule the repair as next session's CORE, but do not attempt ANY
+  repair step now, and do not let the close's language imply the
+  misconception was addressed — closing on an unaddressed misconception
+  with cheerful language teaches the learner that confident wrongness
+  goes unnoticed.
+- **FRAGILE** → a slow-correct response right at the close is genuine
+  partial progress, not full mastery — name it honestly and warmly
+  without inflating it: "you're getting there on that one — one more
+  clean one tomorrow and it's locked in," never "you've got it" (which
+  would misrepresent FRAGILE as INDEPENDENT-level fluency and risk a
+  false promotion at the next session's start).
