@@ -92,16 +92,19 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectCode, completedLesson, lessonTitle, lessonGoal } = schema.parse(body)
+    const { subjectCode, completedLesson, totalLessons: clientTotalLessons, lessonTitle, lessonGoal } = schema.parse(body)
 
     // MED-7: derive totalLessons from the server-authoritative catalog.
-    // subjectCode format: "boardId:subjectSlug:grade"
+    // subjectCode format for School Mode: "boardId:subjectSlug:grade"
+    // For Library Mode the subjectCode is just the slug (e.g. "physics") —
+    // in that case fall back to the client-provided value so subjects can
+    // actually be marked completed.
     const [boardId, subjectSlug, gradeStr] = subjectCode.split(':')
     const grade = parseInt(gradeStr ?? '', 10)
     const catalogChapters = (boardId && subjectSlug && !isNaN(grade))
       ? getSchoolChapters(boardId, subjectSlug, grade)
       : []
-    const totalLessons = catalogChapters.length > 0 ? catalogChapters.length : undefined
+    const totalLessons = catalogChapters.length > 0 ? catalogChapters.length : (clientTotalLessons ?? undefined)
 
     const existing = await prisma.studentProgress.findUnique({
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },

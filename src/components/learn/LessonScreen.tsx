@@ -1118,14 +1118,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
+    let res: Response | undefined
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] } = {}
     try {
-      const res = await fetch('/api/learn/chat', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
-      })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
-      const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
-      if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
+      // Retry up to 2 times on network failures ("Load failed", ECONNRESET, etc.)
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          res = await fetch('/api/learn/chat', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
+          })
+          data = await res.json().catch(() => ({}))
+          break
+        } catch (fetchErr) {
+          if (attempt === 2) throw fetchErr
+          await new Promise((r) => setTimeout(r, (attempt + 1) * 1500))
+        }
+      }
+      const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res?.status ?? 0}`
+      if (!res?.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
       const provider = data.provider
       const responseVisual = data.visual
@@ -1423,6 +1434,23 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const data = await res.json()
       if (!data.success) { setInitError(data.error ?? 'Error'); return }
       const sid = data.data.id; setSessionId(sid)
+
+      // If the server returned an existing active session, restore its messages
+      // instead of sending a new opening prompt — this preserves the conversation
+      // across page refreshes and tab reopens.
+      if (data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
+        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string }>)
+          .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
+          .map((m) => ({
+            id: m.id,
+            role: m.role === 'USER' ? 'user' : 'assistant',
+            content: m.content,
+            ts: new Date(m.createdAt).getTime(),
+          }))
+        setMessages(restored)
+        return
+      }
+
       const lessonRef = resumeLessonTitle
         ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
         : null
@@ -3028,6 +3056,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                             <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
                               {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
                             </span>
+                            {process.env.NODE_ENV === 'development' && (
+                              <span title="AI-generated message" style={{
+                                fontSize: 9, fontWeight: 700, letterSpacing: 0.5, fontFamily: 'var(--font-mono)',
+                                padding: '2px 5px', borderRadius: 5, textTransform: 'uppercase',
+                                color: '#79C0FF', background: 'rgba(121,192,255,0.12)',
+                                border: '1px solid rgba(121,192,255,0.35)',
+                              }}>AI</span>
+                            )}
                             {process.env.NODE_ENV === 'development' && msg.provider && (
                               <span title={`Answered by ${msg.provider}`} style={{
                                 fontSize: 9, fontWeight: 700, letterSpacing: 0.3, fontFamily: 'var(--font-mono)',
