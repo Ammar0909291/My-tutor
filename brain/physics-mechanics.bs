@@ -1,0 +1,39 @@
+# Physics · Mechanics — Band 3 concept dispatch pack (sample)
+# Cite every rule. Ship discipline: authored path names beat inferred defaults.
+
+::pack physics-mechanics 0.1.0
+description: Concept-specific Band 3 dispatch for physics mechanics domain
+::end
+
+# ── Newton's First Law ──────────────────────────────────────────────────────
+# ANCHOR phase: everyday demonstration (balls, tables) BEFORE any formalism.
+
+::rule B3.dispatch.newtons-first-law.anchor v1
+band: 3
+citation: educational-brain/concepts/phys.mech.newtons-first-law.md
+specificity: 3
+mandatory: false
+guard: {"kind":"all","clauses":[{"kind":"eq","field":"currentConceptId","value":"phys.mech.newtons-first-law"},{"kind":"eq","field":"phase","value":"ANCHOR"}]}
+effect: {"actionClass":"DEMONSTRATION"}
+::end
+
+# NAME phase: one term at a time; ban "SI" for lesson-one physics
+::rule B3.dispatch.newtons-first-law.name v1
+band: 3
+citation: educational-brain/concepts/phys.mech.newtons-first-law.md#naming
+specificity: 3
+mandatory: false
+guard: {"kind":"all","clauses":[{"kind":"eq","field":"currentConceptId","value":"phys.mech.newtons-first-law"},{"kind":"eq","field":"phase","value":"NAME"}]}
+effect: {"actionClass":"GUIDED_EXPLANATION","vocabularyBans":["SI","inertial frame"]}
+::end
+
+# ── Units and Measurement (physics first-lesson entry) ─────────────────────
+
+::rule B3.dispatch.units.anchor v1
+band: 3
+citation: educational-brain/first-lesson/07-subject-adaptations.md#physics
+specificity: 3
+mandatory: false
+guard: {"kind":"all","clauses":[{"kind":"eq","field":"currentConceptId","value":"phys.meas.units"},{"kind":"eq","field":"phase","value":"ANCHOR"}]}
+effect: {"actionClass":"OBSERVATION_QUESTION","vocabularyBans":["SI","metric system"]}
+::end
