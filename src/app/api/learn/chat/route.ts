@@ -1876,6 +1876,68 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         content: m.content,
       }))
 
+    // K3 (EOS Kernel Pipeline) — shadow-mode invocation. Off by default;
+    // ENABLE_KERNEL_PIPELINE=1 activates read-only shadow. The pipeline
+    // observes this turn's facts (already computed above), threads them
+    // through stages 1–10 + VERIFY(passthrough), and produces a trace for
+    // parity measurement / golden-transcript capture. Fire-and-forget:
+    // suppresses all errors and never affects the response or the DB.
+    if (!schoolCtx && process.env.ENABLE_KERNEL_PIPELINE && process.env.ENABLE_KERNEL_PIPELINE !== '0') {
+      try {
+        const { runShadowPipeline } = await import('@/lib/kernel/shadow')
+        void runShadowPipeline({
+          learnerId: userId,
+          sessionId,
+          subjectSlug: subjectCode,
+          message,
+          isSchoolMode: false,
+          fold: {
+            contentRegister,
+            profileLevel: (profile?.currentLevel === 'beginner' || profile?.currentLevel === 'intermediate' || profile?.currentLevel === 'advanced')
+              ? profile.currentLevel : null,
+            sessionFailureCount: snapshotSessionFailureCount,
+            currentConceptId: snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null,
+            hasVerifiedPlacement: placementPrevHoisted?.verified === true,
+            pendingPlacementProbe: snapshotPendingProbe ?? null,
+            isFirstLessonContext: firstLessonActiveHoisted,
+          },
+          schedule: {
+            freshBoundary: sessionEpisodeFreshHoisted,
+            boundaryGapMs: null,
+            retroWinOwed: sessionEpisodeHoisted?.retroWinOwed === true,
+            dueReviewCount: libraryDueRevisionCountHoisted,
+          },
+          tsm: {
+            phase: conversationStateHoisted?.phase ?? 'OBSERVE',
+            stageCeiling: evidenceStageCeilingHoisted ?? 2,
+            demonstrated: conversationStateHoisted?.demonstrated === true,
+            consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? 0,
+          },
+          policy: {
+            move: evidenceMoveHoisted === 'teach' ? 'TEACH'
+              : evidenceMoveHoisted === 'show' ? 'SHOW'
+              : evidenceMoveHoisted === 'ask' ? 'ASK'
+              : null,
+            actionClass: null,
+            maxQuestions: (evidenceMoveHoisted === 'ask' ? 1 : 0) as 0 | 1,
+            maxParagraphs: null,
+            maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+            visualClass: null,
+            vocabularyBans: [],
+            provenance: [
+              ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
+              ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
+            ],
+          },
+          resolve: { objective: '' },
+          plan: {
+            systemPrompt,
+            history: historyMessages,
+          },
+        }).catch(() => { /* shadow-mode is fire-and-forget */ })
+      } catch { /* strangler: kernel failure never affects the turn */ }
+    }
+
     try {
       // Explanation Memory / Teaching Action Repository (approved exception to
       // ADR 14's implementation gate — see WAVE_0_APPROVAL_CHECKLIST.md W1-4/
