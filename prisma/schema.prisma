@@ -536,6 +536,12 @@ model Message {
   // Token usage for cost tracking
   inputTokens  Int?
   outputTokens Int?
+  // Which driver actually generated this ASSISTANT message ('memory' |
+  // 'groq' | 'yandex' | 'fallback'). Null for USER messages and for any
+  // ASSISTANT row written before this column existed. Persisted so the
+  // client's AI badge survives a page reload / history restore instead
+  // of only existing for the current in-memory turn.
+  provider     String?
   createdAt    DateTime    @default(now())
 
   session LearnSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)

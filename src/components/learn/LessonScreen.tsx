@@ -897,12 +897,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
-        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string }>)
+        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
+            provider: m.provider ?? undefined,
           }))
         if (cancelled) return
         setMessages(restored)
@@ -1580,12 +1581,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
-          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string }>)
+          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
             .map((m) => ({
               id: m.id,
               role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
               content: m.content,
               ts: new Date(m.createdAt).getTime(),
+              provider: m.provider ?? undefined,
             }))
           setMessages(restored)
           restoredAny = true
@@ -1595,13 +1597,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Fallback (history endpoint unavailable): restore the resumed active
       // session's own messages, exactly as before this feature.
       if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
-        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string }>)
+        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
           .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' : 'assistant',
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
+            provider: m.provider ?? undefined,
           }))
         setMessages(restored)
         restoredAny = true
