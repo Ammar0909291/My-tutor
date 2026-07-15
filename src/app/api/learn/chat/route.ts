@@ -2395,9 +2395,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
       }
 
-      const assistantMessage = await withRetry(() => prisma.message.create({
-        data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider },
-      }))
+      // The chat turn itself must never fail because of the AI-badge column
+      // (P2022 "column does not exist" happens if a deploy's Prisma Client
+      // ever runs ahead of an unapplied migration). Persisting `provider`
+      // is a nice-to-have for the badge, not core to the turn — degrade to
+      // writing the message without it rather than 500ing the whole chat.
+      let assistantMessage
+      try {
+        assistantMessage = await withRetry(() => prisma.message.create({
+          data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider },
+        }))
+      } catch (err) {
+        console.error('[learn/chat] message.create with provider failed, retrying without it:', err)
+        assistantMessage = await withRetry(() => prisma.message.create({
+          data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
+        }))
+      }
 
       // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — never blocks the response.
       // Wave 2 (this build): real KG concept id + gradeBand when Explanation
