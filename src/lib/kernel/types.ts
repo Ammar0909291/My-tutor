@@ -164,7 +164,7 @@ export interface VerificationResult {
   verdict: 'PASS' | 'REJECT'
   violations: Array<{ code: string; matched?: string }>
   attempt: 1 | 2
-  resolution: 'accepted' | 'rerender' | 'template' | 'passthrough'
+  resolution: 'accepted' | 'rerender' | 'template' | 'passthrough' | 'stripped'
 }
 
 // ── COMMIT-2 (Stage 13 output) ───────────────────────────────────────────────

@@ -1,15 +1,18 @@
 /**
  * Stage 12 — VERIFY. Owner: Output Verifier (RS §9).
  *
- * K3 SCOPE: INTERFACE ONLY, PASS-THROUGH. K5 implements the 15 rule codes
- * and the two-attempt rejection protocol. The interface exists here so K5's
- * work is a stage-body swap, not a pipeline change.
+ * K3 shipped this stage as an interface + pass-through. K5 fills in the
+ * real body via `enforcingVerifier`, which is a thin adapter over the
+ * pure `verify()` function in `kernel/verifier`. The passthrough
+ * verifier remains for tests and for callers that haven't opted into
+ * enforcement yet (strangler discipline preserved).
  *
- * The default verifier passes every draft and records `resolution:
- * 'passthrough'`. Tests can inject a spy verifier to assert the pipeline
- * routes drafts through this seam.
+ * The full REJECT loop (constrained re-render + template fallback)
+ * lives in `kernel/verifier/loop.ts` — the pipeline caller invokes it;
+ * this stage only records the single-pass verify decision.
  */
 import type { KernelState, Stage, VerificationResult, RenderDraft, RenderPlan } from '../types'
+import { verify, type VerifierContext } from '../verifier'
 
 export interface Verifier {
   verify(draft: RenderDraft, plan: RenderPlan): Promise<VerificationResult>
@@ -19,6 +22,24 @@ export const passthroughVerifier: Verifier = {
   async verify() {
     return { verdict: 'PASS', violations: [], attempt: 1, resolution: 'passthrough' }
   },
+}
+
+/** Build an enforcing verifier from a VerifierContext supplier. K3
+ *  callers that provide the context get real enforcement; those that
+ *  don't fall back to passthrough. */
+export function enforcingVerifier(getContext: (draft: RenderDraft, plan: RenderPlan) => VerifierContext): Verifier {
+  return {
+    async verify(draft, plan) {
+      const ctx = getContext(draft, plan)
+      const decision = verify(draft.text, ctx, 1)
+      return {
+        verdict: decision.verdict,
+        violations: decision.violations.map((v) => ({ code: v.code, matched: v.matched })),
+        attempt: decision.attempt,
+        resolution: decision.resolution as VerificationResult['resolution'],
+      }
+    },
+  }
 }
 
 export function verifyStage(verifier: Verifier = passthroughVerifier): Stage<KernelState, KernelState> {
