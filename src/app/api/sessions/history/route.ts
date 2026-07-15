@@ -29,24 +29,42 @@ export async function GET(req: Request) {
     return NextResponse.json({ success: false, error: 'subject is required' }, { status: 400 })
   }
 
+  const where = {
+    role: { in: [MessageRole.USER, MessageRole.ASSISTANT] },
+    session: {
+      userId: session.user.id,
+      subject: { slug: subjectSlug },
+    },
+  }
+  // Secondary key keeps same-millisecond pairs (user turn + fast reply) in
+  // stable order.
+  const orderBy = [{ createdAt: 'asc' as const }, { id: 'asc' as const }]
+
   try {
     const messages = await withRetry(() => prisma.message.findMany({
-      where: {
-        role: { in: [MessageRole.USER, MessageRole.ASSISTANT] },
-        session: {
-          userId: session.user.id,
-          subject: { slug: subjectSlug },
-        },
-      },
-      // Secondary key keeps same-millisecond pairs (user turn + fast reply)
-      // in stable order.
-      orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+      where,
+      orderBy,
       select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true },
     }))
 
     return NextResponse.json({ success: true, data: { messages } })
   } catch (err) {
-    console.error('[sessions/history GET]', err)
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+    // The WhatsApp-style history restore is core functionality — it must
+    // never fail because of the AI-badge column (P2022 "column does not
+    // exist" if a deploy's Prisma Client ever runs ahead of an unapplied
+    // migration). Retry without `provider` before giving up; those
+    // messages simply render with no badge, which is the correct fallback.
+    console.error('[sessions/history GET] query with provider failed, retrying without it:', err)
+    try {
+      const messages = await withRetry(() => prisma.message.findMany({
+        where,
+        orderBy,
+        select: { id: true, role: true, content: true, createdAt: true, sessionId: true },
+      }))
+      return NextResponse.json({ success: true, data: { messages } })
+    } catch (fallbackErr) {
+      console.error('[sessions/history GET]', fallbackErr)
+      return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+    }
   }
 }
