@@ -2396,7 +2396,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }
 
       const assistantMessage = await withRetry(() => prisma.message.create({
-        data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
+        data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider },
       }))
 
       // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — never blocks the response.

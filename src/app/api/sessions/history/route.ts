@@ -41,7 +41,7 @@ export async function GET(req: Request) {
       // Secondary key keeps same-millisecond pairs (user turn + fast reply)
       // in stable order.
       orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
-      select: { id: true, role: true, content: true, createdAt: true, sessionId: true },
+      select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true },
     }))
 
     return NextResponse.json({ success: true, data: { messages } })

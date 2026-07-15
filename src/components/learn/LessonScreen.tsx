@@ -451,6 +451,45 @@ function TypingDots() {
   )
 }
 
+// ─── AI Badge ──────────────────────────────────────────────────────────────────
+// Tiny premium pill shown next to "Tutor Max" when an AI provider actually
+// answered the turn. Runtime-only: the parent gates rendering on msg.provider
+// (Brain-served turns pass provider='memory' and never mount this component).
+function AiBadge({ provider }: { provider: string }) {
+  const model =
+    provider === 'groq' ? 'Groq (GPT-OSS-20B)'
+    : provider === 'yandex' ? 'YandexGPT'
+    : provider === 'fallback' ? 'Fallback model'
+    : 'Unknown'
+  const tooltip = `AI Generated\nModel: ${model}\nReason: AI fallback used.`
+  return (
+    <span
+      title={tooltip}
+      aria-label={tooltip}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 3,
+        height: 14,
+        padding: '0 6px',
+        borderRadius: 999,
+        fontSize: 9,
+        fontWeight: 700,
+        letterSpacing: 0.5,
+        color: '#fff',
+        background: 'linear-gradient(135deg, #4A6CF7 0%, #8B5CF6 100%)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        boxShadow: '0 0 6px rgba(99,102,241,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
+        cursor: 'help',
+        userSelect: 'none',
+      }}
+    >
+      <span aria-hidden style={{ fontSize: 7, opacity: 0.9 }}>✦</span>
+      AI
+    </span>
+  )
+}
+
 // ─── Inline practice MCQ (Sprint W gap fix) ────────────────────────────────────
 // Renders the structured InlinePracticeQuestion the route attaches alongside an
 // assistant message (msg.inlinePractice) as a dedicated candy-styled card with
@@ -553,7 +592,7 @@ function HintCard({ hint }: { hint: string }) {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -858,12 +897,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
-        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string }>)
+        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
+            provider: m.provider ?? undefined,
           }))
         if (cancelled) return
         setMessages(restored)
@@ -1541,12 +1581,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
-          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string }>)
+          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
             .map((m) => ({
               id: m.id,
               role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
               content: m.content,
               ts: new Date(m.createdAt).getTime(),
+              provider: m.provider ?? undefined,
             }))
           setMessages(restored)
           restoredAny = true
@@ -1556,13 +1597,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Fallback (history endpoint unavailable): restore the resumed active
       // session's own messages, exactly as before this feature.
       if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
-        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string }>)
+        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
           .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' : 'assistant',
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
+            provider: m.provider ?? undefined,
           }))
         setMessages(restored)
         restoredAny = true
@@ -3167,6 +3209,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                         <EagleMascot variant="logo" size={20} />
                         <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{teachingLanguage === 'ru' ? 'Репетитор Макс' : 'Tutor Max'}</span>
+                        {/* AI badge — shown ONLY when an AI provider actually
+                            answered this turn. Brain-served turns (provider
+                            === 'memory') get NO badge. See the API response
+                            in src/app/api/learn/chat/route.ts: provider is
+                            'memory' for assembled answers, otherwise the
+                            real driver id (groq/yandex/fallback). */}
+                        {msg.provider && msg.provider !== 'memory' && (
+                          <AiBadge provider={msg.provider} />
+                        )}
                       </div>
                     )}
 
@@ -3201,25 +3252,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                             <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
                               {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
                             </span>
-                            {process.env.NODE_ENV === 'development' && (
-                              <span title="AI-generated message" style={{
-                                fontSize: 9, fontWeight: 700, letterSpacing: 0.5, fontFamily: 'var(--font-mono)',
-                                padding: '2px 5px', borderRadius: 5, textTransform: 'uppercase',
-                                color: '#79C0FF', background: 'rgba(121,192,255,0.12)',
-                                border: '1px solid rgba(121,192,255,0.35)',
-                              }}>AI</span>
-                            )}
-                            {process.env.NODE_ENV === 'development' && msg.provider && (
-                              <span title={`Answered by ${msg.provider}`} style={{
-                                fontSize: 9, fontWeight: 700, letterSpacing: 0.3, fontFamily: 'var(--font-mono)',
-                                padding: '2px 6px', borderRadius: 6, textTransform: 'uppercase',
-                                color: msg.provider === 'yandex' ? 'var(--coral)' : msg.provider === 'fallback' ? 'var(--yellow)' : 'var(--green)',
-                                background: msg.provider === 'yandex' ? 'rgba(247,129,102,0.12)' : msg.provider === 'fallback' ? 'rgba(210,153,34,0.12)' : 'rgba(126,231,135,0.12)',
-                                border: `1px solid ${msg.provider === 'yandex' ? 'rgba(247,129,102,0.35)' : msg.provider === 'fallback' ? 'rgba(210,153,34,0.35)' : 'rgba(126,231,135,0.35)'}`,
-                              }}>
-                                {msg.provider === 'yandex' ? 'YandexGPT' : msg.provider === 'fallback' ? 'Fallback' : 'Groq'}
-                              </span>
-                            )}
                             <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
                               depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
                               style={{
