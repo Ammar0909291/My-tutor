@@ -1060,34 +1060,45 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 ```
 
 ## Constraints
-- Branch for current work (canonical): `claude/my-tutor-foundation-KDSUO`.
+- Branch for current work (canonical): `main`.
 - Do NOT create PRs unless explicitly asked. Do NOT push to other branches.
 - Do NOT redesign UI, navigation, or touch Hindi/Sanskrit subject architecture.
 
-## Repository branch policy (2026-07-15, binding)
-`claude/my-tutor-foundation-KDSUO` is the canonical trunk — the single
-source of truth for this repo. It was consolidated on 2026-07-15 (merge
-commit d0a6945) to contain everything from `main` (Dashboard, Curriculum,
-Educational Brain Deliveries 3/5-8, curriculum expansions), from
-`claude/my-tutor-foundation-kdsuo-blpnts` (lesson persistence/session-resume,
-Library-mode subject-completion fallback, network-retry — all verified
-present via content diff; its dev-only AI badge was superseded, not lost),
-and from KDSUO's own line (teaching-quality phases, WhatsApp-style chat
-history, EOS M1/K3/K4/C4/K5/K6, OAuth fixes, the premium AI badge with its
-DB-persisted `provider` field). `main` and
-`claude/my-tutor-foundation-kdsuo-blpnts` are historical/legacy as of this
-consolidation — safe to delete once the team confirms nothing else depends
-on them; `main` may otherwise be kept as an optional, manually-promoted
-release branch, never a second place to develop.
-- Every new feature branch starts from the latest tip of
-  `claude/my-tutor-foundation-KDSUO`.
-- Every feature branch merges back into `claude/my-tutor-foundation-KDSUO`
-  when done — don't let it or any other branch drift unmerged for days.
-- `main` is optional-release-only (or can stay unused) — never develop
-  directly on it again.
+## Repository branch policy (2026-07-15, binding, supersedes the prior
+## KDSUO-as-canonical policy below — kept for history only)
+`main` is now the ONLY active development branch — the single source of
+truth for this repo. On 2026-07-15, `claude/my-tutor-foundation-KDSUO`
+(itself already the union of `main`, `claude/my-tutor-foundation-kdsuo-blpnts`,
+and KDSUO's own line — see the superseded policy note below) was merged
+into `main` (merge commit — see `git log --oneline -1 main` for the current
+tip), so `main` now contains everything: Dashboard, Curriculum, Mathematics/
+Physics/English KGs, Educational Brain (Deliveries 3/5-8 + validation +
+Wave 0 + CTO iterations), EOS (M1 Evidence Spine, K3 Kernel, K4 Policy
+Engine, C4 Brain Compiler, K5 Output Verifier, K6 Live Integration), OAuth
+fixes, WhatsApp-style chat history, the premium AI badge with its
+DB-persisted `provider` field (plus its migration and fail-open guards),
+and the full 65-file test suite.
+- Every new feature branch starts from the latest tip of `main`.
+- Every feature branch merges back into `main` when done — don't let it or
+  any other branch drift more than a few commits unmerged before merging.
+- `claude/my-tutor-foundation-KDSUO`, `claude/my-tutor-foundation-kdsuo-blpnts`,
+  `merge/main-kdsuo-unification`, and every other pre-2026-07-15 branch are
+  **ARCHIVED** — read-only historical snapshots. Do NOT commit to them, do
+  NOT merge them forward, do NOT branch new work from them. They are kept
+  only for history, never deleted, never developed on again.
 - Never develop from a stale branch — `git fetch origin` and confirm you're
-  branching off the current KDSUO tip before starting new work.
-- Never force-push any shared branch. Merge forward, don't rewrite history.
-- Vercel Production Branch should point at `claude/my-tutor-foundation-KDSUO`
-  (a human with dashboard access must set/confirm this — no session in this
-  environment has Vercel API/CLI credentials to verify or change it).
+  branching off the current `main` tip before starting new work.
+- Never force-push any shared branch. Merge forward, don't rewrite history,
+  don't rebase public history, don't squash.
+- Production deploys from `main`. Vercel Production Branch should point at
+  `main` (a human with dashboard access must set/confirm this — no session
+  in this environment has Vercel API/CLI credentials to verify or change it).
+
+### Superseded (2026-07-15): prior KDSUO-as-canonical policy
+`claude/my-tutor-foundation-KDSUO` was briefly the designated canonical
+trunk (merge commit d0a6945, consolidating `main` + `kdsuo-blpnts`'s
+verified-equivalent content + KDSUO's own EOS/teaching-quality work). This
+was superseded the same day by the policy above, which moves all active
+development onto `main` instead and archives KDSUO alongside the other
+historical branches. Nothing from that consolidation was lost — it's fully
+contained in `main`'s current tip.
