@@ -835,6 +835,69 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const fileInputRef = useRef<HTMLInputElement>(null)
   const sessionIdRef = useRef<string|null>(null)
 
+  // ─── WhatsApp-style history: MOUNT-TIME restoration ───────────────────────
+  // Root-cause fix: the previous implementation (commit bea64a3) placed the
+  // history fetch INSIDE startLesson(), which only runs when the learner
+  // presses "Start Lesson". On refresh/re-open the component mounted with
+  // messages=[] and lessonStarted=false, so the welcome screen rendered and
+  // history was never fetched until a manual click — exactly the reported
+  // bug ("refresh page → chat becomes empty").
+  //
+  // WhatsApp shows history on OPEN, not on button click. This effect fetches
+  // history the moment LessonScreen mounts, populates messages, skips the
+  // welcome screen when prior conversation exists, and acquires a sessionId
+  // so subsequent sends have a target. The "Start Lesson" gate remains for
+  // truly-new subjects (empty history → welcome + button, unchanged).
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const histRes = await fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`)
+        const hist = await histRes.json()
+        if (cancelled) return
+        if (!hist?.success) return
+        const raw = hist?.data?.messages
+        if (!Array.isArray(raw) || raw.length === 0) return
+        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string }>)
+          .map((m) => ({
+            id: m.id,
+            role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
+            content: m.content,
+            ts: new Date(m.createdAt).getTime(),
+          }))
+        if (cancelled) return
+        setMessages(restored)
+        setLessonStarted(true) // skip the "Start Lesson" welcome screen
+        // Acquire a sessionId so subsequent sends can dispatch. Resume path
+        // returns an existing ACTIVE session when one is available; otherwise
+        // a new session is created (WhatsApp semantics: the conversation is
+        // permanent, sessions are just per-day containers).
+        try {
+          const res = await fetch('/api/sessions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              subjectSlug,
+              memoryContext: memoryContext ?? undefined,
+              userId: userId ?? undefined,
+              schoolChapterId: schoolChapterId ?? undefined,
+            }),
+          })
+          const data = await res.json()
+          if (cancelled) return
+          if (data?.success && data.data?.id) setSessionId(data.data.id)
+        } catch { /* non-fatal — send path will retry session creation */ }
+        // Prevent startLesson() from firing a duplicate opening prompt if
+        // the (now hidden) button were somehow triggered.
+        initializedRef.current = true
+      } catch { /* non-fatal — welcome screen fallback stays intact */ }
+    })()
+    return () => { cancelled = true }
+    // subjectSlug drives remount via learn/page.tsx key; other props are
+    // stable across the component's lifetime. Effect runs once per mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subjectSlug])
+
   // Derived
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
