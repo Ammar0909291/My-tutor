@@ -1688,6 +1688,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
     // turn's evidence, persisted on the existing snapshot ride.
     let conversationStateHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
+    // emitter — observation only, zero effect on the turn.
+    let evidenceMoveHoisted: string | null = null
+    let evidenceStageCeilingHoisted: number | null = null
+    let evidenceWorkedExampleFirstHoisted = false
+    let evidenceAutonomyHoisted = false
     if (!schoolCtx) {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
@@ -1803,6 +1809,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { detectAutonomyRequest, buildAutonomyBlock } = await import('@/lib/teaching/conversationState')
         if (detectAutonomyRequest(message)) {
           systemPrompt += buildAutonomyBlock()
+          evidenceAutonomyHoisted = true
         }
 
         // Phases C–G (2026-07-14): the conversation state machine. The
@@ -1826,6 +1833,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             recoveryTurn: recoveryKeyHoisted !== null,
             workedExampleFirst,
           })
+          // EOS M1: record the decision facts for the spine (observation only).
+          evidenceMoveHoisted = nextMove
+          evidenceWorkedExampleFirstHoisted = workedExampleFirst
+          const { PHASE_MAX_QUESTION_STAGE } = await import('@/lib/teaching/conversationState')
+          evidenceStageCeilingHoisted = PHASE_MAX_QUESTION_STAGE[conversationStateHoisted.phase]
           const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
           const availableVisual = detectVisual({
             subjectSlug: subjectCode,
@@ -2559,6 +2571,48 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               }),
             }
           }
+
+          // EOS M1 — Evidence Spine: append this turn's typed events to the
+          // parallel append-only log. Fire-and-forget, idempotent, additive:
+          // nothing reads the spine yet and the turn's behavior is identical
+          // with the spine on, off (ENABLE_EVIDENCE_SPINE=0), or failing.
+          try {
+            const { emitTurn } = await import('@/lib/evidence-spine/turnEmitter')
+            const lastAssistantForLatency = learnSession.messages.find((m) => m.role === MessageRole.ASSISTANT)
+            const phaseAfter = (conversationStateUpdate.conversationState as { phase?: string } | undefined)?.phase ?? null
+            emitTurn(prisma, {
+              learnerId: userId,
+              sessionId,
+              turnId: assistantMessage.id,
+              messageLength: message.length,
+              latencyFromPrevTurnMs: lastAssistantForLatency
+                ? Math.max(0, turnReceivedAt - new Date(lastAssistantForLatency.createdAt).getTime())
+                : null,
+              assistantLength: cleanText.length,
+              assistantAskedQuestion: (await import('@/lib/teaching/conversationState')).repliesWithQuestion(cleanText),
+              provider: assembled ? 'memory' : 'llm',
+              signal: teachingSignal ?? null,
+              resolvedConceptId: resolvedConceptId ?? null,
+              recoveryKey: recoveryKeyHoisted,
+              recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
+              sessionFailureCount: snapshotSessionFailureCount,
+              autonomyRequested: evidenceAutonomyHoisted,
+              decisionMove: evidenceMoveHoisted,
+              decisionPhaseBefore: conversationStateHoisted?.phase ?? null,
+              decisionPhaseAfter: phaseAfter,
+              workedExampleFirst: evidenceWorkedExampleFirstHoisted,
+              stageCeiling: evidenceStageCeilingHoisted,
+              provenance: [
+                ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
+                ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
+                ...(evidenceMoveHoisted ? ['turn-directive'] : []),
+                ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
+              ],
+              freshSessionBoundary: sessionEpisodeFreshHoisted,
+              boundaryGapMs: null,
+              lessonCompleted: cleanText.includes('[LESSON_COMPLETE]'),
+            })
+          } catch { /* spine is strictly parallel — never affects the turn */ }
 
           if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0) {
             prisma.learnSession.update({
