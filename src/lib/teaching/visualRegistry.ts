@@ -1,0 +1,264 @@
+/**
+ * Visualization Registry — concept-ID-keyed visual lookup.
+ *
+ * Maps canonical KG concept IDs to the VisualType(s) already available
+ * in the renderer layer (src/components/school/visuals/). This lets the
+ * Teaching Engine know what visuals exist for a concept BEFORE the LLM
+ * generates text, replacing the title-keyword heuristic with a
+ * deterministic concept-level match.
+ *
+ * Three tiers, checked in order (most specific wins):
+ *   1. CONCEPT_VISUALS  — exact concept ID → visual(s)
+ *   2. DOMAIN_VISUALS   — domain prefix (e.g. 'phys.mech') → visual(s)
+ *   3. detectVisual()   — fallback to existing title-keyword matcher
+ *
+ * Pure module: no DB, no I/O. The registry is a static data structure
+ * built from the intersection of the canonical KGs and the existing
+ * renderer inventory.
+ */
+
+import type { VisualType } from '@/lib/school/visuals/visualTypes'
+import type { SceneGeneratorKind } from './sceneGenerators/sceneRouter'
+
+export interface VisualEntry {
+  /** Primary visual (the one decideVisualFirst should prefer). */
+  primary: VisualType
+  /** All available visuals for this concept, primary first. */
+  all: VisualType[]
+  /** Parametric scene generator available (separate pipeline). */
+  sceneGenerator?: SceneGeneratorKind
+}
+
+// ── Tier 1: exact concept ID → visual(s) ─────────────────────────────────────
+// Only concepts with a dedicated renderer (not just a domain-level default).
+
+const CONCEPT_VISUALS: Record<string, VisualEntry> = {
+  // Physics — Mechanics
+  'phys.mech.projectile-motion':      { primary: 'three_projectile_motion', all: ['three_projectile_motion', 'force_diagram'], sceneGenerator: 'projectile' },
+  'phys.mech.circular-motion':        { primary: 'three_circular_motion', all: ['three_circular_motion', 'force_diagram'], sceneGenerator: 'circular' },
+  'phys.mech.newtons-first-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  'phys.mech.newtons-second-law':     { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  'phys.mech.newtons-third-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  'phys.mech.friction':               { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  'phys.mech.momentum':               { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
+  'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
+  'phys.mech.collisions':             { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
+  'phys.mech.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  'phys.mech.simple-harmonic-motion': { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  'phys.mech.torque':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },
+  'phys.mech.gravitation':            { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  'phys.mech.satellite-motion':       { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+
+  // Physics — Vectors
+  'phys.meas.scalars-vectors':        { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
+  'phys.meas.vector-addition':        { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
+  'phys.meas.vector-products':        { primary: 'three_vector_visualization', all: ['three_vector_visualization'] },
+
+  // Physics — Optics
+  'phys.opt.reflection':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  'phys.opt.mirrors':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  'phys.opt.lenses':                  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  'phys.opt.ray-diagrams':            { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+
+  // Physics — Electricity
+  'phys.em.current':                  { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  'phys.em.ohms-law':                 { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  'phys.em.series-parallel':          { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  'phys.em.kirchhoffs-laws':          { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  'phys.em.electric-circuits':        { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+
+  // Physics — Kinematics graphs
+  'phys.mech.kinematics-1d':          { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'kinematics_graphs' },
+  'phys.mech.kinematics-2d':          { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'kinematics_graphs' },
+
+  // Chemistry — Atomic structure
+  'chem.found.atomic-theory':         { primary: 'three_atomic_structure', all: ['three_atomic_structure'] },
+  'chem.found.atom-structure':        { primary: 'three_atomic_structure', all: ['three_atomic_structure', 'three_electron_shells'] },
+  'chem.found.electron-config':       { primary: 'three_electron_shells', all: ['three_electron_shells', 'three_atomic_structure'], sceneGenerator: 'electron_shells' },
+  'chem.found.periodic-table':        { primary: 'three_electron_shells', all: ['three_electron_shells'], sceneGenerator: 'periodic_trends' },
+  'chem.found.periodic-trends':       { primary: 'three_electron_shells', all: ['three_electron_shells'], sceneGenerator: 'periodic_trends' },
+
+  // Chemistry — Bonding
+  'chem.bond.ionic-bond':             { primary: 'three_bond_formation', all: ['three_bond_formation'] },
+  'chem.bond.covalent-bond':          { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_molecular_shapes'] },
+  'chem.bond.metallic-bond':          { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_crystal_lattice'] },
+  'chem.bond.molecular-geometry':     { primary: 'three_molecular_shapes', all: ['three_molecular_shapes'], sceneGenerator: 'molecule' },
+  'chem.bond.vsepr':                  { primary: 'three_molecular_shapes', all: ['three_molecular_shapes'], sceneGenerator: 'molecule' },
+  'chem.bond.crystal-structures':     { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'], sceneGenerator: 'lattice' },
+
+  // Chemistry — States of matter
+  'chem.found.states-of-matter':      { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'] },
+
+  // Biology — Genetics
+  'bio.gen.mendels-laws':             { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
+  'bio.gen.monohybrid-cross':         { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
+  'bio.gen.dihybrid-cross':           { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
+
+  // Biology — Cell biology
+  'bio.cell.cell-division':           { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
+  'bio.cell.mitosis':                 { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
+  'bio.cell.meiosis':                 { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
+
+  // Biology — Molecular biology
+  'bio.mol.dna-structure':            { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'dna_structure' },
+  'bio.mol.dna-replication':          { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'dna_structure' },
+
+  // Biology — Ecology
+  'bio.eco.food-chains':              { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'ecological_pyramid' },
+  'bio.eco.energy-flow':              { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'ecological_pyramid' },
+  'bio.eco.ecosystems':               { primary: 'food_chain', all: ['food_chain'] },
+  'bio.eco.water-cycle':              { primary: 'water_cycle', all: ['water_cycle'] },
+
+  // Mathematics — Coordinate geometry
+  'math.geom.coordinate-geometry':    { primary: 'coordinate_plane', all: ['coordinate_plane', 'three_coordinate_system'], sceneGenerator: 'coordinate_geometry_line' },
+  'math.geom.distance-formula':       { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'coordinate_geometry_line' },
+  'math.geom.section-formula':        { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'coordinate_geometry_line' },
+  'math.geom.straight-lines':         { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+
+  // Mathematics — Geometry
+  'math.geom.triangles':              { primary: 'geometry_shape', all: ['geometry_shape', 'three_geometric_solids'], sceneGenerator: 'triangle' },
+  'math.geom.angle-sum':              { primary: 'geometry_shape', all: ['geometry_shape'], sceneGenerator: 'triangle' },
+  'math.geom.congruence':             { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.similarity':             { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.circles':                { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.quadrilaterals':         { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.polygons':               { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.area-perimeter':         { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.surface-area-volume':    { primary: 'three_geometric_solids', all: ['three_geometric_solids', 'geometry_shape'] },
+  'math.geom.3d-geometry':            { primary: 'three_geometric_solids', all: ['three_geometric_solids'] },
+  'math.geom.transformations':        { primary: 'three_transformations', all: ['three_transformations', 'geometry_shape'] },
+  'math.geom.heights-distances':      { primary: 'geometry_shape', all: ['geometry_shape'], sceneGenerator: 'heights_and_distances' },
+
+  // Mathematics — Number system
+  'math.arith.fractions':             { primary: 'fraction_bar', all: ['fraction_bar', 'number_line'] },
+  'math.arith.decimals':              { primary: 'number_line', all: ['number_line', 'fraction_bar'] },
+  'math.arith.percentages':           { primary: 'percentage_grid', all: ['percentage_grid', 'fraction_bar'] },
+  'math.arith.integers':              { primary: 'number_line', all: ['number_line'] },
+  'math.arith.rational-numbers':      { primary: 'number_line', all: ['number_line', 'fraction_bar'] },
+  'math.arith.real-numbers':          { primary: 'number_line', all: ['number_line'] },
+  'math.arith.number-line':           { primary: 'number_line', all: ['number_line'] },
+
+  // Mathematics — Algebra (graphing)
+  'math.alg.linear-equations':        { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'math.alg.quadratic-equations':     { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'math.alg.polynomials':             { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'math.alg.linear-inequalities':     { primary: 'coordinate_plane', all: ['coordinate_plane', 'number_line'] },
+
+  // Mathematics — Statistics
+  'math.stat.mean-median-mode':       { primary: 'number_line', all: ['number_line'], sceneGenerator: 'statistics_bar_chart' },
+  'math.stat.frequency-distribution': { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'statistics_bar_chart' },
+  'math.stat.data-representation':    { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'statistics_bar_chart' },
+  'math.stat.probability':            { primary: 'number_line', all: ['number_line'] },
+
+  // Mathematics — Vectors
+  'math.vec.vectors':                 { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
+  'math.vec.vector-operations':       { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
+
+  // Mathematics — Calculus
+  'math.calc.differentiation':        { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
+  'math.calc.applications-derivative':{ primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
+  'math.calc.maxima-minima':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
+  'math.calc.integration':            { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+
+  // Mathematics — Trigonometry
+  'math.trig.trigonometric-ratios':   { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.trig.trigonometric-identities':{ primary: 'coordinate_plane', all: ['coordinate_plane', 'geometry_shape'] },
+
+  // Computer Science
+  'cs.found.computer-organisation':   { primary: 'three_computer_architecture', all: ['three_computer_architecture'] },
+  'cs.found.memory-storage':          { primary: 'three_memory_storage', all: ['three_memory_storage'] },
+  'cs.found.number-systems':          { primary: 'three_data_structure', all: ['three_data_structure'] },
+  'cs.found.boolean-logic':           { primary: 'three_data_structure', all: ['three_data_structure'], sceneGenerator: 'logic_gate' },
+  'cs.ds.arrays':                     { primary: 'three_data_structure', all: ['three_data_structure'] },
+  'cs.ds.linked-lists':               { primary: 'three_data_structure', all: ['three_data_structure'] },
+  'cs.ds.stacks-queues':              { primary: 'three_data_structure', all: ['three_data_structure'] },
+  'cs.algo.sorting':                  { primary: 'three_algorithm_visualization', all: ['three_algorithm_visualization'] },
+  'cs.algo.searching':                { primary: 'three_algorithm_visualization', all: ['three_algorithm_visualization'] },
+  'cs.net.networking-basics':         { primary: 'three_network_packet_flow', all: ['three_network_packet_flow'] },
+  'cs.db.relational-databases':       { primary: 'three_data_structure', all: ['three_data_structure'], sceneGenerator: 'er_diagram' },
+}
+
+// ── Tier 2: domain prefix → default visual ───────────────────────────────────
+// Checked only when Tier 1 has no exact match. Prefix is matched greedily
+// (longest match wins).
+
+interface DomainRule {
+  prefix: string
+  entry: VisualEntry
+}
+
+function domainRule(prefix: string, primary: VisualType, all: VisualType[]): DomainRule {
+  return { prefix, entry: { primary, all } }
+}
+
+const DOMAIN_VISUALS: DomainRule[] = [
+  // Physics domains
+  domainRule('phys.mech',  'force_diagram', ['force_diagram', 'three_newton_forces']),
+  domainRule('phys.em',    'circuit_diagram', ['circuit_diagram']),
+  domainRule('phys.opt',   'force_diagram', ['force_diagram']),
+  domainRule('phys.wave',  'force_diagram', ['force_diagram']),
+  domainRule('phys.meas',  'three_vector_visualization', ['three_vector_visualization']),
+
+  // Chemistry domains
+  domainRule('chem.bond',  'three_bond_formation', ['three_bond_formation', 'three_molecular_shapes']),
+  domainRule('chem.found', 'three_atomic_structure', ['three_atomic_structure']),
+
+  // Biology domains
+  domainRule('bio.eco',    'food_chain', ['food_chain', 'water_cycle']),
+  domainRule('bio.cell',   'food_chain', ['food_chain']),
+
+  // Mathematics domains
+  domainRule('math.geom',  'geometry_shape', ['geometry_shape']),
+  domainRule('math.arith', 'number_line', ['number_line']),
+  domainRule('math.alg',   'coordinate_plane', ['coordinate_plane']),
+  domainRule('math.stat',  'coordinate_plane', ['coordinate_plane']),
+  domainRule('math.calc',  'coordinate_plane', ['coordinate_plane']),
+  domainRule('math.trig',  'geometry_shape', ['geometry_shape', 'coordinate_plane']),
+  domainRule('math.vec',   'three_vector_visualization', ['three_vector_visualization']),
+
+  // Computer Science domains
+  domainRule('cs.ds',      'three_data_structure', ['three_data_structure']),
+  domainRule('cs.algo',    'three_algorithm_visualization', ['three_algorithm_visualization']),
+  domainRule('cs.net',     'three_network_packet_flow', ['three_network_packet_flow']),
+  domainRule('cs.found',   'three_computer_architecture', ['three_computer_architecture']),
+].sort((a, b) => b.prefix.length - a.prefix.length)
+
+/**
+ * Look up visual(s) for a canonical KG concept ID.
+ * Returns null when no visual is registered (the caller should fall back
+ * to detectVisual's title-keyword match).
+ */
+export function lookupConceptVisual(conceptId: string | null): VisualEntry | null {
+  if (!conceptId) return null
+
+  // Tier 1: exact match
+  const exact = CONCEPT_VISUALS[conceptId]
+  if (exact) return exact
+
+  // Tier 2: domain prefix (longest match first)
+  for (const rule of DOMAIN_VISUALS) {
+    if (conceptId.startsWith(rule.prefix)) return rule.entry
+  }
+
+  return null
+}
+
+/**
+ * Get just the primary VisualType for a concept — the value the Teaching
+ * Engine's turn directive needs. Returns null for unknown concepts.
+ */
+export function getConceptVisualType(conceptId: string | null): VisualType | null {
+  return lookupConceptVisual(conceptId)?.primary ?? null
+}
+
+/**
+ * Get the scene generator kind available for a concept (if any).
+ * This is separate from the visual type — scene generators run the
+ * parametric 3D pipeline (extract→build→validate), while visual types
+ * are rendered by the existing component layer.
+ */
+export function getConceptSceneGenerator(conceptId: string | null): SceneGeneratorKind | null {
+  if (!conceptId) return null
+  return CONCEPT_VISUALS[conceptId]?.sceneGenerator ?? null
+}

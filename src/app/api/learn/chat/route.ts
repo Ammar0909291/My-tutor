@@ -1873,7 +1873,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { PHASE_MAX_QUESTION_STAGE } = await import('@/lib/teaching/conversationState')
           evidenceStageCeilingHoisted = PHASE_MAX_QUESTION_STAGE[conversationStateHoisted.phase]
           const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
-          const availableVisual = detectVisual({
+          const { getConceptVisualType } = await import('@/lib/teaching/visualRegistry')
+          const registryVisual = getConceptVisualType(convConceptId)
+          const availableVisual = registryVisual ?? detectVisual({
             subjectSlug: subjectCode,
             chapterTitle: lessonCtx?.unitTitle ?? '',
             lessonTitle: lessonCtx?.lessonTitle,
