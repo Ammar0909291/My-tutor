@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   lookupConceptVisual, getConceptVisualType, getConceptSceneGenerator,
+  shouldForceVisualRender, resolveResponseVisual,
 } from '@/lib/teaching/visualRegistry'
 
 describe('visualRegistry', () => {
@@ -101,5 +102,61 @@ describe('visualRegistry', () => {
       expect(entry).not.toBeNull()
       expect(entry!.all[0]).toBe(entry!.primary)
     }
+  })
+})
+
+// ── Phase 2: server-authoritative forced render (route.ts's core gap fix) ────
+// Root cause: the LLM's compliance with "emit the VISUAL:<type> tag" was
+// advisory only — a model could describe a diagram in prose instead of
+// rendering it. These pin down the deterministic replacement.
+
+describe('shouldForceVisualRender', () => {
+  it('forces render on an explicit diagram request with a known visual', () => {
+    expect(shouldForceVisualRender('diagram', 'force_diagram')).toBe(true)
+  })
+
+  it('never forces when no visual is available for the concept', () => {
+    expect(shouldForceVisualRender('diagram', null)).toBe(false)
+  })
+
+  it('never forces for a real_life_example request (not a visual ask)', () => {
+    expect(shouldForceVisualRender('real_life_example', 'force_diagram')).toBe(false)
+  })
+
+  it('never forces for explain_differently', () => {
+    expect(shouldForceVisualRender('explain_differently', 'force_diagram')).toBe(false)
+  })
+
+  it('never forces with no learner request at all (phase-driven suggestion stays advisory)', () => {
+    expect(shouldForceVisualRender(null, 'force_diagram')).toBe(false)
+  })
+})
+
+describe('resolveResponseVisual', () => {
+  it("the LLM's own tag wins even when force-render also applies", () => {
+    // The model may pick a MORE specific visual than the registry default
+    // (e.g. three_newton_forces vs the generic force_diagram) — never
+    // discard a real answer just because the deterministic path exists.
+    expect(resolveResponseVisual('three_newton_forces', true, 'force_diagram')).toBe('three_newton_forces')
+  })
+
+  it('falls back to the available visual when the LLM omitted the tag and force-render applies', () => {
+    // THE root-cause fix: model wrote prose instead of emitting the tag —
+    // render happens anyway.
+    expect(resolveResponseVisual(null, true, 'force_diagram')).toBe('force_diagram')
+  })
+
+  it('renders nothing when the LLM omitted the tag and force-render does not apply', () => {
+    // Phase-driven (non-explicit-request) visual suggestions stay advisory —
+    // unchanged pre-existing behavior.
+    expect(resolveResponseVisual(null, false, 'force_diagram')).toBeNull()
+  })
+
+  it('renders nothing when neither an LLM tag nor an available visual exists', () => {
+    expect(resolveResponseVisual(null, true, null)).toBeNull()
+  })
+
+  it('force-render never fabricates a visual when the registry has none', () => {
+    expect(resolveResponseVisual(null, true, null)).toBeNull()
   })
 })

@@ -262,3 +262,45 @@ export function getConceptSceneGenerator(conceptId: string | null): SceneGenerat
   if (!conceptId) return null
   return CONCEPT_VISUALS[conceptId]?.sceneGenerator ?? null
 }
+
+// ── Server-authoritative render decision (Phase 2) ────────────────────────────
+//
+// The registry/detectVisual match only tells the LLM's system prompt what
+// visual IS AVAILABLE — the LLM was still free to describe it in prose
+// instead of emitting the VISUAL:<type> tag. This mirrors the exact shape
+// of the pre-mastery-gate bug (an advisory instruction the model could
+// silently ignore). For an EXPLICIT learner diagram/visualize request, the
+// render must not depend on LLM compliance — pure decision logic below,
+// unit-testable independent of route.ts's IO.
+
+/**
+ * True when a visual request must be force-attached to the response
+ * server-side, regardless of whether the LLM's own VISUAL:<type> tag
+ * fired. Only for explicit learner requests ('diagram') with a known
+ * available visual — never overrides a phase-driven visual-first
+ * suggestion (those stay advisory, since the learner didn't ask).
+ */
+export function shouldForceVisualRender(
+  learnerRequest: 'diagram' | 'real_life_example' | 'explain_differently' | null,
+  availableVisual: VisualType | null,
+): boolean {
+  return learnerRequest === 'diagram' && availableVisual !== null
+}
+
+/**
+ * Resolve the final responseVisual for the turn: the LLM's own parsed tag
+ * wins when present (it may be a more specific match than the registry
+ * default); otherwise, if force-render applies, the available visual is
+ * attached deterministically. Returns null when neither applies — the
+ * caller's existing "no visual" path (or last-resort text description)
+ * is unchanged.
+ */
+export function resolveResponseVisual(
+  llmTag: VisualType | null,
+  forceRender: boolean,
+  availableVisual: VisualType | null,
+): VisualType | null {
+  if (llmTag) return llmTag
+  if (forceRender && availableVisual) return availableVisual
+  return null
+}

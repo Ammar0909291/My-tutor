@@ -329,6 +329,18 @@ export async function POST(req: Request) {
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
+    // Visualization Registry Phase 2: server-authoritative visual attachment.
+    // availableVisualHoisted is the registry/detectVisual match computed
+    // pre-LLM; forceVisualRenderHoisted is set true only for an explicit
+    // learner diagram/visualize request. When true, the post-AI block
+    // attaches availableVisualHoisted to the response REGARDLESS of
+    // whether the LLM emitted the VISUAL:<type> tag in its text — the
+    // same server-authoritative pattern masteryGate.ts uses for lesson
+    // completion. This closes the "AI describes a diagram that already
+    // exists instead of rendering it" gap: the tag becomes advisory only
+    // (still parsed/preferred when present), never the sole path to render.
+    let availableVisualHoisted: string | null = null
+    let forceVisualRenderHoisted = false
     // CTO iteration (session lifecycle): due-review count hoisted from the
     // library revision block for the OPENING's review-first enforcement.
     let libraryDueRevisionCountHoisted = 0
@@ -1880,11 +1892,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             chapterTitle: lessonCtx?.unitTitle ?? '',
             lessonTitle: lessonCtx?.lessonTitle,
           })
+          availableVisualHoisted = availableVisual
           // Bugs 5/6/7 — explicit learner requests are detected in code and
           // dispatched as forced TeachingActions, injected AFTER the turn
           // directive so they override the phase's default move. A diagram
           // request also overrides Phase G's ask-turn visual suppression.
           learnerRequestHoisted = detectLearnerRequest(message)
+          // Visualization Registry Phase 2: an explicit "show me a diagram"
+          // request with a known visual is FORCED to render server-side —
+          // never left to the LLM's discretion to emit (or skip) the tag.
+          const { shouldForceVisualRender } = await import('@/lib/teaching/visualRegistry')
+          forceVisualRenderHoisted = shouldForceVisualRender(learnerRequestHoisted, availableVisual)
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -2140,6 +2158,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           responseVisual = parsed.visual
           cleanText = parsed.cleanText
         } catch { /* non-fatal */ }
+        // Visualization Registry Phase 2 — server-authoritative attachment:
+        // an explicit learner diagram request with a known available visual
+        // renders it REGARDLESS of whether the LLM emitted (or correctly
+        // spelled) the VISUAL:<type> tag. The LLM's own tag is honored when
+        // present (it may legitimately pick a more specific match); this
+        // only fills the gap when the model described the diagram in prose
+        // instead of rendering it — the exact failure mode this closes.
+        {
+          const { resolveResponseVisual } = await import('@/lib/teaching/visualRegistry')
+          responseVisual = resolveResponseVisual(
+            responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
+            forceVisualRenderHoisted,
+            availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
+          )
+        }
       }
 
       // Sprint W: strip the [INLINE_PRACTICE] control tag from the persisted/
@@ -2442,7 +2475,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // to suppress. responseVisual carries no interactive/challenge payload (it is
       // just a string), so it is unconditionally OPTIONAL whenever present — see
       // isOptionalVisualTag. Independent of, and runs alongside, the block above.
-      if (strategyHoisted && outputBiasHoisted && responseVisual) {
+      // forceVisualRenderHoisted (explicit "show me a diagram" request) is
+      // exempt from SUPPRESS_OPTIONAL: a learner-requested visual is never
+      // "optional" by definition — suppressing it here would reintroduce
+      // the exact bug this closes (AI describes instead of rendering).
+      if (strategyHoisted && outputBiasHoisted && responseVisual && !forceVisualRenderHoisted) {
         try {
           const { isOptionalVisualTag } = await import('@/lib/school/adaptive/teachingOutputBias')
           if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisualTag(responseVisual)) {
