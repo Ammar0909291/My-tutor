@@ -1946,6 +1946,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // today: nothing is ACTIVE until a human reviewer promotes a DRAFT via
       // the admin review endpoint, so assembleLesson() always returns null
       // and the LLM path below runs exactly as before.
+      // K6 — EOS Runtime: lazy-init brain packs before the LLM call so
+      // any compiled Band-3 dispatch rules can influence policy this
+      // turn. Idempotent (loads once per process). Off by default via
+      // ENABLE_BRAIN_PACKS / ENABLE_EOS_RUNTIME.
+      try {
+        const { readEosFlags, ensureBrainPacksLoaded } = await import('@/lib/eos-runtime')
+        if (readEosFlags().brainPacks) ensureBrainPacksLoaded()
+      } catch { /* pack loading is strictly parallel — never breaks a turn */ }
+
       let memoryState: StudentState | null = null
       let assembled: AssembledLesson | null = null
       // Red-team fix D1: never serve a first-lesson turn from the asset
@@ -2103,6 +2112,74 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // since IPA is allowed (optionally/fully) at those registers.
       if (contentRegister === 'beginner') {
         cleanText = stripIpaNotation(cleanText)
+      }
+
+      // K6 — EOS Runtime integration: run the K5 Output Verifier on the
+      // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
+      // master ENABLE_EOS_RUNTIME). Failures follow the RS §9.3 protocol:
+      // one constrained rerender using routeAI with the SAME plan +
+      // violations appendix, then a deterministic template if still failing.
+      // Fires only for Library turns (K6 scope: School Mode untouched); a
+      // memory-served (assembled) turn is skipped since it's already
+      // human-curated.
+      let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
+      let eosVerifierUsedTemplate = false
+      let eosVerifierAttempts: 1 | 2 = 1
+      if (!schoolCtx && !assembled) {
+        try {
+          const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
+          const eosFlags = readEosFlags()
+          if (eosFlags.outputVerifier) {
+            const ctx = buildVerifierContext({
+              contentRegister,
+              move: evidenceMoveHoisted === 'teach' ? 'TEACH'
+                : evidenceMoveHoisted === 'show' ? 'SHOW'
+                : evidenceMoveHoisted === 'ask'  ? 'ASK' : null,
+              phase: conversationStateHoisted?.phase ?? null,
+              stageCeiling: evidenceStageCeilingHoisted,
+              vocabularyUnlocked: !firstLessonActiveHoisted,
+              formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
+              recoveryActive: recoveryKeyHoisted !== null,
+              maxQuestions: (evidenceMoveHoisted === 'ask' ? 1 : 0) as 0 | 1,
+              maxParagraphs: null,
+              maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+              vocabularyBans: [],
+              assessmentActive: false,
+              lessonCompletionAuthorized: false,
+              sessionFailureCount: snapshotSessionFailureCount,
+              learnerText: message,
+              reactMandated: true,
+              legalTags: ['VISUAL', 'HINT', 'INLINE_PRACTICE', 'WE', 'LESSON'],
+              bannedConceptTerms: [],
+            })
+            const gate = await verifierGate({
+              draftText: cleanText,
+              ctx,
+              learnerText: message,
+              fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
+              rerender: async (violationAppendix) => {
+                const routed = await routeAI(
+                  [...historyMessages, { role: 'user', content: message }],
+                  systemPrompt + violationAppendix,
+                  country,
+                  1024,
+                  teachingLang,
+                  { userId, subject: learnSession.subject.slug },
+                )
+                let t = routed.text
+                if (contentRegister === 'beginner') t = stripIpaNotation(t)
+                return t
+              },
+            })
+            cleanText = gate.finalText
+            eosVerifierEvents = gate.events
+            eosVerifierUsedTemplate = gate.usedTemplate
+            eosVerifierAttempts = gate.attempts
+          }
+        } catch (err) {
+          // Fail-open: never break the turn on verifier failure.
+          console.warn('[learn/chat] EOS verifier gate skipped:', err)
+        }
       }
 
       // Sprint C/H: deterministic, rule-based visual detection on the final
@@ -2669,6 +2746,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
                 ...(evidenceMoveHoisted ? ['turn-directive'] : []),
                 ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
+                // K6 — record EOS verifier outcomes as provenance atoms
+                ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
+                ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
+                ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),
               ],
               freshSessionBoundary: sessionEpisodeFreshHoisted,
               boundaryGapMs: null,
