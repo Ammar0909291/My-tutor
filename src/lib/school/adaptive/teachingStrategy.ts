@@ -125,12 +125,57 @@ const STRATEGY_INSTRUCTIONS: Record<TeachingStrategyType, string[]> = {
 const STRATEGY_ACTION_DIRECTIVE: Record<TeachingStrategyType, string> = {
   FOUNDATION_REBUILD:    'Lead with a worked example before theory.',
   MISCONCEPTION_REPAIR:  'Ask the student to explain their reasoning before you correct anything.',
-  MOMENTUM_RECOVERY:     'Give only one small hint. Do not solve it.',
+  MOMENTUM_RECOVERY:     'Give one small CONCEPTUAL hint — name the missing idea, never the next calculation step. If the concept itself is missing, teach it plainly instead of hinting.',
   CONFIDENCE_CORRECTION: 'Open with a real-world analogy first.',
   APPLICATION_FOCUS:     'End this response with the inline practice question provided separately, if one is present.',
   CONFIDENCE_BUILDING:   'Explain directly and clearly. No questions.',
   ACCELERATED_GROWTH:    'Challenge with a harder variant after explaining.',
 }
+
+// ── Beginner evidence (2026-07-14 teaching-quality Phase B) ──────────────────
+//
+// Problem being fixed: a learner with NO signals (first session, empty DB)
+// used to fall through determineStrategy's default chain into
+// APPLICATION_FOCUS — "practice problems in unfamiliar contexts" — the exact
+// opposite of what an unknown, possibly-beginner learner needs. But blindly
+// mapping "no signals" → FOUNDATION_REBUILD would also drag every capable
+// new learner into remedial teaching. So the default is chosen from a
+// confidence score over evidence the route already has in hand — no new
+// tables, no new queries beyond one cheap MistakeRecord count.
+
+export interface BeginnerEvidence {
+  /** Profile.currentLevel — 'beginner' | 'intermediate' | 'advanced' | null */
+  profileLevel: string | null
+  /** contextSnapshot.sessionFailureCount (P1 counter) */
+  sessionFailureCount: number
+  /** recent MistakeRecord rows with category 'recovery_signal' (P5 writer) */
+  recoveryMistakeCount: number
+  /** last SIGNAL parsed this session had correctness=false */
+  lastSignalIncorrect: boolean
+  /** the current concept has unmet prerequisites for this learner */
+  hasPrerequisiteGap: boolean
+}
+
+/**
+ * 0..1 confidence that this learner currently needs foundation-first
+ * teaching. Pure and total; every input is optional-shaped so callers
+ * missing a signal contribute 0, never an error.
+ */
+export function computeFoundationConfidence(e: BeginnerEvidence): number {
+  let score = 0
+  if (e.profileLevel === 'beginner') score += 0.4
+  else if (e.profileLevel === 'advanced') score -= 0.3
+  if (e.sessionFailureCount >= 2) score += 0.3
+  else if (e.sessionFailureCount === 1) score += 0.15
+  if (e.recoveryMistakeCount >= 2) score += 0.3
+  else if (e.recoveryMistakeCount === 1) score += 0.2
+  if (e.lastSignalIncorrect) score += 0.1
+  if (e.hasPrerequisiteGap) score += 0.15
+  return Math.max(0, Math.min(1, score))
+}
+
+/** Threshold above which the strategy DEFAULT becomes FOUNDATION_REBUILD. */
+export const FOUNDATION_CONFIDENCE_THRESHOLD = 0.4
 
 // ── Pure strategy determination ───────────────────────────────────────────────
 
@@ -160,6 +205,7 @@ export function determineStrategy(
   calibration:             CalibrationLevel | null,
   momentumLevel:           MomentumLevel | null,
   excludeStrategy:         TeachingStrategyType | null = null,
+  foundationBias:          boolean = false,
 ): TeachingStrategyType {
   const candidates: TeachingStrategyType[] = []
 
@@ -195,6 +241,15 @@ export function determineStrategy(
     candidates.push('ACCELERATED_GROWTH')
   }
 
+  // Phase B (2026-07-14): when beginner evidence says foundation-first
+  // teaching is warranted, the DEFAULT (no explicit rule matched above)
+  // becomes FOUNDATION_REBUILD instead of falling through to
+  // APPLICATION_FOCUS/ACCELERATED_GROWTH. Deliberately placed AFTER every
+  // rule-driven candidate: real mastery/misconception/momentum signals
+  // still outrank the bias — this only changes what "unknown learner"
+  // defaults to.
+  if (foundationBias) candidates.push('FOUNDATION_REBUILD')
+
   // Default: Application Focus when mastery is solid but transfer is unclear
   if (masteryLevel === 'TRUE_MASTERY' || masteryLevel === 'DEVELOPING') candidates.push('APPLICATION_FOCUS')
 
@@ -220,7 +275,9 @@ function buildReason(
   momentumLevel: MomentumLevel | null,
 ): string {
   switch (type) {
-    case 'FOUNDATION_REBUILD':    return `Mastery level is AT_RISK — foundational gaps detected.`
+    case 'FOUNDATION_REBUILD':    return masteryLevel === 'AT_RISK'
+      ? `Mastery level is AT_RISK — foundational gaps detected.`
+      : 'Beginner evidence (profile level, recovery signals, session failures) indicates foundation-first teaching.'
     case 'MISCONCEPTION_REPAIR':  return topMisconceptConfidence === 'HIGH'
       ? 'A high-confidence misconception was detected.'
       : `FALSE_MASTERY combined with a detected misconception.`
@@ -245,6 +302,7 @@ export async function getTeachingStrategy(
   subjectSlug: string,
   chapterId: string,
   kgNodeIds: string[],
+  beginnerEvidence: BeginnerEvidence | null = null,
 ): Promise<TeachingStrategy> {
   const [masteryProfile, misconceptions, transferProfile, confidenceProfile, momentumProfile, effectiveness] =
     await Promise.all([
@@ -283,6 +341,9 @@ export async function getTeachingStrategy(
     return 'LOW' as const
   })()
 
+  const foundationBias = beginnerEvidence !== null &&
+    computeFoundationConfidence(beginnerEvidence) >= FOUNDATION_CONFIDENCE_THRESHOLD
+
   const type = determineStrategy(
     masteryProfile?.masteryLevel ?? null,
     topMisconceptConfidence,
@@ -290,6 +351,7 @@ export async function getTeachingStrategy(
     confidenceProfile?.calibration ?? null,
     momentumProfile?.level ?? null,
     effectiveness?.staleMate ? effectiveness.dominantStrategy : null,
+    foundationBias,
   )
 
   const meta = STRATEGY_META[type]

@@ -36,19 +36,24 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['hate_subject', /\bi\s+hate\s+(this|maths?|math|physics|chemistry|biology|english|reading|school|it)\b/i],
   ['too_hard',     /\b(this|it)(?:'?s|\s+is)\s+(way\s+|just\s+|really\s+)?too\s+(hard|difficult)\b/i],
   ['cant',         /\bi\s+(just\s+)?can'?t\s+do\s+(this|it|maths?|math|any of this)\b/i],
+  // Absolute-ignorance signals — strong because they leave no ambiguity
+  ['dont_know',    /\bi\s+(know\s+)?nothing\s+(about\s+\S+\s+)?at\s+all\b|\bi\s+know\s+absolutely\s+nothing\b/i],
+  ['dont_know',    /\b(i\s+have\s+no\s+idea|no\s+clue|how\s+would\s+i\s+know)\b/i],
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+understand\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
+  ['confused',        /\b(really\s+confusing|this\s+is\s+confusing)\b/i],
   ['dont_know',       /\bi\s+(don'?t|do\s+not)\s+know\b/i],
+  ['dont_know',       /\bi\s+know\s+nothing\b/i],
   ['forgot',          /\bi\s+(forgot|forget)\b|\bi\s+can'?t\s+remember\b/i],
   ['guessing',        /\bi(?:'?m|\s+was)\s+(just\s+)?guessing\b|\bthat\s+was\s+a\s+guess\b/i],
 ]
 
 /** Mild utterances only fire when the message is short enough to BE the
  * utterance (not merely contain it mid-paragraph). */
-const MILD_MAX_LENGTH = 80
+const MILD_MAX_LENGTH = 120
 
 export function detectFailureState(message: string): FailureStateKey | null {
   const text = message.trim()
@@ -176,10 +181,29 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> 
  * The RECOVERY block — injected LAST, preempting every other instruction
  * (decision-engine/03 §0: the teaching state is irrelevant; foundations/04
  * P5: no content enters a flooded mind).
+ *
+ * sessionFailureCount drives escalation so the same script never repeats
+ * indefinitely (decision-engine/05: per-failure ladders, one-dimension-per-rung).
  */
-export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean): string {
+export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean, sessionFailureCount = 0): string {
   const script = SCRIPTS[key]
   const body = (isFirstLesson && script.lessonOne) ? script.lessonOne : script.general
+
+  let escalation = ''
+  if (sessionFailureCount >= 4) {
+    escalation =
+      '\n- AFFECT BUDGET EXHAUSTED (4+ failures this session): Close this concept ' +
+      'for today. Acknowledge the struggle warmly, tell the learner you will return ' +
+      'to it next session, and pivot immediately to something they can succeed at ' +
+      'right now. Do NOT attempt another explanation or question on this topic.'
+  } else if (sessionFailureCount >= 2) {
+    escalation =
+      '\n- REPEATED STRUGGLE (2+ failures this session): Stop ALL questions this ' +
+      'turn. Do not offer a two-choice question. Validate once ("I hear you — this ' +
+      'one is stubborn"), give a SHORT demonstration of the concept yourself (show, ' +
+      'don\'t ask), say "we\'ll come back to this" and move to a simpler related point.'
+  }
+
   return (
     '\n\nRECOVERY — PREEMPTS EVERYTHING ABOVE (the student just voiced a ' +
     'failure state; their stated state is ground truth — never argue with it, ' +
@@ -188,6 +212,7 @@ export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean)
     '- No new content this turn. No assessment. No calibration questions. ' +
     'One goal only: validate, shrink, and bank one small genuine win.\n' +
     '- Tone: calm, warm, unhurried. Do not become MORE energetic or jokey — ' +
-    'matched energy; playfulness on struggle reads as mockery.'
+    'matched energy; playfulness on struggle reads as mockery.' +
+    escalation
   )
 }

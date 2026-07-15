@@ -39,6 +39,41 @@ export async function POST(req: Request) {
     const subject = await prisma.subject.findUnique({ where: { slug: subjectSlug } });
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
+    // Resume an existing ACTIVE session from within the last 24 hours instead of
+    // creating a new one — this preserves the conversation across page refreshes.
+    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const existingSession = await prisma.learnSession.findFirst({
+      where: {
+        userId: session.user.id,
+        subjectId: subject.id,
+        status: "ACTIVE",
+        startedAt: { gte: cutoff },
+        // Only resume sessions that have at least one assistant message (i.e. the
+        // lesson actually started — not a session that was created but never used).
+        messages: { some: { role: "ASSISTANT" } },
+      },
+      orderBy: { startedAt: "desc" },
+      include: {
+        messages: { orderBy: { createdAt: "asc" } },
+      },
+    });
+
+    if (existingSession) {
+      return NextResponse.json({ success: true, data: existingSession, resumed: true }, { status: 200 });
+    }
+
+    // Close any stale ACTIVE sessions older than 24h (sendBeacon may not have fired
+    // on mobile or after a crash). This prevents orphaned ACTIVE rows accumulating.
+    await prisma.learnSession.updateMany({
+      where: {
+        userId: session.user.id,
+        subjectId: subject.id,
+        status: "ACTIVE",
+        startedAt: { lt: cutoff },
+      },
+      data: { status: "COMPLETED", endedAt: new Date() },
+    }).catch(() => {}); // best-effort — never block session creation
+
     const [profile, activePath] = await Promise.all([
       prisma.profile.findUnique({ where: { userId: session.user.id } }),
       prisma.learningPath.findFirst({

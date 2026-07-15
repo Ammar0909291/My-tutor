@@ -451,6 +451,45 @@ function TypingDots() {
   )
 }
 
+// ─── AI Badge ──────────────────────────────────────────────────────────────────
+// Tiny premium pill shown next to "Tutor Max" when an AI provider actually
+// answered the turn. Runtime-only: the parent gates rendering on msg.provider
+// (Brain-served turns pass provider='memory' and never mount this component).
+function AiBadge({ provider }: { provider: string }) {
+  const model =
+    provider === 'groq' ? 'Groq (GPT-OSS-20B)'
+    : provider === 'yandex' ? 'YandexGPT'
+    : provider === 'fallback' ? 'Fallback model'
+    : 'Unknown'
+  const tooltip = `AI Generated\nModel: ${model}\nReason: AI fallback used.`
+  return (
+    <span
+      title={tooltip}
+      aria-label={tooltip}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 3,
+        height: 14,
+        padding: '0 6px',
+        borderRadius: 999,
+        fontSize: 9,
+        fontWeight: 700,
+        letterSpacing: 0.5,
+        color: '#fff',
+        background: 'linear-gradient(135deg, #4A6CF7 0%, #8B5CF6 100%)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        boxShadow: '0 0 6px rgba(99,102,241,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
+        cursor: 'help',
+        userSelect: 'none',
+      }}
+    >
+      <span aria-hidden style={{ fontSize: 7, opacity: 0.9 }}>✦</span>
+      AI
+    </span>
+  )
+}
+
 // ─── Inline practice MCQ (Sprint W gap fix) ────────────────────────────────────
 // Renders the structured InlinePracticeQuestion the route attaches alongside an
 // assistant message (msg.inlinePractice) as a dedicated candy-styled card with
@@ -553,7 +592,7 @@ function HintCard({ hint }: { hint: string }) {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
@@ -686,6 +725,11 @@ function QuickActionsAndCheck({
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
+// WhatsApp-style history: ALL messages live in state (never trimmed); only
+// the newest window is mounted in the DOM, growing as the user scrolls up.
+// Keeps 5000+ message conversations smooth without any virtualization lib.
+const HISTORY_RENDER_WINDOW = 100
+
 export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage: teachingLanguageProp = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId, autoOpenPractice, initialPrompt }: Props) {
   const { t, lang: uiLang } = useLanguage()
   const { country } = useCountry()
@@ -710,6 +754,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [expanded, setExpanded] = useState<Record<string,boolean>>({})
   const [activeTab, setActiveTab] = useState<ActiveTab>('chat')
   const [atBottom, setAtBottom] = useState(true)
+  // WhatsApp-style windowed rendering: how many of the newest messages are
+  // mounted. Full history stays in `messages`; scrolling to the top reveals
+  // earlier windows with a preserved scroll position.
+  const [visibleCount, setVisibleCount] = useState(HISTORY_RENDER_WINDOW)
+  const visibleCountRef = useRef(HISTORY_RENDER_WINDOW)
+  useEffect(() => { visibleCountRef.current = visibleCount }, [visibleCount])
+  const messagesLenRef = useRef(0)
+  useEffect(() => { messagesLenRef.current = messages.length }, [messages.length])
+  const historyScrolledRef = useRef(false)
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false)
   const [maximizedPanel, setMaximizedPanel] = useState<ActiveTab | null>(null)
 
@@ -821,6 +874,69 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const fileInputRef = useRef<HTMLInputElement>(null)
   const sessionIdRef = useRef<string|null>(null)
 
+  // ─── WhatsApp-style history: MOUNT-TIME restoration ───────────────────────
+  // Root-cause fix: the previous implementation (commit bea64a3) placed the
+  // history fetch INSIDE startLesson(), which only runs when the learner
+  // presses "Start Lesson". On refresh/re-open the component mounted with
+  // messages=[] and lessonStarted=false, so the welcome screen rendered and
+  // history was never fetched until a manual click — exactly the reported
+  // bug ("refresh page → chat becomes empty").
+  //
+  // WhatsApp shows history on OPEN, not on button click. This effect fetches
+  // history the moment LessonScreen mounts, populates messages, skips the
+  // welcome screen when prior conversation exists, and acquires a sessionId
+  // so subsequent sends have a target. The "Start Lesson" gate remains for
+  // truly-new subjects (empty history → welcome + button, unchanged).
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const histRes = await fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`)
+        const hist = await histRes.json()
+        if (cancelled) return
+        if (!hist?.success) return
+        const raw = hist?.data?.messages
+        if (!Array.isArray(raw) || raw.length === 0) return
+        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string }>)
+          .map((m) => ({
+            id: m.id,
+            role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
+            content: m.content,
+            ts: new Date(m.createdAt).getTime(),
+          }))
+        if (cancelled) return
+        setMessages(restored)
+        setLessonStarted(true) // skip the "Start Lesson" welcome screen
+        // Acquire a sessionId so subsequent sends can dispatch. Resume path
+        // returns an existing ACTIVE session when one is available; otherwise
+        // a new session is created (WhatsApp semantics: the conversation is
+        // permanent, sessions are just per-day containers).
+        try {
+          const res = await fetch('/api/sessions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              subjectSlug,
+              memoryContext: memoryContext ?? undefined,
+              userId: userId ?? undefined,
+              schoolChapterId: schoolChapterId ?? undefined,
+            }),
+          })
+          const data = await res.json()
+          if (cancelled) return
+          if (data?.success && data.data?.id) setSessionId(data.data.id)
+        } catch { /* non-fatal — send path will retry session creation */ }
+        // Prevent startLesson() from firing a duplicate opening prompt if
+        // the (now hidden) button were somehow triggered.
+        initializedRef.current = true
+      } catch { /* non-fatal — welcome screen fallback stays intact */ }
+    })()
+    return () => { cancelled = true }
+    // subjectSlug drives remount via learn/page.tsx key; other props are
+    // stable across the component's lifetime. Effect runs once per mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subjectSlug])
+
   // Derived
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
   const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
@@ -846,10 +962,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     return () => clearInterval(id)
   }, [sessionId])
 
-  // Scroll bottom detection
+  // Scroll bottom detection + reveal-earlier-on-top (WhatsApp-style):
+  // reaching the top of the scroll area mounts the previous window of
+  // messages while pinning the viewport to the message the user was on.
   useEffect(() => {
     const el = messagesAreaRef.current; if (!el) return
-    const handler = () => setAtBottom(el.scrollHeight - el.scrollTop - el.clientHeight < 60)
+    const handler = () => {
+      setAtBottom(el.scrollHeight - el.scrollTop - el.clientHeight < 60)
+      if (el.scrollTop < 80 && visibleCountRef.current < messagesLenRef.current) {
+        const prevHeight = el.scrollHeight
+        setVisibleCount((c) => Math.min(c + HISTORY_RENDER_WINDOW, messagesLenRef.current))
+        requestAnimationFrame(() => { el.scrollTop += el.scrollHeight - prevHeight })
+      }
+    }
     el.addEventListener('scroll', handler, { passive: true })
     return () => el.removeEventListener('scroll', handler)
   }, [])
@@ -858,6 +983,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => {
     if (atBottom) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [messages, atBottom])
+
+  // On first history restore, jump straight to the newest message (instant,
+  // not smooth — the user should open the chat AT the latest message).
+  useEffect(() => {
+    if (!historyScrolledRef.current && messages.length > 0) {
+      historyScrolledRef.current = true
+      requestAnimationFrame(() => messagesEndRef.current?.scrollIntoView({ block: 'end' }))
+    }
+  }, [messages.length])
 
   useEffect(() => { setMicSupported(typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getUserMedia) }, [])
 
@@ -1118,14 +1252,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
+    let res: Response | undefined
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] } = {}
     try {
-      const res = await fetch('/api/learn/chat', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
-      })
-      const data = await res.json().catch(() => ({})) as { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] }
-      const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res.status}`
-      if (!res.ok || !data.success || !data.text) throw new Error(errMsg)
+      // Retry up to 2 times on network failures ("Load failed", ECONNRESET, etc.)
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          res = await fetch('/api/learn/chat', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
+          })
+          data = await res.json().catch(() => ({}))
+          break
+        } catch (fetchErr) {
+          if (attempt === 2) throw fetchErr
+          await new Promise((r) => setTimeout(r, (attempt + 1) * 1500))
+        }
+      }
+      const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res?.status ?? 0}`
+      if (!res?.ok || !data.success || !data.text) throw new Error(errMsg)
       let full = data.text
       const provider = data.provider
       const responseVisual = data.visual
@@ -1423,6 +1568,50 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const data = await res.json()
       if (!data.success) { setInitError(data.error ?? 'Error'); return }
       const sid = data.data.id; setSessionId(sid)
+
+      // WhatsApp-style full history: restore the COMPLETE conversation for
+      // this subject — every message across ALL sessions, chronological, no
+      // limit — so refreshing or reopening (even days later) never hides
+      // older messages. UI-only: the AI context window is built separately
+      // inside /api/learn/chat and is untouched by this restore.
+      let restoredAny = false
+      try {
+        const histRes = await fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`)
+        const hist = await histRes.json()
+        const histMsgs = hist?.data?.messages
+        if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
+          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string }>)
+            .map((m) => ({
+              id: m.id,
+              role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
+              content: m.content,
+              ts: new Date(m.createdAt).getTime(),
+            }))
+          setMessages(restored)
+          restoredAny = true
+        }
+      } catch { /* fall back to the resumed-session payload below */ }
+
+      // Fallback (history endpoint unavailable): restore the resumed active
+      // session's own messages, exactly as before this feature.
+      if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
+        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string }>)
+          .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
+          .map((m) => ({
+            id: m.id,
+            role: m.role === 'USER' ? 'user' : 'assistant',
+            content: m.content,
+            ts: new Date(m.createdAt).getTime(),
+          }))
+        setMessages(restored)
+        restoredAny = true
+      }
+
+      // A resumed (still-active) session keeps its flow — no new opening
+      // prompt. A NEW session with restored history still gets the opening
+      // prompt so Tutor Max greets and continues, appended below the history.
+      if (data.resumed) return
+
       const lessonRef = resumeLessonTitle
         ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
         : null
@@ -1659,10 +1848,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     e.target.value = ''
   }
 
-  // Preview cache
+  // WhatsApp-style windowed rendering: the slice actually mounted in the DOM.
+  // Full history stays in `messages`; this is render-only.
+  const visibleMessages = useMemo(() => messages.slice(-visibleCount), [messages, visibleCount])
+
+  // Preview cache — computed over the VISIBLE window only, so a 5000-message
+  // history never pays string processing for messages that aren't mounted.
   const previewCache = useMemo(() => {
     const c: Record<string, { preview: string; full: string; hasMore: boolean }> = {}
-    for (const m of messages) {
+    for (const m of visibleMessages) {
       if (m.role !== 'assistant' || m.streaming) continue
       const full = stripCode(m.content)
       if (full.length < 300) { c[m.id] = { preview: full, full, hasMore: false }; continue }
@@ -1670,7 +1864,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       c[m.id] = { preview, full, hasMore }
     }
     return c
-  }, [messages])
+  }, [visibleMessages])
 
   // Curriculum derived
   const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
@@ -2979,7 +3173,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 </div>
               )}
 
-              {messages.map((msg) => {
+              {/* WhatsApp-style: full history in state; only the newest window
+                  mounted. Scrolling to the top (or tapping) reveals more —
+                  the very first message is always reachable. */}
+              {messages.length > visibleCount && (
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
+                  <button
+                    onClick={() => {
+                      const el = messagesAreaRef.current
+                      const prevHeight = el?.scrollHeight ?? 0
+                      setVisibleCount((c) => Math.min(c + HISTORY_RENDER_WINDOW, messages.length))
+                      requestAnimationFrame(() => { if (el) el.scrollTop += el.scrollHeight - prevHeight })
+                    }}
+                    style={{ fontSize: 11, color: 'var(--text-secondary)', background: 'var(--bg-secondary)', border: '1px solid var(--border-default)', borderRadius: 999, padding: '4px 12px', cursor: 'pointer' }}
+                  >
+                    ↑ {messages.length - visibleCount} earlier message{messages.length - visibleCount === 1 ? '' : 's'}
+                  </button>
+                </div>
+              )}
+              {visibleMessages.map((msg) => {
                 const isUser = msg.role === 'user'
                 const isSpeaking = speakingId === msg.id
                 const cached = previewCache[msg.id]
@@ -2994,6 +3206,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                         <EagleMascot variant="logo" size={20} />
                         <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{teachingLanguage === 'ru' ? 'Репетитор Макс' : 'Tutor Max'}</span>
+                        {/* AI badge — shown ONLY when an AI provider actually
+                            answered this turn. Brain-served turns (provider
+                            === 'memory') get NO badge. See the API response
+                            in src/app/api/learn/chat/route.ts: provider is
+                            'memory' for assembled answers, otherwise the
+                            real driver id (groq/yandex/fallback). */}
+                        {msg.provider && msg.provider !== 'memory' && (
+                          <AiBadge provider={msg.provider} />
+                        )}
                       </div>
                     )}
 
@@ -3028,17 +3249,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                             <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
                               {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
                             </span>
-                            {process.env.NODE_ENV === 'development' && msg.provider && (
-                              <span title={`Answered by ${msg.provider}`} style={{
-                                fontSize: 9, fontWeight: 700, letterSpacing: 0.3, fontFamily: 'var(--font-mono)',
-                                padding: '2px 6px', borderRadius: 6, textTransform: 'uppercase',
-                                color: msg.provider === 'yandex' ? 'var(--coral)' : msg.provider === 'fallback' ? 'var(--yellow)' : 'var(--green)',
-                                background: msg.provider === 'yandex' ? 'rgba(247,129,102,0.12)' : msg.provider === 'fallback' ? 'rgba(210,153,34,0.12)' : 'rgba(126,231,135,0.12)',
-                                border: `1px solid ${msg.provider === 'yandex' ? 'rgba(247,129,102,0.35)' : msg.provider === 'fallback' ? 'rgba(210,153,34,0.35)' : 'rgba(126,231,135,0.35)'}`,
-                              }}>
-                                {msg.provider === 'yandex' ? 'YandexGPT' : msg.provider === 'fallback' ? 'Fallback' : 'Groq'}
-                              </span>
-                            )}
                             <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
                               depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
                               style={{

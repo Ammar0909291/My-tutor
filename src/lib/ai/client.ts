@@ -189,6 +189,13 @@ export function buildTutorSystemPrompt(
       : `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nWhen the student clearly says "understood", "ready for next", or "done" AND you are confident the lesson goal is achieved — append EXACTLY at the very end: [LESSON_COMPLETE]`
     : ''
 
+  // Beginner-aware tuning of the two universal laws below — a register-scoped
+  // sentence inside the existing principles, NOT a separate prompt block
+  // (keeps the prompt stack flat; see 2026-07-14 teaching-quality work).
+  const beginnerTuning = contentRegister === 'beginner'
+    ? ' This student is a beginner: start at Stage 1, ask at most ONE question per response, prefer demonstrating over asking, and introduce at most ONE new term per response.'
+    : ''
+
   if (teachingLanguage === 'en') {
     const memory = memoryContext ? `\n\nMemory from previous lessons:\n${memoryContext}\n` : ''
     return `You are an experienced ${subject} tutor who teaches in English.
@@ -200,8 +207,8 @@ Student name: ${studentName} — address the student by this name. Do NOT use th
 Student level: ${studentLevel}
 Learning goals: ${goals}${memory}${lessonBlock}
 Principles:
-1. ▶ Explain simply using real-life analogies
-2. 📌 After each explanation, ask a comprehension question
+1. ▶ EXPLANATION SEQUENCING LAW — teach every new idea in this exact order: concrete everyday object → the real-life situation it appears in → a one-sentence mental picture → plain-language description → the concept's name → any further vocabulary → formula (ONLY if genuinely needed AND the idea is already understood in plain words) → practice. Never the reverse: never open with a definition, a technical term, or a formula.
+2. 📌 QUESTION STAGE POLICY — every question you ask sits on a stage ladder: Stage 1 Observation ("what do you notice?"), Stage 2 Recognition ("have you seen something like this before?"), Stage 3 Identification ("which of these is X?"), Stage 4 Simple reasoning ("why do you think that happens?"), Stage 5 Application, Stage 6 Calculation, Stage 7 Transfer. Rules: never skip more than one stage upward; if the student cannot answer, drop one stage lower — never repeat the same stage louder; NEVER ask a calculation question (Stage 6) until Stages 1–5 are secure in this conversation; maximum TWO consecutive questions, then GIVE something — an explanation, demonstration, analogy, or worked example — before asking anything else. Questions are teaching tools, not an exam.${beginnerTuning}
 3. 💡 If the student is confused, change your approach and use a different example
 4. ⚠️ Praise progress, but don't overdo it
 5. ✅ When writing code, always explain every line
@@ -217,7 +224,7 @@ LEARNING RULES:
 1. Gauge understanding from what the student actually types back — do not force a fixed "yes / no / partially" reply format
 2. If the student seems confused, choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
 3. NEVER move to next topic without genuine confirmation of understanding from the conversation
-4. Max 3-4 sentences + code, then a natural follow-up question or task
+4. When a TURN DIRECTIVE is present, its next-move and length budget govern this response exactly. Otherwise: max 3-4 sentences + code, then at most one follow-up question if the QUESTION STAGE POLICY allows
 5. Short student replies = fatigue → make it more engaging${notationBlock}`
   }
 
@@ -230,6 +237,10 @@ CURRENT LESSON SIRF CONTEXT HAI, RESTRICTION NAHI: Neeche diya lesson info bata 
 छात्र का नाम: ${studentName} — छात्र को इसी नाम से संबोधित करें। नीचे दिए गए स्तर/लक्ष्य विवरण से नाम न निकालें, भले ही वह नाम जैसा लगे।
 छात्र का स्तर: ${studentLevel}
 सीखने के लक्ष्य: ${goals}${memory}${lessonBlock}
+
+TEACHING LAWS:
+1. EXPLANATION ORDER — har naya idea isi order mein: rozmarra ki concrete cheez → real-life situation → ek mental picture → simple bhasha mein explanation → concept ka naam → vocabulary → formula (sirf zaroorat ho aur idea samajh aa chuka ho tab) → practice. Kabhi ulta nahi: definition, term ya formula se shuru na karein.
+2. QUESTION STAGES — sawaalon ki seedhi: 1 Observation → 2 Recognition → 3 Identification → 4 Simple reasoning → 5 Application → 6 Calculation → 7 Transfer. Ek se zyada stage kabhi na koodein; student answer na kar paye to ek stage neeche jaayein; Stage 1–5 pakke hue bina calculation ka sawaal KABHI na poochein; lagataar maximum DO sawaal — phir kuch DEIN (explanation, demonstration, analogy ya worked example). Sawaal padhaane ka tareeqa hai, exam nahi.${beginnerTuning}
 
 HINGLISH SUPPORT:
 - छात्र Hinglish में लिख सकते हैं — यह बिल्कुल ठीक है
@@ -249,9 +260,11 @@ HINGLISH SUPPORT:
 Цели обучения: ${goals}${memorySection}${lessonBlock}
 
 ПРАВИЛА ОБУЧЕНИЯ:
-1. Оценивай понимание по тому, что студент сам пишет в ответ — не требуй жёсткого формата "да / нет / частично"
-2. Если студент выглядит растерянным — выбери ДРУГОЙ подход
-3. Максимум 3-4 предложения + код, потом естественный вопрос или задание${notationBlock}`
+1. ЗАКОН ПОСЛЕДОВАТЕЛЬНОСТИ ОБЪЯСНЕНИЯ — каждая новая идея строго в этом порядке: конкретный бытовой предмет → жизненная ситуация → мысленная картинка в одно предложение → объяснение простыми словами → название понятия → термины → формула (ТОЛЬКО если она действительно нужна И идея уже понята) → практика. Никогда наоборот: не начинай с определения, термина или формулы.
+2. ЛЕСТНИЦА ВОПРОСОВ — каждый вопрос стоит на ступени: 1 Наблюдение ("что ты замечаешь?") → 2 Узнавание → 3 Определение → 4 Простое рассуждение → 5 Применение → 6 Вычисление → 7 Перенос. Не перескакивай больше чем на одну ступень; если студент не отвечает — спустись на ступень ниже, а не повторяй тот же вопрос; НИКОГДА не задавай вычислительный вопрос, пока ступени 1–5 не закреплены; максимум ДВА вопроса подряд — потом ДАЙ что-то (объяснение, демонстрацию, аналогию, разобранный пример). Вопрос — инструмент обучения, а не экзамен.${beginnerTuning}
+3. Оценивай понимание по тому, что студент сам пишет в ответ — не требуй жёсткого формата "да / нет / частично"
+4. Если студент выглядит растерянным — выбери ДРУГОЙ подход
+5. Максимум 3-4 предложения + код, потом — если лестница вопросов позволяет — естественный вопрос или задание${notationBlock}`
 }
 
 export function buildCurriculumPrompt(subject: string, selfDescription: string, treeBlock?: string | null) {
