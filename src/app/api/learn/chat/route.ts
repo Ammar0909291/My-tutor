@@ -29,6 +29,11 @@ import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 const schema = z.object({
   sessionId: z.string(),
   message: z.string().min(1).max(8000),
+  // Bug 8 (mastery-gate rework): false = the previous long assistant
+  // explanation stayed collapsed ("Read more" never pressed) — the
+  // teaching engine must not assume unread text was read. Optional and
+  // additive: older clients simply never send it.
+  lastExplanationRead: z.boolean().optional(),
 })
 
 export async function POST(req: Request) {
@@ -44,7 +49,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { sessionId, message } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -1694,6 +1699,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let evidenceStageCeilingHoisted: number | null = null
     let evidenceWorkedExampleFirstHoisted = false
     let evidenceAutonomyHoisted = false
+    // Mastery gate (server-authoritative lesson completion):
+    // - masteryGatePendingHoisted: the learner asked to advance before
+    //   mastery — the client renders Continue Learning / Skip Anyway.
+    // - learnerRequestHoisted: deterministic diagram/example/explain-
+    //   differently request detected this turn (forced TeachingAction +
+    //   post-turn student-state fold).
+    // - conversationStateAfterTurnHoisted: the state folded ONCE with this
+    //   turn's evidence — used by the completion gate, the response's
+    //   mastery summary, AND the snapshot persist (never folded twice).
+    let masteryGatePendingHoisted = false
+    let learnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
+    let conversationStateAfterTurnHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    let masteryCompletionSuppressedHoisted = false
     if (!schoolCtx) {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
@@ -1801,17 +1819,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           firstLessonActiveHoisted = true
         }
 
-        // P3 — Learner autonomy: when the student explicitly asks to move on,
-        // inject a deterministic instruction block so the LLM honors the
-        // request instead of blocking on LEARNING RULE 3. Fires before
-        // RECOVERY so recovery still wins if both are somehow present.
-        // (Detection moved into conversationState.ts for testability.)
-        const { detectAutonomyRequest, buildAutonomyBlock } = await import('@/lib/teaching/conversationState')
-        if (detectAutonomyRequest(message)) {
-          systemPrompt += buildAutonomyBlock()
-          evidenceAutonomyHoisted = true
-        }
-
         // Phases C–G (2026-07-14): the conversation state machine. The
         // SERVER decides the teaching phase (OBSERVE→…→TRANSFER), whether
         // this turn teaches/shows/asks (Phase E counters), the question-
@@ -1820,13 +1827,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // first (Phase F), and whether a visual leads (Phase G). One
         // compact TURN DIRECTIVE carries the decisions; the LLM teaches
         // inside them instead of judging pacing itself.
+        //
+        // Mastery-gate rework: the state is read FIRST so the autonomy
+        // path below can consult mastery evidence, and explicit learner
+        // requests (diagram / real-life example / explain differently)
+        // are detected deterministically and override the turn's move.
         {
           const {
             readConversationState, decideNextMove, responseBudget,
             buildTurnDirective, decideVisualFirst,
+            detectAutonomyRequest, buildAutonomyBlock,
           } = await import('@/lib/teaching/conversationState')
+          const {
+            masteryVerified, buildMasteryGateBlock,
+            detectLearnerRequest, buildLearnerRequestBlock,
+            buildUnreadExplanationBlock,
+          } = await import('@/lib/teaching/masteryGate')
           const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
+
+          // P3 — Learner autonomy, now mastery-gated (Bug 4): "next topic"
+          // with verified mastery is honored as before; before mastery it
+          // becomes an explicit Continue Learning / Skip Anyway choice —
+          // the model is FORBIDDEN from emitting [LESSON_COMPLETE] (and the
+          // response-side gate strips it regardless). Never a silent skip.
+          if (detectAutonomyRequest(message)) {
+            evidenceAutonomyHoisted = true
+            if (masteryVerified(conversationStateHoisted)) {
+              systemPrompt += buildAutonomyBlock()
+            } else {
+              systemPrompt += buildMasteryGateBlock()
+              masteryGatePendingHoisted = true
+            }
+          }
+
           const workedExampleFirst =
             snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD'
           const nextMove = decideNextMove(conversationStateHoisted, {
@@ -1844,13 +1878,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             chapterTitle: lessonCtx?.unitTitle ?? '',
             lessonTitle: lessonCtx?.lessonTitle,
           })
+          // Bugs 5/6/7 — explicit learner requests are detected in code and
+          // dispatched as forced TeachingActions, injected AFTER the turn
+          // directive so they override the phase's default move. A diagram
+          // request also overrides Phase G's ask-turn visual suppression.
+          learnerRequestHoisted = detectLearnerRequest(message)
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
             maxParagraphs: responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
             workedExampleFirst,
-            visualType: decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+            visualType: learnerRequestHoisted === 'diagram'
+              ? availableVisual
+              : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
           })
+          if (learnerRequestHoisted) {
+            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual)
+          }
+          // Bug 8 — the client reports whether the previous long (collapsed)
+          // explanation was ever expanded; unread text is never assumed read.
+          if (lastExplanationRead === false) {
+            systemPrompt += buildUnreadExplanationBlock()
+          }
         }
 
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
@@ -2011,8 +2060,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // client. The parsed signal drives evidence + placement below.
       const { parseSignalTag } = await import('@/lib/teaching/signals')
       const signalParse = parseSignalTag(text)
-      const teachingSignal = signalParse.signal
+      let teachingSignal = signalParse.signal
       text = signalParse.cleanText
+      // Bug 2 (mastery gate): a bare acknowledgement ("got it", "ok",
+      // "next", "thanks", "👍"…) is not an answer. The prompt forbids the
+      // model from emitting a SIGNAL for non-answers, but that is
+      // advisory — this is the deterministic guard. Discarding the signal
+      // here keeps acknowledgements out of the phase ladder, mastery
+      // evidence, TopicProgress, and misconception records in one place.
+      if (teachingSignal) {
+        const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+        if (isBareAcknowledgement(message)) teachingSignal = null
+      }
 
       // Phase 2/5 capture: decompose a successful LLM generation into
       // whichever labelled sections and assessment items it actually
@@ -2180,6 +2239,46 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Fail-open: never break the turn on verifier failure.
           console.warn('[learn/chat] EOS verifier gate skipped:', err)
         }
+      }
+
+      // ── MASTERY GATE (server-authoritative completion, Bugs 1/2/3/12) ──
+      // The single chokepoint every completion path funnels through.
+      // Whatever made the model emit [LESSON_COMPLETE] — "got it", an
+      // autonomy request, sheer confidence — the tag reaches the client
+      // (whose parseLessonCompletionTag drives the curriculum-progress
+      // PATCH, XP, confetti, and roadmap advance) ONLY when the state
+      // machine's own evidence counters verify mastery: ≥1 correct CHECK
+      // answer and ≥2 correct PRACTICE answers for this concept. The state
+      // is folded exactly once here with this turn's evidence; the persist
+      // block below reuses the folded value (never folds twice). School
+      // Mode is untouched. Fail-closed: a null state never authorizes.
+      if (!schoolCtx && conversationStateHoisted) {
+        try {
+          const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
+          const { gateLessonCompletion } = await import('@/lib/teaching/masteryGate')
+          conversationStateAfterTurnHoisted = advanceConversationState(conversationStateHoisted, {
+            askedQuestion: repliesWithQuestion(cleanText),
+            signalCorrect: teachingSignal?.correctness ?? null,
+            recoveryFired: recoveryKeyHoisted !== null,
+            learnerRequest: learnerRequestHoisted,
+          })
+          const completionGate = gateLessonCompletion(cleanText, conversationStateAfterTurnHoisted)
+          cleanText = completionGate.cleanText
+          masteryCompletionSuppressedHoisted = completionGate.suppressed
+          if (completionGate.suppressed) masteryGatePendingHoisted = true
+        } catch (err) {
+          // Fail-closed for completion: on any gate failure, strip the tag
+          // rather than let an unverified completion through.
+          console.warn('[learn/chat] mastery gate error — suppressing completion:', err)
+          cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
+          masteryCompletionSuppressedHoisted = true
+        }
+      } else if (!schoolCtx && /\[LESSON_COMPLETE\]/i.test(cleanText)) {
+        // Fail-closed: a Library turn with no state machine (upstream block
+        // threw) has no completion authority — strip rather than trust.
+        cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
+        masteryCompletionSuppressedHoisted = true
+        masteryGatePendingHoisted = true
       }
 
       // Sprint C/H: deterministic, rule-based visual detection on the final
@@ -2708,18 +2807,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
           }
 
-          // Phases C–G (2026-07-14): fold this turn's evidence into the
-          // conversation state machine — did the assistant actually ask a
-          // question (deterministic text check), did the learner's answer
-          // succeed (SIGNAL), did a recovery utterance fire — and persist.
+          // Phases C–G (2026-07-14): persist the conversation state folded
+          // with this turn's evidence. Mastery-gate rework: the fold now
+          // happens ONCE, upstream at the completion gate (so the gate and
+          // the persisted state can never disagree) — this block only
+          // persists that value. The re-fold fallback covers the gate's
+          // catch path, where conversationStateAfterTurnHoisted stays null.
           let conversationStateUpdate: Record<string, unknown> = {}
-          if (conversationStateHoisted) {
+          if (conversationStateAfterTurnHoisted) {
+            conversationStateUpdate = { conversationState: conversationStateAfterTurnHoisted }
+          } else if (conversationStateHoisted) {
             const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
             conversationStateUpdate = {
               conversationState: advanceConversationState(conversationStateHoisted, {
                 askedQuestion: repliesWithQuestion(cleanText),
                 signalCorrect: teachingSignal?.correctness ?? null,
                 recoveryFired: recoveryKeyHoisted !== null,
+                learnerRequest: learnerRequestHoisted,
               }),
             }
           }
@@ -2763,6 +2867,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
                 ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
                 ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),
+                // Mastery gate — an unauthorized [LESSON_COMPLETE] was stripped
+                ...(masteryCompletionSuppressedHoisted ? ['mastery-gate:suppressed'] : []),
+                ...(learnerRequestHoisted ? [`learner-request:${learnerRequestHoisted}`] : []),
               ],
               freshSessionBoundary: sessionEpisodeFreshHoisted,
               boundaryGapMs: null,
@@ -2843,6 +2950,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         runEducationalBrainPipeline({ userId, sessionId, subjectSlug: subjectCode, userMessage: message })
       ).catch(() => {})
 
+      // Mastery gate — the client's single source of truth for whether the
+      // Complete/Next actions are evidence-backed (Bug 9: roadmap, chat,
+      // and mastery always read the same server-computed state).
+      let masterySummary: import('@/lib/teaching/masteryGate').MasterySummary | undefined
+      if (conversationStateAfterTurnHoisted) {
+        try {
+          const { buildMasterySummary } = await import('@/lib/teaching/masteryGate')
+          masterySummary = buildMasterySummary(conversationStateAfterTurnHoisted, {
+            completionSuppressed: masteryCompletionSuppressedHoisted,
+            gatePending: masteryGatePendingHoisted,
+          })
+        } catch { /* summary is informational — never blocks the turn */ }
+      }
+
       return NextResponse.json({
         success: true, text: cleanText, provider,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
@@ -2852,6 +2973,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         hint: hintHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
+        mastery: masterySummary,
       })
     } catch (error: any) {
       // Global AI budget spent — expected under load, not an error to report.

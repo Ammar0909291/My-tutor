@@ -53,6 +53,12 @@ export interface ConversationState {
   demonstrated: boolean
   correctAtCheck: number
   correctAtPractice: number
+  /** Student-state counters (mastery-gate work, Bug 11). All persisted
+   * per-concept and restored via readConversationState's spread-over-
+   * defaults, so pre-existing snapshots without them stay valid. */
+  remediationCount: number
+  diagramRequests: number
+  exampleRequests: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -65,6 +71,9 @@ export function initialConversationState(conceptId: string | null): Conversation
     demonstrated: false,
     correctAtCheck: 0,
     correctAtPractice: 0,
+    remediationCount: 0,
+    diagramRequests: 0,
+    exampleRequests: 0,
   }
 }
 
@@ -95,6 +104,11 @@ export interface TurnEvidence {
   signalCorrect: boolean | null
   /** A recovery utterance fired this turn (failure by statement). */
   recoveryFired: boolean
+  /** Deterministic learner request detected this turn (masteryGate.ts):
+   * 'explain_differently' counts as remediation (confidence down, phase
+   * re-shows); 'diagram'/'real_life_example' update the student-state
+   * counters. Optional so pre-existing call sites stay valid. */
+  learnerRequest?: 'diagram' | 'real_life_example' | 'explain_differently' | null
 }
 
 function phaseIndex(p: TeachingPhase): number { return PHASE_ORDER.indexOf(p) }
@@ -132,6 +146,21 @@ export function advanceConversationState(
     // A no-question turn in DEMONSTRATE (or later) means the teacher showed
     // something — the evidence gate DEMONSTRATE→GUIDE needs.
     if (prev.phase !== 'OBSERVE') next.demonstrated = true
+  }
+
+  // Bug 5/6/11 — student-state counters for explicit action requests.
+  if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
+  if (evidence.learnerRequest === 'real_life_example') next.exampleRequests = prev.exampleRequests + 1
+
+  // Bug 7 — "explain differently" / "I don't understand" is remediation:
+  // confidence drops (consecutiveFailures++), remediation is counted, and
+  // the phase re-shows (down one, floor DEMONSTRATE) instead of advancing.
+  // A stray SIGNAL on such a turn can never advance the ladder.
+  if (evidence.learnerRequest === 'explain_differently') {
+    next.remediationCount = prev.remediationCount + 1
+    next.consecutiveFailures = prev.consecutiveFailures + 1
+    next.phase = phaseDown(prev.phase, next.demonstrated)
+    return next
   }
 
   const failed = evidence.recoveryFired || evidence.signalCorrect === false
@@ -237,6 +266,9 @@ export function detectAutonomyRequest(message: string): boolean {
   return AUTONOMY_RE.test(message)
 }
 
+/** ONLY injected when masteryVerified(state) is already true (see
+ * masteryGate.ts) — an autonomy request before mastery gets
+ * buildMasteryGateBlock() instead, never this. */
 export function buildAutonomyBlock(): string {
   return (
     '\n\nLEARNER AUTONOMY — the student has explicitly asked to move on. ' +

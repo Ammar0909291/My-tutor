@@ -839,6 +839,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Assessment / promotion
   const [promotionResult, setPromotionResult] = useState<PromotionResult | null>(null)
   const [assessmentLoading, setAssessmentLoading] = useState(false)
+  // Mastery gate (server-authoritative): per-turn mastery summary from
+  // /api/learn/chat. verified=false gates the Complete/Next actions behind
+  // an explicit Continue Learning / Skip Anyway choice — never a silent skip.
+  const [masteryState, setMasteryState] = useState<{ verified: boolean; gatePending: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } | null>(null)
+  const [skipConfirm, setSkipConfirm] = useState(false)
+  // Bug 8: was the last long (collapsed) tutor explanation ever expanded?
+  // undefined = no collapsed explanation pending; mirrored into a ref so
+  // sendMessage can read it without dependency churn.
+  const lastExplanationReadRef = useRef<boolean | undefined>(undefined)
   const [finalAssessmentOpen, setFinalAssessmentOpen] = useState(false)
 
   // Practice (Sprint O) + Adaptive (Sprint P)
@@ -1254,14 +1263,20 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[] } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } } = {}
     try {
       // Retry up to 2 times on network failures ("Load failed", ECONNRESET, etc.)
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
           res = await fetch('/api/learn/chat', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sessionId: sid, message: text, userId: userId ?? 'anonymous' }),
+            body: JSON.stringify({
+              sessionId: sid, message: text, userId: userId ?? 'anonymous',
+              // Bug 8 (mastery gate): tell the engine whether the previous
+              // long collapsed explanation was ever expanded — unread text
+              // must never be assumed read. undefined = nothing collapsed.
+              lastExplanationRead: lastExplanationReadRef.current,
+            }),
           })
           data = await res.json().catch(() => ({}))
           break
@@ -1285,6 +1300,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           prev.currentLesson === data.lessonOrder && (!data.completedLessons || prev.completedLessons.length === data.completedLessons.length)
             ? prev
             : { ...prev, currentLesson: data.lessonOrder!, completedLessons: data.completedLessons ?? prev.completedLessons })
+      }
+      // Mastery gate: the server's per-turn evidence summary is the single
+      // source of truth for whether Complete/Next is evidence-backed.
+      if (data.mastery) {
+        setMasteryState({
+          verified: data.mastery.verified === true,
+          gatePending: data.mastery.gatePending === true || data.mastery.completionSuppressed === true,
+          phase: data.mastery.phase,
+          checkCorrect: data.mastery.checkCorrect,
+          practiceCorrect: data.mastery.practiceCorrect,
+        })
       }
       // Sprint C: server already validated this with zod; re-validate
       // client-side too (defense in depth — never trust a network payload).
@@ -1869,6 +1895,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     return c
   }, [visibleMessages])
 
+  // Bug 8 (mastery gate): track whether the newest long tutor explanation
+  // is still collapsed. hasMore && never expanded → false ("not read");
+  // expanded → true; nothing collapsed → undefined (field omitted).
+  useEffect(() => {
+    const lastAssistant = [...visibleMessages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
+    const cached = lastAssistant ? previewCache[lastAssistant.id] : undefined
+    lastExplanationReadRef.current = cached?.hasMore ? expanded[lastAssistant!.id] === true : undefined
+  }, [visibleMessages, previewCache, expanded])
+
   // Curriculum derived
   const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
   const nextLessonData = curriculumLessons.find((l) => l.order === (curriculumProgress.currentLesson + 1)) ?? null
@@ -2419,9 +2454,38 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     <span>{t('lesson_completed_btn')}</span>
                     <span style={{ opacity: 0.7, fontSize: 10 }}>↺ {teachingLanguage === 'ru' ? 'Начать заново' : 'Restart'}</span>
                   </button>
+                ) : skipConfirm ? (
+                  /* Mastery gate (Bug 4): completion without verified mastery is
+                     an explicit choice, never a silent skip. Default: Continue. */
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <p style={{ fontSize: 11, color: 'var(--text-primary)', lineHeight: 1.5 }}>
+                      {teachingLanguage === 'ru'
+                        ? 'Вы ещё не подтвердили усвоение этого урока.'
+                        : "You haven't mastered this lesson yet."}
+                    </p>
+                    <button
+                      onClick={() => setSkipConfirm(false)}
+                      autoFocus
+                      style={{
+                        width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                        background: UI.indigo, color: '#fff', border: 'none',
+                      }}>
+                      {teachingLanguage === 'ru' ? '📚 Продолжить обучение' : '📚 Continue Learning'}
+                    </button>
+                    <button
+                      onClick={() => { setSkipConfirm(false); handleLessonComplete(currentLessonData.order, currentLessonData) }}
+                      style={{
+                        width: '100%', padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
+                        background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
+                      }}>
+                      {teachingLanguage === 'ru' ? 'Пропустить всё равно' : 'Skip Anyway'}
+                    </button>
+                  </div>
                 ) : (
                   <button
-                    onClick={() => handleLessonComplete(currentLessonData.order, currentLessonData)}
+                    onClick={() => masteryState?.verified
+                      ? handleLessonComplete(currentLessonData.order, currentLessonData)
+                      : setSkipConfirm(true)}
                     style={{
                       width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                       background: UI.indigo, color: '#fff', border: 'none',
@@ -3358,6 +3422,48 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   <TypingDots />
                   <span>{teachingLanguage === 'ru' ? 'Думает...' : 'Thinking...'}</span>
                 </Pill>
+              )}
+
+              {/* Mastery gate card (Bug 4) — the learner asked to move on (or the
+                  model tried to complete) before mastery was verified. Explicit
+                  choice, default Continue Learning; never a silent skip. */}
+              {masteryState?.gatePending && !isStreaming && currentLessonData && (
+                <div style={{
+                  alignSelf: 'flex-start', maxWidth: '90%', padding: '10px 12px', borderRadius: 12,
+                  background: `${UI.indigo}0c`, border: `1px solid ${UI.indigo}33`,
+                  display: 'flex', flexDirection: 'column', gap: 8,
+                }}>
+                  <p style={{ fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.5 }}>
+                    {teachingLanguage === 'ru'
+                      ? 'Вы ещё не подтвердили усвоение этого урока. Что дальше?'
+                      : "You haven't mastered this lesson yet. What next?"}
+                  </p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <button
+                      onClick={() => {
+                        setMasteryState((s) => s ? { ...s, gatePending: false } : s)
+                        if (sessionId) sendMessage(sessionId, teachingLanguage === 'ru' ? 'Давай продолжим этот урок' : "Let's keep working on this lesson", true)
+                      }}
+                      disabled={isStreaming || !sessionId}
+                      style={{
+                        padding: '7px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                        background: UI.indigo, color: '#fff', border: 'none',
+                      }}>
+                      {teachingLanguage === 'ru' ? '📚 Продолжить обучение' : '📚 Continue Learning'}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setMasteryState((s) => s ? { ...s, gatePending: false } : s)
+                        handleLessonComplete(currentLessonData.order, currentLessonData)
+                      }}
+                      style={{
+                        padding: '7px 14px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
+                        background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
+                      }}>
+                      {teachingLanguage === 'ru' ? 'Пропустить всё равно' : 'Skip Anyway'}
+                    </button>
+                  </div>
+                </div>
               )}
 
               <div ref={messagesEndRef} />

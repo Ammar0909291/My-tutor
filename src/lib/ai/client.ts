@@ -181,12 +181,18 @@ export function buildTutorSystemPrompt(
   contentRegister: ContentRegister = 'beginner',
 ) {
   const notationBlock = notationRulesBlock(contentRegister, teachingLanguage)
+  // Mastery-gate rework: completion is EVIDENCE-gated, never acknowledgement-
+  // gated. "Understood" / "got it" / "done" / "next" are acknowledgements, not
+  // evidence — the tag may only follow VERIFIED correct answers (one check
+  // question + two practice questions). The server independently enforces this
+  // (masteryGate.ts strips unauthorized tags), so this instruction and the
+  // runtime gate can never disagree in the learner's favor.
   const lessonBlock = lessonCtx
     ? teachingLanguage === 'ru'
-      ? `\n\nТЕКУЩИЙ УРОК:\nУрок ${lessonCtx.currentLesson} из ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nРаздел: ${lessonCtx.unitTitle}\nЦель урока: ${lessonCtx.lessonGoal}\nПройдено уроков: ${lessonCtx.completedLessons.length} из ${lessonCtx.totalLessons}\n\nКогда студент явно говорит "понял", "готов к следующему" или "закончили урок" И ты уверен что цель урока достигнута — ответь СТРОГО в конце сообщения: [LESSON_COMPLETE]`
+      ? `\n\nТЕКУЩИЙ УРОК:\nУрок ${lessonCtx.currentLesson} из ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nРаздел: ${lessonCtx.unitTitle}\nЦель урока: ${lessonCtx.lessonGoal}\nПройдено уроков: ${lessonCtx.completedLessons.length} из ${lessonCtx.totalLessons}\n\nЗАВЕРШЕНИЕ УРОКА — только по ДОКАЗАТЕЛЬСТВАМ: добавь [LESSON_COMPLETE] СТРОГО в конце сообщения ТОЛЬКО после того, как студент ПРАВИЛЬНО ОТВЕТИЛ минимум на один проверочный вопрос и два практических задания по цели урока. Слова "понял", "ок", "дальше", "готов" — это НЕ доказательство: вместо завершения задай маленький проверочный вопрос. Никогда не завершай урок за согласие.`
       : teachingLanguage === 'hi'
-      ? `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nJab student clearly kahe "samajh gaya", "next lesson" ya "done" AND lesson goal achieve ho jaye — reply ke BILKUL END mein likhein: [LESSON_COMPLETE]`
-      : `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nWhen the student clearly says "understood", "ready for next", or "done" AND you are confident the lesson goal is achieved — append EXACTLY at the very end: [LESSON_COMPLETE]`
+      ? `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nLESSON COMPLETION — sirf EVIDENCE par: [LESSON_COMPLETE] reply ke BILKUL END mein SIRF tab likhein jab student ne is lesson goal par kam se kam ek check question aur do practice questions ka SAHI JAWAB diya ho. "Samajh gaya", "ok", "next", "done" kehna evidence NAHIN hai — complete karne ki jagah ek chhota check question poochhein. Sirf acknowledgement par lesson kabhi complete na karein.`
+      : `\n\nCURRENT LESSON:\nLesson ${lessonCtx.currentLesson} of ${lessonCtx.totalLessons}: "${lessonCtx.lessonTitle}"\nUnit: ${lessonCtx.unitTitle}\nLesson goal: ${lessonCtx.lessonGoal}\nCompleted: ${lessonCtx.completedLessons.length} of ${lessonCtx.totalLessons}\n\nLESSON COMPLETION — evidence only: append [LESSON_COMPLETE] EXACTLY at the very end ONLY after the student has CORRECTLY ANSWERED at least one check question and two practice questions on this lesson goal. Saying "understood", "got it", "ok", "done", or "next" is NOT evidence — instead of completing, ask one small check question. Never complete a lesson on acknowledgement alone.`
     : ''
 
   // Beginner-aware tuning of the two universal laws below — a register-scoped
