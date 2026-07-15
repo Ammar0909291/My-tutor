@@ -1,15 +1,20 @@
 /**
  * Stage 8 — POLICY. Owner: Policy Engine (RS §5).
  *
- * K3 v1: emits a PolicyDecision derived from decisions the current runtime
- * already makes (move, stageCeiling, budgets, worked-example-first). The
- * seven-band evaluation network + compiled policy packs are K4's territory;
- * this stage exists to carry those decisions through the pipeline typed,
- * with a PRNG seed recorded so future MRT cells (S4/OSF) have a home.
+ * K3 provided an adapter-driven stub. K4 upgrades it: when the caller
+ * supplies a PolicyPack (typically BASE_PACK), the engine's 7-band
+ * evaluation is authoritative and its EnginePolicyDecision is mapped
+ * onto the pipeline's PolicyDecision artifact — with full provenance.
+ *
+ * The adapter-driven path remains for K3 callers that haven't opted in
+ * yet (ENABLE_POLICY_PACKS off): pass PolicyAdapters and the previous
+ * behaviour applies verbatim. Strangler discipline preserved.
  */
 import { createHash } from 'node:crypto'
 import type { KernelState, Stage, PolicyDecision, PolicyMove } from '../types'
 import { newId } from '../context'
+import type { PolicyInputs, PolicyPack, EnginePolicyDecision } from '../policy/types'
+import { decide } from '../policy/engine'
 
 export interface PolicyAdapters {
   move: PolicyMove | null
@@ -26,6 +31,8 @@ function seededFrom(learnerId: string, sessionId: string, turnId: string): numbe
   const h = createHash('sha256').update(`${learnerId}|${sessionId}|${turnId}`).digest()
   return h.readUInt32BE(0)
 }
+
+// ── K3 adapter path (unchanged behaviour) ────────────────────────────────────
 
 export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> {
   return {
@@ -56,6 +63,55 @@ export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> 
         fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
       }
       return { ...state, policy: decision }
+    },
+  }
+}
+
+// ── K4 engine path — the policy engine as decision authority ─────────────────
+
+export interface EnginePolicyInputs {
+  pack: PolicyPack
+  inputs: PolicyInputs
+}
+
+/** Kernel-authoritative POLICY stage. Uses the 7-band engine. Behaviour:
+ *   1. Engine decides move / budgets / vocabulary / content slots with
+ *      full provenance.
+ *   2. Stage packs the result into the pipeline's PolicyDecision shape,
+ *      preserving the K3 artifact contract downstream.
+ *   3. K3-style provenance strings are derived from engine traces so
+ *      existing consumers keep working (union of both worlds while K5
+ *      and K6 land).
+ */
+export function enginePolicyStage(args: EnginePolicyInputs): Stage<KernelState, KernelState> {
+  return {
+    name: 'POLICY',
+    async run(state) {
+      const { context } = state
+      const engineDecision: EnginePolicyDecision = decide(args.pack, args.inputs)
+      const decision: PolicyDecision = {
+        decisionId: newId('d'),
+        turnId: context.turnId,
+        move: engineDecision.move,
+        actionClass: engineDecision.actionClass,
+        budgets: {
+          maxQuestions: engineDecision.budgets.maxQuestions,
+          maxParagraphs: engineDecision.budgets.maxParagraphs,
+          maxNewTerms: engineDecision.budgets.maxNewTerms,
+        },
+        stageCeiling: engineDecision.stageCeiling,
+        vocabularyBans: engineDecision.vocabularyBans,
+        visualDirective: { use: engineDecision.visualClass !== null, visualClass: engineDecision.visualClass },
+        provenance: engineDecision.provenance.map((t) => t.ruleId),
+        prngSeed: seededFrom(context.learnerId, context.sessionId, context.turnId),
+        fallbackChain: engineDecision.fallbackChain,
+      }
+      // Stash the full engine trace on the adapters bag for downstream
+      // consumers that want it (RESOLVE reads visualClass; PLAN reads
+      // contentSlots via the same bag). Keeps the pipeline artifact
+      // typed while carrying the deeper provenance.
+      const adapters = { ...(state.adapters ?? {}), engineDecision }
+      return { ...state, policy: decision, adapters }
     },
   }
 }
