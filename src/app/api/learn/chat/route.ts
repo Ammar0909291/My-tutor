@@ -88,6 +88,8 @@ export async function POST(req: Request) {
       ? snapshot.pendingPlacementProbe
       : null
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
+    // P1: cumulative failure counter — incremented on recovery turns and false SIGNALs
+    const snapshotSessionFailureCount = typeof snapshot?.sessionFailureCount === 'number' ? snapshot.sessionFailureCount : 0
     // Sprint CH: active worked example carried across turns
     const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
       ? snapshot.currentWorkedExample as { concept: string; currentStep: number; stepCount: number }
@@ -1078,8 +1080,28 @@ export async function POST(req: Request) {
           if (currentModule) {
             const moduleNodeSlugs = currentModule.nodes.map((n) => n.slug)
             const { getTeachingStrategy, buildTeachingStrategyBlock } = await import('@/lib/school/adaptive/teachingStrategy')
+            // Phase B (2026-07-14): beginner evidence from data already in hand
+            // (plus one cheap count) so an unknown/struggling learner defaults to
+            // FOUNDATION_REBUILD instead of APPLICATION_FOCUS. Every field
+            // degrades to a no-signal value on error — never blocks the turn.
+            const recoveryMistakeCount = await prisma.mistakeRecord.count({
+              where: {
+                userId, subjectSlug: subjectCode, category: 'recovery_signal',
+                createdAt: { gte: new Date(Date.now() - 7 * 86400000) },
+              },
+            }).catch(() => 0)
+            const snapLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+              ? snapshot.lastSignal as { correctness?: boolean }
+              : null
             const teachingStrategy = await getTeachingStrategy(
               userId, '', 0, subjectCode, currentModule.slug, moduleNodeSlugs,
+              {
+                profileLevel: profile?.currentLevel ?? null,
+                sessionFailureCount: snapshotSessionFailureCount,
+                recoveryMistakeCount,
+                lastSignalIncorrect: snapLastSignal?.correctness === false,
+                hasPrerequisiteGap: snapshotLastPrereqGap !== null,
+              },
             )
             systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
 
@@ -1089,7 +1111,7 @@ export async function POST(req: Request) {
             outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
             hintBiasHoisted = deriveHintBias(teachingStrategy.type)
             if (hintBiasHoisted === 'PREFERRED') {
-              systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nThe hint must nudge toward the next step only — never state the final answer inside the tag. Omit the tag entirely if the student is not stuck.`
+              systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nHINT POLICY: a hint must reveal the MISSING CONCEPT, never the next calculation step, and must always be EASIER than the problem itself. Good: "Before measuring the shortcut, picture walking along the two sides of the street corner." Bad: "Use Pythagoras" / "Find the square root". If the student is missing the underlying concept, or cannot do the calculation the hint would require, do not hint at all — teach that missing piece plainly in your response and omit the tag.`
             } else if (hintBiasHoisted === 'SUPPRESSED') {
               systemPrompt += `\n\nDo not use a [HINT] tag this turn — explain directly and clearly instead, per this strategy's directive.`
             }
@@ -1334,7 +1356,17 @@ export async function POST(req: Request) {
 
         // Assessment protocol — subject-aware, with deterministic validation instructions
         // for STEM and programming subjects.
-        try {
+        // Assessment gate (2026-07-14 teaching-quality Phase A.4): a formal
+        // 3-question exam is examiner behaviour, not teaching — never offer it
+        // to a beginner, or to anyone already struggling this session
+        // (sessionFailureCount, P1). The protocol text is REPLACED (not merely
+        // omitted) so an explicit "test me" from a struggling learner gets a
+        // teaching-shaped answer instead of an improvised exam.
+        const assessmentSuppressed =
+          profile?.currentLevel === 'beginner' || snapshotSessionFailureCount >= 2
+        if (assessmentSuppressed) {
+          systemPrompt += `\n\nASSESSMENT GATE: Do NOT run a formal multi-question assessment in this session, even if the learner asks to be tested. This learner needs teaching first. If they ask to be assessed, weave ONE Stage 1–2 question (observation or recognition — see the QUESTION STAGE POLICY) into your teaching, react warmly to whatever they answer, and continue teaching. Never emit an [ASSESSMENT_RESULT ...] tag this session.`
+        } else try {
           const { getAssessmentRequirement } = await import('@/lib/assessment/subjectValidator')
           const req = getAssessmentRequirement(subjectCode)
           const deterministicExtra = [
@@ -1652,6 +1684,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // deterministically (Principle 20: stated state is ground truth) and
     // preempts calibration, assessment, and the asset memory path this turn.
     let recoveryKeyHoisted: import('@/lib/teaching/recoveryGuard').FailureStateKey | null = null
+    // Phases C–G (2026-07-14): server-side conversation state machine —
+    // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
+    // turn's evidence, persisted on the existing snapshot ride.
+    let conversationStateHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
+    // emitter — observation only, zero effect on the turn.
+    let evidenceMoveHoisted: string | null = null
+    let evidenceStageCeilingHoisted: number | null = null
+    let evidenceWorkedExampleFirstHoisted = false
+    let evidenceAutonomyHoisted = false
     if (!schoolCtx) {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
@@ -1759,12 +1801,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           firstLessonActiveHoisted = true
         }
 
+        // P3 — Learner autonomy: when the student explicitly asks to move on,
+        // inject a deterministic instruction block so the LLM honors the
+        // request instead of blocking on LEARNING RULE 3. Fires before
+        // RECOVERY so recovery still wins if both are somehow present.
+        // (Detection moved into conversationState.ts for testability.)
+        const { detectAutonomyRequest, buildAutonomyBlock } = await import('@/lib/teaching/conversationState')
+        if (detectAutonomyRequest(message)) {
+          systemPrompt += buildAutonomyBlock()
+          evidenceAutonomyHoisted = true
+        }
+
+        // Phases C–G (2026-07-14): the conversation state machine. The
+        // SERVER decides the teaching phase (OBSERVE→…→TRANSFER), whether
+        // this turn teaches/shows/asks (Phase E counters), the question-
+        // stage ceiling (no OBSERVE→calculation jumps), the response
+        // length budget (Phase D — struggle shortens), worked-example-
+        // first (Phase F), and whether a visual leads (Phase G). One
+        // compact TURN DIRECTIVE carries the decisions; the LLM teaches
+        // inside them instead of judging pacing itself.
+        {
+          const {
+            readConversationState, decideNextMove, responseBudget,
+            buildTurnDirective, decideVisualFirst,
+          } = await import('@/lib/teaching/conversationState')
+          const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+          conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
+          const workedExampleFirst =
+            snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD'
+          const nextMove = decideNextMove(conversationStateHoisted, {
+            recoveryTurn: recoveryKeyHoisted !== null,
+            workedExampleFirst,
+          })
+          // EOS M1: record the decision facts for the spine (observation only).
+          evidenceMoveHoisted = nextMove
+          evidenceWorkedExampleFirstHoisted = workedExampleFirst
+          const { PHASE_MAX_QUESTION_STAGE } = await import('@/lib/teaching/conversationState')
+          evidenceStageCeilingHoisted = PHASE_MAX_QUESTION_STAGE[conversationStateHoisted.phase]
+          const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
+          const availableVisual = detectVisual({
+            subjectSlug: subjectCode,
+            chapterTitle: lessonCtx?.unitTitle ?? '',
+            lessonTitle: lessonCtx?.lessonTitle,
+          })
+          systemPrompt += buildTurnDirective({
+            state: conversationStateHoisted,
+            nextMove,
+            maxParagraphs: responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
+            workedExampleFirst,
+            visualType: decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+          })
+        }
+
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
         // scripts; first-lesson/05 deltas) — injected LAST of all blocks:
         // the affect band outranks every teaching instruction above it.
         if (recoveryKeyHoisted) {
           const { buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
-          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted)
+          // P2: pass session failure count so the script escalates on repeated struggle
+          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted, snapshotSessionFailureCount)
         }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
@@ -1781,6 +1876,68 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         content: m.content,
       }))
 
+    // K3 (EOS Kernel Pipeline) — shadow-mode invocation. Off by default;
+    // ENABLE_KERNEL_PIPELINE=1 activates read-only shadow. The pipeline
+    // observes this turn's facts (already computed above), threads them
+    // through stages 1–10 + VERIFY(passthrough), and produces a trace for
+    // parity measurement / golden-transcript capture. Fire-and-forget:
+    // suppresses all errors and never affects the response or the DB.
+    if (!schoolCtx && process.env.ENABLE_KERNEL_PIPELINE && process.env.ENABLE_KERNEL_PIPELINE !== '0') {
+      try {
+        const { runShadowPipeline } = await import('@/lib/kernel/shadow')
+        void runShadowPipeline({
+          learnerId: userId,
+          sessionId,
+          subjectSlug: subjectCode,
+          message,
+          isSchoolMode: false,
+          fold: {
+            contentRegister,
+            profileLevel: (profile?.currentLevel === 'beginner' || profile?.currentLevel === 'intermediate' || profile?.currentLevel === 'advanced')
+              ? profile.currentLevel : null,
+            sessionFailureCount: snapshotSessionFailureCount,
+            currentConceptId: snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null,
+            hasVerifiedPlacement: placementPrevHoisted?.verified === true,
+            pendingPlacementProbe: snapshotPendingProbe ?? null,
+            isFirstLessonContext: firstLessonActiveHoisted,
+          },
+          schedule: {
+            freshBoundary: sessionEpisodeFreshHoisted,
+            boundaryGapMs: null,
+            retroWinOwed: sessionEpisodeHoisted?.retroWinOwed === true,
+            dueReviewCount: libraryDueRevisionCountHoisted,
+          },
+          tsm: {
+            phase: conversationStateHoisted?.phase ?? 'OBSERVE',
+            stageCeiling: evidenceStageCeilingHoisted ?? 2,
+            demonstrated: conversationStateHoisted?.demonstrated === true,
+            consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? 0,
+          },
+          policy: {
+            move: evidenceMoveHoisted === 'teach' ? 'TEACH'
+              : evidenceMoveHoisted === 'show' ? 'SHOW'
+              : evidenceMoveHoisted === 'ask' ? 'ASK'
+              : null,
+            actionClass: null,
+            maxQuestions: (evidenceMoveHoisted === 'ask' ? 1 : 0) as 0 | 1,
+            maxParagraphs: null,
+            maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+            visualClass: null,
+            vocabularyBans: [],
+            provenance: [
+              ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
+              ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
+            ],
+          },
+          resolve: { objective: '' },
+          plan: {
+            systemPrompt,
+            history: historyMessages,
+          },
+        }).catch(() => { /* shadow-mode is fire-and-forget */ })
+      } catch { /* strangler: kernel failure never affects the turn */ }
+    }
+
     try {
       // Explanation Memory / Teaching Action Repository (approved exception to
       // ADR 14's implementation gate — see WAVE_0_APPROVAL_CHECKLIST.md W1-4/
@@ -1789,6 +1946,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // today: nothing is ACTIVE until a human reviewer promotes a DRAFT via
       // the admin review endpoint, so assembleLesson() always returns null
       // and the LLM path below runs exactly as before.
+      // K6 — EOS Runtime: lazy-init brain packs before the LLM call so
+      // any compiled Band-3 dispatch rules can influence policy this
+      // turn. Idempotent (loads once per process). Off by default via
+      // ENABLE_BRAIN_PACKS / ENABLE_EOS_RUNTIME.
+      try {
+        const { readEosFlags, ensureBrainPacksLoaded } = await import('@/lib/eos-runtime')
+        if (readEosFlags().brainPacks) ensureBrainPacksLoaded()
+      } catch { /* pack loading is strictly parallel — never breaks a turn */ }
+
       let memoryState: StudentState | null = null
       let assembled: AssembledLesson | null = null
       // Red-team fix D1: never serve a first-lesson turn from the asset
@@ -1946,6 +2112,74 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // since IPA is allowed (optionally/fully) at those registers.
       if (contentRegister === 'beginner') {
         cleanText = stripIpaNotation(cleanText)
+      }
+
+      // K6 — EOS Runtime integration: run the K5 Output Verifier on the
+      // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
+      // master ENABLE_EOS_RUNTIME). Failures follow the RS §9.3 protocol:
+      // one constrained rerender using routeAI with the SAME plan +
+      // violations appendix, then a deterministic template if still failing.
+      // Fires only for Library turns (K6 scope: School Mode untouched); a
+      // memory-served (assembled) turn is skipped since it's already
+      // human-curated.
+      let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
+      let eosVerifierUsedTemplate = false
+      let eosVerifierAttempts: 1 | 2 = 1
+      if (!schoolCtx && !assembled) {
+        try {
+          const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
+          const eosFlags = readEosFlags()
+          if (eosFlags.outputVerifier) {
+            const ctx = buildVerifierContext({
+              contentRegister,
+              move: evidenceMoveHoisted === 'teach' ? 'TEACH'
+                : evidenceMoveHoisted === 'show' ? 'SHOW'
+                : evidenceMoveHoisted === 'ask'  ? 'ASK' : null,
+              phase: conversationStateHoisted?.phase ?? null,
+              stageCeiling: evidenceStageCeilingHoisted,
+              vocabularyUnlocked: !firstLessonActiveHoisted,
+              formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
+              recoveryActive: recoveryKeyHoisted !== null,
+              maxQuestions: (evidenceMoveHoisted === 'ask' ? 1 : 0) as 0 | 1,
+              maxParagraphs: null,
+              maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+              vocabularyBans: [],
+              assessmentActive: false,
+              lessonCompletionAuthorized: false,
+              sessionFailureCount: snapshotSessionFailureCount,
+              learnerText: message,
+              reactMandated: true,
+              legalTags: ['VISUAL', 'HINT', 'INLINE_PRACTICE', 'WE', 'LESSON'],
+              bannedConceptTerms: [],
+            })
+            const gate = await verifierGate({
+              draftText: cleanText,
+              ctx,
+              learnerText: message,
+              fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
+              rerender: async (violationAppendix) => {
+                const routed = await routeAI(
+                  [...historyMessages, { role: 'user', content: message }],
+                  systemPrompt + violationAppendix,
+                  country,
+                  1024,
+                  teachingLang,
+                  { userId, subject: learnSession.subject.slug },
+                )
+                let t = routed.text
+                if (contentRegister === 'beginner') t = stripIpaNotation(t)
+                return t
+              },
+            })
+            cleanText = gate.finalText
+            eosVerifierEvents = gate.events
+            eosVerifierUsedTemplate = gate.usedTemplate
+            eosVerifierAttempts = gate.attempts
+          }
+        } catch (err) {
+          // Fail-open: never break the turn on verifier failure.
+          console.warn('[learn/chat] EOS verifier gate skipped:', err)
+        }
       }
 
       // Sprint C/H: deterministic, rule-based visual detection on the final
@@ -2161,9 +2395,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
       }
 
-      const assistantMessage = await withRetry(() => prisma.message.create({
-        data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
-      }))
+      // The chat turn itself must never fail because of the AI-badge column
+      // (P2022 "column does not exist" happens if a deploy's Prisma Client
+      // ever runs ahead of an unapplied migration). Persisting `provider`
+      // is a nice-to-have for the badge, not core to the turn — degrade to
+      // writing the message without it rather than 500ing the whole chat.
+      let assistantMessage
+      try {
+        assistantMessage = await withRetry(() => prisma.message.create({
+          data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider },
+        }))
+      } catch (err) {
+        console.error('[learn/chat] message.create with provider failed, retrying without it:', err)
+        assistantMessage = await withRetry(() => prisma.message.create({
+          data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
+        }))
+      }
 
       // W1-3 (ADR 13 Phase 1): fire-and-forget evidence event — never blocks the response.
       // Wave 2 (this build): real KG concept id + gradeBand when Explanation
@@ -2241,6 +2488,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           outcome:   `recovery:${recoveryKeyHoisted}`,
           strength:  0.0,
         })
+
+        // P4 — Affect budget: recovery turns emit no SIGNAL tag so
+        // applySignalToEpisode() never sees them, leaving the episode
+        // frozen. Synthesize a false-signal failure event here so the
+        // session lifecycle advances toward CLOSING at the same rate as
+        // a learner-signaled failure would.
+        if (sessionEpisodeHoisted) {
+          try {
+            const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+            const syntheticSignal = { correctness: false as const, confidence: undefined, confusion: true }
+            sessionEpisodeHoisted = applySignalToEpisode(sessionEpisodeHoisted, syntheticSignal, {
+              isFirstLesson: firstLessonActiveHoisted,
+            })
+          } catch { /* non-fatal */ }
+        }
+
+        // P5 — Recovery memory: write a MistakeRecord so decide() enters
+        // remediate mode on the next turn for this concept. Fire-and-forget.
+        if (!schoolCtx && resolvedConceptId) {
+          prisma.mistakeRecord.create({
+            data: {
+              userId,
+              subjectSlug: subjectCode,
+              topicSlug: resolvedConceptId,
+              sessionId: learnSession.id,
+              category: 'recovery_signal',
+              questionId: resolvedConceptId,
+            },
+          }).catch(() => {})
+        }
       }
 
       // CTO iteration — Library mastery evidence loop. Before this block,
@@ -2401,21 +2678,99 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
 
+          // P1: accumulate session failure count — increments on recovery
+          // utterances AND false SIGNAL outcomes so escalation has a real
+          // count (decision-engine/05: per-failure ladders).
+          const failureThisTurn = recoveryKeyHoisted !== null || teachingSignal?.correctness === false
+          const newSessionFailureCount = failureThisTurn ? snapshotSessionFailureCount + 1 : snapshotSessionFailureCount
+          const failureCountUpdate = failureThisTurn ? { sessionFailureCount: newSessionFailureCount } : {}
+
           // Session lifecycle fold (07 §1/§6): this turn's signal advances
           // the episode machine — OPENING→CORE on the first answered item,
           // CORE→CLOSING when the affect budget is spent (1 in lesson one).
+          // P4: sessionEpisodeHoisted may have been updated by the recovery
+          // block above (synthetic signal), so we use the (possibly updated)
+          // hoisted value directly and skip re-applying applySignalToEpisode
+          // for recovery turns to avoid double-counting.
           let episodeUpdate: Record<string, unknown> = {}
           if (sessionEpisodeHoisted) {
-            const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
-            const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
-              isFirstLesson: firstLessonActiveHoisted,
-            })
-            if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
-              episodeUpdate = { sessionEpisode: nextEpisode }
+            if (recoveryKeyHoisted) {
+              // P4: episode already advanced via synthetic signal above
+              episodeUpdate = { sessionEpisode: sessionEpisodeHoisted }
+            } else {
+              const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+              const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+                isFirstLesson: firstLessonActiveHoisted,
+              })
+              if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
+                episodeUpdate = { sessionEpisode: nextEpisode }
+              }
             }
           }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0) {
+          // Phases C–G (2026-07-14): fold this turn's evidence into the
+          // conversation state machine — did the assistant actually ask a
+          // question (deterministic text check), did the learner's answer
+          // succeed (SIGNAL), did a recovery utterance fire — and persist.
+          let conversationStateUpdate: Record<string, unknown> = {}
+          if (conversationStateHoisted) {
+            const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
+            conversationStateUpdate = {
+              conversationState: advanceConversationState(conversationStateHoisted, {
+                askedQuestion: repliesWithQuestion(cleanText),
+                signalCorrect: teachingSignal?.correctness ?? null,
+                recoveryFired: recoveryKeyHoisted !== null,
+              }),
+            }
+          }
+
+          // EOS M1 — Evidence Spine: append this turn's typed events to the
+          // parallel append-only log. Fire-and-forget, idempotent, additive:
+          // nothing reads the spine yet and the turn's behavior is identical
+          // with the spine on, off (ENABLE_EVIDENCE_SPINE=0), or failing.
+          try {
+            const { emitTurn } = await import('@/lib/evidence-spine/turnEmitter')
+            const lastAssistantForLatency = learnSession.messages.find((m) => m.role === MessageRole.ASSISTANT)
+            const phaseAfter = (conversationStateUpdate.conversationState as { phase?: string } | undefined)?.phase ?? null
+            emitTurn(prisma, {
+              learnerId: userId,
+              sessionId,
+              turnId: assistantMessage.id,
+              messageLength: message.length,
+              latencyFromPrevTurnMs: lastAssistantForLatency
+                ? Math.max(0, turnReceivedAt - new Date(lastAssistantForLatency.createdAt).getTime())
+                : null,
+              assistantLength: cleanText.length,
+              assistantAskedQuestion: (await import('@/lib/teaching/conversationState')).repliesWithQuestion(cleanText),
+              provider: assembled ? 'memory' : 'llm',
+              signal: teachingSignal ?? null,
+              resolvedConceptId: resolvedConceptId ?? null,
+              recoveryKey: recoveryKeyHoisted,
+              recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
+              sessionFailureCount: snapshotSessionFailureCount,
+              autonomyRequested: evidenceAutonomyHoisted,
+              decisionMove: evidenceMoveHoisted,
+              decisionPhaseBefore: conversationStateHoisted?.phase ?? null,
+              decisionPhaseAfter: phaseAfter,
+              workedExampleFirst: evidenceWorkedExampleFirstHoisted,
+              stageCeiling: evidenceStageCeilingHoisted,
+              provenance: [
+                ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
+                ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
+                ...(evidenceMoveHoisted ? ['turn-directive'] : []),
+                ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
+                // K6 — record EOS verifier outcomes as provenance atoms
+                ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
+                ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
+                ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),
+              ],
+              freshSessionBoundary: sessionEpisodeFreshHoisted,
+              boundaryGapMs: null,
+              lessonCompleted: cleanText.includes('[LESSON_COMPLETE]'),
+            })
+          } catch { /* spine is strictly parallel — never affects the turn */ }
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0) {
             prisma.learnSession.update({
               where: { id: sessionId },
               data: {
@@ -2425,6 +2780,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ...signalUpdate,
                   ...placementUpdate,
                   ...episodeUpdate,
+                  ...failureCountUpdate,
+                  ...conversationStateUpdate,
                 },
               },
             }).catch(() => {})

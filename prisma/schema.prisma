@@ -536,6 +536,12 @@ model Message {
   // Token usage for cost tracking
   inputTokens  Int?
   outputTokens Int?
+  // Which driver actually generated this ASSISTANT message ('memory' |
+  // 'groq' | 'yandex' | 'fallback'). Null for USER messages and for any
+  // ASSISTANT row written before this column existed. Persisted so the
+  // client's AI badge survives a page reload / history restore instead
+  // of only existing for the current in-memory turn.
+  provider     String?
   createdAt    DateTime    @default(now())
 
   session LearnSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
@@ -2717,4 +2723,31 @@ model EvidenceEvent {
   @@index([sessionId, occurredAt])
   @@index([conceptId, category])
   @@map("evidence_events")
+}
+
+// ─── EOS M1: Evidence Spine (EOS_V2_RUNTIME_SPECIFICATION.md §2) ────────────
+// Append-only typed event log with per-learner gapless sequence — the ground
+// truth every learner-model projection folds from (RS L4). Runs in PARALLEL
+// to the existing EvidenceEvent/EbEvidenceEvent category ledgers; it never
+// replaces them and nothing existing reads it yet. Rows are never updated or
+// deleted (corrections are new events referencing the corrected eventId).
+model SpineEvent {
+  eventId        String   @id @default(uuid())
+  seq            Int      // per-learner monotonic, transactionally assigned
+  learnerId      String
+  sessionId      String?
+  turnId         String?  // assistant Message.id when available
+  type           String   // closed catalog, src/lib/evidence-spine/types.ts
+  schemaVersion  Int      @default(1)
+  payload        Json
+  source         Json     // { componentId, version }
+  confidence     Float    @default(1)
+  packVersion    String?  // reserved for M4 policy packs; git SHA until then
+  idempotencyKey String   @unique
+  createdAt      DateTime @default(now())
+
+  @@unique([learnerId, seq])
+  @@index([sessionId])
+  @@index([learnerId, type])
+  @@map("spine_events")
 }
