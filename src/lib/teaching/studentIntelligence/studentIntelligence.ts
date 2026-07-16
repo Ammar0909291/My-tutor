@@ -174,6 +174,18 @@ function daysBetween(a: Date, b: Date): number {
   return Math.max(0, (b.getTime() - a.getTime()) / 86_400_000)
 }
 
+/** The half-life (days) forgettingRisk scales to, given how solid the
+ *  knowledge was (pass rate; unknown → 0.5). Extracted (pure refactor, same
+ *  values forgettingRisk always computed inline) so other consumers that
+ *  need the inverse of the decay law — e.g. "at what date does risk cross
+ *  a threshold" — reuse the exact same scaling rather than re-deriving it.
+ *  Spaced Retrieval Scheduler (Claude Recommendation #8) is the first such
+ *  consumer. */
+export function effectiveHalfLifeDays(passRate: number | null, baseHalfLifeDays: number): number {
+  const solidity = passRate ?? 0.5
+  return baseHalfLifeDays * (0.5 + solidity) // 15d at 0%, 45d at 100% (base 30)
+}
+
 /** Forgetting risk: 1 − 2^(−Δt/halfLife), with the half-life scaled by how
  *  solid the knowledge was (pass rate; unknown → 0.5). Mirrors ADR 10's
  *  decayedScore law read as risk instead of score. */
@@ -183,8 +195,7 @@ export function forgettingRisk(
   passRate: number | null,
   baseHalfLifeDays: number,
 ): number {
-  const solidity = passRate ?? 0.5
-  const halfLife = baseHalfLifeDays * (0.5 + solidity) // 15d at 0%, 45d at 100% (base 30)
+  const halfLife = effectiveHalfLifeDays(passRate, baseHalfLifeDays)
   const dt = daysBetween(lastEvidenceAt, now)
   const retention = Math.pow(2, -dt / halfLife)
   return Math.min(1, Math.max(0, 1 - retention))
