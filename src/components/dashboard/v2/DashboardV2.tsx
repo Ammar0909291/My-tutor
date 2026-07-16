@@ -16,6 +16,7 @@ import { AchievementCenter } from './AchievementCenter'
 import { ActivityTimeline } from './ActivityTimeline'
 import { ExploreLinks } from './ExploreLinks'
 import { LearningCoachCard } from './LearningCoachCard'
+import { ReviewQueueCard } from './ReviewQueueCard'
 import { SectionTitle, useConfetti } from '@/components/ui/candy'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
 import type { DashboardV2Data } from './types'
@@ -68,6 +69,10 @@ export function DashboardV2({ data }: DashboardV2Props) {
 
           {/* AI-powered learning coach (client — fetches own data) */}
           <LearningCoachCard />
+
+          {/* Spaced Retrieval Scheduler surface (client — fetches own data).
+              Renders nothing when no concepts are due (no empty-state noise). */}
+          <ReviewQueueCard />
 
           <ExploreLinks />
         </div>
