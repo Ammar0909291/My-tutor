@@ -336,19 +336,48 @@ UI → (separately, on practice/assessment submit, not the chat turn)
 Student Memory write-back. No step in this chain is generated prose
 except the final LLM render.
 
-**PROPOSED, ADR 14 (Knowledge Asset Lifecycle):** all generated content
-(worked examples, explanations, visual specs, probes) is currently
-discarded at turn end — a P2 violation at the content layer. The future
-asset retrieval step (ADR 14 Phase 3 migration) inserts a new stage
-between Student Memory read and Teaching Engine decision: look up an
-existing ACTIVE `AssetIdentity` record for the current `(conceptId,
-teachingAction, renderer, language, gradeBand)` tuple; if found, serve it
-directly and skip LLM generation for that content block. This is the
-primary mechanism by which the LLM's role converges from
-content-generator to voice-renderer (P2 principle). Retrieval is gated on
-the `incompatibilities` field — assets known to reinforce active
-misconceptions are suppressed for that learner. Gated on KG v1 freeze and
-explicit user approval. **Full design: ADR 14.**
+**LIVE since Wave 0 (2026-07-10, G2 exception — see the CLAUDE.md project
+memory's Wave 0 entry), superseding the "PROPOSED" status below this
+paragraph carried until 2026-07-16:** ADR 14 Phase 3's asset retrieval step
+is implemented and wired into `route.ts`, immediately before the LLM call —
+`assembleLesson()` (`src/lib/teaching/assets/teachingActionRepository.ts`)
+looks up an existing ACTIVE `AssetIdentity` record (via `findBestExplanation`/
+`findBestProbe`, gated on `incompatibilities` so assets reinforcing an active
+misconception are suppressed) for the current concept + student state; if
+found, it serves the assembled text DIRECTLY and the LLM call is skipped
+entirely for that turn (`provider: "memory"`). This is **the canonical,
+production authored-content serving path** — the only mechanism able to
+skip LLM generation — and the primary vehicle for the LLM's role converging
+from content-generator to voice-renderer (P2 principle). Enabled by default
+in every environment (`isExplanationMemoryEnabled()`, a kill-switch —
+`DISABLE_EXPLANATION_MEMORY=true` to force every turn through the LLM);
+safe because an empty `AssetIdentity` catalogue makes every lookup miss,
+so the LLM path runs unchanged until assets are authored and a human
+reviewer promotes them past DRAFT via `/api/admin/knowledge-assets`.
+
+**Relationship to the Package Runtime PoC (`src/lib/curriculum/packageRuntime/`,
+added 2026-07-16, §11 document map):** this is a SEPARATE, SUBORDINATE
+mechanism, not a competing serving path — an architectural ambiguity
+audit (2026-07-16) confirmed neither system had ever been declared
+canonical in writing, resolved here. Package Runtime compiles authored
+Teaching Blueprint markdown into a DRAFT `EducationalPackage` artifact and,
+when `ENABLE_PACKAGE_RUNTIME=1` (off in every environment today), injects
+package-derived PROMPT CONTEXT into the system prompt — it never skips the
+LLM call; the LLM still authors the reply, only with compiled-package
+grounding instead of the legacy blueprint-loader's live-parsed markdown. It
+runs in `route.ts` *before* the Explanation Memory check, but has no actual
+precedence conflict with it: if Explanation Memory serves the turn from
+memory, the context Package Runtime injected simply goes unused for that
+turn (by design — the LLM was never called). Package Runtime is the
+designated successor to the legacy `blueprintLoader.ts` context-injection
+path specifically, not to `AssetIdentity`/Explanation Memory. Its longer-term
+relationship to `AssetIdentity` — e.g. whether a compiled package's assets
+should eventually be promotable INTO the `AssetIdentity` catalogue as a
+curation source, per `MIGRATION_BLUEPRINT_V1.md`'s Phase 0-4 framing — is an
+open architectural question for a future ADR, not decided by this entry;
+today the two systems simply coexist safely at different points in the
+same turn. **Full design: ADR 14** (Explanation Memory/AssetIdentity);
+Package Runtime detail in this Bible's §12 2026-07-16 change-log entries.
 
 ### 6.4 Knowledge flow & curriculum mapping
 

@@ -1472,6 +1472,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // (no artifact, validation, integrity) falls back to the legacy
           // blueprint path below, so external behavior is unchanged unless
           // ENABLE_PACKAGE_RUNTIME=1 AND a valid artifact exists.
+          //
+          // Canonical-path note (see EDUCATIONAL_BRAIN_BIBLE.md §6.3): this
+          // is PROMPT-CONTEXT augmentation only — the LLM is still called
+          // below with this context. It is not a competing content-serving
+          // path against Explanation Memory (`assembleLesson()`, ~140 lines
+          // down): that system decides whether to skip the LLM entirely and
+          // is the canonical authored-content serving path. When it fires
+          // for this turn, the context injected here is simply unused —
+          // by design, not a conflict.
           let packageContextInjected = false
           if (process.env.ENABLE_PACKAGE_RUNTIME === '1') {
             try {
@@ -2077,6 +2086,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // today: nothing is ACTIVE until a human reviewer promotes a DRAFT via
       // the admin review endpoint, so assembleLesson() always returns null
       // and the LLM path below runs exactly as before.
+      //
+      // Canonical serving path (see EDUCATIONAL_BRAIN_BIBLE.md §6.3): this IS
+      // the canonical authored-content serving path — the only one that can
+      // skip the LLM call entirely for a turn. The Package Runtime PoC
+      // (`buildLessonContextForConcept`, ~140 lines up) only ever augments
+      // the LLM's prompt context and never competes with this decision.
       // K6 — EOS Runtime: lazy-init brain packs before the LLM call so
       // any compiled Band-3 dispatch rules can influence policy this
       // turn. Idempotent (loads once per process). Off by default via
