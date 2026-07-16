@@ -1051,6 +1051,7 @@ Assessment) — not due yet.
 | `ARCHITECTURE_DECISIONS.md` | Permanent rules + findings ledger behind this Bible's §2/§7 |
 | `ADR_NN_*.md` | Individual proposals indexed in this Bible's §9 |
 | `docs/project-memory/PROJECT_STATE.md` | Session-by-session execution log (process record, not architecture) |
+| `src/lib/curriculum/blueprintFrontend/`, `src/lib/curriculum/packageRuntime/`, `scripts/brain/compile-educational-package.ts` | **Blueprint Front-End + Educational Package + Package Runtime PoC** (2026-07-16) — parses authored Teaching Blueprint markdown into the existing `RawBlock[]`/`CompiledPack` rule pipeline (unchanged) plus a typed knowledge-layer `AssetNode[]`; compiles to a DRAFT `EducationalPackage` artifact at build time (`brain/packages/*.package.json`); a read-only runtime (loader/reader/lesson-assembler) proves one lesson can be served from a compiled package with zero blueprint-markdown reads at serving time. Gated behind `ENABLE_PACKAGE_RUNTIME` (default off); see Bible §12 change log entry for full detail. |
 | `docs/educational-brain/README.md` + `01-15-*.md` (11 chapters) | **Phase 2 implementation blueprint** — written 2026-06-29, status "Phase 1 design only, no production code until approval." Not superseded; not conflicting. Treats the current `route.ts` pipeline as input and proposes formalizing it into a 10-stage typed pipeline (`TurnContext` object) with: Knowledge Asset model (Explanation/Visual/Probe families, persisted/versioned/ranked), Evidence Engine (event log → rolling windows → nightly rollup), six Memory stores (Session/Student/Knowledge/Teaching/Brain/Long-term), and an AI Independence strategy (P1-P10 principles). Relationship to this Bible: detail documents for completion-criteria items 5 (ch 05), 7 (ch 08), 9 (ch 04), 10 (ch 06), 12 (ch 01, 07). Gap Analysis gate must be applied per item before each becomes a new ADR or Bible-consolidation task. |
 
 ---
@@ -1317,3 +1318,44 @@ Assessment) — not due yet.
   document map updated. Nothing approved by this document's existence;
   checking a box + committing is the approval act. No production code
   changed.
+- **2026-07-16 — Blueprint Front-End + Educational Package + Package
+  Runtime PoC recorded (owner-directed build, out of the ADR/roadmap
+  sequence; G1 KG-freeze still not declared).** Three additive layers,
+  none modifying `lowerToAST`/`emitCompiledPack`/`packRegistry`/K4:
+  (1) `src/lib/curriculum/blueprintFrontend/` — a format-agnostic parser
+  (5 live blueprint structural variants: Component-dash, Component-dash-v2,
+  Protocol, YAML-identity/WE-N, math corpus) + semantic validator (BFV01-06)
+  + rule-layer lowering (blueprint TAs → RawBlock `::rule` entries feeding
+  the EXISTING compiler pipeline unchanged) + asset lowering (blueprint
+  prose sections → typed `AssetNode`s across the 10-kind closed `AssetKind`
+  set) + package assembly (`EducationalPackage` = unchanged rule-layer
+  `CompiledPack` + knowledge-layer `AssetNode[]`, one manifest, one
+  `contentHash` wrapping the rule pack's existing hash — no second hashing
+  scheme). (2) `src/lib/curriculum/packageRuntime/` — loader (structural +
+  conceptId + compiler-allowlist + semver + DRAFT-status + rule-hash +
+  whole-package-hash validation, mirrors the `.bs` loader's integrity
+  check, never calls `packRegistry.activate()`), reader (read-only views
+  per asset kind), lesson assembler (Student State + Package → prompt
+  block, register-scaled worked-example budget, active-misconception
+  surfacing). (3) `scripts/brain/compile-educational-package.ts` —
+  `npm run compile:package -- <conceptId> [--check]`, the authoring/
+  runtime boundary: blueprint markdown is parsed only here, at build
+  time. Proof artifact `brain/packages/phys.mech.angular-momentum.package.json`
+  (7 rules, 22 assets) demonstrates one full lesson assembled with zero
+  blueprint-markdown reads at serving time (test-asserted via `fs`
+  spy). Serving seam in `route.ts` is behind `ENABLE_PACKAGE_RUNTIME`
+  (default unset/off) and falls back to the legacy blueprint-context path
+  on any failure. CI gained a determinism step
+  (`Educational Package determinism (--check)` in `.github/workflows/
+  validate.yml`) running `--check` over every committed
+  `brain/packages/*.package.json`, closing the gap where the compiler's
+  drift gate existed but nothing invoked it. Packages remain DRAFT;
+  `packRegistry.activate()` is called only in test code proving shape
+  compatibility, never from a packageRuntime module path. 90 new tests
+  (`blueprintFrontend.test.ts` 23, `blueprintAssets.test.ts` 27,
+  `packageRuntime.test.ts` 20, plus math-corpus-variant cases) added on
+  top of the existing suite; full suite 1150 passed/1 skipped, tsc clean.
+  §11 document map gains this entry. No Canonical KG, schema, or
+  production-serving-path change; this is authoring/compilation
+  infrastructure sitting upstream of the frozen K4 Policy Engine and the
+  existing AssetIdentity DB model, not a replacement for either.

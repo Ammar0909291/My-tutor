@@ -49,3 +49,17 @@ jobs:
             echo "=== ${s} ==="
             npx tsx scripts/validate-knowledge-graph.ts "docs/${s}/kg/graph.json"
           done
+
+      # Educational Package determinism gate: every committed
+      # brain/packages/*.package.json must be byte-identical to a fresh
+      # compile of its source blueprint. Catches authoring edits that
+      # silently invalidate a committed artifact (ADR 14 / Package Runtime PoC).
+      - name: Educational Package determinism (--check)
+        run: |
+          set -e
+          for f in brain/packages/*.package.json; do
+            [ -e "$f" ] || continue
+            concept=$(basename "$f" .package.json)
+            echo "=== ${concept} ==="
+            npm run compile:package -- "${concept}" --check
+          done
