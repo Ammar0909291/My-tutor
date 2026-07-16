@@ -59,6 +59,12 @@ export interface ConversationState {
   remediationCount: number
   diagramRequests: number
   exampleRequests: number
+  /** Stance Enforcement (Claude Recommendation #6): was a misconception
+   * detected on this concept at any point in the current lesson? Monotonic
+   * within one concept's lifetime (resets only when the concept changes,
+   * same as every other counter here) — feeds stanceEnforcement.ts's
+   * "misconception cannot be marked resolved without evidence" check. */
+  misconceptionDetectedThisLesson: boolean
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -74,6 +80,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     remediationCount: 0,
     diagramRequests: 0,
     exampleRequests: 0,
+    misconceptionDetectedThisLesson: false,
   }
 }
 
@@ -109,6 +116,11 @@ export interface TurnEvidence {
    * re-shows); 'diagram'/'real_life_example' update the student-state
    * counters. Optional so pre-existing call sites stay valid. */
   learnerRequest?: 'diagram' | 'real_life_example' | 'explain_differently' | null
+  /** Stance Enforcement (Claude Recommendation #6): did this turn's parsed
+   * SIGNAL carry a misconception phrase (teachingSignal?.phrase present)?
+   * Optional so pre-existing call sites stay valid; undefined behaves as
+   * false (no misconception signal this turn). */
+  misconceptionDetected?: boolean
 }
 
 function phaseIndex(p: TeachingPhase): number { return PHASE_ORDER.indexOf(p) }
@@ -135,6 +147,13 @@ export function advanceConversationState(
   evidence: TurnEvidence,
 ): ConversationState {
   const next: ConversationState = { ...prev }
+
+  // Stance Enforcement (Claude Recommendation #6): monotonic within the
+  // concept's lifetime, same reset-on-concept-change rule as every other
+  // counter here — never cleared by a later turn without a misconception
+  // signal (a misconception is "addressed", not "erased", per
+  // studentIntelligence.ts's activity model).
+  if (evidence.misconceptionDetected) next.misconceptionDetectedThisLesson = true
 
   // Phase E counters — driven by what the assistant actually did.
   if (evidence.askedQuestion) {

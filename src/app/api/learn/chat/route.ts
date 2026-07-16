@@ -1745,6 +1745,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let learnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
     let conversationStateAfterTurnHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
     let masteryCompletionSuppressedHoisted = false
+    // Stance Enforcement (Claude Recommendation #6) — violations found on
+    // this turn by enforceStance(), for provenance/telemetry only; never
+    // used to rewrite prose (see stanceEnforcement.ts's module doc).
+    let stanceViolationsHoisted: import('@/lib/teaching/stanceEnforcement').StanceViolationCode[] = []
     if (!schoolCtx) {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
@@ -2297,35 +2301,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      // ── MASTERY GATE (server-authoritative completion, Bugs 1/2/3/12) ──
+      // ── STANCE ENFORCEMENT / MASTERY GATE (server-authoritative
+      // completion, Bugs 1/2/3/12; Claude Recommendation #6) ──
       // The single chokepoint every completion path funnels through.
       // Whatever made the model emit [LESSON_COMPLETE] — "got it", an
       // autonomy request, sheer confidence — the tag reaches the client
       // (whose parseLessonCompletionTag drives the curriculum-progress
       // PATCH, XP, confetti, and roadmap advance) ONLY when the state
       // machine's own evidence counters verify mastery: ≥1 correct CHECK
-      // answer and ≥2 correct PRACTICE answers for this concept. The state
-      // is folded exactly once here with this turn's evidence; the persist
-      // block below reuses the folded value (never folds twice). School
-      // Mode is untouched. Fail-closed: a null state never authorizes.
+      // answer and ≥2 correct PRACTICE answers for this concept.
+      // enforceStance() also flags (never rewrites) two additional laws:
+      // an 'ask' move that rendered no question (explanation substituted
+      // for a due check), and a misconception-resolution claim without
+      // verified mastery evidence. The state is folded exactly once here
+      // with this turn's evidence; the persist block below reuses the
+      // folded value (never folds twice). School Mode is untouched.
+      // Fail-closed: a null state never authorizes.
       if (!schoolCtx && conversationStateHoisted) {
         try {
           const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
-          const { gateLessonCompletion } = await import('@/lib/teaching/masteryGate')
+          const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
           conversationStateAfterTurnHoisted = advanceConversationState(conversationStateHoisted, {
             askedQuestion: repliesWithQuestion(cleanText),
             signalCorrect: teachingSignal?.correctness ?? null,
             recoveryFired: recoveryKeyHoisted !== null,
             learnerRequest: learnerRequestHoisted,
+            misconceptionDetected: teachingSignal?.phrase !== undefined,
           })
-          const completionGate = gateLessonCompletion(cleanText, conversationStateAfterTurnHoisted)
-          cleanText = completionGate.cleanText
-          masteryCompletionSuppressedHoisted = completionGate.suppressed
-          if (completionGate.suppressed) masteryGatePendingHoisted = true
+          const stanceVerdict = enforceStance({
+            text: cleanText,
+            state: conversationStateAfterTurnHoisted,
+            move: evidenceMoveHoisted === 'teach' ? 'teach' : evidenceMoveHoisted === 'show' ? 'show' : evidenceMoveHoisted === 'ask' ? 'ask' : null,
+            misconceptionActive: conversationStateAfterTurnHoisted.misconceptionDetectedThisLesson,
+          })
+          cleanText = stanceVerdict.cleanText
+          masteryCompletionSuppressedHoisted = !stanceVerdict.completionAuthorized && stanceVerdict.violations.some((v) => v.code === 'FALSE_MASTERY_COMPLETION')
+          if (masteryCompletionSuppressedHoisted) masteryGatePendingHoisted = true
+          stanceViolationsHoisted = stanceVerdict.violations.map((v) => v.code)
         } catch (err) {
           // Fail-closed for completion: on any gate failure, strip the tag
           // rather than let an unverified completion through.
-          console.warn('[learn/chat] mastery gate error — suppressing completion:', err)
+          console.warn('[learn/chat] stance enforcement error — suppressing completion:', err)
           cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
           masteryCompletionSuppressedHoisted = true
         }
@@ -2930,6 +2946,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Mastery gate — an unauthorized [LESSON_COMPLETE] was stripped
                 ...(masteryCompletionSuppressedHoisted ? ['mastery-gate:suppressed'] : []),
                 ...(learnerRequestHoisted ? [`learner-request:${learnerRequestHoisted}`] : []),
+                // Stance Enforcement (Claude Recommendation #6) — every
+                // violation this turn, for observability only (never
+                // rewrites prose beyond the completion-tag strip above).
+                ...stanceViolationsHoisted.map((code) => `stance:${code}`),
               ],
               freshSessionBoundary: sessionEpisodeFreshHoisted,
               boundaryGapMs: null,
